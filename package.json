@@ -4,7 +4,11 @@
   "description": "Use Ext JS in Angular",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "lerna bootstrap",
+    "increment": "lerna publish --skip-git --skip-npm --force-publish",
+    "clean": "lerna clean",
+    "install:clean": "npm cache clear --force && lerna clean && npm install",
+    "serve-tests": "cd packages/ext-angular-tests && npm start"
   },
   "keywords": [
     "Ext",
