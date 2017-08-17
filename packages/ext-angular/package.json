@@ -1,0 +1,23 @@
+{
+  "name": "@extjs/ext-angular",
+  "version": "0.1.0",
+  "description": "Use Ext JS in Angular",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Sencha",
+    "Ext",
+    "JS",
+    "Angular"
+  ],
+  "author": "Sencha, Inc.",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/core": "^4.3.5"
+  },
+  "devDependencies": {
+    "@angular/core": "^4.3.5"
+  }
+}
