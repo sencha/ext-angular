@@ -1,0 +1,123 @@
+<project name="x-js-impl">
+    <target name="-init-compile-js" depends="-init-compiler">
+        <if>
+            <equals arg1="theme" arg2="${package.type}"/>
+            <then>
+                <property name="build.compile.js.filter">
+                    <![CDATA[
+                        union
+                            -tag=package-${package.name}
+                        and
+                        include
+                            -tag=package-${package.name}-base
+                        and
+                        ${build.operations}
+                    ]]>
+                </property>
+            </then>
+            <else>
+                <property name="build.compile.js.filter">
+                    <![CDATA[
+                    union
+                        -tag=package-${package.name}
+                    and
+                    ${build.operations}
+                    ]]>
+                </property>
+            </else>
+        </if>
+     </target>
+    
+    <target name="-compile-js-dev" depends="-init-compile-js">
+        <if>
+            <equals arg1="development" arg2="${build.environment}" />
+            <then>
+                <local name="build.compile.js.filename" />
+                <property name="build.compile.js.filename" value="${build.all.js}" />
+                <x-compile refid="${compiler.ref.id}">
+                    <![CDATA[
+                        restore
+                            package-${package.name}-all
+                        and
+                        -options=${build.compile.js.debug.options}
+                        ${build.compile.js.filter}
+                        and
+                        meta
+                            -json
+                            -tpl=Ext.Package.loadAllScripts("${package.name}", {0});
+                            +file
+                            -base=${app.metadata.base.dir}
+                            -output-file=${build.compile.js.filename}
+                    ]]>
+                </x-compile>
+            </then>
+        </if>
+    </target>
+
+    <target name="-compile-js-debug" depends="-init-compile-js">
+        <if>
+            <or>
+                <x-is-false value="${build.hasEnvironment}" />
+                <equals arg1="testing" arg2="${build.environment}" />
+            </or>
+            <then>
+                <local name="build.compile.js.filename" />
+                <if>
+                    <x-is-true value="${build.hasEnvironment}" />
+                    <then>
+                        <property name="build.compile.js.filename" value="${build.all.js}" />
+                    </then>
+                    <else>
+                        <property name="build.compile.js.filename" value="${build.all.debug.js}" />
+                    </else>
+                </if>
+                <x-compile refid="${compiler.ref.id}">
+                    <![CDATA[
+                        restore
+                            package-${package.name}-all
+                        and
+                        -options=${build.compile.js.debug.options}
+                        ${build.compile.js.filter}
+                        and
+                        concatenate
+                            -remove-text-references=${build.remove.references}
+                            -output-file=${build.compile.js.filename}
+                            ${build.concat.debug.options}
+                    ]]>
+                </x-compile>
+            </then>
+        </if>
+    </target>
+
+    <target name="-compile-js-non-debug" depends="-init-compile-js">
+        <if>
+            <or>
+                <x-is-false value="${build.hasEnvironment}" />
+                <equals arg1="production" arg2="${build.environment}" />
+            </or>
+            <then>
+                <x-compile refid="${compiler.ref.id}">
+                    <![CDATA[
+                        restore
+                            package-${package.name}-all
+                        and
+                        -options=${build.compile.js.options}
+                        ${build.compile.js.filter}
+                        and
+                        concatenate
+                            -remove-text-references=${build.remove.references}
+                            ${build.compile.js.compress}
+                            -output-file=${build.all.js}
+                            ${build.concat.options}
+                    ]]>
+                </x-compile>
+            </then>
+        </if>
+    </target>
+
+    <target name="-before-js"/>
+    <target name="-after-js"/>
+    <target name="-js"
+            depends="-compile-js-dev,-compile-js-debug,-compile-js-non-debug"/>
+
+</project>
