@@ -1,3 +1,3 @@
-# ext-angular-creator
+# ext-component-creator
 
-Creator for ExtAngular files
+Creator for ExtAngular (and ExtComponent) files
