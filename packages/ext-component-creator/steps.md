@@ -1,6 +1,3 @@
-
-
-
 in ext-component-creator
 
 npm i
@@ -13,8 +10,16 @@ node all.js angular modern (classic as well)
 
 run npm install in ./GeneratedFolders/ext-angular-modern
 run npm run build in ./GeneratedFolders/ext-angular-modern
-copy 
 
+demo app in ext-angular-demo (sues ext-angular module - commented out initially in ./src/app/app.module.ts)
+
+
+
+
+
+
+****************************
+old stuff...
 cd ext-angular-modern
 
 npm i
