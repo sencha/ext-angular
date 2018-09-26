@@ -7,7 +7,7 @@ function log(v,s) {
     blanks = ''
   }
   else {
-    blanks = new Array((40 - v.length) + 1).join( ' ' )
+    blanks = new Array((25 - v.length) + 1).join( ' ' )
     blanks = blanks + ': '
   }
   console.log(`${v}${blanks}${s}`)
@@ -25,6 +25,7 @@ const rimraf = require('rimraf')
 const mkdirp = require('mkdirp')
 var fs = require('fs-extra')
 var newLine = '\n'
+var tb = '	'
 var imports = ''
 var declarations = ''
 var exports = ''
@@ -116,7 +117,7 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder) {
   }
 
   log(`item count`,`${items.length}`)
-  log(``,`**************`)
+  log(``,`************** following items can be copy/pasted into excel (paste special... text)`)
 
   for (i = 0; i < items.length; i++) { 
     var o = items[i];
@@ -129,9 +130,9 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder) {
               num++;
               o.xtype = aliases[alias].substring(7)
               ///testing
-              //if (o.xtype == 'grid'  || o.xtype == 'button') {
+              if (o.xtype == 'grid'  || o.xtype == 'button') {
                 oneItem(o, libFolder, framework, extension, num, o.xtype, alias)
-              //}
+              }
             }
             else {
               console.log(``,'not: ' + o.name + ' - ' + o.alias)
@@ -174,10 +175,7 @@ function oneItem(o, libFolder, framework, extension, num, xtype, alias) {
   var classname =  o.xtype.replace(/-/g, "_")
   var capclassname = classname.charAt(0).toUpperCase() + classname.slice(1)
   var classFile = `${libFolder}ext-${classname}.component.${extension}`
-
-  log(("  " + num).substr(-3) + '.' + alias + ' - ' + xtype, classFile)
-
-
+  console.log(`${xtype}${tb}${tb}${('  ' + num).substr(-3)}_${alias}${tb}${classFile}`)
   var commaOrBlank = "";
   var tab = "\t";
 
@@ -211,7 +209,7 @@ function oneItem(o, libFolder, framework, extension, num, xtype, alias) {
       sPROPERTIES = `${sPROPERTIES}    '${config.name}',${newLine}`
       var type = ''
       if (config.type == undefined) {
-        log(`config.type is any`,`${config.name}`)
+        log('', `${xtype}${tb}${config.name}`)
         type = 'any'
       }
       else {
