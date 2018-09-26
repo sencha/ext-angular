@@ -7,7 +7,7 @@ function log(v,s) {
     blanks = ''
   }
   else {
-    blanks = new Array((22 - v.length) + 1).join( ' ' )
+    blanks = new Array((40 - v.length) + 1).join( ' ' )
     blanks = blanks + ': '
   }
   console.log(`${v}${blanks}${s}`)
@@ -129,9 +129,9 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder) {
               num++;
               o.xtype = aliases[alias].substring(7)
               ///testing
-              if (o.xtype == 'grid'  || o.xtype == 'button') {
+              //if (o.xtype == 'grid'  || o.xtype == 'button') {
                 oneItem(o, libFolder, framework, extension, num, o.xtype, alias)
-              }
+              //}
             }
             else {
               console.log(``,'not: ' + o.name + ' - ' + o.alias)
