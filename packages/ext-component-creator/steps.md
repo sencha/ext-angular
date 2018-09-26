@@ -1,14 +1,19 @@
-ln -s /Users/marcgusmano/aaExt/ext-6.5.3 ext
 
 
 
-in ext-angular-generator
+in ext-component-creator
 
 npm i
-get *-all-classes-flatten.json
-node all.js angular modern
-node all.js classic
-copy files in ext-all-stuff to ext-angular-modern
+get *-all-classes-flatten.json (from sdk build) and copy to ./AllClassesFiles
+node all.js angular modern (classic as well)
+  create ./GeneratedFolders/ext-angular-modern/src/lib
+  copy files in ext-all-stuff to ext-angular-modern
+  generate files in ./GeneratedFolders/ext-angular-modern/src
+  generate files in ./GeneratedFolders/ext-angular-modern/src/lib (1 per widget)
+
+run npm install in ./GeneratedFolders/ext-angular-modern
+run npm run build in ./GeneratedFolders/ext-angular-modern
+copy 
 
 cd ext-angular-modern
 
