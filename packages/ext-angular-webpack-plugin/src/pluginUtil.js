@@ -339,13 +339,33 @@ export function _getVersions(app, pluginName, frameworkName) {
   var extPkg = (fs.existsSync(extPath+'/package.json') && JSON.parse(fs.readFileSync(extPath+'/package.json', 'utf-8')) || {});
   v.extVersion = extPkg.sencha.version
 
-  var cmdPath = path.resolve(process.cwd(),'node_modules/@sencha/cmd')
+  var pluginName = ''
+  switch(frameworkName) {
+    case 'extjs':
+      pluginName = 'ext-webpack-plugin'
+      break;
+    case 'react':
+      pluginName = 'ext-react-webpack-plugin'
+      break;
+    case 'angular':
+      pluginName = 'ext-angular-webpack-plugin'
+      break;
+    default:
+      pluginName = 'ext-webpack-plugin'
+  }
+  var cmdPath = path.resolve(process.cwd(),`node_modules/@sencha/${pluginName}/node_modules/@sencha/cmd`)
   var cmdPkg = (fs.existsSync(cmdPath+'/package.json') && JSON.parse(fs.readFileSync(cmdPath+'/package.json', 'utf-8')) || {});
   v.cmdVersion = cmdPkg.version_full
 
   var frameworkInfo = ''
-  if (frameworkName != undefined && frameworkName != 'extjs') {
-    var frameworkPath = path.resolve(process.cwd(),'node_modules', frameworkName)
+   if (frameworkName != undefined && frameworkName != 'extjs') {
+    var frameworkPath = ''
+    if (frameworkName == 'react') {
+      frameworkPath = path.resolve(process.cwd(),'node_modules/react')
+    }
+    if (frameworkName == 'angular') {
+      frameworkPath = path.resolve(process.cwd(),'node_modules/@angular/core')
+    }
     var frameworkPkg = (fs.existsSync(frameworkPath+'/package.json') && JSON.parse(fs.readFileSync(frameworkPath+'/package.json', 'utf-8')) || {});
     v.frameworkVersion = frameworkPkg.version
     frameworkInfo = ', ' + frameworkName + ' v' + v.frameworkVersion

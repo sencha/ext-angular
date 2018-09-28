@@ -3,10 +3,10 @@
 export function getDefaultOptions() {
   return {
     port: 1962,
+    emit: true,
     profile: 'desktop', 
     environment: 'development', 
     verbose: 'no'
-
   }
 }
 
@@ -49,7 +49,6 @@ export function _afterCompile(compilation, vars, options) {
   }
 }
 
-
 function _getFileAndContextDeps(compilation, files, dirs, cwd) {
   //const log = require('./pluginUtil').log
   const uniq = require('lodash.uniq')
@@ -74,8 +73,6 @@ function _getFileAndContextDeps(compilation, files, dirs, cwd) {
   }
   return { fileDependencies: fds, contextDependencies: cds }
 }
-
-
 
 export function _prepareForBuild(app, vars, options, output, compilation) {
   const log = require('./pluginUtil').log
@@ -120,91 +117,89 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
   vars.lastNumFiles = currentNumFiles
 }
 
+// function toXtype(str) {
+//   return str.toLowerCase().replace(/_/g, '-')
+// }
 
-
-function toXtype(str) {
-  return str.toLowerCase().replace(/_/g, '-')
-}
-
-export function extractFromSource(js) {
-  const log = require('./pluginUtil').log
-  var generate = require("@babel/generator").default
-  var parse = require("babylon").parse
-  var traverse = require("ast-traverse")
-  const statements = []
+// export function extractFromSource(js) {
+//   const log = require('./pluginUtil').log
+//   var generate = require("@babel/generator").default
+//   var parse = require("babylon").parse
+//   var traverse = require("ast-traverse")
+//   const statements = []
   
-  const ast = parse(js, {
-    plugins: [
-      'jsx',
-      'flow',
-      'doExpressions',
-      'objectRestSpread',
-      'classProperties',
-      'exportExtensions',
-      'asyncGenerators',
-      'functionBind',
-      'functionSent',
-      'dynamicImport'
-    ],
-    sourceType: 'module'
-  })
+//   const ast = parse(js, {
+//     plugins: [
+//       'jsx',
+//       'flow',
+//       'doExpressions',
+//       'objectRestSpread',
+//       'classProperties',
+//       'exportExtensions',
+//       'asyncGenerators',
+//       'functionBind',
+//       'functionSent',
+//       'dynamicImport'
+//     ],
+//     sourceType: 'module'
+//   })
 
-  function addType(argNode) {
-    var type
-    if (argNode.type === 'StringLiteral') {
-      var xtype = toXtype(argNode.value)
-      if (xtype != 'extreact') {
-        type = { xtype: toXtype(argNode.value) }
-      }
-    } else {
-      type = { xclass: js.slice(argNode.start, argNode.end) }
-    }
-    if (type != undefined) {
-      let config = JSON.stringify(type)
-      statements.push(`Ext.create(${config})`)
-    }
-  }
+//   function addType(argNode) {
+//     var type
+//     if (argNode.type === 'StringLiteral') {
+//       var xtype = toXtype(argNode.value)
+//       if (xtype != 'extreact') {
+//         type = { xtype: toXtype(argNode.value) }
+//       }
+//     } else {
+//       type = { xclass: js.slice(argNode.start, argNode.end) }
+//     }
+//     if (type != undefined) {
+//       let config = JSON.stringify(type)
+//       statements.push(`Ext.create(${config})`)
+//     }
+//   }
 
-  traverse(ast, {
-    pre: function(node) {
-      if (node.type === 'CallExpression'
-          && node.callee
-          && node.callee.object
-          && node.callee.object.name === 'Ext'
-      ) {
-        statements.push(generate(node).code)
-      }
-      if (node.type == 'VariableDeclarator' 
-          && node.init 
-          && node.init.type === 'CallExpression' 
-          && node.init.callee 
-      ) {
-        if (node.init.callee.name == 'reactify') {
-          for (let i = 0; i < node.init.arguments.length; i++) {
-            const valueNode = node.init.arguments[i];
-            if (!valueNode) continue;
-            addType(valueNode)
-          }
-         }
-      }
+//   traverse(ast, {
+//     pre: function(node) {
+//       if (node.type === 'CallExpression'
+//           && node.callee
+//           && node.callee.object
+//           && node.callee.object.name === 'Ext'
+//       ) {
+//         statements.push(generate(node).code)
+//       }
+//       if (node.type == 'VariableDeclarator' 
+//           && node.init 
+//           && node.init.type === 'CallExpression' 
+//           && node.init.callee 
+//       ) {
+//         if (node.init.callee.name == 'reactify') {
+//           for (let i = 0; i < node.init.arguments.length; i++) {
+//             const valueNode = node.init.arguments[i];
+//             if (!valueNode) continue;
+//             addType(valueNode)
+//           }
+//          }
+//       }
 
-      // // Convert React.createElement(...) calls to the equivalent Ext.create(...) calls to put in the manifest.
-      // if (node.type === 'CallExpressionx' 
-      //     && node.callee.object 
-      //     && node.callee.object.name === 'React' 
-      //     && node.callee.property.name === 'createElement') {
-      //   const [props] = node.arguments
-      //   let config
-      //   if (Array.isArray(props.properties)) {
-      //     config = generate(props).code
-      //     for (let key in type) {
-      //       config = `{\n  ${key}: '${type[key]}',${config.slice(1)}`
-      //     }
-      //   } else {
-      //     config = JSON.stringify(type)
-      //   }
-      // }
-    }
-  })
-  return statements
-}
+//       // // Convert React.createElement(...) calls to the equivalent Ext.create(...) calls to put in the manifest.
+//       // if (node.type === 'CallExpressionx' 
+//       //     && node.callee.object 
+//       //     && node.callee.object.name === 'React' 
+//       //     && node.callee.property.name === 'createElement') {
+//       //   const [props] = node.arguments
+//       //   let config
+//       //   if (Array.isArray(props.properties)) {
+//       //     config = generate(props).code
+//       //     for (let key in type) {
+//       //       config = `{\n  ${key}: '${type[key]}',${config.slice(1)}`
+//       //     }
+//       //   } else {
+//       //     config = JSON.stringify(type)
+//       //   }
+//       // }
+//     }
+//   })
+//   return statements
+// }
