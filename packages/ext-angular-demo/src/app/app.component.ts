@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'my-app',
-  templateUrl: `app.component.html`,
-  styleUrls: ['./app.component.css']
+  selector: '[my-app]',
+  template: `
+    <div style="text-align:center">
+      hello
+      <!--<ext-button [text]="'Example ExtAngular Button'"></ext-button>-->
+    </div>
+  `,
+  styles: []
 })
-export class AppComponent implements OnInit {
-  constructor() {}
-  public ngOnInit(): void {
-  }
+export class AppComponent {
 }

@@ -1,21 +1,3 @@
-export function logv(options, s) {
-  if (options.verbose == 'yes') {
-    require('readline').cursorTo(process.stdout, 0)
-    process.stdout.clearLine()
-    process.stdout.write(`-verbose: ${s}`)
-    process.stdout.write('\n')
-  }
-}
-
-export function _getApp() {
-  var chalk = require('chalk')
-  var prefix = ``
-  const platform = require('os').platform()
-  if (platform == 'darwin') { prefix = `ℹ ｢ext｣:` }
-  else { prefix = `i [ext]:` }
-  return `${chalk.green(prefix)} `
-}
-
 //**********
 export function _constructor(options) {
   var framework = ''
@@ -56,7 +38,7 @@ export function _constructor(options) {
     {thisVars.production = true}
   else 
     {thisVars.production = false}
-  //log(require('./pluginUtil')._getVersions(thisVars.app, pluginName, thisVars.framework))
+  log(require('./pluginUtil')._getVersions(thisVars.app, pluginName, thisVars.framework))
   log(thisVars.app + 'Building for ' + thisOptions.environment)
 
   var data = {}
@@ -322,7 +304,23 @@ export function log(s) {
   process.stdout.write('\n')
 }
 
+export function logv(options, s) {
+  if (options.verbose == 'yes') {
+    require('readline').cursorTo(process.stdout, 0)
+    process.stdout.clearLine()
+    process.stdout.write(`-verbose: ${s}`)
+    process.stdout.write('\n')
+  }
+}
 
+export function _getApp() {
+  var chalk = require('chalk')
+  var prefix = ``
+  const platform = require('os').platform()
+  if (platform == 'darwin') { prefix = `ℹ ｢ext｣:` }
+  else { prefix = `i [ext]:` }
+  return `${chalk.green(prefix)} `
+}
 
 export function _getVersions(app, pluginName, frameworkName) {
   const path = require('path')
@@ -337,13 +335,13 @@ export function _getVersions(app, pluginName, frameworkName) {
   var webpackPkg = (fs.existsSync(webpackPath+'/package.json') && JSON.parse(fs.readFileSync(webpackPath+'/package.json', 'utf-8')) || {});
   v.webpackVersion = webpackPkg.version
 
-  // var extPath = path.resolve(process.cwd(),'node_modules/@sencha/ext')
-  // var extPkg = (fs.existsSync(extPath+'/package.json') && JSON.parse(fs.readFileSync(extPath+'/package.json', 'utf-8')) || {});
-  // v.extVersion = extPkg.sencha.version
+  var extPath = path.resolve(process.cwd(),'node_modules/@sencha/ext')
+  var extPkg = (fs.existsSync(extPath+'/package.json') && JSON.parse(fs.readFileSync(extPath+'/package.json', 'utf-8')) || {});
+  v.extVersion = extPkg.sencha.version
 
-  // var cmdPath = path.resolve(process.cwd(),'node_modules/@sencha/cmd')
-  // var cmdPkg = (fs.existsSync(cmdPath+'/package.json') && JSON.parse(fs.readFileSync(cmdPath+'/package.json', 'utf-8')) || {});
-  // v.cmdVersion = cmdPkg.version_full
+  var cmdPath = path.resolve(process.cwd(),'node_modules/@sencha/cmd')
+  var cmdPkg = (fs.existsSync(cmdPath+'/package.json') && JSON.parse(fs.readFileSync(cmdPath+'/package.json', 'utf-8')) || {});
+  v.cmdVersion = cmdPkg.version_full
 
   var frameworkInfo = ''
   if (frameworkName != undefined && frameworkName != 'extjs') {
