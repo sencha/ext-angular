@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core'
-//import { ExtAngularModule } from 'ext-angular-modern'
+//import { ExtAngularModule } from 'ext-angular'
+//import { NgxTabsLibModule } from 'ngx-tabs-libdemo'
 import { AppComponent } from './app.component'
 import { BrowserModule } from '@angular/platform-browser'
 @NgModule({
   bootstrap: [ AppComponent ],
   imports: [
     BrowserModule,
-    //ExtAngularModule
+ //   NgxTabsLibModule
+ //   ExtAngularModule
   ],
   declarations: [ AppComponent ],
   providers: []

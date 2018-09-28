@@ -1,0 +1,12 @@
+{
+  "frameworks": {
+    "ext": "../../node_modules/@sencha/ext"
+  },
+  "packages": {
+    "dir": [
+      "${workspace.dir}/packages",
+      "${workspace.dir}/../../node_modules/@esencha"
+    ],
+    "extract": "${workspace.dir}/packages/remote"
+  }
+}

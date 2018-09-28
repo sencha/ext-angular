@@ -1,0 +1,40 @@
+{
+  "$schema": "./node_modules/ng-packagr/package.schema.json",
+  "name": "ngx-tabs-libdemo-mjg",
+  "version": "0.0.1",
+  "description": "Demo library to showcase Angular packaging format",
+  "scripts": {
+    "build": "ng-packagr -p package.json",
+    "copyPackageJson": "copyfiles package.json dist",
+    "semantic-release": "semantic-release pre && npm run copyPackageJson && npm publish dist && semantic-release post"
+  },
+  "author": "Juri Strumpflohner",
+  "license": "MIT",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public_api.ts"
+    }
+  },
+  "peerDependencies": {
+    "@angular/core": "^5.0.0",
+    "@angular/common": "^5.0.0",
+    "rxjs": "^5.5.2"
+  },
+  "devDependencies": {
+    "@angular/common": "^5.2.9",
+    "@angular/compiler": "^5.2.9",
+    "@angular/compiler-cli": "^5.2.9",
+    "@angular/core": "^5.2.9",
+    "copyfiles": "^1.2.0",
+    "ng-packagr": "2.4.2",
+    "rxjs": "^5.5.2",
+    "semantic-release": "^8.2.0",
+    "tsickle": "^0.26.0",
+    "typescript": "2.4.2",
+    "zone.js": "^0.8.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/juristr/ngx-tabs-libdemo.git"
+  }
+}
