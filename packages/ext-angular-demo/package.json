@@ -5,7 +5,7 @@
   "author": "Sencha",
   "scripts": {
     "start": "npm run dev",
-    "dev": "webpack-dev-server --env.verbose=no --env.environment=development"
+    "dev": "webpack-dev-server --env.verbose=yes --env.environment=development"
  },
   "repository": {
     "type": "git",
@@ -15,21 +15,14 @@
     "node": ">=6.0.0"
   },
   "license": "MIT",
-  "devDependencies": {
-    "portfinder": "^1.0.17",
-    "ext-angular-modern": "0.0.1",
-    "@angular/compiler-cli": "^6.1.8",
-    "@ngtools/webpack": "^6.2.3",
-    "copy-webpack-plugin": "^4.5.2",
-    "html-webpack-plugin": "^3.2.0",
-    "raw-loader": "^0.5.1",
-    "script-ext-html-webpack-plugin": "^2.0.1",
-    "typescript": "^2.9.0",
-    "webpack": "^4.19.1",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.8"
-  },
   "dependencies": {
+    "ext-angular": "0.0.1",
+    "@sencha/ext": "~6.6.0",
+    "@sencha/ext-modern": "~6.6.0",
+    "@sencha/ext-modern-treegrid": "~6.6.0",
+    "@sencha/ext-modern-theme-material": "~6.6.0",
+
+    "ngx-tabs-libdemo": "^0.3.1",
     "@angular/common": "^6.1.8",
     "@angular/compiler": "^6.1.8",
     "@angular/core": "^6.1.8",
@@ -39,5 +32,19 @@
     "express": "^4.16.3",
     "rxjs": "^6.3.2",
     "zone.js": "^0.8.26"
+  },
+  "devDependencies": {
+    "@sencha/ext-angular-webpack-plugin": "~0.0.1",
+    "portfinder": "^1.0.17",
+     "@angular/compiler-cli": "^6.1.8",
+    "@ngtools/webpack": "^6.2.3",
+    "copy-webpack-plugin": "^4.5.2",
+    "html-webpack-plugin": "^3.2.0",
+    "raw-loader": "^0.5.1",
+    "script-ext-html-webpack-plugin": "^2.0.1",
+    "typescript": "^2.9.0",
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.8"
   }
 }

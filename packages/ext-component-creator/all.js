@@ -34,7 +34,9 @@ var exportall = ''
 log(``,`\next-component-generator\n`)
 
 exportall = exportall + `export * from './lib/ext-angular.module';${newLine}`
-exportall = exportall + `export * from './lib/ext-class.component';${newLine}`
+//exportall = exportall + `export * from './lib/ext-class.component';${newLine}`
+//exports = exports + `ExtClassComponent,${newLine}`
+
 
 var framework = process.argv[2]
 if(framework == undefined) {
@@ -87,7 +89,9 @@ var dataFile = `${dataFolder}${toolkit}-all-classes-flatten.json`
 log(`dataFile`,`${dataFile}`)
 var data = require(dataFile)
 
+//*************
 launch(framework, data, srcFolder, libFolder, templateToolkitFolder)
+
 
 var val = 'copy'
 var str = new Array((19 - val.length) + 1).join( ' ' );
@@ -95,7 +99,25 @@ log(`${val}${str}`,`from ${packageFolder} to ${toolkitFolder}`)
 
 //log(`${('copy' + '               ').substr(-19)}: from ${packageFolder} to ${toolkitFolder}`)
 fs.copySync(packageFolder, toolkitFolder)
-log(``,`done`)
+
+
+toFolder = path.resolve('./../../packages/angular-cli-with-library/projects/ext-angular/src')
+log(`toFolder`,`${toFolder}`)
+rimraf.sync(toFolder)
+
+//rimraf.sync(path.resolve(toFolder,'src'))
+
+log(`ncp${str}`,`from ${srcFolder} to ${toFolder}`)
+require('ncp').ncp(srcFolder, toFolder, function (err) {
+  if (err) {
+    return console.error(err)
+  }
+  log(``,`done`)
+ })
+//fs.copySync(srcFolder, toFolder)
+
+
+
 
 
 function launch(framework, data, srcFolder, libFolder, templateToolkitFolder) {
@@ -143,6 +165,9 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder) {
     }
   }
   log(``,`**************`)
+
+  //imports = imports + `import { ExtClassComponent } from './ext-class.component';${newLine}`
+  //declarations = declarations + `ExtClassComponent,${newLine}`
 
   exports = exports.substring(0, exports.length - 2); exports = exports + newLine
   declarations = declarations.substring(0, declarations.length - 2); declarations = declarations + newLine
@@ -271,7 +296,7 @@ function oneItem(o, libFolder, framework, extension, num, xtype, alias) {
   imports = imports + `import { Ext${capclassname}Component } from './ext-${classname}.component';${newLine}`
   declarations = declarations + `Ext${capclassname}Component,${newLine}`
   exports = exports + `Ext${capclassname}Component,${newLine}`
-  exportall = exportall + `export * from './lib/ext-${classname}.component';${newLine}`
+  //exportall = exportall + `export * from './lib/ext-${classname}.component';${newLine}`
 }
 
 // function doRootfile(fileName, toolkit, folderName) {
@@ -351,6 +376,10 @@ function doModule(imports, exports, declarations) {
 
 function doExtClass() {
   return `declare var Ext: any
+  @Component({
+    selector: 'ext-button', 
+    template: ''
+  })
 export class ExtClassComponent {
   public classname: any
   public extend: any

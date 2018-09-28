@@ -2,3 +2,14 @@ git remote add upstream https://github.com/sencha/ext-angular.git
 
 
 https://github.com/maciejtreder/angular-universal-pwa
+
+
+
+  //"dest": "../../../ext-angular",
+
+
+ng new angular-cli-with-library --style scss --minimal --skip-tests --inline-style --inline-template 
+
+ng generate library ext-angular
+
+ng build ext-angular

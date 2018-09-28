@@ -1,0 +1,22 @@
+{
+  "version": 3,
+  "file": "ngx-tabs-libdemo.umd.js",
+  "sources": [
+    "ng://ngx-tabs-libdemo/out/src/ngx-tabs-lib.module.ts",
+    "ng://ngx-tabs-libdemo/out/src/tabs.component.ts",
+    "ng://ngx-tabs-libdemo/out/src/tab.component.ts"
+  ],
+  "sourcesContent": [
+    "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { TabsComponent } from './tabs.component';\nimport { TabComponent } from './tab.component';\n\n@NgModule({\n  imports: [CommonModule],\n  declarations: [TabsComponent, TabComponent],\n  exports: [TabsComponent, TabComponent]\n})\nexport class NgxTabsLibModule {}\n",
+    "import {\n  Component,\n  ContentChildren,\n  QueryList,\n  AfterContentInit\n} from '@angular/core';\nimport { TabComponent } from './tab.component';\n\n@Component({\n  selector: 'ngx-tabs',\n  template: `<ul class=\"nav nav-tabs\">\n    <li *ngFor=\"let tab of tabs\" (click)=\"selectTab(tab)\" [class.active]=\"tab.active\">\n        <a href=\"#\">{{tab.tabTitle}}</a>\n    </li>\n</ul>\n<ng-content></ng-content>`,\n  styles: [`.nav-tabs:after,.nav-tabs:before{-webkit-box-sizing:border-box;box-sizing:border-box}.nav{padding-left:0;margin-bottom:0;list-style:none;height:43px}ol,ul{margin-top:0;margin-bottom:10px}a{color:#337ab7;text-decoration:none}.nav-tabs{border-bottom:1px solid #ddd}.nav-tabs>li.active>a,.nav-tabs>li.active>a:focus,.nav-tabs>li.active>a:hover{color:#555;cursor:default;background-color:#fff;border:1px solid #ddd;border-bottom-color:transparent}.nav-tabs>li>a{margin-right:2px;line-height:1.42857143;border:1px solid transparent;border-radius:4px 4px 0 0}.nav>li>a{position:relative;display:block;padding:10px 15px}.nav-tabs>li{float:left;margin-bottom:-1px}.nav>li{position:relative;display:block}`]\n})\nexport class TabsComponent implements AfterContentInit {\n  @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;\n\n  // contentChildren are set\n  ngAfterContentInit() {\n    // get all active tabs\n    const activeTabs = this.tabs.filter(tab => tab.active);\n\n    // if there is no active tab set, activate the first\n    if (activeTabs.length === 0) {\n      this.selectTab(this.tabs.first);\n    }\n  }\n\n  selectTab(tab: TabComponent) {\n    // deactivate all tabs\n    this.tabs.toArray().forEach(tab => (tab.active = false));\n\n    // activate the tab the user has clicked on.\n    tab.active = true;\n  }\n}\n",
+    "import { Component, Input } from '@angular/core';\n\n@Component({\n  selector: 'ngx-tab',\n  styles: [\n    `\n    .pane{\n      padding: 1em;\n    }\n  `\n  ],\n  template: `\n    <div [hidden]=\"!active\" class=\"pane\">\n      <ng-content></ng-content>\n    </div>\n  `\n})\nexport class TabComponent {\n  @Input() tabTitle: string;\n  @Input() active = false;\n}\n"
+  ],
+  "names": [
+    "CommonModule",
+    "NgModule",
+    "ContentChildren",
+    "Component",
+    "Input"
+  ],
+  "mappings": ";;;;;;AEAA,IAAA,YAAA,IAAA,YAAA;;QAmBA,IAAA,CAAA,MAAA,GAAoB,KAAK,CAAzB;;;;;IAjBA,EAAA,IAAA,EAACG,cAAS,EAAV,IAAA,EAAA,CAAW;gBACT,QAAQ,EAAE,SAAS;gBACnB,MAAM,EAAE;oBACN,8CAID;iBACA;gBACD,QAAQ,EAAE,kGAIT;aACF,EAAD,EAAA;;;;IAEA,UAAA,EAAA,CAAA,EAAA,IAAA,EAAGC,UAAK,EAAR,EAAA;IACA,QAAA,EAAA,CAAA,EAAA,IAAA,EAAGA,UAAK,EAAR,EAAA;;ADnBA,IAAA,aAAA,IAAA,YAAA;IAAA,SAAA,aAAA,GAAA;;IAsBE,aAAF,CAAA,SAAA,CAAA,kBAAoB,GAAlB,YAAF;QAEI,IAAM,UAAU,GAAG,IAAI,CAAC,IAAI,CAAC,MAAM,CAAC,UAAA,GAAG,EAA3C,EAA+C,OAAA,GAAG,CAAC,MAAM,CAAzD,EAAyD,CAAC,CAAC;QAGvD,IAAI,UAAU,CAAC,MAAM,KAAK,CAAC,EAAE;YAC3B,IAAI,CAAC,SAAS,CAAC,IAAI,CAAC,IAAI,CAAC,KAAK,CAAC,CAAC;SACjC;KACF,CAAH;IAEE,aAAF,CAAA,SAAA,CAAA,SAAW,GAAT,UAAU,GAAiB,EAA7B;QAEI,IAAI,CAAC,IAAI,CAAC,OAAO,EAAE,CAAC,OAAO,CAAC,UAAA,GAAG,EAAnC,EAAA,QAAwC,GAAG,CAAC,MAAM,GAAG,KAAK,EAA1D,EAA2D,CAAC,CAAC;QAGzD,GAAG,CAAC,MAAM,GAAG,IAAI,CAAC;KACnB,CAAH;;;;IA9BA,EAAA,IAAA,EAACD,cAAS,EAAV,IAAA,EAAA,CAAW;gBACT,QAAQ,EAAE,UAAU;gBACpB,QAAQ,EAAE,oNAKc;gBACxB,MAAM,EAAE,CAAC,0rBAA0rB,CAAC;aACrsB,EAAD,EAAA;;;;IAEA,MAAA,EAAA,CAAA,EAAA,IAAA,EAAGD,oBAAe,EAAlB,IAAA,EAAA,CAAmB,YAAY,EAA/B,EAAA,EAAA;;ADnBA,IAAA,gBAAA,IAAA,YAAA;IAAA,SAAA,gBAAA,GAAA;;;;;IAKA,EAAA,IAAA,EAACD,aAAQ,EAAT,IAAA,EAAA,CAAU;gBACR,OAAO,EAAE,CAACD,mBAAY,CAAC;gBACvB,YAAY,EAAE,CAAC,aAAa,EAAE,YAAY,CAAC;gBAC3C,OAAO,EAAE,CAAC,aAAa,EAAE,YAAY,CAAC;aACvC,EAAD,EAAA;;;;;;;;;;;;;;;;"
+}
