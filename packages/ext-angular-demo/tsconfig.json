@@ -1,29 +1,34 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
+    "strictPropertyInitialization": false,
+    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "declaration": false,
+    "target": "es5",
+    "jsx": "react",
     "module": "es2015",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "declaration": false,
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "removeComments": true,
+    "strictNullChecks": false,
+    "outDir": "build",
     "lib": [
-      "es2017",
+      "es6",
+      "es7",
       "dom"
-    ],
-    "paths": {
-      "ext-angular": [
-        "node_modules/ext-angular"
-      ],
-      "ext-angular/*": [
-        "node_modules/ext-angular/*"
-      ]
-    }
-  }
+    ]
+  },
+  "include": [
+    "./src/**/*"
+  ],
+
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules"
+  ]
 }

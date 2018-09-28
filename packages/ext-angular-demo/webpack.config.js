@@ -1,9 +1,7 @@
 const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-//const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtWebpackPlugin = require('@sencha/ext-angular-webpack-plugin')
-//const ScriptExtPlugin = require('script-ext-html-webpack-plugin')
 const { AngularCompilerPlugin } = require('@ngtools/webpack')
 const portfinder = require('portfinder')
 const sourcePath = path.join(__dirname, './src')
@@ -25,20 +23,23 @@ module.exports = function (env) {
       new ExtWebpackPlugin({
         framework: 'angular',
         port: port,
+        emit: false,
         profile: buildprofile, 
         environment: buildenvironment, 
         verbose: buildverbose,
         theme: 'theme-material',
         packages: []
       }),
-      // new ScriptExtPlugin({
-      //   defaultAttribute: 'defer'
-      // }),
       new AngularCompilerPlugin({
+
+        platform: 0,
+        entryModule: path.join(sourcePath, 'app/app.module#AppModule'),
+        skipCodeGeneration: true,
+
         "annotateForClosureCompiler": false,
-        "strictMetadataEmit": true,
-        "skipTemplateCodegen": true,
-        "fullTemplateTypeCheck": true,
+        "strictMetadataEmit": false,
+        "skipTemplateCodegen": false,
+        "fullTemplateTypeCheck": false,
         tsConfigPath: './tsconfig.json',
         sourceMap: true
       })
@@ -65,7 +66,33 @@ module.exports = function (env) {
       },
       module: {
         rules: [
-          { test: /\.ts$/, loaders: ['@ngtools/webpack'] },
+          {
+            test: /\.ts$/,
+            loader: '@ngtools/webpack',
+            exclude: [/\.(spec|e2e)\.ts$/, /node_modules/],
+          },
+          //{ test: /\.ts$/, loaders: ['@ngtools/webpack'] },
+          // {
+          //   test: /\.ts$/,
+          //   loaders: [{
+          //       loader: 'awesome-typescript-loader',
+          //       options: {
+          //         transpileOnly: process.env.NODE_ENV !== 'production'
+          //       }
+          //     },
+          //     'angular2-template-loader',
+          //     'angular2-router-loader'
+    
+          //   ],
+          //   exclude: [/\.(spec|e2e)\.ts$/],
+          // },
+          // {
+          //   test: /\.ts$/,
+          //   include: [/\.(spec|e2e)\.ts$/],
+          //   loaders: ['awesome-typescript-loader', 'angular2-template-loader']
+          // },
+
+
           { test: /\.css$/, loader: 'raw-loader' },
           { test: /\.html$/, loader: 'raw-loader' }
         ]

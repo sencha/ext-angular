@@ -16,14 +16,6 @@
     "lib": [
       "es2017",
       "dom"
-    ],
-    "paths": {
-      "ext-angular": [
-        "node_modules/ext-angular"
-      ],
-      "ext-angular/*": [
-        "node_modules/ext-angular/*"
-      ]
-    }
+    ]
   }
 }

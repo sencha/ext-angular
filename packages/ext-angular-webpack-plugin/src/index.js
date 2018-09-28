@@ -24,9 +24,16 @@ export default class ExtWebpackPlugin {
       }
 
       if (this.plugin.vars.pluginErrors.length == 0) {
-        compiler.hooks.emit.tapAsync(`ext-emit`, (compilation, callback) => {
-          require(`./pluginUtil`).emit(compiler, compilation, this.plugin.vars, this.plugin.options, callback)
-        })
+        if (this.plugin.options.emit == true) {
+          compiler.hooks.emit.tapAsync(`ext-emit`, (compilation, callback) => {
+            require(`./pluginUtil`).emit(compiler, compilation, this.plugin.vars, this.plugin.options, callback)
+          })
+        }
+        else {
+          require('./pluginUtil').logv()
+          console.log(this.plugin.options)
+          logv(this.plugin.options, `emit not run`)
+        }
 
         compiler.hooks.done.tap(`ext-done`, () => {
           require('./pluginUtil').log(this.plugin.vars.app + `Completed ext-webpack-plugin processing`)

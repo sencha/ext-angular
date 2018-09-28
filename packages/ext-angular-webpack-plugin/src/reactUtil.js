@@ -3,6 +3,7 @@
 export function getDefaultOptions() {
   return {
     port: 1962,
+    emit: true,
     profile: '', 
     environment: 'development', 
     verbose: 'no',
