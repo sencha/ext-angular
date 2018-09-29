@@ -99,6 +99,12 @@ module.exports = function (env) {
       },
       plugins,
       devServer: {
+        overlay: true,
+        quiet: false,
+        clientLogLevel: 'none',
+        // before: function(app) {
+        //   console.log('before')
+        // },
         contentBase: './build',
         historyApiFallback: true,
         hot: false,
