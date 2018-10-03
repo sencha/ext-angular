@@ -8,12 +8,11 @@ generators/ext-component-creator/node all.js angular modern
 generators/ext-angular-modern/npm run build
   - writes to generators/ext-angular-modern/dist
 
-copy generators/ext-angular-modern/dist/ext-angular to packages/ext-angular-modern
+copy generators/ext-angular-modern/dist/ext-angular-modern to packages/ext-angular-modern
 
 npm install -g @angular/cli
 ng new ext-angular-client --style scss --minimal --skip-tests --inline-style --inline-template 
 cd ext-angular-client
-npm i -D @angular-builders/custom-webpack
 
 in angular.json
 
@@ -59,7 +58,6 @@ in package.json, add
     "@angular-builders/custom-webpack": "^2.4.1",
     "@angular-builders/dev-server":"^2.2.3",
     "@sencha/ext-angular-webpack-plugin": "~0.0.1",
-
 
 in tsconfig.json, add
 
