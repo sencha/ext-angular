@@ -56,7 +56,6 @@ toFolder = path.resolve(`./../../generators/ext-${framework}-${toolkit}/src`)
 log(`toFolder`,`${toFolder}`)
 rimraf.sync(toFolder);log(`deleted`,`${toFolder}`)
 log(`ncp${str}`,`from ${srcFolder} to ${toFolder}`)
-//require('ncp').ncp(srcFolder, toFolder, function (err) {
 ncp(srcFolder, toFolder, function (err) {
   if (err) {
     return console.error(err)
@@ -111,14 +110,14 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
 
   log(``,`**************`)
 
-  moduleVars.imports = moduleVars.imports.substring(0, moduleVars.imports.length - 2); moduleVars.imports = moduleVars.imports + ';' + newLine
-  moduleVars.imports = moduleVars.imports + `import { ExtClassComponent } from './ext-class.component';${newLine}`
+  // moduleVars.imports = moduleVars.imports.substring(0, moduleVars.imports.length - 2); moduleVars.imports = moduleVars.imports + ';' + newLine
+  // moduleVars.imports = moduleVars.imports + `import { ExtClassComponent } from './ext-class.component';${newLine}`
 
-  moduleVars.exports = moduleVars.exports.substring(0, moduleVars.exports.length - 2); moduleVars.exports = moduleVars.exports + ',' + newLine
-  moduleVars.exports = moduleVars.exports + `    ExtClassComponent${newLine}`
+   moduleVars.exports = moduleVars.exports.substring(0, moduleVars.exports.length - 2); moduleVars.exports = moduleVars.exports + '' + newLine
+  // moduleVars.exports = moduleVars.exports + `    ExtClassComponent${newLine}`
 
-  moduleVars.declarations = moduleVars.declarations.substring(0, moduleVars.declarations.length - 2); moduleVars.declarations = moduleVars.declarations + ',' + newLine
-  moduleVars.declarations = moduleVars.declarations + `    ExtClassComponent${newLine}`
+   moduleVars.declarations = moduleVars.declarations.substring(0, moduleVars.declarations.length - 2); moduleVars.declarations = moduleVars.declarations + '' + newLine
+  // moduleVars.declarations = moduleVars.declarations + `    ExtClassComponent${newLine}`
 
   var exportall = ''
   exportall = exportall + `export * from './lib/ext-${framework}-${toolkit}.module';${newLine}`
@@ -129,8 +128,8 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
       fs.writeFile(publicApiFile, doPublic_Api(exportall, templateToolkitFolder), function(err) {if(err) { return console.log(err); } });
       log(`publicApiFile`,`${publicApiFile}`)
       var classFile = `${libFolder}ext-class.component.${extension}`
-      fs.writeFile(classFile, doExtClass(), function(err) {if(err){return console.log(err);} })
-      log(`classFile`,`${classFile}`)
+      //fs.writeFile(classFile, doExtClass(), function(err) {if(err){return console.log(err);} })
+      //log(`classFile`,`${classFile}`)
       var baseFile = `${libFolder}base.${extension}`
       fs.writeFile(baseFile, doExtBase(templateToolkitFolder), function(err) {if(err){return console.log(err);} })
       log(`baseFile`,`${baseFile}`)
