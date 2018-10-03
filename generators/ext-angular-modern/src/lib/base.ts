@@ -1,13 +1,9 @@
 declare var Ext: any;
-import {ElementRef,EventEmitter,ContentChildren,QueryList,
-//  AfterContentChecked,
-//  AfterContentInit,
-//  AfterViewChecked,
-//  AfterViewInit,
-//  DoCheck,
-//  OnChanges,
-//  OnDestroy,
-//  OnInit,
+import {
+  ElementRef,
+  EventEmitter,
+  ContentChildren,
+  QueryList,
   SimpleChanges
 } from '@angular/core';
 
@@ -63,7 +59,7 @@ export class base {
     for (var i = 0; i < me.metaData.PROPERTIES.length; i++) { 
       var prop = me.metaData.PROPERTIES[i];
       //need to handle listeners coming in here
-      if ((o.xtype == 'cartesian' || o.xtype == 'polar') && prop == 'layout') {
+      if ((o.xtype === 'cartesian' || o.xtype === 'polar') && prop === 'layout') {
       }
       else {
         if (me[prop] != undefined && 
@@ -74,7 +70,7 @@ export class base {
         }
       }
     }
-    if ('true' == me.fitToParent) {
+    if ('true' === me.fitToParent) {
       o.top=0, 
       o.left=0, 
       o.width='100%', 
@@ -112,9 +108,9 @@ export class base {
     //console.log(this.allChildren)
     var parentCmp = this.extChildren.first.ext
     var parentxtype = this.extChildren.first.ext.xtype
-    if (parentxtype == 'container' &&
+    if (parentxtype === 'container' &&
         this.allChildren.first != undefined && 
-        this.allChildren.length == 1) {
+        this.allChildren.length === 1) {
       //console.log(this.allChildren.first.nativeElement)
       parentCmp.setHtml(this.allChildren.first.nativeElement)
       return
@@ -125,24 +121,24 @@ export class base {
       var childCmp = extChildrenArray[i].ext
       var childxtype = childCmp.xtype
       //console.log(`parent: ${parentxtype}, child: ${childxtype}`)
-      if (parentxtype == 'grid') {
-        if (childxtype == 'column' || childxtype == 'treecolumn' || childxtype == 'textcolumn' || childxtype == 'checkcolumn' || childxtype == 'datecolumn' || childxtype == 'rownumberer' || childxtype == 'numbercolumn') {
+      if (parentxtype === 'grid') {
+        if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
           parentCmp.addColumn(childCmp)
         }
-      } else if (parentxtype == 'tooltip') {
+      } else if (parentxtype === 'tooltip') {
         parentCmp.setTooltip(childCmp)
-      } else if (parentxtype == 'plugin') {
+      } else if (parentxtype === 'plugin') {
         parentCmp.setPlugin(childCmp)
-      } else if (parentxtype == 'button') {
-        if (childxtype == 'menu') {
+      } else if (parentxtype === 'button') {
+        if (childxtype === 'menu') {
           parentCmp.setMenu(childCmp)
         } else {
           console.log('child not added')
         }
-      } else if (childxtype == 'toolbar' && Ext.isClassic == true) {
+      } else if (childxtype === 'toolbar' && Ext.isClassic === true) {
         parentCmp.addDockedItems(childCmp)
-      } else if ((childxtype == 'toolbar' || childxtype == 'titlebar') && parentCmp.getHideHeaders != undefined) {
-        if (parentCmp.getHideHeaders() == false) {
+      } else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
+        if (parentCmp.getHideHeaders() === false) {
           var j: any = parentCmp.items.items.length
           parentCmp.insert(j - 1, childCmp)
         } else {

@@ -50,59 +50,68 @@ export function _constructor(options) {
 
 //**********
 export function _compilation(compiler, compilation, vars, options) {
-  if (vars.production) {
-    logv(options,`ext-compilation-production`)
-    compilation.hooks.succeedModule.tap(`ext-succeed-module`, (module) => {
-      if (module.resource && module.resource.match(/\.(j|t)sx?$/) && !module.resource.match(/node_modules/) && !module.resource.match('/ext-react/dist/')) {
-        vars.deps = [ 
-          ...(vars.deps || []), 
-          ...require(`./${vars.framework}Util`).extractFromSource(module._source._value) 
-        ]
-      }
-    })
-  }
-  else {
-    logv(options, `ext-compilation`)
-  }
-  if (options.framework != 'angular') {
-    compilation.hooks.htmlWebpackPluginBeforeHtmlGeneration.tap(`ext-html-generation`,(data) => {
-      logv(options,'FUNCTION ext-html-generation')
-      const path = require('path')
-      var outputPath = ''
-      if (compiler.options.devServer) {
-        if (compiler.outputPath === '/') {
-          outputPath = path.join(compiler.options.devServer.contentBase, outputPath)
+  try {
+    if (vars.production) {
+      logv(options,`ext-compilation-production`)
+      compilation.hooks.succeedModule.tap(`ext-succeed-module`, (module) => {
+        if (module.resource && module.resource.match(/\.(j|t)sx?$/) && !module.resource.match(/node_modules/) && !module.resource.match('/ext-react/dist/')) {
+          vars.deps = [ 
+            ...(vars.deps || []), 
+            ...require(`./${vars.framework}Util`).extractFromSource(module._source._value) 
+          ]
         }
-        else {
-          if (compiler.options.devServer.contentBase == undefined) {
-            outputPath = 'build'
+      })
+    }
+    else {
+      logv(options, `ext-compilation`)
+    }
+    if (options.framework != 'angular') {
+      compilation.hooks.htmlWebpackPluginBeforeHtmlGeneration.tap(`ext-html-generation`,(data) => {
+        logv(options,'FUNCTION ext-html-generation')
+        const path = require('path')
+        var outputPath = ''
+        if (compiler.options.devServer) {
+          if (compiler.outputPath === '/') {
+            outputPath = path.join(compiler.options.devServer.contentBase, outputPath)
           }
           else {
-            outputPath = ''
+            if (compiler.options.devServer.contentBase == undefined) {
+              outputPath = 'build'
+            }
+            else {
+              outputPath = ''
+            }
           }
         }
-      }
-      else {
-        outputPath = 'build'
-      }
-      outputPath = outputPath.replace(process.cwd(), '').trim()
-      var jsPath = path.join(outputPath, vars.extPath, 'ext.js')
-      var cssPath = path.join(outputPath, vars.extPath, 'ext.css')
-      data.assets.js.unshift(jsPath)
-      data.assets.css.unshift(cssPath)
-      log(vars.app + `Adding ${jsPath} and ${cssPath} to index.html`)
-    })
+        else {
+          outputPath = 'build'
+        }
+        outputPath = outputPath.replace(process.cwd(), '').trim()
+        var jsPath = path.join(outputPath, vars.extPath, 'ext.js')
+        var cssPath = path.join(outputPath, vars.extPath, 'ext.css')
+        data.assets.js.unshift(jsPath)
+        data.assets.css.unshift(cssPath)
+        log(vars.app + `Adding ${jsPath} and ${cssPath} to index.html`)
+      })
+    }
+    else {
+      logv(options,'skipped ext-html-generation')
+    }
+  }
+  catch(e) {
+    console.log(e)
+    compilation.errors.push('compilation: ' + e)
   }
 }
 
 //**********
 export async function emit(compiler, compilation, vars, options, callback) {
   try {
-    var app = vars.app
-    var framework = vars.framework
     const log = require('./pluginUtil').log
     const logv = require('./pluginUtil').logv
     logv(options,'FUNCTION ext-emit')
+    var app = vars.app
+    var framework = vars.framework
     const path = require('path')
     const _buildExtBundle = require('./pluginUtil')._buildExtBundle
     let outputPath = path.join(compiler.outputPath,vars.extPath)
@@ -173,6 +182,7 @@ export async function emit(compiler, compilation, vars, options, callback) {
     }
   }
   catch(e) {
+    console.log(e)
     compilation.errors.push('emit: ' + e)
     callback()
   }

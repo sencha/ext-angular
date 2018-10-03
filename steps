@@ -1,5 +1,7 @@
 steps
 
+***************************
+
 generators/ext-component-creator/node all.js angular modern
   - writes to generators/ext-angular-modern/src
 
@@ -8,6 +10,7 @@ generators/ext-angular-modern/npm run build
 
 copy generators/ext-angular-modern/dist/ext-angular to packages/ext-angular-modern
 
+npm install -g @angular/cli
 ng new ext-angular-client --style scss --minimal --skip-tests --inline-style --inline-template 
 cd ext-angular-client
 npm i -D @angular-builders/custom-webpack
@@ -24,37 +27,45 @@ to
 
       "architect": {
         "build": {
-          //"builder": "@angular-devkit/build-angular:browser",
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "customWebpackConfig": {
-              "path": "./ext-angular-webpack.config.js"
-            },
+            "customWebpackConfig": {"path": "./ext-angular-webpack.config.js"},
 
 in angular.json
 
 change
 
+        "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
 
 to
 
-          //"builder": "@angular-devkit/build-angular:dev-server",
+        "serve": {
           "builder": "@angular-builders/dev-server:generic",
 
-add ext-angular-webpack.json
+copy generators/ext-component-creator/filetemplates/angular/ext-angular-webpack.config.json 
+     to ext-angular-client
 
 in package.json, add
 
   "dependencies": {
     "ext-angular-modern": "1.0.0",
+    "@sencha/ext": "~6.6.0",
+    "@sencha/ext-modern": "~6.6.0",
+    "@sencha/ext-modern-treegrid": "~6.6.0",
+    "@sencha/ext-modern-theme-material": "~6.6.0",
+
+  "devDependencies": {
+    "@angular-builders/custom-webpack": "^2.4.1",
+    "@angular-builders/dev-server":"^2.2.3",
+    "@sencha/ext-angular-webpack-plugin": "~0.0.1",
 
 
 in tsconfig.json, add
 
      "paths": {
       "@angular/*": ["./node_modules/@angular/*"]
-
+     }
 
 in src/app.module.ts
 
@@ -76,13 +87,31 @@ import { ExtAngularModernModule } from 'ext-angular-modern'
 })
 export class AppModule { }
 
-
 in src/app.component.ts
 
     <div style="text-align:center">
       <ext-button [text]="'Example ExtAngular Button'"></ext-button>
     </div>
 
+in src/index.html
 
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ExtAngularClient</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="build/ext-angular/ext.css" rel="stylesheet">
+</head>
+<body>
+  <app-root></app-root>
+  <script type="text/javascript" src="build/ext-angular/ext.js"></script>
+</body>
+</html>
+
+run: npm install
+run: npm start
 
 ***************************
