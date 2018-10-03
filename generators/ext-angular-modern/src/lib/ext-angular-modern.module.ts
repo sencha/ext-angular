@@ -1,20 +1,17 @@
 import { NgModule } from '@angular/core';
 import { ExtButtonComponent } from './ext-button.component';
 import { ExtGridComponent } from './ext-grid.component';
-import { ExtClassComponent } from './ext-class.component';
 
 @NgModule({
   imports: [
   ],
   declarations: [
     ExtButtonComponent,
-    ExtGridComponent,
-    ExtClassComponent
+    ExtGridComponent
   ],
   exports: [
     ExtButtonComponent,
-    ExtGridComponent,
-    ExtClassComponent
+    ExtGridComponent
   ]
 })
 export class ExtAngularModernModule { }
