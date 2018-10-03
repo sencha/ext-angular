@@ -1,5 +1,8 @@
 {
   "extends": "./tsconfig.json",
+  "noUnusedLocals": false,
+  "noUnusedParameters": false,
+  "no-unused-variable": false,
   "compilerOptions": {
     "outDir": "./out-tsc/lib",
     "target": "es2015",

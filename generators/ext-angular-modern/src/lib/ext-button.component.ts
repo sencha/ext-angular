@@ -2,15 +2,9 @@ import {
   OnInit,
   AfterContentInit,
   OnChanges,
-  //SimpleChanges,
   Component,
-  //ViewChild,
   ElementRef,
-  //ComponentFactoryResolver,
-  //ViewContainerRef,
   forwardRef
-  //ContentChildren,
-  //QueryList
 } from '@angular/core';
 import { base } from './base';
 export class buttonMetaData {
