@@ -2,16 +2,18 @@
 export function _constructor(options) {
   var thisVars = {}
   var thisOptions = {}
-  const fs = require('fs')
-  const validateOptions = require('schema-utils')
-  validateOptions(require('../options.json'), options, '')
+  var plugin = {}
+
   if (options.framework == undefined) {
     thisVars.pluginErrors = []
     thisVars.pluginErrors.push('webpack config: framework parameter on ext-webpack-plugin is not defined - values: react, angular, extjs')
-    var plugin = {}
     plugin.vars = thisVars
     return plugin
   }
+
+  const validateOptions = require('schema-utils')
+  validateOptions(require(`./${options.framework}Util`).getValidateOptions(), options, '')
+
   thisVars = require(`./${options.framework}Util`).getDefaultVars()
   thisVars.framework = options.framework
   switch(thisVars.framework) {
@@ -30,8 +32,10 @@ export function _constructor(options) {
   thisVars.app = require('./pluginUtil')._getApp()
   logv(options, `pluginName - ${thisVars.pluginName}`)
   logv(options, `thisVars.app - ${thisVars.app}`)
+  const fs = require('fs')
   const rc = (fs.existsSync(`.ext-${thisVars.framework}rc`) && JSON.parse(fs.readFileSync(`.ext-${thisVars.framework}rc`, 'utf-8')) || {})
   thisOptions = { ...require(`./${thisVars.framework}Util`).getDefaultOptions(), ...options, ...rc }
+  logv(options, `thisOptions - ${JSON.stringify(thisOptions)}`)
   if (thisOptions.environment == 'production') 
     {thisVars.production = true}
   else 
@@ -39,14 +43,13 @@ export function _constructor(options) {
   log(require('./pluginUtil')._getVersions(thisVars.app, thisVars.pluginName, thisVars.framework))
   log(thisVars.app + 'Building for ' + thisOptions.environment)
 
-  var plugin = {}
   plugin.vars = thisVars
   plugin.options = thisOptions
   return plugin
 }
 
 //**********
-export function _compilation(compilation, vars, options) {
+export function _compilation(compiler, compilation, vars, options) {
   if (vars.production) {
     logv(options,`ext-compilation-production`)
     compilation.hooks.succeedModule.tap(`ext-succeed-module`, (module) => {
@@ -61,63 +64,116 @@ export function _compilation(compilation, vars, options) {
   else {
     logv(options, `ext-compilation`)
   }
-  //if (vars.pluginErrors.length == 0) {
+  if (options.framework != 'angular') {
     compilation.hooks.htmlWebpackPluginBeforeHtmlGeneration.tap(`ext-html-generation`,(data) => {
       logv(options,'FUNCTION ext-html-generation')
       const path = require('path')
-      var publicPath = ''
-      if (compilation.outputOptions.publicPath != undefined) {
-        publicPath = compilation.outputOptions.publicPath
+      var outputPath = ''
+      if (compiler.options.devServer) {
+        if (compiler.outputPath === '/') {
+          outputPath = path.join(compiler.options.devServer.contentBase, outputPath)
+        }
+        else {
+          if (compiler.options.devServer.contentBase == undefined) {
+            outputPath = 'build'
+          }
+          else {
+            outputPath = ''
+          }
+        }
       }
-      var jsPath = path.join(publicPath,vars.extPath + '/ext.js')
-      var cssPath = path.join(publicPath,vars.extPath + '/ext.css')
+      else {
+        outputPath = 'build'
+      }
+      outputPath = outputPath.replace(process.cwd(), '').trim()
+      var jsPath = path.join(outputPath, vars.extPath, 'ext.js')
+      var cssPath = path.join(outputPath, vars.extPath, 'ext.css')
       data.assets.js.unshift(jsPath)
       data.assets.css.unshift(cssPath)
       log(vars.app + `Adding ${jsPath} and ${cssPath} to index.html`)
     })
-  //}
+  }
 }
 
 //**********
 export async function emit(compiler, compilation, vars, options, callback) {
-  var app = vars.app
-  var framework = vars.framework
-  const log = require('./pluginUtil').log
-  const logv = require('./pluginUtil').logv
-  logv(options,'FUNCTION ext-emit')
-  const path = require('path')
-  const _buildExtBundle = require('./pluginUtil')._buildExtBundle
-  let outputPath = path.join(compiler.outputPath,vars.extPath)
-  if (compiler.outputPath === '/' && compiler.options.devServer) {
-    outputPath = path.join(compiler.options.devServer.contentBase, outputPath)
-  }
-  logv(options,'outputPath: ' + outputPath)
-  logv(options,'framework: ' + framework)
-  if (framework != 'extjs') {
-    _prepareForBuild(app, vars, options, outputPath)
-  }
-  else {
-    require(`./${framework}Util`)._prepareForBuild(app, vars, options, outputPath, compilation)
-  }
-  if (vars.rebuild == true) {
-    var parms = []
-    if (options.profile == undefined || options.profile == '' || options.profile == null) {
-      parms = ['app', 'build', options.environment]
+  try {
+    var app = vars.app
+    var framework = vars.framework
+    const log = require('./pluginUtil').log
+    const logv = require('./pluginUtil').logv
+    logv(options,'FUNCTION ext-emit')
+    const path = require('path')
+    const _buildExtBundle = require('./pluginUtil')._buildExtBundle
+    let outputPath = path.join(compiler.outputPath,vars.extPath)
+    if (compiler.outputPath === '/' && compiler.options.devServer) {
+      outputPath = path.join(compiler.options.devServer.contentBase, outputPath)
+    }
+    logv(options,'outputPath: ' + outputPath)
+    logv(options,'framework: ' + framework)
+    if (options.emit == true) {
+      if (framework != 'extjs') {
+        _prepareForBuild(app, vars, options, outputPath)
+      }
+      else {
+        require(`./${framework}Util`)._prepareForBuild(app, vars, options, outputPath, compilation)
+      }
+      if (vars.rebuild == true) {
+        var parms = []
+        if (options.profile == undefined || options.profile == '' || options.profile == null) {
+          parms = ['app', 'build', options.environment]
+        }
+        else {
+          parms = ['app', 'build', options.profile, options.environment]
+        }
+        await _buildExtBundle(app, compilation, outputPath, parms, options)
+        
+
+
+        const jsChunk = compilation.addChunk(`ext-angular-js`)
+        jsChunk.hasRuntime = jsChunk.isInitial = () => true;
+        //jsChunk.files.push(path.join('build', 'ext-angular', 'ext.js'));
+        //jsChunk.files.push(path.join('build', 'ext-angular',  'ext.css'));
+        //jsChunk.id = -2; // this forces html-webpack-plugin to include ext.js first
+
+
+
+
+
+        if(options.browser == true) {
+          if (vars.browserCount == 0 && compilation.errors.length == 0) {
+            var url = 'http://localhost:' + options.port
+            log(app + `Opening browser at ${url}`)
+            vars.browserCount++
+            const opn = require('opn')
+            opn(url)
+          }
+        }
+        else {
+          logv(options,'browser NOT opened')
+        }
+        callback()
+      }
     }
     else {
-      parms = ['app', 'build', options.profile, options.environment]
+      log(`${vars.app}Emit not run`)
+      if(options.browser == true) {
+        if (vars.browserCount == 0 && compilation.errors.length == 0) {
+          var url = 'http://localhost:' + options.port
+          log(app + `Opening browser at ${url}`)
+          vars.browserCount++
+          const opn = require('opn')
+          opn(url)
+        }
+      }
+      else {
+        logv(options,'browser NOT opened')
+      }
+      callback()
     }
-    await _buildExtBundle(app, compilation, outputPath, parms, options)
-    if (vars.browserCount == 0 && compilation.errors.length == 0) {
-      var url = 'http://localhost:' + options.port
-      log(app + `Opening browser at ${url}`)
-      vars.browserCount++
-      const opn = require('opn')
-      opn(url)
-    }
-    callback()
   }
-  else {
+  catch(e) {
+    compilation.errors.push('emit: ' + e)
     callback()
   }
 }
@@ -288,7 +344,10 @@ export async function executeAsync (app, command, parms, opts, compilation, opti
 
 export function log(s) {
   require('readline').cursorTo(process.stdout, 0)
-  process.stdout.clearLine()
+  try {
+    process.stdout.clearLine()
+  }
+  catch(e) {}
   process.stdout.write(s)
   process.stdout.write('\n')
 }
@@ -296,7 +355,10 @@ export function log(s) {
 export function logv(options, s) {
   if (options.verbose == 'yes') {
     require('readline').cursorTo(process.stdout, 0)
-    process.stdout.clearLine()
+    try {
+      process.stdout.clearLine()
+    }
+    catch(e) {}
     process.stdout.write(`-verbose: ${s}`)
     process.stdout.write('\n')
   }
