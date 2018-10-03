@@ -2,6 +2,7 @@ const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtWebpackPlugin = require('@sencha/ext-angular-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const { AngularCompilerPlugin } = require('@ngtools/webpack')
 const portfinder = require('portfinder')
 const sourcePath = path.join(__dirname, './src')
@@ -30,6 +31,7 @@ module.exports = function (env) {
         theme: 'theme-material',
         packages: []
       }),
+      //new BundleAnalyzerPlugin(),
       new AngularCompilerPlugin({
 
         platform: 0,
@@ -55,7 +57,8 @@ module.exports = function (env) {
       devtool: isProd ? 'source-map' : 'cheap-module-source-map',
       context: sourcePath,
       entry: {
-        'app': ['./main.ts']
+        'app': ['./main.ts'],
+        'ext': ['../build/ext-angular/ext.js']
       },
       output: {
         path: path.resolve(__dirname, 'build'),
@@ -116,7 +119,7 @@ module.exports = function (env) {
         stats: {
           assets: false,
           children: false,
-          chunks: false,
+          chunks: true,
           hash: false,
           modules: false,
           publicPath: false,

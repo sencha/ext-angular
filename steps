@@ -1,0 +1,88 @@
+steps
+
+generators/ext-component-creator/node all.js angular modern
+  - writes to generators/ext-angular-modern/src
+
+generators/ext-angular-modern/npm run build
+  - writes to generators/ext-angular-modern/dist
+
+copy generators/ext-angular-modern/dist/ext-angular to packages/ext-angular-modern
+
+ng new ext-angular-client --style scss --minimal --skip-tests --inline-style --inline-template 
+cd ext-angular-client
+npm i -D @angular-builders/custom-webpack
+
+in angular.json
+
+change
+
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+
+to
+
+      "architect": {
+        "build": {
+          //"builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "customWebpackConfig": {
+              "path": "./ext-angular-webpack.config.js"
+            },
+
+in angular.json
+
+change
+
+          "builder": "@angular-devkit/build-angular:dev-server",
+
+to
+
+          //"builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/dev-server:generic",
+
+add ext-angular-webpack.json
+
+in package.json, add
+
+  "dependencies": {
+    "ext-angular-modern": "1.0.0",
+
+
+in tsconfig.json, add
+
+     "paths": {
+      "@angular/*": ["./node_modules/@angular/*"]
+
+
+in src/app.module.ts
+
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+import { ExtAngularModernModule } from 'ext-angular-modern'
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    ExtAngularModernModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+in src/app.component.ts
+
+    <div style="text-align:center">
+      <ext-button [text]="'Example ExtAngular Button'"></ext-button>
+    </div>
+
+
+
+***************************
