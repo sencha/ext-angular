@@ -9,6 +9,8 @@ import {
 import { base } from './base';
 export class {classname}MetaData {
   public static XTYPE: string = '{xtype}';
+  public static PROPERTIESOBJECT: any = {
+{sPROPERTIESOBJECT}};
   public static PROPERTIES: string[] = [
 {sPROPERTIES}];
   public static EVENTS: any[] = [
