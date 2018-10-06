@@ -25,7 +25,7 @@ export class base {
 
   verb:any = 'initialized'
   ngOnChanges(changes: SimpleChanges) {
-    console.log(`ngOnChanges`)
+    //console.log(`ngOnChanges`)
     let changesMsgs: string[] = []
     for (let propName in changes) {
       let val = changes[propName].currentValue
@@ -35,7 +35,7 @@ export class base {
       }
       changesMsgs.push(`${propName} ${this.verb} to "${val}"`)
     }
-    console.log(`OnChanges: ${changesMsgs.join('; ')}`)
+    //console.log(`OnChanges: ${changesMsgs.join('; ')}`)
     this.verb = 'changed' // next time it will be a change
   }
 
@@ -98,12 +98,20 @@ export class base {
     if (this._nativeElement.parentElement != null) {
       o.renderTo = this._nativeElement
     }
+    //console.log('before create for ' + o.xtype)
+    //Ext.onReady(function() {
+    //  me.ext = Ext.create(o)
+    //  console.log(me.ext)
+    //})
     this.ext = Ext.create(o)
+    //console.log(this.ext)
   }
 
   @ContentChildren(base, {descendants: false}) extChildren: QueryList<any>
   @ContentChildren('ext') allChildren: QueryList<any>
   baseAfterContentInit() {
+    //console.log(this.extChildren)
+    //console.log(this.allChildren)
     //console.log(`ngAfterContentInit: ${this.extChildren.first.ext.xtype} ${this.extChildren.length} ${this.allChildren.length}`)
     //console.log(this.allChildren)
     var parentCmp = this.extChildren.first.ext

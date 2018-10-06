@@ -4,9 +4,6 @@ const sourcePath = path.join(__dirname, './src')
 
 module.exports = {
   context: sourcePath,
-  entry: {
-    'app': ['./main.ts'],
-  },
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].js'
@@ -18,7 +15,7 @@ module.exports = {
       emit: true,
       browser: true,
       profile: '', 
-      environment: 'development', 
+      environment: 'production', 
       verbose: 'no',
       theme: 'theme-material',
       packages: []
