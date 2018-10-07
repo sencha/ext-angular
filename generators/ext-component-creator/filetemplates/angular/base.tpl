@@ -158,7 +158,7 @@ export class base {
         console.log('child not added')
       }
     }
-    this['ready'].emit(parentCmp)
+    //this['ready'].emit(parentCmp)
+    this['ready'].emit(this)
   }
-
 }
