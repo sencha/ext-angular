@@ -85,6 +85,29 @@ export class AnalyzeComponent {
 
   pivotgridInit() {
     this.pivotTitle = 'By Country';
+    var store = new SalesStore({})['ext']
+
+    // var store2 = Ext.create('Ext.data.Store', {
+    //   alias: 'store.sales',
+    //   autoLoad: true,
+    //   // data: [
+    //   //   {"orderid": 65338,"salesperson": "John Doe","orderdate": "19/04/2012","amount": 930,"country": "United States"},
+    //   //   {"orderid": 31993,"salesperson": "Lisa Peacock","orderdate": "27/04/2012","amount": 640,"country": "Netherlands"},
+    //   // ],
+    //   proxy: {
+    //     type: 'ajax',
+    //     url: 'assets/resources/app/data/sales.json',
+    //     reader: {
+    //       type: 'json',
+    //       rootProperty: 'rows'
+    //     }
+    //   }
+    // })
+
+
+
+
+    console.log(store)
     this.pivotgridConfig= {
       plugins: [{
         type: 'pivotdrilldown'
@@ -96,7 +119,7 @@ export class AnalyzeComponent {
         viewLayoutType: 'outline',
         rowGrandTotalsPosition: 'none',
         columnGrandTotalsPosition: 'none',
-        store: new SalesStore({})['ext'],
+        store: store,
         leftAxis: [ { dataIndex: 'salesperson', direction: 'ASC', header: 'Salesperson', width: 150 } ],
         topAxis: [ { dataIndex: 'country', direction: 'ASC' } ],
         aggregate: [ { dataIndex: 'amount', header: 'Total', aggregator: 'sum', width: 150 } ]
@@ -105,11 +128,10 @@ export class AnalyzeComponent {
   }
 
   readyPivotGrid(thePivotGrid) {
-  //		console.log('readyPivotGrid');
-    this.thePivotGrid = thePivotGrid;
+    this.thePivotGrid = thePivotGrid
   }
   readyCartesian(theCartesian) {
-    this.theCartesian = theCartesian;
+    this.theCartesian = theCartesian
   }
 
   private onPivotgridPivotDone({matrix}) {
