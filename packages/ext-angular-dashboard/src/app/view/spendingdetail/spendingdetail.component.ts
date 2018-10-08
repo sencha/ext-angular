@@ -1,19 +1,18 @@
 declare var Ext: any;
 import { Component } from '@angular/core';
 import { AgencyService }  from '../../service/agency.service';
-//import { AgencyPortfolioStore } from '../../store/agencyportfolio.store';
 
 @Component({
-	styles:  [``],
+  styles:  [``],
   selector: 'spendingdetail',
-	template: `
-		<grid fitToParent=true
-			[config]='gridConfig' 
-			(ready)="readyGrid($event)"
-			(select)="selectGrid($event)"
-			(columnsort)="columnsortGrid($event)"
-		></grid>
-	`
+  template: `
+    <grid fitToParent=true
+      [config]='gridConfig' 
+      (ready)="readyGrid($event)"
+      (select)="selectGrid($event)"
+      (columnsort)="columnsortGrid($event)"
+    ></grid>
+  `
 })
 export class SpendingDetailComponent { 
 	private gridConfig: any;
@@ -31,8 +30,7 @@ export class SpendingDetailComponent {
 	}
 
 	readyGrid(theGrid) {
-		//console.log(theGrid.extjsObject);
-		this.theGrid = theGrid.extjsObject;
+		this.theGrid = theGrid['ext'];
 	}
 
 	constructor(private agencyService: AgencyService) {

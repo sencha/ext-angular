@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { StocksStore } from '../../store/stocks.store';
-import { d3 } from 'd3'
 
 @Component({
 	styles:  [``],
   selector: '',
-	template: `<d3_treemap [config]='d3Config' ></d3_treemap>`
+	template: `<d3-treemap [config]='d3Config' ></d3-treemap>`
 })
 export class D3TreeListComponent { 
 	private d3Config: any = {};

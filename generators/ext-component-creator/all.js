@@ -158,8 +158,9 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
 
 function oneItem(o, libFolder, framework, extension, num, xtype, alias, moduleVars) {
   var classname =  o.xtype.replace(/-/g, "_")
+  //var classname =  o.xtype
   var capclassname = classname.charAt(0).toUpperCase() + classname.slice(1)
-  var classFile = `${libFolder}ext-${classname}.component.${extension}`
+  var classFile = `${libFolder}ext-${o.xtype}.component.${extension}`
   console.log(`${xtype}${tb}${tb}${('  ' + num).substr(-3)}_${alias}${tb}${classFile}`)
   var commaOrBlank = "";
   var tab = "\t";
@@ -253,7 +254,7 @@ function oneItem(o, libFolder, framework, extension, num, xtype, alias, moduleVa
       break;
   }
 
-  moduleVars.imports = moduleVars.imports + `import { Ext${capclassname}Component } from './ext-${classname}.component';${newLine}`
+  moduleVars.imports = moduleVars.imports + `import { Ext${capclassname}Component } from './ext-${o.xtype}.component';${newLine}`
   moduleVars.declarations = moduleVars.declarations + `    Ext${capclassname}Component,${newLine}`
   moduleVars.exports = moduleVars.exports + `    Ext${capclassname}Component,${newLine}`
 
