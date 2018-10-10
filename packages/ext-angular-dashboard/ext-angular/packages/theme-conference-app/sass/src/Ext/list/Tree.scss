@@ -1,0 +1,169 @@
+$panel-navigation-background-color: $base-color;
+$nav-text-color: white;
+
+$treelist-font-size: 16px;
+
+$nav-base-color: lighten($panel-navigation-background-color, 20%);
+$nav-bg-color-over: lighten($nav-base-color, 10%);
+$nav-bg-color-selected: lighten($nav-base-color, 5%);
+$nav-text-color-over: lighten($nav-text-color, 20%);
+$nav-indicator-color: lighten($base-color, 30%);
+$nav-indicator-color-over: lighten($base-color, 40%);
+
+@include treelist-ui(
+	$ui: 'nav',
+
+	$row-indicator-width: 5px,
+	$row-indicator-selected-color: $accent-color,
+	$row-indicator-selected-over-color: lighten($panel-navigation-background-color, 7%),
+	$row-indicator-over-color: $nav-indicator-color-over,
+
+	$padding: 5px 10px 0 10px,
+	$item-icon-width: 24px,
+	$item-text-icon-gap: 1px,
+	$item-expander-width: 24px,
+
+	$item-icon-font-size: $treelist-font-size,
+	$item-text-font-size: $treelist-font-size,
+	$item-expander-font-size: $treelist-font-size,
+
+	$item-line-height : 35px,
+	$item-text-overflow: initial,
+
+	$background-color: $panel-navigation-background-color,
+	$item-icon-color: $nav-text-color,
+	$item-text-color: $nav-text-color,
+	$item-expander-color: $nav-text-color,
+	$item-icon-over-color: $nav-text-color-over,
+	$item-text-over-color: $nav-text-color-over,
+	$item-expander-over-color: $nav-text-color-over,
+
+
+	$item-expanded-child-background-color: $nav-base-color,
+
+	$item-expanded-background-color: transparent,
+
+	$row-over-background-color: $nav-bg-color-over,
+
+  $row-selected-background-color: lightgray,
+	$toolstrip-background-color:  $nav-base-color,
+	$tool-selected-color: black,
+	$tool-selected-background-color: $nav-bg-color-over,
+	$tool-float-indicator-color: $nav-indicator-color-over,
+	$tool-float-indicator-width: 4px
+);
+
+
+
+
+$component-tree-background: #fafafa;
+$component-tree-text-color: #212121;
+
+@include treelist-ui(
+    $ui: 'component-tree',
+    $padding: 0 24px,
+    $background-color: $component-tree-background,
+    $item-line-height : 44px,
+    $item-icon-color: $component-tree-text-color,
+    $item-expander-color: $component-tree-text-color,
+    $item-text-color: $component-tree-text-color,
+    $row-over-background-color: darken($component-tree-background, 10%),
+    $item-expanded-background-color: #eee,
+
+    $item-icon-over-color: $component-tree-text-color,
+    $item-expander-over-color: $component-tree-text-color,
+    $item-text-over-color: $component-tree-text-color,
+    $item-icon-width: 0,
+    $item-text-font-size: 16px,
+    $item-text-icon-gap: 0,
+
+    $row-indicator-width: 6px,
+    $row-indicator-selected-color: $accent-color,
+    $row-indicator-selected-over-color: $accent-dark-color,
+    $row-indicator-over-color: $accent-light-color,
+
+    $tool-indicator-selected-color: $accent-dark-color,
+    $tool-float-indicator-color: $accent-light-color,
+    $tool-indicator-selected-width: 6px,
+
+    $item-icon-font-size: 18px,
+    $item-icon-width: 15px,
+    $item-expander-font-size: 22px,
+    $item-expander-width: 24px,
+    $item-expander-color: lighten($component-tree-text-color, 30%),
+
+    $item-icon-over-transition: none,
+    $item-text-over-transition: none,
+    $item-expander-over-transition: none,
+
+    $item-expander-glyph: 'keyboard_arrow_down',
+    $item-expander-expanded-glyph: 'keyboard_arrow_up',
+
+    $row-selected-background-color: darken($component-tree-background, 15%)
+);
+
+.x-treelist-component-tree .x-treelist-item-text {
+    margin: 0;
+}
+
+.x-treelist-component-tree .x-treelist-item-expander {
+    &:after {
+        line-height: 44px !important;
+    }
+}
+
+$component-tree-background: #fafafa;
+$component-tree-text-color: #212121;
+
+@include treelist-ui(
+    $ui: 'component-tree',
+    $padding: 0 24px,
+    $background-color: $component-tree-background,
+    $item-line-height : 44px,
+    $item-icon-color: $component-tree-text-color,
+    $item-expander-color: $component-tree-text-color,
+    $item-text-color: $component-tree-text-color,
+    $row-over-background-color: darken($component-tree-background, 10%),
+    $item-expanded-background-color: #eee,
+
+    $item-icon-over-color: $component-tree-text-color,
+    $item-expander-over-color: $component-tree-text-color,
+    $item-text-over-color: $component-tree-text-color,
+    $item-icon-width: 0,
+    $item-text-font-size: 16px,
+    $item-text-icon-gap: 0,
+
+    $row-indicator-width: 6px,
+    $row-indicator-selected-color: $accent-color,
+    $row-indicator-selected-over-color: $accent-dark-color,
+    $row-indicator-over-color: $accent-light-color,
+
+    $tool-indicator-selected-color: $accent-dark-color,
+    $tool-float-indicator-color: $accent-light-color,
+    $tool-indicator-selected-width: 6px,
+
+    $item-icon-font-size: 18px,
+    $item-icon-width: 15px,
+    $item-expander-font-size: 22px,
+    $item-expander-width: 24px,
+    $item-expander-color: lighten($component-tree-text-color, 30%),
+
+    $item-icon-over-transition: none,
+    $item-text-over-transition: none,
+    $item-expander-over-transition: none,
+
+    $item-expander-glyph: 'keyboard_arrow_down',
+    $item-expander-expanded-glyph: 'keyboard_arrow_up',
+
+    $row-selected-background-color: darken($component-tree-background, 15%)
+);
+
+.x-treelist-component-tree .x-treelist-item-text {
+    margin: 0;
+}
+
+.x-treelist-component-tree .x-treelist-item-expander {
+    &:after {
+        line-height: 44px !important;
+    }
+}

@@ -1,8 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-//import { AppComponent } from './app.component';
 
 import * as d3 from 'd3'
 window['d3'] = d3
@@ -11,18 +8,14 @@ window['d3'] = d3
 import { ExtAngularModernModule } from 'ext-angular-modern'
 
 //services
-//import { ExtClassComponent } from './ext-class.component';
 import { AgencyService } from './service/agency.service';
 
 //in main
-import { ActionsComponent } from './view/main/sidebar/actions/actions.component';
 import { DetailComponent } from './view/main/detail/detail.component';
 import { FooterComponent } from './view/main/footer/footer.component';
 import { HeaderComponent } from './view/main/header/header.component';
 import { MainComponent } from './view/main/main.component';
-import { MenuComponent } from './view/main/sidebar/menu/menu.component';
 import { SideBarComponent } from './view/main/sidebar/sidebar.component';
-import { WelcomeComponent } from './view/main/sidebar/welcome/welcome.component';
 
 //menu
 import { DashboardComponent } from './view/dashboard/dashboard.component';
@@ -38,41 +31,44 @@ import { SimpleGridComponent } from './view/simplegrid/simplegrid.component';
 import { BoilerplateComponent } from './view/boilerplate/boilerplate.component';
 import { ConfiguratorComponent } from './view/configurator/configurator.component';
 
-const appRoutes: Routes = [
+import { Route, RouterModule } from '@angular/router';
+import { ModuleWithProviders } from "@angular/core";
+interface ExtAngularRoute extends Route {
+  text?: string;
+  iconCls?: string;
+  xtype?: string;
+  leaf?: boolean;
+}
+export declare type ExtAngularRoutes = ExtAngularRoute[];
+const routes: ExtAngularRoutes = [
 	{ path: '', redirectTo: '/simplegrid', pathMatch: 'full' },
-	{ path: 'dashboard', component: DashboardComponent },
-	{ path: 'agencies', component: AgenciesComponent },
-	{ path: 'analyze', component: AnalyzeComponent },
-	{ path: 'spendingdetail', component: SpendingDetailComponent },
-	{ path: 'candidatecalendars', component: CandidateCalendarsComponent },
-	{ path: 'reports', component: ReportsComponent },
-	{ path: 'chart', component: ChartComponent },
-	{ path: 'd3treelist', component: D3TreeListComponent },
-	{ path: 'widgetgrid', component: WidgetGridComponent },
-	{ path: 'simplegrid', component: SimpleGridComponent },
-	{ path: 'boilerplate', component: BoilerplateComponent },
-	{ path: 'configurator', component: ConfiguratorComponent }
+	{ path: 'dashboard', component: DashboardComponent, text: 'Dashboard', iconCls: 'x-fa fa-dashboard', leaf: true },
+	{ path: 'agencies', component: AgenciesComponent, text: 'Agencies', iconCls: 'x-fa fa-institution', leaf: true },
+	{ path: 'analyze', component: AnalyzeComponent, text: 'Analyze', iconCls: 'x-fa fa-cog', xtype: 'homeview', leaf: true },
+	{ path: 'spendingdetail', component: SpendingDetailComponent, text: 'Spending Detail', iconCls: 'x-fa fa-dollar', xtype: 'homeview', leaf: true },
+	{ path: 'candidatecalendars', component: CandidateCalendarsComponent, text: 'Calendars', iconCls: 'x-fa fa-dollar', xtype: 'homeview', leaf: true },
+	{ path: 'reports', component: ReportsComponent, text: 'Reports', iconCls: 'x-fa fa-dollar', xtype: 'homeview', leaf: true },
+	{ path: 'chart', component: ChartComponent, text: 'Bar Chart', iconCls: 'x-fa fa-bar-chart', xtype: 'homeview', leaf: true },
+	{ path: 'd3treelist', component: D3TreeListComponent, text: 'D3 TreeList', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'widgetgrid', component: WidgetGridComponent, text: 'Widget Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'simplegrid', component: SimpleGridComponent, text: 'Simple Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'boilerplate', component: BoilerplateComponent, text: 'Boilerplate', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'configurator', component: ConfiguratorComponent, text: 'Configurator', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true }
 ];
-export const routing = RouterModule.forRoot(appRoutes);
+export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
 @NgModule({
   imports: [
     BrowserModule,
     ExtAngularModernModule,
-    routing
+    routingModule
   ],
 	declarations: [
-    //ExtClassComponent,
-    
-		ActionsComponent,
 		DetailComponent,
 		FooterComponent,
 		HeaderComponent,
 		MainComponent,
-		MenuComponent,
 		SideBarComponent,
-		WelcomeComponent,
-
 		AgenciesComponent,
 		AnalyzeComponent,
 		BoilerplateComponent,
@@ -90,9 +86,6 @@ export const routing = RouterModule.forRoot(appRoutes);
 		AgencyService,
 	],
 	entryComponents: [
-		WelcomeComponent, 
-		MenuComponent, 
-		ActionsComponent, 
 		SideBarComponent, 
 		FooterComponent, 
 		ChartComponent

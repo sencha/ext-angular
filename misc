@@ -42,3 +42,7 @@ npm i -D @angular-builders/custom-webpack
      "paths": {
       "@angular/*": ["./node_modules/@angular/*"]
     }
+
+
+//<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+//</nav>

@@ -1,9 +1,9 @@
 const ExtWebpackPlugin = require('@sencha/ext-angular-webpack-plugin')
 const path = require('path')
-const sourcePath = path.join(__dirname, './src')
+//const sourcePath = path.join(__dirname, './src')
 
 module.exports = {
-  context: sourcePath,
+  context: path.join(__dirname, './src'),
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].js'
@@ -17,7 +17,7 @@ module.exports = {
       profile: '', 
       environment: 'development', 
       verbose: 'no',
-      theme: 'theme-material',
+      theme: 'theme-conference-app',
       packages: [
         'font-ext', 
         'ux', 
