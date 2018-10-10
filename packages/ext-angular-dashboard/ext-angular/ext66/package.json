@@ -1,0 +1,99 @@
+{
+  "_args": [
+    [
+      "@sencha/ext@6.6.0",
+      "/Users/marcgusmano/_git/sencha/ext-angular/packages/ext-angular-dashboard"
+    ]
+  ],
+  "_from": "@sencha/ext@6.6.0",
+  "_id": "@sencha/ext@6.6.0",
+  "_inBundle": false,
+  "_integrity": "sha512-hl1yCKd83mx4GHaeECj/mdi5jbY/71eCcz5Ce84sGTD3FtKczPouolkP2QNaDDSh4N+uD1Q1njODHfoKe94nJg==",
+  "_location": "/@sencha/ext",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@sencha/ext@6.6.0",
+    "name": "@sencha/ext",
+    "escapedName": "@sencha%2fext",
+    "scope": "@sencha",
+    "rawSpec": "6.6.0",
+    "saveSpec": null,
+    "fetchSpec": "6.6.0"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "http://npm.sencha.com/@sencha%2fext/-/ext-6.6.0.tgz",
+  "_spec": "6.6.0",
+  "_where": "/Users/marcgusmano/_git/sencha/ext-angular/packages/ext-angular-dashboard",
+  "author": {
+    "name": "Sencha, Inc."
+  },
+  "bugs": {
+    "url": "https://support.sencha.com/"
+  },
+  "dependencies": {
+    "@sencha/ext-core": "6.6.0"
+  },
+  "description": "Ext JS",
+  "homepage": "https://www.sencha.com/products/extjs/",
+  "keywords": [
+    "sencha",
+    "extjs",
+    "ext js",
+    "ext-js",
+    "ext"
+  ],
+  "license": "SEE LICENSE IN license.txt",
+  "name": "@sencha/ext",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/extjs/SDK.git"
+  },
+  "scripts": {
+    "install": "node activate.js"
+  },
+  "sencha": {
+    "name": "ext",
+    "namespace": "Ext",
+    "type": "framework",
+    "creator": "Sencha",
+    "summary": "Ext JS",
+    "detailedDescription": "Sencha Ext JS JavaScript Framework",
+    "version": "6.6.0.258",
+    "compatVersion": "6.5.0",
+    "format": "1",
+    "output": "${package.dir}/build",
+    "local": true,
+    "sass": {
+      "fashion": true,
+      "namespace": "Ext",
+      "etc": "${package.dir}/sass/etc/all.scss",
+      "var": "${package.dir}/sass/var",
+      "src": "${package.dir}/sass/src"
+    },
+    "classpath": "${package.dir}/src",
+    "overrides": "${package.dir}/overrides",
+    "resource": {
+      "paths": [
+        "resources"
+      ]
+    },
+    "language": {
+      "js": {
+        "input": {
+          "version": "ES5"
+        }
+      }
+    },
+    "properties": {
+      "skip.sass": 1,
+      "skip.slice": 1
+    },
+    "extTier": "standard"
+  },
+  "version": "6.6.0",
+  "_activatedby": "@sencha/ext-activator@6.6.0-2018.10.7"
+}

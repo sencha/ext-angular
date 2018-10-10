@@ -256,7 +256,7 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
     }
     else {
       vars.rebuild = false
-      log(app + 'ExtReact rebuild NOT needed')
+      log(app + 'Ext rebuild NOT needed')
     }
   }
   catch(e) {
