@@ -88,7 +88,7 @@ export class AppModule { }
 in src/app.component.ts
 
     <div style="text-align:center">
-      <ext-button [text]="'Example ExtAngular Button'"></ext-button>
+      <button [text]="'Example ExtAngular Button'"></button>
     </div>
 
 in src/index.html
