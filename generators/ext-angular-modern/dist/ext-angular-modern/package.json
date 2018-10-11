@@ -1,0 +1,37 @@
+{
+  "name": "ext-angular-modern",
+  "version": "1.0.0",
+  "description": "ext-angular-modern",
+  "main": "bundles/ext-angular-modern.umd.js",
+  "peerDependencies": {
+    "@angular/compiler": "^6.1.9",
+    "@angular/core": "^6.1.9",
+    "tslib": "^1.9.0"
+  },
+  "dependencies": {
+    "@angular/compiler": "^6.1.9",
+    "@angular/core": "^6.1.9",
+    "tslib": "^1.9.0"
+  },
+  "devDependencies": {
+    "ng-packagr": "^4.2.0",
+    "@angular/compiler-cli": "^6.1.9",
+    "typescript": "~2.9.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sencha/ext-angular.git"
+  },
+  "keywords": [],
+  "author": "Marc Gusmano <mgusmano@yahoo.com> (http://MarcGusmano.com)",
+  "license": "ISC",
+  "module": "fesm5/ext-angular-modern.js",
+  "es2015": "fesm2015/ext-angular-modern.js",
+  "esm5": "esm5/ext-angular-modern.js",
+  "esm2015": "esm2015/ext-angular-modern.js",
+  "fesm5": "fesm5/ext-angular-modern.js",
+  "fesm2015": "fesm2015/ext-angular-modern.js",
+  "typings": "ext-angular-modern.d.ts",
+  "metadata": "ext-angular-modern.metadata.json",
+  "sideEffects": false
+}
