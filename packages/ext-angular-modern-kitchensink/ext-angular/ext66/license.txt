@@ -1,0 +1,68 @@
+Sencha ExtReact - JavaScript Library
+Copyright (c) 2006-2018, Sencha Inc.
+All rights reserved.
+licensing@sencha.com
+
+options: http://www.sencha.com/license
+license: http://www.sencha.com/legal/sencha-software-license-agreement
+
+
+Commercial License
+------------------------------------------------------------------------------------------
+Sencha ExtReact is licensed commercially. 
+See http://www.sencha.com/legal/sencha-software-license-agreement for license terms.
+
+
+Beta License
+------------------------------------------------------------------------------------------
+If this is a Beta version , use is permitted for internal evaluation 
+and review purposes and not use for production purposes.
+See http://www.sencha.com/legal/sencha-software-license-agreement (Beta License) 
+for license terms. 
+ 
+Third Party Content
+------------------------------------------------------------------------------------------
+The following third party software is distributed with Ext JS and is 
+provided under other licenses and/or has source available from other locations. 
+ 
+Library: YUI 0.6 (BSD Licensed) for drag-and-drop code.
+Location: http://developer.yahoo.com/yui
+License: http://developer.yahoo.com/yui/license.html (BSD 3-Clause License)
+
+Library: JSON parser
+Location: http://www.JSON.org/js.html
+License: http://www.json.org/license.html (MIT License)
+
+Library: flexible-js-formatting 
+Location: http://code.google.com/p/flexible-js-formatting/
+License: http://www.opensource.org/licenses/mit-license.php (MIT License)
+
+Library: sparkline.js 
+Location: http://omnipotent.net/jquery.sparkline
+License: http://omnipotent.net/jquery.sparkline (BSD 3-Clause License)
+
+Library: DeftJS 
+Location: http://deftjs.org/
+License: http://www.opensource.org/licenses/mit-license.php (MIT License)
+
+Library: Open-Sans
+Location: http://www.fontsquirrel.com/fonts/open-sans
+License: http://www.fontsquirrel.com/fonts/open-sans (Apache 2.0 License)
+
+Examples:
+
+Library: Silk Icons 
+Location: http://www.famfamfam.com/lab/icons/silk/
+License: http://www.famfamfam.com/lab/icons/silk/ (Creative Commons Attribution 2.5 License)
+
+Library: Font Awesome CSS
+Location: http://fontawesome.io/
+License: http://fontawesome.io/3.2.1/license/ (MIT)
+
+Library: Material Design Icons
+Location: https://github.com/google/material-design-icons
+License: https://github.com/google/material-design-icons/blob/master/LICENSE (Apache)
+
+——
+
+THIS SOFTWARE IS DISTRIBUTED "AS-IS" WITHOUT ANY WARRANTIES, CONDITIONS AND REPRESENTATIONS WHETHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION THE IMPLIED WARRANTIES AND CONDITIONS OF MERCHANTABILITY, MERCHANTABLE QUALITY, FITNESS FOR A PARTICULAR PURPOSE, DURABILITY, NON-INFRINGEMENT, PERFORMANCE AND THOSE ARISING BY STATUTE OR FROM CUSTOM OR USAGE OF TRADE OR COURSE OF DEALING. 
