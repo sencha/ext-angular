@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "strictPropertyInitialization": false,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "target": "es5",
+    "jsx": "react",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "declaration": false,
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "removeComments": true,
+    "strictNullChecks": false,
+    "outDir": "build",
+    "lib": [
+      "es6",
+      "es7",
+      "dom"
+    ]
+  },
+  "include": [
+    "./src/**/*"
+  ],
+
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules"
+  ],
+  "paths": {
+    "@angular/*": ["./node_modules/@angular/*"]
+  }
+
+}

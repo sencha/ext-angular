@@ -109,13 +109,25 @@ export class base {
 
   @ContentChildren('item') items: QueryList<any>
   baseAfterContentInit() {
+    console.log('baseAfterContentInit')
+    console.log(this)
+    console.log(this.items.first)
+
+    if(this == this.items.first) {
+      console.log('yes')
+    }
+    else {
+      console.log('no')
+    }
+
     if (this.items.length < 2) {
       return
     }
     this.items.forEach(item => {
-      if (this == item) {
+      if(this == item) {
         return
       }
+
       if (item.nativeElement != undefined) {
         console.log('parent: ' + this.ext.xtype + ', child: ' + 'container')
         this.ext.add({xtype: 'container',html: item.nativeElement})
