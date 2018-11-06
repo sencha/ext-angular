@@ -1,16 +1,18 @@
-import { NgModule } from '@angular/core'
-//import { ExtAngularModule } from 'ext-angular'
-//import { NgxTabsLibModule } from 'ngx-tabs-libdemo'
-import { AppComponent } from './app.component'
-import { BrowserModule } from '@angular/platform-browser'
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+import { ExtAngularModernModule } from './ext-angular-modern/ext-angular-modern'
+
 @NgModule({
-  bootstrap: [ AppComponent ],
+  declarations: [
+    AppComponent
+  ],
   imports: [
     BrowserModule,
- //   NgxTabsLibModule
- //   ExtAngularModule
+    ExtAngularModernModule
   ],
-  declarations: [ AppComponent ],
-  providers: []
+  providers: [],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
