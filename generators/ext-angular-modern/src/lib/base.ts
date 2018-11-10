@@ -19,24 +19,31 @@ export class base {
     })
   }
 
-    OnChanges(changes: SimpleChanges) {
-    console.log(`OnChanges`)
-    }
-
-  verb:any = 'initialized'
   ngOnChanges(changes: SimpleChanges) {
-    //console.log(`ngOnChanges`)
+    console.log(`ngOnChanges`)
+    console.log(changes)
     let changesMsgs: string[] = []
     for (let propName in changes) {
+      let verb = ''
+      if (changes[propName].firstChange == true) {
+        verb = 'initialized'
+      }
+      else {
+        verb = 'changed'
+      }
       let val = changes[propName].currentValue
       if (this.ext != undefined) {
         var capPropName = propName.charAt(0).toUpperCase() + propName.slice(1)
         this.ext['set'+capPropName](val)
       }
-      changesMsgs.push(`${propName} ${this.verb} to "${val}"`)
+      else {
+        if (verb == 'changed') {
+          console.log('change needed and ext not defined')
+        }
+      }
+      changesMsgs.push(`${propName} ${verb} to "${val}"`)
     }
-    //console.log(`OnChanges: ${changesMsgs.join('; ')}`)
-    this.verb = 'changed' // next time it will be a change
+    console.log(`OnChanges: ${changesMsgs.join('; ')}`)
   }
 
   // Beware! Called frequently!

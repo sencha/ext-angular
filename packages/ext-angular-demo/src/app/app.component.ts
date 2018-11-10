@@ -11,7 +11,7 @@ import { Component } from '@angular/core'
         [layout]="'hbox'">
 
         <div #item>in items<div>another {{somedata}} div</div></div>
-        <button #item [text]="'in items button'"></button>
+        <button #item [text]="somedata"></button>
 
       </panel>
 
