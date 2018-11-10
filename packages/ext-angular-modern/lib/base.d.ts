@@ -8,7 +8,6 @@ export declare class base {
     verb: any;
     ngOnChanges(changes: SimpleChanges): void;
     baseOnInit(metaData: any): void;
-    extChildren: QueryList<any>;
-    allChildren: QueryList<any>;
+    items: QueryList<any>;
     baseAfterContentInit(): void;
 }

@@ -7,7 +7,7 @@
   "author": "Marc Gusmano <mgusmano@yahoo.com> (http://www.marcgusmano.com)",
   "license": "MIT",
   "dependencies": {
-    "ncp":"^2.0.0",
+    "ncp": "^2.0.0",
     "fs-extra": "^7.0.0",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.2"

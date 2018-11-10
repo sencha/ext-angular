@@ -39,13 +39,6 @@ export class SimpleGridComponent {
 
 
 
-code
-
-
-
-
-
-
 
 
 

@@ -6,10 +6,11 @@ async function main() {
   var templateBaseFolder    = './filetemplates/';                           log(`templateBaseFolder`,`${templateBaseFolder}`)
   var templateToolkitFolder = path.resolve(templateBaseFolder + framework); log(`templateToolkitFolder`,`${templateToolkitFolder}`)
   var dataFolder            = './AllClassesFiles/';                         log(`dataFolder`,`${dataFolder}`)
-  var folderName = 'ext-' + framework + '-' + toolkit; log(`folderName`,`${folderName}`)
-  var toolkitFolder = rootFolder + folderName;         log(`toolkitFolder`,`${toolkitFolder}`)
-  var srcFolder = toolkitFolder + '/src/';             log(`srcFolder`,`${srcFolder}`)
-  var libFolder = srcFolder + 'lib/';                  log(`libFolder`,`${libFolder}`)
+  var packageFolder         = './forPackage'
+  var folderName            = 'ext-' + framework + '-' + toolkit;           log(`folderName`,`${folderName}`)
+  var toolkitFolder         = rootFolder + folderName;                      log(`toolkitFolder`,`${toolkitFolder}`)
+  var srcFolder             = toolkitFolder + '/src/';                      log(`srcFolder`,`${srcFolder}`)
+  var libFolder             = srcFolder + 'lib/';                           log(`libFolder`,`${libFolder}`)
 
   await run(`node all.js ${framework} ${toolkit}`)
   await run(`cp -R ${packageFolder}/ ../${folderName}`)
