@@ -1,7 +1,9 @@
 in ext-component-creator
 
-npm i
+npm install
 get *-all-classes-flatten.json (from sdk build) and copy to ./AllClassesFiles
+node run.js
+
 node all.js angular modern (classic as well)
   create ./GeneratedFolders/ext-angular-modern/src/lib
   copy files in ext-all-stuff to ext-angular-modern

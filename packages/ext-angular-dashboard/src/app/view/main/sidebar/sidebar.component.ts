@@ -8,18 +8,18 @@ import { Router } from '@angular/router'
   selector: 'sidebar',
   template: `
 <panel [layout]="'vbox'" [height]="'100%'" [width]="225">
-  <titlebar 
+  <titlebar #item
     [docked]="'top'"
     [titleAlign]="'left'"
     [shadow]
     [height]= "'100px'"
     [title]="''">
   </titlebar>
-  <panel
+  <panel #item
     [flex]="'1'"
     [scrollable]="'y'"
     [bodyStyle]="{'z-index': 100, background: '#025b80'}">
-    <treelist
+    <treelist #item
       [ui]="'nav'"
       [store]="store"
       [expanderFirst]="false"
@@ -28,7 +28,7 @@ import { Router } from '@angular/router'
       (selectionchange)="selectionchangeTreeList($event)">
     </treelist>
   </panel>
-  <titlebar 
+  <titlebar #item
     [docked]="'bottom'"
     [titleAlign]="'left'"
     [shadow]
