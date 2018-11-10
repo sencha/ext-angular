@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { ExtAngularModernModule } from './ext-angular-modern/ext-angular-modern'
+import { ExtAngularModernModule } from 'ext-angular-modern'
 
 @NgModule({
   declarations: [
