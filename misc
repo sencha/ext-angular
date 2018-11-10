@@ -1,5 +1,6 @@
 git remote add upstream https://github.com/sencha/ext-angular.git
 
+
 cat ~/.npmrc
 rm -f ~/.npmrc
 *****
