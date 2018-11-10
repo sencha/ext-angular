@@ -1,6 +1,6 @@
 GeneratedFolders/*.*
 AllClassesFiles/*.*
-generators/ext-andular-modern/*.*
+generators/ext-angular-modern/*.*
 package-lock.json
 node_modules
 build
