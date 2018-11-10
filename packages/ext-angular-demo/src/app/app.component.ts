@@ -8,10 +8,13 @@ import { Component } from '@angular/core'
       <panel #item
         [title]="'Panel with children'"
         [shadow]="'true'"
-        [layout]="'hbox'">
+        [layout]="'vbox'">
 
-        <div #item>in items<div>another {{somedata}} div</div></div>
-        <button #item [text]="somedata"></button>
+        <div #item>root div<div>{{somedata}}</div></div>
+        <button #item 
+          (tap)="clickMe($event)" 
+          [text]="somedata">
+        </button>
 
       </panel>
 
@@ -27,12 +30,10 @@ import { Component } from '@angular/core'
   styles: []
 })
 export class AppComponent {
-  somedata = 'mjg'
+  somedata = 'this is the original text'
 
-//  private onPivotgridPivotDone({matrix}) {
   clickMe(event) {
-    console.log('hi')
-    this.somedata = 'changed'
+    this.somedata = 'now the text has changed ' + Date.now()
   }
 
   readyButton(theButton) {

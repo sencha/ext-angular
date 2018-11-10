@@ -72,19 +72,25 @@ export function _compilation(compiler, compilation, vars, options) {
         const path = require('path')
         var outputPath = ''
         if (compiler.options.devServer) {
+          console.log('a')
           if (compiler.outputPath === '/') {
+            console.log('e')
             outputPath = path.join(compiler.options.devServer.contentBase, outputPath)
           }
           else {
+            console.log('b')
             if (compiler.options.devServer.contentBase == undefined) {
+              console.log('c')
               outputPath = 'build'
             }
             else {
+              console.log('d')
               outputPath = ''
             }
           }
         }
         else {
+          console.log('f')
           outputPath = 'build'
         }
         outputPath = outputPath.replace(process.cwd(), '').trim()
@@ -219,10 +225,10 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
       const createWorkspaceJson = require('./artifacts').createWorkspaceJson
       const createJSDOMEnvironment = require('./artifacts').createJSDOMEnvironment
 
-      fs.writeFileSync(path.join(output, 'build.xml'), buildXML(vars.production, options), 'utf8')
-      fs.writeFileSync(path.join(output, 'app.json'), createAppJson(theme, packages, toolkit, options), 'utf8')
-      fs.writeFileSync(path.join(output, 'jsdom-environment.js'), createJSDOMEnvironment(options), 'utf8')
-      fs.writeFileSync(path.join(output, 'workspace.json'), createWorkspaceJson(options), 'utf8')
+      fs.writeFileSync(path.join(output, 'build.xml'), buildXML(vars.production, options, output), 'utf8')
+      fs.writeFileSync(path.join(output, 'app.json'), createAppJson(theme, packages, toolkit, options, output), 'utf8')
+      fs.writeFileSync(path.join(output, 'jsdom-environment.js'), createJSDOMEnvironment(options, output), 'utf8')
+      fs.writeFileSync(path.join(output, 'workspace.json'), createWorkspaceJson(options, output), 'utf8')
 
       if (fs.existsSync(path.join(process.cwd(),'resources/'))) {
         var fromResources = path.join(process.cwd(), 'resources/')
