@@ -15,7 +15,7 @@ module.exports = {
       browser: true,
       profile: '', 
       environment: 'development', 
-      verbose: 'yes',
+      verbose: 'no',
       theme: 'theme-material',
       packages: [
       ]
