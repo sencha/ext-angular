@@ -36,7 +36,7 @@
     "@angular-builders/custom-webpack": "^7.0.0",
     "@angular-builders/dev-server": "^7.0.0",
     
-    "@sencha/ext-angular-webpack-plugin": "~0.0.1",
+    "@sencha/ext-angular-webpack-plugin": "6.7.0",
 
     "sass-loader":"^7.1.0",
     "@angular/cli": "~7.0.5",
