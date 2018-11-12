@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "ext-angular-modern": "1.0.0",
     "@sencha/ext": "~6.6.0",
