@@ -422,7 +422,6 @@ async function stepCreate() {
   var boilerplate = ''
 //  boilerplate = path.dirname(require.resolve(nodeDir + '/node_modules/@sencha/ext-angular-demo'))
   boilerplate = nodeDir + '/node_modules/@sencha/ext-angular-demo'
-console.log(boilerplate)
 
   // if (answers['language'] == LANGUAGE.TYPESCRIPT) {
   //   boilerplate = path.dirname(require.resolve(nodeDir + '/node_modules/@sencha/ext-react-modern-typescript-boilerplate'))
@@ -434,7 +433,6 @@ console.log(boilerplate)
   //copy in files from boilerplate
   glob.sync('**/*', { cwd: boilerplate, ignore: ['build/**', 'node_modules/**', 'index.js'], dot: true })
     .forEach(file => new Promise((resolve, reject) => {
-      console.log(file)
       fs.copySync(path.join(boilerplate, file), file)
     }))
 
