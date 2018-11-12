@@ -1,6 +1,6 @@
 {
   "name": "ext-angular-tests",
-  "version": "0.1.0",
+  "version": "6.7.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",

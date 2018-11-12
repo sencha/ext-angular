@@ -1,0 +1,18 @@
+{
+  "seeDefaults":false,
+  "useDefaults":true,
+  "createNow":true,
+  "appName":"MyApp",
+  "theme": "material",
+  "language": "JavaScript",
+  "code": "Include some example code",
+  "packageName":"my-app",
+  "version":"0.0.1",
+  "description":"my-app description for Angular app MyApp",
+  "repositoryURL":"https://github.com/",
+  "keywords":["ExtAngular"],
+  "authorName":"Sencha, Inc.",
+  "license":"ISC",
+  "bugsURL":"https://github.com/",
+  "homepageURL":"http://www.sencha.com"
+}

@@ -1,6 +1,6 @@
 {
   "name": "angular-cli-with-library",
-  "version": "0.0.0",
+  "version": "6.7.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
