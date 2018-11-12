@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "ext-angular": "^0.0.1",
     "@angular/animations": "^6.1.0",
