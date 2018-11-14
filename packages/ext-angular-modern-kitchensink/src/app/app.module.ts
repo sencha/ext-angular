@@ -4,11 +4,14 @@ import { NgModule } from '@angular/core';
 import * as d3 from 'd3'
 window['d3'] = d3
 
+declare var Ext: any;
+
 //ExtAngular
-import { ExtAngularModernModule } from 'ext-angular-modern'
+import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
 
 //services
 import { AgencyService } from './service/agency.service';
+import {AppService} from './app.service';
 
 import { LayoutComponent } from './layout.component';
 
@@ -33,9 +36,29 @@ import { WidgetGridComponent } from './view/widgetgrid/widgetgrid.component';
 import { SimpleGridComponent } from './view/simplegrid/simplegrid.component';
 import { BoilerplateComponent } from './view/boilerplate/boilerplate.component';
 import { ConfiguratorComponent } from './view/configurator/configurator.component';
+import { LandingpageComponent } from './view/landingpage/landingpage.component';
 
 import { Route, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from "@angular/core";
+
+import {ButtonComponent} from "../examples/Button/Button"
+import {AudioComponent} from "../examples/Audio/Audio"
+import {CalendarPanelComponent} from "../examples/Calendar/CalendarPanel/CalendarPanel"
+import {CalendarDaysViewComponent} from "../examples/Calendar/DaysView/DaysView"
+import {CalendarDragResizeValidationComponent} from "../examples/Calendar/DragResizeValidation/DragResizeValidation"
+import {CalendarMonthViewComponent} from "../examples/Calendar/MonthView/MonthView"
+import {CalendarWeekViewComponent} from "../examples/Calendar/WeekView/WeekView"
+import {CalendarTimezoneSupportComponent} from "../examples/Calendar/TimezoneSupport/TimezoneSupport"
+
+
+
+
+
+import {CalendarService} from "../examples/Calendar/Calendar.service"
+
+
+
+
 interface ExtAngularRoute extends Route {
   text?: string;
   iconCls?: string;
@@ -44,7 +67,7 @@ interface ExtAngularRoute extends Route {
 }
 export declare type ExtAngularRoutes = ExtAngularRoute[];
 const routes: ExtAngularRoutes = [
-	{ path: '', redirectTo: '/simplegrid', pathMatch: 'full' },
+	{ path: '', redirectTo: '/audio', pathMatch: 'full' },
 	{ path: 'dashboard', component: DashboardComponent, text: 'Dashboard', iconCls: 'x-fa fa-dashboard', leaf: true },
 	{ path: 'agencies', component: AgenciesComponent, text: 'Agencies', iconCls: 'x-fa fa-institution', leaf: true },
 	{ path: 'analyze', component: AnalyzeComponent, text: 'Analyze', iconCls: 'x-fa fa-cog', xtype: 'homeview', leaf: true },
@@ -56,9 +79,26 @@ const routes: ExtAngularRoutes = [
 	{ path: 'widgetgrid', component: WidgetGridComponent, text: 'Widget Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'simplegrid', component: SimpleGridComponent, text: 'Simple Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'boilerplate', component: BoilerplateComponent, text: 'Boilerplate', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'configurator', component: ConfiguratorComponent, text: 'Configurator', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true }
+	{ path: 'configurator', component: ConfiguratorComponent, text: 'Configurator', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	//landing page
+	{ path: 'landingpage', component: LandingpageComponent, text: 'LandingPage', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	//example components
+	//TODO: FOr now we are defining routes as ids of the navtree. Need to to this dynamically.
+	{ path: 'components/buttons/button', component: ButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/media/audio', component: AudioComponent, text: 'Audio', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'calendar/calendar_panel', component: CalendarPanelComponent, text: 'Calendar Panel', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'calendar/days_view', component: CalendarDaysViewComponent, text: 'Calendar Days view', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'calendar/drag_resize_validation', component: CalendarDragResizeValidationComponent, text: 'Calendar drah rezize validation view', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'calendar/month_view', component: CalendarMonthViewComponent, text: 'Calendar month view', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'calendar/week_view', component: CalendarWeekViewComponent, text: 'Calendar week view', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'calendar/timezone_support', component: CalendarTimezoneSupportComponent, text: 'Calendar TZ support view', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
+
+
 
 @NgModule({
   imports: [
@@ -85,16 +125,42 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 		ReportsComponent,
 		SimpleGridComponent,
 		SpendingDetailComponent,
-		WidgetGridComponent
+		WidgetGridComponent,
+
+		LandingpageComponent,
+
+		ButtonComponent,
+		AudioComponent,
+		CalendarPanelComponent,
+		CalendarDaysViewComponent,
+		CalendarDragResizeValidationComponent,
+		CalendarMonthViewComponent,
+		CalendarWeekViewComponent,
+		CalendarTimezoneSupportComponent
+
 	],
 	providers: [
 		AgencyService,
+
+		CalendarService,
+
+		AppService
 	],
 	entryComponents: [
 		SideBarComponent, 
 		FooterComponent, 
-		ChartComponent
+		ChartComponent,
+		ButtonComponent
 	],
-	bootstrap: [LayoutComponent]
+	bootstrap: [LandingpageComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+	constructor(appService: AppService) {
+		appService.init();
+		console.log("isphone: " + Ext.os.is.Phone);
+		console.log("isDesktop: " + Ext.os.is.Desktop);
+	}
+
+
+ }

@@ -1,0 +1,48 @@
+<panel
+#item
+[shadow]="true"
+[title]="panelTitle"
+[layout]="'hbox'"
+[height]="600"
+[header]="{
+  layout: 'hbox',
+  items: [{
+    xtype: 'component',
+    flex: 1
+    }, {
+    xtype: 'segmentedbutton',
+    items: [{
+        text: isPhone ? null : 'Full Week',
+        iconCls: isPhone ? 'x-fa fa-calendar-check-o' : null,
+        value: 'fullweek',
+        handler:changeCalendarView
+    }, {
+        text: isPhone ? null : 'Work Week',
+        iconCls: isPhone ? 'x-fa fa-briefcase' : null,
+        value: 'workweek', 
+        handler:changeCalendarView
+    }]
+  }]
+}"
+>
+    <panel
+    #item
+        [title]="'Calendars'"
+        [ui]="'light'"
+        [width]="150"
+        [bodyPadding]="5"
+        [hidden]="isPhone"
+    >
+        <calendar-list #item [store]="this.store"></calendar-list>
+    </panel>
+    <calendar-week
+        #item
+        [store]="this.store"
+        [flex]="1"
+        [timezoneOffset]="0"
+        [gestureNavigation]="false"
+        [value]="calWeekValue"
+        [firstDayOfWeek]="this.firstDayOfWeek"
+        [visibleDays]="this.visibleDays"
+    ></calendar-week>
+</panel>

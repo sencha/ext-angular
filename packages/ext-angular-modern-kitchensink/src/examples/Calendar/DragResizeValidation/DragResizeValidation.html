@@ -1,0 +1,24 @@
+<panel
+[layout]="'fit'"
+[shadow]="true"
+[height]="600"
+#item
+>
+<calendar-day
+    #item   
+    [startTime]="8"
+    [endTime]="18"
+    [visibleDays]="2"
+    [timezoneOffset]="0"
+    [gestureNavigation]="false"
+    [store]="this.store"
+    [value]="calDayValue"
+    [listeners]="{
+        beforeeventdragstart: this.onBeforeDragStart,
+        beforeeventresizestart: this.onBeforeResizeStart,
+        validateeventdrop: this.confirmAction,
+        validateeventresize: this.confirmAction,
+        validateeventerase: this.confirmAction
+    }" >
+    </calendar-day>
+</panel>
