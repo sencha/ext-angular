@@ -57,7 +57,7 @@ in package.json, add
   "devDependencies": {
     "@angular-builders/custom-webpack": "^2.4.1",
     "@angular-builders/dev-server":"^2.2.3",
-    "@sencha/ext-angular-webpack-plugin": "~0.0.1",
+    "@sencha/ext-angular-webpack-plugin": "~6.7.0",
 
 in tsconfig.json, add
 

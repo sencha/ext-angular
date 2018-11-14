@@ -36,7 +36,7 @@
     "@angular/cli": "~6.2.4",
     "@angular/compiler-cli": "^6.1.0",
     "@angular/language-service": "^6.1.0",
-    "@sencha/ext-angular-webpack-plugin": "0.0.1",
+    "@sencha/ext-angular-webpack-plugin": "6.7.0",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
