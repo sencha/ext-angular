@@ -1,19 +1,7 @@
 import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
-  template: `
-  <container [layout]="'hbox'" [cls]="'main-background'">
-    <container [layout]="'fit'" [flex]="'4'">
-      <titlebar [docked]="'top'" [shadow] [style]="{'z-index': 2}">
-        <button 
-          [iconCls]="'x-fa fa-bars'" 
-        ></button>
-        <div className="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></div>
-        <a href="#" className="app-title">ExtAngular Modern Kitchen Sink - Angular v{{ANGULAR_VERSION}}</a>
-      </titlebar>
-    </container>
-  </container>
-  `,
+  templateUrl: './layout.component.html',
   styles: []
 })
 export class LayoutComponent {

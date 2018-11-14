@@ -2,13 +2,7 @@ import {Component} from '@angular/core';
 
 @Component({
 	selector: 'simplegrid',
-	template: `
-	<grid fitToParent=true
-		[columns]="gridcolumns" 
-		[store]="gridstore"
-		(select)="onGridSelect($event)"
-	></grid>
-	`
+	templateUrl: './simplegrid.component.html' 
 })
 
 export class SimpleGridComponent {
