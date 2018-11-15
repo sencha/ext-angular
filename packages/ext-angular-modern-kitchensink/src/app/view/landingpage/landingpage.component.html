@@ -30,7 +30,7 @@
         }"
         [collapsed]="!showTreeFlag"
         >
-        <searchfield #item [flex]="1" [docked]="'top'" [ui]="'faded'" (change)="filterNav()" [margin]="7" ></searchfield>
+        <searchfield #item [flex]="1" [docked]="'top'" [ui]="'faded'" (change)="filterNav($event)" [margin]="7" ></searchfield>
         <treelist #item
         [ui]="'nav'"
         [expanderFirst]="false"
