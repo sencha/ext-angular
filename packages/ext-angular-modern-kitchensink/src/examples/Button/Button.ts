@@ -42,6 +42,8 @@ export class ButtonComponent implements OnInit, OnChanges  {
     console.log("Round: " + this.round);
   };
 
+  styleChangeDefaults = { handler: this.onStyleChange, group: 'buttonstyle' };
+
   @ViewChild('layoutProps') layoutProps: ElementRef;
 
   @ViewChild('groupLabelProps1') groupLabelProps1: ElementRef;
