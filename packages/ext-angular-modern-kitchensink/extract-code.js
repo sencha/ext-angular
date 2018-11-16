@@ -39,7 +39,7 @@ function extractFrom(example, file, fullPath) {
 }
 
 function run() {
-  const outputDir = path.join(__dirname, 'build', 'resources')
+  const outputDir = path.join(__dirname,'src', 'build', 'resources')
   console.log("outputDir : " + outputDir)
   extractAll(examples)
   mkdirp(outputDir)
