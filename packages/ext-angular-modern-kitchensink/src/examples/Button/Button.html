@@ -1,6 +1,6 @@
 <container #item [padding]="10">
     <container #item
-    [layout]="{ type: 'hbox', pack: 'left'}"
+    [layout]="{ type: 'hbox', pack: isPhone ? 'center' : 'left'}"
     margin="0 0 10 0"
     [defaults]="{ margin: '0 10 0 0' }"
     [width]="550">

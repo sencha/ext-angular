@@ -15,20 +15,19 @@ export class ButtonComponent implements OnInit, OnChanges  {
   iconCls;
   ui;
   menu;
+  isPhone = Ext.os.is.Phone;
 
 
   onStyleChange = function(item){
     //debugger;
     console.log("onStyleChange : " + item._text);
     this.style = item._text; 
-    console.log("this.refreshFlag : " + this.refreshFlag);
   }
 
   onTypeChange = function(item){
     //debugger;
     console.log("onTypeChange : " + item._text);
     this.type = item._text; 
-    console.log("this.refreshFlag : " + this.refreshFlag);
   }
 
   toggleRound = function(){
