@@ -1,1 +1,64 @@
-<div #item>test</div>
+<container #item padding="10">
+    <container   #item
+        [layout]="{ type: 'hbox', pack: isPhone ? 'center' : 'left'}"
+        [margin]="'0 0 10 0'" 
+        [defaults]="{ margin: '0 10 0 0' }"
+        [width]="550"
+    >
+        <button  #item [ui]="'action raised'" text="Style">
+            <menu  #item [defaults]="{ handler: this.onStyleChange, group: 'buttonstyle' }">
+                <menuitem  #item text="None" value="" [iconCls]="style === 'None'?'x-font-icon md-icon-check':''"></menuitem>
+                <menuitem  #item text="Action" value="action" [iconCls]="style === 'Action'?'x-font-icon md-icon-check':''"></menuitem>
+                <menuitem  #item text="Decline" value="decline" [iconCls]="style === 'Decline'?'x-font-icon md-icon-check':''"></menuitem>
+                <menuitem  #item text="Confirm" value="confirm" [iconCls]="style === 'Confirm'?'x-font-icon md-icon-check':''"></menuitem>
+            </menu>
+        </button>
+        <button  #item [ui]="'action raised'" text="Type">
+            <menu  #item [defaults]="{ handler: this.onTypeChange, group: 'buttontype'}">
+                <menuitem  #item text="Text" value="Text" [iconCls]="type === 'Text'?'x-font-icon md-icon-check':''"></menuitem>
+                <menuitem  #item text="Icon" value="Icon" [iconCls]="type === 'Icon'?'x-font-icon md-icon-check':''"></menuitem>
+                <menuitem  #item text="Text & Icon" value="Text & Icon" [iconCls]="type === 'Text & Icon'?'x-font-icon md-icon-check':''"></menuitem>
+            </menu>
+        </button>
+        <button  #item [ui]="'action raised'" [iconCls]="round ? 'x-fa fa-check' : null" [enableToggle]="true" text="Round" (tap)="toggleRound()"></button>
+    </container>
+
+    <panel  #item #layoutProps [padding] = "10" [shadow] = "true"  [defaults]="{layout: 'hbox', flex:'1', margin: '10', width: '100%'}">
+        <container  #item layout="hbox">
+            <container #item layout="hbox" >
+                 <div  #item  #groupLabelProps1 style="text-align:right;margin:24px 20px 0 0;width: 100px">Default</div>
+           </container>
+            <container  #item [flex]="3" className="button-group" #buttonGroupProps1 padding= '17 0 17 20' [layout]="{ type: 'hbox', align: 'middle', pack: 'space-around' }" flex='1' margin='0 20 0 0' width=400 [defaults]="{margin: '0 20 0 0'}">
+                <splitbutton  #item [text]="'Normal'"  [ui]="ui" [iconCls]="iconCls" [menu]="menuProp" [arrowAlign]="'bottom'"></splitbutton>
+                <splitbutton  #item [text]="'Disabled'"  [ui]="ui" [iconCls]="iconCls" [disabled]="true" [menu]="menuProp"></splitbutton>
+            </container>
+        </container>
+        <container  #item layout="hbox">
+            <container #item layout="hbox" >
+                <div  #item  #groupLabelProps1 style="text-align:right;margin:24px 20px 0 0;width: 100px">Alt</div>
+            </container>
+                <container  #item [flex]="3" className="button-group button-group-alt" #buttonGroupProps1 padding= '17 0 17 20' [layout]="{ type: 'hbox', align: 'middle', pack: 'space-around' }" flex='1' margin='0 20 0 0' width=400 [defaults]="{margin: '0 20 0 0'}">
+                <splitbutton  #item [text]="'Normal'" [ui]="ui + ' alt'" [iconCls]="iconCls" [menu]="menuProp"></splitbutton>
+                <splitbutton  #item [text]="'Disabled'" [ui]="ui + ' alt'" [iconCls]="iconCls" [disabled]="true" [menu]="menuProp"></splitbutton>
+            </container>
+        </container>
+        <container  #item layout="hbox">
+            <container #item layout="hbox" >
+                <div  #item  #groupLabelProps1 style="text-align:right;margin:24px 20px 0 0;width: 100px">Raised </div>
+            </container>
+            <container  #item [flex]="3" className="button-group" #buttonGroupProps1 padding= '17 0 17 20' [layout]="{ type: 'hbox', align: 'middle', pack: 'space-around' }" flex='1' margin='0 20 0 0' width=400 [defaults]="{margin: '0 20 0 0'}">
+                <splitbutton  #item [text]="'Normal'" [ui]="ui + ' raised'" [iconCls]="iconCls" [menu]="menuProp"></splitbutton>
+                <splitbutton  #item [text]="'Disabled'" [ui]="ui + ' raised'" [iconCls]="iconCls" [disabled]="true" [menu]="menuProp"></splitbutton>
+            </container>
+        </container>
+        <container  #item layout="hbox">
+        <container #item layout="hbox" >
+            <div  #item  #groupLabelProps1 style="text-align:right;margin:24px 20px 0 0;width: 100px">Alt Raised</div>
+        </container>
+            <container  #item [flex]="3" className="button-group button-group-alt" #buttonGroupProps1 padding= '17 0 17 20' [layout]="{ type: 'hbox', align: 'middle', pack: 'space-around' }" flex='1' margin='0 20 0 0' width=400 [defaults]="{margin: '0 20 0 0'}">
+                <splitbutton  #item [text]="'Normal'" [ui]="ui + ' alt raised'" [iconCls]="iconCls" [menu]="menuProp"></splitbutton>
+                <splitbutton  #item [text]="'Disabled'" [ui]="ui + ' alt raised'" [iconCls]="iconCls" [disabled]="true" [menu]="menuProp" ></splitbutton>
+            </container>
+        </container>
+    </panel>
+</container>
