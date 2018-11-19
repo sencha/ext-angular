@@ -1,20 +1,14 @@
-<container #item
-   [padding]="10"
-    [layout]="{ type: 'hbox', pack: 'left'}"
-    margin="0 0 10 0"
-    [defaults]="{ margin: '0 10 0 0' }"
-    [width]="550"
->
+<container #item [layout]="'vbox'">
+    <div #item [class]="'ripple-target'" [style]="'margin:30 0 30 0'" (click)="clickHandler($event)">
+        I ripple when clicked
+    </div>
     <container #item
-       (onClick)="clickHandler($event)"
-       [cls]="'ripple-target'"
-       [ripple]="true"
-       [html]="'I ripple when clicked.'"
-    >
-    </container>
-    <container #item
-        [margin]="'30 0 0 0'"
-        [cls]="'ripple-target'"
+        [style]="{
+            position: 'relative', 'text-align': 'center',
+            height: '150px', width: '300px',
+            'line-height': '150px', border: '2px dashed #D0D0D0'
+        }"
+        [margin]="'30 0 30 0'"
         [ripple]="true"
         [html]="'Any ExtReact component can also have a ripple.'"
     >
