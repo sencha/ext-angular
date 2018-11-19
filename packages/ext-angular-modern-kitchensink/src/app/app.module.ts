@@ -52,8 +52,7 @@ import {CalendarDragResizeValidationComponent} from "../examples/Calendar/DragRe
 import {CalendarMonthViewComponent} from "../examples/Calendar/MonthView/MonthView"
 import {CalendarWeekViewComponent} from "../examples/Calendar/WeekView/WeekView"
 import {CalendarTimezoneSupportComponent} from "../examples/Calendar/TimezoneSupport/TimezoneSupport"
-
-
+import {SheetComponent} from "../examples/Sheet/Sheet"
 
 
 
@@ -100,6 +99,8 @@ const routes: ExtAngularRoutes = [
 	{ path: 'calendar/month_view', component: CalendarMonthViewComponent, text: 'Calendar month view', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'calendar/week_view', component: CalendarWeekViewComponent, text: 'Calendar week view', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'calendar/timezone_support', component: CalendarTimezoneSupportComponent, text: 'Calendar TZ support view', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/sheet', component: SheetComponent, text: 'Sheet', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
 
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
@@ -145,7 +146,8 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 		CalendarDragResizeValidationComponent,
 		CalendarMonthViewComponent,
 		CalendarWeekViewComponent,
-		CalendarTimezoneSupportComponent
+		CalendarTimezoneSupportComponent,
+		SheetComponent
 
 	],
 	providers: [
@@ -169,6 +171,45 @@ export class AppModule {
 		appService.init();
 		console.log("isphone: " + Ext.os.is.Phone);
 		console.log("isDesktop: " + Ext.os.is.Desktop);
+
+		Ext.define('Ext.viewport.Viewport', {
+			requires: [
+				'Ext.viewport.Ios',
+				'Ext.viewport.Android',
+				'Ext.viewport.WindowsPhone'
+			],
+			singleton: true,
+		
+			setup: function (config) {
+				var osName = Ext.os.name,
+					viewportName,
+					viewport;
+		
+				switch (osName) {
+					case 'Android':
+						viewportName = (Ext.browser.name === 'ChromeMobile') ? 'Default' : 'Android';
+						break;
+		
+					case 'iOS':
+						viewportName = 'Ios';
+						break;
+		
+					case 'Windows':
+						viewportName = (Ext.browser.name === 'IE') ? 'WindowsPhone' : 'Default';
+						break;
+		
+					case 'WindowsPhone':
+						viewportName = 'WindowsPhone';
+						break;
+		
+					default:
+						viewportName = 'Default';
+						break;
+				}
+		
+				return Ext.Viewport = viewport = Ext.create('Ext.viewport.' + viewportName, config);
+			}
+		});
 	}
 
 
