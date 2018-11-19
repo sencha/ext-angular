@@ -14,6 +14,7 @@ import {SheetComponent} from "./Sheet/Sheet";
 import {RippleComponent} from './Ripple/Ripple';
 import {ProgressBarComponent} from './ProgressBar/ProgressBar';
 import {TitleBarComponent} from './TitleBar/TitleBar';
+import {ToolBarComponent} from './ToolBar/ToolBar';
 
 declare var Ext: any;
 
@@ -118,7 +119,7 @@ const treeRoot = {
                 { text: 'TabBar', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Tab-Bar' }        
             ]},
             { text: 'TitleBar', component: TitleBarComponent, navIcon: 'icon-Title-Bar' },
-            { text: 'Toolbar', component: ButtonComponent, navIcon: 'icon-toolbar' },
+            { text: 'Toolbar', component: ToolBarComponent, navIcon: 'icon-toolbar' },
             { text: 'ToolTip', component: ButtonComponent, layout: 'center', navIcon: 'icon-tooltips'  },
             { text: 'Touch Events', component: ButtonComponent, navIcon: 'icon-touch-events' },
             //{ text: 'Transition', component: Transition, navIcon: 'icon-Transition' },
