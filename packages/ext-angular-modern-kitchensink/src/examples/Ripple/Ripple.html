@@ -1,7 +1,4 @@
 <container #item [layout]="'vbox'">
-    <div #item [class]="'ripple-target'" [style]="'margin:30 0 30 0'" (click)="clickHandler($event)">
-        I ripple when clicked
-    </div>
     <container #item
         [style]="{
             position: 'relative', 'text-align': 'center',
@@ -10,7 +7,19 @@
         }"
         [margin]="'30 0 30 0'"
         [ripple]="true"
-        [html]="'Any ExtReact component can also have a ripple.'"
+        (click)="clickHandler($event)"
+        [html]="'I ripple when clicked'"
+    >
+    </container>
+    <container #item
+        [style]="{
+            position: 'relative', 'text-align': 'center',
+            height: '150px', width: '300px',
+            'line-height': '150px', border: '2px dashed #D0D0D0'
+        }"
+        [margin]="'30 0 30 0'"
+        [ripple]="true"
+        [html]="'Any ExtAngular component can also have a ripple.'"
     >
     </container>
 </container>
