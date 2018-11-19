@@ -12,6 +12,7 @@ import {CalendarTimezoneSupportComponent} from "./Calendar/TimezoneSupport/Timez
 import {CalendarWeekViewComponent} from "./Calendar/WeekView/WeekView";
 import {SheetComponent} from "./Sheet/Sheet";
 import {RippleComponent} from './Ripple/Ripple';
+import {ProgressBarComponent} from './ProgressBar/ProgressBar';
 
 declare var Ext: any;
 
@@ -103,7 +104,7 @@ const treeRoot = {
                 { text: 'Msg', component: ButtonComponent, layout: 'center', navIcon: 'icon-overlays' },
                 { text: 'Toast', component: ButtonComponent, layout: 'center', navIcon: 'icon-toast-view' }
             ]},
-            { text: 'ProgressBar', component: ButtonComponent, layout: 'center', navIcon: 'icon-progress-decorated' },
+            { text: 'ProgressBar', component: ProgressBarComponent, layout: 'center', navIcon: 'icon-progress-decorated' },
             { text: 'Ripple', component: RippleComponent, layout: 'center', navIcon: 'icon-Ripple' },
             { text: 'Sheet', component: SheetComponent, layout: 'center', navIcon: 'icon-actionsheets' },
             { text: 'Tabs', navIcon: 'icon-tabs', children: [
