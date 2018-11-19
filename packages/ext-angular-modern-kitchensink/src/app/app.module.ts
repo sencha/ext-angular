@@ -54,7 +54,9 @@ import {CalendarMonthViewComponent} from "../examples/Calendar/MonthView/MonthVi
 import {CalendarWeekViewComponent} from "../examples/Calendar/WeekView/WeekView"
 import {CalendarTimezoneSupportComponent} from "../examples/Calendar/TimezoneSupport/TimezoneSupport"
 import {SheetComponent} from "../examples/Sheet/Sheet"
-
+import {ProgressBarComponent} from "../examples/ProgressBar/ProgressBar"
+import {TitleBarComponent} from "../examples/TitleBar/TitleBar"
+import {ToolBarComponent} from "../examples/ToolBar/ToolBar"
 
 
 import {CalendarService} from "../examples/Calendar/Calendar.service"
@@ -70,7 +72,7 @@ interface ExtAngularRoute extends Route {
 }
 export declare type ExtAngularRoutes = ExtAngularRoute[];
 const routes: ExtAngularRoutes = [
-	{ path: '', redirectTo: '/audio', pathMatch: 'full' },
+	{ path: '', redirectTo: 'components/media/audio', pathMatch: 'full' },
 	{ path: 'dashboard', component: DashboardComponent, text: 'Dashboard', iconCls: 'x-fa fa-dashboard', leaf: true },
 	{ path: 'agencies', component: AgenciesComponent, text: 'Agencies', iconCls: 'x-fa fa-institution', leaf: true },
 	{ path: 'analyze', component: AnalyzeComponent, text: 'Analyze', iconCls: 'x-fa fa-cog', xtype: 'homeview', leaf: true },
@@ -102,8 +104,11 @@ const routes: ExtAngularRoutes = [
 	{ path: 'calendar/week_view', component: CalendarWeekViewComponent, text: 'Calendar week view', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'calendar/timezone_support', component: CalendarTimezoneSupportComponent, text: 'Calendar TZ support view', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/sheet', component: SheetComponent, text: 'Sheet', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/progressbar', component: ProgressBarComponent, text: 'Progress Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/titlebar', component: TitleBarComponent, text: 'Title Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/toolbar', component: ToolBarComponent, text: 'Tool Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
-
+	
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
@@ -150,7 +155,10 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 		CalendarMonthViewComponent,
 		CalendarWeekViewComponent,
 		CalendarTimezoneSupportComponent,
-		SheetComponent
+		SheetComponent,
+		ProgressBarComponent,
+		TitleBarComponent,
+		ToolBarComponent
 
 	],
 	providers: [
