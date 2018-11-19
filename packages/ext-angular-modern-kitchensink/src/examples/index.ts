@@ -13,6 +13,7 @@ import {CalendarWeekViewComponent} from "./Calendar/WeekView/WeekView";
 import {SheetComponent} from "./Sheet/Sheet";
 import {RippleComponent} from './Ripple/Ripple';
 import {ProgressBarComponent} from './ProgressBar/ProgressBar';
+import {TitleBarComponent} from './TitleBar/TitleBar';
 
 declare var Ext: any;
 
@@ -116,7 +117,7 @@ const treeRoot = {
                 { text: 'ScrollingTabs', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Scrolling-Tabs' },
                 { text: 'TabBar', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Tab-Bar' }        
             ]},
-            { text: 'TitleBar', component: ButtonComponent, navIcon: 'icon-Title-Bar' },
+            { text: 'TitleBar', component: TitleBarComponent, navIcon: 'icon-Title-Bar' },
             { text: 'Toolbar', component: ButtonComponent, navIcon: 'icon-toolbar' },
             { text: 'ToolTip', component: ButtonComponent, layout: 'center', navIcon: 'icon-tooltips'  },
             { text: 'Touch Events', component: ButtonComponent, navIcon: 'icon-touch-events' },

@@ -55,7 +55,7 @@ import {CalendarWeekViewComponent} from "../examples/Calendar/WeekView/WeekView"
 import {CalendarTimezoneSupportComponent} from "../examples/Calendar/TimezoneSupport/TimezoneSupport"
 import {SheetComponent} from "../examples/Sheet/Sheet"
 import {ProgressBarComponent} from "../examples/ProgressBar/ProgressBar"
-
+import {TitleBarComponent} from "../examples/TitleBar/TitleBar"
 
 
 import {CalendarService} from "../examples/Calendar/Calendar.service"
@@ -104,6 +104,7 @@ const routes: ExtAngularRoutes = [
 	{ path: 'calendar/timezone_support', component: CalendarTimezoneSupportComponent, text: 'Calendar TZ support view', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/sheet', component: SheetComponent, text: 'Sheet', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/progressbar', component: ProgressBarComponent, text: 'Progress Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/titlebar', component: TitleBarComponent, text: 'Title Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
 	
 ];
@@ -153,7 +154,8 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 		CalendarWeekViewComponent,
 		CalendarTimezoneSupportComponent,
 		SheetComponent,
-		ProgressBarComponent
+		ProgressBarComponent,
+		TitleBarComponent
 
 	],
 	providers: [
