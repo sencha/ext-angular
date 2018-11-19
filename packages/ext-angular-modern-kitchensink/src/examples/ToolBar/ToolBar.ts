@@ -10,7 +10,7 @@ declare var Ext: any;
 export class ToolBarComponent implements OnInit {
 
   message= 'Option 1 selected';
-  optionButton= '1';
+  optionButton= '';
   isPhone = Ext.os.is.Phone;
 
   constructor() { }
@@ -19,6 +19,7 @@ export class ToolBarComponent implements OnInit {
     console.log("Got event :" + event);
     //debugger;
     this.message = "User clicked \"" + event.button.getText() + "\"";
+    this.optionButton = event.button.getValue();
 
   }
 
