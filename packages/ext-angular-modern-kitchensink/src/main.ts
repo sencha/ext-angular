@@ -21,14 +21,11 @@ var lauchFunc = function() {
         .catch(err => console.error(err));
 }
 
-/*
+
 Ext.onReady(() => {
   lauchFunc();
-  Ext.application({
-    name: '$ExtAngularApp'
-  });
 })
-*/
+
 
 /*
 Ext.application({
@@ -39,10 +36,11 @@ Ext.application({
 
 */
 
-
+/*
 Ext.onReady(() => {
   Ext.application({
       name: '$ExtAngularApp',
       launch: lauchFunc
   })
 })
+*/

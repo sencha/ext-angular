@@ -72,7 +72,7 @@ interface ExtAngularRoute extends Route {
 }
 export declare type ExtAngularRoutes = ExtAngularRoute[];
 const routes: ExtAngularRoutes = [
-	{ path: '', redirectTo: '/audio', pathMatch: 'full' },
+	{ path: '', redirectTo: 'components/media/audio', pathMatch: 'full' },
 	{ path: 'dashboard', component: DashboardComponent, text: 'Dashboard', iconCls: 'x-fa fa-dashboard', leaf: true },
 	{ path: 'agencies', component: AgenciesComponent, text: 'Agencies', iconCls: 'x-fa fa-institution', leaf: true },
 	{ path: 'analyze', component: AnalyzeComponent, text: 'Analyze', iconCls: 'x-fa fa-cog', xtype: 'homeview', leaf: true },
