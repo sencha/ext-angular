@@ -10,6 +10,7 @@ import {CalendarDragResizeValidationComponent} from "./Calendar/DragResizeValida
 import {CalendarMonthViewComponent} from "./Calendar/MonthView/MonthView";
 import {CalendarTimezoneSupportComponent} from "./Calendar/TimezoneSupport/TimezoneSupport";
 import {CalendarWeekViewComponent} from "./Calendar/WeekView/WeekView";
+import {RippleComponent} from './Ripple/Ripple';
 
 declare var Ext: any;
 
@@ -102,7 +103,7 @@ const treeRoot = {
                 { text: 'Toast', component: ButtonComponent, layout: 'center', navIcon: 'icon-toast-view' }
             ]},
             { text: 'ProgressBar', component: ButtonComponent, layout: 'center', navIcon: 'icon-progress-decorated' },
-            { text: 'Ripple', component: ButtonComponent, layout: 'center', navIcon: 'icon-Ripple' },
+            { text: 'Ripple', component: RippleComponent, layout: 'center', navIcon: 'icon-Ripple' },
             { text: 'Sheet', component: ButtonComponent, layout: 'center', navIcon: 'icon-actionsheets' },
             { text: 'Tabs', navIcon: 'icon-tabs', children: [
                 { text: 'Basic Tabs', component: ButtonComponent, navIcon: 'icon-basic-tabs' },
