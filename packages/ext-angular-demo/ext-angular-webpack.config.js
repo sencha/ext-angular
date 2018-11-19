@@ -22,7 +22,7 @@ module.exports = {
       profile: '', 
       environment: 'development', 
       verbose: 'yes',
-      theme: 'theme-material',
+      theme: 'theme-conference-app',
       packages: [
       ]
     })

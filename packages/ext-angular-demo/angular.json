@@ -50,10 +50,8 @@
               "src/build"
             ],
             "styles": [
-              "src/styles.scss"
             ],
             "scripts": [
-              "src/build/ext-angular/ext.js"
             ]
           },
           "configurations": {
