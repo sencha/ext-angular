@@ -1,0 +1,6 @@
+@include toolbar-ui(
+    $ui: 'app-header',
+    $background-color: $base-color,
+    $color: white,
+    $padding: 0
+);

@@ -8,5 +8,13 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+declare var Ext: any;
+Ext.application({
+  name: '$ExtAngularApp',
+  launch: () => {
+    platformBrowserDynamic().bootstrapModule(AppModule)
+      .catch(err => console.error(err));
+  }
+})
+// platformBrowserDynamic().bootstrapModule(AppModule)
+//   .catch(err => console.error(err));
