@@ -42,7 +42,11 @@ import { Route, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from "@angular/core";
 
 import {ButtonComponent} from "../examples/Button/Button"
+import {SegmentedButtonComponent} from "../examples/SegmentedButton/SegmentedButton"
+import {SplitButtonComponent} from "../examples/SplitButton/SplitButton"
+import {RippleComponent} from "../examples/Ripple/Ripple"
 import {AudioComponent} from "../examples/Audio/Audio"
+import {VideoComponent} from "../examples/Video/Video"
 import {CalendarPanelComponent} from "../examples/Calendar/CalendarPanel/CalendarPanel"
 import {CalendarDaysViewComponent} from "../examples/Calendar/DaysView/DaysView"
 import {CalendarDragResizeValidationComponent} from "../examples/Calendar/DragResizeValidation/DragResizeValidation"
@@ -87,7 +91,11 @@ const routes: ExtAngularRoutes = [
 	//example components
 	//TODO: FOr now we are defining routes as ids of the navtree. Need to to this dynamically.
 	{ path: 'components/buttons/button', component: ButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/buttons/splitbutton', component: SplitButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/buttons/segmentedbutton', component: SegmentedButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/ripple', component: RippleComponent, text: 'Riple', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/media/audio', component: AudioComponent, text: 'Audio', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/media/video', component: VideoComponent, text: 'Video', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'calendar/calendar_panel', component: CalendarPanelComponent, text: 'Calendar Panel', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'calendar/days_view', component: CalendarDaysViewComponent, text: 'Calendar Days view', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'calendar/drag_resize_validation', component: CalendarDragResizeValidationComponent, text: 'Calendar drah rezize validation view', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -130,7 +138,11 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 		LandingpageComponent,
 
 		ButtonComponent,
+		SplitButtonComponent,
+		SegmentedButtonComponent,
+		RippleComponent,
 		AudioComponent,
+		VideoComponent,
 		CalendarPanelComponent,
 		CalendarDaysViewComponent,
 		CalendarDragResizeValidationComponent,

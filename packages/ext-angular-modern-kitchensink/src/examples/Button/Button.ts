@@ -15,45 +15,29 @@ export class ButtonComponent implements OnInit, OnChanges  {
   iconCls;
   ui;
   menu;
-  refreshFlag:boolean;
+  isPhone = Ext.os.is.Phone;
 
 
   onStyleChange = function(item){
     //debugger;
     console.log("onStyleChange : " + item._text);
     this.style = item._text; 
-    this.refreshFlag = !this.refreshFlag;
-    console.log("this.refreshFlag : " + this.refreshFlag);
   }
 
   onTypeChange = function(item){
     //debugger;
     console.log("onTypeChange : " + item._text);
     this.type = item._text; 
-    this.refreshFlag = !this.refreshFlag;
-    console.log("this.refreshFlag : " + this.refreshFlag);
   }
 
   toggleRound = function(){
     //debugger;
     console.log("In toggleRound");
     this.round=!this.round;
-    this.refreshFlag = !this.refreshFlag;
     console.log("Round: " + this.round);
   };
 
-  @ViewChild('layoutProps') layoutProps: ElementRef;
-
-  @ViewChild('groupLabelProps1') groupLabelProps1: ElementRef;
-  @ViewChild('groupLabelProps2') groupLabelProps2: ElementRef;
-  @ViewChild('groupLabelProps3') groupLabelProps3: ElementRef;
-  @ViewChild('groupLabelProps4') groupLabelProps4: ElementRef;
-
-  @ViewChild('buttonGroupProps1') buttonGroupProps1: ElementRef;
-  @ViewChild('buttonGroupProps2') buttonGroupProps2: ElementRef;
-  @ViewChild('buttonGroupProps3') buttonGroupProps3: ElementRef;
-  @ViewChild('buttonGroupProps4') buttonGroupProps4: ElementRef;
-  
+  styleChangeDefaults = { handler: this.onStyleChange, group: 'buttonstyle' };
 
 
   constructor() { }
@@ -89,52 +73,7 @@ export class ButtonComponent implements OnInit, OnChanges  {
   }
 
 
-  ngOnInit() {
-
-    //this.refreshFlag = false;
-
-    console.log(this.groupLabelProps1.nativeElement.attributes['flex'].value);
-    this.groupLabelProps1.nativeElement.setAttribute("test","a");
-    console.log(this.groupLabelProps1.nativeElement.attributes['test'].value);
-
-    console.log(this.layoutPropsVal);
-
-    
-    //this does not work for extjs components
-    Object.keys(this.layoutPropsVal).forEach( (propName) => {
-      //console.log("layoutProps");
-      //this.layoutProps.nativeElement.setAttribute(propName, this.layoutPropsVal[propName]);
-    });
-
-    //this works since this is not a not extjs component
-    console.log(this.groupLabelPropsVal);
-    Object.keys(this.groupLabelPropsVal).forEach( (propName) => {
-     // console.log("groupLabelProps1");
-   //   this.groupLabelProps1.nativeElement.setAttribute(propName, this.groupLabelPropsVal[propName]);
-    //  console.log("groupLabelProps2");
-   //   this.groupLabelProps2.nativeElement.setAttribute(propName, this.groupLabelPropsVal[propName]);
-    //  console.log("groupLabelProps3");
-    //  this.groupLabelProps3.nativeElement.setAttribute(propName, this.groupLabelPropsVal[propName]);
-    //  console.log("groupLabelProps4");
-    //  this.groupLabelProps4.nativeElement.setAttribute(propName, this.groupLabelPropsVal[propName]);
-    });
-
-
-
-    //this does not work for extjs components
-    console.log(this.buttonGroupPropsVal);
-    Object.keys(this.buttonGroupPropsVal).forEach( (propName) => {
-      //console.log("buttonGroupProps1");
-      //this.buttonGroupProps1.nativeElement.setAttribute(propName, this.buttonGroupPropsVal[propName]);
-      //console.log("buttonGroupProps2");
-      //this.buttonGroupProps2.nativeElement.setAttribute(propName, this.buttonGroupPropsVal[propName]);
-      //console.log("buttonGroupProps3");
-      //this.buttonGroupProps3.nativeElement.setAttribute(propName, this.buttonGroupPropsVal[propName]);
-      //console.log("buttonGroupProps4");
-      //this.buttonGroupProps4.nativeElement.setAttribute(propName, this.buttonGroupPropsVal[propName]);
-    });
-
-    
+  ngOnInit() {   
   }
 
   // [height] = "'100%'" [width] = "'100%'" className = "demo-buttons" defaults={margin: '20'}

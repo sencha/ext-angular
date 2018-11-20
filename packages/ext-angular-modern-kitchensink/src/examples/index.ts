@@ -1,5 +1,16 @@
 
 import {ButtonComponent} from './Button/Button';
+import {SegmentedButtonComponent} from "./SegmentedButton/SegmentedButton"
+import {SplitButtonComponent} from "./SplitButton/SplitButton"
+import {AudioComponent} from "./Audio/Audio";
+import {VideoComponent} from "./Video/Video";
+import {CalendarPanelComponent} from "./Calendar/CalendarPanel/CalendarPanel";
+import {CalendarDaysViewComponent} from "./Calendar/DaysView/DaysView";
+import {CalendarDragResizeValidationComponent} from "./Calendar/DragResizeValidation/DragResizeValidation";
+import {CalendarMonthViewComponent} from "./Calendar/MonthView/MonthView";
+import {CalendarTimezoneSupportComponent} from "./Calendar/TimezoneSupport/TimezoneSupport";
+import {CalendarWeekViewComponent} from "./Calendar/WeekView/WeekView";
+import {RippleComponent} from './Ripple/Ripple';
 
 declare var Ext: any;
 
@@ -10,8 +21,8 @@ const treeRoot = {
         { text: 'Components', navIcon: 'icon-buttons', children: [
             { text: 'Buttons', navIcon: 'icon-buttons', children: [
                 { text: 'Button', component: ButtonComponent, layout: 'center', navIcon: 'icon-buttons' },
-                { text: 'SegmentedButton', component: ButtonComponent, layout: 'center', navIcon: 'icon-segmented-buttons' },
-                { text: 'SplitButton', component: ButtonComponent, layout: 'center', navIcon: 'icon-buttons' },
+                { text: 'SegmentedButton', component: SegmentedButtonComponent, layout: 'center', navIcon: 'icon-segmented-buttons' },
+                { text: 'SplitButton', component: SplitButtonComponent, layout: 'center', navIcon: 'icon-buttons' },
             ]},
             { text: 'Carousel', component: ButtonComponent, navIcon: 'icon-carousel' },
             { text: 'Drag & Drop', navIcon: 'icon-drag-drop', children: [
@@ -75,8 +86,8 @@ const treeRoot = {
                 { text: 'Undoable Step Swiper', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-undoable-step-swiper'}
             ]},
             { text: 'Media', navIcon: 'x-fa fa-video-camera', children: [
-                { text: 'Video', navIcon: 'icon-video', component: ButtonComponent },
-                { text: 'Audio', navIcon: 'icon-audio', component: ButtonComponent }
+                { text: 'Video', navIcon: 'icon-video', component: VideoComponent },
+                { text: 'Audio', navIcon: 'icon-audio', component: AudioComponent }
             ] },
             { text: 'Panels', navIcon: 'icon-panels', children: [
                 { text: 'Basic Panels', component: ButtonComponent, layout: Ext.os.is.Phone ? 'auto': 'center', navIcon: 'icon-panels' },
@@ -92,7 +103,7 @@ const treeRoot = {
                 { text: 'Toast', component: ButtonComponent, layout: 'center', navIcon: 'icon-toast-view' }
             ]},
             { text: 'ProgressBar', component: ButtonComponent, layout: 'center', navIcon: 'icon-progress-decorated' },
-            { text: 'Ripple', component: ButtonComponent, layout: 'center', navIcon: 'icon-Ripple' },
+            { text: 'Ripple', component: RippleComponent, layout: 'center', navIcon: 'icon-Ripple' },
             { text: 'Sheet', component: ButtonComponent, layout: 'center', navIcon: 'icon-actionsheets' },
             { text: 'Tabs', navIcon: 'icon-tabs', children: [
                 { text: 'Basic Tabs', component: ButtonComponent, navIcon: 'icon-basic-tabs' },
@@ -142,12 +153,12 @@ const treeRoot = {
             { text: 'Heterogeneous Tree', premium: true, component: ButtonComponent, navIcon: 'icon-heterogeneous-tree'}
         ] },
         { text: 'Calendar', premium: false, navIcon: 'icon-calendar', children:[
-            { text: 'Calendar Panel', component: ButtonComponent, navIcon: 'icon-calendar-panel' },
-            { text: 'Month View', component: ButtonComponent, navIcon: 'icon-calendar-month-view' },
-            { text: 'Week View', component: ButtonComponent, navIcon: 'icon-calendar-week-view' },
-            { text: 'Days View', component: ButtonComponent, navIcon: 'icon-calendar-days-view' },
-            { text: 'Timezone Support', component: ButtonComponent, navIcon: 'icon-calendar-timezone' },
-            { text: 'Drag Resize Validation', component: ButtonComponent, navIcon: 'icon-calendar-validation' }
+            { text: 'Calendar Panel', component: CalendarPanelComponent, navIcon: 'icon-calendar-panel' },
+            { text: 'Month View', component: CalendarMonthViewComponent, navIcon: 'icon-calendar-month-view' },
+            { text: 'Week View', component: CalendarWeekViewComponent, navIcon: 'icon-calendar-week-view' },
+            { text: 'Days View', component: CalendarDaysViewComponent, navIcon: 'icon-calendar-days-view' },
+            { text: 'Timezone Support', component: CalendarTimezoneSupportComponent, navIcon: 'icon-calendar-timezone' },
+            { text: 'Drag Resize Validation', component: CalendarDragResizeValidationComponent, navIcon: 'icon-calendar-validation' }
         ]},
         { text: 'Charts', premium: true, navIcon: 'icon-charts', children: [
             { text: 'Area', navIcon: 'icon-area-basic', children: [

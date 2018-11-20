@@ -1,12 +1,12 @@
 <container #item [padding]="10">
     <container #item
-    [layout]="{ type: 'hbox', pack: 'left'}"
+    [layout]="{ type: 'hbox', pack: isPhone ? 'center' : 'left'}"
     margin="0 0 10 0"
     [defaults]="{ margin: '0 10 0 0' }"
     [width]="550">
 
     <button #item ui="action raised" text="Style">
-            <menu #item [defaults]="{ handler: onStyleChange, group: 'buttonstyle' }">
+            <menu #item [defaults]="styleChangeDefaults">
                 <menuitem #item text="None" value="" [iconCls]="style === 'None'?'x-font-icon md-icon-check':''"></menuitem>
                 <menuitem #item text="Action" value="action" [iconCls]="style === 'Action'?'x-font-icon md-icon-check':''"></menuitem>
                 <menuitem #item text="Decline" value="decline" [iconCls]="style === 'Decline'?'x-font-icon md-icon-check':''"></menuitem>

@@ -30,6 +30,7 @@ export class LandingpageComponent implements OnInit {
   nodeItems = [];
 
   filterRegex;
+  filterVal;
   showTreeFlag = true;
 
   
@@ -88,13 +89,15 @@ export class LandingpageComponent implements OnInit {
     console.log("toggleTree. After showTreeFlag : " + this.showTreeFlag);
   }
 
-  filterNav = function(field, oldValue, newValue) {
-    debugger;
+  filterNav = function(event) {
+    var oldValue = event.oldValue;
+    var newValue = event.newValue;
+    this.filterVal = newValue;
     console.log("In filterNav.oldValue : " + oldValue + " newValue: " + newValue);
     const store = this.treeStore;
     var escapeRegex = Ext.String.escapeRegex(newValue);
     console.log(escapeRegex);
-    this.filterRegex = new RegExp(`(escapeRegex)`, 'i');
+    this.filterRegex = new RegExp(escapeRegex, 'i');
     store.filterBy(record => this.containsMatches(record));
     
   }
@@ -102,7 +105,7 @@ export class LandingpageComponent implements OnInit {
   containsMatches(node) {
     const found = node.data.name.match(this.filterRegex) || node.childNodes.some(child => this.containsMatches(child));
     if (found) node.expand();
-    node.data.text = node.data.name.replace(this.filterRegex, '<span style="color:#2196F3;font-weight:bold">$1</span>')
+    node.data.text = node.data.name.replace(this.filterRegex, '<span style="color:#2196F3;font-weight:bold">' + this.filterVal + '</span>')
     return found;
   }
 
