@@ -4,10 +4,23 @@ import {navTreeRoot} from '../../../examples/index';
 import { Location } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 
-import {ButtonComponent} from '../../../examples/Button/Button';
 import { VERSION } from '@angular/core';
+import { Subject } from "rxjs";
 
 declare var Ext: any;
+
+declare var _code: any;
+ const generateBreadcrumb = (node) => {
+  const path = [];
+  do {
+    path.unshift({
+      isLeaf: !node.childNodes.length,
+      text: node.get("text"),
+      path: node.get("id"),
+    });
+  } while (node = node.parentNode)
+   return path;
+};
 
 @Component({
   selector: 'app-root',
@@ -24,14 +37,16 @@ export class LandingpageComponent implements OnInit {
   selectedNavNode;
   component;
   layout = "fit";
-  files;
 
-  nodeText;
-  nodeItems = [];
+  node: any;
+  node$: any = new Subject();
+  files: Array<String> = [];
+  breadcrumb: Array<any>;
 
   filterRegex;
   filterVal;
   showTreeFlag = true;
+  leafNode = true;;
 
   
   treeStore = Ext.create('Ext.data.TreeStore', {
@@ -39,47 +54,50 @@ export class LandingpageComponent implements OnInit {
     root: navTreeRoot
   });  
 
-  constructor(location: Location,private router: Router, changeDetectorRef: ChangeDetectorRef,
-    private resolver: ComponentFactoryResolver) { 
-    router.events.subscribe((val) => {
-      if(val instanceof NavigationEnd) {
-        console.log(location.path(true));
-        console.log(val);
-        var path = location.path(true);
-        if(path){
-          this.nodeId = path.substring(path.indexOf("#")+1, path.length);
-          console.log("nodeId : " + this.nodeId);
-          this.selectedNavNode = this.treeStore.getNodeById(this.nodeId);
-          console.log(this.selectedNavNode);
-          if(this.selectedNavNode != null) {
-            this.nodeText = this.selectedNavNode.get('text');
-            console.log("this.nodeText : " + this.nodeText);
-            this.nodeItems.unshift(
-            );
-  
-            this.component = this.selectedNavNode.get('component');
-            console.log("Component: " + this.component);
-            if(this.selectedNavNode.get('layout') != null) {
-              this.layout = this.selectedNavNode.get('layout');
-              console.log("this.layout : " + this.layout);
-            }
-            //this.files = this.code[this.nodeText.replace(/\s/g, '')];
-            //console.log("this.files : " + this.files);
+  constructor(location: Location, private router: Router, changeDetectorRef: ChangeDetectorRef,
+     private resolver: ComponentFactoryResolver) {
+
+      this.node$.subscribe(({
+        next: (v) => {
+          this.node = v;
+          console.log("Generating breadcrum for ID: " + v.id);
+          this.breadcrumb = generateBreadcrumb(v);
+          console.log(`BREADCRUMB: ${JSON.stringify(this.breadcrumb.map(b => b.text))}`);
+        },
+      }));
+      
+      router.events.subscribe((val) => {
+        if (val instanceof NavigationEnd) {
+          console.log(`location.path(true): ${location.path(true)}`);
+          console.log(`val: ${val}`);
+          console.log(`nodeId: ${val.url}`);
+          this.node = this.treeStore.getNodeById(val.url);
+          console.log("Node changed: " + this.node.id);
+          console.log("Children el length : " + this.node.childNodes.length);
+          if(this.node.childNodes.length == 0) {
+            this.leafNode = true;
           }
           else {
-              console.log("selectedNavNode not found.")
+            this.leafNode = false;
           }
-
+          console.log("leafNode :" + this.leafNode);
+          this.breadcrumb = generateBreadcrumb(this.node);
+          console.log("breadcrumb : " + this.breadcrumb);
+          //this.node$.next(this.treeStore.getNodeById(val.url));
         }
-
-      }
-
-    })
-
+        
+      });
   }
 
-  ngOnInit() {
+  navigate(location) {
+    console.log(`location: ${location}`);
+    this.router.navigateByUrl(location);
+  }
 
+
+
+  ngOnInit() {
+    this.node$.next(this.treeStore.getNodeById(location.pathname));
   } 
 
 
@@ -113,15 +131,24 @@ export class LandingpageComponent implements OnInit {
     var record = event.record;
     if(record && record.data && record.data.id) {
       var componentSelectedId = record.data.id;
-      console.log("ID: " + componentSelectedId)
+      console.log("selectionChanged ID: " + componentSelectedId);
       this.router.navigate([componentSelectedId]);
     }
 
   }
 
-  navigate(node) {
-    console.log("In naviagte : " + node.getId());
-    //debugger;
-  }
 
+
+}
+
+
+
+@Component({
+  selector: 'dummy-component',
+  template: ``,
+  styles: [``]
+})
+export class DummyComponent implements OnInit {
+  ngOnInit() {
+  }
 }
