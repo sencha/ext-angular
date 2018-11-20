@@ -15,6 +15,8 @@ import {RippleComponent} from './Ripple/Ripple';
 import {ProgressBarComponent} from './ProgressBar/ProgressBar';
 import {TitleBarComponent} from './TitleBar/TitleBar';
 import {ToolBarComponent} from './ToolBar/ToolBar';
+import {ToolTipComponent} from './ToolTip/ToolTip';
+
 
 declare var Ext: any;
 
@@ -120,7 +122,7 @@ const treeRoot = {
             ]},
             { text: 'TitleBar', component: TitleBarComponent, navIcon: 'icon-Title-Bar' },
             { text: 'Toolbar', component: ToolBarComponent, navIcon: 'icon-toolbar' },
-            { text: 'ToolTip', component: ButtonComponent, layout: 'center', navIcon: 'icon-tooltips'  },
+            { text: 'ToolTip', component: ToolTipComponent, layout: 'center', navIcon: 'icon-tooltips'  },
             { text: 'Touch Events', component: ButtonComponent, navIcon: 'icon-touch-events' },
             //{ text: 'Transition', component: Transition, navIcon: 'icon-Transition' },
             { text: 'Wizard', component: ButtonComponent, navIcon: 'icon-layout-card-indicator', layout: Ext.os.is.Phone ? 'fit': 'center' },
