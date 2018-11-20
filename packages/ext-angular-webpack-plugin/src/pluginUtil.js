@@ -259,10 +259,25 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
       const createWorkspaceJson = require('./artifacts').createWorkspaceJson
       const createJSDOMEnvironment = require('./artifacts').createJSDOMEnvironment
 
-      fs.writeFileSync(path.join(output, 'build.xml'), buildXML(vars.production, options), 'utf8')
-      fs.writeFileSync(path.join(output, 'app.json'), createAppJson(theme, packages, toolkit, options), 'utf8')
-      fs.writeFileSync(path.join(output, 'jsdom-environment.js'), createJSDOMEnvironment(options), 'utf8')
-      fs.writeFileSync(path.join(output, 'workspace.json'), createWorkspaceJson(options), 'utf8')
+      fs.writeFileSync(path.join(output, 'build.xml'), buildXML(vars.production, options, output), 'utf8')
+      fs.writeFileSync(path.join(output, 'app.json'), createAppJson(theme, packages, toolkit, options, output), 'utf8')
+      fs.writeFileSync(path.join(output, 'jsdom-environment.js'), createJSDOMEnvironment(options, output), 'utf8')
+      fs.writeFileSync(path.join(output, 'workspace.json'), createWorkspaceJson(options, output), 'utf8')
+
+      if (vars.framework == 'angular') {
+        if (fs.existsSync(path.join(process.cwd(),'ext-angular/packages/'))) {
+          var fromResources = path.join(process.cwd(), 'ext-angular/')
+          var toResources = path.join(output)
+          fsx.copySync(fromResources, toResources)
+          log(app + 'Copying ' + fromResources.replace(process.cwd(), '') + ' to: ' + toResources.replace(process.cwd(), ''))
+        }
+        if (fs.existsSync(path.join(process.cwd(),'ext-angular/overrides/'))) {
+          var fromResources = path.join(process.cwd(), 'ext-angular/')
+          var toResources = path.join(output)
+          fsx.copySync(fromResources, toResources)
+          log(app + 'Copying ' + fromResources.replace(process.cwd(), '') + ' to: ' + toResources.replace(process.cwd(), ''))
+        }
+      }
 
       if (fs.existsSync(path.join(process.cwd(),'resources/'))) {
         var fromResources = path.join(process.cwd(), 'resources/')
