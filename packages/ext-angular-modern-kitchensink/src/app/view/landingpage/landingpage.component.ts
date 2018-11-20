@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentRef, ComponentFactory } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ViewContainerRef,ElementRef, ComponentFactoryResolver, ComponentRef, ComponentFactory } from '@angular/core';
 import {navTreeRoot} from '../../../examples/index';
 
 import { Location } from '@angular/common';
@@ -46,13 +46,16 @@ export class LandingpageComponent implements OnInit {
   filterRegex;
   filterVal;
   showTreeFlag = true;
-  leafNode = true;;
+  leafNode = true;
+  style;
 
   
   treeStore = Ext.create('Ext.data.TreeStore', {
     rootVisible: true,
     root: navTreeRoot
   });  
+
+  @ViewChild('nonLeafElements') nonLeafEl: ElementRef;
 
   constructor(location: Location, private router: Router, changeDetectorRef: ChangeDetectorRef,
      private resolver: ComponentFactoryResolver) {
@@ -76,9 +79,17 @@ export class LandingpageComponent implements OnInit {
           console.log("Children el length : " + this.node.childNodes.length);
           if(this.node.childNodes.length == 0) {
             this.leafNode = true;
+            //this.nonLeafEl.nativeElement.style="{display:none}";
+            this.style =  {
+              display:'none'
+            }
           }
           else {
             this.leafNode = false;
+            //his.nonLeafEl.nativeElement.style="{display:block}";
+            this.style =  {
+              display:'block'
+            }
           }
           console.log("leafNode :" + this.leafNode);
           this.breadcrumb = generateBreadcrumb(this.node);
@@ -97,6 +108,21 @@ export class LandingpageComponent implements OnInit {
 
 
   ngOnInit() {
+    this.node = this.treeStore.getNodeById(location.pathname);
+    if(this.node.childNodes.length == 0) {
+      this.leafNode = true;
+      //this.nonLeafEl.nativeElement.style="{display:none}";
+      this.style =  {
+        display:'none'
+      }
+    }
+    else {
+      this.leafNode = false;
+      this.style =  {
+        display:'block'
+      }
+      //this.nonLeafEl.nativeElement.style="{display:block}";
+    }
     this.node$.next(this.treeStore.getNodeById(location.pathname));
   } 
 

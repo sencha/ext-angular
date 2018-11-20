@@ -48,20 +48,52 @@
       <!-- docked="top" node={selectedNavNode} -->
   
       <toolbar #item [docked]="'top'">
-        <button #item 
-        [text]="nodeText" 
-        [ui]="app-breadcrumb"
-        [handler]="navigate"
-        ></button>
+
+        <container #item *ngFor="let segment of breadcrumb">
+          <button #item
+          [text]="segment.text"
+          [cls]="'breadcrumb-button'"
+          (tap)="navigate(segment.path)"
+          >
+          </button>
+          <button #item *ngIf="segment.path != node.id"
+            [cls]="'x-font-icon md-icon-keyboard-arrow-right'" 
+            [style]="'
+              color: #666;
+              font-size: 20px;
+              line-height: 32px,;
+              vertical-align: middle;
+            '"
+            [text]="'>'"
+          ></button>
+        </container>
+
+
       </toolbar>  
       <!-- Breadcrums ends-->
 
       <!-- examples start-->
   
-      <container #item [layout]="layout" [scrollable]="true"  [autoSize]="layout !== 'fit'">
-        <container #item [padding]="30" [layout]="'fit'">
-            <router-outlet #item></router-outlet>
+      <container #item [layout]="fit" [scrollable]="true"  [autoSize]="layout !== 'fit'">
+        <container #item [padding]="30" [layout]="'hbox'" [centered]="true" [scrollable]="true">
+
+          
+              <div #item #nonLeafElements [style]="style" >
+                <div   class="app-thumbnail" *ngFor="let child of node.childNodes" >
+                  <div  class="app-thumbnail-icon-wrap" (click)="navigate(child.id)">
+                    <div   class="app-thumbnail-icon" [ngClass]="child.data.navIcon"></div>
+                  </div>
+                  <div  className="app-thumbnail-text">{{child.data.name}}</div>
+                </div>
+              </div>
+              <container></container>
+
         </container> 
+        <container #item [padding]="30" [layout]="'hbox'" [centered]="true" [scrollable]="true">
+            <router-outlet #item></router-outlet>
+        </container>
+
+     
       </container>
   
       <!-- examples end-->
