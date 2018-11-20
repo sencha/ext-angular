@@ -59,7 +59,7 @@ import {SheetComponent} from "../examples/Sheet/Sheet"
 import {ProgressBarComponent} from "../examples/ProgressBar/ProgressBar"
 import {TitleBarComponent} from "../examples/TitleBar/TitleBar"
 import {ToolBarComponent} from "../examples/ToolBar/ToolBar"
-
+import {ToolTipComponent} from "../examples/ToolTip/ToolTip"
 
 import {CalendarService} from "../examples/Calendar/Calendar.service"
 
@@ -147,7 +147,7 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/progressbar', component: ProgressBarComponent, text: 'Progress Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/titlebar', component: TitleBarComponent, text: 'Title Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/toolbar', component: ToolBarComponent, text: 'Tool Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-
+	{ path: 'components/tooltip', component: ToolTipComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
 
 ];
@@ -200,7 +200,8 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 		SheetComponent,
 		ProgressBarComponent,
 		TitleBarComponent,
-		ToolBarComponent
+		ToolBarComponent,
+		ToolTipComponent
 
 	],
 	providers: [

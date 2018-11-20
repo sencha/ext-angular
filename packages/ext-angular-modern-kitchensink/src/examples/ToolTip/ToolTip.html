@@ -1,0 +1,55 @@
+<panel #item [layout]="'vbox'" shadow bodyPadding="20" [defaults]="containerDefaults">
+    <container #item [layout]="{
+        type: isPhone ? 'vbox' : 'hbox', 
+        align: 'start', 
+        pack: 'center' 
+    }" [defaults]="buttonDefaults">
+        <button #item text="Basic Tip" >
+            <tooltip #item>A simple tooltip</tooltip>
+        </button>
+        <button #item text="autoHide: false">
+            <tooltip #item [showOnTap]="true" [autoHide]="false" [title]="'Tip Title'" closable>A simple tooltip</tooltip>
+        </button>
+        <button #item text="Mouse Track">
+            <tooltip #item [showOnTap]="true" [title]="'Mouse Track'" [trackMouse]="true">This tip will follow the mouse while it is over the element</tooltip>
+        </button>
+    </container>
+    <container #item [layout]="{
+        type: isPhone ? 'vbox' : 'hbox', 
+        align: 'start', 
+        pack: 'center' 
+    }" [defaults]="buttonDefaults">
+        <button #item text="Anchor Right, Rich Content" >
+            <tooltip #item showOnTap align="tl-tr" anchorToTarget anchor>
+                <ul #item [style]="{marginBottom: '15px'}">
+                    <li #item>5 bedrooms</li>
+                    <li #item>Close to transport</li>
+                    <li #item>Large backyard</li>
+                </ul>
+                <img #item [style]="{width: '400px', height: '300px'}" src="resources/images/house.jpg" />
+            </tooltip>
+        </button>
+        <button #item text="Anchor Below">
+            <tooltip #item showOnTap align="tc-bc" anchor anchorToTarget>The anchor is centered</tooltip>
+        </button>
+        <button #item text="Anchor with Tracking">
+            <tooltip #item showOnTap trackMouse anchor align="l-r">Following the mouse with an anchor</tooltip>
+        </button>
+    </container>
+
+    <container #item [layout]="{
+        type: isPhone ? 'vbox' : 'hbox', 
+        align: 'start', 
+        pack: 'center' 
+    }" >
+    <!-- Why does div not work in hbox when button does?-->
+        <div #item style="width: 150px;margin: 0 15px 0 0;color: white;padding: 5px 10px;text-align: center;cursor: default; background-color: #e91e63"
+            data-qtip="This tip is inline" data-qshowOnTap="true">Inline Tip</div>
+        <div #item style="width: 150px;margin: 0 15px 0 0;color: white;padding: 5px 10px;text-align: center;cursor: default; background-color: #2196f3"
+            data-qtip="This tip has a fixed width" data-qwidth="400" data-qshowOnTap="true">Fixed width inline tip</div>
+        <div #item style="width: 150px;margin: 0 15px 0 0;color: white;padding: 5px 10px;text-align: center;cursor: default; background-color: #ff5722"
+            data-qtip="This tip has a title" data-qtitle="The title" data-qshowOnTap="true">Inline tip with title</div>
+        <div #item style="width: 150px;margin: 0 15px 0 0;color: white;padding: 5px 10px;text-align: center;cursor: default; background-color: #607d8b"
+            data-qtip="Aligned top" data-qalign="bl-tl" data-qanchorToTarget="true" data-qshowOnTap="true">Inline tip align top</div>
+    </container>
+</panel>
