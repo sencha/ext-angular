@@ -10,8 +10,11 @@ if (environment.production) {
 declare var Ext: any;
 Ext.application({
   name: '$ExtAngularApp',
+  quickTips: true,
   launch: () => {
+    //Ext.tip.QuickTipManager.init()
+    //Ext.QuickTips.init()
     platformBrowserDynamic().bootstrapModule(AppModule)
-      .catch(err => console.error(err));
+      .catch(err => console.error(err))
   }
 })

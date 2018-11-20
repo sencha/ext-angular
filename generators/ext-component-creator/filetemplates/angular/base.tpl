@@ -15,7 +15,12 @@ export class base {
     //console.log('constructor');console.log(el.nativeElement)
     this._nativeElement = el.nativeElement
     metaData.EVENTS.forEach( (event: any, n: any) => {
-      (<any>this)[event.name] = new EventEmitter()
+      if (event.name != 'fullscreen') {
+        (<any>this)[event.name] = new EventEmitter()
+      }
+      else {
+        (<any>this)[event.name + 'event'] = new EventEmitter()
+      }
     })
   }
 
@@ -65,6 +70,11 @@ export class base {
     o.xtype = metaData.XTYPE
     for (var i = 0; i < me.metaData.PROPERTIES.length; i++) { 
       var prop = me.metaData.PROPERTIES[i];
+      if (prop == 'handler') {
+        if (me[prop] != undefined) {
+          o[prop] = me[prop]
+        }
+      }
       //need to handle listeners coming in here
       if ((o.xtype === 'cartesian' || o.xtype === 'polar') && prop === 'layout') {
       }
@@ -72,6 +82,7 @@ export class base {
         if (me[prop] != undefined && 
             prop != 'listeners' && 
             prop != 'config' && 
+            prop != 'handler' && 
             prop != 'fitToParent') { 
           o[prop] = me[prop]; 
         }
@@ -141,7 +152,7 @@ export class base {
             }
           } else if (childxtype === 'tooltip') {
             parentCmp.setTooltip(childCmp)
-          } else if (parentxtype === 'plugin') {
+          } else if (childxtype === 'plugin') {
             parentCmp.setPlugin(childCmp)
           } else if (parentxtype === 'button') {
             if (childxtype === 'menu') {
