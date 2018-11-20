@@ -18,6 +18,7 @@ export class AudioComponent implements OnInit {
   //@ViewChild('audioRef') audioRef: ElementRef<AudioComponent>;
 
   ngOnInit() {
+    console.log("isAndroid : " + this.isAndroid);
     //this is not correct. Need a proper way to reference audio.
     //this.audio = this.audioRef.nativeElement;
   }

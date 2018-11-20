@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnChanges ,
-  ElementRef,
-  Renderer,
-  ViewChild,
-  SimpleChanges
-} from '@angular/core'
+import {Component, OnInit} from '@angular/core'
 
 declare var Ext: any;
 
@@ -32,7 +24,6 @@ export class RippleComponent implements OnInit  {
   constructor() { }
 
   clickHandler = (event) => {
-    console.log('....In clickHandler enabling the ripple effect using Ext....');
     Ext.get(event.target).ripple(event, {})
   }
 

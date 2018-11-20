@@ -10,7 +10,13 @@ import {CalendarDragResizeValidationComponent} from "./Calendar/DragResizeValida
 import {CalendarMonthViewComponent} from "./Calendar/MonthView/MonthView";
 import {CalendarTimezoneSupportComponent} from "./Calendar/TimezoneSupport/TimezoneSupport";
 import {CalendarWeekViewComponent} from "./Calendar/WeekView/WeekView";
+import {SheetComponent} from "./Sheet/Sheet";
 import {RippleComponent} from './Ripple/Ripple';
+import {ProgressBarComponent} from './ProgressBar/ProgressBar';
+import {TitleBarComponent} from './TitleBar/TitleBar';
+import {ToolBarComponent} from './ToolBar/ToolBar';
+import {ToolTipComponent} from './ToolTip/ToolTip';
+
 
 declare var Ext: any;
 
@@ -102,9 +108,9 @@ const treeRoot = {
                 { text: 'Msg', component: ButtonComponent, layout: 'center', navIcon: 'icon-overlays' },
                 { text: 'Toast', component: ButtonComponent, layout: 'center', navIcon: 'icon-toast-view' }
             ]},
-            { text: 'ProgressBar', component: ButtonComponent, layout: 'center', navIcon: 'icon-progress-decorated' },
+            { text: 'ProgressBar', component: ProgressBarComponent, layout: 'center', navIcon: 'icon-progress-decorated' },
             { text: 'Ripple', component: RippleComponent, layout: 'center', navIcon: 'icon-Ripple' },
-            { text: 'Sheet', component: ButtonComponent, layout: 'center', navIcon: 'icon-actionsheets' },
+            { text: 'Sheet', component: SheetComponent, layout: 'center', navIcon: 'icon-actionsheets' },
             { text: 'Tabs', navIcon: 'icon-tabs', children: [
                 { text: 'Basic Tabs', component: ButtonComponent, navIcon: 'icon-basic-tabs' },
                 { text: 'Bottom Tabs', component: ButtonComponent, navIcon: 'icon-bottom-tabs' },
@@ -114,9 +120,9 @@ const treeRoot = {
                 { text: 'ScrollingTabs', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Scrolling-Tabs' },
                 { text: 'TabBar', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Tab-Bar' }        
             ]},
-            { text: 'TitleBar', component: ButtonComponent, navIcon: 'icon-Title-Bar' },
-            { text: 'Toolbar', component: ButtonComponent, navIcon: 'icon-toolbar' },
-            { text: 'ToolTip', component: ButtonComponent, layout: 'center', navIcon: 'icon-tooltips'  },
+            { text: 'TitleBar', component: TitleBarComponent, navIcon: 'icon-Title-Bar' },
+            { text: 'Toolbar', component: ToolBarComponent, navIcon: 'icon-toolbar' },
+            { text: 'ToolTip', component: ToolTipComponent, layout: 'center', navIcon: 'icon-tooltips'  },
             { text: 'Touch Events', component: ButtonComponent, navIcon: 'icon-touch-events' },
             //{ text: 'Transition', component: Transition, navIcon: 'icon-Transition' },
             { text: 'Wizard', component: ButtonComponent, navIcon: 'icon-layout-card-indicator', layout: Ext.os.is.Phone ? 'fit': 'center' },

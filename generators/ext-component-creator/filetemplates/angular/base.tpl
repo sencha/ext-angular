@@ -139,7 +139,7 @@ export class base {
             if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
               parentCmp.addColumn(childCmp)
             }
-          } else if (parentxtype === 'tooltip') {
+          } else if (childxtype === 'tooltip') {
             parentCmp.setTooltip(childCmp)
           } else if (parentxtype === 'plugin') {
             parentCmp.setPlugin(childCmp)

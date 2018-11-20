@@ -9,7 +9,38 @@ if (environment.production) {
   enableProdMode();
 }
 
+/*
 Ext.onReady(() => {
   platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
 })
+*/
+
+var lauchFunc = function() {
+      platformBrowserDynamic().bootstrapModule(AppModule)
+        .catch(err => console.error(err));
+}
+
+
+Ext.onReady(() => {
+  lauchFunc();
+})
+
+
+/*
+Ext.application({
+    name: '$ExtAngularApp',
+    launch: () => lauchFunc()
+  })
+  
+
+*/
+
+/*
+Ext.onReady(() => {
+  Ext.application({
+      name: '$ExtAngularApp',
+      launch: lauchFunc
+  })
+})
+*/

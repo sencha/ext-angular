@@ -149,7 +149,7 @@ export class base {
                             parentCmp.addColumn(childCmp);
                         }
                     }
-                    else if (parentxtype === 'tooltip') {
+                    else if(childxtype === 'tooltip') {
                         parentCmp.setTooltip(childCmp);
                     }
                     else if (parentxtype === 'plugin') {
