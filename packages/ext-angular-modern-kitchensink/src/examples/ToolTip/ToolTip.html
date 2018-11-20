@@ -5,13 +5,13 @@
         pack: 'center' 
     }" [defaults]="buttonDefaults">
         <button #item text="Basic Tip" >
-            <tooltip #item>A simple tooltip</tooltip>
+            <tooltip #item><div #item>A simple tooltip</div></tooltip>
         </button>
         <button #item text="autoHide: false">
-            <tooltip #item [showOnTap]="true" [autoHide]="false" [title]="'Tip Title'" closable>A simple tooltip</tooltip>
+            <tooltip #item [showOnTap]="true" [autoHide]="false" [title]="'Tip Title'" closable><div #item> A simple tooltip</div></tooltip>
         </button>
         <button #item text="Mouse Track">
-            <tooltip #item [showOnTap]="true" [title]="'Mouse Track'" [trackMouse]="true">This tip will follow the mouse while it is over the element</tooltip>
+            <tooltip #item [showOnTap]="true" [title]="'Mouse Track'" [trackMouse]="true"><div #item> This tip will follow the mouse while it is over the element</div></tooltip>
         </button>
     </container>
     <container #item [layout]="{
@@ -20,7 +20,7 @@
         pack: 'center' 
     }" [defaults]="buttonDefaults">
         <button #item text="Anchor Right, Rich Content" >
-            <tooltip #item showOnTap align="tl-tr" anchorToTarget anchor>
+            <tooltip #item showOnTap="true" align="tl-tr" anchorToTarget="true" anchor="true">
                 <ul #item [style]="{marginBottom: '15px'}">
                     <li #item>5 bedrooms</li>
                     <li #item>Close to transport</li>
@@ -30,10 +30,10 @@
             </tooltip>
         </button>
         <button #item text="Anchor Below">
-            <tooltip #item showOnTap align="tc-bc" anchor anchorToTarget>The anchor is centered</tooltip>
+            <tooltip #item showOnTap="true" align="tc-bc" anchor="true" anchorToTarget=""><div #item>The anchor is centered</div></tooltip>
         </button>
         <button #item text="Anchor with Tracking">
-            <tooltip #item showOnTap trackMouse anchor align="l-r">Following the mouse with an anchor</tooltip>
+            <tooltip #item showOnTap="true" trackMouse="true" anchor="true" align="l-r"><div #item>Following the mouse with an anchor</div></tooltip>
         </button>
     </container>
 
