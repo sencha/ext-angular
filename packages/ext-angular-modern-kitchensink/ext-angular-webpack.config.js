@@ -25,7 +25,7 @@ module.exports = {
       profile: '', 
       environment: 'development', 
       verbose: 'no',
-      theme: 'theme-material',
+      theme: 'theme-kitchensink',
       packages: [
         'font-ext', 
         'ux', 
