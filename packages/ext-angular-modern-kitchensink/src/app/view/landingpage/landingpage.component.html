@@ -79,7 +79,7 @@
 
           
               <div #item #nonLeafElements [style]="style" >
-                <div   class="app-thumbnail" *ngFor="let child of node.childNodes" >
+                <div [style]="{display: inline-block}"   class="app-thumbnail" *ngFor="let child of node.childNodes" >
                   <div  class="app-thumbnail-icon-wrap" (click)="navigate(child.id)">
                     <div   class="app-thumbnail-icon" [ngClass]="child.data.navIcon"></div>
                   </div>

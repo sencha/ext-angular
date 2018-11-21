@@ -81,14 +81,16 @@ export class LandingpageComponent implements OnInit {
             this.leafNode = true;
             //this.nonLeafEl.nativeElement.style="{display:none}";
             this.style =  {
-              display:'none'
+              'display':'none',
+              'text-align': 'center'
             }
           }
           else {
             this.leafNode = false;
             //his.nonLeafEl.nativeElement.style="{display:block}";
             this.style =  {
-              display:'block'
+              'display':'block',
+              'text-align': 'center'
             }
           }
           console.log("leafNode :" + this.leafNode);
@@ -113,13 +115,15 @@ export class LandingpageComponent implements OnInit {
       this.leafNode = true;
       //this.nonLeafEl.nativeElement.style="{display:none}";
       this.style =  {
-        display:'none'
+        display:'none',
+        'text-align': 'center'
       }
     }
     else {
       this.leafNode = false;
       this.style =  {
-        display:'block'
+        display:'block',
+        'text-align': 'center'
       }
       //this.nonLeafEl.nativeElement.style="{display:block}";
     }

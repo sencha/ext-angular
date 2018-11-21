@@ -67,6 +67,15 @@ import {TitleBarComponent} from "../examples/TitleBar/TitleBar"
 import {ToolBarComponent} from "../examples/ToolBar/ToolBar"
 import {ToolTipComponent} from "../examples/ToolTip/ToolTip"
 
+import {EditableTreeComponent} from '../examples/Trees/EditableTree/EditableTree';
+import {HeterogeneousTreeComponent} from '../examples/Trees/HeterogeneousTree/HeterogeneousTree';
+import {TreeComponent} from '../examples/Trees/Tree/Tree';
+import {TreeDecorationsComponent} from '../examples/Trees/TreeDecorations/TreeDecorations';
+import {TreeGridComponent} from '../examples/Trees/TreeGrid/TreeGrid';
+import {TreeListComponent} from '../examples/Trees/TreeList/TreeList';
+
+
+
 import {CalendarService} from "../examples/Calendar/Calendar.service"
 
 
@@ -153,6 +162,13 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/toolbar', component: ToolBarComponent, text: 'Tool Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/tooltip', component: ToolTipComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
+	{ path: 'trees/editable_tree', component: EditableTreeComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'trees/heterogeneous_tree', component: HeterogeneousTreeComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'trees/tree', component: TreeComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'trees/tree_decorations', component: TreeDecorationsComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'trees/tree_grid', component: TreeGridComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'trees/treelist', component: TreeListComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
 
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
@@ -236,7 +252,16 @@ export class App {
 		ProgressBarComponent,
 		TitleBarComponent,
 		ToolBarComponent,
-		ToolTipComponent
+		ToolTipComponent,
+
+		EditableTreeComponent,
+		HeterogeneousTreeComponent,
+		TreeComponent,
+		TreeDecorationsComponent,
+		TreeGridComponent,
+		TreeListComponent
+
+
 
 	],
 	providers: [

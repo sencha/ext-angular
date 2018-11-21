@@ -13,5 +13,19 @@ Ext.application({
   launch: () => {
     platformBrowserDynamic().bootstrapModule(AppModule)
       .catch(err => console.error(err));
+  },
+  debug: false,
+  quickTips: {
+    tooltip: {
+        // show qtips on tap on mobile
+        showOnTap: true
+    },
+    overflowTip: {
+        // This means that mouseover (or a touch)
+        // cancels the auto dismiss timer to give the
+        // user an opportunity to read long text.
+        // Tap outside of the tip then closes it.
+        allowOver: true
+    }
   }
 })
