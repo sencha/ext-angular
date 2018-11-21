@@ -17,6 +17,12 @@ import {TitleBarComponent} from './TitleBar/TitleBar';
 import {ToolBarComponent} from './ToolBar/ToolBar';
 import {ToolTipComponent} from './ToolTip/ToolTip';
 
+import {EditableTreeComponent} from './Trees/EditableTree/EditableTree';
+import {HeterogeneousTreeComponent} from './Trees/HeterogeneousTree/HeterogeneousTree';
+import {TreeComponent} from './Trees/Tree/Tree';
+import {TreeDecorationsComponent} from './Trees/TreeDecorations/TreeDecorations';
+import {TreeGridComponent} from './Trees/TreeGrid/TreeGrid';
+import {TreeListComponent} from './Trees/TreeList/TreeList';
 
 declare var Ext: any;
 
@@ -151,12 +157,12 @@ const treeRoot = {
             { text: 'Redux Grid', component: ButtonComponent, navIcon: 'icon-Redux-Grid' }
         ] },
         { text: 'Trees', navIcon: 'icon-trees', children: [
-            { text: 'TreeList', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-tree-list' },
-            { text: 'Tree', premium: true, component: ButtonComponent, navIcon: 'icon-trees' },
-            { text: 'Editable Tree', premium: true, component: ButtonComponent, navIcon: 'icon-tree-editable'},
-            { text: 'Tree Grid', premium: true, component: ButtonComponent, navIcon: 'icon-tree-grid' },
-            { text: 'Tree Decorations', premium: true, component:ButtonComponent, navIcon: 'icon-tree-decorations'},
-            { text: 'Heterogeneous Tree', premium: true, component: ButtonComponent, navIcon: 'icon-heterogeneous-tree'}
+            { text: 'TreeList', component: TreeListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-tree-list' },
+            { text: 'Tree', premium: true, component: TreeComponent, navIcon: 'icon-trees' },
+            { text: 'Editable Tree', premium: true, component: EditableTreeComponent, navIcon: 'icon-tree-editable'},
+            { text: 'Tree Grid', premium: true, component: TreeGridComponent, navIcon: 'icon-tree-grid' },
+            { text: 'Tree Decorations', premium: true, component:TreeDecorationsComponent, navIcon: 'icon-tree-decorations'},
+            { text: 'Heterogeneous Tree', premium: true, component: HeterogeneousTreeComponent, navIcon: 'icon-heterogeneous-tree'}
         ] },
         { text: 'Calendar', premium: false, navIcon: 'icon-calendar', children:[
             { text: 'Calendar Panel', component: CalendarPanelComponent, navIcon: 'icon-calendar-panel' },
