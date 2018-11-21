@@ -10,37 +10,20 @@ if (environment.production) {
 }
 
 /*
+declare var Ext: any;
+Ext.application({
+  name: '$ExtAngularApp',
+  launch: () => {
+    platformBrowserDynamic().bootstrapModule(AppModule)
+      .catch(err => console.error(err));
+    console.log("Ext application launched. Angular bootstrap done!");
+  }
+})
+*/
+
+
 Ext.onReady(() => {
   platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
-})
-*/
-
-var lauchFunc = function() {
-      platformBrowserDynamic().bootstrapModule(AppModule)
-        .catch(err => console.error(err));
-}
-
-
-Ext.onReady(() => {
-  lauchFunc();
+    .catch(err => console.error(err));
 })
 
-
-/*
-Ext.application({
-    name: '$ExtAngularApp',
-    launch: () => lauchFunc()
-  })
-  
-
-*/
-
-/*
-Ext.onReady(() => {
-  Ext.application({
-      name: '$ExtAngularApp',
-      launch: lauchFunc
-  })
-})
-*/

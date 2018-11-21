@@ -141,7 +141,7 @@ export class base {
             }
           } else if (childxtype === 'tooltip') {
             parentCmp.setTooltip(childCmp)
-          } else if (parentxtype === 'plugin') {
+          } else if (childxtype === 'plugin') {
             parentCmp.setPlugin(childCmp)
           } else if (parentxtype === 'button') {
             if (childxtype === 'menu') {
