@@ -1,5 +1,13 @@
 import { Component } from '@angular/core'
 
+/**
+ *    <button #item 
+        (tap)="clickMe($event)" 
+        [text]="somedata">
+      </button>
+
+  Buttont takes up whole screen even if it is insde vbox    
+ */
 @Component({
   selector: 'ext-angular-root',
   template: `
