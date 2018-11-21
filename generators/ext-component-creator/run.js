@@ -19,7 +19,7 @@ async function main() {
   await run(`npm run build`, `../${folderName}/`)
   await run (`rm -R ../../packages/${folderName}`)
   await run(`cp -R ../ext-angular-modern/dist/${folderName} ../../packages/${folderName}`)
-  await run (`ls -l`, `../../packages/${folderName}/lib`)
+  //await run (`ls -l`, `../../packages/${folderName}/lib`)
 }
 
 function log(a,b) {console.log(a + ' ' + b)}

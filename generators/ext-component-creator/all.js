@@ -110,11 +110,24 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
 
   log(``,`**************`)
 
+  switch(framework) {
+    case 'angular':
+      moduleVars.imports = moduleVars.imports + `import { ExtTransitionComponent } from './ext-transition.component';${newLine}`
+      moduleVars.exports = moduleVars.exports + `    ExtTransitionComponent,${newLine}`
+      moduleVars.declarations = moduleVars.declarations + `    ExtTransitionComponent,${newLine}`
+      var transitionFile = `${libFolder}ext-transition.component.${extension}`
+      fs.writeFile(transitionFile, doTransition(templateToolkitFolder), function(err) {if(err){return console.log(err);} })
+      log(`transitionFile`,`${transitionFile}`)
+      break
+    default:
+      break
+    }
+
+
+
   // moduleVars.imports = moduleVars.imports.substring(0, moduleVars.imports.length - 2); moduleVars.imports = moduleVars.imports + ';' + newLine
   // moduleVars.imports = moduleVars.imports + `import { ExtClassComponent } from './ext-class.component';${newLine}`
-
   // moduleVars.exports = moduleVars.exports + `    ExtClassComponent${newLine}`
-
   // moduleVars.declarations = moduleVars.declarations + `    ExtClassComponent${newLine}`
 
 
@@ -255,8 +268,8 @@ function oneItem(o, libFolder, framework, extension, num, xtype, alias, moduleVa
   }
 
   moduleVars.imports = moduleVars.imports + `import { Ext${capclassname}Component } from './ext-${o.xtype}.component';${newLine}`
-  moduleVars.declarations = moduleVars.declarations + `    Ext${capclassname}Component,${newLine}`
   moduleVars.exports = moduleVars.exports + `    Ext${capclassname}Component,${newLine}`
+  moduleVars.declarations = moduleVars.declarations + `    Ext${capclassname}Component,${newLine}`
 
   //exportall = exportall + `export * from './lib/ext-${classname}.component';${newLine}`
 }
@@ -308,6 +321,12 @@ function doExtBase(templateToolkitFolder) {
 // export * from './${lib}ExtClass'
 // `
 // }
+
+function doTransition(templateToolkitFolder) {
+  var p = path.resolve(templateToolkitFolder + '/transition.tpl')
+  var content = fs.readFileSync(p).toString()
+  return content
+}
 
 function doPublic_Api(exportall, templateToolkitFolder) {
   //var p = path.resolve(__dirname, 'filetemplates/' + framework + '/public_api.tpl')

@@ -17,9 +17,7 @@ export class ButtonComponent implements OnInit, OnChanges  {
   menu;
   isPhone = Ext.os.is.Phone;
 
-
-  onStyleChange = function(item){
-    //debugger;
+  onStyleChange = (item) => {
     console.log("onStyleChange : " + item._text);
     this.style = item._text; 
   }
