@@ -1,25 +1,24 @@
-import { BrowserModule } from '@angular/platform-browser';
+
+declare var Ext: any
 import {
-	Component,
-	NgModule,
-	Injectable,
-	Injector,
-	ComponentFactoryResolver,
-	EmbeddedViewRef,
-	ApplicationRef} from '@angular/core'
+  Component,
+  NgModule,
+  Injectable,
+  Injector,
+  ComponentFactoryResolver,
+  EmbeddedViewRef,
+  ApplicationRef,
+  VERSION} from '@angular/core'
+import {BrowserModule} from '@angular/platform-browser'
+import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
+
 
 import * as d3 from 'd3'
 window['d3'] = d3
 
-declare var Ext: any;
-
-//ExtAngular
-import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
-
 //services
 import { AgencyService } from './service/agency.service';
 import {AppService} from './app.service';
-
 
 
 //in main
@@ -44,7 +43,6 @@ import { BoilerplateComponent } from './view/boilerplate/boilerplate.component';
 import { ConfiguratorComponent } from './view/configurator/configurator.component';
 import { LandingpageComponent } from './view/landingpage/landingpage.component';
 import { DummyComponent } from './view/landingpage/landingpage.component';
-
 
 import { Route, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from "@angular/core";
@@ -174,23 +172,21 @@ const routes: ExtAngularRoutes = [
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
 @Injectable()
-export class DomService {
+export class ExtAngularService {
   constructor(
       private componentFactoryResolver: ComponentFactoryResolver,
       private appRef: ApplicationRef,
       private injector: Injector
   ) {}
-
-  appendComponentToBody(component: any) {
+  appendComponentToViewport(component: any) {
     const componentRef = this.componentFactoryResolver
       .resolveComponentFactory(component)
       .create(this.injector)
     this.appRef.attachView(componentRef.hostView)
     const domElem = (componentRef.hostView as EmbeddedViewRef<any>)
-	  .rootNodes[0] as HTMLElement
-	var root = document.getElementsByClassName('x-viewport-body-el')[0]
-	console.log(root);
-    root.appendChild(domElem);
+      .rootNodes[0] as HTMLElement
+    var root = document.getElementsByClassName('x-viewport-body-el')[0]
+    root.appendChild(domElem)
   }
 }
 
@@ -199,12 +195,10 @@ export class DomService {
   template: ``,
 })
 export class App {
-  constructor(private domService: DomService) {
-    this.domService.appendComponentToBody(LandingpageComponent);
+  constructor(private ExtAngularService: ExtAngularService) {
+    this.ExtAngularService.appendComponentToViewport(LandingpageComponent);
   }
 }
-
-
 
 @NgModule({
   imports: [
@@ -268,7 +262,7 @@ export class App {
 		AgencyService,
 		CalendarService,
 		AppService,
-		DomService
+		ExtAngularService
 	],
 	entryComponents: [
 		SideBarComponent, 
@@ -276,7 +270,7 @@ export class App {
 		ChartComponent,
 		LandingpageComponent
 	],
-	bootstrap: [LandingpageComponent]
+	bootstrap: [App]
 })
 export class AppModule {
 

@@ -7,11 +7,11 @@
 
     <button #item ui="action raised" text="Style">
             <menu #item [defaults]="styleChangeDefaults">
-                <menuitem #item text="None" value="" [iconCls]="style === 'None'?'x-font-icon md-icon-check':''"></menuitem>
-                <menuitem #item text="Action" value="action" [iconCls]="style === 'Action'?'x-font-icon md-icon-check':''"></menuitem>
+                <menuitem #item text="None"    value=""        [iconCls]="style === 'None'?'x-font-icon md-icon-check':''"></menuitem>
+                <menuitem #item text="Action"  value="action"  [iconCls]="style === 'Action'?'x-font-icon md-icon-check':''"></menuitem>
                 <menuitem #item text="Decline" value="decline" [iconCls]="style === 'Decline'?'x-font-icon md-icon-check':''"></menuitem>
                 <menuitem #item text="Confirm" value="confirm" [iconCls]="style === 'Confirm'?'x-font-icon md-icon-check':''"></menuitem>
-                <menuitem #item text="Menu" value="menu" [iconCls]="style === 'Menu'?'x-font-icon md-icon-check':''"></menuitem>
+                <menuitem #item text="Menu"    value="menu"    [iconCls]="style === 'Menu'?'x-font-icon md-icon-check':''"></menuitem>
             </menu>
         </button>
         <button #item ui="action raised" text="Type">

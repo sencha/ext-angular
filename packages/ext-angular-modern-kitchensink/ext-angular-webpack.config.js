@@ -1,14 +1,6 @@
 const ExtWebpackPlugin = require('@sencha/ext-angular-webpack-plugin')
 const WebpackShellPlugin = require('webpack-shell-plugin-next')
-//const HtmlWebpackPlugin = require('html-webpack-plugin')
-/*
-    new HtmlWebpackPlugin({
-      template: 'index.html',
-      hash: true
-    }), 
-*/
 const path = require('path')
-//const sourcePath = path.join(__dirname, './src')
 
 module.exports = {
   context: path.join(__dirname, './'),

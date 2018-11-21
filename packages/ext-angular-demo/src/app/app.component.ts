@@ -13,12 +13,21 @@ import { Component } from '@angular/core'
   template: `
     <panel #item
       [title]="'Panel with children'"
-      [shadow]="'true'"
       [layout]="'vbox'">
-      <div #item>root div<div>{{somedata}}</div></div>
+      <div #item data-qtip="'hi'" >root div<div>{{somedata}}</div></div>
       
-      <div #item style="width: 150px;margin: 0 15px 0 0;color: white;padding: 5px 10px;text-align: center;cursor: default; background-color: #e91e63"
-      data-qtip="This tip is inline" data-qshowOnTap="true">Inline Tip</div>
+      <button #item
+        [flex]="'1'"
+        [handler]="clickMe"
+        [text]="somedata">
+      </button>
+
+      <button #item
+      [flex]="'1'"
+      [handler]="clickMe2.bind(this)"
+      [text]="'clickMe2'">
+    </button>
+
     </panel>
   `,
   styles: []
@@ -26,8 +35,16 @@ import { Component } from '@angular/core'
 export class AppComponent {
   somedata = 'this is the original text'
 
-  clickMe(event) {
+  clickMe = (event) => {
+    console.log('hey')
+    console.log(event)
     this.somedata = 'now the text has changed ' + Date.now()
+  }
+
+  clickMe2(event) {
+    console.log('hey from clickMe2')
+    console.log(event)
+    this.somedata = 'now the text has changed from clickMe2 ' + Date.now()
   }
 
 }
