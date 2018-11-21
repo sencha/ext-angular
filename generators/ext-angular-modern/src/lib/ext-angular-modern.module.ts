@@ -215,6 +215,7 @@ import { ExtRatingComponent } from './ext-rating.component';
 import { ExtVideoComponent } from './ext-video.component';
 import { ExtViewportComponent } from './ext-viewport.component';
 import { ExtWidgetComponent } from './ext-widget.component';
+import { ExtTransitionComponent } from './ext-transition.component';
 
 @NgModule({
   imports: [
@@ -435,7 +436,8 @@ import { ExtWidgetComponent } from './ext-widget.component';
     ExtRatingComponent,
     ExtVideoComponent,
     ExtViewportComponent,
-    ExtWidgetComponent
+    ExtWidgetComponent,
+    ExtTransitionComponent
   ],
   exports: [
     ExtActionsheetComponent,
@@ -653,7 +655,8 @@ import { ExtWidgetComponent } from './ext-widget.component';
     ExtRatingComponent,
     ExtVideoComponent,
     ExtViewportComponent,
-    ExtWidgetComponent
+    ExtWidgetComponent,
+    ExtTransitionComponent
   ]
 })
 export class ExtAngularModernModule { }
