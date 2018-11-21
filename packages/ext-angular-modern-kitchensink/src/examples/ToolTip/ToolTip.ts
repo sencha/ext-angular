@@ -21,7 +21,9 @@ export class ToolTipComponent implements OnInit {
 
     
 
-  ructor() { }
+    
+
+  constructor() { }
 
 
 

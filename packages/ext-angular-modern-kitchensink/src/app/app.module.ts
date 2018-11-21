@@ -1,5 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {
+	Component,
+	NgModule,
+	Injectable,
+	Injector,
+	ComponentFactoryResolver,
+	EmbeddedViewRef,
+	ApplicationRef} from '@angular/core'
 
 import * as d3 from 'd3'
 window['d3'] = d3
@@ -13,7 +20,6 @@ import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
 import { AgencyService } from './service/agency.service';
 import {AppService} from './app.service';
 
-import { LayoutComponent } from './layout.component';
 
 
 //in main
@@ -61,9 +67,16 @@ import {TitleBarComponent} from "../examples/TitleBar/TitleBar"
 import {ToolBarComponent} from "../examples/ToolBar/ToolBar"
 import {ToolTipComponent} from "../examples/ToolTip/ToolTip"
 
+import {EditableTreeComponent} from '../examples/Trees/EditableTree/EditableTree';
+import {HeterogeneousTreeComponent} from '../examples/Trees/HeterogeneousTree/HeterogeneousTree';
+import {TreeComponent} from '../examples/Trees/Tree/Tree';
+import {TreeDecorationsComponent} from '../examples/Trees/TreeDecorations/TreeDecorations';
+import {TreeGridComponent} from '../examples/Trees/TreeGrid/TreeGrid';
+import {TreeListComponent} from '../examples/Trees/TreeList/TreeList';
+
+
+
 import {CalendarService} from "../examples/Calendar/Calendar.service"
-
-
 
 
 interface ExtAngularRoute extends Route {
@@ -149,9 +162,47 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/toolbar', component: ToolBarComponent, text: 'Tool Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/tooltip', component: ToolTipComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
+	{ path: 'trees/editable_tree', component: EditableTreeComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'trees/heterogeneous_tree', component: HeterogeneousTreeComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'trees/tree', component: TreeComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'trees/tree_decorations', component: TreeDecorationsComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'trees/tree_grid', component: TreeGridComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'trees/treelist', component: TreeListComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
 
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
+
+@Injectable()
+export class DomService {
+  constructor(
+      private componentFactoryResolver: ComponentFactoryResolver,
+      private appRef: ApplicationRef,
+      private injector: Injector
+  ) {}
+
+  appendComponentToBody(component: any) {
+    const componentRef = this.componentFactoryResolver
+      .resolveComponentFactory(component)
+      .create(this.injector)
+    this.appRef.attachView(componentRef.hostView)
+    const domElem = (componentRef.hostView as EmbeddedViewRef<any>)
+	  .rootNodes[0] as HTMLElement
+	var root = document.getElementsByClassName('x-viewport-body-el')[0]
+	console.log(root);
+    root.appendChild(domElem);
+  }
+}
+
+@Component({
+  selector: 'app-root',
+  template: ``,
+})
+export class App {
+  constructor(private domService: DomService) {
+    this.domService.appendComponentToBody(LandingpageComponent);
+  }
+}
 
 
 
@@ -162,7 +213,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
     routingModule
   ],
 	declarations: [
-    LayoutComponent,
+		App,
 
 		DetailComponent,
 		FooterComponent,
@@ -201,21 +252,29 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 		ProgressBarComponent,
 		TitleBarComponent,
 		ToolBarComponent,
-		ToolTipComponent
+		ToolTipComponent,
+
+		EditableTreeComponent,
+		HeterogeneousTreeComponent,
+		TreeComponent,
+		TreeDecorationsComponent,
+		TreeGridComponent,
+		TreeListComponent
+
+
 
 	],
 	providers: [
 		AgencyService,
-
 		CalendarService,
-
-		AppService
+		AppService,
+		DomService
 	],
 	entryComponents: [
 		SideBarComponent, 
 		FooterComponent, 
 		ChartComponent,
-		ButtonComponent
+		LandingpageComponent
 	],
 	bootstrap: [LandingpageComponent]
 })
@@ -230,3 +289,6 @@ export class AppModule {
 
 
  }
+
+
+
