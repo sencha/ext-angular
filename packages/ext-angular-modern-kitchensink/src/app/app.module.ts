@@ -72,9 +72,16 @@ import {TreeDecorationsComponent} from '../examples/Trees/TreeDecorations/TreeDe
 import {TreeGridComponent} from '../examples/Trees/TreeGrid/TreeGrid';
 import {TreeListComponent} from '../examples/Trees/TreeList/TreeList';
 
+import {BasicGridComponent} from '../examples/Grid//BasicGrid/BasicGrid';
+import {EditableGridComponent} from '../examples/Grid//EditableGrid/EditableGrid';
+import {GroupedGridComponent} from '../examples/Grid//GroupedGrid/GroupedGrid';
+import {ReduxGridComponent} from '../examples/Grid//ReduxGrid/ReduxGrid';
+import {XMLGridComponent} from '../examples/Grid//XMLGrid/XMLGrid';
+
 
 
 import {CalendarService} from "../examples/Calendar/Calendar.service"
+import {GridService} from '../examples/Grid/Grid.service'
 
 
 interface ExtAngularRoute extends Route {
@@ -160,14 +167,18 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/toolbar', component: ToolBarComponent, text: 'Tool Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/tooltip', component: ToolTipComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
-	{ path: 'trees/editable_tree', component: EditableTreeComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'trees/heterogeneous_tree', component: HeterogeneousTreeComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'trees/tree', component: TreeComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'trees/tree_decorations', component: TreeDecorationsComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'trees/tree_grid', component: TreeGridComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'trees/treelist', component: TreeListComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'trees/editable_tree', component: EditableTreeComponent, text: 'Editable Tree', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'trees/heterogeneous_tree', component: HeterogeneousTreeComponent, text: 'Hetrogeneous Tree', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'trees/tree', component: TreeComponent, text: 'Tree', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'trees/tree_decorations', component: TreeDecorationsComponent, text: 'Tree Decorations', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'trees/tree_grid', component: TreeGridComponent, text: 'Tree Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'trees/treelist', component: TreeListComponent, text: 'Tree List', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
-
+	{ path: 'grids/core_features/basic_grid', component: BasicGridComponent, text: 'Basic Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'grids/core_features/grouped_grid', component: GroupedGridComponent, text: 'Grouped Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'grids/core_features/editable_grid', component: EditableGridComponent, text: 'Editable Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'grids/core_features/xml_grid', component: XMLGridComponent, text: 'XML Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'grids/redux_grid', component: ReduxGridComponent, text: 'Redux grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
@@ -253,14 +264,20 @@ export class App {
 		TreeComponent,
 		TreeDecorationsComponent,
 		TreeGridComponent,
-		TreeListComponent
+		TreeListComponent,
 
+		BasicGridComponent,
+		EditableGridComponent,
+		GroupedGridComponent,
+		ReduxGridComponent,
+		XMLGridComponent
 
 
 	],
 	providers: [
 		AgencyService,
 		CalendarService,
+		GridService,
 		AppService,
 		ExtAngularService
 	],

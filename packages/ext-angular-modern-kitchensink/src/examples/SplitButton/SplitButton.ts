@@ -11,7 +11,7 @@ export class SplitButtonComponent implements OnInit {
 
     isPhone = Ext.os.is.Phone;
 
-    style = 'Menu';
+    style = 'None';
     type = 'Text';
     round = false;
     iconCls:string;
