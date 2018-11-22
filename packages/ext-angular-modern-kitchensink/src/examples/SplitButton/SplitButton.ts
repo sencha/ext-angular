@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 declare var Ext: any;
 
@@ -9,28 +9,35 @@ declare var Ext: any;
 })
 export class SplitButtonComponent implements OnInit {
 
-    style= 'None';
-    type= 'Text';
-    round= false;
-
-
-    menu;
-    ui;
-    iconCls;
     isPhone = Ext.os.is.Phone;
+
+    style = 'Menu';
+    type = 'Text';
+    round = false;
+    iconCls:string;
+    text = true;
+    ui:string;
+    menu = true;
 
   constructor() { }
 
-  onStyleChange = function(item){
-    //debugger;
+  onStyleChange = (item) => {
     console.log("onStyleChange : " + item._text);
     this.style = item._text; 
+    if (this.style === 'Menu') {
+      this.menu = true;
+    } else {
+        this.ui = this.style.toLowerCase();
+        this.menu=false;
+    }
   }
 
-  onTypeChange = function(item){
-    //debugger;
+  onTypeChange = (item) => {
     console.log("onTypeChange : " + item._text);
     this.type = item._text; 
+    console.log("this.type : " + this.type);
+    this.iconCls = this.type.indexOf('Icon') !== -1 ? 'x-fa fa-heart' : null;
+    this.text = this.type.indexOf('Text') !== -1;
   }
 
   toggleRound = function(){
@@ -38,21 +45,14 @@ export class SplitButtonComponent implements OnInit {
     console.log("In toggleRound");
     this.round=!this.round;
     console.log("Round: " + this.round);
+    if (this.round) { 
+      this.ui += ' round';
+    }
+    else {
+      this.ui = this.ui.replace(' round', '');
+    }
   };
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.iconCls = this.type.indexOf('icon') !== -1 ? 'x-fa fa-heart' : null;
-
-    if (this.style === 'menu') {
-        this.menu = '<menu #item [indented]="false"><menuitem #item  text="Item 1"></menuitem><menuitem #item  text="Item 2"/></menuitem><menuitem #item  text="Item 3"></menuitem></menu>';
-    } else {
-        this.ui = this.style.toLowerCase();
-    }
-
-    if (this.round) {
-        this.ui += ' round';
-    }
-  }
 
 
 
