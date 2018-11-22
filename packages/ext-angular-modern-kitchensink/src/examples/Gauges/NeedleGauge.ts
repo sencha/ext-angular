@@ -14,7 +14,7 @@ export class NeedleGaugeComponent implements OnInit  {
 
   value:number = 30;
 
-  updateGauge(event) {
+  updateGauges(event) {
     if(this.value === event.oldValue[0]){
       this.value = event.newValue;
     }

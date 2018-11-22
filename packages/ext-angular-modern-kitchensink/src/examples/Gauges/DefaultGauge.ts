@@ -14,7 +14,7 @@ export class DefaultGaugeComponent implements OnInit  {
 
   value:number = 40;
 
-  updateGauge(event) {
+  updateGauges = (event) => {
     if(this.value === event.oldValue[0]){
       this.value = event.newValue;
     }
