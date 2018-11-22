@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -347,5 +348,8 @@ export class ExtSliderComponent extends base implements OnInit,AfterContentInit,
   constructor(eRef:ElementRef) {super(eRef,sliderMetaData)}
   public ngOnInit() {this.baseOnInit(sliderMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

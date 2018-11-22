@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -177,5 +178,8 @@ export class ExtSurfaceComponent extends base implements OnInit,AfterContentInit
   constructor(eRef:ElementRef) {super(eRef,surfaceMetaData)}
   public ngOnInit() {this.baseOnInit(surfaceMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

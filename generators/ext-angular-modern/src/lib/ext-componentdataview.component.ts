@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -501,5 +502,8 @@ export class ExtComponentdataviewComponent extends base implements OnInit,AfterC
   constructor(eRef:ElementRef) {super(eRef,componentdataviewMetaData)}
   public ngOnInit() {this.baseOnInit(componentdataviewMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

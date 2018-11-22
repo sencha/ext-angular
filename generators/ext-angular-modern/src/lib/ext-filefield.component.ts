@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -433,5 +434,8 @@ export class ExtFilefieldComponent extends base implements OnInit,AfterContentIn
   constructor(eRef:ElementRef) {super(eRef,filefieldMetaData)}
   public ngOnInit() {this.baseOnInit(filefieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

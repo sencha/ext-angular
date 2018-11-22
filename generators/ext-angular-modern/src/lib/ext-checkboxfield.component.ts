@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -401,5 +402,8 @@ export class ExtCheckboxfieldComponent extends base implements OnInit,AfterConte
   constructor(eRef:ElementRef) {super(eRef,checkboxfieldMetaData)}
   public ngOnInit() {this.baseOnInit(checkboxfieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

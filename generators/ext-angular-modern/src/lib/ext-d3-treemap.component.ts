@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -383,5 +384,8 @@ export class ExtD3_treemapComponent extends base implements OnInit,AfterContentI
   constructor(eRef:ElementRef) {super(eRef,d3_treemapMetaData)}
   public ngOnInit() {this.baseOnInit(d3_treemapMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

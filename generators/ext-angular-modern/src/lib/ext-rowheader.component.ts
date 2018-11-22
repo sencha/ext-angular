@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -329,5 +330,8 @@ export class ExtRowheaderComponent extends base implements OnInit,AfterContentIn
   constructor(eRef:ElementRef) {super(eRef,rowheaderMetaData)}
   public ngOnInit() {this.baseOnInit(rowheaderMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

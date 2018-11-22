@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -319,5 +320,8 @@ export class ExtSpacerComponent extends base implements OnInit,AfterContentInit,
   constructor(eRef:ElementRef) {super(eRef,spacerMetaData)}
   public ngOnInit() {this.baseOnInit(spacerMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

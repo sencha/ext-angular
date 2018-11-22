@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -473,5 +474,8 @@ export class ExtActionsheetComponent extends base implements OnInit,AfterContent
   constructor(eRef:ElementRef) {super(eRef,actionsheetMetaData)}
   public ngOnInit() {this.baseOnInit(actionsheetMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

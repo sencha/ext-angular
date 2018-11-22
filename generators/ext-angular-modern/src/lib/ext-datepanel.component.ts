@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -529,5 +530,8 @@ export class ExtDatepanelComponent extends base implements OnInit,AfterContentIn
   constructor(eRef:ElementRef) {super(eRef,datepanelMetaData)}
   public ngOnInit() {this.baseOnInit(datepanelMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

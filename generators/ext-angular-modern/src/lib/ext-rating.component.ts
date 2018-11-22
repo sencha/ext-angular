@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -347,5 +348,8 @@ export class ExtRatingComponent extends base implements OnInit,AfterContentInit,
   constructor(eRef:ElementRef) {super(eRef,ratingMetaData)}
   public ngOnInit() {this.baseOnInit(ratingMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

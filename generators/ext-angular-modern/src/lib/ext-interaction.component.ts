@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -47,5 +48,8 @@ export class ExtInteractionComponent extends base implements OnInit,AfterContent
   constructor(eRef:ElementRef) {super(eRef,interactionMetaData)}
   public ngOnInit() {this.baseOnInit(interactionMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

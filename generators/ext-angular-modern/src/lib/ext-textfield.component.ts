@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -427,5 +428,8 @@ export class ExtTextfieldComponent extends base implements OnInit,AfterContentIn
   constructor(eRef:ElementRef) {super(eRef,textfieldMetaData)}
   public ngOnInit() {this.baseOnInit(textfieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -335,5 +336,8 @@ export class ExtD3Component extends base implements OnInit,AfterContentInit,OnCh
   constructor(eRef:ElementRef) {super(eRef,d3MetaData)}
   public ngOnInit() {this.baseOnInit(d3MetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

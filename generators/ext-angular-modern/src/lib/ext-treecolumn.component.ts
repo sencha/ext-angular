@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -461,5 +462,8 @@ export class ExtTreecolumnComponent extends base implements OnInit,AfterContentI
   constructor(eRef:ElementRef) {super(eRef,treecolumnMetaData)}
   public ngOnInit() {this.baseOnInit(treecolumnMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

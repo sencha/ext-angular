@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -323,5 +324,8 @@ export class ExtThumbComponent extends base implements OnInit,AfterContentInit,O
   constructor(eRef:ElementRef) {super(eRef,thumbMetaData)}
   public ngOnInit() {this.baseOnInit(thumbMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

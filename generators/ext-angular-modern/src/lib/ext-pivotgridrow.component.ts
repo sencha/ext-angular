@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -331,5 +332,8 @@ export class ExtPivotgridrowComponent extends base implements OnInit,AfterConten
   constructor(eRef:ElementRef) {super(eRef,pivotgridrowMetaData)}
   public ngOnInit() {this.baseOnInit(pivotgridrowMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

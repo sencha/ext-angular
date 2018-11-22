@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -353,5 +354,8 @@ export class ExtMenuitemComponent extends base implements OnInit,AfterContentIni
   constructor(eRef:ElementRef) {super(eRef,menuitemMetaData)}
   public ngOnInit() {this.baseOnInit(menuitemMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

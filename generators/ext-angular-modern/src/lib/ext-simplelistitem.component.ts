@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -329,5 +330,8 @@ export class ExtSimplelistitemComponent extends base implements OnInit,AfterCont
   constructor(eRef:ElementRef) {super(eRef,simplelistitemMetaData)}
   public ngOnInit() {this.baseOnInit(simplelistitemMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

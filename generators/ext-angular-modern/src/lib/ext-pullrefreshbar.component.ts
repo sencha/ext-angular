@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -339,5 +340,8 @@ export class ExtPullrefreshbarComponent extends base implements OnInit,AfterCont
   constructor(eRef:ElementRef) {super(eRef,pullrefreshbarMetaData)}
   public ngOnInit() {this.baseOnInit(pullrefreshbarMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

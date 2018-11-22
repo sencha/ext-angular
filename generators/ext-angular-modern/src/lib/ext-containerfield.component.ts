@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -393,5 +394,8 @@ export class ExtContainerfieldComponent extends base implements OnInit,AfterCont
   constructor(eRef:ElementRef) {super(eRef,containerfieldMetaData)}
   public ngOnInit() {this.baseOnInit(containerfieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

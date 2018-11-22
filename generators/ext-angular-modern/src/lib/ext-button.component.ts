@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -371,5 +372,8 @@ export class ExtButtonComponent extends base implements OnInit,AfterContentInit,
   constructor(eRef:ElementRef) {super(eRef,buttonMetaData)}
   public ngOnInit() {this.baseOnInit(buttonMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

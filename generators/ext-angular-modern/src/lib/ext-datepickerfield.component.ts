@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -457,5 +458,8 @@ export class ExtDatepickerfieldComponent extends base implements OnInit,AfterCon
   constructor(eRef:ElementRef) {super(eRef,datepickerfieldMetaData)}
   public ngOnInit() {this.baseOnInit(datepickerfieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

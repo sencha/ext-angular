@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -319,5 +320,8 @@ export class ExtEmptytextComponent extends base implements OnInit,AfterContentIn
   constructor(eRef:ElementRef) {super(eRef,emptytextMetaData)}
   public ngOnInit() {this.baseOnInit(emptytextMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

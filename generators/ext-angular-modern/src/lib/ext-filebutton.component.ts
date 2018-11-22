@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -379,5 +380,8 @@ export class ExtFilebuttonComponent extends base implements OnInit,AfterContentI
   constructor(eRef:ElementRef) {super(eRef,filebuttonMetaData)}
   public ngOnInit() {this.baseOnInit(filebuttonMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

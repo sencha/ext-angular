@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -383,5 +384,8 @@ export class ExtTabpanelComponent extends base implements OnInit,AfterContentIni
   constructor(eRef:ElementRef) {super(eRef,tabpanelMetaData)}
   public ngOnInit() {this.baseOnInit(tabpanelMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

@@ -7,6 +7,7 @@ import {
   EmbeddedViewRef,
   ApplicationRef,
   VERSION} from '@angular/core'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser'
 import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
 import { AppComponent } from './app.component'
@@ -42,7 +43,7 @@ export class App {
 }
 
 @NgModule({
-  imports: [ BrowserModule, ExtAngularModernModule ],
+  imports: [ BrowserModule, BrowserAnimationsModule, ExtAngularModernModule ],
   declarations: [ App, AppComponent ],
   bootstrap: [ App ],
   providers: [ DomService ],

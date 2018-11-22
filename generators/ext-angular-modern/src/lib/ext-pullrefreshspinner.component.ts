@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -325,5 +326,8 @@ export class ExtPullrefreshspinnerComponent extends base implements OnInit,After
   constructor(eRef:ElementRef) {super(eRef,pullrefreshspinnerMetaData)}
   public ngOnInit() {this.baseOnInit(pullrefreshspinnerMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -349,5 +350,8 @@ export class ExtSparklinediscreteComponent extends base implements OnInit,AfterC
   constructor(eRef:ElementRef) {super(eRef,sparklinediscreteMetaData)}
   public ngOnInit() {this.baseOnInit(sparklinediscreteMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

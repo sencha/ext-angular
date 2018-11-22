@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -339,5 +340,8 @@ export class ExtIndexbarComponent extends base implements OnInit,AfterContentIni
   constructor(eRef:ElementRef) {super(eRef,indexbarMetaData)}
   public ngOnInit() {this.baseOnInit(indexbarMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

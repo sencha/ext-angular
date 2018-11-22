@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -347,5 +348,8 @@ export class ExtSparklinebulletComponent extends base implements OnInit,AfterCon
   constructor(eRef:ElementRef) {super(eRef,sparklinebulletMetaData)}
   public ngOnInit() {this.baseOnInit(sparklinebulletMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -45,5 +46,8 @@ export class ExtPivotd3containerComponent extends base implements OnInit,AfterCo
   constructor(eRef:ElementRef) {super(eRef,pivotd3containerMetaData)}
   public ngOnInit() {this.baseOnInit(pivotd3containerMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

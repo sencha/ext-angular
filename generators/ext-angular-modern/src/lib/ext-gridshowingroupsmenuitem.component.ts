@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -367,5 +368,8 @@ export class ExtGridshowingroupsmenuitemComponent extends base implements OnInit
   constructor(eRef:ElementRef) {super(eRef,gridshowingroupsmenuitemMetaData)}
   public ngOnInit() {this.baseOnInit(gridshowingroupsmenuitemMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

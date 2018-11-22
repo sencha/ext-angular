@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -455,5 +456,8 @@ export class ExtSpinnerfieldComponent extends base implements OnInit,AfterConten
   constructor(eRef:ElementRef) {super(eRef,spinnerfieldMetaData)}
   public ngOnInit() {this.baseOnInit(spinnerfieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -457,5 +458,8 @@ export class ExtDatefieldComponent extends base implements OnInit,AfterContentIn
   constructor(eRef:ElementRef) {super(eRef,datefieldMetaData)}
   public ngOnInit() {this.baseOnInit(datefieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

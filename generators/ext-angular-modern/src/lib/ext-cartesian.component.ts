@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -467,5 +468,8 @@ export class ExtCartesianComponent extends base implements OnInit,AfterContentIn
   constructor(eRef:ElementRef) {super(eRef,cartesianMetaData)}
   public ngOnInit() {this.baseOnInit(cartesianMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

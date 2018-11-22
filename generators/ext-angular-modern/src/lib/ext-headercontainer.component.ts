@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -387,5 +388,8 @@ export class ExtHeadercontainerComponent extends base implements OnInit,AfterCon
   constructor(eRef:ElementRef) {super(eRef,headercontainerMetaData)}
   public ngOnInit() {this.baseOnInit(headercontainerMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

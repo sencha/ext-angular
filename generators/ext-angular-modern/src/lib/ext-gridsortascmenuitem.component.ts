@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -371,5 +372,8 @@ export class ExtGridsortascmenuitemComponent extends base implements OnInit,Afte
   constructor(eRef:ElementRef) {super(eRef,gridsortascmenuitemMetaData)}
   public ngOnInit() {this.baseOnInit(gridsortascmenuitemMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

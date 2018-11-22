@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -421,5 +422,8 @@ export class ExtMapComponent extends base implements OnInit,AfterContentInit,OnC
   constructor(eRef:ElementRef) {super(eRef,mapMetaData)}
   public ngOnInit() {this.baseOnInit(mapMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

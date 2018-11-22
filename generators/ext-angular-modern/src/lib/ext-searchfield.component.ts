@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -427,5 +428,8 @@ export class ExtSearchfieldComponent extends base implements OnInit,AfterContent
   constructor(eRef:ElementRef) {super(eRef,searchfieldMetaData)}
   public ngOnInit() {this.baseOnInit(searchfieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

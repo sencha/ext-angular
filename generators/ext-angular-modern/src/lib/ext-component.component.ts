@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -319,5 +320,8 @@ export class ExtComponentComponent extends base implements OnInit,AfterContentIn
   constructor(eRef:ElementRef) {super(eRef,componentMetaData)}
   public ngOnInit() {this.baseOnInit(componentMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -423,5 +424,8 @@ export class ExtCelleditorComponent extends base implements OnInit,AfterContentI
   constructor(eRef:ElementRef) {super(eRef,celleditorMetaData)}
   public ngOnInit() {this.baseOnInit(celleditorMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

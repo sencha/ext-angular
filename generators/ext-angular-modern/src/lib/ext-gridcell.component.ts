@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -203,5 +204,8 @@ export class ExtGridcellComponent extends base implements OnInit,AfterContentIni
   constructor(eRef:ElementRef) {super(eRef,gridcellMetaData)}
   public ngOnInit() {this.baseOnInit(gridcellMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

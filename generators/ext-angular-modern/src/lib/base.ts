@@ -1,5 +1,6 @@
 declare var Ext: any;
 import {
+  Output,
   ElementRef,
   EventEmitter,
   ContentChildren,
@@ -25,8 +26,8 @@ export class base {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(`ngOnChanges`)
-    console.log(changes)
+    //console.log(`ngOnChanges`)
+    //console.log(changes)
     let changesMsgs: string[] = []
     for (let propName in changes) {
       let verb = ''
@@ -48,7 +49,7 @@ export class base {
       }
       changesMsgs.push(`${propName} ${verb} to "${val}"`)
     }
-    console.log(`OnChanges: ${changesMsgs.join('; ')}`)
+    //console.log(`OnChanges: ${changesMsgs.join('; ')}`)
   }
 
   // Beware! Called frequently!
@@ -116,13 +117,7 @@ export class base {
     if (this._nativeElement.parentElement != null) {
       o.renderTo = this._nativeElement
     }
-    //console.log('before create for ' + o.xtype)
-    //Ext.onReady(function() {
-    //  me.ext = Ext.create(o)
-    //  console.log(me.ext)
-    //})
     this.ext = Ext.create(o)
-    //console.log(this.ext)
   }
 
   @ContentChildren('item') items: QueryList<any>
@@ -135,12 +130,12 @@ export class base {
         return
       }
       if (item.nativeElement != undefined) {
-        console.log('parent: ' + this.ext.xtype + ', child: ' + 'container')
+        //console.log('parent: ' + this.ext.xtype + ', child: ' + 'container')
         this.ext.add({xtype: 'container',html: item.nativeElement})
       }
       else {
         if (item.ext != undefined) {
-          console.log('parent: ' + this.ext.xtype + ', child: ' + item.ext.xtype)
+          //console.log('parent: ' + this.ext.xtype + ', child: ' + item.ext.xtype)
           var parentxtype = this.ext.xtype
           var childxtype = item.ext.xtype
           var parentCmp = this.ext

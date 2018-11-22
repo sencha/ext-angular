@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -453,5 +454,8 @@ export class ExtTimefieldComponent extends base implements OnInit,AfterContentIn
   constructor(eRef:ElementRef) {super(eRef,timefieldMetaData)}
   public ngOnInit() {this.baseOnInit(timefieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

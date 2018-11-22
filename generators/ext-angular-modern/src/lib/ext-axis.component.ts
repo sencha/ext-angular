@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -113,5 +114,8 @@ export class ExtAxisComponent extends base implements OnInit,AfterContentInit,On
   constructor(eRef:ElementRef) {super(eRef,axisMetaData)}
   public ngOnInit() {this.baseOnInit(axisMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

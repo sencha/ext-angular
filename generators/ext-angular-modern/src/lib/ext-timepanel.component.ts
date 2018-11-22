@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -477,5 +478,8 @@ export class ExtTimepanelComponent extends base implements OnInit,AfterContentIn
   constructor(eRef:ElementRef) {super(eRef,timepanelMetaData)}
   public ngOnInit() {this.baseOnInit(timepanelMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }
