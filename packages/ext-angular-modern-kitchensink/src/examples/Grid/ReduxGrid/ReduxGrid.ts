@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {store} from './store'
+
 declare var Ext: any;
 
 @Component({
-  selector: 'treedecorations-component',
-  templateUrl: './TreeDecorations.html',
+  selector: 'reduxgrid-component',
+  templateUrl: './ReduxGrid.html',
   styles: [``]
 })
-export class TreeDecorationsComponent implements OnInit {
+export class ReduxGridComponent implements OnInit {
 
   constructor() { }
 

@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {store} from './store'
+
 declare var Ext: any;
 
 @Component({
-  selector: 'treedecorations-component',
-  templateUrl: './TreeDecorations.html',
+  selector: 'groupedgrid-component',
+  templateUrl: './GroupedGrid.html',
   styles: [``]
 })
-export class TreeDecorationsComponent implements OnInit {
+export class GroupedGridComponent implements OnInit {
 
   constructor() { }
 

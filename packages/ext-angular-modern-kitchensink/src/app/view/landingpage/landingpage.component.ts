@@ -74,29 +74,38 @@ export class LandingpageComponent implements OnInit {
           console.log(`location.path(true): ${location.path(true)}`);
           console.log(`val: ${val}`);
           console.log(`nodeId: ${val.url}`);
-          this.node = this.treeStore.getNodeById(val.url);
+          var localNode = this.treeStore.getNodeById(val.url);
           console.log("Node changed: " + this.node.id);
           console.log("Children el length : " + this.node.childNodes.length);
-          if(this.node.childNodes.length == 0) {
-            this.leafNode = true;
-            //this.nonLeafEl.nativeElement.style="{display:none}";
-            this.style =  {
-              'display':'none',
-              'text-align': 'center'
+          if(localNode) {
+            this.node = localNode;
+            if(this.node.childNodes.length == 0) {
+              this.leafNode = true;
+              //this.nonLeafEl.nativeElement.style="{display:none}";
+              this.style =  {
+                'display':'none',
+                'text-align': 'center'
+              }
             }
+            else {
+              this.leafNode = false;
+              //his.nonLeafEl.nativeElement.style="{display:block}";
+              this.style =  {
+                'display':'block',
+                'text-align': 'center'
+              }
+            }
+            console.log("leafNode :" + this.leafNode);
+            this.breadcrumb = generateBreadcrumb(this.node);
+            console.log("breadcrumb : " + this.breadcrumb);
+            //this.node$.next(this.treeStore.getNodeById(val.url));
           }
           else {
-            this.leafNode = false;
-            //his.nonLeafEl.nativeElement.style="{display:block}";
-            this.style =  {
-              'display':'block',
-              'text-align': 'center'
-            }
+            console.log("Not a valid node. Probably looking at resources");
           }
-          console.log("leafNode :" + this.leafNode);
-          this.breadcrumb = generateBreadcrumb(this.node);
-          console.log("breadcrumb : " + this.breadcrumb);
-          //this.node$.next(this.treeStore.getNodeById(val.url));
+
+
+
         }
         
       });
@@ -110,24 +119,31 @@ export class LandingpageComponent implements OnInit {
 
 
   ngOnInit() {
-    this.node = this.treeStore.getNodeById(location.pathname);
-    if(this.node.childNodes.length == 0) {
-      this.leafNode = true;
-      //this.nonLeafEl.nativeElement.style="{display:none}";
-      this.style =  {
-        display:'none',
-        'text-align': 'center'
+    var localNode = this.treeStore.getNodeById(location.pathname);
+    if(localNode) {
+      this.node = localNode;
+      if(this.node.childNodes.length == 0) {
+        this.leafNode = true;
+        //this.nonLeafEl.nativeElement.style="{display:none}";
+        this.style =  {
+          display:'none',
+          'text-align': 'center'
+        }
       }
+      else {
+        this.leafNode = false;
+        this.style =  {
+          display:'block',
+          'text-align': 'center'
+        }
+        //this.nonLeafEl.nativeElement.style="{display:block}";
+      }
+      this.node$.next(this.treeStore.getNodeById(location.pathname));
     }
     else {
-      this.leafNode = false;
-      this.style =  {
-        display:'block',
-        'text-align': 'center'
-      }
-      //this.nonLeafEl.nativeElement.style="{display:block}";
+      console.log("Not a valid node. Probably looking at resources");
     }
-    this.node$.next(this.treeStore.getNodeById(location.pathname));
+
   } 
 
 

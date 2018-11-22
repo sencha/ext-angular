@@ -26,6 +26,13 @@ import {TreeListComponent} from './Trees/TreeList/TreeList';
 import { DefaultGaugeComponent } from 'src/examples/Gauges/DefaultGauge';
 import { NeedleGaugeComponent } from 'src/examples/Gauges/NeedleGauge';
 
+import {BasicGridComponent} from './Grid/BasicGrid/BasicGrid';
+import {EditableGridComponent} from './Grid/EditableGrid/EditableGrid';
+import {GroupedGridComponent} from './Grid/GroupedGrid/GroupedGrid';
+import {ReduxGridComponent} from './Grid/ReduxGrid/ReduxGrid';
+import {XMLGridComponent} from './Grid/XMLGrid/XMLGrid';
+
+
 declare var Ext: any;
 
 const treeRoot = {
@@ -135,12 +142,13 @@ const treeRoot = {
             //{ text: 'Transition', component: Transition, navIcon: 'icon-Transition' },
             { text: 'Wizard', component: ButtonComponent, navIcon: 'icon-layout-card-indicator', layout: Ext.os.is.Phone ? 'fit': 'center' },
         ]},
+
         { text: 'Grids', navIcon: 'icon-grids', children: [
             { text: 'Core Features', navIcon: 'icon-grids', children: [
-                { text: 'Basic Grid', component: ButtonComponent, navIcon: 'icon-grids'},
-                { text: 'Grouped Grid', component: ButtonComponent, navIcon: 'icon-grouped-grid'},
-                { text: 'Editable Grid', component: ButtonComponent, navIcon: 'icon-editable-grid'},
-                { text: 'XML Grid', component: ButtonComponent, navIcon: 'icon-xml-grid'}
+                { text: 'Basic Grid', component: BasicGridComponent, navIcon: 'icon-grids'},
+                { text: 'Grouped Grid', component: GroupedGridComponent, navIcon: 'icon-grouped-grid'},
+                { text: 'Editable Grid', component: EditableGridComponent, navIcon: 'icon-editable-grid'},
+                { text: 'XML Grid', component: XMLGridComponent, navIcon: 'icon-xml-grid'}
             ]},
             { text: 'Add-ons', navIcon: 'icon-framing-buttons', children: [
                 { text: 'Grid Tools', component: ButtonComponent, navIcon: 'icon-grid-tools'},
@@ -156,7 +164,7 @@ const treeRoot = {
                 { text: 'Render Components In Cells', component: ButtonComponent, navIcon: 'icon-grid-tools' },
                 { text: 'Stock Ticker', component: ButtonComponent, navIcon: 'icon-ticker-grid' }
             ]},
-            { text: 'Redux Grid', component: ButtonComponent, navIcon: 'icon-Redux-Grid' }
+            { text: 'Redux Grid', component: ReduxGridComponent, navIcon: 'icon-Redux-Grid' }
         ] },
         { text: 'Trees', navIcon: 'icon-trees', children: [
             { text: 'TreeList', component: TreeListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-tree-list' },
