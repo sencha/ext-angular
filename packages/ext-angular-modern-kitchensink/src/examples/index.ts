@@ -23,6 +23,8 @@ import {TreeComponent} from './Trees/Tree/Tree';
 import {TreeDecorationsComponent} from './Trees/TreeDecorations/TreeDecorations';
 import {TreeGridComponent} from './Trees/TreeGrid/TreeGrid';
 import {TreeListComponent} from './Trees/TreeList/TreeList';
+import { DefaultGaugeComponent } from 'src/examples/Gauges/DefaultGauge';
+import { NeedleGaugeComponent } from 'src/examples/Gauges/NeedleGauge';
 
 declare var Ext: any;
 
@@ -36,7 +38,6 @@ const treeRoot = {
                 { text: 'SegmentedButton', component: SegmentedButtonComponent, layout: 'center', navIcon: 'icon-segmented-buttons' },
                 { text: 'SplitButton', component: SplitButtonComponent, layout: 'center', navIcon: 'icon-buttons' },
             ]},
-            { text: 'Carousel', component: ButtonComponent, navIcon: 'icon-carousel' },
             { text: 'Drag & Drop', navIcon: 'icon-drag-drop', children: [
                 { text: 'Simple', component: ButtonComponent, navIcon: 'icon-drag-simple' },
                 { text: 'Constraints', component: ButtonComponent, navIcon: 'icon-drag-constraint' },
@@ -46,7 +47,6 @@ const treeRoot = {
                 { text: 'Data', component: ButtonComponent, navIcon: 'icon-drag-data' },
                 { text: 'Files', component: ButtonComponent, navIcon: 'icon-drag-drop-element' }
             ]},
-            { text: 'Draw', component: ButtonComponent, navIcon: 'icon-drawing' },
             { text: 'Forms', navIcon: 'icon-forms', children: [
                 { text: 'CheckBoxField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-CheckBoxField'  },
                 { text: 'ComboBoxField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-ComboBoxField'  },
@@ -73,8 +73,8 @@ const treeRoot = {
             ] },
            
            { text: 'Gauges', navIcon: 'icon-gauge-charts', children: [
-                { text: 'Default Gauge', component: ButtonComponent, layout: 'center', navIcon: 'icon-gauge-charts' },
-                { text: 'Needle Gauge', component: ButtonComponent, layout: 'center', navIcon: 'icon-gauge-charts' }
+                { text: 'Default Gauge', component: DefaultGaugeComponent, layout: 'center', navIcon: 'icon-gauge-charts' },
+                { text: 'Needle Gauge', component: NeedleGaugeComponent, layout: 'center', navIcon: 'icon-gauge-charts' }
             ]},
             { text: 'Layouts', navIcon: 'icon-layouts', children: [
                 { text: 'card', component: ButtonComponent, navIcon: 'icon-layout-card' },

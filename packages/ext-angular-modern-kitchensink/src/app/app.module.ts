@@ -72,7 +72,8 @@ import {TreeDecorationsComponent} from '../examples/Trees/TreeDecorations/TreeDe
 import {TreeGridComponent} from '../examples/Trees/TreeGrid/TreeGrid';
 import {TreeListComponent} from '../examples/Trees/TreeList/TreeList';
 
-
+import {DefaultGaugeComponent} from "../examples/Gauges/DefaultGauge"
+import {NeedleGaugeComponent} from "../examples/Gauges/NeedleGauge"
 
 import {CalendarService} from "../examples/Calendar/Calendar.service"
 
@@ -146,6 +147,8 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/buttons/splitbutton', component: SplitButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/buttons/segmentedbutton', component: SegmentedButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/ripple', component: RippleComponent, text: 'Riple', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/gauges/default_gauge', component: DefaultGaugeComponent, text: 'Carousel', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/gauges/needle_gauge', component: NeedleGaugeComponent, text: 'Carousel', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/media/audio', component: AudioComponent, text: 'Audio', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/media/video', component: VideoComponent, text: 'Video', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'calendar/calendar_panel', component: CalendarPanelComponent, text: 'Calendar Panel', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -234,6 +237,8 @@ export class App {
 		SplitButtonComponent,
 		SegmentedButtonComponent,
 		RippleComponent,
+		DefaultGaugeComponent,
+		NeedleGaugeComponent,
 		AudioComponent,
 		VideoComponent,
 		CalendarPanelComponent,
