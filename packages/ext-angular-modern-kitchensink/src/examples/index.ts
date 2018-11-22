@@ -37,8 +37,8 @@ const treeRoot = {
                 { text: 'Button', component: ButtonComponent, layout: 'center', navIcon: 'icon-buttons' },
                 { text: 'SegmentedButton', component: SegmentedButtonComponent, layout: 'center', navIcon: 'icon-segmented-buttons' },
                 { text: 'SplitButton', component: SplitButtonComponent, layout: 'center', navIcon: 'icon-buttons' },
-                { text: 'Carousel', component: ButtonComponent, navIcon: 'icon-carousel' }
             ]},
+            { text: 'Carousel', component: ButtonComponent, navIcon: 'icon-carousel' },
             { text: 'Drag & Drop', navIcon: 'icon-drag-drop', children: [
                 { text: 'Simple', component: ButtonComponent, navIcon: 'icon-drag-simple' },
                 { text: 'Constraints', component: ButtonComponent, navIcon: 'icon-drag-constraint' },
@@ -47,8 +47,8 @@ const treeRoot = {
                 { text: 'Groups', component: ButtonComponent, navIcon: 'icon-drag-group' },
                 { text: 'Data', component: ButtonComponent, navIcon: 'icon-drag-data' },
                 { text: 'Files', component: ButtonComponent, navIcon: 'icon-drag-drop-element' }
-                { text: 'Draw', component: ButtonComponent, navIcon: 'icon-drawing' }
             ]},
+            { text: 'Draw', component: ButtonComponent, navIcon: 'icon-drawing' }
             { text: 'Forms', navIcon: 'icon-forms', children: [
                 { text: 'CheckBoxField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-CheckBoxField'  },
                 { text: 'ComboBoxField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-ComboBoxField'  },
