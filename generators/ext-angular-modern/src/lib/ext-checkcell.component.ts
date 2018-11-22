@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -189,5 +190,8 @@ export class ExtCheckcellComponent extends base implements OnInit,AfterContentIn
   constructor(eRef:ElementRef) {super(eRef,checkcellMetaData)}
   public ngOnInit() {this.baseOnInit(checkcellMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

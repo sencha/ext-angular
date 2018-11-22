@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -459,5 +460,8 @@ export class ExtTabletpickerComponent extends base implements OnInit,AfterConten
   constructor(eRef:ElementRef) {super(eRef,tabletpickerMetaData)}
   public ngOnInit() {this.baseOnInit(tabletpickerMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

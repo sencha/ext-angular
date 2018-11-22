@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -461,5 +462,8 @@ export class ExtColumnComponent extends base implements OnInit,AfterContentInit,
   constructor(eRef:ElementRef) {super(eRef,columnMetaData)}
   public ngOnInit() {this.baseOnInit(columnMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

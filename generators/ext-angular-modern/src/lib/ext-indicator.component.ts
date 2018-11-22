@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -333,5 +334,8 @@ export class ExtIndicatorComponent extends base implements OnInit,AfterContentIn
   constructor(eRef:ElementRef) {super(eRef,indicatorMetaData)}
   public ngOnInit() {this.baseOnInit(indicatorMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

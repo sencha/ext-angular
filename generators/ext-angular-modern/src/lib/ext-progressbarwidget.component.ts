@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -327,5 +328,8 @@ export class ExtProgressbarwidgetComponent extends base implements OnInit,AfterC
   constructor(eRef:ElementRef) {super(eRef,progressbarwidgetMetaData)}
   public ngOnInit() {this.baseOnInit(progressbarwidgetMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

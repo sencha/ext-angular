@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -389,5 +390,8 @@ export class ExtNavigationviewComponent extends base implements OnInit,AfterCont
   constructor(eRef:ElementRef) {super(eRef,navigationviewMetaData)}
   public ngOnInit() {this.baseOnInit(navigationviewMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

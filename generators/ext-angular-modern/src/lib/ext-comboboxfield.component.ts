@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -515,5 +516,8 @@ export class ExtComboboxfieldComponent extends base implements OnInit,AfterConte
   constructor(eRef:ElementRef) {super(eRef,comboboxfieldMetaData)}
   public ngOnInit() {this.baseOnInit(comboboxfieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

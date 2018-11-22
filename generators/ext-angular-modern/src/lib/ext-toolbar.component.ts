@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -381,5 +382,8 @@ export class ExtToolbarComponent extends base implements OnInit,AfterContentInit
   constructor(eRef:ElementRef) {super(eRef,toolbarMetaData)}
   public ngOnInit() {this.baseOnInit(toolbarMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -427,5 +428,8 @@ export class ExtEmailfieldComponent extends base implements OnInit,AfterContentI
   constructor(eRef:ElementRef) {super(eRef,emailfieldMetaData)}
   public ngOnInit() {this.baseOnInit(emailfieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

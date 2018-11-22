@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -483,5 +484,8 @@ export class ExtSelectfieldComponent extends base implements OnInit,AfterContent
   constructor(eRef:ElementRef) {super(eRef,selectfieldMetaData)}
   public ngOnInit() {this.baseOnInit(selectfieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

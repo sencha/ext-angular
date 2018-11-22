@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -381,5 +382,8 @@ export class ExtChartnavigatorComponent extends base implements OnInit,AfterCont
   constructor(eRef:ElementRef) {super(eRef,chartnavigatorMetaData)}
   public ngOnInit() {this.baseOnInit(chartnavigatorMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

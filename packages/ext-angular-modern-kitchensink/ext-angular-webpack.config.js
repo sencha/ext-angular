@@ -19,6 +19,7 @@ module.exports = {
       verbose: 'no',
       theme: 'theme-kitchensink',
       packages: [
+        'transition',
         'font-ext', 
         'ux', 
         'd3',

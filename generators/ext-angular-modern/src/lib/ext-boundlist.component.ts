@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -565,5 +566,8 @@ export class ExtBoundlistComponent extends base implements OnInit,AfterContentIn
   constructor(eRef:ElementRef) {super(eRef,boundlistMetaData)}
   public ngOnInit() {this.baseOnInit(boundlistMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -449,5 +450,8 @@ export class ExtPickerfieldComponent extends base implements OnInit,AfterContent
   constructor(eRef:ElementRef) {super(eRef,pickerfieldMetaData)}
   public ngOnInit() {this.baseOnInit(pickerfieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

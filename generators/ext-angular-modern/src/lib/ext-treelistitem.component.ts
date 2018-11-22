@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -199,5 +200,8 @@ export class ExtTreelistitemComponent extends base implements OnInit,AfterConten
   constructor(eRef:ElementRef) {super(eRef,treelistitemMetaData)}
   public ngOnInit() {this.baseOnInit(treelistitemMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

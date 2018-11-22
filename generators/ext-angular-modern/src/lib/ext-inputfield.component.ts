@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -389,5 +390,8 @@ export class ExtInputfieldComponent extends base implements OnInit,AfterContentI
   constructor(eRef:ElementRef) {super(eRef,inputfieldMetaData)}
   public ngOnInit() {this.baseOnInit(inputfieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

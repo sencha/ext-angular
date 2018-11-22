@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -365,5 +366,8 @@ export class ExtSparklineboxComponent extends base implements OnInit,AfterConten
   constructor(eRef:ElementRef) {super(eRef,sparklineboxMetaData)}
   public ngOnInit() {this.baseOnInit(sparklineboxMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

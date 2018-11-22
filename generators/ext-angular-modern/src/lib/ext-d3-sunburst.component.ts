@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -377,5 +378,8 @@ export class ExtD3_sunburstComponent extends base implements OnInit,AfterContent
   constructor(eRef:ElementRef) {super(eRef,d3_sunburstMetaData)}
   public ngOnInit() {this.baseOnInit(d3_sunburstMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -483,5 +484,8 @@ export class ExtCalendar_timefieldComponent extends base implements OnInit,After
   constructor(eRef:ElementRef) {super(eRef,calendar_timefieldMetaData)}
   public ngOnInit() {this.baseOnInit(calendar_timefieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -495,5 +496,8 @@ export class ExtPivotrangeeditorComponent extends base implements OnInit,AfterCo
   constructor(eRef:ElementRef) {super(eRef,pivotrangeeditorMetaData)}
   public ngOnInit() {this.baseOnInit(pivotrangeeditorMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

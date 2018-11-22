@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -387,5 +388,8 @@ export class ExtPivottreemapComponent extends base implements OnInit,AfterConten
   constructor(eRef:ElementRef) {super(eRef,pivottreemapMetaData)}
   public ngOnInit() {this.baseOnInit(pivottreemapMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

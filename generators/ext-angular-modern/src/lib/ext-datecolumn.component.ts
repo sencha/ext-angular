@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -463,5 +464,8 @@ export class ExtDatecolumnComponent extends base implements OnInit,AfterContentI
   constructor(eRef:ElementRef) {super(eRef,datecolumnMetaData)}
   public ngOnInit() {this.baseOnInit(datecolumnMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

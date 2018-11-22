@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -373,5 +374,8 @@ export class ExtD3_partitionComponent extends base implements OnInit,AfterConten
   constructor(eRef:ElementRef) {super(eRef,d3_partitionMetaData)}
   public ngOnInit() {this.baseOnInit(d3_partitionMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

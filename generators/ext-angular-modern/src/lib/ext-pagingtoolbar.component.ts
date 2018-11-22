@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -389,5 +390,8 @@ export class ExtPagingtoolbarComponent extends base implements OnInit,AfterConte
   constructor(eRef:ElementRef) {super(eRef,pagingtoolbarMetaData)}
   public ngOnInit() {this.baseOnInit(pagingtoolbarMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

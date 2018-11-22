@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -387,5 +388,8 @@ export class ExtCalendar_monthviewComponent extends base implements OnInit,After
   constructor(eRef:ElementRef) {super(eRef,calendar_monthviewMetaData)}
   public ngOnInit() {this.baseOnInit(calendar_monthviewMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

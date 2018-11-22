@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -467,5 +468,8 @@ export class ExtBooleancolumnComponent extends base implements OnInit,AfterConte
   constructor(eRef:ElementRef) {super(eRef,booleancolumnMetaData)}
   public ngOnInit() {this.baseOnInit(booleancolumnMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

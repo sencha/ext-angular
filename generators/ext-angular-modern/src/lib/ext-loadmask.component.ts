@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -329,5 +330,8 @@ export class ExtLoadmaskComponent extends base implements OnInit,AfterContentIni
   constructor(eRef:ElementRef) {super(eRef,loadmaskMetaData)}
   public ngOnInit() {this.baseOnInit(loadmaskMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

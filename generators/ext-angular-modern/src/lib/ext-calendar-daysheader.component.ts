@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -331,5 +332,8 @@ export class ExtCalendar_daysheaderComponent extends base implements OnInit,Afte
   constructor(eRef:ElementRef) {super(eRef,calendar_daysheaderMetaData)}
   public ngOnInit() {this.baseOnInit(calendar_daysheaderMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

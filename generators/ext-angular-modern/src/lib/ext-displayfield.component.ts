@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -391,5 +392,8 @@ export class ExtDisplayfieldComponent extends base implements OnInit,AfterConten
   constructor(eRef:ElementRef) {super(eRef,displayfieldMetaData)}
   public ngOnInit() {this.baseOnInit(displayfieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

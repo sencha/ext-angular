@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -411,5 +412,8 @@ export class ExtTogglefieldComponent extends base implements OnInit,AfterContent
   constructor(eRef:ElementRef) {super(eRef,togglefieldMetaData)}
   public ngOnInit() {this.baseOnInit(togglefieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

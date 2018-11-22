@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -385,5 +386,8 @@ export class ExtListswiperitemComponent extends base implements OnInit,AfterCont
   constructor(eRef:ElementRef) {super(eRef,listswiperitemMetaData)}
   public ngOnInit() {this.baseOnInit(listswiperitemMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

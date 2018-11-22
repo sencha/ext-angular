@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -407,5 +408,8 @@ export class ExtSinglesliderfieldComponent extends base implements OnInit,AfterC
   constructor(eRef:ElementRef) {super(eRef,singlesliderfieldMetaData)}
   public ngOnInit() {this.baseOnInit(singlesliderfieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -477,5 +478,8 @@ export class ExtFieldpanelComponent extends base implements OnInit,AfterContentI
   constructor(eRef:ElementRef) {super(eRef,fieldpanelMetaData)}
   public ngOnInit() {this.baseOnInit(fieldpanelMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

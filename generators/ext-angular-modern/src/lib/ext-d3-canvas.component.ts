@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -333,5 +334,8 @@ export class ExtD3_canvasComponent extends base implements OnInit,AfterContentIn
   constructor(eRef:ElementRef) {super(eRef,d3_canvasMetaData)}
   public ngOnInit() {this.baseOnInit(d3_canvasMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

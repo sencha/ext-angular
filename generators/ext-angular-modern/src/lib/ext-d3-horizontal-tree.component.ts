@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -379,5 +380,8 @@ export class ExtD3_horizontal_treeComponent extends base implements OnInit,After
   constructor(eRef:ElementRef) {super(eRef,d3_horizontal_treeMetaData)}
   public ngOnInit() {this.baseOnInit(d3_horizontal_treeMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

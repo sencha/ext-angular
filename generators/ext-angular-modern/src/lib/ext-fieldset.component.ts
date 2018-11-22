@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -385,5 +386,8 @@ export class ExtFieldsetComponent extends base implements OnInit,AfterContentIni
   constructor(eRef:ElementRef) {super(eRef,fieldsetMetaData)}
   public ngOnInit() {this.baseOnInit(fieldsetMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }
