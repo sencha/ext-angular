@@ -23,6 +23,8 @@ import {TreeComponent} from './Trees/Tree/Tree';
 import {TreeDecorationsComponent} from './Trees/TreeDecorations/TreeDecorations';
 import {TreeGridComponent} from './Trees/TreeGrid/TreeGrid';
 import {TreeListComponent} from './Trees/TreeList/TreeList';
+import { DefaultGaugeComponent } from 'src/examples/Gauges/DefaultGauge';
+import { NeedleGaugeComponent } from 'src/examples/Gauges/NeedleGauge';
 
 declare var Ext: any;
 
@@ -73,8 +75,8 @@ const treeRoot = {
             ] },
            
            { text: 'Gauges', navIcon: 'icon-gauge-charts', children: [
-                { text: 'Default Gauge', component: ButtonComponent, layout: 'center', navIcon: 'icon-gauge-charts' },
-                { text: 'Needle Gauge', component: ButtonComponent, layout: 'center', navIcon: 'icon-gauge-charts' }
+                { text: 'Default Gauge', component: DefaultGaugeComponent, layout: 'center', navIcon: 'icon-gauge-charts' },
+                { text: 'Needle Gauge', component: NeedleGaugeComponent, layout: 'center', navIcon: 'icon-gauge-charts' }
             ]},
             { text: 'Layouts', navIcon: 'icon-layouts', children: [
                 { text: 'card', component: ButtonComponent, navIcon: 'icon-layout-card' },
