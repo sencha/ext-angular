@@ -32,6 +32,21 @@ import {GroupedGridComponent} from './Grid/GroupedGrid/GroupedGrid';
 import {ReduxGridComponent} from './Grid/ReduxGrid/ReduxGrid';
 import {XMLGridComponent} from './Grid/XMLGrid/XMLGrid';
 
+import {CheckBoxFieldComponent} from './FormFields/CheckBoxField/CheckBoxField';
+import {ComboBoxFieldComponent} from './FormFields/ComboBoxField/ComboBoxField';
+import {ContainerFieldComponent} from './FormFields/ContainerField/ContainerField';
+import {DatePickerFieldComponent} from './FormFields/DatePickerField/DatePickerField';
+import {EmailFieldComponent} from './FormFields/EmailField/EmailField';
+import {FieldSetComponent} from './FormFields/FieldSet/FieldSet';
+import {FileFieldComponent} from './FormFields/FileField/FileField';
+import {FormPanelComponent} from './FormFields/FormPanel/FormPanel';
+import {NumberFieldComponent} from './FormFields/NumberField/NumberField';
+import {PasswordFieldComponent} from './FormFields/PasswordField/PasswordField';
+import {RadioFieldComponent} from './FormFields/RadioField/RadioField';
+import {SearchFieldComponent} from './FormFields/SearchField/SearchField';
+import {SelectFieldComponent} from './FormFields/SelectField/SelectField';
+import {SliderFieldComponent} from './FormFields/SliderField/SliderField';
+
 
 declare var Ext: any;
 
@@ -57,15 +72,15 @@ const treeRoot = {
             ]},
             { text: 'Draw', component: ButtonComponent, navIcon: 'icon-drawing' },
             { text: 'Forms', navIcon: 'icon-forms', children: [
-                { text: 'CheckBoxField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-CheckBoxField'  },
-                { text: 'ComboBoxField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-ComboBoxField'  },
-                { text: 'ContainerField', component: ButtonComponent, layout: Ext.os.is.Phone ? 'auto' : 'center', navIcon: 'icon-Forms-ContainerField'  },
-                { text: 'DatePickerField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-DatePickerField'  },
-                { text: 'EmailField', component: ButtonComponent , layout: 'center', navIcon: 'icon-Forms-EmailField' },
-                { text: 'FieldSet', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-FieldSet'  },
-                { text: 'FileField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-FileField'  },
-                { text: 'FormPanel', component: ButtonComponent, navIcon: 'icon-form-panel' },
-                { text: 'NumberField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-NumberField' },
+                { text: 'CheckBoxField', component: CheckBoxFieldComponent, layout: 'center', navIcon: 'icon-Forms-CheckBoxField'  },
+                { text: 'ComboBoxField', component: ComboBoxFieldComponent, layout: 'center', navIcon: 'icon-Forms-ComboBoxField'  },
+                { text: 'ContainerField', component: ContainerFieldComponent, layout: Ext.os.is.Phone ? 'auto' : 'center', navIcon: 'icon-Forms-ContainerField'  },
+                { text: 'DatePickerField', component: DatePickerFieldComponent, layout: 'center', navIcon: 'icon-Forms-DatePickerField'  },
+                { text: 'EmailField', component: EmailFieldComponent , layout: 'center', navIcon: 'icon-Forms-EmailField' },
+                { text: 'FieldSet', component: FieldSetComponent, layout: 'center', navIcon: 'icon-Forms-FieldSet'  },
+                { text: 'FileField', component: FileFieldComponent, layout: 'center', navIcon: 'icon-Forms-FileField'  },
+                { text: 'FormPanel', component: FormPanelComponent, navIcon: 'icon-form-panel' },
+                { text: 'NumberField', component: NumberFieldComponent, layout: 'center', navIcon: 'icon-Forms-NumberField' },
                 { text: 'PasswordField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-PasswordField' },
                 { text: 'RadioField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-RadioField' },
                 // { text: 'Picker', component: Picker, layout: 'center', navIcon: 'icon-picker' },
