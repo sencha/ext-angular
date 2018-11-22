@@ -22,14 +22,22 @@ export class CalendarPanelComponent implements OnInit {
     } 
    }); 
 
-  titleTpl = function(data){
-    console.log("titleTpl. data : " + data);
+
+  titleTplVal = (start, end) => {
+     //var trurnData "<div>" +formatDate(start) - formatDate(end} + "</div>";
+     console.log("start : " + start);
+     console.log("end : " + end);
+    return "";
+   }
+
+
+   ngOnInit() {
   }
+  
 
-
-  ngOnInit() {
-
-  }
+   formatDate = function(date) {
+    return Ext.util.Format.date(date, 'j M');
+   } 
 
 
 }

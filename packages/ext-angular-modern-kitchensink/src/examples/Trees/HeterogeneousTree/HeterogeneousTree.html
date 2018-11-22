@@ -1,0 +1,27 @@
+<tree
+[shadow]="true"
+title="Heterogeneous Geographical Tree"
+rootVisible="false"
+[store]="this.store"
+[listeners]="{
+    selectionchange: this.onSelectionChange
+}"
+>
+<treecolumn 
+    text="Name"
+    dataIndex="name"
+    flex="1"
+></treecolumn>
+<toolbar docked="bottom">
+    <textfield 
+        listeners="{
+            action:'onFieldAction'
+        }"
+    ></textfield>
+    <button 
+        text="Add Territory"
+        [handler]="this.addItem"
+    ></button>
+</toolbar>
+
+</tree>
