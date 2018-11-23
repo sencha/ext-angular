@@ -1,4 +1,5 @@
 ExtAngular
+ - use ExtJS 6.7
  - modern kitchensink
  - modern Sencha Tests
  - modern docs
@@ -9,6 +10,7 @@ ExtAngular
  - ExtAngular functionality
    - using *ngIf (etc) in an ExtAngular component
    - accessing resources
+   - conflict with button class
  - plugin tree-shaking (for ExtJS ext.js and ext.css)
  - clean doxi output
  - tree shake the typescript ExtAngular files
