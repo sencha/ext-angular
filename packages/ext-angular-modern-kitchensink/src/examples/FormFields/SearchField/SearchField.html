@@ -1,11 +1,11 @@
 <container #item
-    [width]="600" [layout]="vbox" [padding]="20"
+    [width]="600" [layout]="'vbox'" [padding]="20"
     [platformConfig]="{phone: {width: '100%'}}"
 >
     <container #item [style]="{fontSize: '13px',fontFamily: 'Menlo, Courier',margin: '0 0 8px 0'}" [html]="'alt'">
     </container>
     <titlebar #item [title]="'TitleBar'" [maxWidth]="600" [margin]="'0 0 30 0'">
-        <searchfield #item [ui]="'alt'" [width]="200" [placeholder]="'Search'">
+        <searchfield #item [ui]="'alt'" [flex]="'right'" [docked]="'right'" [width]="200" [placeholder]="'Search'">
         </searchfield>
     </titlebar>
 
@@ -20,7 +20,7 @@
 
     <container #item [style]="{fontSize: '13px', fontFamily: 'Menlo, Courier', margin: '0 0 8px 0'}" [html]="'solo'">
     </container>
-    <container #item [layout]="hbox" [padding]="20" [style]="{backgroundColor: '#F0F0F0'}" [shadow]="true">
+    <container #item [layout]="'hbox'" [padding]="20" [style]="{backgroundColor: '#F0F0F0'}" [shadow]="true">
         <searchfield #item
             [ui]="'solo ks-search-right-trigger'"
             [shadow]="true"
