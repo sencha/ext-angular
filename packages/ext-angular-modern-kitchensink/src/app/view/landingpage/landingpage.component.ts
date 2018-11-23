@@ -12,14 +12,18 @@ declare var Ext: any;
 declare var _code: any;
  const generateBreadcrumb = (node) => {
   const path = [];
+  let isLeaf = true;
   do {
     path.unshift({
-      isLeaf: !node.childNodes.length,
+      isLeaf,
       text: node.get("text"),
       path: node.get("id"),
     });
+
+    isLeaf = false;
   } while (node = node.parentNode)
-   return path;
+
+  return path;
 };
 
 @Component({
