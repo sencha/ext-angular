@@ -186,6 +186,7 @@ export class multisliderMetaData {
     "xtype": "Ext.enums.Widget",
     "zeroBasedSnapping": "Boolean",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -365,6 +366,7 @@ export class multisliderMetaData {
     'xtype',
     'zeroBasedSnapping',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

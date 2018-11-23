@@ -245,6 +245,7 @@ export class treepanelMetaData {
     "width": "Number|String",
     "xtype": "Ext.enums.Widget",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -483,6 +484,7 @@ export class treepanelMetaData {
     'width',
     'xtype',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

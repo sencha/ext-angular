@@ -189,6 +189,7 @@ export class dashboard_panelMetaData {
     "width": "Number|String",
     "xtype": "Ext.enums.Widget",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -371,6 +372,7 @@ export class dashboard_panelMetaData {
     'width',
     'xtype',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

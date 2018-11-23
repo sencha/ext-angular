@@ -171,6 +171,7 @@ export class fieldMetaData {
     "width": "Number|String",
     "xtype": "Ext.enums.Widget",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -335,6 +336,7 @@ export class fieldMetaData {
     'width',
     'xtype',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

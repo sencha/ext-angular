@@ -255,6 +255,7 @@ export class pivotgridMetaData {
     "width": "Number|String",
     "xtype": "Ext.enums.Widget",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -503,6 +504,7 @@ export class pivotgridMetaData {
     'width',
     'xtype',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

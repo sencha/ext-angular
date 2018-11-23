@@ -54,6 +54,7 @@ export class d3_canvasMetaData {
     "viewModel": "String/Object/Ext.app.ViewModel",
     "width": "Number/String",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -101,6 +102,7 @@ export class d3_canvasMetaData {
     'viewModel',
     'width',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

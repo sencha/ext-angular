@@ -135,6 +135,7 @@ export class sliderfieldMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -263,6 +264,7 @@ export class sliderfieldMetaData {
     'y',
     'zIndex',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

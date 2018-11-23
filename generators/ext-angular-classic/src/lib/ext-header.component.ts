@@ -145,6 +145,7 @@ export class headerMetaData {
     "width": "Number|String",
     "xtype": "Ext.enums.Widget",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -283,6 +284,7 @@ export class headerMetaData {
     'width',
     'xtype',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

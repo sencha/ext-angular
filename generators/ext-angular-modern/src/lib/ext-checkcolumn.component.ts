@@ -168,6 +168,7 @@ export class checkcolumnMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -329,6 +330,7 @@ export class checkcolumnMetaData {
     'y',
     'zIndex',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

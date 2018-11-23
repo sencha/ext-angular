@@ -107,6 +107,7 @@ export class gridsummaryrowMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -207,6 +208,7 @@ export class gridsummaryrowMetaData {
     'y',
     'zIndex',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

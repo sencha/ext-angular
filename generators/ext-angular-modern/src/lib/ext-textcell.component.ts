@@ -76,6 +76,7 @@ export class textcellMetaData {
     "y": "Number",
     "zeroValue": "String",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -145,6 +146,7 @@ export class textcellMetaData {
     'y',
     'zeroValue',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

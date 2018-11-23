@@ -71,6 +71,7 @@ export class cleartriggerMetaData {
     "x": "Number",
     "y": "Number",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -135,6 +136,7 @@ export class cleartriggerMetaData {
     'x',
     'y',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

@@ -118,6 +118,7 @@ export class gridgroupbythismenuitemMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -229,6 +230,7 @@ export class gridgroupbythismenuitemMetaData {
     'y',
     'zIndex',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

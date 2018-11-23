@@ -147,6 +147,7 @@ export class textfieldMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -287,6 +288,7 @@ export class textfieldMetaData {
     'y',
     'zIndex',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

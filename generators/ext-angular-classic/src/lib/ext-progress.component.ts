@@ -52,6 +52,7 @@ export class progressMetaData {
     "viewModel": "String/Object/Ext.app.ViewModel",
     "width": "Number/String",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -97,6 +98,7 @@ export class progressMetaData {
     'viewModel',
     'width',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

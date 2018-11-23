@@ -80,6 +80,7 @@ export class pivotgridgroupcellMetaData {
     "y": "Number",
     "zeroValue": "String",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -153,6 +154,7 @@ export class pivotgridgroupcellMetaData {
     'y',
     'zeroValue',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

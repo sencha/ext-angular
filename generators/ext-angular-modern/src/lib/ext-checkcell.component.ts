@@ -73,6 +73,7 @@ export class checkcellMetaData {
     "x": "Number",
     "y": "Number",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -139,6 +140,7 @@ export class checkcellMetaData {
     'x',
     'y',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

@@ -54,6 +54,7 @@ export class calendar_daysheaderMetaData {
     "visibleDays": "Number",
     "width": "Number/String",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -101,6 +102,7 @@ export class calendar_daysheaderMetaData {
     'visibleDays',
     'width',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

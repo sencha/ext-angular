@@ -63,6 +63,7 @@ export class gaugeMetaData {
     "viewModel": "String/Object/Ext.app.ViewModel",
     "width": "Number/String",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -119,6 +120,7 @@ export class gaugeMetaData {
     'viewModel',
     'width',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

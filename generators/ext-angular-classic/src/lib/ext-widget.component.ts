@@ -48,6 +48,7 @@ export class widgetMetaData {
     "viewModel": "String/Object/Ext.app.ViewModel",
     "width": "Number/String",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -89,6 +90,7 @@ export class widgetMetaData {
     'viewModel',
     'width',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

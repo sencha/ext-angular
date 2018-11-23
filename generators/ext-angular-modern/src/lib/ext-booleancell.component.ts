@@ -79,6 +79,7 @@ export class booleancellMetaData {
     "y": "Number",
     "zeroValue": "String",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -151,6 +152,7 @@ export class booleancellMetaData {
     'y',
     'zeroValue',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

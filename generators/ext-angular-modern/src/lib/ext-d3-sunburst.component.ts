@@ -127,6 +127,7 @@ export class d3_sunburstMetaData {
     "zIndex": "Number",
     "zoomParentDotRadius": "Number",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -247,6 +248,7 @@ export class d3_sunburstMetaData {
     'zIndex',
     'zoomParentDotRadius',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

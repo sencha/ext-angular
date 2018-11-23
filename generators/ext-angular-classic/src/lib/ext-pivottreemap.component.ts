@@ -81,6 +81,7 @@ export class pivottreemapMetaData {
     "viewModel": "String/Object/Ext.app.ViewModel",
     "width": "Number/String",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -155,6 +156,7 @@ export class pivottreemapMetaData {
     'viewModel',
     'width',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

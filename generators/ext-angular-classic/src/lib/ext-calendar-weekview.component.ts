@@ -71,6 +71,7 @@ export class calendar_weekviewMetaData {
     "visibleDays": "Number",
     "width": "Number/String",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -135,6 +136,7 @@ export class calendar_weekviewMetaData {
     'visibleDays',
     'width',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

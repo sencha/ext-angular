@@ -63,6 +63,7 @@ export class sparklinetristateMetaData {
     "width": "Number/String",
     "zeroBarColor": "String",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -119,6 +120,7 @@ export class sparklinetristateMetaData {
     'width',
     'zeroBarColor',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

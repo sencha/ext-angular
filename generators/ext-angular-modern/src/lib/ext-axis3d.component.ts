@@ -47,6 +47,7 @@ export class axis3dMetaData {
     "totalAngle": "any",
     "visibleRange": "Array",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -87,6 +88,7 @@ export class axis3dMetaData {
     'totalAngle',
     'visibleRange',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];
