@@ -1,1 +1,44 @@
-Grouped Grid works!
+<container #item layout="vbox" padding="10" width="550px" height="600px">
+    <toolbar #item margin="0 0 20 0" shadow>
+        <container #item key="1" [style]="{ marginRight: '10px' }"     html='Grouping:'></container>
+        <segmentedbutton #item key="2" label="Grouping" >
+            <button #item key="1" ui="toolbar-default" [pressed]="grouped" text="ON" [handler]="this.onToggleGrouping.bind(this, true)"></button>
+            <button #item key="2" ui="toolbar-default" [pressed]="!grouped" text="OFF" [handler]="this.onToggleGrouping.bind(this, false)"></button>
+        </segmentedbutton>
+    </toolbar>
+
+    <grid #item
+        flex="1"
+        title="Restaurants"
+        shadow 
+        [store]="this.store"
+       [grouped]="grouped"
+        [groupFooter]="{
+            xtype: 'gridsummaryrow'
+        }"
+    >
+        <column  #item
+            text="Name" 
+            dataIndex="name" 
+            flex="1"
+            groupHeaderTpl='{columnName}: {value:htmlEncode}'
+        ></column>
+        <column  #item
+            text="Cuisine" 
+            dataIndex="cuisine" 
+            flex="1"
+        ></column>
+        <column  #item
+            text="Rating" 
+            dataIndex="rating"
+            summaryCell="numbercell"
+            groupHeaderTpl='{value:repeat("★")} ({value:plural("Star")})'
+            [cell]="{
+                xtype: 'widgetcell',
+                widget: {
+                    xtype: 'rating'
+                }
+            }"
+        ></column>
+    </grid>
+</container>

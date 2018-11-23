@@ -26,7 +26,6 @@ export class BasicGridComponent implements OnInit {
 
 
       renderSign = (format, value) =>  {
-          debugger;
         console.log("In renderSign. format: " + format + " value : " + value);
         var formattedValue = Ext.util.Format.number(value, format);
         var col = '';
