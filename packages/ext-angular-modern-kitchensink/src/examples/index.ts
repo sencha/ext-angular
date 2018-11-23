@@ -46,7 +46,13 @@ import {RadioFieldComponent} from './FormFields/RadioField/RadioField';
 import {SearchFieldComponent} from './FormFields/SearchField/SearchField';
 import {SelectFieldComponent} from './FormFields/SelectField/SelectField';
 import {SliderFieldComponent} from './FormFields/SliderField/SliderField';
-
+import {SpinnerFieldComponent} from './FormFields/SpinnerField/SpinnerField';
+import {TextAreaFieldComponent} from './FormFields/TextAreaField/TextAreaField';
+import {TextFieldComponent} from './FormFields/TextField/TextField';
+import {TimeFieldComponent} from './FormFields/TimeField/TimeField';
+import {ToggleFieldComponent} from './FormFields/ToggleField/ToggleField';
+import {URLFieldComponent} from './FormFields/URLField/URLField';
+import {ValidationComponent} from './FormFields/Validation/Validation';
 
 declare var Ext: any;
 
@@ -81,19 +87,18 @@ const treeRoot = {
                 { text: 'FileField', component: FileFieldComponent, layout: 'center', navIcon: 'icon-Forms-FileField'  },
                 { text: 'FormPanel', component: FormPanelComponent, navIcon: 'icon-form-panel' },
                 { text: 'NumberField', component: NumberFieldComponent, layout: 'center', navIcon: 'icon-Forms-NumberField' },
-                { text: 'PasswordField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-PasswordField' },
-                { text: 'RadioField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-RadioField' },
-                // { text: 'Picker', component: Picker, layout: 'center', navIcon: 'icon-picker' },
-                { text: 'SearchField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-SearchField' },
-                { text: 'SelectField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-SelectField' },
-                { text: 'SliderField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-SliderField' },
-                { text: 'SpinnerField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-SpinnerField' },
-                { text: 'TextAreaField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-TextAreaField' },
-                { text: 'TextField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-TextField' },
-                { text: 'TimeField', component: ButtonComponent, navIcon: 'icon-form-panel' },
-                { text: 'ToggleField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-ToggleField' },
-                { text: 'URLField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-URLField' },
-                { text: 'Validation', component: ButtonComponent, layout: 'auto', navIcon: 'icon-form-validation'}
+                { text: 'PasswordField', component: PasswordFieldComponent, layout: 'center', navIcon: 'icon-Forms-PasswordField' },
+                { text: 'RadioField', component: RadioFieldComponent, layout: 'center', navIcon: 'icon-Forms-RadioField' },
+                { text: 'SearchField', component: SearchFieldComponent, layout: 'center', navIcon: 'icon-Forms-SearchField' },
+                { text: 'SelectField', component: SelectFieldComponent, layout: 'center', navIcon: 'icon-Forms-SelectField' },
+                { text: 'SliderField', component: SliderFieldComponent, layout: 'center', navIcon: 'icon-Forms-SliderField' },
+                { text: 'SpinnerField', component: SpinnerFieldComponent, layout: 'center', navIcon: 'icon-Forms-SpinnerField' },
+                { text: 'TextAreaField', component: TextAreaFieldComponent, layout: 'center', navIcon: 'icon-Forms-TextAreaField' },
+                { text: 'TextField', component: TextFieldComponent, layout: 'center', navIcon: 'icon-Forms-TextField' },
+                { text: 'TimeField', component: TimeFieldComponent, navIcon: 'icon-form-panel' },
+                { text: 'ToggleField', component: ToggleFieldComponent, layout: 'center', navIcon: 'icon-Forms-ToggleField' },
+                { text: 'URLField', component: URLFieldComponent, layout: 'center', navIcon: 'icon-Forms-URLField' },
+                { text: 'Validation', component: ValidationComponent, layout: 'auto', navIcon: 'icon-form-validation'}
             ] },
            
            { text: 'Gauges', navIcon: 'icon-gauge-charts', children: [

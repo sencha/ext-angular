@@ -64,6 +64,7 @@ import {ProgressBarComponent} from "../examples/ProgressBar/ProgressBar"
 import {TitleBarComponent} from "../examples/TitleBar/TitleBar"
 import {ToolBarComponent} from "../examples/ToolBar/ToolBar"
 import {ToolTipComponent} from "../examples/ToolTip/ToolTip"
+
 import {NumberFieldComponent} from "../examples/FormFields/NumberField/NumberField"
 import {CheckBoxFieldComponent} from '../examples/FormFields/CheckBoxField/CheckBoxField'
 import {ComboBoxFieldComponent} from "../examples/FormFields/ComboBoxField/ComboBoxField"
@@ -78,14 +79,13 @@ import {RadioFieldComponent} from "../examples/FormFields/RadioField/RadioField"
 import {SearchFieldComponent} from "../examples/FormFields/SearchField/SearchField"
 import {SelectFieldComponent} from "../examples/FormFields/SelectField/SelectField"
 import {SliderFieldComponent} from "../examples/FormFields/SliderField/SliderField"
-// import {SpinnerFieldComponent} from "../examples/FormFields/SpinnerField/SpinnerField"
-// import {PasswordFieldComponent} from "../examples/FormFields/PasswordField/PasswordField"
-// import {PasswordFieldComponent} from "../examples/FormFields/PasswordField/PasswordField"
-// import {PasswordFieldComponent} from "../examples/FormFields/PasswordField/PasswordField"
-// import {PasswordFieldComponent} from "../examples/FormFields/PasswordField/PasswordField"
-// import {PasswordFieldComponent} from "../examples/FormFields/PasswordField/PasswordField"
-// import {PasswordFieldComponent} from "../examples/FormFields/PasswordField/PasswordField"
-// import {PasswordFieldComponent} from "../examples/FormFields/PasswordField/PasswordField"
+import {SpinnerFieldComponent} from "../examples/FormFields/SpinnerField/SpinnerField"
+import {TextFieldComponent} from "../examples/FormFields/TextField/TextField"
+import {TextAreaFieldComponent} from "../examples/FormFields/TextAreaField/TextAreaField"
+import {TimeFieldComponent} from "../examples/FormFields/TimeField/TimeField"
+import {URLFieldComponent} from "../examples/FormFields/URLField/URLField"
+import {ValidationComponent} from "../examples/FormFields/Validation/Validation"
+import {ToggleFieldComponent} from "../examples/FormFields/ToggleField/ToggleField"
 
 
 import {EditableTreeComponent} from '../examples/Trees/EditableTree/EditableTree';
@@ -225,16 +225,16 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/forms/numberfield', component: NumberFieldComponent, text: 'NumberField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/forms/passwordfield', component: PasswordFieldComponent, text: 'PasswordField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/forms/selectfield', component: SelectFieldComponent, text: 'SelectField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	// { path: 'components/forms/spinnerfield', component: SpinnerFieldComponent, text: 'SpinnerField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/forms/spinnerfield', component: SpinnerFieldComponent, text: 'SpinnerField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/forms/radiofield', component: RadioFieldComponent, text: 'RadioField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/forms/sliderfield', component: SliderFieldComponent, text: 'SliderField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/forms/searchfield', component: SearchFieldComponent, text: 'SearchField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	// { path: 'components/forms/numberfield', component: NumberFieldComponent, text: 'NumberField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	// { path: 'components/forms/numberfield', component: NumberFieldComponent, text: 'NumberField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	// { path: 'components/forms/numberfield', component: NumberFieldComponent, text: 'NumberField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	// { path: 'components/forms/numberfield', component: NumberFieldComponent, text: 'NumberField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	// { path: 'components/forms/numberfield', component: NumberFieldComponent, text: 'NumberField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-
+	{ path: 'components/forms/textfield', component: TextFieldComponent, text: 'TextField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/forms/textareafield', component: TextAreaFieldComponent, text: 'TextAreaField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/forms/timefield', component: TimeFieldComponent, text: 'TimeField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/forms/togglefield', component: ToggleFieldComponent, text: 'ToggleField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/forms/urlfield', component: URLFieldComponent, text: 'URLField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/forms/validation', component: ValidationComponent, text: 'Validation', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
@@ -344,6 +344,13 @@ export class App {
 		SelectFieldComponent,
 		SearchFieldComponent,
 		SliderFieldComponent,
+		SpinnerFieldComponent,
+		TextFieldComponent,
+		TextAreaFieldComponent,
+		TimeFieldComponent,
+		ToggleFieldComponent,
+		URLFieldComponent,
+		ValidationComponent
 
 	],
 	providers: [

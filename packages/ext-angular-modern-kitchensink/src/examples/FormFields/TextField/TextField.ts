@@ -3,11 +3,11 @@ import {Component, OnInit} from '@angular/core'
 declare var Ext: any;
 
 @Component({
-  selector: 'numberfield-component',
-  templateUrl: "./NumberField.html",
+  selector: 'textfield-component',
+  templateUrl: "./TextField.html",
   styles: [``]
 })
-export class NumberFieldComponent implements OnInit  {
+export class TextFieldComponent implements OnInit  {
 
   constructor() { }
 

@@ -12,7 +12,7 @@ export class SelectFieldComponent implements OnInit  {
   constructor() { }
 
   onChange = (param) => {
-    Ext.toast(`You selected the item with value `, param.newValue);
+    Ext.toast('You selected the item with value '+param.newValue, 1000);
   }
 
   ngOnInit() {}

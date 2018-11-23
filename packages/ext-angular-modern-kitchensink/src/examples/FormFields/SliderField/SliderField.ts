@@ -16,15 +16,15 @@ export class SliderFieldComponent implements OnInit  {
   multipleValue:number[] = [10, 70];
 
   onSingleChange = (param) => {
-    this.singleValue = param.value;
+    this.singleValue = param.newValue;
   }
 
   onMultipleChange = (param) => {
-    this.multipleValue = param.value;
+    this.multipleValue = param.newValue;
   }
 
   onLiveUpdateChange = (param) => {
-    this.liveUpdateValue = param.value;
+    this.liveUpdateValue = param.newValue;
   }
 
   ngOnInit() {}
