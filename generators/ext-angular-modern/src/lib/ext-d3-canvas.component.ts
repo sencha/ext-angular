@@ -81,6 +81,9 @@ export class d3_canvasMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "size": "Object",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Ext.data.Store",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -104,7 +107,6 @@ export class d3_canvasMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -179,6 +181,9 @@ export class d3_canvasMetaData {
     'shim',
     'showAnimation',
     'size',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'tabIndex',
@@ -202,7 +207,6 @@ export class d3_canvasMetaData {
     'y',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

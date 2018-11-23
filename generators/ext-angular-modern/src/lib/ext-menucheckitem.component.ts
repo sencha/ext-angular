@@ -95,6 +95,9 @@ export class menucheckitemMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "submenuText": "String",
     "tabIndex": "Number",
@@ -120,7 +123,6 @@ export class menucheckitemMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -209,6 +211,9 @@ export class menucheckitemMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'submenuText',
     'tabIndex',
@@ -234,7 +239,6 @@ export class menucheckitemMetaData {
     'y',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

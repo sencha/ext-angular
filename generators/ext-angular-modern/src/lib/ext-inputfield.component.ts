@@ -99,6 +99,9 @@ export class inputfieldMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "sideError": "String",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "tipError": "String",
@@ -127,7 +130,6 @@ export class inputfieldMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -220,6 +222,9 @@ export class inputfieldMetaData {
     'shim',
     'showAnimation',
     'sideError',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'tipError',
@@ -248,7 +253,6 @@ export class inputfieldMetaData {
     'y',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

@@ -123,6 +123,9 @@ export class spinnerfieldMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "sideError": "String",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "stepValue": "Number",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -155,7 +158,6 @@ export class spinnerfieldMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -272,6 +274,9 @@ export class spinnerfieldMetaData {
     'shim',
     'showAnimation',
     'sideError',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'stepValue',
     'style',
     'tabIndex',
@@ -304,7 +309,6 @@ export class spinnerfieldMetaData {
     'y',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

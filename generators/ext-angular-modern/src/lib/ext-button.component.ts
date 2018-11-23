@@ -94,6 +94,9 @@ export class buttonMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "stretchMenu": "Boolean",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -120,7 +123,6 @@ export class buttonMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -208,6 +210,9 @@ export class buttonMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'stretchMenu',
     'style',
     'tabIndex',
@@ -234,7 +239,6 @@ export class buttonMetaData {
     'y',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

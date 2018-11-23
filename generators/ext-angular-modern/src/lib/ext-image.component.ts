@@ -81,6 +81,9 @@ export class imageMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "src": "String",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "toFrontOnShow": "Boolean",
@@ -102,7 +105,6 @@ export class imageMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -177,6 +179,9 @@ export class imageMetaData {
     'shim',
     'showAnimation',
     'src',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'toFrontOnShow',
@@ -198,7 +203,6 @@ export class imageMetaData {
     'y',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

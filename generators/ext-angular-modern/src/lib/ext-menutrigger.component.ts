@@ -74,7 +74,6 @@ export class menutriggerMetaData {
     "x": "Number",
     "y": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -142,7 +141,6 @@ export class menutriggerMetaData {
     'x',
     'y',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

@@ -86,6 +86,9 @@ export class pivotheatmapMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "size": "Object",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Ext.data.Store",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -112,7 +115,6 @@ export class pivotheatmapMetaData {
     "yAxis": "Ext.d3.axis.Data",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -192,6 +194,9 @@ export class pivotheatmapMetaData {
     'shim',
     'showAnimation',
     'size',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'tabIndex',
@@ -218,7 +223,6 @@ export class pivotheatmapMetaData {
     'yAxis',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

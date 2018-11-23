@@ -15,7 +15,6 @@ export class pivotd3containerMetaData {
     "drawing": "Ext.Component",
     "matrix": "Ext.pivot.matrix.Base",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -24,7 +23,6 @@ export class pivotd3containerMetaData {
     'drawing',
     'matrix',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

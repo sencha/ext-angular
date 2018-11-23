@@ -1,0 +1,24 @@
+ExtAngular
+ - modern kitchensink
+ - modern Sencha Tests
+ - modern docs
+ - classic Sencha Tests
+ - classic docs
+ - all other examples as per ExtReact
+ - ext-angular-gen
+ - ExtAngular functionality
+   - using *ngIf (etc) in an ExtAngular component
+   - accessing resources
+ - plugin tree-shaking (for ExtJS ext.js and ext.css)
+ - clean doxi output
+ - tree shake the typescript ExtAngular files
+ - use type info for properties in ts ExtAngular files
+
+
+
+ExtReact
+ - modern kitchensink  update/add for ExtJS 6.7
+ - modern Sencha Tests  update/add for ExtJS 6.7
+ - modern docs  update/add for ExtJS 6.7
+ - classic Sencha Tests  update/add for ExtJS 6.7
+ - classic docs  update/add for ExtJS 6.7

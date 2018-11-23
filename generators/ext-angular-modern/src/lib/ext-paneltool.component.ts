@@ -81,6 +81,9 @@ export class paneltoolMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "stopEvent": "Boolean",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -105,7 +108,6 @@ export class paneltoolMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -180,6 +182,9 @@ export class paneltoolMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'stopEvent',
     'style',
     'tabIndex',
@@ -204,7 +209,6 @@ export class paneltoolMetaData {
     'y',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

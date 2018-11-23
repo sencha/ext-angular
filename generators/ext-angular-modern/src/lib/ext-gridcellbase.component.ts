@@ -73,7 +73,6 @@ export class gridcellbaseMetaData {
     "x": "Number",
     "y": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -140,7 +139,6 @@ export class gridcellbaseMetaData {
     'x',
     'y',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

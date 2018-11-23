@@ -96,6 +96,9 @@ export class tabMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "stretchMenu": "Boolean",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -123,7 +126,6 @@ export class tabMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -213,6 +215,9 @@ export class tabMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'stretchMenu',
     'style',
     'tabIndex',
@@ -240,7 +245,6 @@ export class tabMetaData {
     'y',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

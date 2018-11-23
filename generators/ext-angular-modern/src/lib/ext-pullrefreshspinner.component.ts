@@ -80,6 +80,9 @@ export class pullrefreshspinnerMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "state": "'loading'/'loaded'/'pulling'/'holding'",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "toFrontOnShow": "Boolean",
@@ -101,7 +104,6 @@ export class pullrefreshspinnerMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -175,6 +177,9 @@ export class pullrefreshspinnerMetaData {
     'shim',
     'showAnimation',
     'state',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'toFrontOnShow',
@@ -196,7 +201,6 @@ export class pullrefreshspinnerMetaData {
     'y',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

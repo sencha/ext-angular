@@ -1,6 +1,7 @@
 async function main() {
   var path = require('path')
   var framework = 'angular'
+  //var toolkit  = 'classic'
   var toolkit  = 'modern'
   var rootFolder            = './GeneratedFolders/';                        log(`rootFolder`,`${rootFolder}`)
   var templateBaseFolder    = './filetemplates/';                           log(`templateBaseFolder`,`${templateBaseFolder}`)
@@ -13,12 +14,12 @@ async function main() {
   var libFolder             = srcFolder + 'lib/';                           log(`libFolder`,`${libFolder}`)
 
   await run(`node all.js ${framework} ${toolkit}`)
-  await run(`cp -R ${packageFolder}/ ../${folderName}`)
+  await run(`cp -R ${packageFolder}/${toolkit}/ ../${folderName}`)
   await run(`cp -R ${srcFolder} ../${folderName}/src`)
   await run(`npm install`, `../${folderName}/`)
   await run(`npm run build`, `../${folderName}/`)
   await run (`rm -R ../../packages/${folderName}`)
-  await run(`cp -R ../ext-angular-modern/dist/${folderName} ../../packages/${folderName}`)
+  await run(`cp -R ../ext-${framework}-${toolkit}/dist/${folderName} ../../packages/${folderName}`)
   //await run (`ls -l`, `../../packages/${folderName}/lib`)
 }
 

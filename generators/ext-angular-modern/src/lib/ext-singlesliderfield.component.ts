@@ -103,6 +103,9 @@ export class singlesliderfieldMetaData {
     "showAnimation": "String/Mixed",
     "sideError": "String",
     "slider": "any",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "tipError": "String",
@@ -132,7 +135,6 @@ export class singlesliderfieldMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -229,6 +231,9 @@ export class singlesliderfieldMetaData {
     'showAnimation',
     'sideError',
     'slider',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'tipError',
@@ -258,7 +263,6 @@ export class singlesliderfieldMetaData {
     'y',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

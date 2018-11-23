@@ -219,12 +219,12 @@ function oneItem(o, libFolder, framework, extension, num, xtype, alias, moduleVa
     });
 
     sPROPERTIES = `${sPROPERTIES}    'platformConfig',${newLine}`
-    sPROPERTIES = `${sPROPERTIES}    'responsiveConfig',${newLine}`
+//    sPROPERTIES = `${sPROPERTIES}    'responsiveConfig',${newLine}`
     sPROPERTIES = `${sPROPERTIES}    'fitToParent',${newLine}`
     sPROPERTIES = `${sPROPERTIES}    'config'${newLine}`
 
     sPROPERTIESOBJECT = `${sPROPERTIESOBJECT}    "platformConfig": "Object",${newLine}`;
-    sPROPERTIESOBJECT = `${sPROPERTIESOBJECT}    "responsiveConfig": "Object",${newLine}`;
+//    sPROPERTIESOBJECT = `${sPROPERTIESOBJECT}    "responsiveConfig": "Object",${newLine}`;
     sPROPERTIESOBJECT = `${sPROPERTIESOBJECT}    "fitToParent": "Boolean",${newLine}`;
     sPROPERTIESOBJECT = `${sPROPERTIESOBJECT}    "config": "Object",${newLine}`;
   }

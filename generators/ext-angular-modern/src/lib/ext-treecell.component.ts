@@ -83,7 +83,6 @@ export class treecellMetaData {
     "y": "Number",
     "zeroValue": "String",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -160,7 +159,6 @@ export class treecellMetaData {
     'y',
     'zeroValue',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

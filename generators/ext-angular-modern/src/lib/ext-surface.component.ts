@@ -67,7 +67,6 @@ export class surfaceMetaData {
     "x": "Number",
     "y": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -128,7 +127,6 @@ export class surfaceMetaData {
     'x',
     'y',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

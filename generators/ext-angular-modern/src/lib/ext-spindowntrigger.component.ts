@@ -71,7 +71,6 @@ export class spindowntriggerMetaData {
     "x": "Number",
     "y": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -136,7 +135,6 @@ export class spindowntriggerMetaData {
     'x',
     'y',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];
