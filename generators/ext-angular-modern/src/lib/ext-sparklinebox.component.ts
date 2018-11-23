@@ -92,6 +92,9 @@ export class sparklineboxMetaData {
     "showAnimation": "String/Mixed",
     "showOutliers": "Boolean",
     "spotRadius": "Number",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "target": "Number",
@@ -121,7 +124,6 @@ export class sparklineboxMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -207,6 +209,9 @@ export class sparklineboxMetaData {
     'showAnimation',
     'showOutliers',
     'spotRadius',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'target',
@@ -236,7 +241,6 @@ export class sparklineboxMetaData {
     'y',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

@@ -85,6 +85,9 @@ export class sparklinepieMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "sliceColors": "String[]",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "tipTpl": "String/Ext.XTemplate",
@@ -111,7 +114,6 @@ export class sparklinepieMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -190,6 +192,9 @@ export class sparklinepieMetaData {
     'shim',
     'showAnimation',
     'sliceColors',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'tipTpl',
@@ -216,7 +221,6 @@ export class sparklinepieMetaData {
     'y',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

@@ -1,0 +1,39 @@
+{
+  "name": "@sencha/ext-angular-classic",
+  "version": "6.7.0",
+  "description": "ext-angular-classic",
+  "main": "bundles/sencha-ext-angular-classic.umd.js",
+  "peerDependencies": {
+    "@angular/compiler": "^7.0.4",
+    "@angular/core": "^7.0.4",
+    "tslib": "^1.9.3"
+  },
+  "dependencies": {
+    "@angular/compiler": "^7.0.4",
+    "@angular/core": "^7.0.4",
+    "zone.js": "~0.8.26",
+    "tslib": "^1.9.0"
+  },
+  "devDependencies": {
+    "ng-packagr": "^4.4.0",
+    "tsickle": "^0.34.0",
+    "@angular/compiler-cli": "^7.0.4",
+    "typescript": "~3.1.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sencha/ext-angular.git"
+  },
+  "keywords": [],
+  "author": "Marc Gusmano <mgusmano@yahoo.com> (http://MarcGusmano.com)",
+  "license": "ISC",
+  "module": "fesm5/sencha-ext-angular-classic.js",
+  "es2015": "fesm2015/sencha-ext-angular-classic.js",
+  "esm5": "esm5/sencha-ext-angular-classic.js",
+  "esm2015": "esm2015/sencha-ext-angular-classic.js",
+  "fesm5": "fesm5/sencha-ext-angular-classic.js",
+  "fesm2015": "fesm2015/sencha-ext-angular-classic.js",
+  "typings": "sencha-ext-angular-classic.d.ts",
+  "metadata": "sencha-ext-angular-classic.metadata.json",
+  "sideEffects": false
+}

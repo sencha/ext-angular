@@ -87,6 +87,9 @@ export class videoMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "showPosterOnPause": "Boolean",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "toFrontOnShow": "Boolean",
@@ -110,7 +113,6 @@ export class videoMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -191,6 +193,9 @@ export class videoMetaData {
     'shim',
     'showAnimation',
     'showPosterOnPause',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'toFrontOnShow',
@@ -214,7 +219,6 @@ export class videoMetaData {
     'y',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

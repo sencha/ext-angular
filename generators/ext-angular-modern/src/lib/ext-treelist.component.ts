@@ -87,6 +87,9 @@ export class treelistMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "singleExpand": "Boolean",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "String/Object/Ext.data.TreeStore",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -109,7 +112,6 @@ export class treelistMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -190,6 +192,9 @@ export class treelistMetaData {
     'shim',
     'showAnimation',
     'singleExpand',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'tabIndex',
@@ -212,7 +217,6 @@ export class treelistMetaData {
     'y',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

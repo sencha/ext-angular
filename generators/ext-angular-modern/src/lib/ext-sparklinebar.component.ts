@@ -91,6 +91,9 @@ export class sparklinebarMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "stackedBarColor": "String[]",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "tipTpl": "String/Ext.XTemplate",
@@ -119,7 +122,6 @@ export class sparklinebarMetaData {
     "zeroColor": "String",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -204,6 +206,9 @@ export class sparklinebarMetaData {
     'shim',
     'showAnimation',
     'stackedBarColor',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'tipTpl',
@@ -232,7 +237,6 @@ export class sparklinebarMetaData {
     'zeroColor',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

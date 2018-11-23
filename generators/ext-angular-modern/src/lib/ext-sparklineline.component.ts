@@ -97,6 +97,9 @@ export class sparklinelineMetaData {
     "showAnimation": "String/Mixed",
     "spotColor": "String",
     "spotRadius": "Number",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "tipTpl": "String/Ext.XTemplate",
@@ -124,7 +127,6 @@ export class sparklinelineMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -215,6 +217,9 @@ export class sparklinelineMetaData {
     'showAnimation',
     'spotColor',
     'spotRadius',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'tipTpl',
@@ -242,7 +247,6 @@ export class sparklinelineMetaData {
     'y',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

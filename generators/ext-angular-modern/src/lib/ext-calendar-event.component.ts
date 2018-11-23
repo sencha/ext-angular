@@ -84,6 +84,9 @@ export class calendar_eventMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "startDate": "Date",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "timeFormat": "String",
@@ -108,7 +111,6 @@ export class calendar_eventMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -186,6 +188,9 @@ export class calendar_eventMetaData {
     'shim',
     'showAnimation',
     'startDate',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'timeFormat',
@@ -210,7 +215,6 @@ export class calendar_eventMetaData {
     'y',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

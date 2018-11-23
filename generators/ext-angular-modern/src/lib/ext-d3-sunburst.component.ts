@@ -99,6 +99,9 @@ export class d3_sunburstMetaData {
     "showAnimation": "String/Mixed",
     "size": "Object",
     "sorter": "Function",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Ext.data.Store",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -124,7 +127,6 @@ export class d3_sunburstMetaData {
     "zIndex": "Number",
     "zoomParentDotRadius": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -217,6 +219,9 @@ export class d3_sunburstMetaData {
     'showAnimation',
     'size',
     'sorter',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'tabIndex',
@@ -242,7 +247,6 @@ export class d3_sunburstMetaData {
     'zIndex',
     'zoomParentDotRadius',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

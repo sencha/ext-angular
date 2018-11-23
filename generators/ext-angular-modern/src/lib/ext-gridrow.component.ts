@@ -82,6 +82,9 @@ export class gridrowMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "stickyVisibility": "any",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -104,7 +107,6 @@ export class gridrowMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -180,6 +182,9 @@ export class gridrowMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'stickyVisibility',
     'style',
     'tabIndex',
@@ -202,7 +207,6 @@ export class gridrowMetaData {
     'y',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

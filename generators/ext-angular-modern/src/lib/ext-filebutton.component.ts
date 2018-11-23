@@ -97,6 +97,9 @@ export class filebuttonMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "stretchMenu": "Boolean",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -123,7 +126,6 @@ export class filebuttonMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -214,6 +216,9 @@ export class filebuttonMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'stretchMenu',
     'style',
     'tabIndex',
@@ -240,7 +245,6 @@ export class filebuttonMetaData {
     'y',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

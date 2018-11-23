@@ -27,7 +27,6 @@ export class axis3dMetaData {
     "length": "Number",
     "limits": "Array/Object",
     "linkedTo": "Ext.chart.axis.Axis/String/Number",
-    "listeners": "Object",
     "majorTickSteps": "Number",
     "margin": "Number",
     "maximum": "Number",
@@ -48,7 +47,6 @@ export class axis3dMetaData {
     "totalAngle": "any",
     "visibleRange": "Array",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -69,7 +67,6 @@ export class axis3dMetaData {
     'length',
     'limits',
     'linkedTo',
-    'listeners',
     'majorTickSteps',
     'margin',
     'maximum',
@@ -90,7 +87,6 @@ export class axis3dMetaData {
     'totalAngle',
     'visibleRange',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];

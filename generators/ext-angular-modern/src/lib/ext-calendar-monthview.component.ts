@@ -92,6 +92,9 @@ export class calendar_monthviewMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "showOverflow": "String",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Object/Ext.calendar.store.Calendars",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -119,7 +122,6 @@ export class calendar_monthviewMetaData {
     "y": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
-    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -205,6 +207,9 @@ export class calendar_monthviewMetaData {
     'shim',
     'showAnimation',
     'showOverflow',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'tabIndex',
@@ -232,7 +237,6 @@ export class calendar_monthviewMetaData {
     'y',
     'zIndex',
     'platformConfig',
-    'responsiveConfig',
     'fitToParent',
     'config'
 ];
