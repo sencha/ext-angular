@@ -113,6 +113,7 @@ export class d3_heatmapMetaData {
     "yAxis": "Ext.d3.axis.Data",
     "zIndex": "Number",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -219,6 +220,7 @@ export class d3_heatmapMetaData {
     'yAxis',
     'zIndex',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

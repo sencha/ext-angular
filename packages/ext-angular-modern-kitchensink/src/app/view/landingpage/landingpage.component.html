@@ -31,6 +31,18 @@
       (selectionchange)="selectionChanged($event)">
     </treelist>
   </panel>
+<!--
+    <ul #item class="breadcrumb">
+        <li *ngFor="let child of node.childNodes; let lastItem = last;">
+            <button
+              [width]="'100px'"
+              [handler]="clickContact"
+              [text]="child.data.name">
+            </button>
+            <span style="color:red;" *ngIf="!lastItem">></span>
+        </li>
+      </ul>
+    -->
 
   <toolbar #item [docked]="'top'">
     <dataview #item
@@ -42,7 +54,9 @@
       (childtap)="doClickToolbar($event)"
       (ready)="dataviewToolbarReady($event)">
     </dataview>
-  </toolbar>  
+  </toolbar>
+    <!--
+  -->
 
   <container #item [layout]="fit" [cls]="'main-background'" [scrollable]="false" [padding]="30">
     <dataview #item

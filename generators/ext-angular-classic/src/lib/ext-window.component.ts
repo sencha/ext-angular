@@ -202,6 +202,7 @@ export class windowMetaData {
     "xtype": "Ext.enums.Widget",
     "y": "Number",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -397,6 +398,7 @@ export class windowMetaData {
     'xtype',
     'y',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

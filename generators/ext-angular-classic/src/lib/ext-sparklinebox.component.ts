@@ -71,6 +71,7 @@ export class sparklineboxMetaData {
     "whiskerColor": "String",
     "width": "Number/String",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -135,6 +136,7 @@ export class sparklineboxMetaData {
     'whiskerColor',
     'width',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

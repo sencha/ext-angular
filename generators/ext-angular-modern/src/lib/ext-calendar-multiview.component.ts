@@ -20,6 +20,7 @@ export class calendar_multiviewMetaData {
     "value": "Date",
     "views": "Object",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -33,6 +34,7 @@ export class calendar_multiviewMetaData {
     'value',
     'views',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

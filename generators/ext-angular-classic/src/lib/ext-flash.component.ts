@@ -126,6 +126,7 @@ export class flashMetaData {
     "wmode": "String",
     "xtype": "Ext.enums.Widget",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -245,6 +246,7 @@ export class flashMetaData {
     'wmode',
     'xtype',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

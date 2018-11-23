@@ -69,6 +69,7 @@ export class sparklinebarMetaData {
     "zeroAxis": "Boolean",
     "zeroColor": "String",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -131,6 +132,7 @@ export class sparklinebarMetaData {
     'zeroAxis',
     'zeroColor',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

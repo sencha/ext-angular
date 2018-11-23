@@ -219,6 +219,7 @@ export class calendar_form_editMetaData {
     "xtype": "Ext.enums.Widget",
     "y": "Number",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -431,6 +432,7 @@ export class calendar_form_editMetaData {
     'xtype',
     'y',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

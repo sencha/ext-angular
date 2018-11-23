@@ -187,6 +187,7 @@ export class datepanelMetaData {
     "yearPickerDefaults": "Object",
     "zIndex": "Number",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -367,6 +368,7 @@ export class datepanelMetaData {
     'yearPickerDefaults',
     'zIndex',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

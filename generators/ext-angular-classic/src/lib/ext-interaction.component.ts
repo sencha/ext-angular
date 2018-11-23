@@ -16,6 +16,7 @@ export class interactionMetaData {
     "gesture": "Object",
     "listeners": "Object",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -25,6 +26,7 @@ export class interactionMetaData {
     'gesture',
     'listeners',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

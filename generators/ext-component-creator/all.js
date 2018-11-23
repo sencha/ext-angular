@@ -204,6 +204,7 @@ function oneItem(o, libFolder, framework, extension, num, xtype, alias, moduleVa
 
   var configsArray = o.items.filter(function(obj) {return obj.$type == 'configs';});
   if (configsArray.length == 1) {
+    var haveResponsiveConfig = false
     configsArray[0].items.forEach(function (config, index, array) {
       sPROPERTIES = `${sPROPERTIES}    '${config.name}',${newLine}`
       var type = ''
@@ -214,17 +215,24 @@ function oneItem(o, libFolder, framework, extension, num, xtype, alias, moduleVa
       else {
         type = config.type.replace(/"/g, "\'");
       }
+      if (config.name == 'responsiveConfig') {
+        haveResponsiveConfig = true
+      }
       sPROPERTIESOBJECT = `${sPROPERTIESOBJECT}    "${config.name}": "${type}",${newLine}`;
       sGETSET = sGETSET + tab + `get ${config.name}(){return this.getAttribute('${config.name}')};set ${config.name}(${config.name}){this.setAttribute('${config.name}',${config.name})}\n`
     });
 
     sPROPERTIES = `${sPROPERTIES}    'platformConfig',${newLine}`
-//    sPROPERTIES = `${sPROPERTIES}    'responsiveConfig',${newLine}`
+    if (haveResponsiveConfig == false) {
+      sPROPERTIES = `${sPROPERTIES}    'responsiveConfig',${newLine}`
+    }
     sPROPERTIES = `${sPROPERTIES}    'fitToParent',${newLine}`
     sPROPERTIES = `${sPROPERTIES}    'config'${newLine}`
 
     sPROPERTIESOBJECT = `${sPROPERTIESOBJECT}    "platformConfig": "Object",${newLine}`;
-//    sPROPERTIESOBJECT = `${sPROPERTIESOBJECT}    "responsiveConfig": "Object",${newLine}`;
+    if (haveResponsiveConfig == false) {
+      sPROPERTIESOBJECT = `${sPROPERTIESOBJECT}    "responsiveConfig": "Object",${newLine}`;
+    }
     sPROPERTIESOBJECT = `${sPROPERTIESOBJECT}    "fitToParent": "Boolean",${newLine}`;
     sPROPERTIESOBJECT = `${sPROPERTIESOBJECT}    "config": "Object",${newLine}`;
   }

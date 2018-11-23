@@ -171,6 +171,7 @@ export class datepickerMetaData {
     "yearTo": "Number",
     "zIndex": "Number",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -335,6 +336,7 @@ export class datepickerMetaData {
     'yearTo',
     'zIndex',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

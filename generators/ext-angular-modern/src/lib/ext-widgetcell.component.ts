@@ -75,6 +75,7 @@ export class widgetcellMetaData {
     "x": "Number",
     "y": "Number",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -143,6 +144,7 @@ export class widgetcellMetaData {
     'x',
     'y',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

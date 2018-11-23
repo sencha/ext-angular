@@ -21,41 +21,41 @@ import { Component } from '@angular/core'
     padding: 0px;
 }
 
+  ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
+  }
 
-
-
-
-  .menu-outer {
+  .breadcrumb {
     height: 50px;
     width: 100%;
     background: white;
-  }
-  
-  .horizontal-list {
     list-style: none;
-    padding-left: 0px;
-    padding-top: 7px;
+    padding-left: 10px;
+    padding-top: 10px;
     }
-    ul.horizontal-list li {
-      padding-left: 20px;
-      xwidth:150px;
+    .breadcrumb li {
       float:left;
     }
   `],
   template: `
 
-  <div class="menu-outer">
-    <ul class="horizontal-list">
+    <ul class="breadcrumb">
       <li *ngFor="let contact of contacts; let lastItem = last;">
           <button
             [width]="'100px'"
             [handler]="clickContact"
             [text]="contact.name">
           </button>
-          <span style="width:1px;padding-left:1px;" *ngIf="!lastItem">></span>
+          <span style="color:red;xwidth:1px;xpadding-left:1px;" *ngIf="!lastItem">></span>
       </li>
     </ul>
-  </div>
+
 
     <panel #item
       [title]="'Panel with children'"
@@ -76,13 +76,6 @@ import { Component } from '@angular/core'
       </button>
 
     </panel>
-
-
-
-
-
-
-
 
   `
 })

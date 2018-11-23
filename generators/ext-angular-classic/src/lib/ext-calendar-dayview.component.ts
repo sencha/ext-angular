@@ -70,6 +70,7 @@ export class calendar_dayviewMetaData {
     "visibleDays": "Number",
     "width": "Number/String",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -133,6 +134,7 @@ export class calendar_dayviewMetaData {
     'visibleDays',
     'width',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

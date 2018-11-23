@@ -64,6 +64,7 @@ export class pivotheatmapMetaData {
     "xAxis": "Ext.d3.axis.Data",
     "yAxis": "Ext.d3.axis.Data",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -121,6 +122,7 @@ export class pivotheatmapMetaData {
     'xAxis',
     'yAxis',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];

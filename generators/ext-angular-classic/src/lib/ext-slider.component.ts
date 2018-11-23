@@ -187,6 +187,7 @@ export class sliderMetaData {
     "xtype": "Ext.enums.Widget",
     "zeroBasedSnapping": "Boolean",
     "platformConfig": "Object",
+    "responsiveConfig": "Object",
     "fitToParent": "Boolean",
     "config": "Object",
 };
@@ -367,6 +368,7 @@ export class sliderMetaData {
     'xtype',
     'zeroBasedSnapping',
     'platformConfig',
+    'responsiveConfig',
     'fitToParent',
     'config'
 ];
