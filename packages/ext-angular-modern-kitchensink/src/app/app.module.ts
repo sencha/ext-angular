@@ -72,11 +72,19 @@ import {TreeDecorationsComponent} from '../examples/Trees/TreeDecorations/TreeDe
 import {TreeGridComponent} from '../examples/Trees/TreeGrid/TreeGrid';
 import {TreeListComponent} from '../examples/Trees/TreeList/TreeList';
 
-import {BasicGridComponent} from '../examples/Grid//BasicGrid/BasicGrid';
-import {EditableGridComponent} from '../examples/Grid//EditableGrid/EditableGrid';
-import {GroupedGridComponent} from '../examples/Grid//GroupedGrid/GroupedGrid';
-import {ReduxGridComponent} from '../examples/Grid//ReduxGrid/ReduxGrid';
-import {XMLGridComponent} from '../examples/Grid//XMLGrid/XMLGrid';
+import {BasicGridComponent} from '../examples/Grid/BasicGrid/BasicGrid';
+import {EditableGridComponent} from '../examples/Grid/EditableGrid/EditableGrid';
+import {GroupedGridComponent} from '../examples/Grid/GroupedGrid/GroupedGrid';
+import {ReduxGridComponent} from '../examples/Grid/ReduxGrid/ReduxGrid';
+import {XMLGridComponent} from '../examples/Grid/XMLGrid/XMLGrid';
+
+import {GridToolsComponent} from '../examples/Grid/AddonsDecorations/GridTools/GridTools';
+import {RowBodyComponent} from '../examples/Grid/AddonsDecorations/RowBody/RowBody';
+import {RowExpanderComponent} from '../examples/Grid/AddonsDecorations/RowExpander/RowExpander';
+import {SummaryRowComponent} from '../examples/Grid/AddonsDecorations/SummaryRow/SummaryRow';
+import {ViewOptionsComponent} from '../examples/Grid/AddonsDecorations/ViewOptions/ViewOptions';
+
+
 
 
 import {DefaultGaugeComponent} from "../examples/Gauges/DefaultGauge"
@@ -84,6 +92,8 @@ import {NeedleGaugeComponent} from "../examples/Gauges/NeedleGauge"
 
 import {CalendarService} from "../examples/Calendar/Calendar.service"
 import {GridService} from '../examples/Grid/Grid.service'
+
+
 
 
 interface ExtAngularRoute extends Route {
@@ -135,6 +145,7 @@ const routes: ExtAngularRoutes = [
 	
 	{ path: 'grids', component: DummyComponent, text: 'Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/core_features', component: DummyComponent, text: 'Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'grids/addons', component: DummyComponent, text: 'Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
 	
 	
@@ -182,7 +193,15 @@ const routes: ExtAngularRoutes = [
 	{ path: 'grids/core_features/grouped_grid', component: GroupedGridComponent, text: 'Grouped Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/core_features/editable_grid', component: EditableGridComponent, text: 'Editable Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/core_features/xml_grid', component: XMLGridComponent, text: 'XML Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'grids/redux_grid', component: ReduxGridComponent, text: 'Redux grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'grids/redux_grid', component: ReduxGridComponent, text: 'Redux Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	{ path: 'grids/addons/grid_tools', component: GridToolsComponent, text: 'Grid TOols', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'grids/addons/row_expander', component: RowExpanderComponent, text: 'Row Expander', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'grids/addons/row_body', component: RowBodyComponent, text: 'Row Body', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'grids/addons/summary_row', component: SummaryRowComponent, text: 'Summary Row', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'grids/addons/view_options', component: ViewOptionsComponent, text: 'View Options', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
@@ -276,8 +295,13 @@ export class App {
 		EditableGridComponent,
 		GroupedGridComponent,
 		ReduxGridComponent,
-		XMLGridComponent
+		XMLGridComponent,
 
+		GridToolsComponent,
+		RowBodyComponent,
+		RowExpanderComponent,
+		SummaryRowComponent,
+		ViewOptionsComponent
 
 	],
 	providers: [
