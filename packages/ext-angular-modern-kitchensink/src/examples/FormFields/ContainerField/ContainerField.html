@@ -1,0 +1,24 @@
+<container #item [layout]="vbox" [padding]="10" [maxWidth]="660">
+    <panel #item [ui]="'instructions'" [margin]="'0 0 20 0'" [shadow]="true"
+        [html]="'<b>ContainerField</b> allows you to apply a single label to multiple fields.
+        This is especially useful for groups of checkboxes, radio buttons, and other compound 
+        fields.'"
+    ></panel>
+    <formpanel #item [layout]="'form'" [shadow]="true" [defaults]="{labelAlign: 'left', labelTextAlign: 'right'}">
+        <containerfield #item [label]="'Name'" [layout]="isPhone ? 'vbox' : 'hbox'" [defaults]="{labelAlign: 'bottom'}">
+            <textfield #item [label]="'First'"></textfield>
+            <textfield #item [label]="'Middle'"></textfield>
+            <textfield #item [label]="'Last'"></textfield>
+        </containerfield>
+        <containerfield #item [label]="'Vehicle Class'" [layout]="{type: 'vbox', align: 'left'}" [defaults]="{ margin: '0' }">
+            <radiofield #item [boxLabel]="'Compact'" [name]="'priority'"></radiofield>
+            <radiofield #item [boxLabel]="'Mid-size'" [name]="'priority'"></radiofield>
+            <radiofield #item [boxLabel]="'SUV'" [name]="'priority'"></radiofield>
+        </containerfield>
+        <containerfield #item [label]="'Options'" [layout]="{type: 'vbox', align: 'left'}">
+            <checkboxfield #item [boxLabel]="'A/C'"></checkboxfield>
+            <checkboxfield #item [boxLabel]="'Leather'"></checkboxfield>
+            <checkboxfield #item [boxLabel]="'Nav'"></checkboxfield>
+        </containerfield>
+    </formpanel>
+</container>
