@@ -1,4 +1,4 @@
-      <grid title="Grid Tools"
+      <grid  #item title="Grid Tools"
         [store]="this.store"
         columnLines="true"
         grouped="true"
@@ -25,7 +25,7 @@
           }
         }"
       >
-        <column 
+        <column   #item
           text="Name" 
           dataIndex="name" 
           flex="1"
@@ -38,7 +38,7 @@
             }
           }"
         ></column>
-        <column 
+        <column   #item
           text="Cuisine" 
           dataIndex="cuisine" 
           flex="1"
@@ -51,7 +51,7 @@
             }
           }"
         ></column>
-        <column 
+        <column   #item
           text="Actions" 
           width="80" 
           [cell]="{
