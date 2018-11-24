@@ -1,0 +1,71 @@
+<container #item 
+    [platformConfig]="{
+        phone: {layout: 'fit'}, '!phone': {layout: 'center', padding: 10}
+    }"
+>
+<!-- todo handle this ref -->
+    <formpanel #item
+        (ready)="onReady($event)"
+        [shadow]="true" 
+        [padding]="20"
+        [platformConfig]="{'!phone': {maxHeight: 500, width: 350}}"
+    >
+        <fieldset #item [title]="'Personal Info'" [defaults]="{labelAlign: 'placeholder'}">
+            <textfield #item [label]="'Name'" [required]="true" [placeholder]="'This field is required'" [disabled]="disabled">
+            </textfield>
+            <passwordfield #item [label]="'Password'" [required]="true" [revealable]="true" [disabled]="disabled">
+            </passwordfield>
+            <emailfield #item [label]="'Email'" [placeholder]="'me@sencha.com'" [disabled]="disabled">
+            </emailfield>
+            <textfield #item [label]="'Phone Number'" [inputMask]="'(999) 999-9999'" [inputType]="'tel'" [disabled]="disabled">
+            </textfield>
+            <urlfield #item [label]="'URL'" [placeholder]="'http://sencha.com'" [disabled]="disabled">
+            </urlfield>
+            <spinnerfield #item
+                [label]="'Spinner'" [minValue]="0" [maxValue]="1000"
+                [stepValue]="1" [cycle]="true" [margin]="'15 0 0 0'"
+                [labelAlign]="'top'" [disabled]="disabled"
+            ></spinnerfield>
+            <datepickerfield #item [label]="'Start Date'" [disabled]="disabled"></datepickerfield>
+            <selectfield #item [label]="'Rank'"
+                [disabled]="disabled"
+                [options]="[
+                    { text: 'Master', value: 'master' },
+                    { text: 'Journeyman', value: 'journeyman' },
+                    { text: 'Apprentice', value: 'apprentice' }
+                ]"
+            ></selectfield>
+            <textfield #item [label]="'With Error'" [errorMessage]="'This field is invalid'" [errorTarget]="'under'" [disabled]="disabled">
+            </textfield>
+            <sliderfield #item [label]="'Slider'" [disabled]="disabled"></sliderfield>
+            <togglefield #item [label]="'Toggle'" [disabled]="disabled"></togglefield>
+            <textareafield #item [label]="'Bio'" [maxRows]="5" [disabled]="disabled"></textareafield>
+        </fieldset>
+        <fieldset #item [title]="'Roles'" [layout]="{type: 'vbox', align: 'left'}" [margin]="'15 0'" [defaults]="{labelAlign: 'placeholder'}">
+            <checkboxfield #item [disabled]="disabled" [boxLabel]="'Admin'"></checkboxfield>
+            <checkboxfield #item [disabled]="disabled" [boxLabel]="'Power User'"></checkboxfield>
+        </fieldset>
+        <fieldset #item                      
+            [title]="'Favorite Color'" 
+            [layout]="{ type: 'vbox', align: 'left' }" 
+            [defaults]="{
+                labelAlign: 'placeholder',
+                name: 'color',
+                labelAlign: 'right',
+                labelWidth: 'auto',
+                padding: 0
+            }"
+        >
+            <radiofield #item [name]="'color'" [disabled]="disabled" [boxLabel]="'Red'" [value]="'red'"></radiofield>
+            <radiofield #item [name]="'color'" [disabled]="disabled" [boxLabel]="'Blue'" [value]="'blue'"></radiofield>
+            <radiofield #item [name]="'color'" [disabled]="disabled" [boxLabel]="'Green'" [value]="'green'"></radiofield>
+            <radiofield #item [name]="'color'" [disabled]="disabled" [boxLabel]="'Purple'" [value]="'purple'"></radiofield>
+        </fieldset>
+        <toolbar #item [docked]="'bottom'" [layout]="{ type: 'hbox', pack: 'right' }">
+            <button #item [text]="disabled ? 'Enable All' : 'Disable All'" [margin]="'0 10 0 0'" (tap)="toggleDisabled($event)">
+            </button>
+            <!-- Issue could not find reset() in events -->
+            <button #item [text]="'Reset'" (tap="() => formRef.reset()")></button>
+        </toolbar>
+    </formpanel>
+</container>
