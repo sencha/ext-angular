@@ -25,4 +25,6 @@ export class FormPanelComponent implements OnInit  {
 
   ngOnInit() {}
 
+  reset = () => this.formRef.reset();
+
 }

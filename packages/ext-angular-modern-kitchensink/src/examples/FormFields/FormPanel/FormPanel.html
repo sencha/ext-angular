@@ -65,7 +65,7 @@
             <button #item [text]="disabled ? 'Enable All' : 'Disable All'" [margin]="'0 10 0 0'" (tap)="toggleDisabled($event)">
             </button>
             <!-- Issue could not find reset() in events -->
-            <button #item [text]="'Reset'" (tap="() => formRef.reset()")></button>
+            <button #item [text]="'Reset'" (tap)="reset($event)"></button>
         </toolbar>
     </formpanel>
 </container>

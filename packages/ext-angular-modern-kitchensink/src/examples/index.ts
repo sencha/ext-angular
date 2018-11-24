@@ -32,6 +32,11 @@ import {GroupedGridComponent} from './Grid/GroupedGrid/GroupedGrid';
 import {ReduxGridComponent} from './Grid/ReduxGrid/ReduxGrid';
 import {XMLGridComponent} from './Grid/XMLGrid/XMLGrid';
 
+import {GridToolsComponent} from './Grid/AddonsDecorations/GridTools/GridTools';
+import {RowBodyComponent} from './Grid/AddonsDecorations/RowBody/RowBody';
+import {RowExpanderComponent} from './Grid/AddonsDecorations/RowExpander/RowExpander';
+import {SummaryRowComponent} from './Grid/AddonsDecorations/SummaryRow/SummaryRow';
+import {ViewOptionsComponent} from './Grid/AddonsDecorations/ViewOptions/ViewOptions';
 import {CheckBoxFieldComponent} from './FormFields/CheckBoxField/CheckBoxField';
 import {ComboBoxFieldComponent} from './FormFields/ComboBoxField/ComboBoxField';
 import {ContainerFieldComponent} from './FormFields/ContainerField/ContainerField';
@@ -171,11 +176,11 @@ const treeRoot = {
                 { text: 'XML Grid', component: XMLGridComponent, navIcon: 'icon-xml-grid'}
             ]},
             { text: 'Add-ons', navIcon: 'icon-framing-buttons', children: [
-                { text: 'Grid Tools', component: ButtonComponent, navIcon: 'icon-grid-tools'},
-                { text: 'Row Expander', component: ButtonComponent, navIcon: 'icon-row-expander-grid'},
-                { text: 'Row Body', component: ButtonComponent, navIcon: 'icon-row-body-grid'},
-                { text: 'Summary Row', component: ButtonComponent, navIcon: 'icon-grid-summary'},
-                { text: 'View Options', component: ButtonComponent, navIcon: 'icon-view-options-grid'}
+                { text: 'Grid Tools', component: GridToolsComponent, navIcon: 'icon-grid-tools'},
+                { text: 'Row Expander', component: RowExpanderComponent, navIcon: 'icon-row-expander-grid'},
+                { text: 'Row Body', component: RowBodyComponent, navIcon: 'icon-row-body-grid'},
+                { text: 'Summary Row', component: SummaryRowComponent, navIcon: 'icon-grid-summary'},
+                { text: 'View Options', component: ViewOptionsComponent, navIcon: 'icon-view-options-grid'}
             ]},
             { text: 'Advanced Features', navIcon: 'icon-grid-plugins', children:[
                 { text: 'Big Data', component: ButtonComponent, navIcon: 'icon-big-data-grid' },
