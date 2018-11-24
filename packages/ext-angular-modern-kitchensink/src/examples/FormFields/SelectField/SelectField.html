@@ -1,0 +1,13 @@
+<formpanel #item [shadow]="true">
+    <selectfield #item
+        [label]="Select"  
+        [width]="200"
+        (change)="onChange($event)"
+        [options]="[
+            { text: '', value: null },
+            { text: 'Option 1', value: 1 },
+            { text: 'Option 2', value: 2 },
+            { text: 'Option 3', value: 3 }
+        ]"
+    ></selectfield>
+</formpanel>

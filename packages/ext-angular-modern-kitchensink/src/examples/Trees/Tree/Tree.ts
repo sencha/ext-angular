@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { tree, TreeColumn } from '@sencha/ext-modern-treegrid';
 
 declare var Ext: any;
 

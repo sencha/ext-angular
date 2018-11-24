@@ -23,6 +23,41 @@ import {TreeComponent} from './Trees/Tree/Tree';
 import {TreeDecorationsComponent} from './Trees/TreeDecorations/TreeDecorations';
 import {TreeGridComponent} from './Trees/TreeGrid/TreeGrid';
 import {TreeListComponent} from './Trees/TreeList/TreeList';
+import { DefaultGaugeComponent } from 'src/examples/Gauges/DefaultGauge';
+import { NeedleGaugeComponent } from 'src/examples/Gauges/NeedleGauge';
+
+import {BasicGridComponent} from './Grid/BasicGrid/BasicGrid';
+import {EditableGridComponent} from './Grid/EditableGrid/EditableGrid';
+import {GroupedGridComponent} from './Grid/GroupedGrid/GroupedGrid';
+import {ReduxGridComponent} from './Grid/ReduxGrid/ReduxGrid';
+import {XMLGridComponent} from './Grid/XMLGrid/XMLGrid';
+
+import {GridToolsComponent} from './Grid/AddonsDecorations/GridTools/GridTools';
+import {RowBodyComponent} from './Grid/AddonsDecorations/RowBody/RowBody';
+import {RowExpanderComponent} from './Grid/AddonsDecorations/RowExpander/RowExpander';
+import {SummaryRowComponent} from './Grid/AddonsDecorations/SummaryRow/SummaryRow';
+import {ViewOptionsComponent} from './Grid/AddonsDecorations/ViewOptions/ViewOptions';
+import {CheckBoxFieldComponent} from './FormFields/CheckBoxField/CheckBoxField';
+import {ComboBoxFieldComponent} from './FormFields/ComboBoxField/ComboBoxField';
+import {ContainerFieldComponent} from './FormFields/ContainerField/ContainerField';
+import {DatePickerFieldComponent} from './FormFields/DatePickerField/DatePickerField';
+import {EmailFieldComponent} from './FormFields/EmailField/EmailField';
+import {FieldSetComponent} from './FormFields/FieldSet/FieldSet';
+import {FileFieldComponent} from './FormFields/FileField/FileField';
+import {FormPanelComponent} from './FormFields/FormPanel/FormPanel';
+import {NumberFieldComponent} from './FormFields/NumberField/NumberField';
+import {PasswordFieldComponent} from './FormFields/PasswordField/PasswordField';
+import {RadioFieldComponent} from './FormFields/RadioField/RadioField';
+import {SearchFieldComponent} from './FormFields/SearchField/SearchField';
+import {SelectFieldComponent} from './FormFields/SelectField/SelectField';
+import {SliderFieldComponent} from './FormFields/SliderField/SliderField';
+import {SpinnerFieldComponent} from './FormFields/SpinnerField/SpinnerField';
+import {TextAreaFieldComponent} from './FormFields/TextAreaField/TextAreaField';
+import {TextFieldComponent} from './FormFields/TextField/TextField';
+import {TimeFieldComponent} from './FormFields/TimeField/TimeField';
+import {ToggleFieldComponent} from './FormFields/ToggleField/ToggleField';
+import {URLFieldComponent} from './FormFields/URLField/URLField';
+import {ValidationComponent} from './FormFields/Validation/Validation';
 
 declare var Ext: any;
 
@@ -48,33 +83,32 @@ const treeRoot = {
             ]},
             { text: 'Draw', component: ButtonComponent, navIcon: 'icon-drawing' },
             { text: 'Forms', navIcon: 'icon-forms', children: [
-                { text: 'CheckBoxField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-CheckBoxField'  },
-                { text: 'ComboBoxField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-ComboBoxField'  },
-                { text: 'ContainerField', component: ButtonComponent, layout: Ext.os.is.Phone ? 'auto' : 'center', navIcon: 'icon-Forms-ContainerField'  },
-                { text: 'DatePickerField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-DatePickerField'  },
-                { text: 'EmailField', component: ButtonComponent , layout: 'center', navIcon: 'icon-Forms-EmailField' },
-                { text: 'FieldSet', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-FieldSet'  },
-                { text: 'FileField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-FileField'  },
-                { text: 'FormPanel', component: ButtonComponent, navIcon: 'icon-form-panel' },
-                { text: 'NumberField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-NumberField' },
-                { text: 'PasswordField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-PasswordField' },
-                { text: 'RadioField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-RadioField' },
-                // { text: 'Picker', component: Picker, layout: 'center', navIcon: 'icon-picker' },
-                { text: 'SearchField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-SearchField' },
-                { text: 'SelectField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-SelectField' },
-                { text: 'SliderField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-SliderField' },
-                { text: 'SpinnerField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-SpinnerField' },
-                { text: 'TextAreaField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-TextAreaField' },
-                { text: 'TextField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-TextField' },
-                { text: 'TimeField', component: ButtonComponent, navIcon: 'icon-form-panel' },
-                { text: 'ToggleField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-ToggleField' },
-                { text: 'URLField', component: ButtonComponent, layout: 'center', navIcon: 'icon-Forms-URLField' },
-                { text: 'Validation', component: ButtonComponent, layout: 'auto', navIcon: 'icon-form-validation'}
+                { text: 'CheckBoxField', component: CheckBoxFieldComponent, layout: 'center', navIcon: 'icon-Forms-CheckBoxField'  },
+                { text: 'ComboBoxField', component: ComboBoxFieldComponent, layout: 'center', navIcon: 'icon-Forms-ComboBoxField'  },
+                { text: 'ContainerField', component: ContainerFieldComponent, layout: Ext.os.is.Phone ? 'auto' : 'center', navIcon: 'icon-Forms-ContainerField'  },
+                { text: 'DatePickerField', component: DatePickerFieldComponent, layout: 'center', navIcon: 'icon-Forms-DatePickerField'  },
+                { text: 'EmailField', component: EmailFieldComponent , layout: 'center', navIcon: 'icon-Forms-EmailField' },
+                { text: 'FieldSet', component: FieldSetComponent, layout: 'center', navIcon: 'icon-Forms-FieldSet'  },
+                { text: 'FileField', component: FileFieldComponent, layout: 'center', navIcon: 'icon-Forms-FileField'  },
+                { text: 'FormPanel', component: FormPanelComponent, navIcon: 'icon-form-panel' },
+                { text: 'NumberField', component: NumberFieldComponent, layout: 'center', navIcon: 'icon-Forms-NumberField' },
+                { text: 'PasswordField', component: PasswordFieldComponent, layout: 'center', navIcon: 'icon-Forms-PasswordField' },
+                { text: 'RadioField', component: RadioFieldComponent, layout: 'center', navIcon: 'icon-Forms-RadioField' },
+                { text: 'SearchField', component: SearchFieldComponent, layout: 'center', navIcon: 'icon-Forms-SearchField' },
+                { text: 'SelectField', component: SelectFieldComponent, layout: 'center', navIcon: 'icon-Forms-SelectField' },
+                { text: 'SliderField', component: SliderFieldComponent, layout: 'center', navIcon: 'icon-Forms-SliderField' },
+                { text: 'SpinnerField', component: SpinnerFieldComponent, layout: 'center', navIcon: 'icon-Forms-SpinnerField' },
+                { text: 'TextAreaField', component: TextAreaFieldComponent, layout: 'center', navIcon: 'icon-Forms-TextAreaField' },
+                { text: 'TextField', component: TextFieldComponent, layout: 'center', navIcon: 'icon-Forms-TextField' },
+                { text: 'TimeField', component: TimeFieldComponent, navIcon: 'icon-form-panel' },
+                { text: 'ToggleField', component: ToggleFieldComponent, layout: 'center', navIcon: 'icon-Forms-ToggleField' },
+                { text: 'URLField', component: URLFieldComponent, layout: 'center', navIcon: 'icon-Forms-URLField' },
+                { text: 'Validation', component: ValidationComponent, layout: 'auto', navIcon: 'icon-form-validation'}
             ] },
            
            { text: 'Gauges', navIcon: 'icon-gauge-charts', children: [
-                { text: 'Default Gauge', component: ButtonComponent, layout: 'center', navIcon: 'icon-gauge-charts' },
-                { text: 'Needle Gauge', component: ButtonComponent, layout: 'center', navIcon: 'icon-gauge-charts' }
+                { text: 'Default Gauge', component: DefaultGaugeComponent, layout: 'center', navIcon: 'icon-gauge-charts' },
+                { text: 'Needle Gauge', component: NeedleGaugeComponent, layout: 'center', navIcon: 'icon-gauge-charts' }
             ]},
             { text: 'Layouts', navIcon: 'icon-layouts', children: [
                 { text: 'card', component: ButtonComponent, navIcon: 'icon-layout-card' },
@@ -133,19 +167,20 @@ const treeRoot = {
             //{ text: 'Transition', component: Transition, navIcon: 'icon-Transition' },
             { text: 'Wizard', component: ButtonComponent, navIcon: 'icon-layout-card-indicator', layout: Ext.os.is.Phone ? 'fit': 'center' },
         ]},
+
         { text: 'Grids', navIcon: 'icon-grids', children: [
             { text: 'Core Features', navIcon: 'icon-grids', children: [
-                { text: 'Basic Grid', component: ButtonComponent, navIcon: 'icon-grids'},
-                { text: 'Grouped Grid', component: ButtonComponent, navIcon: 'icon-grouped-grid'},
-                { text: 'Editable Grid', component: ButtonComponent, navIcon: 'icon-editable-grid'},
-                { text: 'XML Grid', component: ButtonComponent, navIcon: 'icon-xml-grid'}
+                { text: 'Basic Grid', component: BasicGridComponent, navIcon: 'icon-grids'},
+                { text: 'Grouped Grid', component: GroupedGridComponent, navIcon: 'icon-grouped-grid'},
+                { text: 'Editable Grid', component: EditableGridComponent, navIcon: 'icon-editable-grid'},
+                { text: 'XML Grid', component: XMLGridComponent, navIcon: 'icon-xml-grid'}
             ]},
             { text: 'Add-ons', navIcon: 'icon-framing-buttons', children: [
-                { text: 'Grid Tools', component: ButtonComponent, navIcon: 'icon-grid-tools'},
-                { text: 'Row Expander', component: ButtonComponent, navIcon: 'icon-row-expander-grid'},
-                { text: 'Row Body', component: ButtonComponent, navIcon: 'icon-row-body-grid'},
-                { text: 'Summary Row', component: ButtonComponent, navIcon: 'icon-grid-summary'},
-                { text: 'View Options', component: ButtonComponent, navIcon: 'icon-view-options-grid'}
+                { text: 'Grid Tools', component: GridToolsComponent, navIcon: 'icon-grid-tools'},
+                { text: 'Row Expander', component: RowExpanderComponent, navIcon: 'icon-row-expander-grid'},
+                { text: 'Row Body', component: RowBodyComponent, navIcon: 'icon-row-body-grid'},
+                { text: 'Summary Row', component: SummaryRowComponent, navIcon: 'icon-grid-summary'},
+                { text: 'View Options', component: ViewOptionsComponent, navIcon: 'icon-view-options-grid'}
             ]},
             { text: 'Advanced Features', navIcon: 'icon-grid-plugins', children:[
                 { text: 'Big Data', component: ButtonComponent, navIcon: 'icon-big-data-grid' },
@@ -154,7 +189,7 @@ const treeRoot = {
                 { text: 'Render Components In Cells', component: ButtonComponent, navIcon: 'icon-grid-tools' },
                 { text: 'Stock Ticker', component: ButtonComponent, navIcon: 'icon-ticker-grid' }
             ]},
-            { text: 'Redux Grid', component: ButtonComponent, navIcon: 'icon-Redux-Grid' }
+            { text: 'Redux Grid', component: ReduxGridComponent, navIcon: 'icon-Redux-Grid' }
         ] },
         { text: 'Trees', navIcon: 'icon-trees', children: [
             { text: 'TreeList', component: TreeListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-tree-list' },

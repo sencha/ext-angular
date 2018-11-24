@@ -1,6 +1,6 @@
-<container layout='vbox'>
-        <tree title="Tree Grid" [store]="this.store" shadow="true" flex="1">
-          <treecolumn text="Name" dataIndex="text" width="200"></treecolumn>
-          <numbercolumn  text="# Items" dataIndex="numItems" width="100" align="center" format="0,0"></numbercolumn>
+<container #item layout='vbox'>
+        <tree #item title="Tree Grid" [store]="this.store" shadow="true" flex="1">
+          <treecolumn #item text="Name" dataIndex="text" width="200"></treecolumn>
+          <numbercolumn #item  text="# Items" dataIndex="numItems" width="100" align="center" format="0,0"></numbercolumn>
         </tree>
 </container>

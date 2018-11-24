@@ -44,11 +44,10 @@
       <!--  Navtree ends--> 
   
   
-      <!-- Breadcrums starts-->
+      <!-- Breadcrumb starts-->
       <!-- docked="top" node={selectedNavNode} -->
   
       <toolbar #item [docked]="'top'">
-
         <container #item *ngFor="let segment of breadcrumb">
           <button #item
           [text]="segment.text"
@@ -56,21 +55,15 @@
           (tap)="navigate(segment.path)"
           >
           </button>
-          <button #item *ngIf="segment.path != node.id"
-            [cls]="'x-font-icon md-icon-keyboard-arrow-right'" 
-            [style]="'
-              color: #666;
-              font-size: 20px;
-              line-height: 32px,;
-              vertical-align: middle;
-            '"
-            [text]="'>'"
-          ></button>
+          <div
+            *ngIf="!segment.isLeaf"
+            #item
+            class="x-font-icon md-icon-keyboard-arrow-right"
+            style="font-size: 20px; line-height: 32px; vertical-align: middle; color: #666"
+          ></div>
         </container>
-
-
       </toolbar>  
-      <!-- Breadcrums ends-->
+      <!-- Breadcrumb ends-->
 
       <!-- examples start-->
   
