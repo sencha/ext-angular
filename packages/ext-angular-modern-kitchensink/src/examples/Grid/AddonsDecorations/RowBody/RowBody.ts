@@ -17,19 +17,25 @@ export class RowBodyComponent implements OnInit {
       pageSize: 0,
       proxy: {
           type: 'ajax',
-          url: 'resources/data/CompanyData.json'
+          url: 'build/resources/data/CompanyData.json'
       } 
   });   
 
-  tpl = data => {
-    console.log("tpl. data : " + data);
-    /*
+
+
+  tpl = 
+    `
     <div>
-      <div>Industry: {data.industry}</div>
-      <div>Last Updated: {Ext.util.Format.date(data.lastChange, "Y-m-d g:ia")}</div>
-      <div style={{marginTop:'1em'}}>{data.desc}</div>
+      <div>Industry: {industry}</div>
+      <div>Last Updated: {lastChange} </div>
+      <div style="{marginTop:'1em'}">{desc}</div>
     </div>
-    */
+    `;
+
+  gridItemConfig = {
+    body:{
+        tpl: this.tpl
+    }
   };
 
   renderSign = (format, value) => {
