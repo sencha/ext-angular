@@ -19,7 +19,7 @@ export class XMLGridComponent implements OnInit {
     ],
     proxy:{
       type: 'ajax',
-      url: 'resources/data/Grids/sheldon.xml',
+      url: 'build/resources/data/Grids/sheldon.xml',
       reader: {
         type: 'xml',
         record: 'Item',
@@ -27,7 +27,7 @@ export class XMLGridComponent implements OnInit {
         totalRecords: '@total'
       }
     }
-  })
+  })        
 
   constructor() { }
 

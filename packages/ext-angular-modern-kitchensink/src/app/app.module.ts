@@ -105,7 +105,11 @@ import {RowExpanderComponent} from '../examples/Grid/AddonsDecorations/RowExpand
 import {SummaryRowComponent} from '../examples/Grid/AddonsDecorations/SummaryRow/SummaryRow';
 import {ViewOptionsComponent} from '../examples/Grid/AddonsDecorations/ViewOptions/ViewOptions';
 
-
+import {BigDataComponent} from '../examples/Grid/AdvancedFeatures/BigData/BigData';
+import {ReconfigureGridComponent} from '../examples/Grid/AdvancedFeatures/ReconfigureGrid/ReconfigureGrid';
+import {RenderComponentsInCellsComponent} from '../examples/Grid/AdvancedFeatures/RenderComponentsInCells/RenderComponentsInCells';
+import {SelectAndCopyComponent} from '../examples/Grid/AdvancedFeatures/SelectAndCopy/SelectAndCopy';
+import {StockTickerComponent} from '../examples/Grid/AdvancedFeatures/StockTicker/StockTicker';
 
 
 import {DefaultGaugeComponent} from "../examples/Gauges/DefaultGauge"
@@ -113,7 +117,7 @@ import {NeedleGaugeComponent} from "../examples/Gauges/NeedleGauge"
 
 import {CalendarService} from "../examples/Calendar/Calendar.service"
 import {GridService} from '../examples/Grid/Grid.service'
-
+import {BigDataService} from '../examples/Grid/AdvancedFeatures/BigData/BigData.service'
 
 
 interface ExtAngularRoute extends Route {
@@ -159,16 +163,12 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/panels', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/popups', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/tabs', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-
-	
 	
 	
 	{ path: 'grids', component: DummyComponent, text: 'Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'grids/core_features', component: DummyComponent, text: 'Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'grids/addons', component: DummyComponent, text: 'Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-
-	
-	
+	{ path: 'grids/core_features', component: DummyComponent, text: 'Grids Core Features', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'grids/addons', component: DummyComponent, text: 'Grids Addons', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'grids/advanced_features', component: DummyComponent, text: 'Grids advanced features', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	
 	
 	{ path: 'trees', component: DummyComponent, text: 'Trees', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -177,11 +177,7 @@ const routes: ExtAngularRoutes = [
 	{ path: 'd3', component: DummyComponent, text: 'D3', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'pivotgrids', component: DummyComponent, text: 'Pivot Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
-
-
-
 	//example components
-	//TODO: FOr now we are defining routes as ids of the navtree. Need to to this dynamically.
 	{ path: 'components/buttons/button', component: ButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/buttons/splitbutton', component: SplitButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/buttons/segmentedbutton', component: SegmentedButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -215,11 +211,20 @@ const routes: ExtAngularRoutes = [
 	{ path: 'grids/core_features/xml_grid', component: XMLGridComponent, text: 'XML Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/redux_grid', component: ReduxGridComponent, text: 'Redux Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
-	{ path: 'grids/addons/grid_tools', component: GridToolsComponent, text: 'Grid TOols', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+
+
+	{ path: 'grids/addons/grid_tools', component: GridToolsComponent, text: 'Grid Tools', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/addons/row_expander', component: RowExpanderComponent, text: 'Row Expander', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/addons/row_body', component: RowBodyComponent, text: 'Row Body', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/addons/summary_row', component: SummaryRowComponent, text: 'Summary Row', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/addons/view_options', component: ViewOptionsComponent, text: 'View Options', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	{ path: 'grids/advanced_features/big_data', component: BigDataComponent, text: 'Big Data', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'grids/advanced_features/select_and_copy', component: SelectAndCopyComponent, text: 'Select and Copy', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'grids/advanced_features/reconfigure_grid', component: ReconfigureGridComponent, text: 'Reconfigure grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'grids/advanced_features/render_components_in_cells', component: RenderComponentsInCellsComponent, text: 'Render components in cell', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'grids/advanced_features/stock_ticker', component: StockTickerComponent, text: 'Stock tikcer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
 
 	{ path: 'trees/editable_tree', component: EditableTreeComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -351,6 +356,13 @@ export class App {
 		RowExpanderComponent,
 		SummaryRowComponent,
 		ViewOptionsComponent,
+
+		BigDataComponent,
+		ReconfigureGridComponent,
+		RenderComponentsInCellsComponent,
+		SelectAndCopyComponent,
+		StockTickerComponent,
+
 		CheckBoxFieldComponent,
 		ComboBoxFieldComponent,
 		ContainerFieldComponent,
@@ -379,7 +391,8 @@ export class App {
 		CalendarService,
 		GridService,
 		AppService,
-		ExtAngularService
+		ExtAngularService,
+		BigDataService
 	],
 	entryComponents: [
 		SideBarComponent, 
