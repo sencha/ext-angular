@@ -9,6 +9,7 @@
             [url]="'resources/audio/crash.mp3'"
             [enableControls]="!isAndroid"
             [width]="'550px'"
+            (ready)="audioReady($event)"
         >
         </audio>
 
