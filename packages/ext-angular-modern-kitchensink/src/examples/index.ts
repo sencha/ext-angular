@@ -67,6 +67,11 @@ import {TimeFieldComponent} from './FormFields/TimeField/TimeField';
 import {ToggleFieldComponent} from './FormFields/ToggleField/ToggleField';
 import {URLFieldComponent} from './FormFields/URLField/URLField';
 import {ValidationComponent} from './FormFields/Validation/Validation';
+import {CardLayoutComponent} from './Layouts/CardLayout/CardLayout';
+import {CenterLayoutComponent} from './Layouts/CenterLayout/CenterLayout';
+import {FitLayoutComponent} from './Layouts/FitLayout/FitLayout';
+import {hboxLayoutComponent} from './Layouts/hboxLayout/hboxLayout';
+import {FormLayoutComponent} from './Layouts/FormLayout/FormLayout';
 
 declare var Ext: any;
 
@@ -120,11 +125,11 @@ const treeRoot = {
                 { text: 'Needle Gauge', component: NeedleGaugeComponent, layout: 'center', navIcon: 'icon-gauge-charts' }
             ]},
             { text: 'Layouts', navIcon: 'icon-layouts', children: [
-                { text: 'card', component: ButtonComponent, navIcon: 'icon-layout-card' },
-                { text: 'center', component: ButtonComponent, navIcon: 'icon-layout-center' },
-                { text: 'fit', component: ButtonComponent, navIcon: 'icon-layout-fit' },
-                { text: 'form', component: ButtonComponent, layout: 'auto', navIcon: 'icon-layout-form' },
-                { text: 'hbox', component: ButtonComponent, layout: 'auto', navIcon: 'icon-layout-horizontal-box' },
+                { text: 'card', component: CardLayoutComponent, navIcon: 'icon-layout-card' },
+                { text: 'center', component: CenterLayoutComponent, navIcon: 'icon-layout-center' },
+                { text: 'fit', component: FitLayoutComponent, navIcon: 'icon-layout-fit' },
+                { text: 'form', component: FormLayoutComponent, layout: 'auto', navIcon: 'icon-layout-form' },
+                { text: 'hbox', component: hboxLayoutComponent, layout: 'auto', navIcon: 'icon-layout-horizontal-box' },
                 { text: 'resizable', component: ButtonComponent, navIcon: 'icon-layout-box' },
                 { text: 'vbox', component: ButtonComponent, layout: 'auto', navIcon: 'icon-layout-vertical-box' }
             ]},
