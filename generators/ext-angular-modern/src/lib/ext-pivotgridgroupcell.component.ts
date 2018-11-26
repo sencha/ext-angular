@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -203,5 +204,8 @@ export class ExtPivotgridgroupcellComponent extends base implements OnInit,After
   constructor(eRef:ElementRef) {super(eRef,pivotgridgroupcellMetaData)}
   public ngOnInit() {this.baseOnInit(pivotgridgroupcellMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

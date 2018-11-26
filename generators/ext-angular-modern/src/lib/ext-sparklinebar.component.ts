@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -90,6 +91,9 @@ export class sparklinebarMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "stackedBarColor": "String[]",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "tipTpl": "String/Ext.XTemplate",
@@ -203,6 +207,9 @@ export class sparklinebarMetaData {
     'shim',
     'showAnimation',
     'stackedBarColor',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'tipTpl',
@@ -361,5 +368,8 @@ export class ExtSparklinebarComponent extends base implements OnInit,AfterConten
   constructor(eRef:ElementRef) {super(eRef,sparklinebarMetaData)}
   public ngOnInit() {this.baseOnInit(sparklinebarMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

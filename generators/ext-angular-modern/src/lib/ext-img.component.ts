@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -80,6 +81,9 @@ export class imgMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "src": "String",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "toFrontOnShow": "Boolean",
@@ -176,6 +180,9 @@ export class imgMetaData {
     'shim',
     'showAnimation',
     'src',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'toFrontOnShow',
@@ -333,5 +340,8 @@ export class ExtImgComponent extends base implements OnInit,AfterContentInit,OnC
   constructor(eRef:ElementRef) {super(eRef,imgMetaData)}
   public ngOnInit() {this.baseOnInit(imgMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

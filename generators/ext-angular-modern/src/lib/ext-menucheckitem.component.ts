@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -94,6 +95,9 @@ export class menucheckitemMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "submenuText": "String",
     "tabIndex": "Number",
@@ -208,6 +212,9 @@ export class menucheckitemMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'submenuText',
     'tabIndex',
@@ -367,5 +374,8 @@ export class ExtMenucheckitemComponent extends base implements OnInit,AfterConte
   constructor(eRef:ElementRef) {super(eRef,menucheckitemMetaData)}
   public ngOnInit() {this.baseOnInit(menucheckitemMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

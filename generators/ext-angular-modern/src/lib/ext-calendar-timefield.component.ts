@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -134,6 +135,9 @@ export class calendar_timefieldMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "sideError": "String",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Ext.data.Store/Object/String",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -297,6 +301,9 @@ export class calendar_timefieldMetaData {
     'shim',
     'showAnimation',
     'sideError',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'tabIndex',
@@ -483,5 +490,8 @@ export class ExtCalendar_timefieldComponent extends base implements OnInit,After
   constructor(eRef:ElementRef) {super(eRef,calendar_timefieldMetaData)}
   public ngOnInit() {this.baseOnInit(calendar_timefieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

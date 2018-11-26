@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -84,6 +85,9 @@ export class sparklinepieMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "sliceColors": "String[]",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "tipTpl": "String/Ext.XTemplate",
@@ -189,6 +193,9 @@ export class sparklinepieMetaData {
     'shim',
     'showAnimation',
     'sliceColors',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'tipTpl',
@@ -345,5 +352,8 @@ export class ExtSparklinepieComponent extends base implements OnInit,AfterConten
   constructor(eRef:ElementRef) {super(eRef,sparklinepieMetaData)}
   public ngOnInit() {this.baseOnInit(sparklinepieMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -77,7 +78,7 @@ export class editorMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "matchFont": "Boolean",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
@@ -109,6 +110,9 @@ export class editorMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "swallowKeys": "Boolean",
     "tabIndex": "Number",
@@ -238,6 +242,9 @@ export class editorMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'swallowKeys',
     'tabIndex',
@@ -421,5 +428,8 @@ export class ExtEditorComponent extends base implements OnInit,AfterContentInit,
   constructor(eRef:ElementRef) {super(eRef,editorMetaData)}
   public ngOnInit() {this.baseOnInit(editorMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

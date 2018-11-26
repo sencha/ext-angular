@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -122,6 +123,9 @@ export class spinnerfieldMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "sideError": "String",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "stepValue": "Number",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -271,6 +275,9 @@ export class spinnerfieldMetaData {
     'shim',
     'showAnimation',
     'sideError',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'stepValue',
     'style',
     'tabIndex',
@@ -455,5 +462,8 @@ export class ExtSpinnerfieldComponent extends base implements OnInit,AfterConten
   constructor(eRef:ElementRef) {super(eRef,spinnerfieldMetaData)}
   public ngOnInit() {this.baseOnInit(spinnerfieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

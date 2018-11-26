@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -71,7 +72,7 @@ export class drawMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "minHeight": "Number/String",
@@ -101,6 +102,9 @@ export class drawMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "sprites": "Object[]",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "surfaceZIndexes": "Object",
     "tabIndex": "Number",
@@ -220,6 +224,9 @@ export class drawMetaData {
     'shim',
     'showAnimation',
     'sprites',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'surfaceZIndexes',
     'tabIndex',
@@ -407,5 +414,8 @@ export class ExtDrawComponent extends base implements OnInit,AfterContentInit,On
   constructor(eRef:ElementRef) {super(eRef,drawMetaData)}
   public ngOnInit() {this.baseOnInit(drawMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

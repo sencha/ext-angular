@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -86,6 +87,9 @@ export class treelistMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "singleExpand": "Boolean",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "String/Object/Ext.data.TreeStore",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -189,6 +193,9 @@ export class treelistMetaData {
     'shim',
     'showAnimation',
     'singleExpand',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'tabIndex',
@@ -345,5 +352,8 @@ export class ExtTreelistComponent extends base implements OnInit,AfterContentIni
   constructor(eRef:ElementRef) {super(eRef,treelistMetaData)}
   public ngOnInit() {this.baseOnInit(treelistMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

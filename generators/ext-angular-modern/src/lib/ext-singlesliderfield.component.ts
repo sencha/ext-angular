@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -102,6 +103,9 @@ export class singlesliderfieldMetaData {
     "showAnimation": "String/Mixed",
     "sideError": "String",
     "slider": "any",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "tipError": "String",
@@ -228,6 +232,9 @@ export class singlesliderfieldMetaData {
     'showAnimation',
     'sideError',
     'slider',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'tipError',
@@ -407,5 +414,8 @@ export class ExtSinglesliderfieldComponent extends base implements OnInit,AfterC
   constructor(eRef:ElementRef) {super(eRef,singlesliderfieldMetaData)}
   public ngOnInit() {this.baseOnInit(singlesliderfieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

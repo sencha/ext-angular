@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -91,6 +92,9 @@ export class gridgroupbythismenuitemMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "target": "String",
@@ -200,6 +204,9 @@ export class gridgroupbythismenuitemMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'target',
@@ -353,5 +360,8 @@ export class ExtGridgroupbythismenuitemComponent extends base implements OnInit,
   constructor(eRef:ElementRef) {super(eRef,gridgroupbythismenuitemMetaData)}
   public ngOnInit() {this.baseOnInit(gridgroupbythismenuitemMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

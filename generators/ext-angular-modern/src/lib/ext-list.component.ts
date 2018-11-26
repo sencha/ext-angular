@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -102,7 +103,7 @@ export class listMetaData {
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "markDirty": "Boolean",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxItemCache": "Number",
     "maxWidth": "Number/String",
@@ -139,7 +140,7 @@ export class listMetaData {
     "scrollable": "Boolean/String/Object",
     "scrollDock": "'start'/'emd'",
     "scrollToTopOnRefresh": "Boolean",
-    "selectable": "Object",
+    "selectable": "Object/Ext.dataview.selection.Model",
     "selection": "Ext.data.Model",
     "selfAlign": "String",
     "session": "Boolean/Object/Ext.data.Session",
@@ -147,6 +148,9 @@ export class listMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Ext.data.Store/Object",
     "striped": "Boolean",
     "style": "String/Object",
@@ -323,6 +327,9 @@ export class listMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'striped',
     'style',
@@ -565,5 +572,8 @@ export class ExtListComponent extends base implements OnInit,AfterContentInit,On
   constructor(eRef:ElementRef) {super(eRef,listMetaData)}
   public ngOnInit() {this.baseOnInit(listMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -93,7 +94,7 @@ export class fieldpanelMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "minButtonWidth": "Number",
@@ -127,6 +128,9 @@ export class fieldpanelMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "standardButtons": "Object",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "tbar": "Object/Object[]",
@@ -278,6 +282,9 @@ export class fieldpanelMetaData {
     'shim',
     'showAnimation',
     'standardButtons',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'tbar',
@@ -477,5 +484,8 @@ export class ExtFieldpanelComponent extends base implements OnInit,AfterContentI
   constructor(eRef:ElementRef) {super(eRef,fieldpanelMetaData)}
   public ngOnInit() {this.baseOnInit(fieldpanelMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

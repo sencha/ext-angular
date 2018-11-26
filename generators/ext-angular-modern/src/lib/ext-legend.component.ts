@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -88,7 +89,7 @@ export class legendMetaData {
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "markDirty": "Boolean",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "minHeight": "Number/String",
@@ -114,7 +115,7 @@ export class legendMetaData {
     "scrollable": "Boolean/String/Object",
     "scrollDock": "'start'/'emd'",
     "scrollToTopOnRefresh": "Boolean",
-    "selectable": "Object",
+    "selectable": "Object/Ext.dataview.selection.Model",
     "selected": "Ext.util.Collection",
     "selection": "Ext.data.Model",
     "selfAlign": "String",
@@ -123,6 +124,9 @@ export class legendMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Ext.chart.legend.store.Store",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -267,6 +271,9 @@ export class legendMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'tabIndex',
@@ -501,5 +508,8 @@ export class ExtLegendComponent extends base implements OnInit,AfterContentInit,
   constructor(eRef:ElementRef) {super(eRef,legendMetaData)}
   public ngOnInit() {this.baseOnInit(legendMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

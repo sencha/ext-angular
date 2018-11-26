@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -81,6 +82,9 @@ export class gridsummaryrowMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "stickyVisibility": "any",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -179,6 +183,9 @@ export class gridsummaryrowMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'stickyVisibility',
     'style',
     'tabIndex',
@@ -331,5 +338,8 @@ export class ExtGridsummaryrowComponent extends base implements OnInit,AfterCont
   constructor(eRef:ElementRef) {super(eRef,gridsummaryrowMetaData)}
   public ngOnInit() {this.baseOnInit(gridsummaryrowMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

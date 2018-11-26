@@ -1,0 +1,28 @@
+input[type="button" i], input[type="submit" i], input[type="reset" i], input[type="file" i]::-webkit-file-upload-button, button {
+  border-color: none;
+  border-style: none;
+  border-width: 0px;
+  padding: 0px;
+}
+
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
+}
+
+.breadcrumb {
+ xheight: 50px;
+ xwidth: 100%;
+  background: white;
+  list-style: none;
+  padding-left: 10px;
+  padding-top: 10px;
+  }
+  .breadcrumb li {
+    float:left;
+  }

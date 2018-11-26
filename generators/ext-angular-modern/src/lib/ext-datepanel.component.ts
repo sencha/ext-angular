@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -102,7 +103,7 @@ export class datepanelMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxDate": "Date/String",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
@@ -150,6 +151,9 @@ export class datepanelMetaData {
     "splitTitle": "Boolean",
     "standardButtons": "Object",
     "startDay": "Number",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "tbar": "Object/Object[]",
@@ -328,6 +332,9 @@ export class datepanelMetaData {
     'splitTitle',
     'standardButtons',
     'startDay',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'tbar',
@@ -529,5 +536,8 @@ export class ExtDatepanelComponent extends base implements OnInit,AfterContentIn
   constructor(eRef:ElementRef) {super(eRef,datepanelMetaData)}
   public ngOnInit() {this.baseOnInit(datepanelMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

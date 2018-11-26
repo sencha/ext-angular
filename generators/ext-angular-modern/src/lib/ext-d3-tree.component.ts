@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -101,6 +102,9 @@ export class d3_treeMetaData {
     "showAnimation": "String/Mixed",
     "size": "Object",
     "sorter": "Function",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Ext.data.Store",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -220,6 +224,9 @@ export class d3_treeMetaData {
     'showAnimation',
     'size',
     'sorter',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'tabIndex',
@@ -379,5 +386,8 @@ export class ExtD3_treeComponent extends base implements OnInit,AfterContentInit
   constructor(eRef:ElementRef) {super(eRef,d3_treeMetaData)}
   public ngOnInit() {this.baseOnInit(d3_treeMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

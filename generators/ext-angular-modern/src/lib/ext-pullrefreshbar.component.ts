@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -86,6 +87,9 @@ export class pullrefreshbarMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "state": "'loading'/'loaded'/'pulling'/'holding'",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "toFrontOnShow": "Boolean",
@@ -188,6 +192,9 @@ export class pullrefreshbarMetaData {
     'shim',
     'showAnimation',
     'state',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'toFrontOnShow',
@@ -339,5 +346,8 @@ export class ExtPullrefreshbarComponent extends base implements OnInit,AfterCont
   constructor(eRef:ElementRef) {super(eRef,pullrefreshbarMetaData)}
   public ngOnInit() {this.baseOnInit(pullrefreshbarMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

@@ -1,0 +1,3 @@
+cd ~/_git/extjs/SDK/docs/modern
+sencha doxi build all-classes-flatten
+file is: ~/_git/extjs/SDK/build/docs/modern/modern-all-classes-flatten.json

@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -82,6 +83,9 @@ export class togglesliderMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "thumbDefaults": "Object",
@@ -184,6 +188,9 @@ export class togglesliderMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'thumbDefaults',
@@ -347,5 +354,8 @@ export class ExtTogglesliderComponent extends base implements OnInit,AfterConten
   constructor(eRef:ElementRef) {super(eRef,togglesliderMetaData)}
   public ngOnInit() {this.baseOnInit(togglesliderMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

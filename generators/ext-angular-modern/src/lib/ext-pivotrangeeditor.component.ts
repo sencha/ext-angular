@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -95,7 +96,7 @@ export class pivotrangeeditorMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "method": "String",
@@ -132,6 +133,9 @@ export class pivotrangeeditorMetaData {
     "showAnimation": "String/Mixed",
     "standardButtons": "Object",
     "standardSubmit": "Boolean",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "submitOnAction": "Object",
     "tabIndex": "Number",
@@ -290,6 +294,9 @@ export class pivotrangeeditorMetaData {
     'showAnimation',
     'standardButtons',
     'standardSubmit',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'submitOnAction',
     'tabIndex',
@@ -495,5 +502,8 @@ export class ExtPivotrangeeditorComponent extends base implements OnInit,AfterCo
   constructor(eRef:ElementRef) {super(eRef,pivotrangeeditorMetaData)}
   public ngOnInit() {this.baseOnInit(pivotrangeeditorMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

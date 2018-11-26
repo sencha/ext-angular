@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -89,7 +90,7 @@ export class tabletpickerMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "minButtonWidth": "Number",
@@ -121,6 +122,9 @@ export class tabletpickerMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "standardButtons": "Object",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "tbar": "Object/Object[]",
@@ -264,6 +268,9 @@ export class tabletpickerMetaData {
     'shim',
     'showAnimation',
     'standardButtons',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'tbar',
@@ -459,5 +466,8 @@ export class ExtTabletpickerComponent extends base implements OnInit,AfterConten
   constructor(eRef:ElementRef) {super(eRef,tabletpickerMetaData)}
   public ngOnInit() {this.baseOnInit(tabletpickerMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

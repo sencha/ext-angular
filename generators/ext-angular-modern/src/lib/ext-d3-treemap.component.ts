@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -102,6 +103,9 @@ export class d3_treemapMetaData {
     "showAnimation": "String/Mixed",
     "size": "Object",
     "sorter": "Function",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Ext.data.Store",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -223,6 +227,9 @@ export class d3_treemapMetaData {
     'showAnimation',
     'size',
     'sorter',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'tabIndex',
@@ -383,5 +390,8 @@ export class ExtD3_treemapComponent extends base implements OnInit,AfterContentI
   constructor(eRef:ElementRef) {super(eRef,d3_treemapMetaData)}
   public ngOnInit() {this.baseOnInit(d3_treemapMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }
