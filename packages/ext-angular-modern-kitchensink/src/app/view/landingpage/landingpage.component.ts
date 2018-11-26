@@ -19,6 +19,7 @@ declare var _code: any;
       isLeaf: !node.childNodes.length,
       text: node.get("text"),
       path: node.get("id"),
+      divider: '&nbsp;>&nbsp;'
     });
 
   } while (node = node.parentNode)
