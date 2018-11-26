@@ -24,7 +24,6 @@ export class BasicGridComponent implements OnInit {
         } 
       });
 
-
       renderSign = (format, value) =>  {
         console.log("In renderSign. format: " + format + " value : " + value);
         var formattedValue = Ext.util.Format.number(value, format);
@@ -35,7 +34,8 @@ export class BasicGridComponent implements OnInit {
         else if(value < 0 ) {
             col = 'red';
         }
-        //return "<span style=' color:" +  col +  "'>" + formattedValue + "</span>"
+        
+        //return `<span style=' color:  ${col} > ${formattedValue}' </span>`;
         return formattedValue;
       }
     

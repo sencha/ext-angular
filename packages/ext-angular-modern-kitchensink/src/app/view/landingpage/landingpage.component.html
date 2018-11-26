@@ -34,7 +34,7 @@
 
       <!-- examples start-->
 
-      <container #item [layout]="fit" [cls]="'main-background'" [scrollable]="false" [padding]="30">
+      <container #item [layout]="fit" [cls]="'main-background'" [scrollable]="true" [padding]="30" >
         <dataview #item
           [hidden]="menuhidden"
           [centered]="true"
@@ -48,9 +48,11 @@
         <container #item 
           [hidden]="routerhidden"
           [centered]="true"
-          [style]= "blockstyle">
+          [style]= "blockstyle"
+          [scrollable]="true">
           <router-outlet #item></router-outlet>
         </container>
       </container>
+
 
 </container>

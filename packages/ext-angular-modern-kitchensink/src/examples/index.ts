@@ -32,11 +32,20 @@ import {GroupedGridComponent} from './Grid/GroupedGrid/GroupedGrid';
 import {ReduxGridComponent} from './Grid/ReduxGrid/ReduxGrid';
 import {XMLGridComponent} from './Grid/XMLGrid/XMLGrid';
 
+
 import {GridToolsComponent} from './Grid/AddonsDecorations/GridTools/GridTools';
 import {RowBodyComponent} from './Grid/AddonsDecorations/RowBody/RowBody';
 import {RowExpanderComponent} from './Grid/AddonsDecorations/RowExpander/RowExpander';
 import {SummaryRowComponent} from './Grid/AddonsDecorations/SummaryRow/SummaryRow';
 import {ViewOptionsComponent} from './Grid/AddonsDecorations/ViewOptions/ViewOptions';
+
+import {BigDataComponent} from './Grid/AdvancedFeatures/BigData/BigData';
+import {ReconfigureGridComponent} from './Grid/AdvancedFeatures/ReconfigureGrid/ReconfigureGrid';
+import {RenderComponentsInCellsComponent} from './Grid/AdvancedFeatures/RenderComponentsInCells/RenderComponentsInCells';
+import {SelectAndCopyComponent} from './Grid/AdvancedFeatures/SelectAndCopy/SelectAndCopy';
+import {StockTickerComponent} from './Grid/AdvancedFeatures/StockTicker/StockTicker';
+
+
 import {CheckBoxFieldComponent} from './FormFields/CheckBoxField/CheckBoxField';
 import {ComboBoxFieldComponent} from './FormFields/ComboBoxField/ComboBoxField';
 import {ContainerFieldComponent} from './FormFields/ContainerField/ContainerField';
@@ -183,11 +192,11 @@ const treeRoot = {
                 { text: 'View Options', component: ViewOptionsComponent, navIcon: 'icon-view-options-grid'}
             ]},
             { text: 'Advanced Features', navIcon: 'icon-grid-plugins', children:[
-                { text: 'Big Data', component: ButtonComponent, navIcon: 'icon-big-data-grid' },
-                { text: 'Select And Copy', component: ButtonComponent, navIcon: 'icon-flexible-selection-grid' },
-                { text: 'Reconfigure Grid', component: ButtonComponent, navIcon: 'icon-reconfigure-grid' },
-                { text: 'Render Components In Cells', component: ButtonComponent, navIcon: 'icon-grid-tools' },
-                { text: 'Stock Ticker', component: ButtonComponent, navIcon: 'icon-ticker-grid' }
+                { text: 'Big Data', component: BigDataComponent, navIcon: 'icon-big-data-grid' },
+                { text: 'Select And Copy', component: SelectAndCopyComponent, navIcon: 'icon-flexible-selection-grid' },
+                { text: 'Reconfigure Grid', component: ReconfigureGridComponent, navIcon: 'icon-reconfigure-grid' },
+                { text: 'Render Components In Cells', component: RenderComponentsInCellsComponent, navIcon: 'icon-grid-tools' },
+                { text: 'Stock Ticker', component: StockTickerComponent, navIcon: 'icon-ticker-grid' }
             ]},
             { text: 'Redux Grid', component: ReduxGridComponent, navIcon: 'icon-Redux-Grid' }
         ] },
