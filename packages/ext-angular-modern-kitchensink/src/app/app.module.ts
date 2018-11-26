@@ -85,6 +85,11 @@ import {URLFieldComponent} from "../examples/FormFields/URLField/URLField"
 import {ValidationComponent} from "../examples/FormFields/Validation/Validation"
 import {ToggleFieldComponent} from "../examples/FormFields/ToggleField/ToggleField"
 
+import {CardLayoutComponent} from "../examples/Layouts/CardLayout/CardLayout";
+import {CenterLayoutComponent} from "../examples/Layouts/CenterLayout/CenterLayout";
+import {FitLayoutComponent} from "../examples/Layouts/FitLayout/FitLayout";
+import { hboxLayoutComponent } from 'src/examples/Layouts/hboxLayout/hboxLayout';
+import { FormLayoutComponent } from 'src/examples/Layouts/FormLayout/FormLayout';
 
 import {EditableTreeComponent} from '../examples/Trees/EditableTree/EditableTree';
 import {HeterogeneousTreeComponent} from '../examples/Trees/HeterogeneousTree/HeterogeneousTree';
@@ -110,7 +115,6 @@ import {ReconfigureGridComponent} from '../examples/Grid/AdvancedFeatures/Reconf
 import {RenderComponentsInCellsComponent} from '../examples/Grid/AdvancedFeatures/RenderComponentsInCells/RenderComponentsInCells';
 import {SelectAndCopyComponent} from '../examples/Grid/AdvancedFeatures/SelectAndCopy/SelectAndCopy';
 import {StockTickerComponent} from '../examples/Grid/AdvancedFeatures/StockTicker/StockTicker';
-
 
 import {DefaultGaugeComponent} from "../examples/Gauges/DefaultGauge"
 import {NeedleGaugeComponent} from "../examples/Gauges/NeedleGauge"
@@ -255,6 +259,13 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/forms/togglefield', component: ToggleFieldComponent, text: 'ToggleField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/forms/urlfield', component: URLFieldComponent, text: 'URLField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/forms/validation', component: ValidationComponent, text: 'Validation', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	{ path: 'components/layouts/center', component: CenterLayoutComponent, text: 'center', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/layouts/fit', component: FitLayoutComponent, text: 'fit', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/layouts/card', component: CardLayoutComponent, text: 'card', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/layouts/hbox', component: hboxLayoutComponent, text: 'hbox', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/layouts/form', component: FormLayoutComponent, text: 'form', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
@@ -383,7 +394,13 @@ export class App {
 		TimeFieldComponent,
 		ToggleFieldComponent,
 		URLFieldComponent,
-		ValidationComponent
+		ValidationComponent,
+
+		CardLayoutComponent,
+		FitLayoutComponent,
+		CenterLayoutComponent,
+		hboxLayoutComponent,
+		FormLayoutComponent,
 
 	],
 	providers: [
