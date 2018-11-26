@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -77,6 +78,9 @@ export class progressbarwidgetMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "text": "String",
@@ -173,6 +177,9 @@ export class progressbarwidgetMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'text',
@@ -327,5 +334,8 @@ export class ExtProgressbarwidgetComponent extends base implements OnInit,AfterC
   constructor(eRef:ElementRef) {super(eRef,progressbarwidgetMetaData)}
   public ngOnInit() {this.baseOnInit(progressbarwidgetMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

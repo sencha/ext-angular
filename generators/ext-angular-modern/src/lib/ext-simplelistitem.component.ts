@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -79,6 +80,9 @@ export class simplelistitemMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "toFrontOnShow": "Boolean",
@@ -176,6 +180,9 @@ export class simplelistitemMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'toFrontOnShow',
@@ -329,5 +336,8 @@ export class ExtSimplelistitemComponent extends base implements OnInit,AfterCont
   constructor(eRef:ElementRef) {super(eRef,simplelistitemMetaData)}
   public ngOnInit() {this.baseOnInit(simplelistitemMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

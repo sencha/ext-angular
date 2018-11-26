@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -83,6 +84,9 @@ export class calendar_eventMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "startDate": "Date",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "timeFormat": "String",
@@ -185,6 +189,9 @@ export class calendar_eventMetaData {
     'shim',
     'showAnimation',
     'startDate',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'timeFormat',
@@ -339,5 +346,8 @@ export class ExtCalendar_eventComponent extends base implements OnInit,AfterCont
   constructor(eRef:ElementRef) {super(eRef,calendar_eventMetaData)}
   public ngOnInit() {this.baseOnInit(calendar_eventMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

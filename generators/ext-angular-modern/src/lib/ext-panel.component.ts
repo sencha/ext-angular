@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -89,7 +90,7 @@ export class panelMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "minButtonWidth": "Number",
@@ -121,6 +122,9 @@ export class panelMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "standardButtons": "Object",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "tbar": "Object/Object[]",
@@ -264,6 +268,9 @@ export class panelMetaData {
     'shim',
     'showAnimation',
     'standardButtons',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'tbar',
@@ -459,5 +466,8 @@ export class ExtPanelComponent extends base implements OnInit,AfterContentInit,O
   constructor(eRef:ElementRef) {super(eRef,panelMetaData)}
   public ngOnInit() {this.baseOnInit(panelMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

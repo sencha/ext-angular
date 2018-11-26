@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -113,6 +114,9 @@ export class emailfieldMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "sideError": "String",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "textAlign": "'left'/'center'/'right'",
@@ -251,6 +255,9 @@ export class emailfieldMetaData {
     'shim',
     'showAnimation',
     'sideError',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'textAlign',
@@ -427,5 +434,8 @@ export class ExtEmailfieldComponent extends base implements OnInit,AfterContentI
   constructor(eRef:ElementRef) {super(eRef,emailfieldMetaData)}
   public ngOnInit() {this.baseOnInit(emailfieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

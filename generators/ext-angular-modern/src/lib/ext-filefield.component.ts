@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -116,6 +117,9 @@ export class filefieldMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "sideError": "String",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "textAlign": "'left'/'center'/'right'",
@@ -257,6 +261,9 @@ export class filefieldMetaData {
     'shim',
     'showAnimation',
     'sideError',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'textAlign',
@@ -433,5 +440,8 @@ export class ExtFilefieldComponent extends base implements OnInit,AfterContentIn
   constructor(eRef:ElementRef) {super(eRef,filefieldMetaData)}
   public ngOnInit() {this.baseOnInit(filefieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

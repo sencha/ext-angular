@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -82,6 +83,9 @@ export class gaugeMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "textAlign": "String",
@@ -188,6 +192,9 @@ export class gaugeMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'textAlign',
@@ -347,5 +354,8 @@ export class ExtGaugeComponent extends base implements OnInit,AfterContentInit,O
   constructor(eRef:ElementRef) {super(eRef,gaugeMetaData)}
   public ngOnInit() {this.baseOnInit(gaugeMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

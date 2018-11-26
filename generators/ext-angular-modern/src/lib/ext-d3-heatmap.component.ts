@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -83,6 +84,9 @@ export class d3_heatmapMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "size": "Object",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Ext.data.Store",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -187,6 +191,9 @@ export class d3_heatmapMetaData {
     'shim',
     'showAnimation',
     'size',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'tabIndex',
@@ -347,5 +354,8 @@ export class ExtD3_heatmapComponent extends base implements OnInit,AfterContentI
   constructor(eRef:ElementRef) {super(eRef,d3_heatmapMetaData)}
   public ngOnInit() {this.baseOnInit(d3_heatmapMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

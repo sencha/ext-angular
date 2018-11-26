@@ -1,4 +1,3 @@
-
 declare var Ext: any
 import {
   Component,
@@ -9,9 +8,9 @@ import {
   EmbeddedViewRef,
   ApplicationRef,
   VERSION} from '@angular/core'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import {BrowserModule} from '@angular/platform-browser'
 import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
-
 
 import * as d3 from 'd3'
 window['d3'] = d3
@@ -19,7 +18,6 @@ window['d3'] = d3
 //services
 import { AgencyService } from './service/agency.service';
 import {AppService} from './app.service';
-
 
 //in main
 import { DetailComponent } from './view/main/detail/detail.component';
@@ -115,7 +113,6 @@ import {NeedleGaugeComponent} from "../examples/Gauges/NeedleGauge"
 
 import {CalendarService} from "../examples/Calendar/Calendar.service"
 import {GridService} from '../examples/Grid/Grid.service'
-
 
 
 
@@ -289,6 +286,7 @@ export class App {
   imports: [
     BrowserModule,
     ExtAngularModernModule,
+    BrowserAnimationsModule,
     routingModule
   ],
 	declarations: [
@@ -392,16 +390,9 @@ export class App {
 	bootstrap: [App]
 })
 export class AppModule {
-
-	constructor(appService: AppService) {
-		appService.init();
-		console.log("isphone: " + Ext.os.is.Phone);
-		console.log("isDesktop: " + Ext.os.is.Desktop);
-
-	}
-
-
- }
-
-
-
+  constructor(appService: AppService) {
+    appService.init();
+    //console.log("isphone: " + Ext.os.is.Phone);
+    //console.log("isDesktop: " + Ext.os.is.Desktop);
+  }
+}

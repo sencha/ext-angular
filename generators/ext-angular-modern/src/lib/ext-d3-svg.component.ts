@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -80,6 +81,9 @@ export class d3_svgMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "size": "Object",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Ext.data.Store",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -178,6 +182,9 @@ export class d3_svgMetaData {
     'shim',
     'showAnimation',
     'size',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'tabIndex',
@@ -335,5 +342,8 @@ export class ExtD3_svgComponent extends base implements OnInit,AfterContentInit,
   constructor(eRef:ElementRef) {super(eRef,d3_svgMetaData)}
   public ngOnInit() {this.baseOnInit(d3_svgMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

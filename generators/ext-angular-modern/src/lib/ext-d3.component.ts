@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -80,6 +81,9 @@ export class d3MetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "size": "Object",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Ext.data.Store",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -178,6 +182,9 @@ export class d3MetaData {
     'shim',
     'showAnimation',
     'size',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'tabIndex',
@@ -335,5 +342,8 @@ export class ExtD3Component extends base implements OnInit,AfterContentInit,OnCh
   constructor(eRef:ElementRef) {super(eRef,d3MetaData)}
   public ngOnInit() {this.baseOnInit(d3MetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

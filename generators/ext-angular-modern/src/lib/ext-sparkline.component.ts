@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -80,6 +81,9 @@ export class sparklineMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "tipTpl": "String/Ext.XTemplate",
@@ -181,6 +185,9 @@ export class sparklineMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'tipTpl',
@@ -337,5 +344,8 @@ export class ExtSparklineComponent extends base implements OnInit,AfterContentIn
   constructor(eRef:ElementRef) {super(eRef,sparklineMetaData)}
   public ngOnInit() {this.baseOnInit(sparklineMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

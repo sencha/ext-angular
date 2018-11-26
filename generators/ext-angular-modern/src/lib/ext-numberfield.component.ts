@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -119,6 +120,9 @@ export class numberfieldMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "sideError": "String",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "textAlign": "'left'/'center'/'right'",
@@ -264,6 +268,9 @@ export class numberfieldMetaData {
     'shim',
     'showAnimation',
     'sideError',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'textAlign',
@@ -441,5 +448,8 @@ export class ExtNumberfieldComponent extends base implements OnInit,AfterContent
   constructor(eRef:ElementRef) {super(eRef,numberfieldMetaData)}
   public ngOnInit() {this.baseOnInit(numberfieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

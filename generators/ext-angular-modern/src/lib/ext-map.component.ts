@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -74,7 +75,7 @@ export class mapMetaData {
     "margin": "Number/String",
     "markers": "Ext.data.Store/Object/Ext.data.Model[]/Ext.ux.google.map.Marker",
     "markerTemplate": "Object/Ext.util.ObjectTemplate",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "minHeight": "Number/String",
@@ -103,6 +104,9 @@ export class mapMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "toFrontOnShow": "Boolean",
@@ -224,6 +228,9 @@ export class mapMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'toFrontOnShow',
@@ -421,5 +428,8 @@ export class ExtMapComponent extends base implements OnInit,AfterContentInit,OnC
   constructor(eRef:ElementRef) {super(eRef,mapMetaData)}
   public ngOnInit() {this.baseOnInit(mapMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

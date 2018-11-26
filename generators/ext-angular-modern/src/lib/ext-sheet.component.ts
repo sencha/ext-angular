@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -92,7 +93,7 @@ export class sheetMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "minButtonWidth": "Number",
@@ -126,6 +127,9 @@ export class sheetMetaData {
     "showAnimation": "String/Mixed",
     "side": "'left'/'right'/'top'/'bottom'",
     "standardButtons": "Object",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "stretchX": "Boolean",
     "stretchY": "Boolean",
     "style": "String/Object",
@@ -276,6 +280,9 @@ export class sheetMetaData {
     'showAnimation',
     'side',
     'standardButtons',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'stretchX',
     'stretchY',
     'style',
@@ -473,5 +480,8 @@ export class ExtSheetComponent extends base implements OnInit,AfterContentInit,O
   constructor(eRef:ElementRef) {super(eRef,sheetMetaData)}
   public ngOnInit() {this.baseOnInit(sheetMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

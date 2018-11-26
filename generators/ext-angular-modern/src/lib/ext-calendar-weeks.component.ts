@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -104,7 +105,7 @@ export class calendar_weeksMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "minButtonWidth": "Number",
@@ -138,6 +139,9 @@ export class calendar_weeksMetaData {
     "showAnimation": "String/Mixed",
     "showOverflow": "String",
     "standardButtons": "Object",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Object/Ext.calendar.store.Calendars",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -305,6 +309,9 @@ export class calendar_weeksMetaData {
     'showAnimation',
     'showOverflow',
     'standardButtons',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'tabIndex',
@@ -529,5 +536,8 @@ export class ExtCalendar_weeksComponent extends base implements OnInit,AfterCont
   constructor(eRef:ElementRef) {super(eRef,calendar_weeksMetaData)}
   public ngOnInit() {this.baseOnInit(calendar_weeksMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

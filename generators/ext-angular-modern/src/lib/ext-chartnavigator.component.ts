@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -69,7 +70,7 @@ export class chartnavigatorMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "minHeight": "Number/String",
@@ -98,6 +99,9 @@ export class chartnavigatorMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "toFrontOnShow": "Boolean",
@@ -213,6 +217,9 @@ export class chartnavigatorMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'toFrontOnShow',
@@ -381,5 +388,8 @@ export class ExtChartnavigatorComponent extends base implements OnInit,AfterCont
   constructor(eRef:ElementRef) {super(eRef,chartnavigatorMetaData)}
   public ngOnInit() {this.baseOnInit(chartnavigatorMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

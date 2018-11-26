@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -85,6 +86,9 @@ export class ratingMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "tip": "Object/String/String[]/Ext.XTemplate/Function",
@@ -191,6 +195,9 @@ export class ratingMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'tip',
@@ -347,5 +354,8 @@ export class ExtRatingComponent extends base implements OnInit,AfterContentInit,
   constructor(eRef:ElementRef) {super(eRef,ratingMetaData)}
   public ngOnInit() {this.baseOnInit(ratingMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

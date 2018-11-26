@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -97,7 +98,7 @@ export class tooltipMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "minButtonWidth": "Number",
@@ -133,6 +134,9 @@ export class tooltipMetaData {
     "showDelay": "Number",
     "showOnTap": "Boolean/String[]",
     "standardButtons": "Object",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "target": "Ext.Component/Ext.dom.Element",
@@ -290,6 +294,9 @@ export class tooltipMetaData {
     'showDelay',
     'showOnTap',
     'standardButtons',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'target',
@@ -487,5 +494,8 @@ export class ExtTooltipComponent extends base implements OnInit,AfterContentInit
   constructor(eRef:ElementRef) {super(eRef,tooltipMetaData)}
   public ngOnInit() {this.baseOnInit(tooltipMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

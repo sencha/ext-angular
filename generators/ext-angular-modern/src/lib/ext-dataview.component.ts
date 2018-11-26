@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -88,7 +89,7 @@ export class dataviewMetaData {
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "markDirty": "Boolean",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "minHeight": "Number/String",
@@ -113,7 +114,7 @@ export class dataviewMetaData {
     "scrollable": "Boolean/String/Object",
     "scrollDock": "'start'/'emd'",
     "scrollToTopOnRefresh": "Boolean",
-    "selectable": "Object",
+    "selectable": "Object/Ext.dataview.selection.Model",
     "selected": "Ext.util.Collection",
     "selection": "Ext.data.Model",
     "selfAlign": "String",
@@ -122,6 +123,9 @@ export class dataviewMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Ext.data.Store/Object",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -264,6 +268,9 @@ export class dataviewMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'tabIndex',
@@ -497,5 +504,8 @@ export class ExtDataviewComponent extends base implements OnInit,AfterContentIni
   constructor(eRef:ElementRef) {super(eRef,dataviewMetaData)}
   public ngOnInit() {this.baseOnInit(dataviewMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

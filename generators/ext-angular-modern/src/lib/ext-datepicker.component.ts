@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -95,7 +96,7 @@ export class datepickerMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "minButtonWidth": "Number",
@@ -132,6 +133,9 @@ export class datepickerMetaData {
     "slotOrder": "Array",
     "slots": "Array",
     "standardButtons": "Object",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "stretchX": "Boolean",
     "stretchY": "Boolean",
     "style": "String/Object",
@@ -294,6 +298,9 @@ export class datepickerMetaData {
     'slotOrder',
     'slots',
     'standardButtons',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'stretchX',
     'stretchY',
     'style',
@@ -503,5 +510,8 @@ export class ExtDatepickerComponent extends base implements OnInit,AfterContentI
   constructor(eRef:ElementRef) {super(eRef,datepickerMetaData)}
   public ngOnInit() {this.baseOnInit(datepickerMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

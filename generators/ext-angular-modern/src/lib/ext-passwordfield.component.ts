@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -115,6 +116,9 @@ export class passwordfieldMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "sideError": "String",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "textAlign": "'left'/'center'/'right'",
@@ -255,6 +259,9 @@ export class passwordfieldMetaData {
     'shim',
     'showAnimation',
     'sideError',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'textAlign',
@@ -431,5 +438,8 @@ export class ExtPasswordfieldComponent extends base implements OnInit,AfterConte
   constructor(eRef:ElementRef) {super(eRef,passwordfieldMetaData)}
   public ngOnInit() {this.baseOnInit(passwordfieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -78,7 +79,7 @@ export class celleditorMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "matchFont": "Boolean",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
@@ -110,6 +111,9 @@ export class celleditorMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "swallowKeys": "Boolean",
     "tabIndex": "Number",
@@ -240,6 +244,9 @@ export class celleditorMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'swallowKeys',
     'tabIndex',
@@ -423,5 +430,8 @@ export class ExtCelleditorComponent extends base implements OnInit,AfterContentI
   constructor(eRef:ElementRef) {super(eRef,celleditorMetaData)}
   public ngOnInit() {this.baseOnInit(celleditorMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

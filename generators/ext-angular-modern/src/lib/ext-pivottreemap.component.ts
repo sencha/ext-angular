@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -104,6 +105,9 @@ export class pivottreemapMetaData {
     "showAnimation": "String/Mixed",
     "size": "Object",
     "sorter": "Function",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Ext.data.Store",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -227,6 +231,9 @@ export class pivottreemapMetaData {
     'showAnimation',
     'size',
     'sorter',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'tabIndex',
@@ -387,5 +394,8 @@ export class ExtPivottreemapComponent extends base implements OnInit,AfterConten
   constructor(eRef:ElementRef) {super(eRef,pivottreemapMetaData)}
   public ngOnInit() {this.baseOnInit(pivottreemapMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

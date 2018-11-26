@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -96,6 +97,9 @@ export class gridsortdescmenuitemMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "submenuText": "String",
     "tabIndex": "Number",
@@ -212,6 +216,9 @@ export class gridsortdescmenuitemMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'submenuText',
     'tabIndex',
@@ -371,5 +378,8 @@ export class ExtGridsortdescmenuitemComponent extends base implements OnInit,Aft
   constructor(eRef:ElementRef) {super(eRef,gridsortdescmenuitemMetaData)}
   public ngOnInit() {this.baseOnInit(gridsortdescmenuitemMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

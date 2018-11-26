@@ -1,0 +1,103 @@
+<container #item [layout]="'hbox'" [cls]="'main-background'" [width]="'100%'" [height]="'100%'">
+    <container #item [layout]="'fit'" [flex]="4">
+      <titlebar #item [docked]="'top'" [shadow]="true" [style]="{'z-index': 2}">
+          <button #item
+          [selfAlign]="'left'"
+          [iconCls]="'x-fa fa-bars'"
+          (tap)="toggleTree()"
+        ></button>
+        <container #item [layout]="'hbox'">
+          
+          <div #item class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></div>
+          <a  href="#" #item class="app-title">ExtAngular Modern Kitchen Sink - Angular v{{ANGULAR_VERSION}}</a>
+        </container>
+   
+      </titlebar>
+  
+      <!--  Navtree starts-->
+      <container #item [layout]="'fit'" [flex]="'1'">
+        <panel #item 
+        [scrollable]="'y'" 
+        [shadow] = "false"
+        [style]="{zIndex: 100, backgroundColor: 'white'}"
+        [header]="false"
+        [collapsible]="{ direction: 'left' }"
+        [docked]="'left'"
+        [width]="'300'"
+        [resizable]="{
+          edges: 'east',
+          dynamic: true
+        }"
+        [collapsed]="!showTreeFlag"
+        >
+        <searchfield #item [flex]="1" [docked]="'top'" [ui]="'faded'" (change)="filterNav($event)" [margin]="7" ></searchfield>
+        <treelist #item
+        [ui]="'nav'"
+        [expanderFirst]="false"
+        [expanderOnly]="false"
+        [store]="treeStore"
+        (selectionchange)="selectionChanged($event)"
+        >
+        </treelist>
+      </panel>
+  
+      <!--  Navtree ends--> 
+  
+  
+      <!-- Breadcrums starts-->
+      <!-- docked="top" node={selectedNavNode} -->
+  
+      <toolbar #item [docked]="'top'">
+
+        <container #item *ngFor="let segment of breadcrumb">
+          <button #item
+          [text]="segment.text"
+          [cls]="'breadcrumb-button'"
+          (tap)="navigate(segment.path)"
+          >
+          </button>
+          <button #item *ngIf="segment.path != node.id"
+            [cls]="'x-font-icon md-icon-keyboard-arrow-right'" 
+            [style]="'
+              color: #666;
+              font-size: 20px;
+              line-height: 32px,;
+              vertical-align: middle;
+            '"
+            [text]="'>'"
+          ></button>
+        </container>
+
+
+      </toolbar>  
+      <!-- Breadcrums ends-->
+
+      <!-- examples start-->
+  
+      <container #item [layout]="fit" [scrollable]="true"  [autoSize]="layout !== 'fit'" >
+        <container #item [padding]="30" [layout]="'hbox'" [centered]="true" [scrollable]="true">
+
+          
+              <div #item #nonLeafElements [style]="style" >
+                <div [style]="{display: inline-block}"   class="app-thumbnail" *ngFor="let child of node.childNodes" >
+                  <div  class="app-thumbnail-icon-wrap" (click)="navigate(child.id)">
+                    <div   class="app-thumbnail-icon" [ngClass]="child.data.navIcon"></div>
+                  </div>
+                  <div  className="app-thumbnail-text">{{child.data.name}}</div>
+                </div>
+              </div>
+              <container></container>
+
+        </container> 
+        <container #item [padding]="30" [layout]="'hbox'" [centered]="true" [scrollable]="true">
+            <router-outlet #item></router-outlet>
+        </container>
+
+     
+      </container>
+  
+      <!-- examples end-->
+  
+      </container>
+    </container>
+  </container>

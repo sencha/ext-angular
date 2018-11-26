@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -69,7 +70,7 @@ export class titlebarMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxButtonWidth": "String",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
@@ -98,6 +99,9 @@ export class titlebarMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "title": "String",
@@ -215,6 +219,9 @@ export class titlebarMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'title',
@@ -385,5 +392,8 @@ export class ExtTitlebarComponent extends base implements OnInit,AfterContentIni
   constructor(eRef:ElementRef) {super(eRef,titlebarMetaData)}
   public ngOnInit() {this.baseOnInit(titlebarMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

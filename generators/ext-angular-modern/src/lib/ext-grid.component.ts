@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -74,6 +75,7 @@ export class gridMetaData {
     "hideHeaders": "Boolean",
     "hideMode": "'clip'/'display'/'offsets'/'opacity'/'visibility'",
     "hideOnMaskTap": "Boolean",
+    "hideScrollbar": "Boolean",
     "horizontalOverflow": "any",
     "html": "String/Ext.dom.Element/HTMLElement",
     "id": "String",
@@ -108,7 +110,7 @@ export class gridMetaData {
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "markDirty": "Boolean",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxItemCache": "Number",
     "maxWidth": "Number/String",
@@ -148,7 +150,7 @@ export class gridMetaData {
     "scrollable": "Boolean/String/Object",
     "scrollDock": "'start'/'emd'",
     "scrollToTopOnRefresh": "Boolean",
-    "selectable": "Object",
+    "selectable": "Ext.grid.selection.Model",
     "selection": "Ext.data.Model",
     "selfAlign": "String",
     "session": "Boolean/Object/Ext.data.Session",
@@ -157,6 +159,9 @@ export class gridMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "sortable": "Boolean",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Ext.data.Store/Object",
     "striped": "Boolean",
     "style": "String/Object",
@@ -261,6 +266,7 @@ export class gridMetaData {
     'hideHeaders',
     'hideMode',
     'hideOnMaskTap',
+    'hideScrollbar',
     'horizontalOverflow',
     'html',
     'id',
@@ -344,6 +350,9 @@ export class gridMetaData {
     'shim',
     'showAnimation',
     'sortable',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'striped',
     'style',
@@ -611,5 +620,8 @@ export class ExtGridComponent extends base implements OnInit,AfterContentInit,On
   constructor(eRef:ElementRef) {super(eRef,gridMetaData)}
   public ngOnInit() {this.baseOnInit(gridMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }
