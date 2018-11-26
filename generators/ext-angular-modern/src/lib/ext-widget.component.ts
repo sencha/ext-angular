@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -167,5 +168,8 @@ export class ExtWidgetComponent extends base implements OnInit,AfterContentInit,
   constructor(eRef:ElementRef) {super(eRef,widgetMetaData)}
   public ngOnInit() {this.baseOnInit(widgetMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -105,7 +106,7 @@ export class calendar_form_addMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "method": "String",
@@ -145,6 +146,9 @@ export class calendar_form_addMetaData {
     "standardSubmit": "Boolean",
     "startDateField": "Object",
     "startTimeField": "Object",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "submitOnAction": "Object",
     "tabIndex": "Number",
@@ -318,6 +322,9 @@ export class calendar_form_addMetaData {
     'standardSubmit',
     'startDateField',
     'startTimeField',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'submitOnAction',
     'tabIndex',
@@ -531,5 +538,8 @@ export class ExtCalendar_form_addComponent extends base implements OnInit,AfterC
   constructor(eRef:ElementRef) {super(eRef,calendar_form_addMetaData)}
   public ngOnInit() {this.baseOnInit(calendar_form_addMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

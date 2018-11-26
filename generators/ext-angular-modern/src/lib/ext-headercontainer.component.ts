@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -27,7 +28,7 @@ export class headercontainerMetaData {
     "cardSwitchAnimation": "String/Object/Boolean",
     "centered": "Boolean",
     "cls": "String/String[]",
-    "columns": "Object[]",
+    "columns": "Ext.grid.column.Column[]",
     "constrainAlign": "String/Ext.util.Region/Ext.dom.Element",
     "contentEl": "Ext.dom.Element/HTMLElement/String",
     "control": "Object",
@@ -70,7 +71,7 @@ export class headercontainerMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "minHeight": "Number/String",
@@ -88,7 +89,7 @@ export class headercontainerMetaData {
     "referenceHolder": "Boolean",
     "relative": "Boolean",
     "renderTo": "Ext.dom.Element",
-    "reserveScrollbar": "any",
+    "reserveScrollbar": "Boolean",
     "resetFocusPosition": "Boolean",
     "right": "Number/String",
     "ripple": "Boolean/Object/String",
@@ -99,7 +100,10 @@ export class headercontainerMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
-    "sortable": "any",
+    "sortable": "Boolean",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "toFrontOnShow": "Boolean",
@@ -113,7 +117,7 @@ export class headercontainerMetaData {
     "ui": "String/String[]",
     "userCls": "String/String[]",
     "userSelectable": "Boolean/String/Object",
-    "verticalOverflow": "any",
+    "verticalOverflow": "Boolean",
     "viewModel": "String/Object/Ext.app.ViewModel",
     "weight": "Number",
     "weighted": "Boolean",
@@ -218,6 +222,9 @@ export class headercontainerMetaData {
     'shim',
     'showAnimation',
     'sortable',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'toFrontOnShow',
@@ -387,5 +394,8 @@ export class ExtHeadercontainerComponent extends base implements OnInit,AfterCon
   constructor(eRef:ElementRef) {super(eRef,headercontainerMetaData)}
   public ngOnInit() {this.baseOnInit(headercontainerMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

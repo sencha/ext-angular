@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -197,5 +198,8 @@ export class ExtNumbercellComponent extends base implements OnInit,AfterContentI
   constructor(eRef:ElementRef) {super(eRef,numbercellMetaData)}
   public ngOnInit() {this.baseOnInit(numbercellMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

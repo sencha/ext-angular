@@ -31,7 +31,7 @@ Ext.define('Ext.angular.Transition', {
 
     requires: ['Ext.fx.animation.*'],
 
-    initial: true,
+    initial: false,
 
     config: {
         /**
@@ -75,6 +75,7 @@ Ext.define('Ext.angular.Transition', {
     },
 
     initialize: function () {
+      console.log('******* initialize')
         this.newLocation = location.href;
         this.callParent();
     },
@@ -100,6 +101,7 @@ Ext.define('Ext.angular.Transition', {
 
     // override add to show animation when children are added
     add: function (items) {
+      console.log('**** add ****')
         var me = this,
             animations, i;
 
@@ -261,5 +263,5 @@ Ext.define('Ext.angular.Transition', {
                 duration: duration
             }
         };
-    }    
+    }
 });

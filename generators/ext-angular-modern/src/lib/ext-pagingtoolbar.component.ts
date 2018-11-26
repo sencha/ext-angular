@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -69,7 +70,7 @@ export class pagingtoolbarMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "minHeight": "Number/String",
@@ -100,6 +101,9 @@ export class pagingtoolbarMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "sliderField": "Object",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "summaryComponent": "Object",
     "tabIndex": "Number",
@@ -219,6 +223,9 @@ export class pagingtoolbarMetaData {
     'shim',
     'showAnimation',
     'sliderField',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'summaryComponent',
     'tabIndex',
@@ -389,5 +396,8 @@ export class ExtPagingtoolbarComponent extends base implements OnInit,AfterConte
   constructor(eRef:ElementRef) {super(eRef,pagingtoolbarMetaData)}
   public ngOnInit() {this.baseOnInit(pagingtoolbarMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

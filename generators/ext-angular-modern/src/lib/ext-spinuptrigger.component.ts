@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -185,5 +186,8 @@ export class ExtSpinuptriggerComponent extends base implements OnInit,AfterConte
   constructor(eRef:ElementRef) {super(eRef,spinuptriggerMetaData)}
   public ngOnInit() {this.baseOnInit(spinuptriggerMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

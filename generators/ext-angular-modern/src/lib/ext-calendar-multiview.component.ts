@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -55,5 +56,8 @@ export class ExtCalendar_multiviewComponent extends base implements OnInit,After
   constructor(eRef:ElementRef) {super(eRef,calendar_multiviewMetaData)}
   public ngOnInit() {this.baseOnInit(calendar_multiviewMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

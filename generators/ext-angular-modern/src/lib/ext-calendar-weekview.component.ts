@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -92,6 +93,9 @@ export class calendar_weekviewMetaData {
     "showAnimation": "String/Mixed",
     "showNowMarker": "Boolean",
     "startTime": "Number",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Object/Ext.calendar.store.Calendars",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -206,6 +210,9 @@ export class calendar_weekviewMetaData {
     'showAnimation',
     'showNowMarker',
     'startTime',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'tabIndex',
@@ -391,5 +398,8 @@ export class ExtCalendar_weekviewComponent extends base implements OnInit,AfterC
   constructor(eRef:ElementRef) {super(eRef,calendar_weekviewMetaData)}
   public ngOnInit() {this.baseOnInit(calendar_weekviewMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

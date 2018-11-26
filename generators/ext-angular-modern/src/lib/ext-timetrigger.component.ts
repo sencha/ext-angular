@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -185,5 +186,8 @@ export class ExtTimetriggerComponent extends base implements OnInit,AfterContent
   constructor(eRef:ElementRef) {super(eRef,timetriggerMetaData)}
   public ngOnInit() {this.baseOnInit(timetriggerMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

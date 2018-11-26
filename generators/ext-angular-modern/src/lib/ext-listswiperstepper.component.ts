@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -71,7 +72,7 @@ export class listswiperstepperMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "minHeight": "Number/String",
@@ -101,6 +102,9 @@ export class listswiperstepperMetaData {
     "showAnimation": "String/Mixed",
     "side": "any",
     "state": "any",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "step": "any",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -223,6 +227,9 @@ export class listswiperstepperMetaData {
     'showAnimation',
     'side',
     'state',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'step',
     'style',
     'tabIndex',
@@ -395,5 +402,8 @@ export class ExtListswiperstepperComponent extends base implements OnInit,AfterC
   constructor(eRef:ElementRef) {super(eRef,listswiperstepperMetaData)}
   public ngOnInit() {this.baseOnInit(listswiperstepperMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

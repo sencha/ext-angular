@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -89,7 +90,7 @@ export class calendar_listMetaData {
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "markDirty": "Boolean",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "minHeight": "Number/String",
@@ -114,7 +115,7 @@ export class calendar_listMetaData {
     "scrollable": "Boolean/String/Object",
     "scrollDock": "'start'/'emd'",
     "scrollToTopOnRefresh": "Boolean",
-    "selectable": "Object",
+    "selectable": "Object/Ext.dataview.selection.Model",
     "selected": "Ext.util.Collection",
     "selection": "Ext.data.Model",
     "selfAlign": "String",
@@ -123,6 +124,9 @@ export class calendar_listMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Ext.data.Store/Object",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -266,6 +270,9 @@ export class calendar_listMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'tabIndex',
@@ -499,5 +506,8 @@ export class ExtCalendar_listComponent extends base implements OnInit,AfterConte
   constructor(eRef:ElementRef) {super(eRef,calendar_listMetaData)}
   public ngOnInit() {this.baseOnInit(calendar_listMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

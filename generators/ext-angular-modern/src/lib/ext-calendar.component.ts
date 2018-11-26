@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -96,7 +97,7 @@ export class calendarMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "menuButton": "Object",
@@ -133,6 +134,9 @@ export class calendarMetaData {
     "showAnimation": "String/Mixed",
     "sideBar": "Object",
     "standardButtons": "Object",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Object/Ext.calendar.store.Calendars",
     "style": "String/Object",
     "switcher": "Object",
@@ -296,6 +300,9 @@ export class calendarMetaData {
     'showAnimation',
     'sideBar',
     'standardButtons',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'switcher',
@@ -499,5 +506,8 @@ export class ExtCalendarComponent extends base implements OnInit,AfterContentIni
   constructor(eRef:ElementRef) {super(eRef,calendarMetaData)}
   public ngOnInit() {this.baseOnInit(calendarMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

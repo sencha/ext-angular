@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -95,6 +96,9 @@ export class tabMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "stretchMenu": "Boolean",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -212,6 +216,9 @@ export class tabMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'stretchMenu',
     'style',
     'tabIndex',
@@ -381,5 +388,8 @@ export class ExtTabComponent extends base implements OnInit,AfterContentInit,OnC
   constructor(eRef:ElementRef) {super(eRef,tabMetaData)}
   public ngOnInit() {this.baseOnInit(tabMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

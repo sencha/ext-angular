@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -104,6 +105,9 @@ export class togglefieldMetaData {
     "showAnimation": "String/Mixed",
     "sideError": "String",
     "slider": "any",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
     "tipError": "String",
@@ -232,6 +236,9 @@ export class togglefieldMetaData {
     'showAnimation',
     'sideError',
     'slider',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'tabIndex',
     'tipError',
@@ -411,5 +418,8 @@ export class ExtTogglefieldComponent extends base implements OnInit,AfterContent
   constructor(eRef:ElementRef) {super(eRef,togglefieldMetaData)}
   public ngOnInit() {this.baseOnInit(togglefieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

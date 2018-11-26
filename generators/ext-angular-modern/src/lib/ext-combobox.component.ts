@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -144,6 +145,9 @@ export class comboboxMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "sideError": "String",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Ext.data.Store/Object/String",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -320,6 +324,9 @@ export class comboboxMetaData {
     'shim',
     'showAnimation',
     'sideError',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'tabIndex',
@@ -515,5 +522,8 @@ export class ExtComboboxComponent extends base implements OnInit,AfterContentIni
   constructor(eRef:ElementRef) {super(eRef,comboboxMetaData)}
   public ngOnInit() {this.baseOnInit(comboboxMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

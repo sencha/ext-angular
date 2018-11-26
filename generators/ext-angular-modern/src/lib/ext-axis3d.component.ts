@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -26,7 +27,6 @@ export class axis3dMetaData {
     "length": "Number",
     "limits": "Array/Object",
     "linkedTo": "Ext.chart.axis.Axis/String/Number",
-    "listeners": "Object",
     "majorTickSteps": "Number",
     "margin": "Number",
     "maximum": "Number",
@@ -68,7 +68,6 @@ export class axis3dMetaData {
     'length',
     'limits',
     'linkedTo',
-    'listeners',
     'majorTickSteps',
     'margin',
     'maximum',
@@ -115,5 +114,8 @@ export class ExtAxis3dComponent extends base implements OnInit,AfterContentInit,
   constructor(eRef:ElementRef) {super(eRef,axis3dMetaData)}
   public ngOnInit() {this.baseOnInit(axis3dMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

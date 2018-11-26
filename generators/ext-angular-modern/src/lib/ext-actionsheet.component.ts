@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -92,7 +93,7 @@ export class actionsheetMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "minButtonWidth": "Number",
@@ -126,6 +127,9 @@ export class actionsheetMetaData {
     "showAnimation": "String/Mixed",
     "side": "'left'/'right'/'top'/'bottom'",
     "standardButtons": "Object",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "stretchX": "Boolean",
     "stretchY": "Boolean",
     "style": "String/Object",
@@ -276,6 +280,9 @@ export class actionsheetMetaData {
     'showAnimation',
     'side',
     'standardButtons',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'stretchX',
     'stretchY',
     'style',
@@ -473,5 +480,8 @@ export class ExtActionsheetComponent extends base implements OnInit,AfterContent
   constructor(eRef:ElementRef) {super(eRef,actionsheetMetaData)}
   public ngOnInit() {this.baseOnInit(actionsheetMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

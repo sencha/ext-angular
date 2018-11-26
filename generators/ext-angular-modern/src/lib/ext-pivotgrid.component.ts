@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -78,6 +79,7 @@ export class pivotgridMetaData {
     "hideHeaders": "Boolean",
     "hideMode": "'clip'/'display'/'offsets'/'opacity'/'visibility'",
     "hideOnMaskTap": "Boolean",
+    "hideScrollbar": "Boolean",
     "horizontalOverflow": "any",
     "html": "String/Ext.dom.Element/HTMLElement",
     "id": "String",
@@ -113,7 +115,7 @@ export class pivotgridMetaData {
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "markDirty": "Boolean",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "matrix": "Ext.pivot.matrix.Base",
     "maxHeight": "Number/String",
     "maxItemCache": "Number",
@@ -154,7 +156,7 @@ export class pivotgridMetaData {
     "scrollable": "Boolean/String/Object",
     "scrollDock": "'start'/'emd'",
     "scrollToTopOnRefresh": "Boolean",
-    "selectable": "Object",
+    "selectable": "Ext.grid.selection.Model",
     "selection": "Ext.data.Model",
     "selfAlign": "String",
     "session": "Boolean/Object/Ext.data.Session",
@@ -165,6 +167,9 @@ export class pivotgridMetaData {
     "sortable": "Boolean",
     "startColGroupsCollapsed": "Boolean",
     "startRowGroupsCollapsed": "Boolean",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Ext.data.Store/Object",
     "striped": "Boolean",
     "style": "String/Object",
@@ -274,6 +279,7 @@ export class pivotgridMetaData {
     'hideHeaders',
     'hideMode',
     'hideOnMaskTap',
+    'hideScrollbar',
     'horizontalOverflow',
     'html',
     'id',
@@ -361,6 +367,9 @@ export class pivotgridMetaData {
     'sortable',
     'startColGroupsCollapsed',
     'startRowGroupsCollapsed',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'striped',
     'style',
@@ -693,5 +702,8 @@ export class ExtPivotgridComponent extends base implements OnInit,AfterContentIn
   constructor(eRef:ElementRef) {super(eRef,pivotgridMetaData)}
   public ngOnInit() {this.baseOnInit(pivotgridMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -83,7 +84,7 @@ export class polarMetaData {
     "mainRect": "any",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "minHeight": "Number/String",
@@ -115,6 +116,9 @@ export class polarMetaData {
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
     "sprites": "Object[]",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Ext.data.Store/String/Object",
     "style": "Object",
     "surfaceZIndexes": "Object",
@@ -250,6 +254,9 @@ export class polarMetaData {
     'shim',
     'showAnimation',
     'sprites',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'style',
     'surfaceZIndexes',
@@ -469,5 +476,8 @@ export class ExtPolarComponent extends base implements OnInit,AfterContentInit,O
   constructor(eRef:ElementRef) {super(eRef,polarMetaData)}
   public ngOnInit() {this.baseOnInit(polarMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

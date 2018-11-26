@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -201,5 +202,8 @@ export class ExtBooleancellComponent extends base implements OnInit,AfterContent
   constructor(eRef:ElementRef) {super(eRef,booleancellMetaData)}
   public ngOnInit() {this.baseOnInit(booleancellMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

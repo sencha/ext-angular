@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -29,7 +30,7 @@ export class datecolumnMetaData {
     "cell": "Object",
     "centered": "Boolean",
     "cls": "String/String[]",
-    "columns": "Object[]",
+    "columns": "Ext.grid.column.Column[]",
     "computedWidth": "Number",
     "constrainAlign": "String/Ext.util.Region/Ext.dom.Element",
     "contentEl": "Ext.dom.Element/HTMLElement/String",
@@ -58,6 +59,7 @@ export class datecolumnMetaData {
     "exportRenderer": "Boolean/Function/String",
     "exportStyle": "Ext.exporter.file.Style/Ext.exporter.file.Style[]",
     "exportSummaryRenderer": "Boolean/Function/String",
+    "filter": "Object/Boolean",
     "flex": "Number/String/Object",
     "floated": "Boolean",
     "focusableContainer": "Boolean",
@@ -92,7 +94,7 @@ export class datecolumnMetaData {
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "menu": "Ext.menu.Menu/Object",
@@ -113,7 +115,7 @@ export class datecolumnMetaData {
     "relative": "Boolean",
     "renderer": "Function/String",
     "renderTo": "Ext.dom.Element",
-    "reserveScrollbar": "any",
+    "reserveScrollbar": "Boolean",
     "resetFocusPosition": "Boolean",
     "resizable": "Boolean",
     "right": "Number/String",
@@ -129,6 +131,9 @@ export class datecolumnMetaData {
     "showAnimation": "String/Mixed",
     "sortable": "Boolean",
     "sorter": "Function/String/Object/Ext.util.Sorter",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "style": "String/Object",
     "summary": "String",
     "summaryCell": "Object",
@@ -151,7 +156,7 @@ export class datecolumnMetaData {
     "ui": "String/String[]",
     "userCls": "String/String[]",
     "userSelectable": "Boolean/String/Object",
-    "verticalOverflow": "any",
+    "verticalOverflow": "Boolean",
     "viewModel": "String/Object/Ext.app.ViewModel",
     "weight": "Number",
     "weighted": "Boolean",
@@ -214,6 +219,7 @@ export class datecolumnMetaData {
     'exportRenderer',
     'exportStyle',
     'exportSummaryRenderer',
+    'filter',
     'flex',
     'floated',
     'focusableContainer',
@@ -285,6 +291,9 @@ export class datecolumnMetaData {
     'showAnimation',
     'sortable',
     'sorter',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'style',
     'summary',
     'summaryCell',
@@ -463,5 +472,8 @@ export class ExtDatecolumnComponent extends base implements OnInit,AfterContentI
   constructor(eRef:ElementRef) {super(eRef,datecolumnMetaData)}
   public ngOnInit() {this.baseOnInit(datecolumnMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

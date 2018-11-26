@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -77,6 +78,7 @@ export class treeMetaData {
     "hideHeaders": "Boolean",
     "hideMode": "'clip'/'display'/'offsets'/'opacity'/'visibility'",
     "hideOnMaskTap": "Boolean",
+    "hideScrollbar": "Boolean",
     "horizontalOverflow": "any",
     "html": "String/Ext.dom.Element/HTMLElement",
     "id": "String",
@@ -111,7 +113,7 @@ export class treeMetaData {
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "markDirty": "Boolean",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
+    "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
     "maxHeight": "Number/String",
     "maxItemCache": "Number",
     "maxWidth": "Number/String",
@@ -151,7 +153,7 @@ export class treeMetaData {
     "scrollable": "Boolean/String/Object",
     "scrollDock": "'start'/'emd'",
     "scrollToTopOnRefresh": "Boolean",
-    "selectable": "Object",
+    "selectable": "Ext.grid.selection.Model",
     "selection": "Ext.data.Model",
     "selectOnExpander": "Boolean",
     "selfAlign": "String",
@@ -162,6 +164,9 @@ export class treeMetaData {
     "showAnimation": "String/Mixed",
     "singleExpand": "Boolean",
     "sortable": "Boolean",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "store": "Ext.data.Store/Object",
     "striped": "Boolean",
     "style": "String/Object",
@@ -269,6 +274,7 @@ export class treeMetaData {
     'hideHeaders',
     'hideMode',
     'hideOnMaskTap',
+    'hideScrollbar',
     'horizontalOverflow',
     'html',
     'id',
@@ -354,6 +360,9 @@ export class treeMetaData {
     'showAnimation',
     'singleExpand',
     'sortable',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'store',
     'striped',
     'style',
@@ -633,5 +642,8 @@ export class ExtTreeComponent extends base implements OnInit,AfterContentInit,On
   constructor(eRef:ElementRef) {super(eRef,treeMetaData)}
   public ngOnInit() {this.baseOnInit(treeMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

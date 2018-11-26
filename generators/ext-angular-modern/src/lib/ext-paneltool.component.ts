@@ -1,4 +1,5 @@
 import {
+  Output,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -80,6 +81,9 @@ export class paneltoolMetaData {
     "shareableName": "Boolean",
     "shim": "Boolean",
     "showAnimation": "String/Mixed",
+    "stateful": "Boolean/Object/String[]",
+    "statefulDefaults": "Object/String[]",
+    "stateId": "String",
     "stopEvent": "Boolean",
     "style": "String/Object",
     "tabIndex": "Number",
@@ -179,6 +183,9 @@ export class paneltoolMetaData {
     'shareableName',
     'shim',
     'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
     'stopEvent',
     'style',
     'tabIndex',
@@ -335,5 +342,8 @@ export class ExtPaneltoolComponent extends base implements OnInit,AfterContentIn
   constructor(eRef:ElementRef) {super(eRef,paneltoolMetaData)}
   public ngOnInit() {this.baseOnInit(paneltoolMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-  public ngAfterContentInit() {this.baseAfterContentInit()}
+  public ngAfterContentInit() {
+    this.baseAfterContentInit()
+    this['ready'].emit(this)
+    }
 }

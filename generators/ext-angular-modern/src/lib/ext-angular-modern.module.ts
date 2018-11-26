@@ -23,7 +23,6 @@ import { ExtCalendar_multiviewComponent } from './ext-calendar-multiview.compone
 import { ExtCalendar_weekviewComponent } from './ext-calendar-weekview.component';
 import { ExtCalendar_weeksviewComponent } from './ext-calendar-weeksview.component';
 import { ExtCarouselComponent } from './ext-carousel.component';
-import { ExtAxisComponent } from './ext-axis.component';
 import { ExtAxis3dComponent } from './ext-axis3d.component';
 import { ExtCartesianComponent } from './ext-cartesian.component';
 import { ExtChartComponent } from './ext-chart.component';
@@ -131,6 +130,8 @@ import { ExtTextcolumnComponent } from './ext-textcolumn.component';
 import { ExtTreecolumnComponent } from './ext-treecolumn.component';
 import { ExtGridComponent } from './ext-grid.component';
 import { ExtHeadercontainerComponent } from './ext-headercontainer.component';
+import { ExtLockedgridComponent } from './ext-lockedgrid.component';
+import { ExtLockedgridregionComponent } from './ext-lockedgridregion.component';
 import { ExtGridcolumnsmenuComponent } from './ext-gridcolumnsmenu.component';
 import { ExtGridgroupbythismenuitemComponent } from './ext-gridgroupbythismenuitem.component';
 import { ExtGridshowingroupsmenuitemComponent } from './ext-gridshowingroupsmenuitem.component';
@@ -245,7 +246,6 @@ import { ExtTransitionComponent } from './ext-transition.component';
     ExtCalendar_weekviewComponent,
     ExtCalendar_weeksviewComponent,
     ExtCarouselComponent,
-    ExtAxisComponent,
     ExtAxis3dComponent,
     ExtCartesianComponent,
     ExtChartComponent,
@@ -353,6 +353,8 @@ import { ExtTransitionComponent } from './ext-transition.component';
     ExtTreecolumnComponent,
     ExtGridComponent,
     ExtHeadercontainerComponent,
+    ExtLockedgridComponent,
+    ExtLockedgridregionComponent,
     ExtGridcolumnsmenuComponent,
     ExtGridgroupbythismenuitemComponent,
     ExtGridshowingroupsmenuitemComponent,
@@ -464,7 +466,6 @@ import { ExtTransitionComponent } from './ext-transition.component';
     ExtCalendar_weekviewComponent,
     ExtCalendar_weeksviewComponent,
     ExtCarouselComponent,
-    ExtAxisComponent,
     ExtAxis3dComponent,
     ExtCartesianComponent,
     ExtChartComponent,
@@ -572,6 +573,8 @@ import { ExtTransitionComponent } from './ext-transition.component';
     ExtTreecolumnComponent,
     ExtGridComponent,
     ExtHeadercontainerComponent,
+    ExtLockedgridComponent,
+    ExtLockedgridregionComponent,
     ExtGridcolumnsmenuComponent,
     ExtGridgroupbythismenuitemComponent,
     ExtGridshowingroupsmenuitemComponent,
