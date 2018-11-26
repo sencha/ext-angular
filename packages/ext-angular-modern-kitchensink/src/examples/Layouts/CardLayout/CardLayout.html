@@ -1,0 +1,26 @@
+<container #item [layout]="vbox" [padding]="10">
+    <panel #item
+        [width]="'auto'"
+        [shadow]="true" [ui]="'instructions'" [margin]="'0 0 20 0'"
+        [html]="'A <b>card</b> layout shows one item at a time. Each item takes on the 
+            full height and width of the container. Card layouts can optionally be configured to
+            animate when switching cards.'"
+    ></panel>
+    <container #item 
+        [layout]="{type: 'card', animation:animation}"
+        [activeItem]="activeCard" 
+        [flex]="1"
+        [shadow]="true"
+        [defaults]="{scrollable: 'y'}"
+    >
+        <panel #item [shadow]="true">
+            <container #item>
+                <button #item
+                    [text]="'Slide Left'"
+                    [ui]="'alt'" (onTap)="switchCards({type:'slide', direction:'left', duration: 500, easing: 'ease-in-out'})"
+                    [html]="'------ i. element'"
+                ></button>
+            </container>
+        </panel>
+    </container>
+</container>

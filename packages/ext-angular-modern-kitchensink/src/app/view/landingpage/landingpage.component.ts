@@ -1,23 +1,32 @@
-declare var Ext: any
-import { Component, OnInit } from '@angular/core'
-import { navTreeRoot } from '../../../examples/index'
-import { Router, NavigationEnd } from '@angular/router'
-import { VERSION } from '@angular/core'
-import { Subject } from "rxjs"
 
-const generateBreadcrumb = (node) => {
-  const path = []
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ViewContainerRef,ElementRef, ComponentFactoryResolver, ComponentRef, ComponentFactory } from '@angular/core';
+import {navTreeRoot} from '../../../examples/index';
+
+import { Location } from '@angular/common';
+import { Router, NavigationEnd } from '@angular/router';
+
+import { VERSION } from '@angular/core';
+import { Subject } from "rxjs";
+
+declare var Ext: any;
+
+declare var _code: any;
+ const generateBreadcrumb = (node) => {
+  const path = [];
+
   do {
     path.unshift({
       isLeaf: !node.childNodes.length,
       text: node.get("text"),
       path: node.get("id"),
       divider: '&nbsp;>&nbsp;'
-    })
+    });
+
   } while (node = node.parentNode)
+
   path[path.length-1].divider = ''
   return path
-}
+};
 
 @Component({
   selector: 'app-root',
@@ -31,9 +40,12 @@ export class LandingpageComponent implements OnInit {
   node: any
   node$: any = new Subject()
   breadcrumb: Array<any>
+
   filterRegex: any
   filterVal: any
   showTreeFlag: any = true
+
+
   blockstyle: any = {'background':'top','display':'block','text-align':'center'}
 
   treeStore: any = Ext.create('Ext.data.TreeStore', {
@@ -49,23 +61,31 @@ export class LandingpageComponent implements OnInit {
     </div>
     <div className="app-thumbnail-text" >{text}</div>
   </div>`
+
   dataviewReady = (event) => {
-    this.theDataview = event.ext
+    console.log("dataviewReady");
+    this.theDataview = event.ext;
   }
+
   doClick = (event) => {
     //if( window.console ) console.log('dataView.click(%o,%o,%o,%o)',view,index,node,event);
+    console.log("doClick. ID: " + event.location.record.data.id);
     var id = event.location.record.data.id
     this.navigate(id)
   }
 
   theDataviewToolbar: any
+
   tplToolbar: any = `
   <div class="app-toolbar">
     {text} <span>{divider}</span>
   </div>`
+
   dataviewToolbarReady = (event) => {
+    console.log("dataviewToolbarReady");
     this.theDataviewToolbar = event.ext
   }
+
   doClickToolbar = (event) => {
     console.log('click')
     console.log(event.location.record.data)
@@ -76,47 +96,66 @@ export class LandingpageComponent implements OnInit {
   constructor(private router: Router) {
     console.log('constructor')
 
-    this.node$.subscribe(({
-      next: (v) => {
-        console.log('node subscribe')
-        this.node = v
-        this.breadcrumb = generateBreadcrumb(v)
-        if (this.theDataviewToolbar != undefined) {
-          this.theDataviewToolbar.setData(this.breadcrumb)
-        }
-      }
-    }))
+      this.node$.subscribe(({
+        next: (v) => {
+          this.node = v;
+          console.log("Generating breadcrum for ID: " + v.id);
+          this.breadcrumb = generateBreadcrumb(v);
+          console.log(`BREADCRUMB: ${JSON.stringify(this.breadcrumb.map(b => b.text))}`);
+          if(this.node.childNodes.length == 0) {
+            this.menuhidden = true
+            this.routerhidden = false
+          }
+          else {
+            this.menuhidden = false
+            this.routerhidden = true
+            if (this.theDataview != undefined) {
+              this.theDataview.setData(this.node.childNodes)
+            }
+          }
+          if (this.theDataviewToolbar != undefined) {
+            this.theDataviewToolbar.setData(this.breadcrumb)
+          }
+        },
+      }));
+      
+      router.events.subscribe((val) => {
+        if (val instanceof NavigationEnd) {
+          //console.log(`location.path(true): ${location.path(true)}`);
+          console.log(`val: ${val}`);
+          console.log(`nodeId: ${val.url}`);
+          var localNode = this.treeStore.getNodeById(val.url);
+          console.log("Node changed: " + this.node.id);
+          console.log("Children el length : " + this.node.childNodes.length);
+          if(localNode) {
+            this.node = localNode;
+            this.node$.next(localNode);
+          }
+          else {
+            console.log("Not a valid node. Probably looking at resources");
+          }
 
-    router.events.subscribe((val) => {
-      if (val instanceof NavigationEnd) {
-        console.log('router subscribe: ' + val.url)
-        var node = this.treeStore.getNodeById(val.url);
-        if(node.childNodes.length == 0) {
-          this.menuhidden = true
-          this.routerhidden = false
         }
-        else {
-          this.menuhidden = false
-          this.routerhidden = true
-          this.theDataview.setData(node.childNodes)
-        }
-        this.breadcrumb = generateBreadcrumb(node)
-        if (this.theDataviewToolbar != undefined) {
-          this.theDataviewToolbar.setData(this.breadcrumb)
-        }
-      }
-    })
-  }
 
-  ngOnInit() {
-    console.log('ngOnInit')
-    this.node$.next(this.treeStore.getNodeById(location.pathname));
-  }
+      });
+    }
 
   navigate(location) {
     console.log('navigate')
     this.router.navigateByUrl(location);
   }
+
+  ngOnInit() {
+    var localNode = this.treeStore.getNodeById(location.pathname);
+    if(localNode) {
+      this.node = localNode;
+      this.node$.next(this.treeStore.getNodeById(location.pathname));
+    }
+    else {
+      console.log("Not a valid node. Probably looking at resources");
+    }
+
+  } 
 
   selectionChanged(event) {
     console.log('selectionChanged')

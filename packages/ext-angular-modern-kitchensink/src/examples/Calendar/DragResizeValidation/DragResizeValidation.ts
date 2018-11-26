@@ -19,27 +19,33 @@ export class CalendarDragResizeValidationComponent implements OnInit {
     })
 
 
-    onBeforeDragStart = (view, o) => {
+    onBeforeDragStart = (event) => {
         console.log("In onBeforeDragStart");
         var notAllowed = ['Not draggable', 'Not draggable/resizable'];
-        return !Ext.Array.contains(notAllowed, o.event.getTitle());
+        var contains = !Ext.Array.contains(notAllowed, event.context.event.data.title);
+        console.log("onBeforeDragStart. Returning : " + contains);
+        return contains;
     }
 
-    onBeforeResizeStart = (view, o) => {
+    onBeforeResizeStart = (event) => {
         console.log("In onBeforeResizeStart");
         var notAllowed = ['Not resizable', 'Not draggable/resizable'];
-        return !Ext.Array.contains(notAllowed, o.event.getTitle());
+        var contains = !Ext.Array.contains(notAllowed, event.context.event.data.title);
+        console.log("onBeforeResizeStart. Returning : " + contains);
+        return contains;
     }
 
-    confirmAction = (view, o) => {
+    confirmAction = (event) => {
         console.log("In confirmAction");
-        o.validate = o.validate.then(function () {
+        
+        event.context.validate = event.context.validate.then(function () {
             return new Ext.Promise(function (resolve, reject) {
                 Ext.Msg.confirm('Are you sure', 'Allow the action to go ahead?', function (btn) {
                     resolve(btn === 'yes');
                 });
             });
         });
+        
     }
 
   calDayValue = new Date();

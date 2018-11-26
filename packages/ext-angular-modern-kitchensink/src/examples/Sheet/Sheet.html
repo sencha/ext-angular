@@ -13,8 +13,10 @@
             <button #item text="Star" iconCls="x-fa fa-star" (tap)="toggleMenu()" [width]="direct === 'left' || direct === 'right' ? 250 : undefined"></button>
         </sheet>
         
-        <panel #item shadow ui="instructions">
-            <div #item><b #item>Sheet</b> is a component which allows you to easily display sliding menus from any side of the screen. You can show the menu by clicking the "Show Menu" button below or by swiping from the edge of the screen.</div>
+        <panel #item shadow="true" ui="instructions" [layout]="{type: 'vbox', align: 'left'}">
+            <container #item layout="hbox" >
+                <div #item>Sheet is a component which allows you to easily display sliding menus from any side of the screen. You can show the menu by clicking the "Show Menu" button below or by swiping from the edge of the screen.</div>
+             </container>
         </panel>
 
         <panel #item [layout]="{type: 'vbox', align: 'left'}" shadow margin="20 0 0 0" padding="15" shadow="true">

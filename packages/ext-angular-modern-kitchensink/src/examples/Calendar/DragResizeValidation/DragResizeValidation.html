@@ -14,12 +14,11 @@
     [gestureNavigation]="false"
     [store]="this.store"
     [value]="calDayValue"
-    [listeners]="{
-        beforeeventdragstart: this.onBeforeDragStart,
-        beforeeventresizestart: this.onBeforeResizeStart,
-        validateeventdrop: this.confirmAction,
-        validateeventresize: this.confirmAction,
-        validateeventerase: this.confirmAction
-    }" >
+    (beforeeventdragstart)= "onBeforeDragStart($event)"
+    (beforeeventresizestart)= "onBeforeResizeStart($event)"
+    (validateeventdrop)= "confirmAction($event)"
+    (validateeventresize)= "confirmAction($event)"
+    (validateeventerase)= "confirmAction($event)"
+     >
     </calendar-day>
 </panel>

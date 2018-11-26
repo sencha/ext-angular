@@ -1,4 +1,4 @@
-import {Component, OnInit, OnChanges , ElementRef, Renderer, ViewChild, SimpleChanges} from '@angular/core'
+import {Component, OnInit} from '@angular/core'
 
 declare var Ext: any;
 
@@ -7,25 +7,34 @@ declare var Ext: any;
   templateUrl: "./Button.html",
   styles: [``]
 })
-export class ButtonComponent implements OnInit, OnChanges  {
+export class ButtonComponent implements OnInit  {
 
   style = 'Menu';
   type = 'Text';
-  round = true;
-  iconCls;
-  ui;
-  menu;
+  round = false;
+  iconCls:string;
+  text = true;
+  ui:string;
+  menu = true;
   isPhone = Ext.os.is.Phone;
 
   onStyleChange = (item) => {
     console.log("onStyleChange : " + item._text);
     this.style = item._text; 
+    if (this.style === 'Menu') {
+      this.menu = true;
+    } else {
+        this.ui = this.style.toLowerCase();
+        this.menu=false;
+    }
   }
 
-  onTypeChange = function(item){
-    //debugger;
+  onTypeChange = (item) => {
     console.log("onTypeChange : " + item._text);
     this.type = item._text; 
+    console.log("this.type : " + this.type);
+    this.iconCls = this.type.indexOf('Icon') !== -1 ? 'x-fa fa-heart' : null;
+    this.text = this.type.indexOf('Text') !== -1;
   }
 
   toggleRound = function(){
@@ -33,42 +42,21 @@ export class ButtonComponent implements OnInit, OnChanges  {
     console.log("In toggleRound");
     this.round=!this.round;
     console.log("Round: " + this.round);
+    if (this.round) { 
+      this.ui += ' round';
+    }
+    else {
+      this.ui = this.ui.replace(' round', '');
+    }
   };
 
   styleChangeDefaults = { handler: this.onStyleChange, group: 'buttonstyle' };
+  typeChangeDefaults = { handler: this.onTypeChange, group: 'buttonstyle' };
 
 
   constructor() { }
 
-  ngOnChanges(changes: SimpleChanges) {
 
-
-    this.iconCls = this.type.indexOf('Icon') !== -1 ? 'x-fa fa-heart' : null;
-    console.log("iconCls: " + this.iconCls);
-
-
-    if (this.style === 'Menu') {
-      this.menu = '<menu #item [indented]="false"><menuitem #item  text="Item 1"></menuitem><menuitem #item  text="Item 2"/></menuitem><menuitem #item  text="Item 3"></menuitem></menu>';
-    } else {
-        this.ui = this.style.toLowerCase();
-    }
-
-    if (this.round) {
-      this.ui += ' round';
-    }
-
-    console.log("ui: " + this.ui);
-    console.log("style: " + this.style);
-
-    // changes.prop contains the old and the new value...\
-    console.log("In ngOnChanges. changes : " + changes);
-    for (let propName in changes) {
-      let chng = changes[propName];
-      let cur  = JSON.stringify(chng.currentValue);
-      let prev = JSON.stringify(chng.previousValue);
-      console.log("cur : " + cur + " prev : " + prev );
-    }
-  }
 
 
   ngOnInit() {   

@@ -1,0 +1,32 @@
+<tree #item
+[shadow]="true"
+[store]="store"
+[platformConfig]="{
+    title: 'Editable Tree',
+    desktop: {
+        plugins: {
+            gridcellediting: true
+        }
+    },
+    '!desktop': {
+        plugins: {
+            grideditable: true
+        }
+    }
+}"
+[columns]="[
+{
+    xtype:'treecolumn',
+    text:'Name',
+    dataIndex:'text',
+    flex:1,
+    editable: true
+}, {
+    xtype:'textcolumn',
+    text:'Class Name',
+    dataIndex:'className',
+    flex:1,
+    editable:true
+}]"
+>
+</tree>
