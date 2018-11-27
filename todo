@@ -27,6 +27,13 @@ ExtAngular
   - Button and split button menu always shows up ([hidden] attribute does not work as well as *ngif).
   - DragResizeValidation calendar example does not restrict dragging and resizing
 
+Issues - Alisha
+  - hbox and vbox Layout components having UI issue that starting 3 conatiners/panels are not visible though in dom.
+  - ResizableLayoutComponent have multiple UI issues. (to reproduce compare from ext-react). 
+  - CardLayoutComponent using *ngFor is not working.
+  - FileField have a div showing uploaded file name is missing because of *ngIf not working.
+  - FormPanel (ext component) does not have reset() event binded to it. This might be because in ext component it is
+  inherited from Ext.Field.Manager
 
 
 ExtReact
