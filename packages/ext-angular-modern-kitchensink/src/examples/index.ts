@@ -72,7 +72,7 @@ import {CenterLayoutComponent} from './Layouts/CenterLayout/CenterLayout';
 import {FitLayoutComponent} from './Layouts/FitLayout/FitLayout';
 import {hboxLayoutComponent} from './Layouts/hboxLayout/hboxLayout';
 import {FormLayoutComponent} from './Layouts/FormLayout/FormLayout';
-import {ResizeableLayoutComponent} from './Layouts/ResizeableLayout/ResizeableLayout';
+import {ResizableLayoutComponent} from './Layouts/ResizableLayout/ResizableLayout';
 import {vboxLayoutComponent} from './Layouts/vboxLayout/vboxLayout';
 
 declare var Ext: any;
@@ -132,8 +132,8 @@ const treeRoot = {
                 { text: 'fit', component: FitLayoutComponent, navIcon: 'icon-layout-fit' },
                 { text: 'form', component: FormLayoutComponent, layout: 'auto', navIcon: 'icon-layout-form' },
                 { text: 'hbox', component: hboxLayoutComponent, layout: 'auto', navIcon: 'icon-layout-horizontal-box' },
-                { text: 'resizable', component: ButtonComponent, navIcon: 'icon-layout-box' },
-                { text: 'vbox', component: ButtonComponent, layout: 'auto', navIcon: 'icon-layout-vertical-box' }
+                { text: 'resizable', component: ResizableLayoutComponent, navIcon: 'icon-layout-box' },
+                { text: 'vbox', component: vboxLayoutComponent, layout: 'auto', navIcon: 'icon-layout-vertical-box' }
             ]},
             { text: 'Lists', navIcon: 'icon-lists', children: [
                 { text: 'Basic List', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-list' },

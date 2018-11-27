@@ -90,7 +90,7 @@ import {CenterLayoutComponent} from "../examples/Layouts/CenterLayout/CenterLayo
 import {FitLayoutComponent} from "../examples/Layouts/FitLayout/FitLayout";
 import { hboxLayoutComponent } from 'src/examples/Layouts/hboxLayout/hboxLayout';
 import { FormLayoutComponent } from 'src/examples/Layouts/FormLayout/FormLayout';
-import {ResizeableLayoutComponent} from 'src/examples/Layouts/ResizeableLayout/ResizeableLayout';
+import {ResizableLayoutComponent} from 'src/examples/Layouts/ResizableLayout/ResizableLayout';
 import {vboxLayoutComponent} from 'src/examples/Layouts/vboxLayout/vboxLayout';
 
 import {EditableTreeComponent} from '../examples/Trees/EditableTree/EditableTree';
@@ -268,7 +268,7 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/layouts/card', component: CardLayoutComponent, text: 'card', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/layouts/hbox', component: hboxLayoutComponent, text: 'hbox', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/layouts/form', component: FormLayoutComponent, text: 'form', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'components/layouts/resizeable', component: ResizeableLayoutComponent, text: 'resizeable', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/layouts/resizable', component: ResizableLayoutComponent, text: 'resizable', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/layouts/vbox', component: vboxLayoutComponent, text: 'vbox', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
@@ -406,7 +406,7 @@ export class App {
 		CenterLayoutComponent,
 		hboxLayoutComponent,
 		FormLayoutComponent,
-		ResizeableLayoutComponent,
+		ResizableLayoutComponent,
 		vboxLayoutComponent,
 
 	],

@@ -4,11 +4,11 @@ import colors from '../colors';
 declare var Ext: any;
 
 @Component({
-  selector: 'resizeablelayout-component',
-  templateUrl: "./ResizeableLayout.html",
+  selector: 'resizablelayout-component',
+  templateUrl: "./ResizableLayout.html",
   styles: [``]
 })
-export class ResizeableLayoutComponent implements OnInit  {
+export class ResizableLayoutComponent implements OnInit  {
 
   constructor() { }
 

@@ -7,7 +7,7 @@
         [style]="{fontSize:'13px',fontFamily:'Menlo, Courier', margin:'0 0 8px 0', textAlign:'left'}"
         html="<div>align: 'stretch'</div>"
     ></container>
-    <panel #item [shadow]="true" [layout]="vbox" [height]="175" [margin]="'0 0 40 0'">
+    <panel #item [shadow]="true" [layout]="{type:'vbox', align:'stretch'}" [height]="175" [margin]="'0 0 40 0'">
         <container #item [layout]="center" [style]="colors.card.red" flex="1" [html]="'Item 1'"></container>
         <container #item [layout]="center" [style]="colors.card.blue" flex="1" [html]="'Item 2'"></container>
         <container #item [layout]="center" [style]="colors.card.green" flex="1" [html]="'Item 3'"></container>
