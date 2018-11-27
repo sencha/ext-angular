@@ -72,6 +72,8 @@ import {CenterLayoutComponent} from './Layouts/CenterLayout/CenterLayout';
 import {FitLayoutComponent} from './Layouts/FitLayout/FitLayout';
 import {hboxLayoutComponent} from './Layouts/hboxLayout/hboxLayout';
 import {FormLayoutComponent} from './Layouts/FormLayout/FormLayout';
+import {ResizeableLayoutComponent} from './Layouts/ResizeableLayout/ResizeableLayout';
+import {vboxLayoutComponent} from './Layouts/vboxLayout/vboxLayout';
 
 declare var Ext: any;
 
