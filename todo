@@ -16,6 +16,17 @@ ExtAngular
  - tree shake the typescript ExtAngular files
  - use type info for properties in ts ExtAngular files
 
+ Issues - athakur
+  - toolbar tag does not work inside grid tag (Eg. ReconfigureGrid & StockTicker)
+  - titleBar property does not exist for Grid (Eg. Big Data)
+  - widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components]
+  - render method does not parse the HTML code but uses as string [See multiple grid examples]
+  - textcolumn/numbercolumn tag not working under columnd tag  [See Big Data example]
+  - Tree widgets not loading with error ERROR Error: [Ext.create] Unrecognized class name / alias: widget.tree
+  - Redux grid is not rendering (We are not using redux as well. Needs review)
+  - Button and split button menu always shows up ([hidden] attribute does not work as well as *ngif).
+  - DragResizeValidation calendar example does not restrict dragging and resizing
+
 
 
 ExtReact

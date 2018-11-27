@@ -113,6 +113,7 @@ import {ViewOptionsComponent} from '../examples/Grid/AddonsDecorations/ViewOptio
 import {BigDataComponent} from '../examples/Grid/AdvancedFeatures/BigData/BigData';
 import {ReconfigureGridComponent} from '../examples/Grid/AdvancedFeatures/ReconfigureGrid/ReconfigureGrid';
 import {RenderComponentsInCellsComponent} from '../examples/Grid/AdvancedFeatures/RenderComponentsInCells/RenderComponentsInCells';
+import { ActionCellsComponent } from '../examples/Grid/AdvancedFeatures/RenderComponentsInCells/ActionCells'
 import {SelectAndCopyComponent} from '../examples/Grid/AdvancedFeatures/SelectAndCopy/SelectAndCopy';
 import {StockTickerComponent} from '../examples/Grid/AdvancedFeatures/StockTicker/StockTicker';
 
@@ -371,6 +372,7 @@ export class App {
 		BigDataComponent,
 		ReconfigureGridComponent,
 		RenderComponentsInCellsComponent,
+		ActionCellsComponent,
 		SelectAndCopyComponent,
 		StockTickerComponent,
 
