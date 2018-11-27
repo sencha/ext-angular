@@ -7,6 +7,7 @@ import { Router, NavigationEnd } from '@angular/router';
 
 import { VERSION } from '@angular/core';
 import { Subject } from "rxjs";
+import { getFiles } from "./code_preview_helper";
 
 declare var Ext: any;
 
@@ -34,6 +35,8 @@ declare var _code: any;
   styleUrls: ['./landingpage.component.css']
 })
 export class LandingpageComponent implements OnInit {
+  showCode: boolean = false;
+  files: Array<any> = [];
   menuhidden: any
   routerhidden: any
   ANGULAR_VERSION: any = VERSION.full
@@ -61,6 +64,10 @@ export class LandingpageComponent implements OnInit {
     </div>
     <div className="app-thumbnail-text" >{text}</div>
   </div>`
+
+  toggleCode = () => {
+    this.showCode = !this.showCode;
+  }
 
   dataviewReady = (event) => {
     console.log("dataviewReady");
@@ -96,49 +103,47 @@ export class LandingpageComponent implements OnInit {
   constructor(private router: Router) {
     console.log('constructor')
 
-      this.node$.subscribe(({
-        next: (v) => {
-          this.node = v;
-          console.log("Generating breadcrum for ID: " + v.id);
-          this.breadcrumb = generateBreadcrumb(v);
-          console.log(`BREADCRUMB: ${JSON.stringify(this.breadcrumb.map(b => b.text))}`);
-          if(this.node.childNodes.length == 0) {
-            this.menuhidden = true
-            this.routerhidden = false
-          }
-          else {
-            this.menuhidden = false
-            this.routerhidden = true
-            if (this.theDataview != undefined) {
-              this.theDataview.setData(this.node.childNodes)
-            }
-          }
-          if (this.theDataviewToolbar != undefined) {
-            this.theDataviewToolbar.setData(this.breadcrumb)
-          }
-        },
-      }));
-      
-      router.events.subscribe((val) => {
-        if (val instanceof NavigationEnd) {
-          //console.log(`location.path(true): ${location.path(true)}`);
-          console.log(`val: ${val}`);
-          console.log(`nodeId: ${val.url}`);
-          var localNode = this.treeStore.getNodeById(val.url);
-          console.log("Node changed: " + this.node.id);
-          console.log("Children el length : " + this.node.childNodes.length);
-          if(localNode) {
-            this.node = localNode;
-            this.node$.next(localNode);
-          }
-          else {
-            console.log("Not a valid node. Probably looking at resources");
-          }
-
+    this.node$.subscribe(({
+      next: (v) => {
+        this.node = v;
+        this.files = getFiles(v, _code);
+        console.log("Generating breadcrumb for ID: " + v.id);
+        this.breadcrumb = generateBreadcrumb(v);
+        console.log(`BREADCRUMB: ${JSON.stringify(this.breadcrumb.map(b => b.text))}`);
+        if(this.node.childNodes.length == 0) {
+          this.menuhidden = true
+          this.routerhidden = false
         }
+        else {
+          this.menuhidden = false
+          this.routerhidden = true
+          if (this.theDataview != undefined) {
+            this.theDataview.setData(this.node.childNodes)
+          }
+        }
+        if (this.theDataviewToolbar != undefined) {
+          this.theDataviewToolbar.setData(this.breadcrumb)
+        }
+      },
+    }));
+    
+    router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        //console.log(`location.path(true): ${location.path(true)}`);
+        console.log(`val: ${val}`);
+        console.log(`nodeId: ${val.url}`);
+        var localNode = this.treeStore.getNodeById(val.url);
+        console.log("Node changed: " + this.node.id);
+        console.log("Children el length : " + this.node.childNodes.length);
 
-      });
-    }
+        if (localNode) {
+          this.node$.next(localNode);
+        } else {
+          console.log("Not a valid node. Probably looking at resources");
+        }
+      }
+    });
+  }
 
   navigate(location) {
     console.log('navigate')
