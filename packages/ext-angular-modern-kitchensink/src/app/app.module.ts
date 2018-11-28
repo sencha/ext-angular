@@ -121,12 +121,16 @@ import {StockTickerComponent} from '../examples/Grid/AdvancedFeatures/StockTicke
 
 import {DefaultGaugeComponent} from "../examples/Gauges/DefaultGauge"
 import {NeedleGaugeComponent} from "../examples/Gauges/NeedleGauge"
+import {CarouselComponent} from "../examples/Carousel/Carousel";
 
 import {ChartToolbarComponent} from "../examples/Charts/ChartToolbar"
 import {BasicGaugeChartComponent} from '../examples/Charts/Gauge/BasicGaugeChart/BasicGaugeChart';
 import {BoxPlotComponent} from '../examples/Charts/BoxPlot/BoxPlot';
 import {NavigatorComponent} from '../examples/Charts/Navigator/Navigator';
 
+import {SimpleDragDropComponent} from "../examples/DragAndDrop/Simple/Simple";
+import {ConstraintsDragDropComponent} from '../examples/DragAndDrop/Constraints/Constraints';
+import {ProxiesDragDropComponent} from '../examples/DragAndDrop/Proxies/Proxies';
 
 import {CalendarService} from "../examples/Calendar/Calendar.service"
 import {GridService} from '../examples/Grid/Grid.service'
@@ -159,9 +163,9 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/buttons', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/drag__drop', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'components/drag__drop/simple', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'components/drag__drop/constraints', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'components/drag__drop/proxies', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/drag__drop/simple', component: SimpleDragDropComponent, text: 'simple', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/drag__drop/constraints', component: ConstraintsDragDropComponent, text: 'constraints', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/drag__drop/proxies', component: ProxiesDragDropComponent, text: 'proxies', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/drag__drop/handles', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/drag__drop/groups', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/drag__drop/data', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -208,6 +212,7 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/buttons/splitbutton', component: SplitButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/buttons/segmentedbutton', component: SegmentedButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/ripple', component: RippleComponent, text: 'Riple', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/carousel', component: CarouselComponent, text: 'Carousel', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/gauges/default_gauge', component: DefaultGaugeComponent, text: 'Carousel', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/gauges/needle_gauge', component: NeedleGaugeComponent, text: 'Carousel', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/media/audio', component: AudioComponent, text: 'Audio', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -365,6 +370,7 @@ export class App {
 		SplitButtonComponent,
 		SegmentedButtonComponent,
 		RippleComponent,
+		CarouselComponent,
 		DefaultGaugeComponent,
 		NeedleGaugeComponent,
 		AudioComponent,
@@ -440,7 +446,11 @@ export class App {
 		ChartToolbarComponent,
 		BasicGaugeChartComponent,
 		BoxPlotComponent,
-		NavigatorComponent
+		NavigatorComponent,
+
+		SimpleDragDropComponent,
+		ConstraintsDragDropComponent,
+		ProxiesDragDropComponent,
 
 	],
 	providers: [

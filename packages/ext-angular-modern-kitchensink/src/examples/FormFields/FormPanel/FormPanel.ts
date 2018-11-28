@@ -15,8 +15,7 @@ export class FormPanelComponent implements OnInit  {
   formRef:any;
 
   onReady = (ele) => {
-    this.formRef = ele;
-    console.log('6666666666666666', this.formRef);
+    this.formRef = ele.ext;
   }
 
   toggleDisabled = () => {
