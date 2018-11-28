@@ -31,13 +31,23 @@ ExtAngular
   - child not handled (See Basic Gauge/Box Plot under charts)
 
 Issues - Alisha
-  - hbox and vbox Layout components having UI issue that starting 3 conatiners/panels are not visible though in dom.
-  - ResizableLayoutComponent have multiple UI issues. (to reproduce compare from ext-react). 
+  - hbox and vbox Layout components having UI issue that initial 3 conatiners/panels are not visible though in dom.
+  - For each component i have to explicitly set the width and height! I think this would break on different systems.
+  It will break once code window in merged.
+  - ResizableLayoutComponent have multiple UI issues. (to reproduce compare from ext-react). Can demo this in next call. 
   - CardLayoutComponent using *ngFor is not working.
-  - FormPanel (ext component) does not have reset() event binded to it. This might be because in ext component it is
-  inherited from Ext.Field.Manager
+  - Text in the whole app is center aligned. do i need to handle this separately to make it look like ext-React? 
+   Or probably a solution to set text-align to be 'left' for all components ?  @Marc please help me how to handle this.
+  - Draw Component does not seems to have these methods: mpuseup,mpusedown etc. - Revisit this.
+  - UI for SearchField, Validation is breaking.
+  - RadioField on chnaging is giving error - Look into this.
+
+  One solved::
   - FileField have a div showing uploaded file name is missing because of *ngIf not working. - WORKED with hidden property.
   - Items in Carousel not rendering. - Solved via adding height and width.
+  - FormPanel (ext component) does not have reset() event binded to it. This might be because in ext component it is
+  inherited from Ext.Field.Manager -- solved i was doing something wrong in setting the refrence.
+  
 
 
 ExtReact

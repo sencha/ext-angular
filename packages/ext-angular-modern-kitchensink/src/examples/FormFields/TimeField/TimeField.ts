@@ -15,9 +15,12 @@ export class TimeFieldComponent implements OnInit  {
 
   formPanelRef:any;
 
-  onReady = (param) => {
-    console.log('@@@@@@@@@', param);
-    this.formPanelRef = param;
+  onReady = (ele) => {
+    this.formPanelRef = ele.ext;
+  }
+
+  reset = () => {
+    return this.formPanelRef.reset();
   }
 
   toggleDisabled = () => {
