@@ -23,8 +23,8 @@ import {TreeComponent} from './Trees/Tree/Tree';
 import {TreeDecorationsComponent} from './Trees/TreeDecorations/TreeDecorations';
 import {TreeGridComponent} from './Trees/TreeGrid/TreeGrid';
 import {TreeListComponent} from './Trees/TreeList/TreeList';
-import { DefaultGaugeComponent } from 'src/examples/Gauges/DefaultGauge';
-import { NeedleGaugeComponent } from 'src/examples/Gauges/NeedleGauge';
+import { DefaultGaugeComponent } from './Gauges/DefaultGauge';
+import { NeedleGaugeComponent } from './Gauges/NeedleGauge';
 
 import {BasicGridComponent} from './Grid/BasicGrid/BasicGrid';
 import {EditableGridComponent} from './Grid/EditableGrid/EditableGrid';
@@ -74,6 +74,11 @@ import {hboxLayoutComponent} from './Layouts/hboxLayout/hboxLayout';
 import {FormLayoutComponent} from './Layouts/FormLayout/FormLayout';
 import {ResizableLayoutComponent} from './Layouts/ResizableLayout/ResizableLayout';
 import {vboxLayoutComponent} from './Layouts/vboxLayout/vboxLayout';
+
+import {BasicGaugeChartComponent} from './Charts/Gauge/BasicGaugeChart/BasicGaugeChart';
+import {BoxPlotComponent} from './Charts/BoxPlot/BoxPlot';
+import {NavigatorComponent} from './Charts/Navigator/Navigator';
+
 
 declare var Ext: any;
 
@@ -235,7 +240,7 @@ const treeRoot = {
                 { text: 'Stacked Bar', component: ButtonComponent, navIcon: 'icon-bar-stacked' },
                 { text: 'Full Stacked Bar', component: ButtonComponent, navIcon: 'icon-bar-stacked-100'}
             ] },
-            { text: 'BoxPlot', component: ButtonComponent, navIcon: 'icon-boxplot-charts' },
+            { text: 'BoxPlot', component: BoxPlotComponent, navIcon: 'icon-boxplot-charts' },
             { text: 'Column', navIcon: 'icon-column-charts', children: [
                 { text: 'Basic Column', component: ButtonComponent, navIcon: 'icon-column-basic' },
                 { text: 'Stacked', component: ButtonComponent, navIcon: 'icon-column-stacked' },
@@ -254,7 +259,7 @@ const treeRoot = {
                 { text: 'OHLC', component: ButtonComponent, navIcon: 'icon-financial-ohlc' }
             ] },
             { text: 'Gauges', navIcon: 'icon-gauge-charts', children: [
-                { text: 'Basic Gauge', component: ButtonComponent, navIcon: 'icon-gauge-basic' }  
+                { text: 'Basic Gauge', component: BasicGaugeChartComponent, navIcon: 'icon-gauge-basic' }  
             ] }, 
             { text: 'Line', navIcon: 'icon-line-charts', children: [
                 { text: 'Basic Line', component: ButtonComponent, navIcon: 'icon-line-basic' },
@@ -265,7 +270,7 @@ const treeRoot = {
                 { text: 'With Renderer', component: ButtonComponent, navIcon: 'icon-line-renderer' },
                 { text: 'Realtime', component: ButtonComponent, navIcon: 'icon-line-real-time' }
             ] },
-            { text: 'Navigator', component: Navigator, navIcon: 'icon-navigator-charts' },
+            { text: 'Navigator', component: NavigatorComponent, navIcon: 'icon-navigator-charts' },
             { text: 'Pie', navIcon: 'icon-pie-basic', children: [
                 { text: 'Basic Pie', component: ButtonComponent, navIcon: 'icon-pie-basic' },
                 { text: 'Spie', component: ButtonComponent, navIcon: 'icon-pie-custom' },

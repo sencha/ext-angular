@@ -1,6 +1,6 @@
 
 import { Component, OnInit, ChangeDetectorRef, ViewChild, ViewContainerRef,ElementRef, ComponentFactoryResolver, ComponentRef, ComponentFactory } from '@angular/core';
-import {navTreeRoot} from '../../../examples/index';
+import {navTreeRoot} from '../../../examples';
 
 import { Location } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';

@@ -1,0 +1,13 @@
+<container #item [padding]="!isPhone ? '10' : ''" layout="fit">
+    <chart-toolbar #item
+        [onThemeChange]="this.changeTheme"
+        [onToggleZoomOnPan]="this.toggleZoomOnPan"
+        [theme]="theme"
+    ></chart-toolbar>
+    <chartnavigator #item
+        shadow="true"
+        (ready)="chartNavReady($event)"
+        [navigator]="{ axis: 'bottom' }"
+        [chart]="chartNavChart"
+    ></chartnavigator>
+</container>
