@@ -9,12 +9,12 @@ ExtAngular
  - ext-angular-gen
  - ExtAngular functionality
    - using *ngIf (etc) in an ExtAngular component
-   - accessing resources
    - conflict with button class
+   - hbox layout page not rendering correctly
  - plugin tree-shaking (for ExtJS ext.js and ext.css)
- - clean doxi output
  - tree shake the typescript ExtAngular files
- - use type info for properties in ts ExtAngular files
+ - clean doxi output
+- use type info for properties in ts ExtAngular files
 
  Issues - athakur
   - we need to specify size in root element of each example else it does not show up. This will break on different screen sizes. [Need to see in react]

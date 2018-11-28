@@ -20,6 +20,7 @@ import { AgencyService } from './service/agency.service';
 import {AppService} from './app.service';
 
 //in main
+import { MjgComponent } from './view/landingpage/mjg.component';
 import { DetailComponent } from './view/main/detail/detail.component';
 import { FooterComponent } from './view/main/footer/footer.component';
 import { HeaderComponent } from './view/main/header/header.component';
@@ -331,9 +332,10 @@ export class ExtAngularService {
 })
 export class App {
   constructor(private ExtAngularService: ExtAngularService) {
-    this.ExtAngularService.appendComponentToViewport(LandingpageComponent);
+    this.ExtAngularService.appendComponentToViewport(LandingpageComponent)
   }
 }
+
 
 @NgModule({
   imports: [
@@ -344,7 +346,7 @@ export class App {
   ],
 	declarations: [
 		App,
-
+    MjgComponent,
 		DetailComponent,
 		FooterComponent,
 		HeaderComponent,
@@ -469,6 +471,8 @@ export class App {
 	],
 	bootstrap: [App]
 })
+
+
 export class AppModule {
   constructor(appService: AppService) {
     appService.init();
@@ -476,3 +480,5 @@ export class AppModule {
     //console.log("isDesktop: " + Ext.os.is.Desktop);
   }
 }
+
+

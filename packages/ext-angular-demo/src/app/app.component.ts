@@ -1,15 +1,5 @@
 import { Component } from '@angular/core'
-//import { Observable } from 'rxjs/Observable';
-//import 'rxjs/add/observable/of';
 
-/**
- *    <button #item 
-        (tap)="clickMe($event)" 
-        [text]="somedata">
-      </button>
-
-  Buttont takes up whole screen even if it is insde vbox    
- */
 @Component({
   selector: 'ext-angular-root',
   styles: [`
@@ -45,6 +35,57 @@ import { Component } from '@angular/core'
   `],
   template: `
 
+  <container #item [layout]="'hbox'" [width]="'100%'" [height]="'100%'">
+  <mjg #item></mjg>
+  <button #item [text]="'click'"></button>
+  <titlebar #item [docked]="'top'" [shadow]="true" [style]="{'z-index': 2}">
+    <button #item [selfAlign]="'left'" [iconCls]="'x-fa fa-bars'" (tap)="toggleTree()"></button>
+    <container #item [layout]="'hbox'">
+      <div #item class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></div>
+      <a href="#" #item class="app-title">ExtAngular Modern Kitchen Sink - Angular v{{ANGULAR_VERSION}}</a>
+    </container>
+  </titlebar>
+</container>
+
+
+
+
+<!--
+
+<mjg></mjg>
+
+<panel [title]="'mjg'" #item>
+<mjg #item></mjg>
+<div #item>theDiv</div>
+</panel>
+
+
+<div *ngFor="let contact of contacts;">
+  <div>{{contact.name}}</div>
+</div>
+
+<panel [title]="'title'" #item *ngFor="let contact of contacts; let lastItem = last;">
+<div #item>{{contact.name}}</div>
+</panel>
+
+<button
+  [handler]="changeContacts"
+  [text]="'changeContacts'">
+</button>
+
+
+<container #item>
+<div #item>hi</div>
+</container>
+
+
+
+
+<container #item *ngFor="let contact of contacts; let lastItem = last;">
+<div #item>container</div>
+</container>
+
+
     <ul class="breadcrumb">
       <li *ngFor="let contact of contacts; let lastItem = last;">
           <button
@@ -76,11 +117,28 @@ import { Component } from '@angular/core'
       </button>
 
     </panel>
-
+-->
   `
 })
 export class AppComponent {
   somedata = 'this is the original text'
+  changed = false
+
+  changeContacts = (event) =>  {
+    if (this.changed == false) {
+      this.contacts = this.contacts1
+    }
+    else {
+      this.contacts = this.contacts2
+    }
+    this.changed = !this.changed
+    // console.log(this.contacts)
+    // this.contacts = this.contacts2
+    // console.log('changeContacts')
+    // console.log(this.contacts)
+  }
+
+
 
   clickContact = (event) => {
     console.log(event._text)
@@ -100,6 +158,15 @@ export class AppComponent {
   }
 
   contacts: any[] = [
+    {
+      "id": 1,
+      "name": "Laura",
+      "email": "lbutler0@latimes.com",
+      "age": 47
+    }
+  ]
+
+  contacts1: any[] = [
     {
       "id": 1,
       "name": "Laura",
