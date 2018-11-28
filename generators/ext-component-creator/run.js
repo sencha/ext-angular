@@ -1,8 +1,8 @@
 async function main() {
   var path = require('path')
   var framework = 'angular'
-  var toolkit  = 'classic'
-  //var toolkit  = 'modern'
+  //var toolkit  = 'classic'
+  var toolkit  = 'modern'
   var rootFolder            = './GeneratedFolders/';                        log(`rootFolder`,`${rootFolder}`)
   var templateBaseFolder    = './filetemplates/';                           log(`templateBaseFolder`,`${templateBaseFolder}`)
   var templateToolkitFolder = path.resolve(templateBaseFolder + framework); log(`templateToolkitFolder`,`${templateToolkitFolder}`)
