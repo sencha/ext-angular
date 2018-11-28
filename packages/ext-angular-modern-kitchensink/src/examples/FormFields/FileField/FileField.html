@@ -4,6 +4,5 @@
         [value]="uploadedFile"
         (change)="onChange($event)"
     ></filefield>
-    <!-- issue ngIf is not working -->
-    <div #item *ngIf="uploadedFile != null">You selected {{uploadedFile}}</div>    
+    <div #item [hidden]="uploadedFile == null">You selected {{uploadedFile}}</div>    
 </panel>
