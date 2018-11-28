@@ -34,9 +34,10 @@ Issues - Alisha
   - hbox and vbox Layout components having UI issue that starting 3 conatiners/panels are not visible though in dom.
   - ResizableLayoutComponent have multiple UI issues. (to reproduce compare from ext-react). 
   - CardLayoutComponent using *ngFor is not working.
-  - FileField have a div showing uploaded file name is missing because of *ngIf not working.
   - FormPanel (ext component) does not have reset() event binded to it. This might be because in ext component it is
   inherited from Ext.Field.Manager
+  - FileField have a div showing uploaded file name is missing because of *ngIf not working. - WORKED with hidden property.
+  - Items in Carousel not rendering. - Solved via adding height and width.
 
 
 ExtReact
