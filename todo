@@ -17,6 +17,7 @@ ExtAngular
  - use type info for properties in ts ExtAngular files
 
  Issues - athakur
+  - we need to specify size in root element of each example else it does not show up. This will break on different screen sizes.
   - toolbar tag does not work inside grid tag (Eg. ReconfigureGrid & StockTicker)
   - titleBar property does not exist for Grid (Eg. Big Data)
   - widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components]
@@ -27,7 +28,7 @@ ExtAngular
   - Button and split button menu always shows up ([hidden] attribute does not work as well as *ngif).
   - DragResizeValidation calendar example does not restrict dragging and resizing
   - animate not a property of polar (See Basic Gauge under charts)
-  - child not handled (See Basic Gauge under charts)
+  - child not handled (See Basic Gauge/Box Plot under charts)
 
 Issues - Alisha
   - hbox and vbox Layout components having UI issue that starting 3 conatiners/panels are not visible though in dom.
