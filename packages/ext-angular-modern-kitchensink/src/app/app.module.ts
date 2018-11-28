@@ -10,7 +10,7 @@ import {
   VERSION} from '@angular/core'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import {BrowserModule} from '@angular/platform-browser'
-import {ExtAngularModernModule} from '../../../ext-angular-modern/sencha-ext-angular-modern'
+import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
 
 import * as d3 from 'd3'
 window['d3'] = d3
