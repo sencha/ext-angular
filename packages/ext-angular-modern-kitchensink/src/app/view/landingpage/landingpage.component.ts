@@ -8,6 +8,12 @@ import { Router, NavigationEnd } from '@angular/router';
 import { VERSION } from '@angular/core';
 import { Subject } from "rxjs";
 import { getFiles } from "./code_preview_helper";
+import hljs, { highlightBlock } from 'highlightjs';
+
+// JSX syntax highlighting
+import 'highlightjs/styles/atom-one-dark.css';
+import H_js from './H_js';
+hljs.registerLanguage('js', H_js);
 
 declare var Ext: any;
 
@@ -107,6 +113,7 @@ export class LandingpageComponent implements OnInit {
       next: (v) => {
         this.node = v;
         this.files = getFiles(v, _code);
+        this.highlightCode();
         console.log("Generating breadcrumb for ID: " + v.id);
         this.breadcrumb = generateBreadcrumb(v);
         console.log(`BREADCRUMB: ${JSON.stringify(this.breadcrumb.map(b => b.text))}`);
@@ -150,6 +157,12 @@ export class LandingpageComponent implements OnInit {
     this.router.navigateByUrl(location);
   }
 
+  highlightCode() {
+    document.querySelectorAll(".code").forEach((el) => {
+      highlightBlock(el);
+    });
+  }
+
   ngOnInit() {
     var localNode = this.treeStore.getNodeById(location.pathname);
     if(localNode) {
@@ -159,7 +172,6 @@ export class LandingpageComponent implements OnInit {
     else {
       console.log("Not a valid node. Probably looking at resources");
     }
-
   } 
 
   selectionChanged(event) {
