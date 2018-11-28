@@ -121,6 +121,7 @@ import {StockTickerComponent} from '../examples/Grid/AdvancedFeatures/StockTicke
 
 import {DefaultGaugeComponent} from "../examples/Gauges/DefaultGauge"
 import {NeedleGaugeComponent} from "../examples/Gauges/NeedleGauge"
+import {CarouselComponent} from "../examples/Carousel/Carousel";
 
 import {ChartToolbarComponent} from "../examples/Charts/ChartToolbar"
 import {BasicGaugeChartComponent} from '../examples/Charts/Gauge/BasicGaugeChart/BasicGaugeChart';
@@ -208,6 +209,7 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/buttons/splitbutton', component: SplitButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/buttons/segmentedbutton', component: SegmentedButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/ripple', component: RippleComponent, text: 'Riple', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/carousel', component: CarouselComponent, text: 'Carousel', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/gauges/default_gauge', component: DefaultGaugeComponent, text: 'Carousel', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/gauges/needle_gauge', component: NeedleGaugeComponent, text: 'Carousel', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/media/audio', component: AudioComponent, text: 'Audio', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -365,6 +367,7 @@ export class App {
 		SplitButtonComponent,
 		SegmentedButtonComponent,
 		RippleComponent,
+		CarouselComponent,
 		DefaultGaugeComponent,
 		NeedleGaugeComponent,
 		AudioComponent,

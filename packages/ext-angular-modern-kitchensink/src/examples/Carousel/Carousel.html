@@ -1,0 +1,30 @@
+<container #item [layout]="{type: 'vbox', align: 'strech'}" [padding]="10">
+    <carousel #item
+        [layout]="'vbox'"
+        [flex]="1"
+        [items]="carouselItems"
+        (ready)="compReady($event)"
+    >
+        <container #item
+            [height]="'100%'" [flex]="1"
+            [layout]="{type:'vbox', align: 'center', pack: 'center'}"
+            [style]="{fontSize:18, backgroundColor: 'white'}"
+            [html]="'Swipe left to show the next card...'"
+        >
+        </container>
+        <container #item
+            [layout]="{type:'vbox', align: 'center', pack: 'center'}"
+            [height]="'100%'" [flex]="1"
+            [style]="{fontSize:18, backgroundColor: 'white'}"
+            [html]="'You can also tap on either side of the indicators.'"
+        >
+        </container>
+        <container #item
+            [layout]="{type:'vbox', align: 'center', pack: 'center'}"
+            [height]="'100%'" [flex]="1"
+            [style]="{fontSize:18, backgroundColor: 'white'}"
+            [html]="'Card #3'"
+        >
+        </container>
+    </carousel>
+</container>
