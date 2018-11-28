@@ -10,7 +10,7 @@ import {
   VERSION} from '@angular/core'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import {BrowserModule} from '@angular/platform-browser'
-import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
+import {ExtAngularModernModule} from '../../../ext-angular-modern/sencha-ext-angular-modern'
 
 import * as d3 from 'd3'
 window['d3'] = d3
@@ -88,10 +88,10 @@ import {ToggleFieldComponent} from "../examples/FormFields/ToggleField/ToggleFie
 import {CardLayoutComponent} from "../examples/Layouts/CardLayout/CardLayout";
 import {CenterLayoutComponent} from "../examples/Layouts/CenterLayout/CenterLayout";
 import {FitLayoutComponent} from "../examples/Layouts/FitLayout/FitLayout";
-import { hboxLayoutComponent } from 'src/examples/Layouts/hboxLayout/hboxLayout';
-import { FormLayoutComponent } from 'src/examples/Layouts/FormLayout/FormLayout';
-import {ResizableLayoutComponent} from 'src/examples/Layouts/ResizableLayout/ResizableLayout';
-import {vboxLayoutComponent} from 'src/examples/Layouts/vboxLayout/vboxLayout';
+import { hboxLayoutComponent } from '../examples/Layouts/hboxLayout/hboxLayout';
+import { FormLayoutComponent } from '../examples/Layouts/FormLayout/FormLayout';
+import {ResizableLayoutComponent} from '../examples/Layouts/ResizableLayout/ResizableLayout';
+import {vboxLayoutComponent} from '../examples/Layouts/vboxLayout/vboxLayout';
 
 import {EditableTreeComponent} from '../examples/Trees/EditableTree/EditableTree';
 import {HeterogeneousTreeComponent} from '../examples/Trees/HeterogeneousTree/HeterogeneousTree';
@@ -124,6 +124,8 @@ import {NeedleGaugeComponent} from "../examples/Gauges/NeedleGauge"
 
 import {ChartToolbarComponent} from "../examples/Charts/ChartToolbar"
 import {BasicGaugeChartComponent} from '../examples/Charts/Gauge/BasicGaugeChart/BasicGaugeChart';
+import {BoxPlotComponent} from '../examples/Charts/BoxPlot/BoxPlot';
+import {NavigatorComponent} from '../examples/Charts/Navigator/Navigator';
 
 
 import {CalendarService} from "../examples/Calendar/Calendar.service"
@@ -290,6 +292,8 @@ const routes: ExtAngularRoutes = [
 
 
 	{ path: 'charts/gauges/basic_gauge', component: BasicGaugeChartComponent, text: 'Basic Gauge', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/boxplot', component: BoxPlotComponent, text: 'Box Plot', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/navigator', component: NavigatorComponent, text: 'Navigator', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
 
 	
@@ -434,7 +438,9 @@ export class App {
 		vboxLayoutComponent,
 
 		ChartToolbarComponent,
-		BasicGaugeChartComponent
+		BasicGaugeChartComponent,
+		BoxPlotComponent,
+		NavigatorComponent
 
 	],
 	providers: [
