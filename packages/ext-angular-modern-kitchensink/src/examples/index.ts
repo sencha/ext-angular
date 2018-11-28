@@ -81,6 +81,11 @@ import {NavigatorComponent} from './Charts/Navigator/Navigator';
 
 import { CarouselComponent } from 'src/examples/Carousel/Carousel';
 
+import {SimpleDragDropComponent} from './DragAndDrop/Simple/Simple';
+import {ConstraintsDragDropComponent} from './DragAndDrop/Constraints/Constraints';
+import {ProxiesDragDropComponent} from './DragAndDrop/Proxies/Proxies';
+
+
 declare var Ext: any;
 
 const treeRoot = {
@@ -95,9 +100,9 @@ const treeRoot = {
             ]},
             { text: 'Carousel', component: CarouselComponent, navIcon: 'icon-carousel' },
             { text: 'Drag & Drop', navIcon: 'icon-drag-drop', children: [
-                { text: 'Simple', component: ButtonComponent, navIcon: 'icon-drag-simple' },
-                { text: 'Constraints', component: ButtonComponent, navIcon: 'icon-drag-constraint' },
-                { text: 'Proxies', component: ButtonComponent, navIcon: 'icon-drag-proxy' },
+                { text: 'Simple', component: SimpleDragDropComponent, navIcon: 'icon-drag-simple' },
+                { text: 'Constraints', component: ConstraintsDragDropComponent, navIcon: 'icon-drag-constraint' },
+                { text: 'Proxies', component: ProxiesDragDropComponent, navIcon: 'icon-drag-proxy' },
                 { text: 'Handles', component: ButtonComponent, navIcon: 'icon-drag-handle' },
                 { text: 'Groups', component: ButtonComponent, navIcon: 'icon-drag-group' },
                 { text: 'Data', component: ButtonComponent, navIcon: 'icon-drag-data' },

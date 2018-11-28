@@ -128,6 +128,9 @@ import {BasicGaugeChartComponent} from '../examples/Charts/Gauge/BasicGaugeChart
 import {BoxPlotComponent} from '../examples/Charts/BoxPlot/BoxPlot';
 import {NavigatorComponent} from '../examples/Charts/Navigator/Navigator';
 
+import {SimpleDragDropComponent} from "../examples/DragAndDrop/Simple/Simple";
+import {ConstraintsDragDropComponent} from '../examples/DragAndDrop/Constraints/Constraints';
+import {ProxiesDragDropComponent} from '../examples/DragAndDrop/Proxies/Proxies';
 
 import {CalendarService} from "../examples/Calendar/Calendar.service"
 import {GridService} from '../examples/Grid/Grid.service'
@@ -160,9 +163,9 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/buttons', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/drag__drop', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'components/drag__drop/simple', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'components/drag__drop/constraints', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'components/drag__drop/proxies', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/drag__drop/simple', component: SimpleDragDropComponent, text: 'simple', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/drag__drop/constraints', component: ConstraintsDragDropComponent, text: 'constraints', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/drag__drop/proxies', component: ProxiesDragDropComponent, text: 'proxies', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/drag__drop/handles', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/drag__drop/groups', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/drag__drop/data', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -443,7 +446,11 @@ export class App {
 		ChartToolbarComponent,
 		BasicGaugeChartComponent,
 		BoxPlotComponent,
-		NavigatorComponent
+		NavigatorComponent,
+
+		SimpleDragDropComponent,
+		ConstraintsDragDropComponent,
+		ProxiesDragDropComponent,
 
 	],
 	providers: [
