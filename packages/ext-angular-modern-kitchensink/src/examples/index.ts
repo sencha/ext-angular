@@ -75,6 +75,10 @@ import {FormLayoutComponent} from './Layouts/FormLayout/FormLayout';
 import {ResizableLayoutComponent} from './Layouts/ResizableLayout/ResizableLayout';
 import {vboxLayoutComponent} from './Layouts/vboxLayout/vboxLayout';
 
+import {BasicGaugeChartComponent} from './Charts/Gauge/BasicGaugeChart/BasicGaugeChart';
+
+
+
 declare var Ext: any;
 
 const treeRoot = {
@@ -254,7 +258,7 @@ const treeRoot = {
                 { text: 'OHLC', component: ButtonComponent, navIcon: 'icon-financial-ohlc' }
             ] },
             { text: 'Gauges', navIcon: 'icon-gauge-charts', children: [
-                { text: 'Basic Gauge', component: ButtonComponent, navIcon: 'icon-gauge-basic' }  
+                { text: 'Basic Gauge', component: BasicGaugeChartComponent, navIcon: 'icon-gauge-basic' }  
             ] }, 
             { text: 'Line', navIcon: 'icon-line-charts', children: [
                 { text: 'Basic Line', component: ButtonComponent, navIcon: 'icon-line-basic' },
