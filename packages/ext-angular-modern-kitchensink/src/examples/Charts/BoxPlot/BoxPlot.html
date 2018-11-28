@@ -1,0 +1,21 @@
+<container #item [padding]="!isPhone?  '10' : ''" layout="fit">
+    <chart-toolbar #item
+        [onThemeChange]="this.changeTheme"
+        [onToggleZoomOnPan]="this.toggleZoomOnPan"
+        [onRefreshClick]="this.refresh"
+        [theme]="theme"
+        [onlyMidnight]="true"
+    ></chart-toolbar>
+    <cartesian #item
+        shadow="true"
+        [theme]="theme"
+        [captions]="{
+            title: {
+                text: 'Age of Nobel Prize winners by field\n1901 to 2014'
+            }
+        }"
+        [store]="this.store"
+        [axes]="cartesianAxes" 
+        [series]="cartesianSeries"             
+    ></cartesian>
+</container>

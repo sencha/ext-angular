@@ -10,4 +10,4 @@ rm ext-angular-modern/package-lock.json
 rm ext-angular-modern-kitchensink/package-lock.json
 rm ext-angular-tests/package-lock.json
 rm ext-angular-webpack-plugin/package-lock.json
-rm ngx-tabs-libdemo-mjg/package-lock.json
+rm ext-angular-classic/package-lock.json

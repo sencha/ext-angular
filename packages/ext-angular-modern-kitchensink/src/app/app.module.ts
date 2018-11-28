@@ -89,10 +89,10 @@ import {ToggleFieldComponent} from "../examples/FormFields/ToggleField/ToggleFie
 import {CardLayoutComponent} from "../examples/Layouts/CardLayout/CardLayout";
 import {CenterLayoutComponent} from "../examples/Layouts/CenterLayout/CenterLayout";
 import {FitLayoutComponent} from "../examples/Layouts/FitLayout/FitLayout";
-import { hboxLayoutComponent } from 'src/examples/Layouts/hboxLayout/hboxLayout';
-import { FormLayoutComponent } from 'src/examples/Layouts/FormLayout/FormLayout';
-import {ResizableLayoutComponent} from 'src/examples/Layouts/ResizableLayout/ResizableLayout';
-import {vboxLayoutComponent} from 'src/examples/Layouts/vboxLayout/vboxLayout';
+import { hboxLayoutComponent } from '../examples/Layouts/hboxLayout/hboxLayout';
+import { FormLayoutComponent } from '../examples/Layouts/FormLayout/FormLayout';
+import {ResizableLayoutComponent} from '../examples/Layouts/ResizableLayout/ResizableLayout';
+import {vboxLayoutComponent} from '../examples/Layouts/vboxLayout/vboxLayout';
 
 import {EditableTreeComponent} from '../examples/Trees/EditableTree/EditableTree';
 import {HeterogeneousTreeComponent} from '../examples/Trees/HeterogeneousTree/HeterogeneousTree';
@@ -122,6 +122,16 @@ import {StockTickerComponent} from '../examples/Grid/AdvancedFeatures/StockTicke
 
 import {DefaultGaugeComponent} from "../examples/Gauges/DefaultGauge"
 import {NeedleGaugeComponent} from "../examples/Gauges/NeedleGauge"
+import {CarouselComponent} from "../examples/Carousel/Carousel";
+
+import {ChartToolbarComponent} from "../examples/Charts/ChartToolbar"
+import {BasicGaugeChartComponent} from '../examples/Charts/Gauge/BasicGaugeChart/BasicGaugeChart';
+import {BoxPlotComponent} from '../examples/Charts/BoxPlot/BoxPlot';
+import {NavigatorComponent} from '../examples/Charts/Navigator/Navigator';
+
+import {SimpleDragDropComponent} from "../examples/DragAndDrop/Simple/Simple";
+import {ConstraintsDragDropComponent} from '../examples/DragAndDrop/Constraints/Constraints';
+import {ProxiesDragDropComponent} from '../examples/DragAndDrop/Proxies/Proxies';
 
 import {CalendarService} from "../examples/Calendar/Calendar.service"
 import {GridService} from '../examples/Grid/Grid.service'
@@ -154,9 +164,9 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/buttons', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/drag__drop', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'components/drag__drop/simple', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'components/drag__drop/constraints', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'components/drag__drop/proxies', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/drag__drop/simple', component: SimpleDragDropComponent, text: 'simple', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/drag__drop/constraints', component: ConstraintsDragDropComponent, text: 'constraints', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/drag__drop/proxies', component: ProxiesDragDropComponent, text: 'proxies', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/drag__drop/handles', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/drag__drop/groups', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/drag__drop/data', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -181,15 +191,29 @@ const routes: ExtAngularRoutes = [
 	
 	{ path: 'trees', component: DummyComponent, text: 'Trees', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'calendar', component: DummyComponent, text: 'Calendar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	
+	
 	{ path: 'charts', component: DummyComponent, text: 'Charts', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/area', component: DummyComponent, text: 'Area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/bar', component: DummyComponent, text: 'Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/column', component: DummyComponent, text: 'Column', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/3d_column', component: DummyComponent, text: '3D Column', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/financial', component: DummyComponent, text: 'Financial', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/gauges', component: DummyComponent, text: 'Gauges', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/line', component: DummyComponent, text: 'Line', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/pie', component: DummyComponent, text: 'Pie', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/radar', component: DummyComponent, text: 'Radar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/scatter', component: DummyComponent, text: 'Scatter', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	
 	{ path: 'd3', component: DummyComponent, text: 'D3', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'pivotgrids', component: DummyComponent, text: 'Pivot Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'pivot_grids', component: DummyComponent, text: 'Pivot Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
 	//example components
 	{ path: 'components/buttons/button', component: ButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/buttons/splitbutton', component: SplitButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/buttons/segmentedbutton', component: SegmentedButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/ripple', component: RippleComponent, text: 'Riple', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/carousel', component: CarouselComponent, text: 'Carousel', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/gauges/default_gauge', component: DefaultGaugeComponent, text: 'Carousel', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/gauges/needle_gauge', component: NeedleGaugeComponent, text: 'Carousel', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/media/audio', component: AudioComponent, text: 'Audio', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -271,6 +295,15 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/layouts/form', component: FormLayoutComponent, text: 'form', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/layouts/resizable', component: ResizableLayoutComponent, text: 'resizable', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/layouts/vbox', component: vboxLayoutComponent, text: 'vbox', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+
+	{ path: 'charts/gauges/basic_gauge', component: BasicGaugeChartComponent, text: 'Basic Gauge', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/boxplot', component: BoxPlotComponent, text: 'Box Plot', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/navigator', component: NavigatorComponent, text: 'Navigator', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+
+	
+
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
@@ -339,6 +372,7 @@ export class App {
 		SplitButtonComponent,
 		SegmentedButtonComponent,
 		RippleComponent,
+		CarouselComponent,
 		DefaultGaugeComponent,
 		NeedleGaugeComponent,
 		AudioComponent,
@@ -410,6 +444,15 @@ export class App {
 		FormLayoutComponent,
 		ResizableLayoutComponent,
 		vboxLayoutComponent,
+
+		ChartToolbarComponent,
+		BasicGaugeChartComponent,
+		BoxPlotComponent,
+		NavigatorComponent,
+
+		SimpleDragDropComponent,
+		ConstraintsDragDropComponent,
+		ProxiesDragDropComponent,
 
 	],
 	providers: [
