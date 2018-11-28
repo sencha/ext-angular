@@ -14,8 +14,8 @@
       dynamic: true
     }" [collapsed]="!showTreeFlag">
     <searchfield #item [flex]="1" [docked]="'top'" [ui]="'faded'" (change)="filterNav($event)" [margin]="7"></searchfield>
-    <treelist #item [ui]="'nav'" [expanderFirst]="false" [expanderOnly]="false" [store]="treeStore" (selectionchange)="selectionChanged($event)">
-    </treelist>
+    <treelist #item [ui]="'nav'" [expanderFirst]="false" [expanderOnly]="false" [store]="treeStore" (selectionchange)="selectionChanged($event)"></treelist>
+    <!--<mjg #item></mjg>-->
   </panel>
   <!--  Navtree ends-->
 

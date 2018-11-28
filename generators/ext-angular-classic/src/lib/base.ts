@@ -120,13 +120,13 @@ export class base {
     this.ext = Ext.create(o)
   }
 
-  @ContentChildren('item') items: QueryList<any>
+  @ContentChildren('item', { read: ElementRef }) items: QueryList<ElementRef>
   baseAfterContentInit() {
     if (this.items.length < 2) {
       return
     }
     this.items.forEach(item => {
-      if (this == item) {
+      if (item.nativeElement == this._nativeElement) {
         return
       }
       if (item.nativeElement != undefined) {
@@ -134,12 +134,12 @@ export class base {
         this.ext.add({xtype: 'container',html: item.nativeElement})
       }
       else {
-        if (item.ext != undefined) {
+        if (item['ext'] != undefined) {
           //console.log('parent: ' + this.ext.xtype + ', child: ' + item.ext.xtype)
           var parentxtype = this.ext.xtype
-          var childxtype = item.ext.xtype
+          var childxtype = item['ext'].xtype
           var parentCmp = this.ext
-          var childCmp = item.ext
+          var childCmp = item['ext']
 
           if (parentxtype === 'grid') {
             if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {

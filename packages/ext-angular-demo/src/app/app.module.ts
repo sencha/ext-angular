@@ -7,10 +7,11 @@ import {
   EmbeddedViewRef,
   ApplicationRef,
   VERSION} from '@angular/core'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import {BrowserModule} from '@angular/platform-browser'
-import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
+import { ExtAngularModernModule } from './ext-angular-modern/ext-angular-modern.module'
 import { AppComponent } from './app.component'
+import { MjgComponent } from './mjg.component'
 
 @Injectable()
 export class DomService {
@@ -20,14 +21,14 @@ export class DomService {
       private injector: Injector
   ) {}
 
-  appendComponentToBody(component: any) {
+  appendComponentToBody(component: any, root: any) {
     const componentRef = this.componentFactoryResolver
       .resolveComponentFactory(component)
       .create(this.injector)
     this.appRef.attachView(componentRef.hostView)
     const domElem = (componentRef.hostView as EmbeddedViewRef<any>)
       .rootNodes[0] as HTMLElement
-    var root = document.getElementsByClassName('x-viewport-body-el')[0]
+    //var root = document.getElementsByClassName('x-viewport-body-el')[0]
     root.appendChild(domElem)
   }
 }
@@ -38,15 +39,16 @@ export class DomService {
 })
 export class App {
   constructor(private domService: DomService) {
-    this.domService.appendComponentToBody(AppComponent);
+    var root = document.getElementsByClassName('x-viewport-body-el')[0]
+    this.domService.appendComponentToBody(AppComponent, root);
   }
 }
 
 @NgModule({
   imports: [ BrowserModule, BrowserAnimationsModule, ExtAngularModernModule ],
-  declarations: [ App, AppComponent ],
+  declarations: [ App, AppComponent, MjgComponent ],
   bootstrap: [ App ],
   providers: [ DomService ],
-  entryComponents: [ AppComponent]
+  entryComponents: [ AppComponent, MjgComponent]
 })
 export class AppModule {}
