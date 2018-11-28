@@ -26,6 +26,8 @@ ExtAngular
   - Redux grid is not rendering (We are not using redux as well. Needs review)
   - Button and split button menu always shows up ([hidden] attribute does not work as well as *ngif).
   - DragResizeValidation calendar example does not restrict dragging and resizing
+  - animate not a property of polar (See Basic Gauge under charts)
+  - child not handled (See Basic Gauge under charts)
 
 Issues - Alisha
   - hbox and vbox Layout components having UI issue that starting 3 conatiners/panels are not visible though in dom.
