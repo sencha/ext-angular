@@ -6,6 +6,9 @@ export declare class base {
     constructor(el: ElementRef, metaData: any);
     ngOnChanges(changes: SimpleChanges): void;
     baseOnInit(metaData: any): void;
-    items: QueryList<ElementRef>;
+    items: QueryList<any>;
+    items2: QueryList<ElementRef>;
     baseAfterContentInit(): void;
+    itemsa: QueryList<ElementRef>;
+    baseAfterContentInit2(): void;
 }
