@@ -120,12 +120,92 @@ export class base {
     this.ext = Ext.create(o)
   }
 
-  @ContentChildren('item', { read: ElementRef }) items: QueryList<ElementRef>
+  @ContentChildren('item') items: QueryList<any>
+  @ContentChildren('item', { read: ElementRef }) items2: QueryList<ElementRef>
   baseAfterContentInit() {
+    //console.log('\nbaseAfterContentInit')
+
     if (this.items.length < 2) {
+      //console.log('1 item')
       return
     }
+    //console.log(this.items.length + ' items')
+
+    var anyItems = []
+    var elRefItems = []
     this.items.forEach(item => {
+      anyItems.push(item)
+    })
+    this.items2.forEach(item => {
+      elRefItems.push(item)
+    })
+
+    for (var i in anyItems) {
+      var item = anyItems[i]
+      var elRefItem = elRefItems[i]
+      if (item != this) {
+        if (item.ext != undefined) {
+          //console.log('parent: ' + this.ext.xtype + ', child: ' + item.ext.xtype)
+          var parentxtype = this['ext'].xtype
+          var childxtype = item['ext'].xtype
+          var parentCmp = this['ext']
+          var childCmp = item['ext']
+
+          if (parentxtype === 'grid') {
+            if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
+              parentCmp.addColumn(childCmp)
+            }
+          } else if (childxtype === 'tooltip') {
+            parentCmp.setTooltip(childCmp)
+          } else if (childxtype === 'plugin') {
+            parentCmp.setPlugin(childCmp)
+          } else if (parentxtype === 'button') {
+            if (childxtype === 'menu') {
+              parentCmp.setMenu(childCmp)
+            } else {
+              console.log('child not added')
+            }
+          } else if (childxtype === 'toolbar' && Ext.isClassic === true) {
+            parentCmp.addDockedItems(childCmp)
+          } else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
+            if (parentCmp.getHideHeaders() === false) {
+              var j: any = parentCmp.items.items.length
+              parentCmp.insert(j - 1, childCmp)
+            } else {
+              parentCmp.add(childCmp)
+            }
+          } else if (parentCmp.add != undefined) {
+            parentCmp.add(childCmp)
+          } else {
+            console.log('child not added')
+          }
+        }
+        else if (item.nativeElement != undefined) {
+          //console.log('native')
+          this.ext.add({xtype: 'container',html: item.nativeElement})
+        }
+        else {
+          //console.log('component')
+          //console.log(elRefItem)
+          this.ext.add({xtype: 'container',html: elRefItem.nativeElement})
+        }
+      }
+      // else {
+      //   console.log('same item')
+      // }
+    }
+    //this['ready'].emit(parentCmp)
+    this['ready'].emit(this)
+  }
+
+
+
+  @ContentChildren('item', { read: ElementRef }) itemsa: QueryList<ElementRef>
+  baseAfterContentInit2() {
+    if (this.itemsa.length < 2) {
+      return
+    }
+    this.itemsa.forEach(item => {
       if (item.nativeElement == this._nativeElement) {
         return
       }

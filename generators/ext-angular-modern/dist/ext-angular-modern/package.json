@@ -4,20 +4,20 @@
   "description": "ext-angular-modern",
   "main": "bundles/sencha-ext-angular-modern.umd.js",
   "peerDependencies": {
-    "@angular/compiler": "^7.0.4",
-    "@angular/core": "^7.0.4",
+    "@angular/compiler": "^7.1.1",
+    "@angular/core": "^7.1.1",
     "tslib": "^1.9.3"
   },
   "dependencies": {
-    "@angular/compiler": "^7.0.4",
-    "@angular/core": "^7.0.4",
+    "@angular/compiler": "^7.1.1",
+    "@angular/core": "^7.1.1",
     "zone.js": "~0.8.26",
     "tslib": "^1.9.0"
   },
   "devDependencies": {
     "ng-packagr": "^4.4.0",
     "tsickle": "^0.34.0",
-    "@angular/compiler-cli": "^7.0.4",
+    "@angular/compiler-cli": "^7.1.1",
     "typescript": "~3.1.6"
   },
   "repository": {
