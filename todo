@@ -18,16 +18,16 @@ ExtAngular
 
  Issues - athakur
   - we need to specify size in root element of each example else it does not show up. This will break on different screen sizes. [Need to see in react]
-  - toolbar tag does not work inside grid tag (Eg. ReconfigureGrid & StockTicker) [Retest]
-  - titleBar property does not exist for Grid (Eg. Big Data) [change in SDK]
+  - toolbar tag does not work inside grid tag (Eg. ReconfigureGrid & StockTicker) [Retest] [Fixed base.tpl but the order is not correct]
+  - titleBar property does not exist for Grid (Eg. Big Data) [change in SDK] - TEMP FIX DONE (Need SDK change)
   - [Aniket]widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components] [Visit RendererCell like in react/ Need a simple example in extjs]
   - [Aniket]render method does not parse the HTML code but uses as string [See multiple grid examples] [isolate to standalone angular app] 
-  - textcolumn/numbercolumn tag not working under columnd tag  [See Big Data example] = done/revisit
+  - textcolumn/numbercolumn tag not working under columnd tag  [See Big Data example] = done/revisit - Done
   - [Aniket/Marc]Tree widgets not loading with error ERROR Error: [Ext.create] Unrecognized class name / alias: widget.tree [revisit - Marc & Aniket]
-  - Redux grid is not rendering (We are not using redux as well. Needs review) [Get rid of this. More of react thing]
-  - [Aniket] Button and split button menu always shows up ([hidden] attribute does not work as well as *ngif). [use setMenu method/zip and project to Marc]
+  - Redux grid is not rendering (We are not using redux as well. Needs review) [Get rid of this. More of react thing] - No action
+  - [Aniket] Button and split button menu always shows up ([hidden] attribute does not work as well as *ngif). [use setMenu method/zip and project to Marc] - Done
   - [Aniket] DragResizeValidation calendar example does not restrict dragging and resizing [Issue - working in react but not in angular, use extjs format]
-  - animate not a property of polar (See Basic Gauge under charts) [Use animation/ Fix in react as well]
+  - animate not a property of polar (See Basic Gauge under charts) [Use animation/ Fix in react as well] - Done
   - [Marc] child not handled (See Basic Gauge/Box Plot under charts) [Known issue]
 
 Issues - Alisha

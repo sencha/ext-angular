@@ -225,6 +225,9 @@ export class base {
             if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
               parentCmp.addColumn(childCmp)
             }
+            else if (parentCmp.add != undefined) {
+              parentCmp.add(childCmp);
+            }
           } else if (childxtype === 'tooltip') {
             parentCmp.setTooltip(childCmp)
           } else if (childxtype === 'plugin') {
