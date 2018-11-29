@@ -10,10 +10,8 @@
             [defaults]="{errorTarget: 'under'}"
             [margin]="'0 0 20 0'"
             [title]="'Using Validators'"
+            [html]="'<div style=\'font-size:13px;color:#666;text-align:left;\'>Here we use validators from <code>Ext.data.validator</code> to validate user input.</div>'"
         >
-            <div #item [style]="{fontSize:'13px', color: '#666'}">
-                Here we use validators from <code>Ext.data.validator</code> to validate user input.
-            </div>
             <textfield #item
                 [required]="true"
                 [label]="'Required Field'"
@@ -77,10 +75,9 @@
             [padding]="10"
             [shadow]="true"
             [title]="'Assigning Error Messages Directly'"
+            [html]="'<div style=\'font-size:13px;color:#666;text-align:left;\'>Here we assign error messages directly using the <code>errorMessage</code> and <code>error</code> props.
+                </div>'"
         >
-            <div #item [style]="{fontSize:'13px',color: '#666'}">
-                Here we assign error messages directly using the <code>errorMessage</code> and <code>error</code> props.
-            </div>
             <textfield #item
                 [label]="'Single Error'"
                 [errorMessage]="'The value you entered is invalid.'"
@@ -94,5 +91,3 @@
         </formpanel>
     </container>
 </container>
-
-<!-- issue ui needs to be fixed. -->
