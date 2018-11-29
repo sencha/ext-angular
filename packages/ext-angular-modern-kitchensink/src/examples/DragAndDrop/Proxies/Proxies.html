@@ -20,41 +20,43 @@
             left: '10px',
             top: '10px'
         }"
-        [html]="noneText"
+        html={{noneText}}
     ></container>
 
     <container #item (ready)="originalEleReady($event)"
         [style]="{
-        width: '120px',
-        height: '120px',
-        padding: '5px',
-        position: 'relative',
-        textAlign: 'center',
-        color: '#FFF',
-        borderRadius: '5px',
-        userSelect: 'none',
-        cursor: 'move',
-        backgroundColor: '#43A047',
-        left: '10px',
-        top: '20px'
-    }"
-    [html]="'Element as proxy with revert: true'">
+            left: '10px',
+            top: '20px',
+            width: '120px',
+            height: '120px',
+            padding: '5px',
+            position: 'relative',
+            textAlign: 'center',
+            color: '#FFF',
+            borderRadius: '5px',
+            userSelect: 'none',
+            cursor: 'move',
+            backgroundColor: '#43A047'
+        }"
+        [cls]="'original'"
+        [html]="'Element as proxy with revert: true'">
     </container>
+
     <container #item (ready)="placeholderEleReady($event)"
-      [style]="{
-        width: '120px',
-        height: '120px',
-        padding: '5px',
-        position: 'relative',
-        textAlign: 'center',
-        color: '#FFF',
-        borderRadius: '5px',
-        userSelect: 'none',
-        cursor: 'move',
-        backgroundColor: '#4071CA',
-        left: '10px',
-        top: '30px'
-      }"
-      [html]="'Placeholder'">
+        [style]="{
+            width: '120px',
+            height: '120px',
+            padding: '5px',
+            position: 'relative',
+            textAlign: 'center',
+            color: '#FFF',
+            borderRadius: '5px',
+            userSelect: 'none',
+            cursor: 'move',
+            backgroundColor: '#4071CA',
+            left: '10px',
+            top: '30px'
+        }"
+        [html]="'Placeholder'">
     </container>
 </panel>

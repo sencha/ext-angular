@@ -84,6 +84,7 @@ import { CarouselComponent } from 'src/examples/Carousel/Carousel';
 import {SimpleDragDropComponent} from './DragAndDrop/Simple/Simple';
 import {ConstraintsDragDropComponent} from './DragAndDrop/Constraints/Constraints';
 import {ProxiesDragDropComponent} from './DragAndDrop/Proxies/Proxies';
+import {HandlesDragDropComponent} from './DragAndDrop/Handles/Handles';
 
 
 declare var Ext: any;
@@ -103,7 +104,7 @@ const treeRoot = {
                 { text: 'Simple', component: SimpleDragDropComponent, navIcon: 'icon-drag-simple' },
                 { text: 'Constraints', component: ConstraintsDragDropComponent, navIcon: 'icon-drag-constraint' },
                 { text: 'Proxies', component: ProxiesDragDropComponent, navIcon: 'icon-drag-proxy' },
-                { text: 'Handles', component: ButtonComponent, navIcon: 'icon-drag-handle' },
+                { text: 'Handles', component: HandlesDragDropComponent, navIcon: 'icon-drag-handle' },
                 { text: 'Groups', component: ButtonComponent, navIcon: 'icon-drag-group' },
                 { text: 'Data', component: ButtonComponent, navIcon: 'icon-drag-data' },
                 { text: 'Files', component: ButtonComponent, navIcon: 'icon-drag-drop-element' }
