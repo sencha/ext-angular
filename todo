@@ -47,7 +47,15 @@ Issues - Alisha
   - Items in Carousel not rendering. - Solved via adding height and width.
   - FormPanel (ext component) does not have reset() event binded to it. This might be because in ext component it is
   inherited from Ext.Field.Manager -- solved i was doing something wrong in setting the refrence.
-  
+
+Issues - Tommy
+  - ExtAngular components that use Angular structural directives (e.g. ngFor, ngIf) do not dynamically update when their bound data changes.  This is preventing the following from working as desired:
+    - Code Preview (you muist reload the page to see the correct code preview panels).
+  - Code Preview
+    - FAB button is not positioned properly.
+    - Does not re-render as you navigate due to Angular structural directives issue mentioned above.
+    - CSS for syntax highlighting is hard coded in index.html because it wasn't loading when specified in the component's styleUrls.
+
 
 
 ExtReact

@@ -22,7 +22,7 @@ ul {
   list-style: none;
   padding-left: 10px;
   padding-top: 10px;
-  }
-  .breadcrumb li {
-    float:left;
-  }
+}
+.breadcrumb li {
+  float:left;
+}

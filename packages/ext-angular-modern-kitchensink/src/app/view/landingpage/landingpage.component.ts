@@ -11,7 +11,6 @@ import { getFiles } from "./code_preview_helper";
 import hljs, { highlightBlock } from 'highlightjs';
 
 // JSX syntax highlighting
-import 'highlightjs/styles/atom-one-dark.css';
 import H_js from './H_js';
 hljs.registerLanguage('js', H_js);
 
@@ -49,6 +48,7 @@ export class LandingpageComponent implements OnInit {
   node: any
   node$: any = new Subject()
   breadcrumb: Array<any>
+  isDesktop: boolean = Ext.os.is.Desktop;
 
   filterRegex: any
   filterVal: any
