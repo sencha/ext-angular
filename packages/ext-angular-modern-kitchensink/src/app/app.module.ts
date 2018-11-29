@@ -51,6 +51,7 @@ import {SegmentedButtonComponent} from "../examples/SegmentedButton/SegmentedBut
 import {SplitButtonComponent} from "../examples/SplitButton/SplitButton"
 import {RippleComponent} from "../examples/Ripple/Ripple"
 import {AudioComponent} from "../examples/Audio/Audio"
+import {DrawComponent} from '../examples/Draw/Draw';
 import {VideoComponent} from "../examples/Video/Video"
 import {CalendarPanelComponent} from "../examples/Calendar/CalendarPanel/CalendarPanel"
 import {CalendarDaysViewComponent} from "../examples/Calendar/DaysView/DaysView"
@@ -173,7 +174,7 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/drag__drop/data', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/drag__drop/files', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
-	{ path: 'components/draw', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/draw', component: DrawComponent, text: 'Draw', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/forms', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/gauges', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/layouts', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -374,6 +375,7 @@ export class App {
 		SegmentedButtonComponent,
 		RippleComponent,
 		CarouselComponent,
+		DrawComponent,
 		DefaultGaugeComponent,
 		NeedleGaugeComponent,
 		AudioComponent,

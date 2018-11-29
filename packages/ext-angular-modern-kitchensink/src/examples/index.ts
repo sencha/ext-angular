@@ -4,6 +4,7 @@ import {SegmentedButtonComponent} from "./SegmentedButton/SegmentedButton"
 import {SplitButtonComponent} from "./SplitButton/SplitButton"
 import {AudioComponent} from "./Audio/Audio";
 import {VideoComponent} from "./Video/Video";
+import {DrawComponent} from './Draw/Draw';
 import {CalendarPanelComponent} from "./Calendar/CalendarPanel/CalendarPanel";
 import {CalendarDaysViewComponent} from "./Calendar/DaysView/DaysView";
 import {CalendarDragResizeValidationComponent} from "./Calendar/DragResizeValidation/DragResizeValidation";
@@ -109,6 +110,7 @@ const treeRoot = {
                 { text: 'Data', component: ButtonComponent, navIcon: 'icon-drag-data' },
                 { text: 'Files', component: ButtonComponent, navIcon: 'icon-drag-drop-element' }
             ]},
+            { text: 'Draw', component: DrawComponent, layout: 'center', navIcon: 'icon-drawing' },
             { text: 'Forms', navIcon: 'icon-forms', children: [
                 { text: 'CheckBoxField', component: CheckBoxFieldComponent, layout: 'center', navIcon: 'icon-Forms-CheckBoxField'  },
                 { text: 'ComboBoxField', component: ComboBoxFieldComponent, layout: 'center', navIcon: 'icon-Forms-ComboBoxField'  },
