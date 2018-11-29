@@ -2,10 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { model } from './GridModel'
 
 
-//import {model} from '../BigData/GridModel'
-//import {BigDataService} from '../BigData/BigData.service';
-
-
 
 declare var Ext: any;
 
@@ -16,8 +12,6 @@ declare var Ext: any;
 })
 export class ReconfigureGridComponent implements OnInit {
 
-
-  //constructor(bs : BigDataService) { }
   constructor() { }
 
   lastNames = ['Jones', 'Smith', 'Lee', 'Wilson', 'Black', 'Williams', 'Lewis', 'Johnson', 'Foot', 'Little', 'Vee', 'Train', 'Hot', 'Mutt'];
@@ -71,18 +65,6 @@ export class ReconfigureGridComponent implements OnInit {
   store = undefined;
   columns = undefined;
 
-/*
-  store = Ext.create('Ext.data.Store', {
-    model,
-    autoLoad: true,
-    pageSize: 0,
-    groupField: 'department',
-    proxy: {
-      type: 'ajax',
-      url: '/KitchenSink/BigData'
-    }
-  });
-*/
 
   onChange = (event) => {
     console.log("onChange. event.value : " + event.value)

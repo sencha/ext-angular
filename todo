@@ -18,7 +18,7 @@ ExtAngular
 
  Issues - athakur
   - we need to specify size in root element of each example else it does not show up. This will break on different screen sizes. [Need to see in react]
-  - toolbar tag does not work inside grid tag (Eg. ReconfigureGrid & StockTicker) [Retest]
+  - toolbar tag does not work inside grid tag (Eg. ReconfigureGrid & StockTicker) [Retest] [Fixed base.tpl but the order is not correct]
   - titleBar property does not exist for Grid (Eg. Big Data) [change in SDK] - TEMP FIX DONE (Need SDK change)
   - [Aniket]widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components] [Visit RendererCell like in react/ Need a simple example in extjs]
   - [Aniket]render method does not parse the HTML code but uses as string [See multiple grid examples] [isolate to standalone angular app] 
