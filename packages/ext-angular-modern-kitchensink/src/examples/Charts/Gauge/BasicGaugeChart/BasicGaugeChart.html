@@ -1,4 +1,4 @@
-<container #item [padding]="!isPhone ? 10 : 0" layout="fit">
+<container #item [padding]="!isPhone ? 10 : 0" layout="fit" [width]="'800px'" [height]="'800px'">
     <chart-toolbar #item
         [onRefreshClick]="this.refresh"
     ></chart-toolbar>
@@ -7,7 +7,10 @@
             innerPadding="20"
             [store]="this.store"
             flex="1"
-
+            [animation]="{
+                easing: 'elasticIn',
+                duration: 1000
+            }"
             [series]="polarSeries1"
         ></polar>
         <polar #item
@@ -15,17 +18,11 @@
             [store]="this.store"
             flex="1"
             [series]="polarSeries2"
-        ></polar>  
-    </panel>              
-</container>
-
-<!--
-            [animate]="{
+            [animation]="{
                 easing: 'elasticIn',
                 duration: 1000
             }"
 
-Aboove is present in each polar tag but angular does not fing it.
-
-
--->
+        ></polar>  
+    </panel>              
+</container>

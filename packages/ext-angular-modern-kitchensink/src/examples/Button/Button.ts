@@ -18,14 +18,44 @@ export class ButtonComponent implements OnInit  {
   menu = true;
   isPhone = Ext.os.is.Phone;
 
+  menuButtons = [];
+
+  menuButtonReady = function(event) {
+    console.log("button ready : " + event.ext);
+    this.menuButtons.push(event.ext);
+  }
+
+
   onStyleChange = (item) => {
     console.log("onStyleChange : " + item._text);
     this.style = item._text; 
     if (this.style === 'Menu') {
       this.menu = true;
+      var tempMenu = Ext.create('Ext.menu.Menu');
+      var item1 = new Ext.menu.Item({
+        indented: false,
+        text: "Item 1"
+      });
+      var item2 = new Ext.menu.Item({
+        indented: false,
+        text: "Item 2"
+      });
+      var item3 = new Ext.menu.Item({
+        indented: false,
+        text: "Item 3"
+      });
+      tempMenu.add(item1);
+      tempMenu.add(item2);
+      tempMenu.add(item3);
+      this.menuButtons.forEach(button => {
+        button.setMenu(tempMenu);
+      });
     } else {
         this.ui = this.style.toLowerCase();
         this.menu=false;
+        this.menuButtons.forEach(button => {
+          button.setMenu(null);
+        });
     }
   }
 
@@ -52,6 +82,8 @@ export class ButtonComponent implements OnInit  {
 
   styleChangeDefaults = { handler: this.onStyleChange, group: 'buttonstyle' };
   typeChangeDefaults = { handler: this.onTypeChange, group: 'buttonstyle' };
+
+
 
 
   constructor() { }

@@ -18,17 +18,15 @@ ExtAngular
 
  Issues - athakur
   - we need to specify size in root element of each example else it does not show up. This will break on different screen sizes. [Need to see in react]
-  - toolbar tag does not work inside grid tag (Eg. ReconfigureGrid & StockTicker) [Retest]
-  - titleBar property does not exist for Grid (Eg. Big Data) [change in SDK]
-  - [Aniket]widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components] [Visit RendererCell like in react/ Need a simple example in extjs]
   - [Aniket]render method does not parse the HTML code but uses as string [See multiple grid examples] [isolate to standalone angular app] 
-  - textcolumn/numbercolumn tag not working under columnd tag  [See Big Data example] = done/revisit
   - [Aniket/Marc]Tree widgets not loading with error ERROR Error: [Ext.create] Unrecognized class name / alias: widget.tree [revisit - Marc & Aniket]
-  - Redux grid is not rendering (We are not using redux as well. Needs review) [Get rid of this. More of react thing]
-  - [Aniket] Button and split button menu always shows up ([hidden] attribute does not work as well as *ngif). [use setMenu method/zip and project to Marc]
   - [Aniket] DragResizeValidation calendar example does not restrict dragging and resizing [Issue - working in react but not in angular, use extjs format]
-  - animate not a property of polar (See Basic Gauge under charts) [Use animation/ Fix in react as well]
-  - [Marc] child not handled (See Basic Gauge/Box Plot under charts) [Known issue]
+
+Marc
+  - toolbar tag does not work inside grid tag (Eg. ReconfigureGrid & StockTicker) [Retest] [Fixed base.tpl but the order is not correct]
+  - [Aniket]widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components] [Visit RendererCell like in react/ Need a simple example in extjs]
+
+
 
 Issues - Alisha
   - (MAJOR) hbox and vbox Layout components having UI issue that initial 3 conatiners/panels are not visible though in dom.
@@ -47,7 +45,26 @@ Issues - Alisha
   - Items in Carousel not rendering. - Solved via adding height and width.
   - FormPanel (ext component) does not have reset() event binded to it. This might be because in ext component it is
   inherited from Ext.Field.Manager -- solved i was doing something wrong in setting the refrence.
-  
+
+Issues - Tommy
+  - ExtAngular components that use Angular structural directives (e.g. ngFor, ngIf) do not dynamically update when their bound data changes.  This is preventing the following from working as desired:
+    - Code Preview (you muist reload the page to see the correct code preview panels).
+  - Code Preview
+    - FAB button is not positioned properly.
+    - Does not re-render as you navigate due to Angular structural directives issue mentioned above.
+    - CSS for syntax highlighting is hard coded in index.html because it wasn't loading when specified in the component's styleUrls.
+
+
+Done
+  - animate not a property of polar (See Basic Gauge under charts) [Use animation/ Fix in react as well] - Done
+  - [Marc] child not handled (See Basic Gauge/Box Plot under charts) [Known issue] [Take a pull and test]
+  - Redux grid is not rendering (We are not using redux as well. Needs review) [Get rid of this. More of react thing] - No action
+  - textcolumn/numbercolumn tag not working under columnd tag  [See Big Data example] = done/revisit - Done
+
+
+Low priority
+  - [Aniket] Button and split button menu always shows up ([hidden] attribute does not work as well as *ngif). [use setMenu method/zip and project to Marc] - Done/Revisit angular way
+  - titleBar property does not exist for Grid (Eg. Big Data) [change in SDK] - TEMP FIX DONE (Need SDK change) [Make chanegs to 6.7]
 
 
 ExtReact

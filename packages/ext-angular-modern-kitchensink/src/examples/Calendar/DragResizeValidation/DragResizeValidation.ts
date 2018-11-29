@@ -18,12 +18,19 @@ export class CalendarDragResizeValidationComponent implements OnInit {
         }
     })
 
+    calendarDay: any;
+
+    calendarDayReady = (event) => {
+        console.log("calendarDayReady is ready");
+        this.calendarDay = event.ext;
+    }
 
     onBeforeDragStart = (event) => {
         console.log("In onBeforeDragStart");
         var notAllowed = ['Not draggable', 'Not draggable/resizable'];
         var contains = !Ext.Array.contains(notAllowed, event.context.event.data.title);
         console.log("onBeforeDragStart. Returning : " + contains);
+        this.calendarDay.setDraggable(contains);
         return contains;
     }
 
@@ -32,6 +39,7 @@ export class CalendarDragResizeValidationComponent implements OnInit {
         var notAllowed = ['Not resizable', 'Not draggable/resizable'];
         var contains = !Ext.Array.contains(notAllowed, event.context.event.data.title);
         console.log("onBeforeResizeStart. Returning : " + contains);
+        this.calendarDay.resizeEvents = contains;
         return contains;
     }
 
