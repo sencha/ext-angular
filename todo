@@ -27,7 +27,7 @@ ExtAngular
   - Redux grid is not rendering (We are not using redux as well. Needs review) [Get rid of this. More of react thing]
   - [Aniket] Button and split button menu always shows up ([hidden] attribute does not work as well as *ngif). [use setMenu method/zip and project to Marc]
   - [Aniket] DragResizeValidation calendar example does not restrict dragging and resizing [Issue - working in react but not in angular, use extjs format]
-  - animate not a property of polar (See Basic Gauge under charts) [Use animation/ Fix in react as well]
+  - animate not a property of polar (See Basic Gauge under charts) [Use animation/ Fix in react as well] - Done
   - [Marc] child not handled (See Basic Gauge/Box Plot under charts) [Known issue]
 
 Issues - Alisha
