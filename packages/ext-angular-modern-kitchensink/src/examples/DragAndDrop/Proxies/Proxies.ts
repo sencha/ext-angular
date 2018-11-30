@@ -5,7 +5,12 @@ declare var Ext: any;
 @Component({
   selector: 'proxies-dragdrop-component',
   templateUrl: "./Proxies.html",
-  styles: [``]
+  styles: [`
+    .original{
+      left: 10px;
+      top:20px;
+    }
+  `]
 })
 export class ProxiesDragDropComponent implements OnInit  {
 
@@ -51,13 +56,14 @@ export class ProxiesDragDropComponent implements OnInit  {
       proxy: 'none',
       listeners: {
         dragmove: (source, info) => {
-          const pos = info.proxy.current,
-          noneText = Ext.String.format('X: {0}, Y: {1}',pos.x, Math.round(pos.y));
-          this.noneText = '!!!';
-          console.log('mmmmmmmmmmm', noneText, this.noneText);
+          const pos = info.proxy.current;
+          console.log('######3', this.noneText);
+          this.noneText = Ext.String.format('X: {0}, Y: {1}',pos.x, Math.round(pos.y));
+          console.log('@@@@@@@@@', this.noneText);
+          console.log('mmmmmmmmmmm', this.noneText);
         },
         dragend: () => {
-          this.noneText = 'Back to my initial Position';
+          // this.noneText = 'No :(';
         }
     }
   }),
@@ -72,11 +78,7 @@ export class ProxiesDragDropComponent implements OnInit  {
     new Ext.drag.Source({
       proxy: {
         type: 'placeholder',
-        style: {width:70, height:70, border: '3px dotted #039BE5'},
-        //   padding: '5px',
-        //   textAlign: 'center'
-        // },
-        html: 'Custom'
+        html: '<div style="width:70px; height:70px; border:3px dotted #039BE5;padding:5px;text-align:center;">Custom</div>'
       }
     })
   ];

@@ -51,6 +51,7 @@ import {SegmentedButtonComponent} from "../examples/SegmentedButton/SegmentedBut
 import {SplitButtonComponent} from "../examples/SplitButton/SplitButton"
 import {RippleComponent} from "../examples/Ripple/Ripple"
 import {AudioComponent} from "../examples/Audio/Audio"
+import {DrawComponent} from '../examples/Draw/Draw';
 import {VideoComponent} from "../examples/Video/Video"
 import {CalendarPanelComponent} from "../examples/Calendar/CalendarPanel/CalendarPanel"
 import {CalendarDaysViewComponent} from "../examples/Calendar/DaysView/DaysView"
@@ -132,6 +133,7 @@ import {NavigatorComponent} from '../examples/Charts/Navigator/Navigator';
 import {SimpleDragDropComponent} from "../examples/DragAndDrop/Simple/Simple";
 import {ConstraintsDragDropComponent} from '../examples/DragAndDrop/Constraints/Constraints';
 import {ProxiesDragDropComponent} from '../examples/DragAndDrop/Proxies/Proxies';
+import {HandlesDragDropComponent} from '../examples/DragAndDrop/Handles/Handles';
 
 import {CalendarService} from "../examples/Calendar/Calendar.service"
 import {GridService} from '../examples/Grid/Grid.service'
@@ -167,12 +169,12 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/drag__drop/simple', component: SimpleDragDropComponent, text: 'simple', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/drag__drop/constraints', component: ConstraintsDragDropComponent, text: 'constraints', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/drag__drop/proxies', component: ProxiesDragDropComponent, text: 'proxies', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'components/drag__drop/handles', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/drag__drop/handles', component: HandlesDragDropComponent, text: 'handles', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/drag__drop/groups', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/drag__drop/data', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/drag__drop/files', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
-	{ path: 'components/draw', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/draw', component: DrawComponent, text: 'Draw', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/forms', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/gauges', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/layouts', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -373,6 +375,7 @@ export class App {
 		SegmentedButtonComponent,
 		RippleComponent,
 		CarouselComponent,
+		DrawComponent,
 		DefaultGaugeComponent,
 		NeedleGaugeComponent,
 		AudioComponent,
@@ -453,6 +456,7 @@ export class App {
 		SimpleDragDropComponent,
 		ConstraintsDragDropComponent,
 		ProxiesDragDropComponent,
+		HandlesDragDropComponent,
 
 	],
 	providers: [
