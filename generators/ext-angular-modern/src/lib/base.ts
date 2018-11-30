@@ -155,6 +155,15 @@ export class base {
             if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
               parentCmp.addColumn(childCmp)
             }
+            else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
+              if (parentCmp.getHideHeaders() === false) {
+                //var j = parentCmp.items.items.length;
+                parentCmp.insert(1, childCmp);
+              }
+              else {
+                parentCmp.add(childCmp);
+              }
+            }
           } else if (childxtype === 'tooltip') {
             parentCmp.setTooltip(childCmp)
           } else if (childxtype === 'plugin') {
@@ -169,8 +178,9 @@ export class base {
             parentCmp.addDockedItems(childCmp)
           } else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
             if (parentCmp.getHideHeaders() === false) {
-              var j: any = parentCmp.items.items.length
-              parentCmp.insert(j - 1, childCmp)
+              //var j: any = parentCmp.items.items.length
+              //parentCmp.insert(j - 1, childCmp)
+              parentCmp.insert(1, childCmp)
             } else {
               parentCmp.add(childCmp)
             }
