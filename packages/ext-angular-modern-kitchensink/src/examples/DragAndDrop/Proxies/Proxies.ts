@@ -1,16 +1,12 @@
-import {Component, OnInit} from '@angular/core'
+import {Component, OnInit, ViewEncapsulation} from '@angular/core'
 
 declare var Ext: any;
 
 @Component({
   selector: 'proxies-dragdrop-component',
   templateUrl: "./Proxies.html",
-  styles: [`
-    .original{
-      left: 10px;
-      top:20px;
-    }
-  `]
+  styleUrls: [`./styles.css`],
+  encapsulation: ViewEncapsulation.None
 })
 export class ProxiesDragDropComponent implements OnInit  {
 
@@ -57,13 +53,10 @@ export class ProxiesDragDropComponent implements OnInit  {
       listeners: {
         dragmove: (source, info) => {
           const pos = info.proxy.current;
-          console.log('######3', this.noneText);
           this.noneText = Ext.String.format('X: {0}, Y: {1}',pos.x, Math.round(pos.y));
-          console.log('@@@@@@@@@', this.noneText);
-          console.log('mmmmmmmmmmm', this.noneText);
         },
         dragend: () => {
-          // this.noneText = 'No :(';
+          this.noneText = 'No Proxy';
         }
     }
   }),
@@ -78,7 +71,8 @@ export class ProxiesDragDropComponent implements OnInit  {
     new Ext.drag.Source({
       proxy: {
         type: 'placeholder',
-        html: '<div style="width:70px; height:70px; border:3px dotted #039BE5;padding:5px;text-align:center;">Custom</div>'
+        cls: 'proxy-drag-custom',
+        html: 'Custom'
       }
     })
   ];

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core'
+import {Component, OnInit, ViewEncapsulation} from '@angular/core'
 
 declare var Ext: any;
 
@@ -17,7 +17,8 @@ declare var Ext: any;
       white-space: wrap;
       border: 2px dashed #D0D0D0;
     }
-  `]
+  `],
+  encapsulation: ViewEncapsulation.None
 })
 export class RippleComponent implements OnInit  {
 
