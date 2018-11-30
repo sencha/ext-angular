@@ -121,6 +121,7 @@ export class LandingpageComponent implements OnInit {
           this.routerhidden = false
           if (this.theDataview != undefined) {
             this.theDataview.setData(null)
+            this.theDataview.setData(null)
           }
         }
         else {
