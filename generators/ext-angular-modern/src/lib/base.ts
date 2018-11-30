@@ -89,7 +89,7 @@ export class base {
         }
       }
     }
-    if ('true' === me.fitToParent) {
+    if (true === me.fitToParent) {
       o.top=0, 
       o.left=0, 
       o.width='100%', 
@@ -224,6 +224,9 @@ export class base {
           if (parentxtype === 'grid') {
             if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
               parentCmp.addColumn(childCmp)
+            }
+            else if (parentCmp.add != undefined) {
+              parentCmp.add(childCmp);
             }
           } else if (childxtype === 'tooltip') {
             parentCmp.setTooltip(childCmp)
