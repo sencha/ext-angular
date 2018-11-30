@@ -52,7 +52,7 @@ export class LandingpageComponent implements OnInit {
 
   filterRegex: any
   filterVal: any
-  showTreeFlag: any = true
+  showTreeFlag: any = false
 
 
   blockstyle: any = {'background':'top','display':'block','text-align':'center'}

@@ -1,8 +1,11 @@
-<container #item [padding]="!isPhone ? 10 : 0" layout="fit" [width]="'800px'" [height]="'800px'">
+<container #item [padding]="!isPhone ? 10 : 0" layout="fit" 
+[height]="'600px'"
+>
     <chart-toolbar #item
         [onRefreshClick]="this.refresh"
+        [onToggleZoomOnPan]="null"
     ></chart-toolbar>
-    <panel #item shadow="true" layout="vbox">
+    <panel #item shadow="true" layout="vbox" [width]="'800px'">
         <polar #item
             innerPadding="20"
             [store]="this.store"
@@ -22,6 +25,7 @@
                 easing: 'elasticIn',
                 duration: 1000
             }"
+            
 
         ></polar>  
     </panel>              

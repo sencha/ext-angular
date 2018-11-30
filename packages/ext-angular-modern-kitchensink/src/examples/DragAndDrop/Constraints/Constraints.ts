@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core'
+import {Component, OnInit, ViewEncapsulation} from '@angular/core'
 
 declare var Ext: any;
 
 @Component({
   selector: 'constraints-dragdrop-component',
   templateUrl: "./Constraints.html",
-  styles: [``]
+  styleUrls: [`./styles.css`],
+  encapsulation: ViewEncapsulation.None
 })
 export class ConstraintsDragDropComponent implements OnInit  {
 
@@ -19,7 +20,7 @@ export class ConstraintsDragDropComponent implements OnInit  {
   snapRef: any;
 
   doDestroy() {
-    Ext.destroy(this.sources);
+    this.sources.forEach(Ext.destroy.bind(Ext));
   }
 
   parentReady = (ele) => {
@@ -35,7 +36,6 @@ export class ConstraintsDragDropComponent implements OnInit  {
         snap: { x: 60, y: 50 }
     });
     this.parentRef.destroy = this.doDestroy.bind(this);
-
   }
 
   elementReady = (ele) => {

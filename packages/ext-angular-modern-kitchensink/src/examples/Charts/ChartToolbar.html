@@ -1,7 +1,7 @@
-<toolbar #item docked="top" ui="app-transparent-toolbar" shadow="false" [margin]="isPhone? '0 10' : ''">
+<toolbar #item docked="top" ui="app-transparent-toolbar" [shadow]="false" [margin]="isPhone? '0 10' : ''">
 
-        <button #item [hidden]="!show && !theme" margin="0 10px 0 0" iconCls="x-fa fa-picture-o" text="Theme" ui="action">
-            <menu>
+        <button #item [hidden]="!(show || theme)" margin="0 10px 0 0" iconCls="x-fa fa-picture-o" text="Theme" ui="action">
+            <menu #item>
                 <menuitem #item text="Default" [handler]="onThemeChangeDefault" [iconCls]="theme === 'default' ? 'x-font-icon md-icon-done' : ''"></menuitem>
                 <menuitem #item [hidden]="onlyMidnight" text="Green" [handler]="onThemeChangeGreen" [iconCls]="theme === 'green' ? 'x-font-icon md-icon-done' : ''"></menuitem>
                 <menuitem #item text="Midnight" [handler]="onThemeChangeMidnight" [iconCls]="theme === 'midnight' ? 'x-font-icon md-icon-done' : ''"></menuitem>
@@ -33,12 +33,12 @@
     <spacer #item></spacer>
 
 
-        <segmentedbutton #item [hidden]="!show && !onStackGroup" margin="0 10px 0 0" (onToggle)="onStackGroup" [value]="stacked">
+        <segmentedbutton #item [hidden]="!show || !onStackGroup" margin="0 10px 0 0" (onToggle)="onStackGroup" [value]="stacked">
             <button #item iconCls="x-fa fa-bars" text="STACK" ></button>
             <button #item iconCls="x-fa fa-bar-chart" text="GROUP"></button>
         </segmentedbutton>
 
-        <segmentedbutton #item [hidden]="!show && !onToggleZoomOnPan && supportsTouch" [value]="zoom">
+        <segmentedbutton #item [hidden]="!(show || onToggleZoomOnPan ) || supportsTouch" [value]="zoom">
             <button #item iconCls="x-fa fa-arrows" [handler]="onToggleZoomOnPanPan" text="PAN" value="false"></button>
             <button #item iconCls="x-fa fa-search-plus" [handler]="onToggleZoomOnPanZoom" value="true"></button>
             <button #item [hidden]="!onToggleCrosshair" iconCls="x-fa fa-crosshairs" [handler]="onToggleCrosshairLocal" text="CROSSHAIR" value="crosshair"></button>

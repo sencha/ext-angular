@@ -28,7 +28,10 @@ export class BoxPlotComponent implements OnInit {
     theme: string = 'default';
 
 
-    changeTheme = (themeParam) => { this.theme = themeParam }
+    changeTheme = (themeParam) => { 
+        this.theme = themeParam;
+        console.log("theme changes to " + this.theme);
+    }
 
     constructor() { }
 
