@@ -4,6 +4,8 @@ ExtAngular
  - modern Sencha Tests
  - modern docs
  - ext-angular-gen
+ - package ext-angular.service
+ - clean up bootstrapping process
  - ExtAngular functionality
    - using *ngIf (etc) in an ExtAngular component
    - conflict with button class
