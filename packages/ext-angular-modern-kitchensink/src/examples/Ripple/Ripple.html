@@ -1,10 +1,6 @@
 <container #item [layout]="'vbox'">
     <container #item
-        [style]="{
-            position: 'relative', 'text-align': 'center',
-            height: '150px', width: '300px', backgroundColor: 'white',
-            'line-height': '150px', border: '2px dashed #D0D0D0'
-        }"
+        [cls]="'ripple-target'"
         [margin]="'30 0 30 0'"
         [ripple]="true"
         (click)="clickHandler($event)"
@@ -12,11 +8,7 @@
     >
     </container>
     <container #item
-        [style]="{
-            position: 'relative', 'text-align': 'center',
-            height: '150px', width: '300px', backgroundColor: 'white',
-            'line-height': '150px', border: '2px dashed #D0D0D0'
-        }"
+        [cls]="'ripple-target'"
         [margin]="'30 0 30 0'"
         [ripple]="true"
         [html]="'Any ExtAngular component can also have a ripple.'"
