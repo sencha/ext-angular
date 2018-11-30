@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   template: `
 <panel #item [title]=title [layout]="'hbox'" [fitToParent]="true">
-  <button #item [text]="'click'" [cls]="'aStyle'"></button>
+  <button #item [text]="'click'" ></button>
 </container>
   `,
   styles: []
