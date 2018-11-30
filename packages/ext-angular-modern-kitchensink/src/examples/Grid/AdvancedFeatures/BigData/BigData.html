@@ -9,14 +9,13 @@ height="600px">
         <button #item [handler]="this.exportToHtml" text="HTML"></button>
         <button #item [handler]="this.onCancelExport" text="Cancel"></button>
     </actionsheet>
-    <!--    [titleBar]="gridTitleBar"-->
   <grid #item
     title="Big Data Grid"
     [store]="this.store"
     shadow="true"
     grouped="true"
     rowNumbers="true"
-
+    [titleBar]="gridTitleBar"
     [plugins]="{
       grideditable: true,
       gridviewoptions: true,
