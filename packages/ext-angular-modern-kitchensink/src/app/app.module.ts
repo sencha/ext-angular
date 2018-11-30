@@ -129,6 +129,9 @@ import {ChartToolbarComponent} from "../examples/Charts/ChartToolbar"
 import {BasicGaugeChartComponent} from '../examples/Charts/Gauge/BasicGaugeChart/BasicGaugeChart';
 import {BoxPlotComponent} from '../examples/Charts/BoxPlot/BoxPlot';
 import {NavigatorComponent} from '../examples/Charts/Navigator/Navigator';
+import {BasicScatterComponent} from '../examples/Charts/Scatter/BasicScatter/BasicScatter';
+import {BubbleComponent} from '../examples/Charts/Scatter/Bubble/Bubble';
+import {CustomIconsComponent} from '../examples/Charts/Scatter/CustomIcons/CustomIcons';
 
 import {SimpleDragDropComponent} from "../examples/DragAndDrop/Simple/Simple";
 import {ConstraintsDragDropComponent} from '../examples/DragAndDrop/Constraints/Constraints';
@@ -301,12 +304,12 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/layouts/resizable', component: ResizableLayoutComponent, text: 'resizable', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/layouts/vbox', component: vboxLayoutComponent, text: 'vbox', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
-
 	{ path: 'charts/gauges/basic_gauge', component: BasicGaugeChartComponent, text: 'Basic Gauge', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'charts/boxplot', component: BoxPlotComponent, text: 'Box Plot', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'charts/navigator', component: NavigatorComponent, text: 'Navigator', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-
-
+	{ path: 'charts/scatter/basic_scatter', component: BasicScatterComponent, text: 'Navigator', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/scatter/custom_icons', component: CustomIconsComponent, text: 'Navigator', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/scatter/bubble', component: BubbleComponent, text: 'Navigator', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	
 
 ];
@@ -455,6 +458,9 @@ export class App {
 		BasicGaugeChartComponent,
 		BoxPlotComponent,
 		NavigatorComponent,
+		BasicScatterComponent,
+		BubbleComponent,
+		CustomIconsComponent,
 
 		SimpleDragDropComponent,
 		ConstraintsDragDropComponent,

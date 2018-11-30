@@ -80,6 +80,10 @@ import {BasicGaugeChartComponent} from './Charts/Gauge/BasicGaugeChart/BasicGaug
 import {BoxPlotComponent} from './Charts/BoxPlot/BoxPlot';
 import {NavigatorComponent} from './Charts/Navigator/Navigator';
 
+import {BasicScatterComponent} from './Charts/Scatter/BasicScatter/BasicScatter';
+import {BubbleComponent} from './Charts/Scatter/Bubble/Bubble';
+import {CustomIconsComponent} from './Charts/Scatter/CustomIcons/CustomIcons';
+
 import { CarouselComponent } from 'src/examples/Carousel/Carousel';
 
 import {SimpleDragDropComponent} from './DragAndDrop/Simple/Simple';
@@ -296,9 +300,9 @@ const treeRoot = {
                 { text: 'Multiaxis', component: ButtonComponent, navIcon: 'icon-radar-multi-axis' }
             ] },
             { text: 'Scatter', navIcon: 'icon-scatter-charts', children: [
-                { text: 'Basic Scatter', component: ButtonComponent, navIcon: 'icon-scatter-basic' },
-                { text: 'Custom Icons', component: ButtonComponent, navIcon: 'icon-scatter-custom-icons' },
-                { text: 'Bubble', component: ButtonComponent, navIcon: 'icon-scatter-bubble' }
+                { text: 'Basic Scatter', component: BasicScatterComponent, navIcon: 'icon-scatter-basic' },
+                { text: 'Custom Icons', component: CustomIconsComponent, navIcon: 'icon-scatter-custom-icons' },
+                { text: 'Bubble', component: BubbleComponent, navIcon: 'icon-scatter-bubble' }
             ] }
         ] },
         { text: 'D3', premium: true, navIcon: 'icon-d3', children: [

@@ -38,7 +38,7 @@
             <button #item iconCls="x-fa fa-bar-chart" text="GROUP"></button>
         </segmentedbutton>
 
-        <segmentedbutton #item [hidden]="!(show || onToggleZoomOnPan || !supportsTouch)" [value]="zoom">
+        <segmentedbutton #item [hidden]="!(show || onToggleZoomOnPan ) || supportsTouch" [value]="zoom">
             <button #item iconCls="x-fa fa-arrows" [handler]="onToggleZoomOnPanPan" text="PAN" value="false"></button>
             <button #item iconCls="x-fa fa-search-plus" [handler]="onToggleZoomOnPanZoom" value="true"></button>
             <button #item [hidden]="!onToggleCrosshair" iconCls="x-fa fa-crosshairs" [handler]="onToggleCrosshairLocal" text="CROSSHAIR" value="crosshair"></button>
