@@ -67,7 +67,7 @@ export class ReconfigureGridComponent implements OnInit {
 
 
   onChange = (event) => {
-    console.log("onChange. event.value : " + event.value)
+    //console.log("onChange. event.value : " + event.value)
     const config = this.configs[event.value];
     this.columns = config.columns;
     this.store = this[config.store]();
