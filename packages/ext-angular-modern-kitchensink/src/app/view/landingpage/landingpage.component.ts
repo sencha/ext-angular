@@ -107,19 +107,21 @@ export class LandingpageComponent implements OnInit {
   }
 
   constructor(private router: Router) {
-    console.log('constructor')
 
     this.node$.subscribe(({
       next: (v) => {
         this.node = v;
         this.files = getFiles(v, _code);
         this.highlightCode();
-        console.log("Generating breadcrumb for ID: " + v.id);
+        //console.log("Generating breadcrumb for ID: " + v.id);
         this.breadcrumb = generateBreadcrumb(v);
-        console.log(`BREADCRUMB: ${JSON.stringify(this.breadcrumb.map(b => b.text))}`);
+        //console.log(`BREADCRUMB: ${JSON.stringify(this.breadcrumb.map(b => b.text))}`);
         if(this.node.childNodes.length == 0) {
           this.menuhidden = true
           this.routerhidden = false
+          if (this.theDataview != undefined) {
+            this.theDataview.setData(null)
+          }
         }
         else {
           this.menuhidden = false
@@ -137,11 +139,11 @@ export class LandingpageComponent implements OnInit {
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
         //console.log(`location.path(true): ${location.path(true)}`);
-        console.log(`val: ${val}`);
-        console.log(`nodeId: ${val.url}`);
+        //console.log(`val: ${val}`);
+        //console.log(`nodeId: ${val.url}`);
         var localNode = this.treeStore.getNodeById(val.url);
-        console.log("Node changed: " + this.node.id);
-        console.log("Children el length : " + this.node.childNodes.length);
+        //console.log("Node changed: " + this.node.id);
+        //console.log("Children el length : " + this.node.childNodes.length);
 
         if (localNode) {
           this.node$.next(localNode);

@@ -1,4 +1,5 @@
-<container #item [layout]="'fit'" [width]="'100%'" [height]="'100%'">
+<container #item [layout]="'fit'" [fitToParent]="true">
+
   <titlebar #item [docked]="'top'" [shadow]="true" [style]="{'z-index': 2}">
     <button #item [selfAlign]="'left'" [iconCls]="'x-fa fa-bars'" (tap)="toggleTree()"></button>
     <container #item [layout]="'hbox'">
@@ -21,81 +22,28 @@
 
   <!-- Breadcrumb starts-->
   <toolbar #item [docked]="'top'">
-    <dataview #item [centered]="false" [style]="menustyle" [itemTpl]="tplToolbar" [inline]="'true'" [itemCls]="'div.app-toolbar'"
-      (childtap)="doClickToolbar($event)" (ready)="dataviewToolbarReady($event)">
-    </dataview>
-  </toolbar>
-  <!-- Breadcrumb ends-->
+      <dataview #item [centered]="false" [style]="menustyle" [itemTpl]="tplToolbar" [inline]="'true'" [itemCls]="'div.app-toolbar'"
+        (childtap)="doClickToolbar($event)" (ready)="dataviewToolbarReady($event)">
+      </dataview>
+    </toolbar>
+    <!-- Breadcrumb ends-->
+  
+    <!-- examples start-->
+    <container #item [cls]="'main-background'" [scrollable]="true" [padding]="30" >
+      <dataview #item
 
-  <!-- examples start-->
-  <container #item [layout]="'fit'" [cls]="'main-background'" [scrollable]="true" [padding]="30" >
-    <dataview #item
-      [hidden]="menuhidden"
-      [centered]="true"
-      [style]= "blockstyle"
-      [itemTpl]="tpl"
-      [inline]="'true'"
-      [itemCls]="'div.app-thumbnail'"
-      (childtap)="doClick($event)"
-      (ready)="dataviewReady($event)">
-    </dataview>
-    <container #item 
-      [hidden]="routerhidden"
-      [centered]="true"
-      [style]= "blockstyle"
-      [scrollable]="true">
-      <router-outlet #item></router-outlet>
+        [centered]="true"
+        [style]= "blockstyle"
+        [itemTpl]="tpl"
+        [inline]="'true'"
+        [itemCls]="'div.app-thumbnail'"
+        (childtap)="doClick($event)"
+        (ready)="dataviewReady($event)">
+      </dataview>
+      <container #item [layout]="{ type: 'vbox', align: 'stretch' }">
+          <router-outlet #item></router-outlet>
+      </container>
     </container>
-  </container>
-  <!-- examples ends-->
+    <!-- examples ends-->
 
-  <ng-template [ngIf]="files.length">
-    <button
-      #item
-      [iconCls]="'x-font-icon ' + (showCode ? 'md-icon-close' : 'md-icon-code')"
-      [ui]="'fab'"
-      [top]="isDesktop ? 20 : 35"
-      [right]="21"
-      [zIndex]="1000"
-      (tap)="toggleCode()"
-    ></button>
-    <panel
-      #item
-      [resizable]="{ edges: 'west', dynamic: true }"
-      [collapsed]="!showCode"
-      [docked]="'right'"
-      [header]="false"
-      [collapsible]="{ direction: 'right' }"
-      [shadow]="true"
-      [userSelectable]="true"
-      [width]="'33%'"
-    >
-      <tabpanel
-        #item
-        [height]="'100%'"
-        [shadow]="true"
-        [tabBar]="{
-          layout: {
-              pack: 'left'
-          }
-        }"
-      >
-        <ng-template ngFor let-file [ngForOf]="files">
-          <panel
-            #item
-            [scrollable]="true"
-            [title]="file.name"
-            [ui]="'code-panel'"
-            tab="{
-                ui: 'app-code-tab',
-                flex: 0,
-                minWidth: 120
-            }"
-            [userSelectable]="true"
-            [html]="file.code"
-          ></panel>
-        </ng-template>
-      </tabpanel>
-    </panel>
-  </ng-template>
 </container>
