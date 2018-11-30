@@ -215,7 +215,7 @@ const treeRoot = {
                 { text: 'Big Data', component: BigDataComponent, navIcon: 'icon-big-data-grid' },
                 { text: 'Select And Copy', component: SelectAndCopyComponent, navIcon: 'icon-flexible-selection-grid' },
                 { text: 'Reconfigure Grid', component: ReconfigureGridComponent, navIcon: 'icon-reconfigure-grid' },
-                { text: 'Render Components In Cells', component: RenderComponentsInCellsComponent, navIcon: 'icon-grid-tools' },
+                { text: 'Components In Cells', component: RenderComponentsInCellsComponent, navIcon: 'icon-grid-tools' },
                 { text: 'Stock Ticker', component: StockTickerComponent, navIcon: 'icon-ticker-grid' }
             ]},
             { text: 'Redux Grid', component: ReduxGridComponent, navIcon: 'icon-Redux-Grid' }
