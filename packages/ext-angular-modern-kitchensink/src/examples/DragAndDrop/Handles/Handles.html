@@ -1,90 +1,17 @@
 <panel #item
   [padding]="5"
-  [width]="500"
+  [width]="900"
   [height]="500"
   [shadow]="true"
   (ready)="parentReady($event)"
 >
-    <container #item (ready)="handleRepeatReady($event)"
-        [style]="{
-            width: '120px',
-            height: '120px',
-            marginBottom: '10px',
-            textAlign: 'center',
-            position: 'relative',
-            color: '#fff',
-            borderRadius: '5px',
-            padding: '5px 10px',
-            left: '10px',
-            top: '10px',
-            backgroundColor: '#FF5722'
-        }"
-    >
-        <container #item
-            [id]="'repeatHandler1'"
-            [style]="{
-                cursor: 'move',
-                backgroundColor: '#6CAE3F',
-                borderRadius: '5px',
-                padding: '3px',
-                width: '100%',
-                marginTop: '10px'
-            }"
-            [html]="'Foo'"
-        ></container>
-        <container #item
-            [id]="'repeatHandler2'"
-            [style]="{
-                cursor: 'move',
-                backgroundColor: '#6CAE3F',
-                borderRadius: '5px',
-                padding: '3px',
-                width: '100%',
-                marginTop: '10px'
-            }"
-            [html]="'Bar'"
-        ></container>
-        <container #item
-            [id]="'repeatHandler3'"
-            [style]="{
-                cursor: 'move',
-                backgroundColor: '#6CAE3F',
-                borderRadius: '5px',
-                padding: '3px',
-                width: '100%',
-                marginTop: '10px'
-            }"
-            [html]="'Baz'"
-        ></container>
+    <container #item (ready)="handleRepeatReady($event)" [cls]="'handle-repeat handle-source'">
+        <container #item [cls]="'handle'" [html]="'Foo'"></container>
+        <container #item [cls]="'handle'" [html]="'Bar'"></container>
+        <container #item [cls]="'handle'" [html]="'Baz'"></container>
     </container>
 
-    <container #item (ready)="dragReady($event)"
-        [style]="{
-            width: '120px',
-            height: '120px',
-            marginBottom: '10px',
-            textAlign: 'center',
-            position: 'relative',
-            color: '#fff',
-            borderRadius: '5px',
-            padding: '5px 10px',
-            left: '10px',
-            top: '10px',
-            backgroundColor: '#FFEB3B'
-        }"
-    >
-        <container #item
-            [id]="'dragHandler'"
-            [style]="{
-                cursor: 'move',
-                borderRadius: '5px',
-                padding: '3px',
-                width: '100%',
-                marginTop: '10px',
-                backgroundColor: '#039BE5'
-            }"
-            [html]="'Drag'"
-        ></container>
-
+    <container #item (ready)="dragReady($event)" [cls]="'handle-handles handle-source'">
+        <container #item [cls]="'handle'" [html]="'Drag'"></container>
     </container>
 </panel>

@@ -1,20 +1,12 @@
-import {Component, OnInit} from '@angular/core'
+import {Component, OnInit, ViewEncapsulation} from '@angular/core'
 
 declare var Ext: any;
 
 @Component({
   selector: 'handles-dragdrop-component',
   templateUrl: "./Handles.html",
-  styles: [`
-  .handle-proxy {
-    color: #FFF;
-    text-align: center;
-    width: 60px;
-    height: 60px;
-    background-color: #43A047;
-    border-radius: 5px;
-}
-  `]
+  styleUrls: [`./styles.css`],
+  encapsulation: ViewEncapsulation.None
 })
 export class HandlesDragDropComponent implements OnInit  {
 
@@ -25,21 +17,19 @@ export class HandlesDragDropComponent implements OnInit  {
   dragRef: any;
 
   doDestroy() {
-    Ext.destroy(this.sources);
+    this.sources.forEach(Ext.destroy().bind(Ext));
   }
 
   parentReady = (ele) => {
     this.parentRef = ele.ext.el;
     this.sources[0].setConstrain(this.parentRef);
     this.sources[1].setConstrain(this.parentRef);
-    this.sources[1].setHandle('#dragHandler');
     this.parentRef.destroy = this.doDestroy.bind(this);
   }
 
   handleRepeatReady = (ele) => {
     this.handleRepeatRef = ele.ext.el;
     this.sources[0].setElement(this.handleRepeatRef);
-    this.sources[0].setHandle('#repeatHandler3,#repeatHandler2,#repeatHandler1');
  }
 
   dragReady = (ele) => {
@@ -53,21 +43,22 @@ export class HandlesDragDropComponent implements OnInit  {
     // contextual information can be gained from the item.
     new Ext.drag.Source({
         groups: 'repeat',
+        handle: '.handle',
         listeners: {
           dragstart: (source, info) => {
-            const innerHTML = info.eventTarget.innerHTML;
-            const ele = `<div style="color: #FFF;text-align: center;width: 60px;height: 60px;background-color: #43A047;border-radius: 5px;">${innerHTML}</div>`
-            source.getProxy().setHtml(ele);
+            source.getProxy().setHtml(info.eventTarget.innerHTML);
           }
         },
         proxy: {
           type: 'placeholder',
-          html: '<div style="color:#FFF;text-align:center;width:60px;height:60px;background-color:#43A047;border-radius:5px;" />'
+          cls: 'handle-proxy'
         }
     }),
 
     // This source is only draggable by the handle
-    new Ext.drag.Source({})
+    new Ext.drag.Source({
+      handle: '.handle',
+    })
 ];
 
   ngOnInit() {}
