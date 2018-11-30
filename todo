@@ -25,16 +25,17 @@ ExtAngular
 Marc
   - toolbar tag does not work inside grid tag (Eg. ReconfigureGrid & StockTicker) [Retest] [Fixed base.tpl but the order is not correct]
   - [Aniket]widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components] [Visit RendererCell like in react/ Need a simple example in extjs]
-  - [Marc] hbox and vbox Layout components, Validation (within Forms) having UI issue that initial 3 conatiners/panels are not visible though in dom.
-  - [Maarc] For each component i have to explicitly set the width and height! I think this would break on different systems.
-  It will break once code window in merged.
+  - [Marc] For each component i have to explicitly set the width and height! I think this would break on different systems.
+      It will break once code window in merged.
   - [Marc] ResizableLayoutComponent have multiple UI issues. (to reproduce compare from ext-react). Can demo this in next call. 
-  - [Marc] Text in the whole app is center aligned. do i need to handle this separately to make it look like ext-React? 
-   Or probably a solution to set text-align to be 'left' for all components ?
-  - [Marc] UI for SearchField is breaking.
+  - [Marc] UI for SearchField is breaking. - which example??
   - [Marc] class defined within a component is not getting applied. So, HOW DO WE APPLY CSS CLASSES ?
   - [Marc] In Drag Drop text does not change when draging. (check Proxy and Handles)
 
+Marc - Completed
+  - [Marc] hbox and vbox Layout components, Validation (within Forms) having UI issue that initial 3 conatiners/panels are not visible though in dom.
+  - [Marc] Text in the whole app is center aligned. do i need to handle this separately to make it look like ext-React? 
+   Or probably a solution to set text-align to be 'left' for all components ?
 
 Issues - Alisha
   - [Alisha] CardLayoutComponent using *ngFor is not working. - can revisit.
