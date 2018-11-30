@@ -2,17 +2,9 @@ steps
 
 ***************************
 
-generators/ext-component-creator/node all.js angular modern
-  - writes to generators/ext-angular-modern/src
-
-generators/ext-angular-modern/npm run build
-  - writes to generators/ext-angular-modern/dist
-
-copy generators/ext-angular-modern/dist/ext-angular-modern to packages/ext-angular-modern
-
 npm install -g @angular/cli
-ng new ext-angular-client --style scss --minimal --skip-tests --inline-style --inline-template 
-cd ext-angular-client
+ng new ext-angular-modern-boilerplate --style scss --minimal --skip-tests --inline-style --inline-template 
+cd ext-angular-modern-boilerplate
 
 in angular.json
 
@@ -48,15 +40,15 @@ copy generators/ext-component-creator/filetemplates/angular/ext-angular-webpack.
 in package.json, add
 
   "dependencies": {
-    "ext-angular-modern": "1.0.0",
-    "@sencha/ext": "~6.6.0",
-    "@sencha/ext-modern": "~6.6.0",
-    "@sencha/ext-modern-treegrid": "~6.6.0",
-    "@sencha/ext-modern-theme-material": "~6.6.0",
+    "@sencha/ext-angular-modern": "~6.7.0",
+    "@sencha/ext": "~6.7.0",
+    "@sencha/ext-modern": "~6.7.0",
+    "@sencha/ext-modern-treegrid": "~6.7.0",
+    "@sencha/ext-modern-theme-material": "~6.7.0",
 
   "devDependencies": {
-    "@angular-builders/custom-webpack": "^2.4.1",
-    "@angular-builders/dev-server":"^2.2.3",
+    "@angular-builders/custom-webpack": "~7.0.0",
+    "@angular-builders/dev-server":"~7.0.0",
     "@sencha/ext-angular-webpack-plugin": "~6.7.0",
 
 in tsconfig.json, add
@@ -67,10 +59,39 @@ in tsconfig.json, add
 
 in src/app.module.ts
 
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { ExtAngularModernModule } from 'ext-angular-modern'
+import { BrowserModule } from '@angular/platform-browser'
+import { NgModule } from '@angular/core'
+import { AppComponent } from './app.component'
+import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
+
+@Injectable()
+export class ExtAngularService {
+  constructor(
+      private componentFactoryResolver: ComponentFactoryResolver,
+      private appRef: ApplicationRef,
+      private injector: Injector
+  ) {}
+  appendComponentToViewport(component: any) {
+    const componentRef = this.componentFactoryResolver
+      .resolveComponentFactory(component)
+      .create(this.injector)
+    this.appRef.attachView(componentRef.hostView)
+    const domElem = (componentRef.hostView as EmbeddedViewRef<any>)
+      .rootNodes[0] as HTMLElement
+    var root = document.getElementsByClassName('x-viewport-body-el')[0]
+    root.appendChild(domElem)
+  }
+}
+
+@Component({
+  selector: 'app-root',
+  template: ``,
+})
+export class App {
+  constructor(private ExtAngularService: ExtAngularService) {
+    this.ExtAngularService.appendComponentToViewport(AppComponent)
+  }
+}
 
 @NgModule({
   declarations: [
@@ -80,8 +101,13 @@ import { ExtAngularModernModule } from 'ext-angular-modern'
     BrowserModule,
     ExtAngularModernModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    ExtAngularService
+  ],
+  	entryComponents: [
+		AppComponent
+	],
+  bootstrap: [App]
 })
 export class AppModule { }
 
@@ -113,3 +139,13 @@ run: npm install
 run: npm start
 
 ***************************
+
+For Library Generation
+
+generators/ext-component-creator/node all.js angular modern
+  - writes to generators/ext-angular-modern/src
+
+generators/ext-angular-modern/npm run build
+  - writes to generators/ext-angular-modern/dist
+
+copy generators/ext-angular-modern/dist/ext-angular-modern to packages/ext-angular-modern
