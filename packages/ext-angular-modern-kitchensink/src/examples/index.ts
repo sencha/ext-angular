@@ -86,6 +86,9 @@ import {SimpleDragDropComponent} from './DragAndDrop/Simple/Simple';
 import {ConstraintsDragDropComponent} from './DragAndDrop/Constraints/Constraints';
 import {ProxiesDragDropComponent} from './DragAndDrop/Proxies/Proxies';
 import {HandlesDragDropComponent} from './DragAndDrop/Handles/Handles';
+import {GroupsDragDropComponent} from './DragAndDrop/Groups/Groups';
+import {FilesDragDropComponent} from './DragAndDrop/Files/Files';
+import {DataDragDropComponent} from './DragAndDrop/Data/Data';
 
 
 declare var Ext: any;
@@ -106,9 +109,9 @@ const treeRoot = {
                 { text: 'Constraints', component: ConstraintsDragDropComponent, navIcon: 'icon-drag-constraint' },
                 { text: 'Proxies', component: ProxiesDragDropComponent, navIcon: 'icon-drag-proxy' },
                 { text: 'Handles', component: HandlesDragDropComponent, navIcon: 'icon-drag-handle' },
-                { text: 'Groups', component: ButtonComponent, navIcon: 'icon-drag-group' },
-                { text: 'Data', component: ButtonComponent, navIcon: 'icon-drag-data' },
-                { text: 'Files', component: ButtonComponent, navIcon: 'icon-drag-drop-element' }
+                { text: 'Groups', component: GroupsDragDropComponent, navIcon: 'icon-drag-group' },
+                { text: 'Data', component: DataDragDropComponent, navIcon: 'icon-drag-data' },
+                { text: 'Files', component: FilesDragDropComponent, navIcon: 'icon-drag-drop-element' }
             ]},
             { text: 'Draw', component: DrawComponent, layout: 'center', navIcon: 'icon-drawing' },
             { text: 'Forms', navIcon: 'icon-forms', children: [
