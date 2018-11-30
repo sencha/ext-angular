@@ -47,7 +47,10 @@ getChart() {
     return this.chart;
 }
 
-categoryRenderer = (axis, value) => {Math.round(value * 180 / Math.PI)}
+categoryRenderer = (axis, value) => {
+    console.log("In categoryRenderer. value : " + value);
+    return Math.round(value * 180 / Math.PI)
+}
 
 
   ngOnInit() {

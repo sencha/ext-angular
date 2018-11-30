@@ -31,7 +31,7 @@
     <!-- examples start-->
     <container #item [cls]="'main-background'" [scrollable]="true" [padding]="30" >
       <dataview #item
-
+        [hidden]="menuhidden"
         [centered]="true"
         [style]= "blockstyle"
         [itemTpl]="tpl"
@@ -40,7 +40,7 @@
         (childtap)="doClick($event)"
         (ready)="dataviewReady($event)">
       </dataview>
-      <container #item [layout]="{ type: 'vbox', align: 'stretch' }">
+      <container #item [layout]="{ type: 'vbox', align: 'stretch' }" [hidden]="routerhidden">
           <router-outlet #item></router-outlet>
       </container>
     </container>

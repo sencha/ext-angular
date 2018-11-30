@@ -72,7 +72,19 @@ export class ChartToolbarComponent implements OnInit {
 
 
     ngOnInit() {
+        console.log("isPhone : " + this.isPhone);
+        console.log("supportsTouch : " + this.supportsTouch);
+        console.log("show : " + this.show);
+        if(this.onToggleZoomOnPan) {
+            console.log("this.onToggleZoomOnPan true: " + this.onToggleZoomOnPan);
+        }
+        else {
+            console.log("this.onToggleZoomOnPan false: " + this.onToggleZoomOnPan);
+            console.log(!this.show && !this.onToggleZoomOnPan && this.supportsTouch)
+        }
+        
     }
+
 
 
     onThemeChangeDefault = () => {
