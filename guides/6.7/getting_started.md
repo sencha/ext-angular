@@ -198,7 +198,7 @@ The resulting app uses webpack-dev-server and hot-loading. Any changes you make 
 
 The [ext-angular repo on GitHub](https://github.com/sencha/ext-angular) contains several example apps that you can use to learn more about ExtAngular.  Each has a readme that contains instructions for downloading and running:
 
-* [ext-react-kitchensink](https://github.com/sencha/ext-angular/tree/master/packages/ext-angular-modern-kitchensink) - Shows how to use every ExtAngular component. See it running [here](https://examples.sencha.com/ExtAngular/6.7.0/kitchensink/).
+* [ext-angular-modern-kitchensink](https://github.com/sencha/ext-angular/tree/master/packages/ext-angular-modern-kitchensink) - Shows how to use every ExtAngular component. See it running [here](https://examples.sencha.com/ExtAngular/6.7.0/kitchensink/).
 
 ## Appendix
 
