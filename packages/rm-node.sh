@@ -10,4 +10,4 @@ rm  -r ext-angular-modern/node_modules
 rm  -r ext-angular-modern-kitchensink/node_modules
 rm  -r ext-angular-tests/node_modules
 rm  -r ext-angular-webpack-plugin/node_modules
-rm  -r ngx-tabs-libdemo-mjg/node_modules
+rm 	-r ext-angular-classic/node_modules

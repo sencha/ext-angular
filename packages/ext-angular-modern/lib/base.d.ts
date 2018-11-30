@@ -7,5 +7,8 @@ export declare class base {
     ngOnChanges(changes: SimpleChanges): void;
     baseOnInit(metaData: any): void;
     items: QueryList<any>;
+    items2: QueryList<ElementRef>;
     baseAfterContentInit(): void;
+    itemsa: QueryList<ElementRef>;
+    baseAfterContentInit2(): void;
 }

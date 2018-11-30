@@ -1,0 +1,21 @@
+<container #item [padding]="!isPhone? '10' : ''" layout="fit" [height]="'600px'">
+    <chart-toolbar #item
+        [onThemeChange]="this.changeTheme"
+        [onRefreshClick]="this.refreshData"
+        [theme]="theme"
+    ></chart-toolbar>
+    <cartesian #item
+    [width]="'800px'"
+        shadow="true"
+        insetPadding="20 20 10 10"
+        [legend]="{ type: 'sprite' }"
+        [store]="this.store"
+        [theme]="theme"
+        [interactions]="[{
+            type: 'itemedit',
+            style: { strokeStyle: 'gray' }
+        }]"
+        [axes]="cartesianAxes"
+        [series]="cartesianSeries"
+    ></cartesian>
+</container>
