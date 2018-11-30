@@ -1,10 +1,13 @@
 # Release Notes
 
-## Release Notes ExtReact 6.6
+## Release Notes ExtAngular 6.7
 
-### Support React 16
+### Support Angular 7.x
 
-ExtReact 6.6 supports React 16 which is the first version of React built on top of React’s new core architecture, codenamed "Fiber". The React 16 is designed from the ground up to support asynchronous rendering, which allows processing large component trees without blocking the main execution thread. It supports number of key features such as catching exceptions using error boundaries, returning multiple components from render, reduced file size and support for MIT license.
+ExtAngular 6.7 supports Angular 7.x which is ...
+
+******************
+
 
 When updating to React16, ExtReact developers need to update dependencies to 
 

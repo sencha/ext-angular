@@ -1,20 +1,19 @@
-# Adding ExtReact to an Existing React Application
+# Adding ExtAngular to an Existing Angular Application
 
-The guides provides the steps necessary to add ExtReact to an existing React application.
+The guides provides the steps necessary to add ExtAngular to an existing Angular application.
 
 ## Requirements
 
-ExtReact requires the following:
+ExtAngular requires the following:
 
 * Node 8.11+
 * NPM 6+
-* React 16+
+* Angular 7+
 * Webpack 4+
-* Babel 6+
 * Java 8 *
 
 
-## Installing ExtReact Packages from NPM
+## Installing ExtAngular Packages from NPM
 
 *Note: you must be signed into the Sencha NPM registry to access the ExtReact packages. See [Authenticating to Sencha's NPM Registry](getting_started.html#getting_started_-_authenticating_to_sencha_s_npm_registry) for more information.*
 
