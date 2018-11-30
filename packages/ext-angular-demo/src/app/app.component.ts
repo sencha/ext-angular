@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, ViewEncapsulation } from '@angular/core'
 
 @Component({
   selector: 'ext-angular-root',
@@ -32,12 +32,18 @@ import { Component } from '@angular/core'
     .breadcrumb li {
       float:left;
     }
-  `],
-  template: `
 
-  <container #item [layout]="'hbox'" [width]="'100%'" [height]="'100%'">
+    .aStyle {
+      color: red;
+    }
+
+  `],
+  // https://angular.io/api/core/ViewEncapsulation#None
+  encapsulation: ViewEncapsulation.None,
+  template: `
+  <container #item [layout]="'hbox'" [fitToParent]="true">
   <mjg #item></mjg>
-  <button #item [text]="'click'"></button>
+  <button #item [text]="'click'" [cls]="'aStyle'"></button>
   <titlebar #item [docked]="'top'" [shadow]="true" [style]="{'z-index': 2}">
     <button #item [selfAlign]="'left'" [iconCls]="'x-fa fa-bars'" (tap)="toggleTree()"></button>
     <container #item [layout]="'hbox'">

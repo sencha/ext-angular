@@ -89,7 +89,7 @@ export class base {
         }
       }
     }
-    if ('true' === me.fitToParent) {
+    if (true === me.fitToParent) {
       o.top=0, 
       o.left=0, 
       o.width='100%', 
