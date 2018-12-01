@@ -79,10 +79,17 @@ import {vboxLayoutComponent} from './Layouts/vboxLayout/vboxLayout';
 import {BasicGaugeChartComponent} from './Charts/Gauge/BasicGaugeChart/BasicGaugeChart';
 import {BoxPlotComponent} from './Charts/BoxPlot/BoxPlot';
 import {NavigatorComponent} from './Charts/Navigator/Navigator';
-
 import {BasicScatterComponent} from './Charts/Scatter/BasicScatter/BasicScatter';
 import {BubbleComponent} from './Charts/Scatter/Bubble/Bubble';
 import {CustomIconsComponent} from './Charts/Scatter/CustomIcons/CustomIcons';
+
+import {BasicLineComponent} from './Charts/Line/BasicLine/BasicLine';
+import {BasicMarkersComponent} from './Charts/Line/BasicMarkers/BasicMarkers';
+import {PlotComponent} from './Charts/Line/Plot/Plot';
+import {RealtimeComponent} from './Charts/Line/Realtime/Realtime';
+import {SplineComponent} from './Charts/Line/Spline/Spline';
+import {SplineMarkersComponent} from './Charts/Line/SplineMarkers/SplineMarkers';
+import {WithRendererComponent} from './Charts/Line/WithRenderer/WithRenderer';
 
 import { CarouselComponent } from 'src/examples/Carousel/Carousel';
 
@@ -277,13 +284,13 @@ const treeRoot = {
                 { text: 'Basic Gauge', component: BasicGaugeChartComponent, navIcon: 'icon-gauge-basic' }  
             ] }, 
             { text: 'Line', navIcon: 'icon-line-charts', children: [
-                { text: 'Basic Line', component: ButtonComponent, navIcon: 'icon-line-basic' },
-                { text: 'Basic Markers', component: ButtonComponent, navIcon: 'icon-line-markers' },
-                { text: 'Spline', component: ButtonComponent, navIcon: 'icon-line-spline' },
-                { text: 'Spline Markers', component: ButtonComponent, navIcon: 'icon-line-marked-spline' },
-                { text: 'Plot', component: ButtonComponent, navIcon: 'icon-line-plot' },
-                { text: 'With Renderer', component: ButtonComponent, navIcon: 'icon-line-renderer' },
-                { text: 'Realtime', component: ButtonComponent, navIcon: 'icon-line-real-time' }
+                { text: 'Basic Line', component: BasicLineComponent, navIcon: 'icon-line-basic' },
+                { text: 'Basic Markers', component: BasicMarkersComponent, navIcon: 'icon-line-markers' },
+                { text: 'Spline', component: SplineComponent, navIcon: 'icon-line-spline' },
+                { text: 'Spline Markers', component: SplineMarkersComponent, navIcon: 'icon-line-marked-spline' },
+                { text: 'Plot', component: PlotComponent, navIcon: 'icon-line-plot' },
+                { text: 'With Renderer', component: WithRendererComponent, navIcon: 'icon-line-renderer' },
+                { text: 'Realtime', component: RealtimeComponent, navIcon: 'icon-line-real-time' }
             ] },
             { text: 'Navigator', component: NavigatorComponent, navIcon: 'icon-navigator-charts' },
             { text: 'Pie', navIcon: 'icon-pie-basic', children: [
