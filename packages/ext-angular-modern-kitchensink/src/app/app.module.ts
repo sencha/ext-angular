@@ -141,6 +141,11 @@ import {SplineComponent} from '../examples/Charts/Line/Spline/Spline';
 import {SplineMarkersComponent} from '../examples/Charts/Line/SplineMarkers/SplineMarkers';
 import {WithRendererComponent} from '../examples/Charts/Line/WithRenderer/WithRenderer';
 
+import {BasicAreaComponent} from '../examples/Charts/Area/BasicArea/BasicArea';
+import {FullStackedAreaComponent} from '../examples/Charts/Area/FullStackedArea/FullStackedArea';
+import {NegativeValuesAreaComponent} from '../examples/Charts/Area/NegativeValuesArea/NegativeValuesArea';
+import {StackedAreaComponent} from '../examples/Charts/Area/StackedArea/StackedArea';
+
 import {SimpleDragDropComponent} from "../examples/DragAndDrop/Simple/Simple";
 import {ConstraintsDragDropComponent} from '../examples/DragAndDrop/Constraints/Constraints';
 import {ProxiesDragDropComponent} from '../examples/DragAndDrop/Proxies/Proxies';
@@ -327,7 +332,10 @@ const routes: ExtAngularRoutes = [
 	{ path: 'charts/line/with_renderer', component: WithRendererComponent, text: 'With Renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'charts/line/realtime', component: RealtimeComponent, text: 'Realtime', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
-
+	{ path: 'charts/area/basic_area', component: BasicAreaComponent, text: 'Basic Area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/area/stacked_area', component: FullStackedAreaComponent, text: 'Stacked Area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/area/full_stacked_area', component: StackedAreaComponent, text: 'Full Stacked Area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/area/negative_values_area', component: NegativeValuesAreaComponent, text: 'Negative values area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
@@ -465,6 +473,11 @@ export class App {
 		SplineComponent,
 		SplineMarkersComponent,
 		WithRendererComponent,
+		BasicAreaComponent,
+		FullStackedAreaComponent,
+		NegativeValuesAreaComponent,
+		StackedAreaComponent,
+
 
 		SimpleDragDropComponent,
 		ConstraintsDragDropComponent,
