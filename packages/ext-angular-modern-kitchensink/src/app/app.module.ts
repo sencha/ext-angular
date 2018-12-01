@@ -133,6 +133,18 @@ import {NavigatorComponent} from '../examples/Charts/Navigator/Navigator';
 import {BasicScatterComponent} from '../examples/Charts/Scatter/BasicScatter/BasicScatter';
 import {BubbleComponent} from '../examples/Charts/Scatter/Bubble/Bubble';
 import {CustomIconsComponent} from '../examples/Charts/Scatter/CustomIcons/CustomIcons';
+import {BasicLineComponent} from '../examples/Charts/Line/BasicLine/BasicLine';
+import {BasicMarkersComponent} from '../examples/Charts/Line/BasicMarkers/BasicMarkers';
+import {PlotComponent} from '../examples/Charts/Line/Plot/Plot';
+import {RealtimeComponent} from '../examples/Charts/Line/Realtime/Realtime';
+import {SplineComponent} from '../examples/Charts/Line/Spline/Spline';
+import {SplineMarkersComponent} from '../examples/Charts/Line/SplineMarkers/SplineMarkers';
+import {WithRendererComponent} from '../examples/Charts/Line/WithRenderer/WithRenderer';
+
+import {BasicAreaComponent} from '../examples/Charts/Area/BasicArea/BasicArea';
+import {FullStackedAreaComponent} from '../examples/Charts/Area/FullStackedArea/FullStackedArea';
+import {NegativeValuesAreaComponent} from '../examples/Charts/Area/NegativeValuesArea/NegativeValuesArea';
+import {StackedAreaComponent} from '../examples/Charts/Area/StackedArea/StackedArea';
 
 import {SimpleDragDropComponent} from "../examples/DragAndDrop/Simple/Simple";
 import {ConstraintsDragDropComponent} from '../examples/DragAndDrop/Constraints/Constraints';
@@ -308,11 +320,23 @@ const routes: ExtAngularRoutes = [
 	{ path: 'charts/gauges/basic_gauge', component: BasicGaugeChartComponent, text: 'Basic Gauge', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'charts/boxplot', component: BoxPlotComponent, text: 'Box Plot', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'charts/navigator', component: NavigatorComponent, text: 'Navigator', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'charts/scatter/basic_scatter', component: BasicScatterComponent, text: 'Navigator', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'charts/scatter/custom_icons', component: CustomIconsComponent, text: 'Navigator', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'charts/scatter/bubble', component: BubbleComponent, text: 'Navigator', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/scatter/basic_scatter', component: BasicScatterComponent, text: 'Basic scatter', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/scatter/custom_icons', component: CustomIconsComponent, text: 'Custom icons', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/scatter/bubble', component: BubbleComponent, text: 'Bubble', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	
+	{ path: 'charts/line/basic_line', component: BasicLineComponent, text: 'Basic Line', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/line/basic_markers', component: BasicMarkersComponent, text: 'Basic Markers', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/line/spline', component: SplineComponent, text: 'Spline', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/line/spline_markers', component: SplineMarkersComponent, text: 'Spline Markers', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/line/plot', component: PlotComponent, text: 'Plot', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/line/with_renderer', component: WithRendererComponent, text: 'With Renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/line/realtime', component: RealtimeComponent, text: 'Realtime', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
+	{ path: 'charts/area/basic_area', component: BasicAreaComponent, text: 'Basic Area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/area/stacked_area', component: FullStackedAreaComponent, text: 'Stacked Area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/area/full_stacked_area', component: StackedAreaComponent, text: 'Full Stacked Area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/area/negative_values_area', component: NegativeValuesAreaComponent, text: 'Negative values area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
@@ -442,6 +466,18 @@ export class App {
 		BasicScatterComponent,
 		BubbleComponent,
 		CustomIconsComponent,
+		BasicLineComponent,
+		BasicMarkersComponent,
+		PlotComponent,
+		RealtimeComponent,
+		SplineComponent,
+		SplineMarkersComponent,
+		WithRendererComponent,
+		BasicAreaComponent,
+		FullStackedAreaComponent,
+		NegativeValuesAreaComponent,
+		StackedAreaComponent,
+
 
 		SimpleDragDropComponent,
 		ConstraintsDragDropComponent,
