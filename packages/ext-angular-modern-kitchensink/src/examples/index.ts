@@ -95,6 +95,11 @@ import {FullStackedAreaComponent} from './Charts/Area/FullStackedArea/FullStacke
 import {NegativeValuesAreaComponent} from './Charts/Area/NegativeValuesArea/NegativeValuesArea';
 import {StackedAreaComponent} from './Charts/Area/StackedArea/StackedArea';
 
+import {BasicRadarComponent} from './Charts/Radar/BasicRadar/BasicRadar';
+import {FilledComponent} from './Charts/Radar/Filled/Filled';
+import {MarkedComponent} from './Charts/Radar/Marked/Marked';
+import {MultiaxisComponent} from './Charts/Radar/Multiaxis/Multiaxis';
+
 import { CarouselComponent } from 'src/examples/Carousel/Carousel';
 
 import {SimpleDragDropComponent} from './DragAndDrop/Simple/Simple';
@@ -305,10 +310,10 @@ const treeRoot = {
                 { text: '3D Pie', component: ButtonComponent, navIcon: 'icon-pie-3d' } 
             ] },
             { text: 'Radar', navIcon: 'icon-radar-charts', children: [
-                { text: 'Basic Radar', component: ButtonComponent, navIcon: 'icon-radar-basic' },
-                { text: 'Filled', component: ButtonComponent, navIcon: 'icon-radar-filled' },
-                { text: 'Marked', component: ButtonComponent, navIcon: 'icon-radar-marked' },
-                { text: 'Multiaxis', component: ButtonComponent, navIcon: 'icon-radar-multi-axis' }
+                { text: 'Basic Radar', component: BasicRadarComponent, navIcon: 'icon-radar-basic' },
+                { text: 'Filled', component: FilledComponent, navIcon: 'icon-radar-filled' },
+                { text: 'Marked', component: MarkedComponent, navIcon: 'icon-radar-marked' },
+                { text: 'Multiaxis', component: MultiaxisComponent, navIcon: 'icon-radar-multi-axis' }
             ] },
             { text: 'Scatter', navIcon: 'icon-scatter-charts', children: [
                 { text: 'Basic Scatter', component: BasicScatterComponent, navIcon: 'icon-scatter-basic' },

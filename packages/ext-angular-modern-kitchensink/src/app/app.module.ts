@@ -146,6 +146,12 @@ import {FullStackedAreaComponent} from '../examples/Charts/Area/FullStackedArea/
 import {NegativeValuesAreaComponent} from '../examples/Charts/Area/NegativeValuesArea/NegativeValuesArea';
 import {StackedAreaComponent} from '../examples/Charts/Area/StackedArea/StackedArea';
 
+
+import {BasicRadarComponent} from '../examples/Charts/Radar/BasicRadar/BasicRadar';
+import {FilledComponent} from '../examples/Charts/Radar/Filled/Filled';
+import {MarkedComponent} from '../examples/Charts/Radar/Marked/Marked';
+import {MultiaxisComponent} from '../examples/Charts/Radar/Multiaxis/Multiaxis';
+
 import {SimpleDragDropComponent} from "../examples/DragAndDrop/Simple/Simple";
 import {ConstraintsDragDropComponent} from '../examples/DragAndDrop/Constraints/Constraints';
 import {ProxiesDragDropComponent} from '../examples/DragAndDrop/Proxies/Proxies';
@@ -337,6 +343,11 @@ const routes: ExtAngularRoutes = [
 	{ path: 'charts/area/full_stacked_area', component: StackedAreaComponent, text: 'Full Stacked Area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'charts/area/negative_values_area', component: NegativeValuesAreaComponent, text: 'Negative values area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	
+	{ path: 'charts/radar/basic_radar', component: BasicRadarComponent, text: 'Basic Area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/radar/filled', component: FilledComponent, text: 'Stacked Area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/radar/marked', component: MarkedComponent, text: 'Full Stacked Area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/radar/multiaxis', component: MultiaxisComponent, text: 'Negative values area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
@@ -477,6 +488,11 @@ export class App {
 		FullStackedAreaComponent,
 		NegativeValuesAreaComponent,
 		StackedAreaComponent,
+		BasicRadarComponent,
+		FilledComponent,
+		MarkedComponent,
+		MultiaxisComponent,
+
 
 
 		SimpleDragDropComponent,
