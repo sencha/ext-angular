@@ -163,6 +163,16 @@ import {StackedBarComponent} from '../examples/Charts/Bar/StackedBar/StackedBar'
 import {CandlestickComponent} from '../examples/Charts/Financial/Candlestick/Candlestick';
 import {OHLCComponent} from '../examples/Charts/Financial/OHLC/OHLC';
 
+import {BasicColumnComponent} from '../examples/Charts/Column/BasicColumn/BasicColumn';
+import {ColumnWithRendererComponent} from '../examples/Charts/Column/ColumnWithRenderer/ColumnWithRenderer';
+import {MultiaxisColumnComponent} from '../examples/Charts/Column/MultiaxisColumn/MultiaxisColumn';
+import {StackedComponent} from '../examples/Charts/Column/Stacked/Stacked';
+import {ThreeDColumnWithRendererComponent} from '../examples/Charts/3DColumn/3DColumnWithRenderer/3DColumnWithRenderer';
+import {ThreeDGroupedComponent} from '../examples/Charts/3DColumn/3DGrouped/3DGrouped';
+import {ThreeDStackedComponent} from '../examples/Charts/3DColumn/3DStacked/3DStacked';
+import {Basic3DColumnComponent} from '../examples/Charts/3DColumn/Basic3DColumn/Basic3DColumn';
+import {NegativeValuesComponent} from '../examples/Charts/3DColumn/NegativeValues/NegativeValues';
+
 import {SimpleDragDropComponent} from "../examples/DragAndDrop/Simple/Simple";
 import {ConstraintsDragDropComponent} from '../examples/DragAndDrop/Constraints/Constraints';
 import {ProxiesDragDropComponent} from '../examples/DragAndDrop/Proxies/Proxies';
@@ -374,6 +384,19 @@ const routes: ExtAngularRoutes = [
 	{ path: 'charts/financial/candlestick', component: CandlestickComponent, text: 'Candle stick', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'charts/financial/ohlc', component: OHLCComponent, text: 'OHLC', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
+
+	{ path: 'charts/column/basic_column', component: BasicColumnComponent, text: 'Basic Column', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/column/stacked', component: StackedComponent, text: 'Stacked Column', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/column/column_with_renderer', component: ColumnWithRendererComponent, text: 'Column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/column/multiaxis_column', component: MultiaxisColumnComponent, text: 'Multi axis column', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+
+	{ path: 'charts/3d_column/basic_3d_column', component: Basic3DColumnComponent, text: 'Basic 3D column', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/3d_column/3d_grouped', component: ThreeDGroupedComponent, text: '3D grouped column', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/3d_column/3d_stacked', component: ThreeDStackedComponent, text: '3D stacked', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/3d_column/negative_values', component: NegativeValuesComponent, text: 'Ngeative values', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/3d_column/3d_column_with_renderer', component: ThreeDColumnWithRendererComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
@@ -530,6 +553,16 @@ export class App {
 
 		CandlestickComponent,
 		OHLCComponent,
+
+		BasicColumnComponent,
+		ColumnWithRendererComponent,
+		MultiaxisColumnComponent,
+		StackedComponent,
+		ThreeDColumnWithRendererComponent,
+		ThreeDGroupedComponent,
+		ThreeDStackedComponent,
+		Basic3DColumnComponent,
+		NegativeValuesComponent,
 
 		SimpleDragDropComponent,
 		ConstraintsDragDropComponent,

@@ -75,6 +75,7 @@ export class ChartToolbarComponent implements OnInit {
         console.log("isPhone : " + this.isPhone);
         console.log("supportsTouch : " + this.supportsTouch);
         console.log("show : " + this.show);
+        console.log("onStackGroup : " + this.onStackGroup);
         if(this.onToggleZoomOnPan) {
             console.log("this.onToggleZoomOnPan true: " + this.onToggleZoomOnPan);
         }
