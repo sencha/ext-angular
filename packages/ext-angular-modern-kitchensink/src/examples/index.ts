@@ -97,13 +97,15 @@ import {BasicRadarComponent} from './Charts/Radar/BasicRadar/BasicRadar';
 import {FilledComponent} from './Charts/Radar/Filled/Filled';
 import {MarkedComponent} from './Charts/Radar/Marked/Marked';
 import {MultiaxisComponent} from './Charts/Radar/Multiaxis/Multiaxis';
-
 import {ThreeDPieComponent} from './Charts/Pie/3DPie/3DPie';
 import {BasicPieComponent} from './Charts/Pie/BasicPie/BasicPie';
 import {DonutComponent} from './Charts/Pie/Donut/Donut';
 import {DoubleDonutComponent} from './Charts/Pie/DoubleDonut/DoubleDonut';
 import {SpieComponent} from './Charts/Pie/Spie/Spie';
 
+import {BasicBarComponent} from './Charts/Bar/BasicBar/BasicBar';
+import {FullStackedBarComponent} from './Charts/Bar/FullStackedBar/FullStackedBar';
+import {StackedBarComponent} from './Charts/Bar/StackedBar/StackedBar';
 
 import { CarouselComponent } from 'src/examples/Carousel/Carousel';
 
@@ -272,9 +274,9 @@ const treeRoot = {
                 { text: 'Negative Values Area', component: NegativeValuesAreaComponent, navIcon: 'icon-area-negative'}
             ] },
             { text: 'Bar', navIcon: 'icon-bar-basic', children: [
-                { text: 'Basic Bar', component: ButtonComponent, navIcon: 'icon-bar-basic' },
-                { text: 'Stacked Bar', component: ButtonComponent, navIcon: 'icon-bar-stacked' },
-                { text: 'Full Stacked Bar', component: ButtonComponent, navIcon: 'icon-bar-stacked-100'}
+                { text: 'Basic Bar', component: BasicBarComponent, navIcon: 'icon-bar-basic' },
+                { text: 'Stacked Bar', component: StackedBarComponent, navIcon: 'icon-bar-stacked' },
+                { text: 'Full Stacked Bar', component: FullStackedBarComponent, navIcon: 'icon-bar-stacked-100'}
             ] },
             { text: 'BoxPlot', component: BoxPlotComponent, navIcon: 'icon-boxplot-charts' },
             { text: 'Column', navIcon: 'icon-column-charts', children: [

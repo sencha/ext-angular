@@ -150,12 +150,15 @@ import {BasicRadarComponent} from '../examples/Charts/Radar/BasicRadar/BasicRada
 import {FilledComponent} from '../examples/Charts/Radar/Filled/Filled';
 import {MarkedComponent} from '../examples/Charts/Radar/Marked/Marked';
 import {MultiaxisComponent} from '../examples/Charts/Radar/Multiaxis/Multiaxis';
-
 import {ThreeDPieComponent} from '../examples/Charts/Pie/3DPie/3DPie';
 import {BasicPieComponent} from '../examples/Charts/Pie/BasicPie/BasicPie';
 import {DonutComponent} from '../examples/Charts/Pie/Donut/Donut';
 import {DoubleDonutComponent} from '../examples/Charts/Pie/DoubleDonut/DoubleDonut';
 import {SpieComponent} from '../examples/Charts/Pie/Spie/Spie';
+
+import {BasicBarComponent} from '../examples/Charts/Bar/BasicBar/BasicBar';
+import {FullStackedBarComponent} from '../examples/Charts/Bar/FullStackedBar/FullStackedBar';
+import {StackedBarComponent} from '../examples/Charts/Bar/StackedBar/StackedBar';
 
 
 import {SimpleDragDropComponent} from "../examples/DragAndDrop/Simple/Simple";
@@ -353,7 +356,11 @@ const routes: ExtAngularRoutes = [
 	{ path: 'charts/radar/filled', component: FilledComponent, text: 'Filled Component', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'charts/radar/marked', component: MarkedComponent, text: 'Marked Component', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'charts/radar/multiaxis', component: MultiaxisComponent, text: 'Multi axis', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	
+
+	{ path: 'charts/bar/basic_bar', component: BasicBarComponent, text: 'Basic Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/bar/stacked_bar', component: StackedBarComponent, text: 'Stacked Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/bar/full_stacked_bar', component: FullStackedBarComponent, text: 'Full Stacked Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
 	{ path: 'charts/pie/3d_pie', component: ThreeDPieComponent, text: '3D Pie', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'charts/pie/basic_pie', component: BasicPieComponent, text: 'Basic Pie', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'charts/pie/donut', component: DonutComponent, text: 'Donut', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -504,14 +511,15 @@ export class App {
 		FilledComponent,
 		MarkedComponent,
 		MultiaxisComponent,
-
 		ThreeDPieComponent,
 		BasicPieComponent,
 		DonutComponent,
 		DoubleDonutComponent,
 		SpieComponent,
 
-
+		BasicBarComponent,
+		FullStackedBarComponent,
+		StackedBarComponent,
 
 		SimpleDragDropComponent,
 		ConstraintsDragDropComponent,
