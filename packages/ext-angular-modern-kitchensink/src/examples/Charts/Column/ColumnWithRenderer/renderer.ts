@@ -1,3 +1,5 @@
+
+declare var Ext: any;
 export const  seriesG1Renderer = function(sprite, config, rendererData, index) {
     const store = rendererData.store,
         storeItems = store.getData().items,
@@ -5,7 +7,13 @@ export const  seriesG1Renderer = function(sprite, config, rendererData, index) {
         diff = record && (record.data['g2'] - record.data['g1']),
         last = storeItems.length - 1,
         surface = sprite.getParent(),
-        changes = {};
+        changes = {
+            fillStyle:null,
+            x:null,
+            y:null,
+            width:null,
+            lineWidth:null
+        };
 
     if (!record) {
         return;
