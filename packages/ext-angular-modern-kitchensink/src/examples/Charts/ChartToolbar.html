@@ -27,13 +27,11 @@
             }"
         ></button>
 
-
         <button #item [hidden]="!onRefreshClick" ui="action" margin="0 10px 0 0" iconCls="x-fa fa-refresh" [handler]="onRefreshClick" text="REFRESH"></button>
 
     <spacer #item></spacer>
 
-
-        <segmentedbutton #item [hidden]="!show || !onStackGroup" margin="0 10px 0 0" (onToggle)="onStackGroup" [value]="stacked">
+        <segmentedbutton #item [hidden]="!(show || onStackGroup)" margin="0 10px 0 0" (change)="onStackGroup($event)" >
             <button #item iconCls="x-fa fa-bars" text="STACK" ></button>
             <button #item iconCls="x-fa fa-bar-chart" text="GROUP"></button>
         </segmentedbutton>

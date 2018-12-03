@@ -110,6 +110,17 @@ import {StackedBarComponent} from './Charts/Bar/StackedBar/StackedBar';
 import {CandlestickComponent} from './Charts/Financial/Candlestick/Candlestick';
 import {OHLCComponent} from './Charts/Financial/OHLC/OHLC';
 
+import {BasicColumnComponent} from './Charts/Column/BasicColumn/BasicColumn';
+import {ColumnWithRendererComponent} from './Charts/Column/ColumnWithRenderer/ColumnWithRenderer';
+import {MultiaxisColumnComponent} from './Charts/Column/MultiaxisColumn/MultiaxisColumn';
+import {StackedComponent} from './Charts/Column/Stacked/Stacked';
+import {ThreeDColumnWithRendererComponent} from './Charts/3DColumn/3DColumnWithRenderer/3DColumnWithRenderer';
+import {ThreeDGroupedComponent} from './Charts/3DColumn/3DGrouped/3DGrouped';
+import {ThreeDStackedComponent} from './Charts/3DColumn/3DStacked/3DStacked';
+import {Basic3DColumnComponent} from './Charts/3DColumn/Basic3DColumn/Basic3DColumn';
+import {NegativeValuesComponent} from './Charts/3DColumn/NegativeValues/NegativeValues';
+
+
 import { CarouselComponent } from 'src/examples/Carousel/Carousel';
 
 import {SimpleDragDropComponent} from './DragAndDrop/Simple/Simple';
@@ -283,17 +294,17 @@ const treeRoot = {
             ] },
             { text: 'BoxPlot', component: BoxPlotComponent, navIcon: 'icon-boxplot-charts' },
             { text: 'Column', navIcon: 'icon-column-charts', children: [
-                { text: 'Basic Column', component: ButtonComponent, navIcon: 'icon-column-basic' },
-                { text: 'Stacked', component: ButtonComponent, navIcon: 'icon-column-stacked' },
-                { text: 'Column With Renderer', component: ButtonComponent, navIcon: 'icon-column-renderer' },
-                { text: 'Multiaxis Column', component: ButtonComponent, navIcon: 'icon-column-multi-axis' }
+                { text: 'Basic Column', component: BasicColumnComponent, navIcon: 'icon-column-basic' },
+                { text: 'Stacked', component: StackedComponent, navIcon: 'icon-column-stacked' },
+                { text: 'Column With Renderer', component: ColumnWithRendererComponent, navIcon: 'icon-column-renderer' },
+                { text: 'Multiaxis Column', component: MultiaxisColumnComponent, navIcon: 'icon-column-multi-axis' }
             ] },
             { text: '3D Column', navIcon: 'icon-column-3d', children: [
-                { text: 'Basic 3D Column', component: ButtonComponent, navIcon: 'icon-column-basic-3d' },
-                { text: '3D Grouped', component: ButtonComponent, navIcon: 'icon-column-grouped-3d' },
-                { text: '3D Stacked', component: ButtonComponent, navIcon: 'icon-column-stacked-3d' },
-                { text: 'Negative Values', component: ButtonComponent, navIcon: 'icon-column-negative-3d' },
-                { text: '3D Column With Renderer', component: ButtonComponent, navIcon: 'icon-column-renderer-3d' }
+                { text: 'Basic 3D Column', component: Basic3DColumnComponent, navIcon: 'icon-column-basic-3d' },
+                { text: '3D Grouped', component: ThreeDGroupedComponent, navIcon: 'icon-column-grouped-3d' },
+                { text: '3D Stacked', component: ThreeDStackedComponent, navIcon: 'icon-column-stacked-3d' },
+                { text: 'Negative Values', component: NegativeValuesComponent, navIcon: 'icon-column-negative-3d' },
+                { text: '3D Column With Renderer', component: ThreeDColumnWithRendererComponent, navIcon: 'icon-column-renderer-3d' }
             ]},
             { text: 'Financial', navIcon: 'icon-financial-charts', children: [
                 { text: 'Candlestick', component: CandlestickComponent, navIcon: 'icon-financial-candlestick' },
