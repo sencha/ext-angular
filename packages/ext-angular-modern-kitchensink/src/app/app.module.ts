@@ -194,6 +194,10 @@ import {GroupsDragDropComponent} from '../examples/DragAndDrop/Groups/Groups';
 import {FilesDragDropComponent} from '../examples/DragAndDrop/Files/Files';
 import {DataDragDropComponent} from '../examples/DragAndDrop/Data/Data';
 
+import {BasicPanelComponent} from '../examples/Panels/Basic/Basic';
+import {BasicDatePanelComponent} from '../examples/Panels/BasicDate/BasicDate';
+import {AdvancedDatePanelComponent} from '../examples/Panels/AdvancedDate/AdvancedDate';
+import {TimePanelComponent} from '../examples/Panels/TimePanel/Time';
 import {DialogPopupComponent} from '../examples/Popups/Dialog/Dialog';
 import {MessagePopupComponent} from '../examples/Popups/Message/Message';
 import {ToastPopupComponent} from '../examples/Popups/Toast/Toast';
@@ -247,7 +251,6 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/popups', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/tabs', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	
-	
 	{ path: 'grids', component: DummyComponent, text: 'Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/core_features', component: DummyComponent, text: 'Grids Core Features', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/addons', component: DummyComponent, text: 'Grids Addons', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -272,7 +275,7 @@ const routes: ExtAngularRoutes = [
 	
 	{ path: 'd3', component: DummyComponent, text: 'D3', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'pivot_grids', component: DummyComponent, text: 'Pivot Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-
+	
 	//example components
 	{ path: 'components/buttons/button', component: ButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/buttons/splitbutton', component: SplitButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -360,6 +363,13 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/layouts/form', component: FormLayoutComponent, text: 'form', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/layouts/resizable', component: ResizableLayoutComponent, text: 'resizable', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/layouts/vbox', component: vboxLayoutComponent, text: 'vbox', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	{ path: 'components/panels/basic_panels', component: BasicPanelComponent, text: 'Basic Panels', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
+	{ path: 'components/panels/resizable_handle', component: BasicPanelComponent, text: 'Resizeable handle', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
+	{ path: 'components/panels/collapsible_panel', component: BasicPanelComponent, text: 'Collapsible Panel', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
+	{ path: 'components/panels/basic_date_panel', component: BasicDatePanelComponent, text: 'Basic Date Panel', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
+	{ path: 'components/panels/advanced_date_panel', component: AdvancedDatePanelComponent, text: 'Advanced Date Panel', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
+	{ path: 'components/panels/time_panel', component: TimePanelComponent, text: 'Time Panel', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
 
 	{ path: 'components/popups/dialog', component: DialogPopupComponent, text: 'Dialog', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/popups/msg', component: MessagePopupComponent, text: 'Message', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -615,9 +625,13 @@ export class App {
 		FilesDragDropComponent,
 		DataDragDropComponent,
 
+		BasicPanelComponent,
+		BasicDatePanelComponent,
+		AdvancedDatePanelComponent,
 		DialogPopupComponent,
 		MessagePopupComponent,
 		ToastPopupComponent,
+		TimePanelComponent,
 
 	],
 	providers: [
