@@ -89,16 +89,21 @@ import {RealtimeComponent} from './Charts/Line/Realtime/Realtime';
 import {SplineComponent} from './Charts/Line/Spline/Spline';
 import {SplineMarkersComponent} from './Charts/Line/SplineMarkers/SplineMarkers';
 import {WithRendererComponent} from './Charts/Line/WithRenderer/WithRenderer';
-
 import {BasicAreaComponent} from './Charts/Area/BasicArea/BasicArea';
 import {FullStackedAreaComponent} from './Charts/Area/FullStackedArea/FullStackedArea';
 import {NegativeValuesAreaComponent} from './Charts/Area/NegativeValuesArea/NegativeValuesArea';
 import {StackedAreaComponent} from './Charts/Area/StackedArea/StackedArea';
-
 import {BasicRadarComponent} from './Charts/Radar/BasicRadar/BasicRadar';
 import {FilledComponent} from './Charts/Radar/Filled/Filled';
 import {MarkedComponent} from './Charts/Radar/Marked/Marked';
 import {MultiaxisComponent} from './Charts/Radar/Multiaxis/Multiaxis';
+
+import {ThreeDPieComponent} from './Charts/Pie/3DPie/3DPie';
+import {BasicPieComponent} from './Charts/Pie/BasicPie/BasicPie';
+import {DonutComponent} from './Charts/Pie/Donut/Donut';
+import {DoubleDonutComponent} from './Charts/Pie/DoubleDonut/DoubleDonut';
+import {SpieComponent} from './Charts/Pie/Spie/Spie';
+
 
 import { CarouselComponent } from 'src/examples/Carousel/Carousel';
 
@@ -303,11 +308,11 @@ const treeRoot = {
             ] },
             { text: 'Navigator', component: NavigatorComponent, navIcon: 'icon-navigator-charts' },
             { text: 'Pie', navIcon: 'icon-pie-basic', children: [
-                { text: 'Basic Pie', component: ButtonComponent, navIcon: 'icon-pie-basic' },
-                { text: 'Spie', component: ButtonComponent, navIcon: 'icon-pie-custom' },
-                { text: 'Donut', component: ButtonComponent, navIcon: 'icon-pie-donut' },
-                { text: 'Double Donut', component: ButtonComponent, navIcon: 'icon-pie-double-donut' },
-                { text: '3D Pie', component: ButtonComponent, navIcon: 'icon-pie-3d' } 
+                { text: 'Basic Pie', component: BasicPieComponent, navIcon: 'icon-pie-basic' },
+                { text: 'Spie', component: SpieComponent, navIcon: 'icon-pie-custom' },
+                { text: 'Donut', component: DonutComponent, navIcon: 'icon-pie-donut' },
+                { text: 'Double Donut', component: DoubleDonutComponent, navIcon: 'icon-pie-double-donut' },
+                { text: '3D Pie', component: ThreeDPieComponent, navIcon: 'icon-pie-3d' } 
             ] },
             { text: 'Radar', navIcon: 'icon-radar-charts', children: [
                 { text: 'Basic Radar', component: BasicRadarComponent, navIcon: 'icon-radar-basic' },

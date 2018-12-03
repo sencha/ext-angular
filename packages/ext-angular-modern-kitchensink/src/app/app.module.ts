@@ -146,11 +146,17 @@ import {FullStackedAreaComponent} from '../examples/Charts/Area/FullStackedArea/
 import {NegativeValuesAreaComponent} from '../examples/Charts/Area/NegativeValuesArea/NegativeValuesArea';
 import {StackedAreaComponent} from '../examples/Charts/Area/StackedArea/StackedArea';
 
-
 import {BasicRadarComponent} from '../examples/Charts/Radar/BasicRadar/BasicRadar';
 import {FilledComponent} from '../examples/Charts/Radar/Filled/Filled';
 import {MarkedComponent} from '../examples/Charts/Radar/Marked/Marked';
 import {MultiaxisComponent} from '../examples/Charts/Radar/Multiaxis/Multiaxis';
+
+import {ThreeDPieComponent} from '../examples/Charts/Pie/3DPie/3DPie';
+import {BasicPieComponent} from '../examples/Charts/Pie/BasicPie/BasicPie';
+import {DonutComponent} from '../examples/Charts/Pie/Donut/Donut';
+import {DoubleDonutComponent} from '../examples/Charts/Pie/DoubleDonut/DoubleDonut';
+import {SpieComponent} from '../examples/Charts/Pie/Spie/Spie';
+
 
 import {SimpleDragDropComponent} from "../examples/DragAndDrop/Simple/Simple";
 import {ConstraintsDragDropComponent} from '../examples/DragAndDrop/Constraints/Constraints';
@@ -343,11 +349,17 @@ const routes: ExtAngularRoutes = [
 	{ path: 'charts/area/full_stacked_area', component: StackedAreaComponent, text: 'Full Stacked Area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'charts/area/negative_values_area', component: NegativeValuesAreaComponent, text: 'Negative values area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	
-	{ path: 'charts/radar/basic_radar', component: BasicRadarComponent, text: 'Basic Area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'charts/radar/filled', component: FilledComponent, text: 'Stacked Area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'charts/radar/marked', component: MarkedComponent, text: 'Full Stacked Area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'charts/radar/multiaxis', component: MultiaxisComponent, text: 'Negative values area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/radar/basic_radar', component: BasicRadarComponent, text: 'Basic Radar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/radar/filled', component: FilledComponent, text: 'Filled Component', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/radar/marked', component: MarkedComponent, text: 'Marked Component', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/radar/multiaxis', component: MultiaxisComponent, text: 'Multi axis', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	
+	{ path: 'charts/pie/3d_pie', component: ThreeDPieComponent, text: '3D Pie', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/pie/basic_pie', component: BasicPieComponent, text: 'Basic Pie', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/pie/donut', component: DonutComponent, text: 'Donut', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/pie/double_donut', component: DoubleDonutComponent, text: 'Double Donut', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/pie/spie', component: SpieComponent, text: 'Spie', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
@@ -492,6 +504,12 @@ export class App {
 		FilledComponent,
 		MarkedComponent,
 		MultiaxisComponent,
+
+		ThreeDPieComponent,
+		BasicPieComponent,
+		DonutComponent,
+		DoubleDonutComponent,
+		SpieComponent,
 
 
 
