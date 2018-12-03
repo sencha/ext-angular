@@ -6,7 +6,7 @@
             </div>
         </container>
         <spacer #item></spacer>
-        <button #item (handler)="clear()" [text]="'Clear'"> </button>
+        <button #item (tap)="clear()" [text]="'Clear'"> </button>
     </toolbar>
     <draw #item (ready)="onReady($event)"></draw>
 </panel>

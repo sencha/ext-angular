@@ -142,6 +142,10 @@ import {GroupsDragDropComponent} from './DragAndDrop/Groups/Groups';
 import {FilesDragDropComponent} from './DragAndDrop/Files/Files';
 import {DataDragDropComponent} from './DragAndDrop/Data/Data';
 
+import {DialogPopupComponent} from './Popups/Dialog/Dialog';
+import { MessagePopupComponent } from 'src/examples/Popups/Message/Message';
+import { ToastPopupComponent } from 'src/examples/Popups/Toast/Toast';
+
 
 declare var Ext: any;
 
@@ -228,9 +232,9 @@ const treeRoot = {
                 { text: 'Time Panel', component: ButtonComponent, layout: 'center', navIcon: 'icon-panel-time', hidden: Ext.os.is.Phone },
             ]},
             { text: 'Popups', navIcon: 'icon-windows', children: [
-                { text: 'Dialog', component: ButtonComponent, layout: 'center', navIcon: 'icon-basic-dialog' },
-                { text: 'Msg', component: ButtonComponent, layout: 'center', navIcon: 'icon-overlays' },
-                { text: 'Toast', component: ButtonComponent, layout: 'center', navIcon: 'icon-toast-view' }
+                { text: 'Dialog', component: DialogPopupComponent, layout: 'center', navIcon: 'icon-basic-dialog' },
+                { text: 'Msg', component: MessagePopupComponent, layout: 'center', navIcon: 'icon-overlays' },
+                { text: 'Toast', component: ToastPopupComponent, layout: 'center', navIcon: 'icon-toast-view' }
             ]},
             { text: 'ProgressBar', component: ProgressBarComponent, layout: 'center', navIcon: 'icon-progress-decorated' },
             { text: 'Ripple', component: RippleComponent, layout: 'center', navIcon: 'icon-Ripple' },
