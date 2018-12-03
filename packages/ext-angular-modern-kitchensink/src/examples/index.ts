@@ -107,6 +107,9 @@ import {BasicBarComponent} from './Charts/Bar/BasicBar/BasicBar';
 import {FullStackedBarComponent} from './Charts/Bar/FullStackedBar/FullStackedBar';
 import {StackedBarComponent} from './Charts/Bar/StackedBar/StackedBar';
 
+import {CandlestickComponent} from './Charts/Financial/Candlestick/Candlestick';
+import {OHLCComponent} from './Charts/Financial/OHLC/OHLC';
+
 import { CarouselComponent } from 'src/examples/Carousel/Carousel';
 
 import {SimpleDragDropComponent} from './DragAndDrop/Simple/Simple';
@@ -293,8 +296,8 @@ const treeRoot = {
                 { text: '3D Column With Renderer', component: ButtonComponent, navIcon: 'icon-column-renderer-3d' }
             ]},
             { text: 'Financial', navIcon: 'icon-financial-charts', children: [
-                { text: 'Candlestick', component: ButtonComponent, navIcon: 'icon-financial-candlestick' },
-                { text: 'OHLC', component: ButtonComponent, navIcon: 'icon-financial-ohlc' }
+                { text: 'Candlestick', component: CandlestickComponent, navIcon: 'icon-financial-candlestick' },
+                { text: 'OHLC', component: OHLCComponent, navIcon: 'icon-financial-ohlc' }
             ] },
             { text: 'Gauges', navIcon: 'icon-gauge-charts', children: [
                 { text: 'Basic Gauge', component: BasicGaugeChartComponent, navIcon: 'icon-gauge-basic' }  

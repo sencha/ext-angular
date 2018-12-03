@@ -160,6 +160,8 @@ import {BasicBarComponent} from '../examples/Charts/Bar/BasicBar/BasicBar';
 import {FullStackedBarComponent} from '../examples/Charts/Bar/FullStackedBar/FullStackedBar';
 import {StackedBarComponent} from '../examples/Charts/Bar/StackedBar/StackedBar';
 
+import {CandlestickComponent} from '../examples/Charts/Financial/Candlestick/Candlestick';
+import {OHLCComponent} from '../examples/Charts/Financial/OHLC/OHLC';
 
 import {SimpleDragDropComponent} from "../examples/DragAndDrop/Simple/Simple";
 import {ConstraintsDragDropComponent} from '../examples/DragAndDrop/Constraints/Constraints';
@@ -168,6 +170,8 @@ import {HandlesDragDropComponent} from '../examples/DragAndDrop/Handles/Handles'
 import {GroupsDragDropComponent} from '../examples/DragAndDrop/Groups/Groups';
 import {FilesDragDropComponent} from '../examples/DragAndDrop/Files/Files';
 import {DataDragDropComponent} from '../examples/DragAndDrop/Data/Data';
+
+
 
 import {CalendarService} from "../examples/Calendar/Calendar.service"
 import {GridService} from '../examples/Grid/Grid.service'
@@ -367,6 +371,9 @@ const routes: ExtAngularRoutes = [
 	{ path: 'charts/pie/double_donut', component: DoubleDonutComponent, text: 'Double Donut', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'charts/pie/spie', component: SpieComponent, text: 'Spie', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
+	{ path: 'charts/financial/candlestick', component: CandlestickComponent, text: 'Candle stick', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/financial/ohlc', component: OHLCComponent, text: 'OHLC', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
@@ -520,6 +527,9 @@ export class App {
 		BasicBarComponent,
 		FullStackedBarComponent,
 		StackedBarComponent,
+
+		CandlestickComponent,
+		OHLCComponent,
 
 		SimpleDragDropComponent,
 		ConstraintsDragDropComponent,
