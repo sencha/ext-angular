@@ -151,7 +151,15 @@ import {ResizableHandleComponent} from './Panels/Resizable/ResizableHandle';
 import {DialogPopupComponent} from './Popups/Dialog/Dialog';
 import {MessagePopupComponent} from './Popups/Message/Message';
 import {ToastPopupComponent} from './Popups/Toast/Toast';
-
+import {BasicListComponent} from './Lists/Basic/BasicList';
+import {DisclosureListComponent} from './Lists/Disclosure/Disclosure';
+import {GroupedListComponent} from './Lists/Grouped/GroupedList';
+import {NestedListComponent} from './Lists/NestedList/NestedList';
+import {PagingListComponent} from './Lists/Paging/PagingList';
+import {BasicAccordionSwiperComponent} from './Lists/BasicAccordionSwiper/BasicAccordionSwiper';
+import {BasicStepSwiperComponent} from './Lists/BasicStepSwiper/BasicStepSwiper';
+import {UndoableAccordionSwiperComponent} from '../examples/Lists/UndoableAccordionSwiper/UndoableAccordionSwiper';
+import {UndoableStepSwiperComponent} from '../examples/Lists/UndoableStepSwiper/UndoableStepSwiper';
 
 declare var Ext: any;
 
@@ -214,16 +222,16 @@ const treeRoot = {
                 { text: 'vbox', component: vboxLayoutComponent, layout: 'auto', navIcon: 'icon-layout-vertical-box' }
             ]},
             { text: 'Lists', navIcon: 'icon-lists', children: [
-                { text: 'Basic List', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-list' },
-                { text: 'Disclosure', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-disclosure-list' },
-                { text: 'Grouped', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-grouped-list' },
-                { text: 'NestedList', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-nested-list' },
+                { text: 'Basic List', component: BasicListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-list' },
+                { text: 'Disclosure', component: DisclosureListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-disclosure-list' },
+                { text: 'Grouped', component: GroupedListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-grouped-list' },
+                { text: 'NestedList', component: NestedListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-nested-list' },
                 { text: 'Pull Refresh', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-pullrefresh-list' },
-                { text: 'Paging', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-listpaging-list' },
-                { text: 'Basic Accordion Swiper', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-accordion-swiper'},
-                { text: 'Basic Step Swiper', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-step-swiper'},
-                { text: 'Undoable Accordion Swiper', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-undoable-accordion-swiper'},
-                { text: 'Undoable Step Swiper', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-undoable-step-swiper'}
+                { text: 'Paging', component: PagingListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-listpaging-list' },
+                { text: 'Basic Accordion Swiper', component: BasicAccordionSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-accordion-swiper'},
+                { text: 'Basic Step Swiper', component: BasicStepSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-step-swiper'},
+                { text: 'Undoable Accordion Swiper', component: UndoableAccordionSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-undoable-accordion-swiper'},
+                { text: 'Undoable Step Swiper', component: UndoableStepSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-undoable-step-swiper'}
             ]},
             { text: 'Media', navIcon: 'x-fa fa-video-camera', children: [
                 { text: 'Video', navIcon: 'icon-video', component: VideoComponent },

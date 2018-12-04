@@ -204,6 +204,16 @@ import {DialogPopupComponent} from '../examples/Popups/Dialog/Dialog';
 import {MessagePopupComponent} from '../examples/Popups/Message/Message';
 import {ToastPopupComponent} from '../examples/Popups/Toast/Toast';
 
+import {BasicListComponent} from '../examples/Lists/Basic/BasicList';
+import {DisclosureListComponent} from '../examples/Lists/Disclosure/Disclosure';
+import {GroupedListComponent} from '../examples/Lists/Grouped/GroupedList';
+import {NestedListComponent} from '../examples/Lists/NestedList/NestedList';
+import {PagingListComponent} from '../examples/Lists/Paging/PagingList';
+import {BasicAccordionSwiperComponent} from '../examples/Lists/BasicAccordionSwiper/BasicAccordionSwiper';
+import {BasicStepSwiperComponent} from '../examples/Lists/BasicStepSwiper/BasicStepSwiper';
+import {UndoableAccordionSwiperComponent} from '../examples/Lists/UndoableAccordionSwiper/UndoableAccordionSwiper';
+import {UndoableStepSwiperComponent} from '../examples/Lists/UndoableStepSwiper/UndoableStepSwiper';
+
 import {CalendarService} from "../examples/Calendar/Calendar.service"
 import {GridService} from '../examples/Grid/Grid.service'
 import {BigDataService} from '../examples/Grid/AdvancedFeatures/BigData/BigData.service'
@@ -376,6 +386,17 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/popups/dialog', component: DialogPopupComponent, text: 'Dialog', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/popups/msg', component: MessagePopupComponent, text: 'Message', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/popups/toast', component: ToastPopupComponent, text: 'Toast', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	{ path: 'components/lists/basic_list', component: BasicListComponent, text: 'Basic List', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/disclosure', component: DisclosureListComponent, text: 'Disclosure', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/grouped', component: GroupedListComponent, text: 'Grouped', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/nestedlist', component: NestedListComponent, text: 'Nested List', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/pull_refresh', component: BasicListComponent, text: 'Pull refresh', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/paging', component: PagingListComponent, text: 'Paging', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/basic_accordion_swiper', component: BasicAccordionSwiperComponent, text: 'Basic Accordion Swiper', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/basic_step_swiper', component: BasicStepSwiperComponent, text: 'Basic Step Swiper', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/undoable_accordion_swiper', component: UndoableAccordionSwiperComponent, text: 'Basic Accordion Swiper', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/undoable_step_swiper', component: UndoableStepSwiperComponent, text: 'Basic Step Swiper', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
 	{ path: 'charts/gauges/basic_gauge', component: BasicGaugeChartComponent, text: 'Basic Gauge', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'charts/boxplot', component: BoxPlotComponent, text: 'Box Plot', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -637,6 +658,16 @@ export class App {
 		ResizableHandleComponent,
 		CollapsiblePanelComponent,
 
+		BasicListComponent,
+		DisclosureListComponent,
+		GroupedListComponent,
+		NestedListComponent,
+		PagingListComponent,
+		BasicAccordionSwiperComponent,
+		BasicStepSwiperComponent,
+		UndoableAccordionSwiperComponent,
+		UndoableStepSwiperComponent,
+
 	],
 	providers: [
 		AgencyService,
@@ -644,7 +675,7 @@ export class App {
 		GridService,
 		AppService,
 		ExtAngularService,
-		BigDataService
+		BigDataService,
 	],
 	entryComponents: [
 		SideBarComponent, 
