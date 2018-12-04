@@ -43,8 +43,6 @@ chart:any;
 chartNavReady = function(event) {
     console.log("chartNavReady");
     this.chart = event.ext;
-    this.panzoom = this.chart.getInteraction('panzoom');
-    this.crosshair = this.chart.getInteraction('crosshair');
 }
 
 toggleZoomOnPan = (zoomOnPan) => {
@@ -54,7 +52,6 @@ toggleZoomOnPan = (zoomOnPan) => {
 }
 
 onStackedToggle = event => {
-    //Added cmp to access component attributes in ext-react16 [revisit]
     console.log("onStackedToggle.");
     if(event.value ==  0) {
         this.stacked = 1;
