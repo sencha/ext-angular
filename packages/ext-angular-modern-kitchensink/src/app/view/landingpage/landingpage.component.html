@@ -45,4 +45,53 @@
     </container>
     <!-- examples ends-->
 
-</container>
+    <ng-template [ngIf]="files.length">
+      <button
+        #item
+        [iconCls]="'x-font-icon ' + (showCode ? 'md-icon-close' : 'md-icon-code')"
+        [ui]="'fab'"
+        [top]="isDesktop ? 20 : 35"
+        [right]="21"
+        [zIndex]="1000"
+        (tap)="toggleCode()"
+      ></button>
+      <panel
+        #item
+        [resizable]="{ edges: 'west', dynamic: true }"
+        [collapsed]="!showCode"
+        [docked]="'right'"
+        [header]="false"
+        [collapsible]="{ direction: 'right' }"
+        [shadow]="true"
+        [userSelectable]="true"
+        [width]="'33%'"
+      >
+        <tabpanel
+          #item
+          [height]="'100%'"
+          [shadow]="true"
+          [tabBar]="{
+            layout: {
+                pack: 'left'
+            }
+          }"
+        >
+          <ng-template ngFor let-file [ngForOf]="files">
+            <panel
+              #item
+              [scrollable]="true"
+              [title]="file.name"
+              [ui]="'code-panel'"
+              tab="{
+                  ui: 'app-code-tab',
+                  flex: 0,
+                  minWidth: 120
+              }"
+              [userSelectable]="true"
+              [html]="file.code"
+            ></panel>
+          </ng-template>
+        </tabpanel>
+      </panel>
+    </ng-template>
+  </container>
