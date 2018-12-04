@@ -198,6 +198,8 @@ import {BasicPanelComponent} from '../examples/Panels/Basic/Basic';
 import {BasicDatePanelComponent} from '../examples/Panels/BasicDate/BasicDate';
 import {AdvancedDatePanelComponent} from '../examples/Panels/AdvancedDate/AdvancedDate';
 import {TimePanelComponent} from '../examples/Panels/TimePanel/Time';
+import {CollapsiblePanelComponent} from '../examples/Panels/Collapsible/Collapsible';
+import {ResizableHandleComponent} from '../examples/Panels/Resizable/ResizableHandle';
 import {DialogPopupComponent} from '../examples/Popups/Dialog/Dialog';
 import {MessagePopupComponent} from '../examples/Popups/Message/Message';
 import {ToastPopupComponent} from '../examples/Popups/Toast/Toast';
@@ -365,8 +367,8 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/layouts/vbox', component: vboxLayoutComponent, text: 'vbox', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
 	{ path: 'components/panels/basic_panels', component: BasicPanelComponent, text: 'Basic Panels', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
-	{ path: 'components/panels/resizable_handle', component: BasicPanelComponent, text: 'Resizeable handle', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
-	{ path: 'components/panels/collapsible_panel', component: BasicPanelComponent, text: 'Collapsible Panel', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
+	{ path: 'components/panels/resizable_handle', component: ResizableHandleComponent, text: 'Resizeable handle', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
+	{ path: 'components/panels/collapsible_panel', component: CollapsiblePanelComponent, text: 'Collapsible Panel', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
 	{ path: 'components/panels/basic_date_panel', component: BasicDatePanelComponent, text: 'Basic Date Panel', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
 	{ path: 'components/panels/advanced_date_panel', component: AdvancedDatePanelComponent, text: 'Advanced Date Panel', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
 	{ path: 'components/panels/time_panel', component: TimePanelComponent, text: 'Time Panel', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
@@ -632,6 +634,8 @@ export class App {
 		MessagePopupComponent,
 		ToastPopupComponent,
 		TimePanelComponent,
+		ResizableHandleComponent,
+		CollapsiblePanelComponent,
 
 	],
 	providers: [

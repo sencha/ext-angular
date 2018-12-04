@@ -146,6 +146,8 @@ import {BasicPanelComponent} from './Panels/Basic/Basic';
 import {BasicDatePanelComponent} from './Panels/BasicDate/BasicDate';
 import {AdvancedDatePanelComponent} from './Panels/AdvancedDate/AdvancedDate';
 import {TimePanelComponent} from './Panels/TimePanel/Time';
+import {CollapsiblePanelComponent} from './Panels/Collapsible/Collapsible';
+import {ResizableHandleComponent} from './Panels/Resizable/ResizableHandle';
 import {DialogPopupComponent} from './Popups/Dialog/Dialog';
 import {MessagePopupComponent} from './Popups/Message/Message';
 import {ToastPopupComponent} from './Popups/Toast/Toast';
@@ -229,8 +231,8 @@ const treeRoot = {
             ] },
             { text: 'Panels', navIcon: 'icon-panels', children: [
                 { text: 'Basic Panels', component: BasicPanelComponent, layout: Ext.os.is.Phone ? 'auto': 'center', navIcon: 'icon-panels' },
-                { text: 'Resizable Handle', component: ButtonComponent, layout: 'fit', navIcon: 'icon-panel-handleresize', hidden: Ext.os.is.Phone },
-                { text: 'Collapsible Panel', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-panel-collapsible' },
+                { text: 'Resizable Handle', component: ResizableHandleComponent, layout: 'fit', navIcon: 'icon-panel-handleresize', hidden: Ext.os.is.Phone },
+                { text: 'Collapsible Panel', component: CollapsiblePanelComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-panel-collapsible' },
                 { text: 'Basic Date Panel', component: BasicDatePanelComponent, layout: 'center', navIcon: 'icon-panel-date' },
                 { text: 'Advanced Date Panel', component: AdvancedDatePanelComponent, layout: 'center', navIcon: 'icon-panel-date-adv', hidden: Ext.os.is.Phone },
                 { text: 'Time Panel', component: TimePanelComponent, layout: 'center', navIcon: 'icon-panel-time', hidden: Ext.os.is.Phone },
