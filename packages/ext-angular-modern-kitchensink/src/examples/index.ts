@@ -120,6 +120,17 @@ import {ThreeDStackedComponent} from './Charts/3DColumn/3DStacked/3DStacked';
 import {Basic3DColumnComponent} from './Charts/3DColumn/Basic3DColumn/Basic3DColumn';
 import {NegativeValuesComponent} from './Charts/3DColumn/NegativeValues/NegativeValues';
 
+import {CollapsibleComponent} from './PivotGrid/Collapsible/Collapsible'
+import {CompactLayoutComponent} from './PivotGrid/CompactLayout/CompactLayout'
+import {ConfiguratorPluginComponent} from './PivotGrid/ConfiguratorPlugin/ConfiguratorPlugin'
+import {DataChangesComponent} from './PivotGrid/DataChanges/DataChanges'
+import {DrilldownPluginComponent} from './PivotGrid/DrilldownPlugin/DrilldownPlugin'
+import {ExporterPluginComponent} from './PivotGrid/ExporterPlugin/ExporterPlugin'
+import {OutlineLayoutComponent} from './PivotGrid/OutlineLayout/OutlineLayout'
+import {PivotGridWidgetsComponent} from './PivotGrid/PivotGridWidgets/PivotGridWidgets'
+import {RangeEditorPluginComponent} from './PivotGrid/RangeEditorPlugin/RangeEditorPlugin'
+import {RowStylingComponent} from './PivotGrid/RowStyling/RowStyling'
+import {TabularLayoutComponent} from './PivotGrid/TabularLayout/TabularLayout'
 
 import { CarouselComponent } from 'src/examples/Carousel/Carousel';
 
@@ -361,16 +372,16 @@ const treeRoot = {
             ]}
         ] },
         { text: 'Pivot Grids', premium: true, navIcon: 'icon-pivot-grids', children: [
-            { text: 'Outline Layout', component: ButtonComponent, navIcon: 'icon-outline-pivot-grid' },
-            { text: 'Compact Layout', component: ButtonComponent, navIcon: 'icon-compact-pivot-grid' },
-            { text: 'Tabular Layout', component: ButtonComponent, navIcon: 'icon-tabular-pivot-grid' },
-            { text: 'Collapsible', component: ButtonComponent, navIcon: 'icon-collapsible-pivot-grid' },
-            { text: 'Data Changes', component: ButtonComponent, navIcon: 'icon-datachanges-pivot-grid' },
-            { text: 'Pivot Grid Widgets', component: ButtonComponent, navIcon: 'icon-widgets-pivot-grid' },
-            { text: 'Drilldown Plugin', component: ButtonComponent, navIcon: 'icon-drilldown-pivot-grid' },
-            { text: 'Configurator Plugin', component: ButtonComponent, navIcon: 'icon-configurable-pivot-grid' },
-            { text: 'Range Editor Plugin', component: ButtonComponent, navIcon: 'icon-rangeeditor-pivot-grid' },
-            { text: 'Exporter Plugin', component: ButtonComponent, navIcon: 'icon-exporter-pivot-grid' }
+            { text: 'Outline Layout', component: OutlineLayoutComponent, navIcon: 'icon-outline-pivot-grid' },
+            { text: 'Compact Layout', component: CompactLayoutComponent, navIcon: 'icon-compact-pivot-grid' },
+            { text: 'Tabular Layout', component: TabularLayoutComponent, navIcon: 'icon-tabular-pivot-grid' },
+            { text: 'Collapsible', component: CollapsibleComponent, navIcon: 'icon-collapsible-pivot-grid' },
+            { text: 'Data Changes', component: DataChangesComponent, navIcon: 'icon-datachanges-pivot-grid' },
+            { text: 'Pivot Grid Widgets', component: PivotGridWidgetsComponent, navIcon: 'icon-widgets-pivot-grid' },
+            { text: 'Drilldown Plugin', component: DrilldownPluginComponent, navIcon: 'icon-drilldown-pivot-grid' },
+            { text: 'Configurator Plugin', component: ConfiguratorPluginComponent, navIcon: 'icon-configurable-pivot-grid' },
+            { text: 'Range Editor Plugin', component: RangeEditorPluginComponent, navIcon: 'icon-rangeeditor-pivot-grid' },
+            { text: 'Exporter Plugin', component: ExporterPluginComponent, navIcon: 'icon-exporter-pivot-grid' }
         ]},
 
     ]

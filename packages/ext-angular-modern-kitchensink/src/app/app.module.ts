@@ -173,6 +173,19 @@ import {ThreeDStackedComponent} from '../examples/Charts/3DColumn/3DStacked/3DSt
 import {Basic3DColumnComponent} from '../examples/Charts/3DColumn/Basic3DColumn/Basic3DColumn';
 import {NegativeValuesComponent} from '../examples/Charts/3DColumn/NegativeValues/NegativeValues';
 
+
+import {CollapsibleComponent} from '../examples/PivotGrid/Collapsible/Collapsible'
+import {CompactLayoutComponent} from '../examples/PivotGrid/CompactLayout/CompactLayout'
+import {ConfiguratorPluginComponent} from '../examples/PivotGrid/ConfiguratorPlugin/ConfiguratorPlugin'
+import {DataChangesComponent} from '../examples/PivotGrid/DataChanges/DataChanges'
+import {DrilldownPluginComponent} from '../examples/PivotGrid/DrilldownPlugin/DrilldownPlugin'
+import {ExporterPluginComponent} from '../examples/PivotGrid/ExporterPlugin/ExporterPlugin'
+import {OutlineLayoutComponent} from '../examples/PivotGrid/OutlineLayout/OutlineLayout'
+import {PivotGridWidgetsComponent} from '../examples/PivotGrid/PivotGridWidgets/PivotGridWidgets'
+import {RangeEditorPluginComponent} from '../examples/PivotGrid/RangeEditorPlugin/RangeEditorPlugin'
+import {RowStylingComponent} from '../examples/PivotGrid/RowStyling/RowStyling'
+import {TabularLayoutComponent} from '../examples/PivotGrid/TabularLayout/TabularLayout'
+
 import {SimpleDragDropComponent} from "../examples/DragAndDrop/Simple/Simple";
 import {ConstraintsDragDropComponent} from '../examples/DragAndDrop/Constraints/Constraints';
 import {ProxiesDragDropComponent} from '../examples/DragAndDrop/Proxies/Proxies';
@@ -397,6 +410,18 @@ const routes: ExtAngularRoutes = [
 	{ path: 'charts/3d_column/negative_values', component: NegativeValuesComponent, text: 'Ngeative values', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'charts/3d_column/3d_column_with_renderer', component: ThreeDColumnWithRendererComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
+	{ path: 'pivot_grids/outline_layout', component: OutlineLayoutComponent, text: 'Outline layout component', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'pivot_grids/compact_layout', component: CompactLayoutComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'pivot_grids/tabular_layout', component: TabularLayoutComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'pivot_grids/collapsible', component: CollapsibleComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'pivot_grids/data_changes', component: DataChangesComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'pivot_grids/pivot_grid_widgets', component: PivotGridWidgetsComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'pivot_grids/drilldown_plugin', component: DrilldownPluginComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'pivot_grids/configurator_plugin', component: ConfiguratorPluginComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'pivot_grids/range_editor_plugin', component: RangeEditorPluginComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'pivot_grids/exporter_plugin', component: ExporterPluginComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true }
+
+
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
@@ -563,6 +588,18 @@ export class App {
 		ThreeDStackedComponent,
 		Basic3DColumnComponent,
 		NegativeValuesComponent,
+
+		CollapsibleComponent,
+		CompactLayoutComponent,
+		ConfiguratorPluginComponent,
+		DataChangesComponent,
+		DrilldownPluginComponent,
+		ExporterPluginComponent,
+		OutlineLayoutComponent,
+		PivotGridWidgetsComponent,
+		RangeEditorPluginComponent,
+		RowStylingComponent,
+		TabularLayoutComponent,
 
 		SimpleDragDropComponent,
 		ConstraintsDragDropComponent,
