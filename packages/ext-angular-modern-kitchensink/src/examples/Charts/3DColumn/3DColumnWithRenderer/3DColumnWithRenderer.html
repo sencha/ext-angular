@@ -1,0 +1,20 @@
+    <container #item [padding]="!isPhone?  '10': ''" layout="vbox"
+    [height]="'600px'">
+        <chart-toolbar #item    
+            maxHeight="50" [downloadChartRef]="this.chart"></chart-toolbar>
+    <cartesian #item 
+            shadow="true"
+            flex="2"
+            (ready)="chartNavReady($event)"
+            [store]="this.store"
+            theme="muted"
+            [interactions]="{
+                type: 'panzoom',
+                zoomOnPanGesture: true
+            }"
+            insetPadding="10 20 0 10"
+            innerPadding="0 4 0 3"
+            [axes]="cartesianAxes"
+            [series]="cartesianSeries"
+        ></cartesian>
+</container>

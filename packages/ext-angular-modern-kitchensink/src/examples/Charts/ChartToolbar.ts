@@ -55,6 +55,7 @@ export class ChartToolbarComponent implements OnInit {
     }
 
     downloadChart = (chart) => {
+        console.log("In downloadChart. chart:  " + chart);
         if (Ext.is.Desktop) {
             chart.download({ filename: 'Chart' });
         } else {
@@ -76,6 +77,7 @@ export class ChartToolbarComponent implements OnInit {
         console.log("supportsTouch : " + this.supportsTouch);
         console.log("show : " + this.show);
         console.log("onStackGroup : " + this.onStackGroup);
+        console.log("downloadChartRef : " + this.downloadChartRef);
         if(this.onToggleZoomOnPan) {
             console.log("this.onToggleZoomOnPan true: " + this.onToggleZoomOnPan);
         }

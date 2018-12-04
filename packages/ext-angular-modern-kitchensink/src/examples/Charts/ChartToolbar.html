@@ -18,7 +18,7 @@
             ui="action"
             iconCls="x-fa fa-eye" 
             text="Preview" 
-            [handler]="downloadChart.bind(null, downloadChartRef ? downloadChartRef.cmp : '')"
+            [handler]="downloadChart.bind(null, downloadChartRef ? downloadChartRef : '')"
             [platformConfig]="{
                 desktop: {
                     text: 'DOWNLOAD',

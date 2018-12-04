@@ -1,0 +1,21 @@
+<container #item [padding]="!isPhone?  '10': ''" layout="fit"
+[height]="'600px'">
+    <chart-toolbar #item 
+        [onThemeChange]="this.changeTheme"
+        [onStackGroup]="this.onStackedToggle"
+        [theme]="theme"
+    ></chart-toolbar>
+    <cartesian #item
+        shadow="true"
+        ref="chart"
+        [store]="this.store"
+        [theme]="theme"
+        (ready)="chartNavReady($event)"
+        interactions="itemhighlight"
+        insetPadding="40 20 10 10"
+        [legend]="{ type: 'sprite' }"
+        [axes]="cartesianAxes"
+        [series]="cartesianSeries"
+        [captions]="cartesianCaptions"
+    ></cartesian>
+</container>
