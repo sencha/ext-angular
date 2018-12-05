@@ -158,8 +158,17 @@ import {NestedListComponent} from './Lists/NestedList/NestedList';
 import {PagingListComponent} from './Lists/Paging/PagingList';
 import {BasicAccordionSwiperComponent} from './Lists/BasicAccordionSwiper/BasicAccordionSwiper';
 import {BasicStepSwiperComponent} from './Lists/BasicStepSwiper/BasicStepSwiper';
-import {UndoableAccordionSwiperComponent} from '../examples/Lists/UndoableAccordionSwiper/UndoableAccordionSwiper';
-import {UndoableStepSwiperComponent} from '../examples/Lists/UndoableStepSwiper/UndoableStepSwiper';
+import {UndoableAccordionSwiperComponent} from './Lists/UndoableAccordionSwiper/UndoableAccordionSwiper';
+import {UndoableStepSwiperComponent} from './Lists/UndoableStepSwiper/UndoableStepSwiper';
+
+import {TouchEventsComponent} from './TouchEvents/TouchEvents';
+import {BasicTabComponent} from './Tabs/BasicTab/BasicTab';
+import {BottomTabComponent} from './Tabs/BottomTab/BottomTab';
+import {IconTabComponent} from './Tabs/IconTab/IconTab';
+import {DesktopTabComponent} from './Tabs/DesktopTab/DesktopTab';
+import {CloseableTabComponent} from './Tabs/Closeable/Closeable';
+import {ScrollingTabComponent} from './Tabs/Scrolling/Scrolling';
+import {TabBarComponent} from './Tabs/TabBar/TabBar';
 
 declare var Ext: any;
 
@@ -254,18 +263,18 @@ const treeRoot = {
             { text: 'Ripple', component: RippleComponent, layout: 'center', navIcon: 'icon-Ripple' },
             { text: 'Sheet', component: SheetComponent, layout: 'center', navIcon: 'icon-actionsheets' },
             { text: 'Tabs', navIcon: 'icon-tabs', children: [
-                { text: 'Basic Tabs', component: ButtonComponent, navIcon: 'icon-basic-tabs' },
-                { text: 'Bottom Tabs', component: ButtonComponent, navIcon: 'icon-bottom-tabs' },
-                { text: 'Icon Tabs', component: ButtonComponent, navIcon: 'icon-icon-tabs' },
-                { text: 'Desktop Tabs', component: ButtonComponent, navIcon: 'icon-Desktop-Tabs' },
-                { text: 'Closable', component: ButtonComponent, navIcon: 'icon-Closable-Tabs' },
-                { text: 'ScrollingTabs', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Scrolling-Tabs' },
-                { text: 'TabBar', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Tab-Bar' }        
+                { text: 'Basic Tabs', component: BasicTabComponent, navIcon: 'icon-basic-tabs' },
+                { text: 'Bottom Tabs', component: BottomTabComponent, navIcon: 'icon-bottom-tabs' },
+                { text: 'Icon Tabs', component: IconTabComponent, navIcon: 'icon-icon-tabs' },
+                { text: 'Desktop Tabs', component: DesktopTabComponent, navIcon: 'icon-Desktop-Tabs' },
+                { text: 'Closable', component: CloseableTabComponent, navIcon: 'icon-Closable-Tabs' },
+                { text: 'ScrollingTabs', component: ScrollingTabComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Scrolling-Tabs' },
+                { text: 'TabBar', component: TabBarComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Tab-Bar' }        
             ]},
             { text: 'TitleBar', component: TitleBarComponent, navIcon: 'icon-Title-Bar' },
             { text: 'Toolbar', component: ToolBarComponent, navIcon: 'icon-toolbar' },
             { text: 'ToolTip', component: ToolTipComponent, layout: 'center', navIcon: 'icon-tooltips'  },
-            { text: 'Touch Events', component: ButtonComponent, navIcon: 'icon-touch-events' },
+            { text: 'Touch Events', component: TouchEventsComponent, navIcon: 'icon-touch-events' },
             //{ text: 'Transition', component: Transition, navIcon: 'icon-Transition' },
             { text: 'Wizard', component: ButtonComponent, navIcon: 'icon-layout-card-indicator', layout: Ext.os.is.Phone ? 'fit': 'center' },
         ]},
