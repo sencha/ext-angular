@@ -142,6 +142,24 @@ import {GroupsDragDropComponent} from './DragAndDrop/Groups/Groups';
 import {FilesDragDropComponent} from './DragAndDrop/Files/Files';
 import {DataDragDropComponent} from './DragAndDrop/Data/Data';
 
+import {BasicPanelComponent} from './Panels/Basic/Basic';
+import {BasicDatePanelComponent} from './Panels/BasicDate/BasicDate';
+import {AdvancedDatePanelComponent} from './Panels/AdvancedDate/AdvancedDate';
+import {TimePanelComponent} from './Panels/TimePanel/Time';
+import {CollapsiblePanelComponent} from './Panels/Collapsible/Collapsible';
+import {ResizableHandleComponent} from './Panels/Resizable/ResizableHandle';
+import {DialogPopupComponent} from './Popups/Dialog/Dialog';
+import {MessagePopupComponent} from './Popups/Message/Message';
+import {ToastPopupComponent} from './Popups/Toast/Toast';
+import {BasicListComponent} from './Lists/Basic/BasicList';
+import {DisclosureListComponent} from './Lists/Disclosure/Disclosure';
+import {GroupedListComponent} from './Lists/Grouped/GroupedList';
+import {NestedListComponent} from './Lists/NestedList/NestedList';
+import {PagingListComponent} from './Lists/Paging/PagingList';
+import {BasicAccordionSwiperComponent} from './Lists/BasicAccordionSwiper/BasicAccordionSwiper';
+import {BasicStepSwiperComponent} from './Lists/BasicStepSwiper/BasicStepSwiper';
+import {UndoableAccordionSwiperComponent} from '../examples/Lists/UndoableAccordionSwiper/UndoableAccordionSwiper';
+import {UndoableStepSwiperComponent} from '../examples/Lists/UndoableStepSwiper/UndoableStepSwiper';
 
 declare var Ext: any;
 
@@ -204,33 +222,33 @@ const treeRoot = {
                 { text: 'vbox', component: vboxLayoutComponent, layout: 'auto', navIcon: 'icon-layout-vertical-box' }
             ]},
             { text: 'Lists', navIcon: 'icon-lists', children: [
-                { text: 'Basic List', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-list' },
-                { text: 'Disclosure', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-disclosure-list' },
-                { text: 'Grouped', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-grouped-list' },
-                { text: 'NestedList', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-nested-list' },
+                { text: 'Basic List', component: BasicListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-list' },
+                { text: 'Disclosure', component: DisclosureListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-disclosure-list' },
+                { text: 'Grouped', component: GroupedListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-grouped-list' },
+                { text: 'NestedList', component: NestedListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-nested-list' },
                 { text: 'Pull Refresh', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-pullrefresh-list' },
-                { text: 'Paging', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-listpaging-list' },
-                { text: 'Basic Accordion Swiper', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-accordion-swiper'},
-                { text: 'Basic Step Swiper', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-step-swiper'},
-                { text: 'Undoable Accordion Swiper', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-undoable-accordion-swiper'},
-                { text: 'Undoable Step Swiper', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-undoable-step-swiper'}
+                { text: 'Paging', component: PagingListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-listpaging-list' },
+                { text: 'Basic Accordion Swiper', component: BasicAccordionSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-accordion-swiper'},
+                { text: 'Basic Step Swiper', component: BasicStepSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-step-swiper'},
+                { text: 'Undoable Accordion Swiper', component: UndoableAccordionSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-undoable-accordion-swiper'},
+                { text: 'Undoable Step Swiper', component: UndoableStepSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-undoable-step-swiper'}
             ]},
             { text: 'Media', navIcon: 'x-fa fa-video-camera', children: [
                 { text: 'Video', navIcon: 'icon-video', component: VideoComponent },
                 { text: 'Audio', navIcon: 'icon-audio', component: AudioComponent }
             ] },
             { text: 'Panels', navIcon: 'icon-panels', children: [
-                { text: 'Basic Panels', component: ButtonComponent, layout: Ext.os.is.Phone ? 'auto': 'center', navIcon: 'icon-panels' },
-                { text: 'Resizable Handle', component: ButtonComponent, layout: 'fit', navIcon: 'icon-panel-handleresize', hidden: Ext.os.is.Phone },
-                { text: 'Collapsible Panel', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-panel-collapsible' },
-                { text: 'Basic Date Panel', component: ButtonComponent, layout: 'center', navIcon: 'icon-panel-date' },
-                { text: 'Advanced Date Panel', component: ButtonComponent, layout: 'center', navIcon: 'icon-panel-date-adv', hidden: Ext.os.is.Phone },
-                { text: 'Time Panel', component: ButtonComponent, layout: 'center', navIcon: 'icon-panel-time', hidden: Ext.os.is.Phone },
+                { text: 'Basic Panels', component: BasicPanelComponent, layout: Ext.os.is.Phone ? 'auto': 'center', navIcon: 'icon-panels' },
+                { text: 'Resizable Handle', component: ResizableHandleComponent, layout: 'fit', navIcon: 'icon-panel-handleresize', hidden: Ext.os.is.Phone },
+                { text: 'Collapsible Panel', component: CollapsiblePanelComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-panel-collapsible' },
+                { text: 'Basic Date Panel', component: BasicDatePanelComponent, layout: 'center', navIcon: 'icon-panel-date' },
+                { text: 'Advanced Date Panel', component: AdvancedDatePanelComponent, layout: 'center', navIcon: 'icon-panel-date-adv', hidden: Ext.os.is.Phone },
+                { text: 'Time Panel', component: TimePanelComponent, layout: 'center', navIcon: 'icon-panel-time', hidden: Ext.os.is.Phone },
             ]},
             { text: 'Popups', navIcon: 'icon-windows', children: [
-                { text: 'Dialog', component: ButtonComponent, layout: 'center', navIcon: 'icon-basic-dialog' },
-                { text: 'Msg', component: ButtonComponent, layout: 'center', navIcon: 'icon-overlays' },
-                { text: 'Toast', component: ButtonComponent, layout: 'center', navIcon: 'icon-toast-view' }
+                { text: 'Dialog', component: DialogPopupComponent, layout: 'center', navIcon: 'icon-basic-dialog' },
+                { text: 'Msg', component: MessagePopupComponent, layout: 'center', navIcon: 'icon-overlays' },
+                { text: 'Toast', component: ToastPopupComponent, layout: 'center', navIcon: 'icon-toast-view' }
             ]},
             { text: 'ProgressBar', component: ProgressBarComponent, layout: 'center', navIcon: 'icon-progress-decorated' },
             { text: 'Ripple', component: RippleComponent, layout: 'center', navIcon: 'icon-Ripple' },

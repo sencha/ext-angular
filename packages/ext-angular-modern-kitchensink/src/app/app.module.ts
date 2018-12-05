@@ -194,7 +194,25 @@ import {GroupsDragDropComponent} from '../examples/DragAndDrop/Groups/Groups';
 import {FilesDragDropComponent} from '../examples/DragAndDrop/Files/Files';
 import {DataDragDropComponent} from '../examples/DragAndDrop/Data/Data';
 
+import {BasicPanelComponent} from '../examples/Panels/Basic/Basic';
+import {BasicDatePanelComponent} from '../examples/Panels/BasicDate/BasicDate';
+import {AdvancedDatePanelComponent} from '../examples/Panels/AdvancedDate/AdvancedDate';
+import {TimePanelComponent} from '../examples/Panels/TimePanel/Time';
+import {CollapsiblePanelComponent} from '../examples/Panels/Collapsible/Collapsible';
+import {ResizableHandleComponent} from '../examples/Panels/Resizable/ResizableHandle';
+import {DialogPopupComponent} from '../examples/Popups/Dialog/Dialog';
+import {MessagePopupComponent} from '../examples/Popups/Message/Message';
+import {ToastPopupComponent} from '../examples/Popups/Toast/Toast';
 
+import {BasicListComponent} from '../examples/Lists/Basic/BasicList';
+import {DisclosureListComponent} from '../examples/Lists/Disclosure/Disclosure';
+import {GroupedListComponent} from '../examples/Lists/Grouped/GroupedList';
+import {NestedListComponent} from '../examples/Lists/NestedList/NestedList';
+import {PagingListComponent} from '../examples/Lists/Paging/PagingList';
+import {BasicAccordionSwiperComponent} from '../examples/Lists/BasicAccordionSwiper/BasicAccordionSwiper';
+import {BasicStepSwiperComponent} from '../examples/Lists/BasicStepSwiper/BasicStepSwiper';
+import {UndoableAccordionSwiperComponent} from '../examples/Lists/UndoableAccordionSwiper/UndoableAccordionSwiper';
+import {UndoableStepSwiperComponent} from '../examples/Lists/UndoableStepSwiper/UndoableStepSwiper';
 
 import {CalendarService} from "../examples/Calendar/Calendar.service"
 import {GridService} from '../examples/Grid/Grid.service'
@@ -245,7 +263,6 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/popups', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/tabs', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	
-	
 	{ path: 'grids', component: DummyComponent, text: 'Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/core_features', component: DummyComponent, text: 'Grids Core Features', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/addons', component: DummyComponent, text: 'Grids Addons', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -270,7 +287,7 @@ const routes: ExtAngularRoutes = [
 	
 	{ path: 'd3', component: DummyComponent, text: 'D3', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'pivot_grids', component: DummyComponent, text: 'Pivot Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-
+	
 	//example components
 	{ path: 'components/buttons/button', component: ButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/buttons/splitbutton', component: SplitButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -358,6 +375,28 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/layouts/form', component: FormLayoutComponent, text: 'form', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/layouts/resizable', component: ResizableLayoutComponent, text: 'resizable', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/layouts/vbox', component: vboxLayoutComponent, text: 'vbox', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	{ path: 'components/panels/basic_panels', component: BasicPanelComponent, text: 'Basic Panels', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
+	{ path: 'components/panels/resizable_handle', component: ResizableHandleComponent, text: 'Resizeable handle', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
+	{ path: 'components/panels/collapsible_panel', component: CollapsiblePanelComponent, text: 'Collapsible Panel', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
+	{ path: 'components/panels/basic_date_panel', component: BasicDatePanelComponent, text: 'Basic Date Panel', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
+	{ path: 'components/panels/advanced_date_panel', component: AdvancedDatePanelComponent, text: 'Advanced Date Panel', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
+	{ path: 'components/panels/time_panel', component: TimePanelComponent, text: 'Time Panel', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
+
+	{ path: 'components/popups/dialog', component: DialogPopupComponent, text: 'Dialog', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/popups/msg', component: MessagePopupComponent, text: 'Message', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/popups/toast', component: ToastPopupComponent, text: 'Toast', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	{ path: 'components/lists/basic_list', component: BasicListComponent, text: 'Basic List', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/disclosure', component: DisclosureListComponent, text: 'Disclosure', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/grouped', component: GroupedListComponent, text: 'Grouped', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/nestedlist', component: NestedListComponent, text: 'Nested List', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/pull_refresh', component: BasicListComponent, text: 'Pull refresh', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/paging', component: PagingListComponent, text: 'Paging', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/basic_accordion_swiper', component: BasicAccordionSwiperComponent, text: 'Basic Accordion Swiper', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/basic_step_swiper', component: BasicStepSwiperComponent, text: 'Basic Step Swiper', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/undoable_accordion_swiper', component: UndoableAccordionSwiperComponent, text: 'Basic Accordion Swiper', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/undoable_step_swiper', component: UndoableStepSwiperComponent, text: 'Basic Step Swiper', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
 	{ path: 'charts/gauges/basic_gauge', component: BasicGaugeChartComponent, text: 'Basic Gauge', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'charts/boxplot', component: BoxPlotComponent, text: 'Box Plot', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -609,6 +648,26 @@ export class App {
 		FilesDragDropComponent,
 		DataDragDropComponent,
 
+		BasicPanelComponent,
+		BasicDatePanelComponent,
+		AdvancedDatePanelComponent,
+		DialogPopupComponent,
+		MessagePopupComponent,
+		ToastPopupComponent,
+		TimePanelComponent,
+		ResizableHandleComponent,
+		CollapsiblePanelComponent,
+
+		BasicListComponent,
+		DisclosureListComponent,
+		GroupedListComponent,
+		NestedListComponent,
+		PagingListComponent,
+		BasicAccordionSwiperComponent,
+		BasicStepSwiperComponent,
+		UndoableAccordionSwiperComponent,
+		UndoableStepSwiperComponent,
+
 	],
 	providers: [
 		AgencyService,
@@ -616,7 +675,7 @@ export class App {
 		GridService,
 		AppService,
 		ExtAngularService,
-		BigDataService
+		BigDataService,
 	],
 	entryComponents: [
 		SideBarComponent, 
