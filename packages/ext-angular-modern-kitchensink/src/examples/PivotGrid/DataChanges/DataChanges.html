@@ -1,0 +1,61 @@
+<container #item layout="fit" padding="10" [height]="'600px'">
+    <pivotgrid #item
+      [shadow]="true"
+      [matrix]="{
+        type: 'local',
+        store: this.store,
+        aggregate: [
+          {
+            dataIndex: 'value',
+            header: 'Total',
+            aggregator: 'sum'
+          }, 
+          {
+            dataIndex: 'value',
+            header: 'Count',
+            aggregator: 'count'
+          }
+        ],
+        leftAxis: [
+          {
+            dataIndex: 'year',
+            header: 'Year'
+          }, 
+          {
+            dataIndex: 'person',
+            header: 'Person'
+          }
+        ],
+        topAxis: [
+          {
+            dataIndex: 'country',
+            header: 'Country'
+          }
+        ]
+      }"
+    ></pivotgrid>
+    <toolbar #item
+        shadow="false"
+        docked="top"
+        ui="app-transparent-toolbar"
+        padding="5 8"
+        [layout]="{
+          type: 'hbox',
+          align: 'stretch'
+        }"
+        [defaults]="{
+          margin: '0 10 0 0',
+          shadow: true,
+          ui: 'action'
+        }"
+    >
+      <button #item text="Change data">
+        <menu #item>
+          <menuitem #item text="Add" iconCls="x-fa fa-plus" [handler]="this.addData"></menuitem>
+          <menuitem #item text="Update" iconCls="x-fa fa-edit" [handler]="this.updateData"></menuitem>
+          <menuitem #item text="Remove" iconCls="x-fa fa-minus" [handler]="this.removeData"></menuitem>
+          <menuitem #item text="Clear all" iconCls="x-fa fa-trash" [handler]="this.clearData"></menuitem>
+        </menu>
+      </button>
+    </toolbar>
+  </container>

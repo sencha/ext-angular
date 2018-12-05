@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { generateData, randomDate } from '../generateSaleData';
+import { model } from '../SaleModel';
 
 declare var Ext: any;
 
