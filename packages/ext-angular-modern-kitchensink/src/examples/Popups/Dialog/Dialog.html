@@ -1,0 +1,20 @@
+<container #item>
+    <button #item [text]="'Show dialog'" (tap)="showDialog()" [ui]="'action raised'"></button>
+    <dialog #item 
+        [displayed]="isDialogShowing"
+        [title]="'Dialog'"
+        [closable]="true"
+        [maximizable]="true"
+        [closeAction]="'hide'"
+        [maskTapHandler]="onCancel"
+        [bodyPadding]="20"
+        [maxWidth]="200"
+        [defaultFocus]="'#ok'"
+        (onHide)="onHide()"
+        [html] = "'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore 
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'"
+    >
+        <button #item [text]="'Cancel'" (tap)="onCancel()"></button>
+        <button #item [id]="'ok'" [text]="'OK'" (ready)="onOkButtonReady($event)" (tap)="onOk()"></button>
+    </dialog>
+</container>

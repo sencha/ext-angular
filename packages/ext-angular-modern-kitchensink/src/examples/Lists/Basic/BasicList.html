@@ -1,0 +1,9 @@
+<list #item
+    [shadow]="true"
+    [itemTpl]="tpl"
+    [store]="store"
+    (select)="onSelect($event)"
+    [platformConfig]="{
+        '!phone': {height: 450, width: 300}
+    }"
+></list>
