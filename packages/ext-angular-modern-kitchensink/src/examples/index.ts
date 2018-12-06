@@ -115,6 +115,9 @@ import {PivotHeatmapComponent} from './D3/HeatMap/PivotHeatmap/PivotHeatmap';
 import {PurchasesByDayComponent} from './D3/HeatMap/PurchasesByDay/PurchasesByDay';
 import {SalesPerEmployeeComponent} from './D3/HeatMap/SalesPerEmployee/SalesPerEmployee';
 
+import {OrgChartComponent} from './D3/Hierarchy/OrgChart/OrgChart';
+import {PackComponent} from './D3/Hierarchy/Pack/Pack';
+
 
 import {BasicColumnComponent} from './Charts/Column/BasicColumn/BasicColumn';
 import {ColumnWithRendererComponent} from './Charts/Column/ColumnWithRenderer/ColumnWithRenderer';
@@ -396,8 +399,8 @@ const treeRoot = {
                 { text: 'Configurable Pivot Heatmap', component: ConfigurablePivotHeatmapComponent, navIcon: 'icon-d3-view-heatmap-pivot-configurator' }
             ]},
             { text: 'Hierarchy', navIcon: 'icon-d3-hierarchy', children: [
-                { text: 'Org Chart', component: ButtonComponent, navIcon: 'icon-d3-view-sencha-tree' },
-                { text: 'Pack', component: ButtonComponent, navIcon: 'icon-d3-view-pack' },
+                { text: 'Org Chart', component: OrgChartComponent, navIcon: 'icon-d3-view-sencha-tree' },
+                { text: 'Pack', component: PackComponent, navIcon: 'icon-d3-view-pack' },
                 { text: 'Sunburst', component: ButtonComponent, navIcon: 'icon-d3-view-sunburst' },
                 { text: 'Zoomable Sunburst', component: ButtonComponent, navIcon: 'icon-d3-view-sunburst-zoom' },
                 { text: 'Tree', component: ButtonComponent, navIcon: 'icon-d3-view-tree' },

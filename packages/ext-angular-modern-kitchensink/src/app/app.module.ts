@@ -234,6 +234,9 @@ import {PurchasesByDayComponent} from '../examples/D3/HeatMap/PurchasesByDay/Pur
 import {SalesPerEmployeeComponent} from '../examples/D3/HeatMap/SalesPerEmployee/SalesPerEmployee';
 
 
+import {OrgChartComponent} from '../examples/D3/Hierarchy/OrgChart/OrgChart';
+import {PackComponent} from '../examples/D3/Hierarchy/Pack/Pack';
+
 interface ExtAngularRoute extends Route {
   text?: string;
   iconCls?: string;
@@ -490,7 +493,11 @@ const routes: ExtAngularRoutes = [
 	{ path: 'd3/heatmap/purchases_by_day', component: PurchasesByDayComponent, text: 'Purchase by day component', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'd3/heatmap/sales_per_employee', component: SalesPerEmployeeComponent, text: 'Sales per employee', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'd3/heatmap/pivot_heatmap', component: PivotHeatmapComponent, text: 'Pivot heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'd3/heatmap/configurable_pivot_heatmap', component: ConfigurablePivotHeatmapComponent, text: 'Configurable Pivot heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true }
+	{ path: 'd3/heatmap/configurable_pivot_heatmap', component: ConfigurablePivotHeatmapComponent, text: 'Configurable Pivot heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	{ path: 'd3/hierarchy/org_chart', component: OrgChartComponent, text: 'Configurable Pivot heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/hierarchy/pack', component: PackComponent, text: 'Configurable Pivot heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
 
 
 ];
@@ -713,8 +720,10 @@ export class App {
 		ConfigurablePivotHeatmapComponent,
 		PivotHeatmapComponent,
 		PurchasesByDayComponent,
-		SalesPerEmployeeComponent
+		SalesPerEmployeeComponent,
 
+		OrgChartComponent,
+		PackComponent,
 
 	],
 	providers: [
