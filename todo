@@ -20,6 +20,7 @@ ExtAngular
   - [Aniket/Marc] Tree widgets not loading with error ERROR Error: [Ext.create] Unrecognized class name / alias: widget.tree [revisit - Marc & Aniket]
   - [Aniket] DragResizeValidation calendar example does not restrict dragging and resizing [Issue - working in react but not in angular, use extjs format]
   - [Aniket] widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components] [Visit RendererCell like in react/ Need a simple example in extjs]
+  - onBeforeMoveConfigField and onShowConfigFieldSettings not present in pivot d3 container.
 
 Marc
   - [Marc] For each component i have to explicitly set the width and height! I think this would break on different systems. - still true??

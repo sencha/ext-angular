@@ -228,6 +228,11 @@ import {CalendarService} from "../examples/Calendar/Calendar.service"
 import {GridService} from '../examples/Grid/Grid.service'
 import {BigDataService} from '../examples/Grid/AdvancedFeatures/BigData/BigData.service'
 
+import {ConfigurablePivotHeatmapComponent} from '../examples/D3/HeatMap/ConfigurablePivotHeatmap/ConfigurablePivotHeatmap';
+import {PivotHeatmapComponent} from '../examples/D3/HeatMap/PivotHeatmap/PivotHeatmap';
+import {PurchasesByDayComponent} from '../examples/D3/HeatMap/PurchasesByDay/PurchasesByDay';
+import {SalesPerEmployeeComponent} from '../examples/D3/HeatMap/SalesPerEmployee/SalesPerEmployee';
+
 
 interface ExtAngularRoute extends Route {
   text?: string;
@@ -298,6 +303,8 @@ const routes: ExtAngularRoutes = [
 	{ path: 'charts/scatter', component: DummyComponent, text: 'Scatter', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	
 	{ path: 'd3', component: DummyComponent, text: 'D3', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/heatmap', component: DummyComponent, text: 'D3 Heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/hierarchy', component: DummyComponent, text: 'D3 Hierarchy', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'pivot_grids', component: DummyComponent, text: 'Pivot Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	
 	//example components
@@ -478,7 +485,12 @@ const routes: ExtAngularRoutes = [
 	{ path: 'pivot_grids/drilldown_plugin', component: DrilldownPluginComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'pivot_grids/configurator_plugin', component: ConfiguratorPluginComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'pivot_grids/range_editor_plugin', component: RangeEditorPluginComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'pivot_grids/exporter_plugin', component: ExporterPluginComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true }
+	{ path: 'pivot_grids/exporter_plugin', component: ExporterPluginComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	{ path: 'd3/heatmap/purchases_by_day', component: PurchasesByDayComponent, text: 'Purchase by day component', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/heatmap/sales_per_employee', component: SalesPerEmployeeComponent, text: 'Sales per employee', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/heatmap/pivot_heatmap', component: PivotHeatmapComponent, text: 'Pivot heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/heatmap/configurable_pivot_heatmap', component: ConfigurablePivotHeatmapComponent, text: 'Configurable Pivot heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true }
 
 
 ];
@@ -697,6 +709,12 @@ export class App {
 		// ScrollingTabComponent,
 		TabBarComponent,
 		WizardComponent,
+
+		ConfigurablePivotHeatmapComponent,
+		PivotHeatmapComponent,
+		PurchasesByDayComponent,
+		SalesPerEmployeeComponent
+
 
 	],
 	providers: [

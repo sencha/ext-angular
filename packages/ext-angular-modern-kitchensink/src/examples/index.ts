@@ -110,6 +110,12 @@ import {StackedBarComponent} from './Charts/Bar/StackedBar/StackedBar';
 import {CandlestickComponent} from './Charts/Financial/Candlestick/Candlestick';
 import {OHLCComponent} from './Charts/Financial/OHLC/OHLC';
 
+import {ConfigurablePivotHeatmapComponent} from './D3/HeatMap/ConfigurablePivotHeatmap/ConfigurablePivotHeatmap';
+import {PivotHeatmapComponent} from './D3/HeatMap/PivotHeatmap/PivotHeatmap';
+import {PurchasesByDayComponent} from './D3/HeatMap/PurchasesByDay/PurchasesByDay';
+import {SalesPerEmployeeComponent} from './D3/HeatMap/SalesPerEmployee/SalesPerEmployee';
+
+
 import {BasicColumnComponent} from './Charts/Column/BasicColumn/BasicColumn';
 import {ColumnWithRendererComponent} from './Charts/Column/ColumnWithRenderer/ColumnWithRenderer';
 import {MultiaxisColumnComponent} from './Charts/Column/MultiaxisColumn/MultiaxisColumn';
@@ -384,10 +390,10 @@ const treeRoot = {
         ] },
         { text: 'D3', premium: true, navIcon: 'icon-d3', children: [
             { text: 'Heatmap', navIcon: 'icon-d3-heatmap', children: [
-                { text: 'Purchases By Day', component: ButtonComponent, navIcon: 'icon-d3-view-heatmap-purchases' },
-                { text: 'Sales Per Employee', component: ButtonComponent, navIcon: 'icon-d3-view-heatmap-sales' },
-                { text: 'Pivot Heatmap', component: ButtonComponent, navIcon: 'icon-d3-view-heatmap-pivot' },
-                { text: 'Configurable Pivot Heatmap', component: ButtonComponent, navIcon: 'icon-d3-view-heatmap-pivot-configurator' }
+                { text: 'Purchases By Day', component: PurchasesByDayComponent, navIcon: 'icon-d3-view-heatmap-purchases' },
+                { text: 'Sales Per Employee', component: SalesPerEmployeeComponent, navIcon: 'icon-d3-view-heatmap-sales' },
+                { text: 'Pivot Heatmap', component: PivotHeatmapComponent, navIcon: 'icon-d3-view-heatmap-pivot' },
+                { text: 'Configurable Pivot Heatmap', component: ConfigurablePivotHeatmapComponent, navIcon: 'icon-d3-view-heatmap-pivot-configurator' }
             ]},
             { text: 'Hierarchy', navIcon: 'icon-d3-hierarchy', children: [
                 { text: 'Org Chart', component: ButtonComponent, navIcon: 'icon-d3-view-sencha-tree' },
