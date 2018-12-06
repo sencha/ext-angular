@@ -236,6 +236,11 @@ import {SalesPerEmployeeComponent} from '../examples/D3/HeatMap/SalesPerEmployee
 
 import {OrgChartComponent} from '../examples/D3/Hierarchy/OrgChart/OrgChart';
 import {PackComponent} from '../examples/D3/Hierarchy/Pack/Pack';
+import {TreeMapToolTipComponent} from '../examples/D3/Hierarchy/TreeMapToolTip/TreeMapToolTip';
+import {ConfigurablePivotTreeMapComponent} from '../examples/D3/Hierarchy/ConfigurablePivotTreeMap/ConfigurablePivotTreeMap';
+import {TreeMapComponent} from '../examples/D3/Hierarchy/TreeMap/TreeMap';
+import {SunburstComponent} from '../examples/D3/Hierarchy/Sunburst/Sunburst';
+import {TreeHierarchyComponent} from '../examples/D3/Hierarchy/Tree/Tree';
 
 interface ExtAngularRoute extends Route {
   text?: string;
@@ -497,8 +502,12 @@ const routes: ExtAngularRoutes = [
 
 	{ path: 'd3/hierarchy/org_chart', component: OrgChartComponent, text: 'Configurable Pivot heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'd3/hierarchy/pack', component: PackComponent, text: 'Configurable Pivot heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-
-
+	{ path: 'd3/hierarchy/treemap_tooltip', component: TreeMapToolTipComponent, text: 'TreeMap Tooltip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/hierarchy/configurable_pivot_treemap', component: ConfigurablePivotTreeMapComponent, text: 'Configurable Pivot TreeMap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/hierarchy/treemap', component: TreeMapComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/hierarchy/sunburst', component: SunburstComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/hierarchy/tree', component: TreeHierarchyComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/hierarchy/', component: ExporterPluginComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },	
 
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
@@ -724,6 +733,11 @@ export class App {
 
 		OrgChartComponent,
 		PackComponent,
+		TreeMapToolTipComponent,
+		ConfigurablePivotTreeMapComponent,
+		TreeMapComponent,
+		SunburstComponent,
+		TreeHierarchyComponent,
 
 	],
 	providers: [

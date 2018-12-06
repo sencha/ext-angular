@@ -181,6 +181,12 @@ import {TabBarComponent} from './Tabs/TabBar/TabBar';
 
 import {WizardComponent} from './Wizard/Wizard';
 
+import {TreeMapToolTipComponent} from './D3/Hierarchy/TreeMapToolTip/TreeMapToolTip';
+import {ConfigurablePivotTreeMapComponent} from './D3/Hierarchy/ConfigurablePivotTreeMap/ConfigurablePivotTreeMap';
+import {TreeMapComponent} from './D3/Hierarchy/TreeMap/TreeMap'; 
+import {SunburstComponent} from './D3/Hierarchy/Sunburst/Sunburst';
+import { TreeHierarchyComponent } from 'src/examples/D3/Hierarchy/Tree/Tree';
+
 declare var Ext: any;
 
 const treeRoot = {
@@ -401,12 +407,12 @@ const treeRoot = {
             { text: 'Hierarchy', navIcon: 'icon-d3-hierarchy', children: [
                 { text: 'Org Chart', component: OrgChartComponent, navIcon: 'icon-d3-view-sencha-tree' },
                 { text: 'Pack', component: PackComponent, navIcon: 'icon-d3-view-pack' },
-                { text: 'Sunburst', component: ButtonComponent, navIcon: 'icon-d3-view-sunburst' },
+                { text: 'Sunburst', component: SunburstComponent, navIcon: 'icon-d3-view-sunburst' },
                 { text: 'Zoomable Sunburst', component: ButtonComponent, navIcon: 'icon-d3-view-sunburst-zoom' },
-                { text: 'Tree', component: ButtonComponent, navIcon: 'icon-d3-view-tree' },
-                { text: 'TreeMap', component: ButtonComponent, navIcon: 'icon-d3-view-treemap' },
-                { text: 'TreeMap Tooltip', component: ButtonComponent, navIcon: 'icon-d3-view-treemap-tooltip' },
-                { text: 'Configurable Pivot TreeMap', component: ButtonComponent, navIcon: 'icon-d3-view-treemap-pivot-configurator' }
+                { text: 'Tree', component: TreeHierarchyComponent, navIcon: 'icon-d3-view-tree' },
+                { text: 'TreeMap', component: TreeMapComponent, navIcon: 'icon-d3-view-treemap' },
+                { text: 'TreeMap Tooltip', component: TreeMapToolTipComponent, navIcon: 'icon-d3-view-treemap-tooltip' },
+                { text: 'Configurable Pivot TreeMap', component: ConfigurablePivotTreeMapComponent, navIcon: 'icon-d3-view-treemap-pivot-configurator' }
             ]}
         ] },
         { text: 'Pivot Grids', premium: true, navIcon: 'icon-pivot-grids', children: [
