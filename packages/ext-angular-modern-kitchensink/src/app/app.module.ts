@@ -216,16 +216,17 @@ import {UndoableStepSwiperComponent} from '../examples/Lists/UndoableStepSwiper/
 
 import {TouchEventsComponent} from '../examples/TouchEvents/TouchEvents';
 import {BasicTabComponent} from '../examples/Tabs/BasicTab/BasicTab';
-
-import {CalendarService} from "../examples/Calendar/Calendar.service"
-import {GridService} from '../examples/Grid/Grid.service'
-import {BigDataService} from '../examples/Grid/AdvancedFeatures/BigData/BigData.service'
 import {BottomTabComponent} from '../examples/Tabs/BottomTab/BottomTab';
 import {IconTabComponent} from '../examples/Tabs/IconTab/IconTab';
 import {DesktopTabComponent} from '../examples/Tabs/DesktopTab/DesktopTab';
 import {CloseableTabComponent} from '../examples/Tabs/Closeable/Closeable';
 // import {ScrollingTabComponent} from '../examples/Tabs/Scrolling/Scrolling';
 import {TabBarComponent} from '../examples/Tabs/TabBar/TabBar';
+import {WizardComponent} from '../examples/Wizard/Wizard';
+
+import {CalendarService} from "../examples/Calendar/Calendar.service"
+import {GridService} from '../examples/Grid/Grid.service'
+import {BigDataService} from '../examples/Grid/AdvancedFeatures/BigData/BigData.service'
 
 
 interface ExtAngularRoute extends Route {
@@ -272,7 +273,7 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/popups', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/tabs', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/touch_events', component: TouchEventsComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-
+	{ path: 'components/wizard', component: WizardComponent, text: 'Wizard', iconCls: 'x-fafa-calendar', xtype: 'homeview', leadf: true },
 	
 	{ path: 'grids', component: DummyComponent, text: 'Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/core_features', component: DummyComponent, text: 'Grids Core Features', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -300,7 +301,7 @@ const routes: ExtAngularRoutes = [
 	{ path: 'pivot_grids', component: DummyComponent, text: 'Pivot Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	
 	//example components
-	{ path: 'components/buttons/button', component: ButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/sbuttons/button', component: ButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/buttons/splitbutton', component: SplitButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/buttons/segmentedbutton', component: SegmentedButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/ripple', component: RippleComponent, text: 'Riple', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -695,6 +696,7 @@ export class App {
 		CloseableTabComponent,
 		// ScrollingTabComponent,
 		TabBarComponent,
+		WizardComponent,
 
 	],
 	providers: [

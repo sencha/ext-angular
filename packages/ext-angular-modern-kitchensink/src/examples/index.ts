@@ -170,6 +170,8 @@ import {CloseableTabComponent} from './Tabs/Closeable/Closeable';
 import {ScrollingTabComponent} from './Tabs/Scrolling/Scrolling';
 import {TabBarComponent} from './Tabs/TabBar/TabBar';
 
+import {WizardComponent} from './Wizard/Wizard';
+
 declare var Ext: any;
 
 const treeRoot = {
