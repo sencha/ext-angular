@@ -1,0 +1,20 @@
+<tabpanel #item
+    [flex]="1"
+    [shadow]="true"
+    [tabBar]="{
+        layout: {
+            pack: 'left'
+        }
+      }"
+    (ready)="onReady($event)"
+>
+    <container #item title="Tab 1" layout="center" [html]="'By default, tabs are aligned to the top of a view.'">
+    </container>
+    <!-- <container #item title="'Tab 2'" [layout]="'center'">
+        <container #item [html]="'A TabPanel can use different animations by setting <code>layout.animation.</code>'">
+        </container>
+    </container>
+    <container #item title="'Tab 3'" [layout]="'center'">
+        <container #item [cls]="'action'" [html]="'User tapped Tab 3'"></container>
+    </container> -->
+</tabpanel>
