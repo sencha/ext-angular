@@ -6,26 +6,28 @@
  * A base class for all menu items that require menu-related functionality such as click handling,
  * sub-menus, icons, etc.
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Button, Container, Menu, MenuItem } from '@extjs/ext-react';
+ *     @example packages=[angular]
+ *       import { Component } from '@angular/core'
+ *       declare var Ext: any;
  *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container>
- *                        <Button text="Menu">
- *                            <Menu rel="menu" >
- *                                <MenuItem text="Mobile" name="ui-type" />
- *                                <MenuItem text="Desktop" name="ui-type"/>
- *                            </Menu>
- *                        </Button>
- *                    </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+ *        @Component({
+ *        selector: 'app-root',
+ *        styles: [`
+ *       `],
+ *       template: `
+ *                           <container #item>
+ *                               <button #item text="Menu">
+ *                                   <menu #item rel="menu" >
+ *                                       <menuitem #item text="Mobile" name="ui-type" ></menuitem>
+ *                                       <menuitem #item text="Desktop" name="ui-type"></menuitem>
+ *                                   </menu>
+ *                               </button>
+ *                           </container>
+ *       
+ *       `
+ *       })
+ *       export class AppComponent {
+ *       }
  */
 
 /**

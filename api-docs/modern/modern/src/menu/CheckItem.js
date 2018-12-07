@@ -5,26 +5,28 @@
  *
  * A menu item that contains a togglable checkbox by default, but that can also be a part of a radio group.
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Button, Container, Menu, MenuCheckItem } from '@extjs/ext-react';
+ *     @example packages=[angular]
+ *       import { Component } from '@angular/core'
+ *       declare var Ext: any;
  *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                <ExtReact>
- *                    <Container>
- *                        <Button text="Menu">
- *                            <Menu rel="menu" >
- *                                <MenuCheckItem text="Mobile" name="ui-type" />
- *                                <MenuCheckItem text="Desktop" name="ui-type"/>
- *                            </Menu>
- *                        </Button>
- *                    </Container>
- *                </ExtReact>
- *             )
- *         }
- *     }
+ *        @Component({
+ *        selector: 'app-root',
+ *        styles: [`
+ *       `],
+ *       template: `
+ *                           <container #item>
+ *                               <button #item text="Menu">
+ *                                   <menu #item rel="menu" >
+ *                                       <menucheckitem #item text="Mobile" name="ui-type" ></menucheckitem>
+ *                                       <menucheckitem #item text="Desktop" name="ui-type"></menucheckitem>
+ *                                   </menu>
+ *                               </button>
+ *                           </container>
+ *       
+ *       `
+ *       })
+ *       export class AppComponent {
+ *       }
  */
 
 /**

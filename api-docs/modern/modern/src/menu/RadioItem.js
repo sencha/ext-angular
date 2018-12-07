@@ -6,26 +6,28 @@
  * A menu item that contains a radio button item which can participate in a group of
  * mutually exclusive radio items.
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Button, Container, Menu, MenuRadioItem } from '@extjs/ext-react';
+ *     @example packages=[angular]
+ *       import { Component } from '@angular/core'
+ *       declare var Ext: any;
  *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                    <Container>
- *                        <Button text="Menu">
- *                            <Menu rel="menu" >
- *                                <MenuRadioItem text="Mobile" name="ui-type" />
- *                                <MenuRadioItem text="Desktop" name="ui-type"/>
- *                            </Menu>
- *                        </Button>
- *                    </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+ *        @Component({
+ *        selector: 'app-root',
+ *        styles: [`
+ *       `],
+ *       template: `
+ *                           <container #item>
+ *                               <button #item text="Menu">
+ *                                   <menu #item rel="menu" >
+ *                                       <menuradioitem #item text="Mobile" name="ui-type" group="group1"></menuradioitem>
+ *                                       <menuradioitem #item text="Desktop" name="ui-type"group="group1"></menuradioitem>
+ *                                   </menu>
+ *                               </button>
+ *                           </container>
+ *       
+ *       `
+ *       })
+ *       export class AppComponent {
+ *       }
  */
 
 /**
