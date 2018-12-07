@@ -2,6 +2,9 @@
     shadow="true"
     plugins="responsive" 
     [layout]="'vbox'"
+    [responsiveConfig]="{
+        'width > 600': {layout: 'hbox'}
+    }"
 >
     <tree #item
         [store]="store"
@@ -10,6 +13,13 @@
         plugins="responsive"
         title="Folders"
         shadow="true"
+        [height]="200"
+        [responsiveConfig]="{
+            'width > 600': {
+                width: 230,
+                height: undefined
+            }
+        }"
     ></tree>
     <d3-sunburst #item
         flex="1"

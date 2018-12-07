@@ -1,6 +1,9 @@
 import {Component, OnInit, OnChanges} from '@angular/core'
 
+declare var require: any;
 declare var Ext: any;
+
+require('../stocks');
 
 @Component({
   selector: 'paginglist-component',
@@ -10,7 +13,9 @@ declare var Ext: any;
 export class PagingListComponent implements OnInit, OnChanges  {
 
   constructor() {}
-  
+
+  tpl = `<div>{name}</div>`;
+
   store = Ext.create('Ext.data.Store', {
     fields: ['name'],
     autoLoad: true,

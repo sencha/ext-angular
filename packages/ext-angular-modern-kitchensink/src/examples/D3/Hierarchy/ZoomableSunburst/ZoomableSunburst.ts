@@ -8,12 +8,12 @@ Ext.require([
 ]);
 
 @Component({
-  selector: 'sunburst-component',
-  templateUrl: "./Sunburst.html",
+  selector: 'zoomable-sunburst-component',
+  templateUrl: "./ZoomableSunburst.html",
   styles: [``]
 })
 
-export class SunburstComponent implements OnInit  {
+export class ZoomableSunburstComponent implements OnInit  {
 
   constructor() {}
 
@@ -47,22 +47,20 @@ export class SunburstComponent implements OnInit  {
   onTooltip = (component, tooltip, node) => {
     const record = node.data,
         size = record.get('size'),
-        length = record.childNodes.length;
+        n = record.childNodes.length;
 
-    tooltip.setTitle(record.get('text'));
-    tooltip.setHtml(size ? 
+    tooltip.setHtml(size ?
         Ext.util.Format.fileSize(size) :
-        length + ' file' + (length === 1 ? '' : 's') + ' inside.'
+        n + ' file' + (n === 1 ? '' : 's') + ' inside.'
     );
-  }
+  };
 
-  onSelectionChange = (field, selection) => {
-      console.log('@@@@@@@@@@ in selectio  change.........');
-    if(Ext.isArray(selection)) selection = selection[0];
-    this.selection = selection;
-  }
+  tooltip = {renderer: this.onTooltip};
+  transitions = { select: false };
 
-  selection:any;
+  onSelectionChange = (sunburst, node) => {
+    console.log('############3333', sunburst, node);  
+    sunburst.zoomInNode(node);}
 
   ngOnInit() {}
 }

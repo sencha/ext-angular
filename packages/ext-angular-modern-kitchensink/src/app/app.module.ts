@@ -209,6 +209,7 @@ import {DisclosureListComponent} from '../examples/Lists/Disclosure/Disclosure';
 import {GroupedListComponent} from '../examples/Lists/Grouped/GroupedList';
 import {NestedListComponent} from '../examples/Lists/NestedList/NestedList';
 import {PagingListComponent} from '../examples/Lists/Paging/PagingList';
+import {PullRefreshListComponent} from '../examples/Lists/PullRefresh/PullRefresh';
 import {BasicAccordionSwiperComponent} from '../examples/Lists/BasicAccordionSwiper/BasicAccordionSwiper';
 import {BasicStepSwiperComponent} from '../examples/Lists/BasicStepSwiper/BasicStepSwiper';
 import {UndoableAccordionSwiperComponent} from '../examples/Lists/UndoableAccordionSwiper/UndoableAccordionSwiper';
@@ -241,6 +242,7 @@ import {ConfigurablePivotTreeMapComponent} from '../examples/D3/Hierarchy/Config
 import {TreeMapComponent} from '../examples/D3/Hierarchy/TreeMap/TreeMap';
 import {SunburstComponent} from '../examples/D3/Hierarchy/Sunburst/Sunburst';
 import {TreeHierarchyComponent} from '../examples/D3/Hierarchy/Tree/Tree';
+import {ZoomableSunburstComponent} from '../examples/D3/Hierarchy/ZoomableSunburst/ZoomableSunburst';
 
 interface ExtAngularRoute extends Route {
   text?: string;
@@ -418,7 +420,7 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/lists/disclosure', component: DisclosureListComponent, text: 'Disclosure', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/lists/grouped', component: GroupedListComponent, text: 'Grouped', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/lists/nestedlist', component: NestedListComponent, text: 'Nested List', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'components/lists/pull_refresh', component: BasicListComponent, text: 'Pull refresh', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/pull_refresh', component: PullRefreshListComponent, text: 'Pull refresh', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/lists/paging', component: PagingListComponent, text: 'Paging', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/lists/basic_accordion_swiper', component: BasicAccordionSwiperComponent, text: 'Basic Accordion Swiper', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/lists/basic_step_swiper', component: BasicStepSwiperComponent, text: 'Basic Step Swiper', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -504,10 +506,10 @@ const routes: ExtAngularRoutes = [
 	{ path: 'd3/hierarchy/pack', component: PackComponent, text: 'Configurable Pivot heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'd3/hierarchy/treemap_tooltip', component: TreeMapToolTipComponent, text: 'TreeMap Tooltip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'd3/hierarchy/configurable_pivot_treemap', component: ConfigurablePivotTreeMapComponent, text: 'Configurable Pivot TreeMap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'd3/hierarchy/treemap', component: TreeMapComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'd3/hierarchy/sunburst', component: SunburstComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'd3/hierarchy/tree', component: TreeHierarchyComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'd3/hierarchy/', component: ExporterPluginComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },	
+	{ path: 'd3/hierarchy/treemap', component: TreeMapComponent, text: 'TreeMap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/hierarchy/sunburst', component: SunburstComponent, text: 'Sunburst', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/hierarchy/tree', component: TreeHierarchyComponent, text: 'Tree', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/hierarchy/zoomable_sunburst', component: ZoomableSunburstComponent, text: 'Zoomable Sunburst', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },	
 
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
@@ -710,6 +712,7 @@ export class App {
 		DisclosureListComponent,
 		GroupedListComponent,
 		NestedListComponent,
+		PullRefreshListComponent,
 		PagingListComponent,
 		BasicAccordionSwiperComponent,
 		BasicStepSwiperComponent,
@@ -738,6 +741,7 @@ export class App {
 		TreeMapComponent,
 		SunburstComponent,
 		TreeHierarchyComponent,
+		ZoomableSunburstComponent,
 
 	],
 	providers: [
