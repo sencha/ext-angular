@@ -9,8 +9,8 @@ declare var Ext: any;
                       <container #item>
                           <button #item text="Menu">
                               <menu #item rel="menu" >
-                                  <menuitem #item text="Mobile" name="ui-type" ></menuitem>
-                                  <menuitem #item text="Desktop" name="ui-type"></menuitem>
+                                  <menuradioitem #item text="Mobile" name="ui-type" group="group1"></menuradioitem>
+                                  <menuradioitem #item text="Desktop" name="ui-type" group="group1"></menuradioitem>
                               </menu>
                           </button>
                       </container>
