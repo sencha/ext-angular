@@ -3,12 +3,11 @@
         {{ eventLog }}
         {{ touchPad }}
     </container> -->
-    <container [layout]="'hbox'">
+    <container #item [layout]="'hbox'" [height]="400" [width]="600">
         <container #item [flex]="1" [layout]="'vbox'" [padding]="10" [margin]="'0 20 0 0'">
-          <panel #item [shadow]="true" [margin]="'0 0 20 0'" [bodyPadding]="10" [maxHeight]="220" [scrollable]="true">
-            <div>
-              <div>Ext JS comes with a multitude of touch events available on components. Included touch events that can be used are:</div>
-              <ul>
+          <panel #item [shadow]="true" [margin]="'0 0 20 0'" [bodyPadding]="10" [maxHeight]="220" [scrollable]="true"
+              [html]="'<div><div>Ext JS comes with a multitude of touch events available on components. Included touch events that can be used are:</div>
+              <ul #item>
                 <li>touchstart</li>
                 <li>touchmove</li>
                 <li>touchend</li>
@@ -22,10 +21,23 @@
                 <li>swipe</li>
                 <li>pinch (on iOS and Android 3+)</li>
                 <li>rotate (on iOS and Android 3+)</li>
-              </ul>
-            </div>
+              </ul></div>'">
           </panel>
-          {{ eventLog }}
+         <panel #item title="Event Log" height="250" scrollable="true" bodyPadding="10" shadow="true"
+            [header]="{
+              items: [{
+                xtype: 'button',
+                align: 'right',
+                text: 'clear',
+                ui: 'alt',
+                handler: clearEventLog
+              }]
+            }"
+          >
+          <container #item *ngFor="let event of events" [html]="event"></container>
+          </panel>
         </container>
-        {{ touchPad }}
+        <container #item (ready)="touchpadReady($event)" flex="1" [layout]="{type: 'vbox', pack: 'center', align: 'stretch'}" [style]="{border: '8px dashed #d6d6d6', borderRadius: '30px'}">
+            <container #item [style]="{textAlign: 'center', fontSize: '48px'  , color: '#ccc'}" html="Touch Here"></container>
+          </container>
     </container>

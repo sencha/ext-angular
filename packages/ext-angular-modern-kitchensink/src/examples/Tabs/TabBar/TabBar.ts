@@ -13,8 +13,8 @@ export class TabBarComponent implements OnInit {
 
   activeTab:string = 'info';
 
-  onTabChange = (bar, tab) => {
-    this.activeTab = tab.getItemId();
+  onTabChange = ({sender, value}) => {
+    this.activeTab = value.getItemId();
   }
 
   ngOnInit() {
