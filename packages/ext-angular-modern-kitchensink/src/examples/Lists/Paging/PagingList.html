@@ -1,7 +1,8 @@
 <list #item
+    docked="bottom"
     (ready)="listReady($event)"
     [shadow]="true"
-    [itemTpl]="'name'"
+    [itemTpl]="tpl"
     [store]="store"
     [plugins]="[{type: 'listpaging'}]"
     (select)="onSelect($event)"
@@ -9,14 +10,17 @@
         '!phone': {height: 450, width: 300}
     }"
 >
-    <container docked="top">
-        <div #item [style]="{padding:'15px'}">
-            <b>Auto Paging</b>: {{ bufferZone == false ? 'OFF' : 'ON (buffer zone: bufferZone)' }}
-        </div>
+    <container #item [docked]="'top'"
+    >
+        <container layout="hbox" #item>    
+            <div #item style='padding:15px;'>
+                <b>Auto Paging</b>: {{bufferZone === false ? 'OFF' : 'ON (buffer zone: '+bufferZone+' )'}}
+            </div>
+        </container>
         <segmentedbutton #item>
             <button #item [text]="'Off'" [pressed]="bufferZone === false" (tap)="setBufferZone(false)" [flex]="1">
             </button>
-            <button #item [text]="0" [pressed]="bufferZone === 0" (tap)="setBufferZone(0)" [flex]="1">
+            <button #item [text]="'0'" [pressed]="bufferZone === 0" (tap)="setBufferZone('0')" [flex]="1">
             </button>
             <button #item [text]="8" [pressed]="bufferZone === 8" (tap)="setBufferZone(8)" [flex]="1">
             </button>

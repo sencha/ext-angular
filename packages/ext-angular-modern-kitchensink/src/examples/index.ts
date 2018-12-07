@@ -165,6 +165,7 @@ import {DisclosureListComponent} from './Lists/Disclosure/Disclosure';
 import {GroupedListComponent} from './Lists/Grouped/GroupedList';
 import {NestedListComponent} from './Lists/NestedList/NestedList';
 import {PagingListComponent} from './Lists/Paging/PagingList';
+import {PullRefreshListComponent} from './Lists/PullRefresh/PullRefresh';
 import {BasicAccordionSwiperComponent} from './Lists/BasicAccordionSwiper/BasicAccordionSwiper';
 import {BasicStepSwiperComponent} from './Lists/BasicStepSwiper/BasicStepSwiper';
 import {UndoableAccordionSwiperComponent} from './Lists/UndoableAccordionSwiper/UndoableAccordionSwiper';
@@ -185,7 +186,8 @@ import {TreeMapToolTipComponent} from './D3/Hierarchy/TreeMapToolTip/TreeMapTool
 import {ConfigurablePivotTreeMapComponent} from './D3/Hierarchy/ConfigurablePivotTreeMap/ConfigurablePivotTreeMap';
 import {TreeMapComponent} from './D3/Hierarchy/TreeMap/TreeMap'; 
 import {SunburstComponent} from './D3/Hierarchy/Sunburst/Sunburst';
-import { TreeHierarchyComponent } from 'src/examples/D3/Hierarchy/Tree/Tree';
+import {TreeHierarchyComponent} from './D3/Hierarchy/Tree/Tree';
+import {ZoomableSunburstComponent} from './D3/Hierarchy/ZoomableSunburst/ZoomableSunburst';
 
 declare var Ext: any;
 
@@ -252,7 +254,7 @@ const treeRoot = {
                 { text: 'Disclosure', component: DisclosureListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-disclosure-list' },
                 { text: 'Grouped', component: GroupedListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-grouped-list' },
                 { text: 'NestedList', component: NestedListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-nested-list' },
-                { text: 'Pull Refresh', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-pullrefresh-list' },
+                { text: 'Pull Refresh', component: PullRefreshListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-pullrefresh-list' },
                 { text: 'Paging', component: PagingListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-listpaging-list' },
                 { text: 'Basic Accordion Swiper', component: BasicAccordionSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-accordion-swiper'},
                 { text: 'Basic Step Swiper', component: BasicStepSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-step-swiper'},
@@ -408,7 +410,7 @@ const treeRoot = {
                 { text: 'Org Chart', component: OrgChartComponent, navIcon: 'icon-d3-view-sencha-tree' },
                 { text: 'Pack', component: PackComponent, navIcon: 'icon-d3-view-pack' },
                 { text: 'Sunburst', component: SunburstComponent, navIcon: 'icon-d3-view-sunburst' },
-                { text: 'Zoomable Sunburst', component: ButtonComponent, navIcon: 'icon-d3-view-sunburst-zoom' },
+                { text: 'Zoomable Sunburst', component: ZoomableSunburstComponent, navIcon: 'icon-d3-view-sunburst-zoom' },
                 { text: 'Tree', component: TreeHierarchyComponent, navIcon: 'icon-d3-view-tree' },
                 { text: 'TreeMap', component: TreeMapComponent, navIcon: 'icon-d3-view-treemap' },
                 { text: 'TreeMap Tooltip', component: TreeMapToolTipComponent, navIcon: 'icon-d3-view-treemap-tooltip' },

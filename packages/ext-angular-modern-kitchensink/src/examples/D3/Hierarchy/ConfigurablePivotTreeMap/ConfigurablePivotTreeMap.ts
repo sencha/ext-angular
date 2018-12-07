@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core'
 import createData from './createData';
-import './styles.css';
 
 declare var Ext: any;
 
@@ -18,8 +17,8 @@ Ext.require(['Ext.pivot.d3.TreeMap']);
 @Component({
   selector: 'configurable-pivot-treemap-component',
   templateUrl: "./ConfigurablePivotTreeMap.html",
-  encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./styles.css']
+  styleUrls: ['./styles.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class ConfigurablePivotTreeMapComponent implements OnInit  {
@@ -32,33 +31,35 @@ export class ConfigurablePivotTreeMapComponent implements OnInit  {
     this.mainCtnRef = ele.ext; 
   }
 
-  configurator = Ext.create('Ext.pivot.plugin.Configurator', {
-    // It is possible to configure a list of fields that can be used to configure the pivot matrix
-    // If no fields list is supplied then all fields from the Store model are fetched automatically
-    fields: [{
-        dataIndex: 'quantity',
-        header: 'Qty',
-        // You can even provide a default aggregator function to be used when this field is dropped
-        // on the agg dimensions
-        aggregator: 'sum',
-        formatter: 'number("0")',
+  drawingVar = {xtype: 'pivottreemap'};
 
-        settings: {
-            // Define here in which areas this field could be used
-            allowed: ['aggregate'],
-            // Set a custom style for this field to inform the user that it can be dragged only to "Values"
-            style: {
-                fontWeight: 'bold'
-            },
-            // Define here custom formatters that ca be used on this dimension
-            formatters: {
-                '0': 'number("0")',
-                '0%': 'number("0%")'
+  configuratorVar = {
+    // It is possible to configure a list of fields that can be used to configure the pivot matrix
+        // If no fields list is supplied then all fields from the Store model are fetched automatically
+        fields: [{
+            dataIndex:  'quantity',
+            header:     'Qty',
+            // You can even provide a default aggregator function to be used when this field is dropped
+            // on the agg dimensions
+            aggregator: 'sum',
+            formatter: 'number("0")',
+
+            settings: {
+                // Define here in which areas this field could be used
+                allowed: ['aggregate'],
+                // Set a custom style for this field to inform the user that it can be dragged only to "Values"
+                style: {
+                    fontWeight: 'bold'
+                },
+                // Define here custom formatters that ca be used on this dimension
+                formatters: {
+                    '0': 'number("0")',
+                    '0%': 'number("0%")'
+                }
             }
-        }
         }, {
-            dataIndex: 'value',
-            header: 'Value',
+            dataIndex:  'value',
+            header:     'Value',
 
             settings: {
                 // Define here in which areas this field could be used
@@ -80,8 +81,8 @@ export class ConfigurablePivotTreeMapComponent implements OnInit  {
                 }
             }
         }, {
-            dataIndex: 'company',
-            header: 'Company',
+            dataIndex:  'company',
+            header:     'Company',
 
             settings: {
                 // Define here what aggregator functions can be used when this field is
@@ -124,9 +125,10 @@ export class ConfigurablePivotTreeMapComponent implements OnInit  {
                 allowed: ['leftAxis', 'topAxis']
             }
         }]
-    });
+    };
 
-  store = Ext.create('Ext.data.TreeStore', {
+  
+    store = Ext.create('Ext.data.TreeStore', {
     fields: [
       {name: 'id',        type: 'string'},
       {name: 'company',   type: 'string'},
@@ -155,16 +157,31 @@ export class ConfigurablePivotTreeMapComponent implements OnInit  {
     data: createData()
   });
 
+  matrixVar = {
+    store: this.store,
+    aggregate: [{
+        dataIndex: 'value',
+        header: 'Value',
+        aggregator: 'sum'
+    }],
+    leftAxis: [{
+        dataIndex: 'person',
+        header: 'Person'
+    }]
+  };
+
   showConfigurator = () => {
     this.mainCtnRef.showConfigurator();
   }
 
   onShowConfigPanel = panel => {
+      console.log(panel);
     panel.getLeftAxisHeader().getTitle().setText('Tree labels');
     panel.setTopAxisContainerVisible(false);
   }
 
   onBeforeAddConfigField = (panel, config) => {
+    console.log(',,,,,,,', panel, config);
     const dest = config.toContainer,
         store = dest.getStore();
 
@@ -175,6 +192,7 @@ export class ConfigurablePivotTreeMapComponent implements OnInit  {
   }
 
   onShowFieldSettings = (panel, config) => {
+    console.log('################', panel, config);
     const align = config.container.down('[name=align]');
 
     // hide the alignment field in settings since it's useless
