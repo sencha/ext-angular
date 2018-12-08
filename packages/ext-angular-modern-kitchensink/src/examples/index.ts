@@ -79,10 +79,67 @@ import {vboxLayoutComponent} from './Layouts/vboxLayout/vboxLayout';
 import {BasicGaugeChartComponent} from './Charts/Gauge/BasicGaugeChart/BasicGaugeChart';
 import {BoxPlotComponent} from './Charts/BoxPlot/BoxPlot';
 import {NavigatorComponent} from './Charts/Navigator/Navigator';
-
 import {BasicScatterComponent} from './Charts/Scatter/BasicScatter/BasicScatter';
 import {BubbleComponent} from './Charts/Scatter/Bubble/Bubble';
 import {CustomIconsComponent} from './Charts/Scatter/CustomIcons/CustomIcons';
+import {BasicLineComponent} from './Charts/Line/BasicLine/BasicLine';
+import {BasicMarkersComponent} from './Charts/Line/BasicMarkers/BasicMarkers';
+import {PlotComponent} from './Charts/Line/Plot/Plot';
+import {RealtimeComponent} from './Charts/Line/Realtime/Realtime';
+import {SplineComponent} from './Charts/Line/Spline/Spline';
+import {SplineMarkersComponent} from './Charts/Line/SplineMarkers/SplineMarkers';
+import {WithRendererComponent} from './Charts/Line/WithRenderer/WithRenderer';
+import {BasicAreaComponent} from './Charts/Area/BasicArea/BasicArea';
+import {FullStackedAreaComponent} from './Charts/Area/FullStackedArea/FullStackedArea';
+import {NegativeValuesAreaComponent} from './Charts/Area/NegativeValuesArea/NegativeValuesArea';
+import {StackedAreaComponent} from './Charts/Area/StackedArea/StackedArea';
+import {BasicRadarComponent} from './Charts/Radar/BasicRadar/BasicRadar';
+import {FilledComponent} from './Charts/Radar/Filled/Filled';
+import {MarkedComponent} from './Charts/Radar/Marked/Marked';
+import {MultiaxisComponent} from './Charts/Radar/Multiaxis/Multiaxis';
+import {ThreeDPieComponent} from './Charts/Pie/3DPie/3DPie';
+import {BasicPieComponent} from './Charts/Pie/BasicPie/BasicPie';
+import {DonutComponent} from './Charts/Pie/Donut/Donut';
+import {DoubleDonutComponent} from './Charts/Pie/DoubleDonut/DoubleDonut';
+import {SpieComponent} from './Charts/Pie/Spie/Spie';
+
+import {BasicBarComponent} from './Charts/Bar/BasicBar/BasicBar';
+import {FullStackedBarComponent} from './Charts/Bar/FullStackedBar/FullStackedBar';
+import {StackedBarComponent} from './Charts/Bar/StackedBar/StackedBar';
+
+import {CandlestickComponent} from './Charts/Financial/Candlestick/Candlestick';
+import {OHLCComponent} from './Charts/Financial/OHLC/OHLC';
+
+import {ConfigurablePivotHeatmapComponent} from './D3/HeatMap/ConfigurablePivotHeatmap/ConfigurablePivotHeatmap';
+import {PivotHeatmapComponent} from './D3/HeatMap/PivotHeatmap/PivotHeatmap';
+import {PurchasesByDayComponent} from './D3/HeatMap/PurchasesByDay/PurchasesByDay';
+import {SalesPerEmployeeComponent} from './D3/HeatMap/SalesPerEmployee/SalesPerEmployee';
+
+import {OrgChartComponent} from './D3/Hierarchy/OrgChart/OrgChart';
+import {PackComponent} from './D3/Hierarchy/Pack/Pack';
+
+
+import {BasicColumnComponent} from './Charts/Column/BasicColumn/BasicColumn';
+import {ColumnWithRendererComponent} from './Charts/Column/ColumnWithRenderer/ColumnWithRenderer';
+import {MultiaxisColumnComponent} from './Charts/Column/MultiaxisColumn/MultiaxisColumn';
+import {StackedComponent} from './Charts/Column/Stacked/Stacked';
+import {ThreeDColumnWithRendererComponent} from './Charts/3DColumn/3DColumnWithRenderer/3DColumnWithRenderer';
+import {ThreeDGroupedComponent} from './Charts/3DColumn/3DGrouped/3DGrouped';
+import {ThreeDStackedComponent} from './Charts/3DColumn/3DStacked/3DStacked';
+import {Basic3DColumnComponent} from './Charts/3DColumn/Basic3DColumn/Basic3DColumn';
+import {NegativeValuesComponent} from './Charts/3DColumn/NegativeValues/NegativeValues';
+
+import {CollapsibleComponent} from './PivotGrid/Collapsible/Collapsible'
+import {CompactLayoutComponent} from './PivotGrid/CompactLayout/CompactLayout'
+import {ConfiguratorPluginComponent} from './PivotGrid/ConfiguratorPlugin/ConfiguratorPlugin'
+import {DataChangesComponent} from './PivotGrid/DataChanges/DataChanges'
+import {DrilldownPluginComponent} from './PivotGrid/DrilldownPlugin/DrilldownPlugin'
+import {ExporterPluginComponent} from './PivotGrid/ExporterPlugin/ExporterPlugin'
+import {OutlineLayoutComponent} from './PivotGrid/OutlineLayout/OutlineLayout'
+import {PivotGridWidgetsComponent} from './PivotGrid/PivotGridWidgets/PivotGridWidgets'
+import {RangeEditorPluginComponent} from './PivotGrid/RangeEditorPlugin/RangeEditorPlugin'
+import {RowStylingComponent} from './PivotGrid/RowStyling/RowStyling'
+import {TabularLayoutComponent} from './PivotGrid/TabularLayout/TabularLayout'
 
 import { CarouselComponent } from 'src/examples/Carousel/Carousel';
 
@@ -94,6 +151,43 @@ import {GroupsDragDropComponent} from './DragAndDrop/Groups/Groups';
 import {FilesDragDropComponent} from './DragAndDrop/Files/Files';
 import {DataDragDropComponent} from './DragAndDrop/Data/Data';
 
+import {BasicPanelComponent} from './Panels/Basic/Basic';
+import {BasicDatePanelComponent} from './Panels/BasicDate/BasicDate';
+import {AdvancedDatePanelComponent} from './Panels/AdvancedDate/AdvancedDate';
+import {TimePanelComponent} from './Panels/TimePanel/Time';
+import {CollapsiblePanelComponent} from './Panels/Collapsible/Collapsible';
+import {ResizableHandleComponent} from './Panels/Resizable/ResizableHandle';
+import {DialogPopupComponent} from './Popups/Dialog/Dialog';
+import {MessagePopupComponent} from './Popups/Message/Message';
+import {ToastPopupComponent} from './Popups/Toast/Toast';
+import {BasicListComponent} from './Lists/Basic/BasicList';
+import {DisclosureListComponent} from './Lists/Disclosure/Disclosure';
+import {GroupedListComponent} from './Lists/Grouped/GroupedList';
+import {NestedListComponent} from './Lists/NestedList/NestedList';
+import {PagingListComponent} from './Lists/Paging/PagingList';
+import {PullRefreshListComponent} from './Lists/PullRefresh/PullRefresh';
+import {BasicAccordionSwiperComponent} from './Lists/BasicAccordionSwiper/BasicAccordionSwiper';
+import {BasicStepSwiperComponent} from './Lists/BasicStepSwiper/BasicStepSwiper';
+import {UndoableAccordionSwiperComponent} from './Lists/UndoableAccordionSwiper/UndoableAccordionSwiper';
+import {UndoableStepSwiperComponent} from './Lists/UndoableStepSwiper/UndoableStepSwiper';
+
+import {TouchEventsComponent} from './TouchEvents/TouchEvents';
+import {BasicTabComponent} from './Tabs/BasicTab/BasicTab';
+import {BottomTabComponent} from './Tabs/BottomTab/BottomTab';
+import {IconTabComponent} from './Tabs/IconTab/IconTab';
+import {DesktopTabComponent} from './Tabs/DesktopTab/DesktopTab';
+import {CloseableTabComponent} from './Tabs/Closeable/Closeable';
+import {ScrollingTabComponent} from './Tabs/Scrolling/Scrolling';
+import {TabBarComponent} from './Tabs/TabBar/TabBar';
+
+import {WizardComponent} from './Wizard/Wizard';
+
+import {TreeMapToolTipComponent} from './D3/Hierarchy/TreeMapToolTip/TreeMapToolTip';
+import {ConfigurablePivotTreeMapComponent} from './D3/Hierarchy/ConfigurablePivotTreeMap/ConfigurablePivotTreeMap';
+import {TreeMapComponent} from './D3/Hierarchy/TreeMap/TreeMap'; 
+import {SunburstComponent} from './D3/Hierarchy/Sunburst/Sunburst';
+import {TreeHierarchyComponent} from './D3/Hierarchy/Tree/Tree';
+import {ZoomableSunburstComponent} from './D3/Hierarchy/ZoomableSunburst/ZoomableSunburst';
 
 declare var Ext: any;
 
@@ -156,50 +250,50 @@ const treeRoot = {
                 { text: 'vbox', component: vboxLayoutComponent, layout: 'auto', navIcon: 'icon-layout-vertical-box' }
             ]},
             { text: 'Lists', navIcon: 'icon-lists', children: [
-                { text: 'Basic List', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-list' },
-                { text: 'Disclosure', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-disclosure-list' },
-                { text: 'Grouped', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-grouped-list' },
-                { text: 'NestedList', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-nested-list' },
-                { text: 'Pull Refresh', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-pullrefresh-list' },
-                { text: 'Paging', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-listpaging-list' },
-                { text: 'Basic Accordion Swiper', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-accordion-swiper'},
-                { text: 'Basic Step Swiper', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-step-swiper'},
-                { text: 'Undoable Accordion Swiper', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-undoable-accordion-swiper'},
-                { text: 'Undoable Step Swiper', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-undoable-step-swiper'}
+                { text: 'Basic List', component: BasicListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-list' },
+                { text: 'Disclosure', component: DisclosureListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-disclosure-list' },
+                { text: 'Grouped', component: GroupedListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-grouped-list' },
+                { text: 'NestedList', component: NestedListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-nested-list' },
+                { text: 'Pull Refresh', component: PullRefreshListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-pullrefresh-list' },
+                { text: 'Paging', component: PagingListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-listpaging-list' },
+                { text: 'Basic Accordion Swiper', component: BasicAccordionSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-accordion-swiper'},
+                { text: 'Basic Step Swiper', component: BasicStepSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-step-swiper'},
+                { text: 'Undoable Accordion Swiper', component: UndoableAccordionSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-undoable-accordion-swiper'},
+                { text: 'Undoable Step Swiper', component: UndoableStepSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-undoable-step-swiper'}
             ]},
             { text: 'Media', navIcon: 'x-fa fa-video-camera', children: [
                 { text: 'Video', navIcon: 'icon-video', component: VideoComponent },
                 { text: 'Audio', navIcon: 'icon-audio', component: AudioComponent }
             ] },
             { text: 'Panels', navIcon: 'icon-panels', children: [
-                { text: 'Basic Panels', component: ButtonComponent, layout: Ext.os.is.Phone ? 'auto': 'center', navIcon: 'icon-panels' },
-                { text: 'Resizable Handle', component: ButtonComponent, layout: 'fit', navIcon: 'icon-panel-handleresize', hidden: Ext.os.is.Phone },
-                { text: 'Collapsible Panel', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-panel-collapsible' },
-                { text: 'Basic Date Panel', component: ButtonComponent, layout: 'center', navIcon: 'icon-panel-date' },
-                { text: 'Advanced Date Panel', component: ButtonComponent, layout: 'center', navIcon: 'icon-panel-date-adv', hidden: Ext.os.is.Phone },
-                { text: 'Time Panel', component: ButtonComponent, layout: 'center', navIcon: 'icon-panel-time', hidden: Ext.os.is.Phone },
+                { text: 'Basic Panels', component: BasicPanelComponent, layout: Ext.os.is.Phone ? 'auto': 'center', navIcon: 'icon-panels' },
+                { text: 'Resizable Handle', component: ResizableHandleComponent, layout: 'fit', navIcon: 'icon-panel-handleresize', hidden: Ext.os.is.Phone },
+                { text: 'Collapsible Panel', component: CollapsiblePanelComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-panel-collapsible' },
+                { text: 'Basic Date Panel', component: BasicDatePanelComponent, layout: 'center', navIcon: 'icon-panel-date' },
+                { text: 'Advanced Date Panel', component: AdvancedDatePanelComponent, layout: 'center', navIcon: 'icon-panel-date-adv', hidden: Ext.os.is.Phone },
+                { text: 'Time Panel', component: TimePanelComponent, layout: 'center', navIcon: 'icon-panel-time', hidden: Ext.os.is.Phone },
             ]},
             { text: 'Popups', navIcon: 'icon-windows', children: [
-                { text: 'Dialog', component: ButtonComponent, layout: 'center', navIcon: 'icon-basic-dialog' },
-                { text: 'Msg', component: ButtonComponent, layout: 'center', navIcon: 'icon-overlays' },
-                { text: 'Toast', component: ButtonComponent, layout: 'center', navIcon: 'icon-toast-view' }
+                { text: 'Dialog', component: DialogPopupComponent, layout: 'center', navIcon: 'icon-basic-dialog' },
+                { text: 'Msg', component: MessagePopupComponent, layout: 'center', navIcon: 'icon-overlays' },
+                { text: 'Toast', component: ToastPopupComponent, layout: 'center', navIcon: 'icon-toast-view' }
             ]},
             { text: 'ProgressBar', component: ProgressBarComponent, layout: 'center', navIcon: 'icon-progress-decorated' },
             { text: 'Ripple', component: RippleComponent, layout: 'center', navIcon: 'icon-Ripple' },
             { text: 'Sheet', component: SheetComponent, layout: 'center', navIcon: 'icon-actionsheets' },
             { text: 'Tabs', navIcon: 'icon-tabs', children: [
-                { text: 'Basic Tabs', component: ButtonComponent, navIcon: 'icon-basic-tabs' },
-                { text: 'Bottom Tabs', component: ButtonComponent, navIcon: 'icon-bottom-tabs' },
-                { text: 'Icon Tabs', component: ButtonComponent, navIcon: 'icon-icon-tabs' },
-                { text: 'Desktop Tabs', component: ButtonComponent, navIcon: 'icon-Desktop-Tabs' },
-                { text: 'Closable', component: ButtonComponent, navIcon: 'icon-Closable-Tabs' },
-                { text: 'ScrollingTabs', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Scrolling-Tabs' },
-                { text: 'TabBar', component: ButtonComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Tab-Bar' }        
+                { text: 'Basic Tabs', component: BasicTabComponent, navIcon: 'icon-basic-tabs' },
+                { text: 'Bottom Tabs', component: BottomTabComponent, navIcon: 'icon-bottom-tabs' },
+                { text: 'Icon Tabs', component: IconTabComponent, navIcon: 'icon-icon-tabs' },
+                { text: 'Desktop Tabs', component: DesktopTabComponent, navIcon: 'icon-Desktop-Tabs' },
+                { text: 'Closable', component: CloseableTabComponent, navIcon: 'icon-Closable-Tabs' },
+                { text: 'ScrollingTabs', component: ScrollingTabComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Scrolling-Tabs' },
+                { text: 'TabBar', component: TabBarComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Tab-Bar' }        
             ]},
             { text: 'TitleBar', component: TitleBarComponent, navIcon: 'icon-Title-Bar' },
             { text: 'Toolbar', component: ToolBarComponent, navIcon: 'icon-toolbar' },
             { text: 'ToolTip', component: ToolTipComponent, layout: 'center', navIcon: 'icon-tooltips'  },
-            { text: 'Touch Events', component: ButtonComponent, navIcon: 'icon-touch-events' },
+            { text: 'Touch Events', component: TouchEventsComponent, navIcon: 'icon-touch-events' },
             //{ text: 'Transition', component: Transition, navIcon: 'icon-Transition' },
             { text: 'Wizard', component: ButtonComponent, navIcon: 'icon-layout-card-indicator', layout: Ext.os.is.Phone ? 'fit': 'center' },
         ]},
@@ -245,59 +339,59 @@ const treeRoot = {
         ]},
         { text: 'Charts', premium: true, navIcon: 'icon-charts', children: [
             { text: 'Area', navIcon: 'icon-area-basic', children: [
-                { text: 'Basic Area', component: ButtonComponent, navIcon: 'icon-area-basic' },
-                { text: 'Stacked Area', component: ButtonComponent, navIcon: 'icon-area-stacked'},
-                { text: 'Full Stacked Area', component: ButtonComponent, navIcon: 'icon-area-stacked-100'},
-                { text: 'Negative Values Area', component: ButtonComponent, navIcon: 'icon-area-negative'}
+                { text: 'Basic Area', component: BasicAreaComponent, navIcon: 'icon-area-basic' },
+                { text: 'Stacked Area', component: StackedAreaComponent, navIcon: 'icon-area-stacked'},
+                { text: 'Full Stacked Area', component: FullStackedAreaComponent, navIcon: 'icon-area-stacked-100'},
+                { text: 'Negative Values Area', component: NegativeValuesAreaComponent, navIcon: 'icon-area-negative'}
             ] },
             { text: 'Bar', navIcon: 'icon-bar-basic', children: [
-                { text: 'Basic Bar', component: ButtonComponent, navIcon: 'icon-bar-basic' },
-                { text: 'Stacked Bar', component: ButtonComponent, navIcon: 'icon-bar-stacked' },
-                { text: 'Full Stacked Bar', component: ButtonComponent, navIcon: 'icon-bar-stacked-100'}
+                { text: 'Basic Bar', component: BasicBarComponent, navIcon: 'icon-bar-basic' },
+                { text: 'Stacked Bar', component: StackedBarComponent, navIcon: 'icon-bar-stacked' },
+                { text: 'Full Stacked Bar', component: FullStackedBarComponent, navIcon: 'icon-bar-stacked-100'}
             ] },
             { text: 'BoxPlot', component: BoxPlotComponent, navIcon: 'icon-boxplot-charts' },
             { text: 'Column', navIcon: 'icon-column-charts', children: [
-                { text: 'Basic Column', component: ButtonComponent, navIcon: 'icon-column-basic' },
-                { text: 'Stacked', component: ButtonComponent, navIcon: 'icon-column-stacked' },
-                { text: 'Column With Renderer', component: ButtonComponent, navIcon: 'icon-column-renderer' },
-                { text: 'Multiaxis Column', component: ButtonComponent, navIcon: 'icon-column-multi-axis' }
+                { text: 'Basic Column', component: BasicColumnComponent, navIcon: 'icon-column-basic' },
+                { text: 'Stacked', component: StackedComponent, navIcon: 'icon-column-stacked' },
+                { text: 'Column With Renderer', component: ColumnWithRendererComponent, navIcon: 'icon-column-renderer' },
+                { text: 'Multiaxis Column', component: MultiaxisColumnComponent, navIcon: 'icon-column-multi-axis' }
             ] },
             { text: '3D Column', navIcon: 'icon-column-3d', children: [
-                { text: 'Basic 3D Column', component: ButtonComponent, navIcon: 'icon-column-basic-3d' },
-                { text: '3D Grouped', component: ButtonComponent, navIcon: 'icon-column-grouped-3d' },
-                { text: '3D Stacked', component: ButtonComponent, navIcon: 'icon-column-stacked-3d' },
-                { text: 'Negative Values', component: ButtonComponent, navIcon: 'icon-column-negative-3d' },
-                { text: '3D Column With Renderer', component: ButtonComponent, navIcon: 'icon-column-renderer-3d' }
+                { text: 'Basic 3D Column', component: Basic3DColumnComponent, navIcon: 'icon-column-basic-3d' },
+                { text: '3D Grouped', component: ThreeDGroupedComponent, navIcon: 'icon-column-grouped-3d' },
+                { text: '3D Stacked', component: ThreeDStackedComponent, navIcon: 'icon-column-stacked-3d' },
+                { text: 'Negative Values', component: NegativeValuesComponent, navIcon: 'icon-column-negative-3d' },
+                { text: '3D Column With Renderer', component: ThreeDColumnWithRendererComponent, navIcon: 'icon-column-renderer-3d' }
             ]},
             { text: 'Financial', navIcon: 'icon-financial-charts', children: [
-                { text: 'Candlestick', component: ButtonComponent, navIcon: 'icon-financial-candlestick' },
-                { text: 'OHLC', component: ButtonComponent, navIcon: 'icon-financial-ohlc' }
+                { text: 'Candlestick', component: CandlestickComponent, navIcon: 'icon-financial-candlestick' },
+                { text: 'OHLC', component: OHLCComponent, navIcon: 'icon-financial-ohlc' }
             ] },
             { text: 'Gauges', navIcon: 'icon-gauge-charts', children: [
                 { text: 'Basic Gauge', component: BasicGaugeChartComponent, navIcon: 'icon-gauge-basic' }  
             ] }, 
             { text: 'Line', navIcon: 'icon-line-charts', children: [
-                { text: 'Basic Line', component: ButtonComponent, navIcon: 'icon-line-basic' },
-                { text: 'Basic Markers', component: ButtonComponent, navIcon: 'icon-line-markers' },
-                { text: 'Spline', component: ButtonComponent, navIcon: 'icon-line-spline' },
-                { text: 'Spline Markers', component: ButtonComponent, navIcon: 'icon-line-marked-spline' },
-                { text: 'Plot', component: ButtonComponent, navIcon: 'icon-line-plot' },
-                { text: 'With Renderer', component: ButtonComponent, navIcon: 'icon-line-renderer' },
-                { text: 'Realtime', component: ButtonComponent, navIcon: 'icon-line-real-time' }
+                { text: 'Basic Line', component: BasicLineComponent, navIcon: 'icon-line-basic' },
+                { text: 'Basic Markers', component: BasicMarkersComponent, navIcon: 'icon-line-markers' },
+                { text: 'Spline', component: SplineComponent, navIcon: 'icon-line-spline' },
+                { text: 'Spline Markers', component: SplineMarkersComponent, navIcon: 'icon-line-marked-spline' },
+                { text: 'Plot', component: PlotComponent, navIcon: 'icon-line-plot' },
+                { text: 'With Renderer', component: WithRendererComponent, navIcon: 'icon-line-renderer' },
+                { text: 'Realtime', component: RealtimeComponent, navIcon: 'icon-line-real-time' }
             ] },
             { text: 'Navigator', component: NavigatorComponent, navIcon: 'icon-navigator-charts' },
             { text: 'Pie', navIcon: 'icon-pie-basic', children: [
-                { text: 'Basic Pie', component: ButtonComponent, navIcon: 'icon-pie-basic' },
-                { text: 'Spie', component: ButtonComponent, navIcon: 'icon-pie-custom' },
-                { text: 'Donut', component: ButtonComponent, navIcon: 'icon-pie-donut' },
-                { text: 'Double Donut', component: ButtonComponent, navIcon: 'icon-pie-double-donut' },
-                { text: '3D Pie', component: ButtonComponent, navIcon: 'icon-pie-3d' } 
+                { text: 'Basic Pie', component: BasicPieComponent, navIcon: 'icon-pie-basic' },
+                { text: 'Spie', component: SpieComponent, navIcon: 'icon-pie-custom' },
+                { text: 'Donut', component: DonutComponent, navIcon: 'icon-pie-donut' },
+                { text: 'Double Donut', component: DoubleDonutComponent, navIcon: 'icon-pie-double-donut' },
+                { text: '3D Pie', component: ThreeDPieComponent, navIcon: 'icon-pie-3d' } 
             ] },
             { text: 'Radar', navIcon: 'icon-radar-charts', children: [
-                { text: 'Basic Radar', component: ButtonComponent, navIcon: 'icon-radar-basic' },
-                { text: 'Filled', component: ButtonComponent, navIcon: 'icon-radar-filled' },
-                { text: 'Marked', component: ButtonComponent, navIcon: 'icon-radar-marked' },
-                { text: 'Multiaxis', component: ButtonComponent, navIcon: 'icon-radar-multi-axis' }
+                { text: 'Basic Radar', component: BasicRadarComponent, navIcon: 'icon-radar-basic' },
+                { text: 'Filled', component: FilledComponent, navIcon: 'icon-radar-filled' },
+                { text: 'Marked', component: MarkedComponent, navIcon: 'icon-radar-marked' },
+                { text: 'Multiaxis', component: MultiaxisComponent, navIcon: 'icon-radar-multi-axis' }
             ] },
             { text: 'Scatter', navIcon: 'icon-scatter-charts', children: [
                 { text: 'Basic Scatter', component: BasicScatterComponent, navIcon: 'icon-scatter-basic' },
@@ -307,33 +401,33 @@ const treeRoot = {
         ] },
         { text: 'D3', premium: true, navIcon: 'icon-d3', children: [
             { text: 'Heatmap', navIcon: 'icon-d3-heatmap', children: [
-                { text: 'Purchases By Day', component: ButtonComponent, navIcon: 'icon-d3-view-heatmap-purchases' },
-                { text: 'Sales Per Employee', component: ButtonComponent, navIcon: 'icon-d3-view-heatmap-sales' },
-                { text: 'Pivot Heatmap', component: ButtonComponent, navIcon: 'icon-d3-view-heatmap-pivot' },
-                { text: 'Configurable Pivot Heatmap', component: ButtonComponent, navIcon: 'icon-d3-view-heatmap-pivot-configurator' }
+                { text: 'Purchases By Day', component: PurchasesByDayComponent, navIcon: 'icon-d3-view-heatmap-purchases' },
+                { text: 'Sales Per Employee', component: SalesPerEmployeeComponent, navIcon: 'icon-d3-view-heatmap-sales' },
+                { text: 'Pivot Heatmap', component: PivotHeatmapComponent, navIcon: 'icon-d3-view-heatmap-pivot' },
+                { text: 'Configurable Pivot Heatmap', component: ConfigurablePivotHeatmapComponent, navIcon: 'icon-d3-view-heatmap-pivot-configurator' }
             ]},
             { text: 'Hierarchy', navIcon: 'icon-d3-hierarchy', children: [
-                { text: 'Org Chart', component: ButtonComponent, navIcon: 'icon-d3-view-sencha-tree' },
-                { text: 'Pack', component: ButtonComponent, navIcon: 'icon-d3-view-pack' },
-                { text: 'Sunburst', component: ButtonComponent, navIcon: 'icon-d3-view-sunburst' },
-                { text: 'Zoomable Sunburst', component: ButtonComponent, navIcon: 'icon-d3-view-sunburst-zoom' },
-                { text: 'Tree', component: ButtonComponent, navIcon: 'icon-d3-view-tree' },
-                { text: 'TreeMap', component: ButtonComponent, navIcon: 'icon-d3-view-treemap' },
-                { text: 'TreeMap Tooltip', component: ButtonComponent, navIcon: 'icon-d3-view-treemap-tooltip' },
-                { text: 'Configurable Pivot TreeMap', component: ButtonComponent, navIcon: 'icon-d3-view-treemap-pivot-configurator' }
+                { text: 'Org Chart', component: OrgChartComponent, navIcon: 'icon-d3-view-sencha-tree' },
+                { text: 'Pack', component: PackComponent, navIcon: 'icon-d3-view-pack' },
+                { text: 'Sunburst', component: SunburstComponent, navIcon: 'icon-d3-view-sunburst' },
+                { text: 'Zoomable Sunburst', component: ZoomableSunburstComponent, navIcon: 'icon-d3-view-sunburst-zoom' },
+                { text: 'Tree', component: TreeHierarchyComponent, navIcon: 'icon-d3-view-tree' },
+                { text: 'TreeMap', component: TreeMapComponent, navIcon: 'icon-d3-view-treemap' },
+                { text: 'TreeMap Tooltip', component: TreeMapToolTipComponent, navIcon: 'icon-d3-view-treemap-tooltip' },
+                { text: 'Configurable Pivot TreeMap', component: ConfigurablePivotTreeMapComponent, navIcon: 'icon-d3-view-treemap-pivot-configurator' }
             ]}
         ] },
         { text: 'Pivot Grids', premium: true, navIcon: 'icon-pivot-grids', children: [
-            { text: 'Outline Layout', component: ButtonComponent, navIcon: 'icon-outline-pivot-grid' },
-            { text: 'Compact Layout', component: ButtonComponent, navIcon: 'icon-compact-pivot-grid' },
-            { text: 'Tabular Layout', component: ButtonComponent, navIcon: 'icon-tabular-pivot-grid' },
-            { text: 'Collapsible', component: ButtonComponent, navIcon: 'icon-collapsible-pivot-grid' },
-            { text: 'Data Changes', component: ButtonComponent, navIcon: 'icon-datachanges-pivot-grid' },
-            { text: 'Pivot Grid Widgets', component: ButtonComponent, navIcon: 'icon-widgets-pivot-grid' },
-            { text: 'Drilldown Plugin', component: ButtonComponent, navIcon: 'icon-drilldown-pivot-grid' },
-            { text: 'Configurator Plugin', component: ButtonComponent, navIcon: 'icon-configurable-pivot-grid' },
-            { text: 'Range Editor Plugin', component: ButtonComponent, navIcon: 'icon-rangeeditor-pivot-grid' },
-            { text: 'Exporter Plugin', component: ButtonComponent, navIcon: 'icon-exporter-pivot-grid' }
+            { text: 'Outline Layout', component: OutlineLayoutComponent, navIcon: 'icon-outline-pivot-grid' },
+            { text: 'Compact Layout', component: CompactLayoutComponent, navIcon: 'icon-compact-pivot-grid' },
+            { text: 'Tabular Layout', component: TabularLayoutComponent, navIcon: 'icon-tabular-pivot-grid' },
+            { text: 'Collapsible', component: CollapsibleComponent, navIcon: 'icon-collapsible-pivot-grid' },
+            { text: 'Data Changes', component: DataChangesComponent, navIcon: 'icon-datachanges-pivot-grid' },
+            { text: 'Pivot Grid Widgets', component: PivotGridWidgetsComponent, navIcon: 'icon-widgets-pivot-grid' },
+            { text: 'Drilldown Plugin', component: DrilldownPluginComponent, navIcon: 'icon-drilldown-pivot-grid' },
+            { text: 'Configurator Plugin', component: ConfiguratorPluginComponent, navIcon: 'icon-configurable-pivot-grid' },
+            { text: 'Range Editor Plugin', component: RangeEditorPluginComponent, navIcon: 'icon-rangeeditor-pivot-grid' },
+            { text: 'Exporter Plugin', component: ExporterPluginComponent, navIcon: 'icon-exporter-pivot-grid' }
         ]},
 
     ]

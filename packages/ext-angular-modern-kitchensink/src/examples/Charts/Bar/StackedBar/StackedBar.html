@@ -1,0 +1,18 @@
+<container #item [padding]="!isPhone?  '10': ''" layout="fit"
+[height]="'600px'">
+    <chart-toolbar #item
+        [onThemeChange]="this.changeTheme"
+        [onRefreshClick]="this.refresh"
+        [theme]="theme"
+    ></chart-toolbar>
+    <cartesian
+    #item
+        shadow="true"
+        flipXY="true"
+        [store]="this.store"
+        [theme]="theme"
+        [insetPadding]="'20 20 10 10'"
+        [series]="cartesianSeries"
+        [axes]="cartesianAxes"
+    ></cartesian>
+</container>

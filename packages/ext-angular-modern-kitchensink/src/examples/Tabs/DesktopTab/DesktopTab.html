@@ -1,0 +1,23 @@
+<tabpanel #item
+    [flex]="1"
+    [shadow]="true" 
+    [height]="300"
+    [width]="600"
+    [defaults]="{
+        cls: 'card',
+        layout: 'center',
+        tab: {flex: 0,minWidth: 100}
+    }"
+    [tabBar]="{layout: {pack: 'left'}}"
+>
+    <container #item [title]="'Tab 1'" [layout]="'center'" tab="{flex: 0,minWidth: 100}">
+        <container #item [html]="'When optimizing for desktops, you may want to tabs on the left side of the tab bar.  You can do this by setting <code>pack: \'left\'</code> in the tab bar\'s layout config.'">
+        </container>
+    </container>
+    <container #item [title]="'Tab 2'" [layout]="'center'" tab="{flex: 0,minWidth: 100}">
+        <container #item [cls]="'action'" [html]="'User tapped Tab 2'"></container>
+    </container>
+    <container #item [title]="'Tab 3'" [layout]="'center'" tab="{flex: 0,minWidth: 100}">
+        <container #item [cls]="'action'" [html]="'User tapped Tab 3'"></container>
+    </container>
+</tabpanel>

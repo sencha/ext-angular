@@ -1,0 +1,22 @@
+<container #item [padding]="isPhone? '10' : ''" layout="fit" 
+[height]="'700px'">
+    <chart-toolbar #item
+        [onThemeChange]="this.changeTheme"
+        [onRefreshClick]="this.refresh"
+        [theme]="theme"
+    ></chart-toolbar>
+    <polar #item
+    [width]="'800px'"
+        shadow="true"
+        [innerPadding]="isDesktop ? 40 : 10"
+        [store]="this.store"
+        [theme]="theme"
+        [series]="[{
+            type: 'pie',
+            xField: 'g1',
+            label: {
+                field: 'name'
+            }
+        }]"
+    ></polar>
+</container>

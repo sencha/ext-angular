@@ -133,6 +133,58 @@ import {NavigatorComponent} from '../examples/Charts/Navigator/Navigator';
 import {BasicScatterComponent} from '../examples/Charts/Scatter/BasicScatter/BasicScatter';
 import {BubbleComponent} from '../examples/Charts/Scatter/Bubble/Bubble';
 import {CustomIconsComponent} from '../examples/Charts/Scatter/CustomIcons/CustomIcons';
+import {BasicLineComponent} from '../examples/Charts/Line/BasicLine/BasicLine';
+import {BasicMarkersComponent} from '../examples/Charts/Line/BasicMarkers/BasicMarkers';
+import {PlotComponent} from '../examples/Charts/Line/Plot/Plot';
+import {RealtimeComponent} from '../examples/Charts/Line/Realtime/Realtime';
+import {SplineComponent} from '../examples/Charts/Line/Spline/Spline';
+import {SplineMarkersComponent} from '../examples/Charts/Line/SplineMarkers/SplineMarkers';
+import {WithRendererComponent} from '../examples/Charts/Line/WithRenderer/WithRenderer';
+
+import {BasicAreaComponent} from '../examples/Charts/Area/BasicArea/BasicArea';
+import {FullStackedAreaComponent} from '../examples/Charts/Area/FullStackedArea/FullStackedArea';
+import {NegativeValuesAreaComponent} from '../examples/Charts/Area/NegativeValuesArea/NegativeValuesArea';
+import {StackedAreaComponent} from '../examples/Charts/Area/StackedArea/StackedArea';
+
+import {BasicRadarComponent} from '../examples/Charts/Radar/BasicRadar/BasicRadar';
+import {FilledComponent} from '../examples/Charts/Radar/Filled/Filled';
+import {MarkedComponent} from '../examples/Charts/Radar/Marked/Marked';
+import {MultiaxisComponent} from '../examples/Charts/Radar/Multiaxis/Multiaxis';
+import {ThreeDPieComponent} from '../examples/Charts/Pie/3DPie/3DPie';
+import {BasicPieComponent} from '../examples/Charts/Pie/BasicPie/BasicPie';
+import {DonutComponent} from '../examples/Charts/Pie/Donut/Donut';
+import {DoubleDonutComponent} from '../examples/Charts/Pie/DoubleDonut/DoubleDonut';
+import {SpieComponent} from '../examples/Charts/Pie/Spie/Spie';
+
+import {BasicBarComponent} from '../examples/Charts/Bar/BasicBar/BasicBar';
+import {FullStackedBarComponent} from '../examples/Charts/Bar/FullStackedBar/FullStackedBar';
+import {StackedBarComponent} from '../examples/Charts/Bar/StackedBar/StackedBar';
+
+import {CandlestickComponent} from '../examples/Charts/Financial/Candlestick/Candlestick';
+import {OHLCComponent} from '../examples/Charts/Financial/OHLC/OHLC';
+
+import {BasicColumnComponent} from '../examples/Charts/Column/BasicColumn/BasicColumn';
+import {ColumnWithRendererComponent} from '../examples/Charts/Column/ColumnWithRenderer/ColumnWithRenderer';
+import {MultiaxisColumnComponent} from '../examples/Charts/Column/MultiaxisColumn/MultiaxisColumn';
+import {StackedComponent} from '../examples/Charts/Column/Stacked/Stacked';
+import {ThreeDColumnWithRendererComponent} from '../examples/Charts/3DColumn/3DColumnWithRenderer/3DColumnWithRenderer';
+import {ThreeDGroupedComponent} from '../examples/Charts/3DColumn/3DGrouped/3DGrouped';
+import {ThreeDStackedComponent} from '../examples/Charts/3DColumn/3DStacked/3DStacked';
+import {Basic3DColumnComponent} from '../examples/Charts/3DColumn/Basic3DColumn/Basic3DColumn';
+import {NegativeValuesComponent} from '../examples/Charts/3DColumn/NegativeValues/NegativeValues';
+
+
+import {CollapsibleComponent} from '../examples/PivotGrid/Collapsible/Collapsible'
+import {CompactLayoutComponent} from '../examples/PivotGrid/CompactLayout/CompactLayout'
+import {ConfiguratorPluginComponent} from '../examples/PivotGrid/ConfiguratorPlugin/ConfiguratorPlugin'
+import {DataChangesComponent} from '../examples/PivotGrid/DataChanges/DataChanges'
+import {DrilldownPluginComponent} from '../examples/PivotGrid/DrilldownPlugin/DrilldownPlugin'
+import {ExporterPluginComponent} from '../examples/PivotGrid/ExporterPlugin/ExporterPlugin'
+import {OutlineLayoutComponent} from '../examples/PivotGrid/OutlineLayout/OutlineLayout'
+import {PivotGridWidgetsComponent} from '../examples/PivotGrid/PivotGridWidgets/PivotGridWidgets'
+import {RangeEditorPluginComponent} from '../examples/PivotGrid/RangeEditorPlugin/RangeEditorPlugin'
+import {RowStylingComponent} from '../examples/PivotGrid/RowStyling/RowStyling'
+import {TabularLayoutComponent} from '../examples/PivotGrid/TabularLayout/TabularLayout'
 
 import {SimpleDragDropComponent} from "../examples/DragAndDrop/Simple/Simple";
 import {ConstraintsDragDropComponent} from '../examples/DragAndDrop/Constraints/Constraints';
@@ -142,10 +194,55 @@ import {GroupsDragDropComponent} from '../examples/DragAndDrop/Groups/Groups';
 import {FilesDragDropComponent} from '../examples/DragAndDrop/Files/Files';
 import {DataDragDropComponent} from '../examples/DragAndDrop/Data/Data';
 
+import {BasicPanelComponent} from '../examples/Panels/Basic/Basic';
+import {BasicDatePanelComponent} from '../examples/Panels/BasicDate/BasicDate';
+import {AdvancedDatePanelComponent} from '../examples/Panels/AdvancedDate/AdvancedDate';
+import {TimePanelComponent} from '../examples/Panels/TimePanel/Time';
+import {CollapsiblePanelComponent} from '../examples/Panels/Collapsible/Collapsible';
+import {ResizableHandleComponent} from '../examples/Panels/Resizable/ResizableHandle';
+import {DialogPopupComponent} from '../examples/Popups/Dialog/Dialog';
+import {MessagePopupComponent} from '../examples/Popups/Message/Message';
+import {ToastPopupComponent} from '../examples/Popups/Toast/Toast';
+
+import {BasicListComponent} from '../examples/Lists/Basic/BasicList';
+import {DisclosureListComponent} from '../examples/Lists/Disclosure/Disclosure';
+import {GroupedListComponent} from '../examples/Lists/Grouped/GroupedList';
+import {NestedListComponent} from '../examples/Lists/NestedList/NestedList';
+import {PagingListComponent} from '../examples/Lists/Paging/PagingList';
+import {PullRefreshListComponent} from '../examples/Lists/PullRefresh/PullRefresh';
+import {BasicAccordionSwiperComponent} from '../examples/Lists/BasicAccordionSwiper/BasicAccordionSwiper';
+import {BasicStepSwiperComponent} from '../examples/Lists/BasicStepSwiper/BasicStepSwiper';
+import {UndoableAccordionSwiperComponent} from '../examples/Lists/UndoableAccordionSwiper/UndoableAccordionSwiper';
+import {UndoableStepSwiperComponent} from '../examples/Lists/UndoableStepSwiper/UndoableStepSwiper';
+
+import {TouchEventsComponent} from '../examples/TouchEvents/TouchEvents';
+import {BasicTabComponent} from '../examples/Tabs/BasicTab/BasicTab';
+import {BottomTabComponent} from '../examples/Tabs/BottomTab/BottomTab';
+import {IconTabComponent} from '../examples/Tabs/IconTab/IconTab';
+import {DesktopTabComponent} from '../examples/Tabs/DesktopTab/DesktopTab';
+import {CloseableTabComponent} from '../examples/Tabs/Closeable/Closeable';
+// import {ScrollingTabComponent} from '../examples/Tabs/Scrolling/Scrolling';
+import {TabBarComponent} from '../examples/Tabs/TabBar/TabBar';
+import {WizardComponent} from '../examples/Wizard/Wizard';
+
 import {CalendarService} from "../examples/Calendar/Calendar.service"
 import {GridService} from '../examples/Grid/Grid.service'
 import {BigDataService} from '../examples/Grid/AdvancedFeatures/BigData/BigData.service'
 
+import {ConfigurablePivotHeatmapComponent} from '../examples/D3/HeatMap/ConfigurablePivotHeatmap/ConfigurablePivotHeatmap';
+import {PivotHeatmapComponent} from '../examples/D3/HeatMap/PivotHeatmap/PivotHeatmap';
+import {PurchasesByDayComponent} from '../examples/D3/HeatMap/PurchasesByDay/PurchasesByDay';
+import {SalesPerEmployeeComponent} from '../examples/D3/HeatMap/SalesPerEmployee/SalesPerEmployee';
+
+
+import {OrgChartComponent} from '../examples/D3/Hierarchy/OrgChart/OrgChart';
+import {PackComponent} from '../examples/D3/Hierarchy/Pack/Pack';
+import {TreeMapToolTipComponent} from '../examples/D3/Hierarchy/TreeMapToolTip/TreeMapToolTip';
+import {ConfigurablePivotTreeMapComponent} from '../examples/D3/Hierarchy/ConfigurablePivotTreeMap/ConfigurablePivotTreeMap';
+import {TreeMapComponent} from '../examples/D3/Hierarchy/TreeMap/TreeMap';
+import {SunburstComponent} from '../examples/D3/Hierarchy/Sunburst/Sunburst';
+import {TreeHierarchyComponent} from '../examples/D3/Hierarchy/Tree/Tree';
+import {ZoomableSunburstComponent} from '../examples/D3/Hierarchy/ZoomableSunburst/ZoomableSunburst';
 
 interface ExtAngularRoute extends Route {
   text?: string;
@@ -190,7 +287,8 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/panels', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/popups', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/tabs', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	
+	{ path: 'components/touch_events', component: TouchEventsComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/wizard', component: WizardComponent, text: 'Wizard', iconCls: 'x-fafa-calendar', xtype: 'homeview', leaf: true },
 	
 	{ path: 'grids', component: DummyComponent, text: 'Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/core_features', component: DummyComponent, text: 'Grids Core Features', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -215,8 +313,10 @@ const routes: ExtAngularRoutes = [
 	{ path: 'charts/scatter', component: DummyComponent, text: 'Scatter', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	
 	{ path: 'd3', component: DummyComponent, text: 'D3', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/heatmap', component: DummyComponent, text: 'D3 Heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/hierarchy', component: DummyComponent, text: 'D3 Hierarchy', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'pivot_grids', component: DummyComponent, text: 'Pivot Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-
+	
 	//example components
 	{ path: 'components/buttons/button', component: ButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/buttons/splitbutton', component: SplitButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -305,13 +405,111 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/layouts/resizable', component: ResizableLayoutComponent, text: 'resizable', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/layouts/vbox', component: vboxLayoutComponent, text: 'vbox', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
+	{ path: 'components/panels/basic_panels', component: BasicPanelComponent, text: 'Basic Panels', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
+	{ path: 'components/panels/resizable_handle', component: ResizableHandleComponent, text: 'Resizeable handle', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
+	{ path: 'components/panels/collapsible_panel', component: CollapsiblePanelComponent, text: 'Collapsible Panel', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
+	{ path: 'components/panels/basic_date_panel', component: BasicDatePanelComponent, text: 'Basic Date Panel', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
+	{ path: 'components/panels/advanced_date_panel', component: AdvancedDatePanelComponent, text: 'Advanced Date Panel', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
+	{ path: 'components/panels/time_panel', component: TimePanelComponent, text: 'Time Panel', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
+
+	{ path: 'components/popups/dialog', component: DialogPopupComponent, text: 'Dialog', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/popups/msg', component: MessagePopupComponent, text: 'Message', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/popups/toast', component: ToastPopupComponent, text: 'Toast', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	{ path: 'components/lists/basic_list', component: BasicListComponent, text: 'Basic List', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/disclosure', component: DisclosureListComponent, text: 'Disclosure', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/grouped', component: GroupedListComponent, text: 'Grouped', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/nestedlist', component: NestedListComponent, text: 'Nested List', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/pull_refresh', component: PullRefreshListComponent, text: 'Pull refresh', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/paging', component: PagingListComponent, text: 'Paging', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/basic_accordion_swiper', component: BasicAccordionSwiperComponent, text: 'Basic Accordion Swiper', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/basic_step_swiper', component: BasicStepSwiperComponent, text: 'Basic Step Swiper', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/undoable_accordion_swiper', component: UndoableAccordionSwiperComponent, text: 'Basic Accordion Swiper', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/lists/undoable_step_swiper', component: UndoableStepSwiperComponent, text: 'Basic Step Swiper', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	{ path: 'components/tabs/basic_tabs', component: BasicTabComponent, text: 'Basic Taps', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/tabs/bottom_tabs', component: BottomTabComponent, text: 'Bottom Tabs', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/tabs/icon_tabs', component: IconTabComponent, text: 'Icon Tabs', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/tabs/scrollingtabs', component: DummyComponent, text: 'Scrolling Tabs', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/tabs/closable', component: CloseableTabComponent, text: 'Closeable Tabs', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/tabs/desktop_tabs', component: DesktopTabComponent, text: 'Desktop Tabs', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/tabs/tabbar', component: TabBarComponent, text: 'TabBar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
 	{ path: 'charts/gauges/basic_gauge', component: BasicGaugeChartComponent, text: 'Basic Gauge', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'charts/boxplot', component: BoxPlotComponent, text: 'Box Plot', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'charts/navigator', component: NavigatorComponent, text: 'Navigator', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'charts/scatter/basic_scatter', component: BasicScatterComponent, text: 'Navigator', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'charts/scatter/custom_icons', component: CustomIconsComponent, text: 'Navigator', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'charts/scatter/bubble', component: BubbleComponent, text: 'Navigator', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/scatter/basic_scatter', component: BasicScatterComponent, text: 'Basic scatter', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/scatter/custom_icons', component: CustomIconsComponent, text: 'Custom icons', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/scatter/bubble', component: BubbleComponent, text: 'Bubble', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	
+	{ path: 'charts/line/basic_line', component: BasicLineComponent, text: 'Basic Line', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/line/basic_markers', component: BasicMarkersComponent, text: 'Basic Markers', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/line/spline', component: SplineComponent, text: 'Spline', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/line/spline_markers', component: SplineMarkersComponent, text: 'Spline Markers', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/line/plot', component: PlotComponent, text: 'Plot', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/line/with_renderer', component: WithRendererComponent, text: 'With Renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/line/realtime', component: RealtimeComponent, text: 'Realtime', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	{ path: 'charts/area/basic_area', component: BasicAreaComponent, text: 'Basic Area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/area/stacked_area', component: StackedAreaComponent, text: 'Stacked Area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/area/full_stacked_area', component: FullStackedAreaComponent, text: 'Full Stacked Area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/area/negative_values_area', component: NegativeValuesAreaComponent, text: 'Negative values area', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	
+	{ path: 'charts/radar/basic_radar', component: BasicRadarComponent, text: 'Basic Radar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/radar/filled', component: FilledComponent, text: 'Filled Component', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/radar/marked', component: MarkedComponent, text: 'Marked Component', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/radar/multiaxis', component: MultiaxisComponent, text: 'Multi axis', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	{ path: 'charts/bar/basic_bar', component: BasicBarComponent, text: 'Basic Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/bar/stacked_bar', component: StackedBarComponent, text: 'Stacked Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/bar/full_stacked_bar', component: FullStackedBarComponent, text: 'Full Stacked Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	{ path: 'charts/pie/3d_pie', component: ThreeDPieComponent, text: '3D Pie', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/pie/basic_pie', component: BasicPieComponent, text: 'Basic Pie', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/pie/donut', component: DonutComponent, text: 'Donut', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/pie/double_donut', component: DoubleDonutComponent, text: 'Double Donut', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/pie/spie', component: SpieComponent, text: 'Spie', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	{ path: 'charts/financial/candlestick', component: CandlestickComponent, text: 'Candle stick', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/financial/ohlc', component: OHLCComponent, text: 'OHLC', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+
+	{ path: 'charts/column/basic_column', component: BasicColumnComponent, text: 'Basic Column', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/column/stacked', component: StackedComponent, text: 'Stacked Column', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/column/column_with_renderer', component: ColumnWithRendererComponent, text: 'Column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/column/multiaxis_column', component: MultiaxisColumnComponent, text: 'Multi axis column', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+
+	{ path: 'charts/3d_column/basic_3d_column', component: Basic3DColumnComponent, text: 'Basic 3D column', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/3d_column/3d_grouped', component: ThreeDGroupedComponent, text: '3D grouped column', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/3d_column/3d_stacked', component: ThreeDStackedComponent, text: '3D stacked', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/3d_column/negative_values', component: NegativeValuesComponent, text: 'Ngeative values', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'charts/3d_column/3d_column_with_renderer', component: ThreeDColumnWithRendererComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	{ path: 'pivot_grids/outline_layout', component: OutlineLayoutComponent, text: 'Outline layout component', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'pivot_grids/compact_layout', component: CompactLayoutComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'pivot_grids/tabular_layout', component: TabularLayoutComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'pivot_grids/collapsible', component: CollapsibleComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'pivot_grids/data_changes', component: DataChangesComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'pivot_grids/pivot_grid_widgets', component: PivotGridWidgetsComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'pivot_grids/drilldown_plugin', component: DrilldownPluginComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'pivot_grids/configurator_plugin', component: ConfiguratorPluginComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'pivot_grids/range_editor_plugin', component: RangeEditorPluginComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'pivot_grids/exporter_plugin', component: ExporterPluginComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	{ path: 'd3/heatmap/purchases_by_day', component: PurchasesByDayComponent, text: 'Purchase by day component', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/heatmap/sales_per_employee', component: SalesPerEmployeeComponent, text: 'Sales per employee', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/heatmap/pivot_heatmap', component: PivotHeatmapComponent, text: 'Pivot heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/heatmap/configurable_pivot_heatmap', component: ConfigurablePivotHeatmapComponent, text: 'Configurable Pivot heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
+	{ path: 'd3/hierarchy/org_chart', component: OrgChartComponent, text: 'Configurable Pivot heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/hierarchy/pack', component: PackComponent, text: 'Configurable Pivot heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/hierarchy/treemap_tooltip', component: TreeMapToolTipComponent, text: 'TreeMap Tooltip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/hierarchy/configurable_pivot_treemap', component: ConfigurablePivotTreeMapComponent, text: 'Configurable Pivot TreeMap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/hierarchy/treemap', component: TreeMapComponent, text: 'TreeMap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/hierarchy/sunburst', component: SunburstComponent, text: 'Sunburst', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/hierarchy/tree', component: TreeHierarchyComponent, text: 'Tree', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'd3/hierarchy/zoomable_sunburst', component: ZoomableSunburstComponent, text: 'Zoomable Sunburst', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },	
 
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
@@ -442,6 +640,55 @@ export class App {
 		BasicScatterComponent,
 		BubbleComponent,
 		CustomIconsComponent,
+		BasicLineComponent,
+		BasicMarkersComponent,
+		PlotComponent,
+		RealtimeComponent,
+		SplineComponent,
+		SplineMarkersComponent,
+		WithRendererComponent,
+		BasicAreaComponent,
+		FullStackedAreaComponent,
+		NegativeValuesAreaComponent,
+		StackedAreaComponent,
+		BasicRadarComponent,
+		FilledComponent,
+		MarkedComponent,
+		MultiaxisComponent,
+		ThreeDPieComponent,
+		BasicPieComponent,
+		DonutComponent,
+		DoubleDonutComponent,
+		SpieComponent,
+
+		BasicBarComponent,
+		FullStackedBarComponent,
+		StackedBarComponent,
+
+		CandlestickComponent,
+		OHLCComponent,
+
+		BasicColumnComponent,
+		ColumnWithRendererComponent,
+		MultiaxisColumnComponent,
+		StackedComponent,
+		ThreeDColumnWithRendererComponent,
+		ThreeDGroupedComponent,
+		ThreeDStackedComponent,
+		Basic3DColumnComponent,
+		NegativeValuesComponent,
+
+		CollapsibleComponent,
+		CompactLayoutComponent,
+		ConfiguratorPluginComponent,
+		DataChangesComponent,
+		DrilldownPluginComponent,
+		ExporterPluginComponent,
+		OutlineLayoutComponent,
+		PivotGridWidgetsComponent,
+		RangeEditorPluginComponent,
+		RowStylingComponent,
+		TabularLayoutComponent,
 
 		SimpleDragDropComponent,
 		ConstraintsDragDropComponent,
@@ -451,6 +698,51 @@ export class App {
 		FilesDragDropComponent,
 		DataDragDropComponent,
 
+		BasicPanelComponent,
+		BasicDatePanelComponent,
+		AdvancedDatePanelComponent,
+		DialogPopupComponent,
+		MessagePopupComponent,
+		ToastPopupComponent,
+		TimePanelComponent,
+		ResizableHandleComponent,
+		CollapsiblePanelComponent,
+
+		BasicListComponent,
+		DisclosureListComponent,
+		GroupedListComponent,
+		NestedListComponent,
+		PullRefreshListComponent,
+		PagingListComponent,
+		BasicAccordionSwiperComponent,
+		BasicStepSwiperComponent,
+		UndoableAccordionSwiperComponent,
+		UndoableStepSwiperComponent,
+
+		TouchEventsComponent,
+		BasicTabComponent,
+		BottomTabComponent,
+		IconTabComponent,
+		DesktopTabComponent,
+		CloseableTabComponent,
+		// ScrollingTabComponent,
+		TabBarComponent,
+		WizardComponent,
+
+		ConfigurablePivotHeatmapComponent,
+		PivotHeatmapComponent,
+		PurchasesByDayComponent,
+		SalesPerEmployeeComponent,
+
+		OrgChartComponent,
+		PackComponent,
+		TreeMapToolTipComponent,
+		ConfigurablePivotTreeMapComponent,
+		TreeMapComponent,
+		SunburstComponent,
+		TreeHierarchyComponent,
+		ZoomableSunburstComponent,
+
 	],
 	providers: [
 		AgencyService,
@@ -458,7 +750,7 @@ export class App {
 		GridService,
 		AppService,
 		ExtAngularService,
-		BigDataService
+		BigDataService,
 	],
 	entryComponents: [
 		SideBarComponent, 

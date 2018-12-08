@@ -1,0 +1,10 @@
+<panel #item shadow layout="fit">
+    <d3-sunburst #item
+            padding="20"
+            [store]="store"
+            [tooltip]="tooltip"
+            [transitions]="transitions"
+            (nodeTransform)="this.onSelectionChange"
+            expandEventName="false"
+    ></d3-sunburst>
+</panel>

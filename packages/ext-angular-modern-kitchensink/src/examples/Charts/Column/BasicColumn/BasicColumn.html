@@ -1,0 +1,15 @@
+<container #item layout="fit" padding="8" [height]="'600px'">
+    <chart-toolbar #item
+        [onRefreshClick]="this.refresh"
+        [onThemeChange]="this.changeTheme"
+        [theme]="theme"
+    ></chart-toolbar>
+    <cartesian #item
+        shadow="true"
+        insetPadding="20 10"
+        [store]="this.store"
+        [theme]="theme"
+        [axes]="cartesianAxes"
+        [series]="cartesianSeries"
+    ></cartesian>
+</container>

@@ -1,0 +1,15 @@
+<container #item [layout]="{ type: 'vbox', align: 'center' }" [padding]="10">
+        <panel #item [ui]="'instructions'" [margin]="'0 0 20 0'" shadow="true"
+            [html]="'To acheive the look and feel of tabs without using a <code>TabPanel</code>, you can use <code>TabBar</code> and <code>Tab</code> as standalone components.'"
+        ></panel>
+    
+        <tabbar #item [width]="400" [shadow]="true" (onActiveTabChange)="onTabChange()" [activeTab]="activeTab">
+            <tab #item key="1" [itemId]="'info'" [title]="'Info'" [iconCls]="'x-fa fa-info-circle'"></tab>
+            <tab #item key="2" [itemId]="'download'" title="Download" [iconCls]="'x-fa fa-download'" badgeText="2" ></tab>
+            <tab #item key="3" [itemId]="'favorites'" title="Favorites" iconCls="x-fa fa-star" (onActivate)="onActivateTab()"></tab>
+            <tab #item key="4" [itemId]="'bookmarks'" title="Bookmarks" iconCls="x-fa fa-bookmark" (onActivate)="onActivateTab()"></tab>
+        </tabbar>
+        <panel #item ui="instructions" margin="20 0 0 0" shadow >
+            <container #item html="<div>Active Tab: {{activeTab}}</div>"></container>
+        </panel>
+    </container>
