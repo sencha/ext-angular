@@ -18,11 +18,10 @@ export class CardLayoutComponent implements OnInit  {
   colors:object = colors;
 
   switchCards = (animation) => {
-    this.activeCard = this.activeCard === 0 ? 1 : 0;
     this.animation = animation;
+    this.activeCard = this.activeCard === 0 ? 1 : 0;
   }
 
-// createCardContents(ui) {
   animationDefaults:object = {
       duration: 500,
       easing: 'ease-in-out'
@@ -45,13 +44,6 @@ export class CardLayoutComponent implements OnInit  {
     { text: 'Pop', animation: { type: 'pop', ...this.animationDefaults } },
     { text: 'Flip', animation: { type: 'flip', ...this.animationDefaults } }
   ];
-
-  // return contents;
-  // .map(
-    // ({animation, ...props}, i) => (<button #item { ...props } key={i} ui={ui} onTap={this.switchCards(animation)}/>)
-  // );
-
-// }
 
   ngOnInit() {}
 

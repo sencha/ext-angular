@@ -38,10 +38,9 @@ Marc - Completed
   - [Marc] titleBar property does not exist for Grid (Eg. Big Data) [change in SDK - done]
 
 Issues - Alisha
-  - CardLayoutComponent using *ngFor is not working. - Working on this.
   - ResizableHandle in Panels:Unable to resize the panel from corners and dynamic option not working 
   - Tabs: All components are not rendering.
-  - TouchEvents: Events list not updated in *ngFor (events list not updated). - Working on this.
+  - TouchEvents: Events list is not updated (using *ngFor rendering)
   - Hierarchy D3: In ZoomableSunburst selectionChange() used in react but unable to find an equivalent here.
   so zooming not working on selection of chart node.
 
