@@ -7,10 +7,10 @@ declare var Ext: any;
   templateUrl: './Wizard.html',
   encapsulation: ViewEncapsulation.None,
   styles: [`
-    .step: {
+    .step {
         font-size: 16px;
     }
-    .tooltipHeader: {
+    .tooltipHeader {
         font-weight: bold;
         fon-sSize: 14px;
         font-family: courier
@@ -22,26 +22,35 @@ export class WizardComponent implements OnInit {
 
   constructor() { }
 
-  step = 0;
-  tapMode = 'direction';
+  step:number = 0;
+  tapMode = 'item';
+  indicatorRef:any;
 
   previous = () => {
-    this.step = this.step - 1;
+    if (this.step > 0) {
+      this.step = this.step - 1;
+      this.indicatorRef.setActiveIndex(this.step);
+    }
   }
 
   next = () => {
-    this.step = this.step + 1;
-    console.log('innnnnn next...', this.step);
+    if (this.step < 2) {
+      this.step = this.step + 1;
+      this.indicatorRef.setActiveIndex(this.step);
+    }
   }
 
-  onIndicatorTap = (indicator, dot) => {
-    console.log('@@@@@@@22', indicator, dot);
-    this.step = dot;
+  onIndicatorTap = ({indicator, index}) => {
+    this.step = index;
+    this.indicatorRef.setActiveIndex(this.step);
   }
 
-  changeTapMode = (button, value) => {
-    this.tapMode = value;
+  indicatorReady = (ele) => {
+    this.indicatorRef = ele.ext;
+    this.indicatorRef.setActiveIndex(this.step);
   }
+
+  changeTapMode = (button, value) =>  this.tapMode = value;
 
   ngOnInit() {}
   

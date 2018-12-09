@@ -1,32 +1,28 @@
 <container #item
-    layout="vbox"
+    [layout]="'vbox'"
     padding="10"
     [platformConfig]="{
-        '!phone': {
-            height: 350,
-            width: 550
-        }
+        '!phone': {height: 350, width: 550}
     }"
 >
-    <container #item layout="hbox" [margin]="'0 0 10 0'">
-        <segmentedbutton #item width="300" [value]="tapMode" (change)="changeTapMode($event)" [defaultUI]="'toolbar-default'">
-            <button #item [text]="'direction'" [value]="'direction'">
-                <!-- <tooltip #item maxWidth="300">
+    <container #item [layout]="hbox" [margin]="'0 0 10 0'">
+        <segmentedbutton #item (change)="changeTapMode($event)" [defaultUI]="'toolbar-default'">
+            <button #item text="DIRECTION" [pressed]="tapMode === 'direction'">
+                <tooltip #item maxWidth="300">
                     <div #item style='font-weight:bold;font-size:14px;font-family:courier;'
-                        html="<Indicator tapMode='direction' />"
-                    ></div>
+                    ><code><</code>Indicator tapMode="direction" /></div>
                     <p #item>Clicking on a dot in the indicator will move the wizard one step forward or backward depending on the side that was clicked.</p>
-                </tooltip> -->
+                </tooltip>
             </button>
-            <button #item text="item" value="item">
-                <!-- <tooltip #item maxWidth="300">
+            <button #item text="ITEM" [pressed]="tapMode === 'item'">
+                <tooltip #item maxWidth="300">
                     <div #item style='font-weight:bold;font-size:14px;font-family:courier;'>
-                        <indicator #item [tapMode]="'item'"></indicator>
-                        </div>
-                    <p>
+                        <code><</code>Indicator tapMode="item" />
+                    </div>
+                    <p #item>
                         Clicking on a dot in the indicator will move the wizard to the corresponding step.
                     </p>
-                </tooltip> -->
+                </tooltip>
             </button>
         </segmentedbutton>
     </container>
@@ -41,11 +37,13 @@
                 Please click the 'Next' button to continue...
             "
         ></container>
-        <container #item padding="20" [cls]="'step'">
+        <container #item padding="20" [cls]="'step'"
+            html="
                 Step 2 of 3
 
-                Almost there. Please click the "Next" button to continue...
-        </container>
+                Almost there. Please click the 'Next' button to continue...
+            "
+        ></container>
         <container #item padding="5 20" [cls]="'step'"
             html="
                 <h1>Congratulations!</h1>
@@ -61,8 +59,8 @@
                 iconCls="x-fa fa-chevron-left"
             ></button>
             <indicator #item
+                (ready)="indicatorReady($event)"
                 count="3"
-                [activeIndex]="step" 
                 (next)="next()" 
                 (previous)="previous()" 
                 [tapMode]="tapMode"
