@@ -4,39 +4,41 @@
  * 
  * Creates a Gauge Chart.
  *
- *     @example packages=[charts,reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container } from '@extjs/ext-react';
- *     import { Polar } from '@extjs/ext-react-charts';
- *
- *     export default class MyExample extends Component {
- *
- *        store = new Ext.data.Store({
- *             fields: ['name', 'data1', 'data2', 'data3'],
- *             data: [{
- *                 mph: 65,
- *                 fuel: 50,
- *                 temp: 150,
- *                 rpm: 6000
- *             }]
- *        })
- *
- *        render() {
- *            return (
- *                 <ExtReact>
- *                     <Polar
- *                         store={this.store}
- *                         series={[{
- *                            type: 'gauge',
- *                            angleField: 'mph',
- *                            needle: true,
- *                            donut: 30
- *                         }]}
- *                     />
- *                 </ExtReact>
- *            )
- *        }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <polar #item
+*                        [width]="'800px'"
+*                        [height]="'600px'"
+*                            [store]="this.store"
+*                            [series]="polarSeries"
+*                            ></polar>
+*                        `
+*            })
+*            export class AppComponent {
+*                store = new Ext.data.Store({
+*                        fields: ['name', 'data1', 'data2', 'data3'],
+*                        data: [{
+*                            mph: 65,
+*                            fuel: 50,
+*                            temp: 150,
+*                            rpm: 6000
+*                        }]
+*                })
+*
+*                polarSeries = [{
+*                    type: 'gauge',
+*                    angleField: 'mph',
+*                    needle: true,
+*                    donut: 30
+*                }];
+*            }
  */
 
 /**

@@ -8,45 +8,47 @@
  * As with all other series, the Pie Series must be appended in the *series* Chart array
  * prop. See the Chart documentation for more information.
  *
- *     @example packages=[charts,reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container } from '@extjs/ext-react';
- *     import { Polar } from '@extjs/ext-react-charts';
- *
- *     export default class MyExample extends Component {
- *
- *        store = new Ext.data.Store({
- *             fields: ['name', 'data1'],
- *             data: [
- *                  { name: 'metric one', data1: 14 },
- *                  { name: 'metric two', data1: 16 },
- *                  { name: 'metric three', data1: 14 },
- *                  { name: 'metric four', data1: 6 },
- *                  { name: 'metric five', data1: 36 }
- *             ]
- *        })
- *
- *        render() {
- *            return (
- *                 <ExtReact>
- *                     <Polar
- *                         store={this.store}
- *                         theme="green"
- *                         interactions={['rotate']}
- *                         series={[{
- *                            type: 'pie',
- *                            angleField: 'data1',
- *                            donut: 30,
- *                            label: {
- *                                field: 'name',
- *                                display: 'rotate'
- *                            },
- *                         }]}
- *                     />
- *                 </ExtReact>
- *            )
- *        }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <polar #item
+*                        [width]="'800px'"
+*                        [height]="'600px'"
+*                        theme="green"
+*                        [interactions]="['rotate']"
+*                        [store]="this.store"
+*                        [series]="polarSeries"
+*                            ></polar>
+*                        `
+*            })
+*            export class AppComponent {
+*                store = new Ext.data.Store({
+*                        fields: ['name', 'data1'],
+*                        data: [
+*                            { name: 'metric one', data1: 14 },
+*                            { name: 'metric two', data1: 16 },
+*                            { name: 'metric three', data1: 14 },
+*                            { name: 'metric four', data1: 6 },
+*                            { name: 'metric five', data1: 36 }
+*                        ]
+*                })
+*
+*                polarSeries = [{
+*                    type: 'pie',
+*                    angleField: 'data1',
+*                    donut: 30,
+*                    label: {
+*                        field: 'name',
+*                        display: 'rotate'
+*                    },
+*                }];
+*            }
  *
  */
 

@@ -15,50 +15,54 @@
  *
  * For example:
  *
- *     @example packages=[charts,reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container } from '@extjs/ext-react';
- *     import { Cartesian } from '@extjs/ext-react-charts';
- *
- *     export default class MyExample extends Component {
- *
- *        store = new Ext.data.Store({
- *             fields: ['name', 'data1', 'data2', 'data3'],
- *             data: [
- *                  {
- *                      category: 'Engineer IV',
- *                      low: 110, q1: 130, median: 175, q3: 200, high: 225
- *                  }, {
- *                      category: 'Market',
- *                      low: 75, q1: 125, median: 210, q3: 230, high: 255
- *                  }
- *             ]
- *        })
- *
- *        render() {
- *            return (
- *                 <ExtReact>
- *                     <Cartesian
- *                         store={this.store}
- *                         series={[{
- *                            type: 'boxplot',
- *                            xField: 'category'
- *                         }]}
- *                         axes={[{
- *                            type: 'category',
- *                            position: 'bottom'
- *                        },{
- *                            type: 'numeric',
- *                            position: 'left',
- *                            renderer: function (axis, text) {
- *                                return '$' + text + ' K'
- *                            }
- *                        }]}
- *                     />
- *                 </ExtReact>
- *            )
- *        }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <cartesian #item
+*                        [width]="'800px'"
+*                        [height]="'600px'"
+*                        [store]="store"
+*                        [series]="cartesianSeries"
+*                        [axes]="cartesianAxes"
+*                        ></cartesian>
+*                        `
+*            })
+*            export class AppComponent {
+*                store = new Ext.data.Store({
+*                        fields: ['name', 'data1', 'data2', 'data3'],
+*                        data: [
+*                            {
+*                                category: 'Engineer IV',
+*                                low: 110, q1: 130, median: 175, q3: 200, high: 225
+*                            }, {
+*                                category: 'Market',
+*                                low: 75, q1: 125, median: 210, q3: 230, high: 255
+*                            }
+*                        ]
+*                })
+*
+*                cartesianSeries = [{
+*                    type: 'boxplot',
+*                    xField: 'category'
+*                    }];
+*
+*                cartesianAxes =[{
+*                    type: 'category',
+*                    position: 'bottom'
+*                },{
+*                    type: 'numeric',
+*                    position: 'left',
+*                    renderer: function (axis, text) {
+*                        return '$' + text + ' K'
+*                    }
+*                }];
+*            }
  *
  */
 
