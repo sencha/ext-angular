@@ -19,6 +19,10 @@ log(``,`\n ext-component-generator \n`)
 
 var framework = process.argv[2]
 var toolkit  = process.argv[3]
+var environment = process.argv[4]
+//var environment = 'prod'
+var components = process.argv[5]
+//var components = ['grid','button']
 if (processArgs(framework, toolkit) == -1) return
 
 var rootFolder            = './GeneratedFolders/';                        log(`rootFolder`,`${rootFolder}`)
@@ -34,7 +38,9 @@ else {
   log(`exists`,`${rootFolder}`)
 }
 
+//var folderName = 'ext-' + framework + '-' + toolkit; log(`folderName`,`${folderName}`)
 var folderName = 'ext-' + framework + '-' + toolkit; log(`folderName`,`${folderName}`)
+
 var toolkitFolder = rootFolder + folderName;         log(`toolkitFolder`,`${toolkitFolder}`)
 var srcFolder = toolkitFolder + '/src/';             log(`srcFolder`,`${srcFolder}`)
 var libFolder = srcFolder + 'lib/';                  log(`libFolder`,`${libFolder}`)
@@ -49,10 +55,12 @@ log(`dataFile`,`${dataFile}`)
 var data = require(dataFile)
 
 //*************
-launch(framework, data, srcFolder, libFolder, templateToolkitFolder, moduleVars)
+launch(framework, data, srcFolder, libFolder, templateToolkitFolder, moduleVars, folderName)
 
 var val = 'copy';var str = new Array((19 - val.length) + 1).join( ' ' );
-toFolder = path.resolve(`./../../generators/ext-${framework}-${toolkit}/src`)
+//toFolder = path.resolve(`./../../generators/ext-${framework}-${toolkit}/src`)
+toFolder = path.resolve(`./../../generators/${folderName}/src`)
+
 log(`toFolder`,`${toFolder}`)
 rimraf.sync(toFolder);log(`deleted`,`${toFolder}`)
 log(`ncp${str}`,`from ${srcFolder} to ${toFolder}`)
@@ -64,7 +72,7 @@ ncp(srcFolder, toFolder, function (err) {
  })
 
 //*************
-function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, moduleVars) {
+function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, moduleVars, folderName) {
 
   var extension
   switch(framework) {
@@ -95,9 +103,14 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
               num++;
               o.xtype = aliases[alias].substring(7)
               ///testing
+              if (environment == 'dev') {
+                oneItem(o, libFolder, framework, extension, num, o.xtype, alias, moduleVars)
+              }
+              else if (components.includes(o.xtype)) {
               //if (o.xtype == 'grid'  || o.xtype == 'button') {
                 oneItem(o, libFolder, framework, extension, num, o.xtype, alias, moduleVars)
               //}
+              }
             }
             else {
               console.log(``,'not: ' + o.name + ' - ' + o.alias)
@@ -112,6 +125,12 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
 
   switch(framework) {
     case 'angular':
+    moduleVars.imports = moduleVars.imports + `import { ExtOrgChartComponent } from './ext-orgchart.component';${newLine}`
+    moduleVars.exports = moduleVars.exports + `    ExtOrgChartComponent,${newLine}`
+    moduleVars.declarations = moduleVars.declarations + `    ExtOrgChartComponent,${newLine}`
+    var orgChartFile = `${libFolder}ext-orgchart.component.${extension}`
+    fs.writeFile(orgChartFile, doOrgChart(templateToolkitFolder), function(err) {if(err){return console.log(err);} })
+    log(`orgChartFile`,`${orgChartFile}`);
       moduleVars.imports = moduleVars.imports + `import { ExtTransitionComponent } from './ext-transition.component';${newLine}`
       moduleVars.exports = moduleVars.exports + `    ExtTransitionComponent,${newLine}`
       moduleVars.declarations = moduleVars.declarations + `    ExtTransitionComponent,${newLine}`
@@ -143,7 +162,8 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
   //moduleVars.declarations = moduleVars.declarations + `    ExtClassComponent${newLine}`
 
   var exportall = ''
-  exportall = exportall + `export * from './lib/ext-${framework}-${toolkit}.module';${newLine}`
+  //exportall = exportall + `export * from './lib/ext-${framework}-${toolkit}.module';${newLine}`
+  exportall = exportall + `export * from './lib/${folderName}.module';${newLine}`
 
   switch(framework) {
     case 'angular':
@@ -156,7 +176,8 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
       var baseFile = `${libFolder}base.${extension}`
       fs.writeFile(baseFile, doExtBase(templateToolkitFolder), function(err) {if(err){return console.log(err);} })
       log(`baseFile`,`${baseFile}`)
-      var moduleFile = `${libFolder}ext-${framework}-${toolkit}.module.ts`
+      var moduleFile = `${libFolder}${folderName}.module.ts`
+      //var moduleFile = `${libFolder}ext-${framework}-${toolkit}.module.ts`
       fs.writeFile(moduleFile, doModule(moduleVars), function(err) {if(err) { return console.log(err); } });
       log(`moduleFile`,`${moduleFile}`)
     break
@@ -329,6 +350,12 @@ function doExtBase(templateToolkitFolder) {
 // export * from './${lib}ExtClass'
 // `
 // }
+
+function doOrgChart(templateToolkitFolder) {
+  var p = path.resolve(templateToolkitFolder + '/orgchart.tpl')
+  var content = fs.readFileSync(p).toString()
+  return content
+}
 
 function doTransition(templateToolkitFolder) {
   var p = path.resolve(templateToolkitFolder + '/transition.tpl')
