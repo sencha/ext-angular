@@ -7,37 +7,29 @@
                 styles: [`
                         `],
                 template: `
-                        <list #item 
-                            [store]="this.store"
-                            [itemTpl]="this.itemTpl"
-                        >
-                        <button #item 
-                              scrollDock="bottom"
-                              docked="bottom"
-                              text="load more..."
-                          ></button>
-                        </list>
+                                 <container #item>
+                                     <toolbar #item>
+                                        <container #item>
+                                            <div #item [style]="{marginRight: '10px'}">Default UI:</div>
+                                         </container>
+                                         <segmentedbutton #item>
+                                             <button #item pressed text="Low"></button>
+                                             <button #item text="Medium"></button>
+                                             <button #item text="High"></button>
+                                         </segmentedbutton>
+                                     </toolbar>
+                                     <toolbar #item margin="0 0 20 0">
+                                        <container #item>
+                                            <div #item [style]="{marginRight: '10px'}">Toolbar UI:</div>
+                                        </container>
+                                         <segmentedbutton #item>
+                                             <button #item ui="default-toolbar" pressed text="Low"></button>
+                                             <button #item ui="default-toolbar" text="Medium"></button>
+                                             <button #item ui="default-toolbar" text="High"></button>
+                                         </segmentedbutton>
+                                     </toolbar>
+                                 </container>
                         `
             })
             export class AppComponent {
-                store = new Ext.data.Store({
-                    data: [{
-                        firstName: 'Peter',
-                        lastName: 'Venkman'
-                    },
-                    {
-                        firstName: 'Raymond',
-                        lastName: 'Stantz'
-                    },
-                    {
-                        firstName: 'Egon',
-                        lastName: 'Spengler'
-                    },
-                    {
-                        firstName: 'Winston',
-                        lastName: 'Zeddemore'
-                    }]
-                });
-
-                itemTpl = "{firstName} {lastName}";
             }

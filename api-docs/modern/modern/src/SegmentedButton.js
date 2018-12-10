@@ -8,34 +8,41 @@
  *
  * ## Example usage:
  *
- *     @example packages=[reactor]
- *     import React from 'react';
- *     import { ExtReact, SegmentedButton, Button, Container, Toolbar } from '@extjs/ext-react';
- *
- *     export default function SegementedButtonExample() {
- *         return (
- *             <ExtReact>
- *                 <Container>
- *                     <Toolbar>
- *                         <div style={{marginRight: '10px'}}>Default UI:</div>
- *                         <SegmentedButton>
- *                             <Button pressed text="Low"/>
- *                             <Button text="Medium"/>
- *                             <Button text="High"/>
- *                         </SegmentedButton>
- *                     </Toolbar>
- *                     <Toolbar margin="0 0 20 0">
- *                         <div style={{marginRight: '10px'}}>Toolbar UI:</div>
- *                         <SegmentedButton>
- *                             <Button ui="default-toolbar" pressed text="Low"/>
- *                             <Button ui="default-toolbar" text="Medium"/>
- *                             <Button ui="default-toolbar" text="High"/>
- *                         </SegmentedButton>
- *                     </Toolbar>
- *                 </Container>
- *             </ExtReact>
- *         )
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                                 <container #item>
+*                                     <toolbar #item>
+*                                        <container #item>
+*                                            <div #item [style]="{marginRight: '10px'}">Default UI:</div>
+*                                         </container>
+*                                         <segmentedbutton #item>
+*                                             <button #item pressed text="Low"></button>
+*                                             <button #item text="Medium"></button>
+*                                             <button #item text="High"></button>
+*                                         </segmentedbutton>
+*                                     </toolbar>
+*                                     <toolbar #item margin="0 0 20 0">
+*                                        <container #item>
+*                                            <div #item [style]="{marginRight: '10px'}">Toolbar UI:</div>
+*                                        </container>
+*                                         <segmentedbutton #item>
+*                                             <button #item ui="default-toolbar" pressed text="Low"></button>
+*                                             <button #item ui="default-toolbar" text="Medium"></button>
+*                                             <button #item ui="default-toolbar" text="High"></button>
+*                                         </segmentedbutton>
+*                                     </toolbar>
+*                                 </container>
+*                        `
+*            })
+*            export class AppComponent {
+*            }
  */
 
 /**
