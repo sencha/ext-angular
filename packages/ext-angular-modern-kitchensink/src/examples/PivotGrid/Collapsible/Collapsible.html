@@ -1,7 +1,8 @@
 <container #item layout="fit" padding="10" [height]="'600px'">
     <pivotgrid #item
       shadow="true"
-      [matrix]="pivotgridMatrix"
+      [matrix]="this.pivotgridMatrix"
+      (ready)="onReady($event)"
     ></pivotgrid>
     <toolbar #item
       shadow="false"
