@@ -158,10 +158,10 @@ function stepCheckCmdLine() {
   //console.log('stepCheckCmdLine');console.log(`cmdLine: ${JSON.stringify(cmdLine)}, length: ${Object.keys(cmdLine).length}, process.argv.length: ${process.argv.length}`)
   setDefaults()
   if (cmdLine.verbose == true) {
-    process.env.EXTREACTGEN_VERBOSE = 'true'
+    process.env.EXTANGULARGEN_VERBOSE = 'true'
   }
   else {
-    process.env.EXTREACTGEN_VERBOSE = 'false'
+    process.env.EXTANGULARGEN_VERBOSE = 'false'
   }
   if (cmdLine.help == true) {
     stepHelpGeneral() 
@@ -508,7 +508,7 @@ async function stepCreate() {
     const substrings = ['[ERR]', '[WRN]', '[INF] Processing', "[INF] Server", "[INF] Writing content", "[INF] Loading Build", "[INF] Waiting", "[LOG] Fashion waiting"];
     var command = `npm${/^win/.test(require('os').platform()) ? ".cmd" : ""}`
     var args = []
-    if (process.env.EXTREACTGEN_VERBOSE == 'true') {
+    if (process.env.EXTANGULARGEN_VERBOSE == 'true') {
       args = ['install']
     }
     else {
