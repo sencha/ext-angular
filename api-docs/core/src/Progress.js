@@ -12,40 +12,40 @@
  * want to show progress throughout an operation that has predictable points of interest
  * at which you can update the control.
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react'
- *     import { ExtReact, Panel, Progress } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *
- *         state = {
- *             progress: 0
- *         }
- *
- *         componentDidMount() {
- *             this.updateLoop = setInterval(() => {
- *                 let { progress } = this.state;
- *                 progress += 1;
- *                 if (progress > 100) progress = 0;
- *                 this.setState({ progress });
- *             }, 100)
- *         }
- *
- *         render() {
- *             const { progress } = this.state;
- *
- *             return (
- *                 <ExtReact>
- *                     <Panel layout={{ type: 'vbox', align: 'center' }}>
- *                         <Progress value={progress/100.0} text={`Loading: ${progress}%`} width="75%"/>
- *                         <div style={{marginTop: '20px'}}>Loading: {progress}%</div>
- *                         <Progress value={progress/100.0} width="75%"/>
- *                     </Panel>
- *                 </ExtReact>
- *             )
- *         }
- *
- *     }
+*            @example packages=[angular]
+*            import { Component, OnInit } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                <panel #item [layout]="{ type: 'vbox', align: 'center' }" [shadow]="true" width="300">
+*                    <progress #item [value]="progress/100.0" [text]="progressText" width="75%"></progress>
+*                    <container #item [style]="{marginTop: '20px'}" [html]="progressText"></container>
+*                    <progress #item [value]="progress/100.0"></progress>
+*                </panel>
+*                        `
+*            })
+*            export class AppComponent {
+*
+*                progress = 1;
+*                progressText:string;
+*                updateLoop;
+*              
+*                constructor() { }
+*              
+*                ngOnInit() {
+*                  this.progressText = "1%";
+*                  this.updateLoop = setInterval(() => { 
+*                      this.progress += 1;
+*                      this.progressText = this.progress + "%";
+*                      if (this.progress > 100) this.progress = 0;
+*                  }, 100)
+*                }
+*            
+*             }
  *
  */
 

@@ -9,55 +9,56 @@
  *
  * Here is an example of the usage in a {@link Ext.List}:
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react'
- *     import { ExtReact, List } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *
- *         store = new Ext.data.Store({
- *             data: [{
- *                 firstName: 'Screech',
- *                 lastName: 'Powers'
- *             },
- *             {
- *                 firstName: 'Kelly',
- *                 lastName: 'Kapowski'
- *             },
- *             {
- *                 firstName: 'Zach',
- *                 lastName: 'Morris'
- *             },
- *             {
- *                 firstName: 'Jessie',
- *                 lastName: 'Spano'
- *             },
- *             {
- *                 firstName: 'Lisa',
- *                 lastName: 'Turtle'
- *             },
- *             {
- *                 firstName: 'A.C.',
- *                 lastName: 'Slater'
- *             },
- *             {
- *                 firstName: 'Richard',
- *                 lastName: 'Belding'
- *             }]
- *         });
- *
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <List
- *                         itemTpl="<div class='contact'>{firstName} <strong>{lastName}</strong></div>"
- *                         store={this.store}
- *                         indexBar
- *                     />
- *                 </ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                         <list #item
+*                            [itemTpl]="this.itemTpl"
+*                            [store]="this.store"
+*                            [indexBar]="true"
+*                        ></list>
+*                        `
+*            })
+*            export class AppComponent {
+*                store = new Ext.data.Store({
+*                    data: [{
+*                        firstName: 'Screech',
+*                        lastName: 'Powers'
+*                    },
+*                    {
+*                        firstName: 'Kelly',
+*                        lastName: 'Kapowski'
+*                    },
+*                    {
+*                        firstName: 'Zach',
+*                        lastName: 'Morris'
+*                    },
+*                    {
+*                        firstName: 'Jessie',
+*                        lastName: 'Spano'
+*                    },
+*                    {
+*                        firstName: 'Lisa',
+*                        lastName: 'Turtle'
+*                    },
+*                    {
+*                        firstName: 'A.C.',
+*                        lastName: 'Slater'
+*                    },
+*                    {
+*                        firstName: 'Richard',
+*                        lastName: 'Belding'
+*                    }]
+*                });
+*
+*                itemTpl = "<div class='contact'>{firstName} <strong>{lastName}</strong></div>"
+*             }
  */
 
 /**

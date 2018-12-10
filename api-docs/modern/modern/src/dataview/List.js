@@ -5,122 +5,125 @@
  *
  * List is a custom styled DataView which allows Grouping, Indexing, Icons, and a Disclosure.
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react'
- *     import { ExtReact, List } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *
- *         store = new Ext.data.Store({
- *             data: [
- *                 {title: 'Item 1'},
- *                 {title: 'Item 2'},
- *                 {title: 'Item 3'},
- *                 {title: 'Item 4'}
- *             ]
- *         });
- *
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <List
- *                         itemTpl="{title}"
- *                         store={this.store}
- *                     />
- *                 </ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                         <list #item 
+*                            [store]="this.store"
+*                            [itemTpl]="this.itemTpl"
+*                        ></list>
+*                        `
+*            })
+*            export class AppComponent {
+*                store = new Ext.data.Store({
+*                    data: [
+*                        {title: 'Item 1'},
+*                        {title: 'Item 2'},
+*                        {title: 'Item 3'},
+*                        {title: 'Item 4'}
+*                    ]
+*                });
+*
+*                itemTpl = "{title}";
+*            }
  *
  * A more advanced example showing a list of people grouped by last name:
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react'
- *     import { ExtReact, List, Button } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *
- *         store = new Ext.data.Store({
- *             data: [{
- *                 firstName: 'Peter',
- *                 lastName: 'Venkman'
- *             }, {
- *                 firstName: 'Raymond',
- *                 lastName: 'Stantz'
- *             }, {
- *                 firstName: 'Egon',
- *                 lastName: 'Spengler'
- *             }, {
- *                 firstName: 'Winston',
- *                 lastName: 'Zeddemore'
- *             }],
- *
- *             sorters: 'lastName',
- *
- *             grouper: {
- *                 groupFn: function(record) {
- *                     return record.get('lastName')[0];
- *                 }
- *             }
- *         });
- *
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <List
- *                         itemTpl="{firstName} {lastName}"
- *                         store={this.store}
- *                         grouped
- *                     />
- *                 </ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                         <list #item 
+*                            [store]="this.store"
+*                            [itemTpl]="this.itemTpl"
+*                            grouped="true"
+*                        ></list>
+*                        `
+*            })
+*            export class AppComponent {
+*                store = new Ext.data.Store({
+*                    data: [{
+*                        firstName: 'Peter',
+*                        lastName: 'Venkman'
+*                    }, {
+*                        firstName: 'Raymond',
+*                        lastName: 'Stantz'
+*                    }, {
+*                        firstName: 'Egon',
+*                        lastName: 'Spengler'
+*                    }, {
+*                        firstName: 'Winston',
+*                        lastName: 'Zeddemore'
+*                    }],
+*    
+*                    sorters: 'lastName',
+*    
+*                    grouper: {
+*                        groupFn: function(record) {
+*                            return record.get('lastName')[0];
+*                        }
+*                    }
+*                });
+*
+*                itemTpl = "{firstName} {lastName}";
+*            }
  *
  * If you want to dock items to the bottom or top of a List, you can use the scrollDock configuration on child items in this List. The following example adds a button to the bottom of the List.
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react'
- *     import { ExtReact, List, Button } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *
- *         store = new Ext.data.Store({
- *             data: [{
- *                 firstName: 'Peter',
- *                 lastName: 'Venkman'
- *             },
- *             {
- *                 firstName: 'Raymond',
- *                 lastName: 'Stantz'
- *             },
- *             {
- *                 firstName: 'Egon',
- *                 lastName: 'Spengler'
- *             },
- *             {
- *                 firstName: 'Winston',
- *                 lastName: 'Zeddemore'
- *             }]
- *         });
- *
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <List
- *                         itemTpl="{firstName} {lastName}"
- *                         store={this.store}
- *                     >
- *                         <Button
- *                             scrollDock="bottom"
- *                             docked="bottom"
- *                             text="load more..."
- *                         />
- *                     </List>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <list #item 
+*                            [store]="this.store"
+*                            [itemTpl]="this.itemTpl"
+*                        >
+*                        <button #item 
+*                              scrollDock="bottom"
+*                              docked="bottom"
+*                              text="load more..."
+*                          ></button>
+*                        </list>
+*                        `
+*            })
+*            export class AppComponent {
+*                store = new Ext.data.Store({
+*                    data: [{
+*                        firstName: 'Peter',
+*                        lastName: 'Venkman'
+*                    },
+*                    {
+*                        firstName: 'Raymond',
+*                        lastName: 'Stantz'
+*                    },
+*                    {
+*                        firstName: 'Egon',
+*                        lastName: 'Spengler'
+*                    },
+*                    {
+*                        firstName: 'Winston',
+*                        lastName: 'Zeddemore'
+*                    }]
+*                });
+*
+*                itemTpl = "{firstName} {lastName}";
+*            }
  */
 
 /**

@@ -5,25 +5,27 @@
  *
  * ActionSheet is a `Sheet` that is docked at the bottom of the screen by default.
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container, ActionSheet, Button } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *        render() {
- *            return (
- *                <ExtReact>
- *                    <Container>
- *                        <ActionSheet displayed>
- *                            <Button ui="decline" text="Delete Draft"/>
- *                            <Button text="Save Draft"/>
- *                            <Button text="Cancel"/>
- *                        </ActionSheet>
- *                    </Container>
- *                </ExtReact>
- *            )
- *        }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                    <container #item>
+*                        <actionsheet #item [displayed]="true">
+*                            <button #item ui="decline" text="Delete Draft"></button>
+*                            <button #item text="Save Draft"></button>
+*                            <button #item text="Cancel"></button>
+*                        </actionsheet>
+*                    </container>
+*                        `
+*            })
+*            export class AppComponent {
+*            
+*            }
  *
  */
 

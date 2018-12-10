@@ -9,42 +9,43 @@
  *
  * Here is an example showing multiple button presentations.
  *
- *      @example packages=[reactor]
- *      import React, { Component } from 'react';
- *      import { ExtReact, Container, Button } from '@extjs/ext-react';
- * 
- *      export default class MyExample extends Component {
- *
- *          state = { message: null }
- * 
- *          render() {
- *              return (
- *                  <ExtReact>
- *                      <Container padding="10">
- *                          <Button 
- *                              text="Say Hello" 
- *                              handler={this.sayHello}
- *                              ui="action raised" 
- *                          />
- *                          <Button 
- *                              text="Say Goodbye" 
- *                              handler={this.sayGoodbye}
- *                          />
- *                          { this.state.message }
- *                      </Container>
- *                  </ExtReact>
- *              )
- *          }
- * 
- *          sayHello = () => {
- *              this.setState({ message: 'Hello world!' });  
- *          }
- * 
- *          sayGoodbye = () => {
- *              this.setState({ message: 'Goodbye cruel world.' });  
- *          }
- * 
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                    <container #item padding="10">
+*                        <button #item 
+*                            text="Say Hello" 
+*                            [handler]="this.sayHello"
+*                            ui="action raised" 
+*                        ></button>
+*                        <button  #item
+*                            text="Say Goodbye" 
+*                            [handler]="this.sayGoodbye"
+*                        ></button>
+*                        <div #item>
+*                        {{ this.message }}
+*                        </div>
+*                    </container>
+*                        `
+*            })
+*            export class AppComponent {
+*                message: string;
+*
+*                sayHello = () => {
+*                    this.message = 'Hello world!';
+*                }
+*        
+*                sayGoodbye = () => {
+*                    this.message = 'Goodbye cruel world.';
+*                }
+*            
+*             }
  *
  * ## Icons
  *

@@ -6,56 +6,57 @@
  * NestedList provides a miller column interface to navigate between nested sets
  * and provide a clean interface with limited screen real-estate.
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react'
- *     import { ExtReact, NestedList } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *
- *         store = Ext.create('Ext.data.TreeStore', {
- *             defaultRootProperty: 'items',
- *             root: {
- *                 text: 'Groceries',
- *                 items: [{
- *                     text: 'Drinks',
- *                     items: [{
- *                         text: 'Water',
- *                         items: [{
- *                             text: 'Sparkling',
- *                             leaf: true
- *                         }, {
- *                             text: 'Still',
- *                             leaf: true
- *                         }]
- *                     }]
- *                 },{
- *                     text: 'Snacks',
- *                     items: [{
- *                         text: 'Nuts',
- *                         leaf: true
- *                     }, {
- *                         text: 'Pretzels',
- *                         leaf: true
- *                     }, {
- *                         text: 'Wasabi Peas',
- *                         leaf: true
- *                     }]
- *                 }]
- *             }
- *         });
- *
- *         render() {
- *             return (
- *                 <ExtReact>
- *                      <NestedList
- *                          displayField="text"
- *                          store={this.store}
- *                          title="Groceries"
- *                      />
- *                 <ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                         <nestedlist #item 
+*                            [displayField]="'text'"
+*                            [height]="'600px'"
+*                            [store]="this.store"
+*                            title="Groceries"
+*                        ></nestedlist>
+*                        `
+*            })
+*            export class AppComponent {
+*                store = Ext.create('Ext.data.TreeStore', {
+*                    defaultRootProperty: 'items',
+*                    root: {
+*                        text: 'Groceries',
+*                        items: [{
+*                            text: 'Drinks',
+*                            items: [{
+*                                text: 'Water',
+*                                items: [{
+*                                    text: 'Sparkling',
+*                                    leaf: true
+*                                }, {
+*                                    text: 'Still',
+*                                    leaf: true
+*                                }]
+*                            }]
+*                        },{
+*                            text: 'Snacks',
+*                            items: [{
+*                                text: 'Nuts',
+*                                leaf: true
+*                            }, {
+*                                text: 'Pretzels',
+*                                leaf: true
+*                            }, {
+*                                text: 'Wasabi Peas',
+*                                leaf: true
+*                            }]
+*                        }]
+*                    }
+*                });
+*
+*             }
  *
  */
 

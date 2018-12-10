@@ -18,32 +18,33 @@
  * At its simplest, a DataView is just a Store full of data and a simple template that we
  * use to render each item:
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react'
- *     import { ExtReact, DataView } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *
- *         store = new Ext.data.Store({
- *             data: [
- *                  {name: 'Peter', age: 26},
- *                  {name: 'Ray', age: 21},
- *                  {name: 'Egon', age: 29},
- *                  {name: 'Winston', age: 24},
- *             ]
- *         });
- *
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <DataView
- *                         itemTpl="{name} is {age} years old"
- *                         store={this.store}
- *                     />
- *                 </ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                         <dataview #item
+*                            [itemTpl]="this.itemTpl"
+*                            [store]="this.store"
+*                        ></dataview>
+*                        `
+*            })
+*            export class AppComponent {
+*                         store = new Ext.data.Store({
+*                             data: [
+*                                  {name: 'Peter', age: 26},
+*                                  {name: 'Ray', age: 21},
+*                                  {name: 'Egon', age: 29},
+*                                  {name: 'Winston', age: 24},
+*                             ]
+*                         });
+*
+*                         itemTpl = `{name} is {age} years old`;
+*             }
  *
  *
  * Here we just defined everything inline so it's all local with nothing being loaded from a server. For each of the
@@ -82,35 +83,36 @@
  * rotten tomatoes (http://developer.rottentomatoes.com/) and modify the {@link #store}
  * and {@link #itemTpl} a little:
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react'
- *     import { ExtReact, DataView } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *
- *         store = new Ext.data.Store({
- *              autoLoad: true,
- *              proxy: {
- *                  type: 'jsonp',
- *                  url: 'https://itunes.apple.com/search?term=Pink+Floyd&entity=album',
- *                  reader: {
- *                      type: 'json',
- *                      rootProperty: 'results'
- *                 }
- *              }
- *         });
- *
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <DataView
- *                         itemTpl="<h2>{collectionName}</h2><p><img src='{artworkUrl100}' /></p>"
- *                         store={this.store}
- *                         />
- *                 </ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                         <dataview #item
+*                            [itemTpl]="this.itemTpl"
+*                            [store]="this.store"
+*                        ></dataview>
+*                        `
+*            })
+*            export class AppComponent {
+*                store = new Ext.data.Store({
+*                    autoLoad: true,
+*                    proxy: {
+*                        type: 'jsonp',
+*                        url: 'https://itunes.apple.com/search?term=Pink+Floyd&entity=album',
+*                        reader: {
+*                            type: 'json',
+*                            rootProperty: 'results'
+*                        }
+*                    }
+*                });
+*
+*                itemTpl = "<h2>{collectionName}</h2><p><img src='{artworkUrl100}' /></p>"
+*             }
  *
  * The Store no longer has hard coded data, instead we've provided a {@link Ext.data.proxy.Proxy Proxy}, which fetches
  * the data for us. In this case we used a JSON-P proxy.
