@@ -1,33 +1,6 @@
-import { ViewChild } from '@angular/core';
-
-export function MultiViewChild(selector: any, opts?: { read: any[] }) {
-  const tokens = opts.read;
-  const decorators = tokens.map(x => ViewChild(selector, { read: x }));
-
-  return function(target: any, name: string) {
-    decorators.forEach((decorate, i) => decorate(target, `${name}_${i}`));
-      Object.defineProperty(target, name, {
-        get: function() {
-          return decorators.map((x, i) => this[`${name}_${i}`], this);
-        }
-      });
-  };
-}
-
-
-
 declare var Ext: any;
 import {
   Output,
-  Component,
-  Injectable,
-  Injector,
-  ComponentRef,
-  ViewContainerRef,
-  ComponentFactoryResolver,
-  EmbeddedViewRef,
-  ApplicationRef,
-
   ElementRef,
   EventEmitter,
   ContentChildren,
@@ -35,43 +8,11 @@ import {
   SimpleChanges
 } from '@angular/core';
 
-import { MjgComponent } from '../mjg.component'
-
-
-@Injectable()
-export class DomService {
-  constructor(
-      private componentFactoryResolver: ComponentFactoryResolver,
-      private appRef: ApplicationRef,
-      private injector: Injector
-  ) {}
-
-  appendComponentToBody(component: any, root: any) {
-    const componentRef = this.componentFactoryResolver
-      .resolveComponentFactory(component)
-      .create(this.injector)
-    this.appRef.attachView(componentRef.hostView)
-    const domElem = (componentRef.hostView as EmbeddedViewRef<any>)
-      .rootNodes[0] as HTMLElement
-    //var root = document.getElementsByClassName('x-viewport-body-el')[0]
-    root.appendChild(domElem)
-  }
-}
-
-
 export class base {
   public ext: any
   private _nativeElement: any
-  private domService: any
 
-
-  constructor(
-    el: ElementRef,
-    private metaData: any,
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private appRef: ApplicationRef,
-    private injector: Injector) {
-
+  constructor(el: ElementRef, private metaData: any) {
     //console.log('constructor');console.log(el.nativeElement)
     this._nativeElement = el.nativeElement
     metaData.EVENTS.forEach( (event: any, n: any) => {
@@ -116,7 +57,7 @@ export class base {
   //ngDoCheck() {console.log(`DoCheck`)}
   // Beware! Called frequently!
   // Called in every change detection cycle anywhere on the page
-//  ngAfterContentChecked() { console.log(`AfterContentChecked`) }
+  //ngAfterContentChecked() { console.log(`AfterContentChecked`) }
   //ngAfterViewInit() { console.log(`AfterViewInit`) }
   // Beware! Called frequently!
   // Called in every change detection cycle anywhere on the page
@@ -127,7 +68,7 @@ export class base {
     //console.log(`ngOnInit: ${metaData.XTYPE}`)
     let me: any = this
     let o: any = {}
-    o.xtype = metaData.XTYPE
+    //o.xtype = metaData.XTYPE
     for (var i = 0; i < me.metaData.PROPERTIES.length; i++) { 
       var prop = me.metaData.PROPERTIES[i];
       if (prop == 'handler') {
@@ -148,7 +89,7 @@ export class base {
         }
       }
     }
-    if ('true' === me.fitToParent) {
+    if (true === me.fitToParent) {
       o.top=0, 
       o.left=0, 
       o.width='100%', 
@@ -176,7 +117,10 @@ export class base {
     if (this._nativeElement.parentElement != null) {
       o.renderTo = this._nativeElement
     }
-    this.ext = Ext.create(o)
+    //this.ext = Ext.create(o)
+    var xtype = metaData.XTYPE
+    var extJSClass = Ext.ClassManager.getByAlias(`widget.${xtype}`)
+    this.ext = new extJSClass(o)
   }
 
   @ContentChildren('item') items: QueryList<any>
@@ -205,14 +149,31 @@ export class base {
       if (item != this) {
         if (item.ext != undefined) {
           //console.log('parent: ' + this.ext.xtype + ', child: ' + item.ext.xtype)
+
+
           var parentxtype = this['ext'].xtype
           var childxtype = item['ext'].xtype
           var parentCmp = this['ext']
           var childCmp = item['ext']
 
+
+          //function doAdd(childXtype, parentCmp, childCmp, childPropsChildren) {
+
           if (parentxtype === 'grid') {
             if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
               parentCmp.addColumn(childCmp)
+            }
+            else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
+              if (parentCmp.getHideHeaders() === false) {
+                //var j = parentCmp.items.items.length;
+                parentCmp.insert(1, childCmp);
+              }
+              else {
+                parentCmp.add(childCmp);
+              }
+            }
+            else {
+              console.log('??')
             }
           } else if (childxtype === 'tooltip') {
             parentCmp.setTooltip(childCmp)
@@ -228,8 +189,9 @@ export class base {
             parentCmp.addDockedItems(childCmp)
           } else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
             if (parentCmp.getHideHeaders() === false) {
-              var j: any = parentCmp.items.items.length
-              parentCmp.insert(j - 1, childCmp)
+              //var j: any = parentCmp.items.items.length
+              //parentCmp.insert(j - 1, childCmp)
+              parentCmp.insert(1, childCmp)
             } else {
               parentCmp.add(childCmp)
             }
@@ -238,6 +200,9 @@ export class base {
           } else {
             console.log('child not added')
           }
+
+
+
         }
         else if (item.nativeElement != undefined) {
           //console.log('native')
@@ -256,5 +221,71 @@ export class base {
     //this['ready'].emit(parentCmp)
     this['ready'].emit(this)
   }
+
+
+
+  // @ContentChildren('item', { read: ElementRef }) itemsa: QueryList<ElementRef>
+  // baseAfterContentInit2() {
+  //   if (this.itemsa.length < 2) {
+  //     return
+  //   }
+  //   this.itemsa.forEach(item => {
+  //     if (item.nativeElement == this._nativeElement) {
+  //       return
+  //     }
+  //     if (item.nativeElement != undefined) {
+  //       //console.log('parent: ' + this.ext.xtype + ', child: ' + 'container')
+  //       this.ext.add({xtype: 'container',html: item.nativeElement})
+  //     }
+  //     else {
+  //       if (item['ext'] != undefined) {
+  //         //console.log('parent: ' + this.ext.xtype + ', child: ' + item.ext.xtype)
+  //         var parentxtype = this.ext.xtype
+  //         var childxtype = item['ext'].xtype
+  //         var parentCmp = this.ext
+  //         var childCmp = item['ext']
+
+
+
+  //         if (parentxtype === 'grid') {
+  //           if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
+  //             parentCmp.addColumn(childCmp)
+  //           }
+  //           else if (parentCmp.add != undefined) {
+  //             parentCmp.add(childCmp);
+  //           }
+  //         } else if (childxtype === 'tooltip') {
+  //           parentCmp.setTooltip(childCmp)
+  //         } else if (childxtype === 'plugin') {
+  //           parentCmp.setPlugin(childCmp)
+  //         } else if (parentxtype === 'button') {
+  //           if (childxtype === 'menu') {
+  //             parentCmp.setMenu(childCmp)
+  //           } else {
+  //             console.log('child not added')
+  //           }
+  //         } else if (childxtype === 'toolbar' && Ext.isClassic === true) {
+  //           parentCmp.addDockedItems(childCmp)
+  //         } else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
+  //           if (parentCmp.getHideHeaders() === false) {
+  //             var j: any = parentCmp.items.items.length
+  //             parentCmp.insert(j - 1, childCmp)
+  //           } else {
+  //             parentCmp.add(childCmp)
+  //           }
+  //         } else if (parentCmp.add != undefined) {
+  //           parentCmp.add(childCmp)
+  //         } else {
+  //           console.log('child not added')
+  //         }
+  //       }
+  //       else {
+  //         console.log('child not handled')
+  //       }
+  //     }
+  //   })
+  //   //this['ready'].emit(parentCmp)
+  //   this['ready'].emit(this)
+  // }
 
 }
