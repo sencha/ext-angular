@@ -92,7 +92,7 @@ function stepStart() {
   const mainCommandArgs = commandLineArgs(mainDefinitions, { stopAtFirstUnknown: true })
 //  console.log('');console.log(`mainCommandArgs: ${JSON.stringify(mainCommandArgs)}`)
   var mainCommand = mainCommandArgs.command
-//  console.log(`mainCommand: ${JSON.stringify(mainCommand)}`)
+  console.log(`mainCommand: ${JSON.stringify(mainCommand)}`)
   switch(mainCommand) {
     case undefined:
       let argv = mainCommandArgs._unknown || []
@@ -158,10 +158,10 @@ function stepCheckCmdLine() {
   //console.log('stepCheckCmdLine');console.log(`cmdLine: ${JSON.stringify(cmdLine)}, length: ${Object.keys(cmdLine).length}, process.argv.length: ${process.argv.length}`)
   setDefaults()
   if (cmdLine.verbose == true) {
-    process.env.EXTREACTGEN_VERBOSE = 'true'
+    process.env.EXTANGULARGEN_VERBOSE = 'true'
   }
   else {
-    process.env.EXTREACTGEN_VERBOSE = 'false'
+    process.env.EXTANGULARGEN_VERBOSE = 'false'
   }
   if (cmdLine.help == true) {
     stepHelpGeneral() 
@@ -292,7 +292,7 @@ function stepPackageName() {
 
 function stepVersion() {
   new Input({
-    message: 'What version is your ExtReact application?',
+    message: 'What version is your ExtAngular application?',
     default: config.version
   }).run().then(answer => { 
     answers['version'] = answer
@@ -508,7 +508,7 @@ async function stepCreate() {
     const substrings = ['[ERR]', '[WRN]', '[INF] Processing', "[INF] Server", "[INF] Writing content", "[INF] Loading Build", "[INF] Waiting", "[LOG] Fashion waiting"];
     var command = `npm${/^win/.test(require('os').platform()) ? ".cmd" : ""}`
     var args = []
-    if (process.env.EXTREACTGEN_VERBOSE == 'true') {
+    if (process.env.EXTANGULARGEN_VERBOSE == 'true') {
       args = ['install']
     }
     else {
@@ -546,7 +546,7 @@ async function stepCreate() {
   if (cmdLine.name != undefined) {
     answers['appName'] = cmdLine.name
     answers['packageName'] = kebabCase(answers['appName'])
-    answers['description'] = `${answers['packageName']} description for ExtReact app ${answers['appName']}`
+    answers['description'] = `${answers['packageName']} description for ExtAngular app ${answers['appName']}`
   }
   else {
     answers['appName'] = config.appName
@@ -563,7 +563,7 @@ async function stepCreate() {
 }
 
 function displayDefaults() {
-  console.log(boldGreen(`Defaults for ExtReact app:`))
+  console.log(boldGreen(`Defaults for ExtAngular app:`))
   console.log(`appName:\t${answers['appName']}`)
   console.log(`theme:\t\t${answers['theme']}`)
   console.log(`code:\t\t${answers['code']}`)
@@ -602,9 +602,9 @@ ext-angular-gen app (-h) (-d) (-i) (-t 'material') (-l 'JavaScript') (-c 'Includ
 -v --verbose       verbose npm messages (for problems only)
 
 ${boldGreen('Examples:')} 
-ext-angular-gen app --theme material --name CoolExtReactApp
+ext-angular-gen app --theme material --name CoolExtAngularApp
 ext-angular-gen app --interactive
-ext-angular-gen app -a -t material -l JavaScript -c 'Include some example code' -n CoolExtReactApp
+ext-angular-gen app -a -t material -l JavaScript -c 'Include some example code' -n CoolExtAngularApp
 
 ${boldGreen('Theme Names:')}
 ${boldGreen('modern themes:')}  material, ios, neptune, triton
