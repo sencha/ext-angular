@@ -34,6 +34,12 @@ export class CollapsibleComponent implements OnInit {
   collapsibleRows:boolean= false;
   collapsibleColumns:boolean= false;
 
+  pivotgrid:any;
+  onReady = function(event) {
+    console.log("pivotgrid is ready!");
+    this.pivotgrid = event.ext;
+  }
+
 
 
   ngOnInit() {
@@ -114,6 +120,8 @@ export class CollapsibleComponent implements OnInit {
 
     this.pivotgridMatrix.collapsibleColumns = this.collapsibleColumns ;
     this.pivotgridMatrix.collapsibleRows = this.collapsibleRows ;
+
+    this.pivotgrid.setMatrix(this.pivotgridMatrix);
     
     console.log("this.collapsibleColumns : " + this.collapsibleColumns);
     console.log("this.collapsibleRows : " + this.collapsibleRows);
