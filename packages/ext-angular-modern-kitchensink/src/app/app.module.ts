@@ -43,6 +43,7 @@ import { BoilerplateComponent } from './view/boilerplate/boilerplate.component';
 import { ConfiguratorComponent } from './view/configurator/configurator.component';
 import { LandingpageComponent } from './view/landingpage/landingpage.component';
 import { DummyComponent } from './view/landingpage/landingpage.component';
+import {AppComponent} from './view/example/example.component'
 
 import { Route, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from "@angular/core";
@@ -520,7 +521,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 })
 export class App {
   constructor(private ExtAngularService: ExtAngularService) {
-    this.ExtAngularService.appendComponentToViewport(LandingpageComponent)
+    this.ExtAngularService.appendComponentToViewport(AppComponent);
   }
 }
 
@@ -532,6 +533,7 @@ export class App {
     routingModule
   ],
 	declarations: [
+		AppComponent,
 		App,
     MjgComponent,
 		DetailComponent,
@@ -756,7 +758,8 @@ export class App {
 		SideBarComponent, 
 		FooterComponent, 
 		ChartComponent,
-		LandingpageComponent
+		LandingpageComponent,
+		AppComponent
 	],
 	bootstrap: [App]
 })

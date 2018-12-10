@@ -11,11 +11,6 @@ export class BasicTabComponent implements OnInit  {
 
   constructor() { }
 
-  onReady = (ele) => {
-    console.log(ele.ext);
-    console.log('###3', ele.ext.el);
-  }
-
   ngOnInit() {}
 
 }
