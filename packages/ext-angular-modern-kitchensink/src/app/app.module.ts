@@ -521,7 +521,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 })
 export class App {
   constructor(private ExtAngularService: ExtAngularService) {
-    this.ExtAngularService.appendComponentToViewport(AppComponent);
+    this.ExtAngularService.appendComponentToViewport(LandingpageComponent);
   }
 }
 
