@@ -1,8 +1,5 @@
 import {
   Output,
-  ComponentFactoryResolver,
-  Injector,
-  ApplicationRef,
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -11,8 +8,8 @@ import {
   forwardRef
 } from '@angular/core';
 import { base } from './base';
-export class containerMetaData {
-  public static XTYPE: string = 'container';
+export class titlebarMetaData {
+  public static XTYPE: string = 'titlebar';
   public static PROPERTIESOBJECT: any = {
     "activeChildTabIndex": "Number",
     "activeItem": "Ext.Component/Object/String/Number",
@@ -36,6 +33,7 @@ export class containerMetaData {
     "control": "Object",
     "controller": "String/Object/Ext.app.ViewController",
     "data": "Object",
+    "defaultButtonUI": "String",
     "defaultFocus": "String",
     "defaultListenerScope": "Boolean",
     "defaults": "Object",
@@ -67,12 +65,13 @@ export class containerMetaData {
     "keyMap": "Object",
     "keyMapEnabled": "Boolean",
     "keyMapTarget": "String",
-    "layout": "Object/String",
+    "layout": "any",
     "left": "Number/String",
     "listeners": "Object",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
+    "maxButtonWidth": "String",
     "maxHeight": "Number/String",
     "maxWidth": "Number/String",
     "minHeight": "Number/String",
@@ -105,6 +104,8 @@ export class containerMetaData {
     "stateId": "String",
     "style": "String/Object",
     "tabIndex": "Number",
+    "title": "String",
+    "titleAlign": "String",
     "toFrontOnShow": "Boolean",
     "tooltip": "String/Object",
     "top": "Number/String",
@@ -152,6 +153,7 @@ export class containerMetaData {
     'control',
     'controller',
     'data',
+    'defaultButtonUI',
     'defaultFocus',
     'defaultListenerScope',
     'defaults',
@@ -189,6 +191,7 @@ export class containerMetaData {
     'manageBorders',
     'margin',
     'masked',
+    'maxButtonWidth',
     'maxHeight',
     'maxWidth',
     'minHeight',
@@ -221,6 +224,8 @@ export class containerMetaData {
     'stateId',
     'style',
     'tabIndex',
+    'title',
+    'titleAlign',
     'toFrontOnShow',
     'tooltip',
     'top',
@@ -246,9 +251,9 @@ export class containerMetaData {
     'config'
 ];
   public static EVENTS: any[] = [
-		{name:'activate',parameters:'newActiveItem,container,oldActiveItem'},
+		{name:'activate',parameters:'newActiveItem,titlebar,oldActiveItem'},
 		{name:'activeItemchange',parameters:'sender,value,oldValue'},
-		{name:'add',parameters:'container,item,index'},
+		{name:'add',parameters:'titlebar,item,index'},
 		{name:'added',parameters:'sender,container,index'},
 		{name:'beforeactiveItemchange',parameters:'sender,value,oldValue,undefined'},
 		{name:'beforebottomchange',parameters:'sender,value,oldValue,undefined'},
@@ -267,21 +272,21 @@ export class containerMetaData {
 		{name:'beforerightchange',parameters:'sender,value,oldValue,undefined'},
 		{name:'beforescrollablechange',parameters:'sender,value,oldValue,undefined'},
 		{name:'beforeshow',parameters:'sender'},
-		{name:'beforetofront',parameters:'container'},
+		{name:'beforetofront',parameters:'titlebar'},
 		{name:'beforetopchange',parameters:'sender,value,oldValue,undefined'},
 		{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'blur',parameters:'container,event'},
+		{name:'blur',parameters:'titlebar,event'},
 		{name:'bottomchange',parameters:'sender,value,oldValue'},
 		{name:'centeredchange',parameters:'sender,value,oldValue'},
-		{name:'deactivate',parameters:'oldActiveItem,container,newActiveItem'},
+		{name:'deactivate',parameters:'oldActiveItem,titlebar,newActiveItem'},
 		{name:'destroy',parameters:''},
 		{name:'disabledchange',parameters:'sender,value,oldValue'},
 		{name:'dockedchange',parameters:'sender,value,oldValue'},
 		{name:'erased',parameters:'sender'},
 		{name:'floatingchange',parameters:'sender,positioned'},
-		{name:'focus',parameters:'container,event'},
-		{name:'focusenter',parameters:'container,event'},
-		{name:'focusleave',parameters:'container,event'},
+		{name:'focus',parameters:'titlebar,event'},
+		{name:'focusenter',parameters:'titlebar,event'},
+		{name:'focusleave',parameters:'titlebar,event'},
 		{name:'fullscreen',parameters:'sender'},
 		{name:'heightchange',parameters:'sender,value,oldValue'},
 		{name:'hiddenchange',parameters:'sender,value,oldValue'},
@@ -292,19 +297,19 @@ export class containerMetaData {
 		{name:'maxWidthchange',parameters:'sender,value,oldValue'},
 		{name:'minHeightchange',parameters:'sender,value,oldValue'},
 		{name:'minWidthchange',parameters:'sender,value,oldValue'},
-		{name:'move',parameters:'container,item,toIndex,fromIndex'},
+		{name:'move',parameters:'titlebar,item,toIndex,fromIndex'},
 		{name:'moved',parameters:'sender,container,toIndex,fromIndex'},
 		{name:'orientationchange',parameters:''},
 		{name:'painted',parameters:'sender,element'},
 		{name:'positionedchange',parameters:'sender,positioned'},
-		{name:'remove',parameters:'container,item,index'},
+		{name:'remove',parameters:'titlebar,item,index'},
 		{name:'removed',parameters:'sender,container,index'},
-		{name:'renderedchange',parameters:'container,item,rendered'},
+		{name:'renderedchange',parameters:'titlebar,item,rendered'},
 		{name:'resize',parameters:'element,info'},
 		{name:'rightchange',parameters:'sender,value,oldValue'},
 		{name:'scrollablechange',parameters:'sender,value,oldValue'},
 		{name:'show',parameters:'sender'},
-		{name:'tofront',parameters:'container'},
+		{name:'tofront',parameters:'titlebar'},
 		{name:'topchange',parameters:'sender,value,oldValue'},
 		{name:'updatedata',parameters:'sender,newData'},
 		{name:'widthchange',parameters:'sender,value,oldValue'},
@@ -377,15 +382,15 @@ export class containerMetaData {
 ];
 }
 @Component({
-  selector: 'container', 
-  inputs: containerMetaData.PROPERTIES,
-  outputs: containerMetaData.EVENTNAMES,
-  providers: [{provide: base, useExisting: forwardRef(() => ExtContainerComponent)}],
+  selector: 'titlebar', 
+  inputs: titlebarMetaData.PROPERTIES,
+  outputs: titlebarMetaData.EVENTNAMES,
+  providers: [{provide: base, useExisting: forwardRef(() => ExtTitlebarComponent)}],
   template: '<ng-template #dynamic></ng-template>'
 })
-export class ExtContainerComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef,c:ComponentFactoryResolver,r:ApplicationRef,i:Injector) {super(eRef,containerMetaData,c, r, i)}
-  public ngOnInit() {this.baseOnInit(containerMetaData)}
+export class ExtTitlebarComponent extends base implements OnInit,AfterContentInit,OnChanges {
+  constructor(eRef:ElementRef) {super(eRef,titlebarMetaData)}
+  public ngOnInit() {this.baseOnInit(titlebarMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {
     this.baseAfterContentInit()

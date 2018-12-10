@@ -1,9 +1,5 @@
 import {
   Output,
-  ComponentFactoryResolver,
-  ApplicationRef,
-  Injector,
-
   OnInit,
   AfterContentInit,
   OnChanges,
@@ -379,7 +375,7 @@ export class buttonMetaData {
   template: '<ng-template #dynamic></ng-template>'
 })
 export class ExtButtonComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef,c:ComponentFactoryResolver,r:ApplicationRef,i:Injector) {super(eRef,buttonMetaData,c, r, i)}
+  constructor(eRef:ElementRef) {super(eRef,buttonMetaData)}
   public ngOnInit() {this.baseOnInit(buttonMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {
