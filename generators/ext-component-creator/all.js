@@ -125,6 +125,12 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
 
   switch(framework) {
     case 'angular':
+    moduleVars.imports = moduleVars.imports + `import { ExtOrgChartComponent } from './ext-orgchart.component';${newLine}`
+    moduleVars.exports = moduleVars.exports + `    ExtOrgChartComponent,${newLine}`
+    moduleVars.declarations = moduleVars.declarations + `    ExtOrgChartComponent,${newLine}`
+    var orgChartFile = `${libFolder}ext-orgchart.component.${extension}`
+    fs.writeFile(orgChartFile, doOrgChart(templateToolkitFolder), function(err) {if(err){return console.log(err);} })
+    log(`orgChartFile`,`${orgChartFile}`);
       moduleVars.imports = moduleVars.imports + `import { ExtTransitionComponent } from './ext-transition.component';${newLine}`
       moduleVars.exports = moduleVars.exports + `    ExtTransitionComponent,${newLine}`
       moduleVars.declarations = moduleVars.declarations + `    ExtTransitionComponent,${newLine}`
@@ -344,6 +350,12 @@ function doExtBase(templateToolkitFolder) {
 // export * from './${lib}ExtClass'
 // `
 // }
+
+function doOrgChart(templateToolkitFolder) {
+  var p = path.resolve(templateToolkitFolder + '/orgchart.tpl')
+  var content = fs.readFileSync(p).toString()
+  return content
+}
 
 function doTransition(templateToolkitFolder) {
   var p = path.resolve(templateToolkitFolder + '/transition.tpl')
