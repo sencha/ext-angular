@@ -16,14 +16,10 @@ export class ResizableHandleComponent implements OnInit  {
   panelRef:any;
   doDynamically:boolean = false;
   mediumText = mediumText;
-
-  panelReady = (ele) => {
-    this.panelRef = ele.ext.el;
-    // this.panelRef.center();
-  } 
-
-  toggleDynamic = (cb, dynamic) => {
-    this.doDynamically = dynamic;
+  
+  toggleDynamic = (event) => {
+    this.doDynamically = event.newValue;
+    console.log("this.doDynamically :" + this.doDynamically);
   }
 
   ngOnInit() {}

@@ -58,9 +58,12 @@ export class ZoomableSunburstComponent implements OnInit  {
   tooltip = {renderer: this.onTooltip};
   transitions = { select: false };
 
-  onSelectionChange = (sunburst, node) => {
-    console.log('############3333', sunburst, node);  
-    sunburst.zoomInNode(node);}
-
+  sunburst:any;
+  onSubBurstReady = (event) => {
+    this.sunburst = event.ext;
+    console.log("this.sunburst: " + this.sunburst);
+    this.sunburst.onNodeSelect = (record, selection) => {
+        this.sunburst.zoomInNode(record)};
+    }
   ngOnInit() {}
 }

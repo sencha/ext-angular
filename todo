@@ -17,21 +17,21 @@ ExtAngular
 
 Issues
  - we need to specify size in root element of each example else it does not show up. This will break on different screen sizes. [Add examples]
- - render method does not parse the HTML code but uses as string [See multiple grid examples] [isolate to standalone angular app]  
- - Tree widgets not loading with error ERROR Error: [Ext.create] Unrecognized class name / alias: widget.tree
+ - (major) render method does not parse the HTML code but uses as string [See multiple grid examples] [isolate to standalone angular app]  
+ - (major) Tree widgets not loading with error ERROR Error: [Ext.create] Unrecognized class name / alias: widget.tree
  - DragResizeValidation calendar example does not restrict dragging and resizing 
  - onBeforeMoveConfigField and onShowConfigFieldSettings not present in pivot d3 container(ConfigurablePivotHeatmap)
- - widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components] [Visit RendererCell like in react/ Need a simple example in extjs]
- - orgchart component does not exists (Under pivot/hierearchy).  
+ - (major) widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components] [Visit RendererCell like in react/ Need a simple example in extjs]
+ - (major) orgchart component does not exists (Under pivot/hierearchy).  
+ - UI for SearchField is breaking. Search form is not docked right. (Form fields - Eg( All>Components>Forms>Searchfield or ALl->Components>TitleBar)
+ - (major) Tabs: All components are not rendering. Error: Adding a card to a tab container without specifying any tab configuration
 
 
-Need clarification
- - ResizableLayoutComponent have multiple UI issues. (to reproduce compare from ext-react). Can demo this in next call. 
- - UI for SearchField is breaking (Form fields - search field and titlebar under components/titlebar). - which example??
+Fixed
+ - TouchEvents: Events list is not updated (using *ngFor rendering)
  - In Drag Drop text does not change when draging. (check Proxy and Handles). Files Drag Drop not working for same reason as UI is not updated. 
  - ResizableHandle in Panels:Unable to resize the panel from corners and dynamic option not working 
- - Tabs: All components are not rendering.
- - TouchEvents: Events list is not updated (using *ngFor rendering)
+ - ResizableLayoutComponent have multiple UI issues. (to reproduce compare from ext-react). Can demo this in next call. 
  - Hierarchy D3: In ZoomableSunburst selectionChange() used in react but unable to find an equivalent here.
   so zooming not working on selection of chart node.
 

@@ -18,4 +18,6 @@ export class ResizableLayoutComponent implements OnInit  {
 
   ngOnInit() {}
 
+  rightResizable = {split: true,  edges: 'west'};
+
 }
