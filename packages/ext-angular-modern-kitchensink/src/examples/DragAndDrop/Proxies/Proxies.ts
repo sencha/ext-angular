@@ -52,11 +52,13 @@ export class ProxiesDragDropComponent implements OnInit  {
       proxy: 'none',
       listeners: {
         dragmove: (source, info) => {
+          console.log("dragmove")
           const pos = info.proxy.current;
-          this.noneText = Ext.String.format('X: {0}, Y: {1}',pos.x, Math.round(pos.y));
+          this.noneText = Ext.String.format('X: {0}, Y: {1}', Math.round(pos.x), Math.round(pos.y));
+          this.noneRef.setHtml(this.noneText);
         },
         dragend: () => {
-          this.noneText = 'No Proxy';
+          this.noneRef.setHtml('No Proxy');
         }
     }
   }),
