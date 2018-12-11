@@ -11,9 +11,12 @@ export class TouchEventsComponent implements OnInit {
 
   touchpadRef:any;
   isPhone = Ext.os.is.Phone;
-  events = ['drag', 'touchmove'];
+  events = [{type:'drag'}, {type:'touchmove'}];
+
+  theDataview:any;
 
   touchpadReady = (ele) => {
+    console.log("touchpadReady")
     this.touchpadRef = ele.ext.el;
     this.touchpadRef.on({
       scope: this,
@@ -33,12 +36,21 @@ export class TouchEventsComponent implements OnInit {
     });
   }
 
+  dataviewReady = (event) => {
+    this.theDataview = event.ext;
+  }
+
+  tplDataView: any=`<p>{type}&nbsp;&nbsp;&nbsp;</p>`;
+
   onTouchEvent = (e, target, options) => {
-    this.events = [e.type , ...this.events];
+    this.events = [{type:e.type} , ...this.events];
+    console.log(this.events.length);
+    this.theDataview.setData(this.events);
   }
 
   clearEventLog = () => {
     this.events = [];
+    this.theDataview.setData(null);
   }
 
   ngOnInit() {}
