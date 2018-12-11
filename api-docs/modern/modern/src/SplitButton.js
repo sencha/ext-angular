@@ -9,40 +9,43 @@
  *
  * ## Example usage:
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container, SplitButton } from '@extjs/ext-react';
- *
- *      export default class SplitButtonExample extends Component {
- *
- *          render() {
- *              return (
- *                  <ExtReact>
- *                      <Container padding="10" layout="vbox">
- *                          <SplitButton 
- *                              text="SplitButton" 
- *                              handler={this.sayHello} 
- *                              ui="action alt" 
- *                              iconCls="x-fa fa-heart"
- *                              {...menuProps} margin="10"
- *                          />
- *                      </Container>
- *                  </ExtReact>
- *              )
- *          }
- *          sayHello = () => {
- *              alert("Hello! The button was clicked");
- *          }
- *     }
- *     const menuProps ={
- *         menu: [{
- *             text: 'Menu Item 1',
- *             handler: function(){ alert("Item 1 clicked"); }
- *         }, {
- *             text: 'Menu Item 2',
- *             handler: function(){ alert("Item 2 clicked"); }
- *         }]
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <container #item padding="10" layout="vbox">
+*                            <splitbutton  #item
+*                                text="SplitButton" 
+*                                [handler]="this.sayHello" 
+*                                ui="action alt" 
+*                                iconCls="x-fa fa-heart"
+*                                margin="10"
+*                                [menu]="this.menu"
+*                             ></splitbutton>
+*                        </container>
+*                        `
+*            })
+*            export class AppComponent {
+*
+*                sayHello = () => {
+*                    alert("Hello! The button was clicked");
+*                }
+*
+*                menu = [{
+*                    text: 'Menu Item 1',
+*                    handler: function(){ alert("Item 1 clicked"); }
+*                }, {
+*                    text: 'Menu Item 2',
+*                    handler: function(){ alert("Item 2 clicked"); }
+*                }];
+*
+*
+*            }
  */
 
 /**

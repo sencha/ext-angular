@@ -11,25 +11,27 @@
  * You can also give items of a {@link Ext.TitleBar} an `align` prop of `left` or `right`,
  * which will dock them to the `left` or `right` of the bar.
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container, TitleBar, Button } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container>
- *                         <TitleBar title="App Title" docked="top">
- *                             <Button align="left" iconCls="x-fa fa-bars"/>
- *                             <Button align="right" iconCls="x-fa fa-inbox" text="Inbox"/>
- *                             <Button align="right" iconCls="x-fa fa-user" text="Profile"/>
- *                         </TitleBar>
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <titlebar #item title="App Title" docked="top">
+*                            <button #item align="left" iconCls="x-fa fa-bars"></button>
+*                            <button #item align="right" iconCls="x-fa fa-inbox" text="Inbox"></button>
+*                            <button #item align="right" iconCls="x-fa fa-user" text="Profile"></button>
+*                        </titlebar>
+*                        `
+*            })
+*            export class AppComponent {
+*                buttonHandler = function() {
+*                    Ext.toast('Hello World!');
+*                }
+*            }
  */
 
 /**

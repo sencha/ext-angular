@@ -7,29 +7,24 @@
                 styles: [`
                         `],
                 template: `
-                                 <container #item>
-                                     <toolbar #item>
-                                        <container #item>
-                                            <div #item [style]="{marginRight: '10px'}">Default UI:</div>
-                                         </container>
-                                         <segmentedbutton #item>
-                                             <button #item pressed text="Low"></button>
-                                             <button #item text="Medium"></button>
-                                             <button #item text="High"></button>
-                                         </segmentedbutton>
-                                     </toolbar>
-                                     <toolbar #item margin="0 0 20 0">
-                                        <container #item>
-                                            <div #item [style]="{marginRight: '10px'}">Toolbar UI:</div>
-                                        </container>
-                                         <segmentedbutton #item>
-                                             <button #item ui="default-toolbar" pressed text="Low"></button>
-                                             <button #item ui="default-toolbar" text="Medium"></button>
-                                             <button #item ui="default-toolbar" text="High"></button>
-                                         </segmentedbutton>
-                                     </toolbar>
-                                 </container>
+                        <panel #item shadow="true" [layout]="{type: 'vbox', align: 'stretch'}">
+                            <button #item [handler]="alertHandler" text="Alert"></button>
+                            <button #item [handler]="promptHandler" text="Prompt"></button>
+                            <button #item [handler]="confirmHandler" text="Confirm"></button>
+                        </panel>
                         `
             })
             export class AppComponent {
+
+                         onConfirmResult = function(buttonId, value, opt) {
+                             Ext.toast(`User clicked ${buttonId} button.`);
+                         }
+                
+                         onPromptResult = function(buttonId, value) {
+                             Ext.toast(`User clicked ${buttonId} and entered value "${value}".`);
+                         }
+
+                         alertHandler = () => Ext.Msg.alert('Title', 'The quick brown fox jumped over the lazy dog.');
+                         promptHandler = () => Ext.Msg.prompt('Welcome!', "What's your first name?", this.onPromptResult.bind(this));
+                         confirmHandler = () => Ext.Msg.confirm("Confirmation", "Are you sure you want to do that?", this.onConfirmResult.bind(this));
             }
