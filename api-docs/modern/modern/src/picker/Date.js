@@ -10,28 +10,34 @@
  *
  * ## Examples
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container, DatePicker, Button } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *
- *         showPicker = () => this.picker.show();
- *
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container>
- *                         <Button ui="action" handler={this.showPicker} text="Show Picker"/>
- *                         <DatePicker
- *                             ref={picker => this.picker = picker}
- *                         />
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                            <container #item>
+*                                <button #item ui="action" [handler]="this.showPicker" text="Show Picker"></button>
+*                                <datepicker #item
+*                                    (ready)="onPickerReady($event)"
+*                                ></datepicker>
+*                            </container>
+*                        `
+*            })
+*            export class AppComponent {
+*                    pickerComp;
+*
+*                    onPickerReady = (event) => {
+*                        this.pickerComp = event.ext;
+*                    }
+*
+*                    showPicker = () => {
+*                        this.pickerComp.show();
+*                    }
+*            }
  */
 
 /**

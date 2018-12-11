@@ -19,65 +19,74 @@
  * If configured with `{@link #cfg-anchor: true}`, when you {@link #showBy} another
  * component, there will be an anchor arrow pointing to the reference component.
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container, Panel, Button } from '@extjs/ext-react';
- *
- *     Ext.require('Ext.Toast');
- *
- *     function toolHandler(owner, tool) {
- *         Ext.toast(`You clicked ${tool.config.type}`);
- *     }
- *
- *     export default class PanelExample extends Component {
- *
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container>
- *                         <Panel
- *                             shadow
- *                             title="Panel"
- *                             height={300}
- *                             width={500}
- *                             tools={[
- *                                 { type: 'minimize', handler: toolHandler },
- *                                 { type: 'refresh', handler: toolHandler },
- *                                 { type: 'save', handler: toolHandler },
- *                                 { type: 'search', handler: toolHandler },
- *                                 { type: 'close', handler: toolHandler }
- *                             ]}
- *                         >
- *                             <p>Panel Body</p>
- *                         </Panel>
- *                         <Button ui="action" handler={() => this.refs.modal.show()} margin="20 0 0 0" text="Show Modal"/>
- *                         <Panel
- *                             ref="modal"
- *                             title="Floated Panel"
- *                             modal
- *                             floated
- *                             centered
- *                             hideOnMaskTap
- *                             width={Ext.filterPlatform('ie10') ? '100%' : (Ext.os.deviceType == 'Phone') ? 260 : 400}
- *                             maxHeight={Ext.filterPlatform('ie10') ? '30%' : (Ext.os.deviceType == 'Phone') ? 220 : 400}
- *                             showAnimation={{
- *                                 type: 'popIn',
- *                                 duration: 250,
- *                                 easing: 'ease-out'
- *                             }}
- *                             hideAnimation={{
- *                                 type: 'popOut',
- *                                 duration: 250,
- *                                 easing: 'ease-out'
- *                             }}
- *                         >
- *                             <p>This is a modal, centered and floated panel. hideOnMaskTap is true by default so we can tap anywhere outside the overlay to hide it.</p>
- *                         </Panel>
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <container #item>
+*                            <panel #item
+*                                shadow="true"
+*                                title="Panel"
+*                                height="300"
+*                                width="500"
+*                                [tools]="[
+*                                    { type: 'minimize', handler: toolHandler },
+*                                    { type: 'refresh', handler: toolHandler },
+*                                    { type: 'save', handler: toolHandler },
+*                                    { type: 'search', handler: toolHandler },
+*                                    { type: 'close', handler: toolHandler }
+*                                ]"
+*                            >
+*                                <p #item>Panel Body</p>
+*                            </panel>
+*                            <button #item ui="action" [handler]="showModal" margin="20 0 0 0" text="Show Modal"></button>
+*                            <panel #item
+*                                (ready)="panelReady($event)"
+*                                title="Floated Panel"
+*                                modal="true"
+*                                floated="true"
+*                                centered="true"
+*                                hideOnMaskTap="true"
+*                                [width]="this.width"
+*                                [maxHeight]="this.maxHeight"
+*                                [showAnimation]="{
+*                                    type: 'popIn',
+*                                    duration: 250,
+*                                    easing: 'ease-out'
+*                                }"
+*                                [hideAnimation]="{
+*                                    type: 'popOut',
+*                                    duration: 250,
+*                                    easing: 'ease-out'
+*                                }"
+*                            >
+*                                <p #item>This is a modal, centered and floated panel. hideOnMaskTap is true by default so we can tap anywhere outside the overlay to hide it.</p>
+*                            </panel>
+*                        </container>
+*                        `
+*            })
+*            export class AppComponent {
+*
+*                panel:any;
+*
+*                panelReady = (event) => {
+*                    this.panel = event.ext;
+*                }
+*
+*                showModal  = () => this.panel.show();
+*
+*                width = Ext.filterPlatform('ie10') ? '100%' : (Ext.os.deviceType == 'Phone') ? 260 : 400;
+*                maxHeight = Ext.filterPlatform('ie10') ? '30%' : (Ext.os.deviceType == 'Phone') ? 220 : 400;
+*
+*                toolHandler = function(owner, tool) {
+*                    Ext.toast(`You clicked ${tool.config.type}`);
+*                }
+*            }
  *
  */
 

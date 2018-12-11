@@ -7,29 +7,16 @@
                 styles: [`
                         `],
                 template: `
-                                 <container #item>
-                                     <toolbar #item>
-                                        <container #item>
-                                            <div #item [style]="{marginRight: '10px'}">Default UI:</div>
-                                         </container>
-                                         <segmentedbutton #item>
-                                             <button #item pressed text="Low"></button>
-                                             <button #item text="Medium"></button>
-                                             <button #item text="High"></button>
-                                         </segmentedbutton>
-                                     </toolbar>
-                                     <toolbar #item margin="0 0 20 0">
-                                        <container #item>
-                                            <div #item [style]="{marginRight: '10px'}">Toolbar UI:</div>
-                                        </container>
-                                         <segmentedbutton #item>
-                                             <button #item ui="default-toolbar" pressed text="Low"></button>
-                                             <button #item ui="default-toolbar" text="Medium"></button>
-                                             <button #item ui="default-toolbar" text="High"></button>
-                                         </segmentedbutton>
-                                     </toolbar>
-                                 </container>
+                        <container #item layout="hbox">
+                            <panel #item title="Inner Panel 1" flex="1">
+                                This is the inner panel content
+                            </panel>
+                            <panel #item title="Inner Panel 2" flex="1">
+                                This is the inner panel content
+                            </panel>
+                        </container>
                         `
             })
             export class AppComponent {
-            }
+
+             }
