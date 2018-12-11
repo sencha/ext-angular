@@ -10,14 +10,18 @@
       }]
     }"
   >
-  <container #item *ngFor="let event of events" [html]="event"></container>
+  <container #item>
+    <dataview #item [centered]="false"  [inline]="'true'"
+     (ready)="dataviewReady($event)" [itemTpl]="tplDataView">
+  </dataview>
+  </container>
   </panel>
   <container #item (ready)="touchpadReady($event)" flex="1" [layout]="{type: 'vbox', pack: 'center', align: 'stretch'}" [style]="{border: '8px dashed #d6d6d6', borderRadius: '30px'}">
     <container #item [style]="{textAlign: 'center', fontSize: '48px'  , color: '#ccc'}" html="Touch Here"></container>
   </container>
 </container>
         
-<container #item *ngIf="!isPhone" [layout]="'hbox'" [height]="400" [width]="600">
+<container #item *ngIf="!isPhone" [layout]="'hbox'" [width]="600">
     <container #item [flex]="1" [layout]="'vbox'" [padding]="10" [margin]="'0 20 0 0'">
       <panel #item [shadow]="true" [margin]="'0 0 20 0'" [bodyPadding]="10" [maxHeight]="220" [scrollable]="true"
           [html]="'<div><div>Ext JS comes with a multitude of touch events available on components. Included touch events that can be used are:</div>
@@ -37,18 +41,22 @@
             <li>rotate (on iOS and Android 3+)</li>
           </ul></div>'">
       </panel>
-      <panel #item title="Event Log" height="250" scrollable="true" bodyPadding="10" shadow="true"
+      <panel #item title="Event Log" [height]="300" [scrollable]="true" bodyPadding="10" shadow="true"
         [header]="{
           items: [{
             xtype: 'button',
             align: 'right',
             text: 'clear',
             ui: 'alt',
-            tap: this.clearEventLog
+            handler: this.clearEventLog
           }]
         }"
       >
-      <container #item *ngFor="let event of events" [html]="event"></container>
+      <container #item>
+        <dataview #item [centered]="false"  [inline]="'true'"
+        (ready)="dataviewReady($event)" [itemTpl]="tplDataView">
+     </dataview>
+      </container>
       </panel>
     </container>
     <container #item

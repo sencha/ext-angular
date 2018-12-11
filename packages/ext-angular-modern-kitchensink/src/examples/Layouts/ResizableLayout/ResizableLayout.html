@@ -1,4 +1,4 @@
-<container #item [shadow]="true" [layout]="'fit'">
+<container #item [shadow]="true" [layout]="'fit'" [height]="450">
     <panel #item 
         [title]="'Dock Left'"
         [docked]="'left'" 
@@ -12,9 +12,9 @@
         [docked]="'right'" 
         [title]="'Dock Right'"
         [width]="200"
-        [collapsible]="right"
+        [collapsible]="'right'"
         [layout]="'center'"
-        [resizable]="{split: true,  edges: 'west'}"
+        [resizable]="rightResizable"
         [html]="'<code>collapsible</code>'"
     ></panel>
     <panel #item 
