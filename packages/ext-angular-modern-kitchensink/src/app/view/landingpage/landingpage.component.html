@@ -45,16 +45,17 @@
     </container>
     <!-- examples ends-->
 
-    <ng-template [ngIf]="files.length">
-      <button
-        #item
-        [iconCls]="'x-font-icon ' + (showCode ? 'md-icon-close' : 'md-icon-code')"
-        [ui]="'fab'"
-        [top]="isDesktop ? 20 : 35"
-        [right]="21"
-        [zIndex]="1000"
-        (tap)="toggleCode()"
-      ></button>
+    <button [hidden]="files.length > 0 ? false: true"
+    #item
+    [iconCls]="'x-font-icon ' + (showCode ? 'md-icon-close' : 'md-icon-code')"
+    [ui]="'fab'"
+    [top]="isDesktop ? 20 : 35"
+    [right]="21"
+    [zIndex]="1000"
+    (tap)="toggleCode()"
+    ></button>
+
+    <container #item [hidden]="files.length > 0 ? false: true" [maxWidth]="showCode? '33%' : 0">
       <panel
         #item
         [resizable]="{ edges: 'west', dynamic: true }"
@@ -64,7 +65,7 @@
         [collapsible]="{ direction: 'right' }"
         [shadow]="true"
         [userSelectable]="true"
-        [width]="'33%'"
+        [width]="showCode? '100%' : 0"
       >
         <tabpanel
           #item
@@ -76,8 +77,7 @@
             }
           }"
         >
-          <ng-template ngFor let-file [ngForOf]="files">
-            <panel
+            <panel *ngFor="let file of files" [hidden]="files.length > 0 ? false: true"
               #item
               [scrollable]="true"
               [title]="file.name"
@@ -90,8 +90,7 @@
               [userSelectable]="true"
               [html]="file.code"
             ></panel>
-          </ng-template>
         </tabpanel>
       </panel>
-    </ng-template>
+    </container>
   </container>
