@@ -12,5 +12,6 @@
             "name": "All Tests"
         }
     ],
-    "subjectUrl": "http://localhost:8087/"
+    "subjectUrl": "http://localhost:4200/simple",
+    "pageObjects": []
 }
