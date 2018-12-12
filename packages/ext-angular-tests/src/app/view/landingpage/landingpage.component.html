@@ -1,0 +1,20 @@
+<container #item [layout]="'fit'" [fitToParent]="true">
+
+  <titlebar #item [docked]="'top'" [shadow]="true" [style]="{'z-index': 2}">
+    <container #item [layout]="'hbox'">
+      <div #item class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></div>
+      <a href="#" #item class="app-title">ExtAngular Modern Sencha Test- Angular v{{ANGULAR_VERSION}}</a>
+    </container>
+  </titlebar>
+
+  
+    <!-- examples start-->
+    <container #item [cls]="'main-background'" [scrollable]="true" [padding]="30" >
+      <container #item [layout]="{ type: 'vbox', align: 'stretch' }">
+          <router-outlet #item></router-outlet>
+      </container>
+    </container>
+
+
+
+  </container>
