@@ -1,5 +1,5 @@
 {
-  "name": "ext-angular-modern-kitchensink",
+  "name": "ext-angular-tests",
   "version": "6.7.0",
   "scripts": {
     "ng": "ng",
