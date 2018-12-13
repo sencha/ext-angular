@@ -8,26 +8,28 @@
  * only accepts numerical input and also provides additional spinner UI that increases or decreases the current value
  * by a configured {@link #stepValue step value}. Here's how we might use one in a form:
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container, NumberField, FormPanel } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container layout="center">
- *                         <FormPanel shadow>
- *                             <NumberField
- *                                 label="Number"
- *                                 width="150"
- *                             />
- *                         </FormPanel>
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <container #item layout="center">
+*                            <formpanel #item shadow="true">
+*                                <numberfield #item
+*                                    label="Number"
+*                                    width="150"
+*                                ></numberfield>
+*                            </formpanel>
+*                        </container>
+*                        `
+*            })
+*            export class AppComponent {
+*
+*             }
  *
  * ## minValue, maxValue and stepValue
  *

@@ -9,26 +9,28 @@
  * normal form submission. For example, here is how we might set up a form to send
  * back a hidden userId field:
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container, FormPanel, HiddenField } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container layout="center">
- *                         <FormPanel shadow>
- *                             <HiddenField
- *                                 value="123"
- *                                 name="hide"
- *                             />
- *                         </FormPanel>
- *                     </Container>
- *                 <ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <container #item layout="center">
+*                            <formpanel #item shadow="true">
+*                                <hiddenfield #item
+*                                    value="123"
+*                                    name="hide"
+*                                ></hiddenfield>
+*                            </formpanel>
+*                        </container>
+*                        `
+*            })
+*            export class AppComponent {
+*
+*             }
  *
  * In the form above we created two fields - a hidden field and a
  * {@link Ext.field.Checkbox check box field}. Only the check box will be visible, but

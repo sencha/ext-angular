@@ -6,26 +6,27 @@
  * Specialized {@link Ext.field.Slider} with a single thumb which only supports two
  * {@link #value values}.
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container, FormPanel, ToggleField } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container layout="center">
- *                         <FormPanel shadow>
- *                             <ToggleField boxLabel="On" value={true}/>
- *                             <ToggleField boxLabel="Off" value={false}/>
- *                             <ToggleField boxLabel="Disabled" disabled />
- *                             <ToggleField boxLabel="Disabled (On)" disabled value={true} />
- *                         </FormPanel>
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <container #item layout="center">
+*                            <formpanel #item shadow="true" >
+*                                <togglefield #item boxLabel="On" value="true"></togglefield>
+*                                <togglefield #item boxLabel="Off" value="false"></togglefield>
+*                                <togglefield #item boxLabel="Disabled" disabled="true" ></togglefield>
+*                                <togglefield #item boxLabel="Disabled (On)" disabled="true" value="true" ></togglefield>
+*                            </formpanel>
+*                        </container>
+*                        `
+*            })
+*            export class AppComponent {
+*            }
  */
 
 /**
