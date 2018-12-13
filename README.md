@@ -18,7 +18,7 @@ ExtAngular requires the following to be installed before proceeding:
 
 ExtAngular and all related packages are hosted on Sencha's private NPM registry. 
 
-To gain access to the early adopter registry, contact Sencha Sales,
+To gain access to the early adopter registry, contact Sencha Sales.
 
 Once you have received your credentials from sales for the early adopter registry, 
 you can authenticate by running the following command:
@@ -31,10 +31,11 @@ This command configures npm to download packages in the `@sencha` scope from Sen
 
 ### Step 1b: Authenticate to Sencha's NPM Registry - Production (not available yet)
 
-ExtAngular and all related packages are hosted on Sencha's private NPM registry. 
 
 *************
 When this product is in production...
+
+ExtAngular and all related packages are hosted on Sencha's private NPM registry. 
 
 To gain access to this registry, [sign up for a trial of ExtAngular](https://www.sencha.com/products/extangular/evaluate).  
 
@@ -53,7 +54,7 @@ This command configures npm to download packages in the `@sencha` scope from Sen
 
 ### Step 2: Install ext-angular-gen
 
-Install [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, if you have not already done so, install [npm](https://www.npmjs.com/) (also, we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g @sencha/ext-angular-gen
@@ -61,19 +62,25 @@ npm install -g @sencha/ext-angular-gen
 
 ### Step 3: Create a starter ExtAngular application with ext-angular-gen
 
+Generate an initial application with ext-angular-gen
+
 ```bash
 ext-angular-gen app CoolExtAngularApp
 ```
 
+This will create a folder for your new application and install all npm packages
+
 ### Step 4: Run the newly created starter ExtAngular application
+
+When the install is finished:
 
 type "cd cool-ext-angular-app" then "npm start" to run the development build and open your new application in a web browser
 (for the current early adopter release, you need to run 'npm start' twice for the app to display)
 
 ```
 npm install
-npm start
-control-c
+npm start (let ot get to this: ℹ ｢ext｣: Waiting for changes...)
+control-c (stop the command)
 npm start
 ```
 
