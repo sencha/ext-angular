@@ -8,28 +8,30 @@
  * stars. Aside from that, the password field is just a normal text field. Here's an
  * example of how to use it in a form:
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container, FormPanel, PasswordField } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container layout="center">
- *                         <FormPanel shadow>
- *                             <PasswordField
- *                                 width={200}
- *                                 label="Password"
- *                                 required
- *                                 revealable
- *                             />
- *                         </FormPanel>
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <container #item layout="center">
+*                            <formpanel #item shadow="true">
+*                                <passwordfield #item
+*                                    width="200"
+*                                    label="Password"
+*                                    required="true"
+*                                    revealable="true"
+*                                ></passwordfield>
+*                            </formpanel>
+*                        </container>
+*                        `
+*            })
+*            export class AppComponent {
+*
+*             }
  *
  * Because the password field inherits from {@link Ext.field.Text textfield} it gains all
  * of the functionality that text fields provide, including getting and setting the value

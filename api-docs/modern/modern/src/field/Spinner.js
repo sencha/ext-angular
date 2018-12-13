@@ -5,29 +5,30 @@
  *
  * Wraps an HTML5 number field. Example usage:
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container, SpinnerField, FormPanel } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container layout="center">
- *                         <FormPanel shadow>
- *                             <SpinnerField
- *                                 label="Spinner"
- *                                 width="150"
- *                                 minValue={0}
- *                                 maxValue={10}
- *                                 stepValue={1}
- *                             />
- *                         </FormPanel>
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <container #item layout="center">
+*                            <formpanel #item shadow="true" >
+*                                <spinnerfield #item
+*                                    label="Spinner"
+*                                    width="150"
+*                                    minValue="0"
+*                                    maxValue="10"
+*                                    stepValue="1"
+*                                ></spinnerfield>
+*                            </formpanel>
+*                        </container>
+*                        `
+*            })
+*            export class AppComponent {
+*            }
  *
  */
 

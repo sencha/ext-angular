@@ -5,34 +5,36 @@
  *
  * Simple Select field wrapper. Example usage:
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, FormPanel, SelectField, Container } from '@extjs/ext-react';
- *
- *     Ext.require('Ext.Toast');
- *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container layout="center">
- *                         <FormPanel shadow>
- *                             <SelectField
- *                                 label="Select"
- *                                 width="200"
- *                                 onChange={(field, newValue) => Ext.toast(`You selected ${newValue.get('value')}`)}
- *                                 options={[
- *                                     { text: 'Option 1', value: 1 },
- *                                     { text: 'Option 2', value: 2 },
- *                                     { text: 'Option 3', value: 3 }
- *                                 ]}
- *                             />
- *                         </FormPanel>
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <container #item layout="center">
+*                            <formpanel #item shadow="true" >
+*                                <selectfield  #item
+*                                    label="Select"
+*                                    width="200"
+*                                    (change)="onChange($event)"
+*                                    [options]="[
+*                                        { text: 'Option 1', value: 1 },
+*                                        { text: 'Option 2', value: 2 },
+*                                        { text: 'Option 3', value: 3 }
+*                                    ]"
+*                                ></selectfield>
+*                            </formpanel>
+*                        </container>
+*                        `
+*            })
+*            export class AppComponent {
+*                onChange = (event) => {
+*                    Ext.toast(`You selected ${event.newValue}`)
+*                }
+*             }
  */
 
 /**
