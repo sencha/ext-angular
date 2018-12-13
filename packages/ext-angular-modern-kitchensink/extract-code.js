@@ -28,10 +28,17 @@ function extractFrom(example, file, fullPath) {
   if (!fs.existsSync(fullPath)) return
   const content = fs.readFileSync(path.join(fullPath), 'utf8')
   const importRegex = /import[^'"]+['"]([^'"]+)['"];/gi
+  const htmlRegex = /[ ]+templateUrl[^'"]+['"]([^'"]+)['"],/gi
   let match
   (result[example] = result[example] || {})[file] = content
   while (match = importRegex.exec(content)) {
     file = `${match[1]}.ts`
+    if (file.startsWith('.')) {
+      extractFrom(example, path.basename(file), path.join(path.dirname(fullPath), file))
+    }
+  }
+   while (match = htmlRegex.exec(content)) {
+    file = `${match[1]}`
     if (file.startsWith('.')) {
       extractFrom(example, path.basename(file), path.join(path.dirname(fullPath), file))
     }
