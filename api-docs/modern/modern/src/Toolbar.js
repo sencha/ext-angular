@@ -16,31 +16,29 @@
  *
  * ## Example
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Toolbar, Panel, Button, SegmentedButton, Spacer, SearchField } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Panel shadow bodyPadding={0}>
- *                         <Toolbar docked="top">
- *                             <Button text="Default" badgeText="2"/>
- *                             <Spacer/>
- *                             <SegmentedButton>
- *                                 <Button text="Option 1" pressed/>
- *                                 <Button text="Option 2"/>
- *                             </SegmentedButton>
- *                             <Spacer/>
- *                             <Button ui="action" text="Action"/>
- *                         </Toolbar>
- *                        Some Text!
- *                     </Panel>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                    <toolbar #item docked="top">
+*                        <button #item text="Default" badgeText="2"></button>
+*                        <spacer #item></spacer>
+*                        <segmentedbutton #item>
+*                            <button #item text="Option 1" pressed="true"></button>
+*                            <button #item text="Option 2"></button>
+*                        </segmentedbutton>
+*                        <spacer #item> </spacer>
+*                        <button #item ui="action" text="Action"></button>
+*                    </toolbar>
+*                        `
+*            })
+*            export class AppComponent {
+*            }
  */
 
 /**

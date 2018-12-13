@@ -8,29 +8,30 @@
  * the top or the bottom of the Tab Panel, and can optionally accept title and icon
  * configurations (see {@link Ext.Button#iconCls iconCls} for additional information).
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react'
- *     import { ExtReact, Container, TabPanel } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <TabPanel>
- *                         <Container title="Tab 1">
- *                             This is content for Tab 1!
- *                         </Container>
- *                         <Container title="Tab 2">
- *                             This is content for Tab 2!
- *                         </Container>
- *                         <Container title="Tab 3">
- *                             This is content for Tab 3!
- *                         </Container>
- *                     </TabPanel>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                                     <tabpanel #item shadow="true">
+*                                         <container #item [title]="'Tab 1'">
+*                                             This is content for Tab 1!
+*                                         </container>
+*                                         <container #item [title]="'Tab 2'">
+*                                             This is content for Tab 2!
+*                                         </container>
+*                                         <container #item [title]="'Tab 3'">
+*                                             This is content for Tab 3!
+*                                         </container>
+*                                     </tabpanel>
+*                        `
+*            })
+*            export class AppComponent {
+*            }
  *
  * One tab was created for each of the {@link Ext.Container containers} defined in the within the tabpanel.
  * Each tab automatically uses the title and icon defined on the item configuration, and

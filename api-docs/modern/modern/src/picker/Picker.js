@@ -14,40 +14,46 @@
  *
  * ## Example
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container, Picker, Button } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *
- *         showPicker = () => this.picker.show();
- *
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container>
- *                         <Button ui="action" handler={this.showPicker} text="Show Picker"/>
- *                         <Picker
- *                             ref={picker => this.picker = picker}
- *                             slots={[
- *                                 {
- *                                     name: 'limit_speed',
- *                                     title: 'Speed',
- *                                     data: [
- *                                         {text: '50 KB/s', value: 50},
- *                                         {text: '100 KB/s', value: 100},
- *                                         {text: '200 KB/s', value: 200},
- *                                         {text: '300 KB/s', value: 300}
- *                                     ]
- *                                 }
- *                             ]}
- *                         />
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <container #item>
+*                            <button #item ui="action" [handler]="this.showPicker" text="Show Picker"></button>
+*                            <picker #item
+*                                (ready)='this.onPickerReady($event)'
+*                                [slots]="[
+*                                    {
+*                                        name: 'limit_speed',
+*                                        title: 'Speed',
+*                                        data: [
+*                                            {text: '50 KB/s', value: 50},
+*                                            {text: '100 KB/s', value: 100},
+*                                            {text: '200 KB/s', value: 200},
+*                                            {text: '300 KB/s', value: 300}
+*                                        ]
+*                                    }
+*                                ]"
+*                            ></picker>
+*                            </container>
+*                        `
+*            })
+*            export class AppComponent {
+*                    pickerComp;
+*
+*                    onPickerReady = (event) => {
+*                        this.pickerComp = event.ext;
+*                    }
+*
+*                    showPicker = () => {
+*                        this.pickerComp.show();
+*                    }
+*            }
  */
 
 /**

@@ -17,31 +17,35 @@
  * the current date. You can also use the {@link #setValue} method to update the value
  * at any time.
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container, FormPanel, DatePickerField } from '@extjs/ext-react';
+ *            @example packages=[angular]
+ *            import { Component } from '@angular/core'
+ *            declare var Ext: any;
  *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container layout="center">
- *                         <FormPanel shadow>
- *                             <DatePickerField
- *                                 width={150}
- *                                 value={new Date()}
- *                                 destroyPickerOnHide
- *                                 label="Date"
- *                                 picker={{
- *                                     yearFrom: 1990
- *                                 }}
- *                             />
- *                         </FormPanel>
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+ *            @Component({
+ *                selector: 'app-root-1',
+ *                styles: [`
+ *                        `],
+ *                template: `
+ *                        <container #item [layout]='"center"'>
+ *                            <formpanel #item [shadow]>
+ *                                <datepickerfield #item
+ *                                    [width]='150'
+ *                                    [value]='date'
+ *                                    [destroyPickerOnHide]
+ *                                    [label]='"Date"'
+ *                                    [picker]='{
+ *                                        yearFrom: 1990
+ *                                    }'
+ *                                ></datepickerfield>
+ *                            </formpanel>
+ *                        </container>
+ *                        `
+ *            })
+ *            export class AppComponent {
+ *                
+ *                date:Date = new Date();
+ *
+ *            }
  */
 
 /**
