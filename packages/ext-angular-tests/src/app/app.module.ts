@@ -26,6 +26,7 @@ import { Route, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from "@angular/core";
 
 import { SimpleComponent } from './test/Simple/Simple';
+import { EventsComponent } from './test/Events/Events';
 
 
 
@@ -39,7 +40,9 @@ interface ExtAngularRoute extends Route {
 export declare type ExtAngularRoutes = ExtAngularRoute[];
 const routes: ExtAngularRoutes = [
 	{ path: '', redirectTo: '/', pathMatch: 'full' },
-	{ path: 'simple', component: SimpleComponent, text: 'Dashboard', iconCls: 'x-fa fa-dashboard', leaf: true }
+  { path: 'simple', component: SimpleComponent, text: 'Simple', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'events', component: EventsComponent, text: 'Events', iconCls: 'x-fa fa-dashboard', leaf: true }
+
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
@@ -63,7 +66,8 @@ export class App {
 	declarations: [
 		App,
 		LandingpageComponent,
-		SimpleComponent
+    SimpleComponent,
+    EventsComponent
 
 	],
 	providers: [
