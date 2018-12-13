@@ -421,7 +421,7 @@ async function stepCreate() {
 
   var boilerplate = ''
 //  boilerplate = path.dirname(require.resolve(nodeDir + '/node_modules/@sencha/ext-angular-demo'))
-  boilerplate = nodeDir + '/node_modules/@sencha/ext-angular-demo'
+  boilerplate = nodeDir + '/node_modules/@sencha/ext-angular-modern-boilerplate'
 
   // if (answers['language'] == LANGUAGE.TYPESCRIPT) {
   //   boilerplate = path.dirname(require.resolve(nodeDir + '/node_modules/@sencha/ext-react-modern-typescript-boilerplate'))

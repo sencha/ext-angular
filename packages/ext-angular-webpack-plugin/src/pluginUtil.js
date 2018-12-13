@@ -266,19 +266,34 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
 
       if (vars.framework == 'angular') {
         if (fs.existsSync(path.join(process.cwd(),'ext-angular/packages/'))) {
-          var fromResources = path.join(process.cwd(), 'ext-angular/')
-          var toResources = path.join(output)
-          fsx.copySync(fromResources, toResources)
-          log(app + 'Copying ' + fromResources.replace(process.cwd(), '') + ' to: ' + toResources.replace(process.cwd(), ''))
+          var fromPath = path.join(process.cwd(), 'ext-angular/')
+          var toPath = path.join(output)
+          fsx.copySync(fromPath, toPath)
+          log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
         }
         if (fs.existsSync(path.join(process.cwd(),'ext-angular/overrides/'))) {
-          var fromResources = path.join(process.cwd(), 'ext-angular/')
-          var toResources = path.join(output)
-          fsx.copySync(fromResources, toResources)
-          log(app + 'Copying ' + fromResources.replace(process.cwd(), '') + ' to: ' + toResources.replace(process.cwd(), ''))
+          var fromPath = path.join(process.cwd(), 'ext-angular/')
+          var toPath = path.join(output)
+          fsx.copySync(fromPath, toPath)
+          log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
+        }
+      }
+      if (vars.framework == 'react')  {
+        if (fs.existsSync(path.join(process.cwd(),'ext-react/packages/'))) {
+          var fromPath = path.join(process.cwd(), 'ext-react/packages/')
+          var toPath = path.join(output, 'packages')
+          fsx.copySync(fromPath, toPath)
+          log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
+        }
+        if (fs.existsSync(path.join(process.cwd(),'ext-react/overrides/'))) {
+          var fromPath = path.join(process.cwd(), 'ext-react/overrides/')
+          var toPath = path.join(output, 'overrides')
+          fsx.copySync(fromPath, toPath)
+          log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
         }
       }
 
+//do we ever hit these?
       if (fs.existsSync(path.join(process.cwd(),'resources/'))) {
         var fromResources = path.join(process.cwd(), 'resources/')
         var toResources = path.join(output, '../resources')
@@ -292,6 +307,23 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
         fsx.copySync(fromResources, toResources)
         log(app + 'Copying ' + fromResources.replace(process.cwd(), '') + ' to: ' + toResources.replace(process.cwd(), ''))
       }
+      
+      if (fs.existsSync(path.join(process.cwd(),'packages/'))) {
+        var fromPackages = path.join(process.cwd(), 'packages/')
+        var toPackages = path.join(output, 'packages')
+        fsx.copySync(fromPackages, toPackages)
+        log(app + 'Copying ' + fromPackages.replace(process.cwd(), '') + ' to: ' + toPackages.replace(process.cwd(), ''))
+      }
+
+      if (fs.existsSync(path.join(process.cwd(),'overrides/'))) {
+        var fromPath = path.join(process.cwd(), 'overrides/')
+        var toPath = path.join(output, 'overrides')
+        fsx.copySync(fromPath, toPath)
+        log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
+      }
+
+
+
     }
     vars.firstTime = false
     var js = ''
