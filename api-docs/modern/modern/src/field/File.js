@@ -6,27 +6,29 @@
  * Creates an HTML file input field on the page. This is usually used to upload files to remote server. File fields are usually
  * created inside a form like this:
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container, FormPanel, FileField } from '@extjs/ext-react';
+ *            @example packages=[angular]
+ *            import { Component } from '@angular/core'
+ *            declare var Ext: any;
  *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container layout="center">
- *                         <FormPanel shadow>
- *                             <FileField
- *                                 label="Select a File"
- *                                 name="photo"
- *                                 accept="image"
- *                             />
- *                         </FormPanel>
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+ *            @Component({
+ *                selector: 'app-root-1',
+ *                styles: [`
+ *                        `],
+ *                template: `
+ *                        <container #item [layout]='"center"'>
+ *                            <formpanel #item [shadow]>
+ *                                <filefield #item
+ *                                    [label]='"Select a File"'
+ *                                    [name]='"photo"'
+ *                                    [accept]='"image"'
+ *                                ></filefield>
+ *                            </formpanel>
+ *                        </container>
+ *                        `
+ *            })
+ *            export class AppComponent {
+ *
+ *             }
  */
 
 /**

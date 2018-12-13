@@ -23,39 +23,40 @@
  *
  * # Example usage:
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, FormPanel, ComboBoxField, Container } from '@extjs/ext-react';
+ *            @example packages=[angular]
+ *            import { Component } from '@angular/core'
+ *            declare var Ext: any;
  *
- *     export default class MyExample extends Component {
+ *            @Component({
+ *                selector: 'app-root-1',
+ *                styles: [`
+ *                        `],
+ *                template: `
+ *                    <container #item [layout]='"center"'>
+ *                        <formpanel #item [shadow]>
+ *                            <comboboxfield #item
+ *                                [width]="200"
+ *                                [label]='"State"'
+ *                                [options]='data'
+ *                                [displayField]='"name"'
+ *                                [valueField]='"code"'
+ *                                [queryMode]='"local"'
+ *                                [labelAlign]='"placeholder"'
+ *                                [typeAhead]
+ *                            ></comboboxfield>
+ *                        </formpanel>
+ *                    </container>
+ *                        `
+ *            })
+ *            export class AppComponent {
  *
- *     render() {
- *          const data = [
- *               {"name":"Alabama","abbrev":"AL"},
- *               {"name":"Alaska","abbrev":"AK"},
- *               {"name":"Arizona","abbrev":"AZ"}
- *          ]
+ *                data = [
+ *                    {"name":"Alabama","abbrev":"AL"},
+ *                    {"name":"Alaska","abbrev":"AK"},
+ *                    {"name":"Arizona","abbrev":"AZ"}
+ *                ];
  *
- *          return (
- *              <ExtReact>
- *                  <Container layout="center">
- *                      <FormPanel shadow>
- *                          <ComboBoxField
- *                              width={200}
- *                              label="State"
- *                              options={data}
- *                              displayField="name"
- *                              valueField="code"
- *                              queryMode="local"
- *                              labelAlign="placeholder"
- *                              typeAhead
- *                          />
- *                      </FormPanel>
- *                  </Container>
- *              </ExtReact>
- *          )
- *       }
- *     }
+ *             }
  */
 
 /**

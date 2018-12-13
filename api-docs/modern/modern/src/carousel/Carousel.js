@@ -9,31 +9,30 @@
  * Carousels can be oriented either horizontally or vertically and are easy to configure - they just work like any other
  * Container.
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react'
- *     import { ExtReact, Carousel, Container } from '@extjs/ext-react';
+ *            @example packages=[angular]
+ *            import { Component } from '@angular/core'
+ *            declare var Ext: any;
  *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container layout="fit">
- *                         <Carousel>
- *                             <Container>
- *                                 <div>Slide 1!</div>
- *                             </Container>
- *                             <Container>
- *                                 <div>Slide 2!</div>
- *                             </Container>
- *                             <Container>
- *                                 <div>Slide 3!</div>
- *                             </Container>
- *                         </Carousel>
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+ *            @Component({
+ *                selector: 'app-root-1',
+ *                styles: [`
+ *                        `],
+ *                template: `
+ *                        <container #item [layout]="'fit'">
+ *                            <carousel #item [width]="'800'" [height]="'600'">
+ *                                <container #item [html]="'Slide 1!'">
+ *                                </container>
+ *                                <container #item [html]="'Slide 2!'">
+ *                                </container>
+ *                                <container #item [html]="'Slide 3!'">
+ *                                </container>
+ *                            </carousel>
+ *                        </container>
+ *                        `
+ *            })
+ *            export class AppComponent {
+ *
+ *             }
  *
  * ### Common Props
  * * {@link #ui} defines the style of the carousel
