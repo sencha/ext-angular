@@ -17,12 +17,12 @@ async function main() {
   var libFolder             = srcFolder + 'lib/';                                      log(`libFolder`,`${libFolder}`)
 
   await run(`node all.js ${framework} ${toolkit} ${environment} ${components}`)
-  await run(`cp -R ${packageFolder}/${toolkit}/ ../${folderName}`)
-  await run(`cp -R ${srcFolder} ../${folderName}/src`)
+  await run(`cp -R ${packageFolder}/${toolkit}/. ../${folderName}/`)
+  await run(`cp -R ${srcFolder}/. ../${folderName}/src/`)
   await run(`npm install`, `../${folderName}/`)
   await run(`npm run build`, `../${folderName}/`)
-  await run (`rm -R ../../packages/${folderName}`)
-  await run(`cp -R ../${folderName}/dist/${folderName} ../../packages/${folderName}`)
+  await run (`rm -R ../../packages/${folderName}/.`)
+  await run(`cp -R ../${folderName}/dist/${folderName}/. ../../packages/${folderName}/.`)
   //await run (`ls -l`, `../../packages/${folderName}/lib`)
 }
 

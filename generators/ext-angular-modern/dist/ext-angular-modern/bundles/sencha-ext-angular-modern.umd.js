@@ -2677,20 +2677,23 @@
             "border": "Boolean",
             "bottom": "Number/String",
             "centered": "Boolean",
+            "chipView": "any",
             "clearable": "Boolean",
             "cls": "String/String[]",
+            "collapseOnSelect": "Boolean",
             "constrainAlign": "String/Ext.util.Region/Ext.dom.Element",
             "contentEl": "Ext.dom.Element/HTMLElement/String",
             "controller": "String/Object/Ext.app.ViewController",
             "data": "Object",
             "defaultListenerScope": "Boolean",
+            "delimiter": "String",
             "disabled": "Boolean",
             "displayed": "Boolean",
             "displayField": "String/Number",
             "displayTpl": "String/String[]/Ext.XTemplate",
             "docked": "String",
             "draggable": "Boolean/Object/Ext.drag.Source",
-            "edgePicker": "any",
+            "edgePicker": "Object",
             "editable": "Boolean",
             "enterAnimation": "String/Mixed",
             "error": "String/String[]",
@@ -2702,7 +2705,7 @@
             "exitAnimation": "String/Mixed",
             "flex": "Number/String/Object",
             "floated": "Boolean",
-            "floatedPicker": "any",
+            "floatedPicker": "Object",
             "floatedPickerAlign": "String",
             "focusCls": "String",
             "focusTrap": "any",
@@ -2723,6 +2726,7 @@
             "inputType": "String",
             "inputValue": "any",
             "instanceCls": "String/String[]",
+            "itemCls": "String",
             "itemId": "String",
             "itemTpl": "String/Ext.XTemplate",
             "keyMap": "Object",
@@ -2747,6 +2751,7 @@
             "minWidth": "Number/String",
             "modal": "Boolean",
             "modelValidation": "Boolean",
+            "multiSelect": "Boolean",
             "name": "String",
             "nameable": "Boolean",
             "options": "Array",
@@ -2761,6 +2766,8 @@
             "publishes": "String/String[]/Object",
             "readOnly": "Boolean",
             "record": "Ext.data.Model",
+            "recordCreator": "Function/String",
+            "recordCreatorScope": "Object",
             "reference": "String",
             "relative": "Boolean",
             "renderTo": "Ext.dom.Element",
@@ -2843,13 +2850,16 @@
             'border',
             'bottom',
             'centered',
+            'chipView',
             'clearable',
             'cls',
+            'collapseOnSelect',
             'constrainAlign',
             'contentEl',
             'controller',
             'data',
             'defaultListenerScope',
+            'delimiter',
             'disabled',
             'displayed',
             'displayField',
@@ -2889,6 +2899,7 @@
             'inputType',
             'inputValue',
             'instanceCls',
+            'itemCls',
             'itemId',
             'itemTpl',
             'keyMap',
@@ -2913,6 +2924,7 @@
             'minWidth',
             'modal',
             'modelValidation',
+            'multiSelect',
             'name',
             'nameable',
             'options',
@@ -2927,6 +2939,8 @@
             'publishes',
             'readOnly',
             'record',
+            'recordCreator',
+            'recordCreatorScope',
             'reference',
             'relative',
             'renderTo',
@@ -3769,20 +3783,23 @@
             "border": "Boolean",
             "bottom": "Number/String",
             "centered": "Boolean",
+            "chipView": "any",
             "clearable": "Boolean",
             "cls": "String/String[]",
+            "collapseOnSelect": "Boolean",
             "constrainAlign": "String/Ext.util.Region/Ext.dom.Element",
             "contentEl": "Ext.dom.Element/HTMLElement/String",
             "controller": "String/Object/Ext.app.ViewController",
             "data": "Object",
             "defaultListenerScope": "Boolean",
+            "delimiter": "String",
             "disabled": "Boolean",
             "displayed": "Boolean",
             "displayField": "String/Number",
             "displayTpl": "String/String[]/Ext.XTemplate",
             "docked": "String",
             "draggable": "Boolean/Object/Ext.drag.Source",
-            "edgePicker": "any",
+            "edgePicker": "Object",
             "editable": "Boolean",
             "enterAnimation": "String/Mixed",
             "error": "String/String[]",
@@ -3794,7 +3811,7 @@
             "exitAnimation": "String/Mixed",
             "flex": "Number/String/Object",
             "floated": "Boolean",
-            "floatedPicker": "any",
+            "floatedPicker": "Object",
             "floatedPickerAlign": "String",
             "focusCls": "String",
             "focusTrap": "any",
@@ -3815,6 +3832,7 @@
             "inputType": "String",
             "inputValue": "any",
             "instanceCls": "String/String[]",
+            "itemCls": "String",
             "itemId": "String",
             "itemTpl": "String/Ext.XTemplate",
             "keyMap": "Object",
@@ -3839,6 +3857,7 @@
             "minWidth": "Number/String",
             "modal": "Boolean",
             "modelValidation": "Boolean",
+            "multiSelect": "Boolean",
             "name": "String",
             "nameable": "Boolean",
             "options": "Array",
@@ -3853,6 +3872,8 @@
             "publishes": "String/String[]/Object",
             "readOnly": "Boolean",
             "record": "Ext.data.Model",
+            "recordCreator": "Function/String",
+            "recordCreatorScope": "Object",
             "reference": "String",
             "relative": "Boolean",
             "renderTo": "Ext.dom.Element",
@@ -3935,13 +3956,16 @@
             'border',
             'bottom',
             'centered',
+            'chipView',
             'clearable',
             'cls',
+            'collapseOnSelect',
             'constrainAlign',
             'contentEl',
             'controller',
             'data',
             'defaultListenerScope',
+            'delimiter',
             'disabled',
             'displayed',
             'displayField',
@@ -3981,6 +4005,7 @@
             'inputType',
             'inputValue',
             'instanceCls',
+            'itemCls',
             'itemId',
             'itemTpl',
             'keyMap',
@@ -4005,6 +4030,7 @@
             'minWidth',
             'modal',
             'modelValidation',
+            'multiSelect',
             'name',
             'nameable',
             'options',
@@ -4019,6 +4045,8 @@
             'publishes',
             'readOnly',
             'record',
+            'recordCreator',
+            'recordCreatorScope',
             'reference',
             'relative',
             'renderTo',
@@ -14787,6 +14815,376 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var chipMetaData = /** @class */ (function () {
+        function chipMetaData() {
+        }
+        chipMetaData.XTYPE = 'chip';
+        chipMetaData.PROPERTIESOBJECT = {
+            "alwaysOnTop": "Boolean/Number",
+            "ariaAttributes": "Object",
+            "ariaDescribedBy": "String",
+            "ariaLabel": "String",
+            "ariaLabelledBy": "String",
+            "axisLock": "Boolean",
+            "bind": "Object/String",
+            "border": "Boolean",
+            "bottom": "Number/String",
+            "centered": "Boolean",
+            "closable": "Boolean",
+            "closeHandler": "Function/String",
+            "cls": "String/String[]",
+            "constrainAlign": "String/Ext.util.Region/Ext.dom.Element",
+            "contentEl": "Ext.dom.Element/HTMLElement/String",
+            "controller": "String/Object/Ext.app.ViewController",
+            "data": "Object",
+            "defaultListenerScope": "Boolean",
+            "disabled": "Boolean",
+            "displayed": "Boolean",
+            "docked": "String",
+            "draggable": "Boolean/Object/Ext.drag.Source",
+            "enterAnimation": "String/Mixed",
+            "eventHandlers": "Object",
+            "exitAnimation": "String/Mixed",
+            "flex": "Number/String/Object",
+            "floated": "Boolean",
+            "focusCls": "String",
+            "fullscreen": "Boolean",
+            "height": "Number/String",
+            "hidden": "Boolean",
+            "hideAnimation": "String/Mixed",
+            "hideMode": "'clip'/'display'/'offsets'/'opacity'/'visibility'",
+            "hideOnMaskTap": "Boolean",
+            "html": "String/Ext.dom.Element/HTMLElement",
+            "icon": "String",
+            "iconCls": "String",
+            "id": "String",
+            "instanceCls": "String/String[]",
+            "itemId": "String",
+            "keyMap": "Object",
+            "keyMapEnabled": "Boolean",
+            "keyMapTarget": "String",
+            "left": "Number/String",
+            "listeners": "Object",
+            "margin": "Number/String",
+            "maxHeight": "Number/String",
+            "maxWidth": "Number/String",
+            "minHeight": "Number/String",
+            "minWidth": "Number/String",
+            "modal": "Boolean",
+            "modelValidation": "Boolean",
+            "name": "String",
+            "nameable": "Boolean",
+            "padding": "Number/String",
+            "plugins": "Array/Ext.enums.Plugin/Object/Ext.plugin.Abstract",
+            "publishes": "String/String[]/Object",
+            "record": "Ext.data.Model",
+            "reference": "String",
+            "relative": "Boolean",
+            "renderTo": "Ext.dom.Element",
+            "right": "Number/String",
+            "ripple": "Boolean/Object/String",
+            "scope": "Object",
+            "scrollable": "Boolean/String/Object",
+            "selfAlign": "String",
+            "session": "Boolean/Object/Ext.data.Session",
+            "shadow": "Boolean",
+            "shareableName": "Boolean",
+            "shim": "Boolean",
+            "showAnimation": "String/Mixed",
+            "stateful": "Boolean/Object/String[]",
+            "statefulDefaults": "Object/String[]",
+            "stateId": "String",
+            "style": "String/Object",
+            "tabIndex": "Number",
+            "text": "String",
+            "toFrontOnShow": "Boolean",
+            "tooltip": "String/Object",
+            "top": "Number/String",
+            "touchAction": "Object",
+            "tpl": "String/String[]/Ext.Template/Ext.XTemplate[]",
+            "tplWriteMode": "String",
+            "translatable": "Object",
+            "twoWayBindable": "String/String[]/Object",
+            "ui": "String/String[]",
+            "userCls": "String/String[]",
+            "userSelectable": "Boolean/String/Object",
+            "viewModel": "String/Object/Ext.app.ViewModel",
+            "weight": "Number",
+            "width": "Number/String",
+            "x": "Number",
+            "xtype": "String",
+            "y": "Number",
+            "zIndex": "Number",
+            "platformConfig": "Object",
+            "responsiveConfig": "Object",
+            "fitToParent": "Boolean",
+            "config": "Object",
+        };
+        chipMetaData.PROPERTIES = [
+            'alwaysOnTop',
+            'ariaAttributes',
+            'ariaDescribedBy',
+            'ariaLabel',
+            'ariaLabelledBy',
+            'axisLock',
+            'bind',
+            'border',
+            'bottom',
+            'centered',
+            'closable',
+            'closeHandler',
+            'cls',
+            'constrainAlign',
+            'contentEl',
+            'controller',
+            'data',
+            'defaultListenerScope',
+            'disabled',
+            'displayed',
+            'docked',
+            'draggable',
+            'enterAnimation',
+            'eventHandlers',
+            'exitAnimation',
+            'flex',
+            'floated',
+            'focusCls',
+            'fullscreen',
+            'height',
+            'hidden',
+            'hideAnimation',
+            'hideMode',
+            'hideOnMaskTap',
+            'html',
+            'icon',
+            'iconCls',
+            'id',
+            'instanceCls',
+            'itemId',
+            'keyMap',
+            'keyMapEnabled',
+            'keyMapTarget',
+            'left',
+            'listeners',
+            'margin',
+            'maxHeight',
+            'maxWidth',
+            'minHeight',
+            'minWidth',
+            'modal',
+            'modelValidation',
+            'name',
+            'nameable',
+            'padding',
+            'plugins',
+            'publishes',
+            'record',
+            'reference',
+            'relative',
+            'renderTo',
+            'right',
+            'ripple',
+            'scope',
+            'scrollable',
+            'selfAlign',
+            'session',
+            'shadow',
+            'shareableName',
+            'shim',
+            'showAnimation',
+            'stateful',
+            'statefulDefaults',
+            'stateId',
+            'style',
+            'tabIndex',
+            'text',
+            'toFrontOnShow',
+            'tooltip',
+            'top',
+            'touchAction',
+            'tpl',
+            'tplWriteMode',
+            'translatable',
+            'twoWayBindable',
+            'ui',
+            'userCls',
+            'userSelectable',
+            'viewModel',
+            'weight',
+            'width',
+            'x',
+            'xtype',
+            'y',
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'fitToParent',
+            'config'
+        ];
+        chipMetaData.EVENTS = [
+            { name: 'added', parameters: 'sender,container,index' },
+            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehide', parameters: 'sender' },
+            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforetofront', parameters: 'chip' },
+            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'blur', parameters: 'chip,event' },
+            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'destroy', parameters: '' },
+            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'erased', parameters: 'sender' },
+            { name: 'floatingchange', parameters: 'sender,positioned' },
+            { name: 'focus', parameters: 'chip,event' },
+            { name: 'focusenter', parameters: 'chip,event' },
+            { name: 'focusleave', parameters: 'chip,event' },
+            { name: 'fullscreen', parameters: 'sender' },
+            { name: 'heightchange', parameters: 'sender,value,oldValue' },
+            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+            { name: 'hide', parameters: 'sender' },
+            { name: 'initialize', parameters: 'sender' },
+            { name: 'leftchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+            { name: 'orientationchange', parameters: '' },
+            { name: 'painted', parameters: 'sender,element' },
+            { name: 'positionedchange', parameters: 'sender,positioned' },
+            { name: 'removed', parameters: 'sender,container,index' },
+            { name: 'resize', parameters: 'element,info' },
+            { name: 'rightchange', parameters: 'sender,value,oldValue' },
+            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+            { name: 'show', parameters: 'sender' },
+            { name: 'tofront', parameters: 'chip' },
+            { name: 'topchange', parameters: 'sender,value,oldValue' },
+            { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'widthchange', parameters: 'sender,value,oldValue' },
+            { name: 'ready', parameters: '' }
+        ];
+        chipMetaData.EVENTNAMES = [
+            'added',
+            'beforebottomchange',
+            'beforecenteredchange',
+            'beforedisabledchange',
+            'beforedockedchange',
+            'beforeheightchange',
+            'beforehiddenchange',
+            'beforehide',
+            'beforeleftchange',
+            'beforemaxHeightchange',
+            'beforemaxWidthchange',
+            'beforeminHeightchange',
+            'beforeminWidthchange',
+            'beforeorientationchange',
+            'beforerightchange',
+            'beforescrollablechange',
+            'beforeshow',
+            'beforetofront',
+            'beforetopchange',
+            'beforewidthchange',
+            'blur',
+            'bottomchange',
+            'centeredchange',
+            'destroy',
+            'disabledchange',
+            'dockedchange',
+            'erased',
+            'floatingchange',
+            'focus',
+            'focusenter',
+            'focusleave',
+            'fullscreen',
+            'heightchange',
+            'hiddenchange',
+            'hide',
+            'initialize',
+            'leftchange',
+            'maxHeightchange',
+            'maxWidthchange',
+            'minHeightchange',
+            'minWidthchange',
+            'moved',
+            'orientationchange',
+            'painted',
+            'positionedchange',
+            'removed',
+            'resize',
+            'rightchange',
+            'scrollablechange',
+            'show',
+            'tofront',
+            'topchange',
+            'updatedata',
+            'widthchange',
+            'ready'
+        ];
+        return chipMetaData;
+    }());
+    var ExtChipComponent = /** @class */ (function (_super) {
+        __extends(ExtChipComponent, _super);
+        function ExtChipComponent(eRef) {
+            return _super.call(this, eRef, chipMetaData) || this;
+        }
+        /**
+         * @return {?}
+         */
+        ExtChipComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () { this.baseOnInit(chipMetaData); };
+        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+        /**
+         * @return {?}
+         */
+        ExtChipComponent.prototype.ngAfterContentInit =
+            //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+            /**
+             * @return {?}
+             */
+            function () {
+                this.baseAfterContentInit();
+                this['ready'].emit(this);
+            };
+        ExtChipComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'chip',
+                        inputs: chipMetaData.PROPERTIES,
+                        outputs: chipMetaData.EVENTNAMES,
+                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtChipComponent; }) }],
+                        template: '<ng-template #dynamic></ng-template>'
+                    }] }
+        ];
+        /** @nocollapse */
+        ExtChipComponent.ctorParameters = function () {
+            return [
+                { type: core.ElementRef }
+            ];
+        };
+        return ExtChipComponent;
+    }(base));
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var componentMetaData = /** @class */ (function () {
         function componentMetaData() {
         }
@@ -20167,6 +20565,558 @@
             ];
         };
         return ExtBoundlistComponent;
+    }(base));
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var chipviewMetaData = /** @class */ (function () {
+        function chipviewMetaData() {
+        }
+        chipviewMetaData.XTYPE = 'chipview';
+        chipviewMetaData.PROPERTIESOBJECT = {
+            "activeChildTabIndex": "Number",
+            "activeItem": "Ext.Component/Object/String/Number",
+            "allowFocusingDisabledChildren": "Boolean",
+            "alwaysOnTop": "Boolean/Number",
+            "ariaAttributes": "Object",
+            "ariaDescribedBy": "String",
+            "ariaLabel": "String",
+            "ariaLabelledBy": "String",
+            "associatedData": "Boolean/Object",
+            "autoDestroy": "Boolean",
+            "autoSize": "Boolean",
+            "axisLock": "Boolean",
+            "bind": "Object/String",
+            "border": "Boolean",
+            "bottom": "Number/String",
+            "cardSwitchAnimation": "String/Object/Boolean",
+            "centered": "Boolean",
+            "closable": "Boolean",
+            "closableField": "String",
+            "closeHandler": "Function/String",
+            "cls": "String/String[]",
+            "constrainAlign": "String/Ext.util.Region/Ext.dom.Element",
+            "contentEl": "Ext.dom.Element/HTMLElement/String",
+            "control": "Object",
+            "controller": "String/Object/Ext.app.ViewController",
+            "data": "Object",
+            "defaultFocus": "String",
+            "defaultListenerScope": "Boolean",
+            "defaults": "Object",
+            "defaultType": "String",
+            "deferEmptyText": "Boolean",
+            "deselectOnContainerClick": "Boolean",
+            "disabled": "Boolean",
+            "disableSelection": "Boolean",
+            "displayed": "Boolean",
+            "displayField": "String",
+            "displayTpl": "String/String[]/Ext.XTemplate",
+            "docked": "String",
+            "draggable": "Boolean/Object/Ext.drag.Source",
+            "emptyItemText": "String",
+            "emptyState": "Boolean",
+            "emptyText": "String/Boolean",
+            "emptyTextDefaults": "Object/Ext.Component",
+            "emptyTextProperty": "String",
+            "enableTextSelection": "Boolean",
+            "enterAnimation": "String/Mixed",
+            "eventHandlers": "Object",
+            "exitAnimation": "String/Mixed",
+            "flex": "Number/String/Object",
+            "floated": "Boolean",
+            "focusableContainer": "Boolean",
+            "focusCls": "String",
+            "fullscreen": "Boolean",
+            "height": "Number/String",
+            "hidden": "Boolean",
+            "hideAnimation": "String/Mixed",
+            "hideMode": "'clip'/'display'/'offsets'/'opacity'/'visibility'",
+            "hideOnMaskTap": "Boolean",
+            "html": "String/Ext.dom.Element/HTMLElement",
+            "iconClsField": "String",
+            "iconField": "String",
+            "id": "String",
+            "inactiveChildTabIndex": "Number",
+            "inline": "Boolean/Object",
+            "innerCls": "String",
+            "instanceCls": "String/String[]",
+            "itemButtonMode": "boolean",
+            "itemCls": "String",
+            "itemId": "String",
+            "itemRipple": "Boolean/Object",
+            "items": "Array/Object",
+            "itemsFocusable": "Boolean",
+            "itemTpl": "any",
+            "keyMap": "Object",
+            "keyMapEnabled": "Boolean",
+            "keyMapTarget": "String",
+            "lastSelected": "Ext.data.Model",
+            "layout": "Object/String",
+            "left": "Number/String",
+            "listeners": "Object",
+            "loadingHeight": "Number",
+            "loadingText": "String/Boolean",
+            "manageBorders": "Boolean",
+            "margin": "Number/String",
+            "markDirty": "Boolean",
+            "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
+            "maxHeight": "Number/String",
+            "maxWidth": "Number/String",
+            "minHeight": "Number/String",
+            "minWidth": "Number/String",
+            "modal": "Boolean",
+            "modelValidation": "Boolean",
+            "name": "String",
+            "nameable": "Boolean",
+            "nameHolder": "Boolean",
+            "padding": "Number/String",
+            "plugins": "Array/Ext.enums.Plugin/Object/Ext.plugin.Abstract",
+            "pressedDelay": "Number",
+            "publishes": "String/String[]/Object",
+            "record": "Ext.data.Model",
+            "reference": "String",
+            "referenceHolder": "Boolean",
+            "relative": "Boolean",
+            "renderTo": "Ext.dom.Element",
+            "resetFocusPosition": "Boolean",
+            "right": "Number/String",
+            "ripple": "Boolean/Object/String",
+            "scope": "Object",
+            "scrollable": "Boolean/String/Object",
+            "scrollDock": "'start'/'emd'",
+            "scrollToTopOnRefresh": "Boolean",
+            "selectable": "Object/Ext.dataview.selection.Model",
+            "selected": "Ext.util.Collection",
+            "selection": "Ext.data.Model",
+            "selfAlign": "String",
+            "session": "Boolean/Object/Ext.data.Session",
+            "shadow": "Boolean",
+            "shareableName": "Boolean",
+            "shim": "Boolean",
+            "showAnimation": "String/Mixed",
+            "stateful": "Boolean/Object/String[]",
+            "statefulDefaults": "Object/String[]",
+            "stateId": "String",
+            "store": "Ext.data.Store/Object",
+            "style": "String/Object",
+            "tabIndex": "Number",
+            "toFrontOnShow": "Boolean",
+            "tooltip": "String/Object",
+            "top": "Number/String",
+            "touchAction": "Object",
+            "tpl": "String/String[]/Ext.Template/Ext.XTemplate[]",
+            "tplWriteMode": "String",
+            "translatable": "Object",
+            "triggerCtEvent": "'tap'/'singletap'",
+            "triggerEvent": "'childtap'/'childsingletap'/'childdoubletap'/'childswipe'/'childtaphold'/'childlongpress'",
+            "twoWayBindable": "String/String[]/Object",
+            "ui": "String/String[]",
+            "userCls": "String/String[]",
+            "userSelectable": "Boolean/String/Object",
+            "viewModel": "String/Object/Ext.app.ViewModel",
+            "weight": "Number",
+            "weighted": "Boolean",
+            "width": "Number/String",
+            "x": "Number",
+            "xtype": "String",
+            "y": "Number",
+            "zIndex": "Number",
+            "platformConfig": "Object",
+            "responsiveConfig": "Object",
+            "fitToParent": "Boolean",
+            "config": "Object",
+        };
+        chipviewMetaData.PROPERTIES = [
+            'activeChildTabIndex',
+            'activeItem',
+            'allowFocusingDisabledChildren',
+            'alwaysOnTop',
+            'ariaAttributes',
+            'ariaDescribedBy',
+            'ariaLabel',
+            'ariaLabelledBy',
+            'associatedData',
+            'autoDestroy',
+            'autoSize',
+            'axisLock',
+            'bind',
+            'border',
+            'bottom',
+            'cardSwitchAnimation',
+            'centered',
+            'closable',
+            'closableField',
+            'closeHandler',
+            'cls',
+            'constrainAlign',
+            'contentEl',
+            'control',
+            'controller',
+            'data',
+            'defaultFocus',
+            'defaultListenerScope',
+            'defaults',
+            'defaultType',
+            'deferEmptyText',
+            'deselectOnContainerClick',
+            'disabled',
+            'disableSelection',
+            'displayed',
+            'displayField',
+            'displayTpl',
+            'docked',
+            'draggable',
+            'emptyItemText',
+            'emptyState',
+            'emptyText',
+            'emptyTextDefaults',
+            'emptyTextProperty',
+            'enableTextSelection',
+            'enterAnimation',
+            'eventHandlers',
+            'exitAnimation',
+            'flex',
+            'floated',
+            'focusableContainer',
+            'focusCls',
+            'fullscreen',
+            'height',
+            'hidden',
+            'hideAnimation',
+            'hideMode',
+            'hideOnMaskTap',
+            'html',
+            'iconClsField',
+            'iconField',
+            'id',
+            'inactiveChildTabIndex',
+            'inline',
+            'innerCls',
+            'instanceCls',
+            'itemButtonMode',
+            'itemCls',
+            'itemId',
+            'itemRipple',
+            'items',
+            'itemsFocusable',
+            'itemTpl',
+            'keyMap',
+            'keyMapEnabled',
+            'keyMapTarget',
+            'lastSelected',
+            'layout',
+            'left',
+            'listeners',
+            'loadingHeight',
+            'loadingText',
+            'manageBorders',
+            'margin',
+            'markDirty',
+            'masked',
+            'maxHeight',
+            'maxWidth',
+            'minHeight',
+            'minWidth',
+            'modal',
+            'modelValidation',
+            'name',
+            'nameable',
+            'nameHolder',
+            'padding',
+            'plugins',
+            'pressedDelay',
+            'publishes',
+            'record',
+            'reference',
+            'referenceHolder',
+            'relative',
+            'renderTo',
+            'resetFocusPosition',
+            'right',
+            'ripple',
+            'scope',
+            'scrollable',
+            'scrollDock',
+            'scrollToTopOnRefresh',
+            'selectable',
+            'selected',
+            'selection',
+            'selfAlign',
+            'session',
+            'shadow',
+            'shareableName',
+            'shim',
+            'showAnimation',
+            'stateful',
+            'statefulDefaults',
+            'stateId',
+            'store',
+            'style',
+            'tabIndex',
+            'toFrontOnShow',
+            'tooltip',
+            'top',
+            'touchAction',
+            'tpl',
+            'tplWriteMode',
+            'translatable',
+            'triggerCtEvent',
+            'triggerEvent',
+            'twoWayBindable',
+            'ui',
+            'userCls',
+            'userSelectable',
+            'viewModel',
+            'weight',
+            'weighted',
+            'width',
+            'x',
+            'xtype',
+            'y',
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'fitToParent',
+            'config'
+        ];
+        chipviewMetaData.EVENTS = [
+            { name: 'activate', parameters: 'newActiveItem,chipview,oldActiveItem' },
+            { name: 'activeItemchange', parameters: 'sender,value,oldValue' },
+            { name: 'add', parameters: '' },
+            { name: 'added', parameters: 'sender,container,index' },
+            { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehide', parameters: 'sender' },
+            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforestorechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforetofront', parameters: 'chipview' },
+            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'blur', parameters: 'chipview,event' },
+            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'childdoubletap', parameters: 'chipview,location' },
+            { name: 'childlongpress', parameters: 'chipview,location' },
+            { name: 'childmouseenter', parameters: 'chipview,location' },
+            { name: 'childmouseleave', parameters: 'chipview,location' },
+            { name: 'childsingletap', parameters: 'chipview,location' },
+            { name: 'childtap', parameters: 'chipview,location' },
+            { name: 'childtaphold', parameters: 'chipview,location' },
+            { name: 'childtouchcancel', parameters: 'chipview,location' },
+            { name: 'childtouchend', parameters: 'chipview,location' },
+            { name: 'childtouchmove', parameters: 'chipview,location' },
+            { name: 'childtouchstart', parameters: 'chipview,location' },
+            { name: 'deactivate', parameters: 'oldActiveItem,chipview,newActiveItem' },
+            { name: 'deselect', parameters: 'chipview,records' },
+            { name: 'destroy', parameters: '' },
+            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'erased', parameters: 'sender' },
+            { name: 'floatingchange', parameters: 'sender,positioned' },
+            { name: 'focus', parameters: 'chipview,event' },
+            { name: 'focusenter', parameters: 'chipview,event' },
+            { name: 'focusleave', parameters: 'chipview,event' },
+            { name: 'fullscreen', parameters: 'sender' },
+            { name: 'heightchange', parameters: 'sender,value,oldValue' },
+            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+            { name: 'hide', parameters: 'sender' },
+            { name: 'initialize', parameters: 'sender' },
+            { name: 'itemdoubletap', parameters: 'chipview,index,target,record,e' },
+            { name: 'itemlongpress', parameters: 'chipview,index,target,record,e' },
+            { name: 'itemmouseenter', parameters: 'chipview,index,target,record,e' },
+            { name: 'itemmouseleave', parameters: 'chipview,index,target,record,e' },
+            { name: 'itemsingletap', parameters: 'chipview,index,target,record,e' },
+            { name: 'itemswipe', parameters: 'chipview,index,target,record,e' },
+            { name: 'itemtap', parameters: 'chipview,index,target,record,e' },
+            { name: 'itemtaphold', parameters: 'chipview,index,target,record,e' },
+            { name: 'itemtouchcancel', parameters: 'chipview,index,target,record,e' },
+            { name: 'itemtouchend', parameters: 'chipview,index,target,record,e' },
+            { name: 'itemtouchmove', parameters: 'chipview,index,target,record,e' },
+            { name: 'itemtouchstart', parameters: 'chipview,index,target,record,e' },
+            { name: 'leftchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'move', parameters: '' },
+            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+            { name: 'navigate', parameters: 'chipview,to,from' },
+            { name: 'orientationchange', parameters: '' },
+            { name: 'painted', parameters: 'sender,element' },
+            { name: 'positionedchange', parameters: 'sender,positioned' },
+            { name: 'refresh', parameters: 'chipview' },
+            { name: 'remove', parameters: '' },
+            { name: 'removed', parameters: 'sender,container,index' },
+            { name: 'renderedchange', parameters: 'chipview,item,rendered' },
+            { name: 'resize', parameters: 'element,info' },
+            { name: 'rightchange', parameters: 'sender,value,oldValue' },
+            { name: 'rowselection', parameters: 'view,selection' },
+            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+            { name: 'select', parameters: 'chipview,selected' },
+            { name: 'selectionchange', parameters: 'view,records,selected,selection' },
+            { name: 'show', parameters: 'sender' },
+            { name: 'storechange', parameters: 'sender,value,oldValue' },
+            { name: 'tofront', parameters: 'chipview' },
+            { name: 'topchange', parameters: 'sender,value,oldValue' },
+            { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'widthchange', parameters: 'sender,value,oldValue' },
+            { name: 'ready', parameters: '' }
+        ];
+        chipviewMetaData.EVENTNAMES = [
+            'activate',
+            'activeItemchange',
+            'add',
+            'added',
+            'beforeactiveItemchange',
+            'beforebottomchange',
+            'beforecenteredchange',
+            'beforedisabledchange',
+            'beforedockedchange',
+            'beforeheightchange',
+            'beforehiddenchange',
+            'beforehide',
+            'beforeleftchange',
+            'beforemaxHeightchange',
+            'beforemaxWidthchange',
+            'beforeminHeightchange',
+            'beforeminWidthchange',
+            'beforeorientationchange',
+            'beforerightchange',
+            'beforescrollablechange',
+            'beforeshow',
+            'beforestorechange',
+            'beforetofront',
+            'beforetopchange',
+            'beforewidthchange',
+            'blur',
+            'bottomchange',
+            'centeredchange',
+            'childdoubletap',
+            'childlongpress',
+            'childmouseenter',
+            'childmouseleave',
+            'childsingletap',
+            'childtap',
+            'childtaphold',
+            'childtouchcancel',
+            'childtouchend',
+            'childtouchmove',
+            'childtouchstart',
+            'deactivate',
+            'deselect',
+            'destroy',
+            'disabledchange',
+            'dockedchange',
+            'erased',
+            'floatingchange',
+            'focus',
+            'focusenter',
+            'focusleave',
+            'fullscreen',
+            'heightchange',
+            'hiddenchange',
+            'hide',
+            'initialize',
+            'itemdoubletap',
+            'itemlongpress',
+            'itemmouseenter',
+            'itemmouseleave',
+            'itemsingletap',
+            'itemswipe',
+            'itemtap',
+            'itemtaphold',
+            'itemtouchcancel',
+            'itemtouchend',
+            'itemtouchmove',
+            'itemtouchstart',
+            'leftchange',
+            'maxHeightchange',
+            'maxWidthchange',
+            'minHeightchange',
+            'minWidthchange',
+            'move',
+            'moved',
+            'navigate',
+            'orientationchange',
+            'painted',
+            'positionedchange',
+            'refresh',
+            'remove',
+            'removed',
+            'renderedchange',
+            'resize',
+            'rightchange',
+            'rowselection',
+            'scrollablechange',
+            'select',
+            'selectionchange',
+            'show',
+            'storechange',
+            'tofront',
+            'topchange',
+            'updatedata',
+            'widthchange',
+            'ready'
+        ];
+        return chipviewMetaData;
+    }());
+    var ExtChipviewComponent = /** @class */ (function (_super) {
+        __extends(ExtChipviewComponent, _super);
+        function ExtChipviewComponent(eRef) {
+            return _super.call(this, eRef, chipviewMetaData) || this;
+        }
+        /**
+         * @return {?}
+         */
+        ExtChipviewComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () { this.baseOnInit(chipviewMetaData); };
+        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+        /**
+         * @return {?}
+         */
+        ExtChipviewComponent.prototype.ngAfterContentInit =
+            //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+            /**
+             * @return {?}
+             */
+            function () {
+                this.baseAfterContentInit();
+                this['ready'].emit(this);
+            };
+        ExtChipviewComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'chipview',
+                        inputs: chipviewMetaData.PROPERTIES,
+                        outputs: chipviewMetaData.EVENTNAMES,
+                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtChipviewComponent; }) }],
+                        template: '<ng-template #dynamic></ng-template>'
+                    }] }
+        ];
+        /** @nocollapse */
+        ExtChipviewComponent.ctorParameters = function () {
+            return [
+                { type: core.ElementRef }
+            ];
+        };
+        return ExtChipviewComponent;
     }(base));
 
     /**
@@ -29342,20 +30292,23 @@
             "bottom": "Number/String",
             "caseSensitive": "Boolean",
             "centered": "Boolean",
+            "chipView": "any",
             "clearable": "Boolean",
             "cls": "String/String[]",
+            "collapseOnSelect": "Boolean",
             "constrainAlign": "String/Ext.util.Region/Ext.dom.Element",
             "contentEl": "Ext.dom.Element/HTMLElement/String",
             "controller": "String/Object/Ext.app.ViewController",
             "data": "Object",
             "defaultListenerScope": "Boolean",
+            "delimiter": "String",
             "disabled": "Boolean",
             "displayed": "Boolean",
             "displayField": "String/Number",
             "displayTpl": "String/String[]/Ext.XTemplate",
             "docked": "String",
             "draggable": "Boolean/Object/Ext.drag.Source",
-            "edgePicker": "any",
+            "edgePicker": "Object",
             "editable": "Boolean",
             "enableRegEx": "Boolean",
             "enterAnimation": "String/Mixed",
@@ -29368,7 +30321,7 @@
             "exitAnimation": "String/Mixed",
             "flex": "Number/String/Object",
             "floated": "Boolean",
-            "floatedPicker": "any",
+            "floatedPicker": "Object",
             "floatedPickerAlign": "String",
             "focusCls": "String",
             "focusTrap": "any",
@@ -29389,6 +30342,7 @@
             "inputType": "String",
             "inputValue": "any",
             "instanceCls": "String/String[]",
+            "itemCls": "String",
             "itemId": "String",
             "itemTpl": "String/Ext.XTemplate",
             "keyMap": "Object",
@@ -29414,6 +30368,7 @@
             "minWidth": "Number/String",
             "modal": "Boolean",
             "modelValidation": "Boolean",
+            "multiSelect": "Boolean",
             "name": "String",
             "nameable": "Boolean",
             "options": "Array",
@@ -29425,7 +30380,7 @@
             "placeholder": "String",
             "placeHolder": "String",
             "plugins": "Array/Ext.enums.Plugin/Object/Ext.plugin.Abstract",
-            "primaryFilter": "any",
+            "primaryFilter": "Function/String/Object/Ext.util.Filter",
             "publishes": "String/String[]/Object",
             "queryCaching": "Boolean",
             "queryDelay": "Number",
@@ -29433,6 +30388,8 @@
             "queryParam": "String",
             "readOnly": "Boolean",
             "record": "Ext.data.Model",
+            "recordCreator": "Function/String",
+            "recordCreatorScope": "Object",
             "reference": "String",
             "relative": "Boolean",
             "renderTo": "Ext.dom.Element",
@@ -29521,13 +30478,16 @@
             'bottom',
             'caseSensitive',
             'centered',
+            'chipView',
             'clearable',
             'cls',
+            'collapseOnSelect',
             'constrainAlign',
             'contentEl',
             'controller',
             'data',
             'defaultListenerScope',
+            'delimiter',
             'disabled',
             'displayed',
             'displayField',
@@ -29568,6 +30528,7 @@
             'inputType',
             'inputValue',
             'instanceCls',
+            'itemCls',
             'itemId',
             'itemTpl',
             'keyMap',
@@ -29593,6 +30554,7 @@
             'minWidth',
             'modal',
             'modelValidation',
+            'multiSelect',
             'name',
             'nameable',
             'options',
@@ -29612,6 +30574,8 @@
             'queryParam',
             'readOnly',
             'record',
+            'recordCreator',
+            'recordCreatorScope',
             'reference',
             'relative',
             'renderTo',
@@ -29896,20 +30860,23 @@
             "bottom": "Number/String",
             "caseSensitive": "Boolean",
             "centered": "Boolean",
+            "chipView": "any",
             "clearable": "Boolean",
             "cls": "String/String[]",
+            "collapseOnSelect": "Boolean",
             "constrainAlign": "String/Ext.util.Region/Ext.dom.Element",
             "contentEl": "Ext.dom.Element/HTMLElement/String",
             "controller": "String/Object/Ext.app.ViewController",
             "data": "Object",
             "defaultListenerScope": "Boolean",
+            "delimiter": "String",
             "disabled": "Boolean",
             "displayed": "Boolean",
             "displayField": "String/Number",
             "displayTpl": "String/String[]/Ext.XTemplate",
             "docked": "String",
             "draggable": "Boolean/Object/Ext.drag.Source",
-            "edgePicker": "any",
+            "edgePicker": "Object",
             "editable": "Boolean",
             "enableRegEx": "Boolean",
             "enterAnimation": "String/Mixed",
@@ -29922,7 +30889,7 @@
             "exitAnimation": "String/Mixed",
             "flex": "Number/String/Object",
             "floated": "Boolean",
-            "floatedPicker": "any",
+            "floatedPicker": "Object",
             "floatedPickerAlign": "String",
             "focusCls": "String",
             "focusTrap": "any",
@@ -29943,6 +30910,7 @@
             "inputType": "String",
             "inputValue": "any",
             "instanceCls": "String/String[]",
+            "itemCls": "String",
             "itemId": "String",
             "itemTpl": "String/Ext.XTemplate",
             "keyMap": "Object",
@@ -29968,6 +30936,7 @@
             "minWidth": "Number/String",
             "modal": "Boolean",
             "modelValidation": "Boolean",
+            "multiSelect": "Boolean",
             "name": "String",
             "nameable": "Boolean",
             "options": "Array",
@@ -29979,7 +30948,7 @@
             "placeholder": "String",
             "placeHolder": "String",
             "plugins": "Array/Ext.enums.Plugin/Object/Ext.plugin.Abstract",
-            "primaryFilter": "any",
+            "primaryFilter": "Function/String/Object/Ext.util.Filter",
             "publishes": "String/String[]/Object",
             "queryCaching": "Boolean",
             "queryDelay": "Number",
@@ -29987,6 +30956,8 @@
             "queryParam": "String",
             "readOnly": "Boolean",
             "record": "Ext.data.Model",
+            "recordCreator": "Function/String",
+            "recordCreatorScope": "Object",
             "reference": "String",
             "relative": "Boolean",
             "renderTo": "Ext.dom.Element",
@@ -30075,13 +31046,16 @@
             'bottom',
             'caseSensitive',
             'centered',
+            'chipView',
             'clearable',
             'cls',
+            'collapseOnSelect',
             'constrainAlign',
             'contentEl',
             'controller',
             'data',
             'defaultListenerScope',
+            'delimiter',
             'disabled',
             'displayed',
             'displayField',
@@ -30122,6 +31096,7 @@
             'inputType',
             'inputValue',
             'instanceCls',
+            'itemCls',
             'itemId',
             'itemTpl',
             'keyMap',
@@ -30147,6 +31122,7 @@
             'minWidth',
             'modal',
             'modelValidation',
+            'multiSelect',
             'name',
             'nameable',
             'options',
@@ -30166,6 +31142,8 @@
             'queryParam',
             'readOnly',
             'record',
+            'recordCreator',
+            'recordCreatorScope',
             'reference',
             'relative',
             'renderTo',
@@ -31320,7 +32298,7 @@
             "displayed": "Boolean",
             "docked": "String",
             "draggable": "Boolean/Object/Ext.drag.Source",
-            "edgePicker": "any",
+            "edgePicker": "Object",
             "editable": "Boolean",
             "enterAnimation": "String/Mixed",
             "error": "String/String[]",
@@ -31332,7 +32310,7 @@
             "exitAnimation": "String/Mixed",
             "flex": "Number/String/Object",
             "floated": "Boolean",
-            "floatedPicker": "any",
+            "floatedPicker": "Object",
             "floatedPickerAlign": "String",
             "focusCls": "String",
             "focusTrap": "any",
@@ -31816,7 +32794,7 @@
             "displayed": "Boolean",
             "docked": "String",
             "draggable": "Boolean/Object/Ext.drag.Source",
-            "edgePicker": "any",
+            "edgePicker": "Object",
             "editable": "Boolean",
             "enterAnimation": "String/Mixed",
             "error": "String/String[]",
@@ -31828,7 +32806,7 @@
             "exitAnimation": "String/Mixed",
             "flex": "Number/String/Object",
             "floated": "Boolean",
-            "floatedPicker": "any",
+            "floatedPicker": "Object",
             "floatedPickerAlign": "String",
             "focusCls": "String",
             "focusTrap": "any",
@@ -32312,7 +33290,7 @@
             "displayed": "Boolean",
             "docked": "String",
             "draggable": "Boolean/Object/Ext.drag.Source",
-            "edgePicker": "any",
+            "edgePicker": "Object",
             "editable": "Boolean",
             "enterAnimation": "String/Mixed",
             "error": "String/String[]",
@@ -32324,7 +33302,7 @@
             "exitAnimation": "String/Mixed",
             "flex": "Number/String/Object",
             "floated": "Boolean",
-            "floatedPicker": "any",
+            "floatedPicker": "Object",
             "floatedPickerAlign": "String",
             "focusCls": "String",
             "focusTrap": "any",
@@ -37334,7 +38312,7 @@
             "displayed": "Boolean",
             "docked": "String",
             "draggable": "Boolean/Object/Ext.drag.Source",
-            "edgePicker": "any",
+            "edgePicker": "Object",
             "editable": "Boolean",
             "enterAnimation": "String/Mixed",
             "error": "String/String[]",
@@ -37346,7 +38324,7 @@
             "exitAnimation": "String/Mixed",
             "flex": "Number/String/Object",
             "floated": "Boolean",
-            "floatedPicker": "any",
+            "floatedPicker": "Object",
             "floatedPickerAlign": "String",
             "focusCls": "String",
             "focusTrap": "any",
@@ -39161,20 +40139,23 @@
             "border": "Boolean",
             "bottom": "Number/String",
             "centered": "Boolean",
+            "chipView": "any",
             "clearable": "Boolean",
             "cls": "String/String[]",
+            "collapseOnSelect": "Boolean",
             "constrainAlign": "String/Ext.util.Region/Ext.dom.Element",
             "contentEl": "Ext.dom.Element/HTMLElement/String",
             "controller": "String/Object/Ext.app.ViewController",
             "data": "Object",
             "defaultListenerScope": "Boolean",
+            "delimiter": "String",
             "disabled": "Boolean",
             "displayed": "Boolean",
             "displayField": "String/Number",
             "displayTpl": "String/String[]/Ext.XTemplate",
             "docked": "String",
             "draggable": "Boolean/Object/Ext.drag.Source",
-            "edgePicker": "any",
+            "edgePicker": "Object",
             "editable": "Boolean",
             "enterAnimation": "String/Mixed",
             "error": "String/String[]",
@@ -39186,7 +40167,7 @@
             "exitAnimation": "String/Mixed",
             "flex": "Number/String/Object",
             "floated": "Boolean",
-            "floatedPicker": "any",
+            "floatedPicker": "Object",
             "floatedPickerAlign": "String",
             "focusCls": "String",
             "focusTrap": "any",
@@ -39207,6 +40188,7 @@
             "inputType": "String",
             "inputValue": "any",
             "instanceCls": "String/String[]",
+            "itemCls": "String",
             "itemId": "String",
             "itemTpl": "String/Ext.XTemplate",
             "keyMap": "Object",
@@ -39231,6 +40213,7 @@
             "minWidth": "Number/String",
             "modal": "Boolean",
             "modelValidation": "Boolean",
+            "multiSelect": "Boolean",
             "name": "String",
             "nameable": "Boolean",
             "options": "Array",
@@ -39245,6 +40228,8 @@
             "publishes": "String/String[]/Object",
             "readOnly": "Boolean",
             "record": "Ext.data.Model",
+            "recordCreator": "Function/String",
+            "recordCreatorScope": "Object",
             "reference": "String",
             "relative": "Boolean",
             "renderTo": "Ext.dom.Element",
@@ -39327,13 +40312,16 @@
             'border',
             'bottom',
             'centered',
+            'chipView',
             'clearable',
             'cls',
+            'collapseOnSelect',
             'constrainAlign',
             'contentEl',
             'controller',
             'data',
             'defaultListenerScope',
+            'delimiter',
             'disabled',
             'displayed',
             'displayField',
@@ -39373,6 +40361,7 @@
             'inputType',
             'inputValue',
             'instanceCls',
+            'itemCls',
             'itemId',
             'itemTpl',
             'keyMap',
@@ -39397,6 +40386,7 @@
             'minWidth',
             'modal',
             'modelValidation',
+            'multiSelect',
             'name',
             'nameable',
             'options',
@@ -39411,6 +40401,8 @@
             'publishes',
             'readOnly',
             'record',
+            'recordCreator',
+            'recordCreatorScope',
             'reference',
             'relative',
             'renderTo',
@@ -42011,7 +43003,7 @@
             "displayed": "Boolean",
             "docked": "String",
             "draggable": "Boolean/Object/Ext.drag.Source",
-            "edgePicker": "any",
+            "edgePicker": "Object",
             "editable": "Boolean",
             "enterAnimation": "String/Mixed",
             "error": "String/String[]",
@@ -42023,7 +43015,7 @@
             "exitAnimation": "String/Mixed",
             "flex": "Number/String/Object",
             "floated": "Boolean",
-            "floatedPicker": "any",
+            "floatedPicker": "Object",
             "floatedPickerAlign": "String",
             "focusCls": "String",
             "focusTrap": "any",
@@ -71909,6 +72901,536 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var selectpickerMetaData = /** @class */ (function () {
+        function selectpickerMetaData() {
+        }
+        selectpickerMetaData.XTYPE = 'selectpicker';
+        selectpickerMetaData.PROPERTIESOBJECT = {
+            "activeChildTabIndex": "Number",
+            "activeItem": "Ext.Component/Object/String/Number",
+            "allowFocusingDisabledChildren": "Boolean",
+            "alwaysOnTop": "Boolean/Number",
+            "anchor": "Boolean",
+            "anchorPosition": "String",
+            "ariaAttributes": "Object",
+            "ariaDescribedBy": "String",
+            "ariaLabel": "String",
+            "ariaLabelledBy": "String",
+            "autoDestroy": "Boolean",
+            "autoSize": "Boolean",
+            "axisLock": "Boolean",
+            "bbar": "Object/Object[]",
+            "bind": "Object/String",
+            "bodyBorder": "Boolean",
+            "bodyPadding": "Number/Boolean/String",
+            "bodyStyle": "String/Object",
+            "border": "Boolean",
+            "bottom": "Number/String",
+            "buttonAlign": "String",
+            "buttons": "Object/Ext.Button[]",
+            "buttonToolbar": "Object/Ext.Toolbar",
+            "cancelButton": "String/Mixed",
+            "cardSwitchAnimation": "String/Object/Boolean",
+            "centered": "any",
+            "closable": "Boolean",
+            "closeAction": "String",
+            "closeToolText": "String",
+            "cls": "String/String[]",
+            "collapsed": "Boolean",
+            "collapsible": "'top'/'right'/'bottom'/'left'/Boolean/Object",
+            "constrainAlign": "String/Ext.util.Region/Ext.dom.Element",
+            "contentEl": "Ext.dom.Element/HTMLElement/String",
+            "control": "Object",
+            "controller": "String/Object/Ext.app.ViewController",
+            "cover": "Boolean",
+            "data": "Object",
+            "defaultFocus": "String",
+            "defaultListenerScope": "Boolean",
+            "defaults": "Object",
+            "defaultToolWeights": "Object",
+            "defaultType": "any",
+            "disabled": "Boolean",
+            "displayed": "Boolean",
+            "docked": "String",
+            "doneButton": "String/Mixed",
+            "draggable": "Boolean/Object/Ext.drag.Source",
+            "enter": "'top'/'bottom'/'left'/'right'",
+            "enterAnimation": "String/Mixed",
+            "eventHandlers": "Object",
+            "exit": "'top'/'bottom'/'left'/'right'",
+            "exitAnimation": "String/Mixed",
+            "flex": "Number/String/Object",
+            "floated": "Boolean",
+            "focusableContainer": "Boolean",
+            "focusCls": "String",
+            "fullscreen": "Boolean",
+            "header": "Boolean/Object",
+            "headerPosition": "'top'/'right'/'bottom'/'left'",
+            "height": "Number",
+            "hidden": "Boolean",
+            "hideAnimation": "String/Mixed",
+            "hideMode": "'clip'/'display'/'offsets'/'opacity'/'visibility'",
+            "hideOnMaskTap": "Boolean",
+            "html": "String/Ext.dom.Element/HTMLElement",
+            "icon": "String",
+            "iconAlign": "'top'/'right'/'bottom'/'left'",
+            "iconCls": "String",
+            "id": "String",
+            "inactiveChildTabIndex": "Number",
+            "innerCls": "String",
+            "instanceCls": "String/String[]",
+            "itemId": "String",
+            "items": "Array/Object",
+            "keyMap": "Object",
+            "keyMapEnabled": "Boolean",
+            "keyMapTarget": "String",
+            "layout": "Object/String",
+            "lbar": "Object/Object[]",
+            "left": "Number/String",
+            "listeners": "Object",
+            "manageBorders": "Boolean",
+            "margin": "Number/String",
+            "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
+            "maxHeight": "Number/String",
+            "maxWidth": "Number/String",
+            "minButtonWidth": "Number",
+            "minHeight": "Number/String",
+            "minWidth": "Number/String",
+            "modal": "Boolean",
+            "modelValidation": "Boolean",
+            "name": "String",
+            "nameable": "Boolean",
+            "nameHolder": "Boolean",
+            "padding": "Number/String",
+            "plugins": "Array/Ext.enums.Plugin/Object/Ext.plugin.Abstract",
+            "publishes": "String/String[]/Object",
+            "rbar": "Object/Object[]",
+            "record": "Ext.data.Model",
+            "reference": "String",
+            "referenceHolder": "Boolean",
+            "relative": "Boolean",
+            "renderTo": "Ext.dom.Element",
+            "resetFocusPosition": "Boolean",
+            "resizable": "Object",
+            "reveal": "Boolean",
+            "right": "Number/String",
+            "ripple": "Boolean/Object/String",
+            "scrollable": "Boolean/String/Object",
+            "selfAlign": "String",
+            "session": "Boolean/Object/Ext.data.Session",
+            "shadow": "Boolean",
+            "shareableName": "Boolean",
+            "shim": "Boolean",
+            "showAnimation": "String/Mixed",
+            "side": "'left'/'right'/'top'/'bottom'",
+            "slots": "Array",
+            "standardButtons": "Object",
+            "stateful": "Boolean/Object/String[]",
+            "statefulDefaults": "Object/String[]",
+            "stateId": "String",
+            "stretchX": "Boolean",
+            "stretchY": "Boolean",
+            "style": "String/Object",
+            "tabIndex": "Number",
+            "tbar": "Object/Object[]",
+            "title": "String/Ext.panel.Title",
+            "titleAlign": "'left'/'center'/'right'",
+            "toFrontOnShow": "Boolean",
+            "toolbar": "Ext.TitleBar/Ext.Toolbar/Object",
+            "toolDefaults": "Object",
+            "tools": "Ext.Tool[]/Object/Object[]",
+            "tooltip": "String/Object",
+            "top": "Number/String",
+            "touchAction": "Object",
+            "tpl": "String/String[]/Ext.Template/Ext.XTemplate[]",
+            "tplWriteMode": "String",
+            "translatable": "Object",
+            "twoWayBindable": "String/String[]/Object",
+            "ui": "String/String[]",
+            "userCls": "String/String[]",
+            "userSelectable": "Boolean/String/Object",
+            "useTitles": "Boolean",
+            "value": "Object",
+            "viewModel": "String/Object/Ext.app.ViewModel",
+            "weight": "Number",
+            "weighted": "Boolean",
+            "width": "Number/String",
+            "x": "Number",
+            "xtype": "String",
+            "y": "Number",
+            "zIndex": "Number",
+            "platformConfig": "Object",
+            "responsiveConfig": "Object",
+            "fitToParent": "Boolean",
+            "config": "Object",
+        };
+        selectpickerMetaData.PROPERTIES = [
+            'activeChildTabIndex',
+            'activeItem',
+            'allowFocusingDisabledChildren',
+            'alwaysOnTop',
+            'anchor',
+            'anchorPosition',
+            'ariaAttributes',
+            'ariaDescribedBy',
+            'ariaLabel',
+            'ariaLabelledBy',
+            'autoDestroy',
+            'autoSize',
+            'axisLock',
+            'bbar',
+            'bind',
+            'bodyBorder',
+            'bodyPadding',
+            'bodyStyle',
+            'border',
+            'bottom',
+            'buttonAlign',
+            'buttons',
+            'buttonToolbar',
+            'cancelButton',
+            'cardSwitchAnimation',
+            'centered',
+            'closable',
+            'closeAction',
+            'closeToolText',
+            'cls',
+            'collapsed',
+            'collapsible',
+            'constrainAlign',
+            'contentEl',
+            'control',
+            'controller',
+            'cover',
+            'data',
+            'defaultFocus',
+            'defaultListenerScope',
+            'defaults',
+            'defaultToolWeights',
+            'defaultType',
+            'disabled',
+            'displayed',
+            'docked',
+            'doneButton',
+            'draggable',
+            'enter',
+            'enterAnimation',
+            'eventHandlers',
+            'exit',
+            'exitAnimation',
+            'flex',
+            'floated',
+            'focusableContainer',
+            'focusCls',
+            'fullscreen',
+            'header',
+            'headerPosition',
+            'height',
+            'hidden',
+            'hideAnimation',
+            'hideMode',
+            'hideOnMaskTap',
+            'html',
+            'icon',
+            'iconAlign',
+            'iconCls',
+            'id',
+            'inactiveChildTabIndex',
+            'innerCls',
+            'instanceCls',
+            'itemId',
+            'items',
+            'keyMap',
+            'keyMapEnabled',
+            'keyMapTarget',
+            'layout',
+            'lbar',
+            'left',
+            'listeners',
+            'manageBorders',
+            'margin',
+            'masked',
+            'maxHeight',
+            'maxWidth',
+            'minButtonWidth',
+            'minHeight',
+            'minWidth',
+            'modal',
+            'modelValidation',
+            'name',
+            'nameable',
+            'nameHolder',
+            'padding',
+            'plugins',
+            'publishes',
+            'rbar',
+            'record',
+            'reference',
+            'referenceHolder',
+            'relative',
+            'renderTo',
+            'resetFocusPosition',
+            'resizable',
+            'reveal',
+            'right',
+            'ripple',
+            'scrollable',
+            'selfAlign',
+            'session',
+            'shadow',
+            'shareableName',
+            'shim',
+            'showAnimation',
+            'side',
+            'slots',
+            'standardButtons',
+            'stateful',
+            'statefulDefaults',
+            'stateId',
+            'stretchX',
+            'stretchY',
+            'style',
+            'tabIndex',
+            'tbar',
+            'title',
+            'titleAlign',
+            'toFrontOnShow',
+            'toolbar',
+            'toolDefaults',
+            'tools',
+            'tooltip',
+            'top',
+            'touchAction',
+            'tpl',
+            'tplWriteMode',
+            'translatable',
+            'twoWayBindable',
+            'ui',
+            'userCls',
+            'userSelectable',
+            'useTitles',
+            'value',
+            'viewModel',
+            'weight',
+            'weighted',
+            'width',
+            'x',
+            'xtype',
+            'y',
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'fitToParent',
+            'config'
+        ];
+        selectpickerMetaData.EVENTS = [
+            { name: 'activate', parameters: 'newActiveItem,selectpicker,oldActiveItem' },
+            { name: 'activeItemchange', parameters: 'sender,value,oldValue' },
+            { name: 'add', parameters: 'selectpicker,item,index' },
+            { name: 'added', parameters: 'sender,container,index' },
+            { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecollapse', parameters: 'selectpicker' },
+            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeexpand', parameters: 'selectpicker' },
+            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehide', parameters: 'sender' },
+            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforeresizedragstart', parameters: 'selectpicker,context' },
+            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforetofront', parameters: 'selectpicker' },
+            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'blur', parameters: 'selectpicker,event' },
+            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'cancel', parameters: 'selectpicker' },
+            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'change', parameters: 'selectpicker,values' },
+            { name: 'collapse', parameters: 'selectpicker' },
+            { name: 'deactivate', parameters: 'oldActiveItem,selectpicker,newActiveItem' },
+            { name: 'destroy', parameters: '' },
+            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'drawerhide', parameters: 'selectpicker' },
+            { name: 'drawershow', parameters: 'selectpicker' },
+            { name: 'erased', parameters: 'sender' },
+            { name: 'expand', parameters: 'selectpicker' },
+            { name: 'floatingchange', parameters: 'sender,positioned' },
+            { name: 'focus', parameters: 'selectpicker,event' },
+            { name: 'focusenter', parameters: 'selectpicker,event' },
+            { name: 'focusleave', parameters: 'selectpicker,event' },
+            { name: 'fullscreen', parameters: 'sender' },
+            { name: 'heightchange', parameters: 'sender,value,oldValue' },
+            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+            { name: 'hide', parameters: 'sender' },
+            { name: 'initialize', parameters: 'sender' },
+            { name: 'leftchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'move', parameters: 'selectpicker,item,toIndex,fromIndex' },
+            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+            { name: 'orientationchange', parameters: '' },
+            { name: 'painted', parameters: 'sender,element' },
+            { name: 'pick', parameters: 'selectpicker,values,slot' },
+            { name: 'positionedchange', parameters: 'sender,positioned' },
+            { name: 'remove', parameters: 'selectpicker,item,index' },
+            { name: 'removed', parameters: 'sender,container,index' },
+            { name: 'renderedchange', parameters: 'selectpicker,item,rendered' },
+            { name: 'resize', parameters: 'element,info' },
+            { name: 'resizedrag', parameters: 'selectpicker,context' },
+            { name: 'resizedragcancel', parameters: 'selectpicker,context' },
+            { name: 'resizedragend', parameters: 'selectpicker,context' },
+            { name: 'resizedragstart', parameters: 'selectpicker,context' },
+            { name: 'rightchange', parameters: 'sender,value,oldValue' },
+            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+            { name: 'show', parameters: 'sender' },
+            { name: 'tofront', parameters: 'selectpicker' },
+            { name: 'topchange', parameters: 'sender,value,oldValue' },
+            { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'widthchange', parameters: 'sender,value,oldValue' },
+            { name: 'ready', parameters: '' }
+        ];
+        selectpickerMetaData.EVENTNAMES = [
+            'activate',
+            'activeItemchange',
+            'add',
+            'added',
+            'beforeactiveItemchange',
+            'beforebottomchange',
+            'beforecenteredchange',
+            'beforecollapse',
+            'beforedisabledchange',
+            'beforedockedchange',
+            'beforeexpand',
+            'beforeheightchange',
+            'beforehiddenchange',
+            'beforehide',
+            'beforeleftchange',
+            'beforemaxHeightchange',
+            'beforemaxWidthchange',
+            'beforeminHeightchange',
+            'beforeminWidthchange',
+            'beforeorientationchange',
+            'beforeresizedragstart',
+            'beforerightchange',
+            'beforescrollablechange',
+            'beforeshow',
+            'beforetofront',
+            'beforetopchange',
+            'beforewidthchange',
+            'blur',
+            'bottomchange',
+            'cancel',
+            'centeredchange',
+            'change',
+            'collapse',
+            'deactivate',
+            'destroy',
+            'disabledchange',
+            'dockedchange',
+            'drawerhide',
+            'drawershow',
+            'erased',
+            'expand',
+            'floatingchange',
+            'focus',
+            'focusenter',
+            'focusleave',
+            'fullscreen',
+            'heightchange',
+            'hiddenchange',
+            'hide',
+            'initialize',
+            'leftchange',
+            'maxHeightchange',
+            'maxWidthchange',
+            'minHeightchange',
+            'minWidthchange',
+            'move',
+            'moved',
+            'orientationchange',
+            'painted',
+            'pick',
+            'positionedchange',
+            'remove',
+            'removed',
+            'renderedchange',
+            'resize',
+            'resizedrag',
+            'resizedragcancel',
+            'resizedragend',
+            'resizedragstart',
+            'rightchange',
+            'scrollablechange',
+            'show',
+            'tofront',
+            'topchange',
+            'updatedata',
+            'widthchange',
+            'ready'
+        ];
+        return selectpickerMetaData;
+    }());
+    var ExtSelectpickerComponent = /** @class */ (function (_super) {
+        __extends(ExtSelectpickerComponent, _super);
+        function ExtSelectpickerComponent(eRef) {
+            return _super.call(this, eRef, selectpickerMetaData) || this;
+        }
+        /**
+         * @return {?}
+         */
+        ExtSelectpickerComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () { this.baseOnInit(selectpickerMetaData); };
+        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+        /**
+         * @return {?}
+         */
+        ExtSelectpickerComponent.prototype.ngAfterContentInit =
+            //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+            /**
+             * @return {?}
+             */
+            function () {
+                this.baseAfterContentInit();
+                this['ready'].emit(this);
+            };
+        ExtSelectpickerComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'selectpicker',
+                        inputs: selectpickerMetaData.PROPERTIES,
+                        outputs: selectpickerMetaData.EVENTNAMES,
+                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSelectpickerComponent; }) }],
+                        template: '<ng-template #dynamic></ng-template>'
+                    }] }
+        ];
+        /** @nocollapse */
+        ExtSelectpickerComponent.ctorParameters = function () {
+            return [
+                { type: core.ElementRef }
+            ];
+        };
+        return ExtSelectpickerComponent;
+    }(base));
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var pickerslotMetaData = /** @class */ (function () {
         function pickerslotMetaData() {
         }
@@ -91673,6 +93195,80 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var orgchartMetaData = /** @class */ (function () {
+        function orgchartMetaData() {
+        }
+        orgchartMetaData.XTYPE = 'orgchart';
+        orgchartMetaData.PROPERTIESOBJECT = {
+            "zIndex": "Number",
+            "platformConfig": "Object",
+            "responsiveConfig": "Object",
+            "fitToParent": "Boolean",
+            "config": "Object",
+        };
+        orgchartMetaData.PROPERTIES = [
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'fitToParent',
+            'config'
+        ];
+        orgchartMetaData.EVENTS = [
+            { name: 'ready', parameters: '' }
+        ];
+        orgchartMetaData.EVENTNAMES = [
+            'ready'
+        ];
+        return orgchartMetaData;
+    }());
+    var ExtOrgChartComponent = /** @class */ (function (_super) {
+        __extends(ExtOrgChartComponent, _super);
+        function ExtOrgChartComponent(eRef) {
+            return _super.call(this, eRef, orgchartMetaData) || this;
+        }
+        /**
+         * @return {?}
+         */
+        ExtOrgChartComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () { this.baseOnInit(orgchartMetaData); };
+        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+        /**
+         * @return {?}
+         */
+        ExtOrgChartComponent.prototype.ngAfterContentInit =
+            //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+            /**
+             * @return {?}
+             */
+            function () {
+                this.baseAfterContentInit();
+                this['ready'].emit(this);
+            };
+        ExtOrgChartComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'orgchart',
+                        inputs: orgchartMetaData.PROPERTIES,
+                        outputs: orgchartMetaData.EVENTNAMES,
+                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtOrgChartComponent; }) }],
+                        template: '<ng-template #dynamic></ng-template>'
+                    }] }
+        ];
+        /** @nocollapse */
+        ExtOrgChartComponent.ctorParameters = function () {
+            return [
+                { type: core.ElementRef }
+            ];
+        };
+        return ExtOrgChartComponent;
+    }(base));
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var transitionMetaData = /** @class */ (function () {
         function transitionMetaData() {
         }
@@ -92129,6 +93725,7 @@
                             ExtChartnavigatorComponent,
                             ExtPolarComponent,
                             ExtSpacefillingComponent,
+                            ExtChipComponent,
                             ExtComponentComponent,
                             ExtContainerComponent,
                             ExtD3_canvasComponent,
@@ -92142,6 +93739,7 @@
                             ExtD3_svgComponent,
                             ExtD3Component,
                             ExtBoundlistComponent,
+                            ExtChipviewComponent,
                             ExtComponentdataviewComponent,
                             ExtDataitemComponent,
                             ExtDataviewComponent,
@@ -92266,6 +93864,7 @@
                             ExtYearpickerComponent,
                             ExtDatepickerComponent,
                             ExtPickerComponent,
+                            ExtSelectpickerComponent,
                             ExtPickerslotComponent,
                             ExtTabletpickerComponent,
                             ExtPivotgridcellComponent,
@@ -92314,6 +93913,7 @@
                             ExtVideoComponent,
                             ExtViewportComponent,
                             ExtWidgetComponent,
+                            ExtOrgChartComponent,
                             ExtTransitionComponent
                         ],
                         exports: [
@@ -92349,6 +93949,7 @@
                             ExtChartnavigatorComponent,
                             ExtPolarComponent,
                             ExtSpacefillingComponent,
+                            ExtChipComponent,
                             ExtComponentComponent,
                             ExtContainerComponent,
                             ExtD3_canvasComponent,
@@ -92362,6 +93963,7 @@
                             ExtD3_svgComponent,
                             ExtD3Component,
                             ExtBoundlistComponent,
+                            ExtChipviewComponent,
                             ExtComponentdataviewComponent,
                             ExtDataitemComponent,
                             ExtDataviewComponent,
@@ -92486,6 +94088,7 @@
                             ExtYearpickerComponent,
                             ExtDatepickerComponent,
                             ExtPickerComponent,
+                            ExtSelectpickerComponent,
                             ExtPickerslotComponent,
                             ExtTabletpickerComponent,
                             ExtPivotgridcellComponent,
@@ -92534,6 +94137,7 @@
                             ExtVideoComponent,
                             ExtViewportComponent,
                             ExtWidgetComponent,
+                            ExtOrgChartComponent,
                             ExtTransitionComponent
                         ]
                     },] }
@@ -92559,12 +94163,12 @@
     exports.ɵd = audioMetaData;
     exports.ɵby = ExtAxis3dComponent;
     exports.ɵbx = axis3dMetaData;
-    exports.ɵik = ExtBooleancellComponent;
-    exports.ɵij = booleancellMetaData;
-    exports.ɵje = ExtBooleancolumnComponent;
-    exports.ɵjd = booleancolumnMetaData;
-    exports.ɵdm = ExtBoundlistComponent;
-    exports.ɵdl = boundlistMetaData;
+    exports.ɵio = ExtBooleancellComponent;
+    exports.ɵin = booleancellMetaData;
+    exports.ɵji = ExtBooleancolumnComponent;
+    exports.ɵjh = booleancolumnMetaData;
+    exports.ɵdo = ExtBoundlistComponent;
+    exports.ɵdn = boundlistMetaData;
     exports.ɵg = ExtButtonComponent;
     exports.ɵf = buttonMetaData;
     exports.ɵm = ExtCalendar_calendar_pickerComponent;
@@ -92611,384 +94215,392 @@
     exports.ɵbv = carouselMetaData;
     exports.ɵca = ExtCartesianComponent;
     exports.ɵbz = cartesianMetaData;
-    exports.ɵjc = ExtCelleditorComponent;
-    exports.ɵjb = celleditorMetaData;
+    exports.ɵjg = ExtCelleditorComponent;
+    exports.ɵjf = celleditorMetaData;
     exports.ɵcc = ExtChartComponent;
     exports.ɵcb = chartMetaData;
     exports.ɵci = ExtChartnavigatorComponent;
     exports.ɵch = chartnavigatorMetaData;
-    exports.ɵfa = ExtCheckboxComponent;
-    exports.ɵez = checkboxMetaData;
-    exports.ɵfc = ExtCheckboxfieldComponent;
-    exports.ɵfb = checkboxfieldMetaData;
-    exports.ɵio = ExtCheckcellComponent;
-    exports.ɵin = checkcellMetaData;
-    exports.ɵjg = ExtCheckcolumnComponent;
-    exports.ɵjf = checkcolumnMetaData;
-    exports.ɵhk = ExtCleartriggerComponent;
-    exports.ɵhj = cleartriggerMetaData;
-    exports.ɵjk = ExtColumnComponent;
-    exports.ɵjj = columnMetaData;
-    exports.ɵfe = ExtComboboxComponent;
-    exports.ɵfd = comboboxMetaData;
-    exports.ɵfg = ExtComboboxfieldComponent;
-    exports.ɵff = comboboxfieldMetaData;
-    exports.ɵco = ExtComponentComponent;
-    exports.ɵcn = componentMetaData;
-    exports.ɵdo = ExtComponentdataviewComponent;
-    exports.ɵdn = componentdataviewMetaData;
-    exports.ɵcq = ExtContainerComponent;
-    exports.ɵcp = containerMetaData;
-    exports.ɵfi = ExtContainerfieldComponent;
-    exports.ɵfh = containerfieldMetaData;
-    exports.ɵcs = ExtD3_canvasComponent;
-    exports.ɵcr = d3_canvasMetaData;
-    exports.ɵcu = ExtD3_heatmapComponent;
-    exports.ɵct = d3_heatmapMetaData;
-    exports.ɵde = ExtD3_horizontal_treeComponent;
-    exports.ɵdd = d3_horizontal_treeMetaData;
-    exports.ɵcw = ExtD3_packComponent;
-    exports.ɵcv = d3_packMetaData;
-    exports.ɵcy = ExtD3_partitionComponent;
-    exports.ɵcx = d3_partitionMetaData;
-    exports.ɵda = ExtD3_sunburstComponent;
-    exports.ɵcz = d3_sunburstMetaData;
-    exports.ɵdi = ExtD3_svgComponent;
-    exports.ɵdh = d3_svgMetaData;
-    exports.ɵdc = ExtD3_treeComponent;
-    exports.ɵdb = d3_treeMetaData;
-    exports.ɵdg = ExtD3_treemapComponent;
-    exports.ɵdf = d3_treemapMetaData;
-    exports.ɵdk = ExtD3Component;
-    exports.ɵdj = d3MetaData;
-    exports.ɵdq = ExtDataitemComponent;
-    exports.ɵdp = dataitemMetaData;
-    exports.ɵds = ExtDataviewComponent;
-    exports.ɵdr = dataviewMetaData;
-    exports.ɵiq = ExtDatecellComponent;
-    exports.ɵip = datecellMetaData;
-    exports.ɵjo = ExtDatecolumnComponent;
-    exports.ɵjn = datecolumnMetaData;
-    exports.ɵfm = ExtDatefieldComponent;
-    exports.ɵfl = datefieldMetaData;
-    exports.ɵmm = ExtDatepanelComponent;
-    exports.ɵml = datepanelMetaData;
-    exports.ɵmy = ExtDatepickerComponent;
-    exports.ɵmx = datepickerMetaData;
-    exports.ɵfo = ExtDatepickerfieldComponent;
-    exports.ɵfn = datepickerfieldMetaData;
-    exports.ɵfq = ExtDatepickernativefieldComponent;
-    exports.ɵfp = datepickernativefieldMetaData;
-    exports.ɵmo = ExtDatetitleComponent;
-    exports.ɵmn = datetitleMetaData;
-    exports.ɵhm = ExtDatetriggerComponent;
-    exports.ɵhl = datetriggerMetaData;
-    exports.ɵeq = ExtDialogComponent;
-    exports.ɵep = dialogMetaData;
-    exports.ɵfs = ExtDisplayfieldComponent;
-    exports.ɵfr = displayfieldMetaData;
-    exports.ɵeu = ExtDrawComponent;
-    exports.ɵet = drawMetaData;
-    exports.ɵey = ExtEditorComponent;
-    exports.ɵex = editorMetaData;
-    exports.ɵfu = ExtEmailfieldComponent;
-    exports.ɵft = emailfieldMetaData;
-    exports.ɵdu = ExtEmptytextComponent;
-    exports.ɵdt = emptytextMetaData;
-    exports.ɵho = ExtExpandtriggerComponent;
-    exports.ɵhn = expandtriggerMetaData;
-    exports.ɵfw = ExtFieldComponent;
-    exports.ɵfv = fieldMetaData;
-    exports.ɵfk = ExtFieldcontainerComponent;
-    exports.ɵfj = fieldcontainerMetaData;
-    exports.ɵgi = ExtFieldpanelComponent;
-    exports.ɵgh = fieldpanelMetaData;
-    exports.ɵie = ExtFieldsetComponent;
-    exports.ɵid = fieldsetMetaData;
-    exports.ɵga = ExtFilebuttonComponent;
-    exports.ɵfz = filebuttonMetaData;
-    exports.ɵfy = ExtFilefieldComponent;
-    exports.ɵfx = filefieldMetaData;
-    exports.ɵig = ExtFormpanelComponent;
-    exports.ɵif = formpanelMetaData;
-    exports.ɵqg = ExtGaugeComponent;
-    exports.ɵqf = gaugeMetaData;
-    exports.ɵqk = ExtGoogle_mapComponent;
-    exports.ɵqj = google_mapMetaData;
-    exports.ɵka = ExtGridComponent;
-    exports.ɵjz = gridMetaData;
-    exports.ɵim = ExtGridcellComponent;
-    exports.ɵil = gridcellMetaData;
-    exports.ɵii = ExtGridcellbaseComponent;
-    exports.ɵih = gridcellbaseMetaData;
-    exports.ɵji = ExtGridcolumnComponent;
-    exports.ɵjh = gridcolumnMetaData;
-    exports.ɵki = ExtGridcolumnsmenuComponent;
-    exports.ɵkh = gridcolumnsmenuMetaData;
-    exports.ɵkk = ExtGridgroupbythismenuitemComponent;
-    exports.ɵkj = gridgroupbythismenuitemMetaData;
-    exports.ɵku = ExtGridrowComponent;
-    exports.ɵkt = gridrowMetaData;
-    exports.ɵkm = ExtGridshowingroupsmenuitemComponent;
-    exports.ɵkl = gridshowingroupsmenuitemMetaData;
-    exports.ɵko = ExtGridsortascmenuitemComponent;
-    exports.ɵkn = gridsortascmenuitemMetaData;
-    exports.ɵkq = ExtGridsortdescmenuitemComponent;
-    exports.ɵkp = gridsortdescmenuitemMetaData;
-    exports.ɵla = ExtGridsummaryrowComponent;
-    exports.ɵkz = gridsummaryrowMetaData;
-    exports.ɵkc = ExtHeadercontainerComponent;
-    exports.ɵkb = headercontainerMetaData;
-    exports.ɵgc = ExtHiddenfieldComponent;
-    exports.ɵgb = hiddenfieldMetaData;
-    exports.ɵle = ExtImageComponent;
-    exports.ɵld = imageMetaData;
-    exports.ɵlg = ExtImgComponent;
-    exports.ɵlf = imgMetaData;
-    exports.ɵdw = ExtIndexbarComponent;
-    exports.ɵdv = indexbarMetaData;
-    exports.ɵli = ExtIndicatorComponent;
-    exports.ɵlh = indicatorMetaData;
-    exports.ɵge = ExtInputfieldComponent;
-    exports.ɵgd = inputfieldMetaData;
+    exports.ɵfe = ExtCheckboxComponent;
+    exports.ɵfd = checkboxMetaData;
+    exports.ɵfg = ExtCheckboxfieldComponent;
+    exports.ɵff = checkboxfieldMetaData;
+    exports.ɵis = ExtCheckcellComponent;
+    exports.ɵir = checkcellMetaData;
+    exports.ɵjk = ExtCheckcolumnComponent;
+    exports.ɵjj = checkcolumnMetaData;
+    exports.ɵco = ExtChipComponent;
+    exports.ɵcn = chipMetaData;
+    exports.ɵdq = ExtChipviewComponent;
+    exports.ɵdp = chipviewMetaData;
+    exports.ɵho = ExtCleartriggerComponent;
+    exports.ɵhn = cleartriggerMetaData;
+    exports.ɵjo = ExtColumnComponent;
+    exports.ɵjn = columnMetaData;
+    exports.ɵfi = ExtComboboxComponent;
+    exports.ɵfh = comboboxMetaData;
+    exports.ɵfk = ExtComboboxfieldComponent;
+    exports.ɵfj = comboboxfieldMetaData;
+    exports.ɵcq = ExtComponentComponent;
+    exports.ɵcp = componentMetaData;
+    exports.ɵds = ExtComponentdataviewComponent;
+    exports.ɵdr = componentdataviewMetaData;
+    exports.ɵcs = ExtContainerComponent;
+    exports.ɵcr = containerMetaData;
+    exports.ɵfm = ExtContainerfieldComponent;
+    exports.ɵfl = containerfieldMetaData;
+    exports.ɵcu = ExtD3_canvasComponent;
+    exports.ɵct = d3_canvasMetaData;
+    exports.ɵcw = ExtD3_heatmapComponent;
+    exports.ɵcv = d3_heatmapMetaData;
+    exports.ɵdg = ExtD3_horizontal_treeComponent;
+    exports.ɵdf = d3_horizontal_treeMetaData;
+    exports.ɵcy = ExtD3_packComponent;
+    exports.ɵcx = d3_packMetaData;
+    exports.ɵda = ExtD3_partitionComponent;
+    exports.ɵcz = d3_partitionMetaData;
+    exports.ɵdc = ExtD3_sunburstComponent;
+    exports.ɵdb = d3_sunburstMetaData;
+    exports.ɵdk = ExtD3_svgComponent;
+    exports.ɵdj = d3_svgMetaData;
+    exports.ɵde = ExtD3_treeComponent;
+    exports.ɵdd = d3_treeMetaData;
+    exports.ɵdi = ExtD3_treemapComponent;
+    exports.ɵdh = d3_treemapMetaData;
+    exports.ɵdm = ExtD3Component;
+    exports.ɵdl = d3MetaData;
+    exports.ɵdu = ExtDataitemComponent;
+    exports.ɵdt = dataitemMetaData;
+    exports.ɵdw = ExtDataviewComponent;
+    exports.ɵdv = dataviewMetaData;
+    exports.ɵiu = ExtDatecellComponent;
+    exports.ɵit = datecellMetaData;
+    exports.ɵjs = ExtDatecolumnComponent;
+    exports.ɵjr = datecolumnMetaData;
+    exports.ɵfq = ExtDatefieldComponent;
+    exports.ɵfp = datefieldMetaData;
+    exports.ɵmq = ExtDatepanelComponent;
+    exports.ɵmp = datepanelMetaData;
+    exports.ɵnc = ExtDatepickerComponent;
+    exports.ɵnb = datepickerMetaData;
+    exports.ɵfs = ExtDatepickerfieldComponent;
+    exports.ɵfr = datepickerfieldMetaData;
+    exports.ɵfu = ExtDatepickernativefieldComponent;
+    exports.ɵft = datepickernativefieldMetaData;
+    exports.ɵms = ExtDatetitleComponent;
+    exports.ɵmr = datetitleMetaData;
+    exports.ɵhq = ExtDatetriggerComponent;
+    exports.ɵhp = datetriggerMetaData;
+    exports.ɵeu = ExtDialogComponent;
+    exports.ɵet = dialogMetaData;
+    exports.ɵfw = ExtDisplayfieldComponent;
+    exports.ɵfv = displayfieldMetaData;
+    exports.ɵey = ExtDrawComponent;
+    exports.ɵex = drawMetaData;
+    exports.ɵfc = ExtEditorComponent;
+    exports.ɵfb = editorMetaData;
+    exports.ɵfy = ExtEmailfieldComponent;
+    exports.ɵfx = emailfieldMetaData;
+    exports.ɵdy = ExtEmptytextComponent;
+    exports.ɵdx = emptytextMetaData;
+    exports.ɵhs = ExtExpandtriggerComponent;
+    exports.ɵhr = expandtriggerMetaData;
+    exports.ɵga = ExtFieldComponent;
+    exports.ɵfz = fieldMetaData;
+    exports.ɵfo = ExtFieldcontainerComponent;
+    exports.ɵfn = fieldcontainerMetaData;
+    exports.ɵgm = ExtFieldpanelComponent;
+    exports.ɵgl = fieldpanelMetaData;
+    exports.ɵii = ExtFieldsetComponent;
+    exports.ɵih = fieldsetMetaData;
+    exports.ɵge = ExtFilebuttonComponent;
+    exports.ɵgd = filebuttonMetaData;
+    exports.ɵgc = ExtFilefieldComponent;
+    exports.ɵgb = filefieldMetaData;
+    exports.ɵik = ExtFormpanelComponent;
+    exports.ɵij = formpanelMetaData;
+    exports.ɵqm = ExtGaugeComponent;
+    exports.ɵql = gaugeMetaData;
+    exports.ɵqq = ExtGoogle_mapComponent;
+    exports.ɵqp = google_mapMetaData;
+    exports.ɵke = ExtGridComponent;
+    exports.ɵkd = gridMetaData;
+    exports.ɵiq = ExtGridcellComponent;
+    exports.ɵip = gridcellMetaData;
+    exports.ɵim = ExtGridcellbaseComponent;
+    exports.ɵil = gridcellbaseMetaData;
+    exports.ɵjm = ExtGridcolumnComponent;
+    exports.ɵjl = gridcolumnMetaData;
+    exports.ɵkm = ExtGridcolumnsmenuComponent;
+    exports.ɵkl = gridcolumnsmenuMetaData;
+    exports.ɵko = ExtGridgroupbythismenuitemComponent;
+    exports.ɵkn = gridgroupbythismenuitemMetaData;
+    exports.ɵky = ExtGridrowComponent;
+    exports.ɵkx = gridrowMetaData;
+    exports.ɵkq = ExtGridshowingroupsmenuitemComponent;
+    exports.ɵkp = gridshowingroupsmenuitemMetaData;
+    exports.ɵks = ExtGridsortascmenuitemComponent;
+    exports.ɵkr = gridsortascmenuitemMetaData;
+    exports.ɵku = ExtGridsortdescmenuitemComponent;
+    exports.ɵkt = gridsortdescmenuitemMetaData;
+    exports.ɵle = ExtGridsummaryrowComponent;
+    exports.ɵld = gridsummaryrowMetaData;
+    exports.ɵkg = ExtHeadercontainerComponent;
+    exports.ɵkf = headercontainerMetaData;
+    exports.ɵgg = ExtHiddenfieldComponent;
+    exports.ɵgf = hiddenfieldMetaData;
+    exports.ɵli = ExtImageComponent;
+    exports.ɵlh = imageMetaData;
+    exports.ɵlk = ExtImgComponent;
+    exports.ɵlj = imgMetaData;
+    exports.ɵea = ExtIndexbarComponent;
+    exports.ɵdz = indexbarMetaData;
+    exports.ɵlm = ExtIndicatorComponent;
+    exports.ɵll = indicatorMetaData;
+    exports.ɵgi = ExtInputfieldComponent;
+    exports.ɵgh = inputfieldMetaData;
     exports.ɵce = ExtInteractionComponent;
     exports.ɵcd = interactionMetaData;
-    exports.ɵdy = ExtItemheaderComponent;
-    exports.ɵdx = itemheaderMetaData;
-    exports.ɵlk = ExtLabelComponent;
-    exports.ɵlj = labelMetaData;
+    exports.ɵec = ExtItemheaderComponent;
+    exports.ɵeb = itemheaderMetaData;
+    exports.ɵlo = ExtLabelComponent;
+    exports.ɵln = labelMetaData;
     exports.ɵcg = ExtLegendComponent;
     exports.ɵcf = legendMetaData;
-    exports.ɵea = ExtListComponent;
-    exports.ɵdz = listMetaData;
-    exports.ɵec = ExtListitemComponent;
-    exports.ɵeb = listitemMetaData;
-    exports.ɵee = ExtListswiperitemComponent;
-    exports.ɵed = listswiperitemMetaData;
-    exports.ɵeg = ExtListswiperstepperComponent;
-    exports.ɵef = listswiperstepperMetaData;
-    exports.ɵlq = ExtLoadmaskComponent;
-    exports.ɵlp = loadmaskMetaData;
-    exports.ɵke = ExtLockedgridComponent;
-    exports.ɵkd = lockedgridMetaData;
-    exports.ɵkg = ExtLockedgridregionComponent;
-    exports.ɵkf = lockedgridregionMetaData;
-    exports.ɵqi = ExtMapComponent;
-    exports.ɵqh = mapMetaData;
-    exports.ɵls = ExtMaskComponent;
-    exports.ɵlr = maskMetaData;
-    exports.ɵlu = ExtMediaComponent;
-    exports.ɵlt = mediaMetaData;
-    exports.ɵma = ExtMenuComponent;
-    exports.ɵlz = menuMetaData;
-    exports.ɵlw = ExtMenucheckitemComponent;
-    exports.ɵlv = menucheckitemMetaData;
-    exports.ɵly = ExtMenuitemComponent;
-    exports.ɵlx = menuitemMetaData;
-    exports.ɵmc = ExtMenuradioitemComponent;
-    exports.ɵmb = menuradioitemMetaData;
-    exports.ɵme = ExtMenuseparatorComponent;
-    exports.ɵmd = menuseparatorMetaData;
-    exports.ɵhq = ExtMenutriggerComponent;
-    exports.ɵhp = menutriggerMetaData;
-    exports.ɵmg = ExtMessageboxComponent;
-    exports.ɵmf = messageboxMetaData;
-    exports.ɵmi = ExtNavigationviewComponent;
-    exports.ɵmh = navigationviewMetaData;
-    exports.ɵei = ExtNestedlistComponent;
-    exports.ɵeh = nestedlistMetaData;
-    exports.ɵis = ExtNumbercellComponent;
-    exports.ɵir = numbercellMetaData;
-    exports.ɵjq = ExtNumbercolumnComponent;
-    exports.ɵjp = numbercolumnMetaData;
-    exports.ɵgg = ExtNumberfieldComponent;
-    exports.ɵgf = numberfieldMetaData;
-    exports.ɵks = ExtPagingtoolbarComponent;
-    exports.ɵkr = pagingtoolbarMetaData;
-    exports.ɵmk = ExtPanelComponent;
-    exports.ɵmj = panelMetaData;
-    exports.ɵmq = ExtPanelheaderComponent;
-    exports.ɵmp = panelheaderMetaData;
-    exports.ɵmu = ExtPaneltitleComponent;
-    exports.ɵmt = paneltitleMetaData;
-    exports.ɵqc = ExtPaneltoolComponent;
-    exports.ɵqb = paneltoolMetaData;
-    exports.ɵgk = ExtPasswordfieldComponent;
-    exports.ɵgj = passwordfieldMetaData;
-    exports.ɵna = ExtPickerComponent;
-    exports.ɵmz = pickerMetaData;
-    exports.ɵgm = ExtPickerfieldComponent;
-    exports.ɵgl = pickerfieldMetaData;
-    exports.ɵnc = ExtPickerslotComponent;
-    exports.ɵnb = pickerslotMetaData;
-    exports.ɵnu = ExtPivotconfigcontainerComponent;
-    exports.ɵnt = pivotconfigcontainerMetaData;
-    exports.ɵns = ExtPivotconfigfieldComponent;
-    exports.ɵnr = pivotconfigfieldMetaData;
-    exports.ɵnw = ExtPivotconfigformComponent;
-    exports.ɵnv = pivotconfigformMetaData;
-    exports.ɵny = ExtPivotconfigpanelComponent;
-    exports.ɵnx = pivotconfigpanelMetaData;
-    exports.ɵnk = ExtPivotd3containerComponent;
-    exports.ɵnj = pivotd3containerMetaData;
-    exports.ɵnq = ExtPivotgridComponent;
-    exports.ɵnp = pivotgridMetaData;
-    exports.ɵng = ExtPivotgridcellComponent;
-    exports.ɵnf = pivotgridcellMetaData;
-    exports.ɵni = ExtPivotgridgroupcellComponent;
-    exports.ɵnh = pivotgridgroupcellMetaData;
-    exports.ɵoe = ExtPivotgridrowComponent;
-    exports.ɵod = pivotgridrowMetaData;
-    exports.ɵnm = ExtPivotheatmapComponent;
-    exports.ɵnl = pivotheatmapMetaData;
-    exports.ɵoc = ExtPivotrangeeditorComponent;
-    exports.ɵob = pivotrangeeditorMetaData;
-    exports.ɵoa = ExtPivotsettingsComponent;
-    exports.ɵnz = pivotsettingsMetaData;
-    exports.ɵno = ExtPivottreemapComponent;
-    exports.ɵnn = pivottreemapMetaData;
+    exports.ɵee = ExtListComponent;
+    exports.ɵed = listMetaData;
+    exports.ɵeg = ExtListitemComponent;
+    exports.ɵef = listitemMetaData;
+    exports.ɵei = ExtListswiperitemComponent;
+    exports.ɵeh = listswiperitemMetaData;
+    exports.ɵek = ExtListswiperstepperComponent;
+    exports.ɵej = listswiperstepperMetaData;
+    exports.ɵlu = ExtLoadmaskComponent;
+    exports.ɵlt = loadmaskMetaData;
+    exports.ɵki = ExtLockedgridComponent;
+    exports.ɵkh = lockedgridMetaData;
+    exports.ɵkk = ExtLockedgridregionComponent;
+    exports.ɵkj = lockedgridregionMetaData;
+    exports.ɵqo = ExtMapComponent;
+    exports.ɵqn = mapMetaData;
+    exports.ɵlw = ExtMaskComponent;
+    exports.ɵlv = maskMetaData;
+    exports.ɵly = ExtMediaComponent;
+    exports.ɵlx = mediaMetaData;
+    exports.ɵme = ExtMenuComponent;
+    exports.ɵmd = menuMetaData;
+    exports.ɵma = ExtMenucheckitemComponent;
+    exports.ɵlz = menucheckitemMetaData;
+    exports.ɵmc = ExtMenuitemComponent;
+    exports.ɵmb = menuitemMetaData;
+    exports.ɵmg = ExtMenuradioitemComponent;
+    exports.ɵmf = menuradioitemMetaData;
+    exports.ɵmi = ExtMenuseparatorComponent;
+    exports.ɵmh = menuseparatorMetaData;
+    exports.ɵhu = ExtMenutriggerComponent;
+    exports.ɵht = menutriggerMetaData;
+    exports.ɵmk = ExtMessageboxComponent;
+    exports.ɵmj = messageboxMetaData;
+    exports.ɵmm = ExtNavigationviewComponent;
+    exports.ɵml = navigationviewMetaData;
+    exports.ɵem = ExtNestedlistComponent;
+    exports.ɵel = nestedlistMetaData;
+    exports.ɵiw = ExtNumbercellComponent;
+    exports.ɵiv = numbercellMetaData;
+    exports.ɵju = ExtNumbercolumnComponent;
+    exports.ɵjt = numbercolumnMetaData;
+    exports.ɵgk = ExtNumberfieldComponent;
+    exports.ɵgj = numberfieldMetaData;
+    exports.ɵra = ExtOrgChartComponent;
+    exports.ɵqz = orgchartMetaData;
+    exports.ɵkw = ExtPagingtoolbarComponent;
+    exports.ɵkv = pagingtoolbarMetaData;
+    exports.ɵmo = ExtPanelComponent;
+    exports.ɵmn = panelMetaData;
+    exports.ɵmu = ExtPanelheaderComponent;
+    exports.ɵmt = panelheaderMetaData;
+    exports.ɵmy = ExtPaneltitleComponent;
+    exports.ɵmx = paneltitleMetaData;
+    exports.ɵqi = ExtPaneltoolComponent;
+    exports.ɵqh = paneltoolMetaData;
+    exports.ɵgo = ExtPasswordfieldComponent;
+    exports.ɵgn = passwordfieldMetaData;
+    exports.ɵne = ExtPickerComponent;
+    exports.ɵnd = pickerMetaData;
+    exports.ɵgq = ExtPickerfieldComponent;
+    exports.ɵgp = pickerfieldMetaData;
+    exports.ɵni = ExtPickerslotComponent;
+    exports.ɵnh = pickerslotMetaData;
+    exports.ɵoa = ExtPivotconfigcontainerComponent;
+    exports.ɵnz = pivotconfigcontainerMetaData;
+    exports.ɵny = ExtPivotconfigfieldComponent;
+    exports.ɵnx = pivotconfigfieldMetaData;
+    exports.ɵoc = ExtPivotconfigformComponent;
+    exports.ɵob = pivotconfigformMetaData;
+    exports.ɵoe = ExtPivotconfigpanelComponent;
+    exports.ɵod = pivotconfigpanelMetaData;
+    exports.ɵnq = ExtPivotd3containerComponent;
+    exports.ɵnp = pivotd3containerMetaData;
+    exports.ɵnw = ExtPivotgridComponent;
+    exports.ɵnv = pivotgridMetaData;
+    exports.ɵnm = ExtPivotgridcellComponent;
+    exports.ɵnl = pivotgridcellMetaData;
+    exports.ɵno = ExtPivotgridgroupcellComponent;
+    exports.ɵnn = pivotgridgroupcellMetaData;
+    exports.ɵok = ExtPivotgridrowComponent;
+    exports.ɵoj = pivotgridrowMetaData;
+    exports.ɵns = ExtPivotheatmapComponent;
+    exports.ɵnr = pivotheatmapMetaData;
+    exports.ɵoi = ExtPivotrangeeditorComponent;
+    exports.ɵoh = pivotrangeeditorMetaData;
+    exports.ɵog = ExtPivotsettingsComponent;
+    exports.ɵof = pivotsettingsMetaData;
+    exports.ɵnu = ExtPivottreemapComponent;
+    exports.ɵnt = pivottreemapMetaData;
     exports.ɵck = ExtPolarComponent;
     exports.ɵcj = polarMetaData;
-    exports.ɵog = ExtProgressComponent;
-    exports.ɵof = progressMetaData;
-    exports.ɵoi = ExtProgressbarwidgetComponent;
-    exports.ɵoh = progressbarwidgetMetaData;
-    exports.ɵek = ExtPullrefreshbarComponent;
-    exports.ɵej = pullrefreshbarMetaData;
-    exports.ɵem = ExtPullrefreshspinnerComponent;
-    exports.ɵel = pullrefreshspinnerMetaData;
-    exports.ɵgo = ExtRadioComponent;
-    exports.ɵgn = radioMetaData;
-    exports.ɵgq = ExtRadiofieldComponent;
-    exports.ɵgp = radiofieldMetaData;
-    exports.ɵqm = ExtRatingComponent;
-    exports.ɵql = ratingMetaData;
-    exports.ɵhs = ExtRevealtriggerComponent;
-    exports.ɵhr = revealtriggerMetaData;
-    exports.ɵkw = ExtRowbodyComponent;
-    exports.ɵkv = rowbodyMetaData;
-    exports.ɵky = ExtRowheaderComponent;
-    exports.ɵkx = rowheaderMetaData;
-    exports.ɵjs = ExtRownumbererComponent;
-    exports.ɵjr = rownumbererMetaData;
-    exports.ɵiu = ExtRownumberercellComponent;
-    exports.ɵit = rownumberercellMetaData;
-    exports.ɵgs = ExtSearchfieldComponent;
-    exports.ɵgr = searchfieldMetaData;
-    exports.ɵok = ExtSegmentedbuttonComponent;
-    exports.ɵoj = segmentedbuttonMetaData;
-    exports.ɵgu = ExtSelectfieldComponent;
-    exports.ɵgt = selectfieldMetaData;
-    exports.ɵju = ExtSelectioncolumnComponent;
-    exports.ɵjt = selectioncolumnMetaData;
-    exports.ɵom = ExtSheetComponent;
-    exports.ɵol = sheetMetaData;
-    exports.ɵeo = ExtSimplelistitemComponent;
-    exports.ɵen = simplelistitemMetaData;
-    exports.ɵgw = ExtSinglesliderfieldComponent;
-    exports.ɵgv = singlesliderfieldMetaData;
-    exports.ɵoo = ExtSliderComponent;
-    exports.ɵon = sliderMetaData;
-    exports.ɵgy = ExtSliderfieldComponent;
-    exports.ɵgx = sliderfieldMetaData;
+    exports.ɵom = ExtProgressComponent;
+    exports.ɵol = progressMetaData;
+    exports.ɵoo = ExtProgressbarwidgetComponent;
+    exports.ɵon = progressbarwidgetMetaData;
+    exports.ɵeo = ExtPullrefreshbarComponent;
+    exports.ɵen = pullrefreshbarMetaData;
+    exports.ɵeq = ExtPullrefreshspinnerComponent;
+    exports.ɵep = pullrefreshspinnerMetaData;
+    exports.ɵgs = ExtRadioComponent;
+    exports.ɵgr = radioMetaData;
+    exports.ɵgu = ExtRadiofieldComponent;
+    exports.ɵgt = radiofieldMetaData;
+    exports.ɵqs = ExtRatingComponent;
+    exports.ɵqr = ratingMetaData;
+    exports.ɵhw = ExtRevealtriggerComponent;
+    exports.ɵhv = revealtriggerMetaData;
+    exports.ɵla = ExtRowbodyComponent;
+    exports.ɵkz = rowbodyMetaData;
+    exports.ɵlc = ExtRowheaderComponent;
+    exports.ɵlb = rowheaderMetaData;
+    exports.ɵjw = ExtRownumbererComponent;
+    exports.ɵjv = rownumbererMetaData;
+    exports.ɵiy = ExtRownumberercellComponent;
+    exports.ɵix = rownumberercellMetaData;
+    exports.ɵgw = ExtSearchfieldComponent;
+    exports.ɵgv = searchfieldMetaData;
+    exports.ɵoq = ExtSegmentedbuttonComponent;
+    exports.ɵop = segmentedbuttonMetaData;
+    exports.ɵgy = ExtSelectfieldComponent;
+    exports.ɵgx = selectfieldMetaData;
+    exports.ɵjy = ExtSelectioncolumnComponent;
+    exports.ɵjx = selectioncolumnMetaData;
+    exports.ɵng = ExtSelectpickerComponent;
+    exports.ɵnf = selectpickerMetaData;
+    exports.ɵos = ExtSheetComponent;
+    exports.ɵor = sheetMetaData;
+    exports.ɵes = ExtSimplelistitemComponent;
+    exports.ɵer = simplelistitemMetaData;
+    exports.ɵha = ExtSinglesliderfieldComponent;
+    exports.ɵgz = singlesliderfieldMetaData;
+    exports.ɵou = ExtSliderComponent;
+    exports.ɵot = sliderMetaData;
+    exports.ɵhc = ExtSliderfieldComponent;
+    exports.ɵhb = sliderfieldMetaData;
     exports.ɵcm = ExtSpacefillingComponent;
     exports.ɵcl = spacefillingMetaData;
-    exports.ɵou = ExtSpacerComponent;
-    exports.ɵot = spacerMetaData;
-    exports.ɵoy = ExtSparklineComponent;
-    exports.ɵox = sparklineMetaData;
-    exports.ɵow = ExtSparklinebarComponent;
-    exports.ɵov = sparklinebarMetaData;
-    exports.ɵpa = ExtSparklineboxComponent;
-    exports.ɵoz = sparklineboxMetaData;
-    exports.ɵpc = ExtSparklinebulletComponent;
-    exports.ɵpb = sparklinebulletMetaData;
-    exports.ɵpe = ExtSparklinediscreteComponent;
-    exports.ɵpd = sparklinediscreteMetaData;
-    exports.ɵpg = ExtSparklinelineComponent;
-    exports.ɵpf = sparklinelineMetaData;
-    exports.ɵpi = ExtSparklinepieComponent;
-    exports.ɵph = sparklinepieMetaData;
-    exports.ɵpk = ExtSparklinetristateComponent;
-    exports.ɵpj = sparklinetristateMetaData;
-    exports.ɵhu = ExtSpindowntriggerComponent;
-    exports.ɵht = spindowntriggerMetaData;
-    exports.ɵha = ExtSpinnerfieldComponent;
-    exports.ɵgz = spinnerfieldMetaData;
-    exports.ɵhw = ExtSpinuptriggerComponent;
-    exports.ɵhv = spinuptriggerMetaData;
-    exports.ɵpm = ExtSplitbuttonComponent;
-    exports.ɵpl = splitbuttonMetaData;
-    exports.ɵew = ExtSurfaceComponent;
-    exports.ɵev = surfaceMetaData;
-    exports.ɵps = ExtTabComponent;
-    exports.ɵpr = tabMetaData;
-    exports.ɵpo = ExtTabbarComponent;
-    exports.ɵpn = tabbarMetaData;
-    exports.ɵne = ExtTabletpickerComponent;
-    exports.ɵnd = tabletpickerMetaData;
-    exports.ɵpq = ExtTabpanelComponent;
-    exports.ɵpp = tabpanelMetaData;
-    exports.ɵjm = ExtTemplatecolumnComponent;
-    exports.ɵjl = templatecolumnMetaData;
-    exports.ɵhe = ExtTextareafieldComponent;
-    exports.ɵhd = textareafieldMetaData;
-    exports.ɵiw = ExtTextcellComponent;
-    exports.ɵiv = textcellMetaData;
-    exports.ɵjw = ExtTextcolumnComponent;
-    exports.ɵjv = textcolumnMetaData;
-    exports.ɵhc = ExtTextfieldComponent;
-    exports.ɵhb = textfieldMetaData;
-    exports.ɵoq = ExtThumbComponent;
-    exports.ɵop = thumbMetaData;
-    exports.ɵhg = ExtTimefieldComponent;
-    exports.ɵhf = timefieldMetaData;
-    exports.ɵms = ExtTimepanelComponent;
-    exports.ɵmr = timepanelMetaData;
-    exports.ɵhy = ExtTimetriggerComponent;
-    exports.ɵhx = timetriggerMetaData;
-    exports.ɵpw = ExtTitleComponent;
-    exports.ɵpv = titleMetaData;
-    exports.ɵpy = ExtTitlebarComponent;
-    exports.ɵpx = titlebarMetaData;
-    exports.ɵhi = ExtTogglefieldComponent;
-    exports.ɵhh = togglefieldMetaData;
-    exports.ɵos = ExtTogglesliderComponent;
-    exports.ɵor = togglesliderMetaData;
-    exports.ɵqa = ExtToolComponent;
-    exports.ɵpz = toolMetaData;
-    exports.ɵqe = ExtToolbarComponent;
-    exports.ɵqd = toolbarMetaData;
-    exports.ɵpu = ExtTooltipComponent;
-    exports.ɵpt = tooltipMetaData;
-    exports.ɵqu = ExtTransitionComponent;
-    exports.ɵqt = transitionMetaData;
-    exports.ɵlc = ExtTreeComponent;
-    exports.ɵlb = treeMetaData;
-    exports.ɵiy = ExtTreecellComponent;
-    exports.ɵix = treecellMetaData;
-    exports.ɵjy = ExtTreecolumnComponent;
-    exports.ɵjx = treecolumnMetaData;
-    exports.ɵlm = ExtTreelistComponent;
-    exports.ɵll = treelistMetaData;
-    exports.ɵlo = ExtTreelistitemComponent;
-    exports.ɵln = treelistitemMetaData;
-    exports.ɵia = ExtTriggerComponent;
-    exports.ɵhz = triggerMetaData;
-    exports.ɵic = ExtUrlfieldComponent;
-    exports.ɵib = urlfieldMetaData;
-    exports.ɵqo = ExtVideoComponent;
-    exports.ɵqn = videoMetaData;
-    exports.ɵqq = ExtViewportComponent;
-    exports.ɵqp = viewportMetaData;
-    exports.ɵqs = ExtWidgetComponent;
-    exports.ɵqr = widgetMetaData;
-    exports.ɵja = ExtWidgetcellComponent;
-    exports.ɵiz = widgetcellMetaData;
-    exports.ɵes = ExtWindowComponent;
-    exports.ɵer = windowMetaData;
-    exports.ɵmw = ExtYearpickerComponent;
-    exports.ɵmv = yearpickerMetaData;
+    exports.ɵpa = ExtSpacerComponent;
+    exports.ɵoz = spacerMetaData;
+    exports.ɵpe = ExtSparklineComponent;
+    exports.ɵpd = sparklineMetaData;
+    exports.ɵpc = ExtSparklinebarComponent;
+    exports.ɵpb = sparklinebarMetaData;
+    exports.ɵpg = ExtSparklineboxComponent;
+    exports.ɵpf = sparklineboxMetaData;
+    exports.ɵpi = ExtSparklinebulletComponent;
+    exports.ɵph = sparklinebulletMetaData;
+    exports.ɵpk = ExtSparklinediscreteComponent;
+    exports.ɵpj = sparklinediscreteMetaData;
+    exports.ɵpm = ExtSparklinelineComponent;
+    exports.ɵpl = sparklinelineMetaData;
+    exports.ɵpo = ExtSparklinepieComponent;
+    exports.ɵpn = sparklinepieMetaData;
+    exports.ɵpq = ExtSparklinetristateComponent;
+    exports.ɵpp = sparklinetristateMetaData;
+    exports.ɵhy = ExtSpindowntriggerComponent;
+    exports.ɵhx = spindowntriggerMetaData;
+    exports.ɵhe = ExtSpinnerfieldComponent;
+    exports.ɵhd = spinnerfieldMetaData;
+    exports.ɵia = ExtSpinuptriggerComponent;
+    exports.ɵhz = spinuptriggerMetaData;
+    exports.ɵps = ExtSplitbuttonComponent;
+    exports.ɵpr = splitbuttonMetaData;
+    exports.ɵfa = ExtSurfaceComponent;
+    exports.ɵez = surfaceMetaData;
+    exports.ɵpy = ExtTabComponent;
+    exports.ɵpx = tabMetaData;
+    exports.ɵpu = ExtTabbarComponent;
+    exports.ɵpt = tabbarMetaData;
+    exports.ɵnk = ExtTabletpickerComponent;
+    exports.ɵnj = tabletpickerMetaData;
+    exports.ɵpw = ExtTabpanelComponent;
+    exports.ɵpv = tabpanelMetaData;
+    exports.ɵjq = ExtTemplatecolumnComponent;
+    exports.ɵjp = templatecolumnMetaData;
+    exports.ɵhi = ExtTextareafieldComponent;
+    exports.ɵhh = textareafieldMetaData;
+    exports.ɵja = ExtTextcellComponent;
+    exports.ɵiz = textcellMetaData;
+    exports.ɵka = ExtTextcolumnComponent;
+    exports.ɵjz = textcolumnMetaData;
+    exports.ɵhg = ExtTextfieldComponent;
+    exports.ɵhf = textfieldMetaData;
+    exports.ɵow = ExtThumbComponent;
+    exports.ɵov = thumbMetaData;
+    exports.ɵhk = ExtTimefieldComponent;
+    exports.ɵhj = timefieldMetaData;
+    exports.ɵmw = ExtTimepanelComponent;
+    exports.ɵmv = timepanelMetaData;
+    exports.ɵic = ExtTimetriggerComponent;
+    exports.ɵib = timetriggerMetaData;
+    exports.ɵqc = ExtTitleComponent;
+    exports.ɵqb = titleMetaData;
+    exports.ɵqe = ExtTitlebarComponent;
+    exports.ɵqd = titlebarMetaData;
+    exports.ɵhm = ExtTogglefieldComponent;
+    exports.ɵhl = togglefieldMetaData;
+    exports.ɵoy = ExtTogglesliderComponent;
+    exports.ɵox = togglesliderMetaData;
+    exports.ɵqg = ExtToolComponent;
+    exports.ɵqf = toolMetaData;
+    exports.ɵqk = ExtToolbarComponent;
+    exports.ɵqj = toolbarMetaData;
+    exports.ɵqa = ExtTooltipComponent;
+    exports.ɵpz = tooltipMetaData;
+    exports.ɵrc = ExtTransitionComponent;
+    exports.ɵrb = transitionMetaData;
+    exports.ɵlg = ExtTreeComponent;
+    exports.ɵlf = treeMetaData;
+    exports.ɵjc = ExtTreecellComponent;
+    exports.ɵjb = treecellMetaData;
+    exports.ɵkc = ExtTreecolumnComponent;
+    exports.ɵkb = treecolumnMetaData;
+    exports.ɵlq = ExtTreelistComponent;
+    exports.ɵlp = treelistMetaData;
+    exports.ɵls = ExtTreelistitemComponent;
+    exports.ɵlr = treelistitemMetaData;
+    exports.ɵie = ExtTriggerComponent;
+    exports.ɵid = triggerMetaData;
+    exports.ɵig = ExtUrlfieldComponent;
+    exports.ɵif = urlfieldMetaData;
+    exports.ɵqu = ExtVideoComponent;
+    exports.ɵqt = videoMetaData;
+    exports.ɵqw = ExtViewportComponent;
+    exports.ɵqv = viewportMetaData;
+    exports.ɵqy = ExtWidgetComponent;
+    exports.ɵqx = widgetMetaData;
+    exports.ɵje = ExtWidgetcellComponent;
+    exports.ɵjd = widgetcellMetaData;
+    exports.ɵew = ExtWindowComponent;
+    exports.ɵev = windowMetaData;
+    exports.ɵna = ExtYearpickerComponent;
+    exports.ɵmz = yearpickerMetaData;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
