@@ -79,7 +79,7 @@ type "cd cool-ext-angular-app" then "npm start" to run the development build and
 
 ```
 npm install
-npm start (let ot get to this: ℹ ｢ext｣: Waiting for changes...)
+npm start (let it get to this: ℹ ｢wdm｣: Compiled successfully.)
 control-c (stop the command)
 npm start
 ```
