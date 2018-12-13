@@ -36,8 +36,9 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
+            "customWebpackConfig": {"path": "./ext-angular-webpack.config.js"},
             "outputPath": "dist/ext-angular-modern-boilerplate",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -45,7 +46,8 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/build"
             ],
             "styles": [
               "src/styles.scss"
@@ -80,7 +82,7 @@
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/dev-server:generic",
           "options": {
             "browserTarget": "ext-angular-modern-boilerplate:build"
           },
