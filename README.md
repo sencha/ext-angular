@@ -14,24 +14,41 @@ ExtAngular requires the following to be installed before proceeding:
 
 ## Creating Your First ExtAngular Application
 
-### Step 1: Authenticate to Sencha's NPM Registry
+### Step 1a: Authenticate to Sencha's NPM Registry - early adopter
 
-ExtAngular and all related packages are hosted on Sencha's private NPM registry. To gain access to this registry, [sign up for a trial of ExtAngular](https://www.sencha.com/products/extangular/evaluate).  
+ExtAngular and all related packages are hosted on Sencha's private NPM registry. 
+
+To gain access to the early adopter registry, contact Sencha Sales,
+
+Once you have received your credentials from sales for the early adopter registry, 
+you can authenticate by running the following command:
+
+```bash
+npm login --registry=https://sencha.myget.org/F/early-adopter/npm/ --scope=@sencha
+```
+
+This command configures npm to download packages in the `@sencha` scope from Sencha's registry.
+
+### Step 1b: Authenticate to Sencha's NPM Registry - Production (not available yet)
+
+ExtAngular and all related packages are hosted on Sencha's private NPM registry. 
+
+*************
+When this product is in production...
+
+To gain access to this registry, [sign up for a trial of ExtAngular](https://www.sencha.com/products/extangular/evaluate).  
 
 Once you have received your credentials, you can authenticate by running the following command:
 
 ```bash
 
-production
-
 npm login --registry=http://npm.sencha.com --scope=@sencha
 
-early adopter
-
-npm login --registry=https://sencha.myget.org/F/early-adopter/npm/ --scope=@sencha
 ```
 
-This command configures npm to download packages in the `@sencha` scope from Sencha's registry.  
+This command configures npm to download packages in the `@sencha` scope from Sencha's registry.
+*************
+
 
 
 ### Step 2: Install ext-angular-gen
