@@ -8,29 +8,27 @@
  * good way of allowing your user to choose one option out of a selection of several
  * (for example, choosing a favorite color):
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container, FormPanel, RadioField, FieldSet } from '@extjs/ext-react';
- *
- *     const radioProps = {
- *         name: 'radios'
- *     };
- *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container layout="center">
- *                         <FormPanel shadow layout={{type: 'vbox', align: 'left'}}>
- *                             <RadioField {...radioProps} boxLabel="Checked" value="checked" checked/>
- *                             <RadioField {...radioProps} boxLabel="Unchecked" value="unchecked"/>
- *                             <RadioField {...radioProps} boxLabel="Disabled" value="disabled" disabled/>
- *                         </FormPanel>
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <container #item layout="center">
+*                            <formpanel #item shadow="true" [layout]="{type: 'vbox', align: 'left'}">
+*                                <radiofield #item name="radios" boxLabel="Checked" value="checked" checked="true"></radiofield>
+*                                <radiofield #item name="radios" boxLabel="Unchecked" value="unchecked"></radiofield>
+*                                <radiofield #item name="radios" boxLabel="Disabled" value="disabled" disabled="true"></radiofield>
+*                            </formpanel>
+*                        </container>
+*                        `
+*            })
+*            export class AppComponent {
+*
+*             }
  */
 
 /**

@@ -10,21 +10,23 @@
  * panel to a container using Fit layout, simply set `layout: 'fit'` on the container and
  * add a single panel to it.
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container, Panel } from '@extjs/ext-react';
- *
- *     export default class myExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container width="300" height="150" layout="fit">
- *                         <Panel title="Inner Panel" bodyPadding="20" border="false">
- *                             This is the inner panel content
- *                         </Panel>
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                    <container #item width="300" height="150" layout="fit">
+*                        <panel #item title="Inner Panel" bodyPadding="20" border="false" [html]="'This is the inner panel content'">
+*                            
+*                        </panel>
+*                    </container>
+*                        `
+*            })
+*            export class AppComponent {
+*
+*             }
  */

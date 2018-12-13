@@ -6,24 +6,25 @@
  * The Form panel presents a set of form fields and provides convenient ways to load and save data. Usually a form
  * panel just contains the set of fields you want to display.
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Button, FormPanel, TextField } from '@extjs/ext-react';
- *
- *     export default class myExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <FormPanel title="Form Panel">
- *                         <TextField label="First Name"/>
- *                         <TextField label="Last Name"/>
- *                         <TextField label="Account Number"/>
- *                         <Button text="Submit"/>
- *                     </FormPanel>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                    <formpanel #item title="Form Panel">
+*                        <textfield #item label="First Name"></textfield>
+*                        <textfield #item label="Last Name"></textfield>
+*                        <textfield #item label="Account Number"></textfield>
+*                        <button #item text="Submit"></button>
+*                    </formpanel>
+*                        `
+*            })
+*            export class AppComponent {
+*            }
  *
  * ##Loading data
  *

@@ -9,24 +9,27 @@
  * optionally have a title at the top and instructions at the bottom. Here's how we might create a FieldSet inside a
  * form:
  *
- *     @example packages=[reactor]
- *     import React from 'react';
- *     import { ExtReact, Container, FieldSet, TextField, FormPanel } from '@extjs/ext-react';
- *
- *     export default function FieldSetExample() {
- *         return (
- *             <ExtReact>
- *                 <Container layout="center">
- *                     <FormPanel shadow>
- *                         <FieldSet title="About You" instructions="Tell us about yourself." width={300}>
- *                             <TextField label="First Name" labelAlign="placeholder"/>
- *                             <TextField label="Last Name" labelAlign="placeholder"/>
- *                         </FieldSet>
- *                     </FormPanel>
- *                 </Container>
- *             </ExtReact>
- *         )
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                    <container #item layout="center">
+*                        <formpanel #item shadow="true">
+*                            <fieldset #item title="About You" instructions="Tell us about yourself." width="300">
+*                                <textfield #item label="First Name" labelAlign="placeholder"></textfield>
+*                                <textfield #item label="Last Name" labelAlign="placeholder"></textfield>
+*                            </fieldset>
+*                        </formpanel>
+*                    </container>
+*                        `
+*            })
+*            export class AppComponent {
+*            }
  *
  * Above we created a {@link Ext.form.Panel form} with a fieldset that contains two text fields. In this case, all
  * of the form fields are in the same fieldset, but for longer forms we may choose to use multiple fieldsets. We also
