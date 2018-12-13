@@ -70,6 +70,7 @@ import {ToolTipComponent} from "../examples/ToolTip/ToolTip"
 import {NumberFieldComponent} from "../examples/FormFields/NumberField/NumberField"
 import {CheckBoxFieldComponent} from '../examples/FormFields/CheckBoxField/CheckBoxField'
 import {ComboBoxFieldComponent} from "../examples/FormFields/ComboBoxField/ComboBoxField"
+import {MultiSelectComboBoxFieldComponent} from '../examples/FormFields/MultiSelectComboBoxField/MultiSelectComboBoxField'
 import {FormPanelComponent} from "../examples/FormFields/FormPanel/FormPanel"
 import {ContainerFieldComponent} from "../examples/FormFields/ContainerField/ContainerField"
 import {DatePickerFieldComponent} from "../examples/FormFields/DatePickerField/DatePickerField"
@@ -107,6 +108,7 @@ import {TreeListComponent} from '../examples/Trees/TreeList/TreeList';
 import {BasicGridComponent} from '../examples/Grid/BasicGrid/BasicGrid';
 import {EditableGridComponent} from '../examples/Grid/EditableGrid/EditableGrid';
 import {GroupedGridComponent} from '../examples/Grid/GroupedGrid/GroupedGrid';
+import {LockingGridComponent} from '../examples/Grid/LockingGrid/LockingGrid';
 import {ReduxGridComponent} from '../examples/Grid/ReduxGrid/ReduxGrid';
 import {XMLGridComponent} from '../examples/Grid/XMLGrid/XMLGrid';
 
@@ -114,6 +116,7 @@ import {GridToolsComponent} from '../examples/Grid/AddonsDecorations/GridTools/G
 import {RowBodyComponent} from '../examples/Grid/AddonsDecorations/RowBody/RowBody';
 import {RowExpanderComponent} from '../examples/Grid/AddonsDecorations/RowExpander/RowExpander';
 import {SummaryRowComponent} from '../examples/Grid/AddonsDecorations/SummaryRow/SummaryRow';
+import {GridFilteringComponent} from '../examples/Grid/AddonsDecorations/GridFiltering/GridFiltering';
 import {ViewOptionsComponent} from '../examples/Grid/AddonsDecorations/ViewOptions/ViewOptions';
 
 import {BigDataComponent} from '../examples/Grid/AdvancedFeatures/BigData/BigData';
@@ -349,6 +352,7 @@ const routes: ExtAngularRoutes = [
 
 	{ path: 'grids/core_features/basic_grid', component: BasicGridComponent, text: 'Basic Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/core_features/grouped_grid', component: GroupedGridComponent, text: 'Grouped Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'grids/core_features/locking_grid', component: LockingGridComponent, text: 'Locking Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/core_features/editable_grid', component: EditableGridComponent, text: 'Editable Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/core_features/xml_grid', component: XMLGridComponent, text: 'XML Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/redux_grid', component: ReduxGridComponent, text: 'Redux Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -360,6 +364,7 @@ const routes: ExtAngularRoutes = [
 	{ path: 'grids/addons/row_expander', component: RowExpanderComponent, text: 'Row Expander', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/addons/row_body', component: RowBodyComponent, text: 'Row Body', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/addons/summary_row', component: SummaryRowComponent, text: 'Summary Row', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'grids/addons/grid_filtering', component: GridFilteringComponent, text: 'Grid Filtering', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'grids/addons/view_options', component: ViewOptionsComponent, text: 'View Options', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
 	{ path: 'grids/advanced_features/big_data', component: BigDataComponent, text: 'Big Data', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -378,6 +383,7 @@ const routes: ExtAngularRoutes = [
 
 	{ path: 'components/forms/checkboxfield', component: CheckBoxFieldComponent, text: 'CheckBoxField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/forms/comboboxfield', component: ComboBoxFieldComponent, text: 'ComboBoxField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/forms/multiselect_comboboxfield', component: MultiSelectComboBoxFieldComponent, text: 'MultiSelectComboBoxField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/forms/containerfield', component: ContainerFieldComponent, text: 'ContainerField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/forms/datepickerfield', component: DatePickerFieldComponent, text: 'DatePickerField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/forms/emailfield', component: EmailFieldComponent, text: 'EmailField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -589,6 +595,7 @@ export class App {
 		BasicGridComponent,
 		EditableGridComponent,
 		GroupedGridComponent,
+		LockingGridComponent,
 		ReduxGridComponent,
 		XMLGridComponent,
 
@@ -596,6 +603,7 @@ export class App {
 		RowBodyComponent,
 		RowExpanderComponent,
 		SummaryRowComponent,
+		GridFilteringComponent,
 		ViewOptionsComponent,
 
 		BigDataComponent,
@@ -607,6 +615,7 @@ export class App {
 
 		CheckBoxFieldComponent,
 		ComboBoxFieldComponent,
+		MultiSelectComboBoxFieldComponent,
 		ContainerFieldComponent,
 		NumberFieldComponent,
 		FormPanelComponent,
