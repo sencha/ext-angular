@@ -8,59 +8,65 @@
  * draggable, and closable.  Dialogs are not subject to the restrictions of browser
  * popup windows, but provide similar modal experiences.
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Dialog, Container, Button } from '@extjs/ext-react';
+ *            @example packages=[angular]
+ *            import { Component } from '@angular/core'
+ *            declare var Ext: any;
  *
- *     export default class DialogExample extends Component {
+ *            @Component({
+ *                selector: 'app-root-1',
+ *                styles: [`
+ *                        `],
+ *                template: `
+ *                        <container #item [width]='"800"' [height]='"600"'>
+ *                            <button #item [text]='"Show Dialog"' [handler]='this.showDialog' [ui]='"action raised"'></button>
+ *                            <dialog
+ *                                #item
+ *                                [displayed]='showDialog'
+ *                                [title]='"Dialog"'
+ *                                [closable]
+ *                                [maximizable]
+ *                                [closeAction]='"hide"'
+ *                                [maskTapHandler]='this.onCancel'
+ *                                [bodyPadding]='"20"'
+ *                                [maxWidth]='"200"'
+ *                                [defaultFocus]='"#ok"'
+ *                                (onHide)='this.onHide()'
+ *                                [html]='"
+ *                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+ *                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+ *                                commodo consequat.
+ *                                "'
+ *                                [width]='"800"'
+ *                                [height]='"600"'>
+ *                                <button #item [text]='"Cancel"' [handler]='this.onCancel'></button>
+ *                                <button #item [itemId]='"ok"' [text]='"OK"' [handler]='this.onOk'></button>
+ *                            </dialog>
+ *                        </container>
+ *               
+ *                        `
+ *            })
+ *            export class AppComponent {
+ *                state = {
+ *                    showDialog: false
+ *                }
  *
- *         state = {
- *             showDialog: false
- *         }
+ *                showDialog = () => {
+ *                    this.state['showDialog'] = true;
+ *                }
+ *       
+ *                onOk = () => {
+ *                    this.state['showDialog'] = false;
+ *                }
+ *       
+ *                onCancel = () => {
+ *                    this.state['showDialog'] = false;
+ *                }
  *
- *         render() {
- *             const { showDialog } = this.state;
+ *                onHide = () => {
+ *                    this.state['showDialog'] = false;
+ *                }
  *
- *             return (
- *                 <ExtReact>
- *                     <Container>
- *                         <Button text="Show Dialog" handler={this.showDialog} ui="action raised"/>
- *                         <Dialog
- *                             displayed={showDialog}
- *                             title="Dialog"
- *                             closable
- *                             maximizable
- *                             closeAction="hide"
- *                             maskTapHandler={this.onCancel}
- *                             bodyPadding="20"
- *                             maxWidth="200"
- *                             defaultFocus="#ok"
- *                             onHide={() => this.setState({ showDialog: false })}
- *                         >
- *                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
- *                             magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
- *                             commodo consequat.'
- *                             <Button text="Cancel" handler={this.onCancel}/>
- *                             <Button itemId="ok" text="OK" handler={this.onOk}/>
- *                         </Dialog>
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *
- *         showDialog = () => {
- *             this.setState({ showDialog: true });
- *         }
- *
- *         onOk = () => {
- *             this.setState({ showDialog: false });
- *         }
- *
- *         onCancel = () => {
- *             this.setState({ showDialog: false });
- *         }
- *
- *     }
+ *             }
  *
  * ## Buttons
  *

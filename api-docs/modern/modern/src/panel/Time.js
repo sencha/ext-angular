@@ -10,18 +10,20 @@
  *
  * Example usage:
  *
- *      @example packages=[reactor]
- *      import { ExtReact, Container, TimePanel } from '@extjs/ext-react';
- *      import React, { Component } from 'react';
- *      export default class TimeExample extends Component {
- *          render() {
- *              return (
- *                  <ExtReact>
- *                      <Container padding={10} layout={'auto'}>
- *                          <TimePanel shadow/>
- *                      </Container>
- *                  </ExtReact>
- *              )
- *          }
- *      }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <container #item [padding]="10" [layout]="'auto'">
+*                            <timepanel #item shadow="true"></timepanel>
+*                        </container>
+*                        `
+*            })
+*            export class AppComponent {
+*            }
  */

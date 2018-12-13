@@ -248,34 +248,35 @@
  *
  * ## Examples
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Panel, Button } from '@extjs/ext-react';
- *
- *     Ext.require('Ext.MessageBox');
- *
- *     export default class MyExample extends Component {
- *
- *         onConfirmResult(buttonId, value, opt) {
- *             Ext.toast(`User clicked ${buttonId} button.`);
- *         }
- *
- *         onPromptResult(buttonId, value) {
- *             Ext.toast(`User clicked ${buttonId} and entered value "${value}".`);
- *         }
- *
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Panel shadow layout={{type: 'vbox', align: 'stretch'}}>
- *                         <Button handler={() => Ext.Msg.alert('Title', 'The quick brown fox jumped over the lazy dog.')} text="Alert"/>
- *                         <Button handler={() => Ext.Msg.prompt('Welcome!', "What's your first name?", this.onPromptResult.bind(this))} text="Prompt"/>
- *                         <Button handler={() => Ext.Msg.confirm("Confirmation", "Are you sure you want to do that?", this.onConfirmResult.bind(this))} text="Confirm"/>
- *                     </Panel>
- *                 </ExtReact>
- *             )
- *         }
- *
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <panel #item shadow="true" [layout]="{type: 'vbox', align: 'stretch'}">
+*                            <button #item [handler]="alertHandler" text="Alert"></button>
+*                            <button #item [handler]="promptHandler" text="Prompt"></button>
+*                            <button #item [handler]="confirmHandler" text="Confirm"></button>
+*                        </panel>
+*                        `
+*            })
+*            export class AppComponent {
+*
+*                         onConfirmResult = function(buttonId, value, opt) {
+*                             Ext.toast(`User clicked ${buttonId} button.`);
+*                         }
+*                
+*                         onPromptResult = function(buttonId, value) {
+*                             Ext.toast(`User clicked ${buttonId} and entered value "${value}".`);
+*                         }
+*
+*                         alertHandler = () => Ext.Msg.alert('Title', 'The quick brown fox jumped over the lazy dog.');
+*                         promptHandler = () => Ext.Msg.prompt('Welcome!', "What's your first name?", this.onPromptResult.bind(this));
+*                         confirmHandler = () => Ext.Msg.confirm("Confirmation", "Are you sure you want to do that?", this.onConfirmResult.bind(this));
+*            }
  *
  */

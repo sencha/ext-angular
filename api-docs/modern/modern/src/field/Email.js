@@ -8,27 +8,29 @@
  * virtual keyboard for email address input. Aside from that, the email field is just a
  * normal text field. Here's an example of how to use it in a form:
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container, FormPanel, EmailField } from '@extjs/ext-react';
+ *            @example packages=[angular]
+ *            import { Component } from '@angular/core'
+ *            declare var Ext: any;
  *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container layout="center">
- *                         <FormPanel shadow>
- *                             <EmailField
- *                                 width={250}
- *                                 placeholder="user@domain.com"
- *                                 label="Email"
- *                             />
- *                         </FormPanel>
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+ *            @Component({
+ *                selector: 'app-root-1',
+ *                styles: [`
+ *                        `],
+ *                template: `
+ *                        <container #item [layout]='"center"'>
+ *                            <formpanel #item [shadow]>
+ *                                <emailfield #item
+ *                                    [width]='250'
+ *                                    [placeholder]='"user@domain.com"'
+ *                                    [label]='"Email"'
+ *                                ></emailfield>
+ *                            </formpanel>
+ *                        </container>
+ *                        `
+ *            })
+ *            export class AppComponent {
+ *
+ *             }
  *
  * Because email field inherits from {@link Ext.field.Text textfield} it gains all of the
  * functionality that text fields provide, including getting and setting the value at
