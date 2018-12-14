@@ -8,25 +8,27 @@
  * like any other component. This component typically takes between 1 and 3 props - a {@link #src}, and
  * optionally a {@link #height} and a {@link #width}:
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react'
- *     import { ExtReact, Panel, Image } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Panel shadow layout="fit">
- *                         <Image
- *                             height="64"
- *                             width="64"
- *                             src="http://www.sencha.com/assets/images/sencha-avatar-64x64.png"
- *                         />
- *                     </Panel>
- *                 </ExtReact>
- *             );
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <panel #item shadow="true" layout="fit">
+*                            <image #item
+*                                height="64"
+*                                width="64"
+*                                src="http://www.sencha.com/assets/images/sencha-avatar-64x64.png"
+*                            ></image>
+*                        </panel>
+*                        `
+*            })
+*            export class AppComponent {
+*
+*             }
  */
 
 /**

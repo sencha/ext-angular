@@ -17,6 +17,7 @@ import {ProgressBarComponent} from './ProgressBar/ProgressBar';
 import {TitleBarComponent} from './TitleBar/TitleBar';
 import {ToolBarComponent} from './ToolBar/ToolBar';
 import {ToolTipComponent} from './ToolTip/ToolTip';
+import {ColorPickerComponent} from './ColorPicker/ColorPicker';
 
 import {EditableTreeComponent} from './Trees/EditableTree/EditableTree';
 import {HeterogeneousTreeComponent} from './Trees/HeterogeneousTree/HeterogeneousTree';
@@ -30,6 +31,7 @@ import { NeedleGaugeComponent } from './Gauges/NeedleGauge';
 import {BasicGridComponent} from './Grid/BasicGrid/BasicGrid';
 import {EditableGridComponent} from './Grid/EditableGrid/EditableGrid';
 import {GroupedGridComponent} from './Grid/GroupedGrid/GroupedGrid';
+import {LockingGridComponent} from './Grid/LockingGrid/LockingGrid';
 import {ReduxGridComponent} from './Grid/ReduxGrid/ReduxGrid';
 import {XMLGridComponent} from './Grid/XMLGrid/XMLGrid';
 
@@ -38,6 +40,7 @@ import {GridToolsComponent} from './Grid/AddonsDecorations/GridTools/GridTools';
 import {RowBodyComponent} from './Grid/AddonsDecorations/RowBody/RowBody';
 import {RowExpanderComponent} from './Grid/AddonsDecorations/RowExpander/RowExpander';
 import {SummaryRowComponent} from './Grid/AddonsDecorations/SummaryRow/SummaryRow';
+import {GridFilteringComponent} from './Grid/AddonsDecorations/GridFiltering/GridFiltering';
 import {ViewOptionsComponent} from './Grid/AddonsDecorations/ViewOptions/ViewOptions';
 
 import {BigDataComponent} from './Grid/AdvancedFeatures/BigData/BigData';
@@ -49,6 +52,7 @@ import {StockTickerComponent} from './Grid/AdvancedFeatures/StockTicker/StockTic
 
 import {CheckBoxFieldComponent} from './FormFields/CheckBoxField/CheckBoxField';
 import {ComboBoxFieldComponent} from './FormFields/ComboBoxField/ComboBoxField';
+import {MultiSelectComboBoxFieldComponent} from './FormFields/MultiSelectComboBoxField/MultiSelectComboBoxField'
 import {ContainerFieldComponent} from './FormFields/ContainerField/ContainerField';
 import {DatePickerFieldComponent} from './FormFields/DatePickerField/DatePickerField';
 import {EmailFieldComponent} from './FormFields/EmailField/EmailField';
@@ -202,6 +206,9 @@ const treeRoot = {
                 { text: 'SegmentedButton', component: SegmentedButtonComponent, layout: 'center', navIcon: 'icon-segmented-buttons' },
                 { text: 'SplitButton', component: SplitButtonComponent, layout: 'center', navIcon: 'icon-buttons' },
             ]},
+            { text: 'Color Picker', navIcon: 'icon-color-picker', children: [
+                { text: 'Basic', component: ColorPickerComponent, layout: 'center', navIcon: 'icon-color-picker' }
+            ]},
             { text: 'Carousel', component: CarouselComponent, navIcon: 'icon-carousel' },
             { text: 'Drag & Drop', navIcon: 'icon-drag-drop', children: [
                 { text: 'Simple', component: SimpleDragDropComponent, navIcon: 'icon-drag-simple' },
@@ -216,6 +223,7 @@ const treeRoot = {
             { text: 'Forms', navIcon: 'icon-forms', children: [
                 { text: 'CheckBoxField', component: CheckBoxFieldComponent, layout: 'center', navIcon: 'icon-Forms-CheckBoxField'  },
                 { text: 'ComboBoxField', component: ComboBoxFieldComponent, layout: 'center', navIcon: 'icon-Forms-ComboBoxField'  },
+                { text: 'MultiSelect ComboBoxField', component: MultiSelectComboBoxFieldComponent, layout: 'center', navIcon: 'icon-Forms-ComboBoxField'  },
                 { text: 'ContainerField', component: ContainerFieldComponent, layout: Ext.os.is.Phone ? 'auto' : 'center', navIcon: 'icon-Forms-ContainerField'  },
                 { text: 'DatePickerField', component: DatePickerFieldComponent, layout: 'center', navIcon: 'icon-Forms-DatePickerField'  },
                 { text: 'EmailField', component: EmailFieldComponent , layout: 'center', navIcon: 'icon-Forms-EmailField' },
@@ -303,6 +311,7 @@ const treeRoot = {
             { text: 'Core Features', navIcon: 'icon-grids', children: [
                 { text: 'Basic Grid', component: BasicGridComponent, navIcon: 'icon-grids'},
                 { text: 'Grouped Grid', component: GroupedGridComponent, navIcon: 'icon-grouped-grid'},
+                { text: 'Locking Grid', component: LockingGridComponent, navIcon: 'icon-locking-grid'},
                 { text: 'Editable Grid', component: EditableGridComponent, navIcon: 'icon-editable-grid'},
                 { text: 'XML Grid', component: XMLGridComponent, navIcon: 'icon-xml-grid'}
             ]},
@@ -311,6 +320,7 @@ const treeRoot = {
                 { text: 'Row Expander', component: RowExpanderComponent, navIcon: 'icon-row-expander-grid'},
                 { text: 'Row Body', component: RowBodyComponent, navIcon: 'icon-row-body-grid'},
                 { text: 'Summary Row', component: SummaryRowComponent, navIcon: 'icon-grid-summary'},
+                { text: 'Grid Filtering', component: GridFilteringComponent, navIcon: 'icon-grid-filtering'},
                 { text: 'View Options', component: ViewOptionsComponent, navIcon: 'icon-view-options-grid'}
             ]},
             { text: 'Advanced Features', navIcon: 'icon-grid-plugins', children:[

@@ -1,0 +1,14 @@
+<panel #item [header]="panelHeader"  [layout]="'vbox'" [resizable]="true" bodyPadding="5"
+autoSize="true"
+[width]= "isPhone ? '100%' : 600"
+[minWidth]= "isPhone ? '100%' : 550"
+[minHeight]= "isPhone ? 480 : 0"
+title= "Color Picker Components"
+[viewModel]="{
+    data: {
+        color: this.color
+    }
+    }"
+>
+<colorselector #item [color]="this.color" (change)="this.OnSelChange($event)"></colorselector>
+</panel>

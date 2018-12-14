@@ -10,27 +10,28 @@
  * input methods like select boxes or radio buttons are not possible. Text Areas are
  * usually created inside forms, like this:
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container, FormPanel, TextAreaField } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container layout="center">
- *                         <FormPanel shadow>
- *                             <TextAreaField
- *                                 label="Description"
- *                                 width="300"
- *                                 maxRows={10}
- *                             />
- *                         </FormPanel>
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <container #item layout="center">
+*                            <formpanel #item shadow="true" >
+*                                <textareafield #item
+*                                    label="Description"
+*                                    width="300"
+*                                    [maxRows]="10"
+*                                ></textareafield>
+*                            </formpanel>
+*                        </container>
+*                        `
+*            })
+*            export class AppComponent {
+*            }
  */
 
 /**

@@ -10,26 +10,28 @@
  *
  * ## Example
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, FormPanel, Container, CheckBoxField } from '@extjs/ext-react';
+ *            @example packages=[angular]
+ *            import { Component } from '@angular/core'
+ *            declare var Ext: any;
  *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container layout="center">
- *                         <FormPanel shadow layout={{type: 'vbox', align: 'left'}}>
- *                             <CheckBoxField boxLabel="Unchecked"/>
- *                             <CheckBoxField boxLabel="Checked" checked/>
- *                             <CheckBoxField boxLabel="Disabled" disabled/>
- *                             <CheckBoxField boxLabel="Disabled (checked)" disabled checked/>
- *                         </FormPanel>
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+ *            @Component({
+ *                selector: 'app-root-1',
+ *                styles: [`
+ *                        `],
+ *                template: `
+ *                        <container #item [shadow]="true" [layout]='"center"'>
+ *                            <formpanel #item [shadow] [layout]="{type: 'vbox', align: 'left'}">
+ *                                <checkboxfield #item [boxLabel]='"Unchecked"'></checkboxfield>
+ *                                <checkboxfield #item [boxLabel]='"Checked"' [checked]="true"></checkboxfield>
+ *                                <checkboxfield #item [boxLabel]='"Disabled"' [disabled]="true"></checkboxfield>
+ *                                <checkboxfield #item [boxLabel]='"Disabled (checked)"' [disabled]="true" [checked]="true"></checkboxfield>
+ *                            </formpanel>
+ *                        </container>               
+ *                        `
+ *            })
+ *            export class AppComponent {
+ *
+ *             }
  */
 
 /**

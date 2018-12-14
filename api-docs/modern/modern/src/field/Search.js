@@ -10,39 +10,35 @@
  * As with all other form fields, the search field gains a "clear" button that appears whenever there
  * is text entered into the form, and which removes that text when tapped.
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container, FormPanel, SearchField } from '@extjs/ext-react'
- *
- *     export default class SearchFieldExample extends Component {
- *
- *         state = { };
- *
- *         search = (field, value) => {
- *             this.setState({ query: value });
- *         }
- *
- *         render() {
- *             const { query } = this.state;
- *
- *             return (
- *                 <ExtReact> 
- *                     <Container layout="center">
- *                         <FormPanel shadow>
- *                             <SearchField
- *                                 value={query}
- *                                 width="300"
- *                                 placeholder="Search..."
- *                                 onChange={this.search}
- *                             />
- *                             { query && <div>You searched for "{query}"</div> }
- *                         </FormPanel>
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *
- *     }
+*            @example packages=[angular]
+*            import { Component } from '@angular/core'
+*            declare var Ext: any;
+*
+*            @Component({
+*                selector: 'app-root-1',
+*                styles: [`
+*                        `],
+*                template: `
+*                        <container #item layout="center">
+*                            <formpanel #item shadow="true" >
+*                                <searchfield #item
+*                                    [value]="query"
+*                                    width="300"
+*                                    placeholder="Search..."
+*                                    (change)="search($event)"
+*                                ></searchfield>
+*                                <div #item>You searched for "{{query}}"</div>
+*                            </formpanel>
+*                        </container>
+*                        `
+*            })
+*            export class AppComponent {
+*                query:string = "";
+*                search = (event) => {
+*                    console.log("In search : " + event.newValue);
+*                    this.query = event.newValue;
+*                }
+*             }
  *
  * Because search field inherits from {@link Ext.field.Text textfield} it gains all of the functionality that text
  * fields provide, including getting and setting the value at runtime, validations and various events that are fired
