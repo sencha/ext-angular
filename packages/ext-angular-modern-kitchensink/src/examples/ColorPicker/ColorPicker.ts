@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 
 declare var Ext: any;
 
@@ -9,7 +9,13 @@ declare var Ext: any;
 })
 export class ColorPickerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cdref: ChangeDetectorRef) { }
+
+  ngAfterContentChecked() {
+
+    this.cdref.detectChanges();
+
+  }
 
 
     color:string = '#0f0';
@@ -18,14 +24,14 @@ export class ColorPickerComponent implements OnInit {
   }
 
 
-  onShowMoreLess = (button) => {
-    //this.getViewModel().set('full', button.getValue());
-}
-
-
     onChange= (picker) => {
         this.color = picker.getValue();
-        console.log("this.color: " + this.color);
+        console.log(" onChange :: this.color: " + this.color);
+    }
+
+    OnSelChange = (event) => {
+        this.color = event.color;
+        console.log(" OnSelChange :: this.color: " + this.color);
     }
 
    isPhone = Ext.platformTags.phone ? true : false;

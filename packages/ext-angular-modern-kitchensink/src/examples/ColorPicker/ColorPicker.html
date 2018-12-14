@@ -10,5 +10,5 @@ title= "Color Picker Components"
     }
     }"
 >
-<colorselector #item [color]="this.color"></colorselector>
+<colorselector #item [color]="this.color" (change)="this.OnSelChange($event)"></colorselector>
 </panel>
