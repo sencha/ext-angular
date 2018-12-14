@@ -232,6 +232,7 @@ import {WizardComponent} from '../examples/Wizard/Wizard';
 import {CalendarService} from "../examples/Calendar/Calendar.service"
 import {GridService} from '../examples/Grid/Grid.service'
 import {BigDataService} from '../examples/Grid/AdvancedFeatures/BigData/BigData.service'
+import {GridFilteringService} from '../examples/Grid/AddonsDecorations/GridFiltering/GridFiltering.service'
 
 import {ConfigurablePivotHeatmapComponent} from '../examples/D3/HeatMap/ConfigurablePivotHeatmap/ConfigurablePivotHeatmap';
 import {PivotHeatmapComponent} from '../examples/D3/HeatMap/PivotHeatmap/PivotHeatmap';
@@ -761,7 +762,8 @@ export class App {
 		GridService,
 		AppService,
 		ExtAngularService,
-		BigDataService,
+		BigDataService,,
+		GridFilteringService
 	],
 	entryComponents: [
 		SideBarComponent, 

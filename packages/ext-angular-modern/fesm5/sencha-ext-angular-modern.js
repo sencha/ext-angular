@@ -198,7 +198,7 @@ var base = /** @class */ (function () {
                     var parentCmp = this['ext'];
                     /** @type {?} */
                     var childCmp = item['ext'];
-                    if (parentxtype === 'grid') {
+                    if (parentxtype === 'grid' || parentxtype === 'lockedgrid') {
                         if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
                             parentCmp.addColumn(childCmp);
                         }

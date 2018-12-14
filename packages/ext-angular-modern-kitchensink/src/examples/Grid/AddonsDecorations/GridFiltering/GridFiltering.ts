@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {model} from '../../CompanyModel'
+import {model} from './GridModel'
+import {GridFilteringService} from './GridFiltering.service'
 
 declare var Ext: any;
 
@@ -18,9 +19,7 @@ Ext.require([
 })
 export class GridFilteringComponent implements OnInit {
 
-  constructor() { }
-
-
+  constructor(gridFiletringService : GridFilteringService) { }
 
   store = Ext.create('Ext.data.Store', {
     model,
@@ -28,16 +27,22 @@ export class GridFilteringComponent implements OnInit {
     pageSize: 0,
     proxy: {
       type: 'ajax',
-      url: 'build/resources/data/CompanyData.json'
-    } 
+      url: '/KitchenSink/BigData'
+    }
   });
 
-  renderSign = (format, value) =>  {
-    return Ext.util.Format.number(value, format);
+  nameSorter = (rec1, rec2) => {
+    // Sort prioritizing surname over forename as would be expected.
+    var rec1Name = rec1.get('surname') + rec1.get('forename'),
+        rec2Name = rec2.get('surname') + rec2.get('forename');
+     if (rec1Name > rec2Name) {
+        return 1;
+    }
+     if (rec1Name < rec2Name) {
+        return -1;
+    }
+     return 0;
   }
-
-
- summarizeCompanies = (grid, context) => context.records.length + ' Companies';
 
 
 
