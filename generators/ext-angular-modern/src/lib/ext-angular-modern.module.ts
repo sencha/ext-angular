@@ -212,6 +212,10 @@ import { ExtTitlebarComponent } from './ext-titlebar.component';
 import { ExtToolComponent } from './ext-tool.component';
 import { ExtPaneltoolComponent } from './ext-paneltool.component';
 import { ExtToolbarComponent } from './ext-toolbar.component';
+import { ExtColorbuttonComponent } from './ext-colorbutton.component';
+import { ExtColorpickercolorpreviewComponent } from './ext-colorpickercolorpreview.component';
+import { ExtColorfieldComponent } from './ext-colorfield.component';
+import { ExtColorselectorComponent } from './ext-colorselector.component';
 import { ExtGaugeComponent } from './ext-gauge.component';
 import { ExtMapComponent } from './ext-map.component';
 import { ExtGoogle_mapComponent } from './ext-google-map.component';
@@ -439,6 +443,10 @@ import { ExtTransitionComponent } from './ext-transition.component';
     ExtToolComponent,
     ExtPaneltoolComponent,
     ExtToolbarComponent,
+    ExtColorbuttonComponent,
+    ExtColorpickercolorpreviewComponent,
+    ExtColorfieldComponent,
+    ExtColorselectorComponent,
     ExtGaugeComponent,
     ExtMapComponent,
     ExtGoogle_mapComponent,
@@ -663,6 +671,10 @@ import { ExtTransitionComponent } from './ext-transition.component';
     ExtToolComponent,
     ExtPaneltoolComponent,
     ExtToolbarComponent,
+    ExtColorbuttonComponent,
+    ExtColorpickercolorpreviewComponent,
+    ExtColorfieldComponent,
+    ExtColorselectorComponent,
     ExtGaugeComponent,
     ExtMapComponent,
     ExtGoogle_mapComponent,

@@ -230,7 +230,7 @@
                             var parentCmp = this['ext'];
                             /** @type {?} */
                             var childCmp = item['ext'];
-                            if (parentxtype === 'grid') {
+                            if (parentxtype === 'grid' || parentxtype === 'lockedgrid') {
                                 if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
                                     parentCmp.addColumn(childCmp);
                                 }
@@ -90491,6 +90491,1328 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var colorbuttonMetaData = /** @class */ (function () {
+        function colorbuttonMetaData() {
+        }
+        colorbuttonMetaData.XTYPE = 'colorbutton';
+        colorbuttonMetaData.PROPERTIESOBJECT = {
+            "alphaDecimalFormat": "String",
+            "alwaysOnTop": "Boolean/Number",
+            "ariaAttributes": "Object",
+            "ariaDescribedBy": "String",
+            "ariaLabel": "String",
+            "ariaLabelledBy": "String",
+            "axisLock": "Boolean",
+            "bind": "Object/String",
+            "border": "Boolean",
+            "bottom": "Number/String",
+            "centered": "Boolean",
+            "cls": "String/String[]",
+            "color": "Object",
+            "constrainAlign": "String/Ext.util.Region/Ext.dom.Element",
+            "contentEl": "Ext.dom.Element/HTMLElement/String",
+            "controller": "String/Object/Ext.app.ViewController",
+            "data": "Object",
+            "defaultListenerScope": "Boolean",
+            "disabled": "Boolean",
+            "displayed": "Boolean",
+            "docked": "String",
+            "draggable": "Boolean/Object/Ext.drag.Source",
+            "enterAnimation": "String/Mixed",
+            "eventHandlers": "Object",
+            "exitAnimation": "String/Mixed",
+            "flex": "Number/String/Object",
+            "floated": "Boolean",
+            "focusCls": "String",
+            "format": "'hex6'/'hex8'/'#hex6'/'#hex8'/'HEX6'/'HEX8'/'#HEX6'/'#HEX8'",
+            "fullscreen": "Boolean",
+            "height": "Number/String",
+            "hidden": "Boolean",
+            "hideAnimation": "String/Mixed",
+            "hideMode": "'clip'/'display'/'offsets'/'opacity'/'visibility'",
+            "hideOnMaskTap": "Boolean",
+            "html": "String/Ext.dom.Element/HTMLElement",
+            "id": "String",
+            "instanceCls": "String/String[]",
+            "itemId": "String",
+            "keyMap": "Object",
+            "keyMapEnabled": "Boolean",
+            "keyMapTarget": "String",
+            "left": "Number/String",
+            "listeners": "Object",
+            "margin": "Number/String",
+            "maxHeight": "Number/String",
+            "maxWidth": "Number/String",
+            "minHeight": "Number/String",
+            "minWidth": "Number/String",
+            "modal": "Boolean",
+            "modelValidation": "Boolean",
+            "name": "String",
+            "nameable": "Boolean",
+            "padding": "Number/String",
+            "plugins": "Array/Ext.enums.Plugin/Object/Ext.plugin.Abstract",
+            "popup": "Object",
+            "publishes": "String/String[]/Object",
+            "record": "Ext.data.Model",
+            "reference": "String",
+            "relative": "Boolean",
+            "renderTo": "Ext.dom.Element",
+            "right": "Number/String",
+            "ripple": "Boolean/Object/String",
+            "scrollable": "Boolean/String/Object",
+            "selfAlign": "String",
+            "session": "Boolean/Object/Ext.data.Session",
+            "shadow": "Boolean",
+            "shareableName": "Boolean",
+            "shim": "Boolean",
+            "showAnimation": "String/Mixed",
+            "stateful": "Boolean/Object/String[]",
+            "statefulDefaults": "Object/String[]",
+            "stateId": "String",
+            "style": "String/Object",
+            "tabIndex": "Number",
+            "toFrontOnShow": "Boolean",
+            "tooltip": "String/Object",
+            "top": "Number/String",
+            "touchAction": "Object",
+            "tpl": "String/String[]/Ext.Template/Ext.XTemplate[]",
+            "tplWriteMode": "String",
+            "translatable": "Object",
+            "twoWayBindable": "String/String[]/Object",
+            "ui": "String/String[]",
+            "userCls": "String/String[]",
+            "userSelectable": "Boolean/String/Object",
+            "value": "String",
+            "viewModel": "String/Object/Ext.app.ViewModel",
+            "weight": "Number",
+            "width": "Number/String",
+            "x": "Number",
+            "xtype": "String",
+            "y": "Number",
+            "zIndex": "Number",
+            "platformConfig": "Object",
+            "responsiveConfig": "Object",
+            "fitToParent": "Boolean",
+            "config": "Object",
+        };
+        colorbuttonMetaData.PROPERTIES = [
+            'alphaDecimalFormat',
+            'alwaysOnTop',
+            'ariaAttributes',
+            'ariaDescribedBy',
+            'ariaLabel',
+            'ariaLabelledBy',
+            'axisLock',
+            'bind',
+            'border',
+            'bottom',
+            'centered',
+            'cls',
+            'color',
+            'constrainAlign',
+            'contentEl',
+            'controller',
+            'data',
+            'defaultListenerScope',
+            'disabled',
+            'displayed',
+            'docked',
+            'draggable',
+            'enterAnimation',
+            'eventHandlers',
+            'exitAnimation',
+            'flex',
+            'floated',
+            'focusCls',
+            'format',
+            'fullscreen',
+            'height',
+            'hidden',
+            'hideAnimation',
+            'hideMode',
+            'hideOnMaskTap',
+            'html',
+            'id',
+            'instanceCls',
+            'itemId',
+            'keyMap',
+            'keyMapEnabled',
+            'keyMapTarget',
+            'left',
+            'listeners',
+            'margin',
+            'maxHeight',
+            'maxWidth',
+            'minHeight',
+            'minWidth',
+            'modal',
+            'modelValidation',
+            'name',
+            'nameable',
+            'padding',
+            'plugins',
+            'popup',
+            'publishes',
+            'record',
+            'reference',
+            'relative',
+            'renderTo',
+            'right',
+            'ripple',
+            'scrollable',
+            'selfAlign',
+            'session',
+            'shadow',
+            'shareableName',
+            'shim',
+            'showAnimation',
+            'stateful',
+            'statefulDefaults',
+            'stateId',
+            'style',
+            'tabIndex',
+            'toFrontOnShow',
+            'tooltip',
+            'top',
+            'touchAction',
+            'tpl',
+            'tplWriteMode',
+            'translatable',
+            'twoWayBindable',
+            'ui',
+            'userCls',
+            'userSelectable',
+            'value',
+            'viewModel',
+            'weight',
+            'width',
+            'x',
+            'xtype',
+            'y',
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'fitToParent',
+            'config'
+        ];
+        colorbuttonMetaData.EVENTS = [
+            { name: 'added', parameters: 'sender,container,index' },
+            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehide', parameters: 'sender' },
+            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforetofront', parameters: 'colorbutton' },
+            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'blur', parameters: 'colorbutton,event' },
+            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'change', parameters: 'colorbutton,color,previousColor' },
+            { name: 'destroy', parameters: '' },
+            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'erased', parameters: 'sender' },
+            { name: 'floatingchange', parameters: 'sender,positioned' },
+            { name: 'focus', parameters: 'colorbutton,event' },
+            { name: 'focusenter', parameters: 'colorbutton,event' },
+            { name: 'focusleave', parameters: 'colorbutton,event' },
+            { name: 'fullscreen', parameters: 'sender' },
+            { name: 'heightchange', parameters: 'sender,value,oldValue' },
+            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+            { name: 'hide', parameters: 'sender' },
+            { name: 'initialize', parameters: 'sender' },
+            { name: 'leftchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+            { name: 'orientationchange', parameters: '' },
+            { name: 'painted', parameters: 'sender,element' },
+            { name: 'positionedchange', parameters: 'sender,positioned' },
+            { name: 'removed', parameters: 'sender,container,index' },
+            { name: 'resize', parameters: 'element,info' },
+            { name: 'rightchange', parameters: 'sender,value,oldValue' },
+            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+            { name: 'show', parameters: 'sender' },
+            { name: 'tofront', parameters: 'colorbutton' },
+            { name: 'topchange', parameters: 'sender,value,oldValue' },
+            { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'widthchange', parameters: 'sender,value,oldValue' },
+            { name: 'ready', parameters: '' }
+        ];
+        colorbuttonMetaData.EVENTNAMES = [
+            'added',
+            'beforebottomchange',
+            'beforecenteredchange',
+            'beforedisabledchange',
+            'beforedockedchange',
+            'beforeheightchange',
+            'beforehiddenchange',
+            'beforehide',
+            'beforeleftchange',
+            'beforemaxHeightchange',
+            'beforemaxWidthchange',
+            'beforeminHeightchange',
+            'beforeminWidthchange',
+            'beforeorientationchange',
+            'beforerightchange',
+            'beforescrollablechange',
+            'beforeshow',
+            'beforetofront',
+            'beforetopchange',
+            'beforewidthchange',
+            'blur',
+            'bottomchange',
+            'centeredchange',
+            'change',
+            'destroy',
+            'disabledchange',
+            'dockedchange',
+            'erased',
+            'floatingchange',
+            'focus',
+            'focusenter',
+            'focusleave',
+            'fullscreen',
+            'heightchange',
+            'hiddenchange',
+            'hide',
+            'initialize',
+            'leftchange',
+            'maxHeightchange',
+            'maxWidthchange',
+            'minHeightchange',
+            'minWidthchange',
+            'moved',
+            'orientationchange',
+            'painted',
+            'positionedchange',
+            'removed',
+            'resize',
+            'rightchange',
+            'scrollablechange',
+            'show',
+            'tofront',
+            'topchange',
+            'updatedata',
+            'widthchange',
+            'ready'
+        ];
+        return colorbuttonMetaData;
+    }());
+    var ExtColorbuttonComponent = /** @class */ (function (_super) {
+        __extends(ExtColorbuttonComponent, _super);
+        function ExtColorbuttonComponent(eRef) {
+            return _super.call(this, eRef, colorbuttonMetaData) || this;
+        }
+        /**
+         * @return {?}
+         */
+        ExtColorbuttonComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () { this.baseOnInit(colorbuttonMetaData); };
+        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+        /**
+         * @return {?}
+         */
+        ExtColorbuttonComponent.prototype.ngAfterContentInit =
+            //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+            /**
+             * @return {?}
+             */
+            function () {
+                this.baseAfterContentInit();
+                this['ready'].emit(this);
+            };
+        ExtColorbuttonComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'colorbutton',
+                        inputs: colorbuttonMetaData.PROPERTIES,
+                        outputs: colorbuttonMetaData.EVENTNAMES,
+                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtColorbuttonComponent; }) }],
+                        template: '<ng-template #dynamic></ng-template>'
+                    }] }
+        ];
+        /** @nocollapse */
+        ExtColorbuttonComponent.ctorParameters = function () {
+            return [
+                { type: core.ElementRef }
+            ];
+        };
+        return ExtColorbuttonComponent;
+    }(base));
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var colorpickercolorpreviewMetaData = /** @class */ (function () {
+        function colorpickercolorpreviewMetaData() {
+        }
+        colorpickercolorpreviewMetaData.XTYPE = 'colorpickercolorpreview';
+        colorpickercolorpreviewMetaData.PROPERTIESOBJECT = {
+            "alwaysOnTop": "Boolean/Number",
+            "ariaAttributes": "Object",
+            "ariaDescribedBy": "String",
+            "ariaLabel": "String",
+            "ariaLabelledBy": "String",
+            "axisLock": "Boolean",
+            "bind": "Object/String",
+            "border": "Boolean",
+            "bottom": "Number/String",
+            "centered": "Boolean",
+            "cls": "String/String[]",
+            "constrainAlign": "String/Ext.util.Region/Ext.dom.Element",
+            "contentEl": "Ext.dom.Element/HTMLElement/String",
+            "controller": "String/Object/Ext.app.ViewController",
+            "data": "Object",
+            "defaultListenerScope": "Boolean",
+            "disabled": "Boolean",
+            "displayed": "Boolean",
+            "docked": "String",
+            "draggable": "Boolean/Object/Ext.drag.Source",
+            "enterAnimation": "String/Mixed",
+            "eventHandlers": "Object",
+            "exitAnimation": "String/Mixed",
+            "flex": "Number/String/Object",
+            "floated": "Boolean",
+            "focusCls": "String",
+            "fullscreen": "Boolean",
+            "height": "Number/String",
+            "hidden": "Boolean",
+            "hideAnimation": "String/Mixed",
+            "hideMode": "'clip'/'display'/'offsets'/'opacity'/'visibility'",
+            "hideOnMaskTap": "Boolean",
+            "html": "String/Ext.dom.Element/HTMLElement",
+            "id": "String",
+            "instanceCls": "String/String[]",
+            "itemId": "String",
+            "keyMap": "Object",
+            "keyMapEnabled": "Boolean",
+            "keyMapTarget": "String",
+            "left": "Number/String",
+            "listeners": "Object",
+            "margin": "Number/String",
+            "maxHeight": "Number/String",
+            "maxWidth": "Number/String",
+            "minHeight": "Number/String",
+            "minWidth": "Number/String",
+            "modal": "Boolean",
+            "modelValidation": "Boolean",
+            "name": "String",
+            "nameable": "Boolean",
+            "padding": "Number/String",
+            "plugins": "Array/Ext.enums.Plugin/Object/Ext.plugin.Abstract",
+            "publishes": "String/String[]/Object",
+            "record": "Ext.data.Model",
+            "reference": "String",
+            "relative": "Boolean",
+            "renderTo": "Ext.dom.Element",
+            "right": "Number/String",
+            "ripple": "Boolean/Object/String",
+            "scrollable": "Boolean/String/Object",
+            "selfAlign": "String",
+            "session": "Boolean/Object/Ext.data.Session",
+            "shadow": "Boolean",
+            "shareableName": "Boolean",
+            "shim": "Boolean",
+            "showAnimation": "String/Mixed",
+            "stateful": "Boolean/Object/String[]",
+            "statefulDefaults": "Object/String[]",
+            "stateId": "String",
+            "style": "String/Object",
+            "tabIndex": "Number",
+            "toFrontOnShow": "Boolean",
+            "tooltip": "String/Object",
+            "top": "Number/String",
+            "touchAction": "Object",
+            "tpl": "String/String[]/Ext.Template/Ext.XTemplate[]",
+            "tplWriteMode": "String",
+            "translatable": "Object",
+            "twoWayBindable": "String/String[]/Object",
+            "ui": "String/String[]",
+            "userCls": "String/String[]",
+            "userSelectable": "Boolean/String/Object",
+            "viewModel": "String/Object/Ext.app.ViewModel",
+            "weight": "Number",
+            "width": "Number/String",
+            "x": "Number",
+            "xtype": "String",
+            "y": "Number",
+            "zIndex": "Number",
+            "platformConfig": "Object",
+            "responsiveConfig": "Object",
+            "fitToParent": "Boolean",
+            "config": "Object",
+        };
+        colorpickercolorpreviewMetaData.PROPERTIES = [
+            'alwaysOnTop',
+            'ariaAttributes',
+            'ariaDescribedBy',
+            'ariaLabel',
+            'ariaLabelledBy',
+            'axisLock',
+            'bind',
+            'border',
+            'bottom',
+            'centered',
+            'cls',
+            'constrainAlign',
+            'contentEl',
+            'controller',
+            'data',
+            'defaultListenerScope',
+            'disabled',
+            'displayed',
+            'docked',
+            'draggable',
+            'enterAnimation',
+            'eventHandlers',
+            'exitAnimation',
+            'flex',
+            'floated',
+            'focusCls',
+            'fullscreen',
+            'height',
+            'hidden',
+            'hideAnimation',
+            'hideMode',
+            'hideOnMaskTap',
+            'html',
+            'id',
+            'instanceCls',
+            'itemId',
+            'keyMap',
+            'keyMapEnabled',
+            'keyMapTarget',
+            'left',
+            'listeners',
+            'margin',
+            'maxHeight',
+            'maxWidth',
+            'minHeight',
+            'minWidth',
+            'modal',
+            'modelValidation',
+            'name',
+            'nameable',
+            'padding',
+            'plugins',
+            'publishes',
+            'record',
+            'reference',
+            'relative',
+            'renderTo',
+            'right',
+            'ripple',
+            'scrollable',
+            'selfAlign',
+            'session',
+            'shadow',
+            'shareableName',
+            'shim',
+            'showAnimation',
+            'stateful',
+            'statefulDefaults',
+            'stateId',
+            'style',
+            'tabIndex',
+            'toFrontOnShow',
+            'tooltip',
+            'top',
+            'touchAction',
+            'tpl',
+            'tplWriteMode',
+            'translatable',
+            'twoWayBindable',
+            'ui',
+            'userCls',
+            'userSelectable',
+            'viewModel',
+            'weight',
+            'width',
+            'x',
+            'xtype',
+            'y',
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'fitToParent',
+            'config'
+        ];
+        colorpickercolorpreviewMetaData.EVENTS = [
+            { name: 'added', parameters: 'sender,container,index' },
+            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehide', parameters: 'sender' },
+            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforetofront', parameters: 'colorpickercolorpreview' },
+            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'blur', parameters: 'colorpickercolorpreview,event' },
+            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'destroy', parameters: '' },
+            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'erased', parameters: 'sender' },
+            { name: 'floatingchange', parameters: 'sender,positioned' },
+            { name: 'focus', parameters: 'colorpickercolorpreview,event' },
+            { name: 'focusenter', parameters: 'colorpickercolorpreview,event' },
+            { name: 'focusleave', parameters: 'colorpickercolorpreview,event' },
+            { name: 'fullscreen', parameters: 'sender' },
+            { name: 'heightchange', parameters: 'sender,value,oldValue' },
+            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+            { name: 'hide', parameters: 'sender' },
+            { name: 'initialize', parameters: 'sender' },
+            { name: 'leftchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+            { name: 'orientationchange', parameters: '' },
+            { name: 'painted', parameters: 'sender,element' },
+            { name: 'positionedchange', parameters: 'sender,positioned' },
+            { name: 'removed', parameters: 'sender,container,index' },
+            { name: 'resize', parameters: 'element,info' },
+            { name: 'rightchange', parameters: 'sender,value,oldValue' },
+            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+            { name: 'show', parameters: 'sender' },
+            { name: 'tofront', parameters: 'colorpickercolorpreview' },
+            { name: 'topchange', parameters: 'sender,value,oldValue' },
+            { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'widthchange', parameters: 'sender,value,oldValue' },
+            { name: 'ready', parameters: '' }
+        ];
+        colorpickercolorpreviewMetaData.EVENTNAMES = [
+            'added',
+            'beforebottomchange',
+            'beforecenteredchange',
+            'beforedisabledchange',
+            'beforedockedchange',
+            'beforeheightchange',
+            'beforehiddenchange',
+            'beforehide',
+            'beforeleftchange',
+            'beforemaxHeightchange',
+            'beforemaxWidthchange',
+            'beforeminHeightchange',
+            'beforeminWidthchange',
+            'beforeorientationchange',
+            'beforerightchange',
+            'beforescrollablechange',
+            'beforeshow',
+            'beforetofront',
+            'beforetopchange',
+            'beforewidthchange',
+            'blur',
+            'bottomchange',
+            'centeredchange',
+            'destroy',
+            'disabledchange',
+            'dockedchange',
+            'erased',
+            'floatingchange',
+            'focus',
+            'focusenter',
+            'focusleave',
+            'fullscreen',
+            'heightchange',
+            'hiddenchange',
+            'hide',
+            'initialize',
+            'leftchange',
+            'maxHeightchange',
+            'maxWidthchange',
+            'minHeightchange',
+            'minWidthchange',
+            'moved',
+            'orientationchange',
+            'painted',
+            'positionedchange',
+            'removed',
+            'resize',
+            'rightchange',
+            'scrollablechange',
+            'show',
+            'tofront',
+            'topchange',
+            'updatedata',
+            'widthchange',
+            'ready'
+        ];
+        return colorpickercolorpreviewMetaData;
+    }());
+    var ExtColorpickercolorpreviewComponent = /** @class */ (function (_super) {
+        __extends(ExtColorpickercolorpreviewComponent, _super);
+        function ExtColorpickercolorpreviewComponent(eRef) {
+            return _super.call(this, eRef, colorpickercolorpreviewMetaData) || this;
+        }
+        /**
+         * @return {?}
+         */
+        ExtColorpickercolorpreviewComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () { this.baseOnInit(colorpickercolorpreviewMetaData); };
+        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+        /**
+         * @return {?}
+         */
+        ExtColorpickercolorpreviewComponent.prototype.ngAfterContentInit =
+            //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+            /**
+             * @return {?}
+             */
+            function () {
+                this.baseAfterContentInit();
+                this['ready'].emit(this);
+            };
+        ExtColorpickercolorpreviewComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'colorpickercolorpreview',
+                        inputs: colorpickercolorpreviewMetaData.PROPERTIES,
+                        outputs: colorpickercolorpreviewMetaData.EVENTNAMES,
+                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtColorpickercolorpreviewComponent; }) }],
+                        template: '<ng-template #dynamic></ng-template>'
+                    }] }
+        ];
+        /** @nocollapse */
+        ExtColorpickercolorpreviewComponent.ctorParameters = function () {
+            return [
+                { type: core.ElementRef }
+            ];
+        };
+        return ExtColorpickercolorpreviewComponent;
+    }(base));
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var colorfieldMetaData = /** @class */ (function () {
+        function colorfieldMetaData() {
+        }
+        colorfieldMetaData.XTYPE = 'colorfield';
+        colorfieldMetaData.PROPERTIESOBJECT = {
+            "alignTarget": "String",
+            "alphaDecimalFormat": "String",
+            "alwaysOnTop": "Boolean/Number",
+            "animateUnderline": "Boolean",
+            "ariaAttributes": "Object",
+            "ariaDescribedBy": "String",
+            "ariaLabel": "String",
+            "ariaLabelledBy": "String",
+            "autoCapitalize": "Boolean",
+            "autoComplete": "Boolean",
+            "autoCorrect": "Boolean",
+            "autoFitErrors": "Boolean",
+            "autoHideInputMask": "Boolean",
+            "axisLock": "Boolean",
+            "badFormatMessage": "String",
+            "bind": "Object/String",
+            "bodyAlign": "any",
+            "border": "Boolean",
+            "bottom": "Number/String",
+            "centered": "Boolean",
+            "clearable": "Boolean",
+            "cls": "String/String[]",
+            "color": "Object",
+            "constrainAlign": "String/Ext.util.Region/Ext.dom.Element",
+            "contentEl": "Ext.dom.Element/HTMLElement/String",
+            "controller": "String/Object/Ext.app.ViewController",
+            "data": "Object",
+            "defaultListenerScope": "Boolean",
+            "disabled": "Boolean",
+            "displayed": "Boolean",
+            "docked": "String",
+            "draggable": "Boolean/Object/Ext.drag.Source",
+            "edgePicker": "Object",
+            "editable": "Boolean",
+            "enterAnimation": "String/Mixed",
+            "error": "String/String[]",
+            "errorMessage": "String",
+            "errorTarget": "String",
+            "errorTip": "Object",
+            "errorTpl": "String/String[]/Ext.XTemplate",
+            "eventHandlers": "Object",
+            "exitAnimation": "String/Mixed",
+            "flex": "Number/String/Object",
+            "floated": "Boolean",
+            "floatedPicker": "Object",
+            "floatedPickerAlign": "String",
+            "focusCls": "String",
+            "focusTrap": "any",
+            "format": "'hex6'/'hex8'/'#hex6'/'#hex8'/'HEX6'/'HEX8'/'#HEX6'/'#HEX8'",
+            "fullscreen": "Boolean",
+            "height": "Number/String",
+            "hidden": "Boolean",
+            "hideAnimation": "String/Mixed",
+            "hideMode": "'clip'/'display'/'offsets'/'opacity'/'visibility'",
+            "hideOnMaskTap": "Boolean",
+            "hideTrigger": "Boolean",
+            "html": "String/Ext.dom.Element/HTMLElement",
+            "id": "String",
+            "inline": "Boolean",
+            "inputCls": "String",
+            "inputMask": "String/Ext.field.InputMask",
+            "inputType": "String",
+            "inputValue": "any",
+            "instanceCls": "String/String[]",
+            "itemId": "String",
+            "keyMap": "Object",
+            "keyMapEnabled": "Boolean",
+            "keyMapTarget": "String",
+            "label": "String",
+            "labelAlign": "'top'/'left'/'bottom'/'right'",
+            "labelCls": "String",
+            "labelInPlaceholder": "any",
+            "labelMinWidth": "Number/String",
+            "labelTextAlign": "'top'/'right'/'bottom'/'left'",
+            "labelWidth": "Number/String",
+            "labelWrap": "Boolean",
+            "left": "Number/String",
+            "listeners": "Object",
+            "margin": "Number/String",
+            "matchFieldWidth": "Boolean",
+            "maxHeight": "Number/String",
+            "maxLength": "Number",
+            "maxWidth": "Number/String",
+            "minHeight": "Number/String",
+            "minWidth": "Number/String",
+            "modal": "Boolean",
+            "modelValidation": "Boolean",
+            "name": "String",
+            "nameable": "Boolean",
+            "padding": "Number/String",
+            "parseValidator": "Ext.data.validator.Validator",
+            "pattern": "String",
+            "picker": "String/Object",
+            "pickerSlotAlign": "String",
+            "placeholder": "String",
+            "placeHolder": "String",
+            "plugins": "Array/Ext.enums.Plugin/Object/Ext.plugin.Abstract",
+            "popup": "Object",
+            "publishes": "String/String[]/Object",
+            "readOnly": "Boolean",
+            "record": "Ext.data.Model",
+            "reference": "String",
+            "relative": "Boolean",
+            "renderTo": "Ext.dom.Element",
+            "required": "Boolean",
+            "requiredMessage": "String",
+            "right": "Number/String",
+            "ripple": "Boolean/Object/String",
+            "scrollable": "Boolean/String/Object",
+            "selfAlign": "String",
+            "session": "Boolean/Object/Ext.data.Session",
+            "shadow": "Boolean",
+            "shareableName": "Boolean",
+            "shim": "Boolean",
+            "showAnimation": "String/Mixed",
+            "sideError": "String",
+            "stateful": "Boolean/Object/String[]",
+            "statefulDefaults": "Object/String[]",
+            "stateId": "String",
+            "style": "String/Object",
+            "tabIndex": "Number",
+            "textAlign": "'left'/'center'/'right'",
+            "tipError": "String",
+            "titleError": "String",
+            "toFrontOnShow": "Boolean",
+            "tooltip": "String/Object",
+            "top": "Number/String",
+            "touchAction": "Object",
+            "tpl": "String/String[]/Ext.Template/Ext.XTemplate[]",
+            "tplWriteMode": "String",
+            "translatable": "Object",
+            "triggers": "Object",
+            "twoWayBindable": "String/String[]/Object",
+            "ui": "String/String[]",
+            "underError": "String",
+            "userCls": "String/String[]",
+            "userSelectable": "Boolean/String/Object",
+            "validateDisabled": "Boolean",
+            "validationMessage": "String",
+            "validators": "Mixed",
+            "value": "Mixed",
+            "viewModel": "String/Object/Ext.app.ViewModel",
+            "weight": "Number",
+            "width": "Number/String",
+            "x": "Number",
+            "xtype": "String",
+            "y": "Number",
+            "zIndex": "Number",
+            "platformConfig": "Object",
+            "responsiveConfig": "Object",
+            "fitToParent": "Boolean",
+            "config": "Object",
+        };
+        colorfieldMetaData.PROPERTIES = [
+            'alignTarget',
+            'alphaDecimalFormat',
+            'alwaysOnTop',
+            'animateUnderline',
+            'ariaAttributes',
+            'ariaDescribedBy',
+            'ariaLabel',
+            'ariaLabelledBy',
+            'autoCapitalize',
+            'autoComplete',
+            'autoCorrect',
+            'autoFitErrors',
+            'autoHideInputMask',
+            'axisLock',
+            'badFormatMessage',
+            'bind',
+            'bodyAlign',
+            'border',
+            'bottom',
+            'centered',
+            'clearable',
+            'cls',
+            'color',
+            'constrainAlign',
+            'contentEl',
+            'controller',
+            'data',
+            'defaultListenerScope',
+            'disabled',
+            'displayed',
+            'docked',
+            'draggable',
+            'edgePicker',
+            'editable',
+            'enterAnimation',
+            'error',
+            'errorMessage',
+            'errorTarget',
+            'errorTip',
+            'errorTpl',
+            'eventHandlers',
+            'exitAnimation',
+            'flex',
+            'floated',
+            'floatedPicker',
+            'floatedPickerAlign',
+            'focusCls',
+            'focusTrap',
+            'format',
+            'fullscreen',
+            'height',
+            'hidden',
+            'hideAnimation',
+            'hideMode',
+            'hideOnMaskTap',
+            'hideTrigger',
+            'html',
+            'id',
+            'inline',
+            'inputCls',
+            'inputMask',
+            'inputType',
+            'inputValue',
+            'instanceCls',
+            'itemId',
+            'keyMap',
+            'keyMapEnabled',
+            'keyMapTarget',
+            'label',
+            'labelAlign',
+            'labelCls',
+            'labelInPlaceholder',
+            'labelMinWidth',
+            'labelTextAlign',
+            'labelWidth',
+            'labelWrap',
+            'left',
+            'listeners',
+            'margin',
+            'matchFieldWidth',
+            'maxHeight',
+            'maxLength',
+            'maxWidth',
+            'minHeight',
+            'minWidth',
+            'modal',
+            'modelValidation',
+            'name',
+            'nameable',
+            'padding',
+            'parseValidator',
+            'pattern',
+            'picker',
+            'pickerSlotAlign',
+            'placeholder',
+            'placeHolder',
+            'plugins',
+            'popup',
+            'publishes',
+            'readOnly',
+            'record',
+            'reference',
+            'relative',
+            'renderTo',
+            'required',
+            'requiredMessage',
+            'right',
+            'ripple',
+            'scrollable',
+            'selfAlign',
+            'session',
+            'shadow',
+            'shareableName',
+            'shim',
+            'showAnimation',
+            'sideError',
+            'stateful',
+            'statefulDefaults',
+            'stateId',
+            'style',
+            'tabIndex',
+            'textAlign',
+            'tipError',
+            'titleError',
+            'toFrontOnShow',
+            'tooltip',
+            'top',
+            'touchAction',
+            'tpl',
+            'tplWriteMode',
+            'translatable',
+            'triggers',
+            'twoWayBindable',
+            'ui',
+            'underError',
+            'userCls',
+            'userSelectable',
+            'validateDisabled',
+            'validationMessage',
+            'validators',
+            'value',
+            'viewModel',
+            'weight',
+            'width',
+            'x',
+            'xtype',
+            'y',
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'fitToParent',
+            'config'
+        ];
+        colorfieldMetaData.EVENTS = [
+            { name: 'action', parameters: 'colorfield,e' },
+            { name: 'added', parameters: 'sender,container,index' },
+            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehide', parameters: 'sender' },
+            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforetofront', parameters: 'colorfield' },
+            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'blur', parameters: 'colorfield,e' },
+            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'change', parameters: 'colorfield,color,previousColor' },
+            { name: 'clearicontap', parameters: 'colorfield,input,e' },
+            { name: 'click', parameters: 'e' },
+            { name: 'collapse', parameters: 'field' },
+            { name: 'destroy', parameters: '' },
+            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'erased', parameters: 'sender' },
+            { name: 'errorchange', parameters: 'colorfield,error' },
+            { name: 'expand', parameters: 'field' },
+            { name: 'floatingchange', parameters: 'sender,positioned' },
+            { name: 'focus', parameters: 'colorfield,e' },
+            { name: 'focusenter', parameters: 'colorfield,event' },
+            { name: 'focusleave', parameters: 'colorfield,event' },
+            { name: 'fullscreen', parameters: 'sender' },
+            { name: 'heightchange', parameters: 'sender,value,oldValue' },
+            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+            { name: 'hide', parameters: 'sender' },
+            { name: 'initialize', parameters: 'sender' },
+            { name: 'keyup', parameters: 'colorfield,e' },
+            { name: 'leftchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'mousedown', parameters: 'colorfield,e' },
+            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+            { name: 'orientationchange', parameters: '' },
+            { name: 'painted', parameters: 'sender,element' },
+            { name: 'paste', parameters: 'colorfield,e' },
+            { name: 'positionedchange', parameters: 'sender,positioned' },
+            { name: 'removed', parameters: 'sender,container,index' },
+            { name: 'resize', parameters: 'element,info' },
+            { name: 'rightchange', parameters: 'sender,value,oldValue' },
+            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+            { name: 'show', parameters: 'sender' },
+            { name: 'tofront', parameters: 'colorfield' },
+            { name: 'topchange', parameters: 'sender,value,oldValue' },
+            { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'widthchange', parameters: 'sender,value,oldValue' },
+            { name: 'ready', parameters: '' }
+        ];
+        colorfieldMetaData.EVENTNAMES = [
+            'action',
+            'added',
+            'beforebottomchange',
+            'beforecenteredchange',
+            'beforedisabledchange',
+            'beforedockedchange',
+            'beforeheightchange',
+            'beforehiddenchange',
+            'beforehide',
+            'beforeleftchange',
+            'beforemaxHeightchange',
+            'beforemaxWidthchange',
+            'beforeminHeightchange',
+            'beforeminWidthchange',
+            'beforeorientationchange',
+            'beforerightchange',
+            'beforescrollablechange',
+            'beforeshow',
+            'beforetofront',
+            'beforetopchange',
+            'beforewidthchange',
+            'blur',
+            'bottomchange',
+            'centeredchange',
+            'change',
+            'clearicontap',
+            'click',
+            'collapse',
+            'destroy',
+            'disabledchange',
+            'dockedchange',
+            'erased',
+            'errorchange',
+            'expand',
+            'floatingchange',
+            'focus',
+            'focusenter',
+            'focusleave',
+            'fullscreen',
+            'heightchange',
+            'hiddenchange',
+            'hide',
+            'initialize',
+            'keyup',
+            'leftchange',
+            'maxHeightchange',
+            'maxWidthchange',
+            'minHeightchange',
+            'minWidthchange',
+            'mousedown',
+            'moved',
+            'orientationchange',
+            'painted',
+            'paste',
+            'positionedchange',
+            'removed',
+            'resize',
+            'rightchange',
+            'scrollablechange',
+            'show',
+            'tofront',
+            'topchange',
+            'updatedata',
+            'widthchange',
+            'ready'
+        ];
+        return colorfieldMetaData;
+    }());
+    var ExtColorfieldComponent = /** @class */ (function (_super) {
+        __extends(ExtColorfieldComponent, _super);
+        function ExtColorfieldComponent(eRef) {
+            return _super.call(this, eRef, colorfieldMetaData) || this;
+        }
+        /**
+         * @return {?}
+         */
+        ExtColorfieldComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () { this.baseOnInit(colorfieldMetaData); };
+        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+        /**
+         * @return {?}
+         */
+        ExtColorfieldComponent.prototype.ngAfterContentInit =
+            //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+            /**
+             * @return {?}
+             */
+            function () {
+                this.baseAfterContentInit();
+                this['ready'].emit(this);
+            };
+        ExtColorfieldComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'colorfield',
+                        inputs: colorfieldMetaData.PROPERTIES,
+                        outputs: colorfieldMetaData.EVENTNAMES,
+                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtColorfieldComponent; }) }],
+                        template: '<ng-template #dynamic></ng-template>'
+                    }] }
+        ];
+        /** @nocollapse */
+        ExtColorfieldComponent.ctorParameters = function () {
+            return [
+                { type: core.ElementRef }
+            ];
+        };
+        return ExtColorfieldComponent;
+    }(base));
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var colorselectorMetaData = /** @class */ (function () {
+        function colorselectorMetaData() {
+        }
+        colorselectorMetaData.XTYPE = 'colorselector';
+        colorselectorMetaData.PROPERTIESOBJECT = {
+            "alphaDecimalFormat": "String",
+            "cancelButtonText": "String",
+            "color": "Object",
+            "fieldPad": "Number",
+            "fieldWidth": "Number",
+            "format": "'hex6'/'hex8'/'#hex6'/'#hex8'/'HEX6'/'HEX8'/'#HEX6'/'#HEX8'",
+            "okButtonText": "String",
+            "showOkCancelButtons": "Boolean",
+            "showPreviousColor": "Boolean",
+            "value": "String",
+            "platformConfig": "Object",
+            "responsiveConfig": "Object",
+            "fitToParent": "Boolean",
+            "config": "Object",
+        };
+        colorselectorMetaData.PROPERTIES = [
+            'alphaDecimalFormat',
+            'cancelButtonText',
+            'color',
+            'fieldPad',
+            'fieldWidth',
+            'format',
+            'okButtonText',
+            'showOkCancelButtons',
+            'showPreviousColor',
+            'value',
+            'platformConfig',
+            'responsiveConfig',
+            'fitToParent',
+            'config'
+        ];
+        colorselectorMetaData.EVENTS = [
+            { name: 'cancel', parameters: 'colorselector' },
+            { name: 'change', parameters: 'colorselector,color,previousColor' },
+            { name: 'ok', parameters: 'colorselector,color' },
+            { name: 'ready', parameters: '' }
+        ];
+        colorselectorMetaData.EVENTNAMES = [
+            'cancel',
+            'change',
+            'ok',
+            'ready'
+        ];
+        return colorselectorMetaData;
+    }());
+    var ExtColorselectorComponent = /** @class */ (function (_super) {
+        __extends(ExtColorselectorComponent, _super);
+        function ExtColorselectorComponent(eRef) {
+            return _super.call(this, eRef, colorselectorMetaData) || this;
+        }
+        /**
+         * @return {?}
+         */
+        ExtColorselectorComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () { this.baseOnInit(colorselectorMetaData); };
+        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+        /**
+         * @return {?}
+         */
+        ExtColorselectorComponent.prototype.ngAfterContentInit =
+            //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+            /**
+             * @return {?}
+             */
+            function () {
+                this.baseAfterContentInit();
+                this['ready'].emit(this);
+            };
+        ExtColorselectorComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'colorselector',
+                        inputs: colorselectorMetaData.PROPERTIES,
+                        outputs: colorselectorMetaData.EVENTNAMES,
+                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtColorselectorComponent; }) }],
+                        template: '<ng-template #dynamic></ng-template>'
+                    }] }
+        ];
+        /** @nocollapse */
+        ExtColorselectorComponent.ctorParameters = function () {
+            return [
+                { type: core.ElementRef }
+            ];
+        };
+        return ExtColorselectorComponent;
+    }(base));
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var gaugeMetaData = /** @class */ (function () {
         function gaugeMetaData() {
         }
@@ -93924,6 +95246,10 @@
                             ExtToolComponent,
                             ExtPaneltoolComponent,
                             ExtToolbarComponent,
+                            ExtColorbuttonComponent,
+                            ExtColorpickercolorpreviewComponent,
+                            ExtColorfieldComponent,
+                            ExtColorselectorComponent,
                             ExtGaugeComponent,
                             ExtMapComponent,
                             ExtGoogle_mapComponent,
@@ -94148,6 +95474,10 @@
                             ExtToolComponent,
                             ExtPaneltoolComponent,
                             ExtToolbarComponent,
+                            ExtColorbuttonComponent,
+                            ExtColorpickercolorpreviewComponent,
+                            ExtColorfieldComponent,
+                            ExtColorselectorComponent,
                             ExtGaugeComponent,
                             ExtMapComponent,
                             ExtGoogle_mapComponent,
@@ -94253,6 +95583,14 @@
     exports.ɵdp = chipviewMetaData;
     exports.ɵho = ExtCleartriggerComponent;
     exports.ɵhn = cleartriggerMetaData;
+    exports.ɵqm = ExtColorbuttonComponent;
+    exports.ɵql = colorbuttonMetaData;
+    exports.ɵqq = ExtColorfieldComponent;
+    exports.ɵqp = colorfieldMetaData;
+    exports.ɵqo = ExtColorpickercolorpreviewComponent;
+    exports.ɵqn = colorpickercolorpreviewMetaData;
+    exports.ɵqs = ExtColorselectorComponent;
+    exports.ɵqr = colorselectorMetaData;
     exports.ɵjo = ExtColumnComponent;
     exports.ɵjn = columnMetaData;
     exports.ɵfi = ExtComboboxComponent;
@@ -94337,10 +95675,10 @@
     exports.ɵgb = filefieldMetaData;
     exports.ɵik = ExtFormpanelComponent;
     exports.ɵij = formpanelMetaData;
-    exports.ɵqm = ExtGaugeComponent;
-    exports.ɵql = gaugeMetaData;
-    exports.ɵqq = ExtGoogle_mapComponent;
-    exports.ɵqp = google_mapMetaData;
+    exports.ɵqu = ExtGaugeComponent;
+    exports.ɵqt = gaugeMetaData;
+    exports.ɵqy = ExtGoogle_mapComponent;
+    exports.ɵqx = google_mapMetaData;
     exports.ɵke = ExtGridComponent;
     exports.ɵkd = gridMetaData;
     exports.ɵiq = ExtGridcellComponent;
@@ -94399,8 +95737,8 @@
     exports.ɵkh = lockedgridMetaData;
     exports.ɵkk = ExtLockedgridregionComponent;
     exports.ɵkj = lockedgridregionMetaData;
-    exports.ɵqo = ExtMapComponent;
-    exports.ɵqn = mapMetaData;
+    exports.ɵqw = ExtMapComponent;
+    exports.ɵqv = mapMetaData;
     exports.ɵlw = ExtMaskComponent;
     exports.ɵlv = maskMetaData;
     exports.ɵly = ExtMediaComponent;
@@ -94429,8 +95767,8 @@
     exports.ɵjt = numbercolumnMetaData;
     exports.ɵgk = ExtNumberfieldComponent;
     exports.ɵgj = numberfieldMetaData;
-    exports.ɵra = ExtOrgChartComponent;
-    exports.ɵqz = orgchartMetaData;
+    exports.ɵri = ExtOrgChartComponent;
+    exports.ɵrh = orgchartMetaData;
     exports.ɵkw = ExtPagingtoolbarComponent;
     exports.ɵkv = pagingtoolbarMetaData;
     exports.ɵmo = ExtPanelComponent;
@@ -94489,8 +95827,8 @@
     exports.ɵgr = radioMetaData;
     exports.ɵgu = ExtRadiofieldComponent;
     exports.ɵgt = radiofieldMetaData;
-    exports.ɵqs = ExtRatingComponent;
-    exports.ɵqr = ratingMetaData;
+    exports.ɵra = ExtRatingComponent;
+    exports.ɵqz = ratingMetaData;
     exports.ɵhw = ExtRevealtriggerComponent;
     exports.ɵhv = revealtriggerMetaData;
     exports.ɵla = ExtRowbodyComponent;
@@ -94591,8 +95929,8 @@
     exports.ɵqj = toolbarMetaData;
     exports.ɵqa = ExtTooltipComponent;
     exports.ɵpz = tooltipMetaData;
-    exports.ɵrc = ExtTransitionComponent;
-    exports.ɵrb = transitionMetaData;
+    exports.ɵrk = ExtTransitionComponent;
+    exports.ɵrj = transitionMetaData;
     exports.ɵlg = ExtTreeComponent;
     exports.ɵlf = treeMetaData;
     exports.ɵjc = ExtTreecellComponent;
@@ -94607,12 +95945,12 @@
     exports.ɵid = triggerMetaData;
     exports.ɵig = ExtUrlfieldComponent;
     exports.ɵif = urlfieldMetaData;
-    exports.ɵqu = ExtVideoComponent;
-    exports.ɵqt = videoMetaData;
-    exports.ɵqw = ExtViewportComponent;
-    exports.ɵqv = viewportMetaData;
-    exports.ɵqy = ExtWidgetComponent;
-    exports.ɵqx = widgetMetaData;
+    exports.ɵrc = ExtVideoComponent;
+    exports.ɵrb = videoMetaData;
+    exports.ɵre = ExtViewportComponent;
+    exports.ɵrd = viewportMetaData;
+    exports.ɵrg = ExtWidgetComponent;
+    exports.ɵrf = widgetMetaData;
     exports.ɵje = ExtWidgetcellComponent;
     exports.ɵjd = widgetcellMetaData;
     exports.ɵew = ExtWindowComponent;
