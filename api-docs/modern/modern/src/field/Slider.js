@@ -9,52 +9,45 @@
  * Sliders are equally useful inside {@link Ext.form.Panel forms} and standalone. Here's how to quickly create a
  * slider in form, in this case enabling a user to choose a percentage:
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, Container, FormPanel, SliderField } from '@extjs/ext-react';
+ *          @example packages=[angular]
+ *          import { Component } from '@angular/core'
+ *          declare var Ext: any;
  *
- *     export default class SliderFieldExample extends Component {
+ *          @Component({
+ *              selector: 'app-root-1',
+ *              styles: [``],
+ *              template: `
+ *                  <container #item [layout]="'center'">
+ *                      <formpanel #item [shadow]="true" [width]="400" [height]="300">
+ *                          <sliderfield #item
+ *                              (change)="onSingleChange($event)"
+ *                              label="Single Thumb"
+ *                              [value]="singleValue"
+ *                          ></sliderfield>
+ *                          <container #item [style]="{marginBottom: 20}" [html]="'Value: '+singleValue"></container>
+ *                          <sliderfield #item
+ *                              (change)="onMultipleChange($event)"
+ *                              label="Multiple Thumbs"
+ *                              [value]="multipleValue"
+ *                          ></sliderfield>
+ *                          <container #item [html]="'Values: '+multipleValue.join(', ')"></container>
+ *                      </formpanel>
+ *                  </container>
+ *              `
+ *          })
+ *          export class AppComponent {
+ *              singleValue:number = 20;
+ *              multipleValue:number[] = [10, 70];
  *
- *         state = {
- *             singleValue: 20,
- *             multipleValue: [10, 70]
- *         };
- *
- *         onSingleChange = (field, value) => {
- *             this.setState({ singleValue: value });
- *         }
- *
- *         onMultipleChange = (field, value) => {
- *             this.setState({ multipleValue: value });
- *         }
- *
- *         render() {
- *             const { singleValue, multipleValue } = this.state;
- *
- *             return (
- *                 <ExtReact>
- *                     <Container layout="center">
- *                         <FormPanel shadow width="300">
- *                             <SliderField
- *                                 onChange={this.onSingleChange}
- *                                 label="Single Thumb"
- *                                 value={singleValue}
- *                             />
- *                             <div style={{marginBottom: '20px'}}>Value: {singleValue}</div>
- *                             <SliderField
- *                                 onChange={this.onMultipleChange}
- *                                 label="Multiple Thumbs"
- *                                 values={multipleValue}
- *                             />
- *                             <div>Values: {multipleValue.join(', ')}</div>
- *                         </FormPanel>
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *
- *     }
- *
+ *              onSingleChange = (params) => {
+ *                  this.singleValue = params.newValue;
+ *              }
+ *                     
+ *              onMultipleChange = (params) => {
+ *                  this.multipleValue = params.newValue;
+ *              }
+ *          }
+ * 
  */
 
 /**
