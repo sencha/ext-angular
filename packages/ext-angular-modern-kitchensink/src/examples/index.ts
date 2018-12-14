@@ -17,6 +17,7 @@ import {ProgressBarComponent} from './ProgressBar/ProgressBar';
 import {TitleBarComponent} from './TitleBar/TitleBar';
 import {ToolBarComponent} from './ToolBar/ToolBar';
 import {ToolTipComponent} from './ToolTip/ToolTip';
+import {ColorPickerComponent} from './ColorPicker/ColorPicker';
 
 import {EditableTreeComponent} from './Trees/EditableTree/EditableTree';
 import {HeterogeneousTreeComponent} from './Trees/HeterogeneousTree/HeterogeneousTree';
@@ -204,6 +205,9 @@ const treeRoot = {
                 { text: 'Button', component: ButtonComponent, layout: 'center', navIcon: 'icon-buttons' },
                 { text: 'SegmentedButton', component: SegmentedButtonComponent, layout: 'center', navIcon: 'icon-segmented-buttons' },
                 { text: 'SplitButton', component: SplitButtonComponent, layout: 'center', navIcon: 'icon-buttons' },
+            ]},
+            { text: 'Color Picker', navIcon: 'icon-color-picker', children: [
+                { text: 'Basic', component: ColorPickerComponent, layout: 'center', navIcon: 'icon-color-picker' }
             ]},
             { text: 'Carousel', component: CarouselComponent, navIcon: 'icon-carousel' },
             { text: 'Drag & Drop', navIcon: 'icon-drag-drop', children: [

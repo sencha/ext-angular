@@ -42,6 +42,10 @@ export { ExtCheckcolumnComponent as ɵjk, checkcolumnMetaData as ɵjj } from './
 export { ExtChipComponent as ɵco, chipMetaData as ɵcn } from './lib/ext-chip.component';
 export { ExtChipviewComponent as ɵdq, chipviewMetaData as ɵdp } from './lib/ext-chipview.component';
 export { ExtCleartriggerComponent as ɵho, cleartriggerMetaData as ɵhn } from './lib/ext-cleartrigger.component';
+export { ExtColorbuttonComponent as ɵqm, colorbuttonMetaData as ɵql } from './lib/ext-colorbutton.component';
+export { ExtColorfieldComponent as ɵqq, colorfieldMetaData as ɵqp } from './lib/ext-colorfield.component';
+export { ExtColorpickercolorpreviewComponent as ɵqo, colorpickercolorpreviewMetaData as ɵqn } from './lib/ext-colorpickercolorpreview.component';
+export { ExtColorselectorComponent as ɵqs, colorselectorMetaData as ɵqr } from './lib/ext-colorselector.component';
 export { ExtColumnComponent as ɵjo, columnMetaData as ɵjn } from './lib/ext-column.component';
 export { ExtComboboxComponent as ɵfi, comboboxMetaData as ɵfh } from './lib/ext-combobox.component';
 export { ExtComboboxfieldComponent as ɵfk, comboboxfieldMetaData as ɵfj } from './lib/ext-comboboxfield.component';
@@ -84,8 +88,8 @@ export { ExtFieldsetComponent as ɵii, fieldsetMetaData as ɵih } from './lib/ex
 export { ExtFilebuttonComponent as ɵge, filebuttonMetaData as ɵgd } from './lib/ext-filebutton.component';
 export { ExtFilefieldComponent as ɵgc, filefieldMetaData as ɵgb } from './lib/ext-filefield.component';
 export { ExtFormpanelComponent as ɵik, formpanelMetaData as ɵij } from './lib/ext-formpanel.component';
-export { ExtGaugeComponent as ɵqm, gaugeMetaData as ɵql } from './lib/ext-gauge.component';
-export { ExtGoogle_mapComponent as ɵqq, google_mapMetaData as ɵqp } from './lib/ext-google-map.component';
+export { ExtGaugeComponent as ɵqu, gaugeMetaData as ɵqt } from './lib/ext-gauge.component';
+export { ExtGoogle_mapComponent as ɵqy, google_mapMetaData as ɵqx } from './lib/ext-google-map.component';
 export { ExtGridComponent as ɵke, gridMetaData as ɵkd } from './lib/ext-grid.component';
 export { ExtGridcellComponent as ɵiq, gridcellMetaData as ɵip } from './lib/ext-gridcell.component';
 export { ExtGridcellbaseComponent as ɵim, gridcellbaseMetaData as ɵil } from './lib/ext-gridcellbase.component';
@@ -115,7 +119,7 @@ export { ExtListswiperstepperComponent as ɵek, listswiperstepperMetaData as ɵe
 export { ExtLoadmaskComponent as ɵlu, loadmaskMetaData as ɵlt } from './lib/ext-loadmask.component';
 export { ExtLockedgridComponent as ɵki, lockedgridMetaData as ɵkh } from './lib/ext-lockedgrid.component';
 export { ExtLockedgridregionComponent as ɵkk, lockedgridregionMetaData as ɵkj } from './lib/ext-lockedgridregion.component';
-export { ExtMapComponent as ɵqo, mapMetaData as ɵqn } from './lib/ext-map.component';
+export { ExtMapComponent as ɵqw, mapMetaData as ɵqv } from './lib/ext-map.component';
 export { ExtMaskComponent as ɵlw, maskMetaData as ɵlv } from './lib/ext-mask.component';
 export { ExtMediaComponent as ɵly, mediaMetaData as ɵlx } from './lib/ext-media.component';
 export { ExtMenuComponent as ɵme, menuMetaData as ɵmd } from './lib/ext-menu.component';
@@ -130,7 +134,7 @@ export { ExtNestedlistComponent as ɵem, nestedlistMetaData as ɵel } from './li
 export { ExtNumbercellComponent as ɵiw, numbercellMetaData as ɵiv } from './lib/ext-numbercell.component';
 export { ExtNumbercolumnComponent as ɵju, numbercolumnMetaData as ɵjt } from './lib/ext-numbercolumn.component';
 export { ExtNumberfieldComponent as ɵgk, numberfieldMetaData as ɵgj } from './lib/ext-numberfield.component';
-export { ExtOrgChartComponent as ɵra, orgchartMetaData as ɵqz } from './lib/ext-orgchart.component';
+export { ExtOrgChartComponent as ɵri, orgchartMetaData as ɵrh } from './lib/ext-orgchart.component';
 export { ExtPagingtoolbarComponent as ɵkw, pagingtoolbarMetaData as ɵkv } from './lib/ext-pagingtoolbar.component';
 export { ExtPanelComponent as ɵmo, panelMetaData as ɵmn } from './lib/ext-panel.component';
 export { ExtPanelheaderComponent as ɵmu, panelheaderMetaData as ɵmt } from './lib/ext-panelheader.component';
@@ -160,7 +164,7 @@ export { ExtPullrefreshbarComponent as ɵeo, pullrefreshbarMetaData as ɵen } fr
 export { ExtPullrefreshspinnerComponent as ɵeq, pullrefreshspinnerMetaData as ɵep } from './lib/ext-pullrefreshspinner.component';
 export { ExtRadioComponent as ɵgs, radioMetaData as ɵgr } from './lib/ext-radio.component';
 export { ExtRadiofieldComponent as ɵgu, radiofieldMetaData as ɵgt } from './lib/ext-radiofield.component';
-export { ExtRatingComponent as ɵqs, ratingMetaData as ɵqr } from './lib/ext-rating.component';
+export { ExtRatingComponent as ɵra, ratingMetaData as ɵqz } from './lib/ext-rating.component';
 export { ExtRevealtriggerComponent as ɵhw, revealtriggerMetaData as ɵhv } from './lib/ext-revealtrigger.component';
 export { ExtRowbodyComponent as ɵla, rowbodyMetaData as ɵkz } from './lib/ext-rowbody.component';
 export { ExtRowheaderComponent as ɵlc, rowheaderMetaData as ɵlb } from './lib/ext-rowheader.component';
@@ -211,7 +215,7 @@ export { ExtTogglesliderComponent as ɵoy, togglesliderMetaData as ɵox } from '
 export { ExtToolComponent as ɵqg, toolMetaData as ɵqf } from './lib/ext-tool.component';
 export { ExtToolbarComponent as ɵqk, toolbarMetaData as ɵqj } from './lib/ext-toolbar.component';
 export { ExtTooltipComponent as ɵqa, tooltipMetaData as ɵpz } from './lib/ext-tooltip.component';
-export { ExtTransitionComponent as ɵrc, transitionMetaData as ɵrb } from './lib/ext-transition.component';
+export { ExtTransitionComponent as ɵrk, transitionMetaData as ɵrj } from './lib/ext-transition.component';
 export { ExtTreeComponent as ɵlg, treeMetaData as ɵlf } from './lib/ext-tree.component';
 export { ExtTreecellComponent as ɵjc, treecellMetaData as ɵjb } from './lib/ext-treecell.component';
 export { ExtTreecolumnComponent as ɵkc, treecolumnMetaData as ɵkb } from './lib/ext-treecolumn.component';
@@ -219,9 +223,9 @@ export { ExtTreelistComponent as ɵlq, treelistMetaData as ɵlp } from './lib/ex
 export { ExtTreelistitemComponent as ɵls, treelistitemMetaData as ɵlr } from './lib/ext-treelistitem.component';
 export { ExtTriggerComponent as ɵie, triggerMetaData as ɵid } from './lib/ext-trigger.component';
 export { ExtUrlfieldComponent as ɵig, urlfieldMetaData as ɵif } from './lib/ext-urlfield.component';
-export { ExtVideoComponent as ɵqu, videoMetaData as ɵqt } from './lib/ext-video.component';
-export { ExtViewportComponent as ɵqw, viewportMetaData as ɵqv } from './lib/ext-viewport.component';
-export { ExtWidgetComponent as ɵqy, widgetMetaData as ɵqx } from './lib/ext-widget.component';
+export { ExtVideoComponent as ɵrc, videoMetaData as ɵrb } from './lib/ext-video.component';
+export { ExtViewportComponent as ɵre, viewportMetaData as ɵrd } from './lib/ext-viewport.component';
+export { ExtWidgetComponent as ɵrg, widgetMetaData as ɵrf } from './lib/ext-widget.component';
 export { ExtWidgetcellComponent as ɵje, widgetcellMetaData as ɵjd } from './lib/ext-widgetcell.component';
 export { ExtWindowComponent as ɵew, windowMetaData as ɵev } from './lib/ext-window.component';
 export { ExtYearpickerComponent as ɵna, yearpickerMetaData as ɵmz } from './lib/ext-yearpicker.component';
