@@ -16,6 +16,31 @@ export class ColorPickerComponent implements OnInit {
   ngOnInit() {
   }
 
-   isPhone = Ext.os.is.Phone;
+
+  onShowMoreLess = (button) => {
+    //this.getViewModel().set('full', button.getValue());
+}
+
+
+onChange: (picker) => {
+    //console.log(picker.getId() + '.color: ' + picker.getValue());
+}
+
+   isPhone = Ext.platformTags.phone ? true : false;
+
+   panelHeader =  {
+    hidden: this.isPhone ? true : false,
+    items: [{
+        xtype: 'component',
+        html: 'colorbutton &#8680;'
+    }, {
+        xtype: 'colorbutton',
+        width: Ext.platformTags.phone ? 25 : 15,
+        height: Ext.platformTags.phone ? 25 : 15,
+        listeners: {
+            change: 'onChange'
+        }
+    }]
+};
 
 }
