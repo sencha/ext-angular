@@ -12,6 +12,7 @@ export class ColorPickerComponent implements OnInit {
   constructor() { }
 
 
+    color:string = '#0f0';
 
   ngOnInit() {
   }
@@ -22,9 +23,10 @@ export class ColorPickerComponent implements OnInit {
 }
 
 
-onChange: (picker) => {
-    //console.log(picker.getId() + '.color: ' + picker.getValue());
-}
+    onChange= (picker) => {
+        this.color = picker.getValue();
+        console.log("this.color: " + this.color);
+    }
 
    isPhone = Ext.platformTags.phone ? true : false;
 
@@ -38,7 +40,7 @@ onChange: (picker) => {
         width: Ext.platformTags.phone ? 25 : 15,
         height: Ext.platformTags.phone ? 25 : 15,
         listeners: {
-            change: 'onChange'
+            change: this.onChange
         }
     }]
 };
