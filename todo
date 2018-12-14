@@ -27,6 +27,9 @@ Issues
  - (major) Tabs: All components are not rendering. Error: Adding a card to a tab container without specifying any tab configuration
 - ExtAngular components that use Angular structural directives (e.g. ngFor, ngIf) do not dynamically update when their bound data changes.  This is preventing the following from working as desired - Code Preview (you muist reload the page to see the correct code preview panels).
 
+Issues (Alisha) in api-docs examples: 
+- selectfield not working for CellEditing and editable grid plugins.
+
 
 Fixed
  - TouchEvents: Events list is not updated (using *ngFor rendering)
