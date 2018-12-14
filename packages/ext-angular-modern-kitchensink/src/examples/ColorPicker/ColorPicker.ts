@@ -29,9 +29,22 @@ export class ColorPickerComponent implements OnInit {
         console.log(" onChange :: this.color: " + this.color);
     }
 
+    panel : any;
+
     OnSelChange = (event) => {
         this.color = event.color;
         console.log(" OnSelChange :: this.color: " + this.color);
+        if(this.panel) {
+            var header = this.panel.getHeader();
+            //this.panel.setHeader(header);
+        }
+
+    }
+
+
+    onPanelReady = (event) => {
+        console.log("onPanelReady");
+        this.panel = event.ext;
     }
 
    isPhone = Ext.platformTags.phone ? true : false;
@@ -47,7 +60,8 @@ export class ColorPickerComponent implements OnInit {
         height: Ext.platformTags.phone ? 25 : 15,
         listeners: {
             change: this.onChange
-        }
+        },
+        bind: this.color
     }]
 };
 
