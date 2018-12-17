@@ -29,45 +29,44 @@
  * + {@link Ext.data.summary.Sum sum}
  *
  *
- *      @example packages=[reactor]
- *      import React, { Component } from 'react'
- *      import { ExtReact, Grid, Column } from '@extjs/ext-react';
+ *            @example packages=[angular]
+ *            import { Component } from '@angular/core'
+ *            declare var Ext: any;
  * 
- *      Ext.require('Ext.grid.plugin.Summary');
- *
- *      export default class MyExample extends Component {
- *
- *          store = new Ext.data.Store({
- *              data: [
- *                  { 'fname': 'Barry', 'lname': 'Allen', 'talent': 'Speedster', 'wins': 150 },
- *                  { 'fname': 'Oliver', 'lname': 'Queen', 'talent': 'Archery', 'wins': 27 },
- *                  { 'fname': 'Kara', 'lname': 'Zor-El', 'talent': 'All', 'wins': 75 },
- *                  { 'fname': 'Helena', 'lname': 'Bertinelli', 'talent': 'Weapons Expert', 'wins': 7 },
- *                  { 'fname': 'Hal', 'lname': 'Jordan', 'talent': 'Willpower', 'wins': 198 }
- *              ]
- *          });
+ *            Ext.require('Ext.grid.plugin.Summary');
+ *            @Component({
+ *                selector: 'app-root-1',
+ *                styles: [`
+ *                        `],
+ *                template: `
+ *                    <grid #item
+ *                        [height]="'275px'"
+ *                        [store]="this.store"
+ *                        [plugins]="['gridsummaryrow']"
+ *                    >
+ *                        <column #item text="First Name" dataIndex="fname" flex="1"></column>
+ *                        <column #item text="Last Name" dataIndex="lname" flex="1"></column>
+ *                        <column #item text="Talent" dataIndex="talent" flex="1"></column>
+ *                        <column #item text="Wins" dataIndex="wins" flex="1" summary="sum"></column>
+ *                    </grid>
+ *                `
+ *            })
+ *            export class AppComponent {
+ *                store = Ext.create('Ext.data.Store', {
+ *                    data: [
+ *                        { 'fname': 'Barry', 'lname': 'Allen', 'talent': 'Speedster', 'wins': 150 },
+ *                        { 'fname': 'Oliver', 'lname': 'Queen', 'talent': 'Archery', 'wins': 27 },
+ *                        { 'fname': 'Kara', 'lname': 'Zor-El', 'talent': 'All', 'wins': 75 },
+ *                        { 'fname': 'Helena', 'lname': 'Bertinelli', 'talent': 'Weapons Expert', 'wins': 7 },
+ *                        { 'fname': 'Hal', 'lname': 'Jordan', 'talent': 'Willpower', 'wins': 198 }
+ *                    ]
+ *                });
+ *            }
  *      
- *          render() {
- *              return (
- *                  <ExtReact>
- *                      <Grid
- *                          height="275"
- *                          store={this.store}
- *                          plugins={['gridsummaryrow']}
- *                      >
- *                          <Column text="First Name" dataIndex="fname" flex={1} />
- *                          <Column text="Last Name" dataIndex="lname" flex={1} />
- *                          <Column text="Talent" dataIndex="talent" flex={1} />
- *                          <Column text="Wins" dataIndex="wins" flex={1} summary="sum" />
- *                      </Grid>
- *                  </ExtReact>
- *              )
- *          }
- *      }
  */
 
 /**
- * @cfg {Ext.grid.SummaryRow/Object} row
+ * * @cfg {Ext.grid.SummaryRow/Object} row
  * The configuration object for the docked summary row managed by this plugin.
  * @since 6.5.0
  * @accessor

@@ -16,58 +16,63 @@
  * Customizing the RowOperations plugin to provide operations other then "Delete" can
  * be done with the `operation` config:
  *
- *      @example packages = [reactor]
- *      import React, { Component } from 'react'
- *      import { ExtReact, Grid, Column } from '@extjs/ext-react';
+ *            @example packages=[angular]
+ *            import { Component } from '@angular/core'
+ *            declare var Ext: any;
  *
- *      Ext.require('Ext.grid.plugin.RowOperations');
+ *            Ext.require('Ext.grid.plugin.RowOperations');
+ *            @Component({
+ *                selector: 'app-root-1',
+ *                styles: [`
+ *                        `],
+ *                template: `
+ *                    <grid #item
+ *                        [height]="'600px'"
+ *                        (ready)="gridReady($event)"
+ *                        [store]="store"
+ *                        [fullscreen]="true"
+ *                        title="People"
+ *                        [plugins]="{
+ *                            rowoperations: {
+ *                                operation: {
+ *                                    text: 'Archive',
+ *                                    handler: this.archiveSelected,
+ *                                    ui: 'alt'
+ *                                }
+ *                            }
+ *                        }"
+ *                    >
+ *                        <column #item text="First Name" dataIndex="fname" flex="1"></column>
+ *                        <column #item text="Last Name" dataIndex="lname" flex="1"></column>
+ *                        <column #item text="Talent" dataIndex="talent" flex="1"></column>
+ *                   </grid>
+ *            `
+ *            })
+ *            export class AppComponent {
+ *                gridRef:any;
+ *                store = Ext.create('Ext.data.Store', {
+ *                    data: [
+ *                        { 'fname': 'Barry', 'lname': 'Allen', 'talent': 'Speedster' },
+ *                        { 'fname': 'Oliver', 'lname': 'Queen', 'talent': 'Archery' },
+ *                        { 'fname': 'Kara', 'lname': 'Zor-El', 'talent': 'All' },
+ *                        { 'fname': 'Helena', 'lname': 'Bertinelli', 'talent': 'Weapons Expert' },
+ *                        { 'fname': 'Hal', 'lname': 'Jordan', 'talent': 'Willpower' },
+ *                    ]
+ *                });
  *
- *      export default class MyExample extends Component {
+ *                gridReady = (ele) => {
+ *                    this.gridRef = ele.ext;
+ *                }
  *
- *          store = new Ext.data.Store({
- *              data: [
- *                  { 'fname': 'Barry', 'lname': 'Allen', 'talent': 'Speedster' },
- *                  { 'fname': 'Oliver', 'lname': 'Queen', 'talent': 'Archery' },
- *                  { 'fname': 'Kara', 'lname': 'Zor-El', 'talent': 'All' },
- *                  { 'fname': 'Helena', 'lname': 'Bertinelli', 'talent': 'Weapons Expert' },
- *                  { 'fname': 'Hal', 'lname': 'Jordan', 'talent': 'Willpower' }
- *              ]
- *          });
- *      
- *          render() {
- *              return (
- *                  <ExtReact>
- *                      <Grid
- *                          ref={grid => this.grid = grid}
- *                          store={this.store}
- *                          title="People"
- *                          fullscreen
- *                          plugins={{
- *                              rowoperations: {
- *                                  operation: {
- *                                      text: "Archive",
- *                                      handler: this.archiveSelected,
- *                                      ui: "alt"
- *                                  }
- *                              }
- *                          }}
- *                      >
- *                          <Column text="First Name" dataIndex="fname" flex="1" />
- *                          <Column text="Last Name" dataIndex="lname" flex="1" />
- *                          <Column text="Talent" dataIndex="talent" flex="1" />
- *                      </Grid>
- *                  </ExtReact>
- *              )
- *          }
- *      
- *          archiveSelected = () => {
- *              const selected = this.grid.getSelected().items
- *                  .map(record => `${record.get('fname')} ${record.get('lname')}`)
- *                  .join(', ');
- *      
- *              console.log(`Archived ${selected}`)
- *          }
- *      }
+ *                archiveSelected = () => {
+ *                    const selected = this.gridRef.getSelected().items
+ *                        .map(record => `${record.get('fname')} ${record.get('lname')}`)
+ *                       .join(', ');
+ *                       
+ *                    console.log(`Archived ${selected}`)
+ *                }
+ *            }
+ *
  * 
  * Since the `operation` is a {@link Ext.Button button}, multiple operations can easily be
  * provided using the button's  {@link Ext.Button#cfg!menu menu}.
