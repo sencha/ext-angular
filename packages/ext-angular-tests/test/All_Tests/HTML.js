@@ -5,7 +5,7 @@ describe("HTML", () => {
         
         // verify that .x-react-element class is assigned to wrapper component
         ST.element('>> #container .x-react-element').visible();
-        
-        ST.element('>> #html').text('test');
+
+        ST.element('@html').innerText == "html";
     });
 });

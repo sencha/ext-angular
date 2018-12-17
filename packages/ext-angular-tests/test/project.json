@@ -12,6 +12,6 @@
             "name": "All Tests"
         }
     ],
-    "subjectUrl": "http://localhost:4200/simple",
+    "subjectUrl": "http://localhost:4200/events",
     "pageObjects": []
 }
