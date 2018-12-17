@@ -21,7 +21,7 @@
                         >
                              <gauge #item flex="1" [value]="needleValue" 
                                 [needle]="{outerRadius: '100%'}"
-                                [valueStyle]="{display: 'none'}
+                                [valueStyle]="{display: 'none'}"
                             ></gauge>
                         </container>
                     </formpanel>
