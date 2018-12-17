@@ -1,21 +1,22 @@
 <tabpanel #item
-[flex]="1" 
-    shadow="true" 
+    [width]="400"
+    [flex]="1"
+    [height]="400"
+    [shadow]="true"
     [tabBar]="{
-        layout: {
-            pack: 'start',
-            overflow: 'scroller'
-        }
+        layout: {pack: 'start',
+        overflow: 'scroller'}
+        
+      }"
+
+    [defaults]="{
+        layout: 'center',
+        cls: 'card',
+        bodyPadding: 0
     }"
-    [platformConfig]="{
-        '!phone': {
-            height: 600,
-            width: 400 
-        }
-    }"
-    [defaults]="tabpanelDefaults"
 >
-    <panel [flex]="1"  #item [title]="'Home'" [layout]="'center'" >
+>
+    <panel [flex]="1"  #item [title]="'Home'" [layout]="'center'" [width]="100">
         <container #item width="'100%'" html="'You can set <code>{layout: { overflow: \'scroller\' }}</code> on the <code>tabBar</code> prop in combination with a <code>minWidth</code> on each tab to make the tab bar scroll when it runs out of room.'">
         </container>
     </panel>
