@@ -153,30 +153,28 @@
  * 
  * Example usage:
  *
- *      @example
- *      import React, { Component } from 'react';
- *      import { ExtReact, SliderField, Gauge, FormPanel } from '@extjs/ext-react';
- *      export default class GaugeExample extends Component {
- *          constructor() {
- *              super();
- *              this.state = {
- *                  value: 40
- *              }
- *          }
- *          updateGauges(slider, value) {
- *              this.setState({ value })
- *          }
- *          render() {
- *              const { value } = this.state;
- *              return (
- *                  <ExtReact>
- *                      <FormPanel shadow layout="vbox" maxWidth={350}>
- *                          <SliderField label="Value" onChange={this.updateGauges.bind(this)} value={value}/>
- *                          <Gauge flex={1} value={value}/>
- *                          <Gauge flex={1} value={value} trackStart={180} trackLength={360}/>
- *                      </FormPanel>
- *                  </ExtReact>
- *              )
- *          }
- *      }
+ *        @example
+ *        import { Component } from '@angular/core'
+ *        declare var Ext: any;
+ *
+ *        @Component({
+ *            selector: 'app-root-1',
+ *            styles: [`
+ *                    `],
+ *            template: `
+ *                <formpanel #item shadow="true" layout="vbox" maxWidth="350">
+ *                        <sliderfield #item label="Value" (change)="updateGauges($event)" [value]="needleValue">
+ *                        </sliderfield>
+ *                        <gauge #item flex="1" [value]="needleValue"></gauge>
+ *                        <gauge #item flex="1" [value]="needleValue" [trackStart]="180" [trackLength]="360"></gauge>
+ *                </formpanel>
+ *            `
+ *        })
+ *        export class AppComponent {
+ *            needleValue:number = 40;
+ *            
+ *            updateGauges = (param) => {
+ *                this.needleValue = param.newValue;
+ *            }
+ *        }
  */
