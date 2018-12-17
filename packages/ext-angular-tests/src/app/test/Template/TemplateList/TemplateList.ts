@@ -17,7 +17,7 @@ export class TemplateListComponent implements OnInit {
     });
 
     itemTpl =
-        `<div>
+        `<div #item >
             <span #item className="text">{first} {last}</span>
             <button #item itemId="button" text="Button"></button>
         </div>`;

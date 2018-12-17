@@ -1,0 +1,23 @@
+<container #item layout="vbox">
+        <div #item>This tests that grid columns, cells, and widgets can be defined using children.  The test should pass if both columns show up and the sparkline is rendered.</div>
+        <grid #item
+            itemId="grid"
+            flex="1"
+            [store]="store"
+            [itemConfig]="{
+                viewModel: {
+                  
+                }
+            }"
+        >
+            <column #item text="Name">
+                <column #item text="First" dataIndex="first"></column>
+                <column #item text="Last" dataIndex="last"></column>
+            </column>
+            <column #item text="Trend" dataIndex="trend">
+                <widgetcell #item forceWidth>
+                    <sparklineline #item itemId="sparkLine"></sparklineline>
+                </widgetcell>
+            </column>
+        </grid>
+    </container>

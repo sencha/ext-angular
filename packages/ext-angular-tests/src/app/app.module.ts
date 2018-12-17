@@ -40,7 +40,7 @@ import { LifecycleUnmountComponent } from './test/Lifecycle/LifecycleUnmount';
 import { MyComponent } from './test/Lifecycle/MyComponent/MyComponent';
 import { SimplePropUpdateComponent } from './test/Props/SimplePropUpdate/SimplePropUpdate';
 import { UpdateClassNameComponent } from './test/Props/UpdateClassName/UpdateClassName';
-import { RendererCellTestComponent } from './test/Renderer/RendererCellTest/RendererCelltest';
+import { RendererCellTestComponent } from './test/Renderer/RendererCellTest/RendererCellTest';
 import { CellComponent } from './test/Renderer/Cell/Cell';
 import { TemplateGridComponent } from './test/Template/TemplateGrid/TemplateGrid';
 import { TemplateListComponent } from './test/Template/TemplateList/TemplateList';
@@ -51,6 +51,14 @@ import { ReplaceNodeWithMarkupComponent } from './test/ReplaceNodeWithMarkup/Rep
 import { ResponsiveComponent } from './test/Responsive/Responsive';
 import { SenchaTestHooksComponent } from './test/SenchaTestHooks/SenchaTestHooks';
 import { UpdateFunctionsComponent } from './test/UpdateFunctions/UpdateFunctions';
+import { RelComponent } from './test/Rel/RelComponent/RelComponent';
+import { RelArrayDeleteComponent } from './test/Rel/RelArrayDelete/RelArrayDelete';
+import { RelDialogComponent } from './test/Rel/RelDialog/RelDialog';
+import { RelEditorComponent } from './test/Rel/RelEditor/RelEditor';
+import { RelGridColumnComponent } from './test/Rel/RelGridColumn/RelGridColumn';
+import { RelMenuComponent } from './test/Rel/RelMenu/RelMenu';
+import { RelTooltipComponent } from './test/Rel/RelTooltip/RelTooltip';
+import { RelUpdateComponent } from './test/Rel/RelUpdate/RelUpdate';
 
 
 interface ExtAngularRoute extends Route {
@@ -84,7 +92,15 @@ const routes: ExtAngularRoutes = [
   { path: 'replace-with-markup', component: ReplaceNodeWithMarkupComponent, text: 'Replace Node with Markup', iconCls: 'x-fa fa-dashboard', leaf: true },
   { path: 'responsive', component: ResponsiveComponent, text: 'Responsive', iconCls: 'x-fa fa-dashboard', leaf: true },
   { path: 'sencha-test-hook', component: SenchaTestHooksComponent, text: 'Sencha Test Hooks', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'update-functions', component: UpdateFunctionsComponent, text: 'Update Functions', iconCls: 'x-fa fa-dashboard', leaf: true }
+  { path: 'update-functions', component: UpdateFunctionsComponent, text: 'Update Functions', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'rel', component: RelComponent, text: 'Rel Component', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'rel-array-delete', component: RelArrayDeleteComponent, text: 'Rel Array Delete', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'rel-dialog', component: RelDialogComponent, text: 'Rel Dialog', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'rel-editor', component: RelEditorComponent, text: 'Rel Dialog', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'rel-grid-column', component: RelGridColumnComponent, text: 'Rel Grid Column', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'rel-menu', component: RelMenuComponent, text: 'Rel Menu', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'rel-tooltip', component: RelTooltipComponent, text: 'Rel Tooltip', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'rel-update', component: RelUpdateComponent, text: 'Rel Update', iconCls: 'x-fa fa-dashboard', leaf: true }
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
@@ -133,7 +149,15 @@ export class App {
     ReplaceNodeWithMarkupComponent,
     ResponsiveComponent,
     SenchaTestHooksComponent,
-    UpdateFunctionsComponent
+    UpdateFunctionsComponent,
+    RelComponent,
+    RelArrayDeleteComponent,
+    RelDialogComponent,
+    RelEditorComponent,
+    RelGridColumnComponent,
+    RelMenuComponent,
+    RelTooltipComponent,
+    RelUpdateComponent
 	],
 	providers: [
 		AppService,

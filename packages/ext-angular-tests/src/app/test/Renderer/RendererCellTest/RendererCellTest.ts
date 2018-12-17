@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, RendererCell } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 // import { CellComponent } from './Cell/Cell';
 
 declare var Ext: any;

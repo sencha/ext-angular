@@ -2,3 +2,9 @@ Renderecelltest - renderCell not found
 Templategrid - not working
 Templateunmount - text value not showing on mounted element
 Renderwhenready - what to write as test? It gets rendered initially only
+HTML - one test fails - no class known to check
+lifecycle unmount, child, events - Test content in div through ST.element('@html').innerText == "html" while ST.element('@html').textLike(/html) should work
+RelDialog - does not close - error comes
+RelEditor - value 1 not showing in ui
+Rel-grid-column - data not showing
+In rel-update, first we need to toggle menu seperately then Toggle button works
