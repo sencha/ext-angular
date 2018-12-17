@@ -1,26 +1,22 @@
 <tabpanel #item
     [flex]="1"
-    [height]="'100%'"
+    [height]="400"
     [shadow]="true"
-    [tabBar]="{
-        layout: {pack: 'left'}
-      }"
+    [defaults]="{
+        cls: 'card',
+        layout: 'center'
+    }"
 >
     <panel
         #item
-        [scrollable]="true"
         [title]="'Tab 1'"
-        [ui]="'code-panel'"
-        tab="{
-            ui: 'app-code-tab',
-            minWidth: 120
-        }"
-        [userSelectable]="true"
-        [html]="'By default, tabs are aligned to the top of a view.'"
-    ></panel>
+        [layout]="'center'"
+    >
+    <container #item [flex]="1" [html]="'By default, tabs are aligned to the top of a view.'"></container>
+    </panel>
     <panel #item [flex]="1" title="'Tab 2'" [layout]="'center'">
         <container #item [flex]="1" [html]="'A TabPanel can use different animations by setting <code>layout.animation.</code>'">
-        </container>
+    </container>
     </panel>
     <panel #item title="'Tab 3'" [layout]="'center'">
         <container #item [cls]="'action'" [html]="'User tapped Tab 3'"></container>
