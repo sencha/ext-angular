@@ -18,15 +18,21 @@ export class ColorPickerComponent implements OnInit {
   }
 
 
-    color:string = '#0f0';
+    color:string='#0f0';
+    colorTitle:string=this.getcolorTitle();
 
   ngOnInit() {
+  }
+
+  getcolorTitle() {
+      return `<p style="color: #${this.color}">Selected Color: #${this.color}</p>`
   }
 
 
     onChange= (picker) => {
         this.color = picker.getValue();
         console.log(" onChange :: this.color: " + this.color);
+        this.colorTitle=this.getcolorTitle();
     }
 
     panel : any;
@@ -38,6 +44,7 @@ export class ColorPickerComponent implements OnInit {
             var header = this.panel.getHeader();
             //this.panel.setHeader(header);
         }
+        this.colorTitle=this.getcolorTitle();
 
     }
 

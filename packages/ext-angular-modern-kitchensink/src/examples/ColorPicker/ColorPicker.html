@@ -11,4 +11,9 @@ title= "Color Picker Components"
     }"
 >
 <colorselector #item [color]="this.color" (change)="this.OnSelChange($event)"></colorselector>
+<panel #item
+[title]="this.colorTitle"
+ui="light"
+xtype="panel"
+></panel>
 </panel>

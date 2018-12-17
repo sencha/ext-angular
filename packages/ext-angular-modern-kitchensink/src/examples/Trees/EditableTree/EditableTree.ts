@@ -19,7 +19,6 @@ export class EditableTreeComponent implements OnInit {
   constructor() { }
 
 
-
   ngOnInit() {
   }
 
