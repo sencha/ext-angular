@@ -1,0 +1,22 @@
+<container #item layout="vbox">
+        <container #item > 
+            <div #item >This tests that children which are mapped to array configs can be added and removed</div>
+        </container>
+        <toolbar #item  docked="top">
+            <button #item (tap)="toggleLastName()" text="Toggle Last Name"></button>
+        </toolbar>
+        <grid  #item 
+            itemId="grid"
+            flex="1"
+            [store]="store"
+            [itemConfig]="{
+                viewModel: {
+                  
+                }
+            }"
+        >
+        <column #item  text="First" dataIndex="first"></column>
+        <column #item  [hidden]="!showLastName" itemId="lastName" text="Last" dataIndex="last"></column>
+        <column #item  [hidden]="!showLastName" itemId="lastName1" text="Last" dataIndex="last"></column>
+        </grid>
+    </container>

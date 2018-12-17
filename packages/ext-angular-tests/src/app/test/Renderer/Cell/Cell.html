@@ -1,0 +1,4 @@
+<container #item layout="hbox">
+    <button #item [hidden]="!firstName" text="Button" [itemId]="itemId" [text]="firstName + ' ' + lastName"></button>
+    <button #item [hidden]="firstName" text="Button" [itemId]="itemId" text="Summary"></button>
+</container>

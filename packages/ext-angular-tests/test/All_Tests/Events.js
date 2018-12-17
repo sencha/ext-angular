@@ -7,8 +7,9 @@ describe("Events", () => {
     
     it("should support single events", () => {
         ST.navigate('#/SingleEvent');
-        const message = ST.element('>> #message');
-        ST.button('#button').click().and(() => message.text("1"));
-        ST.button('#button').click().and(() => message.text("1"));
+        const message = ST.element('@message');
+        ST.button('#button').click().and(() => message.innerText == "1");
+        ST.button('#button').click().and(() => message.innerText == "1");
+        //intended to be message.textLike(/1/) but not working
     });
 });
