@@ -249,6 +249,7 @@ import {TreeMapComponent} from '../examples/D3/Hierarchy/TreeMap/TreeMap';
 import {SunburstComponent} from '../examples/D3/Hierarchy/Sunburst/Sunburst';
 import {TreeHierarchyComponent} from '../examples/D3/Hierarchy/Tree/Tree';
 import {ZoomableSunburstComponent} from '../examples/D3/Hierarchy/ZoomableSunburst/ZoomableSunburst';
+import { ScrollingTabComponent } from '../examples/Tabs/Scrolling/Scrolling';
 
 interface ExtAngularRoute extends Route {
   text?: string;
@@ -441,7 +442,7 @@ const routes: ExtAngularRoutes = [
 	{ path: 'components/tabs/basic_tabs', component: BasicTabComponent, text: 'Basic Taps', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/tabs/bottom_tabs', component: BottomTabComponent, text: 'Bottom Tabs', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/tabs/icon_tabs', component: IconTabComponent, text: 'Icon Tabs', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-	{ path: 'components/tabs/scrollingtabs', component: DummyComponent, text: 'Scrolling Tabs', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+	{ path: 'components/tabs/scrollingtabs', component: ScrollingTabComponent, text: 'Scrolling Tabs', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/tabs/closable', component: CloseableTabComponent, text: 'Closeable Tabs', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/tabs/desktop_tabs', component: DesktopTabComponent, text: 'Desktop Tabs', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/tabs/tabbar', component: TabBarComponent, text: 'TabBar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -739,6 +740,7 @@ export class App {
 		BasicTabComponent,
 		BottomTabComponent,
 		IconTabComponent,
+		ScrollingTabComponent,
 		DesktopTabComponent,
 		CloseableTabComponent,
 		// ScrollingTabComponent,

@@ -1,33 +1,27 @@
 <tabpanel #item
-    shadow 
-    tabBar="{
+    shadow="true" 
+    [tabBar]="{
         layout: {
             pack: 'start',
             overflow: 'scroller'
         }
     }"
-    platformConfig="{
+    [platformConfig]="{
         '!phone': {
             height: 600,
             width: 400 
         }
     }"
-    defaults="{
-        layout: "center",
-        cls: 'card',
-        bodyPadding: 0,
-        tab: {
-            minWidth: 130
-        }
-    }"
+    [defaults]="tabpanelDefaults"
 >
-    <panel #item title="Home" layout="center" tab="{minWidth:130}">
+    <panel #item [title]="'Home'" [layout]="'center'" >
         <container #item width="'100%'" html="'You can set <code>{layout: { overflow: \'scroller\' }}</code> on the <code>tabBar</code> prop in combination with a <code>minWidth</code> on each tab to make the tab bar scroll when it runs out of room.'">
         </container>
     </panel>
-    <panel #item title="Politics" layout="center" tab="{minWidth:130}"><container #item html="Politics"></container></panel>
-    <panel #item title="Entertainment" layout="center" tab="{minWidth:130}"><container #item html="Entertainment"></container></panel>
-    <panel #item title="World" layout="center" tab="{minWidth:130}"><container #item html="World"></container></panel>
-    <panel #item title="Markets" layout="center" tab="{minWidth:130}"><container #item html="Markets"></container></panel>
-    <panel #item title="Sports" layout="center" tab="{minWidth:130}"><container #item html="Sports"></container></panel>
+    <panel #item [title]="'Politics'" [layout]="'center'" ><container #item html="Politics"></container></panel>
+    <panel #item [title]="'Entertainment'" [layout]="'center'" ><container #item html="Entertainment"></container></panel>
+    <panel #item [title]="'World'" [layout]="'center'" ><container #item html="World"></container></panel>
+    <panel #item [title]="'Markets'" [layout]="'center'" ><container #item html="Markets"></container></panel>
+    <panel #item [title]="'Sports'" [layout]="'center'" ><container #item html="Sports"></container></panel>
 </tabpanel>
+
