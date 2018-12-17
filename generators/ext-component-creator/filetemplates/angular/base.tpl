@@ -71,7 +71,8 @@ export class base {
     o.xtype = metaData.XTYPE
     for (var i = 0; i < me.metaData.PROPERTIES.length; i++) { 
       var prop = me.metaData.PROPERTIES[i];
-      if (prop == 'handler') {
+      //prop== 'title' is needed for children of tabpanel. 
+      if (prop == 'handler' || prop== 'title') {
         if (me[prop] != undefined) {
           o[prop] = me[prop]
         }

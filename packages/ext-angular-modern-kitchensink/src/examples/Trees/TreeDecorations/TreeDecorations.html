@@ -1,20 +1,22 @@
-<tabpanel #item>
-        <container #item layout="fit" title="Row Lines">
+<tabpanel #item
+[tabBar]="{ docked: 'top' }"
+[height]="'700px'">
+        <panel #item layout="fit" [title]="'Row Lines'">
             <tree  #item
                 header="false"
                 rowLines="true"
-                rootVisible="false",
-                shadow= "true",
+                rootVisible="false"
+                shadow= "true"
                 [store]="store"
             ></tree>
-        </container>
-        <container #item layout="fit" title="Single Expand">
+        </panel>
+        <panel #item layout="fit" [title]="'Single Expand'">
             <tree  #item
                 header="false"
                 singleExpand="true"
-                rootVisible="false",
-                shadow= "true",
+                rootVisible="false"
+                shadow= "true"
                 [store]="store"
             ></tree>
-        </container>
+        </panel>
 </tabpanel>
