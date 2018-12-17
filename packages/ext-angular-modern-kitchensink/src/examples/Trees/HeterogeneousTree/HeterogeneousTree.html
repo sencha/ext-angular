@@ -7,12 +7,14 @@ rootVisible="false"
 [listeners]="{
     selectionchange: this.onSelectionChange
 }"
+[columns]="[
+{
+    xtype:'treecolumn',
+    text:'Name',
+    dataIndex:'name',
+    width:'100%'
+}]"
 >
-<treecolumn  #item
-    text="Name"
-    dataIndex="name"
-    flex="1"
-></treecolumn>
 <toolbar #item docked="bottom">
     <textfield  #item
         listeners="{

@@ -291,7 +291,8 @@ store = Ext.create('Ext.data.TreeStore', {
         },
         url: '/KitchenSink/GeoData'
     },
-    lazyFill: false
+    lazyFill: false,
+    rootVisible: false
 });
 
 /*

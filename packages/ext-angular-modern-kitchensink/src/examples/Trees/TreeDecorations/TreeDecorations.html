@@ -1,7 +1,7 @@
 <tabpanel #item
 [tabBar]="{ docked: 'top' }"
 [height]="'700px'">
-        <container #item layout="fit" [title]="'Row Lines'">
+        <panel #item layout="fit" [title]="'Row Lines'">
             <tree  #item
                 header="false"
                 rowLines="true"
@@ -9,8 +9,8 @@
                 shadow= "true"
                 [store]="store"
             ></tree>
-        </container>
-        <container #item layout="fit" [title]="'Single Expand'">
+        </panel>
+        <panel #item layout="fit" [title]="'Single Expand'">
             <tree  #item
                 header="false"
                 singleExpand="true"
@@ -18,5 +18,5 @@
                 shadow= "true"
                 [store]="store"
             ></tree>
-        </container>
+        </panel>
 </tabpanel>
