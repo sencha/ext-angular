@@ -137,6 +137,7 @@
                 for (var i = 0; i < me.metaData.PROPERTIES.length; i++) {
                     /** @type {?} */
                     var prop = me.metaData.PROPERTIES[i];
+                    //prop== 'title' is needed for children of tabpanel. 
                     if (prop == 'handler') {
                         if (me[prop] != undefined) {
                             o[prop] = me[prop];

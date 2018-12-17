@@ -39,7 +39,7 @@
         (childtap)="doClick($event)"
         (ready)="dataviewReady($event)">
       </dataview>
-      <container #item [layout]="{ type: 'vbox', align: 'stretch' }">
+      <container #item [layout]="{ type: 'fit', align: 'stretch' }">
           <router-outlet #item></router-outlet>
       </container>
     </container>

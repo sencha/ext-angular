@@ -24,7 +24,7 @@ Issues
  - (major) orgchart component does not exists (Under pivot/hierearchy).  
  - UI for SearchField is breaking. Search form is not docked right. (Form fields - Eg( All>Components>Forms>Searchfield or ALl->Components>TitleBar)
 - ExtAngular components that use Angular structural directives (e.g. ngFor, ngIf) do not dynamically update when their bound data changes.  This is preventing the following from working as desired - Code Preview (you muist reload the page to see the correct code preview panels).
- - (major) Tree widgets not loading with error ERROR Error: [Ext.create] Unrecognized class name / alias: widget.tree [Fixed/Need to revisit D3 tree] 
+
 
 
 
@@ -39,6 +39,7 @@ Fixed
  - CSS for syntax highlighting is hard coded in index.html because it wasn't loading when specified in the component's styleUrls. - see ext-angular-demo
  - (major) Tabs: All components are not rendering. Error: Adding a card to a tab container without specifying any tab configuration
  - (major) Tree widgets not loading with error ERROR Error: [Ext.create] Unrecognized class name / alias: widget.tree [Need to revisit D3 tree] 
+  - (major) Tree widgets not loading with error ERROR Error: [Ext.create] Unrecognized class name / alias: widget.tree [Fixed/Need to revisit D3 tree] 
 
 Low priority
   - [Aniket] Button and split button menu always shows up ([hidden] attribute does not work as well as *ngif). [use setMenu method/zip and project to Marc] - Done/Revisit angular way
