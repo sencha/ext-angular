@@ -12,33 +12,33 @@
  *
  * ## A Basic Grid
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react'
- *     import { ExtReact, Grid, Column } from '@extjs/ext-react';
+ *            @example packages=[angular]
+ *            import { Component } from '@angular/core'
+ *            declare var Ext: any;
  *
- *     export default class MyExample extends Component {
+ *            @Component({
+ *                selector: 'app-root-1',
+ *                styles: [`
+ *                        `],
+ *                template: `
+ *                    <grid #item [store]="store" [height]="600">
+ *                        <column #item text="Name" dataIndex="name" flex="1"></column>
+ *                        <column #item text="Email" dataIndex="email" flex="1"></column>
+ *                        <column #item text="Phone" dataIndex="phone" flex="1"></column>
+ *                    </grid>
+ *                `
+ *            })
+ *            export class AppComponent {
+ *                store = new Ext.data.Store({
+ *                    data: [
+ *                        { "name": "Lisa", "email": "lisa@simpsons.com", "phone": "555-111-1224" },
+ *                        { "name": "Bart", "email": "bart@simpsons.com", "phone": "555-222-1234" },
+ *                        { "name": "Homer", "email": "home@simpsons.com", "phone": "555-222-1244" },
+ *                        { "name": "Marge", "email": "marge@simpsons.com", "phone": "555-222-1254" }
+ *                    ]
+ *                });
+ *            }
  *
- *         store = new Ext.data.Store({
- *             data: [
- *                 { "name": "Lisa", "email": "lisa@simpsons.com", "phone": "555-111-1224" },
- *                 { "name": "Bart", "email": "bart@simpsons.com", "phone": "555-222-1234" },
- *                 { "name": "Homer", "email": "home@simpsons.com", "phone": "555-222-1244" },
- *                 { "name": "Marge", "email": "marge@simpsons.com", "phone": "555-222-1254" }
- *             ]
- *         });
- *
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Grid store={this.store}>
- *                         <Column text="Name" dataIndex="name" flex="1"/>
- *                         <Column text="Email" dataIndex="email" flex="1"/>
- *                         <Column text="Phone" dataIndex="phone" flex="1"/>
- *                     </Grid>
- *                 </ExtReact>
- *             )
- *         }
- *     }
  *
  * The code above produces a simple grid with three columns. We specified a Store which will
  * load JSON data inline.
@@ -55,33 +55,36 @@
  * A top-level column definition may contain a `columns` configuration. This means that the
  * resulting header will be a group header, and will contain the child columns.
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react'
- *     import { ExtReact, Grid, Column } from '@extjs/ext-react';
  *
- *     export default class MyExample extends Component {
+ *            @example packages=[angular]
+ *            import { Component } from '@angular/core'
+ *            declare var Ext: any;
  *
- *         store = new Ext.data.Store({
- *             data: [
- *                 { "name": "Lisa", "email": "lisa@simpsons.com", "phone": "555-111-1224" },
- *                 { "name": "Bart", "email": "bart@simpsons.com", "phone": "555-222-1234" },
- *                 { "name": "Homer", "email": "home@simpsons.com", "phone": "555-222-1244" },
- *                 { "name": "Marge", "email": "marge@simpsons.com", "phone": "555-222-1254" }
- *             ]
- *         });
- *
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Grid store={this.store}>
- *                         <Column text="Name" dataIndex="name" flex="1"/>
- *                         <Column text="Email" dataIndex="email" flex="1" hidden="true"/>
- *                         <Column text="Phone" dataIndex="phone" flex="1"/>
- *                     </Grid>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+ *            @Component({
+ *                selector: 'app-root-1',
+ *                styles: [`
+ *                        `],
+ *                template: `
+ *                    <grid #item [store]="store" [height]="600">
+ *                        <column #item text="Name" dataIndex="name" flex="1"></column>
+ *                        <column #item text="Email" dataIndex="email" flex="1" hidden="true"></column>
+ *                        <column #item text="Phone" dataIndex="phone" flex="1"></column>
+ *                    </grid>
+ *                `
+ *            })
+ *            export class AppComponent {
+ *                store = new Ext.data.Store({
+ *                    data: [
+ *                        { "name": "Lisa", "email": "lisa@simpsons.com", "phone": "555-111-1224" },
+ *                        { "name": "Bart", "email": "bart@simpsons.com", "phone": "555-222-1234" },
+ *                        { "name": "Homer", "email": "home@simpsons.com", "phone": "555-222-1244" },
+ *                        { "name": "Marge", "email": "marge@simpsons.com", "phone": "555-222-1254" }
+ *                    ]
+ *                });
+ *            }
+ * 
+ * 
+ * 
  *
  * ## Rows and Cells
  *

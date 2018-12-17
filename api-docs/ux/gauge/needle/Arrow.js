@@ -1,50 +1,44 @@
-/**
+ /**
  * @since 6.6.0
  * 
  * Example usage:
  *
- *      @example
- *      import React, { Component } from 'react';
- *      import { ExtReact, SliderField, Gauge, FormPanel, Container} from '@extjs/ext-react';
- *      Ext.require('Ext.ux.gauge.needle.Arrow');
- *      export default class NeedleExample extends Component {
- *          constructor() {
- *              super();
- *              this.state = {
- *                  value: 30
- *              }
- *          }
- *          updateGauges(slider, value) {
- *              this.setState({ value })
- *          }
- *          render() {
- *              const { value } = this.state;
- *              return (
- *                  <ExtReact>
- *                      <FormPanel shadow layout="vbox" width={850}>
- *                          <SliderField label="Value" width={350} onChange={this.updateGauges.bind(this)} value={value}/>
- *                          <Container 
- *                              layout={{
- *                                  type: 'hbox',
- *                                  align: 'stretch'
- *                              }} 
- *                              margin={'10 0 10 0'} flex={1} 
- *                              width={'100%'}
- *                              minHeight={200}
- *                          >
- *                           <Gauge flex={1} value={value} 
- *                               needle={{
- *                                   type: 'arrow',
- *                                   innerRadius: 0
- *                               }} 
- *                               textOffset={ {
- *                                   dy: 45
- *                               }}
- *                           />
- *                          </Container>
- *                      </FormPanel>
- *                  </ExtReact>
- *              )
- *          }
- *      }
+ *            @example
+ *            import { Component } from '@angular/core'
+ *            declare var Ext: any;
+ *
+ *            Ext.require('Ext.ux.gauge.needle.Arrow');
+ *
+ *            @Component({
+ *                selector: 'app-root-1',
+ *                styles: [`
+ *                        `],
+ *                template: `
+ *                    <formpanel #item shadow="true" layout="vbox" maxWidth="850">
+ *                        <sliderfield #item label="Value" width="350" (change)="updateGauges($event)" [value]="needleValue">
+ *                        </sliderfield>
+ *                        <container #item
+ *                            [layout]="{type: 'hbox', align: 'stretch'}" 
+ *                            [margin]="'10 0 10 0'"
+ *                            flex="1" 
+ *                            [width]="'100%'"
+ *                            minHeight="200"
+ *                        >
+ *                            <gauge #item
+ *                                flex="1"
+ *                                [value]="needleValue"
+ *                                [needle]="{type: 'arrow', innerRadius: 0}"
+ *                                [textOffset]="{ dy: 45 }"
+ *                            ></gauge>     
+ *                        </container>
+ *                    </formpanel>
+ *                `
+ *            })
+ *            export class AppComponent {
+ *                needleValue:number = 30;
+ *                
+ *                updateGauges = (param) => {
+ *                    this.needleValue = param.newValue;
+ *                }
+ *            }
  */
