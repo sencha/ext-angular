@@ -13,113 +13,113 @@
  * The pack additionally layout populates the `r` attribute on each node, where `r` is the
  * computed node radius.
  *
- *     @example packages=[d3,reactor]
- *     import React, { Component } from 'react'
- *     import { ExtReact, Container }  from '@extjs/ext-react';
- *     import { D3_Pack } from '@extjs/ext-react-d3';
+ *            @example packages=[angular]
+ *            import { Component } from '@angular/core'
+ *            declare var Ext: any;
  *
- *     export default class MyExample extends Component {
+ *            @Component({
+ *                selector: 'app-root-1',
+ *                styles: [`
+ *                        `],
+ *                template: `
+ *                    <container #item layout="fit">
+ *                        <d3-pack #item
+ *                            [store]="store"
+ *                            [tooltip]="tooltipVar"
+ *                        ></d3-pack>
+ *                    </container>
+ *                `
+ *            })
+ *            export class AppComponent {
+ *                store = Ext.create('Ext.data.TreeStore', {
+ *                    data: [
+ *                        {
+ *                        "text": "DC",
+ *                        "children": [
+ *                            {
+ *                                "text": "Flash",
+ *                                "children": [{
+ *                                    "text": "Flashpoint"
+ *                                }]
+ *                            },
+ *                            {
+ *                                "text": "Green Lantern",
+ *                                "children": [
+ *                                    {
+ *                                        "text": "Rebirth"
+ *                                    },
+ *                                    {
+ *                                        "text": "Sinestro Corps War"
+ *                                    }
+ *                                ]
+ *                            },
+ *                            {
+ *                                "text": "Batman",
+ *                                "children": [{
+ *                                    "text": "Hush"
+ *                                },
+ *                                {
+ *                                    "text": "The Long Halloween"
+ *                                },
+ *                                {
+ *                                    "text": "Batman and Robin"
+ *                                },
+ *                                {
+ *                                    "text": "The Killing Joke"
+ *                                }]
+ *                            }]
+ *                        },
+ *                        {
+ *                            "text": "Marvel",
+ *                            "children": [{
+ *                                "text": "All",
+ *                                "children": [{
+ *                                    "text": "Infinity War"
+ *                                },
+ *                                    {
+ *                                        "text": "Infinity Gauntlet"
+ *                                    },
+ *                                    {
+ *                                        "text": "Avengers Disassembled"
+ *                                    }
+ *                                ]
+ *                            },
+ *                            {
+ *                                "text": "Spiderman",
+ *                                "children": [{
+ *                                    "text": "Ultimate Spiderman"
+ *                                }]
+ *                            },
+ *                            {
+ *                                "text": "Vision",
+ *                                "children": [{
+ *                                    "text": "The Vision"
+ *                                }]
+ *                            },
+ *                            {
+ *                                "text": "X-Men",
+ *                                "children": [{
+ *                                    "text": "Gifted"
+ *                                },
+ *                                    {
+ *                                        "text": "Dark Phoenix Saga"
+ *                                    },
+ *                                    {
+ *                                        "text": "Unstoppable"
+ *                                    }
+ *                                ]
+ *                            }]
+ *                        }
+ *                    ]
+ *                });
  *
- *         store = Ext.create('Ext.data.TreeStore', {
- *               data: [{
- *                   "text": "DC",
- *                   "children": [{
- *                       "text": "Flash",
- *                       "children": [{
- *                           "text": "Flashpoint"
- *                       }]
- *                   },
- *                       {
- *                           "text": "Green Lantern",
- *                           "children": [{
- *                               "text": "Rebirth"
- *                           },
- *                               {
- *                                   "text": "Sinestro Corps War"
- *                               }
- *                           ]
- *                       },
- *                       {
- *                           "text": "Batman",
- *                           "children": [{
- *                               "text": "Hush"
- *                           },
- *                               {
- *                                   "text": "The Long Halloween"
- *                               },
- *                               {
- *                                   "text": "Batman and Robin"
- *                               },
- *                               {
- *                                   "text": "The Killing Joke"
- *                               }
- *                           ]
- *                       }
- *                   ]
- *               },
- *                   {
- *                       "text": "Marvel",
- *                       "children": [{
- *                           "text": "All",
- *                           "children": [{
- *                               "text": "Infinity War"
- *                           },
- *                               {
- *                                   "text": "Infinity Gauntlet"
- *                               },
- *                               {
- *                                   "text": "Avengers Disassembled"
- *                               }
- *                           ]
- *                       },
- *                           {
- *                               "text": "Spiderman",
- *                               "children": [{
- *                                   "text": "Ultimate Spiderman"
- *                               }]
- *                           },
- *                           {
- *                               "text": "Vision",
- *                               "children": [{
- *                                   "text": "The Vision"
- *                               }]
- *                           },
- *                           {
- *                               "text": "X-Men",
- *                               "children": [{
- *                                   "text": "Gifted"
- *                               },
- *                                   {
- *                                       "text": "Dark Phoenix Saga"
- *                                   },
- *                                   {
- *                                       "text": "Unstoppable"
- *                                   }
- *                               ]
- *                           }
- *                       ]
- *                   }
- *               ]
- *           });
- *
- *       render() {
- *           return (
- *               <ExtReact>
- *                   <Container layout="fit">
- *                       <D3_Pack
- *                           store={this.store}
- *                           tooltip={{
- *                               renderer: function(component, tooltip, node) {
- *                                     var record = node.data;
- *                                     tooltip.setHtml(record.get('text'));
- *                                 }
- *                           }}
- *                       />
- *                   </Container>
- *               </ExtReact>
- *           )
- *       }
- *     }
+ *                tooltipVar = {
+ *                    renderer: function(component, tooltip, node) {
+ *                        var record = node.data;
+ *                        tooltip.setHtml(record.get('text'));
+ *                    }
+ *                };
+ *            }
  */
 
 /**
