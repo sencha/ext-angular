@@ -6,38 +6,41 @@
  * The text field is the basis for most of the input fields. It provides a baseline of shared
  * functionality such as input validation, standard events, state management and look
  * and feel. Typically we create text fields inside a form, like this:
+ * 
+ *            @example packages=[angular]
+ *            import { Component } from '@angular/core'
+ *            declare var Ext: any;
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react';
- *     import { ExtReact, FormPanel, Container, TextField, FieldSet } from '@extjs/ext-react';
- *
- *     export default class MyExample extends Component {
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container layout="center">
- *                         <FormPanel shadow>
- *                             <FieldSet title="Separate Label and Placeholder" margin="0 0 20 0">
- *                                 <TextField placeHolder="Enter Name..." label="Name" required/>
- *                             </FieldSet>
- *                             <FieldSet title="Label as Placeholder" margin="0 0 20 0" >
- *                                 <TextField labelAlign="placeholder" label="Name" required/>
- *                             </FieldSet>
- *                             <FieldSet title="With Error Message">
- *                                 <TextField
- *                                     labelAlign="placeholder"
- *                                     label="Label"
- *                                     errorMessage="The value you entered is invalid."
- *                                     value="invalid value"
- *                                     errorTarget="under"
- *                                 />
- *                             </FieldSet>
- *                         </FormPanel>
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+ *            @Component({
+ *                selector: 'app-root-1',
+ *                styles: [`
+ *                        `],
+ *                template: `
+ *                 <container #item layout="center">
+ *                    <formpanel #item [shadow]="true">
+ *                        <fieldset #item title="Separate Label and Placeholder" [margin]="'0 0 20 0'">
+ *                            <textfield #item placeHolder="Enter Name..." label="Name" [required]="true">
+ *                            </textfield>
+ *                        </fieldset>
+ *                        <fieldset #item title="Label as Placeholder" [margin]="'0 0 20 0'">
+ *                            <textfield #item labelAlign="placeholder" label="Name" [required]="true">
+ *                            </textfield>
+ *                        </fieldset>
+ *                        <fieldset #item title="With Error Message">
+ *                            <textfield #item
+ *                                labelAlign="placeholder"
+ *                                label="Label"
+ *                                errorMessage="The value you entered is invalid."
+ *                                value="invalid value"
+ *                                errorTarget="under"
+ *                            ></textfield>
+ *                        </fieldset>
+ *                    </formpanel>
+ *                </container>
+ *                `
+ *            })
+ *            export class AppComponent {}
+ *            
  */
 
 /**

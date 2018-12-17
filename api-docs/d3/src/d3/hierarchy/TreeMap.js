@@ -8,126 +8,123 @@
  * to recursively subdivide area into rectangles, where the area of any node in the tree
  * corresponds to its value.
  *
- *     @example packages=[d3,reactor]
- *     import React, { Component } from 'react'
- *     import { ExtReact, Container }  from '@extjs/ext-react';
- *     import { D3_TreeMap } from '@extjs/ext-react-d3';
+ *          @example packages=[angular]
+ *            import { Component } from '@angular/core'
+ *            declare var Ext: any;
  *
- *     export default class MyExample extends Component {
+ *            @Component({
+ *                selector: 'app-root-1',
+ *                styles: [`
+ *                        `],
+ *                template: `
+ *                    <container #item layout="fit">
+ *                        <d3-treemap #item [store]="store" [tooltip]="tooltipVar"></d3-treemap>
+ *                    </container>
+ *                `
+ *            })
+ *            export class AppComponent {
+ *                store = Ext.create('Ext.data.TreeStore', {
+ *                    data: [{
+ *                        text: 'Hulk',
+ *                        value: 5,
+ *                        children: [{
+ *                            text: 'The Leader',
+ *                            value: 3
+ *                        },
+ *                            {
+ *                                text: 'Abomination',
+ *                                value: 2
+ *                            },
+ *                            {
+ *                                text: 'Sandman',
+ *                                value: 1
+ *                            }
+ *                        ]
+ *                    },
+ *                        {
+ *                            text: 'Vision',
+ *                            value: 4,
+ *                            children: [{
+ *                                text: 'Kang',
+ *                                value: 4
+ *                            },
+ *                                {
+ *                                    text: 'Magneto',
+ *                                    value: 3
+ *                                },
+ *                                {
+ *                                    text: 'Norman Osborn',
+ *                                    value: 2
+ *                                },
+ *                                {
+ *                                    text: 'Anti-Vision',
+ *                                    value: 1
+ *                                }
+ *                            ]
+ *                        },
+ *                        {
+ *                            text: 'Ghost Rider',
+ *                            value: 3,
+ *                            children: [{
+ *                                text: 'Mephisto',
+ *                                value: 1
+ *                            }]
+ *                        },
+ *                        {
+ *                            text: 'Loki',
+ *                            value: 2,
+ *                            children: [{
+ *                                text: 'Captain America',
+ *                                value: 3
+ *                            },
+ *                                {
+ *                                    text: 'Deadpool',
+ *                                    value: 4
+ *                                },
+ *                                {
+ *                                    text: 'Odin',
+ *                                    value: 5
+ *                                },
+ *                                {
+ *                                    text: 'Scarlet Witch',
+ *                                    value: 2
+ *                                },
+ *                                {
+ *                                    text: 'Silver Surfer',
+ *                                    value: 1
+ *                                }
+ *                            ]
+ *                        },
+ *                        {
+ *                            text: 'Daredevil',
+ *                            value: 1,
+ *                            children: [{
+ *                                text: 'Purple Man',
+ *                                value: 4
+ *                            },
+ *                                {
+ *                                    text: 'Kingpin',
+ *                                    value: 3
+ *                                },
+ *                                {
+ *                                    text: 'Namor',
+ *                                    value: 2
+ *                                },
+ *                                {
+ *                                    text: 'Sabretooth',
+ *                                    value: 1
+ *                                }
+ *                            ]
+ *                        }
+ *                    ]
+ *                });
  *
- *         store = Ext.create('Ext.data.TreeStore', {
- *                 data: [{
- *                     text: 'Hulk',
- *                     value: 5,
- *                     children: [{
- *                         text: 'The Leader',
- *                         value: 3
- *                     },
- *                         {
- *                             text: 'Abomination',
- *                             value: 2
- *                         },
- *                         {
- *                             text: 'Sandman',
- *                             value: 1
- *                         }
- *                     ]
- *                 },
- *                     {
- *                         text: 'Vision',
- *                         value: 4,
- *                         children: [{
- *                             text: 'Kang',
- *                             value: 4
- *                         },
- *                             {
- *                                 text: 'Magneto',
- *                                 value: 3
- *                             },
- *                             {
- *                                 text: 'Norman Osborn',
- *                                 value: 2
- *                             },
- *                             {
- *                                 text: 'Anti-Vision',
- *                                 value: 1
- *                             }
- *                         ]
- *                     },
- *                     {
- *                         text: 'Ghost Rider',
- *                         value: 3,
- *                         children: [{
- *                             text: 'Mephisto',
- *                             value: 1
- *                         }]
- *                     },
- *                     {
- *                         text: 'Loki',
- *                         value: 2,
- *                         children: [{
- *                             text: 'Captain America',
- *                             value: 3
- *                         },
- *                             {
- *                                 text: 'Deadpool',
- *                                 value: 4
- *                             },
- *                             {
- *                                 text: 'Odin',
- *                                 value: 5
- *                             },
- *                             {
- *                                 text: 'Scarlet Witch',
- *                                 value: 2
- *                             },
- *                             {
- *                                 text: 'Silver Surfer',
- *                                 value: 1
- *                             }
- *                         ]
- *                     },
- *                     {
- *                         text: 'Daredevil',
- *                         value: 1,
- *                         children: [{
- *                             text: 'Purple Man',
- *                             value: 4
- *                         },
- *                             {
- *                                 text: 'Kingpin',
- *                                 value: 3
- *                             },
- *                             {
- *                                 text: 'Namor',
- *                                 value: 2
- *                             },
- *                             {
- *                                 text: 'Sabretooth',
- *                                 value: 1
- *                             }
- *                         ]
- *                     }
- *                 ]
- *             });
- *
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container layout="fit">
- *                         <D3_TreeMap
- *                             store={this.store}
- *                             tooltip={{
- *                                 renderer: function(component, tooltip, node) {
- *                                     tooltip.setHtml(node.data.get('text'));
- *                                 }
- *                             }}
- *                         />
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
+ *                tooltipVar = {
+ *                    renderer: function(component, tooltip, node) {
+ *                        tooltip.setHtml(node.data.get('text'));
+ *                    }
+ *                }
+ *            }
  */
 
 /**

@@ -6,7 +6,11 @@ title="Row Expander Grid"
 }"
 shadow="true"
 height="600px"
-[itemConfig]="gridItemConfig"
+[itemConfig]="{
+  body : {
+    tpl: tplVal
+  }
+}"
 >
 <column #item text="Company" dataIndex="name" width="150"></column>
 <column #item text="Price" dataIndex="price" width="75" formatter="usMoney"></column>
