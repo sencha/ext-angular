@@ -15,7 +15,8 @@
         }"
     >
         {{ tabs.map(key => (
-            <container
+            <panel
+                #item
                 [title]="'Tab key'"
                 tab="{ flex: 1, maxWidth: 150 }"
                 key="key"
@@ -24,7 +25,7 @@
                 (onDestroy)="onCloseTab()"
             >
                 <container #item [style]="{ whiteSpace: 'nowrap' }" [html]="'Tab key Content'"></container>
-            </container>
+            </panel>
         ))}}
     </tabpanel>
     <button #item

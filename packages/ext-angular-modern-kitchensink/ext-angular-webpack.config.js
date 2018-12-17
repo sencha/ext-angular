@@ -28,7 +28,8 @@ module.exports = {
         'exporter',
         'pivot', 
         'calendar', 
-        'charts'
+        'charts',
+        'treegrid'
       ]
     }),
     new WebpackShellPlugin({

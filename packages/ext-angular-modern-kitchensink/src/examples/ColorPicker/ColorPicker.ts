@@ -18,20 +18,40 @@ export class ColorPickerComponent implements OnInit {
   }
 
 
-    color:string = '#0f0';
+    color:string='#0f0';
+    colorTitle:string=this.getcolorTitle();
 
   ngOnInit() {
+  }
+
+  getcolorTitle() {
+      return `<p style="color: #${this.color}">Selected Color: #${this.color}</p>`
   }
 
 
     onChange= (picker) => {
         this.color = picker.getValue();
         console.log(" onChange :: this.color: " + this.color);
+        this.colorTitle=this.getcolorTitle();
     }
+
+    panel : any;
 
     OnSelChange = (event) => {
         this.color = event.color;
         console.log(" OnSelChange :: this.color: " + this.color);
+        if(this.panel) {
+            var header = this.panel.getHeader();
+            //this.panel.setHeader(header);
+        }
+        this.colorTitle=this.getcolorTitle();
+
+    }
+
+
+    onPanelReady = (event) => {
+        console.log("onPanelReady");
+        this.panel = event.ext;
     }
 
    isPhone = Ext.platformTags.phone ? true : false;
@@ -47,7 +67,8 @@ export class ColorPickerComponent implements OnInit {
         height: Ext.platformTags.phone ? 25 : 15,
         listeners: {
             change: this.onChange
-        }
+        },
+        bind: this.color
     }]
 };
 

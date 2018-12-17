@@ -105,6 +105,7 @@ var base = /** @class */ (function () {
         for (var i = 0; i < me.metaData.PROPERTIES.length; i++) {
             /** @type {?} */
             var prop = me.metaData.PROPERTIES[i];
+
             if (prop == 'handler') {
                 if (me[prop] != undefined) {
                     o[prop] = me[prop];

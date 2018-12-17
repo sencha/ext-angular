@@ -1,6 +1,6 @@
 declare var Ext: any;
 
-export const store = Ext.create('Ext.data.TreeStore', {
+export const data = Ext.create('Ext.data.TreeStore', {
     root: {
        text: 'Ext JS',
        expanded: true,

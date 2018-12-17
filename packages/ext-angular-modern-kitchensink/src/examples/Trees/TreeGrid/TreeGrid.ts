@@ -22,5 +22,28 @@ export class TreeGridComponent implements OnInit {
   ngOnInit() {
   }
 
+  tree:any;
+  treeReady = (event) => {
+    console.log("tree ready!");
+    this.tree = event.ext;
+    //this.tree.setColumns(this.gridColumns);
+  }
+
+  /*
+  gridColumns =  [
+      {
+          text: "Name",
+          dataIndex: "text",
+          width: 200
+      },{
+          text: "# Items",
+          dataIndex: "numItems",
+          width: 150,
+          align:"center",
+          format:"0,0"
+      }
+  ]
+  */
+
 
 }
