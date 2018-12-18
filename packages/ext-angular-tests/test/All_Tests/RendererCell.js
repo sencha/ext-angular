@@ -32,6 +32,6 @@ describe("RendererCell", () => {
     it('should unmount components in cells when the grid is destroyed', () => {
         ST.navigate('#/RendererCell')
         ST.button('#button').click();
-        ST.element('>> #message').text('unmounted');
+        ST.element('@message').innerText == 'unmounted';
     })
 });

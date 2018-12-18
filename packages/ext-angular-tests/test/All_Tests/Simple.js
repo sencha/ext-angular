@@ -1,9 +1,6 @@
 describe("Simple", function () {
     it("should render the button", function () {
-        //ST.navigate('/simple')
-        console.log("Simple started");
-        location.href = "/simple";
-        console.log("Simple naviagted");
+        ST.navigate('/simple')
         ST.component('#button')
             .visible()
             .text('Click Me')

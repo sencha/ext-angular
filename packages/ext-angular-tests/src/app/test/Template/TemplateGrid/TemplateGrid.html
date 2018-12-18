@@ -6,6 +6,6 @@
         </div>
     </container>
     <grid #item [store]="store" flex="1">
-        <column #item text="Name" [tpl]="nameTpl" flex="1" cell="{encodeHtml: false}"></column>
+        <column #item text="Name" [tpl]="nameTpl" flex="1" [cell]="{ encodeHtml: false }"></column>
     </grid>
 </container>

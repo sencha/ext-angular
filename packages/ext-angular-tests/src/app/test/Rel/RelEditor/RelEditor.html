@@ -4,7 +4,7 @@
             itemId="grid"
             flex="1"
             [store]="store"
-            [plugins]="{gridcellediting: true}">
+            [plugins]="{ gridcellediting: true }">
             <column #item text="Value" dataIndex="value" editable>
                 <numberfield #item className="editor"></numberfield>
             </column>
