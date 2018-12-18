@@ -1,16 +1,15 @@
 <grid  #item
-title="Row Expander Grid"
+[title]="'Row Expander Grid'"
 [store]="this.store"
-[plugins]="{
-  rowexpander: true
-}"
-shadow="true"
-height="600px"
+[layout]="'fit'"
+[shadow]="true"
+[height]="600"
 [itemConfig]="{
   body : {
-    tpl: tplVal
+    tpl: this.tplVal
   }
 }"
+(ready)="onGridReady($event)"
 >
 <column #item text="Company" dataIndex="name" width="150"></column>
 <column #item text="Price" dataIndex="price" width="75" formatter="usMoney"></column>
