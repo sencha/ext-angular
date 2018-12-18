@@ -97,7 +97,6 @@
  * Example usage:
  *
  *      @example
- *                  // @example packages=[angular]
  *      import { Component } from '@angular/core'
  *      declare var Ext: any;
  *

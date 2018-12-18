@@ -26,11 +26,11 @@
  *                styles: [`
  *                        `],
  *                template: `
+ *                <container #item layout="fit">
  *                    <grid #item
  *                        [height]="'600px'"
  *                        (ready)="gridReady($event)"
  *                        [store]="store"
- *                        [fullscreen]="true"
  *                        title="People"
  *                        [plugins]="{
  *                            rowoperations: {
@@ -46,6 +46,7 @@
  *                        <column #item text="Last Name" dataIndex="lname" flex="1"></column>
  *                        <column #item text="Talent" dataIndex="talent" flex="1"></column>
  *                   </grid>
+ *                </container>
  *            `
  *            })
  *            export class AppComponent {

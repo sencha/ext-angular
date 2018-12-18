@@ -22,9 +22,9 @@
  *                styles: [`
  *                        `],
  *                template: `
+ *                <container #item layout="fit">
  *                    <grid #item
- *                        [height]="'600px'"
- *                        layout="fit"
+ *                        [height]="'500px'"
  *                        [store]="store"
  *                        plugins="gridviewoptions"
  *                    >
@@ -32,6 +32,7 @@
  *                        <column #item text="Email" dataIndex="email" flex="1"></column>
  *                        <column #item text="Phone" dataIndex="phone" flex="1"></column>
  *                    </grid>
+ *                </container>
  *                `
  *            })
  *            export class AppComponent {

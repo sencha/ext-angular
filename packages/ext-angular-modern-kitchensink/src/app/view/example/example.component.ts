@@ -2,8 +2,6 @@
             import { Component } from '@angular/core'
             declare var Ext: any;
 
-            Ext.require('Ext.ux.gauge.needle.Arrow');
-
             @Component({
                 selector: 'app-root-1',
                 styles: [`
@@ -28,9 +26,7 @@
                 `
             })
             export class AppComponent {
-                needleValue:number = 30;
-                
-                updateGauges = (param) => {
-                    this.needleValue = param.newValue;
+                onChange = (param) => {
+                    Ext.Msg.alert('Color', param.color);
                 }
             }
