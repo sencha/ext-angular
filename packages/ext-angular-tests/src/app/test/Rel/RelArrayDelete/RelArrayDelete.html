@@ -3,7 +3,7 @@
             <div #item >This tests that children which are mapped to array configs can be added and removed</div>
         </container>
         <toolbar #item  docked="top">
-            <button #item (tap)="toggleLastName()" text="Toggle Last Name"></button>
+            <button itemId="button" #item (tap)="toggleLastName()" text="Toggle Last Name"></button>
         </toolbar>
         <grid  #item 
             itemId="grid"
@@ -15,8 +15,8 @@
                 }
             }"
         >
-        <column #item  text="First" dataIndex="first"></column>
-        <column #item  [hidden]="!showLastName" itemId="lastName" text="Last" dataIndex="last"></column>
-        <column #item  [hidden]="!showLastName" itemId="lastName1" text="Last" dataIndex="last"></column>
+        <column #item  text="First" dataIndex="first" itemId="firstName"></column>
+        <column #item  [hidden]="showLastName" itemId="lastName" text="Last" dataIndex="last"></column>
+        <column #item  [hidden]="showLastName" itemId="lastName1" text="Last" dataIndex="last"></column>
         </grid>
     </container>

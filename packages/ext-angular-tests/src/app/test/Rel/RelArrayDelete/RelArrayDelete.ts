@@ -20,7 +20,7 @@ export class RelArrayDeleteComponent implements OnInit {
         ]
     });
 
-    showLastName:boolean = true;
+    showLastName:boolean = false;
 
     toggleLastName = () => {
         this.showLastName = !this.showLastName;

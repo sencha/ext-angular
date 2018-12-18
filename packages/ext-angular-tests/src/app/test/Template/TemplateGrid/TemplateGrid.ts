@@ -16,7 +16,7 @@ export class TemplateGridComponent implements OnInit {
         ]
     });
 
-    nameTpl = `<div #item className='item'>{first} {last}</div>`;
+    nameTpl = `<div id='container-div' #item className='item'>{first} {last}</div>`;
 
     ngOnInit() {
     }
