@@ -96,7 +96,7 @@ const routes: ExtAngularRoutes = [
   { path: 'rel', component: RelComponent, text: 'Rel Component', iconCls: 'x-fa fa-dashboard', leaf: true },
   { path: 'rel-array-delete', component: RelArrayDeleteComponent, text: 'Rel Array Delete', iconCls: 'x-fa fa-dashboard', leaf: true },
   { path: 'rel-dialog', component: RelDialogComponent, text: 'Rel Dialog', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'rel-editor', component: RelEditorComponent, text: 'Rel Dialog', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'rel-editor', component: RelEditorComponent, text: 'Rel Editor', iconCls: 'x-fa fa-dashboard', leaf: true },
   { path: 'rel-grid-column', component: RelGridColumnComponent, text: 'Rel Grid Column', iconCls: 'x-fa fa-dashboard', leaf: true },
   { path: 'rel-menu', component: RelMenuComponent, text: 'Rel Menu', iconCls: 'x-fa fa-dashboard', leaf: true },
   { path: 'rel-tooltip', component: RelTooltipComponent, text: 'Rel Tooltip', iconCls: 'x-fa fa-dashboard', leaf: true },

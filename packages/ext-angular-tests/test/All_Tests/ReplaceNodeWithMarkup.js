@@ -6,7 +6,7 @@ describe("ReplaceNodeWithMarkup", () => {
         var child = ST.component('#child');
         child.visible();
         toggleChild.click();
-        child.destroyed();
+        child.hidden();
         toggleChild.click();
 
         ST.component('#container').and(container => {
