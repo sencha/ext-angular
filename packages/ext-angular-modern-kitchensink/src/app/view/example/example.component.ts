@@ -7,7 +7,6 @@
                 styles: [`
                         `],
                 template: `
-<<<<<<< 9cce2abdab5ab2700de913eff60d1badbaca49bd
                     <formpanel #item shadow="true" layout="vbox" maxWidth="850">
                         <sliderfield #item label="Value" width="350" (change)="updateGauges($event)" [value]="needleValue">
                         </sliderfield>
@@ -24,13 +23,6 @@
                             ></gauge>
                         </container>
                     </formpanel>
-=======
-                    <colorselector #item
-                        (change)="this.onChange($event)"
-                        format="hex6" 
-                        value="00f"
-                    ></colorselector>
->>>>>>> Added doc for ChipView.Updated colorpicker exmples.
                 `
             })
             export class AppComponent {
