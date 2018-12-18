@@ -13,7 +13,7 @@
  *                        `],
  *                template: `
  *                    <colorfield #item
- *                        (change)="onChange($event)"
+ *                        (collapse)="onChange($event)"
  *                        format="hex6" 
  *                        value="00f"
  *                    ></colorfield>
@@ -21,7 +21,7 @@
  *            })
  *            export class AppComponent {
  *                onChange = (param) => {
- *                    Ext.Msg.alert('Color', param.color);
+ *                    Ext.Msg.alert('Color ', param.field.getValue());
  *                }
  *            }
  * */
