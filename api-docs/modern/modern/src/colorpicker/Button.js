@@ -4,14 +4,27 @@
  * The selected color is configurable via {@link #value} and
  * The Format is configurable via {@link #format}.
  *
- *     @example
- *     <ColorButton
- *         onChange={(picker, color, previousColor) => {
- *             Ext.Msg.alert('Color', color);
- *         }}
- *         format="hex6" // default is hex6, possible values: hex6, rgb, rgba
- *         value="00f" // initial color
- *     />
+ *            @example
+ *            import { Component } from '@angular/core'
+ *            declare var Ext: any;
+ *
+ *            @Component({
+ *                selector: 'app-root-1',
+ *                styles: [`
+ *                        `],
+ *                template: `
+ *                    <colorbutton #item
+ *                          (change)="onChange($event)"
+ *                          format="hex6" 
+ *                          value="00f"
+ *                    ></colorbutton>
+ *                `
+ *            })
+ *            export class AppComponent {
+ *                onChange = ({picker, color, previousColor}) => {
+ *                    Ext.Msg.alert('Color', color);
+ *                }
+ *            }
  */
  /**
  * @cfg {Object} popup
