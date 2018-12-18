@@ -28,8 +28,7 @@ Issues
 
 
 Issues (faced by Alisha) in api-docs examples: 
-- selectfield not working for CellEditing and editable grid plugins.
-- In RowExapander.js example, row expanding not working.
+- selectfield not working for CellEditing and Editable grid plugins.
 
 
 Fixed
