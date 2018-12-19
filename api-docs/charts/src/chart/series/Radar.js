@@ -9,7 +9,7 @@
  * As with all other series, the Radar series must be appended in the *series* Chart array configuration. See the Chart
  * documentation for more information.
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

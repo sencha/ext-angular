@@ -12,7 +12,7 @@
  *
  * ## A Basic Grid
  *
- *            @example packages=[angular]
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *
@@ -21,11 +21,13 @@
  *                styles: [`
  *                        `],
  *                template: `
+ *                 <container #item layout="fit">
  *                    <grid #item [store]="store" [height]="600">
  *                        <column #item text="Name" dataIndex="name" flex="1"></column>
  *                        <column #item text="Email" dataIndex="email" flex="1"></column>
  *                        <column #item text="Phone" dataIndex="phone" flex="1"></column>
- *                    </grid>
+ *                     </grid>
+ *                 </container>
  *                `
  *            })
  *            export class AppComponent {
@@ -56,7 +58,7 @@
  * resulting header will be a group header, and will contain the child columns.
  *
  *
- *            @example packages=[angular]
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *
@@ -65,11 +67,13 @@
  *                styles: [`
  *                        `],
  *                template: `
+ *                <container #item layout="fit">
  *                    <grid #item [store]="store" [height]="600">
  *                        <column #item text="Name" dataIndex="name" flex="1"></column>
  *                        <column #item text="Email" dataIndex="email" flex="1" hidden="true"></column>
  *                        <column #item text="Phone" dataIndex="phone" flex="1"></column>
  *                    </grid>
+ *                </container>
  *                `
  *            })
  *            export class AppComponent {

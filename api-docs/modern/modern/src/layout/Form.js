@@ -10,7 +10,7 @@
  * The following example uses label-auto-widthing to size all labels to the width of the
  * largest label.
  *
- *            @example packages=[angular]
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *

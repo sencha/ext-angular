@@ -1,0 +1,12 @@
+<container #item>
+    <container #item>
+        <div #item>This tests that we can render Angular elements including ExtAngular components in list rows.  
+            The test should pass if the list's element contains "Mark Brocato".
+        </div>
+    </container>
+    <list #item
+        flex="1"
+        [store]="store"
+        [itemTpl]="itemTpl"
+    ></list>
+</container>

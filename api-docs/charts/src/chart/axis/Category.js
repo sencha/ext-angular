@@ -10,7 +10,7 @@
  *
  * As with other axis you can set the position of the axis and its title. For example:
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

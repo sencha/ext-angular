@@ -16,7 +16,7 @@
  * Menu with `{@link #cfg-floated}: false`, a Menu may be used as a child of a 
  * {@link Ext.Container Container}.
  *
- *     @example packages=[angular]
+ *     @example packages=[extangular]
  *       import { Component } from '@angular/core'
  *       declare var Ext: any;
  *

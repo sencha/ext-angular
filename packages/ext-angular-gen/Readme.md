@@ -11,7 +11,7 @@ npm install -g @sencha/ext-angular-gen
 
 ## Creating a new ext-angular-gen App
 
-If you haven't already, log into Sencha's private registry using the credentials you received in your ExtReact trial or subscription activation email. If you don't have credentials, you can get them by [signing up for a trial of ExtAngular](https://www.sencha.com/products/extangular/evaluate/).
+If you haven't already, log into Sencha's private registry using the credentials you received in your ExtAngular trial or subscription activation email. If you don't have credentials, you can get them by [signing up for a trial of ExtAngular](https://www.sencha.com/products/extangular/evaluate/).
 
 ```bash
 npm login --registry=http://npm.sencha.com --scope=@sencha

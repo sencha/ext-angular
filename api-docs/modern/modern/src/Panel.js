@@ -19,7 +19,7 @@
  * If configured with `{@link #cfg-anchor: true}`, when you {@link #showBy} another
  * component, there will be an anchor arrow pointing to the reference component.
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

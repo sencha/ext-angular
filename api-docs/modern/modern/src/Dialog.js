@@ -8,7 +8,7 @@
  * draggable, and closable.  Dialogs are not subject to the restrictions of browser
  * popup windows, but provide similar modal experiences.
  *
- *            @example packages=[angular]
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *

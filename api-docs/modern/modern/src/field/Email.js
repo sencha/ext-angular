@@ -8,7 +8,7 @@
  * virtual keyboard for email address input. Aside from that, the email field is just a
  * normal text field. Here's an example of how to use it in a form:
  *
- *            @example packages=[angular]
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *

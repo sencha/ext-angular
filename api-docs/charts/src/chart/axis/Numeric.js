@@ -9,7 +9,7 @@
  * axis so that the values are bound to that. If no values are set, then the
  * scale will auto-adjust to the values.
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

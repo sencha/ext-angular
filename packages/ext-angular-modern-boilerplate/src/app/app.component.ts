@@ -1,35 +1,56 @@
-import { Component } from '@angular/core';
+import { Component, VERSION } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  template: `
-<panel #item [title]=title [layout]="'fit'" [fitToParent]="true">
-  <grid #item
-    [columns]="gridcolumns" 
-    [store]="gridstore"
-    (select)="onGridSelect($event)"
-  ></grid>
-</panel>
-  `,
-  styles: []
+	selector: 'app-root',
+	templateUrl: 'app.component.html',
+	styles: []
 })
 export class AppComponent {
-  title = 'ext-angular-modern-boilerplate'
-  gridcolumns = [
-		{ text: 'Name', width: 250, dataIndex: 'name' },
-		{ text: 'Email Address', flex: 1, dataIndex: 'email' },
-		{ text: 'Phone Number', width: 250, dataIndex: 'phone' }
-	]
-	gridstore = {
-		fields: ['name', 'email', 'phone'],
-		data: [
-			{ name: 'Lisa', email: 'lisa@simpsons.com', phone: '555-111-1224' },
-			{ name: 'Bart', email: 'bart@simpsons.com', phone: '555-222-1234' },
-			{ name: 'Homer', email: 'homer@simpsons.com', phone: '555-222-1244' },
-			{ name: 'Marge', email: 'marge@simpsons.com', phone: '555-222-1254' }
-		]
-  }
-  private onGridSelect({record}) {
-		alert(record.data.name)
+
+	ANGULAR_VERSION: any = VERSION.full
+	title = 'ext-angular-modern-boilerplate - Angular v' + this.ANGULAR_VERSION
+
+	constructor(private router: Router) {
+
 	}
+
+	showAppMenu: boolean = false;
+
+	toggleAppMenu = () => {
+		this.showAppMenu = !this.showAppMenu;
+	}
+
+	onHideAppMenu = () => {
+		this.showAppMenu = false;
+	}
+
+	navigate = (event) => {
+		console.log("navigate");
+
+		var record = event.record;
+		console.log(record.data.id);
+		this.router.navigate([record.data.id]);
+	}
+
+	navStore = {
+		root: {
+			children: [
+				{ id: '/', text: 'Home', iconCls: 'x-fa fa-home', leaf: true },
+				{ id: '/about', text: 'About', iconCls: 'x-fa fa-info', leaf: true },
+			]
+		}
+	};
+
+	responsiveConfig = {
+		medium: {
+			micro: true,
+			width: 56
+		},
+		large: {
+			micro: false,
+			width: 200
+		}
+	};
+
 }

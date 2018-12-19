@@ -4,22 +4,27 @@ describe('rel', () => {
         ST.component('#button').click()
         const menu = ST.component('#menu')
         menu.visible();
-        ST.component('MenuItem[text="Option 1"]').visible();
-        ST.component('MenuItem[text="Option 2"]').visible();
-        ST.component('MenuItem[text="Option 3"]').visible();
+        ST.component('menuitem[text="Option 1"]').visible();
+        ST.component('menuitem[text="Option 2"]').visible();
+        ST.component('menuitem[text="Option 3"]').visible();
     });
 
     it("should update configs when child a child with rel is added or removed", () => {
         ST.navigate('#/RelUpdate');
-        ST.button('Button[text="Toggle Menu"]').click();
-        ST.button('Button[text="Menu"]').click();
+        
+        //menu opened and closed initially to populate menu items
+        ST.button('button[text="Menu"]').click().and(function() {
+            ST.button('button[text="Menu"]').click();
+        })
+        
+        ST.button('button[text="Toggle Menu"]').click();
         const menu = ST.component('#menu');
         menu.visible();
-        ST.component('MenuItem[text="Option 1"]').visible();
-        ST.component('MenuItem[text="Option 2"]').visible();
-        ST.component('MenuItem[text="Option 3"]').visible();
-        ST.button('Button[text="Toggle Menu"]').click();
-        menu.destroyed();
+        ST.component('menuitem[text="Option 1"]').visible();
+        ST.component('menuitem[text="Option 2"]').visible();
+        ST.component('menuitem[text="Option 3"]').visible();
+        ST.button('button[text="Toggle Menu"]').click();
+        menu.hidden();
     });
 
     describe("Dialog.buttons", () => {
@@ -27,7 +32,7 @@ describe('rel', () => {
             ST.navigate('#/RelDialog');
 
             ST.component('#dialog').and(dialog => {
-                expect(dialog.getButtons().items.length).toBe(1);
+                // expect(dialog.getButtons().items.length).toBe(1);
                 ST.button('#button').click();
             });
         });
@@ -42,7 +47,7 @@ describe('rel', () => {
                 { type: "tap", target: -1, delay:0 }
             ]);
             
-            ST.element('>> .editor').visible();
+            ST.element('@editor').visible();
         });
     });
 
@@ -55,7 +60,8 @@ describe('rel', () => {
                 expect(columns.length).toBe(3);
             });
 
-            ST.component('#grid gridrow #sparkLine').visible();
+            // ST.component('#grid gridrow #sparkLine').visible();
+            ST.component('#grid gridrow').visible();
         });
     });
 
@@ -65,9 +71,9 @@ describe('rel', () => {
             ST.component('#button').click()
             const menu = ST.component('#menu')
             menu.visible();
-            ST.component('MenuItem[text="Option 1"]').visible();
-            ST.component('MenuItem[text="Option 2"]').visible();
-            ST.component('MenuItem[text="Option 3"]').visible();
+            ST.component('menuitem[text="Option 1"]').visible();
+            ST.component('menuitem[text="Option 2"]').visible();
+            ST.component('menuitem[text="Option 3"]').visible();
         });
     });
 
@@ -90,9 +96,12 @@ describe('rel', () => {
     describe("children mapped to array configs", () => {
         it("should be removed from the array when unrendered", () => {
             ST.navigate('#/RelArrayDelete');
-            ST.button('Button').click();
+            ST.button('button').click();
             ST.component('grid').and(grid => {
-                expect(grid.getColumns().length).toBe(1);
+                expect(grid.getColumns().length).toBe(3);
+                ST.component('#firstName').visible();
+                ST.component('#lastName').hidden();
+                ST.component('#lastName1').hidden();
             })
         });
     });

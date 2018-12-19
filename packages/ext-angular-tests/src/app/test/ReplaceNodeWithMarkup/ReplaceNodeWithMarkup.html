@@ -1,0 +1,14 @@
+<container #item>
+        <container #item>
+            <div #item>
+                This tests that ExtAngular's patching of AngularComponentEnvironment.replaceNodeWithMarkup correctly adds and 
+                removes components when switching between null and an ExtAngular component within the render method of a composite component.
+            </div>
+        </container>
+        <button #item itemId="toggleChild" text="Toggle Child" (tap)="toggleChild()"></button>
+        <container #item itemId="container" layout="hbox">
+            <button #item text="Left"></button>
+            <button #item [hidden]="!state.showChild" itemId="child" text="Middle"></button>
+            <button #item text="Right"></button>
+        </container>
+    </container>

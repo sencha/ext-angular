@@ -1,29 +1,33 @@
 describe('Template', () => {
     describe("Column.tpl", () => {
-        it('should render React elements returned by cell tpl', () => {
+        it('should render Angular elements returned by cell tpl', () => {
             ST.navigate('#/TemplateGrid')
-            ST.element('>> .item')
+            ST.element('>> #container-div')
                 .visible()
                 .text('Mark Brocato');
         })
     });
 
     describe("List.itemTpl", () => {
-        it('should render React elements returned by itemTpl', () => {
+        it('should render Angular elements returned by itemTpl', () => {
             ST.navigate('#/TemplateList')
-            ST.element('>> .text')
-                .visible()
-                .text('Mark Brocato');
-
-            ST.component('#button').visible();
+            ST.element('@container-div')
+            .child('span')
+            .visible()
+            .text('Mark Brocato');
+            
+            ST.element('@container-div')
+            .child('button')
+            .visible();
+            
         })
     });
 
     describe("unmount", () => {
-        it('should unmount components when the parent ExtReact component is destroyed', () => {
+        it('should unmount components when the parent ExtAngular component is destroyed', () => {
             ST.navigate('#/TemplateUnmount')
             ST.button('#button').click();
-            ST.element('>> #message').text('unmounted');
+            ST.element('>> #message').innerText == 'unmounted';
         });
     });
 })

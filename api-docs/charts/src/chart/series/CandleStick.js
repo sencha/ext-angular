@@ -14,7 +14,7 @@
  * which can be easily remedied with a 'renderer' that formats a Date object for use
  * as an axis label. For example:
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

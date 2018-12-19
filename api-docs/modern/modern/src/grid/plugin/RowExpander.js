@@ -6,7 +6,7 @@
  * The Row Expander plugin provides an "expander" column to give the user the ability to show
  * or hide the {@link Ext.grid.Row#cfg!body body} of each row.
  *
- *            @example packages=[angular]
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *
@@ -20,7 +20,7 @@
  *                    <grid #item
  *                        [store]="store"
  *                        [fullscreen]="true"
- *                        [plugins]="['rowexpander']"
+ *                        (ready)="gridReady($event)"
  *                        [itemConfig]="configObj"
  *                        [variableHeights]="true"
  *                    >
@@ -49,9 +49,9 @@
  *                        tpl: `
  *                            <div>
  *                                <img height="100" src="http://www.sencha.com/assets/images/sencha-avatar-64x64.png"></img>
- *                                <div style="{fontSize: '16px', marginBottom: '5px'}">{fname} {lname}</div>
- *                                <div style="{fontWeight: 'bold'}">{title}</div>
- *                                <div style="{fontWeight: 'bold', fontSize: '14px'}">{department}</div>
+ *                                <div style="font-size: 16px; margin-bottom: 5px">{fname} {lname}</div>
+ *                                <div style="font-weight: bold">{title}</div>
+ *                                <div style="font-weight: bold; font-size: 14px">{department}</div>
  *                            </div>
  *                        `
  *                    }
@@ -69,6 +69,10 @@
  *                        { property: 'lname' }
  *                    ]
  *                });
+ *                
+ *                gridReady  = (ele) => {
+ *                    ele.ext.setPlugins({rowexpander: true});
+ *                 }
  *            }
  *
  */

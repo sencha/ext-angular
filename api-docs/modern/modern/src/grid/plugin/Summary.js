@@ -29,7 +29,7 @@
  * + {@link Ext.data.summary.Sum sum}
  *
  *
- *            @example packages=[angular]
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  * 
@@ -39,16 +39,18 @@
  *                styles: [`
  *                        `],
  *                template: `
+ *                <container #item layout="fit">
  *                    <grid #item
- *                        [height]="'275px'"
- *                        [store]="this.store"
- *                        [plugins]="['gridsummaryrow']"
- *                    >
- *                        <column #item text="First Name" dataIndex="fname" flex="1"></column>
- *                        <column #item text="Last Name" dataIndex="lname" flex="1"></column>
- *                        <column #item text="Talent" dataIndex="talent" flex="1"></column>
- *                        <column #item text="Wins" dataIndex="wins" flex="1" summary="sum"></column>
- *                    </grid>
+ *                         [height]="'280px'"
+ *                         [store]="this.store"
+ *                         [plugins]="['gridsummaryrow']"
+ *                     >
+ *                         <column #item text="First Name" dataIndex="fname" flex="1"></column>
+ *                         <column #item text="Last Name" dataIndex="lname" flex="1"></column>
+ *                         <column #item text="Talent" dataIndex="talent" flex="1"></column>
+ *                         <column #item text="Wins" dataIndex="wins" flex="1" summary="sum"></column>
+ *                     </grid>
+ *                 </container>
  *                `
  *            })
  *            export class AppComponent {

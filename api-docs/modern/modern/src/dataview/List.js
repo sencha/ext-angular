@@ -5,7 +5,7 @@
  *
  * List is a custom styled DataView which allows Grouping, Indexing, Icons, and a Disclosure.
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *
@@ -35,7 +35,7 @@
  *
  * A more advanced example showing a list of people grouped by last name:
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *
@@ -81,7 +81,7 @@
  *
  * If you want to dock items to the bottom or top of a List, you can use the scrollDock configuration on child items in this List. The following example adds a button to the bottom of the List.
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

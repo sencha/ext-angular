@@ -7,7 +7,7 @@
  * functionality such as input validation, standard events, state management and look
  * and feel. Typically we create text fields inside a form, like this:
  * 
- *            @example packages=[angular]
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *

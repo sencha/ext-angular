@@ -1,5 +1,5 @@
 describe("RendererCell", () => {
-    it('should render a React element in a grid cell', () => {
+    it('should render a Angular element in a grid cell', () => {
         ST.navigate('#/RendererCell')
         
         ST.button('#rendererCellButton')
@@ -32,6 +32,6 @@ describe("RendererCell", () => {
     it('should unmount components in cells when the grid is destroyed', () => {
         ST.navigate('#/RendererCell')
         ST.button('#button').click();
-        ST.element('>> #message').text('unmounted');
+        ST.element('@message').innerText == 'unmounted';
     })
 });

@@ -16,7 +16,7 @@
  * Customizing the RowOperations plugin to provide operations other then "Delete" can
  * be done with the `operation` config:
  *
- *            @example packages=[angular]
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *
@@ -26,11 +26,11 @@
  *                styles: [`
  *                        `],
  *                template: `
+ *                <container #item layout="fit">
  *                    <grid #item
  *                        [height]="'600px'"
  *                        (ready)="gridReady($event)"
  *                        [store]="store"
- *                        [fullscreen]="true"
  *                        title="People"
  *                        [plugins]="{
  *                            rowoperations: {
@@ -46,6 +46,7 @@
  *                        <column #item text="Last Name" dataIndex="lname" flex="1"></column>
  *                        <column #item text="Talent" dataIndex="talent" flex="1"></column>
  *                   </grid>
+ *                </container>
  *            `
  *            })
  *            export class AppComponent {

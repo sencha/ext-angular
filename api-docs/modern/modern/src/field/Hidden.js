@@ -9,7 +9,7 @@
  * normal form submission. For example, here is how we might set up a form to send
  * back a hidden userId field:
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

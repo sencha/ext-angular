@@ -11,7 +11,7 @@
  * You can also give items of a {@link Ext.TitleBar} an `align` prop of `left` or `right`,
  * which will dock them to the `left` or `right` of the bar.
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

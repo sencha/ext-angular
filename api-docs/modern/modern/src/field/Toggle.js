@@ -6,7 +6,7 @@
  * Specialized {@link Ext.field.Slider} with a single thumb which only supports two
  * {@link #value values}.
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

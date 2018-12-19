@@ -4,6 +4,7 @@ title="Heterogeneous Geographical Tree"
 rootVisible="false"
 [store]="this.store"
 [height]="'700px'"
+(select)="this.onSelectionChange($event)"
 [listeners]="{
     selectionchange: this.onSelectionChange
 }"
@@ -14,16 +15,19 @@ rootVisible="false"
     dataIndex:'name',
     width:'100%'
 }]"
+(ready)="onTreeReady($event)"
 >
 <toolbar #item docked="bottom">
     <textfield  #item
         listeners="{
             action:'onFieldAction'
         }"
+        (ready)="onTextFieldReady($event)"
     ></textfield>
     <button  #item
         text="Add Territory"
         [handler]="this.addItem"
+        (ready)="onButtonReady($event)"
     ></button>
 </toolbar>
 

@@ -8,7 +8,7 @@
  * As with all other series, the Pie Series must be appended in the *series* Chart array
  * prop. See the Chart documentation for more information.
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

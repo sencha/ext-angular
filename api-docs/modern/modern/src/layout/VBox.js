@@ -11,7 +11,7 @@
  * an information panel in the rest of the screen. We can achieve this with vbox layout's
  * *flex* config:
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *
@@ -41,7 +41,7 @@
  * example, here we have 3 items - one at the top and bottom with flex: 1, and one in the
  * center with a fixed width of 100px:
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *
