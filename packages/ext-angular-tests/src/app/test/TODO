@@ -19,6 +19,6 @@ D) Test case unclear
 Renderwhenready - what to write as test for angular? It gets rendered initially only.
 
 E) Test case Manipulated
-HTML - no class known to check in which div is rendered like rin React. So, checked for existence of div inside container
+HTML - no class known to check in which div is rendered like in React. So, checked for existence of div inside container
 TemplateList, TemplateGrid - could not fetch element using id directly, thus used parent reference
 In RelUpdate, first we need to toggle menu seperately then Toggle button works in ui.

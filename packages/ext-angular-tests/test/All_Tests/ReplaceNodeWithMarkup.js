@@ -1,5 +1,5 @@
 describe("ReplaceNodeWithMarkup", () => {
-    it('add and remove ExtReact components when swapping between null and an ExtReact component in a composite component', () => {
+    it('add and remove ExtAngular components when swapping between null and an ExtAngular component in a composite component', () => {
         ST.navigate('#/ReplaceNodeWithMarkup')
         var toggleChild = ST.component('#toggleChild')
         toggleChild.click();

@@ -1,4 +1,4 @@
-# ext-react-tests
+# ext-angular-tests
 
 This package contains a suite of tests for @sencha/ext-angular.
 
