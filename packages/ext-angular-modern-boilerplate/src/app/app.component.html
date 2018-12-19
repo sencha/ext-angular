@@ -4,7 +4,7 @@
     </titlebar>
 
         <sheet #item  *ngIf="isPhone" [displayed]="showAppMenu" side="left" (hide)="this.onHideAppMenu()">
-            <panel #item  scrollable="true" title="ExtReact Boilerplate">
+            <panel #item  scrollable="true" title="ExtAngular Boilerplate">
                 <app-navmenu #item  [store]="navStore" [width]="250" [selectionChanged]="navigate"></app-navmenu>
             </panel>
         </sheet>
