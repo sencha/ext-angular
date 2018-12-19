@@ -12,48 +12,49 @@
  * Once the columns are ordered to your liking, you may then close the menu by tapping the
  * "Done" button.
  *
- *     @example packages=[reactor]
- *     import React, { Component } from 'react'
- *     import { ExtReact, Grid, Column } from '@extjs/ext-react';
- * 
- *     Ext.require('Ext.grid.plugin.ViewOptions');
+ *            //@example packages=[angular]
+ *            import { Component } from '@angular/core'
+ *            declare var Ext: any;
  *
- *     export default class MyExample extends Component {
+ *            Ext.require('Ext.grid.plugin.ViewOptions');
+ *            @Component({
+ *                selector: 'app-root-1',
+ *                styles: [`
+ *                        `],
+ *                template: `
+ *                <container #item layout="fit">
+ *                    <grid #item
+ *                        [height]="'500px'"
+ *                        [store]="store"
+ *                        plugins="gridviewoptions"
+ *                    >
+ *                        <column #item text="Name" dataIndex="name" flex="1" [sortable]="false"></column>
+ *                        <column #item text="Email" dataIndex="email" flex="1"></column>
+ *                        <column #item text="Phone" dataIndex="phone" flex="1"></column>
+ *                    </grid>
+ *                </container>
+ *                `
+ *            })
+ *            export class AppComponent {
+ *                store = new Ext.data.Store({
+ *                    data: [
+ *                        { "name": "Lisa", "email": "lisa@simpsons.com", "phone": "555-111-1224" },
+ *                        { "name": "Bart", "email": "bart@simpsons.com", "phone": "555-222-1234" },
+ *                        { "name": "Homer", "email": "home@simpsons.com", "phone": "555-222-1244" },
+ *                        { "name": "Marge", "email": "marge@simpsons.com", "phone": "555-222-1254" }
+ *                    ]
+ *                });
+ *            }
  *
- *         store = new Ext.data.Store({
- *             data: [
- *                 { "name": "Lisa", "email": "lisa@simpsons.com", "phone": "555-111-1224" },
- *                 { "name": "Bart", "email": "bart@simpsons.com", "phone": "555-222-1234" },
- *                 { "name": "Homer", "email": "home@simpsons.com", "phone": "555-222-1244" },
- *                 { "name": "Marge", "email": "marge@simpsons.com", "phone": "555-222-1254" }
- *             ]
- *         });
- *
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Grid
- *                         layout="fit"
- *                         store={this.store}
- *                         plugins={[ 'gridviewoptions' ]}
- *                     >
- *                         <Column text="Name" dataIndex="name" flex={1} sortable={false} />
- *                         <Column text="Email" dataIndex="email" flex={1} />
- *                         <Column text="Phone" dataIndex="phone" flex={1} />
- *                     </Grid>
- *                 </ExtReact>
- *             )
- *         }
- *     }
  *
  * Developers may modify the menu and its contents by overriding {@link #sheet} and
  * {@link #columnList} respectively.
  */
-
-/**
+ 
+ /**
  * @cfg {Number} [sheetWidth=250]
- * The width of the menu
- * @accessor
+  * The width of the menu
+  * @accessor
  */
 
 /**

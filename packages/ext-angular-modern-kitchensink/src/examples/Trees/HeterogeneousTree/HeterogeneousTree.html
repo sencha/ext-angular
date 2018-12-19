@@ -3,24 +3,31 @@
 title="Heterogeneous Geographical Tree"
 rootVisible="false"
 [store]="this.store"
+[height]="'700px'"
+(select)="this.onSelectionChange($event)"
 [listeners]="{
     selectionchange: this.onSelectionChange
 }"
+[columns]="[
+{
+    xtype:'treecolumn',
+    text:'Name',
+    dataIndex:'name',
+    width:'100%'
+}]"
+(ready)="onTreeReady($event)"
 >
-<treecolumn  #item
-    text="Name"
-    dataIndex="name"
-    flex="1"
-></treecolumn>
 <toolbar #item docked="bottom">
     <textfield  #item
         listeners="{
             action:'onFieldAction'
         }"
+        (ready)="onTextFieldReady($event)"
     ></textfield>
     <button  #item
         text="Add Territory"
         [handler]="this.addItem"
+        (ready)="onButtonReady($event)"
     ></button>
 </toolbar>
 

@@ -2,25 +2,25 @@
     [shadow]="true"
     [tabBar]="{ docked: 'bottom' }"
     [defaults]="{
-        cls: 'card',
-        layout: 'center'
-    }"
+                cls: 'card',
+                layout: 'center'
+            }"
     [height]="400"
     [width]="600"
 >
-    <container #item iconCls="'x-fa fa-info-circle'" layout="'center'">
+    <panel #item [title]="'Info'" [iconCls]="'x-fa fa-info-circle'" [layout]="'center'">
         <container #item [html]="'Docking tabs to the bottom will automatically change their style.'"></container>
-    </container>
-    <container #item iconCls="'x-fa fa-download'" badgeText="'4'" layout="'center'">
+    </panel>
+    <panel #item [title]="'Download'" [iconCls]="'x-fa fa-download'" badgeText="'4'" [layout]="'center'">
         <container #item [html]="'Badges <em>(like the 4, below)</em> can be added by setting the <code>badgeText</code> prop.'"></container>
-    </container>
-    <container #item iconCls="'x-fa fa-star'" badgeText="'Overflow Test'" layout="'center">
+    </panel>
+    <panel #item  [title]="'Favorites'" [iconCls]="'x-fa fa-star'" badgeText="'Overflow Test'" [layout]="'center'">
         <container #item [html]="'Badge labels will truncate if the text is wider than the tab.'"></container>
-    </container>
-    <!-- <Container iconCls="x-fa fa-bookmark" layout="center">
-        <Container html='Tabbars are <code>ui:"dark"</code> by default, but also have light variants.'></Container>
-    </Container>
-    <Container iconCls="x-fa fa-ellipsis-h" layout="center">
-        <Container className="action" html='User tapped User'></Container>
-    </Container> -->
+    </panel>
+    <panel #item [title]="'Bookmarks'" [iconCls]="'x-fa fa-bookmark'" [layout]="'center'">
+        <container #item html='Tabbars are <code>ui:"dark"</code> by default, but also have light variants.'></container>
+    </panel>
+    <panel #item [title]="'More'" [iconCls]="'x-fa fa-ellipsis-h'" [layout]="'center'">
+        <container #item [cls]="'action'" html='User tapped User'></container>
+    </panel> 
 </tabpanel>

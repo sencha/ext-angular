@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {store} from './store'
+import {data} from './store'
 declare var Ext: any;
 
 @Component({
@@ -11,7 +11,7 @@ export class TreeDecorationsComponent implements OnInit {
 
   constructor() { }
 
-
+store = data;
 
   ngOnInit() {
   }

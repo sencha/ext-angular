@@ -8,68 +8,65 @@
  * the same value is returned for each node, meaning that siblings will span equal
  * angles and occupy equal area.
  *
- *     @example packages=[d3,reactor]
- *     import React, { Component } from 'react'
- *     import { ExtReact, Container }  from '@extjs/ext-react';
- *     import { D3_Sunburst } from '@extjs/ext-react-d3';
+ *          @example packages=[angular]
+ *            import { Component } from '@angular/core'
+ *            declare var Ext: any;
  *
- *     export default class MyExample extends Component {
- *
- *         store = Ext.create('Ext.data.TreeStore', {
- *             data: [{
- *                 text: "Oscorp",
- *                 children: [{
- *                     text: 'Norman Osborn'
- *                     },
- *                     {
- *                         text: 'Harry Osborn'
- *                     },
- *                     {
- *                         text: 'Arthur Stacy'
- *                     }
- *                 ]
- *                 },{
- *                 text: "SHIELD",
- *                 children: [{
- *                     text: 'Nick Fury'
- *                     },{
- *                         text: 'Maria Hill'
- *                     },{
- *                         text: 'Tony Stark'
- *                     }
- *                 ]
- *                 },{
- *                 text: "Illuminati",
- *                 children: [{
- *                         text: 'Namor'
- *                     },{
- *                         text: 'Tony Stark'
- *                     },{
- *                         text: 'Reed Richards'
- *                     },{
- *                         text: 'Black Bolt'
- *                     },{
- *                         text: 'Stephen Strange'
- *                     },{
- *                         text: 'Charles Xavier'
- *                     }
- *                 ]
- *             }
- *             ]
- *         });
- *
- *         render() {
- *             return (
- *                 <ExtReact>
- *                     <Container layout="fit">
- *                         <D3_Sunburst store={this.store} />
- *                     </Container>
- *                 </ExtReact>
- *             )
- *         }
- *     }
- *
- *
+ *            @Component({
+ *                selector: 'app-root-1',
+ *                styles: [`
+ *                        `],
+ *                template: `
+ *                    <container #item layout="fit">
+ *                        <d3-sunburst #item [store]="store"></d3-sunburst>
+ *                    </container>
+ *                `
+ *            })
+ *            export class AppComponent {
+ *                store = Ext.create('Ext.data.TreeStore', {
+ *                    data: [{
+ *                        text: "Oscorp",
+ *                        children: [{
+ *                            text: 'Norman Osborn'
+ *                            },
+ *                            {
+ *                                text: 'Harry Osborn'
+ *                            },
+ *                            {
+ *                                text: 'Arthur Stacy'
+ *                            }
+ *                        ]
+ *                    },{
+ *                        text: "SHIELD",
+ *                        children: [{
+ *                            text: 'Nick Fury'
+ *                            },{
+ *                                text: 'Maria Hill'
+ *                            },{
+ *                                text: 'Tony Stark'
+ *                            }
+ *                        ]
+ *                    },{
+ *                        text: "Illuminati",
+ *                        children: [{
+ *                                text: 'Namor'
+ *                            },{
+ *                                text: 'Tony Stark'
+ *                            },{
+ *                                text: 'Reed Richards'
+ *                            },{
+ *                                text: 'Black Bolt'
+ *                            },{
+ *                                text: 'Stephen Strange'
+ *                            },{
+ *                                text: 'Charles Xavier'
+ *                            }
+ *                        ]
+ *                    }
+ *                    ]
+ *                });
+ *            }
+ * *
  */
 
 /**

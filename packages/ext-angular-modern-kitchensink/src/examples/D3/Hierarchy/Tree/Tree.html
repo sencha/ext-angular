@@ -1,1 +1,19 @@
-<tree #item [store]="store" [shadow]="true"></tree>
+<panel #item shadow="true" layout="fit" height="500">
+    <d3-tree #item
+      [store]="this.store"
+      [colorAxis]="{ field: 'id' }"
+      [interactions]="{
+        type: 'panzoom',
+        zoom: {
+          extent: [0.3, 3],
+          doubleTap: false
+        }
+      }"
+      padding="10"
+      nodeSize="[300, 40]"
+      nodeRadius="10"
+      [nodeText]="this.getNodeText"
+      [tooltip]="{ renderer: this.onTooltip }"
+      [platformConfig]="platConf"
+    ></d3-tree>
+  </panel>

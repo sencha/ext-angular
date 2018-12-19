@@ -282,6 +282,21 @@ territoryModel = Ext.define('KitchenSink.model.tree.Territory', {
     }]
 });
 
+textField : any;
+onTextFieldReady = (event) => {
+    this.textField = event.ext;
+}
+
+buttonField : any;
+onButtonReady = (event) => {
+    this.buttonField = event.ext;
+}
+
+treeField:any;
+onTreeReady = (event) => {
+    this.treeField = event.ext;
+}
+
 store = Ext.create('Ext.data.TreeStore', {
     proxy: {
         type: 'ajax',
@@ -291,13 +306,16 @@ store = Ext.create('Ext.data.TreeStore', {
         },
         url: '/KitchenSink/GeoData'
     },
-    lazyFill: false
+    lazyFill: false,
+    rootVisible: false
 });
 
-/*
+
+
+
 addItem = () => {
-    var inputField = this.textfield.cmp,
-        tree = this.tree.cmp,
+    var inputField = this.textField,
+        tree = this.treeField,
         value = inputField.getValue(),
         target = tree.getSelections()[0] || this.store.getRoot(),
         node;
@@ -343,9 +361,11 @@ onFieldAction = (field, e) => {
     }
 };
 
-onSelectionChange = (selectable, selection) => {
-    var button = this.button.cmp,
+onSelectionChange = (event) => {
+   // debugger;
+    var button = this.buttonField,
         selectedNode;
+    var selection = event.selected
     if (selection.length) {
         selectedNode = selection[0];
 
@@ -363,7 +383,7 @@ onSelectionChange = (selectable, selection) => {
         button.enable();
     }
 };
-*/
+
 
 
 

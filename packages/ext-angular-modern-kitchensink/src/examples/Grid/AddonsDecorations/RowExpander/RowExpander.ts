@@ -24,7 +24,16 @@ export class RowExpanderComponent implements OnInit {
   })
 
 
-  tpl = 
+  rowExpandeerPlugin = { rowexpander: true };
+
+  grid:any;
+  onGridReady = (event) => {
+    console.log("onGridReady");
+    this.grid = event.ext;
+    this.grid.setPlugins(this.rowExpandeerPlugin);
+  }
+
+  tplVal = 
     `
     <div>
       <div>Industry: {industry}</div>
@@ -32,12 +41,6 @@ export class RowExpanderComponent implements OnInit {
       <div style="{marginTop:'1em'}">{desc}</div>
     </div>
     `;
-
-  gridItemConfig = {
-    body: {
-      tpl: this.tpl
-    }
-  }
 
   constructor() { }
 

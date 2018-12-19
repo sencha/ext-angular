@@ -15,4 +15,13 @@ export class ScrollingTabComponent implements OnInit  {
 
   ngOnInit() {}
 
+  tabpanelDefaults = {
+    layout: 'center',
+    cls: 'card',
+    bodyPadding: 0,
+    tab: {
+        minWidth: 130
+    }
+};
+
 }

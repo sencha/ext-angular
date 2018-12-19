@@ -97,47 +97,48 @@
  * Example usage:
  *
  *      @example
- *      import React, { Component } from 'react';
- *      import { ExtReact, SliderField, Gauge, FormPanel, Container} from '@extjs/ext-react';
+ *      import { Component } from '@angular/core'
+ *      declare var Ext: any;
+ *
  *      Ext.require('Ext.ux.gauge.needle.Diamond');
  *      Ext.require('Ext.ux.gauge.needle.Arrow');
- *      export default class NeedleExample extends Component {
- *          constructor() {
- *              super();
- *              this.state = {
- *                  value: 30
+ *
+ *      @Component({
+ *          selector: 'app-root-1',
+ *              styles: [`
+ *                  `],
+ *              template: `
+ *                  <formpanel #item shadow="true" layout="vbox" maxWidth="850">
+ *                      <sliderfield #item label="Value" width="350" (change)="updateGauges($event)" [value]="needleValue">
+ *                      </sliderfield>
+ *                      <container #item
+ *                          [layout]="{
+ *                              type: 'hbox',
+ *                              align: 'stretch'
+ *                          }" 
+ *                          [margin]="'10 0 10 0'" flex="1" 
+ *                          [width]="'100%'"
+ *                          minHeight="200"
+ *                      >
+ *                          <gauge #item
+ *                               flex="1"
+ *                               [value]="needleValue"
+ *                               [needle]="{
+ *                                   outerRadius: '100%'
+ *                               }"
+ *                               [valueStyle]="{
+ *                                   display: 'none'
+ *                               }"
+ *                           ></gauge>     
+ *                      </container>
+ *                  </formpanel>
+ *              `
+ *          })
+ *          export class AppComponent {
+ *              needleValue:number = 30;
+ *                
+ *              updateGauges = (param) => {
+ *                  this.needleValue = param.newValue;
  *              }
  *          }
- *          updateGauges(slider, value) {
- *              this.setState({ value })
- *          }
- *          render() {
- *              const { value } = this.state;
- *              return (
- *                  <ExtReact>
- *                      <FormPanel shadow layout="vbox" width={850}>
- *                          <SliderField label="Value" width={350} onChange={this.updateGauges.bind(this)} value={value}/>
- *                          <Container 
- *                              layout={{
- *                                  type: 'hbox',
- *                                  align: 'stretch'
- *                              }} 
- *                              margin={'10 0 10 0'} flex={1} 
- *                              width={'100%'}
- *                              minHeight={200}
- *                          >
- *                              <Gauge flex={1} value={value} 
- *                                  needle={{
- *                                      outerRadius: '100%'
- *                                  }} 
- *                                  valueStyle={{
- *                                      display: 'none'
- *                                  }}
- *                              />
- *                          </Container>
- *                      </FormPanel>
- *                  </ExtReact>
- *              )
- *          }
- *      }
  */

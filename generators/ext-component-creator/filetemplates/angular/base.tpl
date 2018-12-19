@@ -71,6 +71,7 @@ export class base {
     o.xtype = metaData.XTYPE
     for (var i = 0; i < me.metaData.PROPERTIES.length; i++) { 
       var prop = me.metaData.PROPERTIES[i];
+      //prop== 'title' is needed for children of tabpanel. 
       if (prop == 'handler') {
         if (me[prop] != undefined) {
           o[prop] = me[prop]
@@ -151,7 +152,7 @@ export class base {
           var parentCmp = this['ext']
           var childCmp = item['ext']
 
-          if (parentxtype === 'grid') {
+          if (parentxtype === 'grid' || parentxtype === 'lockedgrid') {
             if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
               parentCmp.addColumn(childCmp)
             }

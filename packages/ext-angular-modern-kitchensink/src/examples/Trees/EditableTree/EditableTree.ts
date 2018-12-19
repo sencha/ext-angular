@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Tree, TreeColumn } from '@sencha/ext-modern-treegrid';
-import {store} from "./data"
+import {data} from "./data"
 
 declare var Ext: any;
 
@@ -18,7 +17,7 @@ export class EditableTreeComponent implements OnInit {
 
   constructor() { }
 
-
+  store = data;
 
   ngOnInit() {
   }
