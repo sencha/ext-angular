@@ -1,5 +1,5 @@
 declare var Ext: any
-import {Component,NgModule,ModuleWithProviders} from '@angular/core'
+import { Component, NgModule, ModuleWithProviders } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser';
 import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
 import { AppComponent } from './app.component';
@@ -12,8 +12,8 @@ import { Route, RouterModule } from '@angular/router';
 
 const routes: Route[] = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-	{ path: 'home', component: HomeComponent},
-	{ path: 'about', component: AboutComponent }
+  { path: 'home', component: HomeComponent },
+  { path: 'about', component: AboutComponent }
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
@@ -31,7 +31,7 @@ export class App {
   imports: [BrowserModule, ExtAngularModernModule, routingModule],
   declarations: [App, AppComponent, HomeComponent, AboutComponent, NavMenuComponent],
   providers: [ExtAngularService],
-  entryComponents: [ AppComponent, AppComponent],
+  entryComponents: [AppComponent, AppComponent],
   bootstrap: [App]
 })
 export class AppModule { }
