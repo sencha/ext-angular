@@ -11,25 +11,23 @@ export class NavMenuComponent implements OnInit {
 
   constructor() { }
 
+  @Input()
+  selectionChanged: any;
 
+  @Input()
+  width: number;
 
-@Input()
-selectionChanged:any;
+  @Input()
+  store: any;
 
-@Input()
-width:number;
-
-@Input()
-store:any;
-
-@Input()
-responsiveConfig:any;
+  @Input()
+  responsiveConfig: any;
 
 
   ngOnInit() {
   }
 
-   isPhone = Ext.platformTags.phone;
+  isPhone = Ext.platformTags.phone;
 
 
 }

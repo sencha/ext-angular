@@ -11,11 +11,9 @@ export class AboutComponent implements OnInit {
 
   constructor() { }
 
-
-
   ngOnInit() {
   }
 
-   isPhone = Ext.os.is.Phone;
+  isPhone = Ext.os.is.Phone;
 
 }

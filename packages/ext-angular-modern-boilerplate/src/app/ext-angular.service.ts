@@ -4,15 +4,15 @@ import {
   ComponentFactoryResolver,
   EmbeddedViewRef,
   ApplicationRef
-  } 
+}
   from '@angular/core'
 @Injectable()
 export class ExtAngularService {
   constructor(
-      private componentFactoryResolver: ComponentFactoryResolver,
-      private appRef: ApplicationRef,
-      private injector: Injector
-  ) {}
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private appRef: ApplicationRef,
+    private injector: Injector
+  ) { }
   appendComponentToViewport(component: any) {
     const componentRef = this.componentFactoryResolver
       .resolveComponentFactory(component)
