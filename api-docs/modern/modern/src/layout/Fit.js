@@ -10,7 +10,7 @@
  * panel to a container using Fit layout, simply set `layout: 'fit'` on the container and
  * add a single panel to it.
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

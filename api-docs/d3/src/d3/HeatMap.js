@@ -9,7 +9,7 @@
  * dimension of the matrix) and a single {@link Ext.d3.axis.Color Color} axis
  * to encode the values.
  *
- *            @example packages=[angular]
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *

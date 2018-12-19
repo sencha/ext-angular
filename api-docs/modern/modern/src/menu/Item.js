@@ -6,7 +6,7 @@
  * A base class for all menu items that require menu-related functionality such as click handling,
  * sub-menus, icons, etc.
  *
- *     @example packages=[angular]
+ *     @example packages=[extangular]
  *       import { Component } from '@angular/core'
  *       declare var Ext: any;
  *

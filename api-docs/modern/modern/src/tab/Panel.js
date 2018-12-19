@@ -8,7 +8,7 @@
  * the top or the bottom of the Tab Panel, and can optionally accept title and icon
  * configurations (see {@link Ext.Button#iconCls iconCls} for additional information).
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

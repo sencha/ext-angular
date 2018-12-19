@@ -18,7 +18,7 @@
  * At its simplest, a DataView is just a Store full of data and a simple template that we
  * use to render each item:
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *
@@ -83,7 +83,7 @@
  * rotten tomatoes (http://developer.rottentomatoes.com/) and modify the {@link #store}
  * and {@link #itemTpl} a little:
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

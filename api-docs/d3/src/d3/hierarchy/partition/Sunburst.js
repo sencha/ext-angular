@@ -8,7 +8,7 @@
  * the same value is returned for each node, meaning that siblings will span equal
  * angles and occupy equal area.
  *
- *          @example packages=[angular]
+ *          @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *

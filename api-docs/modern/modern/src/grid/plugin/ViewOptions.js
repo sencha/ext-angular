@@ -12,7 +12,7 @@
  * Once the columns are ordered to your liking, you may then close the menu by tapping the
  * "Done" button.
  *
- *            //@example packages=[angular]
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *

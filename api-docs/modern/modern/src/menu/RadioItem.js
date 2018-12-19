@@ -6,7 +6,7 @@
  * A menu item that contains a radio button item which can participate in a group of
  * mutually exclusive radio items.
  *
- *     @example packages=[angular]
+ *     @example packages=[extangular]
  *       import { Component } from '@angular/core'
  *       declare var Ext: any;
  *

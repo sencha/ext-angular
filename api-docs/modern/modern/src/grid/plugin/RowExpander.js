@@ -6,7 +6,7 @@
  * The Row Expander plugin provides an "expander" column to give the user the ability to show
  * or hide the {@link Ext.grid.Row#cfg!body body} of each row.
  *
- *            @example packages=[angular]
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *

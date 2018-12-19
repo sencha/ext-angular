@@ -7,7 +7,7 @@
  * used as the foundation for all of the chart classes but may also be created directly 
  * in order to create custom drawings.
  * 
- * @example packages=[angular]
+ * @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *

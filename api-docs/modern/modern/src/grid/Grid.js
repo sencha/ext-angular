@@ -12,7 +12,7 @@
  *
  * ## A Basic Grid
  *
- *            @example packages=[angular]
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *
@@ -58,7 +58,7 @@
  * resulting header will be a group header, and will contain the child columns.
  *
  *
- *            @example packages=[angular]
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *

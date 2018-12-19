@@ -12,7 +12,7 @@
  * want to show progress throughout an operation that has predictable points of interest
  * at which you can update the control.
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component, OnInit } from '@angular/core'
 *            declare var Ext: any;
 *

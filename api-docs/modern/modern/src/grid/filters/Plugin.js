@@ -4,7 +4,7 @@
  *
  * In general an gridfilters plugin will be passed to the grid:
  *
- *     @example
+ *     @example packages=[extangular]
  *     import { Component } from '@angular/core'
  *              declare var Ext: any;
  *  

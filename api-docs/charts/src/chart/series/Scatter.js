@@ -8,7 +8,7 @@
  * As with all other series, the Scatter Series must be appended in the *series* Chart array configuration. See the Chart
  * documentation for more information on creating charts.
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

@@ -10,7 +10,7 @@
  * input methods like select boxes or radio buttons are not possible. Text Areas are
  * usually created inside forms, like this:
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

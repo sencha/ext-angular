@@ -10,7 +10,7 @@
  * This will create one reusable toast container and content will be swapped out as
  * toast messages are queued or displayed.
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

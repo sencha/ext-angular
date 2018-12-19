@@ -5,7 +5,7 @@
  *
  * Simple Select field wrapper. Example usage:
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *
