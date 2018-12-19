@@ -1,6 +1,6 @@
 describe("HTML", () => {
-    it("should be rendered inside ExtReact components", () => {
-        ST.navigate('#/HTMLInExtReactComponent')
+    it("should be rendered inside ExtAngular components", () => {
+        ST.navigate('#/HTMLInExtAngularComponent')
         ST.component('#container').visible();
         
         // verify that container has a div added as child element

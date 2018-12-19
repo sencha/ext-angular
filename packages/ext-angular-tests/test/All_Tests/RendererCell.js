@@ -1,5 +1,5 @@
 describe("RendererCell", () => {
-    it('should render a React element in a grid cell', () => {
+    it('should render a Angular element in a grid cell', () => {
         ST.navigate('#/RendererCell')
         
         ST.button('#rendererCellButton')

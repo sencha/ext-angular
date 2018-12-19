@@ -1,6 +1,6 @@
 describe('Template', () => {
     describe("Column.tpl", () => {
-        it('should render React elements returned by cell tpl', () => {
+        it('should render Angular elements returned by cell tpl', () => {
             ST.navigate('#/TemplateGrid')
             ST.element('>> #container-div')
                 .visible()
@@ -9,7 +9,7 @@ describe('Template', () => {
     });
 
     describe("List.itemTpl", () => {
-        it('should render React elements returned by itemTpl', () => {
+        it('should render Angular elements returned by itemTpl', () => {
             ST.navigate('#/TemplateList')
             ST.element('@container-div')
             .child('span')
@@ -24,7 +24,7 @@ describe('Template', () => {
     });
 
     describe("unmount", () => {
-        it('should unmount components when the parent ExtReact component is destroyed', () => {
+        it('should unmount components when the parent ExtAngular component is destroyed', () => {
             ST.navigate('#/TemplateUnmount')
             ST.button('#button').click();
             ST.element('>> #message').innerText == 'unmounted';
