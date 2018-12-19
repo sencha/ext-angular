@@ -9,7 +9,7 @@
  * optionally have a title at the top and instructions at the bottom. Here's how we might create a FieldSet inside a
  * form:
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

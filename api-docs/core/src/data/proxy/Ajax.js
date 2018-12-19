@@ -205,7 +205,7 @@
  * @constructor
  * Note that if this HttpProxy is being used by a {@link Ext.data.Store Store}, then the Store's call to
  * {@link Ext.data.Store#method-load load} will override any specified callback and params options. In this case, use the
- * {@link Ext.data.Store Store}'s events to modify parameters, or react to loading events.
+ * {@link Ext.data.Store Store}'s events to modify parameters, or angular to loading events.
  *
  * @param {Object} config (optional) Config object.
  * If an options parameter is passed, the singleton {@link Ext.Ajax} object will be used to make the request.

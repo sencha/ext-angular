@@ -8,7 +8,7 @@
  * If you just want to display dates as categories then use the
  * Category class for axis instead.
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

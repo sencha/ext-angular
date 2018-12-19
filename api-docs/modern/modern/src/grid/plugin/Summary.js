@@ -29,7 +29,7 @@
  * + {@link Ext.data.summary.Sum sum}
  *
  *
- *            @example packages=[angular]
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  * 

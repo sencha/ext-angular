@@ -5,7 +5,7 @@
  *
  * A menu item that contains a togglable checkbox by default, but that can also be a part of a radio group.
  *
- *     @example packages=[angular]
+ *     @example packages=[extangular]
  *       import { Component } from '@angular/core'
  *       declare var Ext: any;
  *

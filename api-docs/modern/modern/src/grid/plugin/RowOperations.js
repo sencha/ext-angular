@@ -16,7 +16,7 @@
  * Customizing the RowOperations plugin to provide operations other then "Delete" can
  * be done with the `operation` config:
  *
- *            @example packages=[angular]
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *

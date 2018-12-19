@@ -8,7 +8,7 @@
  * good way of allowing your user to choose one option out of a selection of several
  * (for example, choosing a favorite color):
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

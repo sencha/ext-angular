@@ -6,7 +6,7 @@
  * Creates an HTML file input field on the page. This is usually used to upload files to remote server. File fields are usually
  * created inside a form like this:
  *
- *            @example packages=[angular]
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *

@@ -9,7 +9,7 @@
  * Note: 'bar' series is meant to be used with the
  * {@link Ext.chart.axis.Category 'category'} axis as its x-axis.
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

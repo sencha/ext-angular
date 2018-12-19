@@ -8,7 +8,7 @@
  * only accepts numerical input and also provides additional spinner UI that increases or decreases the current value
  * by a configured {@link #stepValue step value}. Here's how we might use one in a form:
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

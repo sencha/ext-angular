@@ -14,7 +14,7 @@
  * By default a `TextField` is used as the editor.  You can substitute a different editor by 
  * adding a subclass of `Ext.field.Field` as a child of the `Column`.
  *
- *          @example packages=[angular]
+ *          @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *

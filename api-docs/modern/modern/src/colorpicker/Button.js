@@ -4,7 +4,7 @@
  * The selected color is configurable via {@link #value} and
  * The Format is configurable via {@link #format}.
  *
- *            @example
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *

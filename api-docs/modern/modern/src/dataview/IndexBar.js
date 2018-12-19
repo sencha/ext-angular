@@ -9,7 +9,7 @@
  *
  * Here is an example of the usage in a {@link Ext.List}:
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

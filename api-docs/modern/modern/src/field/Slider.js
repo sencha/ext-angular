@@ -9,7 +9,7 @@
  * Sliders are equally useful inside {@link Ext.form.Panel forms} and standalone. Here's how to quickly create a
  * slider in form, in this case enabling a user to choose a percentage:
  *
- *          @example packages=[angular]
+ *          @example packages=[extangular]
  *          import { Component } from '@angular/core'
  *          declare var Ext: any;
  *

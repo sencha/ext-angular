@@ -13,7 +13,7 @@
  * The pack additionally layout populates the `r` attribute on each node, where `r` is the
  * computed node radius.
  *
- *            @example packages=[angular]
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *

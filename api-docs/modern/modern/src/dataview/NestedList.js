@@ -6,7 +6,7 @@
  * NestedList provides a miller column interface to navigate between nested sets
  * and provide a clean interface with limited screen real-estate.
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

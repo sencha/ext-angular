@@ -10,7 +10,7 @@
  * As with all other form fields, the search field gains a "clear" button that appears whenever there
  * is text entered into the form, and which removes that text when tapped.
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

@@ -9,7 +9,7 @@
  * Carousels can be oriented either horizontally or vertically and are easy to configure - they just work like any other
  * Container.
  *
- *            @example packages=[angular]
+ *            @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *

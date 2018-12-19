@@ -8,7 +8,7 @@
  * like any other component. This component typically takes between 1 and 3 props - a {@link #src}, and
  * optionally a {@link #height} and a {@link #width}:
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *

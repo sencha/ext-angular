@@ -8,7 +8,7 @@
  * to recursively subdivide area into rectangles, where the area of any node in the tree
  * corresponds to its value.
  *
- *          @example packages=[angular]
+ *          @example packages=[extangular]
  *            import { Component } from '@angular/core'
  *            declare var Ext: any;
  *

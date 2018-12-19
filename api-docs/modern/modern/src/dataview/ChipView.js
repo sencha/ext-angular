@@ -4,7 +4,7 @@
  * fields in the DataView's records.
  *
  * This handles selection and deletion of chips.
- *     @example
+ *        @example packages=[extangular]
  *        import { Component } from '@angular/core'
  *        declare var Ext: any;
  *

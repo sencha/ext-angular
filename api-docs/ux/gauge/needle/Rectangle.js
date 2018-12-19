@@ -3,7 +3,7 @@
  * 
  * Example usage:
  *
- *      @example
+ *        @example packages=[extangular]
  *        import { Component } from '@angular/core'
  *        declare var Ext: any;
  *        Ext.require('Ext.ux.gauge.needle.Rectangle');

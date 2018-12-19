@@ -5,7 +5,7 @@
  *
  * Wraps an HTML5 number field. Example usage:
  *
-*            @example packages=[angular]
+*            @example packages=[extangular]
 *            import { Component } from '@angular/core'
 *            declare var Ext: any;
 *
