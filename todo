@@ -12,14 +12,17 @@ ExtAngular
  - plugin tree-shaking (for ExtJS ext.js and ext.css)
  - tree shake the typescript ExtAngular files
  - clean doxi output
- - use type info for properties in ts ExtAngular files
+ - use type info for properties in ts ExtAngular files - future scope
 
 
 Issues
+ - ext-angular-gen (need to remove Angular CLI requirement, need to remove react-only questions)
+ - plugin tree-shaking (for ExtJS ext.js and ext.css - Marc working on a solution)
+ - package ext-angular.service (both service and intermediate component (app) - clean up and document bootstrapping process)
  - (major) render method does not parse the HTML code but uses as string [See multiple grid examples] [isolate to standalone angular app]  
  - (major) widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components] [Visit RendererCell like in react/ Need a simple example in extjs]
  - (major) orgchart component does not exists (Under pivot/hierearchy) [External component addition].  
- - (major) ExtAngular components that use Angular structural directives (e.g. ngFor, ngIf) do not dynamically update when their bound data changes.  This is preventing the following from working as desired - Code Preview (you muist reload the page to see the correct code preview panels).
+ - 1 (major) ExtAngular components that use Angular structural directives (e.g. ngFor, ngIf) do not dynamically update when their bound data changes.  This is preventing the following from working as desired - Code Preview (you muist reload the page to see the correct code preview panels).
  - UI for SearchField is breaking. Search form is not docked right. (Form fields - Eg( All>Components>Forms>Searchfield or ALl->Components>TitleBar)
  - we need to specify size in root element of each example else it does not show up. This will break on different screen sizes. [Add examples]
  - DragResizeValidation calendar example does not restrict dragging and resizing 
