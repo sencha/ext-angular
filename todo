@@ -1,3 +1,38 @@
+Issues
+ - ext-angular-gen 
+    - need to remove Angular CLI requirement
+    - need to remove react-only questions)
+ - tree-shaking 
+    - in plugin: for ExtJS ext.js and ext.css
+    - tree shake the typescript ExtAngular files
+ - package ext-angular.service (both service and intermediate component (app)) 
+   - clean up and document bootstrapping process
+ - (major) render method does not parse the HTML code but uses as string [See multiple grid examples] [isolate to standalone angular app]  
+ - (major) widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components] [Visit RendererCell like in react/ Need a simple example in extjs]
+ - (major) orgchart component does not exists (Under pivot/hierearchy) [External component addition].  
+ - (major) ExtAngular components that use Angular structural directives (e.g. ngFor, ngIf) do not dynamically update when their bound data changes.  This is preventing the following from working as desired - Code Preview (you muist reload the page to see the correct code preview panels).
+ - UI for SearchField is breaking. Search form is not docked right. (Form fields - Eg( All>Components>Forms>Searchfield or ALl->Components>TitleBar)
+ - DragResizeValidation calendar example does not restrict dragging and resizing 
+ - resources from packages like ux are not property referenced [Components -> Color Picker -> Basic]
+
+Issues (faced by Alisha) in api-docs examples: 
+- selectfield not working for CellEditing and Editable grid plugins.
+
+Fixed
+ - we need to specify size in root element of each example else it does not show up. This will break on different screen sizes. [Add examples]
+ - TouchEvents: Events list is not updated (using *ngFor rendering)
+ - In Drag Drop text does not change when draging. (check Proxy and Handles). Files Drag Drop not working for same reason as UI is not updated. 
+ - ResizableHandle in Panels:Unable to resize the panel from corners and dynamic option not working 
+ - ResizableLayoutComponent have multiple UI issues. (to reproduce compare from ext-react). Can demo this in next call. 
+ - Hierarchy D3: In ZoomableSunburst selectionChange() used in react but unable to find an equivalent here.
+  so zooming not working on selection of chart node.
+ - FAB button is not positioned properly.
+ - CSS for syntax highlighting is hard coded in index.html because it wasn't loading when specified in the component's styleUrls. - see ext-angular-demo
+ - (major) Tabs: All components are not rendering. Error: Adding a card to a tab container without specifying any tab configuration
+ - (major) Tree widgets not loading with error ERROR Error: [Ext.create] Unrecognized class name / alias: widget.tree [Need to revisit D3 tree] 
+  - (major) Tree widgets not loading with error ERROR Error: [Ext.create] Unrecognized class name / alias: widget.tree [Fixed/Need to revisit D3 tree] 
+  - [Aniket] Button and split button menu always shows up ([hidden] attribute does not work as well as *ngif). [use setMenu method/zip and project to Marc] - Done/Revisit angular way (Low priority)
+
 ExtAngular
  - use ExtJS 6.7
  - modern kitchensink
@@ -13,42 +48,6 @@ ExtAngular
  - tree shake the typescript ExtAngular files
  - clean doxi output
  - use type info for properties in ts ExtAngular files - future scope
-
-
-Issues
- - ext-angular-gen (need to remove Angular CLI requirement, need to remove react-only questions)
- - plugin tree-shaking (for ExtJS ext.js and ext.css - Marc working on a solution)
- - package ext-angular.service (both service and intermediate component (app) - clean up and document bootstrapping process)
- - (major) render method does not parse the HTML code but uses as string [See multiple grid examples] [isolate to standalone angular app]  
- - (major) widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components] [Visit RendererCell like in react/ Need a simple example in extjs]
- - (major) orgchart component does not exists (Under pivot/hierearchy) [External component addition].  
- - 1 (major) ExtAngular components that use Angular structural directives (e.g. ngFor, ngIf) do not dynamically update when their bound data changes.  This is preventing the following from working as desired - Code Preview (you muist reload the page to see the correct code preview panels).
- - UI for SearchField is breaking. Search form is not docked right. (Form fields - Eg( All>Components>Forms>Searchfield or ALl->Components>TitleBar)
- - we need to specify size in root element of each example else it does not show up. This will break on different screen sizes. [Add examples]
- - DragResizeValidation calendar example does not restrict dragging and resizing 
- - resources from packages like ux are not property referenced [Componenrs -> Color Picker -> Basic]
-
-
-
-Issues (faced by Alisha) in api-docs examples: 
-- selectfield not working for CellEditing and Editable grid plugins.
-
-
-Fixed
- - TouchEvents: Events list is not updated (using *ngFor rendering)
- - In Drag Drop text does not change when draging. (check Proxy and Handles). Files Drag Drop not working for same reason as UI is not updated. 
- - ResizableHandle in Panels:Unable to resize the panel from corners and dynamic option not working 
- - ResizableLayoutComponent have multiple UI issues. (to reproduce compare from ext-react). Can demo this in next call. 
- - Hierarchy D3: In ZoomableSunburst selectionChange() used in react but unable to find an equivalent here.
-  so zooming not working on selection of chart node.
- - FAB button is not positioned properly.
- - CSS for syntax highlighting is hard coded in index.html because it wasn't loading when specified in the component's styleUrls. - see ext-angular-demo
- - (major) Tabs: All components are not rendering. Error: Adding a card to a tab container without specifying any tab configuration
- - (major) Tree widgets not loading with error ERROR Error: [Ext.create] Unrecognized class name / alias: widget.tree [Need to revisit D3 tree] 
-  - (major) Tree widgets not loading with error ERROR Error: [Ext.create] Unrecognized class name / alias: widget.tree [Fixed/Need to revisit D3 tree] 
-  - [Aniket] Button and split button menu always shows up ([hidden] attribute does not work as well as *ngif). [use setMenu method/zip and project to Marc] - Done/Revisit angular way (Low priority)
-
-
 
 ExtReact
  - modern kitchensink  update/add for ExtJS 6.7
