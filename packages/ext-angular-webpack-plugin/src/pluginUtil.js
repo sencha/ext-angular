@@ -183,7 +183,9 @@ export async function emit(compiler, compilation, vars, options, callback) {
         }
 
         if (vars.watchStarted == false) {
+          console.log('build1')
           await _buildExtBundle(app, compilation, outputPath, parms, options)
+          console.log('build2')
           vars.watchStarted = true
         }
 
@@ -193,18 +195,20 @@ export async function emit(compiler, compilation, vars, options, callback) {
         //jsChunk.files.push(path.join('build', 'ext-angular',  'ext.css'));
         //jsChunk.id = -2; // this forces html-webpack-plugin to include ext.js first
 
-        if(options.browser == true && options.watch == 'yes') {
-          if (vars.browserCount == 0 && compilation.errors.length == 0) {
-            var url = 'http://localhost:' + options.port
-            log(app + `Opening browser at ${url}`)
-            vars.browserCount++
-            const opn = require('opn')
-            opn(url)
-          }
-        }
-        else {
-          logv(options,'browser NOT opened')
-        }
+        // if(options.browser == true && options.watch == 'yes') {
+        //   if (vars.browserCount == 0 && compilation.errors.length == 0) {
+        //     var url = 'http://localhost:' + options.port
+        //     log(app + `Opening browser at ${url}`)
+        //     vars.browserCount++
+        //     const opn = require('opn')
+        //     opn(url)
+        //   }
+        // }
+        // else {
+        //   logv(options,'browser NOT opened')
+        // }
+
+
         callback()
       }
       else {
@@ -213,18 +217,18 @@ export async function emit(compiler, compilation, vars, options, callback) {
     }
     else {
       log(`${vars.app}FUNCTION emit not run`)
-      if(options.browser == true) {
-        if (vars.browserCount == 0 && options.watch == 'yes') {
-          var url = 'http://localhost:' + options.port
-          log(app + `Opening browser at ${url}`)
-          vars.browserCount++
-          const opn = require('opn')
-          opn(url)
-        }
-      }
-      else {
-        logv(options,'browser NOT opened')
-      }
+      // if(options.browser == true) {
+      //   if (vars.browserCount == 0 && options.watch == 'yes') {
+      //     var url = 'http://localhost:' + options.port
+      //     log(app + `Opening browser at ${url}`)
+      //     vars.browserCount++
+      //     const opn = require('opn')
+      //     opn(url)
+      //   }
+      // }
+      // else {
+      //   logv(options,'browser NOT opened')
+      // }
       callback()
     }
   }
@@ -383,6 +387,7 @@ export function _buildExtBundle(app, compilation, outputPath, parms, options) {
     })
   }
   catch(e) {
+    console.log('e')
     require('./pluginUtil').logv(options,e)
     compilation.errors.push('_buildExtBundle: ' + e)
     callback()
