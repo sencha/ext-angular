@@ -61,97 +61,94 @@ export function extractFromSource(module, options, compilation) {
     const logv = require('./pluginUtil').logv
     logv(options,'FUNCTION extractFromSource')
     var statements = []
-    if (module.resource.match(/\.html$/)) {
 
-      var generate = require("@babel/generator").default
-      var parse = require("babylon").parse
-      var traverse = require("ast-traverse")
+    var generate = require("@babel/generator").default
+    var parse = require("babylon").parse
+    var traverse = require("ast-traverse")
 
-      var ast = parse(js, {
-        plugins: [
-          'typescript',
-          'flow',
-          'doExpressions',
-          'objectRestSpread',
-          'classProperties',
-          'exportDefaultFrom',
-          'exportExtensions',
-          'asyncGenerators',
-          'functionBind',
-          'functionSent',
-          'dynamicImport'
-        ],
-        sourceType: 'module'
-      })
+    var ast = parse(js, {
+      plugins: [
+        'typescript',
+        'flow',
+        'doExpressions',
+        'objectRestSpread',
+        'classProperties',
+        'exportDefaultFrom',
+        'exportExtensions',
+        'asyncGenerators',
+        'functionBind',
+        'functionSent',
+        'dynamicImport'
+      ],
+      sourceType: 'module'
+    })
 
-      function addType(argNode) {
-        var type
+    function addType(argNode) {
+      var type
 
-        if (argNode.type === 'StringLiteral') {
-          var xtype = toXtype(argNode.value)
+      if (argNode.type === 'StringLiteral') {
+        var xtype = toXtype(argNode.value)
 
-          if (xtype != 'extreact') {
-            type = {
-              xtype: toXtype(argNode.value)
-            }
-          }
-        } else {
+        if (xtype != 'extreact') {
           type = {
-            xclass: js.slice(argNode.start, argNode.end)
+            xtype: toXtype(argNode.value)
           }
         }
-
-        if (type != undefined) {
-          let config = JSON.stringify(type)
-          statements.push(`Ext.create(${config})`)
+      } else {
+        type = {
+          xclass: js.slice(argNode.start, argNode.end)
         }
       }
 
-      traverse(ast, {
-        pre: function (node) {
-          if (node.type === 'CallExpression' && node.callee && node.callee.object && node.callee.object.name === 'Ext') {
-            statements.push(generate(node).code)
-          }
-          if(node.type === 'StringLiteral') {
-            let code = node.value
-            for (var i = 0; i < code.length; ++i) {
-              if (code.charAt(i) == '<') {
-                if (resource.match(/\.html$/) && code.substr(i, 4) == '<!==') {
-                  i += 4
-                  i += code.substr(i).indexOf('-->') + 3
-                  continue
-                } else if (code.charAt(i+1) !== '/') {
-                  var start = code.substring(i)
-                  var end = start.indexOf(' ')
-                  if (end >= 0) {
-                    var xtype = start.substring(1, end)
-                    // TODO add condition to check for ext componenets only.
-                    // Donot need toXtype here since it can safely be assumend the selector is same as xtype for all components defined.
-                    var type = { xtype: toXtype(xtype) }
-                    let config = JSON.stringify(type)
-                    statements.push(`Ext.create(${config})`)
-                  }
-                }
-              }
-              // Probably not required
-              if (node.type == 'VariableDeclarator' && node.init && node.init.type == 'CallExpression' && node.init.callee) {
-                if (node.init.callee.name == 'reactify') {
-                  for (let i = 0; i < node.init.arguments.length; i++) {
-                    const valueNode = node.init.arguments[i]
-                    if (!valueNode) continue
-                    addType(valueNode)
-                  }
+      if (type != undefined) {
+        let config = JSON.stringify(type)
+        statements.push(`Ext.create(${config})`)
+      }
+    }
+
+    traverse(ast, {
+      pre: function (node) {
+        if (node.type === 'CallExpression' && node.callee && node.callee.object && node.callee.object.name === 'Ext') {
+          statements.push(generate(node).code)
+        }
+        if(node.type === 'StringLiteral') {
+          let code = node.value
+          for (var i = 0; i < code.length; ++i) {
+            if (code.charAt(i) == '<') {
+              if (code.substr(i, 4) == '<!--') {
+                i += 4
+                i += code.substr(i).indexOf('-->') + 3
+              } else if (code.charAt(i+1) !== '/') {
+                var start = code.substring(i)
+                var spaceEnd = start.indexOf(' ')
+                var newlineEnd = start.indexOf('\n')
+                var tagEnd = start.indexOf('>')
+                var end = Math.min(spaceEnd, newlineEnd, tagEnd)
+                if (end >= 0) {
+                  var xtype = start.substring(1, end)
+                  // TODO add condition to check for ext componenets only.
+                  // Donot need toXtype here since it can safely be assumend the selector is same as xtype for all components defined.
+                  var type = { xtype: toXtype(xtype) }
+                  let config = JSON.stringify(type)
+                  statements.push(`Ext.create(${config})`)
                 }
               }
             }
           }
         }
-      })
 
-    }
+        if (node.type == 'VariableDeclarator' && node.init && node.init.type == 'CallExpression' && node.init.callee) {
+          if (node.init.callee.name == 'reactify') {
+            for (let i = 0; i < node.init.arguments.length; i++) {
+              const valueNode = node.init.arguments[i]
+              if (!valueNode) continue
+              addType(valueNode)
+            }
+          }
+        } // Probably not required
+      }
+    })
 
-    console.log('$$$$$$$$$$$$$$$4 statements are')
-    console.log(statements)
     return statements
   }
   catch(e) {
