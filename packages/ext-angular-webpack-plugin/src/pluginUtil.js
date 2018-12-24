@@ -80,7 +80,10 @@ export function _compilation(compiler, compilation, vars, options) {
     if (vars.production) {
       logv(options,`ext-compilation: production is ` +  vars.production)
       compilation.hooks.succeedModule.tap(`ext-succeed-module`, (module) => {
-        if (module.resource && module.resource.match(/\.(j|t)sx?$/) && !module.resource.match(/node_modules/) && !module.resource.match(`/ext-{$options.framework}/dist/`) && !module.resource.match(`/ext-${options.framework}-${options.toolkit}/`)) {
+        if (module.resource && (module.resource.match(/\.(j|t)sx?$/) ||
+        (options.framework == 'angular' && module.resource.match(/\.html$/))) &&
+        !module.resource.match(/node_modules/) && !module.resource.match(`/ext-{$options.framework}/dist/`)
+         && !module.resource.match(`/ext-${options.framework}-${options.toolkit}/`)) {
           vars.deps = [ 
             ...(vars.deps || []), 
             ...require(`./${vars.framework}Util`).extractFromSource(module, options, compilation) 
