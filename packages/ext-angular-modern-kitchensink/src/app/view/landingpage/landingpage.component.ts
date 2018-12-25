@@ -177,13 +177,13 @@ export class LandingpageComponent implements OnInit {
   }
 
   dataviewReady = (event) => {
-    console.log("dataviewReady");
+    //console.log("dataviewReady");
     this.theDataview = event.ext;
   }
 
   doClick = (event) => {
     //if( window.console ) console.log('dataView.click(%o,%o,%o,%o)',view,index,node,event);
-    console.log("doClick. ID: " + event.location.record.data.id);
+    //console.log("doClick. ID: " + event.location.record.data.id);
     var id = event.location.record.data.id
     this.navigate(id)
   }
@@ -196,13 +196,13 @@ export class LandingpageComponent implements OnInit {
   </div>`
 
   dataviewToolbarReady = (event) => {
-    console.log("dataviewToolbarReady");
+    //console.log("dataviewToolbarReady");
     this.theDataviewToolbar = event.ext
   }
 
   doClickToolbar = (event) => {
-    console.log('click')
-    console.log(event.location.record.data)
+    //console.log('click')
+    //console.log(event.location.record.data)
     var id = event.location.record.data.path
     this.navigate(id)
   }
@@ -213,7 +213,7 @@ export class LandingpageComponent implements OnInit {
       next: (v) => {
         this.node = v;
         this.files = getFiles(v, _code);
-        console.log("files length : " + this.files.length);
+        //console.log("files length : " + this.files.length);
         this.highlightCode();
         //console.log("Generating breadcrumb for ID: " + v.id);
         this.breadcrumb = generateBreadcrumb(v);
@@ -221,6 +221,7 @@ export class LandingpageComponent implements OnInit {
         if(this.node.childNodes.length == 0) {
           this.menuhidden = true
           this.routerhidden = false
+          this.blockstyle = {'background':'top','display':'none','text-align':'center'}
           if (this.theDataview != undefined) {
             this.theDataview.setData(null)
             this.theDataview.setData(null)
@@ -229,6 +230,7 @@ export class LandingpageComponent implements OnInit {
         else {
           this.menuhidden = false
           this.routerhidden = true
+          this.blockstyle = {'background':'top','display':'block','text-align':'center'}
           if (this.theDataview != undefined) {
             this.theDataview.setData(this.node.childNodes)
           }
@@ -259,7 +261,7 @@ export class LandingpageComponent implements OnInit {
   }
 
   navigate(location) {
-    console.log('navigate')
+    //console.log('navigate')
     this.router.navigateByUrl(location);
   }
 

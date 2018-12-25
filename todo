@@ -1,13 +1,23 @@
 Issues
+ - kitchensink
+    - breadcrumb has extra character at end
+    - breadcrumb background color
+    - stars on premium components
+    - colorpicker needs type library (rerun doxi)
+    - code window does not reflect current example
+    - core.js:15707 Navigation triggered outside Angular zone, did you forget to call 'ngZone.run()'?
+    - width should not be needed, only height at this point (until we figure out height issue)
+    - remove Redux Grid from examples
  - ext-angular-gen 
     - need to remove Angular CLI requirement
-    - need to remove react-only questions)
+    - need to remove react-only questions
  - tree-shaking 
-    - in plugin: for ExtJS ext.js and ext.css
-    - tree shake the typescript ExtAngular files
+    - in plugin: create manifest.js to allow Sencha Cmd to create ExtJS ext.js and ext.css files
+    - in plugin: tree shake the typescript ExtAngular files
  - package ext-angular.service (both service and intermediate component (app)) 
    - clean up and document bootstrapping process
- - (major) render method does not parse the HTML code but uses as string [See multiple grid examples] [isolate to standalone angular app]  
+ - (major) render method does not parse the HTML code but uses as string [See multiple grid examples] [isolate to standalone angular app] 
+    - we need the Ext JS teams help on this one 
  - (major) widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components] [Visit RendererCell like in react/ Need a simple example in extjs]
  - (major) orgchart component does not exists (Under pivot/hierearchy) [External component addition].  
  - (major) ExtAngular components that use Angular structural directives (e.g. ngFor, ngIf) do not dynamically update when their bound data changes.  This is preventing the following from working as desired - Code Preview (you muist reload the page to see the correct code preview panels).
