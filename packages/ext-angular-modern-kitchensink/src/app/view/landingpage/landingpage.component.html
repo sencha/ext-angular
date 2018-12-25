@@ -2,141 +2,103 @@
   [bodyStyle]="'backgroundSize: 20px 20px;backgroundColor: #e8e8e8;backgroundImage: linear-gradient(0deg, #f5f5f5 1.1px, transparent 0), linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)'"
   >
 
-  <titlebar #item [docked]="'top'" [shadow]="true" [style]="{'z-index': 2}">
+  <!-- titlebar starts-->
+  <titlebar #item
+    [docked]="'top'"
+    [shadow]="true"
+    [flex]="1"
+  >
     <button #item [selfAlign]="'left'" [iconCls]="'x-fa fa-bars'" (tap)="toggleTree()"></button>
     <container #item [layout]="'hbox'">
       <div #item class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></div>
       <a href="#" #item class="app-title">ExtAngular Modern Kitchen Sink - Angular v{{ANGULAR_VERSION}}</a>
     </container>
   </titlebar>
-
-  <!--  Navtree starts-->
-  <panel #item [scrollable]="'y'" [shadow]="false" [style]="{zIndex: 100, backgroundColor: 'white'}" [header]="false" [collapsible]="{ direction: 'left' }"
-    [docked]="'left'" [width]="'300'" [resizable]="{
-      edges: 'east',
-      dynamic: true
-    }" [collapsed]="!showTreeFlag">
-    <searchfield #item [flex]="1" [docked]="'top'" [ui]="'faded'" (change)="filterNav($event)" [margin]="7"></searchfield>
-    <treelist #item [ui]="'nav'" [expanderFirst]="false" [expanderOnly]="false" [store]="treeStore" (selectionchange)="selectionChanged($event)"></treelist>
-    <!--<mjg #item></mjg>-->
-  </panel>
-  <!--  Navtree ends-->
+  <!-- titlebar ends-->
 
   <!-- Breadcrumb starts-->
-  <toolbar #item [docked]="'top'">
-      <dataview #item [centered]="false" [style]="menustyle" [itemTpl]="tplToolbar" [inline]="'true'" [itemCls]="'div.app-toolbar'"
-        (childtap)="doClickToolbar($event)" (ready)="dataviewToolbarReady($event)">
-      </dataview>
-    </toolbar>
-    <!-- Breadcrumb ends-->
+  <toolbar #item
+    [docked]="'top'"
+  >
+    <dataview #item [centered]="false" [style]="menustyle" [itemTpl]="tplToolbar" [inline]="'true'" [itemCls]="'div.app-toolbar'"
+      (childtap)="doClickToolbar($event)" (ready)="dataviewToolbarReady($event)">
+    </dataview>
+  </toolbar>
+  <!-- Breadcrumb ends-->
 
-    <!-- examples start-->
-    <container #item [scrollable]="true" [padding]="30" [centered]="true">
-      <router-outlet #item></router-outlet>
-      <dataview #item
-        [style]= "blockstyle"
-        [itemTpl]="tpl"
-        [inline]="'true'"
-        [itemCls]="'div.app-thumbnail'"
-        (childtap)="doClick($event)"
-        (ready)="dataviewReady($event)">
-      </dataview>
-    </container>
-    <!-- examples ends-->
+  <!-- Navtree starts-->
+  <panel #item
+    [docked]="'left'"
+    [flex]="1"
+    [scrollable]="'y'"
+    [shadow]="false"
+    [style]="{zIndex: 100, backgroundColor: 'white'}"
+    [resizable]="{edges: 'east', dynamic: true}"
+    [header]="false"
+    [width]="'300'"
+    [collapsible]="{ direction: 'left' }"
+    [collapsed]="!showTreeFlag"
+  >
+    <searchfield #item [flex]="1" [docked]="'top'" [ui]="'faded'" (change)="filterNav($event)" [margin]="7"></searchfield>
+    <treelist #item [ui]="'nav'" [expanderFirst]="false" [expanderOnly]="false" [store]="treeStore" (selectionchange)="selectionChanged($event)"></treelist>
+  </panel>
+  <!-- Navtree ends-->
 
-    <button [hidden]="files.length > 0 ? false: true"
-    #item
+  <!-- code button starts-->
+  <button #item
+    [hidden]="files.length > 0 ? false: true"
     [iconCls]="'x-font-icon ' + (showCode ? 'md-icon-close' : 'md-icon-code')"
     [ui]="'fab'"
     [top]="isDesktop ? 20 : 35"
     [right]="21"
     [zIndex]="1000"
     (tap)="toggleCode()"
-    ></button>
+  ></button>
+  <!-- code button ends-->
 
-
-
-
-    <panel
-    #item
-    [hidden]="files.length > 0 ? false: true"
-    [resizable]="{ edges: 'west', dynamic: true }"
+  <!-- code start-->
+  <panel #item
     [docked]="'right'"
+    [hidden]="files.length > 0 ? false: true" 
+    [flex]="2"
+    [layout]= "'fit'"
+    [scrollable]="'y'"
+    [shadow]="false"
+    [style]="{zIndex: 100}"
+    [resizable]="{ edges: 'west', dynamic: true }"
     [header]="false"
-    [width]="'400'" 
+    [width]="'33%'" 
     [collapsible]="{ direction: 'right' }"
     [collapsed]="!showCode"
-    [userSelectable]="true"
-   >
-    <tabpanel
-      #item
-      [height]="'100%'"
+  >
+    <tabpanel #item
       [shadow]="true"
-      [tabBar]="{
-        layout: {
-            pack: 'left'
-        }
-      }"
+      [tabBar]="{layout: {pack: 'left'}}"
     >
-        <panel *ngFor="let file of files" [hidden]="files.length > 0 ? false: true"
-          #item
-          [scrollable]="true"
-          [title]="file.name"
-          [ui]="'code-panel'"
-          tab="{
-              ui: 'app-code-tab',
-              flex: 0,
-              minWidth: 120
-          }"
-          [userSelectable]="true"
-          [html]="file.code"
-        ></panel>
-    </tabpanel>
+      <panel #item *ngFor="let file of files" [hidden]="files.length > 0 ? false: true"
+        [scrollable]="true"
+        [title]="file.name"
+        [ui]="'code-panel'"
+        tab="{ui: 'app-code-tab', flex: 0, minWidth: 120}"
+        [userSelectable]="{element: true, bodyElement: true}"
+        [html]="file.code"
+      ></panel>
+  </tabpanel>
   </panel>
+  <!-- code ends-->
 
+  <!-- examples start-->
+  <container #item [scrollable]="true" [padding]="30" [fitToParent]="true">
+    <router-outlet #item></router-outlet>
+    <dataview #item
+      [style]= "blockstyle"
+      [itemTpl]="tpl"
+      [inline]="'true'"
+      [itemCls]="'div.app-thumbnail'"
+      (childtap)="doClick($event)"
+      (ready)="dataviewReady($event)">
+    </dataview>
+  </container>
+  <!-- examples ends-->
 
-    <!--
-    <container #item [docked]="'right'" [hidden]="files.length > 0 ? false: true" [width]="'400'" [maxWidth]="showCode? '83%' : 0">
-      <panel
-        #item
-        [resizable]="{ edges: 'west', dynamic: true }"
-        [collapsed]="!showCode"
-        [docked]="'right'"
-        [header]="false"
-        [collapsible]="{ direction: 'right' }"
-        [shadow]="true"
-        [userSelectable]="true"
-        [width]="showCode? '100%' : 0"
-      >
-        <tabpanel
-          #item
-          [height]="'100%'"
-          [shadow]="true"
-          [tabBar]="{
-            layout: {
-                pack: 'left'
-            }
-          }"
-        >
-            <panel *ngFor="let file of files" [hidden]="files.length > 0 ? false: true"
-              #item
-              [scrollable]="true"
-              [title]="file.name"
-              [ui]="'code-panel'"
-              tab="{
-                  ui: 'app-code-tab',
-                  flex: 0,
-                  minWidth: 120
-              }"
-              [userSelectable]="true"
-              [html]="file.code"
-            ></panel>
-        </tabpanel>
-      </panel>
-    </container>
-  -->
-
-
-
-
-  </panel>
+</panel>
