@@ -5,11 +5,13 @@
     text="Change" 
     width="100" 
     dataIndex="priceChange" 
+    [cell]="{encodeHtml:false}"
     [renderer]="this.renderSign.bind(this,'0.00')"
   ></column>
   <column  #item
     text="% Change" 
     dataIndex="priceChangePct" 
+    [cell]="{encodeHtml:false}"
     [renderer]="this.renderSign.bind(this,'0.00')"
   ></column>
   <column #item text="Last Updated" width="125" dataIndex="lastChange" formatter='date("m/d/Y")'></column>
