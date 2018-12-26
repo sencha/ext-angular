@@ -27,22 +27,11 @@ export class BasicGridComponent implements OnInit {
       renderSign = (format, value) =>  {
         //console.log("In renderSign. format: " + format + " value : " + value);
         var formattedValue = Ext.util.Format.number(value, format);
-        var col = '';
-        if(value > 0) {
-            col = 'green';
-        }
-        else if(value < 0 ) {
-            col = 'red';
-        }
-        
-        // var value: any = `<span>hi</span>`
-        // var s: any = Ext.String.htmlDecode(value);
-        // return s;
-
-        //return Ext.decode(`<span style=' color:  ${col} > ${formattedValue}' </span>`);
-        return formattedValue;
+        var col = ''
+        if(value > 0) {col = 'green'}
+        else if(value < 0 ) {col = 'red'}
+        return `<span style='color:${col}'>${formattedValue}</span>`
       }
-    
 
   constructor(gridService :GridService) {
     gridService.initCompanyData();
