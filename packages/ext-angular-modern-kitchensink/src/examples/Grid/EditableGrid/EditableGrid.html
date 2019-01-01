@@ -1,5 +1,5 @@
 <grid #item title='Stock Prices' shadow="true" [store]="this.store" [platformConfig]="{ desktop: { plugins: { gridcellediting: true } },
-    '!desktop': { plugins: { grideditable: true } } }" height="600px">
+    '!desktop': { plugins: { grideditable: true } } }" [fitToParent]="true">
     <toolbar #item docked="top">
         <div #item [style]="{color: '#666', fontSize: '13px' }">Double- {{pressType}} a {{pressEntity}} to edit</div>
     </toolbar>
