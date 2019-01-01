@@ -88,12 +88,13 @@
   <!-- code ends-->
 
   <!-- examples start-->
-  <container #item [scrollable]="true" [padding]="30" [fitToParent]="true">
+  <container #item [scrollable]="true" [padding]="30" [layout]="'fit'" [fitToParent]="true">
     <router-outlet #item></router-outlet>
-    <dataview #item
+    <dataview #item [fitToParent]="true" 
       [style]= "blockstyle"
       [itemTpl]="tpl"
-      [inline]="'true'"
+      [inline]="true"
+      [centered]="true"
       [itemCls]="'div.app-thumbnail'"
       (childtap)="doClick($event)"
       (ready)="dataviewReady($event)">
