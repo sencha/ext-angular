@@ -1,19 +1,35 @@
 declare var Ext: any;
 import {
   Output,
+  Inject,
+  ViewContainerRef,
+  Host,
   ElementRef,
   EventEmitter,
   ContentChildren,
   QueryList,
   SimpleChanges
 } from '@angular/core';
+//import { ExtContainerComponent } from './ext-container.component';
 
 export class base {
   public ext: any
   private _nativeElement: any
 
-  constructor(el: ElementRef, private metaData: any) {
-    //console.log('constructor');console.log(el.nativeElement)
+  constructor(el: ElementRef,  metaData: any,  vcRef: ViewContainerRef) {
+    //, par: ExtContainerComponent, @Host() private _b: base, @Inject(forwardRef(() => base)) private _parent:base) {
+    console.log('constructor')
+
+    //var parentComponent1 = vcRef.injector._view.context;
+    var parentComponent1 = vcRef.injector;
+
+    console.log(parentComponent1);
+
+    // var parentComponent2 = this.vcRef._element.parentView.context;
+    // console.log(parentComponent2);
+
+    //console.log(_b)
+    console.log(el.nativeElement)
     this._nativeElement = el.nativeElement
     metaData.EVENTS.forEach( (event: any, n: any) => {
       if (event.name != 'fullscreen') {
@@ -51,6 +67,15 @@ export class base {
     }
     //console.log(`OnChanges: ${changesMsgs.join('; ')}`)
   }
+
+  ngOnDestroy() {
+    console.log(`ngOnDestroy`)
+    console.log(this)
+    this.ext.parent.remove(this.ext)
+  }
+
+
+
 
   // Beware! Called frequently!
   // Called in every change detection cycle anywhere on the page
@@ -126,13 +151,14 @@ export class base {
   @ContentChildren('item') items: QueryList<any>
   @ContentChildren('item', { read: ElementRef }) items2: QueryList<ElementRef>
   baseAfterContentInit() {
-    //console.log('\nbaseAfterContentInit')
+    console.log('\nbaseAfterContentInit')
+     console.log(this.items)
 
     if (this.items.length < 2) {
-      //console.log('1 item')
+      console.log('1 item')
       return
     }
-    //console.log(this.items.length + ' items')
+    console.log(this.items.length + ' items')
 
     var anyItems = []
     var elRefItems = []
@@ -148,7 +174,7 @@ export class base {
       var elRefItem = elRefItems[i]
       if (item != this) {
         if (item.ext != undefined) {
-          //console.log('parent: ' + this.ext.xtype + ', child: ' + item.ext.xtype)
+          console.log('parent: ' + this.ext.xtype + ', child: ' + item.ext.xtype)
 
 
           var parentxtype = this['ext'].xtype

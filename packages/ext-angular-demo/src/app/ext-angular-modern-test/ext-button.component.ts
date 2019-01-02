@@ -1,7 +1,9 @@
 import {
   Output,
+  Host,
   OnInit,
   AfterContentInit,
+  ViewContainerRef,
   OnChanges,
   Component,
   ElementRef,
@@ -375,7 +377,10 @@ export class buttonMetaData {
   template: '<ng-template #dynamic></ng-template>'
 })
 export class ExtButtonComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,buttonMetaData)}
+  //constructor(eRef:ElementRef) {super(eRef,buttonMetaData)}
+  constructor(eRef:ElementRef,  metaData:any,  vcRef:ViewContainerRef) {super(eRef,buttonMetaData, vcRef)}
+
+
   public ngOnInit() {this.baseOnInit(buttonMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

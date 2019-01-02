@@ -1,6 +1,7 @@
 import {
   Output,
   OnInit,
+  ViewContainerRef,
   AfterContentInit,
   OnChanges,
   Component,
@@ -378,10 +379,12 @@ export class containerMetaData {
   inputs: containerMetaData.PROPERTIES,
   outputs: containerMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtContainerComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template #dynamic></ng-template><ng-content></ng-content>'
 })
 export class ExtContainerComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,containerMetaData)}
+  //constructor(eRef:ElementRef) {super(eRef,containerMetaData)}
+  constructor(eRef:ElementRef,  metaData: any,  vcRef: ViewContainerRef) {super(eRef,containerMetaData, vcRef)}
+
   public ngOnInit() {this.baseOnInit(containerMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {
