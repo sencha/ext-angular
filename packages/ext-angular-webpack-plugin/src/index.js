@@ -49,7 +49,7 @@ export default class ExtWebpackPlugin {
       const fs = require('fs')
       var itExists = fs.existsSync(jsPath)
 
-      if(!itExists && !this.plugin.vars.production) {
+      if(!itExists && !this.plugin.vars.production && this.plugin.vars.framework != 'extjs') {
         compiler.hooks.beforeCompile.tapAsync(`ext-before-compile`, (compilation, callback) => {
           require('./pluginUtil').logv(this.plugin.options,'HOOK beforeCompile')
           //compilation.errors = []
@@ -87,6 +87,10 @@ export default class ExtWebpackPlugin {
 
       compiler.hooks.done.tap(`ext-done`, () => {
         require('./pluginUtil').logv(this.plugin.options,'HOOK done')
+
+
+
+        
 
         try {
           if(this.plugin.options.browser == true && this.plugin.options.watch == 'yes' && this.plugin.vars.production == false) {
