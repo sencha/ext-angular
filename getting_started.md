@@ -163,9 +163,6 @@ export class App {
 export class AppModule {}
 ```
 
-copy ext-angular.service.ts to this project (from git repo)
-
-
 replace the contents of ./src/index.html with this:
 
 ```html

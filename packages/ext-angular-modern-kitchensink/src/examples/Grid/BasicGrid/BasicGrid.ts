@@ -25,20 +25,13 @@ export class BasicGridComponent implements OnInit {
       });
 
       renderSign = (format, value) =>  {
-        console.log("In renderSign. format: " + format + " value : " + value);
+        //console.log("In renderSign. format: " + format + " value : " + value);
         var formattedValue = Ext.util.Format.number(value, format);
-        var col = '';
-        if(value > 0) {
-            col = 'green';
-        }
-        else if(value < 0 ) {
-            col = 'red';
-        }
-        
-        //return `<span style=' color:  ${col} > ${formattedValue}' </span>`;
-        return formattedValue;
+        var col = ''
+        if(value > 0) {col = 'green'}
+        else if(value < 0 ) {col = 'red'}
+        return `<span style='color:${col}'>${formattedValue}</span>`
       }
-    
 
   constructor(gridService :GridService) {
     gridService.initCompanyData();
@@ -47,8 +40,8 @@ export class BasicGridComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log("Store : ")
-    console.log(this.store);
+    //console.log("Store : ")
+    //console.log(this.store);
   }
 
 

@@ -7,7 +7,7 @@ export class GridService {
 
 
 	constructor() {
-		console.log("Constructor called");
+		//console.log("Constructor called");
     }
 
     initCompanyData = function(){

@@ -1,4 +1,4 @@
-<container #item layout="vbox" padding="10" width="550px" height="600px">
+<container #item padding="10" [layout]="'vbox'" [fitToParent]="true">
     <toolbar #item margin="0 0 20 0" shadow>
         <container #item key="1" [style]="{ marginRight: '10px' }"     html='Grouping:'></container>
         <segmentedbutton #item key="2" label="Grouping" >

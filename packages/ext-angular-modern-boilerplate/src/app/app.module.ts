@@ -9,7 +9,6 @@ import { NavMenuComponent } from './NavMenu/navmenu.component';
 import { ExtAngularService } from './ext-angular.service';
 import { Route, RouterModule } from '@angular/router';
 
-
 const routes: Route[] = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },

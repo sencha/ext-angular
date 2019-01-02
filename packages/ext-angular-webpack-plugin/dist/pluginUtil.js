@@ -168,7 +168,7 @@ function _emit() {
   _emit = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(compiler, compilation, vars, options, callback) {
-    var log, logv, app, framework, path, _buildExtBundle, outputPath, command, parms, url, opn;
+    var log, logv, app, framework, path, _buildExtBundle, outputPath, command, parms;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
@@ -191,7 +191,7 @@ function _emit() {
           logv(options, 'framework: ' + framework);
 
           if (!(options.emit == true)) {
-            _context.next = 30;
+            _context.next = 31;
             break;
           }
 
@@ -210,7 +210,7 @@ function _emit() {
           }
 
           if (!(vars.rebuild == true)) {
-            _context.next = 27;
+            _context.next = 28;
             break;
           }
 
@@ -231,59 +231,60 @@ function _emit() {
           }
 
           if (!(vars.watchStarted == false)) {
-            _context.next = 23;
+            _context.next = 25;
             break;
           }
 
-          _context.next = 22;
+          console.log('build1');
+          _context.next = 23;
           return _buildExtBundle(app, compilation, outputPath, parms, options);
 
-        case 22:
+        case 23:
+          console.log('build2');
           vars.watchStarted = true;
 
-        case 23:
+        case 25:
           //const jsChunk = compilation.addChunk(`ext-angular-js`)
           //jsChunk.hasRuntime = jsChunk.isInitial = () => true;
           //jsChunk.files.push(path.join('build', 'ext-angular', 'ext.js'));
           //jsChunk.files.push(path.join('build', 'ext-angular',  'ext.css'));
           //jsChunk.id = -2; // this forces html-webpack-plugin to include ext.js first
-          if (options.browser == true && options.watch == 'yes') {
-            if (vars.browserCount == 0 && compilation.errors.length == 0) {
-              url = 'http://localhost:' + options.port;
-              log(app + `Opening browser at ${url}`);
-              vars.browserCount++;
-              opn = require('opn');
-              opn(url);
-            }
-          } else {
-            logv(options, 'browser NOT opened');
-          }
-
+          // if(options.browser == true && options.watch == 'yes') {
+          //   if (vars.browserCount == 0 && compilation.errors.length == 0) {
+          //     var url = 'http://localhost:' + options.port
+          //     log(app + `Opening browser at ${url}`)
+          //     vars.browserCount++
+          //     const opn = require('opn')
+          //     opn(url)
+          //   }
+          // }
+          // else {
+          //   logv(options,'browser NOT opened')
+          // }
           callback();
-          _context.next = 28;
+          _context.next = 29;
           break;
 
-        case 27:
+        case 28:
           callback();
 
-        case 28:
+        case 29:
           _context.next = 33;
           break;
 
-        case 30:
-          log(`${vars.app}FUNCTION emit not run`);
-
-          if (options.browser == true) {
-            if (vars.browserCount == 0 && options.watch == 'yes') {
-              url = 'http://localhost:' + options.port;
-              log(app + `Opening browser at ${url}`);
-              vars.browserCount++;
-              opn = require('opn');
-              opn(url);
-            }
-          } else {
-            logv(options, 'browser NOT opened');
-          }
+        case 31:
+          log(`${vars.app}FUNCTION emit not run`); // if(options.browser == true) {
+          //   if (vars.browserCount == 0 && options.watch == 'yes') {
+          //     var url = 'http://localhost:' + options.port
+          //     log(app + `Opening browser at ${url}`)
+          //     vars.browserCount++
+          //     const opn = require('opn')
+          //     opn(url)
+          //   }
+          // }
+          // else {
+          //   logv(options,'browser NOT opened')
+          // }
 
           callback();
 
@@ -482,6 +483,8 @@ function _buildExtBundle(app, compilation, outputPath, parms, options) {
       });
     });
   } catch (e) {
+    console.log('e');
+
     require('./pluginUtil').logv(options, e);
 
     compilation.errors.push('_buildExtBundle: ' + e);
