@@ -14,7 +14,7 @@ module.exports = {
       emit: true,
       browser: true,
       profile: '', 
-      environment: 'development', 
+      environment: 'production', 
       verbose: 'no',
       theme: 'theme-conference-app',
       packages: [

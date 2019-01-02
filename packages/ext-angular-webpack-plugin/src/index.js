@@ -89,7 +89,7 @@ export default class ExtWebpackPlugin {
         require('./pluginUtil').logv(this.plugin.options,'HOOK done')
 
         try {
-          if(this.plugin.options.browser == true && this.plugin.options.watch == 'yes') {
+          if(this.plugin.options.browser == true && this.plugin.options.watch == 'yes' && this.plugin.vars.production == false) {
             if (this.plugin.vars.browserCount == 0) {
             //if (this.plugin.vars.browserCount == 0 && compilation.errors.length == 0) {
               var url = 'http://localhost:' + this.plugin.options.port

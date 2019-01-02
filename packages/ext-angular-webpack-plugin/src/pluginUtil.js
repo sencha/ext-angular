@@ -158,7 +158,7 @@ export async function emit(compiler, compilation, vars, options, callback) {
       }
 
       var command = ''
-      if (options.watch == 'yes') {
+      if (options.watch == 'yes' && vars.production == false) {
         command = 'watch'
       }
       else {
