@@ -1,5 +1,9 @@
 import {
+  Input,
   Output,
+  Host,
+  SkipSelf,
+  Optional,
   OnInit,
   ViewContainerRef,
   AfterContentInit,
@@ -379,16 +383,25 @@ export class containerMetaData {
   inputs: containerMetaData.PROPERTIES,
   outputs: containerMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtContainerComponent)}],
-  template: '<ng-template #dynamic></ng-template><ng-content></ng-content>'
+  template: '<ng-template #dynamic></ng-template>'
 })
 export class ExtContainerComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  //constructor(eRef:ElementRef) {super(eRef,containerMetaData)}
-  constructor(eRef:ElementRef,  metaData: any,  vcRef: ViewContainerRef) {super(eRef,containerMetaData, vcRef)}
 
+  public parent
+  constructor(
+    eRef:ElementRef, 
+    @Host() @Optional() @SkipSelf() public hostComponent : base
+    ) {
+    super(eRef,containerMetaData, hostComponent)
+    this.parent = this
+    }
+
+
+  //constructor(eRef:ElementRef,  metaData: any,  vcRef: ViewContainerRef) {super(eRef,containerMetaData,vcRef)}
   public ngOnInit() {this.baseOnInit(containerMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {
     this.baseAfterContentInit()
-    this['ready'].emit(this)
+    //this['ready'].emit(this)
     }
 }

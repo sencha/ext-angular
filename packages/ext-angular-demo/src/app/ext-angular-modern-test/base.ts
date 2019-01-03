@@ -1,9 +1,12 @@
 declare var Ext: any;
 import {
+  Input,
   Output,
   Inject,
   ViewContainerRef,
   Host,
+  SkipSelf,
+  Optional,
   ElementRef,
   EventEmitter,
   ContentChildren,
@@ -12,33 +15,65 @@ import {
 } from '@angular/core';
 //import { ExtContainerComponent } from './ext-container.component';
 
+
+
+
 export class base {
   public ext: any
   private _nativeElement: any
 
-  constructor(el: ElementRef,  metaData: any,  vcRef: ViewContainerRef) {
+  baseAfterViewinit() {
+//    console.log('baseAfterViewinit')
+//    console.log(this)
+//    console.log(this._nativeElement)
+  }
+
+
+
+  //constructor(el: ElementRef,  metaData: any,  vcRef: ViewContainerRef) {
+
+  //public instance: base;
+
+  constructor(
+    el: ElementRef,  
+    metaData: any,
+    @Host() @Optional() @SkipSelf() public hostComponent : base
+    ) {
+//    console.log(par)
     //, par: ExtContainerComponent, @Host() private _b: base, @Inject(forwardRef(() => base)) private _parent:base) {
-    console.log('constructor')
+    //console.log('constructor')
+    //console.log(this)
 
+    if(hostComponent) {
+      console.log("parent")
+      console.log(this.hostComponent)
+    } 
+
+    console.log('child')
+    console.log(this)
+
+    //this.instance = this;
     //var parentComponent1 = vcRef.injector._view.context;
-    var parentComponent1 = vcRef.injector;
+    //var parentComponent1 = vcRef
 
-    console.log(parentComponent1);
+    //console.log(parentComponent1);
 
     // var parentComponent2 = this.vcRef._element.parentView.context;
     // console.log(parentComponent2);
 
     //console.log(_b)
-    console.log(el.nativeElement)
+//    console.log(el)
+//    console.log(el.nativeElement)
+//    console.log(el.nativeElement.parentElement)
     this._nativeElement = el.nativeElement
-    metaData.EVENTS.forEach( (event: any, n: any) => {
-      if (event.name != 'fullscreen') {
-        (<any>this)[event.name] = new EventEmitter()
-      }
-      else {
-        (<any>this)[event.name + 'event'] = new EventEmitter()
-      }
-    })
+    // metaData.EVENTS.forEach( (event: any, n: any) => {
+    //   if (event.name != 'fullscreen') {
+    //     (<any>this)[event.name] = new EventEmitter()
+    //   }
+    //   else {
+    //     (<any>this)[event.name + 'event'] = new EventEmitter()
+    //   }
+    // })
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -69,8 +104,8 @@ export class base {
   }
 
   ngOnDestroy() {
-    console.log(`ngOnDestroy`)
-    console.log(this)
+    //console.log(`ngOnDestroy`)
+    //console.log(this)
     this.ext.parent.remove(this.ext)
   }
 
@@ -90,12 +125,14 @@ export class base {
   //ngOnDestroy() { console.log(`OnDestroy`) }
 
   baseOnInit(metaData: any) {
+    //console.log(this._nativeElement.parentElement);
+
     //console.log(`ngOnInit: ${metaData.XTYPE}`)
     let me: any = this
     let o: any = {}
     //o.xtype = metaData.XTYPE
-    for (var i = 0; i < me.metaData.PROPERTIES.length; i++) { 
-      var prop = me.metaData.PROPERTIES[i];
+    for (var i = 0; i < metaData.PROPERTIES.length; i++) { 
+      var prop = metaData.PROPERTIES[i];
       if (prop == 'handler') {
         if (me[prop] != undefined) {
           o[prop] = me[prop]
@@ -124,22 +161,23 @@ export class base {
       Ext.apply(o, me.config);
     }
     o.listeners = {}
-    var EVENTS = metaData.EVENTS
-    EVENTS.forEach(function (event: any, index: any, array: any) {
-      let eventname: any = event.name
-      let eventparameters: any = event.parameters
-      o.listeners[eventname] = function() {
-        let parameters: any = eventparameters
-        let parms = parameters.split(',')
-        let args = Array.prototype.slice.call(arguments)
-        let emitparms: any = {}
-        for (let i = 0, j = parms.length; i < j; i++ ) {
-          emitparms[parms[i]] = args[i];
-        }
-        me[eventname].emit(emitparms)
-      }
-    })
+    // var EVENTS = metaData.EVENTS
+    // EVENTS.forEach(function (event: any, index: any, array: any) {
+    //   let eventname: any = event.name
+    //   let eventparameters: any = event.parameters
+    //   o.listeners[eventname] = function() {
+    //     let parameters: any = eventparameters
+    //     let parms = parameters.split(',')
+    //     let args = Array.prototype.slice.call(arguments)
+    //     let emitparms: any = {}
+    //     for (let i = 0, j = parms.length; i < j; i++ ) {
+    //       emitparms[parms[i]] = args[i];
+    //     }
+    //     me[eventname].emit(emitparms)
+    //   }
+    // })
     if (this._nativeElement.parentElement != null) {
+      console.log(this._nativeElement.parentElement)
       o.renderTo = this._nativeElement
     }
     //this.ext = Ext.create(o)
@@ -151,8 +189,9 @@ export class base {
   @ContentChildren('item') items: QueryList<any>
   @ContentChildren('item', { read: ElementRef }) items2: QueryList<ElementRef>
   baseAfterContentInit() {
-    console.log('\nbaseAfterContentInit')
-     console.log(this.items)
+//    console.log('\nbaseAfterContentInit')
+//    console.log(this)
+//    console.log(this.items)
 
     if (this.items.length < 2) {
       console.log('1 item')
@@ -245,7 +284,7 @@ export class base {
       // }
     }
     //this['ready'].emit(parentCmp)
-    this['ready'].emit(this)
+    //this['ready'].emit(this)
   }
 
 
