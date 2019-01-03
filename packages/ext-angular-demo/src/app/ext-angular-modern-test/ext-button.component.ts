@@ -1,8 +1,12 @@
 import {
+  Input,
   Output,
   Host,
+  SkipSelf,
+  Optional,
   OnInit,
   AfterContentInit,
+  AfterViewInit,
   ViewContainerRef,
   OnChanges,
   Component,
@@ -369,22 +373,36 @@ export class buttonMetaData {
 		'ready'
 ];
 }
+import { ExtContainerComponent } from './ext-container.component';
 @Component({
   selector: 'button', 
   inputs: buttonMetaData.PROPERTIES,
   outputs: buttonMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtButtonComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template let-parent="parent" #dynamic></ng-template>'
 })
-export class ExtButtonComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  //constructor(eRef:ElementRef) {super(eRef,buttonMetaData)}
-  constructor(eRef:ElementRef,  metaData:any,  vcRef:ViewContainerRef) {super(eRef,buttonMetaData, vcRef)}
+export class ExtButtonComponent extends base implements OnInit,AfterContentInit,OnChanges,AfterViewInit {
 
-
+  public parent
+  constructor(
+    eRef:ElementRef, 
+    @Host() @Optional() @SkipSelf() public hostComponent : base
+    ) {
+    super(eRef,buttonMetaData, hostComponent)
+    // this.parent = this
+    // if(this.hostComponent) {
+    //   console.log("host is a component")
+    //   console.log(this.hostComponent)
+    // } 
+//    console.log('par')
+//    console.log(this.parent)
+  }
+  public ngAfterViewInit() {this.baseAfterViewinit()}
+  //constructor(eRef:ElementRef,  metaData:any,  vcRef:ViewContainerRef) {super(eRef, buttonMetaData, vcRef)}
   public ngOnInit() {this.baseOnInit(buttonMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {
     this.baseAfterContentInit()
-    this['ready'].emit(this)
+    //this['ready'].emit(this)
     }
 }
