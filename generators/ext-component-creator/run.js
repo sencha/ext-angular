@@ -23,6 +23,7 @@ async function main() {
   await run(`npm run build`, `../${folderName}/`)
   await run (`rm -R ../../packages/${folderName}/.`)
   await run(`cp -R ../${folderName}/dist/${folderName}/. ../../packages/${folderName}/.`)
+  //copy src file (todo)
   //await run (`ls -l`, `../../packages/${folderName}/lib`)
 }
 

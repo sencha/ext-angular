@@ -13,7 +13,7 @@ import { Component, ViewEncapsulation } from '@angular/core'
 
 
 
-  <container #item [layout]="'fit'" [fitToParent]="true">
+  <container #item [layout]="'hbox'" [fitToParent]="true">
     <button #item  [handler]="clickContact" *ngFor="let person of people" [text]=person.name></button>
   </container>
   `
