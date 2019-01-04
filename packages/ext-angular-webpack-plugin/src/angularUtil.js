@@ -55,7 +55,7 @@ function toXtype(str) {
   return str.toLowerCase().replace(/_/g, '-')
 }
 
-export function extractFromSource(module, options, compilation) {
+export function extractFromSource(module, options, compilation, extComponents) {
   try {
     var js = module._source._value
     const logv = require('./pluginUtil').logv
@@ -83,29 +83,6 @@ export function extractFromSource(module, options, compilation) {
       sourceType: 'module'
     })
 
-    function addType(argNode) {
-      var type
-
-      if (argNode.type === 'StringLiteral') {
-        var xtype = toXtype(argNode.value)
-
-        if (xtype != 'extreact') {
-          type = {
-            xtype: toXtype(argNode.value)
-          }
-        }
-      } else {
-        type = {
-          xclass: js.slice(argNode.start, argNode.end)
-        }
-      }
-
-      if (type != undefined) {
-        let config = JSON.stringify(type)
-        statements.push(`Ext.create(${config})`)
-      }
-    }
-
     traverse(ast, {
       pre: function (node) {
         if (node.type === 'CallExpression' && node.callee && node.callee.object && node.callee.object.name === 'Ext') {
@@ -125,27 +102,18 @@ export function extractFromSource(module, options, compilation) {
                 var tagEnd = start.indexOf('>')
                 var end = Math.min(spaceEnd, newlineEnd, tagEnd)
                 if (end >= 0) {
-                  var xtype = start.substring(1, end)
-                  // TODO add condition to check for ext componenets only.
-                  // Donot need toXtype here since it can safely be assumend the selector is same as xtype for all components defined.
-                  var type = { xtype: toXtype(xtype) }
-                  let config = JSON.stringify(type)
-                  statements.push(`Ext.create(${config})`)
+                  var xtype = toXtype(start.substring(1, end))
+                  if(extComponents.includes(xtype)) {
+                    var type = {xtype: xtype}
+                    let config = JSON.stringify(type)
+                    statements.push(`Ext.create(${config})`)
+                  }
+                  i += end
                 }
               }
             }
           }
         }
-
-        if (node.type == 'VariableDeclarator' && node.init && node.init.type == 'CallExpression' && node.init.callee) {
-          if (node.init.callee.name == 'reactify') {
-            for (let i = 0; i < node.init.arguments.length; i++) {
-              const valueNode = node.init.arguments[i]
-              if (!valueNode) continue
-              addType(valueNode)
-            }
-          }
-        } // Probably not required
       }
     })
 
@@ -154,6 +122,30 @@ export function extractFromSource(module, options, compilation) {
   catch(e) {
     console.log(e)
     compilation.errors.push('extractFromSource: ' + e)
+    return []
+  }
+}
+
+export function extractExtComponents(module, optios, compilation) {
+  try {
+    var code = module._source._value;
+    var components = [];
+    for (var i = code.indexOf('selector: '); i >= 0;) {
+      if (code.charAt(i + 10) == '\'') {
+        i += 11;
+        var code = code.substring(i)
+        var end = code.indexOf('\'')
+        if (end >= 0) {
+          var component = code.substring(0, end)
+          components.push(component)
+        }
+        i = code.indexOf('selector: ')
+      }
+    }
+    return components;
+  } catch (e) {
+    console.log(e)
+    compilation.errors.push('extractExtComponents: ' + e)
     return []
   }
 }
