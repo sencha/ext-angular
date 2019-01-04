@@ -4,13 +4,6 @@
   "description": "Use Ext JS components in Angular",
   "main": "dist/index.js",
   "typings": "index.d.ts",
-  "scripts": {
-    "watch": "babel ./src --out-dir ./dist --source-maps --watch",
-    "build": "babel ./src --out-dir ./dist --source-maps",
-    "prepublish": "npm run build",
-    "create-typings": "node script/create-typings.js",
-    "test": "pushd ../ext-react-tests; npm test"
-  },
   "keywords": [
     "Sencha",
     "Ext JS",
