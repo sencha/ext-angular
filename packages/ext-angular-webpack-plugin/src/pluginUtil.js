@@ -77,18 +77,22 @@ export function _constructor(options) {
 export function _compilation(compiler, compilation, vars, options) {
   try {
     require('./pluginUtil').logv(options,'FUNCTION _compilation')
+    var extComponents = []
     if (vars.production) {
-      logv(options,`ext-compilation: production is ` +  vars.production)
-      compilation.hooks.succeedModule.tap(`ext-succeed-module`, (module) => {
-        if (module.resource && (module.resource.match(/\.(j|t)sx?$/) ||
-        (options.framework == 'angular' && module.resource.match(/\.html$/))) &&
-        !module.resource.match(/node_modules/) && !module.resource.match(`/ext-{$options.framework}/dist/`)
-         && !module.resource.match(`/ext-${options.framework}-${options.toolkit}/`)) {
-          vars.deps = [ 
-            ...(vars.deps || []), 
-            ...require(`./${vars.framework}Util`).extractFromSource(module, options, compilation) 
-          ]
-        }
+      logv(options,`ext-compilation: production is ` + vars.production)
+      if (options.framework == 'angular') {
+        compilation.hooks.succeedModule.tap(`ext-succeed-module`, module => {
+          if(module && module.resource && module.resource.match(/ext-angular-modern\/fesm5\/sencha-ext-angular-modern.js/)){  
+            extComponents = require(`./${vars.framework}Util`).extractExtComponents(module, options, compilation)
+          }
+        });
+      }
+      compilation.hooks.optimizeModules.tap(`ext-succeed-module`, modules => {
+        modules.forEach((module) => {
+          if (extComponents.length && module.resource && (module.resource.match(/\.(j|t)sx?$/) || options.framework == 'angular' && module.resource.match(/\.html$/)) && !module.resource.match(/node_modules/) && !module.resource.match(`/ext-{$options.framework}/dist/`)) {
+            vars.deps = [...(vars.deps || []), ...require(`./${vars.framework}Util`).extractFromSource(module, options, compilation, extComponents)]
+          }
+        })
       })
     }
     else {
@@ -300,7 +304,7 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
         }
       }
 
-//do we ever hit these?
+      //do we ever hit these?
       if (fs.existsSync(path.join(process.cwd(),'resources/'))) {
         var fromResources = path.join(process.cwd(), 'resources/')
         var toResources = path.join(output, '../resources')
@@ -335,7 +339,8 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
     vars.firstTime = false
     var js = ''
     if (vars.production) {
-      vars.deps.push('Ext.require("Ext.layout.*");\n')
+      if (!vars.deps.includes('Ext.require("Ext.layout.*");\n'))
+        vars.deps.push('Ext.require("Ext.layout.*");\n')
       js = vars.deps.join(';\n');
     }
     else {
