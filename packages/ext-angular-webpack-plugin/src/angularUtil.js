@@ -125,27 +125,3 @@ export function extractFromSource(module, options, compilation, extComponents) {
     return []
   }
 }
-
-export function extractExtComponents(module, optios, compilation) {
-  try {
-    var code = module._source._value;
-    var components = [];
-    for (var i = code.indexOf('selector: '); i >= 0;) {
-      if (code.charAt(i + 10) == '\'') {
-        i += 11;
-        var code = code.substring(i)
-        var end = code.indexOf('\'')
-        if (end >= 0) {
-          var component = code.substring(0, end)
-          components.push(component)
-        }
-        i = code.indexOf('selector: ')
-      }
-    }
-    return components;
-  } catch (e) {
-    console.log(e)
-    compilation.errors.push('extractExtComponents: ' + e)
-    return []
-  }
-}
