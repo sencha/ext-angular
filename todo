@@ -2,12 +2,12 @@ Issues
  - kitchensink
     - breadcrumb has extra character at end
     - breadcrumb background color
-    - stars on premium components
+    - stars on premium components (done)
     - colorpicker needs type library (rerun doxi)
     - code window does not reflect current example
     - core.js:15707 Navigation triggered outside Angular zone, did you forget to call 'ngZone.run()'?
     - width should not be needed, only height at this point (until we figure out height issue)
-    - remove Redux Grid from examples
+    - remove Redux Grid from examples (done)
  - ext-angular-gen 
     - need to remove Angular CLI requirement
     - need to remove react-only questions
