@@ -32,7 +32,6 @@ import {BasicGridComponent} from './Grid/BasicGrid/BasicGrid';
 import {EditableGridComponent} from './Grid/EditableGrid/EditableGrid';
 import {GroupedGridComponent} from './Grid/GroupedGrid/GroupedGrid';
 import {LockingGridComponent} from './Grid/LockingGrid/LockingGrid';
-import {ReduxGridComponent} from './Grid/ReduxGrid/ReduxGrid';
 import {XMLGridComponent} from './Grid/XMLGrid/XMLGrid';
 
 
@@ -329,8 +328,7 @@ const treeRoot = {
                 { text: 'Reconfigure Grid', component: ReconfigureGridComponent, navIcon: 'icon-reconfigure-grid' },
                 { text: 'Components In Cells', component: RenderComponentsInCellsComponent, navIcon: 'icon-grid-tools' },
                 { text: 'Stock Ticker', component: StockTickerComponent, navIcon: 'icon-ticker-grid' }
-            ]},
-            { text: 'Redux Grid', component: ReduxGridComponent, navIcon: 'icon-Redux-Grid' }
+            ]}
         ] },
         { text: 'Trees', navIcon: 'icon-trees', children: [
             { text: 'TreeList', component: TreeListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-tree-list' },
