@@ -76,59 +76,103 @@ export function _constructor(options) {
 //**********
 export function _compilation(compiler, compilation, vars, options) {
   try {
-    require('./pluginUtil').logv(options,'FUNCTION _compilation')
+    require('./pluginUtil').logv(options, 'FUNCTION _compilation')
+    const fsx = require('fs-extra')
+    const mkdirp = require('mkdirp')
+    const path = require('path')
+    
     var extComponents = []
+    var usedExtComponents = []
+
     if (vars.production) {
-      logv(options,`ext-compilation: production is ` + vars.production)
+      logv(options, `ext-compilation: production is ` + vars.production)
+      
       if (options.framework == 'angular') {
-        compilation.hooks.succeedModule.tap(`ext-succeed-module`, module => {
-          if(module && module.resource && module.resource.match(/ext-angular-modern\/fesm5\/sencha-ext-angular-modern.js/)){  
-            extComponents = require(`./${vars.framework}Util`).extractExtComponents(module, options, compilation)
-          }
-        });
-      }
-      compilation.hooks.optimizeModules.tap(`ext-succeed-module`, modules => {
-        modules.forEach((module) => {
-          if (extComponents.length && module.resource && (module.resource.match(/\.(j|t)sx?$/) || options.framework == 'angular' && module.resource.match(/\.html$/)) && !module.resource.match(/node_modules/) && !module.resource.match(`/ext-{$options.framework}/dist/`)) {
-            vars.deps = [...(vars.deps || []), ...require(`./${vars.framework}Util`).extractFromSource(module, options, compilation, extComponents)]
+        const packagePath = path.resolve(process.cwd(), 'node_modules/@sencha/ext-angular-modern')
+        var files = fsx.readdirSync(`${packagePath}/lib`)
+        files.forEach((fileName) => {
+          if(fileName && fileName.substr(0, 4) == 'ext-') {
+            var end = fileName.substr(4).indexOf('.component')
+            if(end >= 0) {
+              extComponents.push(fileName.substring(4, end + 4))
+            }
           }
         })
-      })
-    }
-    else {
-      logv(options,`ext-compilation: production is ` +  vars.production)
-    }
-    if (options.framework != 'angular') {
-      compilation.hooks.htmlWebpackPluginBeforeHtmlGeneration.tap(`ext-html-generation`,(data) => {
-        logv(options,'HOOK ext-html-generation')
-        const path = require('path')
-        var outputPath = ''
-        if (compiler.options.devServer) {
-          if (compiler.outputPath === '/') {
-            outputPath = path.join(compiler.options.devServer.contentBase, outputPath)
+        try {
+          var rewrite = false;
+          const appModulePath = path.resolve(process.cwd(), 'src/app/app.module.ts')
+          var js = fsx.readFileSync(appModulePath).toString()
+          var i = js.indexOf('@sencha/ext-angular-modern')
+          i = js.substring(0, i).lastIndexOf('import')
+          if (js.substr(i-3, 3) !== '// ') {
+            js = js.substring(0, i-1) + '// ' + js.substring(i)
+            rewrite = true
           }
-          else {
-            if (compiler.options.devServer.contentBase == undefined) {
-              outputPath = 'build'
-            }
-            else {
-              outputPath = ''
-            }
+          i = js.indexOf('./ext-angular-modern-prod/ext-angular-modern.module')
+          if (js.substr(i-43, 3) == '// ') {
+            js = js.substring(0, i-43) + js.substring(i-40)
+            rewrite = true
           }
+          if(rewrite)
+            fsx.writeFileSync(appModulePath, js, 'utf-8', ()=>{return})
         }
-        else {
-          outputPath = 'build'
+        catch (e) {
+          console.log(e)
+          compilation.errors.push('buildModule hook in _compilation: ' + e)
+          return []
         }
-        outputPath = outputPath.replace(process.cwd(), '').trim()
-        var jsPath = path.join(outputPath, vars.extPath, 'ext.js')
-        var cssPath = path.join(outputPath, vars.extPath, 'ext.css')
-        data.assets.js.unshift(jsPath)
-        data.assets.css.unshift(cssPath)
-        log(vars.app + `Adding ${jsPath} and ${cssPath} to index.html`)
+      }
+
+      compilation.hooks.succeedModule.tap(`ext-succeed-module`, module => {
+        if (extComponents.length && module.resource && (module.resource.match(/\.(j|t)sx?$/) || options.framework == 'angular' 
+        && module.resource.match(/\.html$/)) && !module.resource.match(/node_modules/) && 
+        !module.resource.match(`/ext-{$options.framework}/dist/`)) {
+           vars.deps = [...(vars.deps || []), ...require(`./${vars.framework}Util`)
+           .extractFromSource(module, options, compilation, extComponents)]
+        }
       })
-    }
-    else {
-      logv(options,'skipped HOOK ext-html-generation')
+      
+      compilation.hooks.finishModules.tap(`ext-finish-modules`, modules => {  
+        const string = 'Ext.create({\"xtype\":\"'
+        vars.deps.forEach((code) => {
+          var index = code.indexOf(string)
+          if (index >= 0) {
+            code = code.substring(index+string.length)
+            var end = code.indexOf('\"')
+            usedExtComponents.push(code.substr(0, end))
+          }
+        })
+        usedExtComponents = [...new Set(usedExtComponents)]
+        
+        const readFrom = path.resolve(process.cwd(), 'node_modules/@sencha/ext-angular-modern/src/lib')
+        const copyToPath = path.resolve(process.cwd(), 'src/app/ext-angular-modern-prod')
+        const writeToPath = path.resolve(process.cwd(), 'tmp')
+        mkdirp.sync(writeToPath)
+        var writeToPathWritten = false
+
+        var moduleVars = {imports:'', exports: '', declarations: ''}
+        
+        usedExtComponents.forEach((xtype) => {
+          var capclassname = xtype.charAt(0).toUpperCase() + xtype.slice(1)
+          moduleVars.imports = moduleVars.imports + `import { Ext${capclassname}Component } from './ext-${xtype}.component';\n`
+          moduleVars.exports = moduleVars.exports + `    Ext${capclassname}Component,\n`
+          moduleVars.declarations = moduleVars.declarations + `    Ext${capclassname}Component,\n`
+
+          var classFile = `/ext-${xtype}.component.ts`
+          const contents = fsx.readFileSync(`${readFrom}${classFile}`).toString()
+          fsx.writeFileSync(`${writeToPath}${classFile}`, contents, 'utf-8', ()=>{return})
+          writeToPathWritten = true
+        })
+        
+        if (writeToPathWritten) {
+          var t = require('./artifacts').extAngularModerModule(moduleVars.imports, moduleVars.exports, moduleVars.declarations)
+        
+          fsx.writeFileSync(`${writeToPath}/ext-angular-modern.module.ts`, t, 'utf-8', ()=>{return})      
+
+          fsx.copySync(writeToPath, copyToPath)
+          fsx.remove(writeToPath)
+        }
+      });
     }
   }
   catch(e) {
