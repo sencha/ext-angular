@@ -231,7 +231,6 @@ export class LandingpageComponent implements OnInit {
         else {
           this.blockstyle = {'background':'top','display':'block','text-align':'center'}
           if (this.theDataview != undefined) {
-            console.log(this.node.childNodes);
             this.theDataview.setData(this.node.childNodes)
           }
         }
