@@ -136,6 +136,10 @@ declare var _code: any;
     text-decoration: underline;
   }
 
+  #hide-overflow div {
+    overflow-y: hidden !important;
+  }
+
   `],
   // https://angular.io/api/core/ViewEncapsulation#None
   encapsulation: ViewEncapsulation.None,
@@ -143,8 +147,6 @@ declare var _code: any;
 export class LandingpageComponent implements OnInit {
   showCode: boolean = false;
   files: Array<any> = [];
-  menuhidden: any
-  routerhidden: any
   ANGULAR_VERSION: any = VERSION.full
   node: any
   node$: any = new Subject()
@@ -169,7 +171,8 @@ export class LandingpageComponent implements OnInit {
     <div class="app-thumbnail-icon-wrap">
       <div class="app-thumbnail-icon {navIcon}"></div>
     </div>
-    <div className="app-thumbnail-text" >{text}</div>
+    <div class="app-thumbnail-text" >{text}</div>
+    <div class="{premiumClass}"></div>
   </div>`
 
   toggleCode = () => {
@@ -219,8 +222,6 @@ export class LandingpageComponent implements OnInit {
         this.breadcrumb = generateBreadcrumb(v);
         //console.log(`BREADCRUMB: ${JSON.stringify(this.breadcrumb.map(b => b.text))}`);
         if(this.node.childNodes.length == 0) {
-          this.menuhidden = true
-          this.routerhidden = false
           this.blockstyle = {'background':'top','display':'none','text-align':'center'}
           if (this.theDataview != undefined) {
             this.theDataview.setData(null)
@@ -228,8 +229,6 @@ export class LandingpageComponent implements OnInit {
           }
         }
         else {
-          this.menuhidden = false
-          this.routerhidden = true
           this.blockstyle = {'background':'top','display':'block','text-align':'center'}
           if (this.theDataview != undefined) {
             this.theDataview.setData(this.node.childNodes)
@@ -261,7 +260,6 @@ export class LandingpageComponent implements OnInit {
   }
 
   navigate(location) {
-    //console.log('navigate')
     this.router.navigateByUrl(location);
   }
 

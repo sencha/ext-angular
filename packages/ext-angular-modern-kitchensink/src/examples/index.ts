@@ -32,7 +32,6 @@ import {BasicGridComponent} from './Grid/BasicGrid/BasicGrid';
 import {EditableGridComponent} from './Grid/EditableGrid/EditableGrid';
 import {GroupedGridComponent} from './Grid/GroupedGrid/GroupedGrid';
 import {LockingGridComponent} from './Grid/LockingGrid/LockingGrid';
-import {ReduxGridComponent} from './Grid/ReduxGrid/ReduxGrid';
 import {XMLGridComponent} from './Grid/XMLGrid/XMLGrid';
 
 
@@ -329,16 +328,15 @@ const treeRoot = {
                 { text: 'Reconfigure Grid', component: ReconfigureGridComponent, navIcon: 'icon-reconfigure-grid' },
                 { text: 'Components In Cells', component: RenderComponentsInCellsComponent, navIcon: 'icon-grid-tools' },
                 { text: 'Stock Ticker', component: StockTickerComponent, navIcon: 'icon-ticker-grid' }
-            ]},
-            { text: 'Redux Grid', component: ReduxGridComponent, navIcon: 'icon-Redux-Grid' }
+            ]}
         ] },
         { text: 'Trees', navIcon: 'icon-trees', children: [
             { text: 'TreeList', component: TreeListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-tree-list' },
-            { text: 'Tree', premium: true, component: TreeComponent, navIcon: 'icon-trees' },
-            { text: 'Editable Tree', premium: true, component: EditableTreeComponent, navIcon: 'icon-tree-editable'},
-            { text: 'Tree Grid', premium: true, component: TreeGridComponent, navIcon: 'icon-tree-grid' },
-            { text: 'Tree Decorations', premium: true, component:TreeDecorationsComponent, navIcon: 'icon-tree-decorations'},
-            { text: 'Heterogeneous Tree', premium: true, component: HeterogeneousTreeComponent, navIcon: 'icon-heterogeneous-tree'}
+            { text: 'Tree', premium: true, premiumClass: 'x-fa fa-star app-premium-indicator', component: TreeComponent, navIcon: 'icon-trees' },
+            { text: 'Editable Tree', premium: true, premiumClass: 'x-fa fa-star app-premium-indicator', component: EditableTreeComponent, navIcon: 'icon-tree-editable'},
+            { text: 'Tree Grid', premium: true, premiumClass: 'x-fa fa-star app-premium-indicator', component: TreeGridComponent, navIcon: 'icon-tree-grid' },
+            { text: 'Tree Decorations', premium: true, premiumClass: 'x-fa fa-star app-premium-indicator', component:TreeDecorationsComponent, navIcon: 'icon-tree-decorations'},
+            { text: 'Heterogeneous Tree', premium: true, premiumClass: 'x-fa fa-star app-premium-indicator', component: HeterogeneousTreeComponent, navIcon: 'icon-heterogeneous-tree'}
         ] },
         { text: 'Calendar', premium: false, navIcon: 'icon-calendar', children:[
             { text: 'Calendar Panel', component: CalendarPanelComponent, navIcon: 'icon-calendar-panel' },
@@ -348,7 +346,7 @@ const treeRoot = {
             { text: 'Timezone Support', component: CalendarTimezoneSupportComponent, navIcon: 'icon-calendar-timezone' },
             { text: 'Drag Resize Validation', component: CalendarDragResizeValidationComponent, navIcon: 'icon-calendar-validation' }
         ]},
-        { text: 'Charts', premium: true, navIcon: 'icon-charts', children: [
+        { text: 'Charts', premium: true, premiumClass: 'x-fa fa-star app-premium-indicator', navIcon: 'icon-charts', children: [
             { text: 'Area', navIcon: 'icon-area-basic', children: [
                 { text: 'Basic Area', component: BasicAreaComponent, navIcon: 'icon-area-basic' },
                 { text: 'Stacked Area', component: StackedAreaComponent, navIcon: 'icon-area-stacked'},
@@ -410,7 +408,7 @@ const treeRoot = {
                 { text: 'Bubble', component: BubbleComponent, navIcon: 'icon-scatter-bubble' }
             ] }
         ] },
-        { text: 'D3', premium: true, navIcon: 'icon-d3', children: [
+        { text: 'D3', premium: true, premiumClass: 'x-fa fa-star app-premium-indicator', navIcon: 'icon-d3', children: [
             { text: 'Heatmap', navIcon: 'icon-d3-heatmap', children: [
                 { text: 'Purchases By Day', component: PurchasesByDayComponent, navIcon: 'icon-d3-view-heatmap-purchases' },
                 { text: 'Sales Per Employee', component: SalesPerEmployeeComponent, navIcon: 'icon-d3-view-heatmap-sales' },
@@ -428,7 +426,7 @@ const treeRoot = {
                 { text: 'Configurable Pivot TreeMap', component: ConfigurablePivotTreeMapComponent, navIcon: 'icon-d3-view-treemap-pivot-configurator' }
             ]}
         ] },
-        { text: 'Pivot Grids', premium: true, navIcon: 'icon-pivot-grids', children: [
+        { text: 'Pivot Grids', premium: true, premiumClass: 'x-fa fa-star app-premium-indicator', navIcon: 'icon-pivot-grids', children: [
             { text: 'Outline Layout', component: OutlineLayoutComponent, navIcon: 'icon-outline-pivot-grid' },
             { text: 'Compact Layout', component: CompactLayoutComponent, navIcon: 'icon-compact-pivot-grid' },
             { text: 'Tabular Layout', component: TabularLayoutComponent, navIcon: 'icon-tabular-pivot-grid' },
