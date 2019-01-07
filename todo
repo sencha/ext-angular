@@ -1,6 +1,6 @@
 Issues
  - kitchensink
-    - breadcrumb has extra character at end
+    - breadcrumb has extra character at end (done)
     - breadcrumb background color
     - stars on premium components (done)
     - colorpicker needs type library (rerun doxi)

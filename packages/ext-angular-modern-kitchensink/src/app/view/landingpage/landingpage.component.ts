@@ -136,6 +136,10 @@ declare var _code: any;
     text-decoration: underline;
   }
 
+  #hide-overflow div {
+    overflow-y: hidden !important;
+  }
+
   `],
   // https://angular.io/api/core/ViewEncapsulation#None
   encapsulation: ViewEncapsulation.None,
