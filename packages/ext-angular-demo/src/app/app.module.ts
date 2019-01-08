@@ -5,26 +5,28 @@ import { BrowserModule } from '@angular/platform-browser'
 // import { ExtAngularModernModule } from './ext-angular-modern-prod/ext-angular-modern.module'
 import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
 
-import { ExtAngularService } from './ext-angular.service'
+//this should come from '@sencha/ext-angular-modern'
+import { ExtAngularBootstrapService } from './ext-angular-bootstrap.service'
+import { ExtAngularBootstrapComponent } from './ext-angular-bootstrap.component'
+
 import { AppComponent } from './app.component'
 //import { MjgComponent } from './mjg.component'
 //import { AppComponent } from './example.component';
 
-@Component({
-  selector: 'app-root',
-  template: ``,
-})
-export class App {
-  constructor(private ExtAngularService: ExtAngularService) {
-    this.ExtAngularService.appendComponentToViewport(AppComponent)
-  }
-}
+
+
+
 
 @NgModule({
   imports: [ BrowserModule, BrowserAnimationsModule, ExtAngularModernModule ],
-  declarations: [ App, AppComponent ],
-  providers: [ ExtAngularService ],
+  declarations: [ ExtAngularBootstrapComponent, AppComponent ],
+  providers: [ ExtAngularBootstrapService ],
   entryComponents: [ AppComponent],
-  bootstrap: [ App ]
+  bootstrap: [ ExtAngularBootstrapComponent ]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(extAngularService : ExtAngularBootstrapService) {
+    console.log("In AppModule constructor");
+    extAngularService.setBootStrapComponent(AppComponent);
+  }
+}
