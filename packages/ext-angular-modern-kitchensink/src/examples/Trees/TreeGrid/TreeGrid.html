@@ -1,5 +1,5 @@
 <container #item layout='vbox'
-[height]="'700px'">
+[fitToParent]="true">
         <tree #item title="Tree Grid" [store]="this.store" shadow="true" flex="1"
         (ready)="treeReady($event)"
         [columns]="[

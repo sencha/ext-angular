@@ -1,6 +1,5 @@
 <container #item layout="fit" shadow="true" 
-width="900px" 
-height="600px">
+[fitToParent]="true">
     <actionsheet #item [displayed]="showExportSheet">
         <button #item [handler]="this.exportToXlsx" text="Excel xlsx"></button>
         <button #item [handler]="this.exportToXml" text="Excel xml"></button>
