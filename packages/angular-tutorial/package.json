@@ -1,0 +1,65 @@
+{
+  "name": "ext-angular-tutorial",
+  "version": "6.7.0",
+  "description": "ext-angular-tutorial",
+  "scripts": {
+    "start": "webpack-dev-server"
+  },
+  "devDependencies": {
+    "@sencha/ext": "~6.7.0",
+    "@sencha/ext-angular-modern": "6.7.0",
+    "@sencha/ext-modern": "~6.7.0",
+    "@sencha/ext-modern-treegrid": "~6.7.0",
+    "@sencha/ext-ux": "~6.7.0",
+    "@sencha/ext-modern-theme-material": "~6.7.0",
+    "@sencha/ext-angular-webpack-plugin": "~6.7.0",
+
+    "@angular/common": "^7.2.0",
+    "@angular/compiler": "^7.2.0",
+    "@angular/compiler-cli": "^7.2.0",
+    "@angular/core": "^7.2.0",
+    "@angular/forms": "^7.2.0",
+    "@angular/http": "^7.2.0",
+    "@angular/platform-browser": "^7.2.0",
+    "@angular/platform-browser-dynamic": "^7.2.0",
+    "@angular/router": "^7.2.0",
+    "core-js": "^2.6.1",
+
+    "typescript": "^3.2.2",
+    "@types/core-js": "^2.5.0",
+    "@types/node": "^10.12.18",
+
+    "@ngtools/webpack":"^7.2.1",
+    "portfinder": "^1.0.20",
+    "css-loader": "^2.1.0",
+    "html-loader": "^0.5.5",
+    "node-sass": "^4.9.3",
+    "raw-loader": "^1.0.0",
+    "rxjs": "^6.3.3",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+
+    "html-webpack-plugin": "^3.2.0",
+    "webpack-filter-warnings-plugin": "^1.2.1",
+
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14",
+
+    "zone.js": "^0.8.26"
+  },
+  "dependencies": {},
+  "main": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sencha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sencha"
+  },
+  "homepage": "https://github.com/sencha"
+
+}
