@@ -23,7 +23,7 @@
     "@sencha/ext-pivot": "~6.6.0",
     "@sencha/ext-pivot-d3": "~6.6.0",
     "@sencha/ext-ux": "~6.6.0",
-    
+
     "@sencha/ext-modern-theme-material": "~6.6.0",
 
     "d3": "4.5.0",
@@ -45,7 +45,7 @@
     "@angular-builders/dev-server":"^7.0.0",
     "@sencha/ext-angular-webpack-plugin": "~6.7.0",
 
-    "@angular-devkit/build-angular": "~0.10.5",
+    "@angular-devkit/build-angular": "~0.12.1",
     "@angular/cli": "~7.0.5",
     "@angular/compiler-cli": "^7.0.3",
     "@angular/language-service": "^7.0.3",
