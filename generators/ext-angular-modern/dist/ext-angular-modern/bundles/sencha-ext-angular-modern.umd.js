@@ -134,10 +134,11 @@
                 /** @type {?} */
                 var o = {};
                 o.xtype = metaData.XTYPE;
+                /** @type {?} */
+                var listneresProvided = false;
                 for (var i = 0; i < me.metaData.PROPERTIES.length; i++) {
                     /** @type {?} */
                     var prop = me.metaData.PROPERTIES[i];
-                    //prop== 'title' is needed for children of tabpanel. 
                     if (prop == 'handler') {
                         if (me[prop] != undefined) {
                             o[prop] = me[prop];
@@ -145,6 +146,10 @@
                     }
                     //need to handle listeners coming in here
                     if ((o.xtype === 'cartesian' || o.xtype === 'polar') && prop === 'layout') ;
+                    else if (prop == 'listeners' && me[prop] != undefined) {
+                        o[prop] = me[prop];
+                        listneresProvided = true;
+                    }
                     else {
                         if (me[prop] != undefined &&
                             prop != 'listeners' &&
@@ -164,29 +169,31 @@
                 if (me.config !== {}) {
                     Ext.apply(o, me.config);
                 }
-                o.listeners = {};
-                /** @type {?} */
-                var EVENTS = metaData.EVENTS;
-                EVENTS.forEach(function (event, index, array) {
+                if (!listneresProvided) {
+                    o.listeners = {};
                     /** @type {?} */
-                    var eventname = event.name;
-                    /** @type {?} */
-                    var eventparameters = event.parameters;
-                    o.listeners[eventname] = function () {
+                    var EVENTS = metaData.EVENTS;
+                    EVENTS.forEach(function (event, index, array) {
                         /** @type {?} */
-                        var parameters = eventparameters;
+                        var eventname = event.name;
                         /** @type {?} */
-                        var parms = parameters.split(',');
-                        /** @type {?} */
-                        var args = Array.prototype.slice.call(arguments);
-                        /** @type {?} */
-                        var emitparms = {};
-                        for (var i_1 = 0, j = parms.length; i_1 < j; i_1++) {
-                            emitparms[parms[i_1]] = args[i_1];
-                        }
-                        me[eventname].emit(emitparms);
-                    };
-                });
+                        var eventparameters = event.parameters;
+                        o.listeners[eventname] = function () {
+                            /** @type {?} */
+                            var parameters = eventparameters;
+                            /** @type {?} */
+                            var parms = parameters.split(',');
+                            /** @type {?} */
+                            var args = Array.prototype.slice.call(arguments);
+                            /** @type {?} */
+                            var emitparms = {};
+                            for (var i_1 = 0, j = parms.length; i_1 < j; i_1++) {
+                                emitparms[parms[i_1]] = args[i_1];
+                            }
+                            me[eventname].emit(emitparms);
+                        };
+                    });
+                }
                 if (this._nativeElement.parentElement != null) {
                     o.renderTo = this._nativeElement;
                 }
