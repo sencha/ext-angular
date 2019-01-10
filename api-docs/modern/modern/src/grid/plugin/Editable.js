@@ -47,8 +47,16 @@
 *                            dataIndex="talent"
 *                            flex="1"
 *                            editable="true"
-*                            (ready)="readyColumn($event)"
 *                        >
+*                        <selectfield #item
+*                        [options]="[
+*                            { text: 'All', value: 'All' },
+*                            { text: 'Archery', value: 'Archery' },
+*                            { text: 'Speedster', value: 'Speedster' },
+*                            { text: 'Weapons', value: 'Weapons' },
+*                            { text: 'Willpower', value: 'Willpower' }
+*                        ]"
+*                    ></selectfield>
 *                        </column>
 *                    </grid>
 *                </container>
@@ -64,21 +72,9 @@
 *                        { 'fname': 'Hal',    'lname': 'Jordan', 'talent': 'Willpower'  }
 *                    ]
 *                });
-*                talentColumn:any;
-*                readyColumn = (event) => {
-*                    this.talentColumn = event.ext;
-*                    this.talentColumn.setEditor({
-*                        xtype: 'selectfield',
-*                        options: [
-*                            { text: 'All', value: 'All' },
-*                            { text: 'Archery', value: 'Archery' },
-*                            { text: 'Speedster', value: 'Speedster' },
-*                            { text: 'Weapons', value: 'Weapons' },
-*                            { text: 'Willpower', value: 'Willpower' }
-*                        ]
-*                    });
-*                  }
 *            }
+*
+*
 *
 *
  *

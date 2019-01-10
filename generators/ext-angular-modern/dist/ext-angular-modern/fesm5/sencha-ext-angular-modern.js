@@ -1,5 +1,5 @@
 import { __extends } from 'tslib';
-import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, ElementRef, EventEmitter, ContentChildren, Component, NgModule, forwardRef, Host, Optional, SkipSelf, defineInjectable, inject, INJECTOR } from '@angular/core';
+import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, ElementRef, EventEmitter, ContentChildren, Component, NgModule, defineInjectable, inject, INJECTOR, forwardRef, Host, Optional, SkipSelf } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -251,6 +251,14 @@ var base = /** @class */ (function () {
                             else {
                                 parentCmp.add(childCmp);
                             }
+                        }
+                    }
+                    else if (parentxtype === 'column') {
+                        if (childxtype === 'selectfield' || childxtype === 'textfield' || childxtype === 'numberfield' || childxtype === 'textareafield' || childxtype === 'hiddenfield' || childxtype === 'radiofield' || childxtype === 'filefield' || childxtype === 'checkboxfield' || childxtype === 'togglefield' || childxtype === 'fieldset') {
+                            parentCmp.setEditor(item.ext.initialConfig);
+                        }
+                        else if (parentCmp.add != undefined) {
+                            parentCmp.add(childCmp);
                         }
                     }
                     else if (childxtype === 'tooltip') {

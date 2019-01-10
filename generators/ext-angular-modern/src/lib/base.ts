@@ -152,7 +152,16 @@ export class base {
                 parentCmp.add(childCmp);
               }
             }
-          } else if (childxtype === 'tooltip') {
+          } 
+          else if(parentxtype === 'column') {
+              if(childxtype === 'selectfield' || childxtype === 'textfield' || childxtype === 'numberfield' || childxtype === 'textareafield' || childxtype === 'hiddenfield' || childxtype === 'radiofield' || childxtype === 'filefield' || childxtype === 'checkboxfield' || childxtype === 'togglefield' || childxtype === 'fieldset') {
+                parentCmp.setEditor(item.ext.initialConfig);
+              }
+              else if (parentCmp.add != undefined) {
+                parentCmp.add(childCmp)
+              }
+          }
+          else if (childxtype === 'tooltip') {
             parentCmp.setTooltip(childCmp)
           } else if (childxtype === 'plugin') {
             parentCmp.setPlugin(childCmp)
