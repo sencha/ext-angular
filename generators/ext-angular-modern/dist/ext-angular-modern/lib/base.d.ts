@@ -11,10 +11,10 @@ export declare class base {
     ngOnDestroy(): void;
     items: QueryList<any>;
     items2: QueryList<ElementRef>;
-    baseAfterContentInitNew(): void;
+    baseAfterContentInit(): void;
     _items: QueryList<any>;
     _elRefItems: QueryList<ElementRef>;
-    baseAfterContentInit(): void;
+    baseAfterContentInitngFor(): void;
     ngOnChanges(changes: SimpleChanges): void;
     itemsa: QueryList<any>;
     baseAfterContentInit3(): void;

@@ -198,7 +198,7 @@ class base {
     /**
      * @return {?}
      */
-    baseAfterContentInitNew() {
+    baseAfterContentInit() {
         //console.log('\nbaseAfterContentInit')
         if (this.items.length < 2) {
             //console.log('1 item')
@@ -299,7 +299,7 @@ class base {
     /**
      * @return {?}
      */
-    baseAfterContentInit() {
+    baseAfterContentInitngFor() {
         console.log('host');
         console.log(this._hostComponent);
         console.log('native');
@@ -49220,6 +49220,7 @@ booleancolumnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -49382,6 +49383,7 @@ booleancolumnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -49720,6 +49722,7 @@ checkcolumnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -49882,6 +49885,7 @@ checkcolumnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -50221,6 +50225,7 @@ gridcolumnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -50380,6 +50385,7 @@ gridcolumnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -50714,6 +50720,7 @@ columnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -50873,6 +50880,7 @@ columnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -51207,6 +51215,7 @@ templatecolumnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -51366,6 +51375,7 @@ templatecolumnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -51701,6 +51711,7 @@ datecolumnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -51861,6 +51872,7 @@ datecolumnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -52196,6 +52208,7 @@ numbercolumnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -52356,6 +52369,7 @@ numbercolumnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -52691,6 +52705,7 @@ rownumbererMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -52851,6 +52866,7 @@ rownumbererMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -53187,6 +53203,7 @@ selectioncolumnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -53349,6 +53366,7 @@ selectioncolumnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -53688,6 +53706,7 @@ textcolumnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -53847,6 +53866,7 @@ textcolumnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -54181,6 +54201,7 @@ treecolumnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -54340,6 +54361,7 @@ treecolumnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',

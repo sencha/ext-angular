@@ -1,5 +1,5 @@
 import { __extends } from 'tslib';
-import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, Component, ElementRef, EventEmitter, ContentChildren, NgModule, defineInjectable, inject, INJECTOR, forwardRef, Host, Optional, SkipSelf } from '@angular/core';
+import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, ElementRef, EventEmitter, ContentChildren, Component, NgModule, forwardRef, Host, Optional, SkipSelf, defineInjectable, inject, INJECTOR } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -203,7 +203,7 @@ var base = /** @class */ (function () {
     /**
      * @return {?}
      */
-    base.prototype.baseAfterContentInitNew = /**
+    base.prototype.baseAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -307,7 +307,7 @@ var base = /** @class */ (function () {
     /**
      * @return {?}
      */
-    base.prototype.baseAfterContentInit = /**
+    base.prototype.baseAfterContentInitngFor = /**
      * @return {?}
      */
     function () {
@@ -1593,7 +1593,6 @@ var buttonMetaData = /** @class */ (function () {
         "responsiveConfig": "Object",
         "fitToParent": "Boolean",
         "config": "Object",
-        "align": "String"
     };
     buttonMetaData.PROPERTIES = [
         'allowDepress',
@@ -1710,8 +1709,7 @@ var buttonMetaData = /** @class */ (function () {
         'platformConfig',
         'responsiveConfig',
         'fitToParent',
-        'config',
-        'align'
+        'config'
     ];
     buttonMetaData.EVENTS = [
         { name: 'added', parameters: 'sender,container,index' },
@@ -40403,7 +40401,6 @@ var searchfieldMetaData = /** @class */ (function () {
         "responsiveConfig": "Object",
         "fitToParent": "Boolean",
         "config": "Object",
-        "align": "String"
     };
     searchfieldMetaData.PROPERTIES = [
         'alwaysOnTop',
@@ -40544,8 +40541,7 @@ var searchfieldMetaData = /** @class */ (function () {
         'platformConfig',
         'responsiveConfig',
         'fitToParent',
-        'config',
-        'align'
+        'config'
     ];
     searchfieldMetaData.EVENTS = [
         { name: 'action', parameters: 'searchfield,e' },
@@ -50925,6 +50921,7 @@ var booleancolumnMetaData = /** @class */ (function () {
         "layout": "Object/String",
         "left": "Number/String",
         "listeners": "Object",
+        "locked": "Boolean/String",
         "manageBorders": "Boolean",
         "margin": "Number/String",
         "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -51087,6 +51084,7 @@ var booleancolumnMetaData = /** @class */ (function () {
         'layout',
         'left',
         'listeners',
+        'locked',
         'manageBorders',
         'margin',
         'masked',
@@ -51439,6 +51437,7 @@ var checkcolumnMetaData = /** @class */ (function () {
         "layout": "Object/String",
         "left": "Number/String",
         "listeners": "Object",
+        "locked": "Boolean/String",
         "manageBorders": "Boolean",
         "margin": "Number/String",
         "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -51601,6 +51600,7 @@ var checkcolumnMetaData = /** @class */ (function () {
         'layout',
         'left',
         'listeners',
+        'locked',
         'manageBorders',
         'margin',
         'masked',
@@ -51954,6 +51954,7 @@ var gridcolumnMetaData = /** @class */ (function () {
         "layout": "Object/String",
         "left": "Number/String",
         "listeners": "Object",
+        "locked": "Boolean/String",
         "manageBorders": "Boolean",
         "margin": "Number/String",
         "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -52113,6 +52114,7 @@ var gridcolumnMetaData = /** @class */ (function () {
         'layout',
         'left',
         'listeners',
+        'locked',
         'manageBorders',
         'margin',
         'masked',
@@ -52461,6 +52463,7 @@ var columnMetaData = /** @class */ (function () {
         "layout": "Object/String",
         "left": "Number/String",
         "listeners": "Object",
+        "locked": "Boolean/String",
         "manageBorders": "Boolean",
         "margin": "Number/String",
         "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -52620,6 +52623,7 @@ var columnMetaData = /** @class */ (function () {
         'layout',
         'left',
         'listeners',
+        'locked',
         'manageBorders',
         'margin',
         'masked',
@@ -52968,6 +52972,7 @@ var templatecolumnMetaData = /** @class */ (function () {
         "layout": "Object/String",
         "left": "Number/String",
         "listeners": "Object",
+        "locked": "Boolean/String",
         "manageBorders": "Boolean",
         "margin": "Number/String",
         "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -53127,6 +53132,7 @@ var templatecolumnMetaData = /** @class */ (function () {
         'layout',
         'left',
         'listeners',
+        'locked',
         'manageBorders',
         'margin',
         'masked',
@@ -53476,6 +53482,7 @@ var datecolumnMetaData = /** @class */ (function () {
         "layout": "Object/String",
         "left": "Number/String",
         "listeners": "Object",
+        "locked": "Boolean/String",
         "manageBorders": "Boolean",
         "margin": "Number/String",
         "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -53636,6 +53643,7 @@ var datecolumnMetaData = /** @class */ (function () {
         'layout',
         'left',
         'listeners',
+        'locked',
         'manageBorders',
         'margin',
         'masked',
@@ -53985,6 +53993,7 @@ var numbercolumnMetaData = /** @class */ (function () {
         "layout": "Object/String",
         "left": "Number/String",
         "listeners": "Object",
+        "locked": "Boolean/String",
         "manageBorders": "Boolean",
         "margin": "Number/String",
         "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -54145,6 +54154,7 @@ var numbercolumnMetaData = /** @class */ (function () {
         'layout',
         'left',
         'listeners',
+        'locked',
         'manageBorders',
         'margin',
         'masked',
@@ -54494,6 +54504,7 @@ var rownumbererMetaData = /** @class */ (function () {
         "layout": "Object/String",
         "left": "Number/String",
         "listeners": "Object",
+        "locked": "Boolean/String",
         "manageBorders": "Boolean",
         "margin": "Number/String",
         "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -54654,6 +54665,7 @@ var rownumbererMetaData = /** @class */ (function () {
         'layout',
         'left',
         'listeners',
+        'locked',
         'manageBorders',
         'margin',
         'masked',
@@ -55004,6 +55016,7 @@ var selectioncolumnMetaData = /** @class */ (function () {
         "layout": "Object/String",
         "left": "Number/String",
         "listeners": "Object",
+        "locked": "Boolean/String",
         "manageBorders": "Boolean",
         "margin": "Number/String",
         "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -55166,6 +55179,7 @@ var selectioncolumnMetaData = /** @class */ (function () {
         'layout',
         'left',
         'listeners',
+        'locked',
         'manageBorders',
         'margin',
         'masked',
@@ -55519,6 +55533,7 @@ var textcolumnMetaData = /** @class */ (function () {
         "layout": "Object/String",
         "left": "Number/String",
         "listeners": "Object",
+        "locked": "Boolean/String",
         "manageBorders": "Boolean",
         "margin": "Number/String",
         "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -55678,6 +55693,7 @@ var textcolumnMetaData = /** @class */ (function () {
         'layout',
         'left',
         'listeners',
+        'locked',
         'manageBorders',
         'margin',
         'masked',
@@ -56026,6 +56042,7 @@ var treecolumnMetaData = /** @class */ (function () {
         "layout": "Object/String",
         "left": "Number/String",
         "listeners": "Object",
+        "locked": "Boolean/String",
         "manageBorders": "Boolean",
         "margin": "Number/String",
         "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -56185,6 +56202,7 @@ var treecolumnMetaData = /** @class */ (function () {
         'layout',
         'left',
         'listeners',
+        'locked',
         'manageBorders',
         'margin',
         'masked',

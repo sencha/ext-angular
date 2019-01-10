@@ -239,7 +239,7 @@
         /**
          * @return {?}
          */
-        base.prototype.baseAfterContentInitNew = /**
+        base.prototype.baseAfterContentInit = /**
          * @return {?}
          */
             function () {
@@ -343,7 +343,7 @@
         /**
          * @return {?}
          */
-        base.prototype.baseAfterContentInit = /**
+        base.prototype.baseAfterContentInitngFor = /**
          * @return {?}
          */
             function () {
@@ -51197,6 +51197,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -51359,6 +51360,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -51713,6 +51715,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -51875,6 +51878,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -52230,6 +52234,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -52389,6 +52394,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -52739,6 +52745,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -52898,6 +52905,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -53248,6 +53256,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -53407,6 +53416,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -53758,6 +53768,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -53918,6 +53929,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -54269,6 +54281,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -54429,6 +54442,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -54780,6 +54794,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -54940,6 +54955,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -55292,6 +55308,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -55454,6 +55471,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -55809,6 +55827,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -55968,6 +55987,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -56318,6 +56338,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -56477,6 +56498,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
