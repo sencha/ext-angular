@@ -15,9 +15,9 @@ Issues
     - Modify run.js to copy source folder to ext-angular-modern (Marc)
 
 
- - package ext-angular.service (both service and intermediate component (app)) [Extraction is causing issue] (Aniket) - document bootstrapping process - goes into guides (Aniket)
- - Update dependency on treeshaking 
-
+ - package ext-angular.service (both service and intermediate component (app)) [Extraction is causing issue] (Aniket) 
+ - document bootstrapping process - goes into guides (Aniket)
+ - Update dependency on treeshaking (Alisha)
  - [Marc] widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components] [Visit RendererCell like in react/ Need a simple example in extjs]
  - [Marc] resources from packages like ux are not property referenced [Components -> Color Picker -> Basic]
 
