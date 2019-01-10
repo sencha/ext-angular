@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -192,10 +196,11 @@ export class datecellMetaData {
   inputs: datecellMetaData.PROPERTIES,
   outputs: datecellMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtDatecellComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtDatecellComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,datecellMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,datecellMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datecellMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(datecellMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

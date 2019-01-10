@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -402,10 +406,11 @@ export class checkboxMetaData {
   inputs: checkboxMetaData.PROPERTIES,
   outputs: checkboxMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtCheckboxComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtCheckboxComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,checkboxMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,checkboxMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkboxMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(checkboxMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

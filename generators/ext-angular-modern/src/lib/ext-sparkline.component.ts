@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -338,10 +342,11 @@ export class sparklineMetaData {
   inputs: sparklineMetaData.PROPERTIES,
   outputs: sparklineMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtSparklineComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtSparklineComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,sparklineMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,sparklineMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklineMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(sparklineMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

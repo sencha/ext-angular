@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -390,10 +394,11 @@ export class pagingtoolbarMetaData {
   inputs: pagingtoolbarMetaData.PROPERTIES,
   outputs: pagingtoolbarMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtPagingtoolbarComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtPagingtoolbarComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,pagingtoolbarMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,pagingtoolbarMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pagingtoolbarMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(pagingtoolbarMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -532,10 +536,11 @@ export class calendar_form_editMetaData {
   inputs: calendar_form_editMetaData.PROPERTIES,
   outputs: calendar_form_editMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtCalendar_form_editComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtCalendar_form_editComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,calendar_form_editMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,calendar_form_editMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_form_editMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(calendar_form_editMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

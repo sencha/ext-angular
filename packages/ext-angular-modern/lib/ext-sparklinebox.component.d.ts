@@ -8,7 +8,8 @@ export declare class sparklineboxMetaData {
     static EVENTNAMES: string[];
 }
 export declare class ExtSparklineboxComponent extends base implements OnInit, AfterContentInit, OnChanges {
-    constructor(eRef: ElementRef);
+    hostComponent: base;
+    constructor(eRef: ElementRef, hostComponent: base);
     ngOnInit(): void;
     ngAfterContentInit(): void;
 }

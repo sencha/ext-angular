@@ -8,7 +8,8 @@ export declare class pivotheatmapMetaData {
     static EVENTNAMES: string[];
 }
 export declare class ExtPivotheatmapComponent extends base implements OnInit, AfterContentInit, OnChanges {
-    constructor(eRef: ElementRef);
+    hostComponent: base;
+    constructor(eRef: ElementRef, hostComponent: base);
     ngOnInit(): void;
     ngAfterContentInit(): void;
 }

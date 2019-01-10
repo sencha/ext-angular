@@ -90,7 +90,52 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
   var num = 0
   var items = data.global.items
   log(`item count`,`${items.length}`)
+
+
+
+  switch(framework) {
+    case 'angular':
+      moduleVars.imports = moduleVars.imports + `import { ExtAngularBootstrapComponent } from './ext-angular-bootstrap.component';${newLine}`
+      moduleVars.exports = moduleVars.exports + `    ExtAngularBootstrapComponent,${newLine}`
+      moduleVars.declarations = moduleVars.declarations + `    ExtAngularBootstrapComponent,${newLine}`
+      var bootstrapComponentFile = `${libFolder}ext-angular-bootstrap.component.${extension}`
+      fs.writeFile(bootstrapComponentFile, doBootstrapComponent(templateToolkitFolder), function(err) {if(err){return console.log(err);} })
+      log(`bootstrapComponentFile`,`${bootstrapComponentFile}`);
+
+      moduleVars.imports = moduleVars.imports + `import { ExtAngularBootstrapService } from './ext-angular-bootstrap.service';${newLine}`
+//      moduleVars.exports = moduleVars.exports + `    ExtAngularBootstrapService,${newLine}`
+//      moduleVars.declarations = moduleVars.declarations + `    ExtAngularBootstrapService,${newLine}`
+      var bootstrapServiceFile = `${libFolder}ext-angular-bootstrap.service.${extension}`
+      fs.writeFile(bootstrapServiceFile, doBootstrapService(templateToolkitFolder), function(err) {if(err){return console.log(err);} })
+      log(`bootstrapServiceFile`,`${bootstrapServiceFile}`);
+
+
+      // moduleVars.imports = moduleVars.imports + `import { ExtOrgChartComponent } from './ext-orgchart.component';${newLine}`
+      // moduleVars.exports = moduleVars.exports + `    ExtOrgChartComponent,${newLine}`
+      // moduleVars.declarations = moduleVars.declarations + `    ExtOrgChartComponent,${newLine}`
+      // var orgChartFile = `${libFolder}ext-orgchart.component.${extension}`
+      // fs.writeFile(orgChartFile, doOrgChart(templateToolkitFolder), function(err) {if(err){return console.log(err);} })
+      // log(`orgChartFile`,`${orgChartFile}`);
+
+      // moduleVars.imports = moduleVars.imports + `import { ExtTransitionComponent } from './ext-transition.component';${newLine}`
+      // moduleVars.exports = moduleVars.exports + `    ExtTransitionComponent,${newLine}`
+      // moduleVars.declarations = moduleVars.declarations + `    ExtTransitionComponent,${newLine}`
+      // var transitionFile = `${libFolder}ext-transition.component.${extension}`
+      // fs.writeFile(transitionFile, doTransition(templateToolkitFolder), function(err) {if(err){return console.log(err);} })
+      // log(`transitionFile`,`${transitionFile}`)
+
+      break
+    default:
+      break
+    }
+
+
+
   log(``,`************** following items can be copy/pasted into excel (paste special... text)`)
+
+
+
+
 
   for (i = 0; i < items.length; i++) { 
     var o = items[i];
@@ -104,12 +149,15 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
               o.xtype = aliases[alias].substring(7)
               ///testing
               if (environment == 'dev') {
-                oneItem(o, libFolder, framework, extension, num, o.xtype, alias, moduleVars)
+                //oneItem(o, libFolder, framework, extension, num, o.xtype, alias, moduleVars)
+                //if (o.xtype == 'container'  || o.xtype == 'button') {
+                  oneItem(o, libFolder, framework, extension, num, o.xtype, alias, moduleVars)
+                //}
               }
               else if (components.includes(o.xtype)) {
-              //if (o.xtype == 'grid'  || o.xtype == 'button') {
+              if (o.xtype == 'container'  || o.xtype == 'button') {
                 oneItem(o, libFolder, framework, extension, num, o.xtype, alias, moduleVars)
-              //}
+              }
               }
             }
             else {
@@ -123,24 +171,6 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
 
   log(``,`**************`)
 
-  switch(framework) {
-    case 'angular':
-    moduleVars.imports = moduleVars.imports + `import { ExtOrgChartComponent } from './ext-orgchart.component';${newLine}`
-    moduleVars.exports = moduleVars.exports + `    ExtOrgChartComponent,${newLine}`
-    moduleVars.declarations = moduleVars.declarations + `    ExtOrgChartComponent,${newLine}`
-    var orgChartFile = `${libFolder}ext-orgchart.component.${extension}`
-    fs.writeFile(orgChartFile, doOrgChart(templateToolkitFolder), function(err) {if(err){return console.log(err);} })
-    log(`orgChartFile`,`${orgChartFile}`);
-      moduleVars.imports = moduleVars.imports + `import { ExtTransitionComponent } from './ext-transition.component';${newLine}`
-      moduleVars.exports = moduleVars.exports + `    ExtTransitionComponent,${newLine}`
-      moduleVars.declarations = moduleVars.declarations + `    ExtTransitionComponent,${newLine}`
-      var transitionFile = `${libFolder}ext-transition.component.${extension}`
-      fs.writeFile(transitionFile, doTransition(templateToolkitFolder), function(err) {if(err){return console.log(err);} })
-      log(`transitionFile`,`${transitionFile}`)
-      break
-    default:
-      break
-    }
 
 
 
@@ -350,6 +380,18 @@ function doExtBase(templateToolkitFolder) {
 // export * from './${lib}ExtClass'
 // `
 // }
+
+function doBootstrapComponent(templateToolkitFolder) {
+  var p = path.resolve(templateToolkitFolder + '/ext-angular-bootstrap.component.tpl')
+  var content = fs.readFileSync(p).toString()
+  return content
+}
+
+function doBootstrapService(templateToolkitFolder) {
+  var p = path.resolve(templateToolkitFolder + '/ext-angular-bootstrap.service.tpl')
+  var content = fs.readFileSync(p).toString()
+  return content
+}
 
 function doOrgChart(templateToolkitFolder) {
   var p = path.resolve(templateToolkitFolder + '/orgchart.tpl')

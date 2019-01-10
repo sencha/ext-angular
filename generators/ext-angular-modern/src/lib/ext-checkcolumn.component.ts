@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -474,10 +478,11 @@ export class checkcolumnMetaData {
   inputs: checkcolumnMetaData.PROPERTIES,
   outputs: checkcolumnMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtCheckcolumnComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtCheckcolumnComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,checkcolumnMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,checkcolumnMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkcolumnMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(checkcolumnMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

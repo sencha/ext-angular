@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -492,10 +496,11 @@ export class selectpickerMetaData {
   inputs: selectpickerMetaData.PROPERTIES,
   outputs: selectpickerMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtSelectpickerComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtSelectpickerComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,selectpickerMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,selectpickerMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectpickerMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(selectpickerMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

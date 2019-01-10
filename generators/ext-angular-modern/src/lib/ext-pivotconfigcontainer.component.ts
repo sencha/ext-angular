@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -462,10 +466,11 @@ export class pivotconfigcontainerMetaData {
   inputs: pivotconfigcontainerMetaData.PROPERTIES,
   outputs: pivotconfigcontainerMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtPivotconfigcontainerComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtPivotconfigcontainerComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,pivotconfigcontainerMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,pivotconfigcontainerMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigcontainerMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(pivotconfigcontainerMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

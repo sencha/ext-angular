@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -194,10 +198,11 @@ export class treelistitemMetaData {
   inputs: treelistitemMetaData.PROPERTIES,
   outputs: treelistitemMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtTreelistitemComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtTreelistitemComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,treelistitemMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,treelistitemMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treelistitemMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(treelistitemMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

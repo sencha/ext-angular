@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 {imports}
 @NgModule({
-  imports: [
+  imports:         [],
+  declarations:    [
+{declarations}
   ],
-  declarations: [
-{declarations}  ],
-  exports: [
-{exports}  ]
+  providers:       [ ExtAngularBootstrapService ],
+  entryComponents: [ ExtAngularBootstrapComponent ],
+  exports:         [
+{exports}
+  ]
 })
 export class ExtAngular{toolkit}Module { }

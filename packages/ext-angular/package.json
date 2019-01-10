@@ -12,10 +12,10 @@
   ],
   "author": "Sencha, Inc.",
   "license": "MIT",
-  "homepage": "https://github.com/sencha/ext-react#readme",
+  "homepage": "https://github.com/sencha/ext-angular#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sencha/ext-react.git"
+    "url": "git+https://github.com/sencha/ext-angular.git"
   },
   "bin": {
     "ext-react": "./bin/ext-react.js"

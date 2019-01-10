@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -378,10 +382,11 @@ export class d3_sunburstMetaData {
   inputs: d3_sunburstMetaData.PROPERTIES,
   outputs: d3_sunburstMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtD3_sunburstComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtD3_sunburstComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,d3_sunburstMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,d3_sunburstMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_sunburstMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(d3_sunburstMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

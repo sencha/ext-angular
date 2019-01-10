@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -368,10 +372,11 @@ export class menucheckitemMetaData {
   inputs: menucheckitemMetaData.PROPERTIES,
   outputs: menucheckitemMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtMenucheckitemComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtMenucheckitemComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,menucheckitemMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,menucheckitemMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menucheckitemMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(menucheckitemMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

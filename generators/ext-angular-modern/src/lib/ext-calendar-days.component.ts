@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -534,10 +538,11 @@ export class calendar_daysMetaData {
   inputs: calendar_daysMetaData.PROPERTIES,
   outputs: calendar_daysMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtCalendar_daysComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtCalendar_daysComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,calendar_daysMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,calendar_daysMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(calendar_daysMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

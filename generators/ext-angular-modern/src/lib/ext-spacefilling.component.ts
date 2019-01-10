@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -464,10 +468,11 @@ export class spacefillingMetaData {
   inputs: spacefillingMetaData.PROPERTIES,
   outputs: spacefillingMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtSpacefillingComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtSpacefillingComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,spacefillingMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,spacefillingMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spacefillingMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(spacefillingMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {
