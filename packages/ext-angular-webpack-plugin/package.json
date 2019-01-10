@@ -14,7 +14,7 @@
     "switchit":"^1.0.8",
     "@babel/generator": "^7.0.0",
     "@babel/polyfill": "^7.0.0",
-    "@sencha/cmd": "~6.6.0",
+    "@sencha/cmd": "~6.7.0",
     "react": "^16.5.0",
     "react-hot-loader": "^4.3.6",
     "lodash.uniq": "^4.5.0",
