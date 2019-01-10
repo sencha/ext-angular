@@ -52,7 +52,7 @@ export default class ExtWebpackPlugin {
       if(!itExists && !this.plugin.vars.production && this.plugin.vars.framework != 'extjs') {
         compiler.hooks.beforeCompile.tapAsync(`ext-before-compile`, (compilation, callback) => {
           require('./pluginUtil').logv(this.plugin.options,'HOOK beforeCompile')
-          //compilation.errors = []
+          compilation.errors = []
           require(`./pluginUtil`).emit(compiler, compilation, this.plugin.vars, this.plugin.options, callback)
         })
       }

@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -386,10 +390,11 @@ export class listswiperitemMetaData {
   inputs: listswiperitemMetaData.PROPERTIES,
   outputs: listswiperitemMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtListswiperitemComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtListswiperitemComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,listswiperitemMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,listswiperitemMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listswiperitemMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(listswiperitemMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

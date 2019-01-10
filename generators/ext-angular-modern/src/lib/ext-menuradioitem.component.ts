@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -372,10 +376,11 @@ export class menuradioitemMetaData {
   inputs: menuradioitemMetaData.PROPERTIES,
   outputs: menuradioitemMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtMenuradioitemComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtMenuradioitemComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,menuradioitemMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,menuradioitemMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuradioitemMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(menuradioitemMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

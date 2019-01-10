@@ -8,7 +8,8 @@ export declare class booleancolumnMetaData {
     static EVENTNAMES: string[];
 }
 export declare class ExtBooleancolumnComponent extends base implements OnInit, AfterContentInit, OnChanges {
-    constructor(eRef: ElementRef);
+    hostComponent: base;
+    constructor(eRef: ElementRef, hostComponent: base);
     ngOnInit(): void;
     ngAfterContentInit(): void;
 }

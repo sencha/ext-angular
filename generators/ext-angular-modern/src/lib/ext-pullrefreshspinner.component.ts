@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -326,10 +330,11 @@ export class pullrefreshspinnerMetaData {
   inputs: pullrefreshspinnerMetaData.PROPERTIES,
   outputs: pullrefreshspinnerMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtPullrefreshspinnerComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtPullrefreshspinnerComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,pullrefreshspinnerMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,pullrefreshspinnerMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pullrefreshspinnerMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(pullrefreshspinnerMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

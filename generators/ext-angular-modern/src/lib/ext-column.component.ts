@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -91,6 +95,7 @@ export class columnMetaData {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -250,6 +255,7 @@ export class columnMetaData {
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -464,10 +470,11 @@ export class columnMetaData {
   inputs: columnMetaData.PROPERTIES,
   outputs: columnMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtColumnComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtColumnComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,columnMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,columnMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,columnMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(columnMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

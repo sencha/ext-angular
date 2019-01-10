@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -384,10 +388,11 @@ export class d3_treemapMetaData {
   inputs: d3_treemapMetaData.PROPERTIES,
   outputs: d3_treemapMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtD3_treemapComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtD3_treemapComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,d3_treemapMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,d3_treemapMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_treemapMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(d3_treemapMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

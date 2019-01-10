@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -180,10 +184,11 @@ export class spindowntriggerMetaData {
   inputs: spindowntriggerMetaData.PROPERTIES,
   outputs: spindowntriggerMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtSpindowntriggerComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtSpindowntriggerComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,spindowntriggerMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,spindowntriggerMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spindowntriggerMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(spindowntriggerMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

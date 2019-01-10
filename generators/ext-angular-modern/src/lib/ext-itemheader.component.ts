@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -330,10 +334,11 @@ export class itemheaderMetaData {
   inputs: itemheaderMetaData.PROPERTIES,
   outputs: itemheaderMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtItemheaderComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtItemheaderComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,itemheaderMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,itemheaderMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,itemheaderMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(itemheaderMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

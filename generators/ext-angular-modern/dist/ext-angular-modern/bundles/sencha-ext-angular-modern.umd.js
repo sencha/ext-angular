@@ -2,7 +2,95 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core')) :
     typeof define === 'function' && define.amd ? define('@sencha/ext-angular-modern', ['exports', '@angular/core'], factory) :
     (factory((global.sencha = global.sencha || {}, global.sencha['ext-angular-modern'] = {}),global.ng.core));
-}(this, (function (exports,core) { 'use strict';
+}(this, (function (exports,i0) { 'use strict';
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ExtAngularBootstrapService = /** @class */ (function () {
+        function ExtAngularBootstrapService(componentFactoryResolver, appRef, injector) {
+            this.componentFactoryResolver = componentFactoryResolver;
+            this.appRef = appRef;
+            this.injector = injector;
+        }
+        /**
+         * @return {?}
+         */
+        ExtAngularBootstrapService.prototype.appendComponentToViewport = /**
+         * @return {?}
+         */
+            function () {
+                //console.log("In appendComponentToViewport")
+                if (!this.bootstrapComponent) {
+                    throw new Error("Bootstrap component not set. Please use extAngularService.setBootStrapComponent(yourComponent) to setup bootstrap component from your root module constructor");
+                }
+                //console.log("bootstrapComponent : " + this.bootstrapComponent)
+                /** @type {?} */
+                var componentRef = this.componentFactoryResolver
+                    .resolveComponentFactory(this.bootstrapComponent)
+                    .create(this.injector);
+                this.appRef.attachView(componentRef.hostView);
+                /** @type {?} */
+                var domElem = ( /** @type {?} */((( /** @type {?} */(componentRef.hostView)))
+                    .rootNodes[0]));
+                /** @type {?} */
+                var root = document.getElementsByClassName('x-viewport-body-el')[0];
+                root.appendChild(domElem);
+            };
+        /**
+         * @param {?} component
+         * @return {?}
+         */
+        ExtAngularBootstrapService.prototype.setBootStrapComponent = /**
+         * @param {?} component
+         * @return {?}
+         */
+            function (component) {
+                //console.log("In setBootStrapComponent")
+                this.bootstrapComponent = component;
+            };
+        ExtAngularBootstrapService.decorators = [
+            { type: i0.Injectable, args: [{
+                        providedIn: 'root'
+                    },] }
+        ];
+        /** @nocollapse */
+        ExtAngularBootstrapService.ctorParameters = function () {
+            return [
+                { type: i0.ComponentFactoryResolver },
+                { type: i0.ApplicationRef },
+                { type: i0.Injector }
+            ];
+        };
+        /** @nocollapse */ ExtAngularBootstrapService.ngInjectableDef = i0.defineInjectable({ factory: function ExtAngularBootstrapService_Factory() { return new ExtAngularBootstrapService(i0.inject(i0.ComponentFactoryResolver), i0.inject(i0.ApplicationRef), i0.inject(i0.INJECTOR)); }, token: ExtAngularBootstrapService, providedIn: "root" });
+        return ExtAngularBootstrapService;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ExtAngularBootstrapComponent = /** @class */ (function () {
+        function ExtAngularBootstrapComponent(extAngularService) {
+            this.extAngularService = extAngularService;
+            //console.log("In App constructor")
+            this.extAngularService.appendComponentToViewport();
+        }
+        ExtAngularBootstrapComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'app-root',
+                        template: ""
+                    }] }
+        ];
+        /** @nocollapse */
+        ExtAngularBootstrapComponent.ctorParameters = function () {
+            return [
+                { type: ExtAngularBootstrapService }
+            ];
+        };
+        return ExtAngularBootstrapComponent;
+    }());
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -38,95 +126,33 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var base = /** @class */ (function () {
-        function base(el, metaData) {
+        function base(nativeElement, metaData, hostComponent) {
             var _this = this;
             this.metaData = metaData;
+            this.hostComponent = hostComponent;
+            this._extChildren = false;
             //console.log('constructor');console.log(el.nativeElement)
-            this._nativeElement = el.nativeElement;
+            this._nativeElement = nativeElement;
+            console.log('hostComponent');
+            console.log(hostComponent);
+            this._hostComponent = hostComponent;
             metaData.EVENTS.forEach(function (event, n) {
                 if (event.name != 'fullscreen') {
-                    (( /** @type {?} */(_this)))[event.name] = new core.EventEmitter();
+                    (( /** @type {?} */(_this)))[event.name] = new i0.EventEmitter();
                 }
                 else {
-                    (( /** @type {?} */(_this)))[event.name + 'event'] = new core.EventEmitter();
+                    (( /** @type {?} */(_this)))[event.name + 'event'] = new i0.EventEmitter();
                 }
             });
         }
         /**
-         * @param {?} changes
-         * @return {?}
-         */
-        base.prototype.ngOnChanges = /**
-         * @param {?} changes
-         * @return {?}
-         */
-            function (changes) {
-                for (var propName in changes) {
-                    /** @type {?} */
-                    var verb = '';
-                    if (changes[propName].firstChange == true) {
-                        verb = 'initialized';
-                    }
-                    else {
-                        verb = 'changed';
-                    }
-                    /** @type {?} */
-                    var val = changes[propName].currentValue;
-                    if (this.ext != undefined) {
-                        /** @type {?} */
-                        var capPropName = propName.charAt(0).toUpperCase() + propName.slice(1);
-                        this.ext['set' + capPropName](val);
-                    }
-                    else {
-                        if (verb == 'changed') {
-                            console.log('change needed and ext not defined');
-                        }
-                    }
-                }
-                //console.log(`OnChanges: ${changesMsgs.join('; ')}`)
-            };
-        // Beware! Called frequently!
-        // Called in every change detection cycle anywhere on the page
-        //ngDoCheck() {console.log(`DoCheck`)}
-        // Beware! Called frequently!
-        // Called in every change detection cycle anywhere on the page
-        //ngAfterContentChecked() { console.log(`AfterContentChecked`) }
-        //ngAfterViewInit() { console.log(`AfterViewInit`) }
-        // Beware! Called frequently!
-        // Called in every change detection cycle anywhere on the page
-        //ngAfterViewChecked() { console.log(`AfterViewChecked`) }
-        //ngOnDestroy() { console.log(`OnDestroy`) }
-        // Beware! Called frequently!
-        // Called in every change detection cycle anywhere on the page
-        //ngDoCheck() {console.log(`DoCheck`)}
-        // Beware! Called frequently!
-        // Called in every change detection cycle anywhere on the page
-        //ngAfterContentChecked() { console.log(`AfterContentChecked`) }
-        //ngAfterViewInit() { console.log(`AfterViewInit`) }
-        // Beware! Called frequently!
-        // Called in every change detection cycle anywhere on the page
-        //ngAfterViewChecked() { console.log(`AfterViewChecked`) }
-        //ngOnDestroy() { console.log(`OnDestroy`) }
-        /**
          * @param {?} metaData
          * @return {?}
          */
-        base.prototype.baseOnInit =
-            // Beware! Called frequently!
-            // Called in every change detection cycle anywhere on the page
-            //ngDoCheck() {console.log(`DoCheck`)}
-            // Beware! Called frequently!
-            // Called in every change detection cycle anywhere on the page
-            //ngAfterContentChecked() { console.log(`AfterContentChecked`) }
-            //ngAfterViewInit() { console.log(`AfterViewInit`) }
-            // Beware! Called frequently!
-            // Called in every change detection cycle anywhere on the page
-            //ngAfterViewChecked() { console.log(`AfterViewChecked`) }
-            //ngOnDestroy() { console.log(`OnDestroy`) }
-            /**
-             * @param {?} metaData
-             * @return {?}
-             */
+        base.prototype.baseOnInit = /**
+         * @param {?} metaData
+         * @return {?}
+         */
             function (metaData) {
                 //console.log(`ngOnInit: ${metaData.XTYPE}`)
                 /** @type {?} */
@@ -195,7 +221,18 @@
         /**
          * @return {?}
          */
-        base.prototype.baseAfterContentInit = /**
+        base.prototype.ngOnDestroy = /**
+         * @return {?}
+         */
+            function () {
+                console.log("ngOnDestroy");
+                console.log(this);
+                //this.ext.parent.remove(this.ext)
+            };
+        /**
+         * @return {?}
+         */
+        base.prototype.baseAfterContentInitNew = /**
          * @return {?}
          */
             function () {
@@ -299,11 +336,172 @@
         /**
          * @return {?}
          */
-        base.prototype.baseAfterContentInit2 = /**
+        base.prototype.baseAfterContentInit = /**
+         * @return {?}
+         */
+            function () {
+                console.log('host');
+                console.log(this._hostComponent);
+                console.log('native');
+                console.log(this._nativeElement);
+                console.log('_items');
+                console.log(this._items);
+                console.log(this._items.length);
+                if (this._items.length > 0 && this._extChildren == true) {
+                    console.error('cant have both');
+                }
+                else if (this._items.length > 0) {
+                    console.error('do it');
+                    if (this.items.length < 2) {
+                        console.error('1 item');
+                        return;
+                    }
+                    //console.log(this.items.length + ' items')
+                    /** @type {?} */
+                    var anyItems = [];
+                    /** @type {?} */
+                    var elRefItems = [];
+                    this._items.forEach(function (item) { anyItems.push(item); });
+                    this._elRefItems.forEach(function (item) { elRefItems.push(item); });
+                    /** @type {?} */
+                    var j = 0;
+                    for (var i in anyItems) {
+                        if (j == 0) {
+                            j++;
+                            continue;
+                        }
+                        /** @type {?} */
+                        var item = anyItems[i];
+                        /** @type {?} */
+                        var elRefItem = elRefItems[i];
+                        if (item.nativeElement != undefined) {
+                            //console.log('native')
+                            this.ext.add({ xtype: 'container', html: item.nativeElement });
+                        }
+                        else {
+                            //console.log('component')
+                            //console.log(elRefItem)
+                            this.ext.add({ xtype: 'container', html: elRefItem.nativeElement });
+                        }
+                    }
+                    return;
+                }
+                if (this.ext != undefined && this.hostComponent != undefined) {
+                    /** @type {?} */
+                    var parentxtype = this.hostComponent['ext'].xtype;
+                    /** @type {?} */
+                    var childxtype = this['ext'].xtype;
+                    /** @type {?} */
+                    var parentCmp = this.hostComponent['ext'];
+                    /** @type {?} */
+                    var childCmp = this['ext'];
+                    console.log('parent: ' + parentxtype + ', child: ' + childxtype);
+                    this.hostComponent._extChildren = true;
+                    if (parentxtype === 'grid') {
+                        if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
+                            parentCmp.addColumn(childCmp);
+                        }
+                        else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
+                            if (parentCmp.getHideHeaders() === false) {
+                                //var j = parentCmp.items.items.length;
+                                parentCmp.insert(1, childCmp);
+                            }
+                            else {
+                                parentCmp.add(childCmp);
+                            }
+                        }
+                        else {
+                            console.log('??');
+                        }
+                    }
+                    else if (childxtype === 'tooltip') {
+                        parentCmp.setTooltip(childCmp);
+                    }
+                    else if (childxtype === 'plugin') {
+                        parentCmp.setPlugin(childCmp);
+                    }
+                    else if (parentxtype === 'button') {
+                        if (childxtype === 'menu') {
+                            parentCmp.setMenu(childCmp);
+                        }
+                        else {
+                            console.log('child not added');
+                        }
+                    }
+                    else if (childxtype === 'toolbar' && Ext.isClassic === true) {
+                        parentCmp.addDockedItems(childCmp);
+                    }
+                    else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
+                        if (parentCmp.getHideHeaders() === false) {
+                            //var j: any = parentCmp.items.items.length
+                            //parentCmp.insert(j - 1, childCmp)
+                            parentCmp.insert(1, childCmp);
+                        }
+                        else {
+                            parentCmp.add(childCmp);
+                        }
+                    }
+                    else if (parentCmp.add != undefined) {
+                        parentCmp.add(childCmp);
+                    }
+                    else {
+                        console.log('child not added');
+                    }
+                }
+                else if (this._nativeElement != undefined) {
+                    console.log(this._nativeElement);
+                    //this.ext.add({xtype: 'container',html: this._nativeElement})
+                }
+                else {
+                    console.log('component');
+                    //console.log(elRefItem)
+                    //this.ext.add({xtype: 'container',html: this._nativeElement})
+                }
+                //this['ready'].emit(parentCmp)
+                this['ready'].emit(this);
+            };
+        /**
+         * @param {?} changes
+         * @return {?}
+         */
+        base.prototype.ngOnChanges = /**
+         * @param {?} changes
+         * @return {?}
+         */
+            function (changes) {
+                for (var propName in changes) {
+                    /** @type {?} */
+                    var verb = '';
+                    if (changes[propName].firstChange == true) {
+                        verb = 'initialized';
+                    }
+                    else {
+                        verb = 'changed';
+                    }
+                    /** @type {?} */
+                    var val = changes[propName].currentValue;
+                    if (this.ext != undefined) {
+                        /** @type {?} */
+                        var capPropName = propName.charAt(0).toUpperCase() + propName.slice(1);
+                        this.ext['set' + capPropName](val);
+                    }
+                    else {
+                        if (verb == 'changed') {
+                            console.log('change needed and ext not defined');
+                        }
+                    }
+                }
+                //console.log(`OnChanges: ${changesMsgs.join('; ')}`)
+            };
+        /**
+         * @return {?}
+         */
+        base.prototype.baseAfterContentInit3 = /**
          * @return {?}
          */
             function () {
                 var _this = this;
+                console.log('baseAfterContentInit');
                 if (this.itemsa.length < 2) {
                     return;
                 }
@@ -377,9 +575,11 @@
                 this['ready'].emit(this);
             };
         base.propDecorators = {
-            items: [{ type: core.ContentChildren, args: ['item',] }],
-            items2: [{ type: core.ContentChildren, args: ['item', { read: core.ElementRef },] }],
-            itemsa: [{ type: core.ContentChildren, args: ['item', { read: core.ElementRef },] }]
+            items: [{ type: i0.ContentChildren, args: ['item',] }],
+            items2: [{ type: i0.ContentChildren, args: ['item', { read: i0.ElementRef },] }],
+            _items: [{ type: i0.ContentChildren, args: ['item',] }],
+            _elRefItems: [{ type: i0.ContentChildren, args: ['item', { read: i0.ElementRef },] }],
+            itemsa: [{ type: i0.ContentChildren, args: ['item',] }]
         };
         return base;
     }());
@@ -854,15 +1054,21 @@
     }());
     var ExtActionsheetComponent = /** @class */ (function (_super) {
         __extends(ExtActionsheetComponent, _super);
-        function ExtActionsheetComponent(eRef) {
-            return _super.call(this, eRef, actionsheetMetaData) || this;
+        function ExtActionsheetComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, actionsheetMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,actionsheetMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,actionsheetMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtActionsheetComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtActionsheetComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,actionsheetMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(actionsheetMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -879,18 +1085,19 @@
                 this['ready'].emit(this);
             };
         ExtActionsheetComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'actionsheet',
                         inputs: actionsheetMetaData.PROPERTIES,
                         outputs: actionsheetMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtActionsheetComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtActionsheetComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtActionsheetComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtActionsheetComponent;
@@ -1246,15 +1453,21 @@
     }());
     var ExtAudioComponent = /** @class */ (function (_super) {
         __extends(ExtAudioComponent, _super);
-        function ExtAudioComponent(eRef) {
-            return _super.call(this, eRef, audioMetaData) || this;
+        function ExtAudioComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, audioMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,audioMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,audioMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtAudioComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtAudioComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,audioMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(audioMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -1271,18 +1484,19 @@
                 this['ready'].emit(this);
             };
         ExtAudioComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'audio',
                         inputs: audioMetaData.PROPERTIES,
                         outputs: audioMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtAudioComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtAudioComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtAudioComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtAudioComponent;
@@ -1656,15 +1870,21 @@
     }());
     var ExtButtonComponent = /** @class */ (function (_super) {
         __extends(ExtButtonComponent, _super);
-        function ExtButtonComponent(eRef) {
-            return _super.call(this, eRef, buttonMetaData) || this;
+        function ExtButtonComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, buttonMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,buttonMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,buttonMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtButtonComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtButtonComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,buttonMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(buttonMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -1681,18 +1901,19 @@
                 this['ready'].emit(this);
             };
         ExtButtonComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'button',
                         inputs: buttonMetaData.PROPERTIES,
                         outputs: buttonMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtButtonComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtButtonComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtButtonComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtButtonComponent;
@@ -2034,15 +2255,21 @@
     }());
     var ExtCalendar_eventComponent = /** @class */ (function (_super) {
         __extends(ExtCalendar_eventComponent, _super);
-        function ExtCalendar_eventComponent(eRef) {
-            return _super.call(this, eRef, calendar_eventMetaData) || this;
+        function ExtCalendar_eventComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendar_eventMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_eventMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_eventMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendar_eventComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendar_eventComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_eventMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendar_eventMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -2059,18 +2286,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendar_eventComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar-event',
                         inputs: calendar_eventMetaData.PROPERTIES,
                         outputs: calendar_eventMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendar_eventComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_eventComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendar_eventComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendar_eventComponent;
@@ -2604,15 +2832,21 @@
     }());
     var ExtCalendar_form_addComponent = /** @class */ (function (_super) {
         __extends(ExtCalendar_form_addComponent, _super);
-        function ExtCalendar_form_addComponent(eRef) {
-            return _super.call(this, eRef, calendar_form_addMetaData) || this;
+        function ExtCalendar_form_addComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendar_form_addMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_form_addMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_form_addMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendar_form_addComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendar_form_addComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_form_addMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendar_form_addMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -2629,18 +2863,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendar_form_addComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar-form-add',
                         inputs: calendar_form_addMetaData.PROPERTIES,
                         outputs: calendar_form_addMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendar_form_addComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_form_addComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendar_form_addComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendar_form_addComponent;
@@ -3140,15 +3375,21 @@
     }());
     var ExtCalendar_calendar_pickerComponent = /** @class */ (function (_super) {
         __extends(ExtCalendar_calendar_pickerComponent, _super);
-        function ExtCalendar_calendar_pickerComponent(eRef) {
-            return _super.call(this, eRef, calendar_calendar_pickerMetaData) || this;
+        function ExtCalendar_calendar_pickerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendar_calendar_pickerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_calendar_pickerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_calendar_pickerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendar_calendar_pickerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendar_calendar_pickerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_calendar_pickerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendar_calendar_pickerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -3165,18 +3406,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendar_calendar_pickerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar-calendar-picker',
                         inputs: calendar_calendar_pickerMetaData.PROPERTIES,
                         outputs: calendar_calendar_pickerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendar_calendar_pickerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_calendar_pickerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendar_calendar_pickerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendar_calendar_pickerComponent;
@@ -3710,15 +3952,21 @@
     }());
     var ExtCalendar_form_editComponent = /** @class */ (function (_super) {
         __extends(ExtCalendar_form_editComponent, _super);
-        function ExtCalendar_form_editComponent(eRef) {
-            return _super.call(this, eRef, calendar_form_editMetaData) || this;
+        function ExtCalendar_form_editComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendar_form_editMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_form_editMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_form_editMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendar_form_editComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendar_form_editComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_form_editMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendar_form_editMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -3735,18 +3983,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendar_form_editComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar-form-edit',
                         inputs: calendar_form_editMetaData.PROPERTIES,
                         outputs: calendar_form_editMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendar_form_editComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_form_editComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendar_form_editComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendar_form_editComponent;
@@ -4246,15 +4495,21 @@
     }());
     var ExtCalendar_timefieldComponent = /** @class */ (function (_super) {
         __extends(ExtCalendar_timefieldComponent, _super);
-        function ExtCalendar_timefieldComponent(eRef) {
-            return _super.call(this, eRef, calendar_timefieldMetaData) || this;
+        function ExtCalendar_timefieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendar_timefieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_timefieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_timefieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendar_timefieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendar_timefieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_timefieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendar_timefieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -4271,18 +4526,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendar_timefieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar-timefield',
                         inputs: calendar_timefieldMetaData.PROPERTIES,
                         outputs: calendar_timefieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendar_timefieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_timefieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendar_timefieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendar_timefieldComponent;
@@ -4616,15 +4872,21 @@
     }());
     var ExtCalendar_daysheaderComponent = /** @class */ (function (_super) {
         __extends(ExtCalendar_daysheaderComponent, _super);
-        function ExtCalendar_daysheaderComponent(eRef) {
-            return _super.call(this, eRef, calendar_daysheaderMetaData) || this;
+        function ExtCalendar_daysheaderComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendar_daysheaderMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysheaderMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysheaderMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendar_daysheaderComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendar_daysheaderComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysheaderMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendar_daysheaderMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -4641,18 +4903,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendar_daysheaderComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar-daysheader',
                         inputs: calendar_daysheaderMetaData.PROPERTIES,
                         outputs: calendar_daysheaderMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendar_daysheaderComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_daysheaderComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendar_daysheaderComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendar_daysheaderComponent;
@@ -4986,15 +5249,21 @@
     }());
     var ExtCalendar_weeksheaderComponent = /** @class */ (function (_super) {
         __extends(ExtCalendar_weeksheaderComponent, _super);
-        function ExtCalendar_weeksheaderComponent(eRef) {
-            return _super.call(this, eRef, calendar_weeksheaderMetaData) || this;
+        function ExtCalendar_weeksheaderComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendar_weeksheaderMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksheaderMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksheaderMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendar_weeksheaderComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendar_weeksheaderComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksheaderMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendar_weeksheaderMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -5011,18 +5280,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendar_weeksheaderComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar-weeksheader',
                         inputs: calendar_weeksheaderMetaData.PROPERTIES,
                         outputs: calendar_weeksheaderMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendar_weeksheaderComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_weeksheaderComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendar_weeksheaderComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendar_weeksheaderComponent;
@@ -5524,15 +5794,21 @@
     }());
     var ExtCalendar_listComponent = /** @class */ (function (_super) {
         __extends(ExtCalendar_listComponent, _super);
-        function ExtCalendar_listComponent(eRef) {
-            return _super.call(this, eRef, calendar_listMetaData) || this;
+        function ExtCalendar_listComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendar_listMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_listMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_listMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendar_listComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendar_listComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_listMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendar_listMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -5549,18 +5825,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendar_listComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar-list',
                         inputs: calendar_listMetaData.PROPERTIES,
                         outputs: calendar_listMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendar_listComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_listComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendar_listComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendar_listComponent;
@@ -6096,15 +6373,21 @@
     }());
     var ExtCalendar_dayComponent = /** @class */ (function (_super) {
         __extends(ExtCalendar_dayComponent, _super);
-        function ExtCalendar_dayComponent(eRef) {
-            return _super.call(this, eRef, calendar_dayMetaData) || this;
+        function ExtCalendar_dayComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendar_dayMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_dayMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_dayMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendar_dayComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendar_dayComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_dayMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendar_dayMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -6121,18 +6404,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendar_dayComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar-day',
                         inputs: calendar_dayMetaData.PROPERTIES,
                         outputs: calendar_dayMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendar_dayComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_dayComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendar_dayComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendar_dayComponent;
@@ -6668,15 +6952,21 @@
     }());
     var ExtCalendar_daysComponent = /** @class */ (function (_super) {
         __extends(ExtCalendar_daysComponent, _super);
-        function ExtCalendar_daysComponent(eRef) {
-            return _super.call(this, eRef, calendar_daysMetaData) || this;
+        function ExtCalendar_daysComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendar_daysMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendar_daysComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendar_daysComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendar_daysMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -6693,18 +6983,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendar_daysComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar-days',
                         inputs: calendar_daysMetaData.PROPERTIES,
                         outputs: calendar_daysMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendar_daysComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_daysComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendar_daysComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendar_daysComponent;
@@ -7236,15 +7527,21 @@
     }());
     var ExtCalendar_monthComponent = /** @class */ (function (_super) {
         __extends(ExtCalendar_monthComponent, _super);
-        function ExtCalendar_monthComponent(eRef) {
-            return _super.call(this, eRef, calendar_monthMetaData) || this;
+        function ExtCalendar_monthComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendar_monthMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_monthMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_monthMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendar_monthComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendar_monthComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_monthMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendar_monthMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -7261,18 +7558,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendar_monthComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar-month',
                         inputs: calendar_monthMetaData.PROPERTIES,
                         outputs: calendar_monthMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendar_monthComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_monthComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendar_monthComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendar_monthComponent;
@@ -7774,15 +8072,21 @@
     }());
     var ExtCalendarComponent = /** @class */ (function (_super) {
         __extends(ExtCalendarComponent, _super);
-        function ExtCalendarComponent(eRef) {
-            return _super.call(this, eRef, calendarMetaData) || this;
+        function ExtCalendarComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendarMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendarMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendarMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendarComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendarComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendarMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendarMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -7799,18 +8103,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendarComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar',
                         inputs: calendarMetaData.PROPERTIES,
                         outputs: calendarMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendarComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendarComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendarComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendarComponent;
@@ -8348,15 +8653,21 @@
     }());
     var ExtCalendar_weekComponent = /** @class */ (function (_super) {
         __extends(ExtCalendar_weekComponent, _super);
-        function ExtCalendar_weekComponent(eRef) {
-            return _super.call(this, eRef, calendar_weekMetaData) || this;
+        function ExtCalendar_weekComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendar_weekMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weekMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weekMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendar_weekComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendar_weekComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weekMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendar_weekMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -8373,18 +8684,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendar_weekComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar-week',
                         inputs: calendar_weekMetaData.PROPERTIES,
                         outputs: calendar_weekMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendar_weekComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_weekComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendar_weekComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendar_weekComponent;
@@ -8916,15 +9228,21 @@
     }());
     var ExtCalendar_weeksComponent = /** @class */ (function (_super) {
         __extends(ExtCalendar_weeksComponent, _super);
-        function ExtCalendar_weeksComponent(eRef) {
-            return _super.call(this, eRef, calendar_weeksMetaData) || this;
+        function ExtCalendar_weeksComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendar_weeksMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendar_weeksComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendar_weeksComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendar_weeksMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -8941,18 +9259,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendar_weeksComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar-weeks',
                         inputs: calendar_weeksMetaData.PROPERTIES,
                         outputs: calendar_weeksMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendar_weeksComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_weeksComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendar_weeksComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendar_weeksComponent;
@@ -9344,15 +9663,21 @@
     }());
     var ExtCalendar_dayviewComponent = /** @class */ (function (_super) {
         __extends(ExtCalendar_dayviewComponent, _super);
-        function ExtCalendar_dayviewComponent(eRef) {
-            return _super.call(this, eRef, calendar_dayviewMetaData) || this;
+        function ExtCalendar_dayviewComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendar_dayviewMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_dayviewMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_dayviewMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendar_dayviewComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendar_dayviewComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_dayviewMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendar_dayviewMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -9369,18 +9694,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendar_dayviewComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar-dayview',
                         inputs: calendar_dayviewMetaData.PROPERTIES,
                         outputs: calendar_dayviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendar_dayviewComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_dayviewComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendar_dayviewComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendar_dayviewComponent;
@@ -9772,15 +10098,21 @@
     }());
     var ExtCalendar_daysviewComponent = /** @class */ (function (_super) {
         __extends(ExtCalendar_daysviewComponent, _super);
-        function ExtCalendar_daysviewComponent(eRef) {
-            return _super.call(this, eRef, calendar_daysviewMetaData) || this;
+        function ExtCalendar_daysviewComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendar_daysviewMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysviewMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysviewMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendar_daysviewComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendar_daysviewComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysviewMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendar_daysviewMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -9797,18 +10129,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendar_daysviewComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar-daysview',
                         inputs: calendar_daysviewMetaData.PROPERTIES,
                         outputs: calendar_daysviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendar_daysviewComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_daysviewComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendar_daysviewComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendar_daysviewComponent;
@@ -10198,15 +10531,21 @@
     }());
     var ExtCalendar_monthviewComponent = /** @class */ (function (_super) {
         __extends(ExtCalendar_monthviewComponent, _super);
-        function ExtCalendar_monthviewComponent(eRef) {
-            return _super.call(this, eRef, calendar_monthviewMetaData) || this;
+        function ExtCalendar_monthviewComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendar_monthviewMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_monthviewMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_monthviewMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendar_monthviewComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendar_monthviewComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_monthviewMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendar_monthviewMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -10223,18 +10562,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendar_monthviewComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar-monthview',
                         inputs: calendar_monthviewMetaData.PROPERTIES,
                         outputs: calendar_monthviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendar_monthviewComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_monthviewComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendar_monthviewComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendar_monthviewComponent;
@@ -10286,15 +10626,21 @@
     }());
     var ExtCalendar_multiviewComponent = /** @class */ (function (_super) {
         __extends(ExtCalendar_multiviewComponent, _super);
-        function ExtCalendar_multiviewComponent(eRef) {
-            return _super.call(this, eRef, calendar_multiviewMetaData) || this;
+        function ExtCalendar_multiviewComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendar_multiviewMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_multiviewMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_multiviewMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendar_multiviewComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendar_multiviewComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_multiviewMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendar_multiviewMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -10311,18 +10657,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendar_multiviewComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar-multiview',
                         inputs: calendar_multiviewMetaData.PROPERTIES,
                         outputs: calendar_multiviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendar_multiviewComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_multiviewComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendar_multiviewComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendar_multiviewComponent;
@@ -10716,15 +11063,21 @@
     }());
     var ExtCalendar_weekviewComponent = /** @class */ (function (_super) {
         __extends(ExtCalendar_weekviewComponent, _super);
-        function ExtCalendar_weekviewComponent(eRef) {
-            return _super.call(this, eRef, calendar_weekviewMetaData) || this;
+        function ExtCalendar_weekviewComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendar_weekviewMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weekviewMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weekviewMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendar_weekviewComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendar_weekviewComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weekviewMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendar_weekviewMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -10741,18 +11094,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendar_weekviewComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar-weekview',
                         inputs: calendar_weekviewMetaData.PROPERTIES,
                         outputs: calendar_weekviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendar_weekviewComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_weekviewComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendar_weekviewComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendar_weekviewComponent;
@@ -11142,15 +11496,21 @@
     }());
     var ExtCalendar_weeksviewComponent = /** @class */ (function (_super) {
         __extends(ExtCalendar_weeksviewComponent, _super);
-        function ExtCalendar_weeksviewComponent(eRef) {
-            return _super.call(this, eRef, calendar_weeksviewMetaData) || this;
+        function ExtCalendar_weeksviewComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, calendar_weeksviewMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksviewMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksviewMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCalendar_weeksviewComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCalendar_weeksviewComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksviewMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(calendar_weeksviewMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -11167,18 +11527,19 @@
                 this['ready'].emit(this);
             };
         ExtCalendar_weeksviewComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'calendar-weeksview',
                         inputs: calendar_weeksviewMetaData.PROPERTIES,
                         outputs: calendar_weeksviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCalendar_weeksviewComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_weeksviewComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCalendar_weeksviewComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCalendar_weeksviewComponent;
@@ -11562,15 +11923,21 @@
     }());
     var ExtCarouselComponent = /** @class */ (function (_super) {
         __extends(ExtCarouselComponent, _super);
-        function ExtCarouselComponent(eRef) {
-            return _super.call(this, eRef, carouselMetaData) || this;
+        function ExtCarouselComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, carouselMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,carouselMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,carouselMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCarouselComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCarouselComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,carouselMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(carouselMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -11587,18 +11954,19 @@
                 this['ready'].emit(this);
             };
         ExtCarouselComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'carousel',
                         inputs: carouselMetaData.PROPERTIES,
                         outputs: carouselMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCarouselComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCarouselComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCarouselComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCarouselComponent;
@@ -11708,15 +12076,21 @@
     }());
     var ExtAxis3dComponent = /** @class */ (function (_super) {
         __extends(ExtAxis3dComponent, _super);
-        function ExtAxis3dComponent(eRef) {
-            return _super.call(this, eRef, axis3dMetaData) || this;
+        function ExtAxis3dComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, axis3dMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,axis3dMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,axis3dMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtAxis3dComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtAxis3dComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,axis3dMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(axis3dMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -11733,18 +12107,19 @@
                 this['ready'].emit(this);
             };
         ExtAxis3dComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'axis3d',
                         inputs: axis3dMetaData.PROPERTIES,
                         outputs: axis3dMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtAxis3dComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtAxis3dComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtAxis3dComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtAxis3dComponent;
@@ -12214,15 +12589,21 @@
     }());
     var ExtCartesianComponent = /** @class */ (function (_super) {
         __extends(ExtCartesianComponent, _super);
-        function ExtCartesianComponent(eRef) {
-            return _super.call(this, eRef, cartesianMetaData) || this;
+        function ExtCartesianComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, cartesianMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,cartesianMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,cartesianMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCartesianComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCartesianComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,cartesianMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(cartesianMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -12239,18 +12620,19 @@
                 this['ready'].emit(this);
             };
         ExtCartesianComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'cartesian',
                         inputs: cartesianMetaData.PROPERTIES,
                         outputs: cartesianMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCartesianComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCartesianComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCartesianComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCartesianComponent;
@@ -12720,15 +13102,21 @@
     }());
     var ExtChartComponent = /** @class */ (function (_super) {
         __extends(ExtChartComponent, _super);
-        function ExtChartComponent(eRef) {
-            return _super.call(this, eRef, chartMetaData) || this;
+        function ExtChartComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, chartMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chartMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chartMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtChartComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtChartComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chartMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(chartMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -12745,18 +13133,19 @@
                 this['ready'].emit(this);
             };
         ExtChartComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'chart',
                         inputs: chartMetaData.PROPERTIES,
                         outputs: chartMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtChartComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtChartComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtChartComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtChartComponent;
@@ -12800,15 +13189,21 @@
     }());
     var ExtInteractionComponent = /** @class */ (function (_super) {
         __extends(ExtInteractionComponent, _super);
-        function ExtInteractionComponent(eRef) {
-            return _super.call(this, eRef, interactionMetaData) || this;
+        function ExtInteractionComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, interactionMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,interactionMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,interactionMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtInteractionComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtInteractionComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,interactionMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(interactionMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -12825,18 +13220,19 @@
                 this['ready'].emit(this);
             };
         ExtInteractionComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'interaction',
                         inputs: interactionMetaData.PROPERTIES,
                         outputs: interactionMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtInteractionComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtInteractionComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtInteractionComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtInteractionComponent;
@@ -13340,15 +13736,21 @@
     }());
     var ExtLegendComponent = /** @class */ (function (_super) {
         __extends(ExtLegendComponent, _super);
-        function ExtLegendComponent(eRef) {
-            return _super.call(this, eRef, legendMetaData) || this;
+        function ExtLegendComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, legendMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,legendMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,legendMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtLegendComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtLegendComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,legendMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(legendMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -13365,18 +13767,19 @@
                 this['ready'].emit(this);
             };
         ExtLegendComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'legend',
                         inputs: legendMetaData.PROPERTIES,
                         outputs: legendMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtLegendComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtLegendComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtLegendComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtLegendComponent;
@@ -13760,15 +14163,21 @@
     }());
     var ExtChartnavigatorComponent = /** @class */ (function (_super) {
         __extends(ExtChartnavigatorComponent, _super);
-        function ExtChartnavigatorComponent(eRef) {
-            return _super.call(this, eRef, chartnavigatorMetaData) || this;
+        function ExtChartnavigatorComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, chartnavigatorMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chartnavigatorMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chartnavigatorMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtChartnavigatorComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtChartnavigatorComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chartnavigatorMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(chartnavigatorMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -13785,18 +14194,19 @@
                 this['ready'].emit(this);
             };
         ExtChartnavigatorComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'chartnavigator',
                         inputs: chartnavigatorMetaData.PROPERTIES,
                         outputs: chartnavigatorMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtChartnavigatorComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtChartnavigatorComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtChartnavigatorComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtChartnavigatorComponent;
@@ -14268,15 +14678,21 @@
     }());
     var ExtPolarComponent = /** @class */ (function (_super) {
         __extends(ExtPolarComponent, _super);
-        function ExtPolarComponent(eRef) {
-            return _super.call(this, eRef, polarMetaData) || this;
+        function ExtPolarComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, polarMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,polarMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,polarMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPolarComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPolarComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,polarMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(polarMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -14293,18 +14709,19 @@
                 this['ready'].emit(this);
             };
         ExtPolarComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'polar',
                         inputs: polarMetaData.PROPERTIES,
                         outputs: polarMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPolarComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPolarComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPolarComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPolarComponent;
@@ -14770,15 +15187,21 @@
     }());
     var ExtSpacefillingComponent = /** @class */ (function (_super) {
         __extends(ExtSpacefillingComponent, _super);
-        function ExtSpacefillingComponent(eRef) {
-            return _super.call(this, eRef, spacefillingMetaData) || this;
+        function ExtSpacefillingComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, spacefillingMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spacefillingMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spacefillingMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSpacefillingComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSpacefillingComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spacefillingMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(spacefillingMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -14795,18 +15218,19 @@
                 this['ready'].emit(this);
             };
         ExtSpacefillingComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'spacefilling',
                         inputs: spacefillingMetaData.PROPERTIES,
                         outputs: spacefillingMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSpacefillingComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSpacefillingComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSpacefillingComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSpacefillingComponent;
@@ -15140,15 +15564,21 @@
     }());
     var ExtChipComponent = /** @class */ (function (_super) {
         __extends(ExtChipComponent, _super);
-        function ExtChipComponent(eRef) {
-            return _super.call(this, eRef, chipMetaData) || this;
+        function ExtChipComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, chipMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chipMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chipMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtChipComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtChipComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chipMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(chipMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -15165,18 +15595,19 @@
                 this['ready'].emit(this);
             };
         ExtChipComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'chip',
                         inputs: chipMetaData.PROPERTIES,
                         outputs: chipMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtChipComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtChipComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtChipComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtChipComponent;
@@ -15498,15 +15929,21 @@
     }());
     var ExtComponentComponent = /** @class */ (function (_super) {
         __extends(ExtComponentComponent, _super);
-        function ExtComponentComponent(eRef) {
-            return _super.call(this, eRef, componentMetaData) || this;
+        function ExtComponentComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, componentMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,componentMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,componentMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtComponentComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtComponentComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,componentMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(componentMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -15523,18 +15960,19 @@
                 this['ready'].emit(this);
             };
         ExtComponentComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'component',
                         inputs: componentMetaData.PROPERTIES,
                         outputs: componentMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtComponentComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtComponentComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtComponentComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtComponentComponent;
@@ -15914,15 +16352,21 @@
     }());
     var ExtContainerComponent = /** @class */ (function (_super) {
         __extends(ExtContainerComponent, _super);
-        function ExtContainerComponent(eRef) {
-            return _super.call(this, eRef, containerMetaData) || this;
+        function ExtContainerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, containerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,containerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,containerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtContainerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtContainerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,containerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(containerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -15939,18 +16383,19 @@
                 this['ready'].emit(this);
             };
         ExtContainerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'container',
                         inputs: containerMetaData.PROPERTIES,
                         outputs: containerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtContainerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtContainerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtContainerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtContainerComponent;
@@ -16286,15 +16731,21 @@
     }());
     var ExtD3_canvasComponent = /** @class */ (function (_super) {
         __extends(ExtD3_canvasComponent, _super);
-        function ExtD3_canvasComponent(eRef) {
-            return _super.call(this, eRef, d3_canvasMetaData) || this;
+        function ExtD3_canvasComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, d3_canvasMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_canvasMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_canvasMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtD3_canvasComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtD3_canvasComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_canvasMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(d3_canvasMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -16311,18 +16762,19 @@
                 this['ready'].emit(this);
             };
         ExtD3_canvasComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'd3-canvas',
                         inputs: d3_canvasMetaData.PROPERTIES,
                         outputs: d3_canvasMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtD3_canvasComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3_canvasComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtD3_canvasComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtD3_canvasComponent;
@@ -16672,15 +17124,21 @@
     }());
     var ExtD3_heatmapComponent = /** @class */ (function (_super) {
         __extends(ExtD3_heatmapComponent, _super);
-        function ExtD3_heatmapComponent(eRef) {
-            return _super.call(this, eRef, d3_heatmapMetaData) || this;
+        function ExtD3_heatmapComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, d3_heatmapMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_heatmapMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_heatmapMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtD3_heatmapComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtD3_heatmapComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_heatmapMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(d3_heatmapMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -16697,18 +17155,19 @@
                 this['ready'].emit(this);
             };
         ExtD3_heatmapComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'd3-heatmap',
                         inputs: d3_heatmapMetaData.PROPERTIES,
                         outputs: d3_heatmapMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtD3_heatmapComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3_heatmapComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtD3_heatmapComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtD3_heatmapComponent;
@@ -17088,15 +17547,21 @@
     }());
     var ExtD3_packComponent = /** @class */ (function (_super) {
         __extends(ExtD3_packComponent, _super);
-        function ExtD3_packComponent(eRef) {
-            return _super.call(this, eRef, d3_packMetaData) || this;
+        function ExtD3_packComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, d3_packMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_packMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_packMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtD3_packComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtD3_packComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_packMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(d3_packMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -17113,18 +17578,19 @@
                 this['ready'].emit(this);
             };
         ExtD3_packComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'd3-pack',
                         inputs: d3_packMetaData.PROPERTIES,
                         outputs: d3_packMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtD3_packComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3_packComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtD3_packComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtD3_packComponent;
@@ -17500,15 +17966,21 @@
     }());
     var ExtD3_partitionComponent = /** @class */ (function (_super) {
         __extends(ExtD3_partitionComponent, _super);
-        function ExtD3_partitionComponent(eRef) {
-            return _super.call(this, eRef, d3_partitionMetaData) || this;
+        function ExtD3_partitionComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, d3_partitionMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_partitionMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_partitionMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtD3_partitionComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtD3_partitionComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_partitionMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(d3_partitionMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -17525,18 +17997,19 @@
                 this['ready'].emit(this);
             };
         ExtD3_partitionComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'd3-partition',
                         inputs: d3_partitionMetaData.PROPERTIES,
                         outputs: d3_partitionMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtD3_partitionComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3_partitionComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtD3_partitionComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtD3_partitionComponent;
@@ -17916,15 +18389,21 @@
     }());
     var ExtD3_sunburstComponent = /** @class */ (function (_super) {
         __extends(ExtD3_sunburstComponent, _super);
-        function ExtD3_sunburstComponent(eRef) {
-            return _super.call(this, eRef, d3_sunburstMetaData) || this;
+        function ExtD3_sunburstComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, d3_sunburstMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_sunburstMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_sunburstMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtD3_sunburstComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtD3_sunburstComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_sunburstMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(d3_sunburstMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -17941,18 +18420,19 @@
                 this['ready'].emit(this);
             };
         ExtD3_sunburstComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'd3-sunburst',
                         inputs: d3_sunburstMetaData.PROPERTIES,
                         outputs: d3_sunburstMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtD3_sunburstComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3_sunburstComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtD3_sunburstComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtD3_sunburstComponent;
@@ -18334,15 +18814,21 @@
     }());
     var ExtD3_treeComponent = /** @class */ (function (_super) {
         __extends(ExtD3_treeComponent, _super);
-        function ExtD3_treeComponent(eRef) {
-            return _super.call(this, eRef, d3_treeMetaData) || this;
+        function ExtD3_treeComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, d3_treeMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_treeMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_treeMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtD3_treeComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtD3_treeComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_treeMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(d3_treeMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -18359,18 +18845,19 @@
                 this['ready'].emit(this);
             };
         ExtD3_treeComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'd3-tree',
                         inputs: d3_treeMetaData.PROPERTIES,
                         outputs: d3_treeMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtD3_treeComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3_treeComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtD3_treeComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtD3_treeComponent;
@@ -18752,15 +19239,21 @@
     }());
     var ExtD3_horizontal_treeComponent = /** @class */ (function (_super) {
         __extends(ExtD3_horizontal_treeComponent, _super);
-        function ExtD3_horizontal_treeComponent(eRef) {
-            return _super.call(this, eRef, d3_horizontal_treeMetaData) || this;
+        function ExtD3_horizontal_treeComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, d3_horizontal_treeMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_horizontal_treeMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_horizontal_treeMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtD3_horizontal_treeComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtD3_horizontal_treeComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_horizontal_treeMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(d3_horizontal_treeMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -18777,18 +19270,19 @@
                 this['ready'].emit(this);
             };
         ExtD3_horizontal_treeComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'd3-horizontal-tree',
                         inputs: d3_horizontal_treeMetaData.PROPERTIES,
                         outputs: d3_horizontal_treeMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtD3_horizontal_treeComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3_horizontal_treeComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtD3_horizontal_treeComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtD3_horizontal_treeComponent;
@@ -19174,15 +19668,21 @@
     }());
     var ExtD3_treemapComponent = /** @class */ (function (_super) {
         __extends(ExtD3_treemapComponent, _super);
-        function ExtD3_treemapComponent(eRef) {
-            return _super.call(this, eRef, d3_treemapMetaData) || this;
+        function ExtD3_treemapComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, d3_treemapMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_treemapMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_treemapMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtD3_treemapComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtD3_treemapComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_treemapMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(d3_treemapMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -19199,18 +19699,19 @@
                 this['ready'].emit(this);
             };
         ExtD3_treemapComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'd3-treemap',
                         inputs: d3_treemapMetaData.PROPERTIES,
                         outputs: d3_treemapMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtD3_treemapComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3_treemapComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtD3_treemapComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtD3_treemapComponent;
@@ -19548,15 +20049,21 @@
     }());
     var ExtD3_svgComponent = /** @class */ (function (_super) {
         __extends(ExtD3_svgComponent, _super);
-        function ExtD3_svgComponent(eRef) {
-            return _super.call(this, eRef, d3_svgMetaData) || this;
+        function ExtD3_svgComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, d3_svgMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_svgMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_svgMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtD3_svgComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtD3_svgComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_svgMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(d3_svgMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -19573,18 +20080,19 @@
                 this['ready'].emit(this);
             };
         ExtD3_svgComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'd3-svg',
                         inputs: d3_svgMetaData.PROPERTIES,
                         outputs: d3_svgMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtD3_svgComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3_svgComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtD3_svgComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtD3_svgComponent;
@@ -19922,15 +20430,21 @@
     }());
     var ExtD3Component = /** @class */ (function (_super) {
         __extends(ExtD3Component, _super);
-        function ExtD3Component(eRef) {
-            return _super.call(this, eRef, d3MetaData) || this;
+        function ExtD3Component(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, d3MetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3MetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3MetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtD3Component.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtD3Component.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3MetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(d3MetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -19947,18 +20461,19 @@
                 this['ready'].emit(this);
             };
         ExtD3Component.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'd3',
                         inputs: d3MetaData.PROPERTIES,
                         outputs: d3MetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtD3Component; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3Component; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtD3Component.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtD3Component;
@@ -20526,15 +21041,21 @@
     }());
     var ExtBoundlistComponent = /** @class */ (function (_super) {
         __extends(ExtBoundlistComponent, _super);
-        function ExtBoundlistComponent(eRef) {
-            return _super.call(this, eRef, boundlistMetaData) || this;
+        function ExtBoundlistComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, boundlistMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,boundlistMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,boundlistMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtBoundlistComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtBoundlistComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,boundlistMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(boundlistMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -20551,18 +21072,19 @@
                 this['ready'].emit(this);
             };
         ExtBoundlistComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'boundlist',
                         inputs: boundlistMetaData.PROPERTIES,
                         outputs: boundlistMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtBoundlistComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtBoundlistComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtBoundlistComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtBoundlistComponent;
@@ -21078,15 +21600,21 @@
     }());
     var ExtChipviewComponent = /** @class */ (function (_super) {
         __extends(ExtChipviewComponent, _super);
-        function ExtChipviewComponent(eRef) {
-            return _super.call(this, eRef, chipviewMetaData) || this;
+        function ExtChipviewComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, chipviewMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chipviewMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chipviewMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtChipviewComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtChipviewComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chipviewMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(chipviewMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -21103,18 +21631,19 @@
                 this['ready'].emit(this);
             };
         ExtChipviewComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'chipview',
                         inputs: chipviewMetaData.PROPERTIES,
                         outputs: chipviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtChipviewComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtChipviewComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtChipviewComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtChipviewComponent;
@@ -21618,15 +22147,21 @@
     }());
     var ExtComponentdataviewComponent = /** @class */ (function (_super) {
         __extends(ExtComponentdataviewComponent, _super);
-        function ExtComponentdataviewComponent(eRef) {
-            return _super.call(this, eRef, componentdataviewMetaData) || this;
+        function ExtComponentdataviewComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, componentdataviewMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,componentdataviewMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,componentdataviewMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtComponentdataviewComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtComponentdataviewComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,componentdataviewMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(componentdataviewMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -21643,18 +22178,19 @@
                 this['ready'].emit(this);
             };
         ExtComponentdataviewComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'componentdataview',
                         inputs: componentdataviewMetaData.PROPERTIES,
                         outputs: componentdataviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtComponentdataviewComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtComponentdataviewComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtComponentdataviewComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtComponentdataviewComponent;
@@ -22040,15 +22576,21 @@
     }());
     var ExtDataitemComponent = /** @class */ (function (_super) {
         __extends(ExtDataitemComponent, _super);
-        function ExtDataitemComponent(eRef) {
-            return _super.call(this, eRef, dataitemMetaData) || this;
+        function ExtDataitemComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, dataitemMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dataitemMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dataitemMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtDataitemComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtDataitemComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dataitemMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(dataitemMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -22065,18 +22607,19 @@
                 this['ready'].emit(this);
             };
         ExtDataitemComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'dataitem',
                         inputs: dataitemMetaData.PROPERTIES,
                         outputs: dataitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtDataitemComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDataitemComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtDataitemComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtDataitemComponent;
@@ -22576,15 +23119,21 @@
     }());
     var ExtDataviewComponent = /** @class */ (function (_super) {
         __extends(ExtDataviewComponent, _super);
-        function ExtDataviewComponent(eRef) {
-            return _super.call(this, eRef, dataviewMetaData) || this;
+        function ExtDataviewComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, dataviewMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dataviewMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dataviewMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtDataviewComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtDataviewComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dataviewMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(dataviewMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -22601,18 +23150,19 @@
                 this['ready'].emit(this);
             };
         ExtDataviewComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'dataview',
                         inputs: dataviewMetaData.PROPERTIES,
                         outputs: dataviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtDataviewComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDataviewComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtDataviewComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtDataviewComponent;
@@ -22934,15 +23484,21 @@
     }());
     var ExtEmptytextComponent = /** @class */ (function (_super) {
         __extends(ExtEmptytextComponent, _super);
-        function ExtEmptytextComponent(eRef) {
-            return _super.call(this, eRef, emptytextMetaData) || this;
+        function ExtEmptytextComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, emptytextMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,emptytextMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,emptytextMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtEmptytextComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtEmptytextComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,emptytextMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(emptytextMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -22959,18 +23515,19 @@
                 this['ready'].emit(this);
             };
         ExtEmptytextComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'emptytext',
                         inputs: emptytextMetaData.PROPERTIES,
                         outputs: emptytextMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtEmptytextComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtEmptytextComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtEmptytextComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtEmptytextComponent;
@@ -23312,15 +23869,21 @@
     }());
     var ExtIndexbarComponent = /** @class */ (function (_super) {
         __extends(ExtIndexbarComponent, _super);
-        function ExtIndexbarComponent(eRef) {
-            return _super.call(this, eRef, indexbarMetaData) || this;
+        function ExtIndexbarComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, indexbarMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,indexbarMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,indexbarMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtIndexbarComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtIndexbarComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,indexbarMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(indexbarMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -23337,18 +23900,19 @@
                 this['ready'].emit(this);
             };
         ExtIndexbarComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'indexbar',
                         inputs: indexbarMetaData.PROPERTIES,
                         outputs: indexbarMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtIndexbarComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtIndexbarComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtIndexbarComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtIndexbarComponent;
@@ -23680,15 +24244,21 @@
     }());
     var ExtItemheaderComponent = /** @class */ (function (_super) {
         __extends(ExtItemheaderComponent, _super);
-        function ExtItemheaderComponent(eRef) {
-            return _super.call(this, eRef, itemheaderMetaData) || this;
+        function ExtItemheaderComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, itemheaderMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,itemheaderMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,itemheaderMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtItemheaderComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtItemheaderComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,itemheaderMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(itemheaderMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -23705,18 +24275,19 @@
                 this['ready'].emit(this);
             };
         ExtItemheaderComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'itemheader',
                         inputs: itemheaderMetaData.PROPERTIES,
                         outputs: itemheaderMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtItemheaderComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtItemheaderComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtItemheaderComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtItemheaderComponent;
@@ -24284,15 +24855,21 @@
     }());
     var ExtListComponent = /** @class */ (function (_super) {
         __extends(ExtListComponent, _super);
-        function ExtListComponent(eRef) {
-            return _super.call(this, eRef, listMetaData) || this;
+        function ExtListComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, listMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtListComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtListComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(listMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -24309,18 +24886,19 @@
                 this['ready'].emit(this);
             };
         ExtListComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'list',
                         inputs: listMetaData.PROPERTIES,
                         outputs: listMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtListComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtListComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtListComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtListComponent;
@@ -24714,15 +25292,21 @@
     }());
     var ExtListitemComponent = /** @class */ (function (_super) {
         __extends(ExtListitemComponent, _super);
-        function ExtListitemComponent(eRef) {
-            return _super.call(this, eRef, listitemMetaData) || this;
+        function ExtListitemComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, listitemMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listitemMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listitemMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtListitemComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtListitemComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listitemMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(listitemMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -24739,18 +25323,19 @@
                 this['ready'].emit(this);
             };
         ExtListitemComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'listitem',
                         inputs: listitemMetaData.PROPERTIES,
                         outputs: listitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtListitemComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtListitemComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtListitemComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtListitemComponent;
@@ -25138,15 +25723,21 @@
     }());
     var ExtListswiperitemComponent = /** @class */ (function (_super) {
         __extends(ExtListswiperitemComponent, _super);
-        function ExtListswiperitemComponent(eRef) {
-            return _super.call(this, eRef, listswiperitemMetaData) || this;
+        function ExtListswiperitemComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, listswiperitemMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listswiperitemMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listswiperitemMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtListswiperitemComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtListswiperitemComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listswiperitemMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(listswiperitemMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -25163,18 +25754,19 @@
                 this['ready'].emit(this);
             };
         ExtListswiperitemComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'listswiperitem',
                         inputs: listswiperitemMetaData.PROPERTIES,
                         outputs: listswiperitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtListswiperitemComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtListswiperitemComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtListswiperitemComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtListswiperitemComponent;
@@ -25572,15 +26164,21 @@
     }());
     var ExtListswiperstepperComponent = /** @class */ (function (_super) {
         __extends(ExtListswiperstepperComponent, _super);
-        function ExtListswiperstepperComponent(eRef) {
-            return _super.call(this, eRef, listswiperstepperMetaData) || this;
+        function ExtListswiperstepperComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, listswiperstepperMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listswiperstepperMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listswiperstepperMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtListswiperstepperComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtListswiperstepperComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listswiperstepperMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(listswiperstepperMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -25597,18 +26195,19 @@
                 this['ready'].emit(this);
             };
         ExtListswiperstepperComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'listswiperstepper',
                         inputs: listswiperstepperMetaData.PROPERTIES,
                         outputs: listswiperstepperMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtListswiperstepperComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtListswiperstepperComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtListswiperstepperComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtListswiperstepperComponent;
@@ -26050,15 +26649,21 @@
     }());
     var ExtNestedlistComponent = /** @class */ (function (_super) {
         __extends(ExtNestedlistComponent, _super);
-        function ExtNestedlistComponent(eRef) {
-            return _super.call(this, eRef, nestedlistMetaData) || this;
+        function ExtNestedlistComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, nestedlistMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,nestedlistMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,nestedlistMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtNestedlistComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtNestedlistComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,nestedlistMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(nestedlistMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -26075,18 +26680,19 @@
                 this['ready'].emit(this);
             };
         ExtNestedlistComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'nestedlist',
                         inputs: nestedlistMetaData.PROPERTIES,
                         outputs: nestedlistMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtNestedlistComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtNestedlistComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtNestedlistComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtNestedlistComponent;
@@ -26428,15 +27034,21 @@
     }());
     var ExtPullrefreshbarComponent = /** @class */ (function (_super) {
         __extends(ExtPullrefreshbarComponent, _super);
-        function ExtPullrefreshbarComponent(eRef) {
-            return _super.call(this, eRef, pullrefreshbarMetaData) || this;
+        function ExtPullrefreshbarComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, pullrefreshbarMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pullrefreshbarMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pullrefreshbarMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPullrefreshbarComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPullrefreshbarComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pullrefreshbarMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(pullrefreshbarMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -26453,18 +27065,19 @@
                 this['ready'].emit(this);
             };
         ExtPullrefreshbarComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'pullrefreshbar',
                         inputs: pullrefreshbarMetaData.PROPERTIES,
                         outputs: pullrefreshbarMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPullrefreshbarComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPullrefreshbarComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPullrefreshbarComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPullrefreshbarComponent;
@@ -26792,15 +27405,21 @@
     }());
     var ExtPullrefreshspinnerComponent = /** @class */ (function (_super) {
         __extends(ExtPullrefreshspinnerComponent, _super);
-        function ExtPullrefreshspinnerComponent(eRef) {
-            return _super.call(this, eRef, pullrefreshspinnerMetaData) || this;
+        function ExtPullrefreshspinnerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, pullrefreshspinnerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pullrefreshspinnerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pullrefreshspinnerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPullrefreshspinnerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPullrefreshspinnerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pullrefreshspinnerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(pullrefreshspinnerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -26817,18 +27436,19 @@
                 this['ready'].emit(this);
             };
         ExtPullrefreshspinnerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'pullrefreshspinner',
                         inputs: pullrefreshspinnerMetaData.PROPERTIES,
                         outputs: pullrefreshspinnerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPullrefreshspinnerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPullrefreshspinnerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPullrefreshspinnerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPullrefreshspinnerComponent;
@@ -27160,15 +27780,21 @@
     }());
     var ExtSimplelistitemComponent = /** @class */ (function (_super) {
         __extends(ExtSimplelistitemComponent, _super);
-        function ExtSimplelistitemComponent(eRef) {
-            return _super.call(this, eRef, simplelistitemMetaData) || this;
+        function ExtSimplelistitemComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, simplelistitemMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,simplelistitemMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,simplelistitemMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSimplelistitemComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSimplelistitemComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,simplelistitemMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(simplelistitemMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -27185,18 +27811,19 @@
                 this['ready'].emit(this);
             };
         ExtSimplelistitemComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'simplelistitem',
                         inputs: simplelistitemMetaData.PROPERTIES,
                         outputs: simplelistitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSimplelistitemComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSimplelistitemComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSimplelistitemComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSimplelistitemComponent;
@@ -27690,15 +28317,21 @@
     }());
     var ExtDialogComponent = /** @class */ (function (_super) {
         __extends(ExtDialogComponent, _super);
-        function ExtDialogComponent(eRef) {
-            return _super.call(this, eRef, dialogMetaData) || this;
+        function ExtDialogComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, dialogMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dialogMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dialogMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtDialogComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtDialogComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dialogMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(dialogMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -27715,18 +28348,19 @@
                 this['ready'].emit(this);
             };
         ExtDialogComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'dialog',
                         inputs: dialogMetaData.PROPERTIES,
                         outputs: dialogMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtDialogComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDialogComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtDialogComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtDialogComponent;
@@ -28220,15 +28854,21 @@
     }());
     var ExtWindowComponent = /** @class */ (function (_super) {
         __extends(ExtWindowComponent, _super);
-        function ExtWindowComponent(eRef) {
-            return _super.call(this, eRef, windowMetaData) || this;
+        function ExtWindowComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, windowMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,windowMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,windowMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtWindowComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtWindowComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,windowMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(windowMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -28245,18 +28885,19 @@
                 this['ready'].emit(this);
             };
         ExtWindowComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'window',
                         inputs: windowMetaData.PROPERTIES,
                         outputs: windowMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtWindowComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtWindowComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtWindowComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtWindowComponent;
@@ -28666,15 +29307,21 @@
     }());
     var ExtDrawComponent = /** @class */ (function (_super) {
         __extends(ExtDrawComponent, _super);
-        function ExtDrawComponent(eRef) {
-            return _super.call(this, eRef, drawMetaData) || this;
+        function ExtDrawComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, drawMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,drawMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,drawMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtDrawComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtDrawComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,drawMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(drawMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -28691,18 +29338,19 @@
                 this['ready'].emit(this);
             };
         ExtDrawComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'draw',
                         inputs: drawMetaData.PROPERTIES,
                         outputs: drawMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtDrawComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDrawComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtDrawComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtDrawComponent;
@@ -28876,15 +29524,21 @@
     }());
     var ExtSurfaceComponent = /** @class */ (function (_super) {
         __extends(ExtSurfaceComponent, _super);
-        function ExtSurfaceComponent(eRef) {
-            return _super.call(this, eRef, surfaceMetaData) || this;
+        function ExtSurfaceComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, surfaceMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,surfaceMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,surfaceMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSurfaceComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSurfaceComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,surfaceMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(surfaceMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -28901,18 +29555,19 @@
                 this['ready'].emit(this);
             };
         ExtSurfaceComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'surface',
                         inputs: surfaceMetaData.PROPERTIES,
                         outputs: surfaceMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSurfaceComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSurfaceComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSurfaceComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSurfaceComponent;
@@ -29336,15 +29991,21 @@
     }());
     var ExtEditorComponent = /** @class */ (function (_super) {
         __extends(ExtEditorComponent, _super);
-        function ExtEditorComponent(eRef) {
-            return _super.call(this, eRef, editorMetaData) || this;
+        function ExtEditorComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, editorMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,editorMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,editorMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtEditorComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtEditorComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,editorMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(editorMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -29361,18 +30022,19 @@
                 this['ready'].emit(this);
             };
         ExtEditorComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'editor',
                         inputs: editorMetaData.PROPERTIES,
                         outputs: editorMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtEditorComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtEditorComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtEditorComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtEditorComponent;
@@ -29776,15 +30438,21 @@
     }());
     var ExtCheckboxComponent = /** @class */ (function (_super) {
         __extends(ExtCheckboxComponent, _super);
-        function ExtCheckboxComponent(eRef) {
-            return _super.call(this, eRef, checkboxMetaData) || this;
+        function ExtCheckboxComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, checkboxMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkboxMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkboxMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCheckboxComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCheckboxComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkboxMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(checkboxMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -29801,18 +30469,19 @@
                 this['ready'].emit(this);
             };
         ExtCheckboxComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'checkbox',
                         inputs: checkboxMetaData.PROPERTIES,
                         outputs: checkboxMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCheckboxComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCheckboxComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCheckboxComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCheckboxComponent;
@@ -30216,15 +30885,21 @@
     }());
     var ExtCheckboxfieldComponent = /** @class */ (function (_super) {
         __extends(ExtCheckboxfieldComponent, _super);
-        function ExtCheckboxfieldComponent(eRef) {
-            return _super.call(this, eRef, checkboxfieldMetaData) || this;
+        function ExtCheckboxfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, checkboxfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkboxfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkboxfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCheckboxfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCheckboxfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkboxfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(checkboxfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -30241,18 +30916,19 @@
                 this['ready'].emit(this);
             };
         ExtCheckboxfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'checkboxfield',
                         inputs: checkboxfieldMetaData.PROPERTIES,
                         outputs: checkboxfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCheckboxfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCheckboxfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCheckboxfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCheckboxfieldComponent;
@@ -30784,15 +31460,21 @@
     }());
     var ExtComboboxComponent = /** @class */ (function (_super) {
         __extends(ExtComboboxComponent, _super);
-        function ExtComboboxComponent(eRef) {
-            return _super.call(this, eRef, comboboxMetaData) || this;
+        function ExtComboboxComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, comboboxMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,comboboxMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,comboboxMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtComboboxComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtComboboxComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,comboboxMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(comboboxMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -30809,18 +31491,19 @@
                 this['ready'].emit(this);
             };
         ExtComboboxComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'combobox',
                         inputs: comboboxMetaData.PROPERTIES,
                         outputs: comboboxMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtComboboxComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtComboboxComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtComboboxComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtComboboxComponent;
@@ -31352,15 +32035,21 @@
     }());
     var ExtComboboxfieldComponent = /** @class */ (function (_super) {
         __extends(ExtComboboxfieldComponent, _super);
-        function ExtComboboxfieldComponent(eRef) {
-            return _super.call(this, eRef, comboboxfieldMetaData) || this;
+        function ExtComboboxfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, comboboxfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,comboboxfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,comboboxfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtComboboxfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtComboboxfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,comboboxfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(comboboxfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -31377,18 +32066,19 @@
                 this['ready'].emit(this);
             };
         ExtComboboxfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'comboboxfield',
                         inputs: comboboxfieldMetaData.PROPERTIES,
                         outputs: comboboxfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtComboboxfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtComboboxfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtComboboxfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtComboboxfieldComponent;
@@ -31784,15 +32474,21 @@
     }());
     var ExtContainerfieldComponent = /** @class */ (function (_super) {
         __extends(ExtContainerfieldComponent, _super);
-        function ExtContainerfieldComponent(eRef) {
-            return _super.call(this, eRef, containerfieldMetaData) || this;
+        function ExtContainerfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, containerfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,containerfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,containerfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtContainerfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtContainerfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,containerfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(containerfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -31809,18 +32505,19 @@
                 this['ready'].emit(this);
             };
         ExtContainerfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'containerfield',
                         inputs: containerfieldMetaData.PROPERTIES,
                         outputs: containerfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtContainerfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtContainerfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtContainerfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtContainerfieldComponent;
@@ -32216,15 +32913,21 @@
     }());
     var ExtFieldcontainerComponent = /** @class */ (function (_super) {
         __extends(ExtFieldcontainerComponent, _super);
-        function ExtFieldcontainerComponent(eRef) {
-            return _super.call(this, eRef, fieldcontainerMetaData) || this;
+        function ExtFieldcontainerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, fieldcontainerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldcontainerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldcontainerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtFieldcontainerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtFieldcontainerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldcontainerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(fieldcontainerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -32241,18 +32944,19 @@
                 this['ready'].emit(this);
             };
         ExtFieldcontainerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'fieldcontainer',
                         inputs: fieldcontainerMetaData.PROPERTIES,
                         outputs: fieldcontainerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtFieldcontainerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtFieldcontainerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtFieldcontainerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtFieldcontainerComponent;
@@ -32712,15 +33416,21 @@
     }());
     var ExtDatefieldComponent = /** @class */ (function (_super) {
         __extends(ExtDatefieldComponent, _super);
-        function ExtDatefieldComponent(eRef) {
-            return _super.call(this, eRef, datefieldMetaData) || this;
+        function ExtDatefieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, datefieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datefieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datefieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtDatefieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtDatefieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datefieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(datefieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -32737,18 +33447,19 @@
                 this['ready'].emit(this);
             };
         ExtDatefieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'datefield',
                         inputs: datefieldMetaData.PROPERTIES,
                         outputs: datefieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtDatefieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDatefieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtDatefieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtDatefieldComponent;
@@ -33208,15 +33919,21 @@
     }());
     var ExtDatepickerfieldComponent = /** @class */ (function (_super) {
         __extends(ExtDatepickerfieldComponent, _super);
-        function ExtDatepickerfieldComponent(eRef) {
-            return _super.call(this, eRef, datepickerfieldMetaData) || this;
+        function ExtDatepickerfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, datepickerfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickerfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickerfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtDatepickerfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtDatepickerfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickerfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(datepickerfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -33233,18 +33950,19 @@
                 this['ready'].emit(this);
             };
         ExtDatepickerfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'datepickerfield',
                         inputs: datepickerfieldMetaData.PROPERTIES,
                         outputs: datepickerfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtDatepickerfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDatepickerfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtDatepickerfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtDatepickerfieldComponent;
@@ -33704,15 +34422,21 @@
     }());
     var ExtDatepickernativefieldComponent = /** @class */ (function (_super) {
         __extends(ExtDatepickernativefieldComponent, _super);
-        function ExtDatepickernativefieldComponent(eRef) {
-            return _super.call(this, eRef, datepickernativefieldMetaData) || this;
+        function ExtDatepickernativefieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, datepickernativefieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickernativefieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickernativefieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtDatepickernativefieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtDatepickernativefieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickernativefieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(datepickernativefieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -33729,18 +34453,19 @@
                 this['ready'].emit(this);
             };
         ExtDatepickernativefieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'datepickernativefield',
                         inputs: datepickernativefieldMetaData.PROPERTIES,
                         outputs: datepickernativefieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtDatepickernativefieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDatepickernativefieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtDatepickernativefieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtDatepickernativefieldComponent;
@@ -34134,15 +34859,21 @@
     }());
     var ExtDisplayfieldComponent = /** @class */ (function (_super) {
         __extends(ExtDisplayfieldComponent, _super);
-        function ExtDisplayfieldComponent(eRef) {
-            return _super.call(this, eRef, displayfieldMetaData) || this;
+        function ExtDisplayfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, displayfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,displayfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,displayfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtDisplayfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtDisplayfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,displayfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(displayfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -34159,18 +34890,19 @@
                 this['ready'].emit(this);
             };
         ExtDisplayfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'displayfield',
                         inputs: displayfieldMetaData.PROPERTIES,
                         outputs: displayfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtDisplayfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDisplayfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtDisplayfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtDisplayfieldComponent;
@@ -34600,15 +35332,21 @@
     }());
     var ExtEmailfieldComponent = /** @class */ (function (_super) {
         __extends(ExtEmailfieldComponent, _super);
-        function ExtEmailfieldComponent(eRef) {
-            return _super.call(this, eRef, emailfieldMetaData) || this;
+        function ExtEmailfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, emailfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,emailfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,emailfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtEmailfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtEmailfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,emailfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(emailfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -34625,18 +35363,19 @@
                 this['ready'].emit(this);
             };
         ExtEmailfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'emailfield',
                         inputs: emailfieldMetaData.PROPERTIES,
                         outputs: emailfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtEmailfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtEmailfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtEmailfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtEmailfieldComponent;
@@ -35020,15 +35759,21 @@
     }());
     var ExtFieldComponent = /** @class */ (function (_super) {
         __extends(ExtFieldComponent, _super);
-        function ExtFieldComponent(eRef) {
-            return _super.call(this, eRef, fieldMetaData) || this;
+        function ExtFieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, fieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtFieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtFieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(fieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -35045,18 +35790,19 @@
                 this['ready'].emit(this);
             };
         ExtFieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'field',
                         inputs: fieldMetaData.PROPERTIES,
                         outputs: fieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtFieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtFieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtFieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtFieldComponent;
@@ -35492,15 +36238,21 @@
     }());
     var ExtFilefieldComponent = /** @class */ (function (_super) {
         __extends(ExtFilefieldComponent, _super);
-        function ExtFilefieldComponent(eRef) {
-            return _super.call(this, eRef, filefieldMetaData) || this;
+        function ExtFilefieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, filefieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,filefieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,filefieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtFilefieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtFilefieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,filefieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(filefieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -35517,18 +36269,19 @@
                 this['ready'].emit(this);
             };
         ExtFilefieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'filefield',
                         inputs: filefieldMetaData.PROPERTIES,
                         outputs: filefieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtFilefieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtFilefieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtFilefieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtFilefieldComponent;
@@ -35910,15 +36663,21 @@
     }());
     var ExtFilebuttonComponent = /** @class */ (function (_super) {
         __extends(ExtFilebuttonComponent, _super);
-        function ExtFilebuttonComponent(eRef) {
-            return _super.call(this, eRef, filebuttonMetaData) || this;
+        function ExtFilebuttonComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, filebuttonMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,filebuttonMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,filebuttonMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtFilebuttonComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtFilebuttonComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,filebuttonMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(filebuttonMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -35935,18 +36694,19 @@
                 this['ready'].emit(this);
             };
         ExtFilebuttonComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'filebutton',
                         inputs: filebuttonMetaData.PROPERTIES,
                         outputs: filebuttonMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtFilebuttonComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtFilebuttonComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtFilebuttonComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtFilebuttonComponent;
@@ -36338,15 +37098,21 @@
     }());
     var ExtHiddenfieldComponent = /** @class */ (function (_super) {
         __extends(ExtHiddenfieldComponent, _super);
-        function ExtHiddenfieldComponent(eRef) {
-            return _super.call(this, eRef, hiddenfieldMetaData) || this;
+        function ExtHiddenfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, hiddenfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,hiddenfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,hiddenfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtHiddenfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtHiddenfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,hiddenfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(hiddenfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -36363,18 +37129,19 @@
                 this['ready'].emit(this);
             };
         ExtHiddenfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'hiddenfield',
                         inputs: hiddenfieldMetaData.PROPERTIES,
                         outputs: hiddenfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtHiddenfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtHiddenfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtHiddenfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtHiddenfieldComponent;
@@ -36766,15 +37533,21 @@
     }());
     var ExtInputfieldComponent = /** @class */ (function (_super) {
         __extends(ExtInputfieldComponent, _super);
-        function ExtInputfieldComponent(eRef) {
-            return _super.call(this, eRef, inputfieldMetaData) || this;
+        function ExtInputfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, inputfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,inputfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,inputfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtInputfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtInputfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,inputfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(inputfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -36791,18 +37564,19 @@
                 this['ready'].emit(this);
             };
         ExtInputfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'inputfield',
                         inputs: inputfieldMetaData.PROPERTIES,
                         outputs: inputfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtInputfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtInputfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtInputfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtInputfieldComponent;
@@ -37246,15 +38020,21 @@
     }());
     var ExtNumberfieldComponent = /** @class */ (function (_super) {
         __extends(ExtNumberfieldComponent, _super);
-        function ExtNumberfieldComponent(eRef) {
-            return _super.call(this, eRef, numberfieldMetaData) || this;
+        function ExtNumberfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, numberfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numberfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numberfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtNumberfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtNumberfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numberfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(numberfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -37271,18 +38051,19 @@
                 this['ready'].emit(this);
             };
         ExtNumberfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'numberfield',
                         inputs: numberfieldMetaData.PROPERTIES,
                         outputs: numberfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtNumberfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtNumberfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtNumberfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtNumberfieldComponent;
@@ -37762,15 +38543,21 @@
     }());
     var ExtFieldpanelComponent = /** @class */ (function (_super) {
         __extends(ExtFieldpanelComponent, _super);
-        function ExtFieldpanelComponent(eRef) {
-            return _super.call(this, eRef, fieldpanelMetaData) || this;
+        function ExtFieldpanelComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, fieldpanelMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldpanelMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldpanelMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtFieldpanelComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtFieldpanelComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldpanelMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(fieldpanelMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -37787,18 +38574,19 @@
                 this['ready'].emit(this);
             };
         ExtFieldpanelComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'fieldpanel',
                         inputs: fieldpanelMetaData.PROPERTIES,
                         outputs: fieldpanelMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtFieldpanelComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtFieldpanelComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtFieldpanelComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtFieldpanelComponent;
@@ -38232,15 +39020,21 @@
     }());
     var ExtPasswordfieldComponent = /** @class */ (function (_super) {
         __extends(ExtPasswordfieldComponent, _super);
-        function ExtPasswordfieldComponent(eRef) {
-            return _super.call(this, eRef, passwordfieldMetaData) || this;
+        function ExtPasswordfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, passwordfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,passwordfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,passwordfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPasswordfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPasswordfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,passwordfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(passwordfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -38257,18 +39051,19 @@
                 this['ready'].emit(this);
             };
         ExtPasswordfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'passwordfield',
                         inputs: passwordfieldMetaData.PROPERTIES,
                         outputs: passwordfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPasswordfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPasswordfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPasswordfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPasswordfieldComponent;
@@ -38720,15 +39515,21 @@
     }());
     var ExtPickerfieldComponent = /** @class */ (function (_super) {
         __extends(ExtPickerfieldComponent, _super);
-        function ExtPickerfieldComponent(eRef) {
-            return _super.call(this, eRef, pickerfieldMetaData) || this;
+        function ExtPickerfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, pickerfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPickerfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPickerfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(pickerfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -38745,18 +39546,19 @@
                 this['ready'].emit(this);
             };
         ExtPickerfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'pickerfield',
                         inputs: pickerfieldMetaData.PROPERTIES,
                         outputs: pickerfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPickerfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPickerfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPickerfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPickerfieldComponent;
@@ -39160,15 +39962,21 @@
     }());
     var ExtRadioComponent = /** @class */ (function (_super) {
         __extends(ExtRadioComponent, _super);
-        function ExtRadioComponent(eRef) {
-            return _super.call(this, eRef, radioMetaData) || this;
+        function ExtRadioComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, radioMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,radioMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,radioMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtRadioComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtRadioComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,radioMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(radioMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -39185,18 +39993,19 @@
                 this['ready'].emit(this);
             };
         ExtRadioComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'radio',
                         inputs: radioMetaData.PROPERTIES,
                         outputs: radioMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtRadioComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtRadioComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtRadioComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtRadioComponent;
@@ -39600,15 +40409,21 @@
     }());
     var ExtRadiofieldComponent = /** @class */ (function (_super) {
         __extends(ExtRadiofieldComponent, _super);
-        function ExtRadiofieldComponent(eRef) {
-            return _super.call(this, eRef, radiofieldMetaData) || this;
+        function ExtRadiofieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, radiofieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,radiofieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,radiofieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtRadiofieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtRadiofieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,radiofieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(radiofieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -39625,18 +40440,19 @@
                 this['ready'].emit(this);
             };
         ExtRadiofieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'radiofield',
                         inputs: radiofieldMetaData.PROPERTIES,
                         outputs: radiofieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtRadiofieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtRadiofieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtRadiofieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtRadiofieldComponent;
@@ -40066,15 +40882,21 @@
     }());
     var ExtSearchfieldComponent = /** @class */ (function (_super) {
         __extends(ExtSearchfieldComponent, _super);
-        function ExtSearchfieldComponent(eRef) {
-            return _super.call(this, eRef, searchfieldMetaData) || this;
+        function ExtSearchfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, searchfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,searchfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,searchfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSearchfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSearchfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,searchfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(searchfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -40091,18 +40913,19 @@
                 this['ready'].emit(this);
             };
         ExtSearchfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'searchfield',
                         inputs: searchfieldMetaData.PROPERTIES,
                         outputs: searchfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSearchfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSearchfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSearchfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSearchfieldComponent;
@@ -40602,15 +41425,21 @@
     }());
     var ExtSelectfieldComponent = /** @class */ (function (_super) {
         __extends(ExtSelectfieldComponent, _super);
-        function ExtSelectfieldComponent(eRef) {
-            return _super.call(this, eRef, selectfieldMetaData) || this;
+        function ExtSelectfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, selectfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSelectfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSelectfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(selectfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -40627,18 +41456,19 @@
                 this['ready'].emit(this);
             };
         ExtSelectfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'selectfield',
                         inputs: selectfieldMetaData.PROPERTIES,
                         outputs: selectfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSelectfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSelectfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSelectfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSelectfieldComponent;
@@ -41048,15 +41878,21 @@
     }());
     var ExtSinglesliderfieldComponent = /** @class */ (function (_super) {
         __extends(ExtSinglesliderfieldComponent, _super);
-        function ExtSinglesliderfieldComponent(eRef) {
-            return _super.call(this, eRef, singlesliderfieldMetaData) || this;
+        function ExtSinglesliderfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, singlesliderfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,singlesliderfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,singlesliderfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSinglesliderfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSinglesliderfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,singlesliderfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(singlesliderfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -41073,18 +41909,19 @@
                 this['ready'].emit(this);
             };
         ExtSinglesliderfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'singlesliderfield',
                         inputs: singlesliderfieldMetaData.PROPERTIES,
                         outputs: singlesliderfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSinglesliderfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSinglesliderfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSinglesliderfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSinglesliderfieldComponent;
@@ -41494,15 +42331,21 @@
     }());
     var ExtSliderfieldComponent = /** @class */ (function (_super) {
         __extends(ExtSliderfieldComponent, _super);
-        function ExtSliderfieldComponent(eRef) {
-            return _super.call(this, eRef, sliderfieldMetaData) || this;
+        function ExtSliderfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, sliderfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sliderfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sliderfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSliderfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSliderfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sliderfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(sliderfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -41519,18 +42362,19 @@
                 this['ready'].emit(this);
             };
         ExtSliderfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'sliderfield',
                         inputs: sliderfieldMetaData.PROPERTIES,
                         outputs: sliderfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSliderfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSliderfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSliderfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSliderfieldComponent;
@@ -41988,15 +42832,21 @@
     }());
     var ExtSpinnerfieldComponent = /** @class */ (function (_super) {
         __extends(ExtSpinnerfieldComponent, _super);
-        function ExtSpinnerfieldComponent(eRef) {
-            return _super.call(this, eRef, spinnerfieldMetaData) || this;
+        function ExtSpinnerfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, spinnerfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spinnerfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spinnerfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSpinnerfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSpinnerfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spinnerfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(spinnerfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -42013,18 +42863,19 @@
                 this['ready'].emit(this);
             };
         ExtSpinnerfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'spinnerfield',
                         inputs: spinnerfieldMetaData.PROPERTIES,
                         outputs: spinnerfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSpinnerfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSpinnerfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSpinnerfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSpinnerfieldComponent;
@@ -42454,15 +43305,21 @@
     }());
     var ExtTextfieldComponent = /** @class */ (function (_super) {
         __extends(ExtTextfieldComponent, _super);
-        function ExtTextfieldComponent(eRef) {
-            return _super.call(this, eRef, textfieldMetaData) || this;
+        function ExtTextfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, textfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTextfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTextfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(textfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -42479,18 +43336,19 @@
                 this['ready'].emit(this);
             };
         ExtTextfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'textfield',
                         inputs: textfieldMetaData.PROPERTIES,
                         outputs: textfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTextfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTextfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTextfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTextfieldComponent;
@@ -42922,15 +43780,21 @@
     }());
     var ExtTextareafieldComponent = /** @class */ (function (_super) {
         __extends(ExtTextareafieldComponent, _super);
-        function ExtTextareafieldComponent(eRef) {
-            return _super.call(this, eRef, textareafieldMetaData) || this;
+        function ExtTextareafieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, textareafieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textareafieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textareafieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTextareafieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTextareafieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textareafieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(textareafieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -42947,18 +43811,19 @@
                 this['ready'].emit(this);
             };
         ExtTextareafieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'textareafield',
                         inputs: textareafieldMetaData.PROPERTIES,
                         outputs: textareafieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTextareafieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTextareafieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTextareafieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTextareafieldComponent;
@@ -43414,15 +44279,21 @@
     }());
     var ExtTimefieldComponent = /** @class */ (function (_super) {
         __extends(ExtTimefieldComponent, _super);
-        function ExtTimefieldComponent(eRef) {
-            return _super.call(this, eRef, timefieldMetaData) || this;
+        function ExtTimefieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, timefieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timefieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timefieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTimefieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTimefieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timefieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(timefieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -43439,18 +44310,19 @@
                 this['ready'].emit(this);
             };
         ExtTimefieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'timefield',
                         inputs: timefieldMetaData.PROPERTIES,
                         outputs: timefieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTimefieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTimefieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTimefieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTimefieldComponent;
@@ -43864,15 +44736,21 @@
     }());
     var ExtTogglefieldComponent = /** @class */ (function (_super) {
         __extends(ExtTogglefieldComponent, _super);
-        function ExtTogglefieldComponent(eRef) {
-            return _super.call(this, eRef, togglefieldMetaData) || this;
+        function ExtTogglefieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, togglefieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,togglefieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,togglefieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTogglefieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTogglefieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,togglefieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(togglefieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -43889,18 +44767,19 @@
                 this['ready'].emit(this);
             };
         ExtTogglefieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'togglefield',
                         inputs: togglefieldMetaData.PROPERTIES,
                         outputs: togglefieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTogglefieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTogglefieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTogglefieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTogglefieldComponent;
@@ -44082,15 +44961,21 @@
     }());
     var ExtCleartriggerComponent = /** @class */ (function (_super) {
         __extends(ExtCleartriggerComponent, _super);
-        function ExtCleartriggerComponent(eRef) {
-            return _super.call(this, eRef, cleartriggerMetaData) || this;
+        function ExtCleartriggerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, cleartriggerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,cleartriggerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,cleartriggerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCleartriggerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCleartriggerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,cleartriggerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(cleartriggerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -44107,18 +44992,19 @@
                 this['ready'].emit(this);
             };
         ExtCleartriggerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'cleartrigger',
                         inputs: cleartriggerMetaData.PROPERTIES,
                         outputs: cleartriggerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCleartriggerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCleartriggerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCleartriggerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCleartriggerComponent;
@@ -44300,15 +45186,21 @@
     }());
     var ExtDatetriggerComponent = /** @class */ (function (_super) {
         __extends(ExtDatetriggerComponent, _super);
-        function ExtDatetriggerComponent(eRef) {
-            return _super.call(this, eRef, datetriggerMetaData) || this;
+        function ExtDatetriggerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, datetriggerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datetriggerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datetriggerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtDatetriggerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtDatetriggerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datetriggerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(datetriggerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -44325,18 +45217,19 @@
                 this['ready'].emit(this);
             };
         ExtDatetriggerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'datetrigger',
                         inputs: datetriggerMetaData.PROPERTIES,
                         outputs: datetriggerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtDatetriggerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDatetriggerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtDatetriggerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtDatetriggerComponent;
@@ -44518,15 +45411,21 @@
     }());
     var ExtExpandtriggerComponent = /** @class */ (function (_super) {
         __extends(ExtExpandtriggerComponent, _super);
-        function ExtExpandtriggerComponent(eRef) {
-            return _super.call(this, eRef, expandtriggerMetaData) || this;
+        function ExtExpandtriggerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, expandtriggerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,expandtriggerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,expandtriggerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtExpandtriggerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtExpandtriggerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,expandtriggerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(expandtriggerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -44543,18 +45442,19 @@
                 this['ready'].emit(this);
             };
         ExtExpandtriggerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'expandtrigger',
                         inputs: expandtriggerMetaData.PROPERTIES,
                         outputs: expandtriggerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtExpandtriggerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtExpandtriggerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtExpandtriggerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtExpandtriggerComponent;
@@ -44742,15 +45642,21 @@
     }());
     var ExtMenutriggerComponent = /** @class */ (function (_super) {
         __extends(ExtMenutriggerComponent, _super);
-        function ExtMenutriggerComponent(eRef) {
-            return _super.call(this, eRef, menutriggerMetaData) || this;
+        function ExtMenutriggerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, menutriggerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menutriggerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menutriggerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtMenutriggerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtMenutriggerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menutriggerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(menutriggerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -44767,18 +45673,19 @@
                 this['ready'].emit(this);
             };
         ExtMenutriggerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'menutrigger',
                         inputs: menutriggerMetaData.PROPERTIES,
                         outputs: menutriggerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtMenutriggerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMenutriggerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtMenutriggerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtMenutriggerComponent;
@@ -44960,15 +45867,21 @@
     }());
     var ExtRevealtriggerComponent = /** @class */ (function (_super) {
         __extends(ExtRevealtriggerComponent, _super);
-        function ExtRevealtriggerComponent(eRef) {
-            return _super.call(this, eRef, revealtriggerMetaData) || this;
+        function ExtRevealtriggerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, revealtriggerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,revealtriggerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,revealtriggerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtRevealtriggerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtRevealtriggerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,revealtriggerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(revealtriggerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -44985,18 +45898,19 @@
                 this['ready'].emit(this);
             };
         ExtRevealtriggerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'revealtrigger',
                         inputs: revealtriggerMetaData.PROPERTIES,
                         outputs: revealtriggerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtRevealtriggerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtRevealtriggerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtRevealtriggerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtRevealtriggerComponent;
@@ -45178,15 +46092,21 @@
     }());
     var ExtSpindowntriggerComponent = /** @class */ (function (_super) {
         __extends(ExtSpindowntriggerComponent, _super);
-        function ExtSpindowntriggerComponent(eRef) {
-            return _super.call(this, eRef, spindowntriggerMetaData) || this;
+        function ExtSpindowntriggerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, spindowntriggerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spindowntriggerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spindowntriggerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSpindowntriggerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSpindowntriggerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spindowntriggerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(spindowntriggerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -45203,18 +46123,19 @@
                 this['ready'].emit(this);
             };
         ExtSpindowntriggerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'spindowntrigger',
                         inputs: spindowntriggerMetaData.PROPERTIES,
                         outputs: spindowntriggerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSpindowntriggerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSpindowntriggerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSpindowntriggerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSpindowntriggerComponent;
@@ -45396,15 +46317,21 @@
     }());
     var ExtSpinuptriggerComponent = /** @class */ (function (_super) {
         __extends(ExtSpinuptriggerComponent, _super);
-        function ExtSpinuptriggerComponent(eRef) {
-            return _super.call(this, eRef, spinuptriggerMetaData) || this;
+        function ExtSpinuptriggerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, spinuptriggerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spinuptriggerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spinuptriggerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSpinuptriggerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSpinuptriggerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spinuptriggerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(spinuptriggerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -45421,18 +46348,19 @@
                 this['ready'].emit(this);
             };
         ExtSpinuptriggerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'spinuptrigger',
                         inputs: spinuptriggerMetaData.PROPERTIES,
                         outputs: spinuptriggerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSpinuptriggerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSpinuptriggerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSpinuptriggerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSpinuptriggerComponent;
@@ -45614,15 +46542,21 @@
     }());
     var ExtTimetriggerComponent = /** @class */ (function (_super) {
         __extends(ExtTimetriggerComponent, _super);
-        function ExtTimetriggerComponent(eRef) {
-            return _super.call(this, eRef, timetriggerMetaData) || this;
+        function ExtTimetriggerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, timetriggerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timetriggerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timetriggerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTimetriggerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTimetriggerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timetriggerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(timetriggerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -45639,18 +46573,19 @@
                 this['ready'].emit(this);
             };
         ExtTimetriggerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'timetrigger',
                         inputs: timetriggerMetaData.PROPERTIES,
                         outputs: timetriggerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTimetriggerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTimetriggerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTimetriggerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTimetriggerComponent;
@@ -45832,15 +46767,21 @@
     }());
     var ExtTriggerComponent = /** @class */ (function (_super) {
         __extends(ExtTriggerComponent, _super);
-        function ExtTriggerComponent(eRef) {
-            return _super.call(this, eRef, triggerMetaData) || this;
+        function ExtTriggerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, triggerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,triggerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,triggerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTriggerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTriggerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,triggerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(triggerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -45857,18 +46798,19 @@
                 this['ready'].emit(this);
             };
         ExtTriggerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'trigger',
                         inputs: triggerMetaData.PROPERTIES,
                         outputs: triggerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTriggerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTriggerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTriggerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTriggerComponent;
@@ -46298,15 +47240,21 @@
     }());
     var ExtUrlfieldComponent = /** @class */ (function (_super) {
         __extends(ExtUrlfieldComponent, _super);
-        function ExtUrlfieldComponent(eRef) {
-            return _super.call(this, eRef, urlfieldMetaData) || this;
+        function ExtUrlfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, urlfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,urlfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,urlfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtUrlfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtUrlfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,urlfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(urlfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -46323,18 +47271,19 @@
                 this['ready'].emit(this);
             };
         ExtUrlfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'urlfield',
                         inputs: urlfieldMetaData.PROPERTIES,
                         outputs: urlfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtUrlfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtUrlfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtUrlfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtUrlfieldComponent;
@@ -46722,15 +47671,21 @@
     }());
     var ExtFieldsetComponent = /** @class */ (function (_super) {
         __extends(ExtFieldsetComponent, _super);
-        function ExtFieldsetComponent(eRef) {
-            return _super.call(this, eRef, fieldsetMetaData) || this;
+        function ExtFieldsetComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, fieldsetMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldsetMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldsetMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtFieldsetComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtFieldsetComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldsetMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(fieldsetMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -46747,18 +47702,19 @@
                 this['ready'].emit(this);
             };
         ExtFieldsetComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'fieldset',
                         inputs: fieldsetMetaData.PROPERTIES,
                         outputs: fieldsetMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtFieldsetComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtFieldsetComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtFieldsetComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtFieldsetComponent;
@@ -47256,15 +48212,21 @@
     }());
     var ExtFormpanelComponent = /** @class */ (function (_super) {
         __extends(ExtFormpanelComponent, _super);
-        function ExtFormpanelComponent(eRef) {
-            return _super.call(this, eRef, formpanelMetaData) || this;
+        function ExtFormpanelComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, formpanelMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,formpanelMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,formpanelMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtFormpanelComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtFormpanelComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,formpanelMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(formpanelMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -47281,18 +48243,19 @@
                 this['ready'].emit(this);
             };
         ExtFormpanelComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'formpanel',
                         inputs: formpanelMetaData.PROPERTIES,
                         outputs: formpanelMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtFormpanelComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtFormpanelComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtFormpanelComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtFormpanelComponent;
@@ -47478,15 +48441,21 @@
     }());
     var ExtGridcellbaseComponent = /** @class */ (function (_super) {
         __extends(ExtGridcellbaseComponent, _super);
-        function ExtGridcellbaseComponent(eRef) {
-            return _super.call(this, eRef, gridcellbaseMetaData) || this;
+        function ExtGridcellbaseComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, gridcellbaseMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcellbaseMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcellbaseMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtGridcellbaseComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtGridcellbaseComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcellbaseMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(gridcellbaseMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -47503,18 +48472,19 @@
                 this['ready'].emit(this);
             };
         ExtGridcellbaseComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'gridcellbase',
                         inputs: gridcellbaseMetaData.PROPERTIES,
                         outputs: gridcellbaseMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtGridcellbaseComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridcellbaseComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtGridcellbaseComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtGridcellbaseComponent;
@@ -47712,15 +48682,21 @@
     }());
     var ExtBooleancellComponent = /** @class */ (function (_super) {
         __extends(ExtBooleancellComponent, _super);
-        function ExtBooleancellComponent(eRef) {
-            return _super.call(this, eRef, booleancellMetaData) || this;
+        function ExtBooleancellComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, booleancellMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,booleancellMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,booleancellMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtBooleancellComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtBooleancellComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,booleancellMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(booleancellMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -47737,18 +48713,19 @@
                 this['ready'].emit(this);
             };
         ExtBooleancellComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'booleancell',
                         inputs: booleancellMetaData.PROPERTIES,
                         outputs: booleancellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtBooleancellComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtBooleancellComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtBooleancellComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtBooleancellComponent;
@@ -47948,15 +48925,21 @@
     }());
     var ExtGridcellComponent = /** @class */ (function (_super) {
         __extends(ExtGridcellComponent, _super);
-        function ExtGridcellComponent(eRef) {
-            return _super.call(this, eRef, gridcellMetaData) || this;
+        function ExtGridcellComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, gridcellMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcellMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcellMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtGridcellComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtGridcellComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcellMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(gridcellMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -47973,18 +48956,19 @@
                 this['ready'].emit(this);
             };
         ExtGridcellComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'gridcell',
                         inputs: gridcellMetaData.PROPERTIES,
                         outputs: gridcellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtGridcellComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridcellComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtGridcellComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtGridcellComponent;
@@ -48170,15 +49154,21 @@
     }());
     var ExtCheckcellComponent = /** @class */ (function (_super) {
         __extends(ExtCheckcellComponent, _super);
-        function ExtCheckcellComponent(eRef) {
-            return _super.call(this, eRef, checkcellMetaData) || this;
+        function ExtCheckcellComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, checkcellMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkcellMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkcellMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCheckcellComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCheckcellComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkcellMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(checkcellMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -48195,18 +49185,19 @@
                 this['ready'].emit(this);
             };
         ExtCheckcellComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'checkcell',
                         inputs: checkcellMetaData.PROPERTIES,
                         outputs: checkcellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCheckcellComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCheckcellComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCheckcellComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCheckcellComponent;
@@ -48400,15 +49391,21 @@
     }());
     var ExtDatecellComponent = /** @class */ (function (_super) {
         __extends(ExtDatecellComponent, _super);
-        function ExtDatecellComponent(eRef) {
-            return _super.call(this, eRef, datecellMetaData) || this;
+        function ExtDatecellComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, datecellMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datecellMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datecellMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtDatecellComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtDatecellComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datecellMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(datecellMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -48425,18 +49422,19 @@
                 this['ready'].emit(this);
             };
         ExtDatecellComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'datecell',
                         inputs: datecellMetaData.PROPERTIES,
                         outputs: datecellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtDatecellComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDatecellComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtDatecellComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtDatecellComponent;
@@ -48630,15 +49628,21 @@
     }());
     var ExtNumbercellComponent = /** @class */ (function (_super) {
         __extends(ExtNumbercellComponent, _super);
-        function ExtNumbercellComponent(eRef) {
-            return _super.call(this, eRef, numbercellMetaData) || this;
+        function ExtNumbercellComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, numbercellMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numbercellMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numbercellMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtNumbercellComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtNumbercellComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numbercellMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(numbercellMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -48655,18 +49659,19 @@
                 this['ready'].emit(this);
             };
         ExtNumbercellComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'numbercell',
                         inputs: numbercellMetaData.PROPERTIES,
                         outputs: numbercellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtNumbercellComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtNumbercellComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtNumbercellComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtNumbercellComponent;
@@ -48860,15 +49865,21 @@
     }());
     var ExtRownumberercellComponent = /** @class */ (function (_super) {
         __extends(ExtRownumberercellComponent, _super);
-        function ExtRownumberercellComponent(eRef) {
-            return _super.call(this, eRef, rownumberercellMetaData) || this;
+        function ExtRownumberercellComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, rownumberercellMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rownumberercellMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rownumberercellMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtRownumberercellComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtRownumberercellComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rownumberercellMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(rownumberercellMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -48885,18 +49896,19 @@
                 this['ready'].emit(this);
             };
         ExtRownumberercellComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'rownumberercell',
                         inputs: rownumberercellMetaData.PROPERTIES,
                         outputs: rownumberercellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtRownumberercellComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtRownumberercellComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtRownumberercellComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtRownumberercellComponent;
@@ -49088,15 +50100,21 @@
     }());
     var ExtTextcellComponent = /** @class */ (function (_super) {
         __extends(ExtTextcellComponent, _super);
-        function ExtTextcellComponent(eRef) {
-            return _super.call(this, eRef, textcellMetaData) || this;
+        function ExtTextcellComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, textcellMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textcellMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textcellMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTextcellComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTextcellComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textcellMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(textcellMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -49113,18 +50131,19 @@
                 this['ready'].emit(this);
             };
         ExtTextcellComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'textcell',
                         inputs: textcellMetaData.PROPERTIES,
                         outputs: textcellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTextcellComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTextcellComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTextcellComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTextcellComponent;
@@ -49330,15 +50349,21 @@
     }());
     var ExtTreecellComponent = /** @class */ (function (_super) {
         __extends(ExtTreecellComponent, _super);
-        function ExtTreecellComponent(eRef) {
-            return _super.call(this, eRef, treecellMetaData) || this;
+        function ExtTreecellComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, treecellMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treecellMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treecellMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTreecellComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTreecellComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treecellMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(treecellMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -49355,18 +50380,19 @@
                 this['ready'].emit(this);
             };
         ExtTreecellComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'treecell',
                         inputs: treecellMetaData.PROPERTIES,
                         outputs: treecellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTreecellComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTreecellComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTreecellComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTreecellComponent;
@@ -49556,15 +50582,21 @@
     }());
     var ExtWidgetcellComponent = /** @class */ (function (_super) {
         __extends(ExtWidgetcellComponent, _super);
-        function ExtWidgetcellComponent(eRef) {
-            return _super.call(this, eRef, widgetcellMetaData) || this;
+        function ExtWidgetcellComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, widgetcellMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,widgetcellMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,widgetcellMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtWidgetcellComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtWidgetcellComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,widgetcellMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(widgetcellMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -49581,18 +50613,19 @@
                 this['ready'].emit(this);
             };
         ExtWidgetcellComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'widgetcell',
                         inputs: widgetcellMetaData.PROPERTIES,
                         outputs: widgetcellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtWidgetcellComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtWidgetcellComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtWidgetcellComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtWidgetcellComponent;
@@ -50018,15 +51051,21 @@
     }());
     var ExtCelleditorComponent = /** @class */ (function (_super) {
         __extends(ExtCelleditorComponent, _super);
-        function ExtCelleditorComponent(eRef) {
-            return _super.call(this, eRef, celleditorMetaData) || this;
+        function ExtCelleditorComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, celleditorMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,celleditorMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,celleditorMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCelleditorComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCelleditorComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,celleditorMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(celleditorMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -50043,18 +51082,19 @@
                 this['ready'].emit(this);
             };
         ExtCelleditorComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'celleditor',
                         inputs: celleditorMetaData.PROPERTIES,
                         outputs: celleditorMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCelleditorComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCelleditorComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCelleditorComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCelleditorComponent;
@@ -50150,6 +51190,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -50312,6 +51353,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -50526,15 +51568,21 @@
     }());
     var ExtBooleancolumnComponent = /** @class */ (function (_super) {
         __extends(ExtBooleancolumnComponent, _super);
-        function ExtBooleancolumnComponent(eRef) {
-            return _super.call(this, eRef, booleancolumnMetaData) || this;
+        function ExtBooleancolumnComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, booleancolumnMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,booleancolumnMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,booleancolumnMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtBooleancolumnComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtBooleancolumnComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,booleancolumnMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(booleancolumnMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -50551,18 +51599,19 @@
                 this['ready'].emit(this);
             };
         ExtBooleancolumnComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'booleancolumn',
                         inputs: booleancolumnMetaData.PROPERTIES,
                         outputs: booleancolumnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtBooleancolumnComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtBooleancolumnComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtBooleancolumnComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtBooleancolumnComponent;
@@ -50659,6 +51708,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -50821,6 +51871,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -51038,15 +52089,21 @@
     }());
     var ExtCheckcolumnComponent = /** @class */ (function (_super) {
         __extends(ExtCheckcolumnComponent, _super);
-        function ExtCheckcolumnComponent(eRef) {
-            return _super.call(this, eRef, checkcolumnMetaData) || this;
+        function ExtCheckcolumnComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, checkcolumnMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkcolumnMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkcolumnMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtCheckcolumnComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtCheckcolumnComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkcolumnMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(checkcolumnMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -51063,18 +52120,19 @@
                 this['ready'].emit(this);
             };
         ExtCheckcolumnComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'checkcolumn',
                         inputs: checkcolumnMetaData.PROPERTIES,
                         outputs: checkcolumnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCheckcolumnComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCheckcolumnComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtCheckcolumnComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtCheckcolumnComponent;
@@ -51169,6 +52227,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -51328,6 +52387,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -51540,15 +52600,21 @@
     }());
     var ExtGridcolumnComponent = /** @class */ (function (_super) {
         __extends(ExtGridcolumnComponent, _super);
-        function ExtGridcolumnComponent(eRef) {
-            return _super.call(this, eRef, gridcolumnMetaData) || this;
+        function ExtGridcolumnComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, gridcolumnMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcolumnMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcolumnMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtGridcolumnComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtGridcolumnComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcolumnMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(gridcolumnMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -51565,18 +52631,19 @@
                 this['ready'].emit(this);
             };
         ExtGridcolumnComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'gridcolumn',
                         inputs: gridcolumnMetaData.PROPERTIES,
                         outputs: gridcolumnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtGridcolumnComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridcolumnComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtGridcolumnComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtGridcolumnComponent;
@@ -51671,6 +52738,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -51830,6 +52898,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -52042,15 +53111,21 @@
     }());
     var ExtColumnComponent = /** @class */ (function (_super) {
         __extends(ExtColumnComponent, _super);
-        function ExtColumnComponent(eRef) {
-            return _super.call(this, eRef, columnMetaData) || this;
+        function ExtColumnComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, columnMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,columnMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,columnMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtColumnComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtColumnComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,columnMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(columnMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -52067,18 +53142,19 @@
                 this['ready'].emit(this);
             };
         ExtColumnComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'column',
                         inputs: columnMetaData.PROPERTIES,
                         outputs: columnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtColumnComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtColumnComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtColumnComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtColumnComponent;
@@ -52173,6 +53249,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -52332,6 +53409,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -52544,15 +53622,21 @@
     }());
     var ExtTemplatecolumnComponent = /** @class */ (function (_super) {
         __extends(ExtTemplatecolumnComponent, _super);
-        function ExtTemplatecolumnComponent(eRef) {
-            return _super.call(this, eRef, templatecolumnMetaData) || this;
+        function ExtTemplatecolumnComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, templatecolumnMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,templatecolumnMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,templatecolumnMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTemplatecolumnComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTemplatecolumnComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,templatecolumnMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(templatecolumnMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -52569,18 +53653,19 @@
                 this['ready'].emit(this);
             };
         ExtTemplatecolumnComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'templatecolumn',
                         inputs: templatecolumnMetaData.PROPERTIES,
                         outputs: templatecolumnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTemplatecolumnComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTemplatecolumnComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTemplatecolumnComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTemplatecolumnComponent;
@@ -52676,6 +53761,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -52836,6 +53922,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -53048,15 +54135,21 @@
     }());
     var ExtDatecolumnComponent = /** @class */ (function (_super) {
         __extends(ExtDatecolumnComponent, _super);
-        function ExtDatecolumnComponent(eRef) {
-            return _super.call(this, eRef, datecolumnMetaData) || this;
+        function ExtDatecolumnComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, datecolumnMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datecolumnMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datecolumnMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtDatecolumnComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtDatecolumnComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datecolumnMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(datecolumnMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -53073,18 +54166,19 @@
                 this['ready'].emit(this);
             };
         ExtDatecolumnComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'datecolumn',
                         inputs: datecolumnMetaData.PROPERTIES,
                         outputs: datecolumnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtDatecolumnComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDatecolumnComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtDatecolumnComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtDatecolumnComponent;
@@ -53180,6 +54274,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -53340,6 +54435,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -53552,15 +54648,21 @@
     }());
     var ExtNumbercolumnComponent = /** @class */ (function (_super) {
         __extends(ExtNumbercolumnComponent, _super);
-        function ExtNumbercolumnComponent(eRef) {
-            return _super.call(this, eRef, numbercolumnMetaData) || this;
+        function ExtNumbercolumnComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, numbercolumnMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numbercolumnMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numbercolumnMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtNumbercolumnComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtNumbercolumnComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numbercolumnMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(numbercolumnMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -53577,18 +54679,19 @@
                 this['ready'].emit(this);
             };
         ExtNumbercolumnComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'numbercolumn',
                         inputs: numbercolumnMetaData.PROPERTIES,
                         outputs: numbercolumnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtNumbercolumnComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtNumbercolumnComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtNumbercolumnComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtNumbercolumnComponent;
@@ -53684,6 +54787,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -53844,6 +54948,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -54056,15 +55161,21 @@
     }());
     var ExtRownumbererComponent = /** @class */ (function (_super) {
         __extends(ExtRownumbererComponent, _super);
-        function ExtRownumbererComponent(eRef) {
-            return _super.call(this, eRef, rownumbererMetaData) || this;
+        function ExtRownumbererComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, rownumbererMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rownumbererMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rownumbererMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtRownumbererComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtRownumbererComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rownumbererMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(rownumbererMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -54081,18 +55192,19 @@
                 this['ready'].emit(this);
             };
         ExtRownumbererComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'rownumberer',
                         inputs: rownumbererMetaData.PROPERTIES,
                         outputs: rownumbererMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtRownumbererComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtRownumbererComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtRownumbererComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtRownumbererComponent;
@@ -54189,6 +55301,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -54351,6 +55464,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -54568,15 +55682,21 @@
     }());
     var ExtSelectioncolumnComponent = /** @class */ (function (_super) {
         __extends(ExtSelectioncolumnComponent, _super);
-        function ExtSelectioncolumnComponent(eRef) {
-            return _super.call(this, eRef, selectioncolumnMetaData) || this;
+        function ExtSelectioncolumnComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, selectioncolumnMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectioncolumnMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectioncolumnMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSelectioncolumnComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSelectioncolumnComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectioncolumnMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(selectioncolumnMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -54593,18 +55713,19 @@
                 this['ready'].emit(this);
             };
         ExtSelectioncolumnComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'selectioncolumn',
                         inputs: selectioncolumnMetaData.PROPERTIES,
                         outputs: selectioncolumnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSelectioncolumnComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSelectioncolumnComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSelectioncolumnComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSelectioncolumnComponent;
@@ -54699,6 +55820,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -54858,6 +55980,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -55070,15 +56193,21 @@
     }());
     var ExtTextcolumnComponent = /** @class */ (function (_super) {
         __extends(ExtTextcolumnComponent, _super);
-        function ExtTextcolumnComponent(eRef) {
-            return _super.call(this, eRef, textcolumnMetaData) || this;
+        function ExtTextcolumnComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, textcolumnMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textcolumnMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textcolumnMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTextcolumnComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTextcolumnComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textcolumnMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(textcolumnMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -55095,18 +56224,19 @@
                 this['ready'].emit(this);
             };
         ExtTextcolumnComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'textcolumn',
                         inputs: textcolumnMetaData.PROPERTIES,
                         outputs: textcolumnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTextcolumnComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTextcolumnComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTextcolumnComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTextcolumnComponent;
@@ -55201,6 +56331,7 @@
             "layout": "Object/String",
             "left": "Number/String",
             "listeners": "Object",
+            "locked": "Boolean/String",
             "manageBorders": "Boolean",
             "margin": "Number/String",
             "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -55360,6 +56491,7 @@
             'layout',
             'left',
             'listeners',
+            'locked',
             'manageBorders',
             'margin',
             'masked',
@@ -55572,15 +56704,21 @@
     }());
     var ExtTreecolumnComponent = /** @class */ (function (_super) {
         __extends(ExtTreecolumnComponent, _super);
-        function ExtTreecolumnComponent(eRef) {
-            return _super.call(this, eRef, treecolumnMetaData) || this;
+        function ExtTreecolumnComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, treecolumnMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treecolumnMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treecolumnMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTreecolumnComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTreecolumnComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treecolumnMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(treecolumnMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -55597,18 +56735,19 @@
                 this['ready'].emit(this);
             };
         ExtTreecolumnComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'treecolumn',
                         inputs: treecolumnMetaData.PROPERTIES,
                         outputs: treecolumnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTreecolumnComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTreecolumnComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTreecolumnComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTreecolumnComponent;
@@ -56226,15 +57365,21 @@
     }());
     var ExtGridComponent = /** @class */ (function (_super) {
         __extends(ExtGridComponent, _super);
-        function ExtGridComponent(eRef) {
-            return _super.call(this, eRef, gridMetaData) || this;
+        function ExtGridComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, gridMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtGridComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtGridComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(gridMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -56251,18 +57396,19 @@
                 this['ready'].emit(this);
             };
         ExtGridComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'grid',
                         inputs: gridMetaData.PROPERTIES,
                         outputs: gridMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtGridComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtGridComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtGridComponent;
@@ -56652,15 +57798,21 @@
     }());
     var ExtHeadercontainerComponent = /** @class */ (function (_super) {
         __extends(ExtHeadercontainerComponent, _super);
-        function ExtHeadercontainerComponent(eRef) {
-            return _super.call(this, eRef, headercontainerMetaData) || this;
+        function ExtHeadercontainerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, headercontainerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,headercontainerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,headercontainerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtHeadercontainerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtHeadercontainerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,headercontainerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(headercontainerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -56677,18 +57829,19 @@
                 this['ready'].emit(this);
             };
         ExtHeadercontainerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'headercontainer',
                         inputs: headercontainerMetaData.PROPERTIES,
                         outputs: headercontainerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtHeadercontainerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtHeadercontainerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtHeadercontainerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtHeadercontainerComponent;
@@ -57090,15 +58243,21 @@
     }());
     var ExtLockedgridComponent = /** @class */ (function (_super) {
         __extends(ExtLockedgridComponent, _super);
-        function ExtLockedgridComponent(eRef) {
-            return _super.call(this, eRef, lockedgridMetaData) || this;
+        function ExtLockedgridComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, lockedgridMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,lockedgridMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,lockedgridMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtLockedgridComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtLockedgridComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,lockedgridMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(lockedgridMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -57115,18 +58274,19 @@
                 this['ready'].emit(this);
             };
         ExtLockedgridComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'lockedgrid',
                         inputs: lockedgridMetaData.PROPERTIES,
                         outputs: lockedgridMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtLockedgridComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtLockedgridComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtLockedgridComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtLockedgridComponent;
@@ -57596,15 +58756,21 @@
     }());
     var ExtLockedgridregionComponent = /** @class */ (function (_super) {
         __extends(ExtLockedgridregionComponent, _super);
-        function ExtLockedgridregionComponent(eRef) {
-            return _super.call(this, eRef, lockedgridregionMetaData) || this;
+        function ExtLockedgridregionComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, lockedgridregionMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,lockedgridregionMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,lockedgridregionMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtLockedgridregionComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtLockedgridregionComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,lockedgridregionMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(lockedgridregionMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -57621,18 +58787,19 @@
                 this['ready'].emit(this);
             };
         ExtLockedgridregionComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'lockedgridregion',
                         inputs: lockedgridregionMetaData.PROPERTIES,
                         outputs: lockedgridregionMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtLockedgridregionComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtLockedgridregionComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtLockedgridregionComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtLockedgridregionComponent;
@@ -57988,15 +59155,21 @@
     }());
     var ExtGridcolumnsmenuComponent = /** @class */ (function (_super) {
         __extends(ExtGridcolumnsmenuComponent, _super);
-        function ExtGridcolumnsmenuComponent(eRef) {
-            return _super.call(this, eRef, gridcolumnsmenuMetaData) || this;
+        function ExtGridcolumnsmenuComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, gridcolumnsmenuMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcolumnsmenuMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcolumnsmenuMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtGridcolumnsmenuComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtGridcolumnsmenuComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcolumnsmenuMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(gridcolumnsmenuMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -58013,18 +59186,19 @@
                 this['ready'].emit(this);
             };
         ExtGridcolumnsmenuComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'gridcolumnsmenu',
                         inputs: gridcolumnsmenuMetaData.PROPERTIES,
                         outputs: gridcolumnsmenuMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtGridcolumnsmenuComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridcolumnsmenuComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtGridcolumnsmenuComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtGridcolumnsmenuComponent;
@@ -58380,15 +59554,21 @@
     }());
     var ExtGridgroupbythismenuitemComponent = /** @class */ (function (_super) {
         __extends(ExtGridgroupbythismenuitemComponent, _super);
-        function ExtGridgroupbythismenuitemComponent(eRef) {
-            return _super.call(this, eRef, gridgroupbythismenuitemMetaData) || this;
+        function ExtGridgroupbythismenuitemComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, gridgroupbythismenuitemMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridgroupbythismenuitemMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridgroupbythismenuitemMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtGridgroupbythismenuitemComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtGridgroupbythismenuitemComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridgroupbythismenuitemMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(gridgroupbythismenuitemMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -58405,18 +59585,19 @@
                 this['ready'].emit(this);
             };
         ExtGridgroupbythismenuitemComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'gridgroupbythismenuitem',
                         inputs: gridgroupbythismenuitemMetaData.PROPERTIES,
                         outputs: gridgroupbythismenuitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtGridgroupbythismenuitemComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridgroupbythismenuitemComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtGridgroupbythismenuitemComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtGridgroupbythismenuitemComponent;
@@ -58786,15 +59967,21 @@
     }());
     var ExtGridshowingroupsmenuitemComponent = /** @class */ (function (_super) {
         __extends(ExtGridshowingroupsmenuitemComponent, _super);
-        function ExtGridshowingroupsmenuitemComponent(eRef) {
-            return _super.call(this, eRef, gridshowingroupsmenuitemMetaData) || this;
+        function ExtGridshowingroupsmenuitemComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, gridshowingroupsmenuitemMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridshowingroupsmenuitemMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridshowingroupsmenuitemMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtGridshowingroupsmenuitemComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtGridshowingroupsmenuitemComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridshowingroupsmenuitemMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(gridshowingroupsmenuitemMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -58811,18 +59998,19 @@
                 this['ready'].emit(this);
             };
         ExtGridshowingroupsmenuitemComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'gridshowingroupsmenuitem',
                         inputs: gridshowingroupsmenuitemMetaData.PROPERTIES,
                         outputs: gridshowingroupsmenuitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtGridshowingroupsmenuitemComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridshowingroupsmenuitemComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtGridshowingroupsmenuitemComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtGridshowingroupsmenuitemComponent;
@@ -59196,15 +60384,21 @@
     }());
     var ExtGridsortascmenuitemComponent = /** @class */ (function (_super) {
         __extends(ExtGridsortascmenuitemComponent, _super);
-        function ExtGridsortascmenuitemComponent(eRef) {
-            return _super.call(this, eRef, gridsortascmenuitemMetaData) || this;
+        function ExtGridsortascmenuitemComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, gridsortascmenuitemMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsortascmenuitemMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsortascmenuitemMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtGridsortascmenuitemComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtGridsortascmenuitemComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsortascmenuitemMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(gridsortascmenuitemMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -59221,18 +60415,19 @@
                 this['ready'].emit(this);
             };
         ExtGridsortascmenuitemComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'gridsortascmenuitem',
                         inputs: gridsortascmenuitemMetaData.PROPERTIES,
                         outputs: gridsortascmenuitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtGridsortascmenuitemComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridsortascmenuitemComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtGridsortascmenuitemComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtGridsortascmenuitemComponent;
@@ -59606,15 +60801,21 @@
     }());
     var ExtGridsortdescmenuitemComponent = /** @class */ (function (_super) {
         __extends(ExtGridsortdescmenuitemComponent, _super);
-        function ExtGridsortdescmenuitemComponent(eRef) {
-            return _super.call(this, eRef, gridsortdescmenuitemMetaData) || this;
+        function ExtGridsortdescmenuitemComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, gridsortdescmenuitemMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsortdescmenuitemMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsortdescmenuitemMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtGridsortdescmenuitemComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtGridsortdescmenuitemComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsortdescmenuitemMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(gridsortdescmenuitemMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -59631,18 +60832,19 @@
                 this['ready'].emit(this);
             };
         ExtGridsortdescmenuitemComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'gridsortdescmenuitem',
                         inputs: gridsortdescmenuitemMetaData.PROPERTIES,
                         outputs: gridsortdescmenuitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtGridsortdescmenuitemComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridsortdescmenuitemComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtGridsortdescmenuitemComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtGridsortdescmenuitemComponent;
@@ -60034,15 +61236,21 @@
     }());
     var ExtPagingtoolbarComponent = /** @class */ (function (_super) {
         __extends(ExtPagingtoolbarComponent, _super);
-        function ExtPagingtoolbarComponent(eRef) {
-            return _super.call(this, eRef, pagingtoolbarMetaData) || this;
+        function ExtPagingtoolbarComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, pagingtoolbarMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pagingtoolbarMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pagingtoolbarMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPagingtoolbarComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPagingtoolbarComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pagingtoolbarMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(pagingtoolbarMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -60059,18 +61267,19 @@
                 this['ready'].emit(this);
             };
         ExtPagingtoolbarComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'pagingtoolbar',
                         inputs: pagingtoolbarMetaData.PROPERTIES,
                         outputs: pagingtoolbarMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPagingtoolbarComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPagingtoolbarComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPagingtoolbarComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPagingtoolbarComponent;
@@ -60404,15 +61613,21 @@
     }());
     var ExtGridrowComponent = /** @class */ (function (_super) {
         __extends(ExtGridrowComponent, _super);
-        function ExtGridrowComponent(eRef) {
-            return _super.call(this, eRef, gridrowMetaData) || this;
+        function ExtGridrowComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, gridrowMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridrowMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridrowMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtGridrowComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtGridrowComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridrowMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(gridrowMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -60429,18 +61644,19 @@
                 this['ready'].emit(this);
             };
         ExtGridrowComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'gridrow',
                         inputs: gridrowMetaData.PROPERTIES,
                         outputs: gridrowMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtGridrowComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridrowComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtGridrowComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtGridrowComponent;
@@ -60762,15 +61978,21 @@
     }());
     var ExtRowbodyComponent = /** @class */ (function (_super) {
         __extends(ExtRowbodyComponent, _super);
-        function ExtRowbodyComponent(eRef) {
-            return _super.call(this, eRef, rowbodyMetaData) || this;
+        function ExtRowbodyComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, rowbodyMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rowbodyMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rowbodyMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtRowbodyComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtRowbodyComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rowbodyMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(rowbodyMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -60787,18 +62009,19 @@
                 this['ready'].emit(this);
             };
         ExtRowbodyComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'rowbody',
                         inputs: rowbodyMetaData.PROPERTIES,
                         outputs: rowbodyMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtRowbodyComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtRowbodyComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtRowbodyComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtRowbodyComponent;
@@ -61130,15 +62353,21 @@
     }());
     var ExtRowheaderComponent = /** @class */ (function (_super) {
         __extends(ExtRowheaderComponent, _super);
-        function ExtRowheaderComponent(eRef) {
-            return _super.call(this, eRef, rowheaderMetaData) || this;
+        function ExtRowheaderComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, rowheaderMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rowheaderMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rowheaderMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtRowheaderComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtRowheaderComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rowheaderMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(rowheaderMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -61155,18 +62384,19 @@
                 this['ready'].emit(this);
             };
         ExtRowheaderComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'rowheader',
                         inputs: rowheaderMetaData.PROPERTIES,
                         outputs: rowheaderMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtRowheaderComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtRowheaderComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtRowheaderComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtRowheaderComponent;
@@ -61500,15 +62730,21 @@
     }());
     var ExtGridsummaryrowComponent = /** @class */ (function (_super) {
         __extends(ExtGridsummaryrowComponent, _super);
-        function ExtGridsummaryrowComponent(eRef) {
-            return _super.call(this, eRef, gridsummaryrowMetaData) || this;
+        function ExtGridsummaryrowComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, gridsummaryrowMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsummaryrowMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsummaryrowMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtGridsummaryrowComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtGridsummaryrowComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsummaryrowMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(gridsummaryrowMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -61525,18 +62761,19 @@
                 this['ready'].emit(this);
             };
         ExtGridsummaryrowComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'gridsummaryrow',
                         inputs: gridsummaryrowMetaData.PROPERTIES,
                         outputs: gridsummaryrowMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtGridsummaryrowComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridsummaryrowComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtGridsummaryrowComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtGridsummaryrowComponent;
@@ -62176,15 +63413,21 @@
     }());
     var ExtTreeComponent = /** @class */ (function (_super) {
         __extends(ExtTreeComponent, _super);
-        function ExtTreeComponent(eRef) {
-            return _super.call(this, eRef, treeMetaData) || this;
+        function ExtTreeComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, treeMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treeMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treeMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTreeComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTreeComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treeMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(treeMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -62201,18 +63444,19 @@
                 this['ready'].emit(this);
             };
         ExtTreeComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'tree',
                         inputs: treeMetaData.PROPERTIES,
                         outputs: treeMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTreeComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTreeComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTreeComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTreeComponent;
@@ -62548,15 +63792,21 @@
     }());
     var ExtImageComponent = /** @class */ (function (_super) {
         __extends(ExtImageComponent, _super);
-        function ExtImageComponent(eRef) {
-            return _super.call(this, eRef, imageMetaData) || this;
+        function ExtImageComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, imageMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,imageMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,imageMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtImageComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtImageComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,imageMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(imageMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -62573,18 +63823,19 @@
                 this['ready'].emit(this);
             };
         ExtImageComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'image',
                         inputs: imageMetaData.PROPERTIES,
                         outputs: imageMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtImageComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtImageComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtImageComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtImageComponent;
@@ -62920,15 +64171,21 @@
     }());
     var ExtImgComponent = /** @class */ (function (_super) {
         __extends(ExtImgComponent, _super);
-        function ExtImgComponent(eRef) {
-            return _super.call(this, eRef, imgMetaData) || this;
+        function ExtImgComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, imgMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,imgMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,imgMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtImgComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtImgComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,imgMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(imgMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -62945,18 +64202,19 @@
                 this['ready'].emit(this);
             };
         ExtImgComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'img',
                         inputs: imgMetaData.PROPERTIES,
                         outputs: imgMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtImgComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtImgComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtImgComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtImgComponent;
@@ -63292,15 +64550,21 @@
     }());
     var ExtIndicatorComponent = /** @class */ (function (_super) {
         __extends(ExtIndicatorComponent, _super);
-        function ExtIndicatorComponent(eRef) {
-            return _super.call(this, eRef, indicatorMetaData) || this;
+        function ExtIndicatorComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, indicatorMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,indicatorMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,indicatorMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtIndicatorComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtIndicatorComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,indicatorMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(indicatorMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -63317,18 +64581,19 @@
                 this['ready'].emit(this);
             };
         ExtIndicatorComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'indicator',
                         inputs: indicatorMetaData.PROPERTIES,
                         outputs: indicatorMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtIndicatorComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtIndicatorComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtIndicatorComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtIndicatorComponent;
@@ -63650,15 +64915,21 @@
     }());
     var ExtLabelComponent = /** @class */ (function (_super) {
         __extends(ExtLabelComponent, _super);
-        function ExtLabelComponent(eRef) {
-            return _super.call(this, eRef, labelMetaData) || this;
+        function ExtLabelComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, labelMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,labelMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,labelMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtLabelComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtLabelComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,labelMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(labelMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -63675,18 +64946,19 @@
                 this['ready'].emit(this);
             };
         ExtLabelComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'label',
                         inputs: labelMetaData.PROPERTIES,
                         outputs: labelMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtLabelComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtLabelComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtLabelComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtLabelComponent;
@@ -64034,15 +65306,21 @@
     }());
     var ExtTreelistComponent = /** @class */ (function (_super) {
         __extends(ExtTreelistComponent, _super);
-        function ExtTreelistComponent(eRef) {
-            return _super.call(this, eRef, treelistMetaData) || this;
+        function ExtTreelistComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, treelistMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treelistMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treelistMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTreelistComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTreelistComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treelistMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(treelistMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -64059,18 +65337,19 @@
                 this['ready'].emit(this);
             };
         ExtTreelistComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'treelist',
                         inputs: treelistMetaData.PROPERTIES,
                         outputs: treelistMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTreelistComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTreelistComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTreelistComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTreelistComponent;
@@ -64266,15 +65545,21 @@
     }());
     var ExtTreelistitemComponent = /** @class */ (function (_super) {
         __extends(ExtTreelistitemComponent, _super);
-        function ExtTreelistitemComponent(eRef) {
-            return _super.call(this, eRef, treelistitemMetaData) || this;
+        function ExtTreelistitemComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, treelistitemMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treelistitemMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treelistitemMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTreelistitemComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTreelistitemComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treelistitemMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(treelistitemMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -64291,18 +65576,19 @@
                 this['ready'].emit(this);
             };
         ExtTreelistitemComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'treelistitem',
                         inputs: treelistitemMetaData.PROPERTIES,
                         outputs: treelistitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTreelistitemComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTreelistitemComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTreelistitemComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTreelistitemComponent;
@@ -64634,15 +65920,21 @@
     }());
     var ExtLoadmaskComponent = /** @class */ (function (_super) {
         __extends(ExtLoadmaskComponent, _super);
-        function ExtLoadmaskComponent(eRef) {
-            return _super.call(this, eRef, loadmaskMetaData) || this;
+        function ExtLoadmaskComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, loadmaskMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,loadmaskMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,loadmaskMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtLoadmaskComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtLoadmaskComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,loadmaskMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(loadmaskMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -64659,18 +65951,19 @@
                 this['ready'].emit(this);
             };
         ExtLoadmaskComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'loadmask',
                         inputs: loadmaskMetaData.PROPERTIES,
                         outputs: loadmaskMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtLoadmaskComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtLoadmaskComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtLoadmaskComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtLoadmaskComponent;
@@ -64996,15 +66289,21 @@
     }());
     var ExtMaskComponent = /** @class */ (function (_super) {
         __extends(ExtMaskComponent, _super);
-        function ExtMaskComponent(eRef) {
-            return _super.call(this, eRef, maskMetaData) || this;
+        function ExtMaskComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, maskMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,maskMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,maskMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtMaskComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtMaskComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,maskMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(maskMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -65021,18 +66320,19 @@
                 this['ready'].emit(this);
             };
         ExtMaskComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'mask',
                         inputs: maskMetaData.PROPERTIES,
                         outputs: maskMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtMaskComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMaskComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtMaskComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtMaskComponent;
@@ -65388,15 +66688,21 @@
     }());
     var ExtMediaComponent = /** @class */ (function (_super) {
         __extends(ExtMediaComponent, _super);
-        function ExtMediaComponent(eRef) {
-            return _super.call(this, eRef, mediaMetaData) || this;
+        function ExtMediaComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, mediaMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,mediaMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,mediaMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtMediaComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtMediaComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,mediaMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(mediaMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -65413,18 +66719,19 @@
                 this['ready'].emit(this);
             };
         ExtMediaComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'media',
                         inputs: mediaMetaData.PROPERTIES,
                         outputs: mediaMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtMediaComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMediaComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtMediaComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtMediaComponent;
@@ -65794,15 +67101,21 @@
     }());
     var ExtMenucheckitemComponent = /** @class */ (function (_super) {
         __extends(ExtMenucheckitemComponent, _super);
-        function ExtMenucheckitemComponent(eRef) {
-            return _super.call(this, eRef, menucheckitemMetaData) || this;
+        function ExtMenucheckitemComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, menucheckitemMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menucheckitemMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menucheckitemMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtMenucheckitemComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtMenucheckitemComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menucheckitemMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(menucheckitemMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -65819,18 +67132,19 @@
                 this['ready'].emit(this);
             };
         ExtMenucheckitemComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'menucheckitem',
                         inputs: menucheckitemMetaData.PROPERTIES,
                         outputs: menucheckitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtMenucheckitemComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMenucheckitemComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtMenucheckitemComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtMenucheckitemComponent;
@@ -66186,15 +67500,21 @@
     }());
     var ExtMenuitemComponent = /** @class */ (function (_super) {
         __extends(ExtMenuitemComponent, _super);
-        function ExtMenuitemComponent(eRef) {
-            return _super.call(this, eRef, menuitemMetaData) || this;
+        function ExtMenuitemComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, menuitemMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuitemMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuitemMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtMenuitemComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtMenuitemComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuitemMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(menuitemMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -66211,18 +67531,19 @@
                 this['ready'].emit(this);
             };
         ExtMenuitemComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'menuitem',
                         inputs: menuitemMetaData.PROPERTIES,
                         outputs: menuitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtMenuitemComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMenuitemComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtMenuitemComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtMenuitemComponent;
@@ -66702,15 +68023,21 @@
     }());
     var ExtMenuComponent = /** @class */ (function (_super) {
         __extends(ExtMenuComponent, _super);
-        function ExtMenuComponent(eRef) {
-            return _super.call(this, eRef, menuMetaData) || this;
+        function ExtMenuComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, menuMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtMenuComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtMenuComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(menuMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -66727,18 +68054,19 @@
                 this['ready'].emit(this);
             };
         ExtMenuComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'menu',
                         inputs: menuMetaData.PROPERTIES,
                         outputs: menuMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtMenuComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMenuComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtMenuComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtMenuComponent;
@@ -67112,15 +68440,21 @@
     }());
     var ExtMenuradioitemComponent = /** @class */ (function (_super) {
         __extends(ExtMenuradioitemComponent, _super);
-        function ExtMenuradioitemComponent(eRef) {
-            return _super.call(this, eRef, menuradioitemMetaData) || this;
+        function ExtMenuradioitemComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, menuradioitemMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuradioitemMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuradioitemMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtMenuradioitemComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtMenuradioitemComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuradioitemMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(menuradioitemMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -67137,18 +68471,19 @@
                 this['ready'].emit(this);
             };
         ExtMenuradioitemComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'menuradioitem',
                         inputs: menuradioitemMetaData.PROPERTIES,
                         outputs: menuradioitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtMenuradioitemComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMenuradioitemComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtMenuradioitemComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtMenuradioitemComponent;
@@ -67470,15 +68805,21 @@
     }());
     var ExtMenuseparatorComponent = /** @class */ (function (_super) {
         __extends(ExtMenuseparatorComponent, _super);
-        function ExtMenuseparatorComponent(eRef) {
-            return _super.call(this, eRef, menuseparatorMetaData) || this;
+        function ExtMenuseparatorComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, menuseparatorMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuseparatorMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuseparatorMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtMenuseparatorComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtMenuseparatorComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuseparatorMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(menuseparatorMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -67495,18 +68836,19 @@
                 this['ready'].emit(this);
             };
         ExtMenuseparatorComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'menuseparator',
                         inputs: menuseparatorMetaData.PROPERTIES,
                         outputs: menuseparatorMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtMenuseparatorComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMenuseparatorComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtMenuseparatorComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtMenuseparatorComponent;
@@ -68008,15 +69350,21 @@
     }());
     var ExtMessageboxComponent = /** @class */ (function (_super) {
         __extends(ExtMessageboxComponent, _super);
-        function ExtMessageboxComponent(eRef) {
-            return _super.call(this, eRef, messageboxMetaData) || this;
+        function ExtMessageboxComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, messageboxMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,messageboxMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,messageboxMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtMessageboxComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtMessageboxComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,messageboxMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(messageboxMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -68033,18 +69381,19 @@
                 this['ready'].emit(this);
             };
         ExtMessageboxComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'messagebox',
                         inputs: messageboxMetaData.PROPERTIES,
                         outputs: messageboxMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtMessageboxComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMessageboxComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtMessageboxComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtMessageboxComponent;
@@ -68436,15 +69785,21 @@
     }());
     var ExtNavigationviewComponent = /** @class */ (function (_super) {
         __extends(ExtNavigationviewComponent, _super);
-        function ExtNavigationviewComponent(eRef) {
-            return _super.call(this, eRef, navigationviewMetaData) || this;
+        function ExtNavigationviewComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, navigationviewMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,navigationviewMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,navigationviewMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtNavigationviewComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtNavigationviewComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,navigationviewMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(navigationviewMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -68461,18 +69816,19 @@
                 this['ready'].emit(this);
             };
         ExtNavigationviewComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'navigationview',
                         inputs: navigationviewMetaData.PROPERTIES,
                         outputs: navigationviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtNavigationviewComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtNavigationviewComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtNavigationviewComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtNavigationviewComponent;
@@ -68934,15 +70290,21 @@
     }());
     var ExtPanelComponent = /** @class */ (function (_super) {
         __extends(ExtPanelComponent, _super);
-        function ExtPanelComponent(eRef) {
-            return _super.call(this, eRef, panelMetaData) || this;
+        function ExtPanelComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, panelMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,panelMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,panelMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPanelComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPanelComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,panelMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(panelMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -68959,18 +70321,19 @@
                 this['ready'].emit(this);
             };
         ExtPanelComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'panel',
                         inputs: panelMetaData.PROPERTIES,
                         outputs: panelMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPanelComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPanelComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPanelComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPanelComponent;
@@ -69502,15 +70865,21 @@
     }());
     var ExtDatepanelComponent = /** @class */ (function (_super) {
         __extends(ExtDatepanelComponent, _super);
-        function ExtDatepanelComponent(eRef) {
-            return _super.call(this, eRef, datepanelMetaData) || this;
+        function ExtDatepanelComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, datepanelMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepanelMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepanelMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtDatepanelComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtDatepanelComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepanelMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(datepanelMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -69527,18 +70896,19 @@
                 this['ready'].emit(this);
             };
         ExtDatepanelComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'datepanel',
                         inputs: datepanelMetaData.PROPERTIES,
                         outputs: datepanelMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtDatepanelComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDatepanelComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtDatepanelComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtDatepanelComponent;
@@ -69876,15 +71246,21 @@
     }());
     var ExtDatetitleComponent = /** @class */ (function (_super) {
         __extends(ExtDatetitleComponent, _super);
-        function ExtDatetitleComponent(eRef) {
-            return _super.call(this, eRef, datetitleMetaData) || this;
+        function ExtDatetitleComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, datetitleMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datetitleMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datetitleMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtDatetitleComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtDatetitleComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datetitleMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(datetitleMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -69901,18 +71277,19 @@
                 this['ready'].emit(this);
             };
         ExtDatetitleComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'datetitle',
                         inputs: datetitleMetaData.PROPERTIES,
                         outputs: datetitleMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtDatetitleComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDatetitleComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtDatetitleComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtDatetitleComponent;
@@ -70308,15 +71685,21 @@
     }());
     var ExtPanelheaderComponent = /** @class */ (function (_super) {
         __extends(ExtPanelheaderComponent, _super);
-        function ExtPanelheaderComponent(eRef) {
-            return _super.call(this, eRef, panelheaderMetaData) || this;
+        function ExtPanelheaderComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, panelheaderMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,panelheaderMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,panelheaderMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPanelheaderComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPanelheaderComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,panelheaderMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(panelheaderMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -70333,18 +71716,19 @@
                 this['ready'].emit(this);
             };
         ExtPanelheaderComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'panelheader',
                         inputs: panelheaderMetaData.PROPERTIES,
                         outputs: panelheaderMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPanelheaderComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPanelheaderComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPanelheaderComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPanelheaderComponent;
@@ -70824,15 +72208,21 @@
     }());
     var ExtTimepanelComponent = /** @class */ (function (_super) {
         __extends(ExtTimepanelComponent, _super);
-        function ExtTimepanelComponent(eRef) {
-            return _super.call(this, eRef, timepanelMetaData) || this;
+        function ExtTimepanelComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, timepanelMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timepanelMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timepanelMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTimepanelComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTimepanelComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timepanelMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(timepanelMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -70849,18 +72239,19 @@
                 this['ready'].emit(this);
             };
         ExtTimepanelComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'timepanel',
                         inputs: timepanelMetaData.PROPERTIES,
                         outputs: timepanelMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTimepanelComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTimepanelComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTimepanelComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTimepanelComponent;
@@ -71198,15 +72589,21 @@
     }());
     var ExtPaneltitleComponent = /** @class */ (function (_super) {
         __extends(ExtPaneltitleComponent, _super);
-        function ExtPaneltitleComponent(eRef) {
-            return _super.call(this, eRef, paneltitleMetaData) || this;
+        function ExtPaneltitleComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, paneltitleMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,paneltitleMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,paneltitleMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPaneltitleComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPaneltitleComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,paneltitleMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(paneltitleMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -71223,18 +72620,19 @@
                 this['ready'].emit(this);
             };
         ExtPaneltitleComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'paneltitle',
                         inputs: paneltitleMetaData.PROPERTIES,
                         outputs: paneltitleMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPaneltitleComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPaneltitleComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPaneltitleComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPaneltitleComponent;
@@ -71802,15 +73200,21 @@
     }());
     var ExtYearpickerComponent = /** @class */ (function (_super) {
         __extends(ExtYearpickerComponent, _super);
-        function ExtYearpickerComponent(eRef) {
-            return _super.call(this, eRef, yearpickerMetaData) || this;
+        function ExtYearpickerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, yearpickerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,yearpickerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,yearpickerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtYearpickerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtYearpickerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,yearpickerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(yearpickerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -71827,18 +73231,19 @@
                 this['ready'].emit(this);
             };
         ExtYearpickerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'yearpicker',
                         inputs: yearpickerMetaData.PROPERTIES,
                         outputs: yearpickerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtYearpickerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtYearpickerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtYearpickerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtYearpickerComponent;
@@ -72344,15 +73749,21 @@
     }());
     var ExtDatepickerComponent = /** @class */ (function (_super) {
         __extends(ExtDatepickerComponent, _super);
-        function ExtDatepickerComponent(eRef) {
-            return _super.call(this, eRef, datepickerMetaData) || this;
+        function ExtDatepickerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, datepickerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtDatepickerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtDatepickerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(datepickerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -72369,18 +73780,19 @@
                 this['ready'].emit(this);
             };
         ExtDatepickerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'datepicker',
                         inputs: datepickerMetaData.PROPERTIES,
                         outputs: datepickerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtDatepickerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDatepickerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtDatepickerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtDatepickerComponent;
@@ -72874,15 +74286,21 @@
     }());
     var ExtPickerComponent = /** @class */ (function (_super) {
         __extends(ExtPickerComponent, _super);
-        function ExtPickerComponent(eRef) {
-            return _super.call(this, eRef, pickerMetaData) || this;
+        function ExtPickerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, pickerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPickerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPickerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(pickerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -72899,18 +74317,19 @@
                 this['ready'].emit(this);
             };
         ExtPickerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'picker',
                         inputs: pickerMetaData.PROPERTIES,
                         outputs: pickerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPickerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPickerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPickerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPickerComponent;
@@ -73404,15 +74823,21 @@
     }());
     var ExtSelectpickerComponent = /** @class */ (function (_super) {
         __extends(ExtSelectpickerComponent, _super);
-        function ExtSelectpickerComponent(eRef) {
-            return _super.call(this, eRef, selectpickerMetaData) || this;
+        function ExtSelectpickerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, selectpickerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectpickerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectpickerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSelectpickerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSelectpickerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectpickerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(selectpickerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -73429,18 +74854,19 @@
                 this['ready'].emit(this);
             };
         ExtSelectpickerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'selectpicker',
                         inputs: selectpickerMetaData.PROPERTIES,
                         outputs: selectpickerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSelectpickerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSelectpickerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSelectpickerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSelectpickerComponent;
@@ -73956,15 +75382,21 @@
     }());
     var ExtPickerslotComponent = /** @class */ (function (_super) {
         __extends(ExtPickerslotComponent, _super);
-        function ExtPickerslotComponent(eRef) {
-            return _super.call(this, eRef, pickerslotMetaData) || this;
+        function ExtPickerslotComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, pickerslotMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerslotMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerslotMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPickerslotComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPickerslotComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerslotMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(pickerslotMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -73981,18 +75413,19 @@
                 this['ready'].emit(this);
             };
         ExtPickerslotComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'pickerslot',
                         inputs: pickerslotMetaData.PROPERTIES,
                         outputs: pickerslotMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPickerslotComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPickerslotComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPickerslotComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPickerslotComponent;
@@ -74454,15 +75887,21 @@
     }());
     var ExtTabletpickerComponent = /** @class */ (function (_super) {
         __extends(ExtTabletpickerComponent, _super);
-        function ExtTabletpickerComponent(eRef) {
-            return _super.call(this, eRef, tabletpickerMetaData) || this;
+        function ExtTabletpickerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, tabletpickerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabletpickerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabletpickerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTabletpickerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTabletpickerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabletpickerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(tabletpickerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -74479,18 +75918,19 @@
                 this['ready'].emit(this);
             };
         ExtTabletpickerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'tabletpicker',
                         inputs: tabletpickerMetaData.PROPERTIES,
                         outputs: tabletpickerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTabletpickerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTabletpickerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTabletpickerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTabletpickerComponent;
@@ -74690,15 +76130,21 @@
     }());
     var ExtPivotgridcellComponent = /** @class */ (function (_super) {
         __extends(ExtPivotgridcellComponent, _super);
-        function ExtPivotgridcellComponent(eRef) {
-            return _super.call(this, eRef, pivotgridcellMetaData) || this;
+        function ExtPivotgridcellComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, pivotgridcellMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridcellMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridcellMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPivotgridcellComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPivotgridcellComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridcellMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(pivotgridcellMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -74715,18 +76161,19 @@
                 this['ready'].emit(this);
             };
         ExtPivotgridcellComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'pivotgridcell',
                         inputs: pivotgridcellMetaData.PROPERTIES,
                         outputs: pivotgridcellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPivotgridcellComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotgridcellComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPivotgridcellComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPivotgridcellComponent;
@@ -74926,15 +76373,21 @@
     }());
     var ExtPivotgridgroupcellComponent = /** @class */ (function (_super) {
         __extends(ExtPivotgridgroupcellComponent, _super);
-        function ExtPivotgridgroupcellComponent(eRef) {
-            return _super.call(this, eRef, pivotgridgroupcellMetaData) || this;
+        function ExtPivotgridgroupcellComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, pivotgridgroupcellMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridgroupcellMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridgroupcellMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPivotgridgroupcellComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPivotgridgroupcellComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridgroupcellMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(pivotgridgroupcellMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -74951,18 +76404,19 @@
                 this['ready'].emit(this);
             };
         ExtPivotgridgroupcellComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'pivotgridgroupcell',
                         inputs: pivotgridgroupcellMetaData.PROPERTIES,
                         outputs: pivotgridgroupcellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPivotgridgroupcellComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotgridgroupcellComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPivotgridgroupcellComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPivotgridgroupcellComponent;
@@ -75004,15 +76458,21 @@
     }());
     var ExtPivotd3containerComponent = /** @class */ (function (_super) {
         __extends(ExtPivotd3containerComponent, _super);
-        function ExtPivotd3containerComponent(eRef) {
-            return _super.call(this, eRef, pivotd3containerMetaData) || this;
+        function ExtPivotd3containerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, pivotd3containerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotd3containerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotd3containerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPivotd3containerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPivotd3containerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotd3containerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(pivotd3containerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -75029,18 +76489,19 @@
                 this['ready'].emit(this);
             };
         ExtPivotd3containerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'pivotd3container',
                         inputs: pivotd3containerMetaData.PROPERTIES,
                         outputs: pivotd3containerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPivotd3containerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotd3containerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPivotd3containerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPivotd3containerComponent;
@@ -75394,15 +76855,21 @@
     }());
     var ExtPivotheatmapComponent = /** @class */ (function (_super) {
         __extends(ExtPivotheatmapComponent, _super);
-        function ExtPivotheatmapComponent(eRef) {
-            return _super.call(this, eRef, pivotheatmapMetaData) || this;
+        function ExtPivotheatmapComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, pivotheatmapMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotheatmapMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotheatmapMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPivotheatmapComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPivotheatmapComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotheatmapMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(pivotheatmapMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -75419,18 +76886,19 @@
                 this['ready'].emit(this);
             };
         ExtPivotheatmapComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'pivotheatmap',
                         inputs: pivotheatmapMetaData.PROPERTIES,
                         outputs: pivotheatmapMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPivotheatmapComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotheatmapComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPivotheatmapComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPivotheatmapComponent;
@@ -75820,15 +77288,21 @@
     }());
     var ExtPivottreemapComponent = /** @class */ (function (_super) {
         __extends(ExtPivottreemapComponent, _super);
-        function ExtPivottreemapComponent(eRef) {
-            return _super.call(this, eRef, pivottreemapMetaData) || this;
+        function ExtPivottreemapComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, pivottreemapMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivottreemapMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivottreemapMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPivottreemapComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPivottreemapComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivottreemapMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(pivottreemapMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -75845,18 +77319,19 @@
                 this['ready'].emit(this);
             };
         ExtPivottreemapComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'pivottreemap',
                         inputs: pivottreemapMetaData.PROPERTIES,
                         outputs: pivottreemapMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPivottreemapComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivottreemapComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPivottreemapComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPivottreemapComponent;
@@ -76556,15 +78031,21 @@
     }());
     var ExtPivotgridComponent = /** @class */ (function (_super) {
         __extends(ExtPivotgridComponent, _super);
-        function ExtPivotgridComponent(eRef) {
-            return _super.call(this, eRef, pivotgridMetaData) || this;
+        function ExtPivotgridComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, pivotgridMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPivotgridComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPivotgridComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(pivotgridMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -76581,18 +78062,19 @@
                 this['ready'].emit(this);
             };
         ExtPivotgridComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'pivotgrid',
                         inputs: pivotgridMetaData.PROPERTIES,
                         outputs: pivotgridMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPivotgridComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotgridComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPivotgridComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPivotgridComponent;
@@ -76986,15 +78468,21 @@
     }());
     var ExtPivotconfigfieldComponent = /** @class */ (function (_super) {
         __extends(ExtPivotconfigfieldComponent, _super);
-        function ExtPivotconfigfieldComponent(eRef) {
-            return _super.call(this, eRef, pivotconfigfieldMetaData) || this;
+        function ExtPivotconfigfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, pivotconfigfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPivotconfigfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPivotconfigfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(pivotconfigfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -77011,18 +78499,19 @@
                 this['ready'].emit(this);
             };
         ExtPivotconfigfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'pivotconfigfield',
                         inputs: pivotconfigfieldMetaData.PROPERTIES,
                         outputs: pivotconfigfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPivotconfigfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotconfigfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPivotconfigfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPivotconfigfieldComponent;
@@ -77486,15 +78975,21 @@
     }());
     var ExtPivotconfigcontainerComponent = /** @class */ (function (_super) {
         __extends(ExtPivotconfigcontainerComponent, _super);
-        function ExtPivotconfigcontainerComponent(eRef) {
-            return _super.call(this, eRef, pivotconfigcontainerMetaData) || this;
+        function ExtPivotconfigcontainerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, pivotconfigcontainerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigcontainerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigcontainerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPivotconfigcontainerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPivotconfigcontainerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigcontainerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(pivotconfigcontainerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -77511,18 +79006,19 @@
                 this['ready'].emit(this);
             };
         ExtPivotconfigcontainerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'pivotconfigcontainer',
                         inputs: pivotconfigcontainerMetaData.PROPERTIES,
                         outputs: pivotconfigcontainerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPivotconfigcontainerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotconfigcontainerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPivotconfigcontainerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPivotconfigcontainerComponent;
@@ -78020,15 +79516,21 @@
     }());
     var ExtPivotconfigformComponent = /** @class */ (function (_super) {
         __extends(ExtPivotconfigformComponent, _super);
-        function ExtPivotconfigformComponent(eRef) {
-            return _super.call(this, eRef, pivotconfigformMetaData) || this;
+        function ExtPivotconfigformComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, pivotconfigformMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigformMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigformMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPivotconfigformComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPivotconfigformComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigformMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(pivotconfigformMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -78045,18 +79547,19 @@
                 this['ready'].emit(this);
             };
         ExtPivotconfigformComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'pivotconfigform',
                         inputs: pivotconfigformMetaData.PROPERTIES,
                         outputs: pivotconfigformMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPivotconfigformComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotconfigformComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPivotconfigformComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPivotconfigformComponent;
@@ -78534,15 +80037,21 @@
     }());
     var ExtPivotconfigpanelComponent = /** @class */ (function (_super) {
         __extends(ExtPivotconfigpanelComponent, _super);
-        function ExtPivotconfigpanelComponent(eRef) {
-            return _super.call(this, eRef, pivotconfigpanelMetaData) || this;
+        function ExtPivotconfigpanelComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, pivotconfigpanelMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigpanelMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigpanelMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPivotconfigpanelComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPivotconfigpanelComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigpanelMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(pivotconfigpanelMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -78559,18 +80068,19 @@
                 this['ready'].emit(this);
             };
         ExtPivotconfigpanelComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'pivotconfigpanel',
                         inputs: pivotconfigpanelMetaData.PROPERTIES,
                         outputs: pivotconfigpanelMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPivotconfigpanelComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotconfigpanelComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPivotconfigpanelComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPivotconfigpanelComponent;
@@ -79068,15 +80578,21 @@
     }());
     var ExtPivotsettingsComponent = /** @class */ (function (_super) {
         __extends(ExtPivotsettingsComponent, _super);
-        function ExtPivotsettingsComponent(eRef) {
-            return _super.call(this, eRef, pivotsettingsMetaData) || this;
+        function ExtPivotsettingsComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, pivotsettingsMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotsettingsMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotsettingsMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPivotsettingsComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPivotsettingsComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotsettingsMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(pivotsettingsMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -79093,18 +80609,19 @@
                 this['ready'].emit(this);
             };
         ExtPivotsettingsComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'pivotsettings',
                         inputs: pivotsettingsMetaData.PROPERTIES,
                         outputs: pivotsettingsMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPivotsettingsComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotsettingsComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPivotsettingsComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPivotsettingsComponent;
@@ -79602,15 +81119,21 @@
     }());
     var ExtPivotrangeeditorComponent = /** @class */ (function (_super) {
         __extends(ExtPivotrangeeditorComponent, _super);
-        function ExtPivotrangeeditorComponent(eRef) {
-            return _super.call(this, eRef, pivotrangeeditorMetaData) || this;
+        function ExtPivotrangeeditorComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, pivotrangeeditorMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotrangeeditorMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotrangeeditorMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPivotrangeeditorComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPivotrangeeditorComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotrangeeditorMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(pivotrangeeditorMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -79627,18 +81150,19 @@
                 this['ready'].emit(this);
             };
         ExtPivotrangeeditorComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'pivotrangeeditor',
                         inputs: pivotrangeeditorMetaData.PROPERTIES,
                         outputs: pivotrangeeditorMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPivotrangeeditorComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotrangeeditorComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPivotrangeeditorComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPivotrangeeditorComponent;
@@ -79972,15 +81496,21 @@
     }());
     var ExtPivotgridrowComponent = /** @class */ (function (_super) {
         __extends(ExtPivotgridrowComponent, _super);
-        function ExtPivotgridrowComponent(eRef) {
-            return _super.call(this, eRef, pivotgridrowMetaData) || this;
+        function ExtPivotgridrowComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, pivotgridrowMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridrowMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridrowMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPivotgridrowComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPivotgridrowComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridrowMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(pivotgridrowMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -79997,18 +81527,19 @@
                 this['ready'].emit(this);
             };
         ExtPivotgridrowComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'pivotgridrow',
                         inputs: pivotgridrowMetaData.PROPERTIES,
                         outputs: pivotgridrowMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPivotgridrowComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotgridrowComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPivotgridrowComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPivotgridrowComponent;
@@ -80338,15 +81869,21 @@
     }());
     var ExtProgressComponent = /** @class */ (function (_super) {
         __extends(ExtProgressComponent, _super);
-        function ExtProgressComponent(eRef) {
-            return _super.call(this, eRef, progressMetaData) || this;
+        function ExtProgressComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, progressMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,progressMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,progressMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtProgressComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtProgressComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,progressMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(progressMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -80363,18 +81900,19 @@
                 this['ready'].emit(this);
             };
         ExtProgressComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'progress',
                         inputs: progressMetaData.PROPERTIES,
                         outputs: progressMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtProgressComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtProgressComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtProgressComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtProgressComponent;
@@ -80704,15 +82242,21 @@
     }());
     var ExtProgressbarwidgetComponent = /** @class */ (function (_super) {
         __extends(ExtProgressbarwidgetComponent, _super);
-        function ExtProgressbarwidgetComponent(eRef) {
-            return _super.call(this, eRef, progressbarwidgetMetaData) || this;
+        function ExtProgressbarwidgetComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, progressbarwidgetMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,progressbarwidgetMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,progressbarwidgetMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtProgressbarwidgetComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtProgressbarwidgetComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,progressbarwidgetMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(progressbarwidgetMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -80729,18 +82273,19 @@
                 this['ready'].emit(this);
             };
         ExtProgressbarwidgetComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'progressbarwidget',
                         inputs: progressbarwidgetMetaData.PROPERTIES,
                         outputs: progressbarwidgetMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtProgressbarwidgetComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtProgressbarwidgetComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtProgressbarwidgetComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtProgressbarwidgetComponent;
@@ -81140,15 +82685,21 @@
     }());
     var ExtSegmentedbuttonComponent = /** @class */ (function (_super) {
         __extends(ExtSegmentedbuttonComponent, _super);
-        function ExtSegmentedbuttonComponent(eRef) {
-            return _super.call(this, eRef, segmentedbuttonMetaData) || this;
+        function ExtSegmentedbuttonComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, segmentedbuttonMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,segmentedbuttonMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,segmentedbuttonMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSegmentedbuttonComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSegmentedbuttonComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,segmentedbuttonMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(segmentedbuttonMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -81165,18 +82716,19 @@
                 this['ready'].emit(this);
             };
         ExtSegmentedbuttonComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'segmentedbutton',
                         inputs: segmentedbuttonMetaData.PROPERTIES,
                         outputs: segmentedbuttonMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSegmentedbuttonComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSegmentedbuttonComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSegmentedbuttonComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSegmentedbuttonComponent;
@@ -81652,15 +83204,21 @@
     }());
     var ExtSheetComponent = /** @class */ (function (_super) {
         __extends(ExtSheetComponent, _super);
-        function ExtSheetComponent(eRef) {
-            return _super.call(this, eRef, sheetMetaData) || this;
+        function ExtSheetComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, sheetMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sheetMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sheetMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSheetComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSheetComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sheetMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(sheetMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -81677,18 +83235,19 @@
                 this['ready'].emit(this);
             };
         ExtSheetComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'sheet',
                         inputs: sheetMetaData.PROPERTIES,
                         outputs: sheetMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSheetComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSheetComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSheetComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSheetComponent;
@@ -82038,15 +83597,21 @@
     }());
     var ExtSliderComponent = /** @class */ (function (_super) {
         __extends(ExtSliderComponent, _super);
-        function ExtSliderComponent(eRef) {
-            return _super.call(this, eRef, sliderMetaData) || this;
+        function ExtSliderComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, sliderMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sliderMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sliderMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSliderComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSliderComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sliderMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(sliderMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -82063,18 +83628,19 @@
                 this['ready'].emit(this);
             };
         ExtSliderComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'slider',
                         inputs: sliderMetaData.PROPERTIES,
                         outputs: sliderMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSliderComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSliderComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSliderComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSliderComponent;
@@ -82400,15 +83966,21 @@
     }());
     var ExtThumbComponent = /** @class */ (function (_super) {
         __extends(ExtThumbComponent, _super);
-        function ExtThumbComponent(eRef) {
-            return _super.call(this, eRef, thumbMetaData) || this;
+        function ExtThumbComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, thumbMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,thumbMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,thumbMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtThumbComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtThumbComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,thumbMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(thumbMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -82425,18 +83997,19 @@
                 this['ready'].emit(this);
             };
         ExtThumbComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'thumb',
                         inputs: thumbMetaData.PROPERTIES,
                         outputs: thumbMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtThumbComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtThumbComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtThumbComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtThumbComponent;
@@ -82786,15 +84359,21 @@
     }());
     var ExtTogglesliderComponent = /** @class */ (function (_super) {
         __extends(ExtTogglesliderComponent, _super);
-        function ExtTogglesliderComponent(eRef) {
-            return _super.call(this, eRef, togglesliderMetaData) || this;
+        function ExtTogglesliderComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, togglesliderMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,togglesliderMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,togglesliderMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTogglesliderComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTogglesliderComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,togglesliderMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(togglesliderMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -82811,18 +84390,19 @@
                 this['ready'].emit(this);
             };
         ExtTogglesliderComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'toggleslider',
                         inputs: togglesliderMetaData.PROPERTIES,
                         outputs: togglesliderMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTogglesliderComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTogglesliderComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTogglesliderComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTogglesliderComponent;
@@ -83144,15 +84724,21 @@
     }());
     var ExtSpacerComponent = /** @class */ (function (_super) {
         __extends(ExtSpacerComponent, _super);
-        function ExtSpacerComponent(eRef) {
-            return _super.call(this, eRef, spacerMetaData) || this;
+        function ExtSpacerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, spacerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spacerMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spacerMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSpacerComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSpacerComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spacerMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(spacerMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -83169,18 +84755,19 @@
                 this['ready'].emit(this);
             };
         ExtSpacerComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'spacer',
                         inputs: spacerMetaData.PROPERTIES,
                         outputs: spacerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSpacerComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSpacerComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSpacerComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSpacerComponent;
@@ -83544,15 +85131,21 @@
     }());
     var ExtSparklinebarComponent = /** @class */ (function (_super) {
         __extends(ExtSparklinebarComponent, _super);
-        function ExtSparklinebarComponent(eRef) {
-            return _super.call(this, eRef, sparklinebarMetaData) || this;
+        function ExtSparklinebarComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, sparklinebarMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinebarMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinebarMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSparklinebarComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSparklinebarComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinebarMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(sparklinebarMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -83569,18 +85162,19 @@
                 this['ready'].emit(this);
             };
         ExtSparklinebarComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'sparklinebar',
                         inputs: sparklinebarMetaData.PROPERTIES,
                         outputs: sparklinebarMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSparklinebarComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSparklinebarComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSparklinebarComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSparklinebarComponent;
@@ -83920,15 +85514,21 @@
     }());
     var ExtSparklineComponent = /** @class */ (function (_super) {
         __extends(ExtSparklineComponent, _super);
-        function ExtSparklineComponent(eRef) {
-            return _super.call(this, eRef, sparklineMetaData) || this;
+        function ExtSparklineComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, sparklineMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklineMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklineMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSparklineComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSparklineComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklineMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(sparklineMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -83945,18 +85545,19 @@
                 this['ready'].emit(this);
             };
         ExtSparklineComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'sparkline',
                         inputs: sparklineMetaData.PROPERTIES,
                         outputs: sparklineMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSparklineComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSparklineComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSparklineComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSparklineComponent;
@@ -84324,15 +85925,21 @@
     }());
     var ExtSparklineboxComponent = /** @class */ (function (_super) {
         __extends(ExtSparklineboxComponent, _super);
-        function ExtSparklineboxComponent(eRef) {
-            return _super.call(this, eRef, sparklineboxMetaData) || this;
+        function ExtSparklineboxComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, sparklineboxMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklineboxMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklineboxMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSparklineboxComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSparklineboxComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklineboxMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(sparklineboxMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -84349,18 +85956,19 @@
                 this['ready'].emit(this);
             };
         ExtSparklineboxComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'sparklinebox',
                         inputs: sparklineboxMetaData.PROPERTIES,
                         outputs: sparklineboxMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSparklineboxComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSparklineboxComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSparklineboxComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSparklineboxComponent;
@@ -84710,15 +86318,21 @@
     }());
     var ExtSparklinebulletComponent = /** @class */ (function (_super) {
         __extends(ExtSparklinebulletComponent, _super);
-        function ExtSparklinebulletComponent(eRef) {
-            return _super.call(this, eRef, sparklinebulletMetaData) || this;
+        function ExtSparklinebulletComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, sparklinebulletMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinebulletMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinebulletMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSparklinebulletComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSparklinebulletComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinebulletMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(sparklinebulletMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -84735,18 +86349,19 @@
                 this['ready'].emit(this);
             };
         ExtSparklinebulletComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'sparklinebullet',
                         inputs: sparklinebulletMetaData.PROPERTIES,
                         outputs: sparklinebulletMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSparklinebulletComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSparklinebulletComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSparklinebulletComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSparklinebulletComponent;
@@ -85098,15 +86713,21 @@
     }());
     var ExtSparklinediscreteComponent = /** @class */ (function (_super) {
         __extends(ExtSparklinediscreteComponent, _super);
-        function ExtSparklinediscreteComponent(eRef) {
-            return _super.call(this, eRef, sparklinediscreteMetaData) || this;
+        function ExtSparklinediscreteComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, sparklinediscreteMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinediscreteMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinediscreteMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSparklinediscreteComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSparklinediscreteComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinediscreteMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(sparklinediscreteMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -85123,18 +86744,19 @@
                 this['ready'].emit(this);
             };
         ExtSparklinediscreteComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'sparklinediscrete',
                         inputs: sparklinediscreteMetaData.PROPERTIES,
                         outputs: sparklinediscreteMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSparklinediscreteComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSparklinediscreteComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSparklinediscreteComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSparklinediscreteComponent;
@@ -85508,15 +87130,21 @@
     }());
     var ExtSparklinelineComponent = /** @class */ (function (_super) {
         __extends(ExtSparklinelineComponent, _super);
-        function ExtSparklinelineComponent(eRef) {
-            return _super.call(this, eRef, sparklinelineMetaData) || this;
+        function ExtSparklinelineComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, sparklinelineMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinelineMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinelineMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSparklinelineComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSparklinelineComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinelineMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(sparklinelineMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -85533,18 +87161,19 @@
                 this['ready'].emit(this);
             };
         ExtSparklinelineComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'sparklineline',
                         inputs: sparklinelineMetaData.PROPERTIES,
                         outputs: sparklinelineMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSparklinelineComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSparklinelineComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSparklinelineComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSparklinelineComponent;
@@ -85892,15 +87521,21 @@
     }());
     var ExtSparklinepieComponent = /** @class */ (function (_super) {
         __extends(ExtSparklinepieComponent, _super);
-        function ExtSparklinepieComponent(eRef) {
-            return _super.call(this, eRef, sparklinepieMetaData) || this;
+        function ExtSparklinepieComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, sparklinepieMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinepieMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinepieMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSparklinepieComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSparklinepieComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinepieMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(sparklinepieMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -85917,18 +87552,19 @@
                 this['ready'].emit(this);
             };
         ExtSparklinepieComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'sparklinepie',
                         inputs: sparklinepieMetaData.PROPERTIES,
                         outputs: sparklinepieMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSparklinepieComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSparklinepieComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSparklinepieComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSparklinepieComponent;
@@ -86280,15 +87916,21 @@
     }());
     var ExtSparklinetristateComponent = /** @class */ (function (_super) {
         __extends(ExtSparklinetristateComponent, _super);
-        function ExtSparklinetristateComponent(eRef) {
-            return _super.call(this, eRef, sparklinetristateMetaData) || this;
+        function ExtSparklinetristateComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, sparklinetristateMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinetristateMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinetristateMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSparklinetristateComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSparklinetristateComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinetristateMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(sparklinetristateMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -86305,18 +87947,19 @@
                 this['ready'].emit(this);
             };
         ExtSparklinetristateComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'sparklinetristate',
                         inputs: sparklinetristateMetaData.PROPERTIES,
                         outputs: sparklinetristateMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSparklinetristateComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSparklinetristateComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSparklinetristateComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSparklinetristateComponent;
@@ -86694,15 +88337,21 @@
     }());
     var ExtSplitbuttonComponent = /** @class */ (function (_super) {
         __extends(ExtSplitbuttonComponent, _super);
-        function ExtSplitbuttonComponent(eRef) {
-            return _super.call(this, eRef, splitbuttonMetaData) || this;
+        function ExtSplitbuttonComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, splitbuttonMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,splitbuttonMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,splitbuttonMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtSplitbuttonComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtSplitbuttonComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,splitbuttonMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(splitbuttonMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -86719,18 +88368,19 @@
                 this['ready'].emit(this);
             };
         ExtSplitbuttonComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'splitbutton',
                         inputs: splitbuttonMetaData.PROPERTIES,
                         outputs: splitbuttonMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtSplitbuttonComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSplitbuttonComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtSplitbuttonComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtSplitbuttonComponent;
@@ -87126,15 +88776,21 @@
     }());
     var ExtTabbarComponent = /** @class */ (function (_super) {
         __extends(ExtTabbarComponent, _super);
-        function ExtTabbarComponent(eRef) {
-            return _super.call(this, eRef, tabbarMetaData) || this;
+        function ExtTabbarComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, tabbarMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabbarMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabbarMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTabbarComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTabbarComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabbarMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(tabbarMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -87151,18 +88807,19 @@
                 this['ready'].emit(this);
             };
         ExtTabbarComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'tabbar',
                         inputs: tabbarMetaData.PROPERTIES,
                         outputs: tabbarMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTabbarComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTabbarComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTabbarComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTabbarComponent;
@@ -87548,15 +89205,21 @@
     }());
     var ExtTabpanelComponent = /** @class */ (function (_super) {
         __extends(ExtTabpanelComponent, _super);
-        function ExtTabpanelComponent(eRef) {
-            return _super.call(this, eRef, tabpanelMetaData) || this;
+        function ExtTabpanelComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, tabpanelMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabpanelMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabpanelMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTabpanelComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTabpanelComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabpanelMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(tabpanelMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -87573,18 +89236,19 @@
                 this['ready'].emit(this);
             };
         ExtTabpanelComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'tabpanel',
                         inputs: tabpanelMetaData.PROPERTIES,
                         outputs: tabpanelMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTabpanelComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTabpanelComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTabpanelComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTabpanelComponent;
@@ -87968,15 +89632,21 @@
     }());
     var ExtTabComponent = /** @class */ (function (_super) {
         __extends(ExtTabComponent, _super);
-        function ExtTabComponent(eRef) {
-            return _super.call(this, eRef, tabMetaData) || this;
+        function ExtTabComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, tabMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTabComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTabComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(tabMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -87993,18 +89663,19 @@
                 this['ready'].emit(this);
             };
         ExtTabComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'tab',
                         inputs: tabMetaData.PROPERTIES,
                         outputs: tabMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTabComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTabComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTabComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTabComponent;
@@ -88494,15 +90165,21 @@
     }());
     var ExtTooltipComponent = /** @class */ (function (_super) {
         __extends(ExtTooltipComponent, _super);
-        function ExtTooltipComponent(eRef) {
-            return _super.call(this, eRef, tooltipMetaData) || this;
+        function ExtTooltipComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, tooltipMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tooltipMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tooltipMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTooltipComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTooltipComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tooltipMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(tooltipMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -88519,18 +90196,19 @@
                 this['ready'].emit(this);
             };
         ExtTooltipComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'tooltip',
                         inputs: tooltipMetaData.PROPERTIES,
                         outputs: tooltipMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTooltipComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTooltipComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTooltipComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTooltipComponent;
@@ -88854,15 +90532,21 @@
     }());
     var ExtTitleComponent = /** @class */ (function (_super) {
         __extends(ExtTitleComponent, _super);
-        function ExtTitleComponent(eRef) {
-            return _super.call(this, eRef, titleMetaData) || this;
+        function ExtTitleComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, titleMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,titleMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,titleMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTitleComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTitleComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,titleMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(titleMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -88879,18 +90563,19 @@
                 this['ready'].emit(this);
             };
         ExtTitleComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'title',
                         inputs: titleMetaData.PROPERTIES,
                         outputs: titleMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTitleComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTitleComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTitleComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTitleComponent;
@@ -89278,15 +90963,21 @@
     }());
     var ExtTitlebarComponent = /** @class */ (function (_super) {
         __extends(ExtTitlebarComponent, _super);
-        function ExtTitlebarComponent(eRef) {
-            return _super.call(this, eRef, titlebarMetaData) || this;
+        function ExtTitlebarComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, titlebarMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,titlebarMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,titlebarMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtTitlebarComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtTitlebarComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,titlebarMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(titlebarMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -89303,18 +90994,19 @@
                 this['ready'].emit(this);
             };
         ExtTitlebarComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'titlebar',
                         inputs: titlebarMetaData.PROPERTIES,
                         outputs: titlebarMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTitlebarComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTitlebarComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtTitlebarComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtTitlebarComponent;
@@ -89652,15 +91344,21 @@
     }());
     var ExtToolComponent = /** @class */ (function (_super) {
         __extends(ExtToolComponent, _super);
-        function ExtToolComponent(eRef) {
-            return _super.call(this, eRef, toolMetaData) || this;
+        function ExtToolComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, toolMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,toolMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,toolMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtToolComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtToolComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,toolMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(toolMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -89677,18 +91375,19 @@
                 this['ready'].emit(this);
             };
         ExtToolComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'tool',
                         inputs: toolMetaData.PROPERTIES,
                         outputs: toolMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtToolComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtToolComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtToolComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtToolComponent;
@@ -90026,15 +91725,21 @@
     }());
     var ExtPaneltoolComponent = /** @class */ (function (_super) {
         __extends(ExtPaneltoolComponent, _super);
-        function ExtPaneltoolComponent(eRef) {
-            return _super.call(this, eRef, paneltoolMetaData) || this;
+        function ExtPaneltoolComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, paneltoolMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,paneltoolMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,paneltoolMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtPaneltoolComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtPaneltoolComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,paneltoolMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(paneltoolMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -90051,18 +91756,19 @@
                 this['ready'].emit(this);
             };
         ExtPaneltoolComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'paneltool',
                         inputs: paneltoolMetaData.PROPERTIES,
                         outputs: paneltoolMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtPaneltoolComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPaneltoolComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtPaneltoolComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtPaneltoolComponent;
@@ -90446,15 +92152,21 @@
     }());
     var ExtToolbarComponent = /** @class */ (function (_super) {
         __extends(ExtToolbarComponent, _super);
-        function ExtToolbarComponent(eRef) {
-            return _super.call(this, eRef, toolbarMetaData) || this;
+        function ExtToolbarComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, toolbarMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,toolbarMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,toolbarMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtToolbarComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtToolbarComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,toolbarMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(toolbarMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -90471,18 +92183,19 @@
                 this['ready'].emit(this);
             };
         ExtToolbarComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'toolbar',
                         inputs: toolbarMetaData.PROPERTIES,
                         outputs: toolbarMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtToolbarComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtToolbarComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtToolbarComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtToolbarComponent;
@@ -90816,15 +92529,21 @@
     }());
     var ExtColorbuttonComponent = /** @class */ (function (_super) {
         __extends(ExtColorbuttonComponent, _super);
-        function ExtColorbuttonComponent(eRef) {
-            return _super.call(this, eRef, colorbuttonMetaData) || this;
+        function ExtColorbuttonComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, colorbuttonMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorbuttonMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorbuttonMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtColorbuttonComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtColorbuttonComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorbuttonMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(colorbuttonMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -90841,18 +92560,19 @@
                 this['ready'].emit(this);
             };
         ExtColorbuttonComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'colorbutton',
                         inputs: colorbuttonMetaData.PROPERTIES,
                         outputs: colorbuttonMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtColorbuttonComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtColorbuttonComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtColorbuttonComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtColorbuttonComponent;
@@ -91174,15 +92894,21 @@
     }());
     var ExtColorpickercolorpreviewComponent = /** @class */ (function (_super) {
         __extends(ExtColorpickercolorpreviewComponent, _super);
-        function ExtColorpickercolorpreviewComponent(eRef) {
-            return _super.call(this, eRef, colorpickercolorpreviewMetaData) || this;
+        function ExtColorpickercolorpreviewComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, colorpickercolorpreviewMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorpickercolorpreviewMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorpickercolorpreviewMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtColorpickercolorpreviewComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtColorpickercolorpreviewComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorpickercolorpreviewMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(colorpickercolorpreviewMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -91199,18 +92925,19 @@
                 this['ready'].emit(this);
             };
         ExtColorpickercolorpreviewComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'colorpickercolorpreview',
                         inputs: colorpickercolorpreviewMetaData.PROPERTIES,
                         outputs: colorpickercolorpreviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtColorpickercolorpreviewComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtColorpickercolorpreviewComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtColorpickercolorpreviewComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtColorpickercolorpreviewComponent;
@@ -91670,15 +93397,21 @@
     }());
     var ExtColorfieldComponent = /** @class */ (function (_super) {
         __extends(ExtColorfieldComponent, _super);
-        function ExtColorfieldComponent(eRef) {
-            return _super.call(this, eRef, colorfieldMetaData) || this;
+        function ExtColorfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, colorfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorfieldMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorfieldMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtColorfieldComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtColorfieldComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorfieldMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(colorfieldMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -91695,18 +93428,19 @@
                 this['ready'].emit(this);
             };
         ExtColorfieldComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'colorfield',
                         inputs: colorfieldMetaData.PROPERTIES,
                         outputs: colorfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtColorfieldComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtColorfieldComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtColorfieldComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtColorfieldComponent;
@@ -91768,15 +93502,21 @@
     }());
     var ExtColorselectorComponent = /** @class */ (function (_super) {
         __extends(ExtColorselectorComponent, _super);
-        function ExtColorselectorComponent(eRef) {
-            return _super.call(this, eRef, colorselectorMetaData) || this;
+        function ExtColorselectorComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, colorselectorMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorselectorMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorselectorMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtColorselectorComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtColorselectorComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorselectorMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(colorselectorMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -91793,18 +93533,19 @@
                 this['ready'].emit(this);
             };
         ExtColorselectorComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'colorselector',
                         inputs: colorselectorMetaData.PROPERTIES,
                         outputs: colorselectorMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtColorselectorComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtColorselectorComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtColorselectorComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtColorselectorComponent;
@@ -92154,15 +93895,21 @@
     }());
     var ExtGaugeComponent = /** @class */ (function (_super) {
         __extends(ExtGaugeComponent, _super);
-        function ExtGaugeComponent(eRef) {
-            return _super.call(this, eRef, gaugeMetaData) || this;
+        function ExtGaugeComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, gaugeMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gaugeMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gaugeMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtGaugeComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtGaugeComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gaugeMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(gaugeMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -92179,18 +93926,19 @@
                 this['ready'].emit(this);
             };
         ExtGaugeComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'gauge',
                         inputs: gaugeMetaData.PROPERTIES,
                         outputs: gaugeMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtGaugeComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGaugeComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtGaugeComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtGaugeComponent;
@@ -92614,15 +94362,21 @@
     }());
     var ExtMapComponent = /** @class */ (function (_super) {
         __extends(ExtMapComponent, _super);
-        function ExtMapComponent(eRef) {
-            return _super.call(this, eRef, mapMetaData) || this;
+        function ExtMapComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, mapMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,mapMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,mapMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtMapComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtMapComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,mapMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(mapMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -92639,18 +94393,19 @@
                 this['ready'].emit(this);
             };
         ExtMapComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'map',
                         inputs: mapMetaData.PROPERTIES,
                         outputs: mapMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtMapComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMapComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtMapComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtMapComponent;
@@ -93074,15 +94829,21 @@
     }());
     var ExtGoogle_mapComponent = /** @class */ (function (_super) {
         __extends(ExtGoogle_mapComponent, _super);
-        function ExtGoogle_mapComponent(eRef) {
-            return _super.call(this, eRef, google_mapMetaData) || this;
+        function ExtGoogle_mapComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, google_mapMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,google_mapMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,google_mapMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtGoogle_mapComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtGoogle_mapComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,google_mapMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(google_mapMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -93099,18 +94860,19 @@
                 this['ready'].emit(this);
             };
         ExtGoogle_mapComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'google-map',
                         inputs: google_mapMetaData.PROPERTIES,
                         outputs: google_mapMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtGoogle_mapComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGoogle_mapComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtGoogle_mapComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtGoogle_mapComponent;
@@ -93460,15 +95222,21 @@
     }());
     var ExtRatingComponent = /** @class */ (function (_super) {
         __extends(ExtRatingComponent, _super);
-        function ExtRatingComponent(eRef) {
-            return _super.call(this, eRef, ratingMetaData) || this;
+        function ExtRatingComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, ratingMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,ratingMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,ratingMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtRatingComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtRatingComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,ratingMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(ratingMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -93485,18 +95253,19 @@
                 this['ready'].emit(this);
             };
         ExtRatingComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'rating',
                         inputs: ratingMetaData.PROPERTIES,
                         outputs: ratingMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtRatingComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtRatingComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtRatingComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtRatingComponent;
@@ -93856,15 +95625,21 @@
     }());
     var ExtVideoComponent = /** @class */ (function (_super) {
         __extends(ExtVideoComponent, _super);
-        function ExtVideoComponent(eRef) {
-            return _super.call(this, eRef, videoMetaData) || this;
+        function ExtVideoComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, videoMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,videoMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,videoMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtVideoComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtVideoComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,videoMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(videoMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -93881,18 +95656,19 @@
                 this['ready'].emit(this);
             };
         ExtVideoComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'video',
                         inputs: videoMetaData.PROPERTIES,
                         outputs: videoMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtVideoComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtVideoComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtVideoComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtVideoComponent;
@@ -94290,15 +96066,21 @@
     }());
     var ExtViewportComponent = /** @class */ (function (_super) {
         __extends(ExtViewportComponent, _super);
-        function ExtViewportComponent(eRef) {
-            return _super.call(this, eRef, viewportMetaData) || this;
+        function ExtViewportComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, viewportMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,viewportMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,viewportMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtViewportComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtViewportComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,viewportMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(viewportMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -94315,18 +96097,19 @@
                 this['ready'].emit(this);
             };
         ExtViewportComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'viewport',
                         inputs: viewportMetaData.PROPERTIES,
                         outputs: viewportMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtViewportComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtViewportComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtViewportComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtViewportComponent;
@@ -94490,15 +96273,21 @@
     }());
     var ExtWidgetComponent = /** @class */ (function (_super) {
         __extends(ExtWidgetComponent, _super);
-        function ExtWidgetComponent(eRef) {
-            return _super.call(this, eRef, widgetMetaData) || this;
+        function ExtWidgetComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, widgetMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
         }
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,widgetMetaData,hostComponent)}
+        //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,widgetMetaData,hostComponent)}
         /**
          * @return {?}
          */
-        ExtWidgetComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        ExtWidgetComponent.prototype.ngOnInit =
+            //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,widgetMetaData,hostComponent)}
+            /**
+             * @return {?}
+             */
             function () { this.baseOnInit(widgetMetaData); };
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
         //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
@@ -94515,512 +96304,22 @@
                 this['ready'].emit(this);
             };
         ExtWidgetComponent.decorators = [
-            { type: core.Component, args: [{
+            { type: i0.Component, args: [{
                         selector: 'widget',
                         inputs: widgetMetaData.PROPERTIES,
                         outputs: widgetMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtWidgetComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
+                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtWidgetComponent; }) }],
+                        template: '<ng-template></ng-template>'
                     }] }
         ];
         /** @nocollapse */
         ExtWidgetComponent.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: i0.ElementRef },
+                { type: base, decorators: [{ type: i0.Host }, { type: i0.Optional }, { type: i0.SkipSelf }] }
             ];
         };
         return ExtWidgetComponent;
-    }(base));
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var orgchartMetaData = /** @class */ (function () {
-        function orgchartMetaData() {
-        }
-        orgchartMetaData.XTYPE = 'orgchart';
-        orgchartMetaData.PROPERTIESOBJECT = {
-            "zIndex": "Number",
-            "platformConfig": "Object",
-            "responsiveConfig": "Object",
-            "fitToParent": "Boolean",
-            "config": "Object",
-        };
-        orgchartMetaData.PROPERTIES = [
-            'zIndex',
-            'platformConfig',
-            'responsiveConfig',
-            'fitToParent',
-            'config'
-        ];
-        orgchartMetaData.EVENTS = [
-            { name: 'ready', parameters: '' }
-        ];
-        orgchartMetaData.EVENTNAMES = [
-            'ready'
-        ];
-        return orgchartMetaData;
-    }());
-    var ExtOrgChartComponent = /** @class */ (function (_super) {
-        __extends(ExtOrgChartComponent, _super);
-        function ExtOrgChartComponent(eRef) {
-            return _super.call(this, eRef, orgchartMetaData) || this;
-        }
-        /**
-         * @return {?}
-         */
-        ExtOrgChartComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () { this.baseOnInit(orgchartMetaData); };
-        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-        /**
-         * @return {?}
-         */
-        ExtOrgChartComponent.prototype.ngAfterContentInit =
-            //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-            /**
-             * @return {?}
-             */
-            function () {
-                this.baseAfterContentInit();
-                this['ready'].emit(this);
-            };
-        ExtOrgChartComponent.decorators = [
-            { type: core.Component, args: [{
-                        selector: 'orgchart',
-                        inputs: orgchartMetaData.PROPERTIES,
-                        outputs: orgchartMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtOrgChartComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
-                    }] }
-        ];
-        /** @nocollapse */
-        ExtOrgChartComponent.ctorParameters = function () {
-            return [
-                { type: core.ElementRef }
-            ];
-        };
-        return ExtOrgChartComponent;
-    }(base));
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-    var transitionMetaData = /** @class */ (function () {
-        function transitionMetaData() {
-        }
-        transitionMetaData.XTYPE = 'transition';
-        transitionMetaData.PROPERTIESOBJECT = {
-            "type": "slide/reveal/cover/fade/pop",
-            "duration": "Number",
-            "easing": "String",
-            "direction": "String",
-            "bindDirectionToLocation": "Boolean",
-            "activeChildTabIndex": "Number",
-            "activeItem": "Ext.Component/Object/String/Number",
-            "allowFocusingDisabledChildren": "Boolean",
-            "alwaysOnTop": "Boolean/Number",
-            "ariaAttributes": "Object",
-            "ariaDescribedBy": "String",
-            "ariaLabel": "String",
-            "ariaLabelledBy": "String",
-            "autoDestroy": "Boolean",
-            "autoSize": "Boolean",
-            "axisLock": "Boolean",
-            "bind": "Object/String",
-            "border": "Boolean",
-            "bottom": "Number/String",
-            "cardSwitchAnimation": "String/Object/Boolean",
-            "centered": "Boolean",
-            "cls": "String/String[]",
-            "constrainAlign": "String/Ext.util.Region/Ext.dom.Element",
-            "contentEl": "Ext.dom.Element/HTMLElement/String",
-            "control": "Object",
-            "controller": "String/Object/Ext.app.ViewController",
-            "data": "Object",
-            "defaultFocus": "String",
-            "defaultListenerScope": "Boolean",
-            "defaults": "Object",
-            "defaultType": "String",
-            "disabled": "Boolean",
-            "displayed": "Boolean",
-            "docked": "String",
-            "draggable": "Boolean/Object/Ext.drag.Source",
-            "enterAnimation": "String/Mixed",
-            "eventHandlers": "Object",
-            "exitAnimation": "String/Mixed",
-            "flex": "Number/String/Object",
-            "floated": "Boolean",
-            "focusableContainer": "Boolean",
-            "focusCls": "String",
-            "fullscreen": "Boolean",
-            "height": "Number/String",
-            "hidden": "Boolean",
-            "hideAnimation": "String/Mixed",
-            "hideMode": "'clip'/'display'/'offsets'/'opacity'/'visibility'",
-            "hideOnMaskTap": "Boolean",
-            "html": "String/Ext.dom.Element/HTMLElement",
-            "id": "String",
-            "inactiveChildTabIndex": "Number",
-            "innerCls": "String",
-            "instanceCls": "String/String[]",
-            "itemId": "String",
-            "items": "Array/Object",
-            "keyMap": "Object",
-            "keyMapEnabled": "Boolean",
-            "keyMapTarget": "String",
-            "layout": "Object/String",
-            "left": "Number/String",
-            "listeners": "Object",
-            "manageBorders": "Boolean",
-            "margin": "Number/String",
-            "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
-            "maxHeight": "Number/String",
-            "maxWidth": "Number/String",
-            "minHeight": "Number/String",
-            "minWidth": "Number/String",
-            "modal": "Boolean",
-            "modelValidation": "Boolean",
-            "name": "String",
-            "nameable": "Boolean",
-            "nameHolder": "Boolean",
-            "padding": "Number/String",
-            "plugins": "Array/Ext.enums.Plugin/Object/Ext.plugin.Abstract",
-            "publishes": "String/String[]/Object",
-            "record": "Ext.data.Model",
-            "reference": "String",
-            "referenceHolder": "Boolean",
-            "relative": "Boolean",
-            "renderTo": "Ext.dom.Element",
-            "resetFocusPosition": "Boolean",
-            "right": "Number/String",
-            "ripple": "Boolean/Object/String",
-            "scrollable": "Boolean/String/Object",
-            "selfAlign": "String",
-            "session": "Boolean/Object/Ext.data.Session",
-            "shadow": "Boolean",
-            "shareableName": "Boolean",
-            "shim": "Boolean",
-            "showAnimation": "String/Mixed",
-            "style": "String/Object",
-            "tabIndex": "Number",
-            "toFrontOnShow": "Boolean",
-            "tooltip": "String/Object",
-            "top": "Number/String",
-            "touchAction": "Object",
-            "tpl": "String/String[]/Ext.Template/Ext.XTemplate[]",
-            "tplWriteMode": "String",
-            "translatable": "Object",
-            "twoWayBindable": "String/String[]/Object",
-            "ui": "String/String[]",
-            "userCls": "String/String[]",
-            "userSelectable": "Boolean/String/Object",
-            "viewModel": "String/Object/Ext.app.ViewModel",
-            "weight": "Number",
-            "weighted": "Boolean",
-            "width": "Number/String",
-            "x": "Number",
-            "xtype": "String",
-            "y": "Number",
-            "zIndex": "Number",
-            "platformConfig": "Object",
-            "responsiveConfig": "Object",
-            "fitToParent": "Boolean",
-            "config": "Object",
-        };
-        transitionMetaData.PROPERTIES = [
-            'type',
-            'duration',
-            'easing',
-            'direction',
-            'bindDirectionToLocation',
-            'activeChildTabIndex',
-            'activeItem',
-            'allowFocusingDisabledChildren',
-            'alwaysOnTop',
-            'ariaAttributes',
-            'ariaDescribedBy',
-            'ariaLabel',
-            'ariaLabelledBy',
-            'autoDestroy',
-            'autoSize',
-            'axisLock',
-            'bind',
-            'border',
-            'bottom',
-            'cardSwitchAnimation',
-            'centered',
-            'cls',
-            'constrainAlign',
-            'contentEl',
-            'control',
-            'controller',
-            'data',
-            'defaultFocus',
-            'defaultListenerScope',
-            'defaults',
-            'defaultType',
-            'disabled',
-            'displayed',
-            'docked',
-            'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
-            'flex',
-            'floated',
-            'focusableContainer',
-            'focusCls',
-            'fullscreen',
-            'height',
-            'hidden',
-            'hideAnimation',
-            'hideMode',
-            'hideOnMaskTap',
-            'html',
-            'id',
-            'inactiveChildTabIndex',
-            'innerCls',
-            'instanceCls',
-            'itemId',
-            'items',
-            'keyMap',
-            'keyMapEnabled',
-            'keyMapTarget',
-            'layout',
-            'left',
-            'listeners',
-            'manageBorders',
-            'margin',
-            'masked',
-            'maxHeight',
-            'maxWidth',
-            'minHeight',
-            'minWidth',
-            'modal',
-            'modelValidation',
-            'name',
-            'nameable',
-            'nameHolder',
-            'padding',
-            'plugins',
-            'publishes',
-            'record',
-            'reference',
-            'referenceHolder',
-            'relative',
-            'renderTo',
-            'resetFocusPosition',
-            'right',
-            'ripple',
-            'scrollable',
-            'selfAlign',
-            'session',
-            'shadow',
-            'shareableName',
-            'shim',
-            'showAnimation',
-            'style',
-            'tabIndex',
-            'toFrontOnShow',
-            'tooltip',
-            'top',
-            'touchAction',
-            'tpl',
-            'tplWriteMode',
-            'translatable',
-            'twoWayBindable',
-            'ui',
-            'userCls',
-            'userSelectable',
-            'viewModel',
-            'weight',
-            'weighted',
-            'width',
-            'x',
-            'xtype',
-            'y',
-            'zIndex',
-            'platformConfig',
-            'responsiveConfig',
-            'fitToParent',
-            'config'
-        ];
-        transitionMetaData.EVENTS = [
-            { name: 'activate', parameters: 'newActiveItem,container,oldActiveItem' },
-            { name: 'activeItemchange', parameters: 'sender,value,oldValue' },
-            { name: 'add', parameters: 'container,item,index' },
-            { name: 'added', parameters: 'sender,container,index' },
-            { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
-            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
-            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
-            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
-            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
-            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
-            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
-            { name: 'beforehide', parameters: 'sender' },
-            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
-            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
-            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
-            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
-            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
-            { name: 'beforeorientationchange', parameters: '' },
-            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
-            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
-            { name: 'beforeshow', parameters: 'sender' },
-            { name: 'beforetofront', parameters: 'container' },
-            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
-            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
-            { name: 'blur', parameters: 'container,event' },
-            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
-            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
-            { name: 'deactivate', parameters: 'oldActiveItem,container,newActiveItem' },
-            { name: 'destroy', parameters: '' },
-            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
-            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
-            { name: 'erased', parameters: 'sender' },
-            { name: 'floatingchange', parameters: 'sender,positioned' },
-            { name: 'focus', parameters: 'container,event' },
-            { name: 'focusenter', parameters: 'container,event' },
-            { name: 'focusleave', parameters: 'container,event' },
-            { name: 'fullscreen', parameters: 'sender' },
-            { name: 'heightchange', parameters: 'sender,value,oldValue' },
-            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
-            { name: 'hide', parameters: 'sender' },
-            { name: 'initialize', parameters: 'sender' },
-            { name: 'leftchange', parameters: 'sender,value,oldValue' },
-            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
-            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
-            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
-            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
-            { name: 'move', parameters: 'container,item,toIndex,fromIndex' },
-            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
-            { name: 'orientationchange', parameters: '' },
-            { name: 'painted', parameters: 'sender,element' },
-            { name: 'positionedchange', parameters: 'sender,positioned' },
-            { name: 'remove', parameters: 'container,item,index' },
-            { name: 'removed', parameters: 'sender,container,index' },
-            { name: 'renderedchange', parameters: 'container,item,rendered' },
-            { name: 'resize', parameters: 'element,info' },
-            { name: 'rightchange', parameters: 'sender,value,oldValue' },
-            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
-            { name: 'show', parameters: 'sender' },
-            { name: 'tofront', parameters: 'container' },
-            { name: 'topchange', parameters: 'sender,value,oldValue' },
-            { name: 'updatedata', parameters: 'sender,newData' },
-            { name: 'widthchange', parameters: 'sender,value,oldValue' },
-            { name: 'ready', parameters: '' }
-        ];
-        transitionMetaData.EVENTNAMES = [
-            'activate',
-            'activeItemchange',
-            'add',
-            'added',
-            'beforeactiveItemchange',
-            'beforebottomchange',
-            'beforecenteredchange',
-            'beforedisabledchange',
-            'beforedockedchange',
-            'beforeheightchange',
-            'beforehiddenchange',
-            'beforehide',
-            'beforeleftchange',
-            'beforemaxHeightchange',
-            'beforemaxWidthchange',
-            'beforeminHeightchange',
-            'beforeminWidthchange',
-            'beforeorientationchange',
-            'beforerightchange',
-            'beforescrollablechange',
-            'beforeshow',
-            'beforetofront',
-            'beforetopchange',
-            'beforewidthchange',
-            'blur',
-            'bottomchange',
-            'centeredchange',
-            'deactivate',
-            'destroy',
-            'disabledchange',
-            'dockedchange',
-            'erased',
-            'floatingchange',
-            'focus',
-            'focusenter',
-            'focusleave',
-            'fullscreen',
-            'heightchange',
-            'hiddenchange',
-            'hide',
-            'initialize',
-            'leftchange',
-            'maxHeightchange',
-            'maxWidthchange',
-            'minHeightchange',
-            'minWidthchange',
-            'move',
-            'moved',
-            'orientationchange',
-            'painted',
-            'positionedchange',
-            'remove',
-            'removed',
-            'renderedchange',
-            'resize',
-            'rightchange',
-            'scrollablechange',
-            'show',
-            'tofront',
-            'topchange',
-            'updatedata',
-            'widthchange',
-            'ready'
-        ];
-        return transitionMetaData;
-    }());
-    var ExtTransitionComponent = /** @class */ (function (_super) {
-        __extends(ExtTransitionComponent, _super);
-        function ExtTransitionComponent(eRef) {
-            return _super.call(this, eRef, transitionMetaData) || this;
-        }
-        /**
-         * @return {?}
-         */
-        ExtTransitionComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () { this.baseOnInit(transitionMetaData); };
-        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-        //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-        /**
-         * @return {?}
-         */
-        ExtTransitionComponent.prototype.ngAfterContentInit =
-            //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-            /**
-             * @return {?}
-             */
-            function () { this.baseAfterContentInit(); };
-        ExtTransitionComponent.decorators = [
-            { type: core.Component, args: [{
-                        selector: 'transition',
-                        inputs: transitionMetaData.PROPERTIES,
-                        outputs: transitionMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtTransitionComponent; }) }],
-                        template: '<ng-template #dynamic></ng-template>'
-                    }] }
-        ];
-        /** @nocollapse */
-        ExtTransitionComponent.ctorParameters = function () {
-            return [
-                { type: core.ElementRef }
-            ];
-        };
-        return ExtTransitionComponent;
     }(base));
 
     /**
@@ -95031,9 +96330,10 @@
         function ExtAngularModernModule() {
         }
         ExtAngularModernModule.decorators = [
-            { type: core.NgModule, args: [{
+            { type: i0.NgModule, args: [{
                         imports: [],
                         declarations: [
+                            ExtAngularBootstrapComponent,
                             ExtActionsheetComponent,
                             ExtAudioComponent,
                             ExtButtonComponent,
@@ -95257,11 +96557,12 @@
                             ExtRatingComponent,
                             ExtVideoComponent,
                             ExtViewportComponent,
-                            ExtWidgetComponent,
-                            ExtOrgChartComponent,
-                            ExtTransitionComponent
+                            ExtWidgetComponent
                         ],
+                        providers: [ExtAngularBootstrapService],
+                        entryComponents: [ExtAngularBootstrapComponent],
                         exports: [
+                            ExtAngularBootstrapComponent,
                             ExtActionsheetComponent,
                             ExtAudioComponent,
                             ExtButtonComponent,
@@ -95485,9 +96786,7 @@
                             ExtRatingComponent,
                             ExtVideoComponent,
                             ExtViewportComponent,
-                            ExtWidgetComponent,
-                            ExtOrgChartComponent,
-                            ExtTransitionComponent
+                            ExtWidgetComponent
                         ]
                     },] }
         ];
@@ -95505,459 +96804,457 @@
      */
 
     exports.ExtAngularModernModule = ExtAngularModernModule;
-    exports.ɵc = base;
-    exports.ɵb = ExtActionsheetComponent;
-    exports.ɵa = actionsheetMetaData;
-    exports.ɵe = ExtAudioComponent;
-    exports.ɵd = audioMetaData;
-    exports.ɵby = ExtAxis3dComponent;
-    exports.ɵbx = axis3dMetaData;
-    exports.ɵio = ExtBooleancellComponent;
-    exports.ɵin = booleancellMetaData;
-    exports.ɵji = ExtBooleancolumnComponent;
-    exports.ɵjh = booleancolumnMetaData;
-    exports.ɵdo = ExtBoundlistComponent;
-    exports.ɵdn = boundlistMetaData;
-    exports.ɵg = ExtButtonComponent;
-    exports.ɵf = buttonMetaData;
-    exports.ɵm = ExtCalendar_calendar_pickerComponent;
-    exports.ɵl = calendar_calendar_pickerMetaData;
-    exports.ɵy = ExtCalendar_dayComponent;
-    exports.ɵx = calendar_dayMetaData;
-    exports.ɵba = ExtCalendar_daysComponent;
-    exports.ɵz = calendar_daysMetaData;
-    exports.ɵs = ExtCalendar_daysheaderComponent;
-    exports.ɵr = calendar_daysheaderMetaData;
-    exports.ɵbm = ExtCalendar_daysviewComponent;
-    exports.ɵbl = calendar_daysviewMetaData;
-    exports.ɵbk = ExtCalendar_dayviewComponent;
-    exports.ɵbj = calendar_dayviewMetaData;
-    exports.ɵi = ExtCalendar_eventComponent;
-    exports.ɵh = calendar_eventMetaData;
-    exports.ɵk = ExtCalendar_form_addComponent;
-    exports.ɵj = calendar_form_addMetaData;
-    exports.ɵo = ExtCalendar_form_editComponent;
-    exports.ɵn = calendar_form_editMetaData;
-    exports.ɵw = ExtCalendar_listComponent;
-    exports.ɵv = calendar_listMetaData;
-    exports.ɵbc = ExtCalendar_monthComponent;
-    exports.ɵbb = calendar_monthMetaData;
-    exports.ɵbo = ExtCalendar_monthviewComponent;
-    exports.ɵbn = calendar_monthviewMetaData;
-    exports.ɵbq = ExtCalendar_multiviewComponent;
-    exports.ɵbp = calendar_multiviewMetaData;
-    exports.ɵq = ExtCalendar_timefieldComponent;
-    exports.ɵp = calendar_timefieldMetaData;
-    exports.ɵbg = ExtCalendar_weekComponent;
-    exports.ɵbf = calendar_weekMetaData;
-    exports.ɵbi = ExtCalendar_weeksComponent;
-    exports.ɵbh = calendar_weeksMetaData;
-    exports.ɵu = ExtCalendar_weeksheaderComponent;
-    exports.ɵt = calendar_weeksheaderMetaData;
-    exports.ɵbu = ExtCalendar_weeksviewComponent;
-    exports.ɵbt = calendar_weeksviewMetaData;
-    exports.ɵbs = ExtCalendar_weekviewComponent;
-    exports.ɵbr = calendar_weekviewMetaData;
-    exports.ɵbe = ExtCalendarComponent;
-    exports.ɵbd = calendarMetaData;
-    exports.ɵbw = ExtCarouselComponent;
-    exports.ɵbv = carouselMetaData;
-    exports.ɵca = ExtCartesianComponent;
-    exports.ɵbz = cartesianMetaData;
-    exports.ɵjg = ExtCelleditorComponent;
-    exports.ɵjf = celleditorMetaData;
-    exports.ɵcc = ExtChartComponent;
-    exports.ɵcb = chartMetaData;
-    exports.ɵci = ExtChartnavigatorComponent;
-    exports.ɵch = chartnavigatorMetaData;
-    exports.ɵfe = ExtCheckboxComponent;
-    exports.ɵfd = checkboxMetaData;
-    exports.ɵfg = ExtCheckboxfieldComponent;
-    exports.ɵff = checkboxfieldMetaData;
-    exports.ɵis = ExtCheckcellComponent;
-    exports.ɵir = checkcellMetaData;
-    exports.ɵjk = ExtCheckcolumnComponent;
-    exports.ɵjj = checkcolumnMetaData;
-    exports.ɵco = ExtChipComponent;
-    exports.ɵcn = chipMetaData;
-    exports.ɵdq = ExtChipviewComponent;
-    exports.ɵdp = chipviewMetaData;
-    exports.ɵho = ExtCleartriggerComponent;
-    exports.ɵhn = cleartriggerMetaData;
-    exports.ɵqm = ExtColorbuttonComponent;
-    exports.ɵql = colorbuttonMetaData;
-    exports.ɵqq = ExtColorfieldComponent;
-    exports.ɵqp = colorfieldMetaData;
-    exports.ɵqo = ExtColorpickercolorpreviewComponent;
-    exports.ɵqn = colorpickercolorpreviewMetaData;
-    exports.ɵqs = ExtColorselectorComponent;
-    exports.ɵqr = colorselectorMetaData;
-    exports.ɵjo = ExtColumnComponent;
-    exports.ɵjn = columnMetaData;
-    exports.ɵfi = ExtComboboxComponent;
-    exports.ɵfh = comboboxMetaData;
-    exports.ɵfk = ExtComboboxfieldComponent;
-    exports.ɵfj = comboboxfieldMetaData;
-    exports.ɵcq = ExtComponentComponent;
-    exports.ɵcp = componentMetaData;
-    exports.ɵds = ExtComponentdataviewComponent;
-    exports.ɵdr = componentdataviewMetaData;
-    exports.ɵcs = ExtContainerComponent;
-    exports.ɵcr = containerMetaData;
-    exports.ɵfm = ExtContainerfieldComponent;
-    exports.ɵfl = containerfieldMetaData;
-    exports.ɵcu = ExtD3_canvasComponent;
-    exports.ɵct = d3_canvasMetaData;
-    exports.ɵcw = ExtD3_heatmapComponent;
-    exports.ɵcv = d3_heatmapMetaData;
-    exports.ɵdg = ExtD3_horizontal_treeComponent;
-    exports.ɵdf = d3_horizontal_treeMetaData;
-    exports.ɵcy = ExtD3_packComponent;
-    exports.ɵcx = d3_packMetaData;
-    exports.ɵda = ExtD3_partitionComponent;
-    exports.ɵcz = d3_partitionMetaData;
-    exports.ɵdc = ExtD3_sunburstComponent;
-    exports.ɵdb = d3_sunburstMetaData;
-    exports.ɵdk = ExtD3_svgComponent;
-    exports.ɵdj = d3_svgMetaData;
-    exports.ɵde = ExtD3_treeComponent;
-    exports.ɵdd = d3_treeMetaData;
-    exports.ɵdi = ExtD3_treemapComponent;
-    exports.ɵdh = d3_treemapMetaData;
-    exports.ɵdm = ExtD3Component;
-    exports.ɵdl = d3MetaData;
-    exports.ɵdu = ExtDataitemComponent;
-    exports.ɵdt = dataitemMetaData;
-    exports.ɵdw = ExtDataviewComponent;
-    exports.ɵdv = dataviewMetaData;
-    exports.ɵiu = ExtDatecellComponent;
-    exports.ɵit = datecellMetaData;
-    exports.ɵjs = ExtDatecolumnComponent;
-    exports.ɵjr = datecolumnMetaData;
-    exports.ɵfq = ExtDatefieldComponent;
-    exports.ɵfp = datefieldMetaData;
-    exports.ɵmq = ExtDatepanelComponent;
-    exports.ɵmp = datepanelMetaData;
-    exports.ɵnc = ExtDatepickerComponent;
-    exports.ɵnb = datepickerMetaData;
-    exports.ɵfs = ExtDatepickerfieldComponent;
-    exports.ɵfr = datepickerfieldMetaData;
-    exports.ɵfu = ExtDatepickernativefieldComponent;
-    exports.ɵft = datepickernativefieldMetaData;
-    exports.ɵms = ExtDatetitleComponent;
-    exports.ɵmr = datetitleMetaData;
-    exports.ɵhq = ExtDatetriggerComponent;
-    exports.ɵhp = datetriggerMetaData;
-    exports.ɵeu = ExtDialogComponent;
-    exports.ɵet = dialogMetaData;
-    exports.ɵfw = ExtDisplayfieldComponent;
-    exports.ɵfv = displayfieldMetaData;
-    exports.ɵey = ExtDrawComponent;
-    exports.ɵex = drawMetaData;
-    exports.ɵfc = ExtEditorComponent;
-    exports.ɵfb = editorMetaData;
-    exports.ɵfy = ExtEmailfieldComponent;
-    exports.ɵfx = emailfieldMetaData;
-    exports.ɵdy = ExtEmptytextComponent;
-    exports.ɵdx = emptytextMetaData;
-    exports.ɵhs = ExtExpandtriggerComponent;
-    exports.ɵhr = expandtriggerMetaData;
-    exports.ɵga = ExtFieldComponent;
-    exports.ɵfz = fieldMetaData;
-    exports.ɵfo = ExtFieldcontainerComponent;
-    exports.ɵfn = fieldcontainerMetaData;
-    exports.ɵgm = ExtFieldpanelComponent;
-    exports.ɵgl = fieldpanelMetaData;
-    exports.ɵii = ExtFieldsetComponent;
-    exports.ɵih = fieldsetMetaData;
-    exports.ɵge = ExtFilebuttonComponent;
-    exports.ɵgd = filebuttonMetaData;
-    exports.ɵgc = ExtFilefieldComponent;
-    exports.ɵgb = filefieldMetaData;
-    exports.ɵik = ExtFormpanelComponent;
-    exports.ɵij = formpanelMetaData;
-    exports.ɵqu = ExtGaugeComponent;
-    exports.ɵqt = gaugeMetaData;
-    exports.ɵqy = ExtGoogle_mapComponent;
-    exports.ɵqx = google_mapMetaData;
-    exports.ɵke = ExtGridComponent;
-    exports.ɵkd = gridMetaData;
-    exports.ɵiq = ExtGridcellComponent;
-    exports.ɵip = gridcellMetaData;
-    exports.ɵim = ExtGridcellbaseComponent;
-    exports.ɵil = gridcellbaseMetaData;
-    exports.ɵjm = ExtGridcolumnComponent;
-    exports.ɵjl = gridcolumnMetaData;
-    exports.ɵkm = ExtGridcolumnsmenuComponent;
-    exports.ɵkl = gridcolumnsmenuMetaData;
-    exports.ɵko = ExtGridgroupbythismenuitemComponent;
-    exports.ɵkn = gridgroupbythismenuitemMetaData;
-    exports.ɵky = ExtGridrowComponent;
-    exports.ɵkx = gridrowMetaData;
-    exports.ɵkq = ExtGridshowingroupsmenuitemComponent;
-    exports.ɵkp = gridshowingroupsmenuitemMetaData;
-    exports.ɵks = ExtGridsortascmenuitemComponent;
-    exports.ɵkr = gridsortascmenuitemMetaData;
-    exports.ɵku = ExtGridsortdescmenuitemComponent;
-    exports.ɵkt = gridsortdescmenuitemMetaData;
-    exports.ɵle = ExtGridsummaryrowComponent;
-    exports.ɵld = gridsummaryrowMetaData;
-    exports.ɵkg = ExtHeadercontainerComponent;
-    exports.ɵkf = headercontainerMetaData;
-    exports.ɵgg = ExtHiddenfieldComponent;
-    exports.ɵgf = hiddenfieldMetaData;
-    exports.ɵli = ExtImageComponent;
-    exports.ɵlh = imageMetaData;
-    exports.ɵlk = ExtImgComponent;
-    exports.ɵlj = imgMetaData;
-    exports.ɵea = ExtIndexbarComponent;
-    exports.ɵdz = indexbarMetaData;
-    exports.ɵlm = ExtIndicatorComponent;
-    exports.ɵll = indicatorMetaData;
-    exports.ɵgi = ExtInputfieldComponent;
-    exports.ɵgh = inputfieldMetaData;
-    exports.ɵce = ExtInteractionComponent;
-    exports.ɵcd = interactionMetaData;
-    exports.ɵec = ExtItemheaderComponent;
-    exports.ɵeb = itemheaderMetaData;
-    exports.ɵlo = ExtLabelComponent;
-    exports.ɵln = labelMetaData;
-    exports.ɵcg = ExtLegendComponent;
-    exports.ɵcf = legendMetaData;
-    exports.ɵee = ExtListComponent;
-    exports.ɵed = listMetaData;
-    exports.ɵeg = ExtListitemComponent;
-    exports.ɵef = listitemMetaData;
-    exports.ɵei = ExtListswiperitemComponent;
-    exports.ɵeh = listswiperitemMetaData;
-    exports.ɵek = ExtListswiperstepperComponent;
-    exports.ɵej = listswiperstepperMetaData;
-    exports.ɵlu = ExtLoadmaskComponent;
-    exports.ɵlt = loadmaskMetaData;
-    exports.ɵki = ExtLockedgridComponent;
-    exports.ɵkh = lockedgridMetaData;
-    exports.ɵkk = ExtLockedgridregionComponent;
-    exports.ɵkj = lockedgridregionMetaData;
-    exports.ɵqw = ExtMapComponent;
-    exports.ɵqv = mapMetaData;
-    exports.ɵlw = ExtMaskComponent;
-    exports.ɵlv = maskMetaData;
-    exports.ɵly = ExtMediaComponent;
-    exports.ɵlx = mediaMetaData;
-    exports.ɵme = ExtMenuComponent;
-    exports.ɵmd = menuMetaData;
-    exports.ɵma = ExtMenucheckitemComponent;
-    exports.ɵlz = menucheckitemMetaData;
-    exports.ɵmc = ExtMenuitemComponent;
-    exports.ɵmb = menuitemMetaData;
-    exports.ɵmg = ExtMenuradioitemComponent;
-    exports.ɵmf = menuradioitemMetaData;
-    exports.ɵmi = ExtMenuseparatorComponent;
-    exports.ɵmh = menuseparatorMetaData;
-    exports.ɵhu = ExtMenutriggerComponent;
-    exports.ɵht = menutriggerMetaData;
-    exports.ɵmk = ExtMessageboxComponent;
-    exports.ɵmj = messageboxMetaData;
-    exports.ɵmm = ExtNavigationviewComponent;
-    exports.ɵml = navigationviewMetaData;
-    exports.ɵem = ExtNestedlistComponent;
-    exports.ɵel = nestedlistMetaData;
-    exports.ɵiw = ExtNumbercellComponent;
-    exports.ɵiv = numbercellMetaData;
-    exports.ɵju = ExtNumbercolumnComponent;
-    exports.ɵjt = numbercolumnMetaData;
-    exports.ɵgk = ExtNumberfieldComponent;
-    exports.ɵgj = numberfieldMetaData;
-    exports.ɵri = ExtOrgChartComponent;
-    exports.ɵrh = orgchartMetaData;
-    exports.ɵkw = ExtPagingtoolbarComponent;
-    exports.ɵkv = pagingtoolbarMetaData;
-    exports.ɵmo = ExtPanelComponent;
-    exports.ɵmn = panelMetaData;
-    exports.ɵmu = ExtPanelheaderComponent;
-    exports.ɵmt = panelheaderMetaData;
-    exports.ɵmy = ExtPaneltitleComponent;
-    exports.ɵmx = paneltitleMetaData;
-    exports.ɵqi = ExtPaneltoolComponent;
-    exports.ɵqh = paneltoolMetaData;
-    exports.ɵgo = ExtPasswordfieldComponent;
-    exports.ɵgn = passwordfieldMetaData;
-    exports.ɵne = ExtPickerComponent;
-    exports.ɵnd = pickerMetaData;
-    exports.ɵgq = ExtPickerfieldComponent;
-    exports.ɵgp = pickerfieldMetaData;
-    exports.ɵni = ExtPickerslotComponent;
-    exports.ɵnh = pickerslotMetaData;
-    exports.ɵoa = ExtPivotconfigcontainerComponent;
-    exports.ɵnz = pivotconfigcontainerMetaData;
-    exports.ɵny = ExtPivotconfigfieldComponent;
-    exports.ɵnx = pivotconfigfieldMetaData;
-    exports.ɵoc = ExtPivotconfigformComponent;
-    exports.ɵob = pivotconfigformMetaData;
-    exports.ɵoe = ExtPivotconfigpanelComponent;
-    exports.ɵod = pivotconfigpanelMetaData;
-    exports.ɵnq = ExtPivotd3containerComponent;
-    exports.ɵnp = pivotd3containerMetaData;
-    exports.ɵnw = ExtPivotgridComponent;
-    exports.ɵnv = pivotgridMetaData;
-    exports.ɵnm = ExtPivotgridcellComponent;
-    exports.ɵnl = pivotgridcellMetaData;
-    exports.ɵno = ExtPivotgridgroupcellComponent;
-    exports.ɵnn = pivotgridgroupcellMetaData;
-    exports.ɵok = ExtPivotgridrowComponent;
-    exports.ɵoj = pivotgridrowMetaData;
-    exports.ɵns = ExtPivotheatmapComponent;
-    exports.ɵnr = pivotheatmapMetaData;
-    exports.ɵoi = ExtPivotrangeeditorComponent;
-    exports.ɵoh = pivotrangeeditorMetaData;
-    exports.ɵog = ExtPivotsettingsComponent;
-    exports.ɵof = pivotsettingsMetaData;
-    exports.ɵnu = ExtPivottreemapComponent;
-    exports.ɵnt = pivottreemapMetaData;
-    exports.ɵck = ExtPolarComponent;
-    exports.ɵcj = polarMetaData;
-    exports.ɵom = ExtProgressComponent;
-    exports.ɵol = progressMetaData;
-    exports.ɵoo = ExtProgressbarwidgetComponent;
-    exports.ɵon = progressbarwidgetMetaData;
-    exports.ɵeo = ExtPullrefreshbarComponent;
-    exports.ɵen = pullrefreshbarMetaData;
-    exports.ɵeq = ExtPullrefreshspinnerComponent;
-    exports.ɵep = pullrefreshspinnerMetaData;
-    exports.ɵgs = ExtRadioComponent;
-    exports.ɵgr = radioMetaData;
-    exports.ɵgu = ExtRadiofieldComponent;
-    exports.ɵgt = radiofieldMetaData;
-    exports.ɵra = ExtRatingComponent;
-    exports.ɵqz = ratingMetaData;
-    exports.ɵhw = ExtRevealtriggerComponent;
-    exports.ɵhv = revealtriggerMetaData;
-    exports.ɵla = ExtRowbodyComponent;
-    exports.ɵkz = rowbodyMetaData;
-    exports.ɵlc = ExtRowheaderComponent;
-    exports.ɵlb = rowheaderMetaData;
-    exports.ɵjw = ExtRownumbererComponent;
-    exports.ɵjv = rownumbererMetaData;
-    exports.ɵiy = ExtRownumberercellComponent;
-    exports.ɵix = rownumberercellMetaData;
-    exports.ɵgw = ExtSearchfieldComponent;
-    exports.ɵgv = searchfieldMetaData;
-    exports.ɵoq = ExtSegmentedbuttonComponent;
-    exports.ɵop = segmentedbuttonMetaData;
-    exports.ɵgy = ExtSelectfieldComponent;
-    exports.ɵgx = selectfieldMetaData;
-    exports.ɵjy = ExtSelectioncolumnComponent;
-    exports.ɵjx = selectioncolumnMetaData;
-    exports.ɵng = ExtSelectpickerComponent;
-    exports.ɵnf = selectpickerMetaData;
-    exports.ɵos = ExtSheetComponent;
-    exports.ɵor = sheetMetaData;
-    exports.ɵes = ExtSimplelistitemComponent;
-    exports.ɵer = simplelistitemMetaData;
-    exports.ɵha = ExtSinglesliderfieldComponent;
-    exports.ɵgz = singlesliderfieldMetaData;
-    exports.ɵou = ExtSliderComponent;
-    exports.ɵot = sliderMetaData;
-    exports.ɵhc = ExtSliderfieldComponent;
-    exports.ɵhb = sliderfieldMetaData;
-    exports.ɵcm = ExtSpacefillingComponent;
-    exports.ɵcl = spacefillingMetaData;
-    exports.ɵpa = ExtSpacerComponent;
-    exports.ɵoz = spacerMetaData;
-    exports.ɵpe = ExtSparklineComponent;
-    exports.ɵpd = sparklineMetaData;
-    exports.ɵpc = ExtSparklinebarComponent;
-    exports.ɵpb = sparklinebarMetaData;
-    exports.ɵpg = ExtSparklineboxComponent;
-    exports.ɵpf = sparklineboxMetaData;
-    exports.ɵpi = ExtSparklinebulletComponent;
-    exports.ɵph = sparklinebulletMetaData;
-    exports.ɵpk = ExtSparklinediscreteComponent;
-    exports.ɵpj = sparklinediscreteMetaData;
-    exports.ɵpm = ExtSparklinelineComponent;
-    exports.ɵpl = sparklinelineMetaData;
-    exports.ɵpo = ExtSparklinepieComponent;
-    exports.ɵpn = sparklinepieMetaData;
-    exports.ɵpq = ExtSparklinetristateComponent;
-    exports.ɵpp = sparklinetristateMetaData;
-    exports.ɵhy = ExtSpindowntriggerComponent;
-    exports.ɵhx = spindowntriggerMetaData;
-    exports.ɵhe = ExtSpinnerfieldComponent;
-    exports.ɵhd = spinnerfieldMetaData;
-    exports.ɵia = ExtSpinuptriggerComponent;
-    exports.ɵhz = spinuptriggerMetaData;
-    exports.ɵps = ExtSplitbuttonComponent;
-    exports.ɵpr = splitbuttonMetaData;
-    exports.ɵfa = ExtSurfaceComponent;
-    exports.ɵez = surfaceMetaData;
-    exports.ɵpy = ExtTabComponent;
-    exports.ɵpx = tabMetaData;
-    exports.ɵpu = ExtTabbarComponent;
-    exports.ɵpt = tabbarMetaData;
-    exports.ɵnk = ExtTabletpickerComponent;
-    exports.ɵnj = tabletpickerMetaData;
-    exports.ɵpw = ExtTabpanelComponent;
-    exports.ɵpv = tabpanelMetaData;
-    exports.ɵjq = ExtTemplatecolumnComponent;
-    exports.ɵjp = templatecolumnMetaData;
-    exports.ɵhi = ExtTextareafieldComponent;
-    exports.ɵhh = textareafieldMetaData;
-    exports.ɵja = ExtTextcellComponent;
-    exports.ɵiz = textcellMetaData;
-    exports.ɵka = ExtTextcolumnComponent;
-    exports.ɵjz = textcolumnMetaData;
-    exports.ɵhg = ExtTextfieldComponent;
-    exports.ɵhf = textfieldMetaData;
-    exports.ɵow = ExtThumbComponent;
-    exports.ɵov = thumbMetaData;
-    exports.ɵhk = ExtTimefieldComponent;
-    exports.ɵhj = timefieldMetaData;
-    exports.ɵmw = ExtTimepanelComponent;
-    exports.ɵmv = timepanelMetaData;
-    exports.ɵic = ExtTimetriggerComponent;
-    exports.ɵib = timetriggerMetaData;
-    exports.ɵqc = ExtTitleComponent;
-    exports.ɵqb = titleMetaData;
-    exports.ɵqe = ExtTitlebarComponent;
-    exports.ɵqd = titlebarMetaData;
-    exports.ɵhm = ExtTogglefieldComponent;
-    exports.ɵhl = togglefieldMetaData;
-    exports.ɵoy = ExtTogglesliderComponent;
-    exports.ɵox = togglesliderMetaData;
-    exports.ɵqg = ExtToolComponent;
-    exports.ɵqf = toolMetaData;
-    exports.ɵqk = ExtToolbarComponent;
-    exports.ɵqj = toolbarMetaData;
-    exports.ɵqa = ExtTooltipComponent;
-    exports.ɵpz = tooltipMetaData;
-    exports.ɵrk = ExtTransitionComponent;
-    exports.ɵrj = transitionMetaData;
-    exports.ɵlg = ExtTreeComponent;
-    exports.ɵlf = treeMetaData;
-    exports.ɵjc = ExtTreecellComponent;
-    exports.ɵjb = treecellMetaData;
-    exports.ɵkc = ExtTreecolumnComponent;
-    exports.ɵkb = treecolumnMetaData;
-    exports.ɵlq = ExtTreelistComponent;
-    exports.ɵlp = treelistMetaData;
-    exports.ɵls = ExtTreelistitemComponent;
-    exports.ɵlr = treelistitemMetaData;
-    exports.ɵie = ExtTriggerComponent;
-    exports.ɵid = triggerMetaData;
-    exports.ɵig = ExtUrlfieldComponent;
-    exports.ɵif = urlfieldMetaData;
-    exports.ɵrc = ExtVideoComponent;
-    exports.ɵrb = videoMetaData;
-    exports.ɵre = ExtViewportComponent;
-    exports.ɵrd = viewportMetaData;
-    exports.ɵrg = ExtWidgetComponent;
-    exports.ɵrf = widgetMetaData;
-    exports.ɵje = ExtWidgetcellComponent;
-    exports.ɵjd = widgetcellMetaData;
-    exports.ɵew = ExtWindowComponent;
-    exports.ɵev = windowMetaData;
-    exports.ɵna = ExtYearpickerComponent;
-    exports.ɵmz = yearpickerMetaData;
+    exports.ɵe = base;
+    exports.ɵd = ExtActionsheetComponent;
+    exports.ɵc = actionsheetMetaData;
+    exports.ɵa = ExtAngularBootstrapComponent;
+    exports.ɵb = ExtAngularBootstrapService;
+    exports.ɵg = ExtAudioComponent;
+    exports.ɵf = audioMetaData;
+    exports.ɵca = ExtAxis3dComponent;
+    exports.ɵbz = axis3dMetaData;
+    exports.ɵiq = ExtBooleancellComponent;
+    exports.ɵip = booleancellMetaData;
+    exports.ɵjk = ExtBooleancolumnComponent;
+    exports.ɵjj = booleancolumnMetaData;
+    exports.ɵdq = ExtBoundlistComponent;
+    exports.ɵdp = boundlistMetaData;
+    exports.ɵi = ExtButtonComponent;
+    exports.ɵh = buttonMetaData;
+    exports.ɵo = ExtCalendar_calendar_pickerComponent;
+    exports.ɵn = calendar_calendar_pickerMetaData;
+    exports.ɵba = ExtCalendar_dayComponent;
+    exports.ɵz = calendar_dayMetaData;
+    exports.ɵbc = ExtCalendar_daysComponent;
+    exports.ɵbb = calendar_daysMetaData;
+    exports.ɵu = ExtCalendar_daysheaderComponent;
+    exports.ɵt = calendar_daysheaderMetaData;
+    exports.ɵbo = ExtCalendar_daysviewComponent;
+    exports.ɵbn = calendar_daysviewMetaData;
+    exports.ɵbm = ExtCalendar_dayviewComponent;
+    exports.ɵbl = calendar_dayviewMetaData;
+    exports.ɵk = ExtCalendar_eventComponent;
+    exports.ɵj = calendar_eventMetaData;
+    exports.ɵm = ExtCalendar_form_addComponent;
+    exports.ɵl = calendar_form_addMetaData;
+    exports.ɵq = ExtCalendar_form_editComponent;
+    exports.ɵp = calendar_form_editMetaData;
+    exports.ɵy = ExtCalendar_listComponent;
+    exports.ɵx = calendar_listMetaData;
+    exports.ɵbe = ExtCalendar_monthComponent;
+    exports.ɵbd = calendar_monthMetaData;
+    exports.ɵbq = ExtCalendar_monthviewComponent;
+    exports.ɵbp = calendar_monthviewMetaData;
+    exports.ɵbs = ExtCalendar_multiviewComponent;
+    exports.ɵbr = calendar_multiviewMetaData;
+    exports.ɵs = ExtCalendar_timefieldComponent;
+    exports.ɵr = calendar_timefieldMetaData;
+    exports.ɵbi = ExtCalendar_weekComponent;
+    exports.ɵbh = calendar_weekMetaData;
+    exports.ɵbk = ExtCalendar_weeksComponent;
+    exports.ɵbj = calendar_weeksMetaData;
+    exports.ɵw = ExtCalendar_weeksheaderComponent;
+    exports.ɵv = calendar_weeksheaderMetaData;
+    exports.ɵbw = ExtCalendar_weeksviewComponent;
+    exports.ɵbv = calendar_weeksviewMetaData;
+    exports.ɵbu = ExtCalendar_weekviewComponent;
+    exports.ɵbt = calendar_weekviewMetaData;
+    exports.ɵbg = ExtCalendarComponent;
+    exports.ɵbf = calendarMetaData;
+    exports.ɵby = ExtCarouselComponent;
+    exports.ɵbx = carouselMetaData;
+    exports.ɵcc = ExtCartesianComponent;
+    exports.ɵcb = cartesianMetaData;
+    exports.ɵji = ExtCelleditorComponent;
+    exports.ɵjh = celleditorMetaData;
+    exports.ɵce = ExtChartComponent;
+    exports.ɵcd = chartMetaData;
+    exports.ɵck = ExtChartnavigatorComponent;
+    exports.ɵcj = chartnavigatorMetaData;
+    exports.ɵfg = ExtCheckboxComponent;
+    exports.ɵff = checkboxMetaData;
+    exports.ɵfi = ExtCheckboxfieldComponent;
+    exports.ɵfh = checkboxfieldMetaData;
+    exports.ɵiu = ExtCheckcellComponent;
+    exports.ɵit = checkcellMetaData;
+    exports.ɵjm = ExtCheckcolumnComponent;
+    exports.ɵjl = checkcolumnMetaData;
+    exports.ɵcq = ExtChipComponent;
+    exports.ɵcp = chipMetaData;
+    exports.ɵds = ExtChipviewComponent;
+    exports.ɵdr = chipviewMetaData;
+    exports.ɵhq = ExtCleartriggerComponent;
+    exports.ɵhp = cleartriggerMetaData;
+    exports.ɵqo = ExtColorbuttonComponent;
+    exports.ɵqn = colorbuttonMetaData;
+    exports.ɵqs = ExtColorfieldComponent;
+    exports.ɵqr = colorfieldMetaData;
+    exports.ɵqq = ExtColorpickercolorpreviewComponent;
+    exports.ɵqp = colorpickercolorpreviewMetaData;
+    exports.ɵqu = ExtColorselectorComponent;
+    exports.ɵqt = colorselectorMetaData;
+    exports.ɵjq = ExtColumnComponent;
+    exports.ɵjp = columnMetaData;
+    exports.ɵfk = ExtComboboxComponent;
+    exports.ɵfj = comboboxMetaData;
+    exports.ɵfm = ExtComboboxfieldComponent;
+    exports.ɵfl = comboboxfieldMetaData;
+    exports.ɵcs = ExtComponentComponent;
+    exports.ɵcr = componentMetaData;
+    exports.ɵdu = ExtComponentdataviewComponent;
+    exports.ɵdt = componentdataviewMetaData;
+    exports.ɵcu = ExtContainerComponent;
+    exports.ɵct = containerMetaData;
+    exports.ɵfo = ExtContainerfieldComponent;
+    exports.ɵfn = containerfieldMetaData;
+    exports.ɵcw = ExtD3_canvasComponent;
+    exports.ɵcv = d3_canvasMetaData;
+    exports.ɵcy = ExtD3_heatmapComponent;
+    exports.ɵcx = d3_heatmapMetaData;
+    exports.ɵdi = ExtD3_horizontal_treeComponent;
+    exports.ɵdh = d3_horizontal_treeMetaData;
+    exports.ɵda = ExtD3_packComponent;
+    exports.ɵcz = d3_packMetaData;
+    exports.ɵdc = ExtD3_partitionComponent;
+    exports.ɵdb = d3_partitionMetaData;
+    exports.ɵde = ExtD3_sunburstComponent;
+    exports.ɵdd = d3_sunburstMetaData;
+    exports.ɵdm = ExtD3_svgComponent;
+    exports.ɵdl = d3_svgMetaData;
+    exports.ɵdg = ExtD3_treeComponent;
+    exports.ɵdf = d3_treeMetaData;
+    exports.ɵdk = ExtD3_treemapComponent;
+    exports.ɵdj = d3_treemapMetaData;
+    exports.ɵdo = ExtD3Component;
+    exports.ɵdn = d3MetaData;
+    exports.ɵdw = ExtDataitemComponent;
+    exports.ɵdv = dataitemMetaData;
+    exports.ɵdy = ExtDataviewComponent;
+    exports.ɵdx = dataviewMetaData;
+    exports.ɵiw = ExtDatecellComponent;
+    exports.ɵiv = datecellMetaData;
+    exports.ɵju = ExtDatecolumnComponent;
+    exports.ɵjt = datecolumnMetaData;
+    exports.ɵfs = ExtDatefieldComponent;
+    exports.ɵfr = datefieldMetaData;
+    exports.ɵms = ExtDatepanelComponent;
+    exports.ɵmr = datepanelMetaData;
+    exports.ɵne = ExtDatepickerComponent;
+    exports.ɵnd = datepickerMetaData;
+    exports.ɵfu = ExtDatepickerfieldComponent;
+    exports.ɵft = datepickerfieldMetaData;
+    exports.ɵfw = ExtDatepickernativefieldComponent;
+    exports.ɵfv = datepickernativefieldMetaData;
+    exports.ɵmu = ExtDatetitleComponent;
+    exports.ɵmt = datetitleMetaData;
+    exports.ɵhs = ExtDatetriggerComponent;
+    exports.ɵhr = datetriggerMetaData;
+    exports.ɵew = ExtDialogComponent;
+    exports.ɵev = dialogMetaData;
+    exports.ɵfy = ExtDisplayfieldComponent;
+    exports.ɵfx = displayfieldMetaData;
+    exports.ɵfa = ExtDrawComponent;
+    exports.ɵez = drawMetaData;
+    exports.ɵfe = ExtEditorComponent;
+    exports.ɵfd = editorMetaData;
+    exports.ɵga = ExtEmailfieldComponent;
+    exports.ɵfz = emailfieldMetaData;
+    exports.ɵea = ExtEmptytextComponent;
+    exports.ɵdz = emptytextMetaData;
+    exports.ɵhu = ExtExpandtriggerComponent;
+    exports.ɵht = expandtriggerMetaData;
+    exports.ɵgc = ExtFieldComponent;
+    exports.ɵgb = fieldMetaData;
+    exports.ɵfq = ExtFieldcontainerComponent;
+    exports.ɵfp = fieldcontainerMetaData;
+    exports.ɵgo = ExtFieldpanelComponent;
+    exports.ɵgn = fieldpanelMetaData;
+    exports.ɵik = ExtFieldsetComponent;
+    exports.ɵij = fieldsetMetaData;
+    exports.ɵgg = ExtFilebuttonComponent;
+    exports.ɵgf = filebuttonMetaData;
+    exports.ɵge = ExtFilefieldComponent;
+    exports.ɵgd = filefieldMetaData;
+    exports.ɵim = ExtFormpanelComponent;
+    exports.ɵil = formpanelMetaData;
+    exports.ɵqw = ExtGaugeComponent;
+    exports.ɵqv = gaugeMetaData;
+    exports.ɵra = ExtGoogle_mapComponent;
+    exports.ɵqz = google_mapMetaData;
+    exports.ɵkg = ExtGridComponent;
+    exports.ɵkf = gridMetaData;
+    exports.ɵis = ExtGridcellComponent;
+    exports.ɵir = gridcellMetaData;
+    exports.ɵio = ExtGridcellbaseComponent;
+    exports.ɵin = gridcellbaseMetaData;
+    exports.ɵjo = ExtGridcolumnComponent;
+    exports.ɵjn = gridcolumnMetaData;
+    exports.ɵko = ExtGridcolumnsmenuComponent;
+    exports.ɵkn = gridcolumnsmenuMetaData;
+    exports.ɵkq = ExtGridgroupbythismenuitemComponent;
+    exports.ɵkp = gridgroupbythismenuitemMetaData;
+    exports.ɵla = ExtGridrowComponent;
+    exports.ɵkz = gridrowMetaData;
+    exports.ɵks = ExtGridshowingroupsmenuitemComponent;
+    exports.ɵkr = gridshowingroupsmenuitemMetaData;
+    exports.ɵku = ExtGridsortascmenuitemComponent;
+    exports.ɵkt = gridsortascmenuitemMetaData;
+    exports.ɵkw = ExtGridsortdescmenuitemComponent;
+    exports.ɵkv = gridsortdescmenuitemMetaData;
+    exports.ɵlg = ExtGridsummaryrowComponent;
+    exports.ɵlf = gridsummaryrowMetaData;
+    exports.ɵki = ExtHeadercontainerComponent;
+    exports.ɵkh = headercontainerMetaData;
+    exports.ɵgi = ExtHiddenfieldComponent;
+    exports.ɵgh = hiddenfieldMetaData;
+    exports.ɵlk = ExtImageComponent;
+    exports.ɵlj = imageMetaData;
+    exports.ɵlm = ExtImgComponent;
+    exports.ɵll = imgMetaData;
+    exports.ɵec = ExtIndexbarComponent;
+    exports.ɵeb = indexbarMetaData;
+    exports.ɵlo = ExtIndicatorComponent;
+    exports.ɵln = indicatorMetaData;
+    exports.ɵgk = ExtInputfieldComponent;
+    exports.ɵgj = inputfieldMetaData;
+    exports.ɵcg = ExtInteractionComponent;
+    exports.ɵcf = interactionMetaData;
+    exports.ɵee = ExtItemheaderComponent;
+    exports.ɵed = itemheaderMetaData;
+    exports.ɵlq = ExtLabelComponent;
+    exports.ɵlp = labelMetaData;
+    exports.ɵci = ExtLegendComponent;
+    exports.ɵch = legendMetaData;
+    exports.ɵeg = ExtListComponent;
+    exports.ɵef = listMetaData;
+    exports.ɵei = ExtListitemComponent;
+    exports.ɵeh = listitemMetaData;
+    exports.ɵek = ExtListswiperitemComponent;
+    exports.ɵej = listswiperitemMetaData;
+    exports.ɵem = ExtListswiperstepperComponent;
+    exports.ɵel = listswiperstepperMetaData;
+    exports.ɵlw = ExtLoadmaskComponent;
+    exports.ɵlv = loadmaskMetaData;
+    exports.ɵkk = ExtLockedgridComponent;
+    exports.ɵkj = lockedgridMetaData;
+    exports.ɵkm = ExtLockedgridregionComponent;
+    exports.ɵkl = lockedgridregionMetaData;
+    exports.ɵqy = ExtMapComponent;
+    exports.ɵqx = mapMetaData;
+    exports.ɵly = ExtMaskComponent;
+    exports.ɵlx = maskMetaData;
+    exports.ɵma = ExtMediaComponent;
+    exports.ɵlz = mediaMetaData;
+    exports.ɵmg = ExtMenuComponent;
+    exports.ɵmf = menuMetaData;
+    exports.ɵmc = ExtMenucheckitemComponent;
+    exports.ɵmb = menucheckitemMetaData;
+    exports.ɵme = ExtMenuitemComponent;
+    exports.ɵmd = menuitemMetaData;
+    exports.ɵmi = ExtMenuradioitemComponent;
+    exports.ɵmh = menuradioitemMetaData;
+    exports.ɵmk = ExtMenuseparatorComponent;
+    exports.ɵmj = menuseparatorMetaData;
+    exports.ɵhw = ExtMenutriggerComponent;
+    exports.ɵhv = menutriggerMetaData;
+    exports.ɵmm = ExtMessageboxComponent;
+    exports.ɵml = messageboxMetaData;
+    exports.ɵmo = ExtNavigationviewComponent;
+    exports.ɵmn = navigationviewMetaData;
+    exports.ɵeo = ExtNestedlistComponent;
+    exports.ɵen = nestedlistMetaData;
+    exports.ɵiy = ExtNumbercellComponent;
+    exports.ɵix = numbercellMetaData;
+    exports.ɵjw = ExtNumbercolumnComponent;
+    exports.ɵjv = numbercolumnMetaData;
+    exports.ɵgm = ExtNumberfieldComponent;
+    exports.ɵgl = numberfieldMetaData;
+    exports.ɵky = ExtPagingtoolbarComponent;
+    exports.ɵkx = pagingtoolbarMetaData;
+    exports.ɵmq = ExtPanelComponent;
+    exports.ɵmp = panelMetaData;
+    exports.ɵmw = ExtPanelheaderComponent;
+    exports.ɵmv = panelheaderMetaData;
+    exports.ɵna = ExtPaneltitleComponent;
+    exports.ɵmz = paneltitleMetaData;
+    exports.ɵqk = ExtPaneltoolComponent;
+    exports.ɵqj = paneltoolMetaData;
+    exports.ɵgq = ExtPasswordfieldComponent;
+    exports.ɵgp = passwordfieldMetaData;
+    exports.ɵng = ExtPickerComponent;
+    exports.ɵnf = pickerMetaData;
+    exports.ɵgs = ExtPickerfieldComponent;
+    exports.ɵgr = pickerfieldMetaData;
+    exports.ɵnk = ExtPickerslotComponent;
+    exports.ɵnj = pickerslotMetaData;
+    exports.ɵoc = ExtPivotconfigcontainerComponent;
+    exports.ɵob = pivotconfigcontainerMetaData;
+    exports.ɵoa = ExtPivotconfigfieldComponent;
+    exports.ɵnz = pivotconfigfieldMetaData;
+    exports.ɵoe = ExtPivotconfigformComponent;
+    exports.ɵod = pivotconfigformMetaData;
+    exports.ɵog = ExtPivotconfigpanelComponent;
+    exports.ɵof = pivotconfigpanelMetaData;
+    exports.ɵns = ExtPivotd3containerComponent;
+    exports.ɵnr = pivotd3containerMetaData;
+    exports.ɵny = ExtPivotgridComponent;
+    exports.ɵnx = pivotgridMetaData;
+    exports.ɵno = ExtPivotgridcellComponent;
+    exports.ɵnn = pivotgridcellMetaData;
+    exports.ɵnq = ExtPivotgridgroupcellComponent;
+    exports.ɵnp = pivotgridgroupcellMetaData;
+    exports.ɵom = ExtPivotgridrowComponent;
+    exports.ɵol = pivotgridrowMetaData;
+    exports.ɵnu = ExtPivotheatmapComponent;
+    exports.ɵnt = pivotheatmapMetaData;
+    exports.ɵok = ExtPivotrangeeditorComponent;
+    exports.ɵoj = pivotrangeeditorMetaData;
+    exports.ɵoi = ExtPivotsettingsComponent;
+    exports.ɵoh = pivotsettingsMetaData;
+    exports.ɵnw = ExtPivottreemapComponent;
+    exports.ɵnv = pivottreemapMetaData;
+    exports.ɵcm = ExtPolarComponent;
+    exports.ɵcl = polarMetaData;
+    exports.ɵoo = ExtProgressComponent;
+    exports.ɵon = progressMetaData;
+    exports.ɵoq = ExtProgressbarwidgetComponent;
+    exports.ɵop = progressbarwidgetMetaData;
+    exports.ɵeq = ExtPullrefreshbarComponent;
+    exports.ɵep = pullrefreshbarMetaData;
+    exports.ɵes = ExtPullrefreshspinnerComponent;
+    exports.ɵer = pullrefreshspinnerMetaData;
+    exports.ɵgu = ExtRadioComponent;
+    exports.ɵgt = radioMetaData;
+    exports.ɵgw = ExtRadiofieldComponent;
+    exports.ɵgv = radiofieldMetaData;
+    exports.ɵrc = ExtRatingComponent;
+    exports.ɵrb = ratingMetaData;
+    exports.ɵhy = ExtRevealtriggerComponent;
+    exports.ɵhx = revealtriggerMetaData;
+    exports.ɵlc = ExtRowbodyComponent;
+    exports.ɵlb = rowbodyMetaData;
+    exports.ɵle = ExtRowheaderComponent;
+    exports.ɵld = rowheaderMetaData;
+    exports.ɵjy = ExtRownumbererComponent;
+    exports.ɵjx = rownumbererMetaData;
+    exports.ɵja = ExtRownumberercellComponent;
+    exports.ɵiz = rownumberercellMetaData;
+    exports.ɵgy = ExtSearchfieldComponent;
+    exports.ɵgx = searchfieldMetaData;
+    exports.ɵos = ExtSegmentedbuttonComponent;
+    exports.ɵor = segmentedbuttonMetaData;
+    exports.ɵha = ExtSelectfieldComponent;
+    exports.ɵgz = selectfieldMetaData;
+    exports.ɵka = ExtSelectioncolumnComponent;
+    exports.ɵjz = selectioncolumnMetaData;
+    exports.ɵni = ExtSelectpickerComponent;
+    exports.ɵnh = selectpickerMetaData;
+    exports.ɵou = ExtSheetComponent;
+    exports.ɵot = sheetMetaData;
+    exports.ɵeu = ExtSimplelistitemComponent;
+    exports.ɵet = simplelistitemMetaData;
+    exports.ɵhc = ExtSinglesliderfieldComponent;
+    exports.ɵhb = singlesliderfieldMetaData;
+    exports.ɵow = ExtSliderComponent;
+    exports.ɵov = sliderMetaData;
+    exports.ɵhe = ExtSliderfieldComponent;
+    exports.ɵhd = sliderfieldMetaData;
+    exports.ɵco = ExtSpacefillingComponent;
+    exports.ɵcn = spacefillingMetaData;
+    exports.ɵpc = ExtSpacerComponent;
+    exports.ɵpb = spacerMetaData;
+    exports.ɵpg = ExtSparklineComponent;
+    exports.ɵpf = sparklineMetaData;
+    exports.ɵpe = ExtSparklinebarComponent;
+    exports.ɵpd = sparklinebarMetaData;
+    exports.ɵpi = ExtSparklineboxComponent;
+    exports.ɵph = sparklineboxMetaData;
+    exports.ɵpk = ExtSparklinebulletComponent;
+    exports.ɵpj = sparklinebulletMetaData;
+    exports.ɵpm = ExtSparklinediscreteComponent;
+    exports.ɵpl = sparklinediscreteMetaData;
+    exports.ɵpo = ExtSparklinelineComponent;
+    exports.ɵpn = sparklinelineMetaData;
+    exports.ɵpq = ExtSparklinepieComponent;
+    exports.ɵpp = sparklinepieMetaData;
+    exports.ɵps = ExtSparklinetristateComponent;
+    exports.ɵpr = sparklinetristateMetaData;
+    exports.ɵia = ExtSpindowntriggerComponent;
+    exports.ɵhz = spindowntriggerMetaData;
+    exports.ɵhg = ExtSpinnerfieldComponent;
+    exports.ɵhf = spinnerfieldMetaData;
+    exports.ɵic = ExtSpinuptriggerComponent;
+    exports.ɵib = spinuptriggerMetaData;
+    exports.ɵpu = ExtSplitbuttonComponent;
+    exports.ɵpt = splitbuttonMetaData;
+    exports.ɵfc = ExtSurfaceComponent;
+    exports.ɵfb = surfaceMetaData;
+    exports.ɵqa = ExtTabComponent;
+    exports.ɵpz = tabMetaData;
+    exports.ɵpw = ExtTabbarComponent;
+    exports.ɵpv = tabbarMetaData;
+    exports.ɵnm = ExtTabletpickerComponent;
+    exports.ɵnl = tabletpickerMetaData;
+    exports.ɵpy = ExtTabpanelComponent;
+    exports.ɵpx = tabpanelMetaData;
+    exports.ɵjs = ExtTemplatecolumnComponent;
+    exports.ɵjr = templatecolumnMetaData;
+    exports.ɵhk = ExtTextareafieldComponent;
+    exports.ɵhj = textareafieldMetaData;
+    exports.ɵjc = ExtTextcellComponent;
+    exports.ɵjb = textcellMetaData;
+    exports.ɵkc = ExtTextcolumnComponent;
+    exports.ɵkb = textcolumnMetaData;
+    exports.ɵhi = ExtTextfieldComponent;
+    exports.ɵhh = textfieldMetaData;
+    exports.ɵoy = ExtThumbComponent;
+    exports.ɵox = thumbMetaData;
+    exports.ɵhm = ExtTimefieldComponent;
+    exports.ɵhl = timefieldMetaData;
+    exports.ɵmy = ExtTimepanelComponent;
+    exports.ɵmx = timepanelMetaData;
+    exports.ɵie = ExtTimetriggerComponent;
+    exports.ɵid = timetriggerMetaData;
+    exports.ɵqe = ExtTitleComponent;
+    exports.ɵqd = titleMetaData;
+    exports.ɵqg = ExtTitlebarComponent;
+    exports.ɵqf = titlebarMetaData;
+    exports.ɵho = ExtTogglefieldComponent;
+    exports.ɵhn = togglefieldMetaData;
+    exports.ɵpa = ExtTogglesliderComponent;
+    exports.ɵoz = togglesliderMetaData;
+    exports.ɵqi = ExtToolComponent;
+    exports.ɵqh = toolMetaData;
+    exports.ɵqm = ExtToolbarComponent;
+    exports.ɵql = toolbarMetaData;
+    exports.ɵqc = ExtTooltipComponent;
+    exports.ɵqb = tooltipMetaData;
+    exports.ɵli = ExtTreeComponent;
+    exports.ɵlh = treeMetaData;
+    exports.ɵje = ExtTreecellComponent;
+    exports.ɵjd = treecellMetaData;
+    exports.ɵke = ExtTreecolumnComponent;
+    exports.ɵkd = treecolumnMetaData;
+    exports.ɵls = ExtTreelistComponent;
+    exports.ɵlr = treelistMetaData;
+    exports.ɵlu = ExtTreelistitemComponent;
+    exports.ɵlt = treelistitemMetaData;
+    exports.ɵig = ExtTriggerComponent;
+    exports.ɵif = triggerMetaData;
+    exports.ɵii = ExtUrlfieldComponent;
+    exports.ɵih = urlfieldMetaData;
+    exports.ɵre = ExtVideoComponent;
+    exports.ɵrd = videoMetaData;
+    exports.ɵrg = ExtViewportComponent;
+    exports.ɵrf = viewportMetaData;
+    exports.ɵri = ExtWidgetComponent;
+    exports.ɵrh = widgetMetaData;
+    exports.ɵjg = ExtWidgetcellComponent;
+    exports.ɵjf = widgetcellMetaData;
+    exports.ɵey = ExtWindowComponent;
+    exports.ɵex = windowMetaData;
+    exports.ɵnc = ExtYearpickerComponent;
+    exports.ɵnb = yearpickerMetaData;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

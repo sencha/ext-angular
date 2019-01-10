@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -354,10 +358,11 @@ export class gridgroupbythismenuitemMetaData {
   inputs: gridgroupbythismenuitemMetaData.PROPERTIES,
   outputs: gridgroupbythismenuitemMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtGridgroupbythismenuitemComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtGridgroupbythismenuitemComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,gridgroupbythismenuitemMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,gridgroupbythismenuitemMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridgroupbythismenuitemMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(gridgroupbythismenuitemMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

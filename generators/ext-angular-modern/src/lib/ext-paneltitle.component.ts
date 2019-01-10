@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -336,10 +340,11 @@ export class paneltitleMetaData {
   inputs: paneltitleMetaData.PROPERTIES,
   outputs: paneltitleMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtPaneltitleComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtPaneltitleComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,paneltitleMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,paneltitleMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,paneltitleMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(paneltitleMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

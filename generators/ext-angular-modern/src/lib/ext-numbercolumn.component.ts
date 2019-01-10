@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -92,6 +96,7 @@ export class numbercolumnMetaData {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -252,6 +257,7 @@ export class numbercolumnMetaData {
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -466,10 +472,11 @@ export class numbercolumnMetaData {
   inputs: numbercolumnMetaData.PROPERTIES,
   outputs: numbercolumnMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtNumbercolumnComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtNumbercolumnComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,numbercolumnMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,numbercolumnMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numbercolumnMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(numbercolumnMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

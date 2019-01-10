@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -502,10 +506,11 @@ export class componentdataviewMetaData {
   inputs: componentdataviewMetaData.PROPERTIES,
   outputs: componentdataviewMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtComponentdataviewComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtComponentdataviewComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,componentdataviewMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,componentdataviewMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,componentdataviewMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(componentdataviewMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

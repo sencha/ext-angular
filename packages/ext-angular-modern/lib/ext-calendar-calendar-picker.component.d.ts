@@ -8,7 +8,8 @@ export declare class calendar_calendar_pickerMetaData {
     static EVENTNAMES: string[];
 }
 export declare class ExtCalendar_calendar_pickerComponent extends base implements OnInit, AfterContentInit, OnChanges {
-    constructor(eRef: ElementRef);
+    hostComponent: base;
+    constructor(eRef: ElementRef, hostComponent: base);
     ngOnInit(): void;
     ngAfterContentInit(): void;
 }

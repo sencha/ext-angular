@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -198,10 +202,11 @@ export class pivotgridcellMetaData {
   inputs: pivotgridcellMetaData.PROPERTIES,
   outputs: pivotgridcellMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtPivotgridcellComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtPivotgridcellComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,pivotgridcellMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,pivotgridcellMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridcellMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(pivotgridcellMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

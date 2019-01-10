@@ -8,7 +8,8 @@ export declare class calendar_eventMetaData {
     static EVENTNAMES: string[];
 }
 export declare class ExtCalendar_eventComponent extends base implements OnInit, AfterContentInit, OnChanges {
-    constructor(eRef: ElementRef);
+    hostComponent: base;
+    constructor(eRef: ElementRef, hostComponent: base);
     ngOnInit(): void;
     ngAfterContentInit(): void;
 }

@@ -8,7 +8,8 @@ export declare class calendar_form_editMetaData {
     static EVENTNAMES: string[];
 }
 export declare class ExtCalendar_form_editComponent extends base implements OnInit, AfterContentInit, OnChanges {
-    constructor(eRef: ElementRef);
+    hostComponent: base;
+    constructor(eRef: ElementRef, hostComponent: base);
     ngOnInit(): void;
     ngAfterContentInit(): void;
 }
