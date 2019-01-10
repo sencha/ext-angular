@@ -24,9 +24,9 @@ Issues
 
 
   - [Aniket] UI for SearchField is breaking. Search form is not docked right. 
- (Form fields - Eg( All>Components>Forms>Searchfield or ALl->Components>TitleBar) - PUT up a simple example
-- angular/api-docs/modern/modern/src/grid/plugin have CellEditing and Editable defines selectfield 
-as one of the columns of grid but on editing that column selectfield is not rendered. [Aniket : Fixed programatically. May have to revisit for proper fix - Marc?] (Aniket - Need change in base.tpl)
+ (Form fields - Eg( All>Components>Forms>Searchfield or ALl->Components>TitleBar) - Need to add align in source code of button and searchfield.
+
+
 
 
 
@@ -55,6 +55,9 @@ Fixed
 
   - [Aniket] DragResizeValidation calendar example does not restrict dragging and resizing - Put a simple example 
   Issues (faced by Alisha) in api-docs examples: 
+
+  - angular/api-docs/modern/modern/src/grid/plugin have CellEditing and Editable defines selectfield 
+as one of the columns of grid but on editing that column selectfield is not rendered. [Aniket : Fixed programatically. May have to revisit for proper fix - Marc?] (Aniket - Need change in base.tpl) - FIxed
 
 
 
