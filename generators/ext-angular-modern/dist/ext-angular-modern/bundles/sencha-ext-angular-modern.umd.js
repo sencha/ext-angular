@@ -232,7 +232,7 @@
         /**
          * @return {?}
          */
-        base.prototype.baseAfterContentInitNew = /**
+        base.prototype.baseAfterContentInit = /**
          * @return {?}
          */
             function () {
@@ -336,7 +336,7 @@
         /**
          * @return {?}
          */
-        base.prototype.baseAfterContentInit = /**
+        base.prototype.baseAfterContentInitngFor = /**
          * @return {?}
          */
             function () {

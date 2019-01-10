@@ -102,7 +102,7 @@ export class base {
 
   @ContentChildren('item') items: QueryList<any>
   @ContentChildren('item', { read: ElementRef }) items2: QueryList<ElementRef>
-  baseAfterContentInitNew() {
+  baseAfterContentInit() {
     //console.log('\nbaseAfterContentInit')
 
     if (this.items.length < 2) {
@@ -190,7 +190,7 @@ export class base {
 
   @ContentChildren('item') _items: QueryList<any>
   @ContentChildren('item', { read: ElementRef }) _elRefItems: QueryList<ElementRef>
-  baseAfterContentInit() {
+  baseAfterContentInitngFor() {
     console.log('host')
     console.log(this._hostComponent)
     console.log('native')

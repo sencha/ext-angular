@@ -196,7 +196,7 @@ var base = /** @class */ (function () {
     /**
      * @return {?}
      */
-    base.prototype.baseAfterContentInitNew = /**
+    base.prototype.baseAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -300,7 +300,7 @@ var base = /** @class */ (function () {
     /**
      * @return {?}
      */
-    base.prototype.baseAfterContentInit = /**
+    base.prototype.baseAfterContentInitngFor = /**
      * @return {?}
      */
     function () {
