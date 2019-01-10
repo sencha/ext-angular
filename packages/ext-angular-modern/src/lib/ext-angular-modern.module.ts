@@ -31,6 +31,7 @@ import { ExtLegendComponent } from './ext-legend.component';
 import { ExtChartnavigatorComponent } from './ext-chartnavigator.component';
 import { ExtPolarComponent } from './ext-polar.component';
 import { ExtSpacefillingComponent } from './ext-spacefilling.component';
+import { ExtChipComponent } from './ext-chip.component';
 import { ExtComponentComponent } from './ext-component.component';
 import { ExtContainerComponent } from './ext-container.component';
 import { ExtD3_canvasComponent } from './ext-d3-canvas.component';
@@ -44,6 +45,7 @@ import { ExtD3_treemapComponent } from './ext-d3-treemap.component';
 import { ExtD3_svgComponent } from './ext-d3-svg.component';
 import { ExtD3Component } from './ext-d3.component';
 import { ExtBoundlistComponent } from './ext-boundlist.component';
+import { ExtChipviewComponent } from './ext-chipview.component';
 import { ExtComponentdataviewComponent } from './ext-componentdataview.component';
 import { ExtDataitemComponent } from './ext-dataitem.component';
 import { ExtDataviewComponent } from './ext-dataview.component';
@@ -168,6 +170,7 @@ import { ExtPaneltitleComponent } from './ext-paneltitle.component';
 import { ExtYearpickerComponent } from './ext-yearpicker.component';
 import { ExtDatepickerComponent } from './ext-datepicker.component';
 import { ExtPickerComponent } from './ext-picker.component';
+import { ExtSelectpickerComponent } from './ext-selectpicker.component';
 import { ExtPickerslotComponent } from './ext-pickerslot.component';
 import { ExtTabletpickerComponent } from './ext-tabletpicker.component';
 import { ExtPivotgridcellComponent } from './ext-pivotgridcell.component';
@@ -209,6 +212,10 @@ import { ExtTitlebarComponent } from './ext-titlebar.component';
 import { ExtToolComponent } from './ext-tool.component';
 import { ExtPaneltoolComponent } from './ext-paneltool.component';
 import { ExtToolbarComponent } from './ext-toolbar.component';
+import { ExtColorbuttonComponent } from './ext-colorbutton.component';
+import { ExtColorpickercolorpreviewComponent } from './ext-colorpickercolorpreview.component';
+import { ExtColorfieldComponent } from './ext-colorfield.component';
+import { ExtColorselectorComponent } from './ext-colorselector.component';
 import { ExtGaugeComponent } from './ext-gauge.component';
 import { ExtMapComponent } from './ext-map.component';
 import { ExtGoogle_mapComponent } from './ext-google-map.component';
@@ -216,6 +223,7 @@ import { ExtRatingComponent } from './ext-rating.component';
 import { ExtVideoComponent } from './ext-video.component';
 import { ExtViewportComponent } from './ext-viewport.component';
 import { ExtWidgetComponent } from './ext-widget.component';
+import { ExtOrgChartComponent } from './ext-orgchart.component';
 import { ExtTransitionComponent } from './ext-transition.component';
 
 @NgModule({
@@ -254,6 +262,7 @@ import { ExtTransitionComponent } from './ext-transition.component';
     ExtChartnavigatorComponent,
     ExtPolarComponent,
     ExtSpacefillingComponent,
+    ExtChipComponent,
     ExtComponentComponent,
     ExtContainerComponent,
     ExtD3_canvasComponent,
@@ -267,6 +276,7 @@ import { ExtTransitionComponent } from './ext-transition.component';
     ExtD3_svgComponent,
     ExtD3Component,
     ExtBoundlistComponent,
+    ExtChipviewComponent,
     ExtComponentdataviewComponent,
     ExtDataitemComponent,
     ExtDataviewComponent,
@@ -391,6 +401,7 @@ import { ExtTransitionComponent } from './ext-transition.component';
     ExtYearpickerComponent,
     ExtDatepickerComponent,
     ExtPickerComponent,
+    ExtSelectpickerComponent,
     ExtPickerslotComponent,
     ExtTabletpickerComponent,
     ExtPivotgridcellComponent,
@@ -432,6 +443,10 @@ import { ExtTransitionComponent } from './ext-transition.component';
     ExtToolComponent,
     ExtPaneltoolComponent,
     ExtToolbarComponent,
+    ExtColorbuttonComponent,
+    ExtColorpickercolorpreviewComponent,
+    ExtColorfieldComponent,
+    ExtColorselectorComponent,
     ExtGaugeComponent,
     ExtMapComponent,
     ExtGoogle_mapComponent,
@@ -439,6 +454,7 @@ import { ExtTransitionComponent } from './ext-transition.component';
     ExtVideoComponent,
     ExtViewportComponent,
     ExtWidgetComponent,
+    ExtOrgChartComponent,
     ExtTransitionComponent
   ],
   exports: [
@@ -474,6 +490,7 @@ import { ExtTransitionComponent } from './ext-transition.component';
     ExtChartnavigatorComponent,
     ExtPolarComponent,
     ExtSpacefillingComponent,
+    ExtChipComponent,
     ExtComponentComponent,
     ExtContainerComponent,
     ExtD3_canvasComponent,
@@ -487,6 +504,7 @@ import { ExtTransitionComponent } from './ext-transition.component';
     ExtD3_svgComponent,
     ExtD3Component,
     ExtBoundlistComponent,
+    ExtChipviewComponent,
     ExtComponentdataviewComponent,
     ExtDataitemComponent,
     ExtDataviewComponent,
@@ -611,6 +629,7 @@ import { ExtTransitionComponent } from './ext-transition.component';
     ExtYearpickerComponent,
     ExtDatepickerComponent,
     ExtPickerComponent,
+    ExtSelectpickerComponent,
     ExtPickerslotComponent,
     ExtTabletpickerComponent,
     ExtPivotgridcellComponent,
@@ -652,6 +671,10 @@ import { ExtTransitionComponent } from './ext-transition.component';
     ExtToolComponent,
     ExtPaneltoolComponent,
     ExtToolbarComponent,
+    ExtColorbuttonComponent,
+    ExtColorpickercolorpreviewComponent,
+    ExtColorfieldComponent,
+    ExtColorselectorComponent,
     ExtGaugeComponent,
     ExtMapComponent,
     ExtGoogle_mapComponent,
@@ -659,6 +682,7 @@ import { ExtTransitionComponent } from './ext-transition.component';
     ExtVideoComponent,
     ExtViewportComponent,
     ExtWidgetComponent,
+    ExtOrgChartComponent,
     ExtTransitionComponent
   ]
 })
