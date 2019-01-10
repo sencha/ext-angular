@@ -41,9 +41,9 @@ export class base {
     let me: any = this
     let o: any = {}
     o.xtype = metaData.XTYPE
+    let listneresProvided = false
     for (var i = 0; i < me.metaData.PROPERTIES.length; i++) { 
       var prop = me.metaData.PROPERTIES[i];
-      //prop== 'title' is needed for children of tabpanel. 
       if (prop == 'handler') {
         if (me[prop] != undefined) {
           o[prop] = me[prop]
@@ -52,6 +52,10 @@ export class base {
       //need to handle listeners coming in here
       if ((o.xtype === 'cartesian' || o.xtype === 'polar') && prop === 'layout') {
       }
+      else if(prop == 'listeners' && me[prop] != undefined) {
+        o[prop] = me[prop];
+        listneresProvided = true;
+      } 
       else {
         if (me[prop] != undefined && 
             prop != 'listeners' && 
@@ -71,22 +75,26 @@ export class base {
     if (me.config !== {} ) {
       Ext.apply(o, me.config);
     }
-    o.listeners = {}
-    var EVENTS = metaData.EVENTS
-    EVENTS.forEach(function (event: any, index: any, array: any) {
-      let eventname: any = event.name
-      let eventparameters: any = event.parameters
-      o.listeners[eventname] = function() {
-        let parameters: any = eventparameters
-        let parms = parameters.split(',')
-        let args = Array.prototype.slice.call(arguments)
-        let emitparms: any = {}
-        for (let i = 0, j = parms.length; i < j; i++ ) {
-          emitparms[parms[i]] = args[i];
+
+    if(!listneresProvided) {
+      o.listeners = {}
+      var EVENTS = metaData.EVENTS
+      EVENTS.forEach(function (event: any, index: any, array: any) {
+        let eventname: any = event.name
+        let eventparameters: any = event.parameters
+        o.listeners[eventname] = function() {
+          let parameters: any = eventparameters
+          let parms = parameters.split(',')
+          let args = Array.prototype.slice.call(arguments)
+          let emitparms: any = {}
+          for (let i = 0, j = parms.length; i < j; i++ ) {
+            emitparms[parms[i]] = args[i];
+          }
+          me[eventname].emit(emitparms)
         }
-        me[eventname].emit(emitparms)
-      }
-    })
+      })
+    }
+
     if (this._nativeElement.parentElement != null) {
       o.renderTo = this._nativeElement
     }

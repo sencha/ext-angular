@@ -1,4 +1,4 @@
-import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, Component, Host, Optional, SkipSelf, ElementRef, forwardRef, EventEmitter, ContentChildren, NgModule, defineInjectable, inject, INJECTOR } from '@angular/core';
+import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, ElementRef, EventEmitter, ContentChildren, Component, Host, Optional, SkipSelf, forwardRef, NgModule, defineInjectable, inject, INJECTOR } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -122,10 +122,11 @@ class base {
         /** @type {?} */
         let o = {};
         o.xtype = metaData.XTYPE;
+        /** @type {?} */
+        let listneresProvided = false;
         for (var i = 0; i < me.metaData.PROPERTIES.length; i++) {
             /** @type {?} */
             var prop = me.metaData.PROPERTIES[i];
-            //prop== 'title' is needed for children of tabpanel. 
             if (prop == 'handler') {
                 if (me[prop] != undefined) {
                     o[prop] = me[prop];
@@ -133,6 +134,10 @@ class base {
             }
             //need to handle listeners coming in here
             if ((o.xtype === 'cartesian' || o.xtype === 'polar') && prop === 'layout') ;
+            else if (prop == 'listeners' && me[prop] != undefined) {
+                o[prop] = me[prop];
+                listneresProvided = true;
+            }
             else {
                 if (me[prop] != undefined &&
                     prop != 'listeners' &&
@@ -152,29 +157,31 @@ class base {
         if (me.config !== {}) {
             Ext.apply(o, me.config);
         }
-        o.listeners = {};
-        /** @type {?} */
-        var EVENTS = metaData.EVENTS;
-        EVENTS.forEach(function (event, index, array) {
+        if (!listneresProvided) {
+            o.listeners = {};
             /** @type {?} */
-            let eventname = event.name;
-            /** @type {?} */
-            let eventparameters = event.parameters;
-            o.listeners[eventname] = function () {
+            var EVENTS = metaData.EVENTS;
+            EVENTS.forEach(function (event, index, array) {
                 /** @type {?} */
-                let parameters = eventparameters;
+                let eventname = event.name;
                 /** @type {?} */
-                let parms = parameters.split(',');
-                /** @type {?} */
-                let args = Array.prototype.slice.call(arguments);
-                /** @type {?} */
-                let emitparms = {};
-                for (let i = 0, j = parms.length; i < j; i++) {
-                    emitparms[parms[i]] = args[i];
-                }
-                me[eventname].emit(emitparms);
-            };
-        });
+                let eventparameters = event.parameters;
+                o.listeners[eventname] = function () {
+                    /** @type {?} */
+                    let parameters = eventparameters;
+                    /** @type {?} */
+                    let parms = parameters.split(',');
+                    /** @type {?} */
+                    let args = Array.prototype.slice.call(arguments);
+                    /** @type {?} */
+                    let emitparms = {};
+                    for (let i = 0, j = parms.length; i < j; i++) {
+                        emitparms[parms[i]] = args[i];
+                    }
+                    me[eventname].emit(emitparms);
+                };
+            });
+        }
         if (this._nativeElement.parentElement != null) {
             o.renderTo = this._nativeElement;
         }

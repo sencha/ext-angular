@@ -1,8 +1,7 @@
 <panel
 [layout]="'fit'"
 [shadow]="true"
-[height]="600"
-[width]="550"
+[fitToParent]="true"
 #item
 >
 <calendar-day
@@ -14,12 +13,8 @@
     [gestureNavigation]="false"
     [store]="this.store"
     [value]="calDayValue"
-    (beforeeventdragstart)= "onBeforeDragStart($event)"
-    (beforeeventresizestart)= "onBeforeResizeStart($event)"
-    (validateeventdrop)= "confirmAction($event)"
-    (validateeventresize)= "confirmAction($event)"
-    (validateeventerase)= "confirmAction($event)"
     (ready)="calendarDayReady($event)"
+    [listeners]="myCalListeners"
      >
     </calendar-day>
 </panel>

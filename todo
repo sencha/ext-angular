@@ -14,14 +14,13 @@ Issues
    - clean up and document bootstrapping process
  - [Marc] widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components] [Visit RendererCell like in react/ Need a simple example in extjs]
  - [Marc] ExtAngular components that use Angular structural directives (e.g. ngFor, ngIf) do not dynamically update when their bound data changes.  This is preventing the following from working as desired - Code Preview (you muist reload the page to see the correct code preview panels).
- - [Aniket] UI for SearchField is breaking. Search form is not docked right. 
- (Form fields - Eg( All>Components>Forms>Searchfield or ALl->Components>TitleBar) - PUT up a simple example
- - [Aniket] DragResizeValidation calendar example does not restrict dragging and resizing - Put a simple example 
  - [Marc] resources from packages like ux are not property referenced [Components -> Color Picker -> Basic]
 
-Issues (faced by Alisha) in api-docs examples: 
-- angular/api-docs/modern/modern/src/grid/plugin have CellEditing and Editable defines selectfield 
-as one of the columns of grid but on editing that column selectfield is not rendered.
+  - [Aniket] UI for SearchField is breaking. Search form is not docked right. 
+ (Form fields - Eg( All>Components>Forms>Searchfield or ALl->Components>TitleBar) - PUT up a simple example
+      -> This has been fixed temporarily. Both above components are fixed. For permanent fix need to add align in button and searchfield components (or common parent?)
+
+
 
 Fixed
  - (major) orgchart component does not exists (Under pivot/hierearchy) [External component addition].  
@@ -45,6 +44,12 @@ Fixed
  - (major) Tree widgets not loading with error ERROR Error: [Ext.create] Unrecognized class name / alias: widget.tree [Need to revisit D3 tree] 
  - (major) Tree widgets not loading with error ERROR Error: [Ext.create] Unrecognized class name / alias: widget.tree [Fixed/Need to revisit D3 tree] 
  - [Aniket] Button and split button menu always shows up ([hidden] attribute does not work as well as *ngif). [use setMenu method/zip and project to Marc] - Done/Revisit angular way (Low priority)
+
+  - [Aniket] DragResizeValidation calendar example does not restrict dragging and resizing - Put a simple example 
+  Issues (faced by Alisha) in api-docs examples: 
+- angular/api-docs/modern/modern/src/grid/plugin have CellEditing and Editable defines selectfield 
+as one of the columns of grid but on editing that column selectfield is not rendered. [Aniket : Fixed programatically. May have to revisit for proper fix - Marc?]
+
 
 ExtAngular
  - use ExtJS 6.7

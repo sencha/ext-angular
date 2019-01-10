@@ -1,5 +1,5 @@
 import { __extends } from 'tslib';
-import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, Component, ElementRef, EventEmitter, ContentChildren, NgModule, defineInjectable, inject, INJECTOR, forwardRef, Host, Optional, SkipSelf } from '@angular/core';
+import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, ElementRef, EventEmitter, ContentChildren, Component, NgModule, forwardRef, Host, Optional, SkipSelf, defineInjectable, inject, INJECTOR } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -124,10 +124,11 @@ var base = /** @class */ (function () {
         /** @type {?} */
         var o = {};
         o.xtype = metaData.XTYPE;
+        /** @type {?} */
+        var listneresProvided = false;
         for (var i = 0; i < me.metaData.PROPERTIES.length; i++) {
             /** @type {?} */
             var prop = me.metaData.PROPERTIES[i];
-            //prop== 'title' is needed for children of tabpanel. 
             if (prop == 'handler') {
                 if (me[prop] != undefined) {
                     o[prop] = me[prop];
@@ -135,6 +136,10 @@ var base = /** @class */ (function () {
             }
             //need to handle listeners coming in here
             if ((o.xtype === 'cartesian' || o.xtype === 'polar') && prop === 'layout') ;
+            else if (prop == 'listeners' && me[prop] != undefined) {
+                o[prop] = me[prop];
+                listneresProvided = true;
+            }
             else {
                 if (me[prop] != undefined &&
                     prop != 'listeners' &&
@@ -154,29 +159,31 @@ var base = /** @class */ (function () {
         if (me.config !== {}) {
             Ext.apply(o, me.config);
         }
-        o.listeners = {};
-        /** @type {?} */
-        var EVENTS = metaData.EVENTS;
-        EVENTS.forEach(function (event, index, array) {
+        if (!listneresProvided) {
+            o.listeners = {};
             /** @type {?} */
-            var eventname = event.name;
-            /** @type {?} */
-            var eventparameters = event.parameters;
-            o.listeners[eventname] = function () {
+            var EVENTS = metaData.EVENTS;
+            EVENTS.forEach(function (event, index, array) {
                 /** @type {?} */
-                var parameters = eventparameters;
+                var eventname = event.name;
                 /** @type {?} */
-                var parms = parameters.split(',');
-                /** @type {?} */
-                var args = Array.prototype.slice.call(arguments);
-                /** @type {?} */
-                var emitparms = {};
-                for (var i_1 = 0, j = parms.length; i_1 < j; i_1++) {
-                    emitparms[parms[i_1]] = args[i_1];
-                }
-                me[eventname].emit(emitparms);
-            };
-        });
+                var eventparameters = event.parameters;
+                o.listeners[eventname] = function () {
+                    /** @type {?} */
+                    var parameters = eventparameters;
+                    /** @type {?} */
+                    var parms = parameters.split(',');
+                    /** @type {?} */
+                    var args = Array.prototype.slice.call(arguments);
+                    /** @type {?} */
+                    var emitparms = {};
+                    for (var i_1 = 0, j = parms.length; i_1 < j; i_1++) {
+                        emitparms[parms[i_1]] = args[i_1];
+                    }
+                    me[eventname].emit(emitparms);
+                };
+            });
+        }
         if (this._nativeElement.parentElement != null) {
             o.renderTo = this._nativeElement;
         }
@@ -1586,6 +1593,7 @@ var buttonMetaData = /** @class */ (function () {
         "responsiveConfig": "Object",
         "fitToParent": "Boolean",
         "config": "Object",
+        "align": "String"
     };
     buttonMetaData.PROPERTIES = [
         'allowDepress',
@@ -1702,7 +1710,8 @@ var buttonMetaData = /** @class */ (function () {
         'platformConfig',
         'responsiveConfig',
         'fitToParent',
-        'config'
+        'config',
+        'align'
     ];
     buttonMetaData.EVENTS = [
         { name: 'added', parameters: 'sender,container,index' },
@@ -40394,6 +40403,7 @@ var searchfieldMetaData = /** @class */ (function () {
         "responsiveConfig": "Object",
         "fitToParent": "Boolean",
         "config": "Object",
+        "align": "String"
     };
     searchfieldMetaData.PROPERTIES = [
         'alwaysOnTop',
@@ -40534,7 +40544,8 @@ var searchfieldMetaData = /** @class */ (function () {
         'platformConfig',
         'responsiveConfig',
         'fitToParent',
-        'config'
+        'config',
+        'align'
     ];
     searchfieldMetaData.EVENTS = [
         { name: 'action', parameters: 'searchfield,e' },

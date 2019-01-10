@@ -18,6 +18,8 @@ export class CalendarDragResizeValidationComponent implements OnInit {
         }
     })
 
+
+
     calendarDay: any;
 
     calendarDayReady = (event) => {
@@ -25,28 +27,30 @@ export class CalendarDragResizeValidationComponent implements OnInit {
         this.calendarDay = event.ext;
     }
 
-    onBeforeDragStart = (event) => {
+    onBeforeDragStart = (calendarday,context) => {
         console.log("In onBeforeDragStart");
         var notAllowed = ['Not draggable', 'Not draggable/resizable'];
-        var contains = !Ext.Array.contains(notAllowed, event.context.event.data.title);
+        var contains = !Ext.Array.contains(notAllowed, context.event.data.title);
         console.log("onBeforeDragStart. Returning : " + contains);
-        this.calendarDay.setDraggable(contains);
+        calendarday.setDraggable(contains);
         return contains;
     }
 
-    onBeforeResizeStart = (event) => {
+
+
+    onBeforeResizeStart = (calendarday,context) => {
         console.log("In onBeforeResizeStart");
         var notAllowed = ['Not resizable', 'Not draggable/resizable'];
-        var contains = !Ext.Array.contains(notAllowed, event.context.event.data.title);
+        var contains = !Ext.Array.contains(notAllowed, context.event.data.title);
         console.log("onBeforeResizeStart. Returning : " + contains);
-        this.calendarDay.resizeEvents = contains;
+        calendarday.resizeEvents = contains;
         return contains;
     }
 
-    confirmAction = (event) => {
+    confirmAction = (calendarday,context) => {
         console.log("In confirmAction");
         
-        event.context.validate = event.context.validate.then(function () {
+        context.validate = context.validate.then(function () {
             return new Ext.Promise(function (resolve, reject) {
                 Ext.Msg.confirm('Are you sure', 'Allow the action to go ahead?', function (btn) {
                     resolve(btn === 'yes');
@@ -54,6 +58,14 @@ export class CalendarDragResizeValidationComponent implements OnInit {
             });
         });
         
+    }
+
+    myCalListeners = {
+        beforeeventdragstart : this.onBeforeDragStart,
+        beforeeventresizestart: this.onBeforeResizeStart,
+        validateeventdrop: this.confirmAction,
+        validateeventresize : this.confirmAction,
+        validateeventerase: this.confirmAction
     }
 
   calDayValue = new Date();
