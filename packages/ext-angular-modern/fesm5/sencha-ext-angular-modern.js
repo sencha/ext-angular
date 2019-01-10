@@ -1593,6 +1593,7 @@ var buttonMetaData = /** @class */ (function () {
         "responsiveConfig": "Object",
         "fitToParent": "Boolean",
         "config": "Object",
+        "align": "String"
     };
     buttonMetaData.PROPERTIES = [
         'allowDepress',
@@ -1709,7 +1710,8 @@ var buttonMetaData = /** @class */ (function () {
         'platformConfig',
         'responsiveConfig',
         'fitToParent',
-        'config'
+        'config',
+        'align'
     ];
     buttonMetaData.EVENTS = [
         { name: 'added', parameters: 'sender,container,index' },
@@ -40401,6 +40403,7 @@ var searchfieldMetaData = /** @class */ (function () {
         "responsiveConfig": "Object",
         "fitToParent": "Boolean",
         "config": "Object",
+        "align": "String"
     };
     searchfieldMetaData.PROPERTIES = [
         'alwaysOnTop',
@@ -40541,7 +40544,8 @@ var searchfieldMetaData = /** @class */ (function () {
         'platformConfig',
         'responsiveConfig',
         'fitToParent',
-        'config'
+        'config',
+        'align'
     ];
     searchfieldMetaData.EVENTS = [
         { name: 'action', parameters: 'searchfield,e' },
