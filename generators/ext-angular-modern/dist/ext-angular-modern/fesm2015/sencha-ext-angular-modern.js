@@ -191,7 +191,7 @@ class base {
     /**
      * @return {?}
      */
-    baseAfterContentInitNew() {
+    baseAfterContentInit() {
         //console.log('\nbaseAfterContentInit')
         if (this.items.length < 2) {
             //console.log('1 item')
@@ -292,7 +292,7 @@ class base {
     /**
      * @return {?}
      */
-    baseAfterContentInit() {
+    baseAfterContentInitngFor() {
         console.log('host');
         console.log(this._hostComponent);
         console.log('native');
