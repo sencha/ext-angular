@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -332,10 +336,11 @@ export class calendar_weeksheaderMetaData {
   inputs: calendar_weeksheaderMetaData.PROPERTIES,
   outputs: calendar_weeksheaderMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtCalendar_weeksheaderComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtCalendar_weeksheaderComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,calendar_weeksheaderMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,calendar_weeksheaderMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksheaderMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(calendar_weeksheaderMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

@@ -8,7 +8,8 @@ export declare class colorbuttonMetaData {
     static EVENTNAMES: string[];
 }
 export declare class ExtColorbuttonComponent extends base implements OnInit, AfterContentInit, OnChanges {
-    constructor(eRef: ElementRef);
+    hostComponent: base;
+    constructor(eRef: ElementRef, hostComponent: base);
     ngOnInit(): void;
     ngAfterContentInit(): void;
 }

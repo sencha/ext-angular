@@ -15,19 +15,27 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "types": [],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "paths": { "@angular/*": ["node_modules/@angular/*"] },
     "lib": [
       "dom",
       "es2015"
     ]
   },
-  "angularCompilerOptions": {
-    "annotateForClosureCompiler": true,
-    "skipTemplateCodegen": true,
-    "strictMetadataEmit": true,
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true,
-    "enableResourceInlining": true
-  },
   "exclude": [
-  ]
+    "node_modules",
+    "dist"
+],
+  "angularCompilerOptions": {
+    "genDir": "aot",
+    "annotateForClosureCompiler": false,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": false,
+    "fullTemplateTypeCheck": false,
+    "strictInjectionParameters": true,
+    "enableResourceInlining": false
+  }
+
 }

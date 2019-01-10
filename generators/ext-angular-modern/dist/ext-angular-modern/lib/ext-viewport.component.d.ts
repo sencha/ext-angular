@@ -8,7 +8,8 @@ export declare class viewportMetaData {
     static EVENTNAMES: string[];
 }
 export declare class ExtViewportComponent extends base implements OnInit, AfterContentInit, OnChanges {
-    constructor(eRef: ElementRef);
+    hostComponent: base;
+    constructor(eRef: ElementRef, hostComponent: base);
     ngOnInit(): void;
     ngAfterContentInit(): void;
 }

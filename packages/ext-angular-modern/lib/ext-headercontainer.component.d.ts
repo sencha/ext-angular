@@ -8,7 +8,8 @@ export declare class headercontainerMetaData {
     static EVENTNAMES: string[];
 }
 export declare class ExtHeadercontainerComponent extends base implements OnInit, AfterContentInit, OnChanges {
-    constructor(eRef: ElementRef);
+    hostComponent: base;
+    constructor(eRef: ElementRef, hostComponent: base);
     ngOnInit(): void;
     ngAfterContentInit(): void;
 }

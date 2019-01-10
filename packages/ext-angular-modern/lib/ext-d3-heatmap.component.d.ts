@@ -8,7 +8,8 @@ export declare class d3_heatmapMetaData {
     static EVENTNAMES: string[];
 }
 export declare class ExtD3_heatmapComponent extends base implements OnInit, AfterContentInit, OnChanges {
-    constructor(eRef: ElementRef);
+    hostComponent: base;
+    constructor(eRef: ElementRef, hostComponent: base);
     ngOnInit(): void;
     ngAfterContentInit(): void;
 }

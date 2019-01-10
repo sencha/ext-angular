@@ -1,5 +1,6 @@
 GeneratedFolders/*.*
 AllClassesFiles/*.*
+demos/*.*
 generators/ext-angular-modern/*.*
 testing
 package-lock.json

@@ -1,4 +1,87 @@
-import { ElementRef, EventEmitter, ContentChildren, Component, forwardRef, NgModule } from '@angular/core';
+import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, Component, Host, Optional, SkipSelf, ElementRef, forwardRef, EventEmitter, ContentChildren, NgModule, defineInjectable, inject, INJECTOR } from '@angular/core';
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ExtAngularBootstrapService {
+    /**
+     * @param {?} componentFactoryResolver
+     * @param {?} appRef
+     * @param {?} injector
+     */
+    constructor(componentFactoryResolver, appRef, injector) {
+        this.componentFactoryResolver = componentFactoryResolver;
+        this.appRef = appRef;
+        this.injector = injector;
+    }
+    /**
+     * @return {?}
+     */
+    appendComponentToViewport() {
+        //console.log("In appendComponentToViewport")
+        if (!this.bootstrapComponent) {
+            throw new Error("Bootstrap component not set. Please use extAngularService.setBootStrapComponent(yourComponent) to setup bootstrap component from your root module constructor");
+        }
+        //console.log("bootstrapComponent : " + this.bootstrapComponent)
+        /** @type {?} */
+        const componentRef = this.componentFactoryResolver
+            .resolveComponentFactory(this.bootstrapComponent)
+            .create(this.injector);
+        this.appRef.attachView(componentRef.hostView);
+        /** @type {?} */
+        const domElem = (/** @type {?} */ (((/** @type {?} */ (componentRef.hostView)))
+            .rootNodes[0]));
+        /** @type {?} */
+        var root = document.getElementsByClassName('x-viewport-body-el')[0];
+        root.appendChild(domElem);
+    }
+    /**
+     * @param {?} component
+     * @return {?}
+     */
+    setBootStrapComponent(component) {
+        //console.log("In setBootStrapComponent")
+        this.bootstrapComponent = component;
+    }
+}
+ExtAngularBootstrapService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root'
+            },] }
+];
+/** @nocollapse */
+ExtAngularBootstrapService.ctorParameters = () => [
+    { type: ComponentFactoryResolver },
+    { type: ApplicationRef },
+    { type: Injector }
+];
+/** @nocollapse */ ExtAngularBootstrapService.ngInjectableDef = defineInjectable({ factory: function ExtAngularBootstrapService_Factory() { return new ExtAngularBootstrapService(inject(ComponentFactoryResolver), inject(ApplicationRef), inject(INJECTOR)); }, token: ExtAngularBootstrapService, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ExtAngularBootstrapComponent {
+    /**
+     * @param {?} extAngularService
+     */
+    constructor(extAngularService) {
+        this.extAngularService = extAngularService;
+        //console.log("In App constructor")
+        this.extAngularService.appendComponentToViewport();
+    }
+}
+ExtAngularBootstrapComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'app-root',
+                template: ``
+            }] }
+];
+/** @nocollapse */
+ExtAngularBootstrapComponent.ctorParameters = () => [
+    { type: ExtAngularBootstrapService }
+];
 
 /**
  * @fileoverview added by tsickle
@@ -6,13 +89,19 @@ import { ElementRef, EventEmitter, ContentChildren, Component, forwardRef, NgMod
  */
 class base {
     /**
-     * @param {?} el
+     * @param {?} nativeElement
      * @param {?} metaData
+     * @param {?} hostComponent
      */
-    constructor(el, metaData) {
+    constructor(nativeElement, metaData, hostComponent) {
         this.metaData = metaData;
+        this.hostComponent = hostComponent;
+        this._extChildren = false;
         //console.log('constructor');console.log(el.nativeElement)
-        this._nativeElement = el.nativeElement;
+        this._nativeElement = nativeElement;
+        console.log('hostComponent');
+        console.log(hostComponent);
+        this._hostComponent = hostComponent;
         metaData.EVENTS.forEach((event, n) => {
             if (event.name != 'fullscreen') {
                 ((/** @type {?} */ (this)))[event.name] = new EventEmitter();
@@ -22,46 +111,6 @@ class base {
             }
         });
     }
-    /**
-     * @param {?} changes
-     * @return {?}
-     */
-    ngOnChanges(changes) {
-        for (let propName in changes) {
-            /** @type {?} */
-            let verb = '';
-            if (changes[propName].firstChange == true) {
-                verb = 'initialized';
-            }
-            else {
-                verb = 'changed';
-            }
-            /** @type {?} */
-            let val = changes[propName].currentValue;
-            if (this.ext != undefined) {
-                /** @type {?} */
-                var capPropName = propName.charAt(0).toUpperCase() + propName.slice(1);
-                this.ext['set' + capPropName](val);
-            }
-            else {
-                if (verb == 'changed') {
-                    console.log('change needed and ext not defined');
-                }
-            }
-        }
-        //console.log(`OnChanges: ${changesMsgs.join('; ')}`)
-    }
-    // Beware! Called frequently!
-    // Called in every change detection cycle anywhere on the page
-    //ngDoCheck() {console.log(`DoCheck`)}
-    // Beware! Called frequently!
-    // Called in every change detection cycle anywhere on the page
-    //ngAfterContentChecked() { console.log(`AfterContentChecked`) }
-    //ngAfterViewInit() { console.log(`AfterViewInit`) }
-    // Beware! Called frequently!
-    // Called in every change detection cycle anywhere on the page
-    //ngAfterViewChecked() { console.log(`AfterViewChecked`) }
-    //ngOnDestroy() { console.log(`OnDestroy`) }
     /**
      * @param {?} metaData
      * @return {?}
@@ -134,7 +183,15 @@ class base {
     /**
      * @return {?}
      */
-    baseAfterContentInit() {
+    ngOnDestroy() {
+        console.log(`ngOnDestroy`);
+        console.log(this);
+        //this.ext.parent.remove(this.ext)
+    }
+    /**
+     * @return {?}
+     */
+    baseAfterContentInitNew() {
         //console.log('\nbaseAfterContentInit')
         if (this.items.length < 2) {
             //console.log('1 item')
@@ -235,7 +292,161 @@ class base {
     /**
      * @return {?}
      */
-    baseAfterContentInit2() {
+    baseAfterContentInit() {
+        console.log('host');
+        console.log(this._hostComponent);
+        console.log('native');
+        console.log(this._nativeElement);
+        console.log('_items');
+        console.log(this._items);
+        console.log(this._items.length);
+        if (this._items.length > 0 && this._extChildren == true) {
+            console.error('cant have both');
+        }
+        else if (this._items.length > 0) {
+            console.error('do it');
+            if (this.items.length < 2) {
+                console.error('1 item');
+                return;
+            }
+            //console.log(this.items.length + ' items')
+            /** @type {?} */
+            var anyItems = [];
+            /** @type {?} */
+            var elRefItems = [];
+            this._items.forEach(item => { anyItems.push(item); });
+            this._elRefItems.forEach(item => { elRefItems.push(item); });
+            /** @type {?} */
+            var j = 0;
+            for (var i in anyItems) {
+                if (j == 0) {
+                    j++;
+                    continue;
+                }
+                /** @type {?} */
+                var item = anyItems[i];
+                /** @type {?} */
+                var elRefItem = elRefItems[i];
+                if (item.nativeElement != undefined) {
+                    //console.log('native')
+                    this.ext.add({ xtype: 'container', html: item.nativeElement });
+                }
+                else {
+                    //console.log('component')
+                    //console.log(elRefItem)
+                    this.ext.add({ xtype: 'container', html: elRefItem.nativeElement });
+                }
+            }
+            return;
+        }
+        if (this.ext != undefined && this.hostComponent != undefined) {
+            /** @type {?} */
+            var parentxtype = this.hostComponent['ext'].xtype;
+            /** @type {?} */
+            var childxtype = this['ext'].xtype;
+            /** @type {?} */
+            var parentCmp = this.hostComponent['ext'];
+            /** @type {?} */
+            var childCmp = this['ext'];
+            console.log('parent: ' + parentxtype + ', child: ' + childxtype);
+            this.hostComponent._extChildren = true;
+            if (parentxtype === 'grid') {
+                if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
+                    parentCmp.addColumn(childCmp);
+                }
+                else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
+                    if (parentCmp.getHideHeaders() === false) {
+                        //var j = parentCmp.items.items.length;
+                        parentCmp.insert(1, childCmp);
+                    }
+                    else {
+                        parentCmp.add(childCmp);
+                    }
+                }
+                else {
+                    console.log('??');
+                }
+            }
+            else if (childxtype === 'tooltip') {
+                parentCmp.setTooltip(childCmp);
+            }
+            else if (childxtype === 'plugin') {
+                parentCmp.setPlugin(childCmp);
+            }
+            else if (parentxtype === 'button') {
+                if (childxtype === 'menu') {
+                    parentCmp.setMenu(childCmp);
+                }
+                else {
+                    console.log('child not added');
+                }
+            }
+            else if (childxtype === 'toolbar' && Ext.isClassic === true) {
+                parentCmp.addDockedItems(childCmp);
+            }
+            else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
+                if (parentCmp.getHideHeaders() === false) {
+                    //var j: any = parentCmp.items.items.length
+                    //parentCmp.insert(j - 1, childCmp)
+                    parentCmp.insert(1, childCmp);
+                }
+                else {
+                    parentCmp.add(childCmp);
+                }
+            }
+            else if (parentCmp.add != undefined) {
+                parentCmp.add(childCmp);
+            }
+            else {
+                console.log('child not added');
+            }
+        }
+        else if (this._nativeElement != undefined) {
+            console.log(this._nativeElement);
+            //this.ext.add({xtype: 'container',html: this._nativeElement})
+        }
+        else {
+            console.log('component');
+            //console.log(elRefItem)
+            //this.ext.add({xtype: 'container',html: this._nativeElement})
+        }
+        //this['ready'].emit(parentCmp)
+        this['ready'].emit(this);
+    }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    ngOnChanges(changes) {
+        for (let propName in changes) {
+            /** @type {?} */
+            let verb = '';
+            if (changes[propName].firstChange == true) {
+                verb = 'initialized';
+            }
+            else {
+                verb = 'changed';
+            }
+            /** @type {?} */
+            let val = changes[propName].currentValue;
+            if (this.ext != undefined) {
+                /** @type {?} */
+                var capPropName = propName.charAt(0).toUpperCase() + propName.slice(1);
+                this.ext['set' + capPropName](val);
+            }
+            else {
+                if (verb == 'changed') {
+                    console.log('change needed and ext not defined');
+                }
+            }
+        }
+        //console.log(`OnChanges: ${changesMsgs.join('; ')}`)
+    }
+    /**
+     * @return {?}
+     */
+    baseAfterContentInit3() {
+        console.log('baseAfterContentInit');
         if (this.itemsa.length < 2) {
             return;
         }
@@ -312,7 +523,9 @@ class base {
 base.propDecorators = {
     items: [{ type: ContentChildren, args: ['item',] }],
     items2: [{ type: ContentChildren, args: ['item', { read: ElementRef },] }],
-    itemsa: [{ type: ContentChildren, args: ['item', { read: ElementRef },] }]
+    _items: [{ type: ContentChildren, args: ['item',] }],
+    _elRefItems: [{ type: ContentChildren, args: ['item', { read: ElementRef },] }],
+    itemsa: [{ type: ContentChildren, args: ['item',] }]
 };
 
 /**
@@ -783,8 +996,13 @@ actionsheetMetaData.EVENTNAMES = [
 class ExtActionsheetComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, actionsheetMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, actionsheetMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,actionsheetMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -804,12 +1022,13 @@ ExtActionsheetComponent.decorators = [
                 inputs: actionsheetMetaData.PROPERTIES,
                 outputs: actionsheetMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtActionsheetComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtActionsheetComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -1160,8 +1379,13 @@ audioMetaData.EVENTNAMES = [
 class ExtAudioComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, audioMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, audioMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,audioMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -1181,12 +1405,13 @@ ExtAudioComponent.decorators = [
                 inputs: audioMetaData.PROPERTIES,
                 outputs: audioMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtAudioComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtAudioComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -1555,8 +1780,13 @@ buttonMetaData.EVENTNAMES = [
 class ExtButtonComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, buttonMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, buttonMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,buttonMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -1576,12 +1806,13 @@ ExtButtonComponent.decorators = [
                 inputs: buttonMetaData.PROPERTIES,
                 outputs: buttonMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtButtonComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtButtonComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -1918,8 +2149,13 @@ calendar_eventMetaData.EVENTNAMES = [
 class ExtCalendar_eventComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendar_eventMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_eventMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_eventMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -1939,12 +2175,13 @@ ExtCalendar_eventComponent.decorators = [
                 inputs: calendar_eventMetaData.PROPERTIES,
                 outputs: calendar_eventMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_eventComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendar_eventComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -2473,8 +2710,13 @@ calendar_form_addMetaData.EVENTNAMES = [
 class ExtCalendar_form_addComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendar_form_addMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_form_addMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_form_addMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -2494,12 +2736,13 @@ ExtCalendar_form_addComponent.decorators = [
                 inputs: calendar_form_addMetaData.PROPERTIES,
                 outputs: calendar_form_addMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_form_addComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendar_form_addComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -2994,8 +3237,13 @@ calendar_calendar_pickerMetaData.EVENTNAMES = [
 class ExtCalendar_calendar_pickerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendar_calendar_pickerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_calendar_pickerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_calendar_pickerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -3015,12 +3263,13 @@ ExtCalendar_calendar_pickerComponent.decorators = [
                 inputs: calendar_calendar_pickerMetaData.PROPERTIES,
                 outputs: calendar_calendar_pickerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_calendar_pickerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendar_calendar_pickerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -3549,8 +3798,13 @@ calendar_form_editMetaData.EVENTNAMES = [
 class ExtCalendar_form_editComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendar_form_editMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_form_editMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_form_editMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -3570,12 +3824,13 @@ ExtCalendar_form_editComponent.decorators = [
                 inputs: calendar_form_editMetaData.PROPERTIES,
                 outputs: calendar_form_editMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_form_editComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendar_form_editComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -4070,8 +4325,13 @@ calendar_timefieldMetaData.EVENTNAMES = [
 class ExtCalendar_timefieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendar_timefieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_timefieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_timefieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -4091,12 +4351,13 @@ ExtCalendar_timefieldComponent.decorators = [
                 inputs: calendar_timefieldMetaData.PROPERTIES,
                 outputs: calendar_timefieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_timefieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendar_timefieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -4425,8 +4686,13 @@ calendar_daysheaderMetaData.EVENTNAMES = [
 class ExtCalendar_daysheaderComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendar_daysheaderMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_daysheaderMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysheaderMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -4446,12 +4712,13 @@ ExtCalendar_daysheaderComponent.decorators = [
                 inputs: calendar_daysheaderMetaData.PROPERTIES,
                 outputs: calendar_daysheaderMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_daysheaderComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendar_daysheaderComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -4780,8 +5047,13 @@ calendar_weeksheaderMetaData.EVENTNAMES = [
 class ExtCalendar_weeksheaderComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendar_weeksheaderMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_weeksheaderMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksheaderMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -4801,12 +5073,13 @@ ExtCalendar_weeksheaderComponent.decorators = [
                 inputs: calendar_weeksheaderMetaData.PROPERTIES,
                 outputs: calendar_weeksheaderMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weeksheaderComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendar_weeksheaderComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -5303,8 +5576,13 @@ calendar_listMetaData.EVENTNAMES = [
 class ExtCalendar_listComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendar_listMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_listMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_listMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -5324,12 +5602,13 @@ ExtCalendar_listComponent.decorators = [
                 inputs: calendar_listMetaData.PROPERTIES,
                 outputs: calendar_listMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_listComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendar_listComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -5860,8 +6139,13 @@ calendar_dayMetaData.EVENTNAMES = [
 class ExtCalendar_dayComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendar_dayMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_dayMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_dayMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -5881,12 +6165,13 @@ ExtCalendar_dayComponent.decorators = [
                 inputs: calendar_dayMetaData.PROPERTIES,
                 outputs: calendar_dayMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_dayComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendar_dayComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -6417,8 +6702,13 @@ calendar_daysMetaData.EVENTNAMES = [
 class ExtCalendar_daysComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendar_daysMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_daysMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -6438,12 +6728,13 @@ ExtCalendar_daysComponent.decorators = [
                 inputs: calendar_daysMetaData.PROPERTIES,
                 outputs: calendar_daysMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_daysComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendar_daysComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -6970,8 +7261,13 @@ calendar_monthMetaData.EVENTNAMES = [
 class ExtCalendar_monthComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendar_monthMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_monthMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_monthMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -6991,12 +7287,13 @@ ExtCalendar_monthComponent.decorators = [
                 inputs: calendar_monthMetaData.PROPERTIES,
                 outputs: calendar_monthMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_monthComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendar_monthComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -7493,8 +7790,13 @@ calendarMetaData.EVENTNAMES = [
 class ExtCalendarComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendarMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendarMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendarMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -7514,12 +7816,13 @@ ExtCalendarComponent.decorators = [
                 inputs: calendarMetaData.PROPERTIES,
                 outputs: calendarMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendarComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendarComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -8052,8 +8355,13 @@ calendar_weekMetaData.EVENTNAMES = [
 class ExtCalendar_weekComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendar_weekMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_weekMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weekMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -8073,12 +8381,13 @@ ExtCalendar_weekComponent.decorators = [
                 inputs: calendar_weekMetaData.PROPERTIES,
                 outputs: calendar_weekMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weekComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendar_weekComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -8605,8 +8914,13 @@ calendar_weeksMetaData.EVENTNAMES = [
 class ExtCalendar_weeksComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendar_weeksMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_weeksMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -8626,12 +8940,13 @@ ExtCalendar_weeksComponent.decorators = [
                 inputs: calendar_weeksMetaData.PROPERTIES,
                 outputs: calendar_weeksMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weeksComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendar_weeksComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -9018,8 +9333,13 @@ calendar_dayviewMetaData.EVENTNAMES = [
 class ExtCalendar_dayviewComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendar_dayviewMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_dayviewMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_dayviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -9039,12 +9359,13 @@ ExtCalendar_dayviewComponent.decorators = [
                 inputs: calendar_dayviewMetaData.PROPERTIES,
                 outputs: calendar_dayviewMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_dayviewComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendar_dayviewComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -9431,8 +9752,13 @@ calendar_daysviewMetaData.EVENTNAMES = [
 class ExtCalendar_daysviewComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendar_daysviewMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_daysviewMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -9452,12 +9778,13 @@ ExtCalendar_daysviewComponent.decorators = [
                 inputs: calendar_daysviewMetaData.PROPERTIES,
                 outputs: calendar_daysviewMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_daysviewComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendar_daysviewComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -9842,8 +10169,13 @@ calendar_monthviewMetaData.EVENTNAMES = [
 class ExtCalendar_monthviewComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendar_monthviewMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_monthviewMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_monthviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -9863,12 +10195,13 @@ ExtCalendar_monthviewComponent.decorators = [
                 inputs: calendar_monthviewMetaData.PROPERTIES,
                 outputs: calendar_monthviewMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_monthviewComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendar_monthviewComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -9915,8 +10248,13 @@ calendar_multiviewMetaData.EVENTNAMES = [
 class ExtCalendar_multiviewComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendar_multiviewMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_multiviewMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_multiviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -9936,12 +10274,13 @@ ExtCalendar_multiviewComponent.decorators = [
                 inputs: calendar_multiviewMetaData.PROPERTIES,
                 outputs: calendar_multiviewMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_multiviewComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendar_multiviewComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -10330,8 +10669,13 @@ calendar_weekviewMetaData.EVENTNAMES = [
 class ExtCalendar_weekviewComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendar_weekviewMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_weekviewMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weekviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -10351,12 +10695,13 @@ ExtCalendar_weekviewComponent.decorators = [
                 inputs: calendar_weekviewMetaData.PROPERTIES,
                 outputs: calendar_weekviewMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weekviewComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendar_weekviewComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -10741,8 +11086,13 @@ calendar_weeksviewMetaData.EVENTNAMES = [
 class ExtCalendar_weeksviewComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, calendar_weeksviewMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_weeksviewMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -10762,12 +11112,13 @@ ExtCalendar_weeksviewComponent.decorators = [
                 inputs: calendar_weeksviewMetaData.PROPERTIES,
                 outputs: calendar_weeksviewMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weeksviewComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCalendar_weeksviewComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -11146,8 +11497,13 @@ carouselMetaData.EVENTNAMES = [
 class ExtCarouselComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, carouselMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, carouselMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,carouselMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -11167,12 +11523,13 @@ ExtCarouselComponent.decorators = [
                 inputs: carouselMetaData.PROPERTIES,
                 outputs: carouselMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCarouselComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCarouselComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -11277,8 +11634,13 @@ axis3dMetaData.EVENTNAMES = [
 class ExtAxis3dComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, axis3dMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, axis3dMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,axis3dMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -11298,12 +11660,13 @@ ExtAxis3dComponent.decorators = [
                 inputs: axis3dMetaData.PROPERTIES,
                 outputs: axis3dMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtAxis3dComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtAxis3dComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -11768,8 +12131,13 @@ cartesianMetaData.EVENTNAMES = [
 class ExtCartesianComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, cartesianMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, cartesianMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,cartesianMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -11789,12 +12157,13 @@ ExtCartesianComponent.decorators = [
                 inputs: cartesianMetaData.PROPERTIES,
                 outputs: cartesianMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCartesianComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCartesianComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -12259,8 +12628,13 @@ chartMetaData.EVENTNAMES = [
 class ExtChartComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, chartMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, chartMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chartMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -12280,12 +12654,13 @@ ExtChartComponent.decorators = [
                 inputs: chartMetaData.PROPERTIES,
                 outputs: chartMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtChartComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtChartComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -12324,8 +12699,13 @@ interactionMetaData.EVENTNAMES = [
 class ExtInteractionComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, interactionMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, interactionMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,interactionMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -12345,12 +12725,13 @@ ExtInteractionComponent.decorators = [
                 inputs: interactionMetaData.PROPERTIES,
                 outputs: interactionMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtInteractionComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtInteractionComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -12849,8 +13230,13 @@ legendMetaData.EVENTNAMES = [
 class ExtLegendComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, legendMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, legendMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,legendMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -12870,12 +13256,13 @@ ExtLegendComponent.decorators = [
                 inputs: legendMetaData.PROPERTIES,
                 outputs: legendMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtLegendComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtLegendComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -13254,8 +13641,13 @@ chartnavigatorMetaData.EVENTNAMES = [
 class ExtChartnavigatorComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, chartnavigatorMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, chartnavigatorMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chartnavigatorMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -13275,12 +13667,13 @@ ExtChartnavigatorComponent.decorators = [
                 inputs: chartnavigatorMetaData.PROPERTIES,
                 outputs: chartnavigatorMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtChartnavigatorComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtChartnavigatorComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -13747,8 +14140,13 @@ polarMetaData.EVENTNAMES = [
 class ExtPolarComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, polarMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, polarMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,polarMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -13768,12 +14166,13 @@ ExtPolarComponent.decorators = [
                 inputs: polarMetaData.PROPERTIES,
                 outputs: polarMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPolarComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPolarComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -14234,8 +14633,13 @@ spacefillingMetaData.EVENTNAMES = [
 class ExtSpacefillingComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, spacefillingMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, spacefillingMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spacefillingMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -14255,12 +14659,13 @@ ExtSpacefillingComponent.decorators = [
                 inputs: spacefillingMetaData.PROPERTIES,
                 outputs: spacefillingMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSpacefillingComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSpacefillingComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -14589,8 +14994,13 @@ chipMetaData.EVENTNAMES = [
 class ExtChipComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, chipMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, chipMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chipMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -14610,12 +15020,13 @@ ExtChipComponent.decorators = [
                 inputs: chipMetaData.PROPERTIES,
                 outputs: chipMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtChipComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtChipComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -14932,8 +15343,13 @@ componentMetaData.EVENTNAMES = [
 class ExtComponentComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, componentMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, componentMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,componentMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -14953,12 +15369,13 @@ ExtComponentComponent.decorators = [
                 inputs: componentMetaData.PROPERTIES,
                 outputs: componentMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtComponentComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtComponentComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -15333,8 +15750,13 @@ containerMetaData.EVENTNAMES = [
 class ExtContainerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, containerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, containerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,containerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -15354,12 +15776,13 @@ ExtContainerComponent.decorators = [
                 inputs: containerMetaData.PROPERTIES,
                 outputs: containerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtContainerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtContainerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -15690,8 +16113,13 @@ d3_canvasMetaData.EVENTNAMES = [
 class ExtD3_canvasComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, d3_canvasMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3_canvasMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_canvasMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -15711,12 +16139,13 @@ ExtD3_canvasComponent.decorators = [
                 inputs: d3_canvasMetaData.PROPERTIES,
                 outputs: d3_canvasMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_canvasComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtD3_canvasComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -16061,8 +16490,13 @@ d3_heatmapMetaData.EVENTNAMES = [
 class ExtD3_heatmapComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, d3_heatmapMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3_heatmapMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_heatmapMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -16082,12 +16516,13 @@ ExtD3_heatmapComponent.decorators = [
                 inputs: d3_heatmapMetaData.PROPERTIES,
                 outputs: d3_heatmapMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_heatmapComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtD3_heatmapComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -16462,8 +16897,13 @@ d3_packMetaData.EVENTNAMES = [
 class ExtD3_packComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, d3_packMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3_packMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_packMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -16483,12 +16923,13 @@ ExtD3_packComponent.decorators = [
                 inputs: d3_packMetaData.PROPERTIES,
                 outputs: d3_packMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_packComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtD3_packComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -16859,8 +17300,13 @@ d3_partitionMetaData.EVENTNAMES = [
 class ExtD3_partitionComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, d3_partitionMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3_partitionMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_partitionMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -16880,12 +17326,13 @@ ExtD3_partitionComponent.decorators = [
                 inputs: d3_partitionMetaData.PROPERTIES,
                 outputs: d3_partitionMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_partitionComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtD3_partitionComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -17260,8 +17707,13 @@ d3_sunburstMetaData.EVENTNAMES = [
 class ExtD3_sunburstComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, d3_sunburstMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3_sunburstMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_sunburstMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -17281,12 +17733,13 @@ ExtD3_sunburstComponent.decorators = [
                 inputs: d3_sunburstMetaData.PROPERTIES,
                 outputs: d3_sunburstMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_sunburstComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtD3_sunburstComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -17663,8 +18116,13 @@ d3_treeMetaData.EVENTNAMES = [
 class ExtD3_treeComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, d3_treeMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3_treeMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_treeMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -17684,12 +18142,13 @@ ExtD3_treeComponent.decorators = [
                 inputs: d3_treeMetaData.PROPERTIES,
                 outputs: d3_treeMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_treeComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtD3_treeComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -18066,8 +18525,13 @@ d3_horizontal_treeMetaData.EVENTNAMES = [
 class ExtD3_horizontal_treeComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, d3_horizontal_treeMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3_horizontal_treeMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_horizontal_treeMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -18087,12 +18551,13 @@ ExtD3_horizontal_treeComponent.decorators = [
                 inputs: d3_horizontal_treeMetaData.PROPERTIES,
                 outputs: d3_horizontal_treeMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_horizontal_treeComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtD3_horizontal_treeComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -18473,8 +18938,13 @@ d3_treemapMetaData.EVENTNAMES = [
 class ExtD3_treemapComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, d3_treemapMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3_treemapMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_treemapMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -18494,12 +18964,13 @@ ExtD3_treemapComponent.decorators = [
                 inputs: d3_treemapMetaData.PROPERTIES,
                 outputs: d3_treemapMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_treemapComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtD3_treemapComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -18832,8 +19303,13 @@ d3_svgMetaData.EVENTNAMES = [
 class ExtD3_svgComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, d3_svgMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3_svgMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_svgMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -18853,12 +19329,13 @@ ExtD3_svgComponent.decorators = [
                 inputs: d3_svgMetaData.PROPERTIES,
                 outputs: d3_svgMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_svgComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtD3_svgComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -19191,8 +19668,13 @@ d3MetaData.EVENTNAMES = [
 class ExtD3Component extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, d3MetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3MetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3MetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -19212,12 +19694,13 @@ ExtD3Component.decorators = [
                 inputs: d3MetaData.PROPERTIES,
                 outputs: d3MetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtD3Component) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtD3Component.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -19780,8 +20263,13 @@ boundlistMetaData.EVENTNAMES = [
 class ExtBoundlistComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, boundlistMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, boundlistMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,boundlistMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -19801,12 +20289,13 @@ ExtBoundlistComponent.decorators = [
                 inputs: boundlistMetaData.PROPERTIES,
                 outputs: boundlistMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtBoundlistComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtBoundlistComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -20317,8 +20806,13 @@ chipviewMetaData.EVENTNAMES = [
 class ExtChipviewComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, chipviewMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, chipviewMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chipviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -20338,12 +20832,13 @@ ExtChipviewComponent.decorators = [
                 inputs: chipviewMetaData.PROPERTIES,
                 outputs: chipviewMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtChipviewComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtChipviewComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -20842,8 +21337,13 @@ componentdataviewMetaData.EVENTNAMES = [
 class ExtComponentdataviewComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, componentdataviewMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, componentdataviewMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,componentdataviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -20863,12 +21363,13 @@ ExtComponentdataviewComponent.decorators = [
                 inputs: componentdataviewMetaData.PROPERTIES,
                 outputs: componentdataviewMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtComponentdataviewComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtComponentdataviewComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -21249,8 +21750,13 @@ dataitemMetaData.EVENTNAMES = [
 class ExtDataitemComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, dataitemMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, dataitemMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dataitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -21270,12 +21776,13 @@ ExtDataitemComponent.decorators = [
                 inputs: dataitemMetaData.PROPERTIES,
                 outputs: dataitemMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtDataitemComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtDataitemComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -21770,8 +22277,13 @@ dataviewMetaData.EVENTNAMES = [
 class ExtDataviewComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, dataviewMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, dataviewMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dataviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -21791,12 +22303,13 @@ ExtDataviewComponent.decorators = [
                 inputs: dataviewMetaData.PROPERTIES,
                 outputs: dataviewMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtDataviewComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtDataviewComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -22113,8 +22626,13 @@ emptytextMetaData.EVENTNAMES = [
 class ExtEmptytextComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, emptytextMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, emptytextMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,emptytextMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -22134,12 +22652,13 @@ ExtEmptytextComponent.decorators = [
                 inputs: emptytextMetaData.PROPERTIES,
                 outputs: emptytextMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtEmptytextComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtEmptytextComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -22476,8 +22995,13 @@ indexbarMetaData.EVENTNAMES = [
 class ExtIndexbarComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, indexbarMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, indexbarMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,indexbarMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -22497,12 +23021,13 @@ ExtIndexbarComponent.decorators = [
                 inputs: indexbarMetaData.PROPERTIES,
                 outputs: indexbarMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtIndexbarComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtIndexbarComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -22829,8 +23354,13 @@ itemheaderMetaData.EVENTNAMES = [
 class ExtItemheaderComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, itemheaderMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, itemheaderMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,itemheaderMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -22850,12 +23380,13 @@ ExtItemheaderComponent.decorators = [
                 inputs: itemheaderMetaData.PROPERTIES,
                 outputs: itemheaderMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtItemheaderComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtItemheaderComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -23418,8 +23949,13 @@ listMetaData.EVENTNAMES = [
 class ExtListComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, listMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, listMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -23439,12 +23975,13 @@ ExtListComponent.decorators = [
                 inputs: listMetaData.PROPERTIES,
                 outputs: listMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtListComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtListComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -23833,8 +24370,13 @@ listitemMetaData.EVENTNAMES = [
 class ExtListitemComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, listitemMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, listitemMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -23854,12 +24396,13 @@ ExtListitemComponent.decorators = [
                 inputs: listitemMetaData.PROPERTIES,
                 outputs: listitemMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtListitemComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtListitemComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -24242,8 +24785,13 @@ listswiperitemMetaData.EVENTNAMES = [
 class ExtListswiperitemComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, listswiperitemMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, listswiperitemMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listswiperitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -24263,12 +24811,13 @@ ExtListswiperitemComponent.decorators = [
                 inputs: listswiperitemMetaData.PROPERTIES,
                 outputs: listswiperitemMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtListswiperitemComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtListswiperitemComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -24661,8 +25210,13 @@ listswiperstepperMetaData.EVENTNAMES = [
 class ExtListswiperstepperComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, listswiperstepperMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, listswiperstepperMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listswiperstepperMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -24682,12 +25236,13 @@ ExtListswiperstepperComponent.decorators = [
                 inputs: listswiperstepperMetaData.PROPERTIES,
                 outputs: listswiperstepperMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtListswiperstepperComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtListswiperstepperComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -25124,8 +25679,13 @@ nestedlistMetaData.EVENTNAMES = [
 class ExtNestedlistComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, nestedlistMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, nestedlistMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,nestedlistMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -25145,12 +25705,13 @@ ExtNestedlistComponent.decorators = [
                 inputs: nestedlistMetaData.PROPERTIES,
                 outputs: nestedlistMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtNestedlistComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtNestedlistComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -25487,8 +26048,13 @@ pullrefreshbarMetaData.EVENTNAMES = [
 class ExtPullrefreshbarComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, pullrefreshbarMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pullrefreshbarMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pullrefreshbarMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -25508,12 +26074,13 @@ ExtPullrefreshbarComponent.decorators = [
                 inputs: pullrefreshbarMetaData.PROPERTIES,
                 outputs: pullrefreshbarMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPullrefreshbarComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPullrefreshbarComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -25836,8 +26403,13 @@ pullrefreshspinnerMetaData.EVENTNAMES = [
 class ExtPullrefreshspinnerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, pullrefreshspinnerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pullrefreshspinnerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pullrefreshspinnerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -25857,12 +26429,13 @@ ExtPullrefreshspinnerComponent.decorators = [
                 inputs: pullrefreshspinnerMetaData.PROPERTIES,
                 outputs: pullrefreshspinnerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPullrefreshspinnerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPullrefreshspinnerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -26189,8 +26762,13 @@ simplelistitemMetaData.EVENTNAMES = [
 class ExtSimplelistitemComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, simplelistitemMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, simplelistitemMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,simplelistitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -26210,12 +26788,13 @@ ExtSimplelistitemComponent.decorators = [
                 inputs: simplelistitemMetaData.PROPERTIES,
                 outputs: simplelistitemMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSimplelistitemComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSimplelistitemComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -26704,8 +27283,13 @@ dialogMetaData.EVENTNAMES = [
 class ExtDialogComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, dialogMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, dialogMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dialogMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -26725,12 +27309,13 @@ ExtDialogComponent.decorators = [
                 inputs: dialogMetaData.PROPERTIES,
                 outputs: dialogMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtDialogComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtDialogComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -27219,8 +27804,13 @@ windowMetaData.EVENTNAMES = [
 class ExtWindowComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, windowMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, windowMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,windowMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -27240,12 +27830,13 @@ ExtWindowComponent.decorators = [
                 inputs: windowMetaData.PROPERTIES,
                 outputs: windowMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtWindowComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtWindowComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -27650,8 +28241,13 @@ drawMetaData.EVENTNAMES = [
 class ExtDrawComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, drawMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, drawMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,drawMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -27671,12 +28267,13 @@ ExtDrawComponent.decorators = [
                 inputs: drawMetaData.PROPERTIES,
                 outputs: drawMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtDrawComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtDrawComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -27845,8 +28442,13 @@ surfaceMetaData.EVENTNAMES = [
 class ExtSurfaceComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, surfaceMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, surfaceMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,surfaceMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -27866,12 +28468,13 @@ ExtSurfaceComponent.decorators = [
                 inputs: surfaceMetaData.PROPERTIES,
                 outputs: surfaceMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSurfaceComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSurfaceComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -28290,8 +28893,13 @@ editorMetaData.EVENTNAMES = [
 class ExtEditorComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, editorMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, editorMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,editorMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -28311,12 +28919,13 @@ ExtEditorComponent.decorators = [
                 inputs: editorMetaData.PROPERTIES,
                 outputs: editorMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtEditorComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtEditorComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -28715,8 +29324,13 @@ checkboxMetaData.EVENTNAMES = [
 class ExtCheckboxComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, checkboxMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, checkboxMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkboxMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -28736,12 +29350,13 @@ ExtCheckboxComponent.decorators = [
                 inputs: checkboxMetaData.PROPERTIES,
                 outputs: checkboxMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCheckboxComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCheckboxComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -29140,8 +29755,13 @@ checkboxfieldMetaData.EVENTNAMES = [
 class ExtCheckboxfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, checkboxfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, checkboxfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkboxfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -29161,12 +29781,13 @@ ExtCheckboxfieldComponent.decorators = [
                 inputs: checkboxfieldMetaData.PROPERTIES,
                 outputs: checkboxfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCheckboxfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCheckboxfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -29693,8 +30314,13 @@ comboboxMetaData.EVENTNAMES = [
 class ExtComboboxComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, comboboxMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, comboboxMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,comboboxMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -29714,12 +30340,13 @@ ExtComboboxComponent.decorators = [
                 inputs: comboboxMetaData.PROPERTIES,
                 outputs: comboboxMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtComboboxComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtComboboxComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -30246,8 +30873,13 @@ comboboxfieldMetaData.EVENTNAMES = [
 class ExtComboboxfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, comboboxfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, comboboxfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,comboboxfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -30267,12 +30899,13 @@ ExtComboboxfieldComponent.decorators = [
                 inputs: comboboxfieldMetaData.PROPERTIES,
                 outputs: comboboxfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtComboboxfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtComboboxfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -30663,8 +31296,13 @@ containerfieldMetaData.EVENTNAMES = [
 class ExtContainerfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, containerfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, containerfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,containerfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -30684,12 +31322,13 @@ ExtContainerfieldComponent.decorators = [
                 inputs: containerfieldMetaData.PROPERTIES,
                 outputs: containerfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtContainerfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtContainerfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -31080,8 +31719,13 @@ fieldcontainerMetaData.EVENTNAMES = [
 class ExtFieldcontainerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, fieldcontainerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, fieldcontainerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldcontainerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -31101,12 +31745,13 @@ ExtFieldcontainerComponent.decorators = [
                 inputs: fieldcontainerMetaData.PROPERTIES,
                 outputs: fieldcontainerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtFieldcontainerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtFieldcontainerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -31561,8 +32206,13 @@ datefieldMetaData.EVENTNAMES = [
 class ExtDatefieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, datefieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, datefieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datefieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -31582,12 +32232,13 @@ ExtDatefieldComponent.decorators = [
                 inputs: datefieldMetaData.PROPERTIES,
                 outputs: datefieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtDatefieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtDatefieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -32042,8 +32693,13 @@ datepickerfieldMetaData.EVENTNAMES = [
 class ExtDatepickerfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, datepickerfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, datepickerfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickerfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -32063,12 +32719,13 @@ ExtDatepickerfieldComponent.decorators = [
                 inputs: datepickerfieldMetaData.PROPERTIES,
                 outputs: datepickerfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtDatepickerfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtDatepickerfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -32523,8 +33180,13 @@ datepickernativefieldMetaData.EVENTNAMES = [
 class ExtDatepickernativefieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, datepickernativefieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, datepickernativefieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickernativefieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -32544,12 +33206,13 @@ ExtDatepickernativefieldComponent.decorators = [
                 inputs: datepickernativefieldMetaData.PROPERTIES,
                 outputs: datepickernativefieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtDatepickernativefieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtDatepickernativefieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -32938,8 +33601,13 @@ displayfieldMetaData.EVENTNAMES = [
 class ExtDisplayfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, displayfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, displayfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,displayfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -32959,12 +33627,13 @@ ExtDisplayfieldComponent.decorators = [
                 inputs: displayfieldMetaData.PROPERTIES,
                 outputs: displayfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtDisplayfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtDisplayfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -33389,8 +34058,13 @@ emailfieldMetaData.EVENTNAMES = [
 class ExtEmailfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, emailfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, emailfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,emailfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -33410,12 +34084,13 @@ ExtEmailfieldComponent.decorators = [
                 inputs: emailfieldMetaData.PROPERTIES,
                 outputs: emailfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtEmailfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtEmailfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -33794,8 +34469,13 @@ fieldMetaData.EVENTNAMES = [
 class ExtFieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, fieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, fieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -33815,12 +34495,13 @@ ExtFieldComponent.decorators = [
                 inputs: fieldMetaData.PROPERTIES,
                 outputs: fieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtFieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtFieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -34251,8 +34932,13 @@ filefieldMetaData.EVENTNAMES = [
 class ExtFilefieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, filefieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, filefieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,filefieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -34272,12 +34958,13 @@ ExtFilefieldComponent.decorators = [
                 inputs: filefieldMetaData.PROPERTIES,
                 outputs: filefieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtFilefieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtFilefieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -34654,8 +35341,13 @@ filebuttonMetaData.EVENTNAMES = [
 class ExtFilebuttonComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, filebuttonMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, filebuttonMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,filebuttonMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -34675,12 +35367,13 @@ ExtFilebuttonComponent.decorators = [
                 inputs: filebuttonMetaData.PROPERTIES,
                 outputs: filebuttonMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtFilebuttonComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtFilebuttonComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -35067,8 +35760,13 @@ hiddenfieldMetaData.EVENTNAMES = [
 class ExtHiddenfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, hiddenfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, hiddenfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,hiddenfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -35088,12 +35786,13 @@ ExtHiddenfieldComponent.decorators = [
                 inputs: hiddenfieldMetaData.PROPERTIES,
                 outputs: hiddenfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtHiddenfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtHiddenfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -35480,8 +36179,13 @@ inputfieldMetaData.EVENTNAMES = [
 class ExtInputfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, inputfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, inputfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,inputfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -35501,12 +36205,13 @@ ExtInputfieldComponent.decorators = [
                 inputs: inputfieldMetaData.PROPERTIES,
                 outputs: inputfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtInputfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtInputfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -35945,8 +36650,13 @@ numberfieldMetaData.EVENTNAMES = [
 class ExtNumberfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, numberfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, numberfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numberfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -35966,12 +36676,13 @@ ExtNumberfieldComponent.decorators = [
                 inputs: numberfieldMetaData.PROPERTIES,
                 outputs: numberfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtNumberfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtNumberfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -36446,8 +37157,13 @@ fieldpanelMetaData.EVENTNAMES = [
 class ExtFieldpanelComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, fieldpanelMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, fieldpanelMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldpanelMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -36467,12 +37183,13 @@ ExtFieldpanelComponent.decorators = [
                 inputs: fieldpanelMetaData.PROPERTIES,
                 outputs: fieldpanelMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtFieldpanelComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtFieldpanelComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -36901,8 +37618,13 @@ passwordfieldMetaData.EVENTNAMES = [
 class ExtPasswordfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, passwordfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, passwordfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,passwordfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -36922,12 +37644,13 @@ ExtPasswordfieldComponent.decorators = [
                 inputs: passwordfieldMetaData.PROPERTIES,
                 outputs: passwordfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPasswordfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPasswordfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -37374,8 +38097,13 @@ pickerfieldMetaData.EVENTNAMES = [
 class ExtPickerfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, pickerfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pickerfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -37395,12 +38123,13 @@ ExtPickerfieldComponent.decorators = [
                 inputs: pickerfieldMetaData.PROPERTIES,
                 outputs: pickerfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPickerfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPickerfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -37799,8 +38528,13 @@ radioMetaData.EVENTNAMES = [
 class ExtRadioComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, radioMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, radioMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,radioMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -37820,12 +38554,13 @@ ExtRadioComponent.decorators = [
                 inputs: radioMetaData.PROPERTIES,
                 outputs: radioMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtRadioComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtRadioComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -38224,8 +38959,13 @@ radiofieldMetaData.EVENTNAMES = [
 class ExtRadiofieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, radiofieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, radiofieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,radiofieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -38245,12 +38985,13 @@ ExtRadiofieldComponent.decorators = [
                 inputs: radiofieldMetaData.PROPERTIES,
                 outputs: radiofieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtRadiofieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtRadiofieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -38675,8 +39416,13 @@ searchfieldMetaData.EVENTNAMES = [
 class ExtSearchfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, searchfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, searchfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,searchfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -38696,12 +39442,13 @@ ExtSearchfieldComponent.decorators = [
                 inputs: searchfieldMetaData.PROPERTIES,
                 outputs: searchfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSearchfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSearchfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -39196,8 +39943,13 @@ selectfieldMetaData.EVENTNAMES = [
 class ExtSelectfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, selectfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, selectfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -39217,12 +39969,13 @@ ExtSelectfieldComponent.decorators = [
                 inputs: selectfieldMetaData.PROPERTIES,
                 outputs: selectfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSelectfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSelectfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -39627,8 +40380,13 @@ singlesliderfieldMetaData.EVENTNAMES = [
 class ExtSinglesliderfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, singlesliderfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, singlesliderfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,singlesliderfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -39648,12 +40406,13 @@ ExtSinglesliderfieldComponent.decorators = [
                 inputs: singlesliderfieldMetaData.PROPERTIES,
                 outputs: singlesliderfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSinglesliderfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSinglesliderfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -40058,8 +40817,13 @@ sliderfieldMetaData.EVENTNAMES = [
 class ExtSliderfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, sliderfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sliderfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sliderfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -40079,12 +40843,13 @@ ExtSliderfieldComponent.decorators = [
                 inputs: sliderfieldMetaData.PROPERTIES,
                 outputs: sliderfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSliderfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSliderfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -40537,8 +41302,13 @@ spinnerfieldMetaData.EVENTNAMES = [
 class ExtSpinnerfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, spinnerfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, spinnerfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spinnerfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -40558,12 +41328,13 @@ ExtSpinnerfieldComponent.decorators = [
                 inputs: spinnerfieldMetaData.PROPERTIES,
                 outputs: spinnerfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSpinnerfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSpinnerfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -40988,8 +41759,13 @@ textfieldMetaData.EVENTNAMES = [
 class ExtTextfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, textfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, textfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -41009,12 +41785,13 @@ ExtTextfieldComponent.decorators = [
                 inputs: textfieldMetaData.PROPERTIES,
                 outputs: textfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTextfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTextfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -41441,8 +42218,13 @@ textareafieldMetaData.EVENTNAMES = [
 class ExtTextareafieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, textareafieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, textareafieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textareafieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -41462,12 +42244,13 @@ ExtTextareafieldComponent.decorators = [
                 inputs: textareafieldMetaData.PROPERTIES,
                 outputs: textareafieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTextareafieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTextareafieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -41918,8 +42701,13 @@ timefieldMetaData.EVENTNAMES = [
 class ExtTimefieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, timefieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, timefieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timefieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -41939,12 +42727,13 @@ ExtTimefieldComponent.decorators = [
                 inputs: timefieldMetaData.PROPERTIES,
                 outputs: timefieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTimefieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTimefieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -42353,8 +43142,13 @@ togglefieldMetaData.EVENTNAMES = [
 class ExtTogglefieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, togglefieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, togglefieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,togglefieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -42374,12 +43168,13 @@ ExtTogglefieldComponent.decorators = [
                 inputs: togglefieldMetaData.PROPERTIES,
                 outputs: togglefieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTogglefieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTogglefieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -42556,8 +43351,13 @@ cleartriggerMetaData.EVENTNAMES = [
 class ExtCleartriggerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, cleartriggerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, cleartriggerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,cleartriggerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -42577,12 +43377,13 @@ ExtCleartriggerComponent.decorators = [
                 inputs: cleartriggerMetaData.PROPERTIES,
                 outputs: cleartriggerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCleartriggerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCleartriggerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -42759,8 +43560,13 @@ datetriggerMetaData.EVENTNAMES = [
 class ExtDatetriggerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, datetriggerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, datetriggerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datetriggerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -42780,12 +43586,13 @@ ExtDatetriggerComponent.decorators = [
                 inputs: datetriggerMetaData.PROPERTIES,
                 outputs: datetriggerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtDatetriggerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtDatetriggerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -42962,8 +43769,13 @@ expandtriggerMetaData.EVENTNAMES = [
 class ExtExpandtriggerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, expandtriggerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, expandtriggerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,expandtriggerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -42983,12 +43795,13 @@ ExtExpandtriggerComponent.decorators = [
                 inputs: expandtriggerMetaData.PROPERTIES,
                 outputs: expandtriggerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtExpandtriggerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtExpandtriggerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -43171,8 +43984,13 @@ menutriggerMetaData.EVENTNAMES = [
 class ExtMenutriggerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, menutriggerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, menutriggerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menutriggerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -43192,12 +44010,13 @@ ExtMenutriggerComponent.decorators = [
                 inputs: menutriggerMetaData.PROPERTIES,
                 outputs: menutriggerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtMenutriggerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtMenutriggerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -43374,8 +44193,13 @@ revealtriggerMetaData.EVENTNAMES = [
 class ExtRevealtriggerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, revealtriggerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, revealtriggerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,revealtriggerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -43395,12 +44219,13 @@ ExtRevealtriggerComponent.decorators = [
                 inputs: revealtriggerMetaData.PROPERTIES,
                 outputs: revealtriggerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtRevealtriggerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtRevealtriggerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -43577,8 +44402,13 @@ spindowntriggerMetaData.EVENTNAMES = [
 class ExtSpindowntriggerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, spindowntriggerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, spindowntriggerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spindowntriggerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -43598,12 +44428,13 @@ ExtSpindowntriggerComponent.decorators = [
                 inputs: spindowntriggerMetaData.PROPERTIES,
                 outputs: spindowntriggerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSpindowntriggerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSpindowntriggerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -43780,8 +44611,13 @@ spinuptriggerMetaData.EVENTNAMES = [
 class ExtSpinuptriggerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, spinuptriggerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, spinuptriggerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spinuptriggerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -43801,12 +44637,13 @@ ExtSpinuptriggerComponent.decorators = [
                 inputs: spinuptriggerMetaData.PROPERTIES,
                 outputs: spinuptriggerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSpinuptriggerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSpinuptriggerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -43983,8 +44820,13 @@ timetriggerMetaData.EVENTNAMES = [
 class ExtTimetriggerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, timetriggerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, timetriggerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timetriggerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -44004,12 +44846,13 @@ ExtTimetriggerComponent.decorators = [
                 inputs: timetriggerMetaData.PROPERTIES,
                 outputs: timetriggerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTimetriggerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTimetriggerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -44186,8 +45029,13 @@ triggerMetaData.EVENTNAMES = [
 class ExtTriggerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, triggerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, triggerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,triggerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -44207,12 +45055,13 @@ ExtTriggerComponent.decorators = [
                 inputs: triggerMetaData.PROPERTIES,
                 outputs: triggerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTriggerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTriggerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -44637,8 +45486,13 @@ urlfieldMetaData.EVENTNAMES = [
 class ExtUrlfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, urlfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, urlfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,urlfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -44658,12 +45512,13 @@ ExtUrlfieldComponent.decorators = [
                 inputs: urlfieldMetaData.PROPERTIES,
                 outputs: urlfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtUrlfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtUrlfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -45046,8 +45901,13 @@ fieldsetMetaData.EVENTNAMES = [
 class ExtFieldsetComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, fieldsetMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, fieldsetMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldsetMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -45067,12 +45927,13 @@ ExtFieldsetComponent.decorators = [
                 inputs: fieldsetMetaData.PROPERTIES,
                 outputs: fieldsetMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtFieldsetComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtFieldsetComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -45565,8 +46426,13 @@ formpanelMetaData.EVENTNAMES = [
 class ExtFormpanelComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, formpanelMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, formpanelMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,formpanelMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -45586,12 +46452,13 @@ ExtFormpanelComponent.decorators = [
                 inputs: formpanelMetaData.PROPERTIES,
                 outputs: formpanelMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtFormpanelComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtFormpanelComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -45772,8 +46639,13 @@ gridcellbaseMetaData.EVENTNAMES = [
 class ExtGridcellbaseComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, gridcellbaseMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridcellbaseMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcellbaseMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -45793,12 +46665,13 @@ ExtGridcellbaseComponent.decorators = [
                 inputs: gridcellbaseMetaData.PROPERTIES,
                 outputs: gridcellbaseMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtGridcellbaseComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtGridcellbaseComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -45991,8 +46864,13 @@ booleancellMetaData.EVENTNAMES = [
 class ExtBooleancellComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, booleancellMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, booleancellMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,booleancellMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -46012,12 +46890,13 @@ ExtBooleancellComponent.decorators = [
                 inputs: booleancellMetaData.PROPERTIES,
                 outputs: booleancellMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtBooleancellComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtBooleancellComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -46212,8 +47091,13 @@ gridcellMetaData.EVENTNAMES = [
 class ExtGridcellComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, gridcellMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridcellMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcellMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -46233,12 +47117,13 @@ ExtGridcellComponent.decorators = [
                 inputs: gridcellMetaData.PROPERTIES,
                 outputs: gridcellMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtGridcellComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtGridcellComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -46419,8 +47304,13 @@ checkcellMetaData.EVENTNAMES = [
 class ExtCheckcellComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, checkcellMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, checkcellMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkcellMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -46440,12 +47330,13 @@ ExtCheckcellComponent.decorators = [
                 inputs: checkcellMetaData.PROPERTIES,
                 outputs: checkcellMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCheckcellComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCheckcellComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -46634,8 +47525,13 @@ datecellMetaData.EVENTNAMES = [
 class ExtDatecellComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, datecellMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, datecellMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datecellMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -46655,12 +47551,13 @@ ExtDatecellComponent.decorators = [
                 inputs: datecellMetaData.PROPERTIES,
                 outputs: datecellMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtDatecellComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtDatecellComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -46849,8 +47746,13 @@ numbercellMetaData.EVENTNAMES = [
 class ExtNumbercellComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, numbercellMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, numbercellMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numbercellMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -46870,12 +47772,13 @@ ExtNumbercellComponent.decorators = [
                 inputs: numbercellMetaData.PROPERTIES,
                 outputs: numbercellMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtNumbercellComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtNumbercellComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -47064,8 +47967,13 @@ rownumberercellMetaData.EVENTNAMES = [
 class ExtRownumberercellComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, rownumberercellMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, rownumberercellMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rownumberercellMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -47085,12 +47993,13 @@ ExtRownumberercellComponent.decorators = [
                 inputs: rownumberercellMetaData.PROPERTIES,
                 outputs: rownumberercellMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtRownumberercellComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtRownumberercellComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -47277,8 +48186,13 @@ textcellMetaData.EVENTNAMES = [
 class ExtTextcellComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, textcellMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, textcellMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textcellMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -47298,12 +48212,13 @@ ExtTextcellComponent.decorators = [
                 inputs: textcellMetaData.PROPERTIES,
                 outputs: textcellMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTextcellComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTextcellComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -47504,8 +48419,13 @@ treecellMetaData.EVENTNAMES = [
 class ExtTreecellComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, treecellMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, treecellMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treecellMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -47525,12 +48445,13 @@ ExtTreecellComponent.decorators = [
                 inputs: treecellMetaData.PROPERTIES,
                 outputs: treecellMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTreecellComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTreecellComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -47715,8 +48636,13 @@ widgetcellMetaData.EVENTNAMES = [
 class ExtWidgetcellComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, widgetcellMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, widgetcellMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,widgetcellMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -47736,12 +48662,13 @@ ExtWidgetcellComponent.decorators = [
                 inputs: widgetcellMetaData.PROPERTIES,
                 outputs: widgetcellMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtWidgetcellComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtWidgetcellComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -48162,8 +49089,13 @@ celleditorMetaData.EVENTNAMES = [
 class ExtCelleditorComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, celleditorMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, celleditorMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,celleditorMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -48183,12 +49115,13 @@ ExtCelleditorComponent.decorators = [
                 inputs: celleditorMetaData.PROPERTIES,
                 outputs: celleditorMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCelleditorComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCelleditorComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -48280,6 +49213,7 @@ booleancolumnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -48442,6 +49376,7 @@ booleancolumnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -48655,8 +49590,13 @@ booleancolumnMetaData.EVENTNAMES = [
 class ExtBooleancolumnComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, booleancolumnMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, booleancolumnMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,booleancolumnMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -48676,12 +49616,13 @@ ExtBooleancolumnComponent.decorators = [
                 inputs: booleancolumnMetaData.PROPERTIES,
                 outputs: booleancolumnMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtBooleancolumnComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtBooleancolumnComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -48774,6 +49715,7 @@ checkcolumnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -48936,6 +49878,7 @@ checkcolumnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -49152,8 +50095,13 @@ checkcolumnMetaData.EVENTNAMES = [
 class ExtCheckcolumnComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, checkcolumnMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, checkcolumnMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkcolumnMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -49173,12 +50121,13 @@ ExtCheckcolumnComponent.decorators = [
                 inputs: checkcolumnMetaData.PROPERTIES,
                 outputs: checkcolumnMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtCheckcolumnComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtCheckcolumnComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -49269,6 +50218,7 @@ gridcolumnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -49428,6 +50378,7 @@ gridcolumnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -49639,8 +50590,13 @@ gridcolumnMetaData.EVENTNAMES = [
 class ExtGridcolumnComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, gridcolumnMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridcolumnMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcolumnMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -49660,12 +50616,13 @@ ExtGridcolumnComponent.decorators = [
                 inputs: gridcolumnMetaData.PROPERTIES,
                 outputs: gridcolumnMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtGridcolumnComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtGridcolumnComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -49756,6 +50713,7 @@ columnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -49915,6 +50873,7 @@ columnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -50126,8 +51085,13 @@ columnMetaData.EVENTNAMES = [
 class ExtColumnComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, columnMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, columnMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,columnMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -50147,12 +51111,13 @@ ExtColumnComponent.decorators = [
                 inputs: columnMetaData.PROPERTIES,
                 outputs: columnMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtColumnComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtColumnComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -50243,6 +51208,7 @@ templatecolumnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -50402,6 +51368,7 @@ templatecolumnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -50613,8 +51580,13 @@ templatecolumnMetaData.EVENTNAMES = [
 class ExtTemplatecolumnComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, templatecolumnMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, templatecolumnMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,templatecolumnMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -50634,12 +51606,13 @@ ExtTemplatecolumnComponent.decorators = [
                 inputs: templatecolumnMetaData.PROPERTIES,
                 outputs: templatecolumnMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTemplatecolumnComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTemplatecolumnComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -50731,6 +51704,7 @@ datecolumnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -50891,6 +51865,7 @@ datecolumnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -51102,8 +52077,13 @@ datecolumnMetaData.EVENTNAMES = [
 class ExtDatecolumnComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, datecolumnMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, datecolumnMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datecolumnMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -51123,12 +52103,13 @@ ExtDatecolumnComponent.decorators = [
                 inputs: datecolumnMetaData.PROPERTIES,
                 outputs: datecolumnMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtDatecolumnComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtDatecolumnComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -51220,6 +52201,7 @@ numbercolumnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -51380,6 +52362,7 @@ numbercolumnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -51591,8 +52574,13 @@ numbercolumnMetaData.EVENTNAMES = [
 class ExtNumbercolumnComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, numbercolumnMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, numbercolumnMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numbercolumnMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -51612,12 +52600,13 @@ ExtNumbercolumnComponent.decorators = [
                 inputs: numbercolumnMetaData.PROPERTIES,
                 outputs: numbercolumnMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtNumbercolumnComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtNumbercolumnComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -51709,6 +52698,7 @@ rownumbererMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -51869,6 +52859,7 @@ rownumbererMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -52080,8 +53071,13 @@ rownumbererMetaData.EVENTNAMES = [
 class ExtRownumbererComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, rownumbererMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, rownumbererMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rownumbererMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -52101,12 +53097,13 @@ ExtRownumbererComponent.decorators = [
                 inputs: rownumbererMetaData.PROPERTIES,
                 outputs: rownumbererMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtRownumbererComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtRownumbererComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -52199,6 +53196,7 @@ selectioncolumnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -52361,6 +53359,7 @@ selectioncolumnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -52577,8 +53576,13 @@ selectioncolumnMetaData.EVENTNAMES = [
 class ExtSelectioncolumnComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, selectioncolumnMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, selectioncolumnMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectioncolumnMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -52598,12 +53602,13 @@ ExtSelectioncolumnComponent.decorators = [
                 inputs: selectioncolumnMetaData.PROPERTIES,
                 outputs: selectioncolumnMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSelectioncolumnComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSelectioncolumnComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -52694,6 +53699,7 @@ textcolumnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -52853,6 +53859,7 @@ textcolumnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -53064,8 +54071,13 @@ textcolumnMetaData.EVENTNAMES = [
 class ExtTextcolumnComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, textcolumnMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, textcolumnMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textcolumnMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -53085,12 +54097,13 @@ ExtTextcolumnComponent.decorators = [
                 inputs: textcolumnMetaData.PROPERTIES,
                 outputs: textcolumnMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTextcolumnComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTextcolumnComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -53181,6 +54194,7 @@ treecolumnMetaData.PROPERTIESOBJECT = {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -53340,6 +54354,7 @@ treecolumnMetaData.PROPERTIES = [
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -53551,8 +54566,13 @@ treecolumnMetaData.EVENTNAMES = [
 class ExtTreecolumnComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, treecolumnMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, treecolumnMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treecolumnMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -53572,12 +54592,13 @@ ExtTreecolumnComponent.decorators = [
                 inputs: treecolumnMetaData.PROPERTIES,
                 outputs: treecolumnMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTreecolumnComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTreecolumnComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -54190,8 +55211,13 @@ gridMetaData.EVENTNAMES = [
 class ExtGridComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, gridMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -54211,12 +55237,13 @@ ExtGridComponent.decorators = [
                 inputs: gridMetaData.PROPERTIES,
                 outputs: gridMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtGridComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtGridComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -54601,8 +55628,13 @@ headercontainerMetaData.EVENTNAMES = [
 class ExtHeadercontainerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, headercontainerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, headercontainerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,headercontainerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -54622,12 +55654,13 @@ ExtHeadercontainerComponent.decorators = [
                 inputs: headercontainerMetaData.PROPERTIES,
                 outputs: headercontainerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtHeadercontainerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtHeadercontainerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -55024,8 +56057,13 @@ lockedgridMetaData.EVENTNAMES = [
 class ExtLockedgridComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, lockedgridMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, lockedgridMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,lockedgridMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -55045,12 +56083,13 @@ ExtLockedgridComponent.decorators = [
                 inputs: lockedgridMetaData.PROPERTIES,
                 outputs: lockedgridMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtLockedgridComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtLockedgridComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -55515,8 +56554,13 @@ lockedgridregionMetaData.EVENTNAMES = [
 class ExtLockedgridregionComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, lockedgridregionMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, lockedgridregionMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,lockedgridregionMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -55536,12 +56580,13 @@ ExtLockedgridregionComponent.decorators = [
                 inputs: lockedgridregionMetaData.PROPERTIES,
                 outputs: lockedgridregionMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtLockedgridregionComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtLockedgridregionComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -55892,8 +56937,13 @@ gridcolumnsmenuMetaData.EVENTNAMES = [
 class ExtGridcolumnsmenuComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, gridcolumnsmenuMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridcolumnsmenuMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcolumnsmenuMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -55913,12 +56963,13 @@ ExtGridcolumnsmenuComponent.decorators = [
                 inputs: gridcolumnsmenuMetaData.PROPERTIES,
                 outputs: gridcolumnsmenuMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtGridcolumnsmenuComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtGridcolumnsmenuComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -56269,8 +57320,13 @@ gridgroupbythismenuitemMetaData.EVENTNAMES = [
 class ExtGridgroupbythismenuitemComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, gridgroupbythismenuitemMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridgroupbythismenuitemMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridgroupbythismenuitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -56290,12 +57346,13 @@ ExtGridgroupbythismenuitemComponent.decorators = [
                 inputs: gridgroupbythismenuitemMetaData.PROPERTIES,
                 outputs: gridgroupbythismenuitemMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtGridgroupbythismenuitemComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtGridgroupbythismenuitemComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -56660,8 +57717,13 @@ gridshowingroupsmenuitemMetaData.EVENTNAMES = [
 class ExtGridshowingroupsmenuitemComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, gridshowingroupsmenuitemMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridshowingroupsmenuitemMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridshowingroupsmenuitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -56681,12 +57743,13 @@ ExtGridshowingroupsmenuitemComponent.decorators = [
                 inputs: gridshowingroupsmenuitemMetaData.PROPERTIES,
                 outputs: gridshowingroupsmenuitemMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtGridshowingroupsmenuitemComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtGridshowingroupsmenuitemComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -57055,8 +58118,13 @@ gridsortascmenuitemMetaData.EVENTNAMES = [
 class ExtGridsortascmenuitemComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, gridsortascmenuitemMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridsortascmenuitemMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsortascmenuitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -57076,12 +58144,13 @@ ExtGridsortascmenuitemComponent.decorators = [
                 inputs: gridsortascmenuitemMetaData.PROPERTIES,
                 outputs: gridsortascmenuitemMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtGridsortascmenuitemComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtGridsortascmenuitemComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -57450,8 +58519,13 @@ gridsortdescmenuitemMetaData.EVENTNAMES = [
 class ExtGridsortdescmenuitemComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, gridsortdescmenuitemMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridsortdescmenuitemMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsortdescmenuitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -57471,12 +58545,13 @@ ExtGridsortdescmenuitemComponent.decorators = [
                 inputs: gridsortdescmenuitemMetaData.PROPERTIES,
                 outputs: gridsortdescmenuitemMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtGridsortdescmenuitemComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtGridsortdescmenuitemComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -57863,8 +58938,13 @@ pagingtoolbarMetaData.EVENTNAMES = [
 class ExtPagingtoolbarComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, pagingtoolbarMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pagingtoolbarMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pagingtoolbarMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -57884,12 +58964,13 @@ ExtPagingtoolbarComponent.decorators = [
                 inputs: pagingtoolbarMetaData.PROPERTIES,
                 outputs: pagingtoolbarMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPagingtoolbarComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPagingtoolbarComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -58218,8 +59299,13 @@ gridrowMetaData.EVENTNAMES = [
 class ExtGridrowComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, gridrowMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridrowMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridrowMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -58239,12 +59325,13 @@ ExtGridrowComponent.decorators = [
                 inputs: gridrowMetaData.PROPERTIES,
                 outputs: gridrowMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtGridrowComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtGridrowComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -58561,8 +59648,13 @@ rowbodyMetaData.EVENTNAMES = [
 class ExtRowbodyComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, rowbodyMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, rowbodyMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rowbodyMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -58582,12 +59674,13 @@ ExtRowbodyComponent.decorators = [
                 inputs: rowbodyMetaData.PROPERTIES,
                 outputs: rowbodyMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtRowbodyComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtRowbodyComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -58914,8 +60007,13 @@ rowheaderMetaData.EVENTNAMES = [
 class ExtRowheaderComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, rowheaderMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, rowheaderMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rowheaderMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -58935,12 +60033,13 @@ ExtRowheaderComponent.decorators = [
                 inputs: rowheaderMetaData.PROPERTIES,
                 outputs: rowheaderMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtRowheaderComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtRowheaderComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -59269,8 +60368,13 @@ gridsummaryrowMetaData.EVENTNAMES = [
 class ExtGridsummaryrowComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, gridsummaryrowMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridsummaryrowMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsummaryrowMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -59290,12 +60394,13 @@ ExtGridsummaryrowComponent.decorators = [
                 inputs: gridsummaryrowMetaData.PROPERTIES,
                 outputs: gridsummaryrowMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtGridsummaryrowComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtGridsummaryrowComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -59930,8 +61035,13 @@ treeMetaData.EVENTNAMES = [
 class ExtTreeComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, treeMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, treeMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treeMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -59951,12 +61061,13 @@ ExtTreeComponent.decorators = [
                 inputs: treeMetaData.PROPERTIES,
                 outputs: treeMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTreeComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTreeComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -60287,8 +61398,13 @@ imageMetaData.EVENTNAMES = [
 class ExtImageComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, imageMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, imageMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,imageMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -60308,12 +61424,13 @@ ExtImageComponent.decorators = [
                 inputs: imageMetaData.PROPERTIES,
                 outputs: imageMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtImageComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtImageComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -60644,8 +61761,13 @@ imgMetaData.EVENTNAMES = [
 class ExtImgComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, imgMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, imgMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,imgMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -60665,12 +61787,13 @@ ExtImgComponent.decorators = [
                 inputs: imgMetaData.PROPERTIES,
                 outputs: imgMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtImgComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtImgComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -61001,8 +62124,13 @@ indicatorMetaData.EVENTNAMES = [
 class ExtIndicatorComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, indicatorMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, indicatorMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,indicatorMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -61022,12 +62150,13 @@ ExtIndicatorComponent.decorators = [
                 inputs: indicatorMetaData.PROPERTIES,
                 outputs: indicatorMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtIndicatorComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtIndicatorComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -61344,8 +62473,13 @@ labelMetaData.EVENTNAMES = [
 class ExtLabelComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, labelMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, labelMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,labelMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -61365,12 +62499,13 @@ ExtLabelComponent.decorators = [
                 inputs: labelMetaData.PROPERTIES,
                 outputs: labelMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtLabelComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtLabelComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -61713,8 +62848,13 @@ treelistMetaData.EVENTNAMES = [
 class ExtTreelistComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, treelistMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, treelistMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treelistMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -61734,12 +62874,13 @@ ExtTreelistComponent.decorators = [
                 inputs: treelistMetaData.PROPERTIES,
                 outputs: treelistMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTreelistComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTreelistComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -61930,8 +63071,13 @@ treelistitemMetaData.EVENTNAMES = [
 class ExtTreelistitemComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, treelistitemMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, treelistitemMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treelistitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -61951,12 +63097,13 @@ ExtTreelistitemComponent.decorators = [
                 inputs: treelistitemMetaData.PROPERTIES,
                 outputs: treelistitemMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTreelistitemComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTreelistitemComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -62283,8 +63430,13 @@ loadmaskMetaData.EVENTNAMES = [
 class ExtLoadmaskComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, loadmaskMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, loadmaskMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,loadmaskMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -62304,12 +63456,13 @@ ExtLoadmaskComponent.decorators = [
                 inputs: loadmaskMetaData.PROPERTIES,
                 outputs: loadmaskMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtLoadmaskComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtLoadmaskComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -62630,8 +63783,13 @@ maskMetaData.EVENTNAMES = [
 class ExtMaskComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, maskMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, maskMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,maskMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -62651,12 +63809,13 @@ ExtMaskComponent.decorators = [
                 inputs: maskMetaData.PROPERTIES,
                 outputs: maskMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtMaskComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtMaskComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -63007,8 +64166,13 @@ mediaMetaData.EVENTNAMES = [
 class ExtMediaComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, mediaMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, mediaMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,mediaMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -63028,12 +64192,13 @@ ExtMediaComponent.decorators = [
                 inputs: mediaMetaData.PROPERTIES,
                 outputs: mediaMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtMediaComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtMediaComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -63398,8 +64563,13 @@ menucheckitemMetaData.EVENTNAMES = [
 class ExtMenucheckitemComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, menucheckitemMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, menucheckitemMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menucheckitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -63419,12 +64589,13 @@ ExtMenucheckitemComponent.decorators = [
                 inputs: menucheckitemMetaData.PROPERTIES,
                 outputs: menucheckitemMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtMenucheckitemComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtMenucheckitemComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -63775,8 +64946,13 @@ menuitemMetaData.EVENTNAMES = [
 class ExtMenuitemComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, menuitemMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, menuitemMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -63796,12 +64972,13 @@ ExtMenuitemComponent.decorators = [
                 inputs: menuitemMetaData.PROPERTIES,
                 outputs: menuitemMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtMenuitemComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtMenuitemComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -64276,8 +65453,13 @@ menuMetaData.EVENTNAMES = [
 class ExtMenuComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, menuMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, menuMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -64297,12 +65479,13 @@ ExtMenuComponent.decorators = [
                 inputs: menuMetaData.PROPERTIES,
                 outputs: menuMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtMenuComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtMenuComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -64671,8 +65854,13 @@ menuradioitemMetaData.EVENTNAMES = [
 class ExtMenuradioitemComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, menuradioitemMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, menuradioitemMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuradioitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -64692,12 +65880,13 @@ ExtMenuradioitemComponent.decorators = [
                 inputs: menuradioitemMetaData.PROPERTIES,
                 outputs: menuradioitemMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtMenuradioitemComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtMenuradioitemComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -65014,8 +66203,13 @@ menuseparatorMetaData.EVENTNAMES = [
 class ExtMenuseparatorComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, menuseparatorMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, menuseparatorMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuseparatorMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -65035,12 +66229,13 @@ ExtMenuseparatorComponent.decorators = [
                 inputs: menuseparatorMetaData.PROPERTIES,
                 outputs: menuseparatorMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtMenuseparatorComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtMenuseparatorComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -65537,8 +66732,13 @@ messageboxMetaData.EVENTNAMES = [
 class ExtMessageboxComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, messageboxMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, messageboxMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,messageboxMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -65558,12 +66758,13 @@ ExtMessageboxComponent.decorators = [
                 inputs: messageboxMetaData.PROPERTIES,
                 outputs: messageboxMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtMessageboxComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtMessageboxComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -65950,8 +67151,13 @@ navigationviewMetaData.EVENTNAMES = [
 class ExtNavigationviewComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, navigationviewMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, navigationviewMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,navigationviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -65971,12 +67177,13 @@ ExtNavigationviewComponent.decorators = [
                 inputs: navigationviewMetaData.PROPERTIES,
                 outputs: navigationviewMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtNavigationviewComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtNavigationviewComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -66433,8 +67640,13 @@ panelMetaData.EVENTNAMES = [
 class ExtPanelComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, panelMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, panelMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,panelMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -66454,12 +67666,13 @@ ExtPanelComponent.decorators = [
                 inputs: panelMetaData.PROPERTIES,
                 outputs: panelMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPanelComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPanelComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -66986,8 +68199,13 @@ datepanelMetaData.EVENTNAMES = [
 class ExtDatepanelComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, datepanelMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, datepanelMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepanelMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -67007,12 +68225,13 @@ ExtDatepanelComponent.decorators = [
                 inputs: datepanelMetaData.PROPERTIES,
                 outputs: datepanelMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtDatepanelComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtDatepanelComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -67345,8 +68564,13 @@ datetitleMetaData.EVENTNAMES = [
 class ExtDatetitleComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, datetitleMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, datetitleMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datetitleMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -67366,12 +68590,13 @@ ExtDatetitleComponent.decorators = [
                 inputs: datetitleMetaData.PROPERTIES,
                 outputs: datetitleMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtDatetitleComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtDatetitleComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -67762,8 +68987,13 @@ panelheaderMetaData.EVENTNAMES = [
 class ExtPanelheaderComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, panelheaderMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, panelheaderMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,panelheaderMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -67783,12 +69013,13 @@ ExtPanelheaderComponent.decorators = [
                 inputs: panelheaderMetaData.PROPERTIES,
                 outputs: panelheaderMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPanelheaderComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPanelheaderComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -68263,8 +69494,13 @@ timepanelMetaData.EVENTNAMES = [
 class ExtTimepanelComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, timepanelMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, timepanelMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timepanelMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -68284,12 +69520,13 @@ ExtTimepanelComponent.decorators = [
                 inputs: timepanelMetaData.PROPERTIES,
                 outputs: timepanelMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTimepanelComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTimepanelComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -68622,8 +69859,13 @@ paneltitleMetaData.EVENTNAMES = [
 class ExtPaneltitleComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, paneltitleMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, paneltitleMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,paneltitleMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -68643,12 +69885,13 @@ ExtPaneltitleComponent.decorators = [
                 inputs: paneltitleMetaData.PROPERTIES,
                 outputs: paneltitleMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPaneltitleComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPaneltitleComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -69211,8 +70454,13 @@ yearpickerMetaData.EVENTNAMES = [
 class ExtYearpickerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, yearpickerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, yearpickerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,yearpickerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -69232,12 +70480,13 @@ ExtYearpickerComponent.decorators = [
                 inputs: yearpickerMetaData.PROPERTIES,
                 outputs: yearpickerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtYearpickerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtYearpickerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -69738,8 +70987,13 @@ datepickerMetaData.EVENTNAMES = [
 class ExtDatepickerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, datepickerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, datepickerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -69759,12 +71013,13 @@ ExtDatepickerComponent.decorators = [
                 inputs: datepickerMetaData.PROPERTIES,
                 outputs: datepickerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtDatepickerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtDatepickerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -70253,8 +71508,13 @@ pickerMetaData.EVENTNAMES = [
 class ExtPickerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, pickerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pickerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -70274,12 +71534,13 @@ ExtPickerComponent.decorators = [
                 inputs: pickerMetaData.PROPERTIES,
                 outputs: pickerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPickerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPickerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -70768,8 +72029,13 @@ selectpickerMetaData.EVENTNAMES = [
 class ExtSelectpickerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, selectpickerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, selectpickerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectpickerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -70789,12 +72055,13 @@ ExtSelectpickerComponent.decorators = [
                 inputs: selectpickerMetaData.PROPERTIES,
                 outputs: selectpickerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSelectpickerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSelectpickerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -71305,8 +72572,13 @@ pickerslotMetaData.EVENTNAMES = [
 class ExtPickerslotComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, pickerslotMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pickerslotMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerslotMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -71326,12 +72598,13 @@ ExtPickerslotComponent.decorators = [
                 inputs: pickerslotMetaData.PROPERTIES,
                 outputs: pickerslotMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPickerslotComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPickerslotComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -71788,8 +73061,13 @@ tabletpickerMetaData.EVENTNAMES = [
 class ExtTabletpickerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, tabletpickerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, tabletpickerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabletpickerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -71809,12 +73087,13 @@ ExtTabletpickerComponent.decorators = [
                 inputs: tabletpickerMetaData.PROPERTIES,
                 outputs: tabletpickerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTabletpickerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTabletpickerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -72009,8 +73288,13 @@ pivotgridcellMetaData.EVENTNAMES = [
 class ExtPivotgridcellComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, pivotgridcellMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotgridcellMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridcellMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -72030,12 +73314,13 @@ ExtPivotgridcellComponent.decorators = [
                 inputs: pivotgridcellMetaData.PROPERTIES,
                 outputs: pivotgridcellMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotgridcellComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPivotgridcellComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -72230,8 +73515,13 @@ pivotgridgroupcellMetaData.EVENTNAMES = [
 class ExtPivotgridgroupcellComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, pivotgridgroupcellMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotgridgroupcellMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridgroupcellMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -72251,12 +73541,13 @@ ExtPivotgridgroupcellComponent.decorators = [
                 inputs: pivotgridgroupcellMetaData.PROPERTIES,
                 outputs: pivotgridgroupcellMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotgridgroupcellComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPivotgridgroupcellComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -72293,8 +73584,13 @@ pivotd3containerMetaData.EVENTNAMES = [
 class ExtPivotd3containerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, pivotd3containerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotd3containerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotd3containerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -72314,12 +73610,13 @@ ExtPivotd3containerComponent.decorators = [
                 inputs: pivotd3containerMetaData.PROPERTIES,
                 outputs: pivotd3containerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotd3containerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPivotd3containerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -72668,8 +73965,13 @@ pivotheatmapMetaData.EVENTNAMES = [
 class ExtPivotheatmapComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, pivotheatmapMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotheatmapMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotheatmapMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -72689,12 +73991,13 @@ ExtPivotheatmapComponent.decorators = [
                 inputs: pivotheatmapMetaData.PROPERTIES,
                 outputs: pivotheatmapMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotheatmapComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPivotheatmapComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -73079,8 +74382,13 @@ pivottreemapMetaData.EVENTNAMES = [
 class ExtPivottreemapComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, pivottreemapMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivottreemapMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivottreemapMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -73100,12 +74408,13 @@ ExtPivottreemapComponent.decorators = [
                 inputs: pivottreemapMetaData.PROPERTIES,
                 outputs: pivottreemapMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPivottreemapComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPivottreemapComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -73800,8 +75109,13 @@ pivotgridMetaData.EVENTNAMES = [
 class ExtPivotgridComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, pivotgridMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotgridMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -73821,12 +75135,13 @@ ExtPivotgridComponent.decorators = [
                 inputs: pivotgridMetaData.PROPERTIES,
                 outputs: pivotgridMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotgridComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPivotgridComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -74215,8 +75530,13 @@ pivotconfigfieldMetaData.EVENTNAMES = [
 class ExtPivotconfigfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, pivotconfigfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotconfigfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -74236,12 +75556,13 @@ ExtPivotconfigfieldComponent.decorators = [
                 inputs: pivotconfigfieldMetaData.PROPERTIES,
                 outputs: pivotconfigfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotconfigfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPivotconfigfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -74700,8 +76021,13 @@ pivotconfigcontainerMetaData.EVENTNAMES = [
 class ExtPivotconfigcontainerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, pivotconfigcontainerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotconfigcontainerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigcontainerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -74721,12 +76047,13 @@ ExtPivotconfigcontainerComponent.decorators = [
                 inputs: pivotconfigcontainerMetaData.PROPERTIES,
                 outputs: pivotconfigcontainerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotconfigcontainerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPivotconfigcontainerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -75219,8 +76546,13 @@ pivotconfigformMetaData.EVENTNAMES = [
 class ExtPivotconfigformComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, pivotconfigformMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotconfigformMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigformMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -75240,12 +76572,13 @@ ExtPivotconfigformComponent.decorators = [
                 inputs: pivotconfigformMetaData.PROPERTIES,
                 outputs: pivotconfigformMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotconfigformComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPivotconfigformComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -75718,8 +77051,13 @@ pivotconfigpanelMetaData.EVENTNAMES = [
 class ExtPivotconfigpanelComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, pivotconfigpanelMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotconfigpanelMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigpanelMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -75739,12 +77077,13 @@ ExtPivotconfigpanelComponent.decorators = [
                 inputs: pivotconfigpanelMetaData.PROPERTIES,
                 outputs: pivotconfigpanelMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotconfigpanelComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPivotconfigpanelComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -76237,8 +77576,13 @@ pivotsettingsMetaData.EVENTNAMES = [
 class ExtPivotsettingsComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, pivotsettingsMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotsettingsMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotsettingsMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -76258,12 +77602,13 @@ ExtPivotsettingsComponent.decorators = [
                 inputs: pivotsettingsMetaData.PROPERTIES,
                 outputs: pivotsettingsMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotsettingsComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPivotsettingsComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -76756,8 +78101,13 @@ pivotrangeeditorMetaData.EVENTNAMES = [
 class ExtPivotrangeeditorComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, pivotrangeeditorMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotrangeeditorMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotrangeeditorMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -76777,12 +78127,13 @@ ExtPivotrangeeditorComponent.decorators = [
                 inputs: pivotrangeeditorMetaData.PROPERTIES,
                 outputs: pivotrangeeditorMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotrangeeditorComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPivotrangeeditorComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -77111,8 +78462,13 @@ pivotgridrowMetaData.EVENTNAMES = [
 class ExtPivotgridrowComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, pivotgridrowMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotgridrowMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridrowMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -77132,12 +78488,13 @@ ExtPivotgridrowComponent.decorators = [
                 inputs: pivotgridrowMetaData.PROPERTIES,
                 outputs: pivotgridrowMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotgridrowComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPivotgridrowComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -77462,8 +78819,13 @@ progressMetaData.EVENTNAMES = [
 class ExtProgressComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, progressMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, progressMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,progressMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -77483,12 +78845,13 @@ ExtProgressComponent.decorators = [
                 inputs: progressMetaData.PROPERTIES,
                 outputs: progressMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtProgressComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtProgressComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -77813,8 +79176,13 @@ progressbarwidgetMetaData.EVENTNAMES = [
 class ExtProgressbarwidgetComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, progressbarwidgetMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, progressbarwidgetMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,progressbarwidgetMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -77834,12 +79202,13 @@ ExtProgressbarwidgetComponent.decorators = [
                 inputs: progressbarwidgetMetaData.PROPERTIES,
                 outputs: progressbarwidgetMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtProgressbarwidgetComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtProgressbarwidgetComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -78234,8 +79603,13 @@ segmentedbuttonMetaData.EVENTNAMES = [
 class ExtSegmentedbuttonComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, segmentedbuttonMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, segmentedbuttonMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,segmentedbuttonMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -78255,12 +79629,13 @@ ExtSegmentedbuttonComponent.decorators = [
                 inputs: segmentedbuttonMetaData.PROPERTIES,
                 outputs: segmentedbuttonMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSegmentedbuttonComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSegmentedbuttonComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -78731,8 +80106,13 @@ sheetMetaData.EVENTNAMES = [
 class ExtSheetComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, sheetMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sheetMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sheetMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -78752,12 +80132,13 @@ ExtSheetComponent.decorators = [
                 inputs: sheetMetaData.PROPERTIES,
                 outputs: sheetMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSheetComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSheetComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -79102,8 +80483,13 @@ sliderMetaData.EVENTNAMES = [
 class ExtSliderComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, sliderMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sliderMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sliderMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -79123,12 +80509,13 @@ ExtSliderComponent.decorators = [
                 inputs: sliderMetaData.PROPERTIES,
                 outputs: sliderMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSliderComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSliderComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -79449,8 +80836,13 @@ thumbMetaData.EVENTNAMES = [
 class ExtThumbComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, thumbMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, thumbMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,thumbMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -79470,12 +80862,13 @@ ExtThumbComponent.decorators = [
                 inputs: thumbMetaData.PROPERTIES,
                 outputs: thumbMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtThumbComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtThumbComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -79820,8 +81213,13 @@ togglesliderMetaData.EVENTNAMES = [
 class ExtTogglesliderComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, togglesliderMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, togglesliderMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,togglesliderMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -79841,12 +81239,13 @@ ExtTogglesliderComponent.decorators = [
                 inputs: togglesliderMetaData.PROPERTIES,
                 outputs: togglesliderMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTogglesliderComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTogglesliderComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -80163,8 +81562,13 @@ spacerMetaData.EVENTNAMES = [
 class ExtSpacerComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, spacerMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, spacerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spacerMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -80184,12 +81588,13 @@ ExtSpacerComponent.decorators = [
                 inputs: spacerMetaData.PROPERTIES,
                 outputs: spacerMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSpacerComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSpacerComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -80548,8 +81953,13 @@ sparklinebarMetaData.EVENTNAMES = [
 class ExtSparklinebarComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, sparklinebarMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sparklinebarMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinebarMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -80569,12 +81979,13 @@ ExtSparklinebarComponent.decorators = [
                 inputs: sparklinebarMetaData.PROPERTIES,
                 outputs: sparklinebarMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinebarComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSparklinebarComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -80909,8 +82320,13 @@ sparklineMetaData.EVENTNAMES = [
 class ExtSparklineComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, sparklineMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sparklineMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklineMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -80930,12 +82346,13 @@ ExtSparklineComponent.decorators = [
                 inputs: sparklineMetaData.PROPERTIES,
                 outputs: sparklineMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklineComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSparklineComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -81298,8 +82715,13 @@ sparklineboxMetaData.EVENTNAMES = [
 class ExtSparklineboxComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, sparklineboxMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sparklineboxMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklineboxMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -81319,12 +82741,13 @@ ExtSparklineboxComponent.decorators = [
                 inputs: sparklineboxMetaData.PROPERTIES,
                 outputs: sparklineboxMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklineboxComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSparklineboxComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -81669,8 +83092,13 @@ sparklinebulletMetaData.EVENTNAMES = [
 class ExtSparklinebulletComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, sparklinebulletMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sparklinebulletMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinebulletMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -81690,12 +83118,13 @@ ExtSparklinebulletComponent.decorators = [
                 inputs: sparklinebulletMetaData.PROPERTIES,
                 outputs: sparklinebulletMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinebulletComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSparklinebulletComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -82042,8 +83471,13 @@ sparklinediscreteMetaData.EVENTNAMES = [
 class ExtSparklinediscreteComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, sparklinediscreteMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sparklinediscreteMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinediscreteMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -82063,12 +83497,13 @@ ExtSparklinediscreteComponent.decorators = [
                 inputs: sparklinediscreteMetaData.PROPERTIES,
                 outputs: sparklinediscreteMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinediscreteComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSparklinediscreteComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -82437,8 +83872,13 @@ sparklinelineMetaData.EVENTNAMES = [
 class ExtSparklinelineComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, sparklinelineMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sparklinelineMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinelineMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -82458,12 +83898,13 @@ ExtSparklinelineComponent.decorators = [
                 inputs: sparklinelineMetaData.PROPERTIES,
                 outputs: sparklinelineMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinelineComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSparklinelineComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -82806,8 +84247,13 @@ sparklinepieMetaData.EVENTNAMES = [
 class ExtSparklinepieComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, sparklinepieMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sparklinepieMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinepieMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -82827,12 +84273,13 @@ ExtSparklinepieComponent.decorators = [
                 inputs: sparklinepieMetaData.PROPERTIES,
                 outputs: sparklinepieMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinepieComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSparklinepieComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -83179,8 +84626,13 @@ sparklinetristateMetaData.EVENTNAMES = [
 class ExtSparklinetristateComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, sparklinetristateMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sparklinetristateMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinetristateMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -83200,12 +84652,13 @@ ExtSparklinetristateComponent.decorators = [
                 inputs: sparklinetristateMetaData.PROPERTIES,
                 outputs: sparklinetristateMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinetristateComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSparklinetristateComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -83578,8 +85031,13 @@ splitbuttonMetaData.EVENTNAMES = [
 class ExtSplitbuttonComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, splitbuttonMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, splitbuttonMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,splitbuttonMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -83599,12 +85057,13 @@ ExtSplitbuttonComponent.decorators = [
                 inputs: splitbuttonMetaData.PROPERTIES,
                 outputs: splitbuttonMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtSplitbuttonComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtSplitbuttonComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -83995,8 +85454,13 @@ tabbarMetaData.EVENTNAMES = [
 class ExtTabbarComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, tabbarMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, tabbarMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabbarMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -84016,12 +85480,13 @@ ExtTabbarComponent.decorators = [
                 inputs: tabbarMetaData.PROPERTIES,
                 outputs: tabbarMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTabbarComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTabbarComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -84402,8 +85867,13 @@ tabpanelMetaData.EVENTNAMES = [
 class ExtTabpanelComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, tabpanelMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, tabpanelMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabpanelMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -84423,12 +85893,13 @@ ExtTabpanelComponent.decorators = [
                 inputs: tabpanelMetaData.PROPERTIES,
                 outputs: tabpanelMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTabpanelComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTabpanelComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -84807,8 +86278,13 @@ tabMetaData.EVENTNAMES = [
 class ExtTabComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, tabMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, tabMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -84828,12 +86304,13 @@ ExtTabComponent.decorators = [
                 inputs: tabMetaData.PROPERTIES,
                 outputs: tabMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTabComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTabComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -85318,8 +86795,13 @@ tooltipMetaData.EVENTNAMES = [
 class ExtTooltipComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, tooltipMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, tooltipMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tooltipMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -85339,12 +86821,13 @@ ExtTooltipComponent.decorators = [
                 inputs: tooltipMetaData.PROPERTIES,
                 outputs: tooltipMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTooltipComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTooltipComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -85663,8 +87146,13 @@ titleMetaData.EVENTNAMES = [
 class ExtTitleComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, titleMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, titleMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,titleMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -85684,12 +87172,13 @@ ExtTitleComponent.decorators = [
                 inputs: titleMetaData.PROPERTIES,
                 outputs: titleMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTitleComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTitleComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -86072,8 +87561,13 @@ titlebarMetaData.EVENTNAMES = [
 class ExtTitlebarComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, titlebarMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, titlebarMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,titlebarMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -86093,12 +87587,13 @@ ExtTitlebarComponent.decorators = [
                 inputs: titlebarMetaData.PROPERTIES,
                 outputs: titlebarMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtTitlebarComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtTitlebarComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -86431,8 +87926,13 @@ toolMetaData.EVENTNAMES = [
 class ExtToolComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, toolMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, toolMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,toolMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -86452,12 +87952,13 @@ ExtToolComponent.decorators = [
                 inputs: toolMetaData.PROPERTIES,
                 outputs: toolMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtToolComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtToolComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -86790,8 +88291,13 @@ paneltoolMetaData.EVENTNAMES = [
 class ExtPaneltoolComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, paneltoolMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, paneltoolMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,paneltoolMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -86811,12 +88317,13 @@ ExtPaneltoolComponent.decorators = [
                 inputs: paneltoolMetaData.PROPERTIES,
                 outputs: paneltoolMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtPaneltoolComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtPaneltoolComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -87195,8 +88702,13 @@ toolbarMetaData.EVENTNAMES = [
 class ExtToolbarComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, toolbarMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, toolbarMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,toolbarMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -87216,12 +88728,13 @@ ExtToolbarComponent.decorators = [
                 inputs: toolbarMetaData.PROPERTIES,
                 outputs: toolbarMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtToolbarComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtToolbarComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -87550,8 +89063,13 @@ colorbuttonMetaData.EVENTNAMES = [
 class ExtColorbuttonComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, colorbuttonMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, colorbuttonMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorbuttonMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -87571,12 +89089,13 @@ ExtColorbuttonComponent.decorators = [
                 inputs: colorbuttonMetaData.PROPERTIES,
                 outputs: colorbuttonMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtColorbuttonComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtColorbuttonComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -87893,8 +89412,13 @@ colorpickercolorpreviewMetaData.EVENTNAMES = [
 class ExtColorpickercolorpreviewComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, colorpickercolorpreviewMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, colorpickercolorpreviewMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorpickercolorpreviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -87914,12 +89438,13 @@ ExtColorpickercolorpreviewComponent.decorators = [
                 inputs: colorpickercolorpreviewMetaData.PROPERTIES,
                 outputs: colorpickercolorpreviewMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtColorpickercolorpreviewComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtColorpickercolorpreviewComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -88374,8 +89899,13 @@ colorfieldMetaData.EVENTNAMES = [
 class ExtColorfieldComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, colorfieldMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, colorfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -88395,12 +89925,13 @@ ExtColorfieldComponent.decorators = [
                 inputs: colorfieldMetaData.PROPERTIES,
                 outputs: colorfieldMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtColorfieldComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtColorfieldComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -88457,8 +89988,13 @@ colorselectorMetaData.EVENTNAMES = [
 class ExtColorselectorComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, colorselectorMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, colorselectorMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorselectorMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -88478,12 +90014,13 @@ ExtColorselectorComponent.decorators = [
                 inputs: colorselectorMetaData.PROPERTIES,
                 outputs: colorselectorMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtColorselectorComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtColorselectorComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -88828,8 +90365,13 @@ gaugeMetaData.EVENTNAMES = [
 class ExtGaugeComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, gaugeMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gaugeMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gaugeMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -88849,12 +90391,13 @@ ExtGaugeComponent.decorators = [
                 inputs: gaugeMetaData.PROPERTIES,
                 outputs: gaugeMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtGaugeComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtGaugeComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -89273,8 +90816,13 @@ mapMetaData.EVENTNAMES = [
 class ExtMapComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, mapMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, mapMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,mapMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -89294,12 +90842,13 @@ ExtMapComponent.decorators = [
                 inputs: mapMetaData.PROPERTIES,
                 outputs: mapMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtMapComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtMapComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -89718,8 +91267,13 @@ google_mapMetaData.EVENTNAMES = [
 class ExtGoogle_mapComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, google_mapMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, google_mapMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,google_mapMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -89739,12 +91293,13 @@ ExtGoogle_mapComponent.decorators = [
                 inputs: google_mapMetaData.PROPERTIES,
                 outputs: google_mapMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtGoogle_mapComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtGoogle_mapComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -90089,8 +91644,13 @@ ratingMetaData.EVENTNAMES = [
 class ExtRatingComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, ratingMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, ratingMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,ratingMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -90110,12 +91670,13 @@ ExtRatingComponent.decorators = [
                 inputs: ratingMetaData.PROPERTIES,
                 outputs: ratingMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtRatingComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtRatingComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -90470,8 +92031,13 @@ videoMetaData.EVENTNAMES = [
 class ExtVideoComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, videoMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, videoMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,videoMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -90491,12 +92057,13 @@ ExtVideoComponent.decorators = [
                 inputs: videoMetaData.PROPERTIES,
                 outputs: videoMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtVideoComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtVideoComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -90889,8 +92456,13 @@ viewportMetaData.EVENTNAMES = [
 class ExtViewportComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, viewportMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, viewportMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,viewportMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -90910,12 +92482,13 @@ ExtViewportComponent.decorators = [
                 inputs: viewportMetaData.PROPERTIES,
                 outputs: viewportMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtViewportComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtViewportComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -91074,8 +92647,13 @@ widgetMetaData.EVENTNAMES = [
 class ExtWidgetComponent extends base {
     /**
      * @param {?} eRef
+     * @param {?} hostComponent
      */
-    constructor(eRef) { super(eRef, widgetMetaData); }
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, widgetMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,widgetMetaData,hostComponent)}
     /**
      * @return {?}
      */
@@ -91095,473 +92673,13 @@ ExtWidgetComponent.decorators = [
                 inputs: widgetMetaData.PROPERTIES,
                 outputs: widgetMetaData.EVENTNAMES,
                 providers: [{ provide: base, useExisting: forwardRef(() => ExtWidgetComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
+                template: '<ng-template></ng-template>'
             }] }
 ];
 /** @nocollapse */
 ExtWidgetComponent.ctorParameters = () => [
-    { type: ElementRef }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class orgchartMetaData {
-}
-orgchartMetaData.XTYPE = 'orgchart';
-orgchartMetaData.PROPERTIESOBJECT = {
-    "zIndex": "Number",
-    "platformConfig": "Object",
-    "responsiveConfig": "Object",
-    "fitToParent": "Boolean",
-    "config": "Object",
-};
-orgchartMetaData.PROPERTIES = [
-    'zIndex',
-    'platformConfig',
-    'responsiveConfig',
-    'fitToParent',
-    'config'
-];
-orgchartMetaData.EVENTS = [
-    { name: 'ready', parameters: '' }
-];
-orgchartMetaData.EVENTNAMES = [
-    'ready'
-];
-class ExtOrgChartComponent extends base {
-    /**
-     * @param {?} eRef
-     */
-    constructor(eRef) { super(eRef, orgchartMetaData); }
-    /**
-     * @return {?}
-     */
-    ngOnInit() { this.baseOnInit(orgchartMetaData); }
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        this['ready'].emit(this);
-    }
-}
-ExtOrgChartComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'orgchart',
-                inputs: orgchartMetaData.PROPERTIES,
-                outputs: orgchartMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtOrgChartComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtOrgChartComponent.ctorParameters = () => [
-    { type: ElementRef }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class transitionMetaData {
-}
-transitionMetaData.XTYPE = 'transition';
-transitionMetaData.PROPERTIESOBJECT = {
-    "type": "slide/reveal/cover/fade/pop",
-    "duration": "Number",
-    "easing": "String",
-    "direction": "String",
-    "bindDirectionToLocation": "Boolean",
-    "activeChildTabIndex": "Number",
-    "activeItem": "Ext.Component/Object/String/Number",
-    "allowFocusingDisabledChildren": "Boolean",
-    "alwaysOnTop": "Boolean/Number",
-    "ariaAttributes": "Object",
-    "ariaDescribedBy": "String",
-    "ariaLabel": "String",
-    "ariaLabelledBy": "String",
-    "autoDestroy": "Boolean",
-    "autoSize": "Boolean",
-    "axisLock": "Boolean",
-    "bind": "Object/String",
-    "border": "Boolean",
-    "bottom": "Number/String",
-    "cardSwitchAnimation": "String/Object/Boolean",
-    "centered": "Boolean",
-    "cls": "String/String[]",
-    "constrainAlign": "String/Ext.util.Region/Ext.dom.Element",
-    "contentEl": "Ext.dom.Element/HTMLElement/String",
-    "control": "Object",
-    "controller": "String/Object/Ext.app.ViewController",
-    "data": "Object",
-    "defaultFocus": "String",
-    "defaultListenerScope": "Boolean",
-    "defaults": "Object",
-    "defaultType": "String",
-    "disabled": "Boolean",
-    "displayed": "Boolean",
-    "docked": "String",
-    "draggable": "Boolean/Object/Ext.drag.Source",
-    "enterAnimation": "String/Mixed",
-    "eventHandlers": "Object",
-    "exitAnimation": "String/Mixed",
-    "flex": "Number/String/Object",
-    "floated": "Boolean",
-    "focusableContainer": "Boolean",
-    "focusCls": "String",
-    "fullscreen": "Boolean",
-    "height": "Number/String",
-    "hidden": "Boolean",
-    "hideAnimation": "String/Mixed",
-    "hideMode": "'clip'/'display'/'offsets'/'opacity'/'visibility'",
-    "hideOnMaskTap": "Boolean",
-    "html": "String/Ext.dom.Element/HTMLElement",
-    "id": "String",
-    "inactiveChildTabIndex": "Number",
-    "innerCls": "String",
-    "instanceCls": "String/String[]",
-    "itemId": "String",
-    "items": "Array/Object",
-    "keyMap": "Object",
-    "keyMapEnabled": "Boolean",
-    "keyMapTarget": "String",
-    "layout": "Object/String",
-    "left": "Number/String",
-    "listeners": "Object",
-    "manageBorders": "Boolean",
-    "margin": "Number/String",
-    "masked": "Boolean/Object/Ext.Mask/Ext.LoadMask",
-    "maxHeight": "Number/String",
-    "maxWidth": "Number/String",
-    "minHeight": "Number/String",
-    "minWidth": "Number/String",
-    "modal": "Boolean",
-    "modelValidation": "Boolean",
-    "name": "String",
-    "nameable": "Boolean",
-    "nameHolder": "Boolean",
-    "padding": "Number/String",
-    "plugins": "Array/Ext.enums.Plugin/Object/Ext.plugin.Abstract",
-    "publishes": "String/String[]/Object",
-    "record": "Ext.data.Model",
-    "reference": "String",
-    "referenceHolder": "Boolean",
-    "relative": "Boolean",
-    "renderTo": "Ext.dom.Element",
-    "resetFocusPosition": "Boolean",
-    "right": "Number/String",
-    "ripple": "Boolean/Object/String",
-    "scrollable": "Boolean/String/Object",
-    "selfAlign": "String",
-    "session": "Boolean/Object/Ext.data.Session",
-    "shadow": "Boolean",
-    "shareableName": "Boolean",
-    "shim": "Boolean",
-    "showAnimation": "String/Mixed",
-    "style": "String/Object",
-    "tabIndex": "Number",
-    "toFrontOnShow": "Boolean",
-    "tooltip": "String/Object",
-    "top": "Number/String",
-    "touchAction": "Object",
-    "tpl": "String/String[]/Ext.Template/Ext.XTemplate[]",
-    "tplWriteMode": "String",
-    "translatable": "Object",
-    "twoWayBindable": "String/String[]/Object",
-    "ui": "String/String[]",
-    "userCls": "String/String[]",
-    "userSelectable": "Boolean/String/Object",
-    "viewModel": "String/Object/Ext.app.ViewModel",
-    "weight": "Number",
-    "weighted": "Boolean",
-    "width": "Number/String",
-    "x": "Number",
-    "xtype": "String",
-    "y": "Number",
-    "zIndex": "Number",
-    "platformConfig": "Object",
-    "responsiveConfig": "Object",
-    "fitToParent": "Boolean",
-    "config": "Object",
-};
-transitionMetaData.PROPERTIES = [
-    'type',
-    'duration',
-    'easing',
-    'direction',
-    'bindDirectionToLocation',
-    'activeChildTabIndex',
-    'activeItem',
-    'allowFocusingDisabledChildren',
-    'alwaysOnTop',
-    'ariaAttributes',
-    'ariaDescribedBy',
-    'ariaLabel',
-    'ariaLabelledBy',
-    'autoDestroy',
-    'autoSize',
-    'axisLock',
-    'bind',
-    'border',
-    'bottom',
-    'cardSwitchAnimation',
-    'centered',
-    'cls',
-    'constrainAlign',
-    'contentEl',
-    'control',
-    'controller',
-    'data',
-    'defaultFocus',
-    'defaultListenerScope',
-    'defaults',
-    'defaultType',
-    'disabled',
-    'displayed',
-    'docked',
-    'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
-    'flex',
-    'floated',
-    'focusableContainer',
-    'focusCls',
-    'fullscreen',
-    'height',
-    'hidden',
-    'hideAnimation',
-    'hideMode',
-    'hideOnMaskTap',
-    'html',
-    'id',
-    'inactiveChildTabIndex',
-    'innerCls',
-    'instanceCls',
-    'itemId',
-    'items',
-    'keyMap',
-    'keyMapEnabled',
-    'keyMapTarget',
-    'layout',
-    'left',
-    'listeners',
-    'manageBorders',
-    'margin',
-    'masked',
-    'maxHeight',
-    'maxWidth',
-    'minHeight',
-    'minWidth',
-    'modal',
-    'modelValidation',
-    'name',
-    'nameable',
-    'nameHolder',
-    'padding',
-    'plugins',
-    'publishes',
-    'record',
-    'reference',
-    'referenceHolder',
-    'relative',
-    'renderTo',
-    'resetFocusPosition',
-    'right',
-    'ripple',
-    'scrollable',
-    'selfAlign',
-    'session',
-    'shadow',
-    'shareableName',
-    'shim',
-    'showAnimation',
-    'style',
-    'tabIndex',
-    'toFrontOnShow',
-    'tooltip',
-    'top',
-    'touchAction',
-    'tpl',
-    'tplWriteMode',
-    'translatable',
-    'twoWayBindable',
-    'ui',
-    'userCls',
-    'userSelectable',
-    'viewModel',
-    'weight',
-    'weighted',
-    'width',
-    'x',
-    'xtype',
-    'y',
-    'zIndex',
-    'platformConfig',
-    'responsiveConfig',
-    'fitToParent',
-    'config'
-];
-transitionMetaData.EVENTS = [
-    { name: 'activate', parameters: 'newActiveItem,container,oldActiveItem' },
-    { name: 'activeItemchange', parameters: 'sender,value,oldValue' },
-    { name: 'add', parameters: 'container,item,index' },
-    { name: 'added', parameters: 'sender,container,index' },
-    { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
-    { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
-    { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
-    { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
-    { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
-    { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
-    { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
-    { name: 'beforehide', parameters: 'sender' },
-    { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
-    { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
-    { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
-    { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
-    { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
-    { name: 'beforeorientationchange', parameters: '' },
-    { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
-    { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
-    { name: 'beforeshow', parameters: 'sender' },
-    { name: 'beforetofront', parameters: 'container' },
-    { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
-    { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
-    { name: 'blur', parameters: 'container,event' },
-    { name: 'bottomchange', parameters: 'sender,value,oldValue' },
-    { name: 'centeredchange', parameters: 'sender,value,oldValue' },
-    { name: 'deactivate', parameters: 'oldActiveItem,container,newActiveItem' },
-    { name: 'destroy', parameters: '' },
-    { name: 'disabledchange', parameters: 'sender,value,oldValue' },
-    { name: 'dockedchange', parameters: 'sender,value,oldValue' },
-    { name: 'erased', parameters: 'sender' },
-    { name: 'floatingchange', parameters: 'sender,positioned' },
-    { name: 'focus', parameters: 'container,event' },
-    { name: 'focusenter', parameters: 'container,event' },
-    { name: 'focusleave', parameters: 'container,event' },
-    { name: 'fullscreen', parameters: 'sender' },
-    { name: 'heightchange', parameters: 'sender,value,oldValue' },
-    { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
-    { name: 'hide', parameters: 'sender' },
-    { name: 'initialize', parameters: 'sender' },
-    { name: 'leftchange', parameters: 'sender,value,oldValue' },
-    { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
-    { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
-    { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
-    { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
-    { name: 'move', parameters: 'container,item,toIndex,fromIndex' },
-    { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
-    { name: 'orientationchange', parameters: '' },
-    { name: 'painted', parameters: 'sender,element' },
-    { name: 'positionedchange', parameters: 'sender,positioned' },
-    { name: 'remove', parameters: 'container,item,index' },
-    { name: 'removed', parameters: 'sender,container,index' },
-    { name: 'renderedchange', parameters: 'container,item,rendered' },
-    { name: 'resize', parameters: 'element,info' },
-    { name: 'rightchange', parameters: 'sender,value,oldValue' },
-    { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
-    { name: 'show', parameters: 'sender' },
-    { name: 'tofront', parameters: 'container' },
-    { name: 'topchange', parameters: 'sender,value,oldValue' },
-    { name: 'updatedata', parameters: 'sender,newData' },
-    { name: 'widthchange', parameters: 'sender,value,oldValue' },
-    { name: 'ready', parameters: '' }
-];
-transitionMetaData.EVENTNAMES = [
-    'activate',
-    'activeItemchange',
-    'add',
-    'added',
-    'beforeactiveItemchange',
-    'beforebottomchange',
-    'beforecenteredchange',
-    'beforedisabledchange',
-    'beforedockedchange',
-    'beforeheightchange',
-    'beforehiddenchange',
-    'beforehide',
-    'beforeleftchange',
-    'beforemaxHeightchange',
-    'beforemaxWidthchange',
-    'beforeminHeightchange',
-    'beforeminWidthchange',
-    'beforeorientationchange',
-    'beforerightchange',
-    'beforescrollablechange',
-    'beforeshow',
-    'beforetofront',
-    'beforetopchange',
-    'beforewidthchange',
-    'blur',
-    'bottomchange',
-    'centeredchange',
-    'deactivate',
-    'destroy',
-    'disabledchange',
-    'dockedchange',
-    'erased',
-    'floatingchange',
-    'focus',
-    'focusenter',
-    'focusleave',
-    'fullscreen',
-    'heightchange',
-    'hiddenchange',
-    'hide',
-    'initialize',
-    'leftchange',
-    'maxHeightchange',
-    'maxWidthchange',
-    'minHeightchange',
-    'minWidthchange',
-    'move',
-    'moved',
-    'orientationchange',
-    'painted',
-    'positionedchange',
-    'remove',
-    'removed',
-    'renderedchange',
-    'resize',
-    'rightchange',
-    'scrollablechange',
-    'show',
-    'tofront',
-    'topchange',
-    'updatedata',
-    'widthchange',
-    'ready'
-];
-class ExtTransitionComponent extends base {
-    /**
-     * @param {?} eRef
-     */
-    constructor(eRef) { super(eRef, transitionMetaData); }
-    /**
-     * @return {?}
-     */
-    ngOnInit() { this.baseOnInit(transitionMetaData); }
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ngAfterContentInit() { this.baseAfterContentInit(); }
-}
-ExtTransitionComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'transition',
-                inputs: transitionMetaData.PROPERTIES,
-                outputs: transitionMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTransitionComponent) }],
-                template: '<ng-template #dynamic></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTransitionComponent.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
 
 /**
@@ -91574,6 +92692,7 @@ ExtAngularModernModule.decorators = [
     { type: NgModule, args: [{
                 imports: [],
                 declarations: [
+                    ExtAngularBootstrapComponent,
                     ExtActionsheetComponent,
                     ExtAudioComponent,
                     ExtButtonComponent,
@@ -91797,11 +92916,12 @@ ExtAngularModernModule.decorators = [
                     ExtRatingComponent,
                     ExtVideoComponent,
                     ExtViewportComponent,
-                    ExtWidgetComponent,
-                    ExtOrgChartComponent,
-                    ExtTransitionComponent
+                    ExtWidgetComponent
                 ],
+                providers: [ExtAngularBootstrapService],
+                entryComponents: [ExtAngularBootstrapComponent],
                 exports: [
+                    ExtAngularBootstrapComponent,
                     ExtActionsheetComponent,
                     ExtAudioComponent,
                     ExtButtonComponent,
@@ -92025,9 +93145,7 @@ ExtAngularModernModule.decorators = [
                     ExtRatingComponent,
                     ExtVideoComponent,
                     ExtViewportComponent,
-                    ExtWidgetComponent,
-                    ExtOrgChartComponent,
-                    ExtTransitionComponent
+                    ExtWidgetComponent
                 ]
             },] }
 ];
@@ -92042,6 +93160,6 @@ ExtAngularModernModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { ExtAngularModernModule, base as ɵc, ExtActionsheetComponent as ɵb, actionsheetMetaData as ɵa, ExtAudioComponent as ɵe, audioMetaData as ɵd, ExtAxis3dComponent as ɵby, axis3dMetaData as ɵbx, ExtBooleancellComponent as ɵio, booleancellMetaData as ɵin, ExtBooleancolumnComponent as ɵji, booleancolumnMetaData as ɵjh, ExtBoundlistComponent as ɵdo, boundlistMetaData as ɵdn, ExtButtonComponent as ɵg, buttonMetaData as ɵf, ExtCalendar_calendar_pickerComponent as ɵm, calendar_calendar_pickerMetaData as ɵl, ExtCalendar_dayComponent as ɵy, calendar_dayMetaData as ɵx, ExtCalendar_daysComponent as ɵba, calendar_daysMetaData as ɵz, ExtCalendar_daysheaderComponent as ɵs, calendar_daysheaderMetaData as ɵr, ExtCalendar_daysviewComponent as ɵbm, calendar_daysviewMetaData as ɵbl, ExtCalendar_dayviewComponent as ɵbk, calendar_dayviewMetaData as ɵbj, ExtCalendar_eventComponent as ɵi, calendar_eventMetaData as ɵh, ExtCalendar_form_addComponent as ɵk, calendar_form_addMetaData as ɵj, ExtCalendar_form_editComponent as ɵo, calendar_form_editMetaData as ɵn, ExtCalendar_listComponent as ɵw, calendar_listMetaData as ɵv, ExtCalendar_monthComponent as ɵbc, calendar_monthMetaData as ɵbb, ExtCalendar_monthviewComponent as ɵbo, calendar_monthviewMetaData as ɵbn, ExtCalendar_multiviewComponent as ɵbq, calendar_multiviewMetaData as ɵbp, ExtCalendar_timefieldComponent as ɵq, calendar_timefieldMetaData as ɵp, ExtCalendar_weekComponent as ɵbg, calendar_weekMetaData as ɵbf, ExtCalendar_weeksComponent as ɵbi, calendar_weeksMetaData as ɵbh, ExtCalendar_weeksheaderComponent as ɵu, calendar_weeksheaderMetaData as ɵt, ExtCalendar_weeksviewComponent as ɵbu, calendar_weeksviewMetaData as ɵbt, ExtCalendar_weekviewComponent as ɵbs, calendar_weekviewMetaData as ɵbr, ExtCalendarComponent as ɵbe, calendarMetaData as ɵbd, ExtCarouselComponent as ɵbw, carouselMetaData as ɵbv, ExtCartesianComponent as ɵca, cartesianMetaData as ɵbz, ExtCelleditorComponent as ɵjg, celleditorMetaData as ɵjf, ExtChartComponent as ɵcc, chartMetaData as ɵcb, ExtChartnavigatorComponent as ɵci, chartnavigatorMetaData as ɵch, ExtCheckboxComponent as ɵfe, checkboxMetaData as ɵfd, ExtCheckboxfieldComponent as ɵfg, checkboxfieldMetaData as ɵff, ExtCheckcellComponent as ɵis, checkcellMetaData as ɵir, ExtCheckcolumnComponent as ɵjk, checkcolumnMetaData as ɵjj, ExtChipComponent as ɵco, chipMetaData as ɵcn, ExtChipviewComponent as ɵdq, chipviewMetaData as ɵdp, ExtCleartriggerComponent as ɵho, cleartriggerMetaData as ɵhn, ExtColorbuttonComponent as ɵqm, colorbuttonMetaData as ɵql, ExtColorfieldComponent as ɵqq, colorfieldMetaData as ɵqp, ExtColorpickercolorpreviewComponent as ɵqo, colorpickercolorpreviewMetaData as ɵqn, ExtColorselectorComponent as ɵqs, colorselectorMetaData as ɵqr, ExtColumnComponent as ɵjo, columnMetaData as ɵjn, ExtComboboxComponent as ɵfi, comboboxMetaData as ɵfh, ExtComboboxfieldComponent as ɵfk, comboboxfieldMetaData as ɵfj, ExtComponentComponent as ɵcq, componentMetaData as ɵcp, ExtComponentdataviewComponent as ɵds, componentdataviewMetaData as ɵdr, ExtContainerComponent as ɵcs, containerMetaData as ɵcr, ExtContainerfieldComponent as ɵfm, containerfieldMetaData as ɵfl, ExtD3_canvasComponent as ɵcu, d3_canvasMetaData as ɵct, ExtD3_heatmapComponent as ɵcw, d3_heatmapMetaData as ɵcv, ExtD3_horizontal_treeComponent as ɵdg, d3_horizontal_treeMetaData as ɵdf, ExtD3_packComponent as ɵcy, d3_packMetaData as ɵcx, ExtD3_partitionComponent as ɵda, d3_partitionMetaData as ɵcz, ExtD3_sunburstComponent as ɵdc, d3_sunburstMetaData as ɵdb, ExtD3_svgComponent as ɵdk, d3_svgMetaData as ɵdj, ExtD3_treeComponent as ɵde, d3_treeMetaData as ɵdd, ExtD3_treemapComponent as ɵdi, d3_treemapMetaData as ɵdh, ExtD3Component as ɵdm, d3MetaData as ɵdl, ExtDataitemComponent as ɵdu, dataitemMetaData as ɵdt, ExtDataviewComponent as ɵdw, dataviewMetaData as ɵdv, ExtDatecellComponent as ɵiu, datecellMetaData as ɵit, ExtDatecolumnComponent as ɵjs, datecolumnMetaData as ɵjr, ExtDatefieldComponent as ɵfq, datefieldMetaData as ɵfp, ExtDatepanelComponent as ɵmq, datepanelMetaData as ɵmp, ExtDatepickerComponent as ɵnc, datepickerMetaData as ɵnb, ExtDatepickerfieldComponent as ɵfs, datepickerfieldMetaData as ɵfr, ExtDatepickernativefieldComponent as ɵfu, datepickernativefieldMetaData as ɵft, ExtDatetitleComponent as ɵms, datetitleMetaData as ɵmr, ExtDatetriggerComponent as ɵhq, datetriggerMetaData as ɵhp, ExtDialogComponent as ɵeu, dialogMetaData as ɵet, ExtDisplayfieldComponent as ɵfw, displayfieldMetaData as ɵfv, ExtDrawComponent as ɵey, drawMetaData as ɵex, ExtEditorComponent as ɵfc, editorMetaData as ɵfb, ExtEmailfieldComponent as ɵfy, emailfieldMetaData as ɵfx, ExtEmptytextComponent as ɵdy, emptytextMetaData as ɵdx, ExtExpandtriggerComponent as ɵhs, expandtriggerMetaData as ɵhr, ExtFieldComponent as ɵga, fieldMetaData as ɵfz, ExtFieldcontainerComponent as ɵfo, fieldcontainerMetaData as ɵfn, ExtFieldpanelComponent as ɵgm, fieldpanelMetaData as ɵgl, ExtFieldsetComponent as ɵii, fieldsetMetaData as ɵih, ExtFilebuttonComponent as ɵge, filebuttonMetaData as ɵgd, ExtFilefieldComponent as ɵgc, filefieldMetaData as ɵgb, ExtFormpanelComponent as ɵik, formpanelMetaData as ɵij, ExtGaugeComponent as ɵqu, gaugeMetaData as ɵqt, ExtGoogle_mapComponent as ɵqy, google_mapMetaData as ɵqx, ExtGridComponent as ɵke, gridMetaData as ɵkd, ExtGridcellComponent as ɵiq, gridcellMetaData as ɵip, ExtGridcellbaseComponent as ɵim, gridcellbaseMetaData as ɵil, ExtGridcolumnComponent as ɵjm, gridcolumnMetaData as ɵjl, ExtGridcolumnsmenuComponent as ɵkm, gridcolumnsmenuMetaData as ɵkl, ExtGridgroupbythismenuitemComponent as ɵko, gridgroupbythismenuitemMetaData as ɵkn, ExtGridrowComponent as ɵky, gridrowMetaData as ɵkx, ExtGridshowingroupsmenuitemComponent as ɵkq, gridshowingroupsmenuitemMetaData as ɵkp, ExtGridsortascmenuitemComponent as ɵks, gridsortascmenuitemMetaData as ɵkr, ExtGridsortdescmenuitemComponent as ɵku, gridsortdescmenuitemMetaData as ɵkt, ExtGridsummaryrowComponent as ɵle, gridsummaryrowMetaData as ɵld, ExtHeadercontainerComponent as ɵkg, headercontainerMetaData as ɵkf, ExtHiddenfieldComponent as ɵgg, hiddenfieldMetaData as ɵgf, ExtImageComponent as ɵli, imageMetaData as ɵlh, ExtImgComponent as ɵlk, imgMetaData as ɵlj, ExtIndexbarComponent as ɵea, indexbarMetaData as ɵdz, ExtIndicatorComponent as ɵlm, indicatorMetaData as ɵll, ExtInputfieldComponent as ɵgi, inputfieldMetaData as ɵgh, ExtInteractionComponent as ɵce, interactionMetaData as ɵcd, ExtItemheaderComponent as ɵec, itemheaderMetaData as ɵeb, ExtLabelComponent as ɵlo, labelMetaData as ɵln, ExtLegendComponent as ɵcg, legendMetaData as ɵcf, ExtListComponent as ɵee, listMetaData as ɵed, ExtListitemComponent as ɵeg, listitemMetaData as ɵef, ExtListswiperitemComponent as ɵei, listswiperitemMetaData as ɵeh, ExtListswiperstepperComponent as ɵek, listswiperstepperMetaData as ɵej, ExtLoadmaskComponent as ɵlu, loadmaskMetaData as ɵlt, ExtLockedgridComponent as ɵki, lockedgridMetaData as ɵkh, ExtLockedgridregionComponent as ɵkk, lockedgridregionMetaData as ɵkj, ExtMapComponent as ɵqw, mapMetaData as ɵqv, ExtMaskComponent as ɵlw, maskMetaData as ɵlv, ExtMediaComponent as ɵly, mediaMetaData as ɵlx, ExtMenuComponent as ɵme, menuMetaData as ɵmd, ExtMenucheckitemComponent as ɵma, menucheckitemMetaData as ɵlz, ExtMenuitemComponent as ɵmc, menuitemMetaData as ɵmb, ExtMenuradioitemComponent as ɵmg, menuradioitemMetaData as ɵmf, ExtMenuseparatorComponent as ɵmi, menuseparatorMetaData as ɵmh, ExtMenutriggerComponent as ɵhu, menutriggerMetaData as ɵht, ExtMessageboxComponent as ɵmk, messageboxMetaData as ɵmj, ExtNavigationviewComponent as ɵmm, navigationviewMetaData as ɵml, ExtNestedlistComponent as ɵem, nestedlistMetaData as ɵel, ExtNumbercellComponent as ɵiw, numbercellMetaData as ɵiv, ExtNumbercolumnComponent as ɵju, numbercolumnMetaData as ɵjt, ExtNumberfieldComponent as ɵgk, numberfieldMetaData as ɵgj, ExtOrgChartComponent as ɵri, orgchartMetaData as ɵrh, ExtPagingtoolbarComponent as ɵkw, pagingtoolbarMetaData as ɵkv, ExtPanelComponent as ɵmo, panelMetaData as ɵmn, ExtPanelheaderComponent as ɵmu, panelheaderMetaData as ɵmt, ExtPaneltitleComponent as ɵmy, paneltitleMetaData as ɵmx, ExtPaneltoolComponent as ɵqi, paneltoolMetaData as ɵqh, ExtPasswordfieldComponent as ɵgo, passwordfieldMetaData as ɵgn, ExtPickerComponent as ɵne, pickerMetaData as ɵnd, ExtPickerfieldComponent as ɵgq, pickerfieldMetaData as ɵgp, ExtPickerslotComponent as ɵni, pickerslotMetaData as ɵnh, ExtPivotconfigcontainerComponent as ɵoa, pivotconfigcontainerMetaData as ɵnz, ExtPivotconfigfieldComponent as ɵny, pivotconfigfieldMetaData as ɵnx, ExtPivotconfigformComponent as ɵoc, pivotconfigformMetaData as ɵob, ExtPivotconfigpanelComponent as ɵoe, pivotconfigpanelMetaData as ɵod, ExtPivotd3containerComponent as ɵnq, pivotd3containerMetaData as ɵnp, ExtPivotgridComponent as ɵnw, pivotgridMetaData as ɵnv, ExtPivotgridcellComponent as ɵnm, pivotgridcellMetaData as ɵnl, ExtPivotgridgroupcellComponent as ɵno, pivotgridgroupcellMetaData as ɵnn, ExtPivotgridrowComponent as ɵok, pivotgridrowMetaData as ɵoj, ExtPivotheatmapComponent as ɵns, pivotheatmapMetaData as ɵnr, ExtPivotrangeeditorComponent as ɵoi, pivotrangeeditorMetaData as ɵoh, ExtPivotsettingsComponent as ɵog, pivotsettingsMetaData as ɵof, ExtPivottreemapComponent as ɵnu, pivottreemapMetaData as ɵnt, ExtPolarComponent as ɵck, polarMetaData as ɵcj, ExtProgressComponent as ɵom, progressMetaData as ɵol, ExtProgressbarwidgetComponent as ɵoo, progressbarwidgetMetaData as ɵon, ExtPullrefreshbarComponent as ɵeo, pullrefreshbarMetaData as ɵen, ExtPullrefreshspinnerComponent as ɵeq, pullrefreshspinnerMetaData as ɵep, ExtRadioComponent as ɵgs, radioMetaData as ɵgr, ExtRadiofieldComponent as ɵgu, radiofieldMetaData as ɵgt, ExtRatingComponent as ɵra, ratingMetaData as ɵqz, ExtRevealtriggerComponent as ɵhw, revealtriggerMetaData as ɵhv, ExtRowbodyComponent as ɵla, rowbodyMetaData as ɵkz, ExtRowheaderComponent as ɵlc, rowheaderMetaData as ɵlb, ExtRownumbererComponent as ɵjw, rownumbererMetaData as ɵjv, ExtRownumberercellComponent as ɵiy, rownumberercellMetaData as ɵix, ExtSearchfieldComponent as ɵgw, searchfieldMetaData as ɵgv, ExtSegmentedbuttonComponent as ɵoq, segmentedbuttonMetaData as ɵop, ExtSelectfieldComponent as ɵgy, selectfieldMetaData as ɵgx, ExtSelectioncolumnComponent as ɵjy, selectioncolumnMetaData as ɵjx, ExtSelectpickerComponent as ɵng, selectpickerMetaData as ɵnf, ExtSheetComponent as ɵos, sheetMetaData as ɵor, ExtSimplelistitemComponent as ɵes, simplelistitemMetaData as ɵer, ExtSinglesliderfieldComponent as ɵha, singlesliderfieldMetaData as ɵgz, ExtSliderComponent as ɵou, sliderMetaData as ɵot, ExtSliderfieldComponent as ɵhc, sliderfieldMetaData as ɵhb, ExtSpacefillingComponent as ɵcm, spacefillingMetaData as ɵcl, ExtSpacerComponent as ɵpa, spacerMetaData as ɵoz, ExtSparklineComponent as ɵpe, sparklineMetaData as ɵpd, ExtSparklinebarComponent as ɵpc, sparklinebarMetaData as ɵpb, ExtSparklineboxComponent as ɵpg, sparklineboxMetaData as ɵpf, ExtSparklinebulletComponent as ɵpi, sparklinebulletMetaData as ɵph, ExtSparklinediscreteComponent as ɵpk, sparklinediscreteMetaData as ɵpj, ExtSparklinelineComponent as ɵpm, sparklinelineMetaData as ɵpl, ExtSparklinepieComponent as ɵpo, sparklinepieMetaData as ɵpn, ExtSparklinetristateComponent as ɵpq, sparklinetristateMetaData as ɵpp, ExtSpindowntriggerComponent as ɵhy, spindowntriggerMetaData as ɵhx, ExtSpinnerfieldComponent as ɵhe, spinnerfieldMetaData as ɵhd, ExtSpinuptriggerComponent as ɵia, spinuptriggerMetaData as ɵhz, ExtSplitbuttonComponent as ɵps, splitbuttonMetaData as ɵpr, ExtSurfaceComponent as ɵfa, surfaceMetaData as ɵez, ExtTabComponent as ɵpy, tabMetaData as ɵpx, ExtTabbarComponent as ɵpu, tabbarMetaData as ɵpt, ExtTabletpickerComponent as ɵnk, tabletpickerMetaData as ɵnj, ExtTabpanelComponent as ɵpw, tabpanelMetaData as ɵpv, ExtTemplatecolumnComponent as ɵjq, templatecolumnMetaData as ɵjp, ExtTextareafieldComponent as ɵhi, textareafieldMetaData as ɵhh, ExtTextcellComponent as ɵja, textcellMetaData as ɵiz, ExtTextcolumnComponent as ɵka, textcolumnMetaData as ɵjz, ExtTextfieldComponent as ɵhg, textfieldMetaData as ɵhf, ExtThumbComponent as ɵow, thumbMetaData as ɵov, ExtTimefieldComponent as ɵhk, timefieldMetaData as ɵhj, ExtTimepanelComponent as ɵmw, timepanelMetaData as ɵmv, ExtTimetriggerComponent as ɵic, timetriggerMetaData as ɵib, ExtTitleComponent as ɵqc, titleMetaData as ɵqb, ExtTitlebarComponent as ɵqe, titlebarMetaData as ɵqd, ExtTogglefieldComponent as ɵhm, togglefieldMetaData as ɵhl, ExtTogglesliderComponent as ɵoy, togglesliderMetaData as ɵox, ExtToolComponent as ɵqg, toolMetaData as ɵqf, ExtToolbarComponent as ɵqk, toolbarMetaData as ɵqj, ExtTooltipComponent as ɵqa, tooltipMetaData as ɵpz, ExtTransitionComponent as ɵrk, transitionMetaData as ɵrj, ExtTreeComponent as ɵlg, treeMetaData as ɵlf, ExtTreecellComponent as ɵjc, treecellMetaData as ɵjb, ExtTreecolumnComponent as ɵkc, treecolumnMetaData as ɵkb, ExtTreelistComponent as ɵlq, treelistMetaData as ɵlp, ExtTreelistitemComponent as ɵls, treelistitemMetaData as ɵlr, ExtTriggerComponent as ɵie, triggerMetaData as ɵid, ExtUrlfieldComponent as ɵig, urlfieldMetaData as ɵif, ExtVideoComponent as ɵrc, videoMetaData as ɵrb, ExtViewportComponent as ɵre, viewportMetaData as ɵrd, ExtWidgetComponent as ɵrg, widgetMetaData as ɵrf, ExtWidgetcellComponent as ɵje, widgetcellMetaData as ɵjd, ExtWindowComponent as ɵew, windowMetaData as ɵev, ExtYearpickerComponent as ɵna, yearpickerMetaData as ɵmz };
+export { ExtAngularModernModule, base as ɵe, ExtActionsheetComponent as ɵd, actionsheetMetaData as ɵc, ExtAngularBootstrapComponent as ɵa, ExtAngularBootstrapService as ɵb, ExtAudioComponent as ɵg, audioMetaData as ɵf, ExtAxis3dComponent as ɵca, axis3dMetaData as ɵbz, ExtBooleancellComponent as ɵiq, booleancellMetaData as ɵip, ExtBooleancolumnComponent as ɵjk, booleancolumnMetaData as ɵjj, ExtBoundlistComponent as ɵdq, boundlistMetaData as ɵdp, ExtButtonComponent as ɵi, buttonMetaData as ɵh, ExtCalendar_calendar_pickerComponent as ɵo, calendar_calendar_pickerMetaData as ɵn, ExtCalendar_dayComponent as ɵba, calendar_dayMetaData as ɵz, ExtCalendar_daysComponent as ɵbc, calendar_daysMetaData as ɵbb, ExtCalendar_daysheaderComponent as ɵu, calendar_daysheaderMetaData as ɵt, ExtCalendar_daysviewComponent as ɵbo, calendar_daysviewMetaData as ɵbn, ExtCalendar_dayviewComponent as ɵbm, calendar_dayviewMetaData as ɵbl, ExtCalendar_eventComponent as ɵk, calendar_eventMetaData as ɵj, ExtCalendar_form_addComponent as ɵm, calendar_form_addMetaData as ɵl, ExtCalendar_form_editComponent as ɵq, calendar_form_editMetaData as ɵp, ExtCalendar_listComponent as ɵy, calendar_listMetaData as ɵx, ExtCalendar_monthComponent as ɵbe, calendar_monthMetaData as ɵbd, ExtCalendar_monthviewComponent as ɵbq, calendar_monthviewMetaData as ɵbp, ExtCalendar_multiviewComponent as ɵbs, calendar_multiviewMetaData as ɵbr, ExtCalendar_timefieldComponent as ɵs, calendar_timefieldMetaData as ɵr, ExtCalendar_weekComponent as ɵbi, calendar_weekMetaData as ɵbh, ExtCalendar_weeksComponent as ɵbk, calendar_weeksMetaData as ɵbj, ExtCalendar_weeksheaderComponent as ɵw, calendar_weeksheaderMetaData as ɵv, ExtCalendar_weeksviewComponent as ɵbw, calendar_weeksviewMetaData as ɵbv, ExtCalendar_weekviewComponent as ɵbu, calendar_weekviewMetaData as ɵbt, ExtCalendarComponent as ɵbg, calendarMetaData as ɵbf, ExtCarouselComponent as ɵby, carouselMetaData as ɵbx, ExtCartesianComponent as ɵcc, cartesianMetaData as ɵcb, ExtCelleditorComponent as ɵji, celleditorMetaData as ɵjh, ExtChartComponent as ɵce, chartMetaData as ɵcd, ExtChartnavigatorComponent as ɵck, chartnavigatorMetaData as ɵcj, ExtCheckboxComponent as ɵfg, checkboxMetaData as ɵff, ExtCheckboxfieldComponent as ɵfi, checkboxfieldMetaData as ɵfh, ExtCheckcellComponent as ɵiu, checkcellMetaData as ɵit, ExtCheckcolumnComponent as ɵjm, checkcolumnMetaData as ɵjl, ExtChipComponent as ɵcq, chipMetaData as ɵcp, ExtChipviewComponent as ɵds, chipviewMetaData as ɵdr, ExtCleartriggerComponent as ɵhq, cleartriggerMetaData as ɵhp, ExtColorbuttonComponent as ɵqo, colorbuttonMetaData as ɵqn, ExtColorfieldComponent as ɵqs, colorfieldMetaData as ɵqr, ExtColorpickercolorpreviewComponent as ɵqq, colorpickercolorpreviewMetaData as ɵqp, ExtColorselectorComponent as ɵqu, colorselectorMetaData as ɵqt, ExtColumnComponent as ɵjq, columnMetaData as ɵjp, ExtComboboxComponent as ɵfk, comboboxMetaData as ɵfj, ExtComboboxfieldComponent as ɵfm, comboboxfieldMetaData as ɵfl, ExtComponentComponent as ɵcs, componentMetaData as ɵcr, ExtComponentdataviewComponent as ɵdu, componentdataviewMetaData as ɵdt, ExtContainerComponent as ɵcu, containerMetaData as ɵct, ExtContainerfieldComponent as ɵfo, containerfieldMetaData as ɵfn, ExtD3_canvasComponent as ɵcw, d3_canvasMetaData as ɵcv, ExtD3_heatmapComponent as ɵcy, d3_heatmapMetaData as ɵcx, ExtD3_horizontal_treeComponent as ɵdi, d3_horizontal_treeMetaData as ɵdh, ExtD3_packComponent as ɵda, d3_packMetaData as ɵcz, ExtD3_partitionComponent as ɵdc, d3_partitionMetaData as ɵdb, ExtD3_sunburstComponent as ɵde, d3_sunburstMetaData as ɵdd, ExtD3_svgComponent as ɵdm, d3_svgMetaData as ɵdl, ExtD3_treeComponent as ɵdg, d3_treeMetaData as ɵdf, ExtD3_treemapComponent as ɵdk, d3_treemapMetaData as ɵdj, ExtD3Component as ɵdo, d3MetaData as ɵdn, ExtDataitemComponent as ɵdw, dataitemMetaData as ɵdv, ExtDataviewComponent as ɵdy, dataviewMetaData as ɵdx, ExtDatecellComponent as ɵiw, datecellMetaData as ɵiv, ExtDatecolumnComponent as ɵju, datecolumnMetaData as ɵjt, ExtDatefieldComponent as ɵfs, datefieldMetaData as ɵfr, ExtDatepanelComponent as ɵms, datepanelMetaData as ɵmr, ExtDatepickerComponent as ɵne, datepickerMetaData as ɵnd, ExtDatepickerfieldComponent as ɵfu, datepickerfieldMetaData as ɵft, ExtDatepickernativefieldComponent as ɵfw, datepickernativefieldMetaData as ɵfv, ExtDatetitleComponent as ɵmu, datetitleMetaData as ɵmt, ExtDatetriggerComponent as ɵhs, datetriggerMetaData as ɵhr, ExtDialogComponent as ɵew, dialogMetaData as ɵev, ExtDisplayfieldComponent as ɵfy, displayfieldMetaData as ɵfx, ExtDrawComponent as ɵfa, drawMetaData as ɵez, ExtEditorComponent as ɵfe, editorMetaData as ɵfd, ExtEmailfieldComponent as ɵga, emailfieldMetaData as ɵfz, ExtEmptytextComponent as ɵea, emptytextMetaData as ɵdz, ExtExpandtriggerComponent as ɵhu, expandtriggerMetaData as ɵht, ExtFieldComponent as ɵgc, fieldMetaData as ɵgb, ExtFieldcontainerComponent as ɵfq, fieldcontainerMetaData as ɵfp, ExtFieldpanelComponent as ɵgo, fieldpanelMetaData as ɵgn, ExtFieldsetComponent as ɵik, fieldsetMetaData as ɵij, ExtFilebuttonComponent as ɵgg, filebuttonMetaData as ɵgf, ExtFilefieldComponent as ɵge, filefieldMetaData as ɵgd, ExtFormpanelComponent as ɵim, formpanelMetaData as ɵil, ExtGaugeComponent as ɵqw, gaugeMetaData as ɵqv, ExtGoogle_mapComponent as ɵra, google_mapMetaData as ɵqz, ExtGridComponent as ɵkg, gridMetaData as ɵkf, ExtGridcellComponent as ɵis, gridcellMetaData as ɵir, ExtGridcellbaseComponent as ɵio, gridcellbaseMetaData as ɵin, ExtGridcolumnComponent as ɵjo, gridcolumnMetaData as ɵjn, ExtGridcolumnsmenuComponent as ɵko, gridcolumnsmenuMetaData as ɵkn, ExtGridgroupbythismenuitemComponent as ɵkq, gridgroupbythismenuitemMetaData as ɵkp, ExtGridrowComponent as ɵla, gridrowMetaData as ɵkz, ExtGridshowingroupsmenuitemComponent as ɵks, gridshowingroupsmenuitemMetaData as ɵkr, ExtGridsortascmenuitemComponent as ɵku, gridsortascmenuitemMetaData as ɵkt, ExtGridsortdescmenuitemComponent as ɵkw, gridsortdescmenuitemMetaData as ɵkv, ExtGridsummaryrowComponent as ɵlg, gridsummaryrowMetaData as ɵlf, ExtHeadercontainerComponent as ɵki, headercontainerMetaData as ɵkh, ExtHiddenfieldComponent as ɵgi, hiddenfieldMetaData as ɵgh, ExtImageComponent as ɵlk, imageMetaData as ɵlj, ExtImgComponent as ɵlm, imgMetaData as ɵll, ExtIndexbarComponent as ɵec, indexbarMetaData as ɵeb, ExtIndicatorComponent as ɵlo, indicatorMetaData as ɵln, ExtInputfieldComponent as ɵgk, inputfieldMetaData as ɵgj, ExtInteractionComponent as ɵcg, interactionMetaData as ɵcf, ExtItemheaderComponent as ɵee, itemheaderMetaData as ɵed, ExtLabelComponent as ɵlq, labelMetaData as ɵlp, ExtLegendComponent as ɵci, legendMetaData as ɵch, ExtListComponent as ɵeg, listMetaData as ɵef, ExtListitemComponent as ɵei, listitemMetaData as ɵeh, ExtListswiperitemComponent as ɵek, listswiperitemMetaData as ɵej, ExtListswiperstepperComponent as ɵem, listswiperstepperMetaData as ɵel, ExtLoadmaskComponent as ɵlw, loadmaskMetaData as ɵlv, ExtLockedgridComponent as ɵkk, lockedgridMetaData as ɵkj, ExtLockedgridregionComponent as ɵkm, lockedgridregionMetaData as ɵkl, ExtMapComponent as ɵqy, mapMetaData as ɵqx, ExtMaskComponent as ɵly, maskMetaData as ɵlx, ExtMediaComponent as ɵma, mediaMetaData as ɵlz, ExtMenuComponent as ɵmg, menuMetaData as ɵmf, ExtMenucheckitemComponent as ɵmc, menucheckitemMetaData as ɵmb, ExtMenuitemComponent as ɵme, menuitemMetaData as ɵmd, ExtMenuradioitemComponent as ɵmi, menuradioitemMetaData as ɵmh, ExtMenuseparatorComponent as ɵmk, menuseparatorMetaData as ɵmj, ExtMenutriggerComponent as ɵhw, menutriggerMetaData as ɵhv, ExtMessageboxComponent as ɵmm, messageboxMetaData as ɵml, ExtNavigationviewComponent as ɵmo, navigationviewMetaData as ɵmn, ExtNestedlistComponent as ɵeo, nestedlistMetaData as ɵen, ExtNumbercellComponent as ɵiy, numbercellMetaData as ɵix, ExtNumbercolumnComponent as ɵjw, numbercolumnMetaData as ɵjv, ExtNumberfieldComponent as ɵgm, numberfieldMetaData as ɵgl, ExtPagingtoolbarComponent as ɵky, pagingtoolbarMetaData as ɵkx, ExtPanelComponent as ɵmq, panelMetaData as ɵmp, ExtPanelheaderComponent as ɵmw, panelheaderMetaData as ɵmv, ExtPaneltitleComponent as ɵna, paneltitleMetaData as ɵmz, ExtPaneltoolComponent as ɵqk, paneltoolMetaData as ɵqj, ExtPasswordfieldComponent as ɵgq, passwordfieldMetaData as ɵgp, ExtPickerComponent as ɵng, pickerMetaData as ɵnf, ExtPickerfieldComponent as ɵgs, pickerfieldMetaData as ɵgr, ExtPickerslotComponent as ɵnk, pickerslotMetaData as ɵnj, ExtPivotconfigcontainerComponent as ɵoc, pivotconfigcontainerMetaData as ɵob, ExtPivotconfigfieldComponent as ɵoa, pivotconfigfieldMetaData as ɵnz, ExtPivotconfigformComponent as ɵoe, pivotconfigformMetaData as ɵod, ExtPivotconfigpanelComponent as ɵog, pivotconfigpanelMetaData as ɵof, ExtPivotd3containerComponent as ɵns, pivotd3containerMetaData as ɵnr, ExtPivotgridComponent as ɵny, pivotgridMetaData as ɵnx, ExtPivotgridcellComponent as ɵno, pivotgridcellMetaData as ɵnn, ExtPivotgridgroupcellComponent as ɵnq, pivotgridgroupcellMetaData as ɵnp, ExtPivotgridrowComponent as ɵom, pivotgridrowMetaData as ɵol, ExtPivotheatmapComponent as ɵnu, pivotheatmapMetaData as ɵnt, ExtPivotrangeeditorComponent as ɵok, pivotrangeeditorMetaData as ɵoj, ExtPivotsettingsComponent as ɵoi, pivotsettingsMetaData as ɵoh, ExtPivottreemapComponent as ɵnw, pivottreemapMetaData as ɵnv, ExtPolarComponent as ɵcm, polarMetaData as ɵcl, ExtProgressComponent as ɵoo, progressMetaData as ɵon, ExtProgressbarwidgetComponent as ɵoq, progressbarwidgetMetaData as ɵop, ExtPullrefreshbarComponent as ɵeq, pullrefreshbarMetaData as ɵep, ExtPullrefreshspinnerComponent as ɵes, pullrefreshspinnerMetaData as ɵer, ExtRadioComponent as ɵgu, radioMetaData as ɵgt, ExtRadiofieldComponent as ɵgw, radiofieldMetaData as ɵgv, ExtRatingComponent as ɵrc, ratingMetaData as ɵrb, ExtRevealtriggerComponent as ɵhy, revealtriggerMetaData as ɵhx, ExtRowbodyComponent as ɵlc, rowbodyMetaData as ɵlb, ExtRowheaderComponent as ɵle, rowheaderMetaData as ɵld, ExtRownumbererComponent as ɵjy, rownumbererMetaData as ɵjx, ExtRownumberercellComponent as ɵja, rownumberercellMetaData as ɵiz, ExtSearchfieldComponent as ɵgy, searchfieldMetaData as ɵgx, ExtSegmentedbuttonComponent as ɵos, segmentedbuttonMetaData as ɵor, ExtSelectfieldComponent as ɵha, selectfieldMetaData as ɵgz, ExtSelectioncolumnComponent as ɵka, selectioncolumnMetaData as ɵjz, ExtSelectpickerComponent as ɵni, selectpickerMetaData as ɵnh, ExtSheetComponent as ɵou, sheetMetaData as ɵot, ExtSimplelistitemComponent as ɵeu, simplelistitemMetaData as ɵet, ExtSinglesliderfieldComponent as ɵhc, singlesliderfieldMetaData as ɵhb, ExtSliderComponent as ɵow, sliderMetaData as ɵov, ExtSliderfieldComponent as ɵhe, sliderfieldMetaData as ɵhd, ExtSpacefillingComponent as ɵco, spacefillingMetaData as ɵcn, ExtSpacerComponent as ɵpc, spacerMetaData as ɵpb, ExtSparklineComponent as ɵpg, sparklineMetaData as ɵpf, ExtSparklinebarComponent as ɵpe, sparklinebarMetaData as ɵpd, ExtSparklineboxComponent as ɵpi, sparklineboxMetaData as ɵph, ExtSparklinebulletComponent as ɵpk, sparklinebulletMetaData as ɵpj, ExtSparklinediscreteComponent as ɵpm, sparklinediscreteMetaData as ɵpl, ExtSparklinelineComponent as ɵpo, sparklinelineMetaData as ɵpn, ExtSparklinepieComponent as ɵpq, sparklinepieMetaData as ɵpp, ExtSparklinetristateComponent as ɵps, sparklinetristateMetaData as ɵpr, ExtSpindowntriggerComponent as ɵia, spindowntriggerMetaData as ɵhz, ExtSpinnerfieldComponent as ɵhg, spinnerfieldMetaData as ɵhf, ExtSpinuptriggerComponent as ɵic, spinuptriggerMetaData as ɵib, ExtSplitbuttonComponent as ɵpu, splitbuttonMetaData as ɵpt, ExtSurfaceComponent as ɵfc, surfaceMetaData as ɵfb, ExtTabComponent as ɵqa, tabMetaData as ɵpz, ExtTabbarComponent as ɵpw, tabbarMetaData as ɵpv, ExtTabletpickerComponent as ɵnm, tabletpickerMetaData as ɵnl, ExtTabpanelComponent as ɵpy, tabpanelMetaData as ɵpx, ExtTemplatecolumnComponent as ɵjs, templatecolumnMetaData as ɵjr, ExtTextareafieldComponent as ɵhk, textareafieldMetaData as ɵhj, ExtTextcellComponent as ɵjc, textcellMetaData as ɵjb, ExtTextcolumnComponent as ɵkc, textcolumnMetaData as ɵkb, ExtTextfieldComponent as ɵhi, textfieldMetaData as ɵhh, ExtThumbComponent as ɵoy, thumbMetaData as ɵox, ExtTimefieldComponent as ɵhm, timefieldMetaData as ɵhl, ExtTimepanelComponent as ɵmy, timepanelMetaData as ɵmx, ExtTimetriggerComponent as ɵie, timetriggerMetaData as ɵid, ExtTitleComponent as ɵqe, titleMetaData as ɵqd, ExtTitlebarComponent as ɵqg, titlebarMetaData as ɵqf, ExtTogglefieldComponent as ɵho, togglefieldMetaData as ɵhn, ExtTogglesliderComponent as ɵpa, togglesliderMetaData as ɵoz, ExtToolComponent as ɵqi, toolMetaData as ɵqh, ExtToolbarComponent as ɵqm, toolbarMetaData as ɵql, ExtTooltipComponent as ɵqc, tooltipMetaData as ɵqb, ExtTreeComponent as ɵli, treeMetaData as ɵlh, ExtTreecellComponent as ɵje, treecellMetaData as ɵjd, ExtTreecolumnComponent as ɵke, treecolumnMetaData as ɵkd, ExtTreelistComponent as ɵls, treelistMetaData as ɵlr, ExtTreelistitemComponent as ɵlu, treelistitemMetaData as ɵlt, ExtTriggerComponent as ɵig, triggerMetaData as ɵif, ExtUrlfieldComponent as ɵii, urlfieldMetaData as ɵih, ExtVideoComponent as ɵre, videoMetaData as ɵrd, ExtViewportComponent as ɵrg, viewportMetaData as ɵrf, ExtWidgetComponent as ɵri, widgetMetaData as ɵrh, ExtWidgetcellComponent as ɵjg, widgetcellMetaData as ɵjf, ExtWindowComponent as ɵey, windowMetaData as ɵex, ExtYearpickerComponent as ɵnc, yearpickerMetaData as ɵnb };
 
 //# sourceMappingURL=sencha-ext-angular-modern.js.map

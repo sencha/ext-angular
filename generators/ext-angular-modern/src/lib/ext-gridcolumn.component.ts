@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -91,6 +95,7 @@ export class gridcolumnMetaData {
     "layout": "Object/String",
     "left": "Number/String",
     "listeners": "Object",
+    "locked": "Boolean/String",
     "manageBorders": "Boolean",
     "margin": "Number/String",
     "masked": "Boolean/String/Object/Ext.Mask/Ext.LoadMask",
@@ -250,6 +255,7 @@ export class gridcolumnMetaData {
     'layout',
     'left',
     'listeners',
+    'locked',
     'manageBorders',
     'margin',
     'masked',
@@ -464,10 +470,11 @@ export class gridcolumnMetaData {
   inputs: gridcolumnMetaData.PROPERTIES,
   outputs: gridcolumnMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtGridcolumnComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtGridcolumnComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,gridcolumnMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,gridcolumnMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcolumnMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(gridcolumnMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {
