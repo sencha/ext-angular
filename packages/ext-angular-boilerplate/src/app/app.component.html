@@ -1,0 +1,24 @@
+<container #item  fullscreen="true" [layout]="'fit'">
+
+  <titlebar #item  [title]="this.title" docked="top">
+    <button #item  align="left" *ngIf="isPhone" iconCls="x-fa fa-bars" [handler]="this.toggleAppMenu" ripple="false"></button>
+  </titlebar>
+
+  <sheet #item  *ngIf="isPhone" [displayed]="showAppMenu" side="left" (hide)="this.onHideAppMenu()">
+    <panel #item  scrollable="true" title="ExtAngular Boilerplate">
+      <app-navmenu #item  [store]="navStore" [width]="250" [selectionChanged]="navigate"></app-navmenu>
+    </panel>
+  </sheet>
+
+  <panel #item  *ngIf="!isPhone"  scrollable="true" docked="left" shadow="true" zIndex="2">
+    <app-navmenu #item 
+      [store]="navStore"
+      [selectionChanged]="navigate"
+      [responsiveConfig]="responsiveConfig">
+    </app-navmenu>
+  </panel>
+  <container #item [layout]="{ type: 'fit', align: 'stretch' }" [scrollable]="true">
+    <router-outlet #item></router-outlet>
+  </container>
+
+</container>
