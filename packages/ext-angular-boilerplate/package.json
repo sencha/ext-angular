@@ -5,7 +5,7 @@
   "scripts": {
     "start": "webpack-dev-server"
   },
-  "private":false,
+  "private": false,
   "devDependencies": {
     "@sencha/ext": "~6.7.0",
     "@sencha/ext-angular-modern": "6.7.0",
@@ -61,5 +61,4 @@
     "url": "https://github.com/sencha"
   },
   "homepage": "https://github.com/sencha"
-
 }
