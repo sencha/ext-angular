@@ -1,5 +1,5 @@
 {
-  "name": "ext-angular-kitchensink",
+  "name": "@sencha/ext-angular-kitchensink",
   "version": "6.7.0",
   "description": "ext-angular-kitchensink",
   "scripts": {
