@@ -1,0 +1,10 @@
+<panel #item
+    [height]="300"
+    [width]="700"
+    [padding]="5"
+    [shadow]="true"
+    (ready)="parentReady($event)"
+>
+    <container #item [cls]="'drag-file-label'" [html]="labelText"></container>
+    <container #item [cls]="iconcls"></container>
+</panel>

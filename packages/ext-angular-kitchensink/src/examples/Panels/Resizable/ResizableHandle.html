@@ -1,0 +1,17 @@
+<container #item [padding]="10" [height]="'700px'">
+    <panel #item
+        [title]="'Resize Me'"
+        [shadow]="true"
+        [height]="400"
+        [width]="400"
+        [resizable]="{edges: 'all', dynamic: doDynamically}"
+        [bodyPadding]="10"
+        [centered]="true"
+    >
+        <toolbar #item [docked]="'top'">
+            <checkboxfield #item [checked]="doDynamically" (change)="toggleDynamic($event)" [boxLabel]="'Dynamic'">
+            </checkboxfield>
+        </toolbar>
+        <container #item [html]="mediumText"></container>
+    </panel>
+</container>

@@ -1,0 +1,175 @@
+<container #item layout="fit" shadow="true" 
+width="900px" 
+height="600px">
+    <actionsheet #item [displayed]="showExportSheet">
+        <button #item [handler]="this.exportToXlsx" text="Excel xlsx"></button>
+        <button #item [handler]="this.exportToXml" text="Excel xml"></button>
+        <button #item [handler]="this.exportToCSV" text="CSV"></button>
+        <button #item [handler]="this.exportToTSV" text="TSV"></button>
+        <button #item [handler]="this.exportToHtml" text="HTML"></button>
+        <button #item [handler]="this.onCancelExport" text="Cancel"></button>
+    </actionsheet>
+  <grid #item
+    title="Big Data Grid"
+    [store]="this.store"
+    shadow="true"
+    grouped="true"
+    rowNumbers="true"
+    [titleBar]="gridTitleBar"
+    [plugins]="{
+      grideditable: true,
+      gridviewoptions: true,
+      summaryrow: true,
+      rowexpander: true,
+      gridexporter: true,
+      rowoperations: true
+    }"
+    [groupFooter]="{
+      xtype: 'gridsummaryrow'
+    }"
+    [itemConfig]="{
+    viewModel: {
+      
+    },
+      body: {
+        tpl: this.rowBodyTpl
+      }
+    }"
+    (onBeforeDocumentSave)="this.onBeforeDocumentSave($event)"
+    (onDocumentSave)="this.onDocumentSave($event)"
+    (ready)="gridReady($event)"
+    
+
+  >
+    <!-- Title bar property as in react bit not seen-->
+    <!-- [titleBar]="gridTitleBar" -->
+    <textcolumn #item
+      text="Id"
+      dataIndex="employeeNo"
+      flex="1"
+      minWidth="100"
+      [exportStyle]="{
+        format: 'General Number',
+        alignment: {
+          horizontal: 'Right'
+        }
+      }"
+    ></textcolumn>
+
+    <textcolumn #item
+      text="Name"
+      dataIndex="fullName"
+      minWidth="150"
+      [sorter]="{
+        sorterFn:this.nameSorter
+      }"
+    ></textcolumn>
+
+    <checkcolumn #item
+        text="Verified"
+        dataIndex="verified"
+        headerCheckbox="true"
+    ></checkcolumn>
+
+    <column text="Ratings" #item
+      [columns]= "ratingsColumn"
+    ></column> 
+
+    <datecolumn #item
+        text="Date of Birth"
+        dataIndex="dob"
+        editable="true"
+        format='d-m-Y'
+        [exportStyle]="[{
+            format: 'Medium Date',
+            alignment: {
+                horizontal: 'Right'
+            }
+        }, {
+            type: 'csv',
+            format: 'Short Date'
+        }]"
+    ></datecolumn>
+
+    <column #item
+        text=""
+        width="100"
+        ignoreExport="true"
+        align="center"
+        [summaryCell] =  "summaryCell"
+      >
+      <!--
+          TODO: not working
+      <widgetcell #item>
+        <button #item ui ="action" [handler] ="this.onVerify" [bind] = "widgetCellBind" text = "VERIFY"></button>
+      </widgetcell>
+      -->
+    </column>
+
+    <datecolumn #item
+        text="Join Date"
+        dataIndex="joinDate"
+        editable="true"
+        format="d-m-Y"
+        [exportStyle]="{
+            format: 'Medium Date',
+            alignment: {
+                horizontal: 'Right'
+            }
+        }"
+    ></datecolumn>
+
+    <textcolumn #item
+        text="Notice Period"
+        dataIndex='noticePeriod'
+        editable="true"
+    ></textcolumn>
+
+    <textcolumn #item
+        text="Email"
+        dataIndex="email"
+        width="250"
+        editable
+        [editor]="{
+            xtype:'emailfield'
+        }"
+    ></textcolumn>
+
+    <column text='Absences' #item
+    [columns]= "absensesColumn"
+    >
+    </column>
+
+    <column  #item
+        text="Rating<br></br>This Year" 
+        dataIndex="ratingThisYear"
+        groupable="false"
+        formatter='round(1)'
+        summary='average'
+        [cell]="ratingsCell"
+        [exportStyle]= "{
+          alignment: {
+              horizontal: 'Right'
+          }
+       }"
+    ></column>
+    
+
+
+    <textcolumn #item
+        text='Salary'
+        dataIndex='salary'
+        [renderer]="usMoneyRendered"
+        width='150'
+        editable
+        summary='sum'
+        [summaryRenderer]="this.salarySummaryRenderer"
+        [exportStyle]="{
+          format: 'Currency',
+          alignment: {
+              horizontal: 'Right'
+          }
+      }"
+    ></textcolumn>
+    </grid>
+</container>

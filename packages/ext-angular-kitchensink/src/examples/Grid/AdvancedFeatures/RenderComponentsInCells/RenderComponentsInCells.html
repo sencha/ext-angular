@@ -1,0 +1,17 @@
+<grid #item title="Stock Prices" [store]="this.store" shadow="true" grouped="true"
+width="900px" 
+height="600px">
+    <column #item text="Company" dataIndex="name" width="150"></column>
+    <column #item text="Price" width="85" dataIndex="price" formatter='usMoney'></column>
+    <column #item text="Change" width="100" dataIndex="priceChange" [renderer]="this.renderNumberCell.bind(this, '0.00')"></column>
+    <column #item text="% Change" dataIndex="priceChangePct" [renderer]="this.renderNumberCell.bind(this, '0.00%')"></column>
+    <column #item  text="Actions" flex="1" minWidth="210">
+        <widgetcell #item>
+         <segmentedbutton  #item
+          maxWidth="300"
+          allowDepress = "true" 
+          [items] = "gridItems"
+         ></segmentedbutton>
+        </widgetcell>
+    </column>
+</grid>

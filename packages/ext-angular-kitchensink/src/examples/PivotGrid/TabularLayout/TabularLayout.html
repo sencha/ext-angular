@@ -1,0 +1,28 @@
+
+            <container #item layout="fit" padding="10" [height]="'600px'">
+                <pivotgrid #item
+                    shadow="true"
+                    (ready)="onPivotGridRead($event)"
+                    startRowGroupsCollapsed="false"
+                    startColGroupsCollapsed="false"
+                    [matrix]="pivotgridMatrix"
+                ></pivotgrid>
+                <toolbar #item
+                    shadow="false"
+                    docked="top"
+                    ui="app-transparent-toolbar"
+                    padding="5 8"
+                    [layout]="{
+                        type: 'hbox',
+                        align: 'stretch'
+                    }"
+                    [defaults]="{
+                        margin: '0 10 0 0',
+                        shadow: true,
+                        ui: 'action'
+                    }"
+                >
+                    <button #item text="Expand All" [handler]="this.expandAll"></button>
+                    <button #item text="Collapse All" [handler]="this.collapseAll"></button>
+                </toolbar>
+            </container>

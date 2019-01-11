@@ -1,0 +1,16 @@
+<container #item [padding]="isPhone? '10' : ''" layout="fit" 
+[height]="'700px'">
+    <chart-toolbar #item 
+     [onThemeChange]="this.changeTheme"
+      [theme]="theme"></chart-toolbar>
+    <polar #item
+    [width]="'800px'"
+        shadow="true"
+        [insetPadding]="20"
+        [innerPadding]="20"
+        [interactions]="['rotate', 'itemhighlight']"
+        [store]="this.outerStore"
+        [theme]="theme"
+        [series]="polarSeries"
+    ></polar>
+</container>

@@ -13,7 +13,7 @@ return portfinder.getPortPromise().then(port => {
   const plugins = [
     new AngularCompilerPlugin({
       tsConfigPath: './tsconfig.json',
-      mainPath: "./src/app.ts",
+      mainPath: "./src/main.ts",
       skipCodeGeneration: true
     }),
     new ExtWebpackPlugin({
@@ -45,7 +45,7 @@ return portfinder.getPortPromise().then(port => {
     mode: 'development',
     entry: {
       polyfills: "./src/polyfills.ts",
-      main: "./src/app.ts"
+      main: "./src/main.ts"
     },
     context: path.join(__dirname, './'),
     output: {
@@ -54,7 +54,7 @@ return portfinder.getPortPromise().then(port => {
     },
     module: {
       rules: [
-        //{test: /\.ts$/,loader: "awesome-typescript-loader"},
+        {test: /\.(png|svg|jpg|jpeg|gif)$/, use: ['file-loader']},
         {test: /\.css$/, loader: ["style-loader", "css-loader"]},
         {test: /\.ts$/,  loader: '@ngtools/webpack'},
         {test: /\.html$/,loader: "html-loader"},
