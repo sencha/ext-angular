@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -458,10 +462,11 @@ export class datepickernativefieldMetaData {
   inputs: datepickernativefieldMetaData.PROPERTIES,
   outputs: datepickernativefieldMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtDatepickernativefieldComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtDatepickernativefieldComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,datepickernativefieldMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,datepickernativefieldMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickernativefieldMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(datepickernativefieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {
