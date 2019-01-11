@@ -9,10 +9,6 @@ const Input = require('prompt-input')
 const Confirm = require('prompt-confirm')
 const glob = require('glob')
 
-const LANGUAGE = {
-  TYPESCRIPT: 'TypeScript',
-  JAVASCRIPT: 'JavaScript'
-}
 const CODE = {
   EXAMPLE: 'Include some example code', 
   BARE_BONES: 'Generate an empty app'
@@ -46,9 +42,6 @@ var answers = {
   'useDefaults': null,
   'appName': null,
   'packageName': null,
-  'theme': null,
-  'code': null,
-  'language': null,
   'version': null,
   'description': null,
   'repositoryURL': null,
@@ -67,10 +60,7 @@ const optionDefinitions = [
   { name: 'help', alias: 'h', type: Boolean },
   { name: 'defaults', alias: 'd', type: Boolean },
   { name: 'auto', alias: 'a', type: Boolean },
-  { name: 'name', alias: 'n', type: String },
-  { name: 'theme', alias: 't', type: String },
-  { name: 'code', alias: 'c', type: String },
-  { name: 'language', alias: 'l', type: String },
+  { name: 'name', alias: 'n', type: String }
 ]
 
 var version = ''
@@ -92,7 +82,7 @@ function stepStart() {
   const mainCommandArgs = commandLineArgs(mainDefinitions, { stopAtFirstUnknown: true })
 //  console.log('');console.log(`mainCommandArgs: ${JSON.stringify(mainCommandArgs)}`)
   var mainCommand = mainCommandArgs.command
-  console.log(`mainCommand: ${JSON.stringify(mainCommand)}`)
+  //console.log(`mainCommand: ${JSON.stringify(mainCommand)}`)
   switch(mainCommand) {
     case undefined:
       let argv = mainCommandArgs._unknown || []
@@ -237,48 +227,11 @@ function stepNameYourApp() {
   }).run().then(answer => {
     answers['appName'] = answer
     answers['packageName'] = kebabCase(answers['appName'])
-    //stepTheme()
     stepPackageName()
   })
 }
 
-function stepTheme() {
-  new List({
-    message: 'What theme would you like to use?',
-    choices: ['material', 'triton', 'ios'],
-    default: 'material'
-  }).run().then(answer => {
-    answers['theme'] = answer
-    stepCode()
-  })
-}
 
-function stepCode() {
-  new List({
-    message: 'Do you want to include example code (layout, navigation, routing, etc...), or just generate an empty app?',
-    choices:  [CODE.BARE_BONES, CODE.EXAMPLE],
-    default: CODE.EXAMPLE
-  }).run().then(answer => {
-    answers['code'] = answer
-    stepLanguage()
-  })
-}
-
-function stepLanguage() {
-  new List({
-    message: 'Which language would you like to use',
-    choices:  [LANGUAGE.JAVASCRIPT, LANGUAGE.TYPESCRIPT],
-    default: LANGUAGE.JAVASCRIPT
-  }).run().then(answer => {
-    answers['language'] = answer
-    if(answers['useDefaults'] == true) {
-      stepGo()
-    }
-    else {
-      stepPackageName()
-    }
-  })
-}
 
 function stepPackageName() {
   new Input({
@@ -423,37 +376,11 @@ async function stepCreate() {
 //  boilerplate = path.dirname(require.resolve(nodeDir + '/node_modules/@sencha/ext-angular-demo'))
   boilerplate = nodeDir + '/node_modules/@sencha/ext-angular-modern-boilerplate'
 
-  // if (answers['language'] == LANGUAGE.TYPESCRIPT) {
-  //   boilerplate = path.dirname(require.resolve(nodeDir + '/node_modules/@sencha/ext-react-modern-typescript-boilerplate'))
-  // }
-  // else {
-  //   boilerplate = path.dirname(require.resolve(nodeDir + '/node_modules/@sencha/ext-react-modern-boilerplate'))
-  // }
-
   //copy in files from boilerplate
   glob.sync('**/*', { cwd: boilerplate, ignore: ['build/**', 'node_modules/**', 'index.js'], dot: true })
     .forEach(file => new Promise((resolve, reject) => {
       fs.copySync(path.join(boilerplate, file), file)
     }))
-
-
-
-  // copy in files from boilerplate
-  // glob.sync('**/*', { cwd: boilerplate, ignore: ['build/**', 'node_modules/**', 'index.js'], dot: true })
-  //   .forEach(file => new Promise((resolve, reject) => {
-  //     if (answers['code'] === CODE.BARE_BONES && file.match(/src/) && !file.match(/index/)) {
-  //       return
-  //     }
-  //     if (answers['code'] === CODE.BARE_BONES && file.match(/__tests__/)) {
-  //       return
-  //     }
-  //     fs.copySync(path.join(boilerplate, file), file)
-  //   }))
-  // answers['theme'] = `theme-${answers['theme']}`;
-
-  // const theme = path.join('ext-react', 'packages', 'custom-ext-react-theme', 'package.json');
-  // const themePackageJson = fs.readFileSync(theme, 'utf8').replace('theme-material', answers['theme'])
-  // fs.writeFileSync(theme, themePackageJson, 'utf8');
 
   const packageInfo = {};
   Object.assign(packageInfo, {name: answers['packageName']})
@@ -468,41 +395,6 @@ async function stepCreate() {
   if (answers['keywords']) packageInfo.keywords = answers['keywords']
   if (answers['author']) packageInfo.author = answers['author']
   if (answers['license']) packageInfo.license = answers['license']
-
-  // Object.assign(packageInfo, pick(fs.readJsonSync('package.json'), 'main', 'scripts', 'dependencies', 'devDependencies', 'jest'));
-  // if (answers['theme'] !== 'theme-material') {
-  //   packageInfo.dependencies[`@sencha/ext-modern-${answers['theme']}`] = packageInfo.dependencies['@sencha/ext-modern-theme-material'];
-  // }
-
-  // let packageInfoString = JSON.stringify(packageInfo,null,2)
-  // fs.writeFileSync('package.json', packageInfoString)  
-
-  // const indexHtml = path.join('src', 'index.html');
-  // fs.writeFileSync(indexHtml, fs.readFileSync(indexHtml, 'utf8').replace('ExtAngular Boilerplate', answers['appName']), 'utf8')
-
-  // fs.copyFileSync(
-  //   path.join(templatesDir, answers['language'] === LANGUAGE.TYPESCRIPT ? 'ts/README.md' : 'js/README.md'),
-  //   path.join(destDir, 'README.md')
-  // )
-
-  // if (answers['code'] === CODE.BARE_BONES) {
-  //     fs.copyFileSync(
-  //       path.join(templatesDir, answers['language'] === LANGUAGE.TYPESCRIPT ? 'ts/App.minimal.tsx' : 'js/App.minimal.js'),
-  //       path.join(destDir, answers['language'] === LANGUAGE.TYPESCRIPT ? 'src/App.tsx' : 'src/App.js'),
-  //     )
-  //     if (answers['language'] === LANGUAGE.JAVASCRIPT) {
-  //       fs.copyFileSync(
-  //         path.join(templatesDir, 'js/App.test.js'),
-  //         path.join(destDir, 'src/App.test.js')
-  //       )
-  //   }
-  // } 
-  // else {
-  //     // update Layout.js
-  //     const layout = path.join('src', `Layout.${answers['language'] === LANGUAGE.TYPESCRIPT ? 'tsx' : 'js'}`);
-  //     //fs.write(layout, fs.read(layout).replace('ExtReact Boilerplate', answers['appName']));
-  //     fs.writeFileSync(layout, fs.readFileSync(layout, 'utf8').replace('ExtReact Boilerplate', answers['appName']), 'utf8');
-  // }
 
   try {
     const substrings = ['[ERR]', '[WRN]', '[INF] Processing', "[INF] Server", "[INF] Writing content", "[INF] Loading Build", "[INF] Waiting", "[LOG] Fashion waiting"];
@@ -534,14 +426,6 @@ async function stepCreate() {
 
  function setDefaults() {
 
-  if (cmdLine.theme != undefined) { answers['theme'] = cmdLine.theme }
-  else { answers['theme'] = config.theme }
-
-  if (cmdLine.language != undefined) { answers['language'] = cmdLine.language }
-  else { answers['language'] = config.language }
-
-  if (cmdLine.code != undefined) { answers['code'] = cmdLine.code }
-  else { answers['code'] = config.code }
 
   if (cmdLine.name != undefined) {
     answers['appName'] = cmdLine.name
@@ -565,9 +449,6 @@ async function stepCreate() {
 function displayDefaults() {
   console.log(boldGreen(`Defaults for ExtAngular app:`))
   console.log(`appName:\t${answers['appName']}`)
-  console.log(`theme:\t\t${answers['theme']}`)
-  console.log(`code:\t\t${answers['code']}`)
-  console.log(`language:\t${answers['language']}`)
   console.log('')
   console.log(boldGreen(`Defaults for package.json:`))
   console.log(`packageName:\t${answers['packageName']}`)
@@ -590,24 +471,19 @@ function stepHelpApp() {
 
   var message = `${boldGreen('Quick Start:')} ext-angular-gen -a
 
-ext-angular-gen app (-h) (-d) (-i) (-t 'material') (-l 'JavaScript') (-c 'Include some example code') (-n 'name')
+ext-angular-gen app (-h) (-d) (-i) (-n 'name')
 
 -h --help          show help (no parameters also shows help)
 -d --defaults      show defaults for package.json
 -i --interactive   run in interactive mode (question prompts will display)
 -n --name          name for Ext JS generated app
--t --theme         theme name for Ext JS modern toolkit
--l --language      TypeScript or JavaScript
--c --code          'Include some example code' or 'Generate an empty app'
 -v --verbose       verbose npm messages (for problems only)
 
 ${boldGreen('Examples:')} 
-ext-angular-gen app --theme material --name CoolExtAngularApp
+ext-angular-gen app  --name CoolExtAngularApp
 ext-angular-gen app --interactive
-ext-angular-gen app -a -t material -l JavaScript -c 'Include some example code' -n CoolExtAngularApp
+ext-angular-gen app -a -n CoolExtAngularApp
 
-${boldGreen('Theme Names:')}
-${boldGreen('modern themes:')}  material, ios, neptune, triton
 `
   console.log(message)
 }

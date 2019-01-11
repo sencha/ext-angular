@@ -140,6 +140,10 @@ declare var _code: any;
     overflow-y: hidden !important;
   }
 
+  .breadcrum-color {
+    background-color:#f5f5f5 !important
+  }
+
   `],
   // https://angular.io/api/core/ViewEncapsulation#None
   encapsulation: ViewEncapsulation.None,
