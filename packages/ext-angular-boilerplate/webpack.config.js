@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require("webpack")
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin')
 const portfinder = require('portfinder')
-var isProd = false
+var isProd = true
 
 module.exports = function (env) {
 portfinder.basePort = (env && env.port) || 1962
@@ -22,11 +22,12 @@ return portfinder.getPortPromise().then(port => {
       emit: true,
       browser: true,
       profile: '', 
-      environment: 'development', 
+      environment: 'production', 
       verbose: 'no',
       theme: 'theme-material',
       packages: [
-        'ux'
+        'ux',
+        'treegrid'
       ]
     }),
     new HtmlWebpackPlugin({
