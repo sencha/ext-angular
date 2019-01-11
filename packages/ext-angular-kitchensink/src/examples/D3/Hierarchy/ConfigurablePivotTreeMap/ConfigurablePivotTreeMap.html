@@ -1,0 +1,18 @@
+<container #item [layout]="'fit'" [height]="'600px'" >
+    <pivotd3container #item
+        shadow="true"
+        layout="'fit'"
+        (ready)="ctnReady($event)"
+        (onShowConfigPanel)="this.onShowConfigPanel"
+        (onBeforeMoveConfigField)="this.onBeforeAddConfigField"
+        (onShowConfigFieldSettings)="this.onShowFieldSettings"
+        [matrix]="matrixVar"
+        [drawing]="drawingVar"
+        [configurator]="configuratorVar"
+    >
+        <toolbar #item docked="top">
+            <spacer #item></spacer>
+            <button #item text="Show configurator" (tap)="this.showConfigurator"></button>
+        </toolbar>
+    </pivotd3container>
+</container>

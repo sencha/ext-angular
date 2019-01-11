@@ -1,0 +1,28 @@
+<formpanel #item [shadow]="true" [layout]="vbox" [width]="850">
+    <sliderfield #item [label]="'Value'" [width]="350" (change)="updateGauges($event)" [value]="value">
+    </sliderfield>
+    <container #item 
+        [layout]="{type: 'hbox', align: 'stretch'}"
+        [margin]="'10 0 10 0'" [flex]="1"
+        [width]="'100%'" [minHeight]="200"
+    >
+        <gauge #item
+            [flex]="1"
+            [value]="value" 
+            [needle]="{'outerRadius': '100%'}" 
+            [valueStyle]="{display: 'none'}"
+        ></gauge>
+        <gauge #item [flex]="1" [value]="value" [needle]="'wedge'"></gauge>
+    </container>
+    <container #item
+        [layout]="{type: 'hbox', align: 'stretch'}"
+        [margin]="'10 0 10 0'" [flex]="1"
+        [width]="'100%'" [minHeight]="200"
+    >
+        <gauge #item [flex]="1" [value]="value" [needle]="'spike'"></gauge>
+        <gauge #item
+            [flex]="1" [value]="value" [textOffset]="{dy: 45}"
+            [needle]="{type: 'arrow', innerRadius: 0}"
+        ></gauge>
+    </container>
+</formpanel>

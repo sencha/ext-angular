@@ -258,9 +258,7 @@ export async function emit(compiler, compilation, vars, options, callback) {
         }
 
         if (vars.watchStarted == false) {
-          console.log('build1')
           await _buildExtBundle(app, compilation, outputPath, parms, options)
-          console.log('build2')
           vars.watchStarted = true
         }
 

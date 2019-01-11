@@ -7,23 +7,23 @@ import {model} from './CompanyModel'
     selector: "app-root",
     styles: [],
     template: `
-<grid title="Stock Prices" [store]="store" [shadow]="true" grouped="true" [fitToParent]="true">
-  <column text="Company" dataIndex="name" width="150"></column>
-  <column text="Price" width="85" dataIndex="price" formatter='usMoney'></column>
-  <column
+<grid #item title="Stock Prices" [store]="store" [shadow]="true" grouped="true" [fitToParent]="true">
+  <column #item text="Company" dataIndex="name" width="150"></column>
+  <column #item text="Price" width="85" dataIndex="price" formatter='usMoney'></column>
+  <column #item
     text="Change" 
     width="100" 
     dataIndex="priceChange" 
     [cell]="{encodeHtml:false}"
     [renderer]="this.renderSign.bind(this,'0.00')"
   ></column>
-  <column
+  <column #item
     text="% Change" 
     dataIndex="priceChangePct" 
     [cell]="{encodeHtml:false}"
     [renderer]="this.renderSign.bind(this,'0.00')"
   ></column>
-  <column text="Last Updated" width="125" dataIndex="lastChange" formatter='date("m/d/Y")'></column>
+  <column #item text="Last Updated" width="125" dataIndex="lastChange" formatter='date("m/d/Y")'></column>
 </grid>
     `
 })

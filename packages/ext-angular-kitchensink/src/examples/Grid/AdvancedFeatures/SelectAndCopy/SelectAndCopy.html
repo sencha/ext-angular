@@ -1,0 +1,58 @@
+<container layout="fit" padding="10" #item
+width="900px" 
+height="600px">
+    <toolbar #item docked="top" ui="app-transparent-toolbar" defaults="{ margin: '0 5 0 0' }" padding="0 10" shadow="false">
+        <button #item text="Selectable" ui="action">
+            <menu #item>
+                <menucheckitem #item text="rows" [checked]="rows" [handler]="this.toggleSelectable.bind(this, 'rows')"></menucheckitem>
+                <menucheckitem #item text="cells" [checked]="cells" [handler]="this.toggleSelectable.bind(this, 'cells')"></menucheckitem>
+                <menucheckitem #item text="columns" [checked]="columns" [handler]="this.toggleSelectable.bind(this, 'columns')"></menucheckitem>
+                <menucheckitem #item text="drag" [checked]="drag" [handler]="this.toggleSelectable.bind(this, 'drag')"></menucheckitem>
+                <menucheckitem #item text="checkbox" [checked]="checkbox" [handler]="this.toggleSelectable.bind(this, 'checkbox')"></menucheckitem>
+            </menu>
+        </button>
+        <button #item text="Extensible" ui="action">
+            <menu #item>
+                <menuitem #item text="x" [iconCls]="extensible === 'x' ?  'x-font-icon md-icon-check' : ''" [handler]="this.setExtensible.bind(this, 'x')"></menuitem>
+                <menuitem #item text="y" [iconCls]="extensible === 'y' ? 'x-font-icon md-icon-check' : ''" [handler]="this.setExtensible.bind(this, 'y')"></menuitem>
+                <menuitem #item text="both" [iconCls]="extensible === 'both' ?  'x-font-icon md-icon-check' : ''" [handler]="this.setExtensible.bind(this, 'both')"></menuitem>
+            </menu>
+        </button>
+    </toolbar>
+    <grid #item
+        [store]="this.store"
+        [plugins]="{
+            selectionreplicator: true,
+            clipboard: true
+        }"
+        (onSelectionChange)="this.onSelectionChange($event)"
+        selectable="{
+            extensible: this.extensible,
+            roww: this.rows,
+            cells: this.cells,
+            columns: this.columns,
+            drag: this.drag
+        }"
+        shadow="true"
+        rowNumbers="true"
+        columnLines="true"
+    >
+        <column #item text="Year" dataIndex="year" flex="1" minWidth="75"></column>
+        <column #item text="Jan" dataIndex="jan" width="75"></column>
+        <column #item text="Feb" dataIndex="feb" width="75"></column>
+        <column #item text="Mar" dataIndex="mar" width="75"></column>
+        <column #item text="Apr" dataIndex="apr" width="75"></column>
+        <column #item text="May" dataIndex="may" width="75"></column>
+        <column #item text="Jun" dataIndex="jun" width="75"></column>
+        <column #item text="Jul" dataIndex="jul" width="75"></column>
+        <column #item text="Aug" dataIndex="aug" width="75"></column>
+        <column #item text="Sep" dataIndex="sep" width="75"></column>
+        <column #item text="Oct" dataIndex="oct" width="75"></column>
+        <column #item text="Nov" dataIndex="nov" width="75"></column>
+        <column #item text="Dev" dataIndex="dec" width="75"></column>
+        
+        <panel #item docked="bottom" bodyPadding="5">
+            <container  #item [style]="{ fontSize: '14px', fontWeight: 'normal' }" [html]="message"></container>
+        </panel>
+    </grid>
+</container>

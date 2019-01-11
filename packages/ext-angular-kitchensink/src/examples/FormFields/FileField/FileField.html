@@ -1,0 +1,8 @@
+<panel #item [shadow]="true" [height]="200" [width]="400" [bodyPadding]="20" [layout]="vbox">
+    <filefield #item
+        [label]="'Attachment'"
+        [value]="uploadedFile"
+        (change)="onChange($event)"
+    ></filefield>
+    <div #item [hidden]="uploadedFile == null">You selected {{uploadedFile}}</div>    
+</panel>

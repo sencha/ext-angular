@@ -1,0 +1,26 @@
+<panel #item
+[shadow]="!isPhone" 
+scrollable="true"
+platformConfig="{
+    '!phone': {
+        width: 300,
+        height: 500
+    }
+}"
+>
+<toolbar #item docked="top">
+    <segmentedbutton #item allowMultiple="true">
+        <button #item ui="default-toolbar" text="Nav" [pressed]="nav" (pressedchange)="this.toggleNav($event)" [disabled]="micro"></button>
+        <button #item ui="default-toolbar" text="Micro" [pressed]="micro" (pressedchange)="this.toggleMicro($event)"></button>
+    </segmentedbutton>
+</toolbar>
+<treelist  #item     
+    ref="tree"  
+    [width]="width"
+    expanderOnly="false"
+    [store]="this.store"
+    [micro]="micro"
+    [expanderFirst]="!nav"
+    [ui]="nav ? 'nav' : null"
+></treelist>
+</panel>

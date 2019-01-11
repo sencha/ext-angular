@@ -1,0 +1,39 @@
+<container #item [layout]="'fit'" [padding]="10">
+    <tabpanel #item
+        (ready)="tabPanelReady($event)"
+        [style]="{ backgroundColor: 'white'}"
+        [activeItem]="0"
+        [shadow]="true" 
+        [tabBar]="{
+            height: 48,
+            layout: {
+                pack: 'left'
+            },
+            style: {
+                paddingRight: '52px'
+            }
+        }"
+    >
+        {{ tabs.map(key => (
+            <panel
+                #item
+                [title]="'Tab key'"
+                tab="{ flex: 1, maxWidth: 150 }"
+                key="key"
+                [layout]="'center'"
+                closable="true"
+                (onDestroy)="onCloseTab()"
+            >
+                <container #item [style]="{ whiteSpace: 'nowrap' }" [html]="'Tab key Content'"></container>
+            </panel>
+        ))}}
+    </tabpanel>
+    <button #item
+        [top]="18" 
+        [right]="20"
+        [iconCls]="'x-fa fa-plus'" 
+        (tap)="addTab()"
+        [ui]="'alt round'"
+        [tooltip]="'New Tab'"
+    ></button>
+</container>

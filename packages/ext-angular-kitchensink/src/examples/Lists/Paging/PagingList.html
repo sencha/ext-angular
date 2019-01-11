@@ -1,0 +1,33 @@
+<list #item
+    docked="bottom"
+    (ready)="listReady($event)"
+    [shadow]="true"
+    [itemTpl]="tpl"
+    [store]="store"
+    [plugins]="[{type: 'listpaging'}]"
+    (select)="onSelect($event)"
+    [platformConfig]="{
+        '!phone': {height: 450, width: 300}
+    }"
+>
+    <container #item [docked]="'top'"
+    >
+        <container layout="hbox" #item>    
+            <div #item style='padding:15px;'>
+                <b>Auto Paging</b>: {{bufferZone === false ? 'OFF' : 'ON (buffer zone: '+bufferZone+' )'}}
+            </div>
+        </container>
+        <segmentedbutton #item>
+            <button #item [text]="'Off'" [pressed]="bufferZone === false" (tap)="setBufferZone(false)" [flex]="1">
+            </button>
+            <button #item [text]="'0'" [pressed]="bufferZone === 0" (tap)="setBufferZone('0')" [flex]="1">
+            </button>
+            <button #item [text]="8" [pressed]="bufferZone === 8" (tap)="setBufferZone(8)" [flex]="1">
+            </button>
+            <button #item [text]="16" [pressed]="bufferZone === 16" (tap)="setBufferZone(16)" [flex]="1">
+            </button>
+            <button #item [text]="32" [pressed]="bufferZone === 32" (tap)="setBufferZone(32)" [flex]="1">
+            </button>
+        </segmentedbutton>
+    </container>
+</list>
