@@ -1,4 +1,8 @@
 import {
+  Injectable,
+  Host,
+  Optional,
+  SkipSelf,
   Output,
   OnInit,
   AfterContentInit,
@@ -498,10 +502,11 @@ export class calendar_timefieldMetaData {
   inputs: calendar_timefieldMetaData.PROPERTIES,
   outputs: calendar_timefieldMetaData.EVENTNAMES,
   providers: [{provide: base, useExisting: forwardRef(() => ExtCalendar_timefieldComponent)}],
-  template: '<ng-template #dynamic></ng-template>'
+  template: '<ng-template></ng-template>'
 })
 export class ExtCalendar_timefieldComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef) {super(eRef,calendar_timefieldMetaData)}
+  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,calendar_timefieldMetaData,hostComponent)}
+  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_timefieldMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(calendar_timefieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
   public ngAfterContentInit() {

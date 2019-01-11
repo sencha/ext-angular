@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { ExtAngularBootstrapComponent } from './ext-angular-bootstrap.component';
+import { ExtAngularBootstrapService } from './ext-angular-bootstrap.service';
 import { ExtActionsheetComponent } from './ext-actionsheet.component';
 import { ExtAudioComponent } from './ext-audio.component';
 import { ExtButtonComponent } from './ext-button.component';
@@ -223,13 +225,11 @@ import { ExtRatingComponent } from './ext-rating.component';
 import { ExtVideoComponent } from './ext-video.component';
 import { ExtViewportComponent } from './ext-viewport.component';
 import { ExtWidgetComponent } from './ext-widget.component';
-import { ExtOrgChartComponent } from './ext-orgchart.component';
-import { ExtTransitionComponent } from './ext-transition.component';
 
 @NgModule({
-  imports: [
-  ],
-  declarations: [
+  imports:         [],
+  declarations:    [
+    ExtAngularBootstrapComponent,
     ExtActionsheetComponent,
     ExtAudioComponent,
     ExtButtonComponent,
@@ -453,11 +453,13 @@ import { ExtTransitionComponent } from './ext-transition.component';
     ExtRatingComponent,
     ExtVideoComponent,
     ExtViewportComponent,
-    ExtWidgetComponent,
-    ExtOrgChartComponent,
-    ExtTransitionComponent
+    ExtWidgetComponent
+
   ],
-  exports: [
+  providers:       [ ExtAngularBootstrapService ],
+  entryComponents: [ ExtAngularBootstrapComponent ],
+  exports:         [
+    ExtAngularBootstrapComponent,
     ExtActionsheetComponent,
     ExtAudioComponent,
     ExtButtonComponent,
@@ -681,9 +683,8 @@ import { ExtTransitionComponent } from './ext-transition.component';
     ExtRatingComponent,
     ExtVideoComponent,
     ExtViewportComponent,
-    ExtWidgetComponent,
-    ExtOrgChartComponent,
-    ExtTransitionComponent
+    ExtWidgetComponent
+
   ]
 })
 export class ExtAngularModernModule { }
