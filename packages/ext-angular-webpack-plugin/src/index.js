@@ -44,21 +44,21 @@ export default class ExtWebpackPlugin {
       //   callback()
       // })
 
-      const path = require('path')
-      var jsPath = path.join(compiler.options.output.path, this.plugin.vars.extPath, 'ext.js')
-      const fs = require('fs')
-      var itExists = fs.existsSync(jsPath)
+      // const path = require('path')
+      // var jsPath = path.join(compiler.options.output.path, this.plugin.vars.extPath, 'ext.js')
+      // const fs = require('fs')
+      // var itExists = fs.existsSync(jsPath)
 
-      if(!itExists && !this.plugin.vars.production && this.plugin.vars.framework != 'extjs') {
-        compiler.hooks.beforeCompile.tapAsync(`ext-before-compile`, (compilation, callback) => {
-          require('./pluginUtil').logv(this.plugin.options,'HOOK beforeCompile')
-          compilation.errors = []
-          require(`./pluginUtil`).emit(compiler, compilation, this.plugin.vars, this.plugin.options, callback)
-        })
-      }
-      else {
-        require('./pluginUtil').log(this.plugin.vars.app + 'Using existing build at: ' + jsPath)
-      }
+      //if(!itExists && !this.plugin.vars.production && this.plugin.vars.framework != 'extjs') {
+      //   compiler.hooks.beforeCompile.tapAsync(`ext-before-compile`, (compilation, callback) => {
+      //     require('./pluginUtil').logv(this.plugin.options,'HOOK beforeCompile')
+      //     compilation.errors = []
+      //     require(`./pluginUtil`).emit(compiler, compilation, this.plugin.vars, this.plugin.options, callback)
+      //   })
+      // }
+      // else {
+      //   require('./pluginUtil').log(this.plugin.vars.app + 'Using existing build at: ' + jsPath)
+      // }
 
       if ( this.plugin.vars.framework == 'extjs') {
         compiler.hooks.afterCompile.tap('ext-after-compile', (compilation) => {
@@ -69,28 +69,24 @@ export default class ExtWebpackPlugin {
       else {
         compiler.hooks.compilation.tap(`ext-compilation`, (compilation) => {
           require('./pluginUtil').logv(this.plugin.options,'HOOK compilation')
-          if (this.plugin.vars.production) {
+//          if (this.plugin.vars.production) {
             require(`./pluginUtil`)._compilation(compiler, compilation, this.plugin.vars, this.plugin.options)
-          }
+//          }
         })
       }
 
       compiler.hooks.emit.tapAsync(`ext-emit`, (compilation, callback) => {
         require('./pluginUtil').logv(this.plugin.options,'HOOK emit')
-        if (this.plugin.vars.production) {
+        //if (this.plugin.vars.production) {
           require(`./pluginUtil`).emit(compiler, compilation, this.plugin.vars, this.plugin.options, callback)
-        }
-        else {
-          callback()
-        }
+        //}
+        // else {
+        //   callback()
+        // }
       })
 
       compiler.hooks.done.tap(`ext-done`, () => {
         require('./pluginUtil').logv(this.plugin.options,'HOOK done')
-
-
-
-        
 
         try {
           if(this.plugin.options.browser == true && this.plugin.options.watch == 'yes' && this.plugin.vars.production == false) {
@@ -107,9 +103,6 @@ export default class ExtWebpackPlugin {
         catch (e) {
           console.log(e)
         }
-
-
-
         require('./pluginUtil').log(this.plugin.vars.app + `Completed ext-webpack-plugin processing`)
       })
 

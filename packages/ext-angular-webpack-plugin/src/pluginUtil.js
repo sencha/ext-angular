@@ -51,7 +51,7 @@ export function _constructor(options) {
     fsx.copySync(fromFashionDist, toFashionDist)
   }
   else {
-    logv(options, `no copy`)
+    logv(options, `no copy of fashion`)
   }
 
   thisVars.app = require('./pluginUtil')._getApp()

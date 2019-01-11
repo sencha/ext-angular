@@ -3,7 +3,16 @@
   "version": "6.7.0",
   "description": "ext-angular-tutorial",
   "scripts": {
-    "start": "webpack-dev-server"
+    "clean": "rimraf build",
+    "start": "npm run dev",
+    "dev": "webpack-dev-server --env.verbose=no --env.environment=development  --env.browser=true  --env.watch=yes",
+    "prod": "webpack-dev-server --env.verbose=yes --env.environment=production",
+    "build": "npm run clean && cross-env webpack --env.verbose=no --env.environment=production --env.browser=false --env.watch=no"
+  },
+  "extbuild": {
+    "defaultprofile": "",
+    "defaultenvironment": "development",
+    "defaultverbose": "no"
   },
   "devDependencies": {
     "@sencha/ext": "~6.7.0",
@@ -29,6 +38,7 @@
     "typescript": "^3.2.2",
     "@types/core-js": "^2.5.0",
     "@types/node": "^10.12.18",
+    "rimraf": "^2.6.3",
 
     "@ngtools/webpack":"^7.2.1",
     "portfinder": "^1.0.20",
@@ -48,6 +58,7 @@
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {},
+  "private": false,
   "main": "",
   "repository": {
     "type": "git",
@@ -60,5 +71,4 @@
     "url": "https://github.com/sencha"
   },
   "homepage": "https://github.com/sencha"
-
 }
