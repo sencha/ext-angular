@@ -374,7 +374,7 @@ async function stepCreate() {
 
   var boilerplate = ''
 //  boilerplate = path.dirname(require.resolve(nodeDir + '/node_modules/@sencha/ext-angular-demo'))
-  boilerplate = nodeDir + '/node_modules/@sencha/ext-angular-modern-boilerplate'
+  boilerplate = nodeDir + '/node_modules/@sencha/ext-angular-boilerplate'
 
   //copy in files from boilerplate
   glob.sync('**/*', { cwd: boilerplate, ignore: ['build/**', 'node_modules/**', 'index.js'], dot: true })

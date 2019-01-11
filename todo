@@ -5,23 +5,25 @@ Issues
     - core.js:15707 Navigation triggered outside Angular zone, did you forget to call 'ngZone.run()'? [Aniket]
     
  - [To Be Discussed] ext-angular-gen 
+    - Add environment variables to package.json and in webconfig(Marc) 
     - need to remove Angular CLI requirement (Marc)
     - need to remove react-only questions (Aniket)
 
  - tree-shaking 
     - [Alisha] in plugin: tree shake the typescript ExtAngular files (Aniket to review error/ Marc to check treeshaking changes)
     - test against ext-angular-gen (once CLI dependency is removed from bootstrap by Marc) (Alisha)
+    - include ext.js/ext.css in index.html programatically(Alisha/Marc)
     - Modify run.js to copy source folder to ext-angular-modern (Marc)
 
 
  - package ext-angular.service (both service and intermediate component (app)) [Extraction is causing issue] (Aniket) 
+ - Update dependency on treeshaking (Alisha) [Dep on 17]
  - document bootstrapping process - goes into guides (Aniket)
- - Update dependency on treeshaking (Alisha)
  - [Marc] widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components] [Visit RendererCell like in react/ Need a simple example in extjs]
  - [Marc] resources from packages like ux are not property referenced [Components -> Color Picker -> Basic]
 
 
-  - [Aniket] UI for SearchField is breaking. Search form is not docked right. 
+  - [Aniket/Marc] UI for SearchField is breaking. Search form is not docked right. 
  (Form fields - Eg( All>Components>Forms>Searchfield or ALl->Components>TitleBar) - Need to add align in source code of button and searchfield.
 
 
