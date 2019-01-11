@@ -3,6 +3,7 @@ import { ExtAngularBootstrapService } from './ext-angular-bootstrap.service';
 
 @Component({
   selector: 'app-root',
+  styles: [``],
   template: ``,
 })
 export class ExtAngularBootstrapComponent {
