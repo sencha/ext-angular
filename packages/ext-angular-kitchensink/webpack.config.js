@@ -5,17 +5,24 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require("webpack")
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin')
 const portfinder = require('portfinder')
-var isProd = false
 
 module.exports = function (env) {
-portfinder.basePort = (env && env.port) || 1962
-return portfinder.getPortPromise().then(port => {
-  const plugins = [
-    new AngularCompilerPlugin({
-      tsConfigPath: './tsconfig.json',
-      mainPath: "./src/main.ts",
-      skipCodeGeneration: true
-    }),
+  var browserprofile = JSON.parse(env.browser) || true
+  var watchprofile = env.watch || 'yes'
+  var buildprofile = env.profile || process.env.npm_package_extbuild_defaultprofile
+  var buildenvironment = env.environment || process.env.npm_package_extbuild_defaultenvironment
+  var buildverbose = env.verbose || process.env.npm_package_extbuild_defaultverbose
+  if (buildprofile == 'all') { buildprofile = '' }
+  const isProd = buildenvironment === 'production'
+
+  portfinder.basePort = (env && env.port) || 1962
+  return portfinder.getPortPromise().then(port => {
+    const plugins = [
+      new AngularCompilerPlugin({
+        tsConfigPath: './tsconfig.json',
+        mainPath: "./src/main.ts",
+        skipCodeGeneration: true
+      }),
     new ExtWebpackPlugin({
       framework: 'angular',
       port: port,
@@ -39,7 +46,7 @@ return portfinder.getPortPromise().then(port => {
       ]
     }),
     new HtmlWebpackPlugin({
-      template: "src/index.html",
+      template: "index.html",
       inject: "body"
     }),
     new webpack.ContextReplacementPlugin(
@@ -53,31 +60,29 @@ return portfinder.getPortPromise().then(port => {
   return {
     mode: 'development',
     entry: {
-      polyfills: "./src/polyfills.ts",
-      main: "./src/main.ts"
+      polyfills: "./polyfills.ts",
+      main: "./main.ts"
     },
-    context: path.join(__dirname, './'),
+    context: path.join(__dirname, './src'),
     output: {
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, 'build'),
       filename: "[name].js"
     },
     module: {
       rules: [
-        //{test: /\.ts$/,loader: "awesome-typescript-loader"},
         {test: /\.(png|svg|jpg|jpeg|gif)$/, use: ['file-loader']},
-        {test: /\.css$/, loaders: ['to-string-loader', 'css-loader']},
         //{test: /\.css$/, loader: ["style-loader", "css-loader"]},
+        {test: /\.css$/, loaders: ['to-string-loader', 'css-loader']},
         {test: /\.ts$/,  loader: '@ngtools/webpack'},
         {test: /\.html$/,loader: "html-loader"},
-//        {test: /\.scss$/,use: [{ loader: "to-string-loader"}]},
-//        {test: /\.scss$/,loader: ["raw-loader", "sass-loader?sourceMap"]}
+        //{test: /\.scss$/,loader: ["raw-loader", "sass-loader?sourceMap"]}
       ]
     },
     plugins,
     node: false,
     devtool: "source-map",
     devServer: {
-      contentBase: './',
+      contentBase: './build',
       historyApiFallback: true,
       hot: false,
       host: '0.0.0.0',
