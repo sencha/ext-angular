@@ -9,10 +9,10 @@ const Input = require('prompt-input')
 const Confirm = require('prompt-confirm')
 const glob = require('glob')
 
-const CODE = {
-  EXAMPLE: 'Include some example code', 
-  BARE_BONES: 'Generate an empty app'
-}
+// const CODE = {
+//   EXAMPLE: 'Include some example code', 
+//   BARE_BONES: 'Generate an empty app'
+// }
 
 function boldGreen (s) {
   var boldgreencolor = `\x1b[32m\x1b[1m`
@@ -231,8 +231,6 @@ function stepNameYourApp() {
   })
 }
 
-
-
 function stepPackageName() {
   new Input({
     message: 'What would you like to name the npm Package?',
@@ -248,8 +246,14 @@ function stepVersion() {
     message: 'What version is your ExtAngular application?',
     default: config.version
   }).run().then(answer => { 
-    answers['version'] = answer
-    stepDescription()
+    if (semver.valid(answer) == null) {
+      console.log('version is not a valid format, must be 0.0.0')
+      stepVersion()
+    }
+    else {
+      answers['version'] = answer
+      stepDescription()
+    }
   })
 }
 
@@ -425,8 +429,6 @@ async function stepCreate() {
  }
 
  function setDefaults() {
-
-
   if (cmdLine.name != undefined) {
     answers['appName'] = cmdLine.name
     answers['packageName'] = kebabCase(answers['appName'])
