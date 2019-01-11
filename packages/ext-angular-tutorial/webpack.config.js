@@ -58,7 +58,7 @@ return portfinder.getPortPromise().then(port => {
         {test: /\.css$/, loader: ["style-loader", "css-loader"]},
         {test: /\.ts$/,  loader: '@ngtools/webpack'},
         {test: /\.html$/,loader: "html-loader"},
-        {test: /\.scss$/,loader: ["raw-loader", "sass-loader?sourceMap"]}
+        //{test: /\.scss$/,loader: ["raw-loader", "sass-loader?sourceMap"]}
       ]
     },
     plugins,
