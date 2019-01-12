@@ -83,16 +83,18 @@ export function _compilation(compiler, compilation, vars, options) {
     const mkdirp = require('mkdirp')
     const path = require('path')
 
-    var extComponents = []
-    var usedExtComponents = []
-    const extAngularModernFolder = 'ext-angular-modern-prod'
-    const extAngularModernModule = 'ext-angular-modern.module'
+
 
     if (vars.production) {
       logv(options, `ext-compilation: production is ` + vars.production)
 
       if (options.framework == 'angular') {
-        const packagePath = path.resolve(process.cwd(), 'node_modules/@sencha/ext-angular-modern')
+        var extComponents = []
+        var usedExtComponents = []
+        const extAngulaFolder = 'ext-angular-modern-prod'
+        const extAngularModule = 'ext-angular-modern.module'
+        const extAngularPackage = '@sencha/ext-angular-modern'
+        const packagePath = path.resolve(process.cwd(), 'node_modules/' + extAngularPackage)
         var files = fsx.readdirSync(`${packagePath}/lib`)
         files.forEach((fileName) => {
           if (fileName && fileName.substr(0, 4) == 'ext-') {
@@ -107,7 +109,7 @@ export function _compilation(compiler, compilation, vars, options) {
           var rewrite = false
           const appModulePath = path.resolve(process.cwd(), 'src/app/app.module.ts')
           var js = fsx.readFileSync(appModulePath).toString()
-          var i = js.indexOf('@sencha/ext-angular-modern')
+          var i = js.indexOf(extAngularPackage)
           i = js.substring(0, i).lastIndexOf('import')
 
           if (js.substr(i - 3, 3) !== '// ') {
@@ -115,18 +117,18 @@ export function _compilation(compiler, compilation, vars, options) {
             rewrite = true
           }
 
-          const pathToExtAngularModern = path.resolve(process.cwd(), `src/app/${extAngularModernFolder}`)
+          const pathToExtAngularModern = path.resolve(process.cwd(), `src/app/${extAngulaFolder}`)
           if (!fs.existsSync(pathToExtAngularModern)) {
             mkdirp.sync(pathToExtAngularModern)
             const t = require('./artifacts').extAngularModerModule('', '', '')
             fsx.writeFileSync(
-              `${pathToExtAngularModern}/${extAngularModernModule}.ts`, t, 'utf-8', () => {return}
+              `${pathToExtAngularModern}/${extAngularModule}.ts`, t, 'utf-8', () => {return}
             )
             rewrite = true
           }
-          var j = js.indexOf(`./${extAngularModernFolder}/${extAngularModernModule}`)
+          var j = js.indexOf(`./${extAngulaFolder}/${extAngularModule}`)
           if (j < 0) {
-            js = js.substring(0, i) + `import {ExtAngularModernModule} from './${extAngularModernFolder}/${extAngularModernModule}'\n` + js.substr(i)
+            js = js.substring(0, i) + `import {extAngularModule} from './${extAngulaFolder}/${extAngularModule}'\n` + js.substr(i)
             rewrite = true
           }
           else if (js.substr(j - 43, 3) == '// ') {
@@ -164,8 +166,8 @@ export function _compilation(compiler, compilation, vars, options) {
             }
           })
           usedExtComponents = [...new Set(usedExtComponents)]
-          const readFrom = path.resolve(process.cwd(), 'node_modules/@sencha/ext-angular-modern/src/lib')
-          const writeToPath = path.resolve(process.cwd(), `src/app/${extAngularModernFolder}`)
+          const readFrom = path.resolve(process.cwd(), 'node_modules/' + extAngularPackage + '/src/lib')
+          const writeToPath = path.resolve(process.cwd(), `src/app/${extAngulaFolder}`)
           const extAngularModuleBaseFile = path.resolve(process.cwd(), `${writeToPath}/base.ts`)
 
           const baseContent = fsx.readFileSync(`${readFrom}/base.ts`).toString()
@@ -193,11 +195,46 @@ export function _compilation(compiler, compilation, vars, options) {
               moduleVars.imports, moduleVars.exports, moduleVars.declarations
             )
 
-            fsx.writeFileSync(`${writeToPath}/${extAngularModernModule}.ts`, t, 'utf-8', ()=>{return})
+            fsx.writeFileSync(`${writeToPath}/${extAngularModule}.ts`, t, 'utf-8', ()=>{return})
           }
         })
       }
     }
+
+    if (options.framework != 'extjs') {
+      compilation.hooks.htmlWebpackPluginBeforeHtmlGeneration.tap(`ext-html-generation`,(data) => {
+        logv(options,'HOOK ext-html-generation')
+        const path = require('path')
+        var outputPath = ''
+        if (compiler.options.devServer) {
+          if (compiler.outputPath === '/') {
+            outputPath = path.join(compiler.options.devServer.contentBase, outputPath)
+          }
+          else {
+            if (compiler.options.devServer.contentBase == undefined) {
+              outputPath = 'build'
+            }
+            else {
+              outputPath = ''
+            }
+          }
+        }
+        else {
+          outputPath = 'build'
+        }
+        outputPath = outputPath.replace(process.cwd(), '').trim()
+        var jsPath = path.join(outputPath, vars.extPath, 'ext.js')
+        var cssPath = path.join(outputPath, vars.extPath, 'ext.css')
+        data.assets.js.unshift(jsPath)
+        data.assets.css.unshift(cssPath)
+        log(vars.app + `Adding ${jsPath} and ${cssPath} to index.html`)
+      })
+    }
+    else {
+      logv(options,'skipped HOOK ext-html-generation')
+    }
+
+
   }
   catch(e) {
     require('./pluginUtil').logv(options,e)
@@ -346,13 +383,13 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
           var fromPath = path.join(process.cwd(), 'ext-angular/')
           var toPath = path.join(output)
           fsx.copySync(fromPath, toPath)
-          log(app + '1Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
+          log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
         }
         if (fs.existsSync(path.join(process.cwd(),'ext-angular/overrides/'))) {
           var fromPath = path.join(process.cwd(), 'ext-angular/')
           var toPath = path.join(output)
           fsx.copySync(fromPath, toPath)
-          log(app + '2Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
+          log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
         }
       }
       if (vars.framework == 'react')  {
@@ -360,22 +397,21 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
           var fromPath = path.join(process.cwd(), 'ext-react/packages/')
           var toPath = path.join(output, 'packages')
           fsx.copySync(fromPath, toPath)
-          log(app + '3Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
+          log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
         }
         if (fs.existsSync(path.join(process.cwd(),'ext-react/overrides/'))) {
           var fromPath = path.join(process.cwd(), 'ext-react/overrides/')
           var toPath = path.join(output, 'overrides')
           fsx.copySync(fromPath, toPath)
-          log(app + '4Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
+          log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
         }
       }
 
-      //do we ever hit these?
       if (fs.existsSync(path.join(process.cwd(),'resources/'))) {
         var fromResources = path.join(process.cwd(), 'resources/')
         var toResources = path.join(output, '../resources')
         fsx.copySync(fromResources, toResources)
-        log(app + '5Copying ' + fromResources.replace(process.cwd(), '') + ' to: ' + toResources.replace(process.cwd(), ''))
+        log(app + 'Copying ' + fromResources.replace(process.cwd(), '') + ' to: ' + toResources.replace(process.cwd(), ''))
       }
 
       // if (fs.existsSync(path.join(process.cwd(),'resources/'))) {
@@ -389,17 +425,15 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
         var fromPackages = path.join(process.cwd(), 'packages/')
         var toPackages = path.join(output, 'packages')
         fsx.copySync(fromPackages, toPackages)
-        log(app + '7Copying ' + fromPackages.replace(process.cwd(), '') + ' to: ' + toPackages.replace(process.cwd(), ''))
+        log(app + 'Copying ' + fromPackages.replace(process.cwd(), '') + ' to: ' + toPackages.replace(process.cwd(), ''))
       }
 
       if (fs.existsSync(path.join(process.cwd(),'overrides/'))) {
         var fromPath = path.join(process.cwd(), 'overrides/')
         var toPath = path.join(output, 'overrides')
         fsx.copySync(fromPath, toPath)
-        log(app + '8Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
+        log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
       }
-
-
 
     }
     vars.firstTime = false

@@ -66,7 +66,7 @@
       <panel #item *ngFor="let file of files" [hidden]="files.length > 0 ? false: true"
       [scrollable]="true"
       [title]="file.name"
-      [ui]="'code-panel'"
+      [ui]="'code-panel2'"
       tab="{ui: 'app-code-tab', flex: 0, minWidth: 120}"
       [userSelectable]="{element: true, bodyElement: true}"
       [html]="file.code">

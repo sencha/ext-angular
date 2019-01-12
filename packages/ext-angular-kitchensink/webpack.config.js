@@ -24,48 +24,50 @@ module.exports = function (env) {
         mainPath: "./src/main.ts",
         skipCodeGeneration: true
       }),
-    new ExtWebpackPlugin({
-      framework: 'angular',
-      port: port,
-      emit: true,
-      browser: browserprofile,
-      watch: watchprofile,
-      profile: buildprofile, 
-      environment: buildenvironment, 
-      verbose: buildverbose,
-      theme: 'theme-kitchensink',
-      packages: [
-        'font-ext', 
-        'ux', 
-        'd3',
-        'pivot-d3',
-        'font-awesome', 
-        'exporter',
-        'pivot', 
-        'calendar', 
-        'charts',
-        'treegrid'
-      ]
-    }),
-    new WebpackShellPlugin({
-      onBuildEnd:{
-        scripts: ['node extract-code.js'],
-        blocking: false,
-        parallel: true
-      }
-    }),
-    new HtmlWebpackPlugin({
-      template: "index.html",
-      inject: "body"
-    }),
-    new webpack.ContextReplacementPlugin(
-        /\@angular(\\|\/)core(\\|\/)fesm5/,
-        path.resolve(__dirname, 'src'),{}
-    ),
-    new FilterWarningsPlugin({
-        exclude: /System.import/
-    })
-  ]
+      new HtmlWebpackPlugin({
+        template: "index.html",
+        hash: true,
+        inject: "body"
+      }),
+      new ExtWebpackPlugin({
+        framework: 'angular',
+        port: port,
+        emit: true,
+        browser: browserprofile,
+        watch: watchprofile,
+        profile: buildprofile, 
+        environment: buildenvironment, 
+        verbose: buildverbose,
+        theme: 'theme-kitchensink',
+        packages: [
+          'font-ext', 
+          'ux', 
+          'd3',
+          'pivot-d3',
+          'font-awesome', 
+          'exporter',
+          'pivot', 
+          'calendar', 
+          'charts',
+          'treegrid'
+        ]
+      }),
+      new WebpackShellPlugin({
+        onBuildEnd:{
+          scripts: ['node extract-code.js'],
+          blocking: false,
+          parallel: true
+        }
+      }),
+
+      new webpack.ContextReplacementPlugin(
+          /\@angular(\\|\/)core(\\|\/)fesm5/,
+          path.resolve(__dirname, 'src'),{}
+      ),
+      new FilterWarningsPlugin({
+          exclude: /System.import/
+      })
+    ]
   return {
     mode: 'development',
     entry: {
