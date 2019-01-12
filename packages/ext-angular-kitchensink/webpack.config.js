@@ -1,5 +1,6 @@
 const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin
 const ExtWebpackPlugin = require('@sencha/ext-angular-webpack-plugin')
+const WebpackShellPlugin = require('webpack-shell-plugin-next')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require("webpack")
@@ -27,11 +28,12 @@ module.exports = function (env) {
       framework: 'angular',
       port: port,
       emit: true,
-      browser: true,
-      profile: '', 
-      environment: 'development', 
-      verbose: 'no',
-      theme: 'theme-material',
+      browser: browserprofile,
+      watch: watchprofile,
+      profile: buildprofile, 
+      environment: buildenvironment, 
+      verbose: buildverbose,
+      theme: 'theme-kitchensink',
       packages: [
         'font-ext', 
         'ux', 
@@ -44,6 +46,13 @@ module.exports = function (env) {
         'charts',
         'treegrid'
       ]
+    }),
+    new WebpackShellPlugin({
+      onBuildEnd:{
+        scripts: ['node extract-code.js'],
+        blocking: false,
+        parallel: true
+      }
     }),
     new HtmlWebpackPlugin({
       template: "index.html",
@@ -70,11 +79,10 @@ module.exports = function (env) {
     },
     module: {
       rules: [
+        {test: /\.css$/, loader: ['to-string-loader', "style-loader", "css-loader"]},
         {test: /\.(png|svg|jpg|jpeg|gif)$/, use: ['file-loader']},
-        //{test: /\.css$/, loader: ["style-loader", "css-loader"]},
-        {test: /\.css$/, loaders: ['to-string-loader', 'css-loader']},
-        {test: /\.ts$/,  loader: '@ngtools/webpack'},
         {test: /\.html$/,loader: "html-loader"},
+        {test: /\.ts$/,  loader: '@ngtools/webpack'},
         //{test: /\.scss$/,loader: ["raw-loader", "sass-loader?sourceMap"]}
       ]
     },

@@ -5,8 +5,8 @@ Issues
     - core.js:15707 Navigation triggered outside Angular zone, did you forget to call 'ngZone.run()'? [Aniket]
     
  - [To Be Discussed] ext-angular-gen 
-    - Add environment variables to package.json and in webconfig(Marc) 
-    - need to remove Angular CLI requirement (Marc)
+    - Add environment variables to package.json and in webconfig(Marc) DONE
+    - need to remove Angular CLI requirement (Marc) DONE
     - need to remove react-only questions (Aniket)
 
  - tree-shaking 

@@ -3,6 +3,7 @@ AllClassesFiles/*.*
 demos/*.*
 dist/*.*
 dist
+ext-angular-modern-prod
 generators/ext-angular-modern/*.*
 testing
 package-lock.json
