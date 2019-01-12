@@ -11,10 +11,13 @@ export const getFiles = (node, allCode) => {
 	const codeMap = allCode[name] || {};
 	const files = Object.keys(codeMap).map((file) => {
 		return {
-			name: file,
-			code: `<pre><code id='${file}' class='code ${cssClassName(file)}'>${codeMap[file].replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`,
+      name: file,
+      code: `<pre><code mwlHighlightJs id='${file}' class='code ${cssClassName(file)}'>${codeMap[file].replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`,
+
+      //code: `<pre><code mwlHighlightJs [source]="'${codeMap[file].replace(/</g, '&lt;').replace(/>/g, '&gt;')}'" language="typescript"></code></pre>`
 		};
 	});
 
 	return files;
 };
+

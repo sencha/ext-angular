@@ -3,8 +3,15 @@ import { NgModule, ModuleWithProviders } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { Route, RouterModule } from '@angular/router'
 
+//import * as hljs from 'highlightjs';
+import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 // import * as hljs from 'highlight.js';
 // import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
+const hljs: any = require('highlight.js/lib/highlight');
+hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescript'));
+export function highlightJsFactory() {
+  return hljs;
+}
 
 import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
 import { ExtAngularBootstrapService } from './ext-angular/ext-angular-bootstrap.service'
@@ -509,7 +516,11 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
   imports: [
     BrowserModule,
     ExtAngularModernModule,
-    routingModule
+    routingModule,
+    HighlightJsModule.forRoot({
+      provide: HIGHLIGHT_JS,
+      useFactory: highlightJsFactory
+    })
   ],
   declarations: [
     ExtAngularBootstrapComponent,

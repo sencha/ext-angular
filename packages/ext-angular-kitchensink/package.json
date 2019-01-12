@@ -17,7 +17,7 @@
   "devDependencies": {
     "d3": "4.5.0",
     "angular-highlight-js":"^2.0.1",
-    "highlightjs": "^9.12.0",
+    "highlight.js": "^9.13.1",
 
     "@sencha/ext": "~6.7.0",
     "@sencha/ext-angular-modern": "6.7.0",

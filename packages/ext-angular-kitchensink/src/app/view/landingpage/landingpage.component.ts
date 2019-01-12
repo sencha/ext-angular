@@ -7,22 +7,23 @@ import { Router, NavigationEnd } from '@angular/router';
 import { VERSION } from '@angular/core';
 import { Subject } from "rxjs";
 import { getFiles } from "./code_preview_helper";
-//import hljs, { highlightBlock } from 'highlightjs';
+
+////import hljs, { highlightBlock } from 'highlightjs';
+//import hljs from 'highlightjs';
+//import hljs from 'highlight.js/lib/highlight';
 //import * as hljs from 'angular-highlight-js';
 //import {hljs} from 'angular-highlight-js';
-
-import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
-
-
-
+//import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
+//const hljs: any = require('highlight.js/lib/highlight');
+//hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescript'));
 // import hljs from 'highlightjs'
 // console.log(hljs)
-
 // JSX syntax highlighting
 //import H_js from './H_js';
 //hljs.registerLanguage('js', H_js);
 
-
+const hljs: any = require('highlight.js/lib/highlight');
+hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescript'));
 
 declare var Ext: any;
 
@@ -121,9 +122,9 @@ export class LandingpageComponent implements OnInit {
     this.node$.subscribe(({
       next: (v) => {
         this.node = v;
-//mjg        this.files = getFiles(v, _code);
+        this.files = getFiles(v, _code);
         //console.log("files length : " + this.files.length);
-//mjg        this.highlightCode();
+        this.highlightCode();
         //console.log("Generating breadcrumb for ID: " + v.id);
         this.breadcrumb = generateBreadcrumb(v);
         //console.log(`BREADCRUMB: ${JSON.stringify(this.breadcrumb.map(b => b.text))}`);
@@ -156,7 +157,7 @@ export class LandingpageComponent implements OnInit {
         //console.log("Children el length : " + this.node.childNodes.length);
 
         if (localNode) {
-//mjg          this.files = getFiles(localNode, _code);
+          this.files = getFiles(localNode, _code);
           this.node$.next(localNode);
         } else {
           console.log("Not a valid node. Probably looking at resources");
@@ -170,11 +171,11 @@ export class LandingpageComponent implements OnInit {
   }
 
   //mjg
-  // highlightCode() {
-  //   document.querySelectorAll(".code").forEach((el) => {
-  //     highlightBlock(el);
-  //   });
-  // }
+  highlightCode() {
+    document.querySelectorAll(".code").forEach((el) => {
+      //highlightBlock(el);
+    });
+  }
 
   ngOnInit() {
     var localNode = this.treeStore.getNodeById(location.pathname);
