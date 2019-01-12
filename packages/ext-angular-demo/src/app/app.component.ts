@@ -2,8 +2,34 @@ import { Component, ViewEncapsulation } from '@angular/core'
 
 @Component({
   selector: 'ext-angular-root',
-  styles: [``],
+  //encapsulation: ViewEncapsulation.None,
+	//styleUrls: ['./app.component.css'],
+  //styles: [``],
+  styles:[require('./app.component.css').toString()],
+
+
+
+
   template: `
+  <panel #item [layout]="'fit'" [fitToParent]="true"
+  [bodyStyle]="'backgroundSize: 20px 20px;backgroundColor: #e8e8e8;backgroundImage: linear-gradient(0deg, #f5f5f5 1.1px, transparent 0), linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)'"
+>
+  <titlebar #item
+      [docked]="'top'"
+      [shadow]="true"
+      [flex]="1"
+    >
+      <button #item [selfAlign]="'left'" [iconCls]="'x-fa fa-bars'" (tap)="toggleTree()"></button>
+      <container #item [layout]="'hbox'">
+        <div #item class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></div>
+        <a #item href="#" class="mjg">ExtAngular Kitchen Sink - Angular v{{ANGULAR_VERSION}}</a>
+      </container>
+    </titlebar>
+  </panel>
+
+
+
+
   <!--
   <h4>NgIf</h4>
   <ul *ngFor="let person of people">
@@ -26,15 +52,13 @@ import { Component, ViewEncapsulation } from '@angular/core'
   </container>
 
 
-  -->
+
 
   <container #item [fitToParent]="true">
     <div #item *ngFor="let person of people">hello</div>
     <div #item>hello</div>
  </container>
 
-
-<!--
 <button  [handler]="clickContact" *ngFor="let person of people" [text]=person.name></button>
  
 <container [html]="divData"></container>
@@ -48,9 +72,6 @@ import { Component, ViewEncapsulation } from '@angular/core'
 
 </container>
 -->
-
-
-
 
   `
 })
