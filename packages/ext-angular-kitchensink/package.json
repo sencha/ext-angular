@@ -3,10 +3,10 @@
   "version": "6.7.0",
   "description": "ext-angular-kitchensink",
   "scripts": {
-    "clean": "rimraf build",
     "start": "npm run dev",
-    "dev": "webpack-dev-server --env.verbose=no --env.environment=development  --env.browser=true  --env.watch=yes",
-    "prod": "webpack-dev-server --env.verbose=yes --env.environment=production",
+    "clean": "rimraf build",
+    "dev": "webpack-dev-server --env.verbose=no --env.environment=development --env.browser=true --env.watch=yes",
+    "prod": "npm run build",
     "build": "npm run clean && cross-env webpack --env.verbose=no --env.environment=production --env.browser=false --env.watch=no"
   },
   "extbuild": {
@@ -50,6 +50,7 @@
     "@types/core-js": "^2.5.0",
     "@types/node": "^10.12.18",
     "rimraf": "^2.6.3",
+    "cross-env": "^5.2.0",
 
     "to-string-loader":"^1.1.5",
     "style-loader": "^0.23.1",
