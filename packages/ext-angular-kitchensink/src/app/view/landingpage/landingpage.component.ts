@@ -47,9 +47,7 @@ declare var _code: any;
 @Component({
   selector: 'app-root',
   templateUrl: 'landingpage.component.html',
-  styles: [
-    require('./landingpage.component.css').toString()
-  ],
+  styles: [require('./landingpage.component.css').toString()],
   // https://angular.io/api/core/ViewEncapsulation#None
   encapsulation: ViewEncapsulation.None,
 })
@@ -66,9 +64,8 @@ export class LandingpageComponent implements OnInit {
   filterVal: any
   showTreeFlag: any = false
 
-
   blockstyle: any = {'background':'top','display':'block','text-align':'center'}
-
+ 
   treeStore: any = Ext.create('Ext.data.TreeStore', {
     rootVisible: true,
     root: navTreeRoot
