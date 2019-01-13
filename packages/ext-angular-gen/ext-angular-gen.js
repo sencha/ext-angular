@@ -9,11 +9,6 @@ const Input = require('prompt-input')
 const Confirm = require('prompt-confirm')
 const glob = require('glob')
 
-// const CODE = {
-//   EXAMPLE: 'Include some example code', 
-//   BARE_BONES: 'Generate an empty app'
-// }
-
 function boldGreen (s) {
   var boldgreencolor = `\x1b[32m\x1b[1m`
   var endMarker = `\x1b[0m`
@@ -336,7 +331,6 @@ function stepGo() {
     return
   }
 
-  // mjg??
   var message
   if (cmdLine.defaults == true) {
     message = 'Generate the ExtAngular npm project?'
@@ -377,7 +371,6 @@ async function stepCreate() {
   console.log(`${app} ${destDir} created`)
 
   var boilerplate = ''
-//  boilerplate = path.dirname(require.resolve(nodeDir + '/node_modules/@sencha/ext-angular-demo'))
   boilerplate = nodeDir + '/node_modules/@sencha/ext-angular-boilerplate'
 
   //copy in files from boilerplate
