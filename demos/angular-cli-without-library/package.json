@@ -11,7 +11,7 @@
   },
   "private": false,
   "dependencies": {
-    "@sencha/ext-angular-modern": "^6.7.0",
+    "@sencha/ext-angular": "^6.7.0",
     "@angular/animations": "^7.1.1",
     "@angular/common": "^7.1.1",
     "@angular/compiler": "^7.1.1",
