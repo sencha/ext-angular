@@ -21,7 +21,7 @@
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
     "@sencha/ext": "~6.7.0",
-    "@sencha/ext-angular": "6.7.0",
+    "@sencha/ext-angular": "~6.7.0",
     "@sencha/ext-calendar": "~6.7.0",
     "@sencha/ext-charts": "~6.7.0",
     "@sencha/ext-d3": "~6.7.0",
