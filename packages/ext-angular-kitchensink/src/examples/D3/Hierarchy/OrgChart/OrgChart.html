@@ -1,4 +1,4 @@
-<panel #item shadow="true" layout="fit" title="Organization Chart" [height]="'600px'">
+<panel #item shadow="true" layout="fit" title="Organization Chart" [fitToParent]="true">
   <d3-horizontal-tree #item
     [interactions]="interactionsVar"
     [tooltip]="{renderer: this.onTooltip}"

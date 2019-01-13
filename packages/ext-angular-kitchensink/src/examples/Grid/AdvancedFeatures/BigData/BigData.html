@@ -1,6 +1,5 @@
 <container #item layout="fit" shadow="true" 
-width="900px" 
-height="600px">
+[fitToParent]="true">
     <actionsheet #item [displayed]="showExportSheet">
         <button #item [handler]="this.exportToXlsx" text="Excel xlsx"></button>
         <button #item [handler]="this.exportToXml" text="Excel xml"></button>
@@ -28,9 +27,8 @@ height="600px">
       xtype: 'gridsummaryrow'
     }"
     [itemConfig]="{
-    viewModel: {
-      
-    },
+      viewModel: {
+      },
       body: {
         tpl: this.rowBodyTpl
       }
@@ -38,8 +36,6 @@ height="600px">
     (onBeforeDocumentSave)="this.onBeforeDocumentSave($event)"
     (onDocumentSave)="this.onDocumentSave($event)"
     (ready)="gridReady($event)"
-    
-
   >
     <!-- Title bar property as in react bit not seen-->
     <!-- [titleBar]="gridTitleBar" -->
@@ -96,14 +92,22 @@ height="600px">
         width="100"
         ignoreExport="true"
         align="center"
-        [summaryCell] =  "summaryCell"
+        [cell]="verifyCell"
+        [summaryCell]="summaryCell"
       >
-      <!--
-          TODO: not working
+<!--
+    TODO: future release
+    <cell #item>
       <widgetcell #item>
         <button #item ui ="action" [handler] ="this.onVerify" [bind] = "widgetCellBind" text = "VERIFY"></button>
       </widgetcell>
-      -->
+    </cell>
+    <summaryCell #item>
+      <widgetcell #item>
+        <button #item ui ="action" [handler] ="this.onVerifyAll" text = "All"></button>
+      </widgetcell>
+    </summaryCell>
+-->
     </column>
 
     <datecolumn #item
@@ -153,8 +157,6 @@ height="600px">
           }
        }"
     ></column>
-    
-
 
     <textcolumn #item
         text='Salary'

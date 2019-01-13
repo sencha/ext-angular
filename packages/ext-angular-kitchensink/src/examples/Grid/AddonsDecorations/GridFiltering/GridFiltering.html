@@ -1,4 +1,4 @@
-<grid #item [plugins]="{ gridfilters: true }" rowNumbers="true" shadow="true" [store]="this.store" title='Grid Filters'        height="600px">
+<grid #item [plugins]="{ gridfilters: true }" rowNumbers="true" shadow="true" [store]="this.store" title='Grid Filters' [fitToParent]="true">
     <column #item dataIndex='employeeNo' filter='number' flex="1" minWidth="10" text='Id' ></column>
     <column #item dataIndex='fullName' filter='string' minWidth="150" [sorter]="{ sorterFn: this.nameSorter }" text='Name' ></column>
     <datecolumn #item

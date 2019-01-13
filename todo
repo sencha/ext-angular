@@ -17,8 +17,9 @@ Issues
  - Update dependency on treeshaking (Alisha) [Dep on 17]
  - document bootstrapping process - goes into guides (Aniket)
 
- - [Marc] widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components] [Visit RendererCell like in react/ Need a simple example in extjs]
- - [Marc] resources from packages like ux are not property referenced [Components -> Color Picker -> Basic]
+ - [Marc - see example, specify config for cell and summaryCell] widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components] 
+      [Visit RendererCell like in react/ Need a simple example in extjs]
+ - [Marc - added us to packages folder and added copy step to plugin] resources from packages like ux are not property referenced [Components -> Color Picker -> Basic]
 
   - [Aniket/Marc] UI for SearchField is breaking. Search form is not docked right. 
       (Form fields - Eg( All>Components>Forms>Searchfield or ALl->Components>TitleBar) 

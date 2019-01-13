@@ -4,8 +4,7 @@
 shadow="true"
 [deferEmptyText]="false"
 [emptyText]="'Click a button to show a dataset.'"
-width="900px" 
-height="600px"
+[fitToParent]="true"
 >
 <toolbar #item [docked]="'top'" ui="transparent" layout="hbox">
     <segmentedbutton #item width="300" [defaults]="{ flex: 1 }" (change)="onChange($event)">

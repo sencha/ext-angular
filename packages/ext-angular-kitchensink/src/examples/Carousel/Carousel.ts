@@ -8,15 +8,15 @@ declare var Ext: any;
   styles: [``]
 })
 
-export class CarouselComponent implements OnInit  {
+export class CarouselComponent  {
 
-  constructor() { }
+  // constructor() { }
 
-  carouselInstance: any;
+  // carouselInstance: any;
 
-  compReady(event) {
-  }
+  // compReady(event) {
+  // }
 
-  ngOnInit() {}
+  // ngOnInit() {}
 
 }
