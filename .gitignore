@@ -3,8 +3,8 @@ AllClassesFiles/*.*
 demos/*.*
 dist/*.*
 dist
-ext-angular-modern-prod
-generators/ext-angular-modern/*.*
+ext-angular-prod
+generators/ext-angular/*.*
 testing
 package-lock.json
 node_modules

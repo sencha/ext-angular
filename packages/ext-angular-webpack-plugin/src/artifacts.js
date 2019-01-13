@@ -205,7 +205,7 @@ export function createWorkspaceJson(options, output) {
   return JSON.stringify(config, null, 2)
 }
 
-export const extAngularModernModule = function(imports, exports, declarations) {
+export const extAngularModule = function(imports, exports, declarations) {
   return `
   import { NgModule } from '@angular/core';
   ${imports}
@@ -217,6 +217,6 @@ export const extAngularModernModule = function(imports, exports, declarations) {
     exports: [
   ${exports}  ]
   })
-  export class ExtAngularModernModule { }
+  export class ExtAngularModule { }
   `
 }
