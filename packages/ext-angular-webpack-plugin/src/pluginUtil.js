@@ -74,6 +74,9 @@ export function _compilation(compiler, compilation, vars, options) {
     const fs = require('fs')
     const mkdirp = require('mkdirp')
     const path = require('path')
+    const extAngularPackage = '@sencha/ext-angular'
+    const extAngularFolder = 'ext-angular-prod'
+    const extAngularModule = 'ext-angular.module'
 
     if (vars.production) {
       logv(options, `ext-compilation: production is ` + vars.production)
@@ -81,9 +84,7 @@ export function _compilation(compiler, compilation, vars, options) {
       if (options.framework == 'angular') {
         var extComponents = []
         var usedExtComponents = []
-        const extAngulaFolder = 'ext-angular-prod'
-        const extAngularModule = 'ext-angular.module'
-        const extAngularPackage = '@sencha/ext-angular'
+
         const packagePath = path.resolve(process.cwd(), 'node_modules/' + extAngularPackage)
         var files = fsx.readdirSync(`${packagePath}/lib`)
         files.forEach((fileName) => {
@@ -107,18 +108,18 @@ export function _compilation(compiler, compilation, vars, options) {
             rewrite = true
           }
 
-          const pathToExtAngularModern = path.resolve(process.cwd(), `src/app/${extAngulaFolder}`)
+          const pathToExtAngularModern = path.resolve(process.cwd(), `src/app/${extAngularFolder}`)
           if (!fs.existsSync(pathToExtAngularModern)) {
             mkdirp.sync(pathToExtAngularModern)
-            const t = require('./artifacts').extAngularModernModule('', '', '')
+            const t = require('./artifacts').extAngularModule('', '', '')
             fsx.writeFileSync(
               `${pathToExtAngularModern}/${extAngularModule}.ts`, t, 'utf-8', () => {return}
             )
             rewrite = true
           }
-          var j = js.indexOf(`./${extAngulaFolder}/${extAngularModule}`)
+          var j = js.indexOf(`./${extAngularFolder}/${extAngularModule}`)
           if (j < 0) {
-            js = js.substring(0, i) + `import {extAngularModule} from './${extAngulaFolder}/${extAngularModule}'\n` + js.substr(i)
+            js = js.substring(0, i) + `import {ExtAngularModule} from './${extAngularFolder}/${extAngularModule}'\n` + js.substr(i)
             rewrite = true
           }
           else if (js.substr(j - 43, 3) == '// ') {
@@ -156,7 +157,7 @@ export function _compilation(compiler, compilation, vars, options) {
           })
           usedExtComponents = [...new Set(usedExtComponents)]
           const readFrom = path.resolve(process.cwd(), 'node_modules/' + extAngularPackage + '/src/lib')
-          const writeToPath = path.resolve(process.cwd(), `src/app/${extAngulaFolder}`)
+          const writeToPath = path.resolve(process.cwd(), `src/app/${extAngularFolder}`)
           //const extAngularModuleBaseFile = path.resolve(process.cwd(), `${writeToPath}/base.ts`)
 
           const baseContent = fsx.readFileSync(`${readFrom}/base.ts`).toString()
@@ -179,7 +180,7 @@ export function _compilation(compiler, compilation, vars, options) {
             writeToPathWritten = true
           })
           if (writeToPathWritten) {
-            var t = require('./artifacts').extAngularModernModule(
+            var t = require('./artifacts').extAngularModule(
               moduleVars.imports, moduleVars.exports, moduleVars.declarations
             )
             fsx.writeFileSync(`${writeToPath}/${extAngularModule}.ts`, t, 'utf-8', ()=>{return})

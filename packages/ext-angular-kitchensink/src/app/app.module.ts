@@ -3,6 +3,10 @@ import { NgModule, ModuleWithProviders } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { Route, RouterModule } from '@angular/router'
 
+import { ExtAngularModule } from '@sencha/ext-angular'
+import { ExtAngularBootstrapService } from './ext-angular/ext-angular-bootstrap.service'
+import { ExtAngularBootstrapComponent } from './ext-angular/ext-angular-bootstrap.component'
+
 //import * as hljs from 'highlightjs';
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 // import * as hljs from 'highlight.js';
@@ -12,10 +16,6 @@ hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescri
 export function highlightJsFactory() {
   return hljs;
 }
-
-import { ExtAngularModule } from '@sencha/ext-angular'
-import { ExtAngularBootstrapService } from './ext-angular/ext-angular-bootstrap.service'
-import { ExtAngularBootstrapComponent } from './ext-angular/ext-angular-bootstrap.component'
 
 import * as d3 from 'd3'
 window['d3'] = d3
