@@ -39,7 +39,7 @@ else {
 }
 
 //var extAngularModernFolder = 'ext-' + framework + '-' + toolkit; log(`extAngularModernFolder`,`${extAngularModernFolder}`)
-var extAngularModernFolder = 'ext-' + framework + '-' + toolkit; log(`extAngularModernFolder`,`${extAngularModernFolder}`)
+var extAngularModernFolder = 'ext-' + framework; log(`extAngularModernFolder`,`${extAngularModernFolder}`)
 
 var toolkitFolder = generatedFolders + extAngularModernFolder;         log(`toolkitFolder`,`${toolkitFolder}`)
 var srcFolder = toolkitFolder + '/src/';             log(`srcFolder`,`${srcFolder}`)

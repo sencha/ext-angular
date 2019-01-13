@@ -116,7 +116,7 @@ to
 in ./package.json, add
 ```
   "dependencies": {
-    "@sencha/ext-angular-modern": "~6.7.0",
+    "@sencha/ext-angular": "~6.7.0",
     "@sencha/ext": "~6.7.0",
     "@sencha/ext-modern": "~6.7.0",
     "@sencha/ext-modern-treegrid": "~6.7.0",

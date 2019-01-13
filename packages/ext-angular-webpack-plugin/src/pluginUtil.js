@@ -81,9 +81,9 @@ export function _compilation(compiler, compilation, vars, options) {
       if (options.framework == 'angular') {
         var extComponents = []
         var usedExtComponents = []
-        const extAngulaFolder = 'ext-angular-modern-prod'
-        const extAngularModule = 'ext-angular-modern.module'
-        const extAngularPackage = '@sencha/ext-angular-modern'
+        const extAngulaFolder = 'ext-angular-prod'
+        const extAngularModule = 'ext-angular.module'
+        const extAngularPackage = '@sencha/ext-angular'
         const packagePath = path.resolve(process.cwd(), 'node_modules/' + extAngularPackage)
         var files = fsx.readdirSync(`${packagePath}/lib`)
         files.forEach((fileName) => {

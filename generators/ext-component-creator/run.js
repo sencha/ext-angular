@@ -9,12 +9,14 @@ async function main() {
   var templateToolkitFolder     = path.resolve(templateBaseFolder + framework); log(`templateToolkitFolder`,`${templateToolkitFolder}`)
   var dataFolder                = './AllClassesFiles/';                         log(`dataFolder`,`${dataFolder}`)
   var forPackageFolder          = './forPackage'
-  var extAngularModernFolder    = 'ext-' + framework + '-' + toolkit;  log(`extAngularModernFolder`,`${extAngularModernFolder}`)
+  //var extAngularModernFolder    = 'ext-' + framework + '-' + toolkit;  log(`extAngularModernFolder`,`${extAngularModernFolder}`)
+  var extAngularModernFolder    = 'ext-' + framework;  log(`extAngularModernFolder`,`${extAngularModernFolder}`)
   var generatedToolkitFolder    = generatedFolders + extAngularModernFolder;                                 log(`generatedToolkitFolder`,`${generatedToolkitFolder}`)
   var generatedToolkitSrcFolder = generatedToolkitFolder + '/src/';                                 log(`generatedToolkitSrcFolder`,`${generatedToolkitSrcFolder}`)
   var libFolder                 = generatedToolkitSrcFolder + 'lib/';                                      log(`libFolder`,`${libFolder}`)
 
   await run(`node ./all.js ${framework} ${toolkit} ${environment} ${components}`)
+
   await run(`cp -R ${forPackageFolder}/${toolkit}/. ../${extAngularModernFolder}/`)
   await run(`cp -R ${generatedToolkitSrcFolder}/. ../${extAngularModernFolder}/src/${extAngularModernFolder}`)
   await run(`npm install`, `../${extAngularModernFolder}/`)
