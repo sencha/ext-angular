@@ -13,7 +13,7 @@ export function highlightJsFactory() {
   return hljs;
 }
 
-import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
+import { ExtAngularModule } from '@sencha/ext-angular'
 import { ExtAngularBootstrapService } from './ext-angular/ext-angular-bootstrap.service'
 import { ExtAngularBootstrapComponent } from './ext-angular/ext-angular-bootstrap.component'
 
@@ -515,7 +515,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 @NgModule({
   imports: [
     BrowserModule,
-    ExtAngularModernModule,
+    ExtAngularModule,
     routingModule,
     HighlightJsModule.forRoot({
       provide: HIGHLIGHT_JS,

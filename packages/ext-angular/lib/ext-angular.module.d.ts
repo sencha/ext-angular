@@ -1,2 +1,2 @@
-export declare class ExtAngularModernModule {
+export declare class ExtAngularModule {
 }

@@ -96341,10 +96341,10 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var ExtAngularModernModule = /** @class */ (function () {
-        function ExtAngularModernModule() {
+    var ExtAngularModule = /** @class */ (function () {
+        function ExtAngularModule() {
         }
-        ExtAngularModernModule.decorators = [
+        ExtAngularModule.decorators = [
             { type: i0.NgModule, args: [{
                         imports: [],
                         declarations: [
@@ -96805,7 +96805,7 @@
                         ]
                     },] }
         ];
-        return ExtAngularModernModule;
+        return ExtAngularModule;
     }());
 
     /**
@@ -96818,7 +96818,7 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
-    exports.ExtAngularModernModule = ExtAngularModernModule;
+    exports.ExtAngularModule = ExtAngularModule;
     exports.ɵe = base;
     exports.ɵd = ExtActionsheetComponent;
     exports.ɵc = actionsheetMetaData;

@@ -11,4 +11,4 @@ import { NgModule } from '@angular/core';
 {exports}
   ]
 })
-export class ExtAngular{toolkit}Module { }
+export class ExtAngularModule { }

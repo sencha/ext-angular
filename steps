@@ -3,8 +3,8 @@ steps
 ***************************
 
 npm install -g @angular/cli
-ng new ext-angular-modern-boilerplate --style scss --minimal --skip-tests --inline-style --inline-template 
-cd ext-angular-modern-boilerplate
+ng new ext-angular-boilerplate --style scss --minimal --skip-tests --inline-style --inline-template 
+cd ext-angular-boilerplate
 
 in angular.json
 
@@ -62,7 +62,7 @@ in src/app.module.ts
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
 import { AppComponent } from './app.component'
-import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
+import { ExtAngularModernModule } from '@sencha/ext-angular'
 
 @Injectable()
 export class ExtAngularService {

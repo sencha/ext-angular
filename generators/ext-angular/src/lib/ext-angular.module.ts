@@ -687,4 +687,4 @@ import { ExtWidgetComponent } from './ext-widget.component';
 
   ]
 })
-export class ExtAngularModernModule { }
+export class ExtAngularModule { }
