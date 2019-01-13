@@ -1,36 +1,37 @@
 Issues
  - kitchensink
-    - code window does not reflect current example (dependent on ngFor - line 19) [Both]
-     - ExtAngular components that use Angular structural directives (e.g. ngFor, ngIf) do not dynamically update when their bound data changes.  This is preventing the following from working as desired - Code Preview (you muist reload the page to see the correct code preview panels).
+    - code window does not reflect current example (dependent on ngFor - line 19) [Aniket/Marc]
+      - ExtAngular components that use Angular structural directives (e.g. ngFor, ngIf) do not dynamically update when their 
+        bound data changes.  This is preventing the following from working as desired - Code Preview 
+        (you muist reload the page to see the correct code preview panels).
     - core.js:15707 Navigation triggered outside Angular zone, did you forget to call 'ngZone.run()'? [Aniket]
     
- - [To Be Discussed] ext-angular-gen 
-    - Add environment variables to package.json and in webconfig(Marc) DONE
-    - need to remove Angular CLI requirement (Marc) DONE
+ - ext-angular-gen 
     - need to remove react-only questions (Aniket)
 
  - tree-shaking 
     - [Alisha] in plugin: tree shake the typescript ExtAngular files (Aniket to review error/ Marc to check treeshaking changes)
-    - test against ext-angular-gen (once CLI dependency is removed from bootstrap by Marc) (Alisha)
-    - include ext.js/ext.css in index.html programatically(Alisha/Marc)
-    - Modify run.js to copy source folder to ext-angular-modern (Marc)
-
+    - test against ext-angular-gen (once CLI dependency is removed from bootstrap by Marc [DONE]) (Alisha)
 
  - package ext-angular.service (both service and intermediate component (app)) [Extraction is causing issue] (Aniket) 
  - Update dependency on treeshaking (Alisha) [Dep on 17]
  - document bootstrapping process - goes into guides (Aniket)
+
  - [Marc] widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components] [Visit RendererCell like in react/ Need a simple example in extjs]
  - [Marc] resources from packages like ux are not property referenced [Components -> Color Picker -> Basic]
 
-
   - [Aniket/Marc] UI for SearchField is breaking. Search form is not docked right. 
- (Form fields - Eg( All>Components>Forms>Searchfield or ALl->Components>TitleBar) - Need to add align in source code of button and searchfield.
-
-
-
+      (Form fields - Eg( All>Components>Forms>Searchfield or ALl->Components>TitleBar) 
+      - Need to add align in source code of button and searchfield.
 
 
 Fixed
+ - ext-angular-gen 
+    - Add environment variables to package.json and in webconfig(Marc) DONE
+    - need to remove Angular CLI requirement (Marc) DONE
+ - tree-shaking 
+    - include ext.js/ext.css in index.html programatically(Alisha/Marc) DONE
+    - Modify run.js to copy source folder to ext-angular-modern (Marc) DONE
  - (major) orgchart component does not exists (Under pivot/hierearchy) [External component addition].  
  - Tree shaking in plugin: create manifest.js to allow Sencha Cmd to create ExtJS ext.js and ext.css files
  - width should not be needed, only height at this point (until we figure out height issue)
