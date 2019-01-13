@@ -1,13 +1,6 @@
-rm angular-cli-with-library/package-lock.json
-rm angular-cli-without-library/package-lock.json
-rm ext-angular-client-new/package-lock.json
-rm ext-angular-dashboard/package-lock.json
-rm ext-angular-gen/package-lock.json
-rm ext-angular-builder/package-lock.json
-rm ext-angular-client/package-lock.json
+rm ext-angular/package-lock.json
+rm ext-angular-boilerplate/package-lock.json
 rm ext-angular-demo/package-lock.json
-rm ext-angular-modern/package-lock.json
-rm ext-angular-modern-kitchensink/package-lock.json
-rm ext-angular-tests/package-lock.json
+rm ext-angular-gen/package-lock.json
+rm ext-angular-kitchensink/package-lock.json
 rm ext-angular-webpack-plugin/package-lock.json
-rm ext-angular-classic/package-lock.json
