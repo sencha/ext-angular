@@ -25,23 +25,23 @@ var components = process.argv[5]
 //var components = ['grid','button']
 if (processArgs(framework, toolkit) == -1) return
 
-var rootFolder            = './GeneratedFolders/';                        log(`rootFolder`,`${rootFolder}`)
+var generatedFolders      = './GeneratedFolders/';                        log(`generatedFolders`,`${generatedFolders}`)
 var templateBaseFolder    = './filetemplates/';                           log(`templateBaseFolder`,`${templateBaseFolder}`)
 var templateToolkitFolder = path.resolve(templateBaseFolder + framework); log(`templateToolkitFolder`,`${templateToolkitFolder}`)
-var dataFolder            = './AllClassesFiles/';                         log(`dataFolder`,`${dataFolder}`)
+var allClassesFilesFolder = './AllClassesFiles/';                         log(`allClassesFilesFolder`,`${allClassesFilesFolder}`)
 
-if (!fs.existsSync(rootFolder)) {
-  log(`created`,`${rootFolder}`)
-  mkdirp.sync(rootFolder)
+if (!fs.existsSync(generatedFolders)) {
+  mkdirp.sync(generatedFolders)
+  log(`created`,`${generatedFolders}`)
 }
 else {
-  log(`exists`,`${rootFolder}`)
+  log(`exists`,`${generatedFolders}`)
 }
 
-//var folderName = 'ext-' + framework + '-' + toolkit; log(`folderName`,`${folderName}`)
-var folderName = 'ext-' + framework + '-' + toolkit; log(`folderName`,`${folderName}`)
+//var extAngularModernFolder = 'ext-' + framework + '-' + toolkit; log(`extAngularModernFolder`,`${extAngularModernFolder}`)
+var extAngularModernFolder = 'ext-' + framework + '-' + toolkit; log(`extAngularModernFolder`,`${extAngularModernFolder}`)
 
-var toolkitFolder = rootFolder + folderName;         log(`toolkitFolder`,`${toolkitFolder}`)
+var toolkitFolder = generatedFolders + extAngularModernFolder;         log(`toolkitFolder`,`${toolkitFolder}`)
 var srcFolder = toolkitFolder + '/src/';             log(`srcFolder`,`${srcFolder}`)
 var libFolder = srcFolder + 'lib/';                  log(`libFolder`,`${libFolder}`)
 
@@ -50,16 +50,16 @@ mkdirp.sync(toolkitFolder);log(`created`,`${toolkitFolder}`)
 mkdirp.sync(srcFolder);    log(`created`,`${srcFolder}`)
 mkdirp.sync(libFolder);    log(`created`,`${libFolder}`)
 
-var dataFile = `${dataFolder}${toolkit}-all-classes-flatten.json`
+var dataFile = `${allClassesFilesFolder}${toolkit}-all-classes-flatten.json`
 log(`dataFile`,`${dataFile}`)
 var data = require(dataFile)
 
 //*************
-launch(framework, data, srcFolder, libFolder, templateToolkitFolder, moduleVars, folderName)
+launch(framework, data, srcFolder, libFolder, templateToolkitFolder, moduleVars, extAngularModernFolder)
 
 var val = 'copy';var str = new Array((19 - val.length) + 1).join( ' ' );
 //toFolder = path.resolve(`./../../generators/ext-${framework}-${toolkit}/src`)
-toFolder = path.resolve(`./../../generators/${folderName}/src`)
+toFolder = path.resolve(`./../../generators/${extAngularModernFolder}/src`)
 
 log(`toFolder`,`${toFolder}`)
 rimraf.sync(toFolder);log(`deleted`,`${toFolder}`)
@@ -72,7 +72,7 @@ ncp(srcFolder, toFolder, function (err) {
  })
 
 //*************
-function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, moduleVars, folderName) {
+function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, moduleVars, extAngularModernFolder) {
 
   var extension
   switch(framework) {
@@ -86,10 +86,6 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
       extension = 'js'
       break;
   }
-
-  var num = 0
-  var items = data.global.items
-  log(`item count`,`${items.length}`)
 
 
 
@@ -129,13 +125,11 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
       break
     }
 
-
+    var num = 0
+    var items = data.global.items
+    log(`item count`,`${items.length}`)
 
   log(``,`************** following items can be copy/pasted into excel (paste special... text)`)
-
-
-
-
 
   for (i = 0; i < items.length; i++) { 
     var o = items[i];
@@ -149,19 +143,18 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
               o.xtype = aliases[alias].substring(7)
               ///testing
               if (environment == 'dev') {
-                //oneItem(o, libFolder, framework, extension, num, o.xtype, alias, moduleVars)
                 //if (o.xtype == 'container'  || o.xtype == 'button') {
                   oneItem(o, libFolder, framework, extension, num, o.xtype, alias, moduleVars)
                 //}
               }
-              else if (components.includes(o.xtype)) {
-              if (o.xtype == 'container'  || o.xtype == 'button') {
-                oneItem(o, libFolder, framework, extension, num, o.xtype, alias, moduleVars)
-              }
-              }
+              // else if (components.includes(o.xtype)) {
+              // if (o.xtype == 'container'  || o.xtype == 'button') {
+              //   oneItem(o, libFolder, framework, extension, num, o.xtype, alias, moduleVars)
+              // }
+              // }
             }
             else {
-              console.log(``,'not: ' + o.name + ' - ' + o.alias)
+              //console.log(``,'not: ' + o.name + ' - ' + o.alias)
             }
           }
         }
@@ -171,16 +164,10 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
 
   log(``,`**************`)
 
-
-
-
   // moduleVars.imports = moduleVars.imports.substring(0, moduleVars.imports.length - 2); moduleVars.imports = moduleVars.imports + ';' + newLine
   // moduleVars.imports = moduleVars.imports + `import { ExtClassComponent } from './ext-class.component';${newLine}`
   // moduleVars.exports = moduleVars.exports + `    ExtClassComponent${newLine}`
   // moduleVars.declarations = moduleVars.declarations + `    ExtClassComponent${newLine}`
-
-
-
 
   moduleVars.imports = moduleVars.imports.substring(0, moduleVars.imports.length - 2); moduleVars.imports = moduleVars.imports + ';' + newLine
   //moduleVars.imports = moduleVars.imports + `import { ExtClassComponent } from './ext-class.component';${newLine}`
@@ -193,7 +180,7 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
 
   var exportall = ''
   //exportall = exportall + `export * from './lib/ext-${framework}-${toolkit}.module';${newLine}`
-  exportall = exportall + `export * from './lib/${folderName}.module';${newLine}`
+  exportall = exportall + `export * from './lib/${extAngularModernFolder}.module';${newLine}`
 
   switch(framework) {
     case 'angular':
@@ -206,7 +193,7 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
       var baseFile = `${libFolder}base.${extension}`
       fs.writeFile(baseFile, doExtBase(templateToolkitFolder), function(err) {if(err){return console.log(err);} })
       log(`baseFile`,`${baseFile}`)
-      var moduleFile = `${libFolder}${folderName}.module.ts`
+      var moduleFile = `${libFolder}${extAngularModernFolder}.module.ts`
       //var moduleFile = `${libFolder}ext-${framework}-${toolkit}.module.ts`
       fs.writeFile(moduleFile, doModule(moduleVars), function(err) {if(err) { return console.log(err); } });
       log(`moduleFile`,`${moduleFile}`)
@@ -222,10 +209,9 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
 
 function oneItem(o, libFolder, framework, extension, num, xtype, alias, moduleVars) {
   var classname =  o.xtype.replace(/-/g, "_")
-  //var classname =  o.xtype
   var capclassname = classname.charAt(0).toUpperCase() + classname.slice(1)
   var classFile = `${libFolder}ext-${o.xtype}.component.${extension}`
-  console.log(`${xtype}${tb}${tb}${('  ' + num).substr(-3)}_${alias}${tb}${classFile}`)
+  //console.log(`${xtype}${tb}${tb}${('  ' + num).substr(-3)}_${alias}${tb}${classFile}`)
   var commaOrBlank = "";
   var tab = "\t";
 
@@ -248,7 +234,7 @@ function oneItem(o, libFolder, framework, extension, num, xtype, alias, moduleVa
       sMETHODS = sMETHODS + "(" + sItems + ") { return this.ext." + method.name + "(" + sItems + ") } },\n";
     });
   }
-  
+
   var sPROPERTIES = "";
   var sPROPERTIESOBJECT = "";
   var sGETSET = "";
@@ -260,7 +246,7 @@ function oneItem(o, libFolder, framework, extension, num, xtype, alias, moduleVa
       sPROPERTIES = `${sPROPERTIES}    '${config.name}',${newLine}`
       var type = ''
       if (config.type == undefined) {
-        log('', `${xtype}${tb}${config.name}`)
+        //log('', `${xtype}${tb}${config.name}`)
         type = 'any'
       }
       else {
@@ -333,17 +319,17 @@ function oneItem(o, libFolder, framework, extension, num, xtype, alias, moduleVa
   //exportall = exportall + `export * from './lib/ext-${classname}.component';${newLine}`
 }
 
-// function doRootfile(fileName, toolkit, folderName) {
-//   var p = path.resolve(__dirname, 'filetemplates/rootFolder/' + fileName + '.tpl')
+// function doRootfile(fileName, toolkit, extAngularModernFolder) {
+//   var p = path.resolve(__dirname, 'filetemplates/generatedFolders/' + fileName + '.tpl')
 //   var content = fs.readFileSync(p).toString()
 //   var values = {
 //     toolkit: toolkit,
-//     folderName: folderName,
+//     extAngularModernFolder: extAngularModernFolder,
 //   }
 //   var tpl = new Ext.XTemplate(content)
 //   var t = tpl.apply(values)
 //   delete tpl
-//   fs.writeFile(rootFolder + '/' + fileName, t, function(err) {if(err) { return console.log(err) }})
+//   fs.writeFile(generatedFolders + '/' + fileName, t, function(err) {if(err) { return console.log(err) }})
 // }
 
 function doClass(xtype, sGETSET, sMETHODS, sPROPERTIES, sPROPERTIESOBJECT, sEVENTS, sEVENTNAMES, name, classname, capclassname, templateToolkitFolder) {
@@ -393,17 +379,17 @@ function doBootstrapService(templateToolkitFolder) {
   return content
 }
 
-function doOrgChart(templateToolkitFolder) {
-  var p = path.resolve(templateToolkitFolder + '/orgchart.tpl')
-  var content = fs.readFileSync(p).toString()
-  return content
-}
+// function doOrgChart(templateToolkitFolder) {
+//   var p = path.resolve(templateToolkitFolder + '/orgchart.tpl')
+//   var content = fs.readFileSync(p).toString()
+//   return content
+// }
 
-function doTransition(templateToolkitFolder) {
-  var p = path.resolve(templateToolkitFolder + '/transition.tpl')
-  var content = fs.readFileSync(p).toString()
-  return content
-}
+// function doTransition(templateToolkitFolder) {
+//   var p = path.resolve(templateToolkitFolder + '/transition.tpl')
+//   var content = fs.readFileSync(p).toString()
+//   return content
+// }
 
 function doPublic_Api(exportall, templateToolkitFolder) {
   //var p = path.resolve(__dirname, 'filetemplates/' + framework + '/public_api.tpl')

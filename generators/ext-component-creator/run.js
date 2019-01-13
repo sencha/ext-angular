@@ -4,27 +4,27 @@ async function main() {
   var environment = 'dev'
   var components = ['container','button']
   var toolkit  = 'modern'
-  var rootFolder            = './GeneratedFolders/';                        log(`rootFolder`,`${rootFolder}`)
-  var templateBaseFolder    = './filetemplates/';                           log(`templateBaseFolder`,`${templateBaseFolder}`)
-  var templateToolkitFolder = path.resolve(templateBaseFolder + framework); log(`templateToolkitFolder`,`${templateToolkitFolder}`)
-  var dataFolder            = './AllClassesFiles/';                         log(`dataFolder`,`${dataFolder}`)
-  var packageFolder         = './forPackage'
-  //var folderName            = 'ext-' + framework + '-' + toolkit;                    log(`folderName`,`${folderName}`)
-  var folderName            = 'ext-' + framework + '-' + toolkit;  log(`folderName`,`${folderName}`)
-  var toolkitFolder         = rootFolder + folderName;                                 log(`toolkitFolder`,`${toolkitFolder}`)
-  var srcFolder             = toolkitFolder + '/src/';                                 log(`srcFolder`,`${srcFolder}`)
-  var libFolder             = srcFolder + 'lib/';                                      log(`libFolder`,`${libFolder}`)
+  var generatedFolders          = './GeneratedFolders/';                        log(`generatedFolders`,`${generatedFolders}`)
+  var templateBaseFolder        = './filetemplates/';                           log(`templateBaseFolder`,`${templateBaseFolder}`)
+  var templateToolkitFolder     = path.resolve(templateBaseFolder + framework); log(`templateToolkitFolder`,`${templateToolkitFolder}`)
+  var dataFolder                = './AllClassesFiles/';                         log(`dataFolder`,`${dataFolder}`)
+  var forPackageFolder          = './forPackage'
+  var extAngularModernFolder    = 'ext-' + framework + '-' + toolkit;  log(`extAngularModernFolder`,`${extAngularModernFolder}`)
+  var generatedToolkitFolder    = generatedFolders + extAngularModernFolder;                                 log(`generatedToolkitFolder`,`${generatedToolkitFolder}`)
+  var generatedToolkitSrcFolder = generatedToolkitFolder + '/src/';                                 log(`generatedToolkitSrcFolder`,`${generatedToolkitSrcFolder}`)
+  var libFolder                 = generatedToolkitSrcFolder + 'lib/';                                      log(`libFolder`,`${libFolder}`)
 
-  await run(`node all.js ${framework} ${toolkit} ${environment} ${components}`)
-  //return
-  await run(`cp -R ${packageFolder}/${toolkit}/. ../${folderName}/`)
-  await run(`cp -R ${srcFolder}/. ../${folderName}/src/`)
-  await run(`npm install`, `../${folderName}/`)
-  await run(`npm run build`, `../${folderName}/`)
-  await run (`rm -R ../../packages/${folderName}/.`)
-  await run(`cp -R ../${folderName}/dist/${folderName}/. ../../packages/${folderName}/.`)
+  await run(`node ./all.js ${framework} ${toolkit} ${environment} ${components}`)
+  await run(`cp -R ${forPackageFolder}/${toolkit}/. ../${extAngularModernFolder}/`)
+  await run(`cp -R ${generatedToolkitSrcFolder}/. ../${extAngularModernFolder}/src/${extAngularModernFolder}`)
+  await run(`npm install`, `../${extAngularModernFolder}/`)
+  await run(`npm run build`, `../${extAngularModernFolder}/`)
+  await run(`cp -R ${forPackageFolder}/${toolkit}bin/. ../${extAngularModernFolder}/dist/${extAngularModernFolder}`)
+  await run(`cp -R ${generatedToolkitSrcFolder}/. ../${extAngularModernFolder}/dist/${extAngularModernFolder}/src`)
+  await run (`rm -R ../../packages/${extAngularModernFolder}/.`)
+  await run(`cp -R ../${extAngularModernFolder}/dist/${extAngularModernFolder}/. ../../packages/${extAngularModernFolder}/.`)
   //copy src file (todo)
-  //await run (`ls -l`, `../../packages/${folderName}/lib`)
+  //await run (`ls -l`, `../../packages/${extAngularModernFolder}/lib`)
 }
 
 function log(a,b) {console.log(a + ' ' + b)}
