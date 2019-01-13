@@ -289,6 +289,20 @@ absensesColumn = [
 }
 ];
 
+//<button #item ui ="action" [handler] ="this.onVerify" [bind] = "widgetCellBind" text = "VERIFY"></button>
+//widgetCellBind = {tooltip : 'Verify {record.fullName}'};
+verifyCell = {
+  xtype: 'widgetcell',
+  widget: {
+    xtype: 'button',
+    bind: {
+      tooltip: 'Verify {record.fullName}'
+    },
+    ui: 'action',
+    text: 'VERIFY',
+    handler: this.onVerify
+  }
+};
 summaryCell = {
     xtype: 'widgetcell',
     widget: {
@@ -307,7 +321,7 @@ ratingsCell =  {
     }
   };
 
-  widgetCellBind = {tooltip : 'Verify {record.fullName}'};
+  
 
   gridTitleBar = {
     shadow: false,

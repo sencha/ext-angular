@@ -1,5 +1,5 @@
 <container #item [padding]="!isPhone?  '10': ''" layout="vbox"
-[height]="'600px'">
+[fitToParent]="true">
     <chart-toolbar #item  maxHeight="50" [downloadChartRef]="this.chart"></chart-toolbar>
     <cartesian #item
         shadow="true"

@@ -331,6 +331,15 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
       fs.writeFileSync(path.join(output, 'workspace.json'), createWorkspaceJson(options, output), 'utf8')
 
       if (vars.framework == 'angular') {
+
+        //because of a problem with colorpicker
+        if (fs.existsSync(path.join(process.cwd(),'ext-angular/ux/'))) {
+          var fromPath = path.join(process.cwd(), 'ext-angular/')
+          var toPath = path.join(output)
+          fsx.copySync(fromPath, toPath)
+          log(app + 'Copying (ux) ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
+        }
+
         if (fs.existsSync(path.join(process.cwd(),'ext-angular/packages/'))) {
           var fromPath = path.join(process.cwd(), 'ext-angular/')
           var toPath = path.join(output)

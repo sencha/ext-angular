@@ -25,8 +25,8 @@ import {TreeComponent} from './Trees/Tree/Tree';
 import {TreeDecorationsComponent} from './Trees/TreeDecorations/TreeDecorations';
 import {TreeGridComponent} from './Trees/TreeGrid/TreeGrid';
 import {TreeListComponent} from './Trees/TreeList/TreeList';
-import { DefaultGaugeComponent } from './Gauges/DefaultGauge';
-import { NeedleGaugeComponent } from './Gauges/NeedleGauge';
+import {DefaultGaugeComponent} from './Gauges/DefaultGauge';
+import {NeedleGaugeComponent} from './Gauges/NeedleGauge';
 
 import {BasicGridComponent} from './Grid/BasicGrid/BasicGrid';
 import {EditableGridComponent} from './Grid/EditableGrid/EditableGrid';
@@ -121,7 +121,6 @@ import {SalesPerEmployeeComponent} from './D3/HeatMap/SalesPerEmployee/SalesPerE
 import {OrgChartComponent} from './D3/Hierarchy/OrgChart/OrgChart';
 import {PackComponent} from './D3/Hierarchy/Pack/Pack';
 
-
 import {BasicColumnComponent} from './Charts/Column/BasicColumn/BasicColumn';
 import {ColumnWithRendererComponent} from './Charts/Column/ColumnWithRenderer/ColumnWithRenderer';
 import {MultiaxisColumnComponent} from './Charts/Column/MultiaxisColumn/MultiaxisColumn';
@@ -144,7 +143,7 @@ import {RangeEditorPluginComponent} from './PivotGrid/RangeEditorPlugin/RangeEdi
 import {RowStylingComponent} from './PivotGrid/RowStyling/RowStyling'
 import {TabularLayoutComponent} from './PivotGrid/TabularLayout/TabularLayout'
 
-//import { CarouselComponent } from 'src/examples/Carousel/Carousel';
+import { CarouselComponent } from './Carousel/Carousel';
 
 import {SimpleDragDropComponent} from './DragAndDrop/Simple/Simple';
 import {ConstraintsDragDropComponent} from './DragAndDrop/Constraints/Constraints';
@@ -208,7 +207,7 @@ const treeRoot = {
             { text: 'Color Picker', navIcon: 'icon-color-picker', children: [
                 { text: 'Basic', component: ColorPickerComponent, layout: 'center', navIcon: 'icon-color-picker' }
             ]},
-            //{ text: 'Carousel', component: CarouselComponent, navIcon: 'icon-carousel' },
+            { text: 'Carousel', component: CarouselComponent, navIcon: 'icon-carousel' },
             { text: 'Drag & Drop', navIcon: 'icon-drag-drop', children: [
                 { text: 'Simple', component: SimpleDragDropComponent, navIcon: 'icon-drag-simple' },
                 { text: 'Constraints', component: ConstraintsDragDropComponent, navIcon: 'icon-drag-constraint' },

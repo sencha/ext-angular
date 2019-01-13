@@ -1,7 +1,6 @@
 <grid title="Summary Row Grid" [store]="this.store" 
 [shadow]="true" [plugins]="{ gridsummaryrow: true }"
-width="550px" 
-height="600px" #item>
+[fitToParent]="true" #item>
     <column #item text="Company" dataIndex="name" width="150" [summaryRenderer]="this.summarizeCompanies" ></column>
     <column #item text="Price" width="75" dataIndex="price" formatter="usMoney" summary="average" ></column>
     <column #item text="Change" width="90" dataIndex="priceChange" [renderer]="this.renderSign.bind(this, '0.00')" summary="max" ></column>
