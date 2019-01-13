@@ -3,6 +3,9 @@
   "version": "6.7.0",
   "description": "ext-angular-modern",
   "main": "index.js",
+  "bin": {
+    "ext-angular": "./bin/ext-angular.js"
+  },
   "scripts": {
     "build": "ng-packagr -p ng-package.json"
   },

@@ -1,5 +1,5 @@
 import { __extends } from 'tslib';
-import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, ElementRef, EventEmitter, ContentChildren, Component, NgModule, defineInjectable, inject, INJECTOR, forwardRef, Host, Optional, SkipSelf } from '@angular/core';
+import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, Component, ElementRef, EventEmitter, ContentChildren, NgModule, defineInjectable, inject, INJECTOR, forwardRef, Host, Optional, SkipSelf } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -1601,7 +1601,6 @@ var buttonMetaData = /** @class */ (function () {
         "responsiveConfig": "Object",
         "fitToParent": "Boolean",
         "config": "Object",
-        "align": "String"
     };
     buttonMetaData.PROPERTIES = [
         'allowDepress',
@@ -1718,8 +1717,7 @@ var buttonMetaData = /** @class */ (function () {
         'platformConfig',
         'responsiveConfig',
         'fitToParent',
-        'config',
-        'align'
+        'config'
     ];
     buttonMetaData.EVENTS = [
         { name: 'added', parameters: 'sender,container,index' },
@@ -40411,7 +40409,6 @@ var searchfieldMetaData = /** @class */ (function () {
         "responsiveConfig": "Object",
         "fitToParent": "Boolean",
         "config": "Object",
-        "align": "String"
     };
     searchfieldMetaData.PROPERTIES = [
         'alwaysOnTop',
@@ -40552,8 +40549,7 @@ var searchfieldMetaData = /** @class */ (function () {
         'platformConfig',
         'responsiveConfig',
         'fitToParent',
-        'config',
-        'align'
+        'config'
     ];
     searchfieldMetaData.EVENTS = [
         { name: 'action', parameters: 'searchfield,e' },

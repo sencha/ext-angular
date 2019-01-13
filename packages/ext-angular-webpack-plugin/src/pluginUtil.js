@@ -17,14 +17,6 @@ export function _constructor(options) {
   const validateOptions = require('schema-utils')
   validateOptions(require(`./${options.framework}Util`).getValidateOptions(), options, '')
 
-  //fix sencha cmd no jetty server problem
-  // var watchFile = path.resolve(process.cwd(),`node_modules/@sencha/cmd/dist/ant/build/app/watch-impl.xml`)
-  // logv(options, `modify ${watchFile}`)
-  // var data = fs.readFileSync(watchFile, 'utf-8');
-  // var ip = 'webServerRefId="app.web.server"';
-  // var newValue = data.replace(new RegExp(ip), '');
-  // fs.writeFileSync(watchFile, newValue, 'utf-8');
-
   thisVars = require(`./${options.framework}Util`).getDefaultVars()
   thisVars.framework = options.framework
   switch(thisVars.framework) {
@@ -83,8 +75,6 @@ export function _compilation(compiler, compilation, vars, options) {
     const mkdirp = require('mkdirp')
     const path = require('path')
 
-
-
     if (vars.production) {
       logv(options, `ext-compilation: production is ` + vars.production)
 
@@ -120,7 +110,7 @@ export function _compilation(compiler, compilation, vars, options) {
           const pathToExtAngularModern = path.resolve(process.cwd(), `src/app/${extAngulaFolder}`)
           if (!fs.existsSync(pathToExtAngularModern)) {
             mkdirp.sync(pathToExtAngularModern)
-            const t = require('./artifacts').extAngularModerModule('', '', '')
+            const t = require('./artifacts').extAngularModernModule('', '', '')
             fsx.writeFileSync(
               `${pathToExtAngularModern}/${extAngularModule}.ts`, t, 'utf-8', () => {return}
             )
@@ -158,7 +148,6 @@ export function _compilation(compiler, compilation, vars, options) {
           const string = 'Ext.create({\"xtype\":\"'
           vars.deps.forEach(code => {
             var index = code.indexOf(string)
-
             if (index >= 0) {
               code = code.substring(index + string.length)
               var end = code.indexOf('\"')
@@ -168,7 +157,7 @@ export function _compilation(compiler, compilation, vars, options) {
           usedExtComponents = [...new Set(usedExtComponents)]
           const readFrom = path.resolve(process.cwd(), 'node_modules/' + extAngularPackage + '/src/lib')
           const writeToPath = path.resolve(process.cwd(), `src/app/${extAngulaFolder}`)
-          const extAngularModuleBaseFile = path.resolve(process.cwd(), `${writeToPath}/base.ts`)
+          //const extAngularModuleBaseFile = path.resolve(process.cwd(), `${writeToPath}/base.ts`)
 
           const baseContent = fsx.readFileSync(`${readFrom}/base.ts`).toString()
           fsx.writeFileSync(`${writeToPath}/base.ts`, baseContent, 'utf-8', ()=>{return})
@@ -189,12 +178,10 @@ export function _compilation(compiler, compilation, vars, options) {
             fsx.writeFileSync(`${writeToPath}${classFile}`, contents, 'utf-8', ()=>{return})
             writeToPathWritten = true
           })
-
           if (writeToPathWritten) {
-            var t = require('./artifacts').extAngularModerModule(
+            var t = require('./artifacts').extAngularModernModule(
               moduleVars.imports, moduleVars.exports, moduleVars.declarations
             )
-
             fsx.writeFileSync(`${writeToPath}/${extAngularModule}.ts`, t, 'utf-8', ()=>{return})
           }
         })
@@ -233,8 +220,6 @@ export function _compilation(compiler, compilation, vars, options) {
     else {
       logv(options,'skipped HOOK ext-html-generation')
     }
-
-
   }
   catch(e) {
     require('./pluginUtil').logv(options,e)
@@ -298,27 +283,6 @@ export async function emit(compiler, compilation, vars, options, callback) {
           await _buildExtBundle(app, compilation, outputPath, parms, options)
           vars.watchStarted = true
         }
-
-        //const jsChunk = compilation.addChunk(`ext-angular-js`)
-        //jsChunk.hasRuntime = jsChunk.isInitial = () => true;
-        //jsChunk.files.push(path.join('build', 'ext-angular', 'ext.js'));
-        //jsChunk.files.push(path.join('build', 'ext-angular',  'ext.css'));
-        //jsChunk.id = -2; // this forces html-webpack-plugin to include ext.js first
-
-        // if(options.browser == true && options.watch == 'yes') {
-        //   if (vars.browserCount == 0 && compilation.errors.length == 0) {
-        //     var url = 'http://localhost:' + options.port
-        //     log(app + `Opening browser at ${url}`)
-        //     vars.browserCount++
-        //     const opn = require('opn')
-        //     opn(url)
-        //   }
-        // }
-        // else {
-        //   logv(options,'browser NOT opened')
-        // }
-
-
         callback()
       }
       else {
@@ -327,18 +291,6 @@ export async function emit(compiler, compilation, vars, options, callback) {
     }
     else {
       log(`${vars.app}FUNCTION emit not run`)
-      // if(options.browser == true) {
-      //   if (vars.browserCount == 0 && options.watch == 'yes') {
-      //     var url = 'http://localhost:' + options.port
-      //     log(app + `Opening browser at ${url}`)
-      //     vars.browserCount++
-      //     const opn = require('opn')
-      //     opn(url)
-      //   }
-      // }
-      // else {
-      //   logv(options,'browser NOT opened')
-      // }
       callback()
     }
   }
@@ -563,7 +515,6 @@ export async function executeAsync (app, command, parms, opts, compilation, opti
     callback()
   } 
 }
-
 
 export function log(s) {
   require('readline').cursorTo(process.stdout, 0)
