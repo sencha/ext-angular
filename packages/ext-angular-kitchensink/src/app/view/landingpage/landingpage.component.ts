@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, ViewEncapsulation, ViewContainerRef,ElementRef, ComponentFactoryResolver, ComponentRef, ComponentFactory } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, NgZone, ViewEncapsulation, ViewContainerRef,ElementRef, ComponentFactoryResolver, ComponentRef, ComponentFactory } from '@angular/core';
 import {navTreeRoot} from '../../../examples';
 
 import { Location } from '@angular/common';
@@ -117,7 +117,7 @@ export class LandingpageComponent implements OnInit {
     this.navigate(id)
   }
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private ngZone: NgZone) {
 
     this.node$.subscribe(({
       next: (v) => {
@@ -167,7 +167,7 @@ export class LandingpageComponent implements OnInit {
   }
 
   navigate(location) {
-    this.router.navigateByUrl(location);
+    this.ngZone.run(() => this.router.navigateByUrl(location)).then();
   }
 
   //mjg
@@ -194,7 +194,7 @@ export class LandingpageComponent implements OnInit {
     if(record && record.data && record.data.id) {
       var componentSelectedId = record.data.id;
       console.log("selectionChanged ID: " + componentSelectedId);
-      this.router.navigate([componentSelectedId]);
+      this.ngZone.run(() => this.router.navigate([componentSelectedId])).then();
     }
   }
 
