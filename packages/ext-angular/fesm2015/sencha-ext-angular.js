@@ -97,10 +97,7 @@ class base {
         this.metaData = metaData;
         this.hostComponent = hostComponent;
         this._extChildren = false;
-        //console.log('constructor');console.log(el.nativeElement)
         this._nativeElement = nativeElement;
-        console.log('hostComponent');
-        console.log(hostComponent);
         this._hostComponent = hostComponent;
         metaData.EVENTS.forEach((event, n) => {
             if (event.name != 'fullscreen') {
@@ -192,13 +189,216 @@ class base {
      */
     ngOnDestroy() {
         console.log(`ngOnDestroy`);
-        console.log(this);
-        //this.ext.parent.remove(this.ext)
+        try {
+            console.log(this);
+            //console.log(this.ext)
+            //console.log(this._hostComponent)
+            //console.log(this._hostComponent.ext)
+            /** @type {?} */
+            var parent = this._hostComponent.ext;
+            /** @type {?} */
+            var child = this.ext;
+            console.log(parent);
+            console.log(child);
+            parent.remove([child]);
+        }
+        catch (e) {
+            console.error(e);
+        }
     }
     /**
      * @return {?}
      */
     baseAfterContentInit() {
+        //    console.log('host')
+        //    console.log(this._hostComponent)
+        //    console.log('native')
+        //    console.log(this._nativeElement)
+        //    console.log('_items')
+        //    console.log(this._items)
+        //    console.log(this._items.length)
+        if (this._items.length > 0 && this._extChildren == true) {
+            console.error('cant have both native elements and ExtAngular elements as children');
+            return;
+        }
+        else if (this._items.length > 0) {
+            //console.error('do it')
+            if (this._items.length < 2) {
+                //console.error('only 1 item')
+                //console.log(this._items)
+                return;
+            }
+            //console.log(this._items.length + ' items')
+            //console.log('doing something')
+            /** @type {?} */
+            var anyItems = [];
+            this._items.forEach(item => { anyItems.push(item); });
+            this._elRefItems.forEach(item => { });
+            /** @type {?} */
+            var j = 0;
+            for (var i in anyItems) {
+                if (j == 0) {
+                    j++;
+                    continue;
+                }
+                /** @type {?} */
+                var item = anyItems[i];
+                if (item.nativeElement != undefined) {
+                    //          console.log('native')
+                    //          console.log('parent: ' + this.ext.xtype)
+                    //          console.log('child')
+                    //          console.log(item.nativeElement)
+                    this.ext.add({ xtype: 'container', html: item.nativeElement });
+                }
+                else {
+                    //          console.log('component')
+                    //          console.log('parent: ' + this.ext.xtype)
+                    //          console.log('child')
+                    //          console.log(elRefItem.nativeElement)
+                    //          console.log(elRefItem)
+                    //          console.log(item)
+                    /** @type {?} */
+                    var parentCmp = this.ext;
+                    /** @type {?} */
+                    var childCmp = item.ext;
+                    this.addTheChild(parentCmp, childCmp);
+                    //this.ext.add(item.ext)
+                    //this.ext.add({xtype: 'container',html: elRefItem.nativeElement})
+                }
+            }
+            return;
+        }
+        // if (this.ext != undefined && this.hostComponent != undefined) {
+        //   var parentxtype = this.hostComponent['ext'].xtype
+        //   var childxtype = this['ext'].xtype
+        //   var parentCmp = this.hostComponent['ext']
+        //   var childCmp = this['ext']
+        //   console.log('parent: ' + parentxtype + ', child: ' + childxtype)
+        //   this.hostComponent._extChildren = true
+        //   if (parentxtype === 'grid') {
+        //     if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
+        //       parentCmp.addColumn(childCmp)
+        //     }
+        //     else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
+        //       if (parentCmp.getHideHeaders() === false) {
+        //         //var j = parentCmp.items.items.length;
+        //         parentCmp.insert(1, childCmp);
+        //       }
+        //       else {
+        //         parentCmp.add(childCmp);
+        //       }
+        //     }
+        //     else {
+        //       console.log('??')
+        //     }
+        //   } else if (childxtype === 'tooltip') {
+        //     parentCmp.setTooltip(childCmp)
+        //   } else if (childxtype === 'plugin') {
+        //     parentCmp.setPlugin(childCmp)
+        //   } else if (parentxtype === 'button') {
+        //     if (childxtype === 'menu') {
+        //       parentCmp.setMenu(childCmp)
+        //     } else {
+        //       console.log('child not added')
+        //     }
+        //   } else if (childxtype === 'toolbar' && Ext.isClassic === true) {
+        //     parentCmp.addDockedItems(childCmp)
+        //   } else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
+        //     if (parentCmp.getHideHeaders() === false) {
+        //       //var j: any = parentCmp.items.items.length
+        //       //parentCmp.insert(j - 1, childCmp)
+        //       parentCmp.insert(1, childCmp)
+        //     } else {
+        //       parentCmp.add(childCmp)
+        //     }
+        //   } else if (parentCmp.add != undefined) {
+        //     parentCmp.add(childCmp)
+        //   } else {
+        //     console.log('child not added')
+        //   }
+        // }
+        // else if (this._nativeElement != undefined) {
+        //   console.log(this._nativeElement)
+        //   //this.ext.add({xtype: 'container',html: this._nativeElement})
+        // }
+        // else {
+        //   console.log('component')
+        //   //console.log(elRefItem)
+        //   //this.ext.add({xtype: 'container',html: this._nativeElement})
+        // }
+        //this['ready'].emit(parentCmp)
+        //this['ready'].emit(this)
+    }
+    /**
+     * @param {?} parentCmp
+     * @param {?} childCmp
+     * @return {?}
+     */
+    addTheChild(parentCmp, childCmp) {
+        /** @type {?} */
+        var parentxtype = parentCmp.xtype;
+        /** @type {?} */
+        var childxtype = childCmp.xtype
+        //      console.log('parent: ' + parentxtype + ', child: ' + childxtype)
+        //      this.hostComponent._extChildren = true
+        ;
+        //      console.log('parent: ' + parentxtype + ', child: ' + childxtype)
+        //      this.hostComponent._extChildren = true
+        if (parentxtype === 'grid') {
+            if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
+                parentCmp.addColumn(childCmp);
+            }
+            else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
+                if (parentCmp.getHideHeaders() === false) {
+                    //var j = parentCmp.items.items.length;
+                    parentCmp.insert(1, childCmp);
+                }
+                else {
+                    parentCmp.add(childCmp);
+                }
+            }
+            else {
+                console.log('??');
+            }
+        }
+        else if (childxtype === 'tooltip') {
+            parentCmp.setTooltip(childCmp);
+        }
+        else if (childxtype === 'plugin') {
+            parentCmp.setPlugin(childCmp);
+        }
+        else if (parentxtype === 'button') {
+            if (childxtype === 'menu') {
+                parentCmp.setMenu(childCmp);
+            }
+            else {
+                console.log('child not added');
+            }
+        }
+        else if (childxtype === 'toolbar' && Ext.isClassic === true) {
+            parentCmp.addDockedItems(childCmp);
+        }
+        else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
+            if (parentCmp.getHideHeaders() === false) {
+                //var j: any = parentCmp.items.items.length
+                //parentCmp.insert(j - 1, childCmp)
+                parentCmp.insert(1, childCmp);
+            }
+            else {
+                parentCmp.add(childCmp);
+            }
+        }
+        else if (parentCmp.add != undefined) {
+            parentCmp.add(childCmp);
+        }
+        else {
+            console.log('child not added');
+        }
+    }
+    /**
+     * @return {?}
+     */
+    baseAfterContentInitOrig() {
         //console.log('\nbaseAfterContentInit')
         if (this.items.length < 2) {
             //console.log('1 item')
@@ -305,130 +505,6 @@ class base {
         this['ready'].emit(this);
     }
     /**
-     * @return {?}
-     */
-    baseAfterContentInitngFor() {
-        console.log('host');
-        console.log(this._hostComponent);
-        console.log('native');
-        console.log(this._nativeElement);
-        console.log('_items');
-        console.log(this._items);
-        console.log(this._items.length);
-        if (this._items.length > 0 && this._extChildren == true) {
-            console.error('cant have both');
-        }
-        else if (this._items.length > 0) {
-            console.error('do it');
-            if (this.items.length < 2) {
-                console.error('1 item');
-                return;
-            }
-            //console.log(this.items.length + ' items')
-            /** @type {?} */
-            var anyItems = [];
-            /** @type {?} */
-            var elRefItems = [];
-            this._items.forEach(item => { anyItems.push(item); });
-            this._elRefItems.forEach(item => { elRefItems.push(item); });
-            /** @type {?} */
-            var j = 0;
-            for (var i in anyItems) {
-                if (j == 0) {
-                    j++;
-                    continue;
-                }
-                /** @type {?} */
-                var item = anyItems[i];
-                /** @type {?} */
-                var elRefItem = elRefItems[i];
-                if (item.nativeElement != undefined) {
-                    //console.log('native')
-                    this.ext.add({ xtype: 'container', html: item.nativeElement });
-                }
-                else {
-                    //console.log('component')
-                    //console.log(elRefItem)
-                    this.ext.add({ xtype: 'container', html: elRefItem.nativeElement });
-                }
-            }
-            return;
-        }
-        if (this.ext != undefined && this.hostComponent != undefined) {
-            /** @type {?} */
-            var parentxtype = this.hostComponent['ext'].xtype;
-            /** @type {?} */
-            var childxtype = this['ext'].xtype;
-            /** @type {?} */
-            var parentCmp = this.hostComponent['ext'];
-            /** @type {?} */
-            var childCmp = this['ext'];
-            console.log('parent: ' + parentxtype + ', child: ' + childxtype);
-            this.hostComponent._extChildren = true;
-            if (parentxtype === 'grid') {
-                if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
-                    parentCmp.addColumn(childCmp);
-                }
-                else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
-                    if (parentCmp.getHideHeaders() === false) {
-                        //var j = parentCmp.items.items.length;
-                        parentCmp.insert(1, childCmp);
-                    }
-                    else {
-                        parentCmp.add(childCmp);
-                    }
-                }
-                else {
-                    console.log('??');
-                }
-            }
-            else if (childxtype === 'tooltip') {
-                parentCmp.setTooltip(childCmp);
-            }
-            else if (childxtype === 'plugin') {
-                parentCmp.setPlugin(childCmp);
-            }
-            else if (parentxtype === 'button') {
-                if (childxtype === 'menu') {
-                    parentCmp.setMenu(childCmp);
-                }
-                else {
-                    console.log('child not added');
-                }
-            }
-            else if (childxtype === 'toolbar' && Ext.isClassic === true) {
-                parentCmp.addDockedItems(childCmp);
-            }
-            else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
-                if (parentCmp.getHideHeaders() === false) {
-                    //var j: any = parentCmp.items.items.length
-                    //parentCmp.insert(j - 1, childCmp)
-                    parentCmp.insert(1, childCmp);
-                }
-                else {
-                    parentCmp.add(childCmp);
-                }
-            }
-            else if (parentCmp.add != undefined) {
-                parentCmp.add(childCmp);
-            }
-            else {
-                console.log('child not added');
-            }
-        }
-        else if (this._nativeElement != undefined) {
-            console.log(this._nativeElement);
-            //this.ext.add({xtype: 'container',html: this._nativeElement})
-        }
-        else {
-            console.log('component');
-            //console.log(elRefItem)
-            //this.ext.add({xtype: 'container',html: this._nativeElement})
-        }
-        //this['ready'].emit(parentCmp)
-        this['ready'].emit(this);
-    }
-    /**
      * @param {?} changes
      * @return {?}
      */
@@ -457,90 +533,12 @@ class base {
         }
         //console.log(`OnChanges: ${changesMsgs.join('; ')}`)
     }
-    /**
-     * @return {?}
-     */
-    baseAfterContentInit3() {
-        console.log('baseAfterContentInit');
-        if (this.itemsa.length < 2) {
-            return;
-        }
-        this.itemsa.forEach(item => {
-            if (item.nativeElement == this._nativeElement) {
-                return;
-            }
-            if (item.nativeElement != undefined) {
-                //console.log('parent: ' + this.ext.xtype + ', child: ' + 'container')
-                this.ext.add({ xtype: 'container', html: item.nativeElement });
-            }
-            else {
-                if (item['ext'] != undefined) {
-                    //console.log('parent: ' + this.ext.xtype + ', child: ' + item.ext.xtype)
-                    /** @type {?} */
-                    var parentxtype = this.ext.xtype;
-                    /** @type {?} */
-                    var childxtype = item['ext'].xtype;
-                    /** @type {?} */
-                    var parentCmp = this.ext;
-                    /** @type {?} */
-                    var childCmp = item['ext'];
-                    if (parentxtype === 'grid') {
-                        if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
-                            parentCmp.addColumn(childCmp);
-                        }
-                        else if (parentCmp.add != undefined) {
-                            parentCmp.add(childCmp);
-                        }
-                    }
-                    else if (childxtype === 'tooltip') {
-                        parentCmp.setTooltip(childCmp);
-                    }
-                    else if (childxtype === 'plugin') {
-                        parentCmp.setPlugin(childCmp);
-                    }
-                    else if (parentxtype === 'button') {
-                        if (childxtype === 'menu') {
-                            parentCmp.setMenu(childCmp);
-                        }
-                        else {
-                            console.log('child not added');
-                        }
-                    }
-                    else if (childxtype === 'toolbar' && Ext.isClassic === true) {
-                        parentCmp.addDockedItems(childCmp);
-                    }
-                    else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
-                        if (parentCmp.getHideHeaders() === false) {
-                            /** @type {?} */
-                            var j = parentCmp.items.items.length;
-                            parentCmp.insert(j - 1, childCmp);
-                        }
-                        else {
-                            parentCmp.add(childCmp);
-                        }
-                    }
-                    else if (parentCmp.add != undefined) {
-                        parentCmp.add(childCmp);
-                    }
-                    else {
-                        console.log('child not added');
-                    }
-                }
-                else {
-                    console.log('child not handled');
-                }
-            }
-        });
-        //this['ready'].emit(parentCmp)
-        this['ready'].emit(this);
-    }
 }
 base.propDecorators = {
-    items: [{ type: ContentChildren, args: ['item',] }],
-    items2: [{ type: ContentChildren, args: ['item', { read: ElementRef },] }],
     _items: [{ type: ContentChildren, args: ['item',] }],
     _elRefItems: [{ type: ContentChildren, args: ['item', { read: ElementRef },] }],
-    itemsa: [{ type: ContentChildren, args: ['item',] }]
+    items: [{ type: ContentChildren, args: ['item',] }],
+    items2: [{ type: ContentChildren, args: ['item', { read: ElementRef },] }]
 };
 
 /**

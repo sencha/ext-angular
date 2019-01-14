@@ -21,7 +21,6 @@ export class ButtonComponent implements OnInit  {
   menuButtons = [];
 
   menuButtonReady = function(event) {
-    console.log("button ready : " + event.ext);
     this.menuButtons.push(event.ext);
   }
 
