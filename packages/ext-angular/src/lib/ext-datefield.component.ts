@@ -1,4 +1,7 @@
 import {
+  ComponentFactoryResolver,
+  ViewContainerRef,
+  ChangeDetectorRef,
   Injectable,
   Host,
   Optional,
@@ -11,6 +14,7 @@ import {
   ElementRef,
   forwardRef
 } from '@angular/core';
+//import { RouterOutlet, ChildrenOutletContexts } from "@angular/router";
 import { base } from './base';
 export class datefieldMetaData {
   public static XTYPE: string = 'datefield';
@@ -465,7 +469,15 @@ export class datefieldMetaData {
   template: '<ng-template></ng-template>'
 })
 export class ExtDatefieldComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,datefieldMetaData,hostComponent)}
+  constructor(
+  //      private parentContexts: ChildrenOutletContexts,
+        private location: ViewContainerRef,
+        private resolver: ComponentFactoryResolver, 
+        private changeDetector: ChangeDetectorRef,
+    eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {
+      super(eRef,eRef.nativeElement,datefieldMetaData,hostComponent)
+      console.log(location)
+    }
   //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datefieldMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(datefieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}

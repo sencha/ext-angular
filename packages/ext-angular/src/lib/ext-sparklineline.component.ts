@@ -1,4 +1,7 @@
 import {
+  ComponentFactoryResolver,
+  ViewContainerRef,
+  ChangeDetectorRef,
   Injectable,
   Host,
   Optional,
@@ -11,6 +14,7 @@ import {
   ElementRef,
   forwardRef
 } from '@angular/core';
+//import { RouterOutlet, ChildrenOutletContexts } from "@angular/router";
 import { base } from './base';
 export class sparklinelineMetaData {
   public static XTYPE: string = 'sparklineline';
@@ -379,7 +383,15 @@ export class sparklinelineMetaData {
   template: '<ng-template></ng-template>'
 })
 export class ExtSparklinelineComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,sparklinelineMetaData,hostComponent)}
+  constructor(
+  //      private parentContexts: ChildrenOutletContexts,
+        private location: ViewContainerRef,
+        private resolver: ComponentFactoryResolver, 
+        private changeDetector: ChangeDetectorRef,
+    eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {
+      super(eRef,eRef.nativeElement,sparklinelineMetaData,hostComponent)
+      console.log(location)
+    }
   //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinelineMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(sparklinelineMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}

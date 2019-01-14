@@ -1,4 +1,7 @@
 import {
+  ComponentFactoryResolver,
+  ViewContainerRef,
+  ChangeDetectorRef,
   Injectable,
   Host,
   Optional,
@@ -11,6 +14,7 @@ import {
   ElementRef,
   forwardRef
 } from '@angular/core';
+//import { RouterOutlet, ChildrenOutletContexts } from "@angular/router";
 import { base } from './base';
 export class fieldcontainerMetaData {
   public static XTYPE: string = 'fieldcontainer';
@@ -401,7 +405,15 @@ export class fieldcontainerMetaData {
   template: '<ng-template></ng-template>'
 })
 export class ExtFieldcontainerComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,fieldcontainerMetaData,hostComponent)}
+  constructor(
+  //      private parentContexts: ChildrenOutletContexts,
+        private location: ViewContainerRef,
+        private resolver: ComponentFactoryResolver, 
+        private changeDetector: ChangeDetectorRef,
+    eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {
+      super(eRef,eRef.nativeElement,fieldcontainerMetaData,hostComponent)
+      console.log(location)
+    }
   //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldcontainerMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(fieldcontainerMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}

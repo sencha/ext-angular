@@ -1,4 +1,7 @@
 import {
+  ComponentFactoryResolver,
+  ViewContainerRef,
+  ChangeDetectorRef,
   Injectable,
   Host,
   Optional,
@@ -11,6 +14,7 @@ import {
   ElementRef,
   forwardRef
 } from '@angular/core';
+//import { RouterOutlet, ChildrenOutletContexts } from "@angular/router";
 import { base } from './base';
 export class sliderfieldMetaData {
   public static XTYPE: string = 'sliderfield';
@@ -415,7 +419,15 @@ export class sliderfieldMetaData {
   template: '<ng-template></ng-template>'
 })
 export class ExtSliderfieldComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,sliderfieldMetaData,hostComponent)}
+  constructor(
+  //      private parentContexts: ChildrenOutletContexts,
+        private location: ViewContainerRef,
+        private resolver: ComponentFactoryResolver, 
+        private changeDetector: ChangeDetectorRef,
+    eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {
+      super(eRef,eRef.nativeElement,sliderfieldMetaData,hostComponent)
+      console.log(location)
+    }
   //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sliderfieldMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(sliderfieldMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}

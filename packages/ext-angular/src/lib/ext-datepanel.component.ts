@@ -1,4 +1,7 @@
 import {
+  ComponentFactoryResolver,
+  ViewContainerRef,
+  ChangeDetectorRef,
   Injectable,
   Host,
   Optional,
@@ -11,6 +14,7 @@ import {
   ElementRef,
   forwardRef
 } from '@angular/core';
+//import { RouterOutlet, ChildrenOutletContexts } from "@angular/router";
 import { base } from './base';
 export class datepanelMetaData {
   public static XTYPE: string = 'datepanel';
@@ -537,7 +541,15 @@ export class datepanelMetaData {
   template: '<ng-template></ng-template>'
 })
 export class ExtDatepanelComponent extends base implements OnInit,AfterContentInit,OnChanges {
-  constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {super(eRef.nativeElement,datepanelMetaData,hostComponent)}
+  constructor(
+  //      private parentContexts: ChildrenOutletContexts,
+        private location: ViewContainerRef,
+        private resolver: ComponentFactoryResolver, 
+        private changeDetector: ChangeDetectorRef,
+    eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {
+      super(eRef,eRef.nativeElement,datepanelMetaData,hostComponent)
+      console.log(location)
+    }
   //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepanelMetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit(datepanelMetaData)}
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}

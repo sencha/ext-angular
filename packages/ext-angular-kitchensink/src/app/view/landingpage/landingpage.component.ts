@@ -53,9 +53,31 @@ declare var _code: any;
   encapsulation: ViewEncapsulation.None,
 })
 export class LandingpageComponent implements OnInit {
+  ANGULAR_VERSION: any = VERSION.full
+  titlebarHtml = `
+  <span class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></span>
+  <a extjs href="#" class="app-title">ExtAngular Kitchen Sink - Angular v${this.ANGULAR_VERSION}</a>
+  `
+  routerHtml = `
+  <router-outlet></router-outlet>hi
+  `
+
+  router2Html = `
+  <div 
+  [style]="{padding:30}">
+  <router-outlet></router-outlet>hi
+  </div>
+  `
+
   showCode: boolean = false;
   files: Array<any> = [];
-  ANGULAR_VERSION: any = VERSION.full
+
+
+
+
+
+
+
   node: any
   node$: any = new Subject()
   breadcrumb: Array<any>
@@ -129,7 +151,7 @@ export class LandingpageComponent implements OnInit {
         this.breadcrumb = generateBreadcrumb(v);
         //console.log(`BREADCRUMB: ${JSON.stringify(this.breadcrumb.map(b => b.text))}`);
         if(this.node.childNodes.length == 0) {
-          this.blockstyle = {'background':'top','display':'none','text-align':'center'}
+          this.blockstyle = {'background':'top','display':'block','text-align':'center'}
           if (this.theDataview != undefined) {
             this.theDataview.setData(null)
             this.theDataview.setData(null)

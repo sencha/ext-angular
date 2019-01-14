@@ -9,14 +9,10 @@ import { Component, ViewEncapsulation } from '@angular/core'
   template: `
 
 
-  <panel [layout]="'fit'" [fitToParent]="true"
-  [bodyStyle]="'backgroundSize: 20px 20px;backgroundColor: #e8e8e8;backgroundImage: linear-gradient(0deg, #f5f5f5 1.1px, transparent 0), linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)'"
-  >
+  <panel [layout]="'fit'" [fitToParent]="true" [bodyStyle]="'backgroundSize: 20px 20px;backgroundColor: #e8e8e8;backgroundImage: linear-gradient(0deg, #f5f5f5 1.1px, transparent 0), linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)'">
     <titlebar [docked]="'top'" [shadow]="true" [flex]="1">
       <button [selfAlign]="'left'" [iconCls]="'x-fa fa-bars'" (tap)="toggleTree()"></button>
-      <container [layout]="'hbox'" [fitToParent]="true">
-        <div #extjs class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></div>
-        <a #extjs href="#" class="app-title">ExtAngular Kitchen Sink - Angular v{{ANGULAR_VERSION}}</a>
+      <container [html]="theHtml">
       </container>
     </titlebar>
   </panel>
@@ -24,6 +20,16 @@ import { Component, ViewEncapsulation } from '@angular/core'
   `
 })
 export class AppComponent {
+  theHtml = `
+  <span class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></span>
+  <a extjs href="#" class="app-title">ExtAngular Kitchen Sink - Angular v{{ANGULAR_VERSION}}</a>
+  `
+
+//   <container [layout]="'hbox'" [fitToParent]="true">
+//   <div #extjs class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></div>
+//   <a #extjs href="#" class="app-title">ExtAngular Kitchen Sink - Angular v{{ANGULAR_VERSION}}</a>
+// </container>
+
 
   //<container [layout]="'fit'" [fitToParent]="true">
   //  <div #item>hello</div>
