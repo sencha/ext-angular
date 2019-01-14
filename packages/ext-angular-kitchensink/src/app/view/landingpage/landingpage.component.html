@@ -60,13 +60,13 @@
   [width]="'33%'" 
   [collapsible]="{ direction: 'right' }"
   [collapsed]="!showCode">
-    <tabpanel #item
+    <tabpanel #item [fitToParent]="true"
     [shadow]="true"
     [tabBar]="{layout: {pack: 'left'}}">
       <panel #item *ngFor="let file of files" [hidden]="files.length > 0 ? false: true"
       [scrollable]="true"
       [title]="file.name"
-      [ui]="'code-panel2'"
+      [ui]="'code-panel'"
       tab="{ui: 'app-code-tab', flex: 0, minWidth: 120}"
       [userSelectable]="{element: true, bodyElement: true}"
       [html]="file.code">

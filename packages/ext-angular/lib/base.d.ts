@@ -9,13 +9,12 @@ export declare class base {
     constructor(nativeElement: any, metaData: any, hostComponent: base);
     baseOnInit(metaData: any): void;
     ngOnDestroy(): void;
-    items: QueryList<any>;
-    items2: QueryList<ElementRef>;
-    baseAfterContentInit(): void;
     _items: QueryList<any>;
     _elRefItems: QueryList<ElementRef>;
-    baseAfterContentInitngFor(): void;
+    baseAfterContentInit(): void;
+    addTheChild(parentCmp: any, childCmp: any): void;
+    items: QueryList<any>;
+    items2: QueryList<ElementRef>;
+    baseAfterContentInitOrig(): void;
     ngOnChanges(changes: SimpleChanges): void;
-    itemsa: QueryList<any>;
-    baseAfterContentInit3(): void;
 }
