@@ -1,10 +1,14 @@
-<container #item layout="fit" shadow="true" [fitToParent]="true">
-    <grid #item shadow="true" [store]="this.store">
-        <toolbar #item docked="top">
-            <searchfield #item ui="faded" placeholder="Search..." (change)="this.onSearch($event)" [responsiveConfig]="searchresponsiveConfig"></searchfield>
-        </toolbar>
-        <column #item text="Name" dataIndex="name" flex="2" resizable="true"></column>
-        <column #item text="Email" dataIndex="email" flex="3" resizable="true" [responsiveConfig]="emailresponsiveConfig"></column>
-        <column #item text="Phone" dataIndex="phone" flex="2" resizable="true"></column>
-    </grid>
+
+<container 
+  padding="20"
+  layout="fit" 
+  [fitToParent]="true">
+  <grid shadow="true" [store]="this.store">
+    <toolbar docked="top">
+      <searchfield ui="faded" placeholder="Search..." (change)="this.onSearch($event)" [responsiveConfig]="searchresponsiveConfig"></searchfield>
+    </toolbar>
+    <column text="Name" dataIndex="name" flex="2" resizable="true"></column>
+    <column text="Email" dataIndex="email" flex="3" resizable="true" [responsiveConfig]="emailresponsiveConfig"></column>
+    <column text="Phone" dataIndex="phone" flex="2" resizable="true"></column>
+  </grid>
 </container>
