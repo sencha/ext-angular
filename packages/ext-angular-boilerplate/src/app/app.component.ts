@@ -1,13 +1,15 @@
 import { Component, VERSION } from '@angular/core'
 import { Router } from '@angular/router'
 
+declare var Ext: any;
+Ext.require('Ext.data.TreeStore')
 @Component({
 	selector: 'app-root',
 	templateUrl: 'app.component.html',
 	styles: [``]
 })
 export class AppComponent {
-
+  isPhone = Ext.platformTags.phone;
   title = 'ExtAngular Boilerplate - Angular v' + VERSION.full
 
   constructor(private router: Router) {}
