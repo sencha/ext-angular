@@ -1,11 +1,8 @@
 <container fullscreen="true" [layout]="'fit'">
 
-<!--
   <titlebar [title]="title" docked="top">
     <button align="left" *ngIf="isPhone" iconCls="x-fa fa-bars" [handler]="this.toggleAppMenu" ripple="false"></button>
   </titlebar>
--->
-
 
   <panel docked="left" shadow="true">
     <treelist 
@@ -21,34 +18,5 @@
   <container [fitToParent]="true" [layout]="'fit'" [padding]="30">
     <router-outlet #extroute></router-outlet>
   </container>
-
-
-    <!--
-  <container [html]="routerHtml"></container>
-
-  <container [fitToParent]="true" [layout]="'fit'" [padding]="30">
-    <router-outlet #extjs></router-outlet>
-  </container>
-
-
-    <div #extjs>About this App</div>
-
-
-  <panel *ngIf="!isPhone"  scrollable="true" docked="left" shadow="true" zIndex="2">
-
-    <app-navmenu 
-      [store]="navStore"
-      [selectionChanged]="navigate"
-      [responsiveConfig]="responsiveConfig">
-    </app-navmenu>
-
-  </panel>
-  <container [fitToParent]="true" [layout]="'fit'">
-    <router-outlet #extjs></router-outlet>
-  </container>
-
-
-      -->
-
 
 </container>
