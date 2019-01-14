@@ -6,12 +6,10 @@ export declare class base {
     private _nativeElement;
     private _hostComponent;
     private _extChildren;
-    constructor(nativeElement: any, metaData: any, hostComponent: base);
+    constructor(eRef: any, nativeElement: any, metaData: any, hostComponent: base);
     baseOnInit(metaData: any): void;
     ngOnDestroy(): void;
-    _itemsview: QueryList<any>;
-    _items: QueryList<any>;
-    _elRefItems: QueryList<ElementRef>;
+    _extroute: any;
     baseAfterContentInit(): void;
     addTheChild(parentCmp: any, childCmp: any): void;
     items: QueryList<any>;

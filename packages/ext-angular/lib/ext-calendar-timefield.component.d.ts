@@ -1,4 +1,4 @@
-import { OnInit, AfterContentInit, OnChanges, ElementRef } from '@angular/core';
+import { ComponentFactoryResolver, ViewContainerRef, ChangeDetectorRef, OnInit, AfterContentInit, OnChanges, ElementRef } from '@angular/core';
 import { base } from './base';
 export declare class calendar_timefieldMetaData {
     static XTYPE: string;
@@ -8,8 +8,11 @@ export declare class calendar_timefieldMetaData {
     static EVENTNAMES: string[];
 }
 export declare class ExtCalendar_timefieldComponent extends base implements OnInit, AfterContentInit, OnChanges {
+    private location;
+    private resolver;
+    private changeDetector;
     hostComponent: base;
-    constructor(eRef: ElementRef, hostComponent: base);
+    constructor(location: ViewContainerRef, resolver: ComponentFactoryResolver, changeDetector: ChangeDetectorRef, eRef: ElementRef, hostComponent: base);
     ngOnInit(): void;
     ngAfterContentInit(): void;
 }

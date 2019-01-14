@@ -1,27 +1,14 @@
-<container #item fullscreen="true" [layout]="'fit'">
+<container fullscreen="true" [layout]="'fit'">
 
-  <titlebar #item [title]="this.title" docked="top">
-    <button #item align="left" *ngIf="isPhone" iconCls="x-fa fa-bars" [handler]="this.toggleAppMenu" ripple="false"></button>
+<!--
+  <titlebar [title]="title" docked="top">
+    <button align="left" *ngIf="isPhone" iconCls="x-fa fa-bars" [handler]="this.toggleAppMenu" ripple="false"></button>
   </titlebar>
+-->
 
-  <sheet #item *ngIf="isPhone" [displayed]="showAppMenu" side="left" (hide)="this.onHideAppMenu()">
-    <panel #item scrollable="true" title="ExtAngular Boilerplate">
-      <treelist #item 
-        [width]="250" 
-        ui="nav" 
-        expanderFirst="false" 
-        (selectionchange)="navigate($event)" 
-        [store]="navStore"
-        [responsiveConfig]="responsiveConfig">
-      </treelist>
-      <!--
-      <app-navmenu #item [store]="navStore" [width]="250" [selectionChanged]="navigate"></app-navmenu>
-      -->
-    </panel>
-  </sheet>
 
-  <panel #item *ngIf="!isPhone"  scrollable="true" docked="left" shadow="true" zIndex="2">
-    <treelist #item 
+  <panel docked="left" shadow="true">
+    <treelist 
       [width]="width" 
       ui="nav" 
       expanderFirst="false" 
@@ -29,16 +16,39 @@
       [store]="navStore"
       [responsiveConfig]="responsiveConfig">
     </treelist>
+  </panel>
+
+  <container [fitToParent]="true" [layout]="'fit'" [padding]="30">
+    <router-outlet #extroute></router-outlet>
+  </container>
+
+
     <!--
-    <app-navmenu #item 
+  <container [html]="routerHtml"></container>
+
+  <container [fitToParent]="true" [layout]="'fit'" [padding]="30">
+    <router-outlet #extjs></router-outlet>
+  </container>
+
+
+    <div #extjs>About this App</div>
+
+
+  <panel *ngIf="!isPhone"  scrollable="true" docked="left" shadow="true" zIndex="2">
+
+    <app-navmenu 
       [store]="navStore"
       [selectionChanged]="navigate"
       [responsiveConfig]="responsiveConfig">
     </app-navmenu>
-    -->
+
   </panel>
-  <container #item [layout]="{ type: 'fit', align: 'stretch' }" [scrollable]="true">
-    <router-outlet #item></router-outlet>
+  <container [fitToParent]="true" [layout]="'fit'">
+    <router-outlet #extjs></router-outlet>
   </container>
+
+
+      -->
+
 
 </container>

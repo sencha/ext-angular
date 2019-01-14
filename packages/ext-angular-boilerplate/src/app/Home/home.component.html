@@ -1,4 +1,4 @@
-<container #item layout="fit" shadow="true" height="600px">
+<container #item layout="fit" shadow="true" [fitToParent]="true">
     <grid #item shadow="true" [store]="this.store">
         <toolbar #item docked="top">
             <searchfield #item ui="faded" placeholder="Search..." (change)="this.onSearch($event)" [responsiveConfig]="searchresponsiveConfig"></searchfield>
