@@ -23,6 +23,10 @@ module.exports = function (env) {
         mainPath: "./src/main.ts",
         skipCodeGeneration: true
       }),
+      new HtmlWebpackPlugin({
+        template: "index.html",
+        inject: "body"
+      }),
       new ExtWebpackPlugin({
         framework: 'angular',
         port: port,
@@ -37,10 +41,6 @@ module.exports = function (env) {
           'ux',
           'treegrid'
         ]
-      }),
-      new HtmlWebpackPlugin({
-        template: "index.html",
-        inject: "body"
       }),
       new webpack.ContextReplacementPlugin(
           /\@angular(\\|\/)core(\\|\/)fesm5/,
