@@ -1,24 +1,24 @@
-<panel #item [layout]="'fit'" [fitToParent]="true"
+<panel [layout]="'fit'" [fitToParent]="true"
 [bodyStyle]="'backgroundSize: 20px 20px;backgroundColor: #e8e8e8;backgroundImage: linear-gradient(0deg, #f5f5f5 1.1px, transparent 0), linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)'"
 >
-  <titlebar #item [docked]="'top'" [shadow]="true" [flex]="1">
-    <button #item [selfAlign]="'left'" [iconCls]="'x-fa fa-bars'" (tap)="toggleTree()"></button>
-    <container #item [layout]="'hbox'">
-      <div #item class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></div>
-      <a #item href="#" class="app-title">ExtAngular Kitchen Sink - Angular v{{ANGULAR_VERSION}}</a>
+  <titlebar [docked]="'top'" [shadow]="true" [flex]="1">
+    <button [selfAlign]="'left'" [iconCls]="'x-fa fa-bars'" (tap)="toggleTree()"></button>
+    <container [layout]="'hbox'" [fitToParent]="true">
+      <div #extjs class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></div>
+      <a #extjs href="#" class="app-title">ExtAngular Kitchen Sink - Angular v{{ANGULAR_VERSION}}</a>
     </container>
   </titlebar>
 
   <!-- Breadcrumb starts-->
-  <toolbar #item [docked]="'top'">
-    <dataview #item [centered]="false" [itemTpl]="tplToolbar" [inline]="'true'" [itemCls]="'div.app-toolbar'" id="hide-overflow"
+  <toolbar [docked]="'top'">
+    <dataview [centered]="false" [itemTpl]="tplToolbar" [inline]="'true'" [itemCls]="'div.app-toolbar'" id="hide-overflow"
       (childtap)="doClickToolbar($event)" (ready)="dataviewToolbarReady($event)">
     </dataview>
   </toolbar>
   <!-- Breadcrumb ends-->
 
   <!-- Navtree starts-->
-  <panel #item
+  <panel 
   [docked]="'left'"
   [flex]="1"
   [scrollable]="'y'"
@@ -29,13 +29,13 @@
   [width]="'300'"
   [collapsible]="{ direction: 'left' }"
   [collapsed]="!showTreeFlag">
-    <searchfield #item [flex]="1" [docked]="'top'" [ui]="'faded'" (change)="filterNav($event)" [margin]="7"></searchfield>
-    <treelist #item [ui]="'nav'" [expanderFirst]="false" [expanderOnly]="false" [store]="treeStore" (selectionchange)="selectionChanged($event)"></treelist>
+    <searchfield [flex]="1" [docked]="'top'" [ui]="'faded'" (change)="filterNav($event)" [margin]="7"></searchfield>
+    <treelist [ui]="'nav'" [expanderFirst]="false" [expanderOnly]="false" [store]="treeStore" (selectionchange)="selectionChanged($event)"></treelist>
   </panel>
   <!-- Navtree ends-->
 
   <!-- code button starts-->
-  <button #item
+  <button 
   [hidden]="files.length > 0 ? false: true"
   [iconCls]="'x-font-icon ' + (showCode ? 'md-icon-close' : 'md-icon-code')"
   [ui]="'fab'"
@@ -47,7 +47,7 @@
   <!-- code button ends-->
 
   <!-- code start-->
-  <panel #item
+  <panel 
   [docked]="'right'"
   [hidden]="files.length > 0 ? false: true" 
   [flex]="2"
@@ -60,10 +60,10 @@
   [width]="'33%'" 
   [collapsible]="{ direction: 'right' }"
   [collapsed]="!showCode">
-    <tabpanel #item [fitToParent]="true"
+    <tabpanel [fitToParent]="true"
     [shadow]="true"
     [tabBar]="{layout: {pack: 'left'}}">
-      <panel #item *ngFor="let file of files" [hidden]="files.length > 0 ? false: true"
+      <panel *ngFor="let file of files" [hidden]="files.length > 0 ? false: true"
       [scrollable]="true"
       [title]="file.name"
       [ui]="'code-panel'"
@@ -76,9 +76,10 @@
   <!-- code ends-->
 
   <!-- examples start-->
-  <container #item [scrollable]="true" [padding]="30" [layout]="'fit'" [fitToParent]="true">
-    <router-outlet #item></router-outlet>
-    <dataview #item [fitToParent]="true" 
+  <container [scrollable]="true" [padding]="30" [layout]="'fit'" [fitToParent]="true">
+    <div #extjs><router-outlet></router-outlet></div>
+    
+    <dataview [fitToParent]="true" 
       [style]= "blockstyle"
       [itemTpl]="tpl"
       [inline]="true"
