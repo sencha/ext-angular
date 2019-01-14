@@ -7,24 +7,33 @@ import { Component, ViewEncapsulation } from '@angular/core'
   //styles: [``],
   styles:[require('./app.component.css').toString()],
   template: `
-  <panel #item [layout]="'fit'" [fitToParent]="true"
+
+
+  <panel [layout]="'fit'" [fitToParent]="true"
   [bodyStyle]="'backgroundSize: 20px 20px;backgroundColor: #e8e8e8;backgroundImage: linear-gradient(0deg, #f5f5f5 1.1px, transparent 0), linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)'"
->
-  <titlebar #item
-      [docked]="'top'"
-      [shadow]="true"
-      [flex]="1"
-    >
-      <button #item [selfAlign]="'left'" [iconCls]="'x-fa fa-bars'"></button>
-      <container #item [layout]="'hbox'">
-        <div #item class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></div>
-        <a #item href="#" class="app-title">ExtAngular Kitchen Sink - Angular v{{ANGULAR_VERSION}}</a>
+  >
+    <titlebar [docked]="'top'" [shadow]="true" [flex]="1">
+      <button [selfAlign]="'left'" [iconCls]="'x-fa fa-bars'" (tap)="toggleTree()"></button>
+      <container [layout]="'hbox'" [fitToParent]="true">
+        <div #extjs class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></div>
+        <a #extjs href="#" class="app-title">ExtAngular Kitchen Sink - Angular v{{ANGULAR_VERSION}}</a>
       </container>
     </titlebar>
   </panel>
+
   `
 })
 export class AppComponent {
+
+  //<container [layout]="'fit'" [fitToParent]="true">
+  //  <div #item>hello</div>
+  //  <button [handler]="clickContact" *ngFor="let person of people" [text]=person.name></button>
+  //</container>
+
+
+
+  //     <button [handler]="clickContact" *ngFor="let person of people" [text]=person.name></button>
+
   divData = '124'
   divData2 = '<div>\"456\'</div>'
 
@@ -44,10 +53,6 @@ export class AppComponent {
       }
     ]
   }
-
-
-
-
 
   people: any[] = [
     {
@@ -72,6 +77,24 @@ export class AppComponent {
     }
   ]
 }
+
+// <panel #item [layout]="'fit'" [fitToParent]="true"
+// [bodyStyle]="'backgroundSize: 20px 20px;backgroundColor: #e8e8e8;backgroundImage: linear-gradient(0deg, #f5f5f5 1.1px, transparent 0), linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)'"
+// >
+// <titlebar #item
+//     [docked]="'top'"
+//     [shadow]="true"
+//     [flex]="1"
+//   >
+//     <button #item [selfAlign]="'left'" [iconCls]="'x-fa fa-bars'"></button>
+//     <container #item [layout]="'hbox'">
+//       <div #item class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></div>
+//       <a #item href="#" class="app-title">ExtAngular Kitchen Sink - Angular v{{ANGULAR_VERSION}}</a>
+//     </container>
+//   </titlebar>
+// </panel>
+
+
 
 // <container #item [layout]="'hbox'">
 // <div #item class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></div>

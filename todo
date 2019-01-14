@@ -5,6 +5,7 @@ Issues
         bound data changes.  This is preventing the following from working as desired - Code Preview 
         (you muist reload the page to see the correct code preview panels).
 
+ - hightlight.js
 
  - tree-shaking 
     - [Alisha] in plugin: tree shake the typescript ExtAngular files (Aniket to review error/ Marc to check treeshaking changes)

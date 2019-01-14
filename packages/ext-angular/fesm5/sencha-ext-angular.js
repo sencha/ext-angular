@@ -1,5 +1,5 @@
 import { __extends } from 'tslib';
-import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, Component, ElementRef, EventEmitter, ContentChildren, NgModule, defineInjectable, inject, INJECTOR, forwardRef, Host, Optional, SkipSelf } from '@angular/core';
+import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, Component, ElementRef, EventEmitter, ContentChildren, ViewChildren, NgModule, defineInjectable, inject, INJECTOR, forwardRef, Host, Optional, SkipSelf } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -195,7 +195,7 @@ var base = /** @class */ (function () {
     function () {
         console.log("ngOnDestroy");
         try {
-            console.log(this);
+            //console.log(this)
             //console.log(this.ext)
             //console.log(this._hostComponent)
             //console.log(this._hostComponent.ext)
@@ -218,6 +218,50 @@ var base = /** @class */ (function () {
      * @return {?}
      */
     function () {
+        console.log('baseAfterContentInit');
+        console.log(this.ext.xtype);
+        console.log(this._items);
+        console.log(this._itemsview);
+        if (this._hostComponent == null) {
+            console.log('root');
+            console.log(this._items);
+            /** @type {?} */
+            var anyItems = [];
+            /** @type {?} */
+            var elRefItems = [];
+            this._items.forEach(function (item) { anyItems.push(item); });
+            this._elRefItems.forEach(function (item) { elRefItems.push(item); });
+            for (var i in anyItems) {
+                /** @type {?} */
+                var item = anyItems[i];
+                /** @type {?} */
+                var elRefItem = elRefItems[i];
+                if (item.nativeElement != undefined) {
+                    console.log('here');
+                    this.ext.add({ xtype: 'container', html: item.nativeElement });
+                }
+                else {
+                    console.log('not supported');
+                }
+            }
+        }
+        else {
+            console.log(this._hostComponent.ext.xtype);
+            /** @type {?} */
+            var parentCmp = this._hostComponent.ext;
+            /** @type {?} */
+            var childCmp = this.ext;
+            this.addTheChild(parentCmp, childCmp);
+        }
+        return;
+        //        if (item.nativeElement != undefined) {
+        //          this.ext.add({xtype: 'container',html: item.nativeElement})
+        //        }
+        //        else {
+        //          var parentCmp = this.ext
+        //          var childCmp = item.ext
+        //          this.addTheChild(parentCmp,childCmp)
+        //        }
         //    console.log('host')
         //    console.log(this._hostComponent)
         //    console.log('native')
@@ -230,18 +274,29 @@ var base = /** @class */ (function () {
             return;
         }
         else if (this._items.length > 0) {
-            //console.error('do it')
+            console.error('do it');
             if (this._items.length < 2) {
-                //console.error('only 1 item')
+                console.error('only 1 item');
+                console.log(this._hostComponent);
                 //console.log(this._items)
+                //  if (item.nativeElement != undefined) {
+                //    this.ext.add({xtype: 'container',html: item.nativeElement})
+                //  }
+                //  else {
+                //    var parentCmp = this.ext
+                //    var childCmp = item.ext
+                //    this.addTheChild(parentCmp,childCmp)
+                //  }
                 return;
             }
             //console.log(this._items.length + ' items')
-            //console.log('doing something')
+            console.log('doing something');
             /** @type {?} */
             var anyItems = [];
+            /** @type {?} */
+            var elRefItems = [];
             this._items.forEach(function (item) { anyItems.push(item); });
-            this._elRefItems.forEach(function (item) { });
+            this._elRefItems.forEach(function (item) { elRefItems.push(item); });
             /** @type {?} */
             var j = 0;
             for (var i in anyItems) {
@@ -251,6 +306,8 @@ var base = /** @class */ (function () {
                 }
                 /** @type {?} */
                 var item = anyItems[i];
+                /** @type {?} */
+                var elRefItem = elRefItems[i];
                 if (item.nativeElement != undefined) {
                     //          console.log('native')
                     //          console.log('parent: ' + this.ext.xtype)
@@ -554,8 +611,9 @@ var base = /** @class */ (function () {
         //console.log(`OnChanges: ${changesMsgs.join('; ')}`)
     };
     base.propDecorators = {
-        _items: [{ type: ContentChildren, args: ['item',] }],
-        _elRefItems: [{ type: ContentChildren, args: ['item', { read: ElementRef },] }],
+        _itemsview: [{ type: ViewChildren, args: ['extjs',] }],
+        _items: [{ type: ContentChildren, args: ['extjs',] }],
+        _elRefItems: [{ type: ContentChildren, args: ['extjs', { read: ElementRef },] }],
         items: [{ type: ContentChildren, args: ['item',] }],
         items2: [{ type: ContentChildren, args: ['item', { read: ElementRef },] }]
     };

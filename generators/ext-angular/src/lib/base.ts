@@ -6,6 +6,7 @@ import {
   ElementRef,
   EventEmitter,
   ContentChildren,
+  ViewChildren,
   QueryList,
   SimpleChanges
 } from '@angular/core'
@@ -101,7 +102,7 @@ export class base {
   ngOnDestroy() {
     console.log(`ngOnDestroy`)
     try {
-      console.log(this)
+      //console.log(this)
       //console.log(this.ext)
       //console.log(this._hostComponent)
       //console.log(this._hostComponent.ext)
@@ -116,9 +117,56 @@ export class base {
     }
   }
 
-@ContentChildren('item') _items: QueryList<any>
-  @ContentChildren('item', { read: ElementRef }) _elRefItems: QueryList<ElementRef>
+  @ViewChildren('extjs') _itemsview: QueryList<any>
+  @ContentChildren('extjs') _items: QueryList<any>
+  @ContentChildren('extjs', { read: ElementRef }) _elRefItems: QueryList<ElementRef>
   baseAfterContentInit() {
+    console.log('baseAfterContentInit')
+    console.log(this.ext.xtype)
+    console.log(this._items)
+    console.log(this._itemsview)
+    if(this._hostComponent == null) {
+      console.log('root')
+      console.log(this._items)
+
+      var anyItems: any[] = []
+      var elRefItems: any[] = []
+      this._items.forEach(item => {anyItems.push(item)})
+      this._elRefItems.forEach(item => {elRefItems.push(item)})
+
+      for (var i in anyItems) {
+        var item = anyItems[i]
+        var elRefItem = elRefItems[i]
+        if (item.nativeElement != undefined) {
+          console.log('here')
+          this.ext.add({xtype: 'container',html: item.nativeElement})
+        }
+        else {
+          console.log('not supported')
+        }
+      }
+
+    }
+    else {
+      console.log(this._hostComponent.ext.xtype)
+        var parentCmp = this._hostComponent.ext
+        var childCmp = this.ext
+        this.addTheChild(parentCmp,childCmp)
+    }
+    return
+
+//        if (item.nativeElement != undefined) {
+//          this.ext.add({xtype: 'container',html: item.nativeElement})
+//        }
+//        else {
+//          var parentCmp = this.ext
+//          var childCmp = item.ext
+//          this.addTheChild(parentCmp,childCmp)
+//        }
+
+
+
+
 //    console.log('host')
 //    console.log(this._hostComponent)
 //    console.log('native')
@@ -133,14 +181,28 @@ export class base {
       return
     }
     else if (this._items.length > 0) {
-      //console.error('do it')
+      console.error('do it')
       if (this._items.length < 2) {
-        //console.error('only 1 item')
+        console.error('only 1 item')
+        console.log(this._hostComponent)
         //console.log(this._items)
+
+      //  if (item.nativeElement != undefined) {
+      //    this.ext.add({xtype: 'container',html: item.nativeElement})
+      //  }
+      //  else {
+      //    var parentCmp = this.ext
+      //    var childCmp = item.ext
+      //    this.addTheChild(parentCmp,childCmp)
+      //  }
+
+
+
+
         return
       }
       //console.log(this._items.length + ' items')
-      //console.log('doing something')
+      console.log('doing something')
 
       var anyItems: any[] = []
       var elRefItems: any[] = []

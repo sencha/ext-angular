@@ -9,6 +9,7 @@ export declare class base {
     constructor(nativeElement: any, metaData: any, hostComponent: base);
     baseOnInit(metaData: any): void;
     ngOnDestroy(): void;
+    _itemsview: QueryList<any>;
     _items: QueryList<any>;
     _elRefItems: QueryList<ElementRef>;
     baseAfterContentInit(): void;
