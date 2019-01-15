@@ -1,4 +1,4 @@
-import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, Component, ViewContainerRef, ChangeDetectorRef, Host, Optional, SkipSelf, ElementRef, forwardRef, EventEmitter, ContentChild, ContentChildren, NgModule, defineInjectable, inject, INJECTOR } from '@angular/core';
+import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, Component, Host, Optional, SkipSelf, ElementRef, forwardRef, EventEmitter, ContentChild, ContentChildren, NgModule, defineInjectable, inject, INJECTOR } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -89,17 +89,15 @@ ExtAngularBootstrapComponent.ctorParameters = () => [
  */
 class base {
     /**
-     * @param {?} eRef
      * @param {?} nativeElement
      * @param {?} metaData
      * @param {?} hostComponent
      */
-    constructor(eRef, nativeElement, metaData, hostComponent) {
+    constructor(nativeElement, metaData, hostComponent) {
         this.metaData = metaData;
         this.hostComponent = hostComponent;
         this._extChildren = false;
         //    console.log('constructor')
-        //    console.log(eRef)
         this._nativeElement = nativeElement;
         this._hostComponent = hostComponent;
         metaData.EVENTS.forEach((event, n) => {
@@ -191,35 +189,42 @@ class base {
      * @return {?}
      */
     ngOnDestroy() {
-        console.log(`ngOnDestroy`);
+        //console.log(`ngOnDestroy`)
+        /** @type {?} */
+        var childCmp;
+        /** @type {?} */
+        var parentCmp;
         try {
             //console.log(this)
             //console.log(this.ext)
+            childCmp = this.ext;
             //console.log(this._hostComponent)
-            //console.log(this._hostComponent.ext)
-            /** @type {?} */
-            var parent = this._hostComponent.ext;
-            /** @type {?} */
-            var child = this.ext;
-            console.log(parent);
-            console.log(child);
-            parent.remove([child]);
+            if (this._hostComponent != null) {
+                //console.log(this._hostComponent.ext)
+                parentCmp = this._hostComponent.ext;
+                //console.log(parentCmp)
+                //console.log(childCmp)
+                if (parentCmp.xtype == 'button' && childCmp.xtype == 'menu') ;
+                else if (parentCmp.xtype == 'carousel') ;
+                else {
+                    parentCmp.remove([childCmp]);
+                    childCmp.destroy();
+                }
+            }
         }
         catch (e) {
             console.error(e);
+            console.log('*****');
+            console.log(parentCmp);
+            console.log(childCmp);
+            console.log('*****');
         }
     }
-    //@ContentChild('extjs') _extjs: any;
-    //  @ContentChildren('extjs') _items: QueryList<any>
-    //@ContentChildren('HtmlElement') _htmlElement: QueryList<any>
-    // @ContentChildren('extjs', { read: ElementRef }) _elRefItems: QueryList<ElementRef>
     /**
      * @return {?}
      */
     baseAfterContentInit() {
-        console.log('\nbaseAfterContentInit');
-        //    console.log('this._extroute')
-        //    console.log(this._extroute)
+        //    console.log('\nbaseAfterContentInit')
         if (this._extroute != undefined) {
             this.ext.add({ xtype: 'container', html: this._extroute.nativeElement });
             return;
@@ -229,11 +234,29 @@ class base {
         //    console.log(this._items)
         //    console.log('this')
         //    console.log(this)
-        if (this._hostComponent == null) ;
-        else {
-            console.log('_hostComponent: ');
-            console.log(this._hostComponent);
-            console.log('parent: ' + this._hostComponent.ext.xtype);
+        //if(this._hostComponent == null) {
+        // console.log('root')
+        // var anyItems: any[] = []
+        // var elRefItems: any[] = []
+        // this._items.forEach(item => {anyItems.push(item)})
+        // this._elRefItems.forEach(item => {elRefItems.push(item)})
+        // for (var i in anyItems) {
+        //   var item = anyItems[i]
+        //   var elRefItem = elRefItems[i]
+        //   if (item.nativeElement != undefined) {
+        //     console.log('here')
+        //     this.ext.add({xtype: 'container',html: item.nativeElement})
+        //   }
+        //   else {
+        //     console.log('not supported')
+        //   }
+        // }
+        //}
+        //else {
+        if (this._hostComponent != null) {
+            //console.log('_hostComponent: ')
+            //console.log(this._hostComponent)
+            //console.log('parent: ' + this._hostComponent.ext.xtype)
             /** @type {?} */
             var parentCmp = this._hostComponent.ext;
             /** @type {?} */
@@ -1049,19 +1072,12 @@ actionsheetMetaData.EVENTNAMES = [
 ];
 class ExtActionsheetComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, actionsheetMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, actionsheetMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,actionsheetMetaData,hostComponent)}
     /**
@@ -1088,9 +1104,6 @@ ExtActionsheetComponent.decorators = [
 ];
 /** @nocollapse */
 ExtActionsheetComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -1442,19 +1455,12 @@ audioMetaData.EVENTNAMES = [
 ];
 class ExtAudioComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, audioMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, audioMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,audioMetaData,hostComponent)}
     /**
@@ -1481,9 +1487,6 @@ ExtAudioComponent.decorators = [
 ];
 /** @nocollapse */
 ExtAudioComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -1853,19 +1856,12 @@ buttonMetaData.EVENTNAMES = [
 ];
 class ExtButtonComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, buttonMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, buttonMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,buttonMetaData,hostComponent)}
     /**
@@ -1892,9 +1888,6 @@ ExtButtonComponent.decorators = [
 ];
 /** @nocollapse */
 ExtButtonComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -2232,19 +2225,12 @@ calendar_eventMetaData.EVENTNAMES = [
 ];
 class ExtCalendar_eventComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendar_eventMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_eventMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_eventMetaData,hostComponent)}
     /**
@@ -2271,9 +2257,6 @@ ExtCalendar_eventComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendar_eventComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -2803,19 +2786,12 @@ calendar_form_addMetaData.EVENTNAMES = [
 ];
 class ExtCalendar_form_addComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendar_form_addMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_form_addMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_form_addMetaData,hostComponent)}
     /**
@@ -2842,9 +2818,6 @@ ExtCalendar_form_addComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendar_form_addComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -3340,19 +3313,12 @@ calendar_calendar_pickerMetaData.EVENTNAMES = [
 ];
 class ExtCalendar_calendar_pickerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendar_calendar_pickerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_calendar_pickerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_calendar_pickerMetaData,hostComponent)}
     /**
@@ -3379,9 +3345,6 @@ ExtCalendar_calendar_pickerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendar_calendar_pickerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -3911,19 +3874,12 @@ calendar_form_editMetaData.EVENTNAMES = [
 ];
 class ExtCalendar_form_editComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendar_form_editMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_form_editMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_form_editMetaData,hostComponent)}
     /**
@@ -3950,9 +3906,6 @@ ExtCalendar_form_editComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendar_form_editComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -4448,19 +4401,12 @@ calendar_timefieldMetaData.EVENTNAMES = [
 ];
 class ExtCalendar_timefieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendar_timefieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_timefieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_timefieldMetaData,hostComponent)}
     /**
@@ -4487,9 +4433,6 @@ ExtCalendar_timefieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendar_timefieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -4819,19 +4762,12 @@ calendar_daysheaderMetaData.EVENTNAMES = [
 ];
 class ExtCalendar_daysheaderComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendar_daysheaderMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_daysheaderMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysheaderMetaData,hostComponent)}
     /**
@@ -4858,9 +4794,6 @@ ExtCalendar_daysheaderComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendar_daysheaderComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -5190,19 +5123,12 @@ calendar_weeksheaderMetaData.EVENTNAMES = [
 ];
 class ExtCalendar_weeksheaderComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendar_weeksheaderMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_weeksheaderMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksheaderMetaData,hostComponent)}
     /**
@@ -5229,9 +5155,6 @@ ExtCalendar_weeksheaderComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendar_weeksheaderComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -5729,19 +5652,12 @@ calendar_listMetaData.EVENTNAMES = [
 ];
 class ExtCalendar_listComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendar_listMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_listMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_listMetaData,hostComponent)}
     /**
@@ -5768,9 +5684,6 @@ ExtCalendar_listComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendar_listComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -6302,19 +6215,12 @@ calendar_dayMetaData.EVENTNAMES = [
 ];
 class ExtCalendar_dayComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendar_dayMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_dayMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_dayMetaData,hostComponent)}
     /**
@@ -6341,9 +6247,6 @@ ExtCalendar_dayComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendar_dayComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -6875,19 +6778,12 @@ calendar_daysMetaData.EVENTNAMES = [
 ];
 class ExtCalendar_daysComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendar_daysMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_daysMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysMetaData,hostComponent)}
     /**
@@ -6914,9 +6810,6 @@ ExtCalendar_daysComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendar_daysComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -7444,19 +7337,12 @@ calendar_monthMetaData.EVENTNAMES = [
 ];
 class ExtCalendar_monthComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendar_monthMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_monthMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_monthMetaData,hostComponent)}
     /**
@@ -7483,9 +7369,6 @@ ExtCalendar_monthComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendar_monthComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -7983,19 +7866,12 @@ calendarMetaData.EVENTNAMES = [
 ];
 class ExtCalendarComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendarMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendarMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendarMetaData,hostComponent)}
     /**
@@ -8022,9 +7898,6 @@ ExtCalendarComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendarComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -8558,19 +8431,12 @@ calendar_weekMetaData.EVENTNAMES = [
 ];
 class ExtCalendar_weekComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendar_weekMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_weekMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weekMetaData,hostComponent)}
     /**
@@ -8597,9 +8463,6 @@ ExtCalendar_weekComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendar_weekComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -9127,19 +8990,12 @@ calendar_weeksMetaData.EVENTNAMES = [
 ];
 class ExtCalendar_weeksComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendar_weeksMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_weeksMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksMetaData,hostComponent)}
     /**
@@ -9166,9 +9022,6 @@ ExtCalendar_weeksComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendar_weeksComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -9556,19 +9409,12 @@ calendar_dayviewMetaData.EVENTNAMES = [
 ];
 class ExtCalendar_dayviewComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendar_dayviewMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_dayviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_dayviewMetaData,hostComponent)}
     /**
@@ -9595,9 +9441,6 @@ ExtCalendar_dayviewComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendar_dayviewComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -9985,19 +9828,12 @@ calendar_daysviewMetaData.EVENTNAMES = [
 ];
 class ExtCalendar_daysviewComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendar_daysviewMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_daysviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysviewMetaData,hostComponent)}
     /**
@@ -10024,9 +9860,6 @@ ExtCalendar_daysviewComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendar_daysviewComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -10412,19 +10245,12 @@ calendar_monthviewMetaData.EVENTNAMES = [
 ];
 class ExtCalendar_monthviewComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendar_monthviewMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_monthviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_monthviewMetaData,hostComponent)}
     /**
@@ -10451,9 +10277,6 @@ ExtCalendar_monthviewComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendar_monthviewComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -10501,19 +10324,12 @@ calendar_multiviewMetaData.EVENTNAMES = [
 ];
 class ExtCalendar_multiviewComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendar_multiviewMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_multiviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_multiviewMetaData,hostComponent)}
     /**
@@ -10540,9 +10356,6 @@ ExtCalendar_multiviewComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendar_multiviewComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -10932,19 +10745,12 @@ calendar_weekviewMetaData.EVENTNAMES = [
 ];
 class ExtCalendar_weekviewComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendar_weekviewMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_weekviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weekviewMetaData,hostComponent)}
     /**
@@ -10971,9 +10777,6 @@ ExtCalendar_weekviewComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendar_weekviewComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -11359,19 +11162,12 @@ calendar_weeksviewMetaData.EVENTNAMES = [
 ];
 class ExtCalendar_weeksviewComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, calendar_weeksviewMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, calendar_weeksviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksviewMetaData,hostComponent)}
     /**
@@ -11398,9 +11194,6 @@ ExtCalendar_weeksviewComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCalendar_weeksviewComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -11780,19 +11573,12 @@ carouselMetaData.EVENTNAMES = [
 ];
 class ExtCarouselComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, carouselMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, carouselMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,carouselMetaData,hostComponent)}
     /**
@@ -11819,9 +11605,6 @@ ExtCarouselComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCarouselComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -11927,19 +11710,12 @@ axis3dMetaData.EVENTNAMES = [
 ];
 class ExtAxis3dComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, axis3dMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, axis3dMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,axis3dMetaData,hostComponent)}
     /**
@@ -11966,9 +11742,6 @@ ExtAxis3dComponent.decorators = [
 ];
 /** @nocollapse */
 ExtAxis3dComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -12434,19 +12207,12 @@ cartesianMetaData.EVENTNAMES = [
 ];
 class ExtCartesianComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, cartesianMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, cartesianMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,cartesianMetaData,hostComponent)}
     /**
@@ -12473,9 +12239,6 @@ ExtCartesianComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCartesianComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -12941,19 +12704,12 @@ chartMetaData.EVENTNAMES = [
 ];
 class ExtChartComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, chartMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, chartMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chartMetaData,hostComponent)}
     /**
@@ -12980,9 +12736,6 @@ ExtChartComponent.decorators = [
 ];
 /** @nocollapse */
 ExtChartComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -13022,19 +12775,12 @@ interactionMetaData.EVENTNAMES = [
 ];
 class ExtInteractionComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, interactionMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, interactionMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,interactionMetaData,hostComponent)}
     /**
@@ -13061,9 +12807,6 @@ ExtInteractionComponent.decorators = [
 ];
 /** @nocollapse */
 ExtInteractionComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -13563,19 +13306,12 @@ legendMetaData.EVENTNAMES = [
 ];
 class ExtLegendComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, legendMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, legendMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,legendMetaData,hostComponent)}
     /**
@@ -13602,9 +13338,6 @@ ExtLegendComponent.decorators = [
 ];
 /** @nocollapse */
 ExtLegendComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -13984,19 +13717,12 @@ chartnavigatorMetaData.EVENTNAMES = [
 ];
 class ExtChartnavigatorComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, chartnavigatorMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, chartnavigatorMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chartnavigatorMetaData,hostComponent)}
     /**
@@ -14023,9 +13749,6 @@ ExtChartnavigatorComponent.decorators = [
 ];
 /** @nocollapse */
 ExtChartnavigatorComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -14493,19 +14216,12 @@ polarMetaData.EVENTNAMES = [
 ];
 class ExtPolarComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, polarMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, polarMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,polarMetaData,hostComponent)}
     /**
@@ -14532,9 +14248,6 @@ ExtPolarComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPolarComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -14996,19 +14709,12 @@ spacefillingMetaData.EVENTNAMES = [
 ];
 class ExtSpacefillingComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, spacefillingMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, spacefillingMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spacefillingMetaData,hostComponent)}
     /**
@@ -15035,9 +14741,6 @@ ExtSpacefillingComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSpacefillingComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -15367,19 +15070,12 @@ chipMetaData.EVENTNAMES = [
 ];
 class ExtChipComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, chipMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, chipMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chipMetaData,hostComponent)}
     /**
@@ -15406,9 +15102,6 @@ ExtChipComponent.decorators = [
 ];
 /** @nocollapse */
 ExtChipComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -15726,19 +15419,12 @@ componentMetaData.EVENTNAMES = [
 ];
 class ExtComponentComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, componentMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, componentMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,componentMetaData,hostComponent)}
     /**
@@ -15765,9 +15451,6 @@ ExtComponentComponent.decorators = [
 ];
 /** @nocollapse */
 ExtComponentComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -16143,19 +15826,12 @@ containerMetaData.EVENTNAMES = [
 ];
 class ExtContainerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, containerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, containerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,containerMetaData,hostComponent)}
     /**
@@ -16182,9 +15858,6 @@ ExtContainerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtContainerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -16516,19 +16189,12 @@ d3_canvasMetaData.EVENTNAMES = [
 ];
 class ExtD3_canvasComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, d3_canvasMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3_canvasMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_canvasMetaData,hostComponent)}
     /**
@@ -16555,9 +16221,6 @@ ExtD3_canvasComponent.decorators = [
 ];
 /** @nocollapse */
 ExtD3_canvasComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -16903,19 +16566,12 @@ d3_heatmapMetaData.EVENTNAMES = [
 ];
 class ExtD3_heatmapComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, d3_heatmapMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3_heatmapMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_heatmapMetaData,hostComponent)}
     /**
@@ -16942,9 +16598,6 @@ ExtD3_heatmapComponent.decorators = [
 ];
 /** @nocollapse */
 ExtD3_heatmapComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -17320,19 +16973,12 @@ d3_packMetaData.EVENTNAMES = [
 ];
 class ExtD3_packComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, d3_packMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3_packMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_packMetaData,hostComponent)}
     /**
@@ -17359,9 +17005,6 @@ ExtD3_packComponent.decorators = [
 ];
 /** @nocollapse */
 ExtD3_packComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -17733,19 +17376,12 @@ d3_partitionMetaData.EVENTNAMES = [
 ];
 class ExtD3_partitionComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, d3_partitionMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3_partitionMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_partitionMetaData,hostComponent)}
     /**
@@ -17772,9 +17408,6 @@ ExtD3_partitionComponent.decorators = [
 ];
 /** @nocollapse */
 ExtD3_partitionComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -18150,19 +17783,12 @@ d3_sunburstMetaData.EVENTNAMES = [
 ];
 class ExtD3_sunburstComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, d3_sunburstMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3_sunburstMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_sunburstMetaData,hostComponent)}
     /**
@@ -18189,9 +17815,6 @@ ExtD3_sunburstComponent.decorators = [
 ];
 /** @nocollapse */
 ExtD3_sunburstComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -18569,19 +18192,12 @@ d3_treeMetaData.EVENTNAMES = [
 ];
 class ExtD3_treeComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, d3_treeMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3_treeMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_treeMetaData,hostComponent)}
     /**
@@ -18608,9 +18224,6 @@ ExtD3_treeComponent.decorators = [
 ];
 /** @nocollapse */
 ExtD3_treeComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -18988,19 +18601,12 @@ d3_horizontal_treeMetaData.EVENTNAMES = [
 ];
 class ExtD3_horizontal_treeComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, d3_horizontal_treeMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3_horizontal_treeMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_horizontal_treeMetaData,hostComponent)}
     /**
@@ -19027,9 +18633,6 @@ ExtD3_horizontal_treeComponent.decorators = [
 ];
 /** @nocollapse */
 ExtD3_horizontal_treeComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -19411,19 +19014,12 @@ d3_treemapMetaData.EVENTNAMES = [
 ];
 class ExtD3_treemapComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, d3_treemapMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3_treemapMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_treemapMetaData,hostComponent)}
     /**
@@ -19450,9 +19046,6 @@ ExtD3_treemapComponent.decorators = [
 ];
 /** @nocollapse */
 ExtD3_treemapComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -19786,19 +19379,12 @@ d3_svgMetaData.EVENTNAMES = [
 ];
 class ExtD3_svgComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, d3_svgMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3_svgMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_svgMetaData,hostComponent)}
     /**
@@ -19825,9 +19411,6 @@ ExtD3_svgComponent.decorators = [
 ];
 /** @nocollapse */
 ExtD3_svgComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -20161,19 +19744,12 @@ d3MetaData.EVENTNAMES = [
 ];
 class ExtD3Component extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, d3MetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, d3MetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3MetaData,hostComponent)}
     /**
@@ -20200,9 +19776,6 @@ ExtD3Component.decorators = [
 ];
 /** @nocollapse */
 ExtD3Component.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -20766,19 +20339,12 @@ boundlistMetaData.EVENTNAMES = [
 ];
 class ExtBoundlistComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, boundlistMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, boundlistMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,boundlistMetaData,hostComponent)}
     /**
@@ -20805,9 +20371,6 @@ ExtBoundlistComponent.decorators = [
 ];
 /** @nocollapse */
 ExtBoundlistComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -21319,19 +20882,12 @@ chipviewMetaData.EVENTNAMES = [
 ];
 class ExtChipviewComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, chipviewMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, chipviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chipviewMetaData,hostComponent)}
     /**
@@ -21358,9 +20914,6 @@ ExtChipviewComponent.decorators = [
 ];
 /** @nocollapse */
 ExtChipviewComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -21860,19 +21413,12 @@ componentdataviewMetaData.EVENTNAMES = [
 ];
 class ExtComponentdataviewComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, componentdataviewMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, componentdataviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,componentdataviewMetaData,hostComponent)}
     /**
@@ -21899,9 +21445,6 @@ ExtComponentdataviewComponent.decorators = [
 ];
 /** @nocollapse */
 ExtComponentdataviewComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -22283,19 +21826,12 @@ dataitemMetaData.EVENTNAMES = [
 ];
 class ExtDataitemComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, dataitemMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, dataitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dataitemMetaData,hostComponent)}
     /**
@@ -22322,9 +21858,6 @@ ExtDataitemComponent.decorators = [
 ];
 /** @nocollapse */
 ExtDataitemComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -22820,19 +22353,12 @@ dataviewMetaData.EVENTNAMES = [
 ];
 class ExtDataviewComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, dataviewMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, dataviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dataviewMetaData,hostComponent)}
     /**
@@ -22859,9 +22385,6 @@ ExtDataviewComponent.decorators = [
 ];
 /** @nocollapse */
 ExtDataviewComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -23179,19 +22702,12 @@ emptytextMetaData.EVENTNAMES = [
 ];
 class ExtEmptytextComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, emptytextMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, emptytextMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,emptytextMetaData,hostComponent)}
     /**
@@ -23218,9 +22734,6 @@ ExtEmptytextComponent.decorators = [
 ];
 /** @nocollapse */
 ExtEmptytextComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -23558,19 +23071,12 @@ indexbarMetaData.EVENTNAMES = [
 ];
 class ExtIndexbarComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, indexbarMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, indexbarMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,indexbarMetaData,hostComponent)}
     /**
@@ -23597,9 +23103,6 @@ ExtIndexbarComponent.decorators = [
 ];
 /** @nocollapse */
 ExtIndexbarComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -23927,19 +23430,12 @@ itemheaderMetaData.EVENTNAMES = [
 ];
 class ExtItemheaderComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, itemheaderMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, itemheaderMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,itemheaderMetaData,hostComponent)}
     /**
@@ -23966,9 +23462,6 @@ ExtItemheaderComponent.decorators = [
 ];
 /** @nocollapse */
 ExtItemheaderComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -24532,19 +24025,12 @@ listMetaData.EVENTNAMES = [
 ];
 class ExtListComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, listMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, listMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listMetaData,hostComponent)}
     /**
@@ -24571,9 +24057,6 @@ ExtListComponent.decorators = [
 ];
 /** @nocollapse */
 ExtListComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -24963,19 +24446,12 @@ listitemMetaData.EVENTNAMES = [
 ];
 class ExtListitemComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, listitemMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, listitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listitemMetaData,hostComponent)}
     /**
@@ -25002,9 +24478,6 @@ ExtListitemComponent.decorators = [
 ];
 /** @nocollapse */
 ExtListitemComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -25388,19 +24861,12 @@ listswiperitemMetaData.EVENTNAMES = [
 ];
 class ExtListswiperitemComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, listswiperitemMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, listswiperitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listswiperitemMetaData,hostComponent)}
     /**
@@ -25427,9 +24893,6 @@ ExtListswiperitemComponent.decorators = [
 ];
 /** @nocollapse */
 ExtListswiperitemComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -25823,19 +25286,12 @@ listswiperstepperMetaData.EVENTNAMES = [
 ];
 class ExtListswiperstepperComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, listswiperstepperMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, listswiperstepperMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listswiperstepperMetaData,hostComponent)}
     /**
@@ -25862,9 +25318,6 @@ ExtListswiperstepperComponent.decorators = [
 ];
 /** @nocollapse */
 ExtListswiperstepperComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -26302,19 +25755,12 @@ nestedlistMetaData.EVENTNAMES = [
 ];
 class ExtNestedlistComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, nestedlistMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, nestedlistMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,nestedlistMetaData,hostComponent)}
     /**
@@ -26341,9 +25787,6 @@ ExtNestedlistComponent.decorators = [
 ];
 /** @nocollapse */
 ExtNestedlistComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -26681,19 +26124,12 @@ pullrefreshbarMetaData.EVENTNAMES = [
 ];
 class ExtPullrefreshbarComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, pullrefreshbarMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pullrefreshbarMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pullrefreshbarMetaData,hostComponent)}
     /**
@@ -26720,9 +26156,6 @@ ExtPullrefreshbarComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPullrefreshbarComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -27046,19 +26479,12 @@ pullrefreshspinnerMetaData.EVENTNAMES = [
 ];
 class ExtPullrefreshspinnerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, pullrefreshspinnerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pullrefreshspinnerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pullrefreshspinnerMetaData,hostComponent)}
     /**
@@ -27085,9 +26511,6 @@ ExtPullrefreshspinnerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPullrefreshspinnerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -27415,19 +26838,12 @@ simplelistitemMetaData.EVENTNAMES = [
 ];
 class ExtSimplelistitemComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, simplelistitemMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, simplelistitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,simplelistitemMetaData,hostComponent)}
     /**
@@ -27454,9 +26870,6 @@ ExtSimplelistitemComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSimplelistitemComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -27946,19 +27359,12 @@ dialogMetaData.EVENTNAMES = [
 ];
 class ExtDialogComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, dialogMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, dialogMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dialogMetaData,hostComponent)}
     /**
@@ -27985,9 +27391,6 @@ ExtDialogComponent.decorators = [
 ];
 /** @nocollapse */
 ExtDialogComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -28477,19 +27880,12 @@ windowMetaData.EVENTNAMES = [
 ];
 class ExtWindowComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, windowMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, windowMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,windowMetaData,hostComponent)}
     /**
@@ -28516,9 +27912,6 @@ ExtWindowComponent.decorators = [
 ];
 /** @nocollapse */
 ExtWindowComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -28924,19 +28317,12 @@ drawMetaData.EVENTNAMES = [
 ];
 class ExtDrawComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, drawMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, drawMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,drawMetaData,hostComponent)}
     /**
@@ -28963,9 +28349,6 @@ ExtDrawComponent.decorators = [
 ];
 /** @nocollapse */
 ExtDrawComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -29135,19 +28518,12 @@ surfaceMetaData.EVENTNAMES = [
 ];
 class ExtSurfaceComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, surfaceMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, surfaceMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,surfaceMetaData,hostComponent)}
     /**
@@ -29174,9 +28550,6 @@ ExtSurfaceComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSurfaceComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -29596,19 +28969,12 @@ editorMetaData.EVENTNAMES = [
 ];
 class ExtEditorComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, editorMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, editorMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,editorMetaData,hostComponent)}
     /**
@@ -29635,9 +29001,6 @@ ExtEditorComponent.decorators = [
 ];
 /** @nocollapse */
 ExtEditorComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -30037,19 +29400,12 @@ checkboxMetaData.EVENTNAMES = [
 ];
 class ExtCheckboxComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, checkboxMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, checkboxMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkboxMetaData,hostComponent)}
     /**
@@ -30076,9 +29432,6 @@ ExtCheckboxComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCheckboxComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -30478,19 +29831,12 @@ checkboxfieldMetaData.EVENTNAMES = [
 ];
 class ExtCheckboxfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, checkboxfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, checkboxfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkboxfieldMetaData,hostComponent)}
     /**
@@ -30517,9 +29863,6 @@ ExtCheckboxfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCheckboxfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -31047,19 +30390,12 @@ comboboxMetaData.EVENTNAMES = [
 ];
 class ExtComboboxComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, comboboxMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, comboboxMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,comboboxMetaData,hostComponent)}
     /**
@@ -31086,9 +30422,6 @@ ExtComboboxComponent.decorators = [
 ];
 /** @nocollapse */
 ExtComboboxComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -31616,19 +30949,12 @@ comboboxfieldMetaData.EVENTNAMES = [
 ];
 class ExtComboboxfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, comboboxfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, comboboxfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,comboboxfieldMetaData,hostComponent)}
     /**
@@ -31655,9 +30981,6 @@ ExtComboboxfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtComboboxfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -32049,19 +31372,12 @@ containerfieldMetaData.EVENTNAMES = [
 ];
 class ExtContainerfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, containerfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, containerfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,containerfieldMetaData,hostComponent)}
     /**
@@ -32088,9 +31404,6 @@ ExtContainerfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtContainerfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -32482,19 +31795,12 @@ fieldcontainerMetaData.EVENTNAMES = [
 ];
 class ExtFieldcontainerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, fieldcontainerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, fieldcontainerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldcontainerMetaData,hostComponent)}
     /**
@@ -32521,9 +31827,6 @@ ExtFieldcontainerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtFieldcontainerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -32979,19 +32282,12 @@ datefieldMetaData.EVENTNAMES = [
 ];
 class ExtDatefieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, datefieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, datefieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datefieldMetaData,hostComponent)}
     /**
@@ -33018,9 +32314,6 @@ ExtDatefieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtDatefieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -33476,19 +32769,12 @@ datepickerfieldMetaData.EVENTNAMES = [
 ];
 class ExtDatepickerfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, datepickerfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, datepickerfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickerfieldMetaData,hostComponent)}
     /**
@@ -33515,9 +32801,6 @@ ExtDatepickerfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtDatepickerfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -33973,19 +33256,12 @@ datepickernativefieldMetaData.EVENTNAMES = [
 ];
 class ExtDatepickernativefieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, datepickernativefieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, datepickernativefieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickernativefieldMetaData,hostComponent)}
     /**
@@ -34012,9 +33288,6 @@ ExtDatepickernativefieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtDatepickernativefieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -34404,19 +33677,12 @@ displayfieldMetaData.EVENTNAMES = [
 ];
 class ExtDisplayfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, displayfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, displayfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,displayfieldMetaData,hostComponent)}
     /**
@@ -34443,9 +33709,6 @@ ExtDisplayfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtDisplayfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -34871,19 +34134,12 @@ emailfieldMetaData.EVENTNAMES = [
 ];
 class ExtEmailfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, emailfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, emailfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,emailfieldMetaData,hostComponent)}
     /**
@@ -34910,9 +34166,6 @@ ExtEmailfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtEmailfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -35292,19 +34545,12 @@ fieldMetaData.EVENTNAMES = [
 ];
 class ExtFieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, fieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, fieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldMetaData,hostComponent)}
     /**
@@ -35331,9 +34577,6 @@ ExtFieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtFieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -35765,19 +35008,12 @@ filefieldMetaData.EVENTNAMES = [
 ];
 class ExtFilefieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, filefieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, filefieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,filefieldMetaData,hostComponent)}
     /**
@@ -35804,9 +35040,6 @@ ExtFilefieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtFilefieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -36184,19 +35417,12 @@ filebuttonMetaData.EVENTNAMES = [
 ];
 class ExtFilebuttonComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, filebuttonMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, filebuttonMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,filebuttonMetaData,hostComponent)}
     /**
@@ -36223,9 +35449,6 @@ ExtFilebuttonComponent.decorators = [
 ];
 /** @nocollapse */
 ExtFilebuttonComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -36613,19 +35836,12 @@ hiddenfieldMetaData.EVENTNAMES = [
 ];
 class ExtHiddenfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, hiddenfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, hiddenfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,hiddenfieldMetaData,hostComponent)}
     /**
@@ -36652,9 +35868,6 @@ ExtHiddenfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtHiddenfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -37042,19 +36255,12 @@ inputfieldMetaData.EVENTNAMES = [
 ];
 class ExtInputfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, inputfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, inputfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,inputfieldMetaData,hostComponent)}
     /**
@@ -37081,9 +36287,6 @@ ExtInputfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtInputfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -37523,19 +36726,12 @@ numberfieldMetaData.EVENTNAMES = [
 ];
 class ExtNumberfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, numberfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, numberfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numberfieldMetaData,hostComponent)}
     /**
@@ -37562,9 +36758,6 @@ ExtNumberfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtNumberfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -38040,19 +37233,12 @@ fieldpanelMetaData.EVENTNAMES = [
 ];
 class ExtFieldpanelComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, fieldpanelMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, fieldpanelMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldpanelMetaData,hostComponent)}
     /**
@@ -38079,9 +37265,6 @@ ExtFieldpanelComponent.decorators = [
 ];
 /** @nocollapse */
 ExtFieldpanelComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -38511,19 +37694,12 @@ passwordfieldMetaData.EVENTNAMES = [
 ];
 class ExtPasswordfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, passwordfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, passwordfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,passwordfieldMetaData,hostComponent)}
     /**
@@ -38550,9 +37726,6 @@ ExtPasswordfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPasswordfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -39000,19 +38173,12 @@ pickerfieldMetaData.EVENTNAMES = [
 ];
 class ExtPickerfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, pickerfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pickerfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerfieldMetaData,hostComponent)}
     /**
@@ -39039,9 +38205,6 @@ ExtPickerfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPickerfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -39441,19 +38604,12 @@ radioMetaData.EVENTNAMES = [
 ];
 class ExtRadioComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, radioMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, radioMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,radioMetaData,hostComponent)}
     /**
@@ -39480,9 +38636,6 @@ ExtRadioComponent.decorators = [
 ];
 /** @nocollapse */
 ExtRadioComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -39882,19 +39035,12 @@ radiofieldMetaData.EVENTNAMES = [
 ];
 class ExtRadiofieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, radiofieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, radiofieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,radiofieldMetaData,hostComponent)}
     /**
@@ -39921,9 +39067,6 @@ ExtRadiofieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtRadiofieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -40349,19 +39492,12 @@ searchfieldMetaData.EVENTNAMES = [
 ];
 class ExtSearchfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, searchfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, searchfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,searchfieldMetaData,hostComponent)}
     /**
@@ -40388,9 +39524,6 @@ ExtSearchfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSearchfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -40886,19 +40019,12 @@ selectfieldMetaData.EVENTNAMES = [
 ];
 class ExtSelectfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, selectfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, selectfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectfieldMetaData,hostComponent)}
     /**
@@ -40925,9 +40051,6 @@ ExtSelectfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSelectfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -41333,19 +40456,12 @@ singlesliderfieldMetaData.EVENTNAMES = [
 ];
 class ExtSinglesliderfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, singlesliderfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, singlesliderfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,singlesliderfieldMetaData,hostComponent)}
     /**
@@ -41372,9 +40488,6 @@ ExtSinglesliderfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSinglesliderfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -41780,19 +40893,12 @@ sliderfieldMetaData.EVENTNAMES = [
 ];
 class ExtSliderfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, sliderfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sliderfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sliderfieldMetaData,hostComponent)}
     /**
@@ -41819,9 +40925,6 @@ ExtSliderfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSliderfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -42275,19 +41378,12 @@ spinnerfieldMetaData.EVENTNAMES = [
 ];
 class ExtSpinnerfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, spinnerfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, spinnerfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spinnerfieldMetaData,hostComponent)}
     /**
@@ -42314,9 +41410,6 @@ ExtSpinnerfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSpinnerfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -42742,19 +41835,12 @@ textfieldMetaData.EVENTNAMES = [
 ];
 class ExtTextfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, textfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, textfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textfieldMetaData,hostComponent)}
     /**
@@ -42781,9 +41867,6 @@ ExtTextfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTextfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -43211,19 +42294,12 @@ textareafieldMetaData.EVENTNAMES = [
 ];
 class ExtTextareafieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, textareafieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, textareafieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textareafieldMetaData,hostComponent)}
     /**
@@ -43250,9 +42326,6 @@ ExtTextareafieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTextareafieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -43704,19 +42777,12 @@ timefieldMetaData.EVENTNAMES = [
 ];
 class ExtTimefieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, timefieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, timefieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timefieldMetaData,hostComponent)}
     /**
@@ -43743,9 +42809,6 @@ ExtTimefieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTimefieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -44155,19 +43218,12 @@ togglefieldMetaData.EVENTNAMES = [
 ];
 class ExtTogglefieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, togglefieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, togglefieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,togglefieldMetaData,hostComponent)}
     /**
@@ -44194,9 +43250,6 @@ ExtTogglefieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTogglefieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -44374,19 +43427,12 @@ cleartriggerMetaData.EVENTNAMES = [
 ];
 class ExtCleartriggerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, cleartriggerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, cleartriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,cleartriggerMetaData,hostComponent)}
     /**
@@ -44413,9 +43459,6 @@ ExtCleartriggerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCleartriggerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -44593,19 +43636,12 @@ datetriggerMetaData.EVENTNAMES = [
 ];
 class ExtDatetriggerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, datetriggerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, datetriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datetriggerMetaData,hostComponent)}
     /**
@@ -44632,9 +43668,6 @@ ExtDatetriggerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtDatetriggerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -44812,19 +43845,12 @@ expandtriggerMetaData.EVENTNAMES = [
 ];
 class ExtExpandtriggerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, expandtriggerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, expandtriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,expandtriggerMetaData,hostComponent)}
     /**
@@ -44851,9 +43877,6 @@ ExtExpandtriggerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtExpandtriggerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -45037,19 +44060,12 @@ menutriggerMetaData.EVENTNAMES = [
 ];
 class ExtMenutriggerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, menutriggerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, menutriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menutriggerMetaData,hostComponent)}
     /**
@@ -45076,9 +44092,6 @@ ExtMenutriggerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtMenutriggerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -45256,19 +44269,12 @@ revealtriggerMetaData.EVENTNAMES = [
 ];
 class ExtRevealtriggerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, revealtriggerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, revealtriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,revealtriggerMetaData,hostComponent)}
     /**
@@ -45295,9 +44301,6 @@ ExtRevealtriggerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtRevealtriggerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -45475,19 +44478,12 @@ spindowntriggerMetaData.EVENTNAMES = [
 ];
 class ExtSpindowntriggerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, spindowntriggerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, spindowntriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spindowntriggerMetaData,hostComponent)}
     /**
@@ -45514,9 +44510,6 @@ ExtSpindowntriggerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSpindowntriggerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -45694,19 +44687,12 @@ spinuptriggerMetaData.EVENTNAMES = [
 ];
 class ExtSpinuptriggerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, spinuptriggerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, spinuptriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spinuptriggerMetaData,hostComponent)}
     /**
@@ -45733,9 +44719,6 @@ ExtSpinuptriggerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSpinuptriggerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -45913,19 +44896,12 @@ timetriggerMetaData.EVENTNAMES = [
 ];
 class ExtTimetriggerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, timetriggerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, timetriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timetriggerMetaData,hostComponent)}
     /**
@@ -45952,9 +44928,6 @@ ExtTimetriggerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTimetriggerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -46132,19 +45105,12 @@ triggerMetaData.EVENTNAMES = [
 ];
 class ExtTriggerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, triggerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, triggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,triggerMetaData,hostComponent)}
     /**
@@ -46171,9 +45137,6 @@ ExtTriggerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTriggerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -46599,19 +45562,12 @@ urlfieldMetaData.EVENTNAMES = [
 ];
 class ExtUrlfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, urlfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, urlfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,urlfieldMetaData,hostComponent)}
     /**
@@ -46638,9 +45594,6 @@ ExtUrlfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtUrlfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -47024,19 +45977,12 @@ fieldsetMetaData.EVENTNAMES = [
 ];
 class ExtFieldsetComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, fieldsetMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, fieldsetMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldsetMetaData,hostComponent)}
     /**
@@ -47063,9 +46009,6 @@ ExtFieldsetComponent.decorators = [
 ];
 /** @nocollapse */
 ExtFieldsetComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -47559,19 +46502,12 @@ formpanelMetaData.EVENTNAMES = [
 ];
 class ExtFormpanelComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, formpanelMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, formpanelMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,formpanelMetaData,hostComponent)}
     /**
@@ -47598,9 +46534,6 @@ ExtFormpanelComponent.decorators = [
 ];
 /** @nocollapse */
 ExtFormpanelComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -47782,19 +46715,12 @@ gridcellbaseMetaData.EVENTNAMES = [
 ];
 class ExtGridcellbaseComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, gridcellbaseMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridcellbaseMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcellbaseMetaData,hostComponent)}
     /**
@@ -47821,9 +46747,6 @@ ExtGridcellbaseComponent.decorators = [
 ];
 /** @nocollapse */
 ExtGridcellbaseComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -48017,19 +46940,12 @@ booleancellMetaData.EVENTNAMES = [
 ];
 class ExtBooleancellComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, booleancellMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, booleancellMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,booleancellMetaData,hostComponent)}
     /**
@@ -48056,9 +46972,6 @@ ExtBooleancellComponent.decorators = [
 ];
 /** @nocollapse */
 ExtBooleancellComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -48254,19 +47167,12 @@ gridcellMetaData.EVENTNAMES = [
 ];
 class ExtGridcellComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, gridcellMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridcellMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcellMetaData,hostComponent)}
     /**
@@ -48293,9 +47199,6 @@ ExtGridcellComponent.decorators = [
 ];
 /** @nocollapse */
 ExtGridcellComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -48477,19 +47380,12 @@ checkcellMetaData.EVENTNAMES = [
 ];
 class ExtCheckcellComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, checkcellMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, checkcellMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkcellMetaData,hostComponent)}
     /**
@@ -48516,9 +47412,6 @@ ExtCheckcellComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCheckcellComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -48708,19 +47601,12 @@ datecellMetaData.EVENTNAMES = [
 ];
 class ExtDatecellComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, datecellMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, datecellMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datecellMetaData,hostComponent)}
     /**
@@ -48747,9 +47633,6 @@ ExtDatecellComponent.decorators = [
 ];
 /** @nocollapse */
 ExtDatecellComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -48939,19 +47822,12 @@ numbercellMetaData.EVENTNAMES = [
 ];
 class ExtNumbercellComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, numbercellMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, numbercellMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numbercellMetaData,hostComponent)}
     /**
@@ -48978,9 +47854,6 @@ ExtNumbercellComponent.decorators = [
 ];
 /** @nocollapse */
 ExtNumbercellComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -49170,19 +48043,12 @@ rownumberercellMetaData.EVENTNAMES = [
 ];
 class ExtRownumberercellComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, rownumberercellMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, rownumberercellMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rownumberercellMetaData,hostComponent)}
     /**
@@ -49209,9 +48075,6 @@ ExtRownumberercellComponent.decorators = [
 ];
 /** @nocollapse */
 ExtRownumberercellComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -49399,19 +48262,12 @@ textcellMetaData.EVENTNAMES = [
 ];
 class ExtTextcellComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, textcellMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, textcellMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textcellMetaData,hostComponent)}
     /**
@@ -49438,9 +48294,6 @@ ExtTextcellComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTextcellComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -49642,19 +48495,12 @@ treecellMetaData.EVENTNAMES = [
 ];
 class ExtTreecellComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, treecellMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, treecellMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treecellMetaData,hostComponent)}
     /**
@@ -49681,9 +48527,6 @@ ExtTreecellComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTreecellComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -49869,19 +48712,12 @@ widgetcellMetaData.EVENTNAMES = [
 ];
 class ExtWidgetcellComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, widgetcellMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, widgetcellMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,widgetcellMetaData,hostComponent)}
     /**
@@ -49908,9 +48744,6 @@ ExtWidgetcellComponent.decorators = [
 ];
 /** @nocollapse */
 ExtWidgetcellComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -50332,19 +49165,12 @@ celleditorMetaData.EVENTNAMES = [
 ];
 class ExtCelleditorComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, celleditorMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, celleditorMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,celleditorMetaData,hostComponent)}
     /**
@@ -50371,9 +49197,6 @@ ExtCelleditorComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCelleditorComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -50843,19 +49666,12 @@ booleancolumnMetaData.EVENTNAMES = [
 ];
 class ExtBooleancolumnComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, booleancolumnMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, booleancolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,booleancolumnMetaData,hostComponent)}
     /**
@@ -50882,9 +49698,6 @@ ExtBooleancolumnComponent.decorators = [
 ];
 /** @nocollapse */
 ExtBooleancolumnComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -51358,19 +50171,12 @@ checkcolumnMetaData.EVENTNAMES = [
 ];
 class ExtCheckcolumnComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, checkcolumnMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, checkcolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkcolumnMetaData,hostComponent)}
     /**
@@ -51397,9 +50203,6 @@ ExtCheckcolumnComponent.decorators = [
 ];
 /** @nocollapse */
 ExtCheckcolumnComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -51863,19 +50666,12 @@ gridcolumnMetaData.EVENTNAMES = [
 ];
 class ExtGridcolumnComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, gridcolumnMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridcolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcolumnMetaData,hostComponent)}
     /**
@@ -51902,9 +50698,6 @@ ExtGridcolumnComponent.decorators = [
 ];
 /** @nocollapse */
 ExtGridcolumnComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -52368,19 +51161,12 @@ columnMetaData.EVENTNAMES = [
 ];
 class ExtColumnComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, columnMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, columnMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,columnMetaData,hostComponent)}
     /**
@@ -52407,9 +51193,6 @@ ExtColumnComponent.decorators = [
 ];
 /** @nocollapse */
 ExtColumnComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -52873,19 +51656,12 @@ templatecolumnMetaData.EVENTNAMES = [
 ];
 class ExtTemplatecolumnComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, templatecolumnMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, templatecolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,templatecolumnMetaData,hostComponent)}
     /**
@@ -52912,9 +51688,6 @@ ExtTemplatecolumnComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTemplatecolumnComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -53380,19 +52153,12 @@ datecolumnMetaData.EVENTNAMES = [
 ];
 class ExtDatecolumnComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, datecolumnMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, datecolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datecolumnMetaData,hostComponent)}
     /**
@@ -53419,9 +52185,6 @@ ExtDatecolumnComponent.decorators = [
 ];
 /** @nocollapse */
 ExtDatecolumnComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -53887,19 +52650,12 @@ numbercolumnMetaData.EVENTNAMES = [
 ];
 class ExtNumbercolumnComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, numbercolumnMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, numbercolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numbercolumnMetaData,hostComponent)}
     /**
@@ -53926,9 +52682,6 @@ ExtNumbercolumnComponent.decorators = [
 ];
 /** @nocollapse */
 ExtNumbercolumnComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -54394,19 +53147,12 @@ rownumbererMetaData.EVENTNAMES = [
 ];
 class ExtRownumbererComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, rownumbererMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, rownumbererMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rownumbererMetaData,hostComponent)}
     /**
@@ -54433,9 +53179,6 @@ ExtRownumbererComponent.decorators = [
 ];
 /** @nocollapse */
 ExtRownumbererComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -54909,19 +53652,12 @@ selectioncolumnMetaData.EVENTNAMES = [
 ];
 class ExtSelectioncolumnComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, selectioncolumnMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, selectioncolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectioncolumnMetaData,hostComponent)}
     /**
@@ -54948,9 +53684,6 @@ ExtSelectioncolumnComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSelectioncolumnComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -55414,19 +54147,12 @@ textcolumnMetaData.EVENTNAMES = [
 ];
 class ExtTextcolumnComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, textcolumnMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, textcolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textcolumnMetaData,hostComponent)}
     /**
@@ -55453,9 +54179,6 @@ ExtTextcolumnComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTextcolumnComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -55919,19 +54642,12 @@ treecolumnMetaData.EVENTNAMES = [
 ];
 class ExtTreecolumnComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, treecolumnMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, treecolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treecolumnMetaData,hostComponent)}
     /**
@@ -55958,9 +54674,6 @@ ExtTreecolumnComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTreecolumnComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -56574,19 +55287,12 @@ gridMetaData.EVENTNAMES = [
 ];
 class ExtGridComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, gridMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridMetaData,hostComponent)}
     /**
@@ -56613,9 +55319,6 @@ ExtGridComponent.decorators = [
 ];
 /** @nocollapse */
 ExtGridComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -57001,19 +55704,12 @@ headercontainerMetaData.EVENTNAMES = [
 ];
 class ExtHeadercontainerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, headercontainerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, headercontainerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,headercontainerMetaData,hostComponent)}
     /**
@@ -57040,9 +55736,6 @@ ExtHeadercontainerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtHeadercontainerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -57440,19 +56133,12 @@ lockedgridMetaData.EVENTNAMES = [
 ];
 class ExtLockedgridComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, lockedgridMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, lockedgridMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,lockedgridMetaData,hostComponent)}
     /**
@@ -57479,9 +56165,6 @@ ExtLockedgridComponent.decorators = [
 ];
 /** @nocollapse */
 ExtLockedgridComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -57947,19 +56630,12 @@ lockedgridregionMetaData.EVENTNAMES = [
 ];
 class ExtLockedgridregionComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, lockedgridregionMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, lockedgridregionMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,lockedgridregionMetaData,hostComponent)}
     /**
@@ -57986,9 +56662,6 @@ ExtLockedgridregionComponent.decorators = [
 ];
 /** @nocollapse */
 ExtLockedgridregionComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -58340,19 +57013,12 @@ gridcolumnsmenuMetaData.EVENTNAMES = [
 ];
 class ExtGridcolumnsmenuComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, gridcolumnsmenuMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridcolumnsmenuMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcolumnsmenuMetaData,hostComponent)}
     /**
@@ -58379,9 +57045,6 @@ ExtGridcolumnsmenuComponent.decorators = [
 ];
 /** @nocollapse */
 ExtGridcolumnsmenuComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -58733,19 +57396,12 @@ gridgroupbythismenuitemMetaData.EVENTNAMES = [
 ];
 class ExtGridgroupbythismenuitemComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, gridgroupbythismenuitemMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridgroupbythismenuitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridgroupbythismenuitemMetaData,hostComponent)}
     /**
@@ -58772,9 +57428,6 @@ ExtGridgroupbythismenuitemComponent.decorators = [
 ];
 /** @nocollapse */
 ExtGridgroupbythismenuitemComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -59140,19 +57793,12 @@ gridshowingroupsmenuitemMetaData.EVENTNAMES = [
 ];
 class ExtGridshowingroupsmenuitemComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, gridshowingroupsmenuitemMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridshowingroupsmenuitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridshowingroupsmenuitemMetaData,hostComponent)}
     /**
@@ -59179,9 +57825,6 @@ ExtGridshowingroupsmenuitemComponent.decorators = [
 ];
 /** @nocollapse */
 ExtGridshowingroupsmenuitemComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -59551,19 +58194,12 @@ gridsortascmenuitemMetaData.EVENTNAMES = [
 ];
 class ExtGridsortascmenuitemComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, gridsortascmenuitemMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridsortascmenuitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsortascmenuitemMetaData,hostComponent)}
     /**
@@ -59590,9 +58226,6 @@ ExtGridsortascmenuitemComponent.decorators = [
 ];
 /** @nocollapse */
 ExtGridsortascmenuitemComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -59962,19 +58595,12 @@ gridsortdescmenuitemMetaData.EVENTNAMES = [
 ];
 class ExtGridsortdescmenuitemComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, gridsortdescmenuitemMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridsortdescmenuitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsortdescmenuitemMetaData,hostComponent)}
     /**
@@ -60001,9 +58627,6 @@ ExtGridsortdescmenuitemComponent.decorators = [
 ];
 /** @nocollapse */
 ExtGridsortdescmenuitemComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -60391,19 +59014,12 @@ pagingtoolbarMetaData.EVENTNAMES = [
 ];
 class ExtPagingtoolbarComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, pagingtoolbarMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pagingtoolbarMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pagingtoolbarMetaData,hostComponent)}
     /**
@@ -60430,9 +59046,6 @@ ExtPagingtoolbarComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPagingtoolbarComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -60762,19 +59375,12 @@ gridrowMetaData.EVENTNAMES = [
 ];
 class ExtGridrowComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, gridrowMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridrowMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridrowMetaData,hostComponent)}
     /**
@@ -60801,9 +59407,6 @@ ExtGridrowComponent.decorators = [
 ];
 /** @nocollapse */
 ExtGridrowComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -61121,19 +59724,12 @@ rowbodyMetaData.EVENTNAMES = [
 ];
 class ExtRowbodyComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, rowbodyMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, rowbodyMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rowbodyMetaData,hostComponent)}
     /**
@@ -61160,9 +59756,6 @@ ExtRowbodyComponent.decorators = [
 ];
 /** @nocollapse */
 ExtRowbodyComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -61490,19 +60083,12 @@ rowheaderMetaData.EVENTNAMES = [
 ];
 class ExtRowheaderComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, rowheaderMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, rowheaderMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rowheaderMetaData,hostComponent)}
     /**
@@ -61529,9 +60115,6 @@ ExtRowheaderComponent.decorators = [
 ];
 /** @nocollapse */
 ExtRowheaderComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -61861,19 +60444,12 @@ gridsummaryrowMetaData.EVENTNAMES = [
 ];
 class ExtGridsummaryrowComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, gridsummaryrowMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gridsummaryrowMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsummaryrowMetaData,hostComponent)}
     /**
@@ -61900,9 +60476,6 @@ ExtGridsummaryrowComponent.decorators = [
 ];
 /** @nocollapse */
 ExtGridsummaryrowComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -62538,19 +61111,12 @@ treeMetaData.EVENTNAMES = [
 ];
 class ExtTreeComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, treeMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, treeMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treeMetaData,hostComponent)}
     /**
@@ -62577,9 +61143,6 @@ ExtTreeComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTreeComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -62911,19 +61474,12 @@ imageMetaData.EVENTNAMES = [
 ];
 class ExtImageComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, imageMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, imageMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,imageMetaData,hostComponent)}
     /**
@@ -62950,9 +61506,6 @@ ExtImageComponent.decorators = [
 ];
 /** @nocollapse */
 ExtImageComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -63284,19 +61837,12 @@ imgMetaData.EVENTNAMES = [
 ];
 class ExtImgComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, imgMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, imgMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,imgMetaData,hostComponent)}
     /**
@@ -63323,9 +61869,6 @@ ExtImgComponent.decorators = [
 ];
 /** @nocollapse */
 ExtImgComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -63657,19 +62200,12 @@ indicatorMetaData.EVENTNAMES = [
 ];
 class ExtIndicatorComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, indicatorMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, indicatorMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,indicatorMetaData,hostComponent)}
     /**
@@ -63696,9 +62232,6 @@ ExtIndicatorComponent.decorators = [
 ];
 /** @nocollapse */
 ExtIndicatorComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -64016,19 +62549,12 @@ labelMetaData.EVENTNAMES = [
 ];
 class ExtLabelComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, labelMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, labelMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,labelMetaData,hostComponent)}
     /**
@@ -64055,9 +62581,6 @@ ExtLabelComponent.decorators = [
 ];
 /** @nocollapse */
 ExtLabelComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -64401,19 +62924,12 @@ treelistMetaData.EVENTNAMES = [
 ];
 class ExtTreelistComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, treelistMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, treelistMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treelistMetaData,hostComponent)}
     /**
@@ -64440,9 +62956,6 @@ ExtTreelistComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTreelistComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -64634,19 +63147,12 @@ treelistitemMetaData.EVENTNAMES = [
 ];
 class ExtTreelistitemComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, treelistitemMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, treelistitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treelistitemMetaData,hostComponent)}
     /**
@@ -64673,9 +63179,6 @@ ExtTreelistitemComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTreelistitemComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -65003,19 +63506,12 @@ loadmaskMetaData.EVENTNAMES = [
 ];
 class ExtLoadmaskComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, loadmaskMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, loadmaskMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,loadmaskMetaData,hostComponent)}
     /**
@@ -65042,9 +63538,6 @@ ExtLoadmaskComponent.decorators = [
 ];
 /** @nocollapse */
 ExtLoadmaskComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -65366,19 +63859,12 @@ maskMetaData.EVENTNAMES = [
 ];
 class ExtMaskComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, maskMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, maskMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,maskMetaData,hostComponent)}
     /**
@@ -65405,9 +63891,6 @@ ExtMaskComponent.decorators = [
 ];
 /** @nocollapse */
 ExtMaskComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -65759,19 +64242,12 @@ mediaMetaData.EVENTNAMES = [
 ];
 class ExtMediaComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, mediaMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, mediaMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,mediaMetaData,hostComponent)}
     /**
@@ -65798,9 +64274,6 @@ ExtMediaComponent.decorators = [
 ];
 /** @nocollapse */
 ExtMediaComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -66166,19 +64639,12 @@ menucheckitemMetaData.EVENTNAMES = [
 ];
 class ExtMenucheckitemComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, menucheckitemMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, menucheckitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menucheckitemMetaData,hostComponent)}
     /**
@@ -66205,9 +64671,6 @@ ExtMenucheckitemComponent.decorators = [
 ];
 /** @nocollapse */
 ExtMenucheckitemComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -66559,19 +65022,12 @@ menuitemMetaData.EVENTNAMES = [
 ];
 class ExtMenuitemComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, menuitemMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, menuitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuitemMetaData,hostComponent)}
     /**
@@ -66598,9 +65054,6 @@ ExtMenuitemComponent.decorators = [
 ];
 /** @nocollapse */
 ExtMenuitemComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -67076,19 +65529,12 @@ menuMetaData.EVENTNAMES = [
 ];
 class ExtMenuComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, menuMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, menuMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuMetaData,hostComponent)}
     /**
@@ -67115,9 +65561,6 @@ ExtMenuComponent.decorators = [
 ];
 /** @nocollapse */
 ExtMenuComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -67487,19 +65930,12 @@ menuradioitemMetaData.EVENTNAMES = [
 ];
 class ExtMenuradioitemComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, menuradioitemMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, menuradioitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuradioitemMetaData,hostComponent)}
     /**
@@ -67526,9 +65962,6 @@ ExtMenuradioitemComponent.decorators = [
 ];
 /** @nocollapse */
 ExtMenuradioitemComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -67846,19 +66279,12 @@ menuseparatorMetaData.EVENTNAMES = [
 ];
 class ExtMenuseparatorComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, menuseparatorMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, menuseparatorMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuseparatorMetaData,hostComponent)}
     /**
@@ -67885,9 +66311,6 @@ ExtMenuseparatorComponent.decorators = [
 ];
 /** @nocollapse */
 ExtMenuseparatorComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -68385,19 +66808,12 @@ messageboxMetaData.EVENTNAMES = [
 ];
 class ExtMessageboxComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, messageboxMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, messageboxMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,messageboxMetaData,hostComponent)}
     /**
@@ -68424,9 +66840,6 @@ ExtMessageboxComponent.decorators = [
 ];
 /** @nocollapse */
 ExtMessageboxComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -68814,19 +67227,12 @@ navigationviewMetaData.EVENTNAMES = [
 ];
 class ExtNavigationviewComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, navigationviewMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, navigationviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,navigationviewMetaData,hostComponent)}
     /**
@@ -68853,9 +67259,6 @@ ExtNavigationviewComponent.decorators = [
 ];
 /** @nocollapse */
 ExtNavigationviewComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -69313,19 +67716,12 @@ panelMetaData.EVENTNAMES = [
 ];
 class ExtPanelComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, panelMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, panelMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,panelMetaData,hostComponent)}
     /**
@@ -69352,9 +67748,6 @@ ExtPanelComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPanelComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -69882,19 +68275,12 @@ datepanelMetaData.EVENTNAMES = [
 ];
 class ExtDatepanelComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, datepanelMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, datepanelMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepanelMetaData,hostComponent)}
     /**
@@ -69921,9 +68307,6 @@ ExtDatepanelComponent.decorators = [
 ];
 /** @nocollapse */
 ExtDatepanelComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -70257,19 +68640,12 @@ datetitleMetaData.EVENTNAMES = [
 ];
 class ExtDatetitleComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, datetitleMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, datetitleMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datetitleMetaData,hostComponent)}
     /**
@@ -70296,9 +68672,6 @@ ExtDatetitleComponent.decorators = [
 ];
 /** @nocollapse */
 ExtDatetitleComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -70690,19 +69063,12 @@ panelheaderMetaData.EVENTNAMES = [
 ];
 class ExtPanelheaderComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, panelheaderMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, panelheaderMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,panelheaderMetaData,hostComponent)}
     /**
@@ -70729,9 +69095,6 @@ ExtPanelheaderComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPanelheaderComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -71207,19 +69570,12 @@ timepanelMetaData.EVENTNAMES = [
 ];
 class ExtTimepanelComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, timepanelMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, timepanelMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timepanelMetaData,hostComponent)}
     /**
@@ -71246,9 +69602,6 @@ ExtTimepanelComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTimepanelComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -71582,19 +69935,12 @@ paneltitleMetaData.EVENTNAMES = [
 ];
 class ExtPaneltitleComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, paneltitleMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, paneltitleMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,paneltitleMetaData,hostComponent)}
     /**
@@ -71621,9 +69967,6 @@ ExtPaneltitleComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPaneltitleComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -72187,19 +70530,12 @@ yearpickerMetaData.EVENTNAMES = [
 ];
 class ExtYearpickerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, yearpickerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, yearpickerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,yearpickerMetaData,hostComponent)}
     /**
@@ -72226,9 +70562,6 @@ ExtYearpickerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtYearpickerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -72730,19 +71063,12 @@ datepickerMetaData.EVENTNAMES = [
 ];
 class ExtDatepickerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, datepickerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, datepickerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickerMetaData,hostComponent)}
     /**
@@ -72769,9 +71095,6 @@ ExtDatepickerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtDatepickerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -73261,19 +71584,12 @@ pickerMetaData.EVENTNAMES = [
 ];
 class ExtPickerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, pickerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pickerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerMetaData,hostComponent)}
     /**
@@ -73300,9 +71616,6 @@ ExtPickerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPickerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -73792,19 +72105,12 @@ selectpickerMetaData.EVENTNAMES = [
 ];
 class ExtSelectpickerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, selectpickerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, selectpickerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectpickerMetaData,hostComponent)}
     /**
@@ -73831,9 +72137,6 @@ ExtSelectpickerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSelectpickerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -74345,19 +72648,12 @@ pickerslotMetaData.EVENTNAMES = [
 ];
 class ExtPickerslotComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, pickerslotMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pickerslotMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerslotMetaData,hostComponent)}
     /**
@@ -74384,9 +72680,6 @@ ExtPickerslotComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPickerslotComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -74844,19 +73137,12 @@ tabletpickerMetaData.EVENTNAMES = [
 ];
 class ExtTabletpickerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, tabletpickerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, tabletpickerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabletpickerMetaData,hostComponent)}
     /**
@@ -74883,9 +73169,6 @@ ExtTabletpickerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTabletpickerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -75081,19 +73364,12 @@ pivotgridcellMetaData.EVENTNAMES = [
 ];
 class ExtPivotgridcellComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, pivotgridcellMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotgridcellMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridcellMetaData,hostComponent)}
     /**
@@ -75120,9 +73396,6 @@ ExtPivotgridcellComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPivotgridcellComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -75318,19 +73591,12 @@ pivotgridgroupcellMetaData.EVENTNAMES = [
 ];
 class ExtPivotgridgroupcellComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, pivotgridgroupcellMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotgridgroupcellMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridgroupcellMetaData,hostComponent)}
     /**
@@ -75357,9 +73623,6 @@ ExtPivotgridgroupcellComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPivotgridgroupcellComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -75397,19 +73660,12 @@ pivotd3containerMetaData.EVENTNAMES = [
 ];
 class ExtPivotd3containerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, pivotd3containerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotd3containerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotd3containerMetaData,hostComponent)}
     /**
@@ -75436,9 +73692,6 @@ ExtPivotd3containerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPivotd3containerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -75788,19 +74041,12 @@ pivotheatmapMetaData.EVENTNAMES = [
 ];
 class ExtPivotheatmapComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, pivotheatmapMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotheatmapMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotheatmapMetaData,hostComponent)}
     /**
@@ -75827,9 +74073,6 @@ ExtPivotheatmapComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPivotheatmapComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -76215,19 +74458,12 @@ pivottreemapMetaData.EVENTNAMES = [
 ];
 class ExtPivottreemapComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, pivottreemapMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivottreemapMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivottreemapMetaData,hostComponent)}
     /**
@@ -76254,9 +74490,6 @@ ExtPivottreemapComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPivottreemapComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -76952,19 +75185,12 @@ pivotgridMetaData.EVENTNAMES = [
 ];
 class ExtPivotgridComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, pivotgridMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotgridMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridMetaData,hostComponent)}
     /**
@@ -76991,9 +75217,6 @@ ExtPivotgridComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPivotgridComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -77383,19 +75606,12 @@ pivotconfigfieldMetaData.EVENTNAMES = [
 ];
 class ExtPivotconfigfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, pivotconfigfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotconfigfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigfieldMetaData,hostComponent)}
     /**
@@ -77422,9 +75638,6 @@ ExtPivotconfigfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPivotconfigfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -77884,19 +76097,12 @@ pivotconfigcontainerMetaData.EVENTNAMES = [
 ];
 class ExtPivotconfigcontainerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, pivotconfigcontainerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotconfigcontainerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigcontainerMetaData,hostComponent)}
     /**
@@ -77923,9 +76129,6 @@ ExtPivotconfigcontainerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPivotconfigcontainerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -78419,19 +76622,12 @@ pivotconfigformMetaData.EVENTNAMES = [
 ];
 class ExtPivotconfigformComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, pivotconfigformMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotconfigformMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigformMetaData,hostComponent)}
     /**
@@ -78458,9 +76654,6 @@ ExtPivotconfigformComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPivotconfigformComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -78934,19 +77127,12 @@ pivotconfigpanelMetaData.EVENTNAMES = [
 ];
 class ExtPivotconfigpanelComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, pivotconfigpanelMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotconfigpanelMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigpanelMetaData,hostComponent)}
     /**
@@ -78973,9 +77159,6 @@ ExtPivotconfigpanelComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPivotconfigpanelComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -79469,19 +77652,12 @@ pivotsettingsMetaData.EVENTNAMES = [
 ];
 class ExtPivotsettingsComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, pivotsettingsMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotsettingsMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotsettingsMetaData,hostComponent)}
     /**
@@ -79508,9 +77684,6 @@ ExtPivotsettingsComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPivotsettingsComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -80004,19 +78177,12 @@ pivotrangeeditorMetaData.EVENTNAMES = [
 ];
 class ExtPivotrangeeditorComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, pivotrangeeditorMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotrangeeditorMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotrangeeditorMetaData,hostComponent)}
     /**
@@ -80043,9 +78209,6 @@ ExtPivotrangeeditorComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPivotrangeeditorComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -80375,19 +78538,12 @@ pivotgridrowMetaData.EVENTNAMES = [
 ];
 class ExtPivotgridrowComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, pivotgridrowMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, pivotgridrowMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridrowMetaData,hostComponent)}
     /**
@@ -80414,9 +78570,6 @@ ExtPivotgridrowComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPivotgridrowComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -80742,19 +78895,12 @@ progressMetaData.EVENTNAMES = [
 ];
 class ExtProgressComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, progressMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, progressMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,progressMetaData,hostComponent)}
     /**
@@ -80781,9 +78927,6 @@ ExtProgressComponent.decorators = [
 ];
 /** @nocollapse */
 ExtProgressComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -81109,19 +79252,12 @@ progressbarwidgetMetaData.EVENTNAMES = [
 ];
 class ExtProgressbarwidgetComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, progressbarwidgetMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, progressbarwidgetMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,progressbarwidgetMetaData,hostComponent)}
     /**
@@ -81148,9 +79284,6 @@ ExtProgressbarwidgetComponent.decorators = [
 ];
 /** @nocollapse */
 ExtProgressbarwidgetComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -81546,19 +79679,12 @@ segmentedbuttonMetaData.EVENTNAMES = [
 ];
 class ExtSegmentedbuttonComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, segmentedbuttonMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, segmentedbuttonMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,segmentedbuttonMetaData,hostComponent)}
     /**
@@ -81585,9 +79711,6 @@ ExtSegmentedbuttonComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSegmentedbuttonComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -82059,19 +80182,12 @@ sheetMetaData.EVENTNAMES = [
 ];
 class ExtSheetComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, sheetMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sheetMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sheetMetaData,hostComponent)}
     /**
@@ -82098,9 +80214,6 @@ ExtSheetComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSheetComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -82446,19 +80559,12 @@ sliderMetaData.EVENTNAMES = [
 ];
 class ExtSliderComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, sliderMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sliderMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sliderMetaData,hostComponent)}
     /**
@@ -82485,9 +80591,6 @@ ExtSliderComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSliderComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -82809,19 +80912,12 @@ thumbMetaData.EVENTNAMES = [
 ];
 class ExtThumbComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, thumbMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, thumbMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,thumbMetaData,hostComponent)}
     /**
@@ -82848,9 +80944,6 @@ ExtThumbComponent.decorators = [
 ];
 /** @nocollapse */
 ExtThumbComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -83196,19 +81289,12 @@ togglesliderMetaData.EVENTNAMES = [
 ];
 class ExtTogglesliderComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, togglesliderMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, togglesliderMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,togglesliderMetaData,hostComponent)}
     /**
@@ -83235,9 +81321,6 @@ ExtTogglesliderComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTogglesliderComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -83555,19 +81638,12 @@ spacerMetaData.EVENTNAMES = [
 ];
 class ExtSpacerComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, spacerMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, spacerMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spacerMetaData,hostComponent)}
     /**
@@ -83594,9 +81670,6 @@ ExtSpacerComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSpacerComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -83956,19 +82029,12 @@ sparklinebarMetaData.EVENTNAMES = [
 ];
 class ExtSparklinebarComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, sparklinebarMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sparklinebarMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinebarMetaData,hostComponent)}
     /**
@@ -83995,9 +82061,6 @@ ExtSparklinebarComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSparklinebarComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -84333,19 +82396,12 @@ sparklineMetaData.EVENTNAMES = [
 ];
 class ExtSparklineComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, sparklineMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sparklineMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklineMetaData,hostComponent)}
     /**
@@ -84372,9 +82428,6 @@ ExtSparklineComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSparklineComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -84738,19 +82791,12 @@ sparklineboxMetaData.EVENTNAMES = [
 ];
 class ExtSparklineboxComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, sparklineboxMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sparklineboxMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklineboxMetaData,hostComponent)}
     /**
@@ -84777,9 +82823,6 @@ ExtSparklineboxComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSparklineboxComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -85125,19 +83168,12 @@ sparklinebulletMetaData.EVENTNAMES = [
 ];
 class ExtSparklinebulletComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, sparklinebulletMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sparklinebulletMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinebulletMetaData,hostComponent)}
     /**
@@ -85164,9 +83200,6 @@ ExtSparklinebulletComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSparklinebulletComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -85514,19 +83547,12 @@ sparklinediscreteMetaData.EVENTNAMES = [
 ];
 class ExtSparklinediscreteComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, sparklinediscreteMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sparklinediscreteMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinediscreteMetaData,hostComponent)}
     /**
@@ -85553,9 +83579,6 @@ ExtSparklinediscreteComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSparklinediscreteComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -85925,19 +83948,12 @@ sparklinelineMetaData.EVENTNAMES = [
 ];
 class ExtSparklinelineComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, sparklinelineMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sparklinelineMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinelineMetaData,hostComponent)}
     /**
@@ -85964,9 +83980,6 @@ ExtSparklinelineComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSparklinelineComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -86310,19 +84323,12 @@ sparklinepieMetaData.EVENTNAMES = [
 ];
 class ExtSparklinepieComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, sparklinepieMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sparklinepieMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinepieMetaData,hostComponent)}
     /**
@@ -86349,9 +84355,6 @@ ExtSparklinepieComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSparklinepieComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -86699,19 +84702,12 @@ sparklinetristateMetaData.EVENTNAMES = [
 ];
 class ExtSparklinetristateComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, sparklinetristateMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, sparklinetristateMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinetristateMetaData,hostComponent)}
     /**
@@ -86738,9 +84734,6 @@ ExtSparklinetristateComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSparklinetristateComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -87114,19 +85107,12 @@ splitbuttonMetaData.EVENTNAMES = [
 ];
 class ExtSplitbuttonComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, splitbuttonMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, splitbuttonMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,splitbuttonMetaData,hostComponent)}
     /**
@@ -87153,9 +85139,6 @@ ExtSplitbuttonComponent.decorators = [
 ];
 /** @nocollapse */
 ExtSplitbuttonComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -87547,19 +85530,12 @@ tabbarMetaData.EVENTNAMES = [
 ];
 class ExtTabbarComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, tabbarMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, tabbarMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabbarMetaData,hostComponent)}
     /**
@@ -87586,9 +85562,6 @@ ExtTabbarComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTabbarComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -87970,19 +85943,12 @@ tabpanelMetaData.EVENTNAMES = [
 ];
 class ExtTabpanelComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, tabpanelMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, tabpanelMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabpanelMetaData,hostComponent)}
     /**
@@ -88009,9 +85975,6 @@ ExtTabpanelComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTabpanelComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -88391,19 +86354,12 @@ tabMetaData.EVENTNAMES = [
 ];
 class ExtTabComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, tabMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, tabMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabMetaData,hostComponent)}
     /**
@@ -88430,9 +86386,6 @@ ExtTabComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTabComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -88918,19 +86871,12 @@ tooltipMetaData.EVENTNAMES = [
 ];
 class ExtTooltipComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, tooltipMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, tooltipMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tooltipMetaData,hostComponent)}
     /**
@@ -88957,9 +86903,6 @@ ExtTooltipComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTooltipComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -89279,19 +87222,12 @@ titleMetaData.EVENTNAMES = [
 ];
 class ExtTitleComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, titleMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, titleMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,titleMetaData,hostComponent)}
     /**
@@ -89318,9 +87254,6 @@ ExtTitleComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTitleComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -89704,19 +87637,12 @@ titlebarMetaData.EVENTNAMES = [
 ];
 class ExtTitlebarComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, titlebarMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, titlebarMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,titlebarMetaData,hostComponent)}
     /**
@@ -89743,9 +87669,6 @@ ExtTitlebarComponent.decorators = [
 ];
 /** @nocollapse */
 ExtTitlebarComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -90079,19 +88002,12 @@ toolMetaData.EVENTNAMES = [
 ];
 class ExtToolComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, toolMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, toolMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,toolMetaData,hostComponent)}
     /**
@@ -90118,9 +88034,6 @@ ExtToolComponent.decorators = [
 ];
 /** @nocollapse */
 ExtToolComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -90454,19 +88367,12 @@ paneltoolMetaData.EVENTNAMES = [
 ];
 class ExtPaneltoolComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, paneltoolMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, paneltoolMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,paneltoolMetaData,hostComponent)}
     /**
@@ -90493,9 +88399,6 @@ ExtPaneltoolComponent.decorators = [
 ];
 /** @nocollapse */
 ExtPaneltoolComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -90875,19 +88778,12 @@ toolbarMetaData.EVENTNAMES = [
 ];
 class ExtToolbarComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, toolbarMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, toolbarMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,toolbarMetaData,hostComponent)}
     /**
@@ -90914,9 +88810,6 @@ ExtToolbarComponent.decorators = [
 ];
 /** @nocollapse */
 ExtToolbarComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -91246,19 +89139,12 @@ colorbuttonMetaData.EVENTNAMES = [
 ];
 class ExtColorbuttonComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, colorbuttonMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, colorbuttonMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorbuttonMetaData,hostComponent)}
     /**
@@ -91285,9 +89171,6 @@ ExtColorbuttonComponent.decorators = [
 ];
 /** @nocollapse */
 ExtColorbuttonComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -91605,19 +89488,12 @@ colorpickercolorpreviewMetaData.EVENTNAMES = [
 ];
 class ExtColorpickercolorpreviewComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, colorpickercolorpreviewMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, colorpickercolorpreviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorpickercolorpreviewMetaData,hostComponent)}
     /**
@@ -91644,9 +89520,6 @@ ExtColorpickercolorpreviewComponent.decorators = [
 ];
 /** @nocollapse */
 ExtColorpickercolorpreviewComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -92102,19 +89975,12 @@ colorfieldMetaData.EVENTNAMES = [
 ];
 class ExtColorfieldComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, colorfieldMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, colorfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorfieldMetaData,hostComponent)}
     /**
@@ -92141,9 +90007,6 @@ ExtColorfieldComponent.decorators = [
 ];
 /** @nocollapse */
 ExtColorfieldComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -92201,19 +90064,12 @@ colorselectorMetaData.EVENTNAMES = [
 ];
 class ExtColorselectorComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, colorselectorMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, colorselectorMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorselectorMetaData,hostComponent)}
     /**
@@ -92240,9 +90096,6 @@ ExtColorselectorComponent.decorators = [
 ];
 /** @nocollapse */
 ExtColorselectorComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -92588,19 +90441,12 @@ gaugeMetaData.EVENTNAMES = [
 ];
 class ExtGaugeComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, gaugeMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, gaugeMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gaugeMetaData,hostComponent)}
     /**
@@ -92627,9 +90473,6 @@ ExtGaugeComponent.decorators = [
 ];
 /** @nocollapse */
 ExtGaugeComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -93049,19 +90892,12 @@ mapMetaData.EVENTNAMES = [
 ];
 class ExtMapComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, mapMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, mapMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,mapMetaData,hostComponent)}
     /**
@@ -93088,9 +90924,6 @@ ExtMapComponent.decorators = [
 ];
 /** @nocollapse */
 ExtMapComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -93510,19 +91343,12 @@ google_mapMetaData.EVENTNAMES = [
 ];
 class ExtGoogle_mapComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, google_mapMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, google_mapMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,google_mapMetaData,hostComponent)}
     /**
@@ -93549,9 +91375,6 @@ ExtGoogle_mapComponent.decorators = [
 ];
 /** @nocollapse */
 ExtGoogle_mapComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -93897,19 +91720,12 @@ ratingMetaData.EVENTNAMES = [
 ];
 class ExtRatingComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, ratingMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, ratingMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,ratingMetaData,hostComponent)}
     /**
@@ -93936,9 +91752,6 @@ ExtRatingComponent.decorators = [
 ];
 /** @nocollapse */
 ExtRatingComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -94294,19 +92107,12 @@ videoMetaData.EVENTNAMES = [
 ];
 class ExtVideoComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, videoMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, videoMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,videoMetaData,hostComponent)}
     /**
@@ -94333,9 +92139,6 @@ ExtVideoComponent.decorators = [
 ];
 /** @nocollapse */
 ExtVideoComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -94729,19 +92532,12 @@ viewportMetaData.EVENTNAMES = [
 ];
 class ExtViewportComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, viewportMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, viewportMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,viewportMetaData,hostComponent)}
     /**
@@ -94768,9 +92564,6 @@ ExtViewportComponent.decorators = [
 ];
 /** @nocollapse */
 ExtViewportComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];
@@ -94930,19 +92723,12 @@ widgetMetaData.EVENTNAMES = [
 ];
 class ExtWidgetComponent extends base {
     /**
-     * @param {?} location
-     * @param {?} resolver
-     * @param {?} changeDetector
      * @param {?} eRef
      * @param {?} hostComponent
      */
-    constructor(location, resolver, changeDetector, eRef, hostComponent) {
-        super(eRef, eRef.nativeElement, widgetMetaData, hostComponent);
-        this.location = location;
-        this.resolver = resolver;
-        this.changeDetector = changeDetector;
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, widgetMetaData, hostComponent);
         this.hostComponent = hostComponent;
-        console.log(location);
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,widgetMetaData,hostComponent)}
     /**
@@ -94969,9 +92755,6 @@ ExtWidgetComponent.decorators = [
 ];
 /** @nocollapse */
 ExtWidgetComponent.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: ComponentFactoryResolver },
-    { type: ChangeDetectorRef },
     { type: ElementRef },
     { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
 ];

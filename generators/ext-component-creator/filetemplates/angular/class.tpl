@@ -1,7 +1,4 @@
 import {
-  ComponentFactoryResolver,
-  ViewContainerRef,
-  ChangeDetectorRef,
   Injectable,
   Host,
   Optional,
@@ -36,13 +33,8 @@ export class {classname}MetaData {
 })
 export class Ext{capclassname}Component extends base implements OnInit,AfterContentInit,OnChanges {
   constructor(
-  //      private parentContexts: ChildrenOutletContexts,
-        private location: ViewContainerRef,
-        private resolver: ComponentFactoryResolver, 
-        private changeDetector: ChangeDetectorRef,
     eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {
-      super(eRef,eRef.nativeElement,{classname}MetaData,hostComponent)
-      console.log(location)
+      super(eRef.nativeElement,{classname}MetaData,hostComponent)
     }
   //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,{classname}MetaData,hostComponent)}
   public ngOnInit() {this.baseOnInit({classname}MetaData)}
