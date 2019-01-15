@@ -145,7 +145,7 @@ export class LandingpageComponent implements OnInit {
       next: (v) => {
         this.node = v;
         this.files = getFiles(v, _code);
-        console.log("files length : " + this.files.length);
+        //console.log("files length : " + this.files.length);
         this.highlightCode();
         //console.log("Generating breadcrumb for ID: " + v.id);
         this.breadcrumb = generateBreadcrumb(v);

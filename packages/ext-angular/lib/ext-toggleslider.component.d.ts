@@ -1,4 +1,4 @@
-import { ComponentFactoryResolver, ViewContainerRef, ChangeDetectorRef, OnInit, AfterContentInit, OnChanges, ElementRef } from '@angular/core';
+import { OnInit, AfterContentInit, OnChanges, ElementRef } from '@angular/core';
 import { base } from './base';
 export declare class togglesliderMetaData {
     static XTYPE: string;
@@ -8,11 +8,8 @@ export declare class togglesliderMetaData {
     static EVENTNAMES: string[];
 }
 export declare class ExtTogglesliderComponent extends base implements OnInit, AfterContentInit, OnChanges {
-    private location;
-    private resolver;
-    private changeDetector;
     hostComponent: base;
-    constructor(location: ViewContainerRef, resolver: ComponentFactoryResolver, changeDetector: ChangeDetectorRef, eRef: ElementRef, hostComponent: base);
+    constructor(eRef: ElementRef, hostComponent: base);
     ngOnInit(): void;
     ngAfterContentInit(): void;
 }

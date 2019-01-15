@@ -759,7 +759,6 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
 export class AppModule {
   constructor(extAngularService : ExtAngularBootstrapService) {
-    console.log("In AppModule constructor")
     extAngularService.setBootStrapComponent(LandingpageComponent)
   }
 }

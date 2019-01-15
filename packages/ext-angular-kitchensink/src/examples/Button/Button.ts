@@ -26,7 +26,7 @@ export class ButtonComponent implements OnInit  {
 
 
   onStyleChange = (item) => {
-    console.log("onStyleChange : " + item._text);
+    //console.log("onStyleChange : " + item._text);
     this.style = item._text; 
     if (this.style === 'Menu') {
       this.menu = true;
@@ -59,18 +59,17 @@ export class ButtonComponent implements OnInit  {
   }
 
   onTypeChange = (item) => {
-    console.log("onTypeChange : " + item._text);
+//    console.log("onTypeChange : " + item._text);
     this.type = item._text; 
-    console.log("this.type : " + this.type);
+//    console.log("this.type : " + this.type);
     this.iconCls = this.type.indexOf('Icon') !== -1 ? 'x-fa fa-heart' : null;
     this.text = this.type.indexOf('Text') !== -1;
   }
 
   toggleRound = function(){
-    //debugger;
-    console.log("In toggleRound");
+//    console.log("In toggleRound");
     this.round=!this.round;
-    console.log("Round: " + this.round);
+//    console.log("Round: " + this.round);
     if (this.round) { 
       this.ui += ' round';
     }
@@ -79,10 +78,12 @@ export class ButtonComponent implements OnInit  {
     }
   };
 
-  styleChangeDefaults = { handler: this.onStyleChange, group: 'buttonstyle' };
-  typeChangeDefaults = { handler: this.onTypeChange, group: 'buttonstyle' };
+  //mjg what is group for?
+  //styleChangeDefaults = { handler: this.onStyleChange, group: 'buttonstyle' };
+  //typeChangeDefaults = { handler: this.onTypeChange, group: 'buttonstyle' };
 
-
+  styleChangeDefaults = { handler: this.onStyleChange };
+  typeChangeDefaults = { handler: this.onTypeChange };
 
 
   constructor() { }

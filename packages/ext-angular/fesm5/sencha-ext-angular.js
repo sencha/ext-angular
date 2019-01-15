@@ -1,5 +1,5 @@
 import { __extends } from 'tslib';
-import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, Component, ElementRef, EventEmitter, ContentChild, ContentChildren, NgModule, defineInjectable, inject, INJECTOR, forwardRef, ViewContainerRef, ChangeDetectorRef, Host, Optional, SkipSelf } from '@angular/core';
+import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, Component, ElementRef, EventEmitter, ContentChild, ContentChildren, NgModule, defineInjectable, inject, INJECTOR, forwardRef, Host, Optional, SkipSelf } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -90,13 +90,12 @@ var ExtAngularBootstrapComponent = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var base = /** @class */ (function () {
-    function base(eRef, nativeElement, metaData, hostComponent) {
+    function base(nativeElement, metaData, hostComponent) {
         var _this = this;
         this.metaData = metaData;
         this.hostComponent = hostComponent;
         this._extChildren = false;
         //    console.log('constructor')
-        //    console.log(eRef)
         this._nativeElement = nativeElement;
         this._hostComponent = hostComponent;
         metaData.EVENTS.forEach(function (event, n) {
@@ -195,47 +194,45 @@ var base = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        console.log("ngOnDestroy");
+        //console.log(`ngOnDestroy`)
+        /** @type {?} */
+        var childCmp;
+        /** @type {?} */
+        var parentCmp;
         try {
             //console.log(this)
             //console.log(this.ext)
+            childCmp = this.ext;
             //console.log(this._hostComponent)
-            //console.log(this._hostComponent.ext)
-            /** @type {?} */
-            var parent = this._hostComponent.ext;
-            /** @type {?} */
-            var child = this.ext;
-            console.log(parent);
-            console.log(child);
-            parent.remove([child]);
+            if (this._hostComponent != null) {
+                //console.log(this._hostComponent.ext)
+                parentCmp = this._hostComponent.ext;
+                //console.log(parentCmp)
+                //console.log(childCmp)
+                if (parentCmp.xtype == 'button' && childCmp.xtype == 'menu') ;
+                else if (parentCmp.xtype == 'carousel') ;
+                else {
+                    parentCmp.remove([childCmp]);
+                    childCmp.destroy();
+                }
+            }
         }
         catch (e) {
             console.error(e);
+            console.log('*****');
+            console.log(parentCmp);
+            console.log(childCmp);
+            console.log('*****');
         }
     };
-    //@ContentChild('extjs') _extjs: any;
-    //  @ContentChildren('extjs') _items: QueryList<any>
-    //@ContentChildren('HtmlElement') _htmlElement: QueryList<any>
-    // @ContentChildren('extjs', { read: ElementRef }) _elRefItems: QueryList<ElementRef>
-    //@ContentChild('extjs') _extjs: any;
-    //  @ContentChildren('extjs') _items: QueryList<any>
-    //@ContentChildren('HtmlElement') _htmlElement: QueryList<any>
-    // @ContentChildren('extjs', { read: ElementRef }) _elRefItems: QueryList<ElementRef>
     /**
      * @return {?}
      */
-    base.prototype.baseAfterContentInit = 
-    //@ContentChild('extjs') _extjs: any;
-    //  @ContentChildren('extjs') _items: QueryList<any>
-    //@ContentChildren('HtmlElement') _htmlElement: QueryList<any>
-    // @ContentChildren('extjs', { read: ElementRef }) _elRefItems: QueryList<ElementRef>
-    /**
+    base.prototype.baseAfterContentInit = /**
      * @return {?}
      */
     function () {
-        console.log('\nbaseAfterContentInit');
-        //    console.log('this._extroute')
-        //    console.log(this._extroute)
+        //    console.log('\nbaseAfterContentInit')
         if (this._extroute != undefined) {
             this.ext.add({ xtype: 'container', html: this._extroute.nativeElement });
             return;
@@ -245,11 +242,29 @@ var base = /** @class */ (function () {
         //    console.log(this._items)
         //    console.log('this')
         //    console.log(this)
-        if (this._hostComponent == null) ;
-        else {
-            console.log('_hostComponent: ');
-            console.log(this._hostComponent);
-            console.log('parent: ' + this._hostComponent.ext.xtype);
+        //if(this._hostComponent == null) {
+        // console.log('root')
+        // var anyItems: any[] = []
+        // var elRefItems: any[] = []
+        // this._items.forEach(item => {anyItems.push(item)})
+        // this._elRefItems.forEach(item => {elRefItems.push(item)})
+        // for (var i in anyItems) {
+        //   var item = anyItems[i]
+        //   var elRefItem = elRefItems[i]
+        //   if (item.nativeElement != undefined) {
+        //     console.log('here')
+        //     this.ext.add({xtype: 'container',html: item.nativeElement})
+        //   }
+        //   else {
+        //     console.log('not supported')
+        //   }
+        // }
+        //}
+        //else {
+        if (this._hostComponent != null) {
+            //console.log('_hostComponent: ')
+            //console.log(this._hostComponent)
+            //console.log('parent: ' + this._hostComponent.ext.xtype)
             /** @type {?} */
             var parentCmp = this._hostComponent.ext;
             /** @type {?} */
@@ -1081,13 +1096,9 @@ var actionsheetMetaData = /** @class */ (function () {
 }());
 var ExtActionsheetComponent = /** @class */ (function (_super) {
     __extends(ExtActionsheetComponent, _super);
-    function ExtActionsheetComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, actionsheetMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtActionsheetComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, actionsheetMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,actionsheetMetaData,hostComponent)}
@@ -1126,9 +1137,6 @@ var ExtActionsheetComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtActionsheetComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -1485,13 +1493,9 @@ var audioMetaData = /** @class */ (function () {
 }());
 var ExtAudioComponent = /** @class */ (function (_super) {
     __extends(ExtAudioComponent, _super);
-    function ExtAudioComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, audioMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtAudioComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, audioMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,audioMetaData,hostComponent)}
@@ -1530,9 +1534,6 @@ var ExtAudioComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtAudioComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -1907,13 +1908,9 @@ var buttonMetaData = /** @class */ (function () {
 }());
 var ExtButtonComponent = /** @class */ (function (_super) {
     __extends(ExtButtonComponent, _super);
-    function ExtButtonComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, buttonMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtButtonComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, buttonMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,buttonMetaData,hostComponent)}
@@ -1952,9 +1949,6 @@ var ExtButtonComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtButtonComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -2297,13 +2291,9 @@ var calendar_eventMetaData = /** @class */ (function () {
 }());
 var ExtCalendar_eventComponent = /** @class */ (function (_super) {
     __extends(ExtCalendar_eventComponent, _super);
-    function ExtCalendar_eventComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendar_eventMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendar_eventComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendar_eventMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_eventMetaData,hostComponent)}
@@ -2342,9 +2332,6 @@ var ExtCalendar_eventComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendar_eventComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -2879,13 +2866,9 @@ var calendar_form_addMetaData = /** @class */ (function () {
 }());
 var ExtCalendar_form_addComponent = /** @class */ (function (_super) {
     __extends(ExtCalendar_form_addComponent, _super);
-    function ExtCalendar_form_addComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendar_form_addMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendar_form_addComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendar_form_addMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_form_addMetaData,hostComponent)}
@@ -2924,9 +2907,6 @@ var ExtCalendar_form_addComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendar_form_addComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -3427,13 +3407,9 @@ var calendar_calendar_pickerMetaData = /** @class */ (function () {
 }());
 var ExtCalendar_calendar_pickerComponent = /** @class */ (function (_super) {
     __extends(ExtCalendar_calendar_pickerComponent, _super);
-    function ExtCalendar_calendar_pickerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendar_calendar_pickerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendar_calendar_pickerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendar_calendar_pickerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_calendar_pickerMetaData,hostComponent)}
@@ -3472,9 +3448,6 @@ var ExtCalendar_calendar_pickerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendar_calendar_pickerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -4009,13 +3982,9 @@ var calendar_form_editMetaData = /** @class */ (function () {
 }());
 var ExtCalendar_form_editComponent = /** @class */ (function (_super) {
     __extends(ExtCalendar_form_editComponent, _super);
-    function ExtCalendar_form_editComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendar_form_editMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendar_form_editComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendar_form_editMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_form_editMetaData,hostComponent)}
@@ -4054,9 +4023,6 @@ var ExtCalendar_form_editComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendar_form_editComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -4557,13 +4523,9 @@ var calendar_timefieldMetaData = /** @class */ (function () {
 }());
 var ExtCalendar_timefieldComponent = /** @class */ (function (_super) {
     __extends(ExtCalendar_timefieldComponent, _super);
-    function ExtCalendar_timefieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendar_timefieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendar_timefieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendar_timefieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_timefieldMetaData,hostComponent)}
@@ -4602,9 +4564,6 @@ var ExtCalendar_timefieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendar_timefieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -4939,13 +4898,9 @@ var calendar_daysheaderMetaData = /** @class */ (function () {
 }());
 var ExtCalendar_daysheaderComponent = /** @class */ (function (_super) {
     __extends(ExtCalendar_daysheaderComponent, _super);
-    function ExtCalendar_daysheaderComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendar_daysheaderMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendar_daysheaderComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendar_daysheaderMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysheaderMetaData,hostComponent)}
@@ -4984,9 +4939,6 @@ var ExtCalendar_daysheaderComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendar_daysheaderComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -5321,13 +5273,9 @@ var calendar_weeksheaderMetaData = /** @class */ (function () {
 }());
 var ExtCalendar_weeksheaderComponent = /** @class */ (function (_super) {
     __extends(ExtCalendar_weeksheaderComponent, _super);
-    function ExtCalendar_weeksheaderComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendar_weeksheaderMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendar_weeksheaderComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendar_weeksheaderMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksheaderMetaData,hostComponent)}
@@ -5366,9 +5314,6 @@ var ExtCalendar_weeksheaderComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendar_weeksheaderComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -5871,13 +5816,9 @@ var calendar_listMetaData = /** @class */ (function () {
 }());
 var ExtCalendar_listComponent = /** @class */ (function (_super) {
     __extends(ExtCalendar_listComponent, _super);
-    function ExtCalendar_listComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendar_listMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendar_listComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendar_listMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_listMetaData,hostComponent)}
@@ -5916,9 +5857,6 @@ var ExtCalendar_listComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendar_listComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -6455,13 +6393,9 @@ var calendar_dayMetaData = /** @class */ (function () {
 }());
 var ExtCalendar_dayComponent = /** @class */ (function (_super) {
     __extends(ExtCalendar_dayComponent, _super);
-    function ExtCalendar_dayComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendar_dayMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendar_dayComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendar_dayMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_dayMetaData,hostComponent)}
@@ -6500,9 +6434,6 @@ var ExtCalendar_dayComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendar_dayComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -7039,13 +6970,9 @@ var calendar_daysMetaData = /** @class */ (function () {
 }());
 var ExtCalendar_daysComponent = /** @class */ (function (_super) {
     __extends(ExtCalendar_daysComponent, _super);
-    function ExtCalendar_daysComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendar_daysMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendar_daysComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendar_daysMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysMetaData,hostComponent)}
@@ -7084,9 +7011,6 @@ var ExtCalendar_daysComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendar_daysComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -7619,13 +7543,9 @@ var calendar_monthMetaData = /** @class */ (function () {
 }());
 var ExtCalendar_monthComponent = /** @class */ (function (_super) {
     __extends(ExtCalendar_monthComponent, _super);
-    function ExtCalendar_monthComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendar_monthMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendar_monthComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendar_monthMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_monthMetaData,hostComponent)}
@@ -7664,9 +7584,6 @@ var ExtCalendar_monthComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendar_monthComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -8169,13 +8086,9 @@ var calendarMetaData = /** @class */ (function () {
 }());
 var ExtCalendarComponent = /** @class */ (function (_super) {
     __extends(ExtCalendarComponent, _super);
-    function ExtCalendarComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendarMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendarComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendarMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendarMetaData,hostComponent)}
@@ -8214,9 +8127,6 @@ var ExtCalendarComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendarComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -8755,13 +8665,9 @@ var calendar_weekMetaData = /** @class */ (function () {
 }());
 var ExtCalendar_weekComponent = /** @class */ (function (_super) {
     __extends(ExtCalendar_weekComponent, _super);
-    function ExtCalendar_weekComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendar_weekMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendar_weekComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendar_weekMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weekMetaData,hostComponent)}
@@ -8800,9 +8706,6 @@ var ExtCalendar_weekComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendar_weekComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -9335,13 +9238,9 @@ var calendar_weeksMetaData = /** @class */ (function () {
 }());
 var ExtCalendar_weeksComponent = /** @class */ (function (_super) {
     __extends(ExtCalendar_weeksComponent, _super);
-    function ExtCalendar_weeksComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendar_weeksMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendar_weeksComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendar_weeksMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksMetaData,hostComponent)}
@@ -9380,9 +9279,6 @@ var ExtCalendar_weeksComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendar_weeksComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -9775,13 +9671,9 @@ var calendar_dayviewMetaData = /** @class */ (function () {
 }());
 var ExtCalendar_dayviewComponent = /** @class */ (function (_super) {
     __extends(ExtCalendar_dayviewComponent, _super);
-    function ExtCalendar_dayviewComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendar_dayviewMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendar_dayviewComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendar_dayviewMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_dayviewMetaData,hostComponent)}
@@ -9820,9 +9712,6 @@ var ExtCalendar_dayviewComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendar_dayviewComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -10215,13 +10104,9 @@ var calendar_daysviewMetaData = /** @class */ (function () {
 }());
 var ExtCalendar_daysviewComponent = /** @class */ (function (_super) {
     __extends(ExtCalendar_daysviewComponent, _super);
-    function ExtCalendar_daysviewComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendar_daysviewMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendar_daysviewComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendar_daysviewMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysviewMetaData,hostComponent)}
@@ -10260,9 +10145,6 @@ var ExtCalendar_daysviewComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendar_daysviewComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -10653,13 +10535,9 @@ var calendar_monthviewMetaData = /** @class */ (function () {
 }());
 var ExtCalendar_monthviewComponent = /** @class */ (function (_super) {
     __extends(ExtCalendar_monthviewComponent, _super);
-    function ExtCalendar_monthviewComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendar_monthviewMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendar_monthviewComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendar_monthviewMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_monthviewMetaData,hostComponent)}
@@ -10698,9 +10576,6 @@ var ExtCalendar_monthviewComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendar_monthviewComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -10753,13 +10628,9 @@ var calendar_multiviewMetaData = /** @class */ (function () {
 }());
 var ExtCalendar_multiviewComponent = /** @class */ (function (_super) {
     __extends(ExtCalendar_multiviewComponent, _super);
-    function ExtCalendar_multiviewComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendar_multiviewMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendar_multiviewComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendar_multiviewMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_multiviewMetaData,hostComponent)}
@@ -10798,9 +10669,6 @@ var ExtCalendar_multiviewComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendar_multiviewComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -11195,13 +11063,9 @@ var calendar_weekviewMetaData = /** @class */ (function () {
 }());
 var ExtCalendar_weekviewComponent = /** @class */ (function (_super) {
     __extends(ExtCalendar_weekviewComponent, _super);
-    function ExtCalendar_weekviewComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendar_weekviewMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendar_weekviewComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendar_weekviewMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weekviewMetaData,hostComponent)}
@@ -11240,9 +11104,6 @@ var ExtCalendar_weekviewComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendar_weekviewComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -11633,13 +11494,9 @@ var calendar_weeksviewMetaData = /** @class */ (function () {
 }());
 var ExtCalendar_weeksviewComponent = /** @class */ (function (_super) {
     __extends(ExtCalendar_weeksviewComponent, _super);
-    function ExtCalendar_weeksviewComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, calendar_weeksviewMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCalendar_weeksviewComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, calendar_weeksviewMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksviewMetaData,hostComponent)}
@@ -11678,9 +11535,6 @@ var ExtCalendar_weeksviewComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCalendar_weeksviewComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -12065,13 +11919,9 @@ var carouselMetaData = /** @class */ (function () {
 }());
 var ExtCarouselComponent = /** @class */ (function (_super) {
     __extends(ExtCarouselComponent, _super);
-    function ExtCarouselComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, carouselMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCarouselComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, carouselMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,carouselMetaData,hostComponent)}
@@ -12110,9 +11960,6 @@ var ExtCarouselComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCarouselComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -12223,13 +12070,9 @@ var axis3dMetaData = /** @class */ (function () {
 }());
 var ExtAxis3dComponent = /** @class */ (function (_super) {
     __extends(ExtAxis3dComponent, _super);
-    function ExtAxis3dComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, axis3dMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtAxis3dComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, axis3dMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,axis3dMetaData,hostComponent)}
@@ -12268,9 +12111,6 @@ var ExtAxis3dComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtAxis3dComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -12741,13 +12581,9 @@ var cartesianMetaData = /** @class */ (function () {
 }());
 var ExtCartesianComponent = /** @class */ (function (_super) {
     __extends(ExtCartesianComponent, _super);
-    function ExtCartesianComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, cartesianMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCartesianComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, cartesianMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,cartesianMetaData,hostComponent)}
@@ -12786,9 +12622,6 @@ var ExtCartesianComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCartesianComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -13259,13 +13092,9 @@ var chartMetaData = /** @class */ (function () {
 }());
 var ExtChartComponent = /** @class */ (function (_super) {
     __extends(ExtChartComponent, _super);
-    function ExtChartComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, chartMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtChartComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, chartMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chartMetaData,hostComponent)}
@@ -13304,9 +13133,6 @@ var ExtChartComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtChartComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -13351,13 +13177,9 @@ var interactionMetaData = /** @class */ (function () {
 }());
 var ExtInteractionComponent = /** @class */ (function (_super) {
     __extends(ExtInteractionComponent, _super);
-    function ExtInteractionComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, interactionMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtInteractionComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, interactionMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,interactionMetaData,hostComponent)}
@@ -13396,9 +13218,6 @@ var ExtInteractionComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtInteractionComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -13903,13 +13722,9 @@ var legendMetaData = /** @class */ (function () {
 }());
 var ExtLegendComponent = /** @class */ (function (_super) {
     __extends(ExtLegendComponent, _super);
-    function ExtLegendComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, legendMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtLegendComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, legendMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,legendMetaData,hostComponent)}
@@ -13948,9 +13763,6 @@ var ExtLegendComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtLegendComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -14335,13 +14147,9 @@ var chartnavigatorMetaData = /** @class */ (function () {
 }());
 var ExtChartnavigatorComponent = /** @class */ (function (_super) {
     __extends(ExtChartnavigatorComponent, _super);
-    function ExtChartnavigatorComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, chartnavigatorMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtChartnavigatorComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, chartnavigatorMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chartnavigatorMetaData,hostComponent)}
@@ -14380,9 +14188,6 @@ var ExtChartnavigatorComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtChartnavigatorComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -14855,13 +14660,9 @@ var polarMetaData = /** @class */ (function () {
 }());
 var ExtPolarComponent = /** @class */ (function (_super) {
     __extends(ExtPolarComponent, _super);
-    function ExtPolarComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, polarMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPolarComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, polarMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,polarMetaData,hostComponent)}
@@ -14900,9 +14701,6 @@ var ExtPolarComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPolarComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -15369,13 +15167,9 @@ var spacefillingMetaData = /** @class */ (function () {
 }());
 var ExtSpacefillingComponent = /** @class */ (function (_super) {
     __extends(ExtSpacefillingComponent, _super);
-    function ExtSpacefillingComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, spacefillingMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSpacefillingComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, spacefillingMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spacefillingMetaData,hostComponent)}
@@ -15414,9 +15208,6 @@ var ExtSpacefillingComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSpacefillingComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -15751,13 +15542,9 @@ var chipMetaData = /** @class */ (function () {
 }());
 var ExtChipComponent = /** @class */ (function (_super) {
     __extends(ExtChipComponent, _super);
-    function ExtChipComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, chipMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtChipComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, chipMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chipMetaData,hostComponent)}
@@ -15796,9 +15583,6 @@ var ExtChipComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtChipComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -16121,13 +15905,9 @@ var componentMetaData = /** @class */ (function () {
 }());
 var ExtComponentComponent = /** @class */ (function (_super) {
     __extends(ExtComponentComponent, _super);
-    function ExtComponentComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, componentMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtComponentComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, componentMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,componentMetaData,hostComponent)}
@@ -16166,9 +15946,6 @@ var ExtComponentComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtComponentComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -16549,13 +16326,9 @@ var containerMetaData = /** @class */ (function () {
 }());
 var ExtContainerComponent = /** @class */ (function (_super) {
     __extends(ExtContainerComponent, _super);
-    function ExtContainerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, containerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtContainerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, containerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,containerMetaData,hostComponent)}
@@ -16594,9 +16367,6 @@ var ExtContainerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtContainerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -16933,13 +16703,9 @@ var d3_canvasMetaData = /** @class */ (function () {
 }());
 var ExtD3_canvasComponent = /** @class */ (function (_super) {
     __extends(ExtD3_canvasComponent, _super);
-    function ExtD3_canvasComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, d3_canvasMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtD3_canvasComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, d3_canvasMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_canvasMetaData,hostComponent)}
@@ -16978,9 +16744,6 @@ var ExtD3_canvasComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtD3_canvasComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -17331,13 +17094,9 @@ var d3_heatmapMetaData = /** @class */ (function () {
 }());
 var ExtD3_heatmapComponent = /** @class */ (function (_super) {
     __extends(ExtD3_heatmapComponent, _super);
-    function ExtD3_heatmapComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, d3_heatmapMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtD3_heatmapComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, d3_heatmapMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_heatmapMetaData,hostComponent)}
@@ -17376,9 +17135,6 @@ var ExtD3_heatmapComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtD3_heatmapComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -17759,13 +17515,9 @@ var d3_packMetaData = /** @class */ (function () {
 }());
 var ExtD3_packComponent = /** @class */ (function (_super) {
     __extends(ExtD3_packComponent, _super);
-    function ExtD3_packComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, d3_packMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtD3_packComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, d3_packMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_packMetaData,hostComponent)}
@@ -17804,9 +17556,6 @@ var ExtD3_packComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtD3_packComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -18183,13 +17932,9 @@ var d3_partitionMetaData = /** @class */ (function () {
 }());
 var ExtD3_partitionComponent = /** @class */ (function (_super) {
     __extends(ExtD3_partitionComponent, _super);
-    function ExtD3_partitionComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, d3_partitionMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtD3_partitionComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, d3_partitionMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_partitionMetaData,hostComponent)}
@@ -18228,9 +17973,6 @@ var ExtD3_partitionComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtD3_partitionComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -18611,13 +18353,9 @@ var d3_sunburstMetaData = /** @class */ (function () {
 }());
 var ExtD3_sunburstComponent = /** @class */ (function (_super) {
     __extends(ExtD3_sunburstComponent, _super);
-    function ExtD3_sunburstComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, d3_sunburstMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtD3_sunburstComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, d3_sunburstMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_sunburstMetaData,hostComponent)}
@@ -18656,9 +18394,6 @@ var ExtD3_sunburstComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtD3_sunburstComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -19041,13 +18776,9 @@ var d3_treeMetaData = /** @class */ (function () {
 }());
 var ExtD3_treeComponent = /** @class */ (function (_super) {
     __extends(ExtD3_treeComponent, _super);
-    function ExtD3_treeComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, d3_treeMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtD3_treeComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, d3_treeMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_treeMetaData,hostComponent)}
@@ -19086,9 +18817,6 @@ var ExtD3_treeComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtD3_treeComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -19471,13 +19199,9 @@ var d3_horizontal_treeMetaData = /** @class */ (function () {
 }());
 var ExtD3_horizontal_treeComponent = /** @class */ (function (_super) {
     __extends(ExtD3_horizontal_treeComponent, _super);
-    function ExtD3_horizontal_treeComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, d3_horizontal_treeMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtD3_horizontal_treeComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, d3_horizontal_treeMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_horizontal_treeMetaData,hostComponent)}
@@ -19516,9 +19240,6 @@ var ExtD3_horizontal_treeComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtD3_horizontal_treeComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -19905,13 +19626,9 @@ var d3_treemapMetaData = /** @class */ (function () {
 }());
 var ExtD3_treemapComponent = /** @class */ (function (_super) {
     __extends(ExtD3_treemapComponent, _super);
-    function ExtD3_treemapComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, d3_treemapMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtD3_treemapComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, d3_treemapMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_treemapMetaData,hostComponent)}
@@ -19950,9 +19667,6 @@ var ExtD3_treemapComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtD3_treemapComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -20291,13 +20005,9 @@ var d3_svgMetaData = /** @class */ (function () {
 }());
 var ExtD3_svgComponent = /** @class */ (function (_super) {
     __extends(ExtD3_svgComponent, _super);
-    function ExtD3_svgComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, d3_svgMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtD3_svgComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, d3_svgMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_svgMetaData,hostComponent)}
@@ -20336,9 +20046,6 @@ var ExtD3_svgComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtD3_svgComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -20677,13 +20384,9 @@ var d3MetaData = /** @class */ (function () {
 }());
 var ExtD3Component = /** @class */ (function (_super) {
     __extends(ExtD3Component, _super);
-    function ExtD3Component(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, d3MetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtD3Component(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, d3MetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3MetaData,hostComponent)}
@@ -20722,9 +20425,6 @@ var ExtD3Component = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtD3Component.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -21293,13 +20993,9 @@ var boundlistMetaData = /** @class */ (function () {
 }());
 var ExtBoundlistComponent = /** @class */ (function (_super) {
     __extends(ExtBoundlistComponent, _super);
-    function ExtBoundlistComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, boundlistMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtBoundlistComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, boundlistMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,boundlistMetaData,hostComponent)}
@@ -21338,9 +21034,6 @@ var ExtBoundlistComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtBoundlistComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -21857,13 +21550,9 @@ var chipviewMetaData = /** @class */ (function () {
 }());
 var ExtChipviewComponent = /** @class */ (function (_super) {
     __extends(ExtChipviewComponent, _super);
-    function ExtChipviewComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, chipviewMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtChipviewComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, chipviewMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chipviewMetaData,hostComponent)}
@@ -21902,9 +21591,6 @@ var ExtChipviewComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtChipviewComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -22409,13 +22095,9 @@ var componentdataviewMetaData = /** @class */ (function () {
 }());
 var ExtComponentdataviewComponent = /** @class */ (function (_super) {
     __extends(ExtComponentdataviewComponent, _super);
-    function ExtComponentdataviewComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, componentdataviewMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtComponentdataviewComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, componentdataviewMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,componentdataviewMetaData,hostComponent)}
@@ -22454,9 +22136,6 @@ var ExtComponentdataviewComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtComponentdataviewComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -22843,13 +22522,9 @@ var dataitemMetaData = /** @class */ (function () {
 }());
 var ExtDataitemComponent = /** @class */ (function (_super) {
     __extends(ExtDataitemComponent, _super);
-    function ExtDataitemComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, dataitemMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtDataitemComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, dataitemMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dataitemMetaData,hostComponent)}
@@ -22888,9 +22563,6 @@ var ExtDataitemComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtDataitemComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -23391,13 +23063,9 @@ var dataviewMetaData = /** @class */ (function () {
 }());
 var ExtDataviewComponent = /** @class */ (function (_super) {
     __extends(ExtDataviewComponent, _super);
-    function ExtDataviewComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, dataviewMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtDataviewComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, dataviewMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dataviewMetaData,hostComponent)}
@@ -23436,9 +23104,6 @@ var ExtDataviewComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtDataviewComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -23761,13 +23426,9 @@ var emptytextMetaData = /** @class */ (function () {
 }());
 var ExtEmptytextComponent = /** @class */ (function (_super) {
     __extends(ExtEmptytextComponent, _super);
-    function ExtEmptytextComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, emptytextMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtEmptytextComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, emptytextMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,emptytextMetaData,hostComponent)}
@@ -23806,9 +23467,6 @@ var ExtEmptytextComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtEmptytextComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -24151,13 +23809,9 @@ var indexbarMetaData = /** @class */ (function () {
 }());
 var ExtIndexbarComponent = /** @class */ (function (_super) {
     __extends(ExtIndexbarComponent, _super);
-    function ExtIndexbarComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, indexbarMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtIndexbarComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, indexbarMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,indexbarMetaData,hostComponent)}
@@ -24196,9 +23850,6 @@ var ExtIndexbarComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtIndexbarComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -24531,13 +24182,9 @@ var itemheaderMetaData = /** @class */ (function () {
 }());
 var ExtItemheaderComponent = /** @class */ (function (_super) {
     __extends(ExtItemheaderComponent, _super);
-    function ExtItemheaderComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, itemheaderMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtItemheaderComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, itemheaderMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,itemheaderMetaData,hostComponent)}
@@ -24576,9 +24223,6 @@ var ExtItemheaderComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtItemheaderComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -25147,13 +24791,9 @@ var listMetaData = /** @class */ (function () {
 }());
 var ExtListComponent = /** @class */ (function (_super) {
     __extends(ExtListComponent, _super);
-    function ExtListComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, listMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtListComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, listMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listMetaData,hostComponent)}
@@ -25192,9 +24832,6 @@ var ExtListComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtListComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -25589,13 +25226,9 @@ var listitemMetaData = /** @class */ (function () {
 }());
 var ExtListitemComponent = /** @class */ (function (_super) {
     __extends(ExtListitemComponent, _super);
-    function ExtListitemComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, listitemMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtListitemComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, listitemMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listitemMetaData,hostComponent)}
@@ -25634,9 +25267,6 @@ var ExtListitemComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtListitemComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -26025,13 +25655,9 @@ var listswiperitemMetaData = /** @class */ (function () {
 }());
 var ExtListswiperitemComponent = /** @class */ (function (_super) {
     __extends(ExtListswiperitemComponent, _super);
-    function ExtListswiperitemComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, listswiperitemMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtListswiperitemComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, listswiperitemMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listswiperitemMetaData,hostComponent)}
@@ -26070,9 +25696,6 @@ var ExtListswiperitemComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtListswiperitemComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -26471,13 +26094,9 @@ var listswiperstepperMetaData = /** @class */ (function () {
 }());
 var ExtListswiperstepperComponent = /** @class */ (function (_super) {
     __extends(ExtListswiperstepperComponent, _super);
-    function ExtListswiperstepperComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, listswiperstepperMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtListswiperstepperComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, listswiperstepperMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listswiperstepperMetaData,hostComponent)}
@@ -26516,9 +26135,6 @@ var ExtListswiperstepperComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtListswiperstepperComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -26961,13 +26577,9 @@ var nestedlistMetaData = /** @class */ (function () {
 }());
 var ExtNestedlistComponent = /** @class */ (function (_super) {
     __extends(ExtNestedlistComponent, _super);
-    function ExtNestedlistComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, nestedlistMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtNestedlistComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, nestedlistMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,nestedlistMetaData,hostComponent)}
@@ -27006,9 +26618,6 @@ var ExtNestedlistComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtNestedlistComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -27351,13 +26960,9 @@ var pullrefreshbarMetaData = /** @class */ (function () {
 }());
 var ExtPullrefreshbarComponent = /** @class */ (function (_super) {
     __extends(ExtPullrefreshbarComponent, _super);
-    function ExtPullrefreshbarComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, pullrefreshbarMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPullrefreshbarComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, pullrefreshbarMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pullrefreshbarMetaData,hostComponent)}
@@ -27396,9 +27001,6 @@ var ExtPullrefreshbarComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPullrefreshbarComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -27727,13 +27329,9 @@ var pullrefreshspinnerMetaData = /** @class */ (function () {
 }());
 var ExtPullrefreshspinnerComponent = /** @class */ (function (_super) {
     __extends(ExtPullrefreshspinnerComponent, _super);
-    function ExtPullrefreshspinnerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, pullrefreshspinnerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPullrefreshspinnerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, pullrefreshspinnerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pullrefreshspinnerMetaData,hostComponent)}
@@ -27772,9 +27370,6 @@ var ExtPullrefreshspinnerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPullrefreshspinnerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -28107,13 +27702,9 @@ var simplelistitemMetaData = /** @class */ (function () {
 }());
 var ExtSimplelistitemComponent = /** @class */ (function (_super) {
     __extends(ExtSimplelistitemComponent, _super);
-    function ExtSimplelistitemComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, simplelistitemMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSimplelistitemComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, simplelistitemMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,simplelistitemMetaData,hostComponent)}
@@ -28152,9 +27743,6 @@ var ExtSimplelistitemComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSimplelistitemComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -28649,13 +28237,9 @@ var dialogMetaData = /** @class */ (function () {
 }());
 var ExtDialogComponent = /** @class */ (function (_super) {
     __extends(ExtDialogComponent, _super);
-    function ExtDialogComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, dialogMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtDialogComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, dialogMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dialogMetaData,hostComponent)}
@@ -28694,9 +28278,6 @@ var ExtDialogComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtDialogComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -29191,13 +28772,9 @@ var windowMetaData = /** @class */ (function () {
 }());
 var ExtWindowComponent = /** @class */ (function (_super) {
     __extends(ExtWindowComponent, _super);
-    function ExtWindowComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, windowMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtWindowComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, windowMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,windowMetaData,hostComponent)}
@@ -29236,9 +28813,6 @@ var ExtWindowComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtWindowComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -29649,13 +29223,9 @@ var drawMetaData = /** @class */ (function () {
 }());
 var ExtDrawComponent = /** @class */ (function (_super) {
     __extends(ExtDrawComponent, _super);
-    function ExtDrawComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, drawMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtDrawComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, drawMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,drawMetaData,hostComponent)}
@@ -29694,9 +29264,6 @@ var ExtDrawComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtDrawComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -29871,13 +29438,9 @@ var surfaceMetaData = /** @class */ (function () {
 }());
 var ExtSurfaceComponent = /** @class */ (function (_super) {
     __extends(ExtSurfaceComponent, _super);
-    function ExtSurfaceComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, surfaceMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSurfaceComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, surfaceMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,surfaceMetaData,hostComponent)}
@@ -29916,9 +29479,6 @@ var ExtSurfaceComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSurfaceComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -30343,13 +29903,9 @@ var editorMetaData = /** @class */ (function () {
 }());
 var ExtEditorComponent = /** @class */ (function (_super) {
     __extends(ExtEditorComponent, _super);
-    function ExtEditorComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, editorMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtEditorComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, editorMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,editorMetaData,hostComponent)}
@@ -30388,9 +29944,6 @@ var ExtEditorComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtEditorComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -30795,13 +30348,9 @@ var checkboxMetaData = /** @class */ (function () {
 }());
 var ExtCheckboxComponent = /** @class */ (function (_super) {
     __extends(ExtCheckboxComponent, _super);
-    function ExtCheckboxComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, checkboxMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCheckboxComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, checkboxMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkboxMetaData,hostComponent)}
@@ -30840,9 +30389,6 @@ var ExtCheckboxComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCheckboxComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -31247,13 +30793,9 @@ var checkboxfieldMetaData = /** @class */ (function () {
 }());
 var ExtCheckboxfieldComponent = /** @class */ (function (_super) {
     __extends(ExtCheckboxfieldComponent, _super);
-    function ExtCheckboxfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, checkboxfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCheckboxfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, checkboxfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkboxfieldMetaData,hostComponent)}
@@ -31292,9 +30834,6 @@ var ExtCheckboxfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCheckboxfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -31827,13 +31366,9 @@ var comboboxMetaData = /** @class */ (function () {
 }());
 var ExtComboboxComponent = /** @class */ (function (_super) {
     __extends(ExtComboboxComponent, _super);
-    function ExtComboboxComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, comboboxMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtComboboxComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, comboboxMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,comboboxMetaData,hostComponent)}
@@ -31872,9 +31407,6 @@ var ExtComboboxComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtComboboxComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -32407,13 +31939,9 @@ var comboboxfieldMetaData = /** @class */ (function () {
 }());
 var ExtComboboxfieldComponent = /** @class */ (function (_super) {
     __extends(ExtComboboxfieldComponent, _super);
-    function ExtComboboxfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, comboboxfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtComboboxfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, comboboxfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,comboboxfieldMetaData,hostComponent)}
@@ -32452,9 +31980,6 @@ var ExtComboboxfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtComboboxfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -32851,13 +32376,9 @@ var containerfieldMetaData = /** @class */ (function () {
 }());
 var ExtContainerfieldComponent = /** @class */ (function (_super) {
     __extends(ExtContainerfieldComponent, _super);
-    function ExtContainerfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, containerfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtContainerfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, containerfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,containerfieldMetaData,hostComponent)}
@@ -32896,9 +32417,6 @@ var ExtContainerfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtContainerfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -33295,13 +32813,9 @@ var fieldcontainerMetaData = /** @class */ (function () {
 }());
 var ExtFieldcontainerComponent = /** @class */ (function (_super) {
     __extends(ExtFieldcontainerComponent, _super);
-    function ExtFieldcontainerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, fieldcontainerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtFieldcontainerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, fieldcontainerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldcontainerMetaData,hostComponent)}
@@ -33340,9 +32854,6 @@ var ExtFieldcontainerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtFieldcontainerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -33803,13 +33314,9 @@ var datefieldMetaData = /** @class */ (function () {
 }());
 var ExtDatefieldComponent = /** @class */ (function (_super) {
     __extends(ExtDatefieldComponent, _super);
-    function ExtDatefieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, datefieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtDatefieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, datefieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datefieldMetaData,hostComponent)}
@@ -33848,9 +33355,6 @@ var ExtDatefieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtDatefieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -34311,13 +33815,9 @@ var datepickerfieldMetaData = /** @class */ (function () {
 }());
 var ExtDatepickerfieldComponent = /** @class */ (function (_super) {
     __extends(ExtDatepickerfieldComponent, _super);
-    function ExtDatepickerfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, datepickerfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtDatepickerfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, datepickerfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickerfieldMetaData,hostComponent)}
@@ -34356,9 +33856,6 @@ var ExtDatepickerfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtDatepickerfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -34819,13 +34316,9 @@ var datepickernativefieldMetaData = /** @class */ (function () {
 }());
 var ExtDatepickernativefieldComponent = /** @class */ (function (_super) {
     __extends(ExtDatepickernativefieldComponent, _super);
-    function ExtDatepickernativefieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, datepickernativefieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtDatepickernativefieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, datepickernativefieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickernativefieldMetaData,hostComponent)}
@@ -34864,9 +34357,6 @@ var ExtDatepickernativefieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtDatepickernativefieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -35261,13 +34751,9 @@ var displayfieldMetaData = /** @class */ (function () {
 }());
 var ExtDisplayfieldComponent = /** @class */ (function (_super) {
     __extends(ExtDisplayfieldComponent, _super);
-    function ExtDisplayfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, displayfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtDisplayfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, displayfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,displayfieldMetaData,hostComponent)}
@@ -35306,9 +34792,6 @@ var ExtDisplayfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtDisplayfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -35739,13 +35222,9 @@ var emailfieldMetaData = /** @class */ (function () {
 }());
 var ExtEmailfieldComponent = /** @class */ (function (_super) {
     __extends(ExtEmailfieldComponent, _super);
-    function ExtEmailfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, emailfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtEmailfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, emailfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,emailfieldMetaData,hostComponent)}
@@ -35784,9 +35263,6 @@ var ExtEmailfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtEmailfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -36171,13 +35647,9 @@ var fieldMetaData = /** @class */ (function () {
 }());
 var ExtFieldComponent = /** @class */ (function (_super) {
     __extends(ExtFieldComponent, _super);
-    function ExtFieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, fieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtFieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, fieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldMetaData,hostComponent)}
@@ -36216,9 +35688,6 @@ var ExtFieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtFieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -36655,13 +36124,9 @@ var filefieldMetaData = /** @class */ (function () {
 }());
 var ExtFilefieldComponent = /** @class */ (function (_super) {
     __extends(ExtFilefieldComponent, _super);
-    function ExtFilefieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, filefieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtFilefieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, filefieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,filefieldMetaData,hostComponent)}
@@ -36700,9 +36165,6 @@ var ExtFilefieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtFilefieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -37085,13 +36547,9 @@ var filebuttonMetaData = /** @class */ (function () {
 }());
 var ExtFilebuttonComponent = /** @class */ (function (_super) {
     __extends(ExtFilebuttonComponent, _super);
-    function ExtFilebuttonComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, filebuttonMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtFilebuttonComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, filebuttonMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,filebuttonMetaData,hostComponent)}
@@ -37130,9 +36588,6 @@ var ExtFilebuttonComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtFilebuttonComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -37525,13 +36980,9 @@ var hiddenfieldMetaData = /** @class */ (function () {
 }());
 var ExtHiddenfieldComponent = /** @class */ (function (_super) {
     __extends(ExtHiddenfieldComponent, _super);
-    function ExtHiddenfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, hiddenfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtHiddenfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, hiddenfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,hiddenfieldMetaData,hostComponent)}
@@ -37570,9 +37021,6 @@ var ExtHiddenfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtHiddenfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -37965,13 +37413,9 @@ var inputfieldMetaData = /** @class */ (function () {
 }());
 var ExtInputfieldComponent = /** @class */ (function (_super) {
     __extends(ExtInputfieldComponent, _super);
-    function ExtInputfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, inputfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtInputfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, inputfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,inputfieldMetaData,hostComponent)}
@@ -38010,9 +37454,6 @@ var ExtInputfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtInputfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -38457,13 +37898,9 @@ var numberfieldMetaData = /** @class */ (function () {
 }());
 var ExtNumberfieldComponent = /** @class */ (function (_super) {
     __extends(ExtNumberfieldComponent, _super);
-    function ExtNumberfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, numberfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtNumberfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, numberfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numberfieldMetaData,hostComponent)}
@@ -38502,9 +37939,6 @@ var ExtNumberfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtNumberfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -38985,13 +38419,9 @@ var fieldpanelMetaData = /** @class */ (function () {
 }());
 var ExtFieldpanelComponent = /** @class */ (function (_super) {
     __extends(ExtFieldpanelComponent, _super);
-    function ExtFieldpanelComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, fieldpanelMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtFieldpanelComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, fieldpanelMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldpanelMetaData,hostComponent)}
@@ -39030,9 +38460,6 @@ var ExtFieldpanelComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtFieldpanelComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -39467,13 +38894,9 @@ var passwordfieldMetaData = /** @class */ (function () {
 }());
 var ExtPasswordfieldComponent = /** @class */ (function (_super) {
     __extends(ExtPasswordfieldComponent, _super);
-    function ExtPasswordfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, passwordfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPasswordfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, passwordfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,passwordfieldMetaData,hostComponent)}
@@ -39512,9 +38935,6 @@ var ExtPasswordfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPasswordfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -39967,13 +39387,9 @@ var pickerfieldMetaData = /** @class */ (function () {
 }());
 var ExtPickerfieldComponent = /** @class */ (function (_super) {
     __extends(ExtPickerfieldComponent, _super);
-    function ExtPickerfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, pickerfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPickerfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, pickerfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerfieldMetaData,hostComponent)}
@@ -40012,9 +39428,6 @@ var ExtPickerfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPickerfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -40419,13 +39832,9 @@ var radioMetaData = /** @class */ (function () {
 }());
 var ExtRadioComponent = /** @class */ (function (_super) {
     __extends(ExtRadioComponent, _super);
-    function ExtRadioComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, radioMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtRadioComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, radioMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,radioMetaData,hostComponent)}
@@ -40464,9 +39873,6 @@ var ExtRadioComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtRadioComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -40871,13 +40277,9 @@ var radiofieldMetaData = /** @class */ (function () {
 }());
 var ExtRadiofieldComponent = /** @class */ (function (_super) {
     __extends(ExtRadiofieldComponent, _super);
-    function ExtRadiofieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, radiofieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtRadiofieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, radiofieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,radiofieldMetaData,hostComponent)}
@@ -40916,9 +40318,6 @@ var ExtRadiofieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtRadiofieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -41349,13 +40748,9 @@ var searchfieldMetaData = /** @class */ (function () {
 }());
 var ExtSearchfieldComponent = /** @class */ (function (_super) {
     __extends(ExtSearchfieldComponent, _super);
-    function ExtSearchfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, searchfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSearchfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, searchfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,searchfieldMetaData,hostComponent)}
@@ -41394,9 +40789,6 @@ var ExtSearchfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSearchfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -41897,13 +41289,9 @@ var selectfieldMetaData = /** @class */ (function () {
 }());
 var ExtSelectfieldComponent = /** @class */ (function (_super) {
     __extends(ExtSelectfieldComponent, _super);
-    function ExtSelectfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, selectfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSelectfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, selectfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectfieldMetaData,hostComponent)}
@@ -41942,9 +41330,6 @@ var ExtSelectfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSelectfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -42355,13 +41740,9 @@ var singlesliderfieldMetaData = /** @class */ (function () {
 }());
 var ExtSinglesliderfieldComponent = /** @class */ (function (_super) {
     __extends(ExtSinglesliderfieldComponent, _super);
-    function ExtSinglesliderfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, singlesliderfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSinglesliderfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, singlesliderfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,singlesliderfieldMetaData,hostComponent)}
@@ -42400,9 +41781,6 @@ var ExtSinglesliderfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSinglesliderfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -42813,13 +42191,9 @@ var sliderfieldMetaData = /** @class */ (function () {
 }());
 var ExtSliderfieldComponent = /** @class */ (function (_super) {
     __extends(ExtSliderfieldComponent, _super);
-    function ExtSliderfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, sliderfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSliderfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, sliderfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sliderfieldMetaData,hostComponent)}
@@ -42858,9 +42232,6 @@ var ExtSliderfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSliderfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -43319,13 +42690,9 @@ var spinnerfieldMetaData = /** @class */ (function () {
 }());
 var ExtSpinnerfieldComponent = /** @class */ (function (_super) {
     __extends(ExtSpinnerfieldComponent, _super);
-    function ExtSpinnerfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, spinnerfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSpinnerfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, spinnerfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spinnerfieldMetaData,hostComponent)}
@@ -43364,9 +42731,6 @@ var ExtSpinnerfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSpinnerfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -43797,13 +43161,9 @@ var textfieldMetaData = /** @class */ (function () {
 }());
 var ExtTextfieldComponent = /** @class */ (function (_super) {
     __extends(ExtTextfieldComponent, _super);
-    function ExtTextfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, textfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTextfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, textfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textfieldMetaData,hostComponent)}
@@ -43842,9 +43202,6 @@ var ExtTextfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTextfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -44277,13 +43634,9 @@ var textareafieldMetaData = /** @class */ (function () {
 }());
 var ExtTextareafieldComponent = /** @class */ (function (_super) {
     __extends(ExtTextareafieldComponent, _super);
-    function ExtTextareafieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, textareafieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTextareafieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, textareafieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textareafieldMetaData,hostComponent)}
@@ -44322,9 +43675,6 @@ var ExtTextareafieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTextareafieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -44781,13 +44131,9 @@ var timefieldMetaData = /** @class */ (function () {
 }());
 var ExtTimefieldComponent = /** @class */ (function (_super) {
     __extends(ExtTimefieldComponent, _super);
-    function ExtTimefieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, timefieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTimefieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, timefieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timefieldMetaData,hostComponent)}
@@ -44826,9 +44172,6 @@ var ExtTimefieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTimefieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -45243,13 +44586,9 @@ var togglefieldMetaData = /** @class */ (function () {
 }());
 var ExtTogglefieldComponent = /** @class */ (function (_super) {
     __extends(ExtTogglefieldComponent, _super);
-    function ExtTogglefieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, togglefieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTogglefieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, togglefieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,togglefieldMetaData,hostComponent)}
@@ -45288,9 +44627,6 @@ var ExtTogglefieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTogglefieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -45473,13 +44809,9 @@ var cleartriggerMetaData = /** @class */ (function () {
 }());
 var ExtCleartriggerComponent = /** @class */ (function (_super) {
     __extends(ExtCleartriggerComponent, _super);
-    function ExtCleartriggerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, cleartriggerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCleartriggerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, cleartriggerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,cleartriggerMetaData,hostComponent)}
@@ -45518,9 +44850,6 @@ var ExtCleartriggerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCleartriggerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -45703,13 +45032,9 @@ var datetriggerMetaData = /** @class */ (function () {
 }());
 var ExtDatetriggerComponent = /** @class */ (function (_super) {
     __extends(ExtDatetriggerComponent, _super);
-    function ExtDatetriggerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, datetriggerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtDatetriggerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, datetriggerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datetriggerMetaData,hostComponent)}
@@ -45748,9 +45073,6 @@ var ExtDatetriggerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtDatetriggerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -45933,13 +45255,9 @@ var expandtriggerMetaData = /** @class */ (function () {
 }());
 var ExtExpandtriggerComponent = /** @class */ (function (_super) {
     __extends(ExtExpandtriggerComponent, _super);
-    function ExtExpandtriggerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, expandtriggerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtExpandtriggerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, expandtriggerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,expandtriggerMetaData,hostComponent)}
@@ -45978,9 +45296,6 @@ var ExtExpandtriggerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtExpandtriggerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -46169,13 +45484,9 @@ var menutriggerMetaData = /** @class */ (function () {
 }());
 var ExtMenutriggerComponent = /** @class */ (function (_super) {
     __extends(ExtMenutriggerComponent, _super);
-    function ExtMenutriggerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, menutriggerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtMenutriggerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, menutriggerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menutriggerMetaData,hostComponent)}
@@ -46214,9 +45525,6 @@ var ExtMenutriggerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtMenutriggerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -46399,13 +45707,9 @@ var revealtriggerMetaData = /** @class */ (function () {
 }());
 var ExtRevealtriggerComponent = /** @class */ (function (_super) {
     __extends(ExtRevealtriggerComponent, _super);
-    function ExtRevealtriggerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, revealtriggerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtRevealtriggerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, revealtriggerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,revealtriggerMetaData,hostComponent)}
@@ -46444,9 +45748,6 @@ var ExtRevealtriggerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtRevealtriggerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -46629,13 +45930,9 @@ var spindowntriggerMetaData = /** @class */ (function () {
 }());
 var ExtSpindowntriggerComponent = /** @class */ (function (_super) {
     __extends(ExtSpindowntriggerComponent, _super);
-    function ExtSpindowntriggerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, spindowntriggerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSpindowntriggerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, spindowntriggerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spindowntriggerMetaData,hostComponent)}
@@ -46674,9 +45971,6 @@ var ExtSpindowntriggerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSpindowntriggerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -46859,13 +46153,9 @@ var spinuptriggerMetaData = /** @class */ (function () {
 }());
 var ExtSpinuptriggerComponent = /** @class */ (function (_super) {
     __extends(ExtSpinuptriggerComponent, _super);
-    function ExtSpinuptriggerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, spinuptriggerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSpinuptriggerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, spinuptriggerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spinuptriggerMetaData,hostComponent)}
@@ -46904,9 +46194,6 @@ var ExtSpinuptriggerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSpinuptriggerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -47089,13 +46376,9 @@ var timetriggerMetaData = /** @class */ (function () {
 }());
 var ExtTimetriggerComponent = /** @class */ (function (_super) {
     __extends(ExtTimetriggerComponent, _super);
-    function ExtTimetriggerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, timetriggerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTimetriggerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, timetriggerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timetriggerMetaData,hostComponent)}
@@ -47134,9 +46417,6 @@ var ExtTimetriggerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTimetriggerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -47319,13 +46599,9 @@ var triggerMetaData = /** @class */ (function () {
 }());
 var ExtTriggerComponent = /** @class */ (function (_super) {
     __extends(ExtTriggerComponent, _super);
-    function ExtTriggerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, triggerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTriggerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, triggerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,triggerMetaData,hostComponent)}
@@ -47364,9 +46640,6 @@ var ExtTriggerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTriggerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -47797,13 +47070,9 @@ var urlfieldMetaData = /** @class */ (function () {
 }());
 var ExtUrlfieldComponent = /** @class */ (function (_super) {
     __extends(ExtUrlfieldComponent, _super);
-    function ExtUrlfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, urlfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtUrlfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, urlfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,urlfieldMetaData,hostComponent)}
@@ -47842,9 +47111,6 @@ var ExtUrlfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtUrlfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -48233,13 +47499,9 @@ var fieldsetMetaData = /** @class */ (function () {
 }());
 var ExtFieldsetComponent = /** @class */ (function (_super) {
     __extends(ExtFieldsetComponent, _super);
-    function ExtFieldsetComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, fieldsetMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtFieldsetComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, fieldsetMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldsetMetaData,hostComponent)}
@@ -48278,9 +47540,6 @@ var ExtFieldsetComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtFieldsetComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -48779,13 +48038,9 @@ var formpanelMetaData = /** @class */ (function () {
 }());
 var ExtFormpanelComponent = /** @class */ (function (_super) {
     __extends(ExtFormpanelComponent, _super);
-    function ExtFormpanelComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, formpanelMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtFormpanelComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, formpanelMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,formpanelMetaData,hostComponent)}
@@ -48824,9 +48079,6 @@ var ExtFormpanelComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtFormpanelComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -49013,13 +48265,9 @@ var gridcellbaseMetaData = /** @class */ (function () {
 }());
 var ExtGridcellbaseComponent = /** @class */ (function (_super) {
     __extends(ExtGridcellbaseComponent, _super);
-    function ExtGridcellbaseComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, gridcellbaseMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtGridcellbaseComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, gridcellbaseMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcellbaseMetaData,hostComponent)}
@@ -49058,9 +48306,6 @@ var ExtGridcellbaseComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtGridcellbaseComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -49259,13 +48504,9 @@ var booleancellMetaData = /** @class */ (function () {
 }());
 var ExtBooleancellComponent = /** @class */ (function (_super) {
     __extends(ExtBooleancellComponent, _super);
-    function ExtBooleancellComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, booleancellMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtBooleancellComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, booleancellMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,booleancellMetaData,hostComponent)}
@@ -49304,9 +48545,6 @@ var ExtBooleancellComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtBooleancellComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -49507,13 +48745,9 @@ var gridcellMetaData = /** @class */ (function () {
 }());
 var ExtGridcellComponent = /** @class */ (function (_super) {
     __extends(ExtGridcellComponent, _super);
-    function ExtGridcellComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, gridcellMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtGridcellComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, gridcellMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcellMetaData,hostComponent)}
@@ -49552,9 +48786,6 @@ var ExtGridcellComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtGridcellComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -49741,13 +48972,9 @@ var checkcellMetaData = /** @class */ (function () {
 }());
 var ExtCheckcellComponent = /** @class */ (function (_super) {
     __extends(ExtCheckcellComponent, _super);
-    function ExtCheckcellComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, checkcellMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCheckcellComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, checkcellMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkcellMetaData,hostComponent)}
@@ -49786,9 +49013,6 @@ var ExtCheckcellComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCheckcellComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -49983,13 +49207,9 @@ var datecellMetaData = /** @class */ (function () {
 }());
 var ExtDatecellComponent = /** @class */ (function (_super) {
     __extends(ExtDatecellComponent, _super);
-    function ExtDatecellComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, datecellMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtDatecellComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, datecellMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datecellMetaData,hostComponent)}
@@ -50028,9 +49248,6 @@ var ExtDatecellComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtDatecellComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -50225,13 +49442,9 @@ var numbercellMetaData = /** @class */ (function () {
 }());
 var ExtNumbercellComponent = /** @class */ (function (_super) {
     __extends(ExtNumbercellComponent, _super);
-    function ExtNumbercellComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, numbercellMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtNumbercellComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, numbercellMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numbercellMetaData,hostComponent)}
@@ -50270,9 +49483,6 @@ var ExtNumbercellComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtNumbercellComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -50467,13 +49677,9 @@ var rownumberercellMetaData = /** @class */ (function () {
 }());
 var ExtRownumberercellComponent = /** @class */ (function (_super) {
     __extends(ExtRownumberercellComponent, _super);
-    function ExtRownumberercellComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, rownumberercellMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtRownumberercellComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, rownumberercellMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rownumberercellMetaData,hostComponent)}
@@ -50512,9 +49718,6 @@ var ExtRownumberercellComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtRownumberercellComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -50707,13 +49910,9 @@ var textcellMetaData = /** @class */ (function () {
 }());
 var ExtTextcellComponent = /** @class */ (function (_super) {
     __extends(ExtTextcellComponent, _super);
-    function ExtTextcellComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, textcellMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTextcellComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, textcellMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textcellMetaData,hostComponent)}
@@ -50752,9 +49951,6 @@ var ExtTextcellComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTextcellComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -50961,13 +50157,9 @@ var treecellMetaData = /** @class */ (function () {
 }());
 var ExtTreecellComponent = /** @class */ (function (_super) {
     __extends(ExtTreecellComponent, _super);
-    function ExtTreecellComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, treecellMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTreecellComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, treecellMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treecellMetaData,hostComponent)}
@@ -51006,9 +50198,6 @@ var ExtTreecellComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTreecellComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -51199,13 +50388,9 @@ var widgetcellMetaData = /** @class */ (function () {
 }());
 var ExtWidgetcellComponent = /** @class */ (function (_super) {
     __extends(ExtWidgetcellComponent, _super);
-    function ExtWidgetcellComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, widgetcellMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtWidgetcellComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, widgetcellMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,widgetcellMetaData,hostComponent)}
@@ -51244,9 +50429,6 @@ var ExtWidgetcellComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtWidgetcellComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -51673,13 +50855,9 @@ var celleditorMetaData = /** @class */ (function () {
 }());
 var ExtCelleditorComponent = /** @class */ (function (_super) {
     __extends(ExtCelleditorComponent, _super);
-    function ExtCelleditorComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, celleditorMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCelleditorComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, celleditorMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,celleditorMetaData,hostComponent)}
@@ -51718,9 +50896,6 @@ var ExtCelleditorComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCelleditorComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -52195,13 +51370,9 @@ var booleancolumnMetaData = /** @class */ (function () {
 }());
 var ExtBooleancolumnComponent = /** @class */ (function (_super) {
     __extends(ExtBooleancolumnComponent, _super);
-    function ExtBooleancolumnComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, booleancolumnMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtBooleancolumnComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, booleancolumnMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,booleancolumnMetaData,hostComponent)}
@@ -52240,9 +51411,6 @@ var ExtBooleancolumnComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtBooleancolumnComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -52721,13 +51889,9 @@ var checkcolumnMetaData = /** @class */ (function () {
 }());
 var ExtCheckcolumnComponent = /** @class */ (function (_super) {
     __extends(ExtCheckcolumnComponent, _super);
-    function ExtCheckcolumnComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, checkcolumnMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtCheckcolumnComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, checkcolumnMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkcolumnMetaData,hostComponent)}
@@ -52766,9 +51930,6 @@ var ExtCheckcolumnComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtCheckcolumnComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -53237,13 +52398,9 @@ var gridcolumnMetaData = /** @class */ (function () {
 }());
 var ExtGridcolumnComponent = /** @class */ (function (_super) {
     __extends(ExtGridcolumnComponent, _super);
-    function ExtGridcolumnComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, gridcolumnMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtGridcolumnComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, gridcolumnMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcolumnMetaData,hostComponent)}
@@ -53282,9 +52439,6 @@ var ExtGridcolumnComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtGridcolumnComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -53753,13 +52907,9 @@ var columnMetaData = /** @class */ (function () {
 }());
 var ExtColumnComponent = /** @class */ (function (_super) {
     __extends(ExtColumnComponent, _super);
-    function ExtColumnComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, columnMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtColumnComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, columnMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,columnMetaData,hostComponent)}
@@ -53798,9 +52948,6 @@ var ExtColumnComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtColumnComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -54269,13 +53416,9 @@ var templatecolumnMetaData = /** @class */ (function () {
 }());
 var ExtTemplatecolumnComponent = /** @class */ (function (_super) {
     __extends(ExtTemplatecolumnComponent, _super);
-    function ExtTemplatecolumnComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, templatecolumnMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTemplatecolumnComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, templatecolumnMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,templatecolumnMetaData,hostComponent)}
@@ -54314,9 +53457,6 @@ var ExtTemplatecolumnComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTemplatecolumnComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -54787,13 +53927,9 @@ var datecolumnMetaData = /** @class */ (function () {
 }());
 var ExtDatecolumnComponent = /** @class */ (function (_super) {
     __extends(ExtDatecolumnComponent, _super);
-    function ExtDatecolumnComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, datecolumnMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtDatecolumnComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, datecolumnMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datecolumnMetaData,hostComponent)}
@@ -54832,9 +53968,6 @@ var ExtDatecolumnComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtDatecolumnComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -55305,13 +54438,9 @@ var numbercolumnMetaData = /** @class */ (function () {
 }());
 var ExtNumbercolumnComponent = /** @class */ (function (_super) {
     __extends(ExtNumbercolumnComponent, _super);
-    function ExtNumbercolumnComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, numbercolumnMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtNumbercolumnComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, numbercolumnMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numbercolumnMetaData,hostComponent)}
@@ -55350,9 +54479,6 @@ var ExtNumbercolumnComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtNumbercolumnComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -55823,13 +54949,9 @@ var rownumbererMetaData = /** @class */ (function () {
 }());
 var ExtRownumbererComponent = /** @class */ (function (_super) {
     __extends(ExtRownumbererComponent, _super);
-    function ExtRownumbererComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, rownumbererMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtRownumbererComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, rownumbererMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rownumbererMetaData,hostComponent)}
@@ -55868,9 +54990,6 @@ var ExtRownumbererComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtRownumbererComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -56349,13 +55468,9 @@ var selectioncolumnMetaData = /** @class */ (function () {
 }());
 var ExtSelectioncolumnComponent = /** @class */ (function (_super) {
     __extends(ExtSelectioncolumnComponent, _super);
-    function ExtSelectioncolumnComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, selectioncolumnMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSelectioncolumnComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, selectioncolumnMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectioncolumnMetaData,hostComponent)}
@@ -56394,9 +55509,6 @@ var ExtSelectioncolumnComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSelectioncolumnComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -56865,13 +55977,9 @@ var textcolumnMetaData = /** @class */ (function () {
 }());
 var ExtTextcolumnComponent = /** @class */ (function (_super) {
     __extends(ExtTextcolumnComponent, _super);
-    function ExtTextcolumnComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, textcolumnMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTextcolumnComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, textcolumnMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textcolumnMetaData,hostComponent)}
@@ -56910,9 +56018,6 @@ var ExtTextcolumnComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTextcolumnComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -57381,13 +56486,9 @@ var treecolumnMetaData = /** @class */ (function () {
 }());
 var ExtTreecolumnComponent = /** @class */ (function (_super) {
     __extends(ExtTreecolumnComponent, _super);
-    function ExtTreecolumnComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, treecolumnMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTreecolumnComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, treecolumnMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treecolumnMetaData,hostComponent)}
@@ -57426,9 +56527,6 @@ var ExtTreecolumnComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTreecolumnComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -58047,13 +57145,9 @@ var gridMetaData = /** @class */ (function () {
 }());
 var ExtGridComponent = /** @class */ (function (_super) {
     __extends(ExtGridComponent, _super);
-    function ExtGridComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, gridMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtGridComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, gridMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridMetaData,hostComponent)}
@@ -58092,9 +57186,6 @@ var ExtGridComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtGridComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -58485,13 +57576,9 @@ var headercontainerMetaData = /** @class */ (function () {
 }());
 var ExtHeadercontainerComponent = /** @class */ (function (_super) {
     __extends(ExtHeadercontainerComponent, _super);
-    function ExtHeadercontainerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, headercontainerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtHeadercontainerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, headercontainerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,headercontainerMetaData,hostComponent)}
@@ -58530,9 +57617,6 @@ var ExtHeadercontainerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtHeadercontainerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -58935,13 +58019,9 @@ var lockedgridMetaData = /** @class */ (function () {
 }());
 var ExtLockedgridComponent = /** @class */ (function (_super) {
     __extends(ExtLockedgridComponent, _super);
-    function ExtLockedgridComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, lockedgridMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtLockedgridComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, lockedgridMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,lockedgridMetaData,hostComponent)}
@@ -58980,9 +58060,6 @@ var ExtLockedgridComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtLockedgridComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -59453,13 +58530,9 @@ var lockedgridregionMetaData = /** @class */ (function () {
 }());
 var ExtLockedgridregionComponent = /** @class */ (function (_super) {
     __extends(ExtLockedgridregionComponent, _super);
-    function ExtLockedgridregionComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, lockedgridregionMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtLockedgridregionComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, lockedgridregionMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,lockedgridregionMetaData,hostComponent)}
@@ -59498,9 +58571,6 @@ var ExtLockedgridregionComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtLockedgridregionComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -59857,13 +58927,9 @@ var gridcolumnsmenuMetaData = /** @class */ (function () {
 }());
 var ExtGridcolumnsmenuComponent = /** @class */ (function (_super) {
     __extends(ExtGridcolumnsmenuComponent, _super);
-    function ExtGridcolumnsmenuComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, gridcolumnsmenuMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtGridcolumnsmenuComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, gridcolumnsmenuMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcolumnsmenuMetaData,hostComponent)}
@@ -59902,9 +58968,6 @@ var ExtGridcolumnsmenuComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtGridcolumnsmenuComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -60261,13 +59324,9 @@ var gridgroupbythismenuitemMetaData = /** @class */ (function () {
 }());
 var ExtGridgroupbythismenuitemComponent = /** @class */ (function (_super) {
     __extends(ExtGridgroupbythismenuitemComponent, _super);
-    function ExtGridgroupbythismenuitemComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, gridgroupbythismenuitemMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtGridgroupbythismenuitemComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, gridgroupbythismenuitemMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridgroupbythismenuitemMetaData,hostComponent)}
@@ -60306,9 +59365,6 @@ var ExtGridgroupbythismenuitemComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtGridgroupbythismenuitemComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -60679,13 +59735,9 @@ var gridshowingroupsmenuitemMetaData = /** @class */ (function () {
 }());
 var ExtGridshowingroupsmenuitemComponent = /** @class */ (function (_super) {
     __extends(ExtGridshowingroupsmenuitemComponent, _super);
-    function ExtGridshowingroupsmenuitemComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, gridshowingroupsmenuitemMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtGridshowingroupsmenuitemComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, gridshowingroupsmenuitemMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridshowingroupsmenuitemMetaData,hostComponent)}
@@ -60724,9 +59776,6 @@ var ExtGridshowingroupsmenuitemComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtGridshowingroupsmenuitemComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -61101,13 +60150,9 @@ var gridsortascmenuitemMetaData = /** @class */ (function () {
 }());
 var ExtGridsortascmenuitemComponent = /** @class */ (function (_super) {
     __extends(ExtGridsortascmenuitemComponent, _super);
-    function ExtGridsortascmenuitemComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, gridsortascmenuitemMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtGridsortascmenuitemComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, gridsortascmenuitemMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsortascmenuitemMetaData,hostComponent)}
@@ -61146,9 +60191,6 @@ var ExtGridsortascmenuitemComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtGridsortascmenuitemComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -61523,13 +60565,9 @@ var gridsortdescmenuitemMetaData = /** @class */ (function () {
 }());
 var ExtGridsortdescmenuitemComponent = /** @class */ (function (_super) {
     __extends(ExtGridsortdescmenuitemComponent, _super);
-    function ExtGridsortdescmenuitemComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, gridsortdescmenuitemMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtGridsortdescmenuitemComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, gridsortdescmenuitemMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsortdescmenuitemMetaData,hostComponent)}
@@ -61568,9 +60606,6 @@ var ExtGridsortdescmenuitemComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtGridsortdescmenuitemComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -61963,13 +60998,9 @@ var pagingtoolbarMetaData = /** @class */ (function () {
 }());
 var ExtPagingtoolbarComponent = /** @class */ (function (_super) {
     __extends(ExtPagingtoolbarComponent, _super);
-    function ExtPagingtoolbarComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, pagingtoolbarMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPagingtoolbarComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, pagingtoolbarMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pagingtoolbarMetaData,hostComponent)}
@@ -62008,9 +61039,6 @@ var ExtPagingtoolbarComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPagingtoolbarComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -62345,13 +61373,9 @@ var gridrowMetaData = /** @class */ (function () {
 }());
 var ExtGridrowComponent = /** @class */ (function (_super) {
     __extends(ExtGridrowComponent, _super);
-    function ExtGridrowComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, gridrowMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtGridrowComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, gridrowMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridrowMetaData,hostComponent)}
@@ -62390,9 +61414,6 @@ var ExtGridrowComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtGridrowComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -62715,13 +61736,9 @@ var rowbodyMetaData = /** @class */ (function () {
 }());
 var ExtRowbodyComponent = /** @class */ (function (_super) {
     __extends(ExtRowbodyComponent, _super);
-    function ExtRowbodyComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, rowbodyMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtRowbodyComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, rowbodyMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rowbodyMetaData,hostComponent)}
@@ -62760,9 +61777,6 @@ var ExtRowbodyComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtRowbodyComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -63095,13 +62109,9 @@ var rowheaderMetaData = /** @class */ (function () {
 }());
 var ExtRowheaderComponent = /** @class */ (function (_super) {
     __extends(ExtRowheaderComponent, _super);
-    function ExtRowheaderComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, rowheaderMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtRowheaderComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, rowheaderMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rowheaderMetaData,hostComponent)}
@@ -63140,9 +62150,6 @@ var ExtRowheaderComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtRowheaderComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -63477,13 +62484,9 @@ var gridsummaryrowMetaData = /** @class */ (function () {
 }());
 var ExtGridsummaryrowComponent = /** @class */ (function (_super) {
     __extends(ExtGridsummaryrowComponent, _super);
-    function ExtGridsummaryrowComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, gridsummaryrowMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtGridsummaryrowComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, gridsummaryrowMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsummaryrowMetaData,hostComponent)}
@@ -63522,9 +62525,6 @@ var ExtGridsummaryrowComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtGridsummaryrowComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -64165,13 +63165,9 @@ var treeMetaData = /** @class */ (function () {
 }());
 var ExtTreeComponent = /** @class */ (function (_super) {
     __extends(ExtTreeComponent, _super);
-    function ExtTreeComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, treeMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTreeComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, treeMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treeMetaData,hostComponent)}
@@ -64210,9 +63206,6 @@ var ExtTreeComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTreeComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -64549,13 +63542,9 @@ var imageMetaData = /** @class */ (function () {
 }());
 var ExtImageComponent = /** @class */ (function (_super) {
     __extends(ExtImageComponent, _super);
-    function ExtImageComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, imageMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtImageComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, imageMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,imageMetaData,hostComponent)}
@@ -64594,9 +63583,6 @@ var ExtImageComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtImageComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -64933,13 +63919,9 @@ var imgMetaData = /** @class */ (function () {
 }());
 var ExtImgComponent = /** @class */ (function (_super) {
     __extends(ExtImgComponent, _super);
-    function ExtImgComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, imgMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtImgComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, imgMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,imgMetaData,hostComponent)}
@@ -64978,9 +63960,6 @@ var ExtImgComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtImgComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -65317,13 +64296,9 @@ var indicatorMetaData = /** @class */ (function () {
 }());
 var ExtIndicatorComponent = /** @class */ (function (_super) {
     __extends(ExtIndicatorComponent, _super);
-    function ExtIndicatorComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, indicatorMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtIndicatorComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, indicatorMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,indicatorMetaData,hostComponent)}
@@ -65362,9 +64337,6 @@ var ExtIndicatorComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtIndicatorComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -65687,13 +64659,9 @@ var labelMetaData = /** @class */ (function () {
 }());
 var ExtLabelComponent = /** @class */ (function (_super) {
     __extends(ExtLabelComponent, _super);
-    function ExtLabelComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, labelMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtLabelComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, labelMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,labelMetaData,hostComponent)}
@@ -65732,9 +64700,6 @@ var ExtLabelComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtLabelComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -66083,13 +65048,9 @@ var treelistMetaData = /** @class */ (function () {
 }());
 var ExtTreelistComponent = /** @class */ (function (_super) {
     __extends(ExtTreelistComponent, _super);
-    function ExtTreelistComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, treelistMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTreelistComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, treelistMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treelistMetaData,hostComponent)}
@@ -66128,9 +65089,6 @@ var ExtTreelistComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTreelistComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -66327,13 +65285,9 @@ var treelistitemMetaData = /** @class */ (function () {
 }());
 var ExtTreelistitemComponent = /** @class */ (function (_super) {
     __extends(ExtTreelistitemComponent, _super);
-    function ExtTreelistitemComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, treelistitemMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTreelistitemComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, treelistitemMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treelistitemMetaData,hostComponent)}
@@ -66372,9 +65326,6 @@ var ExtTreelistitemComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTreelistitemComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -66707,13 +65658,9 @@ var loadmaskMetaData = /** @class */ (function () {
 }());
 var ExtLoadmaskComponent = /** @class */ (function (_super) {
     __extends(ExtLoadmaskComponent, _super);
-    function ExtLoadmaskComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, loadmaskMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtLoadmaskComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, loadmaskMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,loadmaskMetaData,hostComponent)}
@@ -66752,9 +65699,6 @@ var ExtLoadmaskComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtLoadmaskComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -67081,13 +66025,9 @@ var maskMetaData = /** @class */ (function () {
 }());
 var ExtMaskComponent = /** @class */ (function (_super) {
     __extends(ExtMaskComponent, _super);
-    function ExtMaskComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, maskMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtMaskComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, maskMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,maskMetaData,hostComponent)}
@@ -67126,9 +66066,6 @@ var ExtMaskComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtMaskComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -67485,13 +66422,9 @@ var mediaMetaData = /** @class */ (function () {
 }());
 var ExtMediaComponent = /** @class */ (function (_super) {
     __extends(ExtMediaComponent, _super);
-    function ExtMediaComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, mediaMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtMediaComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, mediaMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,mediaMetaData,hostComponent)}
@@ -67530,9 +66463,6 @@ var ExtMediaComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtMediaComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -67903,13 +66833,9 @@ var menucheckitemMetaData = /** @class */ (function () {
 }());
 var ExtMenucheckitemComponent = /** @class */ (function (_super) {
     __extends(ExtMenucheckitemComponent, _super);
-    function ExtMenucheckitemComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, menucheckitemMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtMenucheckitemComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, menucheckitemMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menucheckitemMetaData,hostComponent)}
@@ -67948,9 +66874,6 @@ var ExtMenucheckitemComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtMenucheckitemComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -68307,13 +67230,9 @@ var menuitemMetaData = /** @class */ (function () {
 }());
 var ExtMenuitemComponent = /** @class */ (function (_super) {
     __extends(ExtMenuitemComponent, _super);
-    function ExtMenuitemComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, menuitemMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtMenuitemComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, menuitemMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuitemMetaData,hostComponent)}
@@ -68352,9 +67271,6 @@ var ExtMenuitemComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtMenuitemComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -68835,13 +67751,9 @@ var menuMetaData = /** @class */ (function () {
 }());
 var ExtMenuComponent = /** @class */ (function (_super) {
     __extends(ExtMenuComponent, _super);
-    function ExtMenuComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, menuMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtMenuComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, menuMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuMetaData,hostComponent)}
@@ -68880,9 +67792,6 @@ var ExtMenuComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtMenuComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -69257,13 +68166,9 @@ var menuradioitemMetaData = /** @class */ (function () {
 }());
 var ExtMenuradioitemComponent = /** @class */ (function (_super) {
     __extends(ExtMenuradioitemComponent, _super);
-    function ExtMenuradioitemComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, menuradioitemMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtMenuradioitemComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, menuradioitemMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuradioitemMetaData,hostComponent)}
@@ -69302,9 +68207,6 @@ var ExtMenuradioitemComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtMenuradioitemComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -69627,13 +68529,9 @@ var menuseparatorMetaData = /** @class */ (function () {
 }());
 var ExtMenuseparatorComponent = /** @class */ (function (_super) {
     __extends(ExtMenuseparatorComponent, _super);
-    function ExtMenuseparatorComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, menuseparatorMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtMenuseparatorComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, menuseparatorMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuseparatorMetaData,hostComponent)}
@@ -69672,9 +68570,6 @@ var ExtMenuseparatorComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtMenuseparatorComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -70177,13 +69072,9 @@ var messageboxMetaData = /** @class */ (function () {
 }());
 var ExtMessageboxComponent = /** @class */ (function (_super) {
     __extends(ExtMessageboxComponent, _super);
-    function ExtMessageboxComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, messageboxMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtMessageboxComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, messageboxMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,messageboxMetaData,hostComponent)}
@@ -70222,9 +69113,6 @@ var ExtMessageboxComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtMessageboxComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -70617,13 +69505,9 @@ var navigationviewMetaData = /** @class */ (function () {
 }());
 var ExtNavigationviewComponent = /** @class */ (function (_super) {
     __extends(ExtNavigationviewComponent, _super);
-    function ExtNavigationviewComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, navigationviewMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtNavigationviewComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, navigationviewMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,navigationviewMetaData,hostComponent)}
@@ -70662,9 +69546,6 @@ var ExtNavigationviewComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtNavigationviewComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -71127,13 +70008,9 @@ var panelMetaData = /** @class */ (function () {
 }());
 var ExtPanelComponent = /** @class */ (function (_super) {
     __extends(ExtPanelComponent, _super);
-    function ExtPanelComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, panelMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPanelComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, panelMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,panelMetaData,hostComponent)}
@@ -71172,9 +70049,6 @@ var ExtPanelComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPanelComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -71707,13 +70581,9 @@ var datepanelMetaData = /** @class */ (function () {
 }());
 var ExtDatepanelComponent = /** @class */ (function (_super) {
     __extends(ExtDatepanelComponent, _super);
-    function ExtDatepanelComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, datepanelMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtDatepanelComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, datepanelMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepanelMetaData,hostComponent)}
@@ -71752,9 +70622,6 @@ var ExtDatepanelComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtDatepanelComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -72093,13 +70960,9 @@ var datetitleMetaData = /** @class */ (function () {
 }());
 var ExtDatetitleComponent = /** @class */ (function (_super) {
     __extends(ExtDatetitleComponent, _super);
-    function ExtDatetitleComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, datetitleMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtDatetitleComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, datetitleMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datetitleMetaData,hostComponent)}
@@ -72138,9 +71001,6 @@ var ExtDatetitleComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtDatetitleComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -72537,13 +71397,9 @@ var panelheaderMetaData = /** @class */ (function () {
 }());
 var ExtPanelheaderComponent = /** @class */ (function (_super) {
     __extends(ExtPanelheaderComponent, _super);
-    function ExtPanelheaderComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, panelheaderMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPanelheaderComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, panelheaderMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,panelheaderMetaData,hostComponent)}
@@ -72582,9 +71438,6 @@ var ExtPanelheaderComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPanelheaderComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -73065,13 +71918,9 @@ var timepanelMetaData = /** @class */ (function () {
 }());
 var ExtTimepanelComponent = /** @class */ (function (_super) {
     __extends(ExtTimepanelComponent, _super);
-    function ExtTimepanelComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, timepanelMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTimepanelComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, timepanelMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timepanelMetaData,hostComponent)}
@@ -73110,9 +71959,6 @@ var ExtTimepanelComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTimepanelComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -73451,13 +72297,9 @@ var paneltitleMetaData = /** @class */ (function () {
 }());
 var ExtPaneltitleComponent = /** @class */ (function (_super) {
     __extends(ExtPaneltitleComponent, _super);
-    function ExtPaneltitleComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, paneltitleMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPaneltitleComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, paneltitleMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,paneltitleMetaData,hostComponent)}
@@ -73496,9 +72338,6 @@ var ExtPaneltitleComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPaneltitleComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -74067,13 +72906,9 @@ var yearpickerMetaData = /** @class */ (function () {
 }());
 var ExtYearpickerComponent = /** @class */ (function (_super) {
     __extends(ExtYearpickerComponent, _super);
-    function ExtYearpickerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, yearpickerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtYearpickerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, yearpickerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,yearpickerMetaData,hostComponent)}
@@ -74112,9 +72947,6 @@ var ExtYearpickerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtYearpickerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -74621,13 +73453,9 @@ var datepickerMetaData = /** @class */ (function () {
 }());
 var ExtDatepickerComponent = /** @class */ (function (_super) {
     __extends(ExtDatepickerComponent, _super);
-    function ExtDatepickerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, datepickerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtDatepickerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, datepickerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickerMetaData,hostComponent)}
@@ -74666,9 +73494,6 @@ var ExtDatepickerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtDatepickerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -75163,13 +73988,9 @@ var pickerMetaData = /** @class */ (function () {
 }());
 var ExtPickerComponent = /** @class */ (function (_super) {
     __extends(ExtPickerComponent, _super);
-    function ExtPickerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, pickerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPickerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, pickerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerMetaData,hostComponent)}
@@ -75208,9 +74029,6 @@ var ExtPickerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPickerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -75705,13 +74523,9 @@ var selectpickerMetaData = /** @class */ (function () {
 }());
 var ExtSelectpickerComponent = /** @class */ (function (_super) {
     __extends(ExtSelectpickerComponent, _super);
-    function ExtSelectpickerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, selectpickerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSelectpickerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, selectpickerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectpickerMetaData,hostComponent)}
@@ -75750,9 +74564,6 @@ var ExtSelectpickerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSelectpickerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -76269,13 +75080,9 @@ var pickerslotMetaData = /** @class */ (function () {
 }());
 var ExtPickerslotComponent = /** @class */ (function (_super) {
     __extends(ExtPickerslotComponent, _super);
-    function ExtPickerslotComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, pickerslotMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPickerslotComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, pickerslotMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerslotMetaData,hostComponent)}
@@ -76314,9 +75121,6 @@ var ExtPickerslotComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPickerslotComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -76779,13 +75583,9 @@ var tabletpickerMetaData = /** @class */ (function () {
 }());
 var ExtTabletpickerComponent = /** @class */ (function (_super) {
     __extends(ExtTabletpickerComponent, _super);
-    function ExtTabletpickerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, tabletpickerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTabletpickerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, tabletpickerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabletpickerMetaData,hostComponent)}
@@ -76824,9 +75624,6 @@ var ExtTabletpickerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTabletpickerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -77027,13 +75824,9 @@ var pivotgridcellMetaData = /** @class */ (function () {
 }());
 var ExtPivotgridcellComponent = /** @class */ (function (_super) {
     __extends(ExtPivotgridcellComponent, _super);
-    function ExtPivotgridcellComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, pivotgridcellMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPivotgridcellComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, pivotgridcellMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridcellMetaData,hostComponent)}
@@ -77072,9 +75865,6 @@ var ExtPivotgridcellComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPivotgridcellComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -77275,13 +76065,9 @@ var pivotgridgroupcellMetaData = /** @class */ (function () {
 }());
 var ExtPivotgridgroupcellComponent = /** @class */ (function (_super) {
     __extends(ExtPivotgridgroupcellComponent, _super);
-    function ExtPivotgridgroupcellComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, pivotgridgroupcellMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPivotgridgroupcellComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, pivotgridgroupcellMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridgroupcellMetaData,hostComponent)}
@@ -77320,9 +76106,6 @@ var ExtPivotgridgroupcellComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPivotgridgroupcellComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -77365,13 +76148,9 @@ var pivotd3containerMetaData = /** @class */ (function () {
 }());
 var ExtPivotd3containerComponent = /** @class */ (function (_super) {
     __extends(ExtPivotd3containerComponent, _super);
-    function ExtPivotd3containerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, pivotd3containerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPivotd3containerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, pivotd3containerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotd3containerMetaData,hostComponent)}
@@ -77410,9 +76189,6 @@ var ExtPivotd3containerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPivotd3containerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -77767,13 +76543,9 @@ var pivotheatmapMetaData = /** @class */ (function () {
 }());
 var ExtPivotheatmapComponent = /** @class */ (function (_super) {
     __extends(ExtPivotheatmapComponent, _super);
-    function ExtPivotheatmapComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, pivotheatmapMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPivotheatmapComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, pivotheatmapMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotheatmapMetaData,hostComponent)}
@@ -77812,9 +76584,6 @@ var ExtPivotheatmapComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPivotheatmapComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -78205,13 +76974,9 @@ var pivottreemapMetaData = /** @class */ (function () {
 }());
 var ExtPivottreemapComponent = /** @class */ (function (_super) {
     __extends(ExtPivottreemapComponent, _super);
-    function ExtPivottreemapComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, pivottreemapMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPivottreemapComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, pivottreemapMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivottreemapMetaData,hostComponent)}
@@ -78250,9 +77015,6 @@ var ExtPivottreemapComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPivottreemapComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -78953,13 +77715,9 @@ var pivotgridMetaData = /** @class */ (function () {
 }());
 var ExtPivotgridComponent = /** @class */ (function (_super) {
     __extends(ExtPivotgridComponent, _super);
-    function ExtPivotgridComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, pivotgridMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPivotgridComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, pivotgridMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridMetaData,hostComponent)}
@@ -78998,9 +77756,6 @@ var ExtPivotgridComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPivotgridComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -79395,13 +78150,9 @@ var pivotconfigfieldMetaData = /** @class */ (function () {
 }());
 var ExtPivotconfigfieldComponent = /** @class */ (function (_super) {
     __extends(ExtPivotconfigfieldComponent, _super);
-    function ExtPivotconfigfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, pivotconfigfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPivotconfigfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, pivotconfigfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigfieldMetaData,hostComponent)}
@@ -79440,9 +78191,6 @@ var ExtPivotconfigfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPivotconfigfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -79907,13 +78655,9 @@ var pivotconfigcontainerMetaData = /** @class */ (function () {
 }());
 var ExtPivotconfigcontainerComponent = /** @class */ (function (_super) {
     __extends(ExtPivotconfigcontainerComponent, _super);
-    function ExtPivotconfigcontainerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, pivotconfigcontainerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPivotconfigcontainerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, pivotconfigcontainerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigcontainerMetaData,hostComponent)}
@@ -79952,9 +78696,6 @@ var ExtPivotconfigcontainerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPivotconfigcontainerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -80453,13 +79194,9 @@ var pivotconfigformMetaData = /** @class */ (function () {
 }());
 var ExtPivotconfigformComponent = /** @class */ (function (_super) {
     __extends(ExtPivotconfigformComponent, _super);
-    function ExtPivotconfigformComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, pivotconfigformMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPivotconfigformComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, pivotconfigformMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigformMetaData,hostComponent)}
@@ -80498,9 +79235,6 @@ var ExtPivotconfigformComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPivotconfigformComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -80979,13 +79713,9 @@ var pivotconfigpanelMetaData = /** @class */ (function () {
 }());
 var ExtPivotconfigpanelComponent = /** @class */ (function (_super) {
     __extends(ExtPivotconfigpanelComponent, _super);
-    function ExtPivotconfigpanelComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, pivotconfigpanelMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPivotconfigpanelComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, pivotconfigpanelMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigpanelMetaData,hostComponent)}
@@ -81024,9 +79754,6 @@ var ExtPivotconfigpanelComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPivotconfigpanelComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -81525,13 +80252,9 @@ var pivotsettingsMetaData = /** @class */ (function () {
 }());
 var ExtPivotsettingsComponent = /** @class */ (function (_super) {
     __extends(ExtPivotsettingsComponent, _super);
-    function ExtPivotsettingsComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, pivotsettingsMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPivotsettingsComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, pivotsettingsMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotsettingsMetaData,hostComponent)}
@@ -81570,9 +80293,6 @@ var ExtPivotsettingsComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPivotsettingsComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -82071,13 +80791,9 @@ var pivotrangeeditorMetaData = /** @class */ (function () {
 }());
 var ExtPivotrangeeditorComponent = /** @class */ (function (_super) {
     __extends(ExtPivotrangeeditorComponent, _super);
-    function ExtPivotrangeeditorComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, pivotrangeeditorMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPivotrangeeditorComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, pivotrangeeditorMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotrangeeditorMetaData,hostComponent)}
@@ -82116,9 +80832,6 @@ var ExtPivotrangeeditorComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPivotrangeeditorComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -82453,13 +81166,9 @@ var pivotgridrowMetaData = /** @class */ (function () {
 }());
 var ExtPivotgridrowComponent = /** @class */ (function (_super) {
     __extends(ExtPivotgridrowComponent, _super);
-    function ExtPivotgridrowComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, pivotgridrowMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPivotgridrowComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, pivotgridrowMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridrowMetaData,hostComponent)}
@@ -82498,9 +81207,6 @@ var ExtPivotgridrowComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPivotgridrowComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -82831,13 +81537,9 @@ var progressMetaData = /** @class */ (function () {
 }());
 var ExtProgressComponent = /** @class */ (function (_super) {
     __extends(ExtProgressComponent, _super);
-    function ExtProgressComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, progressMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtProgressComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, progressMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,progressMetaData,hostComponent)}
@@ -82876,9 +81578,6 @@ var ExtProgressComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtProgressComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -83209,13 +81908,9 @@ var progressbarwidgetMetaData = /** @class */ (function () {
 }());
 var ExtProgressbarwidgetComponent = /** @class */ (function (_super) {
     __extends(ExtProgressbarwidgetComponent, _super);
-    function ExtProgressbarwidgetComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, progressbarwidgetMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtProgressbarwidgetComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, progressbarwidgetMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,progressbarwidgetMetaData,hostComponent)}
@@ -83254,9 +81949,6 @@ var ExtProgressbarwidgetComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtProgressbarwidgetComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -83657,13 +82349,9 @@ var segmentedbuttonMetaData = /** @class */ (function () {
 }());
 var ExtSegmentedbuttonComponent = /** @class */ (function (_super) {
     __extends(ExtSegmentedbuttonComponent, _super);
-    function ExtSegmentedbuttonComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, segmentedbuttonMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSegmentedbuttonComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, segmentedbuttonMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,segmentedbuttonMetaData,hostComponent)}
@@ -83702,9 +82390,6 @@ var ExtSegmentedbuttonComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSegmentedbuttonComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -84181,13 +82866,9 @@ var sheetMetaData = /** @class */ (function () {
 }());
 var ExtSheetComponent = /** @class */ (function (_super) {
     __extends(ExtSheetComponent, _super);
-    function ExtSheetComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, sheetMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSheetComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, sheetMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sheetMetaData,hostComponent)}
@@ -84226,9 +82907,6 @@ var ExtSheetComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSheetComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -84579,13 +83257,9 @@ var sliderMetaData = /** @class */ (function () {
 }());
 var ExtSliderComponent = /** @class */ (function (_super) {
     __extends(ExtSliderComponent, _super);
-    function ExtSliderComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, sliderMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSliderComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, sliderMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sliderMetaData,hostComponent)}
@@ -84624,9 +83298,6 @@ var ExtSliderComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSliderComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -84953,13 +83624,9 @@ var thumbMetaData = /** @class */ (function () {
 }());
 var ExtThumbComponent = /** @class */ (function (_super) {
     __extends(ExtThumbComponent, _super);
-    function ExtThumbComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, thumbMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtThumbComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, thumbMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,thumbMetaData,hostComponent)}
@@ -84998,9 +83665,6 @@ var ExtThumbComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtThumbComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -85351,13 +84015,9 @@ var togglesliderMetaData = /** @class */ (function () {
 }());
 var ExtTogglesliderComponent = /** @class */ (function (_super) {
     __extends(ExtTogglesliderComponent, _super);
-    function ExtTogglesliderComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, togglesliderMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTogglesliderComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, togglesliderMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,togglesliderMetaData,hostComponent)}
@@ -85396,9 +84056,6 @@ var ExtTogglesliderComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTogglesliderComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -85721,13 +84378,9 @@ var spacerMetaData = /** @class */ (function () {
 }());
 var ExtSpacerComponent = /** @class */ (function (_super) {
     __extends(ExtSpacerComponent, _super);
-    function ExtSpacerComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, spacerMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSpacerComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, spacerMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spacerMetaData,hostComponent)}
@@ -85766,9 +84419,6 @@ var ExtSpacerComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSpacerComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -86133,13 +84783,9 @@ var sparklinebarMetaData = /** @class */ (function () {
 }());
 var ExtSparklinebarComponent = /** @class */ (function (_super) {
     __extends(ExtSparklinebarComponent, _super);
-    function ExtSparklinebarComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, sparklinebarMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSparklinebarComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, sparklinebarMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinebarMetaData,hostComponent)}
@@ -86178,9 +84824,6 @@ var ExtSparklinebarComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSparklinebarComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -86521,13 +85164,9 @@ var sparklineMetaData = /** @class */ (function () {
 }());
 var ExtSparklineComponent = /** @class */ (function (_super) {
     __extends(ExtSparklineComponent, _super);
-    function ExtSparklineComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, sparklineMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSparklineComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, sparklineMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklineMetaData,hostComponent)}
@@ -86566,9 +85205,6 @@ var ExtSparklineComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSparklineComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -86937,13 +85573,9 @@ var sparklineboxMetaData = /** @class */ (function () {
 }());
 var ExtSparklineboxComponent = /** @class */ (function (_super) {
     __extends(ExtSparklineboxComponent, _super);
-    function ExtSparklineboxComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, sparklineboxMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSparklineboxComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, sparklineboxMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklineboxMetaData,hostComponent)}
@@ -86982,9 +85614,6 @@ var ExtSparklineboxComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSparklineboxComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -87335,13 +85964,9 @@ var sparklinebulletMetaData = /** @class */ (function () {
 }());
 var ExtSparklinebulletComponent = /** @class */ (function (_super) {
     __extends(ExtSparklinebulletComponent, _super);
-    function ExtSparklinebulletComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, sparklinebulletMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSparklinebulletComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, sparklinebulletMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinebulletMetaData,hostComponent)}
@@ -87380,9 +86005,6 @@ var ExtSparklinebulletComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSparklinebulletComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -87735,13 +86357,9 @@ var sparklinediscreteMetaData = /** @class */ (function () {
 }());
 var ExtSparklinediscreteComponent = /** @class */ (function (_super) {
     __extends(ExtSparklinediscreteComponent, _super);
-    function ExtSparklinediscreteComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, sparklinediscreteMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSparklinediscreteComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, sparklinediscreteMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinediscreteMetaData,hostComponent)}
@@ -87780,9 +86398,6 @@ var ExtSparklinediscreteComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSparklinediscreteComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -88157,13 +86772,9 @@ var sparklinelineMetaData = /** @class */ (function () {
 }());
 var ExtSparklinelineComponent = /** @class */ (function (_super) {
     __extends(ExtSparklinelineComponent, _super);
-    function ExtSparklinelineComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, sparklinelineMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSparklinelineComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, sparklinelineMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinelineMetaData,hostComponent)}
@@ -88202,9 +86813,6 @@ var ExtSparklinelineComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSparklinelineComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -88553,13 +87161,9 @@ var sparklinepieMetaData = /** @class */ (function () {
 }());
 var ExtSparklinepieComponent = /** @class */ (function (_super) {
     __extends(ExtSparklinepieComponent, _super);
-    function ExtSparklinepieComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, sparklinepieMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSparklinepieComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, sparklinepieMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinepieMetaData,hostComponent)}
@@ -88598,9 +87202,6 @@ var ExtSparklinepieComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSparklinepieComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -88953,13 +87554,9 @@ var sparklinetristateMetaData = /** @class */ (function () {
 }());
 var ExtSparklinetristateComponent = /** @class */ (function (_super) {
     __extends(ExtSparklinetristateComponent, _super);
-    function ExtSparklinetristateComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, sparklinetristateMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSparklinetristateComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, sparklinetristateMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinetristateMetaData,hostComponent)}
@@ -88998,9 +87595,6 @@ var ExtSparklinetristateComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSparklinetristateComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -89379,13 +87973,9 @@ var splitbuttonMetaData = /** @class */ (function () {
 }());
 var ExtSplitbuttonComponent = /** @class */ (function (_super) {
     __extends(ExtSplitbuttonComponent, _super);
-    function ExtSplitbuttonComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, splitbuttonMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtSplitbuttonComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, splitbuttonMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,splitbuttonMetaData,hostComponent)}
@@ -89424,9 +88014,6 @@ var ExtSplitbuttonComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtSplitbuttonComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -89823,13 +88410,9 @@ var tabbarMetaData = /** @class */ (function () {
 }());
 var ExtTabbarComponent = /** @class */ (function (_super) {
     __extends(ExtTabbarComponent, _super);
-    function ExtTabbarComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, tabbarMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTabbarComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, tabbarMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabbarMetaData,hostComponent)}
@@ -89868,9 +88451,6 @@ var ExtTabbarComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTabbarComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -90257,13 +88837,9 @@ var tabpanelMetaData = /** @class */ (function () {
 }());
 var ExtTabpanelComponent = /** @class */ (function (_super) {
     __extends(ExtTabpanelComponent, _super);
-    function ExtTabpanelComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, tabpanelMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTabpanelComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, tabpanelMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabpanelMetaData,hostComponent)}
@@ -90302,9 +88878,6 @@ var ExtTabpanelComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTabpanelComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -90689,13 +89262,9 @@ var tabMetaData = /** @class */ (function () {
 }());
 var ExtTabComponent = /** @class */ (function (_super) {
     __extends(ExtTabComponent, _super);
-    function ExtTabComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, tabMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTabComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, tabMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabMetaData,hostComponent)}
@@ -90734,9 +89303,6 @@ var ExtTabComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTabComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -91227,13 +89793,9 @@ var tooltipMetaData = /** @class */ (function () {
 }());
 var ExtTooltipComponent = /** @class */ (function (_super) {
     __extends(ExtTooltipComponent, _super);
-    function ExtTooltipComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, tooltipMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTooltipComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, tooltipMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tooltipMetaData,hostComponent)}
@@ -91272,9 +89834,6 @@ var ExtTooltipComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTooltipComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -91599,13 +90158,9 @@ var titleMetaData = /** @class */ (function () {
 }());
 var ExtTitleComponent = /** @class */ (function (_super) {
     __extends(ExtTitleComponent, _super);
-    function ExtTitleComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, titleMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTitleComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, titleMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,titleMetaData,hostComponent)}
@@ -91644,9 +90199,6 @@ var ExtTitleComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTitleComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -92035,13 +90587,9 @@ var titlebarMetaData = /** @class */ (function () {
 }());
 var ExtTitlebarComponent = /** @class */ (function (_super) {
     __extends(ExtTitlebarComponent, _super);
-    function ExtTitlebarComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, titlebarMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtTitlebarComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, titlebarMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,titlebarMetaData,hostComponent)}
@@ -92080,9 +90628,6 @@ var ExtTitlebarComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtTitlebarComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -92421,13 +90966,9 @@ var toolMetaData = /** @class */ (function () {
 }());
 var ExtToolComponent = /** @class */ (function (_super) {
     __extends(ExtToolComponent, _super);
-    function ExtToolComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, toolMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtToolComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, toolMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,toolMetaData,hostComponent)}
@@ -92466,9 +91007,6 @@ var ExtToolComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtToolComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -92807,13 +91345,9 @@ var paneltoolMetaData = /** @class */ (function () {
 }());
 var ExtPaneltoolComponent = /** @class */ (function (_super) {
     __extends(ExtPaneltoolComponent, _super);
-    function ExtPaneltoolComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, paneltoolMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtPaneltoolComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, paneltoolMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,paneltoolMetaData,hostComponent)}
@@ -92852,9 +91386,6 @@ var ExtPaneltoolComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtPaneltoolComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -93239,13 +91770,9 @@ var toolbarMetaData = /** @class */ (function () {
 }());
 var ExtToolbarComponent = /** @class */ (function (_super) {
     __extends(ExtToolbarComponent, _super);
-    function ExtToolbarComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, toolbarMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtToolbarComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, toolbarMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,toolbarMetaData,hostComponent)}
@@ -93284,9 +91811,6 @@ var ExtToolbarComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtToolbarComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -93621,13 +92145,9 @@ var colorbuttonMetaData = /** @class */ (function () {
 }());
 var ExtColorbuttonComponent = /** @class */ (function (_super) {
     __extends(ExtColorbuttonComponent, _super);
-    function ExtColorbuttonComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, colorbuttonMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtColorbuttonComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, colorbuttonMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorbuttonMetaData,hostComponent)}
@@ -93666,9 +92186,6 @@ var ExtColorbuttonComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtColorbuttonComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -93991,13 +92508,9 @@ var colorpickercolorpreviewMetaData = /** @class */ (function () {
 }());
 var ExtColorpickercolorpreviewComponent = /** @class */ (function (_super) {
     __extends(ExtColorpickercolorpreviewComponent, _super);
-    function ExtColorpickercolorpreviewComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, colorpickercolorpreviewMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtColorpickercolorpreviewComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, colorpickercolorpreviewMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorpickercolorpreviewMetaData,hostComponent)}
@@ -94036,9 +92549,6 @@ var ExtColorpickercolorpreviewComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtColorpickercolorpreviewComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -94499,13 +93009,9 @@ var colorfieldMetaData = /** @class */ (function () {
 }());
 var ExtColorfieldComponent = /** @class */ (function (_super) {
     __extends(ExtColorfieldComponent, _super);
-    function ExtColorfieldComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, colorfieldMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtColorfieldComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, colorfieldMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorfieldMetaData,hostComponent)}
@@ -94544,9 +93050,6 @@ var ExtColorfieldComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtColorfieldComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -94609,13 +93112,9 @@ var colorselectorMetaData = /** @class */ (function () {
 }());
 var ExtColorselectorComponent = /** @class */ (function (_super) {
     __extends(ExtColorselectorComponent, _super);
-    function ExtColorselectorComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, colorselectorMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtColorselectorComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, colorselectorMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorselectorMetaData,hostComponent)}
@@ -94654,9 +93153,6 @@ var ExtColorselectorComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtColorselectorComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -95007,13 +93503,9 @@ var gaugeMetaData = /** @class */ (function () {
 }());
 var ExtGaugeComponent = /** @class */ (function (_super) {
     __extends(ExtGaugeComponent, _super);
-    function ExtGaugeComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, gaugeMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtGaugeComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, gaugeMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gaugeMetaData,hostComponent)}
@@ -95052,9 +93544,6 @@ var ExtGaugeComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtGaugeComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -95479,13 +93968,9 @@ var mapMetaData = /** @class */ (function () {
 }());
 var ExtMapComponent = /** @class */ (function (_super) {
     __extends(ExtMapComponent, _super);
-    function ExtMapComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, mapMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtMapComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, mapMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,mapMetaData,hostComponent)}
@@ -95524,9 +94009,6 @@ var ExtMapComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtMapComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -95951,13 +94433,9 @@ var google_mapMetaData = /** @class */ (function () {
 }());
 var ExtGoogle_mapComponent = /** @class */ (function (_super) {
     __extends(ExtGoogle_mapComponent, _super);
-    function ExtGoogle_mapComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, google_mapMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtGoogle_mapComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, google_mapMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,google_mapMetaData,hostComponent)}
@@ -95996,9 +94474,6 @@ var ExtGoogle_mapComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtGoogle_mapComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -96349,13 +94824,9 @@ var ratingMetaData = /** @class */ (function () {
 }());
 var ExtRatingComponent = /** @class */ (function (_super) {
     __extends(ExtRatingComponent, _super);
-    function ExtRatingComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, ratingMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtRatingComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, ratingMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,ratingMetaData,hostComponent)}
@@ -96394,9 +94865,6 @@ var ExtRatingComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtRatingComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -96757,13 +95225,9 @@ var videoMetaData = /** @class */ (function () {
 }());
 var ExtVideoComponent = /** @class */ (function (_super) {
     __extends(ExtVideoComponent, _super);
-    function ExtVideoComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, videoMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtVideoComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, videoMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,videoMetaData,hostComponent)}
@@ -96802,9 +95266,6 @@ var ExtVideoComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtVideoComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -97203,13 +95664,9 @@ var viewportMetaData = /** @class */ (function () {
 }());
 var ExtViewportComponent = /** @class */ (function (_super) {
     __extends(ExtViewportComponent, _super);
-    function ExtViewportComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, viewportMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtViewportComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, viewportMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,viewportMetaData,hostComponent)}
@@ -97248,9 +95705,6 @@ var ExtViewportComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtViewportComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };
@@ -97415,13 +95869,9 @@ var widgetMetaData = /** @class */ (function () {
 }());
 var ExtWidgetComponent = /** @class */ (function (_super) {
     __extends(ExtWidgetComponent, _super);
-    function ExtWidgetComponent(location, resolver, changeDetector, eRef, hostComponent) {
-        var _this = _super.call(this, eRef, eRef.nativeElement, widgetMetaData, hostComponent) || this;
-        _this.location = location;
-        _this.resolver = resolver;
-        _this.changeDetector = changeDetector;
+    function ExtWidgetComponent(eRef, hostComponent) {
+        var _this = _super.call(this, eRef.nativeElement, widgetMetaData, hostComponent) || this;
         _this.hostComponent = hostComponent;
-        console.log(location);
         return _this;
     }
     //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,widgetMetaData,hostComponent)}
@@ -97460,9 +95910,6 @@ var ExtWidgetComponent = /** @class */ (function (_super) {
     ];
     /** @nocollapse */
     ExtWidgetComponent.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentFactoryResolver },
-        { type: ChangeDetectorRef },
         { type: ElementRef },
         { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
     ]; };

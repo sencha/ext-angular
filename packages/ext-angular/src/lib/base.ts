@@ -19,13 +19,11 @@ export class base {
   private _extChildren: any = false
 
   constructor(
-    eRef: any,
     nativeElement: any,
     private metaData: any,
     public hostComponent : base
   ) {
 //    console.log('constructor')
-//    console.log(eRef)
     this._nativeElement = nativeElement
     this._hostComponent = hostComponent
     metaData.EVENTS.forEach( (event: any, n: any) => {
@@ -104,32 +102,45 @@ export class base {
   }
 
   ngOnDestroy() {
-    console.log(`ngOnDestroy`)
+    //console.log(`ngOnDestroy`)
+    var childCmp
+    var parentCmp
     try {
       //console.log(this)
       //console.log(this.ext)
+      childCmp = this.ext
       //console.log(this._hostComponent)
-      //console.log(this._hostComponent.ext)
-      var parent = this._hostComponent.ext
-      var child = this.ext
-      console.log(parent)
-      console.log(child)
-      parent.remove([child])
+      if (this._hostComponent != null) {
+        //console.log(this._hostComponent.ext)
+        parentCmp = this._hostComponent.ext
+       
+        //console.log(parentCmp)
+        //console.log(childCmp)
+
+        if(parentCmp.xtype == 'button' && childCmp.xtype == 'menu') {
+          //console.log('button menu not deleted')
+        }
+        else if (parentCmp.xtype == 'carousel') {
+          //console.log('carousel child not deleted')
+        }
+        else {
+          parentCmp.remove([childCmp])
+          childCmp.destroy()
+        }
+      }
     }
     catch(e) {
       console.error(e)
+      console.log('*****')
+      console.log(parentCmp)
+      console.log(childCmp)
+      console.log('*****')
     }
   }
 
   @ContentChild('extroute') _extroute: any
-  //@ContentChild('extjs') _extjs: any;
-//  @ContentChildren('extjs') _items: QueryList<any>
-  //@ContentChildren('HtmlElement') _htmlElement: QueryList<any>
- // @ContentChildren('extjs', { read: ElementRef }) _elRefItems: QueryList<ElementRef>
   baseAfterContentInit() {
-    console.log('\nbaseAfterContentInit')
-//    console.log('this._extroute')
-//    console.log(this._extroute)
+//    console.log('\nbaseAfterContentInit')
     if (this._extroute != undefined) {
       this.ext.add({xtype: 'container',html: this._extroute.nativeElement})
       return
@@ -140,7 +151,7 @@ export class base {
 //    console.log('this')
 //    console.log(this)
 
-    if(this._hostComponent == null) {
+    //if(this._hostComponent == null) {
       // console.log('root')
       // var anyItems: any[] = []
       // var elRefItems: any[] = []
@@ -159,11 +170,13 @@ export class base {
       //   }
       // }
 
-    }
-    else {
-      console.log('_hostComponent: ')
-      console.log(this._hostComponent)
-      console.log('parent: ' + this._hostComponent.ext.xtype)
+    //}
+    //else {
+
+    if(this._hostComponent != null) {
+      //console.log('_hostComponent: ')
+      //console.log(this._hostComponent)
+      //console.log('parent: ' + this._hostComponent.ext.xtype)
       var parentCmp = this._hostComponent.ext
       var childCmp = this.ext
       this.addTheChild(parentCmp,childCmp)
