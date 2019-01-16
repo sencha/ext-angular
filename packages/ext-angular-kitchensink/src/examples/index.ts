@@ -204,9 +204,7 @@ const treeRoot = {
                 { text: 'SegmentedButton', component: SegmentedButtonComponent, layout: 'center', navIcon: 'icon-segmented-buttons' },
                 { text: 'SplitButton', component: SplitButtonComponent, layout: 'center', navIcon: 'icon-buttons' },
             ]},
-            { text: 'Color Picker', navIcon: 'icon-color-picker', children: [
-                { text: 'Basic', component: ColorPickerComponent, layout: 'center', navIcon: 'icon-color-picker' }
-            ]},
+            { text: 'ColorPicker', component: ColorPickerComponent, layout: 'center', navIcon: 'icon-color-picker' },
             { text: 'Carousel', component: CarouselComponent, navIcon: 'icon-carousel' },
             { text: 'Drag & Drop', navIcon: 'icon-drag-drop', children: [
                 { text: 'Simple', component: SimpleDragDropComponent, navIcon: 'icon-drag-simple' },
