@@ -106,6 +106,7 @@ export class LandingpageComponent implements OnInit {
 
   toggleCode = () => {
     this.showCode = !this.showCode;
+    this.highlightCode();
   }
 
   dataviewReady = (event) => {
@@ -180,6 +181,7 @@ export class LandingpageComponent implements OnInit {
 
         if (localNode) {
           this.files = getFiles(localNode, _code);
+          this.showCode = false;
           this.node$.next(localNode);
         } else {
           console.log("Not a valid node. Probably looking at resources");
@@ -195,7 +197,7 @@ export class LandingpageComponent implements OnInit {
   //mjg
   highlightCode() {
     document.querySelectorAll(".code").forEach((el) => {
-      //highlightBlock(el);
+      hljs.highlightBlock(el);
     });
   }
 
