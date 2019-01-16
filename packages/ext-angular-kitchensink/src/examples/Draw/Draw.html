@@ -1,12 +1,12 @@
-<panel #item [shadow]="true" [layout]="'fit'" [fitToParent]="true">
-    <toolbar #item [docked]="'top'">
-        <container #item>
-            <div #item [style]="isPhone ? '12px' : '14px'">
+<panel  [shadow]="true" [layout]="'fit'" [fitToParent]="true">
+    <toolbar  [docked]="'top'">
+        <container >
+            <div  [style]="isPhone ? '12px' : '14px'">
                 Use your {{supportsTouch ? 'finger' : 'mouse'}} to paint on the surface below.
             </div>
         </container>
-        <spacer #item></spacer>
-        <button #item (tap)="clear()" [text]="'Clear'"> </button>
+        <spacer ></spacer>
+        <button  (tap)="clear()" [text]="'Clear'"> </button>
     </toolbar>
-    <draw #item (ready)="onReady($event)"></draw>
+    <draw  (ready)="onReady($event)"></draw>
 </panel>

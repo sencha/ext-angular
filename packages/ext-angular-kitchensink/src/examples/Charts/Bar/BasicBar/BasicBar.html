@@ -1,10 +1,10 @@
-<container #item [padding]="!isPhone?  '10': ''" layout="fit"
+<container  [padding]="!isPhone?  '10': ''" layout="fit"
 [fitToParent]="true">
-    <chart-toolbar #item
+    <chart-toolbar 
         [onThemeChange]="this.changeTheme"
         [theme]="theme"
     ></chart-toolbar>
-    <cartesian #item
+    <cartesian 
         shadow="true"
         insetPadding="70 40 0"
         [platformConfig]="{

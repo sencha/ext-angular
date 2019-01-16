@@ -1,14 +1,14 @@
-<container #item [shadow]="true" [layout]="'fit'" [height]="450">
-    <panel #item 
+<container  [shadow]="true" [layout]="'fit'" [height]="450">
+    <panel  
         [title]="'Dock Left'"
         [docked]="'left'" 
         [width]="200"
         [layout]="'center'"
         [resizable]="{split: true, edges: 'east', dynamic: true}"
-        [html]="'<code #item>dynamic: true</code>'"
+        [html]="'<code >dynamic: true</code>'"
     ></panel>
-    <panel #item [title]="'Unresizable region'" [flex]="1"></panel>
-    <panel #item 
+    <panel  [title]="'Unresizable region'" [flex]="1"></panel>
+    <panel  
         [docked]="'right'" 
         [title]="'Dock Right'"
         [width]="200"
@@ -17,18 +17,18 @@
         [resizable]="rightResizable"
         [html]="'<code>collapsible</code>'"
     ></panel>
-    <panel #item 
+    <panel  
         [docked]="'top'" 
         [title]="'Dock Top'"
         [height]="150"
         resizable="{split: true,  edges: 'south'}" 
     ></panel>
-    <panel #item 
+    <panel  
         [docked]="'bottom'" 
         [title]="'Dock Bottom'"
         [height]="150"
         [layout]="'center'"
         [resizable]="{split: true, edges: 'north', snap: 50}"
-        [html]="'<code #item>snap: 50</code>'"
+        [html]="'<code >snap: 50</code>'"
     ></panel>
 </container>

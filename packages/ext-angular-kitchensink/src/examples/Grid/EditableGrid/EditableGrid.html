@@ -1,13 +1,13 @@
-<grid #item title='Stock Prices' shadow="true" [store]="this.store" [platformConfig]="{ desktop: { plugins: { gridcellediting: true } },
+<grid  title='Stock Prices' shadow="true" [store]="this.store" [platformConfig]="{ desktop: { plugins: { gridcellediting: true } },
     '!desktop': { plugins: { grideditable: true } } }" [fitToParent]="true">
-    <toolbar #item docked="top">
-        <div #item [style]="{color: '#666', fontSize: '13px' }">Double- {{pressType}} a {{pressEntity}} to edit</div>
+    <toolbar  docked="top">
+        <div  [style]="{color: '#666', fontSize: '13px' }">Double- {{pressType}} a {{pressEntity}} to edit</div>
     </toolbar>
-    <column #item text="Company" width="150" dataIndex="name" editable="true" ></column>
-    <column #item text="Price" width="120" dataIndex="price" formatter="usMoney" editable="true">
-        <numberfield #item required="true" [validators]="{type: 'number', message: 'Invalid price'}"></numberfield>
+    <column  text="Company" width="150" dataIndex="name" editable="true" ></column>
+    <column  text="Price" width="120" dataIndex="price" formatter="usMoney" editable="true">
+        <numberfield  required="true" [validators]="{type: 'number', message: 'Invalid price'}"></numberfield>
     </column>
-    <column #item text="Change" width="90" dataIndex="change" [renderer]="this.renderSign.bind(this, '0.00')" ></column>
-    <column #item text="% Change" width="100" dataIndex="pctChange" [renderer]="this.renderSign.bind(this, '0.00')" ></column>
-    <column #item text="Last Updated" width="125" dataIndex="lastChange" formatter="date('m/d/Y')" ></column>
+    <column  text="Change" width="90" dataIndex="change" [renderer]="this.renderSign.bind(this, '0.00')" ></column>
+    <column  text="% Change" width="100" dataIndex="pctChange" [renderer]="this.renderSign.bind(this, '0.00')" ></column>
+    <column  text="Last Updated" width="125" dataIndex="lastChange" formatter="date('m/d/Y')" ></column>
 </grid>

@@ -1,13 +1,13 @@
-<container #item padding="10" [layout]="'vbox'" [fitToParent]="true">
-    <toolbar #item margin="0 0 20 0" shadow>
-        <container #item key="1" [style]="{ marginRight: '10px' }"     html='Grouping:'></container>
-        <segmentedbutton #item key="2" label="Grouping" >
-            <button #item key="1" ui="toolbar-default" [pressed]="grouped" text="ON" [handler]="this.onToggleGrouping.bind(this, true)"></button>
-            <button #item key="2" ui="toolbar-default" [pressed]="!grouped" text="OFF" [handler]="this.onToggleGrouping.bind(this, false)"></button>
+<container  padding="10" [layout]="'vbox'" [fitToParent]="true">
+    <toolbar  margin="0 0 20 0" shadow>
+        <container  key="1" [style]="{ marginRight: '10px' }"     html='Grouping:'></container>
+        <segmentedbutton  key="2" label="Grouping" >
+            <button  key="1" ui="toolbar-default" [pressed]="grouped" text="ON" [handler]="this.onToggleGrouping.bind(this, true)"></button>
+            <button  key="2" ui="toolbar-default" [pressed]="!grouped" text="OFF" [handler]="this.onToggleGrouping.bind(this, false)"></button>
         </segmentedbutton>
     </toolbar>
 
-    <grid #item
+    <grid 
         flex="1"
         title="Restaurants"
         shadow 
@@ -17,18 +17,18 @@
             xtype: 'gridsummaryrow'
         }"
     >
-        <column  #item
+        <column  
             text="Name" 
             dataIndex="name" 
             flex="1"
             groupHeaderTpl='{columnName}: {value:htmlEncode}'
         ></column>
-        <column  #item
+        <column  
             text="Cuisine" 
             dataIndex="cuisine" 
             flex="1"
         ></column>
-        <column  #item
+        <column  
             text="Rating" 
             dataIndex="rating"
             summaryCell="numbercell"

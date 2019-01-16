@@ -1,20 +1,20 @@
-<container #item
+<container 
     [platformConfig]="{phone: {layout: 'fit'}, '!phone': {layout: 'center', padding: 10}}"
 >
-    <formpanel #item
+    <formpanel 
         [shadow]="true" 
         [padding]="20"
         (ready)="onReady($event)"
         [platformConfig]="{'!phone': { maxHeight: 500, width: 350 }}"
     >
-        <fieldset #item [title]="'Personal Info'" [defaults]="{labelAlign: 'placeholder'}">
-            <timefield #item [required]="true" [label]="'Time Field'" [value]="'3:42 PM'" [name]="'time'" [disabled]="disabled">
+        <fieldset  [title]="'Personal Info'" [defaults]="{labelAlign: 'placeholder'}">
+            <timefield  [required]="true" [label]="'Time Field'" [value]="'3:42 PM'" [name]="'time'" [disabled]="disabled">
             </timefield>
         </fieldset>
-        <toolbar #item [shadow]="false" [docked]="'bottom'" [layout]="{ type: 'hbox', pack: 'right' }">
-            <button #item [text]="disabled ? 'Enable All' : 'Disable All'" [margin]="'0 10 0 0'" (tap)="toggleDisabled()">
+        <toolbar  [shadow]="false" [docked]="'bottom'" [layout]="{ type: 'hbox', pack: 'right' }">
+            <button  [text]="disabled ? 'Enable All' : 'Disable All'" [margin]="'0 10 0 0'" (tap)="toggleDisabled()">
             </button>
-            <button #item [text]="'Reset'" (tap)="formPanelRef.reset()"></button>
+            <button  [text]="'Reset'" (tap)="formPanelRef.reset()"></button>
         </toolbar>
     </formpanel>
 </container>

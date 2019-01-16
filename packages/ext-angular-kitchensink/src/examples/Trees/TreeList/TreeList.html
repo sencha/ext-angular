@@ -1,4 +1,4 @@
-<panel #item
+<panel 
 [shadow]="!isPhone" 
 scrollable="true"
 platformConfig="{
@@ -8,13 +8,13 @@ platformConfig="{
     }
 }"
 >
-<toolbar #item docked="top">
-    <segmentedbutton #item allowMultiple="true">
-        <button #item ui="default-toolbar" text="Nav" [pressed]="nav" (pressedchange)="this.toggleNav($event)" [disabled]="micro"></button>
-        <button #item ui="default-toolbar" text="Micro" [pressed]="micro" (pressedchange)="this.toggleMicro($event)"></button>
+<toolbar  docked="top">
+    <segmentedbutton  allowMultiple="true">
+        <button  ui="default-toolbar" text="Nav" [pressed]="nav" (pressedchange)="this.toggleNav($event)" [disabled]="micro"></button>
+        <button  ui="default-toolbar" text="Micro" [pressed]="micro" (pressedchange)="this.toggleMicro($event)"></button>
     </segmentedbutton>
 </toolbar>
-<treelist  #item     
+<treelist       
     ref="tree"  
     [width]="width"
     expanderOnly="false"

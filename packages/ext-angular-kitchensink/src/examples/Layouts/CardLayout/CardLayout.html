@@ -1,5 +1,5 @@
-<container #item [layout]="vbox" [padding]="10">
-    <panel #item
+<container  [layout]="vbox" [padding]="10">
+    <panel 
         [width]="'auto'"
         shadow="true"
         ui="instructions"
@@ -8,7 +8,7 @@
             full height and width of the container. Card layouts can optionally be configured to
             animate when switching cards.'"
     ></panel>
-    <container #item 
+    <container  
         [height]="300"
         [layout]="{ type: 'card', animation: animation }"
         [activeItem]="activeCard" 
@@ -16,9 +16,9 @@
         shadow="true"
         [defaults]="{scrollable: 'y'}"
     >
-        <panel #item [bodyStyle]="colors.card.blue" shadow="true">
-            <container #item *ngFor="let card of contents;let index=i">
-                <button #item
+        <panel  [bodyStyle]="colors.card.blue" shadow="true">
+            <container  *ngFor="let card of contents;let index=i">
+                <button 
                     [margin]="card.margin ? card.margin : null"
                     key="i"
                     [text]="card.text"
@@ -27,9 +27,9 @@
                 ></button>
             </container>
         </panel>
-        <panel #item [bodyStyle]="colors.card.green" shadow="true">
-            <container #item *ngFor="let card of contents; let index=i">
-                <button #item
+        <panel  [bodyStyle]="colors.card.green" shadow="true">
+            <container  *ngFor="let card of contents; let index=i">
+                <button 
                     [margin]="card.margin ? card.margin : null"
                     key="i"
                     [text]="card.text"

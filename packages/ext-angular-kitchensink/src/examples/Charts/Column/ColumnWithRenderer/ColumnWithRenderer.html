@@ -1,8 +1,8 @@
-<container #item [padding]="!isPhone?  '10': ''" layout="fit" [fitToParent]="true">
-    <chart-toolbar #item
+<container  [padding]="!isPhone?  '10': ''" layout="fit" [fitToParent]="true">
+    <chart-toolbar 
      [onRefreshClick]="this.refreshData">
      </chart-toolbar>
-    <cartesian #item
+    <cartesian 
         shadow="true"
         insetPadding="20 20 10 10"
         innerPadding="0 10 0 10"

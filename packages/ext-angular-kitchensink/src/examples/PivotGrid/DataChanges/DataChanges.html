@@ -1,5 +1,5 @@
-<container #item layout="fit" padding="10" [fitToParent]="true">
-    <pivotgrid #item
+<container  layout="fit" padding="10" [fitToParent]="true">
+    <pivotgrid 
       [shadow]="true"
       [matrix]="{
         type: 'local',
@@ -34,7 +34,7 @@
         ]
       }"
     ></pivotgrid>
-    <toolbar #item
+    <toolbar 
         shadow="false"
         docked="top"
         ui="app-transparent-toolbar"
@@ -49,12 +49,12 @@
           ui: 'action'
         }"
     >
-      <button #item text="Change data">
-        <menu #item>
-          <menuitem #item text="Add" iconCls="x-fa fa-plus" [handler]="this.addData"></menuitem>
-          <menuitem #item text="Update" iconCls="x-fa fa-edit" [handler]="this.updateData"></menuitem>
-          <menuitem #item text="Remove" iconCls="x-fa fa-minus" [handler]="this.removeData"></menuitem>
-          <menuitem #item text="Clear all" iconCls="x-fa fa-trash" [handler]="this.clearData"></menuitem>
+      <button  text="Change data">
+        <menu >
+          <menuitem  text="Add" iconCls="x-fa fa-plus" [handler]="this.addData"></menuitem>
+          <menuitem  text="Update" iconCls="x-fa fa-edit" [handler]="this.updateData"></menuitem>
+          <menuitem  text="Remove" iconCls="x-fa fa-minus" [handler]="this.removeData"></menuitem>
+          <menuitem  text="Clear all" iconCls="x-fa fa-trash" [handler]="this.clearData"></menuitem>
         </menu>
       </button>
     </toolbar>

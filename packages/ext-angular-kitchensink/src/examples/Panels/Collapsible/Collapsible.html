@@ -1,5 +1,5 @@
-<container #item [padding]="isPhone ? 0: 10" [layout]="isPhone ? 'fit' : 'auto'">
-    <panel #item
+<container  [padding]="isPhone ? 0: 10" [layout]="isPhone ? 'fit' : 'auto'">
+    <panel 
         [title]="'Top Collapsible Panel'"
         [shadow]="true"
         [height]="isPhone ? undefined : 400"
@@ -9,7 +9,7 @@
         [bodyPadding]="10"
         [html]="mediumText"
     >
-        <panel #item 
+        <panel  
             [docked]="'right'"
             [width]="'50%'"
             [bodyPadding]="20"

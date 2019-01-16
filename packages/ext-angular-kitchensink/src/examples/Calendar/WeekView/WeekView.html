@@ -1,5 +1,5 @@
 <panel
-#item
+
 [shadow]="true"
 [title]="panelTitle"
 [layout]="'hbox'"
@@ -26,17 +26,17 @@
 }"
 >
     <panel
-    #item
+    
         [title]="'Calendars'"
         [ui]="'light'"
         [width]="150"
         [bodyPadding]="5"
         [hidden]="isPhone"
     >
-        <calendar-list #item [store]="this.store"></calendar-list>
+        <calendar-list  [store]="this.store"></calendar-list>
     </panel>
     <calendar-week
-        #item
+        
         [store]="this.store"
         [flex]="1"
         [timezoneOffset]="0"

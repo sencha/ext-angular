@@ -1,5 +1,5 @@
-<container #item layout="fit" padding="10" [fitToParent]="true">
-    <pivotgrid #item
+<container  layout="fit" padding="10" [fitToParent]="true">
+    <pivotgrid 
     (ready)="onPivotGridRead($event)"
     shadow="true"
         [plugins]="pivotgridPlugins"
@@ -7,7 +7,7 @@
         (onDocumentSave)="this.onDocumentSave"
         (onBeforeDocumentSave)="this.onBeforeDocumentSave"
     ></pivotgrid>
-    <toolbar #item
+    <toolbar 
         shadow="false"
         docked="top"
         ui="app-transparent-toolbar"
@@ -22,10 +22,10 @@
             ui: 'action'
         }"
     >
-        <button #item text="Configurator" [handler]="this.showConfigurator"></button>
-        <button #item text="Export to ...">
-            <menu #item [defaults]="{ handler: this.exportDocument, iconCls: 'x-fa fa-file-text-o' }">
-                <menuitem  #item
+        <button  text="Configurator" [handler]="this.showConfigurator"></button>
+        <button  text="Export to ...">
+            <menu  [defaults]="{ handler: this.exportDocument, iconCls: 'x-fa fa-file-text-o' }">
+                <menuitem  
                     text="Excel xlsx (pivot table definition)" 
                     iconCls="x-fa fa-file-excel-o"
                     [config]="{
@@ -34,7 +34,7 @@
                         fileName: 'ExportPivot.xlsx'
                     }"
                 ></menuitem>
-                <menuitem #item
+                <menuitem 
                     text="Excel xlsx (all items)"
                     iconCls="x-fa fa-file-excel-o"
                     [config]="{
@@ -42,7 +42,7 @@
                         fileName: 'ExportAll.xlsx'
                     }"
                 ></menuitem>
-                <menuitem #item
+                <menuitem 
                     text="Excel xlsx (visible items)"
                     iconCls="x-fa fa-file-excel-o"
                     [config]="{
@@ -51,7 +51,7 @@
                         onlyExpandedNodes: true
                     }"
                 ></menuitem>
-                <menuitem #item
+                <menuitem 
                     text="Excel xml (all items)"
                     iconCls="x-fa fa-file-excel-o"
                     [config]="{
@@ -59,7 +59,7 @@
                         fileName: 'ExportAll.xml'
                     }"
                 ></menuitem>
-                <menuitem #item
+                <menuitem 
                     text="Excel xml (visible items)"
                     iconCls="x-fa fa-file-excel-o"
                     [config]="{
@@ -68,14 +68,14 @@
                         onlyExpandedNodes: true
                     }"
                 ></menuitem>
-                <menuitem #item
+                <menuitem 
                     text="CSV (all items)"
                     [config]="{
                         type: 'csv',
                         fileName: 'ExportAll.csv'
                     }"
                 ></menuitem>
-                <menuitem #item
+                <menuitem 
                     text="CSV (visible items)"
                     [config]="{
                         type: 'csv',
@@ -83,14 +83,14 @@
                         onlyExpandedNodes: true
                     }"
                 ></menuitem>
-                <menuitem #item
+                <menuitem 
                     text="TSV (all items)"
                     [config]="{
                         type: 'tsv',
                         fileName: 'ExportAll.csv'
                     }"
                 ></menuitem>
-                <menuitem #item
+                <menuitem 
                     text="TSV (visible items)"
                     [config]="{
                         type: 'tsv',
@@ -98,7 +98,7 @@
                         onlyExpandedNodes: true
                     }"
                 ></menuitem>
-                <menuitem #item
+                <menuitem 
                     text="HTML (all items)"
                     iconCls="x-fa fa-html5"
                     [config]="{
@@ -106,7 +106,7 @@
                         fileName: 'ExportAll.html'
                     }"
                 ></menuitem>
-                <menuitem #item
+                <menuitem 
                     text="HTML (visible items)"
                     iconCls="x-fa fa-html5"
                     [config]="{

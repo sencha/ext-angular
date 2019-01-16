@@ -1,14 +1,14 @@
-<container #item layout="fit" shadow="true" 
+<container  layout="fit" shadow="true" 
 [fitToParent]="true">
-    <actionsheet #item [displayed]="showExportSheet">
-        <button #item [handler]="this.exportToXlsx" text="Excel xlsx"></button>
-        <button #item [handler]="this.exportToXml" text="Excel xml"></button>
-        <button #item [handler]="this.exportToCSV" text="CSV"></button>
-        <button #item [handler]="this.exportToTSV" text="TSV"></button>
-        <button #item [handler]="this.exportToHtml" text="HTML"></button>
-        <button #item [handler]="this.onCancelExport" text="Cancel"></button>
+    <actionsheet  [displayed]="showExportSheet">
+        <button  [handler]="this.exportToXlsx" text="Excel xlsx"></button>
+        <button  [handler]="this.exportToXml" text="Excel xml"></button>
+        <button  [handler]="this.exportToCSV" text="CSV"></button>
+        <button  [handler]="this.exportToTSV" text="TSV"></button>
+        <button  [handler]="this.exportToHtml" text="HTML"></button>
+        <button  [handler]="this.onCancelExport" text="Cancel"></button>
     </actionsheet>
-  <grid #item
+  <grid 
     title="Big Data Grid"
     [store]="this.store"
     shadow="true"
@@ -39,7 +39,7 @@
   >
     <!-- Title bar property as in react bit not seen-->
     <!-- [titleBar]="gridTitleBar" -->
-    <textcolumn #item
+    <textcolumn 
       text="Id"
       dataIndex="employeeNo"
       flex="1"
@@ -52,7 +52,7 @@
       }"
     ></textcolumn>
 
-    <textcolumn #item
+    <textcolumn 
       text="Name"
       dataIndex="fullName"
       minWidth="150"
@@ -61,17 +61,17 @@
       }"
     ></textcolumn>
 
-    <checkcolumn #item
+    <checkcolumn 
         text="Verified"
         dataIndex="verified"
         headerCheckbox="true"
     ></checkcolumn>
 
-    <column text="Ratings" #item
+    <column text="Ratings" 
       [columns]= "ratingsColumn"
     ></column> 
 
-    <datecolumn #item
+    <datecolumn 
         text="Date of Birth"
         dataIndex="dob"
         editable="true"
@@ -87,7 +87,7 @@
         }]"
     ></datecolumn>
 
-    <column #item
+    <column 
         text=""
         width="100"
         ignoreExport="true"
@@ -97,20 +97,20 @@
       >
 <!--
     TODO: future release
-    <cell #item>
-      <widgetcell #item>
-        <button #item ui ="action" [handler] ="this.onVerify" [bind] = "widgetCellBind" text = "VERIFY"></button>
+    <cell >
+      <widgetcell >
+        <button  ui ="action" [handler] ="this.onVerify" [bind] = "widgetCellBind" text = "VERIFY"></button>
       </widgetcell>
     </cell>
-    <summaryCell #item>
-      <widgetcell #item>
-        <button #item ui ="action" [handler] ="this.onVerifyAll" text = "All"></button>
+    <summaryCell >
+      <widgetcell >
+        <button  ui ="action" [handler] ="this.onVerifyAll" text = "All"></button>
       </widgetcell>
     </summaryCell>
 -->
     </column>
 
-    <datecolumn #item
+    <datecolumn 
         text="Join Date"
         dataIndex="joinDate"
         editable="true"
@@ -123,13 +123,13 @@
         }"
     ></datecolumn>
 
-    <textcolumn #item
+    <textcolumn 
         text="Notice Period"
         dataIndex='noticePeriod'
         editable="true"
     ></textcolumn>
 
-    <textcolumn #item
+    <textcolumn 
         text="Email"
         dataIndex="email"
         width="250"
@@ -139,12 +139,12 @@
         }"
     ></textcolumn>
 
-    <column text='Absences' #item
+    <column text='Absences' 
     [columns]= "absensesColumn"
     >
     </column>
 
-    <column  #item
+    <column  
         text="Rating<br></br>This Year" 
         dataIndex="ratingThisYear"
         groupable="false"
@@ -158,7 +158,7 @@
        }"
     ></column>
 
-    <textcolumn #item
+    <textcolumn 
         text='Salary'
         dataIndex='salary'
         [renderer]="usMoneyRendered"

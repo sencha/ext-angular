@@ -1,5 +1,5 @@
-<panel #item [padding]="5" [shadow]="true" (ready)="onParentReady($event)" [fitToParent]="true" >
-    <container #item (ready)="onElementReady($event)"
+<panel  [padding]="5" [shadow]="true" (ready)="onParentReady($event)" [fitToParent]="true" >
+    <container  (ready)="onElementReady($event)"
         [style]="{
             width: '130px',
             height: '130px',

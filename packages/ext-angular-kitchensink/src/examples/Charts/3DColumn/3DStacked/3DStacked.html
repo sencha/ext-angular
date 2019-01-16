@@ -1,11 +1,11 @@
-<container #item [padding]="!isPhone?  '10': ''" layout="fit"
+<container  [padding]="!isPhone?  '10': ''" layout="fit"
 [fitToParent]="true">
-    <chart-toolbar #item 
+    <chart-toolbar  
         [onThemeChange]="this.changeTheme"
         [onStackGroup]="this.onStackedToggle"
         [theme]="theme"
     ></chart-toolbar>
-    <cartesian #item
+    <cartesian 
         shadow="true"
         ref="chart"
         [store]="this.store"

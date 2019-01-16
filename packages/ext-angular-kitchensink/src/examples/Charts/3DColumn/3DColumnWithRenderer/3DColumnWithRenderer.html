@@ -1,8 +1,8 @@
-    <container #item [padding]="!isPhone?  '10': ''" layout="vbox"
+    <container  [padding]="!isPhone?  '10': ''" layout="vbox"
     [fitToParent]="true">
-        <chart-toolbar #item    
+        <chart-toolbar     
             maxHeight="50" [downloadChartRef]="this.chart"></chart-toolbar>
-    <cartesian #item 
+    <cartesian  
             shadow="true"
             flex="2"
             (ready)="chartNavReady($event)"

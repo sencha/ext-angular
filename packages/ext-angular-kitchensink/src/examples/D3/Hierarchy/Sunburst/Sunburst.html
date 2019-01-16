@@ -1,4 +1,4 @@
-<panel #item 
+<panel  
     shadow="true"
     plugins="responsive" 
     [layout]="'vbox'"
@@ -7,7 +7,7 @@
     }"
     [fitToParent]="true"
 >
-    <tree #item
+    <tree 
         [store]="store"
         [selection]="selection"
         (select)="onSelectionChange($event)"
@@ -22,7 +22,7 @@
             }
         }"
     ></tree>
-    <d3-sunburst #item
+    <d3-sunburst 
         flex="1"
         padding="20"
         [store]="store"

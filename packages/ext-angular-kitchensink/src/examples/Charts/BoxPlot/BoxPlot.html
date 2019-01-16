@@ -1,13 +1,13 @@
-<container #item [padding]="!isPhone?  '10' : ''" layout="fit"
+<container  [padding]="!isPhone?  '10' : ''" layout="fit"
 [fitToParent]="true">
-    <chart-toolbar #item
+    <chart-toolbar 
         [onThemeChange]="this.changeTheme"
         [onToggleZoomOnPan]="this.toggleZoomOnPan"
         [onRefreshClick]="this.refresh"
         [theme]="theme"
         [onlyMidnight]="true"
     ></chart-toolbar>
-    <cartesian #item
+    <cartesian 
         shadow="true"
         [theme]="theme"
         [captions]="{

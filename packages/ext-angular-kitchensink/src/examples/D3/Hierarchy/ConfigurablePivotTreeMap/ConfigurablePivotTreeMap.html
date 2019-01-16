@@ -1,5 +1,5 @@
-<container #item [layout]="'fit'" [fitToParent]="true" >
-    <pivotd3container #item
+<container  [layout]="'fit'" [fitToParent]="true" >
+    <pivotd3container 
         shadow="true"
         layout="'fit'"
         (ready)="ctnReady($event)"
@@ -10,9 +10,9 @@
         [drawing]="drawingVar"
         [configurator]="configuratorVar"
     >
-        <toolbar #item docked="top">
-            <spacer #item></spacer>
-            <button #item text="Show configurator" (tap)="this.showConfigurator"></button>
+        <toolbar  docked="top">
+            <spacer ></spacer>
+            <button  text="Show configurator" (tap)="this.showConfigurator"></button>
         </toolbar>
     </pivotd3container>
 </container>

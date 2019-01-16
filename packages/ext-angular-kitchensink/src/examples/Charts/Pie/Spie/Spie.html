@@ -1,9 +1,9 @@
-<container #item [padding]="isPhone? '10' : ''" layout="fit" 
+<container  [padding]="isPhone? '10' : ''" layout="fit" 
 [fitToParent]="true">
-    <chart-toolbar #item 
+    <chart-toolbar  
      [onThemeChange]="this.changeTheme" 
      [theme]="theme"></chart-toolbar>
-    <polar #item 
+    <polar  
         [shadow]="true"
         [store]="this.store"
         [theme]="theme"

@@ -1,4 +1,4 @@
-<tree #item
+<tree 
 [shadow]="true"
 title="Heterogeneous Geographical Tree"
 rootVisible="false"
@@ -17,14 +17,14 @@ rootVisible="false"
 }]"
 (ready)="onTreeReady($event)"
 >
-<toolbar #item docked="bottom">
-    <textfield  #item
+<toolbar  docked="bottom">
+    <textfield  
         listeners="{
             action:'onFieldAction'
         }"
         (ready)="onTextFieldReady($event)"
     ></textfield>
-    <button  #item
+    <button  
         text="Add Territory"
         [handler]="this.addItem"
         (ready)="onButtonReady($event)"

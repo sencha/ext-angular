@@ -18,6 +18,7 @@ Issues
  - hightlight.js [Aniket]
 
  - tree-shaking 
+    - [Alisha] revert back from ext-angular-prod
     - [Alisha] in plugin: tree shake the typescript ExtAngular files (Aniket to review error/ Marc to check treeshaking changes)
     - test against ext-angular-gen (once CLI dependency is removed from bootstrap by Marc [DONE]) (Alisha)
 

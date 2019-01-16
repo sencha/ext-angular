@@ -1,11 +1,11 @@
-<container #item layout="fit" padding="10" [fitToParent]="true">
-    <pivotgrid #item
+<container  layout="fit" padding="10" [fitToParent]="true">
+    <pivotgrid 
         [shadow]="true"
         (ready)="onPivotGridRead($event)"
         [plugins]="pivotgridPlugins"
         [matrix]="pivotgridMatrix"
     ></pivotgrid>
-    <toolbar #item
+    <toolbar 
         shadow="false"
         docked="top"
         ui="app-transparent-toolbar"
@@ -15,6 +15,6 @@
             align: 'stretch'
         }"
     >
-      <button #item shadow="true" ui="action" text="Configurator" [handler]="this.showConfigurator.bind(this)"></button>
+      <button  shadow="true" ui="action" text="Configurator" [handler]="this.showConfigurator.bind(this)"></button>
     </toolbar>
 </container>
