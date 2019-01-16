@@ -1,5 +1,5 @@
-<container #item [padding]="!isPhone?  '10': ''" layout="fit" [fitToParent]="true">
-    <chart-toolbar #item
+<container  [padding]="!isPhone?  '10': ''" layout="fit" [fitToParent]="true">
+    <chart-toolbar 
         [onRefreshClick]="this.refreshData"
         [onThemeChange]="this.changeTheme"
         [onToggleZoomOnPan]="this.toggleZoomOnPan"
@@ -7,7 +7,7 @@
         [theme]="theme"
         [stacked]="stacked"
     ></chart-toolbar>
-    <cartesian #item
+    <cartesian 
         shadow="true"
         (ready)="chartNavReady($event)"
         [store]="this.store"

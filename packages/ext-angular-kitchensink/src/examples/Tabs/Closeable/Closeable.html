@@ -1,5 +1,5 @@
-<container #item [layout]="'fit'" [padding]="10">
-    <tabpanel #item
+<container  [layout]="'fit'" [padding]="10">
+    <tabpanel 
         (ready)="tabPanelReady($event)"
         [style]="{ backgroundColor: 'white'}"
         [activeItem]="0"
@@ -16,7 +16,7 @@
     >
         {{ tabs.map(key => (
             <panel
-                #item
+                
                 [title]="'Tab key'"
                 tab="{ flex: 1, maxWidth: 150 }"
                 key="key"
@@ -24,11 +24,11 @@
                 closable="true"
                 (onDestroy)="onCloseTab()"
             >
-                <container #item [style]="{ whiteSpace: 'nowrap' }" [html]="'Tab key Content'"></container>
+                <container  [style]="{ whiteSpace: 'nowrap' }" [html]="'Tab key Content'"></container>
             </panel>
         ))}}
     </tabpanel>
-    <button #item
+    <button 
         [top]="18" 
         [right]="20"
         [iconCls]="'x-fa fa-plus'" 

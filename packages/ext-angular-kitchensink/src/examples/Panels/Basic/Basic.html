@@ -1,4 +1,4 @@
-<container #item
+<container 
     [padding]="10"
     [width]="!isPhone && 700"
     [layout]="{
@@ -7,22 +7,22 @@
         align: 'stretch'
     }"
 >
-    <container #item 
+    <container  
         [autoSize]="true"
         [defaults]="{flex: 1, bodyPadding: 10, shadow: true, margin: 10 }"
         [layout]="{type: isPhone ? 'vbox' : 'hbox', pack: 'center', align: 'stretch'}"
         [flex]="1"
     >
-        <panel #item [html]="text"></panel>
-        <panel #item [title]="'Title'" [html]="text"></panel>
+        <panel  [html]="text"></panel>
+        <panel  [title]="'Title'" [html]="text"></panel>
     </container>
-    <container #item 
+    <container  
         [autoSize]="true" 
         [defaults]="{flex: 1, bodyPadding: 10, shadow: true, margin: 10}" 
         [layout]="{type: isPhone ? 'vbox' : 'hbox', pack: 'center', align: 'stretch'}"
         [flex]="1"
     >
-        <panel #item
+        <panel 
             [title]="'Built in Tools'"
             [tools]="[
                 {type: 'minimize', handler: toolHandler },
@@ -33,7 +33,7 @@
             ]"
             [html]="text"
         ></panel>
-        <panel #item 
+        <panel  
             [title]="'Custom Tools w/ iconCls'"
             [tools]="[
                 {iconCls: 'x-fa fa-wrench', handler: toolHandler },

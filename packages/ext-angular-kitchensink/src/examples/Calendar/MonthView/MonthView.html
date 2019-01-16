@@ -4,20 +4,20 @@
 [layout]="'hbox'"
 [header]="{ titleAlign:'center' }"
 [fitToParent]="true"
-#item
+
 >
     <panel
-        #item
+        
         [title]="'Calendars'"
         [ui]="'light'"
         [width]="150"
         [bodyPadding]="5"
         [hidden]="false"
     >
-        <calendar-list #item [store]="this.store"></calendar-list>
+        <calendar-list  [store]="this.store"></calendar-list>
     </panel>
     <calendar-month
-         #item
+         
         [flex]= "1"
         [visibleWeeks]="null"
         [timezoneOffset]="0"

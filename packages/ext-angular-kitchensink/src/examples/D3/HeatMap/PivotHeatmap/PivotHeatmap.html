@@ -2,15 +2,15 @@
 shadow="true" 
 layout="fit"
 [fitToParent]="true"
-#item
+
 >
 
 
-<toolbar #item docked="top">
-    <spacer #item></spacer>
-    <button #item iconCls="x-fa fa-refresh" [handler]="this.refreshData" text="Refresh Data"></button>
+<toolbar  docked="top">
+    <spacer ></spacer>
+    <button  iconCls="x-fa fa-refresh" [handler]="this.refreshData" text="Refresh Data"></button>
 </toolbar>
-<pivotheatmap #item
+<pivotheatmap 
     [matrix]="matrixVar"
     [padding]="isPhone? '20 20 60 60' : '20 30 70 120'"
     [xAxis]="{

@@ -1,20 +1,20 @@
-<panel #item
+<panel 
     [padding]="5"
     [fitToParent]="true"
     [shadow]="true"
     (ready)="parentReady($event)"
 >
-    <container #item
+    <container 
         (ready)="noneEleReady($event)"
         [cls]="'proxy-none proxy-source'"
         [html]="noneText"
     ></container>
-    <container #item
+    <container 
         (ready)="originalEleReady($event)"
         [cls]="'proxy-original proxy-source'"
         [html]="'Element as proxy with revert: true'"
     ></container>
-    <container #item
+    <container 
         (ready)="placeholderEleReady($event)"
         [cls]="'proxy-placeholder proxy-source'"
         [html]="'Placeholder'"

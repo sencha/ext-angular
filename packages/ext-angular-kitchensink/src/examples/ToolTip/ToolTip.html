@@ -1,55 +1,55 @@
-<panel #item [layout]="'vbox'" shadow bodyPadding="20" [defaults]="containerDefaults">
-    <container #item [layout]="{
+<panel  [layout]="'vbox'" shadow bodyPadding="20" [defaults]="containerDefaults">
+    <container  [layout]="{
         type: isPhone ? 'vbox' : 'hbox', 
         align: 'start', 
         pack: 'center' 
     }" [defaults]="buttonDefaults">
-        <button #item text="Basic Tip" >
-            <tooltip #item><div #item>A simple tooltip</div></tooltip>
+        <button  text="Basic Tip" >
+            <tooltip ><div >A simple tooltip</div></tooltip>
         </button>
-        <button #item text="autoHide: false">
-            <tooltip #item [showOnTap]="true" [autoHide]="false" [title]="'Tip Title'" closable><div #item> A simple tooltip</div></tooltip>
+        <button  text="autoHide: false">
+            <tooltip  [showOnTap]="true" [autoHide]="false" [title]="'Tip Title'" closable><div > A simple tooltip</div></tooltip>
         </button>
-        <button #item text="Mouse Track">
-            <tooltip #item [showOnTap]="true" [title]="'Mouse Track'" [trackMouse]="true"><div #item> This tip will follow the mouse while it is over the element</div></tooltip>
+        <button  text="Mouse Track">
+            <tooltip  [showOnTap]="true" [title]="'Mouse Track'" [trackMouse]="true"><div > This tip will follow the mouse while it is over the element</div></tooltip>
         </button>
     </container>
-    <container #item [layout]="{
+    <container  [layout]="{
         type: isPhone ? 'vbox' : 'hbox', 
         align: 'start', 
         pack: 'center' 
     }" [defaults]="buttonDefaults">
-        <button #item text="Anchor Right, Rich Content" >
-            <tooltip #item showOnTap="true" align="tl-tr" anchorToTarget="true" anchor="true">
-                <ul #item [style]="{marginBottom: '15px'}">
-                    <li #item>5 bedrooms</li>
-                    <li #item>Close to transport</li>
-                    <li #item>Large backyard</li>
+        <button  text="Anchor Right, Rich Content" >
+            <tooltip  showOnTap="true" align="tl-tr" anchorToTarget="true" anchor="true">
+                <ul  [style]="{marginBottom: '15px'}">
+                    <li >5 bedrooms</li>
+                    <li >Close to transport</li>
+                    <li >Large backyard</li>
                 </ul>
-                <img #item [style]="{width: '400px', height: '300px'}" src="house.jpg" />
+                <img  [style]="{width: '400px', height: '300px'}" src="house.jpg" />
             </tooltip>
         </button>
-        <button #item text="Anchor Below">
-            <tooltip #item showOnTap="true" align="tc-bc" anchor="true" anchorToTarget=""><div #item>The anchor is centered</div></tooltip>
+        <button  text="Anchor Below">
+            <tooltip  showOnTap="true" align="tc-bc" anchor="true" anchorToTarget=""><div >The anchor is centered</div></tooltip>
         </button>
-        <button #item text="Anchor with Tracking">
-            <tooltip #item showOnTap="true" trackMouse="true" anchor="true" align="l-r"><div #item>Following the mouse with an anchor</div></tooltip>
+        <button  text="Anchor with Tracking">
+            <tooltip  showOnTap="true" trackMouse="true" anchor="true" align="l-r"><div >Following the mouse with an anchor</div></tooltip>
         </button>
     </container>
 
-    <container #item [centered]="false" [layout]="{
+    <container  [centered]="false" [layout]="{
         type: isPhone ? 'vbox' : 'hbox', 
         align: 'start', 
         pack: 'center' 
     }" >
     <!-- Why does div not work in hbox when button does?-->
-        <div #item style="width: 150px;margin: 0 15px 0 0;color: white;padding: 5px 10px;text-align: center;cursor: default; background-color: #e91e63"
+        <div  style="width: 150px;margin: 0 15px 0 0;color: white;padding: 5px 10px;text-align: center;cursor: default; background-color: #e91e63"
             data-qtip="This tip is inline" data-qshowOnTap="true">Inline Tip</div>
-        <div #item style="width: 150px;margin: 0 15px 0 0;color: white;padding: 5px 10px;text-align: center;cursor: default; background-color: #2196f3"
+        <div  style="width: 150px;margin: 0 15px 0 0;color: white;padding: 5px 10px;text-align: center;cursor: default; background-color: #2196f3"
             data-qtip="This tip has a fixed width" data-qwidth="400" data-qshowOnTap="true">Fixed width inline tip</div>
-        <div #item style="width: 150px;margin: 0 15px 0 0;color: white;padding: 5px 10px;text-align: center;cursor: default; background-color: #ff5722"
+        <div  style="width: 150px;margin: 0 15px 0 0;color: white;padding: 5px 10px;text-align: center;cursor: default; background-color: #ff5722"
             data-qtip="This tip has a title" data-qtitle="The title" data-qshowOnTap="true">Inline tip with title</div>
-        <div #item style="width: 150px;margin: 0 15px 0 0;color: white;padding: 5px 10px;text-align: center;cursor: default; background-color: #607d8b"
+        <div  style="width: 150px;margin: 0 15px 0 0;color: white;padding: 5px 10px;text-align: center;cursor: default; background-color: #607d8b"
             data-qtip="Aligned top" data-qalign="bl-tl" data-qanchorToTarget="true" data-qshowOnTap="true">Inline tip align top</div>
     </container>
 </panel>

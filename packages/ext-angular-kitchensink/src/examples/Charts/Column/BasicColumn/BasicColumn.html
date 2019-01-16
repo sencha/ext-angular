@@ -1,10 +1,10 @@
-<container #item layout="fit" padding="8" [fitToParent]="true">
-    <chart-toolbar #item
+<container  layout="fit" padding="8" [fitToParent]="true">
+    <chart-toolbar 
         [onRefreshClick]="this.refresh"
         [onThemeChange]="this.changeTheme"
         [theme]="theme"
     ></chart-toolbar>
-    <cartesian #item
+    <cartesian 
         shadow="true"
         insetPadding="20 10"
         [store]="this.store"

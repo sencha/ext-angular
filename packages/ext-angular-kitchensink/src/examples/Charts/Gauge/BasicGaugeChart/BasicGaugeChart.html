@@ -1,12 +1,12 @@
-<container #item [padding]="!isPhone ? 10 : 0" layout="fit" 
+<container  [padding]="!isPhone ? 10 : 0" layout="fit" 
 [fitToParent]="true"
 >
-    <chart-toolbar #item
+    <chart-toolbar 
         [onRefreshClick]="this.refresh"
         [onToggleZoomOnPan]="null"
     ></chart-toolbar>
-    <panel #item shadow="true" layout="vbox" [width]="'800px'">
-        <polar #item
+    <panel  shadow="true" layout="vbox" [width]="'800px'">
+        <polar 
             innerPadding="20"
             [store]="this.store"
             flex="1"
@@ -16,7 +16,7 @@
             }"
             [series]="polarSeries1"
         ></polar>
-        <polar #item
+        <polar 
             innerPadding="20"
             [store]="this.store"
             flex="1"

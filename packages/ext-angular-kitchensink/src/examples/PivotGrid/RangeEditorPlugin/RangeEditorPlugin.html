@@ -1,11 +1,11 @@
-<container #item layout="fit" padding="10" [fitToParent]="true">
-    <pivotgrid #item
+<container  layout="fit" padding="10" [fitToParent]="true">
+    <pivotgrid 
         shadow="true"
         (ready)="onPivotGridRead($event)"
         [plugins]="[{ type: 'pivotrangeeditor' }]"
         [matrix]="pivotgridMatrix"
     ></pivotgrid>
-    <toolbar #item
+    <toolbar 
         docked="top"
         ui="app-transparent-toolbar"
         padding="5 8"
@@ -16,10 +16,10 @@
             ui: 'action'
         }"
     >
-        <button #item text="Expand All" [handler]="this.expandAll"></button>
-        <button #item text="Collapse All" [handler]="this.collapseAll"></button>
-        <container #item layout="hbox">
-            <div  #item [style]="{fontSize: '12px', fontWeight: 'normal', marginLeft: '10px'}">Double click an amount to edit.</div>
+        <button  text="Expand All" [handler]="this.expandAll"></button>
+        <button  text="Collapse All" [handler]="this.collapseAll"></button>
+        <container  layout="hbox">
+            <div   [style]="{fontSize: '12px', fontWeight: 'normal', marginLeft: '10px'}">Double click an amount to edit.</div>
      </container>
     </toolbar>
 </container>

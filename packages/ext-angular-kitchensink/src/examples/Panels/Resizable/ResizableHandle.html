@@ -1,5 +1,5 @@
-<container #item [padding]="10" [height]="'700px'">
-    <panel #item
+<container  [padding]="10" [height]="'700px'">
+    <panel 
         [title]="'Resize Me'"
         [shadow]="true"
         [fitToParent]="true"
@@ -8,10 +8,10 @@
         [bodyPadding]="10"
         [centered]="true"
     >
-        <toolbar #item [docked]="'top'">
-            <checkboxfield #item [checked]="doDynamically" (change)="toggleDynamic($event)" [boxLabel]="'Dynamic'">
+        <toolbar  [docked]="'top'">
+            <checkboxfield  [checked]="doDynamically" (change)="toggleDynamic($event)" [boxLabel]="'Dynamic'">
             </checkboxfield>
         </toolbar>
-        <container #item [html]="mediumText"></container>
+        <container  [html]="mediumText"></container>
     </panel>
 </container>

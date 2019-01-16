@@ -65,7 +65,7 @@ export class RenderComponentsInCellsComponent implements OnInit {
   
   renderActionsCell = (value, record) => {
     return `
-        <action-cell #item
+        <action-cell 
             [buyHandler]=this.buyHandler.bind(this, record)" 
             [sellHandler]="this.sellHandler.bind(this, record)" 
             [watchHandler]="this.watchHandler.bind(this, record)" 
@@ -83,7 +83,7 @@ renderNumberCell(format, value) {
     color = "red";
   }
     return `
-        <span #item [style]="{ color: ${color}}">
+        <span  [style]="{ color: ${color}}">
             ${formattedValue}
         </span>
     `

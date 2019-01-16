@@ -1,14 +1,14 @@
-<formpanel #item [shadow]="true" [padding]="20">
-    <fieldset #item [title]="'Separate Label and Placeholder'" [margin]="'0 0 20 0'">
-        <textfield #item [placeholder]="'Enter Name...'" [label]="'Name'" [required]="true">
+<formpanel  [shadow]="true" [padding]="20">
+    <fieldset  [title]="'Separate Label and Placeholder'" [margin]="'0 0 20 0'">
+        <textfield  [placeholder]="'Enter Name...'" [label]="'Name'" [required]="true">
         </textfield>
     </fieldset>
-    <fieldset #item [title]="'Label as Placeholder'" [margin]="'0 0 20 0'">
-        <textfield #item [labelAlign]="'placeholder'" [label]="'Name'" [required]="true">
+    <fieldset  [title]="'Label as Placeholder'" [margin]="'0 0 20 0'">
+        <textfield  [labelAlign]="'placeholder'" [label]="'Name'" [required]="true">
         </textfield>
     </fieldset>
-    <fieldset #item [title]="'With Error Message'">
-        <textfield #item
+    <fieldset  [title]="'With Error Message'">
+        <textfield 
             [labelAlign]="'placeholder'" 
             [label]="'Label'" 
             [errorMessage]="'The value you entered is invalid.'" 

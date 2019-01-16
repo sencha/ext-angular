@@ -1,5 +1,5 @@
-<container #item *ngIf="isPhone" [layout]="'vbox'" [defaults]="{ margin: '10' }">
-  <panel #item title="Event Log" height="250" scrollable="true" bodyPadding="10" shadow="true"
+<container  *ngIf="isPhone" [layout]="'vbox'" [defaults]="{ margin: '10' }">
+  <panel  title="Event Log" height="250" scrollable="true" bodyPadding="10" shadow="true"
     [header]="{
       items: [{
         xtype: 'button',
@@ -10,22 +10,22 @@
       }]
     }"
   >
-  <container #item>
-    <dataview #item [centered]="false"  [inline]="'true'"
+  <container >
+    <dataview  [centered]="false"  [inline]="'true'"
      (ready)="dataviewReady($event)" [itemTpl]="tplDataView">
   </dataview>
   </container>
   </panel>
-  <container #item (ready)="touchpadReady($event)" flex="1" [layout]="{type: 'vbox', pack: 'center', align: 'stretch'}" [style]="{border: '8px dashed #d6d6d6', borderRadius: '30px'}">
-    <container #item [style]="{textAlign: 'center', fontSize: '48px'  , color: '#ccc'}" html="Touch Here"></container>
+  <container  (ready)="touchpadReady($event)" flex="1" [layout]="{type: 'vbox', pack: 'center', align: 'stretch'}" [style]="{border: '8px dashed #d6d6d6', borderRadius: '30px'}">
+    <container  [style]="{textAlign: 'center', fontSize: '48px'  , color: '#ccc'}" html="Touch Here"></container>
   </container>
 </container>
         
-<container #item *ngIf="!isPhone" [layout]="'hbox'" [width]="600">
-    <container #item [flex]="1" [layout]="'vbox'" [padding]="10" [margin]="'0 20 0 0'">
-      <panel #item [shadow]="true" [margin]="'0 0 20 0'" [bodyPadding]="10" [maxHeight]="220" [scrollable]="true"
+<container  *ngIf="!isPhone" [layout]="'hbox'" [width]="600">
+    <container  [flex]="1" [layout]="'vbox'" [padding]="10" [margin]="'0 20 0 0'">
+      <panel  [shadow]="true" [margin]="'0 0 20 0'" [bodyPadding]="10" [maxHeight]="220" [scrollable]="true"
           [html]="'<div><div>Ext JS comes with a multitude of touch events available on components. Included touch events that can be used are:</div>
-          <ul #item>
+          <ul >
             <li>touchstart</li>
             <li>touchmove</li>
             <li>touchend</li>
@@ -41,7 +41,7 @@
             <li>rotate (on iOS and Android 3+)</li>
           </ul></div>'">
       </panel>
-      <panel #item title="Event Log" [height]="300" [scrollable]="true" bodyPadding="10" shadow="true"
+      <panel  title="Event Log" [height]="300" [scrollable]="true" bodyPadding="10" shadow="true"
         [header]="{
           items: [{
             xtype: 'button',
@@ -52,19 +52,19 @@
           }]
         }"
       >
-      <container #item>
-        <dataview #item [centered]="false"  [inline]="'true'"
+      <container >
+        <dataview  [centered]="false"  [inline]="'true'"
         (ready)="dataviewReady($event)" [itemTpl]="tplDataView">
      </dataview>
       </container>
       </panel>
     </container>
-    <container #item
+    <container 
       (ready)="touchpadReady($event)"
       flex="1"
       [layout]="{type: 'vbox', pack: 'center', align: 'stretch'}"
       [style]="{border: '8px dashed #d6d6d6', borderRadius: '30px'}"
     >
-      <container #item [style]="{textAlign: 'center', fontSize: '48px'  , color: '#ccc'}" html="Touch Here"></container>
+      <container  [style]="{textAlign: 'center', fontSize: '48px'  , color: '#ccc'}" html="Touch Here"></container>
     </container>
 </container>
