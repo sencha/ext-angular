@@ -588,7 +588,25 @@ class base {
             if (this.ext != undefined) {
                 /** @type {?} */
                 var capPropName = propName.charAt(0).toUpperCase() + propName.slice(1);
-                this.ext['set' + capPropName](val);
+                /** @type {?} */
+                var setFunction = 'set' + capPropName
+                //        console.log(this)
+                //        console.log(this.ext.xtype)
+                //        console.log(propName)
+                //        console.log(setFunction)
+                //        console.log(this.ext[setFunction])
+                ;
+                //        console.log(this)
+                //        console.log(this.ext.xtype)
+                //        console.log(propName)
+                //        console.log(setFunction)
+                //        console.log(this.ext[setFunction])
+                if (this.ext[setFunction] != undefined) {
+                    this.ext[setFunction](val);
+                }
+                else {
+                    console.error(setFunction + ' not found for ' + this.ext.xtype);
+                }
             }
             else {
                 if (verb == 'changed') {
