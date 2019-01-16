@@ -1,26 +1,14 @@
 import { Component, OnInit, ChangeDetectorRef, ViewChild, NgZone, ViewEncapsulation, ViewContainerRef,ElementRef, ComponentFactoryResolver, ComponentRef, ComponentFactory } from '@angular/core';
 import {navTreeRoot} from '../../../examples';
 
-import { Location } from '@angular/common';
+//import { Location } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 
 import { VERSION } from '@angular/core';
 import { Subject } from "rxjs";
 import { getFiles } from "./code_preview_helper";
 
-////import hljs, { highlightBlock } from 'highlightjs';
-//import hljs from 'highlightjs';
-//import hljs from 'highlight.js/lib/highlight';
-//import * as hljs from 'angular-highlight-js';
-//import {hljs} from 'angular-highlight-js';
-//import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
-//const hljs: any = require('highlight.js/lib/highlight');
-//hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescript'));
-// import hljs from 'highlightjs'
-// console.log(hljs)
-// JSX syntax highlighting
-//import H_js from './H_js';
-//hljs.registerLanguage('js', H_js);
+Ext.require('Ext.panel.Collapser')
 
 const hljs: any = require('highlight.js/lib/highlight');
 hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescript'));
@@ -58,26 +46,19 @@ export class LandingpageComponent implements OnInit {
   <span class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></span>
   <a extjs href="#" class="app-title">ExtAngular Kitchen Sink - Angular v${this.ANGULAR_VERSION}</a>
   `
-  routerHtml = `
-  <router-outlet></router-outlet>hi
-  `
+  // routerHtml = `
+  // <router-outlet></router-outlet>hi
+  // `
 
-  router2Html = `
-  <div 
-  [style]="{padding:30}">
-  <router-outlet></router-outlet>hi
-  </div>
-  `
+  // router2Html = `
+  // <div 
+  // [style]="{padding:30}">
+  // <router-outlet></router-outlet>hi
+  // </div>
+  // `
 
   showCode: boolean = false;
   files: Array<any> = [];
-
-
-
-
-
-
-
   node: any
   node$: any = new Subject()
   breadcrumb: Array<any>
