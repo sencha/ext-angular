@@ -106,6 +106,7 @@ export class LandingpageComponent implements OnInit {
 
   toggleCode = () => {
     this.showCode = !this.showCode;
+    this.highlightCode();
   }
 
   dataviewReady = (event) => {
@@ -195,7 +196,7 @@ export class LandingpageComponent implements OnInit {
   //mjg
   highlightCode() {
     document.querySelectorAll(".code").forEach((el) => {
-      //highlightBlock(el);
+      hljs.highlightBlock(el);
     });
   }
 
