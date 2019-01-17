@@ -312,6 +312,7 @@ export class lockedgridregionMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

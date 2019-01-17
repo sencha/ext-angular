@@ -202,6 +202,7 @@ export class labelMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

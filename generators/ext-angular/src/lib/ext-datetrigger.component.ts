@@ -142,6 +142,7 @@ export class datetriggerMetaData {
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

@@ -232,6 +232,7 @@ export class sparklinediscreteMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

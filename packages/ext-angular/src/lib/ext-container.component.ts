@@ -244,6 +244,7 @@ export class containerMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

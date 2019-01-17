@@ -258,6 +258,7 @@ export class listitemMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

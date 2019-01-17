@@ -61,6 +61,7 @@ const optionDefinitions = [
 var version = ''
 var config = {}
 var cmdLine = {}
+
 stepStart()
 
 function stepStart() {

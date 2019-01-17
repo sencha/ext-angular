@@ -160,6 +160,7 @@ export class gridcellMetaData {
     'zeroValue',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

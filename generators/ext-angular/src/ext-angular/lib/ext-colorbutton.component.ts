@@ -212,6 +212,7 @@ export class colorbuttonMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

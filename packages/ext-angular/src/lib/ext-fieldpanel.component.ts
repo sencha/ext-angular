@@ -320,6 +320,7 @@ export class fieldpanelMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

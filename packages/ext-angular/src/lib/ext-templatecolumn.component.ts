@@ -332,6 +332,7 @@ export class templatecolumnMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

@@ -1,22 +1,19 @@
+declare var Ext: any;
 import { Component, OnInit, ChangeDetectorRef, ViewChild, NgZone, ViewEncapsulation, ViewContainerRef,ElementRef, ComponentFactoryResolver, ComponentRef, ComponentFactory } from '@angular/core';
 import {navTreeRoot} from '../../../examples';
-
-//import { Location } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
-
 import { VERSION } from '@angular/core';
 import { Subject } from "rxjs";
 import { getFiles } from "./code_preview_helper";
 
 Ext.require('Ext.panel.Collapser')
-
 const hljs: any = require('highlight.js/lib/highlight');
 hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescript'));
-
-declare var Ext: any;
+hljs.registerLanguage('http', require('highlight.js/lib/languages/http'));
+hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
 
 declare var _code: any;
- const generateBreadcrumb = (node) => {
+const generateBreadcrumb = (node) => {
   const path = [];
 
   do {
@@ -32,30 +29,19 @@ declare var _code: any;
   path[path.length-1].divider = ''
   return path
 };
-
 @Component({
   selector: 'app-root',
   templateUrl: 'landingpage.component.html',
   styles: [require('./landingpage.component.css').toString()],
   // https://angular.io/api/core/ViewEncapsulation#None
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
 export class LandingpageComponent implements OnInit {
   ANGULAR_VERSION: any = VERSION.full
   titlebarHtml = `
   <span class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></span>
-  <a extjs href="#" class="app-title">ExtAngular Kitchen Sink - Angular v${this.ANGULAR_VERSION}</a>
+  <a extjs href="#" class="app-title">Sencha ExtAngular 6.7 Kitchen Sink - Angular v${this.ANGULAR_VERSION}</a>
   `
-  // routerHtml = `
-  // <router-outlet></router-outlet>hi
-  // `
-
-  // router2Html = `
-  // <div 
-  // [style]="{padding:30}">
-  // <router-outlet></router-outlet>hi
-  // </div>
-  // `
 
   showCode: boolean = false;
   files: Array<any> = [];
@@ -178,7 +164,7 @@ export class LandingpageComponent implements OnInit {
   //mjg
   highlightCode() {
     document.querySelectorAll(".code").forEach((el) => {
-      hljs.highlightBlock(el);
+     hljs.highlightBlock(el);
     });
   }
 

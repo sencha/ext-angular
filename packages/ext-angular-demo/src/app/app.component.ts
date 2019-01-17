@@ -5,11 +5,11 @@ import { Component, ViewEncapsulation } from '@angular/core'
   styles:[require('./app.component.css').toString()],
   template: `
 
+<panel [layout]="'fit'" [fitToParent]="true" [bodyStyle]="'backgroundSize: 20px 20px;backgroundColor: #e8e8e8;backgroundImage: linear-gradient(0deg, #f5f5f5 1.1px, transparent 0), linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)'">
 
-  <panel [layout]="'fit'" [fitToParent]="true" [bodyStyle]="'backgroundSize: 20px 20px;backgroundColor: #e8e8e8;backgroundImage: linear-gradient(0deg, #f5f5f5 1.1px, transparent 0), linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)'">
-
-  <titlebar [docked]="'top'" [shadow]="true" [flex]="1">
-      <button [selfAlign]="'left'" [iconCls]="'x-fa fa-bars'" (tap)="toggleTree()"></button>
+  <titlebar [docked]="'top'" [shadow]="true" [flex]="1" [title]="'TitleBar'" [maxWidth]="'600px'" [margin]="'0 0 30 0'">
+    <button [selfAlign]="'left'" [iconCls]="'x-fa fa-bars'" (tap)="toggleTree()"></button>
+    <searchfield [ui]="'alt'" [flex]="1" align="right" [width]="200" [placeholder]="'Search'"></searchfield>
   </titlebar>
 
   <!-- Navtree starts-->
@@ -28,7 +28,7 @@ import { Component, ViewEncapsulation } from '@angular/core'
   </panel>
   <!-- Navtree ends-->
 
-  </panel>
+</panel>
 
   `
 })
@@ -37,8 +37,6 @@ export class AppComponent {
   toggleTree = function(){
     this.showTreeFlag = !this.showTreeFlag;
   }
-
-
 
   theHtml = `
   <span class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></span>

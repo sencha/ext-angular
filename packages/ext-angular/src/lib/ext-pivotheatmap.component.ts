@@ -230,6 +230,7 @@ export class pivotheatmapMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

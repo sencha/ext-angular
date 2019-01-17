@@ -246,6 +246,7 @@ export class menucheckitemMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

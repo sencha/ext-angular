@@ -156,6 +156,7 @@ export class treelistitemMetaData {
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

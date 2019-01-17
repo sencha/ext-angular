@@ -158,6 +158,7 @@ export class booleancellMetaData {
     'zeroValue',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

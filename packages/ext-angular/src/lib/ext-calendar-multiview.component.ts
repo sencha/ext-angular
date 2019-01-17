@@ -40,6 +40,7 @@ export class calendar_multiviewMetaData {
     'views',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

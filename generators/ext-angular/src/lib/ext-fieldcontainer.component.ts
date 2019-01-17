@@ -264,6 +264,7 @@ export class fieldcontainerMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

@@ -5,7 +5,7 @@
   "scripts": {
     "start": "npm run dev",
     "clean": "rimraf build",
-    "dev": "webpack-dev-server --env.verbose=no --env.environment=development --env.browser=true --env.watch=yes",
+    "dev": "webpack-dev-server  --env.genProdData=false --env.verbose=no --env.environment=development --env.browser=true --env.watch=yes",
     "prod": "npm run build",
     "build2": "npm run clean && cross-env webpack --env.verbose=no --env.environment=development --env.browser=false --env.watch=no",
     "build": "npm run clean && cross-env webpack --env.verbose=no --env.genProdData=true --env.environment=production --env.browser=false --env.watch=no && cross-env webpack --env.verbose=no --env.genProdData=false --env.environment=production --env.browser=false --env.watch=no"

@@ -250,6 +250,7 @@ export class d3_partitionMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

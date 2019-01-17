@@ -244,6 +244,7 @@ export class calendar_weeksviewMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

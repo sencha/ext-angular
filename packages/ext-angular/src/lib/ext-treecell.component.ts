@@ -166,6 +166,7 @@ export class treecellMetaData {
     'zeroValue',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

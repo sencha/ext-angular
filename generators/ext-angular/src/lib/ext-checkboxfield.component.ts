@@ -268,6 +268,7 @@ export class checkboxfieldMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

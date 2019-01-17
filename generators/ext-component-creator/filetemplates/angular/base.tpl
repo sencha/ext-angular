@@ -23,7 +23,6 @@ export class base {
     private metaData: any,
     public hostComponent : base
   ) {
-//    console.log('constructor')
     this._nativeElement = nativeElement
     this._hostComponent = hostComponent
     metaData.EVENTS.forEach( (event: any, n: any) => {
@@ -331,10 +330,21 @@ export class base {
   }
 
   addTheChild(parentCmp, childCmp) {
-      var parentxtype = parentCmp.xtype
-      var childxtype = childCmp.xtype
-//      console.log('parent: ' + parentxtype + ', child: ' + childxtype)
-//      this.hostComponent._extChildren = true
+    var parentxtype = parentCmp.xtype
+    var childxtype = childCmp.xtype
+
+    if (this.ext.initialConfig.align != undefined) {
+      if (parentxtype != 'titlebar') {
+        console.error('Can only use align property if parent is a Titlebar')
+        return
+      }
+    }
+
+//      if (childxtype === 'searchfield') {
+//        if (this.ext.initialConfig.align != undefined) {
+//        }
+//      }
+
       if (parentxtype === 'grid') {
         if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
           parentCmp.addColumn(childCmp)

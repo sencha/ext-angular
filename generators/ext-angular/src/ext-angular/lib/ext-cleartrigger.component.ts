@@ -142,6 +142,7 @@ export class cleartriggerMetaData {
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

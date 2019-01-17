@@ -256,6 +256,7 @@ export class pagingtoolbarMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

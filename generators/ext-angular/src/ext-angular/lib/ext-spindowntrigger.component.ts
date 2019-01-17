@@ -142,6 +142,7 @@ export class spindowntriggerMetaData {
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

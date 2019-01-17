@@ -154,6 +154,7 @@ export class rownumberercellMetaData {
     'zeroValue',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

@@ -236,6 +236,7 @@ export class gridcolumnsmenuMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

@@ -254,6 +254,7 @@ export class d3_sunburstMetaData {
     'zoomParentDotRadius',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

@@ -260,6 +260,7 @@ export class d3_treemapMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

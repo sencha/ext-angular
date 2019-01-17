@@ -146,6 +146,7 @@ export class checkcellMetaData {
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

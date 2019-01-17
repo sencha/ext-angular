@@ -244,6 +244,7 @@ export class calendar_daysviewMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

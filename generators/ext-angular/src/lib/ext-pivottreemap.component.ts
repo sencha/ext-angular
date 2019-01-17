@@ -264,6 +264,7 @@ export class pivottreemapMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

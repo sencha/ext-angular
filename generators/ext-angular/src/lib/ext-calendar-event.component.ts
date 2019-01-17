@@ -222,6 +222,7 @@ export class calendar_eventMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

@@ -246,6 +246,7 @@ export class gridshowingroupsmenuitemMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

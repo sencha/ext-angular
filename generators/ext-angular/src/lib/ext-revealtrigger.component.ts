@@ -142,6 +142,7 @@ export class revealtriggerMetaData {
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

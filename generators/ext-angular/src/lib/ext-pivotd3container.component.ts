@@ -30,6 +30,7 @@ export class pivotd3containerMetaData {
     'matrix',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

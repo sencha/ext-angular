@@ -32,6 +32,7 @@ export class interactionMetaData {
     'listeners',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

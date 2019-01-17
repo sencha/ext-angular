@@ -260,6 +260,7 @@ export class hiddenfieldMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

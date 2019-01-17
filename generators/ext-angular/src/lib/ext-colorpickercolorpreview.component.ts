@@ -202,6 +202,7 @@ export class colorpickercolorpreviewMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
