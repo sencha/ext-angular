@@ -13,6 +13,8 @@ import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 // import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 const hljs: any = require('highlight.js/lib/highlight');
 hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescript'));
+hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'));
+hljs.registerLanguage('xml', require('highlight.js/lib/languages/xml'));
 export function highlightJsFactory() {
   return hljs;
 }
