@@ -142,6 +142,7 @@ export class spinuptriggerMetaData {
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

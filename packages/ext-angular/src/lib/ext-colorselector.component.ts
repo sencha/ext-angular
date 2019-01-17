@@ -44,6 +44,7 @@ export class colorselectorMetaData {
     'value',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

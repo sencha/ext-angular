@@ -320,6 +320,7 @@ export class pivotconfigpanelMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

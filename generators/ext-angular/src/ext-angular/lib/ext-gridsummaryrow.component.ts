@@ -214,6 +214,7 @@ export class gridsummaryrowMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

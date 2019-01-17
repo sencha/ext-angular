@@ -97,7 +97,6 @@ class base {
         this.metaData = metaData;
         this.hostComponent = hostComponent;
         this._extChildren = false;
-        //    console.log('constructor')
         this._nativeElement = nativeElement;
         this._hostComponent = hostComponent;
         metaData.EVENTS.forEach((event, n) => {
@@ -403,12 +402,16 @@ class base {
         /** @type {?} */
         var parentxtype = parentCmp.xtype;
         /** @type {?} */
-        var childxtype = childCmp.xtype
-        //      console.log('parent: ' + parentxtype + ', child: ' + childxtype)
-        //      this.hostComponent._extChildren = true
-        ;
-        //      console.log('parent: ' + parentxtype + ', child: ' + childxtype)
-        //      this.hostComponent._extChildren = true
+        var childxtype = childCmp.xtype;
+        if (this.ext.initialConfig.align != undefined) {
+            if (parentxtype != 'titlebar') {
+                console.error('Can only use align property if parent is a Titlebar');
+            }
+        }
+        //      if (childxtype === 'searchfield') {
+        //        if (this.ext.initialConfig.align != undefined) {
+        //        }
+        //      }
         if (parentxtype === 'grid') {
             if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
                 parentCmp.addColumn(childCmp);
@@ -933,6 +936,7 @@ actionsheetMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -1340,6 +1344,7 @@ audioMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -1747,6 +1752,7 @@ buttonMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -2124,6 +2130,7 @@ calendar_eventMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -2635,6 +2642,7 @@ calendar_form_addMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -3190,6 +3198,7 @@ calendar_calendar_pickerMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -3723,6 +3732,7 @@ calendar_form_editMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -4278,6 +4288,7 @@ calendar_timefieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -4661,6 +4672,7 @@ calendar_daysheaderMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -5022,6 +5034,7 @@ calendar_weeksheaderMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -5473,6 +5486,7 @@ calendar_listMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -6048,6 +6062,7 @@ calendar_dayMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -6611,6 +6626,7 @@ calendar_daysMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -7176,6 +7192,7 @@ calendar_monthMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -7727,6 +7744,7 @@ calendarMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -8264,6 +8282,7 @@ calendar_weekMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -8829,6 +8848,7 @@ calendar_weeksMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -9280,6 +9300,7 @@ calendar_dayviewMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -9699,6 +9720,7 @@ calendar_daysviewMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -10118,6 +10140,7 @@ calendar_monthviewMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -10331,6 +10354,7 @@ calendar_multiviewMetaData.PROPERTIES = [
     'views',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -10616,6 +10640,7 @@ calendar_weekviewMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -11035,6 +11060,7 @@ calendar_weeksviewMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -11456,6 +11482,7 @@ carouselMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -11713,6 +11740,7 @@ axis3dMetaData.PROPERTIES = [
     'visibleRange',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -12042,6 +12070,7 @@ cartesianMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -12539,6 +12568,7 @@ chartMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -12782,6 +12812,7 @@ interactionMetaData.PROPERTIES = [
     'listeners',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -13127,6 +13158,7 @@ legendMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -13600,6 +13632,7 @@ chartnavigatorMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -14051,6 +14084,7 @@ polarMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -14544,6 +14578,7 @@ spacefillingMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -14969,6 +15004,7 @@ chipMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -15318,6 +15354,7 @@ componentMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -15709,6 +15746,7 @@ containerMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -16086,6 +16124,7 @@ d3_canvasMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -16461,6 +16500,7 @@ d3_heatmapMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -16866,6 +16906,7 @@ d3_packMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -17269,6 +17310,7 @@ d3_partitionMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -17676,6 +17718,7 @@ d3_sunburstMetaData.PROPERTIES = [
     'zoomParentDotRadius',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -18085,6 +18128,7 @@ d3_treeMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -18494,6 +18538,7 @@ d3_horizontal_treeMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -18907,6 +18952,7 @@ d3_treemapMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -19274,6 +19320,7 @@ d3_svgMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -19639,6 +19686,7 @@ d3MetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -20160,6 +20208,7 @@ boundlistMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -20703,6 +20752,7 @@ chipviewMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -21238,6 +21288,7 @@ componentdataviewMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -21709,6 +21760,7 @@ dataitemMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -22174,6 +22226,7 @@ dataviewMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -22601,6 +22654,7 @@ emptytextMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -22964,6 +23018,7 @@ indexbarMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -23329,6 +23384,7 @@ itemheaderMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -23846,6 +23902,7 @@ listMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -24329,6 +24386,7 @@ listitemMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -24744,6 +24802,7 @@ listswiperitemMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -25169,6 +25228,7 @@ listswiperstepperMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -25614,6 +25674,7 @@ nestedlistMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -26023,6 +26084,7 @@ pullrefreshbarMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -26378,6 +26440,7 @@ pullrefreshspinnerMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -26737,6 +26800,7 @@ simplelistitemMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -27212,6 +27276,7 @@ dialogMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -27733,6 +27798,7 @@ windowMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -28182,6 +28248,7 @@ drawMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -28497,6 +28564,7 @@ surfaceMetaData.PROPERTIES = [
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -28840,6 +28908,7 @@ editorMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -29283,6 +29352,7 @@ checkboxMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -29714,6 +29784,7 @@ checkboxfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -30261,6 +30332,7 @@ comboboxMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -30820,6 +30892,7 @@ comboboxfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -31259,6 +31332,7 @@ containerfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -31682,6 +31756,7 @@ fieldcontainerMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -32161,6 +32236,7 @@ datefieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -32648,6 +32724,7 @@ datepickerfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -33135,6 +33212,7 @@ datepickernativefieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -33564,6 +33642,7 @@ displayfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -34017,6 +34096,7 @@ emailfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -34432,6 +34512,7 @@ fieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -34891,6 +34972,7 @@ filefieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -35306,6 +35388,7 @@ filebuttonMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -35723,6 +35806,7 @@ hiddenfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -36142,6 +36226,7 @@ inputfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -36609,6 +36694,7 @@ numberfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -37092,6 +37178,7 @@ fieldpanelMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -37577,6 +37664,7 @@ passwordfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -38052,6 +38140,7 @@ pickerfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -38487,6 +38576,7 @@ radioMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -38918,6 +39008,7 @@ radiofieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -39375,6 +39466,7 @@ searchfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -39896,6 +39988,7 @@ selectfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -40335,6 +40428,7 @@ singlesliderfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -40772,6 +40866,7 @@ sliderfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -41255,6 +41350,7 @@ spinnerfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -41718,6 +41814,7 @@ textfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -42177,6 +42274,7 @@ textareafieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -42656,6 +42754,7 @@ timefieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -43097,6 +43196,7 @@ togglefieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -43406,6 +43506,7 @@ cleartriggerMetaData.PROPERTIES = [
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -43615,6 +43716,7 @@ datetriggerMetaData.PROPERTIES = [
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -43824,6 +43926,7 @@ expandtriggerMetaData.PROPERTIES = [
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -44039,6 +44142,7 @@ menutriggerMetaData.PROPERTIES = [
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -44248,6 +44352,7 @@ revealtriggerMetaData.PROPERTIES = [
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -44457,6 +44562,7 @@ spindowntriggerMetaData.PROPERTIES = [
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -44666,6 +44772,7 @@ spinuptriggerMetaData.PROPERTIES = [
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -44875,6 +44982,7 @@ timetriggerMetaData.PROPERTIES = [
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -45084,6 +45192,7 @@ triggerMetaData.PROPERTIES = [
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -45445,6 +45554,7 @@ urlfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -45860,6 +45970,7 @@ fieldsetMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -46357,6 +46468,7 @@ formpanelMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -46694,6 +46806,7 @@ gridcellbaseMetaData.PROPERTIES = [
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -46919,6 +47032,7 @@ booleancellMetaData.PROPERTIES = [
     'zeroValue',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -47146,6 +47260,7 @@ gridcellMetaData.PROPERTIES = [
     'zeroValue',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -47359,6 +47474,7 @@ checkcellMetaData.PROPERTIES = [
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -47580,6 +47696,7 @@ datecellMetaData.PROPERTIES = [
     'zeroValue',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -47801,6 +47918,7 @@ numbercellMetaData.PROPERTIES = [
     'zeroValue',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -48022,6 +48140,7 @@ rownumberercellMetaData.PROPERTIES = [
     'zeroValue',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -48241,6 +48360,7 @@ textcellMetaData.PROPERTIES = [
     'zeroValue',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -48474,6 +48594,7 @@ treecellMetaData.PROPERTIES = [
     'zeroValue',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -48691,6 +48812,7 @@ widgetcellMetaData.PROPERTIES = [
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -49036,6 +49158,7 @@ celleditorMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -49549,6 +49672,7 @@ booleancolumnMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -50050,6 +50174,7 @@ checkcolumnMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -50549,6 +50674,7 @@ gridcolumnMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -51044,6 +51170,7 @@ columnMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -51539,6 +51666,7 @@ templatecolumnMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -52036,6 +52164,7 @@ datecolumnMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -52533,6 +52662,7 @@ numbercolumnMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -53030,6 +53160,7 @@ rownumbererMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -53531,6 +53662,7 @@ selectioncolumnMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -54030,6 +54162,7 @@ textcolumnMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -54525,6 +54658,7 @@ treecolumnMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -55084,6 +55218,7 @@ gridMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -55587,6 +55722,7 @@ headercontainerMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -56016,6 +56152,7 @@ lockedgridMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -56491,6 +56628,7 @@ lockedgridregionMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -56912,6 +57050,7 @@ gridcolumnsmenuMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -57295,6 +57434,7 @@ gridgroupbythismenuitemMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -57688,6 +57828,7 @@ gridshowingroupsmenuitemMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -58089,6 +58230,7 @@ gridsortascmenuitemMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -58490,6 +58632,7 @@ gridsortdescmenuitemMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -58897,6 +59040,7 @@ pagingtoolbarMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -59274,6 +59418,7 @@ gridrowMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -59623,6 +59768,7 @@ rowbodyMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -59982,6 +60128,7 @@ rowheaderMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -60343,6 +60490,7 @@ gridsummaryrowMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -60896,6 +61044,7 @@ treeMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -61367,6 +61516,7 @@ imageMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -61730,6 +61880,7 @@ imgMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -62093,6 +62244,7 @@ indicatorMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -62448,6 +62600,7 @@ labelMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -62819,6 +62972,7 @@ treelistMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -63126,6 +63280,7 @@ treelistitemMetaData.PROPERTIES = [
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -63403,6 +63558,7 @@ loadmaskMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -63756,6 +63912,7 @@ maskMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -64127,6 +64284,7 @@ mediaMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -64534,6 +64692,7 @@ menucheckitemMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -64921,6 +65080,7 @@ menuitemMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -65388,6 +65548,7 @@ menuMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -65825,6 +65986,7 @@ menuradioitemMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -66178,6 +66340,7 @@ menuseparatorMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -66661,6 +66824,7 @@ messageboxMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -67104,6 +67268,7 @@ navigationviewMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -67577,6 +67742,7 @@ panelMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -68136,6 +68302,7 @@ datepanelMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -68539,6 +68706,7 @@ datetitleMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -68946,6 +69114,7 @@ panelheaderMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -69431,6 +69600,7 @@ timepanelMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -69834,6 +70004,7 @@ paneltitleMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -70351,6 +70522,7 @@ yearpickerMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -70918,6 +71090,7 @@ datepickerMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -71439,6 +71612,7 @@ pickerMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -71960,6 +72134,7 @@ selectpickerMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -72467,6 +72642,7 @@ pickerslotMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -72998,6 +73174,7 @@ tabletpickerMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -73343,6 +73520,7 @@ pivotgridcellMetaData.PROPERTIES = [
     'zeroValue',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -73570,6 +73748,7 @@ pivotgridgroupcellMetaData.PROPERTIES = [
     'zeroValue',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -73667,6 +73846,7 @@ pivotd3containerMetaData.PROPERTIES = [
     'matrix',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -73936,6 +74116,7 @@ pivotheatmapMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -74351,6 +74532,7 @@ pivottreemapMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -74918,6 +75100,7 @@ pivotgridMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -75489,6 +75672,7 @@ pivotconfigfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -75958,6 +76142,7 @@ pivotconfigcontainerMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -76477,6 +76662,7 @@ pivotconfigformMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -76988,6 +77174,7 @@ pivotconfigpanelMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -77507,6 +77694,7 @@ pivotsettingsMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -78032,6 +78220,7 @@ pivotrangeeditorMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -78437,6 +78626,7 @@ pivotgridrowMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -78794,6 +78984,7 @@ progressMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -79151,6 +79342,7 @@ progressbarwidgetMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -79558,6 +79750,7 @@ segmentedbuttonMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -80043,6 +80236,7 @@ sheetMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -80450,6 +80644,7 @@ sliderMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -80811,6 +81006,7 @@ thumbMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -81180,6 +81376,7 @@ togglesliderMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -81537,6 +81734,7 @@ spacerMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -81928,6 +82126,7 @@ sparklinebarMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -82295,6 +82494,7 @@ sparklineMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -82690,6 +82890,7 @@ sparklineboxMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -83067,6 +83268,7 @@ sparklinebulletMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -83446,6 +83648,7 @@ sparklinediscreteMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -83847,6 +84050,7 @@ sparklinelineMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -84222,6 +84426,7 @@ sparklinepieMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -84601,6 +84806,7 @@ sparklinetristateMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -84996,6 +85202,7 @@ splitbuttonMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -85407,6 +85614,7 @@ tabbarMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -85826,6 +86034,7 @@ tabpanelMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -86241,6 +86450,7 @@ tabMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -86732,6 +86942,7 @@ tooltipMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -87121,6 +87332,7 @@ titleMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -87520,6 +87732,7 @@ titlebarMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -87899,6 +88112,7 @@ toolMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -88264,6 +88478,7 @@ paneltoolMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -88661,6 +88876,7 @@ toolbarMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -89036,6 +89252,7 @@ colorbuttonMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -89387,6 +89604,7 @@ colorpickercolorpreviewMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -89854,6 +90072,7 @@ colorfieldMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -90065,6 +90284,7 @@ colorselectorMetaData.PROPERTIES = [
     'value',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -90340,6 +90560,7 @@ gaugeMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -90747,6 +90968,7 @@ mapMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -91198,6 +91420,7 @@ google_mapMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -91619,6 +91842,7 @@ ratingMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -91992,6 +92216,7 @@ videoMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -92411,6 +92636,7 @@ viewportMetaData.PROPERTIES = [
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
@@ -92702,6 +92928,7 @@ widgetMetaData.PROPERTIES = [
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

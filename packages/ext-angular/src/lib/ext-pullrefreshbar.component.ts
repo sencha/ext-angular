@@ -222,6 +222,7 @@ export class pullrefreshbarMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

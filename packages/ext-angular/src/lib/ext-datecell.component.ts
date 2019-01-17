@@ -154,6 +154,7 @@ export class datecellMetaData {
     'zeroValue',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

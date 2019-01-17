@@ -74,13 +74,14 @@
   <!-- code ends-->
 
   <!-- examples start-->
-  <container 
+  <panel 
     [hidden]="node.childNodes.length > 0 ? true: false" 
-    [padding]="'30 30 30 30'"
+    [bodyPadding]="30"
     [layout]="'fit'"
     [fitToParent]="true">
     <router-outlet #extroute></router-outlet>
-  </container>
+  </panel>
+  
   <container 
     [hidden]="node.childNodes.length > 0 ? false: true" 
     [layout]="'fit'"

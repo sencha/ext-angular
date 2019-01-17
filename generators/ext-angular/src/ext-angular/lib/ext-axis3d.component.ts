@@ -94,6 +94,7 @@ export class axis3dMetaData {
     'visibleRange',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

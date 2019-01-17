@@ -131,7 +131,6 @@
             this.metaData = metaData;
             this.hostComponent = hostComponent;
             this._extChildren = false;
-            //    console.log('constructor')
             this._nativeElement = nativeElement;
             this._hostComponent = hostComponent;
             metaData.EVENTS.forEach(function (event, n) {
@@ -453,8 +452,15 @@
                 var parentxtype = parentCmp.xtype;
                 /** @type {?} */
                 var childxtype = childCmp.xtype;
-                //      console.log('parent: ' + parentxtype + ', child: ' + childxtype)
-                //      this.hostComponent._extChildren = true
+                if (this.ext.initialConfig.align != undefined) {
+                    if (parentxtype != 'titlebar') {
+                        console.error('Can only use align property if parent is a Titlebar');
+                    }
+                }
+                //      if (childxtype === 'searchfield') {
+                //        if (this.ext.initialConfig.align != undefined) {
+                //        }
+                //      }
                 if (parentxtype === 'grid') {
                     if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
                         parentCmp.addColumn(childCmp);
@@ -982,6 +988,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -1405,6 +1412,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -1828,6 +1836,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -2221,6 +2230,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -2748,6 +2758,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -3319,6 +3330,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -3868,6 +3880,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -4439,6 +4452,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -4838,6 +4852,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -5215,6 +5230,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -5682,6 +5698,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -6273,6 +6290,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -6852,6 +6870,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -7433,6 +7452,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -8000,6 +8020,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -8553,6 +8574,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -9134,6 +9156,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -9601,6 +9624,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -10036,6 +10060,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -10471,6 +10496,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -10700,6 +10726,7 @@
             'views',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -11001,6 +11028,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -11436,6 +11464,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -11873,6 +11902,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -12146,6 +12176,7 @@
             'visibleRange',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -12491,6 +12522,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -13004,6 +13036,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -13263,6 +13296,7 @@
             'listeners',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -13624,6 +13658,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -14113,6 +14148,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -14580,6 +14616,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -15089,6 +15126,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -15530,6 +15568,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -15895,6 +15934,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -16302,6 +16342,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -16695,6 +16736,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -17086,6 +17128,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -17507,6 +17550,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -17926,6 +17970,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -18349,6 +18394,7 @@
             'zoomParentDotRadius',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -18774,6 +18820,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -19199,6 +19246,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -19628,6 +19676,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -20011,6 +20060,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -20392,6 +20442,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -20929,6 +20980,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -21488,6 +21540,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -22039,6 +22092,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -22526,6 +22580,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -23007,6 +23062,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -23450,6 +23506,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -23829,6 +23886,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -24210,6 +24268,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -24743,6 +24802,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -25242,6 +25302,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -25673,6 +25734,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -26114,6 +26176,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -26575,6 +26638,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -27000,6 +27064,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -27371,6 +27436,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -27746,6 +27812,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -28237,6 +28304,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -28774,6 +28842,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -29239,6 +29308,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -29570,6 +29640,7 @@
             'y',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -29929,6 +30000,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -30388,6 +30460,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -30835,6 +30908,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -31398,6 +31472,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -31973,6 +32048,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -32428,6 +32504,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -32867,6 +32944,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -33362,6 +33440,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -33865,6 +33944,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -34368,6 +34448,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -34813,6 +34894,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -35282,6 +35364,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -35713,6 +35796,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -36188,6 +36272,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -36619,6 +36704,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -37052,6 +37138,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -37487,6 +37574,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -37970,6 +38058,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -38469,6 +38558,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -38970,6 +39060,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -39461,6 +39552,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -39912,6 +40004,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -40359,6 +40452,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -40832,6 +40926,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -41369,6 +41464,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -41824,6 +41920,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -42277,6 +42374,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -42776,6 +42874,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -43255,6 +43354,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -43730,6 +43830,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -44225,6 +44326,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -44682,6 +44784,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -45007,6 +45110,7 @@
             'y',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -45232,6 +45336,7 @@
             'y',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -45457,6 +45562,7 @@
             'y',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -45688,6 +45794,7 @@
             'y',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -45913,6 +46020,7 @@
             'y',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -46138,6 +46246,7 @@
             'y',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -46363,6 +46472,7 @@
             'y',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -46588,6 +46698,7 @@
             'y',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -46813,6 +46924,7 @@
             'y',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -47190,6 +47302,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -47621,6 +47734,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -48134,6 +48248,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -48487,6 +48602,7 @@
             'y',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -48728,6 +48844,7 @@
             'zeroValue',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -48971,6 +49088,7 @@
             'zeroValue',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -49200,6 +49318,7 @@
             'y',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -49437,6 +49556,7 @@
             'zeroValue',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -49674,6 +49794,7 @@
             'zeroValue',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -49911,6 +50032,7 @@
             'zeroValue',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -50146,6 +50268,7 @@
             'zeroValue',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -50395,6 +50518,7 @@
             'zeroValue',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -50628,6 +50752,7 @@
             'y',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -50989,6 +51114,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -51518,6 +51644,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -52035,6 +52162,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -52550,6 +52678,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -53061,6 +53190,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -53572,6 +53702,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -54085,6 +54216,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -54598,6 +54730,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -55111,6 +55244,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -55628,6 +55762,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -56143,6 +56278,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -56654,6 +56790,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -57229,6 +57366,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -57748,6 +57886,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -58193,6 +58332,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -58684,6 +58824,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -59121,6 +59262,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -59520,6 +59662,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -59929,6 +60072,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -60346,6 +60490,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -60763,6 +60908,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -61186,6 +61332,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -61579,6 +61726,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -61944,6 +62092,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -62319,6 +62468,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -62696,6 +62846,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -63265,6 +63416,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -63752,6 +63904,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -64131,6 +64284,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -64510,6 +64664,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -64881,6 +65036,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -65268,6 +65424,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -65591,6 +65748,7 @@
             'y',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -65884,6 +66042,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -66253,6 +66412,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -66640,6 +66800,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -67063,6 +67224,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -67466,6 +67628,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -67949,6 +68112,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -68402,6 +68566,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -68771,6 +68936,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -69270,6 +69436,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -69729,6 +69896,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -70218,6 +70386,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -70793,6 +70962,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -71212,6 +71382,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -71635,6 +71806,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -72136,6 +72308,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -72555,6 +72728,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -73088,6 +73262,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -73671,6 +73846,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -74208,6 +74384,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -74745,6 +74922,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -75268,6 +75446,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -75815,6 +75994,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -76176,6 +76356,7 @@
             'zeroValue',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -76419,6 +76600,7 @@
             'zeroValue',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -76532,6 +76714,7 @@
             'matrix',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -76817,6 +77000,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -77248,6 +77432,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -77831,6 +78016,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -78418,6 +78604,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -78903,6 +79090,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -79438,6 +79626,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -79965,6 +80154,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -80500,6 +80690,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -81041,6 +81232,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -81462,6 +81654,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -81835,6 +82028,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -82208,6 +82402,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -82631,6 +82826,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -83132,6 +83328,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -83555,6 +83752,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -83932,6 +84130,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -84317,6 +84516,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -84690,6 +84890,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -85097,6 +85298,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -85480,6 +85682,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -85891,6 +86094,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -86284,6 +86488,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -86679,6 +86884,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -87096,6 +87302,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -87487,6 +87694,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -87882,6 +88090,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -88293,6 +88502,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -88720,6 +88930,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -89155,6 +89366,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -89586,6 +89798,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -90093,6 +90306,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -90498,6 +90712,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -90913,6 +91128,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -91308,6 +91524,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -91689,6 +91906,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -92102,6 +92320,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -92493,6 +92712,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -92860,6 +93080,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -93343,6 +93564,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -93570,6 +93792,7 @@
             'value',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -93861,6 +94084,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -94284,6 +94508,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -94751,6 +94976,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -95188,6 +95414,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -95577,6 +95804,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -96012,6 +96240,7 @@
             'zIndex',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];
@@ -96319,6 +96548,7 @@
             'y',
             'platformConfig',
             'responsiveConfig',
+            'align',
             'fitToParent',
             'config'
         ];

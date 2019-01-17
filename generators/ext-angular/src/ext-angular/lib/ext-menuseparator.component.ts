@@ -202,6 +202,7 @@ export class menuseparatorMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

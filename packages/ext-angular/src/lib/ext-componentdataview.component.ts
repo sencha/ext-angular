@@ -310,6 +310,7 @@ export class componentdataviewMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

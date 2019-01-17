@@ -214,6 +214,7 @@ export class calendar_weeksheaderMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

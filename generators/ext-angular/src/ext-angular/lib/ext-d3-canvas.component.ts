@@ -214,6 +214,7 @@ export class d3_canvasMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

@@ -250,6 +250,7 @@ export class gridsortdescmenuitemMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

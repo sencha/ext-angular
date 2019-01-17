@@ -150,6 +150,7 @@ export class widgetcellMetaData {
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

@@ -244,6 +244,7 @@ export class sparklinebarMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

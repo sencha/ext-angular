@@ -160,6 +160,7 @@ export class pivotgridgroupcellMetaData {
     'zeroValue',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

@@ -248,6 +248,7 @@ export class chartnavigatorMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];
