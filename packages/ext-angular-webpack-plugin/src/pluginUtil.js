@@ -77,12 +77,12 @@ export function _compilation(compiler, compilation, vars, options) {
     const extAngularPackage = '@sencha/ext-angular'
     const extAngularFolder = 'ext-angular-prod'
     const extAngularModule = 'ext-angular.module'
+    var extComponents = []
 
     if (vars.production) {
       logv(options, `ext-compilation: production is ` + vars.production)
 
       if (options.framework == 'angular') {
-        var extComponents = []
         var usedExtComponents = []
 
         const packagePath = path.resolve(process.cwd(), 'node_modules/' + extAngularPackage)
@@ -96,43 +96,51 @@ export function _compilation(compiler, compilation, vars, options) {
           }
         })
 
-        try {
-          var rewrite = false
-          const appModulePath = path.resolve(process.cwd(), 'src/app/app.module.ts')
-          var js = fsx.readFileSync(appModulePath).toString()
-          var i = js.indexOf(extAngularPackage)
-          i = js.substring(0, i).lastIndexOf('import')
+        if (options.genProdData) {
+          try {
+            var rewrite = false
+            const appModulePath = path.resolve(process.cwd(), 'src/app/app.module.ts')
+            var js = fsx.readFileSync(appModulePath).toString()
+            var i = js.indexOf(extAngularPackage)
+            i = js.substring(0, i).lastIndexOf('import')
 
-          if (js.substr(i - 3, 3) !== '// ') {
-            js = js.substring(0, i) + '\n // ' + js.substring(i)
-            rewrite = true
-          }
+            if (js.substr(i - 3, 3) !== '// ') {
+              js = js.substring(0, i) + '\n // ' + js.substring(i)
+              rewrite = true
+            }
 
-          const pathToExtAngularModern = path.resolve(process.cwd(), `src/app/${extAngularFolder}`)
-          if (!fs.existsSync(pathToExtAngularModern)) {
-            mkdirp.sync(pathToExtAngularModern)
-            const t = require('./artifacts').extAngularModule('', '', '')
-            fsx.writeFileSync(
-              `${pathToExtAngularModern}/${extAngularModule}.ts`, t, 'utf-8', () => {return}
-            )
-            rewrite = true
+            const pathToExtAngularModern = path.resolve(process.cwd(), `src/app/${extAngularFolder}`)
+            if (!fs.existsSync(pathToExtAngularModern)) {
+              mkdirp.sync(pathToExtAngularModern)
+              const t = require('./artifacts').extAngularModule('', '', '')
+              fsx.writeFileSync(
+                `${pathToExtAngularModern}/${extAngularModule}.ts`, t, 'utf-8', () => {return}
+              )
+              rewrite = true
+            }
+            var j = js.indexOf(`./${extAngularFolder}/${extAngularModule}`)
+            if (j < 0) {
+              js = js.substring(0, i) + `import {ExtAngularModule} from './${extAngularFolder}/${extAngularModule}'\n` + js.substr(i)
+              rewrite = true
+            }
+            else {
+              var i = js.substring(0, j).lastIndexOf('import')
+              if (js.substr(i - 3, 3) == '// ') {
+                js = js.substring(0, i - 3) + '\n' + js.substring(i)
+                rewrite = true
+              } else if (js.substring(i-2, 2) == '//') {
+                js = js.substring(0, i - 2) + '\n' + js.substring(i)
+                rewrite = true
+              }
+            }
+            if (rewrite)
+              fsx.writeFileSync(appModulePath, js, 'utf-8', ()=>{return})
           }
-          var j = js.indexOf(`./${extAngularFolder}/${extAngularModule}`)
-          if (j < 0) {
-            js = js.substring(0, i) + `import {ExtAngularModule} from './${extAngularFolder}/${extAngularModule}'\n` + js.substr(i)
-            rewrite = true
+          catch (e) {
+            console.log(e)
+            compilation.errors.push('buildModule hook in _compilation: ' + e)
+            return []
           }
-          else if (js.substr(j - 43, 3) == '// ') {
-            js = js.substring(0, j - 43) + '\n' +js.substring(j - 40)
-            rewrite = true
-          }
-          if (rewrite)
-            fsx.writeFileSync(appModulePath, js, 'utf-8', ()=>{return})
-        }
-        catch (e) {
-          console.log(e)
-          compilation.errors.push('buildModule hook in _compilation: ' + e)
-          return []
         }
       }
 
@@ -144,7 +152,7 @@ export function _compilation(compiler, compilation, vars, options) {
         }
       })
 
-      if (options.framework == 'angular') {
+      if (options.framework == 'angular' && options.genProdData) {
         compilation.hooks.finishModules.tap(`ext-finish-modules`, modules => {
           const string = 'Ext.create({\"xtype\":\"'
           vars.deps.forEach(code => {

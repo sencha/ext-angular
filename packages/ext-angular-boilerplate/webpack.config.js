@@ -12,6 +12,7 @@ module.exports = function (env) {
   var buildprofile = env.profile || process.env.npm_package_extbuild_defaultprofile
   var buildenvironment = env.environment || process.env.npm_package_extbuild_defaultenvironment
   var buildverbose = env.verbose || process.env.npm_package_extbuild_defaultverbose
+  var genProdData = JSON.parse(env.genProdData) || false
   if (buildprofile == 'all') { buildprofile = '' }
   const isProd = buildenvironment === 'production'
 
@@ -32,6 +33,7 @@ module.exports = function (env) {
         port: port,
         emit: true,
         browser: browserprofile,
+        genProdData: genProdData,
         watch: watchprofile,
         profile: buildprofile, 
         environment: buildenvironment, 

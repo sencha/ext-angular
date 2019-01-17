@@ -14,7 +14,8 @@ export function getValidateOptions() {
       "verbose":     {"type": [ "string" ]},
       "theme":       {"type": [ "string" ]},
       "toolkit":     {"type": [ "string" ]},
-      "packages":    {"type": [ "string", "array" ]}
+      "packages":    {"type": [ "string", "array" ]},
+      "genProdData": {"type": [ "boolean" ]}
     },
     "additionalProperties": false
     // "errorMessage": {
@@ -30,6 +31,7 @@ export function getDefaultOptions() {
     browser: true,
     watch: 'yes',
     profile: '', 
+    genProdData: false,
     environment: 'development', 
     verbose: 'no',
     toolkit: 'modern',

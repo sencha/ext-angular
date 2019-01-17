@@ -1,7 +1,10 @@
 export const cssClassName = (file) => {
     if (file.endsWith(".css")) {
         return 'css';
-    }
+	}
+	else if(file.endsWith(".TS") || file.endsWith(".ts")) {
+		return 'typescript'
+	}
 
 	return "js xml";
 }
