@@ -8,7 +8,7 @@
     "dev": "webpack-dev-server --env.verbose=no --env.environment=development  --env.browser=true  --env.watch=yes",
     "prod": "webpack-dev-server --env.verbose=yes --env.environment=production",
     "build2": "npm run clean && cross-env webpack --env.verbose=no --env.environment=development --env.browser=false --env.watch=no",
-    "build": "npm run clean && cross-env webpack --env.verbose=no --env.environment=production --env.browser=false --env.watch=no"
+    "build": "npm run clean && cross-env webpack --env.verbose=no --env.genProdData=true --env.environment=production --env.browser=false--env.watch=no && cross-env webpack --env.verbose=no --env.environment=production --env.browser=false --env.watch=no"
   },
   "extbuild": {
     "defaultprofile": "",
