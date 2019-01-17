@@ -17,30 +17,6 @@ export function highlightJsFactory() {
 import * as d3 from 'd3'
 window['d3'] = d3
 
-//services
-import { AgencyService } from './service/agency.service';
-
-//in main
-// import { ExampleComponent } from './view/example/example.component';
-// import { DetailComponent } from './view/main/detail/detail.component';
-// import { FooterComponent } from './view/main/footer/footer.component';
-// import { HeaderComponent } from './view/main/header/header.component';
-// import { MainComponent } from './view/main/main.component';
-// import { SideBarComponent } from './view/main/sidebar/sidebar.component';
-
-//menu
-// import { DashboardComponent } from './view/dashboard/dashboard.component';
-// import { AgenciesComponent } from './view/agencies/agencies.component';
-// import { AnalyzeComponent } from './view/analyze/analyze.component';
-// import { SpendingDetailComponent } from './view/spendingdetail/spendingdetail.component';
-// import { CandidateCalendarsComponent } from './view/candidatecalendars/candidatecalendars.component';
-// import { ReportsComponent } from './view/reports/reports.component';
-// import { ChartComponent } from './view/chart/chart.component';
-// import { D3TreeListComponent } from './view/d3treelist/d3treelist.component';
-// import { WidgetGridComponent } from './view/widgetgrid/widgetgrid.component';
-// import { SimpleGridComponent } from './view/simplegrid/simplegrid.component';
-// import { BoilerplateComponent } from './view/boilerplate/boilerplate.component';
-// import { ConfiguratorComponent } from './view/configurator/configurator.component';
 import { LandingpageComponent } from './view/landingpage/landingpage.component';
 import { DummyComponent } from './view/landingpage/landingpage.component';
 
@@ -302,7 +278,6 @@ const routes: ExtAngularRoutes = [
 	{ path: 'd3/hierarchy', component: DummyComponent, text: 'D3 Hierarchy', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'pivot_grids', component: DummyComponent, text: 'Pivot Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	
-	//example components
 	{ path: 'components/buttons/button', component: ButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/buttons/splitbutton', component: SplitButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'components/buttons/segmentedbutton', component: SegmentedButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -707,7 +682,6 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
   ],
   providers: [
     ExtAngularBootstrapService,
-    AgencyService,
     CalendarService,
     GridService,
     BigDataService,,
