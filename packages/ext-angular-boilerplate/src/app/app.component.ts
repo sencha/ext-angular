@@ -9,10 +9,8 @@ Ext.require('Ext.data.TreeStore')
 	styles: [``]
 })
 export class AppComponent {
-  routerHtml2 ='<router-outlet></router-outlet>'
-  routerHtml ='<div style="height:300px;width:400px;"><router-outlet></router-outlet></div>'
   isPhone = Ext.platformTags.phone;
-  title = 'ExtAngular Boilerplate - Angular v' + VERSION.full
+  title = 'Sencha ExtAngular 6.7 Boilerplate - Angular v' + VERSION.full
 
   constructor(private router: Router) {}
 

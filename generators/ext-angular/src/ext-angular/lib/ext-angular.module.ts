@@ -1,3 +1,7 @@
+
+
+
+
 import { NgModule } from '@angular/core';
 import { ExtAngularBootstrapComponent } from './ext-angular-bootstrap.component';
 import { ExtAngularBootstrapService } from './ext-angular-bootstrap.service';
@@ -456,8 +460,8 @@ import { ExtWidgetComponent } from './ext-widget.component';
     ExtWidgetComponent
 
   ],
-  providers:       [ ExtAngularBootstrapService ],
-  entryComponents: [ ExtAngularBootstrapComponent ],
+  providers:       [  ],
+  entryComponents: [  ],
   exports:         [
     ExtAngularBootstrapComponent,
     ExtActionsheetComponent,
@@ -688,3 +692,4 @@ import { ExtWidgetComponent } from './ext-widget.component';
   ]
 })
 export class ExtAngularModule { }
+

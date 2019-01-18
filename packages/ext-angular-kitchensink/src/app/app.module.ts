@@ -4,8 +4,10 @@ import { BrowserModule } from '@angular/platform-browser'
 import { Route, RouterModule } from '@angular/router'
 
 import { ExtAngularModule } from '@sencha/ext-angular'
-import { ExtAngularBootstrapService } from './ext-angular/ext-angular-bootstrap.service'
-import { ExtAngularBootstrapComponent } from './ext-angular/ext-angular-bootstrap.component'
+//import { ExtAngularBootstrapService } from '@sencha/ext-angular'
+//import { ExtAngularBootstrapComponent } from '@sencha/ext-angular'
+import { ExtAngularBootstrapService } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.service'
+import { ExtAngularBootstrapComponent } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.component'
 
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 const hljs: any = require('highlight.js/lib/highlight');

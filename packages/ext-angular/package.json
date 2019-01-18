@@ -7,21 +7,24 @@
     "ext-angular": "./bin/ext-angular.js"
   },
   "peerDependencies": {
-    "@angular/compiler": "^7.2.0",
-    "@angular/core": "^7.2.0",
+    "@angular/compiler": "^7.2.1",
+    "@angular/core": "^7.2.1",
     "tslib": "^1.9.3"
   },
   "dependencies": {
-    "@angular/compiler": "^7.2.0",
-    "@angular/core": "^7.2.0",
-    "zone.js": "~0.8.26",
+    "@angular/compiler": "^7.2.1",
+    "@angular/core": "^7.2.1",
+    "@angular/common": "^7.2.1",
+    "@angular/platform-browser": "^7.2.1",
+    "@angular/platform-browser-dynamic": "^7.2.1",
+    "zone.js": "~0.8.28",
     "tslib": "^1.9.0"
   },
   "devDependencies": {
-    "ng-packagr": "^4.4.5",
+    "ng-packagr": "^4.6.0",
     "tsickle": "^0.34.0",
-    "@angular/compiler-cli": "^7.2.0",
-    "typescript": "~3.2.2"
+    "@angular/compiler-cli": "^7.2.1",
+    "typescript": "~3.2.4"
   },
   "repository": {
     "type": "git",
