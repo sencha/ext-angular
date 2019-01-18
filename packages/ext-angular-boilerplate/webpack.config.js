@@ -12,7 +12,14 @@ module.exports = function (env) {
   var buildprofile = env.profile || process.env.npm_package_extbuild_defaultprofile
   var buildenvironment = env.environment || process.env.npm_package_extbuild_defaultenvironment
   var buildverbose = env.verbose || process.env.npm_package_extbuild_defaultverbose
-  var genProdData = JSON.parse(env.genProdData) || false
+  console.log(env.genProdData)
+  var genProdData
+  if (env.genProdData == undefined) {
+    genProdData = false
+  }
+  else {
+    genProdData = JSON.parse(env.genProdData) || false
+  }
   if (buildprofile == 'all') { buildprofile = '' }
   const isProd = buildenvironment === 'production'
 

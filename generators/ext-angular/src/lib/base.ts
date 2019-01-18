@@ -17,12 +17,14 @@ export class base {
   private _nativeElement: any
   private _hostComponent: any
   private _extChildren: any = false
+  private q: QueryList<any>
 
   constructor(
     nativeElement: any,
     private metaData: any,
     public hostComponent : base
   ) {
+    
     this._nativeElement = nativeElement
     this._hostComponent = hostComponent
     metaData.EVENTS.forEach( (event: any, n: any) => {
@@ -336,6 +338,7 @@ export class base {
     if (this.ext.initialConfig.align != undefined) {
       if (parentxtype != 'titlebar') {
         console.error('Can only use align property if parent is a Titlebar')
+        return
       }
     }
 

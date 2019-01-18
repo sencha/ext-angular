@@ -6,6 +6,7 @@ export declare class base {
     private _nativeElement;
     private _hostComponent;
     private _extChildren;
+    private q;
     constructor(nativeElement: any, metaData: any, hostComponent: base);
     baseOnInit(metaData: any): void;
     ngOnDestroy(): void;
