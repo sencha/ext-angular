@@ -1,40 +1,6 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import '@angular/platform-browser-dynamic';
 import { __extends } from 'tslib';
-import { Component, Injectable, Injector, ComponentFactoryResolver, ApplicationRef, ElementRef, EventEmitter, ContentChild, ContentChildren, NgModule, defineInjectable, inject, INJECTOR, forwardRef, Host, Optional, SkipSelf } from '@angular/core';
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-var ExtAngularLaunchComponent = /** @class */ (function () {
-    function ExtAngularLaunchComponent() {
-    }
-    /**
-     * @param {?} AppModule
-     * @return {?}
-     */
-    ExtAngularLaunchComponent.prototype.bootstrapModule = /**
-     * @param {?} AppModule
-     * @return {?}
-     */
-    function (AppModule) {
-        console.log('launch');
-        Ext.application({
-            name: "$ExtAngularApp",
-            quickTips: true,
-            launch: function () {
-                platformBrowserDynamic().bootstrapModule(AppModule)
-                    .catch(function (err) {
-                    console.log(err);
-                });
-            }
-        });
-    };
-    ExtAngularLaunchComponent.decorators = [
-        { type: Component, args: [{ selector: 'launch', template: '' }] }
-    ];
-    return ExtAngularLaunchComponent;
-}());
+import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, Component, EventEmitter, ContentChild, NgModule, defineInjectable, inject, INJECTOR, forwardRef, ElementRef, Host, Optional, SkipSelf } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -130,6 +96,7 @@ var base = /** @class */ (function () {
         this.metaData = metaData;
         this.hostComponent = hostComponent;
         this._extChildren = false;
+        this.q = null;
         this._nativeElement = nativeElement;
         this._hostComponent = hostComponent;
         metaData.EVENTS.forEach(function (event, n) {
@@ -234,15 +201,9 @@ var base = /** @class */ (function () {
         /** @type {?} */
         var parentCmp;
         try {
-            //console.log(this)
-            //console.log(this.ext)
             childCmp = this.ext;
-            //console.log(this._hostComponent)
             if (this._hostComponent != null) {
-                //console.log(this._hostComponent.ext)
                 parentCmp = this._hostComponent.ext;
-                //console.log(parentCmp)
-                //console.log(childCmp)
                 if (parentCmp.xtype == 'button' && childCmp.xtype == 'menu') ;
                 else if (parentCmp.xtype == 'carousel') ;
                 else {
@@ -271,170 +232,15 @@ var base = /** @class */ (function () {
             this.ext.add({ xtype: 'container', html: this._extroute.nativeElement });
             return;
         }
-        //    console.log('child: ' + this.ext.xtype)
-        //    console.log('this._items')
-        //    console.log(this._items)
-        //    console.log('this')
-        //    console.log(this)
-        //if(this._hostComponent == null) {
-        // console.log('root')
-        // var anyItems: any[] = []
-        // var elRefItems: any[] = []
-        // this._items.forEach(item => {anyItems.push(item)})
-        // this._elRefItems.forEach(item => {elRefItems.push(item)})
-        // for (var i in anyItems) {
-        //   var item = anyItems[i]
-        //   var elRefItem = elRefItems[i]
-        //   if (item.nativeElement != undefined) {
-        //     console.log('here')
-        //     this.ext.add({xtype: 'container',html: item.nativeElement})
-        //   }
-        //   else {
-        //     console.log('not supported')
-        //   }
-        // }
-        //}
-        //else {
         if (this._hostComponent != null) {
-            //console.log('_hostComponent: ')
-            //console.log(this._hostComponent)
-            //console.log('parent: ' + this._hostComponent.ext.xtype)
             /** @type {?} */
             var parentCmp = this._hostComponent.ext;
             /** @type {?} */
             var childCmp = this.ext;
             this.addTheChild(parentCmp, childCmp);
         }
-        return;
-        //        if (item.nativeElement != undefined) {
-        //          this.ext.add({xtype: 'container',html: item.nativeElement})
-        //        }
-        //        else {
-        //          var parentCmp = this.ext
-        //          var childCmp = item.ext
-        //          this.addTheChild(parentCmp,childCmp)
-        //        }
-        //    console.log('host')
-        //    console.log(this._hostComponent)
-        //    console.log('native')
-        //    console.log(this._nativeElement)
-        //    console.log('_items')
-        //    console.log(this._items)
-        //    console.log(this._items.length)
-        //     if (this._items.length > 0 && this._extChildren == true) {
-        //       console.error('cant have both native elements and ExtAngular elements as children')
-        //       return
-        //     }
-        //     else if (this._items.length > 0) {
-        //       console.error('do it')
-        //       if (this._items.length < 2) {
-        //         console.error('only 1 item')
-        //         console.log(this._hostComponent)
-        //         //console.log(this._items)
-        //       //  if (item.nativeElement != undefined) {
-        //       //    this.ext.add({xtype: 'container',html: item.nativeElement})
-        //       //  }
-        //       //  else {
-        //       //    var parentCmp = this.ext
-        //       //    var childCmp = item.ext
-        //       //    this.addTheChild(parentCmp,childCmp)
-        //       //  }
-        //         return
-        //       }
-        //       //console.log(this._items.length + ' items')
-        //       console.log('doing something')
-        //       var anyItems: any[] = []
-        //       var elRefItems: any[] = []
-        //       this._items.forEach(item => {anyItems.push(item)})
-        //       this._elRefItems.forEach(item => {elRefItems.push(item)})
-        //       var j: any = 0
-        //       for (var i in anyItems) {
-        //         if (j == 0) {j++;continue}
-        //         var item = anyItems[i]
-        //         var elRefItem = elRefItems[i]
-        //         if (item.nativeElement != undefined) {
-        // //          console.log('native')
-        // //          console.log('parent: ' + this.ext.xtype)
-        // //          console.log('child')
-        // //          console.log(item.nativeElement)
-        //           this.ext.add({xtype: 'container',html: item.nativeElement})
-        //         }
-        //         else {
-        // //          console.log('component')
-        // //          console.log('parent: ' + this.ext.xtype)
-        // //          console.log('child')
-        // //          console.log(elRefItem.nativeElement)
-        // //          console.log(elRefItem)
-        // //          console.log(item)
-        //           var parentCmp = this.ext
-        //           var childCmp = item.ext
-        //           this.addTheChild(parentCmp,childCmp)
-        //           //this.ext.add(item.ext)
-        //           //this.ext.add({xtype: 'container',html: elRefItem.nativeElement})
-        //         }
-        //       }
-        //       return
-        //     }
-        //     // if (this.ext != undefined && this.hostComponent != undefined) {
-        //     //   var parentxtype = this.hostComponent['ext'].xtype
-        //     //   var childxtype = this['ext'].xtype
-        //     //   var parentCmp = this.hostComponent['ext']
-        //     //   var childCmp = this['ext']
-        //     //   console.log('parent: ' + parentxtype + ', child: ' + childxtype)
-        //     //   this.hostComponent._extChildren = true
-        //     //   if (parentxtype === 'grid') {
-        //     //     if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
-        //     //       parentCmp.addColumn(childCmp)
-        //     //     }
-        //     //     else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
-        //     //       if (parentCmp.getHideHeaders() === false) {
-        //     //         //var j = parentCmp.items.items.length;
-        //     //         parentCmp.insert(1, childCmp);
-        //     //       }
-        //     //       else {
-        //     //         parentCmp.add(childCmp);
-        //     //       }
-        //     //     }
-        //     //     else {
-        //     //       console.log('??')
-        //     //     }
-        //     //   } else if (childxtype === 'tooltip') {
-        //     //     parentCmp.setTooltip(childCmp)
-        //     //   } else if (childxtype === 'plugin') {
-        //     //     parentCmp.setPlugin(childCmp)
-        //     //   } else if (parentxtype === 'button') {
-        //     //     if (childxtype === 'menu') {
-        //     //       parentCmp.setMenu(childCmp)
-        //     //     } else {
-        //     //       console.log('child not added')
-        //     //     }
-        //     //   } else if (childxtype === 'toolbar' && Ext.isClassic === true) {
-        //     //     parentCmp.addDockedItems(childCmp)
-        //     //   } else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
-        //     //     if (parentCmp.getHideHeaders() === false) {
-        //     //       //var j: any = parentCmp.items.items.length
-        //     //       //parentCmp.insert(j - 1, childCmp)
-        //     //       parentCmp.insert(1, childCmp)
-        //     //     } else {
-        //     //       parentCmp.add(childCmp)
-        //     //     }
-        //     //   } else if (parentCmp.add != undefined) {
-        //     //     parentCmp.add(childCmp)
-        //     //   } else {
-        //     //     console.log('child not added')
-        //     //   }
-        //     // }
-        //     // else if (this._nativeElement != undefined) {
-        //     //   console.log(this._nativeElement)
-        //     //   //this.ext.add({xtype: 'container',html: this._nativeElement})
-        //     // }
-        //     // else {
-        //     //   console.log('component')
-        //     //   //console.log(elRefItem)
-        //     //   //this.ext.add({xtype: 'container',html: this._nativeElement})
-        //     // }
-        //     //this['ready'].emit(parentCmp)
-        //     //this['ready'].emit(this)
+        //this['ready'].emit(parentCmp)
+        //this['ready'].emit(this)
     };
     /**
      * @param {?} parentCmp
@@ -457,10 +263,6 @@ var base = /** @class */ (function () {
                 return;
             }
         }
-        //      if (childxtype === 'searchfield') {
-        //        if (this.ext.initialConfig.align != undefined) {
-        //        }
-        //      }
         if (parentxtype === 'grid') {
             if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
                 parentCmp.addColumn(childCmp);
@@ -513,118 +315,6 @@ var base = /** @class */ (function () {
         }
     };
     /**
-     * @return {?}
-     */
-    base.prototype.baseAfterContentInitOrig = /**
-     * @return {?}
-     */
-    function () {
-        //console.log('\nbaseAfterContentInit')
-        if (this.items.length < 2) {
-            //console.log('1 item')
-            return;
-        }
-        //console.log(this.items.length + ' items')
-        /** @type {?} */
-        var anyItems = [];
-        /** @type {?} */
-        var elRefItems = [];
-        this.items.forEach(function (item) {
-            anyItems.push(item);
-        });
-        this.items2.forEach(function (item) {
-            elRefItems.push(item);
-        });
-        for (var i in anyItems) {
-            /** @type {?} */
-            var item = anyItems[i];
-            /** @type {?} */
-            var elRefItem = elRefItems[i];
-            if (item != this) {
-                if (item.ext != undefined) {
-                    //console.log('parent: ' + this.ext.xtype + ', child: ' + item.ext.xtype)
-                    /** @type {?} */
-                    var parentxtype = this['ext'].xtype;
-                    /** @type {?} */
-                    var childxtype = item['ext'].xtype;
-                    /** @type {?} */
-                    var parentCmp = this['ext'];
-                    /** @type {?} */
-                    var childCmp = item['ext'];
-                    if (parentxtype === 'grid' || parentxtype === 'lockedgrid') {
-                        if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
-                            parentCmp.addColumn(childCmp);
-                        }
-                        else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
-                            if (parentCmp.getHideHeaders() === false) {
-                                //var j = parentCmp.items.items.length;
-                                parentCmp.insert(1, childCmp);
-                            }
-                            else {
-                                parentCmp.add(childCmp);
-                            }
-                        }
-                    }
-                    else if (parentxtype === 'column') {
-                        if (childxtype === 'selectfield' || childxtype === 'textfield' || childxtype === 'numberfield' || childxtype === 'textareafield' || childxtype === 'hiddenfield' || childxtype === 'radiofield' || childxtype === 'filefield' || childxtype === 'checkboxfield' || childxtype === 'togglefield' || childxtype === 'fieldset') {
-                            parentCmp.setEditor(item.ext.initialConfig);
-                        }
-                        else if (parentCmp.add != undefined) {
-                            parentCmp.add(childCmp);
-                        }
-                    }
-                    else if (childxtype === 'tooltip') {
-                        parentCmp.setTooltip(childCmp);
-                    }
-                    else if (childxtype === 'plugin') {
-                        parentCmp.setPlugin(childCmp);
-                    }
-                    else if (parentxtype === 'button') {
-                        if (childxtype === 'menu') {
-                            parentCmp.setMenu(childCmp);
-                        }
-                        else {
-                            console.log('child not added');
-                        }
-                    }
-                    else if (childxtype === 'toolbar' && Ext.isClassic === true) {
-                        parentCmp.addDockedItems(childCmp);
-                    }
-                    else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
-                        if (parentCmp.getHideHeaders() === false) {
-                            //var j: any = parentCmp.items.items.length
-                            //parentCmp.insert(j - 1, childCmp)
-                            parentCmp.insert(1, childCmp);
-                        }
-                        else {
-                            parentCmp.add(childCmp);
-                        }
-                    }
-                    else if (parentCmp.add != undefined) {
-                        parentCmp.add(childCmp);
-                    }
-                    else {
-                        console.log('child not added');
-                    }
-                }
-                else if (item.nativeElement != undefined) {
-                    //console.log('native')
-                    this.ext.add({ xtype: 'container', html: item.nativeElement });
-                }
-                else {
-                    //console.log('component')
-                    //console.log(elRefItem)
-                    this.ext.add({ xtype: 'container', html: elRefItem.nativeElement });
-                }
-            }
-            // else {
-            //   console.log('same item')
-            // }
-        }
-        //this['ready'].emit(parentCmp)
-        this['ready'].emit(this);
-    };
-    /**
      * @param {?} changes
      * @return {?}
      */
@@ -648,18 +338,7 @@ var base = /** @class */ (function () {
                 /** @type {?} */
                 var capPropName = propName.charAt(0).toUpperCase() + propName.slice(1);
                 /** @type {?} */
-                var setFunction = 'set' + capPropName
-                //        console.log(this)
-                //        console.log(this.ext.xtype)
-                //        console.log(propName)
-                //        console.log(setFunction)
-                //        console.log(this.ext[setFunction])
-                ;
-                //        console.log(this)
-                //        console.log(this.ext.xtype)
-                //        console.log(propName)
-                //        console.log(setFunction)
-                //        console.log(this.ext[setFunction])
+                var setFunction = 'set' + capPropName;
                 if (this.ext[setFunction] != undefined) {
                     this.ext[setFunction](val);
                 }
@@ -676,9 +355,7 @@ var base = /** @class */ (function () {
         //console.log(`OnChanges: ${changesMsgs.join('; ')}`)
     };
     base.propDecorators = {
-        _extroute: [{ type: ContentChild, args: ['extroute',] }],
-        items: [{ type: ContentChildren, args: ['item',] }],
-        items2: [{ type: ContentChildren, args: ['item', { read: ElementRef },] }]
+        _extroute: [{ type: ContentChild, args: ['extroute',] }]
     };
     return base;
 }());
@@ -1159,25 +836,19 @@ var ExtActionsheetComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,actionsheetMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,actionsheetMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtActionsheetComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,actionsheetMetaData,hostComponent)}
+    ExtActionsheetComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(actionsheetMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(actionsheetMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtActionsheetComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtActionsheetComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -1557,25 +1228,19 @@ var ExtAudioComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,audioMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,audioMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtAudioComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,audioMetaData,hostComponent)}
+    ExtAudioComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(audioMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(audioMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtAudioComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtAudioComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -1973,25 +1638,19 @@ var ExtButtonComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,buttonMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,buttonMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtButtonComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,buttonMetaData,hostComponent)}
+    ExtButtonComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(buttonMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(buttonMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtButtonComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtButtonComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -2357,25 +2016,19 @@ var ExtCalendar_eventComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_eventMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_eventMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendar_eventComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_eventMetaData,hostComponent)}
+    ExtCalendar_eventComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendar_eventMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendar_eventMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendar_eventComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendar_eventComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -2933,25 +2586,19 @@ var ExtCalendar_form_addComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_form_addMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_form_addMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendar_form_addComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_form_addMetaData,hostComponent)}
+    ExtCalendar_form_addComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendar_form_addMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendar_form_addMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendar_form_addComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendar_form_addComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -3475,25 +3122,19 @@ var ExtCalendar_calendar_pickerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_calendar_pickerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_calendar_pickerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendar_calendar_pickerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_calendar_pickerMetaData,hostComponent)}
+    ExtCalendar_calendar_pickerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendar_calendar_pickerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendar_calendar_pickerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendar_calendar_pickerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendar_calendar_pickerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -4051,25 +3692,19 @@ var ExtCalendar_form_editComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_form_editMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_form_editMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendar_form_editComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_form_editMetaData,hostComponent)}
+    ExtCalendar_form_editComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendar_form_editMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendar_form_editMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendar_form_editComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendar_form_editComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -4593,25 +4228,19 @@ var ExtCalendar_timefieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_timefieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_timefieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendar_timefieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_timefieldMetaData,hostComponent)}
+    ExtCalendar_timefieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendar_timefieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendar_timefieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendar_timefieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendar_timefieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -4969,25 +4598,19 @@ var ExtCalendar_daysheaderComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysheaderMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysheaderMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendar_daysheaderComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysheaderMetaData,hostComponent)}
+    ExtCalendar_daysheaderComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendar_daysheaderMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendar_daysheaderMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendar_daysheaderComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendar_daysheaderComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -5345,25 +4968,19 @@ var ExtCalendar_weeksheaderComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksheaderMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksheaderMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendar_weeksheaderComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksheaderMetaData,hostComponent)}
+    ExtCalendar_weeksheaderComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendar_weeksheaderMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendar_weeksheaderMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendar_weeksheaderComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendar_weeksheaderComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -5889,25 +5506,19 @@ var ExtCalendar_listComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_listMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_listMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendar_listComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_listMetaData,hostComponent)}
+    ExtCalendar_listComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendar_listMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendar_listMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendar_listComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendar_listComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -6467,25 +6078,19 @@ var ExtCalendar_dayComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_dayMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_dayMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendar_dayComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_dayMetaData,hostComponent)}
+    ExtCalendar_dayComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendar_dayMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendar_dayMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendar_dayComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendar_dayComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -7045,25 +6650,19 @@ var ExtCalendar_daysComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendar_daysComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysMetaData,hostComponent)}
+    ExtCalendar_daysComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendar_daysMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendar_daysMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendar_daysComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendar_daysComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -7619,25 +7218,19 @@ var ExtCalendar_monthComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_monthMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_monthMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendar_monthComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_monthMetaData,hostComponent)}
+    ExtCalendar_monthComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendar_monthMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendar_monthMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendar_monthComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendar_monthComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -8163,25 +7756,19 @@ var ExtCalendarComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendarMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendarMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendarComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendarMetaData,hostComponent)}
+    ExtCalendarComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendarMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendarMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendarComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendarComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -8743,25 +8330,19 @@ var ExtCalendar_weekComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weekMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weekMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendar_weekComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weekMetaData,hostComponent)}
+    ExtCalendar_weekComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendar_weekMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendar_weekMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendar_weekComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendar_weekComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -9317,25 +8898,19 @@ var ExtCalendar_weeksComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendar_weeksComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksMetaData,hostComponent)}
+    ExtCalendar_weeksComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendar_weeksMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendar_weeksMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendar_weeksComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendar_weeksComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -9751,25 +9326,19 @@ var ExtCalendar_dayviewComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_dayviewMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_dayviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendar_dayviewComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_dayviewMetaData,hostComponent)}
+    ExtCalendar_dayviewComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendar_dayviewMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendar_dayviewMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendar_dayviewComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendar_dayviewComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -10185,25 +9754,19 @@ var ExtCalendar_daysviewComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysviewMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendar_daysviewComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_daysviewMetaData,hostComponent)}
+    ExtCalendar_daysviewComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendar_daysviewMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendar_daysviewMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendar_daysviewComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendar_daysviewComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -10617,25 +10180,19 @@ var ExtCalendar_monthviewComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_monthviewMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_monthviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendar_monthviewComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_monthviewMetaData,hostComponent)}
+    ExtCalendar_monthviewComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendar_monthviewMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendar_monthviewMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendar_monthviewComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendar_monthviewComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -10711,25 +10268,19 @@ var ExtCalendar_multiviewComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_multiviewMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_multiviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendar_multiviewComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_multiviewMetaData,hostComponent)}
+    ExtCalendar_multiviewComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendar_multiviewMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendar_multiviewMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendar_multiviewComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendar_multiviewComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -11147,25 +10698,19 @@ var ExtCalendar_weekviewComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weekviewMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weekviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendar_weekviewComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weekviewMetaData,hostComponent)}
+    ExtCalendar_weekviewComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendar_weekviewMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendar_weekviewMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendar_weekviewComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendar_weekviewComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -11579,25 +11124,19 @@ var ExtCalendar_weeksviewComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksviewMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCalendar_weeksviewComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,calendar_weeksviewMetaData,hostComponent)}
+    ExtCalendar_weeksviewComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(calendar_weeksviewMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(calendar_weeksviewMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCalendar_weeksviewComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCalendar_weeksviewComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -12005,25 +11544,19 @@ var ExtCarouselComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,carouselMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,carouselMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCarouselComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,carouselMetaData,hostComponent)}
+    ExtCarouselComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(carouselMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(carouselMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCarouselComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCarouselComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -12157,25 +11690,19 @@ var ExtAxis3dComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,axis3dMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,axis3dMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtAxis3dComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,axis3dMetaData,hostComponent)}
+    ExtAxis3dComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(axis3dMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(axis3dMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtAxis3dComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtAxis3dComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -12669,25 +12196,19 @@ var ExtCartesianComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,cartesianMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,cartesianMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCartesianComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,cartesianMetaData,hostComponent)}
+    ExtCartesianComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(cartesianMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(cartesianMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCartesianComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCartesianComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -13181,25 +12702,19 @@ var ExtChartComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chartMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chartMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtChartComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chartMetaData,hostComponent)}
+    ExtChartComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(chartMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(chartMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtChartComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtChartComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -13267,25 +12782,19 @@ var ExtInteractionComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,interactionMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,interactionMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtInteractionComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,interactionMetaData,hostComponent)}
+    ExtInteractionComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(interactionMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(interactionMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtInteractionComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtInteractionComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -13813,25 +13322,19 @@ var ExtLegendComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,legendMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,legendMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtLegendComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,legendMetaData,hostComponent)}
+    ExtLegendComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(legendMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(legendMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtLegendComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtLegendComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -14239,25 +13742,19 @@ var ExtChartnavigatorComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chartnavigatorMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chartnavigatorMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtChartnavigatorComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chartnavigatorMetaData,hostComponent)}
+    ExtChartnavigatorComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(chartnavigatorMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(chartnavigatorMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtChartnavigatorComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtChartnavigatorComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -14753,25 +14250,19 @@ var ExtPolarComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,polarMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,polarMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPolarComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,polarMetaData,hostComponent)}
+    ExtPolarComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(polarMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(polarMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPolarComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPolarComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -15261,25 +14752,19 @@ var ExtSpacefillingComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spacefillingMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spacefillingMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSpacefillingComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spacefillingMetaData,hostComponent)}
+    ExtSpacefillingComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(spacefillingMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(spacefillingMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSpacefillingComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSpacefillingComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -15637,25 +15122,19 @@ var ExtChipComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chipMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chipMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtChipComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chipMetaData,hostComponent)}
+    ExtChipComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(chipMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(chipMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtChipComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtChipComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -16001,25 +15480,19 @@ var ExtComponentComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,componentMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,componentMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtComponentComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,componentMetaData,hostComponent)}
+    ExtComponentComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(componentMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(componentMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtComponentComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtComponentComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -16423,25 +15896,19 @@ var ExtContainerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,containerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,containerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtContainerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,containerMetaData,hostComponent)}
+    ExtContainerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(containerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(containerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtContainerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtContainerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -16801,25 +16268,19 @@ var ExtD3_canvasComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_canvasMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_canvasMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtD3_canvasComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_canvasMetaData,hostComponent)}
+    ExtD3_canvasComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(d3_canvasMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(d3_canvasMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtD3_canvasComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtD3_canvasComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -17193,25 +16654,19 @@ var ExtD3_heatmapComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_heatmapMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_heatmapMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtD3_heatmapComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_heatmapMetaData,hostComponent)}
+    ExtD3_heatmapComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(d3_heatmapMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(d3_heatmapMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtD3_heatmapComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtD3_heatmapComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -17615,25 +17070,19 @@ var ExtD3_packComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_packMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_packMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtD3_packComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_packMetaData,hostComponent)}
+    ExtD3_packComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(d3_packMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(d3_packMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtD3_packComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtD3_packComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -18033,25 +17482,19 @@ var ExtD3_partitionComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_partitionMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_partitionMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtD3_partitionComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_partitionMetaData,hostComponent)}
+    ExtD3_partitionComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(d3_partitionMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(d3_partitionMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtD3_partitionComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtD3_partitionComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -18455,25 +17898,19 @@ var ExtD3_sunburstComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_sunburstMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_sunburstMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtD3_sunburstComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_sunburstMetaData,hostComponent)}
+    ExtD3_sunburstComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(d3_sunburstMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(d3_sunburstMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtD3_sunburstComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtD3_sunburstComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -18879,25 +18316,19 @@ var ExtD3_treeComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_treeMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_treeMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtD3_treeComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_treeMetaData,hostComponent)}
+    ExtD3_treeComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(d3_treeMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(d3_treeMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtD3_treeComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtD3_treeComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -19303,25 +18734,19 @@ var ExtD3_horizontal_treeComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_horizontal_treeMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_horizontal_treeMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtD3_horizontal_treeComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_horizontal_treeMetaData,hostComponent)}
+    ExtD3_horizontal_treeComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(d3_horizontal_treeMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(d3_horizontal_treeMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtD3_horizontal_treeComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtD3_horizontal_treeComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -19731,25 +19156,19 @@ var ExtD3_treemapComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_treemapMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_treemapMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtD3_treemapComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_treemapMetaData,hostComponent)}
+    ExtD3_treemapComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(d3_treemapMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(d3_treemapMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtD3_treemapComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtD3_treemapComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -20111,25 +19530,19 @@ var ExtD3_svgComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_svgMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_svgMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtD3_svgComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3_svgMetaData,hostComponent)}
+    ExtD3_svgComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(d3_svgMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(d3_svgMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtD3_svgComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtD3_svgComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -20491,25 +19904,19 @@ var ExtD3Component = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3MetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3MetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtD3Component.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,d3MetaData,hostComponent)}
+    ExtD3Component.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(d3MetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(d3MetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtD3Component.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtD3Component.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -21101,25 +20508,19 @@ var ExtBoundlistComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,boundlistMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,boundlistMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtBoundlistComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,boundlistMetaData,hostComponent)}
+    ExtBoundlistComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(boundlistMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(boundlistMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtBoundlistComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtBoundlistComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -21659,25 +21060,19 @@ var ExtChipviewComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chipviewMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chipviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtChipviewComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chipviewMetaData,hostComponent)}
+    ExtChipviewComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(chipviewMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(chipviewMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtChipviewComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtChipviewComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -22205,25 +21600,19 @@ var ExtComponentdataviewComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,componentdataviewMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,componentdataviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtComponentdataviewComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,componentdataviewMetaData,hostComponent)}
+    ExtComponentdataviewComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(componentdataviewMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(componentdataviewMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtComponentdataviewComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtComponentdataviewComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -22633,25 +22022,19 @@ var ExtDataitemComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dataitemMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dataitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtDataitemComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dataitemMetaData,hostComponent)}
+    ExtDataitemComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(dataitemMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(dataitemMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtDataitemComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtDataitemComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -23175,25 +22558,19 @@ var ExtDataviewComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dataviewMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dataviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtDataviewComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dataviewMetaData,hostComponent)}
+    ExtDataviewComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(dataviewMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(dataviewMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtDataviewComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtDataviewComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -23539,25 +22916,19 @@ var ExtEmptytextComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,emptytextMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,emptytextMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtEmptytextComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,emptytextMetaData,hostComponent)}
+    ExtEmptytextComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(emptytextMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(emptytextMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtEmptytextComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtEmptytextComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -23923,25 +23294,19 @@ var ExtIndexbarComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,indexbarMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,indexbarMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtIndexbarComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,indexbarMetaData,hostComponent)}
+    ExtIndexbarComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(indexbarMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(indexbarMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtIndexbarComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtIndexbarComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -24297,25 +23662,19 @@ var ExtItemheaderComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,itemheaderMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,itemheaderMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtItemheaderComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,itemheaderMetaData,hostComponent)}
+    ExtItemheaderComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(itemheaderMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(itemheaderMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtItemheaderComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtItemheaderComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -24907,25 +24266,19 @@ var ExtListComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtListComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listMetaData,hostComponent)}
+    ExtListComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(listMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(listMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtListComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtListComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -25343,25 +24696,19 @@ var ExtListitemComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listitemMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtListitemComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listitemMetaData,hostComponent)}
+    ExtListitemComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(listitemMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(listitemMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtListitemComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtListitemComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -25773,25 +25120,19 @@ var ExtListswiperitemComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listswiperitemMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listswiperitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtListswiperitemComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listswiperitemMetaData,hostComponent)}
+    ExtListswiperitemComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(listswiperitemMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(listswiperitemMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtListswiperitemComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtListswiperitemComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -26213,25 +25554,19 @@ var ExtListswiperstepperComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listswiperstepperMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listswiperstepperMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtListswiperstepperComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,listswiperstepperMetaData,hostComponent)}
+    ExtListswiperstepperComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(listswiperstepperMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(listswiperstepperMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtListswiperstepperComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtListswiperstepperComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -26697,25 +26032,19 @@ var ExtNestedlistComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,nestedlistMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,nestedlistMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtNestedlistComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,nestedlistMetaData,hostComponent)}
+    ExtNestedlistComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(nestedlistMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(nestedlistMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtNestedlistComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtNestedlistComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -27081,25 +26410,19 @@ var ExtPullrefreshbarComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pullrefreshbarMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pullrefreshbarMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPullrefreshbarComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pullrefreshbarMetaData,hostComponent)}
+    ExtPullrefreshbarComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(pullrefreshbarMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(pullrefreshbarMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPullrefreshbarComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPullrefreshbarComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -27451,25 +26774,19 @@ var ExtPullrefreshspinnerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pullrefreshspinnerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pullrefreshspinnerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPullrefreshspinnerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pullrefreshspinnerMetaData,hostComponent)}
+    ExtPullrefreshspinnerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(pullrefreshspinnerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(pullrefreshspinnerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPullrefreshspinnerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPullrefreshspinnerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -27825,25 +27142,19 @@ var ExtSimplelistitemComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,simplelistitemMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,simplelistitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSimplelistitemComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,simplelistitemMetaData,hostComponent)}
+    ExtSimplelistitemComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(simplelistitemMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(simplelistitemMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSimplelistitemComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSimplelistitemComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -28361,25 +27672,19 @@ var ExtDialogComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dialogMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dialogMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtDialogComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,dialogMetaData,hostComponent)}
+    ExtDialogComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(dialogMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(dialogMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtDialogComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtDialogComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -28897,25 +28202,19 @@ var ExtWindowComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,windowMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,windowMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtWindowComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,windowMetaData,hostComponent)}
+    ExtWindowComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(windowMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(windowMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtWindowComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtWindowComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -29349,25 +28648,19 @@ var ExtDrawComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,drawMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,drawMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtDrawComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,drawMetaData,hostComponent)}
+    ExtDrawComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(drawMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(drawMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtDrawComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtDrawComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -29565,25 +28858,19 @@ var ExtSurfaceComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,surfaceMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,surfaceMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSurfaceComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,surfaceMetaData,hostComponent)}
+    ExtSurfaceComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(surfaceMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(surfaceMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSurfaceComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSurfaceComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -30031,25 +29318,19 @@ var ExtEditorComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,editorMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,editorMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtEditorComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,editorMetaData,hostComponent)}
+    ExtEditorComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(editorMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(editorMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtEditorComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtEditorComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -30477,25 +29758,19 @@ var ExtCheckboxComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkboxMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkboxMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCheckboxComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkboxMetaData,hostComponent)}
+    ExtCheckboxComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(checkboxMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(checkboxMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCheckboxComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCheckboxComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -30923,25 +30198,19 @@ var ExtCheckboxfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkboxfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkboxfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCheckboxfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkboxfieldMetaData,hostComponent)}
+    ExtCheckboxfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(checkboxfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(checkboxfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCheckboxfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCheckboxfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -31497,25 +30766,19 @@ var ExtComboboxComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,comboboxMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,comboboxMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtComboboxComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,comboboxMetaData,hostComponent)}
+    ExtComboboxComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(comboboxMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(comboboxMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtComboboxComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtComboboxComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -32071,25 +31334,19 @@ var ExtComboboxfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,comboboxfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,comboboxfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtComboboxfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,comboboxfieldMetaData,hostComponent)}
+    ExtComboboxfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(comboboxfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(comboboxfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtComboboxfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtComboboxfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -32509,25 +31766,19 @@ var ExtContainerfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,containerfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,containerfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtContainerfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,containerfieldMetaData,hostComponent)}
+    ExtContainerfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(containerfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(containerfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtContainerfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtContainerfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -32947,25 +32198,19 @@ var ExtFieldcontainerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldcontainerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldcontainerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtFieldcontainerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldcontainerMetaData,hostComponent)}
+    ExtFieldcontainerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(fieldcontainerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(fieldcontainerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtFieldcontainerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtFieldcontainerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -33449,25 +32694,19 @@ var ExtDatefieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datefieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datefieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtDatefieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datefieldMetaData,hostComponent)}
+    ExtDatefieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(datefieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(datefieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtDatefieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtDatefieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -33951,25 +33190,19 @@ var ExtDatepickerfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickerfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickerfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtDatepickerfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickerfieldMetaData,hostComponent)}
+    ExtDatepickerfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(datepickerfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(datepickerfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtDatepickerfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtDatepickerfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -34453,25 +33686,19 @@ var ExtDatepickernativefieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickernativefieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickernativefieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtDatepickernativefieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickernativefieldMetaData,hostComponent)}
+    ExtDatepickernativefieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(datepickernativefieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(datepickernativefieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtDatepickernativefieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtDatepickernativefieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -34889,25 +34116,19 @@ var ExtDisplayfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,displayfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,displayfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtDisplayfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,displayfieldMetaData,hostComponent)}
+    ExtDisplayfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(displayfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(displayfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtDisplayfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtDisplayfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -35361,25 +34582,19 @@ var ExtEmailfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,emailfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,emailfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtEmailfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,emailfieldMetaData,hostComponent)}
+    ExtEmailfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(emailfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(emailfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtEmailfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtEmailfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -35787,25 +35002,19 @@ var ExtFieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtFieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldMetaData,hostComponent)}
+    ExtFieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(fieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(fieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtFieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtFieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -36265,25 +35474,19 @@ var ExtFilefieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,filefieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,filefieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtFilefieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,filefieldMetaData,hostComponent)}
+    ExtFilefieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(filefieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(filefieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtFilefieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtFilefieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -36689,25 +35892,19 @@ var ExtFilebuttonComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,filebuttonMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,filebuttonMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtFilebuttonComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,filebuttonMetaData,hostComponent)}
+    ExtFilebuttonComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(filebuttonMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(filebuttonMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtFilebuttonComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtFilebuttonComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -37123,25 +36320,19 @@ var ExtHiddenfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,hiddenfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,hiddenfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtHiddenfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,hiddenfieldMetaData,hostComponent)}
+    ExtHiddenfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(hiddenfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(hiddenfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtHiddenfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtHiddenfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -37557,25 +36748,19 @@ var ExtInputfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,inputfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,inputfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtInputfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,inputfieldMetaData,hostComponent)}
+    ExtInputfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(inputfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(inputfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtInputfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtInputfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -38043,25 +37228,19 @@ var ExtNumberfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numberfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numberfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtNumberfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numberfieldMetaData,hostComponent)}
+    ExtNumberfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(numberfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(numberfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtNumberfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtNumberfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -38565,25 +37744,19 @@ var ExtFieldpanelComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldpanelMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldpanelMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtFieldpanelComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldpanelMetaData,hostComponent)}
+    ExtFieldpanelComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(fieldpanelMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(fieldpanelMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtFieldpanelComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtFieldpanelComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -39041,25 +38214,19 @@ var ExtPasswordfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,passwordfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,passwordfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPasswordfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,passwordfieldMetaData,hostComponent)}
+    ExtPasswordfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(passwordfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(passwordfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPasswordfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPasswordfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -39535,25 +38702,19 @@ var ExtPickerfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPickerfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerfieldMetaData,hostComponent)}
+    ExtPickerfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(pickerfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(pickerfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPickerfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPickerfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -39981,25 +39142,19 @@ var ExtRadioComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,radioMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,radioMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtRadioComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,radioMetaData,hostComponent)}
+    ExtRadioComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(radioMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(radioMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtRadioComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtRadioComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -40427,25 +39582,19 @@ var ExtRadiofieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,radiofieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,radiofieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtRadiofieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,radiofieldMetaData,hostComponent)}
+    ExtRadiofieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(radiofieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(radiofieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtRadiofieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtRadiofieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -40899,25 +40048,19 @@ var ExtSearchfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,searchfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,searchfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSearchfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,searchfieldMetaData,hostComponent)}
+    ExtSearchfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(searchfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(searchfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSearchfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSearchfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -41441,25 +40584,19 @@ var ExtSelectfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSelectfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectfieldMetaData,hostComponent)}
+    ExtSelectfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(selectfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(selectfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSelectfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSelectfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -41893,25 +41030,19 @@ var ExtSinglesliderfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,singlesliderfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,singlesliderfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSinglesliderfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,singlesliderfieldMetaData,hostComponent)}
+    ExtSinglesliderfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(singlesliderfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(singlesliderfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSinglesliderfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSinglesliderfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -42345,25 +41476,19 @@ var ExtSliderfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sliderfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sliderfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSliderfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sliderfieldMetaData,hostComponent)}
+    ExtSliderfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(sliderfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(sliderfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSliderfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSliderfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -42845,25 +41970,19 @@ var ExtSpinnerfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spinnerfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spinnerfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSpinnerfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spinnerfieldMetaData,hostComponent)}
+    ExtSpinnerfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(spinnerfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(spinnerfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSpinnerfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSpinnerfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -43317,25 +42436,19 @@ var ExtTextfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTextfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textfieldMetaData,hostComponent)}
+    ExtTextfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(textfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(textfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTextfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTextfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -43791,25 +42904,19 @@ var ExtTextareafieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textareafieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textareafieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTextareafieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textareafieldMetaData,hostComponent)}
+    ExtTextareafieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(textareafieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(textareafieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTextareafieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTextareafieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -44289,25 +43396,19 @@ var ExtTimefieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timefieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timefieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTimefieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timefieldMetaData,hostComponent)}
+    ExtTimefieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(timefieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(timefieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTimefieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTimefieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -44745,25 +43846,19 @@ var ExtTogglefieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,togglefieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,togglefieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTogglefieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,togglefieldMetaData,hostComponent)}
+    ExtTogglefieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(togglefieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(togglefieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTogglefieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTogglefieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -44969,25 +44064,19 @@ var ExtCleartriggerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,cleartriggerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,cleartriggerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCleartriggerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,cleartriggerMetaData,hostComponent)}
+    ExtCleartriggerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(cleartriggerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(cleartriggerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCleartriggerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCleartriggerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -45193,25 +44282,19 @@ var ExtDatetriggerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datetriggerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datetriggerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtDatetriggerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datetriggerMetaData,hostComponent)}
+    ExtDatetriggerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(datetriggerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(datetriggerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtDatetriggerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtDatetriggerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -45417,25 +44500,19 @@ var ExtExpandtriggerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,expandtriggerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,expandtriggerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtExpandtriggerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,expandtriggerMetaData,hostComponent)}
+    ExtExpandtriggerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(expandtriggerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(expandtriggerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtExpandtriggerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtExpandtriggerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -45647,25 +44724,19 @@ var ExtMenutriggerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menutriggerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menutriggerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtMenutriggerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menutriggerMetaData,hostComponent)}
+    ExtMenutriggerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(menutriggerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(menutriggerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtMenutriggerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtMenutriggerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -45871,25 +44942,19 @@ var ExtRevealtriggerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,revealtriggerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,revealtriggerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtRevealtriggerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,revealtriggerMetaData,hostComponent)}
+    ExtRevealtriggerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(revealtriggerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(revealtriggerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtRevealtriggerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtRevealtriggerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -46095,25 +45160,19 @@ var ExtSpindowntriggerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spindowntriggerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spindowntriggerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSpindowntriggerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spindowntriggerMetaData,hostComponent)}
+    ExtSpindowntriggerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(spindowntriggerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(spindowntriggerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSpindowntriggerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSpindowntriggerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -46319,25 +45378,19 @@ var ExtSpinuptriggerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spinuptriggerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spinuptriggerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSpinuptriggerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spinuptriggerMetaData,hostComponent)}
+    ExtSpinuptriggerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(spinuptriggerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(spinuptriggerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSpinuptriggerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSpinuptriggerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -46543,25 +45596,19 @@ var ExtTimetriggerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timetriggerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timetriggerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTimetriggerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timetriggerMetaData,hostComponent)}
+    ExtTimetriggerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(timetriggerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(timetriggerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTimetriggerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTimetriggerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -46767,25 +45814,19 @@ var ExtTriggerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,triggerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,triggerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTriggerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,triggerMetaData,hostComponent)}
+    ExtTriggerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(triggerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(triggerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTriggerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTriggerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -47239,25 +46280,19 @@ var ExtUrlfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,urlfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,urlfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtUrlfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,urlfieldMetaData,hostComponent)}
+    ExtUrlfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(urlfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(urlfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtUrlfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtUrlfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -47669,25 +46704,19 @@ var ExtFieldsetComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldsetMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldsetMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtFieldsetComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,fieldsetMetaData,hostComponent)}
+    ExtFieldsetComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(fieldsetMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(fieldsetMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtFieldsetComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtFieldsetComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -48209,25 +47238,19 @@ var ExtFormpanelComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,formpanelMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,formpanelMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtFormpanelComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,formpanelMetaData,hostComponent)}
+    ExtFormpanelComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(formpanelMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(formpanelMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtFormpanelComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtFormpanelComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -48437,25 +47460,19 @@ var ExtGridcellbaseComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcellbaseMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcellbaseMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtGridcellbaseComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcellbaseMetaData,hostComponent)}
+    ExtGridcellbaseComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(gridcellbaseMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(gridcellbaseMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtGridcellbaseComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtGridcellbaseComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -48677,25 +47694,19 @@ var ExtBooleancellComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,booleancellMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,booleancellMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtBooleancellComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,booleancellMetaData,hostComponent)}
+    ExtBooleancellComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(booleancellMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(booleancellMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtBooleancellComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtBooleancellComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -48919,25 +47930,19 @@ var ExtGridcellComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcellMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcellMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtGridcellComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcellMetaData,hostComponent)}
+    ExtGridcellComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(gridcellMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(gridcellMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtGridcellComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtGridcellComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -49147,25 +48152,19 @@ var ExtCheckcellComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkcellMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkcellMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCheckcellComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkcellMetaData,hostComponent)}
+    ExtCheckcellComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(checkcellMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(checkcellMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCheckcellComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCheckcellComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -49383,25 +48382,19 @@ var ExtDatecellComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datecellMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datecellMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtDatecellComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datecellMetaData,hostComponent)}
+    ExtDatecellComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(datecellMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(datecellMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtDatecellComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtDatecellComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -49619,25 +48612,19 @@ var ExtNumbercellComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numbercellMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numbercellMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtNumbercellComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numbercellMetaData,hostComponent)}
+    ExtNumbercellComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(numbercellMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(numbercellMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtNumbercellComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtNumbercellComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -49855,25 +48842,19 @@ var ExtRownumberercellComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rownumberercellMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rownumberercellMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtRownumberercellComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rownumberercellMetaData,hostComponent)}
+    ExtRownumberercellComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(rownumberercellMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(rownumberercellMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtRownumberercellComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtRownumberercellComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -50089,25 +49070,19 @@ var ExtTextcellComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textcellMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textcellMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTextcellComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textcellMetaData,hostComponent)}
+    ExtTextcellComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(textcellMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(textcellMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTextcellComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTextcellComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -50337,25 +49312,19 @@ var ExtTreecellComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treecellMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treecellMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTreecellComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treecellMetaData,hostComponent)}
+    ExtTreecellComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(treecellMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(treecellMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTreecellComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTreecellComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -50569,25 +49538,19 @@ var ExtWidgetcellComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,widgetcellMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,widgetcellMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtWidgetcellComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,widgetcellMetaData,hostComponent)}
+    ExtWidgetcellComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(widgetcellMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(widgetcellMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtWidgetcellComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtWidgetcellComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -51037,25 +50000,19 @@ var ExtCelleditorComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,celleditorMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,celleditorMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCelleditorComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,celleditorMetaData,hostComponent)}
+    ExtCelleditorComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(celleditorMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(celleditorMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCelleditorComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCelleditorComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -51553,25 +50510,19 @@ var ExtBooleancolumnComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,booleancolumnMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,booleancolumnMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtBooleancolumnComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,booleancolumnMetaData,hostComponent)}
+    ExtBooleancolumnComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(booleancolumnMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(booleancolumnMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtBooleancolumnComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtBooleancolumnComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -52073,25 +51024,19 @@ var ExtCheckcolumnComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkcolumnMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkcolumnMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtCheckcolumnComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,checkcolumnMetaData,hostComponent)}
+    ExtCheckcolumnComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(checkcolumnMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(checkcolumnMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtCheckcolumnComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtCheckcolumnComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -52583,25 +51528,19 @@ var ExtGridcolumnComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcolumnMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcolumnMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtGridcolumnComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcolumnMetaData,hostComponent)}
+    ExtGridcolumnComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(gridcolumnMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(gridcolumnMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtGridcolumnComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtGridcolumnComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -53093,25 +52032,19 @@ var ExtColumnComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,columnMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,columnMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtColumnComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,columnMetaData,hostComponent)}
+    ExtColumnComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(columnMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(columnMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtColumnComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtColumnComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -53603,25 +52536,19 @@ var ExtTemplatecolumnComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,templatecolumnMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,templatecolumnMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTemplatecolumnComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,templatecolumnMetaData,hostComponent)}
+    ExtTemplatecolumnComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(templatecolumnMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(templatecolumnMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTemplatecolumnComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTemplatecolumnComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -54115,25 +53042,19 @@ var ExtDatecolumnComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datecolumnMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datecolumnMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtDatecolumnComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datecolumnMetaData,hostComponent)}
+    ExtDatecolumnComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(datecolumnMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(datecolumnMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtDatecolumnComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtDatecolumnComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -54627,25 +53548,19 @@ var ExtNumbercolumnComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numbercolumnMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numbercolumnMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtNumbercolumnComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,numbercolumnMetaData,hostComponent)}
+    ExtNumbercolumnComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(numbercolumnMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(numbercolumnMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtNumbercolumnComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtNumbercolumnComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -55139,25 +54054,19 @@ var ExtRownumbererComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rownumbererMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rownumbererMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtRownumbererComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rownumbererMetaData,hostComponent)}
+    ExtRownumbererComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(rownumbererMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(rownumbererMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtRownumbererComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtRownumbererComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -55659,25 +54568,19 @@ var ExtSelectioncolumnComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectioncolumnMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectioncolumnMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSelectioncolumnComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectioncolumnMetaData,hostComponent)}
+    ExtSelectioncolumnComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(selectioncolumnMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(selectioncolumnMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSelectioncolumnComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSelectioncolumnComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -56169,25 +55072,19 @@ var ExtTextcolumnComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textcolumnMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textcolumnMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTextcolumnComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,textcolumnMetaData,hostComponent)}
+    ExtTextcolumnComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(textcolumnMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(textcolumnMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTextcolumnComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTextcolumnComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -56679,25 +55576,19 @@ var ExtTreecolumnComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treecolumnMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treecolumnMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTreecolumnComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treecolumnMetaData,hostComponent)}
+    ExtTreecolumnComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(treecolumnMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(treecolumnMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTreecolumnComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTreecolumnComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -57339,25 +56230,19 @@ var ExtGridComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtGridComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridMetaData,hostComponent)}
+    ExtGridComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(gridMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(gridMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtGridComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtGridComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -57771,25 +56656,19 @@ var ExtHeadercontainerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,headercontainerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,headercontainerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtHeadercontainerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,headercontainerMetaData,hostComponent)}
+    ExtHeadercontainerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(headercontainerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(headercontainerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtHeadercontainerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtHeadercontainerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -58215,25 +57094,19 @@ var ExtLockedgridComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,lockedgridMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,lockedgridMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtLockedgridComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,lockedgridMetaData,hostComponent)}
+    ExtLockedgridComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(lockedgridMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(lockedgridMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtLockedgridComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtLockedgridComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -58727,25 +57600,19 @@ var ExtLockedgridregionComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,lockedgridregionMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,lockedgridregionMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtLockedgridregionComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,lockedgridregionMetaData,hostComponent)}
+    ExtLockedgridregionComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(lockedgridregionMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(lockedgridregionMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtLockedgridregionComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtLockedgridregionComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -59125,25 +57992,19 @@ var ExtGridcolumnsmenuComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcolumnsmenuMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcolumnsmenuMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtGridcolumnsmenuComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridcolumnsmenuMetaData,hostComponent)}
+    ExtGridcolumnsmenuComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(gridcolumnsmenuMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(gridcolumnsmenuMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtGridcolumnsmenuComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtGridcolumnsmenuComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -59523,25 +58384,19 @@ var ExtGridgroupbythismenuitemComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridgroupbythismenuitemMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridgroupbythismenuitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtGridgroupbythismenuitemComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridgroupbythismenuitemMetaData,hostComponent)}
+    ExtGridgroupbythismenuitemComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(gridgroupbythismenuitemMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(gridgroupbythismenuitemMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtGridgroupbythismenuitemComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtGridgroupbythismenuitemComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -59935,25 +58790,19 @@ var ExtGridshowingroupsmenuitemComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridshowingroupsmenuitemMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridshowingroupsmenuitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtGridshowingroupsmenuitemComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridshowingroupsmenuitemMetaData,hostComponent)}
+    ExtGridshowingroupsmenuitemComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(gridshowingroupsmenuitemMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(gridshowingroupsmenuitemMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtGridshowingroupsmenuitemComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtGridshowingroupsmenuitemComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -60351,25 +59200,19 @@ var ExtGridsortascmenuitemComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsortascmenuitemMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsortascmenuitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtGridsortascmenuitemComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsortascmenuitemMetaData,hostComponent)}
+    ExtGridsortascmenuitemComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(gridsortascmenuitemMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(gridsortascmenuitemMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtGridsortascmenuitemComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtGridsortascmenuitemComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -60767,25 +59610,19 @@ var ExtGridsortdescmenuitemComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsortdescmenuitemMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsortdescmenuitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtGridsortdescmenuitemComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsortdescmenuitemMetaData,hostComponent)}
+    ExtGridsortdescmenuitemComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(gridsortdescmenuitemMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(gridsortdescmenuitemMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtGridsortdescmenuitemComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtGridsortdescmenuitemComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -61201,25 +60038,19 @@ var ExtPagingtoolbarComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pagingtoolbarMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pagingtoolbarMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPagingtoolbarComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pagingtoolbarMetaData,hostComponent)}
+    ExtPagingtoolbarComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(pagingtoolbarMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(pagingtoolbarMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPagingtoolbarComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPagingtoolbarComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -61577,25 +60408,19 @@ var ExtGridrowComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridrowMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridrowMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtGridrowComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridrowMetaData,hostComponent)}
+    ExtGridrowComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(gridrowMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(gridrowMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtGridrowComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtGridrowComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -61941,25 +60766,19 @@ var ExtRowbodyComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rowbodyMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rowbodyMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtRowbodyComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rowbodyMetaData,hostComponent)}
+    ExtRowbodyComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(rowbodyMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(rowbodyMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtRowbodyComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtRowbodyComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -62315,25 +61134,19 @@ var ExtRowheaderComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rowheaderMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rowheaderMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtRowheaderComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,rowheaderMetaData,hostComponent)}
+    ExtRowheaderComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(rowheaderMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(rowheaderMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtRowheaderComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtRowheaderComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -62691,25 +61504,19 @@ var ExtGridsummaryrowComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsummaryrowMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsummaryrowMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtGridsummaryrowComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gridsummaryrowMetaData,hostComponent)}
+    ExtGridsummaryrowComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(gridsummaryrowMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(gridsummaryrowMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtGridsummaryrowComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtGridsummaryrowComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -63373,25 +62180,19 @@ var ExtTreeComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treeMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treeMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTreeComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treeMetaData,hostComponent)}
+    ExtTreeComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(treeMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(treeMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTreeComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTreeComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -63751,25 +62552,19 @@ var ExtImageComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,imageMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,imageMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtImageComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,imageMetaData,hostComponent)}
+    ExtImageComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(imageMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(imageMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtImageComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtImageComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -64129,25 +62924,19 @@ var ExtImgComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,imgMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,imgMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtImgComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,imgMetaData,hostComponent)}
+    ExtImgComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(imgMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(imgMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtImgComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtImgComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -64507,25 +63296,19 @@ var ExtIndicatorComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,indicatorMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,indicatorMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtIndicatorComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,indicatorMetaData,hostComponent)}
+    ExtIndicatorComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(indicatorMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(indicatorMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtIndicatorComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtIndicatorComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -64871,25 +63654,19 @@ var ExtLabelComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,labelMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,labelMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtLabelComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,labelMetaData,hostComponent)}
+    ExtLabelComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(labelMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(labelMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtLabelComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtLabelComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -65261,25 +64038,19 @@ var ExtTreelistComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treelistMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treelistMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTreelistComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treelistMetaData,hostComponent)}
+    ExtTreelistComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(treelistMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(treelistMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTreelistComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTreelistComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -65499,25 +64270,19 @@ var ExtTreelistitemComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treelistitemMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treelistitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTreelistitemComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,treelistitemMetaData,hostComponent)}
+    ExtTreelistitemComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(treelistitemMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(treelistitemMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTreelistitemComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTreelistitemComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -65873,25 +64638,19 @@ var ExtLoadmaskComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,loadmaskMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,loadmaskMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtLoadmaskComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,loadmaskMetaData,hostComponent)}
+    ExtLoadmaskComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(loadmaskMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(loadmaskMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtLoadmaskComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtLoadmaskComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -66241,25 +65000,19 @@ var ExtMaskComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,maskMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,maskMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtMaskComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,maskMetaData,hostComponent)}
+    ExtMaskComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(maskMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(maskMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtMaskComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtMaskComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -66639,25 +65392,19 @@ var ExtMediaComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,mediaMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,mediaMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtMediaComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,mediaMetaData,hostComponent)}
+    ExtMediaComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(mediaMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(mediaMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtMediaComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtMediaComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -67051,25 +65798,19 @@ var ExtMenucheckitemComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menucheckitemMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menucheckitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtMenucheckitemComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menucheckitemMetaData,hostComponent)}
+    ExtMenucheckitemComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(menucheckitemMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(menucheckitemMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtMenucheckitemComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtMenucheckitemComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -67449,25 +66190,19 @@ var ExtMenuitemComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuitemMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtMenuitemComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuitemMetaData,hostComponent)}
+    ExtMenuitemComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(menuitemMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(menuitemMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtMenuitemComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtMenuitemComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -67971,25 +66706,19 @@ var ExtMenuComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtMenuComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuMetaData,hostComponent)}
+    ExtMenuComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(menuMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(menuMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtMenuComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtMenuComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -68387,25 +67116,19 @@ var ExtMenuradioitemComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuradioitemMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuradioitemMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtMenuradioitemComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuradioitemMetaData,hostComponent)}
+    ExtMenuradioitemComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(menuradioitemMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(menuradioitemMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtMenuradioitemComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtMenuradioitemComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -68751,25 +67474,19 @@ var ExtMenuseparatorComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuseparatorMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuseparatorMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtMenuseparatorComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,menuseparatorMetaData,hostComponent)}
+    ExtMenuseparatorComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(menuseparatorMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(menuseparatorMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtMenuseparatorComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtMenuseparatorComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -69295,25 +68012,19 @@ var ExtMessageboxComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,messageboxMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,messageboxMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtMessageboxComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,messageboxMetaData,hostComponent)}
+    ExtMessageboxComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(messageboxMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(messageboxMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtMessageboxComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtMessageboxComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -69729,25 +68440,19 @@ var ExtNavigationviewComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,navigationviewMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,navigationviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtNavigationviewComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,navigationviewMetaData,hostComponent)}
+    ExtNavigationviewComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(navigationviewMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(navigationviewMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtNavigationviewComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtNavigationviewComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -70233,25 +68938,19 @@ var ExtPanelComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,panelMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,panelMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPanelComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,panelMetaData,hostComponent)}
+    ExtPanelComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(panelMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(panelMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPanelComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPanelComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -70807,25 +69506,19 @@ var ExtDatepanelComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepanelMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepanelMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtDatepanelComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepanelMetaData,hostComponent)}
+    ExtDatepanelComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(datepanelMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(datepanelMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtDatepanelComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtDatepanelComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -71187,25 +69880,19 @@ var ExtDatetitleComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datetitleMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datetitleMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtDatetitleComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datetitleMetaData,hostComponent)}
+    ExtDatetitleComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(datetitleMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(datetitleMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtDatetitleComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtDatetitleComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -71625,25 +70312,19 @@ var ExtPanelheaderComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,panelheaderMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,panelheaderMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPanelheaderComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,panelheaderMetaData,hostComponent)}
+    ExtPanelheaderComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(panelheaderMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(panelheaderMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPanelheaderComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPanelheaderComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -72147,25 +70828,19 @@ var ExtTimepanelComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timepanelMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timepanelMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTimepanelComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timepanelMetaData,hostComponent)}
+    ExtTimepanelComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(timepanelMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(timepanelMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTimepanelComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTimepanelComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -72527,25 +71202,19 @@ var ExtPaneltitleComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,paneltitleMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,paneltitleMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPaneltitleComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,paneltitleMetaData,hostComponent)}
+    ExtPaneltitleComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(paneltitleMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(paneltitleMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPaneltitleComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPaneltitleComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -73137,25 +71806,19 @@ var ExtYearpickerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,yearpickerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,yearpickerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtYearpickerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,yearpickerMetaData,hostComponent)}
+    ExtYearpickerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(yearpickerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(yearpickerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtYearpickerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtYearpickerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -73685,25 +72348,19 @@ var ExtDatepickerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtDatepickerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,datepickerMetaData,hostComponent)}
+    ExtDatepickerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(datepickerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(datepickerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtDatepickerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtDatepickerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -74221,25 +72878,19 @@ var ExtPickerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPickerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerMetaData,hostComponent)}
+    ExtPickerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(pickerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(pickerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPickerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPickerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -74757,25 +73408,19 @@ var ExtSelectpickerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectpickerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectpickerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSelectpickerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,selectpickerMetaData,hostComponent)}
+    ExtSelectpickerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(selectpickerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(selectpickerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSelectpickerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSelectpickerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -75315,25 +73960,19 @@ var ExtPickerslotComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerslotMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerslotMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPickerslotComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pickerslotMetaData,hostComponent)}
+    ExtPickerslotComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(pickerslotMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(pickerslotMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPickerslotComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPickerslotComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -75819,25 +74458,19 @@ var ExtTabletpickerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabletpickerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabletpickerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTabletpickerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabletpickerMetaData,hostComponent)}
+    ExtTabletpickerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(tabletpickerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(tabletpickerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTabletpickerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTabletpickerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -76061,25 +74694,19 @@ var ExtPivotgridcellComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridcellMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridcellMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPivotgridcellComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridcellMetaData,hostComponent)}
+    ExtPivotgridcellComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(pivotgridcellMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(pivotgridcellMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPivotgridcellComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPivotgridcellComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -76303,25 +74930,19 @@ var ExtPivotgridgroupcellComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridgroupcellMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridgroupcellMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPivotgridgroupcellComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridgroupcellMetaData,hostComponent)}
+    ExtPivotgridgroupcellComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(pivotgridgroupcellMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(pivotgridgroupcellMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPivotgridgroupcellComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPivotgridgroupcellComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -76387,25 +75008,19 @@ var ExtPivotd3containerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotd3containerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotd3containerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPivotd3containerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotd3containerMetaData,hostComponent)}
+    ExtPivotd3containerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(pivotd3containerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(pivotd3containerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPivotd3containerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPivotd3containerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -76783,25 +75398,19 @@ var ExtPivotheatmapComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotheatmapMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotheatmapMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPivotheatmapComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotheatmapMetaData,hostComponent)}
+    ExtPivotheatmapComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(pivotheatmapMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(pivotheatmapMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPivotheatmapComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPivotheatmapComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -77215,25 +75824,19 @@ var ExtPivottreemapComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivottreemapMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivottreemapMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPivottreemapComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivottreemapMetaData,hostComponent)}
+    ExtPivottreemapComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(pivottreemapMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(pivottreemapMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPivottreemapComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPivottreemapComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -77957,25 +76560,19 @@ var ExtPivotgridComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPivotgridComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridMetaData,hostComponent)}
+    ExtPivotgridComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(pivotgridMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(pivotgridMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPivotgridComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPivotgridComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -78393,25 +76990,19 @@ var ExtPivotconfigfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPivotconfigfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigfieldMetaData,hostComponent)}
+    ExtPivotconfigfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(pivotconfigfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(pivotconfigfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPivotconfigfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPivotconfigfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -78899,25 +77490,19 @@ var ExtPivotconfigcontainerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigcontainerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigcontainerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPivotconfigcontainerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigcontainerMetaData,hostComponent)}
+    ExtPivotconfigcontainerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(pivotconfigcontainerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(pivotconfigcontainerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPivotconfigcontainerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPivotconfigcontainerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -79439,25 +78024,19 @@ var ExtPivotconfigformComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigformMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigformMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPivotconfigformComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigformMetaData,hostComponent)}
+    ExtPivotconfigformComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(pivotconfigformMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(pivotconfigformMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPivotconfigformComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPivotconfigformComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -79959,25 +78538,19 @@ var ExtPivotconfigpanelComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigpanelMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigpanelMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPivotconfigpanelComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotconfigpanelMetaData,hostComponent)}
+    ExtPivotconfigpanelComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(pivotconfigpanelMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(pivotconfigpanelMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPivotconfigpanelComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPivotconfigpanelComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -80499,25 +79072,19 @@ var ExtPivotsettingsComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotsettingsMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotsettingsMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPivotsettingsComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotsettingsMetaData,hostComponent)}
+    ExtPivotsettingsComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(pivotsettingsMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(pivotsettingsMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPivotsettingsComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPivotsettingsComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -81039,25 +79606,19 @@ var ExtPivotrangeeditorComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotrangeeditorMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotrangeeditorMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPivotrangeeditorComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotrangeeditorMetaData,hostComponent)}
+    ExtPivotrangeeditorComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(pivotrangeeditorMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(pivotrangeeditorMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPivotrangeeditorComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPivotrangeeditorComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -81415,25 +79976,19 @@ var ExtPivotgridrowComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridrowMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridrowMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPivotgridrowComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,pivotgridrowMetaData,hostComponent)}
+    ExtPivotgridrowComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(pivotgridrowMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(pivotgridrowMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPivotgridrowComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPivotgridrowComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -81787,25 +80342,19 @@ var ExtProgressComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,progressMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,progressMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtProgressComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,progressMetaData,hostComponent)}
+    ExtProgressComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(progressMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(progressMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtProgressComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtProgressComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -82159,25 +80708,19 @@ var ExtProgressbarwidgetComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,progressbarwidgetMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,progressbarwidgetMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtProgressbarwidgetComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,progressbarwidgetMetaData,hostComponent)}
+    ExtProgressbarwidgetComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(progressbarwidgetMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(progressbarwidgetMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtProgressbarwidgetComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtProgressbarwidgetComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -82601,25 +81144,19 @@ var ExtSegmentedbuttonComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,segmentedbuttonMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,segmentedbuttonMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSegmentedbuttonComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,segmentedbuttonMetaData,hostComponent)}
+    ExtSegmentedbuttonComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(segmentedbuttonMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(segmentedbuttonMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSegmentedbuttonComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSegmentedbuttonComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -83119,25 +81656,19 @@ var ExtSheetComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sheetMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sheetMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSheetComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sheetMetaData,hostComponent)}
+    ExtSheetComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(sheetMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(sheetMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSheetComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSheetComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -83511,25 +82042,19 @@ var ExtSliderComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sliderMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sliderMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSliderComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sliderMetaData,hostComponent)}
+    ExtSliderComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(sliderMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(sliderMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSliderComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSliderComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -83879,25 +82404,19 @@ var ExtThumbComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,thumbMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,thumbMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtThumbComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,thumbMetaData,hostComponent)}
+    ExtThumbComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(thumbMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(thumbMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtThumbComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtThumbComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -84271,25 +82790,19 @@ var ExtTogglesliderComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,togglesliderMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,togglesliderMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTogglesliderComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,togglesliderMetaData,hostComponent)}
+    ExtTogglesliderComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(togglesliderMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(togglesliderMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTogglesliderComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTogglesliderComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -84635,25 +83148,19 @@ var ExtSpacerComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spacerMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spacerMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSpacerComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,spacerMetaData,hostComponent)}
+    ExtSpacerComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(spacerMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(spacerMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSpacerComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSpacerComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -85041,25 +83548,19 @@ var ExtSparklinebarComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinebarMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinebarMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSparklinebarComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinebarMetaData,hostComponent)}
+    ExtSparklinebarComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(sparklinebarMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(sparklinebarMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSparklinebarComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSparklinebarComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -85423,25 +83924,19 @@ var ExtSparklineComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklineMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklineMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSparklineComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklineMetaData,hostComponent)}
+    ExtSparklineComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(sparklineMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(sparklineMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSparklineComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSparklineComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -85833,25 +84328,19 @@ var ExtSparklineboxComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklineboxMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklineboxMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSparklineboxComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklineboxMetaData,hostComponent)}
+    ExtSparklineboxComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(sparklineboxMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(sparklineboxMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSparklineboxComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSparklineboxComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -86225,25 +84714,19 @@ var ExtSparklinebulletComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinebulletMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinebulletMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSparklinebulletComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinebulletMetaData,hostComponent)}
+    ExtSparklinebulletComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(sparklinebulletMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(sparklinebulletMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSparklinebulletComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSparklinebulletComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -86619,25 +85102,19 @@ var ExtSparklinediscreteComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinediscreteMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinediscreteMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSparklinediscreteComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinediscreteMetaData,hostComponent)}
+    ExtSparklinediscreteComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(sparklinediscreteMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(sparklinediscreteMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSparklinediscreteComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSparklinediscreteComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -87035,25 +85512,19 @@ var ExtSparklinelineComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinelineMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinelineMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSparklinelineComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinelineMetaData,hostComponent)}
+    ExtSparklinelineComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(sparklinelineMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(sparklinelineMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSparklinelineComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSparklinelineComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -87425,25 +85896,19 @@ var ExtSparklinepieComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinepieMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinepieMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSparklinepieComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinepieMetaData,hostComponent)}
+    ExtSparklinepieComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(sparklinepieMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(sparklinepieMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSparklinepieComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSparklinepieComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -87819,25 +86284,19 @@ var ExtSparklinetristateComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinetristateMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinetristateMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSparklinetristateComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,sparklinetristateMetaData,hostComponent)}
+    ExtSparklinetristateComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(sparklinetristateMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(sparklinetristateMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSparklinetristateComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSparklinetristateComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -88239,25 +86698,19 @@ var ExtSplitbuttonComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,splitbuttonMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,splitbuttonMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtSplitbuttonComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,splitbuttonMetaData,hostComponent)}
+    ExtSplitbuttonComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(splitbuttonMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(splitbuttonMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtSplitbuttonComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtSplitbuttonComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -88677,25 +87130,19 @@ var ExtTabbarComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabbarMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabbarMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTabbarComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabbarMetaData,hostComponent)}
+    ExtTabbarComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(tabbarMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(tabbarMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTabbarComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTabbarComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -89105,25 +87552,19 @@ var ExtTabpanelComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabpanelMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabpanelMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTabpanelComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabpanelMetaData,hostComponent)}
+    ExtTabpanelComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(tabpanelMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(tabpanelMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTabpanelComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTabpanelComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -89531,25 +87972,19 @@ var ExtTabComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTabComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tabMetaData,hostComponent)}
+    ExtTabComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(tabMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(tabMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTabComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTabComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -90063,25 +88498,19 @@ var ExtTooltipComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tooltipMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tooltipMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTooltipComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,tooltipMetaData,hostComponent)}
+    ExtTooltipComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(tooltipMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(tooltipMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTooltipComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTooltipComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -90429,25 +88858,19 @@ var ExtTitleComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,titleMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,titleMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTitleComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,titleMetaData,hostComponent)}
+    ExtTitleComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(titleMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(titleMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTitleComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTitleComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -90859,25 +89282,19 @@ var ExtTitlebarComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,titlebarMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,titlebarMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtTitlebarComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,titlebarMetaData,hostComponent)}
+    ExtTitlebarComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(titlebarMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(titlebarMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtTitlebarComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtTitlebarComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -91239,25 +89656,19 @@ var ExtToolComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,toolMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,toolMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtToolComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,toolMetaData,hostComponent)}
+    ExtToolComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(toolMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(toolMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtToolComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtToolComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -91619,25 +90030,19 @@ var ExtPaneltoolComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,paneltoolMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,paneltoolMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtPaneltoolComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,paneltoolMetaData,hostComponent)}
+    ExtPaneltoolComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(paneltoolMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(paneltoolMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtPaneltoolComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtPaneltoolComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -92045,25 +90450,19 @@ var ExtToolbarComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,toolbarMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,toolbarMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtToolbarComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,toolbarMetaData,hostComponent)}
+    ExtToolbarComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(toolbarMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(toolbarMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtToolbarComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtToolbarComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -92421,25 +90820,19 @@ var ExtColorbuttonComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorbuttonMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorbuttonMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtColorbuttonComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorbuttonMetaData,hostComponent)}
+    ExtColorbuttonComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(colorbuttonMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(colorbuttonMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtColorbuttonComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtColorbuttonComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -92785,25 +91178,19 @@ var ExtColorpickercolorpreviewComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorpickercolorpreviewMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorpickercolorpreviewMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtColorpickercolorpreviewComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorpickercolorpreviewMetaData,hostComponent)}
+    ExtColorpickercolorpreviewComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(colorpickercolorpreviewMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(colorpickercolorpreviewMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtColorpickercolorpreviewComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtColorpickercolorpreviewComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -93287,25 +91674,19 @@ var ExtColorfieldComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorfieldMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorfieldMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtColorfieldComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorfieldMetaData,hostComponent)}
+    ExtColorfieldComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(colorfieldMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(colorfieldMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtColorfieldComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtColorfieldComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -93391,25 +91772,19 @@ var ExtColorselectorComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorselectorMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorselectorMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtColorselectorComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,colorselectorMetaData,hostComponent)}
+    ExtColorselectorComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(colorselectorMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(colorselectorMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtColorselectorComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtColorselectorComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -93783,25 +92158,19 @@ var ExtGaugeComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gaugeMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gaugeMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtGaugeComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,gaugeMetaData,hostComponent)}
+    ExtGaugeComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(gaugeMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(gaugeMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtGaugeComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtGaugeComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -94249,25 +92618,19 @@ var ExtMapComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,mapMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,mapMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtMapComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,mapMetaData,hostComponent)}
+    ExtMapComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(mapMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(mapMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtMapComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtMapComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -94715,25 +93078,19 @@ var ExtGoogle_mapComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,google_mapMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,google_mapMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtGoogle_mapComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,google_mapMetaData,hostComponent)}
+    ExtGoogle_mapComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(google_mapMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(google_mapMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtGoogle_mapComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtGoogle_mapComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -95107,25 +93464,19 @@ var ExtRatingComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,ratingMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,ratingMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtRatingComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,ratingMetaData,hostComponent)}
+    ExtRatingComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(ratingMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(ratingMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtRatingComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtRatingComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -95509,25 +93860,19 @@ var ExtVideoComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,videoMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,videoMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtVideoComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,videoMetaData,hostComponent)}
+    ExtVideoComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(videoMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(videoMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtVideoComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtVideoComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -95949,25 +94294,19 @@ var ExtViewportComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,viewportMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,viewportMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtViewportComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,viewportMetaData,hostComponent)}
+    ExtViewportComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(viewportMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(viewportMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtViewportComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtViewportComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -96155,25 +94494,19 @@ var ExtWidgetComponent = /** @class */ (function (_super) {
         _this.hostComponent = hostComponent;
         return _this;
     }
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,widgetMetaData,hostComponent)}
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,widgetMetaData,hostComponent)}
     /**
      * @return {?}
      */
-    ExtWidgetComponent.prototype.ngOnInit = 
-    //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,widgetMetaData,hostComponent)}
+    ExtWidgetComponent.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.baseOnInit(widgetMetaData);
+    };
     /**
      * @return {?}
      */
-    function () { this.baseOnInit(widgetMetaData); };
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
-     * @return {?}
-     */
-    ExtWidgetComponent.prototype.ngAfterContentInit = 
-    //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-    /**
+    ExtWidgetComponent.prototype.ngAfterContentInit = /**
      * @return {?}
      */
     function () {
@@ -96208,7 +94541,6 @@ var ExtAngularModule = /** @class */ (function () {
         { type: NgModule, args: [{
                     imports: [],
                     declarations: [
-                        ExtAngularLaunchComponent,
                         ExtAngularBootstrapComponent,
                         ExtActionsheetComponent,
                         ExtAudioComponent,
@@ -96438,7 +94770,6 @@ var ExtAngularModule = /** @class */ (function () {
                     providers: [],
                     entryComponents: [],
                     exports: [
-                        ExtAngularLaunchComponent,
                         ExtAngularBootstrapComponent,
                         ExtActionsheetComponent,
                         ExtAudioComponent,
@@ -96680,6 +95011,6 @@ var ExtAngularModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { ExtAngularModule, base as ɵf, ExtActionsheetComponent as ɵe, actionsheetMetaData as ɵd, ExtAngularBootstrapComponent as ɵb, ExtAngularBootstrapService as ɵc, ExtAngularLaunchComponent as ɵa, ExtAudioComponent as ɵh, audioMetaData as ɵg, ExtAxis3dComponent as ɵcb, axis3dMetaData as ɵca, ExtBooleancellComponent as ɵir, booleancellMetaData as ɵiq, ExtBooleancolumnComponent as ɵjl, booleancolumnMetaData as ɵjk, ExtBoundlistComponent as ɵdr, boundlistMetaData as ɵdq, ExtButtonComponent as ɵj, buttonMetaData as ɵi, ExtCalendar_calendar_pickerComponent as ɵp, calendar_calendar_pickerMetaData as ɵo, ExtCalendar_dayComponent as ɵbb, calendar_dayMetaData as ɵba, ExtCalendar_daysComponent as ɵbd, calendar_daysMetaData as ɵbc, ExtCalendar_daysheaderComponent as ɵv, calendar_daysheaderMetaData as ɵu, ExtCalendar_daysviewComponent as ɵbp, calendar_daysviewMetaData as ɵbo, ExtCalendar_dayviewComponent as ɵbn, calendar_dayviewMetaData as ɵbm, ExtCalendar_eventComponent as ɵl, calendar_eventMetaData as ɵk, ExtCalendar_form_addComponent as ɵn, calendar_form_addMetaData as ɵm, ExtCalendar_form_editComponent as ɵr, calendar_form_editMetaData as ɵq, ExtCalendar_listComponent as ɵz, calendar_listMetaData as ɵy, ExtCalendar_monthComponent as ɵbf, calendar_monthMetaData as ɵbe, ExtCalendar_monthviewComponent as ɵbr, calendar_monthviewMetaData as ɵbq, ExtCalendar_multiviewComponent as ɵbt, calendar_multiviewMetaData as ɵbs, ExtCalendar_timefieldComponent as ɵt, calendar_timefieldMetaData as ɵs, ExtCalendar_weekComponent as ɵbj, calendar_weekMetaData as ɵbi, ExtCalendar_weeksComponent as ɵbl, calendar_weeksMetaData as ɵbk, ExtCalendar_weeksheaderComponent as ɵx, calendar_weeksheaderMetaData as ɵw, ExtCalendar_weeksviewComponent as ɵbx, calendar_weeksviewMetaData as ɵbw, ExtCalendar_weekviewComponent as ɵbv, calendar_weekviewMetaData as ɵbu, ExtCalendarComponent as ɵbh, calendarMetaData as ɵbg, ExtCarouselComponent as ɵbz, carouselMetaData as ɵby, ExtCartesianComponent as ɵcd, cartesianMetaData as ɵcc, ExtCelleditorComponent as ɵjj, celleditorMetaData as ɵji, ExtChartComponent as ɵcf, chartMetaData as ɵce, ExtChartnavigatorComponent as ɵcl, chartnavigatorMetaData as ɵck, ExtCheckboxComponent as ɵfh, checkboxMetaData as ɵfg, ExtCheckboxfieldComponent as ɵfj, checkboxfieldMetaData as ɵfi, ExtCheckcellComponent as ɵiv, checkcellMetaData as ɵiu, ExtCheckcolumnComponent as ɵjn, checkcolumnMetaData as ɵjm, ExtChipComponent as ɵcr, chipMetaData as ɵcq, ExtChipviewComponent as ɵdt, chipviewMetaData as ɵds, ExtCleartriggerComponent as ɵhr, cleartriggerMetaData as ɵhq, ExtColorbuttonComponent as ɵqp, colorbuttonMetaData as ɵqo, ExtColorfieldComponent as ɵqt, colorfieldMetaData as ɵqs, ExtColorpickercolorpreviewComponent as ɵqr, colorpickercolorpreviewMetaData as ɵqq, ExtColorselectorComponent as ɵqv, colorselectorMetaData as ɵqu, ExtColumnComponent as ɵjr, columnMetaData as ɵjq, ExtComboboxComponent as ɵfl, comboboxMetaData as ɵfk, ExtComboboxfieldComponent as ɵfn, comboboxfieldMetaData as ɵfm, ExtComponentComponent as ɵct, componentMetaData as ɵcs, ExtComponentdataviewComponent as ɵdv, componentdataviewMetaData as ɵdu, ExtContainerComponent as ɵcv, containerMetaData as ɵcu, ExtContainerfieldComponent as ɵfp, containerfieldMetaData as ɵfo, ExtD3_canvasComponent as ɵcx, d3_canvasMetaData as ɵcw, ExtD3_heatmapComponent as ɵcz, d3_heatmapMetaData as ɵcy, ExtD3_horizontal_treeComponent as ɵdj, d3_horizontal_treeMetaData as ɵdi, ExtD3_packComponent as ɵdb, d3_packMetaData as ɵda, ExtD3_partitionComponent as ɵdd, d3_partitionMetaData as ɵdc, ExtD3_sunburstComponent as ɵdf, d3_sunburstMetaData as ɵde, ExtD3_svgComponent as ɵdn, d3_svgMetaData as ɵdm, ExtD3_treeComponent as ɵdh, d3_treeMetaData as ɵdg, ExtD3_treemapComponent as ɵdl, d3_treemapMetaData as ɵdk, ExtD3Component as ɵdp, d3MetaData as ɵdo, ExtDataitemComponent as ɵdx, dataitemMetaData as ɵdw, ExtDataviewComponent as ɵdz, dataviewMetaData as ɵdy, ExtDatecellComponent as ɵix, datecellMetaData as ɵiw, ExtDatecolumnComponent as ɵjv, datecolumnMetaData as ɵju, ExtDatefieldComponent as ɵft, datefieldMetaData as ɵfs, ExtDatepanelComponent as ɵmt, datepanelMetaData as ɵms, ExtDatepickerComponent as ɵnf, datepickerMetaData as ɵne, ExtDatepickerfieldComponent as ɵfv, datepickerfieldMetaData as ɵfu, ExtDatepickernativefieldComponent as ɵfx, datepickernativefieldMetaData as ɵfw, ExtDatetitleComponent as ɵmv, datetitleMetaData as ɵmu, ExtDatetriggerComponent as ɵht, datetriggerMetaData as ɵhs, ExtDialogComponent as ɵex, dialogMetaData as ɵew, ExtDisplayfieldComponent as ɵfz, displayfieldMetaData as ɵfy, ExtDrawComponent as ɵfb, drawMetaData as ɵfa, ExtEditorComponent as ɵff, editorMetaData as ɵfe, ExtEmailfieldComponent as ɵgb, emailfieldMetaData as ɵga, ExtEmptytextComponent as ɵeb, emptytextMetaData as ɵea, ExtExpandtriggerComponent as ɵhv, expandtriggerMetaData as ɵhu, ExtFieldComponent as ɵgd, fieldMetaData as ɵgc, ExtFieldcontainerComponent as ɵfr, fieldcontainerMetaData as ɵfq, ExtFieldpanelComponent as ɵgp, fieldpanelMetaData as ɵgo, ExtFieldsetComponent as ɵil, fieldsetMetaData as ɵik, ExtFilebuttonComponent as ɵgh, filebuttonMetaData as ɵgg, ExtFilefieldComponent as ɵgf, filefieldMetaData as ɵge, ExtFormpanelComponent as ɵin, formpanelMetaData as ɵim, ExtGaugeComponent as ɵqx, gaugeMetaData as ɵqw, ExtGoogle_mapComponent as ɵrb, google_mapMetaData as ɵra, ExtGridComponent as ɵkh, gridMetaData as ɵkg, ExtGridcellComponent as ɵit, gridcellMetaData as ɵis, ExtGridcellbaseComponent as ɵip, gridcellbaseMetaData as ɵio, ExtGridcolumnComponent as ɵjp, gridcolumnMetaData as ɵjo, ExtGridcolumnsmenuComponent as ɵkp, gridcolumnsmenuMetaData as ɵko, ExtGridgroupbythismenuitemComponent as ɵkr, gridgroupbythismenuitemMetaData as ɵkq, ExtGridrowComponent as ɵlb, gridrowMetaData as ɵla, ExtGridshowingroupsmenuitemComponent as ɵkt, gridshowingroupsmenuitemMetaData as ɵks, ExtGridsortascmenuitemComponent as ɵkv, gridsortascmenuitemMetaData as ɵku, ExtGridsortdescmenuitemComponent as ɵkx, gridsortdescmenuitemMetaData as ɵkw, ExtGridsummaryrowComponent as ɵlh, gridsummaryrowMetaData as ɵlg, ExtHeadercontainerComponent as ɵkj, headercontainerMetaData as ɵki, ExtHiddenfieldComponent as ɵgj, hiddenfieldMetaData as ɵgi, ExtImageComponent as ɵll, imageMetaData as ɵlk, ExtImgComponent as ɵln, imgMetaData as ɵlm, ExtIndexbarComponent as ɵed, indexbarMetaData as ɵec, ExtIndicatorComponent as ɵlp, indicatorMetaData as ɵlo, ExtInputfieldComponent as ɵgl, inputfieldMetaData as ɵgk, ExtInteractionComponent as ɵch, interactionMetaData as ɵcg, ExtItemheaderComponent as ɵef, itemheaderMetaData as ɵee, ExtLabelComponent as ɵlr, labelMetaData as ɵlq, ExtLegendComponent as ɵcj, legendMetaData as ɵci, ExtListComponent as ɵeh, listMetaData as ɵeg, ExtListitemComponent as ɵej, listitemMetaData as ɵei, ExtListswiperitemComponent as ɵel, listswiperitemMetaData as ɵek, ExtListswiperstepperComponent as ɵen, listswiperstepperMetaData as ɵem, ExtLoadmaskComponent as ɵlx, loadmaskMetaData as ɵlw, ExtLockedgridComponent as ɵkl, lockedgridMetaData as ɵkk, ExtLockedgridregionComponent as ɵkn, lockedgridregionMetaData as ɵkm, ExtMapComponent as ɵqz, mapMetaData as ɵqy, ExtMaskComponent as ɵlz, maskMetaData as ɵly, ExtMediaComponent as ɵmb, mediaMetaData as ɵma, ExtMenuComponent as ɵmh, menuMetaData as ɵmg, ExtMenucheckitemComponent as ɵmd, menucheckitemMetaData as ɵmc, ExtMenuitemComponent as ɵmf, menuitemMetaData as ɵme, ExtMenuradioitemComponent as ɵmj, menuradioitemMetaData as ɵmi, ExtMenuseparatorComponent as ɵml, menuseparatorMetaData as ɵmk, ExtMenutriggerComponent as ɵhx, menutriggerMetaData as ɵhw, ExtMessageboxComponent as ɵmn, messageboxMetaData as ɵmm, ExtNavigationviewComponent as ɵmp, navigationviewMetaData as ɵmo, ExtNestedlistComponent as ɵep, nestedlistMetaData as ɵeo, ExtNumbercellComponent as ɵiz, numbercellMetaData as ɵiy, ExtNumbercolumnComponent as ɵjx, numbercolumnMetaData as ɵjw, ExtNumberfieldComponent as ɵgn, numberfieldMetaData as ɵgm, ExtPagingtoolbarComponent as ɵkz, pagingtoolbarMetaData as ɵky, ExtPanelComponent as ɵmr, panelMetaData as ɵmq, ExtPanelheaderComponent as ɵmx, panelheaderMetaData as ɵmw, ExtPaneltitleComponent as ɵnb, paneltitleMetaData as ɵna, ExtPaneltoolComponent as ɵql, paneltoolMetaData as ɵqk, ExtPasswordfieldComponent as ɵgr, passwordfieldMetaData as ɵgq, ExtPickerComponent as ɵnh, pickerMetaData as ɵng, ExtPickerfieldComponent as ɵgt, pickerfieldMetaData as ɵgs, ExtPickerslotComponent as ɵnl, pickerslotMetaData as ɵnk, ExtPivotconfigcontainerComponent as ɵod, pivotconfigcontainerMetaData as ɵoc, ExtPivotconfigfieldComponent as ɵob, pivotconfigfieldMetaData as ɵoa, ExtPivotconfigformComponent as ɵof, pivotconfigformMetaData as ɵoe, ExtPivotconfigpanelComponent as ɵoh, pivotconfigpanelMetaData as ɵog, ExtPivotd3containerComponent as ɵnt, pivotd3containerMetaData as ɵns, ExtPivotgridComponent as ɵnz, pivotgridMetaData as ɵny, ExtPivotgridcellComponent as ɵnp, pivotgridcellMetaData as ɵno, ExtPivotgridgroupcellComponent as ɵnr, pivotgridgroupcellMetaData as ɵnq, ExtPivotgridrowComponent as ɵon, pivotgridrowMetaData as ɵom, ExtPivotheatmapComponent as ɵnv, pivotheatmapMetaData as ɵnu, ExtPivotrangeeditorComponent as ɵol, pivotrangeeditorMetaData as ɵok, ExtPivotsettingsComponent as ɵoj, pivotsettingsMetaData as ɵoi, ExtPivottreemapComponent as ɵnx, pivottreemapMetaData as ɵnw, ExtPolarComponent as ɵcn, polarMetaData as ɵcm, ExtProgressComponent as ɵop, progressMetaData as ɵoo, ExtProgressbarwidgetComponent as ɵor, progressbarwidgetMetaData as ɵoq, ExtPullrefreshbarComponent as ɵer, pullrefreshbarMetaData as ɵeq, ExtPullrefreshspinnerComponent as ɵet, pullrefreshspinnerMetaData as ɵes, ExtRadioComponent as ɵgv, radioMetaData as ɵgu, ExtRadiofieldComponent as ɵgx, radiofieldMetaData as ɵgw, ExtRatingComponent as ɵrd, ratingMetaData as ɵrc, ExtRevealtriggerComponent as ɵhz, revealtriggerMetaData as ɵhy, ExtRowbodyComponent as ɵld, rowbodyMetaData as ɵlc, ExtRowheaderComponent as ɵlf, rowheaderMetaData as ɵle, ExtRownumbererComponent as ɵjz, rownumbererMetaData as ɵjy, ExtRownumberercellComponent as ɵjb, rownumberercellMetaData as ɵja, ExtSearchfieldComponent as ɵgz, searchfieldMetaData as ɵgy, ExtSegmentedbuttonComponent as ɵot, segmentedbuttonMetaData as ɵos, ExtSelectfieldComponent as ɵhb, selectfieldMetaData as ɵha, ExtSelectioncolumnComponent as ɵkb, selectioncolumnMetaData as ɵka, ExtSelectpickerComponent as ɵnj, selectpickerMetaData as ɵni, ExtSheetComponent as ɵov, sheetMetaData as ɵou, ExtSimplelistitemComponent as ɵev, simplelistitemMetaData as ɵeu, ExtSinglesliderfieldComponent as ɵhd, singlesliderfieldMetaData as ɵhc, ExtSliderComponent as ɵox, sliderMetaData as ɵow, ExtSliderfieldComponent as ɵhf, sliderfieldMetaData as ɵhe, ExtSpacefillingComponent as ɵcp, spacefillingMetaData as ɵco, ExtSpacerComponent as ɵpd, spacerMetaData as ɵpc, ExtSparklineComponent as ɵph, sparklineMetaData as ɵpg, ExtSparklinebarComponent as ɵpf, sparklinebarMetaData as ɵpe, ExtSparklineboxComponent as ɵpj, sparklineboxMetaData as ɵpi, ExtSparklinebulletComponent as ɵpl, sparklinebulletMetaData as ɵpk, ExtSparklinediscreteComponent as ɵpn, sparklinediscreteMetaData as ɵpm, ExtSparklinelineComponent as ɵpp, sparklinelineMetaData as ɵpo, ExtSparklinepieComponent as ɵpr, sparklinepieMetaData as ɵpq, ExtSparklinetristateComponent as ɵpt, sparklinetristateMetaData as ɵps, ExtSpindowntriggerComponent as ɵib, spindowntriggerMetaData as ɵia, ExtSpinnerfieldComponent as ɵhh, spinnerfieldMetaData as ɵhg, ExtSpinuptriggerComponent as ɵid, spinuptriggerMetaData as ɵic, ExtSplitbuttonComponent as ɵpv, splitbuttonMetaData as ɵpu, ExtSurfaceComponent as ɵfd, surfaceMetaData as ɵfc, ExtTabComponent as ɵqb, tabMetaData as ɵqa, ExtTabbarComponent as ɵpx, tabbarMetaData as ɵpw, ExtTabletpickerComponent as ɵnn, tabletpickerMetaData as ɵnm, ExtTabpanelComponent as ɵpz, tabpanelMetaData as ɵpy, ExtTemplatecolumnComponent as ɵjt, templatecolumnMetaData as ɵjs, ExtTextareafieldComponent as ɵhl, textareafieldMetaData as ɵhk, ExtTextcellComponent as ɵjd, textcellMetaData as ɵjc, ExtTextcolumnComponent as ɵkd, textcolumnMetaData as ɵkc, ExtTextfieldComponent as ɵhj, textfieldMetaData as ɵhi, ExtThumbComponent as ɵoz, thumbMetaData as ɵoy, ExtTimefieldComponent as ɵhn, timefieldMetaData as ɵhm, ExtTimepanelComponent as ɵmz, timepanelMetaData as ɵmy, ExtTimetriggerComponent as ɵif, timetriggerMetaData as ɵie, ExtTitleComponent as ɵqf, titleMetaData as ɵqe, ExtTitlebarComponent as ɵqh, titlebarMetaData as ɵqg, ExtTogglefieldComponent as ɵhp, togglefieldMetaData as ɵho, ExtTogglesliderComponent as ɵpb, togglesliderMetaData as ɵpa, ExtToolComponent as ɵqj, toolMetaData as ɵqi, ExtToolbarComponent as ɵqn, toolbarMetaData as ɵqm, ExtTooltipComponent as ɵqd, tooltipMetaData as ɵqc, ExtTreeComponent as ɵlj, treeMetaData as ɵli, ExtTreecellComponent as ɵjf, treecellMetaData as ɵje, ExtTreecolumnComponent as ɵkf, treecolumnMetaData as ɵke, ExtTreelistComponent as ɵlt, treelistMetaData as ɵls, ExtTreelistitemComponent as ɵlv, treelistitemMetaData as ɵlu, ExtTriggerComponent as ɵih, triggerMetaData as ɵig, ExtUrlfieldComponent as ɵij, urlfieldMetaData as ɵii, ExtVideoComponent as ɵrf, videoMetaData as ɵre, ExtViewportComponent as ɵrh, viewportMetaData as ɵrg, ExtWidgetComponent as ɵrj, widgetMetaData as ɵri, ExtWidgetcellComponent as ɵjh, widgetcellMetaData as ɵjg, ExtWindowComponent as ɵez, windowMetaData as ɵey, ExtYearpickerComponent as ɵnd, yearpickerMetaData as ɵnc };
+export { ExtAngularModule, base as ɵe, ExtActionsheetComponent as ɵd, actionsheetMetaData as ɵc, ExtAngularBootstrapComponent as ɵa, ExtAngularBootstrapService as ɵb, ExtAudioComponent as ɵg, audioMetaData as ɵf, ExtAxis3dComponent as ɵca, axis3dMetaData as ɵbz, ExtBooleancellComponent as ɵiq, booleancellMetaData as ɵip, ExtBooleancolumnComponent as ɵjk, booleancolumnMetaData as ɵjj, ExtBoundlistComponent as ɵdq, boundlistMetaData as ɵdp, ExtButtonComponent as ɵi, buttonMetaData as ɵh, ExtCalendar_calendar_pickerComponent as ɵo, calendar_calendar_pickerMetaData as ɵn, ExtCalendar_dayComponent as ɵba, calendar_dayMetaData as ɵz, ExtCalendar_daysComponent as ɵbc, calendar_daysMetaData as ɵbb, ExtCalendar_daysheaderComponent as ɵu, calendar_daysheaderMetaData as ɵt, ExtCalendar_daysviewComponent as ɵbo, calendar_daysviewMetaData as ɵbn, ExtCalendar_dayviewComponent as ɵbm, calendar_dayviewMetaData as ɵbl, ExtCalendar_eventComponent as ɵk, calendar_eventMetaData as ɵj, ExtCalendar_form_addComponent as ɵm, calendar_form_addMetaData as ɵl, ExtCalendar_form_editComponent as ɵq, calendar_form_editMetaData as ɵp, ExtCalendar_listComponent as ɵy, calendar_listMetaData as ɵx, ExtCalendar_monthComponent as ɵbe, calendar_monthMetaData as ɵbd, ExtCalendar_monthviewComponent as ɵbq, calendar_monthviewMetaData as ɵbp, ExtCalendar_multiviewComponent as ɵbs, calendar_multiviewMetaData as ɵbr, ExtCalendar_timefieldComponent as ɵs, calendar_timefieldMetaData as ɵr, ExtCalendar_weekComponent as ɵbi, calendar_weekMetaData as ɵbh, ExtCalendar_weeksComponent as ɵbk, calendar_weeksMetaData as ɵbj, ExtCalendar_weeksheaderComponent as ɵw, calendar_weeksheaderMetaData as ɵv, ExtCalendar_weeksviewComponent as ɵbw, calendar_weeksviewMetaData as ɵbv, ExtCalendar_weekviewComponent as ɵbu, calendar_weekviewMetaData as ɵbt, ExtCalendarComponent as ɵbg, calendarMetaData as ɵbf, ExtCarouselComponent as ɵby, carouselMetaData as ɵbx, ExtCartesianComponent as ɵcc, cartesianMetaData as ɵcb, ExtCelleditorComponent as ɵji, celleditorMetaData as ɵjh, ExtChartComponent as ɵce, chartMetaData as ɵcd, ExtChartnavigatorComponent as ɵck, chartnavigatorMetaData as ɵcj, ExtCheckboxComponent as ɵfg, checkboxMetaData as ɵff, ExtCheckboxfieldComponent as ɵfi, checkboxfieldMetaData as ɵfh, ExtCheckcellComponent as ɵiu, checkcellMetaData as ɵit, ExtCheckcolumnComponent as ɵjm, checkcolumnMetaData as ɵjl, ExtChipComponent as ɵcq, chipMetaData as ɵcp, ExtChipviewComponent as ɵds, chipviewMetaData as ɵdr, ExtCleartriggerComponent as ɵhq, cleartriggerMetaData as ɵhp, ExtColorbuttonComponent as ɵqo, colorbuttonMetaData as ɵqn, ExtColorfieldComponent as ɵqs, colorfieldMetaData as ɵqr, ExtColorpickercolorpreviewComponent as ɵqq, colorpickercolorpreviewMetaData as ɵqp, ExtColorselectorComponent as ɵqu, colorselectorMetaData as ɵqt, ExtColumnComponent as ɵjq, columnMetaData as ɵjp, ExtComboboxComponent as ɵfk, comboboxMetaData as ɵfj, ExtComboboxfieldComponent as ɵfm, comboboxfieldMetaData as ɵfl, ExtComponentComponent as ɵcs, componentMetaData as ɵcr, ExtComponentdataviewComponent as ɵdu, componentdataviewMetaData as ɵdt, ExtContainerComponent as ɵcu, containerMetaData as ɵct, ExtContainerfieldComponent as ɵfo, containerfieldMetaData as ɵfn, ExtD3_canvasComponent as ɵcw, d3_canvasMetaData as ɵcv, ExtD3_heatmapComponent as ɵcy, d3_heatmapMetaData as ɵcx, ExtD3_horizontal_treeComponent as ɵdi, d3_horizontal_treeMetaData as ɵdh, ExtD3_packComponent as ɵda, d3_packMetaData as ɵcz, ExtD3_partitionComponent as ɵdc, d3_partitionMetaData as ɵdb, ExtD3_sunburstComponent as ɵde, d3_sunburstMetaData as ɵdd, ExtD3_svgComponent as ɵdm, d3_svgMetaData as ɵdl, ExtD3_treeComponent as ɵdg, d3_treeMetaData as ɵdf, ExtD3_treemapComponent as ɵdk, d3_treemapMetaData as ɵdj, ExtD3Component as ɵdo, d3MetaData as ɵdn, ExtDataitemComponent as ɵdw, dataitemMetaData as ɵdv, ExtDataviewComponent as ɵdy, dataviewMetaData as ɵdx, ExtDatecellComponent as ɵiw, datecellMetaData as ɵiv, ExtDatecolumnComponent as ɵju, datecolumnMetaData as ɵjt, ExtDatefieldComponent as ɵfs, datefieldMetaData as ɵfr, ExtDatepanelComponent as ɵms, datepanelMetaData as ɵmr, ExtDatepickerComponent as ɵne, datepickerMetaData as ɵnd, ExtDatepickerfieldComponent as ɵfu, datepickerfieldMetaData as ɵft, ExtDatepickernativefieldComponent as ɵfw, datepickernativefieldMetaData as ɵfv, ExtDatetitleComponent as ɵmu, datetitleMetaData as ɵmt, ExtDatetriggerComponent as ɵhs, datetriggerMetaData as ɵhr, ExtDialogComponent as ɵew, dialogMetaData as ɵev, ExtDisplayfieldComponent as ɵfy, displayfieldMetaData as ɵfx, ExtDrawComponent as ɵfa, drawMetaData as ɵez, ExtEditorComponent as ɵfe, editorMetaData as ɵfd, ExtEmailfieldComponent as ɵga, emailfieldMetaData as ɵfz, ExtEmptytextComponent as ɵea, emptytextMetaData as ɵdz, ExtExpandtriggerComponent as ɵhu, expandtriggerMetaData as ɵht, ExtFieldComponent as ɵgc, fieldMetaData as ɵgb, ExtFieldcontainerComponent as ɵfq, fieldcontainerMetaData as ɵfp, ExtFieldpanelComponent as ɵgo, fieldpanelMetaData as ɵgn, ExtFieldsetComponent as ɵik, fieldsetMetaData as ɵij, ExtFilebuttonComponent as ɵgg, filebuttonMetaData as ɵgf, ExtFilefieldComponent as ɵge, filefieldMetaData as ɵgd, ExtFormpanelComponent as ɵim, formpanelMetaData as ɵil, ExtGaugeComponent as ɵqw, gaugeMetaData as ɵqv, ExtGoogle_mapComponent as ɵra, google_mapMetaData as ɵqz, ExtGridComponent as ɵkg, gridMetaData as ɵkf, ExtGridcellComponent as ɵis, gridcellMetaData as ɵir, ExtGridcellbaseComponent as ɵio, gridcellbaseMetaData as ɵin, ExtGridcolumnComponent as ɵjo, gridcolumnMetaData as ɵjn, ExtGridcolumnsmenuComponent as ɵko, gridcolumnsmenuMetaData as ɵkn, ExtGridgroupbythismenuitemComponent as ɵkq, gridgroupbythismenuitemMetaData as ɵkp, ExtGridrowComponent as ɵla, gridrowMetaData as ɵkz, ExtGridshowingroupsmenuitemComponent as ɵks, gridshowingroupsmenuitemMetaData as ɵkr, ExtGridsortascmenuitemComponent as ɵku, gridsortascmenuitemMetaData as ɵkt, ExtGridsortdescmenuitemComponent as ɵkw, gridsortdescmenuitemMetaData as ɵkv, ExtGridsummaryrowComponent as ɵlg, gridsummaryrowMetaData as ɵlf, ExtHeadercontainerComponent as ɵki, headercontainerMetaData as ɵkh, ExtHiddenfieldComponent as ɵgi, hiddenfieldMetaData as ɵgh, ExtImageComponent as ɵlk, imageMetaData as ɵlj, ExtImgComponent as ɵlm, imgMetaData as ɵll, ExtIndexbarComponent as ɵec, indexbarMetaData as ɵeb, ExtIndicatorComponent as ɵlo, indicatorMetaData as ɵln, ExtInputfieldComponent as ɵgk, inputfieldMetaData as ɵgj, ExtInteractionComponent as ɵcg, interactionMetaData as ɵcf, ExtItemheaderComponent as ɵee, itemheaderMetaData as ɵed, ExtLabelComponent as ɵlq, labelMetaData as ɵlp, ExtLegendComponent as ɵci, legendMetaData as ɵch, ExtListComponent as ɵeg, listMetaData as ɵef, ExtListitemComponent as ɵei, listitemMetaData as ɵeh, ExtListswiperitemComponent as ɵek, listswiperitemMetaData as ɵej, ExtListswiperstepperComponent as ɵem, listswiperstepperMetaData as ɵel, ExtLoadmaskComponent as ɵlw, loadmaskMetaData as ɵlv, ExtLockedgridComponent as ɵkk, lockedgridMetaData as ɵkj, ExtLockedgridregionComponent as ɵkm, lockedgridregionMetaData as ɵkl, ExtMapComponent as ɵqy, mapMetaData as ɵqx, ExtMaskComponent as ɵly, maskMetaData as ɵlx, ExtMediaComponent as ɵma, mediaMetaData as ɵlz, ExtMenuComponent as ɵmg, menuMetaData as ɵmf, ExtMenucheckitemComponent as ɵmc, menucheckitemMetaData as ɵmb, ExtMenuitemComponent as ɵme, menuitemMetaData as ɵmd, ExtMenuradioitemComponent as ɵmi, menuradioitemMetaData as ɵmh, ExtMenuseparatorComponent as ɵmk, menuseparatorMetaData as ɵmj, ExtMenutriggerComponent as ɵhw, menutriggerMetaData as ɵhv, ExtMessageboxComponent as ɵmm, messageboxMetaData as ɵml, ExtNavigationviewComponent as ɵmo, navigationviewMetaData as ɵmn, ExtNestedlistComponent as ɵeo, nestedlistMetaData as ɵen, ExtNumbercellComponent as ɵiy, numbercellMetaData as ɵix, ExtNumbercolumnComponent as ɵjw, numbercolumnMetaData as ɵjv, ExtNumberfieldComponent as ɵgm, numberfieldMetaData as ɵgl, ExtPagingtoolbarComponent as ɵky, pagingtoolbarMetaData as ɵkx, ExtPanelComponent as ɵmq, panelMetaData as ɵmp, ExtPanelheaderComponent as ɵmw, panelheaderMetaData as ɵmv, ExtPaneltitleComponent as ɵna, paneltitleMetaData as ɵmz, ExtPaneltoolComponent as ɵqk, paneltoolMetaData as ɵqj, ExtPasswordfieldComponent as ɵgq, passwordfieldMetaData as ɵgp, ExtPickerComponent as ɵng, pickerMetaData as ɵnf, ExtPickerfieldComponent as ɵgs, pickerfieldMetaData as ɵgr, ExtPickerslotComponent as ɵnk, pickerslotMetaData as ɵnj, ExtPivotconfigcontainerComponent as ɵoc, pivotconfigcontainerMetaData as ɵob, ExtPivotconfigfieldComponent as ɵoa, pivotconfigfieldMetaData as ɵnz, ExtPivotconfigformComponent as ɵoe, pivotconfigformMetaData as ɵod, ExtPivotconfigpanelComponent as ɵog, pivotconfigpanelMetaData as ɵof, ExtPivotd3containerComponent as ɵns, pivotd3containerMetaData as ɵnr, ExtPivotgridComponent as ɵny, pivotgridMetaData as ɵnx, ExtPivotgridcellComponent as ɵno, pivotgridcellMetaData as ɵnn, ExtPivotgridgroupcellComponent as ɵnq, pivotgridgroupcellMetaData as ɵnp, ExtPivotgridrowComponent as ɵom, pivotgridrowMetaData as ɵol, ExtPivotheatmapComponent as ɵnu, pivotheatmapMetaData as ɵnt, ExtPivotrangeeditorComponent as ɵok, pivotrangeeditorMetaData as ɵoj, ExtPivotsettingsComponent as ɵoi, pivotsettingsMetaData as ɵoh, ExtPivottreemapComponent as ɵnw, pivottreemapMetaData as ɵnv, ExtPolarComponent as ɵcm, polarMetaData as ɵcl, ExtProgressComponent as ɵoo, progressMetaData as ɵon, ExtProgressbarwidgetComponent as ɵoq, progressbarwidgetMetaData as ɵop, ExtPullrefreshbarComponent as ɵeq, pullrefreshbarMetaData as ɵep, ExtPullrefreshspinnerComponent as ɵes, pullrefreshspinnerMetaData as ɵer, ExtRadioComponent as ɵgu, radioMetaData as ɵgt, ExtRadiofieldComponent as ɵgw, radiofieldMetaData as ɵgv, ExtRatingComponent as ɵrc, ratingMetaData as ɵrb, ExtRevealtriggerComponent as ɵhy, revealtriggerMetaData as ɵhx, ExtRowbodyComponent as ɵlc, rowbodyMetaData as ɵlb, ExtRowheaderComponent as ɵle, rowheaderMetaData as ɵld, ExtRownumbererComponent as ɵjy, rownumbererMetaData as ɵjx, ExtRownumberercellComponent as ɵja, rownumberercellMetaData as ɵiz, ExtSearchfieldComponent as ɵgy, searchfieldMetaData as ɵgx, ExtSegmentedbuttonComponent as ɵos, segmentedbuttonMetaData as ɵor, ExtSelectfieldComponent as ɵha, selectfieldMetaData as ɵgz, ExtSelectioncolumnComponent as ɵka, selectioncolumnMetaData as ɵjz, ExtSelectpickerComponent as ɵni, selectpickerMetaData as ɵnh, ExtSheetComponent as ɵou, sheetMetaData as ɵot, ExtSimplelistitemComponent as ɵeu, simplelistitemMetaData as ɵet, ExtSinglesliderfieldComponent as ɵhc, singlesliderfieldMetaData as ɵhb, ExtSliderComponent as ɵow, sliderMetaData as ɵov, ExtSliderfieldComponent as ɵhe, sliderfieldMetaData as ɵhd, ExtSpacefillingComponent as ɵco, spacefillingMetaData as ɵcn, ExtSpacerComponent as ɵpc, spacerMetaData as ɵpb, ExtSparklineComponent as ɵpg, sparklineMetaData as ɵpf, ExtSparklinebarComponent as ɵpe, sparklinebarMetaData as ɵpd, ExtSparklineboxComponent as ɵpi, sparklineboxMetaData as ɵph, ExtSparklinebulletComponent as ɵpk, sparklinebulletMetaData as ɵpj, ExtSparklinediscreteComponent as ɵpm, sparklinediscreteMetaData as ɵpl, ExtSparklinelineComponent as ɵpo, sparklinelineMetaData as ɵpn, ExtSparklinepieComponent as ɵpq, sparklinepieMetaData as ɵpp, ExtSparklinetristateComponent as ɵps, sparklinetristateMetaData as ɵpr, ExtSpindowntriggerComponent as ɵia, spindowntriggerMetaData as ɵhz, ExtSpinnerfieldComponent as ɵhg, spinnerfieldMetaData as ɵhf, ExtSpinuptriggerComponent as ɵic, spinuptriggerMetaData as ɵib, ExtSplitbuttonComponent as ɵpu, splitbuttonMetaData as ɵpt, ExtSurfaceComponent as ɵfc, surfaceMetaData as ɵfb, ExtTabComponent as ɵqa, tabMetaData as ɵpz, ExtTabbarComponent as ɵpw, tabbarMetaData as ɵpv, ExtTabletpickerComponent as ɵnm, tabletpickerMetaData as ɵnl, ExtTabpanelComponent as ɵpy, tabpanelMetaData as ɵpx, ExtTemplatecolumnComponent as ɵjs, templatecolumnMetaData as ɵjr, ExtTextareafieldComponent as ɵhk, textareafieldMetaData as ɵhj, ExtTextcellComponent as ɵjc, textcellMetaData as ɵjb, ExtTextcolumnComponent as ɵkc, textcolumnMetaData as ɵkb, ExtTextfieldComponent as ɵhi, textfieldMetaData as ɵhh, ExtThumbComponent as ɵoy, thumbMetaData as ɵox, ExtTimefieldComponent as ɵhm, timefieldMetaData as ɵhl, ExtTimepanelComponent as ɵmy, timepanelMetaData as ɵmx, ExtTimetriggerComponent as ɵie, timetriggerMetaData as ɵid, ExtTitleComponent as ɵqe, titleMetaData as ɵqd, ExtTitlebarComponent as ɵqg, titlebarMetaData as ɵqf, ExtTogglefieldComponent as ɵho, togglefieldMetaData as ɵhn, ExtTogglesliderComponent as ɵpa, togglesliderMetaData as ɵoz, ExtToolComponent as ɵqi, toolMetaData as ɵqh, ExtToolbarComponent as ɵqm, toolbarMetaData as ɵql, ExtTooltipComponent as ɵqc, tooltipMetaData as ɵqb, ExtTreeComponent as ɵli, treeMetaData as ɵlh, ExtTreecellComponent as ɵje, treecellMetaData as ɵjd, ExtTreecolumnComponent as ɵke, treecolumnMetaData as ɵkd, ExtTreelistComponent as ɵls, treelistMetaData as ɵlr, ExtTreelistitemComponent as ɵlu, treelistitemMetaData as ɵlt, ExtTriggerComponent as ɵig, triggerMetaData as ɵif, ExtUrlfieldComponent as ɵii, urlfieldMetaData as ɵih, ExtVideoComponent as ɵre, videoMetaData as ɵrd, ExtViewportComponent as ɵrg, viewportMetaData as ɵrf, ExtWidgetComponent as ɵri, widgetMetaData as ɵrh, ExtWidgetcellComponent as ɵjg, widgetcellMetaData as ɵjf, ExtWindowComponent as ɵey, windowMetaData as ɵex, ExtYearpickerComponent as ɵnc, yearpickerMetaData as ɵnb };
 
 //# sourceMappingURL=sencha-ext-angular.js.map
