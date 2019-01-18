@@ -4,6 +4,8 @@ import {generateData} from  './generateData'
 
 declare var Ext: any;
 
+Ext.require('Ext.chart.interactions.ItemEdit');
+
 @Component({
   selector: 'CustomIcons-component',
   templateUrl: './CustomIcons.html',

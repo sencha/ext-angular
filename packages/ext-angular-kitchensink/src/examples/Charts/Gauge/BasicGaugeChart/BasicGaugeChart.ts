@@ -4,6 +4,10 @@ import { createData } from './createData'
 
 declare var Ext: any;
 
+Ext.require([
+    'Ext.chart.series.Gauge'
+]);
+
 @Component({
     selector: 'BasicGaugeChart-component',
     templateUrl: './BasicGaugeChart.html',

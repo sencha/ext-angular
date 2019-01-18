@@ -3,6 +3,17 @@ import {createData} from './createData';
 
 declare var Ext: any;
 
+
+Ext.require([
+  'Ext.chart.interactions.PanZoom',
+  'Ext.chart.axis.Numeric',
+  'Ext.chart.axis.Category',
+  'Ext.chart.axis.Numeric3D',
+  'Ext.chart.grid.HorizontalGrid3D',
+  'Ext.chart.series.Bar3D',
+  'Ext.chart.axis.Category3D'
+]);
+
 @Component({
   selector: 'Basic3DColumn-component',
   templateUrl: './Basic3DColumn.html',

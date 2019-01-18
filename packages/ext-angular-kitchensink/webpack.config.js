@@ -13,9 +13,10 @@ module.exports = function (env) {
   var buildprofile = env.profile || process.env.npm_package_extbuild_defaultprofile
   var buildenvironment = env.environment || process.env.npm_package_extbuild_defaultenvironment
   var buildverbose = env.verbose || process.env.npm_package_extbuild_defaultverbose
-  var genProdData = JSON.parse(env.genProdData) || false
+  var genProdData = env.genProdData ? JSON.parse(env.genProdData) : false
   if (buildprofile == 'all') { buildprofile = '' }
   const isProd = buildenvironment === 'production'
+  var mode = isProd ? 'production': 'development'
 
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
@@ -35,11 +36,17 @@ module.exports = function (env) {
         port: port,
         emit: true,
         browser: browserprofile,
-        genProdData: genProdData,
+        genProdData,
         watch: watchprofile,
         profile: buildprofile, 
         environment: buildenvironment, 
         verbose: buildverbose,
+        prodFileReplacementConfig: [
+          {
+            "replace": "src/environments/environment.ts",
+            "with": "src/environments/environment.prod.ts"
+          }
+        ],
         theme: 'theme-kitchensink',
         packages: [
           'font-ext', 
@@ -71,7 +78,7 @@ module.exports = function (env) {
       })
     ]
   return {
-    mode: 'development',
+    mode,
     entry: {
       polyfills: "./polyfills.ts",
       main: "./main.ts"

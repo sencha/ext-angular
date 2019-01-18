@@ -3,6 +3,13 @@ import {createData} from './createData';
 
 declare var Ext: any;
 
+Ext.require([
+    'Ext.chart.series.Line',
+    'Ext.chart.axis.Numeric',
+    'Ext.chart.axis.Time',
+    'Ext.chart.navigator.Container'
+]);
+
 @Component({
   selector: 'Navigator-component',
   templateUrl: './Navigator.html',

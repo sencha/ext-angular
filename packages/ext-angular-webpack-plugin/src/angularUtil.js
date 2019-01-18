@@ -15,7 +15,8 @@ export function getValidateOptions() {
       "theme":       {"type": [ "string" ]},
       "toolkit":     {"type": [ "string" ]},
       "packages":    {"type": [ "string", "array" ]},
-      "genProdData": {"type": [ "boolean" ]}
+      "genProdData": {"type": [ "boolean" ]},
+      "prodFileReplacementConfig": {"type": [ "array" ]}
     },
     "additionalProperties": false
     // "errorMessage": {
@@ -35,7 +36,8 @@ export function getDefaultOptions() {
     environment: 'development', 
     verbose: 'no',
     toolkit: 'modern',
-    packages: null
+    packages: null,
+    prodFileReplacementConfig: []
   }
 }
 

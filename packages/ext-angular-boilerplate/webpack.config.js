@@ -22,6 +22,7 @@ module.exports = function (env) {
   }
   if (buildprofile == 'all') { buildprofile = '' }
   const isProd = buildenvironment === 'production'
+  const mode = isProd ? 'production' : 'development'
 
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
@@ -60,7 +61,7 @@ module.exports = function (env) {
       })
     ]
     return {
-      mode: 'development',
+      mode,
       entry: {
         polyfills: "./polyfills.ts",
         main: "./main.ts"

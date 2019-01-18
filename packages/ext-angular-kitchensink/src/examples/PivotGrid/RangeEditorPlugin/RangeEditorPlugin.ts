@@ -4,6 +4,8 @@ import { model } from '../SaleModel';
 
 declare var Ext: any;
 
+Ext.require(['Ext.pivot.plugin.RangeEditor']);
+
 @Component({
   selector: 'RangeEditorPlugin-component',
   templateUrl: './RangeEditorPlugin.html',

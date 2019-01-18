@@ -75,36 +75,38 @@ export default class ExtWebpackPlugin {
         })
       }
 
-      compiler.hooks.emit.tapAsync(`ext-emit`, (compilation, callback) => {
-        require('./pluginUtil').logv(this.plugin.options,'HOOK emit')
-        //if (this.plugin.vars.production) {
-          require(`./pluginUtil`).emit(compiler, compilation, this.plugin.vars, this.plugin.options, callback)
-        //}
-        // else {
-        //   callback()
-        // }
-      })
+      if(!this.plugin.options.genProdData) {
+        compiler.hooks.emit.tapAsync(`ext-emit`, (compilation, callback) => {
+          require('./pluginUtil').logv(this.plugin.options,'HOOK emit')
+          //if (this.plugin.vars.production) {
+            require(`./pluginUtil`).emit(compiler, compilation, this.plugin.vars, this.plugin.options, callback)
+          //}
+          // else {
+          //   callback()
+          // }
+        })
 
-      compiler.hooks.done.tap(`ext-done`, () => {
-        require('./pluginUtil').logv(this.plugin.options,'HOOK done')
+        compiler.hooks.done.tap(`ext-done`, () => {
+          require('./pluginUtil').logv(this.plugin.options,'HOOK done')
 
-        try {
-          if(this.plugin.options.browser == true && this.plugin.options.watch == 'yes' && this.plugin.vars.production == false) {
-            if (this.plugin.vars.browserCount == 0) {
-            //if (this.plugin.vars.browserCount == 0 && compilation.errors.length == 0) {
-              var url = 'http://localhost:' + this.plugin.options.port
-              require('./pluginUtil').log(this.plugin.vars.app + `Opening browser at ${url}`)
-              this.plugin.vars.browserCount++
-              const opn = require('opn')
-              opn(url)
+          try {
+            if(this.plugin.options.browser == true && this.plugin.options.watch == 'yes' && this.plugin.vars.production == false) {
+              if (this.plugin.vars.browserCount == 0) {
+              //if (this.plugin.vars.browserCount == 0 && compilation.errors.length == 0) {
+                var url = 'http://localhost:' + this.plugin.options.port
+                require('./pluginUtil').log(this.plugin.vars.app + `Opening browser at ${url}`)
+                this.plugin.vars.browserCount++
+                const opn = require('opn')
+                opn(url)
+              }
             }
           }
-        }
-        catch (e) {
-          console.log(e)
-        }
-        require('./pluginUtil').log(this.plugin.vars.app + `Completed ext-webpack-plugin processing`)
-      })
+          catch (e) {
+            console.log(e)
+          }
+          require('./pluginUtil').log(this.plugin.vars.app + `Completed ext-webpack-plugin processing`)
+        })
+      }
 
     }
     else {console.log('not webpack 4')}
