@@ -11,7 +11,6 @@ import {
   ElementRef,
   forwardRef
 } from '@angular/core';
-//import { RouterOutlet, ChildrenOutletContexts } from "@angular/router";
 import { base } from './base';
 export class cartesianMetaData {
   public static XTYPE: string = 'cartesian';
@@ -481,11 +480,13 @@ export class ExtCartesianComponent extends base implements OnInit,AfterContentIn
     eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {
       super(eRef.nativeElement,cartesianMetaData,hostComponent)
     }
-  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,cartesianMetaData,hostComponent)}
-  public ngOnInit() {this.baseOnInit(cartesianMetaData)}
-  //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+  public ngOnInit() {
+    this.baseOnInit(cartesianMetaData)
+  }
   public ngAfterContentInit() {
     this.baseAfterContentInit()
     this['ready'].emit(this)
-    }
+  }
+  //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+
 }

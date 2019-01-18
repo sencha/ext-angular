@@ -11,7 +11,6 @@ import {
   ElementRef,
   forwardRef
 } from '@angular/core';
-//import { RouterOutlet, ChildrenOutletContexts } from "@angular/router";
 import { base } from './base';
 export class legendMetaData {
   public static XTYPE: string = 'legend';
@@ -515,11 +514,13 @@ export class ExtLegendComponent extends base implements OnInit,AfterContentInit,
     eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {
       super(eRef.nativeElement,legendMetaData,hostComponent)
     }
-  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,legendMetaData,hostComponent)}
-  public ngOnInit() {this.baseOnInit(legendMetaData)}
-  //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+  public ngOnInit() {
+    this.baseOnInit(legendMetaData)
+  }
   public ngAfterContentInit() {
     this.baseAfterContentInit()
     this['ready'].emit(this)
-    }
+  }
+  //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+
 }

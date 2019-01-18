@@ -11,7 +11,6 @@ import {
   ElementRef,
   forwardRef
 } from '@angular/core';
-//import { RouterOutlet, ChildrenOutletContexts } from "@angular/router";
 import { base } from './base';
 export class timefieldMetaData {
   public static XTYPE: string = 'timefield';
@@ -467,11 +466,13 @@ export class ExtTimefieldComponent extends base implements OnInit,AfterContentIn
     eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {
       super(eRef.nativeElement,timefieldMetaData,hostComponent)
     }
-  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,timefieldMetaData,hostComponent)}
-  public ngOnInit() {this.baseOnInit(timefieldMetaData)}
-  //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+  public ngOnInit() {
+    this.baseOnInit(timefieldMetaData)
+  }
   public ngAfterContentInit() {
     this.baseAfterContentInit()
     this['ready'].emit(this)
-    }
+  }
+  //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+
 }

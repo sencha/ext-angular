@@ -11,7 +11,6 @@ import {
   ElementRef,
   forwardRef
 } from '@angular/core';
-//import { RouterOutlet, ChildrenOutletContexts } from "@angular/router";
 import { base } from './base';
 export class lockedgridregionMetaData {
   public static XTYPE: string = 'lockedgridregion';
@@ -481,11 +480,13 @@ export class ExtLockedgridregionComponent extends base implements OnInit,AfterCo
     eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {
       super(eRef.nativeElement,lockedgridregionMetaData,hostComponent)
     }
-  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,lockedgridregionMetaData,hostComponent)}
-  public ngOnInit() {this.baseOnInit(lockedgridregionMetaData)}
-  //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+  public ngOnInit() {
+    this.baseOnInit(lockedgridregionMetaData)
+  }
   public ngAfterContentInit() {
     this.baseAfterContentInit()
     this['ready'].emit(this)
-    }
+  }
+  //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+
 }

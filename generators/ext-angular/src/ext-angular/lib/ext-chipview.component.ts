@@ -11,7 +11,6 @@ import {
   ElementRef,
   forwardRef
 } from '@angular/core';
-//import { RouterOutlet, ChildrenOutletContexts } from "@angular/router";
 import { base } from './base';
 export class chipviewMetaData {
   public static XTYPE: string = 'chipview';
@@ -527,11 +526,13 @@ export class ExtChipviewComponent extends base implements OnInit,AfterContentIni
     eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : base) {
       super(eRef.nativeElement,chipviewMetaData,hostComponent)
     }
-  //constructor(private elementRef: ElementRef,@Host() @Optional() @SkipSelf() public hostComponent : base) {super(hostComponent,chipviewMetaData,hostComponent)}
-  public ngOnInit() {this.baseOnInit(chipviewMetaData)}
-  //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+  public ngOnInit() {
+    this.baseOnInit(chipviewMetaData)
+  }
   public ngAfterContentInit() {
     this.baseAfterContentInit()
     this['ready'].emit(this)
-    }
+  }
+  //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
+
 }

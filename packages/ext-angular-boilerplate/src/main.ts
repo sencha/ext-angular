@@ -1,5 +1,4 @@
-import {AppModule} from "./app/app.module"
-import { ExtAngularLaunchComponent } from '@sencha/ext-angular/esm5/lib/ext-angular-launch.component'
+import { bootstrapModule } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.component';
+import {AppModule} from './app/app.module';
 
-var launch = new ExtAngularLaunchComponent
-launch.bootstrapModule(AppModule)
+bootstrapModule(AppModule);

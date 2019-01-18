@@ -92,12 +92,12 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
   switch(framework) {
     case 'angular':
 
-    moduleVars.imports = moduleVars.imports + `import { ExtAngularLaunchComponent } from './ext-angular-launch.component';${newLine}`
-    moduleVars.exports = moduleVars.exports + `    ExtAngularLaunchComponent,${newLine}`
-    moduleVars.declarations = moduleVars.declarations + `    ExtAngularLaunchComponent,${newLine}`
-    var launchFile = `${libFolder}ext-angular-launch.component.${extension}`
-    fs.writeFile(launchFile, doLaunchComponent(templateToolkitFolder), function(err) {if(err){return console.log(err);} })
-    log(`launchFile`,`${launchFile}`);
+    // moduleVars.imports = moduleVars.imports + `import { ExtAngularLaunchComponent } from './ext-angular-launch.component';${newLine}`
+    // moduleVars.exports = moduleVars.exports + `    ExtAngularLaunchComponent,${newLine}`
+    // moduleVars.declarations = moduleVars.declarations + `    ExtAngularLaunchComponent,${newLine}`
+    // var launchFile = `${libFolder}ext-angular-launch.component.${extension}`
+    // fs.writeFile(launchFile, doLaunchComponent(templateToolkitFolder), function(err) {if(err){return console.log(err);} })
+    // log(`launchFile`,`${launchFile}`);
 
 
       moduleVars.imports = moduleVars.imports + `import { ExtAngularBootstrapComponent } from './ext-angular-bootstrap.component';${newLine}`
@@ -377,11 +377,11 @@ function doExtBase(templateToolkitFolder) {
 // `
 // }
 
-function doLaunchComponent(templateToolkitFolder) {
-  var p = path.resolve(templateToolkitFolder + '/ext-angular-launch.component.tpl')
-  var content = fs.readFileSync(p).toString()
-  return content
-}
+// function doLaunchComponent(templateToolkitFolder) {
+//   var p = path.resolve(templateToolkitFolder + '/ext-angular-launch.component.tpl')
+//   var content = fs.readFileSync(p).toString()
+//   return content
+// }
 
 function doBootstrapComponent(templateToolkitFolder) {
   var p = path.resolve(templateToolkitFolder + '/ext-angular-bootstrap.component.tpl')

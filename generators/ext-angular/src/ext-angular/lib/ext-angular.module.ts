@@ -3,7 +3,6 @@
 
 
 import { NgModule } from '@angular/core';
-import { ExtAngularLaunchComponent } from './ext-angular-launch.component';
 import { ExtAngularBootstrapComponent } from './ext-angular-bootstrap.component';
 import { ExtAngularBootstrapService } from './ext-angular-bootstrap.service';
 import { ExtActionsheetComponent } from './ext-actionsheet.component';
@@ -234,7 +233,6 @@ import { ExtWidgetComponent } from './ext-widget.component';
 @NgModule({
   imports:         [],
   declarations:    [
-    ExtAngularLaunchComponent,
     ExtAngularBootstrapComponent,
     ExtActionsheetComponent,
     ExtAudioComponent,
@@ -465,7 +463,6 @@ import { ExtWidgetComponent } from './ext-widget.component';
   providers:       [  ],
   entryComponents: [  ],
   exports:         [
-    ExtAngularLaunchComponent,
     ExtAngularBootstrapComponent,
     ExtActionsheetComponent,
     ExtAudioComponent,

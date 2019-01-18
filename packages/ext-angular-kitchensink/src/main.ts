@@ -1,14 +1,4 @@
-import {platformBrowserDynamic} from "@angular/platform-browser-dynamic"
-import {AppModule} from "./app/app.module"
+import { bootstrapModule } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.component';
+import {AppModule} from './app/app.module';
 
-declare var Ext: any
-Ext.application({
-  name: "$ExtAngularApp",
-  quickTips: true,
-  launch: () => {
-    platformBrowserDynamic().bootstrapModule(AppModule)
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-})
+bootstrapModule(AppModule);
