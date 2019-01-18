@@ -1,5 +1,5 @@
 import { __extends } from 'tslib';
-import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, Component, ElementRef, EventEmitter, ContentChild, ContentChildren, NgModule, defineInjectable, inject, INJECTOR, forwardRef, Host, Optional, SkipSelf } from '@angular/core';
+import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, ElementRef, EventEmitter, ContentChild, ContentChildren, Component, NgModule, forwardRef, Host, Optional, SkipSelf, defineInjectable, inject, INJECTOR } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -145,6 +145,20 @@ var base = /** @class */ (function () {
                     prop != 'handler' &&
                     prop != 'fitToParent') {
                     o[prop] = me[prop];
+                }
+            }
+        }
+        if (me._nativeElement && me._nativeElement.attributes && me._nativeElement.attributes.length > 0) {
+            for (var i = 0; i < me._nativeElement.attributes.length; i++) {
+                debugger;
+                /** @type {?} */
+                var attribute = me._nativeElement.attributes[i];
+                /** @type {?} */
+                var key = attribute.nodeName;
+                /** @type {?} */
+                var value = attribute.nodeValue;
+                if (!o[key]) {
+                    o[key] = value;
                 }
             }
         }

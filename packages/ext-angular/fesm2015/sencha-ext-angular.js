@@ -1,4 +1,4 @@
-import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, Component, Host, Optional, SkipSelf, ElementRef, forwardRef, EventEmitter, ContentChild, ContentChildren, NgModule, defineInjectable, inject, INJECTOR } from '@angular/core';
+import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, ElementRef, EventEmitter, ContentChild, ContentChildren, Component, Host, Optional, SkipSelf, forwardRef, NgModule, defineInjectable, inject, INJECTOR } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -143,6 +143,20 @@ class base {
                     prop != 'handler' &&
                     prop != 'fitToParent') {
                     o[prop] = me[prop];
+                }
+            }
+        }
+        if (me._nativeElement && me._nativeElement.attributes && me._nativeElement.attributes.length > 0) {
+            for (var i = 0; i < me._nativeElement.attributes.length; i++) {
+                debugger;
+                /** @type {?} */
+                var attribute = me._nativeElement.attributes[i];
+                /** @type {?} */
+                var key = attribute.nodeName;
+                /** @type {?} */
+                var value = attribute.nodeValue;
+                if (!o[key]) {
+                    o[key] = value;
                 }
             }
         }

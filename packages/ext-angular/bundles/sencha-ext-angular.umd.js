@@ -184,6 +184,20 @@
                         }
                     }
                 }
+                if (me._nativeElement && me._nativeElement.attributes && me._nativeElement.attributes.length > 0) {
+                    for (var i = 0; i < me._nativeElement.attributes.length; i++) {
+                        debugger;
+                        /** @type {?} */
+                        var attribute = me._nativeElement.attributes[i];
+                        /** @type {?} */
+                        var key = attribute.nodeName;
+                        /** @type {?} */
+                        var value = attribute.nodeValue;
+                        if (!o[key]) {
+                            o[key] = value;
+                        }
+                    }
+                }
                 if (true === me.fitToParent) {
                     o.top = 0,
                         o.left = 0,

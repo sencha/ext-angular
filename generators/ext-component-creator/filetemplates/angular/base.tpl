@@ -66,6 +66,20 @@ export class base {
         }
       }
     }
+    
+    if(me._nativeElement && me._nativeElement.attributes && me._nativeElement.attributes.length > 0) {
+        for(var i = 0; i < me._nativeElement.attributes.length; i++){
+            debugger;
+            var attribute = me._nativeElement.attributes[i];
+            var key = attribute.nodeName;
+            var value = attribute.nodeValue;
+            if(!o[key]){
+                o[key] = value;
+            }
+        }
+    }
+
+
     if (true === me.fitToParent) {
       o.top=0, 
       o.left=0, 
