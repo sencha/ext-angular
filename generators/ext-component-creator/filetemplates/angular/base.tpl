@@ -17,12 +17,14 @@ export class base {
   private _nativeElement: any
   private _hostComponent: any
   private _extChildren: any = false
+  private q: QueryList<any>
 
   constructor(
     nativeElement: any,
     private metaData: any,
     public hostComponent : base
   ) {
+    
     this._nativeElement = nativeElement
     this._hostComponent = hostComponent
     metaData.EVENTS.forEach( (event: any, n: any) => {

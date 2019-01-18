@@ -1,3 +1,7 @@
+
+
+
+
 import { NgModule } from '@angular/core';
 {imports}
 @NgModule({
@@ -5,10 +9,11 @@ import { NgModule } from '@angular/core';
   declarations:    [
 {declarations}
   ],
-  providers:       [ ExtAngularBootstrapService ],
-  entryComponents: [ ExtAngularBootstrapComponent ],
+  providers:       [  ],
+  entryComponents: [  ],
   exports:         [
 {exports}
   ]
 })
 export class ExtAngularModule { }
+

@@ -91,3 +91,84 @@ https://www.edc4it.com/blog/web/webpack-tutorial.html
     "strictInjectionParameters": true,
     "enableResourceInlining": true
   }
+
+
+
+
+
+import {
+  Component,
+  Injectable,
+  Injector,
+  ComponentFactoryResolver,
+  EmbeddedViewRef,
+  ApplicationRef
+  } 
+from '@angular/core'
+@Injectable({
+  providedIn: 'root'
+})
+@Component({
+  selector: 'app-root',
+  template: ``,
+})
+export class ExtAngularBootstrapService {
+  bootstrapComponent: any
+  constructor(
+      private componentFactoryResolver: ComponentFactoryResolver,
+      private appRef: ApplicationRef,
+      private injector: Injector
+  ) {}
+   appendComponentToViewport() {
+     //console.log("In appendComponentToViewport")
+    if(!this.bootstrapComponent) {
+        throw new Error("Bootstrap component not set. Please use extAngularService.setBootStrapComponent(yourComponent) to setup bootstrap component from your root module constructor")
+    }
+    //console.log("bootstrapComponent : " + this.bootstrapComponent)
+    const componentRef = this.componentFactoryResolver
+      .resolveComponentFactory(this.bootstrapComponent)
+      .create(this.injector)
+    this.appRef.attachView(componentRef.hostView)
+    const domElem = (componentRef.hostView as EmbeddedViewRef<any>)
+      .rootNodes[0] as HTMLElement
+    var root = document.getElementsByClassName('x-viewport-body-el')[0]
+    root.appendChild(domElem)
+  }
+  setBootStrapComponent(component:any) {
+    //console.log("In setBootStrapComponent")
+    this.bootstrapComponent = component
+  }
+}
+
+//import { Component } from '@angular/core'
+//import { ExtAngularBootstrapService } from './ext-angular-bootstrap.service'
+
+@Component({
+  selector: 'app-root',
+  template: ``,
+})
+export class ExtAngularBootstrapComponent {
+  constructor(private extAngularService: ExtAngularBootstrapService) {
+    //console.log("In App constructor")
+    this.extAngularService.appendComponentToViewport()
+  }
+}
+
+
+//export class ExtAngularBootstrapComponent;
+//export class ExtAngularBootstrapService;
+  declare var Ext: any
+import { platformBrowserDynamic } from "@angular/platform-browser-dynamic"
+export function launch(AppModule) {
+
+  Ext.application({
+    name: "$ExtAngularApp",
+    quickTips: true,
+    launch: () => {
+      platformBrowserDynamic().bootstrapModule(AppModule)
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+  })
+}

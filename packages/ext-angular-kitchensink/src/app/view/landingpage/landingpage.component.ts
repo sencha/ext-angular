@@ -6,7 +6,10 @@ import { VERSION } from '@angular/core';
 import { Subject } from "rxjs";
 import { getFiles } from "./code_preview_helper";
 
-Ext.require('Ext.panel.Collapser')
+Ext.require([
+  'Ext.panel.Collapser',
+  'Ext.data.TreeStore'
+])
 const hljs: any = require('highlight.js/lib/highlight');
 hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescript'));
 hljs.registerLanguage('http', require('highlight.js/lib/languages/http'));
