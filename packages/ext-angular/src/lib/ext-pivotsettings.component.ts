@@ -334,6 +334,7 @@ export class pivotsettingsMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

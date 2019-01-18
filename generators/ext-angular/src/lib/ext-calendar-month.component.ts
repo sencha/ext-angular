@@ -352,6 +352,7 @@ export class calendar_monthMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

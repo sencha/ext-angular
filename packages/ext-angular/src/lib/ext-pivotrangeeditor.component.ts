@@ -334,6 +334,7 @@ export class pivotrangeeditorMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

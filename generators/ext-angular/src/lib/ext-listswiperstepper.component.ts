@@ -262,6 +262,7 @@ export class listswiperstepperMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

@@ -95,7 +95,6 @@ var base = /** @class */ (function () {
         this.metaData = metaData;
         this.hostComponent = hostComponent;
         this._extChildren = false;
-        //    console.log('constructor')
         this._nativeElement = nativeElement;
         this._hostComponent = hostComponent;
         metaData.EVENTS.forEach(function (event, n) {
@@ -430,12 +429,17 @@ var base = /** @class */ (function () {
         /** @type {?} */
         var parentxtype = parentCmp.xtype;
         /** @type {?} */
-        var childxtype = childCmp.xtype
-        //      console.log('parent: ' + parentxtype + ', child: ' + childxtype)
-        //      this.hostComponent._extChildren = true
-        ;
-        //      console.log('parent: ' + parentxtype + ', child: ' + childxtype)
-        //      this.hostComponent._extChildren = true
+        var childxtype = childCmp.xtype;
+        if (this.ext.initialConfig.align != undefined) {
+            if (parentxtype != 'titlebar') {
+                console.error('Can only use align property if parent is a Titlebar');
+                return;
+            }
+        }
+        //      if (childxtype === 'searchfield') {
+        //        if (this.ext.initialConfig.align != undefined) {
+        //        }
+        //      }
         if (parentxtype === 'grid') {
             if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
                 parentCmp.addColumn(childCmp);
@@ -622,7 +626,25 @@ var base = /** @class */ (function () {
             if (this.ext != undefined) {
                 /** @type {?} */
                 var capPropName = propName.charAt(0).toUpperCase() + propName.slice(1);
-                this.ext['set' + capPropName](val);
+                /** @type {?} */
+                var setFunction = 'set' + capPropName
+                //        console.log(this)
+                //        console.log(this.ext.xtype)
+                //        console.log(propName)
+                //        console.log(setFunction)
+                //        console.log(this.ext[setFunction])
+                ;
+                //        console.log(this)
+                //        console.log(this.ext.xtype)
+                //        console.log(propName)
+                //        console.log(setFunction)
+                //        console.log(this.ext[setFunction])
+                if (this.ext[setFunction] != undefined) {
+                    this.ext[setFunction](val);
+                }
+                else {
+                    console.error(setFunction + ' not found for ' + this.ext.xtype);
+                }
             }
             else {
                 if (verb == 'changed') {
@@ -951,6 +973,7 @@ var actionsheetMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -1372,6 +1395,7 @@ var audioMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -1793,6 +1817,7 @@ var buttonMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -2184,6 +2209,7 @@ var calendar_eventMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -2709,6 +2735,7 @@ var calendar_form_addMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -3278,6 +3305,7 @@ var calendar_calendar_pickerMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -3825,6 +3853,7 @@ var calendar_form_editMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -4394,6 +4423,7 @@ var calendar_timefieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -4791,6 +4821,7 @@ var calendar_daysheaderMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -5166,6 +5197,7 @@ var calendar_weeksheaderMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -5631,6 +5663,7 @@ var calendar_listMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -6220,6 +6253,7 @@ var calendar_dayMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -6797,6 +6831,7 @@ var calendar_daysMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -7376,6 +7411,7 @@ var calendar_monthMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -7941,6 +7977,7 @@ var calendarMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -8492,6 +8529,7 @@ var calendar_weekMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -9071,6 +9109,7 @@ var calendar_weeksMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -9536,6 +9575,7 @@ var calendar_dayviewMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -9969,6 +10009,7 @@ var calendar_daysviewMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -10402,6 +10443,7 @@ var calendar_monthviewMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -10629,6 +10671,7 @@ var calendar_multiviewMetaData = /** @class */ (function () {
         'views',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -10928,6 +10971,7 @@ var calendar_weekviewMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -11361,6 +11405,7 @@ var calendar_weeksviewMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -11796,6 +11841,7 @@ var carouselMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -12067,6 +12113,7 @@ var axis3dMetaData = /** @class */ (function () {
         'visibleRange',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -12410,6 +12457,7 @@ var cartesianMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -12921,6 +12969,7 @@ var chartMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -13178,6 +13227,7 @@ var interactionMetaData = /** @class */ (function () {
         'listeners',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -13537,6 +13587,7 @@ var legendMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -14024,6 +14075,7 @@ var chartnavigatorMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -14489,6 +14541,7 @@ var polarMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -14996,6 +15049,7 @@ var spacefillingMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -15435,6 +15489,7 @@ var chipMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -15798,6 +15853,7 @@ var componentMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -16203,6 +16259,7 @@ var containerMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -16594,6 +16651,7 @@ var d3_canvasMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -16983,6 +17041,7 @@ var d3_heatmapMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -17402,6 +17461,7 @@ var d3_packMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -17819,6 +17879,7 @@ var d3_partitionMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -18240,6 +18301,7 @@ var d3_sunburstMetaData = /** @class */ (function () {
         'zoomParentDotRadius',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -18663,6 +18725,7 @@ var d3_treeMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -19086,6 +19149,7 @@ var d3_horizontal_treeMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -19513,6 +19577,7 @@ var d3_treemapMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -19894,6 +19959,7 @@ var d3_svgMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -20273,6 +20339,7 @@ var d3MetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -20808,6 +20875,7 @@ var boundlistMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -21365,6 +21433,7 @@ var chipviewMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -21914,6 +21983,7 @@ var componentdataviewMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -22399,6 +22469,7 @@ var dataitemMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -22878,6 +22949,7 @@ var dataviewMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -23319,6 +23391,7 @@ var emptytextMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -23696,6 +23769,7 @@ var indexbarMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -24075,6 +24149,7 @@ var itemheaderMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -24606,6 +24681,7 @@ var listMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -25103,6 +25179,7 @@ var listitemMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -25532,6 +25609,7 @@ var listswiperitemMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -25971,6 +26049,7 @@ var listswiperstepperMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -26430,6 +26509,7 @@ var nestedlistMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -26853,6 +26933,7 @@ var pullrefreshbarMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -27222,6 +27303,7 @@ var pullrefreshspinnerMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -27595,6 +27677,7 @@ var simplelistitemMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -28084,6 +28167,7 @@ var dialogMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -28619,6 +28703,7 @@ var windowMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -29082,6 +29167,7 @@ var drawMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -29411,6 +29497,7 @@ var surfaceMetaData = /** @class */ (function () {
         'y',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -29768,6 +29855,7 @@ var editorMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -30225,6 +30313,7 @@ var checkboxMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -30670,6 +30759,7 @@ var checkboxfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -31231,6 +31321,7 @@ var comboboxMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -31804,6 +31895,7 @@ var comboboxfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -32257,6 +32349,7 @@ var containerfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -32694,6 +32787,7 @@ var fieldcontainerMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -33187,6 +33281,7 @@ var datefieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -33688,6 +33783,7 @@ var datepickerfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -34189,6 +34285,7 @@ var datepickernativefieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -34632,6 +34729,7 @@ var displayfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -35099,6 +35197,7 @@ var emailfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -35528,6 +35627,7 @@ var fieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -36001,6 +36101,7 @@ var filefieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -36430,6 +36531,7 @@ var filebuttonMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -36861,6 +36963,7 @@ var hiddenfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -37294,6 +37397,7 @@ var inputfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -37775,6 +37879,7 @@ var numberfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -38272,6 +38377,7 @@ var fieldpanelMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -38771,6 +38877,7 @@ var passwordfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -39260,6 +39367,7 @@ var pickerfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -39709,6 +39817,7 @@ var radioMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -40154,6 +40263,7 @@ var radiofieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -40625,6 +40735,7 @@ var searchfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -41160,6 +41271,7 @@ var selectfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -41613,6 +41725,7 @@ var singlesliderfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -42064,6 +42177,7 @@ var sliderfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -42561,6 +42675,7 @@ var spinnerfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -43038,6 +43153,7 @@ var textfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -43511,6 +43627,7 @@ var textareafieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -44004,6 +44121,7 @@ var timefieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -44459,6 +44577,7 @@ var togglefieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -44782,6 +44901,7 @@ var cleartriggerMetaData = /** @class */ (function () {
         'y',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -45005,6 +45125,7 @@ var datetriggerMetaData = /** @class */ (function () {
         'y',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -45228,6 +45349,7 @@ var expandtriggerMetaData = /** @class */ (function () {
         'y',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -45457,6 +45579,7 @@ var menutriggerMetaData = /** @class */ (function () {
         'y',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -45680,6 +45803,7 @@ var revealtriggerMetaData = /** @class */ (function () {
         'y',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -45903,6 +46027,7 @@ var spindowntriggerMetaData = /** @class */ (function () {
         'y',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -46126,6 +46251,7 @@ var spinuptriggerMetaData = /** @class */ (function () {
         'y',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -46349,6 +46475,7 @@ var timetriggerMetaData = /** @class */ (function () {
         'y',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -46572,6 +46699,7 @@ var triggerMetaData = /** @class */ (function () {
         'y',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -46947,6 +47075,7 @@ var urlfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -47376,6 +47505,7 @@ var fieldsetMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -47887,6 +48017,7 @@ var formpanelMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -48238,6 +48369,7 @@ var gridcellbaseMetaData = /** @class */ (function () {
         'y',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -48477,6 +48609,7 @@ var booleancellMetaData = /** @class */ (function () {
         'zeroValue',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -48718,6 +48851,7 @@ var gridcellMetaData = /** @class */ (function () {
         'zeroValue',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -48945,6 +49079,7 @@ var checkcellMetaData = /** @class */ (function () {
         'y',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -49180,6 +49315,7 @@ var datecellMetaData = /** @class */ (function () {
         'zeroValue',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -49415,6 +49551,7 @@ var numbercellMetaData = /** @class */ (function () {
         'zeroValue',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -49650,6 +49787,7 @@ var rownumberercellMetaData = /** @class */ (function () {
         'zeroValue',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -49883,6 +50021,7 @@ var textcellMetaData = /** @class */ (function () {
         'zeroValue',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -50130,6 +50269,7 @@ var treecellMetaData = /** @class */ (function () {
         'zeroValue',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -50361,6 +50501,7 @@ var widgetcellMetaData = /** @class */ (function () {
         'y',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -50720,6 +50861,7 @@ var celleditorMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -51247,6 +51389,7 @@ var booleancolumnMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -51762,6 +51905,7 @@ var checkcolumnMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -52275,6 +52419,7 @@ var gridcolumnMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -52784,6 +52929,7 @@ var columnMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -53293,6 +53439,7 @@ var templatecolumnMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -53804,6 +53951,7 @@ var datecolumnMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -54315,6 +54463,7 @@ var numbercolumnMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -54826,6 +54975,7 @@ var rownumbererMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -55341,6 +55491,7 @@ var selectioncolumnMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -55854,6 +56005,7 @@ var textcolumnMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -56363,6 +56515,7 @@ var treecolumnMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -56936,6 +57089,7 @@ var gridMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -57453,6 +57607,7 @@ var headercontainerMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -57896,6 +58051,7 @@ var lockedgridMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -58385,6 +58541,7 @@ var lockedgridregionMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -58820,6 +58977,7 @@ var gridcolumnsmenuMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -59217,6 +59375,7 @@ var gridgroupbythismenuitemMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -59624,6 +59783,7 @@ var gridshowingroupsmenuitemMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -60039,6 +60199,7 @@ var gridsortascmenuitemMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -60454,6 +60615,7 @@ var gridsortdescmenuitemMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -60875,6 +61037,7 @@ var pagingtoolbarMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -61266,6 +61429,7 @@ var gridrowMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -61629,6 +61793,7 @@ var rowbodyMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -62002,6 +62167,7 @@ var rowheaderMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -62377,6 +62543,7 @@ var gridsummaryrowMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -62944,6 +63111,7 @@ var treeMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -63429,6 +63597,7 @@ var imageMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -63806,6 +63975,7 @@ var imgMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -64183,6 +64353,7 @@ var indicatorMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -64552,6 +64723,7 @@ var labelMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -64937,6 +65109,7 @@ var treelistMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -65258,6 +65431,7 @@ var treelistitemMetaData = /** @class */ (function () {
         'y',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -65549,6 +65723,7 @@ var loadmaskMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -65916,6 +66091,7 @@ var maskMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -66301,6 +66477,7 @@ var mediaMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -66722,6 +66899,7 @@ var menucheckitemMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -67123,6 +67301,7 @@ var menuitemMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -67604,6 +67783,7 @@ var menuMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -68055,6 +68235,7 @@ var menuradioitemMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -68422,6 +68603,7 @@ var menuseparatorMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -68919,6 +69101,7 @@ var messageboxMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -69376,6 +69559,7 @@ var navigationviewMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -69863,6 +70047,7 @@ var panelMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -70436,6 +70621,7 @@ var datepanelMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -70853,6 +71039,7 @@ var datetitleMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -71274,6 +71461,7 @@ var panelheaderMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -71773,6 +71961,7 @@ var timepanelMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -72190,6 +72379,7 @@ var paneltitleMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -72721,6 +72911,7 @@ var yearpickerMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -73302,6 +73493,7 @@ var datepickerMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -73837,6 +74029,7 @@ var pickerMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -74372,6 +74565,7 @@ var selectpickerMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -74893,6 +75087,7 @@ var pickerslotMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -75438,6 +75633,7 @@ var tabletpickerMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -75797,6 +75993,7 @@ var pivotgridcellMetaData = /** @class */ (function () {
         'zeroValue',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -76038,6 +76235,7 @@ var pivotgridgroupcellMetaData = /** @class */ (function () {
         'zeroValue',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -76149,6 +76347,7 @@ var pivotd3containerMetaData = /** @class */ (function () {
         'matrix',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -76432,6 +76631,7 @@ var pivotheatmapMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -76861,6 +77061,7 @@ var pivottreemapMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -77442,6 +77643,7 @@ var pivotgridMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -78027,6 +78229,7 @@ var pivotconfigfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -78510,6 +78713,7 @@ var pivotconfigcontainerMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -79043,6 +79247,7 @@ var pivotconfigformMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -79568,6 +79773,7 @@ var pivotconfigpanelMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -80101,6 +80307,7 @@ var pivotsettingsMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -80640,6 +80847,7 @@ var pivotrangeeditorMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -81059,6 +81267,7 @@ var pivotgridrowMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -81430,6 +81639,7 @@ var progressMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -81801,6 +82011,7 @@ var progressbarwidgetMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -82222,6 +82433,7 @@ var segmentedbuttonMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -82721,6 +82933,7 @@ var sheetMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -83142,6 +83355,7 @@ var sliderMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -83517,6 +83731,7 @@ var thumbMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -83900,6 +84115,7 @@ var togglesliderMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -84271,6 +84487,7 @@ var spacerMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -84676,6 +84893,7 @@ var sparklinebarMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -85057,6 +85275,7 @@ var sparklineMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -85466,6 +85685,7 @@ var sparklineboxMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -85857,6 +86077,7 @@ var sparklinebulletMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -86250,6 +86471,7 @@ var sparklinediscreteMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -86665,6 +86887,7 @@ var sparklinelineMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -87054,6 +87277,7 @@ var sparklinepieMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -87447,6 +87671,7 @@ var sparklinetristateMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -87856,6 +88081,7 @@ var splitbuttonMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -88281,6 +88507,7 @@ var tabbarMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -88714,6 +88941,7 @@ var tabpanelMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -89143,6 +89371,7 @@ var tabMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -89648,6 +89877,7 @@ var tooltipMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -90051,6 +90281,7 @@ var titleMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -90464,6 +90695,7 @@ var titlebarMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -90857,6 +91089,7 @@ var toolMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -91236,6 +91469,7 @@ var paneltoolMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -91647,6 +91881,7 @@ var toolbarMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -92036,6 +92271,7 @@ var colorbuttonMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -92401,6 +92637,7 @@ var colorpickercolorpreviewMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -92882,6 +93119,7 @@ var colorfieldMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -93107,6 +93345,7 @@ var colorselectorMetaData = /** @class */ (function () {
         'value',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -93396,6 +93635,7 @@ var gaugeMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -93817,6 +94057,7 @@ var mapMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -94282,6 +94523,7 @@ var google_mapMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -94717,6 +94959,7 @@ var ratingMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -95104,6 +95347,7 @@ var videoMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -95537,6 +95781,7 @@ var viewportMetaData = /** @class */ (function () {
         'zIndex',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];
@@ -95842,6 +96087,7 @@ var widgetMetaData = /** @class */ (function () {
         'y',
         'platformConfig',
         'responsiveConfig',
+        'align',
         'fitToParent',
         'config'
     ];

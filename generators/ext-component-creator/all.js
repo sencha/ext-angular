@@ -263,6 +263,7 @@ function oneItem(o, libFolder, framework, extension, num, xtype, alias, moduleVa
     if (haveResponsiveConfig == false) {
       sPROPERTIES = `${sPROPERTIES}    'responsiveConfig',${newLine}`
     }
+    sPROPERTIES = `${sPROPERTIES}    'align',${newLine}`
     sPROPERTIES = `${sPROPERTIES}    'fitToParent',${newLine}`
     sPROPERTIES = `${sPROPERTIES}    'config'${newLine}`
 

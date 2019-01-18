@@ -214,6 +214,7 @@ export class pivotgridrowMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

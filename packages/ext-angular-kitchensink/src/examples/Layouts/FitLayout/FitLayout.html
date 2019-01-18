@@ -1,10 +1,10 @@
-<container #item [layout]="'vbox'" [padding]="10" [width]="900">
-    <panel #item
+<container  [layout]="'vbox'" [padding]="10" [width]="900">
+    <panel 
         [shadow]="true" [ui]="'instructions'" [margin]="'0 0 20 0'"
         [html]="'A <b>fit</b> layout displays a single item, which takes on the full height and width of the container.'"
     ></panel>
-    <panel #item [layout]="'fit'" [height]="200" [flex]="1" [shadow]="true">
-        <container #item 
+    <panel  [layout]="'fit'" [height]="200" [flex]="1" [shadow]="true">
+        <container  
             [layout]="{type: 'vbox', pack: 'center', align: 'center'}" 
             [style]="colors.card.red" [html]="'Content'"
         ></container>

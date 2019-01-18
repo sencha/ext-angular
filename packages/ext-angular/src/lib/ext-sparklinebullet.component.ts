@@ -230,6 +230,7 @@ export class sparklinebulletMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

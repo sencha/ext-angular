@@ -1,10 +1,10 @@
-<container #item layout="fit" padding="10" [fitToParent]="true">
-    <pivotgrid #item
+<container  layout="fit" padding="10" [fitToParent]="true">
+    <pivotgrid 
         (ready)="onPivotGridRead($event)"
         shadow="true"
         [matrix]="pivotgridMatrix"
     ></pivotgrid>
-    <toolbar #item
+    <toolbar 
         docked="top"
         ui="app-transparent-toolbar"
         padding="5 8"
@@ -19,7 +19,7 @@
             ui: 'action'
         }"
     >
-        <button #item text="Expand All" [handler]="this.expandAll"> </button>
-        <button #item text="Collapse All" [handler]="this.collapseAll"> </button>
+        <button  text="Expand All" [handler]="this.expandAll"> </button>
+        <button  text="Collapse All" [handler]="this.collapseAll"> </button>
     </toolbar>
 </container>

@@ -228,6 +228,7 @@ export class sparklinepieMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

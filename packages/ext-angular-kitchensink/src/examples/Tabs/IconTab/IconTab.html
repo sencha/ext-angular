@@ -1,4 +1,4 @@
-<tabpanel #item
+<tabpanel 
     [shadow]="true"
     [tabBar]="{ docked: 'bottom' }"
     [defaults]="{
@@ -7,19 +7,19 @@
             }"
     [fitToParent]="true"
 >
-    <panel #item [title]="'Info'" [iconCls]="'x-fa fa-info-circle'" [layout]="'center'">
-        <container #item [html]="'Docking tabs to the bottom will automatically change their style.'"></container>
+    <panel  [title]="'Info'" [iconCls]="'x-fa fa-info-circle'" [layout]="'center'">
+        <container  [html]="'Docking tabs to the bottom will automatically change their style.'"></container>
     </panel>
-    <panel #item [title]="'Download'" [iconCls]="'x-fa fa-download'" badgeText="'4'" [layout]="'center'">
-        <container #item [html]="'Badges <em>(like the 4, below)</em> can be added by setting the <code>badgeText</code> prop.'"></container>
+    <panel  [title]="'Download'" [iconCls]="'x-fa fa-download'" badgeText="'4'" [layout]="'center'">
+        <container  [html]="'Badges <em>(like the 4, below)</em> can be added by setting the <code>badgeText</code> prop.'"></container>
     </panel>
-    <panel #item  [title]="'Favorites'" [iconCls]="'x-fa fa-star'" badgeText="'Overflow Test'" [layout]="'center'">
-        <container #item [html]="'Badge labels will truncate if the text is wider than the tab.'"></container>
+    <panel   [title]="'Favorites'" [iconCls]="'x-fa fa-star'" badgeText="'Overflow Test'" [layout]="'center'">
+        <container  [html]="'Badge labels will truncate if the text is wider than the tab.'"></container>
     </panel>
-    <panel #item [title]="'Bookmarks'" [iconCls]="'x-fa fa-bookmark'" [layout]="'center'">
-        <container #item html='Tabbars are <code>ui:"dark"</code> by default, but also have light variants.'></container>
+    <panel  [title]="'Bookmarks'" [iconCls]="'x-fa fa-bookmark'" [layout]="'center'">
+        <container  html='Tabbars are <code>ui:"dark"</code> by default, but also have light variants.'></container>
     </panel>
-    <panel #item [title]="'More'" [iconCls]="'x-fa fa-ellipsis-h'" [layout]="'center'">
-        <container #item [cls]="'action'" html='User tapped User'></container>
+    <panel  [title]="'More'" [iconCls]="'x-fa fa-ellipsis-h'" [layout]="'center'">
+        <container  [cls]="'action'" html='User tapped User'></container>
     </panel> 
 </tabpanel>

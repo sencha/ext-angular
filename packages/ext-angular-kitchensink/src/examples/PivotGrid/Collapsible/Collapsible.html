@@ -1,10 +1,10 @@
-<container #item layout="fit" padding="10" [fitToParent]="true">
-    <pivotgrid #item
+<container  layout="fit" padding="10" [fitToParent]="true">
+    <pivotgrid 
       shadow="true"
       [matrix]="this.pivotgridMatrix"
       (ready)="onReady($event)"
     ></pivotgrid>
-    <toolbar #item
+    <toolbar 
       shadow="false"
       docked="top"
       ui="app-transparent-toolbar"
@@ -19,12 +19,12 @@
         ui: 'action'
       }"
     >
-      <button #item ui="action raised" text="Collapsible">
-        <menu #item [defaults]="{ handler: this.onCollapsibleChange, group: 'buttonstyle' }">
-          <menuitem #item  text="None" value="none" [iconCls]="!collapsibleColumns && !collapsibleRows === true ? 'x-font-icon md-icon-check' : ''"></menuitem>
-          <menuitem #item  text="Rows Only" value="rows" [iconCls]="!collapsibleColumns && collapsibleRows === true ? 'x-font-icon md-icon-check': ''"></menuitem>
-          <menuitem #item  text="Columns Only" value="cols" [iconCls]="collapsibleColumns && !collapsibleRows === true ? 'x-font-icon md-icon-check' : ''"></menuitem>
-          <menuitem #item  text="Rows & Columns" value="both" [iconCls]="collapsibleColumns && collapsibleRows === true ? 'x-font-icon md-icon-check' : ''"></menuitem>
+      <button  ui="action raised" text="Collapsible">
+        <menu  [defaults]="{ handler: this.onCollapsibleChange, group: 'buttonstyle' }">
+          <menuitem   text="None" value="none" [iconCls]="!collapsibleColumns && !collapsibleRows === true ? 'x-font-icon md-icon-check' : ''"></menuitem>
+          <menuitem   text="Rows Only" value="rows" [iconCls]="!collapsibleColumns && collapsibleRows === true ? 'x-font-icon md-icon-check': ''"></menuitem>
+          <menuitem   text="Columns Only" value="cols" [iconCls]="collapsibleColumns && !collapsibleRows === true ? 'x-font-icon md-icon-check' : ''"></menuitem>
+          <menuitem   text="Rows & Columns" value="both" [iconCls]="collapsibleColumns && collapsibleRows === true ? 'x-font-icon md-icon-check' : ''"></menuitem>
         </menu>
       </button>
     </toolbar>

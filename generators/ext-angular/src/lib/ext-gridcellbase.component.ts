@@ -146,6 +146,7 @@ export class gridcellbaseMetaData {
     'y',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

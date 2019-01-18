@@ -232,6 +232,7 @@ export class sparklinetristateMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

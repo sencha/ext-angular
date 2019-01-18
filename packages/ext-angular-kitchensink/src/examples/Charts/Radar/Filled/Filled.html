@@ -1,11 +1,11 @@
-<container #item [padding]="!isPhone? '10' : ''" layout="fit"
+<container  [padding]="!isPhone? '10' : ''" layout="fit"
 [fitToParent]="true">
-<chart-toolbar #item
+<chart-toolbar 
         [onThemeChange]="this.changeTheme"
         [onRefreshClick]="this.refreshData"
         [theme]="theme"
     ></chart-toolbar>
-    <polar #item
+    <polar 
     [width]="'800px'"
         shadow="true"
         interactions="rotate"

@@ -364,6 +364,7 @@ export class calendar_form_addMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

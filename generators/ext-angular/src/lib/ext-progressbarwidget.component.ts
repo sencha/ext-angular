@@ -210,6 +210,7 @@ export class progressbarwidgetMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

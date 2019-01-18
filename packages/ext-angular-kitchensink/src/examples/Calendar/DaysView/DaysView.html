@@ -1,20 +1,20 @@
-<panel #item
+<panel 
 [shadow]="true"
 [title]="panelTitle"
 [layout]="'hbox'"
 [header]="{ titleAlign: 'center' }"
 [fitToParent]="true"
 >
-    <panel #item
+    <panel 
         [title]="calendars"
         [ui]="light"
         [width]="150"
         [bodyPadding]="5"
         [hidden]="false"
     >
-        <calendar-list #item [store]="this.store"></calendar-list>
+        <calendar-list  [store]="this.store"></calendar-list>
     </panel>
-    <calendar-days #item
+    <calendar-days 
         [store]="this.store"
         [flex]="1"
         [timezoneOffset]="0"

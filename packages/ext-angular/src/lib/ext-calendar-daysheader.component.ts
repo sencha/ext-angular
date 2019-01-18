@@ -214,6 +214,7 @@ export class calendar_daysheaderMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

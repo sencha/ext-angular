@@ -334,6 +334,7 @@ export class numbercolumnMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

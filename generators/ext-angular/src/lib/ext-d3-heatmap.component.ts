@@ -226,6 +226,7 @@ export class d3_heatmapMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

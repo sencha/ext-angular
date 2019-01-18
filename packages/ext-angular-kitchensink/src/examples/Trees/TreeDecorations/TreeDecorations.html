@@ -1,8 +1,8 @@
-<tabpanel #item
+<tabpanel 
 [tabBar]="{ docked: 'top' }"
 [fitToParent]="true">
-        <panel #item layout="fit" [title]="'Row Lines'">
-            <tree  #item
+        <panel  layout="fit" [title]="'Row Lines'">
+            <tree  
                 header="false"
                 rowLines="true"
                 rootVisible="false"
@@ -10,8 +10,8 @@
                 [store]="store"
             ></tree>
         </panel>
-        <panel #item layout="fit" [title]="'Single Expand'">
-            <tree  #item
+        <panel  layout="fit" [title]="'Single Expand'">
+            <tree  
                 header="false"
                 singleExpand="true"
                 rootVisible="false"

@@ -1,28 +1,28 @@
-<panel #item [shadow]="isPhone"> 
-    <toolbar #item [shadow]="false">
-      <container #item>
-        <div #item style="margin-right: 150px;">Default UI:</div>
+<panel  [shadow]="isPhone"> 
+    <toolbar  [shadow]="false">
+      <container >
+        <div  style="margin-right: 150px;">Default UI:</div>
       </container>
-      <segmentedbutton #item
+      <segmentedbutton 
         (change)="onButton1Change($event)"
       >
-        <button #item [value]="'low'" [text]="'Low'"></button>
-        <button #item [value]="'medium'" [text]="'Medium'"></button>
-        <button #item [value]="'high'" [text]="'High'"></button>
+        <button  [value]="'low'" [text]="'Low'"></button>
+        <button  [value]="'medium'" [text]="'Medium'"></button>
+        <button  [value]="'high'" [text]="'High'"></button>
       </segmentedbutton>
     </toolbar>
     
-    <toolbar #item [shadow]="false">
-      <container #item>
-        <div #item style="margin-right: 150px;">Toolbar UI:</div>
+    <toolbar  [shadow]="false">
+      <container >
+        <div  style="margin-right: 150px;">Toolbar UI:</div>
       </container>
-      <segmentedbutton #item 
+      <segmentedbutton  
         [defaultUI]="'toolbar-default'" 
         (change)="onButton2Change($event)"
       >
-      <button #item [value]="'low'" [text]="'Low'"></button>
-      <button #item [value]="'medium'" [text]="'Medium'"></button>
-      <button #item [value]="'high'" [text]="'High'"></button>
+      <button  [value]="'low'" [text]="'Low'"></button>
+      <button  [value]="'medium'" [text]="'Medium'"></button>
+      <button  [value]="'high'" [text]="'High'"></button>
       </segmentedbutton>
     </toolbar>
 </panel>

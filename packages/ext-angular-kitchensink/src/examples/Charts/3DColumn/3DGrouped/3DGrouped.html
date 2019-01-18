@@ -1,7 +1,7 @@
-<container #item [padding]="!isPhone?  '10': ''" layout="vbox"
+<container  [padding]="!isPhone?  '10': ''" layout="vbox"
 [fitToParent]="true">
-    <chart-toolbar #item  maxHeight="50" [downloadChartRef]="this.chart"></chart-toolbar>
-    <cartesian #item
+    <chart-toolbar   maxHeight="50" [downloadChartRef]="this.chart"></chart-toolbar>
+    <cartesian 
         shadow="true"
         flex="2"
         [store]="this.store"

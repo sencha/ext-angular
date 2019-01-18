@@ -256,6 +256,7 @@ export class d3_horizontal_treeMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

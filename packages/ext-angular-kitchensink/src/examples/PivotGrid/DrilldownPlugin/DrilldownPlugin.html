@@ -1,11 +1,11 @@
-<container #item layout="fit" padding="10" [fitToParent]="true">
-    <pivotgrid #item
+<container  layout="fit" padding="10" [fitToParent]="true">
+    <pivotgrid 
         shadow="true"
         (ready)="onPivotGridRead($event)"
         [plugins]="[{ type: 'pivotdrilldown' }]"
         [matrix]="pivotgridMatrix"
     ></pivotgrid>
-    <toolbar #item
+    <toolbar 
         shadow="false"
         docked="top"
         ui="app-transparent-toolbar"
@@ -17,10 +17,10 @@
         }"
     >
 
-        <button #item text="Expand All" [handler]="this.expandAll" ></button>
-        <button #item text="Collapse All" [handler]="this.collapseAll"> </button>
+        <button  text="Expand All" [handler]="this.expandAll" ></button>
+        <button  text="Collapse All" [handler]="this.collapseAll"> </button>
         <container layout="hbox">
-            <div #item [style]="{fontSize: '12px', fontWeight: 'normal', marginLeft: '10px'}">Double click an amount to drill down.</div>
+            <div  [style]="{fontSize: '12px', fontWeight: 'normal', marginLeft: '10px'}">Double click an amount to drill down.</div>
         </container>
     </toolbar>
 </container>

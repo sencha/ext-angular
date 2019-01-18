@@ -254,6 +254,7 @@ export class sparklinelineMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

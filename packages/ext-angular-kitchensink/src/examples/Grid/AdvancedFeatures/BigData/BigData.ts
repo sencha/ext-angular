@@ -289,7 +289,7 @@ absensesColumn = [
 }
 ];
 
-//<button #item ui ="action" [handler] ="this.onVerify" [bind] = "widgetCellBind" text = "VERIFY"></button>
+//<button  ui ="action" [handler] ="this.onVerify" [bind] = "widgetCellBind" text = "VERIFY"></button>
 //widgetCellBind = {tooltip : 'Verify {record.fullName}'};
 verifyCell = {
   xtype: 'widgetcell',

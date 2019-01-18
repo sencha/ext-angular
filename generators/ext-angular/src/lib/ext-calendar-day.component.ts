@@ -350,6 +350,7 @@ export class calendar_dayMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

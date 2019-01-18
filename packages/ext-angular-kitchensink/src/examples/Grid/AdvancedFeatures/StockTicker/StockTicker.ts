@@ -89,7 +89,7 @@ onTickDelayChange = (slider, value, oldValue) => {
 
   renderSparkline = (value) => {
     return `
-        <sparkline #item
+        <sparkline 
             [values]="value" 
             height="16"
             [tipTpl]="'Price: {y:number("0.00")}'"
@@ -119,7 +119,7 @@ renderSign = (format, value) => {
 
 
   return `
-    <div #item
+    <div 
         [style]="{ 
             color:  ${col},
             padding: '10px'

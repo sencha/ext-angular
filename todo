@@ -9,15 +9,12 @@ so 1 week for Aniket and a week-ish for Alisha
 
 
 Issues
- - ngFor, ngIf, etc - dynamic component creation logic
-    - code window does not reflect current example (dependent on ngFor - line 19) [Aniket/Marc]
-      - ExtAngular components that use Angular structural directives (e.g. ngFor, ngIf) do not dynamically update when their 
-        bound data changes.  This is preventing the following from working as desired - Code Preview 
-        (you muist reload the page to see the correct code preview panels).
 
- - hightlight.js [Aniket]
+ - hightlight.js [Aniket] 
+    - need to show .css files
 
  - tree-shaking 
+    - [Alisha] revert back from ext-angular-prod
     - [Alisha] in plugin: tree shake the typescript ExtAngular files (Aniket to review error/ Marc to check treeshaking changes)
     - test against ext-angular-gen (once CLI dependency is removed from bootstrap by Marc [DONE]) (Alisha)
 
@@ -27,12 +24,16 @@ Issues
     - Update dependency on treeshaking (Alisha)
     - document bootstrapping process - goes into guides (Aniket)
 
-- handling native html attributes
+Fixed
+- handling native html attributes [DONE]
     - [Aniket/Marc] UI for SearchField is breaking. Search form is not docked right. 
         (Form fields - Eg( All>Components>Forms>Searchfield or ALl->Components>TitleBar) 
         - Need to add align in source code of button and searchfield.
-
-Fixed
+ - ngFor, ngIf, etc - dynamic component creation logic [DONE]
+    - code window does not reflect current example (dependent on ngFor - line 19) [Aniket/Marc]
+      - ExtAngular components that use Angular structural directives (e.g. ngFor, ngIf) do not dynamically update when their 
+        bound data changes.  This is preventing the following from working as desired - Code Preview 
+        (you muist reload the page to see the correct code preview panels).
  - [Marc - workaround, see example, specify config for cell and summaryCell] widgetcell tag not working. (And plugins for that matter) [Eg. Big Data & Render Cell in components] 
       [Visit RendererCell like in react/ Need a simple example in extjs]
  - [Marc - added ux to packages folder and added copy step to plugin] resources from packages like ux are not property referenced [Components -> Color Picker -> Basic]

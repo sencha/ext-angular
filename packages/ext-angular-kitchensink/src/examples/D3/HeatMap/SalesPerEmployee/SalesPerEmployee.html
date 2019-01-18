@@ -1,10 +1,10 @@
 
-            <panel #item shadow="true" layout="vbox" [fitToParent]="true">
-                <toolbar #item docked="top">
-                    <button #item iconCls="x-fa fa-refresh" [handler]="this.refreshData" text="Refresh Data"></button>
-                    <button #item iconCls="x-fa fa-table" [handler]="this.refreshSize" text="Refresh Size"></button>
+            <panel  shadow="true" layout="vbox" [fitToParent]="true">
+                <toolbar  docked="top">
+                    <button  iconCls="x-fa fa-refresh" [handler]="this.refreshData" text="Refresh Data"></button>
+                    <button  iconCls="x-fa fa-table" [handler]="this.refreshSize" text="Refresh Size"></button>
                 </toolbar>
-                <d3-heatmap  #item
+                <d3-heatmap  
                     [store]="this.store"
                     padding="30 30 40 100"
                     flex="1"

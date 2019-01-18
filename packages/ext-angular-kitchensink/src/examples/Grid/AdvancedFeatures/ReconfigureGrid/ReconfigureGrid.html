@@ -1,4 +1,4 @@
-<grid #item
+<grid 
 [columns]="columns"
 [store]="store"
 shadow="true"
@@ -6,10 +6,10 @@ shadow="true"
 [emptyText]="'Click a button to show a dataset.'"
 [fitToParent]="true"
 >
-<toolbar #item [docked]="'top'" ui="transparent" layout="hbox">
-    <segmentedbutton #item width="300" [defaults]="{ flex: 1 }" (change)="onChange($event)">
-        <button #item text="Show Offices" value="Offices"></button>
-        <button #item text="Show Employees" value="Employees"></button>
+<toolbar  [docked]="'top'" ui="transparent" layout="hbox">
+    <segmentedbutton  width="300" [defaults]="{ flex: 1 }" (change)="onChange($event)">
+        <button  text="Show Offices" value="Offices"></button>
+        <button  text="Show Employees" value="Employees"></button>
     </segmentedbutton>
 </toolbar>
 </grid>

@@ -248,6 +248,7 @@ export class splitbuttonMetaData {
     'zIndex',
     'platformConfig',
     'responsiveConfig',
+    'align',
     'fitToParent',
     'config'
 ];

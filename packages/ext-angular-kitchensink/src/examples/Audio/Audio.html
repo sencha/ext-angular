@@ -1,9 +1,9 @@
-<container #item [layout]="{ type: 'vbox', align: 'stretch', pack: 'center' }" [padding]="10">
-    <container #item
+<container  [layout]="{ type: 'vbox', align: 'stretch', pack: 'center' }" [padding]="10">
+    <container 
         [shadow]="true" 
         [layout]="isAndroid? { type: 'vbox', align: 'stretch', pack: 'center' } : 'fit'"
     >
-        <audio #item
+        <audio 
             #audioRef
             [loop]="true" 
             [url]="'build/resources/audio/crash.mp3'"
@@ -13,7 +13,7 @@
         >
         </audio>
 
-        <div #item *ngIf="isAndroid">
+        <div  *ngIf="isAndroid">
             <button [text]="playing ? 'Play Audio' : 'Pause Audio'" [margin]="20" [handler]="this.toggleAudioAndroid.bind(this)">
             </button>
         </div>

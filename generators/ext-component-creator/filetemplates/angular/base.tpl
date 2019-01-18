@@ -23,7 +23,6 @@ export class base {
     private metaData: any,
     public hostComponent : base
   ) {
-//    console.log('constructor')
     this._nativeElement = nativeElement
     this._hostComponent = hostComponent
     metaData.EVENTS.forEach( (event: any, n: any) => {
@@ -345,10 +344,21 @@ export class base {
   }
 
   addTheChild(parentCmp, childCmp) {
-      var parentxtype = parentCmp.xtype
-      var childxtype = childCmp.xtype
-//      console.log('parent: ' + parentxtype + ', child: ' + childxtype)
-//      this.hostComponent._extChildren = true
+    var parentxtype = parentCmp.xtype
+    var childxtype = childCmp.xtype
+
+    if (this.ext.initialConfig.align != undefined) {
+      if (parentxtype != 'titlebar') {
+        console.error('Can only use align property if parent is a Titlebar')
+        return
+      }
+    }
+
+//      if (childxtype === 'searchfield') {
+//        if (this.ext.initialConfig.align != undefined) {
+//        }
+//      }
+
       if (parentxtype === 'grid') {
         if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn') {
           parentCmp.addColumn(childCmp)
@@ -504,7 +514,19 @@ export class base {
       let val = changes[propName].currentValue
       if (this.ext != undefined) {
         var capPropName = propName.charAt(0).toUpperCase() + propName.slice(1)
-        this.ext['set'+capPropName](val)
+        var setFunction = 'set' + capPropName
+//        console.log(this)
+//        console.log(this.ext.xtype)
+//        console.log(propName)
+//        console.log(setFunction)
+//        console.log(this.ext[setFunction])
+
+        if (this.ext[setFunction] != undefined) {
+          this.ext[setFunction](val)
+        }
+        else {
+          console.error(setFunction + ' not found for ' + this.ext.xtype)
+        }
       }
       else {
         if (verb == 'changed') {

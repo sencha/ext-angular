@@ -1,27 +1,27 @@
-<container #item
+<container 
     [width]="600" [layout]="'vbox'" [padding]="20"
     [platformConfig]="{phone: {width: '100%'}}"
 >
-    <container #item [style]="{fontSize: '13px',fontFamily: 'Menlo, Courier',margin: '0 0 8px 0'}" [html]="'alt'">
+    <container  [style]="{fontSize: '13px',fontFamily: 'Menlo, Courier',margin: '0 0 8px 0'}" [html]="'alt'">
     </container>
-    <titlebar #item [title]="'TitleBar'" [maxWidth]="'600px'" [margin]="'0 0 30 0'">
-        <searchfield #item [ui]="'alt'" [flex]="1" align="right" [width]="200" [placeholder]="'Search'">
+    <titlebar  [title]="'TitleBar'" [maxWidth]="'600px'" [margin]="'0 0 30 0'">
+        <searchfield  [ui]="'alt'" [flex]="1" align="right" [width]="200" [placeholder]="'Search'">
         </searchfield>
     </titlebar>
 
-    <container #item [style]="{fontSize: '13px', fontFamily: 'Menlo, Courier', margin: '0 0 8px 0'}" [html]="'faded'">
+    <container  [style]="{fontSize: '13px', fontFamily: 'Menlo, Courier', margin: '0 0 8px 0'}" [html]="'faded'">
     </container>
-    <container #item [layout]="vbox" [padding]="20" [style]="{backgroundColor: 'white'}" [margin]="'0 0 30 0'" [shadow]="true">
-        <searchfield #item
+    <container  [layout]="vbox" [padding]="20" [style]="{backgroundColor: 'white'}" [margin]="'0 0 30 0'" [shadow]="true">
+        <searchfield 
             [ui]="'faded'"
             [placeholder]="'Search'"
         ></searchfield>
     </container>
 
-    <container #item [style]="{fontSize: '13px', fontFamily: 'Menlo, Courier', margin: '0 0 8px 0'}" [html]="'solo'">
+    <container  [style]="{fontSize: '13px', fontFamily: 'Menlo, Courier', margin: '0 0 8px 0'}" [html]="'solo'">
     </container>
-    <container #item [layout]="'hbox'" [padding]="20" [style]="{backgroundColor: '#F0F0F0'}" [shadow]="true">
-        <searchfield #item
+    <container  [layout]="'hbox'" [padding]="20" [style]="{backgroundColor: '#F0F0F0'}" [shadow]="true">
+        <searchfield 
             [ui]="'solo ks-search-right-trigger'"
             [shadow]="true"
             [placeholder]="'Search'"
@@ -30,7 +30,7 @@
             [triggers]="{search: { type: 'search', side: 'right' }}"
             [flex]="1"
         ></searchfield>
-        <button #item
+        <button 
             [iconCls]="'x-fa fa-arrow-right'"
             [ui]="'action round raised'"
             [height]="36"

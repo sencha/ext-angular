@@ -1,4 +1,4 @@
-<tabpanel #item
+<tabpanel 
     [flex]="1"
     [fitToParent]="true"
     [shadow]="true"
@@ -6,14 +6,14 @@
         layout: {pack: 'left'}
       }"
 >
-    <panel [flex]="1"  #item [title]="'Tab 1'" [layout]="'center'" tab="{flex: 0,minWidth: 100}">
-        <container #item [html]="'When optimizing for desktops, you may want to tabs on the left side of the tab bar.  You can do this by setting <code>pack: \'left\'</code> in the tab bar\'s layout config.'">
+    <panel [flex]="1"   [title]="'Tab 1'" [layout]="'center'" tab="{flex: 0,minWidth: 100}">
+        <container  [html]="'When optimizing for desktops, you may want to tabs on the left side of the tab bar.  You can do this by setting <code>pack: \'left\'</code> in the tab bar\'s layout config.'">
         </container>
     </panel>
-    <panel [flex]="1"  #item [title]="'Tab 2'" [layout]="'center'" tab="{flex: 0,minWidth: 100}">
-        <container #item [cls]="'action'" [html]="'User tapped Tab 2'"></container>
+    <panel [flex]="1"   [title]="'Tab 2'" [layout]="'center'" tab="{flex: 0,minWidth: 100}">
+        <container  [cls]="'action'" [html]="'User tapped Tab 2'"></container>
     </panel>
-    <panel [flex]="1"  #item [title]="'Tab 3'" [layout]="'center'" tab="{flex: 0,minWidth: 100}">
-        <container #item [cls]="'action'" [html]="'User tapped Tab 3'"></container>
+    <panel [flex]="1"   [title]="'Tab 3'" [layout]="'center'" tab="{flex: 0,minWidth: 100}">
+        <container  [cls]="'action'" [html]="'User tapped Tab 3'"></container>
     </panel>
 </tabpanel>
