@@ -29,6 +29,8 @@ function extractFrom(example, file, fullPath) {
   const content = fs.readFileSync(path.join(fullPath), 'utf8')
   const importRegex = /import[^'"]+['"]([^'"]+)['"];/gi
   const htmlRegex = /[ ]+templateUrl[^'"]+['"]([^'"]+)['"],/gi
+  const styleRegex =   /[ ]+styleUrls[^'"]+['"]([^'"]+)['"]],/gi
+
   let match
   (result[example] = result[example] || {})[file] = content
   while (match = importRegex.exec(content)) {
@@ -38,6 +40,12 @@ function extractFrom(example, file, fullPath) {
     }
   }
    while (match = htmlRegex.exec(content)) {
+    file = `${match[1]}`
+    if (file.startsWith('.')) {
+      extractFrom(example, path.basename(file), path.join(path.dirname(fullPath), file))
+    }
+  }
+  while (match = styleRegex.exec(content)) {
     file = `${match[1]}`
     if (file.startsWith('.')) {
       extractFrom(example, path.basename(file), path.join(path.dirname(fullPath), file))

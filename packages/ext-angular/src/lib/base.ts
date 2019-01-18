@@ -68,6 +68,7 @@ export class base {
         }
       }
     }
+
     if (true === me.fitToParent) {
       o.top=0, 
       o.left=0, 

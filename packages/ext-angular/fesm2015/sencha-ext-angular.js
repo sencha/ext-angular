@@ -1,5 +1,5 @@
 import '@angular/platform-browser-dynamic';
-import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, Component, Host, Optional, SkipSelf, ElementRef, forwardRef, EventEmitter, ContentChild, NgModule, defineInjectable, inject, INJECTOR } from '@angular/core';
+import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, EventEmitter, ContentChild, Host, Optional, SkipSelf, Component, ElementRef, forwardRef, NgModule, defineInjectable, inject, INJECTOR } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle

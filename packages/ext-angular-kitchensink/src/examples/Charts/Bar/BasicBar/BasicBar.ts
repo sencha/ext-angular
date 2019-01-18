@@ -3,6 +3,12 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 declare var Ext: any;
 
+Ext.require([
+    'Ext.chart.series.Bar',
+    'Ext.chart.axis.Numeric',
+    'Ext.chart.axis.Category'
+]);
+
 @Component({
   selector: 'BasicBar-component',
   templateUrl: './BasicBar.html',

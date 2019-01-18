@@ -53,8 +53,24 @@ export function _constructor(options) {
   const rc = (fs.existsSync(`.ext-${thisVars.framework}rc`) && JSON.parse(fs.readFileSync(`.ext-${thisVars.framework}rc`, 'utf-8')) || {})
   thisOptions = { ...require(`./${thisVars.framework}Util`).getDefaultOptions(), ...options, ...rc }
   logv(options, `thisOptions - ${JSON.stringify(thisOptions)}`)
-  if (thisOptions.environment == 'production') 
-    {thisVars.production = true}
+  if (thisOptions.environment == 'production') {
+    thisVars.production = true
+    if (!options.genProdData && options.framework == 'angular' && options.prodFileReplacementConfig.length) {
+      options.prodFileReplacementConfig.forEach((value) => {
+        if(typeof value === 'object' && value.replace && value.with) {
+          let filePath = path.resolve(process.cwd(), value.with)
+          if (fs.existsSync(filePath)) {
+            const data = fsx.readFileSync(filePath).toString()
+            filePath = path.resolve(process.cwd(), value.replace)
+            if (fs.existsSync(filePath))
+              fsx.writeFileSync(filePath, data, 'utf-8', ()=>{return})
+          }
+        } else {
+          compilation.errors.push('Invalid prodFileReplacementConfig')
+        }
+      })
+    }
+  }
   else 
     {thisVars.production = false}
   log(require('./pluginUtil')._getVersions(thisVars.app, thisVars.pluginName, thisVars.framework))
@@ -83,6 +99,7 @@ export function _compilation(compiler, compilation, vars, options) {
       logv(options, `ext-compilation: production is ` + vars.production)
 
       if (options.framework == 'angular') {
+        // Reads all ext components source code to get all ext-components list
         var usedExtComponents = []
 
         const packagePath = path.resolve(process.cwd(), 'node_modules/' + extAngularPackage)
@@ -97,6 +114,7 @@ export function _compilation(compiler, compilation, vars, options) {
         })
 
         if (options.genProdData) {
+          // Update `app.module.ts` to include prod data folder.
           try {
             var rewrite = false
             const appModulePath = path.resolve(process.cwd(), 'src/app/app.module.ts')
@@ -110,6 +128,8 @@ export function _compilation(compiler, compilation, vars, options) {
             }
 
             const pathToExtAngularModern = path.resolve(process.cwd(), `src/app/${extAngularFolder}`)
+            
+            // Create s the prod folder if does not exists.
             if (!fs.existsSync(pathToExtAngularModern)) {
               mkdirp.sync(pathToExtAngularModern)
               const t = require('./artifacts').extAngularModule('', '', '')
@@ -166,7 +186,6 @@ export function _compilation(compiler, compilation, vars, options) {
           usedExtComponents = [...new Set(usedExtComponents)]
           const readFrom = path.resolve(process.cwd(), 'node_modules/' + extAngularPackage + '/src/lib')
           const writeToPath = path.resolve(process.cwd(), `src/app/${extAngularFolder}`)
-          //const extAngularModuleBaseFile = path.resolve(process.cwd(), `${writeToPath}/base.ts`)
 
           const baseContent = fsx.readFileSync(`${readFrom}/base.ts`).toString()
           fsx.writeFileSync(`${writeToPath}/base.ts`, baseContent, 'utf-8', ()=>{return})

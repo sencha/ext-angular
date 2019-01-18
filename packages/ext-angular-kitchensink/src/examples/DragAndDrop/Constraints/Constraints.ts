@@ -2,6 +2,8 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core'
 
 declare var Ext: any;
 
+Ext.require(['Ext.drag.*']);
+
 @Component({
   selector: 'constraints-dragdrop-component',
   templateUrl: "./Constraints.html",

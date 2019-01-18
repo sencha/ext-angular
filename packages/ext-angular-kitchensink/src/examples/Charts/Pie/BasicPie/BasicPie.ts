@@ -3,6 +3,10 @@ import {createData} from './createData';
 
 declare var Ext: any;
 
+Ext.require([
+    'Ext.chart.series.Pie'
+]);
+
 @Component({
   selector: 'BasicPie-component',
   templateUrl: './BasicPie.html',
