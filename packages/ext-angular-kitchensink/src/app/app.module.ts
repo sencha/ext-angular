@@ -473,7 +473,7 @@ const routes: ExtAngularRoutes = [
 	{ path: 'd3/hierarchy/zoomable_sunburst', component: ZoomableSunburstComponent, text: 'Zoomable Sunburst', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },	
 
 ];
-export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
+export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {useHash: true});
 
 @NgModule({
   imports: [
