@@ -1,20 +1,15 @@
-import {Component, OnInit} from '@angular/core'
-
+import {Component} from '@angular/core'
 declare var Ext: any;
 declare var require: any;
-
 require('../stocks');
-
-Ext.require([
-    'Ext.plugin.PullRefresh'
-]);
+Ext.require(['Ext.plugin.PullRefresh']);
 
 @Component({
   selector: 'pullrefresh-list-component',
   templateUrl: "./PullRefresh.html",
   styles: [``]
 })
-export class PullRefreshListComponent implements OnInit  {
+export class PullRefreshListComponent {
 
   constructor() {}
 
@@ -39,6 +34,4 @@ export class PullRefreshListComponent implements OnInit  {
     }
 });
 
-
-  ngOnInit() {}
 }

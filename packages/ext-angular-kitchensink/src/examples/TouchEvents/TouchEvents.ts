@@ -1,18 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-
 declare var Ext: any;
-
+import { Component } from '@angular/core';
 @Component({
   selector: 'touchevents-component',
   templateUrl: './TouchEvents.html',
   styles: [``]
 })
-export class TouchEventsComponent implements OnInit {
+
+export class TouchEventsComponent {
 
   touchpadRef:any;
   isPhone = Ext.os.is.Phone;
   events = [{type:'drag'}, {type:'touchmove'}];
-
   theDataview:any;
 
   touchpadReady = (ele) => {
@@ -44,7 +42,6 @@ export class TouchEventsComponent implements OnInit {
 
   onTouchEvent = (e, target, options) => {
     this.events = [{type:e.type} , ...this.events];
-    console.log(this.events.length);
     this.theDataview.setData(this.events);
   }
 
@@ -52,7 +49,4 @@ export class TouchEventsComponent implements OnInit {
     this.events = [];
     this.theDataview.setData(null);
   }
-
-  ngOnInit() {}
-
 }

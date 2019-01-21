@@ -1,15 +1,15 @@
-<panel [layout]="'fit'" [fitToParent]="true" [bodyStyle]="'backgroundSize: 20px 20px;backgroundColor: #e8e8e8;backgroundImage: linear-gradient(0deg, #f5f5f5 1.1px, transparent 0), linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)'">
+<panel layout="fit" bodyPadding="20" [fitToParent]="true" bodyStyle="backgroundSize: 20px 20px;backgroundColor: #e8e8e8;backgroundImage: linear-gradient(0deg, #f5f5f5 1.1px, transparent 0), linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)">
 
   <!-- Titlebar starts-->
-  <titlebar [docked]="'top'" [shadow]="true" [flex]="1">
-    <button [selfAlign]="'left'" [iconCls]="'x-fa fa-bars'" (tap)="toggleTree()"></button>
+  <titlebar docked="top">
+    <button iconCls="x-fa fa-bars" (tap)="toggleTree()"></button>
     <container [html]="titlebarHtml"></container>
   </titlebar>
   <!-- Titlebar ends-->
 
   <!-- Breadcrumb starts-->
-  <toolbar [docked]="'top'">
-    <dataview [centered]="false" [itemTpl]="tplToolbar" [inline]="'true'" [itemCls]="'div.app-toolbar'" id="hide-overflow"
+  <toolbar docked="top">
+    <dataview [itemTpl]="tplToolbar" [inline]="'true'" [itemCls]="'div.app-toolbar'"
       (childtap)="doClickToolbar($event)" (ready)="dataviewToolbarReady($event)">
     </dataview>
   </toolbar>
@@ -17,38 +17,37 @@
 
   <!-- Navtree starts-->
   <panel 
-    [docked]="'left'"
-    [flex]="1"
-    [scrollable]="'y'"
-    [shadow]="false"
+    docked="left"
+    flex="1"
+    scrollable="y"
+    width="300"
     [style]="{zIndex: 100, backgroundColor: 'white'}"
     [resizable]="{edges: 'east', dynamic: true}"
     [header]="false"
-    [width]="'300'"
     [collapsible]="{ direction: 'left' }"
     [collapsed]="!showTreeFlag">
-    <searchfield [flex]="1" [docked]="'top'" [ui]="'faded'" (change)="filterNav($event)" [margin]="7"></searchfield>
-    <treelist [ui]="'nav'" [expanderFirst]="false" [expanderOnly]="false" [store]="treeStore" (selectionchange)="selectionChanged($event)"></treelist>
+    <searchfield docked="top" ui="faded" margin="7" (change)="filterNav($event)"></searchfield>
+    <treelist ui="nav" [expanderFirst]="false" [expanderOnly]="false" [store]="treeStore" (selectionchange)="selectionChanged($event)"></treelist>
   </panel>
   <!-- Navtree ends-->
 
   <!-- code button starts-->
   <button 
     [hidden]="files.length > 0 ? false: true"
+    ui="fab"
     [iconCls]="'x-font-icon ' + (showCode ? 'md-icon-close' : 'md-icon-code')"
-    [ui]="'fab'"
     [top]="isDesktop ? 20 : 35"
-    [right]="21"
-    [zIndex]="1000"
+    right="21"
+    zIndex="1000"
     (tap)="toggleCode()">
   </button>
   <!-- code button ends-->
 
   <!-- code start-->
   <panel 
-    [docked]="'right'"
+    docked="right"
     [hidden]="files.length > 0 ? false: true" 
-    [flex]="2"
+    flex="2"
     [layout]= "'fit'"
     [scrollable]="'y'"
     [shadow]="false"
@@ -74,17 +73,15 @@
   <!-- code ends-->
 
   <!-- examples start-->
-  <panel 
+  <container 
     [hidden]="node.childNodes.length > 0 ? true: false" 
-    [bodyPadding]="30"
-    [layout]="'fit'"
-    [fitToParent]="true">
+    layout="fit">
     <router-outlet #extroute></router-outlet>
-  </panel>
+  </container>
   
   <container 
     [hidden]="node.childNodes.length > 0 ? false: true" 
-    [layout]="'fit'"
+    layout="fit"
     [fitToParent]="true">
     <dataview 
       [style]= "blockstyle"

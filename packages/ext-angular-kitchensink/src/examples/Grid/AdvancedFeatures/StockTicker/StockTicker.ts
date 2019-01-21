@@ -20,7 +20,7 @@ export class StockTickerComponent implements OnInit {
     pageSize: null,
     proxy: {
         type: 'ajax',
-        url: 'build/resources/data/CompanyData.json',
+        url: 'resources/data/CompanyData.json',
         reader: {
             type: 'json',
             rootProperty: 'data'

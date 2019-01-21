@@ -1,9 +1,7 @@
 declare var Ext: any;
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
-Ext.require([
-  'Ext.ux.colorpick.*'
-]);
+Ext.require(['Ext.ux.colorpick.*']);
 
 @Component({
   selector: 'ColorPicker-component',
@@ -28,13 +26,11 @@ export class ColorPickerComponent {
 
   onChange= (picker) => {
     this.color = picker.getValue();
-    console.log(" onChange :: this.color: " + this.color);
     this.colorTitle=this.getcolorTitle();
   }
 
   OnSelChange = (event) => {
     this.color = event.color
-    console.log(" OnSelChange :: this.color: " + this.color)
     if(this.panel) {
       var header = this.panel.getHeader()
       //this.panel.setHeader(header)
@@ -43,7 +39,6 @@ export class ColorPickerComponent {
   }
 
   onPanelReady = (event) => {
-    console.log("onPanelReady")
     this.panel = event.ext
   }
 

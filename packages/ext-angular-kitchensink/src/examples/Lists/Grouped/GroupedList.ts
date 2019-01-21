@@ -14,7 +14,7 @@ export class GroupedListComponent implements OnInit  {
     autoLoad: true,
     proxy: {
       type: 'rest',
-      url: 'build/resources/data/people.json'
+      url: 'resources/data/people.json'
     },
     grouper: {
       groupFn: record => record.get('last_name')[0]

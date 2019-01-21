@@ -19,7 +19,7 @@ export class RowExpanderComponent implements OnInit {
     pageSize: null,
     proxy: {
       type: 'ajax',
-      url: 'build/resources/data/CompanyData.json',
+      url: 'resources/data/CompanyData.json',
     }
   })
 

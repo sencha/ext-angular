@@ -18,7 +18,7 @@ export class ViewOptionsComponent implements OnInit {
     pageSize: 0,
     proxy: {
       type: 'ajax',
-      url: 'build/resources/data/CompanyData.json'
+      url: 'resources/data/CompanyData.json'
     } 
   });
 

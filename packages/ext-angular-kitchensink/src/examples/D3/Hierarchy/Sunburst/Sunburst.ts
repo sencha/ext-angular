@@ -39,7 +39,7 @@ export class SunburstComponent implements OnInit  {
     ],
     proxy: {
         type: 'ajax',
-        url: 'build/resources/data/tree/tree.json'
+        url: 'resources/data/tree/tree.json'
     },
     idProperty: 'path'
   });

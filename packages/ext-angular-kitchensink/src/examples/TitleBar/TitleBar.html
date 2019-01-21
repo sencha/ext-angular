@@ -1,31 +1,23 @@
 <container >
-        <titlebar  [title]="'App Title'" [docked]="'top'"
-            [platformConfig]="{
-                phone: {
-                    titleAlign: 'center'
-                }
-            }"
-        >
-
-            <button  align="left" iconCls="x-fa fa-bars" [arrow]="false">
-                    <menu  *ngIf="isPhone">
-                        <menuitem  text="Inbox" iconCls="x-fa fa-inbox"></menuitem>
-                        <menuitem  text="Profile" iconCls="x-fa fa-user"></menuitem>
-                    </menu>
-            </button>
-
-                <button  *ngIf="!isPhone" align="right" [style]="{float:right}" iconCls="x-fa fa-inbox" text="Inbox"></button>
-                <button  *ngIf="!isPhone" align="right" iconCls="x-fa fa-user" text="Profile"></button>
-                <searchfield  *ngIf="!isPhone" align="right" ui="alt" placeholder="Search" margin="0 10"></searchfield>
-
-            <button  align="right" iconCls="x-fa fa-ellipsis-v" [arrow]="false">
-                <menu >
-                    <menuitem  text="Settings" iconCls="x-fa fa-cog"></menuitem>
-                    <menuitem  text="Help" iconCls="x-fa fa-question-circle"></menuitem>
-                </menu>
-            </button>
-        </titlebar>
-
-        <searchfield  *ngIf="isPhone" ui="faded" placeholder="Search" margin="20"></searchfield>
- 
+  <titlebar 
+    title="App Title" 
+    docked="top"
+    [platformConfig]="{phone: {titleAlign: 'center'}}">
+    <button [align]="'left'" iconCls="x-fa fa-bars" [arrow]="false">
+      <menu *ngIf="isPhone">
+        <menuitem text="Inbox" iconCls="x-fa fa-inbox"></menuitem>
+        <menuitem text="Profile" iconCls="x-fa fa-user"></menuitem>
+      </menu>
+    </button>
+    <button *ngIf="!isPhone" [align]="'right'" [style]="{float:right}" iconCls="x-fa fa-inbox" text="Inbox"></button>
+    <button *ngIf="!isPhone" [align]="'right'" iconCls="x-fa fa-user" text="Profile"></button>
+    <searchfield *ngIf="!isPhone" align="right" ui="alt" placeholder="Search" margin="0 10"></searchfield>
+    <button align="right" iconCls="x-fa fa-ellipsis-v" [arrow]="false">
+      <menu >
+        <menuitem text="Settings" iconCls="x-fa fa-cog"></menuitem>
+        <menuitem text="Help" iconCls="x-fa fa-question-circle"></menuitem>
+      </menu>
+    </button>
+  </titlebar>
+  <searchfield *ngIf="isPhone" ui="faded" placeholder="Search" margin="20"></searchfield>
 </container>
