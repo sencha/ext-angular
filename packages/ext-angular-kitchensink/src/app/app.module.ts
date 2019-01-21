@@ -9,6 +9,8 @@ import { ExtAngularModule } from '@sencha/ext-angular'
 import { ExtAngularBootstrapService } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.service'
 import { ExtAngularBootstrapComponent } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.component'
 
+import {AppService} from './app.service'
+
 import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
 const hljs: any = require('highlight.js/lib/highlight');
 hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescript'));
@@ -689,7 +691,8 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
     CalendarService,
     GridService,
     BigDataService,,
-    GridFilteringService
+	GridFilteringService,
+	AppService
   ],
   entryComponents: [
      LandingpageComponent
@@ -698,7 +701,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
 })
 
 export class AppModule {
-  constructor(extAngularService : ExtAngularBootstrapService) {
+  constructor(extAngularService : ExtAngularBootstrapService, appService: AppService) {
     extAngularService.setBootStrapComponent(LandingpageComponent)
   }
 }
