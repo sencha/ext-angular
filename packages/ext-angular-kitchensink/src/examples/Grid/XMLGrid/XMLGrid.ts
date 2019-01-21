@@ -19,7 +19,7 @@ export class XMLGridComponent implements OnInit {
     ],
     proxy:{
       type: 'ajax',
-      url: 'build/resources/data/Grids/sheldon.xml',
+      url: 'resources/data/Grids/sheldon.xml',
       reader: {
         type: 'xml',
         record: 'Item',

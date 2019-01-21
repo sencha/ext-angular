@@ -1,5 +1,5 @@
 declare var Ext: any;
-import { Component, OnInit, ChangeDetectorRef, ViewChild, NgZone, ViewEncapsulation, ViewContainerRef,ElementRef, ComponentFactoryResolver, ComponentRef, ComponentFactory } from '@angular/core';
+import { Component, OnInit, NgZone, ViewEncapsulation } from '@angular/core';
 import {navTreeRoot} from '../../../examples';
 import { Router, NavigationEnd } from '@angular/router';
 import { VERSION } from '@angular/core';
@@ -18,7 +18,6 @@ hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
 declare var _code: any;
 const generateBreadcrumb = (node) => {
   const path = [];
-
   do {
     path.unshift({
       isLeaf: !node.childNodes.length,
@@ -26,9 +25,7 @@ const generateBreadcrumb = (node) => {
       path: node.get("id"),
       divider: '&nbsp;>&nbsp;'
     });
-
   } while (node = node.parentNode)
-
   path[path.length-1].divider = ''
   return path
 };
@@ -123,10 +120,10 @@ export class LandingpageComponent implements OnInit {
         //console.log(`BREADCRUMB: ${JSON.stringify(this.breadcrumb.map(b => b.text))}`);
         if(this.node.childNodes.length == 0) {
           this.blockstyle = {'background':'top','display':'block','text-align':'center'}
-          if (this.theDataview != undefined) {
-            this.theDataview.setData(null)
-            this.theDataview.setData(null)
-          }
+          // if (this.theDataview != undefined) {
+          //   this.theDataview.setData(null)
+          //   this.theDataview.setData(null)
+          // }
         }
         else {
           this.blockstyle = {'background':'top','display':'block','text-align':'center'}
@@ -164,7 +161,6 @@ export class LandingpageComponent implements OnInit {
     this.ngZone.run(() => this.router.navigateByUrl(location)).then();
   }
 
-  //mjg
   highlightCode() {
     document.querySelectorAll(".code").forEach((el) => {
      hljs.highlightBlock(el);

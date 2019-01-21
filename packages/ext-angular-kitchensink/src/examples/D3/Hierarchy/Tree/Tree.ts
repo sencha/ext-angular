@@ -69,7 +69,7 @@ export class TreeHierarchyComponent implements OnInit  {
     root: { text: 'States' },
     proxy: {
       type: 'ajax',
-      url: 'build/resources/data/tree/salary.json',
+      url: 'resources/data/tree/salary.json',
       reader: {
         type: 'salary'
       }

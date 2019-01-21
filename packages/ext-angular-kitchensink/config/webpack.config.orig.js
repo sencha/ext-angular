@@ -1,3 +1,4 @@
+//https://medium.freecodecamp.org/how-to-configure-webpack-4-with-angular-7-a-complete-guide-9a23c879f471
 const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin
 const ExtWebpackPlugin = require('@sencha/ext-angular-webpack-plugin')
 const WebpackShellPlugin = require('webpack-shell-plugin-next')
@@ -5,7 +6,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require("webpack")
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin')
-const portfinder = require('portfinder')
+
 
 module.exports = function (env) {
   var browserprofile = JSON.parse(env.browser) || true
@@ -21,15 +22,22 @@ module.exports = function (env) {
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
     const plugins = [
-      new AngularCompilerPlugin({
-        tsConfigPath: './tsconfig.json',
-        mainPath: "./src/main.ts",
-        skipCodeGeneration: true
-      }),
+      // new CleanWebpackPlugin(
+      //   helpers.root('dist'),
+      //   {
+      //       root: helpers.root(),
+      //       verbose: true
+      //   }
+      // ),
       new HtmlWebpackPlugin({
         template: "index.html",
         hash: true,
         inject: "body"
+      }),
+      new AngularCompilerPlugin({
+        tsConfigPath: './tsconfig.json',
+        mainPath: "./src/main.ts",
+        skipCodeGeneration: true
       }),
       new ExtWebpackPlugin({
         framework: 'angular',
@@ -79,14 +87,19 @@ module.exports = function (env) {
     ]
   return {
     mode,
+    node: false,
+    devtool: "source-map",
+    //devtool: 'cheap-module-eval-source-map',
+    context: path.join(__dirname, './src'),
     entry: {
       polyfills: "./polyfills.ts",
       main: "./main.ts"
     },
-    context: path.join(__dirname, './src'),
     output: {
       path: path.resolve(__dirname, 'build'),
-      filename: "[name].js"
+      publicPath: '/',
+      filename: '[name].bundle.js',
+      chunkFilename: '[id].chunk.js'
     },
     module: {
       rules: [
@@ -94,12 +107,52 @@ module.exports = function (env) {
         {test: /\.(png|svg|jpg|jpeg|gif)$/, use: ['file-loader']},
         {test: /\.html$/,loader: "html-loader"},
         {test: /\.ts$/,  loader: '@ngtools/webpack'},
+        // {
+        //   test: /\.ts$/,
+        //   loaders: [
+        //       'babel-loader',
+        //       {
+        //           loader: 'awesome-typescript-loader',
+        //           options: {
+        //               configFileName: helpers.root('tsconfig.json')
+        //           }
+        //       },
+        //       'angular2-template-loader',
+        //       'angular-router-loader'
+        //   ],
+        //   exclude: [/node_modules/]
+        // },
+
+
         //{test: /\.scss$/,loader: ["raw-loader", "sass-loader?sourceMap"]}
       ]
     },
     plugins,
-    node: false,
-    devtool: "source-map",
+    // optimization: {
+    //   noEmitOnErrors: true
+    // },
+    optimization: {
+      noEmitOnErrors: true,
+      splitChunks: {
+          chunks: 'all'
+      },
+      runtimeChunk: 'single',
+      minimizer: [
+          new UglifyJsPlugin({
+              cache: true,
+              parallel: true
+          }),
+           new OptimizeCSSAssetsPlugin({
+               cssProcessor: cssnano,
+               cssProcessorOptions: {
+                   discardComments: {
+                       removeAll: true
+                   }
+               },
+               canPrint: false
+           })
+      ]
+    },
     devServer: {
       contentBase: './build',
       historyApiFallback: true,
@@ -109,19 +162,20 @@ module.exports = function (env) {
       disableHostCheck: false,
       compress: isProd,
       inline: !isProd,
-      stats: {
-        assets: false,
-        children: false,
-        chunks: false,
-        hash: false,
-        modules: false,
-        publicPath: false,
-        timings: false,
-        version: false,
-        warnings: false,
-        colors: {
-          green: '\u001b[32m'
-        }
+      stats: 'minimal',
+      // stats: {
+      //   assets: false,
+      //   children: false,
+      //   chunks: false,
+      //   hash: false,
+      //   modules: false,
+      //   publicPath: false,
+      //   timings: false,
+      //   version: false,
+      //   warnings: false,
+      //   colors: {
+      //     green: '\u001b[32m'
+      //   }
       }
     }
   }

@@ -14,7 +14,7 @@ export class DisclosureListComponent implements OnInit  {
     autoLoad: true,
     proxy: {
       type: 'rest',
-      url: 'build/resources/data/people.json'
+      url: 'resources/data/people.json'
     },
     sorters: ['last_name', 'first_name']
   });

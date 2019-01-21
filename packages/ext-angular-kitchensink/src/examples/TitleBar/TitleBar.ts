@@ -1,22 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-
 declare var Ext: any;
-
+import { Component } from '@angular/core';
 @Component({
   selector: 'titlebar-component',
   templateUrl: './TitleBar.html',
   styles: [``]
 })
-export class TitleBarComponent implements OnInit {
-
+export class TitleBarComponent{
   isPhone = Ext.os.is.Phone;
-
-  constructor() { }
-
-
-
-  ngOnInit() {
-  }
-
-
 }

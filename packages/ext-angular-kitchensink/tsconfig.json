@@ -1,5 +1,6 @@
 {
   "compileOnSave": true,
+  "exclude": ["node_modules"],
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
@@ -10,19 +11,14 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "preserveSymlinks": true,
+    "lib": ["es2018","dom"],
+    "typeRoots": ["node_modules/@types"],
     "paths": { 
       "@angular/*": ["node_modules/@angular/*"], 
       "@sencha/*": ["node_modules/@sencha/*"] 
-    },
-    "noImplicitAny": false,
-    "suppressImplicitAnyIndexErrors": true,
-    "preserveSymlinks": true
+    }
   }
 }

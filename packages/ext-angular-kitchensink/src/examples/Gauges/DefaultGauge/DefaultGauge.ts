@@ -1,16 +1,13 @@
-import {Component, OnInit} from '@angular/core'
-
 declare var Ext: any;
+import {Component} from '@angular/core'
 
 @Component({
   selector: 'default-gauge-component',
-  templateUrl: "./DefaultGauge.html",
+  templateUrl: './DefaultGauge.html',
   styles: [``]
 })
 
-export class DefaultGaugeComponent implements OnInit  {
-
-  constructor() { }
+export class DefaultGaugeComponent {
 
   value:number = 40;
 
@@ -20,5 +17,4 @@ export class DefaultGaugeComponent implements OnInit  {
     }
   }
 
-  ngOnInit() {}
 }

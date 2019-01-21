@@ -18,7 +18,7 @@ export class GridToolsComponent implements OnInit {
     pageSize: 0,
     proxy: {
       type: 'ajax',
-      url: 'build/resources/data/restaurants.json'
+      url: 'resources/data/restaurants.json'
     }
   })
 

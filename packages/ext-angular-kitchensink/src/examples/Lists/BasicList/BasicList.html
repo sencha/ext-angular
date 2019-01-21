@@ -2,6 +2,6 @@
   [shadow]="true"
   [itemTpl]="tpl"
   [store]="store"
-  [plugins]="[{ type: 'pullrefresh', mergeData: false }]"
+  (select)="onSelect($event)"
   [platformConfig]="{'!phone': {height: 450, width: 300}}"
 ></list>

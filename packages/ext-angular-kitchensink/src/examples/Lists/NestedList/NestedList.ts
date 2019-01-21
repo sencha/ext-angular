@@ -15,7 +15,7 @@ export class NestedListComponent implements OnInit  {
     root: {},
     proxy: {
       type: 'ajax',
-      url: 'build/resources/data/tree/cars.json'
+      url: 'resources/data/tree/cars.json'
     },
     sorters: ['last_name', 'first_name']
   });

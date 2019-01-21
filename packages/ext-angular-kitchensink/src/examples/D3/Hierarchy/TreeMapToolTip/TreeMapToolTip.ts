@@ -60,7 +60,7 @@ export class TreeMapToolTipComponent implements OnInit  {
     ],
     proxy: {
       type: 'ajax',
-      url: 'build/resources/data/tree/stocks.json'
+      url: 'resources/data/tree/stocks.json'
     }
   });
 
