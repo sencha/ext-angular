@@ -16,23 +16,23 @@ hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
 
 declare var _code: any;
 const generateBreadcrumb = (node) => {
-try {
-  const path = [];
-  do {
-    path.unshift({
-      isLeaf: !node.childNodes.length,
-      text: node.get("text"),
-      path: node.get("id"),
-      divider: '&nbsp;>&nbsp;'
-    });
-  } while (node = node.parentNode)
-  path[path.length-1].divider = ''
-  return path
-}
-catch(e) {
-  console.log('generateBreadcrumb')
-  console.error(e)
-}
+  try {
+    const path = [];
+    do {
+      path.unshift({
+        isLeaf: !node.childNodes.length,
+        text: node.get("text"),
+        path: node.get("id"),
+        divider: '&nbsp;>&nbsp;'
+      });
+    } while (node = node.parentNode)
+    path[path.length-1].divider = ''
+    return path
+  }
+  catch(e) {
+    console.log('generateBreadcrumb')
+    console.error(e)
+  }
 };
 @Component({
   selector: 'app-root',
@@ -85,86 +85,63 @@ export class LandingpageComponent implements OnInit {
   }
 
   dataviewReady = (event) => {
-    //console.log("dataviewReady");
     this.theDataview = event.ext;
   }
 
   doClick = (event) => {
-    //if( window.console ) console.log('dataView.click(%o,%o,%o,%o)',view,index,node,event);
-    //console.log("doClick. ID: " + event.location.record.data.id);
     var id = event.location.record.data.id
     this.navigate(id)
   }
 
   dataviewToolbarReady = (event) => {
-    //console.log("dataviewToolbarReady");
     this.theDataviewToolbar = event.ext
   }
 
   doClickToolbar = (event) => {
-    //console.log('click')
-    //console.log(event.location.record.data)
     var id = event.location.record.data.path
     this.navigate(id)
   }
 
   constructor(private router: Router, private ngZone: NgZone) {
-try {
-
-    this.node$.subscribe(({
-      next: (v) => {
-        this.node = v;
-        this.files = getFiles(v, _code);
-        //console.log("files length : " + this.files.length);
-        this.highlightCode();
-        //console.log("Generating breadcrumb for ID: " + v.id);
-        this.breadcrumb = generateBreadcrumb(v);
-        //console.log(`BREADCRUMB: ${JSON.stringify(this.breadcrumb.map(b => b.text))}`);
-        if(this.node.childNodes.length == 0) {
-          this.blockstyle = {'background':'top','display':'block','text-align':'center'}
-          // if (this.theDataview != undefined) {
-          //   this.theDataview.setData(null)
-          //   this.theDataview.setData(null)
-          // }
-        }
-        else {
-          this.blockstyle = {'background':'top','display':'block','text-align':'center'}
-          if (this.theDataview != undefined) {
-            this.theDataview.setData(this.node.childNodes)
+    try {
+      this.node$.subscribe(({
+        next: (v) => {
+          this.node = v;
+          this.files = getFiles(v, _code);
+          this.highlightCode();
+          this.breadcrumb = generateBreadcrumb(v);
+          if(this.node.childNodes.length == 0) {
+            this.blockstyle = {'background':'top','display':'block','text-align':'center'}
+          }
+          else {
+            this.blockstyle = {'background':'top','display':'block','text-align':'center'}
+            if (this.theDataview != undefined) {
+              this.theDataview.setData(this.node.childNodes)
+            }
+          }
+          if (this.theDataviewToolbar != undefined) {
+            this.theDataviewToolbar.setData(this.breadcrumb)
           }
         }
-        if (this.theDataviewToolbar != undefined) {
-          this.theDataviewToolbar.setData(this.breadcrumb)
+      }));
+        
+      router.events.subscribe((val) => {
+        if (val instanceof NavigationEnd) {
+          var localNode = this.treeStore.getNodeById(val.url);
+          if (localNode) {
+            this.files = getFiles(localNode, _code);
+            this.showCode = false;
+            this.node$.next(localNode);
+          } else {
+            console.log("Not a valid node. Probably looking at resources");
+          }
         }
-      },
-    }));
-    
-    router.events.subscribe((val) => {
-      if (val instanceof NavigationEnd) {
-        //console.log(`location.path(true): ${location.path(true)}`);
-        //console.log(`val: ${val}`);
-        //console.log(`nodeId: ${val.url}`);
-        var localNode = this.treeStore.getNodeById(val.url);
-        //console.log("Node changed: " + this.node.id);
-        //console.log("Children el length : " + this.node.childNodes.length);
-
-        if (localNode) {
-          this.files = getFiles(localNode, _code);
-          this.showCode = false;
-          this.node$.next(localNode);
-        } else {
-          console.log("Not a valid node. Probably looking at resources");
-        }
-      }
-    });
-  }
-catch(e) {
-  console.log('constructor')
-  console.error(e)
-}
-
-
-
+      });
+    }
+    catch(e) {
+      console.log('constructor')
+      console.error(e)
+    }
   }
 
   navigate(location) {
@@ -215,28 +192,21 @@ catch(e) {
   }
 
   containsMatches(node) {
-
-try {
-    const found = node.data.name.match(this.filterRegex) || node.childNodes.some(child => this.containsMatches(child));
-    if (found) node.expand();
-    node.data.text = node.data.name.replace(this.filterRegex, '<span style="color:#2196F3;font-weight:bold">' + this.filterVal + '</span>')
-    return found;
-  }
-  catch(e) {
-    console.log('containsMatches')
-    console.error(e)
-  }
-
-
+    try {
+      const found = node.data.name.match(this.filterRegex) || node.childNodes.some(child => this.containsMatches(child));
+      if (found) node.expand();
+      node.data.text = node.data.name.replace(this.filterRegex, '<span style="color:#2196F3;font-weight:bold">' + this.filterVal + '</span>')
+      return found;
+    }
+    catch(e) {
+      console.log('containsMatches')
+      console.error(e)
+    }
   }
 }
-
 @Component({
   selector: 'dummy-component',
   template: ``,
   styles: [``]
 })
-export class DummyComponent implements OnInit {
-  ngOnInit() {
-  }
-}
+export class DummyComponent {}

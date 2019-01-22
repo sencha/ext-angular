@@ -79,7 +79,9 @@
     layout="fit">
     <router-outlet #extroute></router-outlet>
   </container>
+  <!-- examples ends-->
   
+  <!-- selections start-->
   <container 
     [hidden]="node.childNodes.length > 0 ? false: true" 
     layout="fit"
@@ -94,6 +96,6 @@
       (ready)="dataviewReady($event)">
     </dataview>
   </container>
-  <!-- examples ends-->
+  <!-- selections ends-->
 
 </panel>

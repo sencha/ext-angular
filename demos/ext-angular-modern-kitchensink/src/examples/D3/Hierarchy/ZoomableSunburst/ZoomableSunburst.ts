@@ -1,21 +1,18 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core'
-
 declare var Ext: any;
+import {Component, OnInit, ViewEncapsulation} from '@angular/core'
 
 Ext.require([
     'Ext.util.Format',
     'Ext.plugin.Responsive'
 ]);
-
 @Component({
   selector: 'zoomable-sunburst-component',
   templateUrl: "./ZoomableSunburst.html",
   styles: [``]
 })
 
-export class ZoomableSunburstComponent implements OnInit  {
+export class ZoomableSunburstComponent {
 
-  constructor() {}
 
   store = Ext.create('Ext.data.TreeStore', {
     autoLoad: true,
@@ -39,12 +36,13 @@ export class ZoomableSunburstComponent implements OnInit  {
     ],
     proxy: {
         type: 'ajax',
-        url: 'build/resources/data/tree/tree.json'
+        url: 'resources/data/tree/tree.json'
     },
     idProperty: 'path'
   });
 
   onTooltip = (component, tooltip, node) => {
+  try {
     const record = node.data,
         size = record.get('size'),
         n = record.childNodes.length;
@@ -53,6 +51,11 @@ export class ZoomableSunburstComponent implements OnInit  {
         Ext.util.Format.fileSize(size) :
         n + ' file' + (n === 1 ? '' : 's') + ' inside.'
     );
+  }
+  catch(e) {
+    console.log('onTooltip')
+    console.error(e)
+  }
   };
 
   tooltip = {renderer: this.onTooltip};
@@ -65,5 +68,5 @@ export class ZoomableSunburstComponent implements OnInit  {
     this.sunburst.onNodeSelect = (record, selection) => {
         this.sunburst.zoomInNode(record)};
     }
-  ngOnInit() {}
+
 }
