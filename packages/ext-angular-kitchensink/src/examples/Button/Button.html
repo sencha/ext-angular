@@ -21,7 +21,7 @@
     </button>
     <button ui="action raised" [iconCls]="round?'x-fa fa-check':null" [enableToggle]="true" text="Round" (tap)="toggleRound()"></button>
   </container>
-  <panel #layoutProps [padding] = "10" [shadow] = "true"  [defaults]="{layout: 'hbox', flex:'1', margin: '10', width: '100%'}">
+  <panel #layoutProps [padding] = "10" [shadow]="true"  [defaults]="{layout: 'hbox', flex:'1', margin: '10', width: '100%'}">
     <container layout="hbox">
       <container layout="hbox" >
         <div flex="1" #groupLabelProps1 style="text-align:right;margin:24px 20px 0 0;width: 100px">Default</div>

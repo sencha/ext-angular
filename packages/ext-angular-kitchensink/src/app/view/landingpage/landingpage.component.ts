@@ -5,7 +5,6 @@ import { Router, NavigationEnd } from '@angular/router';
 import { VERSION } from '@angular/core';
 import { Subject } from "rxjs";
 import { getFiles } from "./code_preview_helper";
-
 Ext.require([
   'Ext.panel.Collapser',
   'Ext.data.TreeStore'
@@ -50,18 +49,14 @@ export class LandingpageComponent implements OnInit {
   node$: any = new Subject()
   breadcrumb: Array<any>
   isDesktop: boolean = Ext.os.is.Desktop;
-
   filterRegex: any
   filterVal: any
   showTreeFlag: any = false
-
   blockstyle: any = {'background':'top','display':'block','text-align':'center'}
- 
-  treeStore: any = Ext.create('Ext.data.TreeStore', {
+   treeStore: any = Ext.create('Ext.data.TreeStore', {
     rootVisible: true,
     root: navTreeRoot
   })
-  
   theDataview: any
   tpl: any = `
   <div class="app-thumbnail">
@@ -70,6 +65,12 @@ export class LandingpageComponent implements OnInit {
     </div>
     <div class="app-thumbnail-text" >{text}</div>
     <div class="{premiumClass}"></div>
+  </div>`
+
+  theDataviewToolbar: any
+  tplToolbar: any = `
+  <div class="app-toolbar">
+    {text} <span>{divider}</span>
   </div>`
 
   toggleCode = () => {
@@ -89,13 +90,6 @@ export class LandingpageComponent implements OnInit {
     this.navigate(id)
   }
 
-  theDataviewToolbar: any
-
-  tplToolbar: any = `
-  <div class="app-toolbar">
-    {text} <span>{divider}</span>
-  </div>`
-
   dataviewToolbarReady = (event) => {
     //console.log("dataviewToolbarReady");
     this.theDataviewToolbar = event.ext
@@ -109,9 +103,6 @@ export class LandingpageComponent implements OnInit {
   }
 
   constructor(private router: Router, private ngZone: NgZone) {
-
-    console.log(navTreeRoot)
-    
     this.node$.subscribe(({
       next: (v) => {
         this.node = v;
