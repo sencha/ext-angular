@@ -16,6 +16,7 @@ hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
 
 declare var _code: any;
 const generateBreadcrumb = (node) => {
+try {
   const path = [];
   do {
     path.unshift({
@@ -27,6 +28,11 @@ const generateBreadcrumb = (node) => {
   } while (node = node.parentNode)
   path[path.length-1].divider = ''
   return path
+}
+catch(e) {
+  console.log('generateBreadcrumb')
+  console.error(e)
+}
 };
 @Component({
   selector: 'app-root',
@@ -103,6 +109,8 @@ export class LandingpageComponent implements OnInit {
   }
 
   constructor(private router: Router, private ngZone: NgZone) {
+try {
+
     this.node$.subscribe(({
       next: (v) => {
         this.node = v;
@@ -149,6 +157,14 @@ export class LandingpageComponent implements OnInit {
         }
       }
     });
+  }
+catch(e) {
+  console.log('constructor')
+  console.error(e)
+}
+
+
+
   }
 
   navigate(location) {
@@ -199,10 +215,19 @@ export class LandingpageComponent implements OnInit {
   }
 
   containsMatches(node) {
+
+try {
     const found = node.data.name.match(this.filterRegex) || node.childNodes.some(child => this.containsMatches(child));
     if (found) node.expand();
     node.data.text = node.data.name.replace(this.filterRegex, '<span style="color:#2196F3;font-weight:bold">' + this.filterVal + '</span>')
     return found;
+  }
+  catch(e) {
+    console.log('containsMatches')
+    console.error(e)
+  }
+
+
   }
 }
 
