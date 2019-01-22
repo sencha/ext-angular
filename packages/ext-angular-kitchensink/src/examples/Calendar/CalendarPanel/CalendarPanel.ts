@@ -1,14 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {CalendarService} from '../Calendar.service'
-
 declare var Ext: any;
-
+import {Component} from '@angular/core';
+import {CalendarService} from '../Calendar.service'
 @Component({
   selector: 'calendar-panel-component',
   templateUrl: './CalendarPanel.html',
   styles: [``]
 })
-export class CalendarPanelComponent implements OnInit {
+export class CalendarPanelComponent {
 
   constructor(private calService: CalendarService) { 
       console.log("Calendar panel component constructor invoked");
@@ -29,11 +27,6 @@ export class CalendarPanelComponent implements OnInit {
      console.log("end : " + end);
     return "";
    }
-
-
-   ngOnInit() {
-  }
-  
 
    formatDate = function(date) {
     return Ext.util.Format.date(date, 'j M');

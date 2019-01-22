@@ -1,22 +1,17 @@
 <container  [layout]="{ type: 'vbox', align: 'stretch', pack: 'center' }" [padding]="10">
-    <container 
-        [shadow]="true" 
-        [layout]="isAndroid? { type: 'vbox', align: 'stretch', pack: 'center' } : 'fit'"
-    >
-        <audio 
-            #audioRef
-            [loop]="true" 
-            [url]="'resources/audio/crash.mp3'"
-            [enableControls]="!isAndroid"
-            [width]="'550px'"
-            (ready)="audioReady($event)"
-        >
-        </audio>
-
-        <div  *ngIf="isAndroid">
-            <button [text]="playing ? 'Play Audio' : 'Pause Audio'" [margin]="20" [handler]="this.toggleAudioAndroid.bind(this)">
-            </button>
-        </div>
-        
-    </container>
+  <container 
+    [shadow]="true" 
+    [layout]="isAndroid? { type: 'vbox', align: 'stretch', pack: 'center' } : 'fit'">
+    <audio 
+      #audioRef
+      [loop]="true" 
+      [url]="'resources/audio/crash.mp3'"
+      [enableControls]="!isAndroid"
+      [width]="'550px'"
+      (ready)="audioReady($event)">
+    </audio>
+    <div *ngIf="isAndroid">
+      <button [text]="playing ? 'Play Audio' : 'Pause Audio'" [margin]="20" [handler]="this.toggleAudioAndroid.bind(this)"></button>
+    </div>
+  </container>
 </container>

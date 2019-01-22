@@ -1,13 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-
 declare var Ext: any;
-
+import {Component} from '@angular/core';
 @Component({
   selector: 'audio-component',
   templateUrl: './Audio.html',
   styles: [``]
 })
-export class AudioComponent implements OnInit {
+export class AudioComponent {
 
   constructor() { }
 
@@ -15,9 +13,9 @@ export class AudioComponent implements OnInit {
   audio: any;
   isAndroid = Ext.os.is.Android;
 
-  ngOnInit() {
-    console.log("isAndroid : " + this.isAndroid);
-  }
+  // ngOnInit() {
+  //   console.log("isAndroid : " + this.isAndroid);
+  // }
 
 
   audioReady = (event) => {
