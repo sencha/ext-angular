@@ -37,6 +37,7 @@ const generateBreadcrumb = (node) => {
   encapsulation: ViewEncapsulation.None
 })
 export class LandingpageComponent implements OnInit {
+
   ANGULAR_VERSION: any = VERSION.full
   titlebarHtml = `
   <span class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></span>
@@ -60,7 +61,7 @@ export class LandingpageComponent implements OnInit {
     rootVisible: true,
     root: navTreeRoot
   })
-
+  
   theDataview: any
   tpl: any = `
   <div class="app-thumbnail">
@@ -109,6 +110,8 @@ export class LandingpageComponent implements OnInit {
 
   constructor(private router: Router, private ngZone: NgZone) {
 
+    console.log(navTreeRoot)
+    
     this.node$.subscribe(({
       next: (v) => {
         this.node = v;

@@ -1,15 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {CalendarService} from '../Calendar.service';
-
 declare var Ext: any;
-
+import {Component} from '@angular/core';
+import {CalendarService} from '../Calendar.service';
 @Component({
   selector: 'calendar-weekview-component',
   templateUrl: './WeekView.html',
   styles: [``]
 })
-export class CalendarWeekViewComponent implements OnInit {
-
+export class CalendarWeekViewComponent {
 
   calendarview = 'fullweek';
   visibleDays = 7;
@@ -46,10 +43,6 @@ export class CalendarWeekViewComponent implements OnInit {
       this.visibleDays = 5;
       this.firstDayOfWeek = 0;
     }
-  }
-
-  ngOnInit() {
-
   }
 
 }

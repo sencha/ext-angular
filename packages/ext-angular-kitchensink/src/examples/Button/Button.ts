@@ -1,13 +1,11 @@
-import {Component, OnInit} from '@angular/core'
-
 declare var Ext: any;
-
+import {Component} from '@angular/core';
 @Component({
   selector: 'button-component',
   templateUrl: "./Button.html",
   styles: [``]
 })
-export class ButtonComponent implements OnInit  {
+export class ButtonComponent  {
 
   style = 'Menu';
   type = 'Text';
@@ -85,14 +83,6 @@ export class ButtonComponent implements OnInit  {
   styleChangeDefaults = { handler: this.onStyleChange };
   typeChangeDefaults = { handler: this.onTypeChange };
 
-
-  constructor() { }
-
-
-
-
-  ngOnInit() {   
-  }
 
   // [height] = "'100%'" [width] = "'100%'" className = "demo-buttons" defaults={margin: '20'}
   // [padding] = "10" [shadow] = "true" defaults={layout: 'hbox', flex:1, margin: '10', width: '100%'}

@@ -1,14 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {CalendarService} from '../Calendar.service';
-
 declare var Ext: any;
-
+import {Component} from '@angular/core';
+import {CalendarService} from '../Calendar.service';
 @Component({
   selector: 'calendar-monthview-component',
   templateUrl: './MonthView.html',
   styles: [``]
 })
-export class CalendarMonthViewComponent implements OnInit {
+export class CalendarMonthViewComponent {
 
 
     store = Ext.create('Ext.calendar.store.Calendars', {
@@ -23,10 +21,6 @@ export class CalendarMonthViewComponent implements OnInit {
 
   constructor(private calService: CalendarService) { 
       console.log("Calendar panel component constructor invoked");
-  }
-
-  ngOnInit() {
-
   }
 
 }

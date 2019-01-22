@@ -1,22 +1,11 @@
-import {Component, OnInit} from '@angular/core'
-
 declare var Ext: any;
-
+import {Component} from '@angular/core';
 @Component({
   selector: 'carousel-component',
-  templateUrl: "./Carousel.html",
+  templateUrl: './Carousel.html',
   styles: [``]
 })
 
 export class CarouselComponent  {
-
-  // constructor() { }
-
-  // carouselInstance: any;
-
-  // compReady(event) {
-  // }
-
-  // ngOnInit() {}
 
 }
