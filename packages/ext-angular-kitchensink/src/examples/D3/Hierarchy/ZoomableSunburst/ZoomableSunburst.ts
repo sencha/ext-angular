@@ -45,6 +45,7 @@ export class ZoomableSunburstComponent implements OnInit  {
   });
 
   onTooltip = (component, tooltip, node) => {
+try {
     const record = node.data,
         size = record.get('size'),
         n = record.childNodes.length;
@@ -53,6 +54,12 @@ export class ZoomableSunburstComponent implements OnInit  {
         Ext.util.Format.fileSize(size) :
         n + ' file' + (n === 1 ? '' : 's') + ' inside.'
     );
+  }
+catch(e) {
+  console.log('onTooltip')
+  console.error(e)
+}
+
   };
 
   tooltip = {renderer: this.onTooltip};
