@@ -13,6 +13,8 @@ const hljs: any = require('highlight.js/lib/highlight');
 hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescript'));
 hljs.registerLanguage('http', require('highlight.js/lib/languages/http'));
 hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
+hljs.registerLanguage('xml', require('highlight.js/lib/languages/xml'));
+hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'));
 
 declare var _code: any;
 const generateBreadcrumb = (node) => {
@@ -42,6 +44,17 @@ const generateBreadcrumb = (node) => {
   encapsulation: ViewEncapsulation.None
 })
 export class LandingpageComponent implements OnInit {
+
+  showSelections: any = true
+  showExamples: any = false
+
+  bodyStyle: any = `
+    backgroundSize: 20px 20px;
+    backgroundColor: #e8e8e8;
+    backgroundImage: 
+      linear-gradient(0deg, #f5f5f5 1.1px, transparent 0), 
+      linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)
+  `
 
   ANGULAR_VERSION: any = VERSION.full
   titlebarHtml = `
@@ -110,6 +123,8 @@ export class LandingpageComponent implements OnInit {
           this.files = getFiles(v, _code);
           this.highlightCode();
           this.breadcrumb = generateBreadcrumb(v);
+          this.showSelections = this.node.childNodes.length > 0 ? false: true
+          this.showExamples = this.node.childNodes.length > 0 ? true: false
           if(this.node.childNodes.length == 0) {
             this.blockstyle = {'background':'top','display':'block','text-align':'center'}
           }

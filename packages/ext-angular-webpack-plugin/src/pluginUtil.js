@@ -55,6 +55,7 @@ export function _constructor(options) {
   logv(options, `thisOptions - ${JSON.stringify(thisOptions)}`)
   if (thisOptions.environment == 'production') {
     thisVars.production = true
+    thisOptions.genProdData = options.genProdData
     if (!options.genProdData && options.framework == 'angular' && options.prodFileReplacementConfig.length) {
       options.prodFileReplacementConfig.forEach((value) => {
         if(typeof value === 'object' && value.replace && value.with) {
@@ -75,6 +76,7 @@ export function _constructor(options) {
     {thisVars.production = false}
   log(require('./pluginUtil')._getVersions(thisVars.app, thisVars.pluginName, thisVars.framework))
   log(thisVars.app + 'Building for ' + thisOptions.environment)
+  log(thisVars.app + 'genProdData: ' + thisOptions.genProdData)
 
   plugin.vars = thisVars
   plugin.options = thisOptions
@@ -99,21 +101,26 @@ export function _compilation(compiler, compilation, vars, options) {
       logv(options, `ext-compilation: production is ` + vars.production)
 
       if (options.framework == 'angular') {
-        // Reads all ext components source code to get all ext-components list
-        var usedExtComponents = []
 
-        const packagePath = path.resolve(process.cwd(), 'node_modules/' + extAngularPackage)
-        var files = fsx.readdirSync(`${packagePath}/lib`)
-        files.forEach((fileName) => {
-          if (fileName && fileName.substr(0, 4) == 'ext-') {
-            var end = fileName.substr(4).indexOf('.component')
-            if (end >= 0) {
-              extComponents.push(fileName.substring(4, end + 4))
-            }
-          }
-        })
 
         if (options.genProdData) {
+
+          // Reads all ext components source code to get all ext-components list
+          var usedExtComponents = []
+
+          const packagePath = path.resolve(process.cwd(), 'node_modules/' + extAngularPackage)
+          var files = fsx.readdirSync(`${packagePath}/lib`)
+          files.forEach((fileName) => {
+            if (fileName && fileName.substr(0, 4) == 'ext-') {
+              var end = fileName.substr(4).indexOf('.component')
+              if (end >= 0) {
+                extComponents.push(fileName.substring(4, end + 4))
+              }
+            }
+          })
+
+
+
           // Update `app.module.ts` to include prod data folder.
           try {
             var rewrite = false
@@ -164,13 +171,15 @@ export function _compilation(compiler, compilation, vars, options) {
         }
       }
 
-      compilation.hooks.succeedModule.tap(`ext-succeed-module`, module => {
-        if (extComponents.length && module.resource && (module.resource.match(/\.(j|t)sx?$/) ||
-        options.framework == 'angular' && module.resource.match(/\.html$/)) &&
-        !module.resource.match(/node_modules/) && !module.resource.match(`/ext-{$options.framework}/dist/`)) {
-          vars.deps = [...(vars.deps || []), ...require(`./${vars.framework}Util`).extractFromSource(module, options, compilation, extComponents)]
-        }
-      })
+      if (options.framework == 'angular' && !options.genProdData) {
+        compilation.hooks.succeedModule.tap(`ext-succeed-module`, module => {
+          if (extComponents.length && module.resource && (module.resource.match(/\.(j|t)sx?$/) ||
+          options.framework == 'angular' && module.resource.match(/\.html$/)) &&
+          !module.resource.match(/node_modules/) && !module.resource.match(`/ext-{$options.framework}/dist/`)) {
+            vars.deps = [...(vars.deps || []), ...require(`./${vars.framework}Util`).extractFromSource(module, options, compilation, extComponents)]
+          }
+        })
+      }
 
       if (options.framework == 'angular' && options.genProdData) {
         compilation.hooks.finishModules.tap(`ext-finish-modules`, modules => {
@@ -216,7 +225,8 @@ export function _compilation(compiler, compilation, vars, options) {
       }
     }
 
-    if (options.framework != 'extjs') {
+    if (options.framework != 'extjs' && !options.genProdData) {
+
       compilation.hooks.htmlWebpackPluginBeforeHtmlGeneration.tap(`ext-html-generation`,(data) => {
         logv(options,'HOOK ext-html-generation')
         const path = require('path')
@@ -276,7 +286,12 @@ export async function emit(compiler, compilation, vars, options, callback) {
         _prepareForBuild(app, vars, options, outputPath, compilation)
       }
       else {
-        require(`./${framework}Util`)._prepareForBuild(app, vars, options, outputPath, compilation)
+        if (options.framework == 'angular' && !options.genProdData) {
+          require(`./${framework}Util`)._prepareForBuild(app, vars, options, outputPath, compilation)
+        }
+        else {
+          require(`./${framework}Util`)._prepareForBuild(app, vars, options, outputPath, compilation)
+        }
       }
 
       var command = ''

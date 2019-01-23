@@ -21,21 +21,21 @@
     </button>
     <button ui="action raised" [iconCls]="round?'x-fa fa-check':null" [enableToggle]="true" text="Round" (tap)="toggleRound()"></button>
   </container>
-  <panel #layoutProps [padding] = "10" [shadow]="true"  [defaults]="{layout: 'hbox', flex:'1', margin: '10', width: '100%'}">
+  <panel #layoutProps padding="10" [shadow]="true" [defaults]="{layout: 'hbox', flex:'1', margin: '10', width: '100%'}">
     <container layout="hbox">
-      <container layout="hbox" >
+      <container layout="hbox">
         <div flex="1" #groupLabelProps1 style="text-align:right;margin:24px 20px 0 0;width: 100px">Default</div>
       </container>
       <container flex="3" [cls]="'button-group'" #buttonGroupProps1 padding= '17 0 17 20' [layout]="{ type: 'hbox', align: 'middle', pack: 'space-around' }" flex='1' margin='0 20 0 0' width=400 [defaults]="{margin: '0 20 0 0'}">
         <button [text]="text? 'Normal' : '' "  [ui]="ui" [iconCls]="iconCls" arrowAlign="bottom" (ready)="menuButtonReady($event)">
-          <menu  [hidden]="menu" [indented]="false" >
+          <menu [hidden]="menu" [indented]="false">
             <menuitem text="Item 1"></menuitem>
             <menuitem text="Item 2"></menuitem>
             <menuitem text="Item 3"></menuitem>
           </menu>
         </button>
         <button [text]="text? 'Badge' : ''" [ui]="ui" [iconCls]="iconCls" badgeText="2" (ready)="menuButtonReady($event)">
-          <menu  [hidden]="menu" [indented]="false" >
+          <menu [hidden]="menu" [indented]="false">
             <menuitem text="Item 1"></menuitem>
             <menuitem text="Item 2"></menuitem>
             <menuitem text="Item 3"></menuitem>
@@ -55,21 +55,21 @@
         <div flex="1" #groupLabelProps2 width='70px' style="text-align:right;margin:24px 20px 0 0;width: 100px">Alt</div>
       </container>
       <container flex="3" [cls]="'button-group button-group-alt'" #buttonGroupProps2 padding= '17 0 17 20' [layout]="{ type: 'hbox', align: 'middle', pack: 'space-around' }" flex='1' margin='0 20 0 0' width=400 [defaults]="{margin: '0 20 0 0'}">
-        <button [text]="text? 'Normal': ''" [ui]="ui + ' alt'" [iconCls]="iconCls" (ready)="menuButtonReady($event)">
+        <button [text]="text?  'Normal': ''" [ui]="ui + ' alt'" [iconCls]="iconCls" (ready)="menuButtonReady($event)">
           <menu [hidden]="menu" [indented]="false">
             <menuitem text="Item 1"></menuitem>
             <menuitem text="Item 2"></menuitem>
             <menuitem text="Item 3"></menuitem>
           </menu>
         </button>
-        <button [text]="text? 'Badge' : ''" [ui]="ui + ' alt'" [iconCls]="iconCls" badgeText="2" (ready)="menuButtonReady($event)">
+        <button [text]="text?  'Badge' : ''" [ui]="ui + ' alt'" [iconCls]="iconCls" badgeText="2" (ready)="menuButtonReady($event)">
           <menu [hidden]="menu" [indented]="false" >
             <menuitem text="Item 1"></menuitem>
             <menuitem text="Item 2"></menuitem>
             <menuitem text="Item 3"></menuitem>
           </menu>
         </button>
-        <button [text]="text? 'Disabled' : ''" [ui]="ui + ' alt'" [iconCls]="iconCls" [disabled]="true" (ready)="menuButtonReady($event)">
+        <button [text]="text?  'Disabled' : ''" [ui]="ui + ' alt'" [iconCls]="iconCls" [disabled]="true" (ready)="menuButtonReady($event)">
           <menu [hidden]="menu" [indented]="false">
             <menuitem text="Item 1"></menuitem>
             <menuitem text="Item 2"></menuitem>
@@ -83,14 +83,14 @@
         <div flex="1" #groupLabelProps3 style="text-align:right;margin:24px 20px 0 0;width: 100px">Raised</div>
       </container>
       <container flex="3" [cls]="'button-group'" #buttonGroupProps3 padding= '17 0 17 20' [layout]="{ type: 'hbox', align: 'middle', pack: 'space-around' }" flex='1' margin='0 20 0 0' width=400 [defaults]="{margin: '0 20 0 0'}">
-        <button [text]="text? 'Normal' : ''"  [ui]="ui + ' raised'" [iconCls]="iconCls" (ready)="menuButtonReady($event)">
+        <button [text]="text?  'Normal' : ''"  [ui]="ui + ' raised'" [iconCls]="iconCls" (ready)="menuButtonReady($event)">
           <menu [hidden]="menu" [indented]="false">
             <menuitem text="Item 1"></menuitem>
             <menuitem text="Item 2"></menuitem>
             <menuitem text="Item 3"></menuitem>
           </menu>
         </button>
-        <button [text]="text?  'Badge' : ''"  [ui]="ui + ' raised'" [iconCls]="iconCls" badgeText="2" (ready)="menuButtonReady($event)">
+        <button [text]="text?  'Badge' : ''" [ui]="ui + ' raised'" [iconCls]="iconCls" badgeText="2" (ready)="menuButtonReady($event)">
           <menu  [hidden]="menu" [indented]="false">
             <menuitem text="Item 1"></menuitem>
             <menuitem text="Item 2"></menuitem>
@@ -111,7 +111,7 @@
         <div flex="1" #groupLabelProps4 style="text-align:right;margin:24px 20px 0 0;width: 100px">Alt Raised</div>
       </container>
       <container flex="3" [cls]="'button-group button-group-alt'" #buttonGroupProps4 padding= '17 0 17 20' [layout]="{ type: 'hbox', align: 'middle', pack: 'space-around' }" flex='1' margin='0 20 0 0' width=400 [defaults]="{margin: '0 20 0 0'}">
-        <button [text]="text? 'Normal' : '' " [ui]="ui + ' alt raised'" [iconCls]="iconCls" (ready)="menuButtonReady($event)">
+        <button [text]="text?  'Normal' : '' " [ui]="ui + ' alt raised'" [iconCls]="iconCls" (ready)="menuButtonReady($event)">
           <menu [hidden]="menu" [indented]="false">
             <menuitem text="Item 1"></menuitem>
             <menuitem text="Item 2"></menuitem>
@@ -125,7 +125,7 @@
             <menuitem text="Item 3"></menuitem>
           </menu>
         </button>
-        <button [text]="text? 'Disabled' : ''" [ui]="ui + ' alt raised'" [iconCls]="iconCls" [disabled]="true" (ready)="menuButtonReady($event)">
+        <button [text]="text?  'Disabled' : ''" [ui]="ui + ' alt raised'" [iconCls]="iconCls" [disabled]="true" (ready)="menuButtonReady($event)">
           <menu [hidden]="menu" [indented]="false">
             <menuitem text="Item 1"></menuitem>
             <menuitem text="Item 2"></menuitem>
