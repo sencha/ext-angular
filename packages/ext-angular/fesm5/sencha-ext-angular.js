@@ -1,6 +1,6 @@
 import '@angular/platform-browser-dynamic';
 import { __extends } from 'tslib';
-import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, EventEmitter, ContentChild, Component, NgModule, forwardRef, ElementRef, Host, Optional, SkipSelf, defineInjectable, inject, INJECTOR } from '@angular/core';
+import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, Component, EventEmitter, ContentChild, NgModule, defineInjectable, inject, INJECTOR, forwardRef, ElementRef, Host, Optional, SkipSelf } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle

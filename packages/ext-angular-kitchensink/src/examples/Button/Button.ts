@@ -24,7 +24,6 @@ export class ButtonComponent  {
 
 
   onStyleChange = (item) => {
-    //console.log("onStyleChange : " + item._text);
     this.style = item._text; 
     if (this.style === 'Menu') {
       this.menu = true;
@@ -57,17 +56,13 @@ export class ButtonComponent  {
   }
 
   onTypeChange = (item) => {
-//    console.log("onTypeChange : " + item._text);
     this.type = item._text; 
-//    console.log("this.type : " + this.type);
     this.iconCls = this.type.indexOf('Icon') !== -1 ? 'x-fa fa-heart' : null;
     this.text = this.type.indexOf('Text') !== -1;
   }
 
   toggleRound = function(){
-//    console.log("In toggleRound");
     this.round=!this.round;
-//    console.log("Round: " + this.round);
     if (this.round) { 
       this.ui += ' round';
     }
@@ -76,16 +71,9 @@ export class ButtonComponent  {
     }
   };
 
-  //mjg what is group for?
-  //styleChangeDefaults = { handler: this.onStyleChange, group: 'buttonstyle' };
-  //typeChangeDefaults = { handler: this.onTypeChange, group: 'buttonstyle' };
-
   styleChangeDefaults = { handler: this.onStyleChange };
   typeChangeDefaults = { handler: this.onTypeChange };
 
-
-  // [height] = "'100%'" [width] = "'100%'" className = "demo-buttons" defaults={margin: '20'}
-  // [padding] = "10" [shadow] = "true" defaults={layout: 'hbox', flex:1, margin: '10', width: '100%'}
   layoutPropsVal = Ext.os.is.Phone ? {
     height: '100%',
     width: '100%',
@@ -104,7 +92,6 @@ export class ButtonComponent  {
       }
     }
 
-    // padding= '17 0 17 20' layout= "{ type: 'hbox', align: 'middle', pack: 'space-around' }" flex=1 margin='0 20 0 0' width=400 defaults="{margin: '0 20 0 0'}"
   buttonGroupPropsVal = Ext.os.is.Phone ? {
     padding: '20 0 0 20',
     defaults: {
@@ -122,7 +109,6 @@ export class ButtonComponent  {
       }
     }
 
-  // width='70px' textAlign='right' margin='24px 20px 0 0'
   groupLabelPropsVal = Ext.os.is.Phone ? {
     style: {
       margin: '0 0 5px 0'

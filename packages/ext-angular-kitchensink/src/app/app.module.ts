@@ -11,15 +11,6 @@ import { ExtAngularBootstrapComponent } from '@sencha/ext-angular/esm5/lib/ext-a
 
 import {AppService} from './app.service'
 
-import { HighlightJsModule, HIGHLIGHT_JS } from 'angular-highlight-js';
-const hljs: any = require('highlight.js/lib/highlight');
-hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescript'));
-hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'));
-hljs.registerLanguage('xml', require('highlight.js/lib/languages/xml'));
-export function highlightJsFactory() {
-  return hljs;
-}
-
 import * as d3 from 'd3'
 window['d3'] = d3
 
@@ -481,11 +472,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
   imports: [
     BrowserModule,
     ExtAngularModule,
-    routingModule,
-    HighlightJsModule.forRoot({
-      provide: HIGHLIGHT_JS,
-      useFactory: highlightJsFactory
-    })
+    routingModule
   ],
   declarations: [
     ExtAngularBootstrapComponent,
@@ -683,19 +670,18 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
     TreeMapComponent,
     SunburstComponent,
     TreeHierarchyComponent,
-    ZoomableSunburstComponent,
-
+    ZoomableSunburstComponent
   ],
   providers: [
     ExtAngularBootstrapService,
     CalendarService,
     GridService,
     BigDataService,,
-	GridFilteringService,
-	AppService
+    GridFilteringService,
+    AppService
   ],
   entryComponents: [
-     LandingpageComponent
+    LandingpageComponent
   ],
   bootstrap: [ExtAngularBootstrapComponent]
 })
