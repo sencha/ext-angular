@@ -2,33 +2,40 @@ const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin
 const ExtWebpackPlugin = require('@sencha/ext-angular-webpack-plugin')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
 const webpack = require("webpack")
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin')
 const portfinder = require('portfinder')
 
 module.exports = function (env) {
-  var browserprofile = JSON.parse(env.browser) || true
-  var watchprofile = env.watch || 'yes'
+  var browserprofile
+  var watchprofile
+  var buildenvironment = env.environment || process.env.npm_package_extbuild_defaultenvironment
+  if (buildenvironment == 'production') {
+    browserprofile = false
+    watchprofile = 'no'
+  }
+  else {
+    if (env.browser == undefined) {env.browser = true}
+    browserprofile = JSON.parse(env.browser) || true
+    watchprofile = env.watch || 'yes'
+  }
+  const isProd = buildenvironment === 'production'
+  var basehref = env.basehref || '/'
   var buildprofile = env.profile || process.env.npm_package_extbuild_defaultprofile
   var buildenvironment = env.environment || process.env.npm_package_extbuild_defaultenvironment
   var buildverbose = env.verbose || process.env.npm_package_extbuild_defaultverbose
-  console.log(env.genProdData)
-  var genProdData
-  if (env.genProdData == undefined) {
-    genProdData = false
-  }
-  else {
-    genProdData = JSON.parse(env.genProdData) || false
-  }
   if (buildprofile == 'all') { buildprofile = '' }
-  const isProd = buildenvironment === 'production'
-  const mode = isProd ? 'production' : 'development'
+  if (env.genProdData == undefined) {env.genProdData = false}
+  var genProdData = env.genProdData ? JSON.parse(env.genProdData) : false
+  var mode = isProd ? 'production': 'development'
 
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
     const plugins = [
       new AngularCompilerPlugin({
         tsConfigPath: './tsconfig.json',
+        entryModule: "src/app/app.module#AppModule",
         mainPath: "./src/main.ts",
         skipCodeGeneration: true
       }),
@@ -36,6 +43,7 @@ module.exports = function (env) {
         template: "index.html",
         inject: "body"
       }),
+      new BaseHrefWebpackPlugin({ baseHref: basehref }),
       new ExtWebpackPlugin({
         framework: 'angular',
         port: port,
@@ -47,6 +55,12 @@ module.exports = function (env) {
         environment: buildenvironment, 
         verbose: buildverbose,
         theme: 'theme-material',
+        prodFileReplacementConfig: [
+          {
+            "replace": "src/environments/environment.ts",
+            "with": "src/environments/environment.prod.ts"
+          }
+        ],
         packages: [
           'ux',
           'treegrid'

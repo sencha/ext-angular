@@ -3,19 +3,32 @@ const ExtWebpackPlugin = require('@sencha/ext-angular-webpack-plugin')
 const WebpackShellPlugin = require('webpack-shell-plugin-next')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
 const webpack = require("webpack")
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin')
 const portfinder = require('portfinder')
 
 module.exports = function (env) {
-  var browserprofile = JSON.parse(env.browser) || true
-  var watchprofile = env.watch || 'yes'
+  var browserprofile
+  var watchprofile
+  var buildenvironment = env.environment || process.env.npm_package_extbuild_defaultenvironment
+  if (buildenvironment == 'production') {
+    browserprofile = false
+    watchprofile = 'no'
+  }
+  else {
+    if (env.browser == undefined) {env.browser = true}
+    browserprofile = JSON.parse(env.browser) || true
+    watchprofile = env.watch || 'yes'
+  }
+  const isProd = buildenvironment === 'production'
+  var basehref = env.basehref || '/'
   var buildprofile = env.profile || process.env.npm_package_extbuild_defaultprofile
   var buildenvironment = env.environment || process.env.npm_package_extbuild_defaultenvironment
   var buildverbose = env.verbose || process.env.npm_package_extbuild_defaultverbose
-  var genProdData = env.genProdData ? JSON.parse(env.genProdData) : false
   if (buildprofile == 'all') { buildprofile = '' }
-  const isProd = buildenvironment === 'production'
+  if (env.genProdData == undefined) {env.genProdData = false}
+  var genProdData = env.genProdData ? JSON.parse(env.genProdData) : false
   var mode = isProd ? 'production': 'development'
 
   portfinder.basePort = (env && env.port) || 1962
@@ -23,6 +36,7 @@ module.exports = function (env) {
     const plugins = [
       new AngularCompilerPlugin({
         tsConfigPath: './tsconfig.json',
+        entryModule: "src/app/app.module#AppModule",
         mainPath: "./src/main.ts",
         skipCodeGeneration: true
       }),
@@ -31,6 +45,7 @@ module.exports = function (env) {
         hash: true,
         inject: "body"
       }),
+      new BaseHrefWebpackPlugin({ baseHref: basehref }),
       new ExtWebpackPlugin({
         framework: 'angular',
         port: port,

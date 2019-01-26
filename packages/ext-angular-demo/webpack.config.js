@@ -2,18 +2,30 @@ const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin
 const ExtWebpackPlugin = require('@sencha/ext-angular-webpack-plugin')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
 const webpack = require("webpack")
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin')
 const portfinder = require('portfinder')
 
 module.exports = function (env) {
-  var browserprofile = JSON.parse(env.browser) || true
-  var watchprofile = env.watch || 'yes'
+  var browserprofile
+  var watchprofile
+  var buildenvironment = env.environment || process.env.npm_package_extbuild_defaultenvironment
+  if (buildenvironment == 'production') {
+    browserprofile = false
+    watchprofile = 'no'
+  }
+  else {
+    browserprofile = JSON.parse(env.browser) || true
+    watchprofile = env.watch || 'yes'
+  }
+  const isProd = buildenvironment === 'production'
+  var basehref = env.basehref || '/'
   var buildprofile = env.profile || process.env.npm_package_extbuild_defaultprofile
   var buildenvironment = env.environment || process.env.npm_package_extbuild_defaultenvironment
   var buildverbose = env.verbose || process.env.npm_package_extbuild_defaultverbose
   if (buildprofile == 'all') { buildprofile = '' }
-  const isProd = buildenvironment === 'production'
+ 
 
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
@@ -27,6 +39,7 @@ module.exports = function (env) {
         template: "index.html",
         inject: "body"
       }),
+      new BaseHrefWebpackPlugin({ baseHref: basehref }),
       new ExtWebpackPlugin({
         framework: 'angular',
         port: port,
@@ -40,6 +53,12 @@ module.exports = function (env) {
         packages: [
           'ux',
           'treegrid'
+        ],
+        prodFileReplacementConfig: [
+          {
+            "replace": "src/environments/environment.ts",
+            "with": "src/environments/environment.prod.ts"
+          }
         ]
       }),
       new webpack.ContextReplacementPlugin(

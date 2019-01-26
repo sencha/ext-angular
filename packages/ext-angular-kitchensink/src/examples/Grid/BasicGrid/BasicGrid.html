@@ -1,3 +1,4 @@
+<container layout="fit" padding="10" [fitToParent]="true">
 <grid 
   title="Stock Prices"
   [store]="store"
@@ -21,7 +22,7 @@
     [cell]="{encodeHtml:false}"
     [renderer]="this.renderSign.bind(this,'0.00')">
   </column>
-  <column  
+  <column
     text="% Change"
     dataIndex="priceChangePct" 
     [cell]="{encodeHtml:false}"
@@ -34,6 +35,7 @@
     formatter='date("m/d/Y")'>
   </column>
 </grid>
+</container>
 <!--
 <container layout="fit" padding="10" [fitToParent]="true">
 </container>

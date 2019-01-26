@@ -176,3 +176,19 @@ export function launch(AppModule) {
     }
   })
 }
+
+
+    <!--
+    <base href="/">
+    <base href="/ExtAngular/6.7.0/kitchensink/">
+    <base href="/_git/sencha/ext-angular/packages/ext-angular-kitchensink/build/">
+    /repository/download/Early_Adopter_6_7_Examples_SenchaExtAngularKitchensinkTestExamplesSenchaCo/761203:id/ext-angular-6.7.0-kitchensink.zip%21/index.html
+    -->
+
+
+    "webpack-dev": "cross-env NODE_ENV=development webpack --mode development",
+    "webpack-prod": "cross-env NODE_ENV=production webpack --mode production",
+    "build:dev": "webpack-dev-server --inline --hot --progress--env.genProdData=false --env.verbose=no --env.environment=development --env.browser=true --env.watch=yes",
+    "build:prod": "npm run build:clean && ngc && npm run webpack-prod && npm run build:clean",
+    "build:clean": "del-cli 'src/**/*.js' 'src/**/*.js.map' 'src/**/*.ngsummary.json' 'src/**/*.metadata.json' 'src/**/**/*.ngfactory.ts' 'src/**/*.ngstyle.ts' 'src/**/*.shim.ts'",
+    "serve": "lite-server"

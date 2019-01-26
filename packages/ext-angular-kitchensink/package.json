@@ -5,18 +5,10 @@
   "scripts": {
     "start": "npm run dev",
     "clean": "rimraf build",
-    "dev": "webpack-dev-server --env.genProdData=false --env.verbose=no --env.environment=development --env.browser=true --env.watch=yes",
+    "dev": "webpack-dev-server --env.environment=development",
     "prod": "npm run build",
-    "build1": "npm run clean && cross-env webpack --env.verbose=yes --env.genProdData=true --env.environment=production --env.browser=false --env.watch=no",
-    "build": "npm run clean && cross-env webpack --env.verbose=no --env.genProdData=true --env.environment=production --env.browser=false --env.watch=no && cross-env webpack --env.verbose=yes --env.genProdData=false --env.environment=production --env.browser=false --env.watch=no",
-
-    "webpack-dev": "cross-env NODE_ENV=development webpack --mode development",
-    "webpack-prod": "cross-env NODE_ENV=production webpack --mode production",
-    "build:dev": "webpack-dev-server --inline --hot --progress--env.genProdData=false --env.verbose=no --env.environment=development --env.browser=true --env.watch=yes",
-    "build:prod": "npm run build:clean && ngc && npm run webpack-prod && npm run build:clean",
-    "build:clean": "del-cli 'src/**/*.js' 'src/**/*.js.map' 'src/**/*.ngsummary.json' 'src/**/*.metadata.json' 'src/**/**/*.ngfactory.ts' 'src/**/*.ngstyle.ts' 'src/**/*.shim.ts'",
-    "serve": "lite-server"
-
+    "build": "npm run clean && cross-env webpack --env.environment=production --env.genProdData=true && cross-env webpack --env.environment=production --env.basehref='/'",
+    "buildexample": "npm run clean && cross-env webpack --env.environment=production --env.genProdData=true && cross-env webpack --env.environment=production --env.basehref='/ExtAngular/6.7.0/kitchensink/'"
   },
   "extbuild": {
     "defaultprofile": "",
@@ -71,6 +63,7 @@
     "portfinder": "^1.0.20",
     "clean-webpack-plugin": "~1.0.1",
     "html-webpack-plugin": "^3.2.0",
+    "base-href-webpack-plugin": "^2.0.0",
     "webpack-filter-warnings-plugin": "^1.2.1",
     "webpack-shell-plugin-next": "^0.6.4",
     "webpack-merge": "~4.2.1",
