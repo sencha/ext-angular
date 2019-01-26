@@ -2,6 +2,7 @@
 export function _constructor(options) {
   const path = require('path')
   const fs = require('fs')
+  const fsx = require('fs-extra')
 
   var thisVars = {}
   var thisOptions = {}
@@ -15,12 +16,7 @@ export function _constructor(options) {
   }
 
   const validateOptions = require('schema-utils')
-  // console.log('111')
-  // console.log(options)
   validateOptions(require(`./${options.framework}Util`).getValidateOptions(), options, '')
-  // console.log('222')
-  // console.log(options)
-
   thisVars = require(`./${options.framework}Util`).getDefaultVars()
   thisVars.framework = options.framework
   switch(thisVars.framework) {
@@ -38,17 +34,17 @@ export function _constructor(options) {
   }
 
   //fix fashion dist problem
-  const fsx = require('fs-extra')
-  var toFashionDist = path.resolve(process.cwd(),`node_modules/@sencha/cmd/dist/js/node_modules/fashion/dist`)
-  logv(options, `toFashionDist ${toFashionDist}`)
-  if (!fs.existsSync(toFashionDist)) {
-    logv(options, `copy`)
-    var fromFashionDist = path.join(process.cwd(), 'node_modules/@sencha/' + thisVars.pluginName + '/fashion/dist/')
-    fsx.copySync(fromFashionDist, toFashionDist)
-  }
-  else {
-    logv(options, `no copy of fashion`)
-  }
+
+  // var toFashionDist = path.resolve(process.cwd(),`node_modules/@sencha/cmd/dist/js/node_modules/fashion/dist`)
+  // logv(options, `toFashionDist ${toFashionDist}`)
+  // if (!fs.existsSync(toFashionDist)) {
+  //   logv(options, `copy`)
+  //   var fromFashionDist = path.join(process.cwd(), 'node_modules/@sencha/' + thisVars.pluginName + '/fashion/dist/')
+  //   fsx.copySync(fromFashionDist, toFashionDist)
+  // }
+  // else {
+  //   logv(options, `no copy of fashion`)
+  // }
 
   thisVars.app = require('./pluginUtil')._getApp()
   logv(options, `pluginName - ${thisVars.pluginName}`)
@@ -58,7 +54,7 @@ export function _constructor(options) {
   thisOptions = { ...require(`./${thisVars.framework}Util`).getDefaultOptions(), ...options, ...rc }
   logv(options, `thisOptions - ${JSON.stringify(thisOptions)}`)
 
-
+  //mjg
   if (thisOptions.environment == 'production') {
     thisVars.production = true
     thisOptions.genProdData = options.genProdData
@@ -92,12 +88,6 @@ export function _constructor(options) {
 }
 
 //**********
-export function _afterCompile(compiler, compilation, vars, options) {
-  require('./pluginUtil').logv(options, 'FUNCTION _afterCompile')
-}
-
-
-//**********
 export function _compilation(compiler, compilation, vars, options) {
   try {
     require('./pluginUtil').logv(options, 'FUNCTION _compilation')
@@ -114,45 +104,50 @@ export function _compilation(compiler, compilation, vars, options) {
     var extComponents = []
 
     if (vars.production) {
-      //logv(options, `ext-compilation: production is ` + vars.production)
-      if (options.framework == 'angular') {
-        if (options.genProdData) {
-          // Reads all ext components source code to get all ext-components list
-          const packagePath = path.resolve(process.cwd(), 'node_modules/' + extAngularPackage)
-          var files = fsx.readdirSync(`${packagePath}/lib`)
-          files.forEach((fileName) => {
-            if (fileName && fileName.substr(0, 4) == 'ext-') {
-              var end = fileName.substr(4).indexOf('.component')
-              if (end >= 0) {
-                extComponents.push(fileName.substring(4, end + 4))
-              }
+      if (options.framework == 'angular' && options.genProdData) {
+//      if (options.framework == 'angular') {
+//        if (options.genProdData) {
+
+
+
+        // Reads all ext components source code to get all ext-components list
+        const packagePath = path.resolve(process.cwd(), 'node_modules/' + extAngularPackage)
+        var files = fsx.readdirSync(`${packagePath}/lib`)
+        files.forEach((fileName) => {
+          if (fileName && fileName.substr(0, 4) == 'ext-') {
+            var end = fileName.substr(4).indexOf('.component')
+            if (end >= 0) {
+              extComponents.push(fileName.substring(4, end + 4))
             }
-          })
-
-          // Update `app.module.ts` to include prod data folder.
-          try {
-            const appModulePath = path.resolve(process.cwd(), 'src/app/app.module.ts')
-            var js = fsx.readFileSync(appModulePath).toString()
-            var newJs = js.replace(
-              `import { ExtAngularModule } from '@sencha/ext-angular'`,
-              `import { ExtAngularModule } from './ext-angular-prod/ext-angular.module'`
-            );
-            fsx.writeFileSync(appModulePath, newJs, 'utf-8', ()=>{return})
-
-            // Create the prod folder if does not exists.
-            if (!fs.existsSync(pathToExtAngularModern)) {
-              mkdirp.sync(pathToExtAngularModern)
-              const t = require('./artifacts').extAngularModule('', '', '')
-              fsx.writeFileSync(`${pathToExtAngularModern}/${extAngularModule}.ts`, t, 'utf-8', () => {return})
-            }
-
           }
-          catch (e) {
-            console.log(e)
-            compilation.errors.push('buildModule hook in _compilation: ' + e)
-            return []
+        })
+
+        try {
+          const appModulePath = path.resolve(process.cwd(), 'src/app/app.module.ts')
+          var js = fsx.readFileSync(appModulePath).toString()
+          var newJs = js.replace(
+            `import { ExtAngularModule } from '@sencha/ext-angular'`,
+            `import { ExtAngularModule } from './ext-angular-prod/ext-angular.module'`
+          );
+          fsx.writeFileSync(appModulePath, newJs, 'utf-8', ()=>{return})
+
+          // Create the prod folder if does not exists.
+          if (!fs.existsSync(pathToExtAngularModern)) {
+            mkdirp.sync(pathToExtAngularModern)
+            const t = require('./artifacts').extAngularModule('', '', '')
+            fsx.writeFileSync(`${pathToExtAngularModern}/${extAngularModule}.ts`, t, 'utf-8', () => {return})
           }
+
         }
+        catch (e) {
+          console.log(e)
+          compilation.errors.push('buildModule hook in _compilation: ' + e)
+          return []
+        }
+//        }
+
+
+
       }
 
       compilation.hooks.succeedModule.tap(`ext-succeed-module`, module => {
@@ -168,6 +163,9 @@ export function _compilation(compiler, compilation, vars, options) {
       })
 
       if (options.framework == 'angular' && options.genProdData) {
+
+
+
         compilation.hooks.finishModules.tap(`ext-finish-modules`, modules => {
           require('./pluginUtil').logv(options, 'HOOK finishModules')
           const string = 'Ext.create({\"xtype\":\"'
@@ -210,6 +208,9 @@ export function _compilation(compiler, compilation, vars, options) {
           }
         })
       }
+
+
+
     }
 
     if (options.framework != 'extjs' && !options.genProdData) {
@@ -250,6 +251,11 @@ export function _compilation(compiler, compilation, vars, options) {
     require('./pluginUtil').logv(options,e)
     compilation.errors.push('_compilation: ' + e)
   }
+}
+
+//**********
+export function _afterCompile(compiler, compilation, vars, options) {
+  require('./pluginUtil').logv(options, 'FUNCTION _afterCompile')
 }
 
 //**********
@@ -404,13 +410,6 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
         fsx.copySync(fromResources, toResources)
         log(app + 'Copying ' + fromResources.replace(process.cwd(), '') + ' to: ' + toResources.replace(process.cwd(), ''))
       }
-
-      // if (fs.existsSync(path.join(process.cwd(),'resources/'))) {
-      //   var fromResources = path.join(process.cwd(), 'resources/')
-      //   var toResources = path.join(output, 'resources')
-      //   fsx.copySync(fromResources, toResources)
-      //   log(app + '6Copying ' + fromResources.replace(process.cwd(), '') + ' to: ' + toResources.replace(process.cwd(), ''))
-      // }
       
       if (fs.existsSync(path.join(process.cwd(),'packages/'))) {
         var fromPackages = path.join(process.cwd(), 'packages/')

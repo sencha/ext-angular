@@ -1,8 +1,6 @@
 'use strict'
 require('@babel/polyfill')
-
 export default class ExtWebpackPlugin {
-
   constructor(options) {
     this.plugin = require(`./pluginUtil`)._constructor(options)
   }
@@ -91,6 +89,5 @@ export default class ExtWebpackPlugin {
       }
       require('./pluginUtil').log(this.plugin.vars.app + `Completed ext-webpack-plugin processing`)
     })
-
   }
 }

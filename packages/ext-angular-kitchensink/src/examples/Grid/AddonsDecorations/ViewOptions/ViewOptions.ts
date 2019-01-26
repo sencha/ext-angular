@@ -12,6 +12,9 @@ Ext.require(['Ext.grid.plugin.ViewOptions']);
 })
 export class ViewOptionsComponent implements OnInit {
 
+  toolbarHtml = `
+  <div [style]="{fontSize: '14px', fontWeight: 'normal'}">Long press on a column header to customize this grid.</div>
+  `
 
   store = Ext.create('Ext.data.Store', {
     autoLoad: true,
