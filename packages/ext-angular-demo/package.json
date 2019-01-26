@@ -7,7 +7,8 @@
     "start": "npm run dev",
     "dev": "webpack-dev-server --env.verbose=no --env.environment=development  --env.browser=true  --env.watch=yes",
     "prod": "webpack-dev-server --env.verbose=yes --env.environment=production",
-    "build": "npm run clean && cross-env webpack --env.verbose=no --env.environment=production --env.browser=false --env.watch=no"
+    "build": "npm run clean && cross-env webpack --env.environment=production --env.basehref='/a/b/c'",
+    "build2": "npm run clean && cross-env webpack --env.environment=production"
   },
   "extbuild": {
     "defaultprofile": "",
@@ -52,6 +53,7 @@
     "style-loader": "^0.23.1",
 
     "html-webpack-plugin": "^3.2.0",
+    "base-href-webpack-plugin": "^2.0.0",
     "webpack-filter-warnings-plugin": "^1.2.1",
 
     "webpack": "^4.28.3",

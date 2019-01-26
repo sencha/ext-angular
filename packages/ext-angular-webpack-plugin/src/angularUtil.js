@@ -51,6 +51,7 @@ export function getDefaultVars() {
     extPath: 'ext-angular',
     pluginErrors: [],
     deps: [],
+    usedExtComponents: [],
     rebuild: true
   }
 }
@@ -63,7 +64,8 @@ export function extractFromSource(module, options, compilation, extComponents) {
   try {
     var js = module._source._value
     const logv = require('./pluginUtil').logv
-    logv(options,'FUNCTION extractFromSource')
+    logv(options,'HOOK succeedModule, FUNCTION extractFromSource: ' + module.resource)
+
     var statements = []
 
     var generate = require("@babel/generator").default

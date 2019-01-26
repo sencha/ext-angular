@@ -15,7 +15,11 @@ export function _constructor(options) {
   }
 
   const validateOptions = require('schema-utils')
+  // console.log('111')
+  // console.log(options)
   validateOptions(require(`./${options.framework}Util`).getValidateOptions(), options, '')
+  // console.log('222')
+  // console.log(options)
 
   thisVars = require(`./${options.framework}Util`).getDefaultVars()
   thisVars.framework = options.framework
@@ -53,6 +57,8 @@ export function _constructor(options) {
   const rc = (fs.existsSync(`.ext-${thisVars.framework}rc`) && JSON.parse(fs.readFileSync(`.ext-${thisVars.framework}rc`, 'utf-8')) || {})
   thisOptions = { ...require(`./${thisVars.framework}Util`).getDefaultOptions(), ...options, ...rc }
   logv(options, `thisOptions - ${JSON.stringify(thisOptions)}`)
+
+
   if (thisOptions.environment == 'production') {
     thisVars.production = true
     thisOptions.genProdData = options.genProdData
@@ -73,15 +79,23 @@ export function _constructor(options) {
     }
   }
   else 
-    {thisVars.production = false}
+    { thisVars.production = false }
+
   log(require('./pluginUtil')._getVersions(thisVars.app, thisVars.pluginName, thisVars.framework))
   log(thisVars.app + 'Building for ' + thisOptions.environment)
-  log(thisVars.app + 'genProdData: ' + thisOptions.genProdData)
+  log(thisVars.app + 'Generating production data: ' + thisOptions.genProdData)
 
   plugin.vars = thisVars
   plugin.options = thisOptions
+  require('./pluginUtil').logv(options, 'FUNCTION constructor (end)')
   return plugin
 }
+
+//**********
+export function _afterCompile(compiler, compilation, vars, options) {
+  require('./pluginUtil').logv(options, 'FUNCTION _afterCompile')
+}
+
 
 //**********
 export function _compilation(compiler, compilation, vars, options) {
@@ -92,22 +106,18 @@ export function _compilation(compiler, compilation, vars, options) {
     const fs = require('fs')
     const mkdirp = require('mkdirp')
     const path = require('path')
+
     const extAngularPackage = '@sencha/ext-angular'
     const extAngularFolder = 'ext-angular-prod'
     const extAngularModule = 'ext-angular.module'
+    const pathToExtAngularModern = path.resolve(process.cwd(), `src/app/${extAngularFolder}`)
     var extComponents = []
 
     if (vars.production) {
-      logv(options, `ext-compilation: production is ` + vars.production)
-
+      //logv(options, `ext-compilation: production is ` + vars.production)
       if (options.framework == 'angular') {
-
-
         if (options.genProdData) {
-
           // Reads all ext components source code to get all ext-components list
-          var usedExtComponents = []
-
           const packagePath = path.resolve(process.cwd(), 'node_modules/' + extAngularPackage)
           var files = fsx.readdirSync(`${packagePath}/lib`)
           files.forEach((fileName) => {
@@ -119,49 +129,23 @@ export function _compilation(compiler, compilation, vars, options) {
             }
           })
 
-
-
           // Update `app.module.ts` to include prod data folder.
           try {
-            var rewrite = false
             const appModulePath = path.resolve(process.cwd(), 'src/app/app.module.ts')
             var js = fsx.readFileSync(appModulePath).toString()
-            var i = js.indexOf(extAngularPackage)
-            i = js.substring(0, i).lastIndexOf('import')
+            var newJs = js.replace(
+              `import { ExtAngularModule } from '@sencha/ext-angular'`,
+              `import { ExtAngularModule } from './ext-angular-prod/ext-angular.module'`
+            );
+            fsx.writeFileSync(appModulePath, newJs, 'utf-8', ()=>{return})
 
-            if (js.substr(i - 3, 3) !== '// ') {
-              js = js.substring(0, i) + '\n // ' + js.substring(i)
-              rewrite = true
-            }
-
-            const pathToExtAngularModern = path.resolve(process.cwd(), `src/app/${extAngularFolder}`)
-            
-            // Create s the prod folder if does not exists.
+            // Create the prod folder if does not exists.
             if (!fs.existsSync(pathToExtAngularModern)) {
               mkdirp.sync(pathToExtAngularModern)
               const t = require('./artifacts').extAngularModule('', '', '')
-              fsx.writeFileSync(
-                `${pathToExtAngularModern}/${extAngularModule}.ts`, t, 'utf-8', () => {return}
-              )
-              rewrite = true
+              fsx.writeFileSync(`${pathToExtAngularModern}/${extAngularModule}.ts`, t, 'utf-8', () => {return})
             }
-            var j = js.indexOf(`./${extAngularFolder}/${extAngularModule}`)
-            if (j < 0) {
-              js = js.substring(0, i) + `import {ExtAngularModule} from './${extAngularFolder}/${extAngularModule}'\n` + js.substr(i)
-              rewrite = true
-            }
-            else {
-              var i = js.substring(0, j).lastIndexOf('import')
-              if (js.substr(i - 3, 3) == '// ') {
-                js = js.substring(0, i - 3) + '\n' + js.substring(i)
-                rewrite = true
-              } else if (js.substring(i-2, 2) == '//') {
-                js = js.substring(0, i - 2) + '\n' + js.substring(i)
-                rewrite = true
-              }
-            }
-            if (rewrite)
-              fsx.writeFileSync(appModulePath, js, 'utf-8', ()=>{return})
+
           }
           catch (e) {
             console.log(e)
@@ -171,30 +155,33 @@ export function _compilation(compiler, compilation, vars, options) {
         }
       }
 
-      if (options.framework == 'angular' && !options.genProdData) {
-        compilation.hooks.succeedModule.tap(`ext-succeed-module`, module => {
-          if (extComponents.length && module.resource && (module.resource.match(/\.(j|t)sx?$/) ||
-          options.framework == 'angular' && module.resource.match(/\.html$/)) &&
-          !module.resource.match(/node_modules/) && !module.resource.match(`/ext-{$options.framework}/dist/`)) {
-            vars.deps = [...(vars.deps || []), ...require(`./${vars.framework}Util`).extractFromSource(module, options, compilation, extComponents)]
-          }
-        })
-      }
+      compilation.hooks.succeedModule.tap(`ext-succeed-module`, module => {
+        //require('./pluginUtil').logv(options, 'HOOK succeedModule')
+        if (module.resource && !module.resource.match(/node_modules/)) {
+          vars.deps = [...(vars.deps || []), ...require(`./${vars.framework}Util`).extractFromSource(module, options, compilation, extComponents)]
+        }
+        // if (extComponents.length && module.resource && (module.resource.match(/\.(j|t)sx?$/) ||
+        // options.framework == 'angular' && module.resource.match(/\.html$/)) &&
+        // !module.resource.match(/node_modules/) && !module.resource.match(`/ext-{$options.framework}/build/`)) {
+        //   vars.deps = [...(vars.deps || []), ...require(`./${vars.framework}Util`).extractFromSource(module, options, compilation, extComponents)]
+        // }
+      })
 
       if (options.framework == 'angular' && options.genProdData) {
         compilation.hooks.finishModules.tap(`ext-finish-modules`, modules => {
+          require('./pluginUtil').logv(options, 'HOOK finishModules')
           const string = 'Ext.create({\"xtype\":\"'
           vars.deps.forEach(code => {
             var index = code.indexOf(string)
             if (index >= 0) {
               code = code.substring(index + string.length)
               var end = code.indexOf('\"')
-              usedExtComponents.push(code.substr(0, end))
+              vars.usedExtComponents.push(code.substr(0, end))
             }
           })
-          usedExtComponents = [...new Set(usedExtComponents)]
+          vars.usedExtComponents = [...new Set(vars.usedExtComponents)]
           const readFrom = path.resolve(process.cwd(), 'node_modules/' + extAngularPackage + '/src/lib')
-          const writeToPath = path.resolve(process.cwd(), `src/app/${extAngularFolder}`)
+          const writeToPath = pathToExtAngularModern
 
           const baseContent = fsx.readFileSync(`${readFrom}/base.ts`).toString()
           fsx.writeFileSync(`${writeToPath}/base.ts`, baseContent, 'utf-8', ()=>{return})
@@ -205,7 +192,7 @@ export function _compilation(compiler, compilation, vars, options) {
             exports: '',
             declarations: ''
           }
-          usedExtComponents.forEach(xtype => {
+          vars.usedExtComponents.forEach(xtype => {
             var capclassname = xtype.charAt(0).toUpperCase() + xtype.replace(/-/g, "_").slice(1)
             moduleVars.imports = moduleVars.imports + `import { Ext${capclassname}Component } from './ext-${xtype}.component';\n`
             moduleVars.exports = moduleVars.exports + `    Ext${capclassname}Component,\n`
@@ -443,8 +430,9 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
     vars.firstTime = false
     var js = ''
     if (vars.production) {
-      if (!vars.deps.includes('Ext.require("Ext.layout.*");\n'))
+      if (!vars.deps.includes('Ext.require("Ext.layout.*");\n')) {
         vars.deps.push('Ext.require("Ext.layout.*");\n')
+      }
       js = vars.deps.join(';\n');
     }
     else {

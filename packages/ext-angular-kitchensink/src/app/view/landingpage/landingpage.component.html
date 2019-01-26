@@ -83,6 +83,7 @@
 
 
   <!-- selections start-->
+ 
   <container 
     [hidden]="showSelections" 
     layout="fit"
@@ -97,12 +98,15 @@
       (ready)="dataviewReady($event)">
     </dataview>
   </container>
+<!--
+    <container padding="10" 
+    [hidden]="showExamples" 
+    layout="fit">
+-->
   <!-- selections ends-->
 
   <!-- examples start-->
-  <container padding="10" 
-    [hidden]="showExamples" 
-    layout="fit">
+  <container [hidden]="showExamples">
     <router-outlet #extroute></router-outlet>
   </container>
   <!-- examples ends-->

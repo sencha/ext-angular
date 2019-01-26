@@ -50,6 +50,7 @@ export class LandingpageComponent implements OnInit {
 
   bodyStyle: any = `
     backgroundSize: 20px 20px;
+    borderWidth: 0px;
     backgroundColor: #e8e8e8;
     backgroundImage: 
       linear-gradient(0deg, #f5f5f5 1.1px, transparent 0), 
@@ -57,6 +58,7 @@ export class LandingpageComponent implements OnInit {
   `
 
   ANGULAR_VERSION: any = VERSION.full
+
   titlebarHtml = `
   <span class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></span>
   <a extjs href="#" class="app-title">Sencha ExtAngular 6.7 Kitchen Sink - Angular v${this.ANGULAR_VERSION}</a>
