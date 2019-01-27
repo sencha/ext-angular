@@ -44,7 +44,6 @@ export class BigDataComponent implements OnInit {
   grid:any;
 
   gridReady = (event) => {
-    console.log("gridReady");
     this.grid = event.ext;
   }
 
