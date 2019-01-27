@@ -92,7 +92,6 @@ export class LandingpageComponent implements OnInit {
     try {
       this.node$.subscribe(({
         next: (v) => {
-          console.log('node event')
           this.node = v;
           this.files = getFiles(v, _code);
           this.highlightCode();
@@ -106,7 +105,6 @@ export class LandingpageComponent implements OnInit {
           }
           else {
             var location = window.location.hash.substr(1);
-            console.log(location)
             this.navigate(location)
           }
           if (this.theDataviewToolbar != undefined) {
@@ -158,7 +156,6 @@ export class LandingpageComponent implements OnInit {
   }
 
   navigate(location) {
-    console.log('here')
     this.ngZone.run(() => this.router.navigateByUrl(location)).then();
   }
 
