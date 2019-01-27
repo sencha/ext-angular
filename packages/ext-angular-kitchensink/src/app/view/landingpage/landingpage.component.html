@@ -1,17 +1,31 @@
+
+  <!-- code button starts-->
+  <button [weight]="5"
+    [hidden]="files.length > 0 ? false: true"
+    ui="fab"
+    [iconCls]="'x-font-icon ' + (showCode ? 'md-icon-close' : 'md-icon-code')"
+    [top]="isDesktop ? 20 : 35"
+    right="21"
+    zIndex="10000"
+    (tap)="toggleCode()">
+  </button>
+  <!-- code button ends-->
+
 <panel 
   layout="fit"
-  bodyPadding="10"
+  [bodyStyle]="bodyStyle"
   [fullscreen]="true"
-  [bodyStyle]="bodyStyle">
+  [weighted]="true">
+
   <!-- Titlebar starts-->
-  <titlebar docked="top">
+  <titlebar docked="top" [weight]="10">
     <button iconCls="x-fa fa-bars" (tap)="toggleTree()"></button>
     <container [html]="titlebarHtml"></container>
   </titlebar>
   <!-- Titlebar ends-->
 
   <!-- Breadcrumb starts-->
-  <toolbar docked="top">
+  <toolbar docked="top" [weight]="10">
     <dataview [itemTpl]="tplToolbar" [inline]="'true'" [itemCls]="'div.app-toolbar'"
       (childtap)="doClickToolbar($event)" (ready)="dataviewToolbarReady($event)">
     </dataview>
@@ -19,9 +33,8 @@
   <!-- Breadcrumb ends-->
 
   <!-- Navtree starts-->
-  <panel 
+  <panel [weight]="10"
     docked="left"
-    flex="1"
     scrollable="y"
     width="300"
     [style]="{zIndex: 100, backgroundColor: 'white'}"
@@ -34,33 +47,40 @@
   </panel>
   <!-- Navtree ends-->
 
-  <!-- code button starts-->
-  <button 
-    [hidden]="files.length > 0 ? false: true"
-    ui="fab"
-    [iconCls]="'x-font-icon ' + (showCode ? 'md-icon-close' : 'md-icon-code')"
-    [top]="isDesktop ? 20 : 35"
-    right="21"
-    zIndex="1000"
-    (tap)="toggleCode()">
-  </button>
-  <!-- code button ends-->
+  <!-- selections starts-->
+  <dataview
+    [hidden]="hideSelections"
+    [itemTpl]="tpl"
+    [store]="treeStore"
+    [style]="{'background':'top','display':'block','text-align':'center'}"
+    [inline]="true"
+    [centered]="true"
+    [itemCls]="'div.app-thumbnail'"
+    (childtap)="doClick($event)"
+    (ready)="dataviewReady($event)">
+  </dataview>
+  <!-- selections ends-->
 
-  <!-- code start-->
-  <panel 
-    docked="right"
+  <!-- examples starts-->
+  <container 
+    [hidden]="hideExamples">
+    <router-outlet #extroute></router-outlet>
+  </container>
+  <!-- examples ends-->
+
+  <!-- code window starts-->
+  <panel docked="right" [weight]="5"
     [hidden]="files.length > 0 ? false: true" 
-    flex="2"
-    [layout]= "'fit'"
-    [scrollable]="'y'"
-    [shadow]="false"
-    [style]="{zIndex: 100}"
+    width="900"
+    layout= "fit"
+    [style]="{zIndex: 3}"
     [resizable]="{ edges: 'west', dynamic: true }"
     [header]="false"
-    [width]="'33%'" 
+    [hideAnimation]="{type: 'slideOut', direction: 'right', duration: 100, easing: 'ease' }"
+    [showAnimation]="{type: 'slideIn', direction: 'left', duration: 100, easing: 'ease' }"
     [collapsible]="{ direction: 'right' }"
     [collapsed]="!showCode">
-    <tabpanel [fitToParent]="true"
+    <tabpanel 
       [shadow]="true"
       [tabBar]="{layout: {pack: 'left'}}">
       <panel *ngFor="let file of files" [hidden]="files.length > 0 ? false: true"
@@ -74,41 +94,6 @@
       </panel>
     </tabpanel>
   </panel>
-  <!-- code ends-->
-  
-  <!--
-    [hidden]="node.childNodes.length > 0 ? false: true" 
-    [hidden]="node.childNodes.length > 0 ? true: false" 
-  -->
-
-
-  <!-- selections start-->
- 
-  <container 
-    [hidden]="showSelections" 
-    layout="fit"
-    [fitToParent]="true">
-    <dataview 
-      [style]= "blockstyle"
-      [itemTpl]="tpl"
-      [inline]="true"
-      [centered]="true"
-      [itemCls]="'div.app-thumbnail'"
-      (childtap)="doClick($event)"
-      (ready)="dataviewReady($event)">
-    </dataview>
-  </container>
-<!--
-    <container padding="10" 
-    [hidden]="showExamples" 
-    layout="fit">
--->
-  <!-- selections ends-->
-
-  <!-- examples start-->
-  <container [hidden]="showExamples">
-    <router-outlet #extroute></router-outlet>
-  </container>
-  <!-- examples ends-->
+  <!-- code window ends-->
 
 </panel>

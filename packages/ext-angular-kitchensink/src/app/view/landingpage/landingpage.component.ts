@@ -15,7 +15,6 @@ hljs.registerLanguage('http', require('highlight.js/lib/languages/http'));
 hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
 hljs.registerLanguage('xml', require('highlight.js/lib/languages/xml'));
 hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'));
-
 declare var _code: any;
 const generateBreadcrumb = (node) => {
   try {
@@ -45,39 +44,22 @@ const generateBreadcrumb = (node) => {
 })
 export class LandingpageComponent implements OnInit {
 
-  showSelections: any = true
-  showExamples: any = false
-
-  bodyStyle: any = `
-    backgroundSize: 20px 20px;
-    borderWidth: 0px;
-    backgroundColor: #e8e8e8;
-    backgroundImage: 
-      linear-gradient(0deg, #f5f5f5 1.1px, transparent 0), 
-      linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)
-  `
-
   ANGULAR_VERSION: any = VERSION.full
-
+  treeStore: any
+  hideSelections: any = false
+  hideExamples: any = true
+  blockstyle: any = {'background':'top','display':'block','text-align':'center'}
+  bodyStyle: any = `
+  backgroundSize: 20px 20px;
+  borderWidth: 0px;
+  backgroundColor: #e8e8e8;
+  backgroundImage: 
+    linear-gradient(0deg, #f5f5f5 1.1px, transparent 0), 
+    linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)`
   titlebarHtml = `
   <span class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></span>
   <a extjs href="#" class="app-title">Sencha ExtAngular 6.7 Kitchen Sink - Angular v${this.ANGULAR_VERSION}</a>
   `
-
-  showCode: boolean = false;
-  files: Array<any> = [];
-  node: any
-  node$: any = new Subject()
-  breadcrumb: Array<any>
-  isDesktop: boolean = Ext.os.is.Desktop;
-  filterRegex: any
-  filterVal: any
-  showTreeFlag: any = false
-  blockstyle: any = {'background':'top','display':'block','text-align':'center'}
-   treeStore: any = Ext.create('Ext.data.TreeStore', {
-    rootVisible: true,
-    root: navTreeRoot
-  })
   theDataview: any
   tpl: any = `
   <div class="app-thumbnail">
@@ -87,54 +69,45 @@ export class LandingpageComponent implements OnInit {
     <div class="app-thumbnail-text" >{text}</div>
     <div class="{premiumClass}"></div>
   </div>`
-
+  showCode: boolean = false;
+  files: Array<any> = [];
+  node: any
+  node$: any = new Subject()
+  breadcrumb: Array<any>
+  isDesktop: boolean = Ext.os.is.Desktop;
+  filterRegex: any
+  filterVal: any
+  showTreeFlag: any = false
   theDataviewToolbar: any
   tplToolbar: any = `
   <div class="app-toolbar">
     {text} <span>{divider}</span>
   </div>`
 
-  toggleCode = () => {
-    this.showCode = !this.showCode;
-    this.highlightCode();
-  }
-
-  dataviewReady = (event) => {
-    this.theDataview = event.ext;
-  }
-
-  doClick = (event) => {
-    var id = event.location.record.data.id
-    this.navigate(id)
-  }
-
-  dataviewToolbarReady = (event) => {
-    this.theDataviewToolbar = event.ext
-  }
-
-  doClickToolbar = (event) => {
-    var id = event.location.record.data.path
-    this.navigate(id)
-  }
-
   constructor(private router: Router, private ngZone: NgZone) {
+    this.treeStore = Ext.create('Ext.data.TreeStore', {
+      rootVisible: true,
+      root: navTreeRoot
+    })
     try {
       this.node$.subscribe(({
         next: (v) => {
+          console.log('node event')
           this.node = v;
           this.files = getFiles(v, _code);
           this.highlightCode();
           this.breadcrumb = generateBreadcrumb(v);
-          this.showSelections = this.node.childNodes.length > 0 ? false: true
-          this.showExamples = this.node.childNodes.length > 0 ? true: false
-          if(this.node.childNodes.length == 0) {
-            this.blockstyle = {'background':'top','display':'block','text-align':'center'}
-          }
-          else {
-            this.blockstyle = {'background':'top','display':'block','text-align':'center'}
+          this.hideSelections = this.node.childNodes.length > 0 ? false: true
+          this.hideExamples = this.node.childNodes.length > 0 ? true: false
+          if(this.hideSelections == false) {
             if (this.theDataview != undefined) {
               this.theDataview.setData(this.node.childNodes)
             }
+          }
+          else {
+            var location = window.location.hash.substr(1);
+            console.log(location)
+            this.navigate(location)
           }
           if (this.theDataviewToolbar != undefined) {
             this.theDataviewToolbar.setData(this.breadcrumb)
@@ -161,7 +134,31 @@ export class LandingpageComponent implements OnInit {
     }
   }
 
+  toggleCode = () => {
+    this.showCode = !this.showCode;
+    this.highlightCode();
+  }
+
+  dataviewReady = (event) => {
+    this.theDataview = event.ext;
+  }
+
+  doClick = (event) => {
+    var id = event.location.record.data.id
+    this.navigate(id)
+  }
+
+  dataviewToolbarReady = (event) => {
+    this.theDataviewToolbar = event.ext
+  }
+
+  doClickToolbar = (event) => {
+    var id = event.location.record.data.path
+    this.navigate(id)
+  }
+
   navigate(location) {
+    console.log('here')
     this.ngZone.run(() => this.router.navigateByUrl(location)).then();
   }
 

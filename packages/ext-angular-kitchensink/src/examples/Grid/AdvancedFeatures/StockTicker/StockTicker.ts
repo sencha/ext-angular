@@ -119,13 +119,7 @@ renderSign = (format, value) => {
 
 
   return `
-    <div 
-        [style]="{ 
-            color:  ${col},
-            padding: '10px'
-        }"
-        [className]="'${clsNm}'"
-    >
+    <div [style]="{color: ${col}, padding: '10px'}" class="${clsNm}">
      ${formattedVal}
     </div>`
    }

@@ -1,5 +1,6 @@
-<grid  [plugins]="{ gridfilters: true }" rowNumbers="true" shadow="true" [store]="this.store" title='Grid Filters' [fitToParent]="true">
-    <column  dataIndex='employeeNo' filter='number' flex="1" minWidth="10" text='Id' ></column>
+<container padding="10px" layout="fit" [fitToParent]="true">
+<grid [plugins]="{ gridfilters: true }" rowNumbers="true" shadow="true" [store]="this.store" title='Grid Filters'>
+    <column  dataIndex='employeeNo' filter='number' minWidth="10" text='Id' ></column>
     <column  dataIndex='fullName' filter='string' minWidth="150" [sorter]="{ sorterFn: this.nameSorter }" text='Name' ></column>
     <datecolumn 
      dataIndex="dob" editable="true" format='d-m-Y' text='Date of Birth' 
@@ -9,5 +10,6 @@
     <column  align='center' dataIndex='holidayDays' format='0' text='Holidays' xtype='numbercolumn' ></column>
     <column  align='center' dataIndex='verified' text='Visible' width="150" xtype='booleancolumn' ></column>
     <column  align='right' dataIndex='salary' editable="true" formatter='usMoney' text='Salary' width="150" ></column>
-    <column  dataIndex='email' editable="true" [editor]="{ xtype: 'emailfield' }" text='Email' width="250" ></column>
+    <column  dataIndex='email' flex="1" editable="true" [editor]="{ xtype: 'emailfield' }" text='Email' width="250" ></column>
 </grid>
+</container>

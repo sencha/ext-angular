@@ -264,7 +264,7 @@
             function () {
                 //    console.log('\nbaseAfterContentInit')
                 if (this._extroute != undefined) {
-                    this.ext.add({ xtype: 'container', html: this._extroute.nativeElement });
+                    this.ext.add({ xtype: 'container', width: '100%', height: '100%', html: this._extroute.nativeElement });
                     return;
                 }
                 if (this._hostComponent != null) {
@@ -293,8 +293,8 @@
                 /** @type {?} */
                 var childxtype = childCmp.xtype;
                 if (this.ext.initialConfig.align != undefined) {
-                    if (parentxtype != 'titlebar') {
-                        console.error('Can only use align property if parent is a Titlebar');
+                    if (parentxtype != 'titlebar' && parentxtype != 'grid') {
+                        console.error('Can only use align property if parent is a Titlebar or Grid');
                         return;
                     }
                 }
