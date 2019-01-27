@@ -49,7 +49,7 @@ module.exports = function (env) {
       new ExtWebpackPlugin({
         framework: 'angular',
         port: port,
-        emit: true,
+        emit: false,
         browser: browserprofile,
         genProdData,
         watch: watchprofile,

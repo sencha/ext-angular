@@ -1,0 +1,128 @@
+<container 
+  [layout]="{type:'hbox', align: 'middle'}"
+  [fullscreen]="true"
+  cls="main-background">
+
+  <container [flex]="4" layout="hbox">
+    <!-- Titlebar starts-->
+    <titlebar docked="top">
+      <button iconCls="x-fa fa-bars" (tap)="toggleTree()"></button>
+      <container [html]="titlebarHtml"></container>
+    </titlebar>
+    <!-- Titlebar ends-->
+    <!-- Breadcrumb starts-->
+    <toolbar docked="top">
+      <dataview [itemTpl]="tplToolbar" [inline]="'true'" [itemCls]="'div.app-toolbar'"
+        (childtap)="doClickToolbar($event)" (ready)="dataviewToolbarReady($event)">
+      </dataview>
+    </toolbar>
+    <!-- Breadcrumb ends-->
+    <!-- Navtree starts-->
+    <panel 
+      docked="left"
+      scrollable="y"
+      width="300"
+      [style]="{zIndex: 100, backgroundColor: 'white'}"
+      [resizable]="{edges: 'east', dynamic: true}"
+      [header]="false"
+      [collapsible]="{ direction: 'left' }"
+      [collapsed]="!showTreeFlag">
+      <searchfield docked="top" ui="faded" margin="7" (change)="filterNav($event)"></searchfield>
+      <treelist ui="nav" [expanderFirst]="false" [expanderOnly]="false" [store]="treeStore" (selectionchange)="selectionChanged($event)"></treelist>
+    </panel>
+    <!-- Navtree ends-->
+
+    <!--
+            [hidden]="showSelections" 
+      [hidden]="showExamples"
+      -->
+<!--
+
+
+   <container flex="1" docked="left">
+      <dataview 
+        [itemTpl]="tpl"
+        [style]="{'background':'top','display':'block','text-align':'center'}"
+        [inline]="true"
+        [centered]="true"
+        [itemCls]="'div.app-thumbnail'"
+        (childtap)="doClick($event)"
+        (ready)="dataviewReady($event)">
+      </dataview>
+    </container>
+  -->
+
+<!--
+      <router-outlet *ngIf="showExamples" #extroute></router-outlet>
+-->
+<!--
+        <router-outlet #extroute></router-outlet>
+
+-->
+<container flex="4">
+<dataview
+[hidden]="hideSelections"
+[itemTpl]="tpl"
+[store]="treeStore"
+[style]="{'background':'top','display':'block','text-align':'center'}"
+[inline]="true"
+[centered]="true"
+[itemCls]="'div.app-thumbnail'"
+(childtap)="doClick($event)"
+(ready)="dataviewReady($event)">
+</dataview>
+<container 
+[hidden]="hideExamples"
+[fitToParent]="true">
+<router-outlet #extroute></router-outlet>
+</container>
+</container>
+    <!-- examples start-->
+    <!--
+        <router-outlet #extroute></router-outlet>
+
+   -->
+    <!-- examples ends-->
+
+  </container>
+
+  <!-- selections start-->
+  <panel 
+    [hidden]="files.length > 0 ? false: true"
+    flex="2"
+    layout= "fit"
+    [style]="{zIndex: 3}"
+    [resizable]="{ edges: 'west', dynamic: true }"
+    [header]="false"
+    [hideAnimation]="{type: 'slideOut', direction: 'right', duration: 100, easing: 'ease' }"
+    [showAnimation]="{type: 'slideIn', direction: 'left', duration: 100, easing: 'ease' }"
+    [collapsible]="{ direction: 'right' }"
+    [collapsed]="!showCode">
+    <tabpanel 
+      [shadow]="true"
+      [tabBar]="{layout: {pack: 'left'}}">
+      <panel *ngFor="let file of files" [hidden]="files.length > 0 ? false: true"
+        layout="fit"
+        [scrollable]="true"
+        [title]="file.name"
+        [ui]="'code-panel'"
+        tab="{ui: 'app-code-tab', flex: 0, minWidth: 120}"
+        [userSelectable]="{element: true, bodyElement: true}"
+        [html]="file.code">
+      </panel>
+    </tabpanel>
+  </panel>
+
+  <!-- code button starts-->
+  <button 
+    [hidden]="files.length > 0 ? false: true"
+    ui="fab"
+    [iconCls]="'x-font-icon ' + (showCode ? 'md-icon-close' : 'md-icon-code')"
+    [top]="isDesktop ? 20 : 35"
+    right="21"
+    zIndex="1000"
+    (tap)="toggleCode()">
+  </button>
+  <!-- code button ends-->
+
+</container>
