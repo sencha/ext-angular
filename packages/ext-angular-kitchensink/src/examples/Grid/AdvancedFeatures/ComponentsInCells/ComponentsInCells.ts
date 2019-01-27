@@ -1,15 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { GridService } from '../../Grid.service'
-import { ActionCellsComponent } from './ActionCells'
-
 declare var Ext: any;
+import { Component } from '@angular/core';
+import { GridService } from '../../Grid.service'
 
 @Component({
-  selector: 'rendercomponentsincell-component',
-  templateUrl: './RenderComponentsInCells.html',
+  selector: 'componentsincell-component',
+  templateUrl: './ComponentsInCells.html',
   styles: [``]
 })
-export class RenderComponentsInCellsComponent implements OnInit {
+export class ComponentsInCellsComponent {
 
   constructor(gridService: GridService) {
     gridService.initCompanyData();
@@ -23,13 +21,6 @@ export class RenderComponentsInCellsComponent implements OnInit {
       url: '/KitchenSink/Companys'
     }
   });
-
-
-
-
-
-  ngOnInit() {
-  }
 
   buyHandler = (button) => {
     let gridrow = button.up('gridrow'),
@@ -47,7 +38,13 @@ export class RenderComponentsInCellsComponent implements OnInit {
     Ext.toast(`Watch ${record.get('name')}`)
   }
 
-  gridItems = [
+  actionsCell = {
+    xtype: 'widgetcell',
+    widget: {
+      xtype: 'segmentedbutton',
+   maxWidth: "300",
+   allowDepress: "true", 
+   items: [
     {
       text: 'Buy',
       handler : this.buyHandler
@@ -60,7 +57,24 @@ export class RenderComponentsInCellsComponent implements OnInit {
       text: 'Watch',
       handler : this.watchHandler
       }
-    ];
+    ]
+    }
+  };
+
+  // gridItems = [
+  //   {
+  //     text: 'Buy',
+  //     handler : this.buyHandler
+  //   }, 
+  //   {
+  //     text: 'Sell',
+  //     handler : this.sellHandler
+  //   }, 
+  //   {
+  //     text: 'Watch',
+  //     handler : this.watchHandler
+  //     }
+  //   ];
 
   
   renderActionsCell = (value, record) => {
@@ -87,8 +101,6 @@ renderNumberCell(format, value) {
             ${formattedValue}
         </span>
     `
-}
-
-
+  }
 
 }

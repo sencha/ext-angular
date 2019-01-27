@@ -44,7 +44,7 @@ import {ViewOptionsComponent} from './Grid/AddonsDecorations/ViewOptions/ViewOpt
 
 import {BigDataComponent} from './Grid/AdvancedFeatures/BigData/BigData';
 import {ReconfigureGridComponent} from './Grid/AdvancedFeatures/ReconfigureGrid/ReconfigureGrid';
-import {RenderComponentsInCellsComponent} from './Grid/AdvancedFeatures/RenderComponentsInCells/RenderComponentsInCells';
+import {ComponentsInCellsComponent} from './Grid/AdvancedFeatures/ComponentsInCells/ComponentsInCells';
 import {SelectAndCopyComponent} from './Grid/AdvancedFeatures/SelectAndCopy/SelectAndCopy';
 import {StockTickerComponent} from './Grid/AdvancedFeatures/StockTicker/StockTicker';
 
@@ -323,7 +323,7 @@ const treeRoot = {
                 { text: 'Big Data', component: BigDataComponent, navIcon: 'icon-big-data-grid' },
                 { text: 'Select And Copy', component: SelectAndCopyComponent, navIcon: 'icon-flexible-selection-grid' },
                 { text: 'Reconfigure Grid', component: ReconfigureGridComponent, navIcon: 'icon-reconfigure-grid' },
-                { text: 'Components In Cells', component: RenderComponentsInCellsComponent, navIcon: 'icon-grid-tools' },
+                { text: 'Components In Cells', component: ComponentsInCellsComponent, navIcon: 'icon-grid-tools' },
                 { text: 'Stock Ticker', component: StockTickerComponent, navIcon: 'icon-ticker-grid' }
             ]}
         ] },

@@ -90,8 +90,8 @@ import {ViewOptionsComponent} from '../examples/Grid/AddonsDecorations/ViewOptio
 
 import {BigDataComponent} from '../examples/Grid/AdvancedFeatures/BigData/BigData';
 import {ReconfigureGridComponent} from '../examples/Grid/AdvancedFeatures/ReconfigureGrid/ReconfigureGrid';
-import {RenderComponentsInCellsComponent} from '../examples/Grid/AdvancedFeatures/RenderComponentsInCells/RenderComponentsInCells';
-import { ActionCellsComponent } from '../examples/Grid/AdvancedFeatures/RenderComponentsInCells/ActionCells'
+import {ComponentsInCellsComponent} from '../examples/Grid/AdvancedFeatures/ComponentsInCells/ComponentsInCells';
+import { ActionCellsComponent } from '../examples/Grid/AdvancedFeatures/ComponentsInCells/ActionCells'
 import {SelectAndCopyComponent} from '../examples/Grid/AdvancedFeatures/SelectAndCopy/SelectAndCopy';
 import {StockTickerComponent} from '../examples/Grid/AdvancedFeatures/StockTicker/StockTicker';
 
@@ -320,7 +320,7 @@ const routes: ExtAngularRoutes = [
   { path: 'grids/advanced_features/big_data', component: BigDataComponent, text: 'Big Data', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/advanced_features/select_and_copy', component: SelectAndCopyComponent, text: 'Select and Copy', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/advanced_features/reconfigure_grid', component: ReconfigureGridComponent, text: 'Reconfigure grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-  { path: 'grids/advanced_features/components_in_cells', component: RenderComponentsInCellsComponent, text: 'Render components in cell', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  { path: 'grids/advanced_features/components_in_cells', component: ComponentsInCellsComponent, text: 'Render components in cell', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/advanced_features/stock_ticker', component: StockTickerComponent, text: 'Stock tikcer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
   { path: 'trees/editable_tree', component: EditableTreeComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -525,7 +525,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
 
     BigDataComponent,
     ReconfigureGridComponent,
-    RenderComponentsInCellsComponent,
+    ComponentsInCellsComponent,
     ActionCellsComponent,
     SelectAndCopyComponent,
     StockTickerComponent,
