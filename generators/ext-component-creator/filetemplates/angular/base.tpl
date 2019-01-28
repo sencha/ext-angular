@@ -135,7 +135,14 @@ export class base {
 
   @ContentChild('extroute') _extroute: any;
   @ContentChildren('extroute') _extroutes: QueryList<any>;
+  @ContentChild('extitem') _extitem: any;
+  @ContentChildren('extitem') _extitems: QueryList<any>;
   baseAfterContentInit() {
+    if (this._extitems.length == 1) {
+        if (this._hostComponent != null) {
+          this.ext.add({ xtype: 'container', width: '100%', height: '100%', html: this._extitem.nativeElement });
+        }
+    }
     if (this._extroutes.length == 1) {
       this.ext.add({xtype: 'container',width: '100%', height: '100%', html: this._extroute.nativeElement})
     }

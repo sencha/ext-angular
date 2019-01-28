@@ -45,10 +45,10 @@ const generateBreadcrumb = (node) => {
 export class LandingpageComponent implements OnInit {
 
   ANGULAR_VERSION: any = VERSION.full
-  titlebarHtml = `
-  <span class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></span>
-  <a extjs href="#" class="app-title">Sencha ExtAngular 6.7 Kitchen Sink - Angular v${this.ANGULAR_VERSION}</a>
-  `
+  // titlebarHtml = `
+  // <span class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></span>
+  // <a extjs href="#" class="app-title">Sencha ExtAngular 6.7 Kitchen Sink - Angular v${this.ANGULAR_VERSION}</a>
+  // `
   treeStore: any
   hideSelections: any = false
   hideExamples: any = true

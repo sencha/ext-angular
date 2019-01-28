@@ -219,6 +219,15 @@ class base {
      * @return {?}
      */
     baseAfterContentInit() {
+        if (this._extitems.length == 1) {
+            console.log('_extitems');
+            console.log(this._extitems);
+            console.log(this);
+            console.log(this._hostComponent);
+            if (this._hostComponent != null) {
+                this.ext.add({ xtype: 'container', width: '100%', height: '100%', html: this._extitem.nativeElement });
+            }
+        }
         if (this._extroutes.length == 1) {
             this.ext.add({ xtype: 'container', width: '100%', height: '100%', html: this._extroute.nativeElement });
         }
@@ -337,7 +346,9 @@ class base {
 }
 base.propDecorators = {
     _extroute: [{ type: ContentChild, args: ['extroute',] }],
-    _extroutes: [{ type: ContentChildren, args: ['extroute',] }]
+    _extroutes: [{ type: ContentChildren, args: ['extroute',] }],
+    _extitem: [{ type: ContentChild, args: ['extitem',] }],
+    _extitems: [{ type: ContentChildren, args: ['extitem',] }]
 };
 
 /**

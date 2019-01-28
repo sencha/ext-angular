@@ -12,6 +12,8 @@ export declare class base {
     ngOnDestroy(): void;
     _extroute: any;
     _extroutes: QueryList<any>;
+    _extitem: any;
+    _extitems: QueryList<any>;
     baseAfterContentInit(): void;
     addTheChild(parentCmp: any, childCmp: any): void;
     ngOnChanges(changes: SimpleChanges): void;
