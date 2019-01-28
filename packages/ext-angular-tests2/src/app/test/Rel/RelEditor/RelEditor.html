@@ -1,0 +1,12 @@
+<container #item layout="vbox">
+        <div #item>This tests that fields within columns are automatically assigned as editors.</div>
+        <grid #item
+            itemId="grid"
+            flex="1"
+            [store]="store"
+            [plugins]="{ gridcellediting: true }">
+            <column #item text="Value" dataIndex="value" editable>
+                <numberfield #item className="editor"></numberfield>
+            </column>
+        </grid>
+    </container>

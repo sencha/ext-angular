@@ -513,7 +513,7 @@ export class ExtFormpanelComponent extends base implements OnInit,AfterContentIn
   }
   public ngAfterContentInit() {
     this.baseAfterContentInit()
-    this['ready'].emit(this)
+    //this['ready'].emit(this)
   }
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
 

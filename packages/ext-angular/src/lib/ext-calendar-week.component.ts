@@ -553,7 +553,7 @@ export class ExtCalendar_weekComponent extends base implements OnInit,AfterConte
   }
   public ngAfterContentInit() {
     this.baseAfterContentInit()
-    this['ready'].emit(this)
+    //this['ready'].emit(this)
   }
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
 

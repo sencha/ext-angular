@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "minimist": "^1.2.0",
-    "ng-packagr": "^4.6.0",
+    "ng-packagr": "^4.7.0",
     "tsickle":"^0.34.0",
     "@angular/compiler-cli": "^7.2.2",
     "typescript": "~3.2.4"

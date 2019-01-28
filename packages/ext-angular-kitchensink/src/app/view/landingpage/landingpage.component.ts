@@ -45,6 +45,10 @@ const generateBreadcrumb = (node) => {
 export class LandingpageComponent implements OnInit {
 
   ANGULAR_VERSION: any = VERSION.full
+  titlebarHtml = `
+  <span class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></span>
+  <a extjs href="#" class="app-title">Sencha ExtAngular 6.7 Kitchen Sink - Angular v${this.ANGULAR_VERSION}</a>
+  `
   treeStore: any
   hideSelections: any = false
   hideExamples: any = true
@@ -56,10 +60,7 @@ export class LandingpageComponent implements OnInit {
   backgroundImage: 
     linear-gradient(0deg, #f5f5f5 1.1px, transparent 0), 
     linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)`
-  titlebarHtml = `
-  <span class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></span>
-  <a extjs href="#" class="app-title">Sencha ExtAngular 6.7 Kitchen Sink - Angular v${this.ANGULAR_VERSION}</a>
-  `
+
   theDataview: any
   tpl: any = `
   <div class="app-thumbnail">
@@ -177,11 +178,10 @@ export class LandingpageComponent implements OnInit {
   } 
 
   selectionChanged(event) {
-    console.log('selectionChanged')
     var record = event.record;
     if(record && record.data && record.data.id) {
       var componentSelectedId = record.data.id;
-      console.log("selectionChanged ID: " + componentSelectedId);
+      console.log(componentSelectedId)
       this.ngZone.run(() => this.router.navigate([componentSelectedId])).then();
     }
   }

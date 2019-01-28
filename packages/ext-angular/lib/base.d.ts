@@ -1,4 +1,4 @@
-import { SimpleChanges } from '@angular/core';
+import { QueryList, SimpleChanges } from '@angular/core';
 export declare class base {
     private metaData;
     hostComponent: base;
@@ -11,6 +11,7 @@ export declare class base {
     baseOnInit(metaData: any): void;
     ngOnDestroy(): void;
     _extroute: any;
+    _extroutes: QueryList<any>;
     baseAfterContentInit(): void;
     addTheChild(parentCmp: any, childCmp: any): void;
     ngOnChanges(changes: SimpleChanges): void;
