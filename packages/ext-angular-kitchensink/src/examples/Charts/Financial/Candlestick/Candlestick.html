@@ -1,17 +1,54 @@
-<container  [padding]="!isPhone?  '0': ''" layout="fit"
-[fitToParent]="true">
-    <toolbar docked="top">
-      <button text="hi"></button>
-    </toolbar>
-    <cartesian 
-        shadow="true"
-        (ready)="chartNavReady($event)"
-        [store]="this.store"
-        [theme]="theme"
-        [interactions]="cartesianInteractions"
-        [series]="cartesianSeries"
-        [axes]="cartesianAxes"
-    ></cartesian>
+<container [padding]="!isPhone?  '5px': ''" layout="fit" [fitToParent]="true">
+
+  <toolbar docked="top" ui="app-transparent-toolbar" [shadow]="false" [margin]="isPhone? '0 10' : ''">
+<!--
+    <button margin="0 10px 0 0" iconCls="x-fa fa-picture-o" text="Theme" ui="action">
+      <menu >
+        <menuitem  text="Default" [handler]="onThemeChangeDefault" [iconCls]="theme === 'default' ? 'x-font-icon md-icon-done' : ''"></menuitem>
+        <menuitem  [hidden]="onlyMidnight" text="Green" [handler]="onThemeChangeGreen" [iconCls]="theme === 'green' ? 'x-font-icon md-icon-done' : ''"></menuitem>
+        <menuitem  text="Midnight" [handler]="onThemeChangeMidnight" [iconCls]="theme === 'midnight' ? 'x-font-icon md-icon-done' : ''"></menuitem>
+        <menuitem  [hidden]="onlyMidnight" text="Muted" [handler]="onThemeChangeMuted" [iconCls]="theme === 'muted' ? 'x-font-icon md-icon-done' : ''"></menuitem>
+        <menuitem  [hidden]="onlyMidnight" text="Red" [handler]="onThemeChangeRed" [iconCls]="theme === 'red' ? 'x-font-icon md-icon-done' : ''"></menuitem>
+        <menuitem  [hidden]="onlyMidnight" text="Sky" [handler]="onThemeChangeSky" [iconCls]="theme === 'sky' ? 'x-font-icon md-icon-done' : ''"></menuitem>
+        <menuitem  [hidden]="onlyMidnight" text="Yellow" [handler]="onThemeChangeYellow" [iconCls]="theme === 'yellow' ? 'x-font-icon md-icon-done' : ''"></menuitem>
+      </menu>
+    </button>
+
+    <button
+      margin="0 10px 0 0"
+      ui="action"
+      iconCls="x-fa fa-eye" 
+      text="Preview" 
+      [handler]="downloadChart.bind(null, downloadChartRef ? downloadChartRef : '')"
+      [platformConfig]="{desktop: {text: 'DOWNLOAD',iconCls: 'x-fa fa-download'}}">
+    </button>
+  -->
+    <button ui="action" margin="0 10px 0 0" iconCls="x-fa fa-refresh" (tap)="onRefresh()" text="REFRESH"></button>
+<!--
+    <spacer></spacer>
+
+    <segmentedbutton margin="0 10px 0 0" (change)="onStackGroup()" >
+      <button iconCls="x-fa fa-bars" text="STACK" ></button>
+      <button iconCls="x-fa fa-bar-chart" text="GROUP"></button>
+    </segmentedbutton>
+
+    <segmentedbutton margin="0 10px 0 0">
+      <button iconCls="x-fa fa-arrows" text="PAN"></button>
+      <button iconCls="x-fa fa-search-plus" text="SEARCH"></button>
+      <button iconCls="x-fa fa-crosshairs" text="CROSSHAIR"></button>
+    </segmentedbutton>
+  -->
+  </toolbar>
+
+  <cartesian 
+    shadow="true"
+    (ready)="chartNavReady()"
+    [store]="this.store"
+    [theme]="theme"
+    [interactions]="cartesianInteractions"
+    [series]="cartesianSeries"
+    [axes]="cartesianAxes">
+  </cartesian>
 </container>
 
 <!--
