@@ -89,6 +89,7 @@ ExtAngularBootstrapComponent.ctorParameters = () => [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class base {
+    //private subscriptions: Subscription[] = [];
     /**
      * @param {?} nativeElement
      * @param {?} metaData
@@ -109,7 +110,21 @@ class base {
                 ((/** @type {?} */ (this)))[event.name + 'event'] = new EventEmitter();
             }
         });
+        //    let f = this.ngOnDestroy;
+        //    this.ngOnDestroy = () => {
+        //      f();
+        //      this.unsubscribeAll();
+        //    };
     }
+    //    protected safeSubscription (sub: Subscription): Subscription {
+    //        this.subscriptions.push(sub);
+    //        return sub;
+    //    }
+    //    private unsubscribeAll() {
+    //        this.subscriptions.forEach(element => {
+    //            !element.isUnsubscribed && element.unsubscribe();
+    //        });
+    //    }
     /**
      * @param {?} metaData
      * @return {?}
@@ -191,6 +206,7 @@ class base {
      */
     ngOnDestroy() {
         //console.log(`ngOnDestroy`)
+        //console.log(this)
         /** @type {?} */
         var childCmp;
         /** @type {?} */
@@ -206,6 +222,9 @@ class base {
                     childCmp.destroy();
                 }
             }
+            else {
+                console.log('known problem here with destroy...');
+            }
         }
         catch (e) {
             console.error(e);
@@ -220,10 +239,6 @@ class base {
      */
     baseAfterContentInit() {
         if (this._extitems.length == 1) {
-            console.log('_extitems');
-            console.log(this._extitems);
-            console.log(this);
-            console.log(this._hostComponent);
             if (this._hostComponent != null) {
                 this.ext.add({ xtype: 'container', width: '100%', height: '100%', html: this._extitem.nativeElement });
             }
@@ -271,6 +286,8 @@ class base {
             }
             else {
                 console.log('??');
+                console.log(parentxtype);
+                console.log(childxtype);
             }
         }
         else if (childxtype === 'tooltip') {

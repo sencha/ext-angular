@@ -1,6 +1,12 @@
-<container #item>
-    <button #item text="Button" itemId="button" (tap)="onButtonTap($event)"></button>
-    <div #item id="message">
-        {{count}}
+<panel title="Single Event" [fitToParent]="true">
+  <button
+    text="Button" 
+    itemId="button" 
+    (tap)="onButtonTap($event)">
+  </button>
+  <container>
+    <div #extitem id="message">
+      {{count}}
     </div>
-</container>
+  </container>
+</panel>

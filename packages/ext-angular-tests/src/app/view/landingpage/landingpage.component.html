@@ -1,8 +1,15 @@
 <panel layout="fit" [fitToParent]="true" [bodyStyle]="bodyStyle">
 
-  <titlebar [docked]="'top'" [shadow]="true" [style]="{'z-index': 2}">
-    <container [html]="titlebarHtml"></container>
-  </titlebar>
+  <!-- Titlebar starts-->
+  <titlebar docked="top" [weight]="10">
+      <container>
+        <span #extitem>
+          <span class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></span>
+          <span extjs href="#" class="app-title">Sencha ExtAngular 6.7 Tests - Angular v{{ANGULAR_VERSION}}</span>
+        </span>
+      </container>
+    </titlebar>
+    <!-- Titlebar ends-->
 
   <panel [weight]="10"
     docked="left"
@@ -16,7 +23,7 @@
     <treelist ui="nav" [expanderFirst]="false" [expanderOnly]="false" [store]="treeStore" (selectionchange)="selectionChanged($event)"></treelist>
   </panel>
 
-  <container padding="30">
+  <container padding="15">
     <router-outlet #extroute></router-outlet>
   </container>
  
