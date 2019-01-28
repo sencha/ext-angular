@@ -192,3 +192,17 @@ export function launch(AppModule) {
     "build:prod": "npm run build:clean && ngc && npm run webpack-prod && npm run build:clean",
     "build:clean": "del-cli 'src/**/*.js' 'src/**/*.js.map' 'src/**/*.ngsummary.json' 'src/**/*.metadata.json' 'src/**/**/*.ngfactory.ts' 'src/**/*.ngstyle.ts' 'src/**/*.shim.ts'",
     "serve": "lite-server"
+
+
+    <!--
+  <panel docked="bottom" bodyPadding="5" shadow="true">
+    <container #extitem>
+      <container [style]="{fontSize: '14px', fontWeight: 'normal'}" [html]="message"></container>
+    </container>
+  </panel>
+-->
+
+
+<!--
+        (selectionchange)="this.onSelectionChange($event)"
+-->

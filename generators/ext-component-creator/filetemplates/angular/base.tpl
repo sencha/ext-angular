@@ -19,6 +19,7 @@ export class base {
   private _extChildren: any = false
   private q: QueryList<any>
 
+  //private subscriptions: Subscription[] = [];
   constructor(
     nativeElement: any,
     private metaData: any,
@@ -36,7 +37,28 @@ export class base {
         (<any>this)[event.name + 'event'] = new EventEmitter()
       }
     })
+
+//    let f = this.ngOnDestroy;
+//    this.ngOnDestroy = () => {
+//      f();
+//      this.unsubscribeAll();
+//    };
+
   }
+
+//    protected safeSubscription (sub: Subscription): Subscription {
+//        this.subscriptions.push(sub);
+//        return sub;
+//    }
+ 
+//    private unsubscribeAll() {
+//        this.subscriptions.forEach(element => {
+//            !element.isUnsubscribed && element.unsubscribe();
+//        });
+//    }
+
+
+
 
   baseOnInit(metaData: any) {
     //console.log(`ngOnInit: ${metaData.XTYPE}`)
@@ -106,6 +128,7 @@ export class base {
 
   ngOnDestroy() {
     //console.log(`ngOnDestroy`)
+    //console.log(this)
     var childCmp
     var parentCmp
     try {
@@ -122,6 +145,9 @@ export class base {
           parentCmp.remove([childCmp])
           childCmp.destroy()
         }
+      }
+      else {
+        console.log('known problem here with destroy...')
       }
     }
     catch(e) {
@@ -179,6 +205,8 @@ export class base {
         }
         else {
           console.log('??')
+          console.log(parentxtype)
+          console.log(childxtype)
         }
       } else if (childxtype === 'tooltip') {
         parentCmp.setTooltip(childCmp)

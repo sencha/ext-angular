@@ -91,6 +91,7 @@ var ExtAngularBootstrapComponent = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var base = /** @class */ (function () {
+    //private subscriptions: Subscription[] = [];
     function base(nativeElement, metaData, hostComponent) {
         var _this = this;
         this.metaData = metaData;
@@ -107,12 +108,45 @@ var base = /** @class */ (function () {
                 ((/** @type {?} */ (_this)))[event.name + 'event'] = new EventEmitter();
             }
         });
+        //    let f = this.ngOnDestroy;
+        //    this.ngOnDestroy = () => {
+        //      f();
+        //      this.unsubscribeAll();
+        //    };
     }
+    //    protected safeSubscription (sub: Subscription): Subscription {
+    //        this.subscriptions.push(sub);
+    //        return sub;
+    //    }
+    //    private unsubscribeAll() {
+    //        this.subscriptions.forEach(element => {
+    //            !element.isUnsubscribed && element.unsubscribe();
+    //        });
+    //    }
+    //    protected safeSubscription (sub: Subscription): Subscription {
+    //        this.subscriptions.push(sub);
+    //        return sub;
+    //    }
+    //    private unsubscribeAll() {
+    //        this.subscriptions.forEach(element => {
+    //            !element.isUnsubscribed && element.unsubscribe();
+    //        });
+    //    }
     /**
      * @param {?} metaData
      * @return {?}
      */
-    base.prototype.baseOnInit = /**
+    base.prototype.baseOnInit = 
+    //    protected safeSubscription (sub: Subscription): Subscription {
+    //        this.subscriptions.push(sub);
+    //        return sub;
+    //    }
+    //    private unsubscribeAll() {
+    //        this.subscriptions.forEach(element => {
+    //            !element.isUnsubscribed && element.unsubscribe();
+    //        });
+    //    }
+    /**
      * @param {?} metaData
      * @return {?}
      */
@@ -196,6 +230,7 @@ var base = /** @class */ (function () {
      */
     function () {
         //console.log(`ngOnDestroy`)
+        //console.log(this)
         /** @type {?} */
         var childCmp;
         /** @type {?} */
@@ -210,6 +245,9 @@ var base = /** @class */ (function () {
                     parentCmp.remove([childCmp]);
                     childCmp.destroy();
                 }
+            }
+            else {
+                console.log('known problem here with destroy...');
             }
         }
         catch (e) {
@@ -228,10 +266,6 @@ var base = /** @class */ (function () {
      */
     function () {
         if (this._extitems.length == 1) {
-            console.log('_extitems');
-            console.log(this._extitems);
-            console.log(this);
-            console.log(this._hostComponent);
             if (this._hostComponent != null) {
                 this.ext.add({ xtype: 'container', width: '100%', height: '100%', html: this._extitem.nativeElement });
             }
@@ -284,6 +318,8 @@ var base = /** @class */ (function () {
             }
             else {
                 console.log('??');
+                console.log(parentxtype);
+                console.log(childxtype);
             }
         }
         else if (childxtype === 'tooltip') {
