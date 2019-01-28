@@ -47,12 +47,16 @@ export class BigDataComponent implements OnInit {
     this.grid = event.ext;
   }
 
+  rowBodyTpl2 = data => `
+  <div>
+    <img src={data.avatar} height="100px" style="{float:'left', margin:'0 10px 5px 0'}"><img>
+    <p>{formatDate(data.dob)}</p>
+  </div>
+`;
+
   rowBodyTpl = data => `
-    <div>
-      <img src={data.avatar} height="100px" style="{float:'left', margin:'0 10px 5px 0'}"><img>
-      <p>{formatDate(data.dob)}</p>
-    </div>
   `;
+
 
   nameSorter = (rec1, rec2) => {
     // Sort prioritizing surname over forename as would be expected.

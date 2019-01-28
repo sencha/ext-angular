@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core'
-
+import { VERSION } from '@angular/core';
 @Component({
   selector: 'ext-angular-root',
   styles:[require('./app.component.css').toString()],
@@ -10,6 +10,13 @@ import { Component, ViewEncapsulation } from '@angular/core'
   <titlebar [docked]="'top'" [shadow]="true" [flex]="1" [title]="'TitleBar'" [maxWidth]="'600px'" [margin]="'0 0 30 0'">
     <button [selfAlign]="'left'" [iconCls]="'x-fa fa-bars'" (tap)="toggleTree()"></button>
     <searchfield [ui]="'alt'" [flex]="1" align="right" [width]="200" [placeholder]="'Search'"></searchfield>
+  </titlebar>
+
+  <titlebar [docked]="'top'" [shadow]="true" [flex]="1" [title]="'TitleBar'" [maxWidth]="'600px'" [margin]="'0 0 30 0'">
+    <span #extitem>
+      <span class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></span>
+      <a extjs href="#" class="app-title">Sencha ExtAngular 6.7 Kitchen Sink - Angular v{{ANGULAR_VERSION}}</a>
+    </span>
   </titlebar>
 
   <!-- Navtree starts-->
@@ -33,6 +40,7 @@ import { Component, ViewEncapsulation } from '@angular/core'
   `
 })
 export class AppComponent {
+  ANGULAR_VERSION: any = VERSION.full
   showTreeFlag: any = false
   toggleTree = function(){
     this.showTreeFlag = !this.showTreeFlag;
