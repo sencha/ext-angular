@@ -1,29 +1,18 @@
 declare var Ext: any
-import {
-  Component,
-  NgModule,
-  Injectable,
-  Injector,
-  ComponentFactoryResolver,
-  EmbeddedViewRef,
-  ApplicationRef,
-  VERSION} from '@angular/core'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import {BrowserModule} from '@angular/platform-browser'
-import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
+import { NgModule, ModuleWithProviders } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { Route, RouterModule } from '@angular/router';
+
+import { ExtAngularModule } from '@sencha/ext-angular'
+import { ExtAngularBootstrapService } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.service'
+import { ExtAngularBootstrapComponent } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.component'
+
+import { AppService } from './app.service';
 
 import * as d3 from 'd3'
 window['d3'] = d3
 
-//services
-import { ExtAngularService } from './ext-angular.service';
-import {AppService} from './app.service';
-
 import { LandingpageComponent } from './view/landingpage/landingpage.component';
-
-
-import { Route, RouterModule } from '@angular/router';
-import { ModuleWithProviders } from "@angular/core";
 
 import { SimpleComponent } from './test/Simple/Simple';
 import { BasicEventComponent } from './test/Events/BasicEvent/BasicEvent';
@@ -59,8 +48,6 @@ import { RelGridColumnComponent } from './test/Rel/RelGridColumn/RelGridColumn';
 import { RelMenuComponent } from './test/Rel/RelMenu/RelMenu';
 import { RelTooltipComponent } from './test/Rel/RelTooltip/RelTooltip';
 import { RelUpdateComponent } from './test/Rel/RelUpdate/RelUpdate';
-
-
 interface ExtAngularRoute extends Route {
   text?: string;
   iconCls?: string;
@@ -69,61 +56,49 @@ interface ExtAngularRoute extends Route {
 }
 export declare type ExtAngularRoutes = ExtAngularRoute[];
 const routes: ExtAngularRoutes = [
-	{ path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: 'simple', component: SimpleComponent, text: 'Simple', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'basic-event', component: BasicEventComponent, text: 'Basic Event', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'single-event', component: SingleEventComponent, text: 'Single Event', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'element-insert-between', component: ElementInsertBetweenComponent, text: 'Element Insert Between', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'element-insert-end', component: ElementInsertEndComponent, text: 'Element Insert End', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'element-insert-start', component: ElementInsertStartComponent, text: 'Element Insert Start', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'insert-between', component: InsertBetweenComponent, text: 'Insert Between', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'insert-start', component: InsertStartComponent, text: 'Insert Start', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'insert-end', component: InsertEndComponent, text: 'Insert End', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'basic_event', component: BasicEventComponent, text: 'Basic Event', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'single_event', component: SingleEventComponent, text: 'Single Event', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'element_insert_between', component: ElementInsertBetweenComponent, text: 'Element Insert Between', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'element_insert_end', component: ElementInsertEndComponent, text: 'Element Insert End', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'element_insert_start', component: ElementInsertStartComponent, text: 'Element Insert Start', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'insert_between', component: InsertBetweenComponent, text: 'Insert Between', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'insert_start', component: InsertStartComponent, text: 'Insert Start', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'insert_end', component: InsertEndComponent, text: 'Insert End', iconCls: 'x-fa fa-dashboard', leaf: true },
   { path: 'default', component: DefaultComponent, text: 'Default', iconCls: 'x-fa fa-dashboard', leaf: true },
   { path: 'html', component: HTMLInExtAngularComponent, text: 'HTML', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'lifecycle-unmount', component: LifecycleUnmountComponent, text: 'Lifecycle Unmount', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'simple-prop-update', component: SimplePropUpdateComponent, text: 'Simple Prop Update', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'update-class-name', component: UpdateClassNameComponent, text: 'Update Class Name', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'renderer-cell', component: RendererCellTestComponent, text: 'Renderer Cell', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'template-grid', component: TemplateGridComponent, text: 'Template Grid', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'template-list', component: TemplateListComponent, text: 'Template List', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'template-unmount', component: TemplateUnmountComponent, text: 'Template Unmount', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'render-when-ready', component: RenderWhenReadyComponent, text: 'Render When Ready', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'replace-with-markup', component: ReplaceNodeWithMarkupComponent, text: 'Replace Node with Markup', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'lifecycle_unmount', component: LifecycleUnmountComponent, text: 'Lifecycle Unmount', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'simple_prop_update', component: SimplePropUpdateComponent, text: 'Simple Prop Update', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'update_class_name', component: UpdateClassNameComponent, text: 'Update Class Name', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'renderer_cell', component: RendererCellTestComponent, text: 'Renderer Cell', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'template_grid', component: TemplateGridComponent, text: 'Template Grid', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'template_list', component: TemplateListComponent, text: 'Template List', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'template_unmount', component: TemplateUnmountComponent, text: 'Template Unmount', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'render_when_ready', component: RenderWhenReadyComponent, text: 'Render When Ready', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'replace_with_markup', component: ReplaceNodeWithMarkupComponent, text: 'Replace Node with Markup', iconCls: 'x-fa fa-dashboard', leaf: true },
   { path: 'responsive', component: ResponsiveComponent, text: 'Responsive', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'sencha-test-hook', component: SenchaTestHooksComponent, text: 'Sencha Test Hooks', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'update-functions', component: UpdateFunctionsComponent, text: 'Update Functions', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'sencha_test_hook', component: SenchaTestHooksComponent, text: 'Sencha Test Hooks', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'update_functions', component: UpdateFunctionsComponent, text: 'Update Functions', iconCls: 'x-fa fa-dashboard', leaf: true },
   { path: 'rel', component: RelComponent, text: 'Rel Component', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'rel-array-delete', component: RelArrayDeleteComponent, text: 'Rel Array Delete', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'rel-dialog', component: RelDialogComponent, text: 'Rel Dialog', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'rel-editor', component: RelEditorComponent, text: 'Rel Editor', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'rel-grid-column', component: RelGridColumnComponent, text: 'Rel Grid Column', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'rel-menu', component: RelMenuComponent, text: 'Rel Menu', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'rel-tooltip', component: RelTooltipComponent, text: 'Rel Tooltip', iconCls: 'x-fa fa-dashboard', leaf: true },
-  { path: 'rel-update', component: RelUpdateComponent, text: 'Rel Update', iconCls: 'x-fa fa-dashboard', leaf: true }
+  { path: 'rel_array_delete', component: RelArrayDeleteComponent, text: 'Rel Array Delete', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'rel_dialog', component: RelDialogComponent, text: 'Rel Dialog', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'rel_editor', component: RelEditorComponent, text: 'Rel Editor', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'rel_grid_column', component: RelGridColumnComponent, text: 'Rel Grid Column', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'rel_menu', component: RelMenuComponent, text: 'Rel Menu', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'rel_tooltip', component: RelTooltipComponent, text: 'Rel Tooltip', iconCls: 'x-fa fa-dashboard', leaf: true },
+  { path: 'rel_update', component: RelUpdateComponent, text: 'Rel Update', iconCls: 'x-fa fa-dashboard', leaf: true }
 ];
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
-
-@Component({
-  selector: 'app-root',
-  template: ``,
-})
-export class App {
-  constructor(private ExtAngularService: ExtAngularService) {
-    this.ExtAngularService.appendComponentToViewport(LandingpageComponent);
-  }
-}
-
 @NgModule({
   imports: [
     BrowserModule,
-    ExtAngularModernModule,
-    BrowserAnimationsModule,
+    ExtAngularModule,
     routingModule
   ],
 	declarations: [
-		App,
-		LandingpageComponent,
+    ExtAngularBootstrapComponent,
+    LandingpageComponent,
     SimpleComponent,
     BasicEventComponent,
     SingleEventComponent,
@@ -158,22 +133,19 @@ export class App {
     RelMenuComponent,
     RelTooltipComponent,
     RelUpdateComponent
-	],
-	providers: [
-		AppService,
-		ExtAngularService
-	],
-	entryComponents: [
-		LandingpageComponent
-	],
-	bootstrap: [App]
+  ],
+  providers: [
+    ExtAngularBootstrapService,
+    AppService
+  ],
+  entryComponents: [
+    LandingpageComponent
+  ],
+  bootstrap: [ExtAngularBootstrapComponent]
 })
 
-
 export class AppModule {
-  constructor(appService: AppService) {
-    appService.init();
+  constructor(extAngularService : ExtAngularBootstrapService, appService: AppService) {
+    extAngularService.setBootStrapComponent(LandingpageComponent)
   }
 }
-
-

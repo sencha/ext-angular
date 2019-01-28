@@ -133,21 +133,18 @@ export class base {
     }
   }
 
-  @ContentChild('extroute') _extroute: any
+  @ContentChild('extroute') _extroute: any;
+  @ContentChildren('extroute') _extroutes: QueryList<any>;
   baseAfterContentInit() {
-//    console.log('\nbaseAfterContentInit')
-    if (this._extroute != undefined) {
+    if (this._extroutes.length == 1) {
       this.ext.add({xtype: 'container',width: '100%', height: '100%', html: this._extroute.nativeElement})
-      return
     }
-
     if(this._hostComponent != null) {
       var parentCmp = this._hostComponent.ext
       var childCmp = this.ext
       this.addTheChild(parentCmp,childCmp)
     }
-//this['ready'].emit(parentCmp)
-//this['ready'].emit(this)
+    this['ready'].emit(this)
   }
 
   addTheChild(parentCmp, childCmp) {
@@ -209,7 +206,7 @@ export class base {
     let changesMsgs: string[] = []
     for (let propName in changes) {
       let verb = ''
-      if (changes[propName].firstChange == true) {
+      if (changes[propName].firstChange === true) {
         verb = 'initialized'
       }
       else {

@@ -353,7 +353,7 @@ export class ExtD3_svgComponent extends base implements OnInit,AfterContentInit,
   }
   public ngAfterContentInit() {
     this.baseAfterContentInit()
-    this['ready'].emit(this)
+    //this['ready'].emit(this)
   }
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
 

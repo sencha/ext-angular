@@ -479,7 +479,7 @@ export class ExtPivotconfigcontainerComponent extends base implements OnInit,Aft
   }
   public ngAfterContentInit() {
     this.baseAfterContentInit()
-    this['ready'].emit(this)
+    //this['ready'].emit(this)
   }
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
 

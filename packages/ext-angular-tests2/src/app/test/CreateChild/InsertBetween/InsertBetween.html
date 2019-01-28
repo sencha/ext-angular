@@ -1,0 +1,6 @@
+<panel #item>
+    <container #item html="top"></container>
+    <container #item [hidden]="!showInserted" itemId="inserted" html="inserted"></container>
+    <button #item (tap)="insert($event)" text="Insert" itemId="insert"> </button>
+    <container #item html="bottom"></container>
+</panel>

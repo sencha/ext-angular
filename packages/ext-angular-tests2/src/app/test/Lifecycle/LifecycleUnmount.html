@@ -1,0 +1,7 @@
+<container #item>
+    <button  #item itemId="button" text="Unmount" (tap)="toggleChild($event)"></button>
+    <container #item [hidden] = "show">
+        <my-component #item></my-component>
+    </container>
+    <div  #item id="message"></div>
+</container>

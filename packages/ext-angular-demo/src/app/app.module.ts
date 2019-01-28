@@ -1,12 +1,10 @@
 declare var Ext: any
-import { NgModule, ModuleWithProviders } from '@angular/core'
+import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 
-import {ExtAngularModule} from './ext-angular-prod/ext-angular.module'
-
- // import { ExtAngularModule } from '@sencha/ext-angular'
-import { ExtAngularBootstrapService } from './ext-angular/ext-angular-bootstrap.service'
-import { ExtAngularBootstrapComponent } from './ext-angular/ext-angular-bootstrap.component'
+import { ExtAngularModule } from '@sencha/ext-angular'
+import { ExtAngularBootstrapService } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.service'
+import { ExtAngularBootstrapComponent } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.component'
 
 import { AppComponent } from './app.component'
 

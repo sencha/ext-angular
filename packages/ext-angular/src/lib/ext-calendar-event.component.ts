@@ -357,7 +357,7 @@ export class ExtCalendar_eventComponent extends base implements OnInit,AfterCont
   }
   public ngAfterContentInit() {
     this.baseAfterContentInit()
-    this['ready'].emit(this)
+    //this['ready'].emit(this)
   }
   //public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
 
