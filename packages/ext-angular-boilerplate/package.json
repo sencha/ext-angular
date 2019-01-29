@@ -15,15 +15,16 @@
   "extbuild": {
     "defaultprofile": "",
     "defaultenvironment": "development",
-    "defaultverbose": "yes"
+    "defaultverbose": "no"
   },
   "devDependencies": {
-    "@sencha/ext": "~6.7.0",
     "@sencha/ext-angular": "~6.7.0",
+    "@sencha/ext-angular-webpack-plugin": "~6.7.0",
+
+    "@sencha/ext": "~6.7.0",
     "@sencha/ext-modern": "~6.7.0",
     "@sencha/ext-modern-treegrid": "~6.7.0",
     "@sencha/ext-modern-theme-material": "~6.7.0",
-    "@sencha/ext-angular-webpack-plugin": "~6.7.0",
     "@sencha/ext-ux": "~6.7.0",
 
     "@angular/common": "^7.2.2",
