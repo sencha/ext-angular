@@ -27,8 +27,8 @@ module.exports = function (env) {
   var buildenvironment = env.environment || process.env.npm_package_extbuild_defaultenvironment
   var buildverbose = env.verbose || process.env.npm_package_extbuild_defaultverbose
   if (buildprofile == 'all') { buildprofile = '' }
-  if (env.genProdData == undefined) {env.genProdData = false}
-  var genProdData = env.genProdData ? JSON.parse(env.genProdData) : false
+  if (env.treeshake == undefined) {env.treeshake = false}
+  var treeshake = env.treeshake ? JSON.parse(env.treeshake) : false
   var mode = isProd ? 'production': 'development'
 
   portfinder.basePort = (env && env.port) || 1962
@@ -51,7 +51,7 @@ module.exports = function (env) {
         port: port,
         emit: true,
         browser: browserprofile,
-        genProdData,
+        treeshake,
         watch: watchprofile,
         profile: buildprofile, 
         environment: buildenvironment, 

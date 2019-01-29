@@ -1,7 +1,0 @@
-<container #item layout="fit">
-    <toolbar #item docked="top">
-        <button #item text="Toggle List" itemId="button" (tap)="toggleList()"></button>
-        <div #item id="message"></div>
-    </toolbar>
-    <list #item [hidden] ="!showList" [store]="store" [itemTpl]="itemTpl"></list>
-</container>

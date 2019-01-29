@@ -21,7 +21,7 @@ export default class ExtWebpackPlugin {
 
     if ( this.plugin.vars.framework == 'extjs') {
       compiler.hooks.compilation.tap(`ext-compilation`, (compilation) => {
-        require('./pluginUtil').logv(this.plugin.options,'HOOK compilation')
+        require('./pluginUtil').logv(this.plugin.options,'HOOK compilation (empty)')
       })
       compiler.hooks.afterCompile.tap('ext-after-compile', (compilation) => {
         require('./pluginUtil').logv(this.plugin.options,'HOOK afterCompile')
@@ -39,8 +39,8 @@ export default class ExtWebpackPlugin {
       })
     }
 
-    if((this.plugin.options.genProdData == true && this.plugin.options.environment == 'production') ||
-       (this.plugin.options.genProdData == false && this.plugin.options.environment != 'production'))
+    if((this.plugin.options.treeshake == true && this.plugin.options.environment == 'production') ||
+       (this.plugin.options.treeshake == false && this.plugin.options.environment != 'production'))
     {
       compiler.hooks.emit.tapAsync(`ext-emit`, (compilation, callback) => {
         require('./pluginUtil').logv(this.plugin.options,'HOOK emit')
@@ -50,43 +50,7 @@ export default class ExtWebpackPlugin {
 
     compiler.hooks.done.tap(`ext-done`, () => {
       require('./pluginUtil').logv(this.plugin.options,'HOOK done')
-
-      if (this.plugin.vars.production && !this.plugin.options.genProdData && this.plugin.options.framework == 'angular') {
-        const path = require('path')
-        const fsx = require('fs-extra')
-        var rimraf = require("rimraf");
-        rimraf.sync(path.resolve(process.cwd(), `src/app/ext-angular-prod`));
-        try {
-          const appModulePath = path.resolve(process.cwd(), 'src/app/app.module.ts')
-          var js = fsx.readFileSync(appModulePath).toString()
-          var newJs = js.replace(
-            `import { ExtAngularModule } from './ext-angular-prod/ext-angular.module'`,
-            `import { ExtAngularModule } from '@sencha/ext-angular'`
-          );
-          fsx.writeFileSync(appModulePath, newJs, 'utf-8', ()=>{return})
-        }
-        catch (e) {
-          console.log(e)
-          compilation.errors.push('replace ExtAngularModule - ext-done: ' + e)
-          return []
-        }
-      } 
-
-      try {
-        if(this.plugin.options.browser == true && this.plugin.options.watch == 'yes' && this.plugin.vars.production == false) {
-          if (this.plugin.vars.browserCount == 0) {
-            var url = 'http://localhost:' + this.plugin.options.port
-            require('./pluginUtil').log(this.plugin.vars.app + `Opening browser at ${url}`)
-            this.plugin.vars.browserCount++
-            const opn = require('opn')
-            opn(url)
-          }
-        }
-      }
-      catch (e) {
-        console.log(e)
-        compilation.errors.push('show browser window - ext-done: ' + e)
-      }
+      require(`./pluginUtil`)._done(this.plugin.vars, this.plugin.options)
       require('./pluginUtil').log(this.plugin.vars.app + `Completed ext-webpack-plugin processing`)
     })
   }
