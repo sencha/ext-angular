@@ -12,6 +12,7 @@
   "peerDependencies": {
     "@angular/compiler": "^7.2.2",
     "@angular/core": "^7.2.2",
+    "comment-json": "^1.1.3",
     "tslib": "^1.9.3"
   },
   "dependencies": {
@@ -20,7 +21,9 @@
     "@angular/common": "^7.2.2",
     "@angular/platform-browser": "^7.2.2",
     "@angular/platform-browser-dynamic": "^7.2.2",
-    "zone.js": "~0.8.29"
+    "comment-json": "^1.1.3",
+    "zone.js": "~0.8.29",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
     "minimist": "^1.2.0",
@@ -34,6 +37,6 @@
     "url": "git+https://github.com/sencha/ext-angular.git"
   },
   "keywords": [],
-  "author": "Marc Gusmano <mgusmano@yahoo.com> (http://MarcGusmano.com)",
+  "author": "Sencha",
   "license": "ISC"
 }
