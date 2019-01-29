@@ -206,3 +206,27 @@ export function launch(AppModule) {
 <!--
         (selectionchange)="this.onSelectionChange($event)"
 -->
+
+
+  // //mjg
+  // if (thisOptions.environment == 'production') {
+  //   thisVars.production = true
+  //   thisOptions.genProdData = options.genProdData
+  //   if (!options.genProdData && options.framework == 'angular' && options.prodFileReplacementConfig.length) {
+  //     options.prodFileReplacementConfig.forEach((value) => {
+  //       if(typeof value === 'object' && value.replace && value.with) {
+  //         let filePath = path.resolve(process.cwd(), value.with)
+  //         if (fs.existsSync(filePath)) {
+  //           const data = fsx.readFileSync(filePath).toString()
+  //           filePath = path.resolve(process.cwd(), value.replace)
+  //           if (fs.existsSync(filePath))
+  //             fsx.writeFileSync(filePath, data, 'utf-8', ()=>{return})
+  //         }
+  //       } else {
+  //         compilation.errors.push('Invalid prodFileReplacementConfig')
+  //       }
+  //     })
+  //   }
+  // }
+  // else 
+  //   { thisVars.production = false }

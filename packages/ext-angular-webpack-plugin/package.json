@@ -6,17 +6,11 @@
   "scripts": {
     "build": "babel ./src --out-dir ./dist"
   },
-  "peerDependencies": {
-    "react": "^16.5.2",
-    "react-hot-loader": "^4.3.11"
-  },
   "dependencies": {
     "switchit":"^1.0.8",
     "@babel/generator": "^7.0.0",
     "@babel/polyfill": "^7.0.0",
     "@sencha/cmd": "~6.7.0",
-    "react": "^16.5.0",
-    "react-hot-loader": "^4.3.6",
     "lodash.uniq": "^4.5.0",
     "schema-utils": "^1.0.0",
     "babylon": "^6.18.0",
