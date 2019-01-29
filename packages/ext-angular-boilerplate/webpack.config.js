@@ -49,12 +49,12 @@ module.exports = function (env) {
         port: port,
         emit: true,
         browser: browserprofile,
-        treeshake: treeshake,
         watch: watchprofile,
         profile: buildprofile, 
         environment: buildenvironment, 
         verbose: buildverbose,
         theme: 'theme-material',
+        treeshake: treeshake,
         packages: [
           'ux',
           'treegrid'
