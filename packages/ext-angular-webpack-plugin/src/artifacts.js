@@ -131,12 +131,21 @@ export function createAppJson( theme, packages, toolkit, options, output ) {
   //   dir: packageDirs.map(dir => path.resolve(dir))
   // },
 
+  // var pathDifference = output.substring(process.cwd().length)
+  // var numberOfPaths = (pathDifference.split("/").length - 1)
+  // var nodeModulePath = ''
+  // for (var i = 0; i < numberOfPaths; i++) { 
+  //   nodeModulePath += "../"
+  // }
+
+  var isWindows = typeof process != 'undefined' && typeof process.platform != 'undefined' && !!process.platform.match(/^win/);
   var pathDifference = output.substring(process.cwd().length)
-  var numberOfPaths = (pathDifference.split("/").length - 1)
+  var numberOfPaths = pathDifference.split(isWindows ? "\\" : "/").length - 1;
   var nodeModulePath = ''
   for (var i = 0; i < numberOfPaths; i++) { 
     nodeModulePath += "../"
   }
+
 
   const config = {
     framework: "ext",
@@ -192,6 +201,12 @@ export function createWorkspaceJson2(options, output) {
   for (var i = 0; i < numberOfPaths; i++) { 
     nodeModulePath += "../"
   }
+
+  logv(options,'isWindows: ' + isWindows)
+  logv(options,'output: ' + output)
+  logv(options,'pathDifference: ' + pathDifference)
+  logv(options,'numberOfPaths: ' + numberOfPaths)
+  logv(options,'nodeModulePath: ' + nodeModulePath)
 
   const config = {
     "frameworks": {
