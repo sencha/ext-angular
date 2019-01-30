@@ -5,7 +5,7 @@
   "appName":"MyExtAngularApp",
   "packageName":"my-ext-angular-app",
   "version":"0.0.1",
-  "description":"my-app description for Angular app MyExtAngularApp",
+  "description":"my-ext-angular-app description for Angular app MyExtAngularApp",
   "repositoryURL":"https://github.com/",
   "keywords":["ExtAngular"],
   "authorName":"Sencha, Inc.",
