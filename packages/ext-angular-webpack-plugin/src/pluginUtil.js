@@ -335,21 +335,21 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
 
         //because of a problem with colorpicker
         if (fs.existsSync(path.join(process.cwd(),'ext-angular/ux/'))) {
-          var fromPath = path.join(process.cwd(), 'ext-angular/')
-          var toPath = path.join(output)
+          var fromPath = path.join(process.cwd(), 'ext-angular/ux/')
+          var toPath = path.join(output, 'ux')
           fsx.copySync(fromPath, toPath)
           log(app + 'Copying (ux) ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
         }
 
         if (fs.existsSync(path.join(process.cwd(),'ext-angular/packages/'))) {
-          var fromPath = path.join(process.cwd(), 'ext-angular/')
-          var toPath = path.join(output)
+          var fromPath = path.join(process.cwd(), 'ext-angular/packages/')
+          var toPath = path.join(output, 'packages')
           fsx.copySync(fromPath, toPath)
           log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
         }
         if (fs.existsSync(path.join(process.cwd(),'ext-angular/overrides/'))) {
-          var fromPath = path.join(process.cwd(), 'ext-angular/')
-          var toPath = path.join(output)
+          var fromPath = path.join(process.cwd(), 'ext-angular/overrides/')
+          var toPath = path.join(output, 'overrides')
           fsx.copySync(fromPath, toPath)
           log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
         }

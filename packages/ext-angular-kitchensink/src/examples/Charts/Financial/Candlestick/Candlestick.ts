@@ -36,7 +36,7 @@ export class CandlestickComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("isPhone : " + this.isPhone);
+    //console.log("isPhone : " + this.isPhone);
     //console.log("supportsTouch : " + this.supportsTouch);
     //console.log("show : " + this.show);
     //console.log("onStackGroup : " + this.onStackGroup);
@@ -61,7 +61,7 @@ export class CandlestickComponent implements OnInit {
   chart:any;
 
   chartNavReady = function(event) {
-      console.log("chartNavReady");
+      //console.log("chartNavReady");
       this.chart = event.ext;
       this.panzoom = this.chart.getInteraction('panzoom');
       this.crosshair = this.chart.getInteraction('crosshair');
@@ -151,7 +151,7 @@ export class CandlestickComponent implements OnInit {
   }
 
   downloadChart = (chart) => {
-    console.log("In downloadChart. chart:  " + chart);
+    //console.log("In downloadChart. chart:  " + chart);
     if (Ext.is.Desktop) {
         chart.download({ filename: 'Chart' });
     } else {

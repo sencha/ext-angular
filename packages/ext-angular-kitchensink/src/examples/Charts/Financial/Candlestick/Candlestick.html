@@ -1,5 +1,15 @@
 <container [padding]="!isPhone?  '5px': ''" layout="fit" [fitToParent]="true">
 
+  <chart-toolbar #extitem 
+    [onThemeChange]="this.changeTheme"
+    [onToggleZoomOnPan]="this.toggleZoomOnPan"
+    [onToggleCrosshair]="this.toggleCrosshair"
+    [onRefreshClick]="this.refresh"
+    [theme]="theme"
+    [onlyMidnight]="true"
+  ></chart-toolbar>
+
+
   <toolbar docked="top" ui="app-transparent-toolbar" [shadow]="false" [margin]="isPhone? '0 10' : ''">
 <!--
     <button margin="0 10px 0 0" iconCls="x-fa fa-picture-o" text="Theme" ui="action">
@@ -52,7 +62,7 @@
 </container>
 
 <!--
-    <chart-toolbar 
+    <chart-toolbar #extitem 
         [onThemeChange]="this.changeTheme"
         [onToggleZoomOnPan]="this.toggleZoomOnPan"
         [onToggleCrosshair]="this.toggleCrosshair"
