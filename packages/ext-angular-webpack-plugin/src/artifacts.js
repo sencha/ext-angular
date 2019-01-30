@@ -126,18 +126,6 @@ export function createAppJson( theme, packages, toolkit, options, output ) {
 
   const fs = require('fs')
 
-  // overrides: overrides.map(dir => path.resolve(dir)).concat('jsdom-environment.js'),
-  // packages: {
-  //   dir: packageDirs.map(dir => path.resolve(dir))
-  // },
-
-  // var pathDifference = output.substring(process.cwd().length)
-  // var numberOfPaths = (pathDifference.split("/").length - 1)
-  // var nodeModulePath = ''
-  // for (var i = 0; i < numberOfPaths; i++) { 
-  //   nodeModulePath += "../"
-  // }
-
   var isWindows = typeof process != 'undefined' && typeof process.platform != 'undefined' && !!process.platform.match(/^win/);
   var pathDifference = output.substring(process.cwd().length)
   var numberOfPaths = pathDifference.split(isWindows ? "\\" : "/").length - 1;
@@ -145,7 +133,6 @@ export function createAppJson( theme, packages, toolkit, options, output ) {
   for (var i = 0; i < numberOfPaths; i++) { 
     nodeModulePath += "../"
   }
-
 
   const config = {
     framework: "ext",
@@ -190,7 +177,7 @@ export function createJSDOMEnvironment(options, output) {
   return 'window.Ext = Ext;'
 }
 
-export function createWorkspaceJson2(options, output) {
+export function createWorkspaceJson(options, output) {
   const logv = require('./pluginUtil').logv
   logv(options,'FUNCTION createWorkspaceJson')
 
@@ -210,42 +197,7 @@ export function createWorkspaceJson2(options, output) {
 
   const config = {
     "frameworks": {
-      "ext":  nodeModulePath + "node_modules/@sencha/ext"
-    },
-    "packages": {
-      "dir": [
-        "${workspace.dir}" + nodeModulePath + "ext-" + options.framework + "/packages",
-        "${workspace.dir}" + nodeModulePath + "node_modules/@sencha"
-      ],
-      "extract": "${workspace.dir}/packages/remote"
-    }
-  }
-  return JSON.stringify(config, null, 2)
-}
-
-export function createWorkspaceJson(options, output) {
-  const logv = require('./pluginUtil').logv
-  logv(options,'FUNCTION createWorkspaceJson')
-
-  // var pathDifference = output.substring(process.cwd().length)
-  // var numberOfPaths = (pathDifference.split("/").length - 1)
-  // var nodeModulePath = ''
-  // for (var i = 0; i < numberOfPaths; i++) { 
-  //   nodeModulePath += "../"
-  // }
-
-
-  var isWindows = typeof process != 'undefined' && typeof process.platform != 'undefined' && !!process.platform.match(/^win/);
-  var pathDifference = output.substring(process.cwd().length)
-  var numberOfPaths = pathDifference.split(isWindows ? "\\" : "/").length - 1;
-  var nodeModulePath = ''
-  for (var i = 0; i < numberOfPaths; i++) { 
-    nodeModulePath += "../"
-  }
-
-  const config = {
-    "frameworks": {
-      "ext": "${workspace.dir}/" + nodeModulePath + "node_modules/@sencha/ext"
+      "ext": nodeModulePath + "node_modules/@sencha/ext"
     },
     "build": {
       "dir": "${workspace.dir}/" + nodeModulePath + "build"
