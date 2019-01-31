@@ -466,34 +466,7 @@ export function _done(vars, options) {
     logv(options,'FUNCTION _done')
 
     if (vars.production && !options.treeshake && options.framework == 'angular') {
-      require(`./${framework}Util`)._done(vars, options)
-
-      // const path = require('path')
-      // const fsx = require('fs-extra')
-      // var rimraf = require("rimraf");
-      // rimraf.sync(path.resolve(process.cwd(), `src/app/ext-angular-prod`));
-      // try {
-      //   const appModulePath = path.resolve(process.cwd(), 'src/app/app.module.ts')
-      //   var js = fsx.readFileSync(appModulePath).toString()
-      //   var newJs = js.replace(
-      //     `import { ExtAngularModule } from './ext-angular-prod/ext-angular.module'`,
-      //     `import { ExtAngularModule } from '@sencha/ext-angular'`
-      //   );
-      //   fsx.writeFileSync(appModulePath, newJs, 'utf-8', ()=>{return})
-
-      //   const mainPath = path.resolve(process.cwd(), 'src/main.ts')
-      //   var jsMain = fsx.readFileSync(mainPath).toString()
-      //   var newJsMain = jsMain.replace(
-      //     `enableProdMode();bootstrapModule( AppModule );`,
-      //     `bootstrapModule(AppModule);`
-      //   );
-      //   fsx.writeFileSync(mainPath, newJsMain, 'utf-8', ()=>{return})
-      // }
-      // catch (e) {
-      //   console.log(e)
-      //   //compilation.errors.push('replace ExtAngularModule - ext-done: ' + e)
-      //   return []
-      // }
+      require(`./${options.framework}Util`)._done(vars, options)
     } 
 
     try {
