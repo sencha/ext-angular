@@ -282,9 +282,18 @@
                         }
                     }
                     else {
-                        console.log('known problem here with destroy...');
-                        console.log('parent: ' + parentCmp.xtype);
-                        console.log('child: ' + childCmp.xtype);
+                        if (childCmp != undefined) {
+                            childCmp.destroy();
+                        }
+                        //console.log('known problem here with destroy...')
+                        //console.log('parent: ')
+                        //console.log(parentCmp)
+                        //console.log('child: ')
+                        //console.log(childCmp)
+                        //console.log('this: ')
+                        //console.log(this)
+                        //childCmp.destroy()
+                        //console.log('destroyed')
                     }
                 }
                 catch (e) {
@@ -304,14 +313,11 @@
             function () {
                 if (this._extitems.length == 1) {
                     if (this._hostComponent != null) {
-                        //this.ext.add({ xtype: 'container', width: '100%', height: '100%', html: this._extitem.nativeElement });
                         this.ext.setHtml(this._extitem.nativeElement);
                     }
                 }
                 if (this._extroutes.length == 1) {
-                    console.log('here');
                     this.ext.setHtml(this._extroute.nativeElement);
-                    //this.ext.add({xtype: 'container',width: '100%', height: '100%', html: this._extroute.nativeElement})
                 }
                 if (this._hostComponent != null) {
                     /** @type {?} */
