@@ -1,6 +1,12 @@
-<container  [padding]="!isPhone?  '10': ''" layout="vbox"
-[fitToParent]="true">
-    <chart-toolbar   maxHeight="50" [downloadChartRef]="this.chart"></chart-toolbar>
+<container  [padding]="!isPhone? '15px': ''" layout="fit"[fitToParent]="true">
+
+    <container docked="top" [margin]="isPhone? '0 15' : '10 15 0 15'"><div #extitem>
+      <chart-toolbar 
+        maxHeight="50" 
+        [downloadChartRef]="this.chart">
+      </chart-toolbar>
+    </div></container>
+
     <cartesian 
         shadow="true"
         flex="2"
@@ -13,6 +19,7 @@
         [legend]="{ type: 'sprite' }"
         [captions]="cartesianCaptions"
         [axes]="cartesianAxes"
-        [series]="cartesianSeries"
-    ></cartesian>
+        [series]="cartesianSeries">
+    </cartesian>
+    
 </container>

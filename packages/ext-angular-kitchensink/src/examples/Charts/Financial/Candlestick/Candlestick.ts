@@ -1,12 +1,12 @@
 declare var Ext: any;
-import { Component, OnInit } from '@angular/core';
-import {createData} from './createData'
+import { Component } from '@angular/core';
+import {createData} from './createData';
 
 Ext.require([
-    'Ext.chart.axis.Numeric',
-    'Ext.chart.axis.Time',
-    'Ext.chart.series.CandleStick',
-    'Ext.chart.interactions.Crosshair'
+  'Ext.chart.axis.Numeric',
+  'Ext.chart.axis.Time',
+  'Ext.chart.series.CandleStick',
+  'Ext.chart.interactions.Crosshair'
 ]);
 @Component({
   selector: 'Candlestick-component',
@@ -19,12 +19,6 @@ export class CandlestickComponent {
   store = Ext.create('Ext.data.Store', {
     fields: ['time', 'open', 'high', 'low', 'close']
   });
-  // toolbarItemDefaults = {
-  //   margin: '0 10px 0 0'
-  // }
-  // show: boolean = false;
-  // supportsTouch: boolean = Ext.supports.Touch;
-  // onStackGroup: any
 
   constructor() {
     this.refresh();
