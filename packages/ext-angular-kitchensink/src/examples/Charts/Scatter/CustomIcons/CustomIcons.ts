@@ -1,8 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-
-import {generateData} from  './generateData'
-
 declare var Ext: any;
+import { Component } from '@angular/core';
+import { generateData } from './generateData';
 
 Ext.require('Ext.chart.interactions.ItemEdit');
 
@@ -11,32 +9,27 @@ Ext.require('Ext.chart.interactions.ItemEdit');
   templateUrl: './CustomIcons.html',
   styles: [``]
 })
-export class CustomIconsComponent implements OnInit {
+export class CustomIconsComponent {
 
-  constructor() { 
+  constructor() {
     this.refreshData();
   }
 
   store = Ext.create('Ext.data.Store', {
     fields: ['id', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'name']
-})
+  });
 
 
-numRecords:number = 25;
-theme:string= 'default';
+  numRecords: number = 25;
+  theme: string = 'default';
 
-refreshData = () => {
+  refreshData = () => {
     this.store.loadData(generateData(this.numRecords));
-}
+  };
 
-changeTheme = themep => {this.theme = themep};
-
-
-
-
-  ngOnInit() {
-  }
-
+  changeTheme = themep => {
+    this.theme = themep;
+  };
 
   cartesianSeries = [{
     type: 'scatter',
@@ -45,60 +38,59 @@ changeTheme = themep => {this.theme = themep};
     title: 'Group 1',
     highlight: true,
     marker: {
-        type: 'path',
-        scale: 10,
-        lineWidth: 2,
-        path: [
-            ['M',  0,  1],
-            ['L',  1,  0],
-            ['L',  0, -1],
-            ['L', -1,  0],
-            ['Z']
-        ]
+      type: 'path',
+      scale: 10,
+      lineWidth: 2,
+      path: [
+        ['M', 0, 1],
+        ['L', 1, 0],
+        ['L', 0, -1],
+        ['L', -1, 0],
+        ['Z']
+      ]
     }
-}, {
+  }, {
     type: 'scatter',
     xField: 'id',
     yField: 'g2',
     title: 'Group 2',
     highlight: true,
     marker: {
-        type: 'path',
-        scalingX: 0.1,
-        scalingY: -0.1,
-        path: [
-            ['M', 0,    -145],
-            ['L', 48,   -50],
-            ['L', 153,  -36],
-            ['L', 76,    39],
-            ['L', 93,    143],
-            ['L', 0,     95],
-            ['L', -93,   143],
-            ['L', -76,   39],
-            ['L', -153, -36],
-            ['L', -48,  -50],
-            ['Z']
-        ]
+      type: 'path',
+      scalingX: 0.1,
+      scalingY: -0.1,
+      path: [
+        ['M', 0, -145],
+        ['L', 48, -50],
+        ['L', 153, -36],
+        ['L', 76, 39],
+        ['L', 93, 143],
+        ['L', 0, 95],
+        ['L', -93, 143],
+        ['L', -76, 39],
+        ['L', -153, -36],
+        ['L', -48, -50],
+        ['Z']
+      ]
     }
-}];
+  }];
 
-isPhone: boolean = Ext.os.is.Phone;
+  isPhone: boolean = Ext.os.is.Phone;
 
-cartesianAxes = [{
+  cartesianAxes = [{
     type: 'numeric',
     position: 'left',
     fields: ['g1', 'g2', 'g3', 'g4'],
     label: {
-        rotate: {
-            degrees: -30
-        }
+      rotate: {
+        degrees: -30
+      }
     }
-}, {
+  }, {
     type: 'category',
     position: 'bottom',
     fields: 'id'
-}];
-
+  }];
 
 
 }

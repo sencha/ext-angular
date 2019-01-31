@@ -1,5 +1,4 @@
 declare var Ext: any;
-
 import { Component } from '@angular/core';
 import { createData } from './createData';
 
