@@ -1,24 +1,29 @@
-<container  [padding]="!isPhone?  '10': ''" layout="fit" [fitToParent]="true">
-    <chart-toolbar 
-        [onRefreshClick]="this.refreshData"
-        [onThemeChange]="this.changeTheme"
-        [onToggleZoomOnPan]="this.toggleZoomOnPan"
-        [onStackGroup]="this.onStackedToggle"
-        [theme]="theme"
-        [stacked]="stacked"
-    ></chart-toolbar>
-    <cartesian 
-        shadow="true"
-        (ready)="chartNavReady($event)"
-        [store]="this.store"
-        [theme]="theme"
-        insetPadding="20 20 10 10"
-        [legend]="{
+<container [padding]="!isPhone?  '10': ''" layout="fit" [fitToParent]="true">
+
+  <container docked="top" [margin]="isPhone? '0 15' : '10 15 0 15'"><div #extitem>
+    <chart-toolbar
+      [onRefreshClick]="this.refreshData"
+      [onThemeChange]="this.changeTheme"
+      [onToggleZoomOnPan]="this.toggleZoomOnPan"
+      [onStackGroup]="this.onStackedToggle"
+      [theme]="theme"
+      [stacked]="stacked">
+    </chart-toolbar>
+  </div></container>
+
+  <cartesian
+    shadow="true"
+    (ready)="chartNavReady($event)"
+    [store]="this.store"
+    [theme]="theme"
+    insetPadding="20 20 10 10"
+    [legend]="{
             type: 'sprite',
             position: 'bottom'
         }"
-        [interactions]="cartesianInteractions"
-        [series]="cartesianSeries"
-        [axes]="cartesianAxes"
-    ></cartesian>
+    [interactions]="cartesianInteractions"
+    [series]="cartesianSeries"
+    [axes]="cartesianAxes">
+  </cartesian>
+
 </container>

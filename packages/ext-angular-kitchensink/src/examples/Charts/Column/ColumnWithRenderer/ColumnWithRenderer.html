@@ -1,13 +1,18 @@
-<container  [padding]="!isPhone?  '10': ''" layout="fit" [fitToParent]="true">
-    <chart-toolbar 
-     [onRefreshClick]="this.refreshData">
-     </chart-toolbar>
-    <cartesian 
-        shadow="true"
-        insetPadding="20 20 10 10"
-        innerPadding="0 10 0 10"
-        [store]="this.store"
-        [series]="cartesianSeries"
-        [axes]="cartesianAxes"
-    ></cartesian>
+<container [padding]="!isPhone?  '15': ''" layout="fit" [fitToParent]="true">
+
+  <container docked="top" [margin]="isPhone? '0 15' : '10 15 0 15'"><div #extitem>
+    <chart-toolbar
+      [onRefreshClick]="this.refreshData">
+    </chart-toolbar>
+  </div></container>
+
+  <cartesian
+    shadow="true"
+    insetPadding="20 20 10 10"
+    innerPadding="0 10 0 10"
+    [store]="this.store"
+    [series]="cartesianSeries"
+    [axes]="cartesianAxes">
+  </cartesian>
+
 </container>
