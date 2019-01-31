@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { createData } from './createData'
-
 declare var Ext: any;
+
+import { Component } from '@angular/core';
+import { createData } from './createData';
 
 Ext.require([
   'Ext.chart.*',
@@ -15,6 +15,7 @@ Ext.require([
   templateUrl: './BasicScatter.html',
   styles: [``]
 })
+
 export class BasicScatterComponent {
 
   constructor() {
@@ -30,23 +31,23 @@ export class BasicScatterComponent {
   chartNavReady = function (event) {
     console.log("chartNavReady");
     this.chart = event.ext;
-  }
+  };
 
   theme: string = 'default';
   zoom: boolean = false;
 
   refresh = () => {
     this.store.loadData(createData(25));
-  }
+  };
 
   changeTheme = (theme) => {
-    this.theme = theme
-  }
+    this.theme = theme;
+  };
 
   toggleZoomOnPan = (zoomOnPan) => {
     this.chart.getInteraction('panzoom').setZoomOnPan(zoomOnPan);
     this.zoom = zoomOnPan;
-  }
+  };
 
   isPhone = Ext.os.is.Phone;
 
