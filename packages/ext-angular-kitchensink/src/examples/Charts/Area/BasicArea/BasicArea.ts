@@ -1,51 +1,45 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {createData} from './createData';
-
 declare var Ext: any;
+import { Component } from '@angular/core';
+import { createData } from './createData';
 
 Ext.require([
-    'Ext.chart.theme.Midnight',
-    'Ext.chart.theme.Green',
-    'Ext.chart.theme.Muted',
-    'Ext.chart.theme.Purple',
-    'Ext.chart.theme.Sky',
-    'Ext.chart.series.Area',
-    'Ext.chart.axis.Numeric',
-    'Ext.chart.axis.Category'
-  ]);
+  'Ext.chart.theme.Midnight',
+  'Ext.chart.theme.Green',
+  'Ext.chart.theme.Muted',
+  'Ext.chart.theme.Purple',
+  'Ext.chart.theme.Sky',
+  'Ext.chart.series.Area',
+  'Ext.chart.axis.Numeric',
+  'Ext.chart.axis.Category'
+]);
 
 @Component({
   selector: 'BasicArea-component',
   templateUrl: './BasicArea.html',
   styles: [``]
 })
-export class BasicAreaComponent implements OnInit {
+export class BasicAreaComponent {
 
   constructor() {
-      this.refresh();
-   }
+    this.refresh();
+  }
 
-
-   isPhone = Ext.os.is.Phone;
+  isPhone = Ext.os.is.Phone;
 
   store = Ext.create('Ext.data.Store', {
     fields: ['id', 'g0', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'name'],
-});
+  });
 
-theme:string= 'default';
+  theme: string = 'default';
 
-refresh = () => {
+  refresh = () => {
     this.store.loadData(createData(25));
-}
+  };
 
-changeTheme = (theme) => {
-  console.log(theme)
-  this.theme = theme;
-}
-
-
-  ngOnInit() {
-  }
+  changeTheme = (theme) => {
+    console.log(theme);
+    this.theme = theme;
+  };
 
   cartesianSeries = [{
     type: 'area',
@@ -53,42 +47,43 @@ changeTheme = (theme) => {
     yField: ['g1', 'g2', 'g3', 'g4', 'g5'],
     title: ['G1', 'G2', 'G3', 'G4', 'G5'],
     style: {
-        stroke: 'black',
-        lineWidth: 2,
-        fillOpacity: 0.8
+      stroke: 'black',
+      lineWidth: 2,
+      fillOpacity: 0.8
     }
-}];
+  }];
 
 
-cartesianAxes = [{
-    type: 'numeric',
-    position: 'left',
-    fields: ['g1', 'g2', 'g3', 'g4', 'g5', 'g6'],
-    label: {
+  cartesianAxes = [
+    {
+      type: 'numeric',
+      position: 'left',
+      fields: ['g1', 'g2', 'g3', 'g4', 'g5', 'g6'],
+      label: {
         rotate: {
-            degrees: -30
+          degrees: -30
         }
-    },
-    grid: {
+      },
+      grid: {
         odd: {
-            fill: '#e8e8e8'
+          fill: '#e8e8e8'
         }
-    },
-    title: {
+      },
+      title: {
         text: 'Summation of Data',
         fontSize: 20
-    }
-}, {
-    type: 'category',
-    position: 'bottom',
-    fields: 'name',
-    grid: true,
-    visibleRange: [0, 0.25],
-    title: {
+      }
+    },
+    {
+      type: 'category',
+      position: 'bottom',
+      fields: 'name',
+      grid: true,
+      visibleRange: [0, 0.25],
+      title: {
         text: this.theme,
         fontSize: 20
-    }
-}];
-
+      }
+    }];
 
 }

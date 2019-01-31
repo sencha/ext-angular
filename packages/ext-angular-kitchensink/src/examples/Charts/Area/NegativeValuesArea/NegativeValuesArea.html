@@ -1,19 +1,21 @@
-            <container  [padding]="!isSPhone? '10': ''" layout="fit"
-            [fitToParent]="true">
-    <chart-toolbar 
-                    [onThemeChange]="this.changeTheme"
-                    [theme]="theme"
-                ></chart-toolbar>
-                <cartesian 
-                
-                [width]="'800px'"
-                    shadow="true"
-                    insetPadding="20 20 10 10"
-                    [store]="this.store"
-                    [theme]="theme"
-                    [legend]="{type:'sprite'}"
-                    [axes]="cartesianAxes"
-                    [series]="cartesianSeries"
-                    
-                ></cartesian>
-            </container>
+<container [padding]="!isSPhone? '15': ''" layout="fit" [fitToParent]="true">
+
+  <container docked="top" [margin]="isPhone? '0 15' : '10 15 0 15'"><div #extitem>
+    <chart-toolbar
+      [onThemeChange]="this.changeTheme"
+      [theme]="theme">
+    </chart-toolbar>
+  </div></container>
+
+  <cartesian
+    [width]="'800px'"
+    shadow="true"
+    insetPadding="20 20 10 10"
+    [store]="this.store"
+    [theme]="theme"
+    [legend]="{type:'sprite'}"
+    [axes]="cartesianAxes"
+    [series]="cartesianSeries">
+  </cartesian>
+
+</container>
