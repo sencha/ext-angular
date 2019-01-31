@@ -1,18 +1,22 @@
-<container  [padding]="!isPhone? '10' : ''" layout="fit"
-[fitToParent]="true">
-<chart-toolbar 
-        [onThemeChange]="this.changeTheme"
-        [onRefreshClick]="this.refreshData"
-        [theme]="theme"
-    ></chart-toolbar>
-    <polar 
+<container  [padding]="!isPhone? '15' : ''" layout="fit" [fitToParent]="true">
+
+  <container docked="top" [margin]="isPhone? '0 15' : '10 15 0 15'"><div #extitem>
+    <chart-toolbar
+      [onThemeChange]="this.changeTheme"
+      [onRefreshClick]="this.refreshData"
+      [theme]="theme">
+    </chart-toolbar>
+  </div></container>
+
+  <polar
     [width]="'800px'"
-        shadow="true"
-        interactions="rotate"
-        [legend]="{ type: 'sprite' }"
-        [store]="this.store"
-        [theme]="theme"
-        [series]="polarSeries"
-        [axes]="polarAxes"
-    ></polar>
+    shadow="true"
+    interactions="rotate"
+    [legend]="{ type: 'sprite' }"
+    [store]="this.store"
+    [theme]="theme"
+    [series]="polarSeries"
+    [axes]="polarAxes">
+  </polar>
+
 </container>
