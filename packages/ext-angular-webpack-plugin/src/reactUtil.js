@@ -147,3 +147,22 @@ export function extractFromSource(module, options, compilation) {
     return []
   }
 }
+
+//**********
+export function _done(vars, options) {
+  try {
+    const log = require('./pluginUtil').log
+    const logv = require('./pluginUtil').logv
+    logv(options,'FUNCTION _done')
+
+    try {
+    }
+    catch (e) {
+      console.log(e)
+      return []
+    }
+  }
+  catch(e) {
+    require('./pluginUtil').logv(options,e)
+  }
+}
