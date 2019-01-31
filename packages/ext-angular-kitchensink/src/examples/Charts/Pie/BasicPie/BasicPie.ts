@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {createData} from './createData';
-
 declare var Ext: any;
+import { Component } from '@angular/core';
+import { createData } from './createData';
 
 Ext.require([
-    'Ext.chart.series.Pie'
+  'Ext.chart.series.Pie'
 ]);
 
 @Component({
@@ -12,32 +11,25 @@ Ext.require([
   templateUrl: './BasicPie.html',
   styles: [``]
 })
-export class BasicPieComponent implements OnInit {
+export class BasicPieComponent {
 
-  constructor() { 
-      this.refresh();
+  constructor() {
+    this.refresh();
   }
 
   isPhone = Ext.os.is.Phone;
   isDesktop = Ext.os.is.Desktop;
 
-
-
-  ngOnInit() {
-  }
-
-
   store = Ext.create('Ext.data.Store', {
     fields: ['id', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'name'],
-});
+  });
 
-theme:string= 'default'
+  theme: string = 'default';
 
-changeTheme = theme => this.theme = theme;
+  changeTheme = theme => this.theme = theme;
 
-refresh = () => {
+  refresh = () => {
     this.store.loadData(createData(5));
-}
-
+  };
 
 }

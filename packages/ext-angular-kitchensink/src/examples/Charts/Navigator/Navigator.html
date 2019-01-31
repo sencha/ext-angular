@@ -1,16 +1,19 @@
-<container  [padding]="!isPhone ? '10' : ''" layout="fit"
-[fitToParent]="true"
->
-    <chart-toolbar 
-        [onThemeChange]="this.changeTheme"
-        [onToggleZoomOnPan]="this.toggleZoomOnPan"
-        [theme]="theme"
-    ></chart-toolbar>
-    <chartnavigator 
-        [width]="'800px'"
-        [shadow]="true"
-        (ready)="chartNavReady($event)"
-        [navigator]="{ axis: 'bottom' }"
-        [chart]="chartNavChart"
-    ></chartnavigator>
+<container [padding]="!isPhone ? '15' : ''" layout="fit" [fitToParent]="true">
+
+  <container docked="top" [margin]="isPhone? '0 15' : '10 15 0 15'"><div #extitem>
+    <chart-toolbar
+      [onThemeChange]="this.changeTheme"
+      [onToggleZoomOnPan]="this.toggleZoomOnPan"
+      [theme]="theme">
+    </chart-toolbar>
+  </div></container>
+
+  <chartnavigator
+    [width]="'800px'"
+    [shadow]="true"
+    (ready)="chartNavReady($event)"
+    [navigator]="{ axis: 'bottom' }"
+    [chart]="chartNavChart">
+  </chartnavigator>
+
 </container>

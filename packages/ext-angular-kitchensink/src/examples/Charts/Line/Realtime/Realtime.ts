@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {addNewData} from './addNewData'
-
 declare var Ext: any;
+import { Component } from '@angular/core';
+import { addNewData } from './addNewData';
+
 const interval = 1000;
 
 @Component({
@@ -9,102 +9,95 @@ const interval = 1000;
   templateUrl: './Realtime.html',
   styles: [``]
 })
-export class RealtimeComponent implements OnInit {
+export class RealtimeComponent {
 
-  constructor() { 
-      
+  constructor() {
+
   }
-  timeChartTask:any;
 
-
-  ngOnInit() {
-  }
+  timeChartTask: any;
 
   store = Ext.create('Ext.data.Store', {
     fields: ['yValue', 'metric1', 'metric2']
-})
+  });
 
 
+  chart: any;
 
-chart:any;
-
-chartNavReady = function(event) {
+  chartNavReady = function (event) {
     console.log("chartNavReady");
     this.chart = event.ext;
     this.startTask();
-}
+  };
 
-startTask = () => {
+  startTask = () => {
     let callCount = 1;
     this.timeChartTask = setInterval(() => {
-        if(callCount >= 120){
-            clearInterval(this.timeChartTask);
-        } else {
-            callCount++;
-            addNewData(this.chart, this.store, interval);
-        }
+      if (callCount >= 120) {
+        clearInterval(this.timeChartTask);
+      } else {
+        callCount++;
+        addNewData(this.chart, this.store, interval);
+      }
     }, interval);
-}
+  };
 
-stopTask = () => {
+  stopTask = () => {
     clearInterval(this.timeChartTask);
-}
+  };
 
 
-
-
-cartesianAxes = [{
+  cartesianAxes = [{
     type: 'numeric',
     minimum: 0,
     maximum: 20,
     grid: true,
     position: 'left',
     title: 'Number of Hits'
-}, {
+  }, {
     type: 'time',
     dateFormat: 'G:i:s',
     segmenter: {
-        type: 'time',
-        step: {
-            unit: Ext.Date.SECOND,
-            step: 1
-        }
+      type: 'time',
+      step: {
+        unit: Ext.Date.SECOND,
+        step: 1
+      }
     },
     label: {
-        fontSize: 10
+      fontSize: 10
     },
     grid: true,
     position: 'bottom',
     title: 'Seconds',
     fields: ['xValue'],
     majorTickSteps: 10
-}];
+  }];
 
-cartesianSeries = [{
+  cartesianSeries = [{
     type: 'line',
     title: 'Metric 1',
     marker: {
-        type: 'cross',
-        size: 5
+      type: 'cross',
+      size: 5
     },
     style: {
-        miterLimit: 0
+      miterLimit: 0
     },
     xField: 'xValue',
     yField: 'metric1'
-}, {
+  }, {
     type: 'line',
     title: 'Metric 2',
     marker: {
-        type: 'arrow',
-        size: 5
+      type: 'arrow',
+      size: 5
     },
     style: {
-        miterLimit: 0
+      miterLimit: 0
     },
     xField: 'xValue',
     yField: 'metric2'
-}];
-
+  }];
 
 }

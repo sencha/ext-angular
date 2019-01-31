@@ -1,22 +1,22 @@
-<container  [padding]="!isPhone?  '10': ''" layout="fit"
-[fitToParent]="true">
-    <chart-toolbar 
-        [onThemeChange]="this.changeTheme"
-        [theme]="theme"
-    ></chart-toolbar>
-    <cartesian 
-        shadow="true"
-        insetPadding="70 40 0"
-        [platformConfig]="{
-            phone: {
-                insetPadding: '50 0 0'
-            }
-        }"
-        flipXY="true"
-        [store]="this.store"
-        [theme]="theme"
-        [series]="cartesianSeries"
-        [axes]="cartesianAxes"
-        [captions]="cartesianCaptions"
-    ></cartesian>
+<container [padding]="!isPhone?  '15': ''" layout="fit" [fitToParent]="true">
+
+  <container docked="top" [margin]="isPhone? '0 15' : '10 15 0 15'"><div #extitem>
+    <chart-toolbar
+      [onThemeChange]="this.changeTheme"
+      [theme]="theme">
+    </chart-toolbar>
+  </div></container>
+
+  <cartesian
+    shadow="true"
+    insetPadding="70 40 0"
+    [platformConfig]="{ phone: { insetPadding: '50 0 0' } }"
+    flipXY="true"
+    [store]="this.store"
+    [theme]="theme"
+    [series]="cartesianSeries"
+    [axes]="cartesianAxes"
+    [captions]="cartesianCaptions">
+  </cartesian>
+
 </container>

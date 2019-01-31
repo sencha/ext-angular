@@ -1,69 +1,63 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-
 declare var Ext: any;
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'Donut-component',
   templateUrl: './Donut.html',
   styles: [``]
 })
-export class DonutComponent implements OnInit {
+export class DonutComponent {
 
-  constructor() { }
-
-
-
-  ngOnInit() {
+  constructor() {
   }
 
   store = Ext.create('Ext.data.Store', {
-    fields: ['os', 'data1' ],
+    fields: ['os', 'data1'],
     data: [
-        { os: 'Android', data1: 68.3 },
-        { os: 'BlackBerry', data1: 1.7 },
-        { os: 'iOS', data1: 17.9 },
-        { os: 'Windows Phone', data1: 10.2 },
-        { os: 'Others', data1: 1.9 }
+      {os: 'Android', data1: 68.3},
+      {os: 'BlackBerry', data1: 1.7},
+      {os: 'iOS', data1: 17.9},
+      {os: 'Windows Phone', data1: 10.2},
+      {os: 'Others', data1: 1.9}
     ]
-})
+  });
 
+  isPhone = Ext.os.is.Phone;
 
-isPhone = Ext.os.is.Phone;
+  theme: string = 'default';
 
-    theme:string= 'default';
+  changeTheme = theme => this.theme = theme;
 
+  chart: any;
 
-changeTheme = theme => this.theme =theme;
-
-chart:any;
-
-chartNavReady = function(event) {
+  chartNavReady = function (event) {
     console.log("chartNavReady");
     this.chart = event.ext;
-}
+  };
 
-onResize = (view, width, height) => {
+  onResize = (view, width, height) => {
     const legend = this.chart.getLegend();
-    if(width > height) {
-        legend.setDocked('right');
+    if (width > height) {
+      legend.setDocked('right');
     } else {
-        legend.setDocked('top');
+      legend.setDocked('top');
     }
-}
+  };
 
-
-polarSeries =  [{
+  polarSeries = [{
     type: 'pie',
     angleField: 'data1',
     donut: 50,
     highlight: true,
     label: {
-        field: 'os'
+      field: 'os'
     },
     tooltip: {
-        trackMouse: true,
-        renderer: (tooltip, record) => { tooltip.setHtml(record.get('os') + ': ' + record.get('data1') + '%'); }
+      trackMouse: true,
+      renderer: (tooltip, record) => {
+        tooltip.setHtml(record.get('os') + ': ' + record.get('data1') + '%');
+      }
     }
-}];
+  }];
 
 }

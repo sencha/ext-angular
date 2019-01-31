@@ -1,14 +1,12 @@
-
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {createData} from './createData';
-
 declare var Ext: any;
+import { Component } from '@angular/core';
+import { createData } from './createData';
 
 Ext.require([
-    'Ext.chart.interactions.PanZoom',
-    'Ext.chart.series.Bar',
-    'Ext.chart.axis.Numeric',
-    'Ext.chart.axis.Category'
+  'Ext.chart.interactions.PanZoom',
+  'Ext.chart.series.Bar',
+  'Ext.chart.axis.Numeric',
+  'Ext.chart.axis.Category'
 ]);
 
 @Component({
@@ -16,66 +14,55 @@ Ext.require([
   templateUrl: './StackedBar.html',
   styles: [``]
 })
-export class StackedBarComponent implements OnInit {
+export class StackedBarComponent {
 
   constructor() {
-      this.refresh();
-   }
-
-
-
-  ngOnInit() {
+    this.refresh();
   }
 
   isPhone = Ext.os.is.Phone;
 
-store = Ext.create('Ext.data.Store', {
+  store = Ext.create('Ext.data.Store', {
     fields: ['id', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'name']
-});
+  });
 
-theme: 'default';
+  theme: 'default';
 
-refresh = () => {
+  refresh = () => {
     this.store.loadData(createData(15));
-}
+  };
 
-changeTheme = theme => this.theme = theme;
+  changeTheme = theme => this.theme = theme;
 
-cartesianAxes = [{
+  cartesianAxes = [{
     type: 'numeric',
     position: 'bottom',
     fields: ['g1', 'g2', 'g3', 'g4', 'g5', 'g6'],
     grid: {
-        even: {
-            lineWidth: 1
-        },
-        odd: {
-            stroke: '#fff'
-        }
+      even: {
+        lineWidth: 1
+      },
+      odd: {
+        stroke: '#fff'
+      }
     },
     label: {
-        rotate: {
-            degrees: -90
-        }
+      rotate: {
+        degrees: -90
+      }
     },
     maxZoom: 1
-}, {
+  }, {
     type: 'category',
     position: 'left',
     fields: 'name',
     maxZoom: 4
-}];
+  }];
 
-
-cartesianSeries = [{
+  cartesianSeries = [{
     type: 'bar',
     xField: 'name',
     yField: ['g1', 'g2', 'g3', 'g4', 'g5', 'g6']
-}];
-
-
-
-
-
+  }];
 
 }

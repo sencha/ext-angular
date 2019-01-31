@@ -1,29 +1,27 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {storeData} from './storeData'
-
-
 declare var Ext: any;
+import { Component } from '@angular/core';
+import { storeData } from './storeData';
 
 @Component({
   selector: 'Spline-component',
   templateUrl: './Spline.html',
   styles: [``]
 })
-export class SplineComponent implements OnInit {
+export class SplineComponent {
 
-    store = Ext.create('Ext.data.Store', {
-        fields: ['theta', 'sin', 'cos', 'tan'],
-        data: storeData
-    })
+  store = Ext.create('Ext.data.Store', {
+    fields: ['theta', 'sin', 'cos', 'tan'],
+    data: storeData
+  });
 
-    theme:string= 'default';
+  theme: string = 'default';
 
-    changeTheme = theme => this.theme = theme;
+  changeTheme = theme => this.theme = theme;
 
-    isPhone:boolean = Ext.os.is.Phone;
+  isPhone: boolean = Ext.os.is.Phone;
 
-  constructor() { }
-
+  constructor() {
+  }
 
   cartesianSeries = [{
     type: 'line',
@@ -32,37 +30,29 @@ export class SplineComponent implements OnInit {
     smooth: true,
     highlight: true,
     showMarkers: false
-}];
+  }];
 
-cartesianAxes = [{
+  cartesianAxes = [{
     type: 'numeric',
     position: 'left',
     title: 'Sin (Theta)',
     grid: true,
     fields: 'sin',
     label: {
-        renderer: (axis, label) => Ext.util.Format.number(label, '0.00')
+      renderer: (axis, label) => Ext.util.Format.number(label, '0.00')
     }
-}, {
+  }, {
     type: 'numeric',
     position: 'bottom',
     title: 'Theta',
     grid: true,
     fields: 'theta',
     label: {
-        textPadding: 0,
-        rotate: {
-            degrees: -45
-        }
+      textPadding: 0,
+      rotate: {
+        degrees: -45
+      }
     }
-}];
-
-
-
-
-
-  ngOnInit() {
-  }
-
+  }];
 
 }

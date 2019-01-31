@@ -1,77 +1,68 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {createData} from './createData'
-
 declare var Ext: any;
+import { Component } from '@angular/core';
+import { createData } from './createData';
 
 Ext.require([
-    'Ext.chart.series.Bar',
-    'Ext.chart.axis.Numeric',
-    'Ext.chart.axis.Category'
+  'Ext.chart.series.Bar',
+  'Ext.chart.axis.Numeric',
+  'Ext.chart.axis.Category'
 ]);
-
 
 @Component({
   selector: 'BasicColumn-component',
   templateUrl: './BasicColumn.html',
   styles: [``]
 })
-export class BasicColumnComponent implements OnInit {
+export class BasicColumnComponent {
 
   constructor() {
-      this.refresh();
-   }
-
-
-
-  ngOnInit() {
+    this.refresh();
   }
 
-   isPhone = Ext.os.is.Phone;
+  isPhone = Ext.os.is.Phone;
 
-   store = Ext.create('Ext.data.Store', {
+  store = Ext.create('Ext.data.Store', {
     fields: [
-        'month',
-        'high',
-        'low',
-        {
-            name: 'highF',
-            calculate: function (data) {
-                return data.high * 1.8 + 32;
-            }
-        },
-        {
-            name: 'lowF',
-            calculate: function (data) {
-                return data.low * 1.8 + 32;
-            }
+      'month',
+      'high',
+      'low',
+      {
+        name: 'highF',
+        calculate: function (data) {
+          return data.high * 1.8 + 32;
         }
+      },
+      {
+        name: 'lowF',
+        calculate: function (data) {
+          return data.low * 1.8 + 32;
+        }
+      }
     ]
-});
+  });
 
-theme:string= 'default';
+  theme: string = 'default';
 
-refresh = () => {
+  refresh = () => {
     this.store.loadData(createData());
-}
+  };
 
-changeTheme = theme => this.theme = theme;
+  changeTheme = theme => this.theme = theme;
 
-cartesianSeries = [{
+  cartesianSeries = [{
     type: 'bar',
     xField: 'month',
     yField: 'highF'
-}];
+  }];
 
-cartesianAxes = [{
+  cartesianAxes = [{
     type: 'numeric',
     position: 'left',
     minimum: 30,
     title: 'Temperature in °F'
-}, {
+  }, {
     type: 'category',
     position: 'bottom'
-}];
-
-
+  }];
 
 }

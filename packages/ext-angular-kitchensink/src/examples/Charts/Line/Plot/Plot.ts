@@ -1,55 +1,56 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {createData} from './createData';
-
 declare var Ext: any;
+import { Component } from '@angular/core';
+import { createData } from './createData';
 
 @Component({
   selector: 'Plot-component',
   templateUrl: './Plot.html',
   styles: [``]
 })
-export class PlotComponent implements OnInit {
+export class PlotComponent {
 
-    store = Ext.create('Ext.data.Store', {
-        fields: ['x', 'y']
-    })
+  store = Ext.create('Ext.data.Store', {
+    fields: ['x', 'y']
+  });
 
-    refreshData = () => {
-        this.store.loadData(createData());
-    }
+  refreshData = () => {
+    this.store.loadData(createData());
+  };
 
-    theme:string= 'default';
+  theme: string = 'default';
 
-    isPhone:boolean = Ext.os.is.Phone;
+  isPhone: boolean = Ext.os.is.Phone;
 
-  constructor() { 
-      this.refreshData();
+  constructor() {
+    this.refreshData();
   }
 
-  changeTheme = theme => {this.theme = theme};
+  changeTheme = theme => {
+    this.theme = theme;
+  };
 
-  chart:any;
+  chart: any;
 
-  chartNavReady = function(event) {
-      console.log("chartNavReady");
-      this.chart = event.ext;
-  }
-  
+  chartNavReady = function (event) {
+    console.log("chartNavReady");
+    this.chart = event.ext;
+  };
+
   toggleZoomOnPan = (zoomOnPan) => {
-   this.chart.getInteraction('panzoom').setZoomOnPan(zoomOnPan);
-    }
+    this.chart.getInteraction('panzoom').setZoomOnPan(zoomOnPan);
+  };
 
-cartesianSeries = [{
+  cartesianSeries = [{
     type: 'line',
     xField: 'x',
     yField: 'y',
     style: {
-        lineWidth: 2,
-        strokeStyle: 'rgb(0, 119, 204)'
+      lineWidth: 2,
+      strokeStyle: 'rgb(0, 119, 204)'
     }
-}];
+  }];
 
-cartesianAxes = [{
+  cartesianAxes = [{
     type: 'numeric',
     position: 'left',
     fields: 'y',
@@ -57,33 +58,28 @@ cartesianAxes = [{
     minimum: -4,
     maximum: 4,
     title: {
-        text: 'f(x)',
-        fontSize: 16,
-        fillStyle: 'rgb(255, 0, 136)'
+      text: 'f(x)',
+      fontSize: 16,
+      fillStyle: 'rgb(255, 0, 136)'
     },
     floating: {
-        value: 0,
-        alongAxis: 1
+      value: 0,
+      alongAxis: 1
     }
-}, {
+  }, {
     type: 'numeric',
     position: 'bottom',
     fields: 'x',
     grid: true,
     title: {
-        text: 'x',
-        fontSize: 16,
-        fillStyle: 'rgb(255, 0, 136)'
+      text: 'x',
+      fontSize: 16,
+      fillStyle: 'rgb(255, 0, 136)'
     },
     floating: {
-        value: 0,
-        alongAxis: 0
+      value: 0,
+      alongAxis: 0
     }
-}];
-
-
-  ngOnInit() {
-  }
-
+  }];
 
 }
