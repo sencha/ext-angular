@@ -37,7 +37,6 @@ export class BasicAreaComponent {
   };
 
   changeTheme = (theme) => {
-    console.log(theme);
     this.theme = theme;
   };
 
@@ -52,7 +51,6 @@ export class BasicAreaComponent {
       fillOpacity: 0.8
     }
   }];
-
 
   cartesianAxes = [
     {
