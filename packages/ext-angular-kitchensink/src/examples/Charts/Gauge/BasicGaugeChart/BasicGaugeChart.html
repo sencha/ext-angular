@@ -1,32 +1,27 @@
-<container  [padding]="!isPhone ? 10 : 0" layout="fit" 
-[fitToParent]="true"
->
-    <chart-toolbar 
-        [onRefreshClick]="this.refresh"
-        [onToggleZoomOnPan]="null"
-    ></chart-toolbar>
-    <panel  shadow="true" layout="vbox" [width]="'800px'">
-        <polar 
-            innerPadding="20"
-            [store]="this.store"
-            flex="1"
-            [animation]="{
-                easing: 'elasticIn',
-                duration: 1000
-            }"
-            [series]="polarSeries1"
-        ></polar>
-        <polar 
-            innerPadding="20"
-            [store]="this.store"
-            flex="1"
-            [series]="polarSeries2"
-            [animation]="{
-                easing: 'elasticIn',
-                duration: 1000
-            }"
-            
+<container [padding]="!isPhone ? 15 : 0" layout="fit" [fitToParent]="true">
 
-        ></polar>  
-    </panel>              
+  <container docked="top" [margin]="isPhone? '0 15' : '10 15 0 15'"><div #extitem>
+    <chart-toolbar
+      [onRefreshClick]="this.refresh"
+      [onToggleZoomOnPan]="null">
+    </chart-toolbar>
+  </div></container>
+
+  <panel shadow="true" layout="vbox" [width]="'800px'">
+    <polar
+      innerPadding="20"
+      [store]="this.store"
+      flex="1"
+      [animation]="{ easing: 'elasticIn', duration: 1000}"
+      [series]="polarSeries1">
+    </polar>
+    <polar
+      innerPadding="20"
+      [store]="this.store"
+      flex="1"
+      [series]="polarSeries2"
+      [animation]="{ easing: 'elasticIn', duration: 1000 }">
+    </polar>
+  </panel>
+
 </container>

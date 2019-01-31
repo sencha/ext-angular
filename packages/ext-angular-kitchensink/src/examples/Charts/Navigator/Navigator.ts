@@ -38,7 +38,6 @@ export class NavigatorComponent {
   };
 
   chartNavReady = function (event) {
-    console.log("chartNavReady");
     this.chart = event.ext.getChart();
   };
 
@@ -52,7 +51,6 @@ export class NavigatorComponent {
   }
 
   categoryRenderer = (axis, value) => {
-    console.log("In categoryRenderer. value : " + value);
     return Math.round(value * 180 / Math.PI);
   };
 
