@@ -1,45 +1,39 @@
-<toolbar  docked="top" ui="app-transparent-toolbar" [shadow]="false" [margin]="isPhone? '0 10' : ''">
+<toolbar docked="top" ui="app-transparent-toolbar" [shadow]="false" [margin]="isPhone? '0 10' : ''">
 
-        <button  [hidden]="!(show || theme)" margin="0 10px 0 0" iconCls="x-fa fa-picture-o" text="Theme" ui="action">
-            <menu >
-                <menuitem  text="Default" [handler]="onThemeChangeDefault" [iconCls]="theme === 'default' ? 'x-font-icon md-icon-done' : ''"></menuitem>
-                <menuitem  [hidden]="onlyMidnight" text="Green" [handler]="onThemeChangeGreen" [iconCls]="theme === 'green' ? 'x-font-icon md-icon-done' : ''"></menuitem>
-                <menuitem  text="Midnight" [handler]="onThemeChangeMidnight" [iconCls]="theme === 'midnight' ? 'x-font-icon md-icon-done' : ''"></menuitem>
-                <menuitem  [hidden]="onlyMidnight" text="Muted" [handler]="onThemeChangeMuted" [iconCls]="theme === 'muted' ? 'x-font-icon md-icon-done' : ''"></menuitem>
-                <menuitem  [hidden]="onlyMidnight" text="Red" [handler]="onThemeChangeRed" [iconCls]="theme === 'red' ? 'x-font-icon md-icon-done' : ''"></menuitem>
-                <menuitem  [hidden]="onlyMidnight" text="Sky" [handler]="onThemeChangeSky" [iconCls]="theme === 'sky' ? 'x-font-icon md-icon-done' : ''"></menuitem>
-                <menuitem  [hidden]="onlyMidnight" text="Yellow" [handler]="onThemeChangeYellow" [iconCls]="theme === 'yellow' ? 'x-font-icon md-icon-done' : ''"></menuitem>
-            </menu>
-        </button>
+  <button [hidden]="!(show || theme)" margin="0 10px 0 0" iconCls="x-fa fa-picture-o" text="Theme" ui="action">
+    <menu >
+      <menuitem text="Default" [handler]="onThemeChangeDefault" [iconCls]="theme === 'default' ? 'x-font-icon md-icon-done' : ''"></menuitem>
+      <menuitem [hidden]="onlyMidnight" text="Green" [handler]="onThemeChangeGreen" [iconCls]="theme === 'green' ? 'x-font-icon md-icon-done' : ''"></menuitem>
+      <menuitem text="Midnight" [handler]="onThemeChangeMidnight" [iconCls]="theme === 'midnight' ? 'x-font-icon md-icon-done' : ''"></menuitem>
+      <menuitem [hidden]="onlyMidnight" text="Muted" [handler]="onThemeChangeMuted" [iconCls]="theme === 'muted' ? 'x-font-icon md-icon-done' : ''"></menuitem>
+      <menuitem [hidden]="onlyMidnight" text="Red" [handler]="onThemeChangeRed" [iconCls]="theme === 'red' ? 'x-font-icon md-icon-done' : ''"></menuitem>
+      <menuitem [hidden]="onlyMidnight" text="Sky" [handler]="onThemeChangeSky" [iconCls]="theme === 'sky' ? 'x-font-icon md-icon-done' : ''"></menuitem>
+      <menuitem [hidden]="onlyMidnight" text="Yellow" [handler]="onThemeChangeYellow" [iconCls]="theme === 'yellow' ? 'x-font-icon md-icon-done' : ''"></menuitem>
+    </menu>
+  </button>
 
+  <button  [hidden]="!downloadChartRef"
+    margin="0 10px 0 0"
+    ui="action"
+    iconCls="x-fa fa-eye" 
+    text="Preview" 
+    [handler]="downloadChart.bind(null, downloadChartRef ? downloadChartRef : '')"
+    [platformConfig]="{desktop: {text: 'DOWNLOAD',iconCls: 'x-fa fa-download'}}">
+  </button>
 
-        <button  [hidden]="!downloadChartRef"
-            margin="0 10px 0 0"
-            ui="action"
-            iconCls="x-fa fa-eye" 
-            text="Preview" 
-            [handler]="downloadChart.bind(null, downloadChartRef ? downloadChartRef : '')"
-            [platformConfig]="{
-                desktop: {
-                    text: 'DOWNLOAD',
-                    iconCls: 'x-fa fa-download'
-                }
-            }"
-        ></button>
+  <button [hidden]="!onRefreshClick" ui="action" margin="0 10px 0 0" iconCls="x-fa fa-refresh" [handler]="onRefreshClick" text="REFRESH"></button>
 
-        <button  [hidden]="!onRefreshClick" ui="action" margin="0 10px 0 0" iconCls="x-fa fa-refresh" [handler]="onRefreshClick" text="REFRESH"></button>
+  <spacer></spacer>
 
-    <spacer ></spacer>
+  <segmentedbutton  [hidden]="!(show || onStackGroup)" margin="0 10px 0 0" (change)="onStackGroup($event)" >
+    <button  iconCls="x-fa fa-bars" text="STACK" ></button>
+    <button  iconCls="x-fa fa-bar-chart" text="GROUP"></button>
+  </segmentedbutton>
 
-        <segmentedbutton  [hidden]="!(show || onStackGroup)" margin="0 10px 0 0" (change)="onStackGroup($event)" >
-            <button  iconCls="x-fa fa-bars" text="STACK" ></button>
-            <button  iconCls="x-fa fa-bar-chart" text="GROUP"></button>
-        </segmentedbutton>
-
-        <segmentedbutton  [hidden]="!(show || onToggleZoomOnPan ) || supportsTouch" [value]="zoom">
-            <button  iconCls="x-fa fa-arrows" [handler]="onToggleZoomOnPanPan" text="PAN" value="false"></button>
-            <button  iconCls="x-fa fa-search-plus" [handler]="onToggleZoomOnPanZoom" value="true"></button>
-            <button  [hidden]="!onToggleCrosshair" iconCls="x-fa fa-crosshairs" [handler]="onToggleCrosshairLocal" text="CROSSHAIR" value="crosshair"></button>
-        </segmentedbutton>
+  <segmentedbutton  [hidden]="!(show || onToggleZoomOnPan ) || supportsTouch" [value]="zoom">
+    <button  iconCls="x-fa fa-arrows" [handler]="onToggleZoomOnPanPan" text="PAN" value="false"></button>
+    <button  iconCls="x-fa fa-search-plus" [handler]="onToggleZoomOnPanZoom" text="SEARCH" value="true"></button>
+    <button  [hidden]="!onToggleCrosshair" iconCls="x-fa fa-crosshairs" [handler]="onToggleCrosshairLocal" text="CROSSHAIR" value="crosshair"></button>
+  </segmentedbutton>
 
 </toolbar>

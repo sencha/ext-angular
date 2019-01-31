@@ -4,39 +4,19 @@ import { VERSION } from '@angular/core';
   selector: 'ext-angular-root',
   styles:[require('./app.component.css').toString()],
   template: `
-
-<panel [layout]="'fit'" [fitToParent]="true" [bodyStyle]="'backgroundSize: 20px 20px;backgroundColor: #e8e8e8;backgroundImage: linear-gradient(0deg, #f5f5f5 1.1px, transparent 0), linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)'">
-
-  <titlebar [docked]="'top'" [shadow]="true" [flex]="1" [title]="'TitleBar'" [maxWidth]="'600px'" [margin]="'0 0 30 0'">
-    <button [selfAlign]="'left'" [iconCls]="'x-fa fa-bars'" (tap)="toggleTree()"></button>
-    <searchfield [ui]="'alt'" [flex]="1" align="right" [width]="200" [placeholder]="'Search'"></searchfield>
-  </titlebar>
-
-  <titlebar [docked]="'top'" [shadow]="true" [flex]="1" [title]="'TitleBar'" [maxWidth]="'600px'" [margin]="'0 0 30 0'">
-    <span #extitem>
-      <span class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></span>
-      <a extjs href="#" class="app-title">Sencha ExtAngular 6.7 Kitchen Sink - Angular v{{ANGULAR_VERSION}}</a>
-    </span>
-  </titlebar>
-
-  <!-- Navtree starts-->
-  <panel 
-    [docked]="'left'"
-    [flex]="1"
-    [scrollable]="'y'"
-    [shadow]="false"
-    [style]="{zIndex: 100, backgroundColor: 'white'}"
-    [resizable]="{edges: 'east', dynamic: true}"
-    [header]="false"
-    [width]="'300'"
-    [collapsible]="{ direction: 'left' }"
-    [collapsed]="!showTreeFlag">
-    <searchfield [flex]="1" [docked]="'top'" [ui]="'faded'" (change)="filterNav($event)" [margin]="7"></searchfield>
+  <panel layout="fit" [fullscreen]="true" [weighted]="true">
+    <titlebar docked="top" [weight]="10">
+      <container align="left">
+          <span #extitem>
+            <span class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></span>
+            <span extjs href="#" class="app-title">Sencha ExtAngular 6.7 Kitchen Sink - Angular v{{ANGULAR_VERSION}}</span>
+          </span>
+      </container>
+    </titlebar>
+    <container><span #extitem>
+        <button-component></button-component>
+    </span></container>
   </panel>
-  <!-- Navtree ends-->
-
-</panel>
-
   `
 })
 export class AppComponent {
