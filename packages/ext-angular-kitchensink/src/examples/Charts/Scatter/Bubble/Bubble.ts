@@ -56,7 +56,6 @@ export class BubbleComponent {
 
   isPhone: boolean = Ext.os.is.Phone;
 
-
   cartesianSeries = [{
     type: 'scatter',
     xField: 'id',
@@ -80,7 +79,6 @@ export class BubbleComponent {
       renderer: this.styleRenderer
     }
   }];
-
 
   cartesianAxes = [{
     type: 'numeric',

@@ -283,6 +283,8 @@
                     }
                     else {
                         console.log('known problem here with destroy...');
+                        console.log('parent: ' + parentCmp.xtype);
+                        console.log('child: ' + childCmp.xtype);
                     }
                 }
                 catch (e) {

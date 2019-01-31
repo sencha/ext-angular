@@ -148,6 +148,8 @@ export class base {
       }
       else {
         console.log('known problem here with destroy...')
+        console.log('parent: ' + parentCmp)
+        console.log('child: ' + childCmp)
       }
     }
     catch(e) {
