@@ -1,20 +1,24 @@
-<container  [padding]="!isPhone? '10':''" layout="fit"
-[fitToParent]="true">
-    <chart-toolbar 
-        [onThemeChange]="this.changeTheme"
-        [onRefreshClick]="this.refreshData"
-        [onToggleZoomOnPan]="this.toggleZoomOnPan"
-        [theme]="theme"
-        [onlyMidnight]=true
-    ></chart-toolbar>
-    <cartesian 
+<container [padding]="!isPhone? '15':''" layout="fit" [fitToParent]="true">
+
+  <container docked="top" [margin]="isPhone? '0 15' : '10 15 0 15'"><div #extitem>
+    <chart-toolbar
+      [onThemeChange]="this.changeTheme"
+      [onRefreshClick]="this.refreshData"
+      [onToggleZoomOnPan]="this.toggleZoomOnPan"
+      [theme]="theme"
+      [onlyMidnight]=true>
+    </chart-toolbar>
+  </div></container>
+
+  <cartesian
     [width]="'800px'"
-        shadow="true"
-        [store]="this.store"
-        [theme]="theme"
-        interactions="panzoom"
-        [axes]="cartesianAxes"
-        [series]="cartesianSeries"
-        (ready)="chartNavReady($event)"
-    ></cartesian>
+    shadow="true"
+    [store]="this.store"
+    [theme]="theme"
+    interactions="panzoom"
+    [axes]="cartesianAxes"
+    [series]="cartesianSeries"
+    (ready)="chartNavReady($event)">
+  </cartesian>
+
 </container>

@@ -1,12 +1,12 @@
 <cartesian
-[fitToParent]="true"
-shadow="true"
-ref="chart"
-[store]="this.store"
-(onDestroy)="this.stopTask($event)"
-title="Time Axis"
-insetPadding="30 30 10 10"
-[axes]="cartesianAxes"
-[series]="cartesianSeries"
-(ready)="chartNavReady($event)"
-></cartesian>
+  [fitToParent]="true"
+  shadow="true"
+  ref="chart"
+  [store]="this.store"
+  (onDestroy)="this.stopTask($event)"
+  title="Time Axis"
+  insetPadding="30 30 10 10"
+  [axes]="cartesianAxes"
+  [series]="cartesianSeries"
+  (ready)="chartNavReady($event)">
+</cartesian>

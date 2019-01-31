@@ -1,12 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {data} from './data'
-
 declare var Ext: any;
+import { Component } from '@angular/core';
+import { data } from './data';
 
 Ext.require([
-    'Ext.chart.series.Line',
-    'Ext.chart.axis.Numeric',
-    'Ext.chart.axis.Time'
+  'Ext.chart.series.Line',
+  'Ext.chart.axis.Numeric',
+  'Ext.chart.axis.Time'
 ]);
 
 @Component({
@@ -14,42 +13,41 @@ Ext.require([
   templateUrl: './BasicLine.html',
   styles: [``]
 })
-export class BasicLineComponent implements OnInit {
+export class BasicLineComponent {
 
-  constructor() { }
+  constructor() {
+  }
 
   store = Ext.create('Ext.data.Store', {
     data
-});
+  });
 
 
-theme:string= 'default';
+  theme: string = 'default';
 
-changeTheme = theme => {this.theme = theme};
+  changeTheme = theme => {
+    this.theme = theme;
+  };
 
-isPhone = Ext.os.is.Phone;
+  isPhone = Ext.os.is.Phone;
 
-cartesianAxes = [{
+  cartesianAxes = [{
     type: 'numeric',
     position: 'left',
     fields: 'value',
     title: 'USD to Euro'
-}, {
+  }, {
     type: 'time',
     dateFormat: 'Y-m-d',
     position: 'bottom',
     fields: 'time',
     title: 'Date'
-}];
+  }];
 
-cartesianSeries = {
+  cartesianSeries = {
     type: 'line',
     xField: 'time',
     yField: 'value'
-};
-
-  ngOnInit() {
-  }
-
+  };
 
 }
