@@ -166,11 +166,14 @@ export class base {
   baseAfterContentInit() {
     if (this._extitems.length == 1) {
         if (this._hostComponent != null) {
-          this.ext.add({ xtype: 'container', width: '100%', height: '100%', html: this._extitem.nativeElement });
+          //this.ext.add({ xtype: 'container', width: '100%', height: '100%', html: this._extitem.nativeElement });
+          this.ext.setHtml(this._extitem.nativeElement)
         }
     }
     if (this._extroutes.length == 1) {
-      this.ext.add({xtype: 'container',width: '100%', height: '100%', html: this._extroute.nativeElement})
+      console.log('here')
+      this.ext.setHtml(this._extroute.nativeElement)
+      //this.ext.add({xtype: 'container',width: '100%', height: '100%', html: this._extroute.nativeElement})
     }
     if(this._hostComponent != null) {
       var parentCmp = this._hostComponent.ext

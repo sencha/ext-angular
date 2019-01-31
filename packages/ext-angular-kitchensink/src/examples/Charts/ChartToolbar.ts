@@ -1,16 +1,14 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-
 declare var Ext: any;
+import { Component, OnInit, Input } from '@angular/core';
 
 Ext.require([
-    'Ext.chart.theme.Blue',
-    'Ext.chart.theme.Green',
-    'Ext.chart.theme.Muted',
-    'Ext.chart.theme.Red',
-    'Ext.chart.theme.Sky',
-    'Ext.chart.theme.Yellow'
+  'Ext.chart.theme.Blue',
+  'Ext.chart.theme.Green',
+  'Ext.chart.theme.Muted',
+  'Ext.chart.theme.Red',
+  'Ext.chart.theme.Sky',
+  'Ext.chart.theme.Yellow'
 ]);
-
 
 @Component({
     selector: 'chart-toolbar',
@@ -19,108 +17,74 @@ Ext.require([
 })
 export class ChartToolbarComponent implements OnInit {
 
+  @Input() theme: any;
+  @Input() stacked: any;
+  @Input() zoom: any;
+  @Input() onlyMidnight: boolean = false;
+  @Input() onThemeChange: any;
+  @Input() onToggleZoomOnPan: any;
+  @Input() onToggleCrosshair: any;
+  @Input() onRefreshClick: any;
+  @Input() downloadChartRef: any;
+  @Input() onStackGroup: any;
 
-    @Input()
-    theme;
-
-    @Input()
-    stacked;
-
-    @Input()
-    zoom;
-
-    @Input()
-    onlyMidnight: boolean = false;
-
-    @Input()
-    onThemeChange;
-
-    @Input()
-    onToggleZoomOnPan;
-
-    @Input()
-    onToggleCrosshair;
-
-    @Input()
-    onRefreshClick;
-
-    @Input()
-    downloadChartRef;
-
-    @Input()
-    onStackGroup;
-
-    toolbarItemDefaults = {
-        margin: '0 10px 0 0'
+  downloadChart = (chart) => {
+    console.log("In downloadChart. chart:  " + chart);
+    if (Ext.is.Desktop) {
+      chart.download({ filename: 'Chart' });
+    } else {
+      chart.preview();
     }
+  }
 
-    downloadChart = (chart) => {
-        console.log("In downloadChart. chart:  " + chart);
-        if (Ext.is.Desktop) {
-            chart.download({ filename: 'Chart' });
-        } else {
-            chart.preview();
-        }
-    }
+  show: boolean = false;
+  isPhone: boolean;
+  supportsTouch: boolean = Ext.supports.Touch;
 
-    show: boolean = false;
+  ngOnInit() {
+    if (Ext.os.is.Phone == true) {this.isPhone = true} else {this.isPhone = false}
 
-    isPhone: boolean = Ext.os.is.Phone;
-    supportsTouch: boolean = Ext.supports.Touch;
+    // console.log("isPhone : " + this.isPhone);
+    // console.log("supportsTouch : " + this.supportsTouch);
+    // console.log("show : " + this.show);
+    // console.log("onStackGroup : " + this.onStackGroup);
+    // console.log("downloadChartRef : " + this.downloadChartRef);
+    // if(this.onToggleZoomOnPan) {
+    //   console.log("this.onToggleZoomOnPan true: " + this.onToggleZoomOnPan);
+    // }
+    // else {
+    //   console.log("this.onToggleZoomOnPan false: " + this.onToggleZoomOnPan);
+    //   console.log(!this.show && !this.onToggleZoomOnPan && this.supportsTouch)
+    // }
+  }
 
-    constructor() { }
-
-
-
-    ngOnInit() {
-        console.log("isPhone : " + this.isPhone);
-        console.log("supportsTouch : " + this.supportsTouch);
-        console.log("show : " + this.show);
-        console.log("onStackGroup : " + this.onStackGroup);
-        console.log("downloadChartRef : " + this.downloadChartRef);
-        if(this.onToggleZoomOnPan) {
-            console.log("this.onToggleZoomOnPan true: " + this.onToggleZoomOnPan);
-        }
-        else {
-            console.log("this.onToggleZoomOnPan false: " + this.onToggleZoomOnPan);
-            console.log(!this.show && !this.onToggleZoomOnPan && this.supportsTouch)
-        }
-        
-    }
-
-
-
-    onThemeChangeDefault = () => {
-        this.onThemeChange('default');
-    }
-    onThemeChangeMidnight = () => {
-        this.onThemeChange('midnight');
-    }
-    onThemeChangeGreen = () => {
-        this.onThemeChange('green');
-    }
-    onThemeChangeRed = () => {
-        this.onThemeChange('red');
-    }
-    onThemeChangeMuted = () => {
-        this.onThemeChange('muted');
-    }
-    onThemeChangeSky = () => {
-        this.onThemeChange('sky');
-    }
-    onThemeChangeYellow = () => {
-        this.onThemeChange('yellow');
-    }
-
-    onToggleZoomOnPanPan = () => {
-        this.onToggleZoomOnPan(false)
-    }
-    onToggleZoomOnPanZoom = () => {
-        this.onToggleZoomOnPan(true)
-    }
-
-    onToggleCrosshairLocal = () => {
-        this.onToggleCrosshair(true);
-    }
+  onThemeChangeDefault = () => {this.onThemeChange('default')}
+  onThemeChangeMidnight = () => {
+    this.onThemeChange('midnight');
+  }
+  onThemeChangeGreen = () => {
+    this.onThemeChange('green');
+  }
+  onThemeChangeRed = () => {
+    this.onThemeChange('red');
+  }
+  onThemeChangeMuted = () => {
+    this.onThemeChange('muted');
+  }
+  onThemeChangeSky = () => {
+    this.onThemeChange('sky');
+  }
+  onThemeChangeYellow = () => {
+    this.onThemeChange('yellow');
+  }
+  onToggleZoomOnPanPan = () => {
+    this.onToggleZoomOnPan(false)
+  }
+  onToggleZoomOnPanZoom = () => {
+    this.onToggleZoomOnPan(true)
+  }
+  onToggleCrosshairLocal = () => {
+    this.onToggleCrosshair(true);
+  }
 
 }

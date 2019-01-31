@@ -1,13 +1,15 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-
 declare var Ext: any;
+import { Component } from '@angular/core';
 
+Ext.require([
+  'Ext.MessageBox'
+]);
 @Component({
   selector: 'gridtools-component',
   templateUrl: './GridTools.html',
   styles: [``]
 })
-export class GridToolsComponent implements OnInit {
+export class GridToolsComponent {
 
   store = Ext.create('Ext.data.Store', {
     autoLoad: true,
@@ -62,15 +64,5 @@ export class GridToolsComponent implements OnInit {
   doGroup = (info, action) => {
       Ext.Msg.alert(action, this.helperTpl.apply({ group: info.group }));
   }
-
-  constructor() { }
-
-
-
-  ngOnInit() {
-  }
-
-
-
 
 }

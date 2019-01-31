@@ -16,15 +16,19 @@ module.exports = function (env) {
     watchprofile = 'no'
   }
   else {
+    if (env.browser == undefined) {env.browser = true}
     browserprofile = JSON.parse(env.browser) || true
     watchprofile = env.watch || 'yes'
   }
   const isProd = buildenvironment === 'production'
-  var basehref = env.basehref || '/'
   var buildprofile = env.profile || process.env.npm_package_extbuild_defaultprofile
   var buildenvironment = env.environment || process.env.npm_package_extbuild_defaultenvironment
   var buildverbose = env.verbose || process.env.npm_package_extbuild_defaultverbose
   if (buildprofile == 'all') { buildprofile = '' }
+  if (env.treeshake == undefined) {env.treeshake = false}
+  var treeshake = env.treeshake ? JSON.parse(env.treeshake) : false
+  var basehref = env.basehref || '/'
+  var mode = isProd ? 'production': 'development'
  
 
   portfinder.basePort = (env && env.port) || 1962
@@ -45,6 +49,7 @@ module.exports = function (env) {
         port: port,
         emit: true,
         browser: browserprofile,
+        treeshake: treeshake,
         watch: watchprofile,
         profile: buildprofile, 
         environment: buildenvironment, 
@@ -53,12 +58,6 @@ module.exports = function (env) {
         packages: [
           'ux',
           'treegrid'
-        ],
-        prodFileReplacementConfig: [
-          {
-            "replace": "src/environments/environment.ts",
-            "with": "src/environments/environment.prod.ts"
-          }
         ]
       }),
       new webpack.ContextReplacementPlugin(
