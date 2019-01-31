@@ -1,20 +1,26 @@
-    <container  [padding]="!isPhone?  '10': ''" layout="vbox"
-    [fitToParent]="true">
-        <chart-toolbar     
-            maxHeight="50" [downloadChartRef]="this.chart"></chart-toolbar>
-    <cartesian  
-            shadow="true"
-            flex="2"
-            (ready)="chartNavReady($event)"
-            [store]="this.store"
-            theme="muted"
-            [interactions]="{
-                type: 'panzoom',
-                zoomOnPanGesture: true
-            }"
-            insetPadding="10 20 0 10"
-            innerPadding="0 4 0 3"
-            [axes]="cartesianAxes"
-            [series]="cartesianSeries"
-        ></cartesian>
+<container [padding]="!isPhone? '15px': ''" layout="fit" [fitToParent]="true">
+
+  <container docked="top" [margin]="isPhone? '0 15' : '10 15 0 15'"><div #extitem>
+    <chart-toolbar 
+      maxHeight="50"
+      [downloadChartRef]="this.chart">
+    </chart-toolbar>
+  </div></container>
+
+  <cartesian  
+    shadow="true"
+    flex="2"
+    (ready)="chartNavReady($event)"
+    [store]="this.store"
+    theme="muted"
+    [interactions]="{
+      type: 'panzoom',
+      zoomOnPanGesture: true
+    }"
+    insetPadding="10 20 0 10"
+    innerPadding="0 4 0 3"
+    [axes]="cartesianAxes"
+    [series]="cartesianSeries">
+  </cartesian>
+
 </container>
