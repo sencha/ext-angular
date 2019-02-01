@@ -1,26 +1,19 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-
 declare var Ext: any;
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'sheet-component',
   templateUrl: './Sheet.html',
   styles: [``]
 })
-export class SheetComponent implements OnInit {
-
-    direct= 'left';
-    modal= true;
-    reveal= false;
-    displayed= false;
-
-
-  
-    
-  constructor() { }
+export class SheetComponent {
+  direct= 'left';
+  modal= true;
+  reveal= false;
+  displayed= false;
 
   toggleMenu = function() {
-      this.displayed = !this.displayed;
+    this.displayed = !this.displayed;
   }
 
   onHide = function() {
@@ -58,11 +51,5 @@ export class SheetComponent implements OnInit {
   unsetModal = function() {
     this.modal = false;
   }
-  
-  ngOnInit() {
-    
-
-  }
-
 
 }

@@ -1,15 +1,16 @@
-import {Component, OnInit} from '@angular/core'
-
 declare var Ext: any;
+import {Component} from '@angular/core'
+
+Ext.require([
+  'Ext.Msg'
+]);
 
 @Component({
   selector: 'message-popup-component',
   templateUrl: "./Message.html",
   styles: [``]
 })
-export class MessagePopupComponent implements OnInit  {
-
-  constructor() { }
+export class MessagePopupComponent {
 
   onConfirmResult(buttonId, value, opt) {
     Ext.toast(`User clicked ${buttonId} button.`);
@@ -28,7 +29,5 @@ export class MessagePopupComponent implements OnInit  {
   clickHandler = (event) => {
     Ext.get(event.target).ripple(event, {});
   }
-
-  ngOnInit() {}
 
 }
