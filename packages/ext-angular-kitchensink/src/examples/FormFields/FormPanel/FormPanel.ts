@@ -1,15 +1,16 @@
-import {Component, OnInit} from '@angular/core'
-
 declare var Ext: any;
+import {Component} from '@angular/core'
+
+Ext.require([
+  'Ext.field.InputMask'
+]);
 
 @Component({
   selector: 'formpanel-component',
   templateUrl: "./FormPanel.html",
   styles: [``]
 })
-export class FormPanelComponent implements OnInit  {
-
-  constructor() { }
+export class FormPanelComponent {
 
   disabled:boolean = false;
   formRef:any;
@@ -21,8 +22,6 @@ export class FormPanelComponent implements OnInit  {
   toggleDisabled = () => {
     this.disabled = !this.disabled;
   }
-
-  ngOnInit() {}
 
   reset = () => this.formRef.reset();
 

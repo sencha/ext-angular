@@ -1,4 +1,5 @@
 
+- issue in ExtReact  https://sencha.jira.com/browse/EXTREACT-9
 - support upgrade to multi-app workspace in ext-gen
 - reset project if npm run build fails
   - remove ext-angular-prod
@@ -23,16 +24,13 @@
 - refactor plugin to separate repo
 - refactor ext-gen, et all
 - implement widgetcell (see BigData)
-    <!--
-        TODO: future release
-        <cell >
-          <widgetcell >
-            <button  ui ="action" [handler] ="this.onVerify" [bind] = "widgetCellBind" text = "VERIFY"></button>
+        <cell>
+          <widgetcell>
+            <button ui ="action" [handler] ="this.onVerify" [bind] = "widgetCellBind" text = "VERIFY"></button>
           </widgetcell>
         </cell>
-        <summaryCell >
-          <widgetcell >
-            <button  ui ="action" [handler] ="this.onVerifyAll" text = "All"></button>
+        <summaryCell>
+          <widgetcell>
+            <button ui ="action" [handler] ="this.onVerifyAll" text = "All"></button>
           </widgetcell>
         </summaryCell>
-    -->

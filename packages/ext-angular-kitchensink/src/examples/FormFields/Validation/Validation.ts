@@ -1,15 +1,18 @@
-import {Component, OnInit} from '@angular/core'
-
 declare var Ext: any;
+import {Component} from '@angular/core'
+
+Ext.require([
+  'Ext.data.validator.CurrencyUS',
+  'Ext.data.validator.Range',
+  'Ext.data.validator.DateTime'
+]);
 
 @Component({
   selector: 'validation-component',
   templateUrl: "./Validation.html",
   styles: [``]
 })
-export class ValidationComponent implements OnInit  {
-
-  constructor() { }
+export class ValidationComponent {
 
   validators = Ext.data.validator;
 
@@ -25,8 +28,4 @@ export class ValidationComponent implements OnInit  {
     return true;
   }
 
-  ngOnInit() {}
-
 }
-
-// Ext.data.validator.*
