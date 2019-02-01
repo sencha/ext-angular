@@ -197,8 +197,8 @@ export class base {
     var childxtype = childCmp.xtype
 
     if (this.ext.initialConfig.align != undefined) {
-      if (parentxtype != 'titlebar' && parentxtype != 'grid') {
-        console.error('Can only use align property if parent is a Titlebar or Grid')
+      if (parentxtype != 'titlebar' && parentxtype != 'grid' && parentxtype != 'button') {
+        console.error('Can only use align property if parent is a Titlebar or Grid or Button')
         return
       }
     }
