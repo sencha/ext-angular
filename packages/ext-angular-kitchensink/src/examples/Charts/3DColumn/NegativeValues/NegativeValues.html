@@ -1,22 +1,24 @@
-<container  [padding]="!isPhone?  '10': ''" layout="vbox"
-[fitToParent]="true">
+<container [padding]="!isPhone? '10': ''" layout="fit" [fitToParent]="true">
+
+  <container docked="top"><div #extitem>
     <chart-toolbar  
-     maxHeight="50" [downloadChartRef]="this.chart"></chart-toolbar>
-    <cartesian
-     
-        shadow="true"
-        flex="2"
-        (ready)="chartNavReady($event)"
-        theme="muted"
-        [store]="this.store"
-        insetPadding="40 40 20 20"
-        innerPadding="0 3 0 0"
-        interactions="itemhighlight"
-        [animation]="{
-            easing: 'backOut',
-            duration: 500
-        }"
-        [axes]="cartesianAxes"
-        [series]="cartesianSeries"
-    ></cartesian>
+      maxHeight="50" 
+      [downloadChartRef]="this.chart">
+    </chart-toolbar>
+  </div></container>
+
+  <cartesian
+    shadow="true"
+    flex="2"
+    (ready)="chartNavReady($event)"
+    theme="muted"
+    [store]="this.store"
+    insetPadding="40 40 20 20"
+    innerPadding="0 3 0 0"
+    interactions="itemhighlight"
+    [animation]="{easing: 'backOut',duration: 500}"
+    [axes]="cartesianAxes"
+    [series]="cartesianSeries">
+  </cartesian>
+
 </container>

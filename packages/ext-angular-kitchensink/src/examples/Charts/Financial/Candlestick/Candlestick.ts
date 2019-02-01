@@ -51,9 +51,9 @@ export class CandlestickComponent {
   toggleCrosshair = (crosshair) => {
       this.panzoom.setEnabled(!crosshair);
       this.crosshair.setEnabled(crosshair);
-      if(crosshair){
-          this.crosshair = crosshair;
-      }
+      // if(crosshair){
+      //     this.crosshair = crosshair;
+      // }
   }
 
   refresh = () => {

@@ -1,6 +1,6 @@
-<container [padding]="!isPhone? '15px': ''" layout="fit" [fitToParent]="true">
+<container [padding]="!isPhone? '10': ''" layout="fit" [fitToParent]="true">
 
-  <container docked="top" [margin]="isPhone? '0 15' : '10 15 0 15'"><div #extitem>
+  <container docked="top"><div #extitem>
     <chart-toolbar
       [onThemeChange]="this.changeTheme"
       [onToggleZoomOnPan]="this.toggleZoomOnPan"
@@ -16,9 +16,9 @@
     (ready)="chartNavReady($event)"
     [store]="this.store"
     [theme]="theme"
-    [interactions]="cartesianInteractions"
+    [axes]="cartesianAxes"
     [series]="cartesianSeries"
-    [axes]="cartesianAxes">
+    [interactions]="cartesianInteractions">
   </cartesian>
 
 </container>

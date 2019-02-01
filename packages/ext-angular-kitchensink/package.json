@@ -50,7 +50,7 @@
 
     "@types/core-js": "^2.5.0",
     "@types/node": "^10.12.18",
-    "typescript": "^3.2.4",
+    "typescript": "3.3.0",
 
     "to-string-loader":"^1.1.5",
     "style-loader": "^0.23.1",
