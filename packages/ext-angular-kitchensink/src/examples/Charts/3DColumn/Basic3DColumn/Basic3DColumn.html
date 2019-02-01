@@ -1,15 +1,19 @@
-<container  [padding]="!isPhone?  '10': ''" layout="fit"
-[fitToParent]="true">
+<container [padding]="!isPhone? '10': ''" layout="fit" [fitToParent]="true">
+
+  <container docked="top"><div #extitem>
     <chart-toolbar  
-        [onThemeChange]="this.changeTheme"
-        [onRefreshClick]="this.refresh"
-        [theme]="theme"
-    ></chart-toolbar>
-    <cartesian  
-        shadow="true"
-        [store]="this.store"
-        [theme]="theme"
-        [series]="cartesianSeries"
-        [axes]="cartesianAxes"
-    ></cartesian>
+      [onThemeChange]="this.changeTheme"
+      [onRefreshClick]="this.refresh"
+      [theme]="theme">
+    </chart-toolbar>
+  </div></container>
+
+  <cartesian  
+    shadow="true"
+    [store]="this.store"
+    [theme]="theme"
+    [series]="cartesianSeries"
+    [axes]="cartesianAxes">
+  </cartesian>
+
 </container>

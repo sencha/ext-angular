@@ -142,6 +142,8 @@ export function extractFromSource(module, options, compilation) {
     return statements
   }
   catch(e) {
+    console.log(module.resource)
+    console.log(js)
     console.log(e)
     compilation.errors.push('extractFromSource: ' + e)
     return []

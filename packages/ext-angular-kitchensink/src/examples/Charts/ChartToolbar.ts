@@ -29,7 +29,6 @@ export class ChartToolbarComponent implements OnInit {
   @Input() onStackGroup: any;
 
   downloadChart = (chart) => {
-    console.log("In downloadChart. chart:  " + chart);
     if (Ext.is.Desktop) {
       chart.download({ filename: 'Chart' });
     } else {
@@ -43,48 +42,17 @@ export class ChartToolbarComponent implements OnInit {
 
   ngOnInit() {
     if (Ext.os.is.Phone == true) {this.isPhone = true} else {this.isPhone = false}
-
-    // console.log("isPhone : " + this.isPhone);
-    // console.log("supportsTouch : " + this.supportsTouch);
-    // console.log("show : " + this.show);
-    // console.log("onStackGroup : " + this.onStackGroup);
-    // console.log("downloadChartRef : " + this.downloadChartRef);
-    // if(this.onToggleZoomOnPan) {
-    //   console.log("this.onToggleZoomOnPan true: " + this.onToggleZoomOnPan);
-    // }
-    // else {
-    //   console.log("this.onToggleZoomOnPan false: " + this.onToggleZoomOnPan);
-    //   console.log(!this.show && !this.onToggleZoomOnPan && this.supportsTouch)
-    // }
   }
 
   onThemeChangeDefault = () => {this.onThemeChange('default')}
-  onThemeChangeMidnight = () => {
-    this.onThemeChange('midnight');
-  }
-  onThemeChangeGreen = () => {
-    this.onThemeChange('green');
-  }
-  onThemeChangeRed = () => {
-    this.onThemeChange('red');
-  }
-  onThemeChangeMuted = () => {
-    this.onThemeChange('muted');
-  }
-  onThemeChangeSky = () => {
-    this.onThemeChange('sky');
-  }
-  onThemeChangeYellow = () => {
-    this.onThemeChange('yellow');
-  }
-  onToggleZoomOnPanPan = () => {
-    this.onToggleZoomOnPan(false)
-  }
-  onToggleZoomOnPanZoom = () => {
-    this.onToggleZoomOnPan(true)
-  }
-  onToggleCrosshairLocal = () => {
-    this.onToggleCrosshair(true);
-  }
+  onThemeChangeMidnight = () => {this.onThemeChange('midnight')}
+  onThemeChangeGreen = () => {this.onThemeChange('green')}
+  onThemeChangeRed = () => {this.onThemeChange('red')}
+  onThemeChangeMuted = () => {this.onThemeChange('muted')}
+  onThemeChangeSky = () => {this.onThemeChange('sky')}
+  onThemeChangeYellow = () => {this.onThemeChange('yellow')}
+  onToggleZoomOnPanPan = () => {this.onToggleZoomOnPan(false)}
+  onToggleZoomOnPanZoom = () => {this.onToggleZoomOnPan(true)}
+  onToggleCrosshairLocal = () => {this.onToggleCrosshair(true)}
 
 }

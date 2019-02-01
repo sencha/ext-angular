@@ -118,7 +118,7 @@ export function _compilation(compiler, compilation, vars, options) {
 
       compilation.hooks.succeedModule.tap(`ext-succeed-module`, module => {
         //require('./pluginUtil').logv(options, 'HOOK succeedModule')
-        if (module.resource && !module.resource.match(/node_modules/)) {
+        if (module.resource && !module.resource.match(/node_modules/) && !module.resource.match(/\.html$/)) {
           vars.deps = [...(vars.deps || []), ...require(`./${vars.framework}Util`).extractFromSource(module, options, compilation, extComponents)]
         }
         // if (extComponents.length && module.resource && (module.resource.match(/\.(j|t)sx?$/) ||
@@ -333,23 +333,23 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
 
       if (vars.framework == 'angular') {
 
-        //because of a problem with colorpicker
+        //because of a problem in colorpicker
         if (fs.existsSync(path.join(process.cwd(),'ext-angular/ux/'))) {
-          var fromPath = path.join(process.cwd(), 'ext-angular/ux/')
-          var toPath = path.join(output, 'ux')
+          var fromPath = path.join(process.cwd(), 'ext-angular/')
+          var toPath = path.join(output)
           fsx.copySync(fromPath, toPath)
           log(app + 'Copying (ux) ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
         }
 
         if (fs.existsSync(path.join(process.cwd(),'ext-angular/packages/'))) {
-          var fromPath = path.join(process.cwd(), 'ext-angular/packages/')
-          var toPath = path.join(output, 'packages')
+          var fromPath = path.join(process.cwd(), 'ext-angular/')
+          var toPath = path.join(output)
           fsx.copySync(fromPath, toPath)
           log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
         }
         if (fs.existsSync(path.join(process.cwd(),'ext-angular/overrides/'))) {
-          var fromPath = path.join(process.cwd(), 'ext-angular/overrides/')
-          var toPath = path.join(output, 'overrides')
+          var fromPath = path.join(process.cwd(), 'ext-angular/')
+          var toPath = path.join(output)
           fsx.copySync(fromPath, toPath)
           log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
         }
@@ -466,7 +466,7 @@ export function _done(vars, options) {
     logv(options,'FUNCTION _done')
 
     if (vars.production && !options.treeshake && options.framework == 'angular') {
-      require(`./${options.framework}Util`)._done(vars, options)
+      require(`./${framework}Util`)._done(vars, options)
     } 
 
     try {

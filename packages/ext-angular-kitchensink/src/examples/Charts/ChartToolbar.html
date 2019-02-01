@@ -1,7 +1,7 @@
-<toolbar docked="top" ui="app-transparent-toolbar" [shadow]="false" [margin]="isPhone? '0 10' : ''">
+<toolbar docked="top" ui="app-transparent-toolbar" [shadow]="false" [margin]="isPhone? '0 10' : '10 0 0 10'" padding="0 10 0 10">
 
   <button [hidden]="!(show || theme)" margin="0 10px 0 0" iconCls="x-fa fa-picture-o" text="Theme" ui="action">
-    <menu >
+    <menu>
       <menuitem text="Default" [handler]="onThemeChangeDefault" [iconCls]="theme === 'default' ? 'x-font-icon md-icon-done' : ''"></menuitem>
       <menuitem [hidden]="onlyMidnight" text="Green" [handler]="onThemeChangeGreen" [iconCls]="theme === 'green' ? 'x-font-icon md-icon-done' : ''"></menuitem>
       <menuitem text="Midnight" [handler]="onThemeChangeMidnight" [iconCls]="theme === 'midnight' ? 'x-font-icon md-icon-done' : ''"></menuitem>
@@ -12,7 +12,7 @@
     </menu>
   </button>
 
-  <button  [hidden]="!downloadChartRef"
+  <button [hidden]="!downloadChartRef"
     margin="0 10px 0 0"
     ui="action"
     iconCls="x-fa fa-eye" 
@@ -26,14 +26,14 @@
   <spacer></spacer>
 
   <segmentedbutton  [hidden]="!(show || onStackGroup)" margin="0 10px 0 0" (change)="onStackGroup($event)" >
-    <button  iconCls="x-fa fa-bars" text="STACK" ></button>
-    <button  iconCls="x-fa fa-bar-chart" text="GROUP"></button>
+    <button iconCls="x-fa fa-bars" text="STACK" ></button>
+    <button iconCls="x-fa fa-bar-chart" text="GROUP"></button>
   </segmentedbutton>
 
   <segmentedbutton  [hidden]="!(show || onToggleZoomOnPan ) || supportsTouch" [value]="zoom">
-    <button  iconCls="x-fa fa-arrows" [handler]="onToggleZoomOnPanPan" text="PAN" value="false"></button>
-    <button  iconCls="x-fa fa-search-plus" [handler]="onToggleZoomOnPanZoom" text="SEARCH" value="true"></button>
-    <button  [hidden]="!onToggleCrosshair" iconCls="x-fa fa-crosshairs" [handler]="onToggleCrosshairLocal" text="CROSSHAIR" value="crosshair"></button>
+    <button iconCls="x-fa fa-arrows" [handler]="onToggleZoomOnPanPan" text="PAN" value="false"></button>
+    <button iconCls="x-fa fa-search-plus" [handler]="onToggleZoomOnPanZoom" text="ZOOM" value="true"></button>
+    <button [hidden]="!onToggleCrosshair" iconCls="x-fa fa-crosshairs" [handler]="onToggleCrosshairLocal" text="CROSSHAIR" value="crosshair"></button>
   </segmentedbutton>
 
 </toolbar>
