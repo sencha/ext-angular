@@ -1,4 +1,4 @@
-<container [padding]="!isPhone? '10': ''" layout="fit"[fitToParent]="true">
+<container [padding]="!isPhone? '10': ''" layout="fit" [fitToParent]="true">
 
   <container docked="top"><div #extitem>
     <chart-toolbar 
@@ -18,7 +18,7 @@
     [theme]="theme"
     [interactions]="cartesianInteractions"
     [series]="cartesianSeries"
-    [axes]="cartesianAxes"
-  ></cartesian>
+    [axes]="cartesianAxes">
+  </cartesian>
 
 </container>  
