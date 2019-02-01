@@ -1,16 +1,15 @@
-import {Component, OnInit} from '@angular/core'
-
 declare var Ext: any;
+import {Component} from '@angular/core'
+
+Ext.require([
+  'Ext.data.validator.Email'
+]);
 
 @Component({
   selector: 'emailfield-component',
   templateUrl: "./EmailField.html",
   styles: [``]
 })
-export class EmailFieldComponent implements OnInit  {
-
-  constructor() { }
-
-  ngOnInit() {}
+export class EmailFieldComponent {
 
 }

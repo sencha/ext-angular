@@ -2,7 +2,7 @@ declare var Ext: any;
 import {Component} from '@angular/core'
 
 Ext.require([
-  'Ext.Msg'
+  'Ext.MessageBox'
 ]);
 
 @Component({
