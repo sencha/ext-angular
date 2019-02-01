@@ -6,6 +6,8 @@ import { VERSION } from '@angular/core';
 import { Subject } from "rxjs";
 import { getFiles } from "./code_preview_helper";
 Ext.require([
+  'Ext.MessageBox',
+  'Ext.Toast',
   'Ext.panel.Collapser',
   'Ext.data.TreeStore'
 ])

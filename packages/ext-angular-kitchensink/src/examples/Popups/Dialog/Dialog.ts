@@ -1,16 +1,12 @@
-import {Component, OnInit, OnDestroy} from '@angular/core'
-
 declare var Ext: any;
+import {Component, OnDestroy} from '@angular/core'
 
 @Component({
   selector: 'dialog-popup-component',
   templateUrl: "./Dialog.html",
   styles: [``]
 })
-export class DialogPopupComponent implements OnInit, OnDestroy  {
-
-  constructor() { }
-
+export class DialogPopupComponent implements OnDestroy  {
   isDialogShowing:boolean = false;
   okButtonRef:any;
 
@@ -25,8 +21,6 @@ export class DialogPopupComponent implements OnInit, OnDestroy  {
   onCancel = () => this.isDialogShowing = false;
 
   onHide = () => this.isDialogShowing = false;
-
-  ngOnInit() {}
 
   ngOnDestroy() {
     this.okButtonRef.doDestroy();

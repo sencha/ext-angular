@@ -1,5 +1,9 @@
 
 - support upgrade to multi-app workspace in ext-gen
+- reset project if npm run build fails
+  - remove ext-angular-prod
+  - update module
+  - update main
 - Sencha tests for ExtAngular (like those for ExtReact)
 - Create eslint for app
 - Example applications for modern toolkit (like those for ExtReact)
