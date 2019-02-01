@@ -1,15 +1,14 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {model} from './GridModel'
-import {GridFilteringService} from './GridFiltering.service'
-
 declare var Ext: any;
-
+import { Component } from '@angular/core';
+import { model } from './GridModel'
+import {GridFilteringService} from './GridFiltering.service'
 
 Ext.require([
     'Ext.grid.filters.*',
     'Ext.grid.plugin.SummaryRow',
     'Ext.data.summary.Average',
     'Ext.data.summary.Max',
+    'Ext.grid.column.Boolean'
 ]);
 
 @Component({
@@ -17,10 +16,9 @@ Ext.require([
   templateUrl: './GridFiltering.html',
   styles: [``]
 })
-export class GridFilteringComponent implements OnInit {
+export class GridFilteringComponent {
 
-  constructor(gridFiletringService : GridFilteringService) { }
-
+  isPhone = Ext.os.is.Phone;
   store = Ext.create('Ext.data.Store', {
     model,
     autoLoad: true,
@@ -30,6 +28,8 @@ export class GridFilteringComponent implements OnInit {
       url: '/KitchenSink/BigData'
     }
   });
+
+  constructor(gridFiletringService : GridFilteringService) { }
 
   nameSorter = (rec1, rec2) => {
     // Sort prioritizing surname over forename as would be expected.
@@ -43,12 +43,5 @@ export class GridFilteringComponent implements OnInit {
     }
      return 0;
   }
-
-
-
-  ngOnInit() {
-  }
-
-   isPhone = Ext.os.is.Phone;
 
 }

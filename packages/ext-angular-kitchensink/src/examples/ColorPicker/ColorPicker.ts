@@ -1,7 +1,10 @@
 declare var Ext: any;
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 
-Ext.require(['Ext.ux.colorpick.*']);
+Ext.require([
+  'Ext.ux.colorpick.*',
+  'Ext.data.validator.Format'
+]);
 
 @Component({
   selector: 'ColorPicker-component',
