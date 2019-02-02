@@ -1,16 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {model} from '../CompanyModel'
-
 declare var Ext: any;
+import { Component } from '@angular/core';
+import {model} from '../CompanyModel'
 
 @Component({
   selector: 'LockingGrid-component',
   templateUrl: './LockingGrid.html',
   styles: [``]
 })
-export class LockingGridComponent implements OnInit {
-
-  constructor() { }
+export class LockingGridComponent {
 
   store = Ext.create('Ext.data.Store', {
     model,
@@ -22,35 +19,33 @@ export class LockingGridComponent implements OnInit {
     } 
   });
 
-  ngOnInit() {
-  }
+  isPhone = Ext.os.is.Phone;
 
-   isPhone = Ext.os.is.Phone;
-
-   onApprove = (grid, info) => {
+  onApprove = (grid, info) => {
     Ext.Msg.alert('Approve', info.record.get('name'));
   }
-   onDecline = (grid, info) => {
+
+  onDecline = (grid, info) => {
     Ext.Msg.alert('Decline', info.record.get('name'));
   }
 
-   renderSign = (format, value) => {
+  renderSign = (format, value) => {
      return Ext.util.Format.number(value, format);    
    }
 
-   summarizeCompanies = (grid, context) => context.records.length + ' Companies';
+  summarizeCompanies = (grid, context) => context.records.length + ' Companies';
 
-    leftLockedColumnCell = {
-        tools: {
-            approve: {
-                iconCls: 'x-fa fa-check green',
-                handler: this.onApprove
-            },
-            decline: {
-                iconCls: 'x-fa fa-ban red',
-                handler: this.onDecline,
-                weight: 1
-            }
+  leftLockedColumnCell = {
+      tools: {
+        approve: {
+          iconCls: 'x-fa fa-check green',
+          handler: this.onApprove
+        },
+        decline: {
+          iconCls: 'x-fa fa-ban red',
+          handler: this.onDecline,
+          weight: 1
         }
-    };
+      }
+  };
 }

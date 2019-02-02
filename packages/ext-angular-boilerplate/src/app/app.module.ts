@@ -3,9 +3,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { Route, RouterModule } from '@angular/router'
 
-
 import { ExtAngularModule } from '@sencha/ext-angular'
-
 
 //import { ExtAngularBootstrapService } from '@sencha/ext-angular'
 //import { ExtAngularBootstrapComponent } from '@sencha/ext-angular'

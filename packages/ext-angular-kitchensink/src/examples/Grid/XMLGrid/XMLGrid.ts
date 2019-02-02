@@ -1,13 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-
 declare var Ext: any;
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'xmlgrid-component',
   templateUrl: './XMLGrid.html',
   styles: [``]
 })
-export class XMLGridComponent implements OnInit {
+export class XMLGridComponent {
 
   store = Ext.create('Ext.data.Store', {
     autoLoad: true,
@@ -27,14 +26,6 @@ export class XMLGridComponent implements OnInit {
         totalRecords: '@total'
       }
     }
-  })        
-
-  constructor() { }
-
-
-
-  ngOnInit() {
-  }
-
+  })
 
 }
