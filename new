@@ -1,6 +1,7 @@
 
 - issue in ExtReact  https://sencha.jira.com/browse/EXTREACT-9
 - support upgrade to multi-app workspace in ext-gen
+- implement 'class' component for ext
 - reset project if npm run build fails
   - remove ext-angular-prod
   - update module
