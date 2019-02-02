@@ -20,7 +20,8 @@ const routes: Route[] = [
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent }
 ]
-export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes)
+export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {useHash: true});
+
 @NgModule({
   imports:         [BrowserModule, ExtAngularModule, routingModule],
   declarations:    [ExtAngularBootstrapComponent, AppComponent, HomeComponent, AboutComponent, NavMenuComponent],

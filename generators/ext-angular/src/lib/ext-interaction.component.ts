@@ -14,16 +14,6 @@ import {
 import { base } from './base';
 export class interactionMetaData {
   public static XTYPE: string = 'interaction';
-  public static PROPERTIESOBJECT: any = {
-    "chart": "Ext.chart.AbstractChart",
-    "enabled": "Boolean",
-    "gesture": "Object",
-    "listeners": "Object",
-    "platformConfig": "Object",
-    "responsiveConfig": "Object",
-    "fitToParent": "Boolean",
-    "config": "Object",
-};
   public static PROPERTIES: string[] = [
     'chart',
     'enabled',

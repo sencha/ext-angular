@@ -21,7 +21,8 @@ const routes: ExtAngularRoutes = [
 	{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 	{ path: 'dashboard', component: ButtonComponent, text: 'Dashboard', iconCls: 'x-fa fa-dashboard', leaf: true },
 ]
-export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
+export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {useHash: true});
+
 
 
 @Component({

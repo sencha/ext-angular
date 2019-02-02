@@ -14,15 +14,6 @@ import {
 import { base } from './base';
 export class pivotd3containerMetaData {
   public static XTYPE: string = 'pivotd3container';
-  public static PROPERTIESOBJECT: any = {
-    "configurator": "Ext.pivot.plugin.Configurator",
-    "drawing": "Ext.Component",
-    "matrix": "Ext.pivot.matrix.Base",
-    "platformConfig": "Object",
-    "responsiveConfig": "Object",
-    "fitToParent": "Boolean",
-    "config": "Object",
-};
   public static PROPERTIES: string[] = [
     'configurator',
     'drawing',

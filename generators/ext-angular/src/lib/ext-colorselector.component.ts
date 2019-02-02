@@ -14,22 +14,6 @@ import {
 import { base } from './base';
 export class colorselectorMetaData {
   public static XTYPE: string = 'colorselector';
-  public static PROPERTIESOBJECT: any = {
-    "alphaDecimalFormat": "String",
-    "cancelButtonText": "String",
-    "color": "Object",
-    "fieldPad": "Number",
-    "fieldWidth": "Number",
-    "format": "'hex6'/'hex8'/'#hex6'/'#hex8'/'HEX6'/'HEX8'/'#HEX6'/'#HEX8'",
-    "okButtonText": "String",
-    "showOkCancelButtons": "Boolean",
-    "showPreviousColor": "Boolean",
-    "value": "String",
-    "platformConfig": "Object",
-    "responsiveConfig": "Object",
-    "fitToParent": "Boolean",
-    "config": "Object",
-};
   public static PROPERTIES: string[] = [
     'alphaDecimalFormat',
     'cancelButtonText',
