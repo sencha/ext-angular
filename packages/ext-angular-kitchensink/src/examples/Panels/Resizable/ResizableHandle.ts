@@ -1,7 +1,6 @@
-import {Component, OnInit} from '@angular/core'
-import {mediumText} from '../../dummy';
-
 declare var Ext: any;
+import {Component} from '@angular/core'
+import {mediumText} from '../../dummy';
 
 @Component({
   selector: 'resizable-panel-component',
@@ -9,9 +8,7 @@ declare var Ext: any;
   styles: [``]
 })
 
-export class ResizableHandleComponent implements OnInit  {
-
-  constructor() { }
+export class ResizableHandleComponent {
 
   panelRef:any;
   doDynamically:boolean = false;
@@ -19,9 +16,6 @@ export class ResizableHandleComponent implements OnInit  {
   
   toggleDynamic = (event) => {
     this.doDynamically = event.newValue;
-    console.log("this.doDynamically :" + this.doDynamically);
   }
-
-  ngOnInit() {}
 
 }

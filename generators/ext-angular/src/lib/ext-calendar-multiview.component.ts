@@ -14,20 +14,6 @@ import {
 import { base } from './base';
 export class calendar_multiviewMetaData {
   public static XTYPE: string = 'calendar-multiview';
-  public static PROPERTIESOBJECT: any = {
-    "compact": "Boolean",
-    "compactOptions": "Object",
-    "defaultView": "String",
-    "layout": "Object/String",
-    "store": "Object/Ext.calendar.store.Calendars",
-    "timezoneOffset": "Number",
-    "value": "Date",
-    "views": "Object",
-    "platformConfig": "Object",
-    "responsiveConfig": "Object",
-    "fitToParent": "Boolean",
-    "config": "Object",
-};
   public static PROPERTIES: string[] = [
     'compact',
     'compactOptions',

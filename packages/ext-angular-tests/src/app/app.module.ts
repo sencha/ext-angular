@@ -89,7 +89,8 @@ const routes: ExtAngularRoutes = [
   { path: 'rel_tooltip', component: RelTooltipComponent, text: 'Rel Tooltip', iconCls: 'x-fa fa-dashboard', leaf: true },
   { path: 'rel_update', component: RelUpdateComponent, text: 'Rel Update', iconCls: 'x-fa fa-dashboard', leaf: true }
 ];
-export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
+export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {useHash: true});
+
 @NgModule({
   imports: [
     BrowserModule,

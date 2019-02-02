@@ -55,7 +55,7 @@ const routes: ExtAngularRoutes = [
 	{ path: 'boilerplate', component: BoilerplateComponent, text: 'Boilerplate', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 	{ path: 'configurator', component: ConfiguratorComponent, text: 'Configurator', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true }
 ];
-export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
+export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {useHash: true});
 
 @NgModule({
   imports: [

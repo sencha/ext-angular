@@ -153,7 +153,6 @@ export function _toProd(vars, options) {
     if (!fs.existsSync(pathExtAngularProd)) {
       mkdirp.sync(pathExtAngularProd)
       const t = require('./artifacts').extAngularModule('', '', '')
-      console.log(t)
       fsx.writeFileSync(`${pathExtAngularProd}/ext-angular.module.ts`, t, 'utf-8', () => {
         return
       })

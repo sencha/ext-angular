@@ -1,17 +1,20 @@
-<container  [padding]="10" [height]="'700px'">
-    <panel 
-        [title]="'Resize Me'"
-        [shadow]="true"
-        [fitToParent]="true"
-        [width]="400"
-        [resizable]="{edges: 'all', dynamic: doDynamically}"
-        [bodyPadding]="10"
-        [centered]="true"
-    >
-        <toolbar  [docked]="'top'">
-            <checkboxfield  [checked]="doDynamically" (change)="toggleDynamic($event)" [boxLabel]="'Dynamic'">
-            </checkboxfield>
-        </toolbar>
-        <container  [html]="mediumText"></container>
-    </panel>
+<container [padding]="10" [fitToParent]="true">
+  <panel 
+    [title]="'Resize Me'"
+    [shadow]="true"
+    [width]="400"
+    [resizable]="{edges: 'all', dynamic: doDynamically}"
+    [bodyPadding]="10"
+    [centered]="true">
+    <toolbar  [docked]="'top'">
+      <checkboxfield 
+        [checked]="doDynamically"
+        (change)="toggleDynamic($event)"
+        [boxLabel]="'Dynamic'">
+      </checkboxfield>
+    </toolbar>
+    <container
+      [html]="mediumText">
+    </container>
+  </panel>
 </container>

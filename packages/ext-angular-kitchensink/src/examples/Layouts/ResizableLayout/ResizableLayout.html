@@ -1,8 +1,9 @@
-<container  [shadow]="true" layout="fit" [fitToParent]="true" >
+<container padding="10" layout="fit" [fitToParent]="true" >
     <panel  
         [title]="'Dock Left'"
         [docked]="'left'" 
         [width]="200"
+        [shadow]="true" 
         [layout]="'center'"
         [resizable]="{split: true, edges: 'east', dynamic: true}"
         [html]="'<code >dynamic: true</code>'"
