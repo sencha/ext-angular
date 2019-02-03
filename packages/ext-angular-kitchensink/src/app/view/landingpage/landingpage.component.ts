@@ -5,7 +5,9 @@ import { Router, NavigationEnd } from '@angular/router';
 import { VERSION } from '@angular/core';
 import { Subject } from "rxjs";
 import { getFiles } from "./code_preview_helper";
+
 Ext.require([
+  'Ext.layout.*',
   'Ext.MessageBox',
   'Ext.Toast',
   'Ext.panel.Collapser',
@@ -47,10 +49,6 @@ const generateBreadcrumb = (node) => {
 export class LandingpageComponent implements OnInit {
 
   ANGULAR_VERSION: any = VERSION.full
-  // titlebarHtml = `
-  // <span class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></span>
-  // <a extjs href="#" class="app-title">Sencha ExtAngular 6.7 Kitchen Sink - Angular v${this.ANGULAR_VERSION}</a>
-  // `
   treeStore: any
   hideSelections: any = false
   hideExamples: any = true

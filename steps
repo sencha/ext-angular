@@ -3,8 +3,12 @@ steps
 ***************************
 
 npm install -g @angular/cli
-ng new ext-angular-boilerplate --style scss --minimal --skip-tests --inline-style --inline-template 
+ng new ext-angular-boilerplate --style scss --minimal --skip-tests --inline-style --inline-template
+Would you like to add Angular routing? n
 cd ext-angular-boilerplate
+
+open in an editor
+
 
 in angular.json
 
@@ -13,6 +17,7 @@ change
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
+          "options": {
 
 to
 
@@ -34,11 +39,16 @@ to
         "serve": {
           "builder": "@angular-builders/dev-server:generic",
 
-copy generators/ext-component-creator/filetemplates/angular/ext-angular-webpack.config.json 
-     to ext-angular-client
+copy generators/ext-component-creator/filetemplates/angular/ext-angular-webpack.config.js
+     to ext-angular-boilerplate
+
+remove
+      "es5BrowserSupport": true
+
 
 in package.json, add
 
+```
   "dependencies": {
     "@sencha/ext-angular": "~6.7.0",
     "@sencha/ext": "~6.7.0",
@@ -46,94 +56,90 @@ in package.json, add
     "@sencha/ext-modern-treegrid": "~6.7.0",
     "@sencha/ext-modern-theme-material": "~6.7.0",
 
-  "devDependencies": {
-    "@angular-builders/custom-webpack": "~7.0.0",
-    "@angular-builders/dev-server":"~7.0.0",
-    "@sencha/ext-angular-webpack-plugin": "~6.7.0",
 
-in tsconfig.json, add
+  "devDependencies": {
+    "@sencha/ext-angular-webpack-plugin": "~6.7.0",
+    "html-webpack-plugin": "^3.2.0",
+    "base-href-webpack-plugin": "^2.0.0",
+
+    "@angular-builders/custom-webpack": "~7.2.0",
+    "@angular-builders/dev-server":"~7.2.1",
+
+```
+
+in tsconfig.json, under compilerOptions, add
 
      "paths": {
       "@angular/*": ["./node_modules/@angular/*"]
-     }
+     },
+
+in src/main.ts
+
+```
+import { enableProdMode } from '@angular/core';
+import { bootstrapModule } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.component';
+import { AppModule } from './app/app.module';
+
+bootstrapModule( AppModule );
+```
+
 
 in src/app.module.ts
 
-import { BrowserModule } from '@angular/platform-browser'
-import { NgModule } from '@angular/core'
-import { AppComponent } from './app.component'
-import { ExtAngularModernModule } from '@sencha/ext-angular'
+```
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-@Injectable()
-export class ExtAngularService {
-  constructor(
-      private componentFactoryResolver: ComponentFactoryResolver,
-      private appRef: ApplicationRef,
-      private injector: Injector
-  ) {}
-  appendComponentToViewport(component: any) {
-    const componentRef = this.componentFactoryResolver
-      .resolveComponentFactory(component)
-      .create(this.injector)
-    this.appRef.attachView(componentRef.hostView)
-    const domElem = (componentRef.hostView as EmbeddedViewRef<any>)
-      .rootNodes[0] as HTMLElement
-    var root = document.getElementsByClassName('x-viewport-body-el')[0]
-    root.appendChild(domElem)
-  }
-}
+import { AppComponent } from './app.component';
 
-@Component({
-  selector: 'app-root',
-  template: ``,
-})
-export class App {
-  constructor(private ExtAngularService: ExtAngularService) {
-    this.ExtAngularService.appendComponentToViewport(AppComponent)
-  }
-}
+import { ExtAngularModule } from '@sencha/ext-angular';
+import { ExtAngularBootstrapService } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.service';
+import { ExtAngularBootstrapComponent } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent, ExtAngularBootstrapComponent
   ],
   imports: [
-    BrowserModule,
-    ExtAngularModernModule
+    BrowserModule, ExtAngularModule
   ],
-  providers: [
-    ExtAngularService
-  ],
-  	entryComponents: [
-		AppComponent
-	],
-  bootstrap: [App]
+  providers: [ExtAngularBootstrapService],
+  bootstrap: [ExtAngularBootstrapComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(extAngularService : ExtAngularBootstrapService) {
+    extAngularService.setBootStrapComponent(AppComponent)
+  }
+}
+```
 
 in src/app.component.ts
 
-    <div style="text-align:center">
-      <button [text]="'Example ExtAngular Button'"></button>
-    </div>
+```
+  template: `
+  <div style="text-align:center">
+    <button [text]="title"></button>
+  </div>
+  `,
+```
 
 in src/index.html
 
-<!doctype html>
+```
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>ExtAngularClient</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="build/ext-angular/ext.css" rel="stylesheet">
-</head>
-<body>
-  <app-root></app-root>
-  <script type="text/javascript" src="build/ext-angular/ext.js"></script>
-</body>
+  <head>
+    <title>ExtAngular Boilerplate</title>
+    <meta charset="UTF-8">
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
 </html>
+```
 
 run: npm install
 run: npm start

@@ -1,4 +1,4 @@
-<container fullscreen="true" [layout]="'fit'">
+<container [fullscreen]="true" layout="fit">
 
   <titlebar [title]="title" docked="top">
     <button align="left" *ngIf="isPhone" iconCls="x-fa fa-bars" [handler]="this.toggleAppMenu" ripple="false"></button>
@@ -15,7 +15,7 @@
     </treelist>
   </panel>
 
-  <container [fitToParent]="true" [layout]="'fit'" [padding]="30">
+  <container>
     <router-outlet #extroute></router-outlet>
   </container>
 

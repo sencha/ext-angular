@@ -1,21 +1,29 @@
-<container padding="10" [fitToParent]="true">
-  <lockedgrid title="Locking Grid" [store]="store" [shadow]="true" width="700" height="400">
-    <column 
+<container padding="10" layout="fit" [fitToParent]="true">
+  <lockedgrid title="Locking Grid" [store]="store" [shadow]="true">
+    <column
+      [locked]="true"
       text="Company"
+      width="200"
       [dataIndex]="'name'"
-      width="150"
-      [locked]="true">
+      minwidth="100"
+      [menu]="{
+        customFirst: {
+          text: 'Custom First',
+          weight: -200,
+          handler: 'onCustomFirst.bind(this)'
+        },
+        customLast: {
+          text: 'Custom Last',
+          separator: true,
+          handler: 'onCustomLast.bind(this)'
+        }
+      }"
+      >
     </column>
+    <column [locked]="true" text="Price" width="75" dataIndex="price" formatter="usMoney" summary="average"></column>
+    <column locked="left" [cell]="leftLockedColumnCell"></column>
+    <column [locked]="right" text="Change" width="90" dataIndex="priceChange" [renderer]="this.renderSign.bind(this, '0.00')" summary="max"></column>
+    <column text="% Change" width="100" dataIndex="priceChangePct" [renderer]="this.renderSign.bind(this, '0.00')" summary="average"></column>
+    <column text="Last Updated" width="125" dataIndex="priceLastChange" formatter="date('m/d/Y')" summary="max"></column>
   </lockedgrid>
 </container>
-
-<!--
-
-      [summaryRenderer]="this.summarizeCompanies"
-
-<column text="Price" width="75" dataIndex="price" formatter="usMoney" summary="average" [locked]="true"></column>
-<column locked="left" [cell]="leftLockedColumnCell"></column>
-<column text="Change" width="90" dataIndex="priceChange" [renderer]="this.renderSign.bind(this, '0.00')" summary="max" [locked]="right"></column>
-<column text="% Change" width="100" dataIndex="priceChangePct" [renderer]="this.renderSign.bind(this, '0.00')" summary="average"></column>
-<column text="Last Updated" width="125" dataIndex="priceLastChange" formatter="date('m/d/Y')" summary="max"></column>
--->

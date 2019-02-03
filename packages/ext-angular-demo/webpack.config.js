@@ -29,7 +29,6 @@ module.exports = function (env) {
   var treeshake = env.treeshake ? JSON.parse(env.treeshake) : false
   var basehref = env.basehref || '/'
   var mode = isProd ? 'production': 'development'
- 
 
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
@@ -55,10 +54,7 @@ module.exports = function (env) {
         environment: buildenvironment, 
         verbose: buildverbose,
         theme: 'theme-material',
-        packages: [
-          'ux',
-          'treegrid'
-        ]
+        packages: []
       }),
       new webpack.ContextReplacementPlugin(
           /\@angular(\\|\/)core(\\|\/)fesm5/,
@@ -69,15 +65,16 @@ module.exports = function (env) {
       })
     ]
     return {
-      mode: 'development',
+      mode: mode,
+      devtool: (mode === 'development') ? 'inline-source-map' : false,
+      context: path.join(__dirname, './src'),
       entry: {
         polyfills: "./polyfills.ts",
         main: "./main.ts"
       },
-      context: path.join(__dirname, './src'),
       output: {
         path: path.resolve(__dirname, 'build'),
-        filename: "[name].js"
+        filename: "[name].[chunkhash:20].js"
       },
       module: {
         rules: [
@@ -88,9 +85,8 @@ module.exports = function (env) {
           //{test: /\.scss$/,loader: ["raw-loader", "sass-loader?sourceMap"]}
         ]
       },
-      plugins,
+      plugins: plugins,
       node: false,
-      devtool: "source-map",
       devServer: {
         contentBase: './build',
         historyApiFallback: true,

@@ -1,6 +1,14 @@
 declare var Ext: any;
 import {Component} from '@angular/core';
 
+Ext.require([
+  'Ext.ux.gauge.Gauge',
+  'Ext.ux.gauge.needle.Wedge',
+  'Ext.ux.gauge.needle.Diamond',
+  'Ext.ux.gauge.needle.Spike',
+  'Ext.ux.gauge.needle.Arrow'
+])
+
 @Component({
   selector: 'needle-gauge-component',
   templateUrl: './NeedleGauge.html',

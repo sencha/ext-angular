@@ -100,14 +100,22 @@ var base = /** @class */ (function () {
         this.q = null;
         this._nativeElement = nativeElement;
         this._hostComponent = hostComponent;
-        metaData.EVENTS.forEach(function (event, n) {
-            if (event.name != 'fullscreen') {
-                ((/** @type {?} */ (_this)))[event.name] = new EventEmitter();
+        metaData.EVENTNAMES.forEach(function (event, n) {
+            if (event != 'fullscreen') {
+                ((/** @type {?} */ (_this)))[event] = new EventEmitter();
             }
             else {
-                ((/** @type {?} */ (_this)))[event.name + 'event'] = new EventEmitter();
+                ((/** @type {?} */ (_this)))[event + 'event'] = new EventEmitter();
             }
         });
+        //    metaData.EVENTS.forEach( (event: any, n: any) => {
+        //      if (event.name != 'fullscreen') {
+        //        (<any>this)[event.name] = new EventEmitter()
+        //      }
+        //      else {
+        //        (<any>this)[event.name + 'event'] = new EventEmitter()
+        //      }
+        //    })
         //    let f = this.ngOnDestroy;
         //    this.ngOnDestroy = () => {
         //      f();
@@ -314,7 +322,7 @@ var base = /** @class */ (function () {
                 return;
             }
         }
-        if (parentxtype === 'grid') {
+        if (parentxtype === 'grid' || parentxtype === 'lockedgrid') {
             if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn' || childxtype === 'booleancolumn') {
                 parentCmp.addColumn(childCmp);
             }

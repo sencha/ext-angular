@@ -18,9 +18,6 @@ export function getValidateOptions() {
       "packages":    {"type": [ "string", "array" ]}
     },
     "additionalProperties": false
-    // "errorMessage": {
-    //   "option": "should be {Boolean} (https:/github.com/org/repo#anchor)"
-    // }
   }
 }
 
@@ -108,9 +105,12 @@ export function extractFromSource(module, options, compilation, extComponents) {
                 if (end >= 0) {
                   var xtype = toXtype(start.substring(1, end))
                   if(extComponents.includes(xtype)) {
-                    var type = {xtype: xtype}
-                    let config = JSON.stringify(type)
-                    statements.push(`Ext.create(${config})`)
+                    var theValue = node.value.toLowerCase()
+                    if (theValue.indexOf('doctype html') == -1) {
+                      var type = {xtype: xtype}
+                      let config = JSON.stringify(type)
+                      statements.push(`Ext.create(${config})`)
+                    }
                   }
                   i += end
                 }

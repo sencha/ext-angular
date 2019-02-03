@@ -29,7 +29,7 @@ module.exports = function (env) {
   var treeshake = env.treeshake ? JSON.parse(env.treeshake) : false
   var basehref = env.basehref || '/'
   var mode = isProd ? 'production': 'development'
-
+  
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
     const plugins = [
@@ -69,16 +69,22 @@ module.exports = function (env) {
       })
     ]
     return {
-      mode,
+      mode: mode,
+      devtool: (mode === 'development') ? 'inline-source-map' : false,
+      context: path.join(__dirname, './src'),
       entry: {
         polyfills: "./polyfills.ts",
         main: "./main.ts"
       },
-      context: path.join(__dirname, './src'),
       output: {
         path: path.resolve(__dirname, 'build'),
-        filename: "[name].js"
+        filename: "[name].[chunkhash:20].js"
       },
+
+      watch: false,
+      watchOptions: { poll: undefined },
+      performance: { hints: false },
+
       module: {
         rules: [
           {test: /\.(png|svg|jpg|jpeg|gif)$/, use: ['file-loader']},
@@ -88,9 +94,31 @@ module.exports = function (env) {
           //{test: /\.scss$/,loader: ["raw-loader", "sass-loader?sourceMap"]}
         ]
       },
-      plugins,
+      optimization: {
+        noEmitOnErrors: true
+      },
+      plugins: plugins,
       node: false,
-      devtool: "source-map",
+      stats:
+      { colors: true,
+        hash: false,
+        timings: false,
+        chunks: true,
+        chunkModules: false,
+        children: false,
+        modules: false,
+        reasons: false,
+        warnings: true,
+        errors: true,
+        assets: true,
+        version: false,
+        errorDetails: false,
+        moduleTrace: false
+      },
+
+
+
+
       devServer: {
         contentBase: './build',
         historyApiFallback: true,
@@ -100,20 +128,24 @@ module.exports = function (env) {
         disableHostCheck: false,
         compress: isProd,
         inline: !isProd,
-        stats: {
-          assets: false,
-          children: false,
-          chunks: false,
+
+        stats:
+        { colors: true,
           hash: false,
-          modules: false,
-          publicPath: false,
           timings: false,
+          chunks: true,
+          chunkModules: false,
+          children: false,
+          modules: false,
+          reasons: false,
+          warnings: true,
+          errors: true,
+          assets: true,
           version: false,
-          warnings: false,
-          colors: {
-            green: '\u001b[32m'
-          }
-        }
+          errorDetails: false,
+          moduleTrace: false } ,
+     
+
       }
     }
   })
