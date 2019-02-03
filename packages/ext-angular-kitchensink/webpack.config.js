@@ -29,12 +29,9 @@ module.exports = function (env) {
   if (env.treeshake == undefined) {env.treeshake = false}
   var treeshake = env.treeshake ? JSON.parse(env.treeshake) : false
   var basehref = env.basehref || '/'
-  var mode = isProd ? 'production': 'development'
-  console.log('mode')
-  console.log(mode)
+  //var mode = isProd ? 'production': 'development'
+  var mode = 'development'
   var devtool = (mode === 'development') ? 'inline-source-map' : false
-  console.log('devtool')
-  console.log(devtool)
 
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
@@ -82,7 +79,6 @@ module.exports = function (env) {
           parallel: true
         }
       }),
-
       new webpack.ContextReplacementPlugin(
           /\@angular(\\|\/)core(\\|\/)fesm5/,
           path.resolve(__dirname, 'src'),{}
