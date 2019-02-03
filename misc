@@ -1,3 +1,5 @@
+@angular-devkit/build-webpack/src/webpack/index.js/runWebpack
+
 git remote add upstream https://github.com/sencha/ext-angular.git
 
     <base href="/">

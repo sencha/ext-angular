@@ -29,14 +29,25 @@ export class base {
     this.q = null
     this._nativeElement = nativeElement
     this._hostComponent = hostComponent
-    metaData.EVENTS.forEach( (event: any, n: any) => {
-      if (event.name != 'fullscreen') {
-        (<any>this)[event.name] = new EventEmitter()
+
+    metaData.EVENTNAMES.forEach( (event: any, n: any) => {
+      if (event != 'fullscreen') {
+        (<any>this)[event] = new EventEmitter()
       }
       else {
-        (<any>this)[event.name + 'event'] = new EventEmitter()
+        (<any>this)[event + 'event'] = new EventEmitter()
       }
     })
+
+
+//    metaData.EVENTS.forEach( (event: any, n: any) => {
+//      if (event.name != 'fullscreen') {
+//        (<any>this)[event.name] = new EventEmitter()
+//      }
+//      else {
+//        (<any>this)[event.name + 'event'] = new EventEmitter()
+//      }
+//    })
 
 //    let f = this.ngOnDestroy;
 //    this.ngOnDestroy = () => {
@@ -120,6 +131,7 @@ export class base {
       })
     }
 
+
     if (this._nativeElement.parentElement != null) {
       o.renderTo = this._nativeElement
     }
@@ -202,7 +214,7 @@ export class base {
         return
       }
     }
-      if (parentxtype === 'grid') {
+      if (parentxtype === 'grid' || parentxtype === 'lockedgrid') {
         if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn' || childxtype === 'booleancolumn' ) {
           parentCmp.addColumn(childCmp)
         }

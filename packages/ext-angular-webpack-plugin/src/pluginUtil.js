@@ -43,6 +43,7 @@ export function _constructor(options) {
     {thisVars.production = true}
   else 
     {thisVars.production = false}
+  logv(options, `thisVars - ${JSON.stringify(thisVars)}`)
 
   log(require('./pluginUtil')._getVersions(thisVars.app, thisVars.pluginName, thisVars.framework))
   log(thisVars.app + 'Building for ' + thisOptions.environment)
@@ -313,9 +314,9 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
     vars.firstTime = false
     var js = ''
     if (vars.production) {
-      if (!vars.deps.includes('Ext.require("Ext.layout.*");\n')) {
-        vars.deps.push('Ext.require("Ext.layout.*");\n')
-      }
+      // if (!vars.deps.includes('Ext.require("Ext.layout.*");\n')) {
+      //   vars.deps.push('Ext.require("Ext.layout.*");\n')
+      // }
       js = vars.deps.join(';\n');
     }
     else {

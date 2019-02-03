@@ -1,16 +1,13 @@
+<container padding="10" layout="fit" [fitToParent]="true">
 <list 
-    docked="bottom"
     (ready)="listReady($event)"
     [shadow]="true"
     [itemTpl]="tpl"
     [store]="store"
     [plugins]="[{type: 'listpaging'}]"
     (select)="onSelect($event)"
-    [platformConfig]="{
-        '!phone': {height: 450, width: 300}
-    }"
 >
-    <container  [docked]="'top'"
+    <container [docked]="'top'"
     >
         <container layout="hbox" >    
             <div  style='padding:15px;'>
@@ -31,3 +28,4 @@
         </segmentedbutton>
     </container>
 </list>
+</container>

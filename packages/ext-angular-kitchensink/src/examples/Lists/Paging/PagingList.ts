@@ -1,18 +1,18 @@
-import {Component, OnInit, OnChanges} from '@angular/core'
-
-declare var require: any;
 declare var Ext: any;
-
+import {Component, OnChanges} from '@angular/core'
+declare var require: any;
 require('../stocks');
+
+Ext.require([
+  'Ext.dataview.plugin.ListPaging'
+])
 
 @Component({
   selector: 'paginglist-component',
   templateUrl: "./PagingList.html",
   styles: [``]
 })
-export class PagingListComponent implements OnInit, OnChanges  {
-
-  constructor() {}
+export class PagingListComponent implements OnChanges  {
 
   tpl = `<div>{name}</div>`;
 
@@ -44,8 +44,6 @@ export class PagingListComponent implements OnInit, OnChanges  {
   listReady = (ele) => {
     this.listRef = ele.ext.el;
   }
-
-  ngOnInit() {}
 
   ngOnChanges(changes) {
     console.log(changes);

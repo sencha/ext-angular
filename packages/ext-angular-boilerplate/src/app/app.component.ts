@@ -1,8 +1,15 @@
+declare var Ext: any;
 import { Component, VERSION } from '@angular/core'
 import { Router } from '@angular/router'
 
-declare var Ext: any;
-Ext.require('Ext.data.TreeStore')
+Ext.require([
+  'Ext.layout.*',
+//  'Ext.MessageBox',
+//  'Ext.Toast',
+//  'Ext.panel.Collapser',
+  'Ext.data.TreeStore'
+])
+
 @Component({
 	selector: 'app-root',
 	templateUrl: 'app.component.html',

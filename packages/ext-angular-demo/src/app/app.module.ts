@@ -7,10 +7,10 @@ import { ExtAngularBootstrapService } from '@sencha/ext-angular/esm5/lib/ext-ang
 import { ExtAngularBootstrapComponent } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.component'
 
 import { AppComponent } from './app.component'
-import {ButtonComponent} from "./Button/Button"
+
 @NgModule({
   imports:         [BrowserModule, ExtAngularModule],
-  declarations:    [ExtAngularBootstrapComponent, AppComponent, ButtonComponent,],
+  declarations:    [ExtAngularBootstrapComponent, AppComponent ],
   providers:       [ExtAngularBootstrapService],
   entryComponents: [AppComponent],
   bootstrap:       [ExtAngularBootstrapComponent]

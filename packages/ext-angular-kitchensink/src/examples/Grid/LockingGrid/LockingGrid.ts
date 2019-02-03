@@ -29,6 +29,22 @@ export class LockingGridComponent {
     Ext.Msg.alert('Decline', info.record.get('name'));
   }
 
+  onCustomFirst = () => {
+    Ext.Msg.alert('Custom Menu', 'Clicked first custom column menu item');
+  }
+
+  onCustomLast = () => {
+      Ext.Msg.alert('Custom Menu', 'Clicked last custom column menu item');
+  }
+
+  renderChange = (value) => {
+    return this.renderSign(value, '0.00');
+  }
+
+  renderPercent = (value) => {
+      return this.renderSign(value, '0.00%');
+  }
+
   renderSign = (format, value) => {
      return Ext.util.Format.number(value, format);    
    }
