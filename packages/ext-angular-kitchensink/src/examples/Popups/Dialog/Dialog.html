@@ -1,9 +1,9 @@
-<container >
+<container [padding]="10" [fitToParent]="true">
   <button [text]="'Show dialog'" (tap)="showDialog()" [ui]="'action raised'"></button>
   <dialog
     [displayed]="isDialogShowing"
     [title]="'Dialog'"
-    [closable]="true"
+    [closable]="false"
     [maximizable]="true"
     [closeAction]="'hide'"
     [maskTapHandler]="onCancel"
@@ -13,7 +13,7 @@
     (onHide)="onHide()"
     [html] = "'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore 
     magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'">
-    <button [text]="'Cancel'" (tap)="onCancel()"></button>
-    <button [id]="'ok'" [text]="'OK'" (ready)="onOkButtonReady($event)" (tap)="onOk()"></button>
+    <button text="Cancel" (tap)="onCancel()"></button>
+    <button [id]="'ok'" text="OK" (tap)="onOk()"></button>
   </dialog>
 </container>

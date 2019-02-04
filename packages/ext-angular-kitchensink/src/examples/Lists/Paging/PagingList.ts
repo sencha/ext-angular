@@ -1,5 +1,5 @@
 declare var Ext: any;
-import {Component, OnChanges} from '@angular/core'
+import {Component} from '@angular/core'
 declare var require: any;
 require('../stocks');
 
@@ -12,7 +12,7 @@ Ext.require([
   templateUrl: "./PagingList.html",
   styles: [``]
 })
-export class PagingListComponent implements OnChanges  {
+export class PagingListComponent {
 
   tpl = `<div>{name}</div>`;
 
@@ -25,7 +25,6 @@ export class PagingListComponent implements OnChanges  {
       reader: {
         type: 'json',
         rootProperty: 'data',
-        // Do not attempt to load orders inline. They are loaded through the proxy
         implicitIncludes: false
       },
       extraParams: {
@@ -35,24 +34,19 @@ export class PagingListComponent implements OnChanges  {
   });
 
   bufferZone:boolean = false;
-  listRef:any;
-
-  setBufferZone = (val) => {
-    this.bufferZone = val;
+  setBufferZone = (value) => {
+    this.bufferZone = value;
+    var store = this.list.getStore()
+    var plugin = this.list.findPlugin('listpaging');
+    store.removeAll();
+    plugin.setAutoPaging(value !== false);
+    plugin.setBufferZone(value || 0);
+    store.loadPage(1);
   }
 
+  list: any;
   listReady = (ele) => {
-    this.listRef = ele.ext.el;
-  }
-
-  ngOnChanges(changes) {
-    console.log(changes);
-    // if (prevState.bufferZone !== bufferZone) {
-        const plugin = this.listRef.findPlugin('listpaging');
-        // console.log('got here');
-        // plugin.setAutoPaging(bufferZone !== false);
-        // plugin.setBufferZone(bufferZone);
-    // }
+    this.list = ele.ext;
   }
 
 }
