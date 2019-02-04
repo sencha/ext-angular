@@ -1,15 +1,12 @@
-import {Component, OnInit} from '@angular/core'
-
 declare var Ext: any;
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'simple-dragdrop-component',
   templateUrl: "./Simple.html",
   styles: [``]
 })
-export class SimpleDragDropComponent implements OnInit  {
-
-  constructor() { }
+export class SimpleDragDropComponent {
 
   dragText:any = Ext.String.format('Drag Me!');
 
@@ -46,7 +43,5 @@ export class SimpleDragDropComponent implements OnInit  {
         dragmove: this.onDragMove.bind(this)
     }
   });
-
-  ngOnInit() {}
 
 }

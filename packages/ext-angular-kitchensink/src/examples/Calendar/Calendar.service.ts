@@ -6,7 +6,6 @@ declare var KitchenSink: any;
 export class CalendarService {
 
   constructor() {
-    console.log("Constructor called");
     this.init();
   }
 
@@ -496,7 +495,6 @@ export class CalendarService {
         });
       })
 
-
       Ext.define('KitchenSink.data.calendar.Timezone', {}, function () {
         var U = KitchenSink.data.calendar.Util,
           D = Ext.Date,
@@ -547,7 +545,6 @@ export class CalendarService {
           }
         });
       });
-
 
       Ext.define('Kitchensink.data.calendar.Week', {}, function () {
         var U = KitchenSink.data.calendar.Util,
@@ -641,17 +638,7 @@ export class CalendarService {
           }
         });
       });
-
-
-
-
-
-
     });
-
-
   }
-
-
 
 }

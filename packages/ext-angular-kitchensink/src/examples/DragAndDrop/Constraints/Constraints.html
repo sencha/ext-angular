@@ -1,30 +1,34 @@
-<panel 
-  [padding]="5"
-  [fitToParent]="true"
-  [shadow]="true"
-  (ready)="parentReady($event)"
->
-    <container  (ready)="elementReady($event)" [cls]="'dand-constraints-dragCt'">
-        <container 
-            (ready)="toParentReady($event)"
-            [cls]="'dand-constraints-item dand-constraints-to-parent'"
-            [html]="'To parent'"
-        ></container>
+<container padding="10" layout="fit" [fitToParent]="true">
+  <panel 
+    [padding]="5"
+    [shadow]="true"
+    (ready)="parentReady($event)">
+
+    <container (ready)="elementReady($event)" [cls]="'dand-constraints-dragCt'">
+      <container 
+        (ready)="toParentReady($event)"
+        [cls]="'dand-constraints-item dand-constraints-to-parent'"
+        [html]="'To parent'">
+      </container>
     </container>
 
     <container 
-        (ready)="verticalReady($event)"
-        [cls]="'dand-constraints-item dand-constraints-vertical'"
-        [html]="'Vertical'"
-    ></container>
+      (ready)="verticalReady($event)"
+      [cls]="'dand-constraints-item dand-constraints-vertical'"
+      [html]="'Vertical'">
+    </container>
+
     <container 
-        (ready)="horizontalReady($event)"
-        [cls]="'dand-constraints-item dand-constraints-horizontal'"
-        [html]="'Horizontal'"
-    ></container>
+      (ready)="horizontalReady($event)"
+      [cls]="'dand-constraints-item dand-constraints-horizontal'"
+      [html]="'Horizontal'">
+    </container>
+
     <container 
-        (ready)="snapReady($event)"
-        [cls]="'dand-constraints-item dand-constraints-snap'"
-        [html]="'snap: 60,50'"
-    ></container>
-</panel>
+      (ready)="snapReady($event)"
+      [cls]="'dand-constraints-item dand-constraints-snap'"
+      [html]="'snap: 60,50'">
+    </container>
+
+  </panel>
+</container>

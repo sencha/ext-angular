@@ -18,7 +18,7 @@
   "devDependencies": {
     "d3": "4.5.0",
     "angular-highlight-js":"^2.0.1",
-    "highlight.js": "^9.13.1",
+    "highlight.js": "^9.14.2",
  
     "@sencha/ext-angular": "~6.7.0",
     "@sencha/ext-angular-webpack-plugin": "~6.7.0",
@@ -70,7 +70,7 @@
     "webpack-shell-plugin-next": "^0.6.4",
     "webpack-merge": "~4.2.1",
 
-    "webpack": "^4.29.0",
+    "webpack": "^4.29.1",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14"
   },

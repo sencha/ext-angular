@@ -1,11 +1,5 @@
-<panel
-[layout]="'fit'"
-[shadow]="true"
-[fitToParent]="true"
-
->
-<calendar-day
-       
+<container padding="10" layout="fit" [fitToParent]="true">
+  <calendar-day
     [startTime]="8"
     [endTime]="18"
     [visibleDays]="2"
@@ -14,7 +8,6 @@
     [store]="this.store"
     [value]="calDayValue"
     (ready)="calendarDayReady($event)"
-    [listeners]="myCalListeners"
-     >
-    </calendar-day>
-</panel>
+    [listeners]="myCalListeners">
+  </calendar-day>
+</container>

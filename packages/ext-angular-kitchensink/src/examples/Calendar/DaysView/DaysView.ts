@@ -8,19 +8,17 @@ import {CalendarService} from '../Calendar.service';
 })
 export class CalendarDaysViewComponent {
 
-    store = Ext.create('Ext.calendar.store.Calendars', {
-        autoLoad: true,
-        proxy: {
-            type: 'ajax',
-            url: '/KitchenSink/CalendarDays'
-        }
-    })
+  store = Ext.create('Ext.calendar.store.Calendars', {
+    autoLoad: true,
+    proxy: {
+      type: 'ajax',
+      url: '/KitchenSink/CalendarDays'
+    }
+  })
 
- panelTitle =  Ext.Date.format(new Date(), 'F Y');
- calendarDaysValue = new Date();
+  panelTitle =  Ext.Date.format(new Date(), 'F Y');
+  calendarDaysValue = new Date();
 
-  constructor(private calService: CalendarService) { 
-      console.log("Calendar panel component constructor invoked");
-  }
+  constructor(private calService: CalendarService) {}
 
 }

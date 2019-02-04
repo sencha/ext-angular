@@ -1,23 +1,17 @@
 <container padding="10" layout="fit" [fitToParent]="true">
-<tabpanel 
+  <tabpanel 
     [width]="400"
     [flex]="1"
     [shadow]="true"
     [tabBar]="{layout: {pack: 'start',overflow: 'scroller'}}"
-    [defaults]="{
-        layout: 'center',
-        cls: 'card',
-        bodyPadding: 0
-    }">
-    <panel [flex]="1"   [title]="'Home'" [layout]="'center'" [width]="100">
-      <container  width="'100%'" html="'You can set <code>{layout: { overflow: \'scroller\' }}</code> on the <code>tabBar</code> prop in combination with a <code>minWidth</code> on each tab to make the tab bar scroll when it runs out of room.'">
-      </container>
+    [defaults]="{layout: 'center', cls: 'card', bodyPadding: 0}">
+    <panel [flex]="1" [title]="'Home'" [layout]="'center'" [width]="100">
+      <container [width]="'100%'" [html]="'You can set <code>{layout: { overflow: \'scroller\' }}</code> on the <code>tabBar</code> prop in combination with a <code>minWidth</code> on each tab to make the tab bar scroll when it runs out of room.'"></container>
     </panel>
-    <panel [flex]="1"   [title]="'Politics'" [layout]="'center'" ><container  html="Politics"></container></panel>
-    <panel [flex]="1"   [title]="'Entertainment'" [layout]="'center'" ><container  html="Entertainment"></container></panel>
-    <panel [flex]="1"   [title]="'World'" [layout]="'center'" ><container  html="World"></container></panel>
-    <panel [flex]="1"   [title]="'Markets'" [layout]="'center'" ><container  html="Markets"></container></panel>
-    <panel [flex]="1"   [title]="'Sports'" [layout]="'center'" ><container  html="Sports"></container></panel>
-</tabpanel>
+    <panel [flex]="1" [title]="'Politics'" [layout]="'center'" ><container  [html]="'Politics'"></container></panel>
+    <panel [flex]="1" [title]="'Entertainment'" [layout]="'center'" ><container [width]="'100%'" [html]="'Entertainment'"></container></panel>
+    <panel [flex]="1" [title]="'World'" [layout]="'center'" ><container [width]="'100%'" html="World"></container></panel>
+    <panel [flex]="1" [title]="'Markets'" [layout]="'center'" ><container [width]="'100%'" html="Markets"></container></panel>
+    <panel [flex]="1" [title]="'Sports'" [layout]="'center'" ><container [width]="'100%'" html="Sports"></container></panel>
+  </tabpanel>
 </container>
-

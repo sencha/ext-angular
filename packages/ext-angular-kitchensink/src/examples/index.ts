@@ -79,7 +79,7 @@ import {FormLayoutComponent} from './Layouts/FormLayout/FormLayout';
 import {ResizableLayoutComponent} from './Layouts/ResizableLayout/ResizableLayout';
 import {vboxLayoutComponent} from './Layouts/vboxLayout/vboxLayout';
 
-import {BasicGaugeChartComponent} from './Charts/Gauge/BasicGaugeChart/BasicGaugeChart';
+import {BasicGaugeChartComponent} from './Charts/Gauges/BasicGaugeChart/BasicGaugeChart';
 import {BoxPlotComponent} from './Charts/BoxPlot/BoxPlot';
 import {NavigatorComponent} from './Charts/Navigator/Navigator';
 import {BasicScatterComponent} from './Charts/Scatter/BasicScatter/BasicScatter';
@@ -178,7 +178,7 @@ import {BasicTabComponent} from './Tabs/BasicTab/BasicTab';
 import {BottomTabComponent} from './Tabs/BottomTab/BottomTab';
 import {IconTabComponent} from './Tabs/IconTab/IconTab';
 import {DesktopTabComponent} from './Tabs/DesktopTab/DesktopTab';
-import {CloseableTabComponent} from './Tabs/Closeable/Closeable';
+import {ClosableTabComponent} from './Tabs/Closable/Closable';
 import {ScrollingTabComponent} from './Tabs/Scrolling/Scrolling';
 import {TabBarComponent} from './Tabs/TabBar/TabBar';
 
@@ -291,9 +291,9 @@ const treeRoot = {
                 { text: 'Bottom Tabs', component: BottomTabComponent, navIcon: 'icon-bottom-tabs' },
                 { text: 'Icon Tabs', component: IconTabComponent, navIcon: 'icon-icon-tabs' },
                 { text: 'Desktop Tabs', component: DesktopTabComponent, navIcon: 'icon-Desktop-Tabs' },
-                { text: 'Closable', component: CloseableTabComponent, navIcon: 'icon-Closable-Tabs' },
+                { text: 'Closable', component: ClosableTabComponent, navIcon: 'icon-Closable-Tabs' },
                 { text: 'ScrollingTabs', component: ScrollingTabComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Scrolling-Tabs' },
-                { text: 'TabBar', component: TabBarComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Tab-Bar' }        
+                { text: 'TabBar', component: TabBarComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Tab-Bar' }
             ]},
             { text: 'TitleBar', component: TitleBarComponent, navIcon: 'icon-Title-Bar' },
             { text: 'Toolbar', component: ToolBarComponent, navIcon: 'icon-toolbar' },

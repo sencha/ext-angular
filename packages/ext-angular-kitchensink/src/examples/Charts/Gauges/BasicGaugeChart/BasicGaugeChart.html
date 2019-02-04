@@ -1,4 +1,4 @@
-<container [padding]="!isPhone ? 15 : 0" layout="fit" [fitToParent]="true">
+<container [padding]="!isPhone ? 10 : 0" layout="fit" [fitToParent]="true">
 
   <container docked="top"><div #extitem>
     <chart-toolbar
@@ -7,7 +7,7 @@
     </chart-toolbar>
   </div></container>
 
-  <panel shadow="true" layout="vbox" [width]="'800px'">
+  <panel shadow="true" layout="vbox">
     <polar
       innerPadding="20"
       [store]="this.store"
@@ -19,8 +19,8 @@
       innerPadding="20"
       [store]="this.store"
       flex="1"
-      [series]="polarSeries2"
-      [animation]="{ easing: 'elasticIn', duration: 1000 }">
+      [animation]="{ easing: 'elasticIn', duration: 1000 }"
+      [series]="polarSeries2">
     </polar>
   </panel>
 

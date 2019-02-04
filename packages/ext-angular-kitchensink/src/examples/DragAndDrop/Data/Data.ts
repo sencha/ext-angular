@@ -1,6 +1,5 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core'
-
 declare var Ext: any;
+import {Component, ViewEncapsulation} from '@angular/core'
 
 Ext.require(['Ext.drag.*'])
 
@@ -11,9 +10,7 @@ Ext.require(['Ext.drag.*'])
   encapsulation: ViewEncapsulation.None
 })
 
-export class DataDragDropComponent implements OnInit  {
-
-  constructor() { }
+export class DataDragDropComponent {
 
   parentRef: any;
   sourceRef: any;
@@ -69,7 +66,5 @@ export class DataDragDropComponent implements OnInit  {
         }
     }
   });
-
-  ngOnInit() {}
 
 }
