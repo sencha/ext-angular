@@ -25,30 +25,25 @@ export const model = Ext.define('KitchenSink.model.Company', {
     {
       name: 'trend',
       calculate: function(data) {
-          // Avoid circular dependency by hiding the read of trend value
-          const record = data;
-          const trend = Array.from(record['trend'] || []);
-
-          trend.push(data.price);
-
-          if (trend.length === 1) {
-              //let's start the trend off with a change
-              trend.push(data.price + data.priceChange);
-          }
-
-          if (trend.length > 10) {
-              trend.shift();
-          }
-
-          record.trend = trend;
-
-          return trend;
+        // Avoid circular dependency by hiding the read of trend value
+        const record = data;
+        const trend = Array.from(record['trend'] || []);
+        trend.push(data.price);
+        if (trend.length === 1) {
+          //let's start the trend off with a change
+          trend.push(data.price + data.priceChange);
+        }
+        if (trend.length > 10) {
+          trend.shift();
+        }
+        record.trend = trend;
+        return trend;
       },
       
       // It's the same array. But we need Model#set to see it as modified so it
       // is flushed to the UI
       isEqual: function() {
-          return false;
+        return false;
       }
     },
     
@@ -58,8 +53,7 @@ export const model = Ext.define('KitchenSink.model.Company', {
       type: 'float',
       calculate: function(data) {
         var trend = data.trend,
-            len = trend.length;
-
+          len = trend.length;
         return len > 1 ? trend[len - 1] - trend[len - 2] : 0;
       }
     },
@@ -69,10 +63,9 @@ export const model = Ext.define('KitchenSink.model.Company', {
       name: 'pctChange',
       type: 'float',
       calculate: function(data) {
-          var trend = data.trend,
-              len = trend.length;
-
-          return len > 1 ? (data.change / trend[len - 2]) * 100 : 0;
+        var trend = data.trend,
+            len = trend.length;
+        return len > 1 ? (data.change / trend[len - 2]) * 100 : 0;
       }
     },
     
@@ -81,10 +74,9 @@ export const model = Ext.define('KitchenSink.model.Company', {
       name: 'lastChange',
       type: 'date',
       calculate: function(data) {
-          // Signal that we are dependent upon price so we get recaulculated when price changes
-          data.price;
-
-          return new Date();
+        // Signal that we are dependent upon price so we get recaulculated when price changes
+        data.price;
+        return new Date();
       }
     },
     {name: 'industry'},
@@ -94,9 +86,8 @@ export const model = Ext.define('KitchenSink.model.Company', {
       name: 'rating',
       type: 'int',
       calculate: function(data) {
-          var pct = data.pctChange;
-
-          return (pct < 0) ? 2 : ((pct < 1) ? 1 : 0);
+        var pct = data.pctChange;
+        return (pct < 0) ? 2 : ((pct < 1) ? 1 : 0);
       }
     }
   ],

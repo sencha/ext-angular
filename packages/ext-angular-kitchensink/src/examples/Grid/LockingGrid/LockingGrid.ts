@@ -1,6 +1,6 @@
 declare var Ext: any;
 import { Component } from '@angular/core';
-import {model} from '../CompanyModel'
+import { model } from '../CompanyModel'
 
 @Component({
   selector: 'LockingGrid-component',
@@ -9,10 +9,10 @@ import {model} from '../CompanyModel'
 })
 export class LockingGridComponent {
 
-  store = Ext.create('Ext.data.Store', {
+  companies = Ext.create('Ext.data.Store', {
     model,
     autoLoad: true,
-    pageSize: 0,
+//    pageSize: 0,
     proxy: {
       type: 'ajax',
       url: 'resources/data/CompanyData.json'

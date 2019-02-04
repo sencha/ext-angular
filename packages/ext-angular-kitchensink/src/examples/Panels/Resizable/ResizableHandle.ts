@@ -1,6 +1,7 @@
 declare var Ext: any;
-import {Component} from '@angular/core'
-import {mediumText} from '../../dummy';
+import { Component } from '@angular/core'
+import { mediumText } from '../../dummy';
+//https://www.sencha.com/forum/showthread.php?468441-6-5-Modern-Resizable-panel-throw-an-exception-when-dragging-ne-se-sw-nw-handles
 
 @Component({
   selector: 'resizable-panel-component',
@@ -10,10 +11,7 @@ import {mediumText} from '../../dummy';
 
 export class ResizableHandleComponent {
 
-  panelRef:any;
   doDynamically:boolean = false;
-  mediumText = mediumText;
-  
   toggleDynamic = (event) => {
     this.doDynamically = event.newValue;
   }

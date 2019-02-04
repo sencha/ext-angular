@@ -2,10 +2,13 @@
   <panel 
     [title]="'Resize Me'"
     [shadow]="true"
+    [border]="true"
+    [left]="100"
+    [top]="100"
     [width]="400"
+    [height]="400"
     [resizable]="{edges: 'all', dynamic: doDynamically}"
-    [bodyPadding]="10"
-    [centered]="true">
+    [bodyPadding]="10">
     <toolbar  [docked]="'top'">
       <checkboxfield 
         [checked]="doDynamically"
@@ -13,8 +16,18 @@
         [boxLabel]="'Dynamic'">
       </checkboxfield>
     </toolbar>
+    <container>
+      <span #extitem>
+          mediumText
+      </span>
+    </container>
     <container
       [html]="mediumText">
     </container>
   </panel>
 </container>
+
+<!--
+      [resizable]="{edges: 'all', dynamic: doDynamically}"
+
+-->
