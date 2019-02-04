@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Ext JS Tester</title>
+    <meta charset="UTF-8">
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes">
+    <link href="ext.css" rel="stylesheet">
+    <script type="text/javascript" src="ext.js"></script>
+</head>
+  <script>
+
+    Ext.application({
+        name: "$ExtAngularApp",
+        quickTips: true,
+        launch: function () {
+          var store = {
+            autoLoad: true,
+            fields: ['name', 'email', 'phone'],
+            data: [
+              { name: 'Lisa', email: 'lisa@simpsons.com', phone: '555-111-1224' },
+              { name: 'Bart', email: 'bart@simpsons.com', phone: '555-222-1234' },
+              { name: 'Homer', email: 'homer@simpsons.com', phone: '555-222-1244' },
+              { name: 'Marge', email: 'marge@simpsons.com', phone: '555-222-1254' }
+            ]
+          }
+
+          // var o1 = {
+          //   xtype: 'lockedgrid',
+          //   store: store,
+          //   columns: [
+          //     {locked: true, text: 'Name', dataIndex: 'name'},
+          //     {text: 'Email', dataIndex: 'email', width: 600},
+          //     {text: 'Email', dataIndex: 'email', width: 600}
+          //   ]
+          // }
+          // var ext1 = Ext.create(o1)
+
+
+          var o2 = {
+            xtype: 'lockedgrid',
+            store: store
+          }
+          var ext2 = Ext.create(o2)
+          ext2.addColumn({locked: true, text: 'Name', dataIndex: 'name'})
+          ext2.addColumn({text: 'Email', dataIndex: 'email', width: 600})
+          ext2.addColumn({text: 'Email', dataIndex: 'email', width: 600})
+
+
+          Ext.Viewport.add([
+//            ext1
+            ext2
+          ])
+        }
+    });
+
+
+  </script>
+  <body>
+</body>
+</html>

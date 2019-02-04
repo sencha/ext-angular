@@ -1,10 +1,10 @@
 <container padding="10" layout="fit" [fitToParent]="true">
-  <lockedgrid title="Locking Grid" [store]="store" [shadow]="true">
+  <lockedgrid [store]="companies" [shadow]="true">
     <column
       [locked]="true"
       text="Company"
       width="200"
-      [dataIndex]="'name'"
+      dataIndex="name"
       minwidth="100"
       [menu]="{
         customFirst: {
