@@ -169,7 +169,7 @@ import {BasicDatePanelComponent} from '../examples/Panels/BasicDate/BasicDate';
 import {AdvancedDatePanelComponent} from '../examples/Panels/AdvancedDate/AdvancedDate';
 import {TimePanelComponent} from '../examples/Panels/TimePanel/Time';
 import {CollapsiblePanelComponent} from '../examples/Panels/Collapsible/Collapsible';
-import {ResizableHandleComponent} from '../examples/Panels/Resizable/ResizableHandle';
+import {ResizableHandleComponent} from '../examples/Panels/ResizableHandle/ResizableHandle';
 import {DialogPopupComponent} from '../examples/Popups/Dialog/Dialog';
 import {MessagePopupComponent} from '../examples/Popups/Message/Message';
 import {ToastPopupComponent} from '../examples/Popups/Toast/Toast';

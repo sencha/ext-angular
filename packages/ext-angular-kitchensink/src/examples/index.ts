@@ -158,7 +158,7 @@ import {BasicDatePanelComponent} from './Panels/BasicDate/BasicDate';
 import {AdvancedDatePanelComponent} from './Panels/AdvancedDate/AdvancedDate';
 import {TimePanelComponent} from './Panels/TimePanel/Time';
 import {CollapsiblePanelComponent} from './Panels/Collapsible/Collapsible';
-import {ResizableHandleComponent} from './Panels/Resizable/ResizableHandle';
+import {ResizableHandleComponent} from './Panels/ResizableHandle/ResizableHandle';
 import {DialogPopupComponent} from './Popups/Dialog/Dialog';
 import {MessagePopupComponent} from './Popups/Message/Message';
 import {ToastPopupComponent} from './Popups/Toast/Toast';
