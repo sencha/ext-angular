@@ -1,18 +1,15 @@
-import {Component, OnInit} from '@angular/core'
-
 declare var Ext: any;
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'colseabletab-component',
   templateUrl: "./Closeable.html",
   styles: [``]
 })
-export class CloseableTabComponent implements OnInit  {
-
-  constructor() { }
+export class CloseableTabComponent {
 
   nextKey:number = 0;
-  tabPanelRef:any;
+  tabPanel:any;
   tabs:number[] = [
     this.nextKey++,
     this.nextKey++,
@@ -20,7 +17,7 @@ export class CloseableTabComponent implements OnInit  {
   ];
 
   tabPanelReady = (ele) => {
-    this.tabPanelRef = ele.ext;
+    this.tabPanel = ele.ext;
   }
 
   onCloseTab = tab => {
@@ -30,10 +27,8 @@ export class CloseableTabComponent implements OnInit  {
   addTab = () => {
     const key = this.nextKey++;
     this.tabs = [...this.tabs, key];
-    this.tabPanelRef.setActiveItem(this.tabs.indexOf(key))
+    this.tabPanel.setActiveItem(this.tabs.indexOf(key))
     return false;
   }
-
-  ngOnInit() {}
 
 }

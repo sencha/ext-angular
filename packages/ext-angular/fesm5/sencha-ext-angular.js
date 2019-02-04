@@ -247,8 +247,24 @@ var base = /** @class */ (function () {
             childCmp = this.ext;
             if (this._hostComponent != null) {
                 parentCmp = this._hostComponent.ext;
-                if (parentCmp.xtype == 'button' && childCmp.xtype == 'menu') ;
-                else if (parentCmp.xtype == 'carousel') ;
+                if (parentCmp.xtype == 'button' && childCmp.xtype == 'menu') {
+                    console.log('button/menu not deleted');
+                }
+                else if (parentCmp.xtype == 'carousel') {
+                    console.log('carousel parent not deleted');
+                }
+                else if (parentCmp.xtype == 'segmentedbutton' && childCmp.xtype == 'button') {
+                    console.log('segmentedbutton/button not deleted');
+                }
+                else if (parentCmp.xtype == 'button' && childCmp.xtype == 'tooltip') {
+                    console.log('button/tooltip not deleted');
+                }
+                else if (parentCmp.xtype == 'titlebar' && childCmp.xtype == 'button') {
+                    console.log('titlebar/button not deleted');
+                }
+                else if (parentCmp.xtype == 'titlebar' && childCmp.xtype == 'searchfield') {
+                    console.log('titlebar/searchfield not deleted');
+                }
                 else {
                     parentCmp.remove([childCmp]);
                     childCmp.destroy();
@@ -258,15 +274,9 @@ var base = /** @class */ (function () {
                 if (childCmp != undefined) {
                     childCmp.destroy();
                 }
-                //console.log('known problem here with destroy...')
-                //console.log('parent: ')
-                //console.log(parentCmp)
-                //console.log('child: ')
-                //console.log(childCmp)
-                //console.log('this: ')
-                //console.log(this)
-                //childCmp.destroy()
-                //console.log('destroyed')
+                else {
+                    console.log('no destroy');
+                }
             }
         }
         catch (e) {

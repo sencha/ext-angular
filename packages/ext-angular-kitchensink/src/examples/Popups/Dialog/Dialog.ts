@@ -1,29 +1,17 @@
 declare var Ext: any;
-import {Component, OnDestroy} from '@angular/core'
+import {Component} from '@angular/core'
 
 @Component({
   selector: 'dialog-popup-component',
   templateUrl: "./Dialog.html",
   styles: [``]
 })
-export class DialogPopupComponent implements OnDestroy  {
+export class DialogPopupComponent {
+
   isDialogShowing:boolean = false;
-  okButtonRef:any;
-
-  showDialog = () => {
-    this.isDialogShowing = true;
-  }
-
-  onOkButtonReady = (ele) => this.okButtonRef = ele.ext;
-
+  showDialog = () => {this.isDialogShowing = true;}
   onOk = () => this.isDialogShowing = false;
-
   onCancel = () => this.isDialogShowing = false;
-
   onHide = () => this.isDialogShowing = false;
-
-  ngOnDestroy() {
-    this.okButtonRef.doDestroy();
-  }
 
 }

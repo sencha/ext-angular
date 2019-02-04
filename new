@@ -19,6 +19,7 @@ ExtReact
 - issue in ExtReact  https://sencha.jira.com/browse/EXTREACT-9
 
 Misc
+- is skipping all ngDestroy correct?
 - Sencha tests for ExtAngular (like those for ExtReact)
 - Create eslint for app
 - Example applications for modern toolkit (like those for ExtReact)

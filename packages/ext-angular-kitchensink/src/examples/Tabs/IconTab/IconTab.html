@@ -1,12 +1,8 @@
+<container padding="10" layout="fit" [fitToParent]="true">
 <tabpanel 
     [shadow]="true"
     [tabBar]="{ docked: 'bottom' }"
-    [defaults]="{
-                cls: 'card',
-                layout: 'center'
-            }"
-    [fitToParent]="true"
->
+    [defaults]="{cls: 'card', layout: 'center'}">
     <panel  [title]="'Info'" [iconCls]="'x-fa fa-info-circle'" [layout]="'center'">
         <container  [html]="'Docking tabs to the bottom will automatically change their style.'"></container>
     </panel>
@@ -22,4 +18,5 @@
     <panel  [title]="'More'" [iconCls]="'x-fa fa-ellipsis-h'" [layout]="'center'">
         <container  [cls]="'action'" html='User tapped User'></container>
     </panel> 
-</tabpanel>
+  </tabpanel>
+</container>

@@ -1,6 +1,5 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core'
-
 declare var Ext: any;
+import {Component, ViewEncapsulation} from '@angular/core'
 
 @Component({
   selector: 'handles-dragdrop-component',
@@ -8,23 +7,21 @@ declare var Ext: any;
   styleUrls: [`./styles.css`],
   encapsulation: ViewEncapsulation.None
 })
-export class HandlesDragDropComponent implements OnInit  {
-
-  constructor() { }
+export class HandlesDragDropComponent {
 
   parentRef: any;
   handleRepeatRef: any;
   dragRef: any;
 
-  doDestroy() {
-    this.sources.forEach(Ext.destroy().bind(Ext));
-  }
+  // doDestroy() {
+  //   this.sources.forEach(Ext.destroy().bind(Ext));
+  // }
 
   parentReady = (ele) => {
     this.parentRef = ele.ext.el;
     this.sources[0].setConstrain(this.parentRef);
     this.sources[1].setConstrain(this.parentRef);
-    this.parentRef.destroy = this.doDestroy.bind(this);
+//    this.parentRef.destroy = this.doDestroy.bind(this);
   }
 
   handleRepeatReady = (ele) => {
@@ -36,7 +33,6 @@ export class HandlesDragDropComponent implements OnInit  {
     this.dragRef = ele.ext.el;
     this.sources[1].setElement(this.dragRef);
   }
-
 
   sources = [
     // This source uses handle to represent a repeating element,so when the item is dragged,
@@ -59,8 +55,6 @@ export class HandlesDragDropComponent implements OnInit  {
     new Ext.drag.Source({
       handle: '.handle',
     })
-];
-
-  ngOnInit() {}
+  ];
 
 }
