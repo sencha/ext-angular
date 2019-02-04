@@ -13,7 +13,7 @@
   "extbuild": {
     "defaultprofile": "",
     "defaultenvironment": "development",
-    "defaultverbose": "yes"
+    "defaultverbose": "no"
   },
   "devDependencies": {
     "d3": "4.5.0",
