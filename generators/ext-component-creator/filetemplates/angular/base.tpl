@@ -148,22 +148,22 @@ export class base {
       if (this._hostComponent != null) {
         parentCmp = this._hostComponent.ext
         if(parentCmp.xtype == 'button' && childCmp.xtype == 'menu') {
-          console.log('button/menu not deleted')
+          //console.log('button/menu not deleted')
         }
         else if (parentCmp.xtype == 'carousel') {
-          console.log('carousel parent not deleted')
+          //console.log('carousel parent not deleted')
         }
         else if (parentCmp.xtype == 'segmentedbutton' && childCmp.xtype == 'button') {
-          console.log('segmentedbutton/button not deleted')
+          //console.log('segmentedbutton/button not deleted')
         }
         else if (parentCmp.xtype == 'button' && childCmp.xtype == 'tooltip') {
-          console.log('button/tooltip not deleted')
+          //console.log('button/tooltip not deleted')
         }
         else if (parentCmp.xtype == 'titlebar' && childCmp.xtype == 'button') {
-          console.log('titlebar/button not deleted')
+          //console.log('titlebar/button not deleted')
         }
         else if (parentCmp.xtype == 'titlebar' && childCmp.xtype == 'searchfield') {
-          console.log('titlebar/searchfield not deleted')
+          //console.log('titlebar/searchfield not deleted')
         }
         else {
           parentCmp.remove([childCmp])

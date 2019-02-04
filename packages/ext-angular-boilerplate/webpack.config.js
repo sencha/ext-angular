@@ -69,6 +69,7 @@ module.exports = function (env) {
       })
     ]
     return {
+      performance: { hints: false },
       mode: mode,
       devtool: (mode === 'development') ? 'inline-source-map' : false,
       context: path.join(__dirname, './src'),
