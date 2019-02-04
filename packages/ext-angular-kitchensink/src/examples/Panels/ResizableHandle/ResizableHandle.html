@@ -2,6 +2,7 @@
   <panel 
     [title]="'Resize Me'"
     [shadow]="true"
+    [layout]="'fit'"
     [border]="true"
     [left]="100"
     [top]="100"
@@ -9,17 +10,20 @@
     [height]="400"
     [resizable]="{edges: 'all', dynamic: doDynamically}"
     [bodyPadding]="10">
-    <toolbar  [docked]="'top'">
-      <checkboxfield 
+
+    <toolbar [docked]="'top'">
+      <checkboxfield
         [checked]="doDynamically"
         (change)="toggleDynamic($event)"
         [boxLabel]="'Dynamic'">
       </checkboxfield>
     </toolbar>
+
     <container>
-      <span #extitem>
-          mediumText
-      </span>
+        <span #extitem>
+          {{bodyText}}
+        </span>
     </container>
+
   </panel>
 </container>
