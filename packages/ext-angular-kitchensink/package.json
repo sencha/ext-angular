@@ -16,6 +16,7 @@
     "defaultverbose": "no"
   },
   "devDependencies": {
+    "hammerjs": "^2.0.8",
     "d3": "4.5.0",
     "angular-highlight-js":"^2.0.1",
     "highlight.js": "^9.14.2",

@@ -86,6 +86,7 @@ module.exports = function (env) {
       })
     ]
   return {
+    performance: { hints: false },
     mode: mode,
     devtool: (mode === 'development') ? 'inline-source-map' : false,
     entry: {
