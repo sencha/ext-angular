@@ -1,27 +1,21 @@
-<panel 
-[shadow]="true"
-[title]="panelTitle"
-[layout]="'hbox'"
-[header]="{ titleAlign:'center' }"
-[fitToParent]="true"
+<container padding="10" layout="fit" [fitToParent]="true">
 
->
-    <panel
-        
-        [title]="'Calendars'"
-        [ui]="'light'"
-        [width]="150"
-        [bodyPadding]="5"
-        [hidden]="false"
-    >
-        <calendar-list  [store]="this.store"></calendar-list>
-    </panel>
-    <calendar-month
-         
-        [flex]= "1"
-        [visibleWeeks]="null"
-        [timezoneOffset]="0"
-        [gestureNavigation]="false"
-        [store]="this.store"
-    ></calendar-month>
-</panel>
+  <panel
+    docked="left"
+    [title]="'Calendars'"
+    [ui]="'light'"
+    [width]="150"
+    [bodyPadding]="5"
+    [hidden]="false">
+    <calendar-list  [store]="this.store"></calendar-list>
+  </panel>
+
+  <calendar-month
+    [flex]= "1"
+    [visibleWeeks]="null"
+    [timezoneOffset]="0"
+    [gestureNavigation]="false"
+    [store]="this.store">
+  </calendar-month>
+
+</container>

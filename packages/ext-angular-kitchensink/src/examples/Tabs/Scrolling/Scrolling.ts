@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core'
-
 declare var Ext: any;
+import { Component } from '@angular/core'
 
 Ext.require('Ext.layout.overflow.Scroller');
 
@@ -9,19 +8,5 @@ Ext.require('Ext.layout.overflow.Scroller');
   templateUrl: "./Scrolling.html",
   styles: [``]
 })
-export class ScrollingTabComponent implements OnInit  {
-
-  constructor() { }
-
-  ngOnInit() {}
-
-  tabpanelDefaults = {
-    layout: 'center',
-    cls: 'card',
-    bodyPadding: 0,
-    tab: {
-        minWidth: 130
-    }
-};
-
+export class ScrollingTabComponent {
 }

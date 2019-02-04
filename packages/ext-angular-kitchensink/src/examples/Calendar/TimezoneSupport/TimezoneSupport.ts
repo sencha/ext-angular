@@ -26,12 +26,8 @@ export class CalendarTimezoneSupportComponent {
     this.timezoneOffset = selectorValue;
   }
 
-
   constructor(private calService: CalendarService) { 
-      console.log("Calendar panel component constructor invoked");
-      this.isPhone = Ext.os.is.Phone;
-      console.log("isphone: " + Ext.os.is.Phone + " isPhone: " + this.isPhone);
-      console.log("isDesktop: " + Ext.os.is.Desktop);
+    this.isPhone = Ext.os.is.Phone;
   }
 
 }

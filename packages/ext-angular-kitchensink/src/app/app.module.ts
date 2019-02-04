@@ -3,7 +3,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { Route, RouterModule } from '@angular/router'
 
-import { ExtAngularModule } from '@sencha/ext-angular'
+import { ExtAngularModule } from './ext-angular-prod/ext-angular.module'
 import { ExtAngularBootstrapService } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.service'
 import { ExtAngularBootstrapComponent } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.component'
 
@@ -98,7 +98,7 @@ import {NeedleGaugeComponent} from "../examples/Gauges/NeedleGauge/NeedleGauge"
 import {CarouselComponent} from "../examples/Carousel/Carousel"
 
 import {ChartToolbarComponent} from "../examples/Charts/ChartToolbar"
-import {BasicGaugeChartComponent} from '../examples/Charts/Gauge/BasicGaugeChart/BasicGaugeChart';
+import {BasicGaugeChartComponent} from '../examples/Charts/Gauges/BasicGaugeChart/BasicGaugeChart';
 import {BoxPlotComponent} from '../examples/Charts/BoxPlot/BoxPlot';
 import {NavigatorComponent} from '../examples/Charts/Navigator/Navigator';
 import {BasicScatterComponent} from '../examples/Charts/Scatter/BasicScatter/BasicScatter';
@@ -190,7 +190,7 @@ import {BasicTabComponent} from '../examples/Tabs/BasicTab/BasicTab';
 import {BottomTabComponent} from '../examples/Tabs/BottomTab/BottomTab';
 import {IconTabComponent} from '../examples/Tabs/IconTab/IconTab';
 import {DesktopTabComponent} from '../examples/Tabs/DesktopTab/DesktopTab';
-import {CloseableTabComponent} from '../examples/Tabs/Closeable/Closeable';
+import {ClosableTabComponent} from '../examples/Tabs/Closable/Closable';
 // import {ScrollingTabComponent} from '../examples/Tabs/Scrolling/Scrolling';
 import {TabBarComponent} from '../examples/Tabs/TabBar/TabBar';
 import {WizardComponent} from '../examples/Wizard/Wizard';
@@ -385,7 +385,7 @@ const routes: ExtAngularRoutes = [
   { path: 'components/tabs/bottom_tabs', component: BottomTabComponent, text: 'Bottom Tabs', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/tabs/icon_tabs', component: IconTabComponent, text: 'Icon Tabs', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/tabs/scrollingtabs', component: ScrollingTabComponent, text: 'Scrolling Tabs', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-  { path: 'components/tabs/closable', component: CloseableTabComponent, text: 'Closeable Tabs', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  { path: 'components/tabs/closable', component: ClosableTabComponent, text: 'Closable Tabs', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/tabs/desktop_tabs', component: DesktopTabComponent, text: 'Desktop Tabs', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/tabs/tabbar', component: TabBarComponent, text: 'TabBar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
@@ -651,7 +651,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
     IconTabComponent,
     ScrollingTabComponent,
     DesktopTabComponent,
-    CloseableTabComponent,
+    ClosableTabComponent,
     // ScrollingTabComponent,
     TabBarComponent,
     WizardComponent,

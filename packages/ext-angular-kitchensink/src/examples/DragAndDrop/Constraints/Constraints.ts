@@ -1,6 +1,5 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core'
-
 declare var Ext: any;
+import {Component, ViewEncapsulation} from '@angular/core'
 
 Ext.require(['Ext.drag.*']);
 
@@ -10,9 +9,7 @@ Ext.require(['Ext.drag.*']);
   styleUrls: [`./styles.css`],
   encapsulation: ViewEncapsulation.None
 })
-export class ConstraintsDragDropComponent implements OnInit  {
-
-  constructor() { }
+export class ConstraintsDragDropComponent {
 
   parentRef: any;
   elementRef: any;
@@ -82,7 +79,5 @@ export class ConstraintsDragDropComponent implements OnInit  {
     // Snap drag to a [30, 50] grid. Constrain to the owner panel.
     new Ext.drag.Source({})
 ];
-
-  ngOnInit() {}
 
 }

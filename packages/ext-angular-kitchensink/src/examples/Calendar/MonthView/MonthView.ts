@@ -8,19 +8,16 @@ import {CalendarService} from '../Calendar.service';
 })
 export class CalendarMonthViewComponent {
 
+  store = Ext.create('Ext.calendar.store.Calendars', {
+    autoLoad: true,
+    proxy:{
+      type: 'ajax',
+      url: '/KitchenSink/CalendarFull'
+    }
+  })
 
-    store = Ext.create('Ext.calendar.store.Calendars', {
-        autoLoad: true,
-        proxy:{
-            type: 'ajax',
-            url: '/KitchenSink/CalendarFull'
-        }
-    })
+  panelTitle = Ext.Date.format(new Date(),'F Y');
 
-    panelTitle = Ext.Date.format(new Date(),'F Y');
-
-  constructor(private calService: CalendarService) { 
-      console.log("Calendar panel component constructor invoked");
-  }
+  constructor(private calService: CalendarService) {}
 
 }

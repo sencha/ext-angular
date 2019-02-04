@@ -5,7 +5,7 @@ const mkdirp = require('mkdirp').sync
 let result = {}
 
 function extractAll(dir) {
-  //console.log(dir)
+//  console.log(dir)
   const files = fs.readdirSync(dir)
   const parts = dir.split(path.sep)
 
@@ -18,7 +18,7 @@ function extractAll(dir) {
       extractAll(fullPath);
     } else if (file === `${example}.ts`) {
       try {
-        //console.log(example)
+//        console.log(example)
         extractFrom(example, file, fullPath)
       } catch (e) {
         console.log(`Error extracting code from ${file}`, e)

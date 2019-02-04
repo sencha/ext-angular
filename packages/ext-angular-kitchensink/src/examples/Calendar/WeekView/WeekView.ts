@@ -16,10 +16,7 @@ export class CalendarWeekViewComponent {
   calWeekValue=new Date();
 
   constructor(private calService: CalendarService) { 
-      console.log("Calendar panel component constructor invoked");
       this.isPhone = Ext.os.is.Phone;
-      console.log("isphone: " + Ext.os.is.Phone + " isPhone: " + this.isPhone);
-      console.log("isDesktop: " + Ext.os.is.Desktop);
   }
 
   store = Ext.create('Ext.calendar.store.Calendars', {
@@ -32,7 +29,6 @@ export class CalendarWeekViewComponent {
 
   changeCalendarView = (button, value) => { 
     var buttVal = button._value;
-    console.log("button : " + button + " value: " + value);
     if (buttVal == 'fullweek') {
       this.calendarview = value;
       this.visibleDays = 7;
