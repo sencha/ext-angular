@@ -13,15 +13,10 @@ export class HandlesDragDropComponent {
   handleRepeatRef: any;
   dragRef: any;
 
-  // doDestroy() {
-  //   this.sources.forEach(Ext.destroy().bind(Ext));
-  // }
-
   parentReady = (ele) => {
     this.parentRef = ele.ext.el;
     this.sources[0].setConstrain(this.parentRef);
     this.sources[1].setConstrain(this.parentRef);
-//    this.parentRef.destroy = this.doDestroy.bind(this);
   }
 
   handleRepeatReady = (ele) => {

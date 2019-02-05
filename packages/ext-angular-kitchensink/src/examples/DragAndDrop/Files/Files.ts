@@ -1,7 +1,5 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core'
-
 declare var Ext: any;
-
+import { Component, ViewEncapsulation } from '@angular/core'
 const DEFAULT_TEXT = 'Drag a file from your computer here';
 
 @Component({
@@ -11,9 +9,7 @@ const DEFAULT_TEXT = 'Drag a file from your computer here';
   encapsulation: ViewEncapsulation.None
 })
 
-export class FilesDragDropComponent implements OnInit  {
-
-  constructor() { }
+export class FilesDragDropComponent {
 
   parentRef: any;
   iconCls:string = 'drag-file-icon';
@@ -63,7 +59,5 @@ export class FilesDragDropComponent implements OnInit  {
     clearInterval(this.timer);
     Ext.destroy(this.target);
   }
-
-  ngOnInit() {}
 
 }

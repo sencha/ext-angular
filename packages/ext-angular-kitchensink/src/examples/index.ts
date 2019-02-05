@@ -280,7 +280,7 @@ const treeRoot = {
             ]},
             { text: 'Popups', navIcon: 'icon-windows', children: [
                 { text: 'Dialog', component: DialogPopupComponent, layout: 'center', navIcon: 'icon-basic-dialog' },
-                { text: 'Msg', component: MessagePopupComponent, layout: 'center', navIcon: 'icon-overlays' },
+                { text: 'Message', component: MessagePopupComponent, layout: 'center', navIcon: 'icon-overlays' },
                 { text: 'Toast', component: ToastPopupComponent, layout: 'center', navIcon: 'icon-toast-view' }
             ]},
             { text: 'ProgressBar', component: ProgressBarComponent, layout: 'center', navIcon: 'icon-progress-decorated' },

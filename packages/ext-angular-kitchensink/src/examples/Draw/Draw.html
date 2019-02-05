@@ -1,12 +1,23 @@
-<panel  [shadow]="true" [layout]="'fit'" [fitToParent]="true">
-    <toolbar  [docked]="'top'">
-        <container >
-            <div  [style]="isPhone ? '12px' : '14px'">
-                Use your {{supportsTouch ? 'finger' : 'mouse'}} to paint on the surface below.
+<container padding="10" layout="fit" [fitToParent]="true">
+
+  <panel [shadow]="true" [layout]="'fit'">
+
+    <toolbar [docked]="'top'">
+      <container>
+        <container>
+          <span #extitem>
+            <div [style]="isPhone ? '12px' : '14px'">
+              Use your {{supportsTouch ? 'finger' : 'mouse'}} to paint on the surface below.
             </div>
+          </span>
         </container>
-        <spacer ></spacer>
-        <button  (tap)="clear()" [text]="'Clear'"> </button>
+      </container>
+      <spacer ></spacer>
+      <button (tap)="clear()" [text]="'Clear'"> </button>
     </toolbar>
-    <draw  (ready)="onReady($event)"></draw>
-</panel>
+
+    <draw (ready)="onReady($event)"></draw>
+
+  </panel>
+
+</container>

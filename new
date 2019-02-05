@@ -14,6 +14,7 @@ Treeshaking
 ExtGen
 - support upgrade to multi-app workspace in ext-gen
 - refactor ext-gen, et all
+- don't assume defaults of phone and desktop for profiles
 
 ExtReact
 - issue in ExtReact  https://sencha.jira.com/browse/EXTREACT-9

@@ -1,28 +1,23 @@
-import { Component, OnInit} from '@angular/core';
-
 declare var Ext: any;
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'split-button-component',
   templateUrl: './SplitButton.html',
   styles: [``]
 })
-export class SplitButtonComponent implements OnInit {
+export class SplitButtonComponent {
 
-    isPhone = Ext.os.is.Phone;
-
-    style = 'None';
-    type = 'Text';
-    round = false;
-    iconCls:string;
-    text = true;
-    ui:string;
-    menu = true;
-
-  constructor() { }
+  isPhone = Ext.os.is.Phone;
+  style = 'None';
+  type = 'Text';
+  round = false;
+  iconCls:string;
+  text = true;
+  ui:string;
+  menu = true;
 
   onStyleChange = (item) => {
-    console.log("onStyleChange : " + item._text);
     this.style = item._text; 
     if (this.style === 'Menu') {
       this.menu = true;
@@ -33,18 +28,13 @@ export class SplitButtonComponent implements OnInit {
   }
 
   onTypeChange = (item) => {
-    console.log("onTypeChange : " + item._text);
     this.type = item._text; 
-    console.log("this.type : " + this.type);
     this.iconCls = this.type.indexOf('Icon') !== -1 ? 'x-fa fa-heart' : null;
     this.text = this.type.indexOf('Text') !== -1;
   }
 
   toggleRound = function(){
-    //debugger;
-    console.log("In toggleRound");
     this.round=!this.round;
-    console.log("Round: " + this.round);
     if (this.round) { 
       this.ui += ' round';
     }
@@ -53,19 +43,13 @@ export class SplitButtonComponent implements OnInit {
     }
   };
 
-
-
-
-  ngOnInit() {
-  }
-
-    menuProp =  [{
-        text: 'Menu Item 1'
-    }, {
-        text: 'Menu Item 2'
-    }, {
-        text: 'Menu Item 3'
-    }];
+  menuProp =  [{
+      text: 'Menu Item 1'
+  }, {
+      text: 'Menu Item 2'
+  }, {
+      text: 'Menu Item 3'
+  }];
 
  layoutProps = Ext.os.is.Phone ? {
     height: '100%',
@@ -74,7 +58,7 @@ export class SplitButtonComponent implements OnInit {
     defaults: {
         margin: '20'
     }
-} : {
+  } : {
     padding: 10,
     shadow: true,
     defaults: {
@@ -83,14 +67,14 @@ export class SplitButtonComponent implements OnInit {
         margin: '10',
         width: '100%'
     }
-}
+  }
 
- buttonGroupProps = Ext.os.is.Phone ? {
+  buttonGroupProps = Ext.os.is.Phone ? {
     padding: '20 0 0 20',
     defaults: {
         margin: '0 20 20 0',
     }
-} : {
+  } : {
     padding: '17 0 17 20',
     layout: { type: 'hbox', align: 'middle', pack: 'space-around' },
     flex: 1,
@@ -99,19 +83,18 @@ export class SplitButtonComponent implements OnInit {
     defaults: {
         margin: '0 20 0 0'
     }
-}
+  }
 
- groupLabelProps = Ext.os.is.Phone ? {
+  groupLabelProps = Ext.os.is.Phone ? {
     style: {
         margin: '0 0 5px 0'
     }
-} : {
+  } : {
     style: {
         width: '70px',
         textAlign: 'right',
         margin: '24px 20px 0 0'
     }
-};
-  
+  };
 
 }
