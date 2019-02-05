@@ -1,8 +1,7 @@
+declare var Ext: any;
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { generateData, randomDate } from '../generateSaleData';
 import { model } from '../SaleModel';
-
-declare var Ext: any;
 
 Ext.require(['Ext.pivot.plugin.Configurator']);
 
@@ -11,37 +10,29 @@ Ext.require(['Ext.pivot.plugin.Configurator']);
   templateUrl: './ConfiguratorPlugin.html',
   styles: [``]
 })
-export class ConfiguratorPluginComponent implements OnInit {
-
-  constructor() { }
-
-
-
-  ngOnInit() {
-  }
+export class ConfiguratorPluginComponent {
 
   isPhone = Ext.os.is.Phone;
 
   store = Ext.create('Ext.data.Store', {
     model: model,
     data: generateData()
-})
-//problem with late rendered components
-coloredRenderer = (v, record, dataIndex, cell, column) => {
-    cell.setStyle( Ext.String.format('color: {0};', v > 500 ? 'green' : 'red') );
+  })
+  //problem with late rendered components
+  coloredRenderer = (v, record, dataIndex, cell, column) => {
+      cell.setStyle( Ext.String.format('color: {0};', v > 500 ? 'green' : 'red') );
 
-    return Ext.util.Format.number(v, '0,000.00');
-}
+      return Ext.util.Format.number(v, '0,000.00');
+  }
 
-pivotgrid:any;
+  pivotgrid:any;
+  onPivotGridRead = function(event) {
+    this.pivotgrid = event.ext;
+  }
 
-onPivotGridRead = function(event) {
-  this.pivotgrid = event.ext;
-}
+  showConfigurator = () => { this.pivotgrid.showConfigurator() }
 
-showConfigurator = () => { this.pivotgrid.showConfigurator() }
-
-monthRenderer = value => Ext.Date.monthNames[value];
+  monthRenderer = value => Ext.Date.monthNames[value];
 
 
 pivotgridPlugins = [{
@@ -181,5 +172,5 @@ pivotgridMatrix = {
       labelRenderer: value => `Year ${value}`
   }]
 };
-   
+
 }

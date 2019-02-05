@@ -1,4 +1,5 @@
-<container padding="10px" layout="vbox" [fitToParent]="true">
+<container padding="10px" layout="vbox" [width]="600">
+
   <container
     [layout]="{ type: 'hbox', pack: isPhone ? 'center' : 'left'}"
     margin="0 0 10 0"
@@ -21,6 +22,7 @@
     </button>
     <button ui="action raised" [iconCls]="round?'x-fa fa-check':null" [enableToggle]="true" text="Round" (tap)="toggleRound()"></button>
   </container>
+
   <panel #layoutProps padding="10" [shadow]="true" [defaults]="{layout: 'hbox', flex:'1', margin: '10', width: '100%'}">
     <container layout="hbox">
       <container layout="hbox">
@@ -135,4 +137,5 @@
       </container>
     </container>
   </panel>
+  
 </container>
