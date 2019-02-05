@@ -1,14 +1,5 @@
 <container padding="10" layout="fit" [fitToParent]="true">
 
-  <toolbar docked="top" ui="app-transparent-toolbar" [shadow]="false" [margin]="isPhone? '0 10' : '10 0 0 10'" padding="0 10 0 10">
-      <button ui="action" margin="0 10px 0 0" iconCls="x-fa fa-refresh" (tap)="click($event)"  text="TABS"></button>
-      <spacer></spacer>
-      <segmentedbutton [hidden]="true" margin="0 10px 0 0" (change)="onStackGroup($event)" >
-        <button iconCls="x-fa fa-bars" text="STACK" ></button>
-        <button iconCls="x-fa fa-bar-chart" text="GROUP"></button>
-      </segmentedbutton>
-  </toolbar>
-
   <tabpanel 
     (ready)="tabPanelReady($event)"
     [style]="{ backgroundColor: 'white'}"
@@ -18,14 +9,17 @@
       layout: {pack: 'left'},
       style: {paddingRight: '52px'}
     }">
-    <panel *ngFor="let tab of tabs" [hidden]="tabs.length > 0 ? false: true"
-      [title]="'tab '+tab" 
+
+    <panel *ngFor="let tab of tabs"
+      [title]="'Tab ' + tab"
       tab="{flex: 1, maxWidth: 150}"
-      [closable]="true"
-      [bodyPadding]="30"
-      (onDestroy)="onCloseTab()"
-      [html]="'content for tab '+tab">
+      layout="center"
+      closable="true"
+      (added)="tabPanelAdded($event)"
+      (destroy)="closeTab()"
+      [html]="'Tab ' + tab + ' Content'">
     </panel>
+
   </tabpanel>
 
   <button 
