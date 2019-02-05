@@ -24,16 +24,12 @@ export class CalendarDragResizeValidationComponent {
   onBeforeDragStart = (calendarday,context) => {
     var notAllowed = ['Not draggable', 'Not draggable/resizable'];
     var contains = !Ext.Array.contains(notAllowed, context.event.data.title);
-    calendarday.setDraggable(contains);
     return contains;
   }
 
   onBeforeResizeStart = (calendarday,context) => {
-    console.log("In onBeforeResizeStart");
     var notAllowed = ['Not resizable', 'Not draggable/resizable'];
     var contains = !Ext.Array.contains(notAllowed, context.event.data.title);
-    console.log("onBeforeResizeStart. Returning : " + contains);
-    calendarday.resizeEvents = contains;
     return contains;
   }
 
