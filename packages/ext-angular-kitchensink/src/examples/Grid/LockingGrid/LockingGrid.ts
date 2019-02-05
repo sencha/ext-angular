@@ -18,50 +18,99 @@ export class LockingGridComponent {
       url: 'resources/data/CompanyData.json'
     } 
   });
-
   isPhone = Ext.os.is.Phone;
 
-  onApprove = (grid, info) => {
-    Ext.Msg.alert('Approve', info.record.get('name'));
-  }
-
-  onDecline = (grid, info) => {
-    Ext.Msg.alert('Decline', info.record.get('name'));
-  }
-
-  onCustomFirst = () => {
-    Ext.Msg.alert('Custom Menu', 'Clicked first custom column menu item');
-  }
-
-  onCustomLast = () => {
-      Ext.Msg.alert('Custom Menu', 'Clicked last custom column menu item');
-  }
-
-  renderChange = (value) => {
-    return this.renderSign(value, '0.00');
-  }
-
-  renderPercent = (value) => {
-      return this.renderSign(value, '0.00%');
-  }
-
-  renderSign = (format, value) => {
-     return Ext.util.Format.number(value, format);    
-   }
-
+  renderChange = (value) => {return Ext.util.Format.number(value, '0.00');}
+  renderPercent = (value) => {return Ext.util.Format.number(value, '0.00%');}
+  onApprove = (grid, info) => {Ext.Msg.alert('Approve', info.record.get('name'));}
+  onDecline = (grid, info) => {Ext.Msg.alert('Decline', info.record.get('name'));}
+  onCustomFirst = () => {Ext.Msg.alert('Custom Menu', 'Clicked first custom column menu item');}
+  onCustomLast = () => {Ext.Msg.alert('Custom Menu', 'Clicked last custom column menu item');}
   summarizeCompanies = (grid, context) => context.records.length + ' Companies';
 
-  leftLockedColumnCell = {
-      tools: {
-        approve: {
-          iconCls: 'x-fa fa-check green',
-          handler: this.onApprove
+  columns = [
+    {
+      locked: true,
+      text: 'Company',
+      width: 200,
+      dataIndex: 'name',
+      minWidth: 100,
+      menu: {
+        customFirst: {
+          text: 'Custom First',
+          weight: -200,
+          handler: 'onCustomFirst'
         },
-        decline: {
-          iconCls: 'x-fa fa-ban red',
-          handler: this.onDecline,
-          weight: 1
+        customLast: {
+          text: 'Custom Last',
+          separator: true,
+          handler: this.onCustomLast.bind(this)
         }
       }
-  };
+    },
+    {
+      locked: true,
+      text: 'Price',
+      width: 75,
+      dataIndex: 'price',
+      formatter: 'usMoney',
+      editable: true,
+      editor: {
+        xtype: 'numberfield',
+        required: true,
+        validators: {
+          type: 'number',
+          message: 'Invalid price'
+        }
+      }
+    },
+    {
+      locked: 'left',
+      width: 70,
+      cell: {
+        tools: {
+          approve: {
+            iconCls: 'x-fa fa-check green',
+            handler: this.onApprove.bind(this)
+          },
+          decline: {
+            iconCls: 'x-fa fa-ban red',
+            handler:  this.onDecline.bind(this),
+            weight: 1
+          }
+        }
+      }
+    },
+    {
+      locked: 'right',
+      text: 'Change',
+      width: 120,
+      renderer: this.renderChange.bind(this),
+      dataIndex: 'change',
+      cell: {
+        encodeHtml: false
+      }
+    },
+    {
+      text: '% Change',
+      width: 130,
+      dataIndex: 'pctChange',
+      renderer: this.renderPercent.bind(this),
+      cell: {
+        encodeHtml: false
+      }
+    },
+    {
+      text: 'Last Updated',
+      width: 150,
+      dataIndex: 'lastChange',
+      formatter: 'date("m/d/Y")'
+    },
+    {
+      text: 'Industry',
+      width: 150,
+      dataIndex: 'industry'
+    }
+  ]
+
 }

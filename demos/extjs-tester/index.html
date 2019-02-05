@@ -10,9 +10,32 @@
 </head>
   <script>
 
+          // var o1 = {
+          //   xtype: 'lockedgrid',
+          //   store: store,
+          //   columns: [
+          //     {locked: true, text: 'Name', dataIndex: 'name'},
+          //     {text: 'Email', dataIndex: 'email', width: 600},
+          //     {text: 'Email', dataIndex: 'email', width: 600}
+          //   ]
+          // }
+          // var ext1 = Ext.create(o1)
+          
+          // columns: [
+          //     {locked: true, text: 'Name', dataIndex: 'name'},
+          //     {text: 'Email', dataIndex: 'email', width: 600},
+          //     {text: 'Email', dataIndex: 'email', width: 600}
+          //   ]
+
+          // ext2.setColumns([
+          //   {xtype: 'column', locked: true, text: 'Name', dataIndex: 'name'},
+          //   {xtype: 'column', locked: true, text: 'Email', dataIndex: 'email', width: 600},
+          //   {xtype: 'column', text: 'Email', dataIndex: 'email', width: 600}
+          // ])
+
+
     Ext.application({
         name: "$ExtAngularApp",
-        quickTips: true,
         launch: function () {
           var store = {
             autoLoad: true,
@@ -24,38 +47,29 @@
               { name: 'Marge', email: 'marge@simpsons.com', phone: '555-222-1254' }
             ]
           }
-
-          // var o1 = {
-          //   xtype: 'lockedgrid',
-          //   store: store,
-          //   columns: [
-          //     {locked: true, text: 'Name', dataIndex: 'name'},
-          //     {text: 'Email', dataIndex: 'email', width: 600},
-          //     {text: 'Email', dataIndex: 'email', width: 600}
-          //   ]
-          // }
-          // var ext1 = Ext.create(o1)
-
-
-          var o2 = {
-            xtype: 'lockedgrid',
-            store: store
-          }
+          var o2 = {xtype: 'lockedgrid',store: store, variableheights: true}
           var ext2 = Ext.create(o2)
-          ext2.addColumn({locked: true, text: 'Name', dataIndex: 'name'})
-          ext2.addColumn({text: 'Email', dataIndex: 'email', width: 600})
-          ext2.addColumn({text: 'Email', dataIndex: 'email', width: 600})
-
-
-          Ext.Viewport.add([
-//            ext1
-            ext2
+          //ext2.addColumn({locked: true, text: 'Name', dataIndex: 'name'})
+          ext2.setColumns([
+            {xtype: 'column', locked: true, text: 'Name', dataIndex: 'name'},
+            {xtype: 'column', locked: true, text: 'Email', dataIndex: 'email', width: 600},
+            {xtype: 'column', text: 'Email', dataIndex: 'email', width: 600}
           ])
+
+
+//          ext2.addColumn({locked: true, text: 'Email', dataIndex: 'email', width: 600})
+//          ext2.addColumn({locked: 'left', text: 'Email', dataIndex: 'email', width: 600})
+//          ext2.addColumn({text: 'Email', dataIndex: 'email', width: 600})
+//          ext2.setStore(store)
+
+          var panel = Ext.create({xtype:'panel',layout:'fit',title:'lockedgrid'})
+          Ext.Viewport.add([panel])
+          panel.add(ext2)
         }
     });
 
 
   </script>
-  <body>
+<body>
 </body>
 </html>
