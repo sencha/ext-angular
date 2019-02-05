@@ -16,8 +16,8 @@
       layout="center"
       closable="true"
       (added)="tabPanelAdded($event)"
-      (destroy)="closeTab()"
-      [html]="'Tab ' + tab + ' Content'">
+      (destroy)="closeTab($event)"
+      [html]="'<H1>Tab ' + tab + ' Content</H1>'">
     </panel>
 
   </tabpanel>

@@ -26,7 +26,7 @@ export class ClosableTabComponent {
     }
   }
 
-  closeTab = tab => {
+  closeTab = (tab) => {
     this.tabs = this.tabs.filter(t => t !== tab);
   }
 
