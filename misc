@@ -232,3 +232,21 @@ export function launch(AppModule) {
   // }
   // else 
   //   { thisVars.production = false }
+
+
+
+    <toolbar [hidden]="true" docked="top" ui="app-transparent-toolbar" [shadow]="false" [margin]="isPhone? '0 10' : '10 0 0 10'" padding="0 10 0 10">
+    <button ui="action" margin="0 10px 0 0" iconCls="x-fa fa-refresh" (tap)="click($event)"  text="TABS"></button>
+    <spacer></spacer>
+    <segmentedbutton [hidden]="true" margin="0 10px 0 0" (change)="onStackGroup($event)" >
+      <button iconCls="x-fa fa-bars" text="STACK" ></button>
+      <button iconCls="x-fa fa-bar-chart" text="GROUP"></button>
+    </segmentedbutton>
+  </toolbar>
+
+
+  click = event => {
+    this.tabs.map(key => (
+      console.log(key)
+    ))
+  }
