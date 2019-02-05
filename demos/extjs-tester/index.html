@@ -35,37 +35,28 @@
 
 
     Ext.application({
-        name: "$ExtAngularApp",
-        launch: function () {
-          var store = {
-            autoLoad: true,
-            fields: ['name', 'email', 'phone'],
-            data: [
-              { name: 'Lisa', email: 'lisa@simpsons.com', phone: '555-111-1224' },
-              { name: 'Bart', email: 'bart@simpsons.com', phone: '555-222-1234' },
-              { name: 'Homer', email: 'homer@simpsons.com', phone: '555-222-1244' },
-              { name: 'Marge', email: 'marge@simpsons.com', phone: '555-222-1254' }
-            ]
-          }
-          var o2 = {xtype: 'lockedgrid',store: store, variableheights: true}
-          var ext2 = Ext.create(o2)
-          //ext2.addColumn({locked: true, text: 'Name', dataIndex: 'name'})
-          ext2.setColumns([
-            {xtype: 'column', locked: true, text: 'Name', dataIndex: 'name'},
-            {xtype: 'column', locked: true, text: 'Email', dataIndex: 'email', width: 600},
-            {xtype: 'column', text: 'Email', dataIndex: 'email', width: 600}
-          ])
-
-
-//          ext2.addColumn({locked: true, text: 'Email', dataIndex: 'email', width: 600})
-//          ext2.addColumn({locked: 'left', text: 'Email', dataIndex: 'email', width: 600})
-//          ext2.addColumn({text: 'Email', dataIndex: 'email', width: 600})
-//          ext2.setStore(store)
-
-          var panel = Ext.create({xtype:'panel',layout:'fit',title:'lockedgrid'})
-          Ext.Viewport.add([panel])
-          panel.add(ext2)
+      name: "$ExtAngularApp",
+      launch: function () {
+        var store = {
+          autoLoad: true,
+          fields: ['name', 'email', 'phone'],
+          data: [
+            { name: 'Lisa', email: 'lisa@simpsons.com', phone: '555-111-1224' },
+            { name: 'Bart', email: 'bart@simpsons.com', phone: '555-222-1234' },
+            { name: 'Homer', email: 'homer@simpsons.com', phone: '555-222-1244' },
+            { name: 'Marge', email: 'marge@simpsons.com', phone: '555-222-1254' }
+          ]
         }
+        var o = {xtype: 'lockedgrid',store: store}
+        var extObj = Ext.create(o)
+        extObj.addColumn({locked: true, text: 'Name', dataIndex: 'name'})
+        extObj.addColumn({locked: true, text: 'Email', dataIndex: 'email', width: 600})
+        extObj.addColumn({locked: 'left', text: 'Email', dataIndex: 'email', width: 600})
+        extObj.addColumn({text: 'Email', dataIndex: 'email', width: 600})
+        var panel = Ext.create({xtype:'panel',layout:'fit',title:'lockedgrid'})
+        Ext.Viewport.add([panel])
+        panel.add(extObj)
+      }
     });
 
 
