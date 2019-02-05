@@ -8,22 +8,30 @@ import { Component } from '@angular/core'
 })
 export class ClosableTabComponent {
 
-  nextKey:number = 0;
+  nextKey:number = 4;
   tabPanel:any;
-  tabs:number[] = [
-    this.nextKey++,
-    this.nextKey++,
-    this.nextKey++
-  ];
+  tabs:number[] = [0,1,2,3]
+
+  // tabs:number[] = [
+  //   this.nextKey++,
+  //   this.nextKey++,
+  //   this.nextKey++
+  // ];
 
   tabPanelReady = (ele) => {
     this.tabPanel = ele.ext;
   }
 
+  click = event => {
+    this.tabs.map(key => (
+      console.log(key)
+    ))
+  }
+
   onCloseTab = tab => {
     this.tabs = this.tabs.filter(t => t !== tab);
   }
-    
+
   addTab = () => {
     const key = this.nextKey++;
     this.tabs = [...this.tabs, key];
