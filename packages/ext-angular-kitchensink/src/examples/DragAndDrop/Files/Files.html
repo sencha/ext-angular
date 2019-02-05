@@ -1,9 +1,11 @@
+<container padding="10" layout="fit" [fitToParent]="true">
+
 <panel 
-[fitToParent]="true"
-    [padding]="5"
-    [shadow]="true"
-    (ready)="parentReady($event)"
->
-    <container  [cls]="'drag-file-label'" [html]="labelText"></container>
-    <container  [cls]="iconcls"></container>
+  [padding]="5"
+  [shadow]="true"
+  (ready)="parentReady($event)">
+  <container [cls]="'drag-file-label'" [html]="labelText"></container>
+  <container [cls]="iconcls"></container>
 </panel>
+
+</container>

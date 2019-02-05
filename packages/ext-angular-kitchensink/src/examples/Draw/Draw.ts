@@ -1,29 +1,19 @@
-import {
-  Component,
-  OnInit,
-  ElementRef,
-  Renderer,
-  ViewChild,
-  SimpleChanges
-} from '@angular/core'
-  
 declare var Ext: any;
-  
+import { Component } from '@angular/core'
+
 @Component({
   selector: 'draw-component',
   templateUrl: "./Draw.html",
   styles: [``]
 })
 
-export class DrawComponent implements OnInit  {
+export class DrawComponent {
   
   refs = {
     draw: {}
   };
   isPhone = Ext.os.is.Phone;
   supportsTouch = Ext.supports.Touch;
-
-  constructor() {}
 
   drawRef: any;
   
@@ -116,10 +106,7 @@ export class DrawComponent implements OnInit  {
     this.drawRef.getSurface().setRect([0, 0, size.width, size.height]);
     this.drawRef.renderFrame();
   }
-  
-  ngOnInit() {
-    
-  }
+
 }
 
 function smoothList(points) {

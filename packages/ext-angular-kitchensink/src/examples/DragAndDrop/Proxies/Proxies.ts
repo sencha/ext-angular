@@ -1,6 +1,5 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core'
-
 declare var Ext: any;
+import { Component, ViewEncapsulation } from '@angular/core'
 
 @Component({
   selector: 'proxies-dragdrop-component',
@@ -8,12 +7,9 @@ declare var Ext: any;
   styleUrls: [`./styles.css`],
   encapsulation: ViewEncapsulation.None
 })
-export class ProxiesDragDropComponent implements OnInit  {
-
-  constructor() { }
+export class ProxiesDragDropComponent {
 
   noneText:any = 'No Proxy';
-
   parentRef: any;
   noneRef: any;
   originalRef: any;
@@ -60,8 +56,8 @@ export class ProxiesDragDropComponent implements OnInit  {
         dragend: () => {
           this.noneRef.setHtml('No Proxy');
         }
-    }
-  }),
+      }
+    }),
 
     // Use the drag element as the proxy. Animate it back into position on drop.
     new Ext.drag.Source({
@@ -69,16 +65,14 @@ export class ProxiesDragDropComponent implements OnInit  {
       proxy: 'original'
     }),
 
-    // Leave the drag element in place and create a custom placeholder.
+      // Leave the drag element in place and create a custom placeholder.
     new Ext.drag.Source({
       proxy: {
-        type: 'placeholder',
-        cls: 'proxy-drag-custom',
-        html: 'Custom'
+          type: 'placeholder',
+          cls: 'proxy-drag-custom',
+          html: 'Custom'
       }
     })
   ];
-  
-  ngOnInit() {}
 
 }

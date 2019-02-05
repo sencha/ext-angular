@@ -1,6 +1,5 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core'
-
 declare var Ext: any;
+import { Component, ViewEncapsulation } from '@angular/core'
 
 @Component({
   selector: 'groups-dragdrop-component',
@@ -9,9 +8,7 @@ declare var Ext: any;
   encapsulation: ViewEncapsulation.None
 })
 
-export class GroupsDragDropComponent implements OnInit  {
-
-  constructor() { }
+export class GroupsDragDropComponent {
 
   parentRef: any;
   src1Ref: any;
@@ -109,7 +106,5 @@ export class GroupsDragDropComponent implements OnInit  {
         groups: ['group1', 'group2']
     })
 ];
-
-  ngOnInit() {}
 
 }

@@ -1,22 +1,24 @@
-<panel 
+<container padding="10" layout="fit" [fitToParent]="true">
+
+  <panel 
     [padding]="5"
-    [fitToParent]="true"
     [shadow]="true"
-    (ready)="parentReady($event)"
->
+    (ready)="parentReady($event)">
     <container 
-        (ready)="noneEleReady($event)"
-        [cls]="'proxy-none proxy-source'"
-        [html]="noneText"
-    ></container>
+      (ready)="noneEleReady($event)"
+      [cls]="'proxy-none proxy-source'"
+      [html]="noneText">
+    </container>
     <container 
-        (ready)="originalEleReady($event)"
-        [cls]="'proxy-original proxy-source'"
-        [html]="'Element as proxy with revert: true'"
-    ></container>
+      (ready)="originalEleReady($event)"
+      [cls]="'proxy-original proxy-source'"
+      [html]="'Element as proxy with revert: true'">
+    </container>
     <container 
-        (ready)="placeholderEleReady($event)"
-        [cls]="'proxy-placeholder proxy-source'"
-        [html]="'Placeholder'"
-    ></container>
-</panel>
+      (ready)="placeholderEleReady($event)"
+      [cls]="'proxy-placeholder proxy-source'"
+      [html]="'Placeholder'">
+    </container>
+  </panel>
+
+</container>

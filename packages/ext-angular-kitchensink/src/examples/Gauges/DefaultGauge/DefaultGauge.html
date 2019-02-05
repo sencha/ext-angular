@@ -1,7 +1,9 @@
 <container padding="10" layout="fit" [fitToParent]="true">
+
   <formpanel layout="vbox" [shadow]="true">
     <sliderfield label="Value" (change)="updateGauges($event)" [value]="value"></sliderfield>
     <gauge flex="1" [value]="value"></gauge>
     <gauge flex="1" [value]="value" [ui]="'green'" [trackStart]="180" [trackLength]="360"></gauge>
   </formpanel>
+  
 </container>
