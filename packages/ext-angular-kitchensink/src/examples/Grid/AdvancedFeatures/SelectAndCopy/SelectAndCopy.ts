@@ -13,36 +13,22 @@ Ext.require([
 export class SelectAndCopyComponent {
 
   selectable:any = {
-    extensible: 'both',
-    checkbox: true,
-    rows: true,
-    cells: true,
     columns: true,
-    drag: true
+    cells: true,
+    checkbox: true,
+    drag: true,
+    extensible: 'both'
   }
-  extensible:string= 'both';
-  checkbox:boolean = true;
-  rows: boolean = true;
-  cells:boolean = true;
   columns:boolean= true;
+  cells:boolean = true;
+  checkbox:boolean = true;
   drag:boolean= true;
-
+  extensible:string= 'both';
+  rows: boolean = true;
   message:string= 'No Selection';
   store = createStore();
 
-  constructor() {
-    this.selectable = {
-      extensible: this.extensible,
-      checkbox: this.checkbox,
-      rows: this.rows,
-      cells: this.cells,
-      columns: this.columns,
-      drag: this.drag
-    }
-  }
-
   toggleSelectable = field => {
-    console.log("field : " + field);
     switch(field) {
       case 'checkbox' : 
         this.checkbox = !this.checkbox;
@@ -61,11 +47,10 @@ export class SelectAndCopyComponent {
     }
 
     this.selectable = {
-      extensible: this.extensible,
-      checkbox: this.checkbox,
-      rows: this.rows,
       columns: this.columns,
       cells: this.cells,
+      checkbox: this.checkbox,
+      extensible: this.extensible,
       drag: this.drag
     }
   }
