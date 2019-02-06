@@ -21,6 +21,9 @@ ExtReact
 - issue in ExtReact  https://sencha.jira.com/browse/EXTREACT-9
 
 Misc
+- grid SelectionChange missing
+- spreadsheet mode and columns
+- mobile/phone layout for kitchensink
 - is skipping all ngDestroy correct?  
   - investigate effects of grid/column not deleted (and others)
 - formatting for many examples

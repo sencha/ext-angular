@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+declare var Ext: any;
+import { Component } from '@angular/core';
 import {model} from '../../CompanyModel';
 
-
-declare var Ext: any;
 
 Ext.require(['Ext.grid.plugin.RowExpander'])
 
@@ -11,7 +10,7 @@ Ext.require(['Ext.grid.plugin.RowExpander'])
   templateUrl: './RowExpander.html',
   styles: [``]
 })
-export class RowExpanderComponent implements OnInit {
+export class RowExpanderComponent {
 
   store = Ext.create('Ext.data.Store', {
     model,
@@ -23,12 +22,10 @@ export class RowExpanderComponent implements OnInit {
     }
   })
 
-
   rowExpandeerPlugin = { rowexpander: true };
 
   grid:any;
   onGridReady = (event) => {
-    console.log("onGridReady");
     this.grid = event.ext;
     this.grid.setPlugins(this.rowExpandeerPlugin);
   }
@@ -42,8 +39,7 @@ export class RowExpanderComponent implements OnInit {
     </div>
     `;
 
-  constructor() { }
-
+  //mjg
   renderSign = (format, value) => {
     var formattedValue = Ext.util.Format.number(value, format);
     var color = "";
@@ -55,9 +51,5 @@ export class RowExpanderComponent implements OnInit {
     }
     return formattedValue;
   } ;
-
-  ngOnInit() {
-  }
-
 
 }
