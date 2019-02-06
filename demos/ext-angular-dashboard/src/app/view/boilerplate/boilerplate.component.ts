@@ -31,7 +31,7 @@ import data from './data';
 				[tools]="tools"
 				(ready)="onEmployeePanelReady($event)">
 			<container (ready)="onEmployeeDetailsReady($event)"></container>
-			<polar
+			<polar downloadServerUrl ="http://svg.sencha.io"
 					[config]="configPolar"
 					[store]="ptoStore"
 					[interactions]="interactions"

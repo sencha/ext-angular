@@ -1,22 +1,26 @@
-<tabpanel 
-[tabBar]="{ docked: 'top' }"
-[fitToParent]="true">
-        <panel  layout="fit" [title]="'Row Lines'">
-            <tree  
-                header="false"
-                rowLines="true"
-                rootVisible="false"
-                shadow= "true"
-                [store]="store"
-            ></tree>
-        </panel>
-        <panel  layout="fit" [title]="'Single Expand'">
-            <tree  
-                header="false"
-                singleExpand="true"
-                rootVisible="false"
-                shadow= "true"
-                [store]="store"
-            ></tree>
-        </panel>
+<container padding="10" layout="fit" [fitToParent]="true">
+  <tabpanel
+    [left]="10" [top]="10" [width]="300" [height]="400"
+    [tabBar]="{docked: 'top'}">
+
+    <panel layout="fit" [title]="'Row Lines'">
+      <tree
+        header="false"
+        rowLines="true"
+        rootVisible="false"
+        shadow= "true"
+        [store]="store">
+      </tree>
+    </panel>
+
+    <panel layout="fit" [title]="'Single Expand'">
+      <tree
+        header="false"
+        singleExpand="true"
+        rootVisible="false"
+        shadow= "true"
+        [store]="store">
+      </tree>
+    </panel>
+
 </tabpanel>

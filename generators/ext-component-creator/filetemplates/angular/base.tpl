@@ -153,6 +153,10 @@ export class base {
         else if (parentCmp.xtype == 'carousel') {
           //console.log('carousel parent not deleted')
         }
+        else if (parentCmp.xtype == 'grid' && childCmp.xtype == 'column') {
+          //console.log('grid/column not deleted')
+          //console.log(childCmp)
+        }
         else if (parentCmp.xtype == 'segmentedbutton' && childCmp.xtype == 'button') {
           //console.log('segmentedbutton/button not deleted')
         }

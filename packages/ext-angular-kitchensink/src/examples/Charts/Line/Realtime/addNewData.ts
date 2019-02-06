@@ -9,7 +9,7 @@ const nextValue = (prev, min = 0, max = 20, delta = 3) => {
 let startTime;
 
 export const addNewData = function (chart, store, second = 1000) {
-  //Added cmp to access component attributes in ext-react16 [revisit]
+  if (chart.getAxes() == null) {return}
   const xAxis = chart.getAxes()[1],
     visibleRange = 10000,
     count = store.getCount();

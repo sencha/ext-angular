@@ -8,9 +8,6 @@ import { Component } from '@angular/core';
 })
 export class DonutComponent {
 
-  constructor() {
-  }
-
   store = Ext.create('Ext.data.Store', {
     fields: ['os', 'data1'],
     data: [
@@ -21,17 +18,12 @@ export class DonutComponent {
       {os: 'Others', data1: 1.9}
     ]
   });
-
   isPhone = Ext.os.is.Phone;
-
   theme: string = 'default';
-
   changeTheme = theme => this.theme = theme;
 
   chart: any;
-
   chartNavReady = function (event) {
-    console.log("chartNavReady");
     this.chart = event.ext;
   };
 

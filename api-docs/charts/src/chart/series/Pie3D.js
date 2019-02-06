@@ -17,7 +17,7 @@
 *                styles: [`
 *                        `],
 *                template: `
-*                        <polar #item
+*                        <polar downloadServerUrl ="http://svg.sencha.io" #item
 *                        [width]="'800px'"
 *                        [height]="'600px'"
 *                        theme="green"

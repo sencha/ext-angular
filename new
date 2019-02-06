@@ -1,11 +1,11 @@
 
 Smaller prod for ExtAngular
-- 'title' is brought in from index.html
 - reduce size of main.js
 - ExtAngular package smaller footprint (events, for example)
+- optimizations section in webconfig - also chunks?
 
 Treeshaking
-- treeshake error logic and recovery
+- treeshake error logic and recovery (if part 1 fails, for example)
 - reset project if npm run build fails
   - remove ext-angular-prod
   - update module
@@ -14,15 +14,16 @@ Treeshaking
 ExtGen
 - support upgrade to multi-app workspace in ext-gen
 - refactor ext-gen, et all
-- don't assume defaults of phone and desktop for profiles
-- implement folder parm
+- don't assume defaults of phone and desktop for profiles in upgrade
+- implement folder parameter
 
 ExtReact
 - issue in ExtReact  https://sencha.jira.com/browse/EXTREACT-9
 
 Misc
+- is skipping all ngDestroy correct?  
+  - investigate effects of grid/column not deleted (and others)
 - formatting for many examples
-- is skipping all ngDestroy correct?
 - Sencha tests for ExtAngular (like those for ExtReact)
 - Create eslint for app
 - Example applications for modern toolkit (like those for ExtReact)

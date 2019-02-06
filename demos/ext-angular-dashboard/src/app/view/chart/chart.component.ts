@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 	styles:  [``],
   selector: '',
 	template: `
-	<cartesian fitToParent=true [config]='cartesianConfig' ></cartesian>
+	<cartesian downloadServerUrl ="http://svg.sencha.io" fitToParent=true [config]='cartesianConfig' ></cartesian>
 	
 	<div style="width:500px;height:500px;">
 	</div>

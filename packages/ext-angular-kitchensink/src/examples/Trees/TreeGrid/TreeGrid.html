@@ -1,19 +1,23 @@
-<container  layout='vbox'
-[fitToParent]="true">
-        <tree  title="Tree Grid" [store]="this.store" shadow="true" flex="1"
-        (ready)="treeReady($event)"
-        [columns]="[
-{
-    xtype:'treecolumn',
-    text:'Name',
-    dataIndex:'text',
-    width:200
-}, {
-    xtype:'numbercolumn',
-    text:'No of Items',
-    dataIndex:'numItems',
-    width:100
-}]"
->
-        </tree>
+<container padding="10" layout="fit" [fitToParent]="true">
+  <tree
+    [left]="10" [top]="10" [width]="300" [height]="400"
+    title="Tree Grid"
+    [store]="this.store"
+    shadow="true"
+    (ready)="treeReady($event)"
+    [columns]="[
+      {
+        xtype:'treecolumn',
+        text:'Name',
+        dataIndex:'text',
+        width:200
+      }, 
+      {
+        xtype:'numbercolumn',
+        text:'No of Items',
+        dataIndex:'numItems',
+        width:100
+      }
+    ]">
+  </tree>
 </container>

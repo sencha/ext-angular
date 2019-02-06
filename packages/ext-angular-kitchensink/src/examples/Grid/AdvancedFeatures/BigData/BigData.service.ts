@@ -1,28 +1,24 @@
-import { Injectable } from '@angular/core';
-
 declare var Ext: any;
+import { Injectable } from '@angular/core';
 declare var KitchenSink: any;
 
 @Injectable()
 export class BigDataService {
 
+  constructor() {
+    this.init();
+  }
 
-	constructor() {
-		console.log("Constructor called");
-		this.init();
+  process = function(data) {
+    for (var i = 0; i < data.length; ++i) {
+      var d = data[i];
+      d.ratingLastYear = Math.max(Math.round(d.rating[0] / 2), 1);
+      d.ratingThisYear = Math.max(Math.round(d.rating[d.rating.length - 1] / 2), 1);
     }
+    return data;
+  }
 
-    process = function(data) {
-        for (var i = 0; i < data.length; ++i) {
-            var d = data[i];
-            d.ratingLastYear = Math.max(Math.round(d.rating[0] / 2), 1);
-            d.ratingThisYear = Math.max(Math.round(d.rating[d.rating.length - 1] / 2), 1);
-        }
-        return data;
-    }
-
-    init = function() {
-
+  init = function() {
         Ext.ux.ajax.SimManager.register({
             '/KitchenSink/BigData': {
                 type: 'json',
