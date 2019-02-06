@@ -1,7 +1,6 @@
 declare var Ext: any;
 import { Component } from '@angular/core';
 import { addNewData } from './addNewData';
-
 const interval = 1000;
 
 @Component({
@@ -11,21 +10,13 @@ const interval = 1000;
 })
 export class RealtimeComponent {
 
-  constructor() {
-
-  }
-
   timeChartTask: any;
-
   store = Ext.create('Ext.data.Store', {
     fields: ['yValue', 'metric1', 'metric2']
   });
 
-
   chart: any;
-
   chartNavReady = function (event) {
-    console.log("chartNavReady");
     this.chart = event.ext;
     this.startTask();
   };
@@ -45,7 +36,6 @@ export class RealtimeComponent {
   stopTask = () => {
     clearInterval(this.timeChartTask);
   };
-
 
   cartesianAxes = [{
     type: 'numeric',

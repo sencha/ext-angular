@@ -18,7 +18,7 @@
 *                styles: [`
 *                        `],
 *                template: `
-*                        <cartesian #item
+*                        <cartesian downloadServerUrl ="http://svg.sencha.io" #item
 *                        [width]="'800px'"
 *                        [height]="'600px'"
 *                        [store]="store"

@@ -1,33 +1,35 @@
-<tree 
-[shadow]="true"
-[store]="store"
-[fitToParent]="true"
-[platformConfig]="{
-    title: 'Editable Tree',
-    desktop: {
+<container padding="10" layout="fit" [fitToParent]="true">
+  <tree
+    [shadow]="true"
+    [store]="store"
+    [platformConfig]="{
+      title: 'Editable Tree',
+      desktop: {
         plugins: {
-            gridcellediting: true
+          gridcellediting: true
         }
-    },
-    '!desktop': {
+      },
+      '!desktop': {
         plugins: {
-            grideditable: true
+          grideditable: true
         }
-    }
-}"
-[columns]="[
-{
-    xtype:'treecolumn',
-    text:'Name',
-    dataIndex:'text',
-    flex:1,
-    editable: true
-}, {
-    xtype:'textcolumn',
-    text:'Class Name',
-    dataIndex:'className',
-    flex:1,
-    editable:true
-}]"
->
-</tree>
+      }
+    }"
+    [columns]="[
+      {
+        xtype:'treecolumn',
+        text:'Name',
+        dataIndex:'text',
+        flex:1,
+        editable: true
+      }, 
+      {
+        xtype:'textcolumn',
+        text:'Class Name',
+        dataIndex:'className',
+        flex:1,
+        editable:true
+      }
+    ]">
+  </tree>
+</container>

@@ -89,14 +89,14 @@ module.exports = function (env) {
     performance: { hints: false },
     mode: mode,
     devtool: (mode === 'development') ? 'inline-source-map' : false,
+    context: path.join(__dirname, './src'),
     entry: {
       polyfills: "./polyfills.ts",
       main: "./main.ts"
     },
-    context: path.join(__dirname, './src'),
     output: {
       path: path.resolve(__dirname, 'build'),
-      filename: "[name].[chunkhash:20].js"
+      filename: '[name].[chunkhash:20].js'
     },
     module: {
       rules: [
@@ -107,7 +107,7 @@ module.exports = function (env) {
         //{test: /\.scss$/,loader: ["raw-loader", "sass-loader?sourceMap"]}
       ]
     },
-    plugins,
+    plugins: plugins,
     node: false,
     devServer: {
       contentBase: './build',

@@ -45,21 +45,45 @@
             <checkboxfield  [disabled]="disabled" [boxLabel]="'Admin'"></checkboxfield>
             <checkboxfield  [disabled]="disabled" [boxLabel]="'Power User'"></checkboxfield>
         </fieldset>
-        <fieldset                       
-            [title]="'Favorite Color'" 
-            [layout]="{ type: 'vbox', align: 'left' }" 
-            [defaults]="{
-                labelAlign: 'placeholder',
-                name: 'color',
-                labelAlign: 'right',
-                labelWidth: 'auto',
-                padding: 0
-            }"
-        >
-            <radiofield [name]="'color'" [disabled]="disabled" [boxLabel]="'Red'" [value]="'red'"></radiofield>
-            <radiofield [name]="'color'" [disabled]="disabled" [boxLabel]="'Blue'" [value]="'blue'"></radiofield>
-            <radiofield [name]="'color'" [disabled]="disabled" [boxLabel]="'Green'" [value]="'green'"></radiofield>
-            <radiofield [name]="'color'" [disabled]="disabled" [boxLabel]="'Purple'" [value]="'purple'"></radiofield>
+        <fieldset
+            [title]="'Favorite Color'"
+            [layout]="{ type: 'vbox', align: 'left' }">
+            <radiofield 
+              name="color" 
+              labelAlign= "right"
+              labelWidth= "auto"
+              padding= "0"
+              [disabled]="disabled"
+              boxLabel="Red"
+              value="red">
+            </radiofield>
+            <radiofield 
+              name="color"
+              labelAlign= "right"
+              labelWidth= "auto"
+              padding= "0"
+              [disabled]="disabled"
+              boxLabel="Blue"
+              value="blue">
+            </radiofield>
+            <radiofield 
+              name="color"
+              labelAlign= "right"
+              labelWidth= "auto"
+              padding= "0"
+              [disabled]="disabled"
+              boxLabel="Green"
+              value="green">
+            </radiofield>
+            <radiofield
+              name="color"
+              labelAlign= "right"
+              labelWidth= "auto"
+              padding= "0"
+              [disabled]="disabled"
+              boxLabel="Purple"
+              value="purple">
+            </radiofield>
         </fieldset>
         <toolbar  [docked]="'bottom'" [layout]="{ type: 'hbox', pack: 'right' }">
             <button  [text]="disabled ? 'Enable All' : 'Disable All'" [margin]="'0 10 0 0'" (tap)="toggleDisabled($event)">

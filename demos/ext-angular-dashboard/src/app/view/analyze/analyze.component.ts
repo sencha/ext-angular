@@ -23,7 +23,7 @@ import { SalesStore } from '../../store/sales.store';
       (ready)="readyPivotGrid($event)"
       (pivotdone)="onPivotgridPivotDone($event)">
     </pivotgrid>
-    <cartesian
+    <cartesian downloadServerUrl ="http://svg.sencha.io"
       [flex]="'1'"
       [config]='cartesianConfig'
       (ready)="readyCartesian($event)">

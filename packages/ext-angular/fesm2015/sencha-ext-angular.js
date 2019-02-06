@@ -225,6 +225,7 @@ class base {
                 parentCmp = this._hostComponent.ext;
                 if (parentCmp.xtype == 'button' && childCmp.xtype == 'menu') ;
                 else if (parentCmp.xtype == 'carousel') ;
+                else if (parentCmp.xtype == 'grid' && childCmp.xtype == 'column') ;
                 else if (parentCmp.xtype == 'segmentedbutton' && childCmp.xtype == 'button') ;
                 else if (parentCmp.xtype == 'button' && childCmp.xtype == 'tooltip') ;
                 else if (parentCmp.xtype == 'titlebar' && childCmp.xtype == 'button') ;

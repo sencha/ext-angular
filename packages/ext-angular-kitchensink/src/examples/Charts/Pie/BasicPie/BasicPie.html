@@ -1,4 +1,4 @@
-<container [padding]="isPhone? '15' : ''" layout="fit" [fitToParent]="true">
+<container [padding]="!isPhone? '10' : ''" layout="fit" [fitToParent]="true">
 
   <container docked="top"><div #extitem>
     <chart-toolbar
@@ -8,8 +8,7 @@
     </chart-toolbar>
   </div></container>
 
-  <polar
-    [width]="'800px'"
+  <polar downloadServerUrl ="http://svg.sencha.io"
     shadow="true"
     [innerPadding]="isDesktop ? 40 : 10"
     [store]="this.store"
