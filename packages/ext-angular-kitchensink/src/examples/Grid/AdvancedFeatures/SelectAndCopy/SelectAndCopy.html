@@ -1,4 +1,5 @@
 <container layout="fit" padding="5" [fitToParent]="true">
+
   <toolbar docked="top" ui="app-transparent-toolbar" padding="0 10" [shadow]="false">
     <button margin="0 10 0 0" text="Selectable" ui="action">
       <menu>
@@ -19,6 +20,7 @@
     <spacer></spacer>
     <container margin="5 5 0 0" [style]="{fontSize: '18px', fontWeight: 'normal'}" [html]="message"></container>
   </toolbar>
+
   <grid 
     title="Flexible Selection"
     [store]="this.store"
@@ -26,15 +28,7 @@
     [listeners]= "{
       selectionchange: this.onSelectionChange
     }"
-    [selectable]="{
-      extensible: this.extensible,
-      checkbox: this.checkbox,
-      rows: this.rows,
-      columns: this.columns,
-      cells: this.cells,
-      columns: this.columns,
-      drag: this.drag
-    }"
+    [selectable]="this.selectable"
     [shadow]="true"
     [rowNumbers]="true"
     [columnLines]="true">
@@ -52,4 +46,5 @@
     <column text="Nov" dataIndex="nov" width="75"></column>
     <column text="Dev" dataIndex="dec" width="75"></column>
   </grid>
+
 </container>
