@@ -215,9 +215,54 @@ export class LandingpageComponent implements OnInit {
     }
   }
 }
+
+
+// @Component({
+//   selector: 'dummy-component',
+//   template: ``,
+//   styles: [``]
+// })
+// export class DummyComponent {}
+
+
+
 @Component({
   selector: 'dummy-component',
   template: ``,
   styles: [``]
 })
 export class DummyComponent {}
+
+import Hammer from 'hammerjs';
+import { OnDestroy, ElementRef } from '@angular/core';
+
+@Component({
+  selector: 'dummy-hammer-component',
+  template: ``,
+  styles: [``]
+})
+export class MyComponentUsingGestures implements OnInit, OnDestroy {
+
+  constructor(private elementRef: ElementRef) {}
+  tap() {}
+
+  _hammer:any;
+  ngOnInit() {
+    let element = this.elementRef.nativeElement;
+    this._hammer = new Hammer.Manager(element, {
+      recognizers: [
+        [Hammer.Tap],
+      ],
+    });
+    this._hammer.on('tap', this.tap);
+  }
+
+  ngOnDestroy() {
+    if (this._hammer) {
+      this._hammer.off('tap', this.tap);
+      this._hammer.destroy();
+      this._hammer = null;
+    }
+  }
+
+}

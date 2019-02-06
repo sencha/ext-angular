@@ -1,19 +1,22 @@
-<grid  
-[title]="'Row Expander Grid'"
-[store]="this.store"
-[layout]="'fit'"
-[shadow]="true"
-[fitToParent]="true"
-[itemConfig]="{
-  body : {
-    tpl: this.tplVal
-  }
-}"
-(ready)="onGridReady($event)"
->
-<column  text="Company" dataIndex="name" width="150"></column>
-<column  text="Price" dataIndex="price" width="75" formatter="usMoney"></column>
-<column  text="Change" width="100" dataIndex="priceChange" [renderer]="this.renderSign.bind(this, '0.00')"></column>
-<column  text="% Change" dataIndex="priceChangePct" [renderer]="this.renderSign.bind(this, '0.00')"></column>
-<column  text="Last Updated" dataIndex="priceLastChange" width="125" formatter="date('m/d/Y')" ></column>
-</grid>
+<container padding="10" layout="fit" [fitToParent]="true">
+
+  <grid
+    [title]="'Row Expander Grid'"
+    [store]="this.store"
+    [layout]="'fit'"
+    [shadow]="true"
+    [itemConfig]="{
+      body : {
+        tpl: this.tplVal
+      }
+    }"
+    (ready)="onGridReady($event)">
+
+    <column text="Company" dataIndex="name" width="150"></column>
+    <column text="Price" dataIndex="price" width="75" formatter="usMoney"></column>
+    <column text="Change" width="100" dataIndex="priceChange" [renderer]="this.renderSign.bind(this, '0.00')"></column>
+    <column text="% Change" dataIndex="priceChangePct" [renderer]="this.renderSign.bind(this, '0.00')"></column>
+    <column text="Last Updated" dataIndex="priceLastChange" width="125" formatter="date('m/d/Y')" ></column>
+  </grid>
+
+</container>
