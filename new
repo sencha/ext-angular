@@ -22,6 +22,7 @@ ExtReact
 - withRef: true and react-redux 6.0.0 (https://github.com/reduxjs/react-redux/releases)
 
 Misc
+- move to webpack-serve?
 - grid SelectionChange missing
 - spreadsheet mode and columns
 - mobile/phone layout for kitchensink

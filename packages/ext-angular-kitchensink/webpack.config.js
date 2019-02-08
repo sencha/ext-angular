@@ -88,7 +88,6 @@ module.exports = function (env) {
       new webpack.HotModuleReplacementPlugin()
     ]
     return {
-      watch: false,
       performance: { hints: false },
       mode: mode,
       devtool: (mode === 'development') ? 'inline-source-map' : false,
@@ -103,7 +102,7 @@ module.exports = function (env) {
         filename: '[name].js'
       },
       resolve: {
-        extensions: ['.ts', '.js']
+        extensions: ['.ts', '.js', '.html']
       },
       module: {
         rules: [
@@ -113,6 +112,9 @@ module.exports = function (env) {
           {test: /\.ts$/,  loader: '@ngtools/webpack'},
           //{test: /\.scss$/,loader: ["raw-loader", "sass-loader?sourceMap"]}
         ]
+      },
+      optimization: {
+        noEmitOnErrors: true
       },
       plugins: plugins,
       node: false,
@@ -124,7 +126,7 @@ module.exports = function (env) {
         port: port,
         disableHostCheck: false,
         compress: isProd,
-        inline: true,
+        inline:!isProd,
         stats: {
           assets: false,
           children: false,

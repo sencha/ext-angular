@@ -1,5 +1,6 @@
 const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin
 const ExtWebpackPlugin = require('@sencha/ext-angular-webpack-plugin')
+
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
@@ -29,6 +30,7 @@ module.exports = function (env) {
   var treeshake = env.treeshake ? JSON.parse(env.treeshake) : false
   var basehref = env.basehref || '/'
   var mode = isProd ? 'production': 'development'
+  var outputFolder = 'build'
   
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
@@ -41,6 +43,7 @@ module.exports = function (env) {
       }),
       new HtmlWebpackPlugin({
         template: "index.html",
+        hash: true,
         inject: "body"
       }),
       new BaseHrefWebpackPlugin({ baseHref: basehref }),
@@ -66,7 +69,8 @@ module.exports = function (env) {
       ),
       new FilterWarningsPlugin({
           exclude: /System.import/
-      })
+      }),
+      new webpack.HotModuleReplacementPlugin()
     ]
     return {
       performance: { hints: false },
@@ -74,18 +78,17 @@ module.exports = function (env) {
       devtool: (mode === 'development') ? 'inline-source-map' : false,
       context: path.join(__dirname, './src'),
       entry: {
+        vendor:  './vendor.ts',
         polyfills: "./polyfills.ts",
         main: "./main.ts"
       },
       output: {
-        path: path.resolve(__dirname, 'build'),
-        filename: "[name].[chunkhash:20].js"
+        path: path.resolve(__dirname, outputFolder),
+        filename: "[name].js"
       },
-
-      watch: false,
-      watchOptions: { poll: undefined },
-      performance: { hints: false },
-
+      resolve: {
+        extensions: ['.ts', '.js', '.html']
+      },
       module: {
         rules: [
           {test: /\.(png|svg|jpg|jpeg|gif)$/, use: ['file-loader']},
@@ -100,51 +103,47 @@ module.exports = function (env) {
       },
       plugins: plugins,
       node: false,
-      stats:
-      { colors: true,
-        hash: false,
-        timings: false,
-        chunks: true,
-        chunkModules: false,
-        children: false,
-        modules: false,
-        reasons: false,
-        warnings: true,
-        errors: true,
-        assets: true,
-        version: false,
-        errorDetails: false,
-        moduleTrace: false
-      },
-
-
-
-
       devServer: {
-        contentBase: './build',
+        contentBase: outputFolder,
+        hot: true,
         historyApiFallback: true,
-        hot: false,
         host: '0.0.0.0',
         port: port,
         disableHostCheck: false,
         compress: isProd,
         inline: !isProd,
-
-        stats:
-        { colors: true,
-          hash: false,
-          timings: false,
-          chunks: true,
-          chunkModules: false,
+        stats: {
+          assets: false,
           children: false,
+          chunks: false,
+          hash: false,
           modules: false,
-          reasons: false,
-          warnings: true,
-          errors: true,
-          assets: true,
+          publicPath: false,
+          timings: false,
           version: false,
-          errorDetails: false,
-          moduleTrace: false } ,
+          warnings: false,
+          colors: {
+            green: '\u001b[32m'
+          }
+        }
+
+        // stats:
+        // { 
+        //   colors: true,
+        //   hash: false,
+        //   timings: false,
+        //   chunks: true,
+        //   chunkModules: false,
+        //   children: false,
+        //   modules: false,
+        //   reasons: false,
+        //   warnings: true,
+        //   errors: true,
+        //   assets: true,
+        //   version: false,
+        //   errorDetails: false,
+        //   moduleTrace: false 
+        // } ,
      
 
       }
