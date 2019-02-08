@@ -91,7 +91,6 @@ var ExtAngularBootstrapComponent = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var base = /** @class */ (function () {
-    //private subscriptions: Subscription[] = [];
     function base(nativeElement, metaData, hostComponent) {
         var _this = this;
         this.metaData = metaData;
@@ -113,53 +112,12 @@ var base = /** @class */ (function () {
                 ((/** @type {?} */ (_this)))[event + 'event'] = new EventEmitter();
             }
         }));
-        //    metaData.EVENTS.forEach( (event: any, n: any) => {
-        //      if (event.name != 'fullscreen') {
-        //        (<any>this)[event.name] = new EventEmitter()
-        //      }
-        //      else {
-        //        (<any>this)[event.name + 'event'] = new EventEmitter()
-        //      }
-        //    })
-        //    let f = this.ngOnDestroy;
-        //    this.ngOnDestroy = () => {
-        //      f();
-        //      this.unsubscribeAll();
-        //    };
     }
-    //    protected safeSubscription (sub: Subscription): Subscription {
-    //        this.subscriptions.push(sub);
-    //        return sub;
-    //    }
-    //    private unsubscribeAll() {
-    //        this.subscriptions.forEach(element => {
-    //            !element.isUnsubscribed && element.unsubscribe();
-    //        });
-    //    }
-    //    protected safeSubscription (sub: Subscription): Subscription {
-    //        this.subscriptions.push(sub);
-    //        return sub;
-    //    }
-    //    private unsubscribeAll() {
-    //        this.subscriptions.forEach(element => {
-    //            !element.isUnsubscribed && element.unsubscribe();
-    //        });
-    //    }
     /**
      * @param {?} metaData
      * @return {?}
      */
-    base.prototype.baseOnInit = 
-    //    protected safeSubscription (sub: Subscription): Subscription {
-    //        this.subscriptions.push(sub);
-    //        return sub;
-    //    }
-    //    private unsubscribeAll() {
-    //        this.subscriptions.forEach(element => {
-    //            !element.isUnsubscribed && element.unsubscribe();
-    //        });
-    //    }
-    /**
+    base.prototype.baseOnInit = /**
      * @param {?} metaData
      * @return {?}
      */
@@ -247,52 +205,6 @@ var base = /** @class */ (function () {
     /**
      * @return {?}
      */
-    base.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        //console.log(`ngOnDestroy`)
-        //console.log(this)
-        /** @type {?} */
-        var childCmp;
-        /** @type {?} */
-        var parentCmp;
-        try {
-            childCmp = this.ext;
-            if (this._hostComponent != null) {
-                parentCmp = this._hostComponent.ext;
-                if (parentCmp.xtype == 'button' && childCmp.xtype == 'menu') ;
-                else if (parentCmp.xtype == 'carousel') ;
-                else if (parentCmp.xtype == 'grid' && childCmp.xtype == 'column') ;
-                else if (parentCmp.xtype == 'segmentedbutton' && childCmp.xtype == 'button') ;
-                else if (parentCmp.xtype == 'button' && childCmp.xtype == 'tooltip') ;
-                else if (parentCmp.xtype == 'titlebar' && childCmp.xtype == 'button') ;
-                else if (parentCmp.xtype == 'titlebar' && childCmp.xtype == 'searchfield') ;
-                else {
-                    parentCmp.remove([childCmp]);
-                    childCmp.destroy();
-                }
-            }
-            else {
-                if (childCmp != undefined) {
-                    childCmp.destroy();
-                }
-                else {
-                    console.log('no destroy');
-                }
-            }
-        }
-        catch (e) {
-            console.error(e);
-            console.log('*****');
-            console.log(parentCmp);
-            console.log(childCmp);
-            console.log('*****');
-        }
-    };
-    /**
-     * @return {?}
-     */
     base.prototype.baseAfterContentInit = /**
      * @return {?}
      */
@@ -338,55 +250,63 @@ var base = /** @class */ (function () {
         if (parentxtype === 'grid' || parentxtype === 'lockedgrid') {
             if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn' || childxtype === 'booleancolumn') {
                 parentCmp.addColumn(childCmp);
+                return;
             }
             else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
                 if (parentCmp.getHideHeaders() === false) {
                     //var j = parentCmp.items.items.length;
                     parentCmp.insert(1, childCmp);
+                    return;
                 }
                 else {
                     parentCmp.add(childCmp);
+                    return;
                 }
             }
             else {
-                console.log('??');
+                console.log('unhandled else in addTheChild');
                 console.log(parentxtype);
                 console.log(childxtype);
             }
         }
-        else if (childxtype === 'tooltip') {
+        if (childxtype === 'tooltip') {
             parentCmp.setTooltip(childCmp);
+            return;
         }
-        else if (childxtype === 'plugin') {
+        if (childxtype === 'plugin') {
             parentCmp.setPlugin(childCmp);
+            return;
         }
         else if (parentxtype === 'button') {
             if (childxtype === 'menu') {
                 parentCmp.setMenu(childCmp);
+                return;
             }
             else {
                 console.log('child not added');
             }
         }
-        else if (childxtype === 'toolbar' && Ext.isClassic === true) {
+        if (childxtype === 'toolbar' && Ext.isClassic === true) {
             parentCmp.addDockedItems(childCmp);
+            return;
         }
         else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
             if (parentCmp.getHideHeaders() === false) {
                 //var j: any = parentCmp.items.items.length
                 //parentCmp.insert(j - 1, childCmp)
                 parentCmp.insert(1, childCmp);
+                return;
             }
             else {
                 parentCmp.add(childCmp);
+                return;
             }
         }
-        else if (parentCmp.add != undefined) {
+        if (parentCmp.add != undefined) {
             parentCmp.add(childCmp);
+            return;
         }
-        else {
-            console.log('child not added');
-        }
+        console.log('child not added');
     };
     /**
      * @param {?} changes
@@ -427,6 +347,50 @@ var base = /** @class */ (function () {
             }
         }
         //console.log(`OnChanges: ${changesMsgs.join('; ')}`)
+    };
+    /**
+     * @return {?}
+     */
+    base.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var childCmp;
+        /** @type {?} */
+        var parentCmp;
+        try {
+            childCmp = this.ext;
+            if (this._hostComponent != null) {
+                parentCmp = this._hostComponent.ext;
+                if (parentCmp.xtype == 'button' && childCmp.xtype == 'menu') ;
+                else if (parentCmp.xtype == 'carousel') ;
+                else if (parentCmp.xtype == 'grid' && childCmp.xtype == 'column') ;
+                else if (parentCmp.xtype == 'segmentedbutton' && childCmp.xtype == 'button') ;
+                else if (parentCmp.xtype == 'button' && childCmp.xtype == 'tooltip') ;
+                else if (parentCmp.xtype == 'titlebar' && childCmp.xtype == 'button') ;
+                else if (parentCmp.xtype == 'titlebar' && childCmp.xtype == 'searchfield') ;
+                else {
+                    parentCmp.remove([childCmp]);
+                    childCmp.destroy();
+                }
+            }
+            else {
+                if (childCmp != undefined) {
+                    childCmp.destroy();
+                }
+                else {
+                    console.log('no destroy');
+                }
+            }
+        }
+        catch (e) {
+            console.error(e);
+            console.log('*****');
+            console.log(parentCmp);
+            console.log(childCmp);
+            console.log('*****');
+        }
     };
     base.propDecorators = {
         _extroute: [{ type: ContentChild, args: ['extroute',] }],

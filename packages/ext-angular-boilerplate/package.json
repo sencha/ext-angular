@@ -39,7 +39,7 @@
     "core-js": "^2.6.4",
     "zone.js": "^0.8.29",
 
-    "typescript": "^3.3.3",
+    "typescript": "3.2.4",
     "@types/core-js": "^2.5.0",
     "@types/node": "^10.12.21",
     "rimraf": "^2.6.3",
