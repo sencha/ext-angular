@@ -93,12 +93,16 @@ module.exports = function (env) {
       devtool: (mode === 'development') ? 'inline-source-map' : false,
       context: path.join(__dirname, './src'),
       entry: {
+        vendor:  path.join(__dirname, './src/vendor.ts'),
         polyfills:  path.join(__dirname, './src/polyfills.ts'),
         main: path.join(__dirname, './src/main.ts') //"./main.ts"
       },
       output: {
         path: path.resolve(__dirname, 'build'),
         filename: '[name].js'
+      },
+      resolve: {
+        extensions: ['.ts', '.js']
       },
       module: {
         rules: [
@@ -113,15 +117,12 @@ module.exports = function (env) {
       node: false,
       devServer: {
         contentBase: './build',
-        //contentBase: false,
-        compress: false,
         hot: true,
         historyApiFallback: true,
-        //hot: true,
         host: '0.0.0.0',
         port: port,
         disableHostCheck: false,
-        //compress: isProd,
+        compress: isProd,
         inline: true,
         stats: {
           assets: false,

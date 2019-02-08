@@ -6,6 +6,7 @@ import { VERSION } from '@angular/core';
 import { Subject } from "rxjs";
 import { getFiles } from "./code_preview_helper";
 
+
 Ext.require([
   'Ext.layout.*',
   'Ext.MessageBox',
@@ -67,7 +68,7 @@ export class LandingpageComponent implements OnInit {
     <div class="app-thumbnail-icon-wrap">
       <div class="app-thumbnail-icon {navIcon}"></div>
     </div>
-    <div class="app-thumbnail-text" >{text}</div>
+    <div class="app-thumbnail-text">{text}</div>
     <div class="{premiumClass}"></div>
   </div>`
   showCode: boolean = false;
