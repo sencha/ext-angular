@@ -253,3 +253,6 @@ export function launch(AppModule) {
       console.log(key)
     ))
   }
+
+
+    "angular-highlight-js":"^2.0.1",

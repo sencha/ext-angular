@@ -265,4 +265,5 @@ export class MyComponentUsingGestures implements OnInit, OnDestroy {
     }
   }
 
+  
 }
