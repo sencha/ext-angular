@@ -86,57 +86,57 @@ module.exports = function (env) {
       }),
       new webpack.HotModuleReplacementPlugin()
     ]
-  return {
-    watch: false,
-    performance: { hints: false },
-    mode: mode,
-    devtool: (mode === 'development') ? 'inline-source-map' : false,
-    context: path.join(__dirname, './src'),
-    entry: {
-      polyfills:  path.join(__dirname, './src/polyfills.ts'),
-      main: path.join(__dirname, './src/main.ts') //"./main.ts"
-    },
-    output: {
-      path: path.resolve(__dirname, 'build'),
-      filename: '[name].js'
-    },
-    module: {
-      rules: [
-        {test: /\.css$/, loader: ['to-string-loader', "style-loader", "css-loader"]},
-        {test: /\.(png|svg|jpg|jpeg|gif)$/, use: ['file-loader']},
-        {test: /\.html$/,loader: "html-loader"},
-        {test: /\.ts$/,  loader: '@ngtools/webpack'},
-        //{test: /\.scss$/,loader: ["raw-loader", "sass-loader?sourceMap"]}
-      ]
-    },
-    plugins: plugins,
-    node: false,
-    devServer: {
-      contentBase: './build',
-      //contentBase: false,
-      stats: false,
-      compress: false,
-      hot: true,
-      historyApiFallback: true,
-      //hot: true,
-      host: '0.0.0.0',
-      port: port,
-      disableHostCheck: false,
-      //compress: isProd,
-      inline: true
-      // stats: {
-      //   assets: false,
-      //   children: false,
-      //   chunks: false,
-      //   hash: false,
-      //   modules: false,
-      //   publicPath: false,
-      //   timings: false,
-      //   version: false,
-      //   warnings: false,
-      //   colors: {
-      //     green: '\u001b[32m'
-      //   }
+    return {
+      watch: false,
+      performance: { hints: false },
+      mode: mode,
+      devtool: (mode === 'development') ? 'inline-source-map' : false,
+      context: path.join(__dirname, './src'),
+      entry: {
+        polyfills:  path.join(__dirname, './src/polyfills.ts'),
+        main: path.join(__dirname, './src/main.ts') //"./main.ts"
+      },
+      output: {
+        path: path.resolve(__dirname, 'build'),
+        filename: '[name].js'
+      },
+      module: {
+        rules: [
+          {test: /\.css$/, loader: ['to-string-loader', "style-loader", "css-loader"]},
+          {test: /\.(png|svg|jpg|jpeg|gif)$/, use: ['file-loader']},
+          {test: /\.html$/,loader: "html-loader"},
+          {test: /\.ts$/,  loader: '@ngtools/webpack'},
+          //{test: /\.scss$/,loader: ["raw-loader", "sass-loader?sourceMap"]}
+        ]
+      },
+      plugins: plugins,
+      node: false,
+      devServer: {
+        contentBase: './build',
+        //contentBase: false,
+        compress: false,
+        hot: true,
+        historyApiFallback: true,
+        //hot: true,
+        host: '0.0.0.0',
+        port: port,
+        disableHostCheck: false,
+        //compress: isProd,
+        inline: true,
+        stats: {
+          assets: false,
+          children: false,
+          chunks: false,
+          hash: false,
+          modules: false,
+          publicPath: false,
+          timings: false,
+          version: false,
+          warnings: false,
+          colors: {
+            green: '\u001b[32m'
+          }
+        }
       }
     }
   })
