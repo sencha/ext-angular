@@ -87,7 +87,7 @@ module.exports = function (env) {
       new webpack.HotModuleReplacementPlugin()
     ]
   return {
-    watch: true,
+    watch: false,
     performance: { hints: false },
     mode: mode,
     devtool: (mode === 'development') ? 'inline-source-map' : false,
