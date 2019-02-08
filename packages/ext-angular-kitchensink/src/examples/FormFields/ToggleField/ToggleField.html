@@ -1,6 +1,8 @@
-<formpanel  [shadow]="true" [defaults]="{ padding: '0 10'}" [padding]="20">
+<container padding="10" layout="fit" [fitToParent]="true">
+  <formpanel [shadow]="true" [defaults]="{ padding: '0 10'}" [padding]="20">
     <togglefield  [boxLabel]="'On'" [value]="true"></togglefield>
     <togglefield  [boxLabel]="'Off'" [value]="false"></togglefield>
     <togglefield  [boxLabel]="'Disabled'" [disabled]="true"></togglefield>
     <togglefield  [boxLabel]="'Disabled (On)'" [disabled]="true" [value]="true"></togglefield>
 </formpanel>
+</container>

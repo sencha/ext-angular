@@ -83,20 +83,22 @@ module.exports = function (env) {
       ),
       new FilterWarningsPlugin({
           exclude: /System.import/
-      })
+      }),
+      new webpack.HotModuleReplacementPlugin()
     ]
   return {
+    watch: true,
     performance: { hints: false },
     mode: mode,
     devtool: (mode === 'development') ? 'inline-source-map' : false,
     context: path.join(__dirname, './src'),
     entry: {
-      polyfills: "./polyfills.ts",
-      main: "./main.ts"
+      polyfills:  path.join(__dirname, './src/polyfills.ts'),
+      main: path.join(__dirname, './src/main.ts') //"./main.ts"
     },
     output: {
       path: path.resolve(__dirname, 'build'),
-      filename: '[name].[chunkhash:20].js'
+      filename: '[name].js'
     },
     module: {
       rules: [
@@ -111,28 +113,31 @@ module.exports = function (env) {
     node: false,
     devServer: {
       contentBase: './build',
+      //contentBase: false,
+      stats: false,
+      compress: false,
+      hot: true,
       historyApiFallback: true,
-      hot: false,
+      //hot: true,
       host: '0.0.0.0',
       port: port,
       disableHostCheck: false,
-      compress: isProd,
-      inline: !isProd,
-      stats: {
-        assets: false,
-        children: false,
-        chunks: false,
-        hash: false,
-        modules: false,
-        publicPath: false,
-        timings: false,
-        version: false,
-        warnings: false,
-        colors: {
-          green: '\u001b[32m'
-        }
+      //compress: isProd,
+      inline: true
+      // stats: {
+      //   assets: false,
+      //   children: false,
+      //   chunks: false,
+      //   hash: false,
+      //   modules: false,
+      //   publicPath: false,
+      //   timings: false,
+      //   version: false,
+      //   warnings: false,
+      //   colors: {
+      //     green: '\u001b[32m'
+      //   }
       }
     }
-  }
-})
+  })
 }

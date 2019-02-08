@@ -3,7 +3,7 @@ import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, Compone
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ExtAngularBootstrapService {
     /**
@@ -61,7 +61,7 @@ ExtAngularBootstrapService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ExtAngularBootstrapComponent {
     /**
@@ -86,7 +86,7 @@ ExtAngularBootstrapComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class base {
     //private subscriptions: Subscription[] = [];
@@ -102,14 +102,19 @@ class base {
         this.q = null;
         this._nativeElement = nativeElement;
         this._hostComponent = hostComponent;
-        metaData.EVENTNAMES.forEach((event, n) => {
+        metaData.EVENTNAMES.forEach((/**
+         * @param {?} event
+         * @param {?} n
+         * @return {?}
+         */
+        (event, n) => {
             if (event != 'fullscreen') {
                 ((/** @type {?} */ (this)))[event] = new EventEmitter();
             }
             else {
                 ((/** @type {?} */ (this)))[event + 'event'] = new EventEmitter();
             }
-        });
+        }));
         //    metaData.EVENTS.forEach( (event: any, n: any) => {
         //      if (event.name != 'fullscreen') {
         //        (<any>this)[event.name] = new EventEmitter()
@@ -183,12 +188,21 @@ class base {
             o.listeners = {};
             /** @type {?} */
             var EVENTS = metaData.EVENTS;
-            EVENTS.forEach(function (event, index, array) {
+            EVENTS.forEach((/**
+             * @param {?} event
+             * @param {?} index
+             * @param {?} array
+             * @return {?}
+             */
+            function (event, index, array) {
                 /** @type {?} */
                 let eventname = event.name;
                 /** @type {?} */
                 let eventparameters = event.parameters;
-                o.listeners[eventname] = function () {
+                o.listeners[eventname] = (/**
+                 * @return {?}
+                 */
+                function () {
                     /** @type {?} */
                     let parameters = eventparameters;
                     /** @type {?} */
@@ -201,8 +215,8 @@ class base {
                         emitparms[parms[i]] = args[i];
                     }
                     me[eventname].emit(emitparms);
-                };
-            });
+                });
+            }));
         }
         if (this._nativeElement.parentElement != null) {
             o.renderTo = this._nativeElement;
@@ -388,7 +402,7 @@ base.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class actionsheetMetaData {
 }
@@ -727,7 +741,10 @@ ExtActionsheetComponent.decorators = [
                 selector: 'actionsheet',
                 inputs: actionsheetMetaData.PROPERTIES,
                 outputs: actionsheetMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtActionsheetComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtActionsheetComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -739,7 +756,7 @@ ExtActionsheetComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class audioMetaData {
 }
@@ -1006,7 +1023,10 @@ ExtAudioComponent.decorators = [
                 selector: 'audio',
                 inputs: audioMetaData.PROPERTIES,
                 outputs: audioMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtAudioComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtAudioComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -1018,7 +1038,7 @@ ExtAudioComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class buttonMetaData {
 }
@@ -1291,7 +1311,10 @@ ExtButtonComponent.decorators = [
                 selector: 'button',
                 inputs: buttonMetaData.PROPERTIES,
                 outputs: buttonMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtButtonComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtButtonComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -1303,7 +1326,7 @@ ExtButtonComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendar_eventMetaData {
 }
@@ -1556,7 +1579,10 @@ ExtCalendar_eventComponent.decorators = [
                 selector: 'calendar-event',
                 inputs: calendar_eventMetaData.PROPERTIES,
                 outputs: calendar_eventMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_eventComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendar_eventComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -1568,7 +1594,7 @@ ExtCalendar_eventComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendar_form_addMetaData {
 }
@@ -1942,7 +1968,10 @@ ExtCalendar_form_addComponent.decorators = [
                 selector: 'calendar-form-add',
                 inputs: calendar_form_addMetaData.PROPERTIES,
                 outputs: calendar_form_addMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_form_addComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendar_form_addComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -1954,7 +1983,7 @@ ExtCalendar_form_addComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendar_calendar_pickerMetaData {
 }
@@ -2297,7 +2326,10 @@ ExtCalendar_calendar_pickerComponent.decorators = [
                 selector: 'calendar-calendar-picker',
                 inputs: calendar_calendar_pickerMetaData.PROPERTIES,
                 outputs: calendar_calendar_pickerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_calendar_pickerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendar_calendar_pickerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -2309,7 +2341,7 @@ ExtCalendar_calendar_pickerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendar_form_editMetaData {
 }
@@ -2683,7 +2715,10 @@ ExtCalendar_form_editComponent.decorators = [
                 selector: 'calendar-form-edit',
                 inputs: calendar_form_editMetaData.PROPERTIES,
                 outputs: calendar_form_editMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_form_editComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendar_form_editComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -2695,7 +2730,7 @@ ExtCalendar_form_editComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendar_timefieldMetaData {
 }
@@ -3038,7 +3073,10 @@ ExtCalendar_timefieldComponent.decorators = [
                 selector: 'calendar-timefield',
                 inputs: calendar_timefieldMetaData.PROPERTIES,
                 outputs: calendar_timefieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_timefieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendar_timefieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -3050,7 +3088,7 @@ ExtCalendar_timefieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendar_daysheaderMetaData {
 }
@@ -3299,7 +3337,10 @@ ExtCalendar_daysheaderComponent.decorators = [
                 selector: 'calendar-daysheader',
                 inputs: calendar_daysheaderMetaData.PROPERTIES,
                 outputs: calendar_daysheaderMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_daysheaderComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendar_daysheaderComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -3311,7 +3352,7 @@ ExtCalendar_daysheaderComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendar_weeksheaderMetaData {
 }
@@ -3560,7 +3601,10 @@ ExtCalendar_weeksheaderComponent.decorators = [
                 selector: 'calendar-weeksheader',
                 inputs: calendar_weeksheaderMetaData.PROPERTIES,
                 outputs: calendar_weeksheaderMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weeksheaderComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendar_weeksheaderComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -3572,7 +3616,7 @@ ExtCalendar_weeksheaderComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendar_listMetaData {
 }
@@ -3944,7 +3988,10 @@ ExtCalendar_listComponent.decorators = [
                 selector: 'calendar-list',
                 inputs: calendar_listMetaData.PROPERTIES,
                 outputs: calendar_listMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_listComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendar_listComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -3956,7 +4003,7 @@ ExtCalendar_listComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendar_dayMetaData {
 }
@@ -4339,7 +4386,10 @@ ExtCalendar_dayComponent.decorators = [
                 selector: 'calendar-day',
                 inputs: calendar_dayMetaData.PROPERTIES,
                 outputs: calendar_dayMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_dayComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendar_dayComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -4351,7 +4401,7 @@ ExtCalendar_dayComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendar_daysMetaData {
 }
@@ -4734,7 +4784,10 @@ ExtCalendar_daysComponent.decorators = [
                 selector: 'calendar-days',
                 inputs: calendar_daysMetaData.PROPERTIES,
                 outputs: calendar_daysMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_daysComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendar_daysComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -4746,7 +4799,7 @@ ExtCalendar_daysComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendar_monthMetaData {
 }
@@ -5124,7 +5177,10 @@ ExtCalendar_monthComponent.decorators = [
                 selector: 'calendar-month',
                 inputs: calendar_monthMetaData.PROPERTIES,
                 outputs: calendar_monthMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_monthComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendar_monthComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -5136,7 +5192,7 @@ ExtCalendar_monthComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendarMetaData {
 }
@@ -5488,7 +5544,10 @@ ExtCalendarComponent.decorators = [
                 selector: 'calendar',
                 inputs: calendarMetaData.PROPERTIES,
                 outputs: calendarMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendarComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendarComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -5500,7 +5559,7 @@ ExtCalendarComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendar_weekMetaData {
 }
@@ -5884,7 +5943,10 @@ ExtCalendar_weekComponent.decorators = [
                 selector: 'calendar-week',
                 inputs: calendar_weekMetaData.PROPERTIES,
                 outputs: calendar_weekMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weekComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendar_weekComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -5896,7 +5958,7 @@ ExtCalendar_weekComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendar_weeksMetaData {
 }
@@ -6274,7 +6336,10 @@ ExtCalendar_weeksComponent.decorators = [
                 selector: 'calendar-weeks',
                 inputs: calendar_weeksMetaData.PROPERTIES,
                 outputs: calendar_weeksMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weeksComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendar_weeksComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -6286,7 +6351,7 @@ ExtCalendar_weeksComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendar_dayviewMetaData {
 }
@@ -6578,7 +6643,10 @@ ExtCalendar_dayviewComponent.decorators = [
                 selector: 'calendar-dayview',
                 inputs: calendar_dayviewMetaData.PROPERTIES,
                 outputs: calendar_dayviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_dayviewComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendar_dayviewComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -6590,7 +6658,7 @@ ExtCalendar_dayviewComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendar_daysviewMetaData {
 }
@@ -6882,7 +6950,10 @@ ExtCalendar_daysviewComponent.decorators = [
                 selector: 'calendar-daysview',
                 inputs: calendar_daysviewMetaData.PROPERTIES,
                 outputs: calendar_daysviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_daysviewComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendar_daysviewComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -6894,7 +6965,7 @@ ExtCalendar_daysviewComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendar_monthviewMetaData {
 }
@@ -7184,7 +7255,10 @@ ExtCalendar_monthviewComponent.decorators = [
                 selector: 'calendar-monthview',
                 inputs: calendar_monthviewMetaData.PROPERTIES,
                 outputs: calendar_monthviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_monthviewComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendar_monthviewComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -7196,7 +7270,7 @@ ExtCalendar_monthviewComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendar_multiviewMetaData {
 }
@@ -7250,7 +7324,10 @@ ExtCalendar_multiviewComponent.decorators = [
                 selector: 'calendar-multiview',
                 inputs: calendar_multiviewMetaData.PROPERTIES,
                 outputs: calendar_multiviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_multiviewComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendar_multiviewComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -7262,7 +7339,7 @@ ExtCalendar_multiviewComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendar_weekviewMetaData {
 }
@@ -7555,7 +7632,10 @@ ExtCalendar_weekviewComponent.decorators = [
                 selector: 'calendar-weekview',
                 inputs: calendar_weekviewMetaData.PROPERTIES,
                 outputs: calendar_weekviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weekviewComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendar_weekviewComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -7567,7 +7647,7 @@ ExtCalendar_weekviewComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class calendar_weeksviewMetaData {
 }
@@ -7857,7 +7937,10 @@ ExtCalendar_weeksviewComponent.decorators = [
                 selector: 'calendar-weeksview',
                 inputs: calendar_weeksviewMetaData.PROPERTIES,
                 outputs: calendar_weeksviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weeksviewComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCalendar_weeksviewComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -7869,7 +7952,7 @@ ExtCalendar_weeksviewComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class carouselMetaData {
 }
@@ -8151,7 +8234,10 @@ ExtCarouselComponent.decorators = [
                 selector: 'carousel',
                 inputs: carouselMetaData.PROPERTIES,
                 outputs: carouselMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCarouselComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCarouselComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -8163,7 +8249,7 @@ ExtCarouselComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class axis3dMetaData {
 }
@@ -8248,7 +8334,10 @@ ExtAxis3dComponent.decorators = [
                 selector: 'axis3d',
                 inputs: axis3dMetaData.PROPERTIES,
                 outputs: axis3dMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtAxis3dComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtAxis3dComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -8260,7 +8349,7 @@ ExtAxis3dComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class cartesianMetaData {
 }
@@ -8609,7 +8698,10 @@ ExtCartesianComponent.decorators = [
                 selector: 'cartesian',
                 inputs: cartesianMetaData.PROPERTIES,
                 outputs: cartesianMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCartesianComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCartesianComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -8621,7 +8713,7 @@ ExtCartesianComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class chartMetaData {
 }
@@ -8970,7 +9062,10 @@ ExtChartComponent.decorators = [
                 selector: 'chart',
                 inputs: chartMetaData.PROPERTIES,
                 outputs: chartMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtChartComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtChartComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -8982,7 +9077,7 @@ ExtChartComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class interactionMetaData {
 }
@@ -9032,7 +9127,10 @@ ExtInteractionComponent.decorators = [
                 selector: 'interaction',
                 inputs: interactionMetaData.PROPERTIES,
                 outputs: interactionMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtInteractionComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtInteractionComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -9044,7 +9142,7 @@ ExtInteractionComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class legendMetaData {
 }
@@ -9417,7 +9515,10 @@ ExtLegendComponent.decorators = [
                 selector: 'legend',
                 inputs: legendMetaData.PROPERTIES,
                 outputs: legendMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtLegendComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtLegendComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -9429,7 +9530,7 @@ ExtLegendComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class chartnavigatorMetaData {
 }
@@ -9711,7 +9812,10 @@ ExtChartnavigatorComponent.decorators = [
                 selector: 'chartnavigator',
                 inputs: chartnavigatorMetaData.PROPERTIES,
                 outputs: chartnavigatorMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtChartnavigatorComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtChartnavigatorComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -9723,7 +9827,7 @@ ExtChartnavigatorComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class polarMetaData {
 }
@@ -10073,7 +10177,10 @@ ExtPolarComponent.decorators = [
                 selector: 'polar',
                 inputs: polarMetaData.PROPERTIES,
                 outputs: polarMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPolarComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPolarComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -10085,7 +10192,7 @@ ExtPolarComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class spacefillingMetaData {
 }
@@ -10432,7 +10539,10 @@ ExtSpacefillingComponent.decorators = [
                 selector: 'spacefilling',
                 inputs: spacefillingMetaData.PROPERTIES,
                 outputs: spacefillingMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSpacefillingComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSpacefillingComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -10444,7 +10554,7 @@ ExtSpacefillingComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class chipMetaData {
 }
@@ -10693,7 +10803,10 @@ ExtChipComponent.decorators = [
                 selector: 'chip',
                 inputs: chipMetaData.PROPERTIES,
                 outputs: chipMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtChipComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtChipComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -10705,7 +10818,7 @@ ExtChipComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class componentMetaData {
 }
@@ -10948,7 +11061,10 @@ ExtComponentComponent.decorators = [
                 selector: 'component',
                 inputs: componentMetaData.PROPERTIES,
                 outputs: componentMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtComponentComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtComponentComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -10960,7 +11076,7 @@ ExtComponentComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class containerMetaData {
 }
@@ -11240,7 +11356,10 @@ ExtContainerComponent.decorators = [
                 selector: 'container',
                 inputs: containerMetaData.PROPERTIES,
                 outputs: containerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtContainerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtContainerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -11252,7 +11371,7 @@ ExtContainerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class d3_canvasMetaData {
 }
@@ -11503,7 +11622,10 @@ ExtD3_canvasComponent.decorators = [
                 selector: 'd3-canvas',
                 inputs: d3_canvasMetaData.PROPERTIES,
                 outputs: d3_canvasMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_canvasComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtD3_canvasComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -11515,7 +11637,7 @@ ExtD3_canvasComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class d3_heatmapMetaData {
 }
@@ -11774,7 +11896,10 @@ ExtD3_heatmapComponent.decorators = [
                 selector: 'd3-heatmap',
                 inputs: d3_heatmapMetaData.PROPERTIES,
                 outputs: d3_heatmapMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_heatmapComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtD3_heatmapComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -11786,7 +11911,7 @@ ExtD3_heatmapComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class d3_packMetaData {
 }
@@ -12061,7 +12186,10 @@ ExtD3_packComponent.decorators = [
                 selector: 'd3-pack',
                 inputs: d3_packMetaData.PROPERTIES,
                 outputs: d3_packMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_packComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtD3_packComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -12073,7 +12201,7 @@ ExtD3_packComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class d3_partitionMetaData {
 }
@@ -12346,7 +12474,10 @@ ExtD3_partitionComponent.decorators = [
                 selector: 'd3-partition',
                 inputs: d3_partitionMetaData.PROPERTIES,
                 outputs: d3_partitionMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_partitionComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtD3_partitionComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -12358,7 +12489,7 @@ ExtD3_partitionComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class d3_sunburstMetaData {
 }
@@ -12633,7 +12764,10 @@ ExtD3_sunburstComponent.decorators = [
                 selector: 'd3-sunburst',
                 inputs: d3_sunburstMetaData.PROPERTIES,
                 outputs: d3_sunburstMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_sunburstComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtD3_sunburstComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -12645,7 +12779,7 @@ ExtD3_sunburstComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class d3_treeMetaData {
 }
@@ -12921,7 +13055,10 @@ ExtD3_treeComponent.decorators = [
                 selector: 'd3-tree',
                 inputs: d3_treeMetaData.PROPERTIES,
                 outputs: d3_treeMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_treeComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtD3_treeComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -12933,7 +13070,7 @@ ExtD3_treeComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class d3_horizontal_treeMetaData {
 }
@@ -13209,7 +13346,10 @@ ExtD3_horizontal_treeComponent.decorators = [
                 selector: 'd3-horizontal-tree',
                 inputs: d3_horizontal_treeMetaData.PROPERTIES,
                 outputs: d3_horizontal_treeMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_horizontal_treeComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtD3_horizontal_treeComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -13221,7 +13361,7 @@ ExtD3_horizontal_treeComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class d3_treemapMetaData {
 }
@@ -13499,7 +13639,10 @@ ExtD3_treemapComponent.decorators = [
                 selector: 'd3-treemap',
                 inputs: d3_treemapMetaData.PROPERTIES,
                 outputs: d3_treemapMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_treemapComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtD3_treemapComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -13511,7 +13654,7 @@ ExtD3_treemapComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class d3_svgMetaData {
 }
@@ -13764,7 +13907,10 @@ ExtD3_svgComponent.decorators = [
                 selector: 'd3-svg',
                 inputs: d3_svgMetaData.PROPERTIES,
                 outputs: d3_svgMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_svgComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtD3_svgComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -13776,7 +13922,7 @@ ExtD3_svgComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class d3MetaData {
 }
@@ -14029,7 +14175,10 @@ ExtD3Component.decorators = [
                 selector: 'd3',
                 inputs: d3MetaData.PROPERTIES,
                 outputs: d3MetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtD3Component) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtD3Component)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -14041,7 +14190,7 @@ ExtD3Component.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class boundlistMetaData {
 }
@@ -14446,7 +14595,10 @@ ExtBoundlistComponent.decorators = [
                 selector: 'boundlist',
                 inputs: boundlistMetaData.PROPERTIES,
                 outputs: boundlistMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtBoundlistComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtBoundlistComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -14458,7 +14610,7 @@ ExtBoundlistComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class chipviewMetaData {
 }
@@ -14837,7 +14989,10 @@ ExtChipviewComponent.decorators = [
                 selector: 'chipview',
                 inputs: chipviewMetaData.PROPERTIES,
                 outputs: chipviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtChipviewComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtChipviewComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -14849,7 +15004,7 @@ ExtChipviewComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class componentdataviewMetaData {
 }
@@ -15220,7 +15375,10 @@ ExtComponentdataviewComponent.decorators = [
                 selector: 'componentdataview',
                 inputs: componentdataviewMetaData.PROPERTIES,
                 outputs: componentdataviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtComponentdataviewComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtComponentdataviewComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -15232,7 +15390,7 @@ ExtComponentdataviewComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class dataitemMetaData {
 }
@@ -15515,7 +15673,10 @@ ExtDataitemComponent.decorators = [
                 selector: 'dataitem',
                 inputs: dataitemMetaData.PROPERTIES,
                 outputs: dataitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtDataitemComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtDataitemComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -15527,7 +15688,7 @@ ExtDataitemComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class dataviewMetaData {
 }
@@ -15898,7 +16059,10 @@ ExtDataviewComponent.decorators = [
                 selector: 'dataview',
                 inputs: dataviewMetaData.PROPERTIES,
                 outputs: dataviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtDataviewComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtDataviewComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -15910,7 +16074,7 @@ ExtDataviewComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class emptytextMetaData {
 }
@@ -16153,7 +16317,10 @@ ExtEmptytextComponent.decorators = [
                 selector: 'emptytext',
                 inputs: emptytextMetaData.PROPERTIES,
                 outputs: emptytextMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtEmptytextComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtEmptytextComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -16165,7 +16332,7 @@ ExtEmptytextComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class indexbarMetaData {
 }
@@ -16421,7 +16588,10 @@ ExtIndexbarComponent.decorators = [
                 selector: 'indexbar',
                 inputs: indexbarMetaData.PROPERTIES,
                 outputs: indexbarMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtIndexbarComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtIndexbarComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -16433,7 +16603,7 @@ ExtIndexbarComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class itemheaderMetaData {
 }
@@ -16681,7 +16851,10 @@ ExtItemheaderComponent.decorators = [
                 selector: 'itemheader',
                 inputs: itemheaderMetaData.PROPERTIES,
                 outputs: itemheaderMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtItemheaderComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtItemheaderComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -16693,7 +16866,7 @@ ExtItemheaderComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class listMetaData {
 }
@@ -17098,7 +17271,10 @@ ExtListComponent.decorators = [
                 selector: 'list',
                 inputs: listMetaData.PROPERTIES,
                 outputs: listMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtListComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtListComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -17110,7 +17286,7 @@ ExtListComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class listitemMetaData {
 }
@@ -17397,7 +17573,10 @@ ExtListitemComponent.decorators = [
                 selector: 'listitem',
                 inputs: listitemMetaData.PROPERTIES,
                 outputs: listitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtListitemComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtListitemComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -17409,7 +17588,7 @@ ExtListitemComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class listswiperitemMetaData {
 }
@@ -17693,7 +17872,10 @@ ExtListswiperitemComponent.decorators = [
                 selector: 'listswiperitem',
                 inputs: listswiperitemMetaData.PROPERTIES,
                 outputs: listswiperitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtListswiperitemComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtListswiperitemComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -17705,7 +17887,7 @@ ExtListswiperitemComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class listswiperstepperMetaData {
 }
@@ -17994,7 +18176,10 @@ ExtListswiperstepperComponent.decorators = [
                 selector: 'listswiperstepper',
                 inputs: listswiperstepperMetaData.PROPERTIES,
                 outputs: listswiperstepperMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtListswiperstepperComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtListswiperstepperComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -18006,7 +18191,7 @@ ExtListswiperstepperComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class nestedlistMetaData {
 }
@@ -18329,7 +18514,10 @@ ExtNestedlistComponent.decorators = [
                 selector: 'nestedlist',
                 inputs: nestedlistMetaData.PROPERTIES,
                 outputs: nestedlistMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtNestedlistComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtNestedlistComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -18341,7 +18529,7 @@ ExtNestedlistComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class pullrefreshbarMetaData {
 }
@@ -18594,7 +18782,10 @@ ExtPullrefreshbarComponent.decorators = [
                 selector: 'pullrefreshbar',
                 inputs: pullrefreshbarMetaData.PROPERTIES,
                 outputs: pullrefreshbarMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPullrefreshbarComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPullrefreshbarComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -18606,7 +18797,7 @@ ExtPullrefreshbarComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class pullrefreshspinnerMetaData {
 }
@@ -18852,7 +19043,10 @@ ExtPullrefreshspinnerComponent.decorators = [
                 selector: 'pullrefreshspinner',
                 inputs: pullrefreshspinnerMetaData.PROPERTIES,
                 outputs: pullrefreshspinnerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPullrefreshspinnerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPullrefreshspinnerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -18864,7 +19058,7 @@ ExtPullrefreshspinnerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class simplelistitemMetaData {
 }
@@ -19112,7 +19306,10 @@ ExtSimplelistitemComponent.decorators = [
                 selector: 'simplelistitem',
                 inputs: simplelistitemMetaData.PROPERTIES,
                 outputs: simplelistitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSimplelistitemComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSimplelistitemComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -19124,7 +19321,7 @@ ExtSimplelistitemComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class dialogMetaData {
 }
@@ -19476,7 +19673,10 @@ ExtDialogComponent.decorators = [
                 selector: 'dialog',
                 inputs: dialogMetaData.PROPERTIES,
                 outputs: dialogMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtDialogComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtDialogComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -19488,7 +19688,7 @@ ExtDialogComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class windowMetaData {
 }
@@ -19840,7 +20040,10 @@ ExtWindowComponent.decorators = [
                 selector: 'window',
                 inputs: windowMetaData.PROPERTIES,
                 outputs: windowMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtWindowComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtWindowComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -19852,7 +20055,7 @@ ExtWindowComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class drawMetaData {
 }
@@ -20156,7 +20359,10 @@ ExtDrawComponent.decorators = [
                 selector: 'draw',
                 inputs: drawMetaData.PROPERTIES,
                 outputs: drawMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtDrawComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtDrawComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -20168,7 +20374,7 @@ ExtDrawComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class surfaceMetaData {
 }
@@ -20297,7 +20503,10 @@ ExtSurfaceComponent.decorators = [
                 selector: 'surface',
                 inputs: surfaceMetaData.PROPERTIES,
                 outputs: surfaceMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSurfaceComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSurfaceComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -20309,7 +20518,7 @@ ExtSurfaceComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class editorMetaData {
 }
@@ -20617,7 +20826,10 @@ ExtEditorComponent.decorators = [
                 selector: 'editor',
                 inputs: editorMetaData.PROPERTIES,
                 outputs: editorMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtEditorComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtEditorComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -20629,7 +20841,7 @@ ExtEditorComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class checkboxMetaData {
 }
@@ -20921,7 +21133,10 @@ ExtCheckboxComponent.decorators = [
                 selector: 'checkbox',
                 inputs: checkboxMetaData.PROPERTIES,
                 outputs: checkboxMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCheckboxComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCheckboxComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -20933,7 +21148,7 @@ ExtCheckboxComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class checkboxfieldMetaData {
 }
@@ -21225,7 +21440,10 @@ ExtCheckboxfieldComponent.decorators = [
                 selector: 'checkboxfield',
                 inputs: checkboxfieldMetaData.PROPERTIES,
                 outputs: checkboxfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCheckboxfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCheckboxfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -21237,7 +21455,7 @@ ExtCheckboxfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class comboboxMetaData {
 }
@@ -21599,7 +21817,10 @@ ExtComboboxComponent.decorators = [
                 selector: 'combobox',
                 inputs: comboboxMetaData.PROPERTIES,
                 outputs: comboboxMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtComboboxComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtComboboxComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -21611,7 +21832,7 @@ ExtComboboxComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class comboboxfieldMetaData {
 }
@@ -21973,7 +22194,10 @@ ExtComboboxfieldComponent.decorators = [
                 selector: 'comboboxfield',
                 inputs: comboboxfieldMetaData.PROPERTIES,
                 outputs: comboboxfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtComboboxfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtComboboxfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -21985,7 +22209,7 @@ ExtComboboxfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class containerfieldMetaData {
 }
@@ -22271,7 +22495,10 @@ ExtContainerfieldComponent.decorators = [
                 selector: 'containerfield',
                 inputs: containerfieldMetaData.PROPERTIES,
                 outputs: containerfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtContainerfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtContainerfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -22283,7 +22510,7 @@ ExtContainerfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class fieldcontainerMetaData {
 }
@@ -22569,7 +22796,10 @@ ExtFieldcontainerComponent.decorators = [
                 selector: 'fieldcontainer',
                 inputs: fieldcontainerMetaData.PROPERTIES,
                 outputs: fieldcontainerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtFieldcontainerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtFieldcontainerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -22581,7 +22811,7 @@ ExtFieldcontainerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class datefieldMetaData {
 }
@@ -22903,7 +23133,10 @@ ExtDatefieldComponent.decorators = [
                 selector: 'datefield',
                 inputs: datefieldMetaData.PROPERTIES,
                 outputs: datefieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtDatefieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtDatefieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -22915,7 +23148,7 @@ ExtDatefieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class datepickerfieldMetaData {
 }
@@ -23237,7 +23470,10 @@ ExtDatepickerfieldComponent.decorators = [
                 selector: 'datepickerfield',
                 inputs: datepickerfieldMetaData.PROPERTIES,
                 outputs: datepickerfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtDatepickerfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtDatepickerfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -23249,7 +23485,7 @@ ExtDatepickerfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class datepickernativefieldMetaData {
 }
@@ -23571,7 +23807,10 @@ ExtDatepickernativefieldComponent.decorators = [
                 selector: 'datepickernativefield',
                 inputs: datepickernativefieldMetaData.PROPERTIES,
                 outputs: datepickernativefieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtDatepickernativefieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtDatepickernativefieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -23583,7 +23822,7 @@ ExtDatepickernativefieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class displayfieldMetaData {
 }
@@ -23868,7 +24107,10 @@ ExtDisplayfieldComponent.decorators = [
                 selector: 'displayfield',
                 inputs: displayfieldMetaData.PROPERTIES,
                 outputs: displayfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtDisplayfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtDisplayfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -23880,7 +24122,7 @@ ExtDisplayfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class emailfieldMetaData {
 }
@@ -24185,7 +24427,10 @@ ExtEmailfieldComponent.decorators = [
                 selector: 'emailfield',
                 inputs: emailfieldMetaData.PROPERTIES,
                 outputs: emailfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtEmailfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtEmailfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -24197,7 +24442,7 @@ ExtEmailfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class fieldMetaData {
 }
@@ -24477,7 +24722,10 @@ ExtFieldComponent.decorators = [
                 selector: 'field',
                 inputs: fieldMetaData.PROPERTIES,
                 outputs: fieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtFieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtFieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -24489,7 +24737,7 @@ ExtFieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class filefieldMetaData {
 }
@@ -24797,7 +25045,10 @@ ExtFilefieldComponent.decorators = [
                 selector: 'filefield',
                 inputs: filefieldMetaData.PROPERTIES,
                 outputs: filefieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtFilefieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtFilefieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -24809,7 +25060,7 @@ ExtFilefieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class filebuttonMetaData {
 }
@@ -25087,7 +25338,10 @@ ExtFilebuttonComponent.decorators = [
                 selector: 'filebutton',
                 inputs: filebuttonMetaData.PROPERTIES,
                 outputs: filebuttonMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtFilebuttonComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtFilebuttonComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -25099,7 +25353,7 @@ ExtFilebuttonComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class hiddenfieldMetaData {
 }
@@ -25383,7 +25637,10 @@ ExtHiddenfieldComponent.decorators = [
                 selector: 'hiddenfield',
                 inputs: hiddenfieldMetaData.PROPERTIES,
                 outputs: hiddenfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtHiddenfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtHiddenfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -25395,7 +25652,7 @@ ExtHiddenfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class inputfieldMetaData {
 }
@@ -25679,7 +25936,10 @@ ExtInputfieldComponent.decorators = [
                 selector: 'inputfield',
                 inputs: inputfieldMetaData.PROPERTIES,
                 outputs: inputfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtInputfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtInputfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -25691,7 +25951,7 @@ ExtInputfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class numberfieldMetaData {
 }
@@ -26003,7 +26263,10 @@ ExtNumberfieldComponent.decorators = [
                 selector: 'numberfield',
                 inputs: numberfieldMetaData.PROPERTIES,
                 outputs: numberfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtNumberfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtNumberfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -26015,7 +26278,7 @@ ExtNumberfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class fieldpanelMetaData {
 }
@@ -26357,7 +26620,10 @@ ExtFieldpanelComponent.decorators = [
                 selector: 'fieldpanel',
                 inputs: fieldpanelMetaData.PROPERTIES,
                 outputs: fieldpanelMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtFieldpanelComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtFieldpanelComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -26369,7 +26635,7 @@ ExtFieldpanelComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class passwordfieldMetaData {
 }
@@ -26676,7 +26942,10 @@ ExtPasswordfieldComponent.decorators = [
                 selector: 'passwordfield',
                 inputs: passwordfieldMetaData.PROPERTIES,
                 outputs: passwordfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPasswordfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPasswordfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -26688,7 +26957,7 @@ ExtPasswordfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class pickerfieldMetaData {
 }
@@ -27006,7 +27275,10 @@ ExtPickerfieldComponent.decorators = [
                 selector: 'pickerfield',
                 inputs: pickerfieldMetaData.PROPERTIES,
                 outputs: pickerfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPickerfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPickerfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -27018,7 +27290,7 @@ ExtPickerfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class radioMetaData {
 }
@@ -27310,7 +27582,10 @@ ExtRadioComponent.decorators = [
                 selector: 'radio',
                 inputs: radioMetaData.PROPERTIES,
                 outputs: radioMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtRadioComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtRadioComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -27322,7 +27597,7 @@ ExtRadioComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class radiofieldMetaData {
 }
@@ -27614,7 +27889,10 @@ ExtRadiofieldComponent.decorators = [
                 selector: 'radiofield',
                 inputs: radiofieldMetaData.PROPERTIES,
                 outputs: radiofieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtRadiofieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtRadiofieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -27626,7 +27904,7 @@ ExtRadiofieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class searchfieldMetaData {
 }
@@ -27931,7 +28209,10 @@ ExtSearchfieldComponent.decorators = [
                 selector: 'searchfield',
                 inputs: searchfieldMetaData.PROPERTIES,
                 outputs: searchfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSearchfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSearchfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -27943,7 +28224,7 @@ ExtSearchfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class selectfieldMetaData {
 }
@@ -28286,7 +28567,10 @@ ExtSelectfieldComponent.decorators = [
                 selector: 'selectfield',
                 inputs: selectfieldMetaData.PROPERTIES,
                 outputs: selectfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSelectfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSelectfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -28298,7 +28582,7 @@ ExtSelectfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class singlesliderfieldMetaData {
 }
@@ -28595,7 +28879,10 @@ ExtSinglesliderfieldComponent.decorators = [
                 selector: 'singlesliderfield',
                 inputs: singlesliderfieldMetaData.PROPERTIES,
                 outputs: singlesliderfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSinglesliderfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSinglesliderfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -28607,7 +28894,7 @@ ExtSinglesliderfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class sliderfieldMetaData {
 }
@@ -28904,7 +29191,10 @@ ExtSliderfieldComponent.decorators = [
                 selector: 'sliderfield',
                 inputs: sliderfieldMetaData.PROPERTIES,
                 outputs: sliderfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSliderfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSliderfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -28916,7 +29206,7 @@ ExtSliderfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class spinnerfieldMetaData {
 }
@@ -29238,7 +29528,10 @@ ExtSpinnerfieldComponent.decorators = [
                 selector: 'spinnerfield',
                 inputs: spinnerfieldMetaData.PROPERTIES,
                 outputs: spinnerfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSpinnerfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSpinnerfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -29250,7 +29543,7 @@ ExtSpinnerfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class textfieldMetaData {
 }
@@ -29555,7 +29848,10 @@ ExtTextfieldComponent.decorators = [
                 selector: 'textfield',
                 inputs: textfieldMetaData.PROPERTIES,
                 outputs: textfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTextfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTextfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -29567,7 +29863,7 @@ ExtTextfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class textareafieldMetaData {
 }
@@ -29873,7 +30169,10 @@ ExtTextareafieldComponent.decorators = [
                 selector: 'textareafield',
                 inputs: textareafieldMetaData.PROPERTIES,
                 outputs: textareafieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTextareafieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTextareafieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -29885,7 +30184,7 @@ ExtTextareafieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class timefieldMetaData {
 }
@@ -30205,7 +30504,10 @@ ExtTimefieldComponent.decorators = [
                 selector: 'timefield',
                 inputs: timefieldMetaData.PROPERTIES,
                 outputs: timefieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTimefieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTimefieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -30217,7 +30519,7 @@ ExtTimefieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class togglefieldMetaData {
 }
@@ -30516,7 +30818,10 @@ ExtTogglefieldComponent.decorators = [
                 selector: 'togglefield',
                 inputs: togglefieldMetaData.PROPERTIES,
                 outputs: togglefieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTogglefieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTogglefieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -30528,7 +30833,7 @@ ExtTogglefieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class cleartriggerMetaData {
 }
@@ -30661,7 +30966,10 @@ ExtCleartriggerComponent.decorators = [
                 selector: 'cleartrigger',
                 inputs: cleartriggerMetaData.PROPERTIES,
                 outputs: cleartriggerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCleartriggerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCleartriggerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -30673,7 +30981,7 @@ ExtCleartriggerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class datetriggerMetaData {
 }
@@ -30806,7 +31114,10 @@ ExtDatetriggerComponent.decorators = [
                 selector: 'datetrigger',
                 inputs: datetriggerMetaData.PROPERTIES,
                 outputs: datetriggerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtDatetriggerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtDatetriggerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -30818,7 +31129,7 @@ ExtDatetriggerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class expandtriggerMetaData {
 }
@@ -30951,7 +31262,10 @@ ExtExpandtriggerComponent.decorators = [
                 selector: 'expandtrigger',
                 inputs: expandtriggerMetaData.PROPERTIES,
                 outputs: expandtriggerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtExpandtriggerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtExpandtriggerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -30963,7 +31277,7 @@ ExtExpandtriggerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class menutriggerMetaData {
 }
@@ -31099,7 +31413,10 @@ ExtMenutriggerComponent.decorators = [
                 selector: 'menutrigger',
                 inputs: menutriggerMetaData.PROPERTIES,
                 outputs: menutriggerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtMenutriggerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtMenutriggerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -31111,7 +31428,7 @@ ExtMenutriggerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class revealtriggerMetaData {
 }
@@ -31244,7 +31561,10 @@ ExtRevealtriggerComponent.decorators = [
                 selector: 'revealtrigger',
                 inputs: revealtriggerMetaData.PROPERTIES,
                 outputs: revealtriggerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtRevealtriggerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtRevealtriggerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -31256,7 +31576,7 @@ ExtRevealtriggerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class spindowntriggerMetaData {
 }
@@ -31389,7 +31709,10 @@ ExtSpindowntriggerComponent.decorators = [
                 selector: 'spindowntrigger',
                 inputs: spindowntriggerMetaData.PROPERTIES,
                 outputs: spindowntriggerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSpindowntriggerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSpindowntriggerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -31401,7 +31724,7 @@ ExtSpindowntriggerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class spinuptriggerMetaData {
 }
@@ -31534,7 +31857,10 @@ ExtSpinuptriggerComponent.decorators = [
                 selector: 'spinuptrigger',
                 inputs: spinuptriggerMetaData.PROPERTIES,
                 outputs: spinuptriggerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSpinuptriggerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSpinuptriggerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -31546,7 +31872,7 @@ ExtSpinuptriggerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class timetriggerMetaData {
 }
@@ -31679,7 +32005,10 @@ ExtTimetriggerComponent.decorators = [
                 selector: 'timetrigger',
                 inputs: timetriggerMetaData.PROPERTIES,
                 outputs: timetriggerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTimetriggerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTimetriggerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -31691,7 +32020,7 @@ ExtTimetriggerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class triggerMetaData {
 }
@@ -31824,7 +32153,10 @@ ExtTriggerComponent.decorators = [
                 selector: 'trigger',
                 inputs: triggerMetaData.PROPERTIES,
                 outputs: triggerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTriggerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTriggerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -31836,7 +32168,7 @@ ExtTriggerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class urlfieldMetaData {
 }
@@ -32141,7 +32473,10 @@ ExtUrlfieldComponent.decorators = [
                 selector: 'urlfield',
                 inputs: urlfieldMetaData.PROPERTIES,
                 outputs: urlfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtUrlfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtUrlfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -32153,7 +32488,7 @@ ExtUrlfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class fieldsetMetaData {
 }
@@ -32437,7 +32772,10 @@ ExtFieldsetComponent.decorators = [
                 selector: 'fieldset',
                 inputs: fieldsetMetaData.PROPERTIES,
                 outputs: fieldsetMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtFieldsetComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtFieldsetComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -32449,7 +32787,7 @@ ExtFieldsetComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class formpanelMetaData {
 }
@@ -32802,7 +33140,10 @@ ExtFormpanelComponent.decorators = [
                 selector: 'formpanel',
                 inputs: formpanelMetaData.PROPERTIES,
                 outputs: formpanelMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtFormpanelComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtFormpanelComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -32814,7 +33155,7 @@ ExtFormpanelComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class gridcellbaseMetaData {
 }
@@ -32949,7 +33290,10 @@ ExtGridcellbaseComponent.decorators = [
                 selector: 'gridcellbase',
                 inputs: gridcellbaseMetaData.PROPERTIES,
                 outputs: gridcellbaseMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtGridcellbaseComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtGridcellbaseComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -32961,7 +33305,7 @@ ExtGridcellbaseComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class booleancellMetaData {
 }
@@ -33102,7 +33446,10 @@ ExtBooleancellComponent.decorators = [
                 selector: 'booleancell',
                 inputs: booleancellMetaData.PROPERTIES,
                 outputs: booleancellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtBooleancellComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtBooleancellComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -33114,7 +33461,7 @@ ExtBooleancellComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class gridcellMetaData {
 }
@@ -33256,7 +33603,10 @@ ExtGridcellComponent.decorators = [
                 selector: 'gridcell',
                 inputs: gridcellMetaData.PROPERTIES,
                 outputs: gridcellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtGridcellComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtGridcellComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -33268,7 +33618,7 @@ ExtGridcellComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class checkcellMetaData {
 }
@@ -33403,7 +33753,10 @@ ExtCheckcellComponent.decorators = [
                 selector: 'checkcell',
                 inputs: checkcellMetaData.PROPERTIES,
                 outputs: checkcellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCheckcellComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCheckcellComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -33415,7 +33768,7 @@ ExtCheckcellComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class datecellMetaData {
 }
@@ -33554,7 +33907,10 @@ ExtDatecellComponent.decorators = [
                 selector: 'datecell',
                 inputs: datecellMetaData.PROPERTIES,
                 outputs: datecellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtDatecellComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtDatecellComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -33566,7 +33922,7 @@ ExtDatecellComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class numbercellMetaData {
 }
@@ -33705,7 +34061,10 @@ ExtNumbercellComponent.decorators = [
                 selector: 'numbercell',
                 inputs: numbercellMetaData.PROPERTIES,
                 outputs: numbercellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtNumbercellComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtNumbercellComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -33717,7 +34076,7 @@ ExtNumbercellComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class rownumberercellMetaData {
 }
@@ -33856,7 +34215,10 @@ ExtRownumberercellComponent.decorators = [
                 selector: 'rownumberercell',
                 inputs: rownumberercellMetaData.PROPERTIES,
                 outputs: rownumberercellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtRownumberercellComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtRownumberercellComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -33868,7 +34230,7 @@ ExtRownumberercellComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class textcellMetaData {
 }
@@ -34006,7 +34368,10 @@ ExtTextcellComponent.decorators = [
                 selector: 'textcell',
                 inputs: textcellMetaData.PROPERTIES,
                 outputs: textcellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTextcellComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTextcellComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -34018,7 +34383,7 @@ ExtTextcellComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class treecellMetaData {
 }
@@ -34163,7 +34528,10 @@ ExtTreecellComponent.decorators = [
                 selector: 'treecell',
                 inputs: treecellMetaData.PROPERTIES,
                 outputs: treecellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTreecellComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTreecellComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -34175,7 +34543,7 @@ ExtTreecellComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class widgetcellMetaData {
 }
@@ -34312,7 +34680,10 @@ ExtWidgetcellComponent.decorators = [
                 selector: 'widgetcell',
                 inputs: widgetcellMetaData.PROPERTIES,
                 outputs: widgetcellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtWidgetcellComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtWidgetcellComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -34324,7 +34695,7 @@ ExtWidgetcellComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class celleditorMetaData {
 }
@@ -34633,7 +35004,10 @@ ExtCelleditorComponent.decorators = [
                 selector: 'celleditor',
                 inputs: celleditorMetaData.PROPERTIES,
                 outputs: celleditorMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCelleditorComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCelleditorComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -34645,7 +35019,7 @@ ExtCelleditorComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class booleancolumnMetaData {
 }
@@ -34972,7 +35346,10 @@ ExtBooleancolumnComponent.decorators = [
                 selector: 'booleancolumn',
                 inputs: booleancolumnMetaData.PROPERTIES,
                 outputs: booleancolumnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtBooleancolumnComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtBooleancolumnComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -34984,7 +35361,7 @@ ExtBooleancolumnComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class checkcolumnMetaData {
 }
@@ -35315,7 +35692,10 @@ ExtCheckcolumnComponent.decorators = [
                 selector: 'checkcolumn',
                 inputs: checkcolumnMetaData.PROPERTIES,
                 outputs: checkcolumnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtCheckcolumnComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtCheckcolumnComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -35327,7 +35707,7 @@ ExtCheckcolumnComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class gridcolumnMetaData {
 }
@@ -35651,7 +36031,10 @@ ExtGridcolumnComponent.decorators = [
                 selector: 'gridcolumn',
                 inputs: gridcolumnMetaData.PROPERTIES,
                 outputs: gridcolumnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtGridcolumnComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtGridcolumnComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -35663,7 +36046,7 @@ ExtGridcolumnComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class columnMetaData {
 }
@@ -35987,7 +36370,10 @@ ExtColumnComponent.decorators = [
                 selector: 'column',
                 inputs: columnMetaData.PROPERTIES,
                 outputs: columnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtColumnComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtColumnComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -35999,7 +36385,7 @@ ExtColumnComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class templatecolumnMetaData {
 }
@@ -36323,7 +36709,10 @@ ExtTemplatecolumnComponent.decorators = [
                 selector: 'templatecolumn',
                 inputs: templatecolumnMetaData.PROPERTIES,
                 outputs: templatecolumnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTemplatecolumnComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTemplatecolumnComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -36335,7 +36724,7 @@ ExtTemplatecolumnComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class datecolumnMetaData {
 }
@@ -36660,7 +37049,10 @@ ExtDatecolumnComponent.decorators = [
                 selector: 'datecolumn',
                 inputs: datecolumnMetaData.PROPERTIES,
                 outputs: datecolumnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtDatecolumnComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtDatecolumnComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -36672,7 +37064,7 @@ ExtDatecolumnComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class numbercolumnMetaData {
 }
@@ -36997,7 +37389,10 @@ ExtNumbercolumnComponent.decorators = [
                 selector: 'numbercolumn',
                 inputs: numbercolumnMetaData.PROPERTIES,
                 outputs: numbercolumnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtNumbercolumnComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtNumbercolumnComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -37009,7 +37404,7 @@ ExtNumbercolumnComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class rownumbererMetaData {
 }
@@ -37334,7 +37729,10 @@ ExtRownumbererComponent.decorators = [
                 selector: 'rownumberer',
                 inputs: rownumbererMetaData.PROPERTIES,
                 outputs: rownumbererMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtRownumbererComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtRownumbererComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -37346,7 +37744,7 @@ ExtRownumbererComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class selectioncolumnMetaData {
 }
@@ -37677,7 +38075,10 @@ ExtSelectioncolumnComponent.decorators = [
                 selector: 'selectioncolumn',
                 inputs: selectioncolumnMetaData.PROPERTIES,
                 outputs: selectioncolumnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSelectioncolumnComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSelectioncolumnComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -37689,7 +38090,7 @@ ExtSelectioncolumnComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class textcolumnMetaData {
 }
@@ -38013,7 +38414,10 @@ ExtTextcolumnComponent.decorators = [
                 selector: 'textcolumn',
                 inputs: textcolumnMetaData.PROPERTIES,
                 outputs: textcolumnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTextcolumnComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTextcolumnComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -38025,7 +38429,7 @@ ExtTextcolumnComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class treecolumnMetaData {
 }
@@ -38349,7 +38753,10 @@ ExtTreecolumnComponent.decorators = [
                 selector: 'treecolumn',
                 inputs: treecolumnMetaData.PROPERTIES,
                 outputs: treecolumnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTreecolumnComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTreecolumnComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -38361,7 +38768,7 @@ ExtTreecolumnComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class gridMetaData {
 }
@@ -38803,7 +39210,10 @@ ExtGridComponent.decorators = [
                 selector: 'grid',
                 inputs: gridMetaData.PROPERTIES,
                 outputs: gridMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtGridComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtGridComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -38815,7 +39225,7 @@ ExtGridComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class headercontainerMetaData {
 }
@@ -39100,7 +39510,10 @@ ExtHeadercontainerComponent.decorators = [
                 selector: 'headercontainer',
                 inputs: headercontainerMetaData.PROPERTIES,
                 outputs: headercontainerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtHeadercontainerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtHeadercontainerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -39112,7 +39525,7 @@ ExtHeadercontainerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class lockedgridMetaData {
 }
@@ -39403,7 +39816,10 @@ ExtLockedgridComponent.decorators = [
                 selector: 'lockedgrid',
                 inputs: lockedgridMetaData.PROPERTIES,
                 outputs: lockedgridMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtLockedgridComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtLockedgridComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -39415,7 +39831,7 @@ ExtLockedgridComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class lockedgridregionMetaData {
 }
@@ -39751,7 +40167,10 @@ ExtLockedgridregionComponent.decorators = [
                 selector: 'lockedgridregion',
                 inputs: lockedgridregionMetaData.PROPERTIES,
                 outputs: lockedgridregionMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtLockedgridregionComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtLockedgridregionComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -39763,7 +40182,7 @@ ExtLockedgridregionComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class gridcolumnsmenuMetaData {
 }
@@ -40023,7 +40442,10 @@ ExtGridcolumnsmenuComponent.decorators = [
                 selector: 'gridcolumnsmenu',
                 inputs: gridcolumnsmenuMetaData.PROPERTIES,
                 outputs: gridcolumnsmenuMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtGridcolumnsmenuComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtGridcolumnsmenuComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -40035,7 +40457,7 @@ ExtGridcolumnsmenuComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class gridgroupbythismenuitemMetaData {
 }
@@ -40295,7 +40717,10 @@ ExtGridgroupbythismenuitemComponent.decorators = [
                 selector: 'gridgroupbythismenuitem',
                 inputs: gridgroupbythismenuitemMetaData.PROPERTIES,
                 outputs: gridgroupbythismenuitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtGridgroupbythismenuitemComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtGridgroupbythismenuitemComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -40307,7 +40732,7 @@ ExtGridgroupbythismenuitemComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class gridshowingroupsmenuitemMetaData {
 }
@@ -40576,7 +41001,10 @@ ExtGridshowingroupsmenuitemComponent.decorators = [
                 selector: 'gridshowingroupsmenuitem',
                 inputs: gridshowingroupsmenuitemMetaData.PROPERTIES,
                 outputs: gridshowingroupsmenuitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtGridshowingroupsmenuitemComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtGridshowingroupsmenuitemComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -40588,7 +41016,7 @@ ExtGridshowingroupsmenuitemComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class gridsortascmenuitemMetaData {
 }
@@ -40859,7 +41287,10 @@ ExtGridsortascmenuitemComponent.decorators = [
                 selector: 'gridsortascmenuitem',
                 inputs: gridsortascmenuitemMetaData.PROPERTIES,
                 outputs: gridsortascmenuitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtGridsortascmenuitemComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtGridsortascmenuitemComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -40871,7 +41302,7 @@ ExtGridsortascmenuitemComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class gridsortdescmenuitemMetaData {
 }
@@ -41142,7 +41573,10 @@ ExtGridsortdescmenuitemComponent.decorators = [
                 selector: 'gridsortdescmenuitem',
                 inputs: gridsortdescmenuitemMetaData.PROPERTIES,
                 outputs: gridsortdescmenuitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtGridsortdescmenuitemComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtGridsortdescmenuitemComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -41154,7 +41588,7 @@ ExtGridsortdescmenuitemComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class pagingtoolbarMetaData {
 }
@@ -41440,7 +41874,10 @@ ExtPagingtoolbarComponent.decorators = [
                 selector: 'pagingtoolbar',
                 inputs: pagingtoolbarMetaData.PROPERTIES,
                 outputs: pagingtoolbarMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPagingtoolbarComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPagingtoolbarComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -41452,7 +41889,7 @@ ExtPagingtoolbarComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class gridrowMetaData {
 }
@@ -41701,7 +42138,10 @@ ExtGridrowComponent.decorators = [
                 selector: 'gridrow',
                 inputs: gridrowMetaData.PROPERTIES,
                 outputs: gridrowMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtGridrowComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtGridrowComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -41713,7 +42153,7 @@ ExtGridrowComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class rowbodyMetaData {
 }
@@ -41956,7 +42396,10 @@ ExtRowbodyComponent.decorators = [
                 selector: 'rowbody',
                 inputs: rowbodyMetaData.PROPERTIES,
                 outputs: rowbodyMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtRowbodyComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtRowbodyComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -41968,7 +42411,7 @@ ExtRowbodyComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class rowheaderMetaData {
 }
@@ -42216,7 +42659,10 @@ ExtRowheaderComponent.decorators = [
                 selector: 'rowheader',
                 inputs: rowheaderMetaData.PROPERTIES,
                 outputs: rowheaderMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtRowheaderComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtRowheaderComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -42228,7 +42674,7 @@ ExtRowheaderComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class gridsummaryrowMetaData {
 }
@@ -42477,7 +42923,10 @@ ExtGridsummaryrowComponent.decorators = [
                 selector: 'gridsummaryrow',
                 inputs: gridsummaryrowMetaData.PROPERTIES,
                 outputs: gridsummaryrowMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtGridsummaryrowComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtGridsummaryrowComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -42489,7 +42938,7 @@ ExtGridsummaryrowComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class treeMetaData {
 }
@@ -42948,7 +43397,10 @@ ExtTreeComponent.decorators = [
                 selector: 'tree',
                 inputs: treeMetaData.PROPERTIES,
                 outputs: treeMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTreeComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTreeComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -42960,7 +43412,7 @@ ExtTreeComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class imageMetaData {
 }
@@ -43213,7 +43665,10 @@ ExtImageComponent.decorators = [
                 selector: 'image',
                 inputs: imageMetaData.PROPERTIES,
                 outputs: imageMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtImageComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtImageComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -43225,7 +43680,7 @@ ExtImageComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class imgMetaData {
 }
@@ -43478,7 +43933,10 @@ ExtImgComponent.decorators = [
                 selector: 'img',
                 inputs: imgMetaData.PROPERTIES,
                 outputs: imgMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtImgComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtImgComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -43490,7 +43948,7 @@ ExtImgComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class indicatorMetaData {
 }
@@ -43743,7 +44201,10 @@ ExtIndicatorComponent.decorators = [
                 selector: 'indicator',
                 inputs: indicatorMetaData.PROPERTIES,
                 outputs: indicatorMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtIndicatorComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtIndicatorComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -43755,7 +44216,7 @@ ExtIndicatorComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class labelMetaData {
 }
@@ -43998,7 +44459,10 @@ ExtLabelComponent.decorators = [
                 selector: 'label',
                 inputs: labelMetaData.PROPERTIES,
                 outputs: labelMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtLabelComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtLabelComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -44010,7 +44474,7 @@ ExtLabelComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class treelistMetaData {
 }
@@ -44268,7 +44732,10 @@ ExtTreelistComponent.decorators = [
                 selector: 'treelist',
                 inputs: treelistMetaData.PROPERTIES,
                 outputs: treelistMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTreelistComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTreelistComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -44280,7 +44747,7 @@ ExtTreelistComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class treelistitemMetaData {
 }
@@ -44420,7 +44887,10 @@ ExtTreelistitemComponent.decorators = [
                 selector: 'treelistitem',
                 inputs: treelistitemMetaData.PROPERTIES,
                 outputs: treelistitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTreelistitemComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTreelistitemComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -44432,7 +44902,7 @@ ExtTreelistitemComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class loadmaskMetaData {
 }
@@ -44681,7 +45151,10 @@ ExtLoadmaskComponent.decorators = [
                 selector: 'loadmask',
                 inputs: loadmaskMetaData.PROPERTIES,
                 outputs: loadmaskMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtLoadmaskComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtLoadmaskComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -44693,7 +45166,7 @@ ExtLoadmaskComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class maskMetaData {
 }
@@ -44939,7 +45412,10 @@ ExtMaskComponent.decorators = [
                 selector: 'mask',
                 inputs: maskMetaData.PROPERTIES,
                 outputs: maskMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtMaskComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtMaskComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -44951,7 +45427,7 @@ ExtMaskComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class mediaMetaData {
 }
@@ -45218,7 +45694,10 @@ ExtMediaComponent.decorators = [
                 selector: 'media',
                 inputs: mediaMetaData.PROPERTIES,
                 outputs: mediaMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtMediaComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtMediaComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -45230,7 +45709,7 @@ ExtMediaComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class menucheckitemMetaData {
 }
@@ -45499,7 +45978,10 @@ ExtMenucheckitemComponent.decorators = [
                 selector: 'menucheckitem',
                 inputs: menucheckitemMetaData.PROPERTIES,
                 outputs: menucheckitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtMenucheckitemComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtMenucheckitemComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -45511,7 +45993,7 @@ ExtMenucheckitemComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class menuitemMetaData {
 }
@@ -45771,7 +46253,10 @@ ExtMenuitemComponent.decorators = [
                 selector: 'menuitem',
                 inputs: menuitemMetaData.PROPERTIES,
                 outputs: menuitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtMenuitemComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtMenuitemComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -45783,7 +46268,7 @@ ExtMenuitemComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class menuMetaData {
 }
@@ -46125,7 +46610,10 @@ ExtMenuComponent.decorators = [
                 selector: 'menu',
                 inputs: menuMetaData.PROPERTIES,
                 outputs: menuMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtMenuComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtMenuComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -46137,7 +46625,7 @@ ExtMenuComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class menuradioitemMetaData {
 }
@@ -46408,7 +46896,10 @@ ExtMenuradioitemComponent.decorators = [
                 selector: 'menuradioitem',
                 inputs: menuradioitemMetaData.PROPERTIES,
                 outputs: menuradioitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtMenuradioitemComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtMenuradioitemComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -46420,7 +46911,7 @@ ExtMenuradioitemComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class menuseparatorMetaData {
 }
@@ -46663,7 +47154,10 @@ ExtMenuseparatorComponent.decorators = [
                 selector: 'menuseparator',
                 inputs: menuseparatorMetaData.PROPERTIES,
                 outputs: menuseparatorMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtMenuseparatorComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtMenuseparatorComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -46675,7 +47169,7 @@ ExtMenuseparatorComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class messageboxMetaData {
 }
@@ -47031,7 +47525,10 @@ ExtMessageboxComponent.decorators = [
                 selector: 'messagebox',
                 inputs: messageboxMetaData.PROPERTIES,
                 outputs: messageboxMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtMessageboxComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtMessageboxComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -47043,7 +47540,7 @@ ExtMessageboxComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class navigationviewMetaData {
 }
@@ -47332,7 +47829,10 @@ ExtNavigationviewComponent.decorators = [
                 selector: 'navigationview',
                 inputs: navigationviewMetaData.PROPERTIES,
                 outputs: navigationviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtNavigationviewComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtNavigationviewComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -47344,7 +47844,7 @@ ExtNavigationviewComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class panelMetaData {
 }
@@ -47676,7 +48176,10 @@ ExtPanelComponent.decorators = [
                 selector: 'panel',
                 inputs: panelMetaData.PROPERTIES,
                 outputs: panelMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPanelComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPanelComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -47688,7 +48191,7 @@ ExtPanelComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class datepanelMetaData {
 }
@@ -48055,7 +48558,10 @@ ExtDatepanelComponent.decorators = [
                 selector: 'datepanel',
                 inputs: datepanelMetaData.PROPERTIES,
                 outputs: datepanelMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtDatepanelComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtDatepanelComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -48067,7 +48573,7 @@ ExtDatepanelComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class datetitleMetaData {
 }
@@ -48318,7 +48824,10 @@ ExtDatetitleComponent.decorators = [
                 selector: 'datetitle',
                 inputs: datetitleMetaData.PROPERTIES,
                 outputs: datetitleMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtDatetitleComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtDatetitleComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -48330,7 +48839,7 @@ ExtDatetitleComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class panelheaderMetaData {
 }
@@ -48618,7 +49127,10 @@ ExtPanelheaderComponent.decorators = [
                 selector: 'panelheader',
                 inputs: panelheaderMetaData.PROPERTIES,
                 outputs: panelheaderMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPanelheaderComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPanelheaderComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -48630,7 +49142,7 @@ ExtPanelheaderComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class timepanelMetaData {
 }
@@ -48971,7 +49483,10 @@ ExtTimepanelComponent.decorators = [
                 selector: 'timepanel',
                 inputs: timepanelMetaData.PROPERTIES,
                 outputs: timepanelMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTimepanelComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTimepanelComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -48983,7 +49498,7 @@ ExtTimepanelComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class paneltitleMetaData {
 }
@@ -49234,7 +49749,10 @@ ExtPaneltitleComponent.decorators = [
                 selector: 'paneltitle',
                 inputs: paneltitleMetaData.PROPERTIES,
                 outputs: paneltitleMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPaneltitleComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPaneltitleComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -49246,7 +49764,7 @@ ExtPaneltitleComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class yearpickerMetaData {
 }
@@ -49651,7 +50169,10 @@ ExtYearpickerComponent.decorators = [
                 selector: 'yearpicker',
                 inputs: yearpickerMetaData.PROPERTIES,
                 outputs: yearpickerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtYearpickerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtYearpickerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -49663,7 +50184,7 @@ ExtYearpickerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class datepickerMetaData {
 }
@@ -50020,7 +50541,10 @@ ExtDatepickerComponent.decorators = [
                 selector: 'datepicker',
                 inputs: datepickerMetaData.PROPERTIES,
                 outputs: datepickerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtDatepickerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtDatepickerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -50032,7 +50556,7 @@ ExtDatepickerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class pickerMetaData {
 }
@@ -50383,7 +50907,10 @@ ExtPickerComponent.decorators = [
                 selector: 'picker',
                 inputs: pickerMetaData.PROPERTIES,
                 outputs: pickerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPickerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPickerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -50395,7 +50922,7 @@ ExtPickerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class selectpickerMetaData {
 }
@@ -50746,7 +51273,10 @@ ExtSelectpickerComponent.decorators = [
                 selector: 'selectpicker',
                 inputs: selectpickerMetaData.PROPERTIES,
                 outputs: selectpickerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSelectpickerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSelectpickerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -50758,7 +51288,7 @@ ExtSelectpickerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class pickerslotMetaData {
 }
@@ -51138,7 +51668,10 @@ ExtPickerslotComponent.decorators = [
                 selector: 'pickerslot',
                 inputs: pickerslotMetaData.PROPERTIES,
                 outputs: pickerslotMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPickerslotComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPickerslotComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -51150,7 +51683,7 @@ ExtPickerslotComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class tabletpickerMetaData {
 }
@@ -51482,7 +52015,10 @@ ExtTabletpickerComponent.decorators = [
                 selector: 'tabletpicker',
                 inputs: tabletpickerMetaData.PROPERTIES,
                 outputs: tabletpickerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTabletpickerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTabletpickerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -51494,7 +52030,7 @@ ExtTabletpickerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class pivotgridcellMetaData {
 }
@@ -51636,7 +52172,10 @@ ExtPivotgridcellComponent.decorators = [
                 selector: 'pivotgridcell',
                 inputs: pivotgridcellMetaData.PROPERTIES,
                 outputs: pivotgridcellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotgridcellComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPivotgridcellComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -51648,7 +52187,7 @@ ExtPivotgridcellComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class pivotgridgroupcellMetaData {
 }
@@ -51790,7 +52329,10 @@ ExtPivotgridgroupcellComponent.decorators = [
                 selector: 'pivotgridgroupcell',
                 inputs: pivotgridgroupcellMetaData.PROPERTIES,
                 outputs: pivotgridgroupcellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotgridgroupcellComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPivotgridgroupcellComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -51802,7 +52344,7 @@ ExtPivotgridgroupcellComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class pivotd3containerMetaData {
 }
@@ -51851,7 +52393,10 @@ ExtPivotd3containerComponent.decorators = [
                 selector: 'pivotd3container',
                 inputs: pivotd3containerMetaData.PROPERTIES,
                 outputs: pivotd3containerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotd3containerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPivotd3containerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -51863,7 +52408,7 @@ ExtPivotd3containerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class pivotheatmapMetaData {
 }
@@ -52124,7 +52669,10 @@ ExtPivotheatmapComponent.decorators = [
                 selector: 'pivotheatmap',
                 inputs: pivotheatmapMetaData.PROPERTIES,
                 outputs: pivotheatmapMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotheatmapComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPivotheatmapComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -52136,7 +52684,7 @@ ExtPivotheatmapComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class pivottreemapMetaData {
 }
@@ -52416,7 +52964,10 @@ ExtPivottreemapComponent.decorators = [
                 selector: 'pivottreemap',
                 inputs: pivottreemapMetaData.PROPERTIES,
                 outputs: pivottreemapMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPivottreemapComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPivottreemapComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -52428,7 +52979,7 @@ ExtPivottreemapComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class pivotgridMetaData {
 }
@@ -52943,7 +53494,10 @@ ExtPivotgridComponent.decorators = [
                 selector: 'pivotgrid',
                 inputs: pivotgridMetaData.PROPERTIES,
                 outputs: pivotgridMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotgridComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPivotgridComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -52955,7 +53509,7 @@ ExtPivotgridComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class pivotconfigfieldMetaData {
 }
@@ -53242,7 +53796,10 @@ ExtPivotconfigfieldComponent.decorators = [
                 selector: 'pivotconfigfield',
                 inputs: pivotconfigfieldMetaData.PROPERTIES,
                 outputs: pivotconfigfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotconfigfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPivotconfigfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -53254,7 +53811,7 @@ ExtPivotconfigfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class pivotconfigcontainerMetaData {
 }
@@ -53587,7 +54144,10 @@ ExtPivotconfigcontainerComponent.decorators = [
                 selector: 'pivotconfigcontainer',
                 inputs: pivotconfigcontainerMetaData.PROPERTIES,
                 outputs: pivotconfigcontainerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotconfigcontainerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPivotconfigcontainerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -53599,7 +54159,7 @@ ExtPivotconfigcontainerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class pivotconfigformMetaData {
 }
@@ -53952,7 +54512,10 @@ ExtPivotconfigformComponent.decorators = [
                 selector: 'pivotconfigform',
                 inputs: pivotconfigformMetaData.PROPERTIES,
                 outputs: pivotconfigformMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotconfigformComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPivotconfigformComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -53964,7 +54527,7 @@ ExtPivotconfigformComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class pivotconfigpanelMetaData {
 }
@@ -54304,7 +54867,10 @@ ExtPivotconfigpanelComponent.decorators = [
                 selector: 'pivotconfigpanel',
                 inputs: pivotconfigpanelMetaData.PROPERTIES,
                 outputs: pivotconfigpanelMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotconfigpanelComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPivotconfigpanelComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -54316,7 +54882,7 @@ ExtPivotconfigpanelComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class pivotsettingsMetaData {
 }
@@ -54669,7 +55235,10 @@ ExtPivotsettingsComponent.decorators = [
                 selector: 'pivotsettings',
                 inputs: pivotsettingsMetaData.PROPERTIES,
                 outputs: pivotsettingsMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotsettingsComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPivotsettingsComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -54681,7 +55250,7 @@ ExtPivotsettingsComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class pivotrangeeditorMetaData {
 }
@@ -55034,7 +55603,10 @@ ExtPivotrangeeditorComponent.decorators = [
                 selector: 'pivotrangeeditor',
                 inputs: pivotrangeeditorMetaData.PROPERTIES,
                 outputs: pivotrangeeditorMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotrangeeditorComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPivotrangeeditorComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -55046,7 +55618,7 @@ ExtPivotrangeeditorComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class pivotgridrowMetaData {
 }
@@ -55295,7 +55867,10 @@ ExtPivotgridrowComponent.decorators = [
                 selector: 'pivotgridrow',
                 inputs: pivotgridrowMetaData.PROPERTIES,
                 outputs: pivotgridrowMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotgridrowComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPivotgridrowComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -55307,7 +55882,7 @@ ExtPivotgridrowComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class progressMetaData {
 }
@@ -55554,7 +56129,10 @@ ExtProgressComponent.decorators = [
                 selector: 'progress',
                 inputs: progressMetaData.PROPERTIES,
                 outputs: progressMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtProgressComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtProgressComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -55566,7 +56144,7 @@ ExtProgressComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class progressbarwidgetMetaData {
 }
@@ -55813,7 +56391,10 @@ ExtProgressbarwidgetComponent.decorators = [
                 selector: 'progressbarwidget',
                 inputs: progressbarwidgetMetaData.PROPERTIES,
                 outputs: progressbarwidgetMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtProgressbarwidgetComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtProgressbarwidgetComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -55825,7 +56406,7 @@ ExtProgressbarwidgetComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class segmentedbuttonMetaData {
 }
@@ -56117,7 +56698,10 @@ ExtSegmentedbuttonComponent.decorators = [
                 selector: 'segmentedbutton',
                 inputs: segmentedbuttonMetaData.PROPERTIES,
                 outputs: segmentedbuttonMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSegmentedbuttonComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSegmentedbuttonComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -56129,7 +56713,7 @@ ExtSegmentedbuttonComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class sheetMetaData {
 }
@@ -56468,7 +57052,10 @@ ExtSheetComponent.decorators = [
                 selector: 'sheet',
                 inputs: sheetMetaData.PROPERTIES,
                 outputs: sheetMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSheetComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSheetComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -56480,7 +57067,7 @@ ExtSheetComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class sliderMetaData {
 }
@@ -56741,7 +57328,10 @@ ExtSliderComponent.decorators = [
                 selector: 'slider',
                 inputs: sliderMetaData.PROPERTIES,
                 outputs: sliderMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSliderComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSliderComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -56753,7 +57343,7 @@ ExtSliderComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class thumbMetaData {
 }
@@ -56998,7 +57588,10 @@ ExtThumbComponent.decorators = [
                 selector: 'thumb',
                 inputs: thumbMetaData.PROPERTIES,
                 outputs: thumbMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtThumbComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtThumbComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -57010,7 +57603,7 @@ ExtThumbComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class togglesliderMetaData {
 }
@@ -57271,7 +57864,10 @@ ExtTogglesliderComponent.decorators = [
                 selector: 'toggleslider',
                 inputs: togglesliderMetaData.PROPERTIES,
                 outputs: togglesliderMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTogglesliderComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTogglesliderComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -57283,7 +57879,7 @@ ExtTogglesliderComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class spacerMetaData {
 }
@@ -57526,7 +58122,10 @@ ExtSpacerComponent.decorators = [
                 selector: 'spacer',
                 inputs: spacerMetaData.PROPERTIES,
                 outputs: spacerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSpacerComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSpacerComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -57538,7 +58137,7 @@ ExtSpacerComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class sparklinebarMetaData {
 }
@@ -57802,7 +58401,10 @@ ExtSparklinebarComponent.decorators = [
                 selector: 'sparklinebar',
                 inputs: sparklinebarMetaData.PROPERTIES,
                 outputs: sparklinebarMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinebarComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSparklinebarComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -57814,7 +58416,7 @@ ExtSparklinebarComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class sparklineMetaData {
 }
@@ -58066,7 +58668,10 @@ ExtSparklineComponent.decorators = [
                 selector: 'sparkline',
                 inputs: sparklineMetaData.PROPERTIES,
                 outputs: sparklineMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklineComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSparklineComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -58078,7 +58683,7 @@ ExtSparklineComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class sparklineboxMetaData {
 }
@@ -58344,7 +58949,10 @@ ExtSparklineboxComponent.decorators = [
                 selector: 'sparklinebox',
                 inputs: sparklineboxMetaData.PROPERTIES,
                 outputs: sparklineboxMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklineboxComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSparklineboxComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -58356,7 +58964,7 @@ ExtSparklineboxComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class sparklinebulletMetaData {
 }
@@ -58613,7 +59221,10 @@ ExtSparklinebulletComponent.decorators = [
                 selector: 'sparklinebullet',
                 inputs: sparklinebulletMetaData.PROPERTIES,
                 outputs: sparklinebulletMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinebulletComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSparklinebulletComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -58625,7 +59236,7 @@ ExtSparklinebulletComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class sparklinediscreteMetaData {
 }
@@ -58883,7 +59494,10 @@ ExtSparklinediscreteComponent.decorators = [
                 selector: 'sparklinediscrete',
                 inputs: sparklinediscreteMetaData.PROPERTIES,
                 outputs: sparklinediscreteMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinediscreteComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSparklinediscreteComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -58895,7 +59509,7 @@ ExtSparklinediscreteComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class sparklinelineMetaData {
 }
@@ -59164,7 +59778,10 @@ ExtSparklinelineComponent.decorators = [
                 selector: 'sparklineline',
                 inputs: sparklinelineMetaData.PROPERTIES,
                 outputs: sparklinelineMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinelineComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSparklinelineComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -59176,7 +59793,7 @@ ExtSparklinelineComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class sparklinepieMetaData {
 }
@@ -59432,7 +60049,10 @@ ExtSparklinepieComponent.decorators = [
                 selector: 'sparklinepie',
                 inputs: sparklinepieMetaData.PROPERTIES,
                 outputs: sparklinepieMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinepieComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSparklinepieComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -59444,7 +60064,7 @@ ExtSparklinepieComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class sparklinetristateMetaData {
 }
@@ -59702,7 +60322,10 @@ ExtSparklinetristateComponent.decorators = [
                 selector: 'sparklinetristate',
                 inputs: sparklinetristateMetaData.PROPERTIES,
                 outputs: sparklinetristateMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinetristateComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSparklinetristateComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -59714,7 +60337,7 @@ ExtSparklinetristateComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class splitbuttonMetaData {
 }
@@ -59990,7 +60613,10 @@ ExtSplitbuttonComponent.decorators = [
                 selector: 'splitbutton',
                 inputs: splitbuttonMetaData.PROPERTIES,
                 outputs: splitbuttonMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtSplitbuttonComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtSplitbuttonComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -60002,7 +60628,7 @@ ExtSplitbuttonComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class tabbarMetaData {
 }
@@ -60293,7 +60919,10 @@ ExtTabbarComponent.decorators = [
                 selector: 'tabbar',
                 inputs: tabbarMetaData.PROPERTIES,
                 outputs: tabbarMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTabbarComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTabbarComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -60305,7 +60934,7 @@ ExtTabbarComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class tabpanelMetaData {
 }
@@ -60588,7 +61217,10 @@ ExtTabpanelComponent.decorators = [
                 selector: 'tabpanel',
                 inputs: tabpanelMetaData.PROPERTIES,
                 outputs: tabpanelMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTabpanelComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTabpanelComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -60600,7 +61232,7 @@ ExtTabpanelComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class tabMetaData {
 }
@@ -60880,7 +61512,10 @@ ExtTabComponent.decorators = [
                 selector: 'tab',
                 inputs: tabMetaData.PROPERTIES,
                 outputs: tabMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTabComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTabComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -60892,7 +61527,7 @@ ExtTabComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class tooltipMetaData {
 }
@@ -61238,7 +61873,10 @@ ExtTooltipComponent.decorators = [
                 selector: 'tooltip',
                 inputs: tooltipMetaData.PROPERTIES,
                 outputs: tooltipMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTooltipComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTooltipComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -61250,7 +61888,7 @@ ExtTooltipComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class titleMetaData {
 }
@@ -61494,7 +62132,10 @@ ExtTitleComponent.decorators = [
                 selector: 'title',
                 inputs: titleMetaData.PROPERTIES,
                 outputs: titleMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTitleComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTitleComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -61506,7 +62147,7 @@ ExtTitleComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class titlebarMetaData {
 }
@@ -61790,7 +62431,10 @@ ExtTitlebarComponent.decorators = [
                 selector: 'titlebar',
                 inputs: titlebarMetaData.PROPERTIES,
                 outputs: titlebarMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtTitlebarComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtTitlebarComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -61802,7 +62446,7 @@ ExtTitlebarComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class toolMetaData {
 }
@@ -62054,7 +62698,10 @@ ExtToolComponent.decorators = [
                 selector: 'tool',
                 inputs: toolMetaData.PROPERTIES,
                 outputs: toolMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtToolComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtToolComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -62066,7 +62713,7 @@ ExtToolComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class paneltoolMetaData {
 }
@@ -62318,7 +62965,10 @@ ExtPaneltoolComponent.decorators = [
                 selector: 'paneltool',
                 inputs: paneltoolMetaData.PROPERTIES,
                 outputs: paneltoolMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtPaneltoolComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtPaneltoolComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -62330,7 +62980,7 @@ ExtPaneltoolComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class toolbarMetaData {
 }
@@ -62612,7 +63262,10 @@ ExtToolbarComponent.decorators = [
                 selector: 'toolbar',
                 inputs: toolbarMetaData.PROPERTIES,
                 outputs: toolbarMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtToolbarComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtToolbarComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -62624,7 +63277,7 @@ ExtToolbarComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class colorbuttonMetaData {
 }
@@ -62874,7 +63527,10 @@ ExtColorbuttonComponent.decorators = [
                 selector: 'colorbutton',
                 inputs: colorbuttonMetaData.PROPERTIES,
                 outputs: colorbuttonMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtColorbuttonComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtColorbuttonComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -62886,7 +63542,7 @@ ExtColorbuttonComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class colorpickercolorpreviewMetaData {
 }
@@ -63129,7 +63785,10 @@ ExtColorpickercolorpreviewComponent.decorators = [
                 selector: 'colorpickercolorpreview',
                 inputs: colorpickercolorpreviewMetaData.PROPERTIES,
                 outputs: colorpickercolorpreviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtColorpickercolorpreviewComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtColorpickercolorpreviewComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -63141,7 +63800,7 @@ ExtColorpickercolorpreviewComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class colorfieldMetaData {
 }
@@ -63463,7 +64122,10 @@ ExtColorfieldComponent.decorators = [
                 selector: 'colorfield',
                 inputs: colorfieldMetaData.PROPERTIES,
                 outputs: colorfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtColorfieldComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtColorfieldComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -63475,7 +64137,7 @@ ExtColorfieldComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class colorselectorMetaData {
 }
@@ -63537,7 +64199,10 @@ ExtColorselectorComponent.decorators = [
                 selector: 'colorselector',
                 inputs: colorselectorMetaData.PROPERTIES,
                 outputs: colorselectorMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtColorselectorComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtColorselectorComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -63549,7 +64214,7 @@ ExtColorselectorComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class gaugeMetaData {
 }
@@ -63806,7 +64471,10 @@ ExtGaugeComponent.decorators = [
                 selector: 'gauge',
                 inputs: gaugeMetaData.PROPERTIES,
                 outputs: gaugeMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtGaugeComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtGaugeComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -63818,7 +64486,7 @@ ExtGaugeComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class mapMetaData {
 }
@@ -64134,7 +64802,10 @@ ExtMapComponent.decorators = [
                 selector: 'map',
                 inputs: mapMetaData.PROPERTIES,
                 outputs: mapMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtMapComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtMapComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -64146,7 +64817,7 @@ ExtMapComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class google_mapMetaData {
 }
@@ -64462,7 +65133,10 @@ ExtGoogle_mapComponent.decorators = [
                 selector: 'google-map',
                 inputs: google_mapMetaData.PROPERTIES,
                 outputs: google_mapMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtGoogle_mapComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtGoogle_mapComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -64474,7 +65148,7 @@ ExtGoogle_mapComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ratingMetaData {
 }
@@ -64731,7 +65405,10 @@ ExtRatingComponent.decorators = [
                 selector: 'rating',
                 inputs: ratingMetaData.PROPERTIES,
                 outputs: ratingMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtRatingComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtRatingComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -64743,7 +65420,7 @@ ExtRatingComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class videoMetaData {
 }
@@ -65012,7 +65689,10 @@ ExtVideoComponent.decorators = [
                 selector: 'video',
                 inputs: videoMetaData.PROPERTIES,
                 outputs: videoMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtVideoComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtVideoComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -65024,7 +65704,7 @@ ExtVideoComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class viewportMetaData {
 }
@@ -65315,7 +65995,10 @@ ExtViewportComponent.decorators = [
                 selector: 'viewport',
                 inputs: viewportMetaData.PROPERTIES,
                 outputs: viewportMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtViewportComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtViewportComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -65327,7 +66010,7 @@ ExtViewportComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class widgetMetaData {
 }
@@ -65451,7 +66134,10 @@ ExtWidgetComponent.decorators = [
                 selector: 'widget',
                 inputs: widgetMetaData.PROPERTIES,
                 outputs: widgetMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef(() => ExtWidgetComponent) }],
+                providers: [{ provide: base, useExisting: forwardRef((/**
+                         * @return {?}
+                         */
+                        () => ExtWidgetComponent)) }],
                 template: '<ng-template></ng-template>'
             }] }
 ];
@@ -65463,7 +66149,7 @@ ExtWidgetComponent.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ExtAngularModule {
 }
@@ -65931,12 +66617,12 @@ ExtAngularModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { ExtAngularModule, base as ɵe, ExtActionsheetComponent as ɵd, actionsheetMetaData as ɵc, ExtAngularBootstrapComponent as ɵa, ExtAngularBootstrapService as ɵb, ExtAudioComponent as ɵg, audioMetaData as ɵf, ExtAxis3dComponent as ɵca, axis3dMetaData as ɵbz, ExtBooleancellComponent as ɵiq, booleancellMetaData as ɵip, ExtBooleancolumnComponent as ɵjk, booleancolumnMetaData as ɵjj, ExtBoundlistComponent as ɵdq, boundlistMetaData as ɵdp, ExtButtonComponent as ɵi, buttonMetaData as ɵh, ExtCalendar_calendar_pickerComponent as ɵo, calendar_calendar_pickerMetaData as ɵn, ExtCalendar_dayComponent as ɵba, calendar_dayMetaData as ɵz, ExtCalendar_daysComponent as ɵbc, calendar_daysMetaData as ɵbb, ExtCalendar_daysheaderComponent as ɵu, calendar_daysheaderMetaData as ɵt, ExtCalendar_daysviewComponent as ɵbo, calendar_daysviewMetaData as ɵbn, ExtCalendar_dayviewComponent as ɵbm, calendar_dayviewMetaData as ɵbl, ExtCalendar_eventComponent as ɵk, calendar_eventMetaData as ɵj, ExtCalendar_form_addComponent as ɵm, calendar_form_addMetaData as ɵl, ExtCalendar_form_editComponent as ɵq, calendar_form_editMetaData as ɵp, ExtCalendar_listComponent as ɵy, calendar_listMetaData as ɵx, ExtCalendar_monthComponent as ɵbe, calendar_monthMetaData as ɵbd, ExtCalendar_monthviewComponent as ɵbq, calendar_monthviewMetaData as ɵbp, ExtCalendar_multiviewComponent as ɵbs, calendar_multiviewMetaData as ɵbr, ExtCalendar_timefieldComponent as ɵs, calendar_timefieldMetaData as ɵr, ExtCalendar_weekComponent as ɵbi, calendar_weekMetaData as ɵbh, ExtCalendar_weeksComponent as ɵbk, calendar_weeksMetaData as ɵbj, ExtCalendar_weeksheaderComponent as ɵw, calendar_weeksheaderMetaData as ɵv, ExtCalendar_weeksviewComponent as ɵbw, calendar_weeksviewMetaData as ɵbv, ExtCalendar_weekviewComponent as ɵbu, calendar_weekviewMetaData as ɵbt, ExtCalendarComponent as ɵbg, calendarMetaData as ɵbf, ExtCarouselComponent as ɵby, carouselMetaData as ɵbx, ExtCartesianComponent as ɵcc, cartesianMetaData as ɵcb, ExtCelleditorComponent as ɵji, celleditorMetaData as ɵjh, ExtChartComponent as ɵce, chartMetaData as ɵcd, ExtChartnavigatorComponent as ɵck, chartnavigatorMetaData as ɵcj, ExtCheckboxComponent as ɵfg, checkboxMetaData as ɵff, ExtCheckboxfieldComponent as ɵfi, checkboxfieldMetaData as ɵfh, ExtCheckcellComponent as ɵiu, checkcellMetaData as ɵit, ExtCheckcolumnComponent as ɵjm, checkcolumnMetaData as ɵjl, ExtChipComponent as ɵcq, chipMetaData as ɵcp, ExtChipviewComponent as ɵds, chipviewMetaData as ɵdr, ExtCleartriggerComponent as ɵhq, cleartriggerMetaData as ɵhp, ExtColorbuttonComponent as ɵqo, colorbuttonMetaData as ɵqn, ExtColorfieldComponent as ɵqs, colorfieldMetaData as ɵqr, ExtColorpickercolorpreviewComponent as ɵqq, colorpickercolorpreviewMetaData as ɵqp, ExtColorselectorComponent as ɵqu, colorselectorMetaData as ɵqt, ExtColumnComponent as ɵjq, columnMetaData as ɵjp, ExtComboboxComponent as ɵfk, comboboxMetaData as ɵfj, ExtComboboxfieldComponent as ɵfm, comboboxfieldMetaData as ɵfl, ExtComponentComponent as ɵcs, componentMetaData as ɵcr, ExtComponentdataviewComponent as ɵdu, componentdataviewMetaData as ɵdt, ExtContainerComponent as ɵcu, containerMetaData as ɵct, ExtContainerfieldComponent as ɵfo, containerfieldMetaData as ɵfn, ExtD3_canvasComponent as ɵcw, d3_canvasMetaData as ɵcv, ExtD3_heatmapComponent as ɵcy, d3_heatmapMetaData as ɵcx, ExtD3_horizontal_treeComponent as ɵdi, d3_horizontal_treeMetaData as ɵdh, ExtD3_packComponent as ɵda, d3_packMetaData as ɵcz, ExtD3_partitionComponent as ɵdc, d3_partitionMetaData as ɵdb, ExtD3_sunburstComponent as ɵde, d3_sunburstMetaData as ɵdd, ExtD3_svgComponent as ɵdm, d3_svgMetaData as ɵdl, ExtD3_treeComponent as ɵdg, d3_treeMetaData as ɵdf, ExtD3_treemapComponent as ɵdk, d3_treemapMetaData as ɵdj, ExtD3Component as ɵdo, d3MetaData as ɵdn, ExtDataitemComponent as ɵdw, dataitemMetaData as ɵdv, ExtDataviewComponent as ɵdy, dataviewMetaData as ɵdx, ExtDatecellComponent as ɵiw, datecellMetaData as ɵiv, ExtDatecolumnComponent as ɵju, datecolumnMetaData as ɵjt, ExtDatefieldComponent as ɵfs, datefieldMetaData as ɵfr, ExtDatepanelComponent as ɵms, datepanelMetaData as ɵmr, ExtDatepickerComponent as ɵne, datepickerMetaData as ɵnd, ExtDatepickerfieldComponent as ɵfu, datepickerfieldMetaData as ɵft, ExtDatepickernativefieldComponent as ɵfw, datepickernativefieldMetaData as ɵfv, ExtDatetitleComponent as ɵmu, datetitleMetaData as ɵmt, ExtDatetriggerComponent as ɵhs, datetriggerMetaData as ɵhr, ExtDialogComponent as ɵew, dialogMetaData as ɵev, ExtDisplayfieldComponent as ɵfy, displayfieldMetaData as ɵfx, ExtDrawComponent as ɵfa, drawMetaData as ɵez, ExtEditorComponent as ɵfe, editorMetaData as ɵfd, ExtEmailfieldComponent as ɵga, emailfieldMetaData as ɵfz, ExtEmptytextComponent as ɵea, emptytextMetaData as ɵdz, ExtExpandtriggerComponent as ɵhu, expandtriggerMetaData as ɵht, ExtFieldComponent as ɵgc, fieldMetaData as ɵgb, ExtFieldcontainerComponent as ɵfq, fieldcontainerMetaData as ɵfp, ExtFieldpanelComponent as ɵgo, fieldpanelMetaData as ɵgn, ExtFieldsetComponent as ɵik, fieldsetMetaData as ɵij, ExtFilebuttonComponent as ɵgg, filebuttonMetaData as ɵgf, ExtFilefieldComponent as ɵge, filefieldMetaData as ɵgd, ExtFormpanelComponent as ɵim, formpanelMetaData as ɵil, ExtGaugeComponent as ɵqw, gaugeMetaData as ɵqv, ExtGoogle_mapComponent as ɵra, google_mapMetaData as ɵqz, ExtGridComponent as ɵkg, gridMetaData as ɵkf, ExtGridcellComponent as ɵis, gridcellMetaData as ɵir, ExtGridcellbaseComponent as ɵio, gridcellbaseMetaData as ɵin, ExtGridcolumnComponent as ɵjo, gridcolumnMetaData as ɵjn, ExtGridcolumnsmenuComponent as ɵko, gridcolumnsmenuMetaData as ɵkn, ExtGridgroupbythismenuitemComponent as ɵkq, gridgroupbythismenuitemMetaData as ɵkp, ExtGridrowComponent as ɵla, gridrowMetaData as ɵkz, ExtGridshowingroupsmenuitemComponent as ɵks, gridshowingroupsmenuitemMetaData as ɵkr, ExtGridsortascmenuitemComponent as ɵku, gridsortascmenuitemMetaData as ɵkt, ExtGridsortdescmenuitemComponent as ɵkw, gridsortdescmenuitemMetaData as ɵkv, ExtGridsummaryrowComponent as ɵlg, gridsummaryrowMetaData as ɵlf, ExtHeadercontainerComponent as ɵki, headercontainerMetaData as ɵkh, ExtHiddenfieldComponent as ɵgi, hiddenfieldMetaData as ɵgh, ExtImageComponent as ɵlk, imageMetaData as ɵlj, ExtImgComponent as ɵlm, imgMetaData as ɵll, ExtIndexbarComponent as ɵec, indexbarMetaData as ɵeb, ExtIndicatorComponent as ɵlo, indicatorMetaData as ɵln, ExtInputfieldComponent as ɵgk, inputfieldMetaData as ɵgj, ExtInteractionComponent as ɵcg, interactionMetaData as ɵcf, ExtItemheaderComponent as ɵee, itemheaderMetaData as ɵed, ExtLabelComponent as ɵlq, labelMetaData as ɵlp, ExtLegendComponent as ɵci, legendMetaData as ɵch, ExtListComponent as ɵeg, listMetaData as ɵef, ExtListitemComponent as ɵei, listitemMetaData as ɵeh, ExtListswiperitemComponent as ɵek, listswiperitemMetaData as ɵej, ExtListswiperstepperComponent as ɵem, listswiperstepperMetaData as ɵel, ExtLoadmaskComponent as ɵlw, loadmaskMetaData as ɵlv, ExtLockedgridComponent as ɵkk, lockedgridMetaData as ɵkj, ExtLockedgridregionComponent as ɵkm, lockedgridregionMetaData as ɵkl, ExtMapComponent as ɵqy, mapMetaData as ɵqx, ExtMaskComponent as ɵly, maskMetaData as ɵlx, ExtMediaComponent as ɵma, mediaMetaData as ɵlz, ExtMenuComponent as ɵmg, menuMetaData as ɵmf, ExtMenucheckitemComponent as ɵmc, menucheckitemMetaData as ɵmb, ExtMenuitemComponent as ɵme, menuitemMetaData as ɵmd, ExtMenuradioitemComponent as ɵmi, menuradioitemMetaData as ɵmh, ExtMenuseparatorComponent as ɵmk, menuseparatorMetaData as ɵmj, ExtMenutriggerComponent as ɵhw, menutriggerMetaData as ɵhv, ExtMessageboxComponent as ɵmm, messageboxMetaData as ɵml, ExtNavigationviewComponent as ɵmo, navigationviewMetaData as ɵmn, ExtNestedlistComponent as ɵeo, nestedlistMetaData as ɵen, ExtNumbercellComponent as ɵiy, numbercellMetaData as ɵix, ExtNumbercolumnComponent as ɵjw, numbercolumnMetaData as ɵjv, ExtNumberfieldComponent as ɵgm, numberfieldMetaData as ɵgl, ExtPagingtoolbarComponent as ɵky, pagingtoolbarMetaData as ɵkx, ExtPanelComponent as ɵmq, panelMetaData as ɵmp, ExtPanelheaderComponent as ɵmw, panelheaderMetaData as ɵmv, ExtPaneltitleComponent as ɵna, paneltitleMetaData as ɵmz, ExtPaneltoolComponent as ɵqk, paneltoolMetaData as ɵqj, ExtPasswordfieldComponent as ɵgq, passwordfieldMetaData as ɵgp, ExtPickerComponent as ɵng, pickerMetaData as ɵnf, ExtPickerfieldComponent as ɵgs, pickerfieldMetaData as ɵgr, ExtPickerslotComponent as ɵnk, pickerslotMetaData as ɵnj, ExtPivotconfigcontainerComponent as ɵoc, pivotconfigcontainerMetaData as ɵob, ExtPivotconfigfieldComponent as ɵoa, pivotconfigfieldMetaData as ɵnz, ExtPivotconfigformComponent as ɵoe, pivotconfigformMetaData as ɵod, ExtPivotconfigpanelComponent as ɵog, pivotconfigpanelMetaData as ɵof, ExtPivotd3containerComponent as ɵns, pivotd3containerMetaData as ɵnr, ExtPivotgridComponent as ɵny, pivotgridMetaData as ɵnx, ExtPivotgridcellComponent as ɵno, pivotgridcellMetaData as ɵnn, ExtPivotgridgroupcellComponent as ɵnq, pivotgridgroupcellMetaData as ɵnp, ExtPivotgridrowComponent as ɵom, pivotgridrowMetaData as ɵol, ExtPivotheatmapComponent as ɵnu, pivotheatmapMetaData as ɵnt, ExtPivotrangeeditorComponent as ɵok, pivotrangeeditorMetaData as ɵoj, ExtPivotsettingsComponent as ɵoi, pivotsettingsMetaData as ɵoh, ExtPivottreemapComponent as ɵnw, pivottreemapMetaData as ɵnv, ExtPolarComponent as ɵcm, polarMetaData as ɵcl, ExtProgressComponent as ɵoo, progressMetaData as ɵon, ExtProgressbarwidgetComponent as ɵoq, progressbarwidgetMetaData as ɵop, ExtPullrefreshbarComponent as ɵeq, pullrefreshbarMetaData as ɵep, ExtPullrefreshspinnerComponent as ɵes, pullrefreshspinnerMetaData as ɵer, ExtRadioComponent as ɵgu, radioMetaData as ɵgt, ExtRadiofieldComponent as ɵgw, radiofieldMetaData as ɵgv, ExtRatingComponent as ɵrc, ratingMetaData as ɵrb, ExtRevealtriggerComponent as ɵhy, revealtriggerMetaData as ɵhx, ExtRowbodyComponent as ɵlc, rowbodyMetaData as ɵlb, ExtRowheaderComponent as ɵle, rowheaderMetaData as ɵld, ExtRownumbererComponent as ɵjy, rownumbererMetaData as ɵjx, ExtRownumberercellComponent as ɵja, rownumberercellMetaData as ɵiz, ExtSearchfieldComponent as ɵgy, searchfieldMetaData as ɵgx, ExtSegmentedbuttonComponent as ɵos, segmentedbuttonMetaData as ɵor, ExtSelectfieldComponent as ɵha, selectfieldMetaData as ɵgz, ExtSelectioncolumnComponent as ɵka, selectioncolumnMetaData as ɵjz, ExtSelectpickerComponent as ɵni, selectpickerMetaData as ɵnh, ExtSheetComponent as ɵou, sheetMetaData as ɵot, ExtSimplelistitemComponent as ɵeu, simplelistitemMetaData as ɵet, ExtSinglesliderfieldComponent as ɵhc, singlesliderfieldMetaData as ɵhb, ExtSliderComponent as ɵow, sliderMetaData as ɵov, ExtSliderfieldComponent as ɵhe, sliderfieldMetaData as ɵhd, ExtSpacefillingComponent as ɵco, spacefillingMetaData as ɵcn, ExtSpacerComponent as ɵpc, spacerMetaData as ɵpb, ExtSparklineComponent as ɵpg, sparklineMetaData as ɵpf, ExtSparklinebarComponent as ɵpe, sparklinebarMetaData as ɵpd, ExtSparklineboxComponent as ɵpi, sparklineboxMetaData as ɵph, ExtSparklinebulletComponent as ɵpk, sparklinebulletMetaData as ɵpj, ExtSparklinediscreteComponent as ɵpm, sparklinediscreteMetaData as ɵpl, ExtSparklinelineComponent as ɵpo, sparklinelineMetaData as ɵpn, ExtSparklinepieComponent as ɵpq, sparklinepieMetaData as ɵpp, ExtSparklinetristateComponent as ɵps, sparklinetristateMetaData as ɵpr, ExtSpindowntriggerComponent as ɵia, spindowntriggerMetaData as ɵhz, ExtSpinnerfieldComponent as ɵhg, spinnerfieldMetaData as ɵhf, ExtSpinuptriggerComponent as ɵic, spinuptriggerMetaData as ɵib, ExtSplitbuttonComponent as ɵpu, splitbuttonMetaData as ɵpt, ExtSurfaceComponent as ɵfc, surfaceMetaData as ɵfb, ExtTabComponent as ɵqa, tabMetaData as ɵpz, ExtTabbarComponent as ɵpw, tabbarMetaData as ɵpv, ExtTabletpickerComponent as ɵnm, tabletpickerMetaData as ɵnl, ExtTabpanelComponent as ɵpy, tabpanelMetaData as ɵpx, ExtTemplatecolumnComponent as ɵjs, templatecolumnMetaData as ɵjr, ExtTextareafieldComponent as ɵhk, textareafieldMetaData as ɵhj, ExtTextcellComponent as ɵjc, textcellMetaData as ɵjb, ExtTextcolumnComponent as ɵkc, textcolumnMetaData as ɵkb, ExtTextfieldComponent as ɵhi, textfieldMetaData as ɵhh, ExtThumbComponent as ɵoy, thumbMetaData as ɵox, ExtTimefieldComponent as ɵhm, timefieldMetaData as ɵhl, ExtTimepanelComponent as ɵmy, timepanelMetaData as ɵmx, ExtTimetriggerComponent as ɵie, timetriggerMetaData as ɵid, ExtTitleComponent as ɵqe, titleMetaData as ɵqd, ExtTitlebarComponent as ɵqg, titlebarMetaData as ɵqf, ExtTogglefieldComponent as ɵho, togglefieldMetaData as ɵhn, ExtTogglesliderComponent as ɵpa, togglesliderMetaData as ɵoz, ExtToolComponent as ɵqi, toolMetaData as ɵqh, ExtToolbarComponent as ɵqm, toolbarMetaData as ɵql, ExtTooltipComponent as ɵqc, tooltipMetaData as ɵqb, ExtTreeComponent as ɵli, treeMetaData as ɵlh, ExtTreecellComponent as ɵje, treecellMetaData as ɵjd, ExtTreecolumnComponent as ɵke, treecolumnMetaData as ɵkd, ExtTreelistComponent as ɵls, treelistMetaData as ɵlr, ExtTreelistitemComponent as ɵlu, treelistitemMetaData as ɵlt, ExtTriggerComponent as ɵig, triggerMetaData as ɵif, ExtUrlfieldComponent as ɵii, urlfieldMetaData as ɵih, ExtVideoComponent as ɵre, videoMetaData as ɵrd, ExtViewportComponent as ɵrg, viewportMetaData as ɵrf, ExtWidgetComponent as ɵri, widgetMetaData as ɵrh, ExtWidgetcellComponent as ɵjg, widgetcellMetaData as ɵjf, ExtWindowComponent as ɵey, windowMetaData as ɵex, ExtYearpickerComponent as ɵnc, yearpickerMetaData as ɵnb };

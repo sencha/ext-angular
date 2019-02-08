@@ -19,6 +19,7 @@ ExtGen
 
 ExtReact
 - issue in ExtReact  https://sencha.jira.com/browse/EXTREACT-9
+- withRef: true and react-redux 6.0.0 (https://github.com/reduxjs/react-redux/releases)
 
 Misc
 - grid SelectionChange missing
@@ -29,6 +30,7 @@ Misc
 - formatting for many examples
 - Sencha tests for ExtAngular (like those for ExtReact)
 - Create eslint for app
+- custom theme does not show up on Conference App
 - Example applications for modern toolkit (like those for ExtReact)
   - Conference app
   - Froala Example
