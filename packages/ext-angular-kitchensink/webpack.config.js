@@ -30,6 +30,7 @@ module.exports = function (env) {
   var treeshake = env.treeshake ? JSON.parse(env.treeshake) : false
   var basehref = env.basehref || '/'
   var mode = isProd ? 'production': 'development'
+  var outputFolder = 'build'
 
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
@@ -98,7 +99,7 @@ module.exports = function (env) {
         main: path.join(__dirname, './src/main.ts') //"./main.ts"
       },
       output: {
-        path: path.resolve(__dirname, 'build'),
+        path: path.resolve(__dirname, outputFolder),
         filename: '[name].js'
       },
       resolve: {
@@ -116,7 +117,7 @@ module.exports = function (env) {
       plugins: plugins,
       node: false,
       devServer: {
-        contentBase: './build',
+        contentBase: outputFolder,
         hot: true,
         historyApiFallback: true,
         host: '0.0.0.0',
