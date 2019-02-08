@@ -107,26 +107,33 @@ export function _compilation(compiler, compilation, vars, options) {
         compilation.hooks.htmlWebpackPluginBeforeHtmlGeneration.tap(`ext-html-generation`,(data) => {
         logv(options,'HOOK ext-html-generation')
         const path = require('path')
-        var outputPath = ''
-        if (compiler.options.devServer) {
-          if (compiler.outputPath === '/') {
-            outputPath = path.join(compiler.options.devServer.contentBase, outputPath)
-          }
-          else {
-            if (compiler.options.devServer.contentBase == undefined) {
-              outputPath = 'build'
-            }
-            else {
-              outputPath = ''
-            }
-          }
-        }
-        else {
-          outputPath = 'build'
-        }
-        outputPath = outputPath.replace(process.cwd(), '').trim()
-        var jsPath = path.join(outputPath, vars.extPath, 'ext.js')
-        var cssPath = path.join(outputPath, vars.extPath, 'ext.css')
+
+        //var outputPath = ''
+        // log('compiler.options.devServer: ' + compiler.options.devServer)
+        // log('compiler.options.devServer.contentBase: ' + compiler.options.devServer.contentBase)
+        // log('compiler.outputPath: ' + compiler.outputPath)
+        // if (compiler.options.devServer) {
+        //   if (compiler.outputPath === '/') {
+        //     outputPath = path.join(compiler.options.devServer.contentBase, outputPath)
+        //   }
+        //   else {
+        //     if (compiler.options.devServer.contentBase == undefined) {
+        //       outputPath = 'build'
+        //     }
+        //     else {
+        //       outputPath = ''
+        //     }
+        //   }
+        // }
+        // else {
+        //   outputPath = 'build'
+        // }
+        // outputPath = outputPath.replace(process.cwd(), '').trim()
+        //var jsPath = path.join(outputPath, vars.extPath, 'ext.js')
+        //var cssPath = path.join(outputPath, vars.extPath, 'ext.css')
+
+        var jsPath = path.join(vars.extPath, 'ext.js')
+        var cssPath = path.join(vars.extPath, 'ext.css')
         data.assets.js.unshift(jsPath)
         data.assets.css.unshift(cssPath)
         log(vars.app + `Adding ${jsPath} and ${cssPath} to index.html`)
