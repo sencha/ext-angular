@@ -4,7 +4,7 @@
   "description": "A webpack plugin for new Ext JS applications",
   "main": "dist/index.js",
   "scripts": {
-    "build": "babel ./src --out-dir ./dist"
+    "build": "npx babel ./src --out-dir ./dist"
   },
   "dependencies": {
     "switchit":"^1.0.8",

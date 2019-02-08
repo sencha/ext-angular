@@ -1,7 +1,7 @@
 <container 
     [platformConfig]="{phone: {layout: 'fit'}, '!phone': {layout: 'center', padding: 10}}"
 >
-    <formpanel 
+    <container padding="10" layout="fit" [fitToParent]="true"><formpanel 
         [shadow]="true" 
         [padding]="20"
         (ready)="onReady($event)"

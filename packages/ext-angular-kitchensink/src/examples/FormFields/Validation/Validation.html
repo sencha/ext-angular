@@ -4,7 +4,7 @@
     <container 
         [padding]="10" [platformConfig]="{desktop: {maxWidth: 400}}"
     >
-        <formpanel 
+        <container padding="10" layout="fit" [fitToParent]="true"><formpanel 
             [padding]="10"
             [shadow]="true"
             [defaults]="{errorTarget: 'under'}"
@@ -71,7 +71,7 @@
                 [validators]="{type: 'method', fn: validateCapilization}"
             ></textfield>
         </formpanel>
-        <formpanel 
+        <container padding="10" layout="fit" [fitToParent]="true"><formpanel 
             [padding]="10"
             [shadow]="true"
             [title]="'Assigning Error Messages Directly'"

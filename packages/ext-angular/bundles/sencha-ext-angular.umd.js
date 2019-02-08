@@ -6,7 +6,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ExtAngularBootstrapService = /** @class */ (function () {
         function ExtAngularBootstrapService(componentFactoryResolver, appRef, injector) {
@@ -69,7 +69,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ExtAngularBootstrapComponent = /** @class */ (function () {
         function ExtAngularBootstrapComponent(extAngularService) {
@@ -123,7 +123,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var base = /** @class */ (function () {
         //private subscriptions: Subscription[] = [];
@@ -135,14 +135,18 @@
             this.q = null;
             this._nativeElement = nativeElement;
             this._hostComponent = hostComponent;
-            metaData.EVENTNAMES.forEach(function (event, n) {
+            metaData.EVENTNAMES.forEach(( /**
+             * @param {?} event
+             * @param {?} n
+             * @return {?}
+             */function (event, n) {
                 if (event != 'fullscreen') {
                     (( /** @type {?} */(_this)))[event] = new i0.EventEmitter();
                 }
                 else {
                     (( /** @type {?} */(_this)))[event + 'event'] = new i0.EventEmitter();
                 }
-            });
+            }));
             //    metaData.EVENTS.forEach( (event: any, n: any) => {
             //      if (event.name != 'fullscreen') {
             //        (<any>this)[event.name] = new EventEmitter()
@@ -239,12 +243,19 @@
                     o.listeners = {};
                     /** @type {?} */
                     var EVENTS = metaData.EVENTS;
-                    EVENTS.forEach(function (event, index, array) {
+                    EVENTS.forEach(( /**
+                     * @param {?} event
+                     * @param {?} index
+                     * @param {?} array
+                     * @return {?}
+                     */function (event, index, array) {
                         /** @type {?} */
                         var eventname = event.name;
                         /** @type {?} */
                         var eventparameters = event.parameters;
-                        o.listeners[eventname] = function () {
+                        o.listeners[eventname] = ( /**
+                         * @return {?}
+                         */function () {
                             /** @type {?} */
                             var parameters = eventparameters;
                             /** @type {?} */
@@ -257,8 +268,8 @@
                                 emitparms[parms[i_1]] = args[i_1];
                             }
                             me[eventname].emit(emitparms);
-                        };
-                    });
+                        });
+                    }));
                 }
                 if (this._nativeElement.parentElement != null) {
                     o.renderTo = this._nativeElement;
@@ -460,7 +471,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var actionsheetMetaData = /** @class */ (function () {
         function actionsheetMetaData() {
@@ -805,7 +816,9 @@
                         selector: 'actionsheet',
                         inputs: actionsheetMetaData.PROPERTIES,
                         outputs: actionsheetMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtActionsheetComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtActionsheetComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -821,7 +834,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var audioMetaData = /** @class */ (function () {
         function audioMetaData() {
@@ -1094,7 +1107,9 @@
                         selector: 'audio',
                         inputs: audioMetaData.PROPERTIES,
                         outputs: audioMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtAudioComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtAudioComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -1110,7 +1125,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var buttonMetaData = /** @class */ (function () {
         function buttonMetaData() {
@@ -1389,7 +1404,9 @@
                         selector: 'button',
                         inputs: buttonMetaData.PROPERTIES,
                         outputs: buttonMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtButtonComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtButtonComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -1405,7 +1422,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendar_eventMetaData = /** @class */ (function () {
         function calendar_eventMetaData() {
@@ -1664,7 +1681,9 @@
                         selector: 'calendar-event',
                         inputs: calendar_eventMetaData.PROPERTIES,
                         outputs: calendar_eventMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_eventComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendar_eventComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -1680,7 +1699,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendar_form_addMetaData = /** @class */ (function () {
         function calendar_form_addMetaData() {
@@ -2060,7 +2079,9 @@
                         selector: 'calendar-form-add',
                         inputs: calendar_form_addMetaData.PROPERTIES,
                         outputs: calendar_form_addMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_form_addComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendar_form_addComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -2076,7 +2097,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendar_calendar_pickerMetaData = /** @class */ (function () {
         function calendar_calendar_pickerMetaData() {
@@ -2425,7 +2446,9 @@
                         selector: 'calendar-calendar-picker',
                         inputs: calendar_calendar_pickerMetaData.PROPERTIES,
                         outputs: calendar_calendar_pickerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_calendar_pickerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendar_calendar_pickerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -2441,7 +2464,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendar_form_editMetaData = /** @class */ (function () {
         function calendar_form_editMetaData() {
@@ -2821,7 +2844,9 @@
                         selector: 'calendar-form-edit',
                         inputs: calendar_form_editMetaData.PROPERTIES,
                         outputs: calendar_form_editMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_form_editComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendar_form_editComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -2837,7 +2862,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendar_timefieldMetaData = /** @class */ (function () {
         function calendar_timefieldMetaData() {
@@ -3186,7 +3211,9 @@
                         selector: 'calendar-timefield',
                         inputs: calendar_timefieldMetaData.PROPERTIES,
                         outputs: calendar_timefieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_timefieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendar_timefieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -3202,7 +3229,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendar_daysheaderMetaData = /** @class */ (function () {
         function calendar_daysheaderMetaData() {
@@ -3457,7 +3484,9 @@
                         selector: 'calendar-daysheader',
                         inputs: calendar_daysheaderMetaData.PROPERTIES,
                         outputs: calendar_daysheaderMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_daysheaderComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendar_daysheaderComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -3473,7 +3502,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendar_weeksheaderMetaData = /** @class */ (function () {
         function calendar_weeksheaderMetaData() {
@@ -3728,7 +3757,9 @@
                         selector: 'calendar-weeksheader',
                         inputs: calendar_weeksheaderMetaData.PROPERTIES,
                         outputs: calendar_weeksheaderMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_weeksheaderComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendar_weeksheaderComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -3744,7 +3775,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendar_listMetaData = /** @class */ (function () {
         function calendar_listMetaData() {
@@ -4122,7 +4153,9 @@
                         selector: 'calendar-list',
                         inputs: calendar_listMetaData.PROPERTIES,
                         outputs: calendar_listMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_listComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendar_listComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -4138,7 +4171,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendar_dayMetaData = /** @class */ (function () {
         function calendar_dayMetaData() {
@@ -4527,7 +4560,9 @@
                         selector: 'calendar-day',
                         inputs: calendar_dayMetaData.PROPERTIES,
                         outputs: calendar_dayMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_dayComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendar_dayComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -4543,7 +4578,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendar_daysMetaData = /** @class */ (function () {
         function calendar_daysMetaData() {
@@ -4932,7 +4967,9 @@
                         selector: 'calendar-days',
                         inputs: calendar_daysMetaData.PROPERTIES,
                         outputs: calendar_daysMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_daysComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendar_daysComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -4948,7 +4985,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendar_monthMetaData = /** @class */ (function () {
         function calendar_monthMetaData() {
@@ -5332,7 +5369,9 @@
                         selector: 'calendar-month',
                         inputs: calendar_monthMetaData.PROPERTIES,
                         outputs: calendar_monthMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_monthComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendar_monthComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -5348,7 +5387,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendarMetaData = /** @class */ (function () {
         function calendarMetaData() {
@@ -5706,7 +5745,9 @@
                         selector: 'calendar',
                         inputs: calendarMetaData.PROPERTIES,
                         outputs: calendarMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendarComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendarComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -5722,7 +5763,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendar_weekMetaData = /** @class */ (function () {
         function calendar_weekMetaData() {
@@ -6112,7 +6153,9 @@
                         selector: 'calendar-week',
                         inputs: calendar_weekMetaData.PROPERTIES,
                         outputs: calendar_weekMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_weekComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendar_weekComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -6128,7 +6171,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendar_weeksMetaData = /** @class */ (function () {
         function calendar_weeksMetaData() {
@@ -6512,7 +6555,9 @@
                         selector: 'calendar-weeks',
                         inputs: calendar_weeksMetaData.PROPERTIES,
                         outputs: calendar_weeksMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_weeksComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendar_weeksComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -6528,7 +6573,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendar_dayviewMetaData = /** @class */ (function () {
         function calendar_dayviewMetaData() {
@@ -6826,7 +6871,9 @@
                         selector: 'calendar-dayview',
                         inputs: calendar_dayviewMetaData.PROPERTIES,
                         outputs: calendar_dayviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_dayviewComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendar_dayviewComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -6842,7 +6889,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendar_daysviewMetaData = /** @class */ (function () {
         function calendar_daysviewMetaData() {
@@ -7140,7 +7187,9 @@
                         selector: 'calendar-daysview',
                         inputs: calendar_daysviewMetaData.PROPERTIES,
                         outputs: calendar_daysviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_daysviewComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendar_daysviewComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -7156,7 +7205,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendar_monthviewMetaData = /** @class */ (function () {
         function calendar_monthviewMetaData() {
@@ -7452,7 +7501,9 @@
                         selector: 'calendar-monthview',
                         inputs: calendar_monthviewMetaData.PROPERTIES,
                         outputs: calendar_monthviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_monthviewComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendar_monthviewComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -7468,7 +7519,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendar_multiviewMetaData = /** @class */ (function () {
         function calendar_multiviewMetaData() {
@@ -7528,7 +7579,9 @@
                         selector: 'calendar-multiview',
                         inputs: calendar_multiviewMetaData.PROPERTIES,
                         outputs: calendar_multiviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_multiviewComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendar_multiviewComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -7544,7 +7597,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendar_weekviewMetaData = /** @class */ (function () {
         function calendar_weekviewMetaData() {
@@ -7843,7 +7896,9 @@
                         selector: 'calendar-weekview',
                         inputs: calendar_weekviewMetaData.PROPERTIES,
                         outputs: calendar_weekviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_weekviewComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendar_weekviewComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -7859,7 +7914,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var calendar_weeksviewMetaData = /** @class */ (function () {
         function calendar_weeksviewMetaData() {
@@ -8155,7 +8210,9 @@
                         selector: 'calendar-weeksview',
                         inputs: calendar_weeksviewMetaData.PROPERTIES,
                         outputs: calendar_weeksviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCalendar_weeksviewComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCalendar_weeksviewComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -8171,7 +8228,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var carouselMetaData = /** @class */ (function () {
         function carouselMetaData() {
@@ -8459,7 +8516,9 @@
                         selector: 'carousel',
                         inputs: carouselMetaData.PROPERTIES,
                         outputs: carouselMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCarouselComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCarouselComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -8475,7 +8534,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var axis3dMetaData = /** @class */ (function () {
         function axis3dMetaData() {
@@ -8566,7 +8625,9 @@
                         selector: 'axis3d',
                         inputs: axis3dMetaData.PROPERTIES,
                         outputs: axis3dMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtAxis3dComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtAxis3dComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -8582,7 +8643,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var cartesianMetaData = /** @class */ (function () {
         function cartesianMetaData() {
@@ -8937,7 +8998,9 @@
                         selector: 'cartesian',
                         inputs: cartesianMetaData.PROPERTIES,
                         outputs: cartesianMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCartesianComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCartesianComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -8953,7 +9016,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var chartMetaData = /** @class */ (function () {
         function chartMetaData() {
@@ -9308,7 +9371,9 @@
                         selector: 'chart',
                         inputs: chartMetaData.PROPERTIES,
                         outputs: chartMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtChartComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtChartComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -9324,7 +9389,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var interactionMetaData = /** @class */ (function () {
         function interactionMetaData() {
@@ -9380,7 +9445,9 @@
                         selector: 'interaction',
                         inputs: interactionMetaData.PROPERTIES,
                         outputs: interactionMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtInteractionComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtInteractionComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -9396,7 +9463,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var legendMetaData = /** @class */ (function () {
         function legendMetaData() {
@@ -9775,7 +9842,9 @@
                         selector: 'legend',
                         inputs: legendMetaData.PROPERTIES,
                         outputs: legendMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtLegendComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtLegendComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -9791,7 +9860,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var chartnavigatorMetaData = /** @class */ (function () {
         function chartnavigatorMetaData() {
@@ -10079,7 +10148,9 @@
                         selector: 'chartnavigator',
                         inputs: chartnavigatorMetaData.PROPERTIES,
                         outputs: chartnavigatorMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtChartnavigatorComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtChartnavigatorComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -10095,7 +10166,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var polarMetaData = /** @class */ (function () {
         function polarMetaData() {
@@ -10451,7 +10522,9 @@
                         selector: 'polar',
                         inputs: polarMetaData.PROPERTIES,
                         outputs: polarMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPolarComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPolarComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -10467,7 +10540,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var spacefillingMetaData = /** @class */ (function () {
         function spacefillingMetaData() {
@@ -10820,7 +10893,9 @@
                         selector: 'spacefilling',
                         inputs: spacefillingMetaData.PROPERTIES,
                         outputs: spacefillingMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSpacefillingComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSpacefillingComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -10836,7 +10911,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var chipMetaData = /** @class */ (function () {
         function chipMetaData() {
@@ -11091,7 +11166,9 @@
                         selector: 'chip',
                         inputs: chipMetaData.PROPERTIES,
                         outputs: chipMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtChipComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtChipComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -11107,7 +11184,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var componentMetaData = /** @class */ (function () {
         function componentMetaData() {
@@ -11356,7 +11433,9 @@
                         selector: 'component',
                         inputs: componentMetaData.PROPERTIES,
                         outputs: componentMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtComponentComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtComponentComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -11372,7 +11451,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var containerMetaData = /** @class */ (function () {
         function containerMetaData() {
@@ -11658,7 +11737,9 @@
                         selector: 'container',
                         inputs: containerMetaData.PROPERTIES,
                         outputs: containerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtContainerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtContainerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -11674,7 +11755,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var d3_canvasMetaData = /** @class */ (function () {
         function d3_canvasMetaData() {
@@ -11931,7 +12012,9 @@
                         selector: 'd3-canvas',
                         inputs: d3_canvasMetaData.PROPERTIES,
                         outputs: d3_canvasMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3_canvasComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtD3_canvasComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -11947,7 +12030,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var d3_heatmapMetaData = /** @class */ (function () {
         function d3_heatmapMetaData() {
@@ -12212,7 +12295,9 @@
                         selector: 'd3-heatmap',
                         inputs: d3_heatmapMetaData.PROPERTIES,
                         outputs: d3_heatmapMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3_heatmapComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtD3_heatmapComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -12228,7 +12313,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var d3_packMetaData = /** @class */ (function () {
         function d3_packMetaData() {
@@ -12509,7 +12594,9 @@
                         selector: 'd3-pack',
                         inputs: d3_packMetaData.PROPERTIES,
                         outputs: d3_packMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3_packComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtD3_packComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -12525,7 +12612,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var d3_partitionMetaData = /** @class */ (function () {
         function d3_partitionMetaData() {
@@ -12804,7 +12891,9 @@
                         selector: 'd3-partition',
                         inputs: d3_partitionMetaData.PROPERTIES,
                         outputs: d3_partitionMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3_partitionComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtD3_partitionComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -12820,7 +12909,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var d3_sunburstMetaData = /** @class */ (function () {
         function d3_sunburstMetaData() {
@@ -13101,7 +13190,9 @@
                         selector: 'd3-sunburst',
                         inputs: d3_sunburstMetaData.PROPERTIES,
                         outputs: d3_sunburstMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3_sunburstComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtD3_sunburstComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -13117,7 +13208,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var d3_treeMetaData = /** @class */ (function () {
         function d3_treeMetaData() {
@@ -13399,7 +13490,9 @@
                         selector: 'd3-tree',
                         inputs: d3_treeMetaData.PROPERTIES,
                         outputs: d3_treeMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3_treeComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtD3_treeComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -13415,7 +13508,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var d3_horizontal_treeMetaData = /** @class */ (function () {
         function d3_horizontal_treeMetaData() {
@@ -13697,7 +13790,9 @@
                         selector: 'd3-horizontal-tree',
                         inputs: d3_horizontal_treeMetaData.PROPERTIES,
                         outputs: d3_horizontal_treeMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3_horizontal_treeComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtD3_horizontal_treeComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -13713,7 +13808,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var d3_treemapMetaData = /** @class */ (function () {
         function d3_treemapMetaData() {
@@ -13997,7 +14092,9 @@
                         selector: 'd3-treemap',
                         inputs: d3_treemapMetaData.PROPERTIES,
                         outputs: d3_treemapMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3_treemapComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtD3_treemapComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -14013,7 +14110,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var d3_svgMetaData = /** @class */ (function () {
         function d3_svgMetaData() {
@@ -14272,7 +14369,9 @@
                         selector: 'd3-svg',
                         inputs: d3_svgMetaData.PROPERTIES,
                         outputs: d3_svgMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3_svgComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtD3_svgComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -14288,7 +14387,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var d3MetaData = /** @class */ (function () {
         function d3MetaData() {
@@ -14547,7 +14646,9 @@
                         selector: 'd3',
                         inputs: d3MetaData.PROPERTIES,
                         outputs: d3MetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtD3Component; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtD3Component; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -14563,7 +14664,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var boundlistMetaData = /** @class */ (function () {
         function boundlistMetaData() {
@@ -14974,7 +15075,9 @@
                         selector: 'boundlist',
                         inputs: boundlistMetaData.PROPERTIES,
                         outputs: boundlistMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtBoundlistComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtBoundlistComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -14990,7 +15093,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var chipviewMetaData = /** @class */ (function () {
         function chipviewMetaData() {
@@ -15375,7 +15478,9 @@
                         selector: 'chipview',
                         inputs: chipviewMetaData.PROPERTIES,
                         outputs: chipviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtChipviewComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtChipviewComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -15391,7 +15496,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var componentdataviewMetaData = /** @class */ (function () {
         function componentdataviewMetaData() {
@@ -15768,7 +15873,9 @@
                         selector: 'componentdataview',
                         inputs: componentdataviewMetaData.PROPERTIES,
                         outputs: componentdataviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtComponentdataviewComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtComponentdataviewComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -15784,7 +15891,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var dataitemMetaData = /** @class */ (function () {
         function dataitemMetaData() {
@@ -16073,7 +16180,9 @@
                         selector: 'dataitem',
                         inputs: dataitemMetaData.PROPERTIES,
                         outputs: dataitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDataitemComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtDataitemComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -16089,7 +16198,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var dataviewMetaData = /** @class */ (function () {
         function dataviewMetaData() {
@@ -16466,7 +16575,9 @@
                         selector: 'dataview',
                         inputs: dataviewMetaData.PROPERTIES,
                         outputs: dataviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDataviewComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtDataviewComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -16482,7 +16593,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var emptytextMetaData = /** @class */ (function () {
         function emptytextMetaData() {
@@ -16731,7 +16842,9 @@
                         selector: 'emptytext',
                         inputs: emptytextMetaData.PROPERTIES,
                         outputs: emptytextMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtEmptytextComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtEmptytextComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -16747,7 +16860,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var indexbarMetaData = /** @class */ (function () {
         function indexbarMetaData() {
@@ -17009,7 +17122,9 @@
                         selector: 'indexbar',
                         inputs: indexbarMetaData.PROPERTIES,
                         outputs: indexbarMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtIndexbarComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtIndexbarComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -17025,7 +17140,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var itemheaderMetaData = /** @class */ (function () {
         function itemheaderMetaData() {
@@ -17279,7 +17394,9 @@
                         selector: 'itemheader',
                         inputs: itemheaderMetaData.PROPERTIES,
                         outputs: itemheaderMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtItemheaderComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtItemheaderComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -17295,7 +17412,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var listMetaData = /** @class */ (function () {
         function listMetaData() {
@@ -17706,7 +17823,9 @@
                         selector: 'list',
                         inputs: listMetaData.PROPERTIES,
                         outputs: listMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtListComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtListComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -17722,7 +17841,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var listitemMetaData = /** @class */ (function () {
         function listitemMetaData() {
@@ -18015,7 +18134,9 @@
                         selector: 'listitem',
                         inputs: listitemMetaData.PROPERTIES,
                         outputs: listitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtListitemComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtListitemComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -18031,7 +18152,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var listswiperitemMetaData = /** @class */ (function () {
         function listswiperitemMetaData() {
@@ -18321,7 +18442,9 @@
                         selector: 'listswiperitem',
                         inputs: listswiperitemMetaData.PROPERTIES,
                         outputs: listswiperitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtListswiperitemComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtListswiperitemComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -18337,7 +18460,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var listswiperstepperMetaData = /** @class */ (function () {
         function listswiperstepperMetaData() {
@@ -18632,7 +18755,9 @@
                         selector: 'listswiperstepper',
                         inputs: listswiperstepperMetaData.PROPERTIES,
                         outputs: listswiperstepperMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtListswiperstepperComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtListswiperstepperComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -18648,7 +18773,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var nestedlistMetaData = /** @class */ (function () {
         function nestedlistMetaData() {
@@ -18977,7 +19102,9 @@
                         selector: 'nestedlist',
                         inputs: nestedlistMetaData.PROPERTIES,
                         outputs: nestedlistMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtNestedlistComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtNestedlistComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -18993,7 +19120,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var pullrefreshbarMetaData = /** @class */ (function () {
         function pullrefreshbarMetaData() {
@@ -19252,7 +19379,9 @@
                         selector: 'pullrefreshbar',
                         inputs: pullrefreshbarMetaData.PROPERTIES,
                         outputs: pullrefreshbarMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPullrefreshbarComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPullrefreshbarComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -19268,7 +19397,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var pullrefreshspinnerMetaData = /** @class */ (function () {
         function pullrefreshspinnerMetaData() {
@@ -19520,7 +19649,9 @@
                         selector: 'pullrefreshspinner',
                         inputs: pullrefreshspinnerMetaData.PROPERTIES,
                         outputs: pullrefreshspinnerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPullrefreshspinnerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPullrefreshspinnerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -19536,7 +19667,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var simplelistitemMetaData = /** @class */ (function () {
         function simplelistitemMetaData() {
@@ -19790,7 +19921,9 @@
                         selector: 'simplelistitem',
                         inputs: simplelistitemMetaData.PROPERTIES,
                         outputs: simplelistitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSimplelistitemComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSimplelistitemComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -19806,7 +19939,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var dialogMetaData = /** @class */ (function () {
         function dialogMetaData() {
@@ -20164,7 +20297,9 @@
                         selector: 'dialog',
                         inputs: dialogMetaData.PROPERTIES,
                         outputs: dialogMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDialogComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtDialogComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -20180,7 +20315,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var windowMetaData = /** @class */ (function () {
         function windowMetaData() {
@@ -20538,7 +20673,9 @@
                         selector: 'window',
                         inputs: windowMetaData.PROPERTIES,
                         outputs: windowMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtWindowComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtWindowComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -20554,7 +20691,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var drawMetaData = /** @class */ (function () {
         function drawMetaData() {
@@ -20864,7 +21001,9 @@
                         selector: 'draw',
                         inputs: drawMetaData.PROPERTIES,
                         outputs: drawMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDrawComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtDrawComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -20880,7 +21019,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var surfaceMetaData = /** @class */ (function () {
         function surfaceMetaData() {
@@ -21015,7 +21154,9 @@
                         selector: 'surface',
                         inputs: surfaceMetaData.PROPERTIES,
                         outputs: surfaceMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSurfaceComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSurfaceComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -21031,7 +21172,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var editorMetaData = /** @class */ (function () {
         function editorMetaData() {
@@ -21345,7 +21486,9 @@
                         selector: 'editor',
                         inputs: editorMetaData.PROPERTIES,
                         outputs: editorMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtEditorComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtEditorComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -21361,7 +21504,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var checkboxMetaData = /** @class */ (function () {
         function checkboxMetaData() {
@@ -21659,7 +21802,9 @@
                         selector: 'checkbox',
                         inputs: checkboxMetaData.PROPERTIES,
                         outputs: checkboxMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCheckboxComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCheckboxComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -21675,7 +21820,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var checkboxfieldMetaData = /** @class */ (function () {
         function checkboxfieldMetaData() {
@@ -21973,7 +22118,9 @@
                         selector: 'checkboxfield',
                         inputs: checkboxfieldMetaData.PROPERTIES,
                         outputs: checkboxfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCheckboxfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCheckboxfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -21989,7 +22136,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var comboboxMetaData = /** @class */ (function () {
         function comboboxMetaData() {
@@ -22357,7 +22504,9 @@
                         selector: 'combobox',
                         inputs: comboboxMetaData.PROPERTIES,
                         outputs: comboboxMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtComboboxComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtComboboxComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -22373,7 +22522,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var comboboxfieldMetaData = /** @class */ (function () {
         function comboboxfieldMetaData() {
@@ -22741,7 +22890,9 @@
                         selector: 'comboboxfield',
                         inputs: comboboxfieldMetaData.PROPERTIES,
                         outputs: comboboxfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtComboboxfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtComboboxfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -22757,7 +22908,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var containerfieldMetaData = /** @class */ (function () {
         function containerfieldMetaData() {
@@ -23049,7 +23200,9 @@
                         selector: 'containerfield',
                         inputs: containerfieldMetaData.PROPERTIES,
                         outputs: containerfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtContainerfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtContainerfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -23065,7 +23218,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var fieldcontainerMetaData = /** @class */ (function () {
         function fieldcontainerMetaData() {
@@ -23357,7 +23510,9 @@
                         selector: 'fieldcontainer',
                         inputs: fieldcontainerMetaData.PROPERTIES,
                         outputs: fieldcontainerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtFieldcontainerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtFieldcontainerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -23373,7 +23528,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var datefieldMetaData = /** @class */ (function () {
         function datefieldMetaData() {
@@ -23701,7 +23856,9 @@
                         selector: 'datefield',
                         inputs: datefieldMetaData.PROPERTIES,
                         outputs: datefieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDatefieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtDatefieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -23717,7 +23874,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var datepickerfieldMetaData = /** @class */ (function () {
         function datepickerfieldMetaData() {
@@ -24045,7 +24202,9 @@
                         selector: 'datepickerfield',
                         inputs: datepickerfieldMetaData.PROPERTIES,
                         outputs: datepickerfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDatepickerfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtDatepickerfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -24061,7 +24220,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var datepickernativefieldMetaData = /** @class */ (function () {
         function datepickernativefieldMetaData() {
@@ -24389,7 +24548,9 @@
                         selector: 'datepickernativefield',
                         inputs: datepickernativefieldMetaData.PROPERTIES,
                         outputs: datepickernativefieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDatepickernativefieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtDatepickernativefieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -24405,7 +24566,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var displayfieldMetaData = /** @class */ (function () {
         function displayfieldMetaData() {
@@ -24696,7 +24857,9 @@
                         selector: 'displayfield',
                         inputs: displayfieldMetaData.PROPERTIES,
                         outputs: displayfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDisplayfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtDisplayfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -24712,7 +24875,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var emailfieldMetaData = /** @class */ (function () {
         function emailfieldMetaData() {
@@ -25023,7 +25186,9 @@
                         selector: 'emailfield',
                         inputs: emailfieldMetaData.PROPERTIES,
                         outputs: emailfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtEmailfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtEmailfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -25039,7 +25204,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var fieldMetaData = /** @class */ (function () {
         function fieldMetaData() {
@@ -25325,7 +25490,9 @@
                         selector: 'field',
                         inputs: fieldMetaData.PROPERTIES,
                         outputs: fieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtFieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtFieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -25341,7 +25508,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var filefieldMetaData = /** @class */ (function () {
         function filefieldMetaData() {
@@ -25655,7 +25822,9 @@
                         selector: 'filefield',
                         inputs: filefieldMetaData.PROPERTIES,
                         outputs: filefieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtFilefieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtFilefieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -25671,7 +25840,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var filebuttonMetaData = /** @class */ (function () {
         function filebuttonMetaData() {
@@ -25955,7 +26124,9 @@
                         selector: 'filebutton',
                         inputs: filebuttonMetaData.PROPERTIES,
                         outputs: filebuttonMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtFilebuttonComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtFilebuttonComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -25971,7 +26142,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var hiddenfieldMetaData = /** @class */ (function () {
         function hiddenfieldMetaData() {
@@ -26261,7 +26432,9 @@
                         selector: 'hiddenfield',
                         inputs: hiddenfieldMetaData.PROPERTIES,
                         outputs: hiddenfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtHiddenfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtHiddenfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -26277,7 +26450,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var inputfieldMetaData = /** @class */ (function () {
         function inputfieldMetaData() {
@@ -26567,7 +26740,9 @@
                         selector: 'inputfield',
                         inputs: inputfieldMetaData.PROPERTIES,
                         outputs: inputfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtInputfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtInputfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -26583,7 +26758,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var numberfieldMetaData = /** @class */ (function () {
         function numberfieldMetaData() {
@@ -26901,7 +27076,9 @@
                         selector: 'numberfield',
                         inputs: numberfieldMetaData.PROPERTIES,
                         outputs: numberfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtNumberfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtNumberfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -26917,7 +27094,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var fieldpanelMetaData = /** @class */ (function () {
         function fieldpanelMetaData() {
@@ -27265,7 +27442,9 @@
                         selector: 'fieldpanel',
                         inputs: fieldpanelMetaData.PROPERTIES,
                         outputs: fieldpanelMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtFieldpanelComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtFieldpanelComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -27281,7 +27460,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var passwordfieldMetaData = /** @class */ (function () {
         function passwordfieldMetaData() {
@@ -27594,7 +27773,9 @@
                         selector: 'passwordfield',
                         inputs: passwordfieldMetaData.PROPERTIES,
                         outputs: passwordfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPasswordfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPasswordfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -27610,7 +27791,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var pickerfieldMetaData = /** @class */ (function () {
         function pickerfieldMetaData() {
@@ -27934,7 +28115,9 @@
                         selector: 'pickerfield',
                         inputs: pickerfieldMetaData.PROPERTIES,
                         outputs: pickerfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPickerfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPickerfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -27950,7 +28133,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var radioMetaData = /** @class */ (function () {
         function radioMetaData() {
@@ -28248,7 +28431,9 @@
                         selector: 'radio',
                         inputs: radioMetaData.PROPERTIES,
                         outputs: radioMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtRadioComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtRadioComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -28264,7 +28449,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var radiofieldMetaData = /** @class */ (function () {
         function radiofieldMetaData() {
@@ -28562,7 +28747,9 @@
                         selector: 'radiofield',
                         inputs: radiofieldMetaData.PROPERTIES,
                         outputs: radiofieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtRadiofieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtRadiofieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -28578,7 +28765,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var searchfieldMetaData = /** @class */ (function () {
         function searchfieldMetaData() {
@@ -28889,7 +29076,9 @@
                         selector: 'searchfield',
                         inputs: searchfieldMetaData.PROPERTIES,
                         outputs: searchfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSearchfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSearchfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -28905,7 +29094,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var selectfieldMetaData = /** @class */ (function () {
         function selectfieldMetaData() {
@@ -29254,7 +29443,9 @@
                         selector: 'selectfield',
                         inputs: selectfieldMetaData.PROPERTIES,
                         outputs: selectfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSelectfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSelectfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -29270,7 +29461,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var singlesliderfieldMetaData = /** @class */ (function () {
         function singlesliderfieldMetaData() {
@@ -29573,7 +29764,9 @@
                         selector: 'singlesliderfield',
                         inputs: singlesliderfieldMetaData.PROPERTIES,
                         outputs: singlesliderfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSinglesliderfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSinglesliderfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -29589,7 +29782,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var sliderfieldMetaData = /** @class */ (function () {
         function sliderfieldMetaData() {
@@ -29892,7 +30085,9 @@
                         selector: 'sliderfield',
                         inputs: sliderfieldMetaData.PROPERTIES,
                         outputs: sliderfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSliderfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSliderfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -29908,7 +30103,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var spinnerfieldMetaData = /** @class */ (function () {
         function spinnerfieldMetaData() {
@@ -30236,7 +30431,9 @@
                         selector: 'spinnerfield',
                         inputs: spinnerfieldMetaData.PROPERTIES,
                         outputs: spinnerfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSpinnerfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSpinnerfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -30252,7 +30449,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var textfieldMetaData = /** @class */ (function () {
         function textfieldMetaData() {
@@ -30563,7 +30760,9 @@
                         selector: 'textfield',
                         inputs: textfieldMetaData.PROPERTIES,
                         outputs: textfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTextfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTextfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -30579,7 +30778,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var textareafieldMetaData = /** @class */ (function () {
         function textareafieldMetaData() {
@@ -30891,7 +31090,9 @@
                         selector: 'textareafield',
                         inputs: textareafieldMetaData.PROPERTIES,
                         outputs: textareafieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTextareafieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTextareafieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -30907,7 +31108,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var timefieldMetaData = /** @class */ (function () {
         function timefieldMetaData() {
@@ -31233,7 +31434,9 @@
                         selector: 'timefield',
                         inputs: timefieldMetaData.PROPERTIES,
                         outputs: timefieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTimefieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTimefieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -31249,7 +31452,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var togglefieldMetaData = /** @class */ (function () {
         function togglefieldMetaData() {
@@ -31554,7 +31757,9 @@
                         selector: 'togglefield',
                         inputs: togglefieldMetaData.PROPERTIES,
                         outputs: togglefieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTogglefieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTogglefieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -31570,7 +31775,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var cleartriggerMetaData = /** @class */ (function () {
         function cleartriggerMetaData() {
@@ -31709,7 +31914,9 @@
                         selector: 'cleartrigger',
                         inputs: cleartriggerMetaData.PROPERTIES,
                         outputs: cleartriggerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCleartriggerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCleartriggerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -31725,7 +31932,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var datetriggerMetaData = /** @class */ (function () {
         function datetriggerMetaData() {
@@ -31864,7 +32071,9 @@
                         selector: 'datetrigger',
                         inputs: datetriggerMetaData.PROPERTIES,
                         outputs: datetriggerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDatetriggerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtDatetriggerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -31880,7 +32089,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var expandtriggerMetaData = /** @class */ (function () {
         function expandtriggerMetaData() {
@@ -32019,7 +32228,9 @@
                         selector: 'expandtrigger',
                         inputs: expandtriggerMetaData.PROPERTIES,
                         outputs: expandtriggerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtExpandtriggerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtExpandtriggerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -32035,7 +32246,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var menutriggerMetaData = /** @class */ (function () {
         function menutriggerMetaData() {
@@ -32177,7 +32388,9 @@
                         selector: 'menutrigger',
                         inputs: menutriggerMetaData.PROPERTIES,
                         outputs: menutriggerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMenutriggerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtMenutriggerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -32193,7 +32406,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var revealtriggerMetaData = /** @class */ (function () {
         function revealtriggerMetaData() {
@@ -32332,7 +32545,9 @@
                         selector: 'revealtrigger',
                         inputs: revealtriggerMetaData.PROPERTIES,
                         outputs: revealtriggerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtRevealtriggerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtRevealtriggerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -32348,7 +32563,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var spindowntriggerMetaData = /** @class */ (function () {
         function spindowntriggerMetaData() {
@@ -32487,7 +32702,9 @@
                         selector: 'spindowntrigger',
                         inputs: spindowntriggerMetaData.PROPERTIES,
                         outputs: spindowntriggerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSpindowntriggerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSpindowntriggerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -32503,7 +32720,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var spinuptriggerMetaData = /** @class */ (function () {
         function spinuptriggerMetaData() {
@@ -32642,7 +32859,9 @@
                         selector: 'spinuptrigger',
                         inputs: spinuptriggerMetaData.PROPERTIES,
                         outputs: spinuptriggerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSpinuptriggerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSpinuptriggerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -32658,7 +32877,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var timetriggerMetaData = /** @class */ (function () {
         function timetriggerMetaData() {
@@ -32797,7 +33016,9 @@
                         selector: 'timetrigger',
                         inputs: timetriggerMetaData.PROPERTIES,
                         outputs: timetriggerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTimetriggerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTimetriggerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -32813,7 +33034,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var triggerMetaData = /** @class */ (function () {
         function triggerMetaData() {
@@ -32952,7 +33173,9 @@
                         selector: 'trigger',
                         inputs: triggerMetaData.PROPERTIES,
                         outputs: triggerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTriggerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTriggerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -32968,7 +33191,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var urlfieldMetaData = /** @class */ (function () {
         function urlfieldMetaData() {
@@ -33279,7 +33502,9 @@
                         selector: 'urlfield',
                         inputs: urlfieldMetaData.PROPERTIES,
                         outputs: urlfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtUrlfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtUrlfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -33295,7 +33520,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var fieldsetMetaData = /** @class */ (function () {
         function fieldsetMetaData() {
@@ -33585,7 +33810,9 @@
                         selector: 'fieldset',
                         inputs: fieldsetMetaData.PROPERTIES,
                         outputs: fieldsetMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtFieldsetComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtFieldsetComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -33601,7 +33828,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var formpanelMetaData = /** @class */ (function () {
         function formpanelMetaData() {
@@ -33960,7 +34187,9 @@
                         selector: 'formpanel',
                         inputs: formpanelMetaData.PROPERTIES,
                         outputs: formpanelMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtFormpanelComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtFormpanelComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -33976,7 +34205,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var gridcellbaseMetaData = /** @class */ (function () {
         function gridcellbaseMetaData() {
@@ -34117,7 +34346,9 @@
                         selector: 'gridcellbase',
                         inputs: gridcellbaseMetaData.PROPERTIES,
                         outputs: gridcellbaseMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridcellbaseComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtGridcellbaseComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -34133,7 +34364,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var booleancellMetaData = /** @class */ (function () {
         function booleancellMetaData() {
@@ -34280,7 +34511,9 @@
                         selector: 'booleancell',
                         inputs: booleancellMetaData.PROPERTIES,
                         outputs: booleancellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtBooleancellComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtBooleancellComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -34296,7 +34529,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var gridcellMetaData = /** @class */ (function () {
         function gridcellMetaData() {
@@ -34444,7 +34677,9 @@
                         selector: 'gridcell',
                         inputs: gridcellMetaData.PROPERTIES,
                         outputs: gridcellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridcellComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtGridcellComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -34460,7 +34695,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var checkcellMetaData = /** @class */ (function () {
         function checkcellMetaData() {
@@ -34601,7 +34836,9 @@
                         selector: 'checkcell',
                         inputs: checkcellMetaData.PROPERTIES,
                         outputs: checkcellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCheckcellComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCheckcellComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -34617,7 +34854,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var datecellMetaData = /** @class */ (function () {
         function datecellMetaData() {
@@ -34762,7 +34999,9 @@
                         selector: 'datecell',
                         inputs: datecellMetaData.PROPERTIES,
                         outputs: datecellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDatecellComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtDatecellComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -34778,7 +35017,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var numbercellMetaData = /** @class */ (function () {
         function numbercellMetaData() {
@@ -34923,7 +35162,9 @@
                         selector: 'numbercell',
                         inputs: numbercellMetaData.PROPERTIES,
                         outputs: numbercellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtNumbercellComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtNumbercellComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -34939,7 +35180,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var rownumberercellMetaData = /** @class */ (function () {
         function rownumberercellMetaData() {
@@ -35084,7 +35325,9 @@
                         selector: 'rownumberercell',
                         inputs: rownumberercellMetaData.PROPERTIES,
                         outputs: rownumberercellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtRownumberercellComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtRownumberercellComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -35100,7 +35343,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var textcellMetaData = /** @class */ (function () {
         function textcellMetaData() {
@@ -35244,7 +35487,9 @@
                         selector: 'textcell',
                         inputs: textcellMetaData.PROPERTIES,
                         outputs: textcellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTextcellComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTextcellComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -35260,7 +35505,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var treecellMetaData = /** @class */ (function () {
         function treecellMetaData() {
@@ -35411,7 +35656,9 @@
                         selector: 'treecell',
                         inputs: treecellMetaData.PROPERTIES,
                         outputs: treecellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTreecellComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTreecellComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -35427,7 +35674,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var widgetcellMetaData = /** @class */ (function () {
         function widgetcellMetaData() {
@@ -35570,7 +35817,9 @@
                         selector: 'widgetcell',
                         inputs: widgetcellMetaData.PROPERTIES,
                         outputs: widgetcellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtWidgetcellComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtWidgetcellComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -35586,7 +35835,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var celleditorMetaData = /** @class */ (function () {
         function celleditorMetaData() {
@@ -35901,7 +36150,9 @@
                         selector: 'celleditor',
                         inputs: celleditorMetaData.PROPERTIES,
                         outputs: celleditorMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCelleditorComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCelleditorComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -35917,7 +36168,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var booleancolumnMetaData = /** @class */ (function () {
         function booleancolumnMetaData() {
@@ -36250,7 +36501,9 @@
                         selector: 'booleancolumn',
                         inputs: booleancolumnMetaData.PROPERTIES,
                         outputs: booleancolumnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtBooleancolumnComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtBooleancolumnComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -36266,7 +36519,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var checkcolumnMetaData = /** @class */ (function () {
         function checkcolumnMetaData() {
@@ -36603,7 +36856,9 @@
                         selector: 'checkcolumn',
                         inputs: checkcolumnMetaData.PROPERTIES,
                         outputs: checkcolumnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtCheckcolumnComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtCheckcolumnComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -36619,7 +36874,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var gridcolumnMetaData = /** @class */ (function () {
         function gridcolumnMetaData() {
@@ -36949,7 +37204,9 @@
                         selector: 'gridcolumn',
                         inputs: gridcolumnMetaData.PROPERTIES,
                         outputs: gridcolumnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridcolumnComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtGridcolumnComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -36965,7 +37222,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var columnMetaData = /** @class */ (function () {
         function columnMetaData() {
@@ -37295,7 +37552,9 @@
                         selector: 'column',
                         inputs: columnMetaData.PROPERTIES,
                         outputs: columnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtColumnComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtColumnComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -37311,7 +37570,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var templatecolumnMetaData = /** @class */ (function () {
         function templatecolumnMetaData() {
@@ -37641,7 +37900,9 @@
                         selector: 'templatecolumn',
                         inputs: templatecolumnMetaData.PROPERTIES,
                         outputs: templatecolumnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTemplatecolumnComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTemplatecolumnComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -37657,7 +37918,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var datecolumnMetaData = /** @class */ (function () {
         function datecolumnMetaData() {
@@ -37988,7 +38249,9 @@
                         selector: 'datecolumn',
                         inputs: datecolumnMetaData.PROPERTIES,
                         outputs: datecolumnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDatecolumnComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtDatecolumnComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -38004,7 +38267,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var numbercolumnMetaData = /** @class */ (function () {
         function numbercolumnMetaData() {
@@ -38335,7 +38598,9 @@
                         selector: 'numbercolumn',
                         inputs: numbercolumnMetaData.PROPERTIES,
                         outputs: numbercolumnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtNumbercolumnComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtNumbercolumnComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -38351,7 +38616,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var rownumbererMetaData = /** @class */ (function () {
         function rownumbererMetaData() {
@@ -38682,7 +38947,9 @@
                         selector: 'rownumberer',
                         inputs: rownumbererMetaData.PROPERTIES,
                         outputs: rownumbererMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtRownumbererComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtRownumbererComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -38698,7 +38965,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var selectioncolumnMetaData = /** @class */ (function () {
         function selectioncolumnMetaData() {
@@ -39035,7 +39302,9 @@
                         selector: 'selectioncolumn',
                         inputs: selectioncolumnMetaData.PROPERTIES,
                         outputs: selectioncolumnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSelectioncolumnComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSelectioncolumnComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -39051,7 +39320,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var textcolumnMetaData = /** @class */ (function () {
         function textcolumnMetaData() {
@@ -39381,7 +39650,9 @@
                         selector: 'textcolumn',
                         inputs: textcolumnMetaData.PROPERTIES,
                         outputs: textcolumnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTextcolumnComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTextcolumnComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -39397,7 +39668,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var treecolumnMetaData = /** @class */ (function () {
         function treecolumnMetaData() {
@@ -39727,7 +39998,9 @@
                         selector: 'treecolumn',
                         inputs: treecolumnMetaData.PROPERTIES,
                         outputs: treecolumnMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTreecolumnComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTreecolumnComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -39743,7 +40016,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var gridMetaData = /** @class */ (function () {
         function gridMetaData() {
@@ -40191,7 +40464,9 @@
                         selector: 'grid',
                         inputs: gridMetaData.PROPERTIES,
                         outputs: gridMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtGridComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -40207,7 +40482,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var headercontainerMetaData = /** @class */ (function () {
         function headercontainerMetaData() {
@@ -40498,7 +40773,9 @@
                         selector: 'headercontainer',
                         inputs: headercontainerMetaData.PROPERTIES,
                         outputs: headercontainerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtHeadercontainerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtHeadercontainerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -40514,7 +40791,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var lockedgridMetaData = /** @class */ (function () {
         function lockedgridMetaData() {
@@ -40811,7 +41088,9 @@
                         selector: 'lockedgrid',
                         inputs: lockedgridMetaData.PROPERTIES,
                         outputs: lockedgridMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtLockedgridComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtLockedgridComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -40827,7 +41106,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var lockedgridregionMetaData = /** @class */ (function () {
         function lockedgridregionMetaData() {
@@ -41169,7 +41448,9 @@
                         selector: 'lockedgridregion',
                         inputs: lockedgridregionMetaData.PROPERTIES,
                         outputs: lockedgridregionMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtLockedgridregionComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtLockedgridregionComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -41185,7 +41466,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var gridcolumnsmenuMetaData = /** @class */ (function () {
         function gridcolumnsmenuMetaData() {
@@ -41451,7 +41732,9 @@
                         selector: 'gridcolumnsmenu',
                         inputs: gridcolumnsmenuMetaData.PROPERTIES,
                         outputs: gridcolumnsmenuMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridcolumnsmenuComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtGridcolumnsmenuComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -41467,7 +41750,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var gridgroupbythismenuitemMetaData = /** @class */ (function () {
         function gridgroupbythismenuitemMetaData() {
@@ -41733,7 +42016,9 @@
                         selector: 'gridgroupbythismenuitem',
                         inputs: gridgroupbythismenuitemMetaData.PROPERTIES,
                         outputs: gridgroupbythismenuitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridgroupbythismenuitemComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtGridgroupbythismenuitemComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -41749,7 +42034,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var gridshowingroupsmenuitemMetaData = /** @class */ (function () {
         function gridshowingroupsmenuitemMetaData() {
@@ -42024,7 +42309,9 @@
                         selector: 'gridshowingroupsmenuitem',
                         inputs: gridshowingroupsmenuitemMetaData.PROPERTIES,
                         outputs: gridshowingroupsmenuitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridshowingroupsmenuitemComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtGridshowingroupsmenuitemComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -42040,7 +42327,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var gridsortascmenuitemMetaData = /** @class */ (function () {
         function gridsortascmenuitemMetaData() {
@@ -42317,7 +42604,9 @@
                         selector: 'gridsortascmenuitem',
                         inputs: gridsortascmenuitemMetaData.PROPERTIES,
                         outputs: gridsortascmenuitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridsortascmenuitemComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtGridsortascmenuitemComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -42333,7 +42622,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var gridsortdescmenuitemMetaData = /** @class */ (function () {
         function gridsortdescmenuitemMetaData() {
@@ -42610,7 +42899,9 @@
                         selector: 'gridsortdescmenuitem',
                         inputs: gridsortdescmenuitemMetaData.PROPERTIES,
                         outputs: gridsortdescmenuitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridsortdescmenuitemComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtGridsortdescmenuitemComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -42626,7 +42917,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var pagingtoolbarMetaData = /** @class */ (function () {
         function pagingtoolbarMetaData() {
@@ -42918,7 +43209,9 @@
                         selector: 'pagingtoolbar',
                         inputs: pagingtoolbarMetaData.PROPERTIES,
                         outputs: pagingtoolbarMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPagingtoolbarComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPagingtoolbarComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -42934,7 +43227,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var gridrowMetaData = /** @class */ (function () {
         function gridrowMetaData() {
@@ -43189,7 +43482,9 @@
                         selector: 'gridrow',
                         inputs: gridrowMetaData.PROPERTIES,
                         outputs: gridrowMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridrowComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtGridrowComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -43205,7 +43500,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var rowbodyMetaData = /** @class */ (function () {
         function rowbodyMetaData() {
@@ -43454,7 +43749,9 @@
                         selector: 'rowbody',
                         inputs: rowbodyMetaData.PROPERTIES,
                         outputs: rowbodyMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtRowbodyComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtRowbodyComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -43470,7 +43767,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var rowheaderMetaData = /** @class */ (function () {
         function rowheaderMetaData() {
@@ -43724,7 +44021,9 @@
                         selector: 'rowheader',
                         inputs: rowheaderMetaData.PROPERTIES,
                         outputs: rowheaderMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtRowheaderComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtRowheaderComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -43740,7 +44039,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var gridsummaryrowMetaData = /** @class */ (function () {
         function gridsummaryrowMetaData() {
@@ -43995,7 +44294,9 @@
                         selector: 'gridsummaryrow',
                         inputs: gridsummaryrowMetaData.PROPERTIES,
                         outputs: gridsummaryrowMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGridsummaryrowComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtGridsummaryrowComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -44011,7 +44312,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var treeMetaData = /** @class */ (function () {
         function treeMetaData() {
@@ -44476,7 +44777,9 @@
                         selector: 'tree',
                         inputs: treeMetaData.PROPERTIES,
                         outputs: treeMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTreeComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTreeComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -44492,7 +44795,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var imageMetaData = /** @class */ (function () {
         function imageMetaData() {
@@ -44751,7 +45054,9 @@
                         selector: 'image',
                         inputs: imageMetaData.PROPERTIES,
                         outputs: imageMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtImageComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtImageComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -44767,7 +45072,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var imgMetaData = /** @class */ (function () {
         function imgMetaData() {
@@ -45026,7 +45331,9 @@
                         selector: 'img',
                         inputs: imgMetaData.PROPERTIES,
                         outputs: imgMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtImgComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtImgComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -45042,7 +45349,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var indicatorMetaData = /** @class */ (function () {
         function indicatorMetaData() {
@@ -45301,7 +45608,9 @@
                         selector: 'indicator',
                         inputs: indicatorMetaData.PROPERTIES,
                         outputs: indicatorMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtIndicatorComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtIndicatorComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -45317,7 +45626,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var labelMetaData = /** @class */ (function () {
         function labelMetaData() {
@@ -45566,7 +45875,9 @@
                         selector: 'label',
                         inputs: labelMetaData.PROPERTIES,
                         outputs: labelMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtLabelComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtLabelComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -45582,7 +45893,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var treelistMetaData = /** @class */ (function () {
         function treelistMetaData() {
@@ -45846,7 +46157,9 @@
                         selector: 'treelist',
                         inputs: treelistMetaData.PROPERTIES,
                         outputs: treelistMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTreelistComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTreelistComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -45862,7 +46175,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var treelistitemMetaData = /** @class */ (function () {
         function treelistitemMetaData() {
@@ -46008,7 +46321,9 @@
                         selector: 'treelistitem',
                         inputs: treelistitemMetaData.PROPERTIES,
                         outputs: treelistitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTreelistitemComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTreelistitemComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -46024,7 +46339,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var loadmaskMetaData = /** @class */ (function () {
         function loadmaskMetaData() {
@@ -46279,7 +46594,9 @@
                         selector: 'loadmask',
                         inputs: loadmaskMetaData.PROPERTIES,
                         outputs: loadmaskMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtLoadmaskComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtLoadmaskComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -46295,7 +46612,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var maskMetaData = /** @class */ (function () {
         function maskMetaData() {
@@ -46547,7 +46864,9 @@
                         selector: 'mask',
                         inputs: maskMetaData.PROPERTIES,
                         outputs: maskMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMaskComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtMaskComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -46563,7 +46882,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var mediaMetaData = /** @class */ (function () {
         function mediaMetaData() {
@@ -46836,7 +47155,9 @@
                         selector: 'media',
                         inputs: mediaMetaData.PROPERTIES,
                         outputs: mediaMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMediaComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtMediaComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -46852,7 +47173,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var menucheckitemMetaData = /** @class */ (function () {
         function menucheckitemMetaData() {
@@ -47127,7 +47448,9 @@
                         selector: 'menucheckitem',
                         inputs: menucheckitemMetaData.PROPERTIES,
                         outputs: menucheckitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMenucheckitemComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtMenucheckitemComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -47143,7 +47466,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var menuitemMetaData = /** @class */ (function () {
         function menuitemMetaData() {
@@ -47409,7 +47732,9 @@
                         selector: 'menuitem',
                         inputs: menuitemMetaData.PROPERTIES,
                         outputs: menuitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMenuitemComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtMenuitemComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -47425,7 +47750,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var menuMetaData = /** @class */ (function () {
         function menuMetaData() {
@@ -47773,7 +48098,9 @@
                         selector: 'menu',
                         inputs: menuMetaData.PROPERTIES,
                         outputs: menuMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMenuComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtMenuComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -47789,7 +48116,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var menuradioitemMetaData = /** @class */ (function () {
         function menuradioitemMetaData() {
@@ -48066,7 +48393,9 @@
                         selector: 'menuradioitem',
                         inputs: menuradioitemMetaData.PROPERTIES,
                         outputs: menuradioitemMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMenuradioitemComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtMenuradioitemComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -48082,7 +48411,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var menuseparatorMetaData = /** @class */ (function () {
         function menuseparatorMetaData() {
@@ -48331,7 +48660,9 @@
                         selector: 'menuseparator',
                         inputs: menuseparatorMetaData.PROPERTIES,
                         outputs: menuseparatorMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMenuseparatorComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtMenuseparatorComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -48347,7 +48678,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var messageboxMetaData = /** @class */ (function () {
         function messageboxMetaData() {
@@ -48709,7 +49040,9 @@
                         selector: 'messagebox',
                         inputs: messageboxMetaData.PROPERTIES,
                         outputs: messageboxMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMessageboxComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtMessageboxComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -48725,7 +49058,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var navigationviewMetaData = /** @class */ (function () {
         function navigationviewMetaData() {
@@ -49020,7 +49353,9 @@
                         selector: 'navigationview',
                         inputs: navigationviewMetaData.PROPERTIES,
                         outputs: navigationviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtNavigationviewComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtNavigationviewComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -49036,7 +49371,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var panelMetaData = /** @class */ (function () {
         function panelMetaData() {
@@ -49374,7 +49709,9 @@
                         selector: 'panel',
                         inputs: panelMetaData.PROPERTIES,
                         outputs: panelMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPanelComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPanelComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -49390,7 +49727,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var datepanelMetaData = /** @class */ (function () {
         function datepanelMetaData() {
@@ -49763,7 +50100,9 @@
                         selector: 'datepanel',
                         inputs: datepanelMetaData.PROPERTIES,
                         outputs: datepanelMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDatepanelComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtDatepanelComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -49779,7 +50118,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var datetitleMetaData = /** @class */ (function () {
         function datetitleMetaData() {
@@ -50036,7 +50375,9 @@
                         selector: 'datetitle',
                         inputs: datetitleMetaData.PROPERTIES,
                         outputs: datetitleMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDatetitleComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtDatetitleComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -50052,7 +50393,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var panelheaderMetaData = /** @class */ (function () {
         function panelheaderMetaData() {
@@ -50346,7 +50687,9 @@
                         selector: 'panelheader',
                         inputs: panelheaderMetaData.PROPERTIES,
                         outputs: panelheaderMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPanelheaderComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPanelheaderComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -50362,7 +50705,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var timepanelMetaData = /** @class */ (function () {
         function timepanelMetaData() {
@@ -50709,7 +51052,9 @@
                         selector: 'timepanel',
                         inputs: timepanelMetaData.PROPERTIES,
                         outputs: timepanelMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTimepanelComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTimepanelComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -50725,7 +51070,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var paneltitleMetaData = /** @class */ (function () {
         function paneltitleMetaData() {
@@ -50982,7 +51327,9 @@
                         selector: 'paneltitle',
                         inputs: paneltitleMetaData.PROPERTIES,
                         outputs: paneltitleMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPaneltitleComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPaneltitleComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -50998,7 +51345,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var yearpickerMetaData = /** @class */ (function () {
         function yearpickerMetaData() {
@@ -51409,7 +51756,9 @@
                         selector: 'yearpicker',
                         inputs: yearpickerMetaData.PROPERTIES,
                         outputs: yearpickerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtYearpickerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtYearpickerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -51425,7 +51774,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var datepickerMetaData = /** @class */ (function () {
         function datepickerMetaData() {
@@ -51788,7 +52137,9 @@
                         selector: 'datepicker',
                         inputs: datepickerMetaData.PROPERTIES,
                         outputs: datepickerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtDatepickerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtDatepickerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -51804,7 +52155,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var pickerMetaData = /** @class */ (function () {
         function pickerMetaData() {
@@ -52161,7 +52512,9 @@
                         selector: 'picker',
                         inputs: pickerMetaData.PROPERTIES,
                         outputs: pickerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPickerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPickerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -52177,7 +52530,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var selectpickerMetaData = /** @class */ (function () {
         function selectpickerMetaData() {
@@ -52534,7 +52887,9 @@
                         selector: 'selectpicker',
                         inputs: selectpickerMetaData.PROPERTIES,
                         outputs: selectpickerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSelectpickerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSelectpickerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -52550,7 +52905,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var pickerslotMetaData = /** @class */ (function () {
         function pickerslotMetaData() {
@@ -52936,7 +53291,9 @@
                         selector: 'pickerslot',
                         inputs: pickerslotMetaData.PROPERTIES,
                         outputs: pickerslotMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPickerslotComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPickerslotComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -52952,7 +53309,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var tabletpickerMetaData = /** @class */ (function () {
         function tabletpickerMetaData() {
@@ -53290,7 +53647,9 @@
                         selector: 'tabletpicker',
                         inputs: tabletpickerMetaData.PROPERTIES,
                         outputs: tabletpickerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTabletpickerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTabletpickerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -53306,7 +53665,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var pivotgridcellMetaData = /** @class */ (function () {
         function pivotgridcellMetaData() {
@@ -53454,7 +53813,9 @@
                         selector: 'pivotgridcell',
                         inputs: pivotgridcellMetaData.PROPERTIES,
                         outputs: pivotgridcellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotgridcellComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPivotgridcellComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -53470,7 +53831,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var pivotgridgroupcellMetaData = /** @class */ (function () {
         function pivotgridgroupcellMetaData() {
@@ -53618,7 +53979,9 @@
                         selector: 'pivotgridgroupcell',
                         inputs: pivotgridgroupcellMetaData.PROPERTIES,
                         outputs: pivotgridgroupcellMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotgridgroupcellComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPivotgridgroupcellComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -53634,7 +53997,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var pivotd3containerMetaData = /** @class */ (function () {
         function pivotd3containerMetaData() {
@@ -53689,7 +54052,9 @@
                         selector: 'pivotd3container',
                         inputs: pivotd3containerMetaData.PROPERTIES,
                         outputs: pivotd3containerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotd3containerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPivotd3containerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -53705,7 +54070,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var pivotheatmapMetaData = /** @class */ (function () {
         function pivotheatmapMetaData() {
@@ -53972,7 +54337,9 @@
                         selector: 'pivotheatmap',
                         inputs: pivotheatmapMetaData.PROPERTIES,
                         outputs: pivotheatmapMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotheatmapComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPivotheatmapComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -53988,7 +54355,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var pivottreemapMetaData = /** @class */ (function () {
         function pivottreemapMetaData() {
@@ -54274,7 +54641,9 @@
                         selector: 'pivottreemap',
                         inputs: pivottreemapMetaData.PROPERTIES,
                         outputs: pivottreemapMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivottreemapComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPivottreemapComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -54290,7 +54659,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var pivotgridMetaData = /** @class */ (function () {
         function pivotgridMetaData() {
@@ -54811,7 +55180,9 @@
                         selector: 'pivotgrid',
                         inputs: pivotgridMetaData.PROPERTIES,
                         outputs: pivotgridMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotgridComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPivotgridComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -54827,7 +55198,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var pivotconfigfieldMetaData = /** @class */ (function () {
         function pivotconfigfieldMetaData() {
@@ -55120,7 +55491,9 @@
                         selector: 'pivotconfigfield',
                         inputs: pivotconfigfieldMetaData.PROPERTIES,
                         outputs: pivotconfigfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotconfigfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPivotconfigfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -55136,7 +55509,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var pivotconfigcontainerMetaData = /** @class */ (function () {
         function pivotconfigcontainerMetaData() {
@@ -55475,7 +55848,9 @@
                         selector: 'pivotconfigcontainer',
                         inputs: pivotconfigcontainerMetaData.PROPERTIES,
                         outputs: pivotconfigcontainerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotconfigcontainerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPivotconfigcontainerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -55491,7 +55866,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var pivotconfigformMetaData = /** @class */ (function () {
         function pivotconfigformMetaData() {
@@ -55850,7 +56225,9 @@
                         selector: 'pivotconfigform',
                         inputs: pivotconfigformMetaData.PROPERTIES,
                         outputs: pivotconfigformMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotconfigformComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPivotconfigformComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -55866,7 +56243,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var pivotconfigpanelMetaData = /** @class */ (function () {
         function pivotconfigpanelMetaData() {
@@ -56212,7 +56589,9 @@
                         selector: 'pivotconfigpanel',
                         inputs: pivotconfigpanelMetaData.PROPERTIES,
                         outputs: pivotconfigpanelMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotconfigpanelComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPivotconfigpanelComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -56228,7 +56607,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var pivotsettingsMetaData = /** @class */ (function () {
         function pivotsettingsMetaData() {
@@ -56587,7 +56966,9 @@
                         selector: 'pivotsettings',
                         inputs: pivotsettingsMetaData.PROPERTIES,
                         outputs: pivotsettingsMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotsettingsComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPivotsettingsComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -56603,7 +56984,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var pivotrangeeditorMetaData = /** @class */ (function () {
         function pivotrangeeditorMetaData() {
@@ -56962,7 +57343,9 @@
                         selector: 'pivotrangeeditor',
                         inputs: pivotrangeeditorMetaData.PROPERTIES,
                         outputs: pivotrangeeditorMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotrangeeditorComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPivotrangeeditorComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -56978,7 +57361,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var pivotgridrowMetaData = /** @class */ (function () {
         function pivotgridrowMetaData() {
@@ -57233,7 +57616,9 @@
                         selector: 'pivotgridrow',
                         inputs: pivotgridrowMetaData.PROPERTIES,
                         outputs: pivotgridrowMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPivotgridrowComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPivotgridrowComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -57249,7 +57634,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var progressMetaData = /** @class */ (function () {
         function progressMetaData() {
@@ -57502,7 +57887,9 @@
                         selector: 'progress',
                         inputs: progressMetaData.PROPERTIES,
                         outputs: progressMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtProgressComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtProgressComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -57518,7 +57905,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var progressbarwidgetMetaData = /** @class */ (function () {
         function progressbarwidgetMetaData() {
@@ -57771,7 +58158,9 @@
                         selector: 'progressbarwidget',
                         inputs: progressbarwidgetMetaData.PROPERTIES,
                         outputs: progressbarwidgetMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtProgressbarwidgetComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtProgressbarwidgetComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -57787,7 +58176,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var segmentedbuttonMetaData = /** @class */ (function () {
         function segmentedbuttonMetaData() {
@@ -58085,7 +58474,9 @@
                         selector: 'segmentedbutton',
                         inputs: segmentedbuttonMetaData.PROPERTIES,
                         outputs: segmentedbuttonMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSegmentedbuttonComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSegmentedbuttonComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -58101,7 +58492,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var sheetMetaData = /** @class */ (function () {
         function sheetMetaData() {
@@ -58446,7 +58837,9 @@
                         selector: 'sheet',
                         inputs: sheetMetaData.PROPERTIES,
                         outputs: sheetMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSheetComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSheetComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -58462,7 +58855,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var sliderMetaData = /** @class */ (function () {
         function sliderMetaData() {
@@ -58729,7 +59122,9 @@
                         selector: 'slider',
                         inputs: sliderMetaData.PROPERTIES,
                         outputs: sliderMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSliderComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSliderComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -58745,7 +59140,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var thumbMetaData = /** @class */ (function () {
         function thumbMetaData() {
@@ -58996,7 +59391,9 @@
                         selector: 'thumb',
                         inputs: thumbMetaData.PROPERTIES,
                         outputs: thumbMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtThumbComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtThumbComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -59012,7 +59409,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var togglesliderMetaData = /** @class */ (function () {
         function togglesliderMetaData() {
@@ -59279,7 +59676,9 @@
                         selector: 'toggleslider',
                         inputs: togglesliderMetaData.PROPERTIES,
                         outputs: togglesliderMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTogglesliderComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTogglesliderComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -59295,7 +59694,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var spacerMetaData = /** @class */ (function () {
         function spacerMetaData() {
@@ -59544,7 +59943,9 @@
                         selector: 'spacer',
                         inputs: spacerMetaData.PROPERTIES,
                         outputs: spacerMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSpacerComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSpacerComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -59560,7 +59961,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var sparklinebarMetaData = /** @class */ (function () {
         function sparklinebarMetaData() {
@@ -59830,7 +60231,9 @@
                         selector: 'sparklinebar',
                         inputs: sparklinebarMetaData.PROPERTIES,
                         outputs: sparklinebarMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSparklinebarComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSparklinebarComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -59846,7 +60249,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var sparklineMetaData = /** @class */ (function () {
         function sparklineMetaData() {
@@ -60104,7 +60507,9 @@
                         selector: 'sparkline',
                         inputs: sparklineMetaData.PROPERTIES,
                         outputs: sparklineMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSparklineComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSparklineComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -60120,7 +60525,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var sparklineboxMetaData = /** @class */ (function () {
         function sparklineboxMetaData() {
@@ -60392,7 +60797,9 @@
                         selector: 'sparklinebox',
                         inputs: sparklineboxMetaData.PROPERTIES,
                         outputs: sparklineboxMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSparklineboxComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSparklineboxComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -60408,7 +60815,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var sparklinebulletMetaData = /** @class */ (function () {
         function sparklinebulletMetaData() {
@@ -60671,7 +61078,9 @@
                         selector: 'sparklinebullet',
                         inputs: sparklinebulletMetaData.PROPERTIES,
                         outputs: sparklinebulletMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSparklinebulletComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSparklinebulletComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -60687,7 +61096,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var sparklinediscreteMetaData = /** @class */ (function () {
         function sparklinediscreteMetaData() {
@@ -60951,7 +61360,9 @@
                         selector: 'sparklinediscrete',
                         inputs: sparklinediscreteMetaData.PROPERTIES,
                         outputs: sparklinediscreteMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSparklinediscreteComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSparklinediscreteComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -60967,7 +61378,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var sparklinelineMetaData = /** @class */ (function () {
         function sparklinelineMetaData() {
@@ -61242,7 +61653,9 @@
                         selector: 'sparklineline',
                         inputs: sparklinelineMetaData.PROPERTIES,
                         outputs: sparklinelineMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSparklinelineComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSparklinelineComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -61258,7 +61671,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var sparklinepieMetaData = /** @class */ (function () {
         function sparklinepieMetaData() {
@@ -61520,7 +61933,9 @@
                         selector: 'sparklinepie',
                         inputs: sparklinepieMetaData.PROPERTIES,
                         outputs: sparklinepieMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSparklinepieComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSparklinepieComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -61536,7 +61951,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var sparklinetristateMetaData = /** @class */ (function () {
         function sparklinetristateMetaData() {
@@ -61800,7 +62215,9 @@
                         selector: 'sparklinetristate',
                         inputs: sparklinetristateMetaData.PROPERTIES,
                         outputs: sparklinetristateMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSparklinetristateComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSparklinetristateComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -61816,7 +62233,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var splitbuttonMetaData = /** @class */ (function () {
         function splitbuttonMetaData() {
@@ -62098,7 +62515,9 @@
                         selector: 'splitbutton',
                         inputs: splitbuttonMetaData.PROPERTIES,
                         outputs: splitbuttonMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtSplitbuttonComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtSplitbuttonComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -62114,7 +62533,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var tabbarMetaData = /** @class */ (function () {
         function tabbarMetaData() {
@@ -62411,7 +62830,9 @@
                         selector: 'tabbar',
                         inputs: tabbarMetaData.PROPERTIES,
                         outputs: tabbarMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTabbarComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTabbarComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -62427,7 +62848,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var tabpanelMetaData = /** @class */ (function () {
         function tabpanelMetaData() {
@@ -62716,7 +63137,9 @@
                         selector: 'tabpanel',
                         inputs: tabpanelMetaData.PROPERTIES,
                         outputs: tabpanelMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTabpanelComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTabpanelComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -62732,7 +63155,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var tabMetaData = /** @class */ (function () {
         function tabMetaData() {
@@ -63018,7 +63441,9 @@
                         selector: 'tab',
                         inputs: tabMetaData.PROPERTIES,
                         outputs: tabMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTabComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTabComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -63034,7 +63459,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var tooltipMetaData = /** @class */ (function () {
         function tooltipMetaData() {
@@ -63386,7 +63811,9 @@
                         selector: 'tooltip',
                         inputs: tooltipMetaData.PROPERTIES,
                         outputs: tooltipMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTooltipComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTooltipComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -63402,7 +63829,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var titleMetaData = /** @class */ (function () {
         function titleMetaData() {
@@ -63652,7 +64079,9 @@
                         selector: 'title',
                         inputs: titleMetaData.PROPERTIES,
                         outputs: titleMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTitleComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTitleComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -63668,7 +64097,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var titlebarMetaData = /** @class */ (function () {
         function titlebarMetaData() {
@@ -63958,7 +64387,9 @@
                         selector: 'titlebar',
                         inputs: titlebarMetaData.PROPERTIES,
                         outputs: titlebarMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtTitlebarComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtTitlebarComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -63974,7 +64405,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var toolMetaData = /** @class */ (function () {
         function toolMetaData() {
@@ -64232,7 +64663,9 @@
                         selector: 'tool',
                         inputs: toolMetaData.PROPERTIES,
                         outputs: toolMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtToolComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtToolComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -64248,7 +64681,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var paneltoolMetaData = /** @class */ (function () {
         function paneltoolMetaData() {
@@ -64506,7 +64939,9 @@
                         selector: 'paneltool',
                         inputs: paneltoolMetaData.PROPERTIES,
                         outputs: paneltoolMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtPaneltoolComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtPaneltoolComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -64522,7 +64957,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var toolbarMetaData = /** @class */ (function () {
         function toolbarMetaData() {
@@ -64810,7 +65245,9 @@
                         selector: 'toolbar',
                         inputs: toolbarMetaData.PROPERTIES,
                         outputs: toolbarMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtToolbarComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtToolbarComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -64826,7 +65263,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var colorbuttonMetaData = /** @class */ (function () {
         function colorbuttonMetaData() {
@@ -65082,7 +65519,9 @@
                         selector: 'colorbutton',
                         inputs: colorbuttonMetaData.PROPERTIES,
                         outputs: colorbuttonMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtColorbuttonComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtColorbuttonComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -65098,7 +65537,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var colorpickercolorpreviewMetaData = /** @class */ (function () {
         function colorpickercolorpreviewMetaData() {
@@ -65347,7 +65786,9 @@
                         selector: 'colorpickercolorpreview',
                         inputs: colorpickercolorpreviewMetaData.PROPERTIES,
                         outputs: colorpickercolorpreviewMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtColorpickercolorpreviewComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtColorpickercolorpreviewComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -65363,7 +65804,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var colorfieldMetaData = /** @class */ (function () {
         function colorfieldMetaData() {
@@ -65691,7 +66132,9 @@
                         selector: 'colorfield',
                         inputs: colorfieldMetaData.PROPERTIES,
                         outputs: colorfieldMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtColorfieldComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtColorfieldComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -65707,7 +66150,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var colorselectorMetaData = /** @class */ (function () {
         function colorselectorMetaData() {
@@ -65775,7 +66218,9 @@
                         selector: 'colorselector',
                         inputs: colorselectorMetaData.PROPERTIES,
                         outputs: colorselectorMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtColorselectorComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtColorselectorComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -65791,7 +66236,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var gaugeMetaData = /** @class */ (function () {
         function gaugeMetaData() {
@@ -66054,7 +66499,9 @@
                         selector: 'gauge',
                         inputs: gaugeMetaData.PROPERTIES,
                         outputs: gaugeMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGaugeComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtGaugeComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -66070,7 +66517,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var mapMetaData = /** @class */ (function () {
         function mapMetaData() {
@@ -66392,7 +66839,9 @@
                         selector: 'map',
                         inputs: mapMetaData.PROPERTIES,
                         outputs: mapMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtMapComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtMapComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -66408,7 +66857,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var google_mapMetaData = /** @class */ (function () {
         function google_mapMetaData() {
@@ -66730,7 +67179,9 @@
                         selector: 'google-map',
                         inputs: google_mapMetaData.PROPERTIES,
                         outputs: google_mapMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtGoogle_mapComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtGoogle_mapComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -66746,7 +67197,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ratingMetaData = /** @class */ (function () {
         function ratingMetaData() {
@@ -67009,7 +67460,9 @@
                         selector: 'rating',
                         inputs: ratingMetaData.PROPERTIES,
                         outputs: ratingMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtRatingComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtRatingComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -67025,7 +67478,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var videoMetaData = /** @class */ (function () {
         function videoMetaData() {
@@ -67300,7 +67753,9 @@
                         selector: 'video',
                         inputs: videoMetaData.PROPERTIES,
                         outputs: videoMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtVideoComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtVideoComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -67316,7 +67771,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var viewportMetaData = /** @class */ (function () {
         function viewportMetaData() {
@@ -67613,7 +68068,9 @@
                         selector: 'viewport',
                         inputs: viewportMetaData.PROPERTIES,
                         outputs: viewportMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtViewportComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtViewportComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -67629,7 +68086,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var widgetMetaData = /** @class */ (function () {
         function widgetMetaData() {
@@ -67759,7 +68216,9 @@
                         selector: 'widget',
                         inputs: widgetMetaData.PROPERTIES,
                         outputs: widgetMetaData.EVENTNAMES,
-                        providers: [{ provide: base, useExisting: i0.forwardRef(function () { return ExtWidgetComponent; }) }],
+                        providers: [{ provide: base, useExisting: i0.forwardRef(( /**
+                                         * @return {?}
+                                         */function () { return ExtWidgetComponent; })) }],
                         template: '<ng-template></ng-template>'
                     }] }
         ];
@@ -67775,7 +68234,7 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ExtAngularModule = /** @class */ (function () {
         function ExtAngularModule() {
@@ -68246,12 +68705,12 @@
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     exports.ExtAngularModule = ExtAngularModule;

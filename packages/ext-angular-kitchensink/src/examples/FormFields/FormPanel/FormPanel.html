@@ -1,10 +1,11 @@
+<container padding="10" layout="fit" [fitToParent]="true">
 <container  
     [platformConfig]="{
         phone: {layout: 'fit'}, '!phone': {layout: 'center', padding: 10}
     }"
 >
 <!-- todo handle this ref -->
-    <formpanel 
+    <container padding="10" layout="fit" [fitToParent]="true"><formpanel 
         (ready)="onReady($event)"
         [shadow]="true" 
         [padding]="20"
@@ -91,4 +92,5 @@
             <button  [text]="'Reset'" (tap)="reset($event)"></button>
         </toolbar>
     </formpanel>
+</container>
 </container>
