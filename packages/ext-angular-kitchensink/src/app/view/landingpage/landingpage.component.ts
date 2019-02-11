@@ -48,7 +48,8 @@ const generateBreadcrumb = (node) => {
   encapsulation: ViewEncapsulation.None
 })
 export class LandingpageComponent implements OnInit {
-
+  
+  isPhone = Ext.os.is.Phone;
   ANGULAR_VERSION: any = VERSION.full
   treeStore: any
   hideSelections: any = false
@@ -143,9 +144,55 @@ export class LandingpageComponent implements OnInit {
     this.theDataview = event.ext;
   }
 
+
+  theNestedlist: any
+  nestedlistReady = (event) => {
+    this.theNestedlist = event.ext;
+  }
+
+
+
+  onNavChange = (nodeId) => {
+    if(nodeId === '' || nodeId) {
+      location.hash = nodeId;
+    }
+  }
+
+
+
+  doItemTap = (event) => {
+    console.log(event)
+    var id = event.record.data.id
+    this.onNavChange(id)
+    //this.navigate(id)
+
+
+    var node = event.record
+
+
+
+    // if (node && previousProps.selectedNavNode !== node) {
+      if (node.isLeaf()) {
+        this.theNestedlist.goToLeaf(node);
+      } else {
+        this.theNestedlist.goToNode(node);
+      }
+    }
+
+
+
+  doBack = (event) => {
+    console.log(event)
+    var newId=event.node.getId().replace(/\/[^\/]*$/, '')
+    //var id = event.location.record.data.id
+    //var newId=id.replace(/\/[^\/]*$/, '')
+    this.navigate(newId)
+  }
+
   doClick = (event) => {
     var id = event.location.record.data.id
     this.navigate(id)
+
   }
 
   dataviewToolbarReady = (event) => {
