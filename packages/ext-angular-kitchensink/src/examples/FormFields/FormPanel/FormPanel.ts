@@ -1,5 +1,5 @@
 declare var Ext: any;
-import {Component} from '@angular/core'
+import { Component } from '@angular/core'
 
 Ext.require([
   'Ext.field.InputMask'

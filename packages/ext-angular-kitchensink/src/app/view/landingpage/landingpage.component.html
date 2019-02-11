@@ -19,7 +19,7 @@
   [weighted]="true">
 
   <!-- Titlebar starts-->
-  <titlebar docked="top" [weight]="10">
+  <titlebar docked="top" [weight]="10" *ngIf="!isPhone" >
     <container><div #extitem></div></container>
     <button iconCls="x-fa fa-bars" (tap)="toggleTree()"></button>
     <container>
@@ -32,7 +32,7 @@
   <!-- Titlebar ends-->
 
   <!-- Breadcrumb starts-->
-  <toolbar docked="top" [weight]="10">
+  <toolbar docked="top" [weight]="10" *ngIf="!isPhone">
     <dataview [itemTpl]="tplToolbar" [inline]="'true'" [itemCls]="'div.app-toolbar'"
       (childtap)="doClickToolbar($event)" (ready)="dataviewToolbarReady($event)">
     </dataview>
@@ -40,7 +40,7 @@
   <!-- Breadcrumb ends-->
 
   <!-- Navtree starts-->
-  <panel [weight]="10"
+  <panel [weight]="10" *ngIf="!isPhone"
     docked="left"
     scrollable="y"
     width="300"
@@ -54,23 +54,37 @@
   </panel>
   <!-- Navtree ends-->
 
-  <!-- selections starts-->
-  <panel scrollable="y" [hidden]="hideSelections" [bodyStyle]="bodyStyle">
-  <dataview
-    [itemTpl]="tpl"
+  <!-- nestedlist starts-->
+  <nestedlist *ngIf="isPhone"
+    [title]="'ExtAngular 6.7 Kitchen Sink'"
     [store]="treeStore"
-    [style]="{'background':'top','display':'block','text-align':'center'}"
-    [inline]="true"
-    [centered]="true"
-    [itemCls]="'div.app-thumbnail'"
-    (childtap)="doClick($event)"
-    (ready)="dataviewReady($event)">
-  </dataview>
-  </panel>
+    (itemtap)="doItemTap($event)"
+    (back)="doBack($event)"
+    (ready)="nestedlistReady($event)">
+    <container [hidden]="hideExamples">
+      <router-outlet #extroute></router-outlet>
+    </container>
+  </nestedlist>
+  <!-- nestedlist ends-->
+
+  <!-- selections starts-->
+  <panel scrollable="y" [hidden]="hideSelections" [bodyStyle]="bodyStyle" *ngIf="!isPhone">
+      <dataview
+        [itemTpl]="tpl"
+        [store]="treeStore"
+        [style]="{'background':'top','display':'block','text-align':'center'}"
+        [inline]="true"
+        [centered]="true"
+        [itemCls]="'div.app-thumbnail'"
+        (childtap)="doClick($event)"
+        (ready)="dataviewReady($event)">
+      </dataview>
+      </panel>
+  <!--
   <!-- selections ends-->
 
   <!-- examples starts-->
-  <container [hidden]="hideExamples">
+  <container [hidden]="hideExamples" *ngIf="!isPhone" >
     <router-outlet #extroute></router-outlet>
   </container>
   <!-- examples ends-->
