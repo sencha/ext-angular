@@ -1,6 +1,6 @@
 
   <!-- code button starts-->
-  <button [weight]="5"
+  <button [weight]="5" *ngIf="!isPhone"
     [hidden]="files.length > 0 ? false: true"
     ui="fab"
     [iconCls]="'x-font-icon ' + (showCode ? 'md-icon-close' : 'md-icon-code')"
@@ -54,19 +54,6 @@
   </panel>
   <!-- Navtree ends-->
 
-  <!-- nestedlist starts-->
-  <nestedlist *ngIf="isPhone"
-    [title]="'ExtAngular 6.7 Kitchen Sink'"
-    [store]="treeStore"
-    (itemtap)="doItemTap($event)"
-    (back)="doBack($event)"
-    (ready)="nestedlistReady($event)">
-    <container [hidden]="hideExamples">
-      <router-outlet #extroute></router-outlet>
-    </container>
-  </nestedlist>
-  <!-- nestedlist ends-->
-
   <!-- selections starts-->
   <panel scrollable="y" [hidden]="hideSelections" [bodyStyle]="bodyStyle" *ngIf="!isPhone">
       <dataview
@@ -116,5 +103,42 @@
     </tabpanel>
   </panel>
   <!-- code window ends-->
+
+  <!-- nestedlist starts-->
+  <nestedlist *ngIf="isPhone" [hidden]="hideSelections"
+    [title]="'ExtAngular 6.7 Kitchen Sink'"
+    [store]="treeStore"
+
+    [layout]="{type: 'card',
+      animation: {
+        duration: 250,
+        easing: 'ease-in-out'
+      }}
+    "
+    (itemtap)="doItemTap($event)"
+    (back)="doBack($event)"
+    (ready)="nestedlistReady($event)">
+
+  </nestedlist>
+
+  <toolbar docked="top" [weight]="10" *ngIf="isPhone" [hidden]="hideExamples" >
+    <dataview [itemTpl]="tplToolbar" [inline]="'true'" [itemCls]="'div.app-toolbar'"
+      (childtap)="doClickToolbar($event)" (ready)="dataviewToolbarReady($event)">
+    </dataview>
+  </toolbar>
+
+
+  <container *ngIf="isPhone" [hidden]="hideExamples" layout="fit">
+    <router-outlet #extroute></router-outlet>
+  </container>
+
+<!--
+    (itemtap)="doItemTap($event)"
+        (childtap)="doTap($event)"
+    (leafchildtap)="doTap($event)"
+
+-->
+
+  <!-- nestedlist ends-->
 
 </panel>

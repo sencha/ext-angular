@@ -152,47 +152,36 @@ export class LandingpageComponent implements OnInit {
 
 
 
-  onNavChange = (nodeId) => {
+  onNavChange = (nodeId, node) => {
+    if (node.isLeaf()) {
+      this.theNestedlist.goToLeaf(node);
+    } else {
+      this.theNestedlist.goToNode(node);
+    }
     if(nodeId === '' || nodeId) {
       location.hash = nodeId;
+      this.navigate(nodeId)
     }
+  }
+
+  doTap = (event, record) => {
+  }
+
+  doItemTap = (event, record) => {
+    var id = event.record.data.id
+    this.onNavChange(id, event.record)
   }
 
 
 
-  doItemTap = (event) => {
-    console.log(event)
-    var id = event.record.data.id
-    this.onNavChange(id)
-    //this.navigate(id)
-
-
-    var node = event.record
-
-
-
-    // if (node && previousProps.selectedNavNode !== node) {
-      if (node.isLeaf()) {
-        this.theNestedlist.goToLeaf(node);
-      } else {
-        this.theNestedlist.goToNode(node);
-      }
-    }
-
-
-
   doBack = (event) => {
-    console.log(event)
-    var newId=event.node.getId().replace(/\/[^\/]*$/, '')
-    //var id = event.location.record.data.id
-    //var newId=id.replace(/\/[^\/]*$/, '')
-    this.navigate(newId)
+    var id = event.node.getId()
+    this.onNavChange(id, event.node)
   }
 
   doClick = (event) => {
     var id = event.location.record.data.id
     this.navigate(id)
-
   }
 
   dataviewToolbarReady = (event) => {
@@ -263,16 +252,6 @@ export class LandingpageComponent implements OnInit {
     }
   }
 }
-
-
-// @Component({
-//   selector: 'dummy-component',
-//   template: ``,
-//   styles: [``]
-// })
-// export class DummyComponent {}
-
-
 
 @Component({
   selector: 'dummy-component',
