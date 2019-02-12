@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core'
-
 declare var Ext: any;
+import { Component } from '@angular/core'
+
+
 
 @Component({
   selector: 'nestedlist-component',
   templateUrl: "./NestedList.html",
   styles: [``]
 })
-export class NestedListComponent implements OnInit  {
+export class NestedListComponent {
 
-  constructor() { }
   store = Ext.create('Ext.data.TreeStore', { 
     autoLoad: true,
     root: {},
@@ -23,8 +23,5 @@ export class NestedListComponent implements OnInit  {
   onLeafItemTap = ({record}) => {
     Ext.toast(`You selected ${record.get('text')}`)
   }
-
-
-  ngOnInit() {}
 
 }

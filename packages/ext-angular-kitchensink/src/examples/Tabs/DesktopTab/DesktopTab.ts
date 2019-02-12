@@ -1,16 +1,10 @@
-import {Component, OnInit} from '@angular/core'
-
 declare var Ext: any;
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'desktoptab-component',
   templateUrl: "./DesktopTab.html",
   styles: [``]
 })
-export class DesktopTabComponent implements OnInit  {
-
-  constructor() { }
-
-  ngOnInit() {}
-
+export class DesktopTabComponent {
 }

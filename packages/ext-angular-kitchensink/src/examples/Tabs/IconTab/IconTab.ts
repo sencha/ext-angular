@@ -1,6 +1,5 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core'
-
 declare var Ext: any;
+import {Component, ViewEncapsulation} from '@angular/core'
 
 @Component({
   selector: 'icontab-component',
@@ -38,16 +37,12 @@ declare var Ext: any;
 
   `]
 })
-export class IconTabComponent implements OnInit  {
-
-  constructor() { }
+export class IconTabComponent {
 
   iconItems = [{
     xtype: 'container',
     title: 'Tab 1',
     html: '!!!!!!!!!!!!!!!!!!!!!'
   }]
-
-  ngOnInit() {}
 
 }

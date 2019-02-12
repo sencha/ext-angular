@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-
 declare var Ext: any;
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'advanced-date-panel-component',
@@ -8,9 +7,7 @@ declare var Ext: any;
   styles: [``]
 })
 
-export class AdvancedDatePanelComponent implements OnInit  {
-
-  constructor() { }
+export class AdvancedDatePanelComponent  {
 
   isPhone:boolean = Ext.os.is.Phone;
 
@@ -25,7 +22,5 @@ export class AdvancedDatePanelComponent implements OnInit  {
     new Date(new Date().getFullYear(), 4, 1),
     new Date(new Date().getFullYear(), 2, 16)
   ];
-
-  ngOnInit() {}
 
 }

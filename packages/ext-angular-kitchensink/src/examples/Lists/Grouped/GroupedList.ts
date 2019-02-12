@@ -1,15 +1,13 @@
-import {Component, OnInit} from '@angular/core'
-
 declare var Ext: any;
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'groupedlist-component',
   templateUrl: "./GroupedList.html",
   styles: [``]
 })
-export class GroupedListComponent implements OnInit  {
+export class GroupedListComponent {
 
-  constructor() { }
   store = Ext.create('Ext.data.Store', { 
     autoLoad: true,
     proxy: {
@@ -31,7 +29,5 @@ export class GroupedListComponent implements OnInit  {
   onSelect = ({list, selected}) => {
     Ext.toast(`You selected ${selected.get('first_name')} ${selected.get('last_name')}.`);
   }
-
-  ngOnInit() {}
 
 }

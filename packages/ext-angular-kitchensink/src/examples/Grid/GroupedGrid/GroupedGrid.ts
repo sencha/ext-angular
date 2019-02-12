@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { GridService } from '../Grid.service'
-
 declare var Ext: any;
+import { Component } from '@angular/core';
+import { GridService } from '../Grid.service'
 
 Ext.require([
   'Ext.grid.cell.Number',
@@ -15,7 +14,7 @@ Ext.require([
   templateUrl: './GroupedGrid.html',
   styles: [``]
 })
-export class GroupedGridComponent implements OnInit {
+export class GroupedGridComponent {
 
   store = Ext.create('Ext.data.Store', {
     autoLoad: true,
@@ -34,11 +33,6 @@ onToggleGrouping = on => { this.grouped = on;}
   constructor(gridService: GridService) {
     gridService.initResturantData();
    }
-
-
-
-  ngOnInit() {
-  }
 
 
 }

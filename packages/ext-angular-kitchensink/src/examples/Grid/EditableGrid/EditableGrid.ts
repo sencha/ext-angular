@@ -31,12 +31,9 @@ export class EditableGridComponent implements OnInit {
     }
   });
 
-
   isDesktop = Ext.os.is.Desktop ;
   pressType : string;
   pressEntity : string;
-
-
 
   constructor(gridService: GridService) {
     gridService.initCompanyData();
@@ -55,8 +52,6 @@ export class EditableGridComponent implements OnInit {
     return formattedValue;
   }
 
-
-
   ngOnInit() {
     if(this.isDesktop) {
       this.pressType = "click";
@@ -67,6 +62,5 @@ export class EditableGridComponent implements OnInit {
       this.pressEntity = "row"
     }
   }
-
 
 }

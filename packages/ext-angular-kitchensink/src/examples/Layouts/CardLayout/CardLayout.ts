@@ -1,16 +1,13 @@
-import {Component, OnInit} from '@angular/core'
-import colors from '../colors';
-
 declare var Ext: any;
+import { Component } from '@angular/core'
+import colors from '../colors';
 
 @Component({
   selector: 'cardlayout-component',
   templateUrl: "./CardLayout.html",
   styles: [``]
 })
-export class CardLayoutComponent implements OnInit  {
-
-  constructor() { }
+export class CardLayoutComponent {
 
   activeCard:number = 0; 
   animation:any = null;
@@ -44,7 +41,5 @@ export class CardLayoutComponent implements OnInit  {
     { text: 'Pop', animation: { type: 'pop', ...this.animationDefaults } },
     { text: 'Flip', animation: { type: 'flip', ...this.animationDefaults } }
   ];
-
-  ngOnInit() {}
 
 }

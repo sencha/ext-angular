@@ -11,8 +11,6 @@ declare var Ext: any;
 
 export class BasicPanelComponent implements OnInit  {
 
-  constructor() { }
-
   isPhone:boolean = Ext.os.is.Phone;
   text:any;
 

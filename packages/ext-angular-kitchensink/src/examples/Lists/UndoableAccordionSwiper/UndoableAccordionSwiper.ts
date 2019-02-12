@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core'
-
 declare var Ext: any;
+import { Component } from '@angular/core'
 
 Ext.require([
     'Ext.dataview.listswiper.ListSwiper'
@@ -12,9 +11,7 @@ Ext.require([
   styles: [``]
 })
 
-export class UndoableAccordionSwiperComponent implements OnInit {
-  
-  constructor() {}
+export class UndoableAccordionSwiperComponent {
   
   store = Ext.create('Ext.data.Store', { 
     autoLoad: true,
@@ -56,7 +53,5 @@ export class UndoableAccordionSwiperComponent implements OnInit {
   onUndoDeleteItem = (list, {record}) => {
     Ext.toast(`Recover ${record.get('first_name')} ${record.get('last_name')}`)
   }
-
-  ngOnInit() {}
 
 }

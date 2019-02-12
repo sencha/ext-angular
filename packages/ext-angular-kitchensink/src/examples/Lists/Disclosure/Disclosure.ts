@@ -1,15 +1,13 @@
-import {Component, OnInit} from '@angular/core'
-
 declare var Ext: any;
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'disclosurelist-component',
   templateUrl: "./Disclosure.html",
   styles: [``]
 })
-export class DisclosureListComponent implements OnInit  {
+export class DisclosureListComponent {
 
-  constructor() { }
   store = Ext.create('Ext.data.Store', { 
     autoLoad: true,
     proxy: {
@@ -24,7 +22,5 @@ export class DisclosureListComponent implements OnInit  {
   msgAlert = (param) => {
     Ext.Msg.alert('Tap', 'Disclose more info for ' + param.get('first_name'), Ext.emptyFn);
   };
-  
-  ngOnInit() {}
 
 }

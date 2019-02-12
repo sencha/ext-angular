@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core'
-
 declare var Ext: any;
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'time-panel-component',
@@ -8,12 +7,8 @@ declare var Ext: any;
   styles: [``]
 })
 
-export class TimePanelComponent implements OnInit  {
-
-  constructor() { }
+export class TimePanelComponent {
 
   isPhone:boolean = Ext.os.is.Phone;
-
-  ngOnInit() {}
 
 }

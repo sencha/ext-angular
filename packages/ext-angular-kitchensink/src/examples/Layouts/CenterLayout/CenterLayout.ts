@@ -1,19 +1,14 @@
-import {Component, OnInit} from '@angular/core'
-import colors from '../colors';
-
 declare var Ext: any;
+import { Component } from '@angular/core'
+import colors from '../colors';
 
 @Component({
   selector: 'centerlayout-component',
   templateUrl: "./CenterLayout.html",
   styles: [``]
 })
-export class CenterLayoutComponent implements OnInit  {
-
-  constructor() { }
+export class CenterLayoutComponent {
 
   colors:object = colors; 
-
-  ngOnInit() {}
 
 }

@@ -1,15 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {model} from '../../CompanyModel';
-
 declare var Ext: any;
-
+import { Component } from '@angular/core';
+import {model} from '../../CompanyModel';
 
 @Component({
   selector: 'rowbody-component',
   templateUrl: './RowBody.html',
   styles: [``]
 })
-export class RowBodyComponent implements OnInit {
+export class RowBodyComponent {
 
   store = Ext.create('Ext.data.Store', {
     model,
@@ -49,13 +47,5 @@ export class RowBodyComponent implements OnInit {
     }
     return formattedValue;
   }
-
-  constructor() { }
-
-
-
-  ngOnInit() {
-  }
-
 
 }

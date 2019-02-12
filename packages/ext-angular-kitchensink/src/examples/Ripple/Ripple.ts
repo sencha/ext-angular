@@ -1,6 +1,5 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core'
-
 declare var Ext: any;
+import { Component, ViewEncapsulation } from '@angular/core'
 
 @Component({
   selector: 'ripple-component',
@@ -20,14 +19,10 @@ declare var Ext: any;
   `],
   encapsulation: ViewEncapsulation.None
 })
-export class RippleComponent implements OnInit  {
-
-  constructor() { }
+export class RippleComponent {
 
   clickHandler = (event) => {
     Ext.get(event.target).ripple(event, {})
   }
-
-  ngOnInit() {}
 
 }

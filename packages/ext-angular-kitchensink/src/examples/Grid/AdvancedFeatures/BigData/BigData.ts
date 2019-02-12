@@ -1,9 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-
+declare var Ext: any;
+import { Component } from '@angular/core';
 import {model} from './GridModel'
 import {BigDataService} from './BigData.service';
-
-declare var Ext: any;
 
 Ext.require([
     'Ext.grid.plugin.*',
@@ -12,13 +10,12 @@ Ext.require([
     'Ext.exporter.*'
 ]);
 
-
 @Component({
   selector: 'bigdata-component',
   templateUrl: './BigData.html',
   styles: [``]
 })
-export class BigDataComponent implements OnInit {
+export class BigDataComponent {
 
   constructor(bigDataService : BigDataService) { }
 
@@ -36,10 +33,6 @@ export class BigDataComponent implements OnInit {
     }
   });
 
-
-
-  ngOnInit() {
-  }
 
   grid:any;
 

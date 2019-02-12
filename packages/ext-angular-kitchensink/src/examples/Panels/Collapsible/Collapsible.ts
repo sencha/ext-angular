@@ -1,7 +1,6 @@
-import {Component, OnInit} from '@angular/core'
-import {mediumText} from '../../dummy';
-
 declare var Ext: any;
+import { Component } from '@angular/core'
+import {mediumText} from '../../dummy';
 
 @Component({
   selector: 'collapsible-panel-component',
@@ -9,13 +8,9 @@ declare var Ext: any;
   styles: [``]
 })
 
-export class CollapsiblePanelComponent implements OnInit  {
-
-  constructor() { }
+export class CollapsiblePanelComponent {
 
   isPhone:boolean = Ext.os.is.Phone;
   mediumText = mediumText;
-
-  ngOnInit() {}
 
 }

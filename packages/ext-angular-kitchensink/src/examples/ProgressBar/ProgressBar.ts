@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-
 declare var Ext: any;
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'porgressbar-component',
@@ -13,8 +12,6 @@ export class ProgressBarComponent implements OnInit {
   progress = 1;
   progressText:string;
   updateLoop;
-
-  constructor() { }
 
   ngOnInit() {
     this.progressText = "1%";

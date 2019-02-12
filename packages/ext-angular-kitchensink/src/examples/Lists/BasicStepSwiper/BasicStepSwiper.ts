@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core'
-
 declare var Ext: any;
+import { Component } from '@angular/core'
 
 Ext.require([
     'Ext.dataview.listswiper.ListSwiper',
@@ -13,9 +12,8 @@ Ext.require([
   styles: [``]
 })
 
-export class BasicStepSwiperComponent implements OnInit  {
+export class BasicStepSwiperComponent {
 
-  constructor() { }
   store = Ext.create('Ext.data.Store', { 
     autoLoad: true,
     proxy: {
@@ -45,7 +43,5 @@ export class BasicStepSwiperComponent implements OnInit  {
   onEdit = (list, {record}) => {
     Ext.toast(`Edit ${record.get('first_name')} ${record.get('last_name')}`)
   }
-
-  ngOnInit() {}
 
 }
