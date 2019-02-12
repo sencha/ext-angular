@@ -1,8 +1,7 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core'
+declare var Ext: any;
+import { Component, ViewEncapsulation } from '@angular/core'
 import onTooltip from './tooltip';
 import './styles.css';
-
-declare var Ext: any;
 
 @Component({
   selector: 'treemap-tooltip-component',
@@ -11,9 +10,7 @@ declare var Ext: any;
   styleUrls: ['./styles.css']
 })
 
-export class TreeMapToolTipComponent implements OnInit  {
-
-  constructor() {}
+export class TreeMapToolTipComponent {
 
   tooltipRenderer = onTooltip;
   nodeValue = (node) => {
@@ -63,6 +60,4 @@ export class TreeMapToolTipComponent implements OnInit  {
       url: 'resources/data/tree/stocks.json'
     }
   });
-
-  ngOnInit() {}
 }

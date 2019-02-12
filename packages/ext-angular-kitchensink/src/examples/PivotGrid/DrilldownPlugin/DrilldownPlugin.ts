@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+declare var Ext: any;
+import { Component } from '@angular/core';
 import { generateData, randomDate } from '../generateSaleData';
 import { model } from '../SaleModel';
-
-declare var Ext: any;
 
 Ext.require(['Ext.pivot.plugin.DrillDown']);
 
@@ -11,35 +10,25 @@ Ext.require(['Ext.pivot.plugin.DrillDown']);
   templateUrl: './DrilldownPlugin.html',
   styles: [``]
 })
-export class DrilldownPluginComponent implements OnInit {
-
-  constructor() { }
-
-
+export class DrilldownPluginComponent {
   store = Ext.create('Ext.data.Store', {
     model: model,
     data: generateData()
-})
+  })
 
 
-pivotgrid:any;
+  pivotgrid:any;
 
-onPivotGridRead = function(event) {
-  this.pivotgrid = event.ext;
-}
-
-
-
-collapseAll = () => { this.pivotgrid.collapseAll(); }
-expandAll = () => { this.pivotgrid.expandAll(); }
-
-
-  ngOnInit() {
+  onPivotGridRead = function(event) {
+    this.pivotgrid = event.ext;
   }
 
-   isPhone = Ext.os.is.Phone;
+  collapseAll = () => { this.pivotgrid.collapseAll(); }
+  expandAll = () => { this.pivotgrid.expandAll(); }
 
-   pivotgridMatrix = {
+  isPhone = Ext.os.is.Phone;
+
+  pivotgridMatrix = {
     type: 'local',
     store: this.store,
     // Configure the aggregate dimensions. Multiple dimensions are supported.
@@ -76,6 +65,6 @@ expandAll = () => { this.pivotgrid.expandAll(); }
         header: 'Month',
         labelRenderer: value => Ext.Date.monthNames[value]
     }]
-};
+  };
 
 }

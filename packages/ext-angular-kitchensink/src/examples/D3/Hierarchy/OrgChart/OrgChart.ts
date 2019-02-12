@@ -1,22 +1,16 @@
+declare var Ext: any;
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {createStore} from './createStore';
-
-declare var Ext: any;
 
 @Component({
   selector: 'OrgChart-component',
   templateUrl: './OrgChart.html',
   styles: [``]
 })
-export class OrgChartComponent implements OnInit {
+export class OrgChartComponent {
 
   constructor() { 
     this.defineOrgChart();
-  }
-
-
-
-  ngOnInit() {
   }
 
    isPhone = Ext.os.is.Phone;

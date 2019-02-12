@@ -1,28 +1,30 @@
 <container  layout="fit" padding="10" [fitToParent]="true">
-    <pivotgrid 
+
+  <toolbar 
+    [shadow]="false"
+    docked="top"
+    padding="5 8"
+    [layout]="{
+        type: 'hbox',
+        align: 'stretch'
+    }"
+    ui="app-transparent-toolbar"
+    [defaults]="{
+        margin: '0 10 0 0',
+        shadow: true,
+        ui: 'action'
+    }">
+    <button text="Expand all" [handler]="this.expandAll"></button>
+    <button text="Collapse all" [handler]="this.collapseAll"></button>
+  </toolbar>
+
+  <pivotgrid
     (ready)="onPivotGridRead($event)"
-        shadow="true"
-        [selectable]="{ cells: true }"
-        [startRowGroupsCollapsed]="false"
-        [startColGroupsCollapsed]="false"
-        [matrix]="pivotgridMatrix"
-    ></pivotgrid>
-    <toolbar 
-        [shadow]="false"
-        docked="top"
-        padding="5 8"
-        [layout]="{
-            type: 'hbox',
-            align: 'stretch'
-        }"
-        ui="app-transparent-toolbar"
-        [defaults]="{
-            margin: '0 10 0 0',
-            shadow: true,
-            ui: 'action'
-        }"
-    >
-        <button  text="Expand all" [handler]="this.expandAll"></button>
-        <button  text="Collapse all" [handler]="this.collapseAll"></button>
-    </toolbar>
+    shadow="true"
+    [selectable]="{ cells: true }"
+    [startRowGroupsCollapsed]="false"
+    [startColGroupsCollapsed]="false"
+    [matrix]="pivotgridMatrix">
+  </pivotgrid>
+
 </container>

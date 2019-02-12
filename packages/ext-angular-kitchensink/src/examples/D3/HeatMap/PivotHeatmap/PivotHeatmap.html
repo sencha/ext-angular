@@ -1,48 +1,50 @@
 <container padding="10" layout="fit" [fitToParent]="true">
 
-<toolbar  docked="top">
-    <spacer ></spacer>
-    <button  iconCls="x-fa fa-refresh" [handler]="this.refreshData" text="Refresh Data"></button>
-</toolbar>
-<pivotheatmap 
+  <toolbar docked="top">
+    <spacer></spacer>
+    <button iconCls="x-fa fa-refresh" [handler]="this.refreshData" text="Refresh Data"></button>
+  </toolbar>
+
+  <pivotheatmap 
     [matrix]="matrixVar"
     [padding]="isPhone? '20 20 60 60' : '20 30 70 120'"
     [xAxis]="{
-        title: {
-            attr: {
-                'font-size': '12px'
-            }
+      title: {
+        attr: {
+          'font-size': '12px'
         }
+      }
     }"
     [yAxis]="{
-        title: {
-            attr: {
-                'font-size': '12px'
-            }
+      title: {
+        attr: {
+          'font-size': '12px'
         }
+      }
     }"
     [colorAxis]="{
-        scale: {
-            type: 'linear',
-            range: ['#ffffd9', '#49b6c4', '#225ea8']
-        }
+      scale: {
+        type: 'linear',
+        range: ['#ffffd9', '#49b6c4', '#225ea8']
+      }
     }"
     [legend]="this.legendVar"
     [tooltip]="{
-        renderer: this.onTooltip
+      renderer: this.onTooltip
     }"
 
     [platformConfig]="{
-        phone: {
-            tiles: {
-                cls: 'phone-tiles'
-            }
-        },
-        tablet: {
-            tiles: {
-                cls: 'tablet-tiles'
-            }
+      phone: {
+        tiles: {
+          cls: 'phone-tiles'
         }
-    }"
-></pivotheatmap>
-  </container>
+      },
+      tablet: {
+        tiles: {
+          cls: 'tablet-tiles'
+        }
+      }
+    }">
+  </pivotheatmap>
+
+</container>

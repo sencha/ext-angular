@@ -1,6 +1,5 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core'
-
 declare var Ext: any;
+import { Component } from '@angular/core'
 
 Ext.require(['Ext.d3.interaction.PanZoom']);
 
@@ -10,9 +9,7 @@ Ext.require(['Ext.d3.interaction.PanZoom']);
   styles: [``]
 })
 
-export class TreeMapComponent implements OnInit  {
-
-  constructor() {}
+export class TreeMapComponent {
 
   store = Ext.create('Ext.data.TreeStore', {
     autoLoad: true,
@@ -100,7 +97,5 @@ export class TreeMapComponent implements OnInit  {
     field: 'change',
     processor: this.colorAxisProcessor
   });
-
-  ngOnInit() {}
 
 }

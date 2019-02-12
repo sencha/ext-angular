@@ -1,22 +1,17 @@
 
-  <!-- code button starts-->
-  <button [weight]="5" *ngIf="!isPhone"
-    [hidden]="files.length > 0 ? false: true"
-    ui="fab"
-    [iconCls]="'x-font-icon ' + (showCode ? 'md-icon-close' : 'md-icon-code')"
-    [top]="isDesktop ? 20 : 35"
-    right="21"
-    zIndex="10000"
-    (tap)="toggleCode()">
-  </button>
-  <!-- code button ends-->
-
+<!-- code button starts-->
+<button [weight]="5" *ngIf="!isPhone"
+  [hidden]="files.length > 0 ? false: true"
+  ui="fab"
+  [iconCls]="'x-font-icon ' + (showCode ? 'md-icon-close' : 'md-icon-code')"
+  [top]="isDesktop ? 20 : 35"
+  right="21"
+  zIndex="10000"
+  (tap)="toggleCode()">
+</button>
+<!-- code button ends-->
   
-<panel 
-  layout="fit"
-  [bodyStyle]="bodyStyle"
-  [fullscreen]="true"
-  [weighted]="true">
+<panel layout="fit" [bodyStyle]="bodyStyle" [fullscreen]="true" [weighted]="true">
 
   <!-- Titlebar starts-->
   <titlebar docked="top" [weight]="10" *ngIf="!isPhone" >
@@ -108,17 +103,10 @@
   <nestedlist *ngIf="isPhone" [hidden]="hideSelections"
     [title]="'ExtAngular 6.7 Kitchen Sink'"
     [store]="treeStore"
-
-    [layout]="{type: 'card',
-      animation: {
-        duration: 250,
-        easing: 'ease-in-out'
-      }}
-    "
+    [layout]="{type: 'card',animation: {duration: 250,easing: 'ease-in-out'}}"
     (itemtap)="doItemTap($event)"
     (back)="doBack($event)"
     (ready)="nestedlistReady($event)">
-
   </nestedlist>
 
   <toolbar docked="top" [weight]="10" *ngIf="isPhone" [hidden]="hideExamples" >
@@ -127,18 +115,9 @@
     </dataview>
   </toolbar>
 
-
   <container *ngIf="isPhone" [hidden]="hideExamples" layout="fit">
     <router-outlet #extroute></router-outlet>
   </container>
-
-<!--
-    (itemtap)="doItemTap($event)"
-        (childtap)="doTap($event)"
-    (leafchildtap)="doTap($event)"
-
--->
-
   <!-- nestedlist ends-->
 
 </panel>

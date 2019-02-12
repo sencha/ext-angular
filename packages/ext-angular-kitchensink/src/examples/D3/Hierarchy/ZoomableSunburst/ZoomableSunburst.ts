@@ -1,6 +1,5 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core'
-
 declare var Ext: any;
+import { Component } from '@angular/core'
 
 Ext.require([
     'Ext.util.Format',
@@ -13,9 +12,7 @@ Ext.require([
   styles: [``]
 })
 
-export class ZoomableSunburstComponent implements OnInit  {
-
-  constructor() {}
+export class ZoomableSunburstComponent {
 
   store = Ext.create('Ext.data.TreeStore', {
     autoLoad: true,
@@ -68,9 +65,8 @@ catch(e) {
   sunburst:any;
   onSubBurstReady = (event) => {
     this.sunburst = event.ext;
-    console.log("this.sunburst: " + this.sunburst);
     this.sunburst.onNodeSelect = (record, selection) => {
         this.sunburst.zoomInNode(record)};
     }
-  ngOnInit() {}
+
 }

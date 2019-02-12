@@ -1,15 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-
 declare var Ext: any;
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'Pack-component',
   templateUrl: './Pack.html',
   styles: [``]
 })
-export class PackComponent implements OnInit {
-
-  constructor() { }
+export class PackComponent {
 
   store = Ext.create('Ext.data.TreeStore', {
     autoLoad: true,
@@ -52,11 +49,6 @@ onTooltip = (component, tooltip, node) => {
 
     tooltip.setHtml(html);
 }
-
-
-
-  ngOnInit() {
-  }
 
    isPhone = Ext.os.is.Phone;
 

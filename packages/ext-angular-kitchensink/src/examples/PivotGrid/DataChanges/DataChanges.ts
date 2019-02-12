@@ -1,23 +1,14 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+declare var Ext: any;
+import { Component } from '@angular/core';
 import { generateData, randomDate, randomItem } from '../generateSaleData';
 import { model } from '../SaleModel';
-
-declare var Ext: any;
 
 @Component({
   selector: 'DataChanges-component',
   templateUrl: './DataChanges.html',
   styles: [``]
 })
-export class DataChangesComponent implements OnInit {
-
-  constructor() { }
-
-
-
-  ngOnInit() {
-  }
-
+export class DataChangesComponent {
    isPhone = Ext.os.is.Phone;
 
    store = Ext.create('Ext.data.Store', {

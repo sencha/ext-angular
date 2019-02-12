@@ -1,7 +1,6 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core'
-import createData from './createData';
-
 declare var Ext: any;
+import { Component, ViewEncapsulation } from '@angular/core'
+import createData from './createData';
 
 const regions = {
     "Belgium": 'Europe',
@@ -21,9 +20,7 @@ Ext.require(['Ext.pivot.d3.TreeMap']);
   encapsulation: ViewEncapsulation.None
 })
 
-export class ConfigurablePivotTreeMapComponent implements OnInit  {
-
-  constructor() {}
+export class ConfigurablePivotTreeMapComponent {
 
   mainCtnRef:any;
 
@@ -200,6 +197,4 @@ export class ConfigurablePivotTreeMapComponent implements OnInit  {
         align.hide();
     }
   }
-
-  ngOnInit() {}
 }

@@ -1,7 +1,6 @@
+declare var Ext: any;
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {refreshRandomData} from './createData';
-
-declare var Ext: any;
 
 @Component({
   selector: 'PivotHeatmap-component',
@@ -11,11 +10,10 @@ declare var Ext: any;
 export class PivotHeatmapComponent implements OnInit {
 
   constructor() { 
-      this.refreshData();
+    this.refreshData();
   }
 
  legendVar = {}
-
 
   ngOnInit() {
       if(Ext.platformTags.phone) {
@@ -44,49 +42,49 @@ export class PivotHeatmapComponent implements OnInit {
         {name: 'day', type: 'string'},
         {name: 'sales', type: 'number'}
     ]
-})
+  })
 
-refreshData = () => {
-    this.store.loadData(refreshRandomData());
-}
+  refreshData = () => {
+      this.store.loadData(refreshRandomData());
+  }
 
-onTooltip = (component, tooltip, datum) => {
-    const d = datum.data,
-        x = component.getXAxis().getField(),
-        y = component.getYAxis().getField(),
-        z = component.getColorAxis().getField();
+  onTooltip = (component, tooltip, datum) => {
+      const d = datum.data,
+          x = component.getXAxis().getField(),
+          y = component.getYAxis().getField(),
+          z = component.getColorAxis().getField();
 
-    tooltip.setHtml(
-        '<div>X: ' + d[x] + '</div>' +
-        '<div>Y: ' + d[y] + '</div>' +
-        '<div>Z: ' + d[z] + '</div>' +
-        '<div>Records: ' + d.records + '</div>'
-    );
-}
+      tooltip.setHtml(
+          '<div>X: ' + d[x] + '</div>' +
+          '<div>Y: ' + d[y] + '</div>' +
+          '<div>Z: ' + d[z] + '</div>' +
+          '<div>Records: ' + d.records + '</div>'
+      );
+  }
 
-theme:string= 'default';
+  theme:string= 'default';
 
-changeTheme = (select, choice) => {
-    this.theme = choice.get('value')
-}
+  changeTheme = (select, choice) => {
+      this.theme = choice.get('value')
+  }
 
-matrixVar = {
-    store: this.store,
-    leftAxis: {
-        dataIndex: 'employee',
-        header: !Ext.platformTags.phone?  'Employee' : '',
-        sortable: false
-    },
-    topAxis: {
-        dataIndex: 'day',
-        sortIndex: 'dayNumber',
-        header: 'Day'
-    },
-    aggregate: {
-        dataIndex: 'sales',
-        aggregator: 'sum'
-    }
-};
+  matrixVar = {
+      store: this.store,
+      leftAxis: {
+          dataIndex: 'employee',
+          header: !Ext.platformTags.phone?  'Employee' : '',
+          sortable: false
+      },
+      topAxis: {
+          dataIndex: 'day',
+          sortIndex: 'dayNumber',
+          header: 'Day'
+      },
+      aggregate: {
+          dataIndex: 'sales',
+          aggregator: 'sum'
+      }
+  };
 
 
 

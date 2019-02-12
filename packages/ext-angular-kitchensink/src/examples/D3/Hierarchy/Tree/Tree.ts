@@ -1,7 +1,6 @@
-import {Component, OnInit} from '@angular/core'
-import data from './data';
-
 declare var Ext: any;
+import { Component } from '@angular/core'
+import data from './data';
 declare var KitchenSink: any;
 
 Ext.define('KitchenSink.reader.Salary', {
@@ -57,11 +56,7 @@ Ext.define('KitchenSink.reader.Salary', {
   styles: ['']
 })
 
-export class TreeHierarchyComponent implements OnInit  {
-
-  constructor() {}
-
-  
+export class TreeHierarchyComponent {
 
   store = Ext.create('Ext.data.TreeStore', {
     autoLoad: true,
@@ -96,8 +91,6 @@ export class TreeHierarchyComponent implements OnInit  {
     const n = node.data.childNodes.length;
     tooltip.setHtml(n + ' item' + (n === 1 ? '' : 's') + ' inside.');
   }
-
-  ngOnInit() {}
 }
 
 
