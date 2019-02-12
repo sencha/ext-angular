@@ -153,7 +153,6 @@ import {ExporterPluginComponent} from '../examples/PivotGrid/ExporterPlugin/Expo
 import {OutlineLayoutComponent} from '../examples/PivotGrid/OutlineLayout/OutlineLayout'
 import {PivotGridWidgetsComponent} from '../examples/PivotGrid/PivotGridWidgets/PivotGridWidgets'
 import {RangeEditorPluginComponent} from '../examples/PivotGrid/RangeEditorPlugin/RangeEditorPlugin'
-import {RowStylingComponent} from '../examples/PivotGrid/RowStyling/RowStyling'
 import {TabularLayoutComponent} from '../examples/PivotGrid/TabularLayout/TabularLayout'
 
 import {SimpleDragDropComponent} from "../examples/DragAndDrop/Simple/Simple";
@@ -613,7 +612,6 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
     OutlineLayoutComponent,
     PivotGridWidgetsComponent,
     RangeEditorPluginComponent,
-    RowStylingComponent,
     TabularLayoutComponent,
 
     SimpleDragDropComponent,

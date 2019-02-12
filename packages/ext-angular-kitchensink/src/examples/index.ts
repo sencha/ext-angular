@@ -140,7 +140,6 @@ import {ExporterPluginComponent} from './PivotGrid/ExporterPlugin/ExporterPlugin
 import {OutlineLayoutComponent} from './PivotGrid/OutlineLayout/OutlineLayout'
 import {PivotGridWidgetsComponent} from './PivotGrid/PivotGridWidgets/PivotGridWidgets'
 import {RangeEditorPluginComponent} from './PivotGrid/RangeEditorPlugin/RangeEditorPlugin'
-import {RowStylingComponent} from './PivotGrid/RowStyling/RowStyling'
 import {TabularLayoutComponent} from './PivotGrid/TabularLayout/TabularLayout'
 
 import { CarouselComponent } from './Carousel/Carousel';
