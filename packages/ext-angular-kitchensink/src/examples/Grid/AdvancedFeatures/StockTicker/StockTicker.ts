@@ -34,8 +34,6 @@ export class StockTickerComponent implements OnInit {
     }
   });
 
-  constructor() { }
-
   ngOnInit() {
     if (this.store.isLoaded() && this.store.getCount()) {
       this.onStoreLoad(this.store);

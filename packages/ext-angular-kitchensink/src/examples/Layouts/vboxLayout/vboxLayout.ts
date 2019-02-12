@@ -1,21 +1,15 @@
-import {Component, OnInit} from '@angular/core'
-import colors from '../colors';
-
 declare var Ext: any;
+import { Component } from '@angular/core'
+import colors from '../colors';
 
 @Component({
   selector: 'vboxlayout-component',
   templateUrl: "./vboxLayout.html",
   styles: [``]
 })
-export class vboxLayoutComponent implements OnInit  {
-
-  constructor() { }
+export class vboxLayoutComponent {
 
   isPhone:boolean = Ext.os.is.Phone;
-
   colors:object = colors; 
-
-  ngOnInit() {}
 
 }

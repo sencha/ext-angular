@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core'
-
 declare var Ext: any;
+import { Component } from '@angular/core'
 
 Ext.require([
     'Ext.dataview.listswiper.ListSwiper'
@@ -11,9 +10,7 @@ Ext.require([
   templateUrl: "./BasicAccordionSwiper.html",
   styles: [``]
 })
-export class BasicAccordionSwiperComponent implements OnInit  {
-
-  constructor() {}
+export class BasicAccordionSwiperComponent {
 
   store = Ext.create('Ext.data.Store', { 
     autoLoad: true,
@@ -47,7 +44,5 @@ export class BasicAccordionSwiperComponent implements OnInit  {
     const record = info.record;
     Ext.toast(`Edit ${record.get('first_name')} ${record.get('last_name')}`)
   }
-
-  ngOnInit() {}
 
 }

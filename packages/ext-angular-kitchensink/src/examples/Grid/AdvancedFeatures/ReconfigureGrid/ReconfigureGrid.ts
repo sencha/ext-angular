@@ -1,18 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { model } from './GridModel'
-
-
-
 declare var Ext: any;
+import { Component } from '@angular/core';
+import { model } from './GridModel'
 
 @Component({
   selector: 'reconfiguregrid-component',
   templateUrl: './ReconfigureGrid.html',
   styles: [``]
 })
-export class ReconfigureGridComponent implements OnInit {
-
-  constructor() { }
+export class ReconfigureGridComponent {
 
   lastNames = ['Jones', 'Smith', 'Lee', 'Wilson', 'Black', 'Williams', 'Lewis', 'Johnson', 'Foot', 'Little', 'Vee', 'Train', 'Hot', 'Mutt'];
   firstNames = ['Fred', 'Julie', 'Bill', 'Ted', 'Jack', 'John', 'Mark', 'Mike', 'Chris', 'Bob', 'Travis', 'Kelly', 'Sara'];
@@ -165,12 +160,5 @@ export class ReconfigureGridComponent implements OnInit {
       len = departments.length;
     return departments[Ext.Number.randomInt(0, len - 1)];
   }
-
-
-
-  ngOnInit() {
-    console.log("In reconfigured grid");
-  }
-
 
 }

@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {model} from '../../CompanyModel';
-
 declare var Ext: any;
+import { Component } from '@angular/core';
+import {model} from '../../CompanyModel';
 
 Ext.require(['Ext.grid.plugin.ViewOptions']);
 
@@ -10,7 +9,7 @@ Ext.require(['Ext.grid.plugin.ViewOptions']);
   templateUrl: './ViewOptions.html',
   styles: [``]
 })
-export class ViewOptionsComponent implements OnInit {
+export class ViewOptionsComponent {
 
   toolbarHtml = `
   <div style="fontSize:'14px';fontWeight: 'normal';">Long press on a column header to customize this grid.</div>
@@ -25,8 +24,6 @@ export class ViewOptionsComponent implements OnInit {
     } 
   });
 
-  constructor() { }
-
   renderSign = (format, value) => {
     var formattedValue = Ext.util.Format.number(value, format);
     var color = "";
@@ -38,9 +35,5 @@ export class ViewOptionsComponent implements OnInit {
     }
     return formattedValue;
   } ;
-
-  ngOnInit() {
-  }
-
 
 }

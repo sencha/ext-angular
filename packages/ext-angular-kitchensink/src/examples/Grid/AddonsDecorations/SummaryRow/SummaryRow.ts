@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {model} from '../../CompanyModel';
-
 declare var Ext: any;
+import { Component } from '@angular/core';
+import {model} from '../../CompanyModel';
 
 Ext.require([
   'Ext.grid.plugin.SummaryRow',
@@ -14,7 +13,7 @@ Ext.require([
   templateUrl: './SummaryRow.html',
   styles: [``]
 })
-export class SummaryRowComponent implements OnInit {
+export class SummaryRowComponent {
 
   store = Ext.create('Ext.data.Store', {
     model,
@@ -39,13 +38,5 @@ export class SummaryRowComponent implements OnInit {
   } ;
 
 summarizeCompanies = (grid, context) => context.records.length + ' Companies';
-  
-  constructor() { }
-
-
-
-  ngOnInit() {
-  }
-
 
 }

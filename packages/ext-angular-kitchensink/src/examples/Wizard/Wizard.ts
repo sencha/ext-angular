@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewEncapsulation} from '@angular/core';
-
 declare var Ext: any;
+import { Component, OnInit, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'wizard-component',
@@ -18,9 +17,7 @@ declare var Ext: any;
 `]
 })
 
-export class WizardComponent implements OnInit {
-
-  constructor() { }
+export class WizardComponent {
 
   step:number = 0;
   tapMode = 'item';
@@ -52,6 +49,4 @@ export class WizardComponent implements OnInit {
 
   changeTapMode = (button, value) =>  this.tapMode = value;
 
-  ngOnInit() {}
-  
 }

@@ -1,19 +1,15 @@
-import {Component, OnInit} from '@angular/core'
+declare var Ext: any;
+import { Component } from '@angular/core'
 import colors from '../colors';
 
-declare var Ext: any;
 
 @Component({
   selector: 'fitlayout-component',
   templateUrl: "./FitLayout.html",
   styles: [``]
 })
-export class FitLayoutComponent implements OnInit  {
-
-  constructor() { }
+export class FitLayoutComponent {
 
   colors:object = colors;
-
-  ngOnInit() {}
 
 }
