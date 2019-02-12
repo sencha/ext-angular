@@ -1,12 +1,4 @@
-<panel  
-    shadow="true"
-    plugins="responsive" 
-    [layout]="'vbox'"
-    [responsiveConfig]="{
-        'width > 600': {layout: 'hbox'}
-    }"
-    [fitToParent]="true"
->
+<container padding="10" layout="fit" [fitToParent]="true">
     <tree 
         [store]="store"
         [selection]="selection"
@@ -30,7 +22,7 @@
         [tooltip]="{ renderer: onTooltip }"
         (selectionChange)="onSelectionChange($event)"
     ></d3-sunburst>
-</panel>
+</container>
 
 <!--Need to add this config 
     responsiveConfig={{

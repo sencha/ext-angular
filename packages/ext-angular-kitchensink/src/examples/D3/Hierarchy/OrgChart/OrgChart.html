@@ -1,4 +1,4 @@
-<panel  shadow="true" layout="fit" title="Organization Chart" [fitToParent]="true">
+<container padding="10" layout="fit" [fitToParent]="true">
   <d3-horizontal-tree 
     [interactions]="interactionsVar"
     [tooltip]="{renderer: this.onTooltip}"
@@ -6,4 +6,4 @@
     imagePath="resources/images/org-chart/"
     [store]="this.store"
   ></d3-horizontal-tree>
-</panel>
+</container>

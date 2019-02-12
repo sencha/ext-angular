@@ -1,18 +1,18 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+declare var Ext: any;
+import { Component } from '@angular/core';
 import { generateData, randomDate } from '../generateSaleData';
 import { model } from '../SaleModel';
-
-declare var Ext: any;
 
 @Component({
   selector: 'Collapsible-component',
   templateUrl: './Collapsible.html',
   styles: [``]
 })
-export class CollapsibleComponent implements OnInit {
+export class CollapsibleComponent {
+
+  isPhone = Ext.os.is.Phone;
 
   constructor() {
-
     this.loadData();
    }
 
@@ -36,13 +36,7 @@ export class CollapsibleComponent implements OnInit {
 
   pivotgrid:any;
   onReady = function(event) {
-    console.log("pivotgrid is ready!");
     this.pivotgrid = event.ext;
-  }
-
-
-
-  ngOnInit() {
   }
 
   pivotgridMatrix = {
@@ -86,13 +80,9 @@ export class CollapsibleComponent implements OnInit {
     ]
   };
 
-   isPhone = Ext.os.is.Phone;
-
    onCollapsibleChange = (item) => {
-     console.log("In onCollapsibleChange");
     var collapsibleColumns = false
     var collapsibleRows = false
-    //debugger;
     switch(item._text) {
       case 'None':
         collapsibleColumns = false
@@ -117,17 +107,9 @@ export class CollapsibleComponent implements OnInit {
 
     this.collapsibleColumns = collapsibleColumns;
     this.collapsibleRows = collapsibleRows;
-
     this.pivotgridMatrix.collapsibleColumns = this.collapsibleColumns ;
     this.pivotgridMatrix.collapsibleRows = this.collapsibleRows ;
-
     this.pivotgrid.setMatrix(this.pivotgridMatrix);
-    
-    console.log("this.collapsibleColumns : " + this.collapsibleColumns);
-    console.log("this.collapsibleRows : " + this.collapsibleRows);
-
   }
-
-
 
 }

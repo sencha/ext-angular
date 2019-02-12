@@ -1,9 +1,7 @@
 <container padding="10" layout="fit" [fitToParent]="true">
   <tree
-    [left]="10" [top]="10" [width]="300" [height]="400"
-    title="Tree Grid"
+    [shadow]="true" [top]="top" [left]="left" [width]="width" [height]="height"
     [store]="this.store"
-    shadow="true"
     (ready)="treeReady($event)"
     [columns]="[
       {
