@@ -1,14 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {refreshData, refreshSize} from './createData'
-
 declare var Ext: any;
+import { Component } from '@angular/core';
+import {refreshData, refreshSize} from './createData'
 
 @Component({
   selector: 'SalesPerEmployee-component',
   templateUrl: './SalesPerEmployee.html',
   styles: [``]
 })
-export class SalesPerEmployeeComponent implements OnInit {
+export class SalesPerEmployeeComponent {
 
   constructor() {
       this.refreshData();
@@ -36,9 +35,6 @@ theme:string= 'default'
 changeTheme = (select, choice) => {
     this.theme = choice.get('value');
 }
-
-  ngOnInit() {
-  }
 
    isPhone = Ext.os.is.Phone;
 

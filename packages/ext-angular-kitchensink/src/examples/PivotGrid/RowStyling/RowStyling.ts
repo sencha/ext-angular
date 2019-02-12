@@ -1,23 +1,15 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+declare var Ext: any;
+import { Component } from '@angular/core';
 import { generateData, randomDate } from '../generateSaleData';
 import { model } from '../SaleModel';
-
-declare var Ext: any;
 
 @Component({
   selector: 'RowStyling-component',
   templateUrl: './RowStyling.html',
   styles: [``]
 })
-export class RowStylingComponent implements OnInit {
+export class RowStylingComponent  {
 
-  constructor() { }
-
-
-
-  ngOnInit() {
-  }
-
-   isPhone = Ext.os.is.Phone;
+  isPhone = Ext.os.is.Phone;
 
 }

@@ -1,26 +1,29 @@
 <container  layout="fit" padding="10" [fitToParent]="true">
-    <pivotgrid 
-        shadow="true"
-        (ready)="onPivotGridRead($event)"
-        [plugins]="[{ type: 'pivotdrilldown' }]"
-        [matrix]="pivotgridMatrix"
-    ></pivotgrid>
-    <toolbar 
-        shadow="false"
-        docked="top"
-        ui="app-transparent-toolbar"
-        padding="5 8"
-        [defaults]="{
-            margin: '0 10 0 0',
-            shadow: true,
-            ui: 'action'
-        }"
-    >
 
-        <button  text="Expand All" [handler]="this.expandAll" ></button>
-        <button  text="Collapse All" [handler]="this.collapseAll"> </button>
-        <container layout="hbox">
-            <div style="font-size: '12px'; font-weight: 'normal'; margin-left: '10px;'">Double click an amount to drill down.</div>
-        </container>
-    </toolbar>
+  <toolbar 
+    shadow="false"
+    docked="top"
+    ui="app-transparent-toolbar"
+    padding="5 8"
+    [defaults]="{
+      margin: '0 10 0 0',
+      shadow: true,
+      ui: 'action'
+    }">
+    <button  text="Expand All" [handler]="this.expandAll" ></button>
+    <button  text="Collapse All" [handler]="this.collapseAll"> </button>
+    <container  layout="hbox">
+      <span #extitem>
+        <div style="font-size: '12px'; font-weight: 'normal'; margin-left: '10px;'">Double click an amount to drill down.</div>
+      </span>
+    </container>
+  </toolbar>
+
+  <pivotgrid 
+    shadow="true"
+    (ready)="onPivotGridRead($event)"
+    [plugins]="[{ type: 'pivotdrilldown' }]"
+    [matrix]="pivotgridMatrix">
+  </pivotgrid>
+
 </container>
