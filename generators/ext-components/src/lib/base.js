@@ -1,5 +1,10 @@
 class ExtBase extends HTMLElement {
 
+  constructor() {
+    super()
+    this._prevProps = {}
+  }
+
   static get observedAttributes() {
     var attrs = []
     for (var property in this.PROPERTIESOBJECT) {
@@ -15,24 +20,21 @@ class ExtBase extends HTMLElement {
     return attrs
   }
 
-  constructor() {
-    super()
-    this._prevProps = {}
-  }
-
   attributeChangedCallback(attr, oldVal, newVal) {
-    console.log('attributeChangedCallback (attr,oldVal,newVal)',attr,oldVal,newVal)
     if (/^on/.test(attr)) {
       if (newVal) {
         this[attr] = newVal;
-        this.addEventListener(attr.slice(2), function() {evaconsole.log(this[attr])});
+        this.addEventListener(attr.slice(2), function() {eval(this[attr])});
       } else {
         delete this[attr];
         this.removeEventListener(attr.slice(2), this);
       }
     } else {
+      // if(attr == 'config' && newVal != null && this._config == undefined) {
+      // 	this._config = newVal
+      // }
       if (this.ext === undefined) {
-        console.log('this.ext is undefined')
+        this.connectedCallback()
       }
       else {
         var method = 'set' + attr[0].toUpperCase() + attr.substring(1)
@@ -41,47 +43,110 @@ class ExtBase extends HTMLElement {
     }
   }
 
+  setEvent(eventparameters,o,me) {
+    o.listeners[eventparameters.name] = function() {
+      let eventname = eventparameters.name
+      let parameters = eventparameters.parameters;
+      let parms = parameters.split(',');
+      let args = Array.prototype.slice.call(arguments);
+      let event = {};
+      for (let i = 0, j = parms.length; i < j; i++ ) {
+        event[parms[i]] = args[i];
+      }
+      me.dispatchEvent(new CustomEvent(eventname,{detail: event}))
+    }
+  }
+
   connectedCallback() {
-    var nodeName = this.nodeName
+    //console.dir(this)
+    //var nodeName = this.nodeName
     var nodeParentName = this.parentNode.nodeName
-    console.dir(nodeName + ' ,parent: ' + nodeParentName)
+    //console.dir(nodeName + ' ,parent: ' + nodeParentName)
     var parentCmp = this.parentNode['ext']
     var childCmp;
     var me = this
     var props = {}
-    for (var property in me.PROPERTIESOBJECT) {
-      if (me.PROPERTIESOBJECT.hasOwnProperty(property)) {
-        if(me.getAttribute(property) !== null) {
-          props[property] =  me[property]
-        }
-      }
-    }
-    var o = props
-    o.xtype = me.XTYPE
-    if (nodeParentName == 'BODY') {
-      Ext.application({
-        name: 'MyExtWCApp',
-        launch: function () {
-          console.log('\nXTYPE: ' + o.xtype)
-          console.log('parent: ' + nodeParentName)
-          me.ext = Ext.create(o)
-          if (nodeParentName == 'BODY') {
-            Ext.Viewport.add([me.ext])
+    props.xtype = me.XTYPE
+    setTimeout(function(){ 
+      for (var property in me.PROPERTIESOBJECT) {
+        if (me.PROPERTIESOBJECT.hasOwnProperty(property)) {
+          if(me.getAttribute(property) !== null) {
+            try {
+              props[property] = JSON.parse(me[property])
+            }
+            catch(e) {
+              props[property] =  me[property]
+            }
           }
         }
-      });
-    }
-    else{
-      Ext.onReady(function(){
-        console.log('\nXTYPE: ' + o.xtype)
-        console.log('parent: ' + nodeParentName)
-        me.ext = Ext.create(o)
-        parentCmp = me.parentNode['ext'];
-        childCmp = me.ext;
-        console.log(`parentCmp: ${parentCmp.xtype} childCmp: ${childCmp.xtype}`)
-        me.addTheChild(parentCmp, childCmp)
-      });
-    }
+      }
+  
+      props.listeners = {}
+      me.EVENTS.forEach(function (eventparameter, index, array) {
+        me.setEvent(eventparameter,props,me)
+      })
+      if (nodeParentName == 'APP-ROOT') {
+        Ext.onReady(function(){
+          props.renderTo = me.parentNode
+          me.ext = Ext.create(props)
+          me.dispatchEvent(new CustomEvent('ready',{detail:{cmp: me.ext}}))
+        });
+        return
+      }
+  
+      if (nodeParentName == 'BODY') {
+        Ext.application({
+          name: 'MyExtWCApp',
+          launch: function () {
+            //console.log('\nXTYPE: ' + props.xtype)
+            //console.log('parent: ' + nodeParentName)
+            me.ext = Ext.create(props)
+            console.log(`launch: Ext.create(${props.xtype})`)
+            me.dispatchEvent(new CustomEvent('ready',{detail:{cmp: me.ext}}))
+            if (nodeParentName == 'BODY') {
+              console.log(`Ext.Viewport.add(${me.ext.xtype})`)
+              Ext.Viewport.add([me.ext])
+            }
+          }
+        });
+      }
+      else {
+        Ext.onReady(function(){
+          //console.log('\nXTYPE: ' + props.xtype)
+          //console.log('parent: ' + nodeParentName)
+          me.ext = Ext.create(props)
+          console.log(`Ext.create(${props.xtype})`)
+          me.dispatchEvent(new CustomEvent('ready',{detail:{cmp: me.ext}}))
+          parentCmp = me.parentNode['ext'];
+          childCmp = me.ext;
+          //console.log(`parentCmp: ${parentCmp.xtype} childCmp: ${childCmp.xtype}`)
+          me.addTheChild(parentCmp, childCmp)
+
+
+          setTimeout(function() { 
+            var i = 0
+            var removeItems = []
+            for (let item of me.children) {
+              //if (item.nodeName.substring(0, 3) != "EXT" && item.nodeName != "#text") {
+              if (item.nodeName.substring(0, 3) != "EXT") {
+                var cln = item.cloneNode(true);
+                var el = Ext.get(cln);
+                me.ext.insert(i,{xtype:'widget', element:el});
+                console.log(`${me.ext.xtype}.insert(${i},widget,${cln.nodeName}) ${cln.outerHTML}`)
+                removeItems.push(item)
+              }
+              else {
+              }
+              i++;
+            }
+            for (let item of removeItems) {
+              item.remove(); 
+              console.log(`${item.nodeName}.remove() ${item.outerHTML}`)
+            }
+          }, 50);
+        });
+      }
+    }, 50);
   }
 
   addTheChild(parentCmp, childCmp) {
@@ -97,6 +162,7 @@ class ExtBase extends HTMLElement {
     if (parentxtype === 'grid' || parentxtype === 'lockedgrid') {
       if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn' || childxtype === 'booleancolumn' ) {
         parentCmp.addColumn(childCmp)
+        console.log(`${parentCmp.xtype}.addColumn(${childCmp.xtype})`)
         return
       }
       else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
@@ -148,30 +214,16 @@ class ExtBase extends HTMLElement {
         return
       } else {
         parentCmp.add(childCmp)
-        //console.log('**')
+        console.log(`${parentCmp.xtype}.add(${childCmp.xtype})`)
         return
       }
     } 
       if (parentCmp.add != undefined) {
       parentCmp.add(childCmp)
-      //console.log('**')
+      console.log(`${parentCmp.xtype}.add(${childCmp.xtype})`)
       return
     }
     console.log('child not added')
-  }
-
-  setEvent(eventparameters,o,me) {
-    o.listeners[eventparameters.name] = function() {
-      let eventname = eventparameters.name
-      let parameters = eventparameters.parameters;
-      let parms = parameters.split(',');
-      let args = Array.prototype.slice.call(arguments);
-      let event = {};
-      for (let i = 0, j = parms.length; i < j; i++ ) {
-          event[parms[i]] = args[i];
-      }
-      me.dispatchEvent(new CustomEvent(eventname,{detail: event}))
-    }
   }
 
   disconnectedCallback() {
@@ -179,4 +231,3 @@ class ExtBase extends HTMLElement {
     console.log('ExtBase disconnectedCallback')
   }
 }
-
