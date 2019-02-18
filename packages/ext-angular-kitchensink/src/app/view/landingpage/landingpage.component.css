@@ -137,3 +137,8 @@ ul {
 .breadcrumb li {
   float:left;
 }
+
+
+#hide-overflow div {
+  overflow-y: hidden !important;
+}
