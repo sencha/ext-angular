@@ -1,5 +1,5 @@
 //node all.js angular modern
-//node all.js webcomponents modern
+//node all.js components modern
 
 var path = require('path')
 require('./XTemplate')
@@ -38,10 +38,10 @@ else {
   log(`exists`,`${generatedFolders}`)
 }
 
-//var extAngularModernFolder = 'ext-' + framework + '-' + toolkit; log(`extAngularModernFolder`,`${extAngularModernFolder}`)
-var extAngularModernFolder = 'ext-' + framework; log(`extAngularModernFolder`,`${extAngularModernFolder}`)
+//var baseFolder = 'ext-' + framework + '-' + toolkit; log(`baseFolder`,`${baseFolder}`)
+var baseFolder = 'ext-' + framework; log(`baseFolder`,`${baseFolder}`)
 
-var toolkitFolder = generatedFolders + extAngularModernFolder;         log(`toolkitFolder`,`${toolkitFolder}`)
+var toolkitFolder = generatedFolders + baseFolder;         log(`toolkitFolder`,`${toolkitFolder}`)
 var srcFolder = toolkitFolder + '/src/';             log(`srcFolder`,`${srcFolder}`)
 var libFolder = srcFolder + 'lib/';                  log(`libFolder`,`${libFolder}`)
 
@@ -55,11 +55,11 @@ log(`dataFile`,`${dataFile}`)
 var data = require(dataFile)
 
 //*************
-launch(framework, data, srcFolder, libFolder, templateToolkitFolder, moduleVars, extAngularModernFolder)
+launch(framework, data, srcFolder, libFolder, templateToolkitFolder, moduleVars, baseFolder)
 
 var val = 'copy';var str = new Array((19 - val.length) + 1).join( ' ' );
 //toFolder = path.resolve(`./../../generators/ext-${framework}-${toolkit}/src`)
-toFolder = path.resolve(`./../../generators/${extAngularModernFolder}/src`)
+toFolder = path.resolve(`./../../generators/${baseFolder}/src`)
 
 log(`toFolder`,`${toFolder}`)
 rimraf.sync(toFolder);log(`deleted`,`${toFolder}`)
@@ -72,14 +72,14 @@ ncp(srcFolder, toFolder, function (err) {
  })
 
 //*************
-function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, moduleVars, extAngularModernFolder) {
+function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, moduleVars, baseFolder) {
 
   var extension
   switch(framework) {
     case 'angular':
       extension = 'ts'
       break;
-    case 'webcomponents':
+    case 'components':
       extension = 'js'
       break;
     default:
@@ -189,7 +189,7 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
 
   var exportall = ''
   //exportall = exportall + `export * from './lib/ext-${framework}-${toolkit}.module';${newLine}`
-  exportall = exportall + `export * from './lib/${extAngularModernFolder}.module';${newLine}`
+  exportall = exportall + `export * from './lib/${baseFolder}.module';${newLine}`
 
   switch(framework) {
     case 'angular':
@@ -202,12 +202,12 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
       var baseFile = `${libFolder}base.${extension}`
       fs.writeFile(baseFile, doExtBase(templateToolkitFolder), function(err) {if(err){return console.log(err);} })
       log(`baseFile`,`${baseFile}`)
-      var moduleFile = `${libFolder}${extAngularModernFolder}.module.ts`
+      var moduleFile = `${libFolder}${baseFolder}.module.ts`
       //var moduleFile = `${libFolder}ext-${framework}-${toolkit}.module.ts`
       fs.writeFile(moduleFile, doModule(moduleVars), function(err) {if(err) { return console.log(err); } });
       log(`moduleFile`,`${moduleFile}`)
     break
-    case 'webcomponents':
+    case 'components':
       fs.writeFile(`${libFolder}base.${extension}`, doExtBase(templateToolkitFolder), function(err) {if(err){return console.log(err);} })
       break
     default:
@@ -315,7 +315,7 @@ function oneItem(o, libFolder, framework, extension, num, xtype, alias, moduleVa
     case 'angular':
       fs.writeFile(`${classFile}`, doClass(o.xtype, sGETSET, sMETHODS, sPROPERTIES, sPROPERTIESOBJECT, sEVENTS, sEVENTNAMES, o.name, classname, capclassname, templateToolkitFolder), function(err) {if(err) { return console.log(err); }});
       break;
-    case 'webcomponents':
+    case 'components':
       fs.writeFile(`${classFile}`, doClass(o.xtype, sGETSET, sMETHODS, sPROPERTIES, sPROPERTIESOBJECT, sEVENTS, sEVENTNAMES, o.name, classname, capclassname, templateToolkitFolder), function(err) {if(err) { return console.log(err); }});
       break;
     default:
@@ -329,12 +329,12 @@ function oneItem(o, libFolder, framework, extension, num, xtype, alias, moduleVa
   //exportall = exportall + `export * from './lib/ext-${classname}.component';${newLine}`
 }
 
-// function doRootfile(fileName, toolkit, extAngularModernFolder) {
+// function doRootfile(fileName, toolkit, baseFolder) {
 //   var p = path.resolve(__dirname, 'filetemplates/generatedFolders/' + fileName + '.tpl')
 //   var content = fs.readFileSync(p).toString()
 //   var values = {
 //     toolkit: toolkit,
-//     extAngularModernFolder: extAngularModernFolder,
+//     baseFolder: baseFolder,
 //   }
 //   var tpl = new Ext.XTemplate(content)
 //   var t = tpl.apply(values)
@@ -465,11 +465,11 @@ export class ExtClassComponent {
 
 function processArgs(framework, toolkit) {
   if(framework == undefined) {
-    log(``,`framework: ${framework} is incorrect.  should be webcomponents or angular`)
+    log(``,`framework: ${framework} is incorrect.  should be components or angular`)
     return -1
   }
-  if ((framework != 'webcomponents') && (framework != 'angular')) {
-    log(``,`framework: ${framework} is incorrect.  should be webcomponents or angular`)
+  if ((framework != 'components') && (framework != 'angular')) {
+    log(``,`framework: ${framework} is incorrect.  should be components or angular`)
     return -1
   }
   if(toolkit == undefined) {

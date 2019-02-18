@@ -97,8 +97,8 @@ renderNumberCell(format, value) {
     color = "red";
   }
     return `
-        <span  [style]="{ color: ${color}}">
-            ${formattedValue}
+        <span style="color:${color}">
+        ${formattedValue}
         </span>
     `
   }

@@ -1,6 +1,7 @@
 async function main() {
   var path = require('path')
-  var framework = 'angular'
+  //var framework = 'angular'
+  var framework = 'components'
   var environment = 'dev'
   var components = ['container','button']
   var toolkit  = 'modern'
@@ -9,24 +10,24 @@ async function main() {
   var templateToolkitFolder     = path.resolve(templateBaseFolder + framework); log(`templateToolkitFolder`,`${templateToolkitFolder}`)
   var dataFolder                = './AllClassesFiles/';                         log(`dataFolder`,`${dataFolder}`)
   var forPackageFolder          = './forPackage'
-  //var extAngularModernFolder    = 'ext-' + framework + '-' + toolkit;  log(`extAngularModernFolder`,`${extAngularModernFolder}`)
-  var extAngularModernFolder    = 'ext-' + framework;  log(`extAngularModernFolder`,`${extAngularModernFolder}`)
-  var generatedToolkitFolder    = generatedFolders + extAngularModernFolder;                                 log(`generatedToolkitFolder`,`${generatedToolkitFolder}`)
+  //var baseFolder    = 'ext-' + framework + '-' + toolkit;  log(`baseFolder`,`${baseFolder}`)
+  var baseFolder    = 'ext-' + framework;  log(`baseFolder`,`${baseFolder}`)
+  var generatedToolkitFolder    = generatedFolders + baseFolder;                                 log(`generatedToolkitFolder`,`${generatedToolkitFolder}`)
   var generatedToolkitSrcFolder = generatedToolkitFolder + '/src/';                                 log(`generatedToolkitSrcFolder`,`${generatedToolkitSrcFolder}`)
   var libFolder                 = generatedToolkitSrcFolder + 'lib/';                                      log(`libFolder`,`${libFolder}`)
 
   await run(`node ./all.js ${framework} ${toolkit} ${environment} ${components}`)
-
-  await run(`cp -R ${forPackageFolder}/${toolkit}/. ../${extAngularModernFolder}/`)
-  await run(`cp -R ${generatedToolkitSrcFolder}/. ../${extAngularModernFolder}/src/${extAngularModernFolder}`)
-  await run(`npm install`, `../${extAngularModernFolder}/`)
-  await run(`npm run build`, `../${extAngularModernFolder}/`)
-  await run(`cp -R ${forPackageFolder}/${toolkit}bin/. ../${extAngularModernFolder}/dist/${extAngularModernFolder}`)
-  await run(`cp -R ${generatedToolkitSrcFolder}/. ../${extAngularModernFolder}/dist/${extAngularModernFolder}/src`)
-  await run (`rm -R ../../packages/${extAngularModernFolder}/.`)
-  await run(`cp -R ../${extAngularModernFolder}/dist/${extAngularModernFolder}/. ../../packages/${extAngularModernFolder}/.`)
+return
+  await run(`cp -R ${forPackageFolder}/${toolkit}/. ../${baseFolder}/`)
+  await run(`cp -R ${generatedToolkitSrcFolder}/. ../${baseFolder}/src/${baseFolder}`)
+  await run(`npm install`, `../${baseFolder}/`)
+  await run(`npm run build`, `../${baseFolder}/`)
+  await run(`cp -R ${forPackageFolder}/${toolkit}bin/. ../${baseFolder}/dist/${baseFolder}`)
+  await run(`cp -R ${generatedToolkitSrcFolder}/. ../${baseFolder}/dist/${baseFolder}/src`)
+  await run (`rm -R ../../packages/${baseFolder}/.`)
+  await run(`cp -R ../${baseFolder}/dist/${baseFolder}/. ../../packages/${baseFolder}/.`)
   //copy src file (todo)
-  //await run (`ls -l`, `../../packages/${extAngularModernFolder}/lib`)
+  //await run (`ls -l`, `../../packages/${baseFolder}/lib`)
 }
 
 function log(a,b) {console.log(a + ' ' + b)}
