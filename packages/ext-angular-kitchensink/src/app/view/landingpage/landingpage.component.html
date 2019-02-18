@@ -28,7 +28,7 @@
 
   <!-- Breadcrumb starts-->
   <toolbar docked="top" [weight]="10" *ngIf="!isPhone">
-    <dataview [itemTpl]="tplToolbar" [inline]="'true'" [itemCls]="'div.app-toolbar'"
+    <dataview [itemTpl]="tplToolbar" [inline]="'true'" [itemCls]="'div.app-toolbar'" id="hide-overflow"
       (childtap)="doClickToolbar($event)" (ready)="dataviewToolbarReady($event)">
     </dataview>
   </toolbar>
