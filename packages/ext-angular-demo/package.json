@@ -25,7 +25,7 @@
     "@sencha/ext-modern-theme-material": "~6.7.0",
     "@sencha/ext-angular-webpack-plugin": "~6.7.0",
     "@sencha/ext-ux": "~6.7.0",
-    "@angular/common": "^7.2.4",
+    "@angular/common": "^7.2.5",
     "@angular/compiler": "^7.2.1",
     "@angular/compiler-cli": "^7.2.1",
     "@angular/core": "^7.2.1",

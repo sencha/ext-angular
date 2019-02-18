@@ -1,12 +1,14 @@
 <container padding="10px" layout="fit" [fitToParent]="true">
-    <actionsheet  [displayed]="showExportSheet">
-        <button  [handler]="this.exportToXlsx" text="Excel xlsx"></button>
-        <button  [handler]="this.exportToXml" text="Excel xml"></button>
-        <button  [handler]="this.exportToCSV" text="CSV"></button>
-        <button  [handler]="this.exportToTSV" text="TSV"></button>
-        <button  [handler]="this.exportToHtml" text="HTML"></button>
-        <button  [handler]="this.onCancelExport" text="Cancel"></button>
-    </actionsheet>
+
+  <actionsheet [displayed]="showExportSheet">
+    <button [handler]="this.exportToXlsx" text="Excel xlsx"></button>
+    <button [handler]="this.exportToXml" text="Excel xml"></button>
+    <button [handler]="this.exportToCSV" text="CSV"></button>
+    <button [handler]="this.exportToTSV" text="TSV"></button>
+    <button [handler]="this.exportToHtml" text="HTML"></button>
+    <button [handler]="this.onCancelExport" text="Cancel"></button>
+  </actionsheet>
+
   <grid 
     title="Big Data Grid"
     [store]="this.store"
@@ -30,12 +32,11 @@
       },
       body: {
         tpl: this.rowBodyTpl
-      }
+       }
     }"
     (onBeforeDocumentSave)="this.onBeforeDocumentSave($event)"
     (onDocumentSave)="this.onDocumentSave($event)"
-    (ready)="gridReady($event)"
-  >
+    (ready)="gridReady($event)">
     <!-- Title bar property as in react bit not seen-->
     <!-- [titleBar]="gridTitleBar" -->
     <textcolumn 
@@ -48,8 +49,8 @@
         alignment: {
           horizontal: 'Right'
         }
-      }"
-    ></textcolumn>
+      }">
+    </textcolumn>
 
     <textcolumn 
       text="Name"
@@ -57,43 +58,112 @@
       minWidth="150"
       [sorter]="{
         sorterFn:this.nameSorter
-      }"
-    ></textcolumn>
+      }">
+    </textcolumn>
 
     <checkcolumn 
-        text="Verified"
-        dataIndex="verified"
-        headerCheckbox="true"
-    ></checkcolumn>
+      text="Verified"
+      dataIndex="verified"
+      headerCheckbox="true">
+    </checkcolumn>
 
     <column text="Ratings" 
-      [columns]= "ratingsColumn"
-    ></column> 
+      [columns]= "ratingsColumn">
+    </column> 
 
     <datecolumn 
-        text="Date of Birth"
-        dataIndex="dob"
-        editable="true"
-        format='d-m-Y'
-        [exportStyle]="[{
-            format: 'Medium Date',
-            alignment: {
-                horizontal: 'Right'
-            }
-        }, {
-            type: 'csv',
-            format: 'Short Date'
-        }]"
-    ></datecolumn>
+      text="Date of Birth"
+      dataIndex="dob"
+      editable="true"
+      format='m-d-Y'
+      [exportStyle]="[{
+          format: 'Medium Date',
+          alignment: {
+              horizontal: 'Right'
+          }
+      }, {
+          type: 'csv',
+          format: 'Short Date'
+      }]">
+    </datecolumn>
 
     <column 
-        text=""
-        width="100"
-        ignoreExport="true"
-        align="center"
-        [cell]="verifyCell"
-        [summaryCell]="summaryCell"
-      >
+      text=""
+      width="100"
+      ignoreExport="true"
+      align="center"
+      [cell]="verifyCell"
+      [summaryCell]="summaryCell">
+    </column>
+
+    <datecolumn 
+      text="Join Date"
+      dataIndex="joinDate"
+      editable="true"
+      format="d-m-Y"
+      [exportStyle]="{
+          format: 'Medium Date',
+          alignment: {
+              horizontal: 'Right'
+          }
+      }">
+    </datecolumn>
+
+    <textcolumn 
+      text="Notice Period"
+      dataIndex='noticePeriod'
+      editable="true">
+    </textcolumn>
+
+    <textcolumn 
+      text="Email"
+      dataIndex="email"
+      width="250"
+      editable
+      [editor]="{
+          xtype:'emailfield'
+      }">
+    </textcolumn>
+
+    <column
+      text='Absences' 
+      [columns]="absensesColumn">
+    </column>
+
+    <column  
+      text="Rating<br></br>This Year" 
+      dataIndex="ratingThisYear"
+      groupable="false"
+      formatter='round(1)'
+      summary='average'
+      [cell]="ratingsCell"
+      [exportStyle]="{
+        alignment: {
+          horizontal: 'Right'
+        }
+      }">
+      </column>
+
+    <textcolumn 
+      text='Salary'
+      dataIndex='salary'
+      [renderer]="usMoneyRendered"
+      width='150'
+      editable
+      summary='sum'
+      [summaryRenderer]="this.salarySummaryRenderer"
+      [exportStyle]="{
+        format: 'Currency',
+        alignment: {
+          horizontal: 'Right'
+        }
+      }">
+    </textcolumn>
+
+  </grid>
+
+</container>
+
 <!--
     TODO: future release
     <cell >
@@ -107,70 +177,3 @@
       </widgetcell>
     </summaryCell>
 -->
-    </column>
-
-    <datecolumn 
-        text="Join Date"
-        dataIndex="joinDate"
-        editable="true"
-        format="d-m-Y"
-        [exportStyle]="{
-            format: 'Medium Date',
-            alignment: {
-                horizontal: 'Right'
-            }
-        }"
-    ></datecolumn>
-
-    <textcolumn 
-        text="Notice Period"
-        dataIndex='noticePeriod'
-        editable="true"
-    ></textcolumn>
-
-    <textcolumn 
-        text="Email"
-        dataIndex="email"
-        width="250"
-        editable
-        [editor]="{
-            xtype:'emailfield'
-        }"
-    ></textcolumn>
-
-    <column text='Absences' 
-    [columns]= "absensesColumn"
-    >
-    </column>
-
-    <column  
-        text="Rating<br></br>This Year" 
-        dataIndex="ratingThisYear"
-        groupable="false"
-        formatter='round(1)'
-        summary='average'
-        [cell]="ratingsCell"
-        [exportStyle]= "{
-          alignment: {
-              horizontal: 'Right'
-          }
-       }"
-    ></column>
-
-    <textcolumn 
-        text='Salary'
-        dataIndex='salary'
-        [renderer]="usMoneyRendered"
-        width='150'
-        editable
-        summary='sum'
-        [summaryRenderer]="this.salarySummaryRenderer"
-        [exportStyle]="{
-          format: 'Currency',
-          alignment: {
-              horizontal: 'Right'
-          }
-      }"
-    ></textcolumn>
-    </grid>
-</container>

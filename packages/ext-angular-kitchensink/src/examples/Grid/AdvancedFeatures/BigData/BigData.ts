@@ -1,13 +1,13 @@
 declare var Ext: any;
 import { Component } from '@angular/core';
-import {model} from './GridModel'
-import {BigDataService} from './BigData.service';
+import { model } from './GridModel';
+import { BigDataService } from './BigData.service';
 
 Ext.require([
-    'Ext.grid.plugin.*',
-    'Ext.tip.ToolTip',
-    'Ext.data.summary.Sum',
-    'Ext.exporter.*'
+  'Ext.grid.plugin.*',
+  'Ext.tip.ToolTip',
+  'Ext.data.summary.Sum',
+  'Ext.exporter.*'
 ]);
 
 @Component({
@@ -18,7 +18,6 @@ Ext.require([
 export class BigDataComponent {
 
   constructor(bigDataService : BigDataService) { }
-
 
   showExportSheet: boolean =  false;
 
@@ -33,29 +32,23 @@ export class BigDataComponent {
     }
   });
 
-
   grid:any;
-
   gridReady = (event) => {
     this.grid = event.ext;
   }
 
-  rowBodyTpl2 = data => `
+  rowBodyTpl=`
   <div>
-    <img src={data.avatar} height="100px" style="{float:'left', margin:'0 10px 5px 0'}"><img>
-    <p>{formatDate(data.dob)}</p>
+    <img src={avatar} height="100px" style="float:left;margin:0px 10px 5px 0px;"/>
+    <br><b>{fullName}</b>
+    <br>{dob:date}
   </div>
-`;
-
-  rowBodyTpl = data => `
-  `;
-
+  `
 
   nameSorter = (rec1, rec2) => {
     // Sort prioritizing surname over forename as would be expected.
     var rec1Name = rec1.get('surname') + rec1.get('forename'),
         rec2Name = rec2.get('surname') + rec2.get('forename');
-
     if (rec1Name > rec2Name) {
       return 1;
     }
@@ -102,18 +95,18 @@ export class BigDataComponent {
   }
 
   exportToTSV = () => {
-      this.doExport({
-        type: 'tsv',
-        title: 'Grid Export Demo',
-        fileName: 'GridExport.tsv'
+    this.doExport({
+      type: 'tsv',
+      title: 'Grid Export Demo',
+      fileName: 'GridExport.tsv'
     });
   }
 
   exportToHtml = () => {
-      this.doExport({
-        type: 'html',
-        title: 'Grid Export Demo',
-        fileName: 'GridExport.html'
+    this.doExport({
+      type: 'html',
+      title: 'Grid Export Demo',
+      fileName: 'GridExport.html'
     });
   }
 
@@ -142,13 +135,10 @@ export class BigDataComponent {
         if (answer === 'yes') {
             // Don't want to grid to update on each change:
             store.suspendEvent('update');
-
             (group || store).each(function (rec) {
               rec.set('verified', true);
             });
-
             store.resumeEvent('update');
-
             // Now update all the things
             grid.refresh();
         }
@@ -168,7 +158,6 @@ export class BigDataComponent {
   renderRating = (value, record) => {
     const age = record.get('averageRating');
     let group = "over6";
-
     if (age < 4) {
         group = "under4";
     } else if (age < 5) {
@@ -176,8 +165,7 @@ export class BigDataComponent {
     } else if (age < 6) {
         group = "under6";
     }
-
-    return `<div className=${group}>${value.toFixed(2)}</div>`
+    return `<div class=${group}>${value.toFixed(2)}</div>`
   }
 
   renderRatingThisYear = (value) => {
@@ -195,7 +183,7 @@ export class BigDataComponent {
   }
 
   renderVerify = (value, record) => {
-      return `
+    return `
     <Container>
       <Button
         text={value ? 'Verified' : 'Verify'}
@@ -206,7 +194,7 @@ export class BigDataComponent {
   }
 
   renderVerifyAll = (value, record, dataIndex, cell) => {
-      return `
+    return `
     <Container>
       <Button 
         ui="action"
@@ -225,16 +213,16 @@ export class BigDataComponent {
 
   onDocumentSave = view => view.unmask();
 
-
   ratingsColumn = [
     {
       text: 'Avg',
-      xtype: 'numbercolumn',
+      //xtype: 'numbercolumn',
       dataIndex: 'averageRating',
       renderer : this.renderRating,
       summary: 'average',
       width: 75,
       cell: {
+        encodeHtml:false,
         cls: 'big-data-ratings-cell'
       },
       exportStyle: {
