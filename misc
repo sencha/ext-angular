@@ -1,6 +1,8 @@
 @angular-devkit/build-webpack/src/webpack/index.js/runWebpack
 @angular-devkit/build-angular/src/dev-server/index.js
 
+https://medium.com/@jeroenouw/upgrade-to-angular-8-beta-within-10-minutes-cd831fb8dd0e
+
 git remote add upstream https://github.com/sencha/ext-angular.git
 
     <base href="/">
