@@ -118,6 +118,66 @@ class ExtInputfield extends ExtBase {
 	get xtype(){return this.getAttribute('xtype')};set xtype(xtype){this.setAttribute('xtype',xtype)}
 	get y(){return this.getAttribute('y')};set y(y){this.setAttribute('y',y)}
 	get zIndex(){return this.getAttribute('zIndex')};set zIndex(zIndex){this.setAttribute('zIndex',zIndex)}
+	get onadded(){return this.getAttribute('onadded')};set onadded(onadded){this.setAttribute('onadded',onadded)}
+	get onbeforebottomchange(){return this.getAttribute('onbeforebottomchange')};set onbeforebottomchange(onbeforebottomchange){this.setAttribute('onbeforebottomchange',onbeforebottomchange)}
+	get onbeforecenteredchange(){return this.getAttribute('onbeforecenteredchange')};set onbeforecenteredchange(onbeforecenteredchange){this.setAttribute('onbeforecenteredchange',onbeforecenteredchange)}
+	get onbeforedisabledchange(){return this.getAttribute('onbeforedisabledchange')};set onbeforedisabledchange(onbeforedisabledchange){this.setAttribute('onbeforedisabledchange',onbeforedisabledchange)}
+	get onbeforedockedchange(){return this.getAttribute('onbeforedockedchange')};set onbeforedockedchange(onbeforedockedchange){this.setAttribute('onbeforedockedchange',onbeforedockedchange)}
+	get onbeforeheightchange(){return this.getAttribute('onbeforeheightchange')};set onbeforeheightchange(onbeforeheightchange){this.setAttribute('onbeforeheightchange',onbeforeheightchange)}
+	get onbeforehiddenchange(){return this.getAttribute('onbeforehiddenchange')};set onbeforehiddenchange(onbeforehiddenchange){this.setAttribute('onbeforehiddenchange',onbeforehiddenchange)}
+	get onbeforehide(){return this.getAttribute('onbeforehide')};set onbeforehide(onbeforehide){this.setAttribute('onbeforehide',onbeforehide)}
+	get onbeforeleftchange(){return this.getAttribute('onbeforeleftchange')};set onbeforeleftchange(onbeforeleftchange){this.setAttribute('onbeforeleftchange',onbeforeleftchange)}
+	get onbeforemaxHeightchange(){return this.getAttribute('onbeforemaxHeightchange')};set onbeforemaxHeightchange(onbeforemaxHeightchange){this.setAttribute('onbeforemaxHeightchange',onbeforemaxHeightchange)}
+	get onbeforemaxWidthchange(){return this.getAttribute('onbeforemaxWidthchange')};set onbeforemaxWidthchange(onbeforemaxWidthchange){this.setAttribute('onbeforemaxWidthchange',onbeforemaxWidthchange)}
+	get onbeforeminHeightchange(){return this.getAttribute('onbeforeminHeightchange')};set onbeforeminHeightchange(onbeforeminHeightchange){this.setAttribute('onbeforeminHeightchange',onbeforeminHeightchange)}
+	get onbeforeminWidthchange(){return this.getAttribute('onbeforeminWidthchange')};set onbeforeminWidthchange(onbeforeminWidthchange){this.setAttribute('onbeforeminWidthchange',onbeforeminWidthchange)}
+	get onbeforeorientationchange(){return this.getAttribute('onbeforeorientationchange')};set onbeforeorientationchange(onbeforeorientationchange){this.setAttribute('onbeforeorientationchange',onbeforeorientationchange)}
+	get onbeforerightchange(){return this.getAttribute('onbeforerightchange')};set onbeforerightchange(onbeforerightchange){this.setAttribute('onbeforerightchange',onbeforerightchange)}
+	get onbeforescrollablechange(){return this.getAttribute('onbeforescrollablechange')};set onbeforescrollablechange(onbeforescrollablechange){this.setAttribute('onbeforescrollablechange',onbeforescrollablechange)}
+	get onbeforeshow(){return this.getAttribute('onbeforeshow')};set onbeforeshow(onbeforeshow){this.setAttribute('onbeforeshow',onbeforeshow)}
+	get onbeforetofront(){return this.getAttribute('onbeforetofront')};set onbeforetofront(onbeforetofront){this.setAttribute('onbeforetofront',onbeforetofront)}
+	get onbeforetopchange(){return this.getAttribute('onbeforetopchange')};set onbeforetopchange(onbeforetopchange){this.setAttribute('onbeforetopchange',onbeforetopchange)}
+	get onbeforewidthchange(){return this.getAttribute('onbeforewidthchange')};set onbeforewidthchange(onbeforewidthchange){this.setAttribute('onbeforewidthchange',onbeforewidthchange)}
+	get onblur(){return this.getAttribute('onblur')};set onblur(onblur){this.setAttribute('onblur',onblur)}
+	get onbottomchange(){return this.getAttribute('onbottomchange')};set onbottomchange(onbottomchange){this.setAttribute('onbottomchange',onbottomchange)}
+	get oncenteredchange(){return this.getAttribute('oncenteredchange')};set oncenteredchange(oncenteredchange){this.setAttribute('oncenteredchange',oncenteredchange)}
+	get onchange(){return this.getAttribute('onchange')};set onchange(onchange){this.setAttribute('onchange',onchange)}
+	get onclick(){return this.getAttribute('onclick')};set onclick(onclick){this.setAttribute('onclick',onclick)}
+	get ondestroy(){return this.getAttribute('ondestroy')};set ondestroy(ondestroy){this.setAttribute('ondestroy',ondestroy)}
+	get ondisabledchange(){return this.getAttribute('ondisabledchange')};set ondisabledchange(ondisabledchange){this.setAttribute('ondisabledchange',ondisabledchange)}
+	get ondockedchange(){return this.getAttribute('ondockedchange')};set ondockedchange(ondockedchange){this.setAttribute('ondockedchange',ondockedchange)}
+	get onerased(){return this.getAttribute('onerased')};set onerased(onerased){this.setAttribute('onerased',onerased)}
+	get onerrorchange(){return this.getAttribute('onerrorchange')};set onerrorchange(onerrorchange){this.setAttribute('onerrorchange',onerrorchange)}
+	get onfloatingchange(){return this.getAttribute('onfloatingchange')};set onfloatingchange(onfloatingchange){this.setAttribute('onfloatingchange',onfloatingchange)}
+	get onfocus(){return this.getAttribute('onfocus')};set onfocus(onfocus){this.setAttribute('onfocus',onfocus)}
+	get onfocusenter(){return this.getAttribute('onfocusenter')};set onfocusenter(onfocusenter){this.setAttribute('onfocusenter',onfocusenter)}
+	get onfocusleave(){return this.getAttribute('onfocusleave')};set onfocusleave(onfocusleave){this.setAttribute('onfocusleave',onfocusleave)}
+	get onfullscreen(){return this.getAttribute('onfullscreen')};set onfullscreen(onfullscreen){this.setAttribute('onfullscreen',onfullscreen)}
+	get onheightchange(){return this.getAttribute('onheightchange')};set onheightchange(onheightchange){this.setAttribute('onheightchange',onheightchange)}
+	get onhiddenchange(){return this.getAttribute('onhiddenchange')};set onhiddenchange(onhiddenchange){this.setAttribute('onhiddenchange',onhiddenchange)}
+	get onhide(){return this.getAttribute('onhide')};set onhide(onhide){this.setAttribute('onhide',onhide)}
+	get oninitialize(){return this.getAttribute('oninitialize')};set oninitialize(oninitialize){this.setAttribute('oninitialize',oninitialize)}
+	get onkeyup(){return this.getAttribute('onkeyup')};set onkeyup(onkeyup){this.setAttribute('onkeyup',onkeyup)}
+	get onleftchange(){return this.getAttribute('onleftchange')};set onleftchange(onleftchange){this.setAttribute('onleftchange',onleftchange)}
+	get onmaxHeightchange(){return this.getAttribute('onmaxHeightchange')};set onmaxHeightchange(onmaxHeightchange){this.setAttribute('onmaxHeightchange',onmaxHeightchange)}
+	get onmaxWidthchange(){return this.getAttribute('onmaxWidthchange')};set onmaxWidthchange(onmaxWidthchange){this.setAttribute('onmaxWidthchange',onmaxWidthchange)}
+	get onminHeightchange(){return this.getAttribute('onminHeightchange')};set onminHeightchange(onminHeightchange){this.setAttribute('onminHeightchange',onminHeightchange)}
+	get onminWidthchange(){return this.getAttribute('onminWidthchange')};set onminWidthchange(onminWidthchange){this.setAttribute('onminWidthchange',onminWidthchange)}
+	get onmousedown(){return this.getAttribute('onmousedown')};set onmousedown(onmousedown){this.setAttribute('onmousedown',onmousedown)}
+	get onmoved(){return this.getAttribute('onmoved')};set onmoved(onmoved){this.setAttribute('onmoved',onmoved)}
+	get onorientationchange(){return this.getAttribute('onorientationchange')};set onorientationchange(onorientationchange){this.setAttribute('onorientationchange',onorientationchange)}
+	get onpainted(){return this.getAttribute('onpainted')};set onpainted(onpainted){this.setAttribute('onpainted',onpainted)}
+	get onpaste(){return this.getAttribute('onpaste')};set onpaste(onpaste){this.setAttribute('onpaste',onpaste)}
+	get onpositionedchange(){return this.getAttribute('onpositionedchange')};set onpositionedchange(onpositionedchange){this.setAttribute('onpositionedchange',onpositionedchange)}
+	get onremoved(){return this.getAttribute('onremoved')};set onremoved(onremoved){this.setAttribute('onremoved',onremoved)}
+	get onresize(){return this.getAttribute('onresize')};set onresize(onresize){this.setAttribute('onresize',onresize)}
+	get onrightchange(){return this.getAttribute('onrightchange')};set onrightchange(onrightchange){this.setAttribute('onrightchange',onrightchange)}
+	get onscrollablechange(){return this.getAttribute('onscrollablechange')};set onscrollablechange(onscrollablechange){this.setAttribute('onscrollablechange',onscrollablechange)}
+	get onshow(){return this.getAttribute('onshow')};set onshow(onshow){this.setAttribute('onshow',onshow)}
+	get ontofront(){return this.getAttribute('ontofront')};set ontofront(ontofront){this.setAttribute('ontofront',ontofront)}
+	get ontopchange(){return this.getAttribute('ontopchange')};set ontopchange(ontopchange){this.setAttribute('ontopchange',ontopchange)}
+	get onupdatedata(){return this.getAttribute('onupdatedata')};set onupdatedata(onupdatedata){this.setAttribute('onupdatedata',onupdatedata)}
+	get onwidthchange(){return this.getAttribute('onwidthchange')};set onwidthchange(onwidthchange){this.setAttribute('onwidthchange',onwidthchange)}
 
 	static XTYPE() {return 'inputfield'}
   static PROPERTIESOBJECT() { return {

@@ -294,6 +294,10 @@ function oneItem(o, libFolder, framework, extension, num, xtype, alias, moduleVa
         event.name = s.substr(s.indexOf('#') + 1);
       }
       //if (event.name == 'tap') { event.name = 'tapit' };
+
+      var eventName = 'on' + event.name
+      sGETSET = sGETSET + tab + `get ${eventName}(){return this.getAttribute('${eventName}')};set ${eventName}(${eventName}){this.setAttribute('${eventName}',${eventName})}\n`
+
       sEVENTS = sEVENTS + tab + tab + "{name:'" + event.name + "',parameters:'";
       sEVENTNAMES = sEVENTNAMES + tab + tab + "'" + event.name + "'" + "," + newLine;
       if (event.items != undefined) {

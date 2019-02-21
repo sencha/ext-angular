@@ -68,6 +68,20 @@ class ExtPivotgridcell extends ExtBase {
 	get x(){return this.getAttribute('x')};set x(x){this.setAttribute('x',x)}
 	get y(){return this.getAttribute('y')};set y(y){this.setAttribute('y',y)}
 	get zeroValue(){return this.getAttribute('zeroValue')};set zeroValue(zeroValue){this.setAttribute('zeroValue',zeroValue)}
+	get onbeforedisabledchange(){return this.getAttribute('onbeforedisabledchange')};set onbeforedisabledchange(onbeforedisabledchange){this.setAttribute('onbeforedisabledchange',onbeforedisabledchange)}
+	get onbeforeheightchange(){return this.getAttribute('onbeforeheightchange')};set onbeforeheightchange(onbeforeheightchange){this.setAttribute('onbeforeheightchange',onbeforeheightchange)}
+	get onbeforehiddenchange(){return this.getAttribute('onbeforehiddenchange')};set onbeforehiddenchange(onbeforehiddenchange){this.setAttribute('onbeforehiddenchange',onbeforehiddenchange)}
+	get onbeforetofront(){return this.getAttribute('onbeforetofront')};set onbeforetofront(onbeforetofront){this.setAttribute('onbeforetofront',onbeforetofront)}
+	get onbeforewidthchange(){return this.getAttribute('onbeforewidthchange')};set onbeforewidthchange(onbeforewidthchange){this.setAttribute('onbeforewidthchange',onbeforewidthchange)}
+	get onblur(){return this.getAttribute('onblur')};set onblur(onblur){this.setAttribute('onblur',onblur)}
+	get ondisabledchange(){return this.getAttribute('ondisabledchange')};set ondisabledchange(ondisabledchange){this.setAttribute('ondisabledchange',ondisabledchange)}
+	get onfocus(){return this.getAttribute('onfocus')};set onfocus(onfocus){this.setAttribute('onfocus',onfocus)}
+	get onfocusenter(){return this.getAttribute('onfocusenter')};set onfocusenter(onfocusenter){this.setAttribute('onfocusenter',onfocusenter)}
+	get onfocusleave(){return this.getAttribute('onfocusleave')};set onfocusleave(onfocusleave){this.setAttribute('onfocusleave',onfocusleave)}
+	get onheightchange(){return this.getAttribute('onheightchange')};set onheightchange(onheightchange){this.setAttribute('onheightchange',onheightchange)}
+	get onhiddenchange(){return this.getAttribute('onhiddenchange')};set onhiddenchange(onhiddenchange){this.setAttribute('onhiddenchange',onhiddenchange)}
+	get ontofront(){return this.getAttribute('ontofront')};set ontofront(ontofront){this.setAttribute('ontofront',ontofront)}
+	get onwidthchange(){return this.getAttribute('onwidthchange')};set onwidthchange(onwidthchange){this.setAttribute('onwidthchange',onwidthchange)}
 
 	static XTYPE() {return 'pivotgridcell'}
   static PROPERTIESOBJECT() { return {
