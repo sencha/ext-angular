@@ -35,6 +35,8 @@ class ExtAxis3d extends ExtBase {
 	get titleMargin(){return this.getAttribute('titleMargin')};set titleMargin(titleMargin){this.setAttribute('titleMargin',titleMargin)}
 	get totalAngle(){return this.getAttribute('totalAngle')};set totalAngle(totalAngle){this.setAttribute('totalAngle',totalAngle)}
 	get visibleRange(){return this.getAttribute('visibleRange')};set visibleRange(visibleRange){this.setAttribute('visibleRange',visibleRange)}
+	get onrangechange(){return this.getAttribute('onrangechange')};set onrangechange(onrangechange){this.setAttribute('onrangechange',onrangechange)}
+	get onvisiblerangechange(){return this.getAttribute('onvisiblerangechange')};set onvisiblerangechange(onvisiblerangechange){this.setAttribute('onvisiblerangechange',onvisiblerangechange)}
 
 	static XTYPE() {return 'axis3d'}
   static PROPERTIESOBJECT() { return {

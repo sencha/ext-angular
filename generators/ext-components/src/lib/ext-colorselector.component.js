@@ -10,6 +10,9 @@ class ExtColorselector extends ExtBase {
 	get showOkCancelButtons(){return this.getAttribute('showOkCancelButtons')};set showOkCancelButtons(showOkCancelButtons){this.setAttribute('showOkCancelButtons',showOkCancelButtons)}
 	get showPreviousColor(){return this.getAttribute('showPreviousColor')};set showPreviousColor(showPreviousColor){this.setAttribute('showPreviousColor',showPreviousColor)}
 	get value(){return this.getAttribute('value')};set value(value){this.setAttribute('value',value)}
+	get oncancel(){return this.getAttribute('oncancel')};set oncancel(oncancel){this.setAttribute('oncancel',oncancel)}
+	get onchange(){return this.getAttribute('onchange')};set onchange(onchange){this.setAttribute('onchange',onchange)}
+	get onok(){return this.getAttribute('onok')};set onok(onok){this.setAttribute('onok',onok)}
 
 	static XTYPE() {return 'colorselector'}
   static PROPERTIESOBJECT() { return {

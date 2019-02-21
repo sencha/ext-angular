@@ -2,7 +2,7 @@ class ExtBase extends HTMLElement {
 
   constructor() {
     super()
-    this._prevProps = {}
+//    this._prevProps = {}
   }
 
   static get observedAttributes() {
@@ -23,11 +23,10 @@ class ExtBase extends HTMLElement {
   attributeChangedCallback(attr, oldVal, newVal) {
     if (/^on/.test(attr)) {
       if (newVal) {
-        this[attr] = newVal;
-        this.addEventListener(attr.slice(2), function() {eval(this[attr])});
+        this.addEventListener(attr.slice(2), function() {eval(newVal)});
       } else {
-        delete this[attr];
-        this.removeEventListener(attr.slice(2), this);
+        //delete this[attr];
+        //this.removeEventListener(attr.slice(2), this);
       }
     } else {
       // if(attr == 'config' && newVal != null && this._config == undefined) {
@@ -101,10 +100,10 @@ class ExtBase extends HTMLElement {
             //console.log('\nXTYPE: ' + props.xtype)
             //console.log('parent: ' + nodeParentName)
             me.ext = Ext.create(props)
-            console.log(`launch: Ext.create(${props.xtype})`)
+            //console.log(`launch: Ext.create(${props.xtype})`)
             me.dispatchEvent(new CustomEvent('ready',{detail:{cmp: me.ext}}))
             if (nodeParentName == 'BODY') {
-              console.log(`Ext.Viewport.add(${me.ext.xtype})`)
+              //console.log(`Ext.Viewport.add(${me.ext.xtype})`)
               Ext.Viewport.add([me.ext])
             }
           }
@@ -114,13 +113,20 @@ class ExtBase extends HTMLElement {
         Ext.onReady(function(){
           //console.log('\nXTYPE: ' + props.xtype)
           //console.log('parent: ' + nodeParentName)
+          if(nodeParentName.substring(0, 3) != 'EXT') {
+            props.renderTo = me.parentNode
+            //console.dir(me.parentNode)
+          }
+
           me.ext = Ext.create(props)
-          console.log(`Ext.create(${props.xtype})`)
+          //console.log(`Ext.create(${props.xtype})`)
           me.dispatchEvent(new CustomEvent('ready',{detail:{cmp: me.ext}}))
-          parentCmp = me.parentNode['ext'];
-          childCmp = me.ext;
-          //console.log(`parentCmp: ${parentCmp.xtype} childCmp: ${childCmp.xtype}`)
-          me.addTheChild(parentCmp, childCmp)
+
+          if (nodeParentName.substring(0, 3) == 'EXT') {
+            parentCmp = me.parentNode['ext'];
+            childCmp = me.ext;
+            me.addTheChild(parentCmp, childCmp)
+          }
 
 
           setTimeout(function() { 
@@ -132,7 +138,7 @@ class ExtBase extends HTMLElement {
                 var cln = item.cloneNode(true);
                 var el = Ext.get(cln);
                 me.ext.insert(i,{xtype:'widget', element:el});
-                console.log(`${me.ext.xtype}.insert(${i},widget,${cln.nodeName}) ${cln.outerHTML}`)
+                //console.log(`${me.ext.xtype}.insert(${i},widget,${cln.nodeName}) ${cln.outerHTML}`)
                 removeItems.push(item)
               }
               else {
@@ -141,7 +147,7 @@ class ExtBase extends HTMLElement {
             }
             for (let item of removeItems) {
               item.remove(); 
-              console.log(`${item.nodeName}.remove() ${item.outerHTML}`)
+              //console.log(`${item.nodeName}.remove() ${item.outerHTML}`)
             }
           }, 50);
         });
@@ -214,20 +220,20 @@ class ExtBase extends HTMLElement {
         return
       } else {
         parentCmp.add(childCmp)
-        console.log(`${parentCmp.xtype}.add(${childCmp.xtype})`)
+        //console.log(`${parentCmp.xtype}.add(${childCmp.xtype})`)
         return
       }
     } 
       if (parentCmp.add != undefined) {
       parentCmp.add(childCmp)
-      console.log(`${parentCmp.xtype}.add(${childCmp.xtype})`)
+      //console.log(`${parentCmp.xtype}.add(${childCmp.xtype})`)
       return
     }
     console.log('child not added')
   }
 
   disconnectedCallback() {
+    console.log('ExtBase disconnectedCallback ' + this.ext.xtype)
     delete this.ext
-    console.log('ExtBase disconnectedCallback')
   }
 }
