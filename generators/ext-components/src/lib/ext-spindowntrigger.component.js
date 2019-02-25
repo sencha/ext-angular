@@ -1,5 +1,6 @@
-(function () {
-class ExtSpindowntrigger extends ExtBase {
+import ExtBase from './base';
+
+export default class ExtSpindowntrigger extends ExtBase {
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
 	get ariaAttributes(){return this.getAttribute('ariaAttributes')};set ariaAttributes(ariaAttributes){this.setAttribute('ariaAttributes',ariaAttributes)}
 	get ariaDescribedBy(){return this.getAttribute('ariaDescribedBy')};set ariaDescribedBy(ariaDescribedBy){this.setAttribute('ariaDescribedBy',ariaDescribedBy)}
@@ -59,6 +60,11 @@ class ExtSpindowntrigger extends ExtBase {
 	get width(){return this.getAttribute('width')};set width(width){this.setAttribute('width',width)}
 	get x(){return this.getAttribute('x')};set x(x){this.setAttribute('x',x)}
 	get y(){return this.getAttribute('y')};set y(y){this.setAttribute('y',y)}
+	get platformConfig(){return this.getAttribute('platformConfig')};set platformConfig(platformConfig){this.setAttribute('platformConfig',platformConfig)}
+	get responsiveConfig(){return this.getAttribute('responsiveConfig')};set responsiveConfig(responsiveConfig){this.setAttribute('responsiveConfig',responsiveConfig)}
+	get align(){return this.getAttribute('align')};set align(align){this.setAttribute('align',align)}
+	get fitToParent(){return this.getAttribute('fitToParent')};set fitToParent(fitToParent){this.setAttribute('fitToParent',fitToParent)}
+	get config(){return this.getAttribute('config')};set config(config){this.setAttribute('config',config)}
 	get onbeforedisabledchange(){return this.getAttribute('onbeforedisabledchange')};set onbeforedisabledchange(onbeforedisabledchange){this.setAttribute('onbeforedisabledchange',onbeforedisabledchange)}
 	get onbeforeheightchange(){return this.getAttribute('onbeforeheightchange')};set onbeforeheightchange(onbeforeheightchange){this.setAttribute('onbeforeheightchange',onbeforeheightchange)}
 	get onbeforehiddenchange(){return this.getAttribute('onbeforehiddenchange')};set onbeforehiddenchange(onbeforehiddenchange){this.setAttribute('onbeforehiddenchange',onbeforehiddenchange)}
@@ -137,6 +143,7 @@ class ExtSpindowntrigger extends ExtBase {
     "y": "Number",
     "platformConfig": "Object",
     "responsiveConfig": "Object",
+    "align": "Obyect",
     "fitToParent": "Boolean",
     "config": "Object",
 
@@ -350,5 +357,6 @@ class ExtSpindowntrigger extends ExtBase {
     super.attributeChangedCallback(attrName, oldVal, newVal)
   }
 }
+(function () {
 window.customElements.define('ext-spindowntrigger', ExtSpindowntrigger);
 })();

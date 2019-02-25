@@ -1,5 +1,6 @@
-(function () {
-class ExtTimefield extends ExtBase {
+import ExtBase from './base';
+
+export default class ExtTimefield extends ExtBase {
 	get alignTarget(){return this.getAttribute('alignTarget')};set alignTarget(alignTarget){this.setAttribute('alignTarget',alignTarget)}
 	get altFormats(){return this.getAttribute('altFormats')};set altFormats(altFormats){this.setAttribute('altFormats',altFormats)}
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
@@ -146,6 +147,11 @@ class ExtTimefield extends ExtBase {
 	get xtype(){return this.getAttribute('xtype')};set xtype(xtype){this.setAttribute('xtype',xtype)}
 	get y(){return this.getAttribute('y')};set y(y){this.setAttribute('y',y)}
 	get zIndex(){return this.getAttribute('zIndex')};set zIndex(zIndex){this.setAttribute('zIndex',zIndex)}
+	get platformConfig(){return this.getAttribute('platformConfig')};set platformConfig(platformConfig){this.setAttribute('platformConfig',platformConfig)}
+	get responsiveConfig(){return this.getAttribute('responsiveConfig')};set responsiveConfig(responsiveConfig){this.setAttribute('responsiveConfig',responsiveConfig)}
+	get align(){return this.getAttribute('align')};set align(align){this.setAttribute('align',align)}
+	get fitToParent(){return this.getAttribute('fitToParent')};set fitToParent(fitToParent){this.setAttribute('fitToParent',fitToParent)}
+	get config(){return this.getAttribute('config')};set config(config){this.setAttribute('config',config)}
 	get onaction(){return this.getAttribute('onaction')};set onaction(onaction){this.setAttribute('onaction',onaction)}
 	get onadded(){return this.getAttribute('onadded')};set onadded(onadded){this.setAttribute('onadded',onadded)}
 	get onbeforebottomchange(){return this.getAttribute('onbeforebottomchange')};set onbeforebottomchange(onbeforebottomchange){this.setAttribute('onbeforebottomchange',onbeforebottomchange)}
@@ -361,6 +367,7 @@ class ExtTimefield extends ExtBase {
     "zIndex": "Number",
     "platformConfig": "Object",
     "responsiveConfig": "Object",
+    "align": "Obyect",
     "fitToParent": "Boolean",
     "config": "Object",
 
@@ -698,5 +705,6 @@ class ExtTimefield extends ExtBase {
     super.attributeChangedCallback(attrName, oldVal, newVal)
   }
 }
+(function () {
 window.customElements.define('ext-timefield', ExtTimefield);
 })();

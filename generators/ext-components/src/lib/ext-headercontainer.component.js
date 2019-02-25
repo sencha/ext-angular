@@ -1,5 +1,6 @@
-(function () {
-class ExtHeadercontainer extends ExtBase {
+import ExtBase from './base';
+
+export default class ExtHeadercontainer extends ExtBase {
 	get activeChildTabIndex(){return this.getAttribute('activeChildTabIndex')};set activeChildTabIndex(activeChildTabIndex){this.setAttribute('activeChildTabIndex',activeChildTabIndex)}
 	get activeItem(){return this.getAttribute('activeItem')};set activeItem(activeItem){this.setAttribute('activeItem',activeItem)}
 	get allowFocusingDisabledChildren(){return this.getAttribute('allowFocusingDisabledChildren')};set allowFocusingDisabledChildren(allowFocusingDisabledChildren){this.setAttribute('allowFocusingDisabledChildren',allowFocusingDisabledChildren)}
@@ -115,6 +116,11 @@ class ExtHeadercontainer extends ExtBase {
 	get xtype(){return this.getAttribute('xtype')};set xtype(xtype){this.setAttribute('xtype',xtype)}
 	get y(){return this.getAttribute('y')};set y(y){this.setAttribute('y',y)}
 	get zIndex(){return this.getAttribute('zIndex')};set zIndex(zIndex){this.setAttribute('zIndex',zIndex)}
+	get platformConfig(){return this.getAttribute('platformConfig')};set platformConfig(platformConfig){this.setAttribute('platformConfig',platformConfig)}
+	get responsiveConfig(){return this.getAttribute('responsiveConfig')};set responsiveConfig(responsiveConfig){this.setAttribute('responsiveConfig',responsiveConfig)}
+	get align(){return this.getAttribute('align')};set align(align){this.setAttribute('align',align)}
+	get fitToParent(){return this.getAttribute('fitToParent')};set fitToParent(fitToParent){this.setAttribute('fitToParent',fitToParent)}
+	get config(){return this.getAttribute('config')};set config(config){this.setAttribute('config',config)}
 	get onactivate(){return this.getAttribute('onactivate')};set onactivate(onactivate){this.setAttribute('onactivate',onactivate)}
 	get onactiveItemchange(){return this.getAttribute('onactiveItemchange')};set onactiveItemchange(onactiveItemchange){this.setAttribute('onactiveItemchange',onactiveItemchange)}
 	get onadd(){return this.getAttribute('onadd')};set onadd(onadd){this.setAttribute('onadd',onadd)}
@@ -297,6 +303,7 @@ class ExtHeadercontainer extends ExtBase {
     "zIndex": "Number",
     "platformConfig": "Object",
     "responsiveConfig": "Object",
+    "align": "Obyect",
     "fitToParent": "Boolean",
     "config": "Object",
 
@@ -660,5 +667,6 @@ class ExtHeadercontainer extends ExtBase {
     super.attributeChangedCallback(attrName, oldVal, newVal)
   }
 }
+(function () {
 window.customElements.define('ext-headercontainer', ExtHeadercontainer);
 })();

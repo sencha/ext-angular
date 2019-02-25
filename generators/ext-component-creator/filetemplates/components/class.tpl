@@ -1,5 +1,6 @@
-(function () {
-class Ext{capclassname} extends ExtBase {
+import ExtBase from './base';
+
+export default class Ext{capclassname} extends ExtBase {
 {sGETSET}
 	static XTYPE() {return '{classname}'}
   static PROPERTIESOBJECT() { return {
@@ -29,5 +30,6 @@ class Ext{capclassname} extends ExtBase {
     super.attributeChangedCallback(attrName, oldVal, newVal)
   }
 }
+(function () {
 window.customElements.define('ext-{classname}', Ext{capclassname});
 })();

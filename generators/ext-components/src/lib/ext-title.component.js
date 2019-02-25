@@ -1,5 +1,6 @@
-(function () {
-class ExtTitle extends ExtBase {
+import ExtBase from './base';
+
+export default class ExtTitle extends ExtBase {
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
 	get ariaAttributes(){return this.getAttribute('ariaAttributes')};set ariaAttributes(ariaAttributes){this.setAttribute('ariaAttributes',ariaAttributes)}
 	get ariaDescribedBy(){return this.getAttribute('ariaDescribedBy')};set ariaDescribedBy(ariaDescribedBy){this.setAttribute('ariaDescribedBy',ariaDescribedBy)}
@@ -90,6 +91,11 @@ class ExtTitle extends ExtBase {
 	get xtype(){return this.getAttribute('xtype')};set xtype(xtype){this.setAttribute('xtype',xtype)}
 	get y(){return this.getAttribute('y')};set y(y){this.setAttribute('y',y)}
 	get zIndex(){return this.getAttribute('zIndex')};set zIndex(zIndex){this.setAttribute('zIndex',zIndex)}
+	get platformConfig(){return this.getAttribute('platformConfig')};set platformConfig(platformConfig){this.setAttribute('platformConfig',platformConfig)}
+	get responsiveConfig(){return this.getAttribute('responsiveConfig')};set responsiveConfig(responsiveConfig){this.setAttribute('responsiveConfig',responsiveConfig)}
+	get align(){return this.getAttribute('align')};set align(align){this.setAttribute('align',align)}
+	get fitToParent(){return this.getAttribute('fitToParent')};set fitToParent(fitToParent){this.setAttribute('fitToParent',fitToParent)}
+	get config(){return this.getAttribute('config')};set config(config){this.setAttribute('config',config)}
 	get onadded(){return this.getAttribute('onadded')};set onadded(onadded){this.setAttribute('onadded',onadded)}
 	get onbeforebottomchange(){return this.getAttribute('onbeforebottomchange')};set onbeforebottomchange(onbeforebottomchange){this.setAttribute('onbeforebottomchange',onbeforebottomchange)}
 	get onbeforecenteredchange(){return this.getAttribute('onbeforecenteredchange')};set onbeforecenteredchange(onbeforecenteredchange){this.setAttribute('onbeforecenteredchange',onbeforecenteredchange)}
@@ -239,6 +245,7 @@ class ExtTitle extends ExtBase {
     "zIndex": "Number",
     "platformConfig": "Object",
     "responsiveConfig": "Object",
+    "align": "Obyect",
     "fitToParent": "Boolean",
     "config": "Object",
 
@@ -536,5 +543,6 @@ class ExtTitle extends ExtBase {
     super.attributeChangedCallback(attrName, oldVal, newVal)
   }
 }
+(function () {
 window.customElements.define('ext-title', ExtTitle);
 })();

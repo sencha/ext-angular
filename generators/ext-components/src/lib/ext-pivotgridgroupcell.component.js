@@ -1,5 +1,6 @@
-(function () {
-class ExtPivotgridgroupcell extends ExtBase {
+import ExtBase from './base';
+
+export default class ExtPivotgridgroupcell extends ExtBase {
 	get align(){return this.getAttribute('align')};set align(align){this.setAttribute('align',align)}
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
 	get ariaAttributes(){return this.getAttribute('ariaAttributes')};set ariaAttributes(ariaAttributes){this.setAttribute('ariaAttributes',ariaAttributes)}
@@ -68,6 +69,11 @@ class ExtPivotgridgroupcell extends ExtBase {
 	get x(){return this.getAttribute('x')};set x(x){this.setAttribute('x',x)}
 	get y(){return this.getAttribute('y')};set y(y){this.setAttribute('y',y)}
 	get zeroValue(){return this.getAttribute('zeroValue')};set zeroValue(zeroValue){this.setAttribute('zeroValue',zeroValue)}
+	get platformConfig(){return this.getAttribute('platformConfig')};set platformConfig(platformConfig){this.setAttribute('platformConfig',platformConfig)}
+	get responsiveConfig(){return this.getAttribute('responsiveConfig')};set responsiveConfig(responsiveConfig){this.setAttribute('responsiveConfig',responsiveConfig)}
+	get align(){return this.getAttribute('align')};set align(align){this.setAttribute('align',align)}
+	get fitToParent(){return this.getAttribute('fitToParent')};set fitToParent(fitToParent){this.setAttribute('fitToParent',fitToParent)}
+	get config(){return this.getAttribute('config')};set config(config){this.setAttribute('config',config)}
 	get onbeforedisabledchange(){return this.getAttribute('onbeforedisabledchange')};set onbeforedisabledchange(onbeforedisabledchange){this.setAttribute('onbeforedisabledchange',onbeforedisabledchange)}
 	get onbeforeheightchange(){return this.getAttribute('onbeforeheightchange')};set onbeforeheightchange(onbeforeheightchange){this.setAttribute('onbeforeheightchange',onbeforeheightchange)}
 	get onbeforehiddenchange(){return this.getAttribute('onbeforehiddenchange')};set onbeforehiddenchange(onbeforehiddenchange){this.setAttribute('onbeforehiddenchange',onbeforehiddenchange)}
@@ -155,6 +161,7 @@ class ExtPivotgridgroupcell extends ExtBase {
     "zeroValue": "String",
     "platformConfig": "Object",
     "responsiveConfig": "Object",
+    "align": "Obyect",
     "fitToParent": "Boolean",
     "config": "Object",
 
@@ -370,5 +377,6 @@ class ExtPivotgridgroupcell extends ExtBase {
     super.attributeChangedCallback(attrName, oldVal, newVal)
   }
 }
+(function () {
 window.customElements.define('ext-pivotgridgroupcell', ExtPivotgridgroupcell);
 })();

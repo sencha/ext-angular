@@ -6,7 +6,7 @@ export const cssClassName = (file) => {
 		return 'typescript'
 	}
 
-	return "js xml";
+	return "js";
 }
 
 export const getFiles = (node, allCode) => {

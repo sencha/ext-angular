@@ -1,5 +1,6 @@
-(function () {
-class ExtAxis3d extends ExtBase {
+import ExtBase from './base';
+
+export default class ExtAxis3d extends ExtBase {
 	get adjustByMajorUnit(){return this.getAttribute('adjustByMajorUnit')};set adjustByMajorUnit(adjustByMajorUnit){this.setAttribute('adjustByMajorUnit',adjustByMajorUnit)}
 	get background(){return this.getAttribute('background')};set background(background){this.setAttribute('background',background)}
 	get center(){return this.getAttribute('center')};set center(center){this.setAttribute('center',center)}
@@ -35,6 +36,11 @@ class ExtAxis3d extends ExtBase {
 	get titleMargin(){return this.getAttribute('titleMargin')};set titleMargin(titleMargin){this.setAttribute('titleMargin',titleMargin)}
 	get totalAngle(){return this.getAttribute('totalAngle')};set totalAngle(totalAngle){this.setAttribute('totalAngle',totalAngle)}
 	get visibleRange(){return this.getAttribute('visibleRange')};set visibleRange(visibleRange){this.setAttribute('visibleRange',visibleRange)}
+	get platformConfig(){return this.getAttribute('platformConfig')};set platformConfig(platformConfig){this.setAttribute('platformConfig',platformConfig)}
+	get responsiveConfig(){return this.getAttribute('responsiveConfig')};set responsiveConfig(responsiveConfig){this.setAttribute('responsiveConfig',responsiveConfig)}
+	get align(){return this.getAttribute('align')};set align(align){this.setAttribute('align',align)}
+	get fitToParent(){return this.getAttribute('fitToParent')};set fitToParent(fitToParent){this.setAttribute('fitToParent',fitToParent)}
+	get config(){return this.getAttribute('config')};set config(config){this.setAttribute('config',config)}
 	get onrangechange(){return this.getAttribute('onrangechange')};set onrangechange(onrangechange){this.setAttribute('onrangechange',onrangechange)}
 	get onvisiblerangechange(){return this.getAttribute('onvisiblerangechange')};set onvisiblerangechange(onvisiblerangechange){this.setAttribute('onvisiblerangechange',onvisiblerangechange)}
 
@@ -77,6 +83,7 @@ class ExtAxis3d extends ExtBase {
     "visibleRange": "Array",
     "platformConfig": "Object",
     "responsiveConfig": "Object",
+    "align": "Obyect",
     "fitToParent": "Boolean",
     "config": "Object",
 
@@ -119,5 +126,6 @@ class ExtAxis3d extends ExtBase {
     super.attributeChangedCallback(attrName, oldVal, newVal)
   }
 }
+(function () {
 window.customElements.define('ext-axis3d', ExtAxis3d);
 })();
