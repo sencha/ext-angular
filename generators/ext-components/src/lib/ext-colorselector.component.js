@@ -1,5 +1,6 @@
-(function () {
-class ExtColorselector extends ExtBase {
+import ExtBase from './base';
+
+export default class ExtColorselector extends ExtBase {
 	get alphaDecimalFormat(){return this.getAttribute('alphaDecimalFormat')};set alphaDecimalFormat(alphaDecimalFormat){this.setAttribute('alphaDecimalFormat',alphaDecimalFormat)}
 	get cancelButtonText(){return this.getAttribute('cancelButtonText')};set cancelButtonText(cancelButtonText){this.setAttribute('cancelButtonText',cancelButtonText)}
 	get color(){return this.getAttribute('color')};set color(color){this.setAttribute('color',color)}
@@ -10,6 +11,11 @@ class ExtColorselector extends ExtBase {
 	get showOkCancelButtons(){return this.getAttribute('showOkCancelButtons')};set showOkCancelButtons(showOkCancelButtons){this.setAttribute('showOkCancelButtons',showOkCancelButtons)}
 	get showPreviousColor(){return this.getAttribute('showPreviousColor')};set showPreviousColor(showPreviousColor){this.setAttribute('showPreviousColor',showPreviousColor)}
 	get value(){return this.getAttribute('value')};set value(value){this.setAttribute('value',value)}
+	get platformConfig(){return this.getAttribute('platformConfig')};set platformConfig(platformConfig){this.setAttribute('platformConfig',platformConfig)}
+	get responsiveConfig(){return this.getAttribute('responsiveConfig')};set responsiveConfig(responsiveConfig){this.setAttribute('responsiveConfig',responsiveConfig)}
+	get align(){return this.getAttribute('align')};set align(align){this.setAttribute('align',align)}
+	get fitToParent(){return this.getAttribute('fitToParent')};set fitToParent(fitToParent){this.setAttribute('fitToParent',fitToParent)}
+	get config(){return this.getAttribute('config')};set config(config){this.setAttribute('config',config)}
 	get oncancel(){return this.getAttribute('oncancel')};set oncancel(oncancel){this.setAttribute('oncancel',oncancel)}
 	get onchange(){return this.getAttribute('onchange')};set onchange(onchange){this.setAttribute('onchange',onchange)}
 	get onok(){return this.getAttribute('onok')};set onok(onok){this.setAttribute('onok',onok)}
@@ -28,6 +34,7 @@ class ExtColorselector extends ExtBase {
     "value": "String",
     "platformConfig": "Object",
     "responsiveConfig": "Object",
+    "align": "Obyect",
     "fitToParent": "Boolean",
     "config": "Object",
 
@@ -76,5 +83,6 @@ class ExtColorselector extends ExtBase {
     super.attributeChangedCallback(attrName, oldVal, newVal)
   }
 }
+(function () {
 window.customElements.define('ext-colorselector', ExtColorselector);
 })();

@@ -1,9 +1,15 @@
-(function () {
-class ExtInteraction extends ExtBase {
+import ExtBase from './base';
+
+export default class ExtInteraction extends ExtBase {
 	get chart(){return this.getAttribute('chart')};set chart(chart){this.setAttribute('chart',chart)}
 	get enabled(){return this.getAttribute('enabled')};set enabled(enabled){this.setAttribute('enabled',enabled)}
 	get gesture(){return this.getAttribute('gesture')};set gesture(gesture){this.setAttribute('gesture',gesture)}
 	get listeners(){return this.getAttribute('listeners')};set listeners(listeners){this.setAttribute('listeners',listeners)}
+	get platformConfig(){return this.getAttribute('platformConfig')};set platformConfig(platformConfig){this.setAttribute('platformConfig',platformConfig)}
+	get responsiveConfig(){return this.getAttribute('responsiveConfig')};set responsiveConfig(responsiveConfig){this.setAttribute('responsiveConfig',responsiveConfig)}
+	get align(){return this.getAttribute('align')};set align(align){this.setAttribute('align',align)}
+	get fitToParent(){return this.getAttribute('fitToParent')};set fitToParent(fitToParent){this.setAttribute('fitToParent',fitToParent)}
+	get config(){return this.getAttribute('config')};set config(config){this.setAttribute('config',config)}
 
 	static XTYPE() {return 'interaction'}
   static PROPERTIESOBJECT() { return {
@@ -13,6 +19,7 @@ class ExtInteraction extends ExtBase {
     "listeners": "Object",
     "platformConfig": "Object",
     "responsiveConfig": "Object",
+    "align": "Obyect",
     "fitToParent": "Boolean",
     "config": "Object",
 
@@ -100,5 +107,6 @@ class ExtInteraction extends ExtBase {
     super.attributeChangedCallback(attrName, oldVal, newVal)
   }
 }
+(function () {
 window.customElements.define('ext-interaction', ExtInteraction);
 })();

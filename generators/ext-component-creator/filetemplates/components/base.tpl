@@ -1,18 +1,13 @@
-class ExtBase extends HTMLElement {
+export default class ExtBase extends HTMLElement {
 
   constructor() {
     super()
-//    this._prevProps = {}
   }
 
   static get observedAttributes() {
     var attrs = []
-    for (var property in this.PROPERTIESOBJECT) {
-      if (this.PROPERTIESOBJECT.hasOwnProperty(property)) {
-        if(this.getAttribute(property) !== null) {
-          attrs.push(property)
-        }
-      }
+    for (var property in this.PROPERTIESOBJECT()) {
+      attrs.push(property)
     }
     this.EVENTS().forEach(function (eventparameter, index, array) {
       attrs.push('on'+eventparameter.name)
@@ -29,11 +24,7 @@ class ExtBase extends HTMLElement {
         //this.removeEventListener(attr.slice(2), this);
       }
     } else {
-      // if(attr == 'config' && newVal != null && this._config == undefined) {
-      // 	this._config = newVal
-      // }
       if (this.ext === undefined) {
-        this.connectedCallback()
       }
       else {
         var method = 'set' + attr[0].toUpperCase() + attr.substring(1)
@@ -57,16 +48,38 @@ class ExtBase extends HTMLElement {
   }
 
   connectedCallback() {
-    //console.dir(this)
-    //var nodeName = this.nodeName
+    var elItems = []
+    var removeItems = []
+    var props = {}
+
     var nodeParentName = this.parentNode.nodeName
     //console.dir(nodeName + ' ,parent: ' + nodeParentName)
     var parentCmp = this.parentNode['ext']
     var childCmp;
     var me = this
-    var props = {}
     props.xtype = me.XTYPE
-    setTimeout(function(){ 
+
+    if (true === me.fitToParent) {
+      props.top=0, 
+      props.left=0, 
+      props.width='100%', 
+      props.height='100%'
+    }
+
+    setTimeout(function(){
+
+      var i = 0;
+      for (let item of me.children) {
+        if (item.nodeName.substring(0, 3) != "EXT") {
+          var cln = item.cloneNode(true);
+          var el = Ext.get(cln);
+          elItems.push({i:i,el:el});
+          item.style.display = 'none';
+          removeItems.push(item)
+        }
+        i++;
+      }
+
       for (var property in me.PROPERTIESOBJECT) {
         if (me.PROPERTIESOBJECT.hasOwnProperty(property)) {
           if(me.getAttribute(property) !== null) {
@@ -84,6 +97,7 @@ class ExtBase extends HTMLElement {
       me.EVENTS.forEach(function (eventparameter, index, array) {
         me.setEvent(eventparameter,props,me)
       })
+
       if (nodeParentName == 'APP-ROOT') {
         Ext.onReady(function(){
           props.renderTo = me.parentNode
@@ -100,10 +114,8 @@ class ExtBase extends HTMLElement {
             //console.log('\nXTYPE: ' + props.xtype)
             //console.log('parent: ' + nodeParentName)
             me.ext = Ext.create(props)
-            //console.log(`launch: Ext.create(${props.xtype})`)
             me.dispatchEvent(new CustomEvent('ready',{detail:{cmp: me.ext}}))
             if (nodeParentName == 'BODY') {
-              //console.log(`Ext.Viewport.add(${me.ext.xtype})`)
               Ext.Viewport.add([me.ext])
             }
           }
@@ -115,33 +127,22 @@ class ExtBase extends HTMLElement {
           //console.log('parent: ' + nodeParentName)
           if(nodeParentName.substring(0, 3) != 'EXT') {
             props.renderTo = me.parentNode
-            //console.dir(me.parentNode)
           }
-
           me.ext = Ext.create(props)
           //console.log(`Ext.create(${props.xtype})`)
           me.dispatchEvent(new CustomEvent('ready',{detail:{cmp: me.ext}}))
-
           if (nodeParentName.substring(0, 3) == 'EXT') {
             parentCmp = me.parentNode['ext'];
             childCmp = me.ext;
             me.addTheChild(parentCmp, childCmp)
           }
-
-
           setTimeout(function() { 
             var i = 0
-            var removeItems = []
+            var notExtItem = 0
             for (let item of me.children) {
-              //if (item.nodeName.substring(0, 3) != "EXT" && item.nodeName != "#text") {
               if (item.nodeName.substring(0, 3) != "EXT") {
-                var cln = item.cloneNode(true);
-                var el = Ext.get(cln);
-                me.ext.insert(i,{xtype:'widget', element:el});
-                //console.log(`${me.ext.xtype}.insert(${i},widget,${cln.nodeName}) ${cln.outerHTML}`)
-                removeItems.push(item)
-              }
-              else {
+                me.ext.insert(i,{xtype:'widget', element:elItems[notExtItem].el});
+                notExtItem++
               }
               i++;
             }
@@ -156,8 +157,11 @@ class ExtBase extends HTMLElement {
   }
 
   addTheChild(parentCmp, childCmp) {
-    var parentxtype = parentCmp.xtype
+    //console.log(childCmp)
+    //console.log(parentCmp)
     var childxtype = childCmp.xtype
+    var parentxtype = parentCmp.xtype
+
 
     if (this.ext.initialConfig.align != undefined) {
       if (parentxtype != 'titlebar' && parentxtype != 'grid' && parentxtype != 'button') {
@@ -206,6 +210,8 @@ class ExtBase extends HTMLElement {
         return
       } else {
         console.log('child not added')
+        console.log(childCmp)
+        console.log(parentCmp)
       }
     } 
     if (childxtype === 'toolbar' && Ext.isClassic === true) {
@@ -230,10 +236,12 @@ class ExtBase extends HTMLElement {
       return
     }
     console.log('child not added')
+    console.log(childCmp)
+    console.log(parentCmp)
   }
 
   disconnectedCallback() {
-    console.log('ExtBase disconnectedCallback ' + this.ext.xtype)
+    //console.log('ExtBase disconnectedCallback ' + this.ext.xtype)
     delete this.ext
   }
 }

@@ -1,5 +1,6 @@
-(function () {
-class ExtCalendar_multiview extends ExtBase {
+import ExtBase from './base';
+
+export default class ExtCalendar_multiview extends ExtBase {
 	get compact(){return this.getAttribute('compact')};set compact(compact){this.setAttribute('compact',compact)}
 	get compactOptions(){return this.getAttribute('compactOptions')};set compactOptions(compactOptions){this.setAttribute('compactOptions',compactOptions)}
 	get defaultView(){return this.getAttribute('defaultView')};set defaultView(defaultView){this.setAttribute('defaultView',defaultView)}
@@ -8,6 +9,11 @@ class ExtCalendar_multiview extends ExtBase {
 	get timezoneOffset(){return this.getAttribute('timezoneOffset')};set timezoneOffset(timezoneOffset){this.setAttribute('timezoneOffset',timezoneOffset)}
 	get value(){return this.getAttribute('value')};set value(value){this.setAttribute('value',value)}
 	get views(){return this.getAttribute('views')};set views(views){this.setAttribute('views',views)}
+	get platformConfig(){return this.getAttribute('platformConfig')};set platformConfig(platformConfig){this.setAttribute('platformConfig',platformConfig)}
+	get responsiveConfig(){return this.getAttribute('responsiveConfig')};set responsiveConfig(responsiveConfig){this.setAttribute('responsiveConfig',responsiveConfig)}
+	get align(){return this.getAttribute('align')};set align(align){this.setAttribute('align',align)}
+	get fitToParent(){return this.getAttribute('fitToParent')};set fitToParent(fitToParent){this.setAttribute('fitToParent',fitToParent)}
+	get config(){return this.getAttribute('config')};set config(config){this.setAttribute('config',config)}
 
 	static XTYPE() {return 'calendar_multiview'}
   static PROPERTIESOBJECT() { return {
@@ -21,6 +27,7 @@ class ExtCalendar_multiview extends ExtBase {
     "views": "Object",
     "platformConfig": "Object",
     "responsiveConfig": "Object",
+    "align": "Obyect",
     "fitToParent": "Boolean",
     "config": "Object",
 
@@ -54,5 +61,6 @@ class ExtCalendar_multiview extends ExtBase {
     super.attributeChangedCallback(attrName, oldVal, newVal)
   }
 }
+(function () {
 window.customElements.define('ext-calendar_multiview', ExtCalendar_multiview);
 })();

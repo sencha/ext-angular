@@ -43,7 +43,7 @@ export class base {
     let me: any = this
     let o: any = {}
     o.xtype = metaData.XTYPE
-    let listneresProvided = false
+    let listenersProvided = false
     for (var i = 0; i < me.metaData.PROPERTIES.length; i++) { 
       var prop = me.metaData.PROPERTIES[i];
       if (prop == 'handler') {
@@ -56,7 +56,7 @@ export class base {
       }
       else if(prop == 'listeners' && me[prop] != undefined) {
         o[prop] = me[prop];
-        listneresProvided = true;
+        listenersProvided = true;
       } 
       else {
         if (me[prop] != undefined && 
@@ -79,7 +79,7 @@ export class base {
       Ext.apply(o, me.config);
     }
 
-    if(!listneresProvided) {
+    if(!listenersProvided) {
       o.listeners = {}
       var EVENTS = metaData.EVENTS
       EVENTS.forEach(function (event: any, index: any, array: any) {
@@ -101,6 +101,11 @@ export class base {
     if (this._nativeElement.parentElement != null) {
       o.renderTo = this._nativeElement
     }
+
+    if (o.xtype == 'dialog') {
+      o.renderTo = undefined;
+    }
+
     this.ext = Ext.create(o)
   }
 
