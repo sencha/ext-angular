@@ -86,6 +86,12 @@
               value="purple">
             </radiofield>
         </fieldset>
+        <fieldset [title]="'Second Favorite Color'" [layout]="{ type: 'vbox', align: 'left' }">
+            <colorfield
+                    [color]="this.color"
+                    (change)="this.OnSelChange($event)">
+            </colorfield>
+        </fieldset>
         <toolbar  [docked]="'bottom'" [layout]="{ type: 'hbox', pack: 'right' }">
             <button  [text]="disabled ? 'Enable All' : 'Disable All'" [margin]="'0 10 0 0'" (tap)="toggleDisabled($event)">
             </button>
