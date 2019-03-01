@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtAxis3d extends ExtBase {
+export class ExtAxis3dComponent extends ExtBase {
 	get adjustByMajorUnit(){return this.getAttribute('adjustByMajorUnit')};set adjustByMajorUnit(adjustByMajorUnit){this.setAttribute('adjustByMajorUnit',adjustByMajorUnit)}
 	get background(){return this.getAttribute('background')};set background(background){this.setAttribute('background',background)}
 	get center(){return this.getAttribute('center')};set center(center){this.setAttribute('center',center)}

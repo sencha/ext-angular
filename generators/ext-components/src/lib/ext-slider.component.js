@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtSlider extends ExtBase {
+export class ExtSliderComponent extends ExtBase {
 	get allowThumbsOverlapping(){return this.getAttribute('allowThumbsOverlapping')};set allowThumbsOverlapping(allowThumbsOverlapping){this.setAttribute('allowThumbsOverlapping',allowThumbsOverlapping)}
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
 	get animation(){return this.getAttribute('animation')};set animation(animation){this.setAttribute('animation',animation)}

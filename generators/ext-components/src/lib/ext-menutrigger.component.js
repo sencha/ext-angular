@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtMenutrigger extends ExtBase {
+export class ExtMenutriggerComponent extends ExtBase {
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
 	get ariaAttributes(){return this.getAttribute('ariaAttributes')};set ariaAttributes(ariaAttributes){this.setAttribute('ariaAttributes',ariaAttributes)}
 	get ariaDescribedBy(){return this.getAttribute('ariaDescribedBy')};set ariaDescribedBy(ariaDescribedBy){this.setAttribute('ariaDescribedBy',ariaDescribedBy)}

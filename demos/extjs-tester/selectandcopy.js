@@ -66,7 +66,7 @@ function selectandcopy() {
       cells: true,
       checkbox: true,
       drag: true,
-      extensible: 'both'
+      extensible: 'y'
     },
     shadow:true,
     rowNumbers:true,

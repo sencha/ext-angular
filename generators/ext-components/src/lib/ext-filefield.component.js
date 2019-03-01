@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtFilefield extends ExtBase {
+export class ExtFilefieldComponent extends ExtBase {
 	get accept(){return this.getAttribute('accept')};set accept(accept){this.setAttribute('accept',accept)}
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
 	get animateUnderline(){return this.getAttribute('animateUnderline')};set animateUnderline(animateUnderline){this.setAttribute('animateUnderline',animateUnderline)}

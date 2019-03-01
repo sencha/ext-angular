@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtNestedlist extends ExtBase {
+export class ExtNestedlistComponent extends ExtBase {
 	get activeChildTabIndex(){return this.getAttribute('activeChildTabIndex')};set activeChildTabIndex(activeChildTabIndex){this.setAttribute('activeChildTabIndex',activeChildTabIndex)}
 	get activeItem(){return this.getAttribute('activeItem')};set activeItem(activeItem){this.setAttribute('activeItem',activeItem)}
 	get allowDeselect(){return this.getAttribute('allowDeselect')};set allowDeselect(allowDeselect){this.setAttribute('allowDeselect',allowDeselect)}

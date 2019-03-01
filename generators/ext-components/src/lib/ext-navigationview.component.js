@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtNavigationview extends ExtBase {
+export class ExtNavigationviewComponent extends ExtBase {
 	get activeChildTabIndex(){return this.getAttribute('activeChildTabIndex')};set activeChildTabIndex(activeChildTabIndex){this.setAttribute('activeChildTabIndex',activeChildTabIndex)}
 	get activeItem(){return this.getAttribute('activeItem')};set activeItem(activeItem){this.setAttribute('activeItem',activeItem)}
 	get allowFocusingDisabledChildren(){return this.getAttribute('allowFocusingDisabledChildren')};set allowFocusingDisabledChildren(allowFocusingDisabledChildren){this.setAttribute('allowFocusingDisabledChildren',allowFocusingDisabledChildren)}

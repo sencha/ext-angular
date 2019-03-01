@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtGauge extends ExtBase {
+export class ExtGaugeComponent extends ExtBase {
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
 	get angleOffset(){return this.getAttribute('angleOffset')};set angleOffset(angleOffset){this.setAttribute('angleOffset',angleOffset)}
 	get animation(){return this.getAttribute('animation')};set animation(animation){this.setAttribute('animation',animation)}

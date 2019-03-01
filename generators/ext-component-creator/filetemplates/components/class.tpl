@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class Ext{capclassname} extends ExtBase {
+export class Ext{capclassname}Component extends ExtBase {
 {sGETSET}
 	static XTYPE() {return '{classname}'}
   static PROPERTIESOBJECT() { return {

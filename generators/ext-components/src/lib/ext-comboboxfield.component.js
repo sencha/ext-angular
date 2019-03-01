@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtComboboxfield extends ExtBase {
+export class ExtComboboxfieldComponent extends ExtBase {
 	get alignTarget(){return this.getAttribute('alignTarget')};set alignTarget(alignTarget){this.setAttribute('alignTarget',alignTarget)}
 	get allQuery(){return this.getAttribute('allQuery')};set allQuery(allQuery){this.setAttribute('allQuery',allQuery)}
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}

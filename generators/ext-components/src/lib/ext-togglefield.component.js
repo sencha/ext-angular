@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtTogglefield extends ExtBase {
+export class ExtTogglefieldComponent extends ExtBase {
 	get activeLabel(){return this.getAttribute('activeLabel')};set activeLabel(activeLabel){this.setAttribute('activeLabel',activeLabel)}
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
 	get ariaAttributes(){return this.getAttribute('ariaAttributes')};set ariaAttributes(ariaAttributes){this.setAttribute('ariaAttributes',ariaAttributes)}

@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtCalendar_form_add extends ExtBase {
+export class ExtCalendar_form_addComponent extends ExtBase {
 	get activeChildTabIndex(){return this.getAttribute('activeChildTabIndex')};set activeChildTabIndex(activeChildTabIndex){this.setAttribute('activeChildTabIndex',activeChildTabIndex)}
 	get activeItem(){return this.getAttribute('activeItem')};set activeItem(activeItem){this.setAttribute('activeItem',activeItem)}
 	get allDayField(){return this.getAttribute('allDayField')};set allDayField(allDayField){this.setAttribute('allDayField',allDayField)}

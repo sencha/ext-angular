@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtUrlfield extends ExtBase {
+export class ExtUrlfieldComponent extends ExtBase {
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
 	get animateUnderline(){return this.getAttribute('animateUnderline')};set animateUnderline(animateUnderline){this.setAttribute('animateUnderline',animateUnderline)}
 	get ariaAttributes(){return this.getAttribute('ariaAttributes')};set ariaAttributes(ariaAttributes){this.setAttribute('ariaAttributes',ariaAttributes)}

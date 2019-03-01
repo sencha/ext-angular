@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtDatecell extends ExtBase {
+export class ExtDatecellComponent extends ExtBase {
 	get align(){return this.getAttribute('align')};set align(align){this.setAttribute('align',align)}
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
 	get ariaAttributes(){return this.getAttribute('ariaAttributes')};set ariaAttributes(ariaAttributes){this.setAttribute('ariaAttributes',ariaAttributes)}

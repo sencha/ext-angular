@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtGridsortdescmenuitem extends ExtBase {
+export class ExtGridsortdescmenuitemComponent extends ExtBase {
 	get allowUncheck(){return this.getAttribute('allowUncheck')};set allowUncheck(allowUncheck){this.setAttribute('allowUncheck',allowUncheck)}
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
 	get ariaAttributes(){return this.getAttribute('ariaAttributes')};set ariaAttributes(ariaAttributes){this.setAttribute('ariaAttributes',ariaAttributes)}

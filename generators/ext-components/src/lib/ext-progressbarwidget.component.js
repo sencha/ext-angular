@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtProgressbarwidget extends ExtBase {
+export class ExtProgressbarwidgetComponent extends ExtBase {
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
 	get animate(){return this.getAttribute('animate')};set animate(animate){this.setAttribute('animate',animate)}
 	get ariaAttributes(){return this.getAttribute('ariaAttributes')};set ariaAttributes(ariaAttributes){this.setAttribute('ariaAttributes',ariaAttributes)}
