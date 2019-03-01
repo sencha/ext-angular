@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtColorselector extends ExtBase {
+export class ExtColorselectorComponent extends ExtBase {
 	get alphaDecimalFormat(){return this.getAttribute('alphaDecimalFormat')};set alphaDecimalFormat(alphaDecimalFormat){this.setAttribute('alphaDecimalFormat',alphaDecimalFormat)}
 	get cancelButtonText(){return this.getAttribute('cancelButtonText')};set cancelButtonText(cancelButtonText){this.setAttribute('cancelButtonText',cancelButtonText)}
 	get color(){return this.getAttribute('color')};set color(color){this.setAttribute('color',color)}

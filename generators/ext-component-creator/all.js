@@ -130,6 +130,11 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
       // log(`transitionFile`,`${transitionFile}`)
 
       break
+    case 'components':
+      var routerFile = `${libFolder}aa-router.component.js`
+      fs.writeFile(routerFile, doRouter(templateToolkitFolder), function(err) {if(err){return console.log(err);} })
+      log(`routerFile`,`${routerFile}`);
+      break
     default:
       break
     }
@@ -209,12 +214,31 @@ function launch(framework, data, srcFolder, libFolder, templateToolkitFolder, mo
     break
     case 'components':
       fs.writeFile(`${libFolder}base.${extension}`, doExtBase(templateToolkitFolder), function(err) {if(err){return console.log(err);} })
+
+      var indexFile = `${libFolder}index.js`
+      fs.writeFile(indexFile, doIndex(moduleVars), function(err) {if(err) { return console.log(err); } });
+      log(`indexFile`,`${indexFile}`)
+
       break
     default:
       break
   }
 
 }
+
+function doIndex(moduleVars) {
+  var p = path.resolve(__dirname, 'filetemplates/' + framework + '/index.tpl')
+  var content = fs.readFileSync(p).toString()
+  var values = {
+    imports: moduleVars.imports,
+    exports: moduleVars.exports
+  }
+  var tpl = new Ext.XTemplate(content)
+  var t = tpl.apply(values)
+  delete tpl
+  return t
+ }
+
 
 function oneItem(o, libFolder, framework, extension, num, xtype, alias, moduleVars) {
   var classname =  o.xtype.replace(/-/g, "_")
@@ -414,6 +438,14 @@ function doBootstrapService(templateToolkitFolder) {
   var content = fs.readFileSync(p).toString()
   return content
 }
+
+function doRouter(templateToolkitFolder) {
+  var p = path.resolve(templateToolkitFolder + '/aa-router.component.tpl')
+  var content = fs.readFileSync(p).toString()
+  return content
+}
+
+
 
 // function doOrgChart(templateToolkitFolder) {
 //   var p = path.resolve(templateToolkitFolder + '/orgchart.tpl')

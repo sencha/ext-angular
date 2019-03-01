@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtTextcell extends ExtBase {
+export class ExtTextcellComponent extends ExtBase {
 	get align(){return this.getAttribute('align')};set align(align){this.setAttribute('align',align)}
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
 	get ariaAttributes(){return this.getAttribute('ariaAttributes')};set ariaAttributes(ariaAttributes){this.setAttribute('ariaAttributes',ariaAttributes)}

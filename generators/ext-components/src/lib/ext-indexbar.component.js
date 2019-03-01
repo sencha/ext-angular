@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtIndexbar extends ExtBase {
+export class ExtIndexbarComponent extends ExtBase {
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
 	get animation(){return this.getAttribute('animation')};set animation(animation){this.setAttribute('animation',animation)}
 	get ariaAttributes(){return this.getAttribute('ariaAttributes')};set ariaAttributes(ariaAttributes){this.setAttribute('ariaAttributes',ariaAttributes)}

@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtPivotd3container extends ExtBase {
+export class ExtPivotd3containerComponent extends ExtBase {
 	get configurator(){return this.getAttribute('configurator')};set configurator(configurator){this.setAttribute('configurator',configurator)}
 	get drawing(){return this.getAttribute('drawing')};set drawing(drawing){this.setAttribute('drawing',drawing)}
 	get matrix(){return this.getAttribute('matrix')};set matrix(matrix){this.setAttribute('matrix',matrix)}

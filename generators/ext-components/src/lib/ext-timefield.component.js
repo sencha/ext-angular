@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtTimefield extends ExtBase {
+export class ExtTimefieldComponent extends ExtBase {
 	get alignTarget(){return this.getAttribute('alignTarget')};set alignTarget(alignTarget){this.setAttribute('alignTarget',alignTarget)}
 	get altFormats(){return this.getAttribute('altFormats')};set altFormats(altFormats){this.setAttribute('altFormats',altFormats)}
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}

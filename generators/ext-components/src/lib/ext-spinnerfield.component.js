@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtSpinnerfield extends ExtBase {
+export class ExtSpinnerfieldComponent extends ExtBase {
 	get accelerateOnTapHold(){return this.getAttribute('accelerateOnTapHold')};set accelerateOnTapHold(accelerateOnTapHold){this.setAttribute('accelerateOnTapHold',accelerateOnTapHold)}
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
 	get animateUnderline(){return this.getAttribute('animateUnderline')};set animateUnderline(animateUnderline){this.setAttribute('animateUnderline',animateUnderline)}

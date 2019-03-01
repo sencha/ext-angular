@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtGoogle_map extends ExtBase {
+export class ExtGoogle_mapComponent extends ExtBase {
 	get activeChildTabIndex(){return this.getAttribute('activeChildTabIndex')};set activeChildTabIndex(activeChildTabIndex){this.setAttribute('activeChildTabIndex',activeChildTabIndex)}
 	get activeItem(){return this.getAttribute('activeItem')};set activeItem(activeItem){this.setAttribute('activeItem',activeItem)}
 	get allowFocusingDisabledChildren(){return this.getAttribute('allowFocusingDisabledChildren')};set allowFocusingDisabledChildren(allowFocusingDisabledChildren){this.setAttribute('allowFocusingDisabledChildren',allowFocusingDisabledChildren)}

@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtIndicator extends ExtBase {
+export class ExtIndicatorComponent extends ExtBase {
 	get activeIndex(){return this.getAttribute('activeIndex')};set activeIndex(activeIndex){this.setAttribute('activeIndex',activeIndex)}
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
 	get ariaAttributes(){return this.getAttribute('ariaAttributes')};set ariaAttributes(ariaAttributes){this.setAttribute('ariaAttributes',ariaAttributes)}

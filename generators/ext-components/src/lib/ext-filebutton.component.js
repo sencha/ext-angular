@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtFilebutton extends ExtBase {
+export class ExtFilebuttonComponent extends ExtBase {
 	get accept(){return this.getAttribute('accept')};set accept(accept){this.setAttribute('accept',accept)}
 	get allowDepress(){return this.getAttribute('allowDepress')};set allowDepress(allowDepress){this.setAttribute('allowDepress',allowDepress)}
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}

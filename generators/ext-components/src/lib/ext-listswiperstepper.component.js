@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtListswiperstepper extends ExtBase {
+export class ExtListswiperstepperComponent extends ExtBase {
 	get action(){return this.getAttribute('action')};set action(action){this.setAttribute('action',action)}
 	get activeChildTabIndex(){return this.getAttribute('activeChildTabIndex')};set activeChildTabIndex(activeChildTabIndex){this.setAttribute('activeChildTabIndex',activeChildTabIndex)}
 	get activeItem(){return this.getAttribute('activeItem')};set activeItem(activeItem){this.setAttribute('activeItem',activeItem)}

@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtColorfield extends ExtBase {
+export class ExtColorfieldComponent extends ExtBase {
 	get alignTarget(){return this.getAttribute('alignTarget')};set alignTarget(alignTarget){this.setAttribute('alignTarget',alignTarget)}
 	get alphaDecimalFormat(){return this.getAttribute('alphaDecimalFormat')};set alphaDecimalFormat(alphaDecimalFormat){this.setAttribute('alphaDecimalFormat',alphaDecimalFormat)}
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}

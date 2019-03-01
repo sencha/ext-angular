@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtColorbutton extends ExtBase {
+export class ExtColorbuttonComponent extends ExtBase {
 	get alphaDecimalFormat(){return this.getAttribute('alphaDecimalFormat')};set alphaDecimalFormat(alphaDecimalFormat){this.setAttribute('alphaDecimalFormat',alphaDecimalFormat)}
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
 	get ariaAttributes(){return this.getAttribute('ariaAttributes')};set ariaAttributes(ariaAttributes){this.setAttribute('ariaAttributes',ariaAttributes)}

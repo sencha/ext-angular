@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtSelectfield extends ExtBase {
+export class ExtSelectfieldComponent extends ExtBase {
 	get alignTarget(){return this.getAttribute('alignTarget')};set alignTarget(alignTarget){this.setAttribute('alignTarget',alignTarget)}
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
 	get animateUnderline(){return this.getAttribute('animateUnderline')};set animateUnderline(animateUnderline){this.setAttribute('animateUnderline',animateUnderline)}

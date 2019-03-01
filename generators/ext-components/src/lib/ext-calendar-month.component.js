@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtCalendar_month extends ExtBase {
+export class ExtCalendar_monthComponent extends ExtBase {
 	get activeChildTabIndex(){return this.getAttribute('activeChildTabIndex')};set activeChildTabIndex(activeChildTabIndex){this.setAttribute('activeChildTabIndex',activeChildTabIndex)}
 	get activeItem(){return this.getAttribute('activeItem')};set activeItem(activeItem){this.setAttribute('activeItem',activeItem)}
 	get addForm(){return this.getAttribute('addForm')};set addForm(addForm){this.setAttribute('addForm',addForm)}

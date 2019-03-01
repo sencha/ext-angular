@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtSegmentedbutton extends ExtBase {
+export class ExtSegmentedbuttonComponent extends ExtBase {
 	get activeChildTabIndex(){return this.getAttribute('activeChildTabIndex')};set activeChildTabIndex(activeChildTabIndex){this.setAttribute('activeChildTabIndex',activeChildTabIndex)}
 	get activeItem(){return this.getAttribute('activeItem')};set activeItem(activeItem){this.setAttribute('activeItem',activeItem)}
 	get allowDepress(){return this.getAttribute('allowDepress')};set allowDepress(allowDepress){this.setAttribute('allowDepress',allowDepress)}

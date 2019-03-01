@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtCelleditor extends ExtBase {
+export class ExtCelleditorComponent extends ExtBase {
 	get activeChildTabIndex(){return this.getAttribute('activeChildTabIndex')};set activeChildTabIndex(activeChildTabIndex){this.setAttribute('activeChildTabIndex',activeChildTabIndex)}
 	get activeItem(){return this.getAttribute('activeItem')};set activeItem(activeItem){this.setAttribute('activeItem',activeItem)}
 	get alignment(){return this.getAttribute('alignment')};set alignment(alignment){this.setAttribute('alignment',alignment)}

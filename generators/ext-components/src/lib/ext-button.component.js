@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtButton extends ExtBase {
+export class ExtButtonComponent extends ExtBase {
 	get allowDepress(){return this.getAttribute('allowDepress')};set allowDepress(allowDepress){this.setAttribute('allowDepress',allowDepress)}
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
 	get ariaAttributes(){return this.getAttribute('ariaAttributes')};set ariaAttributes(ariaAttributes){this.setAttribute('ariaAttributes',ariaAttributes)}

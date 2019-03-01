@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtCalendar_monthview extends ExtBase {
+export class ExtCalendar_monthviewComponent extends ExtBase {
 	get addForm(){return this.getAttribute('addForm')};set addForm(addForm){this.setAttribute('addForm',addForm)}
 	get addOnSelect(){return this.getAttribute('addOnSelect')};set addOnSelect(addOnSelect){this.setAttribute('addOnSelect',addOnSelect)}
 	get allowSelection(){return this.getAttribute('allowSelection')};set allowSelection(allowSelection){this.setAttribute('allowSelection',allowSelection)}

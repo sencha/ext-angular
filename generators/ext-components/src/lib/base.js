@@ -2,24 +2,12 @@ export default class ExtBase extends HTMLElement {
 
   constructor() {
     super()
-    // console.dir(this)
-    // console.log('before')
-    // var me = this
-    // for (let item of me.children) {
-    //   console.log(item.nodeName) 
-    // }
-    // console.log('after')
   }
 
   static get observedAttributes() {
     var attrs = []
     for (var property in this.PROPERTIESOBJECT()) {
-      //console.log(property)
-      //if (this.PROPERTIESOBJECT.hasOwnProperty(property)) {
-      //  if(this.getAttribute(property) !== null) {
-          attrs.push(property)
-      //  }
-      //}
+      attrs.push(property)
     }
     this.EVENTS().forEach(function (eventparameter, index, array) {
       attrs.push('on'+eventparameter.name)
@@ -37,7 +25,6 @@ export default class ExtBase extends HTMLElement {
       }
     } else {
       if (this.ext === undefined) {
-        //this.connectedCallback()
       }
       else {
         var method = 'set' + attr[0].toUpperCase() + attr.substring(1)
@@ -127,10 +114,8 @@ export default class ExtBase extends HTMLElement {
             //console.log('\nXTYPE: ' + props.xtype)
             //console.log('parent: ' + nodeParentName)
             me.ext = Ext.create(props)
-            //console.log(`launch: Ext.create(${props.xtype})`)
             me.dispatchEvent(new CustomEvent('ready',{detail:{cmp: me.ext}}))
             if (nodeParentName == 'BODY') {
-              //console.log(`Ext.Viewport.add(${me.ext.xtype})`)
               Ext.Viewport.add([me.ext])
             }
           }
@@ -146,13 +131,11 @@ export default class ExtBase extends HTMLElement {
           me.ext = Ext.create(props)
           //console.log(`Ext.create(${props.xtype})`)
           me.dispatchEvent(new CustomEvent('ready',{detail:{cmp: me.ext}}))
-
           if (nodeParentName.substring(0, 3) == 'EXT') {
             parentCmp = me.parentNode['ext'];
             childCmp = me.ext;
             me.addTheChild(parentCmp, childCmp)
           }
-
           setTimeout(function() { 
             var i = 0
             var notExtItem = 0
@@ -174,8 +157,11 @@ export default class ExtBase extends HTMLElement {
   }
 
   addTheChild(parentCmp, childCmp) {
-    var parentxtype = parentCmp.xtype
+    //console.log(childCmp)
+    //console.log(parentCmp)
     var childxtype = childCmp.xtype
+    var parentxtype = parentCmp.xtype
+
 
     if (this.ext.initialConfig.align != undefined) {
       if (parentxtype != 'titlebar' && parentxtype != 'grid' && parentxtype != 'button') {
@@ -224,6 +210,8 @@ export default class ExtBase extends HTMLElement {
         return
       } else {
         console.log('child not added')
+        console.log(childCmp)
+        console.log(parentCmp)
       }
     } 
     if (childxtype === 'toolbar' && Ext.isClassic === true) {
@@ -248,6 +236,8 @@ export default class ExtBase extends HTMLElement {
       return
     }
     console.log('child not added')
+    console.log(childCmp)
+    console.log(parentCmp)
   }
 
   disconnectedCallback() {

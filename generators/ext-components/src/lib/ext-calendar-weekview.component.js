@@ -1,6 +1,6 @@
 import ExtBase from './base';
 
-export default class ExtCalendar_weekview extends ExtBase {
+export class ExtCalendar_weekviewComponent extends ExtBase {
 	get addForm(){return this.getAttribute('addForm')};set addForm(addForm){this.setAttribute('addForm',addForm)}
 	get allowSelection(){return this.getAttribute('allowSelection')};set allowSelection(allowSelection){this.setAttribute('allowSelection',allowSelection)}
 	get alwaysOnTop(){return this.getAttribute('alwaysOnTop')};set alwaysOnTop(alwaysOnTop){this.setAttribute('alwaysOnTop',alwaysOnTop)}
