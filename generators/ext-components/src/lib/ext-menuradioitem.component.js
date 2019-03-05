@@ -581,11 +581,11 @@ export class ExtMenuradioitemComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtMenuradioitem.METHODS()
-    this.XTYPE = ExtMenuradioitem.XTYPE()
-    //this.PROPERTIES = ExtMenuradioitem.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtMenuradioitem.PROPERTIESOBJECT()
-    this.EVENTS = ExtMenuradioitem.EVENTS()
+    this.METHODS = ExtMenuradioitemComponent.METHODS()
+    this.XTYPE = ExtMenuradioitemComponent.XTYPE()
+    //this.PROPERTIES = ExtMenuradioitemComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtMenuradioitemComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtMenuradioitemComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -597,5 +597,5 @@ export class ExtMenuradioitemComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-menuradioitem', ExtMenuradioitem);
+window.customElements.define('ext-menuradioitem', ExtMenuradioitemComponent);
 })();

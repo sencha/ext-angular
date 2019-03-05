@@ -737,11 +737,11 @@ export class ExtTreecolumnComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtTreecolumn.METHODS()
-    this.XTYPE = ExtTreecolumn.XTYPE()
-    //this.PROPERTIES = ExtTreecolumn.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtTreecolumn.PROPERTIESOBJECT()
-    this.EVENTS = ExtTreecolumn.EVENTS()
+    this.METHODS = ExtTreecolumnComponent.METHODS()
+    this.XTYPE = ExtTreecolumnComponent.XTYPE()
+    //this.PROPERTIES = ExtTreecolumnComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtTreecolumnComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtTreecolumnComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -753,5 +753,5 @@ export class ExtTreecolumnComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-treecolumn', ExtTreecolumn);
+window.customElements.define('ext-treecolumn', ExtTreecolumnComponent);
 })();

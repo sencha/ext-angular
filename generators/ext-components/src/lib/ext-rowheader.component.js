@@ -536,11 +536,11 @@ export class ExtRowheaderComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtRowheader.METHODS()
-    this.XTYPE = ExtRowheader.XTYPE()
-    //this.PROPERTIES = ExtRowheader.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtRowheader.PROPERTIESOBJECT()
-    this.EVENTS = ExtRowheader.EVENTS()
+    this.METHODS = ExtRowheaderComponent.METHODS()
+    this.XTYPE = ExtRowheaderComponent.XTYPE()
+    //this.PROPERTIES = ExtRowheaderComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtRowheaderComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtRowheaderComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -552,5 +552,5 @@ export class ExtRowheaderComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-rowheader', ExtRowheader);
+window.customElements.define('ext-rowheader', ExtRowheaderComponent);
 })();

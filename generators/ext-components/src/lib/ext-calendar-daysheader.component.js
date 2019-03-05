@@ -537,11 +537,11 @@ export class ExtCalendar_daysheaderComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtCalendar_daysheader.METHODS()
-    this.XTYPE = ExtCalendar_daysheader.XTYPE()
-    //this.PROPERTIES = ExtCalendar_daysheader.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtCalendar_daysheader.PROPERTIESOBJECT()
-    this.EVENTS = ExtCalendar_daysheader.EVENTS()
+    this.METHODS = ExtCalendar_daysheaderComponent.METHODS()
+    this.XTYPE = ExtCalendar_daysheaderComponent.XTYPE()
+    //this.PROPERTIES = ExtCalendar_daysheaderComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtCalendar_daysheaderComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtCalendar_daysheaderComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -553,5 +553,5 @@ export class ExtCalendar_daysheaderComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-calendar_daysheader', ExtCalendar_daysheader);
+window.customElements.define('ext-calendar_daysheader', ExtCalendar_daysheaderComponent);
 })();

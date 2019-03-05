@@ -528,11 +528,11 @@ export class ExtTitleComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtTitle.METHODS()
-    this.XTYPE = ExtTitle.XTYPE()
-    //this.PROPERTIES = ExtTitle.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtTitle.PROPERTIESOBJECT()
-    this.EVENTS = ExtTitle.EVENTS()
+    this.METHODS = ExtTitleComponent.METHODS()
+    this.XTYPE = ExtTitleComponent.XTYPE()
+    //this.PROPERTIES = ExtTitleComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtTitleComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtTitleComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -544,5 +544,5 @@ export class ExtTitleComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-title', ExtTitle);
+window.customElements.define('ext-title', ExtTitleComponent);
 })();

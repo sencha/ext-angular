@@ -693,11 +693,11 @@ export class ExtColorfieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtColorfield.METHODS()
-    this.XTYPE = ExtColorfield.XTYPE()
-    //this.PROPERTIES = ExtColorfield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtColorfield.PROPERTIESOBJECT()
-    this.EVENTS = ExtColorfield.EVENTS()
+    this.METHODS = ExtColorfieldComponent.METHODS()
+    this.XTYPE = ExtColorfieldComponent.XTYPE()
+    //this.PROPERTIES = ExtColorfieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtColorfieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtColorfieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -709,5 +709,5 @@ export class ExtColorfieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-colorfield', ExtColorfield);
+window.customElements.define('ext-colorfield', ExtColorfieldComponent);
 })();

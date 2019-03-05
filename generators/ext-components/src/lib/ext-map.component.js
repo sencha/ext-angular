@@ -691,11 +691,11 @@ export class ExtMapComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtMap.METHODS()
-    this.XTYPE = ExtMap.XTYPE()
-    //this.PROPERTIES = ExtMap.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtMap.PROPERTIESOBJECT()
-    this.EVENTS = ExtMap.EVENTS()
+    this.METHODS = ExtMapComponent.METHODS()
+    this.XTYPE = ExtMapComponent.XTYPE()
+    //this.PROPERTIES = ExtMapComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtMapComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtMapComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -707,5 +707,5 @@ export class ExtMapComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-map', ExtMap);
+window.customElements.define('ext-map', ExtMapComponent);
 })();

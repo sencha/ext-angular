@@ -172,8 +172,6 @@ export class LandingpageComponent implements OnInit {
     this.onNavChange(id, event.record)
   }
 
-
-
   doBack = (event) => {
     var id = event.node.getId()
     this.onNavChange(id, event.node)

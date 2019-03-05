@@ -548,11 +548,11 @@ export class ExtD3_canvasComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtD3_canvas.METHODS()
-    this.XTYPE = ExtD3_canvas.XTYPE()
-    //this.PROPERTIES = ExtD3_canvas.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtD3_canvas.PROPERTIESOBJECT()
-    this.EVENTS = ExtD3_canvas.EVENTS()
+    this.METHODS = ExtD3_canvasComponent.METHODS()
+    this.XTYPE = ExtD3_canvasComponent.XTYPE()
+    //this.PROPERTIES = ExtD3_canvasComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtD3_canvasComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtD3_canvasComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -564,5 +564,5 @@ export class ExtD3_canvasComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-d3_canvas', ExtD3_canvas);
+window.customElements.define('ext-d3_canvas', ExtD3_canvasComponent);
 })();

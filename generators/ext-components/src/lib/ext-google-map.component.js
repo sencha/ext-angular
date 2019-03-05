@@ -691,11 +691,11 @@ export class ExtGoogle_mapComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtGoogle_map.METHODS()
-    this.XTYPE = ExtGoogle_map.XTYPE()
-    //this.PROPERTIES = ExtGoogle_map.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtGoogle_map.PROPERTIESOBJECT()
-    this.EVENTS = ExtGoogle_map.EVENTS()
+    this.METHODS = ExtGoogle_mapComponent.METHODS()
+    this.XTYPE = ExtGoogle_mapComponent.XTYPE()
+    //this.PROPERTIES = ExtGoogle_mapComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtGoogle_mapComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtGoogle_mapComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -707,5 +707,5 @@ export class ExtGoogle_mapComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-google_map', ExtGoogle_map);
+window.customElements.define('ext-google_map', ExtGoogle_mapComponent);
 })();

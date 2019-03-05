@@ -654,11 +654,11 @@ export class ExtPivotconfigfieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtPivotconfigfield.METHODS()
-    this.XTYPE = ExtPivotconfigfield.XTYPE()
-    //this.PROPERTIES = ExtPivotconfigfield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtPivotconfigfield.PROPERTIESOBJECT()
-    this.EVENTS = ExtPivotconfigfield.EVENTS()
+    this.METHODS = ExtPivotconfigfieldComponent.METHODS()
+    this.XTYPE = ExtPivotconfigfieldComponent.XTYPE()
+    //this.PROPERTIES = ExtPivotconfigfieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtPivotconfigfieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtPivotconfigfieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -670,5 +670,5 @@ export class ExtPivotconfigfieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-pivotconfigfield', ExtPivotconfigfield);
+window.customElements.define('ext-pivotconfigfield', ExtPivotconfigfieldComponent);
 })();

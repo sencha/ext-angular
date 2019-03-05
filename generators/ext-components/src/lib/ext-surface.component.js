@@ -356,11 +356,11 @@ export class ExtSurfaceComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtSurface.METHODS()
-    this.XTYPE = ExtSurface.XTYPE()
-    //this.PROPERTIES = ExtSurface.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtSurface.PROPERTIESOBJECT()
-    this.EVENTS = ExtSurface.EVENTS()
+    this.METHODS = ExtSurfaceComponent.METHODS()
+    this.XTYPE = ExtSurfaceComponent.XTYPE()
+    //this.PROPERTIES = ExtSurfaceComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtSurfaceComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtSurfaceComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -372,5 +372,5 @@ export class ExtSurfaceComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-surface', ExtSurface);
+window.customElements.define('ext-surface', ExtSurfaceComponent);
 })();

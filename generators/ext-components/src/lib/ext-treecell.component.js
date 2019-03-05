@@ -373,11 +373,11 @@ export class ExtTreecellComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtTreecell.METHODS()
-    this.XTYPE = ExtTreecell.XTYPE()
-    //this.PROPERTIES = ExtTreecell.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtTreecell.PROPERTIESOBJECT()
-    this.EVENTS = ExtTreecell.EVENTS()
+    this.METHODS = ExtTreecellComponent.METHODS()
+    this.XTYPE = ExtTreecellComponent.XTYPE()
+    //this.PROPERTIES = ExtTreecellComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtTreecellComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtTreecellComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -389,5 +389,5 @@ export class ExtTreecellComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-treecell', ExtTreecell);
+window.customElements.define('ext-treecell', ExtTreecellComponent);
 })();

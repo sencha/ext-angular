@@ -546,11 +546,11 @@ export class ExtToolComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtTool.METHODS()
-    this.XTYPE = ExtTool.XTYPE()
-    //this.PROPERTIES = ExtTool.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtTool.PROPERTIESOBJECT()
-    this.EVENTS = ExtTool.EVENTS()
+    this.METHODS = ExtToolComponent.METHODS()
+    this.XTYPE = ExtToolComponent.XTYPE()
+    //this.PROPERTIES = ExtToolComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtToolComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtToolComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -562,5 +562,5 @@ export class ExtToolComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-tool', ExtTool);
+window.customElements.define('ext-tool', ExtToolComponent);
 })();

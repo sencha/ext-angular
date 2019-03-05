@@ -673,11 +673,11 @@ export class ExtViewportComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtViewport.METHODS()
-    this.XTYPE = ExtViewport.XTYPE()
-    //this.PROPERTIES = ExtViewport.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtViewport.PROPERTIESOBJECT()
-    this.EVENTS = ExtViewport.EVENTS()
+    this.METHODS = ExtViewportComponent.METHODS()
+    this.XTYPE = ExtViewportComponent.XTYPE()
+    //this.PROPERTIES = ExtViewportComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtViewportComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtViewportComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -689,5 +689,5 @@ export class ExtViewportComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-viewport', ExtViewport);
+window.customElements.define('ext-viewport', ExtViewportComponent);
 })();

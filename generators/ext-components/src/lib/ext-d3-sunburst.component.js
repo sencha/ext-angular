@@ -619,11 +619,11 @@ export class ExtD3_sunburstComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtD3_sunburst.METHODS()
-    this.XTYPE = ExtD3_sunburst.XTYPE()
-    //this.PROPERTIES = ExtD3_sunburst.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtD3_sunburst.PROPERTIESOBJECT()
-    this.EVENTS = ExtD3_sunburst.EVENTS()
+    this.METHODS = ExtD3_sunburstComponent.METHODS()
+    this.XTYPE = ExtD3_sunburstComponent.XTYPE()
+    //this.PROPERTIES = ExtD3_sunburstComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtD3_sunburstComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtD3_sunburstComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -635,5 +635,5 @@ export class ExtD3_sunburstComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-d3_sunburst', ExtD3_sunburst);
+window.customElements.define('ext-d3_sunburst', ExtD3_sunburstComponent);
 })();

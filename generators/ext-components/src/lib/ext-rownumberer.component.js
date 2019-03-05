@@ -739,11 +739,11 @@ export class ExtRownumbererComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtRownumberer.METHODS()
-    this.XTYPE = ExtRownumberer.XTYPE()
-    //this.PROPERTIES = ExtRownumberer.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtRownumberer.PROPERTIESOBJECT()
-    this.EVENTS = ExtRownumberer.EVENTS()
+    this.METHODS = ExtRownumbererComponent.METHODS()
+    this.XTYPE = ExtRownumbererComponent.XTYPE()
+    //this.PROPERTIES = ExtRownumbererComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtRownumbererComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtRownumbererComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -755,5 +755,5 @@ export class ExtRownumbererComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-rownumberer', ExtRownumberer);
+window.customElements.define('ext-rownumberer', ExtRownumbererComponent);
 })();

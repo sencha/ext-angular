@@ -533,11 +533,11 @@ export class ExtProgressbarwidgetComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtProgressbarwidget.METHODS()
-    this.XTYPE = ExtProgressbarwidget.XTYPE()
-    //this.PROPERTIES = ExtProgressbarwidget.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtProgressbarwidget.PROPERTIESOBJECT()
-    this.EVENTS = ExtProgressbarwidget.EVENTS()
+    this.METHODS = ExtProgressbarwidgetComponent.METHODS()
+    this.XTYPE = ExtProgressbarwidgetComponent.XTYPE()
+    //this.PROPERTIES = ExtProgressbarwidgetComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtProgressbarwidgetComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtProgressbarwidgetComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -549,5 +549,5 @@ export class ExtProgressbarwidgetComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-progressbarwidget', ExtProgressbarwidget);
+window.customElements.define('ext-progressbarwidget', ExtProgressbarwidgetComponent);
 })();

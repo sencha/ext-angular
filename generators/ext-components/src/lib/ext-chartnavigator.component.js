@@ -641,11 +641,11 @@ export class ExtChartnavigatorComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtChartnavigator.METHODS()
-    this.XTYPE = ExtChartnavigator.XTYPE()
-    //this.PROPERTIES = ExtChartnavigator.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtChartnavigator.PROPERTIESOBJECT()
-    this.EVENTS = ExtChartnavigator.EVENTS()
+    this.METHODS = ExtChartnavigatorComponent.METHODS()
+    this.XTYPE = ExtChartnavigatorComponent.XTYPE()
+    //this.PROPERTIES = ExtChartnavigatorComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtChartnavigatorComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtChartnavigatorComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -657,5 +657,5 @@ export class ExtChartnavigatorComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-chartnavigator', ExtChartnavigator);
+window.customElements.define('ext-chartnavigator', ExtChartnavigatorComponent);
 })();

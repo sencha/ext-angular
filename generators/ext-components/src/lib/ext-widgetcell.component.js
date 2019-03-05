@@ -352,11 +352,11 @@ export class ExtWidgetcellComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtWidgetcell.METHODS()
-    this.XTYPE = ExtWidgetcell.XTYPE()
-    //this.PROPERTIES = ExtWidgetcell.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtWidgetcell.PROPERTIESOBJECT()
-    this.EVENTS = ExtWidgetcell.EVENTS()
+    this.METHODS = ExtWidgetcellComponent.METHODS()
+    this.XTYPE = ExtWidgetcellComponent.XTYPE()
+    //this.PROPERTIES = ExtWidgetcellComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtWidgetcellComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtWidgetcellComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -368,5 +368,5 @@ export class ExtWidgetcellComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-widgetcell', ExtWidgetcell);
+window.customElements.define('ext-widgetcell', ExtWidgetcellComponent);
 })();

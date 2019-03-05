@@ -596,11 +596,11 @@ export class ExtFilebuttonComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtFilebutton.METHODS()
-    this.XTYPE = ExtFilebutton.XTYPE()
-    //this.PROPERTIES = ExtFilebutton.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtFilebutton.PROPERTIESOBJECT()
-    this.EVENTS = ExtFilebutton.EVENTS()
+    this.METHODS = ExtFilebuttonComponent.METHODS()
+    this.XTYPE = ExtFilebuttonComponent.XTYPE()
+    //this.PROPERTIES = ExtFilebuttonComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtFilebuttonComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtFilebuttonComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -612,5 +612,5 @@ export class ExtFilebuttonComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-filebutton', ExtFilebutton);
+window.customElements.define('ext-filebutton', ExtFilebuttonComponent);
 })();

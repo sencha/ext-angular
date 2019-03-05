@@ -763,11 +763,11 @@ export class ExtFieldpanelComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtFieldpanel.METHODS()
-    this.XTYPE = ExtFieldpanel.XTYPE()
-    //this.PROPERTIES = ExtFieldpanel.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtFieldpanel.PROPERTIESOBJECT()
-    this.EVENTS = ExtFieldpanel.EVENTS()
+    this.METHODS = ExtFieldpanelComponent.METHODS()
+    this.XTYPE = ExtFieldpanelComponent.XTYPE()
+    //this.PROPERTIES = ExtFieldpanelComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtFieldpanelComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtFieldpanelComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -779,5 +779,5 @@ export class ExtFieldpanelComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-fieldpanel', ExtFieldpanel);
+window.customElements.define('ext-fieldpanel', ExtFieldpanelComponent);
 })();

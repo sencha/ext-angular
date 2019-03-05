@@ -741,11 +741,11 @@ export class ExtSheetComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtSheet.METHODS()
-    this.XTYPE = ExtSheet.XTYPE()
-    //this.PROPERTIES = ExtSheet.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtSheet.PROPERTIESOBJECT()
-    this.EVENTS = ExtSheet.EVENTS()
+    this.METHODS = ExtSheetComponent.METHODS()
+    this.XTYPE = ExtSheetComponent.XTYPE()
+    //this.PROPERTIES = ExtSheetComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtSheetComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtSheetComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -757,5 +757,5 @@ export class ExtSheetComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-sheet', ExtSheet);
+window.customElements.define('ext-sheet', ExtSheetComponent);
 })();

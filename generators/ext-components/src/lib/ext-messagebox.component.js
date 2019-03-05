@@ -781,11 +781,11 @@ export class ExtMessageboxComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtMessagebox.METHODS()
-    this.XTYPE = ExtMessagebox.XTYPE()
-    //this.PROPERTIES = ExtMessagebox.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtMessagebox.PROPERTIESOBJECT()
-    this.EVENTS = ExtMessagebox.EVENTS()
+    this.METHODS = ExtMessageboxComponent.METHODS()
+    this.XTYPE = ExtMessageboxComponent.XTYPE()
+    //this.PROPERTIES = ExtMessageboxComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtMessageboxComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtMessageboxComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -797,5 +797,5 @@ export class ExtMessageboxComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-messagebox', ExtMessagebox);
+window.customElements.define('ext-messagebox', ExtMessageboxComponent);
 })();

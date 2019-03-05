@@ -617,11 +617,11 @@ export class ExtD3_treeComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtD3_tree.METHODS()
-    this.XTYPE = ExtD3_tree.XTYPE()
-    //this.PROPERTIES = ExtD3_tree.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtD3_tree.PROPERTIESOBJECT()
-    this.EVENTS = ExtD3_tree.EVENTS()
+    this.METHODS = ExtD3_treeComponent.METHODS()
+    this.XTYPE = ExtD3_treeComponent.XTYPE()
+    //this.PROPERTIES = ExtD3_treeComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtD3_treeComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtD3_treeComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -633,5 +633,5 @@ export class ExtD3_treeComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-d3_tree', ExtD3_tree);
+window.customElements.define('ext-d3_tree', ExtD3_treeComponent);
 })();

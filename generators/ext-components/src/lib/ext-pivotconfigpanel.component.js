@@ -757,11 +757,11 @@ export class ExtPivotconfigpanelComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtPivotconfigpanel.METHODS()
-    this.XTYPE = ExtPivotconfigpanel.XTYPE()
-    //this.PROPERTIES = ExtPivotconfigpanel.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtPivotconfigpanel.PROPERTIESOBJECT()
-    this.EVENTS = ExtPivotconfigpanel.EVENTS()
+    this.METHODS = ExtPivotconfigpanelComponent.METHODS()
+    this.XTYPE = ExtPivotconfigpanelComponent.XTYPE()
+    //this.PROPERTIES = ExtPivotconfigpanelComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtPivotconfigpanelComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtPivotconfigpanelComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -773,5 +773,5 @@ export class ExtPivotconfigpanelComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-pivotconfigpanel', ExtPivotconfigpanel);
+window.customElements.define('ext-pivotconfigpanel', ExtPivotconfigpanelComponent);
 })();

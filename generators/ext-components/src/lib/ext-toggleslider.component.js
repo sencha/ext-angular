@@ -570,11 +570,11 @@ export class ExtTogglesliderComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtToggleslider.METHODS()
-    this.XTYPE = ExtToggleslider.XTYPE()
-    //this.PROPERTIES = ExtToggleslider.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtToggleslider.PROPERTIESOBJECT()
-    this.EVENTS = ExtToggleslider.EVENTS()
+    this.METHODS = ExtTogglesliderComponent.METHODS()
+    this.XTYPE = ExtTogglesliderComponent.XTYPE()
+    //this.PROPERTIES = ExtTogglesliderComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtTogglesliderComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtTogglesliderComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -586,5 +586,5 @@ export class ExtTogglesliderComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-toggleslider', ExtToggleslider);
+window.customElements.define('ext-toggleslider', ExtTogglesliderComponent);
 })();

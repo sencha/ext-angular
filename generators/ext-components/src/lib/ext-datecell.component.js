@@ -356,11 +356,11 @@ export class ExtDatecellComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtDatecell.METHODS()
-    this.XTYPE = ExtDatecell.XTYPE()
-    //this.PROPERTIES = ExtDatecell.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtDatecell.PROPERTIESOBJECT()
-    this.EVENTS = ExtDatecell.EVENTS()
+    this.METHODS = ExtDatecellComponent.METHODS()
+    this.XTYPE = ExtDatecellComponent.XTYPE()
+    //this.PROPERTIES = ExtDatecellComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtDatecellComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtDatecellComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -372,5 +372,5 @@ export class ExtDatecellComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-datecell', ExtDatecell);
+window.customElements.define('ext-datecell', ExtDatecellComponent);
 })();

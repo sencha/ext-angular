@@ -570,11 +570,11 @@ export class ExtSliderComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtSlider.METHODS()
-    this.XTYPE = ExtSlider.XTYPE()
-    //this.PROPERTIES = ExtSlider.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtSlider.PROPERTIESOBJECT()
-    this.EVENTS = ExtSlider.EVENTS()
+    this.METHODS = ExtSliderComponent.METHODS()
+    this.XTYPE = ExtSliderComponent.XTYPE()
+    //this.PROPERTIES = ExtSliderComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtSliderComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtSliderComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -586,5 +586,5 @@ export class ExtSliderComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-slider', ExtSlider);
+window.customElements.define('ext-slider', ExtSliderComponent);
 })();

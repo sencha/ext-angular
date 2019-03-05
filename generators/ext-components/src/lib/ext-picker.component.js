@@ -771,11 +771,11 @@ export class ExtPickerComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtPicker.METHODS()
-    this.XTYPE = ExtPicker.XTYPE()
-    //this.PROPERTIES = ExtPicker.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtPicker.PROPERTIESOBJECT()
-    this.EVENTS = ExtPicker.EVENTS()
+    this.METHODS = ExtPickerComponent.METHODS()
+    this.XTYPE = ExtPickerComponent.XTYPE()
+    //this.PROPERTIES = ExtPickerComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtPickerComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtPickerComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -787,5 +787,5 @@ export class ExtPickerComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-picker', ExtPicker);
+window.customElements.define('ext-picker', ExtPickerComponent);
 })();

@@ -538,11 +538,11 @@ export class ExtLoadmaskComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtLoadmask.METHODS()
-    this.XTYPE = ExtLoadmask.XTYPE()
-    //this.PROPERTIES = ExtLoadmask.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtLoadmask.PROPERTIESOBJECT()
-    this.EVENTS = ExtLoadmask.EVENTS()
+    this.METHODS = ExtLoadmaskComponent.METHODS()
+    this.XTYPE = ExtLoadmaskComponent.XTYPE()
+    //this.PROPERTIES = ExtLoadmaskComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtLoadmaskComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtLoadmaskComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -554,5 +554,5 @@ export class ExtLoadmaskComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-loadmask', ExtLoadmask);
+window.customElements.define('ext-loadmask', ExtLoadmaskComponent);
 })();

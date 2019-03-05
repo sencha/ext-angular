@@ -342,11 +342,11 @@ export class ExtSpindowntriggerComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtSpindowntrigger.METHODS()
-    this.XTYPE = ExtSpindowntrigger.XTYPE()
-    //this.PROPERTIES = ExtSpindowntrigger.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtSpindowntrigger.PROPERTIESOBJECT()
-    this.EVENTS = ExtSpindowntrigger.EVENTS()
+    this.METHODS = ExtSpindowntriggerComponent.METHODS()
+    this.XTYPE = ExtSpindowntriggerComponent.XTYPE()
+    //this.PROPERTIES = ExtSpindowntriggerComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtSpindowntriggerComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtSpindowntriggerComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -358,5 +358,5 @@ export class ExtSpindowntriggerComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-spindowntrigger', ExtSpindowntrigger);
+window.customElements.define('ext-spindowntrigger', ExtSpindowntriggerComponent);
 })();

@@ -647,11 +647,11 @@ export class ExtToolbarComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtToolbar.METHODS()
-    this.XTYPE = ExtToolbar.XTYPE()
-    //this.PROPERTIES = ExtToolbar.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtToolbar.PROPERTIESOBJECT()
-    this.EVENTS = ExtToolbar.EVENTS()
+    this.METHODS = ExtToolbarComponent.METHODS()
+    this.XTYPE = ExtToolbarComponent.XTYPE()
+    //this.PROPERTIES = ExtToolbarComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtToolbarComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtToolbarComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -663,5 +663,5 @@ export class ExtToolbarComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-toolbar', ExtToolbar);
+window.customElements.define('ext-toolbar', ExtToolbarComponent);
 })();

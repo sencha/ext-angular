@@ -111,11 +111,11 @@ export class ExtAxis3dComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtAxis3d.METHODS()
-    this.XTYPE = ExtAxis3d.XTYPE()
-    //this.PROPERTIES = ExtAxis3d.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtAxis3d.PROPERTIESOBJECT()
-    this.EVENTS = ExtAxis3d.EVENTS()
+    this.METHODS = ExtAxis3dComponent.METHODS()
+    this.XTYPE = ExtAxis3dComponent.XTYPE()
+    //this.PROPERTIES = ExtAxis3dComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtAxis3dComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtAxis3dComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -127,5 +127,5 @@ export class ExtAxis3dComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-axis3d', ExtAxis3d);
+window.customElements.define('ext-axis3d', ExtAxis3dComponent);
 })();

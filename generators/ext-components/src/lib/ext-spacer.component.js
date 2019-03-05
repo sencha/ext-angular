@@ -525,11 +525,11 @@ export class ExtSpacerComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtSpacer.METHODS()
-    this.XTYPE = ExtSpacer.XTYPE()
-    //this.PROPERTIES = ExtSpacer.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtSpacer.PROPERTIESOBJECT()
-    this.EVENTS = ExtSpacer.EVENTS()
+    this.METHODS = ExtSpacerComponent.METHODS()
+    this.XTYPE = ExtSpacerComponent.XTYPE()
+    //this.PROPERTIES = ExtSpacerComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtSpacerComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtSpacerComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -541,5 +541,5 @@ export class ExtSpacerComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-spacer', ExtSpacer);
+window.customElements.define('ext-spacer', ExtSpacerComponent);
 })();

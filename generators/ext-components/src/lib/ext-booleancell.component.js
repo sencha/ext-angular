@@ -360,11 +360,11 @@ export class ExtBooleancellComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtBooleancell.METHODS()
-    this.XTYPE = ExtBooleancell.XTYPE()
-    //this.PROPERTIES = ExtBooleancell.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtBooleancell.PROPERTIESOBJECT()
-    this.EVENTS = ExtBooleancell.EVENTS()
+    this.METHODS = ExtBooleancellComponent.METHODS()
+    this.XTYPE = ExtBooleancellComponent.XTYPE()
+    //this.PROPERTIES = ExtBooleancellComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtBooleancellComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtBooleancellComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -376,5 +376,5 @@ export class ExtBooleancellComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-booleancell', ExtBooleancell);
+window.customElements.define('ext-booleancell', ExtBooleancellComponent);
 })();

@@ -797,11 +797,11 @@ export class ExtDatepanelComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtDatepanel.METHODS()
-    this.XTYPE = ExtDatepanel.XTYPE()
-    //this.PROPERTIES = ExtDatepanel.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtDatepanel.PROPERTIESOBJECT()
-    this.EVENTS = ExtDatepanel.EVENTS()
+    this.METHODS = ExtDatepanelComponent.METHODS()
+    this.XTYPE = ExtDatepanelComponent.XTYPE()
+    //this.PROPERTIES = ExtDatepanelComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtDatepanelComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtDatepanelComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -813,5 +813,5 @@ export class ExtDatepanelComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-datepanel', ExtDatepanel);
+window.customElements.define('ext-datepanel', ExtDatepanelComponent);
 })();

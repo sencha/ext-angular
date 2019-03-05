@@ -567,11 +567,11 @@ export class ExtTreelistComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtTreelist.METHODS()
-    this.XTYPE = ExtTreelist.XTYPE()
-    //this.PROPERTIES = ExtTreelist.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtTreelist.PROPERTIESOBJECT()
-    this.EVENTS = ExtTreelist.EVENTS()
+    this.METHODS = ExtTreelistComponent.METHODS()
+    this.XTYPE = ExtTreelistComponent.XTYPE()
+    //this.PROPERTIES = ExtTreelistComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtTreelistComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtTreelistComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -583,5 +583,5 @@ export class ExtTreelistComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-treelist', ExtTreelist);
+window.customElements.define('ext-treelist', ExtTreelistComponent);
 })();

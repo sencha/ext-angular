@@ -354,11 +354,11 @@ export class ExtTextcellComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtTextcell.METHODS()
-    this.XTYPE = ExtTextcell.XTYPE()
-    //this.PROPERTIES = ExtTextcell.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtTextcell.PROPERTIESOBJECT()
-    this.EVENTS = ExtTextcell.EVENTS()
+    this.METHODS = ExtTextcellComponent.METHODS()
+    this.XTYPE = ExtTextcellComponent.XTYPE()
+    //this.PROPERTIES = ExtTextcellComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtTextcellComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtTextcellComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -370,5 +370,5 @@ export class ExtTextcellComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-textcell', ExtTextcell);
+window.customElements.define('ext-textcell', ExtTextcellComponent);
 })();

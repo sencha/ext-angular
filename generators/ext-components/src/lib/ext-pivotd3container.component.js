@@ -32,11 +32,11 @@ export class ExtPivotd3containerComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtPivotd3container.METHODS()
-    this.XTYPE = ExtPivotd3container.XTYPE()
-    //this.PROPERTIES = ExtPivotd3container.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtPivotd3container.PROPERTIESOBJECT()
-    this.EVENTS = ExtPivotd3container.EVENTS()
+    this.METHODS = ExtPivotd3containerComponent.METHODS()
+    this.XTYPE = ExtPivotd3containerComponent.XTYPE()
+    //this.PROPERTIES = ExtPivotd3containerComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtPivotd3containerComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtPivotd3containerComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -48,5 +48,5 @@ export class ExtPivotd3containerComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-pivotd3container', ExtPivotd3container);
+window.customElements.define('ext-pivotd3container', ExtPivotd3containerComponent);
 })();

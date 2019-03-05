@@ -659,11 +659,11 @@ export class ExtSearchfieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtSearchfield.METHODS()
-    this.XTYPE = ExtSearchfield.XTYPE()
-    //this.PROPERTIES = ExtSearchfield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtSearchfield.PROPERTIESOBJECT()
-    this.EVENTS = ExtSearchfield.EVENTS()
+    this.METHODS = ExtSearchfieldComponent.METHODS()
+    this.XTYPE = ExtSearchfieldComponent.XTYPE()
+    //this.PROPERTIES = ExtSearchfieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtSearchfieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtSearchfieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -675,5 +675,5 @@ export class ExtSearchfieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-searchfield', ExtSearchfield);
+window.customElements.define('ext-searchfield', ExtSearchfieldComponent);
 })();

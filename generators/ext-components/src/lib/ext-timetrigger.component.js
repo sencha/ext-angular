@@ -342,11 +342,11 @@ export class ExtTimetriggerComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtTimetrigger.METHODS()
-    this.XTYPE = ExtTimetrigger.XTYPE()
-    //this.PROPERTIES = ExtTimetrigger.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtTimetrigger.PROPERTIESOBJECT()
-    this.EVENTS = ExtTimetrigger.EVENTS()
+    this.METHODS = ExtTimetriggerComponent.METHODS()
+    this.XTYPE = ExtTimetriggerComponent.XTYPE()
+    //this.PROPERTIES = ExtTimetriggerComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtTimetriggerComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtTimetriggerComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -358,5 +358,5 @@ export class ExtTimetriggerComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-timetrigger', ExtTimetrigger);
+window.customElements.define('ext-timetrigger', ExtTimetriggerComponent);
 })();

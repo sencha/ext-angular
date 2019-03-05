@@ -758,11 +758,11 @@ export class ExtChartComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtChart.METHODS()
-    this.XTYPE = ExtChart.XTYPE()
-    //this.PROPERTIES = ExtChart.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtChart.PROPERTIESOBJECT()
-    this.EVENTS = ExtChart.EVENTS()
+    this.METHODS = ExtChartComponent.METHODS()
+    this.XTYPE = ExtChartComponent.XTYPE()
+    //this.PROPERTIES = ExtChartComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtChartComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtChartComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -774,5 +774,5 @@ export class ExtChartComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-chart', ExtChart);
+window.customElements.define('ext-chart', ExtChartComponent);
 })();

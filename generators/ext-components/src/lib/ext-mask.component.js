@@ -529,11 +529,11 @@ export class ExtMaskComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtMask.METHODS()
-    this.XTYPE = ExtMask.XTYPE()
-    //this.PROPERTIES = ExtMask.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtMask.PROPERTIESOBJECT()
-    this.EVENTS = ExtMask.EVENTS()
+    this.METHODS = ExtMaskComponent.METHODS()
+    this.XTYPE = ExtMaskComponent.XTYPE()
+    //this.PROPERTIES = ExtMaskComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtMaskComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtMaskComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -545,5 +545,5 @@ export class ExtMaskComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-mask', ExtMask);
+window.customElements.define('ext-mask', ExtMaskComponent);
 })();

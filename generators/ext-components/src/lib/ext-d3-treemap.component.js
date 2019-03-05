@@ -625,11 +625,11 @@ export class ExtD3_treemapComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtD3_treemap.METHODS()
-    this.XTYPE = ExtD3_treemap.XTYPE()
-    //this.PROPERTIES = ExtD3_treemap.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtD3_treemap.PROPERTIESOBJECT()
-    this.EVENTS = ExtD3_treemap.EVENTS()
+    this.METHODS = ExtD3_treemapComponent.METHODS()
+    this.XTYPE = ExtD3_treemapComponent.XTYPE()
+    //this.PROPERTIES = ExtD3_treemapComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtD3_treemapComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtD3_treemapComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -641,5 +641,5 @@ export class ExtD3_treemapComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-d3_treemap', ExtD3_treemap);
+window.customElements.define('ext-d3_treemap', ExtD3_treemapComponent);
 })();

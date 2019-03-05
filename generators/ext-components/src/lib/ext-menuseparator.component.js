@@ -525,11 +525,11 @@ export class ExtMenuseparatorComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtMenuseparator.METHODS()
-    this.XTYPE = ExtMenuseparator.XTYPE()
-    //this.PROPERTIES = ExtMenuseparator.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtMenuseparator.PROPERTIESOBJECT()
-    this.EVENTS = ExtMenuseparator.EVENTS()
+    this.METHODS = ExtMenuseparatorComponent.METHODS()
+    this.XTYPE = ExtMenuseparatorComponent.XTYPE()
+    //this.PROPERTIES = ExtMenuseparatorComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtMenuseparatorComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtMenuseparatorComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -541,5 +541,5 @@ export class ExtMenuseparatorComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-menuseparator', ExtMenuseparator);
+window.customElements.define('ext-menuseparator', ExtMenuseparatorComponent);
 })();

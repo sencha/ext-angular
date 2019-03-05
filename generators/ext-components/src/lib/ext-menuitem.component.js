@@ -562,11 +562,11 @@ export class ExtMenuitemComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtMenuitem.METHODS()
-    this.XTYPE = ExtMenuitem.XTYPE()
-    //this.PROPERTIES = ExtMenuitem.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtMenuitem.PROPERTIESOBJECT()
-    this.EVENTS = ExtMenuitem.EVENTS()
+    this.METHODS = ExtMenuitemComponent.METHODS()
+    this.XTYPE = ExtMenuitemComponent.XTYPE()
+    //this.PROPERTIES = ExtMenuitemComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtMenuitemComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtMenuitemComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -578,5 +578,5 @@ export class ExtMenuitemComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-menuitem', ExtMenuitem);
+window.customElements.define('ext-menuitem', ExtMenuitemComponent);
 })();

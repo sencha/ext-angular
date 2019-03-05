@@ -133,5 +133,5 @@ export class ExtRouterComponent extends HTMLElement {
   }
 }
 (function () {
-window.customElements.define('ext-router', ExtRouter);
+window.customElements.define('ext-router', ExtRouterComponent);
 })();

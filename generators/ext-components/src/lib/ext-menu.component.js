@@ -748,11 +748,11 @@ export class ExtMenuComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtMenu.METHODS()
-    this.XTYPE = ExtMenu.XTYPE()
-    //this.PROPERTIES = ExtMenu.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtMenu.PROPERTIESOBJECT()
-    this.EVENTS = ExtMenu.EVENTS()
+    this.METHODS = ExtMenuComponent.METHODS()
+    this.XTYPE = ExtMenuComponent.XTYPE()
+    //this.PROPERTIES = ExtMenuComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtMenuComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtMenuComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -764,5 +764,5 @@ export class ExtMenuComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-menu', ExtMenu);
+window.customElements.define('ext-menu', ExtMenuComponent);
 })();

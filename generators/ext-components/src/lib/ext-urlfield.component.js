@@ -659,11 +659,11 @@ export class ExtUrlfieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtUrlfield.METHODS()
-    this.XTYPE = ExtUrlfield.XTYPE()
-    //this.PROPERTIES = ExtUrlfield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtUrlfield.PROPERTIESOBJECT()
-    this.EVENTS = ExtUrlfield.EVENTS()
+    this.METHODS = ExtUrlfieldComponent.METHODS()
+    this.XTYPE = ExtUrlfieldComponent.XTYPE()
+    //this.PROPERTIES = ExtUrlfieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtUrlfieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtUrlfieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -675,5 +675,5 @@ export class ExtUrlfieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-urlfield', ExtUrlfield);
+window.customElements.define('ext-urlfield', ExtUrlfieldComponent);
 })();

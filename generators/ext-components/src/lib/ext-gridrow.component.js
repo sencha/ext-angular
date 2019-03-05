@@ -547,11 +547,11 @@ export class ExtGridrowComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtGridrow.METHODS()
-    this.XTYPE = ExtGridrow.XTYPE()
-    //this.PROPERTIES = ExtGridrow.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtGridrow.PROPERTIESOBJECT()
-    this.EVENTS = ExtGridrow.EVENTS()
+    this.METHODS = ExtGridrowComponent.METHODS()
+    this.XTYPE = ExtGridrowComponent.XTYPE()
+    //this.PROPERTIES = ExtGridrowComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtGridrowComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtGridrowComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -563,5 +563,5 @@ export class ExtGridrowComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-gridrow', ExtGridrow);
+window.customElements.define('ext-gridrow', ExtGridrowComponent);
 })();

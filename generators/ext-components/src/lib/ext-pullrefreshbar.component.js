@@ -545,11 +545,11 @@ export class ExtPullrefreshbarComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtPullrefreshbar.METHODS()
-    this.XTYPE = ExtPullrefreshbar.XTYPE()
-    //this.PROPERTIES = ExtPullrefreshbar.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtPullrefreshbar.PROPERTIESOBJECT()
-    this.EVENTS = ExtPullrefreshbar.EVENTS()
+    this.METHODS = ExtPullrefreshbarComponent.METHODS()
+    this.XTYPE = ExtPullrefreshbarComponent.XTYPE()
+    //this.PROPERTIES = ExtPullrefreshbarComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtPullrefreshbarComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtPullrefreshbarComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -561,5 +561,5 @@ export class ExtPullrefreshbarComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-pullrefreshbar', ExtPullrefreshbar);
+window.customElements.define('ext-pullrefreshbar', ExtPullrefreshbarComponent);
 })();

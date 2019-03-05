@@ -797,11 +797,11 @@ export class ExtChipviewComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtChipview.METHODS()
-    this.XTYPE = ExtChipview.XTYPE()
-    //this.PROPERTIES = ExtChipview.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtChipview.PROPERTIESOBJECT()
-    this.EVENTS = ExtChipview.EVENTS()
+    this.METHODS = ExtChipviewComponent.METHODS()
+    this.XTYPE = ExtChipviewComponent.XTYPE()
+    //this.PROPERTIES = ExtChipviewComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtChipviewComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtChipviewComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -813,5 +813,5 @@ export class ExtChipviewComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-chipview', ExtChipview);
+window.customElements.define('ext-chipview', ExtChipviewComponent);
 })();

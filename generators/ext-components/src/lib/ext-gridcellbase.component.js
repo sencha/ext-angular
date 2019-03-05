@@ -348,11 +348,11 @@ export class ExtGridcellbaseComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtGridcellbase.METHODS()
-    this.XTYPE = ExtGridcellbase.XTYPE()
-    //this.PROPERTIES = ExtGridcellbase.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtGridcellbase.PROPERTIESOBJECT()
-    this.EVENTS = ExtGridcellbase.EVENTS()
+    this.METHODS = ExtGridcellbaseComponent.METHODS()
+    this.XTYPE = ExtGridcellbaseComponent.XTYPE()
+    //this.PROPERTIES = ExtGridcellbaseComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtGridcellbaseComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtGridcellbaseComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -364,5 +364,5 @@ export class ExtGridcellbaseComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-gridcellbase', ExtGridcellbase);
+window.customElements.define('ext-gridcellbase', ExtGridcellbaseComponent);
 })();

@@ -546,11 +546,11 @@ export class ExtIndexbarComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtIndexbar.METHODS()
-    this.XTYPE = ExtIndexbar.XTYPE()
-    //this.PROPERTIES = ExtIndexbar.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtIndexbar.PROPERTIESOBJECT()
-    this.EVENTS = ExtIndexbar.EVENTS()
+    this.METHODS = ExtIndexbarComponent.METHODS()
+    this.XTYPE = ExtIndexbarComponent.XTYPE()
+    //this.PROPERTIES = ExtIndexbarComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtIndexbarComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtIndexbarComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -562,5 +562,5 @@ export class ExtIndexbarComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-indexbar', ExtIndexbar);
+window.customElements.define('ext-indexbar', ExtIndexbarComponent);
 })();

@@ -537,11 +537,11 @@ export class ExtChipComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtChip.METHODS()
-    this.XTYPE = ExtChip.XTYPE()
-    //this.PROPERTIES = ExtChip.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtChip.PROPERTIESOBJECT()
-    this.EVENTS = ExtChip.EVENTS()
+    this.METHODS = ExtChipComponent.METHODS()
+    this.XTYPE = ExtChipComponent.XTYPE()
+    //this.PROPERTIES = ExtChipComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtChipComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtChipComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -553,5 +553,5 @@ export class ExtChipComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-chip', ExtChip);
+window.customElements.define('ext-chip', ExtChipComponent);
 })();

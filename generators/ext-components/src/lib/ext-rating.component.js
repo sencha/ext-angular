@@ -559,11 +559,11 @@ export class ExtRatingComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtRating.METHODS()
-    this.XTYPE = ExtRating.XTYPE()
-    //this.PROPERTIES = ExtRating.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtRating.PROPERTIESOBJECT()
-    this.EVENTS = ExtRating.EVENTS()
+    this.METHODS = ExtRatingComponent.METHODS()
+    this.XTYPE = ExtRatingComponent.XTYPE()
+    //this.PROPERTIES = ExtRatingComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtRatingComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtRatingComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -575,5 +575,5 @@ export class ExtRatingComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-rating', ExtRating);
+window.customElements.define('ext-rating', ExtRatingComponent);
 })();

@@ -754,11 +754,11 @@ export class ExtSpacefillingComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtSpacefilling.METHODS()
-    this.XTYPE = ExtSpacefilling.XTYPE()
-    //this.PROPERTIES = ExtSpacefilling.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtSpacefilling.PROPERTIESOBJECT()
-    this.EVENTS = ExtSpacefilling.EVENTS()
+    this.METHODS = ExtSpacefillingComponent.METHODS()
+    this.XTYPE = ExtSpacefillingComponent.XTYPE()
+    //this.PROPERTIES = ExtSpacefillingComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtSpacefillingComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtSpacefillingComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -770,5 +770,5 @@ export class ExtSpacefillingComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-spacefilling', ExtSpacefilling);
+window.customElements.define('ext-spacefilling', ExtSpacefillingComponent);
 })();

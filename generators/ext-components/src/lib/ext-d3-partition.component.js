@@ -610,11 +610,11 @@ export class ExtD3_partitionComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtD3_partition.METHODS()
-    this.XTYPE = ExtD3_partition.XTYPE()
-    //this.PROPERTIES = ExtD3_partition.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtD3_partition.PROPERTIESOBJECT()
-    this.EVENTS = ExtD3_partition.EVENTS()
+    this.METHODS = ExtD3_partitionComponent.METHODS()
+    this.XTYPE = ExtD3_partitionComponent.XTYPE()
+    //this.PROPERTIES = ExtD3_partitionComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtD3_partitionComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtD3_partitionComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -626,5 +626,5 @@ export class ExtD3_partitionComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-d3_partition', ExtD3_partition);
+window.customElements.define('ext-d3_partition', ExtD3_partitionComponent);
 })();

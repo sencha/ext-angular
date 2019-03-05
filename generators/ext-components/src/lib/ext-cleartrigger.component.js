@@ -342,11 +342,11 @@ export class ExtCleartriggerComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtCleartrigger.METHODS()
-    this.XTYPE = ExtCleartrigger.XTYPE()
-    //this.PROPERTIES = ExtCleartrigger.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtCleartrigger.PROPERTIESOBJECT()
-    this.EVENTS = ExtCleartrigger.EVENTS()
+    this.METHODS = ExtCleartriggerComponent.METHODS()
+    this.XTYPE = ExtCleartriggerComponent.XTYPE()
+    //this.PROPERTIES = ExtCleartriggerComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtCleartriggerComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtCleartriggerComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -358,5 +358,5 @@ export class ExtCleartriggerComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-cleartrigger', ExtCleartrigger);
+window.customElements.define('ext-cleartrigger', ExtCleartriggerComponent);
 })();

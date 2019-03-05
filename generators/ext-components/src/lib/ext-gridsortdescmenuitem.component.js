@@ -581,11 +581,11 @@ export class ExtGridsortdescmenuitemComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtGridsortdescmenuitem.METHODS()
-    this.XTYPE = ExtGridsortdescmenuitem.XTYPE()
-    //this.PROPERTIES = ExtGridsortdescmenuitem.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtGridsortdescmenuitem.PROPERTIESOBJECT()
-    this.EVENTS = ExtGridsortdescmenuitem.EVENTS()
+    this.METHODS = ExtGridsortdescmenuitemComponent.METHODS()
+    this.XTYPE = ExtGridsortdescmenuitemComponent.XTYPE()
+    //this.PROPERTIES = ExtGridsortdescmenuitemComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtGridsortdescmenuitemComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtGridsortdescmenuitemComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -597,5 +597,5 @@ export class ExtGridsortdescmenuitemComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-gridsortdescmenuitem', ExtGridsortdescmenuitem);
+window.customElements.define('ext-gridsortdescmenuitem', ExtGridsortdescmenuitemComponent);
 })();

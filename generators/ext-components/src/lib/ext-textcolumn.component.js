@@ -737,11 +737,11 @@ export class ExtTextcolumnComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtTextcolumn.METHODS()
-    this.XTYPE = ExtTextcolumn.XTYPE()
-    //this.PROPERTIES = ExtTextcolumn.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtTextcolumn.PROPERTIESOBJECT()
-    this.EVENTS = ExtTextcolumn.EVENTS()
+    this.METHODS = ExtTextcolumnComponent.METHODS()
+    this.XTYPE = ExtTextcolumnComponent.XTYPE()
+    //this.PROPERTIES = ExtTextcolumnComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtTextcolumnComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtTextcolumnComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -753,5 +753,5 @@ export class ExtTextcolumnComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-textcolumn', ExtTextcolumn);
+window.customElements.define('ext-textcolumn', ExtTextcolumnComponent);
 })();

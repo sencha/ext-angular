@@ -651,11 +651,11 @@ export class ExtCarouselComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtCarousel.METHODS()
-    this.XTYPE = ExtCarousel.XTYPE()
-    //this.PROPERTIES = ExtCarousel.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtCarousel.PROPERTIESOBJECT()
-    this.EVENTS = ExtCarousel.EVENTS()
+    this.METHODS = ExtCarouselComponent.METHODS()
+    this.XTYPE = ExtCarouselComponent.XTYPE()
+    //this.PROPERTIES = ExtCarouselComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtCarouselComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtCarouselComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -667,5 +667,5 @@ export class ExtCarouselComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-carousel', ExtCarousel);
+window.customElements.define('ext-carousel', ExtCarouselComponent);
 })();

@@ -696,11 +696,11 @@ export class ExtDatepickerfieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtDatepickerfield.METHODS()
-    this.XTYPE = ExtDatepickerfield.XTYPE()
-    //this.PROPERTIES = ExtDatepickerfield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtDatepickerfield.PROPERTIESOBJECT()
-    this.EVENTS = ExtDatepickerfield.EVENTS()
+    this.METHODS = ExtDatepickerfieldComponent.METHODS()
+    this.XTYPE = ExtDatepickerfieldComponent.XTYPE()
+    //this.PROPERTIES = ExtDatepickerfieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtDatepickerfieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtDatepickerfieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -712,5 +712,5 @@ export class ExtDatepickerfieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-datepickerfield', ExtDatepickerfield);
+window.customElements.define('ext-datepickerfield', ExtDatepickerfieldComponent);
 })();

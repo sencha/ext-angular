@@ -858,11 +858,11 @@ export class ExtYearpickerComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtYearpicker.METHODS()
-    this.XTYPE = ExtYearpicker.XTYPE()
-    //this.PROPERTIES = ExtYearpicker.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtYearpicker.PROPERTIESOBJECT()
-    this.EVENTS = ExtYearpicker.EVENTS()
+    this.METHODS = ExtYearpickerComponent.METHODS()
+    this.XTYPE = ExtYearpickerComponent.XTYPE()
+    //this.PROPERTIES = ExtYearpickerComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtYearpickerComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtYearpickerComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -874,5 +874,5 @@ export class ExtYearpickerComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-yearpicker', ExtYearpicker);
+window.customElements.define('ext-yearpicker', ExtYearpickerComponent);
 })();

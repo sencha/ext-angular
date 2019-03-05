@@ -690,11 +690,11 @@ export class ExtTimefieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtTimefield.METHODS()
-    this.XTYPE = ExtTimefield.XTYPE()
-    //this.PROPERTIES = ExtTimefield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtTimefield.PROPERTIESOBJECT()
-    this.EVENTS = ExtTimefield.EVENTS()
+    this.METHODS = ExtTimefieldComponent.METHODS()
+    this.XTYPE = ExtTimefieldComponent.XTYPE()
+    //this.PROPERTIES = ExtTimefieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtTimefieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtTimefieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -706,5 +706,5 @@ export class ExtTimefieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-timefield', ExtTimefield);
+window.customElements.define('ext-timefield', ExtTimefieldComponent);
 })();

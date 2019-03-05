@@ -750,11 +750,11 @@ export class ExtCalendar_calendar_pickerComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtCalendar_calendar_picker.METHODS()
-    this.XTYPE = ExtCalendar_calendar_picker.XTYPE()
-    //this.PROPERTIES = ExtCalendar_calendar_picker.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtCalendar_calendar_picker.PROPERTIESOBJECT()
-    this.EVENTS = ExtCalendar_calendar_picker.EVENTS()
+    this.METHODS = ExtCalendar_calendar_pickerComponent.METHODS()
+    this.XTYPE = ExtCalendar_calendar_pickerComponent.XTYPE()
+    //this.PROPERTIES = ExtCalendar_calendar_pickerComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtCalendar_calendar_pickerComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtCalendar_calendar_pickerComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -766,5 +766,5 @@ export class ExtCalendar_calendar_pickerComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-calendar_calendar_picker', ExtCalendar_calendar_picker);
+window.customElements.define('ext-calendar_calendar_picker', ExtCalendar_calendar_pickerComponent);
 })();

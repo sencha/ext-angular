@@ -830,11 +830,11 @@ export class ExtCalendar_form_addComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtCalendar_form_add.METHODS()
-    this.XTYPE = ExtCalendar_form_add.XTYPE()
-    //this.PROPERTIES = ExtCalendar_form_add.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtCalendar_form_add.PROPERTIESOBJECT()
-    this.EVENTS = ExtCalendar_form_add.EVENTS()
+    this.METHODS = ExtCalendar_form_addComponent.METHODS()
+    this.XTYPE = ExtCalendar_form_addComponent.XTYPE()
+    //this.PROPERTIES = ExtCalendar_form_addComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtCalendar_form_addComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtCalendar_form_addComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -846,5 +846,5 @@ export class ExtCalendar_form_addComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-calendar_form_add', ExtCalendar_form_add);
+window.customElements.define('ext-calendar_form_add', ExtCalendar_form_addComponent);
 })();

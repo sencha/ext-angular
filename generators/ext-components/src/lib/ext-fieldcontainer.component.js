@@ -637,11 +637,11 @@ export class ExtFieldcontainerComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtFieldcontainer.METHODS()
-    this.XTYPE = ExtFieldcontainer.XTYPE()
-    //this.PROPERTIES = ExtFieldcontainer.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtFieldcontainer.PROPERTIESOBJECT()
-    this.EVENTS = ExtFieldcontainer.EVENTS()
+    this.METHODS = ExtFieldcontainerComponent.METHODS()
+    this.XTYPE = ExtFieldcontainerComponent.XTYPE()
+    //this.PROPERTIES = ExtFieldcontainerComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtFieldcontainerComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtFieldcontainerComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -653,5 +653,5 @@ export class ExtFieldcontainerComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-fieldcontainer', ExtFieldcontainer);
+window.customElements.define('ext-fieldcontainer', ExtFieldcontainerComponent);
 })();

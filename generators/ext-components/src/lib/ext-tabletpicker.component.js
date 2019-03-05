@@ -727,11 +727,11 @@ export class ExtTabletpickerComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtTabletpicker.METHODS()
-    this.XTYPE = ExtTabletpicker.XTYPE()
-    //this.PROPERTIES = ExtTabletpicker.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtTabletpicker.PROPERTIESOBJECT()
-    this.EVENTS = ExtTabletpicker.EVENTS()
+    this.METHODS = ExtTabletpickerComponent.METHODS()
+    this.XTYPE = ExtTabletpickerComponent.XTYPE()
+    //this.PROPERTIES = ExtTabletpickerComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtTabletpickerComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtTabletpickerComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -743,5 +743,5 @@ export class ExtTabletpickerComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-tabletpicker', ExtTabletpicker);
+window.customElements.define('ext-tabletpicker', ExtTabletpickerComponent);
 })();

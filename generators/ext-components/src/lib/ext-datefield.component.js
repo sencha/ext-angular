@@ -696,11 +696,11 @@ export class ExtDatefieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtDatefield.METHODS()
-    this.XTYPE = ExtDatefield.XTYPE()
-    //this.PROPERTIES = ExtDatefield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtDatefield.PROPERTIESOBJECT()
-    this.EVENTS = ExtDatefield.EVENTS()
+    this.METHODS = ExtDatefieldComponent.METHODS()
+    this.XTYPE = ExtDatefieldComponent.XTYPE()
+    //this.PROPERTIES = ExtDatefieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtDatefieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtDatefieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -712,5 +712,5 @@ export class ExtDatefieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-datefield', ExtDatefield);
+window.customElements.define('ext-datefield', ExtDatefieldComponent);
 })();

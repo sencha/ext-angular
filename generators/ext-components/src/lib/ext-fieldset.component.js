@@ -652,11 +652,11 @@ export class ExtFieldsetComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtFieldset.METHODS()
-    this.XTYPE = ExtFieldset.XTYPE()
-    //this.PROPERTIES = ExtFieldset.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtFieldset.PROPERTIESOBJECT()
-    this.EVENTS = ExtFieldset.EVENTS()
+    this.METHODS = ExtFieldsetComponent.METHODS()
+    this.XTYPE = ExtFieldsetComponent.XTYPE()
+    //this.PROPERTIES = ExtFieldsetComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtFieldsetComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtFieldsetComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -668,5 +668,5 @@ export class ExtFieldsetComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-fieldset', ExtFieldset);
+window.customElements.define('ext-fieldset', ExtFieldsetComponent);
 })();

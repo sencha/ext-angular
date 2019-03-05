@@ -675,11 +675,11 @@ export class ExtDrawComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtDraw.METHODS()
-    this.XTYPE = ExtDraw.XTYPE()
-    //this.PROPERTIES = ExtDraw.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtDraw.PROPERTIESOBJECT()
-    this.EVENTS = ExtDraw.EVENTS()
+    this.METHODS = ExtDrawComponent.METHODS()
+    this.XTYPE = ExtDrawComponent.XTYPE()
+    //this.PROPERTIES = ExtDrawComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtDrawComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtDrawComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -691,5 +691,5 @@ export class ExtDrawComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-draw', ExtDraw);
+window.customElements.define('ext-draw', ExtDrawComponent);
 })();

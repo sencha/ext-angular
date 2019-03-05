@@ -659,11 +659,11 @@ export class ExtTextfieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtTextfield.METHODS()
-    this.XTYPE = ExtTextfield.XTYPE()
-    //this.PROPERTIES = ExtTextfield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtTextfield.PROPERTIESOBJECT()
-    this.EVENTS = ExtTextfield.EVENTS()
+    this.METHODS = ExtTextfieldComponent.METHODS()
+    this.XTYPE = ExtTextfieldComponent.XTYPE()
+    //this.PROPERTIES = ExtTextfieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtTextfieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtTextfieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -675,5 +675,5 @@ export class ExtTextfieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-textfield', ExtTextfield);
+window.customElements.define('ext-textfield', ExtTextfieldComponent);
 })();

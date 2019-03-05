@@ -348,11 +348,11 @@ export class ExtCheckcellComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtCheckcell.METHODS()
-    this.XTYPE = ExtCheckcell.XTYPE()
-    //this.PROPERTIES = ExtCheckcell.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtCheckcell.PROPERTIESOBJECT()
-    this.EVENTS = ExtCheckcell.EVENTS()
+    this.METHODS = ExtCheckcellComponent.METHODS()
+    this.XTYPE = ExtCheckcellComponent.XTYPE()
+    //this.PROPERTIES = ExtCheckcellComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtCheckcellComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtCheckcellComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -364,5 +364,5 @@ export class ExtCheckcellComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-checkcell', ExtCheckcell);
+window.customElements.define('ext-checkcell', ExtCheckcellComponent);
 })();

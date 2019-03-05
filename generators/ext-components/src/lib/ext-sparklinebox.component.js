@@ -573,11 +573,11 @@ export class ExtSparklineboxComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtSparklinebox.METHODS()
-    this.XTYPE = ExtSparklinebox.XTYPE()
-    //this.PROPERTIES = ExtSparklinebox.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtSparklinebox.PROPERTIESOBJECT()
-    this.EVENTS = ExtSparklinebox.EVENTS()
+    this.METHODS = ExtSparklineboxComponent.METHODS()
+    this.XTYPE = ExtSparklineboxComponent.XTYPE()
+    //this.PROPERTIES = ExtSparklineboxComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtSparklineboxComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtSparklineboxComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -589,5 +589,5 @@ export class ExtSparklineboxComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-sparklinebox', ExtSparklinebox);
+window.customElements.define('ext-sparklinebox', ExtSparklineboxComponent);
 })();

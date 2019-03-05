@@ -574,11 +574,11 @@ export class ExtMediaComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtMedia.METHODS()
-    this.XTYPE = ExtMedia.XTYPE()
-    //this.PROPERTIES = ExtMedia.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtMedia.PROPERTIESOBJECT()
-    this.EVENTS = ExtMedia.EVENTS()
+    this.METHODS = ExtMediaComponent.METHODS()
+    this.XTYPE = ExtMediaComponent.XTYPE()
+    //this.PROPERTIES = ExtMediaComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtMediaComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtMediaComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -590,5 +590,5 @@ export class ExtMediaComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-media', ExtMedia);
+window.customElements.define('ext-media', ExtMediaComponent);
 })();

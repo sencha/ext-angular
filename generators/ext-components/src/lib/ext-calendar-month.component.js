@@ -815,11 +815,11 @@ export class ExtCalendar_monthComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtCalendar_month.METHODS()
-    this.XTYPE = ExtCalendar_month.XTYPE()
-    //this.PROPERTIES = ExtCalendar_month.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtCalendar_month.PROPERTIESOBJECT()
-    this.EVENTS = ExtCalendar_month.EVENTS()
+    this.METHODS = ExtCalendar_monthComponent.METHODS()
+    this.XTYPE = ExtCalendar_monthComponent.XTYPE()
+    //this.PROPERTIES = ExtCalendar_monthComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtCalendar_monthComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtCalendar_monthComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -831,5 +831,5 @@ export class ExtCalendar_monthComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-calendar_month', ExtCalendar_month);
+window.customElements.define('ext-calendar_month', ExtCalendar_monthComponent);
 })();

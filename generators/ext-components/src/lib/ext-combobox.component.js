@@ -788,11 +788,11 @@ export class ExtComboboxComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtCombobox.METHODS()
-    this.XTYPE = ExtCombobox.XTYPE()
-    //this.PROPERTIES = ExtCombobox.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtCombobox.PROPERTIESOBJECT()
-    this.EVENTS = ExtCombobox.EVENTS()
+    this.METHODS = ExtComboboxComponent.METHODS()
+    this.XTYPE = ExtComboboxComponent.XTYPE()
+    //this.PROPERTIES = ExtComboboxComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtComboboxComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtComboboxComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -804,5 +804,5 @@ export class ExtComboboxComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-combobox', ExtCombobox);
+window.customElements.define('ext-combobox', ExtComboboxComponent);
 })();

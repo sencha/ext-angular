@@ -760,11 +760,11 @@ export class ExtPolarComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtPolar.METHODS()
-    this.XTYPE = ExtPolar.XTYPE()
-    //this.PROPERTIES = ExtPolar.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtPolar.PROPERTIESOBJECT()
-    this.EVENTS = ExtPolar.EVENTS()
+    this.METHODS = ExtPolarComponent.METHODS()
+    this.XTYPE = ExtPolarComponent.XTYPE()
+    //this.PROPERTIES = ExtPolarComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtPolarComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtPolarComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -776,5 +776,5 @@ export class ExtPolarComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-polar', ExtPolar);
+window.customElements.define('ext-polar', ExtPolarComponent);
 })();

@@ -668,11 +668,11 @@ export class ExtFilefieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtFilefield.METHODS()
-    this.XTYPE = ExtFilefield.XTYPE()
-    //this.PROPERTIES = ExtFilefield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtFilefield.PROPERTIESOBJECT()
-    this.EVENTS = ExtFilefield.EVENTS()
+    this.METHODS = ExtFilefieldComponent.METHODS()
+    this.XTYPE = ExtFilefieldComponent.XTYPE()
+    //this.PROPERTIES = ExtFilefieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtFilefieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtFilefieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -684,5 +684,5 @@ export class ExtFilefieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-filefield', ExtFilefield);
+window.customElements.define('ext-filefield', ExtFilefieldComponent);
 })();

@@ -348,11 +348,11 @@ export class ExtMenutriggerComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtMenutrigger.METHODS()
-    this.XTYPE = ExtMenutrigger.XTYPE()
-    //this.PROPERTIES = ExtMenutrigger.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtMenutrigger.PROPERTIESOBJECT()
-    this.EVENTS = ExtMenutrigger.EVENTS()
+    this.METHODS = ExtMenutriggerComponent.METHODS()
+    this.XTYPE = ExtMenutriggerComponent.XTYPE()
+    //this.PROPERTIES = ExtMenutriggerComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtMenutriggerComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtMenutriggerComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -364,5 +364,5 @@ export class ExtMenutriggerComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-menutrigger', ExtMenutrigger);
+window.customElements.define('ext-menutrigger', ExtMenutriggerComponent);
 })();

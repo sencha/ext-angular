@@ -790,11 +790,11 @@ export class ExtFormpanelComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtFormpanel.METHODS()
-    this.XTYPE = ExtFormpanel.XTYPE()
-    //this.PROPERTIES = ExtFormpanel.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtFormpanel.PROPERTIESOBJECT()
-    this.EVENTS = ExtFormpanel.EVENTS()
+    this.METHODS = ExtFormpanelComponent.METHODS()
+    this.XTYPE = ExtFormpanelComponent.XTYPE()
+    //this.PROPERTIES = ExtFormpanelComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtFormpanelComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtFormpanelComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -806,5 +806,5 @@ export class ExtFormpanelComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-formpanel', ExtFormpanel);
+window.customElements.define('ext-formpanel', ExtFormpanelComponent);
 })();

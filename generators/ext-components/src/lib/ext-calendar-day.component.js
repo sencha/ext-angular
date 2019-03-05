@@ -816,11 +816,11 @@ export class ExtCalendar_dayComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtCalendar_day.METHODS()
-    this.XTYPE = ExtCalendar_day.XTYPE()
-    //this.PROPERTIES = ExtCalendar_day.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtCalendar_day.PROPERTIESOBJECT()
-    this.EVENTS = ExtCalendar_day.EVENTS()
+    this.METHODS = ExtCalendar_dayComponent.METHODS()
+    this.XTYPE = ExtCalendar_dayComponent.XTYPE()
+    //this.PROPERTIES = ExtCalendar_dayComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtCalendar_dayComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtCalendar_dayComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -832,5 +832,5 @@ export class ExtCalendar_dayComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-calendar_day', ExtCalendar_day);
+window.customElements.define('ext-calendar_day', ExtCalendar_dayComponent);
 })();

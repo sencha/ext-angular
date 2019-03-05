@@ -15,11 +15,11 @@ export class Ext{capclassname}Component extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = Ext{capclassname}.METHODS()
-    this.XTYPE = Ext{capclassname}.XTYPE()
-    //this.PROPERTIES = Ext{capclassname}.PROPERTIES()
-    this.PROPERTIESOBJECT = Ext{capclassname}.PROPERTIESOBJECT()
-    this.EVENTS = Ext{capclassname}.EVENTS()
+    this.METHODS = Ext{capclassname}Component.METHODS()
+    this.XTYPE = Ext{capclassname}Component.XTYPE()
+    //this.PROPERTIES = Ext{capclassname}Component.PROPERTIES()
+    this.PROPERTIESOBJECT = Ext{capclassname}Component.PROPERTIESOBJECT()
+    this.EVENTS = Ext{capclassname}Component.EVENTS()
   }
 
   connectedCallback() {
@@ -31,5 +31,5 @@ export class Ext{capclassname}Component extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-{classname}', Ext{capclassname});
+window.customElements.define('ext-{classname}', Ext{capclassname}Component);
 })();

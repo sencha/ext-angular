@@ -540,11 +540,11 @@ export class ExtImgComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtImg.METHODS()
-    this.XTYPE = ExtImg.XTYPE()
-    //this.PROPERTIES = ExtImg.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtImg.PROPERTIESOBJECT()
-    this.EVENTS = ExtImg.EVENTS()
+    this.METHODS = ExtImgComponent.METHODS()
+    this.XTYPE = ExtImgComponent.XTYPE()
+    //this.PROPERTIES = ExtImgComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtImgComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtImgComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -556,5 +556,5 @@ export class ExtImgComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-img', ExtImg);
+window.customElements.define('ext-img', ExtImgComponent);
 })();
