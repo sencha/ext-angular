@@ -92,11 +92,11 @@ export class ExtInteractionComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtInteraction.METHODS()
-    this.XTYPE = ExtInteraction.XTYPE()
-    //this.PROPERTIES = ExtInteraction.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtInteraction.PROPERTIESOBJECT()
-    this.EVENTS = ExtInteraction.EVENTS()
+    this.METHODS = ExtInteractionComponent.METHODS()
+    this.XTYPE = ExtInteractionComponent.XTYPE()
+    //this.PROPERTIES = ExtInteractionComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtInteractionComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtInteractionComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -108,5 +108,5 @@ export class ExtInteractionComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-interaction', ExtInteraction);
+window.customElements.define('ext-interaction', ExtInteractionComponent);
 })();

@@ -761,11 +761,11 @@ export class ExtDialogComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtDialog.METHODS()
-    this.XTYPE = ExtDialog.XTYPE()
-    //this.PROPERTIES = ExtDialog.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtDialog.PROPERTIESOBJECT()
-    this.EVENTS = ExtDialog.EVENTS()
+    this.METHODS = ExtDialogComponent.METHODS()
+    this.XTYPE = ExtDialogComponent.XTYPE()
+    //this.PROPERTIES = ExtDialogComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtDialogComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtDialogComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -777,5 +777,5 @@ export class ExtDialogComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-dialog', ExtDialog);
+window.customElements.define('ext-dialog', ExtDialogComponent);
 })();

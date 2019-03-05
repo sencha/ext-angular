@@ -747,11 +747,11 @@ export class ExtCheckcolumnComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtCheckcolumn.METHODS()
-    this.XTYPE = ExtCheckcolumn.XTYPE()
-    //this.PROPERTIES = ExtCheckcolumn.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtCheckcolumn.PROPERTIESOBJECT()
-    this.EVENTS = ExtCheckcolumn.EVENTS()
+    this.METHODS = ExtCheckcolumnComponent.METHODS()
+    this.XTYPE = ExtCheckcolumnComponent.XTYPE()
+    //this.PROPERTIES = ExtCheckcolumnComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtCheckcolumnComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtCheckcolumnComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -763,5 +763,5 @@ export class ExtCheckcolumnComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-checkcolumn', ExtCheckcolumn);
+window.customElements.define('ext-checkcolumn', ExtCheckcolumnComponent);
 })();

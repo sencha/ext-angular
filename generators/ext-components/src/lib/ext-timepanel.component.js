@@ -747,11 +747,11 @@ export class ExtTimepanelComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtTimepanel.METHODS()
-    this.XTYPE = ExtTimepanel.XTYPE()
-    //this.PROPERTIES = ExtTimepanel.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtTimepanel.PROPERTIESOBJECT()
-    this.EVENTS = ExtTimepanel.EVENTS()
+    this.METHODS = ExtTimepanelComponent.METHODS()
+    this.XTYPE = ExtTimepanelComponent.XTYPE()
+    //this.PROPERTIES = ExtTimepanelComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtTimepanelComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtTimepanelComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -763,5 +763,5 @@ export class ExtTimepanelComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-timepanel', ExtTimepanel);
+window.customElements.define('ext-timepanel', ExtTimepanelComponent);
 })();

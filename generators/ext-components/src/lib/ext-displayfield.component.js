@@ -612,11 +612,11 @@ export class ExtDisplayfieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtDisplayfield.METHODS()
-    this.XTYPE = ExtDisplayfield.XTYPE()
-    //this.PROPERTIES = ExtDisplayfield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtDisplayfield.PROPERTIESOBJECT()
-    this.EVENTS = ExtDisplayfield.EVENTS()
+    this.METHODS = ExtDisplayfieldComponent.METHODS()
+    this.XTYPE = ExtDisplayfieldComponent.XTYPE()
+    //this.PROPERTIES = ExtDisplayfieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtDisplayfieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtDisplayfieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -628,5 +628,5 @@ export class ExtDisplayfieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-displayfield', ExtDisplayfield);
+window.customElements.define('ext-displayfield', ExtDisplayfieldComponent);
 })();

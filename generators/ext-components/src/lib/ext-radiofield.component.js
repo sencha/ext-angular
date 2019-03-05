@@ -634,11 +634,11 @@ export class ExtRadiofieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtRadiofield.METHODS()
-    this.XTYPE = ExtRadiofield.XTYPE()
-    //this.PROPERTIES = ExtRadiofield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtRadiofield.PROPERTIESOBJECT()
-    this.EVENTS = ExtRadiofield.EVENTS()
+    this.METHODS = ExtRadiofieldComponent.METHODS()
+    this.XTYPE = ExtRadiofieldComponent.XTYPE()
+    //this.PROPERTIES = ExtRadiofieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtRadiofieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtRadiofieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -650,5 +650,5 @@ export class ExtRadiofieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-radiofield', ExtRadiofield);
+window.customElements.define('ext-radiofield', ExtRadiofieldComponent);
 })();

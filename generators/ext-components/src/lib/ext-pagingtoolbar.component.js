@@ -655,11 +655,11 @@ export class ExtPagingtoolbarComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtPagingtoolbar.METHODS()
-    this.XTYPE = ExtPagingtoolbar.XTYPE()
-    //this.PROPERTIES = ExtPagingtoolbar.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtPagingtoolbar.PROPERTIESOBJECT()
-    this.EVENTS = ExtPagingtoolbar.EVENTS()
+    this.METHODS = ExtPagingtoolbarComponent.METHODS()
+    this.XTYPE = ExtPagingtoolbarComponent.XTYPE()
+    //this.PROPERTIES = ExtPagingtoolbarComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtPagingtoolbarComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtPagingtoolbarComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -671,5 +671,5 @@ export class ExtPagingtoolbarComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-pagingtoolbar', ExtPagingtoolbar);
+window.customElements.define('ext-pagingtoolbar', ExtPagingtoolbarComponent);
 })();

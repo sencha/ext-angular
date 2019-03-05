@@ -1026,11 +1026,11 @@ export class ExtPivotgridComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtPivotgrid.METHODS()
-    this.XTYPE = ExtPivotgrid.XTYPE()
-    //this.PROPERTIES = ExtPivotgrid.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtPivotgrid.PROPERTIESOBJECT()
-    this.EVENTS = ExtPivotgrid.EVENTS()
+    this.METHODS = ExtPivotgridComponent.METHODS()
+    this.XTYPE = ExtPivotgridComponent.XTYPE()
+    //this.PROPERTIES = ExtPivotgridComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtPivotgridComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtPivotgridComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -1042,5 +1042,5 @@ export class ExtPivotgridComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-pivotgrid', ExtPivotgrid);
+window.customElements.define('ext-pivotgrid', ExtPivotgridComponent);
 })();

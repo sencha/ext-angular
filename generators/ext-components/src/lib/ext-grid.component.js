@@ -913,11 +913,11 @@ export class ExtGridComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtGrid.METHODS()
-    this.XTYPE = ExtGrid.XTYPE()
-    //this.PROPERTIES = ExtGrid.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtGrid.PROPERTIESOBJECT()
-    this.EVENTS = ExtGrid.EVENTS()
+    this.METHODS = ExtGridComponent.METHODS()
+    this.XTYPE = ExtGridComponent.XTYPE()
+    //this.PROPERTIES = ExtGridComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtGridComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtGridComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -929,5 +929,5 @@ export class ExtGridComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-grid', ExtGrid);
+window.customElements.define('ext-grid', ExtGridComponent);
 })();

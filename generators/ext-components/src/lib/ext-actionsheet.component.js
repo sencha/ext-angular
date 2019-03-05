@@ -741,11 +741,11 @@ export class ExtActionsheetComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtActionsheet.METHODS()
-    this.XTYPE = ExtActionsheet.XTYPE()
-    //this.PROPERTIES = ExtActionsheet.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtActionsheet.PROPERTIESOBJECT()
-    this.EVENTS = ExtActionsheet.EVENTS()
+    this.METHODS = ExtActionsheetComponent.METHODS()
+    this.XTYPE = ExtActionsheetComponent.XTYPE()
+    //this.PROPERTIES = ExtActionsheetComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtActionsheetComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtActionsheetComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -757,5 +757,5 @@ export class ExtActionsheetComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-actionsheet', ExtActionsheet);
+window.customElements.define('ext-actionsheet', ExtActionsheetComponent);
 })();

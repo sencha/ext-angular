@@ -546,11 +546,11 @@ export class ExtPaneltoolComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtPaneltool.METHODS()
-    this.XTYPE = ExtPaneltool.XTYPE()
-    //this.PROPERTIES = ExtPaneltool.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtPaneltool.PROPERTIESOBJECT()
-    this.EVENTS = ExtPaneltool.EVENTS()
+    this.METHODS = ExtPaneltoolComponent.METHODS()
+    this.XTYPE = ExtPaneltoolComponent.XTYPE()
+    //this.PROPERTIES = ExtPaneltoolComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtPaneltoolComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtPaneltoolComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -562,5 +562,5 @@ export class ExtPaneltoolComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-paneltool', ExtPaneltool);
+window.customElements.define('ext-paneltool', ExtPaneltoolComponent);
 })();

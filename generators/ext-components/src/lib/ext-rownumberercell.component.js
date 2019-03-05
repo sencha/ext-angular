@@ -356,11 +356,11 @@ export class ExtRownumberercellComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtRownumberercell.METHODS()
-    this.XTYPE = ExtRownumberercell.XTYPE()
-    //this.PROPERTIES = ExtRownumberercell.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtRownumberercell.PROPERTIESOBJECT()
-    this.EVENTS = ExtRownumberercell.EVENTS()
+    this.METHODS = ExtRownumberercellComponent.METHODS()
+    this.XTYPE = ExtRownumberercellComponent.XTYPE()
+    //this.PROPERTIES = ExtRownumberercellComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtRownumberercellComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtRownumberercellComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -372,5 +372,5 @@ export class ExtRownumberercellComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-rownumberercell', ExtRownumberercell);
+window.customElements.define('ext-rownumberercell', ExtRownumberercellComponent);
 })();

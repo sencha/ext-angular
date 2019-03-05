@@ -525,11 +525,11 @@ export class ExtLabelComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtLabel.METHODS()
-    this.XTYPE = ExtLabel.XTYPE()
-    //this.PROPERTIES = ExtLabel.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtLabel.PROPERTIESOBJECT()
-    this.EVENTS = ExtLabel.EVENTS()
+    this.METHODS = ExtLabelComponent.METHODS()
+    this.XTYPE = ExtLabelComponent.XTYPE()
+    //this.PROPERTIES = ExtLabelComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtLabelComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtLabelComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -541,5 +541,5 @@ export class ExtLabelComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-label', ExtLabel);
+window.customElements.define('ext-label', ExtLabelComponent);
 })();

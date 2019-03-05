@@ -547,11 +547,11 @@ export class ExtPivotgridrowComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtPivotgridrow.METHODS()
-    this.XTYPE = ExtPivotgridrow.XTYPE()
-    //this.PROPERTIES = ExtPivotgridrow.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtPivotgridrow.PROPERTIESOBJECT()
-    this.EVENTS = ExtPivotgridrow.EVENTS()
+    this.METHODS = ExtPivotgridrowComponent.METHODS()
+    this.XTYPE = ExtPivotgridrowComponent.XTYPE()
+    //this.PROPERTIES = ExtPivotgridrowComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtPivotgridrowComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtPivotgridrowComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -563,5 +563,5 @@ export class ExtPivotgridrowComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-pivotgridrow', ExtPivotgridrow);
+window.customElements.define('ext-pivotgridrow', ExtPivotgridrowComponent);
 })();

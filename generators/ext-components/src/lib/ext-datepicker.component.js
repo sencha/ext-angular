@@ -792,11 +792,11 @@ export class ExtDatepickerComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtDatepicker.METHODS()
-    this.XTYPE = ExtDatepicker.XTYPE()
-    //this.PROPERTIES = ExtDatepicker.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtDatepicker.PROPERTIESOBJECT()
-    this.EVENTS = ExtDatepicker.EVENTS()
+    this.METHODS = ExtDatepickerComponent.METHODS()
+    this.XTYPE = ExtDatepickerComponent.XTYPE()
+    //this.PROPERTIES = ExtDatepickerComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtDatepickerComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtDatepickerComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -808,5 +808,5 @@ export class ExtDatepickerComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-datepicker', ExtDatepicker);
+window.customElements.define('ext-datepicker', ExtDatepickerComponent);
 })();

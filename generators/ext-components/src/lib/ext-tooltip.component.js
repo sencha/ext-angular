@@ -757,11 +757,11 @@ export class ExtTooltipComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtTooltip.METHODS()
-    this.XTYPE = ExtTooltip.XTYPE()
-    //this.PROPERTIES = ExtTooltip.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtTooltip.PROPERTIESOBJECT()
-    this.EVENTS = ExtTooltip.EVENTS()
+    this.METHODS = ExtTooltipComponent.METHODS()
+    this.XTYPE = ExtTooltipComponent.XTYPE()
+    //this.PROPERTIES = ExtTooltipComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtTooltipComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtTooltipComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -773,5 +773,5 @@ export class ExtTooltipComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-tooltip', ExtTooltip);
+window.customElements.define('ext-tooltip', ExtTooltipComponent);
 })();

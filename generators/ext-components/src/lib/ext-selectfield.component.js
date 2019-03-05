@@ -750,11 +750,11 @@ export class ExtSelectfieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtSelectfield.METHODS()
-    this.XTYPE = ExtSelectfield.XTYPE()
-    //this.PROPERTIES = ExtSelectfield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtSelectfield.PROPERTIESOBJECT()
-    this.EVENTS = ExtSelectfield.EVENTS()
+    this.METHODS = ExtSelectfieldComponent.METHODS()
+    this.XTYPE = ExtSelectfieldComponent.XTYPE()
+    //this.PROPERTIES = ExtSelectfieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtSelectfieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtSelectfieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -766,5 +766,5 @@ export class ExtSelectfieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-selectfield', ExtSelectfield);
+window.customElements.define('ext-selectfield', ExtSelectfieldComponent);
 })();

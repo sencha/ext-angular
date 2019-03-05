@@ -710,11 +710,11 @@ export class ExtNestedlistComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtNestedlist.METHODS()
-    this.XTYPE = ExtNestedlist.XTYPE()
-    //this.PROPERTIES = ExtNestedlist.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtNestedlist.PROPERTIESOBJECT()
-    this.EVENTS = ExtNestedlist.EVENTS()
+    this.METHODS = ExtNestedlistComponent.METHODS()
+    this.XTYPE = ExtNestedlistComponent.XTYPE()
+    //this.PROPERTIES = ExtNestedlistComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtNestedlistComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtNestedlistComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -726,5 +726,5 @@ export class ExtNestedlistComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-nestedlist', ExtNestedlist);
+window.customElements.define('ext-nestedlist', ExtNestedlistComponent);
 })();

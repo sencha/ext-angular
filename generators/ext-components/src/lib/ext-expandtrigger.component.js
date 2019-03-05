@@ -342,11 +342,11 @@ export class ExtExpandtriggerComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtExpandtrigger.METHODS()
-    this.XTYPE = ExtExpandtrigger.XTYPE()
-    //this.PROPERTIES = ExtExpandtrigger.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtExpandtrigger.PROPERTIESOBJECT()
-    this.EVENTS = ExtExpandtrigger.EVENTS()
+    this.METHODS = ExtExpandtriggerComponent.METHODS()
+    this.XTYPE = ExtExpandtriggerComponent.XTYPE()
+    //this.PROPERTIES = ExtExpandtriggerComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtExpandtriggerComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtExpandtriggerComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -358,5 +358,5 @@ export class ExtExpandtriggerComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-expandtrigger', ExtExpandtrigger);
+window.customElements.define('ext-expandtrigger', ExtExpandtriggerComponent);
 })();

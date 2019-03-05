@@ -172,7 +172,7 @@ export default class ExtBase extends HTMLElement {
     if (parentxtype === 'grid' || parentxtype === 'lockedgrid') {
       if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn' || childxtype === 'booleancolumn' ) {
         parentCmp.addColumn(childCmp)
-        console.log(`${parentCmp.xtype}.addColumn(${childCmp.xtype})`)
+        //console.log(`${parentCmp.xtype}.addColumn(${childCmp.xtype})`)
         return
       }
       else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {

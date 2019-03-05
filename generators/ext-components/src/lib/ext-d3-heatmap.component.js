@@ -563,11 +563,11 @@ export class ExtD3_heatmapComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtD3_heatmap.METHODS()
-    this.XTYPE = ExtD3_heatmap.XTYPE()
-    //this.PROPERTIES = ExtD3_heatmap.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtD3_heatmap.PROPERTIESOBJECT()
-    this.EVENTS = ExtD3_heatmap.EVENTS()
+    this.METHODS = ExtD3_heatmapComponent.METHODS()
+    this.XTYPE = ExtD3_heatmapComponent.XTYPE()
+    //this.PROPERTIES = ExtD3_heatmapComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtD3_heatmapComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtD3_heatmapComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -579,5 +579,5 @@ export class ExtD3_heatmapComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-d3_heatmap', ExtD3_heatmap);
+window.customElements.define('ext-d3_heatmap', ExtD3_heatmapComponent);
 })();

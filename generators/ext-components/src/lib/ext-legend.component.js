@@ -785,11 +785,11 @@ export class ExtLegendComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtLegend.METHODS()
-    this.XTYPE = ExtLegend.XTYPE()
-    //this.PROPERTIES = ExtLegend.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtLegend.PROPERTIESOBJECT()
-    this.EVENTS = ExtLegend.EVENTS()
+    this.METHODS = ExtLegendComponent.METHODS()
+    this.XTYPE = ExtLegendComponent.XTYPE()
+    //this.PROPERTIES = ExtLegendComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtLegendComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtLegendComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -801,5 +801,5 @@ export class ExtLegendComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-legend', ExtLegend);
+window.customElements.define('ext-legend', ExtLegendComponent);
 })();

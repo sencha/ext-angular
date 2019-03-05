@@ -541,11 +541,11 @@ export class ExtDatetitleComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtDatetitle.METHODS()
-    this.XTYPE = ExtDatetitle.XTYPE()
-    //this.PROPERTIES = ExtDatetitle.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtDatetitle.PROPERTIESOBJECT()
-    this.EVENTS = ExtDatetitle.EVENTS()
+    this.METHODS = ExtDatetitleComponent.METHODS()
+    this.XTYPE = ExtDatetitleComponent.XTYPE()
+    //this.PROPERTIES = ExtDatetitleComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtDatetitleComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtDatetitleComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -557,5 +557,5 @@ export class ExtDatetitleComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-datetitle', ExtDatetitle);
+window.customElements.define('ext-datetitle', ExtDatetitleComponent);
 })();

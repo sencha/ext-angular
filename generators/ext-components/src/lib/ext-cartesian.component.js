@@ -758,11 +758,11 @@ export class ExtCartesianComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtCartesian.METHODS()
-    this.XTYPE = ExtCartesian.XTYPE()
-    //this.PROPERTIES = ExtCartesian.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtCartesian.PROPERTIESOBJECT()
-    this.EVENTS = ExtCartesian.EVENTS()
+    this.METHODS = ExtCartesianComponent.METHODS()
+    this.XTYPE = ExtCartesianComponent.XTYPE()
+    //this.PROPERTIES = ExtCartesianComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtCartesianComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtCartesianComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -774,5 +774,5 @@ export class ExtCartesianComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-cartesian', ExtCartesian);
+window.customElements.define('ext-cartesian', ExtCartesianComponent);
 })();

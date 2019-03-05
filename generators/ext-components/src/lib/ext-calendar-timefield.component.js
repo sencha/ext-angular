@@ -750,11 +750,11 @@ export class ExtCalendar_timefieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtCalendar_timefield.METHODS()
-    this.XTYPE = ExtCalendar_timefield.XTYPE()
-    //this.PROPERTIES = ExtCalendar_timefield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtCalendar_timefield.PROPERTIESOBJECT()
-    this.EVENTS = ExtCalendar_timefield.EVENTS()
+    this.METHODS = ExtCalendar_timefieldComponent.METHODS()
+    this.XTYPE = ExtCalendar_timefieldComponent.XTYPE()
+    //this.PROPERTIES = ExtCalendar_timefieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtCalendar_timefieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtCalendar_timefieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -766,5 +766,5 @@ export class ExtCalendar_timefieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-calendar_timefield', ExtCalendar_timefield);
+window.customElements.define('ext-calendar_timefield', ExtCalendar_timefieldComponent);
 })();

@@ -690,11 +690,11 @@ export class ExtSpinnerfieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtSpinnerfield.METHODS()
-    this.XTYPE = ExtSpinnerfield.XTYPE()
-    //this.PROPERTIES = ExtSpinnerfield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtSpinnerfield.PROPERTIESOBJECT()
-    this.EVENTS = ExtSpinnerfield.EVENTS()
+    this.METHODS = ExtSpinnerfieldComponent.METHODS()
+    this.XTYPE = ExtSpinnerfieldComponent.XTYPE()
+    //this.PROPERTIES = ExtSpinnerfieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtSpinnerfieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtSpinnerfieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -706,5 +706,5 @@ export class ExtSpinnerfieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-spinnerfield', ExtSpinnerfield);
+window.customElements.define('ext-spinnerfield', ExtSpinnerfieldComponent);
 })();

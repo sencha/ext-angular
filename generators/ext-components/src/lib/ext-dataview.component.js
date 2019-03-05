@@ -781,11 +781,11 @@ export class ExtDataviewComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtDataview.METHODS()
-    this.XTYPE = ExtDataview.XTYPE()
-    //this.PROPERTIES = ExtDataview.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtDataview.PROPERTIESOBJECT()
-    this.EVENTS = ExtDataview.EVENTS()
+    this.METHODS = ExtDataviewComponent.METHODS()
+    this.XTYPE = ExtDataviewComponent.XTYPE()
+    //this.PROPERTIES = ExtDataviewComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtDataviewComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtDataviewComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -797,5 +797,5 @@ export class ExtDataviewComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-dataview', ExtDataview);
+window.customElements.define('ext-dataview', ExtDataviewComponent);
 })();

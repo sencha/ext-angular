@@ -743,11 +743,11 @@ export class ExtBooleancolumnComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtBooleancolumn.METHODS()
-    this.XTYPE = ExtBooleancolumn.XTYPE()
-    //this.PROPERTIES = ExtBooleancolumn.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtBooleancolumn.PROPERTIESOBJECT()
-    this.EVENTS = ExtBooleancolumn.EVENTS()
+    this.METHODS = ExtBooleancolumnComponent.METHODS()
+    this.XTYPE = ExtBooleancolumnComponent.XTYPE()
+    //this.PROPERTIES = ExtBooleancolumnComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtBooleancolumnComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtBooleancolumnComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -759,5 +759,5 @@ export class ExtBooleancolumnComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-booleancolumn', ExtBooleancolumn);
+window.customElements.define('ext-booleancolumn', ExtBooleancolumnComponent);
 })();

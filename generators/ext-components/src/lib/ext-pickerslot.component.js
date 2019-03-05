@@ -805,11 +805,11 @@ export class ExtPickerslotComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtPickerslot.METHODS()
-    this.XTYPE = ExtPickerslot.XTYPE()
-    //this.PROPERTIES = ExtPickerslot.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtPickerslot.PROPERTIESOBJECT()
-    this.EVENTS = ExtPickerslot.EVENTS()
+    this.METHODS = ExtPickerslotComponent.METHODS()
+    this.XTYPE = ExtPickerslotComponent.XTYPE()
+    //this.PROPERTIES = ExtPickerslotComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtPickerslotComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtPickerslotComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -821,5 +821,5 @@ export class ExtPickerslotComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-pickerslot', ExtPickerslot);
+window.customElements.define('ext-pickerslot', ExtPickerslotComponent);
 })();

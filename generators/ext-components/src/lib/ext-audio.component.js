@@ -574,11 +574,11 @@ export class ExtAudioComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtAudio.METHODS()
-    this.XTYPE = ExtAudio.XTYPE()
-    //this.PROPERTIES = ExtAudio.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtAudio.PROPERTIESOBJECT()
-    this.EVENTS = ExtAudio.EVENTS()
+    this.METHODS = ExtAudioComponent.METHODS()
+    this.XTYPE = ExtAudioComponent.XTYPE()
+    //this.PROPERTIES = ExtAudioComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtAudioComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtAudioComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -590,5 +590,5 @@ export class ExtAudioComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-audio', ExtAudio);
+window.customElements.define('ext-audio', ExtAudioComponent);
 })();

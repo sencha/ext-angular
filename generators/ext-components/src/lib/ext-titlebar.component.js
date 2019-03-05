@@ -646,11 +646,11 @@ export class ExtTitlebarComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtTitlebar.METHODS()
-    this.XTYPE = ExtTitlebar.XTYPE()
-    //this.PROPERTIES = ExtTitlebar.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtTitlebar.PROPERTIESOBJECT()
-    this.EVENTS = ExtTitlebar.EVENTS()
+    this.METHODS = ExtTitlebarComponent.METHODS()
+    this.XTYPE = ExtTitlebarComponent.XTYPE()
+    //this.PROPERTIES = ExtTitlebarComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtTitlebarComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtTitlebarComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -662,5 +662,5 @@ export class ExtTitlebarComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-titlebar', ExtTitlebar);
+window.customElements.define('ext-titlebar', ExtTitlebarComponent);
 })();

@@ -645,11 +645,11 @@ export class ExtListswiperitemComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtListswiperitem.METHODS()
-    this.XTYPE = ExtListswiperitem.XTYPE()
-    //this.PROPERTIES = ExtListswiperitem.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtListswiperitem.PROPERTIESOBJECT()
-    this.EVENTS = ExtListswiperitem.EVENTS()
+    this.METHODS = ExtListswiperitemComponent.METHODS()
+    this.XTYPE = ExtListswiperitemComponent.XTYPE()
+    //this.PROPERTIES = ExtListswiperitemComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtListswiperitemComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtListswiperitemComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -661,5 +661,5 @@ export class ExtListswiperitemComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-listswiperitem', ExtListswiperitem);
+window.customElements.define('ext-listswiperitem', ExtListswiperitemComponent);
 })();

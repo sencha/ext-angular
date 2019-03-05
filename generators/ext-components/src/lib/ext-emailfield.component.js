@@ -659,11 +659,11 @@ export class ExtEmailfieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtEmailfield.METHODS()
-    this.XTYPE = ExtEmailfield.XTYPE()
-    //this.PROPERTIES = ExtEmailfield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtEmailfield.PROPERTIESOBJECT()
-    this.EVENTS = ExtEmailfield.EVENTS()
+    this.METHODS = ExtEmailfieldComponent.METHODS()
+    this.XTYPE = ExtEmailfieldComponent.XTYPE()
+    //this.PROPERTIES = ExtEmailfieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtEmailfieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtEmailfieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -675,5 +675,5 @@ export class ExtEmailfieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-emailfield', ExtEmailfield);
+window.customElements.define('ext-emailfield', ExtEmailfieldComponent);
 })();

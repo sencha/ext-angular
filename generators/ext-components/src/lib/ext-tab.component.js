@@ -597,11 +597,11 @@ export class ExtTabComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtTab.METHODS()
-    this.XTYPE = ExtTab.XTYPE()
-    //this.PROPERTIES = ExtTab.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtTab.PROPERTIESOBJECT()
-    this.EVENTS = ExtTab.EVENTS()
+    this.METHODS = ExtTabComponent.METHODS()
+    this.XTYPE = ExtTabComponent.XTYPE()
+    //this.PROPERTIES = ExtTabComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtTabComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtTabComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -613,5 +613,5 @@ export class ExtTabComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-tab', ExtTab);
+window.customElements.define('ext-tab', ExtTabComponent);
 })();

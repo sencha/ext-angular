@@ -790,11 +790,11 @@ export class ExtPivotrangeeditorComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtPivotrangeeditor.METHODS()
-    this.XTYPE = ExtPivotrangeeditor.XTYPE()
-    //this.PROPERTIES = ExtPivotrangeeditor.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtPivotrangeeditor.PROPERTIESOBJECT()
-    this.EVENTS = ExtPivotrangeeditor.EVENTS()
+    this.METHODS = ExtPivotrangeeditorComponent.METHODS()
+    this.XTYPE = ExtPivotrangeeditorComponent.XTYPE()
+    //this.PROPERTIES = ExtPivotrangeeditorComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtPivotrangeeditorComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtPivotrangeeditorComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -806,5 +806,5 @@ export class ExtPivotrangeeditorComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-pivotrangeeditor', ExtPivotrangeeditor);
+window.customElements.define('ext-pivotrangeeditor', ExtPivotrangeeditorComponent);
 })();

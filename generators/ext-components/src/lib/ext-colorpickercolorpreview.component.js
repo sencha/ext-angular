@@ -525,11 +525,11 @@ export class ExtColorpickercolorpreviewComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtColorpickercolorpreview.METHODS()
-    this.XTYPE = ExtColorpickercolorpreview.XTYPE()
-    //this.PROPERTIES = ExtColorpickercolorpreview.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtColorpickercolorpreview.PROPERTIESOBJECT()
-    this.EVENTS = ExtColorpickercolorpreview.EVENTS()
+    this.METHODS = ExtColorpickercolorpreviewComponent.METHODS()
+    this.XTYPE = ExtColorpickercolorpreviewComponent.XTYPE()
+    //this.PROPERTIES = ExtColorpickercolorpreviewComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtColorpickercolorpreviewComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtColorpickercolorpreviewComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -541,5 +541,5 @@ export class ExtColorpickercolorpreviewComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-colorpickercolorpreview', ExtColorpickercolorpreview);
+window.customElements.define('ext-colorpickercolorpreview', ExtColorpickercolorpreviewComponent);
 })();

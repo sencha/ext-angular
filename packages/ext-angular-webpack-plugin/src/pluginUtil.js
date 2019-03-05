@@ -109,9 +109,6 @@ export function _compilation(compiler, compilation, vars, options) {
         const path = require('path')
 
         //var outputPath = ''
-        // log('compiler.options.devServer: ' + compiler.options.devServer)
-        // log('compiler.options.devServer.contentBase: ' + compiler.options.devServer.contentBase)
-        // log('compiler.outputPath: ' + compiler.outputPath)
         // if (compiler.options.devServer) {
         //   if (compiler.outputPath === '/') {
         //     outputPath = path.join(compiler.options.devServer.contentBase, outputPath)
@@ -218,7 +215,7 @@ export async function emit(compiler, compilation, vars, options, callback) {
         callback()
       }
       else {
-        callback()
+          callback()
       }
     }
     else {
@@ -415,7 +412,17 @@ export async function executeAsync (app, command, parms, opts, compilation, opti
       child.stdout.on('data', (data) => {
         var str = data.toString().replace(/\r?\n|\r/g, " ").trim()
         logv(options, `${str}`)
-        if (data && data.toString().match(/waiting for changes\.\.\./)) {
+        if (data && data.toString().match(/Fashion waiting for changes\.\.\./)) {
+          try {
+          const fs = require('fs');
+          var filename = process.cwd()+'/src/index.js';
+          var data = fs.readFileSync(filename);
+          fs.writeFileSync(filename, data + ' ', 'utf8')
+          logv(options, `touching ${filename}`)
+          }
+          catch(e) {
+            logv(options, `${filename} not found`)
+          }
           resolve(0)
         }
         else {

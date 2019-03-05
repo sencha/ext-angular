@@ -673,11 +673,11 @@ export class ExtNumberfieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtNumberfield.METHODS()
-    this.XTYPE = ExtNumberfield.XTYPE()
-    //this.PROPERTIES = ExtNumberfield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtNumberfield.PROPERTIESOBJECT()
-    this.EVENTS = ExtNumberfield.EVENTS()
+    this.METHODS = ExtNumberfieldComponent.METHODS()
+    this.XTYPE = ExtNumberfieldComponent.XTYPE()
+    //this.PROPERTIES = ExtNumberfieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtNumberfieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtNumberfieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -689,5 +689,5 @@ export class ExtNumberfieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-numberfield', ExtNumberfield);
+window.customElements.define('ext-numberfield', ExtNumberfieldComponent);
 })();

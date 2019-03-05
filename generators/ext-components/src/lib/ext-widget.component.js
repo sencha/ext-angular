@@ -325,11 +325,11 @@ export class ExtWidgetComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtWidget.METHODS()
-    this.XTYPE = ExtWidget.XTYPE()
-    //this.PROPERTIES = ExtWidget.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtWidget.PROPERTIESOBJECT()
-    this.EVENTS = ExtWidget.EVENTS()
+    this.METHODS = ExtWidgetComponent.METHODS()
+    this.XTYPE = ExtWidgetComponent.XTYPE()
+    //this.PROPERTIES = ExtWidgetComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtWidgetComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtWidgetComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -341,5 +341,5 @@ export class ExtWidgetComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-widget', ExtWidget);
+window.customElements.define('ext-widget', ExtWidgetComponent);
 })();

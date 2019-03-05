@@ -536,11 +536,11 @@ export class ExtSimplelistitemComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtSimplelistitem.METHODS()
-    this.XTYPE = ExtSimplelistitem.XTYPE()
-    //this.PROPERTIES = ExtSimplelistitem.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtSimplelistitem.PROPERTIESOBJECT()
-    this.EVENTS = ExtSimplelistitem.EVENTS()
+    this.METHODS = ExtSimplelistitemComponent.METHODS()
+    this.XTYPE = ExtSimplelistitemComponent.XTYPE()
+    //this.PROPERTIES = ExtSimplelistitemComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtSimplelistitemComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtSimplelistitemComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -552,5 +552,5 @@ export class ExtSimplelistitemComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-simplelistitem', ExtSimplelistitem);
+window.customElements.define('ext-simplelistitem', ExtSimplelistitemComponent);
 })();

@@ -531,11 +531,11 @@ export class ExtPullrefreshspinnerComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtPullrefreshspinner.METHODS()
-    this.XTYPE = ExtPullrefreshspinner.XTYPE()
-    //this.PROPERTIES = ExtPullrefreshspinner.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtPullrefreshspinner.PROPERTIESOBJECT()
-    this.EVENTS = ExtPullrefreshspinner.EVENTS()
+    this.METHODS = ExtPullrefreshspinnerComponent.METHODS()
+    this.XTYPE = ExtPullrefreshspinnerComponent.XTYPE()
+    //this.PROPERTIES = ExtPullrefreshspinnerComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtPullrefreshspinnerComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtPullrefreshspinnerComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -547,5 +547,5 @@ export class ExtPullrefreshspinnerComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-pullrefreshspinner', ExtPullrefreshspinner);
+window.customElements.define('ext-pullrefreshspinner', ExtPullrefreshspinnerComponent);
 })();

@@ -555,11 +555,11 @@ export class ExtSparklinebulletComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtSparklinebullet.METHODS()
-    this.XTYPE = ExtSparklinebullet.XTYPE()
-    //this.PROPERTIES = ExtSparklinebullet.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtSparklinebullet.PROPERTIESOBJECT()
-    this.EVENTS = ExtSparklinebullet.EVENTS()
+    this.METHODS = ExtSparklinebulletComponent.METHODS()
+    this.XTYPE = ExtSparklinebulletComponent.XTYPE()
+    //this.PROPERTIES = ExtSparklinebulletComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtSparklinebulletComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtSparklinebulletComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -571,5 +571,5 @@ export class ExtSparklinebulletComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-sparklinebullet', ExtSparklinebullet);
+window.customElements.define('ext-sparklinebullet', ExtSparklinebulletComponent);
 })();

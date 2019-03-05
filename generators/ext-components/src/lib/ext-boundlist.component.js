@@ -858,11 +858,11 @@ export class ExtBoundlistComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtBoundlist.METHODS()
-    this.XTYPE = ExtBoundlist.XTYPE()
-    //this.PROPERTIES = ExtBoundlist.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtBoundlist.PROPERTIESOBJECT()
-    this.EVENTS = ExtBoundlist.EVENTS()
+    this.METHODS = ExtBoundlistComponent.METHODS()
+    this.XTYPE = ExtBoundlistComponent.XTYPE()
+    //this.PROPERTIES = ExtBoundlistComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtBoundlistComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtBoundlistComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -874,5 +874,5 @@ export class ExtBoundlistComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-boundlist', ExtBoundlist);
+window.customElements.define('ext-boundlist', ExtBoundlistComponent);
 })();

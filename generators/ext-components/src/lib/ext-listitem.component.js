@@ -653,11 +653,11 @@ export class ExtListitemComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtListitem.METHODS()
-    this.XTYPE = ExtListitem.XTYPE()
-    //this.PROPERTIES = ExtListitem.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtListitem.PROPERTIESOBJECT()
-    this.EVENTS = ExtListitem.EVENTS()
+    this.METHODS = ExtListitemComponent.METHODS()
+    this.XTYPE = ExtListitemComponent.XTYPE()
+    //this.PROPERTIES = ExtListitemComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtListitemComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtListitemComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -669,5 +669,5 @@ export class ExtListitemComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-listitem', ExtListitem);
+window.customElements.define('ext-listitem', ExtListitemComponent);
 })();

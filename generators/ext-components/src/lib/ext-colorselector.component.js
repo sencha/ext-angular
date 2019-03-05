@@ -68,11 +68,11 @@ export class ExtColorselectorComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtColorselector.METHODS()
-    this.XTYPE = ExtColorselector.XTYPE()
-    //this.PROPERTIES = ExtColorselector.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtColorselector.PROPERTIESOBJECT()
-    this.EVENTS = ExtColorselector.EVENTS()
+    this.METHODS = ExtColorselectorComponent.METHODS()
+    this.XTYPE = ExtColorselectorComponent.XTYPE()
+    //this.PROPERTIES = ExtColorselectorComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtColorselectorComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtColorselectorComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -84,5 +84,5 @@ export class ExtColorselectorComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-colorselector', ExtColorselector);
+window.customElements.define('ext-colorselector', ExtColorselectorComponent);
 })();

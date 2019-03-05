@@ -688,11 +688,11 @@ export class ExtEditorComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtEditor.METHODS()
-    this.XTYPE = ExtEditor.XTYPE()
-    //this.PROPERTIES = ExtEditor.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtEditor.PROPERTIESOBJECT()
-    this.EVENTS = ExtEditor.EVENTS()
+    this.METHODS = ExtEditorComponent.METHODS()
+    this.XTYPE = ExtEditorComponent.XTYPE()
+    //this.PROPERTIES = ExtEditorComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtEditorComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtEditorComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -704,5 +704,5 @@ export class ExtEditorComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-editor', ExtEditor);
+window.customElements.define('ext-editor', ExtEditorComponent);
 })();

@@ -631,11 +631,11 @@ export class ExtSliderfieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtSliderfield.METHODS()
-    this.XTYPE = ExtSliderfield.XTYPE()
-    //this.PROPERTIES = ExtSliderfield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtSliderfield.PROPERTIESOBJECT()
-    this.EVENTS = ExtSliderfield.EVENTS()
+    this.METHODS = ExtSliderfieldComponent.METHODS()
+    this.XTYPE = ExtSliderfieldComponent.XTYPE()
+    //this.PROPERTIES = ExtSliderfieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtSliderfieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtSliderfieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -647,5 +647,5 @@ export class ExtSliderfieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-sliderfield', ExtSliderfield);
+window.customElements.define('ext-sliderfield', ExtSliderfieldComponent);
 })();

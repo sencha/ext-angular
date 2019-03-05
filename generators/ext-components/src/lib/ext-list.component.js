@@ -857,11 +857,11 @@ export class ExtListComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtList.METHODS()
-    this.XTYPE = ExtList.XTYPE()
-    //this.PROPERTIES = ExtList.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtList.PROPERTIESOBJECT()
-    this.EVENTS = ExtList.EVENTS()
+    this.METHODS = ExtListComponent.METHODS()
+    this.XTYPE = ExtListComponent.XTYPE()
+    //this.PROPERTIES = ExtListComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtListComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtListComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -873,5 +873,5 @@ export class ExtListComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-list', ExtList);
+window.customElements.define('ext-list', ExtListComponent);
 })();

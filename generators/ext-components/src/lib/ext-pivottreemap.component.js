@@ -629,11 +629,11 @@ export class ExtPivottreemapComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtPivottreemap.METHODS()
-    this.XTYPE = ExtPivottreemap.XTYPE()
-    //this.PROPERTIES = ExtPivottreemap.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtPivottreemap.PROPERTIESOBJECT()
-    this.EVENTS = ExtPivottreemap.EVENTS()
+    this.METHODS = ExtPivottreemapComponent.METHODS()
+    this.XTYPE = ExtPivottreemapComponent.XTYPE()
+    //this.PROPERTIES = ExtPivottreemapComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtPivottreemapComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtPivottreemapComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -645,5 +645,5 @@ export class ExtPivottreemapComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-pivottreemap', ExtPivottreemap);
+window.customElements.define('ext-pivottreemap', ExtPivottreemapComponent);
 })();

@@ -577,11 +577,11 @@ export class ExtGridshowingroupsmenuitemComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtGridshowingroupsmenuitem.METHODS()
-    this.XTYPE = ExtGridshowingroupsmenuitem.XTYPE()
-    //this.PROPERTIES = ExtGridshowingroupsmenuitem.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtGridshowingroupsmenuitem.PROPERTIESOBJECT()
-    this.EVENTS = ExtGridshowingroupsmenuitem.EVENTS()
+    this.METHODS = ExtGridshowingroupsmenuitemComponent.METHODS()
+    this.XTYPE = ExtGridshowingroupsmenuitemComponent.XTYPE()
+    //this.PROPERTIES = ExtGridshowingroupsmenuitemComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtGridshowingroupsmenuitemComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtGridshowingroupsmenuitemComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -593,5 +593,5 @@ export class ExtGridshowingroupsmenuitemComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-gridshowingroupsmenuitem', ExtGridshowingroupsmenuitem);
+window.customElements.define('ext-gridshowingroupsmenuitem', ExtGridshowingroupsmenuitemComponent);
 })();

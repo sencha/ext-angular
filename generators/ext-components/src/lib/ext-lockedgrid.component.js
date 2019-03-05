@@ -659,11 +659,11 @@ export class ExtLockedgridComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtLockedgrid.METHODS()
-    this.XTYPE = ExtLockedgrid.XTYPE()
-    //this.PROPERTIES = ExtLockedgrid.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtLockedgrid.PROPERTIESOBJECT()
-    this.EVENTS = ExtLockedgrid.EVENTS()
+    this.METHODS = ExtLockedgridComponent.METHODS()
+    this.XTYPE = ExtLockedgridComponent.XTYPE()
+    //this.PROPERTIES = ExtLockedgridComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtLockedgridComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtLockedgridComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -675,5 +675,5 @@ export class ExtLockedgridComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-lockedgrid', ExtLockedgrid);
+window.customElements.define('ext-lockedgrid', ExtLockedgridComponent);
 })();

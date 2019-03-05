@@ -614,11 +614,11 @@ export class ExtD3_packComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtD3_pack.METHODS()
-    this.XTYPE = ExtD3_pack.XTYPE()
-    //this.PROPERTIES = ExtD3_pack.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtD3_pack.PROPERTIESOBJECT()
-    this.EVENTS = ExtD3_pack.EVENTS()
+    this.METHODS = ExtD3_packComponent.METHODS()
+    this.XTYPE = ExtD3_packComponent.XTYPE()
+    //this.PROPERTIES = ExtD3_packComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtD3_packComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtD3_packComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -630,5 +630,5 @@ export class ExtD3_packComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-d3_pack', ExtD3_pack);
+window.customElements.define('ext-d3_pack', ExtD3_packComponent);
 })();

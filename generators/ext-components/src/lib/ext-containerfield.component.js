@@ -637,11 +637,11 @@ export class ExtContainerfieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtContainerfield.METHODS()
-    this.XTYPE = ExtContainerfield.XTYPE()
-    //this.PROPERTIES = ExtContainerfield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtContainerfield.PROPERTIESOBJECT()
-    this.EVENTS = ExtContainerfield.EVENTS()
+    this.METHODS = ExtContainerfieldComponent.METHODS()
+    this.XTYPE = ExtContainerfieldComponent.XTYPE()
+    //this.PROPERTIES = ExtContainerfieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtContainerfieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtContainerfieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -653,5 +653,5 @@ export class ExtContainerfieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-containerfield', ExtContainerfield);
+window.customElements.define('ext-containerfield', ExtContainerfieldComponent);
 })();

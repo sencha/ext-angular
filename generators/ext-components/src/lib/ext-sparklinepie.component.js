@@ -553,11 +553,11 @@ export class ExtSparklinepieComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtSparklinepie.METHODS()
-    this.XTYPE = ExtSparklinepie.XTYPE()
-    //this.PROPERTIES = ExtSparklinepie.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtSparklinepie.PROPERTIESOBJECT()
-    this.EVENTS = ExtSparklinepie.EVENTS()
+    this.METHODS = ExtSparklinepieComponent.METHODS()
+    this.XTYPE = ExtSparklinepieComponent.XTYPE()
+    //this.PROPERTIES = ExtSparklinepieComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtSparklinepieComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtSparklinepieComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -569,5 +569,5 @@ export class ExtSparklinepieComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-sparklinepie', ExtSparklinepie);
+window.customElements.define('ext-sparklinepie', ExtSparklinepieComponent);
 })();

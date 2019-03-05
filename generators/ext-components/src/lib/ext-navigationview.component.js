@@ -665,11 +665,11 @@ export class ExtNavigationviewComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtNavigationview.METHODS()
-    this.XTYPE = ExtNavigationview.XTYPE()
-    //this.PROPERTIES = ExtNavigationview.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtNavigationview.PROPERTIESOBJECT()
-    this.EVENTS = ExtNavigationview.EVENTS()
+    this.METHODS = ExtNavigationviewComponent.METHODS()
+    this.XTYPE = ExtNavigationviewComponent.XTYPE()
+    //this.PROPERTIES = ExtNavigationviewComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtNavigationviewComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtNavigationviewComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -681,5 +681,5 @@ export class ExtNavigationviewComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-navigationview', ExtNavigationview);
+window.customElements.define('ext-navigationview', ExtNavigationviewComponent);
 })();

@@ -582,11 +582,11 @@ export class ExtVideoComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtVideo.METHODS()
-    this.XTYPE = ExtVideo.XTYPE()
-    //this.PROPERTIES = ExtVideo.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtVideo.PROPERTIESOBJECT()
-    this.EVENTS = ExtVideo.EVENTS()
+    this.METHODS = ExtVideoComponent.METHODS()
+    this.XTYPE = ExtVideoComponent.XTYPE()
+    //this.PROPERTIES = ExtVideoComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtVideoComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtVideoComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -598,5 +598,5 @@ export class ExtVideoComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-video', ExtVideo);
+window.customElements.define('ext-video', ExtVideoComponent);
 })();

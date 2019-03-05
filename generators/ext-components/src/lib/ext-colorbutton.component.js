@@ -537,11 +537,11 @@ export class ExtColorbuttonComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtColorbutton.METHODS()
-    this.XTYPE = ExtColorbutton.XTYPE()
-    //this.PROPERTIES = ExtColorbutton.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtColorbutton.PROPERTIESOBJECT()
-    this.EVENTS = ExtColorbutton.EVENTS()
+    this.METHODS = ExtColorbuttonComponent.METHODS()
+    this.XTYPE = ExtColorbuttonComponent.XTYPE()
+    //this.PROPERTIES = ExtColorbuttonComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtColorbuttonComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtColorbuttonComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -553,5 +553,5 @@ export class ExtColorbuttonComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-colorbutton', ExtColorbutton);
+window.customElements.define('ext-colorbutton', ExtColorbuttonComponent);
 })();

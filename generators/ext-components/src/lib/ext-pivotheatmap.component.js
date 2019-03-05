@@ -567,11 +567,11 @@ export class ExtPivotheatmapComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtPivotheatmap.METHODS()
-    this.XTYPE = ExtPivotheatmap.XTYPE()
-    //this.PROPERTIES = ExtPivotheatmap.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtPivotheatmap.PROPERTIESOBJECT()
-    this.EVENTS = ExtPivotheatmap.EVENTS()
+    this.METHODS = ExtPivotheatmapComponent.METHODS()
+    this.XTYPE = ExtPivotheatmapComponent.XTYPE()
+    //this.PROPERTIES = ExtPivotheatmapComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtPivotheatmapComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtPivotheatmapComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -583,5 +583,5 @@ export class ExtPivotheatmapComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-pivotheatmap', ExtPivotheatmap);
+window.customElements.define('ext-pivotheatmap', ExtPivotheatmapComponent);
 })();

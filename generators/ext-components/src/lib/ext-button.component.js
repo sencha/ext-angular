@@ -587,11 +587,11 @@ export class ExtButtonComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtButton.METHODS()
-    this.XTYPE = ExtButton.XTYPE()
-    //this.PROPERTIES = ExtButton.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtButton.PROPERTIESOBJECT()
-    this.EVENTS = ExtButton.EVENTS()
+    this.METHODS = ExtButtonComponent.METHODS()
+    this.XTYPE = ExtButtonComponent.XTYPE()
+    //this.PROPERTIES = ExtButtonComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtButtonComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtButtonComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -603,5 +603,5 @@ export class ExtButtonComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-button', ExtButton);
+window.customElements.define('ext-button', ExtButtonComponent);
 })();

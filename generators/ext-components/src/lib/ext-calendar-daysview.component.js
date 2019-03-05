@@ -689,11 +689,11 @@ export class ExtCalendar_daysviewComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtCalendar_daysview.METHODS()
-    this.XTYPE = ExtCalendar_daysview.XTYPE()
-    //this.PROPERTIES = ExtCalendar_daysview.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtCalendar_daysview.PROPERTIESOBJECT()
-    this.EVENTS = ExtCalendar_daysview.EVENTS()
+    this.METHODS = ExtCalendar_daysviewComponent.METHODS()
+    this.XTYPE = ExtCalendar_daysviewComponent.XTYPE()
+    //this.PROPERTIES = ExtCalendar_daysviewComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtCalendar_daysviewComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtCalendar_daysviewComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -705,5 +705,5 @@ export class ExtCalendar_daysviewComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-calendar_daysview', ExtCalendar_daysview);
+window.customElements.define('ext-calendar_daysview', ExtCalendar_daysviewComponent);
 })();

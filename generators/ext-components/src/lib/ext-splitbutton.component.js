@@ -591,11 +591,11 @@ export class ExtSplitbuttonComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtSplitbutton.METHODS()
-    this.XTYPE = ExtSplitbutton.XTYPE()
-    //this.PROPERTIES = ExtSplitbutton.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtSplitbutton.PROPERTIESOBJECT()
-    this.EVENTS = ExtSplitbutton.EVENTS()
+    this.METHODS = ExtSplitbuttonComponent.METHODS()
+    this.XTYPE = ExtSplitbuttonComponent.XTYPE()
+    //this.PROPERTIES = ExtSplitbuttonComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtSplitbuttonComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtSplitbuttonComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -607,5 +607,5 @@ export class ExtSplitbuttonComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-splitbutton', ExtSplitbutton);
+window.customElements.define('ext-splitbutton', ExtSplitbuttonComponent);
 })();

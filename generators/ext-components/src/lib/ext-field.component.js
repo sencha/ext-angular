@@ -601,11 +601,11 @@ export class ExtFieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtField.METHODS()
-    this.XTYPE = ExtField.XTYPE()
-    //this.PROPERTIES = ExtField.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtField.PROPERTIESOBJECT()
-    this.EVENTS = ExtField.EVENTS()
+    this.METHODS = ExtFieldComponent.METHODS()
+    this.XTYPE = ExtFieldComponent.XTYPE()
+    //this.PROPERTIES = ExtFieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtFieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtFieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -617,5 +617,5 @@ export class ExtFieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-field', ExtField);
+window.customElements.define('ext-field', ExtFieldComponent);
 })();

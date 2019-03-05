@@ -529,11 +529,11 @@ export class ExtThumbComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtThumb.METHODS()
-    this.XTYPE = ExtThumb.XTYPE()
-    //this.PROPERTIES = ExtThumb.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtThumb.PROPERTIESOBJECT()
-    this.EVENTS = ExtThumb.EVENTS()
+    this.METHODS = ExtThumbComponent.METHODS()
+    this.XTYPE = ExtThumbComponent.XTYPE()
+    //this.PROPERTIES = ExtThumbComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtThumbComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtThumbComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -545,5 +545,5 @@ export class ExtThumbComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-thumb', ExtThumb);
+window.customElements.define('ext-thumb', ExtThumbComponent);
 })();

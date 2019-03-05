@@ -691,11 +691,11 @@ export class ExtCelleditorComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtCelleditor.METHODS()
-    this.XTYPE = ExtCelleditor.XTYPE()
-    //this.PROPERTIES = ExtCelleditor.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtCelleditor.PROPERTIESOBJECT()
-    this.EVENTS = ExtCelleditor.EVENTS()
+    this.METHODS = ExtCelleditorComponent.METHODS()
+    this.XTYPE = ExtCelleditorComponent.XTYPE()
+    //this.PROPERTIES = ExtCelleditorComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtCelleditorComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtCelleditorComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -707,5 +707,5 @@ export class ExtCelleditorComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-celleditor', ExtCelleditor);
+window.customElements.define('ext-celleditor', ExtCelleditorComponent);
 })();

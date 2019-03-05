@@ -737,11 +737,11 @@ export class ExtGridcolumnComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtGridcolumn.METHODS()
-    this.XTYPE = ExtGridcolumn.XTYPE()
-    //this.PROPERTIES = ExtGridcolumn.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtGridcolumn.PROPERTIESOBJECT()
-    this.EVENTS = ExtGridcolumn.EVENTS()
+    this.METHODS = ExtGridcolumnComponent.METHODS()
+    this.XTYPE = ExtGridcolumnComponent.XTYPE()
+    //this.PROPERTIES = ExtGridcolumnComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtGridcolumnComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtGridcolumnComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -753,5 +753,5 @@ export class ExtGridcolumnComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-gridcolumn', ExtGridcolumn);
+window.customElements.define('ext-gridcolumn', ExtGridcolumnComponent);
 })();

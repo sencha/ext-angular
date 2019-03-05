@@ -638,11 +638,11 @@ export class ExtTogglefieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtTogglefield.METHODS()
-    this.XTYPE = ExtTogglefield.XTYPE()
-    //this.PROPERTIES = ExtTogglefield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtTogglefield.PROPERTIESOBJECT()
-    this.EVENTS = ExtTogglefield.EVENTS()
+    this.METHODS = ExtTogglefieldComponent.METHODS()
+    this.XTYPE = ExtTogglefieldComponent.XTYPE()
+    //this.PROPERTIES = ExtTogglefieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtTogglefieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtTogglefieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -654,5 +654,5 @@ export class ExtTogglefieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-togglefield', ExtTogglefield);
+window.customElements.define('ext-togglefield', ExtTogglefieldComponent);
 })();

@@ -761,11 +761,11 @@ export class ExtWindowComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtWindow.METHODS()
-    this.XTYPE = ExtWindow.XTYPE()
-    //this.PROPERTIES = ExtWindow.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtWindow.PROPERTIESOBJECT()
-    this.EVENTS = ExtWindow.EVENTS()
+    this.METHODS = ExtWindowComponent.METHODS()
+    this.XTYPE = ExtWindowComponent.XTYPE()
+    //this.PROPERTIES = ExtWindowComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtWindowComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtWindowComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -777,5 +777,5 @@ export class ExtWindowComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-window', ExtWindow);
+window.customElements.define('ext-window', ExtWindowComponent);
 })();

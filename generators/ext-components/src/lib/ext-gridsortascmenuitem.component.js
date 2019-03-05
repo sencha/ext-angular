@@ -581,11 +581,11 @@ export class ExtGridsortascmenuitemComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtGridsortascmenuitem.METHODS()
-    this.XTYPE = ExtGridsortascmenuitem.XTYPE()
-    //this.PROPERTIES = ExtGridsortascmenuitem.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtGridsortascmenuitem.PROPERTIESOBJECT()
-    this.EVENTS = ExtGridsortascmenuitem.EVENTS()
+    this.METHODS = ExtGridsortascmenuitemComponent.METHODS()
+    this.XTYPE = ExtGridsortascmenuitemComponent.XTYPE()
+    //this.PROPERTIES = ExtGridsortascmenuitemComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtGridsortascmenuitemComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtGridsortascmenuitemComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -597,5 +597,5 @@ export class ExtGridsortascmenuitemComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-gridsortascmenuitem', ExtGridsortascmenuitem);
+window.customElements.define('ext-gridsortascmenuitem', ExtGridsortascmenuitemComponent);
 })();

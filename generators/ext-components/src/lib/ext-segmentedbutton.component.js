@@ -663,11 +663,11 @@ export class ExtSegmentedbuttonComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtSegmentedbutton.METHODS()
-    this.XTYPE = ExtSegmentedbutton.XTYPE()
-    //this.PROPERTIES = ExtSegmentedbutton.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtSegmentedbutton.PROPERTIESOBJECT()
-    this.EVENTS = ExtSegmentedbutton.EVENTS()
+    this.METHODS = ExtSegmentedbuttonComponent.METHODS()
+    this.XTYPE = ExtSegmentedbuttonComponent.XTYPE()
+    //this.PROPERTIES = ExtSegmentedbuttonComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtSegmentedbuttonComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtSegmentedbuttonComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -679,5 +679,5 @@ export class ExtSegmentedbuttonComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-segmentedbutton', ExtSegmentedbutton);
+window.customElements.define('ext-segmentedbutton', ExtSegmentedbuttonComponent);
 })();

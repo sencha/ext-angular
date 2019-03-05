@@ -631,11 +631,11 @@ export class ExtCheckboxComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtCheckbox.METHODS()
-    this.XTYPE = ExtCheckbox.XTYPE()
-    //this.PROPERTIES = ExtCheckbox.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtCheckbox.PROPERTIESOBJECT()
-    this.EVENTS = ExtCheckbox.EVENTS()
+    this.METHODS = ExtCheckboxComponent.METHODS()
+    this.XTYPE = ExtCheckboxComponent.XTYPE()
+    //this.PROPERTIES = ExtCheckboxComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtCheckboxComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtCheckboxComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -647,5 +647,5 @@ export class ExtCheckboxComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-checkbox', ExtCheckbox);
+window.customElements.define('ext-checkbox', ExtCheckboxComponent);
 })();

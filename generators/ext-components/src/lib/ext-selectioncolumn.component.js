@@ -747,11 +747,11 @@ export class ExtSelectioncolumnComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtSelectioncolumn.METHODS()
-    this.XTYPE = ExtSelectioncolumn.XTYPE()
-    //this.PROPERTIES = ExtSelectioncolumn.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtSelectioncolumn.PROPERTIESOBJECT()
-    this.EVENTS = ExtSelectioncolumn.EVENTS()
+    this.METHODS = ExtSelectioncolumnComponent.METHODS()
+    this.XTYPE = ExtSelectioncolumnComponent.XTYPE()
+    //this.PROPERTIES = ExtSelectioncolumnComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtSelectioncolumnComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtSelectioncolumnComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -763,5 +763,5 @@ export class ExtSelectioncolumnComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-selectioncolumn', ExtSelectioncolumn);
+window.customElements.define('ext-selectioncolumn', ExtSelectioncolumnComponent);
 })();

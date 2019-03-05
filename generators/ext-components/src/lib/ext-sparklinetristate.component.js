@@ -557,11 +557,11 @@ export class ExtSparklinetristateComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtSparklinetristate.METHODS()
-    this.XTYPE = ExtSparklinetristate.XTYPE()
-    //this.PROPERTIES = ExtSparklinetristate.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtSparklinetristate.PROPERTIESOBJECT()
-    this.EVENTS = ExtSparklinetristate.EVENTS()
+    this.METHODS = ExtSparklinetristateComponent.METHODS()
+    this.XTYPE = ExtSparklinetristateComponent.XTYPE()
+    //this.PROPERTIES = ExtSparklinetristateComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtSparklinetristateComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtSparklinetristateComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -573,5 +573,5 @@ export class ExtSparklinetristateComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-sparklinetristate', ExtSparklinetristate);
+window.customElements.define('ext-sparklinetristate', ExtSparklinetristateComponent);
 })();

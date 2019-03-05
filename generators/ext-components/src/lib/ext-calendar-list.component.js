@@ -783,11 +783,11 @@ export class ExtCalendar_listComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtCalendar_list.METHODS()
-    this.XTYPE = ExtCalendar_list.XTYPE()
-    //this.PROPERTIES = ExtCalendar_list.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtCalendar_list.PROPERTIESOBJECT()
-    this.EVENTS = ExtCalendar_list.EVENTS()
+    this.METHODS = ExtCalendar_listComponent.METHODS()
+    this.XTYPE = ExtCalendar_listComponent.XTYPE()
+    //this.PROPERTIES = ExtCalendar_listComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtCalendar_listComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtCalendar_listComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -799,5 +799,5 @@ export class ExtCalendar_listComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-calendar_list', ExtCalendar_list);
+window.customElements.define('ext-calendar_list', ExtCalendar_listComponent);
 })();

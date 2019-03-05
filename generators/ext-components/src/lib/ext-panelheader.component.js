@@ -653,11 +653,11 @@ export class ExtPanelheaderComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtPanelheader.METHODS()
-    this.XTYPE = ExtPanelheader.XTYPE()
-    //this.PROPERTIES = ExtPanelheader.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtPanelheader.PROPERTIESOBJECT()
-    this.EVENTS = ExtPanelheader.EVENTS()
+    this.METHODS = ExtPanelheaderComponent.METHODS()
+    this.XTYPE = ExtPanelheaderComponent.XTYPE()
+    //this.PROPERTIES = ExtPanelheaderComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtPanelheaderComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtPanelheaderComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -669,5 +669,5 @@ export class ExtPanelheaderComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-panelheader', ExtPanelheader);
+window.customElements.define('ext-panelheader', ExtPanelheaderComponent);
 })();

@@ -692,11 +692,11 @@ export class ExtCalendar_weekviewComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtCalendar_weekview.METHODS()
-    this.XTYPE = ExtCalendar_weekview.XTYPE()
-    //this.PROPERTIES = ExtCalendar_weekview.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtCalendar_weekview.PROPERTIESOBJECT()
-    this.EVENTS = ExtCalendar_weekview.EVENTS()
+    this.METHODS = ExtCalendar_weekviewComponent.METHODS()
+    this.XTYPE = ExtCalendar_weekviewComponent.XTYPE()
+    //this.PROPERTIES = ExtCalendar_weekviewComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtCalendar_weekviewComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtCalendar_weekviewComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -708,5 +708,5 @@ export class ExtCalendar_weekviewComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-calendar_weekview', ExtCalendar_weekview);
+window.customElements.define('ext-calendar_weekview', ExtCalendar_weekviewComponent);
 })();

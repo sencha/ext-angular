@@ -610,11 +610,11 @@ export class ExtInputfieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtInputfield.METHODS()
-    this.XTYPE = ExtInputfield.XTYPE()
-    //this.PROPERTIES = ExtInputfield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtInputfield.PROPERTIESOBJECT()
-    this.EVENTS = ExtInputfield.EVENTS()
+    this.METHODS = ExtInputfieldComponent.METHODS()
+    this.XTYPE = ExtInputfieldComponent.XTYPE()
+    //this.PROPERTIES = ExtInputfieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtInputfieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtInputfieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -626,5 +626,5 @@ export class ExtInputfieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-inputfield', ExtInputfield);
+window.customElements.define('ext-inputfield', ExtInputfieldComponent);
 })();

@@ -617,11 +617,11 @@ export class ExtD3_horizontal_treeComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtD3_horizontal_tree.METHODS()
-    this.XTYPE = ExtD3_horizontal_tree.XTYPE()
-    //this.PROPERTIES = ExtD3_horizontal_tree.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtD3_horizontal_tree.PROPERTIESOBJECT()
-    this.EVENTS = ExtD3_horizontal_tree.EVENTS()
+    this.METHODS = ExtD3_horizontal_treeComponent.METHODS()
+    this.XTYPE = ExtD3_horizontal_treeComponent.XTYPE()
+    //this.PROPERTIES = ExtD3_horizontal_treeComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtD3_horizontal_treeComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtD3_horizontal_treeComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -633,5 +633,5 @@ export class ExtD3_horizontal_treeComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-d3_horizontal_tree', ExtD3_horizontal_tree);
+window.customElements.define('ext-d3_horizontal_tree', ExtD3_horizontal_treeComponent);
 })();

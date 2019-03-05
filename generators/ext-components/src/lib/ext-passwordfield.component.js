@@ -664,11 +664,11 @@ export class ExtPasswordfieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtPasswordfield.METHODS()
-    this.XTYPE = ExtPasswordfield.XTYPE()
-    //this.PROPERTIES = ExtPasswordfield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtPasswordfield.PROPERTIESOBJECT()
-    this.EVENTS = ExtPasswordfield.EVENTS()
+    this.METHODS = ExtPasswordfieldComponent.METHODS()
+    this.XTYPE = ExtPasswordfieldComponent.XTYPE()
+    //this.PROPERTIES = ExtPasswordfieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtPasswordfieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtPasswordfieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -680,5 +680,5 @@ export class ExtPasswordfieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-passwordfield', ExtPasswordfield);
+window.customElements.define('ext-passwordfield', ExtPasswordfieldComponent);
 })();

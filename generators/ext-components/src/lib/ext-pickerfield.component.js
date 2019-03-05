@@ -685,11 +685,11 @@ export class ExtPickerfieldComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtPickerfield.METHODS()
-    this.XTYPE = ExtPickerfield.XTYPE()
-    //this.PROPERTIES = ExtPickerfield.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtPickerfield.PROPERTIESOBJECT()
-    this.EVENTS = ExtPickerfield.EVENTS()
+    this.METHODS = ExtPickerfieldComponent.METHODS()
+    this.XTYPE = ExtPickerfieldComponent.XTYPE()
+    //this.PROPERTIES = ExtPickerfieldComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtPickerfieldComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtPickerfieldComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -701,5 +701,5 @@ export class ExtPickerfieldComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-pickerfield', ExtPickerfield);
+window.customElements.define('ext-pickerfield', ExtPickerfieldComponent);
 })();

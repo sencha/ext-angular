@@ -533,11 +533,11 @@ export class ExtProgressComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtProgress.METHODS()
-    this.XTYPE = ExtProgress.XTYPE()
-    //this.PROPERTIES = ExtProgress.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtProgress.PROPERTIESOBJECT()
-    this.EVENTS = ExtProgress.EVENTS()
+    this.METHODS = ExtProgressComponent.METHODS()
+    this.XTYPE = ExtProgressComponent.XTYPE()
+    //this.PROPERTIES = ExtProgressComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtProgressComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtProgressComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -549,5 +549,5 @@ export class ExtProgressComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-progress', ExtProgress);
+window.customElements.define('ext-progress', ExtProgressComponent);
 })();

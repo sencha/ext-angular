@@ -739,11 +739,11 @@ export class ExtDatecolumnComponent extends ExtBase {
 
   constructor() {
     super()
-    this.METHODS = ExtDatecolumn.METHODS()
-    this.XTYPE = ExtDatecolumn.XTYPE()
-    //this.PROPERTIES = ExtDatecolumn.PROPERTIES()
-    this.PROPERTIESOBJECT = ExtDatecolumn.PROPERTIESOBJECT()
-    this.EVENTS = ExtDatecolumn.EVENTS()
+    this.METHODS = ExtDatecolumnComponent.METHODS()
+    this.XTYPE = ExtDatecolumnComponent.XTYPE()
+    //this.PROPERTIES = ExtDatecolumnComponent.PROPERTIES()
+    this.PROPERTIESOBJECT = ExtDatecolumnComponent.PROPERTIESOBJECT()
+    this.EVENTS = ExtDatecolumnComponent.EVENTS()
   }
 
   connectedCallback() {
@@ -755,5 +755,5 @@ export class ExtDatecolumnComponent extends ExtBase {
   }
 }
 (function () {
-window.customElements.define('ext-datecolumn', ExtDatecolumn);
+window.customElements.define('ext-datecolumn', ExtDatecolumnComponent);
 })();
