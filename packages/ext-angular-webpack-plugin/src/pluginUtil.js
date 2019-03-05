@@ -414,14 +414,21 @@ export async function executeAsync (app, command, parms, opts, compilation, opti
         logv(options, `${str}`)
         if (data && data.toString().match(/Fashion waiting for changes\.\.\./)) {
           try {
-          const fs = require('fs');
-          var filename = process.cwd()+'/src/index.js';
-          var data = fs.readFileSync(filename);
-          fs.writeFileSync(filename, data + ' ', 'utf8')
-          logv(options, `touching ${filename}`)
-          }
-          catch(e) {
-            logv(options, `${filename} not found`)
+            const fs = require('fs');
+            if (options.framework == 'angular') {
+              var filename = process.cwd() + '/src/app/app.module.ts';
+              var data = fs.readFileSync(filename);
+              fs.writeFileSync(filename, data + ' ', 'utf8');
+              logv(options, `touching ${filename}`);
+            }
+            if (options.framework == 'react') {
+              var filename = process.cwd() + '/src/index.js';
+              var data = fs.readFileSync(filename);
+              fs.writeFileSync(filename, data + ' ', 'utf8');
+              logv(options, `touching ${filename}`);
+            }
+          } catch (e) {
+            logv(options, `${filename} not found`);
           }
           resolve(0)
         }
