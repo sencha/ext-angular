@@ -1,5 +1,5 @@
 {
-  "name": "@sencha/ext-angular-webpack-plugin",
+  "name": "@sencha/ext-angular-webpack-plugin-orig",
   "version": "6.7.1",
   "description": "A webpack plugin for new Ext JS applications",
   "main": "dist/index.js",
