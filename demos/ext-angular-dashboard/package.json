@@ -1,6 +1,6 @@
 {
   "name": "ext-angular-dashboard",
-  "version": "6.7.0",
+  "version": "6.7.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

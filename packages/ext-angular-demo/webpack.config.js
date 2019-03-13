@@ -1,5 +1,5 @@
 const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin
-const ExtWebpackPlugin = require('@sencha/ext-angular-webpack-plugin')
+const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
@@ -35,12 +35,13 @@ module.exports = function (env) {
     const plugins = [
       new AngularCompilerPlugin({
         tsConfigPath: './tsconfig.json',
+        entryModule: "src/app/app.module#AppModule",
         mainPath: "./src/main.ts",
         skipCodeGeneration: true
       }),
       new HtmlWebpackPlugin({
-        template: "index.html",
-        inject: "body"
+        // template: "index.html",
+        // inject: "body"
       }),
       new BaseHrefWebpackPlugin({ baseHref: basehref }),
       new ExtWebpackPlugin({
@@ -54,6 +55,7 @@ module.exports = function (env) {
         environment: buildenvironment, 
         verbose: buildverbose,
         theme: 'theme-material',
+        script: '',
         packages: []
       }),
       new webpack.ContextReplacementPlugin(
@@ -74,7 +76,7 @@ module.exports = function (env) {
       },
       output: {
         path: path.resolve(__dirname, 'build'),
-        filename: "[name].[chunkhash:20].js"
+        filename: "[name].js"
       },
       module: {
         rules: [
@@ -85,31 +87,36 @@ module.exports = function (env) {
           //{test: /\.scss$/,loader: ["raw-loader", "sass-loader?sourceMap"]}
         ]
       },
+      stats: 'none',
+      optimization: {
+        noEmitOnErrors: true
+      },
       plugins: plugins,
       node: false,
       devServer: {
         contentBase: './build',
         historyApiFallback: true,
-        hot: false,
+        hot: !isProd,
         host: '0.0.0.0',
         port: port,
         disableHostCheck: false,
         compress: isProd,
         inline: !isProd,
-        stats: {
-          assets: false,
-          children: false,
-          chunks: false,
-          hash: false,
-          modules: false,
-          publicPath: false,
-          timings: false,
-          version: false,
-          warnings: false,
-          colors: {
-            green: '\u001b[32m'
-          }
-        }
+        stats: 'none'
+        // stats: {
+        //   assets: false,
+        //   children: false,
+        //   chunks: false,
+        //   hash: false,
+        //   modules: false,
+        //   publicPath: false,
+        //   timings: false,
+        //   version: false,
+        //   warnings: false,
+        //   colors: {
+        //     green: '\u001b[32m'
+        //   }
+        //}
       }
     }
   })

@@ -1,6 +1,6 @@
 {
   "name": "@sencha/ext-angular",
-  "version": "6.7.0",
+  "version": "6.7.1",
   "description": "ext-angular",
   "main": "bundles/sencha-ext-angular.umd.js",
   "bin": {
