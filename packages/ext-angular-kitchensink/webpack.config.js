@@ -16,10 +16,6 @@ module.exports = function (env) {
   var browser     = get('browser',     'yes')
   var watch       = get('watch',       'yes')
   var verbose     = get('verbose',     'no')
-  if (environment == 'production') {
-    browser = 'no'
-    watch   = 'no'
-  }
   const isProd = environment === 'production'
   const outputFolder = 'build'
   portfinder.basePort = (env && env.port) || 1962
