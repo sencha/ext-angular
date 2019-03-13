@@ -1,6 +1,6 @@
 {
   "name": "@sencha/ext-angular-demo",
-  "version": "6.7.0",
+  "version": "6.7.1",
   "description": "ext-angular-demo",
   "scripts": {
     "start": "npm run dev",
@@ -15,7 +15,7 @@
   "extbuild": {
     "defaultprofile": "",
     "defaultenvironment": "development",
-    "defaultverbose": "no"
+    "defaultverbose": "yes"
   },
   "devDependencies": {
     "@sencha/ext": "~6.7.0",
@@ -23,7 +23,7 @@
     "@sencha/ext-modern": "~6.7.0",
     "@sencha/ext-modern-treegrid": "~6.7.0",
     "@sencha/ext-modern-theme-material": "~6.7.0",
-    "@sencha/ext-angular-webpack-plugin": "~6.7.0",
+    "@sencha/ext-webpack-plugin": "~7.0.0",
     "@sencha/ext-ux": "~6.7.0",
     "@angular/common": "^7.2.6",
     "@angular/compiler": "^7.2.1",

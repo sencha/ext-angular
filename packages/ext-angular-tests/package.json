@@ -1,6 +1,6 @@
 {
   "name": "@sencha/ext-angular-tests",
-  "version": "6.7.0",
+  "version": "6.7.1",
   "description": "ext-angular-tests",
   "scripts": {
     "start": "npm run dev",
