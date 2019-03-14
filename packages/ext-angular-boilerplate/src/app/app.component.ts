@@ -4,9 +4,6 @@ import { Router } from '@angular/router'
 
 Ext.require([
   'Ext.layout.*',
-//  'Ext.MessageBox',
-//  'Ext.Toast',
-//  'Ext.panel.Collapser',
   'Ext.data.TreeStore'
 ])
 

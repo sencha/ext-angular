@@ -258,3 +258,5 @@ export function launch(AppModule) {
 
 
     "angular-highlight-js":"^2.0.1",
+
+    https://www.sencha.com/blog/build-a-completely-custom-ext-js-theme-in-less-than-10-minutes/
