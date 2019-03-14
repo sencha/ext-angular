@@ -34,9 +34,9 @@ module.exports = function (env) {
       new ExtWebpackPlugin({
         framework: 'angular',
         toolkit: 'modern',
-        theme: 'theme-kitchensink',
+        theme: 'theme-material',
         emit: 'yes',
-        script: './extract-code.js',
+        script: '',
         port: port,
         packages: [
           'ux', 
