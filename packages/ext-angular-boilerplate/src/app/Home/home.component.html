@@ -1,0 +1,10 @@
+<container padding="10"layout="fit" [fitToParent]="true">
+  <grid shadow="true" [store]="this.store">
+    <toolbar docked="top">
+      <searchfield ui="faded" placeholder="Search..." (change)="this.onSearch($event)" [responsiveConfig]="searchresponsiveConfig"></searchfield>
+    </toolbar>
+    <column text="Name" dataIndex="name" flex="2" resizable="true"></column>
+    <column text="Email" dataIndex="email" flex="3" resizable="true" [responsiveConfig]="emailresponsiveConfig"></column>
+    <column text="Phone" dataIndex="phone" flex="2" resizable="true"></column>
+  </grid>
+</container>

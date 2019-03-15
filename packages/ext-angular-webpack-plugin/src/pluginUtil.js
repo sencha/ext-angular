@@ -1,8 +1,7 @@
 //**********
 export function _constructor(options) {
-  const path = require('path')
   const fs = require('fs')
-
+ 
   var thisVars = {}
   var thisOptions = {}
   var plugin = {}
@@ -16,15 +15,6 @@ export function _constructor(options) {
 
   const validateOptions = require('schema-utils')
   validateOptions(require(`./${options.framework}Util`).getValidateOptions(), options, '')
-
-  //fix sencha cmd no jetty server problem
-  // var watchFile = path.resolve(process.cwd(),`node_modules/@sencha/cmd/dist/ant/build/app/watch-impl.xml`)
-  // logv(options, `modify ${watchFile}`)
-  // var data = fs.readFileSync(watchFile, 'utf-8');
-  // var ip = 'webServerRefId="app.web.server"';
-  // var newValue = data.replace(new RegExp(ip), '');
-  // fs.writeFileSync(watchFile, newValue, 'utf-8');
-
   thisVars = require(`./${options.framework}Util`).getDefaultVars()
   thisVars.framework = options.framework
   switch(thisVars.framework) {
@@ -41,19 +31,6 @@ export function _constructor(options) {
       thisVars.pluginName = 'ext-webpack-plugin'
   }
 
-  //fix fashion dist problem
-  const fsx = require('fs-extra')
-  var toFashionDist = path.resolve(process.cwd(),`node_modules/@sencha/cmd/dist/js/node_modules/fashion/dist`)
-  logv(options, `toFashionDist ${toFashionDist}`)
-  if (!fs.existsSync(toFashionDist)) {
-    logv(options, `copy`)
-    var fromFashionDist = path.join(process.cwd(), 'node_modules/@sencha/' + thisVars.pluginName + '/fashion/dist/')
-    fsx.copySync(fromFashionDist, toFashionDist)
-  }
-  else {
-    logv(options, `no copy`)
-  }
-
   thisVars.app = require('./pluginUtil')._getApp()
   logv(options, `pluginName - ${thisVars.pluginName}`)
   logv(options, `thisVars.app - ${thisVars.app}`)
@@ -61,63 +38,99 @@ export function _constructor(options) {
   const rc = (fs.existsSync(`.ext-${thisVars.framework}rc`) && JSON.parse(fs.readFileSync(`.ext-${thisVars.framework}rc`, 'utf-8')) || {})
   thisOptions = { ...require(`./${thisVars.framework}Util`).getDefaultOptions(), ...options, ...rc }
   logv(options, `thisOptions - ${JSON.stringify(thisOptions)}`)
+
   if (thisOptions.environment == 'production') 
     {thisVars.production = true}
   else 
     {thisVars.production = false}
+  logv(options, `thisVars - ${JSON.stringify(thisVars)}`)
+
   log(require('./pluginUtil')._getVersions(thisVars.app, thisVars.pluginName, thisVars.framework))
   log(thisVars.app + 'Building for ' + thisOptions.environment)
+  log(thisVars.app + 'Treeshake is ' + thisOptions.treeshake)
+
+  if (thisVars.production == true && thisOptions.treeshake == true && options.framework == 'angular') {
+    require(`./angularUtil`)._toProd(thisVars, thisOptions)
+  }
 
   plugin.vars = thisVars
   plugin.options = thisOptions
+  require('./pluginUtil').logv(options, 'FUNCTION constructor (end)')
   return plugin
 }
 
 //**********
 export function _compilation(compiler, compilation, vars, options) {
   try {
-    require('./pluginUtil').logv(options,'FUNCTION _compilation')
+    require('./pluginUtil').logv(options, 'FUNCTION _compilation')
+
+    var extComponents = []
+
     if (vars.production) {
-      logv(options,`ext-compilation: production is ` +  vars.production)
-      compilation.hooks.succeedModule.tap(`ext-succeed-module`, (module) => {
-        if (module.resource && (module.resource.match(/\.(j|t)sx?$/) ||
-        (options.framework == 'angular' && module.resource.match(/\.html$/))) &&
-        !module.resource.match(/node_modules/) && !module.resource.match(`/ext-{$options.framework}/dist/`)
-         && !module.resource.match(`/ext-${options.framework}-${options.toolkit}/`)) {
-          vars.deps = [ 
-            ...(vars.deps || []), 
-            ...require(`./${vars.framework}Util`).extractFromSource(module, options, compilation) 
-          ]
-        }
-      })
-    }
-    else {
-      logv(options,`ext-compilation: production is ` +  vars.production)
-    }
-    if (options.framework != 'angular') {
-      compilation.hooks.htmlWebpackPluginBeforeHtmlGeneration.tap(`ext-html-generation`,(data) => {
-        logv(options,'HOOK ext-html-generation')
-        const path = require('path')
-        var outputPath = ''
-        if (compiler.options.devServer) {
-          if (compiler.outputPath === '/') {
-            outputPath = path.join(compiler.options.devServer.contentBase, outputPath)
+      if (options.framework == 'angular' && options.treeshake) {
+        extComponents = require('./angularUtil')._getAllComponents(vars, options)
+      }
+
+      compilation.hooks.succeedModule.tap(`ext-succeed-module`, module => {
+        //require('./pluginUtil').logv(options, 'HOOK succeedModule')
+        if (module.resource && !module.resource.match(/node_modules/)) {
+          if(module.resource.match(/\.html$/) != null) {
+            if(module._source._value.toLowerCase().includes('doctype html') == false) {
+              vars.deps = [...(vars.deps || []), ...require(`./${vars.framework}Util`).extractFromSource(module, options, compilation, extComponents)]
+            }
           }
           else {
-            if (compiler.options.devServer.contentBase == undefined) {
-              outputPath = 'build'
-            }
-            else {
-              outputPath = ''
-            }
+            vars.deps = [...(vars.deps || []), ...require(`./${vars.framework}Util`).extractFromSource(module, options, compilation, extComponents)]
+
           }
         }
-        else {
-          outputPath = 'build'
-        }
-        outputPath = outputPath.replace(process.cwd(), '').trim()
-        var jsPath = path.join(outputPath, vars.extPath, 'ext.js')
-        var cssPath = path.join(outputPath, vars.extPath, 'ext.css')
+        // if (extComponents.length && module.resource && (module.resource.match(/\.(j|t)sx?$/) ||
+        // options.framework == 'angular' && module.resource.match(/\.html$/)) &&
+        // !module.resource.match(/node_modules/) && !module.resource.match(`/ext-{$options.framework}/build/`)) {
+        //   vars.deps = [...(vars.deps || []), ...require(`./${vars.framework}Util`).extractFromSource(module, options, compilation, extComponents)]
+        // }
+      })
+
+      if (options.framework == 'angular' && options.treeshake == true) {
+        compilation.hooks.finishModules.tap(`ext-finish-modules`, modules => {
+          require('./pluginUtil').logv(options, 'HOOK finishModules')
+          require('./angularUtil')._writeFilesToProdFolder(vars, options)
+        })
+      }
+
+    }
+
+    if (
+      (options.framework == 'angular' && options.treeshake == false) ||
+      (options.framework == 'react')
+    ) {
+        compilation.hooks.htmlWebpackPluginBeforeHtmlGeneration.tap(`ext-html-generation`,(data) => {
+        logv(options,'HOOK ext-html-generation')
+        const path = require('path')
+
+        //var outputPath = ''
+        // if (compiler.options.devServer) {
+        //   if (compiler.outputPath === '/') {
+        //     outputPath = path.join(compiler.options.devServer.contentBase, outputPath)
+        //   }
+        //   else {
+        //     if (compiler.options.devServer.contentBase == undefined) {
+        //       outputPath = 'build'
+        //     }
+        //     else {
+        //       outputPath = ''
+        //     }
+        //   }
+        // }
+        // else {
+        //   outputPath = 'build'
+        // }
+        // outputPath = outputPath.replace(process.cwd(), '').trim()
+        //var jsPath = path.join(outputPath, vars.extPath, 'ext.js')
+        //var cssPath = path.join(outputPath, vars.extPath, 'ext.css')
+
+        var jsPath = path.join(vars.extPath, 'ext.js')
+        var cssPath = path.join(vars.extPath, 'ext.css')
         data.assets.js.unshift(jsPath)
         data.assets.css.unshift(cssPath)
         log(vars.app + `Adding ${jsPath} and ${cssPath} to index.html`)
@@ -131,6 +144,11 @@ export function _compilation(compiler, compilation, vars, options) {
     require('./pluginUtil').logv(options,e)
     compilation.errors.push('_compilation: ' + e)
   }
+}
+
+//**********
+export function _afterCompile(compiler, compilation, vars, options) {
+  require('./pluginUtil').logv(options, 'FUNCTION _afterCompile')
 }
 
 //**********
@@ -154,7 +172,12 @@ export async function emit(compiler, compilation, vars, options, callback) {
         _prepareForBuild(app, vars, options, outputPath, compilation)
       }
       else {
-        require(`./${framework}Util`)._prepareForBuild(app, vars, options, outputPath, compilation)
+        if (options.framework == 'angular' && options.treeshake == false) {
+          require(`./${framework}Util`)._prepareForBuild(app, vars, options, outputPath, compilation)
+        }
+        else {
+          require(`./${framework}Util`)._prepareForBuild(app, vars, options, outputPath, compilation)
+        }
       }
 
       var command = ''
@@ -186,52 +209,17 @@ export async function emit(compiler, compilation, vars, options, callback) {
         }
 
         if (vars.watchStarted == false) {
-          console.log('build1')
           await _buildExtBundle(app, compilation, outputPath, parms, options)
-          console.log('build2')
           vars.watchStarted = true
         }
-
-        //const jsChunk = compilation.addChunk(`ext-angular-js`)
-        //jsChunk.hasRuntime = jsChunk.isInitial = () => true;
-        //jsChunk.files.push(path.join('build', 'ext-angular', 'ext.js'));
-        //jsChunk.files.push(path.join('build', 'ext-angular',  'ext.css'));
-        //jsChunk.id = -2; // this forces html-webpack-plugin to include ext.js first
-
-        // if(options.browser == true && options.watch == 'yes') {
-        //   if (vars.browserCount == 0 && compilation.errors.length == 0) {
-        //     var url = 'http://localhost:' + options.port
-        //     log(app + `Opening browser at ${url}`)
-        //     vars.browserCount++
-        //     const opn = require('opn')
-        //     opn(url)
-        //   }
-        // }
-        // else {
-        //   logv(options,'browser NOT opened')
-        // }
-
-
         callback()
       }
       else {
-        callback()
+          callback()
       }
     }
     else {
       log(`${vars.app}FUNCTION emit not run`)
-      // if(options.browser == true) {
-      //   if (vars.browserCount == 0 && options.watch == 'yes') {
-      //     var url = 'http://localhost:' + options.port
-      //     log(app + `Opening browser at ${url}`)
-      //     vars.browserCount++
-      //     const opn = require('opn')
-      //     opn(url)
-      //   }
-      // }
-      // else {
-      //   logv(options,'browser NOT opened')
-      // }
       callback()
     }
   }
@@ -271,71 +259,36 @@ export function _prepareForBuild(app, vars, options, output, compilation) {
       fs.writeFileSync(path.join(output, 'jsdom-environment.js'), createJSDOMEnvironment(options, output), 'utf8')
       fs.writeFileSync(path.join(output, 'workspace.json'), createWorkspaceJson(options, output), 'utf8')
 
-      if (vars.framework == 'angular') {
-        if (fs.existsSync(path.join(process.cwd(),'ext-angular/packages/'))) {
-          var fromPath = path.join(process.cwd(), 'ext-angular/')
-          var toPath = path.join(output)
-          fsx.copySync(fromPath, toPath)
-          log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
-        }
-        if (fs.existsSync(path.join(process.cwd(),'ext-angular/overrides/'))) {
-          var fromPath = path.join(process.cwd(), 'ext-angular/')
-          var toPath = path.join(output)
-          fsx.copySync(fromPath, toPath)
-          log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
-        }
+      var framework = vars.framework;
+      //because of a problem with colorpicker
+      if (fs.existsSync(path.join(process.cwd(),`ext-${framework}/ux/`))) {
+        var fromPath = path.join(process.cwd(), `ext-${framework}/ux/`)
+        var toPath = path.join(output, 'ux')
+        fsx.copySync(fromPath, toPath)
+        log(app + 'Copying (ux) ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
       }
-      if (vars.framework == 'react')  {
-        if (fs.existsSync(path.join(process.cwd(),'ext-react/packages/'))) {
-          var fromPath = path.join(process.cwd(), 'ext-react/packages/')
-          var toPath = path.join(output, 'packages')
-          fsx.copySync(fromPath, toPath)
-          log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
-        }
-        if (fs.existsSync(path.join(process.cwd(),'ext-react/overrides/'))) {
-          var fromPath = path.join(process.cwd(), 'ext-react/overrides/')
-          var toPath = path.join(output, 'overrides')
-          fsx.copySync(fromPath, toPath)
-          log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
-        }
+      if (fs.existsSync(path.join(process.cwd(),`ext-${framework}/packages/`))) {
+        var fromPath = path.join(process.cwd(), `ext-${framework}/packages/`)
+        var toPath = path.join(output, 'packages')
+        fsx.copySync(fromPath, toPath)
+        log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
       }
-
-//do we ever hit these?
+      if (fs.existsSync(path.join(process.cwd(),`ext-${framework}/overrides/`))) {
+        var fromPath = path.join(process.cwd(), `ext-${framework}/overrides/`)
+        var toPath = path.join(output, 'overrides')
+        fsx.copySync(fromPath, toPath)
+        log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
+      }
       if (fs.existsSync(path.join(process.cwd(),'resources/'))) {
         var fromResources = path.join(process.cwd(), 'resources/')
         var toResources = path.join(output, '../resources')
         fsx.copySync(fromResources, toResources)
         log(app + 'Copying ' + fromResources.replace(process.cwd(), '') + ' to: ' + toResources.replace(process.cwd(), ''))
       }
-
-      if (fs.existsSync(path.join(process.cwd(),'resources/'))) {
-        var fromResources = path.join(process.cwd(), 'resources/')
-        var toResources = path.join(output, 'resources')
-        fsx.copySync(fromResources, toResources)
-        log(app + 'Copying ' + fromResources.replace(process.cwd(), '') + ' to: ' + toResources.replace(process.cwd(), ''))
-      }
-      
-      if (fs.existsSync(path.join(process.cwd(),'packages/'))) {
-        var fromPackages = path.join(process.cwd(), 'packages/')
-        var toPackages = path.join(output, 'packages')
-        fsx.copySync(fromPackages, toPackages)
-        log(app + 'Copying ' + fromPackages.replace(process.cwd(), '') + ' to: ' + toPackages.replace(process.cwd(), ''))
-      }
-
-      if (fs.existsSync(path.join(process.cwd(),'overrides/'))) {
-        var fromPath = path.join(process.cwd(), 'overrides/')
-        var toPath = path.join(output, 'overrides')
-        fsx.copySync(fromPath, toPath)
-        log(app + 'Copying ' + fromPath.replace(process.cwd(), '') + ' to: ' + toPath.replace(process.cwd(), ''))
-      }
-
-
-
     }
     vars.firstTime = false
     var js = ''
     if (vars.production) {
-      vars.deps.push('Ext.require("Ext.layout.*");\n')
       js = vars.deps.join(';\n');
     }
     else {
@@ -398,6 +351,40 @@ export function _buildExtBundle(app, compilation, outputPath, parms, options) {
 }
 
 //**********
+export function _done(vars, options) {
+  try {
+    const log = require('./pluginUtil').log
+    const logv = require('./pluginUtil').logv
+    logv(options,'FUNCTION _done')
+
+
+    if (vars.production == true && options.treeshake == false && options.framework == 'angular') {
+      require(`./${options.framework}Util`)._toDev(vars, options)
+    }
+
+
+    try {
+      if(options.browser == true && options.watch == 'yes' && vars.production == false) {
+        if (vars.browserCount == 0) {
+          var url = 'http://localhost:' + options.port
+          require('./pluginUtil').log(vars.app + `Opening browser at ${url}`)
+          vars.browserCount++
+          const opn = require('opn')
+          opn(url)
+        }
+      }
+    }
+    catch (e) {
+      console.log(e)
+      //compilation.errors.push('show browser window - ext-done: ' + e)
+    }
+  }
+  catch(e) {
+    require('./pluginUtil').logv(options,e)
+  }
+}
+
+//**********
 export async function executeAsync (app, command, parms, opts, compilation, options) {
   try {
     //const DEFAULT_SUBSTRS = ['[INF] Loading', '[INF] Processing', '[LOG] Fashion build complete', '[ERR]', '[WRN]', "[INF] Server", "[INF] Writing", "[INF] Loading Build", "[INF] Waiting", "[LOG] Fashion waiting"];
@@ -425,7 +412,24 @@ export async function executeAsync (app, command, parms, opts, compilation, opti
       child.stdout.on('data', (data) => {
         var str = data.toString().replace(/\r?\n|\r/g, " ").trim()
         logv(options, `${str}`)
-        if (data && data.toString().match(/waiting for changes\.\.\./)) {
+        if (data && data.toString().match(/Fashion waiting for changes\.\.\./)) {
+          try {
+            const fs = require('fs');
+            if (options.framework == 'angular') {
+              var filename = process.cwd() + '/src/app/app.module.ts';
+              var data = fs.readFileSync(filename);
+              fs.writeFileSync(filename, data + ' ', 'utf8');
+              logv(options, `touching ${filename}`);
+            }
+            if (options.framework == 'react') {
+              var filename = process.cwd() + '/src/index.js';
+              var data = fs.readFileSync(filename);
+              fs.writeFileSync(filename, data + ' ', 'utf8');
+              logv(options, `touching ${filename}`);
+            }
+          } catch (e) {
+            logv(options, `${filename} not found`);
+          }
           resolve(0)
         }
         else {
@@ -458,7 +462,6 @@ export async function executeAsync (app, command, parms, opts, compilation, opti
     callback()
   } 
 }
-
 
 export function log(s) {
   require('readline').cursorTo(process.stdout, 0)

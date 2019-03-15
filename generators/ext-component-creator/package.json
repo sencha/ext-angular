@@ -8,8 +8,8 @@
   "license": "MIT",
   "dependencies": {
     "ncp": "^2.0.0",
-    "fs-extra": "^7.0.0",
+    "fs-extra": "^7.0.1",
     "mkdirp": "^0.5.1",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.3"
   }
 }

@@ -1,0 +1,34 @@
+<container padding="10" layout="fit" [fitToParent]="true">
+
+  <tabpanel 
+    (ready)="tabPanelReady($event)"
+    [style]="{ backgroundColor: 'white'}"
+    [shadow]="true" 
+    [tabBar]="{
+      height: 48,
+      layout: {pack: 'left'},
+      style: {paddingRight: '52px'}
+    }">
+
+    <panel *ngFor="let tab of tabs"
+      [title]="'Tab ' + tab"
+      tab="{flex: 1, maxWidth: 150}"
+      layout="center"
+      closable="true"
+      (added)="tabPanelAdded($event)"
+      (destroy)="closeTab($event)"
+      [html]="'<H1>Tab ' + tab + ' Content</H1>'">
+    </panel>
+
+  </tabpanel>
+
+  <button 
+    [top]="18" 
+    [right]="20"
+    [iconCls]="'x-fa fa-plus'" 
+    (tap)="addTab()"
+    [ui]="'alt round'"
+    [tooltip]="'New Tab'">
+  </button>
+
+</container>

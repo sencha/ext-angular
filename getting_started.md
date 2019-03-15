@@ -116,11 +116,11 @@ to
 in ./package.json, add
 ```
   "dependencies": {
-    "@sencha/ext-angular-modern": "~6.7.0",
-    "@sencha/ext": "~6.6.0",
-    "@sencha/ext-modern": "~6.6.0",
-    "@sencha/ext-modern-treegrid": "~6.6.0",
-    "@sencha/ext-modern-theme-material": "~6.6.0",
+    "@sencha/ext-angular": "~6.7.0",
+    "@sencha/ext": "~6.7.0",
+    "@sencha/ext-modern": "~6.7.0",
+    "@sencha/ext-modern-treegrid": "~6.7.0",
+    "@sencha/ext-modern-theme-material": "~6.7.0",
 
   "devDependencies": {
     "@angular-builders/custom-webpack": "~7.1.1",

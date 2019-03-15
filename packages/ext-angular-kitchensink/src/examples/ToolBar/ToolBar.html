@@ -1,0 +1,16 @@
+<panel  flex="1" shadow="true" bodyPadding="0">
+      <toolbar  docked="top">
+          <button  text="Button" ui="toolbar-default" (tap)="buttonHandler($event)" badgeText="2"></button>
+          <spacer ></spacer>
+
+              <segmentedbutton  *ngIf="!isPhone"
+              >
+                  <button  value="1" text="Option 1" [pressed]="true" (tap)="buttonHandler($event)"></button>
+                  <button  value="2" text="Option 2" (tap)="buttonHandler($event)"></button>
+              </segmentedbutton>
+
+          <spacer ></spacer>
+          <searchfield  ui="faded" placeholder="Search"></searchfield>
+      </toolbar>
+      <container  [style]="{padding: '20px'}" [html]="message"></container>
+  </panel>

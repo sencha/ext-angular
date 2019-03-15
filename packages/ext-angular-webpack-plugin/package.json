@@ -1,22 +1,16 @@
 {
-  "name": "@sencha/ext-angular-webpack-plugin",
-  "version": "6.7.0",
+  "name": "@sencha/ext-angular-webpack-plugin-orig",
+  "version": "6.7.1",
   "description": "A webpack plugin for new Ext JS applications",
   "main": "dist/index.js",
   "scripts": {
-    "build": "babel ./src --out-dir ./dist"
-  },
-  "peerDependencies": {
-    "react": "^16.5.2",
-    "react-hot-loader": "^4.3.11"
+    "build": "npx babel ./src --out-dir ./dist"
   },
   "dependencies": {
     "switchit":"^1.0.8",
     "@babel/generator": "^7.0.0",
     "@babel/polyfill": "^7.0.0",
-    "@sencha/cmd": "~6.6.0",
-    "react": "^16.5.0",
-    "react-hot-loader": "^4.3.6",
+    "@sencha/cmd": "~6.7.0",
     "lodash.uniq": "^4.5.0",
     "schema-utils": "^1.0.0",
     "babylon": "^6.18.0",

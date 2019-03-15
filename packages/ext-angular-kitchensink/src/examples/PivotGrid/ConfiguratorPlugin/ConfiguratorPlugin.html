@@ -1,0 +1,22 @@
+<container  layout="fit" padding="10" [fitToParent]="true">
+
+  <toolbar 
+    [shadow]="false"
+    docked="top"
+    ui="app-transparent-toolbar"
+    padding="5 8"
+    [layout]="{
+      type: 'hbox',
+      align: 'stretch'
+    }">
+    <button shadow="true" ui="action" text="Configurator" [handler]="this.showConfigurator.bind(this)"></button>
+  </toolbar>
+
+  <pivotgrid 
+    [shadow]="true"
+    (ready)="onPivotGridRead($event)"
+    [plugins]="pivotgridPlugins"
+    [matrix]="pivotgridMatrix">
+  </pivotgrid>
+
+</container>

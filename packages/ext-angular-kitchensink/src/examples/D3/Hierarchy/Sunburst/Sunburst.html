@@ -1,0 +1,35 @@
+<container padding="10" layout="fit" [fitToParent]="true">
+    <tree 
+        [store]="store"
+        [selection]="selection"
+        (select)="onSelectionChange($event)"
+        plugins="responsive"
+        title="Folders"
+        shadow="true"
+        [height]="200"
+        [responsiveConfig]="{
+            'width > 600': {
+                width: 230,
+                height: undefined
+            }
+        }"
+    ></tree>
+    <d3-sunburst 
+        flex="1"
+        padding="20"
+        [store]="store"
+        [selection]="selection"
+        [tooltip]="{ renderer: onTooltip }"
+        (selectionChange)="onSelectionChange($event)"
+    ></d3-sunburst>
+</container>
+
+<!--Need to add this config 
+    responsiveConfig={{
+                    'width > 600': {
+                        layout: 'hbox'
+                    },
+                    'width <= 600': {
+                        layout: 'vbox'
+                    }
+                }} -->

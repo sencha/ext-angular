@@ -1,0 +1,28 @@
+
+<container padding="10" layout="fit" [fitToParent]="true">
+                <toolbar  docked="top">
+                    <button  iconCls="x-fa fa-refresh" [handler]="this.refreshData" text="Refresh Data"></button>
+                    <button  iconCls="x-fa fa-table" [handler]="this.refreshSize" text="Refresh Size"></button>
+                </toolbar>
+                <d3-heatmap  
+                    [store]="this.store"
+                    padding="30 30 40 100"
+                    flex="1"
+                    [platformConfig]="platformConfigVar"
+                    [xAxis]="xAxisVar"
+                    [yAxis]="yAxisVar"
+                    [colorAxis]="{
+                        scale: {
+                            type: 'linear',
+                            range: ['#ffffd9', '#49b6c4', '#225ea8']
+                        },
+                        field: 'sales'
+                    }"
+                    [tiles]="{
+                        attr: {
+                            'stroke': '#081d58',
+                            'stroke-width': 2
+                        }
+                    }"
+                ></d3-heatmap>
+</container>

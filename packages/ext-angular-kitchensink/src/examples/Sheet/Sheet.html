@@ -1,0 +1,71 @@
+<container  padding="10" maxWidth="500">
+  <sheet 
+    [side]="direct" 
+    [modal]="modal"
+    [reveal]="reveal" 
+    [displayed]="displayed"
+    (hide)="onHide()"
+    layout="vbox"
+    padding="15 0">
+    <button text="Settings" iconCls="x-fa fa-gear" (tap)="toggleMenu()" [width]="direct === 'left' || direct === 'right' ? 250 : undefined"></button>
+    <button text="New Item" iconCls="x-fa fa-pencil" (tap)="toggleMenu()" [width]="direct === 'left' || direct === 'right' ? 250 : undefined"></button>
+    <button text="Star" iconCls="x-fa fa-star" (tap)="toggleMenu()" [width]="direct === 'left' || direct === 'right' ? 250 : undefined"></button>
+  </sheet>
+  
+  <panel  shadow="true" ui="instructions" [layout]="{type: 'vbox', align: 'left'}">
+    <container  layout="hbox" >
+      <container docked="top"><div #extitem>
+        <div>Sheet is a component which allows you to easily display sliding menus from any side of the screen. You can show the menu by clicking the "Show Menu" button below or by swiping from the edge of the screen.</div>
+      </div></container>
+    </container>
+  </panel>
+
+  <panel [layout]="{type: 'vbox', align: 'left'}" shadow margin="20 0 0 0" padding="15" shadow="true">
+    <container  layout="hbox" > 
+      <button  
+        ui="action" 
+        enableToggle="true" 
+        [pressed]="displayed"
+        [text]="displayed ? 'Hide Menu' : 'Show Menu'"
+        (tap)="toggleMenu()"
+        margin= "0 0 10 0">
+      </button>
+    </container>
+
+    <container layout="hbox" >
+      <container docked="top"><div #extitem>
+        <div>side</div>
+      </div></container>
+    </container>
+
+    <segmentedbutton  margin= "0 0 10 0">
+      <button text="left" [pressed]="direct === 'left'" (tap)="directLeft()"></button>
+      <button text="right" [pressed]="direct === 'right'" (tap)="directRight()"></button>
+      <button text="top" [pressed]="direct === 'top'" (tap)="directTop()"></button>
+      <button text="bottom" [pressed]="direct === 'bottom'" (tap)="directBottom()"></button>
+    </segmentedbutton>
+
+    <container layout="hbox" >
+      <container docked="top"><div #extitem>
+        <div>reveal</div>
+      </div></container>
+    </container>
+
+    <segmentedbutton  margin= "0 0 10 0">
+      <button text="true" [pressed]="reveal" (tap)="setReveal()"></button>
+      <button text="false" [pressed]="reveal" (tap)="unsetReveal()"></button>
+    </segmentedbutton>
+
+    <container layout="hbox" >
+      <container docked="top"><div #extitem>
+        <div>modal</div>
+      </div></container>
+    </container>
+
+    <segmentedbutton [disabled]="reveal">
+      <button text="true" [pressed]="modal" (tap)="setModal()"></button>
+      <button text="false" [pressed]="modal" (tap)="unsetModal()"></button>
+    </segmentedbutton>
+
+  </panel>
+</container>

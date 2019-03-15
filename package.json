@@ -1,13 +1,15 @@
 {
   "name": "ext-angular",
-  "version": "6.7.0",
+  "version": "6.7.1",
   "description": "Use Ext JS in Angular",
   "main": "index.js",
   "scripts": {
-    "postinstall": "lerna bootstrap",
-    "increment": "lerna publish --skip-git --skip-npm --force-publish",
-    "clean": "lerna clean",
-    "install:clean": "npm cache clear --force && lerna clean && npm install",
+    "postinstall": "npx lerna bootstrap --loglevel warn",
+    "increment": "npx lerna publish --skip-git --skip-npm --force-publish",
+    "clean": "npx lerna clean",
+    "install:clean": "npm cache clear --force && npx lerna clean && npm install",
+    "kitchensink": "cd packages/ext-angular-kitchensink && npm start",
+    "boilerplate": "cd packages/ext-angular-boilerplate && npm start",
     "serve-tests": "cd packages/ext-angular-tests && npm start"
   },
   "keywords": [
@@ -19,6 +21,6 @@
   "author": "Sencha, Inc.",
   "license": "MIT",
   "devDependencies": {
-    "lerna": "^3.8.1"
+    "lerna": "^3.13.1"
   }
 }

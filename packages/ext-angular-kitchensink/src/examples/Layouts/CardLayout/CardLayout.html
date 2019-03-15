@@ -1,0 +1,42 @@
+<container  [layout]="vbox" [padding]="10">
+    <panel 
+        [width]="'auto'"
+        shadow="true"
+        ui="instructions"
+        margin="0 0 20 0"
+        [html]="'A <b>card</b> layout shows one item at a time. Each item takes on the 
+            full height and width of the container. Card layouts can optionally be configured to
+            animate when switching cards.'"
+    ></panel>
+    <container  
+        [height]="300"
+        [layout]="{ type: 'card', animation: animation }"
+        [activeItem]="activeCard" 
+        flex="1"
+        shadow="true"
+        [defaults]="{scrollable: 'y'}"
+    >
+        <panel  [bodyStyle]="colors.card.blue" shadow="true">
+            <container  *ngFor="let card of contents;let index=i">
+                <button 
+                    [margin]="card.margin ? card.margin : null"
+                    key="i"
+                    [text]="card.text"
+                    [ui]="'alt'"
+                    (tap)="switchCards(card.animation)"
+                ></button>
+            </container>
+        </panel>
+        <panel  [bodyStyle]="colors.card.green" shadow="true">
+            <container  *ngFor="let card of contents; let index=i">
+                <button 
+                    [margin]="card.margin ? card.margin : null"
+                    key="i"
+                    [text]="card.text"
+                    [ui]="'alt'"
+                    (tap)="switchCards(card.animation)"
+                ></button>
+            </container>
+        </panel>
+    </container>
+</container>

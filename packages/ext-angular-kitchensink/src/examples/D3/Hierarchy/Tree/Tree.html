@@ -1,0 +1,19 @@
+<container padding="10" layout="fit" [fitToParent]="true">
+    <d3-tree 
+      [store]="this.store"
+      [colorAxis]="{ field: 'id' }"
+      [interactions]="{
+        type: 'panzoom',
+        zoom: {
+          extent: [0.3, 3],
+          doubleTap: false
+        }
+      }"
+      padding="10"
+      nodeSize="[300, 40]"
+      nodeRadius="10"
+      [nodeText]="this.getNodeText"
+      [tooltip]="{ renderer: this.onTooltip }"
+      [platformConfig]="platConf"
+    ></d3-tree>
+</container>

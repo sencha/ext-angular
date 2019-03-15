@@ -1,38 +1,22 @@
-import { Component, NgModule } from '@angular/core'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+declare var Ext: any
+import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 
-import { environment } from '../environment';
-if (environment.production) {
-  import { ExtAngularModernModule } from './ext-angular-modern-prod/ext-angular-modern.module'
-}
-else {
-  import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
+import { ExtAngularModule } from './ext-angular-prod/ext-angular.module'
+import { ExtAngularBootstrapService } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.service'
+import { ExtAngularBootstrapComponent } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.component'
 
-}
-
-//import { ExtAngularModernModule } from './ext-angular-modern-test/ext-angular-modern.module'
-//import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
-import { ExtAngularService } from './ext-angular.service'
 import { AppComponent } from './app.component'
-import { MjgComponent } from './mjg.component'
-//import { AppComponent } from './example.component';
-
-@Component({
-  selector: 'app-root',
-  template: ``,
-})
-export class App {
-  constructor(private ExtAngularService: ExtAngularService) {
-    this.ExtAngularService.appendComponentToViewport(AppComponent)
-  }
-}
 
 @NgModule({
-  imports: [ BrowserModule, BrowserAnimationsModule, ExtAngularModernModule ],
-  declarations: [ App, AppComponent, MjgComponent, AppComponent ],
-  providers: [ ExtAngularService ],
-  entryComponents: [ AppComponent, MjgComponent, AppComponent],
-  bootstrap: [ App ]
+  imports:         [BrowserModule, ExtAngularModule],
+  declarations:    [ExtAngularBootstrapComponent, AppComponent ],
+  providers:       [ExtAngularBootstrapService],
+  entryComponents: [AppComponent],
+  bootstrap:       [ExtAngularBootstrapComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(extAngularService : ExtAngularBootstrapService) {
+    extAngularService.setBootStrapComponent(AppComponent)
+  }
+}

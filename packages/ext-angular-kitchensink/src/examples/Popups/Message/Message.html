@@ -1,0 +1,22 @@
+<container [padding]="10" layout="vbox" width="150">
+
+    <button 
+      [ui]="'action raised'" 
+      [margin]="'0 0 10 0'" 
+      (tap)="onAlertTap()" 
+      [text]="'Alert'">
+    </button>
+    <button 
+      [ui]="'action raised'" 
+      [margin]="'0 0 10 0'" 
+      (tap)="onPropmtTap()"
+      [text]="'Prompt'">
+    </button>
+    <button 
+      [ui]="'action raised'" 
+      [margin]="'0 0 0 0'"
+      (tap)="onConfirmTap()"
+      [text]="'Confirm'">
+    </button>
+
+</container>

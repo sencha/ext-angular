@@ -1,0 +1,19 @@
+<container padding="10" layout="fit" [fitToParent]="true">
+
+  <panel 
+    [shadow]="true"
+    (ready)="parentReady($event)">
+
+    <container (ready)="handleRepeatReady($event)" [cls]="'handle-repeat handle-source'">
+      <container [cls]="'handle'" [html]="'Foo'"></container>
+      <container [cls]="'handle'" [html]="'Bar'"></container>
+      <container [cls]="'handle'" [html]="'Baz'"></container>
+    </container>
+
+    <container (ready)="dragReady($event)" [cls]="'handle-handles handle-source'">
+      <container [cls]="'handle'" [html]="'Drag'"></container>
+    </container>
+
+  </panel>
+
+</container>

@@ -1,0 +1,20 @@
+<container layout="fit" padding="8" [fitToParent]="true">
+
+  <container docked="top"><div #extitem>
+    <chart-toolbar
+      [onRefreshClick]="this.refresh"
+      [onThemeChange]="this.changeTheme"
+      [theme]="theme">
+    </chart-toolbar>
+  </div></container>
+
+  <cartesian downloadServerUrl ="http://svg.sencha.io"
+    shadow="true"
+    insetPadding="20 10"
+    [store]="this.store"
+    [theme]="theme"
+    [axes]="cartesianAxes"
+    [series]="cartesianSeries">
+  </cartesian>
+
+</container>

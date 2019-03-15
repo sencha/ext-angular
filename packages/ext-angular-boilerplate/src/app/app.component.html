@@ -1,0 +1,22 @@
+<container [fullscreen]="true" layout="fit">
+
+  <titlebar [title]="title" docked="top">
+    <button align="left" *ngIf="isPhone" iconCls="x-fa fa-bars" [handler]="this.toggleAppMenu" ripple="false"></button>
+  </titlebar>
+
+  <panel docked="left" shadow="true">
+    <treelist 
+      [width]="width" 
+      ui="nav" 
+      expanderFirst="false" 
+      (selectionchange)="navigate($event)" 
+      [store]="navStore"
+      [responsiveConfig]="responsiveConfig">
+    </treelist>
+  </panel>
+
+  <container>
+    <router-outlet #extroute></router-outlet>
+  </container>
+
+</container>

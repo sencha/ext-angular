@@ -1,0 +1,63 @@
+
+Smaller prod for ExtAngular
+- reduce size of main.js
+- ExtAngular package smaller footprint (events, for example)
+- optimizations section in webconfig - also chunks?
+
+Treeshaking
+- treeshake error logic and recovery (if part 1 fails, for example)
+- reset project if npm run build fails
+  - remove ext-angular-prod
+  - update module
+  - update main
+
+ExtGen
+- support upgrade to multi-app workspace in ext-gen
+- refactor ext-gen, et all
+- don't assume defaults of phone and desktop for profiles in upgrade
+- implement folder parameter
+
+ExtReact
+- issue in ExtReact  https://sencha.jira.com/browse/EXTREACT-9
+- withRef: true and react-redux 6.0.0 (https://github.com/reduxjs/react-redux/releases)
+
+Misc
+- move to webpack-serve?
+- grid SelectionChange missing
+- spreadsheet mode and columns
+- mobile/phone layout for kitchensink
+- is skipping all ngDestroy correct?  
+  - investigate effects of grid/column not deleted (and others)
+- formatting for many examples
+- Sencha tests for ExtAngular (like those for ExtReact)
+- Create eslint for app
+- custom theme does not show up on Conference App
+- Example applications for modern toolkit (like those for ExtReact)
+  - Conference app
+  - Froala Example
+  - renderwhenready
+  - rest Example
+  - GraphQL
+- ux images for colorpicker (fix)
+- refactor plugin to separate repo
+
+Angular 'language' issues
+- implement 'class' component for ext
+- fix for following issue, remove <span #extitem> and have it still work
+    <container>
+        <span #extitem>
+          <span class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></span>
+          <span extjs href="#" class="app-title">Sencha ExtAngular 6.7 Kitchen Sink - Angular v{{ANGULAR_VERSION}}</span>
+        </span>
+    </container>
+- implement widgetcell (see BigData)
+        <cell>
+          <widgetcell>
+            <button ui ="action" [handler] ="this.onVerify" [bind] = "widgetCellBind" text = "VERIFY"></button>
+          </widgetcell>
+        </cell>
+        <summaryCell>
+          <widgetcell>
+            <button ui ="action" [handler] ="this.onVerifyAll" text = "All"></button>
+          </widgetcell>
+        </summaryCell>

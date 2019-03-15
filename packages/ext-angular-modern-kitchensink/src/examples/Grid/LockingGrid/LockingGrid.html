@@ -1,8 +1,0 @@
-<lockedgrid #item title="Locking Grid" [store]="store" [shadow]="true" [fitToParent]="true">
-  <column #item text="Company" dataIndex="name" width="150" [summaryRenderer]="this.summarizeCompanies" locked="true"></column>
-  <column #item text="Price" width="75" dataIndex="price" formatter="usMoney" summary="average" locked="true"></column>
-  <column #item locked="left" [cell]="leftLockedColumnCell"></column>
-  <column #item text="Change" width="90" dataIndex="priceChange" [renderer]="this.renderSign.bind(this, '0.00')" summary="max" locked="right"></column>
-  <column #item text="% Change" width="100" dataIndex="priceChangePct" [renderer]="this.renderSign.bind(this, '0.00')" summary="average"></column>
-  <column #item text="Last Updated" width="125" dataIndex="priceLastChange" formatter="date('m/d/Y')" summary="max"></column>
-</lockedgrid>

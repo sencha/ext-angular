@@ -5,6 +5,7 @@ export function getValidateOptions() {
     "type": "object",
     "properties": {
       "framework":   {"type": [ "string" ]},
+      "toolkit":     {"type": [ "string" ]},
       "port":        {"type": [ "integer" ]},
       "emit":        {"type": [ "boolean" ]},
       "browser":     {"type": [ "boolean" ]},
@@ -13,7 +14,7 @@ export function getValidateOptions() {
       "environment": {"type": [ "string" ]},
       "verbose":     {"type": [ "string" ]},
       "theme":       {"type": [ "string" ]},
-      "toolkit":     {"type": [ "string" ]},
+      "treeshake": {"type": [ "boolean" ]},
       "packages":    {"type": [ "string", "array" ]}
     },
     "additionalProperties": false
@@ -141,8 +142,29 @@ export function extractFromSource(module, options, compilation) {
     return statements
   }
   catch(e) {
+    console.log(module.resource)
+    console.log(js)
     console.log(e)
     compilation.errors.push('extractFromSource: ' + e)
     return []
+  }
+}
+
+//**********
+export function _done(vars, options) {
+  try {
+    const log = require('./pluginUtil').log
+    const logv = require('./pluginUtil').logv
+    logv(options,'FUNCTION _done')
+
+    try {
+    }
+    catch (e) {
+      console.log(e)
+      return []
+    }
+  }
+  catch(e) {
+    require('./pluginUtil').logv(options,e)
   }
 }

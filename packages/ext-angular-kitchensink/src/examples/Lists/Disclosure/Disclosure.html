@@ -1,0 +1,11 @@
+<list 
+    [shadow]="true"
+    [itemTpl]="tpl"
+    [store]="store"
+    [config]="{
+        onItemDisclosure: msgAlert
+    }"
+    [platformConfig]="{
+        '!phone': {height: 450, width: 300}
+    }"
+></list>

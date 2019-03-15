@@ -1,11 +1,19 @@
+
+
+
+
 import { NgModule } from '@angular/core';
 {imports}
 @NgModule({
-  imports: [
+  imports:         [],
+  declarations:    [
+{declarations}
   ],
-  declarations: [
-{declarations}  ],
-  exports: [
-{exports}  ]
+  providers:       [  ],
+  entryComponents: [  ],
+  exports:         [
+{exports}
+  ]
 })
-export class ExtAngular{toolkit}Module { }
+export class ExtAngularModule { }
+

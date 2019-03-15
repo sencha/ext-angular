@@ -1,0 +1,19 @@
+<container padding="10" layout="fit" [fitToParent]="true">
+
+  <container docked="top"><div #extitem>
+    <chart-toolbar
+      [onThemeChange]="this.changeTheme"
+      [theme]="theme">
+    </chart-toolbar>
+  </div></container>
+
+  <polar downloadServerUrl ="http://svg.sencha.io"
+    [shadow]="true"
+    [store]="this.store"
+    [theme]="theme"
+    [legend]="{ type: 'sprite', docked: 'bottom', marker: { size: 16 }}"
+    [interactions]="['rotate', 'itemhighlight']"
+    [series]="polarSeries">
+  </polar>
+
+</container>

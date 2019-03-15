@@ -1,0 +1,24 @@
+<container padding="10" layout="fit" [fitToParent]="true">
+
+  <lockedgrid
+    [left]="10" [top]="10" [width]="800" [height]="400"
+    title="Locking Grid"
+    [store]="companies" 
+    [scrollable]="true"
+    [shadow]="true">
+      <column [locked]="true"    text="Company"      dataIndex="name"            width="150"></column>
+      <column [locked]="true"    text="Price"        dataIndex="price"           width="100"></column>
+      <column [locked]="'left'"  [cell]="{
+          tools: {
+            approve: {iconCls: 'x-fa fa-check green',handler: this.onApprove.bind(this)},
+            decline: {iconCls: 'x-fa fa-ban red', handler:  this.onDecline.bind(this), weight: 1}
+          }}">
+      </column>
+      <column [locked]="'right'" text="Change"       dataIndex="priceChange"     width="100"></column>
+      <column                    text="% Change"     dataIndex="priceChangePct"  width="100"></column>
+      <column                    text="Last Updated" dataIndex="priceLastChange" width="150"></column>
+      <column                    text="Industry"     dataIndex="industry"        width="150"></column>
+  </lockedgrid>
+
+</container>
+

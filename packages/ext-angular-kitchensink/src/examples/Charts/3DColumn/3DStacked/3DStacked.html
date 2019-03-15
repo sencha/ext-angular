@@ -1,0 +1,25 @@
+<container padding="10" layout="fit" [fitToParent]="true">
+
+  <container docked="top"><div #extitem>
+    <chart-toolbar  
+      [onThemeChange]="this.changeTheme"
+      [onStackGroup]="this.onStackedToggle"
+      [theme]="theme">
+    </chart-toolbar>
+  </div></container>
+
+  <cartesian downloadServerUrl ="http://svg.sencha.io" 
+    shadow="true"
+    ref="chart"
+    [store]="this.store"
+    [theme]="theme"
+    (ready)="chartNavReady($event)"
+    interactions="itemhighlight"
+    insetPadding="40 20 10 10"
+    [legend]="{ type: 'sprite' }"
+    [axes]="cartesianAxes"
+    [series]="cartesianSeries"
+    [captions]="cartesianCaptions">
+  </cartesian>
+
+</container>

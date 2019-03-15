@@ -1,6 +1,10 @@
 GeneratedFolders/*.*
 AllClassesFiles/*.*
-generators/ext-angular-modern/*.*
+demos/*.*
+dist/*.*
+dist
+ext-angular-prod
+generators/ext-angular/*.*
 testing
 package-lock.json
 node_modules

@@ -1,0 +1,91 @@
+<container padding="10" layout="fit" [fitToParent]="true">
+    <container [scrollable]="y" layout="hbox" [top]="top" [left]="left" [width]="width" [height]="height" padding="20">
+          <formpanel 
+            [padding]="10"
+            [shadow]="true"
+            [defaults]="{errorTarget: 'under'}"
+            [margin]="'0 0 20 0'"
+            [title]="'Using Validators'"
+            [html]="'<div style=\'font-size:13px;color:#666;text-align:left;\'>Here we use validators from <code>Ext.data.validator</code> to validate user input.</div>'"
+        >
+            <textfield 
+                [required]="true"
+                [label]="'Required Field'"
+                [requiredMessage]="'This field is required.'"
+            ></textfield>
+            <urlfield 
+                [label]="'URL'"
+                [validators]="{type: 'url', message: 'Please enter a valid website url.'}"
+            ></urlfield>
+            <emailfield 
+                [label]="'Email'"
+                [validators]="'email'"
+            ></emailfield>
+            <textfield  
+                [label]="'Phone Number'"
+                [inputMask]="'(999) 999-9999'"
+            ></textfield>
+            <datepickerfield 
+                [label]="'Date of Birth'"
+                [placeholder]="'mm/dd/yyyy'"
+                [validators]="'date'"
+            ></datepickerfield>
+            <textfield 
+                [label]="'Salary'"
+                [placeholder]="'$xx,xxx'"
+                [validators]="{type: 'currency-us', message: 'Invalid salary.'}"
+            ></textfield>
+            <numberfield 
+                [label]="'Rating (1-5)'"
+                [decimals]="0"
+                [validators]="{
+                    type: 'range',
+                    min: 1,
+                    max: 5,
+                    minOnlyMessage: 'The rating must be at least {0}',
+                    maxOnlyMessage: 'The rating must be no more than than {0}',
+                    bothMessage: 'Invalid rating, must be between {0} and {1}'
+                }"
+            ></numberfield>
+            <textfield 
+                [label]="'Last Login'"
+                [placeholder]="'YYYY/MM/DD hh:mm'"
+                [validators]="{
+                    type: 'datetime',
+                    message: 'Invalid date and/or time'
+                }"
+            ></textfield>
+            <textfield 
+                [label]="'Custom Format Regex: Uppercase letters only'"
+                [name]="'uppercase'"
+                [validators]="{
+                    type: 'format', matcher: '/^[A-Z]*$/', message: 'Only uppercase letters are allowed.'
+                }"
+            ></textfield>
+            <textfield 
+                [label]="'Custom Format Function: Capitalized words'"
+                [validators]="{type: 'method', fn: validateCapilization}"
+            ></textfield>
+        </formpanel>
+          <formpanel 
+            [padding]="10"
+            [shadow]="true"
+            [margin]="'0 0 20 50'"
+            [title]="'Assigning Error Messages Directly'"
+            [html]="'<div style=\'font-size:13px;color:#666;text-align:left;\'>Here we assign error messages directly using the <code>errorMessage</code> and <code>error</code> props.
+                </div>'"
+        >
+            <textfield 
+                [label]="'Single Error'"
+                [errorMessage]="'The value you entered is invalid.'"
+                [errorTarget]= "'under'">
+            </textfield>
+            <textfield 
+                [label]="'Multiple Errors'"
+                [errorTarget]="'under'"
+                [error]="['Error 1', 'Error 2', 'Error 3']">
+            </textfield>
+
+        </formpanel>
+    </container>
+</container>

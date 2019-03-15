@@ -1,0 +1,21 @@
+<container padding="10" layout="fit" [fitToParent]="true">
+    <formpanel [shadow]="true" [top]="top" [left]="left" [width]="width" [height]="height" padding="20">
+        <fieldset  [title]="'Separate Label and Placeholder'" [margin]="'0 0 20 0'">
+        <textfield  [placeholder]="'Enter Name...'" [label]="'Name'" [required]="true">
+        </textfield>
+    </fieldset>
+    <fieldset  [title]="'Label as Placeholder'" [margin]="'0 0 20 0'">
+        <textfield  [labelAlign]="'placeholder'" [label]="'Name'" [required]="true">
+        </textfield>
+    </fieldset>
+    <fieldset  [title]="'With Error Message'">
+        <textfield 
+            [labelAlign]="'placeholder'" 
+            [label]="'Label'" 
+            [errorMessage]="'The value you entered is invalid.'" 
+            [value]="'invalid value'"
+            [errorTarget]="'under'"
+        ></textfield>
+    </fieldset>
+</formpanel>
+</container>
