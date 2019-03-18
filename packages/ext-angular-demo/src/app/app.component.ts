@@ -10,6 +10,7 @@ import { Component } from '@angular/core';
   template: `
   <panel [fullscreen]="true" title="Ext Angular Test App">
 
+  
   <button text="floating menu">
     <menu [floated]="true">
       <menucheckitem
