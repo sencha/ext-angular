@@ -163,7 +163,7 @@
                 var o = {};
                 o.xtype = metaData.XTYPE;
                 /** @type {?} */
-                var listneresProvided = false;
+                var listenersProvided = false;
                 for (var i = 0; i < me.metaData.PROPERTIES.length; i++) {
                     /** @type {?} */
                     var prop = me.metaData.PROPERTIES[i];
@@ -176,7 +176,7 @@
                     if ((o.xtype === 'cartesian' || o.xtype === 'polar') && prop === 'layout') ;
                     else if (prop == 'listeners' && me[prop] != undefined) {
                         o[prop] = me[prop];
-                        listneresProvided = true;
+                        listenersProvided = true;
                     }
                     else {
                         if (me[prop] != undefined &&
@@ -197,7 +197,7 @@
                 if (me.config !== {}) {
                     Ext.apply(o, me.config);
                 }
-                if (!listneresProvided) {
+                if (!listenersProvided) {
                     o.listeners = {};
                     /** @type {?} */
                     var EVENTS = metaData.EVENTS;
@@ -231,6 +231,9 @@
                 }
                 if (this._nativeElement.parentElement != null) {
                     o.renderTo = this._nativeElement;
+                }
+                if (o.xtype == 'dialog') {
+                    o.renderTo = undefined;
                 }
                 this.ext = Ext.create(o);
             };
@@ -309,7 +312,9 @@
                     parentCmp.setPlugin(childCmp);
                     return;
                 }
-                else if (parentxtype === 'button') {
+                else if (parentxtype === 'button' ||
+                    parentxtype === 'menuitem' ||
+                    parentxtype === 'menucheckitem') {
                     if (childxtype === 'menu') {
                         parentCmp.setMenu(childCmp);
                         return;
