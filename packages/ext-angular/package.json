@@ -31,7 +31,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sencha/ext-angular.git"
+    "url": "git+https://github.com/sencha/ext-angular"
   },
   "keywords": [],
   "author": "Sencha",
