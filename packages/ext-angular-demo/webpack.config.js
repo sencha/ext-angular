@@ -3,7 +3,7 @@ const webpack = require("webpack")
 const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
-const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin')
+const ExtWebpackPlugin = require('@sencha/ext-angular-webpack-plugin')
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin')
 const portfinder = require('portfinder')
 
