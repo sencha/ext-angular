@@ -13,7 +13,9 @@ module.exports = function (env) {
   var profile     = get('profile',     '')
   var environment = get('environment', 'development')
   var treeshake   = get('treeshake',   'no')
+  treeshake = false
   var browser     = get('browser',     'yes')
+  browser = true
   var watch       = get('watch',       'yes')
   var verbose     = get('verbose',     'no')
   const isProd = environment === 'production'

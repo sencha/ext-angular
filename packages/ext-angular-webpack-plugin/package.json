@@ -63,5 +63,5 @@
   "bugs": {
     "url": "https://github.com/sencha"
   },
-  "homepage": "https://github.com/sencha/ext-gen/tree/master/packages/ext-webpack-plugin"
+  "homepage": "https://github.com/sencha/ext-gen/tree/master/packages/ext-angular-webpack-plugin"
 }

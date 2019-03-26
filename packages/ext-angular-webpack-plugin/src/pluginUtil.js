@@ -6,7 +6,7 @@ export function _constructor(initialOptions) {
   try {
     if (initialOptions.framework == undefined) {
       vars.pluginErrors = []
-      vars.pluginErrors.push('webpack config: framework parameter on ext-webpack-plugin is not defined - values: react, angular, extjs, components')
+      vars.pluginErrors.push('webpack config: framework parameter on ext-angular-webpack-plugin is not defined - values: react, angular, extjs, components')
       var o = {}
       o.vars = vars
       return o
@@ -22,7 +22,6 @@ export function _constructor(initialOptions) {
     options = { ..._getDefaultOptions(), ...initialOptions, ...rc }
 
     vars = require(`./${framework}Util`)._getDefaultVars()
-//mjg    vars.pluginName = 'ext-webpack-plugin'
     vars.pluginName = 'ext-angular-webpack-plugin'
 
     vars.app = _getApp()
