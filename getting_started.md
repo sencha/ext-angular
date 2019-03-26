@@ -14,26 +14,7 @@ ExtAngular requires the following to be installed before proceeding:
 
 ## Creating Your First ExtAngular Application with Angular CLI
 
-### Step 1a: Authenticate to Sencha's NPM Registry - early adopter
-
-ExtAngular and all related packages are hosted on Sencha's private NPM registry. 
-
-To gain access to the early adopter registry, contact Sencha Sales.
-
-Once you have received your credentials from sales for the early adopter registry, 
-you can authenticate by running the following command:
-
-```bash
-npm login --registry=https://sencha.myget.org/F/early-adopter/npm/ --scope=@sencha
-```
-
-This command configures npm to download packages in the `@sencha` scope from Sencha's registry.
-
-### Step 1b: Authenticate to Sencha's NPM Registry - Production (not available yet)
-
-
-*************
-When this product is in production...
+### Step 1: Authenticate to Sencha's NPM Registry - Production
 
 ExtAngular and all related packages are hosted on Sencha's private NPM registry. 
 
@@ -48,7 +29,6 @@ npm login --registry=http://npm.sencha.com --scope=@sencha
 ```
 
 This command configures npm to download packages in the `@sencha` scope from Sencha's registry.
-*************
 
 ### Step 2: Create a New Angular CLI Application
 
@@ -172,11 +152,11 @@ replace the contents of ./src/index.html with this:
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="build/ext-angular/ext.css" rel="stylesheet">
+  <link href="ext-angular/ext.css" rel="stylesheet">
+  <script type="text/javascript" src="ext-angular/ext.js"></script>
 </head>
 <body>
   <app-root></app-root>
-  <script type="text/javascript" src="build/ext-angular/ext.js"></script>
 </body>
 </html>
 ```
