@@ -14,7 +14,7 @@ ExtAngular requires the following to be installed before proceeding:
 
 ## Creating Your First ExtAngular Application with Angular CLI
 
-### Step 1: Authenticate to Sencha's NPM Registry - Production
+### Step 1: Authenticate to Sencha's NPM Registry
 
 ExtAngular and all related packages are hosted on Sencha's private NPM registry. 
 

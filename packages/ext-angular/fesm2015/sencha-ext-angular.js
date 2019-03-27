@@ -1,99 +1,59 @@
+import { __decorate, __metadata, __param } from 'tslib';
+import { defineInjectable, inject, ComponentFactoryResolver, ApplicationRef, INJECTOR, Injectable, Injector, Component, EventEmitter, ContentChild, ContentChildren, QueryList, forwardRef, Host, Optional, SkipSelf, ElementRef, NgModule } from '@angular/core';
 import '@angular/platform-browser-dynamic';
-import { Injectable, Injector, ComponentFactoryResolver, ApplicationRef, Component, Host, Optional, SkipSelf, ElementRef, forwardRef, EventEmitter, ContentChild, ContentChildren, NgModule, defineInjectable, inject, INJECTOR } from '@angular/core';
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ExtAngularBootstrapService {
-    /**
-     * @param {?} componentFactoryResolver
-     * @param {?} appRef
-     * @param {?} injector
-     */
+let ExtAngularBootstrapService = class ExtAngularBootstrapService {
     constructor(componentFactoryResolver, appRef, injector) {
         this.componentFactoryResolver = componentFactoryResolver;
         this.appRef = appRef;
         this.injector = injector;
     }
-    /**
-     * @return {?}
-     */
     appendComponentToViewport() {
         //console.log("In appendComponentToViewport")
         if (!this.bootstrapComponent) {
             throw new Error("Bootstrap component not set. Please use extAngularService.setBootStrapComponent(yourComponent) to setup bootstrap component from your root module constructor");
         }
         //console.log("bootstrapComponent : " + this.bootstrapComponent)
-        /** @type {?} */
         const componentRef = this.componentFactoryResolver
             .resolveComponentFactory(this.bootstrapComponent)
             .create(this.injector);
         this.appRef.attachView(componentRef.hostView);
-        /** @type {?} */
-        const domElem = (/** @type {?} */ (((/** @type {?} */ (componentRef.hostView)))
-            .rootNodes[0]));
-        /** @type {?} */
+        const domElem = componentRef.hostView
+            .rootNodes[0];
         var root = document.getElementsByClassName('x-viewport-body-el')[0];
         root.appendChild(domElem);
     }
-    /**
-     * @param {?} component
-     * @return {?}
-     */
     setBootStrapComponent(component) {
         //console.log("In setBootStrapComponent")
         this.bootstrapComponent = component;
     }
-}
-ExtAngularBootstrapService.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root'
-            },] }
-];
-/** @nocollapse */
-ExtAngularBootstrapService.ctorParameters = () => [
-    { type: ComponentFactoryResolver },
-    { type: ApplicationRef },
-    { type: Injector }
-];
-/** @nocollapse */ ExtAngularBootstrapService.ngInjectableDef = defineInjectable({ factory: function ExtAngularBootstrapService_Factory() { return new ExtAngularBootstrapService(inject(ComponentFactoryResolver), inject(ApplicationRef), inject(INJECTOR)); }, token: ExtAngularBootstrapService, providedIn: "root" });
+};
+ExtAngularBootstrapService.ngInjectableDef = defineInjectable({ factory: function ExtAngularBootstrapService_Factory() { return new ExtAngularBootstrapService(inject(ComponentFactoryResolver), inject(ApplicationRef), inject(INJECTOR)); }, token: ExtAngularBootstrapService, providedIn: "root" });
+ExtAngularBootstrapService = __decorate([
+    Injectable({
+        providedIn: 'root'
+    }),
+    __metadata("design:paramtypes", [ComponentFactoryResolver,
+        ApplicationRef,
+        Injector])
+], ExtAngularBootstrapService);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ExtAngularBootstrapComponent {
-    /**
-     * @param {?} extAngularService
-     */
+let ExtAngularBootstrapComponent = class ExtAngularBootstrapComponent {
     constructor(extAngularService) {
         this.extAngularService = extAngularService;
         //console.log("In App constructor")
         this.extAngularService.appendComponentToViewport();
     }
-}
-ExtAngularBootstrapComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'app-root',
-                template: ``
-            }] }
-];
-/** @nocollapse */
-ExtAngularBootstrapComponent.ctorParameters = () => [
-    { type: ExtAngularBootstrapService }
-];
+};
+ExtAngularBootstrapComponent = __decorate([
+    Component({
+        selector: 'app-root',
+        template: ``
+    }),
+    __metadata("design:paramtypes", [ExtAngularBootstrapService])
+], ExtAngularBootstrapComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 class base {
-    /**
-     * @param {?} nativeElement
-     * @param {?} metaData
-     * @param {?} hostComponent
-     */
     constructor(nativeElement, metaData, hostComponent) {
         this.metaData = metaData;
         this.hostComponent = hostComponent;
@@ -101,35 +61,22 @@ class base {
         this.q = null;
         this._nativeElement = nativeElement;
         this._hostComponent = hostComponent;
-        metaData.EVENTNAMES.forEach((/**
-         * @param {?} event
-         * @param {?} n
-         * @return {?}
-         */
-        (event, n) => {
+        metaData.EVENTNAMES.forEach((event, n) => {
             if (event != 'fullscreen') {
-                ((/** @type {?} */ (this)))[event] = new EventEmitter();
+                this[event] = new EventEmitter();
             }
             else {
-                ((/** @type {?} */ (this)))[event + 'event'] = new EventEmitter();
+                this[event + 'event'] = new EventEmitter();
             }
-        }));
+        });
     }
-    /**
-     * @param {?} metaData
-     * @return {?}
-     */
     baseOnInit(metaData) {
         //console.log(`ngOnInit: ${metaData.XTYPE}`)
-        /** @type {?} */
         let me = this;
-        /** @type {?} */
         let o = {};
         o.xtype = metaData.XTYPE;
-        /** @type {?} */
         let listenersProvided = false;
         for (var i = 0; i < me.metaData.PROPERTIES.length; i++) {
-            /** @type {?} */
             var prop = me.metaData.PROPERTIES[i];
             if (prop == 'handler') {
                 if (me[prop] != undefined) {
@@ -163,37 +110,21 @@ class base {
         }
         if (!listenersProvided) {
             o.listeners = {};
-            /** @type {?} */
             var EVENTS = metaData.EVENTS;
-            EVENTS.forEach((/**
-             * @param {?} event
-             * @param {?} index
-             * @param {?} array
-             * @return {?}
-             */
-            function (event, index, array) {
-                /** @type {?} */
+            EVENTS.forEach(function (event, index, array) {
                 let eventname = event.name;
-                /** @type {?} */
                 let eventparameters = event.parameters;
-                o.listeners[eventname] = (/**
-                 * @return {?}
-                 */
-                function () {
-                    /** @type {?} */
+                o.listeners[eventname] = function () {
                     let parameters = eventparameters;
-                    /** @type {?} */
                     let parms = parameters.split(',');
-                    /** @type {?} */
                     let args = Array.prototype.slice.call(arguments);
-                    /** @type {?} */
                     let emitparms = {};
                     for (let i = 0, j = parms.length; i < j; i++) {
                         emitparms[parms[i]] = args[i];
                     }
                     me[eventname].emit(emitparms);
-                });
-            }));
+                };
+            });
         }
         if (this._nativeElement.parentElement != null) {
             o.renderTo = this._nativeElement;
@@ -203,9 +134,6 @@ class base {
         }
         this.ext = Ext.create(o);
     }
-    /**
-     * @return {?}
-     */
     baseAfterContentInit() {
         if (this._extitems.length == 1) {
             if (this._hostComponent != null) {
@@ -216,23 +144,14 @@ class base {
             this.ext.setHtml(this._extroute.nativeElement);
         }
         if (this._hostComponent != null) {
-            /** @type {?} */
             var parentCmp = this._hostComponent.ext;
-            /** @type {?} */
             var childCmp = this.ext;
             this.addTheChild(parentCmp, childCmp);
         }
         this['ready'].emit(this);
     }
-    /**
-     * @param {?} parentCmp
-     * @param {?} childCmp
-     * @return {?}
-     */
     addTheChild(parentCmp, childCmp) {
-        /** @type {?} */
         var parentxtype = parentCmp.xtype;
-        /** @type {?} */
         var childxtype = childCmp.xtype;
         if (this.ext.initialConfig.align != undefined) {
             if (parentxtype != 'titlebar' && parentxtype != 'grid' && parentxtype != 'button') {
@@ -303,13 +222,8 @@ class base {
         }
         console.log('child not added');
     }
-    /**
-     * @param {?} changes
-     * @return {?}
-     */
     ngOnChanges(changes) {
         for (let propName in changes) {
-            /** @type {?} */
             let verb = '';
             if (changes[propName].firstChange === true) {
                 verb = 'initialized';
@@ -317,12 +231,9 @@ class base {
             else {
                 verb = 'changed';
             }
-            /** @type {?} */
             let val = changes[propName].currentValue;
             if (this.ext != undefined) {
-                /** @type {?} */
                 var capPropName = propName.charAt(0).toUpperCase() + propName.slice(1);
-                /** @type {?} */
                 var setFunction = 'set' + capPropName;
                 if (this.ext[setFunction] != undefined) {
                     this.ext[setFunction](val);
@@ -339,13 +250,8 @@ class base {
         }
         //console.log(`OnChanges: ${changesMsgs.join('; ')}`)
     }
-    /**
-     * @return {?}
-     */
     ngOnDestroy() {
-        /** @type {?} */
         var childCmp;
-        /** @type {?} */
         var parentCmp;
         try {
             childCmp = this.ext;
@@ -381,17 +287,24 @@ class base {
         }
     }
 }
-base.propDecorators = {
-    _extroute: [{ type: ContentChild, args: ['extroute',] }],
-    _extroutes: [{ type: ContentChildren, args: ['extroute',] }],
-    _extitem: [{ type: ContentChild, args: ['extitem',] }],
-    _extitems: [{ type: ContentChildren, args: ['extitem',] }]
-};
+__decorate([
+    ContentChild('extroute'),
+    __metadata("design:type", Object)
+], base.prototype, "_extroute", void 0);
+__decorate([
+    ContentChildren('extroute'),
+    __metadata("design:type", QueryList)
+], base.prototype, "_extroutes", void 0);
+__decorate([
+    ContentChild('extitem'),
+    __metadata("design:type", Object)
+], base.prototype, "_extitem", void 0);
+__decorate([
+    ContentChildren('extitem'),
+    __metadata("design:type", QueryList)
+], base.prototype, "_extitems", void 0);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtActionsheetComponent_1;
 class actionsheetMetaData {
 }
 actionsheetMetaData.XTYPE = 'actionsheet';
@@ -701,51 +614,32 @@ actionsheetMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtActionsheetComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtActionsheetComponent = ExtActionsheetComponent_1 = class ExtActionsheetComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, actionsheetMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(actionsheetMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtActionsheetComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'actionsheet',
-                inputs: actionsheetMetaData.PROPERTIES,
-                outputs: actionsheetMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtActionsheetComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtActionsheetComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtActionsheetComponent = ExtActionsheetComponent_1 = __decorate([
+    Component({
+        selector: 'actionsheet',
+        inputs: actionsheetMetaData.PROPERTIES,
+        outputs: actionsheetMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtActionsheetComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtActionsheetComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtAudioComponent_1;
 class audioMetaData {
 }
 audioMetaData.XTYPE = 'audio';
@@ -983,51 +877,32 @@ audioMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtAudioComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtAudioComponent = ExtAudioComponent_1 = class ExtAudioComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, audioMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(audioMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtAudioComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'audio',
-                inputs: audioMetaData.PROPERTIES,
-                outputs: audioMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtAudioComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtAudioComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtAudioComponent = ExtAudioComponent_1 = __decorate([
+    Component({
+        selector: 'audio',
+        inputs: audioMetaData.PROPERTIES,
+        outputs: audioMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtAudioComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtAudioComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtButtonComponent_1;
 class buttonMetaData {
 }
 buttonMetaData.XTYPE = 'button';
@@ -1271,51 +1146,32 @@ buttonMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtButtonComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtButtonComponent = ExtButtonComponent_1 = class ExtButtonComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, buttonMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(buttonMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtButtonComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'button',
-                inputs: buttonMetaData.PROPERTIES,
-                outputs: buttonMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtButtonComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtButtonComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtButtonComponent = ExtButtonComponent_1 = __decorate([
+    Component({
+        selector: 'button',
+        inputs: buttonMetaData.PROPERTIES,
+        outputs: buttonMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtButtonComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtButtonComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendar_eventComponent_1;
 class calendar_eventMetaData {
 }
 calendar_eventMetaData.XTYPE = 'calendar-event';
@@ -1539,51 +1395,32 @@ calendar_eventMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCalendar_eventComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendar_eventComponent = ExtCalendar_eventComponent_1 = class ExtCalendar_eventComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_eventMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendar_eventMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendar_eventComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar-event',
-                inputs: calendar_eventMetaData.PROPERTIES,
-                outputs: calendar_eventMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendar_eventComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendar_eventComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendar_eventComponent = ExtCalendar_eventComponent_1 = __decorate([
+    Component({
+        selector: 'calendar-event',
+        inputs: calendar_eventMetaData.PROPERTIES,
+        outputs: calendar_eventMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_eventComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendar_eventComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendar_form_addComponent_1;
 class calendar_form_addMetaData {
 }
 calendar_form_addMetaData.XTYPE = 'calendar-form-add';
@@ -1928,51 +1765,32 @@ calendar_form_addMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCalendar_form_addComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendar_form_addComponent = ExtCalendar_form_addComponent_1 = class ExtCalendar_form_addComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_form_addMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendar_form_addMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendar_form_addComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar-form-add',
-                inputs: calendar_form_addMetaData.PROPERTIES,
-                outputs: calendar_form_addMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendar_form_addComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendar_form_addComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendar_form_addComponent = ExtCalendar_form_addComponent_1 = __decorate([
+    Component({
+        selector: 'calendar-form-add',
+        inputs: calendar_form_addMetaData.PROPERTIES,
+        outputs: calendar_form_addMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_form_addComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendar_form_addComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendar_calendar_pickerComponent_1;
 class calendar_calendar_pickerMetaData {
 }
 calendar_calendar_pickerMetaData.XTYPE = 'calendar-calendar-picker';
@@ -2286,51 +2104,32 @@ calendar_calendar_pickerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCalendar_calendar_pickerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendar_calendar_pickerComponent = ExtCalendar_calendar_pickerComponent_1 = class ExtCalendar_calendar_pickerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_calendar_pickerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendar_calendar_pickerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendar_calendar_pickerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar-calendar-picker',
-                inputs: calendar_calendar_pickerMetaData.PROPERTIES,
-                outputs: calendar_calendar_pickerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendar_calendar_pickerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendar_calendar_pickerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendar_calendar_pickerComponent = ExtCalendar_calendar_pickerComponent_1 = __decorate([
+    Component({
+        selector: 'calendar-calendar-picker',
+        inputs: calendar_calendar_pickerMetaData.PROPERTIES,
+        outputs: calendar_calendar_pickerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_calendar_pickerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendar_calendar_pickerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendar_form_editComponent_1;
 class calendar_form_editMetaData {
 }
 calendar_form_editMetaData.XTYPE = 'calendar-form-edit';
@@ -2675,51 +2474,32 @@ calendar_form_editMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCalendar_form_editComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendar_form_editComponent = ExtCalendar_form_editComponent_1 = class ExtCalendar_form_editComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_form_editMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendar_form_editMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendar_form_editComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar-form-edit',
-                inputs: calendar_form_editMetaData.PROPERTIES,
-                outputs: calendar_form_editMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendar_form_editComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendar_form_editComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendar_form_editComponent = ExtCalendar_form_editComponent_1 = __decorate([
+    Component({
+        selector: 'calendar-form-edit',
+        inputs: calendar_form_editMetaData.PROPERTIES,
+        outputs: calendar_form_editMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_form_editComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendar_form_editComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendar_timefieldComponent_1;
 class calendar_timefieldMetaData {
 }
 calendar_timefieldMetaData.XTYPE = 'calendar-timefield';
@@ -3033,51 +2813,32 @@ calendar_timefieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCalendar_timefieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendar_timefieldComponent = ExtCalendar_timefieldComponent_1 = class ExtCalendar_timefieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_timefieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendar_timefieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendar_timefieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar-timefield',
-                inputs: calendar_timefieldMetaData.PROPERTIES,
-                outputs: calendar_timefieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendar_timefieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendar_timefieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendar_timefieldComponent = ExtCalendar_timefieldComponent_1 = __decorate([
+    Component({
+        selector: 'calendar-timefield',
+        inputs: calendar_timefieldMetaData.PROPERTIES,
+        outputs: calendar_timefieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_timefieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendar_timefieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendar_daysheaderComponent_1;
 class calendar_daysheaderMetaData {
 }
 calendar_daysheaderMetaData.XTYPE = 'calendar-daysheader';
@@ -3297,51 +3058,32 @@ calendar_daysheaderMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCalendar_daysheaderComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendar_daysheaderComponent = ExtCalendar_daysheaderComponent_1 = class ExtCalendar_daysheaderComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_daysheaderMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendar_daysheaderMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendar_daysheaderComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar-daysheader',
-                inputs: calendar_daysheaderMetaData.PROPERTIES,
-                outputs: calendar_daysheaderMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendar_daysheaderComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendar_daysheaderComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendar_daysheaderComponent = ExtCalendar_daysheaderComponent_1 = __decorate([
+    Component({
+        selector: 'calendar-daysheader',
+        inputs: calendar_daysheaderMetaData.PROPERTIES,
+        outputs: calendar_daysheaderMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_daysheaderComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendar_daysheaderComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendar_weeksheaderComponent_1;
 class calendar_weeksheaderMetaData {
 }
 calendar_weeksheaderMetaData.XTYPE = 'calendar-weeksheader';
@@ -3561,51 +3303,32 @@ calendar_weeksheaderMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCalendar_weeksheaderComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendar_weeksheaderComponent = ExtCalendar_weeksheaderComponent_1 = class ExtCalendar_weeksheaderComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_weeksheaderMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendar_weeksheaderMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendar_weeksheaderComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar-weeksheader',
-                inputs: calendar_weeksheaderMetaData.PROPERTIES,
-                outputs: calendar_weeksheaderMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendar_weeksheaderComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendar_weeksheaderComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendar_weeksheaderComponent = ExtCalendar_weeksheaderComponent_1 = __decorate([
+    Component({
+        selector: 'calendar-weeksheader',
+        inputs: calendar_weeksheaderMetaData.PROPERTIES,
+        outputs: calendar_weeksheaderMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weeksheaderComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendar_weeksheaderComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendar_listComponent_1;
 class calendar_listMetaData {
 }
 calendar_listMetaData.XTYPE = 'calendar-list';
@@ -3948,51 +3671,32 @@ calendar_listMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCalendar_listComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendar_listComponent = ExtCalendar_listComponent_1 = class ExtCalendar_listComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_listMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendar_listMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendar_listComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar-list',
-                inputs: calendar_listMetaData.PROPERTIES,
-                outputs: calendar_listMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendar_listComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendar_listComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendar_listComponent = ExtCalendar_listComponent_1 = __decorate([
+    Component({
+        selector: 'calendar-list',
+        inputs: calendar_listMetaData.PROPERTIES,
+        outputs: calendar_listMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_listComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendar_listComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendar_dayComponent_1;
 class calendar_dayMetaData {
 }
 calendar_dayMetaData.XTYPE = 'calendar-day';
@@ -4346,51 +4050,32 @@ calendar_dayMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCalendar_dayComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendar_dayComponent = ExtCalendar_dayComponent_1 = class ExtCalendar_dayComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_dayMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendar_dayMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendar_dayComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar-day',
-                inputs: calendar_dayMetaData.PROPERTIES,
-                outputs: calendar_dayMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendar_dayComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendar_dayComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendar_dayComponent = ExtCalendar_dayComponent_1 = __decorate([
+    Component({
+        selector: 'calendar-day',
+        inputs: calendar_dayMetaData.PROPERTIES,
+        outputs: calendar_dayMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_dayComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendar_dayComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendar_daysComponent_1;
 class calendar_daysMetaData {
 }
 calendar_daysMetaData.XTYPE = 'calendar-days';
@@ -4744,51 +4429,32 @@ calendar_daysMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCalendar_daysComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendar_daysComponent = ExtCalendar_daysComponent_1 = class ExtCalendar_daysComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_daysMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendar_daysMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendar_daysComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar-days',
-                inputs: calendar_daysMetaData.PROPERTIES,
-                outputs: calendar_daysMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendar_daysComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendar_daysComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendar_daysComponent = ExtCalendar_daysComponent_1 = __decorate([
+    Component({
+        selector: 'calendar-days',
+        inputs: calendar_daysMetaData.PROPERTIES,
+        outputs: calendar_daysMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_daysComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendar_daysComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendar_monthComponent_1;
 class calendar_monthMetaData {
 }
 calendar_monthMetaData.XTYPE = 'calendar-month';
@@ -5137,51 +4803,32 @@ calendar_monthMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCalendar_monthComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendar_monthComponent = ExtCalendar_monthComponent_1 = class ExtCalendar_monthComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_monthMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendar_monthMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendar_monthComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar-month',
-                inputs: calendar_monthMetaData.PROPERTIES,
-                outputs: calendar_monthMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendar_monthComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendar_monthComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendar_monthComponent = ExtCalendar_monthComponent_1 = __decorate([
+    Component({
+        selector: 'calendar-month',
+        inputs: calendar_monthMetaData.PROPERTIES,
+        outputs: calendar_monthMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_monthComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendar_monthComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendarComponent_1;
 class calendarMetaData {
 }
 calendarMetaData.XTYPE = 'calendar';
@@ -5504,51 +5151,32 @@ calendarMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCalendarComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendarComponent = ExtCalendarComponent_1 = class ExtCalendarComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendarMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendarMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendarComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar',
-                inputs: calendarMetaData.PROPERTIES,
-                outputs: calendarMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendarComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendarComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendarComponent = ExtCalendarComponent_1 = __decorate([
+    Component({
+        selector: 'calendar',
+        inputs: calendarMetaData.PROPERTIES,
+        outputs: calendarMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendarComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendarComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendar_weekComponent_1;
 class calendar_weekMetaData {
 }
 calendar_weekMetaData.XTYPE = 'calendar-week';
@@ -5903,51 +5531,32 @@ calendar_weekMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCalendar_weekComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendar_weekComponent = ExtCalendar_weekComponent_1 = class ExtCalendar_weekComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_weekMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendar_weekMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendar_weekComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar-week',
-                inputs: calendar_weekMetaData.PROPERTIES,
-                outputs: calendar_weekMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendar_weekComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendar_weekComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendar_weekComponent = ExtCalendar_weekComponent_1 = __decorate([
+    Component({
+        selector: 'calendar-week',
+        inputs: calendar_weekMetaData.PROPERTIES,
+        outputs: calendar_weekMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weekComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendar_weekComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendar_weeksComponent_1;
 class calendar_weeksMetaData {
 }
 calendar_weeksMetaData.XTYPE = 'calendar-weeks';
@@ -6296,51 +5905,32 @@ calendar_weeksMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCalendar_weeksComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendar_weeksComponent = ExtCalendar_weeksComponent_1 = class ExtCalendar_weeksComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_weeksMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendar_weeksMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendar_weeksComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar-weeks',
-                inputs: calendar_weeksMetaData.PROPERTIES,
-                outputs: calendar_weeksMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendar_weeksComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendar_weeksComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendar_weeksComponent = ExtCalendar_weeksComponent_1 = __decorate([
+    Component({
+        selector: 'calendar-weeks',
+        inputs: calendar_weeksMetaData.PROPERTIES,
+        outputs: calendar_weeksMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weeksComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendar_weeksComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendar_dayviewComponent_1;
 class calendar_dayviewMetaData {
 }
 calendar_dayviewMetaData.XTYPE = 'calendar-dayview';
@@ -6603,51 +6193,32 @@ calendar_dayviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCalendar_dayviewComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendar_dayviewComponent = ExtCalendar_dayviewComponent_1 = class ExtCalendar_dayviewComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_dayviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendar_dayviewMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendar_dayviewComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar-dayview',
-                inputs: calendar_dayviewMetaData.PROPERTIES,
-                outputs: calendar_dayviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendar_dayviewComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendar_dayviewComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendar_dayviewComponent = ExtCalendar_dayviewComponent_1 = __decorate([
+    Component({
+        selector: 'calendar-dayview',
+        inputs: calendar_dayviewMetaData.PROPERTIES,
+        outputs: calendar_dayviewMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_dayviewComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendar_dayviewComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendar_daysviewComponent_1;
 class calendar_daysviewMetaData {
 }
 calendar_daysviewMetaData.XTYPE = 'calendar-daysview';
@@ -6910,51 +6481,32 @@ calendar_daysviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCalendar_daysviewComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendar_daysviewComponent = ExtCalendar_daysviewComponent_1 = class ExtCalendar_daysviewComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_daysviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendar_daysviewMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendar_daysviewComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar-daysview',
-                inputs: calendar_daysviewMetaData.PROPERTIES,
-                outputs: calendar_daysviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendar_daysviewComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendar_daysviewComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendar_daysviewComponent = ExtCalendar_daysviewComponent_1 = __decorate([
+    Component({
+        selector: 'calendar-daysview',
+        inputs: calendar_daysviewMetaData.PROPERTIES,
+        outputs: calendar_daysviewMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_daysviewComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendar_daysviewComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendar_monthviewComponent_1;
 class calendar_monthviewMetaData {
 }
 calendar_monthviewMetaData.XTYPE = 'calendar-monthview';
@@ -7215,51 +6767,32 @@ calendar_monthviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCalendar_monthviewComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendar_monthviewComponent = ExtCalendar_monthviewComponent_1 = class ExtCalendar_monthviewComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_monthviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendar_monthviewMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendar_monthviewComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar-monthview',
-                inputs: calendar_monthviewMetaData.PROPERTIES,
-                outputs: calendar_monthviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendar_monthviewComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendar_monthviewComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendar_monthviewComponent = ExtCalendar_monthviewComponent_1 = __decorate([
+    Component({
+        selector: 'calendar-monthview',
+        inputs: calendar_monthviewMetaData.PROPERTIES,
+        outputs: calendar_monthviewMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_monthviewComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendar_monthviewComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendar_multiviewComponent_1;
 class calendar_multiviewMetaData {
 }
 calendar_multiviewMetaData.XTYPE = 'calendar-multiview';
@@ -7284,51 +6817,32 @@ calendar_multiviewMetaData.EVENTS = [
 calendar_multiviewMetaData.EVENTNAMES = [
     'ready'
 ];
-class ExtCalendar_multiviewComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendar_multiviewComponent = ExtCalendar_multiviewComponent_1 = class ExtCalendar_multiviewComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_multiviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendar_multiviewMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendar_multiviewComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar-multiview',
-                inputs: calendar_multiviewMetaData.PROPERTIES,
-                outputs: calendar_multiviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendar_multiviewComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendar_multiviewComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendar_multiviewComponent = ExtCalendar_multiviewComponent_1 = __decorate([
+    Component({
+        selector: 'calendar-multiview',
+        inputs: calendar_multiviewMetaData.PROPERTIES,
+        outputs: calendar_multiviewMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_multiviewComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendar_multiviewComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendar_weekviewComponent_1;
 class calendar_weekviewMetaData {
 }
 calendar_weekviewMetaData.XTYPE = 'calendar-weekview';
@@ -7592,51 +7106,32 @@ calendar_weekviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCalendar_weekviewComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendar_weekviewComponent = ExtCalendar_weekviewComponent_1 = class ExtCalendar_weekviewComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_weekviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendar_weekviewMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendar_weekviewComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar-weekview',
-                inputs: calendar_weekviewMetaData.PROPERTIES,
-                outputs: calendar_weekviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendar_weekviewComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendar_weekviewComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendar_weekviewComponent = ExtCalendar_weekviewComponent_1 = __decorate([
+    Component({
+        selector: 'calendar-weekview',
+        inputs: calendar_weekviewMetaData.PROPERTIES,
+        outputs: calendar_weekviewMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weekviewComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendar_weekviewComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCalendar_weeksviewComponent_1;
 class calendar_weeksviewMetaData {
 }
 calendar_weeksviewMetaData.XTYPE = 'calendar-weeksview';
@@ -7897,51 +7392,32 @@ calendar_weeksviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCalendar_weeksviewComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCalendar_weeksviewComponent = ExtCalendar_weeksviewComponent_1 = class ExtCalendar_weeksviewComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_weeksviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(calendar_weeksviewMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCalendar_weeksviewComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'calendar-weeksview',
-                inputs: calendar_weeksviewMetaData.PROPERTIES,
-                outputs: calendar_weeksviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCalendar_weeksviewComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCalendar_weeksviewComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCalendar_weeksviewComponent = ExtCalendar_weeksviewComponent_1 = __decorate([
+    Component({
+        selector: 'calendar-weeksview',
+        inputs: calendar_weeksviewMetaData.PROPERTIES,
+        outputs: calendar_weeksviewMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weeksviewComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCalendar_weeksviewComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCarouselComponent_1;
 class carouselMetaData {
 }
 carouselMetaData.XTYPE = 'carousel';
@@ -8194,51 +7670,32 @@ carouselMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCarouselComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCarouselComponent = ExtCarouselComponent_1 = class ExtCarouselComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, carouselMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(carouselMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCarouselComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'carousel',
-                inputs: carouselMetaData.PROPERTIES,
-                outputs: carouselMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCarouselComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCarouselComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCarouselComponent = ExtCarouselComponent_1 = __decorate([
+    Component({
+        selector: 'carousel',
+        inputs: carouselMetaData.PROPERTIES,
+        outputs: carouselMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCarouselComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCarouselComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtAxis3dComponent_1;
 class axis3dMetaData {
 }
 axis3dMetaData.XTYPE = 'axis3d';
@@ -8294,51 +7751,32 @@ axis3dMetaData.EVENTNAMES = [
     'visiblerangechange',
     'ready'
 ];
-class ExtAxis3dComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtAxis3dComponent = ExtAxis3dComponent_1 = class ExtAxis3dComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, axis3dMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(axis3dMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtAxis3dComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'axis3d',
-                inputs: axis3dMetaData.PROPERTIES,
-                outputs: axis3dMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtAxis3dComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtAxis3dComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtAxis3dComponent = ExtAxis3dComponent_1 = __decorate([
+    Component({
+        selector: 'axis3d',
+        inputs: axis3dMetaData.PROPERTIES,
+        outputs: axis3dMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtAxis3dComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtAxis3dComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCartesianComponent_1;
 class cartesianMetaData {
 }
 cartesianMetaData.XTYPE = 'cartesian';
@@ -8658,51 +8096,32 @@ cartesianMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCartesianComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCartesianComponent = ExtCartesianComponent_1 = class ExtCartesianComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, cartesianMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(cartesianMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCartesianComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cartesian',
-                inputs: cartesianMetaData.PROPERTIES,
-                outputs: cartesianMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCartesianComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCartesianComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCartesianComponent = ExtCartesianComponent_1 = __decorate([
+    Component({
+        selector: 'cartesian',
+        inputs: cartesianMetaData.PROPERTIES,
+        outputs: cartesianMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCartesianComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCartesianComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtChartComponent_1;
 class chartMetaData {
 }
 chartMetaData.XTYPE = 'chart';
@@ -9022,51 +8441,32 @@ chartMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtChartComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtChartComponent = ExtChartComponent_1 = class ExtChartComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, chartMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(chartMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtChartComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'chart',
-                inputs: chartMetaData.PROPERTIES,
-                outputs: chartMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtChartComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtChartComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtChartComponent = ExtChartComponent_1 = __decorate([
+    Component({
+        selector: 'chart',
+        inputs: chartMetaData.PROPERTIES,
+        outputs: chartMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtChartComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtChartComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtInteractionComponent_1;
 class interactionMetaData {
 }
 interactionMetaData.XTYPE = 'interaction';
@@ -9087,51 +8487,32 @@ interactionMetaData.EVENTS = [
 interactionMetaData.EVENTNAMES = [
     'ready'
 ];
-class ExtInteractionComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtInteractionComponent = ExtInteractionComponent_1 = class ExtInteractionComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, interactionMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(interactionMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtInteractionComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'interaction',
-                inputs: interactionMetaData.PROPERTIES,
-                outputs: interactionMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtInteractionComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtInteractionComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtInteractionComponent = ExtInteractionComponent_1 = __decorate([
+    Component({
+        selector: 'interaction',
+        inputs: interactionMetaData.PROPERTIES,
+        outputs: interactionMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtInteractionComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtInteractionComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtLegendComponent_1;
 class legendMetaData {
 }
 legendMetaData.XTYPE = 'legend';
@@ -9475,51 +8856,32 @@ legendMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtLegendComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtLegendComponent = ExtLegendComponent_1 = class ExtLegendComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, legendMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(legendMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtLegendComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'legend',
-                inputs: legendMetaData.PROPERTIES,
-                outputs: legendMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtLegendComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtLegendComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtLegendComponent = ExtLegendComponent_1 = __decorate([
+    Component({
+        selector: 'legend',
+        inputs: legendMetaData.PROPERTIES,
+        outputs: legendMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtLegendComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtLegendComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtChartnavigatorComponent_1;
 class chartnavigatorMetaData {
 }
 chartnavigatorMetaData.XTYPE = 'chartnavigator';
@@ -9772,51 +9134,32 @@ chartnavigatorMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtChartnavigatorComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtChartnavigatorComponent = ExtChartnavigatorComponent_1 = class ExtChartnavigatorComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, chartnavigatorMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(chartnavigatorMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtChartnavigatorComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'chartnavigator',
-                inputs: chartnavigatorMetaData.PROPERTIES,
-                outputs: chartnavigatorMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtChartnavigatorComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtChartnavigatorComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtChartnavigatorComponent = ExtChartnavigatorComponent_1 = __decorate([
+    Component({
+        selector: 'chartnavigator',
+        inputs: chartnavigatorMetaData.PROPERTIES,
+        outputs: chartnavigatorMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtChartnavigatorComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtChartnavigatorComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPolarComponent_1;
 class polarMetaData {
 }
 polarMetaData.XTYPE = 'polar';
@@ -10137,51 +9480,32 @@ polarMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPolarComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPolarComponent = ExtPolarComponent_1 = class ExtPolarComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, polarMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(polarMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPolarComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'polar',
-                inputs: polarMetaData.PROPERTIES,
-                outputs: polarMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPolarComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPolarComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPolarComponent = ExtPolarComponent_1 = __decorate([
+    Component({
+        selector: 'polar',
+        inputs: polarMetaData.PROPERTIES,
+        outputs: polarMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPolarComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPolarComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSpacefillingComponent_1;
 class spacefillingMetaData {
 }
 spacefillingMetaData.XTYPE = 'spacefilling';
@@ -10499,51 +9823,32 @@ spacefillingMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSpacefillingComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSpacefillingComponent = ExtSpacefillingComponent_1 = class ExtSpacefillingComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, spacefillingMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(spacefillingMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSpacefillingComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'spacefilling',
-                inputs: spacefillingMetaData.PROPERTIES,
-                outputs: spacefillingMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSpacefillingComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSpacefillingComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSpacefillingComponent = ExtSpacefillingComponent_1 = __decorate([
+    Component({
+        selector: 'spacefilling',
+        inputs: spacefillingMetaData.PROPERTIES,
+        outputs: spacefillingMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSpacefillingComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSpacefillingComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtChipComponent_1;
 class chipMetaData {
 }
 chipMetaData.XTYPE = 'chip';
@@ -10763,51 +10068,32 @@ chipMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtChipComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtChipComponent = ExtChipComponent_1 = class ExtChipComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, chipMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(chipMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtChipComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'chip',
-                inputs: chipMetaData.PROPERTIES,
-                outputs: chipMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtChipComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtChipComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtChipComponent = ExtChipComponent_1 = __decorate([
+    Component({
+        selector: 'chip',
+        inputs: chipMetaData.PROPERTIES,
+        outputs: chipMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtChipComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtChipComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtComponentComponent_1;
 class componentMetaData {
 }
 componentMetaData.XTYPE = 'component';
@@ -11021,51 +10307,32 @@ componentMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtComponentComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtComponentComponent = ExtComponentComponent_1 = class ExtComponentComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, componentMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(componentMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtComponentComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'component',
-                inputs: componentMetaData.PROPERTIES,
-                outputs: componentMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtComponentComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtComponentComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtComponentComponent = ExtComponentComponent_1 = __decorate([
+    Component({
+        selector: 'component',
+        inputs: componentMetaData.PROPERTIES,
+        outputs: componentMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtComponentComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtComponentComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtContainerComponent_1;
 class containerMetaData {
 }
 containerMetaData.XTYPE = 'container';
@@ -11316,51 +10583,32 @@ containerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtContainerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtContainerComponent = ExtContainerComponent_1 = class ExtContainerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, containerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(containerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtContainerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'container',
-                inputs: containerMetaData.PROPERTIES,
-                outputs: containerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtContainerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtContainerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtContainerComponent = ExtContainerComponent_1 = __decorate([
+    Component({
+        selector: 'container',
+        inputs: containerMetaData.PROPERTIES,
+        outputs: containerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtContainerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtContainerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtD3_canvasComponent_1;
 class d3_canvasMetaData {
 }
 d3_canvasMetaData.XTYPE = 'd3-canvas';
@@ -11582,51 +10830,32 @@ d3_canvasMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtD3_canvasComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtD3_canvasComponent = ExtD3_canvasComponent_1 = class ExtD3_canvasComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3_canvasMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(d3_canvasMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtD3_canvasComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'd3-canvas',
-                inputs: d3_canvasMetaData.PROPERTIES,
-                outputs: d3_canvasMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtD3_canvasComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtD3_canvasComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtD3_canvasComponent = ExtD3_canvasComponent_1 = __decorate([
+    Component({
+        selector: 'd3-canvas',
+        inputs: d3_canvasMetaData.PROPERTIES,
+        outputs: d3_canvasMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_canvasComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtD3_canvasComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtD3_heatmapComponent_1;
 class d3_heatmapMetaData {
 }
 d3_heatmapMetaData.XTYPE = 'd3-heatmap';
@@ -11856,51 +11085,32 @@ d3_heatmapMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtD3_heatmapComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtD3_heatmapComponent = ExtD3_heatmapComponent_1 = class ExtD3_heatmapComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3_heatmapMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(d3_heatmapMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtD3_heatmapComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'd3-heatmap',
-                inputs: d3_heatmapMetaData.PROPERTIES,
-                outputs: d3_heatmapMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtD3_heatmapComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtD3_heatmapComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtD3_heatmapComponent = ExtD3_heatmapComponent_1 = __decorate([
+    Component({
+        selector: 'd3-heatmap',
+        inputs: d3_heatmapMetaData.PROPERTIES,
+        outputs: d3_heatmapMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_heatmapComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtD3_heatmapComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtD3_packComponent_1;
 class d3_packMetaData {
 }
 d3_packMetaData.XTYPE = 'd3-pack';
@@ -12146,51 +11356,32 @@ d3_packMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtD3_packComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtD3_packComponent = ExtD3_packComponent_1 = class ExtD3_packComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3_packMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(d3_packMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtD3_packComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'd3-pack',
-                inputs: d3_packMetaData.PROPERTIES,
-                outputs: d3_packMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtD3_packComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtD3_packComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtD3_packComponent = ExtD3_packComponent_1 = __decorate([
+    Component({
+        selector: 'd3-pack',
+        inputs: d3_packMetaData.PROPERTIES,
+        outputs: d3_packMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_packComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtD3_packComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtD3_partitionComponent_1;
 class d3_partitionMetaData {
 }
 d3_partitionMetaData.XTYPE = 'd3-partition';
@@ -12434,51 +11625,32 @@ d3_partitionMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtD3_partitionComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtD3_partitionComponent = ExtD3_partitionComponent_1 = class ExtD3_partitionComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3_partitionMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(d3_partitionMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtD3_partitionComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'd3-partition',
-                inputs: d3_partitionMetaData.PROPERTIES,
-                outputs: d3_partitionMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtD3_partitionComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtD3_partitionComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtD3_partitionComponent = ExtD3_partitionComponent_1 = __decorate([
+    Component({
+        selector: 'd3-partition',
+        inputs: d3_partitionMetaData.PROPERTIES,
+        outputs: d3_partitionMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_partitionComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtD3_partitionComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtD3_sunburstComponent_1;
 class d3_sunburstMetaData {
 }
 d3_sunburstMetaData.XTYPE = 'd3-sunburst';
@@ -12724,51 +11896,32 @@ d3_sunburstMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtD3_sunburstComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtD3_sunburstComponent = ExtD3_sunburstComponent_1 = class ExtD3_sunburstComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3_sunburstMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(d3_sunburstMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtD3_sunburstComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'd3-sunburst',
-                inputs: d3_sunburstMetaData.PROPERTIES,
-                outputs: d3_sunburstMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtD3_sunburstComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtD3_sunburstComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtD3_sunburstComponent = ExtD3_sunburstComponent_1 = __decorate([
+    Component({
+        selector: 'd3-sunburst',
+        inputs: d3_sunburstMetaData.PROPERTIES,
+        outputs: d3_sunburstMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_sunburstComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtD3_sunburstComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtD3_treeComponent_1;
 class d3_treeMetaData {
 }
 d3_treeMetaData.XTYPE = 'd3-tree';
@@ -13015,51 +12168,32 @@ d3_treeMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtD3_treeComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtD3_treeComponent = ExtD3_treeComponent_1 = class ExtD3_treeComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3_treeMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(d3_treeMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtD3_treeComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'd3-tree',
-                inputs: d3_treeMetaData.PROPERTIES,
-                outputs: d3_treeMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtD3_treeComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtD3_treeComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtD3_treeComponent = ExtD3_treeComponent_1 = __decorate([
+    Component({
+        selector: 'd3-tree',
+        inputs: d3_treeMetaData.PROPERTIES,
+        outputs: d3_treeMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_treeComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtD3_treeComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtD3_horizontal_treeComponent_1;
 class d3_horizontal_treeMetaData {
 }
 d3_horizontal_treeMetaData.XTYPE = 'd3-horizontal-tree';
@@ -13306,51 +12440,32 @@ d3_horizontal_treeMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtD3_horizontal_treeComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtD3_horizontal_treeComponent = ExtD3_horizontal_treeComponent_1 = class ExtD3_horizontal_treeComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3_horizontal_treeMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(d3_horizontal_treeMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtD3_horizontal_treeComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'd3-horizontal-tree',
-                inputs: d3_horizontal_treeMetaData.PROPERTIES,
-                outputs: d3_horizontal_treeMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtD3_horizontal_treeComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtD3_horizontal_treeComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtD3_horizontal_treeComponent = ExtD3_horizontal_treeComponent_1 = __decorate([
+    Component({
+        selector: 'd3-horizontal-tree',
+        inputs: d3_horizontal_treeMetaData.PROPERTIES,
+        outputs: d3_horizontal_treeMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_horizontal_treeComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtD3_horizontal_treeComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtD3_treemapComponent_1;
 class d3_treemapMetaData {
 }
 d3_treemapMetaData.XTYPE = 'd3-treemap';
@@ -13599,51 +12714,32 @@ d3_treemapMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtD3_treemapComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtD3_treemapComponent = ExtD3_treemapComponent_1 = class ExtD3_treemapComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3_treemapMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(d3_treemapMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtD3_treemapComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'd3-treemap',
-                inputs: d3_treemapMetaData.PROPERTIES,
-                outputs: d3_treemapMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtD3_treemapComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtD3_treemapComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtD3_treemapComponent = ExtD3_treemapComponent_1 = __decorate([
+    Component({
+        selector: 'd3-treemap',
+        inputs: d3_treemapMetaData.PROPERTIES,
+        outputs: d3_treemapMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_treemapComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtD3_treemapComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtD3_svgComponent_1;
 class d3_svgMetaData {
 }
 d3_svgMetaData.XTYPE = 'd3-svg';
@@ -13867,51 +12963,32 @@ d3_svgMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtD3_svgComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtD3_svgComponent = ExtD3_svgComponent_1 = class ExtD3_svgComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3_svgMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(d3_svgMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtD3_svgComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'd3-svg',
-                inputs: d3_svgMetaData.PROPERTIES,
-                outputs: d3_svgMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtD3_svgComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtD3_svgComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtD3_svgComponent = ExtD3_svgComponent_1 = __decorate([
+    Component({
+        selector: 'd3-svg',
+        inputs: d3_svgMetaData.PROPERTIES,
+        outputs: d3_svgMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_svgComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtD3_svgComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtD3Component_1;
 class d3MetaData {
 }
 d3MetaData.XTYPE = 'd3';
@@ -14135,51 +13212,32 @@ d3MetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtD3Component extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtD3Component = ExtD3Component_1 = class ExtD3Component extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3MetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(d3MetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtD3Component.decorators = [
-    { type: Component, args: [{
-                selector: 'd3',
-                inputs: d3MetaData.PROPERTIES,
-                outputs: d3MetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtD3Component)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtD3Component.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtD3Component = ExtD3Component_1 = __decorate([
+    Component({
+        selector: 'd3',
+        inputs: d3MetaData.PROPERTIES,
+        outputs: d3MetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3Component_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtD3Component);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtBoundlistComponent_1;
 class boundlistMetaData {
 }
 boundlistMetaData.XTYPE = 'boundlist';
@@ -14555,51 +13613,32 @@ boundlistMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtBoundlistComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtBoundlistComponent = ExtBoundlistComponent_1 = class ExtBoundlistComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, boundlistMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(boundlistMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtBoundlistComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'boundlist',
-                inputs: boundlistMetaData.PROPERTIES,
-                outputs: boundlistMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtBoundlistComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtBoundlistComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtBoundlistComponent = ExtBoundlistComponent_1 = __decorate([
+    Component({
+        selector: 'boundlist',
+        inputs: boundlistMetaData.PROPERTIES,
+        outputs: boundlistMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtBoundlistComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtBoundlistComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtChipviewComponent_1;
 class chipviewMetaData {
 }
 chipviewMetaData.XTYPE = 'chipview';
@@ -14949,51 +13988,32 @@ chipviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtChipviewComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtChipviewComponent = ExtChipviewComponent_1 = class ExtChipviewComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, chipviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(chipviewMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtChipviewComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'chipview',
-                inputs: chipviewMetaData.PROPERTIES,
-                outputs: chipviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtChipviewComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtChipviewComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtChipviewComponent = ExtChipviewComponent_1 = __decorate([
+    Component({
+        selector: 'chipview',
+        inputs: chipviewMetaData.PROPERTIES,
+        outputs: chipviewMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtChipviewComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtChipviewComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtComponentdataviewComponent_1;
 class componentdataviewMetaData {
 }
 componentdataviewMetaData.XTYPE = 'componentdataview';
@@ -15335,51 +14355,32 @@ componentdataviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtComponentdataviewComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtComponentdataviewComponent = ExtComponentdataviewComponent_1 = class ExtComponentdataviewComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, componentdataviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(componentdataviewMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtComponentdataviewComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'componentdataview',
-                inputs: componentdataviewMetaData.PROPERTIES,
-                outputs: componentdataviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtComponentdataviewComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtComponentdataviewComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtComponentdataviewComponent = ExtComponentdataviewComponent_1 = __decorate([
+    Component({
+        selector: 'componentdataview',
+        inputs: componentdataviewMetaData.PROPERTIES,
+        outputs: componentdataviewMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtComponentdataviewComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtComponentdataviewComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtDataitemComponent_1;
 class dataitemMetaData {
 }
 dataitemMetaData.XTYPE = 'dataitem';
@@ -15633,51 +14634,32 @@ dataitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtDataitemComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtDataitemComponent = ExtDataitemComponent_1 = class ExtDataitemComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, dataitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(dataitemMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtDataitemComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'dataitem',
-                inputs: dataitemMetaData.PROPERTIES,
-                outputs: dataitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtDataitemComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtDataitemComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtDataitemComponent = ExtDataitemComponent_1 = __decorate([
+    Component({
+        selector: 'dataitem',
+        inputs: dataitemMetaData.PROPERTIES,
+        outputs: dataitemMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtDataitemComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtDataitemComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtDataviewComponent_1;
 class dataviewMetaData {
 }
 dataviewMetaData.XTYPE = 'dataview';
@@ -16019,51 +15001,32 @@ dataviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtDataviewComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtDataviewComponent = ExtDataviewComponent_1 = class ExtDataviewComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, dataviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(dataviewMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtDataviewComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'dataview',
-                inputs: dataviewMetaData.PROPERTIES,
-                outputs: dataviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtDataviewComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtDataviewComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtDataviewComponent = ExtDataviewComponent_1 = __decorate([
+    Component({
+        selector: 'dataview',
+        inputs: dataviewMetaData.PROPERTIES,
+        outputs: dataviewMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtDataviewComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtDataviewComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtEmptytextComponent_1;
 class emptytextMetaData {
 }
 emptytextMetaData.XTYPE = 'emptytext';
@@ -16277,51 +15240,32 @@ emptytextMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtEmptytextComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtEmptytextComponent = ExtEmptytextComponent_1 = class ExtEmptytextComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, emptytextMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(emptytextMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtEmptytextComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'emptytext',
-                inputs: emptytextMetaData.PROPERTIES,
-                outputs: emptytextMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtEmptytextComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtEmptytextComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtEmptytextComponent = ExtEmptytextComponent_1 = __decorate([
+    Component({
+        selector: 'emptytext',
+        inputs: emptytextMetaData.PROPERTIES,
+        outputs: emptytextMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtEmptytextComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtEmptytextComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtIndexbarComponent_1;
 class indexbarMetaData {
 }
 indexbarMetaData.XTYPE = 'indexbar';
@@ -16548,51 +15492,32 @@ indexbarMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtIndexbarComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtIndexbarComponent = ExtIndexbarComponent_1 = class ExtIndexbarComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, indexbarMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(indexbarMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtIndexbarComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'indexbar',
-                inputs: indexbarMetaData.PROPERTIES,
-                outputs: indexbarMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtIndexbarComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtIndexbarComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtIndexbarComponent = ExtIndexbarComponent_1 = __decorate([
+    Component({
+        selector: 'indexbar',
+        inputs: indexbarMetaData.PROPERTIES,
+        outputs: indexbarMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtIndexbarComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtIndexbarComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtItemheaderComponent_1;
 class itemheaderMetaData {
 }
 itemheaderMetaData.XTYPE = 'itemheader';
@@ -16811,51 +15736,32 @@ itemheaderMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtItemheaderComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtItemheaderComponent = ExtItemheaderComponent_1 = class ExtItemheaderComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, itemheaderMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(itemheaderMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtItemheaderComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'itemheader',
-                inputs: itemheaderMetaData.PROPERTIES,
-                outputs: itemheaderMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtItemheaderComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtItemheaderComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtItemheaderComponent = ExtItemheaderComponent_1 = __decorate([
+    Component({
+        selector: 'itemheader',
+        inputs: itemheaderMetaData.PROPERTIES,
+        outputs: itemheaderMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtItemheaderComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtItemheaderComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtListComponent_1;
 class listMetaData {
 }
 listMetaData.XTYPE = 'list';
@@ -17231,51 +16137,32 @@ listMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtListComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtListComponent = ExtListComponent_1 = class ExtListComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, listMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(listMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtListComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'list',
-                inputs: listMetaData.PROPERTIES,
-                outputs: listMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtListComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtListComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtListComponent = ExtListComponent_1 = __decorate([
+    Component({
+        selector: 'list',
+        inputs: listMetaData.PROPERTIES,
+        outputs: listMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtListComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtListComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtListitemComponent_1;
 class listitemMetaData {
 }
 listitemMetaData.XTYPE = 'listitem';
@@ -17533,51 +16420,32 @@ listitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtListitemComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtListitemComponent = ExtListitemComponent_1 = class ExtListitemComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, listitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(listitemMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtListitemComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'listitem',
-                inputs: listitemMetaData.PROPERTIES,
-                outputs: listitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtListitemComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtListitemComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtListitemComponent = ExtListitemComponent_1 = __decorate([
+    Component({
+        selector: 'listitem',
+        inputs: listitemMetaData.PROPERTIES,
+        outputs: listitemMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtListitemComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtListitemComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtListswiperitemComponent_1;
 class listswiperitemMetaData {
 }
 listswiperitemMetaData.XTYPE = 'listswiperitem';
@@ -17832,51 +16700,32 @@ listswiperitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtListswiperitemComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtListswiperitemComponent = ExtListswiperitemComponent_1 = class ExtListswiperitemComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, listswiperitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(listswiperitemMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtListswiperitemComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'listswiperitem',
-                inputs: listswiperitemMetaData.PROPERTIES,
-                outputs: listswiperitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtListswiperitemComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtListswiperitemComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtListswiperitemComponent = ExtListswiperitemComponent_1 = __decorate([
+    Component({
+        selector: 'listswiperitem',
+        inputs: listswiperitemMetaData.PROPERTIES,
+        outputs: listswiperitemMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtListswiperitemComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtListswiperitemComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtListswiperstepperComponent_1;
 class listswiperstepperMetaData {
 }
 listswiperstepperMetaData.XTYPE = 'listswiperstepper';
@@ -18136,51 +16985,32 @@ listswiperstepperMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtListswiperstepperComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtListswiperstepperComponent = ExtListswiperstepperComponent_1 = class ExtListswiperstepperComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, listswiperstepperMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(listswiperstepperMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtListswiperstepperComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'listswiperstepper',
-                inputs: listswiperstepperMetaData.PROPERTIES,
-                outputs: listswiperstepperMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtListswiperstepperComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtListswiperstepperComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtListswiperstepperComponent = ExtListswiperstepperComponent_1 = __decorate([
+    Component({
+        selector: 'listswiperstepper',
+        inputs: listswiperstepperMetaData.PROPERTIES,
+        outputs: listswiperstepperMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtListswiperstepperComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtListswiperstepperComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtNestedlistComponent_1;
 class nestedlistMetaData {
 }
 nestedlistMetaData.XTYPE = 'nestedlist';
@@ -18474,51 +17304,32 @@ nestedlistMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtNestedlistComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtNestedlistComponent = ExtNestedlistComponent_1 = class ExtNestedlistComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, nestedlistMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(nestedlistMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtNestedlistComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'nestedlist',
-                inputs: nestedlistMetaData.PROPERTIES,
-                outputs: nestedlistMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtNestedlistComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtNestedlistComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtNestedlistComponent = ExtNestedlistComponent_1 = __decorate([
+    Component({
+        selector: 'nestedlist',
+        inputs: nestedlistMetaData.PROPERTIES,
+        outputs: nestedlistMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtNestedlistComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtNestedlistComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPullrefreshbarComponent_1;
 class pullrefreshbarMetaData {
 }
 pullrefreshbarMetaData.XTYPE = 'pullrefreshbar';
@@ -18742,51 +17553,32 @@ pullrefreshbarMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPullrefreshbarComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPullrefreshbarComponent = ExtPullrefreshbarComponent_1 = class ExtPullrefreshbarComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pullrefreshbarMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(pullrefreshbarMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPullrefreshbarComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pullrefreshbar',
-                inputs: pullrefreshbarMetaData.PROPERTIES,
-                outputs: pullrefreshbarMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPullrefreshbarComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPullrefreshbarComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPullrefreshbarComponent = ExtPullrefreshbarComponent_1 = __decorate([
+    Component({
+        selector: 'pullrefreshbar',
+        inputs: pullrefreshbarMetaData.PROPERTIES,
+        outputs: pullrefreshbarMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPullrefreshbarComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPullrefreshbarComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPullrefreshspinnerComponent_1;
 class pullrefreshspinnerMetaData {
 }
 pullrefreshspinnerMetaData.XTYPE = 'pullrefreshspinner';
@@ -19003,51 +17795,32 @@ pullrefreshspinnerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPullrefreshspinnerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPullrefreshspinnerComponent = ExtPullrefreshspinnerComponent_1 = class ExtPullrefreshspinnerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pullrefreshspinnerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(pullrefreshspinnerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPullrefreshspinnerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pullrefreshspinner',
-                inputs: pullrefreshspinnerMetaData.PROPERTIES,
-                outputs: pullrefreshspinnerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPullrefreshspinnerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPullrefreshspinnerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPullrefreshspinnerComponent = ExtPullrefreshspinnerComponent_1 = __decorate([
+    Component({
+        selector: 'pullrefreshspinner',
+        inputs: pullrefreshspinnerMetaData.PROPERTIES,
+        outputs: pullrefreshspinnerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPullrefreshspinnerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPullrefreshspinnerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSimplelistitemComponent_1;
 class simplelistitemMetaData {
 }
 simplelistitemMetaData.XTYPE = 'simplelistitem';
@@ -19266,51 +18039,32 @@ simplelistitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSimplelistitemComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSimplelistitemComponent = ExtSimplelistitemComponent_1 = class ExtSimplelistitemComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, simplelistitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(simplelistitemMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSimplelistitemComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'simplelistitem',
-                inputs: simplelistitemMetaData.PROPERTIES,
-                outputs: simplelistitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSimplelistitemComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSimplelistitemComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSimplelistitemComponent = ExtSimplelistitemComponent_1 = __decorate([
+    Component({
+        selector: 'simplelistitem',
+        inputs: simplelistitemMetaData.PROPERTIES,
+        outputs: simplelistitemMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSimplelistitemComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSimplelistitemComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtDialogComponent_1;
 class dialogMetaData {
 }
 dialogMetaData.XTYPE = 'dialog';
@@ -19633,51 +18387,32 @@ dialogMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtDialogComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtDialogComponent = ExtDialogComponent_1 = class ExtDialogComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, dialogMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(dialogMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtDialogComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'dialog',
-                inputs: dialogMetaData.PROPERTIES,
-                outputs: dialogMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtDialogComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtDialogComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtDialogComponent = ExtDialogComponent_1 = __decorate([
+    Component({
+        selector: 'dialog',
+        inputs: dialogMetaData.PROPERTIES,
+        outputs: dialogMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtDialogComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtDialogComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtWindowComponent_1;
 class windowMetaData {
 }
 windowMetaData.XTYPE = 'window';
@@ -20000,51 +18735,32 @@ windowMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtWindowComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtWindowComponent = ExtWindowComponent_1 = class ExtWindowComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, windowMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(windowMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtWindowComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'window',
-                inputs: windowMetaData.PROPERTIES,
-                outputs: windowMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtWindowComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtWindowComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtWindowComponent = ExtWindowComponent_1 = __decorate([
+    Component({
+        selector: 'window',
+        inputs: windowMetaData.PROPERTIES,
+        outputs: windowMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtWindowComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtWindowComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtDrawComponent_1;
 class drawMetaData {
 }
 drawMetaData.XTYPE = 'draw';
@@ -20319,51 +19035,32 @@ drawMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtDrawComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtDrawComponent = ExtDrawComponent_1 = class ExtDrawComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, drawMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(drawMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtDrawComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'draw',
-                inputs: drawMetaData.PROPERTIES,
-                outputs: drawMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtDrawComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtDrawComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtDrawComponent = ExtDrawComponent_1 = __decorate([
+    Component({
+        selector: 'draw',
+        inputs: drawMetaData.PROPERTIES,
+        outputs: drawMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtDrawComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtDrawComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSurfaceComponent_1;
 class surfaceMetaData {
 }
 surfaceMetaData.XTYPE = 'surface';
@@ -20463,51 +19160,32 @@ surfaceMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSurfaceComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSurfaceComponent = ExtSurfaceComponent_1 = class ExtSurfaceComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, surfaceMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(surfaceMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSurfaceComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'surface',
-                inputs: surfaceMetaData.PROPERTIES,
-                outputs: surfaceMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSurfaceComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSurfaceComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSurfaceComponent = ExtSurfaceComponent_1 = __decorate([
+    Component({
+        selector: 'surface',
+        inputs: surfaceMetaData.PROPERTIES,
+        outputs: surfaceMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSurfaceComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSurfaceComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtEditorComponent_1;
 class editorMetaData {
 }
 editorMetaData.XTYPE = 'editor';
@@ -20786,51 +19464,32 @@ editorMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtEditorComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtEditorComponent = ExtEditorComponent_1 = class ExtEditorComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, editorMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(editorMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtEditorComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'editor',
-                inputs: editorMetaData.PROPERTIES,
-                outputs: editorMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtEditorComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtEditorComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtEditorComponent = ExtEditorComponent_1 = __decorate([
+    Component({
+        selector: 'editor',
+        inputs: editorMetaData.PROPERTIES,
+        outputs: editorMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtEditorComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtEditorComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCheckboxComponent_1;
 class checkboxMetaData {
 }
 checkboxMetaData.XTYPE = 'checkbox';
@@ -21093,51 +19752,32 @@ checkboxMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCheckboxComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCheckboxComponent = ExtCheckboxComponent_1 = class ExtCheckboxComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, checkboxMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(checkboxMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCheckboxComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'checkbox',
-                inputs: checkboxMetaData.PROPERTIES,
-                outputs: checkboxMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCheckboxComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCheckboxComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCheckboxComponent = ExtCheckboxComponent_1 = __decorate([
+    Component({
+        selector: 'checkbox',
+        inputs: checkboxMetaData.PROPERTIES,
+        outputs: checkboxMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCheckboxComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCheckboxComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCheckboxfieldComponent_1;
 class checkboxfieldMetaData {
 }
 checkboxfieldMetaData.XTYPE = 'checkboxfield';
@@ -21400,51 +20040,32 @@ checkboxfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCheckboxfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCheckboxfieldComponent = ExtCheckboxfieldComponent_1 = class ExtCheckboxfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, checkboxfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(checkboxfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCheckboxfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'checkboxfield',
-                inputs: checkboxfieldMetaData.PROPERTIES,
-                outputs: checkboxfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCheckboxfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCheckboxfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCheckboxfieldComponent = ExtCheckboxfieldComponent_1 = __decorate([
+    Component({
+        selector: 'checkboxfield',
+        inputs: checkboxfieldMetaData.PROPERTIES,
+        outputs: checkboxfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCheckboxfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCheckboxfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtComboboxComponent_1;
 class comboboxMetaData {
 }
 comboboxMetaData.XTYPE = 'combobox';
@@ -21777,51 +20398,32 @@ comboboxMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtComboboxComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtComboboxComponent = ExtComboboxComponent_1 = class ExtComboboxComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, comboboxMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(comboboxMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtComboboxComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'combobox',
-                inputs: comboboxMetaData.PROPERTIES,
-                outputs: comboboxMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtComboboxComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtComboboxComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtComboboxComponent = ExtComboboxComponent_1 = __decorate([
+    Component({
+        selector: 'combobox',
+        inputs: comboboxMetaData.PROPERTIES,
+        outputs: comboboxMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtComboboxComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtComboboxComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtComboboxfieldComponent_1;
 class comboboxfieldMetaData {
 }
 comboboxfieldMetaData.XTYPE = 'comboboxfield';
@@ -22154,51 +20756,32 @@ comboboxfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtComboboxfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtComboboxfieldComponent = ExtComboboxfieldComponent_1 = class ExtComboboxfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, comboboxfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(comboboxfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtComboboxfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'comboboxfield',
-                inputs: comboboxfieldMetaData.PROPERTIES,
-                outputs: comboboxfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtComboboxfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtComboboxfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtComboboxfieldComponent = ExtComboboxfieldComponent_1 = __decorate([
+    Component({
+        selector: 'comboboxfield',
+        inputs: comboboxfieldMetaData.PROPERTIES,
+        outputs: comboboxfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtComboboxfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtComboboxfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtContainerfieldComponent_1;
 class containerfieldMetaData {
 }
 containerfieldMetaData.XTYPE = 'containerfield';
@@ -22455,51 +21038,32 @@ containerfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtContainerfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtContainerfieldComponent = ExtContainerfieldComponent_1 = class ExtContainerfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, containerfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(containerfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtContainerfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'containerfield',
-                inputs: containerfieldMetaData.PROPERTIES,
-                outputs: containerfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtContainerfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtContainerfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtContainerfieldComponent = ExtContainerfieldComponent_1 = __decorate([
+    Component({
+        selector: 'containerfield',
+        inputs: containerfieldMetaData.PROPERTIES,
+        outputs: containerfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtContainerfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtContainerfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtFieldcontainerComponent_1;
 class fieldcontainerMetaData {
 }
 fieldcontainerMetaData.XTYPE = 'fieldcontainer';
@@ -22756,51 +21320,32 @@ fieldcontainerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtFieldcontainerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtFieldcontainerComponent = ExtFieldcontainerComponent_1 = class ExtFieldcontainerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, fieldcontainerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(fieldcontainerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtFieldcontainerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'fieldcontainer',
-                inputs: fieldcontainerMetaData.PROPERTIES,
-                outputs: fieldcontainerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtFieldcontainerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtFieldcontainerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtFieldcontainerComponent = ExtFieldcontainerComponent_1 = __decorate([
+    Component({
+        selector: 'fieldcontainer',
+        inputs: fieldcontainerMetaData.PROPERTIES,
+        outputs: fieldcontainerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtFieldcontainerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtFieldcontainerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtDatefieldComponent_1;
 class datefieldMetaData {
 }
 datefieldMetaData.XTYPE = 'datefield';
@@ -23093,51 +21638,32 @@ datefieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtDatefieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtDatefieldComponent = ExtDatefieldComponent_1 = class ExtDatefieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, datefieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(datefieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtDatefieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'datefield',
-                inputs: datefieldMetaData.PROPERTIES,
-                outputs: datefieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtDatefieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtDatefieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtDatefieldComponent = ExtDatefieldComponent_1 = __decorate([
+    Component({
+        selector: 'datefield',
+        inputs: datefieldMetaData.PROPERTIES,
+        outputs: datefieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtDatefieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtDatefieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtDatepickerfieldComponent_1;
 class datepickerfieldMetaData {
 }
 datepickerfieldMetaData.XTYPE = 'datepickerfield';
@@ -23430,51 +21956,32 @@ datepickerfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtDatepickerfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtDatepickerfieldComponent = ExtDatepickerfieldComponent_1 = class ExtDatepickerfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, datepickerfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(datepickerfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtDatepickerfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'datepickerfield',
-                inputs: datepickerfieldMetaData.PROPERTIES,
-                outputs: datepickerfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtDatepickerfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtDatepickerfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtDatepickerfieldComponent = ExtDatepickerfieldComponent_1 = __decorate([
+    Component({
+        selector: 'datepickerfield',
+        inputs: datepickerfieldMetaData.PROPERTIES,
+        outputs: datepickerfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtDatepickerfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtDatepickerfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtDatepickernativefieldComponent_1;
 class datepickernativefieldMetaData {
 }
 datepickernativefieldMetaData.XTYPE = 'datepickernativefield';
@@ -23767,51 +22274,32 @@ datepickernativefieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtDatepickernativefieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtDatepickernativefieldComponent = ExtDatepickernativefieldComponent_1 = class ExtDatepickernativefieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, datepickernativefieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(datepickernativefieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtDatepickernativefieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'datepickernativefield',
-                inputs: datepickernativefieldMetaData.PROPERTIES,
-                outputs: datepickernativefieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtDatepickernativefieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtDatepickernativefieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtDatepickernativefieldComponent = ExtDatepickernativefieldComponent_1 = __decorate([
+    Component({
+        selector: 'datepickernativefield',
+        inputs: datepickernativefieldMetaData.PROPERTIES,
+        outputs: datepickernativefieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtDatepickernativefieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtDatepickernativefieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtDisplayfieldComponent_1;
 class displayfieldMetaData {
 }
 displayfieldMetaData.XTYPE = 'displayfield';
@@ -24067,51 +22555,32 @@ displayfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtDisplayfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtDisplayfieldComponent = ExtDisplayfieldComponent_1 = class ExtDisplayfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, displayfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(displayfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtDisplayfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'displayfield',
-                inputs: displayfieldMetaData.PROPERTIES,
-                outputs: displayfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtDisplayfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtDisplayfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtDisplayfieldComponent = ExtDisplayfieldComponent_1 = __decorate([
+    Component({
+        selector: 'displayfield',
+        inputs: displayfieldMetaData.PROPERTIES,
+        outputs: displayfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtDisplayfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtDisplayfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtEmailfieldComponent_1;
 class emailfieldMetaData {
 }
 emailfieldMetaData.XTYPE = 'emailfield';
@@ -24387,51 +22856,32 @@ emailfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtEmailfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtEmailfieldComponent = ExtEmailfieldComponent_1 = class ExtEmailfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, emailfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(emailfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtEmailfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'emailfield',
-                inputs: emailfieldMetaData.PROPERTIES,
-                outputs: emailfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtEmailfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtEmailfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtEmailfieldComponent = ExtEmailfieldComponent_1 = __decorate([
+    Component({
+        selector: 'emailfield',
+        inputs: emailfieldMetaData.PROPERTIES,
+        outputs: emailfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtEmailfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtEmailfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtFieldComponent_1;
 class fieldMetaData {
 }
 fieldMetaData.XTYPE = 'field';
@@ -24682,51 +23132,32 @@ fieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtFieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtFieldComponent = ExtFieldComponent_1 = class ExtFieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, fieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(fieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtFieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'field',
-                inputs: fieldMetaData.PROPERTIES,
-                outputs: fieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtFieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtFieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtFieldComponent = ExtFieldComponent_1 = __decorate([
+    Component({
+        selector: 'field',
+        inputs: fieldMetaData.PROPERTIES,
+        outputs: fieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtFieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtFieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtFilefieldComponent_1;
 class filefieldMetaData {
 }
 filefieldMetaData.XTYPE = 'filefield';
@@ -25005,51 +23436,32 @@ filefieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtFilefieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtFilefieldComponent = ExtFilefieldComponent_1 = class ExtFilefieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, filefieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(filefieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtFilefieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'filefield',
-                inputs: filefieldMetaData.PROPERTIES,
-                outputs: filefieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtFilefieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtFilefieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtFilefieldComponent = ExtFilefieldComponent_1 = __decorate([
+    Component({
+        selector: 'filefield',
+        inputs: filefieldMetaData.PROPERTIES,
+        outputs: filefieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtFilefieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtFilefieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtFilebuttonComponent_1;
 class filebuttonMetaData {
 }
 filebuttonMetaData.XTYPE = 'filebutton';
@@ -25298,51 +23710,32 @@ filebuttonMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtFilebuttonComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtFilebuttonComponent = ExtFilebuttonComponent_1 = class ExtFilebuttonComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, filebuttonMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(filebuttonMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtFilebuttonComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'filebutton',
-                inputs: filebuttonMetaData.PROPERTIES,
-                outputs: filebuttonMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtFilebuttonComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtFilebuttonComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtFilebuttonComponent = ExtFilebuttonComponent_1 = __decorate([
+    Component({
+        selector: 'filebutton',
+        inputs: filebuttonMetaData.PROPERTIES,
+        outputs: filebuttonMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtFilebuttonComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtFilebuttonComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtHiddenfieldComponent_1;
 class hiddenfieldMetaData {
 }
 hiddenfieldMetaData.XTYPE = 'hiddenfield';
@@ -25597,51 +23990,32 @@ hiddenfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtHiddenfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtHiddenfieldComponent = ExtHiddenfieldComponent_1 = class ExtHiddenfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, hiddenfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(hiddenfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtHiddenfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'hiddenfield',
-                inputs: hiddenfieldMetaData.PROPERTIES,
-                outputs: hiddenfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtHiddenfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtHiddenfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtHiddenfieldComponent = ExtHiddenfieldComponent_1 = __decorate([
+    Component({
+        selector: 'hiddenfield',
+        inputs: hiddenfieldMetaData.PROPERTIES,
+        outputs: hiddenfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtHiddenfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtHiddenfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtInputfieldComponent_1;
 class inputfieldMetaData {
 }
 inputfieldMetaData.XTYPE = 'inputfield';
@@ -25896,51 +24270,32 @@ inputfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtInputfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtInputfieldComponent = ExtInputfieldComponent_1 = class ExtInputfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, inputfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(inputfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtInputfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'inputfield',
-                inputs: inputfieldMetaData.PROPERTIES,
-                outputs: inputfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtInputfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtInputfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtInputfieldComponent = ExtInputfieldComponent_1 = __decorate([
+    Component({
+        selector: 'inputfield',
+        inputs: inputfieldMetaData.PROPERTIES,
+        outputs: inputfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtInputfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtInputfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtNumberfieldComponent_1;
 class numberfieldMetaData {
 }
 numberfieldMetaData.XTYPE = 'numberfield';
@@ -26223,51 +24578,32 @@ numberfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtNumberfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtNumberfieldComponent = ExtNumberfieldComponent_1 = class ExtNumberfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, numberfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(numberfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtNumberfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'numberfield',
-                inputs: numberfieldMetaData.PROPERTIES,
-                outputs: numberfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtNumberfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtNumberfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtNumberfieldComponent = ExtNumberfieldComponent_1 = __decorate([
+    Component({
+        selector: 'numberfield',
+        inputs: numberfieldMetaData.PROPERTIES,
+        outputs: numberfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtNumberfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtNumberfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtFieldpanelComponent_1;
 class fieldpanelMetaData {
 }
 fieldpanelMetaData.XTYPE = 'fieldpanel';
@@ -26580,51 +24916,32 @@ fieldpanelMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtFieldpanelComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtFieldpanelComponent = ExtFieldpanelComponent_1 = class ExtFieldpanelComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, fieldpanelMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(fieldpanelMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtFieldpanelComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'fieldpanel',
-                inputs: fieldpanelMetaData.PROPERTIES,
-                outputs: fieldpanelMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtFieldpanelComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtFieldpanelComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtFieldpanelComponent = ExtFieldpanelComponent_1 = __decorate([
+    Component({
+        selector: 'fieldpanel',
+        inputs: fieldpanelMetaData.PROPERTIES,
+        outputs: fieldpanelMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtFieldpanelComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtFieldpanelComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPasswordfieldComponent_1;
 class passwordfieldMetaData {
 }
 passwordfieldMetaData.XTYPE = 'passwordfield';
@@ -26902,51 +25219,32 @@ passwordfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPasswordfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPasswordfieldComponent = ExtPasswordfieldComponent_1 = class ExtPasswordfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, passwordfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(passwordfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPasswordfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'passwordfield',
-                inputs: passwordfieldMetaData.PROPERTIES,
-                outputs: passwordfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPasswordfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPasswordfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPasswordfieldComponent = ExtPasswordfieldComponent_1 = __decorate([
+    Component({
+        selector: 'passwordfield',
+        inputs: passwordfieldMetaData.PROPERTIES,
+        outputs: passwordfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPasswordfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPasswordfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPickerfieldComponent_1;
 class pickerfieldMetaData {
 }
 pickerfieldMetaData.XTYPE = 'pickerfield';
@@ -27235,51 +25533,32 @@ pickerfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPickerfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPickerfieldComponent = ExtPickerfieldComponent_1 = class ExtPickerfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pickerfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(pickerfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPickerfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pickerfield',
-                inputs: pickerfieldMetaData.PROPERTIES,
-                outputs: pickerfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPickerfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPickerfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPickerfieldComponent = ExtPickerfieldComponent_1 = __decorate([
+    Component({
+        selector: 'pickerfield',
+        inputs: pickerfieldMetaData.PROPERTIES,
+        outputs: pickerfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPickerfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPickerfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtRadioComponent_1;
 class radioMetaData {
 }
 radioMetaData.XTYPE = 'radio';
@@ -27542,51 +25821,32 @@ radioMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtRadioComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtRadioComponent = ExtRadioComponent_1 = class ExtRadioComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, radioMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(radioMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtRadioComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'radio',
-                inputs: radioMetaData.PROPERTIES,
-                outputs: radioMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtRadioComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtRadioComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtRadioComponent = ExtRadioComponent_1 = __decorate([
+    Component({
+        selector: 'radio',
+        inputs: radioMetaData.PROPERTIES,
+        outputs: radioMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtRadioComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtRadioComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtRadiofieldComponent_1;
 class radiofieldMetaData {
 }
 radiofieldMetaData.XTYPE = 'radiofield';
@@ -27849,51 +26109,32 @@ radiofieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtRadiofieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtRadiofieldComponent = ExtRadiofieldComponent_1 = class ExtRadiofieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, radiofieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(radiofieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtRadiofieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'radiofield',
-                inputs: radiofieldMetaData.PROPERTIES,
-                outputs: radiofieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtRadiofieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtRadiofieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtRadiofieldComponent = ExtRadiofieldComponent_1 = __decorate([
+    Component({
+        selector: 'radiofield',
+        inputs: radiofieldMetaData.PROPERTIES,
+        outputs: radiofieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtRadiofieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtRadiofieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSearchfieldComponent_1;
 class searchfieldMetaData {
 }
 searchfieldMetaData.XTYPE = 'searchfield';
@@ -28169,51 +26410,32 @@ searchfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSearchfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSearchfieldComponent = ExtSearchfieldComponent_1 = class ExtSearchfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, searchfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(searchfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSearchfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'searchfield',
-                inputs: searchfieldMetaData.PROPERTIES,
-                outputs: searchfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSearchfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSearchfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSearchfieldComponent = ExtSearchfieldComponent_1 = __decorate([
+    Component({
+        selector: 'searchfield',
+        inputs: searchfieldMetaData.PROPERTIES,
+        outputs: searchfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSearchfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSearchfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSelectfieldComponent_1;
 class selectfieldMetaData {
 }
 selectfieldMetaData.XTYPE = 'selectfield';
@@ -28527,51 +26749,32 @@ selectfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSelectfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSelectfieldComponent = ExtSelectfieldComponent_1 = class ExtSelectfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, selectfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(selectfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSelectfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'selectfield',
-                inputs: selectfieldMetaData.PROPERTIES,
-                outputs: selectfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSelectfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSelectfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSelectfieldComponent = ExtSelectfieldComponent_1 = __decorate([
+    Component({
+        selector: 'selectfield',
+        inputs: selectfieldMetaData.PROPERTIES,
+        outputs: selectfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSelectfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSelectfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSinglesliderfieldComponent_1;
 class singlesliderfieldMetaData {
 }
 singlesliderfieldMetaData.XTYPE = 'singlesliderfield';
@@ -28839,51 +27042,32 @@ singlesliderfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSinglesliderfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSinglesliderfieldComponent = ExtSinglesliderfieldComponent_1 = class ExtSinglesliderfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, singlesliderfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(singlesliderfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSinglesliderfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'singlesliderfield',
-                inputs: singlesliderfieldMetaData.PROPERTIES,
-                outputs: singlesliderfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSinglesliderfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSinglesliderfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSinglesliderfieldComponent = ExtSinglesliderfieldComponent_1 = __decorate([
+    Component({
+        selector: 'singlesliderfield',
+        inputs: singlesliderfieldMetaData.PROPERTIES,
+        outputs: singlesliderfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSinglesliderfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSinglesliderfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSliderfieldComponent_1;
 class sliderfieldMetaData {
 }
 sliderfieldMetaData.XTYPE = 'sliderfield';
@@ -29151,51 +27335,32 @@ sliderfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSliderfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSliderfieldComponent = ExtSliderfieldComponent_1 = class ExtSliderfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sliderfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(sliderfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSliderfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'sliderfield',
-                inputs: sliderfieldMetaData.PROPERTIES,
-                outputs: sliderfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSliderfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSliderfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSliderfieldComponent = ExtSliderfieldComponent_1 = __decorate([
+    Component({
+        selector: 'sliderfield',
+        inputs: sliderfieldMetaData.PROPERTIES,
+        outputs: sliderfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSliderfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSliderfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSpinnerfieldComponent_1;
 class spinnerfieldMetaData {
 }
 spinnerfieldMetaData.XTYPE = 'spinnerfield';
@@ -29488,51 +27653,32 @@ spinnerfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSpinnerfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSpinnerfieldComponent = ExtSpinnerfieldComponent_1 = class ExtSpinnerfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, spinnerfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(spinnerfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSpinnerfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'spinnerfield',
-                inputs: spinnerfieldMetaData.PROPERTIES,
-                outputs: spinnerfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSpinnerfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSpinnerfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSpinnerfieldComponent = ExtSpinnerfieldComponent_1 = __decorate([
+    Component({
+        selector: 'spinnerfield',
+        inputs: spinnerfieldMetaData.PROPERTIES,
+        outputs: spinnerfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSpinnerfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSpinnerfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTextfieldComponent_1;
 class textfieldMetaData {
 }
 textfieldMetaData.XTYPE = 'textfield';
@@ -29808,51 +27954,32 @@ textfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTextfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTextfieldComponent = ExtTextfieldComponent_1 = class ExtTextfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, textfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(textfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTextfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'textfield',
-                inputs: textfieldMetaData.PROPERTIES,
-                outputs: textfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTextfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTextfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTextfieldComponent = ExtTextfieldComponent_1 = __decorate([
+    Component({
+        selector: 'textfield',
+        inputs: textfieldMetaData.PROPERTIES,
+        outputs: textfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTextfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTextfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTextareafieldComponent_1;
 class textareafieldMetaData {
 }
 textareafieldMetaData.XTYPE = 'textareafield';
@@ -30129,51 +28256,32 @@ textareafieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTextareafieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTextareafieldComponent = ExtTextareafieldComponent_1 = class ExtTextareafieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, textareafieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(textareafieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTextareafieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'textareafield',
-                inputs: textareafieldMetaData.PROPERTIES,
-                outputs: textareafieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTextareafieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTextareafieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTextareafieldComponent = ExtTextareafieldComponent_1 = __decorate([
+    Component({
+        selector: 'textareafield',
+        inputs: textareafieldMetaData.PROPERTIES,
+        outputs: textareafieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTextareafieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTextareafieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTimefieldComponent_1;
 class timefieldMetaData {
 }
 timefieldMetaData.XTYPE = 'timefield';
@@ -30464,51 +28572,32 @@ timefieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTimefieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTimefieldComponent = ExtTimefieldComponent_1 = class ExtTimefieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, timefieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(timefieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTimefieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'timefield',
-                inputs: timefieldMetaData.PROPERTIES,
-                outputs: timefieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTimefieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTimefieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTimefieldComponent = ExtTimefieldComponent_1 = __decorate([
+    Component({
+        selector: 'timefield',
+        inputs: timefieldMetaData.PROPERTIES,
+        outputs: timefieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTimefieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTimefieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTogglefieldComponent_1;
 class togglefieldMetaData {
 }
 togglefieldMetaData.XTYPE = 'togglefield';
@@ -30778,51 +28867,32 @@ togglefieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTogglefieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTogglefieldComponent = ExtTogglefieldComponent_1 = class ExtTogglefieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, togglefieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(togglefieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTogglefieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'togglefield',
-                inputs: togglefieldMetaData.PROPERTIES,
-                outputs: togglefieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTogglefieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTogglefieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTogglefieldComponent = ExtTogglefieldComponent_1 = __decorate([
+    Component({
+        selector: 'togglefield',
+        inputs: togglefieldMetaData.PROPERTIES,
+        outputs: togglefieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTogglefieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTogglefieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCleartriggerComponent_1;
 class cleartriggerMetaData {
 }
 cleartriggerMetaData.XTYPE = 'cleartrigger';
@@ -30926,51 +28996,32 @@ cleartriggerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCleartriggerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCleartriggerComponent = ExtCleartriggerComponent_1 = class ExtCleartriggerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, cleartriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(cleartriggerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCleartriggerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cleartrigger',
-                inputs: cleartriggerMetaData.PROPERTIES,
-                outputs: cleartriggerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCleartriggerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCleartriggerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCleartriggerComponent = ExtCleartriggerComponent_1 = __decorate([
+    Component({
+        selector: 'cleartrigger',
+        inputs: cleartriggerMetaData.PROPERTIES,
+        outputs: cleartriggerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCleartriggerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCleartriggerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtDatetriggerComponent_1;
 class datetriggerMetaData {
 }
 datetriggerMetaData.XTYPE = 'datetrigger';
@@ -31074,51 +29125,32 @@ datetriggerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtDatetriggerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtDatetriggerComponent = ExtDatetriggerComponent_1 = class ExtDatetriggerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, datetriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(datetriggerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtDatetriggerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'datetrigger',
-                inputs: datetriggerMetaData.PROPERTIES,
-                outputs: datetriggerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtDatetriggerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtDatetriggerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtDatetriggerComponent = ExtDatetriggerComponent_1 = __decorate([
+    Component({
+        selector: 'datetrigger',
+        inputs: datetriggerMetaData.PROPERTIES,
+        outputs: datetriggerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtDatetriggerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtDatetriggerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtExpandtriggerComponent_1;
 class expandtriggerMetaData {
 }
 expandtriggerMetaData.XTYPE = 'expandtrigger';
@@ -31222,51 +29254,32 @@ expandtriggerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtExpandtriggerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtExpandtriggerComponent = ExtExpandtriggerComponent_1 = class ExtExpandtriggerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, expandtriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(expandtriggerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtExpandtriggerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'expandtrigger',
-                inputs: expandtriggerMetaData.PROPERTIES,
-                outputs: expandtriggerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtExpandtriggerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtExpandtriggerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtExpandtriggerComponent = ExtExpandtriggerComponent_1 = __decorate([
+    Component({
+        selector: 'expandtrigger',
+        inputs: expandtriggerMetaData.PROPERTIES,
+        outputs: expandtriggerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtExpandtriggerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtExpandtriggerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtMenutriggerComponent_1;
 class menutriggerMetaData {
 }
 menutriggerMetaData.XTYPE = 'menutrigger';
@@ -31373,51 +29386,32 @@ menutriggerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtMenutriggerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtMenutriggerComponent = ExtMenutriggerComponent_1 = class ExtMenutriggerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, menutriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(menutriggerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtMenutriggerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'menutrigger',
-                inputs: menutriggerMetaData.PROPERTIES,
-                outputs: menutriggerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtMenutriggerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtMenutriggerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtMenutriggerComponent = ExtMenutriggerComponent_1 = __decorate([
+    Component({
+        selector: 'menutrigger',
+        inputs: menutriggerMetaData.PROPERTIES,
+        outputs: menutriggerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtMenutriggerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtMenutriggerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtRevealtriggerComponent_1;
 class revealtriggerMetaData {
 }
 revealtriggerMetaData.XTYPE = 'revealtrigger';
@@ -31521,51 +29515,32 @@ revealtriggerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtRevealtriggerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtRevealtriggerComponent = ExtRevealtriggerComponent_1 = class ExtRevealtriggerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, revealtriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(revealtriggerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtRevealtriggerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'revealtrigger',
-                inputs: revealtriggerMetaData.PROPERTIES,
-                outputs: revealtriggerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtRevealtriggerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtRevealtriggerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtRevealtriggerComponent = ExtRevealtriggerComponent_1 = __decorate([
+    Component({
+        selector: 'revealtrigger',
+        inputs: revealtriggerMetaData.PROPERTIES,
+        outputs: revealtriggerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtRevealtriggerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtRevealtriggerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSpindowntriggerComponent_1;
 class spindowntriggerMetaData {
 }
 spindowntriggerMetaData.XTYPE = 'spindowntrigger';
@@ -31669,51 +29644,32 @@ spindowntriggerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSpindowntriggerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSpindowntriggerComponent = ExtSpindowntriggerComponent_1 = class ExtSpindowntriggerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, spindowntriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(spindowntriggerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSpindowntriggerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'spindowntrigger',
-                inputs: spindowntriggerMetaData.PROPERTIES,
-                outputs: spindowntriggerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSpindowntriggerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSpindowntriggerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSpindowntriggerComponent = ExtSpindowntriggerComponent_1 = __decorate([
+    Component({
+        selector: 'spindowntrigger',
+        inputs: spindowntriggerMetaData.PROPERTIES,
+        outputs: spindowntriggerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSpindowntriggerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSpindowntriggerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSpinuptriggerComponent_1;
 class spinuptriggerMetaData {
 }
 spinuptriggerMetaData.XTYPE = 'spinuptrigger';
@@ -31817,51 +29773,32 @@ spinuptriggerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSpinuptriggerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSpinuptriggerComponent = ExtSpinuptriggerComponent_1 = class ExtSpinuptriggerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, spinuptriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(spinuptriggerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSpinuptriggerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'spinuptrigger',
-                inputs: spinuptriggerMetaData.PROPERTIES,
-                outputs: spinuptriggerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSpinuptriggerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSpinuptriggerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSpinuptriggerComponent = ExtSpinuptriggerComponent_1 = __decorate([
+    Component({
+        selector: 'spinuptrigger',
+        inputs: spinuptriggerMetaData.PROPERTIES,
+        outputs: spinuptriggerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSpinuptriggerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSpinuptriggerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTimetriggerComponent_1;
 class timetriggerMetaData {
 }
 timetriggerMetaData.XTYPE = 'timetrigger';
@@ -31965,51 +29902,32 @@ timetriggerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTimetriggerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTimetriggerComponent = ExtTimetriggerComponent_1 = class ExtTimetriggerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, timetriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(timetriggerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTimetriggerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'timetrigger',
-                inputs: timetriggerMetaData.PROPERTIES,
-                outputs: timetriggerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTimetriggerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTimetriggerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTimetriggerComponent = ExtTimetriggerComponent_1 = __decorate([
+    Component({
+        selector: 'timetrigger',
+        inputs: timetriggerMetaData.PROPERTIES,
+        outputs: timetriggerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTimetriggerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTimetriggerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTriggerComponent_1;
 class triggerMetaData {
 }
 triggerMetaData.XTYPE = 'trigger';
@@ -32113,51 +30031,32 @@ triggerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTriggerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTriggerComponent = ExtTriggerComponent_1 = class ExtTriggerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, triggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(triggerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTriggerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'trigger',
-                inputs: triggerMetaData.PROPERTIES,
-                outputs: triggerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTriggerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTriggerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTriggerComponent = ExtTriggerComponent_1 = __decorate([
+    Component({
+        selector: 'trigger',
+        inputs: triggerMetaData.PROPERTIES,
+        outputs: triggerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTriggerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTriggerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtUrlfieldComponent_1;
 class urlfieldMetaData {
 }
 urlfieldMetaData.XTYPE = 'urlfield';
@@ -32433,51 +30332,32 @@ urlfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtUrlfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtUrlfieldComponent = ExtUrlfieldComponent_1 = class ExtUrlfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, urlfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(urlfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtUrlfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'urlfield',
-                inputs: urlfieldMetaData.PROPERTIES,
-                outputs: urlfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtUrlfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtUrlfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtUrlfieldComponent = ExtUrlfieldComponent_1 = __decorate([
+    Component({
+        selector: 'urlfield',
+        inputs: urlfieldMetaData.PROPERTIES,
+        outputs: urlfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtUrlfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtUrlfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtFieldsetComponent_1;
 class fieldsetMetaData {
 }
 fieldsetMetaData.XTYPE = 'fieldset';
@@ -32732,51 +30612,32 @@ fieldsetMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtFieldsetComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtFieldsetComponent = ExtFieldsetComponent_1 = class ExtFieldsetComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, fieldsetMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(fieldsetMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtFieldsetComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'fieldset',
-                inputs: fieldsetMetaData.PROPERTIES,
-                outputs: fieldsetMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtFieldsetComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtFieldsetComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtFieldsetComponent = ExtFieldsetComponent_1 = __decorate([
+    Component({
+        selector: 'fieldset',
+        inputs: fieldsetMetaData.PROPERTIES,
+        outputs: fieldsetMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtFieldsetComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtFieldsetComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtFormpanelComponent_1;
 class formpanelMetaData {
 }
 formpanelMetaData.XTYPE = 'formpanel';
@@ -33100,51 +30961,32 @@ formpanelMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtFormpanelComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtFormpanelComponent = ExtFormpanelComponent_1 = class ExtFormpanelComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, formpanelMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(formpanelMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtFormpanelComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'formpanel',
-                inputs: formpanelMetaData.PROPERTIES,
-                outputs: formpanelMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtFormpanelComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtFormpanelComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtFormpanelComponent = ExtFormpanelComponent_1 = __decorate([
+    Component({
+        selector: 'formpanel',
+        inputs: formpanelMetaData.PROPERTIES,
+        outputs: formpanelMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtFormpanelComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtFormpanelComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtGridcellbaseComponent_1;
 class gridcellbaseMetaData {
 }
 gridcellbaseMetaData.XTYPE = 'gridcellbase';
@@ -33250,51 +31092,32 @@ gridcellbaseMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtGridcellbaseComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtGridcellbaseComponent = ExtGridcellbaseComponent_1 = class ExtGridcellbaseComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridcellbaseMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(gridcellbaseMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtGridcellbaseComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'gridcellbase',
-                inputs: gridcellbaseMetaData.PROPERTIES,
-                outputs: gridcellbaseMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtGridcellbaseComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtGridcellbaseComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtGridcellbaseComponent = ExtGridcellbaseComponent_1 = __decorate([
+    Component({
+        selector: 'gridcellbase',
+        inputs: gridcellbaseMetaData.PROPERTIES,
+        outputs: gridcellbaseMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridcellbaseComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtGridcellbaseComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtBooleancellComponent_1;
 class booleancellMetaData {
 }
 booleancellMetaData.XTYPE = 'booleancell';
@@ -33406,51 +31229,32 @@ booleancellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtBooleancellComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtBooleancellComponent = ExtBooleancellComponent_1 = class ExtBooleancellComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, booleancellMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(booleancellMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtBooleancellComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'booleancell',
-                inputs: booleancellMetaData.PROPERTIES,
-                outputs: booleancellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtBooleancellComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtBooleancellComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtBooleancellComponent = ExtBooleancellComponent_1 = __decorate([
+    Component({
+        selector: 'booleancell',
+        inputs: booleancellMetaData.PROPERTIES,
+        outputs: booleancellMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtBooleancellComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtBooleancellComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtGridcellComponent_1;
 class gridcellMetaData {
 }
 gridcellMetaData.XTYPE = 'gridcell';
@@ -33563,51 +31367,32 @@ gridcellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtGridcellComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtGridcellComponent = ExtGridcellComponent_1 = class ExtGridcellComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridcellMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(gridcellMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtGridcellComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'gridcell',
-                inputs: gridcellMetaData.PROPERTIES,
-                outputs: gridcellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtGridcellComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtGridcellComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtGridcellComponent = ExtGridcellComponent_1 = __decorate([
+    Component({
+        selector: 'gridcell',
+        inputs: gridcellMetaData.PROPERTIES,
+        outputs: gridcellMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridcellComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtGridcellComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCheckcellComponent_1;
 class checkcellMetaData {
 }
 checkcellMetaData.XTYPE = 'checkcell';
@@ -33713,51 +31498,32 @@ checkcellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCheckcellComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCheckcellComponent = ExtCheckcellComponent_1 = class ExtCheckcellComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, checkcellMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(checkcellMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCheckcellComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'checkcell',
-                inputs: checkcellMetaData.PROPERTIES,
-                outputs: checkcellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCheckcellComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCheckcellComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCheckcellComponent = ExtCheckcellComponent_1 = __decorate([
+    Component({
+        selector: 'checkcell',
+        inputs: checkcellMetaData.PROPERTIES,
+        outputs: checkcellMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCheckcellComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCheckcellComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtDatecellComponent_1;
 class datecellMetaData {
 }
 datecellMetaData.XTYPE = 'datecell';
@@ -33867,51 +31633,32 @@ datecellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtDatecellComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtDatecellComponent = ExtDatecellComponent_1 = class ExtDatecellComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, datecellMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(datecellMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtDatecellComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'datecell',
-                inputs: datecellMetaData.PROPERTIES,
-                outputs: datecellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtDatecellComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtDatecellComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtDatecellComponent = ExtDatecellComponent_1 = __decorate([
+    Component({
+        selector: 'datecell',
+        inputs: datecellMetaData.PROPERTIES,
+        outputs: datecellMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtDatecellComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtDatecellComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtNumbercellComponent_1;
 class numbercellMetaData {
 }
 numbercellMetaData.XTYPE = 'numbercell';
@@ -34021,51 +31768,32 @@ numbercellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtNumbercellComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtNumbercellComponent = ExtNumbercellComponent_1 = class ExtNumbercellComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, numbercellMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(numbercellMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtNumbercellComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'numbercell',
-                inputs: numbercellMetaData.PROPERTIES,
-                outputs: numbercellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtNumbercellComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtNumbercellComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtNumbercellComponent = ExtNumbercellComponent_1 = __decorate([
+    Component({
+        selector: 'numbercell',
+        inputs: numbercellMetaData.PROPERTIES,
+        outputs: numbercellMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtNumbercellComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtNumbercellComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtRownumberercellComponent_1;
 class rownumberercellMetaData {
 }
 rownumberercellMetaData.XTYPE = 'rownumberercell';
@@ -34175,51 +31903,32 @@ rownumberercellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtRownumberercellComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtRownumberercellComponent = ExtRownumberercellComponent_1 = class ExtRownumberercellComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, rownumberercellMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(rownumberercellMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtRownumberercellComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'rownumberercell',
-                inputs: rownumberercellMetaData.PROPERTIES,
-                outputs: rownumberercellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtRownumberercellComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtRownumberercellComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtRownumberercellComponent = ExtRownumberercellComponent_1 = __decorate([
+    Component({
+        selector: 'rownumberercell',
+        inputs: rownumberercellMetaData.PROPERTIES,
+        outputs: rownumberercellMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtRownumberercellComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtRownumberercellComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTextcellComponent_1;
 class textcellMetaData {
 }
 textcellMetaData.XTYPE = 'textcell';
@@ -34328,51 +32037,32 @@ textcellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTextcellComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTextcellComponent = ExtTextcellComponent_1 = class ExtTextcellComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, textcellMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(textcellMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTextcellComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'textcell',
-                inputs: textcellMetaData.PROPERTIES,
-                outputs: textcellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTextcellComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTextcellComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTextcellComponent = ExtTextcellComponent_1 = __decorate([
+    Component({
+        selector: 'textcell',
+        inputs: textcellMetaData.PROPERTIES,
+        outputs: textcellMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTextcellComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTextcellComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTreecellComponent_1;
 class treecellMetaData {
 }
 treecellMetaData.XTYPE = 'treecell';
@@ -34488,51 +32178,32 @@ treecellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTreecellComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTreecellComponent = ExtTreecellComponent_1 = class ExtTreecellComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, treecellMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(treecellMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTreecellComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'treecell',
-                inputs: treecellMetaData.PROPERTIES,
-                outputs: treecellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTreecellComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTreecellComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTreecellComponent = ExtTreecellComponent_1 = __decorate([
+    Component({
+        selector: 'treecell',
+        inputs: treecellMetaData.PROPERTIES,
+        outputs: treecellMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTreecellComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTreecellComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtWidgetcellComponent_1;
 class widgetcellMetaData {
 }
 widgetcellMetaData.XTYPE = 'widgetcell';
@@ -34640,51 +32311,32 @@ widgetcellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtWidgetcellComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtWidgetcellComponent = ExtWidgetcellComponent_1 = class ExtWidgetcellComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, widgetcellMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(widgetcellMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtWidgetcellComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'widgetcell',
-                inputs: widgetcellMetaData.PROPERTIES,
-                outputs: widgetcellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtWidgetcellComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtWidgetcellComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtWidgetcellComponent = ExtWidgetcellComponent_1 = __decorate([
+    Component({
+        selector: 'widgetcell',
+        inputs: widgetcellMetaData.PROPERTIES,
+        outputs: widgetcellMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtWidgetcellComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtWidgetcellComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCelleditorComponent_1;
 class celleditorMetaData {
 }
 celleditorMetaData.XTYPE = 'celleditor';
@@ -34964,51 +32616,32 @@ celleditorMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCelleditorComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCelleditorComponent = ExtCelleditorComponent_1 = class ExtCelleditorComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, celleditorMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(celleditorMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCelleditorComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'celleditor',
-                inputs: celleditorMetaData.PROPERTIES,
-                outputs: celleditorMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCelleditorComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCelleditorComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCelleditorComponent = ExtCelleditorComponent_1 = __decorate([
+    Component({
+        selector: 'celleditor',
+        inputs: celleditorMetaData.PROPERTIES,
+        outputs: celleditorMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCelleditorComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCelleditorComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtBooleancolumnComponent_1;
 class booleancolumnMetaData {
 }
 booleancolumnMetaData.XTYPE = 'booleancolumn';
@@ -35306,51 +32939,32 @@ booleancolumnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtBooleancolumnComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtBooleancolumnComponent = ExtBooleancolumnComponent_1 = class ExtBooleancolumnComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, booleancolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(booleancolumnMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtBooleancolumnComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'booleancolumn',
-                inputs: booleancolumnMetaData.PROPERTIES,
-                outputs: booleancolumnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtBooleancolumnComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtBooleancolumnComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtBooleancolumnComponent = ExtBooleancolumnComponent_1 = __decorate([
+    Component({
+        selector: 'booleancolumn',
+        inputs: booleancolumnMetaData.PROPERTIES,
+        outputs: booleancolumnMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtBooleancolumnComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtBooleancolumnComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtCheckcolumnComponent_1;
 class checkcolumnMetaData {
 }
 checkcolumnMetaData.XTYPE = 'checkcolumn';
@@ -35652,51 +33266,32 @@ checkcolumnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtCheckcolumnComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtCheckcolumnComponent = ExtCheckcolumnComponent_1 = class ExtCheckcolumnComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, checkcolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(checkcolumnMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtCheckcolumnComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'checkcolumn',
-                inputs: checkcolumnMetaData.PROPERTIES,
-                outputs: checkcolumnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtCheckcolumnComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtCheckcolumnComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtCheckcolumnComponent = ExtCheckcolumnComponent_1 = __decorate([
+    Component({
+        selector: 'checkcolumn',
+        inputs: checkcolumnMetaData.PROPERTIES,
+        outputs: checkcolumnMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtCheckcolumnComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtCheckcolumnComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtGridcolumnComponent_1;
 class gridcolumnMetaData {
 }
 gridcolumnMetaData.XTYPE = 'gridcolumn';
@@ -35991,51 +33586,32 @@ gridcolumnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtGridcolumnComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtGridcolumnComponent = ExtGridcolumnComponent_1 = class ExtGridcolumnComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridcolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(gridcolumnMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtGridcolumnComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'gridcolumn',
-                inputs: gridcolumnMetaData.PROPERTIES,
-                outputs: gridcolumnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtGridcolumnComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtGridcolumnComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtGridcolumnComponent = ExtGridcolumnComponent_1 = __decorate([
+    Component({
+        selector: 'gridcolumn',
+        inputs: gridcolumnMetaData.PROPERTIES,
+        outputs: gridcolumnMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridcolumnComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtGridcolumnComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtColumnComponent_1;
 class columnMetaData {
 }
 columnMetaData.XTYPE = 'column';
@@ -36330,51 +33906,32 @@ columnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtColumnComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtColumnComponent = ExtColumnComponent_1 = class ExtColumnComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, columnMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(columnMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtColumnComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'column',
-                inputs: columnMetaData.PROPERTIES,
-                outputs: columnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtColumnComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtColumnComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtColumnComponent = ExtColumnComponent_1 = __decorate([
+    Component({
+        selector: 'column',
+        inputs: columnMetaData.PROPERTIES,
+        outputs: columnMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtColumnComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtColumnComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTemplatecolumnComponent_1;
 class templatecolumnMetaData {
 }
 templatecolumnMetaData.XTYPE = 'templatecolumn';
@@ -36669,51 +34226,32 @@ templatecolumnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTemplatecolumnComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTemplatecolumnComponent = ExtTemplatecolumnComponent_1 = class ExtTemplatecolumnComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, templatecolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(templatecolumnMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTemplatecolumnComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'templatecolumn',
-                inputs: templatecolumnMetaData.PROPERTIES,
-                outputs: templatecolumnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTemplatecolumnComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTemplatecolumnComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTemplatecolumnComponent = ExtTemplatecolumnComponent_1 = __decorate([
+    Component({
+        selector: 'templatecolumn',
+        inputs: templatecolumnMetaData.PROPERTIES,
+        outputs: templatecolumnMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTemplatecolumnComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTemplatecolumnComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtDatecolumnComponent_1;
 class datecolumnMetaData {
 }
 datecolumnMetaData.XTYPE = 'datecolumn';
@@ -37009,51 +34547,32 @@ datecolumnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtDatecolumnComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtDatecolumnComponent = ExtDatecolumnComponent_1 = class ExtDatecolumnComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, datecolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(datecolumnMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtDatecolumnComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'datecolumn',
-                inputs: datecolumnMetaData.PROPERTIES,
-                outputs: datecolumnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtDatecolumnComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtDatecolumnComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtDatecolumnComponent = ExtDatecolumnComponent_1 = __decorate([
+    Component({
+        selector: 'datecolumn',
+        inputs: datecolumnMetaData.PROPERTIES,
+        outputs: datecolumnMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtDatecolumnComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtDatecolumnComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtNumbercolumnComponent_1;
 class numbercolumnMetaData {
 }
 numbercolumnMetaData.XTYPE = 'numbercolumn';
@@ -37349,51 +34868,32 @@ numbercolumnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtNumbercolumnComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtNumbercolumnComponent = ExtNumbercolumnComponent_1 = class ExtNumbercolumnComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, numbercolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(numbercolumnMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtNumbercolumnComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'numbercolumn',
-                inputs: numbercolumnMetaData.PROPERTIES,
-                outputs: numbercolumnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtNumbercolumnComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtNumbercolumnComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtNumbercolumnComponent = ExtNumbercolumnComponent_1 = __decorate([
+    Component({
+        selector: 'numbercolumn',
+        inputs: numbercolumnMetaData.PROPERTIES,
+        outputs: numbercolumnMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtNumbercolumnComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtNumbercolumnComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtRownumbererComponent_1;
 class rownumbererMetaData {
 }
 rownumbererMetaData.XTYPE = 'rownumberer';
@@ -37689,51 +35189,32 @@ rownumbererMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtRownumbererComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtRownumbererComponent = ExtRownumbererComponent_1 = class ExtRownumbererComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, rownumbererMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(rownumbererMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtRownumbererComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'rownumberer',
-                inputs: rownumbererMetaData.PROPERTIES,
-                outputs: rownumbererMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtRownumbererComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtRownumbererComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtRownumbererComponent = ExtRownumbererComponent_1 = __decorate([
+    Component({
+        selector: 'rownumberer',
+        inputs: rownumbererMetaData.PROPERTIES,
+        outputs: rownumbererMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtRownumbererComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtRownumbererComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSelectioncolumnComponent_1;
 class selectioncolumnMetaData {
 }
 selectioncolumnMetaData.XTYPE = 'selectioncolumn';
@@ -38035,51 +35516,32 @@ selectioncolumnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSelectioncolumnComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSelectioncolumnComponent = ExtSelectioncolumnComponent_1 = class ExtSelectioncolumnComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, selectioncolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(selectioncolumnMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSelectioncolumnComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'selectioncolumn',
-                inputs: selectioncolumnMetaData.PROPERTIES,
-                outputs: selectioncolumnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSelectioncolumnComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSelectioncolumnComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSelectioncolumnComponent = ExtSelectioncolumnComponent_1 = __decorate([
+    Component({
+        selector: 'selectioncolumn',
+        inputs: selectioncolumnMetaData.PROPERTIES,
+        outputs: selectioncolumnMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSelectioncolumnComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSelectioncolumnComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTextcolumnComponent_1;
 class textcolumnMetaData {
 }
 textcolumnMetaData.XTYPE = 'textcolumn';
@@ -38374,51 +35836,32 @@ textcolumnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTextcolumnComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTextcolumnComponent = ExtTextcolumnComponent_1 = class ExtTextcolumnComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, textcolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(textcolumnMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTextcolumnComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'textcolumn',
-                inputs: textcolumnMetaData.PROPERTIES,
-                outputs: textcolumnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTextcolumnComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTextcolumnComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTextcolumnComponent = ExtTextcolumnComponent_1 = __decorate([
+    Component({
+        selector: 'textcolumn',
+        inputs: textcolumnMetaData.PROPERTIES,
+        outputs: textcolumnMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTextcolumnComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTextcolumnComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTreecolumnComponent_1;
 class treecolumnMetaData {
 }
 treecolumnMetaData.XTYPE = 'treecolumn';
@@ -38713,51 +36156,32 @@ treecolumnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTreecolumnComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTreecolumnComponent = ExtTreecolumnComponent_1 = class ExtTreecolumnComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, treecolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(treecolumnMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTreecolumnComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'treecolumn',
-                inputs: treecolumnMetaData.PROPERTIES,
-                outputs: treecolumnMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTreecolumnComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTreecolumnComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTreecolumnComponent = ExtTreecolumnComponent_1 = __decorate([
+    Component({
+        selector: 'treecolumn',
+        inputs: treecolumnMetaData.PROPERTIES,
+        outputs: treecolumnMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTreecolumnComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTreecolumnComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtGridComponent_1;
 class gridMetaData {
 }
 gridMetaData.XTYPE = 'grid';
@@ -39170,51 +36594,32 @@ gridMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtGridComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtGridComponent = ExtGridComponent_1 = class ExtGridComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(gridMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtGridComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'grid',
-                inputs: gridMetaData.PROPERTIES,
-                outputs: gridMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtGridComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtGridComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtGridComponent = ExtGridComponent_1 = __decorate([
+    Component({
+        selector: 'grid',
+        inputs: gridMetaData.PROPERTIES,
+        outputs: gridMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtGridComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtHeadercontainerComponent_1;
 class headercontainerMetaData {
 }
 headercontainerMetaData.XTYPE = 'headercontainer';
@@ -39470,51 +36875,32 @@ headercontainerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtHeadercontainerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtHeadercontainerComponent = ExtHeadercontainerComponent_1 = class ExtHeadercontainerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, headercontainerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(headercontainerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtHeadercontainerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'headercontainer',
-                inputs: headercontainerMetaData.PROPERTIES,
-                outputs: headercontainerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtHeadercontainerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtHeadercontainerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtHeadercontainerComponent = ExtHeadercontainerComponent_1 = __decorate([
+    Component({
+        selector: 'headercontainer',
+        inputs: headercontainerMetaData.PROPERTIES,
+        outputs: headercontainerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtHeadercontainerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtHeadercontainerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtLockedgridComponent_1;
 class lockedgridMetaData {
 }
 lockedgridMetaData.XTYPE = 'lockedgrid';
@@ -39776,51 +37162,32 @@ lockedgridMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtLockedgridComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtLockedgridComponent = ExtLockedgridComponent_1 = class ExtLockedgridComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, lockedgridMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(lockedgridMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtLockedgridComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'lockedgrid',
-                inputs: lockedgridMetaData.PROPERTIES,
-                outputs: lockedgridMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtLockedgridComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtLockedgridComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtLockedgridComponent = ExtLockedgridComponent_1 = __decorate([
+    Component({
+        selector: 'lockedgrid',
+        inputs: lockedgridMetaData.PROPERTIES,
+        outputs: lockedgridMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtLockedgridComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtLockedgridComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtLockedgridregionComponent_1;
 class lockedgridregionMetaData {
 }
 lockedgridregionMetaData.XTYPE = 'lockedgridregion';
@@ -40127,51 +37494,32 @@ lockedgridregionMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtLockedgridregionComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtLockedgridregionComponent = ExtLockedgridregionComponent_1 = class ExtLockedgridregionComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, lockedgridregionMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(lockedgridregionMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtLockedgridregionComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'lockedgridregion',
-                inputs: lockedgridregionMetaData.PROPERTIES,
-                outputs: lockedgridregionMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtLockedgridregionComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtLockedgridregionComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtLockedgridregionComponent = ExtLockedgridregionComponent_1 = __decorate([
+    Component({
+        selector: 'lockedgridregion',
+        inputs: lockedgridregionMetaData.PROPERTIES,
+        outputs: lockedgridregionMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtLockedgridregionComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtLockedgridregionComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtGridcolumnsmenuComponent_1;
 class gridcolumnsmenuMetaData {
 }
 gridcolumnsmenuMetaData.XTYPE = 'gridcolumnsmenu';
@@ -40402,51 +37750,32 @@ gridcolumnsmenuMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtGridcolumnsmenuComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtGridcolumnsmenuComponent = ExtGridcolumnsmenuComponent_1 = class ExtGridcolumnsmenuComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridcolumnsmenuMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(gridcolumnsmenuMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtGridcolumnsmenuComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'gridcolumnsmenu',
-                inputs: gridcolumnsmenuMetaData.PROPERTIES,
-                outputs: gridcolumnsmenuMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtGridcolumnsmenuComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtGridcolumnsmenuComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtGridcolumnsmenuComponent = ExtGridcolumnsmenuComponent_1 = __decorate([
+    Component({
+        selector: 'gridcolumnsmenu',
+        inputs: gridcolumnsmenuMetaData.PROPERTIES,
+        outputs: gridcolumnsmenuMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridcolumnsmenuComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtGridcolumnsmenuComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtGridgroupbythismenuitemComponent_1;
 class gridgroupbythismenuitemMetaData {
 }
 gridgroupbythismenuitemMetaData.XTYPE = 'gridgroupbythismenuitem';
@@ -40677,51 +38006,32 @@ gridgroupbythismenuitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtGridgroupbythismenuitemComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtGridgroupbythismenuitemComponent = ExtGridgroupbythismenuitemComponent_1 = class ExtGridgroupbythismenuitemComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridgroupbythismenuitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(gridgroupbythismenuitemMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtGridgroupbythismenuitemComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'gridgroupbythismenuitem',
-                inputs: gridgroupbythismenuitemMetaData.PROPERTIES,
-                outputs: gridgroupbythismenuitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtGridgroupbythismenuitemComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtGridgroupbythismenuitemComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtGridgroupbythismenuitemComponent = ExtGridgroupbythismenuitemComponent_1 = __decorate([
+    Component({
+        selector: 'gridgroupbythismenuitem',
+        inputs: gridgroupbythismenuitemMetaData.PROPERTIES,
+        outputs: gridgroupbythismenuitemMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridgroupbythismenuitemComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtGridgroupbythismenuitemComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtGridshowingroupsmenuitemComponent_1;
 class gridshowingroupsmenuitemMetaData {
 }
 gridshowingroupsmenuitemMetaData.XTYPE = 'gridshowingroupsmenuitem';
@@ -40961,51 +38271,32 @@ gridshowingroupsmenuitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtGridshowingroupsmenuitemComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtGridshowingroupsmenuitemComponent = ExtGridshowingroupsmenuitemComponent_1 = class ExtGridshowingroupsmenuitemComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridshowingroupsmenuitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(gridshowingroupsmenuitemMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtGridshowingroupsmenuitemComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'gridshowingroupsmenuitem',
-                inputs: gridshowingroupsmenuitemMetaData.PROPERTIES,
-                outputs: gridshowingroupsmenuitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtGridshowingroupsmenuitemComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtGridshowingroupsmenuitemComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtGridshowingroupsmenuitemComponent = ExtGridshowingroupsmenuitemComponent_1 = __decorate([
+    Component({
+        selector: 'gridshowingroupsmenuitem',
+        inputs: gridshowingroupsmenuitemMetaData.PROPERTIES,
+        outputs: gridshowingroupsmenuitemMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridshowingroupsmenuitemComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtGridshowingroupsmenuitemComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtGridsortascmenuitemComponent_1;
 class gridsortascmenuitemMetaData {
 }
 gridsortascmenuitemMetaData.XTYPE = 'gridsortascmenuitem';
@@ -41247,51 +38538,32 @@ gridsortascmenuitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtGridsortascmenuitemComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtGridsortascmenuitemComponent = ExtGridsortascmenuitemComponent_1 = class ExtGridsortascmenuitemComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridsortascmenuitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(gridsortascmenuitemMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtGridsortascmenuitemComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'gridsortascmenuitem',
-                inputs: gridsortascmenuitemMetaData.PROPERTIES,
-                outputs: gridsortascmenuitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtGridsortascmenuitemComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtGridsortascmenuitemComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtGridsortascmenuitemComponent = ExtGridsortascmenuitemComponent_1 = __decorate([
+    Component({
+        selector: 'gridsortascmenuitem',
+        inputs: gridsortascmenuitemMetaData.PROPERTIES,
+        outputs: gridsortascmenuitemMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridsortascmenuitemComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtGridsortascmenuitemComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtGridsortdescmenuitemComponent_1;
 class gridsortdescmenuitemMetaData {
 }
 gridsortdescmenuitemMetaData.XTYPE = 'gridsortdescmenuitem';
@@ -41533,51 +38805,32 @@ gridsortdescmenuitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtGridsortdescmenuitemComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtGridsortdescmenuitemComponent = ExtGridsortdescmenuitemComponent_1 = class ExtGridsortdescmenuitemComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridsortdescmenuitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(gridsortdescmenuitemMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtGridsortdescmenuitemComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'gridsortdescmenuitem',
-                inputs: gridsortdescmenuitemMetaData.PROPERTIES,
-                outputs: gridsortdescmenuitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtGridsortdescmenuitemComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtGridsortdescmenuitemComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtGridsortdescmenuitemComponent = ExtGridsortdescmenuitemComponent_1 = __decorate([
+    Component({
+        selector: 'gridsortdescmenuitem',
+        inputs: gridsortdescmenuitemMetaData.PROPERTIES,
+        outputs: gridsortdescmenuitemMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridsortdescmenuitemComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtGridsortdescmenuitemComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPagingtoolbarComponent_1;
 class pagingtoolbarMetaData {
 }
 pagingtoolbarMetaData.XTYPE = 'pagingtoolbar';
@@ -41834,51 +39087,32 @@ pagingtoolbarMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPagingtoolbarComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPagingtoolbarComponent = ExtPagingtoolbarComponent_1 = class ExtPagingtoolbarComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pagingtoolbarMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(pagingtoolbarMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPagingtoolbarComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pagingtoolbar',
-                inputs: pagingtoolbarMetaData.PROPERTIES,
-                outputs: pagingtoolbarMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPagingtoolbarComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPagingtoolbarComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPagingtoolbarComponent = ExtPagingtoolbarComponent_1 = __decorate([
+    Component({
+        selector: 'pagingtoolbar',
+        inputs: pagingtoolbarMetaData.PROPERTIES,
+        outputs: pagingtoolbarMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPagingtoolbarComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPagingtoolbarComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtGridrowComponent_1;
 class gridrowMetaData {
 }
 gridrowMetaData.XTYPE = 'gridrow';
@@ -42098,51 +39332,32 @@ gridrowMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtGridrowComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtGridrowComponent = ExtGridrowComponent_1 = class ExtGridrowComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridrowMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(gridrowMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtGridrowComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'gridrow',
-                inputs: gridrowMetaData.PROPERTIES,
-                outputs: gridrowMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtGridrowComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtGridrowComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtGridrowComponent = ExtGridrowComponent_1 = __decorate([
+    Component({
+        selector: 'gridrow',
+        inputs: gridrowMetaData.PROPERTIES,
+        outputs: gridrowMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridrowComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtGridrowComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtRowbodyComponent_1;
 class rowbodyMetaData {
 }
 rowbodyMetaData.XTYPE = 'rowbody';
@@ -42356,51 +39571,32 @@ rowbodyMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtRowbodyComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtRowbodyComponent = ExtRowbodyComponent_1 = class ExtRowbodyComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, rowbodyMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(rowbodyMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtRowbodyComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'rowbody',
-                inputs: rowbodyMetaData.PROPERTIES,
-                outputs: rowbodyMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtRowbodyComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtRowbodyComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtRowbodyComponent = ExtRowbodyComponent_1 = __decorate([
+    Component({
+        selector: 'rowbody',
+        inputs: rowbodyMetaData.PROPERTIES,
+        outputs: rowbodyMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtRowbodyComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtRowbodyComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtRowheaderComponent_1;
 class rowheaderMetaData {
 }
 rowheaderMetaData.XTYPE = 'rowheader';
@@ -42619,51 +39815,32 @@ rowheaderMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtRowheaderComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtRowheaderComponent = ExtRowheaderComponent_1 = class ExtRowheaderComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, rowheaderMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(rowheaderMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtRowheaderComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'rowheader',
-                inputs: rowheaderMetaData.PROPERTIES,
-                outputs: rowheaderMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtRowheaderComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtRowheaderComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtRowheaderComponent = ExtRowheaderComponent_1 = __decorate([
+    Component({
+        selector: 'rowheader',
+        inputs: rowheaderMetaData.PROPERTIES,
+        outputs: rowheaderMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtRowheaderComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtRowheaderComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtGridsummaryrowComponent_1;
 class gridsummaryrowMetaData {
 }
 gridsummaryrowMetaData.XTYPE = 'gridsummaryrow';
@@ -42883,51 +40060,32 @@ gridsummaryrowMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtGridsummaryrowComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtGridsummaryrowComponent = ExtGridsummaryrowComponent_1 = class ExtGridsummaryrowComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridsummaryrowMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(gridsummaryrowMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtGridsummaryrowComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'gridsummaryrow',
-                inputs: gridsummaryrowMetaData.PROPERTIES,
-                outputs: gridsummaryrowMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtGridsummaryrowComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtGridsummaryrowComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtGridsummaryrowComponent = ExtGridsummaryrowComponent_1 = __decorate([
+    Component({
+        selector: 'gridsummaryrow',
+        inputs: gridsummaryrowMetaData.PROPERTIES,
+        outputs: gridsummaryrowMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridsummaryrowComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtGridsummaryrowComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTreeComponent_1;
 class treeMetaData {
 }
 treeMetaData.XTYPE = 'tree';
@@ -43357,51 +40515,32 @@ treeMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTreeComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTreeComponent = ExtTreeComponent_1 = class ExtTreeComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, treeMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(treeMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTreeComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'tree',
-                inputs: treeMetaData.PROPERTIES,
-                outputs: treeMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTreeComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTreeComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTreeComponent = ExtTreeComponent_1 = __decorate([
+    Component({
+        selector: 'tree',
+        inputs: treeMetaData.PROPERTIES,
+        outputs: treeMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTreeComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTreeComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtImageComponent_1;
 class imageMetaData {
 }
 imageMetaData.XTYPE = 'image';
@@ -43625,51 +40764,32 @@ imageMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtImageComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtImageComponent = ExtImageComponent_1 = class ExtImageComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, imageMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(imageMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtImageComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'image',
-                inputs: imageMetaData.PROPERTIES,
-                outputs: imageMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtImageComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtImageComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtImageComponent = ExtImageComponent_1 = __decorate([
+    Component({
+        selector: 'image',
+        inputs: imageMetaData.PROPERTIES,
+        outputs: imageMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtImageComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtImageComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtImgComponent_1;
 class imgMetaData {
 }
 imgMetaData.XTYPE = 'img';
@@ -43893,51 +41013,32 @@ imgMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtImgComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtImgComponent = ExtImgComponent_1 = class ExtImgComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, imgMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(imgMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtImgComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'img',
-                inputs: imgMetaData.PROPERTIES,
-                outputs: imgMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtImgComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtImgComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtImgComponent = ExtImgComponent_1 = __decorate([
+    Component({
+        selector: 'img',
+        inputs: imgMetaData.PROPERTIES,
+        outputs: imgMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtImgComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtImgComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtIndicatorComponent_1;
 class indicatorMetaData {
 }
 indicatorMetaData.XTYPE = 'indicator';
@@ -44161,51 +41262,32 @@ indicatorMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtIndicatorComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtIndicatorComponent = ExtIndicatorComponent_1 = class ExtIndicatorComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, indicatorMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(indicatorMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtIndicatorComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'indicator',
-                inputs: indicatorMetaData.PROPERTIES,
-                outputs: indicatorMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtIndicatorComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtIndicatorComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtIndicatorComponent = ExtIndicatorComponent_1 = __decorate([
+    Component({
+        selector: 'indicator',
+        inputs: indicatorMetaData.PROPERTIES,
+        outputs: indicatorMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtIndicatorComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtIndicatorComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtLabelComponent_1;
 class labelMetaData {
 }
 labelMetaData.XTYPE = 'label';
@@ -44419,51 +41501,32 @@ labelMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtLabelComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtLabelComponent = ExtLabelComponent_1 = class ExtLabelComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, labelMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(labelMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtLabelComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'label',
-                inputs: labelMetaData.PROPERTIES,
-                outputs: labelMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtLabelComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtLabelComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtLabelComponent = ExtLabelComponent_1 = __decorate([
+    Component({
+        selector: 'label',
+        inputs: labelMetaData.PROPERTIES,
+        outputs: labelMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtLabelComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtLabelComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTreelistComponent_1;
 class treelistMetaData {
 }
 treelistMetaData.XTYPE = 'treelist';
@@ -44692,51 +41755,32 @@ treelistMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTreelistComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTreelistComponent = ExtTreelistComponent_1 = class ExtTreelistComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, treelistMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(treelistMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTreelistComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'treelist',
-                inputs: treelistMetaData.PROPERTIES,
-                outputs: treelistMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTreelistComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTreelistComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTreelistComponent = ExtTreelistComponent_1 = __decorate([
+    Component({
+        selector: 'treelist',
+        inputs: treelistMetaData.PROPERTIES,
+        outputs: treelistMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTreelistComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTreelistComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTreelistitemComponent_1;
 class treelistitemMetaData {
 }
 treelistitemMetaData.XTYPE = 'treelistitem';
@@ -44847,51 +41891,32 @@ treelistitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTreelistitemComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTreelistitemComponent = ExtTreelistitemComponent_1 = class ExtTreelistitemComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, treelistitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(treelistitemMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTreelistitemComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'treelistitem',
-                inputs: treelistitemMetaData.PROPERTIES,
-                outputs: treelistitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTreelistitemComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTreelistitemComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTreelistitemComponent = ExtTreelistitemComponent_1 = __decorate([
+    Component({
+        selector: 'treelistitem',
+        inputs: treelistitemMetaData.PROPERTIES,
+        outputs: treelistitemMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTreelistitemComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTreelistitemComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtLoadmaskComponent_1;
 class loadmaskMetaData {
 }
 loadmaskMetaData.XTYPE = 'loadmask';
@@ -45111,51 +42136,32 @@ loadmaskMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtLoadmaskComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtLoadmaskComponent = ExtLoadmaskComponent_1 = class ExtLoadmaskComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, loadmaskMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(loadmaskMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtLoadmaskComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'loadmask',
-                inputs: loadmaskMetaData.PROPERTIES,
-                outputs: loadmaskMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtLoadmaskComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtLoadmaskComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtLoadmaskComponent = ExtLoadmaskComponent_1 = __decorate([
+    Component({
+        selector: 'loadmask',
+        inputs: loadmaskMetaData.PROPERTIES,
+        outputs: loadmaskMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtLoadmaskComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtLoadmaskComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtMaskComponent_1;
 class maskMetaData {
 }
 maskMetaData.XTYPE = 'mask';
@@ -45372,51 +42378,32 @@ maskMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtMaskComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtMaskComponent = ExtMaskComponent_1 = class ExtMaskComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, maskMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(maskMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtMaskComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'mask',
-                inputs: maskMetaData.PROPERTIES,
-                outputs: maskMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtMaskComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtMaskComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtMaskComponent = ExtMaskComponent_1 = __decorate([
+    Component({
+        selector: 'mask',
+        inputs: maskMetaData.PROPERTIES,
+        outputs: maskMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtMaskComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtMaskComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtMediaComponent_1;
 class mediaMetaData {
 }
 mediaMetaData.XTYPE = 'media';
@@ -45654,51 +42641,32 @@ mediaMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtMediaComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtMediaComponent = ExtMediaComponent_1 = class ExtMediaComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, mediaMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(mediaMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtMediaComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'media',
-                inputs: mediaMetaData.PROPERTIES,
-                outputs: mediaMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtMediaComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtMediaComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtMediaComponent = ExtMediaComponent_1 = __decorate([
+    Component({
+        selector: 'media',
+        inputs: mediaMetaData.PROPERTIES,
+        outputs: mediaMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtMediaComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtMediaComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtMenucheckitemComponent_1;
 class menucheckitemMetaData {
 }
 menucheckitemMetaData.XTYPE = 'menucheckitem';
@@ -45938,51 +42906,32 @@ menucheckitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtMenucheckitemComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtMenucheckitemComponent = ExtMenucheckitemComponent_1 = class ExtMenucheckitemComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, menucheckitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(menucheckitemMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtMenucheckitemComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'menucheckitem',
-                inputs: menucheckitemMetaData.PROPERTIES,
-                outputs: menucheckitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtMenucheckitemComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtMenucheckitemComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtMenucheckitemComponent = ExtMenucheckitemComponent_1 = __decorate([
+    Component({
+        selector: 'menucheckitem',
+        inputs: menucheckitemMetaData.PROPERTIES,
+        outputs: menucheckitemMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtMenucheckitemComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtMenucheckitemComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtMenuitemComponent_1;
 class menuitemMetaData {
 }
 menuitemMetaData.XTYPE = 'menuitem';
@@ -46213,51 +43162,32 @@ menuitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtMenuitemComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtMenuitemComponent = ExtMenuitemComponent_1 = class ExtMenuitemComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, menuitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(menuitemMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtMenuitemComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'menuitem',
-                inputs: menuitemMetaData.PROPERTIES,
-                outputs: menuitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtMenuitemComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtMenuitemComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtMenuitemComponent = ExtMenuitemComponent_1 = __decorate([
+    Component({
+        selector: 'menuitem',
+        inputs: menuitemMetaData.PROPERTIES,
+        outputs: menuitemMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtMenuitemComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtMenuitemComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtMenuComponent_1;
 class menuMetaData {
 }
 menuMetaData.XTYPE = 'menu';
@@ -46570,51 +43500,32 @@ menuMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtMenuComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtMenuComponent = ExtMenuComponent_1 = class ExtMenuComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, menuMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(menuMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtMenuComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'menu',
-                inputs: menuMetaData.PROPERTIES,
-                outputs: menuMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtMenuComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtMenuComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtMenuComponent = ExtMenuComponent_1 = __decorate([
+    Component({
+        selector: 'menu',
+        inputs: menuMetaData.PROPERTIES,
+        outputs: menuMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtMenuComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtMenuComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtMenuradioitemComponent_1;
 class menuradioitemMetaData {
 }
 menuradioitemMetaData.XTYPE = 'menuradioitem';
@@ -46856,51 +43767,32 @@ menuradioitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtMenuradioitemComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtMenuradioitemComponent = ExtMenuradioitemComponent_1 = class ExtMenuradioitemComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, menuradioitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(menuradioitemMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtMenuradioitemComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'menuradioitem',
-                inputs: menuradioitemMetaData.PROPERTIES,
-                outputs: menuradioitemMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtMenuradioitemComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtMenuradioitemComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtMenuradioitemComponent = ExtMenuradioitemComponent_1 = __decorate([
+    Component({
+        selector: 'menuradioitem',
+        inputs: menuradioitemMetaData.PROPERTIES,
+        outputs: menuradioitemMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtMenuradioitemComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtMenuradioitemComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtMenuseparatorComponent_1;
 class menuseparatorMetaData {
 }
 menuseparatorMetaData.XTYPE = 'menuseparator';
@@ -47114,51 +44006,32 @@ menuseparatorMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtMenuseparatorComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtMenuseparatorComponent = ExtMenuseparatorComponent_1 = class ExtMenuseparatorComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, menuseparatorMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(menuseparatorMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtMenuseparatorComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'menuseparator',
-                inputs: menuseparatorMetaData.PROPERTIES,
-                outputs: menuseparatorMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtMenuseparatorComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtMenuseparatorComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtMenuseparatorComponent = ExtMenuseparatorComponent_1 = __decorate([
+    Component({
+        selector: 'menuseparator',
+        inputs: menuseparatorMetaData.PROPERTIES,
+        outputs: menuseparatorMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtMenuseparatorComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtMenuseparatorComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtMessageboxComponent_1;
 class messageboxMetaData {
 }
 messageboxMetaData.XTYPE = 'messagebox';
@@ -47485,51 +44358,32 @@ messageboxMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtMessageboxComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtMessageboxComponent = ExtMessageboxComponent_1 = class ExtMessageboxComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, messageboxMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(messageboxMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtMessageboxComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'messagebox',
-                inputs: messageboxMetaData.PROPERTIES,
-                outputs: messageboxMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtMessageboxComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtMessageboxComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtMessageboxComponent = ExtMessageboxComponent_1 = __decorate([
+    Component({
+        selector: 'messagebox',
+        inputs: messageboxMetaData.PROPERTIES,
+        outputs: messageboxMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtMessageboxComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtMessageboxComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtNavigationviewComponent_1;
 class navigationviewMetaData {
 }
 navigationviewMetaData.XTYPE = 'navigationview';
@@ -47789,51 +44643,32 @@ navigationviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtNavigationviewComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtNavigationviewComponent = ExtNavigationviewComponent_1 = class ExtNavigationviewComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, navigationviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(navigationviewMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtNavigationviewComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'navigationview',
-                inputs: navigationviewMetaData.PROPERTIES,
-                outputs: navigationviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtNavigationviewComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtNavigationviewComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtNavigationviewComponent = ExtNavigationviewComponent_1 = __decorate([
+    Component({
+        selector: 'navigationview',
+        inputs: navigationviewMetaData.PROPERTIES,
+        outputs: navigationviewMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtNavigationviewComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtNavigationviewComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPanelComponent_1;
 class panelMetaData {
 }
 panelMetaData.XTYPE = 'panel';
@@ -48136,51 +44971,32 @@ panelMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPanelComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPanelComponent = ExtPanelComponent_1 = class ExtPanelComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, panelMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(panelMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPanelComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'panel',
-                inputs: panelMetaData.PROPERTIES,
-                outputs: panelMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPanelComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPanelComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPanelComponent = ExtPanelComponent_1 = __decorate([
+    Component({
+        selector: 'panel',
+        inputs: panelMetaData.PROPERTIES,
+        outputs: panelMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPanelComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPanelComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtDatepanelComponent_1;
 class datepanelMetaData {
 }
 datepanelMetaData.XTYPE = 'datepanel';
@@ -48518,51 +45334,32 @@ datepanelMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtDatepanelComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtDatepanelComponent = ExtDatepanelComponent_1 = class ExtDatepanelComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, datepanelMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(datepanelMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtDatepanelComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'datepanel',
-                inputs: datepanelMetaData.PROPERTIES,
-                outputs: datepanelMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtDatepanelComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtDatepanelComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtDatepanelComponent = ExtDatepanelComponent_1 = __decorate([
+    Component({
+        selector: 'datepanel',
+        inputs: datepanelMetaData.PROPERTIES,
+        outputs: datepanelMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtDatepanelComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtDatepanelComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtDatetitleComponent_1;
 class datetitleMetaData {
 }
 datetitleMetaData.XTYPE = 'datetitle';
@@ -48784,51 +45581,32 @@ datetitleMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtDatetitleComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtDatetitleComponent = ExtDatetitleComponent_1 = class ExtDatetitleComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, datetitleMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(datetitleMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtDatetitleComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'datetitle',
-                inputs: datetitleMetaData.PROPERTIES,
-                outputs: datetitleMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtDatetitleComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtDatetitleComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtDatetitleComponent = ExtDatetitleComponent_1 = __decorate([
+    Component({
+        selector: 'datetitle',
+        inputs: datetitleMetaData.PROPERTIES,
+        outputs: datetitleMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtDatetitleComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtDatetitleComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPanelheaderComponent_1;
 class panelheaderMetaData {
 }
 panelheaderMetaData.XTYPE = 'panelheader';
@@ -49087,51 +45865,32 @@ panelheaderMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPanelheaderComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPanelheaderComponent = ExtPanelheaderComponent_1 = class ExtPanelheaderComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, panelheaderMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(panelheaderMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPanelheaderComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'panelheader',
-                inputs: panelheaderMetaData.PROPERTIES,
-                outputs: panelheaderMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPanelheaderComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPanelheaderComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPanelheaderComponent = ExtPanelheaderComponent_1 = __decorate([
+    Component({
+        selector: 'panelheader',
+        inputs: panelheaderMetaData.PROPERTIES,
+        outputs: panelheaderMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPanelheaderComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPanelheaderComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTimepanelComponent_1;
 class timepanelMetaData {
 }
 timepanelMetaData.XTYPE = 'timepanel';
@@ -49443,51 +46202,32 @@ timepanelMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTimepanelComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTimepanelComponent = ExtTimepanelComponent_1 = class ExtTimepanelComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, timepanelMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(timepanelMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTimepanelComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'timepanel',
-                inputs: timepanelMetaData.PROPERTIES,
-                outputs: timepanelMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTimepanelComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTimepanelComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTimepanelComponent = ExtTimepanelComponent_1 = __decorate([
+    Component({
+        selector: 'timepanel',
+        inputs: timepanelMetaData.PROPERTIES,
+        outputs: timepanelMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTimepanelComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTimepanelComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPaneltitleComponent_1;
 class paneltitleMetaData {
 }
 paneltitleMetaData.XTYPE = 'paneltitle';
@@ -49709,51 +46449,32 @@ paneltitleMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPaneltitleComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPaneltitleComponent = ExtPaneltitleComponent_1 = class ExtPaneltitleComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, paneltitleMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(paneltitleMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPaneltitleComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'paneltitle',
-                inputs: paneltitleMetaData.PROPERTIES,
-                outputs: paneltitleMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPaneltitleComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPaneltitleComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPaneltitleComponent = ExtPaneltitleComponent_1 = __decorate([
+    Component({
+        selector: 'paneltitle',
+        inputs: paneltitleMetaData.PROPERTIES,
+        outputs: paneltitleMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPaneltitleComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPaneltitleComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtYearpickerComponent_1;
 class yearpickerMetaData {
 }
 yearpickerMetaData.XTYPE = 'yearpicker';
@@ -50129,51 +46850,32 @@ yearpickerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtYearpickerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtYearpickerComponent = ExtYearpickerComponent_1 = class ExtYearpickerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, yearpickerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(yearpickerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtYearpickerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'yearpicker',
-                inputs: yearpickerMetaData.PROPERTIES,
-                outputs: yearpickerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtYearpickerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtYearpickerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtYearpickerComponent = ExtYearpickerComponent_1 = __decorate([
+    Component({
+        selector: 'yearpicker',
+        inputs: yearpickerMetaData.PROPERTIES,
+        outputs: yearpickerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtYearpickerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtYearpickerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtDatepickerComponent_1;
 class datepickerMetaData {
 }
 datepickerMetaData.XTYPE = 'datepicker';
@@ -50501,51 +47203,32 @@ datepickerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtDatepickerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtDatepickerComponent = ExtDatepickerComponent_1 = class ExtDatepickerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, datepickerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(datepickerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtDatepickerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'datepicker',
-                inputs: datepickerMetaData.PROPERTIES,
-                outputs: datepickerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtDatepickerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtDatepickerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtDatepickerComponent = ExtDatepickerComponent_1 = __decorate([
+    Component({
+        selector: 'datepicker',
+        inputs: datepickerMetaData.PROPERTIES,
+        outputs: datepickerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtDatepickerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtDatepickerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPickerComponent_1;
 class pickerMetaData {
 }
 pickerMetaData.XTYPE = 'picker';
@@ -50867,51 +47550,32 @@ pickerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPickerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPickerComponent = ExtPickerComponent_1 = class ExtPickerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pickerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(pickerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPickerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'picker',
-                inputs: pickerMetaData.PROPERTIES,
-                outputs: pickerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPickerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPickerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPickerComponent = ExtPickerComponent_1 = __decorate([
+    Component({
+        selector: 'picker',
+        inputs: pickerMetaData.PROPERTIES,
+        outputs: pickerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPickerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPickerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSelectpickerComponent_1;
 class selectpickerMetaData {
 }
 selectpickerMetaData.XTYPE = 'selectpicker';
@@ -51233,51 +47897,32 @@ selectpickerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSelectpickerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSelectpickerComponent = ExtSelectpickerComponent_1 = class ExtSelectpickerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, selectpickerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(selectpickerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSelectpickerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'selectpicker',
-                inputs: selectpickerMetaData.PROPERTIES,
-                outputs: selectpickerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSelectpickerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSelectpickerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSelectpickerComponent = ExtSelectpickerComponent_1 = __decorate([
+    Component({
+        selector: 'selectpicker',
+        inputs: selectpickerMetaData.PROPERTIES,
+        outputs: selectpickerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSelectpickerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSelectpickerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPickerslotComponent_1;
 class pickerslotMetaData {
 }
 pickerslotMetaData.XTYPE = 'pickerslot';
@@ -51628,51 +48273,32 @@ pickerslotMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPickerslotComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPickerslotComponent = ExtPickerslotComponent_1 = class ExtPickerslotComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pickerslotMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(pickerslotMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPickerslotComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pickerslot',
-                inputs: pickerslotMetaData.PROPERTIES,
-                outputs: pickerslotMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPickerslotComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPickerslotComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPickerslotComponent = ExtPickerslotComponent_1 = __decorate([
+    Component({
+        selector: 'pickerslot',
+        inputs: pickerslotMetaData.PROPERTIES,
+        outputs: pickerslotMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPickerslotComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPickerslotComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTabletpickerComponent_1;
 class tabletpickerMetaData {
 }
 tabletpickerMetaData.XTYPE = 'tabletpicker';
@@ -51975,51 +48601,32 @@ tabletpickerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTabletpickerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTabletpickerComponent = ExtTabletpickerComponent_1 = class ExtTabletpickerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, tabletpickerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(tabletpickerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTabletpickerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'tabletpicker',
-                inputs: tabletpickerMetaData.PROPERTIES,
-                outputs: tabletpickerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTabletpickerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTabletpickerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTabletpickerComponent = ExtTabletpickerComponent_1 = __decorate([
+    Component({
+        selector: 'tabletpicker',
+        inputs: tabletpickerMetaData.PROPERTIES,
+        outputs: tabletpickerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTabletpickerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTabletpickerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPivotgridcellComponent_1;
 class pivotgridcellMetaData {
 }
 pivotgridcellMetaData.XTYPE = 'pivotgridcell';
@@ -52132,51 +48739,32 @@ pivotgridcellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPivotgridcellComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPivotgridcellComponent = ExtPivotgridcellComponent_1 = class ExtPivotgridcellComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotgridcellMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(pivotgridcellMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPivotgridcellComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pivotgridcell',
-                inputs: pivotgridcellMetaData.PROPERTIES,
-                outputs: pivotgridcellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPivotgridcellComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPivotgridcellComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPivotgridcellComponent = ExtPivotgridcellComponent_1 = __decorate([
+    Component({
+        selector: 'pivotgridcell',
+        inputs: pivotgridcellMetaData.PROPERTIES,
+        outputs: pivotgridcellMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotgridcellComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPivotgridcellComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPivotgridgroupcellComponent_1;
 class pivotgridgroupcellMetaData {
 }
 pivotgridgroupcellMetaData.XTYPE = 'pivotgridgroupcell';
@@ -52289,51 +48877,32 @@ pivotgridgroupcellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPivotgridgroupcellComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPivotgridgroupcellComponent = ExtPivotgridgroupcellComponent_1 = class ExtPivotgridgroupcellComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotgridgroupcellMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(pivotgridgroupcellMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPivotgridgroupcellComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pivotgridgroupcell',
-                inputs: pivotgridgroupcellMetaData.PROPERTIES,
-                outputs: pivotgridgroupcellMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPivotgridgroupcellComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPivotgridgroupcellComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPivotgridgroupcellComponent = ExtPivotgridgroupcellComponent_1 = __decorate([
+    Component({
+        selector: 'pivotgridgroupcell',
+        inputs: pivotgridgroupcellMetaData.PROPERTIES,
+        outputs: pivotgridgroupcellMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotgridgroupcellComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPivotgridgroupcellComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPivotd3containerComponent_1;
 class pivotd3containerMetaData {
 }
 pivotd3containerMetaData.XTYPE = 'pivotd3container';
@@ -52353,51 +48922,32 @@ pivotd3containerMetaData.EVENTS = [
 pivotd3containerMetaData.EVENTNAMES = [
     'ready'
 ];
-class ExtPivotd3containerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPivotd3containerComponent = ExtPivotd3containerComponent_1 = class ExtPivotd3containerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotd3containerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(pivotd3containerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPivotd3containerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pivotd3container',
-                inputs: pivotd3containerMetaData.PROPERTIES,
-                outputs: pivotd3containerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPivotd3containerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPivotd3containerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPivotd3containerComponent = ExtPivotd3containerComponent_1 = __decorate([
+    Component({
+        selector: 'pivotd3container',
+        inputs: pivotd3containerMetaData.PROPERTIES,
+        outputs: pivotd3containerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotd3containerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPivotd3containerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPivotheatmapComponent_1;
 class pivotheatmapMetaData {
 }
 pivotheatmapMetaData.XTYPE = 'pivotheatmap';
@@ -52629,51 +49179,32 @@ pivotheatmapMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPivotheatmapComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPivotheatmapComponent = ExtPivotheatmapComponent_1 = class ExtPivotheatmapComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotheatmapMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(pivotheatmapMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPivotheatmapComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pivotheatmap',
-                inputs: pivotheatmapMetaData.PROPERTIES,
-                outputs: pivotheatmapMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPivotheatmapComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPivotheatmapComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPivotheatmapComponent = ExtPivotheatmapComponent_1 = __decorate([
+    Component({
+        selector: 'pivotheatmap',
+        inputs: pivotheatmapMetaData.PROPERTIES,
+        outputs: pivotheatmapMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotheatmapComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPivotheatmapComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPivottreemapComponent_1;
 class pivottreemapMetaData {
 }
 pivottreemapMetaData.XTYPE = 'pivottreemap';
@@ -52924,51 +49455,32 @@ pivottreemapMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPivottreemapComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPivottreemapComponent = ExtPivottreemapComponent_1 = class ExtPivottreemapComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivottreemapMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(pivottreemapMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPivottreemapComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pivottreemap',
-                inputs: pivottreemapMetaData.PROPERTIES,
-                outputs: pivottreemapMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPivottreemapComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPivottreemapComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPivottreemapComponent = ExtPivottreemapComponent_1 = __decorate([
+    Component({
+        selector: 'pivottreemap',
+        inputs: pivottreemapMetaData.PROPERTIES,
+        outputs: pivottreemapMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivottreemapComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPivottreemapComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPivotgridComponent_1;
 class pivotgridMetaData {
 }
 pivotgridMetaData.XTYPE = 'pivotgrid';
@@ -53454,51 +49966,32 @@ pivotgridMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPivotgridComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPivotgridComponent = ExtPivotgridComponent_1 = class ExtPivotgridComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotgridMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(pivotgridMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPivotgridComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pivotgrid',
-                inputs: pivotgridMetaData.PROPERTIES,
-                outputs: pivotgridMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPivotgridComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPivotgridComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPivotgridComponent = ExtPivotgridComponent_1 = __decorate([
+    Component({
+        selector: 'pivotgrid',
+        inputs: pivotgridMetaData.PROPERTIES,
+        outputs: pivotgridMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotgridComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPivotgridComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPivotconfigfieldComponent_1;
 class pivotconfigfieldMetaData {
 }
 pivotconfigfieldMetaData.XTYPE = 'pivotconfigfield';
@@ -53756,51 +50249,32 @@ pivotconfigfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPivotconfigfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPivotconfigfieldComponent = ExtPivotconfigfieldComponent_1 = class ExtPivotconfigfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotconfigfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(pivotconfigfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPivotconfigfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pivotconfigfield',
-                inputs: pivotconfigfieldMetaData.PROPERTIES,
-                outputs: pivotconfigfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPivotconfigfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPivotconfigfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPivotconfigfieldComponent = ExtPivotconfigfieldComponent_1 = __decorate([
+    Component({
+        selector: 'pivotconfigfield',
+        inputs: pivotconfigfieldMetaData.PROPERTIES,
+        outputs: pivotconfigfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotconfigfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPivotconfigfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPivotconfigcontainerComponent_1;
 class pivotconfigcontainerMetaData {
 }
 pivotconfigcontainerMetaData.XTYPE = 'pivotconfigcontainer';
@@ -54104,51 +50578,32 @@ pivotconfigcontainerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPivotconfigcontainerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPivotconfigcontainerComponent = ExtPivotconfigcontainerComponent_1 = class ExtPivotconfigcontainerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotconfigcontainerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(pivotconfigcontainerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPivotconfigcontainerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pivotconfigcontainer',
-                inputs: pivotconfigcontainerMetaData.PROPERTIES,
-                outputs: pivotconfigcontainerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPivotconfigcontainerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPivotconfigcontainerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPivotconfigcontainerComponent = ExtPivotconfigcontainerComponent_1 = __decorate([
+    Component({
+        selector: 'pivotconfigcontainer',
+        inputs: pivotconfigcontainerMetaData.PROPERTIES,
+        outputs: pivotconfigcontainerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotconfigcontainerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPivotconfigcontainerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPivotconfigformComponent_1;
 class pivotconfigformMetaData {
 }
 pivotconfigformMetaData.XTYPE = 'pivotconfigform';
@@ -54472,51 +50927,32 @@ pivotconfigformMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPivotconfigformComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPivotconfigformComponent = ExtPivotconfigformComponent_1 = class ExtPivotconfigformComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotconfigformMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(pivotconfigformMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPivotconfigformComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pivotconfigform',
-                inputs: pivotconfigformMetaData.PROPERTIES,
-                outputs: pivotconfigformMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPivotconfigformComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPivotconfigformComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPivotconfigformComponent = ExtPivotconfigformComponent_1 = __decorate([
+    Component({
+        selector: 'pivotconfigform',
+        inputs: pivotconfigformMetaData.PROPERTIES,
+        outputs: pivotconfigformMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotconfigformComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPivotconfigformComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPivotconfigpanelComponent_1;
 class pivotconfigpanelMetaData {
 }
 pivotconfigpanelMetaData.XTYPE = 'pivotconfigpanel';
@@ -54827,51 +51263,32 @@ pivotconfigpanelMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPivotconfigpanelComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPivotconfigpanelComponent = ExtPivotconfigpanelComponent_1 = class ExtPivotconfigpanelComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotconfigpanelMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(pivotconfigpanelMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPivotconfigpanelComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pivotconfigpanel',
-                inputs: pivotconfigpanelMetaData.PROPERTIES,
-                outputs: pivotconfigpanelMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPivotconfigpanelComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPivotconfigpanelComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPivotconfigpanelComponent = ExtPivotconfigpanelComponent_1 = __decorate([
+    Component({
+        selector: 'pivotconfigpanel',
+        inputs: pivotconfigpanelMetaData.PROPERTIES,
+        outputs: pivotconfigpanelMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotconfigpanelComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPivotconfigpanelComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPivotsettingsComponent_1;
 class pivotsettingsMetaData {
 }
 pivotsettingsMetaData.XTYPE = 'pivotsettings';
@@ -55195,51 +51612,32 @@ pivotsettingsMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPivotsettingsComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPivotsettingsComponent = ExtPivotsettingsComponent_1 = class ExtPivotsettingsComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotsettingsMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(pivotsettingsMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPivotsettingsComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pivotsettings',
-                inputs: pivotsettingsMetaData.PROPERTIES,
-                outputs: pivotsettingsMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPivotsettingsComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPivotsettingsComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPivotsettingsComponent = ExtPivotsettingsComponent_1 = __decorate([
+    Component({
+        selector: 'pivotsettings',
+        inputs: pivotsettingsMetaData.PROPERTIES,
+        outputs: pivotsettingsMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotsettingsComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPivotsettingsComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPivotrangeeditorComponent_1;
 class pivotrangeeditorMetaData {
 }
 pivotrangeeditorMetaData.XTYPE = 'pivotrangeeditor';
@@ -55563,51 +51961,32 @@ pivotrangeeditorMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPivotrangeeditorComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPivotrangeeditorComponent = ExtPivotrangeeditorComponent_1 = class ExtPivotrangeeditorComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotrangeeditorMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(pivotrangeeditorMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPivotrangeeditorComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pivotrangeeditor',
-                inputs: pivotrangeeditorMetaData.PROPERTIES,
-                outputs: pivotrangeeditorMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPivotrangeeditorComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPivotrangeeditorComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPivotrangeeditorComponent = ExtPivotrangeeditorComponent_1 = __decorate([
+    Component({
+        selector: 'pivotrangeeditor',
+        inputs: pivotrangeeditorMetaData.PROPERTIES,
+        outputs: pivotrangeeditorMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotrangeeditorComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPivotrangeeditorComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPivotgridrowComponent_1;
 class pivotgridrowMetaData {
 }
 pivotgridrowMetaData.XTYPE = 'pivotgridrow';
@@ -55827,51 +52206,32 @@ pivotgridrowMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPivotgridrowComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPivotgridrowComponent = ExtPivotgridrowComponent_1 = class ExtPivotgridrowComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotgridrowMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(pivotgridrowMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPivotgridrowComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pivotgridrow',
-                inputs: pivotgridrowMetaData.PROPERTIES,
-                outputs: pivotgridrowMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPivotgridrowComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPivotgridrowComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPivotgridrowComponent = ExtPivotgridrowComponent_1 = __decorate([
+    Component({
+        selector: 'pivotgridrow',
+        inputs: pivotgridrowMetaData.PROPERTIES,
+        outputs: pivotgridrowMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotgridrowComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPivotgridrowComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtProgressComponent_1;
 class progressMetaData {
 }
 progressMetaData.XTYPE = 'progress';
@@ -56089,51 +52449,32 @@ progressMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtProgressComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtProgressComponent = ExtProgressComponent_1 = class ExtProgressComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, progressMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(progressMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtProgressComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'progress',
-                inputs: progressMetaData.PROPERTIES,
-                outputs: progressMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtProgressComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtProgressComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtProgressComponent = ExtProgressComponent_1 = __decorate([
+    Component({
+        selector: 'progress',
+        inputs: progressMetaData.PROPERTIES,
+        outputs: progressMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtProgressComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtProgressComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtProgressbarwidgetComponent_1;
 class progressbarwidgetMetaData {
 }
 progressbarwidgetMetaData.XTYPE = 'progressbarwidget';
@@ -56351,51 +52692,32 @@ progressbarwidgetMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtProgressbarwidgetComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtProgressbarwidgetComponent = ExtProgressbarwidgetComponent_1 = class ExtProgressbarwidgetComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, progressbarwidgetMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(progressbarwidgetMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtProgressbarwidgetComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'progressbarwidget',
-                inputs: progressbarwidgetMetaData.PROPERTIES,
-                outputs: progressbarwidgetMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtProgressbarwidgetComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtProgressbarwidgetComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtProgressbarwidgetComponent = ExtProgressbarwidgetComponent_1 = __decorate([
+    Component({
+        selector: 'progressbarwidget',
+        inputs: progressbarwidgetMetaData.PROPERTIES,
+        outputs: progressbarwidgetMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtProgressbarwidgetComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtProgressbarwidgetComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSegmentedbuttonComponent_1;
 class segmentedbuttonMetaData {
 }
 segmentedbuttonMetaData.XTYPE = 'segmentedbutton';
@@ -56658,51 +52980,32 @@ segmentedbuttonMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSegmentedbuttonComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSegmentedbuttonComponent = ExtSegmentedbuttonComponent_1 = class ExtSegmentedbuttonComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, segmentedbuttonMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(segmentedbuttonMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSegmentedbuttonComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'segmentedbutton',
-                inputs: segmentedbuttonMetaData.PROPERTIES,
-                outputs: segmentedbuttonMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSegmentedbuttonComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSegmentedbuttonComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSegmentedbuttonComponent = ExtSegmentedbuttonComponent_1 = __decorate([
+    Component({
+        selector: 'segmentedbutton',
+        inputs: segmentedbuttonMetaData.PROPERTIES,
+        outputs: segmentedbuttonMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSegmentedbuttonComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSegmentedbuttonComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSheetComponent_1;
 class sheetMetaData {
 }
 sheetMetaData.XTYPE = 'sheet';
@@ -57012,51 +53315,32 @@ sheetMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSheetComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSheetComponent = ExtSheetComponent_1 = class ExtSheetComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sheetMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(sheetMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSheetComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'sheet',
-                inputs: sheetMetaData.PROPERTIES,
-                outputs: sheetMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSheetComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSheetComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSheetComponent = ExtSheetComponent_1 = __decorate([
+    Component({
+        selector: 'sheet',
+        inputs: sheetMetaData.PROPERTIES,
+        outputs: sheetMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSheetComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSheetComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSliderComponent_1;
 class sliderMetaData {
 }
 sliderMetaData.XTYPE = 'slider';
@@ -57288,51 +53572,32 @@ sliderMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSliderComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSliderComponent = ExtSliderComponent_1 = class ExtSliderComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sliderMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(sliderMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSliderComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'slider',
-                inputs: sliderMetaData.PROPERTIES,
-                outputs: sliderMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSliderComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSliderComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSliderComponent = ExtSliderComponent_1 = __decorate([
+    Component({
+        selector: 'slider',
+        inputs: sliderMetaData.PROPERTIES,
+        outputs: sliderMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSliderComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSliderComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtThumbComponent_1;
 class thumbMetaData {
 }
 thumbMetaData.XTYPE = 'thumb';
@@ -57548,51 +53813,32 @@ thumbMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtThumbComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtThumbComponent = ExtThumbComponent_1 = class ExtThumbComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, thumbMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(thumbMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtThumbComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'thumb',
-                inputs: thumbMetaData.PROPERTIES,
-                outputs: thumbMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtThumbComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtThumbComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtThumbComponent = ExtThumbComponent_1 = __decorate([
+    Component({
+        selector: 'thumb',
+        inputs: thumbMetaData.PROPERTIES,
+        outputs: thumbMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtThumbComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtThumbComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTogglesliderComponent_1;
 class togglesliderMetaData {
 }
 togglesliderMetaData.XTYPE = 'toggleslider';
@@ -57824,51 +54070,32 @@ togglesliderMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTogglesliderComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTogglesliderComponent = ExtTogglesliderComponent_1 = class ExtTogglesliderComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, togglesliderMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(togglesliderMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTogglesliderComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'toggleslider',
-                inputs: togglesliderMetaData.PROPERTIES,
-                outputs: togglesliderMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTogglesliderComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTogglesliderComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTogglesliderComponent = ExtTogglesliderComponent_1 = __decorate([
+    Component({
+        selector: 'toggleslider',
+        inputs: togglesliderMetaData.PROPERTIES,
+        outputs: togglesliderMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTogglesliderComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTogglesliderComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSpacerComponent_1;
 class spacerMetaData {
 }
 spacerMetaData.XTYPE = 'spacer';
@@ -58082,51 +54309,32 @@ spacerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSpacerComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSpacerComponent = ExtSpacerComponent_1 = class ExtSpacerComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, spacerMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(spacerMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSpacerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'spacer',
-                inputs: spacerMetaData.PROPERTIES,
-                outputs: spacerMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSpacerComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSpacerComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSpacerComponent = ExtSpacerComponent_1 = __decorate([
+    Component({
+        selector: 'spacer',
+        inputs: spacerMetaData.PROPERTIES,
+        outputs: spacerMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSpacerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSpacerComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSparklinebarComponent_1;
 class sparklinebarMetaData {
 }
 sparklinebarMetaData.XTYPE = 'sparklinebar';
@@ -58361,51 +54569,32 @@ sparklinebarMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSparklinebarComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSparklinebarComponent = ExtSparklinebarComponent_1 = class ExtSparklinebarComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sparklinebarMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(sparklinebarMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSparklinebarComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'sparklinebar',
-                inputs: sparklinebarMetaData.PROPERTIES,
-                outputs: sparklinebarMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSparklinebarComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSparklinebarComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSparklinebarComponent = ExtSparklinebarComponent_1 = __decorate([
+    Component({
+        selector: 'sparklinebar',
+        inputs: sparklinebarMetaData.PROPERTIES,
+        outputs: sparklinebarMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinebarComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSparklinebarComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSparklineComponent_1;
 class sparklineMetaData {
 }
 sparklineMetaData.XTYPE = 'sparkline';
@@ -58628,51 +54817,32 @@ sparklineMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSparklineComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSparklineComponent = ExtSparklineComponent_1 = class ExtSparklineComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sparklineMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(sparklineMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSparklineComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'sparkline',
-                inputs: sparklineMetaData.PROPERTIES,
-                outputs: sparklineMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSparklineComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSparklineComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSparklineComponent = ExtSparklineComponent_1 = __decorate([
+    Component({
+        selector: 'sparkline',
+        inputs: sparklineMetaData.PROPERTIES,
+        outputs: sparklineMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklineComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSparklineComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSparklineboxComponent_1;
 class sparklineboxMetaData {
 }
 sparklineboxMetaData.XTYPE = 'sparklinebox';
@@ -58909,51 +55079,32 @@ sparklineboxMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSparklineboxComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSparklineboxComponent = ExtSparklineboxComponent_1 = class ExtSparklineboxComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sparklineboxMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(sparklineboxMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSparklineboxComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'sparklinebox',
-                inputs: sparklineboxMetaData.PROPERTIES,
-                outputs: sparklineboxMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSparklineboxComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSparklineboxComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSparklineboxComponent = ExtSparklineboxComponent_1 = __decorate([
+    Component({
+        selector: 'sparklinebox',
+        inputs: sparklineboxMetaData.PROPERTIES,
+        outputs: sparklineboxMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklineboxComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSparklineboxComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSparklinebulletComponent_1;
 class sparklinebulletMetaData {
 }
 sparklinebulletMetaData.XTYPE = 'sparklinebullet';
@@ -59181,51 +55332,32 @@ sparklinebulletMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSparklinebulletComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSparklinebulletComponent = ExtSparklinebulletComponent_1 = class ExtSparklinebulletComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sparklinebulletMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(sparklinebulletMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSparklinebulletComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'sparklinebullet',
-                inputs: sparklinebulletMetaData.PROPERTIES,
-                outputs: sparklinebulletMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSparklinebulletComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSparklinebulletComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSparklinebulletComponent = ExtSparklinebulletComponent_1 = __decorate([
+    Component({
+        selector: 'sparklinebullet',
+        inputs: sparklinebulletMetaData.PROPERTIES,
+        outputs: sparklinebulletMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinebulletComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSparklinebulletComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSparklinediscreteComponent_1;
 class sparklinediscreteMetaData {
 }
 sparklinediscreteMetaData.XTYPE = 'sparklinediscrete';
@@ -59454,51 +55586,32 @@ sparklinediscreteMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSparklinediscreteComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSparklinediscreteComponent = ExtSparklinediscreteComponent_1 = class ExtSparklinediscreteComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sparklinediscreteMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(sparklinediscreteMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSparklinediscreteComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'sparklinediscrete',
-                inputs: sparklinediscreteMetaData.PROPERTIES,
-                outputs: sparklinediscreteMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSparklinediscreteComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSparklinediscreteComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSparklinediscreteComponent = ExtSparklinediscreteComponent_1 = __decorate([
+    Component({
+        selector: 'sparklinediscrete',
+        inputs: sparklinediscreteMetaData.PROPERTIES,
+        outputs: sparklinediscreteMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinediscreteComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSparklinediscreteComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSparklinelineComponent_1;
 class sparklinelineMetaData {
 }
 sparklinelineMetaData.XTYPE = 'sparklineline';
@@ -59738,51 +55851,32 @@ sparklinelineMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSparklinelineComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSparklinelineComponent = ExtSparklinelineComponent_1 = class ExtSparklinelineComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sparklinelineMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(sparklinelineMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSparklinelineComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'sparklineline',
-                inputs: sparklinelineMetaData.PROPERTIES,
-                outputs: sparklinelineMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSparklinelineComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSparklinelineComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSparklinelineComponent = ExtSparklinelineComponent_1 = __decorate([
+    Component({
+        selector: 'sparklineline',
+        inputs: sparklinelineMetaData.PROPERTIES,
+        outputs: sparklinelineMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinelineComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSparklinelineComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSparklinepieComponent_1;
 class sparklinepieMetaData {
 }
 sparklinepieMetaData.XTYPE = 'sparklinepie';
@@ -60009,51 +56103,32 @@ sparklinepieMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSparklinepieComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSparklinepieComponent = ExtSparklinepieComponent_1 = class ExtSparklinepieComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sparklinepieMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(sparklinepieMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSparklinepieComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'sparklinepie',
-                inputs: sparklinepieMetaData.PROPERTIES,
-                outputs: sparklinepieMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSparklinepieComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSparklinepieComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSparklinepieComponent = ExtSparklinepieComponent_1 = __decorate([
+    Component({
+        selector: 'sparklinepie',
+        inputs: sparklinepieMetaData.PROPERTIES,
+        outputs: sparklinepieMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinepieComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSparklinepieComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSparklinetristateComponent_1;
 class sparklinetristateMetaData {
 }
 sparklinetristateMetaData.XTYPE = 'sparklinetristate';
@@ -60282,51 +56357,32 @@ sparklinetristateMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSparklinetristateComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSparklinetristateComponent = ExtSparklinetristateComponent_1 = class ExtSparklinetristateComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sparklinetristateMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(sparklinetristateMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSparklinetristateComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'sparklinetristate',
-                inputs: sparklinetristateMetaData.PROPERTIES,
-                outputs: sparklinetristateMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSparklinetristateComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSparklinetristateComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSparklinetristateComponent = ExtSparklinetristateComponent_1 = __decorate([
+    Component({
+        selector: 'sparklinetristate',
+        inputs: sparklinetristateMetaData.PROPERTIES,
+        outputs: sparklinetristateMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinetristateComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSparklinetristateComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtSplitbuttonComponent_1;
 class splitbuttonMetaData {
 }
 splitbuttonMetaData.XTYPE = 'splitbutton';
@@ -60573,51 +56629,32 @@ splitbuttonMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtSplitbuttonComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtSplitbuttonComponent = ExtSplitbuttonComponent_1 = class ExtSplitbuttonComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, splitbuttonMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(splitbuttonMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtSplitbuttonComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'splitbutton',
-                inputs: splitbuttonMetaData.PROPERTIES,
-                outputs: splitbuttonMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtSplitbuttonComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtSplitbuttonComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtSplitbuttonComponent = ExtSplitbuttonComponent_1 = __decorate([
+    Component({
+        selector: 'splitbutton',
+        inputs: splitbuttonMetaData.PROPERTIES,
+        outputs: splitbuttonMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtSplitbuttonComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtSplitbuttonComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTabbarComponent_1;
 class tabbarMetaData {
 }
 tabbarMetaData.XTYPE = 'tabbar';
@@ -60879,51 +56916,32 @@ tabbarMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTabbarComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTabbarComponent = ExtTabbarComponent_1 = class ExtTabbarComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, tabbarMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(tabbarMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTabbarComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'tabbar',
-                inputs: tabbarMetaData.PROPERTIES,
-                outputs: tabbarMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTabbarComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTabbarComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTabbarComponent = ExtTabbarComponent_1 = __decorate([
+    Component({
+        selector: 'tabbar',
+        inputs: tabbarMetaData.PROPERTIES,
+        outputs: tabbarMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTabbarComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTabbarComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTabpanelComponent_1;
 class tabpanelMetaData {
 }
 tabpanelMetaData.XTYPE = 'tabpanel';
@@ -61177,51 +57195,32 @@ tabpanelMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTabpanelComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTabpanelComponent = ExtTabpanelComponent_1 = class ExtTabpanelComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, tabpanelMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(tabpanelMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTabpanelComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'tabpanel',
-                inputs: tabpanelMetaData.PROPERTIES,
-                outputs: tabpanelMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTabpanelComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTabpanelComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTabpanelComponent = ExtTabpanelComponent_1 = __decorate([
+    Component({
+        selector: 'tabpanel',
+        inputs: tabpanelMetaData.PROPERTIES,
+        outputs: tabpanelMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTabpanelComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTabpanelComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTabComponent_1;
 class tabMetaData {
 }
 tabMetaData.XTYPE = 'tab';
@@ -61472,51 +57471,32 @@ tabMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTabComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTabComponent = ExtTabComponent_1 = class ExtTabComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, tabMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(tabMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTabComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'tab',
-                inputs: tabMetaData.PROPERTIES,
-                outputs: tabMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTabComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTabComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTabComponent = ExtTabComponent_1 = __decorate([
+    Component({
+        selector: 'tab',
+        inputs: tabMetaData.PROPERTIES,
+        outputs: tabMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTabComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTabComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTooltipComponent_1;
 class tooltipMetaData {
 }
 tooltipMetaData.XTYPE = 'tooltip';
@@ -61833,51 +57813,32 @@ tooltipMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTooltipComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTooltipComponent = ExtTooltipComponent_1 = class ExtTooltipComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, tooltipMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(tooltipMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTooltipComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'tooltip',
-                inputs: tooltipMetaData.PROPERTIES,
-                outputs: tooltipMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTooltipComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTooltipComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTooltipComponent = ExtTooltipComponent_1 = __decorate([
+    Component({
+        selector: 'tooltip',
+        inputs: tooltipMetaData.PROPERTIES,
+        outputs: tooltipMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTooltipComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTooltipComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTitleComponent_1;
 class titleMetaData {
 }
 titleMetaData.XTYPE = 'title';
@@ -62092,51 +58053,32 @@ titleMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTitleComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTitleComponent = ExtTitleComponent_1 = class ExtTitleComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, titleMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(titleMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTitleComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'title',
-                inputs: titleMetaData.PROPERTIES,
-                outputs: titleMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTitleComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTitleComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTitleComponent = ExtTitleComponent_1 = __decorate([
+    Component({
+        selector: 'title',
+        inputs: titleMetaData.PROPERTIES,
+        outputs: titleMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTitleComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTitleComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtTitlebarComponent_1;
 class titlebarMetaData {
 }
 titlebarMetaData.XTYPE = 'titlebar';
@@ -62391,51 +58333,32 @@ titlebarMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtTitlebarComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtTitlebarComponent = ExtTitlebarComponent_1 = class ExtTitlebarComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, titlebarMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(titlebarMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtTitlebarComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'titlebar',
-                inputs: titlebarMetaData.PROPERTIES,
-                outputs: titlebarMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtTitlebarComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtTitlebarComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtTitlebarComponent = ExtTitlebarComponent_1 = __decorate([
+    Component({
+        selector: 'titlebar',
+        inputs: titlebarMetaData.PROPERTIES,
+        outputs: titlebarMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtTitlebarComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtTitlebarComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtToolComponent_1;
 class toolMetaData {
 }
 toolMetaData.XTYPE = 'tool';
@@ -62658,51 +58581,32 @@ toolMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtToolComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtToolComponent = ExtToolComponent_1 = class ExtToolComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, toolMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(toolMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtToolComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'tool',
-                inputs: toolMetaData.PROPERTIES,
-                outputs: toolMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtToolComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtToolComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtToolComponent = ExtToolComponent_1 = __decorate([
+    Component({
+        selector: 'tool',
+        inputs: toolMetaData.PROPERTIES,
+        outputs: toolMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtToolComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtToolComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtPaneltoolComponent_1;
 class paneltoolMetaData {
 }
 paneltoolMetaData.XTYPE = 'paneltool';
@@ -62925,51 +58829,32 @@ paneltoolMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtPaneltoolComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtPaneltoolComponent = ExtPaneltoolComponent_1 = class ExtPaneltoolComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, paneltoolMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(paneltoolMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtPaneltoolComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'paneltool',
-                inputs: paneltoolMetaData.PROPERTIES,
-                outputs: paneltoolMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtPaneltoolComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtPaneltoolComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtPaneltoolComponent = ExtPaneltoolComponent_1 = __decorate([
+    Component({
+        selector: 'paneltool',
+        inputs: paneltoolMetaData.PROPERTIES,
+        outputs: paneltoolMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtPaneltoolComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtPaneltoolComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtToolbarComponent_1;
 class toolbarMetaData {
 }
 toolbarMetaData.XTYPE = 'toolbar';
@@ -63222,51 +59107,32 @@ toolbarMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtToolbarComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtToolbarComponent = ExtToolbarComponent_1 = class ExtToolbarComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, toolbarMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(toolbarMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtToolbarComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'toolbar',
-                inputs: toolbarMetaData.PROPERTIES,
-                outputs: toolbarMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtToolbarComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtToolbarComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtToolbarComponent = ExtToolbarComponent_1 = __decorate([
+    Component({
+        selector: 'toolbar',
+        inputs: toolbarMetaData.PROPERTIES,
+        outputs: toolbarMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtToolbarComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtToolbarComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtColorbuttonComponent_1;
 class colorbuttonMetaData {
 }
 colorbuttonMetaData.XTYPE = 'colorbutton';
@@ -63487,51 +59353,32 @@ colorbuttonMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtColorbuttonComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtColorbuttonComponent = ExtColorbuttonComponent_1 = class ExtColorbuttonComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, colorbuttonMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(colorbuttonMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtColorbuttonComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'colorbutton',
-                inputs: colorbuttonMetaData.PROPERTIES,
-                outputs: colorbuttonMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtColorbuttonComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtColorbuttonComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtColorbuttonComponent = ExtColorbuttonComponent_1 = __decorate([
+    Component({
+        selector: 'colorbutton',
+        inputs: colorbuttonMetaData.PROPERTIES,
+        outputs: colorbuttonMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtColorbuttonComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtColorbuttonComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtColorpickercolorpreviewComponent_1;
 class colorpickercolorpreviewMetaData {
 }
 colorpickercolorpreviewMetaData.XTYPE = 'colorpickercolorpreview';
@@ -63745,51 +59592,32 @@ colorpickercolorpreviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtColorpickercolorpreviewComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtColorpickercolorpreviewComponent = ExtColorpickercolorpreviewComponent_1 = class ExtColorpickercolorpreviewComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, colorpickercolorpreviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(colorpickercolorpreviewMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtColorpickercolorpreviewComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'colorpickercolorpreview',
-                inputs: colorpickercolorpreviewMetaData.PROPERTIES,
-                outputs: colorpickercolorpreviewMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtColorpickercolorpreviewComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtColorpickercolorpreviewComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtColorpickercolorpreviewComponent = ExtColorpickercolorpreviewComponent_1 = __decorate([
+    Component({
+        selector: 'colorpickercolorpreview',
+        inputs: colorpickercolorpreviewMetaData.PROPERTIES,
+        outputs: colorpickercolorpreviewMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtColorpickercolorpreviewComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtColorpickercolorpreviewComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtColorfieldComponent_1;
 class colorfieldMetaData {
 }
 colorfieldMetaData.XTYPE = 'colorfield';
@@ -64082,51 +59910,32 @@ colorfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtColorfieldComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtColorfieldComponent = ExtColorfieldComponent_1 = class ExtColorfieldComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, colorfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(colorfieldMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtColorfieldComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'colorfield',
-                inputs: colorfieldMetaData.PROPERTIES,
-                outputs: colorfieldMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtColorfieldComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtColorfieldComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtColorfieldComponent = ExtColorfieldComponent_1 = __decorate([
+    Component({
+        selector: 'colorfield',
+        inputs: colorfieldMetaData.PROPERTIES,
+        outputs: colorfieldMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtColorfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtColorfieldComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtColorselectorComponent_1;
 class colorselectorMetaData {
 }
 colorselectorMetaData.XTYPE = 'colorselector';
@@ -64159,51 +59968,32 @@ colorselectorMetaData.EVENTNAMES = [
     'ok',
     'ready'
 ];
-class ExtColorselectorComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtColorselectorComponent = ExtColorselectorComponent_1 = class ExtColorselectorComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, colorselectorMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(colorselectorMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtColorselectorComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'colorselector',
-                inputs: colorselectorMetaData.PROPERTIES,
-                outputs: colorselectorMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtColorselectorComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtColorselectorComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtColorselectorComponent = ExtColorselectorComponent_1 = __decorate([
+    Component({
+        selector: 'colorselector',
+        inputs: colorselectorMetaData.PROPERTIES,
+        outputs: colorselectorMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtColorselectorComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtColorselectorComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtGaugeComponent_1;
 class gaugeMetaData {
 }
 gaugeMetaData.XTYPE = 'gauge';
@@ -64431,51 +60221,32 @@ gaugeMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtGaugeComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtGaugeComponent = ExtGaugeComponent_1 = class ExtGaugeComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gaugeMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(gaugeMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtGaugeComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'gauge',
-                inputs: gaugeMetaData.PROPERTIES,
-                outputs: gaugeMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtGaugeComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtGaugeComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtGaugeComponent = ExtGaugeComponent_1 = __decorate([
+    Component({
+        selector: 'gauge',
+        inputs: gaugeMetaData.PROPERTIES,
+        outputs: gaugeMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtGaugeComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtGaugeComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtMapComponent_1;
 class mapMetaData {
 }
 mapMetaData.XTYPE = 'map';
@@ -64762,51 +60533,32 @@ mapMetaData.EVENTNAMES = [
     'zoomchange',
     'ready'
 ];
-class ExtMapComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtMapComponent = ExtMapComponent_1 = class ExtMapComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, mapMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(mapMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtMapComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'map',
-                inputs: mapMetaData.PROPERTIES,
-                outputs: mapMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtMapComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtMapComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtMapComponent = ExtMapComponent_1 = __decorate([
+    Component({
+        selector: 'map',
+        inputs: mapMetaData.PROPERTIES,
+        outputs: mapMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtMapComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtMapComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtGoogle_mapComponent_1;
 class google_mapMetaData {
 }
 google_mapMetaData.XTYPE = 'google-map';
@@ -65093,51 +60845,32 @@ google_mapMetaData.EVENTNAMES = [
     'zoomchange',
     'ready'
 ];
-class ExtGoogle_mapComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtGoogle_mapComponent = ExtGoogle_mapComponent_1 = class ExtGoogle_mapComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, google_mapMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(google_mapMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtGoogle_mapComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'google-map',
-                inputs: google_mapMetaData.PROPERTIES,
-                outputs: google_mapMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtGoogle_mapComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtGoogle_mapComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtGoogle_mapComponent = ExtGoogle_mapComponent_1 = __decorate([
+    Component({
+        selector: 'google-map',
+        inputs: google_mapMetaData.PROPERTIES,
+        outputs: google_mapMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtGoogle_mapComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtGoogle_mapComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtRatingComponent_1;
 class ratingMetaData {
 }
 ratingMetaData.XTYPE = 'rating';
@@ -65365,51 +61098,32 @@ ratingMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtRatingComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtRatingComponent = ExtRatingComponent_1 = class ExtRatingComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, ratingMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(ratingMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtRatingComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'rating',
-                inputs: ratingMetaData.PROPERTIES,
-                outputs: ratingMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtRatingComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtRatingComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtRatingComponent = ExtRatingComponent_1 = __decorate([
+    Component({
+        selector: 'rating',
+        inputs: ratingMetaData.PROPERTIES,
+        outputs: ratingMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtRatingComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtRatingComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtVideoComponent_1;
 class videoMetaData {
 }
 videoMetaData.XTYPE = 'video';
@@ -65649,51 +61363,32 @@ videoMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtVideoComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtVideoComponent = ExtVideoComponent_1 = class ExtVideoComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, videoMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(videoMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtVideoComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'video',
-                inputs: videoMetaData.PROPERTIES,
-                outputs: videoMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtVideoComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtVideoComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtVideoComponent = ExtVideoComponent_1 = __decorate([
+    Component({
+        selector: 'video',
+        inputs: videoMetaData.PROPERTIES,
+        outputs: videoMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtVideoComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtVideoComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtViewportComponent_1;
 class viewportMetaData {
 }
 viewportMetaData.XTYPE = 'viewport';
@@ -65955,51 +61650,32 @@ viewportMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtViewportComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtViewportComponent = ExtViewportComponent_1 = class ExtViewportComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, viewportMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(viewportMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtViewportComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'viewport',
-                inputs: viewportMetaData.PROPERTIES,
-                outputs: viewportMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtViewportComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtViewportComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtViewportComponent = ExtViewportComponent_1 = __decorate([
+    Component({
+        selector: 'viewport',
+        inputs: viewportMetaData.PROPERTIES,
+        outputs: viewportMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtViewportComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtViewportComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+var ExtWidgetComponent_1;
 class widgetMetaData {
 }
 widgetMetaData.XTYPE = 'widget';
@@ -66094,525 +61770,502 @@ widgetMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-class ExtWidgetComponent extends base {
-    /**
-     * @param {?} eRef
-     * @param {?} hostComponent
-     */
+let ExtWidgetComponent = ExtWidgetComponent_1 = class ExtWidgetComponent extends base {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, widgetMetaData, hostComponent);
         this.hostComponent = hostComponent;
     }
-    /**
-     * @return {?}
-     */
     ngOnInit() {
         this.baseOnInit(widgetMetaData);
     }
-    /**
-     * @return {?}
-     */
     ngAfterContentInit() {
         this.baseAfterContentInit();
         //this['ready'].emit(this)
     }
-}
-ExtWidgetComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'widget',
-                inputs: widgetMetaData.PROPERTIES,
-                outputs: widgetMetaData.EVENTNAMES,
-                providers: [{ provide: base, useExisting: forwardRef((/**
-                         * @return {?}
-                         */
-                        () => ExtWidgetComponent)) }],
-                template: '<ng-template></ng-template>'
-            }] }
-];
-/** @nocollapse */
-ExtWidgetComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: base, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
-];
+};
+ExtWidgetComponent = ExtWidgetComponent_1 = __decorate([
+    Component({
+        selector: 'widget',
+        inputs: widgetMetaData.PROPERTIES,
+        outputs: widgetMetaData.EVENTNAMES,
+        providers: [{ provide: base, useExisting: forwardRef(() => ExtWidgetComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, base])
+], ExtWidgetComponent);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class ExtAngularModule {
-}
-ExtAngularModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [],
-                declarations: [
-                    ExtAngularBootstrapComponent,
-                    ExtActionsheetComponent,
-                    ExtAudioComponent,
-                    ExtButtonComponent,
-                    ExtCalendar_eventComponent,
-                    ExtCalendar_form_addComponent,
-                    ExtCalendar_calendar_pickerComponent,
-                    ExtCalendar_form_editComponent,
-                    ExtCalendar_timefieldComponent,
-                    ExtCalendar_daysheaderComponent,
-                    ExtCalendar_weeksheaderComponent,
-                    ExtCalendar_listComponent,
-                    ExtCalendar_dayComponent,
-                    ExtCalendar_daysComponent,
-                    ExtCalendar_monthComponent,
-                    ExtCalendarComponent,
-                    ExtCalendar_weekComponent,
-                    ExtCalendar_weeksComponent,
-                    ExtCalendar_dayviewComponent,
-                    ExtCalendar_daysviewComponent,
-                    ExtCalendar_monthviewComponent,
-                    ExtCalendar_multiviewComponent,
-                    ExtCalendar_weekviewComponent,
-                    ExtCalendar_weeksviewComponent,
-                    ExtCarouselComponent,
-                    ExtAxis3dComponent,
-                    ExtCartesianComponent,
-                    ExtChartComponent,
-                    ExtInteractionComponent,
-                    ExtLegendComponent,
-                    ExtChartnavigatorComponent,
-                    ExtPolarComponent,
-                    ExtSpacefillingComponent,
-                    ExtChipComponent,
-                    ExtComponentComponent,
-                    ExtContainerComponent,
-                    ExtD3_canvasComponent,
-                    ExtD3_heatmapComponent,
-                    ExtD3_packComponent,
-                    ExtD3_partitionComponent,
-                    ExtD3_sunburstComponent,
-                    ExtD3_treeComponent,
-                    ExtD3_horizontal_treeComponent,
-                    ExtD3_treemapComponent,
-                    ExtD3_svgComponent,
-                    ExtD3Component,
-                    ExtBoundlistComponent,
-                    ExtChipviewComponent,
-                    ExtComponentdataviewComponent,
-                    ExtDataitemComponent,
-                    ExtDataviewComponent,
-                    ExtEmptytextComponent,
-                    ExtIndexbarComponent,
-                    ExtItemheaderComponent,
-                    ExtListComponent,
-                    ExtListitemComponent,
-                    ExtListswiperitemComponent,
-                    ExtListswiperstepperComponent,
-                    ExtNestedlistComponent,
-                    ExtPullrefreshbarComponent,
-                    ExtPullrefreshspinnerComponent,
-                    ExtSimplelistitemComponent,
-                    ExtDialogComponent,
-                    ExtWindowComponent,
-                    ExtDrawComponent,
-                    ExtSurfaceComponent,
-                    ExtEditorComponent,
-                    ExtCheckboxComponent,
-                    ExtCheckboxfieldComponent,
-                    ExtComboboxComponent,
-                    ExtComboboxfieldComponent,
-                    ExtContainerfieldComponent,
-                    ExtFieldcontainerComponent,
-                    ExtDatefieldComponent,
-                    ExtDatepickerfieldComponent,
-                    ExtDatepickernativefieldComponent,
-                    ExtDisplayfieldComponent,
-                    ExtEmailfieldComponent,
-                    ExtFieldComponent,
-                    ExtFilefieldComponent,
-                    ExtFilebuttonComponent,
-                    ExtHiddenfieldComponent,
-                    ExtInputfieldComponent,
-                    ExtNumberfieldComponent,
-                    ExtFieldpanelComponent,
-                    ExtPasswordfieldComponent,
-                    ExtPickerfieldComponent,
-                    ExtRadioComponent,
-                    ExtRadiofieldComponent,
-                    ExtSearchfieldComponent,
-                    ExtSelectfieldComponent,
-                    ExtSinglesliderfieldComponent,
-                    ExtSliderfieldComponent,
-                    ExtSpinnerfieldComponent,
-                    ExtTextfieldComponent,
-                    ExtTextareafieldComponent,
-                    ExtTimefieldComponent,
-                    ExtTogglefieldComponent,
-                    ExtCleartriggerComponent,
-                    ExtDatetriggerComponent,
-                    ExtExpandtriggerComponent,
-                    ExtMenutriggerComponent,
-                    ExtRevealtriggerComponent,
-                    ExtSpindowntriggerComponent,
-                    ExtSpinuptriggerComponent,
-                    ExtTimetriggerComponent,
-                    ExtTriggerComponent,
-                    ExtUrlfieldComponent,
-                    ExtFieldsetComponent,
-                    ExtFormpanelComponent,
-                    ExtGridcellbaseComponent,
-                    ExtBooleancellComponent,
-                    ExtGridcellComponent,
-                    ExtCheckcellComponent,
-                    ExtDatecellComponent,
-                    ExtNumbercellComponent,
-                    ExtRownumberercellComponent,
-                    ExtTextcellComponent,
-                    ExtTreecellComponent,
-                    ExtWidgetcellComponent,
-                    ExtCelleditorComponent,
-                    ExtBooleancolumnComponent,
-                    ExtCheckcolumnComponent,
-                    ExtGridcolumnComponent,
-                    ExtColumnComponent,
-                    ExtTemplatecolumnComponent,
-                    ExtDatecolumnComponent,
-                    ExtNumbercolumnComponent,
-                    ExtRownumbererComponent,
-                    ExtSelectioncolumnComponent,
-                    ExtTextcolumnComponent,
-                    ExtTreecolumnComponent,
-                    ExtGridComponent,
-                    ExtHeadercontainerComponent,
-                    ExtLockedgridComponent,
-                    ExtLockedgridregionComponent,
-                    ExtGridcolumnsmenuComponent,
-                    ExtGridgroupbythismenuitemComponent,
-                    ExtGridshowingroupsmenuitemComponent,
-                    ExtGridsortascmenuitemComponent,
-                    ExtGridsortdescmenuitemComponent,
-                    ExtPagingtoolbarComponent,
-                    ExtGridrowComponent,
-                    ExtRowbodyComponent,
-                    ExtRowheaderComponent,
-                    ExtGridsummaryrowComponent,
-                    ExtTreeComponent,
-                    ExtImageComponent,
-                    ExtImgComponent,
-                    ExtIndicatorComponent,
-                    ExtLabelComponent,
-                    ExtTreelistComponent,
-                    ExtTreelistitemComponent,
-                    ExtLoadmaskComponent,
-                    ExtMaskComponent,
-                    ExtMediaComponent,
-                    ExtMenucheckitemComponent,
-                    ExtMenuitemComponent,
-                    ExtMenuComponent,
-                    ExtMenuradioitemComponent,
-                    ExtMenuseparatorComponent,
-                    ExtMessageboxComponent,
-                    ExtNavigationviewComponent,
-                    ExtPanelComponent,
-                    ExtDatepanelComponent,
-                    ExtDatetitleComponent,
-                    ExtPanelheaderComponent,
-                    ExtTimepanelComponent,
-                    ExtPaneltitleComponent,
-                    ExtYearpickerComponent,
-                    ExtDatepickerComponent,
-                    ExtPickerComponent,
-                    ExtSelectpickerComponent,
-                    ExtPickerslotComponent,
-                    ExtTabletpickerComponent,
-                    ExtPivotgridcellComponent,
-                    ExtPivotgridgroupcellComponent,
-                    ExtPivotd3containerComponent,
-                    ExtPivotheatmapComponent,
-                    ExtPivottreemapComponent,
-                    ExtPivotgridComponent,
-                    ExtPivotconfigfieldComponent,
-                    ExtPivotconfigcontainerComponent,
-                    ExtPivotconfigformComponent,
-                    ExtPivotconfigpanelComponent,
-                    ExtPivotsettingsComponent,
-                    ExtPivotrangeeditorComponent,
-                    ExtPivotgridrowComponent,
-                    ExtProgressComponent,
-                    ExtProgressbarwidgetComponent,
-                    ExtSegmentedbuttonComponent,
-                    ExtSheetComponent,
-                    ExtSliderComponent,
-                    ExtThumbComponent,
-                    ExtTogglesliderComponent,
-                    ExtSpacerComponent,
-                    ExtSparklinebarComponent,
-                    ExtSparklineComponent,
-                    ExtSparklineboxComponent,
-                    ExtSparklinebulletComponent,
-                    ExtSparklinediscreteComponent,
-                    ExtSparklinelineComponent,
-                    ExtSparklinepieComponent,
-                    ExtSparklinetristateComponent,
-                    ExtSplitbuttonComponent,
-                    ExtTabbarComponent,
-                    ExtTabpanelComponent,
-                    ExtTabComponent,
-                    ExtTooltipComponent,
-                    ExtTitleComponent,
-                    ExtTitlebarComponent,
-                    ExtToolComponent,
-                    ExtPaneltoolComponent,
-                    ExtToolbarComponent,
-                    ExtColorbuttonComponent,
-                    ExtColorpickercolorpreviewComponent,
-                    ExtColorfieldComponent,
-                    ExtColorselectorComponent,
-                    ExtGaugeComponent,
-                    ExtMapComponent,
-                    ExtGoogle_mapComponent,
-                    ExtRatingComponent,
-                    ExtVideoComponent,
-                    ExtViewportComponent,
-                    ExtWidgetComponent
-                ],
-                providers: [],
-                entryComponents: [],
-                exports: [
-                    ExtAngularBootstrapComponent,
-                    ExtActionsheetComponent,
-                    ExtAudioComponent,
-                    ExtButtonComponent,
-                    ExtCalendar_eventComponent,
-                    ExtCalendar_form_addComponent,
-                    ExtCalendar_calendar_pickerComponent,
-                    ExtCalendar_form_editComponent,
-                    ExtCalendar_timefieldComponent,
-                    ExtCalendar_daysheaderComponent,
-                    ExtCalendar_weeksheaderComponent,
-                    ExtCalendar_listComponent,
-                    ExtCalendar_dayComponent,
-                    ExtCalendar_daysComponent,
-                    ExtCalendar_monthComponent,
-                    ExtCalendarComponent,
-                    ExtCalendar_weekComponent,
-                    ExtCalendar_weeksComponent,
-                    ExtCalendar_dayviewComponent,
-                    ExtCalendar_daysviewComponent,
-                    ExtCalendar_monthviewComponent,
-                    ExtCalendar_multiviewComponent,
-                    ExtCalendar_weekviewComponent,
-                    ExtCalendar_weeksviewComponent,
-                    ExtCarouselComponent,
-                    ExtAxis3dComponent,
-                    ExtCartesianComponent,
-                    ExtChartComponent,
-                    ExtInteractionComponent,
-                    ExtLegendComponent,
-                    ExtChartnavigatorComponent,
-                    ExtPolarComponent,
-                    ExtSpacefillingComponent,
-                    ExtChipComponent,
-                    ExtComponentComponent,
-                    ExtContainerComponent,
-                    ExtD3_canvasComponent,
-                    ExtD3_heatmapComponent,
-                    ExtD3_packComponent,
-                    ExtD3_partitionComponent,
-                    ExtD3_sunburstComponent,
-                    ExtD3_treeComponent,
-                    ExtD3_horizontal_treeComponent,
-                    ExtD3_treemapComponent,
-                    ExtD3_svgComponent,
-                    ExtD3Component,
-                    ExtBoundlistComponent,
-                    ExtChipviewComponent,
-                    ExtComponentdataviewComponent,
-                    ExtDataitemComponent,
-                    ExtDataviewComponent,
-                    ExtEmptytextComponent,
-                    ExtIndexbarComponent,
-                    ExtItemheaderComponent,
-                    ExtListComponent,
-                    ExtListitemComponent,
-                    ExtListswiperitemComponent,
-                    ExtListswiperstepperComponent,
-                    ExtNestedlistComponent,
-                    ExtPullrefreshbarComponent,
-                    ExtPullrefreshspinnerComponent,
-                    ExtSimplelistitemComponent,
-                    ExtDialogComponent,
-                    ExtWindowComponent,
-                    ExtDrawComponent,
-                    ExtSurfaceComponent,
-                    ExtEditorComponent,
-                    ExtCheckboxComponent,
-                    ExtCheckboxfieldComponent,
-                    ExtComboboxComponent,
-                    ExtComboboxfieldComponent,
-                    ExtContainerfieldComponent,
-                    ExtFieldcontainerComponent,
-                    ExtDatefieldComponent,
-                    ExtDatepickerfieldComponent,
-                    ExtDatepickernativefieldComponent,
-                    ExtDisplayfieldComponent,
-                    ExtEmailfieldComponent,
-                    ExtFieldComponent,
-                    ExtFilefieldComponent,
-                    ExtFilebuttonComponent,
-                    ExtHiddenfieldComponent,
-                    ExtInputfieldComponent,
-                    ExtNumberfieldComponent,
-                    ExtFieldpanelComponent,
-                    ExtPasswordfieldComponent,
-                    ExtPickerfieldComponent,
-                    ExtRadioComponent,
-                    ExtRadiofieldComponent,
-                    ExtSearchfieldComponent,
-                    ExtSelectfieldComponent,
-                    ExtSinglesliderfieldComponent,
-                    ExtSliderfieldComponent,
-                    ExtSpinnerfieldComponent,
-                    ExtTextfieldComponent,
-                    ExtTextareafieldComponent,
-                    ExtTimefieldComponent,
-                    ExtTogglefieldComponent,
-                    ExtCleartriggerComponent,
-                    ExtDatetriggerComponent,
-                    ExtExpandtriggerComponent,
-                    ExtMenutriggerComponent,
-                    ExtRevealtriggerComponent,
-                    ExtSpindowntriggerComponent,
-                    ExtSpinuptriggerComponent,
-                    ExtTimetriggerComponent,
-                    ExtTriggerComponent,
-                    ExtUrlfieldComponent,
-                    ExtFieldsetComponent,
-                    ExtFormpanelComponent,
-                    ExtGridcellbaseComponent,
-                    ExtBooleancellComponent,
-                    ExtGridcellComponent,
-                    ExtCheckcellComponent,
-                    ExtDatecellComponent,
-                    ExtNumbercellComponent,
-                    ExtRownumberercellComponent,
-                    ExtTextcellComponent,
-                    ExtTreecellComponent,
-                    ExtWidgetcellComponent,
-                    ExtCelleditorComponent,
-                    ExtBooleancolumnComponent,
-                    ExtCheckcolumnComponent,
-                    ExtGridcolumnComponent,
-                    ExtColumnComponent,
-                    ExtTemplatecolumnComponent,
-                    ExtDatecolumnComponent,
-                    ExtNumbercolumnComponent,
-                    ExtRownumbererComponent,
-                    ExtSelectioncolumnComponent,
-                    ExtTextcolumnComponent,
-                    ExtTreecolumnComponent,
-                    ExtGridComponent,
-                    ExtHeadercontainerComponent,
-                    ExtLockedgridComponent,
-                    ExtLockedgridregionComponent,
-                    ExtGridcolumnsmenuComponent,
-                    ExtGridgroupbythismenuitemComponent,
-                    ExtGridshowingroupsmenuitemComponent,
-                    ExtGridsortascmenuitemComponent,
-                    ExtGridsortdescmenuitemComponent,
-                    ExtPagingtoolbarComponent,
-                    ExtGridrowComponent,
-                    ExtRowbodyComponent,
-                    ExtRowheaderComponent,
-                    ExtGridsummaryrowComponent,
-                    ExtTreeComponent,
-                    ExtImageComponent,
-                    ExtImgComponent,
-                    ExtIndicatorComponent,
-                    ExtLabelComponent,
-                    ExtTreelistComponent,
-                    ExtTreelistitemComponent,
-                    ExtLoadmaskComponent,
-                    ExtMaskComponent,
-                    ExtMediaComponent,
-                    ExtMenucheckitemComponent,
-                    ExtMenuitemComponent,
-                    ExtMenuComponent,
-                    ExtMenuradioitemComponent,
-                    ExtMenuseparatorComponent,
-                    ExtMessageboxComponent,
-                    ExtNavigationviewComponent,
-                    ExtPanelComponent,
-                    ExtDatepanelComponent,
-                    ExtDatetitleComponent,
-                    ExtPanelheaderComponent,
-                    ExtTimepanelComponent,
-                    ExtPaneltitleComponent,
-                    ExtYearpickerComponent,
-                    ExtDatepickerComponent,
-                    ExtPickerComponent,
-                    ExtSelectpickerComponent,
-                    ExtPickerslotComponent,
-                    ExtTabletpickerComponent,
-                    ExtPivotgridcellComponent,
-                    ExtPivotgridgroupcellComponent,
-                    ExtPivotd3containerComponent,
-                    ExtPivotheatmapComponent,
-                    ExtPivottreemapComponent,
-                    ExtPivotgridComponent,
-                    ExtPivotconfigfieldComponent,
-                    ExtPivotconfigcontainerComponent,
-                    ExtPivotconfigformComponent,
-                    ExtPivotconfigpanelComponent,
-                    ExtPivotsettingsComponent,
-                    ExtPivotrangeeditorComponent,
-                    ExtPivotgridrowComponent,
-                    ExtProgressComponent,
-                    ExtProgressbarwidgetComponent,
-                    ExtSegmentedbuttonComponent,
-                    ExtSheetComponent,
-                    ExtSliderComponent,
-                    ExtThumbComponent,
-                    ExtTogglesliderComponent,
-                    ExtSpacerComponent,
-                    ExtSparklinebarComponent,
-                    ExtSparklineComponent,
-                    ExtSparklineboxComponent,
-                    ExtSparklinebulletComponent,
-                    ExtSparklinediscreteComponent,
-                    ExtSparklinelineComponent,
-                    ExtSparklinepieComponent,
-                    ExtSparklinetristateComponent,
-                    ExtSplitbuttonComponent,
-                    ExtTabbarComponent,
-                    ExtTabpanelComponent,
-                    ExtTabComponent,
-                    ExtTooltipComponent,
-                    ExtTitleComponent,
-                    ExtTitlebarComponent,
-                    ExtToolComponent,
-                    ExtPaneltoolComponent,
-                    ExtToolbarComponent,
-                    ExtColorbuttonComponent,
-                    ExtColorpickercolorpreviewComponent,
-                    ExtColorfieldComponent,
-                    ExtColorselectorComponent,
-                    ExtGaugeComponent,
-                    ExtMapComponent,
-                    ExtGoogle_mapComponent,
-                    ExtRatingComponent,
-                    ExtVideoComponent,
-                    ExtViewportComponent,
-                    ExtWidgetComponent
-                ]
-            },] }
-];
+let ExtAngularModule = class ExtAngularModule {
+};
+ExtAngularModule = __decorate([
+    NgModule({
+        imports: [],
+        declarations: [
+            ExtAngularBootstrapComponent,
+            ExtActionsheetComponent,
+            ExtAudioComponent,
+            ExtButtonComponent,
+            ExtCalendar_eventComponent,
+            ExtCalendar_form_addComponent,
+            ExtCalendar_calendar_pickerComponent,
+            ExtCalendar_form_editComponent,
+            ExtCalendar_timefieldComponent,
+            ExtCalendar_daysheaderComponent,
+            ExtCalendar_weeksheaderComponent,
+            ExtCalendar_listComponent,
+            ExtCalendar_dayComponent,
+            ExtCalendar_daysComponent,
+            ExtCalendar_monthComponent,
+            ExtCalendarComponent,
+            ExtCalendar_weekComponent,
+            ExtCalendar_weeksComponent,
+            ExtCalendar_dayviewComponent,
+            ExtCalendar_daysviewComponent,
+            ExtCalendar_monthviewComponent,
+            ExtCalendar_multiviewComponent,
+            ExtCalendar_weekviewComponent,
+            ExtCalendar_weeksviewComponent,
+            ExtCarouselComponent,
+            ExtAxis3dComponent,
+            ExtCartesianComponent,
+            ExtChartComponent,
+            ExtInteractionComponent,
+            ExtLegendComponent,
+            ExtChartnavigatorComponent,
+            ExtPolarComponent,
+            ExtSpacefillingComponent,
+            ExtChipComponent,
+            ExtComponentComponent,
+            ExtContainerComponent,
+            ExtD3_canvasComponent,
+            ExtD3_heatmapComponent,
+            ExtD3_packComponent,
+            ExtD3_partitionComponent,
+            ExtD3_sunburstComponent,
+            ExtD3_treeComponent,
+            ExtD3_horizontal_treeComponent,
+            ExtD3_treemapComponent,
+            ExtD3_svgComponent,
+            ExtD3Component,
+            ExtBoundlistComponent,
+            ExtChipviewComponent,
+            ExtComponentdataviewComponent,
+            ExtDataitemComponent,
+            ExtDataviewComponent,
+            ExtEmptytextComponent,
+            ExtIndexbarComponent,
+            ExtItemheaderComponent,
+            ExtListComponent,
+            ExtListitemComponent,
+            ExtListswiperitemComponent,
+            ExtListswiperstepperComponent,
+            ExtNestedlistComponent,
+            ExtPullrefreshbarComponent,
+            ExtPullrefreshspinnerComponent,
+            ExtSimplelistitemComponent,
+            ExtDialogComponent,
+            ExtWindowComponent,
+            ExtDrawComponent,
+            ExtSurfaceComponent,
+            ExtEditorComponent,
+            ExtCheckboxComponent,
+            ExtCheckboxfieldComponent,
+            ExtComboboxComponent,
+            ExtComboboxfieldComponent,
+            ExtContainerfieldComponent,
+            ExtFieldcontainerComponent,
+            ExtDatefieldComponent,
+            ExtDatepickerfieldComponent,
+            ExtDatepickernativefieldComponent,
+            ExtDisplayfieldComponent,
+            ExtEmailfieldComponent,
+            ExtFieldComponent,
+            ExtFilefieldComponent,
+            ExtFilebuttonComponent,
+            ExtHiddenfieldComponent,
+            ExtInputfieldComponent,
+            ExtNumberfieldComponent,
+            ExtFieldpanelComponent,
+            ExtPasswordfieldComponent,
+            ExtPickerfieldComponent,
+            ExtRadioComponent,
+            ExtRadiofieldComponent,
+            ExtSearchfieldComponent,
+            ExtSelectfieldComponent,
+            ExtSinglesliderfieldComponent,
+            ExtSliderfieldComponent,
+            ExtSpinnerfieldComponent,
+            ExtTextfieldComponent,
+            ExtTextareafieldComponent,
+            ExtTimefieldComponent,
+            ExtTogglefieldComponent,
+            ExtCleartriggerComponent,
+            ExtDatetriggerComponent,
+            ExtExpandtriggerComponent,
+            ExtMenutriggerComponent,
+            ExtRevealtriggerComponent,
+            ExtSpindowntriggerComponent,
+            ExtSpinuptriggerComponent,
+            ExtTimetriggerComponent,
+            ExtTriggerComponent,
+            ExtUrlfieldComponent,
+            ExtFieldsetComponent,
+            ExtFormpanelComponent,
+            ExtGridcellbaseComponent,
+            ExtBooleancellComponent,
+            ExtGridcellComponent,
+            ExtCheckcellComponent,
+            ExtDatecellComponent,
+            ExtNumbercellComponent,
+            ExtRownumberercellComponent,
+            ExtTextcellComponent,
+            ExtTreecellComponent,
+            ExtWidgetcellComponent,
+            ExtCelleditorComponent,
+            ExtBooleancolumnComponent,
+            ExtCheckcolumnComponent,
+            ExtGridcolumnComponent,
+            ExtColumnComponent,
+            ExtTemplatecolumnComponent,
+            ExtDatecolumnComponent,
+            ExtNumbercolumnComponent,
+            ExtRownumbererComponent,
+            ExtSelectioncolumnComponent,
+            ExtTextcolumnComponent,
+            ExtTreecolumnComponent,
+            ExtGridComponent,
+            ExtHeadercontainerComponent,
+            ExtLockedgridComponent,
+            ExtLockedgridregionComponent,
+            ExtGridcolumnsmenuComponent,
+            ExtGridgroupbythismenuitemComponent,
+            ExtGridshowingroupsmenuitemComponent,
+            ExtGridsortascmenuitemComponent,
+            ExtGridsortdescmenuitemComponent,
+            ExtPagingtoolbarComponent,
+            ExtGridrowComponent,
+            ExtRowbodyComponent,
+            ExtRowheaderComponent,
+            ExtGridsummaryrowComponent,
+            ExtTreeComponent,
+            ExtImageComponent,
+            ExtImgComponent,
+            ExtIndicatorComponent,
+            ExtLabelComponent,
+            ExtTreelistComponent,
+            ExtTreelistitemComponent,
+            ExtLoadmaskComponent,
+            ExtMaskComponent,
+            ExtMediaComponent,
+            ExtMenucheckitemComponent,
+            ExtMenuitemComponent,
+            ExtMenuComponent,
+            ExtMenuradioitemComponent,
+            ExtMenuseparatorComponent,
+            ExtMessageboxComponent,
+            ExtNavigationviewComponent,
+            ExtPanelComponent,
+            ExtDatepanelComponent,
+            ExtDatetitleComponent,
+            ExtPanelheaderComponent,
+            ExtTimepanelComponent,
+            ExtPaneltitleComponent,
+            ExtYearpickerComponent,
+            ExtDatepickerComponent,
+            ExtPickerComponent,
+            ExtSelectpickerComponent,
+            ExtPickerslotComponent,
+            ExtTabletpickerComponent,
+            ExtPivotgridcellComponent,
+            ExtPivotgridgroupcellComponent,
+            ExtPivotd3containerComponent,
+            ExtPivotheatmapComponent,
+            ExtPivottreemapComponent,
+            ExtPivotgridComponent,
+            ExtPivotconfigfieldComponent,
+            ExtPivotconfigcontainerComponent,
+            ExtPivotconfigformComponent,
+            ExtPivotconfigpanelComponent,
+            ExtPivotsettingsComponent,
+            ExtPivotrangeeditorComponent,
+            ExtPivotgridrowComponent,
+            ExtProgressComponent,
+            ExtProgressbarwidgetComponent,
+            ExtSegmentedbuttonComponent,
+            ExtSheetComponent,
+            ExtSliderComponent,
+            ExtThumbComponent,
+            ExtTogglesliderComponent,
+            ExtSpacerComponent,
+            ExtSparklinebarComponent,
+            ExtSparklineComponent,
+            ExtSparklineboxComponent,
+            ExtSparklinebulletComponent,
+            ExtSparklinediscreteComponent,
+            ExtSparklinelineComponent,
+            ExtSparklinepieComponent,
+            ExtSparklinetristateComponent,
+            ExtSplitbuttonComponent,
+            ExtTabbarComponent,
+            ExtTabpanelComponent,
+            ExtTabComponent,
+            ExtTooltipComponent,
+            ExtTitleComponent,
+            ExtTitlebarComponent,
+            ExtToolComponent,
+            ExtPaneltoolComponent,
+            ExtToolbarComponent,
+            ExtColorbuttonComponent,
+            ExtColorpickercolorpreviewComponent,
+            ExtColorfieldComponent,
+            ExtColorselectorComponent,
+            ExtGaugeComponent,
+            ExtMapComponent,
+            ExtGoogle_mapComponent,
+            ExtRatingComponent,
+            ExtVideoComponent,
+            ExtViewportComponent,
+            ExtWidgetComponent
+        ],
+        providers: [],
+        entryComponents: [],
+        exports: [
+            ExtAngularBootstrapComponent,
+            ExtActionsheetComponent,
+            ExtAudioComponent,
+            ExtButtonComponent,
+            ExtCalendar_eventComponent,
+            ExtCalendar_form_addComponent,
+            ExtCalendar_calendar_pickerComponent,
+            ExtCalendar_form_editComponent,
+            ExtCalendar_timefieldComponent,
+            ExtCalendar_daysheaderComponent,
+            ExtCalendar_weeksheaderComponent,
+            ExtCalendar_listComponent,
+            ExtCalendar_dayComponent,
+            ExtCalendar_daysComponent,
+            ExtCalendar_monthComponent,
+            ExtCalendarComponent,
+            ExtCalendar_weekComponent,
+            ExtCalendar_weeksComponent,
+            ExtCalendar_dayviewComponent,
+            ExtCalendar_daysviewComponent,
+            ExtCalendar_monthviewComponent,
+            ExtCalendar_multiviewComponent,
+            ExtCalendar_weekviewComponent,
+            ExtCalendar_weeksviewComponent,
+            ExtCarouselComponent,
+            ExtAxis3dComponent,
+            ExtCartesianComponent,
+            ExtChartComponent,
+            ExtInteractionComponent,
+            ExtLegendComponent,
+            ExtChartnavigatorComponent,
+            ExtPolarComponent,
+            ExtSpacefillingComponent,
+            ExtChipComponent,
+            ExtComponentComponent,
+            ExtContainerComponent,
+            ExtD3_canvasComponent,
+            ExtD3_heatmapComponent,
+            ExtD3_packComponent,
+            ExtD3_partitionComponent,
+            ExtD3_sunburstComponent,
+            ExtD3_treeComponent,
+            ExtD3_horizontal_treeComponent,
+            ExtD3_treemapComponent,
+            ExtD3_svgComponent,
+            ExtD3Component,
+            ExtBoundlistComponent,
+            ExtChipviewComponent,
+            ExtComponentdataviewComponent,
+            ExtDataitemComponent,
+            ExtDataviewComponent,
+            ExtEmptytextComponent,
+            ExtIndexbarComponent,
+            ExtItemheaderComponent,
+            ExtListComponent,
+            ExtListitemComponent,
+            ExtListswiperitemComponent,
+            ExtListswiperstepperComponent,
+            ExtNestedlistComponent,
+            ExtPullrefreshbarComponent,
+            ExtPullrefreshspinnerComponent,
+            ExtSimplelistitemComponent,
+            ExtDialogComponent,
+            ExtWindowComponent,
+            ExtDrawComponent,
+            ExtSurfaceComponent,
+            ExtEditorComponent,
+            ExtCheckboxComponent,
+            ExtCheckboxfieldComponent,
+            ExtComboboxComponent,
+            ExtComboboxfieldComponent,
+            ExtContainerfieldComponent,
+            ExtFieldcontainerComponent,
+            ExtDatefieldComponent,
+            ExtDatepickerfieldComponent,
+            ExtDatepickernativefieldComponent,
+            ExtDisplayfieldComponent,
+            ExtEmailfieldComponent,
+            ExtFieldComponent,
+            ExtFilefieldComponent,
+            ExtFilebuttonComponent,
+            ExtHiddenfieldComponent,
+            ExtInputfieldComponent,
+            ExtNumberfieldComponent,
+            ExtFieldpanelComponent,
+            ExtPasswordfieldComponent,
+            ExtPickerfieldComponent,
+            ExtRadioComponent,
+            ExtRadiofieldComponent,
+            ExtSearchfieldComponent,
+            ExtSelectfieldComponent,
+            ExtSinglesliderfieldComponent,
+            ExtSliderfieldComponent,
+            ExtSpinnerfieldComponent,
+            ExtTextfieldComponent,
+            ExtTextareafieldComponent,
+            ExtTimefieldComponent,
+            ExtTogglefieldComponent,
+            ExtCleartriggerComponent,
+            ExtDatetriggerComponent,
+            ExtExpandtriggerComponent,
+            ExtMenutriggerComponent,
+            ExtRevealtriggerComponent,
+            ExtSpindowntriggerComponent,
+            ExtSpinuptriggerComponent,
+            ExtTimetriggerComponent,
+            ExtTriggerComponent,
+            ExtUrlfieldComponent,
+            ExtFieldsetComponent,
+            ExtFormpanelComponent,
+            ExtGridcellbaseComponent,
+            ExtBooleancellComponent,
+            ExtGridcellComponent,
+            ExtCheckcellComponent,
+            ExtDatecellComponent,
+            ExtNumbercellComponent,
+            ExtRownumberercellComponent,
+            ExtTextcellComponent,
+            ExtTreecellComponent,
+            ExtWidgetcellComponent,
+            ExtCelleditorComponent,
+            ExtBooleancolumnComponent,
+            ExtCheckcolumnComponent,
+            ExtGridcolumnComponent,
+            ExtColumnComponent,
+            ExtTemplatecolumnComponent,
+            ExtDatecolumnComponent,
+            ExtNumbercolumnComponent,
+            ExtRownumbererComponent,
+            ExtSelectioncolumnComponent,
+            ExtTextcolumnComponent,
+            ExtTreecolumnComponent,
+            ExtGridComponent,
+            ExtHeadercontainerComponent,
+            ExtLockedgridComponent,
+            ExtLockedgridregionComponent,
+            ExtGridcolumnsmenuComponent,
+            ExtGridgroupbythismenuitemComponent,
+            ExtGridshowingroupsmenuitemComponent,
+            ExtGridsortascmenuitemComponent,
+            ExtGridsortdescmenuitemComponent,
+            ExtPagingtoolbarComponent,
+            ExtGridrowComponent,
+            ExtRowbodyComponent,
+            ExtRowheaderComponent,
+            ExtGridsummaryrowComponent,
+            ExtTreeComponent,
+            ExtImageComponent,
+            ExtImgComponent,
+            ExtIndicatorComponent,
+            ExtLabelComponent,
+            ExtTreelistComponent,
+            ExtTreelistitemComponent,
+            ExtLoadmaskComponent,
+            ExtMaskComponent,
+            ExtMediaComponent,
+            ExtMenucheckitemComponent,
+            ExtMenuitemComponent,
+            ExtMenuComponent,
+            ExtMenuradioitemComponent,
+            ExtMenuseparatorComponent,
+            ExtMessageboxComponent,
+            ExtNavigationviewComponent,
+            ExtPanelComponent,
+            ExtDatepanelComponent,
+            ExtDatetitleComponent,
+            ExtPanelheaderComponent,
+            ExtTimepanelComponent,
+            ExtPaneltitleComponent,
+            ExtYearpickerComponent,
+            ExtDatepickerComponent,
+            ExtPickerComponent,
+            ExtSelectpickerComponent,
+            ExtPickerslotComponent,
+            ExtTabletpickerComponent,
+            ExtPivotgridcellComponent,
+            ExtPivotgridgroupcellComponent,
+            ExtPivotd3containerComponent,
+            ExtPivotheatmapComponent,
+            ExtPivottreemapComponent,
+            ExtPivotgridComponent,
+            ExtPivotconfigfieldComponent,
+            ExtPivotconfigcontainerComponent,
+            ExtPivotconfigformComponent,
+            ExtPivotconfigpanelComponent,
+            ExtPivotsettingsComponent,
+            ExtPivotrangeeditorComponent,
+            ExtPivotgridrowComponent,
+            ExtProgressComponent,
+            ExtProgressbarwidgetComponent,
+            ExtSegmentedbuttonComponent,
+            ExtSheetComponent,
+            ExtSliderComponent,
+            ExtThumbComponent,
+            ExtTogglesliderComponent,
+            ExtSpacerComponent,
+            ExtSparklinebarComponent,
+            ExtSparklineComponent,
+            ExtSparklineboxComponent,
+            ExtSparklinebulletComponent,
+            ExtSparklinediscreteComponent,
+            ExtSparklinelineComponent,
+            ExtSparklinepieComponent,
+            ExtSparklinetristateComponent,
+            ExtSplitbuttonComponent,
+            ExtTabbarComponent,
+            ExtTabpanelComponent,
+            ExtTabComponent,
+            ExtTooltipComponent,
+            ExtTitleComponent,
+            ExtTitlebarComponent,
+            ExtToolComponent,
+            ExtPaneltoolComponent,
+            ExtToolbarComponent,
+            ExtColorbuttonComponent,
+            ExtColorpickercolorpreviewComponent,
+            ExtColorfieldComponent,
+            ExtColorselectorComponent,
+            ExtGaugeComponent,
+            ExtMapComponent,
+            ExtGoogle_mapComponent,
+            ExtRatingComponent,
+            ExtVideoComponent,
+            ExtViewportComponent,
+            ExtWidgetComponent
+        ]
+    })
+], ExtAngularModule);
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+/*
+ * Public API Surface of ext-angular
  */
 
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * Generated bundle index. Do not edit.
  */
 
-export { ExtAngularModule, base as ɵe, ExtActionsheetComponent as ɵd, actionsheetMetaData as ɵc, ExtAngularBootstrapComponent as ɵa, ExtAngularBootstrapService as ɵb, ExtAudioComponent as ɵg, audioMetaData as ɵf, ExtAxis3dComponent as ɵca, axis3dMetaData as ɵbz, ExtBooleancellComponent as ɵiq, booleancellMetaData as ɵip, ExtBooleancolumnComponent as ɵjk, booleancolumnMetaData as ɵjj, ExtBoundlistComponent as ɵdq, boundlistMetaData as ɵdp, ExtButtonComponent as ɵi, buttonMetaData as ɵh, ExtCalendar_calendar_pickerComponent as ɵo, calendar_calendar_pickerMetaData as ɵn, ExtCalendar_dayComponent as ɵba, calendar_dayMetaData as ɵz, ExtCalendar_daysComponent as ɵbc, calendar_daysMetaData as ɵbb, ExtCalendar_daysheaderComponent as ɵu, calendar_daysheaderMetaData as ɵt, ExtCalendar_daysviewComponent as ɵbo, calendar_daysviewMetaData as ɵbn, ExtCalendar_dayviewComponent as ɵbm, calendar_dayviewMetaData as ɵbl, ExtCalendar_eventComponent as ɵk, calendar_eventMetaData as ɵj, ExtCalendar_form_addComponent as ɵm, calendar_form_addMetaData as ɵl, ExtCalendar_form_editComponent as ɵq, calendar_form_editMetaData as ɵp, ExtCalendar_listComponent as ɵy, calendar_listMetaData as ɵx, ExtCalendar_monthComponent as ɵbe, calendar_monthMetaData as ɵbd, ExtCalendar_monthviewComponent as ɵbq, calendar_monthviewMetaData as ɵbp, ExtCalendar_multiviewComponent as ɵbs, calendar_multiviewMetaData as ɵbr, ExtCalendar_timefieldComponent as ɵs, calendar_timefieldMetaData as ɵr, ExtCalendar_weekComponent as ɵbi, calendar_weekMetaData as ɵbh, ExtCalendar_weeksComponent as ɵbk, calendar_weeksMetaData as ɵbj, ExtCalendar_weeksheaderComponent as ɵw, calendar_weeksheaderMetaData as ɵv, ExtCalendar_weeksviewComponent as ɵbw, calendar_weeksviewMetaData as ɵbv, ExtCalendar_weekviewComponent as ɵbu, calendar_weekviewMetaData as ɵbt, ExtCalendarComponent as ɵbg, calendarMetaData as ɵbf, ExtCarouselComponent as ɵby, carouselMetaData as ɵbx, ExtCartesianComponent as ɵcc, cartesianMetaData as ɵcb, ExtCelleditorComponent as ɵji, celleditorMetaData as ɵjh, ExtChartComponent as ɵce, chartMetaData as ɵcd, ExtChartnavigatorComponent as ɵck, chartnavigatorMetaData as ɵcj, ExtCheckboxComponent as ɵfg, checkboxMetaData as ɵff, ExtCheckboxfieldComponent as ɵfi, checkboxfieldMetaData as ɵfh, ExtCheckcellComponent as ɵiu, checkcellMetaData as ɵit, ExtCheckcolumnComponent as ɵjm, checkcolumnMetaData as ɵjl, ExtChipComponent as ɵcq, chipMetaData as ɵcp, ExtChipviewComponent as ɵds, chipviewMetaData as ɵdr, ExtCleartriggerComponent as ɵhq, cleartriggerMetaData as ɵhp, ExtColorbuttonComponent as ɵqo, colorbuttonMetaData as ɵqn, ExtColorfieldComponent as ɵqs, colorfieldMetaData as ɵqr, ExtColorpickercolorpreviewComponent as ɵqq, colorpickercolorpreviewMetaData as ɵqp, ExtColorselectorComponent as ɵqu, colorselectorMetaData as ɵqt, ExtColumnComponent as ɵjq, columnMetaData as ɵjp, ExtComboboxComponent as ɵfk, comboboxMetaData as ɵfj, ExtComboboxfieldComponent as ɵfm, comboboxfieldMetaData as ɵfl, ExtComponentComponent as ɵcs, componentMetaData as ɵcr, ExtComponentdataviewComponent as ɵdu, componentdataviewMetaData as ɵdt, ExtContainerComponent as ɵcu, containerMetaData as ɵct, ExtContainerfieldComponent as ɵfo, containerfieldMetaData as ɵfn, ExtD3_canvasComponent as ɵcw, d3_canvasMetaData as ɵcv, ExtD3_heatmapComponent as ɵcy, d3_heatmapMetaData as ɵcx, ExtD3_horizontal_treeComponent as ɵdi, d3_horizontal_treeMetaData as ɵdh, ExtD3_packComponent as ɵda, d3_packMetaData as ɵcz, ExtD3_partitionComponent as ɵdc, d3_partitionMetaData as ɵdb, ExtD3_sunburstComponent as ɵde, d3_sunburstMetaData as ɵdd, ExtD3_svgComponent as ɵdm, d3_svgMetaData as ɵdl, ExtD3_treeComponent as ɵdg, d3_treeMetaData as ɵdf, ExtD3_treemapComponent as ɵdk, d3_treemapMetaData as ɵdj, ExtD3Component as ɵdo, d3MetaData as ɵdn, ExtDataitemComponent as ɵdw, dataitemMetaData as ɵdv, ExtDataviewComponent as ɵdy, dataviewMetaData as ɵdx, ExtDatecellComponent as ɵiw, datecellMetaData as ɵiv, ExtDatecolumnComponent as ɵju, datecolumnMetaData as ɵjt, ExtDatefieldComponent as ɵfs, datefieldMetaData as ɵfr, ExtDatepanelComponent as ɵms, datepanelMetaData as ɵmr, ExtDatepickerComponent as ɵne, datepickerMetaData as ɵnd, ExtDatepickerfieldComponent as ɵfu, datepickerfieldMetaData as ɵft, ExtDatepickernativefieldComponent as ɵfw, datepickernativefieldMetaData as ɵfv, ExtDatetitleComponent as ɵmu, datetitleMetaData as ɵmt, ExtDatetriggerComponent as ɵhs, datetriggerMetaData as ɵhr, ExtDialogComponent as ɵew, dialogMetaData as ɵev, ExtDisplayfieldComponent as ɵfy, displayfieldMetaData as ɵfx, ExtDrawComponent as ɵfa, drawMetaData as ɵez, ExtEditorComponent as ɵfe, editorMetaData as ɵfd, ExtEmailfieldComponent as ɵga, emailfieldMetaData as ɵfz, ExtEmptytextComponent as ɵea, emptytextMetaData as ɵdz, ExtExpandtriggerComponent as ɵhu, expandtriggerMetaData as ɵht, ExtFieldComponent as ɵgc, fieldMetaData as ɵgb, ExtFieldcontainerComponent as ɵfq, fieldcontainerMetaData as ɵfp, ExtFieldpanelComponent as ɵgo, fieldpanelMetaData as ɵgn, ExtFieldsetComponent as ɵik, fieldsetMetaData as ɵij, ExtFilebuttonComponent as ɵgg, filebuttonMetaData as ɵgf, ExtFilefieldComponent as ɵge, filefieldMetaData as ɵgd, ExtFormpanelComponent as ɵim, formpanelMetaData as ɵil, ExtGaugeComponent as ɵqw, gaugeMetaData as ɵqv, ExtGoogle_mapComponent as ɵra, google_mapMetaData as ɵqz, ExtGridComponent as ɵkg, gridMetaData as ɵkf, ExtGridcellComponent as ɵis, gridcellMetaData as ɵir, ExtGridcellbaseComponent as ɵio, gridcellbaseMetaData as ɵin, ExtGridcolumnComponent as ɵjo, gridcolumnMetaData as ɵjn, ExtGridcolumnsmenuComponent as ɵko, gridcolumnsmenuMetaData as ɵkn, ExtGridgroupbythismenuitemComponent as ɵkq, gridgroupbythismenuitemMetaData as ɵkp, ExtGridrowComponent as ɵla, gridrowMetaData as ɵkz, ExtGridshowingroupsmenuitemComponent as ɵks, gridshowingroupsmenuitemMetaData as ɵkr, ExtGridsortascmenuitemComponent as ɵku, gridsortascmenuitemMetaData as ɵkt, ExtGridsortdescmenuitemComponent as ɵkw, gridsortdescmenuitemMetaData as ɵkv, ExtGridsummaryrowComponent as ɵlg, gridsummaryrowMetaData as ɵlf, ExtHeadercontainerComponent as ɵki, headercontainerMetaData as ɵkh, ExtHiddenfieldComponent as ɵgi, hiddenfieldMetaData as ɵgh, ExtImageComponent as ɵlk, imageMetaData as ɵlj, ExtImgComponent as ɵlm, imgMetaData as ɵll, ExtIndexbarComponent as ɵec, indexbarMetaData as ɵeb, ExtIndicatorComponent as ɵlo, indicatorMetaData as ɵln, ExtInputfieldComponent as ɵgk, inputfieldMetaData as ɵgj, ExtInteractionComponent as ɵcg, interactionMetaData as ɵcf, ExtItemheaderComponent as ɵee, itemheaderMetaData as ɵed, ExtLabelComponent as ɵlq, labelMetaData as ɵlp, ExtLegendComponent as ɵci, legendMetaData as ɵch, ExtListComponent as ɵeg, listMetaData as ɵef, ExtListitemComponent as ɵei, listitemMetaData as ɵeh, ExtListswiperitemComponent as ɵek, listswiperitemMetaData as ɵej, ExtListswiperstepperComponent as ɵem, listswiperstepperMetaData as ɵel, ExtLoadmaskComponent as ɵlw, loadmaskMetaData as ɵlv, ExtLockedgridComponent as ɵkk, lockedgridMetaData as ɵkj, ExtLockedgridregionComponent as ɵkm, lockedgridregionMetaData as ɵkl, ExtMapComponent as ɵqy, mapMetaData as ɵqx, ExtMaskComponent as ɵly, maskMetaData as ɵlx, ExtMediaComponent as ɵma, mediaMetaData as ɵlz, ExtMenuComponent as ɵmg, menuMetaData as ɵmf, ExtMenucheckitemComponent as ɵmc, menucheckitemMetaData as ɵmb, ExtMenuitemComponent as ɵme, menuitemMetaData as ɵmd, ExtMenuradioitemComponent as ɵmi, menuradioitemMetaData as ɵmh, ExtMenuseparatorComponent as ɵmk, menuseparatorMetaData as ɵmj, ExtMenutriggerComponent as ɵhw, menutriggerMetaData as ɵhv, ExtMessageboxComponent as ɵmm, messageboxMetaData as ɵml, ExtNavigationviewComponent as ɵmo, navigationviewMetaData as ɵmn, ExtNestedlistComponent as ɵeo, nestedlistMetaData as ɵen, ExtNumbercellComponent as ɵiy, numbercellMetaData as ɵix, ExtNumbercolumnComponent as ɵjw, numbercolumnMetaData as ɵjv, ExtNumberfieldComponent as ɵgm, numberfieldMetaData as ɵgl, ExtPagingtoolbarComponent as ɵky, pagingtoolbarMetaData as ɵkx, ExtPanelComponent as ɵmq, panelMetaData as ɵmp, ExtPanelheaderComponent as ɵmw, panelheaderMetaData as ɵmv, ExtPaneltitleComponent as ɵna, paneltitleMetaData as ɵmz, ExtPaneltoolComponent as ɵqk, paneltoolMetaData as ɵqj, ExtPasswordfieldComponent as ɵgq, passwordfieldMetaData as ɵgp, ExtPickerComponent as ɵng, pickerMetaData as ɵnf, ExtPickerfieldComponent as ɵgs, pickerfieldMetaData as ɵgr, ExtPickerslotComponent as ɵnk, pickerslotMetaData as ɵnj, ExtPivotconfigcontainerComponent as ɵoc, pivotconfigcontainerMetaData as ɵob, ExtPivotconfigfieldComponent as ɵoa, pivotconfigfieldMetaData as ɵnz, ExtPivotconfigformComponent as ɵoe, pivotconfigformMetaData as ɵod, ExtPivotconfigpanelComponent as ɵog, pivotconfigpanelMetaData as ɵof, ExtPivotd3containerComponent as ɵns, pivotd3containerMetaData as ɵnr, ExtPivotgridComponent as ɵny, pivotgridMetaData as ɵnx, ExtPivotgridcellComponent as ɵno, pivotgridcellMetaData as ɵnn, ExtPivotgridgroupcellComponent as ɵnq, pivotgridgroupcellMetaData as ɵnp, ExtPivotgridrowComponent as ɵom, pivotgridrowMetaData as ɵol, ExtPivotheatmapComponent as ɵnu, pivotheatmapMetaData as ɵnt, ExtPivotrangeeditorComponent as ɵok, pivotrangeeditorMetaData as ɵoj, ExtPivotsettingsComponent as ɵoi, pivotsettingsMetaData as ɵoh, ExtPivottreemapComponent as ɵnw, pivottreemapMetaData as ɵnv, ExtPolarComponent as ɵcm, polarMetaData as ɵcl, ExtProgressComponent as ɵoo, progressMetaData as ɵon, ExtProgressbarwidgetComponent as ɵoq, progressbarwidgetMetaData as ɵop, ExtPullrefreshbarComponent as ɵeq, pullrefreshbarMetaData as ɵep, ExtPullrefreshspinnerComponent as ɵes, pullrefreshspinnerMetaData as ɵer, ExtRadioComponent as ɵgu, radioMetaData as ɵgt, ExtRadiofieldComponent as ɵgw, radiofieldMetaData as ɵgv, ExtRatingComponent as ɵrc, ratingMetaData as ɵrb, ExtRevealtriggerComponent as ɵhy, revealtriggerMetaData as ɵhx, ExtRowbodyComponent as ɵlc, rowbodyMetaData as ɵlb, ExtRowheaderComponent as ɵle, rowheaderMetaData as ɵld, ExtRownumbererComponent as ɵjy, rownumbererMetaData as ɵjx, ExtRownumberercellComponent as ɵja, rownumberercellMetaData as ɵiz, ExtSearchfieldComponent as ɵgy, searchfieldMetaData as ɵgx, ExtSegmentedbuttonComponent as ɵos, segmentedbuttonMetaData as ɵor, ExtSelectfieldComponent as ɵha, selectfieldMetaData as ɵgz, ExtSelectioncolumnComponent as ɵka, selectioncolumnMetaData as ɵjz, ExtSelectpickerComponent as ɵni, selectpickerMetaData as ɵnh, ExtSheetComponent as ɵou, sheetMetaData as ɵot, ExtSimplelistitemComponent as ɵeu, simplelistitemMetaData as ɵet, ExtSinglesliderfieldComponent as ɵhc, singlesliderfieldMetaData as ɵhb, ExtSliderComponent as ɵow, sliderMetaData as ɵov, ExtSliderfieldComponent as ɵhe, sliderfieldMetaData as ɵhd, ExtSpacefillingComponent as ɵco, spacefillingMetaData as ɵcn, ExtSpacerComponent as ɵpc, spacerMetaData as ɵpb, ExtSparklineComponent as ɵpg, sparklineMetaData as ɵpf, ExtSparklinebarComponent as ɵpe, sparklinebarMetaData as ɵpd, ExtSparklineboxComponent as ɵpi, sparklineboxMetaData as ɵph, ExtSparklinebulletComponent as ɵpk, sparklinebulletMetaData as ɵpj, ExtSparklinediscreteComponent as ɵpm, sparklinediscreteMetaData as ɵpl, ExtSparklinelineComponent as ɵpo, sparklinelineMetaData as ɵpn, ExtSparklinepieComponent as ɵpq, sparklinepieMetaData as ɵpp, ExtSparklinetristateComponent as ɵps, sparklinetristateMetaData as ɵpr, ExtSpindowntriggerComponent as ɵia, spindowntriggerMetaData as ɵhz, ExtSpinnerfieldComponent as ɵhg, spinnerfieldMetaData as ɵhf, ExtSpinuptriggerComponent as ɵic, spinuptriggerMetaData as ɵib, ExtSplitbuttonComponent as ɵpu, splitbuttonMetaData as ɵpt, ExtSurfaceComponent as ɵfc, surfaceMetaData as ɵfb, ExtTabComponent as ɵqa, tabMetaData as ɵpz, ExtTabbarComponent as ɵpw, tabbarMetaData as ɵpv, ExtTabletpickerComponent as ɵnm, tabletpickerMetaData as ɵnl, ExtTabpanelComponent as ɵpy, tabpanelMetaData as ɵpx, ExtTemplatecolumnComponent as ɵjs, templatecolumnMetaData as ɵjr, ExtTextareafieldComponent as ɵhk, textareafieldMetaData as ɵhj, ExtTextcellComponent as ɵjc, textcellMetaData as ɵjb, ExtTextcolumnComponent as ɵkc, textcolumnMetaData as ɵkb, ExtTextfieldComponent as ɵhi, textfieldMetaData as ɵhh, ExtThumbComponent as ɵoy, thumbMetaData as ɵox, ExtTimefieldComponent as ɵhm, timefieldMetaData as ɵhl, ExtTimepanelComponent as ɵmy, timepanelMetaData as ɵmx, ExtTimetriggerComponent as ɵie, timetriggerMetaData as ɵid, ExtTitleComponent as ɵqe, titleMetaData as ɵqd, ExtTitlebarComponent as ɵqg, titlebarMetaData as ɵqf, ExtTogglefieldComponent as ɵho, togglefieldMetaData as ɵhn, ExtTogglesliderComponent as ɵpa, togglesliderMetaData as ɵoz, ExtToolComponent as ɵqi, toolMetaData as ɵqh, ExtToolbarComponent as ɵqm, toolbarMetaData as ɵql, ExtTooltipComponent as ɵqc, tooltipMetaData as ɵqb, ExtTreeComponent as ɵli, treeMetaData as ɵlh, ExtTreecellComponent as ɵje, treecellMetaData as ɵjd, ExtTreecolumnComponent as ɵke, treecolumnMetaData as ɵkd, ExtTreelistComponent as ɵls, treelistMetaData as ɵlr, ExtTreelistitemComponent as ɵlu, treelistitemMetaData as ɵlt, ExtTriggerComponent as ɵig, triggerMetaData as ɵif, ExtUrlfieldComponent as ɵii, urlfieldMetaData as ɵih, ExtVideoComponent as ɵre, videoMetaData as ɵrd, ExtViewportComponent as ɵrg, viewportMetaData as ɵrf, ExtWidgetComponent as ɵri, widgetMetaData as ɵrh, ExtWidgetcellComponent as ɵjg, widgetcellMetaData as ɵjf, ExtWindowComponent as ɵey, windowMetaData as ɵex, ExtYearpickerComponent as ɵnc, yearpickerMetaData as ɵnb };
-
+export { ExtAngularModule, ExtAngularBootstrapComponent as ɵa, ExtAngularBootstrapService as ɵb, ExtCalendar_dayComponent as ɵba, calendar_daysMetaData as ɵbb, ExtCalendar_daysComponent as ɵbc, calendar_monthMetaData as ɵbd, ExtCalendar_monthComponent as ɵbe, calendarMetaData as ɵbf, ExtCalendarComponent as ɵbg, calendar_weekMetaData as ɵbh, ExtCalendar_weekComponent as ɵbi, calendar_weeksMetaData as ɵbj, ExtCalendar_weeksComponent as ɵbk, calendar_dayviewMetaData as ɵbl, ExtCalendar_dayviewComponent as ɵbm, calendar_daysviewMetaData as ɵbn, ExtCalendar_daysviewComponent as ɵbo, calendar_monthviewMetaData as ɵbp, ExtCalendar_monthviewComponent as ɵbq, calendar_multiviewMetaData as ɵbr, ExtCalendar_multiviewComponent as ɵbs, calendar_weekviewMetaData as ɵbt, ExtCalendar_weekviewComponent as ɵbu, calendar_weeksviewMetaData as ɵbv, ExtCalendar_weeksviewComponent as ɵbw, carouselMetaData as ɵbx, ExtCarouselComponent as ɵby, axis3dMetaData as ɵbz, actionsheetMetaData as ɵc, ExtAxis3dComponent as ɵca, cartesianMetaData as ɵcb, ExtCartesianComponent as ɵcc, chartMetaData as ɵcd, ExtChartComponent as ɵce, interactionMetaData as ɵcf, ExtInteractionComponent as ɵcg, legendMetaData as ɵch, ExtLegendComponent as ɵci, chartnavigatorMetaData as ɵcj, ExtChartnavigatorComponent as ɵck, polarMetaData as ɵcl, ExtPolarComponent as ɵcm, spacefillingMetaData as ɵcn, ExtSpacefillingComponent as ɵco, chipMetaData as ɵcp, ExtChipComponent as ɵcq, componentMetaData as ɵcr, ExtComponentComponent as ɵcs, containerMetaData as ɵct, ExtContainerComponent as ɵcu, d3_canvasMetaData as ɵcv, ExtD3_canvasComponent as ɵcw, d3_heatmapMetaData as ɵcx, ExtD3_heatmapComponent as ɵcy, d3_packMetaData as ɵcz, ExtActionsheetComponent as ɵd, ExtD3_packComponent as ɵda, d3_partitionMetaData as ɵdb, ExtD3_partitionComponent as ɵdc, d3_sunburstMetaData as ɵdd, ExtD3_sunburstComponent as ɵde, d3_treeMetaData as ɵdf, ExtD3_treeComponent as ɵdg, d3_horizontal_treeMetaData as ɵdh, ExtD3_horizontal_treeComponent as ɵdi, d3_treemapMetaData as ɵdj, ExtD3_treemapComponent as ɵdk, d3_svgMetaData as ɵdl, ExtD3_svgComponent as ɵdm, d3MetaData as ɵdn, ExtD3Component as ɵdo, boundlistMetaData as ɵdp, ExtBoundlistComponent as ɵdq, chipviewMetaData as ɵdr, ExtChipviewComponent as ɵds, componentdataviewMetaData as ɵdt, ExtComponentdataviewComponent as ɵdu, dataitemMetaData as ɵdv, ExtDataitemComponent as ɵdw, dataviewMetaData as ɵdx, ExtDataviewComponent as ɵdy, emptytextMetaData as ɵdz, base as ɵe, ExtEmptytextComponent as ɵea, indexbarMetaData as ɵeb, ExtIndexbarComponent as ɵec, itemheaderMetaData as ɵed, ExtItemheaderComponent as ɵee, listMetaData as ɵef, ExtListComponent as ɵeg, listitemMetaData as ɵeh, ExtListitemComponent as ɵei, listswiperitemMetaData as ɵej, ExtListswiperitemComponent as ɵek, listswiperstepperMetaData as ɵel, ExtListswiperstepperComponent as ɵem, nestedlistMetaData as ɵen, ExtNestedlistComponent as ɵeo, pullrefreshbarMetaData as ɵep, ExtPullrefreshbarComponent as ɵeq, pullrefreshspinnerMetaData as ɵer, ExtPullrefreshspinnerComponent as ɵes, simplelistitemMetaData as ɵet, ExtSimplelistitemComponent as ɵeu, dialogMetaData as ɵev, ExtDialogComponent as ɵew, windowMetaData as ɵex, ExtWindowComponent as ɵey, drawMetaData as ɵez, audioMetaData as ɵf, ExtDrawComponent as ɵfa, surfaceMetaData as ɵfb, ExtSurfaceComponent as ɵfc, editorMetaData as ɵfd, ExtEditorComponent as ɵfe, checkboxMetaData as ɵff, ExtCheckboxComponent as ɵfg, checkboxfieldMetaData as ɵfh, ExtCheckboxfieldComponent as ɵfi, comboboxMetaData as ɵfj, ExtComboboxComponent as ɵfk, comboboxfieldMetaData as ɵfl, ExtComboboxfieldComponent as ɵfm, containerfieldMetaData as ɵfn, ExtContainerfieldComponent as ɵfo, fieldcontainerMetaData as ɵfp, ExtFieldcontainerComponent as ɵfq, datefieldMetaData as ɵfr, ExtDatefieldComponent as ɵfs, datepickerfieldMetaData as ɵft, ExtDatepickerfieldComponent as ɵfu, datepickernativefieldMetaData as ɵfv, ExtDatepickernativefieldComponent as ɵfw, displayfieldMetaData as ɵfx, ExtDisplayfieldComponent as ɵfy, emailfieldMetaData as ɵfz, ExtAudioComponent as ɵg, ExtEmailfieldComponent as ɵga, fieldMetaData as ɵgb, ExtFieldComponent as ɵgc, filefieldMetaData as ɵgd, ExtFilefieldComponent as ɵge, filebuttonMetaData as ɵgf, ExtFilebuttonComponent as ɵgg, hiddenfieldMetaData as ɵgh, ExtHiddenfieldComponent as ɵgi, inputfieldMetaData as ɵgj, ExtInputfieldComponent as ɵgk, numberfieldMetaData as ɵgl, ExtNumberfieldComponent as ɵgm, fieldpanelMetaData as ɵgn, ExtFieldpanelComponent as ɵgo, passwordfieldMetaData as ɵgp, ExtPasswordfieldComponent as ɵgq, pickerfieldMetaData as ɵgr, ExtPickerfieldComponent as ɵgs, radioMetaData as ɵgt, ExtRadioComponent as ɵgu, radiofieldMetaData as ɵgv, ExtRadiofieldComponent as ɵgw, searchfieldMetaData as ɵgx, ExtSearchfieldComponent as ɵgy, selectfieldMetaData as ɵgz, buttonMetaData as ɵh, ExtSelectfieldComponent as ɵha, singlesliderfieldMetaData as ɵhb, ExtSinglesliderfieldComponent as ɵhc, sliderfieldMetaData as ɵhd, ExtSliderfieldComponent as ɵhe, spinnerfieldMetaData as ɵhf, ExtSpinnerfieldComponent as ɵhg, textfieldMetaData as ɵhh, ExtTextfieldComponent as ɵhi, textareafieldMetaData as ɵhj, ExtTextareafieldComponent as ɵhk, timefieldMetaData as ɵhl, ExtTimefieldComponent as ɵhm, togglefieldMetaData as ɵhn, ExtTogglefieldComponent as ɵho, cleartriggerMetaData as ɵhp, ExtCleartriggerComponent as ɵhq, datetriggerMetaData as ɵhr, ExtDatetriggerComponent as ɵhs, expandtriggerMetaData as ɵht, ExtExpandtriggerComponent as ɵhu, menutriggerMetaData as ɵhv, ExtMenutriggerComponent as ɵhw, revealtriggerMetaData as ɵhx, ExtRevealtriggerComponent as ɵhy, spindowntriggerMetaData as ɵhz, ExtButtonComponent as ɵi, ExtSpindowntriggerComponent as ɵia, spinuptriggerMetaData as ɵib, ExtSpinuptriggerComponent as ɵic, timetriggerMetaData as ɵid, ExtTimetriggerComponent as ɵie, triggerMetaData as ɵif, ExtTriggerComponent as ɵig, urlfieldMetaData as ɵih, ExtUrlfieldComponent as ɵii, fieldsetMetaData as ɵij, ExtFieldsetComponent as ɵik, formpanelMetaData as ɵil, ExtFormpanelComponent as ɵim, gridcellbaseMetaData as ɵin, ExtGridcellbaseComponent as ɵio, booleancellMetaData as ɵip, ExtBooleancellComponent as ɵiq, gridcellMetaData as ɵir, ExtGridcellComponent as ɵis, checkcellMetaData as ɵit, ExtCheckcellComponent as ɵiu, datecellMetaData as ɵiv, ExtDatecellComponent as ɵiw, numbercellMetaData as ɵix, ExtNumbercellComponent as ɵiy, rownumberercellMetaData as ɵiz, calendar_eventMetaData as ɵj, ExtRownumberercellComponent as ɵja, textcellMetaData as ɵjb, ExtTextcellComponent as ɵjc, treecellMetaData as ɵjd, ExtTreecellComponent as ɵje, widgetcellMetaData as ɵjf, ExtWidgetcellComponent as ɵjg, celleditorMetaData as ɵjh, ExtCelleditorComponent as ɵji, booleancolumnMetaData as ɵjj, ExtBooleancolumnComponent as ɵjk, checkcolumnMetaData as ɵjl, ExtCheckcolumnComponent as ɵjm, gridcolumnMetaData as ɵjn, ExtGridcolumnComponent as ɵjo, columnMetaData as ɵjp, ExtColumnComponent as ɵjq, templatecolumnMetaData as ɵjr, ExtTemplatecolumnComponent as ɵjs, datecolumnMetaData as ɵjt, ExtDatecolumnComponent as ɵju, numbercolumnMetaData as ɵjv, ExtNumbercolumnComponent as ɵjw, rownumbererMetaData as ɵjx, ExtRownumbererComponent as ɵjy, selectioncolumnMetaData as ɵjz, ExtCalendar_eventComponent as ɵk, ExtSelectioncolumnComponent as ɵka, textcolumnMetaData as ɵkb, ExtTextcolumnComponent as ɵkc, treecolumnMetaData as ɵkd, ExtTreecolumnComponent as ɵke, gridMetaData as ɵkf, ExtGridComponent as ɵkg, headercontainerMetaData as ɵkh, ExtHeadercontainerComponent as ɵki, lockedgridMetaData as ɵkj, ExtLockedgridComponent as ɵkk, lockedgridregionMetaData as ɵkl, ExtLockedgridregionComponent as ɵkm, gridcolumnsmenuMetaData as ɵkn, ExtGridcolumnsmenuComponent as ɵko, gridgroupbythismenuitemMetaData as ɵkp, ExtGridgroupbythismenuitemComponent as ɵkq, gridshowingroupsmenuitemMetaData as ɵkr, ExtGridshowingroupsmenuitemComponent as ɵks, gridsortascmenuitemMetaData as ɵkt, ExtGridsortascmenuitemComponent as ɵku, gridsortdescmenuitemMetaData as ɵkv, ExtGridsortdescmenuitemComponent as ɵkw, pagingtoolbarMetaData as ɵkx, ExtPagingtoolbarComponent as ɵky, gridrowMetaData as ɵkz, calendar_form_addMetaData as ɵl, ExtGridrowComponent as ɵla, rowbodyMetaData as ɵlb, ExtRowbodyComponent as ɵlc, rowheaderMetaData as ɵld, ExtRowheaderComponent as ɵle, gridsummaryrowMetaData as ɵlf, ExtGridsummaryrowComponent as ɵlg, treeMetaData as ɵlh, ExtTreeComponent as ɵli, imageMetaData as ɵlj, ExtImageComponent as ɵlk, imgMetaData as ɵll, ExtImgComponent as ɵlm, indicatorMetaData as ɵln, ExtIndicatorComponent as ɵlo, labelMetaData as ɵlp, ExtLabelComponent as ɵlq, treelistMetaData as ɵlr, ExtTreelistComponent as ɵls, treelistitemMetaData as ɵlt, ExtTreelistitemComponent as ɵlu, loadmaskMetaData as ɵlv, ExtLoadmaskComponent as ɵlw, maskMetaData as ɵlx, ExtMaskComponent as ɵly, mediaMetaData as ɵlz, ExtCalendar_form_addComponent as ɵm, ExtMediaComponent as ɵma, menucheckitemMetaData as ɵmb, ExtMenucheckitemComponent as ɵmc, menuitemMetaData as ɵmd, ExtMenuitemComponent as ɵme, menuMetaData as ɵmf, ExtMenuComponent as ɵmg, menuradioitemMetaData as ɵmh, ExtMenuradioitemComponent as ɵmi, menuseparatorMetaData as ɵmj, ExtMenuseparatorComponent as ɵmk, messageboxMetaData as ɵml, ExtMessageboxComponent as ɵmm, navigationviewMetaData as ɵmn, ExtNavigationviewComponent as ɵmo, panelMetaData as ɵmp, ExtPanelComponent as ɵmq, datepanelMetaData as ɵmr, ExtDatepanelComponent as ɵms, datetitleMetaData as ɵmt, ExtDatetitleComponent as ɵmu, panelheaderMetaData as ɵmv, ExtPanelheaderComponent as ɵmw, timepanelMetaData as ɵmx, ExtTimepanelComponent as ɵmy, paneltitleMetaData as ɵmz, calendar_calendar_pickerMetaData as ɵn, ExtPaneltitleComponent as ɵna, yearpickerMetaData as ɵnb, ExtYearpickerComponent as ɵnc, datepickerMetaData as ɵnd, ExtDatepickerComponent as ɵne, pickerMetaData as ɵnf, ExtPickerComponent as ɵng, selectpickerMetaData as ɵnh, ExtSelectpickerComponent as ɵni, pickerslotMetaData as ɵnj, ExtPickerslotComponent as ɵnk, tabletpickerMetaData as ɵnl, ExtTabletpickerComponent as ɵnm, pivotgridcellMetaData as ɵnn, ExtPivotgridcellComponent as ɵno, pivotgridgroupcellMetaData as ɵnp, ExtPivotgridgroupcellComponent as ɵnq, pivotd3containerMetaData as ɵnr, ExtPivotd3containerComponent as ɵns, pivotheatmapMetaData as ɵnt, ExtPivotheatmapComponent as ɵnu, pivottreemapMetaData as ɵnv, ExtPivottreemapComponent as ɵnw, pivotgridMetaData as ɵnx, ExtPivotgridComponent as ɵny, pivotconfigfieldMetaData as ɵnz, ExtCalendar_calendar_pickerComponent as ɵo, ExtPivotconfigfieldComponent as ɵoa, pivotconfigcontainerMetaData as ɵob, ExtPivotconfigcontainerComponent as ɵoc, pivotconfigformMetaData as ɵod, ExtPivotconfigformComponent as ɵoe, pivotconfigpanelMetaData as ɵof, ExtPivotconfigpanelComponent as ɵog, pivotsettingsMetaData as ɵoh, ExtPivotsettingsComponent as ɵoi, pivotrangeeditorMetaData as ɵoj, ExtPivotrangeeditorComponent as ɵok, pivotgridrowMetaData as ɵol, ExtPivotgridrowComponent as ɵom, progressMetaData as ɵon, ExtProgressComponent as ɵoo, progressbarwidgetMetaData as ɵop, ExtProgressbarwidgetComponent as ɵoq, segmentedbuttonMetaData as ɵor, ExtSegmentedbuttonComponent as ɵos, sheetMetaData as ɵot, ExtSheetComponent as ɵou, sliderMetaData as ɵov, ExtSliderComponent as ɵow, thumbMetaData as ɵox, ExtThumbComponent as ɵoy, togglesliderMetaData as ɵoz, calendar_form_editMetaData as ɵp, ExtTogglesliderComponent as ɵpa, spacerMetaData as ɵpb, ExtSpacerComponent as ɵpc, sparklinebarMetaData as ɵpd, ExtSparklinebarComponent as ɵpe, sparklineMetaData as ɵpf, ExtSparklineComponent as ɵpg, sparklineboxMetaData as ɵph, ExtSparklineboxComponent as ɵpi, sparklinebulletMetaData as ɵpj, ExtSparklinebulletComponent as ɵpk, sparklinediscreteMetaData as ɵpl, ExtSparklinediscreteComponent as ɵpm, sparklinelineMetaData as ɵpn, ExtSparklinelineComponent as ɵpo, sparklinepieMetaData as ɵpp, ExtSparklinepieComponent as ɵpq, sparklinetristateMetaData as ɵpr, ExtSparklinetristateComponent as ɵps, splitbuttonMetaData as ɵpt, ExtSplitbuttonComponent as ɵpu, tabbarMetaData as ɵpv, ExtTabbarComponent as ɵpw, tabpanelMetaData as ɵpx, ExtTabpanelComponent as ɵpy, tabMetaData as ɵpz, ExtCalendar_form_editComponent as ɵq, ExtTabComponent as ɵqa, tooltipMetaData as ɵqb, ExtTooltipComponent as ɵqc, titleMetaData as ɵqd, ExtTitleComponent as ɵqe, titlebarMetaData as ɵqf, ExtTitlebarComponent as ɵqg, toolMetaData as ɵqh, ExtToolComponent as ɵqi, paneltoolMetaData as ɵqj, ExtPaneltoolComponent as ɵqk, toolbarMetaData as ɵql, ExtToolbarComponent as ɵqm, colorbuttonMetaData as ɵqn, ExtColorbuttonComponent as ɵqo, colorpickercolorpreviewMetaData as ɵqp, ExtColorpickercolorpreviewComponent as ɵqq, colorfieldMetaData as ɵqr, ExtColorfieldComponent as ɵqs, colorselectorMetaData as ɵqt, ExtColorselectorComponent as ɵqu, gaugeMetaData as ɵqv, ExtGaugeComponent as ɵqw, mapMetaData as ɵqx, ExtMapComponent as ɵqy, google_mapMetaData as ɵqz, calendar_timefieldMetaData as ɵr, ExtGoogle_mapComponent as ɵra, ratingMetaData as ɵrb, ExtRatingComponent as ɵrc, videoMetaData as ɵrd, ExtVideoComponent as ɵre, viewportMetaData as ɵrf, ExtViewportComponent as ɵrg, widgetMetaData as ɵrh, ExtWidgetComponent as ɵri, ExtCalendar_timefieldComponent as ɵs, calendar_daysheaderMetaData as ɵt, ExtCalendar_daysheaderComponent as ɵu, calendar_weeksheaderMetaData as ɵv, ExtCalendar_weeksheaderComponent as ɵw, calendar_listMetaData as ɵx, ExtCalendar_listComponent as ɵy, calendar_dayMetaData as ɵz };
 //# sourceMappingURL=sencha-ext-angular.js.map
