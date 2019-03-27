@@ -81,7 +81,11 @@ module.exports = function (env) {
       mode: environment,
       devtool: (environment === 'development') ? 'inline-source-map' : false,
       context: path.join(__dirname, contextFolder),
-      entry: entryFile,
+      entry: {
+        vendor:  './vendor.ts',
+        polyfills: "./polyfills.ts",
+        main: entryFile
+      },
       output: {
         path: path.join(__dirname, outputFolder),
         filename: "[name].js"
