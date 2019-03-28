@@ -5,11 +5,11 @@
   "scripts": {
     "start": "npm run dev",
     "clean": "rimraf build",
-    "dev": "webpack-dev-server --env.verbose='no'",
-    "b1": "npm run clean && cross-env webpack --env.environment=production --env.treeshake='yes'",
-    "b2": "cross-env webpack --env.environment=production --env.basehref='/'",
-    "build": "npm run clean && cross-env webpack --env.environment='production' --env.treeshake='yes' && cross-env webpack --env.environment=production --env.basehref='/'",
-    "buildexample": "npm run clean && cross-env webpack --env.environment='production' --env.treeshake='yes' && cross-env webpack --env.environment='production' --env.basehref='/ExtAngular/6.7.0/kitchensink/'"
+    "dev": "webpack-dev-server --env.verbose=no",
+    "b1": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=yes",
+    "b2": "cross-env webpack --env.environment=production --env.basehref=/",
+    "build": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=yes && cross-env webpack --env.environment=production --env.basehref=/",
+    "buildexample": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=yes && cross-env webpack --env.environment=production --env.basehref='/ExtAngular/6.7.0/kitchensink/'"
    },
   "devDependencies": {
     "@sencha/ext-angular": "~6.7.1",
