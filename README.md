@@ -2,7 +2,7 @@
 
 ## Release Notes
 
-### 6.7.1
+### 7.0.0
 
 NOTE: the easiest way to make thes changes is to refer to the package.json
 and webpack.config.js files the ext-angular-boilerplate project
