@@ -14,26 +14,7 @@ ExtAngular requires the following to be installed before proceeding:
 
 ## Creating Your First ExtAngular Application with Angular CLI
 
-### Step 1a: Authenticate to Sencha's NPM Registry - early adopter
-
-ExtAngular and all related packages are hosted on Sencha's private NPM registry. 
-
-To gain access to the early adopter registry, contact Sencha Sales.
-
-Once you have received your credentials from sales for the early adopter registry, 
-you can authenticate by running the following command:
-
-```bash
-npm login --registry=https://sencha.myget.org/F/early-adopter/npm/ --scope=@sencha
-```
-
-This command configures npm to download packages in the `@sencha` scope from Sencha's registry.
-
-### Step 1b: Authenticate to Sencha's NPM Registry - Production (not available yet)
-
-
-*************
-When this product is in production...
+### Step 1: Authenticate to Sencha's NPM Registry
 
 ExtAngular and all related packages are hosted on Sencha's private NPM registry. 
 
@@ -48,7 +29,6 @@ npm login --registry=http://npm.sencha.com --scope=@sencha
 ```
 
 This command configures npm to download packages in the `@sencha` scope from Sencha's registry.
-*************
 
 ### Step 2: Create a New Angular CLI Application
 
@@ -56,8 +36,8 @@ If you are new to Angular, or do not have an existing application, we recommend 
 
 ```
 npm install -g @angular/cli
-ng new ext-angular-modern-boilerplate --style scss --minimal --skip-tests --inline-style --inline-template
-cd ext-angular-modern-boilerplate
+ng new ext-angular-cli-boilerplate --style scss --minimal --skip-tests --inline-style --inline-template
+cd ext-angular-cli-boilerplate
 npm start
 ```
 
@@ -73,6 +53,7 @@ change
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
+          "options": {
 
 to
 
@@ -94,73 +75,70 @@ to
         "serve": {
           "builder": "@angular-builders/dev-server:generic",
 
-in the terminal window
+in the terminal window 
 
-copy 
+from https://github.com/sencha/ext-angular, copy 
 ```
-../../generators/ext-component-creator/filetemplates/angular/ext-angular-webpack.config.json 
-```
-to
-```
- ./
-```
-copy 
-```
-../../generators/ext-component-creator/filetemplates/angular/ext-angular.service.ts
+generators/ext-component-creator/filetemplates/angular/ext-angular-webpack.config.js 
 ```
 to
 ```
-./src
+ ./ext-angular-webpack.config.js 
+```
+copy 
+```
+generators/ext-component-creator/filetemplates/angular/ext-angular.service.ts
+```
+to
+```
+./src/ext-angular.service.ts
 ```
 
 in ./package.json, add
 ```
   "dependencies": {
-    "@sencha/ext-angular": "~6.7.0",
+    "@sencha/ext-angular": "~6.7.1",
     "@sencha/ext": "~6.7.0",
     "@sencha/ext-modern": "~6.7.0",
     "@sencha/ext-modern-treegrid": "~6.7.0",
     "@sencha/ext-modern-theme-material": "~6.7.0",
 
   "devDependencies": {
-    "@angular-builders/custom-webpack": "~7.1.1",
-    "@angular-builders/dev-server":"~7.1.1",
+    "@angular-builders/custom-webpack": "~7.4.3",
+    "@angular-builders/dev-server":"~7.3.1",
     "@sencha/ext-angular-webpack-plugin": "~6.7.0",
+    "html-webpack-plugin": "^3.2.0",
+    "base-href-webpack-plugin": "~2.0.0",
 ```
 in ./tsconfig.json, add
 ```
      "paths": {
       "@angular/*": ["./node_modules/@angular/*"]
-     }
+     },
 ```
 replace contents of ./src/app/app.module.ts with this:
 
 ```javascript
-import { Component, NgModule } from '@angular/core'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
-import { ExtAngularModernModule } from './ext-angular-modern/ext-angular-modern.module'
-import { ExtAngularService } from './ext-angular.service'
+import { ExtAngularModule } from '@sencha/ext-angular';
+import { ExtAngularBootstrapService } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.service';
+import { ExtAngularBootstrapComponent } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.component';
+
 import { AppComponent } from './app.component'
 
-@Component({
-  selector: 'app-root',
-  template: ``,
+@NgModule({
+  imports: [BrowserModule, ExtAngularModule],
+  declarations: [ExtAngularBootstrapComponent, AppComponent,],
+  providers: [ExtAngularBootstrapService],
+  entryComponents: [AppComponent],
+  bootstrap: [ExtAngularBootstrapComponent]
 })
-export class App {
-  constructor(private ExtAngularService: ExtAngularService) {
-    this.ExtAngularService.appendComponentToViewport(AppComponent)
+export class AppModule {
+  constructor(extAngularService : ExtAngularBootstrapService) {
+    extAngularService.setBootStrapComponent(AppComponent)
   }
 }
-
-@NgModule({
-  imports: [ BrowserModule, BrowserAnimationsModule, ExtAngularModernModule ],
-  declarations: [ App, AppComponent ],
-  providers: [ ExtAngularService ],
-  entryComponents: [ AppComponent ],
-  bootstrap: [ App ]
-})
-export class AppModule {}
 ```
 
 replace the contents of ./src/index.html with this:
@@ -170,15 +148,15 @@ replace the contents of ./src/index.html with this:
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>ExtAngularClient</title>
+  <title>ExtAngularCliBoilerplate</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="build/ext-angular/ext.css" rel="stylesheet">
+  <link href="ext-angular/ext.css" rel="stylesheet">
+  <script type="text/javascript" src="ext-angular/ext.js"></script>
 </head>
 <body>
   <app-root></app-root>
-  <script type="text/javascript" src="build/ext-angular/ext.js"></script>
 </body>
 </html>
 ```
@@ -198,19 +176,21 @@ import { Component } from '@angular/core';
   styles: []
 })
 export class AppComponent {
-  title = 'ext-angular-modern-boilerplate'
+  title = 'ext-angular-cli-boilerplate'
 }
 ```
 
 
 ### Step 4: Re-Run install and start your ExtAngular application
 
-Once the app has been updated, run the following to install and start the app and open it in a browser at http://localhost:4200:
-
+Run the following in a terminal window to install and start the app 
 ```
 npm install
 npm start
 ```
+
+Open a browser at http://localhost:4200
+
 
 The resulting app uses webpack-dev-server and hot-loading. Any changes you make will be immediately reflected in the browser.
 
@@ -218,7 +198,7 @@ The resulting app uses webpack-dev-server and hot-loading. Any changes you make 
 
 The [ext-angular repo on GitHub](https://github.com/sencha/ext-angular) contains several example apps that you can use to learn more about ExtAngular.  Each has a readme that contains instructions for downloading and running:
 
-* [ext-angular-modern-kitchensink](https://github.com/sencha/ext-angular/tree/master/packages/ext-angular-modern-kitchensink) - Shows how to use every ExtAngular component. See it running [here](https://examples.sencha.com/ExtAngular/6.7.0/kitchensink/).
+* [ext-angular-kitchensink](https://github.com/sencha/ext-angular/tree/master/packages/ext-angular-kitchensink) - Shows how to use every ExtAngular component. See it running [here](https://examples.sencha.com/ExtAngular/6.7.0/kitchensink/).
 
 ## Appendix
 
