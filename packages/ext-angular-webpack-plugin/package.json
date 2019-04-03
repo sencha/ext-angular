@@ -1,5 +1,5 @@
 {
-  "name": "@sencha/ext-angular-webpack-plugin-orig",
+  "name": "@sencha/ext-angular-webpack-plugin",
   "version": "6.7.1",
   "description": "A webpack plugin for new Ext JS applications",
   "main": "dist/index.js",
@@ -63,5 +63,5 @@
   "bugs": {
     "url": "https://github.com/sencha"
   },
-  "homepage": "https://github.com/sencha/ext-gen/tree/master/packages/ext-webpack-plugin"
+  "homepage": "https://github.com/sencha/ext-gen/tree/master/packages/ext-angular-webpack-plugin"
 }

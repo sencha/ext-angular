@@ -1,5 +1,24 @@
 # Sencha ExtAngular - Getting Started
 
+## Release Notes
+
+### 6.7.1
+
+NOTE: the easiest way to make thes changes is to refer to the package.json
+and webpack.config.js files the ext-angular-boilerplate project
+
+in fact, just copy those 2 files to your project and add back in anything custom
+you may have added
+
+* changed package name of plugin
+  from: "@sencha/ext-angular-webpack-plugin": "~6.7.0",
+  to: "@sencha/ext-webpack-plugin": "~7.0.0",
+  (this effects package.json and webpack.config.js)
+
+* made all ext-webpack-plugin true/false fields now 'yes'/'no' fields
+  more consistent, now all are 'yes'/'no' fields
+
+
 ## Overview
 
 This guide will show you how to install and configure ExtAngular in your development environment.

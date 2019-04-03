@@ -7,10 +7,6 @@ import { ExtAngularModule } from '@sencha/ext-angular';
 import { ExtAngularBootstrapService } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.service';
 import { ExtAngularBootstrapComponent } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.component';
 
-//import { ExtAngularBootstrapService } from '@sencha/ext-angular'
-//import { ExtAngularBootstrapComponent } from '@sencha/ext-angular'
-
-
 import { AppComponent } from './app.component'
 import { HomeComponent } from './Home/home.component'
 import { AboutComponent } from './About/about.component'
