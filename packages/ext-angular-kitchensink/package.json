@@ -9,7 +9,7 @@
     "b1": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=yes",
     "b2": "cross-env webpack --env.environment=production --env.basehref=/",
     "build": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=yes && cross-env webpack --env.environment=production --env.basehref=/",
-    "buildexample": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=yes && cross-env webpack --env.environment=production --env.basehref=/ExtAngular/6.7.0/kitchensink/"
+    "buildexample": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=yes && cross-env webpack --env.environment=production --env.basehref=/ExtAngular/7.0.0/kitchensink/"
   },
   "devDependencies": {
     "hammerjs": "~2.0.8",
