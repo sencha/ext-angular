@@ -14,7 +14,7 @@ Ext.require([
 })
 export class AppComponent {
   isPhone = Ext.platformTags.phone;
-  title = 'Sencha ExtAngular 6.7 Boilerplate - Angular v' + VERSION.full
+  title = 'Sencha ExtAngular 7.0 Boilerplate - Angular v' + VERSION.full
 
   constructor(private router: Router) {}
 
