@@ -28,6 +28,7 @@ npm --registry https://sencha.myget.org/F/community/npm/ whoami
 
 git fetch upstream
 git merge upstream/ext-angular-6.7.x
+git merge upstream/ext-angular-7.0.x
 git merge upstream/ext-6.7.x
 
         // compilation.hooks.additionalAssets.tapAsync(`ext-additionalAssets`, (cb) => {
