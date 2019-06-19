@@ -72,6 +72,7 @@ import {TreeComponent} from '../examples/Trees/Tree/Tree';
 import {TreeDecorationsComponent} from '../examples/Trees/TreeDecorations/TreeDecorations';
 import {TreeGridComponent} from '../examples/Trees/TreeGrid/TreeGrid';
 import {TreeListComponent} from '../examples/Trees/TreeList/TreeList';
+import {TreeReorderComponent} from '../examples/Trees/TreeReorder/TreeReorder';
 
 import {BasicGridComponent} from '../examples/Grid/BasicGrid/BasicGrid';
 import {EditableGridComponent} from '../examples/Grid/EditableGrid/EditableGrid';
@@ -300,7 +301,8 @@ const routes: ExtAngularRoutes = [
   { path: 'trees/tree_decorations', component: TreeDecorationsComponent, text: 'Tree Decorations', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'trees/tree_grid', component: TreeGridComponent, text: 'Tree Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'trees/treelist', component: TreeListComponent, text: 'Tree List', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-
+  { path: 'trees/tree_reorder', component: TreeReorderComponent, text: 'Tree Reorder', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  
   { path: 'grids/core_features/basic_grid', component: BasicGridComponent, text: 'Basic Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/core_features/grouped_grid', component: GroupedGridComponent, text: 'Grouped Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/core_features/locking_grid', component: LockingGridComponent, text: 'Locking Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -326,7 +328,8 @@ const routes: ExtAngularRoutes = [
   { path: 'trees/tree_decorations', component: TreeDecorationsComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'trees/tree_grid', component: TreeGridComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'trees/treelist', component: TreeListComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-
+  { path: 'trees/tree_reorder', component: TreeReorderComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  
   { path: 'components/forms/checkboxfield', component: CheckBoxFieldComponent, text: 'CheckBoxField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/forms/comboboxfield', component: ComboBoxFieldComponent, text: 'ComboBoxField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/forms/multiselect_comboboxfield', component: MultiSelectComboBoxFieldComponent, text: 'MultiSelectComboBoxField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -506,6 +509,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
     TreeDecorationsComponent,
     TreeGridComponent,
     TreeListComponent,
+    TreeReorderComponent,
 
     BasicGridComponent,
     EditableGridComponent,
