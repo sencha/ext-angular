@@ -57,14 +57,14 @@ export class axis3dMetaData {
     'config'
 ];
   public static EVENTS: any[] = [
-		{name:'rangechange',parameters:'axis,range,oldRange'},
-		{name:'visiblerangechange',parameters:'axis,visibleRange'},
-		{name:'ready',parameters:''}
+{name:'rangechange',parameters:'axis,range,oldRange'},
+{name:'visiblerangechange',parameters:'axis,visibleRange'},
+{name:'ready',parameters:''}
 ];
   public static EVENTNAMES: string[] = [
-		'rangechange',
-		'visiblerangechange',
-		'ready'
+'rangechange',
+'visiblerangechange',
+'ready'
 ];
 }
 @Component({

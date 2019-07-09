@@ -15,6 +15,7 @@ import { base } from './base';
 export class widgetMetaData {
   public static XTYPE: string = 'widget';
   public static PROPERTIES: string[] = [
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -27,7 +28,6 @@ export class widgetMetaData {
     'controller',
     'defaultListenerScope',
     'disabled',
-    'eventHandlers',
     'flex',
     'floated',
     'focusCls',
@@ -41,6 +41,7 @@ export class widgetMetaData {
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -49,7 +50,6 @@ export class widgetMetaData {
     'relative',
     'renderTo',
     'ripple',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -72,38 +72,38 @@ export class widgetMetaData {
     'config'
 ];
   public static EVENTS: any[] = [
-		{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'beforetofront',parameters:'widget'},
-		{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'blur',parameters:'widget,event'},
-		{name:'disabledchange',parameters:'sender,value,oldValue'},
-		{name:'focus',parameters:'widget,event'},
-		{name:'focusenter',parameters:'widget,event'},
-		{name:'focusleave',parameters:'widget,event'},
-		{name:'heightchange',parameters:'sender,value,oldValue'},
-		{name:'hiddenchange',parameters:'sender,value,oldValue'},
-		{name:'tofront',parameters:'widget'},
-		{name:'widthchange',parameters:'sender,value,oldValue'},
-		{name:'ready',parameters:''}
+{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforetofront',parameters:'widget'},
+{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
+{name:'blur',parameters:'widget,event'},
+{name:'disabledchange',parameters:'sender,value,oldValue'},
+{name:'focus',parameters:'widget,event'},
+{name:'focusenter',parameters:'widget,event'},
+{name:'focusleave',parameters:'widget,event'},
+{name:'heightchange',parameters:'sender,value,oldValue'},
+{name:'hiddenchange',parameters:'sender,value,oldValue'},
+{name:'tofront',parameters:'widget'},
+{name:'widthchange',parameters:'sender,value,oldValue'},
+{name:'ready',parameters:''}
 ];
   public static EVENTNAMES: string[] = [
-		'beforedisabledchange',
-		'beforeheightchange',
-		'beforehiddenchange',
-		'beforetofront',
-		'beforewidthchange',
-		'blur',
-		'disabledchange',
-		'focus',
-		'focusenter',
-		'focusleave',
-		'heightchange',
-		'hiddenchange',
-		'tofront',
-		'widthchange',
-		'ready'
+'beforedisabledchange',
+'beforeheightchange',
+'beforehiddenchange',
+'beforetofront',
+'beforewidthchange',
+'blur',
+'disabledchange',
+'focus',
+'focusenter',
+'focusleave',
+'heightchange',
+'hiddenchange',
+'tofront',
+'widthchange',
+'ready'
 ];
 }
 @Component({

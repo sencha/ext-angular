@@ -15,6 +15,7 @@ import { base } from './base';
 export class surfaceMetaData {
   public static XTYPE: string = 'surface';
   public static PROPERTIES: string[] = [
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -29,7 +30,6 @@ export class surfaceMetaData {
     'defaultListenerScope',
     'dirty',
     'disabled',
-    'eventHandlers',
     'flex',
     'flipRtlText',
     'floated',
@@ -45,6 +45,7 @@ export class surfaceMetaData {
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -54,7 +55,6 @@ export class surfaceMetaData {
     'relative',
     'renderTo',
     'ripple',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -77,38 +77,38 @@ export class surfaceMetaData {
     'config'
 ];
   public static EVENTS: any[] = [
-		{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'beforetofront',parameters:'surface'},
-		{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'blur',parameters:'surface,event'},
-		{name:'disabledchange',parameters:'sender,value,oldValue'},
-		{name:'focus',parameters:'surface,event'},
-		{name:'focusenter',parameters:'surface,event'},
-		{name:'focusleave',parameters:'surface,event'},
-		{name:'heightchange',parameters:'sender,value,oldValue'},
-		{name:'hiddenchange',parameters:'sender,value,oldValue'},
-		{name:'tofront',parameters:'surface'},
-		{name:'widthchange',parameters:'sender,value,oldValue'},
-		{name:'ready',parameters:''}
+{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforetofront',parameters:'surface'},
+{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
+{name:'blur',parameters:'surface,event'},
+{name:'disabledchange',parameters:'sender,value,oldValue'},
+{name:'focus',parameters:'surface,event'},
+{name:'focusenter',parameters:'surface,event'},
+{name:'focusleave',parameters:'surface,event'},
+{name:'heightchange',parameters:'sender,value,oldValue'},
+{name:'hiddenchange',parameters:'sender,value,oldValue'},
+{name:'tofront',parameters:'surface'},
+{name:'widthchange',parameters:'sender,value,oldValue'},
+{name:'ready',parameters:''}
 ];
   public static EVENTNAMES: string[] = [
-		'beforedisabledchange',
-		'beforeheightchange',
-		'beforehiddenchange',
-		'beforetofront',
-		'beforewidthchange',
-		'blur',
-		'disabledchange',
-		'focus',
-		'focusenter',
-		'focusleave',
-		'heightchange',
-		'hiddenchange',
-		'tofront',
-		'widthchange',
-		'ready'
+'beforedisabledchange',
+'beforeheightchange',
+'beforehiddenchange',
+'beforetofront',
+'beforewidthchange',
+'blur',
+'disabledchange',
+'focus',
+'focusenter',
+'focusleave',
+'heightchange',
+'hiddenchange',
+'tofront',
+'widthchange',
+'ready'
 ];
 }
 @Component({
