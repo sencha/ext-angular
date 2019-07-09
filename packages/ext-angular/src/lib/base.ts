@@ -109,9 +109,9 @@ export class base {
     this.ext = Ext.create(o)
   }
 
-  @ContentChild('extroute') _extroute: any;
+  @ContentChild('extroute',{ static : false }) _extroute: any;
   @ContentChildren('extroute') _extroutes: QueryList<any>;
-  @ContentChild('extitem') _extitem: any;
+  @ContentChild('extitem',{ static : false }) _extitem: any;
   @ContentChildren('extitem') _extitems: QueryList<any>;
   baseAfterContentInit() {
     if (this._extitems.length == 1) {

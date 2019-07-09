@@ -15,6 +15,7 @@ import { base } from './base';
 export class menutriggerMetaData {
   public static XTYPE: string = 'menutrigger';
   public static PROPERTIES: string[] = [
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -28,7 +29,6 @@ export class menutriggerMetaData {
     'defaultListenerScope',
     'destroyMenu',
     'disabled',
-    'eventHandlers',
     'field',
     'flex',
     'floated',
@@ -47,6 +47,7 @@ export class menutriggerMetaData {
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'menu',
     'menuAlign',
     'name',
@@ -59,7 +60,6 @@ export class menutriggerMetaData {
     'repeat',
     'ripple',
     'scope',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -84,38 +84,38 @@ export class menutriggerMetaData {
     'config'
 ];
   public static EVENTS: any[] = [
-		{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'beforetofront',parameters:'menutrigger'},
-		{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'blur',parameters:'menutrigger,event'},
-		{name:'disabledchange',parameters:'sender,value,oldValue'},
-		{name:'focus',parameters:'menutrigger,event'},
-		{name:'focusenter',parameters:'menutrigger,event'},
-		{name:'focusleave',parameters:'menutrigger,event'},
-		{name:'heightchange',parameters:'sender,value,oldValue'},
-		{name:'hiddenchange',parameters:'sender,value,oldValue'},
-		{name:'tofront',parameters:'menutrigger'},
-		{name:'widthchange',parameters:'sender,value,oldValue'},
-		{name:'ready',parameters:''}
+{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforetofront',parameters:'menutrigger'},
+{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
+{name:'blur',parameters:'menutrigger,event'},
+{name:'disabledchange',parameters:'sender,value,oldValue'},
+{name:'focus',parameters:'menutrigger,event'},
+{name:'focusenter',parameters:'menutrigger,event'},
+{name:'focusleave',parameters:'menutrigger,event'},
+{name:'heightchange',parameters:'sender,value,oldValue'},
+{name:'hiddenchange',parameters:'sender,value,oldValue'},
+{name:'tofront',parameters:'menutrigger'},
+{name:'widthchange',parameters:'sender,value,oldValue'},
+{name:'ready',parameters:''}
 ];
   public static EVENTNAMES: string[] = [
-		'beforedisabledchange',
-		'beforeheightchange',
-		'beforehiddenchange',
-		'beforetofront',
-		'beforewidthchange',
-		'blur',
-		'disabledchange',
-		'focus',
-		'focusenter',
-		'focusleave',
-		'heightchange',
-		'hiddenchange',
-		'tofront',
-		'widthchange',
-		'ready'
+'beforedisabledchange',
+'beforeheightchange',
+'beforehiddenchange',
+'beforetofront',
+'beforewidthchange',
+'blur',
+'disabledchange',
+'focus',
+'focusenter',
+'focusleave',
+'heightchange',
+'hiddenchange',
+'tofront',
+'widthchange',
+'ready'
 ];
 }
 @Component({

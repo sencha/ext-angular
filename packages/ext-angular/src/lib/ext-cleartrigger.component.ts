@@ -15,6 +15,7 @@ import { base } from './base';
 export class cleartriggerMetaData {
   public static XTYPE: string = 'cleartrigger';
   public static PROPERTIES: string[] = [
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -27,7 +28,6 @@ export class cleartriggerMetaData {
     'controller',
     'defaultListenerScope',
     'disabled',
-    'eventHandlers',
     'field',
     'flex',
     'floated',
@@ -46,6 +46,7 @@ export class cleartriggerMetaData {
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -56,7 +57,6 @@ export class cleartriggerMetaData {
     'repeat',
     'ripple',
     'scope',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -81,38 +81,38 @@ export class cleartriggerMetaData {
     'config'
 ];
   public static EVENTS: any[] = [
-		{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'beforetofront',parameters:'cleartrigger'},
-		{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'blur',parameters:'cleartrigger,event'},
-		{name:'disabledchange',parameters:'sender,value,oldValue'},
-		{name:'focus',parameters:'cleartrigger,event'},
-		{name:'focusenter',parameters:'cleartrigger,event'},
-		{name:'focusleave',parameters:'cleartrigger,event'},
-		{name:'heightchange',parameters:'sender,value,oldValue'},
-		{name:'hiddenchange',parameters:'sender,value,oldValue'},
-		{name:'tofront',parameters:'cleartrigger'},
-		{name:'widthchange',parameters:'sender,value,oldValue'},
-		{name:'ready',parameters:''}
+{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforetofront',parameters:'cleartrigger'},
+{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
+{name:'blur',parameters:'cleartrigger,event'},
+{name:'disabledchange',parameters:'sender,value,oldValue'},
+{name:'focus',parameters:'cleartrigger,event'},
+{name:'focusenter',parameters:'cleartrigger,event'},
+{name:'focusleave',parameters:'cleartrigger,event'},
+{name:'heightchange',parameters:'sender,value,oldValue'},
+{name:'hiddenchange',parameters:'sender,value,oldValue'},
+{name:'tofront',parameters:'cleartrigger'},
+{name:'widthchange',parameters:'sender,value,oldValue'},
+{name:'ready',parameters:''}
 ];
   public static EVENTNAMES: string[] = [
-		'beforedisabledchange',
-		'beforeheightchange',
-		'beforehiddenchange',
-		'beforetofront',
-		'beforewidthchange',
-		'blur',
-		'disabledchange',
-		'focus',
-		'focusenter',
-		'focusleave',
-		'heightchange',
-		'hiddenchange',
-		'tofront',
-		'widthchange',
-		'ready'
+'beforedisabledchange',
+'beforeheightchange',
+'beforehiddenchange',
+'beforetofront',
+'beforewidthchange',
+'blur',
+'disabledchange',
+'focus',
+'focusenter',
+'focusleave',
+'heightchange',
+'hiddenchange',
+'tofront',
+'widthchange',
+'ready'
 ];
 }
 @Component({

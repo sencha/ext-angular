@@ -30,10 +30,10 @@ export class calendar_multiviewMetaData {
     'config'
 ];
   public static EVENTS: any[] = [
-		{name:'ready',parameters:''}
+{name:'ready',parameters:''}
 ];
   public static EVENTNAMES: string[] = [
-		'ready'
+'ready'
 ];
 }
 @Component({
