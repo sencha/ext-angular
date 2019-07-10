@@ -1,5 +1,5 @@
 declare var Ext: any
-import { NgModule, ModuleWithProviders } from '@angular/core'
+import { Inject, NgModule, ModuleWithProviders } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { Route, RouterModule } from '@angular/router'
 
@@ -687,7 +687,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
 })
 
 export class AppModule {
-  constructor(extAngularService : ExtAngularBootstrapService, appService: AppService) {
+  constructor(@Inject(ExtAngularBootstrapService) extAngularService : ExtAngularBootstrapService, appService: AppService) {
     extAngularService.setBootStrapComponent(LandingpageComponent)
   }
 }
