@@ -27,7 +27,7 @@ let ExtAngularBootstrapService = class ExtAngularBootstrapService {
         this.bootstrapComponent = component;
     }
 };
-ExtAngularBootstrapService.ngInjectableDef = i0.defineInjectable({ factory: function ExtAngularBootstrapService_Factory() { return new ExtAngularBootstrapService(i0.inject(i0.ComponentFactoryResolver), i0.inject(i0.ApplicationRef), i0.inject(i0.INJECTOR)); }, token: ExtAngularBootstrapService, providedIn: "root" });
+ExtAngularBootstrapService.ngInjectableDef = i0.ɵɵdefineInjectable({ factory: function ExtAngularBootstrapService_Factory() { return new ExtAngularBootstrapService(i0.ɵɵinject(i0.ComponentFactoryResolver), i0.ɵɵinject(i0.ApplicationRef), i0.ɵɵinject(i0.INJECTOR)); }, token: ExtAngularBootstrapService, providedIn: "root" });
 ExtAngularBootstrapService = tslib_1.__decorate([
     Injectable({
         providedIn: 'root'

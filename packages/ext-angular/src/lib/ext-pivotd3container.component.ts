@@ -25,10 +25,10 @@ export class pivotd3containerMetaData {
     'config'
 ];
   public static EVENTS: any[] = [
-		{name:'ready',parameters:''}
+{name:'ready',parameters:''}
 ];
   public static EVENTNAMES: string[] = [
-		'ready'
+'ready'
 ];
 }
 @Component({
