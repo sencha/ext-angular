@@ -15,6 +15,7 @@ import { base } from './base';
 export class spinuptriggerMetaData {
   public static XTYPE: string = 'spinuptrigger';
   public static PROPERTIES: string[] = [
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -27,7 +28,6 @@ export class spinuptriggerMetaData {
     'controller',
     'defaultListenerScope',
     'disabled',
-    'eventHandlers',
     'field',
     'flex',
     'floated',
@@ -46,6 +46,7 @@ export class spinuptriggerMetaData {
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -56,7 +57,6 @@ export class spinuptriggerMetaData {
     'repeat',
     'ripple',
     'scope',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -81,38 +81,38 @@ export class spinuptriggerMetaData {
     'config'
 ];
   public static EVENTS: any[] = [
-		{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'beforetofront',parameters:'spinuptrigger'},
-		{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'blur',parameters:'spinuptrigger,event'},
-		{name:'disabledchange',parameters:'sender,value,oldValue'},
-		{name:'focus',parameters:'spinuptrigger,event'},
-		{name:'focusenter',parameters:'spinuptrigger,event'},
-		{name:'focusleave',parameters:'spinuptrigger,event'},
-		{name:'heightchange',parameters:'sender,value,oldValue'},
-		{name:'hiddenchange',parameters:'sender,value,oldValue'},
-		{name:'tofront',parameters:'spinuptrigger'},
-		{name:'widthchange',parameters:'sender,value,oldValue'},
-		{name:'ready',parameters:''}
+{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforetofront',parameters:'spinuptrigger'},
+{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
+{name:'blur',parameters:'spinuptrigger,event'},
+{name:'disabledchange',parameters:'sender,value,oldValue'},
+{name:'focus',parameters:'spinuptrigger,event'},
+{name:'focusenter',parameters:'spinuptrigger,event'},
+{name:'focusleave',parameters:'spinuptrigger,event'},
+{name:'heightchange',parameters:'sender,value,oldValue'},
+{name:'hiddenchange',parameters:'sender,value,oldValue'},
+{name:'tofront',parameters:'spinuptrigger'},
+{name:'widthchange',parameters:'sender,value,oldValue'},
+{name:'ready',parameters:''}
 ];
   public static EVENTNAMES: string[] = [
-		'beforedisabledchange',
-		'beforeheightchange',
-		'beforehiddenchange',
-		'beforetofront',
-		'beforewidthchange',
-		'blur',
-		'disabledchange',
-		'focus',
-		'focusenter',
-		'focusleave',
-		'heightchange',
-		'hiddenchange',
-		'tofront',
-		'widthchange',
-		'ready'
+'beforedisabledchange',
+'beforeheightchange',
+'beforehiddenchange',
+'beforetofront',
+'beforewidthchange',
+'blur',
+'disabledchange',
+'focus',
+'focusenter',
+'focusleave',
+'heightchange',
+'hiddenchange',
+'tofront',
+'widthchange',
+'ready'
 ];
 }
 @Component({

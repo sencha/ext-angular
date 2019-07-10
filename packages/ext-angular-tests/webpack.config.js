@@ -1,5 +1,5 @@
 const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin
-const ExtWebpackPlugin = require('@sencha/ext-angular-webpack-plugin')
+const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin')
 const WebpackShellPlugin = require('webpack-shell-plugin-next')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')

@@ -73,7 +73,7 @@
             //console.log("In setBootStrapComponent")
             this.bootstrapComponent = component;
         };
-        ExtAngularBootstrapService.ngInjectableDef = core.defineInjectable({ factory: function ExtAngularBootstrapService_Factory() { return new ExtAngularBootstrapService(core.inject(core.ComponentFactoryResolver), core.inject(core.ApplicationRef), core.inject(core.INJECTOR)); }, token: ExtAngularBootstrapService, providedIn: "root" });
+        ExtAngularBootstrapService.ngInjectableDef = core.ɵɵdefineInjectable({ factory: function ExtAngularBootstrapService_Factory() { return new ExtAngularBootstrapService(core.ɵɵinject(core.ComponentFactoryResolver), core.ɵɵinject(core.ApplicationRef), core.ɵɵinject(core.INJECTOR)); }, token: ExtAngularBootstrapService, providedIn: "root" });
         ExtAngularBootstrapService = __decorate([
             core.Injectable({
                 providedIn: 'root'
@@ -306,13 +306,28 @@
                 childCmp = this.ext;
                 if (this._hostComponent != null) {
                     parentCmp = this._hostComponent.ext;
-                    if (parentCmp.xtype == 'button' && childCmp.xtype == 'menu') ;
-                    else if (parentCmp.xtype == 'carousel') ;
-                    else if (parentCmp.xtype == 'grid' && childCmp.xtype == 'column') ;
-                    else if (parentCmp.xtype == 'segmentedbutton' && childCmp.xtype == 'button') ;
-                    else if (parentCmp.xtype == 'button' && childCmp.xtype == 'tooltip') ;
-                    else if (parentCmp.xtype == 'titlebar' && childCmp.xtype == 'button') ;
-                    else if (parentCmp.xtype == 'titlebar' && childCmp.xtype == 'searchfield') ;
+                    if (parentCmp.xtype == 'button' && childCmp.xtype == 'menu') {
+                        //console.log('button/menu not deleted')
+                    }
+                    else if (parentCmp.xtype == 'carousel') {
+                        //console.log('carousel parent not deleted')
+                    }
+                    else if (parentCmp.xtype == 'grid' && childCmp.xtype == 'column') {
+                        //console.log('grid/column not deleted')
+                        //console.log(childCmp)
+                    }
+                    else if (parentCmp.xtype == 'segmentedbutton' && childCmp.xtype == 'button') {
+                        //console.log('segmentedbutton/button not deleted')
+                    }
+                    else if (parentCmp.xtype == 'button' && childCmp.xtype == 'tooltip') {
+                        //console.log('button/tooltip not deleted')
+                    }
+                    else if (parentCmp.xtype == 'titlebar' && childCmp.xtype == 'button') {
+                        //console.log('titlebar/button not deleted')
+                    }
+                    else if (parentCmp.xtype == 'titlebar' && childCmp.xtype == 'searchfield') {
+                        //console.log('titlebar/searchfield not deleted')
+                    }
                     else {
                         parentCmp.remove([childCmp]);
                         childCmp.destroy();
@@ -336,7 +351,7 @@
             }
         };
         __decorate([
-            core.ContentChild('extroute'),
+            core.ContentChild('extroute', { static: false }),
             __metadata("design:type", Object)
         ], base.prototype, "_extroute", void 0);
         __decorate([
@@ -344,7 +359,7 @@
             __metadata("design:type", core.QueryList)
         ], base.prototype, "_extroutes", void 0);
         __decorate([
-            core.ContentChild('extitem'),
+            core.ContentChild('extitem', { static: false }),
             __metadata("design:type", Object)
         ], base.prototype, "_extitem", void 0);
         __decorate([
@@ -361,6 +376,7 @@
         actionsheetMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -375,6 +391,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -406,10 +423,7 @@
             'docked',
             'draggable',
             'enter',
-            'enterAnimation',
-            'eventHandlers',
             'exit',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -467,7 +481,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -485,6 +498,7 @@
             'tbar',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -701,6 +715,7 @@
         }
         audioMetaData.XTYPE = 'audio';
         audioMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -724,10 +739,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enableControls',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -769,7 +780,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -966,11 +976,309 @@
         return ExtAudioComponent;
     }(base));
 
+    var breadcrumbbarMetaData = /** @class */ (function () {
+        function breadcrumbbarMetaData() {
+        }
+        breadcrumbbarMetaData.XTYPE = 'breadcrumbbar';
+        breadcrumbbarMetaData.PROPERTIES = [
+            'activeChildTabIndex',
+            'activeItem',
+            'alignSelf',
+            'allowFocusingDisabledChildren',
+            'alwaysOnTop',
+            'ariaAttributes',
+            'ariaDescribedBy',
+            'ariaLabel',
+            'ariaLabelledBy',
+            'autoDestroy',
+            'autoSize',
+            'axisLock',
+            'bind',
+            'bodyCls',
+            'border',
+            'bottom',
+            'btnCls',
+            'buttonConfig',
+            'buttonUI',
+            'cardSwitchAnimation',
+            'centered',
+            'cls',
+            'constrainAlign',
+            'contentEl',
+            'control',
+            'controller',
+            'data',
+            'defaultButtonUI',
+            'defaultFocus',
+            'defaultListenerScope',
+            'defaults',
+            'defaultType',
+            'disabled',
+            'displayed',
+            'displayField',
+            'docked',
+            'draggable',
+            'flex',
+            'floated',
+            'focusableContainer',
+            'focusCls',
+            'fullscreen',
+            'height',
+            'hidden',
+            'hideAnimation',
+            'hideMode',
+            'hideOnMaskTap',
+            'html',
+            'id',
+            'inactiveChildTabIndex',
+            'innerCls',
+            'instanceCls',
+            'itemId',
+            'items',
+            'keyMap',
+            'keyMapEnabled',
+            'keyMapTarget',
+            'layout',
+            'left',
+            'listeners',
+            'manageBorders',
+            'margin',
+            'masked',
+            'maxHeight',
+            'maxWidth',
+            'menu',
+            'minHeight',
+            'minWidth',
+            'modal',
+            'modelValidation',
+            'name',
+            'nameable',
+            'nameHolder',
+            'padding',
+            'plugins',
+            'publishes',
+            'record',
+            'reference',
+            'referenceHolder',
+            'relative',
+            'renderTo',
+            'resetFocusPosition',
+            'right',
+            'ripple',
+            'scrollable',
+            'selection',
+            'session',
+            'shadow',
+            'shareableName',
+            'shim',
+            'showAnimation',
+            'showIcons',
+            'showMenuIcons',
+            'stateful',
+            'statefulDefaults',
+            'stateId',
+            'store',
+            'style',
+            'tabIndex',
+            'title',
+            'toFrontOnShow',
+            'tooltip',
+            'top',
+            'touchAction',
+            'tpl',
+            'tplWriteMode',
+            'translatable',
+            'twoWayBindable',
+            'ui',
+            'userCls',
+            'userSelectable',
+            'useSplitButtons',
+            'viewModel',
+            'weight',
+            'weighted',
+            'width',
+            'x',
+            'xtype',
+            'y',
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'align',
+            'fitToParent',
+            'config'
+        ];
+        breadcrumbbarMetaData.EVENTS = [
+            { name: 'activate', parameters: 'newActiveItem,breadcrumbbar,oldActiveItem' },
+            { name: 'activeItemchange', parameters: 'sender,value,oldValue' },
+            { name: 'add', parameters: 'breadcrumbbar,item,index' },
+            { name: 'added', parameters: 'sender,container,index' },
+            { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehide', parameters: 'sender' },
+            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforetofront', parameters: 'breadcrumbbar' },
+            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'blur', parameters: 'breadcrumbbar,event' },
+            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'change', parameters: 'breadcrumbbar,node,prevNode' },
+            { name: 'deactivate', parameters: 'oldActiveItem,breadcrumbbar,newActiveItem' },
+            { name: 'destroy', parameters: '' },
+            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'erased', parameters: 'sender' },
+            { name: 'floatingchange', parameters: 'sender,positioned' },
+            { name: 'focus', parameters: 'breadcrumbbar,event' },
+            { name: 'focusenter', parameters: 'breadcrumbbar,event' },
+            { name: 'focusleave', parameters: 'breadcrumbbar,event' },
+            { name: 'fullscreen', parameters: 'sender' },
+            { name: 'heightchange', parameters: 'sender,value,oldValue' },
+            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+            { name: 'hide', parameters: 'sender' },
+            { name: 'initialize', parameters: 'sender' },
+            { name: 'leftchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'move', parameters: 'breadcrumbbar,item,toIndex,fromIndex' },
+            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+            { name: 'orientationchange', parameters: '' },
+            { name: 'painted', parameters: 'sender,element' },
+            { name: 'positionedchange', parameters: 'sender,positioned' },
+            { name: 'remove', parameters: 'breadcrumbbar,item,index' },
+            { name: 'removed', parameters: 'sender,container,index' },
+            { name: 'renderedchange', parameters: 'breadcrumbbar,item,rendered' },
+            { name: 'resize', parameters: 'element,info' },
+            { name: 'rightchange', parameters: 'sender,value,oldValue' },
+            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+            { name: 'selectionchange', parameters: 'breadcrumbbar,node,prevNode' },
+            { name: 'show', parameters: 'sender' },
+            { name: 'tofront', parameters: 'breadcrumbbar' },
+            { name: 'topchange', parameters: 'sender,value,oldValue' },
+            { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'widthchange', parameters: 'sender,value,oldValue' },
+            { name: 'ready', parameters: '' }
+        ];
+        breadcrumbbarMetaData.EVENTNAMES = [
+            'activate',
+            'activeItemchange',
+            'add',
+            'added',
+            'beforeactiveItemchange',
+            'beforebottomchange',
+            'beforecenteredchange',
+            'beforedisabledchange',
+            'beforedockedchange',
+            'beforeheightchange',
+            'beforehiddenchange',
+            'beforehide',
+            'beforeleftchange',
+            'beforemaxHeightchange',
+            'beforemaxWidthchange',
+            'beforeminHeightchange',
+            'beforeminWidthchange',
+            'beforeorientationchange',
+            'beforerightchange',
+            'beforescrollablechange',
+            'beforeshow',
+            'beforetofront',
+            'beforetopchange',
+            'beforewidthchange',
+            'blur',
+            'bottomchange',
+            'centeredchange',
+            'change',
+            'deactivate',
+            'destroy',
+            'disabledchange',
+            'dockedchange',
+            'erased',
+            'floatingchange',
+            'focus',
+            'focusenter',
+            'focusleave',
+            'fullscreen',
+            'heightchange',
+            'hiddenchange',
+            'hide',
+            'initialize',
+            'leftchange',
+            'maxHeightchange',
+            'maxWidthchange',
+            'minHeightchange',
+            'minWidthchange',
+            'move',
+            'moved',
+            'orientationchange',
+            'painted',
+            'positionedchange',
+            'remove',
+            'removed',
+            'renderedchange',
+            'resize',
+            'rightchange',
+            'scrollablechange',
+            'selectionchange',
+            'show',
+            'tofront',
+            'topchange',
+            'updatedata',
+            'widthchange',
+            'ready'
+        ];
+        return breadcrumbbarMetaData;
+    }());
+    var ExtBreadcrumbbarComponent = /** @class */ (function (_super) {
+        __extends(ExtBreadcrumbbarComponent, _super);
+        function ExtBreadcrumbbarComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, breadcrumbbarMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
+        }
+        ExtBreadcrumbbarComponent_1 = ExtBreadcrumbbarComponent;
+        ExtBreadcrumbbarComponent.prototype.ngOnInit = function () {
+            this.baseOnInit(breadcrumbbarMetaData);
+        };
+        ExtBreadcrumbbarComponent.prototype.ngAfterContentInit = function () {
+            this.baseAfterContentInit();
+            //this['ready'].emit(this)
+        };
+        var ExtBreadcrumbbarComponent_1;
+        ExtBreadcrumbbarComponent = ExtBreadcrumbbarComponent_1 = __decorate([
+            core.Component({
+                selector: 'breadcrumbbar',
+                inputs: breadcrumbbarMetaData.PROPERTIES,
+                outputs: breadcrumbbarMetaData.EVENTNAMES,
+                providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtBreadcrumbbarComponent_1; }) }],
+                template: '<ng-template></ng-template>'
+            }),
+            __param(1, core.Host()), __param(1, core.Optional()), __param(1, core.SkipSelf()),
+            __metadata("design:paramtypes", [core.ElementRef, base])
+        ], ExtBreadcrumbbarComponent);
+        return ExtBreadcrumbbarComponent;
+    }(base));
+
     var buttonMetaData = /** @class */ (function () {
         function buttonMetaData() {
         }
         buttonMetaData.XTYPE = 'button';
         buttonMetaData.PROPERTIES = [
+            'alignSelf',
             'allowDepress',
             'alwaysOnTop',
             'ariaAttributes',
@@ -999,9 +1307,6 @@
             'docked',
             'draggable',
             'enableToggle',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -1048,7 +1353,6 @@
             'ripple',
             'scope',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -1247,6 +1551,7 @@
         }
         calendar_eventMetaData.XTYPE = 'calendar-event';
         calendar_eventMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -1269,9 +1574,6 @@
             'docked',
             'draggable',
             'endDate',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -1313,7 +1615,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -1505,6 +1806,7 @@
         calendar_form_addMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allDayField',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
@@ -1522,10 +1824,12 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
             'bottom',
+            'bubbleDirty',
             'buttonAlign',
             'buttons',
             'buttonToolbar',
@@ -1552,6 +1856,7 @@
             'defaultToolWeights',
             'defaultType',
             'descriptionField',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
@@ -1561,10 +1866,8 @@
             'enctype',
             'endDateField',
             'endTimeField',
-            'enterAnimation',
             'event',
-            'eventHandlers',
-            'exitAnimation',
+            'fieldDefaults',
             'fieldSeparators',
             'flex',
             'floated',
@@ -1589,6 +1892,7 @@
             'instanceCls',
             'itemId',
             'items',
+            'jsonSubmit',
             'keyMap',
             'keyMapEnabled',
             'keyMapTarget',
@@ -1628,7 +1932,6 @@
             'ripple',
             'saveButton',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -1648,6 +1951,7 @@
             'timeout',
             'title',
             'titleAlign',
+            'titleCollapse',
             'titleField',
             'toFrontOnShow',
             'toolDefaults',
@@ -1715,6 +2019,7 @@
             { name: 'collapse', parameters: 'calendar-form-add' },
             { name: 'deactivate', parameters: 'oldActiveItem,calendar-form-add,newActiveItem' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'calendar-form-add,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'drawerhide', parameters: 'calendar-form-add' },
@@ -1797,6 +2102,7 @@
             'collapse',
             'deactivate',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'drawerhide',
@@ -1880,6 +2186,7 @@
         }
         calendar_calendar_pickerMetaData.XTYPE = 'calendar-calendar-picker';
         calendar_calendar_pickerMetaData.PROPERTIES = [
+            'alignSelf',
             'alignTarget',
             'alwaysOnTop',
             'animateUnderline',
@@ -1902,6 +2209,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'chipView',
             'clearable',
@@ -1913,6 +2221,7 @@
             'data',
             'defaultListenerScope',
             'delimiter',
+            'dirty',
             'disabled',
             'displayed',
             'displayField',
@@ -1921,14 +2230,11 @@
             'draggable',
             'edgePicker',
             'editable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'floatedPicker',
@@ -1947,7 +2253,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -1987,7 +2292,6 @@
             'picker',
             'pickerSlotAlign',
             'placeholder',
-            'placeHolder',
             'plugins',
             'publishes',
             'readOnly',
@@ -2004,7 +2308,6 @@
             'scrollable',
             'selection',
             'selectOnTab',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -2015,6 +2318,7 @@
             'statefulDefaults',
             'stateId',
             'store',
+            'stripCharsRe',
             'style',
             'tabIndex',
             'textAlign',
@@ -2083,6 +2387,7 @@
             { name: 'click', parameters: 'e' },
             { name: 'collapse', parameters: 'field' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'calendar-calendar-picker,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -2097,6 +2402,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'calendar-calendar-picker,e' },
             { name: 'keyup', parameters: 'calendar-calendar-picker,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -2151,6 +2457,7 @@
             'click',
             'collapse',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -2165,6 +2472,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -2228,6 +2536,7 @@
         calendar_form_editMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allDayField',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
@@ -2245,10 +2554,12 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
             'bottom',
+            'bubbleDirty',
             'buttonAlign',
             'buttons',
             'buttonToolbar',
@@ -2275,6 +2586,7 @@
             'defaultToolWeights',
             'defaultType',
             'descriptionField',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
@@ -2284,10 +2596,8 @@
             'enctype',
             'endDateField',
             'endTimeField',
-            'enterAnimation',
             'event',
-            'eventHandlers',
-            'exitAnimation',
+            'fieldDefaults',
             'fieldSeparators',
             'flex',
             'floated',
@@ -2312,6 +2622,7 @@
             'instanceCls',
             'itemId',
             'items',
+            'jsonSubmit',
             'keyMap',
             'keyMapEnabled',
             'keyMapTarget',
@@ -2351,7 +2662,6 @@
             'ripple',
             'saveButton',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -2371,6 +2681,7 @@
             'timeout',
             'title',
             'titleAlign',
+            'titleCollapse',
             'titleField',
             'toFrontOnShow',
             'toolDefaults',
@@ -2438,6 +2749,7 @@
             { name: 'collapse', parameters: 'calendar-form-edit' },
             { name: 'deactivate', parameters: 'oldActiveItem,calendar-form-edit,newActiveItem' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'calendar-form-edit,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'drawerhide', parameters: 'calendar-form-edit' },
@@ -2520,6 +2832,7 @@
             'collapse',
             'deactivate',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'drawerhide',
@@ -2603,6 +2916,7 @@
         }
         calendar_timefieldMetaData.XTYPE = 'calendar-timefield';
         calendar_timefieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alignTarget',
             'alwaysOnTop',
             'animateUnderline',
@@ -2625,6 +2939,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'chipView',
             'clearable',
@@ -2636,6 +2951,7 @@
             'data',
             'defaultListenerScope',
             'delimiter',
+            'dirty',
             'disabled',
             'displayed',
             'displayField',
@@ -2644,14 +2960,11 @@
             'draggable',
             'edgePicker',
             'editable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'floatedPicker',
@@ -2670,7 +2983,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -2710,7 +3022,6 @@
             'picker',
             'pickerSlotAlign',
             'placeholder',
-            'placeHolder',
             'plugins',
             'publishes',
             'readOnly',
@@ -2727,7 +3038,6 @@
             'scrollable',
             'selection',
             'selectOnTab',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -2738,6 +3048,7 @@
             'statefulDefaults',
             'stateId',
             'store',
+            'stripCharsRe',
             'style',
             'tabIndex',
             'textAlign',
@@ -2806,6 +3117,7 @@
             { name: 'click', parameters: 'e' },
             { name: 'collapse', parameters: 'field' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'calendar-timefield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -2820,6 +3132,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'calendar-timefield,e' },
             { name: 'keyup', parameters: 'calendar-timefield,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -2874,6 +3187,7 @@
             'click',
             'collapse',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -2888,6 +3202,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -2949,6 +3264,7 @@
         }
         calendar_daysheaderMetaData.XTYPE = 'calendar-daysheader';
         calendar_daysheaderMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -2972,9 +3288,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -3013,7 +3326,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -3201,6 +3513,7 @@
         }
         calendar_weeksheaderMetaData.XTYPE = 'calendar-weeksheader';
         calendar_weeksheaderMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -3224,9 +3537,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -3265,7 +3575,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -3455,6 +3764,7 @@
         calendar_listMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -3466,6 +3776,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -3492,11 +3803,7 @@
             'emptyText',
             'emptyTextDefaults',
             'emptyTextProperty',
-            'enableTextSelection',
             'enableToggle',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -3560,7 +3867,6 @@
             'selectable',
             'selected',
             'selection',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -3831,6 +4137,7 @@
             'activeChildTabIndex',
             'activeItem',
             'addForm',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'allowSelection',
             'alwaysOnTop',
@@ -3846,6 +4153,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -3884,11 +4192,8 @@
             'droppable',
             'editForm',
             'endTime',
-            'enterAnimation',
             'eventDefaults',
-            'eventHandlers',
             'eventRelayers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -3902,6 +4207,7 @@
             'hideAnimation',
             'hideMode',
             'hideOnMaskTap',
+            'highlightToday',
             'html',
             'icon',
             'iconAlign',
@@ -3947,7 +4253,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -3967,6 +4272,7 @@
             'timezoneOffset',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -4217,6 +4523,7 @@
             'activeChildTabIndex',
             'activeItem',
             'addForm',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'allowSelection',
             'alwaysOnTop',
@@ -4232,6 +4539,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -4270,11 +4578,8 @@
             'droppable',
             'editForm',
             'endTime',
-            'enterAnimation',
             'eventDefaults',
-            'eventHandlers',
             'eventRelayers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -4288,6 +4593,7 @@
             'hideAnimation',
             'hideMode',
             'hideOnMaskTap',
+            'highlightToday',
             'html',
             'icon',
             'iconAlign',
@@ -4333,7 +4639,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -4353,6 +4658,7 @@
             'timezoneOffset',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -4604,6 +4910,7 @@
             'activeItem',
             'addForm',
             'addOnSelect',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'allowSelection',
             'alwaysOnTop',
@@ -4619,6 +4926,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -4656,11 +4964,8 @@
             'draggable',
             'droppable',
             'editForm',
-            'enterAnimation',
             'eventDefaults',
-            'eventHandlers',
             'eventRelayers',
-            'exitAnimation',
             'firstDayOfWeek',
             'flex',
             'floated',
@@ -4675,6 +4980,7 @@
             'hideAnimation',
             'hideMode',
             'hideOnMaskTap',
+            'highlightToday',
             'html',
             'icon',
             'iconAlign',
@@ -4720,7 +5026,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -4738,6 +5043,7 @@
             'timezoneOffset',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -4983,6 +5289,7 @@
         calendarMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -4997,6 +5304,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -5033,9 +5341,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -5048,6 +5353,7 @@
             'hideAnimation',
             'hideMode',
             'hideOnMaskTap',
+            'highlightToday',
             'html',
             'icon',
             'iconAlign',
@@ -5095,7 +5401,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -5117,6 +5422,7 @@
             'title',
             'titleAlign',
             'titleBar',
+            'titleCollapse',
             'todayButton',
             'toFrontOnShow',
             'toolDefaults',
@@ -5339,6 +5645,7 @@
             'activeChildTabIndex',
             'activeItem',
             'addForm',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'allowSelection',
             'alwaysOnTop',
@@ -5354,6 +5661,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -5392,11 +5700,8 @@
             'droppable',
             'editForm',
             'endTime',
-            'enterAnimation',
             'eventDefaults',
-            'eventHandlers',
             'eventRelayers',
-            'exitAnimation',
             'firstDayOfWeek',
             'flex',
             'floated',
@@ -5411,6 +5716,7 @@
             'hideAnimation',
             'hideMode',
             'hideOnMaskTap',
+            'highlightToday',
             'html',
             'icon',
             'iconAlign',
@@ -5456,7 +5762,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -5476,6 +5781,7 @@
             'timezoneOffset',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -5727,6 +6033,7 @@
             'activeItem',
             'addForm',
             'addOnSelect',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'allowSelection',
             'alwaysOnTop',
@@ -5742,6 +6049,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -5779,11 +6087,8 @@
             'draggable',
             'droppable',
             'editForm',
-            'enterAnimation',
             'eventDefaults',
-            'eventHandlers',
             'eventRelayers',
-            'exitAnimation',
             'firstDayOfWeek',
             'flex',
             'floated',
@@ -5798,6 +6103,7 @@
             'hideAnimation',
             'hideMode',
             'hideOnMaskTap',
+            'highlightToday',
             'html',
             'icon',
             'iconAlign',
@@ -5843,7 +6149,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -5861,6 +6166,7 @@
             'timezoneOffset',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -6105,6 +6411,7 @@
         calendar_dayviewMetaData.XTYPE = 'calendar-dayview';
         calendar_dayviewMetaData.PROPERTIES = [
             'addForm',
+            'alignSelf',
             'allowSelection',
             'alwaysOnTop',
             'ariaAttributes',
@@ -6133,10 +6440,7 @@
             'droppable',
             'editForm',
             'endTime',
-            'enterAnimation',
             'eventDefaults',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -6177,7 +6481,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -6400,6 +6703,7 @@
         calendar_daysviewMetaData.XTYPE = 'calendar-daysview';
         calendar_daysviewMetaData.PROPERTIES = [
             'addForm',
+            'alignSelf',
             'allowSelection',
             'alwaysOnTop',
             'ariaAttributes',
@@ -6428,10 +6732,7 @@
             'droppable',
             'editForm',
             'endTime',
-            'enterAnimation',
             'eventDefaults',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -6472,7 +6773,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -6696,6 +6996,7 @@
         calendar_monthviewMetaData.PROPERTIES = [
             'addForm',
             'addOnSelect',
+            'alignSelf',
             'allowSelection',
             'alwaysOnTop',
             'ariaAttributes',
@@ -6723,10 +7024,7 @@
             'draggable',
             'droppable',
             'editForm',
-            'enterAnimation',
             'eventDefaults',
-            'eventHandlers',
-            'exitAnimation',
             'firstDayOfWeek',
             'flex',
             'floated',
@@ -6768,7 +7066,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -7045,6 +7342,7 @@
         calendar_weekviewMetaData.XTYPE = 'calendar-weekview';
         calendar_weekviewMetaData.PROPERTIES = [
             'addForm',
+            'alignSelf',
             'allowSelection',
             'alwaysOnTop',
             'ariaAttributes',
@@ -7073,10 +7371,7 @@
             'droppable',
             'editForm',
             'endTime',
-            'enterAnimation',
             'eventDefaults',
-            'eventHandlers',
-            'exitAnimation',
             'firstDayOfWeek',
             'flex',
             'floated',
@@ -7118,7 +7413,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -7342,6 +7636,7 @@
         calendar_weeksviewMetaData.PROPERTIES = [
             'addForm',
             'addOnSelect',
+            'alignSelf',
             'allowSelection',
             'alwaysOnTop',
             'ariaAttributes',
@@ -7369,10 +7664,7 @@
             'draggable',
             'droppable',
             'editForm',
-            'enterAnimation',
             'eventDefaults',
-            'eventHandlers',
-            'exitAnimation',
             'firstDayOfWeek',
             'flex',
             'floated',
@@ -7414,7 +7706,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -7635,6 +7926,7 @@
         carouselMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -7645,6 +7937,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -7664,9 +7957,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -7715,7 +8005,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -8008,6 +8297,7 @@
         cartesianMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'animation',
@@ -8021,6 +8311,7 @@
             'axisLock',
             'background',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'captions',
@@ -8043,9 +8334,6 @@
             'downloadServerUrl',
             'draggable',
             'engine',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'flipXY',
             'floated',
@@ -8102,7 +8390,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'series',
             'session',
             'shadow',
@@ -8360,6 +8647,7 @@
         chartMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'animation',
@@ -8373,6 +8661,7 @@
             'axisLock',
             'background',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'captions',
@@ -8395,9 +8684,6 @@
             'downloadServerUrl',
             'draggable',
             'engine',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'flipXY',
             'floated',
@@ -8454,7 +8740,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'series',
             'session',
             'shadow',
@@ -8765,6 +9050,7 @@
         legendMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -8776,6 +9062,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -8802,10 +9089,6 @@
             'emptyText',
             'emptyTextDefaults',
             'emptyTextProperty',
-            'enableTextSelection',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -8870,7 +9153,6 @@
             'selectable',
             'selected',
             'selection',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -9141,6 +9423,7 @@
         chartnavigatorMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -9151,6 +9434,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -9170,9 +9454,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -9221,7 +9502,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -9426,6 +9706,7 @@
         polarMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'animation',
@@ -9439,6 +9720,7 @@
             'axisLock',
             'background',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'captions',
@@ -9462,9 +9744,6 @@
             'downloadServerUrl',
             'draggable',
             'engine',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -9521,7 +9800,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'series',
             'session',
             'shadow',
@@ -9779,6 +10057,7 @@
         spacefillingMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'animation',
@@ -9792,6 +10071,7 @@
             'axisLock',
             'background',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'captions',
@@ -9814,9 +10094,6 @@
             'downloadServerUrl',
             'draggable',
             'engine',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -9871,7 +10148,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'series',
             'session',
             'shadow',
@@ -10127,6 +10403,7 @@
         }
         chipMetaData.XTYPE = 'chip';
         chipMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -10149,9 +10426,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -10192,7 +10466,6 @@
             'ripple',
             'scope',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -10379,6 +10652,7 @@
         }
         componentMetaData.XTYPE = 'component';
         componentMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -10399,9 +10673,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -10439,7 +10710,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -10627,6 +10897,7 @@
         containerMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -10637,6 +10908,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -10655,9 +10927,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -10705,7 +10974,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -10908,6 +11176,7 @@
         }
         d3_canvasMetaData.XTYPE = 'd3-canvas';
         d3_canvasMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -10929,9 +11198,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -10971,7 +11237,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -11162,6 +11427,7 @@
         }
         d3_heatmapMetaData.XTYPE = 'd3-heatmap';
         d3_heatmapMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -11185,9 +11451,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -11228,7 +11491,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -11424,6 +11686,7 @@
         }
         d3_packMetaData.XTYPE = 'd3-pack';
         d3_packMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -11448,9 +11711,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'expandEventName',
             'flex',
             'floated',
@@ -11505,7 +11765,6 @@
             'scrollable',
             'selectEventName',
             'selection',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -11702,6 +11961,7 @@
         }
         d3_partitionMetaData.XTYPE = 'd3-partition';
         d3_partitionMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -11725,9 +11985,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'expandEventName',
             'flex',
             'floated',
@@ -11782,7 +12039,6 @@
             'scrollable',
             'selectEventName',
             'selection',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -11978,6 +12234,7 @@
         }
         d3_sunburstMetaData.XTYPE = 'd3-sunburst';
         d3_sunburstMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -12001,9 +12258,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'expandEventName',
             'flex',
             'floated',
@@ -12058,7 +12312,6 @@
             'scrollable',
             'selectEventName',
             'selection',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -12256,6 +12509,7 @@
         }
         d3_treeMetaData.XTYPE = 'd3-tree';
         d3_treeMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -12280,9 +12534,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'expandEventName',
             'flex',
             'floated',
@@ -12339,7 +12590,6 @@
             'scrollable',
             'selectEventName',
             'selection',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -12535,6 +12785,7 @@
         }
         d3_horizontal_treeMetaData.XTYPE = 'd3-horizontal-tree';
         d3_horizontal_treeMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -12559,9 +12810,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'expandEventName',
             'flex',
             'floated',
@@ -12618,7 +12866,6 @@
             'scrollable',
             'selectEventName',
             'selection',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -12814,6 +13061,7 @@
         }
         d3_treemapMetaData.XTYPE = 'd3-treemap';
         d3_treemapMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -12838,9 +13086,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'expandEventName',
             'flex',
             'floated',
@@ -12898,7 +13143,6 @@
             'scrollable',
             'selectEventName',
             'selection',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -13095,6 +13339,7 @@
         }
         d3_svgMetaData.XTYPE = 'd3-svg';
         d3_svgMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -13117,9 +13362,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -13158,7 +13400,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -13351,6 +13592,7 @@
         }
         d3MetaData.XTYPE = 'd3';
         d3MetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -13373,9 +13615,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -13414,7 +13653,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -13609,6 +13847,7 @@
         boundlistMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -13620,12 +13859,15 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'bufferSize',
             'cardSwitchAnimation',
             'centered',
             'cls',
+            'collapseDefaults',
+            'collapsible',
             'constrainAlign',
             'contentEl',
             'control',
@@ -13648,10 +13890,6 @@
             'emptyText',
             'emptyTextDefaults',
             'emptyTextProperty',
-            'enableTextSelection',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -13660,6 +13898,8 @@
             'grouped',
             'groupFooter',
             'groupHeader',
+            'grouping',
+            'groupPlaceholder',
             'height',
             'hidden',
             'hideAnimation',
@@ -13738,7 +13978,6 @@
             'scrollToTopOnRefresh',
             'selectable',
             'selection',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -13765,7 +14004,6 @@
             'ui',
             'userCls',
             'userSelectable',
-            'useSimpleItems',
             'variableHeights',
             'verticalOverflow',
             'viewModel',
@@ -13796,6 +14034,8 @@
             { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforegroupcollapse', parameters: 'boundlist,group' },
+            { name: 'beforegroupexpand', parameters: 'boundlist,group' },
             { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforehide', parameters: 'sender' },
@@ -13838,6 +14078,8 @@
             { name: 'focusenter', parameters: 'boundlist,event' },
             { name: 'focusleave', parameters: 'boundlist,event' },
             { name: 'fullscreen', parameters: 'sender' },
+            { name: 'groupcollapse', parameters: 'boundlist,group' },
+            { name: 'groupexpand', parameters: 'boundlist,group' },
             { name: 'heightchange', parameters: 'sender,value,oldValue' },
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
@@ -13892,6 +14134,8 @@
             'beforecenteredchange',
             'beforedisabledchange',
             'beforedockedchange',
+            'beforegroupcollapse',
+            'beforegroupexpand',
             'beforeheightchange',
             'beforehiddenchange',
             'beforehide',
@@ -13934,6 +14178,8 @@
             'focusenter',
             'focusleave',
             'fullscreen',
+            'groupcollapse',
+            'groupexpand',
             'heightchange',
             'hiddenchange',
             'hide',
@@ -14017,6 +14263,7 @@
         chipviewMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -14028,6 +14275,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -14059,10 +14307,6 @@
             'emptyText',
             'emptyTextDefaults',
             'emptyTextProperty',
-            'enableTextSelection',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -14129,7 +14373,6 @@
             'selectable',
             'selected',
             'selection',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -14399,6 +14642,7 @@
         componentdataviewMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -14410,6 +14654,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -14436,10 +14681,6 @@
             'emptyText',
             'emptyTextDefaults',
             'emptyTextProperty',
-            'enableTextSelection',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -14506,7 +14747,6 @@
             'scrollToTopOnRefresh',
             'selectable',
             'selection',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -14773,6 +15013,7 @@
         dataitemMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -14783,6 +15024,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -14802,9 +15044,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -14854,7 +15093,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -15059,6 +15297,7 @@
         dataviewMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -15070,6 +15309,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -15096,10 +15336,6 @@
             'emptyText',
             'emptyTextDefaults',
             'emptyTextProperty',
-            'enableTextSelection',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -15163,7 +15399,6 @@
             'selectable',
             'selected',
             'selection',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -15431,6 +15666,7 @@
         }
         emptytextMetaData.XTYPE = 'emptytext';
         emptytextMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -15451,9 +15687,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -15491,7 +15724,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -15677,6 +15909,7 @@
         }
         indexbarMetaData.XTYPE = 'indexbar';
         indexbarMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'animation',
             'ariaAttributes',
@@ -15701,9 +15934,6 @@
             'docked',
             'draggable',
             'dynamic',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -15744,7 +15974,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -15936,6 +16165,7 @@
         }
         itemheaderMetaData.XTYPE = 'itemheader';
         itemheaderMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -15957,9 +16187,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -15999,7 +16226,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -16189,6 +16415,7 @@
         listMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -16200,12 +16427,15 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'bufferSize',
             'cardSwitchAnimation',
             'centered',
             'cls',
+            'collapseDefaults',
+            'collapsible',
             'constrainAlign',
             'contentEl',
             'control',
@@ -16228,10 +16458,6 @@
             'emptyText',
             'emptyTextDefaults',
             'emptyTextProperty',
-            'enableTextSelection',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -16240,6 +16466,8 @@
             'grouped',
             'groupFooter',
             'groupHeader',
+            'grouping',
+            'groupPlaceholder',
             'height',
             'hidden',
             'hideAnimation',
@@ -16318,7 +16546,6 @@
             'scrollToTopOnRefresh',
             'selectable',
             'selection',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -16345,7 +16572,6 @@
             'ui',
             'userCls',
             'userSelectable',
-            'useSimpleItems',
             'variableHeights',
             'verticalOverflow',
             'viewModel',
@@ -16376,6 +16602,8 @@
             { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforegroupcollapse', parameters: 'list,group' },
+            { name: 'beforegroupexpand', parameters: 'list,group' },
             { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforehide', parameters: 'sender' },
@@ -16418,6 +16646,8 @@
             { name: 'focusenter', parameters: 'list,event' },
             { name: 'focusleave', parameters: 'list,event' },
             { name: 'fullscreen', parameters: 'sender' },
+            { name: 'groupcollapse', parameters: 'list,group' },
+            { name: 'groupexpand', parameters: 'list,group' },
             { name: 'heightchange', parameters: 'sender,value,oldValue' },
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
@@ -16472,6 +16702,8 @@
             'beforecenteredchange',
             'beforedisabledchange',
             'beforedockedchange',
+            'beforegroupcollapse',
+            'beforegroupexpand',
             'beforeheightchange',
             'beforehiddenchange',
             'beforehide',
@@ -16514,6 +16746,8 @@
             'focusenter',
             'focusleave',
             'fullscreen',
+            'groupcollapse',
+            'groupexpand',
             'heightchange',
             'hiddenchange',
             'hide',
@@ -16597,6 +16831,7 @@
         listitemMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -16607,6 +16842,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -16627,9 +16863,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -16680,7 +16913,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -16880,6 +17112,254 @@
         return ExtListitemComponent;
     }(base));
 
+    var listitemplaceholderMetaData = /** @class */ (function () {
+        function listitemplaceholderMetaData() {
+        }
+        listitemplaceholderMetaData.XTYPE = 'listitemplaceholder';
+        listitemplaceholderMetaData.PROPERTIES = [
+            'alignSelf',
+            'alwaysOnTop',
+            'ariaAttributes',
+            'ariaDescribedBy',
+            'ariaLabel',
+            'ariaLabelledBy',
+            'axisLock',
+            'bind',
+            'border',
+            'bottom',
+            'centered',
+            'cls',
+            'constrainAlign',
+            'contentEl',
+            'controller',
+            'data',
+            'defaultListenerScope',
+            'defaultToolWeights',
+            'disabled',
+            'displayed',
+            'docked',
+            'draggable',
+            'flex',
+            'floated',
+            'focusCls',
+            'fullscreen',
+            'height',
+            'hidden',
+            'hideAnimation',
+            'hideMode',
+            'hideOnMaskTap',
+            'html',
+            'id',
+            'instanceCls',
+            'itemId',
+            'keyMap',
+            'keyMapEnabled',
+            'keyMapTarget',
+            'left',
+            'listeners',
+            'margin',
+            'maxHeight',
+            'maxWidth',
+            'minHeight',
+            'minWidth',
+            'modal',
+            'modelValidation',
+            'name',
+            'nameable',
+            'padding',
+            'pinned',
+            'plugins',
+            'publishes',
+            'record',
+            'recordIndex',
+            'reference',
+            'relative',
+            'renderTo',
+            'right',
+            'ripple',
+            'scrollable',
+            'session',
+            'shadow',
+            'shareableName',
+            'shim',
+            'showAnimation',
+            'stateful',
+            'statefulDefaults',
+            'stateId',
+            'style',
+            'tabIndex',
+            'toFrontOnShow',
+            'toolDefaults',
+            'tools',
+            'tooltip',
+            'top',
+            'touchAction',
+            'tpl',
+            'tplWriteMode',
+            'translatable',
+            'twoWayBindable',
+            'ui',
+            'userCls',
+            'userSelectable',
+            'viewModel',
+            'weight',
+            'width',
+            'x',
+            'xtype',
+            'y',
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'align',
+            'fitToParent',
+            'config'
+        ];
+        listitemplaceholderMetaData.EVENTS = [
+            { name: 'added', parameters: 'sender,container,index' },
+            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehide', parameters: 'sender' },
+            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforetofront', parameters: 'listitemplaceholder' },
+            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'blur', parameters: 'listitemplaceholder,event' },
+            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'destroy', parameters: '' },
+            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'erased', parameters: 'sender' },
+            { name: 'floatingchange', parameters: 'sender,positioned' },
+            { name: 'focus', parameters: 'listitemplaceholder,event' },
+            { name: 'focusenter', parameters: 'listitemplaceholder,event' },
+            { name: 'focusleave', parameters: 'listitemplaceholder,event' },
+            { name: 'fullscreen', parameters: 'sender' },
+            { name: 'heightchange', parameters: 'sender,value,oldValue' },
+            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+            { name: 'hide', parameters: 'sender' },
+            { name: 'initialize', parameters: 'sender' },
+            { name: 'leftchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+            { name: 'orientationchange', parameters: '' },
+            { name: 'painted', parameters: 'sender,element' },
+            { name: 'positionedchange', parameters: 'sender,positioned' },
+            { name: 'removed', parameters: 'sender,container,index' },
+            { name: 'resize', parameters: 'element,info' },
+            { name: 'rightchange', parameters: 'sender,value,oldValue' },
+            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+            { name: 'show', parameters: 'sender' },
+            { name: 'tofront', parameters: 'listitemplaceholder' },
+            { name: 'topchange', parameters: 'sender,value,oldValue' },
+            { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'widthchange', parameters: 'sender,value,oldValue' },
+            { name: 'ready', parameters: '' }
+        ];
+        listitemplaceholderMetaData.EVENTNAMES = [
+            'added',
+            'beforebottomchange',
+            'beforecenteredchange',
+            'beforedisabledchange',
+            'beforedockedchange',
+            'beforeheightchange',
+            'beforehiddenchange',
+            'beforehide',
+            'beforeleftchange',
+            'beforemaxHeightchange',
+            'beforemaxWidthchange',
+            'beforeminHeightchange',
+            'beforeminWidthchange',
+            'beforeorientationchange',
+            'beforerightchange',
+            'beforescrollablechange',
+            'beforeshow',
+            'beforetofront',
+            'beforetopchange',
+            'beforewidthchange',
+            'blur',
+            'bottomchange',
+            'centeredchange',
+            'destroy',
+            'disabledchange',
+            'dockedchange',
+            'erased',
+            'floatingchange',
+            'focus',
+            'focusenter',
+            'focusleave',
+            'fullscreen',
+            'heightchange',
+            'hiddenchange',
+            'hide',
+            'initialize',
+            'leftchange',
+            'maxHeightchange',
+            'maxWidthchange',
+            'minHeightchange',
+            'minWidthchange',
+            'moved',
+            'orientationchange',
+            'painted',
+            'positionedchange',
+            'removed',
+            'resize',
+            'rightchange',
+            'scrollablechange',
+            'show',
+            'tofront',
+            'topchange',
+            'updatedata',
+            'widthchange',
+            'ready'
+        ];
+        return listitemplaceholderMetaData;
+    }());
+    var ExtListitemplaceholderComponent = /** @class */ (function (_super) {
+        __extends(ExtListitemplaceholderComponent, _super);
+        function ExtListitemplaceholderComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, listitemplaceholderMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
+        }
+        ExtListitemplaceholderComponent_1 = ExtListitemplaceholderComponent;
+        ExtListitemplaceholderComponent.prototype.ngOnInit = function () {
+            this.baseOnInit(listitemplaceholderMetaData);
+        };
+        ExtListitemplaceholderComponent.prototype.ngAfterContentInit = function () {
+            this.baseAfterContentInit();
+            //this['ready'].emit(this)
+        };
+        var ExtListitemplaceholderComponent_1;
+        ExtListitemplaceholderComponent = ExtListitemplaceholderComponent_1 = __decorate([
+            core.Component({
+                selector: 'listitemplaceholder',
+                inputs: listitemplaceholderMetaData.PROPERTIES,
+                outputs: listitemplaceholderMetaData.EVENTNAMES,
+                providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtListitemplaceholderComponent_1; }) }],
+                template: '<ng-template></ng-template>'
+            }),
+            __param(1, core.Host()), __param(1, core.Optional()), __param(1, core.SkipSelf()),
+            __metadata("design:paramtypes", [core.ElementRef, base])
+        ], ExtListitemplaceholderComponent);
+        return ExtListitemplaceholderComponent;
+    }(base));
+
     var listswiperitemMetaData = /** @class */ (function () {
         function listswiperitemMetaData() {
         }
@@ -16888,6 +17368,7 @@
             'action',
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -16898,6 +17379,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -16916,9 +17398,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -16966,7 +17445,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -17175,6 +17653,7 @@
             'action',
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'animation',
@@ -17186,6 +17665,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -17204,9 +17684,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -17255,7 +17732,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -17466,6 +17942,7 @@
         nestedlistMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowDeselect',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
@@ -17479,6 +17956,7 @@
             'backButton',
             'backText',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -17501,9 +17979,6 @@
             'docked',
             'draggable',
             'emptyText',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -17556,7 +18031,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -17583,7 +18057,6 @@
             'userCls',
             'userSelectable',
             'useTitleAsBackText',
-            'useToolbar',
             'variableHeights',
             'viewModel',
             'weight',
@@ -17790,6 +18263,7 @@
         }
         pullrefreshbarMetaData.XTYPE = 'pullrefreshbar';
         pullrefreshbarMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -17810,9 +18284,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -17859,7 +18330,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -18046,6 +18516,7 @@
         }
         pullrefreshspinnerMetaData.XTYPE = 'pullrefreshspinner';
         pullrefreshspinnerMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -18066,9 +18537,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -18108,7 +18576,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -18295,6 +18762,7 @@
         }
         simplelistitemMetaData.XTYPE = 'simplelistitem';
         simplelistitemMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -18316,9 +18784,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -18358,7 +18823,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -18548,6 +19012,7 @@
         dialogMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -18562,6 +19027,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -18594,9 +19060,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -18662,7 +19125,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -18677,6 +19139,7 @@
             'tbar',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -18903,6 +19366,7 @@
         windowMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -18917,6 +19381,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -18949,9 +19414,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -19017,7 +19479,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -19032,6 +19493,7 @@
             'tbar',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -19258,6 +19720,7 @@
         drawMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -19268,6 +19731,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -19288,9 +19752,6 @@
             'downloadServerUrl',
             'draggable',
             'engine',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -19340,7 +19801,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -19563,6 +20023,7 @@
         }
         surfaceMetaData.XTYPE = 'surface';
         surfaceMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -19577,7 +20038,6 @@
             'defaultListenerScope',
             'dirty',
             'disabled',
-            'eventHandlers',
             'flex',
             'flipRtlText',
             'floated',
@@ -19593,6 +20053,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -19602,7 +20063,6 @@
             'relative',
             'renderTo',
             'ripple',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -19698,6 +20158,7 @@
             'activeChildTabIndex',
             'activeItem',
             'alignment',
+            'alignSelf',
             'allowBlur',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
@@ -19709,6 +20170,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cancelOnClear',
@@ -19731,9 +20193,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'field',
             'flex',
             'floated',
@@ -19788,7 +20247,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -20006,6 +20464,7 @@
         }
         checkboxMetaData.XTYPE = 'checkbox';
         checkboxMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -20019,6 +20478,7 @@
             'bottom',
             'boxLabel',
             'boxLabelAlign',
+            'bubbleDirty',
             'centered',
             'checked',
             'cls',
@@ -20027,18 +20487,16 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -20051,7 +20509,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputType',
             'inputValue',
             'instanceCls',
@@ -20091,7 +20548,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -20162,6 +20618,7 @@
             { name: 'check', parameters: 'checkbox' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'checkbox,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -20227,6 +20684,7 @@
             'check',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -20301,6 +20759,7 @@
         }
         checkboxfieldMetaData.XTYPE = 'checkboxfield';
         checkboxfieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -20314,6 +20773,7 @@
             'bottom',
             'boxLabel',
             'boxLabelAlign',
+            'bubbleDirty',
             'centered',
             'checked',
             'cls',
@@ -20322,18 +20782,16 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -20346,7 +20804,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputType',
             'inputValue',
             'instanceCls',
@@ -20386,7 +20843,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -20457,6 +20913,7 @@
             { name: 'check', parameters: 'checkbox' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'checkbox,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -20522,6 +20979,7 @@
             'check',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -20591,11 +21049,307 @@
         return ExtCheckboxfieldComponent;
     }(base));
 
+    var checkboxgroupMetaData = /** @class */ (function () {
+        function checkboxgroupMetaData() {
+        }
+        checkboxgroupMetaData.XTYPE = 'checkboxgroup';
+        checkboxgroupMetaData.PROPERTIES = [
+            'alignSelf',
+            'alwaysOnTop',
+            'ariaAttributes',
+            'ariaDescribedBy',
+            'ariaLabel',
+            'ariaLabelledBy',
+            'autoFitErrors',
+            'autoSize',
+            'axisLock',
+            'bind',
+            'bodyAlign',
+            'border',
+            'bottom',
+            'bubbleDirty',
+            'centered',
+            'cls',
+            'constrainAlign',
+            'container',
+            'contentEl',
+            'controller',
+            'data',
+            'defaultFieldValue',
+            'defaultListenerScope',
+            'defaults',
+            'defaultType',
+            'delegate',
+            'dirty',
+            'disabled',
+            'displayed',
+            'docked',
+            'draggable',
+            'error',
+            'errorMessage',
+            'errorTarget',
+            'errorTip',
+            'errorTpl',
+            'fieldDefaults',
+            'fieldsName',
+            'flex',
+            'floated',
+            'focusCls',
+            'fullscreen',
+            'height',
+            'hidden',
+            'hideAnimation',
+            'hideMode',
+            'hideOnMaskTap',
+            'html',
+            'id',
+            'inline',
+            'instanceCls',
+            'itemId',
+            'items',
+            'keyMap',
+            'keyMapEnabled',
+            'keyMapTarget',
+            'label',
+            'labelAlign',
+            'labelCls',
+            'labelMinWidth',
+            'labelTextAlign',
+            'labelWidth',
+            'labelWrap',
+            'layout',
+            'left',
+            'listeners',
+            'margin',
+            'maxHeight',
+            'maxWidth',
+            'minHeight',
+            'minWidth',
+            'modal',
+            'modelValidation',
+            'name',
+            'nameable',
+            'padding',
+            'plugins',
+            'publishes',
+            'record',
+            'reference',
+            'relative',
+            'renderTo',
+            'required',
+            'requiredMessage',
+            'right',
+            'ripple',
+            'scrollable',
+            'session',
+            'shadow',
+            'shareableName',
+            'shim',
+            'showAnimation',
+            'sideError',
+            'stateful',
+            'statefulDefaults',
+            'stateId',
+            'style',
+            'tabIndex',
+            'tipError',
+            'titleError',
+            'toFrontOnShow',
+            'tooltip',
+            'top',
+            'touchAction',
+            'tpl',
+            'tplWriteMode',
+            'translatable',
+            'twoWayBindable',
+            'ui',
+            'underError',
+            'userCls',
+            'userSelectable',
+            'validateDisabled',
+            'validationMessage',
+            'validators',
+            'value',
+            'vertical',
+            'viewModel',
+            'weight',
+            'width',
+            'x',
+            'xtype',
+            'y',
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'align',
+            'fitToParent',
+            'config'
+        ];
+        checkboxgroupMetaData.EVENTS = [
+            { name: 'added', parameters: 'sender,container,index' },
+            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehide', parameters: 'sender' },
+            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforetofront', parameters: 'checkboxgroup' },
+            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'blur', parameters: 'checkboxgroup,event' },
+            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'change', parameters: 'checkboxgroup,newValue,oldValue' },
+            { name: 'click', parameters: 'e' },
+            { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'checkboxgroup,dirty' },
+            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'erased', parameters: 'sender' },
+            { name: 'errorchange', parameters: 'checkboxgroup,error' },
+            { name: 'floatingchange', parameters: 'sender,positioned' },
+            { name: 'focus', parameters: 'checkboxgroup,event' },
+            { name: 'focusenter', parameters: 'checkboxgroup,event' },
+            { name: 'focusleave', parameters: 'checkboxgroup,event' },
+            { name: 'fullscreen', parameters: 'sender' },
+            { name: 'heightchange', parameters: 'sender,value,oldValue' },
+            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+            { name: 'hide', parameters: 'sender' },
+            { name: 'initialize', parameters: 'sender' },
+            { name: 'keyup', parameters: 'e' },
+            { name: 'leftchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'mousedown', parameters: 'e' },
+            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+            { name: 'orientationchange', parameters: '' },
+            { name: 'painted', parameters: 'sender,element' },
+            { name: 'paste', parameters: 'e' },
+            { name: 'positionedchange', parameters: 'sender,positioned' },
+            { name: 'removed', parameters: 'sender,container,index' },
+            { name: 'resize', parameters: 'element,info' },
+            { name: 'rightchange', parameters: 'sender,value,oldValue' },
+            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+            { name: 'show', parameters: 'sender' },
+            { name: 'tofront', parameters: 'checkboxgroup' },
+            { name: 'topchange', parameters: 'sender,value,oldValue' },
+            { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'widthchange', parameters: 'sender,value,oldValue' },
+            { name: 'ready', parameters: '' }
+        ];
+        checkboxgroupMetaData.EVENTNAMES = [
+            'added',
+            'beforebottomchange',
+            'beforecenteredchange',
+            'beforedisabledchange',
+            'beforedockedchange',
+            'beforeheightchange',
+            'beforehiddenchange',
+            'beforehide',
+            'beforeleftchange',
+            'beforemaxHeightchange',
+            'beforemaxWidthchange',
+            'beforeminHeightchange',
+            'beforeminWidthchange',
+            'beforeorientationchange',
+            'beforerightchange',
+            'beforescrollablechange',
+            'beforeshow',
+            'beforetofront',
+            'beforetopchange',
+            'beforewidthchange',
+            'blur',
+            'bottomchange',
+            'centeredchange',
+            'change',
+            'click',
+            'destroy',
+            'dirtychange',
+            'disabledchange',
+            'dockedchange',
+            'erased',
+            'errorchange',
+            'floatingchange',
+            'focus',
+            'focusenter',
+            'focusleave',
+            'fullscreen',
+            'heightchange',
+            'hiddenchange',
+            'hide',
+            'initialize',
+            'keyup',
+            'leftchange',
+            'maxHeightchange',
+            'maxWidthchange',
+            'minHeightchange',
+            'minWidthchange',
+            'mousedown',
+            'moved',
+            'orientationchange',
+            'painted',
+            'paste',
+            'positionedchange',
+            'removed',
+            'resize',
+            'rightchange',
+            'scrollablechange',
+            'show',
+            'tofront',
+            'topchange',
+            'updatedata',
+            'widthchange',
+            'ready'
+        ];
+        return checkboxgroupMetaData;
+    }());
+    var ExtCheckboxgroupComponent = /** @class */ (function (_super) {
+        __extends(ExtCheckboxgroupComponent, _super);
+        function ExtCheckboxgroupComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, checkboxgroupMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
+        }
+        ExtCheckboxgroupComponent_1 = ExtCheckboxgroupComponent;
+        ExtCheckboxgroupComponent.prototype.ngOnInit = function () {
+            this.baseOnInit(checkboxgroupMetaData);
+        };
+        ExtCheckboxgroupComponent.prototype.ngAfterContentInit = function () {
+            this.baseAfterContentInit();
+            //this['ready'].emit(this)
+        };
+        var ExtCheckboxgroupComponent_1;
+        ExtCheckboxgroupComponent = ExtCheckboxgroupComponent_1 = __decorate([
+            core.Component({
+                selector: 'checkboxgroup',
+                inputs: checkboxgroupMetaData.PROPERTIES,
+                outputs: checkboxgroupMetaData.EVENTNAMES,
+                providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtCheckboxgroupComponent_1; }) }],
+                template: '<ng-template></ng-template>'
+            }),
+            __param(1, core.Host()), __param(1, core.Optional()), __param(1, core.SkipSelf()),
+            __metadata("design:paramtypes", [core.ElementRef, base])
+        ], ExtCheckboxgroupComponent);
+        return ExtCheckboxgroupComponent;
+    }(base));
+
     var comboboxMetaData = /** @class */ (function () {
         function comboboxMetaData() {
         }
         comboboxMetaData.XTYPE = 'combobox';
         comboboxMetaData.PROPERTIES = [
+            'alignSelf',
             'alignTarget',
             'allQuery',
             'alwaysOnTop',
@@ -20620,6 +21374,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'caseSensitive',
             'centered',
             'chipView',
@@ -20632,6 +21387,7 @@
             'data',
             'defaultListenerScope',
             'delimiter',
+            'dirty',
             'disabled',
             'displayed',
             'displayField',
@@ -20641,14 +21397,11 @@
             'edgePicker',
             'editable',
             'enableRegEx',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'floatedPicker',
@@ -20667,7 +21420,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -20708,7 +21460,6 @@
             'picker',
             'pickerSlotAlign',
             'placeholder',
-            'placeHolder',
             'plugins',
             'primaryFilter',
             'publishes',
@@ -20730,7 +21481,6 @@
             'scrollable',
             'selection',
             'selectOnTab',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -20741,6 +21491,7 @@
             'statefulDefaults',
             'stateId',
             'store',
+            'stripCharsRe',
             'style',
             'tabIndex',
             'textAlign',
@@ -20814,6 +21565,7 @@
             { name: 'click', parameters: 'e' },
             { name: 'collapse', parameters: 'field' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'combobox,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -20828,6 +21580,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'combobox,e' },
             { name: 'keyup', parameters: 'combobox,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -20885,6 +21638,7 @@
             'click',
             'collapse',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -20899,6 +21653,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -20961,6 +21716,7 @@
         }
         comboboxfieldMetaData.XTYPE = 'comboboxfield';
         comboboxfieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alignTarget',
             'allQuery',
             'alwaysOnTop',
@@ -20985,6 +21741,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'caseSensitive',
             'centered',
             'chipView',
@@ -20997,6 +21754,7 @@
             'data',
             'defaultListenerScope',
             'delimiter',
+            'dirty',
             'disabled',
             'displayed',
             'displayField',
@@ -21006,14 +21764,11 @@
             'edgePicker',
             'editable',
             'enableRegEx',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'floatedPicker',
@@ -21032,7 +21787,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -21073,7 +21827,6 @@
             'picker',
             'pickerSlotAlign',
             'placeholder',
-            'placeHolder',
             'plugins',
             'primaryFilter',
             'publishes',
@@ -21095,7 +21848,6 @@
             'scrollable',
             'selection',
             'selectOnTab',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -21106,6 +21858,7 @@
             'statefulDefaults',
             'stateId',
             'store',
+            'stripCharsRe',
             'style',
             'tabIndex',
             'textAlign',
@@ -21179,6 +21932,7 @@
             { name: 'click', parameters: 'e' },
             { name: 'collapse', parameters: 'field' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'combobox,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -21193,6 +21947,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'combobox,e' },
             { name: 'keyup', parameters: 'combobox,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -21250,6 +22005,7 @@
             'click',
             'collapse',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -21264,6 +22020,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -21326,6 +22083,7 @@
         }
         containerfieldMetaData.XTYPE = 'containerfield';
         containerfieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -21338,6 +22096,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'cls',
             'constrainAlign',
@@ -21348,18 +22107,17 @@
             'defaultListenerScope',
             'defaults',
             'defaultType',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
+            'fieldDefaults',
             'flex',
             'floated',
             'focusCls',
@@ -21409,7 +22167,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -21479,6 +22236,7 @@
             { name: 'change', parameters: 'containerfield,newValue,oldValue' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'containerfield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -21542,6 +22300,7 @@
             'change',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -21615,6 +22374,7 @@
         }
         fieldcontainerMetaData.XTYPE = 'fieldcontainer';
         fieldcontainerMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -21627,6 +22387,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'cls',
             'constrainAlign',
@@ -21637,18 +22398,17 @@
             'defaultListenerScope',
             'defaults',
             'defaultType',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
+            'fieldDefaults',
             'flex',
             'floated',
             'focusCls',
@@ -21698,7 +22458,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -21768,6 +22527,7 @@
             { name: 'change', parameters: 'containerfield,newValue,oldValue' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'containerfield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -21831,6 +22591,7 @@
             'change',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -21904,7 +22665,9 @@
         }
         datefieldMetaData.XTYPE = 'datefield';
         datefieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alignTarget',
+            'altFormats',
             'alwaysOnTop',
             'animateUnderline',
             'ariaAttributes',
@@ -21922,6 +22685,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'clearable',
             'cls',
@@ -21932,20 +22696,18 @@
             'dateFormat',
             'defaultListenerScope',
             'destroyPickerOnHide',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'edgePicker',
             'editable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'floatedPicker',
@@ -21962,7 +22724,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -22000,7 +22761,6 @@
             'picker',
             'pickerSlotAlign',
             'placeholder',
-            'placeHolder',
             'plugins',
             'publishes',
             'readOnly',
@@ -22013,7 +22773,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -22023,7 +22782,9 @@
             'stateful',
             'statefulDefaults',
             'stateId',
+            'stripCharsRe',
             'style',
+            'submitFormat',
             'tabIndex',
             'textAlign',
             'tipError',
@@ -22088,6 +22849,7 @@
             { name: 'click', parameters: 'e' },
             { name: 'collapse', parameters: 'field' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'datefield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -22102,6 +22864,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'datefield,e' },
             { name: 'keyup', parameters: 'datefield,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -22155,6 +22918,7 @@
             'click',
             'collapse',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -22169,6 +22933,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -22229,7 +22994,9 @@
         }
         datepickerfieldMetaData.XTYPE = 'datepickerfield';
         datepickerfieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alignTarget',
+            'altFormats',
             'alwaysOnTop',
             'animateUnderline',
             'ariaAttributes',
@@ -22247,6 +23014,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'clearable',
             'cls',
@@ -22257,20 +23025,18 @@
             'dateFormat',
             'defaultListenerScope',
             'destroyPickerOnHide',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'edgePicker',
             'editable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'floatedPicker',
@@ -22287,7 +23053,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -22325,7 +23090,6 @@
             'picker',
             'pickerSlotAlign',
             'placeholder',
-            'placeHolder',
             'plugins',
             'publishes',
             'readOnly',
@@ -22338,7 +23102,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -22348,7 +23111,9 @@
             'stateful',
             'statefulDefaults',
             'stateId',
+            'stripCharsRe',
             'style',
+            'submitFormat',
             'tabIndex',
             'textAlign',
             'tipError',
@@ -22413,6 +23178,7 @@
             { name: 'click', parameters: 'e' },
             { name: 'collapse', parameters: 'field' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'datefield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -22427,6 +23193,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'datefield,e' },
             { name: 'keyup', parameters: 'datefield,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -22480,6 +23247,7 @@
             'click',
             'collapse',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -22494,6 +23262,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -22554,7 +23323,9 @@
         }
         datepickernativefieldMetaData.XTYPE = 'datepickernativefield';
         datepickernativefieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alignTarget',
+            'altFormats',
             'alwaysOnTop',
             'animateUnderline',
             'ariaAttributes',
@@ -22572,6 +23343,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'clearable',
             'cls',
@@ -22582,20 +23354,18 @@
             'dateFormat',
             'defaultListenerScope',
             'destroyPickerOnHide',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'edgePicker',
             'editable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'floatedPicker',
@@ -22612,7 +23382,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -22650,7 +23419,6 @@
             'picker',
             'pickerSlotAlign',
             'placeholder',
-            'placeHolder',
             'plugins',
             'publishes',
             'readOnly',
@@ -22663,7 +23431,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -22673,7 +23440,9 @@
             'stateful',
             'statefulDefaults',
             'stateId',
+            'stripCharsRe',
             'style',
+            'submitFormat',
             'tabIndex',
             'textAlign',
             'tipError',
@@ -22738,6 +23507,7 @@
             { name: 'click', parameters: 'e' },
             { name: 'collapse', parameters: 'field' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'datepickernativefield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -22752,6 +23522,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'datepickernativefield,e' },
             { name: 'keyup', parameters: 'datepickernativefield,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -22805,6 +23576,7 @@
             'click',
             'collapse',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -22819,6 +23591,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -22879,6 +23652,7 @@
         }
         displayfieldMetaData.XTYPE = 'displayfield';
         displayfieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -22890,6 +23664,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'cls',
             'constrainAlign',
@@ -22897,19 +23672,17 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'encodeHtml',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusable',
@@ -22961,7 +23734,6 @@
             'ripple',
             'scope',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -23031,6 +23803,7 @@
             { name: 'change', parameters: 'displayfield,newValue,oldValue' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'displayfield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -23094,6 +23867,7 @@
             'change',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -23167,6 +23941,7 @@
         }
         emailfieldMetaData.XTYPE = 'emailfield';
         emailfieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'animateUnderline',
             'ariaAttributes',
@@ -23184,6 +23959,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'clearable',
             'cls',
@@ -23192,19 +23968,17 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'editable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -23217,7 +23991,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -23250,7 +24023,6 @@
             'parseValidator',
             'pattern',
             'placeholder',
-            'placeHolder',
             'plugins',
             'publishes',
             'readOnly',
@@ -23263,7 +24035,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -23273,6 +24044,7 @@
             'stateful',
             'statefulDefaults',
             'stateId',
+            'stripCharsRe',
             'style',
             'tabIndex',
             'textAlign',
@@ -23337,6 +24109,7 @@
             { name: 'clearicontap', parameters: 'emailfield,input,e' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'emailfield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -23350,6 +24123,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'emailfield,e' },
             { name: 'keyup', parameters: 'emailfield,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -23402,6 +24176,7 @@
             'clearicontap',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -23415,6 +24190,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -23475,6 +24251,7 @@
         }
         fieldMetaData.XTYPE = 'field';
         fieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -23486,6 +24263,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'cls',
             'constrainAlign',
@@ -23493,18 +24271,16 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -23552,7 +24328,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -23622,6 +24397,7 @@
             { name: 'change', parameters: 'field,newValue,oldValue' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'field,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -23685,6 +24461,7 @@
             'change',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -23753,12 +24530,308 @@
         return ExtFieldComponent;
     }(base));
 
+    var groupcontainerMetaData = /** @class */ (function () {
+        function groupcontainerMetaData() {
+        }
+        groupcontainerMetaData.XTYPE = 'groupcontainer';
+        groupcontainerMetaData.PROPERTIES = [
+            'alignSelf',
+            'alwaysOnTop',
+            'ariaAttributes',
+            'ariaDescribedBy',
+            'ariaLabel',
+            'ariaLabelledBy',
+            'autoFitErrors',
+            'autoSize',
+            'axisLock',
+            'bind',
+            'bodyAlign',
+            'border',
+            'bottom',
+            'bubbleDirty',
+            'centered',
+            'cls',
+            'constrainAlign',
+            'container',
+            'contentEl',
+            'controller',
+            'data',
+            'defaultFieldValue',
+            'defaultListenerScope',
+            'defaults',
+            'defaultType',
+            'delegate',
+            'dirty',
+            'disabled',
+            'displayed',
+            'docked',
+            'draggable',
+            'error',
+            'errorMessage',
+            'errorTarget',
+            'errorTip',
+            'errorTpl',
+            'fieldDefaults',
+            'fieldsName',
+            'flex',
+            'floated',
+            'focusCls',
+            'fullscreen',
+            'height',
+            'hidden',
+            'hideAnimation',
+            'hideMode',
+            'hideOnMaskTap',
+            'html',
+            'id',
+            'inline',
+            'instanceCls',
+            'itemId',
+            'items',
+            'keyMap',
+            'keyMapEnabled',
+            'keyMapTarget',
+            'label',
+            'labelAlign',
+            'labelCls',
+            'labelMinWidth',
+            'labelTextAlign',
+            'labelWidth',
+            'labelWrap',
+            'layout',
+            'left',
+            'listeners',
+            'margin',
+            'maxHeight',
+            'maxWidth',
+            'minHeight',
+            'minWidth',
+            'modal',
+            'modelValidation',
+            'name',
+            'nameable',
+            'padding',
+            'plugins',
+            'publishes',
+            'record',
+            'reference',
+            'relative',
+            'renderTo',
+            'required',
+            'requiredMessage',
+            'right',
+            'ripple',
+            'scrollable',
+            'session',
+            'shadow',
+            'shareableName',
+            'shim',
+            'showAnimation',
+            'sideError',
+            'stateful',
+            'statefulDefaults',
+            'stateId',
+            'style',
+            'tabIndex',
+            'tipError',
+            'titleError',
+            'toFrontOnShow',
+            'tooltip',
+            'top',
+            'touchAction',
+            'tpl',
+            'tplWriteMode',
+            'translatable',
+            'twoWayBindable',
+            'ui',
+            'underError',
+            'userCls',
+            'userSelectable',
+            'validateDisabled',
+            'validationMessage',
+            'validators',
+            'value',
+            'vertical',
+            'viewModel',
+            'weight',
+            'width',
+            'x',
+            'xtype',
+            'y',
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'align',
+            'fitToParent',
+            'config'
+        ];
+        groupcontainerMetaData.EVENTS = [
+            { name: 'added', parameters: 'sender,container,index' },
+            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehide', parameters: 'sender' },
+            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforetofront', parameters: 'groupcontainer' },
+            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'blur', parameters: 'groupcontainer,event' },
+            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'change', parameters: 'groupcontainer,newValue,oldValue' },
+            { name: 'click', parameters: 'e' },
+            { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'groupcontainer,dirty' },
+            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'erased', parameters: 'sender' },
+            { name: 'errorchange', parameters: 'groupcontainer,error' },
+            { name: 'floatingchange', parameters: 'sender,positioned' },
+            { name: 'focus', parameters: 'groupcontainer,event' },
+            { name: 'focusenter', parameters: 'groupcontainer,event' },
+            { name: 'focusleave', parameters: 'groupcontainer,event' },
+            { name: 'fullscreen', parameters: 'sender' },
+            { name: 'heightchange', parameters: 'sender,value,oldValue' },
+            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+            { name: 'hide', parameters: 'sender' },
+            { name: 'initialize', parameters: 'sender' },
+            { name: 'keyup', parameters: 'e' },
+            { name: 'leftchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'mousedown', parameters: 'e' },
+            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+            { name: 'orientationchange', parameters: '' },
+            { name: 'painted', parameters: 'sender,element' },
+            { name: 'paste', parameters: 'e' },
+            { name: 'positionedchange', parameters: 'sender,positioned' },
+            { name: 'removed', parameters: 'sender,container,index' },
+            { name: 'resize', parameters: 'element,info' },
+            { name: 'rightchange', parameters: 'sender,value,oldValue' },
+            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+            { name: 'show', parameters: 'sender' },
+            { name: 'tofront', parameters: 'groupcontainer' },
+            { name: 'topchange', parameters: 'sender,value,oldValue' },
+            { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'widthchange', parameters: 'sender,value,oldValue' },
+            { name: 'ready', parameters: '' }
+        ];
+        groupcontainerMetaData.EVENTNAMES = [
+            'added',
+            'beforebottomchange',
+            'beforecenteredchange',
+            'beforedisabledchange',
+            'beforedockedchange',
+            'beforeheightchange',
+            'beforehiddenchange',
+            'beforehide',
+            'beforeleftchange',
+            'beforemaxHeightchange',
+            'beforemaxWidthchange',
+            'beforeminHeightchange',
+            'beforeminWidthchange',
+            'beforeorientationchange',
+            'beforerightchange',
+            'beforescrollablechange',
+            'beforeshow',
+            'beforetofront',
+            'beforetopchange',
+            'beforewidthchange',
+            'blur',
+            'bottomchange',
+            'centeredchange',
+            'change',
+            'click',
+            'destroy',
+            'dirtychange',
+            'disabledchange',
+            'dockedchange',
+            'erased',
+            'errorchange',
+            'floatingchange',
+            'focus',
+            'focusenter',
+            'focusleave',
+            'fullscreen',
+            'heightchange',
+            'hiddenchange',
+            'hide',
+            'initialize',
+            'keyup',
+            'leftchange',
+            'maxHeightchange',
+            'maxWidthchange',
+            'minHeightchange',
+            'minWidthchange',
+            'mousedown',
+            'moved',
+            'orientationchange',
+            'painted',
+            'paste',
+            'positionedchange',
+            'removed',
+            'resize',
+            'rightchange',
+            'scrollablechange',
+            'show',
+            'tofront',
+            'topchange',
+            'updatedata',
+            'widthchange',
+            'ready'
+        ];
+        return groupcontainerMetaData;
+    }());
+    var ExtGroupcontainerComponent = /** @class */ (function (_super) {
+        __extends(ExtGroupcontainerComponent, _super);
+        function ExtGroupcontainerComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, groupcontainerMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
+        }
+        ExtGroupcontainerComponent_1 = ExtGroupcontainerComponent;
+        ExtGroupcontainerComponent.prototype.ngOnInit = function () {
+            this.baseOnInit(groupcontainerMetaData);
+        };
+        ExtGroupcontainerComponent.prototype.ngAfterContentInit = function () {
+            this.baseAfterContentInit();
+            //this['ready'].emit(this)
+        };
+        var ExtGroupcontainerComponent_1;
+        ExtGroupcontainerComponent = ExtGroupcontainerComponent_1 = __decorate([
+            core.Component({
+                selector: 'groupcontainer',
+                inputs: groupcontainerMetaData.PROPERTIES,
+                outputs: groupcontainerMetaData.EVENTNAMES,
+                providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtGroupcontainerComponent_1; }) }],
+                template: '<ng-template></ng-template>'
+            }),
+            __param(1, core.Host()), __param(1, core.Optional()), __param(1, core.SkipSelf()),
+            __metadata("design:paramtypes", [core.ElementRef, base])
+        ], ExtGroupcontainerComponent);
+        return ExtGroupcontainerComponent;
+    }(base));
+
     var filefieldMetaData = /** @class */ (function () {
         function filefieldMetaData() {
         }
         filefieldMetaData.XTYPE = 'filefield';
         filefieldMetaData.PROPERTIES = [
             'accept',
+            'alignSelf',
             'alwaysOnTop',
             'animateUnderline',
             'ariaAttributes',
@@ -23776,6 +24849,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'capture',
             'centered',
             'clearable',
@@ -23785,19 +24859,17 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'editable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -23810,7 +24882,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -23844,7 +24915,6 @@
             'parseValidator',
             'pattern',
             'placeholder',
-            'placeHolder',
             'plugins',
             'publishes',
             'readOnly',
@@ -23857,7 +24927,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -23867,6 +24936,7 @@
             'stateful',
             'statefulDefaults',
             'stateId',
+            'stripCharsRe',
             'style',
             'tabIndex',
             'textAlign',
@@ -23931,6 +25001,7 @@
             { name: 'clearicontap', parameters: 'filefield,input,e' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'filefield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -23944,6 +25015,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'filefield,e' },
             { name: 'keyup', parameters: 'filefield,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -23996,6 +25068,7 @@
             'clearicontap',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -24009,6 +25082,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -24070,6 +25144,7 @@
         filebuttonMetaData.XTYPE = 'filebutton';
         filebuttonMetaData.PROPERTIES = [
             'accept',
+            'alignSelf',
             'allowDepress',
             'alwaysOnTop',
             'ariaAttributes',
@@ -24099,9 +25174,6 @@
             'docked',
             'draggable',
             'enableToggle',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -24149,7 +25221,6 @@
             'ripple',
             'scope',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -24350,6 +25421,7 @@
         }
         hiddenfieldMetaData.XTYPE = 'hiddenfield';
         hiddenfieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -24361,6 +25433,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'cls',
             'constrainAlign',
@@ -24368,18 +25441,16 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -24392,7 +25463,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputType',
             'inputValue',
             'instanceCls',
@@ -24431,7 +25501,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -24501,6 +25570,7 @@
             { name: 'change', parameters: 'hiddenfield,newValue,oldValue' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'hiddenfield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -24564,6 +25634,7 @@
             'change',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -24637,6 +25708,7 @@
         }
         inputfieldMetaData.XTYPE = 'inputfield';
         inputfieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -24648,6 +25720,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'cls',
             'constrainAlign',
@@ -24655,18 +25728,16 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -24679,7 +25750,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputType',
             'inputValue',
             'instanceCls',
@@ -24718,7 +25788,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -24788,6 +25857,7 @@
             { name: 'change', parameters: 'inputfield,newValue,oldValue' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'inputfield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -24851,6 +25921,7 @@
             'change',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -24924,6 +25995,7 @@
         }
         numberfieldMetaData.XTYPE = 'numberfield';
         numberfieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'animateUnderline',
             'ariaAttributes',
@@ -24941,6 +26013,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'clearable',
             'cls',
@@ -24949,21 +26022,20 @@
             'controller',
             'data',
             'decimals',
+            'decimalSeparator',
             'decimalsText',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'editable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -24976,7 +26048,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -25013,7 +26084,6 @@
             'parseValidator',
             'pattern',
             'placeholder',
-            'placeHolder',
             'plugins',
             'publishes',
             'readOnly',
@@ -25026,7 +26096,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -25036,6 +26105,7 @@
             'stateful',
             'statefulDefaults',
             'stateId',
+            'stripCharsRe',
             'style',
             'tabIndex',
             'textAlign',
@@ -25101,6 +26171,7 @@
             { name: 'clearicontap', parameters: 'numberfield,input,e' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'numberfield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -25114,6 +26185,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'numberfield,e' },
             { name: 'keyup', parameters: 'numberfield,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -25166,6 +26238,7 @@
             'clearicontap',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -25179,6 +26252,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -25241,6 +26315,7 @@
         fieldpanelMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -25257,10 +26332,12 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
             'bottom',
+            'bubbleDirty',
             'buttonAlign',
             'buttons',
             'buttonToolbar',
@@ -25282,13 +26359,11 @@
             'defaults',
             'defaultToolWeights',
             'defaultType',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'fieldSeparators',
             'flex',
             'floated',
@@ -25349,7 +26424,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -25365,6 +26439,7 @@
             'timeout',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -25427,6 +26502,7 @@
             { name: 'collapse', parameters: 'fieldpanel' },
             { name: 'deactivate', parameters: 'oldActiveItem,fieldpanel,newActiveItem' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'fieldpanel,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'drawerhide', parameters: 'fieldpanel' },
@@ -25504,6 +26580,7 @@
             'collapse',
             'deactivate',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'drawerhide',
@@ -25584,6 +26661,7 @@
         }
         passwordfieldMetaData.XTYPE = 'passwordfield';
         passwordfieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'animateUnderline',
             'ariaAttributes',
@@ -25601,6 +26679,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'clearable',
             'cls',
@@ -25609,19 +26688,17 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'editable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -25634,7 +26711,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -25667,7 +26743,6 @@
             'parseValidator',
             'pattern',
             'placeholder',
-            'placeHolder',
             'plugins',
             'publishes',
             'readOnly',
@@ -25682,7 +26757,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -25692,6 +26766,7 @@
             'stateful',
             'statefulDefaults',
             'stateId',
+            'stripCharsRe',
             'style',
             'tabIndex',
             'textAlign',
@@ -25756,6 +26831,7 @@
             { name: 'clearicontap', parameters: 'passwordfield,input,e' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'passwordfield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -25769,6 +26845,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'passwordfield,e' },
             { name: 'keyup', parameters: 'passwordfield,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -25821,6 +26898,7 @@
             'clearicontap',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -25834,6 +26912,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -25894,6 +26973,7 @@
         }
         pickerfieldMetaData.XTYPE = 'pickerfield';
         pickerfieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alignTarget',
             'alwaysOnTop',
             'animateUnderline',
@@ -25912,6 +26992,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'clearable',
             'cls',
@@ -25920,20 +27001,18 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'edgePicker',
             'editable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'floatedPicker',
@@ -25950,7 +27029,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -25986,7 +27064,6 @@
             'picker',
             'pickerSlotAlign',
             'placeholder',
-            'placeHolder',
             'plugins',
             'publishes',
             'readOnly',
@@ -25999,7 +27076,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -26009,6 +27085,7 @@
             'stateful',
             'statefulDefaults',
             'stateId',
+            'stripCharsRe',
             'style',
             'tabIndex',
             'textAlign',
@@ -26074,6 +27151,7 @@
             { name: 'click', parameters: 'e' },
             { name: 'collapse', parameters: 'field' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'pickerfield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -26088,6 +27166,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'pickerfield,e' },
             { name: 'keyup', parameters: 'pickerfield,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -26141,6 +27220,7 @@
             'click',
             'collapse',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -26155,6 +27235,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -26215,6 +27296,7 @@
         }
         radioMetaData.XTYPE = 'radio';
         radioMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -26228,6 +27310,7 @@
             'bottom',
             'boxLabel',
             'boxLabelAlign',
+            'bubbleDirty',
             'centered',
             'checked',
             'cls',
@@ -26236,18 +27319,16 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -26260,7 +27341,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputType',
             'inputValue',
             'instanceCls',
@@ -26300,7 +27380,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -26371,6 +27450,7 @@
             { name: 'check', parameters: 'radio' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'radio,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -26436,6 +27516,7 @@
             'check',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -26510,6 +27591,7 @@
         }
         radiofieldMetaData.XTYPE = 'radiofield';
         radiofieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -26523,6 +27605,7 @@
             'bottom',
             'boxLabel',
             'boxLabelAlign',
+            'bubbleDirty',
             'centered',
             'checked',
             'cls',
@@ -26531,18 +27614,16 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -26555,7 +27636,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputType',
             'inputValue',
             'instanceCls',
@@ -26595,7 +27675,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -26666,6 +27745,7 @@
             { name: 'check', parameters: 'radio' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'radio,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -26731,6 +27811,7 @@
             'check',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -26800,11 +27881,308 @@
         return ExtRadiofieldComponent;
     }(base));
 
+    var radiogroupMetaData = /** @class */ (function () {
+        function radiogroupMetaData() {
+        }
+        radiogroupMetaData.XTYPE = 'radiogroup';
+        radiogroupMetaData.PROPERTIES = [
+            'alignSelf',
+            'alwaysOnTop',
+            'ariaAttributes',
+            'ariaDescribedBy',
+            'ariaLabel',
+            'ariaLabelledBy',
+            'autoFitErrors',
+            'autoSize',
+            'axisLock',
+            'bind',
+            'bodyAlign',
+            'border',
+            'bottom',
+            'bubbleDirty',
+            'centered',
+            'cls',
+            'constrainAlign',
+            'container',
+            'contentEl',
+            'controller',
+            'data',
+            'defaultFieldValue',
+            'defaultListenerScope',
+            'defaults',
+            'defaultType',
+            'delegate',
+            'dirty',
+            'disabled',
+            'displayed',
+            'docked',
+            'draggable',
+            'error',
+            'errorMessage',
+            'errorTarget',
+            'errorTip',
+            'errorTpl',
+            'fieldDefaults',
+            'fieldsName',
+            'flex',
+            'floated',
+            'focusCls',
+            'fullscreen',
+            'height',
+            'hidden',
+            'hideAnimation',
+            'hideMode',
+            'hideOnMaskTap',
+            'html',
+            'id',
+            'inline',
+            'instanceCls',
+            'itemId',
+            'items',
+            'keyMap',
+            'keyMapEnabled',
+            'keyMapTarget',
+            'label',
+            'labelAlign',
+            'labelCls',
+            'labelMinWidth',
+            'labelTextAlign',
+            'labelWidth',
+            'labelWrap',
+            'layout',
+            'left',
+            'listeners',
+            'margin',
+            'maxHeight',
+            'maxWidth',
+            'minHeight',
+            'minWidth',
+            'modal',
+            'modelValidation',
+            'name',
+            'nameable',
+            'padding',
+            'plugins',
+            'publishes',
+            'record',
+            'reference',
+            'relative',
+            'renderTo',
+            'required',
+            'requiredMessage',
+            'right',
+            'ripple',
+            'scrollable',
+            'session',
+            'shadow',
+            'shareableName',
+            'shim',
+            'showAnimation',
+            'sideError',
+            'simpleValue',
+            'stateful',
+            'statefulDefaults',
+            'stateId',
+            'style',
+            'tabIndex',
+            'tipError',
+            'titleError',
+            'toFrontOnShow',
+            'tooltip',
+            'top',
+            'touchAction',
+            'tpl',
+            'tplWriteMode',
+            'translatable',
+            'twoWayBindable',
+            'ui',
+            'underError',
+            'userCls',
+            'userSelectable',
+            'validateDisabled',
+            'validationMessage',
+            'validators',
+            'value',
+            'vertical',
+            'viewModel',
+            'weight',
+            'width',
+            'x',
+            'xtype',
+            'y',
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'align',
+            'fitToParent',
+            'config'
+        ];
+        radiogroupMetaData.EVENTS = [
+            { name: 'added', parameters: 'sender,container,index' },
+            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehide', parameters: 'sender' },
+            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforetofront', parameters: 'radiogroup' },
+            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'blur', parameters: 'radiogroup,event' },
+            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'change', parameters: 'radiogroup,newValue,oldValue' },
+            { name: 'click', parameters: 'e' },
+            { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'radiogroup,dirty' },
+            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'erased', parameters: 'sender' },
+            { name: 'errorchange', parameters: 'radiogroup,error' },
+            { name: 'floatingchange', parameters: 'sender,positioned' },
+            { name: 'focus', parameters: 'radiogroup,event' },
+            { name: 'focusenter', parameters: 'radiogroup,event' },
+            { name: 'focusleave', parameters: 'radiogroup,event' },
+            { name: 'fullscreen', parameters: 'sender' },
+            { name: 'heightchange', parameters: 'sender,value,oldValue' },
+            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+            { name: 'hide', parameters: 'sender' },
+            { name: 'initialize', parameters: 'sender' },
+            { name: 'keyup', parameters: 'e' },
+            { name: 'leftchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'mousedown', parameters: 'e' },
+            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+            { name: 'orientationchange', parameters: '' },
+            { name: 'painted', parameters: 'sender,element' },
+            { name: 'paste', parameters: 'e' },
+            { name: 'positionedchange', parameters: 'sender,positioned' },
+            { name: 'removed', parameters: 'sender,container,index' },
+            { name: 'resize', parameters: 'element,info' },
+            { name: 'rightchange', parameters: 'sender,value,oldValue' },
+            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+            { name: 'show', parameters: 'sender' },
+            { name: 'tofront', parameters: 'radiogroup' },
+            { name: 'topchange', parameters: 'sender,value,oldValue' },
+            { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'widthchange', parameters: 'sender,value,oldValue' },
+            { name: 'ready', parameters: '' }
+        ];
+        radiogroupMetaData.EVENTNAMES = [
+            'added',
+            'beforebottomchange',
+            'beforecenteredchange',
+            'beforedisabledchange',
+            'beforedockedchange',
+            'beforeheightchange',
+            'beforehiddenchange',
+            'beforehide',
+            'beforeleftchange',
+            'beforemaxHeightchange',
+            'beforemaxWidthchange',
+            'beforeminHeightchange',
+            'beforeminWidthchange',
+            'beforeorientationchange',
+            'beforerightchange',
+            'beforescrollablechange',
+            'beforeshow',
+            'beforetofront',
+            'beforetopchange',
+            'beforewidthchange',
+            'blur',
+            'bottomchange',
+            'centeredchange',
+            'change',
+            'click',
+            'destroy',
+            'dirtychange',
+            'disabledchange',
+            'dockedchange',
+            'erased',
+            'errorchange',
+            'floatingchange',
+            'focus',
+            'focusenter',
+            'focusleave',
+            'fullscreen',
+            'heightchange',
+            'hiddenchange',
+            'hide',
+            'initialize',
+            'keyup',
+            'leftchange',
+            'maxHeightchange',
+            'maxWidthchange',
+            'minHeightchange',
+            'minWidthchange',
+            'mousedown',
+            'moved',
+            'orientationchange',
+            'painted',
+            'paste',
+            'positionedchange',
+            'removed',
+            'resize',
+            'rightchange',
+            'scrollablechange',
+            'show',
+            'tofront',
+            'topchange',
+            'updatedata',
+            'widthchange',
+            'ready'
+        ];
+        return radiogroupMetaData;
+    }());
+    var ExtRadiogroupComponent = /** @class */ (function (_super) {
+        __extends(ExtRadiogroupComponent, _super);
+        function ExtRadiogroupComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, radiogroupMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
+        }
+        ExtRadiogroupComponent_1 = ExtRadiogroupComponent;
+        ExtRadiogroupComponent.prototype.ngOnInit = function () {
+            this.baseOnInit(radiogroupMetaData);
+        };
+        ExtRadiogroupComponent.prototype.ngAfterContentInit = function () {
+            this.baseAfterContentInit();
+            //this['ready'].emit(this)
+        };
+        var ExtRadiogroupComponent_1;
+        ExtRadiogroupComponent = ExtRadiogroupComponent_1 = __decorate([
+            core.Component({
+                selector: 'radiogroup',
+                inputs: radiogroupMetaData.PROPERTIES,
+                outputs: radiogroupMetaData.EVENTNAMES,
+                providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtRadiogroupComponent_1; }) }],
+                template: '<ng-template></ng-template>'
+            }),
+            __param(1, core.Host()), __param(1, core.Optional()), __param(1, core.SkipSelf()),
+            __metadata("design:paramtypes", [core.ElementRef, base])
+        ], ExtRadiogroupComponent);
+        return ExtRadiogroupComponent;
+    }(base));
+
     var searchfieldMetaData = /** @class */ (function () {
         function searchfieldMetaData() {
         }
         searchfieldMetaData.XTYPE = 'searchfield';
         searchfieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'animateUnderline',
             'ariaAttributes',
@@ -26822,6 +28200,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'clearable',
             'cls',
@@ -26830,19 +28209,17 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'editable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -26855,7 +28232,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -26888,7 +28264,6 @@
             'parseValidator',
             'pattern',
             'placeholder',
-            'placeHolder',
             'plugins',
             'publishes',
             'readOnly',
@@ -26901,7 +28276,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -26911,6 +28285,7 @@
             'stateful',
             'statefulDefaults',
             'stateId',
+            'stripCharsRe',
             'style',
             'tabIndex',
             'textAlign',
@@ -26975,6 +28350,7 @@
             { name: 'clearicontap', parameters: 'searchfield,input,e' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'searchfield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -26988,6 +28364,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'searchfield,e' },
             { name: 'keyup', parameters: 'searchfield,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -27040,6 +28417,7 @@
             'clearicontap',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -27053,6 +28431,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -27113,6 +28492,7 @@
         }
         selectfieldMetaData.XTYPE = 'selectfield';
         selectfieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alignTarget',
             'alwaysOnTop',
             'animateUnderline',
@@ -27135,6 +28515,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'chipView',
             'clearable',
@@ -27146,6 +28527,7 @@
             'data',
             'defaultListenerScope',
             'delimiter',
+            'dirty',
             'disabled',
             'displayed',
             'displayField',
@@ -27154,14 +28536,11 @@
             'draggable',
             'edgePicker',
             'editable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'floatedPicker',
@@ -27180,7 +28559,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -27220,7 +28598,6 @@
             'picker',
             'pickerSlotAlign',
             'placeholder',
-            'placeHolder',
             'plugins',
             'publishes',
             'readOnly',
@@ -27237,7 +28614,6 @@
             'scrollable',
             'selection',
             'selectOnTab',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -27248,6 +28624,7 @@
             'statefulDefaults',
             'stateId',
             'store',
+            'stripCharsRe',
             'style',
             'tabIndex',
             'textAlign',
@@ -27316,6 +28693,7 @@
             { name: 'click', parameters: 'e' },
             { name: 'collapse', parameters: 'field' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'selectfield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -27330,6 +28708,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'selectfield,e' },
             { name: 'keyup', parameters: 'selectfield,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -27384,6 +28763,7 @@
             'click',
             'collapse',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -27398,6 +28778,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -27459,6 +28840,7 @@
         }
         singlesliderfieldMetaData.XTYPE = 'singlesliderfield';
         singlesliderfieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -27472,6 +28854,7 @@
             'bottom',
             'boxLabel',
             'boxLabelAlign',
+            'bubbleDirty',
             'centered',
             'cls',
             'constrainAlign',
@@ -27479,18 +28862,16 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -27543,7 +28924,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -27615,6 +28995,7 @@
             { name: 'change', parameters: 'me,newValue,oldValue' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'singlesliderfield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'drag', parameters: 'singlesliderfield,sl,thumb,e' },
@@ -27682,6 +29063,7 @@
             'change',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'drag',
@@ -27759,6 +29141,7 @@
         }
         sliderfieldMetaData.XTYPE = 'sliderfield';
         sliderfieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -27772,6 +29155,7 @@
             'bottom',
             'boxLabel',
             'boxLabelAlign',
+            'bubbleDirty',
             'centered',
             'cls',
             'constrainAlign',
@@ -27779,18 +29163,16 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -27843,7 +29225,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -27915,6 +29296,7 @@
             { name: 'change', parameters: 'me,newValue,oldValue' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'sliderfield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'drag', parameters: 'sliderfield,sl,thumb,e' },
@@ -27982,6 +29364,7 @@
             'change',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'drag',
@@ -28060,6 +29443,7 @@
         spinnerfieldMetaData.XTYPE = 'spinnerfield';
         spinnerfieldMetaData.PROPERTIES = [
             'accelerateOnTapHold',
+            'alignSelf',
             'alwaysOnTop',
             'animateUnderline',
             'ariaAttributes',
@@ -28077,6 +29461,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'clearable',
             'cls',
@@ -28086,26 +29471,24 @@
             'cycle',
             'data',
             'decimals',
+            'decimalSeparator',
             'decimalsText',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'editable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
             'fullscreen',
-            'groupButtons',
             'height',
             'hidden',
             'hideAnimation',
@@ -28114,7 +29497,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -28151,7 +29533,6 @@
             'parseValidator',
             'pattern',
             'placeholder',
-            'placeHolder',
             'plugins',
             'publishes',
             'readOnly',
@@ -28164,7 +29545,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -28175,6 +29555,7 @@
             'statefulDefaults',
             'stateId',
             'stepValue',
+            'stripCharsRe',
             'style',
             'tabIndex',
             'textAlign',
@@ -28240,6 +29621,7 @@
             { name: 'clearicontap', parameters: 'spinnerfield,input,e' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'spinnerfield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -28253,6 +29635,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'spinnerfield,e' },
             { name: 'keyup', parameters: 'spinnerfield,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -28308,6 +29691,7 @@
             'clearicontap',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -28321,6 +29705,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -28384,6 +29769,7 @@
         }
         textfieldMetaData.XTYPE = 'textfield';
         textfieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'animateUnderline',
             'ariaAttributes',
@@ -28401,6 +29787,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'clearable',
             'cls',
@@ -28409,19 +29796,17 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'editable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -28434,7 +29819,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -28467,7 +29851,6 @@
             'parseValidator',
             'pattern',
             'placeholder',
-            'placeHolder',
             'plugins',
             'publishes',
             'readOnly',
@@ -28480,7 +29863,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -28490,6 +29872,7 @@
             'stateful',
             'statefulDefaults',
             'stateId',
+            'stripCharsRe',
             'style',
             'tabIndex',
             'textAlign',
@@ -28554,6 +29937,7 @@
             { name: 'clearicontap', parameters: 'textfield,input,e' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'textfield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -28567,6 +29951,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'textfield,e' },
             { name: 'keyup', parameters: 'textfield,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -28619,6 +30004,7 @@
             'clearicontap',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -28632,6 +30018,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -28692,6 +30079,7 @@
         }
         textareafieldMetaData.XTYPE = 'textareafield';
         textareafieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'animateUnderline',
             'ariaAttributes',
@@ -28709,6 +30097,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'clearable',
             'cls',
@@ -28717,19 +30106,17 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'editable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -28742,7 +30129,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -28776,7 +30162,6 @@
             'parseValidator',
             'pattern',
             'placeholder',
-            'placeHolder',
             'plugins',
             'publishes',
             'readOnly',
@@ -28789,7 +30174,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -28799,6 +30183,7 @@
             'stateful',
             'statefulDefaults',
             'stateId',
+            'stripCharsRe',
             'style',
             'tabIndex',
             'textAlign',
@@ -28863,6 +30248,7 @@
             { name: 'clearicontap', parameters: 'textareafield,input,e' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'textareafield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -28876,6 +30262,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'textareafield,e' },
             { name: 'keyup', parameters: 'textareafield,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -28928,6 +30315,7 @@
             'clearicontap',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -28941,6 +30329,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -29001,6 +30390,7 @@
         }
         timefieldMetaData.XTYPE = 'timefield';
         timefieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alignTarget',
             'altFormats',
             'alwaysOnTop',
@@ -29020,6 +30410,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'clearable',
             'cls',
@@ -29028,20 +30419,18 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'edgePicker',
             'editable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'floatedPicker',
@@ -29059,7 +30448,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -29095,7 +30483,6 @@
             'picker',
             'pickerSlotAlign',
             'placeholder',
-            'placeHolder',
             'plugins',
             'publishes',
             'readOnly',
@@ -29108,7 +30495,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -29118,6 +30504,7 @@
             'stateful',
             'statefulDefaults',
             'stateId',
+            'stripCharsRe',
             'style',
             'tabIndex',
             'textAlign',
@@ -29183,6 +30570,7 @@
             { name: 'click', parameters: 'e' },
             { name: 'collapse', parameters: 'field' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'timefield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -29197,6 +30585,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'timefield,e' },
             { name: 'keyup', parameters: 'timefield,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -29250,6 +30639,7 @@
             'click',
             'collapse',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -29264,6 +30654,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -29325,6 +30716,7 @@
         togglefieldMetaData.XTYPE = 'togglefield';
         togglefieldMetaData.PROPERTIES = [
             'activeLabel',
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -29338,6 +30730,7 @@
             'bottom',
             'boxLabel',
             'boxLabelAlign',
+            'bubbleDirty',
             'centered',
             'cls',
             'constrainAlign',
@@ -29345,18 +30738,16 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -29410,7 +30801,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -29482,6 +30872,7 @@
             { name: 'change', parameters: 'togglefield,newValue,oldValue' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'togglefield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'drag', parameters: '' },
@@ -29549,6 +30940,7 @@
             'change',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'drag',
@@ -29626,6 +31018,7 @@
         }
         cleartriggerMetaData.XTYPE = 'cleartrigger';
         cleartriggerMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -29638,7 +31031,6 @@
             'controller',
             'defaultListenerScope',
             'disabled',
-            'eventHandlers',
             'field',
             'flex',
             'floated',
@@ -29657,6 +31049,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -29667,7 +31060,6 @@
             'repeat',
             'ripple',
             'scope',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -29762,6 +31154,7 @@
         }
         datetriggerMetaData.XTYPE = 'datetrigger';
         datetriggerMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -29774,7 +31167,6 @@
             'controller',
             'defaultListenerScope',
             'disabled',
-            'eventHandlers',
             'field',
             'flex',
             'floated',
@@ -29793,6 +31185,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -29803,7 +31196,6 @@
             'repeat',
             'ripple',
             'scope',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -29898,6 +31290,7 @@
         }
         expandtriggerMetaData.XTYPE = 'expandtrigger';
         expandtriggerMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -29910,7 +31303,6 @@
             'controller',
             'defaultListenerScope',
             'disabled',
-            'eventHandlers',
             'field',
             'flex',
             'floated',
@@ -29929,6 +31321,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -29939,7 +31332,6 @@
             'repeat',
             'ripple',
             'scope',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -30034,6 +31426,7 @@
         }
         menutriggerMetaData.XTYPE = 'menutrigger';
         menutriggerMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -30047,7 +31440,6 @@
             'defaultListenerScope',
             'destroyMenu',
             'disabled',
-            'eventHandlers',
             'field',
             'flex',
             'floated',
@@ -30066,6 +31458,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'menu',
             'menuAlign',
             'name',
@@ -30078,7 +31471,6 @@
             'repeat',
             'ripple',
             'scope',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -30173,6 +31565,7 @@
         }
         revealtriggerMetaData.XTYPE = 'revealtrigger';
         revealtriggerMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -30185,7 +31578,6 @@
             'controller',
             'defaultListenerScope',
             'disabled',
-            'eventHandlers',
             'field',
             'flex',
             'floated',
@@ -30204,6 +31596,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -30214,7 +31607,6 @@
             'repeat',
             'ripple',
             'scope',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -30309,6 +31701,7 @@
         }
         spindowntriggerMetaData.XTYPE = 'spindowntrigger';
         spindowntriggerMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -30321,7 +31714,6 @@
             'controller',
             'defaultListenerScope',
             'disabled',
-            'eventHandlers',
             'field',
             'flex',
             'floated',
@@ -30340,6 +31732,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -30350,7 +31743,6 @@
             'repeat',
             'ripple',
             'scope',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -30445,6 +31837,7 @@
         }
         spinuptriggerMetaData.XTYPE = 'spinuptrigger';
         spinuptriggerMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -30457,7 +31850,6 @@
             'controller',
             'defaultListenerScope',
             'disabled',
-            'eventHandlers',
             'field',
             'flex',
             'floated',
@@ -30476,6 +31868,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -30486,7 +31879,6 @@
             'repeat',
             'ripple',
             'scope',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -30581,6 +31973,7 @@
         }
         timetriggerMetaData.XTYPE = 'timetrigger';
         timetriggerMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -30593,7 +31986,6 @@
             'controller',
             'defaultListenerScope',
             'disabled',
-            'eventHandlers',
             'field',
             'flex',
             'floated',
@@ -30612,6 +32004,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -30622,7 +32015,6 @@
             'repeat',
             'ripple',
             'scope',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -30717,6 +32109,7 @@
         }
         triggerMetaData.XTYPE = 'trigger';
         triggerMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -30729,7 +32122,6 @@
             'controller',
             'defaultListenerScope',
             'disabled',
-            'eventHandlers',
             'field',
             'flex',
             'floated',
@@ -30748,6 +32140,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -30758,7 +32151,6 @@
             'repeat',
             'ripple',
             'scope',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -30853,6 +32245,7 @@
         }
         urlfieldMetaData.XTYPE = 'urlfield';
         urlfieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'animateUnderline',
             'ariaAttributes',
@@ -30870,6 +32263,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'clearable',
             'cls',
@@ -30878,19 +32272,17 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'editable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -30903,7 +32295,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -30936,7 +32327,6 @@
             'parseValidator',
             'pattern',
             'placeholder',
-            'placeHolder',
             'plugins',
             'publishes',
             'readOnly',
@@ -30949,7 +32339,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -30959,6 +32348,7 @@
             'stateful',
             'statefulDefaults',
             'stateId',
+            'stripCharsRe',
             'style',
             'tabIndex',
             'textAlign',
@@ -31023,6 +32413,7 @@
             { name: 'clearicontap', parameters: 'urlfield,input,e' },
             { name: 'click', parameters: 'e' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'urlfield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -31036,6 +32427,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'urlfield,e' },
             { name: 'keyup', parameters: 'urlfield,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -31088,6 +32480,7 @@
             'clearicontap',
             'click',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -31101,6 +32494,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -31163,6 +32557,7 @@
         fieldsetMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -31173,6 +32568,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -31191,9 +32587,7 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
+            'fieldDefaults',
             'fieldSeparators',
             'flex',
             'floated',
@@ -31244,7 +32638,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -31450,6 +32843,7 @@
         formpanelMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -31466,10 +32860,12 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
             'bottom',
+            'bubbleDirty',
             'buttonAlign',
             'buttons',
             'buttonToolbar',
@@ -31491,15 +32887,14 @@
             'defaults',
             'defaultToolWeights',
             'defaultType',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'enableSubmissionForm',
             'enctype',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
+            'fieldDefaults',
             'fieldSeparators',
             'flex',
             'floated',
@@ -31524,6 +32919,7 @@
             'instanceCls',
             'itemId',
             'items',
+            'jsonSubmit',
             'keyMap',
             'keyMapEnabled',
             'keyMapTarget',
@@ -31562,7 +32958,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -31580,6 +32975,7 @@
             'timeout',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -31644,6 +33040,7 @@
             { name: 'collapse', parameters: 'formpanel' },
             { name: 'deactivate', parameters: 'oldActiveItem,formpanel,newActiveItem' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'formpanel,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'drawerhide', parameters: 'formpanel' },
@@ -31723,6 +33120,7 @@
             'collapse',
             'deactivate',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'drawerhide',
@@ -31805,6 +33203,7 @@
         gridcellbaseMetaData.XTYPE = 'gridcellbase';
         gridcellbaseMetaData.PROPERTIES = [
             'align',
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -31822,7 +33221,6 @@
             'defaultListenerScope',
             'defaultToolWeights',
             'disabled',
-            'eventHandlers',
             'flex',
             'floated',
             'focusCls',
@@ -31836,6 +33234,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -31846,7 +33245,6 @@
             'renderTo',
             'ripple',
             'selectable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -31943,6 +33341,7 @@
         booleancellMetaData.XTYPE = 'booleancell';
         booleancellMetaData.PROPERTIES = [
             'align',
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -31961,7 +33360,6 @@
             'defaultToolWeights',
             'disabled',
             'encodeHtml',
-            'eventHandlers',
             'falseText',
             'flex',
             'floated',
@@ -31976,6 +33374,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -31987,7 +33386,6 @@
             'renderTo',
             'ripple',
             'selectable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -32087,6 +33485,7 @@
         gridcellMetaData.XTYPE = 'gridcell';
         gridcellMetaData.PROPERTIES = [
             'align',
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -32105,7 +33504,6 @@
             'defaultToolWeights',
             'disabled',
             'encodeHtml',
-            'eventHandlers',
             'flex',
             'floated',
             'focusCls',
@@ -32120,6 +33518,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -32133,7 +33532,6 @@
             'ripple',
             'scope',
             'selectable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -32232,6 +33630,7 @@
         checkcellMetaData.XTYPE = 'checkcell';
         checkcellMetaData.PROPERTIES = [
             'align',
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -32249,7 +33648,6 @@
             'defaultListenerScope',
             'defaultToolWeights',
             'disabled',
-            'eventHandlers',
             'flex',
             'floated',
             'focusCls',
@@ -32263,6 +33661,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -32273,7 +33672,6 @@
             'renderTo',
             'ripple',
             'selectable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -32370,6 +33768,7 @@
         datecellMetaData.XTYPE = 'datecell';
         datecellMetaData.PROPERTIES = [
             'align',
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -32388,7 +33787,6 @@
             'defaultToolWeights',
             'disabled',
             'encodeHtml',
-            'eventHandlers',
             'flex',
             'floated',
             'focusCls',
@@ -32403,6 +33801,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -32414,7 +33813,6 @@
             'renderTo',
             'ripple',
             'selectable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -32512,6 +33910,7 @@
         numbercellMetaData.XTYPE = 'numbercell';
         numbercellMetaData.PROPERTIES = [
             'align',
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -32530,7 +33929,6 @@
             'defaultToolWeights',
             'disabled',
             'encodeHtml',
-            'eventHandlers',
             'flex',
             'floated',
             'focusCls',
@@ -32545,6 +33943,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -32556,7 +33955,6 @@
             'renderTo',
             'ripple',
             'selectable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -32654,6 +34052,7 @@
         rownumberercellMetaData.XTYPE = 'rownumberercell';
         rownumberercellMetaData.PROPERTIES = [
             'align',
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -32672,7 +34071,6 @@
             'defaultToolWeights',
             'disabled',
             'encodeHtml',
-            'eventHandlers',
             'flex',
             'floated',
             'focusCls',
@@ -32687,6 +34085,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -32698,7 +34097,6 @@
             'renderTo',
             'ripple',
             'selectable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -32796,6 +34194,7 @@
         textcellMetaData.XTYPE = 'textcell';
         textcellMetaData.PROPERTIES = [
             'align',
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -32814,7 +34213,6 @@
             'defaultToolWeights',
             'disabled',
             'encodeHtml',
-            'eventHandlers',
             'flex',
             'floated',
             'focusCls',
@@ -32828,6 +34226,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -32839,7 +34238,6 @@
             'renderTo',
             'ripple',
             'selectable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -32937,16 +34335,22 @@
         treecellMetaData.XTYPE = 'treecell';
         treecellMetaData.PROPERTIES = [
             'align',
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
             'ariaLabel',
             'ariaLabelledBy',
+            'autoCheckChildren',
             'bind',
             'bodyCls',
             'bodyStyle',
             'border',
             'cellCls',
+            'checkable',
+            'checkableField',
+            'checkedField',
+            'checkOnTriTap',
             'cls',
             'column',
             'constrainAlign',
@@ -32954,8 +34358,8 @@
             'defaultListenerScope',
             'defaultToolWeights',
             'disabled',
+            'enableTri',
             'encodeHtml',
-            'eventHandlers',
             'flex',
             'floated',
             'focusCls',
@@ -32972,6 +34376,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -32985,7 +34390,6 @@
             'ripple',
             'scope',
             'selectable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -33014,12 +34418,14 @@
             'config'
         ];
         treecellMetaData.EVENTS = [
+            { name: 'beforecheckchange', parameters: 'treecell,checked,current,record,e' },
             { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforetofront', parameters: 'treecell' },
             { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'blur', parameters: 'treecell,event' },
+            { name: 'checkchange', parameters: 'treecell,checked,record,e' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'focus', parameters: 'treecell,event' },
             { name: 'focusenter', parameters: 'treecell,event' },
@@ -33031,12 +34437,14 @@
             { name: 'ready', parameters: '' }
         ];
         treecellMetaData.EVENTNAMES = [
+            'beforecheckchange',
             'beforedisabledchange',
             'beforeheightchange',
             'beforehiddenchange',
             'beforetofront',
             'beforewidthchange',
             'blur',
+            'checkchange',
             'disabledchange',
             'focus',
             'focusenter',
@@ -33085,6 +34493,7 @@
         widgetcellMetaData.XTYPE = 'widgetcell';
         widgetcellMetaData.PROPERTIES = [
             'align',
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -33102,7 +34511,6 @@
             'defaultListenerScope',
             'defaultToolWeights',
             'disabled',
-            'eventHandlers',
             'flex',
             'floated',
             'focusCls',
@@ -33117,6 +34525,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -33127,7 +34536,6 @@
             'renderTo',
             'ripple',
             'selectable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -33227,6 +34635,7 @@
             'activeChildTabIndex',
             'activeItem',
             'alignment',
+            'alignSelf',
             'allowBlur',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
@@ -33239,6 +34648,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cancelOnClear',
@@ -33261,9 +34671,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'field',
             'flex',
             'floated',
@@ -33318,7 +34725,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -33539,6 +34945,7 @@
             'activeChildTabIndex',
             'activeItem',
             'align',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -33549,6 +34956,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -33578,9 +34986,7 @@
             'draggable',
             'editable',
             'editor',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
+            'editorDefaults',
             'exportRenderer',
             'exportStyle',
             'exportSummaryRenderer',
@@ -33649,7 +35055,6 @@
             'scope',
             'scratchCell',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -33666,7 +35071,6 @@
             'summaryDataIndex',
             'summaryFormatter',
             'summaryRenderer',
-            'summaryType',
             'tabIndex',
             'text',
             'toFrontOnShow',
@@ -33869,6 +35273,7 @@
             'activeChildTabIndex',
             'activeItem',
             'align',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -33879,6 +35284,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -33908,9 +35314,7 @@
             'draggable',
             'editable',
             'editor',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
+            'editorDefaults',
             'exportRenderer',
             'exportStyle',
             'exportSummaryRenderer',
@@ -33980,7 +35384,6 @@
             'scope',
             'scratchCell',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -33998,7 +35401,6 @@
             'summaryDataIndex',
             'summaryFormatter',
             'summaryRenderer',
-            'summaryType',
             'tabIndex',
             'text',
             'toFrontOnShow',
@@ -34203,6 +35605,7 @@
             'activeChildTabIndex',
             'activeItem',
             'align',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -34213,6 +35616,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -34242,9 +35646,7 @@
             'draggable',
             'editable',
             'editor',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
+            'editorDefaults',
             'exportRenderer',
             'exportStyle',
             'exportSummaryRenderer',
@@ -34312,7 +35714,6 @@
             'scope',
             'scratchCell',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -34329,7 +35730,6 @@
             'summaryDataIndex',
             'summaryFormatter',
             'summaryRenderer',
-            'summaryType',
             'tabIndex',
             'text',
             'toFrontOnShow',
@@ -34530,6 +35930,7 @@
             'activeChildTabIndex',
             'activeItem',
             'align',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -34540,6 +35941,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -34569,9 +35971,7 @@
             'draggable',
             'editable',
             'editor',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
+            'editorDefaults',
             'exportRenderer',
             'exportStyle',
             'exportSummaryRenderer',
@@ -34639,7 +36039,6 @@
             'scope',
             'scratchCell',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -34656,7 +36055,6 @@
             'summaryDataIndex',
             'summaryFormatter',
             'summaryRenderer',
-            'summaryType',
             'tabIndex',
             'text',
             'toFrontOnShow',
@@ -34857,6 +36255,7 @@
             'activeChildTabIndex',
             'activeItem',
             'align',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -34867,6 +36266,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -34896,9 +36296,7 @@
             'draggable',
             'editable',
             'editor',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
+            'editorDefaults',
             'exportRenderer',
             'exportStyle',
             'exportSummaryRenderer',
@@ -34966,7 +36364,6 @@
             'scope',
             'scratchCell',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -34983,7 +36380,6 @@
             'summaryDataIndex',
             'summaryFormatter',
             'summaryRenderer',
-            'summaryType',
             'tabIndex',
             'text',
             'toFrontOnShow',
@@ -35184,6 +36580,7 @@
             'activeChildTabIndex',
             'activeItem',
             'align',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -35194,6 +36591,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -35223,9 +36621,7 @@
             'draggable',
             'editable',
             'editor',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
+            'editorDefaults',
             'exportRenderer',
             'exportStyle',
             'exportSummaryRenderer',
@@ -35294,7 +36690,6 @@
             'scope',
             'scratchCell',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -35311,7 +36706,6 @@
             'summaryDataIndex',
             'summaryFormatter',
             'summaryRenderer',
-            'summaryType',
             'tabIndex',
             'text',
             'toFrontOnShow',
@@ -35504,14 +36898,15 @@
         return ExtDatecolumnComponent;
     }(base));
 
-    var numbercolumnMetaData = /** @class */ (function () {
-        function numbercolumnMetaData() {
+    var dragcolumnMetaData = /** @class */ (function () {
+        function dragcolumnMetaData() {
         }
-        numbercolumnMetaData.XTYPE = 'numbercolumn';
-        numbercolumnMetaData.PROPERTIES = [
+        dragcolumnMetaData.XTYPE = 'dragcolumn';
+        dragcolumnMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
             'align',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -35522,6 +36917,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -35551,9 +36947,332 @@
             'draggable',
             'editable',
             'editor',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
+            'editorDefaults',
+            'exportRenderer',
+            'exportStyle',
+            'exportSummaryRenderer',
+            'filter',
+            'flex',
+            'floated',
+            'focusableContainer',
+            'focusCls',
+            'formatter',
+            'fullscreen',
+            'groupable',
+            'grouper',
+            'groupHeaderTpl',
+            'height',
+            'hidden',
+            'hideable',
+            'hideAnimation',
+            'hideMode',
+            'hideOnMaskTap',
+            'hideShowMenuItem',
+            'html',
+            'id',
+            'ignore',
+            'ignoreExport',
+            'inactiveChildTabIndex',
+            'innerCls',
+            'instanceCls',
+            'itemId',
+            'items',
+            'keyMap',
+            'keyMapEnabled',
+            'keyMapTarget',
+            'layout',
+            'left',
+            'listeners',
+            'locked',
+            'manageBorders',
+            'margin',
+            'masked',
+            'maxHeight',
+            'maxWidth',
+            'menu',
+            'menuDisabled',
+            'minHeight',
+            'minWidth',
+            'modal',
+            'modelValidation',
+            'name',
+            'nameable',
+            'nameHolder',
+            'padding',
+            'plugins',
+            'publishes',
+            'record',
+            'reference',
+            'referenceHolder',
+            'relative',
+            'renderer',
+            'renderTo',
+            'reserveScrollbar',
+            'resetFocusPosition',
+            'resizable',
+            'right',
+            'ripple',
+            'scope',
+            'scratchCell',
+            'scrollable',
+            'session',
+            'shadow',
+            'shareableName',
+            'shim',
+            'showAnimation',
+            'sortable',
+            'sorter',
+            'stateful',
+            'statefulDefaults',
+            'stateId',
+            'style',
+            'summary',
+            'summaryCell',
+            'summaryDataIndex',
+            'summaryFormatter',
+            'summaryRenderer',
+            'tabIndex',
+            'text',
+            'toFrontOnShow',
+            'toolDefaults',
+            'tools',
+            'tooltip',
+            'top',
+            'touchAction',
+            'tpl',
+            'tplWriteMode',
+            'translatable',
+            'twoWayBindable',
+            'ui',
+            'userCls',
+            'userSelectable',
+            'verticalOverflow',
+            'viewModel',
+            'weight',
+            'weighted',
+            'width',
+            'x',
+            'xtype',
+            'y',
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'align',
+            'fitToParent',
+            'config'
+        ];
+        dragcolumnMetaData.EVENTS = [
+            { name: 'activate', parameters: 'newActiveItem,dragcolumn,oldActiveItem' },
+            { name: 'activeItemchange', parameters: 'sender,value,oldValue' },
+            { name: 'add', parameters: 'dragcolumn,item,index' },
+            { name: 'added', parameters: 'sender,container,index' },
+            { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehide', parameters: 'sender' },
+            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforetofront', parameters: 'dragcolumn' },
+            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'blur', parameters: 'dragcolumn,event' },
+            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'deactivate', parameters: 'oldActiveItem,dragcolumn,newActiveItem' },
+            { name: 'destroy', parameters: '' },
+            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'erased', parameters: 'sender' },
+            { name: 'floatingchange', parameters: 'sender,positioned' },
+            { name: 'focus', parameters: 'dragcolumn,event' },
+            { name: 'focusenter', parameters: 'dragcolumn,event' },
+            { name: 'focusleave', parameters: 'dragcolumn,event' },
+            { name: 'fullscreen', parameters: 'sender' },
+            { name: 'heightchange', parameters: 'sender,value,oldValue' },
+            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+            { name: 'hide', parameters: 'sender' },
+            { name: 'initialize', parameters: 'sender' },
+            { name: 'leftchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'move', parameters: 'dragcolumn,item,toIndex,fromIndex' },
+            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+            { name: 'orientationchange', parameters: '' },
+            { name: 'painted', parameters: 'sender,element' },
+            { name: 'positionedchange', parameters: 'sender,positioned' },
+            { name: 'remove', parameters: 'dragcolumn,item,index' },
+            { name: 'removed', parameters: 'sender,container,index' },
+            { name: 'renderedchange', parameters: 'dragcolumn,item,rendered' },
+            { name: 'resize', parameters: 'element,info' },
+            { name: 'rightchange', parameters: 'sender,value,oldValue' },
+            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+            { name: 'show', parameters: 'sender' },
+            { name: 'tofront', parameters: 'dragcolumn' },
+            { name: 'topchange', parameters: 'sender,value,oldValue' },
+            { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'widthchange', parameters: 'sender,value,oldValue' },
+            { name: 'ready', parameters: '' }
+        ];
+        dragcolumnMetaData.EVENTNAMES = [
+            'activate',
+            'activeItemchange',
+            'add',
+            'added',
+            'beforeactiveItemchange',
+            'beforebottomchange',
+            'beforecenteredchange',
+            'beforedisabledchange',
+            'beforedockedchange',
+            'beforeheightchange',
+            'beforehiddenchange',
+            'beforehide',
+            'beforeleftchange',
+            'beforemaxHeightchange',
+            'beforemaxWidthchange',
+            'beforeminHeightchange',
+            'beforeminWidthchange',
+            'beforeorientationchange',
+            'beforerightchange',
+            'beforescrollablechange',
+            'beforeshow',
+            'beforetofront',
+            'beforetopchange',
+            'beforewidthchange',
+            'blur',
+            'bottomchange',
+            'centeredchange',
+            'deactivate',
+            'destroy',
+            'disabledchange',
+            'dockedchange',
+            'erased',
+            'floatingchange',
+            'focus',
+            'focusenter',
+            'focusleave',
+            'fullscreen',
+            'heightchange',
+            'hiddenchange',
+            'hide',
+            'initialize',
+            'leftchange',
+            'maxHeightchange',
+            'maxWidthchange',
+            'minHeightchange',
+            'minWidthchange',
+            'move',
+            'moved',
+            'orientationchange',
+            'painted',
+            'positionedchange',
+            'remove',
+            'removed',
+            'renderedchange',
+            'resize',
+            'rightchange',
+            'scrollablechange',
+            'show',
+            'tofront',
+            'topchange',
+            'updatedata',
+            'widthchange',
+            'ready'
+        ];
+        return dragcolumnMetaData;
+    }());
+    var ExtDragcolumnComponent = /** @class */ (function (_super) {
+        __extends(ExtDragcolumnComponent, _super);
+        function ExtDragcolumnComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, dragcolumnMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
+        }
+        ExtDragcolumnComponent_1 = ExtDragcolumnComponent;
+        ExtDragcolumnComponent.prototype.ngOnInit = function () {
+            this.baseOnInit(dragcolumnMetaData);
+        };
+        ExtDragcolumnComponent.prototype.ngAfterContentInit = function () {
+            this.baseAfterContentInit();
+            //this['ready'].emit(this)
+        };
+        var ExtDragcolumnComponent_1;
+        ExtDragcolumnComponent = ExtDragcolumnComponent_1 = __decorate([
+            core.Component({
+                selector: 'dragcolumn',
+                inputs: dragcolumnMetaData.PROPERTIES,
+                outputs: dragcolumnMetaData.EVENTNAMES,
+                providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtDragcolumnComponent_1; }) }],
+                template: '<ng-template></ng-template>'
+            }),
+            __param(1, core.Host()), __param(1, core.Optional()), __param(1, core.SkipSelf()),
+            __metadata("design:paramtypes", [core.ElementRef, base])
+        ], ExtDragcolumnComponent);
+        return ExtDragcolumnComponent;
+    }(base));
+
+    var numbercolumnMetaData = /** @class */ (function () {
+        function numbercolumnMetaData() {
+        }
+        numbercolumnMetaData.XTYPE = 'numbercolumn';
+        numbercolumnMetaData.PROPERTIES = [
+            'activeChildTabIndex',
+            'activeItem',
+            'align',
+            'alignSelf',
+            'allowFocusingDisabledChildren',
+            'alwaysOnTop',
+            'ariaAttributes',
+            'ariaDescribedBy',
+            'ariaLabel',
+            'ariaLabelledBy',
+            'autoDestroy',
+            'autoSize',
+            'axisLock',
+            'bind',
+            'bodyCls',
+            'border',
+            'bottom',
+            'cardSwitchAnimation',
+            'cell',
+            'centered',
+            'cls',
+            'columns',
+            'computedWidth',
+            'constrainAlign',
+            'contentEl',
+            'control',
+            'controller',
+            'data',
+            'dataIndex',
+            'defaultColumnUI',
+            'defaultEditor',
+            'defaultFocus',
+            'defaultListenerScope',
+            'defaults',
+            'defaultToolWeights',
+            'defaultType',
+            'defaultWidth',
+            'depends',
+            'disabled',
+            'displayed',
+            'docked',
+            'draggable',
+            'editable',
+            'editor',
+            'editorDefaults',
             'exportRenderer',
             'exportStyle',
             'exportSummaryRenderer',
@@ -35622,7 +37341,6 @@
             'scope',
             'scratchCell',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -35639,7 +37357,6 @@
             'summaryDataIndex',
             'summaryFormatter',
             'summaryRenderer',
-            'summaryType',
             'tabIndex',
             'text',
             'toFrontOnShow',
@@ -35840,6 +37557,7 @@
             'activeChildTabIndex',
             'activeItem',
             'align',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -35850,6 +37568,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -35879,9 +37598,7 @@
             'draggable',
             'editable',
             'editor',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
+            'editorDefaults',
             'exportRenderer',
             'exportStyle',
             'exportSummaryRenderer',
@@ -35950,7 +37667,6 @@
             'scope',
             'scratchCell',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -35967,7 +37683,6 @@
             'summaryDataIndex',
             'summaryFormatter',
             'summaryRenderer',
-            'summaryType',
             'tabIndex',
             'text',
             'toFrontOnShow',
@@ -36168,6 +37883,7 @@
             'activeChildTabIndex',
             'activeItem',
             'align',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -36178,6 +37894,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -36207,9 +37924,7 @@
             'draggable',
             'editable',
             'editor',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
+            'editorDefaults',
             'exportRenderer',
             'exportStyle',
             'exportSummaryRenderer',
@@ -36279,7 +37994,6 @@
             'scope',
             'scratchCell',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -36297,7 +38011,6 @@
             'summaryDataIndex',
             'summaryFormatter',
             'summaryRenderer',
-            'summaryType',
             'tabIndex',
             'text',
             'toFrontOnShow',
@@ -36502,6 +38215,7 @@
             'activeChildTabIndex',
             'activeItem',
             'align',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -36512,6 +38226,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -36541,9 +38256,7 @@
             'draggable',
             'editable',
             'editor',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
+            'editorDefaults',
             'exportRenderer',
             'exportStyle',
             'exportSummaryRenderer',
@@ -36611,7 +38324,6 @@
             'scope',
             'scratchCell',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -36628,7 +38340,6 @@
             'summaryDataIndex',
             'summaryFormatter',
             'summaryRenderer',
-            'summaryType',
             'tabIndex',
             'text',
             'toFrontOnShow',
@@ -36829,6 +38540,7 @@
             'activeChildTabIndex',
             'activeItem',
             'align',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -36839,6 +38551,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -36868,9 +38581,7 @@
             'draggable',
             'editable',
             'editor',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
+            'editorDefaults',
             'exportRenderer',
             'exportStyle',
             'exportSummaryRenderer',
@@ -36938,7 +38649,6 @@
             'scope',
             'scratchCell',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -36955,7 +38665,6 @@
             'summaryDataIndex',
             'summaryFormatter',
             'summaryRenderer',
-            'summaryType',
             'tabIndex',
             'text',
             'toFrontOnShow',
@@ -37155,6 +38864,7 @@
         gridMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -37166,12 +38876,15 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'bufferSize',
             'cardSwitchAnimation',
             'centered',
             'cls',
+            'collapseDefaults',
+            'collapsible',
             'columnLines',
             'columnMenu',
             'columnResize',
@@ -37199,10 +38912,7 @@
             'emptyText',
             'emptyTextDefaults',
             'emptyTextProperty',
-            'enableTextSelection',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
+            'enableColumnMove',
             'flex',
             'floated',
             'focusableContainer',
@@ -37211,6 +38921,8 @@
             'grouped',
             'groupFooter',
             'groupHeader',
+            'grouping',
+            'groupPlaceholder',
             'height',
             'hidden',
             'hideAnimation',
@@ -37294,7 +39006,6 @@
             'scrollToTopOnRefresh',
             'selectable',
             'selection',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -37324,7 +39035,6 @@
             'ui',
             'userCls',
             'userSelectable',
-            'useSimpleItems',
             'variableHeights',
             'verticalOverflow',
             'viewModel',
@@ -37353,8 +39063,12 @@
             { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecomplete', parameters: 'editor,value,startValue,The' },
             { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeedit', parameters: 'sender,location' },
+            { name: 'beforegroupcollapse', parameters: 'grid,group' },
+            { name: 'beforegroupexpand', parameters: 'grid,group' },
             { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforehide', parameters: 'sender' },
@@ -37368,12 +39082,15 @@
             { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforeselectionextend', parameters: 'grid,An,extension' },
             { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforestartedit', parameters: 'editor,boundEl,value,The' },
             { name: 'beforestorechange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforetofront', parameters: 'grid' },
             { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'blur', parameters: 'grid,event' },
             { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'canceledit', parameters: 'editor,value,startValue' },
+            { name: 'canceledit', parameters: 'sender,location' },
             { name: 'cellselection', parameters: 'grid,selection' },
             { name: 'centeredchange', parameters: 'sender,value,oldValue' },
             { name: 'childdoubletap', parameters: 'grid,location' },
@@ -37396,18 +39113,22 @@
             { name: 'columnselection', parameters: 'grid,selection' },
             { name: 'columnshow', parameters: 'grid,column' },
             { name: 'columnsort', parameters: 'grid,column,direction' },
+            { name: 'complete', parameters: 'editor,value,startValue,The' },
             { name: 'deactivate', parameters: 'oldActiveItem,grid,newActiveItem' },
             { name: 'deselect', parameters: 'grid,records' },
             { name: 'destroy', parameters: '' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'disclose', parameters: 'list,record,target,index,event' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'edit', parameters: 'sender,location' },
             { name: 'erased', parameters: 'sender' },
             { name: 'floatingchange', parameters: 'sender,positioned' },
             { name: 'focus', parameters: 'grid,event' },
             { name: 'focusenter', parameters: 'grid,event' },
             { name: 'focusleave', parameters: 'grid,event' },
             { name: 'fullscreen', parameters: 'sender' },
+            { name: 'groupcollapse', parameters: 'grid,group' },
+            { name: 'groupexpand', parameters: 'grid,group' },
             { name: 'heightchange', parameters: 'sender,value,oldValue' },
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
@@ -37446,10 +39167,13 @@
             { name: 'select', parameters: 'grid,selected' },
             { name: 'selectionextenderdrag', parameters: 'grid,An,extension' },
             { name: 'show', parameters: 'sender' },
+            { name: 'specialkey', parameters: 'editor,field,event' },
+            { name: 'startedit', parameters: 'editor,boundEl,value,The' },
             { name: 'storechange', parameters: 'sender,value,oldValue' },
             { name: 'tofront', parameters: 'grid' },
             { name: 'topchange', parameters: 'sender,value,oldValue' },
             { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'validateedit', parameters: 'sender,location' },
             { name: 'widthchange', parameters: 'sender,value,oldValue' },
             { name: 'ready', parameters: '' }
         ];
@@ -37461,8 +39185,12 @@
             'beforeactiveItemchange',
             'beforebottomchange',
             'beforecenteredchange',
+            'beforecomplete',
             'beforedisabledchange',
             'beforedockedchange',
+            'beforeedit',
+            'beforegroupcollapse',
+            'beforegroupexpand',
             'beforeheightchange',
             'beforehiddenchange',
             'beforehide',
@@ -37476,12 +39204,15 @@
             'beforescrollablechange',
             'beforeselectionextend',
             'beforeshow',
+            'beforestartedit',
             'beforestorechange',
             'beforetofront',
             'beforetopchange',
             'beforewidthchange',
             'blur',
             'bottomchange',
+            'canceledit',
+            'canceledit',
             'cellselection',
             'centeredchange',
             'childdoubletap',
@@ -37504,18 +39235,22 @@
             'columnselection',
             'columnshow',
             'columnsort',
+            'complete',
             'deactivate',
             'deselect',
             'destroy',
             'disabledchange',
             'disclose',
             'dockedchange',
+            'edit',
             'erased',
             'floatingchange',
             'focus',
             'focusenter',
             'focusleave',
             'fullscreen',
+            'groupcollapse',
+            'groupexpand',
             'heightchange',
             'hiddenchange',
             'hide',
@@ -37554,10 +39289,13 @@
             'select',
             'selectionextenderdrag',
             'show',
+            'specialkey',
+            'startedit',
             'storechange',
             'tofront',
             'topchange',
             'updatedata',
+            'validateedit',
             'widthchange',
             'ready'
         ];
@@ -37600,6 +39338,7 @@
         headercontainerMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -37610,6 +39349,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -37630,9 +39370,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -37681,7 +39418,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -37888,8 +39624,11 @@
         lockedgridMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
+            'anchor',
+            'anchorPosition',
             'ariaAttributes',
             'ariaDescribedBy',
             'ariaLabel',
@@ -37897,12 +39636,25 @@
             'autoDestroy',
             'autoSize',
             'axisLock',
+            'bbar',
             'bind',
+            'bodyBorder',
+            'bodyCls',
+            'bodyPadding',
+            'bodyStyle',
             'border',
             'bottom',
+            'buttonAlign',
+            'buttons',
+            'buttonToolbar',
             'cardSwitchAnimation',
             'centered',
+            'closable',
+            'closeAction',
+            'closeToolText',
             'cls',
+            'collapsed',
+            'collapsible',
             'columnMenu',
             'columns',
             'constrainAlign',
@@ -37914,20 +39666,22 @@
             'defaultListenerScope',
             'defaultLockedRegion',
             'defaults',
+            'defaultToolWeights',
             'defaultType',
             'disabled',
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
+            'enableColumnMove',
             'flex',
             'floated',
             'focusableContainer',
             'focusCls',
             'fullscreen',
             'gridDefaults',
+            'grouped',
+            'header',
+            'headerPosition',
             'height',
             'hidden',
             'hideAnimation',
@@ -37935,6 +39689,9 @@
             'hideMode',
             'hideOnMaskTap',
             'html',
+            'icon',
+            'iconAlign',
+            'iconCls',
             'id',
             'inactiveChildTabIndex',
             'innerCls',
@@ -37946,6 +39703,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'layout',
+            'lbar',
             'left',
             'leftGridDefaults',
             'listeners',
@@ -37954,6 +39712,7 @@
             'masked',
             'maxHeight',
             'maxWidth',
+            'minButtonWidth',
             'minHeight',
             'minWidth',
             'modal',
@@ -37964,6 +39723,7 @@
             'padding',
             'plugins',
             'publishes',
+            'rbar',
             'record',
             'reference',
             'referenceHolder',
@@ -37971,23 +39731,30 @@
             'relative',
             'renderTo',
             'resetFocusPosition',
+            'resizable',
             'right',
             'rightGridDefaults',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
             'shim',
             'showAnimation',
+            'standardButtons',
             'stateful',
             'statefulDefaults',
             'stateId',
             'store',
             'style',
             'tabIndex',
+            'tbar',
+            'title',
+            'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
+            'toolDefaults',
+            'tools',
             'tooltip',
             'top',
             'touchAction',
@@ -38021,8 +39788,10 @@
             { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecollapse', parameters: 'lockedgrid' },
             { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeexpand', parameters: 'lockedgrid' },
             { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforehide', parameters: 'sender' },
@@ -38032,6 +39801,7 @@
             { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforeresizedragstart', parameters: 'lockedgrid,context' },
             { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforeshow', parameters: 'sender' },
@@ -38041,11 +39811,15 @@
             { name: 'blur', parameters: 'lockedgrid,event' },
             { name: 'bottomchange', parameters: 'sender,value,oldValue' },
             { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'collapse', parameters: 'lockedgrid' },
             { name: 'deactivate', parameters: 'oldActiveItem,lockedgrid,newActiveItem' },
             { name: 'destroy', parameters: '' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'drawerhide', parameters: 'lockedgrid' },
+            { name: 'drawershow', parameters: 'lockedgrid' },
             { name: 'erased', parameters: 'sender' },
+            { name: 'expand', parameters: 'lockedgrid' },
             { name: 'floatingchange', parameters: 'sender,positioned' },
             { name: 'focus', parameters: 'lockedgrid,event' },
             { name: 'focusenter', parameters: 'lockedgrid,event' },
@@ -38069,6 +39843,10 @@
             { name: 'removed', parameters: 'sender,container,index' },
             { name: 'renderedchange', parameters: 'lockedgrid,item,rendered' },
             { name: 'resize', parameters: 'element,info' },
+            { name: 'resizedrag', parameters: 'lockedgrid,context' },
+            { name: 'resizedragcancel', parameters: 'lockedgrid,context' },
+            { name: 'resizedragend', parameters: 'lockedgrid,context' },
+            { name: 'resizedragstart', parameters: 'lockedgrid,context' },
             { name: 'rightchange', parameters: 'sender,value,oldValue' },
             { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
             { name: 'show', parameters: 'sender' },
@@ -38086,8 +39864,10 @@
             'beforeactiveItemchange',
             'beforebottomchange',
             'beforecenteredchange',
+            'beforecollapse',
             'beforedisabledchange',
             'beforedockedchange',
+            'beforeexpand',
             'beforeheightchange',
             'beforehiddenchange',
             'beforehide',
@@ -38097,6 +39877,7 @@
             'beforeminHeightchange',
             'beforeminWidthchange',
             'beforeorientationchange',
+            'beforeresizedragstart',
             'beforerightchange',
             'beforescrollablechange',
             'beforeshow',
@@ -38106,11 +39887,15 @@
             'blur',
             'bottomchange',
             'centeredchange',
+            'collapse',
             'deactivate',
             'destroy',
             'disabledchange',
             'dockedchange',
+            'drawerhide',
+            'drawershow',
             'erased',
+            'expand',
             'floatingchange',
             'focus',
             'focusenter',
@@ -38134,6 +39919,10 @@
             'removed',
             'renderedchange',
             'resize',
+            'resizedrag',
+            'resizedragcancel',
+            'resizedragend',
+            'resizedragstart',
             'rightchange',
             'scrollablechange',
             'show',
@@ -38182,6 +39971,7 @@
         lockedgridregionMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -38196,6 +39986,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -38225,9 +40016,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -38288,7 +40076,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -38303,6 +40090,7 @@
             'tbar',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -38519,6 +40307,7 @@
         }
         gridcolumnsmenuMetaData.XTYPE = 'gridcolumnsmenu';
         gridcolumnsmenuMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -38541,9 +40330,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -38593,7 +40379,6 @@
             'ripple',
             'scope',
             'scrollable',
-            'selfAlign',
             'separator',
             'session',
             'shadow',
@@ -38782,6 +40567,7 @@
         }
         gridgroupbythismenuitemMetaData.XTYPE = 'gridgroupbythismenuitem';
         gridgroupbythismenuitemMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -38804,9 +40590,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -38856,7 +40639,6 @@
             'ripple',
             'scope',
             'scrollable',
-            'selfAlign',
             'separator',
             'session',
             'shadow',
@@ -39045,6 +40827,7 @@
         }
         gridshowingroupsmenuitemMetaData.XTYPE = 'gridshowingroupsmenuitem';
         gridshowingroupsmenuitemMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -39070,9 +40853,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -39122,7 +40902,6 @@
             'ripple',
             'scope',
             'scrollable',
-            'selfAlign',
             'separator',
             'session',
             'shadow',
@@ -39317,6 +41096,7 @@
         }
         gridsortascmenuitemMetaData.XTYPE = 'gridsortascmenuitem';
         gridsortascmenuitemMetaData.PROPERTIES = [
+            'alignSelf',
             'allowUncheck',
             'alwaysOnTop',
             'ariaAttributes',
@@ -39343,9 +41123,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -39396,7 +41173,6 @@
             'ripple',
             'scope',
             'scrollable',
-            'selfAlign',
             'separator',
             'session',
             'shadow',
@@ -39591,6 +41367,7 @@
         }
         gridsortdescmenuitemMetaData.XTYPE = 'gridsortdescmenuitem';
         gridsortdescmenuitemMetaData.PROPERTIES = [
+            'alignSelf',
             'allowUncheck',
             'alwaysOnTop',
             'ariaAttributes',
@@ -39617,9 +41394,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -39670,7 +41444,6 @@
             'ripple',
             'scope',
             'scrollable',
-            'selfAlign',
             'separator',
             'session',
             'shadow',
@@ -39867,6 +41640,7 @@
         pagingtoolbarMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -39877,6 +41651,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -39896,9 +41671,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -39948,7 +41720,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -40154,6 +41925,7 @@
         }
         gridrowMetaData.XTYPE = 'gridrow';
         gridrowMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -40176,9 +41948,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'expandedField',
             'flex',
             'floated',
@@ -40219,7 +41988,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -40406,6 +42174,7 @@
         }
         rowbodyMetaData.XTYPE = 'rowbody';
         rowbodyMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -40426,9 +42195,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -40466,7 +42232,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -40647,11 +42412,1127 @@
         return ExtRowbodyComponent;
     }(base));
 
+    var roweditorbarMetaData = /** @class */ (function () {
+        function roweditorbarMetaData() {
+        }
+        roweditorbarMetaData.XTYPE = 'roweditorbar';
+        roweditorbarMetaData.PROPERTIES = [
+            'activeChildTabIndex',
+            'activeItem',
+            'alignSelf',
+            'allowFocusingDisabledChildren',
+            'alwaysOnTop',
+            'anchor',
+            'anchorPosition',
+            'ariaAttributes',
+            'ariaDescribedBy',
+            'ariaLabel',
+            'ariaLabelledBy',
+            'autoDestroy',
+            'autoSize',
+            'axisLock',
+            'bbar',
+            'bind',
+            'bodyBorder',
+            'bodyCls',
+            'bodyPadding',
+            'bodyStyle',
+            'border',
+            'bottom',
+            'buttonAlign',
+            'buttons',
+            'buttonToolbar',
+            'cardSwitchAnimation',
+            'centered',
+            'closable',
+            'closeAction',
+            'closeToolText',
+            'cls',
+            'collapsed',
+            'collapsible',
+            'constrainAlign',
+            'contentEl',
+            'control',
+            'controller',
+            'data',
+            'defaultFocus',
+            'defaultListenerScope',
+            'defaults',
+            'defaultToolWeights',
+            'defaultType',
+            'disabled',
+            'displayed',
+            'docked',
+            'draggable',
+            'flex',
+            'floated',
+            'focusableContainer',
+            'focusCls',
+            'fullscreen',
+            'header',
+            'headerPosition',
+            'height',
+            'hidden',
+            'hideAnimation',
+            'hideMode',
+            'hideOnMaskTap',
+            'html',
+            'icon',
+            'iconAlign',
+            'iconCls',
+            'id',
+            'inactiveChildTabIndex',
+            'innerCls',
+            'instanceCls',
+            'itemId',
+            'items',
+            'keyMap',
+            'keyMapEnabled',
+            'keyMapTarget',
+            'layout',
+            'lbar',
+            'left',
+            'listeners',
+            'manageBorders',
+            'margin',
+            'masked',
+            'maxHeight',
+            'maxWidth',
+            'minButtonWidth',
+            'minHeight',
+            'minWidth',
+            'modal',
+            'modelValidation',
+            'name',
+            'nameable',
+            'nameHolder',
+            'padding',
+            'plugins',
+            'publishes',
+            'rbar',
+            'record',
+            'reference',
+            'referenceHolder',
+            'relative',
+            'renderTo',
+            'resetFocusPosition',
+            'resizable',
+            'right',
+            'ripple',
+            'scrollable',
+            'session',
+            'shadow',
+            'shareableName',
+            'shim',
+            'showAnimation',
+            'standardButtons',
+            'stateful',
+            'statefulDefaults',
+            'stateId',
+            'style',
+            'tabIndex',
+            'tbar',
+            'title',
+            'titleAlign',
+            'titleCollapse',
+            'toFrontOnShow',
+            'toolDefaults',
+            'tools',
+            'tooltip',
+            'top',
+            'touchAction',
+            'tpl',
+            'tplWriteMode',
+            'translatable',
+            'twoWayBindable',
+            'ui',
+            'userCls',
+            'userSelectable',
+            'viewModel',
+            'weight',
+            'weighted',
+            'width',
+            'x',
+            'xtype',
+            'y',
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'align',
+            'fitToParent',
+            'config'
+        ];
+        roweditorbarMetaData.EVENTS = [
+            { name: 'activate', parameters: 'newActiveItem,roweditorbar,oldActiveItem' },
+            { name: 'activeItemchange', parameters: 'sender,value,oldValue' },
+            { name: 'add', parameters: 'roweditorbar,item,index' },
+            { name: 'added', parameters: 'sender,container,index' },
+            { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecollapse', parameters: 'roweditorbar' },
+            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeexpand', parameters: 'roweditorbar' },
+            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehide', parameters: 'sender' },
+            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforeresizedragstart', parameters: 'roweditorbar,context' },
+            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforetofront', parameters: 'roweditorbar' },
+            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'blur', parameters: 'roweditorbar,event' },
+            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'collapse', parameters: 'roweditorbar' },
+            { name: 'deactivate', parameters: 'oldActiveItem,roweditorbar,newActiveItem' },
+            { name: 'destroy', parameters: '' },
+            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'drawerhide', parameters: 'roweditorbar' },
+            { name: 'drawershow', parameters: 'roweditorbar' },
+            { name: 'erased', parameters: 'sender' },
+            { name: 'expand', parameters: 'roweditorbar' },
+            { name: 'floatingchange', parameters: 'sender,positioned' },
+            { name: 'focus', parameters: 'roweditorbar,event' },
+            { name: 'focusenter', parameters: 'roweditorbar,event' },
+            { name: 'focusleave', parameters: 'roweditorbar,event' },
+            { name: 'fullscreen', parameters: 'sender' },
+            { name: 'heightchange', parameters: 'sender,value,oldValue' },
+            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+            { name: 'hide', parameters: 'sender' },
+            { name: 'initialize', parameters: 'sender' },
+            { name: 'leftchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'move', parameters: 'roweditorbar,item,toIndex,fromIndex' },
+            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+            { name: 'orientationchange', parameters: '' },
+            { name: 'painted', parameters: 'sender,element' },
+            { name: 'positionedchange', parameters: 'sender,positioned' },
+            { name: 'remove', parameters: 'roweditorbar,item,index' },
+            { name: 'removed', parameters: 'sender,container,index' },
+            { name: 'renderedchange', parameters: 'roweditorbar,item,rendered' },
+            { name: 'resize', parameters: 'element,info' },
+            { name: 'resizedrag', parameters: 'roweditorbar,context' },
+            { name: 'resizedragcancel', parameters: 'roweditorbar,context' },
+            { name: 'resizedragend', parameters: 'roweditorbar,context' },
+            { name: 'resizedragstart', parameters: 'roweditorbar,context' },
+            { name: 'rightchange', parameters: 'sender,value,oldValue' },
+            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+            { name: 'show', parameters: 'sender' },
+            { name: 'tofront', parameters: 'roweditorbar' },
+            { name: 'topchange', parameters: 'sender,value,oldValue' },
+            { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'widthchange', parameters: 'sender,value,oldValue' },
+            { name: 'ready', parameters: '' }
+        ];
+        roweditorbarMetaData.EVENTNAMES = [
+            'activate',
+            'activeItemchange',
+            'add',
+            'added',
+            'beforeactiveItemchange',
+            'beforebottomchange',
+            'beforecenteredchange',
+            'beforecollapse',
+            'beforedisabledchange',
+            'beforedockedchange',
+            'beforeexpand',
+            'beforeheightchange',
+            'beforehiddenchange',
+            'beforehide',
+            'beforeleftchange',
+            'beforemaxHeightchange',
+            'beforemaxWidthchange',
+            'beforeminHeightchange',
+            'beforeminWidthchange',
+            'beforeorientationchange',
+            'beforeresizedragstart',
+            'beforerightchange',
+            'beforescrollablechange',
+            'beforeshow',
+            'beforetofront',
+            'beforetopchange',
+            'beforewidthchange',
+            'blur',
+            'bottomchange',
+            'centeredchange',
+            'collapse',
+            'deactivate',
+            'destroy',
+            'disabledchange',
+            'dockedchange',
+            'drawerhide',
+            'drawershow',
+            'erased',
+            'expand',
+            'floatingchange',
+            'focus',
+            'focusenter',
+            'focusleave',
+            'fullscreen',
+            'heightchange',
+            'hiddenchange',
+            'hide',
+            'initialize',
+            'leftchange',
+            'maxHeightchange',
+            'maxWidthchange',
+            'minHeightchange',
+            'minWidthchange',
+            'move',
+            'moved',
+            'orientationchange',
+            'painted',
+            'positionedchange',
+            'remove',
+            'removed',
+            'renderedchange',
+            'resize',
+            'resizedrag',
+            'resizedragcancel',
+            'resizedragend',
+            'resizedragstart',
+            'rightchange',
+            'scrollablechange',
+            'show',
+            'tofront',
+            'topchange',
+            'updatedata',
+            'widthchange',
+            'ready'
+        ];
+        return roweditorbarMetaData;
+    }());
+    var ExtRoweditorbarComponent = /** @class */ (function (_super) {
+        __extends(ExtRoweditorbarComponent, _super);
+        function ExtRoweditorbarComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, roweditorbarMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
+        }
+        ExtRoweditorbarComponent_1 = ExtRoweditorbarComponent;
+        ExtRoweditorbarComponent.prototype.ngOnInit = function () {
+            this.baseOnInit(roweditorbarMetaData);
+        };
+        ExtRoweditorbarComponent.prototype.ngAfterContentInit = function () {
+            this.baseAfterContentInit();
+            //this['ready'].emit(this)
+        };
+        var ExtRoweditorbarComponent_1;
+        ExtRoweditorbarComponent = ExtRoweditorbarComponent_1 = __decorate([
+            core.Component({
+                selector: 'roweditorbar',
+                inputs: roweditorbarMetaData.PROPERTIES,
+                outputs: roweditorbarMetaData.EVENTNAMES,
+                providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtRoweditorbarComponent_1; }) }],
+                template: '<ng-template></ng-template>'
+            }),
+            __param(1, core.Host()), __param(1, core.Optional()), __param(1, core.SkipSelf()),
+            __metadata("design:paramtypes", [core.ElementRef, base])
+        ], ExtRoweditorbarComponent);
+        return ExtRoweditorbarComponent;
+    }(base));
+
+    var roweditorcellMetaData = /** @class */ (function () {
+        function roweditorcellMetaData() {
+        }
+        roweditorcellMetaData.XTYPE = 'roweditorcell';
+        roweditorcellMetaData.PROPERTIES = [
+            'alignSelf',
+            'alwaysOnTop',
+            'ariaAttributes',
+            'ariaDescribedBy',
+            'ariaLabel',
+            'ariaLabelledBy',
+            'axisLock',
+            'bind',
+            'border',
+            'bottom',
+            'centered',
+            'cls',
+            'constrainAlign',
+            'contentEl',
+            'controller',
+            'data',
+            'defaultListenerScope',
+            'disabled',
+            'displayed',
+            'docked',
+            'draggable',
+            'flex',
+            'floated',
+            'focusCls',
+            'fullscreen',
+            'height',
+            'hidden',
+            'hideAnimation',
+            'hideMode',
+            'hideOnMaskTap',
+            'html',
+            'id',
+            'instanceCls',
+            'itemId',
+            'keyMap',
+            'keyMapEnabled',
+            'keyMapTarget',
+            'left',
+            'listeners',
+            'margin',
+            'maxHeight',
+            'maxWidth',
+            'minHeight',
+            'minWidth',
+            'modal',
+            'modelValidation',
+            'name',
+            'nameable',
+            'padding',
+            'plugins',
+            'publishes',
+            'record',
+            'reference',
+            'relative',
+            'renderTo',
+            'right',
+            'ripple',
+            'scrollable',
+            'session',
+            'shadow',
+            'shareableName',
+            'shim',
+            'showAnimation',
+            'stateful',
+            'statefulDefaults',
+            'stateId',
+            'style',
+            'tabIndex',
+            'toFrontOnShow',
+            'tooltip',
+            'top',
+            'touchAction',
+            'tpl',
+            'tplWriteMode',
+            'translatable',
+            'twoWayBindable',
+            'ui',
+            'userCls',
+            'userSelectable',
+            'viewModel',
+            'weight',
+            'width',
+            'x',
+            'xtype',
+            'y',
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'align',
+            'fitToParent',
+            'config'
+        ];
+        roweditorcellMetaData.EVENTS = [
+            { name: 'added', parameters: 'sender,container,index' },
+            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehide', parameters: 'sender' },
+            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforetofront', parameters: 'roweditorcell' },
+            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'blur', parameters: 'roweditorcell,event' },
+            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'destroy', parameters: '' },
+            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'erased', parameters: 'sender' },
+            { name: 'floatingchange', parameters: 'sender,positioned' },
+            { name: 'focus', parameters: 'roweditorcell,event' },
+            { name: 'focusenter', parameters: 'roweditorcell,event' },
+            { name: 'focusleave', parameters: 'roweditorcell,event' },
+            { name: 'fullscreen', parameters: 'sender' },
+            { name: 'heightchange', parameters: 'sender,value,oldValue' },
+            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+            { name: 'hide', parameters: 'sender' },
+            { name: 'initialize', parameters: 'sender' },
+            { name: 'leftchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+            { name: 'orientationchange', parameters: '' },
+            { name: 'painted', parameters: 'sender,element' },
+            { name: 'positionedchange', parameters: 'sender,positioned' },
+            { name: 'removed', parameters: 'sender,container,index' },
+            { name: 'resize', parameters: 'element,info' },
+            { name: 'rightchange', parameters: 'sender,value,oldValue' },
+            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+            { name: 'show', parameters: 'sender' },
+            { name: 'tofront', parameters: 'roweditorcell' },
+            { name: 'topchange', parameters: 'sender,value,oldValue' },
+            { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'widthchange', parameters: 'sender,value,oldValue' },
+            { name: 'ready', parameters: '' }
+        ];
+        roweditorcellMetaData.EVENTNAMES = [
+            'added',
+            'beforebottomchange',
+            'beforecenteredchange',
+            'beforedisabledchange',
+            'beforedockedchange',
+            'beforeheightchange',
+            'beforehiddenchange',
+            'beforehide',
+            'beforeleftchange',
+            'beforemaxHeightchange',
+            'beforemaxWidthchange',
+            'beforeminHeightchange',
+            'beforeminWidthchange',
+            'beforeorientationchange',
+            'beforerightchange',
+            'beforescrollablechange',
+            'beforeshow',
+            'beforetofront',
+            'beforetopchange',
+            'beforewidthchange',
+            'blur',
+            'bottomchange',
+            'centeredchange',
+            'destroy',
+            'disabledchange',
+            'dockedchange',
+            'erased',
+            'floatingchange',
+            'focus',
+            'focusenter',
+            'focusleave',
+            'fullscreen',
+            'heightchange',
+            'hiddenchange',
+            'hide',
+            'initialize',
+            'leftchange',
+            'maxHeightchange',
+            'maxWidthchange',
+            'minHeightchange',
+            'minWidthchange',
+            'moved',
+            'orientationchange',
+            'painted',
+            'positionedchange',
+            'removed',
+            'resize',
+            'rightchange',
+            'scrollablechange',
+            'show',
+            'tofront',
+            'topchange',
+            'updatedata',
+            'widthchange',
+            'ready'
+        ];
+        return roweditorcellMetaData;
+    }());
+    var ExtRoweditorcellComponent = /** @class */ (function (_super) {
+        __extends(ExtRoweditorcellComponent, _super);
+        function ExtRoweditorcellComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, roweditorcellMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
+        }
+        ExtRoweditorcellComponent_1 = ExtRoweditorcellComponent;
+        ExtRoweditorcellComponent.prototype.ngOnInit = function () {
+            this.baseOnInit(roweditorcellMetaData);
+        };
+        ExtRoweditorcellComponent.prototype.ngAfterContentInit = function () {
+            this.baseAfterContentInit();
+            //this['ready'].emit(this)
+        };
+        var ExtRoweditorcellComponent_1;
+        ExtRoweditorcellComponent = ExtRoweditorcellComponent_1 = __decorate([
+            core.Component({
+                selector: 'roweditorcell',
+                inputs: roweditorcellMetaData.PROPERTIES,
+                outputs: roweditorcellMetaData.EVENTNAMES,
+                providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtRoweditorcellComponent_1; }) }],
+                template: '<ng-template></ng-template>'
+            }),
+            __param(1, core.Host()), __param(1, core.Optional()), __param(1, core.SkipSelf()),
+            __metadata("design:paramtypes", [core.ElementRef, base])
+        ], ExtRoweditorcellComponent);
+        return ExtRoweditorcellComponent;
+    }(base));
+
+    var roweditorMetaData = /** @class */ (function () {
+        function roweditorMetaData() {
+        }
+        roweditorMetaData.XTYPE = 'roweditor';
+        roweditorMetaData.PROPERTIES = [
+            'activeChildTabIndex',
+            'activeItem',
+            'alignSelf',
+            'allowFocusingDisabledChildren',
+            'alwaysOnTop',
+            'ariaAttributes',
+            'ariaDescribedBy',
+            'ariaLabel',
+            'ariaLabelledBy',
+            'autoDestroy',
+            'autoSize',
+            'axisLock',
+            'bind',
+            'bodyCls',
+            'border',
+            'bottom',
+            'buttonAlign',
+            'cardSwitchAnimation',
+            'centered',
+            'cls',
+            'constrainAlign',
+            'contentEl',
+            'control',
+            'controller',
+            'data',
+            'dataMap',
+            'defaultFocus',
+            'defaultListenerScope',
+            'defaults',
+            'defaultToolWeights',
+            'defaultType',
+            'disabled',
+            'displayed',
+            'docked',
+            'draggable',
+            'flex',
+            'floated',
+            'focusableContainer',
+            'focusCls',
+            'fullscreen',
+            'height',
+            'hidden',
+            'hideAnimation',
+            'hideMode',
+            'hideOnMaskTap',
+            'html',
+            'id',
+            'inactiveChildTabIndex',
+            'innerCls',
+            'instanceCls',
+            'itemCls',
+            'itemId',
+            'items',
+            'keyMap',
+            'keyMapEnabled',
+            'keyMapTarget',
+            'layout',
+            'left',
+            'listeners',
+            'manageBorders',
+            'margin',
+            'masked',
+            'maxHeight',
+            'maxWidth',
+            'minButtonWidth',
+            'minHeight',
+            'minWidth',
+            'modal',
+            'modelValidation',
+            'name',
+            'nameable',
+            'nameHolder',
+            'owner',
+            'ownerListeners',
+            'padding',
+            'pinned',
+            'plugins',
+            'publishes',
+            'record',
+            'recordIndex',
+            'reference',
+            'referenceHolder',
+            'relative',
+            'renderTo',
+            'resetFocusPosition',
+            'right',
+            'ripple',
+            'scrollable',
+            'session',
+            'shadow',
+            'shareableName',
+            'shim',
+            'showAnimation',
+            'sourceListeners',
+            'standardButtons',
+            'stateful',
+            'statefulDefaults',
+            'stateId',
+            'storeListeners',
+            'style',
+            'tabIndex',
+            'toFrontOnShow',
+            'toolDefaults',
+            'tools',
+            'tooltip',
+            'top',
+            'touchAction',
+            'tpl',
+            'tplWriteMode',
+            'translatable',
+            'twoWayBindable',
+            'ui',
+            'userCls',
+            'userSelectable',
+            'viewModel',
+            'weight',
+            'weighted',
+            'width',
+            'x',
+            'xtype',
+            'y',
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'align',
+            'fitToParent',
+            'config'
+        ];
+        roweditorMetaData.EVENTS = [
+            { name: 'activate', parameters: 'newActiveItem,roweditor,oldActiveItem' },
+            { name: 'activeItemchange', parameters: 'sender,value,oldValue' },
+            { name: 'add', parameters: 'roweditor,item,index' },
+            { name: 'added', parameters: 'sender,container,index' },
+            { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehide', parameters: 'sender' },
+            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforetofront', parameters: 'roweditor' },
+            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'blur', parameters: 'roweditor,event' },
+            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'deactivate', parameters: 'oldActiveItem,roweditor,newActiveItem' },
+            { name: 'destroy', parameters: '' },
+            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'erased', parameters: 'sender' },
+            { name: 'floatingchange', parameters: 'sender,positioned' },
+            { name: 'focus', parameters: 'roweditor,event' },
+            { name: 'focusenter', parameters: 'roweditor,event' },
+            { name: 'focusleave', parameters: 'roweditor,event' },
+            { name: 'fullscreen', parameters: 'sender' },
+            { name: 'heightchange', parameters: 'sender,value,oldValue' },
+            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+            { name: 'hide', parameters: 'sender' },
+            { name: 'initialize', parameters: 'sender' },
+            { name: 'leftchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'move', parameters: 'roweditor,item,toIndex,fromIndex' },
+            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+            { name: 'orientationchange', parameters: '' },
+            { name: 'painted', parameters: 'sender,element' },
+            { name: 'positionedchange', parameters: 'sender,positioned' },
+            { name: 'remove', parameters: 'roweditor,item,index' },
+            { name: 'removed', parameters: 'sender,container,index' },
+            { name: 'renderedchange', parameters: 'roweditor,item,rendered' },
+            { name: 'resize', parameters: 'element,info' },
+            { name: 'rightchange', parameters: 'sender,value,oldValue' },
+            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+            { name: 'show', parameters: 'sender' },
+            { name: 'tofront', parameters: 'roweditor' },
+            { name: 'topchange', parameters: 'sender,value,oldValue' },
+            { name: 'updatedata', parameters: 'dataItem,newData' },
+            { name: 'widthchange', parameters: 'sender,value,oldValue' },
+            { name: 'ready', parameters: '' }
+        ];
+        roweditorMetaData.EVENTNAMES = [
+            'activate',
+            'activeItemchange',
+            'add',
+            'added',
+            'beforeactiveItemchange',
+            'beforebottomchange',
+            'beforecenteredchange',
+            'beforedisabledchange',
+            'beforedockedchange',
+            'beforeheightchange',
+            'beforehiddenchange',
+            'beforehide',
+            'beforeleftchange',
+            'beforemaxHeightchange',
+            'beforemaxWidthchange',
+            'beforeminHeightchange',
+            'beforeminWidthchange',
+            'beforeorientationchange',
+            'beforerightchange',
+            'beforescrollablechange',
+            'beforeshow',
+            'beforetofront',
+            'beforetopchange',
+            'beforewidthchange',
+            'blur',
+            'bottomchange',
+            'centeredchange',
+            'deactivate',
+            'destroy',
+            'disabledchange',
+            'dockedchange',
+            'erased',
+            'floatingchange',
+            'focus',
+            'focusenter',
+            'focusleave',
+            'fullscreen',
+            'heightchange',
+            'hiddenchange',
+            'hide',
+            'initialize',
+            'leftchange',
+            'maxHeightchange',
+            'maxWidthchange',
+            'minHeightchange',
+            'minWidthchange',
+            'move',
+            'moved',
+            'orientationchange',
+            'painted',
+            'positionedchange',
+            'remove',
+            'removed',
+            'renderedchange',
+            'resize',
+            'rightchange',
+            'scrollablechange',
+            'show',
+            'tofront',
+            'topchange',
+            'updatedata',
+            'widthchange',
+            'ready'
+        ];
+        return roweditorMetaData;
+    }());
+    var ExtRoweditorComponent = /** @class */ (function (_super) {
+        __extends(ExtRoweditorComponent, _super);
+        function ExtRoweditorComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, roweditorMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
+        }
+        ExtRoweditorComponent_1 = ExtRoweditorComponent;
+        ExtRoweditorComponent.prototype.ngOnInit = function () {
+            this.baseOnInit(roweditorMetaData);
+        };
+        ExtRoweditorComponent.prototype.ngAfterContentInit = function () {
+            this.baseAfterContentInit();
+            //this['ready'].emit(this)
+        };
+        var ExtRoweditorComponent_1;
+        ExtRoweditorComponent = ExtRoweditorComponent_1 = __decorate([
+            core.Component({
+                selector: 'roweditor',
+                inputs: roweditorMetaData.PROPERTIES,
+                outputs: roweditorMetaData.EVENTNAMES,
+                providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtRoweditorComponent_1; }) }],
+                template: '<ng-template></ng-template>'
+            }),
+            __param(1, core.Host()), __param(1, core.Optional()), __param(1, core.SkipSelf()),
+            __metadata("design:paramtypes", [core.ElementRef, base])
+        ], ExtRoweditorComponent);
+        return ExtRoweditorComponent;
+    }(base));
+
+    var roweditorgapMetaData = /** @class */ (function () {
+        function roweditorgapMetaData() {
+        }
+        roweditorgapMetaData.XTYPE = 'roweditorgap';
+        roweditorgapMetaData.PROPERTIES = [
+            'alignSelf',
+            'alwaysOnTop',
+            'ariaAttributes',
+            'ariaDescribedBy',
+            'ariaLabel',
+            'ariaLabelledBy',
+            'axisLock',
+            'bind',
+            'border',
+            'bottom',
+            'centered',
+            'cls',
+            'constrainAlign',
+            'contentEl',
+            'controller',
+            'data',
+            'defaultListenerScope',
+            'disabled',
+            'displayed',
+            'docked',
+            'draggable',
+            'flex',
+            'floated',
+            'focusCls',
+            'fullscreen',
+            'height',
+            'hidden',
+            'hideAnimation',
+            'hideMode',
+            'hideOnMaskTap',
+            'html',
+            'id',
+            'instanceCls',
+            'itemId',
+            'keyMap',
+            'keyMapEnabled',
+            'keyMapTarget',
+            'left',
+            'listeners',
+            'margin',
+            'maxHeight',
+            'maxWidth',
+            'minHeight',
+            'minWidth',
+            'modal',
+            'modelValidation',
+            'name',
+            'nameable',
+            'padding',
+            'plugins',
+            'publishes',
+            'record',
+            'reference',
+            'relative',
+            'renderTo',
+            'right',
+            'ripple',
+            'scrollable',
+            'session',
+            'shadow',
+            'shareableName',
+            'shim',
+            'showAnimation',
+            'stateful',
+            'statefulDefaults',
+            'stateId',
+            'style',
+            'tabIndex',
+            'toFrontOnShow',
+            'tooltip',
+            'top',
+            'touchAction',
+            'tpl',
+            'tplWriteMode',
+            'translatable',
+            'twoWayBindable',
+            'ui',
+            'userCls',
+            'userSelectable',
+            'viewModel',
+            'weight',
+            'width',
+            'x',
+            'xtype',
+            'y',
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'align',
+            'fitToParent',
+            'config'
+        ];
+        roweditorgapMetaData.EVENTS = [
+            { name: 'added', parameters: 'sender,container,index' },
+            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehide', parameters: 'sender' },
+            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforetofront', parameters: 'roweditorgap' },
+            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'blur', parameters: 'roweditorgap,event' },
+            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'destroy', parameters: '' },
+            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'erased', parameters: 'sender' },
+            { name: 'floatingchange', parameters: 'sender,positioned' },
+            { name: 'focus', parameters: 'roweditorgap,event' },
+            { name: 'focusenter', parameters: 'roweditorgap,event' },
+            { name: 'focusleave', parameters: 'roweditorgap,event' },
+            { name: 'fullscreen', parameters: 'sender' },
+            { name: 'heightchange', parameters: 'sender,value,oldValue' },
+            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+            { name: 'hide', parameters: 'sender' },
+            { name: 'initialize', parameters: 'sender' },
+            { name: 'leftchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+            { name: 'orientationchange', parameters: '' },
+            { name: 'painted', parameters: 'sender,element' },
+            { name: 'positionedchange', parameters: 'sender,positioned' },
+            { name: 'removed', parameters: 'sender,container,index' },
+            { name: 'resize', parameters: 'element,info' },
+            { name: 'rightchange', parameters: 'sender,value,oldValue' },
+            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+            { name: 'show', parameters: 'sender' },
+            { name: 'tofront', parameters: 'roweditorgap' },
+            { name: 'topchange', parameters: 'sender,value,oldValue' },
+            { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'widthchange', parameters: 'sender,value,oldValue' },
+            { name: 'ready', parameters: '' }
+        ];
+        roweditorgapMetaData.EVENTNAMES = [
+            'added',
+            'beforebottomchange',
+            'beforecenteredchange',
+            'beforedisabledchange',
+            'beforedockedchange',
+            'beforeheightchange',
+            'beforehiddenchange',
+            'beforehide',
+            'beforeleftchange',
+            'beforemaxHeightchange',
+            'beforemaxWidthchange',
+            'beforeminHeightchange',
+            'beforeminWidthchange',
+            'beforeorientationchange',
+            'beforerightchange',
+            'beforescrollablechange',
+            'beforeshow',
+            'beforetofront',
+            'beforetopchange',
+            'beforewidthchange',
+            'blur',
+            'bottomchange',
+            'centeredchange',
+            'destroy',
+            'disabledchange',
+            'dockedchange',
+            'erased',
+            'floatingchange',
+            'focus',
+            'focusenter',
+            'focusleave',
+            'fullscreen',
+            'heightchange',
+            'hiddenchange',
+            'hide',
+            'initialize',
+            'leftchange',
+            'maxHeightchange',
+            'maxWidthchange',
+            'minHeightchange',
+            'minWidthchange',
+            'moved',
+            'orientationchange',
+            'painted',
+            'positionedchange',
+            'removed',
+            'resize',
+            'rightchange',
+            'scrollablechange',
+            'show',
+            'tofront',
+            'topchange',
+            'updatedata',
+            'widthchange',
+            'ready'
+        ];
+        return roweditorgapMetaData;
+    }());
+    var ExtRoweditorgapComponent = /** @class */ (function (_super) {
+        __extends(ExtRoweditorgapComponent, _super);
+        function ExtRoweditorgapComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, roweditorgapMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
+        }
+        ExtRoweditorgapComponent_1 = ExtRoweditorgapComponent;
+        ExtRoweditorgapComponent.prototype.ngOnInit = function () {
+            this.baseOnInit(roweditorgapMetaData);
+        };
+        ExtRoweditorgapComponent.prototype.ngAfterContentInit = function () {
+            this.baseAfterContentInit();
+            //this['ready'].emit(this)
+        };
+        var ExtRoweditorgapComponent_1;
+        ExtRoweditorgapComponent = ExtRoweditorgapComponent_1 = __decorate([
+            core.Component({
+                selector: 'roweditorgap',
+                inputs: roweditorgapMetaData.PROPERTIES,
+                outputs: roweditorgapMetaData.EVENTNAMES,
+                providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtRoweditorgapComponent_1; }) }],
+                template: '<ng-template></ng-template>'
+            }),
+            __param(1, core.Host()), __param(1, core.Optional()), __param(1, core.SkipSelf()),
+            __metadata("design:paramtypes", [core.ElementRef, base])
+        ], ExtRoweditorgapComponent);
+        return ExtRoweditorgapComponent;
+    }(base));
+
     var rowheaderMetaData = /** @class */ (function () {
         function rowheaderMetaData() {
         }
         rowheaderMetaData.XTYPE = 'rowheader';
         rowheaderMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -40673,9 +43554,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -40715,7 +43593,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -40903,6 +43780,7 @@
         }
         gridsummaryrowMetaData.XTYPE = 'gridsummaryrow';
         gridsummaryrowMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -40925,9 +43803,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'expandedField',
             'flex',
             'floated',
@@ -40968,7 +43843,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -41157,6 +44031,7 @@
         treeMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -41168,12 +44043,15 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'bufferSize',
             'cardSwitchAnimation',
             'centered',
             'cls',
+            'collapseDefaults',
+            'collapsible',
             'columnLines',
             'columnMenu',
             'columnResize',
@@ -41201,10 +44079,7 @@
             'emptyText',
             'emptyTextDefaults',
             'emptyTextProperty',
-            'enableTextSelection',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
+            'enableColumnMove',
             'expanderFirst',
             'expanderOnly',
             'flex',
@@ -41216,6 +44091,8 @@
             'grouped',
             'groupFooter',
             'groupHeader',
+            'grouping',
+            'groupPlaceholder',
             'height',
             'hidden',
             'hideAnimation',
@@ -41300,7 +44177,6 @@
             'selectable',
             'selection',
             'selectOnExpander',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -41331,7 +44207,6 @@
             'ui',
             'userCls',
             'userSelectable',
-            'useSimpleItems',
             'variableHeights',
             'verticalOverflow',
             'viewModel',
@@ -41360,8 +44235,13 @@
             { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecheckchange', parameters: 'tree,checked,current,record,e' },
+            { name: 'beforecomplete', parameters: 'editor,value,startValue,The' },
             { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeedit', parameters: 'sender,location' },
+            { name: 'beforegroupcollapse', parameters: 'tree,group' },
+            { name: 'beforegroupexpand', parameters: 'tree,group' },
             { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforehide', parameters: 'sender' },
@@ -41378,14 +44258,17 @@
             { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforeselectionextend', parameters: 'grid,An,extension' },
             { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforestartedit', parameters: 'editor,boundEl,value,The' },
             { name: 'beforestorechange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforetofront', parameters: 'tree' },
             { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'blur', parameters: 'tree,event' },
             { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'canceledit', parameters: 'editor,value,startValue' },
             { name: 'cellselection', parameters: 'grid,selection' },
             { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'checkchange', parameters: 'cell,checked,record,e' },
             { name: 'childdoubletap', parameters: 'tree,location' },
             { name: 'childlongpress', parameters: 'tree,location' },
             { name: 'childmouseenter', parameters: 'tree,location' },
@@ -41406,18 +44289,22 @@
             { name: 'columnselection', parameters: 'grid,selection' },
             { name: 'columnshow', parameters: 'tree,column' },
             { name: 'columnsort', parameters: 'tree,column,direction' },
+            { name: 'complete', parameters: 'editor,value,startValue,The' },
             { name: 'deactivate', parameters: 'oldActiveItem,tree,newActiveItem' },
             { name: 'deselect', parameters: 'tree,records' },
             { name: 'destroy', parameters: '' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'disclose', parameters: 'list,record,target,index,event' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'edit', parameters: 'sender,location' },
             { name: 'erased', parameters: 'sender' },
             { name: 'floatingchange', parameters: 'sender,positioned' },
             { name: 'focus', parameters: 'tree,event' },
             { name: 'focusenter', parameters: 'tree,event' },
             { name: 'focusleave', parameters: 'tree,event' },
             { name: 'fullscreen', parameters: 'sender' },
+            { name: 'groupcollapse', parameters: 'tree,group' },
+            { name: 'groupexpand', parameters: 'tree,group' },
             { name: 'heightchange', parameters: 'sender,value,oldValue' },
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
@@ -41459,10 +44346,13 @@
             { name: 'select', parameters: 'tree,selected' },
             { name: 'selectionextenderdrag', parameters: 'grid,An,extension' },
             { name: 'show', parameters: 'sender' },
+            { name: 'specialkey', parameters: 'editor,field,event' },
+            { name: 'startedit', parameters: 'editor,boundEl,value,The' },
             { name: 'storechange', parameters: 'sender,value,oldValue' },
             { name: 'tofront', parameters: 'tree' },
             { name: 'topchange', parameters: 'sender,value,oldValue' },
             { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'validateedit', parameters: 'sender,location' },
             { name: 'widthchange', parameters: 'sender,value,oldValue' },
             { name: 'ready', parameters: '' }
         ];
@@ -41474,8 +44364,13 @@
             'beforeactiveItemchange',
             'beforebottomchange',
             'beforecenteredchange',
+            'beforecheckchange',
+            'beforecomplete',
             'beforedisabledchange',
             'beforedockedchange',
+            'beforeedit',
+            'beforegroupcollapse',
+            'beforegroupexpand',
             'beforeheightchange',
             'beforehiddenchange',
             'beforehide',
@@ -41492,14 +44387,17 @@
             'beforescrollablechange',
             'beforeselectionextend',
             'beforeshow',
+            'beforestartedit',
             'beforestorechange',
             'beforetofront',
             'beforetopchange',
             'beforewidthchange',
             'blur',
             'bottomchange',
+            'canceledit',
             'cellselection',
             'centeredchange',
+            'checkchange',
             'childdoubletap',
             'childlongpress',
             'childmouseenter',
@@ -41520,18 +44418,22 @@
             'columnselection',
             'columnshow',
             'columnsort',
+            'complete',
             'deactivate',
             'deselect',
             'destroy',
             'disabledchange',
             'disclose',
             'dockedchange',
+            'edit',
             'erased',
             'floatingchange',
             'focus',
             'focusenter',
             'focusleave',
             'fullscreen',
+            'groupcollapse',
+            'groupexpand',
             'heightchange',
             'hiddenchange',
             'hide',
@@ -41573,10 +44475,13 @@
             'select',
             'selectionextenderdrag',
             'show',
+            'specialkey',
+            'startedit',
             'storechange',
             'tofront',
             'topchange',
             'updatedata',
+            'validateedit',
             'widthchange',
             'ready'
         ];
@@ -41617,6 +44522,7 @@
         }
         imageMetaData.XTYPE = 'image';
         imageMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -41638,9 +44544,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -41680,7 +44583,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -41873,6 +44775,7 @@
         }
         imgMetaData.XTYPE = 'img';
         imgMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -41894,9 +44797,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -41936,7 +44836,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -42130,6 +45029,7 @@
         indicatorMetaData.XTYPE = 'indicator';
         indicatorMetaData.PROPERTIES = [
             'activeIndex',
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -42152,9 +45052,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -42192,7 +45089,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -42385,6 +45281,7 @@
         }
         labelMetaData.XTYPE = 'label';
         labelMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -42405,9 +45302,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -42445,7 +45339,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -42631,6 +45524,7 @@
         }
         treelistMetaData.XTYPE = 'treelist';
         treelistMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -42652,9 +45546,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'expanderFirst',
             'expanderOnly',
             'flex',
@@ -42670,6 +45561,7 @@
             'highlightPath',
             'html',
             'id',
+            'indent',
             'instanceCls',
             'itemId',
             'itemRipple',
@@ -42700,7 +45592,6 @@
             'scrollable',
             'selection',
             'selectOnExpander',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -42892,6 +45783,7 @@
         }
         treelistitemMetaData.XTYPE = 'treelistitem';
         treelistitemMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -42904,7 +45796,6 @@
             'controller',
             'defaultListenerScope',
             'disabled',
-            'eventHandlers',
             'expandable',
             'expanded',
             'flex',
@@ -42924,6 +45815,7 @@
             'leaf',
             'listeners',
             'loading',
+            'margin',
             'name',
             'nameable',
             'node',
@@ -42940,7 +45832,6 @@
             'rowClsProperty',
             'selected',
             'selectedParent',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -43035,6 +45926,7 @@
         }
         loadmaskMetaData.XTYPE = 'loadmask';
         loadmaskMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -43055,9 +45947,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -43098,7 +45987,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -43287,6 +46175,7 @@
         }
         maskMetaData.XTYPE = 'mask';
         maskMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -43307,9 +46196,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -43347,7 +46233,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -43536,6 +46421,7 @@
         }
         mediaMetaData.XTYPE = 'media';
         mediaMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -43559,10 +46445,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enableControls',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -43604,7 +46486,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -43806,6 +46687,7 @@
         }
         menucheckitemMetaData.XTYPE = 'menucheckitem';
         menucheckitemMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -43831,9 +46713,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -43883,7 +46762,6 @@
             'ripple',
             'scope',
             'scrollable',
-            'selfAlign',
             'separator',
             'session',
             'shadow',
@@ -44078,6 +46956,7 @@
         }
         menuitemMetaData.XTYPE = 'menuitem';
         menuitemMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -44100,9 +46979,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -44152,7 +47028,6 @@
             'ripple',
             'scope',
             'scrollable',
-            'selfAlign',
             'separator',
             'session',
             'shadow',
@@ -44344,6 +47219,7 @@
             'activeChildTabIndex',
             'activeItem',
             'align',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'allowOtherMenus',
             'alwaysOnTop',
@@ -44360,6 +47236,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -44389,9 +47266,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -44452,7 +47326,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'separator',
             'session',
             'shadow',
@@ -44468,6 +47341,7 @@
             'tbar',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -44686,6 +47560,7 @@
         }
         menuradioitemMetaData.XTYPE = 'menuradioitem';
         menuradioitemMetaData.PROPERTIES = [
+            'alignSelf',
             'allowUncheck',
             'alwaysOnTop',
             'ariaAttributes',
@@ -44712,9 +47587,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -44765,7 +47637,6 @@
             'ripple',
             'scope',
             'scrollable',
-            'selfAlign',
             'separator',
             'session',
             'shadow',
@@ -44960,6 +47831,7 @@
         }
         menuseparatorMetaData.XTYPE = 'menuseparator';
         menuseparatorMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -44980,9 +47852,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -45020,7 +47889,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -45208,6 +48076,7 @@
         messageboxMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -45222,6 +48091,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -45255,9 +48125,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -45326,7 +48193,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -45341,6 +48207,7 @@
             'tbar',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -45567,6 +48434,7 @@
         navigationviewMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -45577,6 +48445,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -45596,9 +48465,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -45647,7 +48513,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -45859,6 +48724,7 @@
         panelMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -45873,6 +48739,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -45902,9 +48769,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -45961,7 +48825,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -45976,6 +48839,7 @@
             'tbar',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -46187,6 +49051,343 @@
         return ExtPanelComponent;
     }(base));
 
+    var accordionMetaData = /** @class */ (function () {
+        function accordionMetaData() {
+        }
+        accordionMetaData.XTYPE = 'accordion';
+        accordionMetaData.PROPERTIES = [
+            'activeChildTabIndex',
+            'activeItem',
+            'alignSelf',
+            'allowFocusingDisabledChildren',
+            'alwaysOnTop',
+            'anchor',
+            'anchorPosition',
+            'ariaAttributes',
+            'ariaDescribedBy',
+            'ariaLabel',
+            'ariaLabelledBy',
+            'autoDestroy',
+            'autoSize',
+            'axisLock',
+            'bbar',
+            'bind',
+            'bodyBorder',
+            'bodyCls',
+            'bodyPadding',
+            'bodyStyle',
+            'border',
+            'bottom',
+            'buttonAlign',
+            'buttons',
+            'buttonToolbar',
+            'cardSwitchAnimation',
+            'centered',
+            'closable',
+            'closeAction',
+            'closeToolText',
+            'cls',
+            'collapsed',
+            'collapsible',
+            'constrainAlign',
+            'contentEl',
+            'control',
+            'controller',
+            'data',
+            'defaultFocus',
+            'defaultListenerScope',
+            'defaultPanelUI',
+            'defaults',
+            'defaultToolWeights',
+            'defaultType',
+            'disabled',
+            'displayed',
+            'docked',
+            'draggable',
+            'expandedFirst',
+            'flex',
+            'floated',
+            'focusableContainer',
+            'focusCls',
+            'fullscreen',
+            'header',
+            'headerPosition',
+            'height',
+            'hidden',
+            'hideAnimation',
+            'hideMode',
+            'hideOnMaskTap',
+            'html',
+            'icon',
+            'iconAlign',
+            'iconCls',
+            'id',
+            'inactiveChildTabIndex',
+            'innerCls',
+            'instanceCls',
+            'itemId',
+            'items',
+            'keyMap',
+            'keyMapEnabled',
+            'keyMapTarget',
+            'layout',
+            'lbar',
+            'left',
+            'listeners',
+            'manageBorders',
+            'margin',
+            'masked',
+            'maxHeight',
+            'maxWidth',
+            'minButtonWidth',
+            'minHeight',
+            'minWidth',
+            'modal',
+            'modelValidation',
+            'name',
+            'nameable',
+            'nameHolder',
+            'openable',
+            'padding',
+            'plugins',
+            'publishes',
+            'rbar',
+            'record',
+            'reference',
+            'referenceHolder',
+            'relative',
+            'renderTo',
+            'resetFocusPosition',
+            'resizable',
+            'right',
+            'ripple',
+            'scrollable',
+            'session',
+            'shadow',
+            'shareableName',
+            'shim',
+            'showAnimation',
+            'standardButtons',
+            'stateful',
+            'statefulDefaults',
+            'stateId',
+            'style',
+            'tabIndex',
+            'tbar',
+            'title',
+            'titleAlign',
+            'titleCollapse',
+            'toFrontOnShow',
+            'toolDefaults',
+            'tools',
+            'tooltip',
+            'top',
+            'touchAction',
+            'tpl',
+            'tplWriteMode',
+            'translatable',
+            'twoWayBindable',
+            'ui',
+            'userCls',
+            'userSelectable',
+            'viewModel',
+            'weight',
+            'weighted',
+            'width',
+            'x',
+            'xtype',
+            'y',
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'align',
+            'fitToParent',
+            'config'
+        ];
+        accordionMetaData.EVENTS = [
+            { name: 'activate', parameters: 'newActiveItem,accordion,oldActiveItem' },
+            { name: 'activeItemchange', parameters: 'sender,value,oldValue' },
+            { name: 'add', parameters: 'accordion,item,index' },
+            { name: 'added', parameters: 'sender,container,index' },
+            { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecollapse', parameters: 'accordion' },
+            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeexpand', parameters: 'accordion' },
+            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehide', parameters: 'sender' },
+            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforeresizedragstart', parameters: 'accordion,context' },
+            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforetofront', parameters: 'accordion' },
+            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'blur', parameters: 'accordion,event' },
+            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'collapse', parameters: 'accordion' },
+            { name: 'deactivate', parameters: 'oldActiveItem,accordion,newActiveItem' },
+            { name: 'destroy', parameters: '' },
+            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'drawerhide', parameters: 'accordion' },
+            { name: 'drawershow', parameters: 'accordion' },
+            { name: 'erased', parameters: 'sender' },
+            { name: 'expand', parameters: 'accordion' },
+            { name: 'floatingchange', parameters: 'sender,positioned' },
+            { name: 'focus', parameters: 'accordion,event' },
+            { name: 'focusenter', parameters: 'accordion,event' },
+            { name: 'focusleave', parameters: 'accordion,event' },
+            { name: 'fullscreen', parameters: 'sender' },
+            { name: 'heightchange', parameters: 'sender,value,oldValue' },
+            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+            { name: 'hide', parameters: 'sender' },
+            { name: 'initialize', parameters: 'sender' },
+            { name: 'leftchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'move', parameters: 'accordion,item,toIndex,fromIndex' },
+            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+            { name: 'orientationchange', parameters: '' },
+            { name: 'painted', parameters: 'sender,element' },
+            { name: 'positionedchange', parameters: 'sender,positioned' },
+            { name: 'remove', parameters: 'accordion,item,index' },
+            { name: 'removed', parameters: 'sender,container,index' },
+            { name: 'renderedchange', parameters: 'accordion,item,rendered' },
+            { name: 'resize', parameters: 'element,info' },
+            { name: 'resizedrag', parameters: 'accordion,context' },
+            { name: 'resizedragcancel', parameters: 'accordion,context' },
+            { name: 'resizedragend', parameters: 'accordion,context' },
+            { name: 'resizedragstart', parameters: 'accordion,context' },
+            { name: 'rightchange', parameters: 'sender,value,oldValue' },
+            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+            { name: 'show', parameters: 'sender' },
+            { name: 'tofront', parameters: 'accordion' },
+            { name: 'topchange', parameters: 'sender,value,oldValue' },
+            { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'widthchange', parameters: 'sender,value,oldValue' },
+            { name: 'ready', parameters: '' }
+        ];
+        accordionMetaData.EVENTNAMES = [
+            'activate',
+            'activeItemchange',
+            'add',
+            'added',
+            'beforeactiveItemchange',
+            'beforebottomchange',
+            'beforecenteredchange',
+            'beforecollapse',
+            'beforedisabledchange',
+            'beforedockedchange',
+            'beforeexpand',
+            'beforeheightchange',
+            'beforehiddenchange',
+            'beforehide',
+            'beforeleftchange',
+            'beforemaxHeightchange',
+            'beforemaxWidthchange',
+            'beforeminHeightchange',
+            'beforeminWidthchange',
+            'beforeorientationchange',
+            'beforeresizedragstart',
+            'beforerightchange',
+            'beforescrollablechange',
+            'beforeshow',
+            'beforetofront',
+            'beforetopchange',
+            'beforewidthchange',
+            'blur',
+            'bottomchange',
+            'centeredchange',
+            'collapse',
+            'deactivate',
+            'destroy',
+            'disabledchange',
+            'dockedchange',
+            'drawerhide',
+            'drawershow',
+            'erased',
+            'expand',
+            'floatingchange',
+            'focus',
+            'focusenter',
+            'focusleave',
+            'fullscreen',
+            'heightchange',
+            'hiddenchange',
+            'hide',
+            'initialize',
+            'leftchange',
+            'maxHeightchange',
+            'maxWidthchange',
+            'minHeightchange',
+            'minWidthchange',
+            'move',
+            'moved',
+            'orientationchange',
+            'painted',
+            'positionedchange',
+            'remove',
+            'removed',
+            'renderedchange',
+            'resize',
+            'resizedrag',
+            'resizedragcancel',
+            'resizedragend',
+            'resizedragstart',
+            'rightchange',
+            'scrollablechange',
+            'show',
+            'tofront',
+            'topchange',
+            'updatedata',
+            'widthchange',
+            'ready'
+        ];
+        return accordionMetaData;
+    }());
+    var ExtAccordionComponent = /** @class */ (function (_super) {
+        __extends(ExtAccordionComponent, _super);
+        function ExtAccordionComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, accordionMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
+        }
+        ExtAccordionComponent_1 = ExtAccordionComponent;
+        ExtAccordionComponent.prototype.ngOnInit = function () {
+            this.baseOnInit(accordionMetaData);
+        };
+        ExtAccordionComponent.prototype.ngAfterContentInit = function () {
+            this.baseAfterContentInit();
+            //this['ready'].emit(this)
+        };
+        var ExtAccordionComponent_1;
+        ExtAccordionComponent = ExtAccordionComponent_1 = __decorate([
+            core.Component({
+                selector: 'accordion',
+                inputs: accordionMetaData.PROPERTIES,
+                outputs: accordionMetaData.EVENTNAMES,
+                providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtAccordionComponent_1; }) }],
+                template: '<ng-template></ng-template>'
+            }),
+            __param(1, core.Host()), __param(1, core.Optional()), __param(1, core.SkipSelf()),
+            __metadata("design:paramtypes", [core.ElementRef, base])
+        ], ExtAccordionComponent);
+        return ExtAccordionComponent;
+    }(base));
+
     var datepanelMetaData = /** @class */ (function () {
         function datepanelMetaData() {
         }
@@ -46194,6 +49395,7 @@
         datepanelMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -46210,6 +49412,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -46243,9 +49446,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -46317,7 +49517,6 @@
             'scope',
             'scrollable',
             'selectOnNavigate',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -46341,6 +49540,7 @@
             'title',
             'titleAlign',
             'titleAnimation',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -46562,6 +49762,7 @@
         }
         datetitleMetaData.XTYPE = 'datetitle';
         datetitleMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -46582,9 +49783,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -46628,7 +49826,6 @@
             'rotateIcon',
             'rotation',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -46818,6 +50015,7 @@
         panelheaderMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -46828,6 +50026,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -46846,9 +50045,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -46901,7 +50097,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -47109,6 +50304,8 @@
         timepanelMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignPMInside',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -47124,6 +50321,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -47156,9 +50354,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -47172,6 +50367,7 @@
             'hideAnimation',
             'hideMode',
             'hideOnMaskTap',
+            'hourDisplayFormat',
             'html',
             'icon',
             'iconAlign',
@@ -47194,6 +50390,7 @@
             'masked',
             'maxHeight',
             'maxWidth',
+            'meridiem',
             'minButtonWidth',
             'minHeight',
             'minWidth',
@@ -47218,7 +50415,6 @@
             'ripple',
             'scope',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -47233,6 +50429,7 @@
             'tbar',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -47451,6 +50648,7 @@
         }
         paneltitleMetaData.XTYPE = 'paneltitle';
         paneltitleMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -47471,9 +50669,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -47517,7 +50712,6 @@
             'rotateIcon',
             'rotation',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -47707,6 +50901,7 @@
         yearpickerMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -47718,12 +50913,15 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'bufferSize',
             'cardSwitchAnimation',
             'centered',
             'cls',
+            'collapseDefaults',
+            'collapsible',
             'constrainAlign',
             'contentEl',
             'control',
@@ -47746,10 +50944,6 @@
             'emptyText',
             'emptyTextDefaults',
             'emptyTextProperty',
-            'enableTextSelection',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -47758,6 +50952,8 @@
             'grouped',
             'groupFooter',
             'groupHeader',
+            'grouping',
+            'groupPlaceholder',
             'height',
             'hidden',
             'hideAnimation',
@@ -47836,7 +51032,6 @@
             'scrollToTopOnRefresh',
             'selectable',
             'selection',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -47863,7 +51058,6 @@
             'ui',
             'userCls',
             'userSelectable',
-            'useSimpleItems',
             'variableHeights',
             'verticalOverflow',
             'viewModel',
@@ -47894,6 +51088,8 @@
             { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforegroupcollapse', parameters: 'yearpicker,group' },
+            { name: 'beforegroupexpand', parameters: 'yearpicker,group' },
             { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforehide', parameters: 'sender' },
@@ -47936,6 +51132,8 @@
             { name: 'focusenter', parameters: 'yearpicker,event' },
             { name: 'focusleave', parameters: 'yearpicker,event' },
             { name: 'fullscreen', parameters: 'sender' },
+            { name: 'groupcollapse', parameters: 'yearpicker,group' },
+            { name: 'groupexpand', parameters: 'yearpicker,group' },
             { name: 'heightchange', parameters: 'sender,value,oldValue' },
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
@@ -47990,6 +51188,8 @@
             'beforecenteredchange',
             'beforedisabledchange',
             'beforedockedchange',
+            'beforegroupcollapse',
+            'beforegroupexpand',
             'beforeheightchange',
             'beforehiddenchange',
             'beforehide',
@@ -48032,6 +51232,8 @@
             'focusenter',
             'focusleave',
             'fullscreen',
+            'groupcollapse',
+            'groupexpand',
             'heightchange',
             'hiddenchange',
             'hide',
@@ -48115,6 +51317,7 @@
         datepickerMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -48129,6 +51332,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -48163,10 +51367,7 @@
             'doneButton',
             'draggable',
             'enter',
-            'enterAnimation',
-            'eventHandlers',
             'exit',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -48225,7 +51426,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -48245,6 +51445,7 @@
             'tbar',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolbar',
             'toolDefaults',
@@ -48475,6 +51676,7 @@
         pickerMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -48489,6 +51691,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -48522,10 +51725,7 @@
             'doneButton',
             'draggable',
             'enter',
-            'enterAnimation',
-            'eventHandlers',
             'exit',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -48583,7 +51783,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -48602,6 +51801,7 @@
             'tbar',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolbar',
             'toolDefaults',
@@ -48829,6 +52029,7 @@
         selectpickerMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -48843,6 +52044,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -48876,10 +52078,7 @@
             'doneButton',
             'draggable',
             'enter',
-            'enterAnimation',
-            'eventHandlers',
             'exit',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -48937,7 +52136,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -48956,6 +52154,7 @@
             'tbar',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolbar',
             'toolDefaults',
@@ -49184,6 +52383,7 @@
             'activeChildTabIndex',
             'activeItem',
             'align',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -49195,6 +52395,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -49222,10 +52423,6 @@
             'emptyText',
             'emptyTextDefaults',
             'emptyTextProperty',
-            'enableTextSelection',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -49289,7 +52486,6 @@
             'selectable',
             'selected',
             'selection',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -49566,6 +52762,7 @@
         tabletpickerMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -49580,6 +52777,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -49609,9 +52807,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -49668,7 +52863,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -49683,6 +52877,7 @@
             'tbar',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -49900,6 +53095,7 @@
         pivotgridcellMetaData.XTYPE = 'pivotgridcell';
         pivotgridcellMetaData.PROPERTIES = [
             'align',
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -49918,7 +53114,6 @@
             'defaultToolWeights',
             'disabled',
             'encodeHtml',
-            'eventHandlers',
             'flex',
             'floated',
             'focusCls',
@@ -49933,6 +53128,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -49946,7 +53142,6 @@
             'ripple',
             'scope',
             'selectable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -50045,6 +53240,7 @@
         pivotgridgroupcellMetaData.XTYPE = 'pivotgridgroupcell';
         pivotgridgroupcellMetaData.PROPERTIES = [
             'align',
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -50063,7 +53259,6 @@
             'defaultToolWeights',
             'disabled',
             'encodeHtml',
-            'eventHandlers',
             'flex',
             'floated',
             'focusCls',
@@ -50078,6 +53273,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -50091,7 +53287,6 @@
             'ripple',
             'scope',
             'selectable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -50241,6 +53436,7 @@
         }
         pivotheatmapMetaData.XTYPE = 'pivotheatmap';
         pivotheatmapMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -50265,9 +53461,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -50309,7 +53502,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -50505,6 +53697,7 @@
         }
         pivottreemapMetaData.XTYPE = 'pivottreemap';
         pivottreemapMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -50530,9 +53723,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'expandEventName',
             'flex',
             'floated',
@@ -50591,7 +53781,6 @@
             'scrollable',
             'selectEventName',
             'selection',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -50790,6 +53979,7 @@
         pivotgridMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -50801,6 +53991,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'bufferSize',
@@ -50809,6 +54000,8 @@
             'cls',
             'clsGrandTotal',
             'clsGroupTotal',
+            'collapseDefaults',
+            'collapsible',
             'columnLines',
             'columnMenu',
             'columnResize',
@@ -50836,12 +54029,9 @@
             'emptyText',
             'emptyTextDefaults',
             'emptyTextProperty',
+            'enableColumnMove',
             'enableColumnSort',
             'enableLoadMask',
-            'enableTextSelection',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -50850,6 +54040,8 @@
             'grouped',
             'groupFooter',
             'groupHeader',
+            'grouping',
+            'groupPlaceholder',
             'height',
             'hidden',
             'hideAnimation',
@@ -50935,7 +54127,6 @@
             'scrollToTopOnRefresh',
             'selectable',
             'selection',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -50968,7 +54159,6 @@
             'ui',
             'userCls',
             'userSelectable',
-            'useSimpleItems',
             'variableHeights',
             'verticalOverflow',
             'viewModel',
@@ -50997,8 +54187,12 @@
             { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecomplete', parameters: 'editor,value,startValue,The' },
             { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeedit', parameters: 'sender,location' },
+            { name: 'beforegroupcollapse', parameters: 'pivotgrid,group' },
+            { name: 'beforegroupexpand', parameters: 'pivotgrid,group' },
             { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforehide', parameters: 'sender' },
@@ -51012,12 +54206,14 @@
             { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforeselectionextend', parameters: 'grid,An,extension' },
             { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforestartedit', parameters: 'editor,boundEl,value,The' },
             { name: 'beforestorechange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforetofront', parameters: 'pivotgrid' },
             { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
             { name: 'blur', parameters: 'pivotgrid,event' },
             { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'canceledit', parameters: 'editor,value,startValue' },
             { name: 'cellselection', parameters: 'grid,selection' },
             { name: 'centeredchange', parameters: 'sender,value,oldValue' },
             { name: 'childdoubletap', parameters: 'pivotgrid,location' },
@@ -51040,18 +54236,22 @@
             { name: 'columnselection', parameters: 'grid,selection' },
             { name: 'columnshow', parameters: 'pivotgrid,column' },
             { name: 'columnsort', parameters: 'pivotgrid,column,direction' },
+            { name: 'complete', parameters: 'editor,value,startValue,The' },
             { name: 'deactivate', parameters: 'oldActiveItem,pivotgrid,newActiveItem' },
             { name: 'deselect', parameters: 'pivotgrid,records' },
             { name: 'destroy', parameters: '' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'disclose', parameters: 'list,record,target,index,event' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'edit', parameters: 'sender,location' },
             { name: 'erased', parameters: 'sender' },
             { name: 'floatingchange', parameters: 'sender,positioned' },
             { name: 'focus', parameters: 'pivotgrid,event' },
             { name: 'focusenter', parameters: 'pivotgrid,event' },
             { name: 'focusleave', parameters: 'pivotgrid,event' },
             { name: 'fullscreen', parameters: 'sender' },
+            { name: 'groupcollapse', parameters: 'pivotgrid,group' },
+            { name: 'groupexpand', parameters: 'pivotgrid,group' },
             { name: 'heightchange', parameters: 'sender,value,oldValue' },
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
@@ -51122,10 +54322,13 @@
             { name: 'select', parameters: 'pivotgrid,selected' },
             { name: 'selectionextenderdrag', parameters: 'grid,An,extension' },
             { name: 'show', parameters: 'sender' },
+            { name: 'specialkey', parameters: 'editor,field,event' },
+            { name: 'startedit', parameters: 'editor,boundEl,value,The' },
             { name: 'storechange', parameters: 'sender,value,oldValue' },
             { name: 'tofront', parameters: 'pivotgrid' },
             { name: 'topchange', parameters: 'sender,value,oldValue' },
             { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'validateedit', parameters: 'sender,location' },
             { name: 'widthchange', parameters: 'sender,value,oldValue' },
             { name: 'ready', parameters: '' }
         ];
@@ -51137,8 +54340,12 @@
             'beforeactiveItemchange',
             'beforebottomchange',
             'beforecenteredchange',
+            'beforecomplete',
             'beforedisabledchange',
             'beforedockedchange',
+            'beforeedit',
+            'beforegroupcollapse',
+            'beforegroupexpand',
             'beforeheightchange',
             'beforehiddenchange',
             'beforehide',
@@ -51152,12 +54359,14 @@
             'beforescrollablechange',
             'beforeselectionextend',
             'beforeshow',
+            'beforestartedit',
             'beforestorechange',
             'beforetofront',
             'beforetopchange',
             'beforewidthchange',
             'blur',
             'bottomchange',
+            'canceledit',
             'cellselection',
             'centeredchange',
             'childdoubletap',
@@ -51180,18 +54389,22 @@
             'columnselection',
             'columnshow',
             'columnsort',
+            'complete',
             'deactivate',
             'deselect',
             'destroy',
             'disabledchange',
             'disclose',
             'dockedchange',
+            'edit',
             'erased',
             'floatingchange',
             'focus',
             'focusenter',
             'focusleave',
             'fullscreen',
+            'groupcollapse',
+            'groupexpand',
             'heightchange',
             'hiddenchange',
             'hide',
@@ -51262,10 +54475,13 @@
             'select',
             'selectionextenderdrag',
             'show',
+            'specialkey',
+            'startedit',
             'storechange',
             'tofront',
             'topchange',
             'updatedata',
+            'validateedit',
             'widthchange',
             'ready'
         ];
@@ -51308,6 +54524,7 @@
         pivotconfigfieldMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -51318,6 +54535,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -51338,9 +54556,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -51391,7 +54606,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -51598,6 +54812,7 @@
         pivotconfigcontainerMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -51612,6 +54827,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -51641,9 +54857,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'fieldType',
             'flex',
             'floated',
@@ -51701,7 +54914,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -51716,6 +54928,7 @@
             'tbar',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -51934,6 +55147,7 @@
         pivotconfigformMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -51950,10 +55164,12 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
             'bottom',
+            'bubbleDirty',
             'buttonAlign',
             'buttons',
             'buttonToolbar',
@@ -51975,15 +55191,14 @@
             'defaults',
             'defaultToolWeights',
             'defaultType',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'enableSubmissionForm',
             'enctype',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
+            'fieldDefaults',
             'fieldSeparators',
             'flex',
             'floated',
@@ -52008,6 +55223,7 @@
             'instanceCls',
             'itemId',
             'items',
+            'jsonSubmit',
             'keyMap',
             'keyMapEnabled',
             'keyMapTarget',
@@ -52046,7 +55262,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -52064,6 +55279,7 @@
             'timeout',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -52128,6 +55344,7 @@
             { name: 'collapse', parameters: 'pivotconfigform' },
             { name: 'deactivate', parameters: 'oldActiveItem,pivotconfigform,newActiveItem' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'pivotconfigform,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'drawerhide', parameters: 'pivotconfigform' },
@@ -52207,6 +55424,7 @@
             'collapse',
             'deactivate',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'drawerhide',
@@ -52290,6 +55508,7 @@
         pivotconfigpanelMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -52304,6 +55523,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -52333,9 +55553,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -52400,7 +55617,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -52415,6 +55631,7 @@
             'tbar',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -52633,6 +55850,7 @@
         pivotsettingsMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -52649,10 +55867,12 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
             'bottom',
+            'bubbleDirty',
             'buttonAlign',
             'buttons',
             'buttonToolbar',
@@ -52674,15 +55894,14 @@
             'defaults',
             'defaultToolWeights',
             'defaultType',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'enableSubmissionForm',
             'enctype',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
+            'fieldDefaults',
             'fieldSeparators',
             'flex',
             'floated',
@@ -52707,6 +55926,7 @@
             'instanceCls',
             'itemId',
             'items',
+            'jsonSubmit',
             'keyMap',
             'keyMapEnabled',
             'keyMapTarget',
@@ -52745,7 +55965,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -52763,6 +55982,7 @@
             'timeout',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -52827,6 +56047,7 @@
             { name: 'collapse', parameters: 'pivotsettings' },
             { name: 'deactivate', parameters: 'oldActiveItem,pivotsettings,newActiveItem' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'pivotsettings,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'drawerhide', parameters: 'pivotsettings' },
@@ -52906,6 +56127,7 @@
             'collapse',
             'deactivate',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'drawerhide',
@@ -52989,6 +56211,7 @@
         pivotrangeeditorMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -53005,10 +56228,12 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
             'bottom',
+            'bubbleDirty',
             'buttonAlign',
             'buttons',
             'buttonToolbar',
@@ -53030,15 +56255,14 @@
             'defaults',
             'defaultToolWeights',
             'defaultType',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'enableSubmissionForm',
             'enctype',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
+            'fieldDefaults',
             'fieldSeparators',
             'flex',
             'floated',
@@ -53063,6 +56287,7 @@
             'instanceCls',
             'itemId',
             'items',
+            'jsonSubmit',
             'keyMap',
             'keyMapEnabled',
             'keyMapTarget',
@@ -53101,7 +56326,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -53119,6 +56343,7 @@
             'timeout',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -53183,6 +56408,7 @@
             { name: 'collapse', parameters: 'pivotrangeeditor' },
             { name: 'deactivate', parameters: 'oldActiveItem,pivotrangeeditor,newActiveItem' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'pivotrangeeditor,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'drawerhide', parameters: 'pivotrangeeditor' },
@@ -53262,6 +56488,7 @@
             'collapse',
             'deactivate',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'drawerhide',
@@ -53343,6 +56570,7 @@
         }
         pivotgridrowMetaData.XTYPE = 'pivotgridrow';
         pivotgridrowMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -53365,9 +56593,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'expandedField',
             'flex',
             'floated',
@@ -53408,7 +56633,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -53595,6 +56819,7 @@
         }
         progressMetaData.XTYPE = 'progress';
         progressMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'animate',
             'ariaAttributes',
@@ -53616,9 +56841,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -53656,7 +56878,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -53845,6 +57066,7 @@
         }
         progressbarwidgetMetaData.XTYPE = 'progressbarwidget';
         progressbarwidgetMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'animate',
             'ariaAttributes',
@@ -53866,9 +57088,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -53906,7 +57125,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -54097,6 +57315,7 @@
         segmentedbuttonMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowDepress',
             'allowFocusingDisabledChildren',
             'allowMultiple',
@@ -54110,6 +57329,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -54129,9 +57349,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -54181,7 +57398,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -54392,6 +57608,7 @@
         sheetMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'anchor',
@@ -54406,6 +57623,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -54437,10 +57655,7 @@
             'docked',
             'draggable',
             'enter',
-            'enterAnimation',
-            'eventHandlers',
             'exit',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -54498,7 +57713,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -54516,6 +57730,7 @@
             'tbar',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -54732,6 +57947,7 @@
         }
         sliderMetaData.XTYPE = 'slider';
         sliderMetaData.PROPERTIES = [
+            'alignSelf',
             'allowThumbsOverlapping',
             'alwaysOnTop',
             'animation',
@@ -54754,9 +57970,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -54798,7 +58011,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -54996,6 +58208,7 @@
         }
         thumbMetaData.XTYPE = 'thumb';
         thumbMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -55016,9 +58229,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'fillCls',
             'fillTrack',
             'flex',
@@ -55058,7 +58268,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -55244,6 +58453,7 @@
         }
         togglesliderMetaData.XTYPE = 'toggleslider';
         togglesliderMetaData.PROPERTIES = [
+            'alignSelf',
             'allowThumbsOverlapping',
             'alwaysOnTop',
             'animation',
@@ -55266,9 +58476,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -55310,7 +58517,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -55508,6 +58714,7 @@
         }
         spacerMetaData.XTYPE = 'spacer';
         spacerMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -55528,9 +58735,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -55568,7 +58772,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -55754,6 +58957,7 @@
         }
         sparklinebarMetaData.XTYPE = 'sparklinebar';
         sparklinebarMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -55782,9 +58986,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -55827,7 +59028,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -56021,6 +59221,7 @@
         }
         sparklineMetaData.XTYPE = 'sparkline';
         sparklineMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -56042,9 +59243,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -56085,7 +59283,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -56276,6 +59473,7 @@
         }
         sparklineboxMetaData.XTYPE = 'sparklinebox';
         sparklineboxMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -56301,9 +59499,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -56349,7 +59544,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -56545,6 +59739,7 @@
         }
         sparklinebulletMetaData.XTYPE = 'sparklinebullet';
         sparklinebulletMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -56567,9 +59762,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -56612,7 +59804,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -56805,6 +59996,7 @@
         }
         sparklinediscreteMetaData.XTYPE = 'sparklinediscrete';
         sparklinediscreteMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -56829,9 +60021,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -56873,7 +60062,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -57066,6 +60254,7 @@
         }
         sparklinelineMetaData.XTYPE = 'sparklineline';
         sparklinelineMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -57092,9 +60281,6 @@
             'docked',
             'draggable',
             'drawNormalOnTop',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'fillColor',
             'flex',
             'floated',
@@ -57144,7 +60330,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -57338,6 +60523,7 @@
         }
         sparklinepieMetaData.XTYPE = 'sparklinepie';
         sparklinepieMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -57361,9 +60547,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -57405,7 +60588,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -57597,6 +60779,7 @@
         }
         sparklinetristateMetaData.XTYPE = 'sparklinetristate';
         sparklinetristateMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -57621,9 +60804,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -57666,7 +60846,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -57858,6 +61037,7 @@
         }
         splitbuttonMetaData.XTYPE = 'splitbutton';
         splitbuttonMetaData.PROPERTIES = [
+            'alignSelf',
             'allowDepress',
             'alwaysOnTop',
             'ariaAttributes',
@@ -57887,9 +61067,6 @@
             'docked',
             'draggable',
             'enableToggle',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -57936,7 +61113,6 @@
             'ripple',
             'scope',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -58140,6 +61316,7 @@
             'activeChildTabIndex',
             'activeItem',
             'activeTab',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'animateIndicator',
@@ -58151,6 +61328,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -58171,9 +61349,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -58221,7 +61396,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -58232,6 +61406,7 @@
             'stateId',
             'style',
             'tabIndex',
+            'tabRotation',
             'title',
             'toFrontOnShow',
             'tooltip',
@@ -58433,6 +61608,7 @@
         tabpanelMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -58440,9 +61616,11 @@
             'ariaLabel',
             'ariaLabelledBy',
             'autoDestroy',
+            'autoOrientAnimation',
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -58461,9 +61639,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -58512,7 +61687,6 @@
             'ripple',
             'scroll',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -58525,6 +61699,7 @@
             'tabBar',
             'tabBarPosition',
             'tabIndex',
+            'tabRotation',
             'toFrontOnShow',
             'tooltip',
             'top',
@@ -58718,6 +61893,7 @@
         tabMetaData.XTYPE = 'tab';
         tabMetaData.PROPERTIES = [
             'active',
+            'alignSelf',
             'allowDepress',
             'alwaysOnTop',
             'ariaAttributes',
@@ -58747,9 +61923,6 @@
             'docked',
             'draggable',
             'enableToggle',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -58794,9 +61967,9 @@
             'renderTo',
             'right',
             'ripple',
+            'rotation',
             'scope',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -58808,6 +61981,7 @@
             'stretchMenu',
             'style',
             'tabIndex',
+            'tabPosition',
             'text',
             'textAlign',
             'title',
@@ -59004,6 +62178,7 @@
             'activeItem',
             'align',
             'alignDelegate',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'allowOver',
             'alwaysOnTop',
@@ -59021,6 +62196,7 @@
             'bbar',
             'bind',
             'bodyBorder',
+            'bodyCls',
             'bodyPadding',
             'bodyStyle',
             'border',
@@ -59052,9 +62228,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -59114,7 +62287,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -59132,6 +62304,7 @@
             'tbar',
             'title',
             'titleAlign',
+            'titleCollapse',
             'toFrontOnShow',
             'toolDefaults',
             'tools',
@@ -59349,6 +62522,7 @@
         }
         titleMetaData.XTYPE = 'title';
         titleMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -59369,9 +62543,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -59409,7 +62580,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -59598,6 +62768,7 @@
         titlebarMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -59608,6 +62779,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -59627,9 +62799,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -59678,7 +62847,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -59883,6 +63051,7 @@
         }
         toolMetaData.XTYPE = 'tool';
         toolMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -59903,9 +63072,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -59947,7 +63113,6 @@
             'ripple',
             'scope',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -60138,6 +63303,7 @@
         }
         paneltoolMetaData.XTYPE = 'paneltool';
         paneltoolMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -60158,9 +63324,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -60202,7 +63365,6 @@
             'ripple',
             'scope',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -60395,6 +63557,7 @@
         toolbarMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -60405,6 +63568,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -60424,9 +63588,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -60474,7 +63635,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -60678,6 +63838,7 @@
         }
         colorbuttonMetaData.XTYPE = 'colorbutton';
         colorbuttonMetaData.PROPERTIES = [
+            'alignSelf',
             'alphaDecimalFormat',
             'alwaysOnTop',
             'ariaAttributes',
@@ -60700,9 +63861,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -60742,7 +63900,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -60931,6 +64088,7 @@
         }
         colorpickercolorpreviewMetaData.XTYPE = 'colorpickercolorpreview';
         colorpickercolorpreviewMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -60951,9 +64109,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -60991,7 +64146,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -61177,6 +64331,7 @@
         }
         colorfieldMetaData.XTYPE = 'colorfield';
         colorfieldMetaData.PROPERTIES = [
+            'alignSelf',
             'alignTarget',
             'alphaDecimalFormat',
             'alwaysOnTop',
@@ -61196,6 +64351,7 @@
             'bodyAlign',
             'border',
             'bottom',
+            'bubbleDirty',
             'centered',
             'clearable',
             'cls',
@@ -61205,20 +64361,18 @@
             'controller',
             'data',
             'defaultListenerScope',
+            'dirty',
             'disabled',
             'displayed',
             'docked',
             'draggable',
             'edgePicker',
             'editable',
-            'enterAnimation',
             'error',
             'errorMessage',
             'errorTarget',
             'errorTip',
             'errorTpl',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'floatedPicker',
@@ -61236,7 +64390,6 @@
             'html',
             'id',
             'inline',
-            'inputCls',
             'inputMask',
             'inputType',
             'inputValue',
@@ -61272,7 +64425,6 @@
             'picker',
             'pickerSlotAlign',
             'placeholder',
-            'placeHolder',
             'plugins',
             'popup',
             'publishes',
@@ -61286,7 +64438,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -61296,6 +64447,7 @@
             'stateful',
             'statefulDefaults',
             'stateId',
+            'stripCharsRe',
             'style',
             'tabIndex',
             'textAlign',
@@ -61361,6 +64513,7 @@
             { name: 'click', parameters: 'e' },
             { name: 'collapse', parameters: 'field' },
             { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'colorfield,dirty' },
             { name: 'disabledchange', parameters: 'sender,value,oldValue' },
             { name: 'dockedchange', parameters: 'sender,value,oldValue' },
             { name: 'erased', parameters: 'sender' },
@@ -61375,6 +64528,7 @@
             { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
             { name: 'hide', parameters: 'sender' },
             { name: 'initialize', parameters: 'sender' },
+            { name: 'keydown', parameters: 'colorfield,e' },
             { name: 'keyup', parameters: 'colorfield,e' },
             { name: 'leftchange', parameters: 'sender,value,oldValue' },
             { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -61428,6 +64582,7 @@
             'click',
             'collapse',
             'destroy',
+            'dirtychange',
             'disabledchange',
             'dockedchange',
             'erased',
@@ -61442,6 +64597,7 @@
             'hiddenchange',
             'hide',
             'initialize',
+            'keydown',
             'keyup',
             'leftchange',
             'maxHeightchange',
@@ -61567,6 +64723,7 @@
         }
         gaugeMetaData.XTYPE = 'gauge';
         gaugeMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'angleOffset',
             'animation',
@@ -61590,9 +64747,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -61633,7 +64787,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -61829,6 +64982,7 @@
         mapMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -61839,6 +64993,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -61857,9 +65012,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -61914,7 +65066,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -62148,6 +65299,7 @@
         google_mapMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -62158,6 +65310,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -62176,9 +65329,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -62233,7 +65383,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -62465,6 +65614,7 @@
         }
         ratingMetaData.XTYPE = 'rating';
         ratingMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'animate',
             'ariaAttributes',
@@ -62486,9 +65636,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'family',
             'flex',
             'floated',
@@ -62534,7 +65681,6 @@
             'scale',
             'scrollable',
             'selectedStyle',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -62725,6 +65871,7 @@
         }
         videoMetaData.XTYPE = 'video';
         videoMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -62748,10 +65895,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enableControls',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusCls',
@@ -62794,7 +65937,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -62999,6 +66141,7 @@
         viewportMetaData.PROPERTIES = [
             'activeChildTabIndex',
             'activeItem',
+            'alignSelf',
             'allowFocusingDisabledChildren',
             'alwaysOnTop',
             'ariaAttributes',
@@ -63012,6 +66155,7 @@
             'autoSize',
             'axisLock',
             'bind',
+            'bodyCls',
             'border',
             'bottom',
             'cardSwitchAnimation',
@@ -63030,9 +66174,6 @@
             'displayed',
             'docked',
             'draggable',
-            'enterAnimation',
-            'eventHandlers',
-            'exitAnimation',
             'flex',
             'floated',
             'focusableContainer',
@@ -63083,7 +66224,6 @@
             'right',
             'ripple',
             'scrollable',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -63291,6 +66431,7 @@
         }
         widgetMetaData.XTYPE = 'widget';
         widgetMetaData.PROPERTIES = [
+            'alignSelf',
             'alwaysOnTop',
             'ariaAttributes',
             'ariaDescribedBy',
@@ -63303,7 +66444,6 @@
             'controller',
             'defaultListenerScope',
             'disabled',
-            'eventHandlers',
             'flex',
             'floated',
             'focusCls',
@@ -63317,6 +66457,7 @@
             'keyMapEnabled',
             'keyMapTarget',
             'listeners',
+            'margin',
             'name',
             'nameable',
             'plugins',
@@ -63325,7 +66466,6 @@
             'relative',
             'renderTo',
             'ripple',
-            'selfAlign',
             'session',
             'shadow',
             'shareableName',
@@ -63423,6 +66563,7 @@
                     ExtAngularBootstrapComponent,
                     ExtActionsheetComponent,
                     ExtAudioComponent,
+                    ExtBreadcrumbbarComponent,
                     ExtButtonComponent,
                     ExtCalendar_eventComponent,
                     ExtCalendar_form_addComponent,
@@ -63476,6 +66617,7 @@
                     ExtItemheaderComponent,
                     ExtListComponent,
                     ExtListitemComponent,
+                    ExtListitemplaceholderComponent,
                     ExtListswiperitemComponent,
                     ExtListswiperstepperComponent,
                     ExtNestedlistComponent,
@@ -63489,6 +66631,7 @@
                     ExtEditorComponent,
                     ExtCheckboxComponent,
                     ExtCheckboxfieldComponent,
+                    ExtCheckboxgroupComponent,
                     ExtComboboxComponent,
                     ExtComboboxfieldComponent,
                     ExtContainerfieldComponent,
@@ -63499,6 +66642,7 @@
                     ExtDisplayfieldComponent,
                     ExtEmailfieldComponent,
                     ExtFieldComponent,
+                    ExtGroupcontainerComponent,
                     ExtFilefieldComponent,
                     ExtFilebuttonComponent,
                     ExtHiddenfieldComponent,
@@ -63509,6 +66653,7 @@
                     ExtPickerfieldComponent,
                     ExtRadioComponent,
                     ExtRadiofieldComponent,
+                    ExtRadiogroupComponent,
                     ExtSearchfieldComponent,
                     ExtSelectfieldComponent,
                     ExtSinglesliderfieldComponent,
@@ -63547,6 +66692,7 @@
                     ExtColumnComponent,
                     ExtTemplatecolumnComponent,
                     ExtDatecolumnComponent,
+                    ExtDragcolumnComponent,
                     ExtNumbercolumnComponent,
                     ExtRownumbererComponent,
                     ExtSelectioncolumnComponent,
@@ -63564,6 +66710,10 @@
                     ExtPagingtoolbarComponent,
                     ExtGridrowComponent,
                     ExtRowbodyComponent,
+                    ExtRoweditorbarComponent,
+                    ExtRoweditorcellComponent,
+                    ExtRoweditorComponent,
+                    ExtRoweditorgapComponent,
                     ExtRowheaderComponent,
                     ExtGridsummaryrowComponent,
                     ExtTreeComponent,
@@ -63584,6 +66734,7 @@
                     ExtMessageboxComponent,
                     ExtNavigationviewComponent,
                     ExtPanelComponent,
+                    ExtAccordionComponent,
                     ExtDatepanelComponent,
                     ExtDatetitleComponent,
                     ExtPanelheaderComponent,
@@ -63652,6 +66803,7 @@
                     ExtAngularBootstrapComponent,
                     ExtActionsheetComponent,
                     ExtAudioComponent,
+                    ExtBreadcrumbbarComponent,
                     ExtButtonComponent,
                     ExtCalendar_eventComponent,
                     ExtCalendar_form_addComponent,
@@ -63705,6 +66857,7 @@
                     ExtItemheaderComponent,
                     ExtListComponent,
                     ExtListitemComponent,
+                    ExtListitemplaceholderComponent,
                     ExtListswiperitemComponent,
                     ExtListswiperstepperComponent,
                     ExtNestedlistComponent,
@@ -63718,6 +66871,7 @@
                     ExtEditorComponent,
                     ExtCheckboxComponent,
                     ExtCheckboxfieldComponent,
+                    ExtCheckboxgroupComponent,
                     ExtComboboxComponent,
                     ExtComboboxfieldComponent,
                     ExtContainerfieldComponent,
@@ -63728,6 +66882,7 @@
                     ExtDisplayfieldComponent,
                     ExtEmailfieldComponent,
                     ExtFieldComponent,
+                    ExtGroupcontainerComponent,
                     ExtFilefieldComponent,
                     ExtFilebuttonComponent,
                     ExtHiddenfieldComponent,
@@ -63738,6 +66893,7 @@
                     ExtPickerfieldComponent,
                     ExtRadioComponent,
                     ExtRadiofieldComponent,
+                    ExtRadiogroupComponent,
                     ExtSearchfieldComponent,
                     ExtSelectfieldComponent,
                     ExtSinglesliderfieldComponent,
@@ -63776,6 +66932,7 @@
                     ExtColumnComponent,
                     ExtTemplatecolumnComponent,
                     ExtDatecolumnComponent,
+                    ExtDragcolumnComponent,
                     ExtNumbercolumnComponent,
                     ExtRownumbererComponent,
                     ExtSelectioncolumnComponent,
@@ -63793,6 +66950,10 @@
                     ExtPagingtoolbarComponent,
                     ExtGridrowComponent,
                     ExtRowbodyComponent,
+                    ExtRoweditorbarComponent,
+                    ExtRoweditorcellComponent,
+                    ExtRoweditorComponent,
+                    ExtRoweditorgapComponent,
                     ExtRowheaderComponent,
                     ExtGridsummaryrowComponent,
                     ExtTreeComponent,
@@ -63813,6 +66974,7 @@
                     ExtMessageboxComponent,
                     ExtNavigationviewComponent,
                     ExtPanelComponent,
+                    ExtAccordionComponent,
                     ExtDatepanelComponent,
                     ExtDatetitleComponent,
                     ExtPanelheaderComponent,
@@ -63883,455 +67045,477 @@
     exports.ExtAngularModule = ExtAngularModule;
     exports.ɵa = ExtAngularBootstrapComponent;
     exports.ɵb = ExtAngularBootstrapService;
-    exports.ɵba = ExtCalendar_dayComponent;
-    exports.ɵbb = calendar_daysMetaData;
-    exports.ɵbc = ExtCalendar_daysComponent;
-    exports.ɵbd = calendar_monthMetaData;
-    exports.ɵbe = ExtCalendar_monthComponent;
-    exports.ɵbf = calendarMetaData;
-    exports.ɵbg = ExtCalendarComponent;
-    exports.ɵbh = calendar_weekMetaData;
-    exports.ɵbi = ExtCalendar_weekComponent;
-    exports.ɵbj = calendar_weeksMetaData;
-    exports.ɵbk = ExtCalendar_weeksComponent;
-    exports.ɵbl = calendar_dayviewMetaData;
-    exports.ɵbm = ExtCalendar_dayviewComponent;
-    exports.ɵbn = calendar_daysviewMetaData;
-    exports.ɵbo = ExtCalendar_daysviewComponent;
-    exports.ɵbp = calendar_monthviewMetaData;
-    exports.ɵbq = ExtCalendar_monthviewComponent;
-    exports.ɵbr = calendar_multiviewMetaData;
-    exports.ɵbs = ExtCalendar_multiviewComponent;
-    exports.ɵbt = calendar_weekviewMetaData;
-    exports.ɵbu = ExtCalendar_weekviewComponent;
-    exports.ɵbv = calendar_weeksviewMetaData;
-    exports.ɵbw = ExtCalendar_weeksviewComponent;
-    exports.ɵbx = carouselMetaData;
-    exports.ɵby = ExtCarouselComponent;
-    exports.ɵbz = axis3dMetaData;
+    exports.ɵba = ExtCalendar_listComponent;
+    exports.ɵbb = calendar_dayMetaData;
+    exports.ɵbc = ExtCalendar_dayComponent;
+    exports.ɵbd = calendar_daysMetaData;
+    exports.ɵbe = ExtCalendar_daysComponent;
+    exports.ɵbf = calendar_monthMetaData;
+    exports.ɵbg = ExtCalendar_monthComponent;
+    exports.ɵbh = calendarMetaData;
+    exports.ɵbi = ExtCalendarComponent;
+    exports.ɵbj = calendar_weekMetaData;
+    exports.ɵbk = ExtCalendar_weekComponent;
+    exports.ɵbl = calendar_weeksMetaData;
+    exports.ɵbm = ExtCalendar_weeksComponent;
+    exports.ɵbn = calendar_dayviewMetaData;
+    exports.ɵbo = ExtCalendar_dayviewComponent;
+    exports.ɵbp = calendar_daysviewMetaData;
+    exports.ɵbq = ExtCalendar_daysviewComponent;
+    exports.ɵbr = calendar_monthviewMetaData;
+    exports.ɵbs = ExtCalendar_monthviewComponent;
+    exports.ɵbt = calendar_multiviewMetaData;
+    exports.ɵbu = ExtCalendar_multiviewComponent;
+    exports.ɵbv = calendar_weekviewMetaData;
+    exports.ɵbw = ExtCalendar_weekviewComponent;
+    exports.ɵbx = calendar_weeksviewMetaData;
+    exports.ɵby = ExtCalendar_weeksviewComponent;
+    exports.ɵbz = carouselMetaData;
     exports.ɵc = actionsheetMetaData;
-    exports.ɵca = ExtAxis3dComponent;
-    exports.ɵcb = cartesianMetaData;
-    exports.ɵcc = ExtCartesianComponent;
-    exports.ɵcd = chartMetaData;
-    exports.ɵce = ExtChartComponent;
-    exports.ɵcf = interactionMetaData;
-    exports.ɵcg = ExtInteractionComponent;
-    exports.ɵch = legendMetaData;
-    exports.ɵci = ExtLegendComponent;
-    exports.ɵcj = chartnavigatorMetaData;
-    exports.ɵck = ExtChartnavigatorComponent;
-    exports.ɵcl = polarMetaData;
-    exports.ɵcm = ExtPolarComponent;
-    exports.ɵcn = spacefillingMetaData;
-    exports.ɵco = ExtSpacefillingComponent;
-    exports.ɵcp = chipMetaData;
-    exports.ɵcq = ExtChipComponent;
-    exports.ɵcr = componentMetaData;
-    exports.ɵcs = ExtComponentComponent;
-    exports.ɵct = containerMetaData;
-    exports.ɵcu = ExtContainerComponent;
-    exports.ɵcv = d3_canvasMetaData;
-    exports.ɵcw = ExtD3_canvasComponent;
-    exports.ɵcx = d3_heatmapMetaData;
-    exports.ɵcy = ExtD3_heatmapComponent;
-    exports.ɵcz = d3_packMetaData;
+    exports.ɵca = ExtCarouselComponent;
+    exports.ɵcb = axis3dMetaData;
+    exports.ɵcc = ExtAxis3dComponent;
+    exports.ɵcd = cartesianMetaData;
+    exports.ɵce = ExtCartesianComponent;
+    exports.ɵcf = chartMetaData;
+    exports.ɵcg = ExtChartComponent;
+    exports.ɵch = interactionMetaData;
+    exports.ɵci = ExtInteractionComponent;
+    exports.ɵcj = legendMetaData;
+    exports.ɵck = ExtLegendComponent;
+    exports.ɵcl = chartnavigatorMetaData;
+    exports.ɵcm = ExtChartnavigatorComponent;
+    exports.ɵcn = polarMetaData;
+    exports.ɵco = ExtPolarComponent;
+    exports.ɵcp = spacefillingMetaData;
+    exports.ɵcq = ExtSpacefillingComponent;
+    exports.ɵcr = chipMetaData;
+    exports.ɵcs = ExtChipComponent;
+    exports.ɵct = componentMetaData;
+    exports.ɵcu = ExtComponentComponent;
+    exports.ɵcv = containerMetaData;
+    exports.ɵcw = ExtContainerComponent;
+    exports.ɵcx = d3_canvasMetaData;
+    exports.ɵcy = ExtD3_canvasComponent;
+    exports.ɵcz = d3_heatmapMetaData;
     exports.ɵd = ExtActionsheetComponent;
-    exports.ɵda = ExtD3_packComponent;
-    exports.ɵdb = d3_partitionMetaData;
-    exports.ɵdc = ExtD3_partitionComponent;
-    exports.ɵdd = d3_sunburstMetaData;
-    exports.ɵde = ExtD3_sunburstComponent;
-    exports.ɵdf = d3_treeMetaData;
-    exports.ɵdg = ExtD3_treeComponent;
-    exports.ɵdh = d3_horizontal_treeMetaData;
-    exports.ɵdi = ExtD3_horizontal_treeComponent;
-    exports.ɵdj = d3_treemapMetaData;
-    exports.ɵdk = ExtD3_treemapComponent;
-    exports.ɵdl = d3_svgMetaData;
-    exports.ɵdm = ExtD3_svgComponent;
-    exports.ɵdn = d3MetaData;
-    exports.ɵdo = ExtD3Component;
-    exports.ɵdp = boundlistMetaData;
-    exports.ɵdq = ExtBoundlistComponent;
-    exports.ɵdr = chipviewMetaData;
-    exports.ɵds = ExtChipviewComponent;
-    exports.ɵdt = componentdataviewMetaData;
-    exports.ɵdu = ExtComponentdataviewComponent;
-    exports.ɵdv = dataitemMetaData;
-    exports.ɵdw = ExtDataitemComponent;
-    exports.ɵdx = dataviewMetaData;
-    exports.ɵdy = ExtDataviewComponent;
-    exports.ɵdz = emptytextMetaData;
+    exports.ɵda = ExtD3_heatmapComponent;
+    exports.ɵdb = d3_packMetaData;
+    exports.ɵdc = ExtD3_packComponent;
+    exports.ɵdd = d3_partitionMetaData;
+    exports.ɵde = ExtD3_partitionComponent;
+    exports.ɵdf = d3_sunburstMetaData;
+    exports.ɵdg = ExtD3_sunburstComponent;
+    exports.ɵdh = d3_treeMetaData;
+    exports.ɵdi = ExtD3_treeComponent;
+    exports.ɵdj = d3_horizontal_treeMetaData;
+    exports.ɵdk = ExtD3_horizontal_treeComponent;
+    exports.ɵdl = d3_treemapMetaData;
+    exports.ɵdm = ExtD3_treemapComponent;
+    exports.ɵdn = d3_svgMetaData;
+    exports.ɵdo = ExtD3_svgComponent;
+    exports.ɵdp = d3MetaData;
+    exports.ɵdq = ExtD3Component;
+    exports.ɵdr = boundlistMetaData;
+    exports.ɵds = ExtBoundlistComponent;
+    exports.ɵdt = chipviewMetaData;
+    exports.ɵdu = ExtChipviewComponent;
+    exports.ɵdv = componentdataviewMetaData;
+    exports.ɵdw = ExtComponentdataviewComponent;
+    exports.ɵdx = dataitemMetaData;
+    exports.ɵdy = ExtDataitemComponent;
+    exports.ɵdz = dataviewMetaData;
     exports.ɵe = base;
-    exports.ɵea = ExtEmptytextComponent;
-    exports.ɵeb = indexbarMetaData;
-    exports.ɵec = ExtIndexbarComponent;
-    exports.ɵed = itemheaderMetaData;
-    exports.ɵee = ExtItemheaderComponent;
-    exports.ɵef = listMetaData;
-    exports.ɵeg = ExtListComponent;
-    exports.ɵeh = listitemMetaData;
-    exports.ɵei = ExtListitemComponent;
-    exports.ɵej = listswiperitemMetaData;
-    exports.ɵek = ExtListswiperitemComponent;
-    exports.ɵel = listswiperstepperMetaData;
-    exports.ɵem = ExtListswiperstepperComponent;
-    exports.ɵen = nestedlistMetaData;
-    exports.ɵeo = ExtNestedlistComponent;
-    exports.ɵep = pullrefreshbarMetaData;
-    exports.ɵeq = ExtPullrefreshbarComponent;
-    exports.ɵer = pullrefreshspinnerMetaData;
-    exports.ɵes = ExtPullrefreshspinnerComponent;
-    exports.ɵet = simplelistitemMetaData;
-    exports.ɵeu = ExtSimplelistitemComponent;
-    exports.ɵev = dialogMetaData;
-    exports.ɵew = ExtDialogComponent;
-    exports.ɵex = windowMetaData;
-    exports.ɵey = ExtWindowComponent;
-    exports.ɵez = drawMetaData;
+    exports.ɵea = ExtDataviewComponent;
+    exports.ɵeb = emptytextMetaData;
+    exports.ɵec = ExtEmptytextComponent;
+    exports.ɵed = indexbarMetaData;
+    exports.ɵee = ExtIndexbarComponent;
+    exports.ɵef = itemheaderMetaData;
+    exports.ɵeg = ExtItemheaderComponent;
+    exports.ɵeh = listMetaData;
+    exports.ɵei = ExtListComponent;
+    exports.ɵej = listitemMetaData;
+    exports.ɵek = ExtListitemComponent;
+    exports.ɵel = listitemplaceholderMetaData;
+    exports.ɵem = ExtListitemplaceholderComponent;
+    exports.ɵen = listswiperitemMetaData;
+    exports.ɵeo = ExtListswiperitemComponent;
+    exports.ɵep = listswiperstepperMetaData;
+    exports.ɵeq = ExtListswiperstepperComponent;
+    exports.ɵer = nestedlistMetaData;
+    exports.ɵes = ExtNestedlistComponent;
+    exports.ɵet = pullrefreshbarMetaData;
+    exports.ɵeu = ExtPullrefreshbarComponent;
+    exports.ɵev = pullrefreshspinnerMetaData;
+    exports.ɵew = ExtPullrefreshspinnerComponent;
+    exports.ɵex = simplelistitemMetaData;
+    exports.ɵey = ExtSimplelistitemComponent;
+    exports.ɵez = dialogMetaData;
     exports.ɵf = audioMetaData;
-    exports.ɵfa = ExtDrawComponent;
-    exports.ɵfb = surfaceMetaData;
-    exports.ɵfc = ExtSurfaceComponent;
-    exports.ɵfd = editorMetaData;
-    exports.ɵfe = ExtEditorComponent;
-    exports.ɵff = checkboxMetaData;
-    exports.ɵfg = ExtCheckboxComponent;
-    exports.ɵfh = checkboxfieldMetaData;
-    exports.ɵfi = ExtCheckboxfieldComponent;
-    exports.ɵfj = comboboxMetaData;
-    exports.ɵfk = ExtComboboxComponent;
-    exports.ɵfl = comboboxfieldMetaData;
-    exports.ɵfm = ExtComboboxfieldComponent;
-    exports.ɵfn = containerfieldMetaData;
-    exports.ɵfo = ExtContainerfieldComponent;
-    exports.ɵfp = fieldcontainerMetaData;
-    exports.ɵfq = ExtFieldcontainerComponent;
-    exports.ɵfr = datefieldMetaData;
-    exports.ɵfs = ExtDatefieldComponent;
-    exports.ɵft = datepickerfieldMetaData;
-    exports.ɵfu = ExtDatepickerfieldComponent;
-    exports.ɵfv = datepickernativefieldMetaData;
-    exports.ɵfw = ExtDatepickernativefieldComponent;
-    exports.ɵfx = displayfieldMetaData;
-    exports.ɵfy = ExtDisplayfieldComponent;
-    exports.ɵfz = emailfieldMetaData;
+    exports.ɵfa = ExtDialogComponent;
+    exports.ɵfb = windowMetaData;
+    exports.ɵfc = ExtWindowComponent;
+    exports.ɵfd = drawMetaData;
+    exports.ɵfe = ExtDrawComponent;
+    exports.ɵff = surfaceMetaData;
+    exports.ɵfg = ExtSurfaceComponent;
+    exports.ɵfh = editorMetaData;
+    exports.ɵfi = ExtEditorComponent;
+    exports.ɵfj = checkboxMetaData;
+    exports.ɵfk = ExtCheckboxComponent;
+    exports.ɵfl = checkboxfieldMetaData;
+    exports.ɵfm = ExtCheckboxfieldComponent;
+    exports.ɵfn = checkboxgroupMetaData;
+    exports.ɵfo = ExtCheckboxgroupComponent;
+    exports.ɵfp = comboboxMetaData;
+    exports.ɵfq = ExtComboboxComponent;
+    exports.ɵfr = comboboxfieldMetaData;
+    exports.ɵfs = ExtComboboxfieldComponent;
+    exports.ɵft = containerfieldMetaData;
+    exports.ɵfu = ExtContainerfieldComponent;
+    exports.ɵfv = fieldcontainerMetaData;
+    exports.ɵfw = ExtFieldcontainerComponent;
+    exports.ɵfx = datefieldMetaData;
+    exports.ɵfy = ExtDatefieldComponent;
+    exports.ɵfz = datepickerfieldMetaData;
     exports.ɵg = ExtAudioComponent;
-    exports.ɵga = ExtEmailfieldComponent;
-    exports.ɵgb = fieldMetaData;
-    exports.ɵgc = ExtFieldComponent;
-    exports.ɵgd = filefieldMetaData;
-    exports.ɵge = ExtFilefieldComponent;
-    exports.ɵgf = filebuttonMetaData;
-    exports.ɵgg = ExtFilebuttonComponent;
-    exports.ɵgh = hiddenfieldMetaData;
-    exports.ɵgi = ExtHiddenfieldComponent;
-    exports.ɵgj = inputfieldMetaData;
-    exports.ɵgk = ExtInputfieldComponent;
-    exports.ɵgl = numberfieldMetaData;
-    exports.ɵgm = ExtNumberfieldComponent;
-    exports.ɵgn = fieldpanelMetaData;
-    exports.ɵgo = ExtFieldpanelComponent;
-    exports.ɵgp = passwordfieldMetaData;
-    exports.ɵgq = ExtPasswordfieldComponent;
-    exports.ɵgr = pickerfieldMetaData;
-    exports.ɵgs = ExtPickerfieldComponent;
-    exports.ɵgt = radioMetaData;
-    exports.ɵgu = ExtRadioComponent;
-    exports.ɵgv = radiofieldMetaData;
-    exports.ɵgw = ExtRadiofieldComponent;
-    exports.ɵgx = searchfieldMetaData;
-    exports.ɵgy = ExtSearchfieldComponent;
-    exports.ɵgz = selectfieldMetaData;
-    exports.ɵh = buttonMetaData;
-    exports.ɵha = ExtSelectfieldComponent;
-    exports.ɵhb = singlesliderfieldMetaData;
-    exports.ɵhc = ExtSinglesliderfieldComponent;
-    exports.ɵhd = sliderfieldMetaData;
-    exports.ɵhe = ExtSliderfieldComponent;
-    exports.ɵhf = spinnerfieldMetaData;
-    exports.ɵhg = ExtSpinnerfieldComponent;
-    exports.ɵhh = textfieldMetaData;
-    exports.ɵhi = ExtTextfieldComponent;
-    exports.ɵhj = textareafieldMetaData;
-    exports.ɵhk = ExtTextareafieldComponent;
-    exports.ɵhl = timefieldMetaData;
-    exports.ɵhm = ExtTimefieldComponent;
-    exports.ɵhn = togglefieldMetaData;
-    exports.ɵho = ExtTogglefieldComponent;
-    exports.ɵhp = cleartriggerMetaData;
-    exports.ɵhq = ExtCleartriggerComponent;
-    exports.ɵhr = datetriggerMetaData;
-    exports.ɵhs = ExtDatetriggerComponent;
-    exports.ɵht = expandtriggerMetaData;
-    exports.ɵhu = ExtExpandtriggerComponent;
-    exports.ɵhv = menutriggerMetaData;
-    exports.ɵhw = ExtMenutriggerComponent;
-    exports.ɵhx = revealtriggerMetaData;
-    exports.ɵhy = ExtRevealtriggerComponent;
-    exports.ɵhz = spindowntriggerMetaData;
-    exports.ɵi = ExtButtonComponent;
-    exports.ɵia = ExtSpindowntriggerComponent;
-    exports.ɵib = spinuptriggerMetaData;
-    exports.ɵic = ExtSpinuptriggerComponent;
-    exports.ɵid = timetriggerMetaData;
-    exports.ɵie = ExtTimetriggerComponent;
-    exports.ɵif = triggerMetaData;
-    exports.ɵig = ExtTriggerComponent;
-    exports.ɵih = urlfieldMetaData;
-    exports.ɵii = ExtUrlfieldComponent;
-    exports.ɵij = fieldsetMetaData;
-    exports.ɵik = ExtFieldsetComponent;
-    exports.ɵil = formpanelMetaData;
-    exports.ɵim = ExtFormpanelComponent;
-    exports.ɵin = gridcellbaseMetaData;
-    exports.ɵio = ExtGridcellbaseComponent;
-    exports.ɵip = booleancellMetaData;
-    exports.ɵiq = ExtBooleancellComponent;
-    exports.ɵir = gridcellMetaData;
-    exports.ɵis = ExtGridcellComponent;
-    exports.ɵit = checkcellMetaData;
-    exports.ɵiu = ExtCheckcellComponent;
-    exports.ɵiv = datecellMetaData;
-    exports.ɵiw = ExtDatecellComponent;
-    exports.ɵix = numbercellMetaData;
-    exports.ɵiy = ExtNumbercellComponent;
-    exports.ɵiz = rownumberercellMetaData;
-    exports.ɵj = calendar_eventMetaData;
-    exports.ɵja = ExtRownumberercellComponent;
-    exports.ɵjb = textcellMetaData;
-    exports.ɵjc = ExtTextcellComponent;
-    exports.ɵjd = treecellMetaData;
-    exports.ɵje = ExtTreecellComponent;
-    exports.ɵjf = widgetcellMetaData;
-    exports.ɵjg = ExtWidgetcellComponent;
-    exports.ɵjh = celleditorMetaData;
-    exports.ɵji = ExtCelleditorComponent;
-    exports.ɵjj = booleancolumnMetaData;
-    exports.ɵjk = ExtBooleancolumnComponent;
-    exports.ɵjl = checkcolumnMetaData;
-    exports.ɵjm = ExtCheckcolumnComponent;
-    exports.ɵjn = gridcolumnMetaData;
-    exports.ɵjo = ExtGridcolumnComponent;
-    exports.ɵjp = columnMetaData;
-    exports.ɵjq = ExtColumnComponent;
-    exports.ɵjr = templatecolumnMetaData;
-    exports.ɵjs = ExtTemplatecolumnComponent;
-    exports.ɵjt = datecolumnMetaData;
-    exports.ɵju = ExtDatecolumnComponent;
-    exports.ɵjv = numbercolumnMetaData;
-    exports.ɵjw = ExtNumbercolumnComponent;
-    exports.ɵjx = rownumbererMetaData;
-    exports.ɵjy = ExtRownumbererComponent;
-    exports.ɵjz = selectioncolumnMetaData;
-    exports.ɵk = ExtCalendar_eventComponent;
-    exports.ɵka = ExtSelectioncolumnComponent;
-    exports.ɵkb = textcolumnMetaData;
-    exports.ɵkc = ExtTextcolumnComponent;
-    exports.ɵkd = treecolumnMetaData;
-    exports.ɵke = ExtTreecolumnComponent;
-    exports.ɵkf = gridMetaData;
-    exports.ɵkg = ExtGridComponent;
-    exports.ɵkh = headercontainerMetaData;
-    exports.ɵki = ExtHeadercontainerComponent;
-    exports.ɵkj = lockedgridMetaData;
-    exports.ɵkk = ExtLockedgridComponent;
-    exports.ɵkl = lockedgridregionMetaData;
-    exports.ɵkm = ExtLockedgridregionComponent;
-    exports.ɵkn = gridcolumnsmenuMetaData;
-    exports.ɵko = ExtGridcolumnsmenuComponent;
-    exports.ɵkp = gridgroupbythismenuitemMetaData;
-    exports.ɵkq = ExtGridgroupbythismenuitemComponent;
-    exports.ɵkr = gridshowingroupsmenuitemMetaData;
-    exports.ɵks = ExtGridshowingroupsmenuitemComponent;
-    exports.ɵkt = gridsortascmenuitemMetaData;
-    exports.ɵku = ExtGridsortascmenuitemComponent;
-    exports.ɵkv = gridsortdescmenuitemMetaData;
-    exports.ɵkw = ExtGridsortdescmenuitemComponent;
-    exports.ɵkx = pagingtoolbarMetaData;
-    exports.ɵky = ExtPagingtoolbarComponent;
-    exports.ɵkz = gridrowMetaData;
-    exports.ɵl = calendar_form_addMetaData;
-    exports.ɵla = ExtGridrowComponent;
-    exports.ɵlb = rowbodyMetaData;
-    exports.ɵlc = ExtRowbodyComponent;
-    exports.ɵld = rowheaderMetaData;
-    exports.ɵle = ExtRowheaderComponent;
-    exports.ɵlf = gridsummaryrowMetaData;
-    exports.ɵlg = ExtGridsummaryrowComponent;
-    exports.ɵlh = treeMetaData;
-    exports.ɵli = ExtTreeComponent;
-    exports.ɵlj = imageMetaData;
-    exports.ɵlk = ExtImageComponent;
-    exports.ɵll = imgMetaData;
-    exports.ɵlm = ExtImgComponent;
-    exports.ɵln = indicatorMetaData;
-    exports.ɵlo = ExtIndicatorComponent;
-    exports.ɵlp = labelMetaData;
-    exports.ɵlq = ExtLabelComponent;
-    exports.ɵlr = treelistMetaData;
-    exports.ɵls = ExtTreelistComponent;
-    exports.ɵlt = treelistitemMetaData;
-    exports.ɵlu = ExtTreelistitemComponent;
-    exports.ɵlv = loadmaskMetaData;
-    exports.ɵlw = ExtLoadmaskComponent;
-    exports.ɵlx = maskMetaData;
-    exports.ɵly = ExtMaskComponent;
-    exports.ɵlz = mediaMetaData;
-    exports.ɵm = ExtCalendar_form_addComponent;
-    exports.ɵma = ExtMediaComponent;
-    exports.ɵmb = menucheckitemMetaData;
-    exports.ɵmc = ExtMenucheckitemComponent;
-    exports.ɵmd = menuitemMetaData;
-    exports.ɵme = ExtMenuitemComponent;
-    exports.ɵmf = menuMetaData;
-    exports.ɵmg = ExtMenuComponent;
-    exports.ɵmh = menuradioitemMetaData;
-    exports.ɵmi = ExtMenuradioitemComponent;
-    exports.ɵmj = menuseparatorMetaData;
-    exports.ɵmk = ExtMenuseparatorComponent;
-    exports.ɵml = messageboxMetaData;
-    exports.ɵmm = ExtMessageboxComponent;
-    exports.ɵmn = navigationviewMetaData;
-    exports.ɵmo = ExtNavigationviewComponent;
-    exports.ɵmp = panelMetaData;
-    exports.ɵmq = ExtPanelComponent;
-    exports.ɵmr = datepanelMetaData;
-    exports.ɵms = ExtDatepanelComponent;
-    exports.ɵmt = datetitleMetaData;
-    exports.ɵmu = ExtDatetitleComponent;
-    exports.ɵmv = panelheaderMetaData;
-    exports.ɵmw = ExtPanelheaderComponent;
-    exports.ɵmx = timepanelMetaData;
-    exports.ɵmy = ExtTimepanelComponent;
-    exports.ɵmz = paneltitleMetaData;
-    exports.ɵn = calendar_calendar_pickerMetaData;
-    exports.ɵna = ExtPaneltitleComponent;
-    exports.ɵnb = yearpickerMetaData;
-    exports.ɵnc = ExtYearpickerComponent;
-    exports.ɵnd = datepickerMetaData;
-    exports.ɵne = ExtDatepickerComponent;
-    exports.ɵnf = pickerMetaData;
-    exports.ɵng = ExtPickerComponent;
-    exports.ɵnh = selectpickerMetaData;
-    exports.ɵni = ExtSelectpickerComponent;
-    exports.ɵnj = pickerslotMetaData;
-    exports.ɵnk = ExtPickerslotComponent;
-    exports.ɵnl = tabletpickerMetaData;
-    exports.ɵnm = ExtTabletpickerComponent;
-    exports.ɵnn = pivotgridcellMetaData;
-    exports.ɵno = ExtPivotgridcellComponent;
-    exports.ɵnp = pivotgridgroupcellMetaData;
-    exports.ɵnq = ExtPivotgridgroupcellComponent;
-    exports.ɵnr = pivotd3containerMetaData;
-    exports.ɵns = ExtPivotd3containerComponent;
-    exports.ɵnt = pivotheatmapMetaData;
-    exports.ɵnu = ExtPivotheatmapComponent;
-    exports.ɵnv = pivottreemapMetaData;
-    exports.ɵnw = ExtPivottreemapComponent;
-    exports.ɵnx = pivotgridMetaData;
-    exports.ɵny = ExtPivotgridComponent;
-    exports.ɵnz = pivotconfigfieldMetaData;
-    exports.ɵo = ExtCalendar_calendar_pickerComponent;
-    exports.ɵoa = ExtPivotconfigfieldComponent;
-    exports.ɵob = pivotconfigcontainerMetaData;
-    exports.ɵoc = ExtPivotconfigcontainerComponent;
-    exports.ɵod = pivotconfigformMetaData;
-    exports.ɵoe = ExtPivotconfigformComponent;
-    exports.ɵof = pivotconfigpanelMetaData;
-    exports.ɵog = ExtPivotconfigpanelComponent;
-    exports.ɵoh = pivotsettingsMetaData;
-    exports.ɵoi = ExtPivotsettingsComponent;
-    exports.ɵoj = pivotrangeeditorMetaData;
-    exports.ɵok = ExtPivotrangeeditorComponent;
-    exports.ɵol = pivotgridrowMetaData;
-    exports.ɵom = ExtPivotgridrowComponent;
-    exports.ɵon = progressMetaData;
-    exports.ɵoo = ExtProgressComponent;
-    exports.ɵop = progressbarwidgetMetaData;
-    exports.ɵoq = ExtProgressbarwidgetComponent;
-    exports.ɵor = segmentedbuttonMetaData;
-    exports.ɵos = ExtSegmentedbuttonComponent;
-    exports.ɵot = sheetMetaData;
-    exports.ɵou = ExtSheetComponent;
-    exports.ɵov = sliderMetaData;
-    exports.ɵow = ExtSliderComponent;
-    exports.ɵox = thumbMetaData;
-    exports.ɵoy = ExtThumbComponent;
-    exports.ɵoz = togglesliderMetaData;
-    exports.ɵp = calendar_form_editMetaData;
-    exports.ɵpa = ExtTogglesliderComponent;
-    exports.ɵpb = spacerMetaData;
-    exports.ɵpc = ExtSpacerComponent;
-    exports.ɵpd = sparklinebarMetaData;
-    exports.ɵpe = ExtSparklinebarComponent;
-    exports.ɵpf = sparklineMetaData;
-    exports.ɵpg = ExtSparklineComponent;
-    exports.ɵph = sparklineboxMetaData;
-    exports.ɵpi = ExtSparklineboxComponent;
-    exports.ɵpj = sparklinebulletMetaData;
-    exports.ɵpk = ExtSparklinebulletComponent;
-    exports.ɵpl = sparklinediscreteMetaData;
-    exports.ɵpm = ExtSparklinediscreteComponent;
-    exports.ɵpn = sparklinelineMetaData;
-    exports.ɵpo = ExtSparklinelineComponent;
-    exports.ɵpp = sparklinepieMetaData;
-    exports.ɵpq = ExtSparklinepieComponent;
-    exports.ɵpr = sparklinetristateMetaData;
-    exports.ɵps = ExtSparklinetristateComponent;
-    exports.ɵpt = splitbuttonMetaData;
-    exports.ɵpu = ExtSplitbuttonComponent;
-    exports.ɵpv = tabbarMetaData;
-    exports.ɵpw = ExtTabbarComponent;
-    exports.ɵpx = tabpanelMetaData;
-    exports.ɵpy = ExtTabpanelComponent;
-    exports.ɵpz = tabMetaData;
-    exports.ɵq = ExtCalendar_form_editComponent;
-    exports.ɵqa = ExtTabComponent;
-    exports.ɵqb = tooltipMetaData;
-    exports.ɵqc = ExtTooltipComponent;
-    exports.ɵqd = titleMetaData;
-    exports.ɵqe = ExtTitleComponent;
-    exports.ɵqf = titlebarMetaData;
-    exports.ɵqg = ExtTitlebarComponent;
-    exports.ɵqh = toolMetaData;
-    exports.ɵqi = ExtToolComponent;
-    exports.ɵqj = paneltoolMetaData;
-    exports.ɵqk = ExtPaneltoolComponent;
-    exports.ɵql = toolbarMetaData;
-    exports.ɵqm = ExtToolbarComponent;
-    exports.ɵqn = colorbuttonMetaData;
-    exports.ɵqo = ExtColorbuttonComponent;
-    exports.ɵqp = colorpickercolorpreviewMetaData;
-    exports.ɵqq = ExtColorpickercolorpreviewComponent;
-    exports.ɵqr = colorfieldMetaData;
-    exports.ɵqs = ExtColorfieldComponent;
-    exports.ɵqt = colorselectorMetaData;
-    exports.ɵqu = ExtColorselectorComponent;
-    exports.ɵqv = gaugeMetaData;
-    exports.ɵqw = ExtGaugeComponent;
-    exports.ɵqx = mapMetaData;
-    exports.ɵqy = ExtMapComponent;
-    exports.ɵqz = google_mapMetaData;
-    exports.ɵr = calendar_timefieldMetaData;
-    exports.ɵra = ExtGoogle_mapComponent;
-    exports.ɵrb = ratingMetaData;
-    exports.ɵrc = ExtRatingComponent;
-    exports.ɵrd = videoMetaData;
-    exports.ɵre = ExtVideoComponent;
-    exports.ɵrf = viewportMetaData;
-    exports.ɵrg = ExtViewportComponent;
-    exports.ɵrh = widgetMetaData;
-    exports.ɵri = ExtWidgetComponent;
-    exports.ɵs = ExtCalendar_timefieldComponent;
-    exports.ɵt = calendar_daysheaderMetaData;
-    exports.ɵu = ExtCalendar_daysheaderComponent;
-    exports.ɵv = calendar_weeksheaderMetaData;
-    exports.ɵw = ExtCalendar_weeksheaderComponent;
-    exports.ɵx = calendar_listMetaData;
-    exports.ɵy = ExtCalendar_listComponent;
-    exports.ɵz = calendar_dayMetaData;
+    exports.ɵga = ExtDatepickerfieldComponent;
+    exports.ɵgb = datepickernativefieldMetaData;
+    exports.ɵgc = ExtDatepickernativefieldComponent;
+    exports.ɵgd = displayfieldMetaData;
+    exports.ɵge = ExtDisplayfieldComponent;
+    exports.ɵgf = emailfieldMetaData;
+    exports.ɵgg = ExtEmailfieldComponent;
+    exports.ɵgh = fieldMetaData;
+    exports.ɵgi = ExtFieldComponent;
+    exports.ɵgj = groupcontainerMetaData;
+    exports.ɵgk = ExtGroupcontainerComponent;
+    exports.ɵgl = filefieldMetaData;
+    exports.ɵgm = ExtFilefieldComponent;
+    exports.ɵgn = filebuttonMetaData;
+    exports.ɵgo = ExtFilebuttonComponent;
+    exports.ɵgp = hiddenfieldMetaData;
+    exports.ɵgq = ExtHiddenfieldComponent;
+    exports.ɵgr = inputfieldMetaData;
+    exports.ɵgs = ExtInputfieldComponent;
+    exports.ɵgt = numberfieldMetaData;
+    exports.ɵgu = ExtNumberfieldComponent;
+    exports.ɵgv = fieldpanelMetaData;
+    exports.ɵgw = ExtFieldpanelComponent;
+    exports.ɵgx = passwordfieldMetaData;
+    exports.ɵgy = ExtPasswordfieldComponent;
+    exports.ɵgz = pickerfieldMetaData;
+    exports.ɵh = breadcrumbbarMetaData;
+    exports.ɵha = ExtPickerfieldComponent;
+    exports.ɵhb = radioMetaData;
+    exports.ɵhc = ExtRadioComponent;
+    exports.ɵhd = radiofieldMetaData;
+    exports.ɵhe = ExtRadiofieldComponent;
+    exports.ɵhf = radiogroupMetaData;
+    exports.ɵhg = ExtRadiogroupComponent;
+    exports.ɵhh = searchfieldMetaData;
+    exports.ɵhi = ExtSearchfieldComponent;
+    exports.ɵhj = selectfieldMetaData;
+    exports.ɵhk = ExtSelectfieldComponent;
+    exports.ɵhl = singlesliderfieldMetaData;
+    exports.ɵhm = ExtSinglesliderfieldComponent;
+    exports.ɵhn = sliderfieldMetaData;
+    exports.ɵho = ExtSliderfieldComponent;
+    exports.ɵhp = spinnerfieldMetaData;
+    exports.ɵhq = ExtSpinnerfieldComponent;
+    exports.ɵhr = textfieldMetaData;
+    exports.ɵhs = ExtTextfieldComponent;
+    exports.ɵht = textareafieldMetaData;
+    exports.ɵhu = ExtTextareafieldComponent;
+    exports.ɵhv = timefieldMetaData;
+    exports.ɵhw = ExtTimefieldComponent;
+    exports.ɵhx = togglefieldMetaData;
+    exports.ɵhy = ExtTogglefieldComponent;
+    exports.ɵhz = cleartriggerMetaData;
+    exports.ɵi = ExtBreadcrumbbarComponent;
+    exports.ɵia = ExtCleartriggerComponent;
+    exports.ɵib = datetriggerMetaData;
+    exports.ɵic = ExtDatetriggerComponent;
+    exports.ɵid = expandtriggerMetaData;
+    exports.ɵie = ExtExpandtriggerComponent;
+    exports.ɵif = menutriggerMetaData;
+    exports.ɵig = ExtMenutriggerComponent;
+    exports.ɵih = revealtriggerMetaData;
+    exports.ɵii = ExtRevealtriggerComponent;
+    exports.ɵij = spindowntriggerMetaData;
+    exports.ɵik = ExtSpindowntriggerComponent;
+    exports.ɵil = spinuptriggerMetaData;
+    exports.ɵim = ExtSpinuptriggerComponent;
+    exports.ɵin = timetriggerMetaData;
+    exports.ɵio = ExtTimetriggerComponent;
+    exports.ɵip = triggerMetaData;
+    exports.ɵiq = ExtTriggerComponent;
+    exports.ɵir = urlfieldMetaData;
+    exports.ɵis = ExtUrlfieldComponent;
+    exports.ɵit = fieldsetMetaData;
+    exports.ɵiu = ExtFieldsetComponent;
+    exports.ɵiv = formpanelMetaData;
+    exports.ɵiw = ExtFormpanelComponent;
+    exports.ɵix = gridcellbaseMetaData;
+    exports.ɵiy = ExtGridcellbaseComponent;
+    exports.ɵiz = booleancellMetaData;
+    exports.ɵj = buttonMetaData;
+    exports.ɵja = ExtBooleancellComponent;
+    exports.ɵjb = gridcellMetaData;
+    exports.ɵjc = ExtGridcellComponent;
+    exports.ɵjd = checkcellMetaData;
+    exports.ɵje = ExtCheckcellComponent;
+    exports.ɵjf = datecellMetaData;
+    exports.ɵjg = ExtDatecellComponent;
+    exports.ɵjh = numbercellMetaData;
+    exports.ɵji = ExtNumbercellComponent;
+    exports.ɵjj = rownumberercellMetaData;
+    exports.ɵjk = ExtRownumberercellComponent;
+    exports.ɵjl = textcellMetaData;
+    exports.ɵjm = ExtTextcellComponent;
+    exports.ɵjn = treecellMetaData;
+    exports.ɵjo = ExtTreecellComponent;
+    exports.ɵjp = widgetcellMetaData;
+    exports.ɵjq = ExtWidgetcellComponent;
+    exports.ɵjr = celleditorMetaData;
+    exports.ɵjs = ExtCelleditorComponent;
+    exports.ɵjt = booleancolumnMetaData;
+    exports.ɵju = ExtBooleancolumnComponent;
+    exports.ɵjv = checkcolumnMetaData;
+    exports.ɵjw = ExtCheckcolumnComponent;
+    exports.ɵjx = gridcolumnMetaData;
+    exports.ɵjy = ExtGridcolumnComponent;
+    exports.ɵjz = columnMetaData;
+    exports.ɵk = ExtButtonComponent;
+    exports.ɵka = ExtColumnComponent;
+    exports.ɵkb = templatecolumnMetaData;
+    exports.ɵkc = ExtTemplatecolumnComponent;
+    exports.ɵkd = datecolumnMetaData;
+    exports.ɵke = ExtDatecolumnComponent;
+    exports.ɵkf = dragcolumnMetaData;
+    exports.ɵkg = ExtDragcolumnComponent;
+    exports.ɵkh = numbercolumnMetaData;
+    exports.ɵki = ExtNumbercolumnComponent;
+    exports.ɵkj = rownumbererMetaData;
+    exports.ɵkk = ExtRownumbererComponent;
+    exports.ɵkl = selectioncolumnMetaData;
+    exports.ɵkm = ExtSelectioncolumnComponent;
+    exports.ɵkn = textcolumnMetaData;
+    exports.ɵko = ExtTextcolumnComponent;
+    exports.ɵkp = treecolumnMetaData;
+    exports.ɵkq = ExtTreecolumnComponent;
+    exports.ɵkr = gridMetaData;
+    exports.ɵks = ExtGridComponent;
+    exports.ɵkt = headercontainerMetaData;
+    exports.ɵku = ExtHeadercontainerComponent;
+    exports.ɵkv = lockedgridMetaData;
+    exports.ɵkw = ExtLockedgridComponent;
+    exports.ɵkx = lockedgridregionMetaData;
+    exports.ɵky = ExtLockedgridregionComponent;
+    exports.ɵkz = gridcolumnsmenuMetaData;
+    exports.ɵl = calendar_eventMetaData;
+    exports.ɵla = ExtGridcolumnsmenuComponent;
+    exports.ɵlb = gridgroupbythismenuitemMetaData;
+    exports.ɵlc = ExtGridgroupbythismenuitemComponent;
+    exports.ɵld = gridshowingroupsmenuitemMetaData;
+    exports.ɵle = ExtGridshowingroupsmenuitemComponent;
+    exports.ɵlf = gridsortascmenuitemMetaData;
+    exports.ɵlg = ExtGridsortascmenuitemComponent;
+    exports.ɵlh = gridsortdescmenuitemMetaData;
+    exports.ɵli = ExtGridsortdescmenuitemComponent;
+    exports.ɵlj = pagingtoolbarMetaData;
+    exports.ɵlk = ExtPagingtoolbarComponent;
+    exports.ɵll = gridrowMetaData;
+    exports.ɵlm = ExtGridrowComponent;
+    exports.ɵln = rowbodyMetaData;
+    exports.ɵlo = ExtRowbodyComponent;
+    exports.ɵlp = roweditorbarMetaData;
+    exports.ɵlq = ExtRoweditorbarComponent;
+    exports.ɵlr = roweditorcellMetaData;
+    exports.ɵls = ExtRoweditorcellComponent;
+    exports.ɵlt = roweditorMetaData;
+    exports.ɵlu = ExtRoweditorComponent;
+    exports.ɵlv = roweditorgapMetaData;
+    exports.ɵlw = ExtRoweditorgapComponent;
+    exports.ɵlx = rowheaderMetaData;
+    exports.ɵly = ExtRowheaderComponent;
+    exports.ɵlz = gridsummaryrowMetaData;
+    exports.ɵm = ExtCalendar_eventComponent;
+    exports.ɵma = ExtGridsummaryrowComponent;
+    exports.ɵmb = treeMetaData;
+    exports.ɵmc = ExtTreeComponent;
+    exports.ɵmd = imageMetaData;
+    exports.ɵme = ExtImageComponent;
+    exports.ɵmf = imgMetaData;
+    exports.ɵmg = ExtImgComponent;
+    exports.ɵmh = indicatorMetaData;
+    exports.ɵmi = ExtIndicatorComponent;
+    exports.ɵmj = labelMetaData;
+    exports.ɵmk = ExtLabelComponent;
+    exports.ɵml = treelistMetaData;
+    exports.ɵmm = ExtTreelistComponent;
+    exports.ɵmn = treelistitemMetaData;
+    exports.ɵmo = ExtTreelistitemComponent;
+    exports.ɵmp = loadmaskMetaData;
+    exports.ɵmq = ExtLoadmaskComponent;
+    exports.ɵmr = maskMetaData;
+    exports.ɵms = ExtMaskComponent;
+    exports.ɵmt = mediaMetaData;
+    exports.ɵmu = ExtMediaComponent;
+    exports.ɵmv = menucheckitemMetaData;
+    exports.ɵmw = ExtMenucheckitemComponent;
+    exports.ɵmx = menuitemMetaData;
+    exports.ɵmy = ExtMenuitemComponent;
+    exports.ɵmz = menuMetaData;
+    exports.ɵn = calendar_form_addMetaData;
+    exports.ɵna = ExtMenuComponent;
+    exports.ɵnb = menuradioitemMetaData;
+    exports.ɵnc = ExtMenuradioitemComponent;
+    exports.ɵnd = menuseparatorMetaData;
+    exports.ɵne = ExtMenuseparatorComponent;
+    exports.ɵnf = messageboxMetaData;
+    exports.ɵng = ExtMessageboxComponent;
+    exports.ɵnh = navigationviewMetaData;
+    exports.ɵni = ExtNavigationviewComponent;
+    exports.ɵnj = panelMetaData;
+    exports.ɵnk = ExtPanelComponent;
+    exports.ɵnl = accordionMetaData;
+    exports.ɵnm = ExtAccordionComponent;
+    exports.ɵnn = datepanelMetaData;
+    exports.ɵno = ExtDatepanelComponent;
+    exports.ɵnp = datetitleMetaData;
+    exports.ɵnq = ExtDatetitleComponent;
+    exports.ɵnr = panelheaderMetaData;
+    exports.ɵns = ExtPanelheaderComponent;
+    exports.ɵnt = timepanelMetaData;
+    exports.ɵnu = ExtTimepanelComponent;
+    exports.ɵnv = paneltitleMetaData;
+    exports.ɵnw = ExtPaneltitleComponent;
+    exports.ɵnx = yearpickerMetaData;
+    exports.ɵny = ExtYearpickerComponent;
+    exports.ɵnz = datepickerMetaData;
+    exports.ɵo = ExtCalendar_form_addComponent;
+    exports.ɵoa = ExtDatepickerComponent;
+    exports.ɵob = pickerMetaData;
+    exports.ɵoc = ExtPickerComponent;
+    exports.ɵod = selectpickerMetaData;
+    exports.ɵoe = ExtSelectpickerComponent;
+    exports.ɵof = pickerslotMetaData;
+    exports.ɵog = ExtPickerslotComponent;
+    exports.ɵoh = tabletpickerMetaData;
+    exports.ɵoi = ExtTabletpickerComponent;
+    exports.ɵoj = pivotgridcellMetaData;
+    exports.ɵok = ExtPivotgridcellComponent;
+    exports.ɵol = pivotgridgroupcellMetaData;
+    exports.ɵom = ExtPivotgridgroupcellComponent;
+    exports.ɵon = pivotd3containerMetaData;
+    exports.ɵoo = ExtPivotd3containerComponent;
+    exports.ɵop = pivotheatmapMetaData;
+    exports.ɵoq = ExtPivotheatmapComponent;
+    exports.ɵor = pivottreemapMetaData;
+    exports.ɵos = ExtPivottreemapComponent;
+    exports.ɵot = pivotgridMetaData;
+    exports.ɵou = ExtPivotgridComponent;
+    exports.ɵov = pivotconfigfieldMetaData;
+    exports.ɵow = ExtPivotconfigfieldComponent;
+    exports.ɵox = pivotconfigcontainerMetaData;
+    exports.ɵoy = ExtPivotconfigcontainerComponent;
+    exports.ɵoz = pivotconfigformMetaData;
+    exports.ɵp = calendar_calendar_pickerMetaData;
+    exports.ɵpa = ExtPivotconfigformComponent;
+    exports.ɵpb = pivotconfigpanelMetaData;
+    exports.ɵpc = ExtPivotconfigpanelComponent;
+    exports.ɵpd = pivotsettingsMetaData;
+    exports.ɵpe = ExtPivotsettingsComponent;
+    exports.ɵpf = pivotrangeeditorMetaData;
+    exports.ɵpg = ExtPivotrangeeditorComponent;
+    exports.ɵph = pivotgridrowMetaData;
+    exports.ɵpi = ExtPivotgridrowComponent;
+    exports.ɵpj = progressMetaData;
+    exports.ɵpk = ExtProgressComponent;
+    exports.ɵpl = progressbarwidgetMetaData;
+    exports.ɵpm = ExtProgressbarwidgetComponent;
+    exports.ɵpn = segmentedbuttonMetaData;
+    exports.ɵpo = ExtSegmentedbuttonComponent;
+    exports.ɵpp = sheetMetaData;
+    exports.ɵpq = ExtSheetComponent;
+    exports.ɵpr = sliderMetaData;
+    exports.ɵps = ExtSliderComponent;
+    exports.ɵpt = thumbMetaData;
+    exports.ɵpu = ExtThumbComponent;
+    exports.ɵpv = togglesliderMetaData;
+    exports.ɵpw = ExtTogglesliderComponent;
+    exports.ɵpx = spacerMetaData;
+    exports.ɵpy = ExtSpacerComponent;
+    exports.ɵpz = sparklinebarMetaData;
+    exports.ɵq = ExtCalendar_calendar_pickerComponent;
+    exports.ɵqa = ExtSparklinebarComponent;
+    exports.ɵqb = sparklineMetaData;
+    exports.ɵqc = ExtSparklineComponent;
+    exports.ɵqd = sparklineboxMetaData;
+    exports.ɵqe = ExtSparklineboxComponent;
+    exports.ɵqf = sparklinebulletMetaData;
+    exports.ɵqg = ExtSparklinebulletComponent;
+    exports.ɵqh = sparklinediscreteMetaData;
+    exports.ɵqi = ExtSparklinediscreteComponent;
+    exports.ɵqj = sparklinelineMetaData;
+    exports.ɵqk = ExtSparklinelineComponent;
+    exports.ɵql = sparklinepieMetaData;
+    exports.ɵqm = ExtSparklinepieComponent;
+    exports.ɵqn = sparklinetristateMetaData;
+    exports.ɵqo = ExtSparklinetristateComponent;
+    exports.ɵqp = splitbuttonMetaData;
+    exports.ɵqq = ExtSplitbuttonComponent;
+    exports.ɵqr = tabbarMetaData;
+    exports.ɵqs = ExtTabbarComponent;
+    exports.ɵqt = tabpanelMetaData;
+    exports.ɵqu = ExtTabpanelComponent;
+    exports.ɵqv = tabMetaData;
+    exports.ɵqw = ExtTabComponent;
+    exports.ɵqx = tooltipMetaData;
+    exports.ɵqy = ExtTooltipComponent;
+    exports.ɵqz = titleMetaData;
+    exports.ɵr = calendar_form_editMetaData;
+    exports.ɵra = ExtTitleComponent;
+    exports.ɵrb = titlebarMetaData;
+    exports.ɵrc = ExtTitlebarComponent;
+    exports.ɵrd = toolMetaData;
+    exports.ɵre = ExtToolComponent;
+    exports.ɵrf = paneltoolMetaData;
+    exports.ɵrg = ExtPaneltoolComponent;
+    exports.ɵrh = toolbarMetaData;
+    exports.ɵri = ExtToolbarComponent;
+    exports.ɵrj = colorbuttonMetaData;
+    exports.ɵrk = ExtColorbuttonComponent;
+    exports.ɵrl = colorpickercolorpreviewMetaData;
+    exports.ɵrm = ExtColorpickercolorpreviewComponent;
+    exports.ɵrn = colorfieldMetaData;
+    exports.ɵro = ExtColorfieldComponent;
+    exports.ɵrp = colorselectorMetaData;
+    exports.ɵrq = ExtColorselectorComponent;
+    exports.ɵrr = gaugeMetaData;
+    exports.ɵrs = ExtGaugeComponent;
+    exports.ɵrt = mapMetaData;
+    exports.ɵru = ExtMapComponent;
+    exports.ɵrv = google_mapMetaData;
+    exports.ɵrw = ExtGoogle_mapComponent;
+    exports.ɵrx = ratingMetaData;
+    exports.ɵry = ExtRatingComponent;
+    exports.ɵrz = videoMetaData;
+    exports.ɵs = ExtCalendar_form_editComponent;
+    exports.ɵsa = ExtVideoComponent;
+    exports.ɵsb = viewportMetaData;
+    exports.ɵsc = ExtViewportComponent;
+    exports.ɵsd = widgetMetaData;
+    exports.ɵse = ExtWidgetComponent;
+    exports.ɵt = calendar_timefieldMetaData;
+    exports.ɵu = ExtCalendar_timefieldComponent;
+    exports.ɵv = calendar_daysheaderMetaData;
+    exports.ɵw = ExtCalendar_daysheaderComponent;
+    exports.ɵx = calendar_weeksheaderMetaData;
+    exports.ɵy = ExtCalendar_weeksheaderComponent;
+    exports.ɵz = calendar_listMetaData;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

@@ -15,6 +15,7 @@ import { base } from './base';
 export class treelistitemMetaData {
   public static XTYPE: string = 'treelistitem';
   public static PROPERTIES: string[] = [
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -27,7 +28,6 @@ export class treelistitemMetaData {
     'controller',
     'defaultListenerScope',
     'disabled',
-    'eventHandlers',
     'expandable',
     'expanded',
     'flex',
@@ -47,6 +47,7 @@ export class treelistitemMetaData {
     'leaf',
     'listeners',
     'loading',
+    'margin',
     'name',
     'nameable',
     'node',
@@ -63,7 +64,6 @@ export class treelistitemMetaData {
     'rowClsProperty',
     'selected',
     'selectedParent',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -88,38 +88,38 @@ export class treelistitemMetaData {
     'config'
 ];
   public static EVENTS: any[] = [
-		{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'beforetofront',parameters:'treelistitem'},
-		{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
-		{name:'blur',parameters:'treelistitem,event'},
-		{name:'disabledchange',parameters:'sender,value,oldValue'},
-		{name:'focus',parameters:'treelistitem,event'},
-		{name:'focusenter',parameters:'treelistitem,event'},
-		{name:'focusleave',parameters:'treelistitem,event'},
-		{name:'heightchange',parameters:'sender,value,oldValue'},
-		{name:'hiddenchange',parameters:'sender,value,oldValue'},
-		{name:'tofront',parameters:'treelistitem'},
-		{name:'widthchange',parameters:'sender,value,oldValue'},
-		{name:'ready',parameters:''}
+{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforetofront',parameters:'treelistitem'},
+{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
+{name:'blur',parameters:'treelistitem,event'},
+{name:'disabledchange',parameters:'sender,value,oldValue'},
+{name:'focus',parameters:'treelistitem,event'},
+{name:'focusenter',parameters:'treelistitem,event'},
+{name:'focusleave',parameters:'treelistitem,event'},
+{name:'heightchange',parameters:'sender,value,oldValue'},
+{name:'hiddenchange',parameters:'sender,value,oldValue'},
+{name:'tofront',parameters:'treelistitem'},
+{name:'widthchange',parameters:'sender,value,oldValue'},
+{name:'ready',parameters:''}
 ];
   public static EVENTNAMES: string[] = [
-		'beforedisabledchange',
-		'beforeheightchange',
-		'beforehiddenchange',
-		'beforetofront',
-		'beforewidthchange',
-		'blur',
-		'disabledchange',
-		'focus',
-		'focusenter',
-		'focusleave',
-		'heightchange',
-		'hiddenchange',
-		'tofront',
-		'widthchange',
-		'ready'
+'beforedisabledchange',
+'beforeheightchange',
+'beforehiddenchange',
+'beforetofront',
+'beforewidthchange',
+'blur',
+'disabledchange',
+'focus',
+'focusenter',
+'focusleave',
+'heightchange',
+'hiddenchange',
+'tofront',
+'widthchange',
+'ready'
 ];
 }
 @Component({
