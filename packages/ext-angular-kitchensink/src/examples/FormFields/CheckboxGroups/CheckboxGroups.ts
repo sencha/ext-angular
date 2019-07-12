@@ -2,12 +2,12 @@ declare var Ext: any;
 import { Component } from '@angular/core'
 
 @Component({
-  selector: 'checkboxfield-component',
-  templateUrl: "./CheckBoxField.html",
+  selector: 'checkboxgroups-component',
+  templateUrl: "./CheckboxGroups.html",
   styles: [``]
 })
 
-export class CheckBoxFieldComponent {
+export class CheckBoxGroupsComponent {
   isPhone = Ext.os.is.Phone;
   top = !this.isPhone ? '10' : null
   left = !this.isPhone ? '10' : null
