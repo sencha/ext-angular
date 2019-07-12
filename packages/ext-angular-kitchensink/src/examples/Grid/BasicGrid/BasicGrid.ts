@@ -4,6 +4,9 @@ import { GridService } from '../Grid.service';
 import { model } from '../CompanyModel';
 
 Ext.require({"xtype":"renderercell"})
+Ext.require([
+  'Ext.grid.plugin.HeaderReorder'
+]);
 
 @Component({
   selector: 'basicgrid-component',
