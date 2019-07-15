@@ -78,6 +78,7 @@ import {EditableGridComponent} from '../examples/Grid/EditableGrid/EditableGrid'
 import {GroupedGridComponent} from '../examples/Grid/GroupedGrid/GroupedGrid';
 import {LockingGridComponent} from '../examples/Grid/LockingGrid/LockingGrid';
 import {XMLGridComponent} from '../examples/Grid/XMLGrid/XMLGrid';
+import {RowEditingComponent} from '../examples/Grid/RowEditing/RowEditing';
 
 import {GridToolsComponent} from '../examples/Grid/AddonsDecorations/GridTools/GridTools';
 import {RowBodyComponent} from '../examples/Grid/AddonsDecorations/RowBody/RowBody';
@@ -308,6 +309,7 @@ const routes: ExtAngularRoutes = [
   { path: 'grids/core_features/locking_grid', component: LockingGridComponent, text: 'Locking Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/core_features/editable_grid', component: EditableGridComponent, text: 'Editable Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/core_features/xml_grid', component: XMLGridComponent, text: 'XML Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  { path: 'grids/core_features/editable_row', component: RowEditingComponent, text: 'Row Editing', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
   { path: 'grids/addons/grid_tools', component: GridToolsComponent, text: 'Grid Tools', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/addons/row_expander', component: RowExpanderComponent, text: 'Row Expander', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -515,6 +517,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
     GroupedGridComponent,
     LockingGridComponent,
     XMLGridComponent,
+    RowEditingComponent,
 
     GridToolsComponent,
     RowBodyComponent,
