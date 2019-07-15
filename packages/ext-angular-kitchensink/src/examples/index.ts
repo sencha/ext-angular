@@ -15,10 +15,9 @@ import {SheetComponent} from "./Sheet/Sheet";
 import {RippleComponent} from './Ripple/Ripple';
 import {ProgressBarComponent} from './ProgressBar/ProgressBar';
 import {TitleBarComponent} from './TitleBar/TitleBar';
-import {ToolBarComponent} from './ToolBar/ToolBar';
-import {ToolTipComponent} from './ToolTip/ToolTip';
+import {ToolBarComponent} from './ToolBar/ToolBar/ToolBar';
+import {BreadcrumbToolBarComponent} from './ToolBar/BreadcrumbToolbar/Breadcrumbtoolbar';import {ToolTipComponent} from './ToolTip/ToolTip';
 import {ColorPickerComponent} from './ColorPicker/ColorPicker';
-
 import {EditableTreeComponent} from './Trees/EditableTree/EditableTree';
 import {HeterogeneousTreeComponent} from './Trees/HeterogeneousTree/HeterogeneousTree';
 import {TreeComponent} from './Trees/Tree/Tree';
@@ -296,7 +295,10 @@ const treeRoot = {
             { text: 'TabBar', component: TabBarComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Tab-Bar' }
         ]},
         { text: 'TitleBar', component: TitleBarComponent, navIcon: 'icon-Title-Bar' },
-        { text: 'Toolbar', component: ToolBarComponent, navIcon: 'icon-toolbar' },
+        { text: 'Toolbar', navIcon: 'icon-toolbar',children:[
+            { text: 'Toolbar', component: ToolBarComponent , navIcon: 'icon-toolbar'},
+            { text: 'Breadcrumb Toolbar', component: BreadcrumbToolBarComponent , navIcon: 'icon-toolbar'}
+        ] },
         { text: 'ToolTip', component: ToolTipComponent, layout: 'center', navIcon: 'icon-tooltips'  },
         { text: 'Touch Events', component: TouchEventsComponent, navIcon: 'icon-touch-events' },
         //{ text: 'Transition', component: Transition, navIcon: 'icon-Transition' },
