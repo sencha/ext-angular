@@ -31,8 +31,8 @@ import {CalendarTimezoneSupportComponent} from "../examples/Calendar/TimezoneSup
 import {SheetComponent} from "../examples/Sheet/Sheet"
 import {ProgressBarComponent} from "../examples/ProgressBar/ProgressBar"
 import {TitleBarComponent} from "../examples/TitleBar/TitleBar"
-import {ToolBarComponent} from "../examples/ToolBar/ToolBar/ToolBar"
-import {BreadcrumbToolBarComponent} from "../examples/ToolBar/BreadcrumbToolbar/Breadcrumbtoolbar"
+import {ToolBarComponent} from "../examples/ToolBars/ToolBar/ToolBar"
+import {BreadcrumbToolBarComponent} from "../examples/ToolBars/BreadcrumbToolbar/BreadcrumbToolbar"
 import {ToolTipComponent} from "../examples/ToolTip/ToolTip"
 import {ColorPickerComponent} from '../examples/ColorPicker/ColorPicker';
 
