@@ -38,6 +38,7 @@ import {ColorPickerComponent} from '../examples/ColorPicker/ColorPicker';
 
 import {NumberFieldComponent} from "../examples/FormFields/NumberField/NumberField"
 import {CheckBoxFieldComponent} from '../examples/FormFields/CheckBoxField/CheckBoxField'
+import {CheckBoxGroupsComponent} from '../examples/FormFields/CheckboxGroups/CheckboxGroups';
 import {ComboBoxFieldComponent} from "../examples/FormFields/ComboBoxField/ComboBoxField"
 import {MultiSelectComboBoxFieldComponent} from '../examples/FormFields/MultiSelectComboBoxField/MultiSelectComboBoxField'
 import {FormPanelComponent} from "../examples/FormFields/FormPanel/FormPanel"
@@ -341,6 +342,7 @@ const routes: ExtAngularRoutes = [
 
   { path: 'components/forms/checkboxfield', component: CheckBoxFieldComponent, text: 'CheckBoxField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/forms/comboboxfield', component: ComboBoxFieldComponent, text: 'ComboBoxField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  { path: 'components/forms/checkboxgroups', component: CheckBoxGroupsComponent, text: 'CheckBoxGroups', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/forms/multiselect_comboboxfield', component: MultiSelectComboBoxFieldComponent, text: 'MultiSelectComboBoxField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/forms/containerfield', component: ContainerFieldComponent, text: 'ContainerField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/forms/datepickerfield', component: DatePickerFieldComponent, text: 'DatePickerField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -545,6 +547,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
     StockTickerComponent,
 
     CheckBoxFieldComponent,
+    CheckBoxGroupsComponent,
     ComboBoxFieldComponent,
     MultiSelectComboBoxFieldComponent,
     ContainerFieldComponent,

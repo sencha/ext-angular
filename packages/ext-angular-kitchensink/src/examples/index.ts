@@ -53,6 +53,7 @@ import {StockTickerComponent} from './Grid/AdvancedFeatures/StockTicker/StockTic
 
 
 import {CheckBoxFieldComponent} from './FormFields/CheckBoxField/CheckBoxField';
+import {CheckBoxGroupsComponent} from './FormFields/CheckboxGroups/CheckboxGroups';
 import {ComboBoxFieldComponent} from './FormFields/ComboBoxField/ComboBoxField';
 import {MultiSelectComboBoxFieldComponent} from './FormFields/MultiSelectComboBoxField/MultiSelectComboBoxField'
 import {ContainerFieldComponent} from './FormFields/ContainerField/ContainerField';
@@ -220,6 +221,7 @@ const treeRoot = {
         { text: 'Draw', component: DrawComponent, layout: 'center', navIcon: 'icon-drawing' },
         { text: 'Forms', navIcon: 'icon-forms', children: [
           { text: 'CheckBoxField', component: CheckBoxFieldComponent, layout: 'center', navIcon: 'icon-Forms-CheckBoxField'  },
+          { text: 'CheckboxGroups', component: CheckBoxGroupsComponent, layout: 'center', navIcon: 'icon-form-checkboxgroup'  },
           { text: 'ComboBoxField', component: ComboBoxFieldComponent, layout: 'center', navIcon: 'icon-Forms-ComboBoxField'  },
           { text: 'MultiSelect ComboBoxField', component: MultiSelectComboBoxFieldComponent, layout: 'center', navIcon: 'icon-Forms-ComboBoxField'  },
           { text: 'ContainerField', component: ContainerFieldComponent, layout: Ext.os.is.Phone ? 'auto' : 'center', navIcon: 'icon-Forms-ContainerField'  },

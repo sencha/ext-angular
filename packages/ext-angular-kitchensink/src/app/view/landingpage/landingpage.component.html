@@ -10,7 +10,7 @@
   (tap)="toggleCode()">
 </button>
 <!-- code button ends-->
-  
+
 <panel layout="fit" [bodyStyle]="bodyStyle" [fullscreen]="true" [weighted]="true">
 
   <!-- Titlebar starts-->
@@ -64,14 +64,14 @@
   <!-- selections ends-->
 
   <!-- examples starts-->
-  <container [hidden]="hideExamples" *ngIf="!isPhone" >
+  <container [hidden]="hideExamples" *ngIf="!isPhone" scrollable="true">
     <router-outlet #extroute></router-outlet>
   </container>
   <!-- examples ends-->
 
   <!-- code window starts-->
   <panel docked="right" [weight]="5"
-    [hidden]="files.length > 0 ? false: true" 
+    [hidden]="files.length > 0 ? false: true"
     width="900"
     layout= "fit"
     [style]="{zIndex: 3}"
@@ -81,7 +81,7 @@
     [showAnimation]="{type: 'slideIn', direction: 'left', duration: 100, easing: 'ease' }"
     [collapsible]="{ direction: 'right' }"
     [collapsed]="!showCode">
-    <tabpanel 
+    <tabpanel
       [shadow]="true"
       [tabBar]="{layout: {pack: 'left'}}">
       <panel *ngFor="let file of files" [hidden]="files.length > 0 ? false: true"
