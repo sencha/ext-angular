@@ -14,6 +14,7 @@ export class BigDataService {
       var d = data[i];
       d.ratingLastYear = Math.max(Math.round(d.rating[0] / 2), 1);
       d.ratingThisYear = Math.max(Math.round(d.rating[d.rating.length - 1] / 2), 1);
+      d.fullName = d.forename + ' ' + d.surname;
     }
     return data;
   }
