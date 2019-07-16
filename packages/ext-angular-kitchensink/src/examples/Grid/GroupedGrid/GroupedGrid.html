@@ -16,6 +16,11 @@
         [groupFooter]="{
             xtype: 'gridsummaryrow'
         }"
+        [stateful]="true"
+        [stateId]="grouped-grid"
+        [plugins]='{
+            "gridfilters": "true"
+        }'
     >
         <column  
             text="Name" 
