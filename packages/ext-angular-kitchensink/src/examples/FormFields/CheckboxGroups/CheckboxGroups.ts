@@ -1,16 +1,37 @@
 declare var Ext: any;
 import { Component } from '@angular/core'
 
+Ext.require(['Ext.field.CheckboxGroup']);
+
 @Component({
   selector: 'checkboxgroups-component',
   templateUrl: "./CheckboxGroups.html",
-  styles: [``]
+  styles: ["./CheckboxGroups.scss"]
 })
 
 export class CheckBoxGroupsComponent {
-  isPhone = Ext.os.is.Phone;
-  top = !this.isPhone ? '10' : null
-  left = !this.isPhone ? '10' : null
-  width = !this.isPhone ? '800' : null
-  height = !this.isPhone ? '600' : null
+  parentPanelCmp:any;
+
+  onParentPanelReady = (event) => {
+    this.parentPanelCmp = event.ext;
+  }
+
+  onSaveFormClick = () => {
+      if (this.parentPanelCmp.isValid()) {
+          Ext.Msg.alert(
+              'Form completed',
+              'Form values will be sent to the server'
+          );
+      }
+      else {
+          Ext.Msg.alert(
+              'Form incomplete',
+              'You must fill out the form with valid values'
+          );
+      }
+  }
+
+  onResetFormClick = () => {
+      this.parentPanelCmp.reset();
+  }
 }
