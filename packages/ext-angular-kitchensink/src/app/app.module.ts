@@ -86,6 +86,7 @@ import {SummaryRowComponent} from '../examples/Grid/AddonsDecorations/SummaryRow
 import {GridFilteringComponent} from '../examples/Grid/AddonsDecorations/GridFiltering/GridFiltering';
 import {ViewOptionsComponent} from '../examples/Grid/AddonsDecorations/ViewOptions/ViewOptions';
 import {RowDragAndDropComponent} from '../examples/Grid/AddonsDecorations/RowDragAndDrop/RowDragAndDrop';
+import {DragFormToGridComponent} from '../examples/Grid/AddonsDecorations/DragFormToGrid/DragFormToGrid';
 
 
 import {BigDataComponent} from '../examples/Grid/AdvancedFeatures/BigData/BigData';
@@ -316,6 +317,7 @@ const routes: ExtAngularRoutes = [
   { path: 'grids/addons/grid_filtering', component: GridFilteringComponent, text: 'Grid Filtering', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/addons/view_options', component: ViewOptionsComponent, text: 'View Options', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/addons/row_drag_and_drop', component: RowDragAndDropComponent, text: 'Row Drag and Drop Options', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  { path: 'grids/addons/drag_form_to_grid', component: DragFormToGridComponent, text: 'Drag Form To Grid', iconCls: 'icon-dd-form-to-grid', xtype: 'homeview', leaf: true },
 
   { path: 'grids/advanced_features/big_data', component: BigDataComponent, text: 'Big Data', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/advanced_features/select_and_copy', component: SelectAndCopyComponent, text: 'Select and Copy', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -523,6 +525,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
     GridFilteringComponent,
     ViewOptionsComponent,
     RowDragAndDropComponent,
+    DragFormToGridComponent,
 
     BigDataComponent,
     ReconfigureGridComponent,
