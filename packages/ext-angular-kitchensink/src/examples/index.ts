@@ -33,8 +33,8 @@ import {EditableGridComponent} from './Grid/EditableGrid/EditableGrid';
 import {GroupedGridComponent} from './Grid/GroupedGrid/GroupedGrid';
 import {LockingGridComponent} from './Grid/LockingGrid/LockingGrid';
 import {XMLGridComponent} from './Grid/XMLGrid/XMLGrid';
+import {RowEditingComponent} from './Grid/RowEditing/RowEditing';
 import {InfiniteGridComponent} from './Grid/InfiniteGrid/InfiniteGrid';
-
 
 import {GridToolsComponent} from './Grid/AddonsDecorations/GridTools/GridTools';
 import {RowBodyComponent} from './Grid/AddonsDecorations/RowBody/RowBody';
@@ -312,7 +312,9 @@ const treeRoot = {
               { text: 'Locking Grid', component: LockingGridComponent, navIcon: 'icon-locking-grid'},
               { text: 'Editable Grid', component: EditableGridComponent, navIcon: 'icon-editable-grid'},
               { text: 'XML Grid', component: XMLGridComponent, navIcon: 'icon-xml-grid'},
+              { text: 'Editable Row', component: RowEditingComponent, navIcon: 'icon-row-editing'}
               { text: 'Infinite Grid', component: InfiniteGridComponent, navIcon: 'icon-buffer-grid'}
+
           ]},
           { text: 'Add-ons', navIcon: 'icon-framing-buttons', children: [
               { text: 'Grid Tools', component: GridToolsComponent, navIcon: 'icon-grid-tools'},
