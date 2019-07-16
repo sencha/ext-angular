@@ -16,6 +16,11 @@
         [groupFooter]="{
             xtype: 'gridsummaryrow'
         }"
+        [stateful]="true"
+        [stateId]="grouped-grid"
+        [plugins]='{
+            "gridfilters": "true"
+        }'
     >
         <column  
             text="Name" 
@@ -31,7 +36,8 @@
         <column  
             text="Rating" 
             dataIndex="rating"
-            summaryCell="numbercell"
+            summaryCell="numbercell" 
+            flex="1"
             groupHeaderTpl='{value:repeat("★")} ({value:plural("Star")})'
             [cell]="{
                 xtype: 'widgetcell',
