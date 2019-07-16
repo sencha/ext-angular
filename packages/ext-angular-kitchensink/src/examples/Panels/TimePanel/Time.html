@@ -1,7 +1,40 @@
 <container 
-    [padding]="isPhone ? 0 : 10"
-    [width]="!isPhone && 300"
+    [padding]="isPhone ? 0 : 20"
+    [width]="!isPhone && 325"
     [layout]="isPhone ? 'fit' : 'auto'"
 >
-    <timepanel  [shadow]="true"></timepanel>
+    <toolbar 
+        docked='top'
+        [ui]='transparent'
+    >
+    <togglefield
+        boxLabel="is Meridiem (12 hour)"
+        name="hourformat"
+        reference="hourformat"
+        cls="demo-solid-background"
+        padding="0 10"
+        value="true"
+        (change)="this.onMeridiemChange($event)"
+    >
+    </togglefield>
+    <togglefield
+        boxLabel="PM hours Inside"
+        name="pminside"
+        reference="hourformat"
+        cls="demo-solid-background"
+        [padding]="'0 10'"
+        [disabled]="this.isDisabled"
+        [value]="this.isValue"
+        (change)="this.onPMHoursChange($event)"
+    >
+    </togglefield>
+    </toolbar>
+    <timepanel
+        [shadow]="true"
+        [meridiem]="this.isMeridiem"
+        [alignPMInside]="this.isalignPMInside"
+        alignFormatInside="false"
+      >
+    </timepanel>
 </container>
+

@@ -79,6 +79,7 @@ import {GroupedGridComponent} from '../examples/Grid/GroupedGrid/GroupedGrid';
 import {LockingGridComponent} from '../examples/Grid/LockingGrid/LockingGrid';
 import {XMLGridComponent} from '../examples/Grid/XMLGrid/XMLGrid';
 import {RowEditingComponent} from '../examples/Grid/RowEditing/RowEditing';
+import {InfiniteGridComponent} from '../examples/Grid/InfiniteGrid/InfiniteGrid';
 
 import {GridToolsComponent} from '../examples/Grid/AddonsDecorations/GridTools/GridTools';
 import {RowBodyComponent} from '../examples/Grid/AddonsDecorations/RowBody/RowBody';
@@ -87,6 +88,7 @@ import {SummaryRowComponent} from '../examples/Grid/AddonsDecorations/SummaryRow
 import {GridFilteringComponent} from '../examples/Grid/AddonsDecorations/GridFiltering/GridFiltering';
 import {ViewOptionsComponent} from '../examples/Grid/AddonsDecorations/ViewOptions/ViewOptions';
 import {RowDragAndDropComponent} from '../examples/Grid/AddonsDecorations/RowDragAndDrop/RowDragAndDrop';
+import {DragFormToGridComponent} from '../examples/Grid/AddonsDecorations/DragFormToGrid/DragFormToGrid';
 
 
 import {BigDataComponent} from '../examples/Grid/AdvancedFeatures/BigData/BigData';
@@ -310,6 +312,7 @@ const routes: ExtAngularRoutes = [
   { path: 'grids/core_features/editable_grid', component: EditableGridComponent, text: 'Editable Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/core_features/xml_grid', component: XMLGridComponent, text: 'XML Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/core_features/editable_row', component: RowEditingComponent, text: 'Row Editing', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  { path: 'grids/core_features/infinite_grid', component: InfiniteGridComponent, text: 'Infinite Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
   { path: 'grids/addons/grid_tools', component: GridToolsComponent, text: 'Grid Tools', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/addons/row_expander', component: RowExpanderComponent, text: 'Row Expander', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -318,6 +321,7 @@ const routes: ExtAngularRoutes = [
   { path: 'grids/addons/grid_filtering', component: GridFilteringComponent, text: 'Grid Filtering', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/addons/view_options', component: ViewOptionsComponent, text: 'View Options', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/addons/row_drag_and_drop', component: RowDragAndDropComponent, text: 'Row Drag and Drop Options', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  { path: 'grids/addons/drag_form_to_grid', component: DragFormToGridComponent, text: 'Drag Form To Grid', iconCls: 'icon-dd-form-to-grid', xtype: 'homeview', leaf: true },
 
   { path: 'grids/advanced_features/big_data', component: BigDataComponent, text: 'Big Data', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/advanced_features/select_and_copy', component: SelectAndCopyComponent, text: 'Select and Copy', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -518,6 +522,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
     LockingGridComponent,
     XMLGridComponent,
     RowEditingComponent,
+    InfiniteGridComponent,
 
     GridToolsComponent,
     RowBodyComponent,
@@ -526,6 +531,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
     GridFilteringComponent,
     ViewOptionsComponent,
     RowDragAndDropComponent,
+    DragFormToGridComponent,
 
     BigDataComponent,
     ReconfigureGridComponent,

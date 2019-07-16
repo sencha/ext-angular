@@ -6,7 +6,8 @@ Ext.require([
   'Ext.grid.cell.Number',
   'Ext.grid.cell.Widget',
   'Ext.grid.SummaryRow',
-  'Ext.ux.rating.Picker'
+  'Ext.ux.rating.Picker',
+  'Ext.grid.filters.Plugin'
 ]);
 
 @Component({

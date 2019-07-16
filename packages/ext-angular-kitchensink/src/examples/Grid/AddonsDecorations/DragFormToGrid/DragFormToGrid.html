@@ -1,0 +1,69 @@
+<panel
+	[layout]="{
+		type: 'box'
+	}"
+	padding="10"
+	margin="40"
+	cls="form-to-grid-dd"
+	title="Patient Hospital Assignment"
+	maxWidth="800"
+	(ready)="parentPanelReady($event)"
+>
+	<panel
+		title="Patients"
+        flex="0.4"
+        border="true"
+		scrollable="y"
+		(ready)="dataPanelReady($event)"
+	>
+		<dataview
+			(ready)="dataViewReady($event)"
+			[itemTpl]="patientTpl"
+			[store]="patientStore"
+		>
+		</dataview>	
+	</panel>
+	<spacer
+		maxHeight="20"
+		maxWidth="20"
+	>
+	</spacer>
+	<grid
+		title="Hospitals"
+		flex="0.6"
+        cls="dd-hospital-grid"
+        variableHeights="true"
+        (ready)="hospitalGridReady($event)"
+        [itemConfig]="{
+	      	body : {
+	        	tpl: this.hospitalTpl,
+	        	cls: 'hospital-target'
+	      	}
+	    }"
+        [store]="hospitalStore"
+        [listeners]="{
+            element: 'element',
+            delegate: ['.remove-icon'],
+            tap: this.onRemoveTapped
+        }"
+	>
+		<column
+			dataIndex="name"
+			text="Name"
+			flex="1"
+		>
+		</column>
+		<column
+			dataIndex="address"
+			text="Address"
+			flex="1"
+		>
+		</column>
+		<column
+			dataIndex="telephone"
+			text="Telephone"
+			flex="1"
+		>
+		</column>
+	</grid>
+</panel>
