@@ -15,10 +15,9 @@ import {SheetComponent} from "./Sheet/Sheet";
 import {RippleComponent} from './Ripple/Ripple';
 import {ProgressBarComponent} from './ProgressBar/ProgressBar';
 import {TitleBarComponent} from './TitleBar/TitleBar';
-import {ToolBarComponent} from './ToolBar/ToolBar';
-import {ToolTipComponent} from './ToolTip/ToolTip';
+import {ToolBarComponent} from './ToolBars/ToolBar/ToolBar';
+import {BreadcrumbToolBarComponent} from './ToolBars/BreadcrumbToolbar/BreadcrumbToolbar';import {ToolTipComponent} from './ToolTip/ToolTip';
 import {ColorPickerComponent} from './ColorPicker/ColorPicker';
-
 import {EditableTreeComponent} from './Trees/EditableTree/EditableTree';
 import {HeterogeneousTreeComponent} from './Trees/HeterogeneousTree/HeterogeneousTree';
 import {TreeComponent} from './Trees/Tree/Tree';
@@ -33,7 +32,8 @@ import {EditableGridComponent} from './Grid/EditableGrid/EditableGrid';
 import {GroupedGridComponent} from './Grid/GroupedGrid/GroupedGrid';
 import {LockingGridComponent} from './Grid/LockingGrid/LockingGrid';
 import {XMLGridComponent} from './Grid/XMLGrid/XMLGrid';
-
+import {RowEditingComponent} from './Grid/RowEditing/RowEditing';
+import {InfiniteGridComponent} from './Grid/InfiniteGrid/InfiniteGrid';
 
 import {GridToolsComponent} from './Grid/AddonsDecorations/GridTools/GridTools';
 import {RowBodyComponent} from './Grid/AddonsDecorations/RowBody/RowBody';
@@ -42,6 +42,7 @@ import {SummaryRowComponent} from './Grid/AddonsDecorations/SummaryRow/SummaryRo
 import {GridFilteringComponent} from './Grid/AddonsDecorations/GridFiltering/GridFiltering';
 import {ViewOptionsComponent} from './Grid/AddonsDecorations/ViewOptions/ViewOptions';
 import {RowDragAndDropComponent} from './Grid/AddonsDecorations/RowDragAndDrop/RowDragAndDrop';
+import {DragFormToGridComponent} from './Grid/AddonsDecorations/DragFormToGrid/DragFormToGrid';
 
 
 import {BigDataComponent} from './Grid/AdvancedFeatures/BigData/BigData';
@@ -298,7 +299,10 @@ const treeRoot = {
             { text: 'TabBar', component: TabBarComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Tab-Bar' }
         ]},
         { text: 'TitleBar', component: TitleBarComponent, navIcon: 'icon-Title-Bar' },
-        { text: 'Toolbar', component: ToolBarComponent, navIcon: 'icon-toolbar' },
+        { text: 'Toolbar', navIcon: 'icon-toolbar',children:[
+            { text: 'Toolbar', component: ToolBarComponent , navIcon: 'icon-toolbar'},
+            { text: 'Breadcrumb Toolbar', component: BreadcrumbToolBarComponent , navIcon: 'icon-toolbar'}
+        ] },
         { text: 'ToolTip', component: ToolTipComponent, layout: 'center', navIcon: 'icon-tooltips'  },
         { text: 'Touch Events', component: TouchEventsComponent, navIcon: 'icon-touch-events' },
         //{ text: 'Transition', component: Transition, navIcon: 'icon-Transition' },
@@ -311,7 +315,10 @@ const treeRoot = {
               { text: 'Grouped Grid', component: GroupedGridComponent, navIcon: 'icon-grouped-grid'},
               { text: 'Locking Grid', component: LockingGridComponent, navIcon: 'icon-locking-grid'},
               { text: 'Editable Grid', component: EditableGridComponent, navIcon: 'icon-editable-grid'},
-              { text: 'XML Grid', component: XMLGridComponent, navIcon: 'icon-xml-grid'}
+              { text: 'XML Grid', component: XMLGridComponent, navIcon: 'icon-xml-grid'},
+              { text: 'Editable Row', component: RowEditingComponent, navIcon: 'icon-row-editing'}
+              { text: 'Infinite Grid', component: InfiniteGridComponent, navIcon: 'icon-buffer-grid'}
+
           ]},
           { text: 'Add-ons', navIcon: 'icon-framing-buttons', children: [
               { text: 'Grid Tools', component: GridToolsComponent, navIcon: 'icon-grid-tools'},
@@ -320,7 +327,8 @@ const treeRoot = {
               { text: 'Summary Row', component: SummaryRowComponent, navIcon: 'icon-grid-summary'},
               { text: 'Grid Filtering', component: GridFilteringComponent, navIcon: 'icon-grid-filtering'},
               { text: 'View Options', component: ViewOptionsComponent, navIcon: 'icon-view-options-grid'},
-              { text: 'Row Drag and Drop', component: RowDragAndDropComponent, navIcon: 'icon-view-options-grid'}
+              { text: 'Row Drag and Drop', component: RowDragAndDropComponent, navIcon: 'icon-view-options-grid'},
+              { text: 'Drag Form To Grid', component: DragFormToGridComponent, navIcon: 'icon-dd-form-to-grid'}
           ]},
           { text: 'Advanced Features', navIcon: 'icon-grid-plugins', children:[
               { text: 'Big Data', component: BigDataComponent, navIcon: 'icon-big-data-grid' },
