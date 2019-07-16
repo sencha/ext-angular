@@ -6,7 +6,7 @@ Ext.require(['Ext.field.CheckboxGroup']);
 @Component({
   selector: 'checkboxgroups-component',
   templateUrl: "./CheckboxGroups.html",
-  styles: ["./CheckboxGroups.scss"]
+  styleUrls: [`./CheckboxGroups.css`],
 })
 
 export class CheckBoxGroupsComponent {
