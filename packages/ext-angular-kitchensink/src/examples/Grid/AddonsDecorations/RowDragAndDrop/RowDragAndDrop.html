@@ -1,0 +1,26 @@
+<container padding="10" layout="fit" [fitToParent]="true">
+    <grid
+      [store]="this.store"
+      [layout]="'fit'"
+      [shadow]="true"
+      [height]="'100%'"
+      [selectable]="this.selectable"
+      [plugins]="{ gridrowdragdrop: true }"
+    >
+      <column
+        text="Name"
+        dataIndex="fullName"
+        width="150"
+        checked="true"
+      >
+      </column>
+      <column
+        text="Email"
+        dataIndex="email"
+        [flex]="1"
+        [sortable]="true"
+        checked="true"
+       >
+       </column>
+    </grid>
+</container>

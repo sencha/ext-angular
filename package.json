@@ -21,6 +21,6 @@
   "author": "Sencha, Inc.",
   "license": "MIT",
   "devDependencies": {
-    "lerna": "^3.13.1"
+    "lerna": "^3.15.0"
   }
 }

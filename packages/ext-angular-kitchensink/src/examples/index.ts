@@ -41,6 +41,8 @@ import {RowExpanderComponent} from './Grid/AddonsDecorations/RowExpander/RowExpa
 import {SummaryRowComponent} from './Grid/AddonsDecorations/SummaryRow/SummaryRow';
 import {GridFilteringComponent} from './Grid/AddonsDecorations/GridFiltering/GridFiltering';
 import {ViewOptionsComponent} from './Grid/AddonsDecorations/ViewOptions/ViewOptions';
+import {RowDragAndDropComponent} from './Grid/AddonsDecorations/RowDragAndDrop/RowDragAndDrop';
+
 
 import {BigDataComponent} from './Grid/AdvancedFeatures/BigData/BigData';
 import {ReconfigureGridComponent} from './Grid/AdvancedFeatures/ReconfigureGrid/ReconfigureGrid';
@@ -186,7 +188,7 @@ import {WizardComponent} from './Wizard/Wizard';
 
 import {TreeMapToolTipComponent} from './D3/Hierarchy/TreeMapToolTip/TreeMapToolTip';
 import {ConfigurablePivotTreeMapComponent} from './D3/Hierarchy/ConfigurablePivotTreeMap/ConfigurablePivotTreeMap';
-import {TreeMapComponent} from './D3/Hierarchy/TreeMap/TreeMap'; 
+import {TreeMapComponent} from './D3/Hierarchy/TreeMap/TreeMap';
 import {SunburstComponent} from './D3/Hierarchy/Sunburst/Sunburst';
 import {TreeHierarchyComponent} from './D3/Hierarchy/Tree/Tree';
 import {ZoomableSunburstComponent} from './D3/Hierarchy/ZoomableSunburst/ZoomableSunburst';
@@ -317,7 +319,8 @@ const treeRoot = {
               { text: 'Row Body', component: RowBodyComponent, navIcon: 'icon-row-body-grid'},
               { text: 'Summary Row', component: SummaryRowComponent, navIcon: 'icon-grid-summary'},
               { text: 'Grid Filtering', component: GridFilteringComponent, navIcon: 'icon-grid-filtering'},
-              { text: 'View Options', component: ViewOptionsComponent, navIcon: 'icon-view-options-grid'}
+              { text: 'View Options', component: ViewOptionsComponent, navIcon: 'icon-view-options-grid'},
+              { text: 'Row Drag and Drop', component: RowDragAndDropComponent, navIcon: 'icon-view-options-grid'}
           ]},
           { text: 'Advanced Features', navIcon: 'icon-grid-plugins', children:[
               { text: 'Big Data', component: BigDataComponent, navIcon: 'icon-big-data-grid' },
@@ -374,8 +377,8 @@ const treeRoot = {
               { text: 'OHLC', component: OHLCComponent, navIcon: 'icon-financial-ohlc' }
           ] },
           { text: 'Gauges', navIcon: 'icon-gauge-charts', children: [
-              { text: 'Basic Gauge', component: BasicGaugeChartComponent, navIcon: 'icon-gauge-basic' }  
-          ] }, 
+              { text: 'Basic Gauge', component: BasicGaugeChartComponent, navIcon: 'icon-gauge-basic' }
+          ] },
           { text: 'Line', navIcon: 'icon-line-charts', children: [
               { text: 'Basic Line', component: BasicLineComponent, navIcon: 'icon-line-basic' },
               { text: 'Basic Markers', component: BasicMarkersComponent, navIcon: 'icon-line-markers' },
@@ -391,7 +394,7 @@ const treeRoot = {
               { text: 'Spie', component: SpieComponent, navIcon: 'icon-pie-custom' },
               { text: 'Donut', component: DonutComponent, navIcon: 'icon-pie-donut' },
               { text: 'Double Donut', component: DoubleDonutComponent, navIcon: 'icon-pie-double-donut' },
-              { text: '3D Pie', component: ThreeDPieComponent, navIcon: 'icon-pie-3d' } 
+              { text: '3D Pie', component: ThreeDPieComponent, navIcon: 'icon-pie-3d' }
           ] },
           { text: 'Radar', navIcon: 'icon-radar-charts', children: [
               { text: 'Basic Radar', component: BasicRadarComponent, navIcon: 'icon-radar-basic' },
@@ -454,6 +457,6 @@ function transform(node, parentUrl) {
     }
 }
 
-transform(treeRoot, null); 
+transform(treeRoot, null);
 
 export const navTreeRoot = treeRoot;

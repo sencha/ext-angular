@@ -32,16 +32,16 @@ export class colorselectorMetaData {
     'config'
 ];
   public static EVENTS: any[] = [
-		{name:'cancel',parameters:'colorselector'},
-		{name:'change',parameters:'colorselector,color,previousColor'},
-		{name:'ok',parameters:'colorselector,color'},
-		{name:'ready',parameters:''}
+{name:'cancel',parameters:'colorselector'},
+{name:'change',parameters:'colorselector,color,previousColor'},
+{name:'ok',parameters:'colorselector,color'},
+{name:'ready',parameters:''}
 ];
   public static EVENTNAMES: string[] = [
-		'cancel',
-		'change',
-		'ok',
-		'ready'
+'cancel',
+'change',
+'ok',
+'ready'
 ];
 }
 @Component({
