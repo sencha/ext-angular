@@ -31,7 +31,8 @@ import {CalendarTimezoneSupportComponent} from "../examples/Calendar/TimezoneSup
 import {SheetComponent} from "../examples/Sheet/Sheet"
 import {ProgressBarComponent} from "../examples/ProgressBar/ProgressBar"
 import {TitleBarComponent} from "../examples/TitleBar/TitleBar"
-import {ToolBarComponent} from "../examples/ToolBar/ToolBar"
+import {ToolBarComponent} from "../examples/ToolBars/ToolBar/ToolBar"
+import {BreadcrumbToolBarComponent} from "../examples/ToolBars/BreadcrumbToolbar/BreadcrumbToolbar"
 import {ToolTipComponent} from "../examples/ToolTip/ToolTip"
 import {ColorPickerComponent} from '../examples/ColorPicker/ColorPicker';
 
@@ -249,6 +250,7 @@ const routes: ExtAngularRoutes = [
   { path: 'components/panels', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/popups', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/tabs', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  { path: 'components/toolbar', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/touch_events', component: TouchEventsComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/wizard', component: WizardComponent, text: 'Wizard', iconCls: 'x-fafa-calendar', xtype: 'homeview', leaf: true },
 
@@ -296,7 +298,8 @@ const routes: ExtAngularRoutes = [
   { path: 'components/sheet', component: SheetComponent, text: 'Sheet', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/progressbar', component: ProgressBarComponent, text: 'Progress Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/titlebar', component: TitleBarComponent, text: 'Title Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-  { path: 'components/toolbar', component: ToolBarComponent, text: 'Tool Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  { path: 'components/toolbar/toolbar', component: ToolBarComponent, text: 'Tool Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  { path: 'components/toolbar/breadcrumb_toolbar', component: BreadcrumbToolBarComponent, text: 'Tool Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/tooltip', component: ToolTipComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
   { path: 'trees/editable_tree', component: EditableTreeComponent, text: 'Editable Tree', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -507,6 +510,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
     ProgressBarComponent,
     TitleBarComponent,
     ToolBarComponent,
+    BreadcrumbToolBarComponent,
     ToolTipComponent,
 
     EditableTreeComponent,
