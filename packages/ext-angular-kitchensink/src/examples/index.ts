@@ -43,6 +43,7 @@ import {SummaryRowComponent} from './Grid/AddonsDecorations/SummaryRow/SummaryRo
 import {GridFilteringComponent} from './Grid/AddonsDecorations/GridFiltering/GridFiltering';
 import {ViewOptionsComponent} from './Grid/AddonsDecorations/ViewOptions/ViewOptions';
 import {RowDragAndDropComponent} from './Grid/AddonsDecorations/RowDragAndDrop/RowDragAndDrop';
+import {DragFormToGridComponent} from './Grid/AddonsDecorations/DragFormToGrid/DragFormToGrid';
 
 
 import {BigDataComponent} from './Grid/AdvancedFeatures/BigData/BigData';
@@ -320,7 +321,8 @@ const treeRoot = {
               { text: 'Summary Row', component: SummaryRowComponent, navIcon: 'icon-grid-summary'},
               { text: 'Grid Filtering', component: GridFilteringComponent, navIcon: 'icon-grid-filtering'},
               { text: 'View Options', component: ViewOptionsComponent, navIcon: 'icon-view-options-grid'},
-              { text: 'Row Drag and Drop', component: RowDragAndDropComponent, navIcon: 'icon-view-options-grid'}
+              { text: 'Row Drag and Drop', component: RowDragAndDropComponent, navIcon: 'icon-view-options-grid'},
+              { text: 'Drag Form To Grid', component: DragFormToGridComponent, navIcon: 'icon-dd-form-to-grid'}
           ]},
           { text: 'Advanced Features', navIcon: 'icon-grid-plugins', children:[
               { text: 'Big Data', component: BigDataComponent, navIcon: 'icon-big-data-grid' },
