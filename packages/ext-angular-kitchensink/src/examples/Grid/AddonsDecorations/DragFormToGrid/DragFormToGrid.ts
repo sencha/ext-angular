@@ -41,7 +41,6 @@ export class DragFormToGridComponent {
 	}
 
 	registerDragZone = () => {
-		debugger;
         let me = this.formDataPanel;
         let patientView = this.formDataView;
         let touchEvents = Ext.supports.Touch && Ext.supports.TouchEvents;
