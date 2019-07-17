@@ -83,6 +83,7 @@ import {hboxLayoutComponent} from './Layouts/hboxLayout/hboxLayout';
 import {FormLayoutComponent} from './Layouts/FormLayout/FormLayout';
 import {ResizableLayoutComponent} from './Layouts/ResizableLayout/ResizableLayout';
 import {vboxLayoutComponent} from './Layouts/vboxLayout/vboxLayout';
+import {AccordionLayoutComponent} from './Layouts/AccordionLayout/AccordionLayout';
 
 import {BasicGaugeChartComponent} from './Charts/Gauges/BasicGaugeChart/BasicGaugeChart';
 import {BoxPlotComponent} from './Charts/BoxPlot/BoxPlot';
@@ -250,6 +251,7 @@ const treeRoot = {
           { text: 'Needle Gauge', component: NeedleGaugeComponent, layout: 'center', navIcon: 'icon-gauge-charts' }
         ]},
         { text: 'Layouts', navIcon: 'icon-layouts', children: [
+          { text: 'accordion', component: AccordionLayoutComponent, navIcon: 'icon-layout-accordion' },
           { text: 'card', component: CardLayoutComponent, navIcon: 'icon-layout-card' },
           { text: 'center', component: CenterLayoutComponent, navIcon: 'icon-layout-center' },
           { text: 'fit', component: FitLayoutComponent, navIcon: 'icon-layout-fit' },
