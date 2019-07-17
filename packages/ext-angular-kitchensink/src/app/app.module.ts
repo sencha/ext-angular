@@ -67,6 +67,7 @@ import { hboxLayoutComponent } from '../examples/Layouts/hboxLayout/hboxLayout';
 import { FormLayoutComponent } from '../examples/Layouts/FormLayout/FormLayout';
 import {ResizableLayoutComponent} from '../examples/Layouts/ResizableLayout/ResizableLayout';
 import {vboxLayoutComponent} from '../examples/Layouts/vboxLayout/vboxLayout';
+import {AccordionLayoutComponent} from "../examples/Layouts/AccordionLayout/AccordionLayout";
 
 import {EditableTreeComponent} from '../examples/Trees/EditableTree/EditableTree';
 import {HeterogeneousTreeComponent} from '../examples/Trees/HeterogeneousTree/HeterogeneousTree';
@@ -371,6 +372,7 @@ const routes: ExtAngularRoutes = [
   { path: 'components/layouts/form', component: FormLayoutComponent, text: 'form', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/layouts/resizable', component: ResizableLayoutComponent, text: 'resizable', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/layouts/vbox', component: vboxLayoutComponent, text: 'vbox', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  { path: 'components/layouts/accordion', component: AccordionLayoutComponent, text: 'accordion', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
   { path: 'components/panels/basic_panels', component: BasicPanelComponent, text: 'Basic Panels', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
   { path: 'components/panels/resizable_handle', component: ResizableHandleComponent, text: 'Resizeable handle', iconCls: 'x-fa fa-calender', xtype: 'homeview', leaf: true },
@@ -577,6 +579,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
     FormLayoutComponent,
     ResizableLayoutComponent,
     vboxLayoutComponent,
+    AccordionLayoutComponent,
 
     ChartToolbarComponent,
     BasicGaugeChartComponent,
