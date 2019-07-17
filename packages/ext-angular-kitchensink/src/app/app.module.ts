@@ -31,12 +31,14 @@ import {CalendarTimezoneSupportComponent} from "../examples/Calendar/TimezoneSup
 import {SheetComponent} from "../examples/Sheet/Sheet"
 import {ProgressBarComponent} from "../examples/ProgressBar/ProgressBar"
 import {TitleBarComponent} from "../examples/TitleBar/TitleBar"
-import {ToolBarComponent} from "../examples/ToolBar/ToolBar"
+import {ToolBarComponent} from "../examples/ToolBars/ToolBar/ToolBar"
+import {BreadcrumbToolBarComponent} from "../examples/ToolBars/BreadcrumbToolbar/BreadcrumbToolbar"
 import {ToolTipComponent} from "../examples/ToolTip/ToolTip"
 import {ColorPickerComponent} from '../examples/ColorPicker/ColorPicker';
 
 import {NumberFieldComponent} from "../examples/FormFields/NumberField/NumberField"
 import {CheckBoxFieldComponent} from '../examples/FormFields/CheckBoxField/CheckBoxField'
+import {CheckBoxGroupsComponent} from '../examples/FormFields/CheckboxGroups/CheckboxGroups';
 import {ComboBoxFieldComponent} from "../examples/FormFields/ComboBoxField/ComboBoxField"
 import {MultiSelectComboBoxFieldComponent} from '../examples/FormFields/MultiSelectComboBoxField/MultiSelectComboBoxField'
 import {FormPanelComponent} from "../examples/FormFields/FormPanel/FormPanel"
@@ -79,6 +81,8 @@ import {EditableGridComponent} from '../examples/Grid/EditableGrid/EditableGrid'
 import {GroupedGridComponent} from '../examples/Grid/GroupedGrid/GroupedGrid';
 import {LockingGridComponent} from '../examples/Grid/LockingGrid/LockingGrid';
 import {XMLGridComponent} from '../examples/Grid/XMLGrid/XMLGrid';
+import {RowEditingComponent} from '../examples/Grid/RowEditing/RowEditing';
+import {InfiniteGridComponent} from '../examples/Grid/InfiniteGrid/InfiniteGrid';
 
 import {GridToolsComponent} from '../examples/Grid/AddonsDecorations/GridTools/GridTools';
 import {RowBodyComponent} from '../examples/Grid/AddonsDecorations/RowBody/RowBody';
@@ -87,6 +91,7 @@ import {SummaryRowComponent} from '../examples/Grid/AddonsDecorations/SummaryRow
 import {GridFilteringComponent} from '../examples/Grid/AddonsDecorations/GridFiltering/GridFiltering';
 import {ViewOptionsComponent} from '../examples/Grid/AddonsDecorations/ViewOptions/ViewOptions';
 import {RowDragAndDropComponent} from '../examples/Grid/AddonsDecorations/RowDragAndDrop/RowDragAndDrop';
+import {DragFormToGridComponent} from '../examples/Grid/AddonsDecorations/DragFormToGrid/DragFormToGrid';
 
 
 import {BigDataComponent} from '../examples/Grid/AdvancedFeatures/BigData/BigData';
@@ -247,6 +252,7 @@ const routes: ExtAngularRoutes = [
   { path: 'components/panels', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/popups', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/tabs', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  { path: 'components/toolbar', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/touch_events', component: TouchEventsComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/wizard', component: WizardComponent, text: 'Wizard', iconCls: 'x-fafa-calendar', xtype: 'homeview', leaf: true },
 
@@ -294,7 +300,8 @@ const routes: ExtAngularRoutes = [
   { path: 'components/sheet', component: SheetComponent, text: 'Sheet', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/progressbar', component: ProgressBarComponent, text: 'Progress Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/titlebar', component: TitleBarComponent, text: 'Title Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-  { path: 'components/toolbar', component: ToolBarComponent, text: 'Tool Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  { path: 'components/toolbar/toolbar', component: ToolBarComponent, text: 'Tool Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  { path: 'components/toolbar/breadcrumb_toolbar', component: BreadcrumbToolBarComponent, text: 'Tool Bar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/tooltip', component: ToolTipComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
   { path: 'trees/editable_tree', component: EditableTreeComponent, text: 'Editable Tree', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -309,6 +316,8 @@ const routes: ExtAngularRoutes = [
   { path: 'grids/core_features/locking_grid', component: LockingGridComponent, text: 'Locking Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/core_features/editable_grid', component: EditableGridComponent, text: 'Editable Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/core_features/xml_grid', component: XMLGridComponent, text: 'XML Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  { path: 'grids/core_features/editable_row', component: RowEditingComponent, text: 'Row Editing', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  { path: 'grids/core_features/infinite_grid', component: InfiniteGridComponent, text: 'Infinite Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
   { path: 'grids/addons/grid_tools', component: GridToolsComponent, text: 'Grid Tools', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/addons/row_expander', component: RowExpanderComponent, text: 'Row Expander', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -317,6 +326,7 @@ const routes: ExtAngularRoutes = [
   { path: 'grids/addons/grid_filtering', component: GridFilteringComponent, text: 'Grid Filtering', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/addons/view_options', component: ViewOptionsComponent, text: 'View Options', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/addons/row_drag_and_drop', component: RowDragAndDropComponent, text: 'Row Drag and Drop Options', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  { path: 'grids/addons/drag_form_to_grid', component: DragFormToGridComponent, text: 'Drag Form To Grid', iconCls: 'icon-dd-form-to-grid', xtype: 'homeview', leaf: true },
 
   { path: 'grids/advanced_features/big_data', component: BigDataComponent, text: 'Big Data', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/advanced_features/select_and_copy', component: SelectAndCopyComponent, text: 'Select and Copy', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -333,6 +343,7 @@ const routes: ExtAngularRoutes = [
 
   { path: 'components/forms/checkboxfield', component: CheckBoxFieldComponent, text: 'CheckBoxField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/forms/comboboxfield', component: ComboBoxFieldComponent, text: 'ComboBoxField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+  { path: 'components/forms/checkboxgroups', component: CheckBoxGroupsComponent, text: 'CheckBoxGroups', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/forms/multiselect_comboboxfield', component: MultiSelectComboBoxFieldComponent, text: 'MultiSelectComboBoxField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/forms/containerfield', component: ContainerFieldComponent, text: 'ContainerField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/forms/datepickerfield', component: DatePickerFieldComponent, text: 'DatePickerField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -503,6 +514,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
     ProgressBarComponent,
     TitleBarComponent,
     ToolBarComponent,
+    BreadcrumbToolBarComponent,
     ToolTipComponent,
 
     EditableTreeComponent,
@@ -517,6 +529,8 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
     GroupedGridComponent,
     LockingGridComponent,
     XMLGridComponent,
+    RowEditingComponent,
+    InfiniteGridComponent,
 
     GridToolsComponent,
     RowBodyComponent,
@@ -525,6 +539,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
     GridFilteringComponent,
     ViewOptionsComponent,
     RowDragAndDropComponent,
+    DragFormToGridComponent,
 
     BigDataComponent,
     ReconfigureGridComponent,
@@ -534,6 +549,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
     StockTickerComponent,
 
     CheckBoxFieldComponent,
+    CheckBoxGroupsComponent,
     ComboBoxFieldComponent,
     MultiSelectComboBoxFieldComponent,
     ContainerFieldComponent,
