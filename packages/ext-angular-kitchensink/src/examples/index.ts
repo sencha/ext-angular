@@ -317,7 +317,7 @@ const treeRoot = {
               { text: 'Locking Grid', component: LockingGridComponent, navIcon: 'icon-locking-grid'},
               { text: 'Editable Grid', component: EditableGridComponent, navIcon: 'icon-editable-grid'},
               { text: 'XML Grid', component: XMLGridComponent, navIcon: 'icon-xml-grid'},
-              { text: 'Editable Row', component: RowEditingComponent, navIcon: 'icon-row-editing'}
+              { text: 'Editable Row', component: RowEditingComponent, navIcon: 'icon-row-editing'},
               { text: 'Infinite Grid', component: InfiniteGridComponent, navIcon: 'icon-buffer-grid'}
 
           ]},

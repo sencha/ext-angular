@@ -1,6 +1,12 @@
 declare var Ext: any;
 import { Component } from '@angular/core';
 import {data} from './data'
+
+Ext.require([
+  'Ext.data.TreeStore',
+  'Ext.grid.plugin.TreeDragDrop'
+]);
+
 @Component({
   selector: 'treereorder-component',
   templateUrl: './TreeReorder.html',
