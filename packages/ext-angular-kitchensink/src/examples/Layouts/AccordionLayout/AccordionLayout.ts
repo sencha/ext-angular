@@ -12,5 +12,13 @@ Ext.require([
   styles: [``]
 })
 export class AccordionLayoutComponent {
+  openableValue: number = 2;
   panel:any;
+  gaugeValue: number = 40;
+
+  updateGauges = (event) => {
+        if(this.gaugeValue === event.oldValue[0]){
+            this.gaugeValue = event.newValue;
+        }
+    }
 }
