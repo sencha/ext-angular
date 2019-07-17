@@ -1,0 +1,251 @@
+<formpanel 
+    title="Checkbox Group Example"
+    [bodyPadding]="20"
+    scrollable="y"
+    [maxHeight]="1400"
+    [width]="750"
+    margin="10"
+    (ready)="onParentPanelReady($event)"
+>
+    <container
+        [layout]="{
+            'type': 'box',
+            'vertical': false
+        }"
+        [responsiveConfig]='{
+        "width < 565": {
+            "height": 500,
+            "layout": {
+                "vertical": true
+            }
+        },
+        "width >= 565": {
+            "height": 200,
+            "layout": {
+                "vertical": false
+            }
+        }
+        }'
+    >
+        <fieldset
+            title="Individual Checkboxes"
+            [defaultType]="checkbox"
+            [layout]="'form'"
+            [padding]="0"
+            [flex]="1"
+        >
+            <textfield [name]="'txt-test1'" [label]="'Alignment Test:'"></textfield>
+            <checkboxfield
+                [boxLabel]="'Dog'"
+                [checked]="true"
+                [label]="'Favorite Animals'"
+                [name]="'fav-animal-dog'"
+                [inputValue]="'dog'"
+            >
+            </checkboxfield>
+            <checkboxfield
+                [boxLabel]="'Cat'"
+                [checked]="true"
+                [disabled]="true"
+                [name]="'fav-animal-cat'"
+                [inputValue]="'cat'"
+            >
+            </checkboxfield>
+            <checkboxfield
+                [boxLabel]="'Monkey'"
+                [name]="'fav-animal-monkey'"
+                [inputValue]="'monkey'"
+            >
+            </checkboxfield>
+        </fieldset>
+        <component [width]="10"></component>
+        <fieldset
+            title="Individual Radios"
+            [defaultType]="radio"
+            [layout]="'form'"
+            [padding]="0"
+            [flex]="1"
+        >
+            <textfield [name]="'txt-test2'" [label]="'Alignment Test 2:'"></textfield>
+            <radiofield
+                [boxLabel]="'Red'"
+                [checked]="true"
+                [label]="'Favorite Color'"
+                [name]="'fav-color'"
+                [inputValue]="'red'"
+            >
+            </radiofield>
+            <radiofield
+                [boxLabel]="'Blue'"
+                [checked]="true"
+                [disabled]="true"
+                [name]="'fav-color'"
+                [inputValue]="'blue'"
+            >
+            </radiofield>
+            <radiofield
+                [boxLabel]="'Green'"
+                [name]="'fav-color'"
+                [inputValue]="'green'"
+            >
+            </radiofield>
+        </fieldset>
+    </container>
+    <fieldset
+        title="Checkbox Groups"
+    >
+        <textfield
+            [name]="'txt-test3'"
+            [label]="'Alignment Test:'"
+            [labelAlign]="'left'"
+            [labelWidth]="120"
+            [margin]="10"
+        >
+        </textfield>
+        <checkboxgroup
+            [label]="'Auto Layout:'"
+            [cls]="'x-check-group-alt'"
+            [labelAlign]="'left'"
+            [labelWidth]="120"
+            [margin]="10"
+            [items]='[
+                { "label": "Item 1", "name": "cb-auto-1" },
+                { "label": "Item 2", "name": "cb-auto-2" },
+                { "label": "Item 3", "name": "cb-auto-3" },
+                { "label": "Item 4", "name": "cb-auto-4" }
+            ]'
+        >
+        </checkboxgroup>
+        <checkboxgroup
+            [label]="'Single Column:'"
+            [width]="250"
+            [labelAlign]="'left'"
+            [labelWidth]="120"
+            [margin]="10"
+            [items]='[
+                { "label": "Item 1", "name": "cb-auto-1" },
+                { "label": "Item 2", "name": "cb-auto-2" },
+                { "label": "Item 3", "name": "cb-auto-3" }
+            ]'
+        >
+        </checkboxgroup>
+        <checkboxgroup
+            [label]="'Multi-Column<br />(horizontal):'"
+            [cls]="'x-check-group-alt'"
+            [labelAlign]="'left'"
+            [labelWidth]="120"
+            [margin]="10"
+            [responsiveConfig]='{
+                "width < 565": {
+                    "width": "100%"
+                },
+                "width >= 565": {
+                    "width": "490"
+                }
+            }'
+            [items]='[
+                { "label": "Item 1", "name": "cb-horiz-1" },
+                { "label": "Item 2", "name": "cb-horiz-2" },
+                { "label": "Item 3", "name": "cb-horiz-3" },
+                { "label": "Item 4", "name": "cb-horiz-4" },
+                { "label": "Item 5", "name": "cb-horiz-5" },
+                { "label": "Item 6", "name": "cb-horiz-6" }
+            ]'
+        >
+        </checkboxgroup>
+        <checkboxgroup
+            [label]="'Multi-Column<br />(vertical):'"
+            [vertical]="true"
+            [height]="90"
+            [labelAlign]="'left'"
+            [labelWidth]="120"
+            [margin]="10"
+            [responsiveConfig]='{
+                "width < 565": {
+                    "vertical": false,
+                    "height": "auto"
+                },
+                "width >= 565": {
+                    "vertical": true,
+                    "height": 90
+                }
+            }'
+            [items]='[
+                { "label": "Item 1", "name": "cb-vert-1" },
+                { "label": "Item 2", "name": "cb-vert-2" },
+                { "label": "Item 3", "name": "cb-vert-3" },
+                { "label": "Item 4", "name": "cb-vert-4" },
+                { "label": "Item 5", "name": "cb-vert-5" },
+                { "label": "Item 6", "name": "cb-vert-6" }
+            ]'
+        >
+        </checkboxgroup>
+        <checkboxgroup
+            [label]="'Multi-Column<br />(custom widths):'"
+            [cls]="'x-check-group-alt'"
+            [labelAlign]="'left'"
+            [labelWidth]="120"
+            [margin]="10"
+            [responsiveConfig]='{
+                "width < 565": {
+                    "vertical": false,
+                    "height": "auto"
+                },
+                "width >= 565": {
+                    "vertical": true,
+                    "height": 110
+                }
+            }'
+            [items]='[
+                { "label": "Item 1", "name": "cb-custwidth", "inputValue": 1 },
+                { "label": "Item 2", "name": "cb-custwidth", "inputValue": 2 },
+                { "label": "Item 3", "name": "cb-custwidth", "inputValue": 3 },
+                { "label": "Item 4", "name": "cb-custwidth", "inputValue": 4, "width": 100 },
+                { "label": "Item 5", "name": "cb-custwidth", "inputValue": 5, "width": 100 }
+            ]'
+        >
+        </checkboxgroup>
+        <checkboxgroup
+            [label]="'Multi-Column<br />(custom widths):'"
+            [cls]="'multi-column-checkbox-group'"
+            [vertical]="true"
+            [errorTarget]="'side'"
+            [required]="true"
+            [height]="120"
+            [hidden]="false"
+            [margin]="10"
+            [labelAlign]="'left'"
+            [labelWidth]="120"
+        >
+            <container 
+                [width]="140"
+                [height]="120"
+            >
+                <component [html]="'Heading 1'" [padding]="'0 2'"></component>
+                <checkboxfield [labelAlign]="'right'" [label]="'Item 1'" [name]="'cb-cust-1'"></checkboxfield>
+                <checkboxfield [labelAlign]="'right'" [label]="'Item 2'" [name]="'cb-cust-2'"></checkboxfield>
+            </container>
+            <container 
+                [width]="180"
+                [height]="120"
+            >
+                <component [html]="'Heading 2'" [padding]="'0 2'"></component>
+                <checkboxfield [labelAlign]="'right'" [label]="'A long item just for fun'" [name]="'cb-cust-3'"></checkboxfield>
+            </container>
+            <container 
+                [width]="140"
+                [height]="120"
+            >
+                <component [html]="'Heading 3'" [padding]="'0 2'"></component>
+                <checkboxfield [labelAlign]="'right'" [label]="'Item 4'" [name]="'cb-cust-4'"></checkboxfield>
+                <checkboxfield [labelAlign]="'right'" [label]="'Item 5'" [name]="'cb-cust-5'"></checkboxfield>
+            </container>
+        </checkboxgroup>
+    </fieldset>
+    <container>
+        <button [text]="'Save'" (tap)="onSaveFormClick()">
+        </button>
+        <button [text]="'Reset'" (tap)="onResetFormClick()">
+        </button>
+    </container>
+</formpanel>

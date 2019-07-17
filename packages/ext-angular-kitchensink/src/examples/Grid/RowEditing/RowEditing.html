@@ -1,0 +1,61 @@
+<container padding="10" layout="fit" [fitToParent]="true">
+    <grid 
+      title="Row Editing"
+      [store]="plants"
+      [shadow]="true"
+      [height]="700"
+      [width]="600"
+      [rowNumbers]="true"
+      [markDirty]="true"
+      [plugins]="{ rowedit: { autoConfirm: false }}"
+    >
+      <column  
+        text= 'Common Name'
+        [flex]= "1"
+        [width]= "100"
+        dataIndex= "common"
+        [editable]= "true"
+      >
+      </column>
+      <column
+        text= 'Light'
+        [width]= "125"
+        [flex]= "1"
+        dataIndex= "light"
+        [editable]= "true"
+        [editor]= "{
+            xtype: 'selectfield',
+            options: [
+                'Shade',
+                'Mostly Shady',
+                'Sun or Shade',
+                'Mostly Sunny',
+                'Sunny'
+            ]
+        }">
+      </column>
+      <column
+        text= 'Price'
+        [width]= "100"
+        [flex]= "1"
+        [formatter]= "usMoney"
+        dataIndex= 'price'
+        [editable]= 'true'>
+      </column>
+      <datecolumn
+        text= 'Available'
+        [width]= '125'
+        [flex]= "1"
+        dataIndex= 'availDate'
+        [editable]='true'>
+      </datecolumn>
+      <checkcolumn
+        text= 'Indoor?'
+        [flex]= "1"
+        dataIndex= 'indoor'
+        [headerCheckbox]= 'true'
+        >
+      </checkcolumn>
+    </grid>
+  </container>
+  
