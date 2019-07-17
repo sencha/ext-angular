@@ -24,6 +24,7 @@ import {TreeComponent} from './Trees/Tree/Tree';
 import {TreeDecorationsComponent} from './Trees/TreeDecorations/TreeDecorations';
 import {TreeGridComponent} from './Trees/TreeGrid/TreeGrid';
 import {TreeListComponent} from './Trees/TreeList/TreeList';
+import {TreeReorderComponent} from './Trees/TreeReorder/TreeReorder';
 import {DefaultGaugeComponent} from './Gauges/DefaultGauge/DefaultGauge';
 import {NeedleGaugeComponent} from './Gauges/NeedleGauge/NeedleGauge';
 
@@ -318,7 +319,7 @@ const treeRoot = {
               { text: 'Locking Grid', component: LockingGridComponent, navIcon: 'icon-locking-grid'},
               { text: 'Editable Grid', component: EditableGridComponent, navIcon: 'icon-editable-grid'},
               { text: 'XML Grid', component: XMLGridComponent, navIcon: 'icon-xml-grid'},
-              { text: 'Editable Row', component: RowEditingComponent, navIcon: 'icon-row-editing'}
+              { text: 'Editable Row', component: RowEditingComponent, navIcon: 'icon-row-editing'},
               { text: 'Infinite Grid', component: InfiniteGridComponent, navIcon: 'icon-buffer-grid'}
 
           ]},
@@ -346,6 +347,7 @@ const treeRoot = {
           { text: 'Editable Tree', premium: true, premiumClass: 'x-fa fa-star app-premium-indicator', component: EditableTreeComponent, navIcon: 'icon-tree-editable'},
           { text: 'Tree Grid', premium: true, premiumClass: 'x-fa fa-star app-premium-indicator', component: TreeGridComponent, navIcon: 'icon-tree-grid' },
           { text: 'Tree Decorations', premium: true, premiumClass: 'x-fa fa-star app-premium-indicator', component:TreeDecorationsComponent, navIcon: 'icon-tree-decorations'},
+          { text: 'Tree Reorder', component: TreeReorderComponent, navIcon: 'icon-tree-reorder'},
           { text: 'Heterogeneous Tree', premium: true, premiumClass: 'x-fa fa-star app-premium-indicator', component: HeterogeneousTreeComponent, navIcon: 'icon-heterogeneous-tree'}
       ] },
       { text: 'Calendar', premium: false, navIcon: 'icon-calendar', children:[
