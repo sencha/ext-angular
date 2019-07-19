@@ -25,13 +25,20 @@
   </titlebar>
   <!-- Titlebar ends-->
 
-  <!-- Breadcrumb starts-->
-  <toolbar docked="top" [weight]="10" *ngIf="!isPhone">
-    <dataview [itemTpl]="tplToolbar" [inline]="'true'" [itemCls]="'div.app-toolbar'" id="hide-overflow"
-      (childtap)="doClickToolbar($event)" (ready)="dataviewToolbarReady($event)">
-    </dataview>
-  </toolbar>
-  <!-- Breadcrumb ends-->
+    <!-- Breadcrumb starts-->
+    <toolbar docked="top" [weight]="10" *ngIf="!isPhone" padding="0">
+        <breadcrumbbar
+            showIcons= "true"
+            [store]="treeStore"
+            useSplitButtons="true"
+            (ready)="breadcrumbReady($event)"
+            (change)="breadcrumbChange($event)"
+            width="100%"
+            height="100%"
+        >
+        </breadcrumbbar>
+    </toolbar>
+    <!-- Breadcrumb ends-->
 
   <!-- Navtree starts-->
   <panel [weight]="10" *ngIf="!isPhone"
@@ -44,7 +51,15 @@
     [collapsible]="{ direction: 'left' }"
     [collapsed]="!showTreeFlag">
     <searchfield docked="top" ui="faded" margin="7" (change)="filterNav($event)"></searchfield>
-    <treelist ui="nav" [expanderFirst]="false" [expanderOnly]="false" [store]="treeStore" (selectionchange)="selectionChanged($event)"></treelist>
+    <treelist
+        ui="nav"
+        [expanderFirst]="false"
+        [expanderOnly]="true"
+        [selectOnExpander]="true"
+        [store]="treeStore"
+        (selectionchange)="selectionChanged($event)"
+    >
+    </treelist>
   </panel>
   <!-- Navtree ends-->
 
@@ -106,16 +121,4 @@
     (back)="doBack($event)"
     (ready)="nestedlistReady($event)">
   </nestedlist>
-
-  <toolbar docked="top" [weight]="10" *ngIf="isPhone" [hidden]="hideExamples" >
-    <dataview [itemTpl]="tplToolbar" [inline]="'true'" [itemCls]="'div.app-toolbar'"
-      (childtap)="doClickToolbar($event)" (ready)="dataviewToolbarReady($event)">
-    </dataview>
-  </toolbar>
-
-  <container *ngIf="isPhone" [hidden]="hideExamples" layout="fit">
-    <router-outlet #extroute></router-outlet>
-  </container>
-  <!-- nestedlist ends-->
-
 </panel>

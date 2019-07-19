@@ -21,25 +21,7 @@ hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
 hljs.registerLanguage('xml', require('highlight.js/lib/languages/xml'));
 hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'));
 declare var _code: any;
-const generateBreadcrumb = (node) => {
-  try {
-    const path = [];
-    do {
-      path.unshift({
-        isLeaf: !node.childNodes.length,
-        text: node.get("text"),
-        path: node.get("id"),
-        divider: '&nbsp;>&nbsp;'
-      });
-    } while (node = node.parentNode)
-    path[path.length-1].divider = ''
-    return path
-  }
-  catch(e) {
-    console.log('generateBreadcrumb')
-    console.error(e)
-  }
-};
+
 @Component({
   selector: 'app-root',
   templateUrl: 'landingpage.component.html',
@@ -76,12 +58,11 @@ export class LandingpageComponent implements OnInit {
   files: Array<any> = [];
   node: any
   node$: any = new Subject()
-  breadcrumb: Array<any>
   isDesktop: boolean = Ext.os.is.Desktop;
   filterRegex: any
   filterVal: any
   showTreeFlag: any = false
-  theDataviewToolbar: any
+  breadcrumbCmp: any
   tplToolbar: any = `
   <div class="app-toolbar">
     {text} <span>{divider}</span>
@@ -98,20 +79,16 @@ export class LandingpageComponent implements OnInit {
           this.node = v;
           this.files = getFiles(v, _code);
           this.highlightCode();
-          this.breadcrumb = generateBreadcrumb(v);
           this.hideSelections = this.node.childNodes.length > 0 ? false: true
           this.hideExamples = this.node.childNodes.length > 0 ? true: false
           if(this.hideSelections == false) {
             if (this.theDataview != undefined) {
-              this.theDataview.setData(this.node.childNodes)
+                this.theDataview.setData(this.node.childNodes)
             }
           }
           else {
             var location = window.location.hash.substr(1);
             this.navigate(location)
-          }
-          if (this.theDataviewToolbar != undefined) {
-            this.theDataviewToolbar.setData(this.breadcrumb)
           }
         }
       }));
@@ -126,6 +103,9 @@ export class LandingpageComponent implements OnInit {
           } else {
             console.log("Not a valid node. Probably looking at resources");
           }
+
+          this.node = localNode;
+          this.breadcrumbCmp.setSelection(this.node)
         }
       });
     }
@@ -142,6 +122,10 @@ export class LandingpageComponent implements OnInit {
 
   dataviewReady = (event) => {
     this.theDataview = event.ext;
+  }
+
+  breadcrumbReady = (event) => {
+    this.breadcrumbCmp = event.ext;
   }
 
 
@@ -182,13 +166,9 @@ export class LandingpageComponent implements OnInit {
     this.navigate(id)
   }
 
-  dataviewToolbarReady = (event) => {
-    this.theDataviewToolbar = event.ext
-  }
-
-  doClickToolbar = (event) => {
-    var id = event.location.record.data.path
-    this.navigate(id)
+  breadcrumbChange = (event) => {
+    this.breadcrumbCmp.setSelection(event.node);
+    this.navigate(event.node.id);
   }
 
   navigate(location) {
