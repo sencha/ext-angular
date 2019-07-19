@@ -25,17 +25,20 @@
   </titlebar>
   <!-- Titlebar ends-->
 
-  <!-- Breadcrumb starts-->
-    <breadcrumbbar 
-        docked="top"
-        showIcons= "true"
-        [store]="treeStore"
-        useSplitButtons="true"
-        (ready)="breadcrumbReady($event)"
-        (change)="breadcrumbChange($event)"
-    >  
-    </breadcrumbbar>
-  <!-- Breadcrumb ends-->
+    <!-- Breadcrumb starts-->
+    <toolbar docked="top" [weight]="10" *ngIf="!isPhone" padding="0">
+        <breadcrumbbar
+            showIcons= "true"
+            [store]="treeStore"
+            useSplitButtons="true"
+            (ready)="breadcrumbReady($event)"
+            (change)="breadcrumbChange($event)"
+            width="100%"
+            height="100%"
+        >
+        </breadcrumbbar>
+    </toolbar>
+    <!-- Breadcrumb ends-->
 
   <!-- Navtree starts-->
   <panel [weight]="10" *ngIf="!isPhone"
