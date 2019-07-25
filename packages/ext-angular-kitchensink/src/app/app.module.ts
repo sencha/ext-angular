@@ -12,6 +12,10 @@ import {AppService} from './app.service'
 import * as d3 from 'd3'
 window['d3'] = d3
 
+
+import * as FroalaEditor from 'froala-editor/js/froala_editor.pkgd.min.js';
+window['FroalaEditor'] = FroalaEditor;
+
 import { LandingpageComponent } from './view/landingpage/landingpage.component';
 import { DummyComponent } from './view/landingpage/landingpage.component';
 
@@ -503,6 +507,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
     SegmentedButtonComponent,
     RippleComponent,
     ColorPickerComponent,
+    FroalaEditorComponent,
     CarouselComponent,
     DrawComponent,
     DefaultGaugeComponent,

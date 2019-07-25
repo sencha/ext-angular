@@ -1,15 +1,37 @@
 declare var Ext: any;
 import { Component } from '@angular/core';
-import 'froala-editor/css/froala_editor.pkgd.min.css';
 
 @Component({
   	selector: 'froalaeditor-component',
   	templateUrl: './FroalaEditor.html',
-  	styleUrls: [``]
+  	styles: [``]
 })
 
 export class FroalaEditorComponent {
-	value: any;
+	value: any = '';
+  editorFieldCmp: any;
+  parentFormPanelCmp: any;
+
+  onFormPanelReady = (event) => {
+    if (event.detail.cmp) {
+      this.parentFormPanelCmp = event.detail.cmp;
+    }
+  }
+
+  formPanelOkBtnClick = () => {
+    Ext.Msg.alert('getValues()', Ext.JSON.encode(this.parentFormPanelCmp.getValues()));
+  }
+
+  onEditorFieldReady = (event) => {
+    if (event.detail.cmp) {
+      this.editorFieldCmp = event.detail.cmp;
+      this.editorFieldCmp.setValue(this.value);
+      this.editorFieldCmp.setListeners({
+        'froala.click': (froalaComponent) => { Ext.toast({ message: 'Click!' }); }
+      });
+    }
+  }
+
   buttonsObj: any = {
     ok: {
         text: 'getValues()',
@@ -22,17 +44,13 @@ export class FroalaEditorComponent {
     fontSize: [10, 12, 16, 24]
   }
 
-  listenersObj: any = {
-    change: this.froalaTextChange,
-    'froala.click': (froalaComponent) => { Ext.toast({ message: 'Click!' }); }
-  }
-
-  formPanelOkBtnClick = () => {
-    Ext.Msg.alert('getValues()', Ext.JSON.encode(this.refs.parentFormPanelCmp.cmp.getValues()));
-  }
-
   froalaTextChange = (ele, the) => {
     this.value = the;
     Ext.toast({ message: 'Change!' });
+  }
+
+  listenersObj: any = {
+    change: this.froalaTextChange,
+    'froala.click': (froalaComponent) => { Ext.toast({ message: 'Click!' }); }
   }
 }

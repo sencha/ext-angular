@@ -4,10 +4,12 @@
   width="95%"
   title="Ext.froala.EditorField insde a form panel"
   [buttons]="buttonsObj"
+  (ready)="onFormPanelReady($event)"
 >
   <froalaeditorfield
     name="html"
     margin="16"
+    (ready)="onEditorFieldReady($event)"
     [value]="value"
     [listeners] = "listenersObj"
     [editor]="editorObj"
