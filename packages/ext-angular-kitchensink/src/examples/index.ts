@@ -18,6 +18,7 @@ import {TitleBarComponent} from './TitleBar/TitleBar';
 import {ToolBarComponent} from './ToolBars/ToolBar/ToolBar';
 import {BreadcrumbToolBarComponent} from './ToolBars/BreadcrumbToolbar/BreadcrumbToolbar';import {ToolTipComponent} from './ToolTip/ToolTip';
 import {ColorPickerComponent} from './ColorPicker/ColorPicker';
+import {FroalaEditorComponent} from './FroalaEditor/FroalaEditor';
 import {EditableTreeComponent} from './Trees/EditableTree/EditableTree';
 import {HeterogeneousTreeComponent} from './Trees/HeterogeneousTree/HeterogeneousTree';
 import {TreeComponent} from './Trees/Tree/Tree';
@@ -309,7 +310,8 @@ const treeRoot = {
         { text: 'ToolTip', component: ToolTipComponent, layout: 'center', navIcon: 'icon-tooltips'  },
         { text: 'Touch Events', component: TouchEventsComponent, navIcon: 'icon-touch-events' },
         //{ text: 'Transition', component: Transition, navIcon: 'icon-Transition' },
-        { text: 'Wizard', component: ButtonComponent, navIcon: 'icon-layout-card-indicator', layout: Ext.os.is.Phone ? 'fit': 'center' }
+        { text: 'Wizard', component: ButtonComponent, navIcon: 'icon-layout-card-indicator', layout: Ext.os.is.Phone ? 'fit': 'center' },
+        { text: 'Froala Editor', component: FroalaEditorComponent, layout: 'center', navIcon: 'icon-editor' },
       ]},
 
       { text: 'Grids', navIcon: 'icon-grids', children: [

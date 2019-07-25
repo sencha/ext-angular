@@ -1,6 +1,5 @@
 declare var Ext: any;
 import { Component } from '@angular/core';
-import {data} from './data'
 
 Ext.require([
   'Ext.data.TreeStore',
@@ -15,15 +14,28 @@ Ext.require([
 export class TreeReorderComponent {
   toolbar:any;
   treeCmp:any;
+
   treeStore = Ext.create('Ext.data.TreeStore', {
-    rootVisible: true,
-    root: data
+      type: 'tree',
+      rootVisible: true,
+      sorters: [{
+          property: 'text',
+          direction: 'ASC'
+      }],
+      root: {
+          text: 'Products',
+          expanded: true
+      },
+      proxy: {
+          type: 'ajax',
+          url: 'resources/data/tree/cars.json'
+      },
   });
 
   onTreeReady = (event) => {
     this.treeCmp = event.ext;
   }
-  
+
   toolbarReady = (event) => {
     this.toolbar = event.ext;
   }
@@ -48,5 +60,9 @@ export class TreeReorderComponent {
       this.treeCmp.collapseAll(() => {
           this.toolbar.enable();
       });
+  }
+
+  onResetClick = () => {
+      this.treeStore.reload();
   }
 }
