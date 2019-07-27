@@ -119,7 +119,7 @@ import { ExtTriggerComponent } from './ext-trigger.component';
 import { ExtUrlfieldComponent } from './ext-urlfield.component';
 import { ExtFieldsetComponent } from './ext-fieldset.component';
 import { ExtFormpanelComponent } from './ext-formpanel.component';
-import { ExtFroalaeditorfieldComponent } from './ext-froalaeditorfield.component';
+import { ExtFroalaeditorComponent } from './ext-froalaeditor.component';
 import { ExtFroalaeditorfieldComponent } from './ext-froalaeditorfield.component';
 import { ExtGridcellbaseComponent } from './ext-gridcellbase.component';
 import { ExtBooleancellComponent } from './ext-booleancell.component';
@@ -361,7 +361,7 @@ import { ExtWidgetComponent } from './ext-widget.component';
     ExtUrlfieldComponent,
     ExtFieldsetComponent,
     ExtFormpanelComponent,
-    ExtFroalaeditorfieldComponent,
+    ExtFroalaeditorComponent,
     ExtFroalaeditorfieldComponent,
     ExtGridcellbaseComponent,
     ExtBooleancellComponent,
@@ -604,7 +604,7 @@ import { ExtWidgetComponent } from './ext-widget.component';
     ExtUrlfieldComponent,
     ExtFieldsetComponent,
     ExtFormpanelComponent,
-    ExtFroalaeditorfieldComponent,
+    ExtFroalaeditorComponent,
     ExtFroalaeditorfieldComponent,
     ExtGridcellbaseComponent,
     ExtBooleancellComponent,

@@ -34,6 +34,7 @@ export class inputfieldMetaData {
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
     'dirty',
     'disabled',

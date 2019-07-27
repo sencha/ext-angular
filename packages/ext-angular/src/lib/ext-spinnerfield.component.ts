@@ -43,6 +43,7 @@ export class spinnerfieldMetaData {
     'controller',
     'cycle',
     'data',
+    'dataType',
     'decimals',
     'decimalSeparator',
     'decimalsText',

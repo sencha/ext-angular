@@ -36,6 +36,7 @@ export class radiogroupMetaData {
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultFieldValue',
     'defaultListenerScope',
     'defaults',

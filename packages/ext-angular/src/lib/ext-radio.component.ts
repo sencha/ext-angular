@@ -37,6 +37,7 @@ export class radioMetaData {
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
     'dirty',
     'disabled',

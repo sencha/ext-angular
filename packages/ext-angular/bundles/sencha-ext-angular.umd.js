@@ -2219,6 +2219,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'delimiter',
             'dirty',
@@ -2949,6 +2950,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'delimiter',
             'dirty',
@@ -20486,6 +20488,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -20781,6 +20784,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -21075,6 +21079,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultFieldValue',
             'defaultListenerScope',
             'defaults',
@@ -21385,6 +21390,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'delimiter',
             'dirty',
@@ -21752,6 +21758,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'delimiter',
             'dirty',
@@ -22104,6 +22111,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'defaults',
             'defaultType',
@@ -22395,6 +22403,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'defaults',
             'defaultType',
@@ -22693,6 +22702,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'dateFormat',
             'defaultListenerScope',
             'destroyPickerOnHide',
@@ -22784,7 +22794,6 @@
             'stateId',
             'stripCharsRe',
             'style',
-            'submitFormat',
             'tabIndex',
             'textAlign',
             'tipError',
@@ -23022,6 +23031,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'dateFormat',
             'defaultListenerScope',
             'destroyPickerOnHide',
@@ -23113,7 +23123,6 @@
             'stateId',
             'stripCharsRe',
             'style',
-            'submitFormat',
             'tabIndex',
             'textAlign',
             'tipError',
@@ -23351,6 +23360,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'dateFormat',
             'defaultListenerScope',
             'destroyPickerOnHide',
@@ -23442,7 +23452,6 @@
             'stateId',
             'stripCharsRe',
             'style',
-            'submitFormat',
             'tabIndex',
             'textAlign',
             'tipError',
@@ -23671,6 +23680,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -23967,6 +23977,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -24270,6 +24281,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -24556,6 +24568,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultFieldValue',
             'defaultListenerScope',
             'defaults',
@@ -24858,6 +24871,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -25440,6 +25454,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -25727,6 +25742,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -26021,6 +26037,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'decimals',
             'decimalSeparator',
             'decimalsText',
@@ -26687,6 +26704,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -27000,6 +27018,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -27318,6 +27337,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -27613,6 +27633,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -27907,6 +27928,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultFieldValue',
             'defaultListenerScope',
             'defaults',
@@ -28208,6 +28230,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -28525,6 +28548,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'delimiter',
             'dirty',
@@ -28861,6 +28885,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -29162,6 +29187,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -29470,6 +29496,7 @@
             'controller',
             'cycle',
             'data',
+            'dataType',
             'decimals',
             'decimalSeparator',
             'decimalsText',
@@ -29795,6 +29822,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -30105,6 +30133,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -30418,6 +30447,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -30737,6 +30767,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -32271,6 +32302,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -33195,6 +33227,554 @@
             __metadata("design:paramtypes", [core.ElementRef, base])
         ], ExtFormpanelComponent);
         return ExtFormpanelComponent;
+    }(base));
+
+    var froalaeditorMetaData = /** @class */ (function () {
+        function froalaeditorMetaData() {
+        }
+        froalaeditorMetaData.XTYPE = 'froalaeditor';
+        froalaeditorMetaData.PROPERTIES = [
+            'activationKey',
+            'alignSelf',
+            'alwaysOnTop',
+            'ariaAttributes',
+            'ariaDescribedBy',
+            'ariaLabel',
+            'ariaLabelledBy',
+            'axisLock',
+            'bind',
+            'border',
+            'bottom',
+            'centered',
+            'cls',
+            'constrainAlign',
+            'contentEl',
+            'controller',
+            'data',
+            'defaultEditor',
+            'defaultListenerScope',
+            'disabled',
+            'displayed',
+            'docked',
+            'draggable',
+            'editor',
+            'flex',
+            'floated',
+            'focusCls',
+            'fullscreen',
+            'height',
+            'hidden',
+            'hideAnimation',
+            'hideMode',
+            'hideOnMaskTap',
+            'html',
+            'id',
+            'instanceCls',
+            'itemId',
+            'keyMap',
+            'keyMapEnabled',
+            'keyMapTarget',
+            'left',
+            'listeners',
+            'margin',
+            'maxHeight',
+            'maxWidth',
+            'minHeight',
+            'minWidth',
+            'modal',
+            'modelValidation',
+            'name',
+            'nameable',
+            'padding',
+            'plugins',
+            'publishes',
+            'record',
+            'reference',
+            'relative',
+            'renderTo',
+            'right',
+            'ripple',
+            'scrollable',
+            'session',
+            'shadow',
+            'shareableName',
+            'shim',
+            'showAnimation',
+            'stateful',
+            'statefulDefaults',
+            'stateId',
+            'style',
+            'tabIndex',
+            'toFrontOnShow',
+            'tooltip',
+            'top',
+            'touchAction',
+            'tpl',
+            'tplWriteMode',
+            'translatable',
+            'twoWayBindable',
+            'ui',
+            'userCls',
+            'userSelectable',
+            'value',
+            'viewModel',
+            'weight',
+            'width',
+            'x',
+            'xtype',
+            'y',
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'align',
+            'fitToParent',
+            'config'
+        ];
+        froalaeditorMetaData.EVENTS = [
+            { name: 'added', parameters: 'sender,container,index' },
+            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehide', parameters: 'sender' },
+            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforetofront', parameters: 'froalaeditor' },
+            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'blur', parameters: 'froalaeditor,event' },
+            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'change', parameters: 'froalaeditor,the' },
+            { name: 'destroy', parameters: '' },
+            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'erased', parameters: 'sender' },
+            { name: 'floatingchange', parameters: 'sender,positioned' },
+            { name: 'focus', parameters: 'froalaeditor,event' },
+            { name: 'focusenter', parameters: 'froalaeditor,event' },
+            { name: 'focusleave', parameters: 'froalaeditor,event' },
+            { name: 'fullscreen', parameters: 'sender' },
+            { name: 'heightchange', parameters: 'sender,value,oldValue' },
+            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+            { name: 'hide', parameters: 'sender' },
+            { name: 'initialize', parameters: 'sender' },
+            { name: 'leftchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+            { name: 'orientationchange', parameters: '' },
+            { name: 'painted', parameters: 'sender,element' },
+            { name: 'positionedchange', parameters: 'sender,positioned' },
+            { name: 'ready', parameters: 'froalaeditor,the' },
+            { name: 'removed', parameters: 'sender,container,index' },
+            { name: 'resize', parameters: 'element,info' },
+            { name: 'rightchange', parameters: 'sender,value,oldValue' },
+            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+            { name: 'show', parameters: 'sender' },
+            { name: 'tofront', parameters: 'froalaeditor' },
+            { name: 'topchange', parameters: 'sender,value,oldValue' },
+            { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'widthchange', parameters: 'sender,value,oldValue' },
+            { name: 'ready', parameters: '' }
+        ];
+        froalaeditorMetaData.EVENTNAMES = [
+            'added',
+            'beforebottomchange',
+            'beforecenteredchange',
+            'beforedisabledchange',
+            'beforedockedchange',
+            'beforeheightchange',
+            'beforehiddenchange',
+            'beforehide',
+            'beforeleftchange',
+            'beforemaxHeightchange',
+            'beforemaxWidthchange',
+            'beforeminHeightchange',
+            'beforeminWidthchange',
+            'beforeorientationchange',
+            'beforerightchange',
+            'beforescrollablechange',
+            'beforeshow',
+            'beforetofront',
+            'beforetopchange',
+            'beforewidthchange',
+            'blur',
+            'bottomchange',
+            'centeredchange',
+            'change',
+            'destroy',
+            'disabledchange',
+            'dockedchange',
+            'erased',
+            'floatingchange',
+            'focus',
+            'focusenter',
+            'focusleave',
+            'fullscreen',
+            'heightchange',
+            'hiddenchange',
+            'hide',
+            'initialize',
+            'leftchange',
+            'maxHeightchange',
+            'maxWidthchange',
+            'minHeightchange',
+            'minWidthchange',
+            'moved',
+            'orientationchange',
+            'painted',
+            'positionedchange',
+            'ready',
+            'removed',
+            'resize',
+            'rightchange',
+            'scrollablechange',
+            'show',
+            'tofront',
+            'topchange',
+            'updatedata',
+            'widthchange',
+            'ready'
+        ];
+        return froalaeditorMetaData;
+    }());
+    var ExtFroalaeditorComponent = /** @class */ (function (_super) {
+        __extends(ExtFroalaeditorComponent, _super);
+        function ExtFroalaeditorComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, froalaeditorMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
+        }
+        ExtFroalaeditorComponent_1 = ExtFroalaeditorComponent;
+        ExtFroalaeditorComponent.prototype.ngOnInit = function () {
+            this.baseOnInit(froalaeditorMetaData);
+        };
+        ExtFroalaeditorComponent.prototype.ngAfterContentInit = function () {
+            this.baseAfterContentInit();
+            //this['ready'].emit(this)
+        };
+        var ExtFroalaeditorComponent_1;
+        ExtFroalaeditorComponent = ExtFroalaeditorComponent_1 = __decorate([
+            core.Component({
+                selector: 'froalaeditor',
+                inputs: froalaeditorMetaData.PROPERTIES,
+                outputs: froalaeditorMetaData.EVENTNAMES,
+                providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtFroalaeditorComponent_1; }) }],
+                template: '<ng-template></ng-template>'
+            }),
+            __param(1, core.Host()), __param(1, core.Optional()), __param(1, core.SkipSelf()),
+            __metadata("design:paramtypes", [core.ElementRef, base])
+        ], ExtFroalaeditorComponent);
+        return ExtFroalaeditorComponent;
+    }(base));
+
+    var froalaeditorfieldMetaData = /** @class */ (function () {
+        function froalaeditorfieldMetaData() {
+        }
+        froalaeditorfieldMetaData.XTYPE = 'froalaeditorfield';
+        froalaeditorfieldMetaData.PROPERTIES = [
+            'activationKey',
+            'alignSelf',
+            'alwaysOnTop',
+            'ariaAttributes',
+            'ariaDescribedBy',
+            'ariaLabel',
+            'ariaLabelledBy',
+            'autoFitErrors',
+            'autoSize',
+            'axisLock',
+            'bind',
+            'bodyAlign',
+            'border',
+            'bottom',
+            'bubbleDirty',
+            'centered',
+            'cls',
+            'constrainAlign',
+            'container',
+            'contentEl',
+            'controller',
+            'data',
+            'dataType',
+            'defaultEditor',
+            'defaultListenerScope',
+            'defaults',
+            'defaultType',
+            'dirty',
+            'disabled',
+            'displayed',
+            'docked',
+            'draggable',
+            'editor',
+            'error',
+            'errorMessage',
+            'errorTarget',
+            'errorTip',
+            'errorTpl',
+            'fieldDefaults',
+            'flex',
+            'floated',
+            'focusCls',
+            'fullscreen',
+            'height',
+            'hidden',
+            'hideAnimation',
+            'hideMode',
+            'hideOnMaskTap',
+            'html',
+            'id',
+            'inline',
+            'instanceCls',
+            'itemId',
+            'items',
+            'keyMap',
+            'keyMapEnabled',
+            'keyMapTarget',
+            'label',
+            'labelAlign',
+            'labelCls',
+            'labelMinWidth',
+            'labelTextAlign',
+            'labelWidth',
+            'labelWrap',
+            'layout',
+            'left',
+            'listeners',
+            'margin',
+            'maxHeight',
+            'maxWidth',
+            'minHeight',
+            'minWidth',
+            'modal',
+            'modelValidation',
+            'name',
+            'nameable',
+            'padding',
+            'plugins',
+            'publishes',
+            'record',
+            'reference',
+            'relative',
+            'renderTo',
+            'required',
+            'requiredMessage',
+            'right',
+            'ripple',
+            'scrollable',
+            'session',
+            'shadow',
+            'shareableName',
+            'shim',
+            'showAnimation',
+            'sideError',
+            'stateful',
+            'statefulDefaults',
+            'stateId',
+            'style',
+            'tabIndex',
+            'tipError',
+            'titleError',
+            'toFrontOnShow',
+            'tooltip',
+            'top',
+            'touchAction',
+            'tpl',
+            'tplWriteMode',
+            'translatable',
+            'twoWayBindable',
+            'ui',
+            'underError',
+            'userCls',
+            'userSelectable',
+            'validateDisabled',
+            'validationMessage',
+            'validators',
+            'value',
+            'viewModel',
+            'weight',
+            'width',
+            'x',
+            'xtype',
+            'y',
+            'zIndex',
+            'platformConfig',
+            'responsiveConfig',
+            'align',
+            'fitToParent',
+            'config'
+        ];
+        froalaeditorfieldMetaData.EVENTS = [
+            { name: 'added', parameters: 'sender,container,index' },
+            { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforehide', parameters: 'sender' },
+            { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeorientationchange', parameters: '' },
+            { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforeshow', parameters: 'sender' },
+            { name: 'beforetofront', parameters: 'froalaeditorfield' },
+            { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+            { name: 'blur', parameters: 'froalaeditorfield,event' },
+            { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+            { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+            { name: 'change', parameters: 'froalaeditorfield,the' },
+            { name: 'click', parameters: 'e' },
+            { name: 'destroy', parameters: '' },
+            { name: 'dirtychange', parameters: 'froalaeditorfield,dirty' },
+            { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+            { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+            { name: 'erased', parameters: 'sender' },
+            { name: 'errorchange', parameters: 'froalaeditorfield,error' },
+            { name: 'floatingchange', parameters: 'sender,positioned' },
+            { name: 'focus', parameters: 'froalaeditorfield,event' },
+            { name: 'focusenter', parameters: 'froalaeditorfield,event' },
+            { name: 'focusleave', parameters: 'froalaeditorfield,event' },
+            { name: 'fullscreen', parameters: 'sender' },
+            { name: 'heightchange', parameters: 'sender,value,oldValue' },
+            { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+            { name: 'hide', parameters: 'sender' },
+            { name: 'initialize', parameters: 'sender' },
+            { name: 'keyup', parameters: 'e' },
+            { name: 'leftchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+            { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+            { name: 'mousedown', parameters: 'e' },
+            { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+            { name: 'orientationchange', parameters: '' },
+            { name: 'painted', parameters: 'sender,element' },
+            { name: 'paste', parameters: 'e' },
+            { name: 'positionedchange', parameters: 'sender,positioned' },
+            { name: 'ready', parameters: 'froalaeditorfield,the' },
+            { name: 'removed', parameters: 'sender,container,index' },
+            { name: 'resize', parameters: 'element,info' },
+            { name: 'rightchange', parameters: 'sender,value,oldValue' },
+            { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+            { name: 'show', parameters: 'sender' },
+            { name: 'tofront', parameters: 'froalaeditorfield' },
+            { name: 'topchange', parameters: 'sender,value,oldValue' },
+            { name: 'updatedata', parameters: 'sender,newData' },
+            { name: 'widthchange', parameters: 'sender,value,oldValue' },
+            { name: 'ready', parameters: '' }
+        ];
+        froalaeditorfieldMetaData.EVENTNAMES = [
+            'added',
+            'beforebottomchange',
+            'beforecenteredchange',
+            'beforedisabledchange',
+            'beforedockedchange',
+            'beforeheightchange',
+            'beforehiddenchange',
+            'beforehide',
+            'beforeleftchange',
+            'beforemaxHeightchange',
+            'beforemaxWidthchange',
+            'beforeminHeightchange',
+            'beforeminWidthchange',
+            'beforeorientationchange',
+            'beforerightchange',
+            'beforescrollablechange',
+            'beforeshow',
+            'beforetofront',
+            'beforetopchange',
+            'beforewidthchange',
+            'blur',
+            'bottomchange',
+            'centeredchange',
+            'change',
+            'click',
+            'destroy',
+            'dirtychange',
+            'disabledchange',
+            'dockedchange',
+            'erased',
+            'errorchange',
+            'floatingchange',
+            'focus',
+            'focusenter',
+            'focusleave',
+            'fullscreen',
+            'heightchange',
+            'hiddenchange',
+            'hide',
+            'initialize',
+            'keyup',
+            'leftchange',
+            'maxHeightchange',
+            'maxWidthchange',
+            'minHeightchange',
+            'minWidthchange',
+            'mousedown',
+            'moved',
+            'orientationchange',
+            'painted',
+            'paste',
+            'positionedchange',
+            'ready',
+            'removed',
+            'resize',
+            'rightchange',
+            'scrollablechange',
+            'show',
+            'tofront',
+            'topchange',
+            'updatedata',
+            'widthchange',
+            'ready'
+        ];
+        return froalaeditorfieldMetaData;
+    }());
+    var ExtFroalaeditorfieldComponent = /** @class */ (function (_super) {
+        __extends(ExtFroalaeditorfieldComponent, _super);
+        function ExtFroalaeditorfieldComponent(eRef, hostComponent) {
+            var _this = _super.call(this, eRef.nativeElement, froalaeditorfieldMetaData, hostComponent) || this;
+            _this.hostComponent = hostComponent;
+            return _this;
+        }
+        ExtFroalaeditorfieldComponent_1 = ExtFroalaeditorfieldComponent;
+        ExtFroalaeditorfieldComponent.prototype.ngOnInit = function () {
+            this.baseOnInit(froalaeditorfieldMetaData);
+        };
+        ExtFroalaeditorfieldComponent.prototype.ngAfterContentInit = function () {
+            this.baseAfterContentInit();
+            //this['ready'].emit(this)
+        };
+        var ExtFroalaeditorfieldComponent_1;
+        ExtFroalaeditorfieldComponent = ExtFroalaeditorfieldComponent_1 = __decorate([
+            core.Component({
+                selector: 'froalaeditorfield',
+                inputs: froalaeditorfieldMetaData.PROPERTIES,
+                outputs: froalaeditorfieldMetaData.EVENTNAMES,
+                providers: [{ provide: base, useExisting: core.forwardRef(function () { return ExtFroalaeditorfieldComponent_1; }) }],
+                template: '<ng-template></ng-template>'
+            }),
+            __param(1, core.Host()), __param(1, core.Optional()), __param(1, core.SkipSelf()),
+            __metadata("design:paramtypes", [core.ElementRef, base])
+        ], ExtFroalaeditorfieldComponent);
+        return ExtFroalaeditorfieldComponent;
     }(base));
 
     var gridcellbaseMetaData = /** @class */ (function () {
@@ -40052,7 +40632,7 @@
             'masked',
             'maxHeight',
             'maxWidth',
-            'menuLabel',
+            'menuItem',
             'minButtonWidth',
             'minHeight',
             'minWidth',
@@ -64360,6 +64940,7 @@
             'contentEl',
             'controller',
             'data',
+            'dataType',
             'defaultListenerScope',
             'dirty',
             'disabled',
@@ -66675,6 +67256,8 @@
                     ExtUrlfieldComponent,
                     ExtFieldsetComponent,
                     ExtFormpanelComponent,
+                    ExtFroalaeditorComponent,
+                    ExtFroalaeditorfieldComponent,
                     ExtGridcellbaseComponent,
                     ExtBooleancellComponent,
                     ExtGridcellComponent,
@@ -66915,6 +67498,8 @@
                     ExtUrlfieldComponent,
                     ExtFieldsetComponent,
                     ExtFormpanelComponent,
+                    ExtFroalaeditorComponent,
+                    ExtFroalaeditorfieldComponent,
                     ExtGridcellbaseComponent,
                     ExtBooleancellComponent,
                     ExtGridcellComponent,
@@ -67257,258 +67842,262 @@
     exports.ɵiu = ExtFieldsetComponent;
     exports.ɵiv = formpanelMetaData;
     exports.ɵiw = ExtFormpanelComponent;
-    exports.ɵix = gridcellbaseMetaData;
-    exports.ɵiy = ExtGridcellbaseComponent;
-    exports.ɵiz = booleancellMetaData;
+    exports.ɵix = froalaeditorMetaData;
+    exports.ɵiy = ExtFroalaeditorComponent;
+    exports.ɵiz = froalaeditorfieldMetaData;
     exports.ɵj = buttonMetaData;
-    exports.ɵja = ExtBooleancellComponent;
-    exports.ɵjb = gridcellMetaData;
-    exports.ɵjc = ExtGridcellComponent;
-    exports.ɵjd = checkcellMetaData;
-    exports.ɵje = ExtCheckcellComponent;
-    exports.ɵjf = datecellMetaData;
-    exports.ɵjg = ExtDatecellComponent;
-    exports.ɵjh = numbercellMetaData;
-    exports.ɵji = ExtNumbercellComponent;
-    exports.ɵjj = rownumberercellMetaData;
-    exports.ɵjk = ExtRownumberercellComponent;
-    exports.ɵjl = textcellMetaData;
-    exports.ɵjm = ExtTextcellComponent;
-    exports.ɵjn = treecellMetaData;
-    exports.ɵjo = ExtTreecellComponent;
-    exports.ɵjp = widgetcellMetaData;
-    exports.ɵjq = ExtWidgetcellComponent;
-    exports.ɵjr = celleditorMetaData;
-    exports.ɵjs = ExtCelleditorComponent;
-    exports.ɵjt = booleancolumnMetaData;
-    exports.ɵju = ExtBooleancolumnComponent;
-    exports.ɵjv = checkcolumnMetaData;
-    exports.ɵjw = ExtCheckcolumnComponent;
-    exports.ɵjx = gridcolumnMetaData;
-    exports.ɵjy = ExtGridcolumnComponent;
-    exports.ɵjz = columnMetaData;
+    exports.ɵja = ExtFroalaeditorfieldComponent;
+    exports.ɵjb = gridcellbaseMetaData;
+    exports.ɵjc = ExtGridcellbaseComponent;
+    exports.ɵjd = booleancellMetaData;
+    exports.ɵje = ExtBooleancellComponent;
+    exports.ɵjf = gridcellMetaData;
+    exports.ɵjg = ExtGridcellComponent;
+    exports.ɵjh = checkcellMetaData;
+    exports.ɵji = ExtCheckcellComponent;
+    exports.ɵjj = datecellMetaData;
+    exports.ɵjk = ExtDatecellComponent;
+    exports.ɵjl = numbercellMetaData;
+    exports.ɵjm = ExtNumbercellComponent;
+    exports.ɵjn = rownumberercellMetaData;
+    exports.ɵjo = ExtRownumberercellComponent;
+    exports.ɵjp = textcellMetaData;
+    exports.ɵjq = ExtTextcellComponent;
+    exports.ɵjr = treecellMetaData;
+    exports.ɵjs = ExtTreecellComponent;
+    exports.ɵjt = widgetcellMetaData;
+    exports.ɵju = ExtWidgetcellComponent;
+    exports.ɵjv = celleditorMetaData;
+    exports.ɵjw = ExtCelleditorComponent;
+    exports.ɵjx = booleancolumnMetaData;
+    exports.ɵjy = ExtBooleancolumnComponent;
+    exports.ɵjz = checkcolumnMetaData;
     exports.ɵk = ExtButtonComponent;
-    exports.ɵka = ExtColumnComponent;
-    exports.ɵkb = templatecolumnMetaData;
-    exports.ɵkc = ExtTemplatecolumnComponent;
-    exports.ɵkd = datecolumnMetaData;
-    exports.ɵke = ExtDatecolumnComponent;
-    exports.ɵkf = dragcolumnMetaData;
-    exports.ɵkg = ExtDragcolumnComponent;
-    exports.ɵkh = numbercolumnMetaData;
-    exports.ɵki = ExtNumbercolumnComponent;
-    exports.ɵkj = rownumbererMetaData;
-    exports.ɵkk = ExtRownumbererComponent;
-    exports.ɵkl = selectioncolumnMetaData;
-    exports.ɵkm = ExtSelectioncolumnComponent;
-    exports.ɵkn = textcolumnMetaData;
-    exports.ɵko = ExtTextcolumnComponent;
-    exports.ɵkp = treecolumnMetaData;
-    exports.ɵkq = ExtTreecolumnComponent;
-    exports.ɵkr = gridMetaData;
-    exports.ɵks = ExtGridComponent;
-    exports.ɵkt = headercontainerMetaData;
-    exports.ɵku = ExtHeadercontainerComponent;
-    exports.ɵkv = lockedgridMetaData;
-    exports.ɵkw = ExtLockedgridComponent;
-    exports.ɵkx = lockedgridregionMetaData;
-    exports.ɵky = ExtLockedgridregionComponent;
-    exports.ɵkz = gridcolumnsmenuMetaData;
+    exports.ɵka = ExtCheckcolumnComponent;
+    exports.ɵkb = gridcolumnMetaData;
+    exports.ɵkc = ExtGridcolumnComponent;
+    exports.ɵkd = columnMetaData;
+    exports.ɵke = ExtColumnComponent;
+    exports.ɵkf = templatecolumnMetaData;
+    exports.ɵkg = ExtTemplatecolumnComponent;
+    exports.ɵkh = datecolumnMetaData;
+    exports.ɵki = ExtDatecolumnComponent;
+    exports.ɵkj = dragcolumnMetaData;
+    exports.ɵkk = ExtDragcolumnComponent;
+    exports.ɵkl = numbercolumnMetaData;
+    exports.ɵkm = ExtNumbercolumnComponent;
+    exports.ɵkn = rownumbererMetaData;
+    exports.ɵko = ExtRownumbererComponent;
+    exports.ɵkp = selectioncolumnMetaData;
+    exports.ɵkq = ExtSelectioncolumnComponent;
+    exports.ɵkr = textcolumnMetaData;
+    exports.ɵks = ExtTextcolumnComponent;
+    exports.ɵkt = treecolumnMetaData;
+    exports.ɵku = ExtTreecolumnComponent;
+    exports.ɵkv = gridMetaData;
+    exports.ɵkw = ExtGridComponent;
+    exports.ɵkx = headercontainerMetaData;
+    exports.ɵky = ExtHeadercontainerComponent;
+    exports.ɵkz = lockedgridMetaData;
     exports.ɵl = calendar_eventMetaData;
-    exports.ɵla = ExtGridcolumnsmenuComponent;
-    exports.ɵlb = gridgroupbythismenuitemMetaData;
-    exports.ɵlc = ExtGridgroupbythismenuitemComponent;
-    exports.ɵld = gridshowingroupsmenuitemMetaData;
-    exports.ɵle = ExtGridshowingroupsmenuitemComponent;
-    exports.ɵlf = gridsortascmenuitemMetaData;
-    exports.ɵlg = ExtGridsortascmenuitemComponent;
-    exports.ɵlh = gridsortdescmenuitemMetaData;
-    exports.ɵli = ExtGridsortdescmenuitemComponent;
-    exports.ɵlj = pagingtoolbarMetaData;
-    exports.ɵlk = ExtPagingtoolbarComponent;
-    exports.ɵll = gridrowMetaData;
-    exports.ɵlm = ExtGridrowComponent;
-    exports.ɵln = rowbodyMetaData;
-    exports.ɵlo = ExtRowbodyComponent;
-    exports.ɵlp = roweditorbarMetaData;
-    exports.ɵlq = ExtRoweditorbarComponent;
-    exports.ɵlr = roweditorcellMetaData;
-    exports.ɵls = ExtRoweditorcellComponent;
-    exports.ɵlt = roweditorMetaData;
-    exports.ɵlu = ExtRoweditorComponent;
-    exports.ɵlv = roweditorgapMetaData;
-    exports.ɵlw = ExtRoweditorgapComponent;
-    exports.ɵlx = rowheaderMetaData;
-    exports.ɵly = ExtRowheaderComponent;
-    exports.ɵlz = gridsummaryrowMetaData;
+    exports.ɵla = ExtLockedgridComponent;
+    exports.ɵlb = lockedgridregionMetaData;
+    exports.ɵlc = ExtLockedgridregionComponent;
+    exports.ɵld = gridcolumnsmenuMetaData;
+    exports.ɵle = ExtGridcolumnsmenuComponent;
+    exports.ɵlf = gridgroupbythismenuitemMetaData;
+    exports.ɵlg = ExtGridgroupbythismenuitemComponent;
+    exports.ɵlh = gridshowingroupsmenuitemMetaData;
+    exports.ɵli = ExtGridshowingroupsmenuitemComponent;
+    exports.ɵlj = gridsortascmenuitemMetaData;
+    exports.ɵlk = ExtGridsortascmenuitemComponent;
+    exports.ɵll = gridsortdescmenuitemMetaData;
+    exports.ɵlm = ExtGridsortdescmenuitemComponent;
+    exports.ɵln = pagingtoolbarMetaData;
+    exports.ɵlo = ExtPagingtoolbarComponent;
+    exports.ɵlp = gridrowMetaData;
+    exports.ɵlq = ExtGridrowComponent;
+    exports.ɵlr = rowbodyMetaData;
+    exports.ɵls = ExtRowbodyComponent;
+    exports.ɵlt = roweditorbarMetaData;
+    exports.ɵlu = ExtRoweditorbarComponent;
+    exports.ɵlv = roweditorcellMetaData;
+    exports.ɵlw = ExtRoweditorcellComponent;
+    exports.ɵlx = roweditorMetaData;
+    exports.ɵly = ExtRoweditorComponent;
+    exports.ɵlz = roweditorgapMetaData;
     exports.ɵm = ExtCalendar_eventComponent;
-    exports.ɵma = ExtGridsummaryrowComponent;
-    exports.ɵmb = treeMetaData;
-    exports.ɵmc = ExtTreeComponent;
-    exports.ɵmd = imageMetaData;
-    exports.ɵme = ExtImageComponent;
-    exports.ɵmf = imgMetaData;
-    exports.ɵmg = ExtImgComponent;
-    exports.ɵmh = indicatorMetaData;
-    exports.ɵmi = ExtIndicatorComponent;
-    exports.ɵmj = labelMetaData;
-    exports.ɵmk = ExtLabelComponent;
-    exports.ɵml = treelistMetaData;
-    exports.ɵmm = ExtTreelistComponent;
-    exports.ɵmn = treelistitemMetaData;
-    exports.ɵmo = ExtTreelistitemComponent;
-    exports.ɵmp = loadmaskMetaData;
-    exports.ɵmq = ExtLoadmaskComponent;
-    exports.ɵmr = maskMetaData;
-    exports.ɵms = ExtMaskComponent;
-    exports.ɵmt = mediaMetaData;
-    exports.ɵmu = ExtMediaComponent;
-    exports.ɵmv = menucheckitemMetaData;
-    exports.ɵmw = ExtMenucheckitemComponent;
-    exports.ɵmx = menuitemMetaData;
-    exports.ɵmy = ExtMenuitemComponent;
-    exports.ɵmz = menuMetaData;
+    exports.ɵma = ExtRoweditorgapComponent;
+    exports.ɵmb = rowheaderMetaData;
+    exports.ɵmc = ExtRowheaderComponent;
+    exports.ɵmd = gridsummaryrowMetaData;
+    exports.ɵme = ExtGridsummaryrowComponent;
+    exports.ɵmf = treeMetaData;
+    exports.ɵmg = ExtTreeComponent;
+    exports.ɵmh = imageMetaData;
+    exports.ɵmi = ExtImageComponent;
+    exports.ɵmj = imgMetaData;
+    exports.ɵmk = ExtImgComponent;
+    exports.ɵml = indicatorMetaData;
+    exports.ɵmm = ExtIndicatorComponent;
+    exports.ɵmn = labelMetaData;
+    exports.ɵmo = ExtLabelComponent;
+    exports.ɵmp = treelistMetaData;
+    exports.ɵmq = ExtTreelistComponent;
+    exports.ɵmr = treelistitemMetaData;
+    exports.ɵms = ExtTreelistitemComponent;
+    exports.ɵmt = loadmaskMetaData;
+    exports.ɵmu = ExtLoadmaskComponent;
+    exports.ɵmv = maskMetaData;
+    exports.ɵmw = ExtMaskComponent;
+    exports.ɵmx = mediaMetaData;
+    exports.ɵmy = ExtMediaComponent;
+    exports.ɵmz = menucheckitemMetaData;
     exports.ɵn = calendar_form_addMetaData;
-    exports.ɵna = ExtMenuComponent;
-    exports.ɵnb = menuradioitemMetaData;
-    exports.ɵnc = ExtMenuradioitemComponent;
-    exports.ɵnd = menuseparatorMetaData;
-    exports.ɵne = ExtMenuseparatorComponent;
-    exports.ɵnf = messageboxMetaData;
-    exports.ɵng = ExtMessageboxComponent;
-    exports.ɵnh = navigationviewMetaData;
-    exports.ɵni = ExtNavigationviewComponent;
-    exports.ɵnj = panelMetaData;
-    exports.ɵnk = ExtPanelComponent;
-    exports.ɵnl = accordionMetaData;
-    exports.ɵnm = ExtAccordionComponent;
-    exports.ɵnn = datepanelMetaData;
-    exports.ɵno = ExtDatepanelComponent;
-    exports.ɵnp = datetitleMetaData;
-    exports.ɵnq = ExtDatetitleComponent;
-    exports.ɵnr = panelheaderMetaData;
-    exports.ɵns = ExtPanelheaderComponent;
-    exports.ɵnt = timepanelMetaData;
-    exports.ɵnu = ExtTimepanelComponent;
-    exports.ɵnv = paneltitleMetaData;
-    exports.ɵnw = ExtPaneltitleComponent;
-    exports.ɵnx = yearpickerMetaData;
-    exports.ɵny = ExtYearpickerComponent;
-    exports.ɵnz = datepickerMetaData;
+    exports.ɵna = ExtMenucheckitemComponent;
+    exports.ɵnb = menuitemMetaData;
+    exports.ɵnc = ExtMenuitemComponent;
+    exports.ɵnd = menuMetaData;
+    exports.ɵne = ExtMenuComponent;
+    exports.ɵnf = menuradioitemMetaData;
+    exports.ɵng = ExtMenuradioitemComponent;
+    exports.ɵnh = menuseparatorMetaData;
+    exports.ɵni = ExtMenuseparatorComponent;
+    exports.ɵnj = messageboxMetaData;
+    exports.ɵnk = ExtMessageboxComponent;
+    exports.ɵnl = navigationviewMetaData;
+    exports.ɵnm = ExtNavigationviewComponent;
+    exports.ɵnn = panelMetaData;
+    exports.ɵno = ExtPanelComponent;
+    exports.ɵnp = accordionMetaData;
+    exports.ɵnq = ExtAccordionComponent;
+    exports.ɵnr = datepanelMetaData;
+    exports.ɵns = ExtDatepanelComponent;
+    exports.ɵnt = datetitleMetaData;
+    exports.ɵnu = ExtDatetitleComponent;
+    exports.ɵnv = panelheaderMetaData;
+    exports.ɵnw = ExtPanelheaderComponent;
+    exports.ɵnx = timepanelMetaData;
+    exports.ɵny = ExtTimepanelComponent;
+    exports.ɵnz = paneltitleMetaData;
     exports.ɵo = ExtCalendar_form_addComponent;
-    exports.ɵoa = ExtDatepickerComponent;
-    exports.ɵob = pickerMetaData;
-    exports.ɵoc = ExtPickerComponent;
-    exports.ɵod = selectpickerMetaData;
-    exports.ɵoe = ExtSelectpickerComponent;
-    exports.ɵof = pickerslotMetaData;
-    exports.ɵog = ExtPickerslotComponent;
-    exports.ɵoh = tabletpickerMetaData;
-    exports.ɵoi = ExtTabletpickerComponent;
-    exports.ɵoj = pivotgridcellMetaData;
-    exports.ɵok = ExtPivotgridcellComponent;
-    exports.ɵol = pivotgridgroupcellMetaData;
-    exports.ɵom = ExtPivotgridgroupcellComponent;
-    exports.ɵon = pivotd3containerMetaData;
-    exports.ɵoo = ExtPivotd3containerComponent;
-    exports.ɵop = pivotheatmapMetaData;
-    exports.ɵoq = ExtPivotheatmapComponent;
-    exports.ɵor = pivottreemapMetaData;
-    exports.ɵos = ExtPivottreemapComponent;
-    exports.ɵot = pivotgridMetaData;
-    exports.ɵou = ExtPivotgridComponent;
-    exports.ɵov = pivotconfigfieldMetaData;
-    exports.ɵow = ExtPivotconfigfieldComponent;
-    exports.ɵox = pivotconfigcontainerMetaData;
-    exports.ɵoy = ExtPivotconfigcontainerComponent;
-    exports.ɵoz = pivotconfigformMetaData;
+    exports.ɵoa = ExtPaneltitleComponent;
+    exports.ɵob = yearpickerMetaData;
+    exports.ɵoc = ExtYearpickerComponent;
+    exports.ɵod = datepickerMetaData;
+    exports.ɵoe = ExtDatepickerComponent;
+    exports.ɵof = pickerMetaData;
+    exports.ɵog = ExtPickerComponent;
+    exports.ɵoh = selectpickerMetaData;
+    exports.ɵoi = ExtSelectpickerComponent;
+    exports.ɵoj = pickerslotMetaData;
+    exports.ɵok = ExtPickerslotComponent;
+    exports.ɵol = tabletpickerMetaData;
+    exports.ɵom = ExtTabletpickerComponent;
+    exports.ɵon = pivotgridcellMetaData;
+    exports.ɵoo = ExtPivotgridcellComponent;
+    exports.ɵop = pivotgridgroupcellMetaData;
+    exports.ɵoq = ExtPivotgridgroupcellComponent;
+    exports.ɵor = pivotd3containerMetaData;
+    exports.ɵos = ExtPivotd3containerComponent;
+    exports.ɵot = pivotheatmapMetaData;
+    exports.ɵou = ExtPivotheatmapComponent;
+    exports.ɵov = pivottreemapMetaData;
+    exports.ɵow = ExtPivottreemapComponent;
+    exports.ɵox = pivotgridMetaData;
+    exports.ɵoy = ExtPivotgridComponent;
+    exports.ɵoz = pivotconfigfieldMetaData;
     exports.ɵp = calendar_calendar_pickerMetaData;
-    exports.ɵpa = ExtPivotconfigformComponent;
-    exports.ɵpb = pivotconfigpanelMetaData;
-    exports.ɵpc = ExtPivotconfigpanelComponent;
-    exports.ɵpd = pivotsettingsMetaData;
-    exports.ɵpe = ExtPivotsettingsComponent;
-    exports.ɵpf = pivotrangeeditorMetaData;
-    exports.ɵpg = ExtPivotrangeeditorComponent;
-    exports.ɵph = pivotgridrowMetaData;
-    exports.ɵpi = ExtPivotgridrowComponent;
-    exports.ɵpj = progressMetaData;
-    exports.ɵpk = ExtProgressComponent;
-    exports.ɵpl = progressbarwidgetMetaData;
-    exports.ɵpm = ExtProgressbarwidgetComponent;
-    exports.ɵpn = segmentedbuttonMetaData;
-    exports.ɵpo = ExtSegmentedbuttonComponent;
-    exports.ɵpp = sheetMetaData;
-    exports.ɵpq = ExtSheetComponent;
-    exports.ɵpr = sliderMetaData;
-    exports.ɵps = ExtSliderComponent;
-    exports.ɵpt = thumbMetaData;
-    exports.ɵpu = ExtThumbComponent;
-    exports.ɵpv = togglesliderMetaData;
-    exports.ɵpw = ExtTogglesliderComponent;
-    exports.ɵpx = spacerMetaData;
-    exports.ɵpy = ExtSpacerComponent;
-    exports.ɵpz = sparklinebarMetaData;
+    exports.ɵpa = ExtPivotconfigfieldComponent;
+    exports.ɵpb = pivotconfigcontainerMetaData;
+    exports.ɵpc = ExtPivotconfigcontainerComponent;
+    exports.ɵpd = pivotconfigformMetaData;
+    exports.ɵpe = ExtPivotconfigformComponent;
+    exports.ɵpf = pivotconfigpanelMetaData;
+    exports.ɵpg = ExtPivotconfigpanelComponent;
+    exports.ɵph = pivotsettingsMetaData;
+    exports.ɵpi = ExtPivotsettingsComponent;
+    exports.ɵpj = pivotrangeeditorMetaData;
+    exports.ɵpk = ExtPivotrangeeditorComponent;
+    exports.ɵpl = pivotgridrowMetaData;
+    exports.ɵpm = ExtPivotgridrowComponent;
+    exports.ɵpn = progressMetaData;
+    exports.ɵpo = ExtProgressComponent;
+    exports.ɵpp = progressbarwidgetMetaData;
+    exports.ɵpq = ExtProgressbarwidgetComponent;
+    exports.ɵpr = segmentedbuttonMetaData;
+    exports.ɵps = ExtSegmentedbuttonComponent;
+    exports.ɵpt = sheetMetaData;
+    exports.ɵpu = ExtSheetComponent;
+    exports.ɵpv = sliderMetaData;
+    exports.ɵpw = ExtSliderComponent;
+    exports.ɵpx = thumbMetaData;
+    exports.ɵpy = ExtThumbComponent;
+    exports.ɵpz = togglesliderMetaData;
     exports.ɵq = ExtCalendar_calendar_pickerComponent;
-    exports.ɵqa = ExtSparklinebarComponent;
-    exports.ɵqb = sparklineMetaData;
-    exports.ɵqc = ExtSparklineComponent;
-    exports.ɵqd = sparklineboxMetaData;
-    exports.ɵqe = ExtSparklineboxComponent;
-    exports.ɵqf = sparklinebulletMetaData;
-    exports.ɵqg = ExtSparklinebulletComponent;
-    exports.ɵqh = sparklinediscreteMetaData;
-    exports.ɵqi = ExtSparklinediscreteComponent;
-    exports.ɵqj = sparklinelineMetaData;
-    exports.ɵqk = ExtSparklinelineComponent;
-    exports.ɵql = sparklinepieMetaData;
-    exports.ɵqm = ExtSparklinepieComponent;
-    exports.ɵqn = sparklinetristateMetaData;
-    exports.ɵqo = ExtSparklinetristateComponent;
-    exports.ɵqp = splitbuttonMetaData;
-    exports.ɵqq = ExtSplitbuttonComponent;
-    exports.ɵqr = tabbarMetaData;
-    exports.ɵqs = ExtTabbarComponent;
-    exports.ɵqt = tabpanelMetaData;
-    exports.ɵqu = ExtTabpanelComponent;
-    exports.ɵqv = tabMetaData;
-    exports.ɵqw = ExtTabComponent;
-    exports.ɵqx = tooltipMetaData;
-    exports.ɵqy = ExtTooltipComponent;
-    exports.ɵqz = titleMetaData;
+    exports.ɵqa = ExtTogglesliderComponent;
+    exports.ɵqb = spacerMetaData;
+    exports.ɵqc = ExtSpacerComponent;
+    exports.ɵqd = sparklinebarMetaData;
+    exports.ɵqe = ExtSparklinebarComponent;
+    exports.ɵqf = sparklineMetaData;
+    exports.ɵqg = ExtSparklineComponent;
+    exports.ɵqh = sparklineboxMetaData;
+    exports.ɵqi = ExtSparklineboxComponent;
+    exports.ɵqj = sparklinebulletMetaData;
+    exports.ɵqk = ExtSparklinebulletComponent;
+    exports.ɵql = sparklinediscreteMetaData;
+    exports.ɵqm = ExtSparklinediscreteComponent;
+    exports.ɵqn = sparklinelineMetaData;
+    exports.ɵqo = ExtSparklinelineComponent;
+    exports.ɵqp = sparklinepieMetaData;
+    exports.ɵqq = ExtSparklinepieComponent;
+    exports.ɵqr = sparklinetristateMetaData;
+    exports.ɵqs = ExtSparklinetristateComponent;
+    exports.ɵqt = splitbuttonMetaData;
+    exports.ɵqu = ExtSplitbuttonComponent;
+    exports.ɵqv = tabbarMetaData;
+    exports.ɵqw = ExtTabbarComponent;
+    exports.ɵqx = tabpanelMetaData;
+    exports.ɵqy = ExtTabpanelComponent;
+    exports.ɵqz = tabMetaData;
     exports.ɵr = calendar_form_editMetaData;
-    exports.ɵra = ExtTitleComponent;
-    exports.ɵrb = titlebarMetaData;
-    exports.ɵrc = ExtTitlebarComponent;
-    exports.ɵrd = toolMetaData;
-    exports.ɵre = ExtToolComponent;
-    exports.ɵrf = paneltoolMetaData;
-    exports.ɵrg = ExtPaneltoolComponent;
-    exports.ɵrh = toolbarMetaData;
-    exports.ɵri = ExtToolbarComponent;
-    exports.ɵrj = colorbuttonMetaData;
-    exports.ɵrk = ExtColorbuttonComponent;
-    exports.ɵrl = colorpickercolorpreviewMetaData;
-    exports.ɵrm = ExtColorpickercolorpreviewComponent;
-    exports.ɵrn = colorfieldMetaData;
-    exports.ɵro = ExtColorfieldComponent;
-    exports.ɵrp = colorselectorMetaData;
-    exports.ɵrq = ExtColorselectorComponent;
-    exports.ɵrr = gaugeMetaData;
-    exports.ɵrs = ExtGaugeComponent;
-    exports.ɵrt = mapMetaData;
-    exports.ɵru = ExtMapComponent;
-    exports.ɵrv = google_mapMetaData;
-    exports.ɵrw = ExtGoogle_mapComponent;
-    exports.ɵrx = ratingMetaData;
-    exports.ɵry = ExtRatingComponent;
-    exports.ɵrz = videoMetaData;
+    exports.ɵra = ExtTabComponent;
+    exports.ɵrb = tooltipMetaData;
+    exports.ɵrc = ExtTooltipComponent;
+    exports.ɵrd = titleMetaData;
+    exports.ɵre = ExtTitleComponent;
+    exports.ɵrf = titlebarMetaData;
+    exports.ɵrg = ExtTitlebarComponent;
+    exports.ɵrh = toolMetaData;
+    exports.ɵri = ExtToolComponent;
+    exports.ɵrj = paneltoolMetaData;
+    exports.ɵrk = ExtPaneltoolComponent;
+    exports.ɵrl = toolbarMetaData;
+    exports.ɵrm = ExtToolbarComponent;
+    exports.ɵrn = colorbuttonMetaData;
+    exports.ɵro = ExtColorbuttonComponent;
+    exports.ɵrp = colorpickercolorpreviewMetaData;
+    exports.ɵrq = ExtColorpickercolorpreviewComponent;
+    exports.ɵrr = colorfieldMetaData;
+    exports.ɵrs = ExtColorfieldComponent;
+    exports.ɵrt = colorselectorMetaData;
+    exports.ɵru = ExtColorselectorComponent;
+    exports.ɵrv = gaugeMetaData;
+    exports.ɵrw = ExtGaugeComponent;
+    exports.ɵrx = mapMetaData;
+    exports.ɵry = ExtMapComponent;
+    exports.ɵrz = google_mapMetaData;
     exports.ɵs = ExtCalendar_form_editComponent;
-    exports.ɵsa = ExtVideoComponent;
-    exports.ɵsb = viewportMetaData;
-    exports.ɵsc = ExtViewportComponent;
-    exports.ɵsd = widgetMetaData;
-    exports.ɵse = ExtWidgetComponent;
+    exports.ɵsa = ExtGoogle_mapComponent;
+    exports.ɵsb = ratingMetaData;
+    exports.ɵsc = ExtRatingComponent;
+    exports.ɵsd = videoMetaData;
+    exports.ɵse = ExtVideoComponent;
+    exports.ɵsf = viewportMetaData;
+    exports.ɵsg = ExtViewportComponent;
+    exports.ɵsh = widgetMetaData;
+    exports.ɵsi = ExtWidgetComponent;
     exports.ɵt = calendar_timefieldMetaData;
     exports.ɵu = ExtCalendar_timefieldComponent;
     exports.ɵv = calendar_daysheaderMetaData;

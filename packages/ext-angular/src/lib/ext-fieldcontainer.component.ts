@@ -36,6 +36,7 @@ export class fieldcontainerMetaData {
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
     'defaults',
     'defaultType',

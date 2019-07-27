@@ -41,6 +41,7 @@ export class passwordfieldMetaData {
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
     'dirty',
     'disabled',

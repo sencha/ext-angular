@@ -42,6 +42,7 @@ export class pickerfieldMetaData {
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
     'dirty',
     'disabled',

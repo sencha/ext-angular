@@ -37,6 +37,7 @@ export class checkboxfieldMetaData {
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
     'dirty',
     'disabled',
