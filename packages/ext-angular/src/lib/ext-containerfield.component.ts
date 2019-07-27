@@ -36,6 +36,7 @@ export class containerfieldMetaData {
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
     'defaults',
     'defaultType',

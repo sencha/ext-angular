@@ -41,6 +41,7 @@ export class numberfieldMetaData {
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'decimals',
     'decimalSeparator',
     'decimalsText',

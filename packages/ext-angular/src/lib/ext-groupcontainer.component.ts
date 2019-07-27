@@ -36,6 +36,7 @@ export class groupcontainerMetaData {
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultFieldValue',
     'defaultListenerScope',
     'defaults',

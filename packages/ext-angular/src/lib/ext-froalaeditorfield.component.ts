@@ -37,6 +37,7 @@ export class froalaeditorfieldMetaData {
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultEditor',
     'defaultListenerScope',
     'defaults',
