@@ -78,6 +78,12 @@
  * @accessor
  */
 
+ /**
+ * @cfg {String/String[]} bodyCls
+ * The CSS class to add to this container's body element.
+ * @since 7.0
+ */
+
 /**
  * @cfg {Object} [defaults=null]
  * A set of default configurations to apply to all child Components in this Container.
