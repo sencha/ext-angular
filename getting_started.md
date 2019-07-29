@@ -79,7 +79,8 @@ in the terminal window
 
 from https://github.com/sencha/ext-angular, copy
 ```
-generators/ext-component-creator/filetemplates/angular/ext-angular-webpack.config.js
+
+https://github.com/sencha/ext-allshared/tree/ext-allshared-7.0.x/generators/ext-component-creator/filetemplates/angular/ext-angular-webpack.config.js
 ```
 to
 ```
@@ -87,7 +88,8 @@ to
 ```
 copy
 ```
-generators/ext-component-creator/filetemplates/angular/ext-angular.service.ts
+
+https://github.com/sencha/ext-allshared/tree/ext-allshared-7.0.x/generators/ext-component-creator/filetemplates/angular/ext-angular.service.ts
 ```
 to
 ```
@@ -104,9 +106,9 @@ in ./package.json, add
     "@sencha/ext-modern-theme-material": "~7.0.0",
 
   "devDependencies": {
-    "@angular-builders/custom-webpack": "~7.4.3",
+    "@angular-builders/custom-webpack": "~8.1.0",
     "@angular-builders/dev-server":"~7.3.1",
-    "@sencha/ext-angular-webpack-plugin": "~7.0.0",
+    "@sencha/ext-webpack-plugin": "~7.0.0",
     "html-webpack-plugin": "^3.2.0",
     "base-href-webpack-plugin": "~2.0.0",
 ```

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import {BasicGridComponent} from '../../Grid/BasicGrid/BasicGrid';
 
 Ext.require([
-  'Ext.layout.Accordion'
+  'Ext.panel.Accordion'
 ])
 
 @Component({
