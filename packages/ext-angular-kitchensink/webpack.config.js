@@ -31,21 +31,22 @@ module.exports = function (env) {
     extensions: ['.ts', '.js', '.html']
   }
   //******* */
- 
+
   var toolkit       = get('toolkit',       'modern')
   var theme         = get('theme',         'theme-kitchensink')
   var packages      = get('packages',
   [
-    'font-ext', 
-    'ux', 
+    'font-ext',
+    'ux',
     'd3',
     'pivot-d3',
-    'font-awesome', 
+    'font-awesome',
     'exporter',
-    'pivot', 
-    'calendar', 
+    'pivot',
+    'calendar',
     'charts',
-    'treegrid'
+    'treegrid',
+    'froala-editor'
   ])
   var script        = get('script',        './extract-code.js')
   var emit          = get('emit',          'yes')
@@ -55,7 +56,7 @@ module.exports = function (env) {
   var browser       = get('browser',       'yes')
   var watch         = get('watch',         'yes')
   var verbose       = get('verbose',       'no')
-  var basehref      = get('basehref',      '/') 
+  var basehref      = get('basehref',      '/')
 
   const isProd = environment === 'production'
   portfinder.basePort = (env && env.port) || 1962
@@ -71,7 +72,7 @@ module.exports = function (env) {
         script: script,
         emit: emit,
         port: port,
-        profile: profile, 
+        profile: profile,
         environment: environment,
         treeshake: treeshake,
         browser: browser,

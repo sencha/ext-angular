@@ -12,6 +12,10 @@ import {AppService} from './app.service'
 import * as d3 from 'd3'
 window['d3'] = d3
 
+
+import * as FroalaEditor from 'froala-editor/js/froala_editor.pkgd.min.js';
+window['FroalaEditor'] = FroalaEditor;
+
 import { LandingpageComponent } from './view/landingpage/landingpage.component';
 import { DummyComponent } from './view/landingpage/landingpage.component';
 
@@ -35,6 +39,7 @@ import {ToolBarComponent} from "../examples/ToolBars/ToolBar/ToolBar"
 import {BreadcrumbToolBarComponent} from "../examples/ToolBars/BreadcrumbToolbar/BreadcrumbToolbar"
 import {ToolTipComponent} from "../examples/ToolTip/ToolTip"
 import {ColorPickerComponent} from '../examples/ColorPicker/ColorPicker';
+import {FroalaEditorComponent} from '../examples/FroalaEditor/FroalaEditor';
 
 import {NumberFieldComponent} from "../examples/FormFields/NumberField/NumberField"
 import {CheckBoxFieldComponent} from '../examples/FormFields/CheckBoxField/CheckBoxField'
@@ -256,6 +261,7 @@ const routes: ExtAngularRoutes = [
   { path: 'components/toolbar', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/touch_events', component: TouchEventsComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/wizard', component: WizardComponent, text: 'Wizard', iconCls: 'x-fafa-calendar', xtype: 'homeview', leaf: true },
+  { path: 'components/froala_editor', component: FroalaEditorComponent, text: 'Froala Editor', iconCls: 'x-fa fa-editor', xtype: 'homeview', leaf: true },
 
   { path: 'grids', component: DummyComponent, text: 'Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/core_features', component: DummyComponent, text: 'Grids Core Features', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -312,7 +318,7 @@ const routes: ExtAngularRoutes = [
   { path: 'trees/tree_grid', component: TreeGridComponent, text: 'Tree Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'trees/treelist', component: TreeListComponent, text: 'Tree List', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'trees/tree_reorder', component: TreeReorderComponent, text: 'Tree Reorder', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-  
+
   { path: 'grids/core_features/basic_grid', component: BasicGridComponent, text: 'Basic Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/core_features/grouped_grid', component: GroupedGridComponent, text: 'Grouped Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/core_features/locking_grid', component: LockingGridComponent, text: 'Locking Grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -343,7 +349,7 @@ const routes: ExtAngularRoutes = [
   { path: 'trees/tree_grid', component: TreeGridComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'trees/treelist', component: TreeListComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'trees/tree_reorder', component: TreeReorderComponent, text: 'Tool Tip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-  
+
   { path: 'components/forms/checkboxfield', component: CheckBoxFieldComponent, text: 'CheckBoxField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/forms/comboboxfield', component: ComboBoxFieldComponent, text: 'ComboBoxField', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/forms/checkboxgroups', component: CheckBoxGroupsComponent, text: 'CheckBoxGroups', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -501,6 +507,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
     SegmentedButtonComponent,
     RippleComponent,
     ColorPickerComponent,
+    FroalaEditorComponent,
     CarouselComponent,
     DrawComponent,
     DefaultGaugeComponent,
