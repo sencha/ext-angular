@@ -51,6 +51,7 @@ export class comboboxfieldMetaData {
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
     'delimiter',
     'dirty',

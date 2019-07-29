@@ -48,6 +48,7 @@ export class calendar_calendar_pickerMetaData {
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
     'delimiter',
     'dirty',

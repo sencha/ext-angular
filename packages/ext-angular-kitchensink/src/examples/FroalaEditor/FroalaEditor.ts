@@ -1,5 +1,6 @@
 declare var Ext: any;
 import { Component } from '@angular/core';
+import 'froala-editor/css/froala_editor.pkgd.min.css';
 
 @Component({
   	selector: 'froalaeditor-component',
@@ -12,9 +13,9 @@ export class FroalaEditorComponent {
   editorFieldCmp: any;
   parentFormPanelCmp: any;
 
-  onFormPanelReady = (event) => {
-    if (event.detail.cmp) {
-      this.parentFormPanelCmp = event.detail.cmp;
+  onFormPanelReady = (ele) => {
+    if (ele.ext) {
+      this.parentFormPanelCmp = ele.ext;
     }
   }
 
@@ -22,9 +23,9 @@ export class FroalaEditorComponent {
     Ext.Msg.alert('getValues()', Ext.JSON.encode(this.parentFormPanelCmp.getValues()));
   }
 
-  onEditorFieldReady = (event) => {
-    if (event.detail.cmp) {
-      this.editorFieldCmp = event.detail.cmp;
+  onEditorFieldReady = (ele) => {
+    if (ele.ext) {
+      this.editorFieldCmp = ele.ext;
       this.editorFieldCmp.setValue(this.value);
       this.editorFieldCmp.setListeners({
         'froala.click': (froalaComponent) => { Ext.toast({ message: 'Click!' }); }

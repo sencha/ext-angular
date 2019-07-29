@@ -36,6 +36,7 @@ export class checkboxgroupMetaData {
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultFieldValue',
     'defaultListenerScope',
     'defaults',

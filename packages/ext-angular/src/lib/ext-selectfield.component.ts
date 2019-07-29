@@ -48,6 +48,7 @@ export class selectfieldMetaData {
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
     'delimiter',
     'dirty',

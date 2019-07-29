@@ -1,18 +1,21 @@
-<formpanel
-  layout="fit"
-  height="90%"
-  width="95%"
-  title="Ext.froala.EditorField insde a form panel"
-  [buttons]="buttonsObj"
-  (ready)="onFormPanelReady($event)"
->
-  <froalaeditorfield
-    name="html"
+<container layout="center" width="100%" height="100%" [fitToParent]="true">
+  <formpanel
+    layout="fit"
+    height="90%"
+    width="98%"
+    title="Ext.froala.EditorField insde a form panel"
+    [buttons]="buttonsObj"
+    (ready)="onFormPanelReady($event)"
     margin="16"
-    (ready)="onEditorFieldReady($event)"
-    [value]="value"
-    [listeners] = "listenersObj"
-    [editor]="editorObj"
   >
-  </froalaeditorfield>
-</formpanel>
+    <froalaeditorfield
+      name="html"
+      margin="8"
+      (ready)="onEditorFieldReady($event)"
+      [value]="value"
+      [listeners] = "listenersObj"
+      [editor]="editorObj"
+    >
+    </froalaeditorfield>
+  </formpanel>
+</container>

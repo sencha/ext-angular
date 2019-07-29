@@ -26,6 +26,13 @@
  */
 
 /**
+ * @cfg {String} [tabRotation='default']
+ * Specifies tab rotation. Possible values are 'default', 'left',
+ * 'none', 'right'.
+ * @accessor
+ */
+
+/**
  * @event tabchange
  * Fired when active tab changes.
  * @param {Ext.tab.Bar} this

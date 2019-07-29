@@ -48,6 +48,7 @@ export class calendar_timefieldMetaData {
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
     'delimiter',
     'dirty',

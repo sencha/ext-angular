@@ -273,7 +273,7 @@ const treeRoot = {
           { text: 'Undoable Accordion Swiper', component: UndoableAccordionSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-undoable-accordion-swiper'},
           { text: 'Undoable Step Swiper', component: UndoableStepSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-undoable-step-swiper'}
         ]},
-        { text: 'Media', navIcon: 'x-fa fa-video-camera', children: [
+        { text: 'Media', navIcon: 'icon-video', children: [
             { text: 'Video', navIcon: 'icon-video', component: VideoComponent },
             { text: 'Audio', navIcon: 'icon-audio', component: AudioComponent }
         ] },
@@ -332,7 +332,7 @@ const treeRoot = {
               { text: 'Summary Row', component: SummaryRowComponent, navIcon: 'icon-grid-summary'},
               { text: 'Grid Filtering', component: GridFilteringComponent, navIcon: 'icon-grid-filtering'},
               { text: 'View Options', component: ViewOptionsComponent, navIcon: 'icon-view-options-grid'},
-              { text: 'Row Drag and Drop', component: RowDragAndDropComponent, navIcon: 'icon-view-options-grid'},
+              { text: 'Row Drag and Drop', component: RowDragAndDropComponent, navIcon: 'icon-dd-grid-row'},
               { text: 'Drag Form To Grid', component: DragFormToGridComponent, navIcon: 'icon-dd-form-to-grid'}
           ]},
           { text: 'Advanced Features', navIcon: 'icon-grid-plugins', children:[

@@ -261,7 +261,7 @@ const routes: ExtAngularRoutes = [
   { path: 'components/toolbar', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/touch_events', component: TouchEventsComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'components/wizard', component: WizardComponent, text: 'Wizard', iconCls: 'x-fafa-calendar', xtype: 'homeview', leaf: true },
-  { path: 'components/froala', component: FroalaEditorComponent, text: 'Froala Editor', iconCls: 'x-fa fa-editor', xtype: 'homeview', leaf: true },
+  { path: 'components/froala_editor', component: FroalaEditorComponent, text: 'Froala Editor', iconCls: 'x-fa fa-editor', xtype: 'homeview', leaf: true },
 
   { path: 'grids', component: DummyComponent, text: 'Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
   { path: 'grids/core_features', component: DummyComponent, text: 'Grids Core Features', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
