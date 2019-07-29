@@ -16,9 +16,9 @@ ExtAngular requires the following to be installed before proceeding:
 
 ### Step 1: Authenticate to Sencha's NPM Registry
 
-ExtAngular and all related packages are hosted on Sencha's private NPM registry. 
+ExtAngular and all related packages are hosted on Sencha's private NPM registry.
 
-To gain access to this registry, [sign up for a trial of ExtAngular](https://www.sencha.com/products/extangular/evaluate).  
+To gain access to this registry, [sign up for a trial of ExtAngular](https://www.sencha.com/products/extangular/evaluate).
 
 Once you have received your credentials, you can authenticate by running the following command:
 
@@ -75,17 +75,17 @@ to
         "serve": {
           "builder": "@angular-builders/dev-server:generic",
 
-in the terminal window 
+in the terminal window
 
-from https://github.com/sencha/ext-angular, copy 
+from https://github.com/sencha/ext-angular, copy
 ```
-generators/ext-component-creator/filetemplates/angular/ext-angular-webpack.config.js 
+generators/ext-component-creator/filetemplates/angular/ext-angular-webpack.config.js
 ```
 to
 ```
- ./ext-angular-webpack.config.js 
+ ./ext-angular-webpack.config.js
 ```
-copy 
+copy
 ```
 generators/ext-component-creator/filetemplates/angular/ext-angular.service.ts
 ```
@@ -98,15 +98,15 @@ in ./package.json, add
 ```
   "dependencies": {
     "@sencha/ext-angular": "~7.0.0",
-    "@sencha/ext": "~6.7.0",
-    "@sencha/ext-modern": "~6.7.0",
-    "@sencha/ext-modern-treegrid": "~6.7.0",
-    "@sencha/ext-modern-theme-material": "~6.7.0",
+    "@sencha/ext": "~7.0.0",
+    "@sencha/ext-modern": "~7.0.0",
+    "@sencha/ext-modern-treegrid": "~7.0.0",
+    "@sencha/ext-modern-theme-material": "~7.0.0",
 
   "devDependencies": {
     "@angular-builders/custom-webpack": "~7.4.3",
     "@angular-builders/dev-server":"~7.3.1",
-    "@sencha/ext-angular-webpack-plugin": "~6.7.0",
+    "@sencha/ext-angular-webpack-plugin": "~7.0.0",
     "html-webpack-plugin": "^3.2.0",
     "base-href-webpack-plugin": "~2.0.0",
 ```
@@ -183,7 +183,7 @@ export class AppComponent {
 
 ### Step 4: Re-Run install and start your ExtAngular application
 
-Run the following in a terminal window to install and start the app 
+Run the following in a terminal window to install and start the app
 ```
 npm install
 npm start
@@ -198,7 +198,7 @@ The resulting app uses webpack-dev-server and hot-loading. Any changes you make 
 
 The [ext-angular repo on GitHub](https://github.com/sencha/ext-angular) contains several example apps that you can use to learn more about ExtAngular.  Each has a readme that contains instructions for downloading and running:
 
-* [ext-angular-kitchensink](https://github.com/sencha/ext-angular/tree/master/packages/ext-angular-kitchensink) - Shows how to use every ExtAngular component. See it running [here](https://examples.sencha.com/ExtAngular/6.7.0/kitchensink/).
+* [ext-angular-kitchensink](https://github.com/sencha/ext-angular/tree/master/packages/ext-angular-kitchensink) - Shows how to use every ExtAngular component. See it running [here](https://examples.sencha.com/ExtAngular/7.0.0/kitchensink/).
 
 ## Appendix
 
@@ -220,7 +220,7 @@ node --version
 
 ### Installing Java
 
-In order to install ExtReact's webpack plugin on Linux, Java 8 must first be installed. 
+In order to install ExtReact's webpack plugin on Linux, Java 8 must first be installed.
 
 You can check which version of Java you have installed by running:
 
