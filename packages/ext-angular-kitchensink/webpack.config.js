@@ -45,7 +45,8 @@ module.exports = function (env) {
     'pivot',
     'calendar',
     'charts',
-    'treegrid'
+    'treegrid',
+    'froala-editor'
   ])
   var script        = get('script',        './extract-code.js')
   var emit          = get('emit',          'yes')

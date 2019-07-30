@@ -27,7 +27,7 @@ export class DragFormToGridComponent {
 	parentPanelReady= (parentPanelEle: any) => {
 		this.parentPanel = parentPanelEle.ext;
 	}
-	
+
 	dataViewReady = (dataViewEle: any) => {
 		this.formDataView = dataViewEle.ext;
 	}
@@ -41,33 +41,33 @@ export class DragFormToGridComponent {
 	}
 
 	registerDragZone = () => {
-        let me = this.formDataPanel;
-        let patientView = this.formDataView;
-        let touchEvents = Ext.supports.Touch && Ext.supports.TouchEvents;
+      let context = this;
+      let me = this.formDataPanel;
+      let patientView = this.formDataView;
+      let touchEvents = Ext.supports.Touch && Ext.supports.TouchEvents;
 
-        me.dragZone = Ext.create('Ext.plugin.dd.DragZone', {
-            element: patientView.bodyElement,
-            handle: '.patient-source',
-            view: patientView,  
-            $configStrict: false,
-            activateOnLongPress: touchEvents ? true : false,
-            proxy: {
-                cls: 'x-proxy-drag-el patient-proxy-el'
-            },
+      me.dragZone = Ext.create('Ext.plugin.dd.DragZone', {
+          element: patientView.bodyElement,
+          handle: '.patient-source',
+          view: patientView,
+          activateOnLongPress: touchEvents ? true : false,
+          proxy: {
+              cls: 'x-proxy-drag-el patient-proxy-el'
+          },
+          $configStrict: false,
+          getDragText: function(info) {
+              var result = context.getParentElement(info.eventTarget, 'x-dataview-item');
 
-            getDragText: function(info: any) {
-                var selector = '.x-dataview-item',
-                    el = Ext.fly(info.eventTarget).up(selector);
-
-                return el.dom.innerHTML;
-            },
-
-            getDragData: function(e: any) {
-                return {
-                    patientData: this.view.mapToRecord(e)
-                };
-            }
-        });
+              if (result.isFound) {
+                  return result.searchedElement.innerHTML;
+              }
+          },
+          getDragData: function(e) {
+              return {
+                  patientData: this.view.mapToRecord(e)
+              };
+          }
+      });
     };
 
     registerDropZone = () => {
@@ -81,23 +81,21 @@ export class DragFormToGridComponent {
             $configStrict: false,
             prepareNameString: me.prepareNameString,
 
-            onDragMove: function(info: any) {
+            onDragMove: function(info) {
                 let me = this;
                 let ddManager = Ext.dd.Manager;
                 let targetEl = ddManager.getTargetEl(info);
-                let rowBody = Ext.fly(targetEl);
-                let isRowBody = rowBody.hasCls('hospital-target');
-                let hospital: any;
-                let patients: any;
-                let name: any;
 
+                let result = mainContext.getParentElement(targetEl, 'x-rowbody');
+                let isRowBody = result.isFound;
                 if (!isRowBody) {
-                    rowBody = Ext.fly(targetEl).parent('.x-rowbody');
-
-                    if (rowBody) {
-                        isRowBody = rowBody.hasCls('hospital-target');
-                    }
+                    return;
                 }
+
+                let rowBody = Ext.get(result.searchedElement);
+                let hospital;
+                let patients;
+                let name;
 
                 me.toggleDropMarker(info, false);
 
@@ -117,12 +115,12 @@ export class DragFormToGridComponent {
                 me.toggleDropMarker(info, true);
             },
 
-            onDrop: function(info: any) {
+            onDrop: function(info) {
                 let me = this;
-                let hospital: any;
-                let patients: any;
-                let name: any;
-                let component: any;
+                let hospital;
+                let patients;
+                let name;
+                let component;
 
                 if (!me.ddEl) {
                     return;
@@ -147,9 +145,9 @@ export class DragFormToGridComponent {
                 me.toggleDropMarker(info, false);
             },
 
-            toggleDropMarker: function(info: any, state: any) {
+            toggleDropMarker: function(info, state) {
                 let me = this;
-                let ddManager: any;
+                let ddManager;
 
                 if (!me.ddEl) {
                     return;
@@ -202,6 +200,25 @@ export class DragFormToGridComponent {
             record.set('patients', null);
         }
     };
+
+    getParentElement = (selectedElement, selector) => {
+        let isFound = false;
+        let searchedElement = null;
+
+        while(!isFound) {
+            if (selectedElement.className.includes(selector)) {
+                isFound = true;
+                searchedElement = selectedElement;
+            } else {
+                selectedElement = selectedElement.parentNode;
+                if (selectedElement.tagName === 'BODY') {
+                    break;
+                }
+            }
+        }
+
+        return { searchedElement, isFound };
+    }
 
     destroy = function() {
         let me = this;

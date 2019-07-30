@@ -19,74 +19,76 @@
  * If configured with `{@link #cfg-anchor: true}`, when you {@link #showBy} another
  * component, there will be an anchor arrow pointing to the reference component.
  *
-*            @example packages=[extangular]
-*            import { Component } from '@angular/core'
-*            declare var Ext: any;
-*
-*            @Component({
-*                selector: 'app-root-1',
-*                styles: [`
-*                        `],
-*                template: `
-*                        <container #item>
-*                            <panel #item
-*                                shadow="true"
-*                                title="Panel"
-*                                height="300"
-*                                width="500"
-*                                [tools]="[
-*                                    { type: 'minimize', handler: toolHandler },
-*                                    { type: 'refresh', handler: toolHandler },
-*                                    { type: 'save', handler: toolHandler },
-*                                    { type: 'search', handler: toolHandler },
-*                                    { type: 'close', handler: toolHandler }
-*                                ]"
-*                            >
-*                                <p #item>Panel Body</p>
-*                            </panel>
-*                            <button #item ui="action" [handler]="showModal" margin="20 0 0 0" text="Show Modal"></button>
-*                            <panel #item
-*                                (ready)="panelReady($event)"
-*                                title="Floated Panel"
-*                                modal="true"
-*                                floated="true"
-*                                centered="true"
-*                                hideOnMaskTap="true"
-*                                [width]="this.width"
-*                                [maxHeight]="this.maxHeight"
-*                                [showAnimation]="{
-*                                    type: 'popIn',
-*                                    duration: 250,
-*                                    easing: 'ease-out'
-*                                }"
-*                                [hideAnimation]="{
-*                                    type: 'popOut',
-*                                    duration: 250,
-*                                    easing: 'ease-out'
-*                                }"
-*                            >
-*                                <p #item>This is a modal, centered and floated panel. hideOnMaskTap is true by default so we can tap anywhere outside the overlay to hide it.</p>
-*                            </panel>
-*                        </container>
-*                        `
-*            })
-*            export class AppComponent {
-*
-*                panel:any;
-*
-*                panelReady = (event) => {
-*                    this.panel = event.ext;
-*                }
-*
-*                showModal  = () => this.panel.show();
-*
-*                width = Ext.filterPlatform('ie10') ? '100%' : (Ext.os.deviceType == 'Phone') ? 260 : 400;
-*                maxHeight = Ext.filterPlatform('ie10') ? '30%' : (Ext.os.deviceType == 'Phone') ? 220 : 400;
-*
-*                toolHandler = function(owner, tool) {
-*                    Ext.toast(`You clicked ${tool.config.type}`);
-*                }
-*            }
+ *		@example packages=[extangular]
+ *		declare var Ext: any;
+ *		import {Component} from '@angular/core';
+ *		Ext.require('Ext.Toast');
+ *
+ *		@Component({
+ *		  selector: 'app-component',
+ *		  template: `<container>
+ *		    <panel
+ *		        [shadow]="true"
+ *		        title="Panel"
+ *		        [height]="300"
+ *		        [width]="500"
+ *		        (ready)="this.onMainPanelReady($event)"
+ *		        [html]= "'<p>Panel Body</p>'"
+ *		    >
+ *		    </panel>
+ *		    <button [ui]="'action'" (tap)="modalClick()" margin="20 0 0 0" text="Show Modal"></button>
+ *		    <panel
+ *		        title="Floated Panel"
+ *		        [modal]="true"
+ *		        [floated]="true"
+ *		        [centered]="true"
+ *		        hideOnMaskTap="true"
+ *		        [width]="400"
+ *		        maxHeight="400"
+ *		        (ready)="this.onModalPanelReady($event)"
+ *		        [showAnimation]="{
+ *		        type: 'popIn',
+ *		        duration: 250,
+ *		        easing: 'ease-out'
+ *		        }"
+ *		        [hideAnimation]="{
+ *		        type: 'popOut',
+ *		        duration: 250,
+ *		        easing: 'ease-out'
+ *		        }"
+ *		        [html]="'<p>This is a modal, centered and floated panel. hideOnMaskTap is true by default so we can tap anywhere outside the overlay to hide it.</p>'"
+ *		    >
+ *		    </panel>
+ *		</container>`,
+ *		  styles: [``]
+ *		})
+ *		
+ *		  export class AppComponent  {
+ *		  mainPanel:any;
+ *		  modalPanelCmp:any;
+ *		  toolHandler = (owner, tool) => {
+ *		     Ext.toast(`You clicked ${tool.config.type}`);
+ *		  }
+ *		    
+ *		  onMainPanelReady = (event) => {
+ *		    this.mainPanel = event.ext;
+ *		    this.mainPanel.setTools([
+ *		      { type: "minimize", handler: this.toolHandler.bind(this) },
+ *		      { type: "refresh", handler: this.toolHandler.bind(this) },
+ *		      { type: "save", handler: this.toolHandler.bind(this) },
+ *		      { type: "search", handler: this.toolHandler.bind(this) },
+ *		      { type: "close", handler: this.toolHandler.bind(this) }
+ *		    ]);
+ *		  }
+ *		    
+ *		  onModalPanelReady = (event) => {
+ *		    this.modalPanelCmp = event.ext;
+ *		  }
+ *		    
+ *		  modalClick = (owner, tool) => {
+ *		    this.modalPanelCmp.show();
+ *		  }
+ *		}
  *
  */
 

@@ -11,20 +11,38 @@
  *
  * Usually a `fieldpanel` just contains a set of fields.
  *
- *     panel = <FieldPanel>
- *         <TextField
- *             name="name"
- *             label="Name"
- *         />
- *         <EmailField
- *             name="email"
- *             label="Email"
- *         />
- *         <PasswordField
- *             name="password"
- *             label="Password"
- *         />
- *     </FieldPanel>
+ * # Example usage:
+ *
+ *            @example packages=[extangular]
+ *            import { Component } from '@angular/core'
+ *            declare var Ext: any;
+ *
+ *            @Component({
+ *                selector: 'fieldpanel-component',
+ *                styles: [``],
+ *                template: `
+ *                  <fieldpanel width="600" height="300">
+ *                       <textfield
+ *                           [name]="'name'"
+ *                           [label]="'Name'"
+ *                           padding="10"
+ *                       >
+ *                       </textfield>
+ *                       <emailfield
+ *                           [name]="'email'"
+ *                           [label]="'Email'"
+ *                           padding="10"
+ *                       >
+ *                       </emailfield>
+ *                       <passwordfield
+ *                           [name]="'password'"
+ *                           [label]="'Password'"
+ *                           padding="10"
+ *                       >
+ *                       </passwordfield>
+ *                   </fieldpanel>`
+ *              })
+ *            export class FieldPanelComponent  {}
  *
  * Here we just created a simple container which could be used as a registration form to
  * sign up to your service. We added a plain TextField for the user's Name, an EmailField,
@@ -68,7 +86,6 @@
  * The above code responds to a {@link Ext.field.Text#change change} event from any `field`
  * that is an immediate child of its view, the `fieldpanel`.
  *
- * @since 6.5.0
  */
 
 /**
