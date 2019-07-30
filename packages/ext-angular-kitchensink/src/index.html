@@ -7,9 +7,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes">
     <script src="resources/code.js"></script>
-    <link rel="stylesheet" type="text/css" href="resources/loader.css"/>
     <link rel="icon" type="image/x-icon" href="resources/favicon.ico">
   </head>
+
+  <style>
+    :xroot {
+      --base-color:red;
+      --base-foreground-color:white;
+      --color:green;
+      --background-color:white;
+      --hovered-background-color:lightgray;
+    }
+    xbody {
+      xpadding: '10px'
+    }
+    x* {
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+  </style>
+    <script>
+        //http://localhost:1962/?basecolor=darkred&title=Angular UI Toolkit
+        //https://www.rapidtables.com/web/color/red-color.html
+        const params = new URLSearchParams(window.location.search);
+        const basecolor = params.get("basecolor");
+        window['title'] = params.get("title");
+        var d = document.documentElement.style
+        if (basecolor != null) {
+            d.setProperty('--base-color', basecolor);
+            d.setProperty('--color', basecolor);
+        }
+    </script>
+  <link rel="stylesheet" type="text/css" href="resources/loader.css"/>
+
   <body>
     <app-root>
       <div id="loadingSplash">

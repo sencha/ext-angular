@@ -16,12 +16,15 @@
   <!-- Titlebar starts-->
   <titlebar docked="top" [weight]="10" *ngIf="!isPhone" >
     <button iconCls="x-fa fa-bars" (tap)="toggleTree()"></button>
-    <container align="left">
+    <container align="left"  (ready)="readyLeftContainer($event)"></container>
+    <container align="left" html=" - Angular v{{ANGULAR_VERSION}}"></container>
+    <!-- <container align="left">
         <span #extitem>
           <span class="ext ext-sencha" style="margin: '0 5px 0 7px;', fontSize: '20px', width: '20px'"></span>
           <span extjs href="#" class="app-title">Sencha ExtAngular 7.0 Kitchen Sink - Angular v{{ANGULAR_VERSION}}</span>
         </span>
-    </container>
+    </container> -->
+    <container align="right" (ready)="readyRightContainer($event)"></container>
   </titlebar>
   <!-- Titlebar ends-->
 
