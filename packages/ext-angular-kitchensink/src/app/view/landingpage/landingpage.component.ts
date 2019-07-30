@@ -1,4 +1,5 @@
 declare var Ext: any;
+declare var BUILD_VERSION: any;
 import { Component, OnInit, NgZone, ViewEncapsulation } from '@angular/core';
 import {navTreeRoot} from '../../../examples';
 import { Router, NavigationEnd } from '@angular/router';
@@ -30,7 +31,7 @@ declare var _code: any;
   encapsulation: ViewEncapsulation.None
 })
 export class LandingpageComponent implements OnInit {
-  
+
   isPhone = Ext.os.is.Phone;
   ANGULAR_VERSION: any = VERSION.full
   treeStore: any
@@ -41,8 +42,8 @@ export class LandingpageComponent implements OnInit {
   backgroundSize: 20px 20px;
   borderWidth: 0px;
   backgroundColor: #e8e8e8;
-  backgroundImage: 
-    linear-gradient(0deg, #f5f5f5 1.1px, transparent 0), 
+  backgroundImage:
+    linear-gradient(0deg, #f5f5f5 1.1px, transparent 0),
     linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)`
 
   theDataview: any
@@ -63,6 +64,8 @@ export class LandingpageComponent implements OnInit {
   filterVal: any
   showTreeFlag: any = false
   breadcrumbCmp: any
+  rightContainerCmp: any
+  leftContainerCmp: any
   tplToolbar: any = `
   <div class="app-toolbar">
     {text} <span>{divider}</span>
@@ -92,7 +95,7 @@ export class LandingpageComponent implements OnInit {
           }
         }
       }));
-        
+
       router.events.subscribe((val) => {
         if (val instanceof NavigationEnd) {
           var localNode = this.treeStore.getNodeById(val.url);
@@ -128,6 +131,29 @@ export class LandingpageComponent implements OnInit {
     this.breadcrumbCmp = event.ext;
   }
 
+  readyLeftContainer = (event) => {
+    this.leftContainerCmp = event.ext;
+    var title
+    if(window['title'] == null) {
+        title = 'Sencha ExtAngular Kitchen Sink'
+    }
+    else {
+        title = window['title']
+    }
+    // if(window.location.search == '') {
+    //     title = 'Sencha ExtAngular Kitchen Sink'
+    // }
+    // else {
+    //     title = window.location.search
+    // }
+
+    this.leftContainerCmp.updateHtml(title); // eslint-disable-line no-undef
+  }
+
+  readyRightContainer = (event) => {
+    this.rightContainerCmp = event.ext;
+    this.rightContainerCmp.updateHtml('Build: ' + BUILD_VERSION); // eslint-disable-line no-undef
+  }
 
   theNestedlist: any
   nestedlistReady = (event) => {
@@ -190,7 +216,7 @@ export class LandingpageComponent implements OnInit {
     else {
       console.log("Not a valid node. Probably looking at resources");
     }
-  } 
+  }
 
   selectionChanged(event) {
     var record = event.record;
@@ -270,5 +296,5 @@ export class MyComponentUsingGestures implements OnInit, OnDestroy {
     }
   }
 
-  
+
 }

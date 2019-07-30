@@ -9,7 +9,8 @@
 
 #loadingSplashTop,
 #loadingSplashBottom {
-    background-color: #2196f3;
+    xbackground-color: #2196f3;
+    background-color: var(--base-color);
     position: absolute;
     right: 0;
     left: 0;
