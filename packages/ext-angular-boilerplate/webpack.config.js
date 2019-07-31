@@ -26,7 +26,7 @@ module.exports = function (env) {
     extensions: ['.ts', '.js', '.html']
   }
   //******* */
- 
+
    var toolkit       = get('toolkit',       'modern')
    var theme         = get('theme',         'theme-material')
    var packages      = get('packages',      ['treegrid'])
@@ -38,13 +38,13 @@ module.exports = function (env) {
    var browser       = get('browser',       'yes')
    var watch         = get('watch',         'yes')
    var verbose       = get('verbose',       'no')
-   var basehref      = get('basehref',      '/') 
+   var basehref      = get('basehref',      '/')
 
   const isProd = environment === 'production'
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
     const plugins = [
-      new HtmlWebpackPlugin({template: "index.html",hash: true,inject: "body"}),
+      new HtmlWebpackPlugin({template: "index.html",hash: false,inject: "body"}),
       new BaseHrefWebpackPlugin({ baseHref: basehref }),
       new ExtWebpackPlugin({
         framework: framework,
@@ -54,7 +54,7 @@ module.exports = function (env) {
         script: script,
         emit: emit,
         port: port,
-        profile: profile, 
+        profile: profile,
         environment: environment,
         treeshake: treeshake,
         browser: browser,
