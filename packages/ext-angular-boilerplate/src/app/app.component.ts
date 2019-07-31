@@ -3,8 +3,8 @@ import { Component, VERSION } from '@angular/core'
 import { Router } from '@angular/router'
 
 Ext.require([
-  'Ext.layout.*',
-  'Ext.data.TreeStore'
+  'Ext.layout.*'
+
 ])
 
 @Component({
