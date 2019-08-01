@@ -4,7 +4,6 @@ import { Router } from '@angular/router'
 
 Ext.require([
   'Ext.layout.*'
-
 ])
 
 @Component({

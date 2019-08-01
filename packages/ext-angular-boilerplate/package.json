@@ -5,7 +5,7 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "webpack-dev-server --env.browser=yes --env.verbose=no",
-    "build": "npm run clean && npm run webpack && npm run gzip && npm run replace",
+    "build": "npm run clean && npm run webpack && npm run gzip && npm run http",
     "clean": "rimraf build",
     "webpack": "npm run webpack1 && npm run webpack2",
     "webpack1": "cross-env webpack --env.environment=production --env.treeshake=yes",
@@ -13,7 +13,8 @@
     "gzip": "npm run gzipbuild && npm run gzipext",
     "gzipbuild": "npx gzip build/*.js",
     "gzipext": "npx gzip build/ext/*.js",
-    "replace": "npx replace-in-file /.js/g .js.gz build/index.html --isRegex"
+    "replace": "npx replace-in-file /.js/g .js.gz build/index.html --isRegex",
+    "http": "npx http-server build -g -o"
 },
   "devDependencies": {
     "@sencha/ext-angular": "~7.0.0",
@@ -46,6 +47,7 @@
     "portfinder": "~1.0.21",
     "gzip-cli": "^1.0.1",
     "replace-in-file": "^4.1.1",
+    "http-server": "^0.11.1",
 
     "css-loader": "~3.1.0",
     "file-loader":"~4.1.0",
