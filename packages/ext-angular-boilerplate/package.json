@@ -4,14 +4,16 @@
   "description": "ext-angular-boilerplate",
   "scripts": {
     "start": "npm run dev",
-    "clean": "rimraf build",
     "dev": "webpack-dev-server --env.browser=yes --env.verbose=no",
-    "b1": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=yes",
-    "b2": "cross-env webpack --env.environment=production --env.basehref=/",
-    "build": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=yes && cross-env webpack --env.environment=production --env.basehref=/ && npm run gzip && npm run gzip2 && npm run replace",
-    "gzip": "npx gzip build/*.js",
-    "gzip2": "npx gzip build/ext/*.js",
-    "replace": "npx replace-in-file .js .js.gz build/index.html"
+    "build": "npm run clean && npm run webpack && npm run gzip && npm run replace",
+    "clean": "rimraf build",
+    "webpack": "npm run webpack1 && npm run webpack2",
+    "webpack1": "cross-env webpack --env.environment=production --env.treeshake=yes",
+    "webpack2": "cross-env webpack --env.environment=production --env.treeshake=no --env.basehref=/",
+    "gzip": "npm run gzipbuild && npm run gzipext",
+    "gzipbuild": "npx gzip build/*.js",
+    "gzipext": "npx gzip build/ext/*.js",
+    "replace": "npx replace-in-file /.js/g .js.gz build/index.html --isRegex"
 },
   "devDependencies": {
     "@sencha/ext-angular": "~7.0.0",
