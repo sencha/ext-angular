@@ -8,10 +8,25 @@
     "dev": "webpack-dev-server --env.browser=yes --env.verbose=no",
     "b1": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=yes",
     "b2": "cross-env webpack --env.environment=production --env.basehref=/",
-    "build": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=yes && cross-env webpack --env.environment=production --env.basehref=/",
+    "buildorig": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=yes && cross-env webpack --env.environment=production --env.basehref=/",
+
+    "build": "npm run clean && npm run b1 && npm run b2 && npm run gzip && npm run replace && npm run http",
+
+    "gzip": "npm run gzipbuild && npm run gzipext && npm run gzipresources",
+    "gzipbuild": "npx gzip build/*.js",
+    "gzipext": "npx gzip build/ext/*.js",
+    "gzipresources": "npx gzip build/resources/*.js",
+    "replace": "npx replace-in-file /.js/g .js.gz build/index.html --isRegex",
+    "http": "npx http-server build -g -o",
+
+
     "buildexample": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=yes && cross-env webpack --env.environment=production --env.basehref=/ExtAngular/7.0.0/kitchensink/"
   },
   "devDependencies": {
+    "gzip-cli": "^1.0.1",
+    "replace-in-file": "^4.1.1",
+    "http-server": "^0.11.1",
+
     "@sencha/ext-angular": "~7.0.0",
     "@sencha/ext-webpack-plugin": "~7.0.0",
     "@sencha/ext": "~7.0.0",
