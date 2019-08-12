@@ -3,7 +3,9 @@ import { Inject, NgModule, ModuleWithProviders } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { Route, RouterModule } from '@angular/router'
 
-import { ExtAngularModule } from '@sencha/ext-angular'
+//import { ExtAngularModule } from '@sencha/ext-angular'
+import { ExtGridComponent } from '@sencha/ext-angular/lib/ext-grid.component';
+
 import { ExtAngularBootstrapService } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.service'
 import { ExtAngularBootstrapComponent } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.component'
 
