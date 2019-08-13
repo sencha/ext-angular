@@ -59,7 +59,9 @@ either...
 Add the following to the dependencies section of package.json:
 
 ```sh
-"@sencha/ext-angular-grid": "^7.0.0",
+"gzip-cli": "^1.0.1",
+"http-server": "^0.11.1",
+"@sencha/ext-angular": "^7.0.0",
 "@sencha/ext": "^7.0.0",
 "@sencha/ext-modern": "^7.0.0",
 "@sencha/ext-modern-theme-material": "^7.0.0",
@@ -85,6 +87,17 @@ npm install --save @angular-builders/custom-webpack
 npm install --save @angular-builders/dev-server
 ```
 
+#### Edit scripts section pf package.json
+
+Add the following to the scripts section of package.json:
+
+```sh
+"buildprod": "ng build && npm run gzipext && npm run http",
+"gzipext": "npx gzip dist/ext/*.js",
+"http": "npx http-server dist -g -o",
+```
+
+
 #### Edit angular.json, index.html, app.module.ts, app component files, and Add custom-webpack.config.js
 
 To introduce custom webpack configuration, we first need to make changes inside angular.json file.
@@ -98,6 +111,7 @@ For **ng build** command, configure the architect/build object in the angular.js
      "path": "./custom-webpack.config.js",
      "replaceDuplicatePlugins": true
    },
+   "outputPath": "dist",
    ... other options
 ```
 
@@ -134,13 +148,22 @@ module.exports = {
       script: '',
       packages: [],
       profile: '',
-      environment: 'development',
-      treeshake: 'no',
-      browser: 'no',
-      watch: 'yes',
-      verbose: 'no'
+      environment: environment,
+      treeshake: treeshake,
+      browser: browser,
+      watch: watch,
+      verbose: 'no',
+      inject: 'no',
+      intellishake: 'no'
     }),
-    new CompressionPlugin,
+    new CompressionPlugin({
+        //include: /\/dist\/ext/,
+        filename: "[path].gz[query]",
+        algorithm: "gzip",
+        test: /\.js$|\.css$|\.html$/,
+        minRatio: 0.8,
+        threshold: 10240
+    }),
   ]
 };
 ```
@@ -150,17 +173,18 @@ Replace src/app/app.module.ts with the following:
 ```sh
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
-import { ExtAngularGridModule } from '@sencha/ext-angular-grid';
+import { ExtPanelComponent } from '@sencha/ext-angular/esm5/src/ext-panel.component';
+import { ExtGridComponent } from '@sencha/ext-angular/esm5/src/ext-grid.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ExtPanelComponent,
+    ExtGridComponent
   ],
   imports: [
-    BrowserModule,
-    ExtAngularGridModule
+    BrowserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -192,12 +216,12 @@ Replace src/app/app.component.html with the following:
 
 ```sh
 <div>
+    <panel title="panel title" layout="fit">
+    </panel>
     <grid
         height="500px"
         width="700px"
         title="Sencha ExtAngular Grid"
-        [data]="this.data"
-        [columns]= "this.columns"
     >
     </grid>
 </div>
@@ -217,6 +241,5 @@ or
 npm start
 ```
 
-Browse to http://localhost:4200 in your browser.  You should see the Angular starter application with an ExtAngular Panel in the browser.
+Browse to http://localhost:4200 in your browser.  You should see the Angular starter application with an ExtAngular Panel and Grid in the browser.
 
-![Angular with ExtAngular](Angular.png)
