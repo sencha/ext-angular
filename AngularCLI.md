@@ -241,5 +241,12 @@ or
 npm start
 ```
 
+for production build:
+
+```sh
+npm run buildprod
+```
+
+
 Browse to http://localhost:4200 in your browser.  You should see the Angular starter application with an ExtAngular Panel and Grid in the browser.
 
