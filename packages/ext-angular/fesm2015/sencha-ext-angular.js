@@ -132,7 +132,10 @@ class base {
         if (o.xtype == 'dialog') {
             o.renderTo = undefined;
         }
-        this.ext = Ext.create(o);
+        //this.ext = Ext.create(o)
+        Ext.onReady(function () {
+            me.ext = Ext.create(o);
+        });
     }
     baseAfterContentInit() {
         if (this._extitems.length == 1) {
