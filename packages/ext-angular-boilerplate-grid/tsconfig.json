@@ -1,0 +1,28 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": false,
+    "declaration": false,
+    "module": "commonjs",
+    "target": "es5",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "paths": { 
+      "@angular/*": ["node_modules/@angular/*"], 
+      "@sencha/*": ["node_modules/@sencha/*"] 
+    },
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "preserveSymlinks": true
+  }
+}
