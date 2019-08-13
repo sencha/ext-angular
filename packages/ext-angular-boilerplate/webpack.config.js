@@ -59,7 +59,9 @@ module.exports = function (env) {
         treeshake: treeshake,
         browser: browser,
         watch: watch,
-        verbose: verbose
+        verbose: verbose,
+        inject: 'yes',
+        intellishake: 'no'
       }),
 
       new AngularCompilerPlugin({

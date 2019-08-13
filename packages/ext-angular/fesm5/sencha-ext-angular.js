@@ -135,7 +135,10 @@ var base = /** @class */ (function () {
         if (o.xtype == 'dialog') {
             o.renderTo = undefined;
         }
-        this.ext = Ext.create(o);
+        //this.ext = Ext.create(o)
+        Ext.onReady(function () {
+            me.ext = Ext.create(o);
+        });
     };
     base.prototype.baseAfterContentInit = function () {
         if (this._extitems.length == 1) {
