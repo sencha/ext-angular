@@ -1,10 +1,7 @@
 declare var Ext: any;
 import { Component, VERSION } from '@angular/core'
 import { Router } from '@angular/router'
-
-Ext.require([
-  'Ext.layout.*'
-])
+import { NgZone } from '@angular/core';
 
 @Component({
 	selector: 'app-root',
@@ -15,10 +12,11 @@ export class AppComponent {
   isPhone = Ext.platformTags.phone;
   title = 'Sencha ExtAngular 7.0 Boilerplate - Angular v' + VERSION.full
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public zone: NgZone) {}
 
   showAppMenu: boolean = false;
   toggleAppMenu = () => {
+      console.log('toggle')
     this.showAppMenu = !this.showAppMenu
   }
 
@@ -28,7 +26,10 @@ export class AppComponent {
 
   navigate = (event) => {
     var record = event.record;
-    this.router.navigate([record.data.id])
+    var me = this
+    this.zone.run(function () {
+        me.router.navigate([record.data.id])
+    })
   }
 
   navStore = {

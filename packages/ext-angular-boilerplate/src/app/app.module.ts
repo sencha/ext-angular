@@ -3,20 +3,21 @@ import { Inject, NgModule, ModuleWithProviders } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { Route, RouterModule } from '@angular/router'
 
+
 //import { ExtAngularModule } from './ext-angular-prod/ext-angular.module';
 
-import { ExtContainerComponent } from '@sencha/ext-angular/esm5/src/ext-container.component';
-import { ExtTitlebarComponent } from '@sencha/ext-angular/esm5/src/ext-titlebar.component';
-import { ExtButtonComponent } from '@sencha/ext-angular/esm5/src/ext-button.component';
-import { ExtPanelComponent } from '@sencha/ext-angular/esm5/src/ext-panel.component';
-import { ExtTreelistComponent } from '@sencha/ext-angular/esm5/src/ext-treelist.component';
-import { ExtGridComponent } from '@sencha/ext-angular/esm5/src/ext-grid.component';
-import { ExtToolbarComponent } from '@sencha/ext-angular/esm5/src/ext-toolbar.component';
-import { ExtSearchfieldComponent } from '@sencha/ext-angular/esm5/src/ext-searchfield.component';
-import { ExtColumnComponent } from '@sencha/ext-angular/esm5/src/ext-column.component';
+import { ExtContainerComponent } from '@sencha/ext-angular-all/lib/ext-container.component';
+import { ExtTitlebarComponent } from '@sencha/ext-angular-all/lib/ext-titlebar.component';
+import { ExtButtonComponent } from '@sencha/ext-angular-all/lib/ext-button.component';
+import { ExtPanelComponent } from '@sencha/ext-angular-all/lib/ext-panel.component';
+import { ExtTreelistComponent } from '@sencha/ext-angular-all/lib/ext-treelist.component';
+import { ExtGridComponent } from '@sencha/ext-angular-all/lib/ext-grid.component';
+import { ExtToolbarComponent } from '@sencha/ext-angular-all/lib/ext-toolbar.component';
+import { ExtSearchfieldComponent } from '@sencha/ext-angular-all/lib/ext-searchfield.component';
+import { ExtColumnComponent } from '@sencha/ext-angular-all/lib/ext-column.component';
 
-import { ExtAngularBootstrapService } from '@sencha/ext-angular/esm5/src/ext-angular-bootstrap.service';
-import { ExtAngularBootstrapComponent } from '@sencha/ext-angular/esm5/src/ext-angular-bootstrap.component';
+//import { ExtAngularBootstrapService } from '@sencha/ext-angular-all/lib/ext-angular-bootstrap.service';
+//import { ExtAngularBootstrapComponent } from '@sencha/ext-angular-all/lib/ext-angular-bootstrap.component';
 
 import { AppComponent } from './app.component'
 import { HomeComponent } from './Home/home.component'
@@ -33,7 +34,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
 @NgModule({
   imports:         [BrowserModule, routingModule],
   declarations:    [
-        ExtAngularBootstrapComponent,
+        //ExtAngularBootstrapComponent,
         AppComponent,
         HomeComponent,
         AboutComponent,
@@ -49,13 +50,32 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
         ExtSearchfieldComponent,
         ExtColumnComponent
     ],
-  providers:       [ExtAngularBootstrapService],
-  entryComponents: [AppComponent],
-  bootstrap:       [ExtAngularBootstrapComponent]
-})
-export class AppModule {
-
-  constructor(@Inject(ExtAngularBootstrapService) extAngularService : ExtAngularBootstrapService) {
-    extAngularService.setBootStrapComponent(AppComponent)
+    providers: [],
+    entryComponents: [AppComponent]
+    //bootstrap: [AppComponent]
+  })
+  export class AppModule {
+      ngDoBootstrap(app) {
+          Ext.onReady(function () {
+              console.log('ngDoBootstrap')
+              app.bootstrap(AppComponent);
+          });
+     }
   }
-}
+
+
+
+
+//   providers:       [],
+//   bootstrap:       [AppComponent]
+// })
+// export class AppModule {}
+// // export class AppModule {
+
+//     Ext.onReady(function() {
+
+
+// //   constructor(@Inject(ExtAngularBootstrapService) extAngularService : ExtAngularBootstrapService) {
+// //     extAngularService.setBootStrapComponent(AppComponent)
+// //   }
+// // }

@@ -10,6 +10,7 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+
     "lib": [
       "es2018",
       "dom"
@@ -17,12 +18,16 @@
     "typeRoots": [
       "node_modules/@types"
     ],
-    "paths": { 
-      "@angular/*": ["node_modules/@angular/*"], 
-      "@sencha/*": ["node_modules/@sencha/*"] 
+    "paths": {
+      "@angular/*": ["node_modules/@angular/*"],
+      "@sencha/*": ["node_modules/@sencha/*"]
     },
     "noImplicitAny": false,
     "suppressImplicitAnyIndexErrors": true,
     "preserveSymlinks": true
-  }
+  },
+  "include": [
+    "src/**/*.ts",
+    "node_modules/@sencha/**/*.ts"
+  ]
 }
