@@ -81,7 +81,7 @@ or...
 Run the following commands in the terminal/command window:
 
 ```sh
-npm install --save @sencha/ext-angular-grid @sencha/ext @sencha/ext-modern @sencha/ext-modern-theme-material
+npm install --save @sencha/ext-angular @sencha/ext @sencha/ext-modern @sencha/ext-modern-theme-material
 npm install --save @sencha/ext-webpack-plugin
 npm install --save @angular-builders/custom-webpack
 npm install --save @angular-builders/dev-server
@@ -127,7 +127,6 @@ To configure the ext-webpack-plugin for webpack in Angular, create a file named 
 ```sh
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin')
 const path = require('path');
 
@@ -139,7 +138,6 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
   },
   plugins: [
-    new HtmlWebpackPlugin({}),
     new ExtWebpackPlugin({
       framework: 'angular',
       toolkit: 'modern',
@@ -148,10 +146,10 @@ module.exports = {
       script: '',
       packages: [],
       profile: '',
-      environment: environment,
-      treeshake: treeshake,
-      browser: browser,
-      watch: watch,
+      environment: 'development',
+      treeshake: 'no',
+      browser: 'no',
+      watch: 'no',
       verbose: 'no',
       inject: 'no',
       intellishake: 'no'
@@ -171,11 +169,14 @@ module.exports = {
 Replace src/app/app.module.ts with the following:
 
 ```sh
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
+declare var Ext: any;
 import { ExtPanelComponent } from '@sencha/ext-angular/esm5/src/ext-panel.component';
 import { ExtGridComponent } from '@sencha/ext-angular/esm5/src/ext-grid.component';
+
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
@@ -187,11 +188,16 @@ import { ExtGridComponent } from '@sencha/ext-angular/esm5/src/ext-grid.componen
     BrowserModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  entryComponents: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+    ngDoBootstrap(app) {
+        Ext.onReady(function () {
+            app.bootstrap(AppComponent);
+        });
+    }
+}
 ```
-
 Add Ext.js and Ext.css inside index.html
 
 ```sh
@@ -249,4 +255,3 @@ npm run buildprod
 
 
 Browse to http://localhost:4200 in your browser.  You should see the Angular starter application with an ExtAngular Panel and Grid in the browser.
-

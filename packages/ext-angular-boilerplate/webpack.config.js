@@ -43,6 +43,7 @@ module.exports = function (env) {
   const isProd = environment === 'production'
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
+      console.log(port)
     const plugins = [
       new HtmlWebpackPlugin({template: "index.html",hash: false,inject: "body"}),
       new BaseHrefWebpackPlugin({ baseHref: basehref }),
@@ -52,7 +53,7 @@ module.exports = function (env) {
         theme: theme,
         packages: packages,
         script: script,
-        emit: emit,
+        emit: 'no',
         port: port,
         profile: profile,
         environment: environment,
@@ -60,7 +61,7 @@ module.exports = function (env) {
         browser: browser,
         watch: watch,
         verbose: verbose,
-        inject: 'yes',
+        inject: 'no',
         intellishake: 'no'
       }),
 
