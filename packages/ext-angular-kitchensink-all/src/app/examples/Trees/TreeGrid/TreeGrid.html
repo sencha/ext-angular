@@ -1,0 +1,26 @@
+<ext-container padding="10" layout="fit" [fitToParent]="true">
+    <ext-tree
+        [shadow]="true"
+        [top]="top"
+        [left]="left"
+        [width]="width"
+        [height]="height"
+        [store]="this.store"
+        (ready)="treeReady($event)"
+        [columns]="[
+            {
+                xtype: 'treecolumn',
+                text: 'Name',
+                dataIndex: 'text',
+                width: 200
+            },
+            {
+                xtype: 'numbercolumn',
+                text: 'No of Items',
+                dataIndex: 'numItems',
+                width: 100
+            }
+        ]"
+    >
+    </ext-tree>
+</ext-container>

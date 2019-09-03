@@ -1,0 +1,52 @@
+<ext-container padding="10" layout="fit" [fitToParent]="true">
+    <ext-toolbar docked="top">
+        <ext-spacer></ext-spacer>
+        <ext-button
+            iconCls="x-fa fa-refresh"
+            [handler]="this.refreshData"
+            text="Refresh Data"
+        ></ext-button>
+    </ext-toolbar>
+
+    <ext-pivotheatmap
+        [matrix]="matrixVar"
+        [padding]="isPhone ? '20 20 60 60' : '20 30 70 120'"
+        [xAxis]="{
+            title: {
+                attr: {
+                    'font-size': '12px'
+                }
+            }
+        }"
+        [yAxis]="{
+            title: {
+                attr: {
+                    'font-size': '12px'
+                }
+            }
+        }"
+        [colorAxis]="{
+            scale: {
+                type: 'linear',
+                range: ['#ffffd9', '#49b6c4', '#225ea8']
+            }
+        }"
+        [legend]="this.legendVar"
+        [tooltip]="{
+            renderer: this.onTooltip
+        }"
+        [platformConfig]="{
+            phone: {
+                tiles: {
+                    cls: 'phone-tiles'
+                }
+            },
+            tablet: {
+                tiles: {
+                    cls: 'tablet-tiles'
+                }
+            }
+        }"
+    >
+    </ext-pivotheatmap>
+</ext-container>

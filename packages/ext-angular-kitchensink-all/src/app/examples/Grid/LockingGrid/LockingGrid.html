@@ -1,0 +1,55 @@
+<ext-container padding="10" layout="fit" [fitToParent]="true">
+    <ext-lockedgrid
+        [left]="10"
+        [top]="10"
+        [width]="800"
+        [height]="400"
+        title="Locking Grid"
+        [store]="companies"
+        [scrollable]="true"
+        [shadow]="true"
+    >
+        <ext-column
+            [locked]="true"
+            text="Company"
+            dataIndex="name"
+            width="150"
+        ></ext-column>
+        <ext-column
+            [locked]="true"
+            text="Price"
+            dataIndex="price"
+            width="100"
+        ></ext-column>
+        <ext-column
+            [locked]="'left'"
+            [cell]="{
+          tools: {
+            approve: {iconCls: 'x-fa fa-check green',handler: this.onApprove.bind(this)},
+            decline: {iconCls: 'x-fa fa-ban red', handler:  this.onDecline.bind(this), weight: 1}
+          }}"
+        >
+        </ext-column>
+        <ext-column
+            [locked]="'right'"
+            text="Change"
+            dataIndex="priceChange"
+            width="100"
+        ></ext-column>
+        <ext-column
+            text="% Change"
+            dataIndex="priceChangePct"
+            width="100"
+        ></ext-column>
+        <ext-column
+            text="Last Updated"
+            dataIndex="priceLastChange"
+            width="150"
+        ></ext-column>
+        <ext-column
+            text="Industry"
+            dataIndex="industry"
+            width="150"
+        ></ext-column>
+    </ext-lockedgrid>
+</ext-container>
