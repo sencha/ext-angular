@@ -1,0 +1,37 @@
+<ext-container layout="fit" padding="10" [fitToParent]="true">
+    <ext-toolbar
+        docked="top"
+        ui="app-transparent-toolbar"
+        padding="5 8"
+        [shadow]="false"
+        [defaults]="{
+            margin: '0 10 0 0',
+            shadow: true,
+            ui: 'action'
+        }"
+    >
+        <ext-button text="Expand All" [handler]="this.expandAll"></ext-button>
+        <ext-button
+            text="Collapse All"
+            [handler]="this.collapseAll"
+        ></ext-button>
+        <ext-spacer></ext-spacer>
+        <ext-container layout="hbox">
+            <span #extitem>
+                <div
+                    style="font-size: '12px'; font-weight: 'normal'; margin-left: '10px';"
+                >
+                    Double click an amount to edit.
+                </div>
+            </span>
+        </ext-container>
+    </ext-toolbar>
+
+    <ext-pivotgrid
+        shadow="true"
+        (ready)="onPivotGridRead($event)"
+        [plugins]="[{ type: 'pivotrangeeditor' }]"
+        [matrix]="pivotgridMatrix"
+    >
+    </ext-pivotgrid>
+</ext-container>

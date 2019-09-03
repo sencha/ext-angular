@@ -1,0 +1,65 @@
+<ext-container padding="10" layout="fit" [fitToParent]="true">
+  <ext-grid title="Grid Tools"
+      [store]="this.store"
+      columnLines="true"
+      grouped="true"
+      shadow="true"
+      [tpl]="this.helperTpl"
+      [itemConfig]="{
+        header:{
+          tools:{
+            refresh:  {
+              handler: this.onGroupRefresh
+            },
+            print: {
+              handler: this.onGroupPrint,
+              tooltip: 'Print group...',
+              zone: 'tail'
+            },
+            save: {
+              handler: this.onGroupSave,
+              zone: 'end'
+            }
+          }
+        }
+      }"
+    >
+      <ext-column
+        text="Name"
+        dataIndex="name"
+        flex="1"
+        maxWidth="200"
+        [cell]="{
+          tools:{
+            pin: {
+              handler: this.onPin
+            }
+          }
+        }"
+      ></ext-column>
+      <ext-column
+        text="Cuisine"
+        dataIndex="cuisine"
+        flex="1"
+        maxWidth="150"
+        [cell]="{
+          tools:{
+            gear: {
+              handler: this.onGear
+            }
+          }
+        }"
+      ></ext-column>
+      <ext-column
+        text="Actions"
+        width="80"
+        [cell]="{
+          tools:{
+            search: {
+              handler: this.onSearch
+            }
+          }
+        }"
+      ></ext-column>
+    </ext-grid>
+</ext-container>
