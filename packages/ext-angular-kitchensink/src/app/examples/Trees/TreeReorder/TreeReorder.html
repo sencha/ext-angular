@@ -1,0 +1,23 @@
+<ext-container padding="10" layout="center" flex="1" height="100%">
+    <ext-tree
+        plugins="treedragdrop"
+        (ready)="onTreeReady($event)"
+        title="Files"
+        [store]="treeStore"
+        [shadow]="true"
+        [height]="400"
+        [width]="350"
+    >
+        <ext-toolbar docked="top" (ready)="toolbarReady($event)">
+            <ext-button
+                text="Expand All"
+                [handler]="this.onExpandAllClick"
+            ></ext-button>
+            <ext-button
+                text="Collapse All"
+                [handler]="this.onCollapseAllClick"
+            ></ext-button>
+            <ext-button text="Reset" [handler]="this.onResetClick"></ext-button>
+        </ext-toolbar>
+    </ext-tree>
+</ext-container>

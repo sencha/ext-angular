@@ -1,0 +1,20 @@
+<ext-container padding="10" layout="fit" [fitToParent]="true">
+    <ext-d3-treemap
+        [store]="store"
+        [interactions]="{
+            type: 'panzoom',
+            zoom: {
+                doubleTap: false
+            }
+        }"
+        [rootVisible]="false"
+        [tooltip]="{
+            cls: 'tip',
+            renderer: onTooltip
+        }"
+        [nodeValue]="'cap'"
+        [noParentValue]="true"
+        [scaleLabels]="true"
+        [colorAxis]="colorAxis"
+    ></ext-d3-treemap>
+</ext-container>

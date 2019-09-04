@@ -1,0 +1,17 @@
+<ext-container padding="10" layout="fit" [fitToParent]="true">
+    <ext-formpanel layout="vbox" [shadow]="true">
+        <ext-sliderfield
+            label="Value"
+            (change)="updateGauges($event)"
+            [value]="value"
+        ></ext-sliderfield>
+        <ext-gauge flex="1" [value]="value"></ext-gauge>
+        <ext-gauge
+            flex="1"
+            [value]="value"
+            [ui]="'green'"
+            [trackStart]="180"
+            [trackLength]="360"
+        ></ext-gauge>
+    </ext-formpanel>
+</ext-container>

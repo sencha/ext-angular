@@ -1,6 +1,6 @@
 ## @sencha/ext-angular-all
 
-last run: Tue Sep 03 2019 16:59:08 GMT-0400 (Eastern Daylight Time)
+last run: Wed Sep 04 2019 09:44:20 GMT-0400 (Eastern Daylight Time)
 
 This npm package contains the minimum files that are needed to provide for the @sencha/ext-angular-all package for an Angular application
 

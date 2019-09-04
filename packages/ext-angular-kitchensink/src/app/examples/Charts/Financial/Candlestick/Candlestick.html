@@ -1,0 +1,24 @@
+<ext-container padding="10" layout="fit" [fitToParent]="true">
+
+  <ext-container docked="top"><div #extitem>
+    <chart-toolbar
+      [onThemeChange]="this.changeTheme"
+      [onToggleZoomOnPan]="this.toggleZoomOnPan"
+      [onToggleCrosshair]="this.toggleCrosshair"
+      [onRefreshClick]="this.refresh"
+      [theme]="theme"
+      [onlyMidnight]="true">
+    </chart-toolbar>
+  </div></ext-container>
+
+  <ext-cartesian downloadServerUrl ="http://svg.sencha.io"
+    shadow="true"
+    (ready)="chartNavReady($event)"
+    [store]="this.store"
+    [theme]="theme"
+    [axes]="cartesianAxes"
+    [series]="cartesianSeries"
+    [interactions]="cartesianInteractions">
+  </ext-cartesian>
+
+</ext-container>

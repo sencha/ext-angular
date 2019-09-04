@@ -1,0 +1,65 @@
+<ext-container layout="fit" padding="10" [fitToParent]="true">
+    <ext-toolbar
+        shadow="false"
+        docked="top"
+        ui="app-transparent-toolbar"
+        padding="5 8"
+        [layout]="{
+            type: 'hbox',
+            align: 'stretch'
+        }"
+        [defaults]="{
+            margin: '0 10 0 0',
+            shadow: true,
+            ui: 'action'
+        }"
+    >
+        <ext-button ui="action raised" text="Collapsible">
+            <ext-menu [defaults]="{ handler: this.onCollapsibleChange }">
+                <ext-menuitem
+                    text="None"
+                    value="none"
+                    [iconCls]="
+                        !collapsibleColumns && !collapsibleRows === true
+                            ? 'x-font-icon md-icon-check'
+                            : ''
+                    "
+                ></ext-menuitem>
+                <ext-menuitem
+                    text="Rows Only"
+                    value="rows"
+                    [iconCls]="
+                        !collapsibleColumns && collapsibleRows === true
+                            ? 'x-font-icon md-icon-check'
+                            : ''
+                    "
+                ></ext-menuitem>
+                <ext-menuitem
+                    text="Columns Only"
+                    value="cols"
+                    [iconCls]="
+                        collapsibleColumns && !collapsibleRows === true
+                            ? 'x-font-icon md-icon-check'
+                            : ''
+                    "
+                ></ext-menuitem>
+                <ext-menuitem
+                    text="Rows & Columns"
+                    value="both"
+                    [iconCls]="
+                        collapsibleColumns && collapsibleRows === true
+                            ? 'x-font-icon md-icon-check'
+                            : ''
+                    "
+                ></ext-menuitem>
+            </ext-menu>
+        </ext-button>
+    </ext-toolbar>
+
+    <ext-pivotgrid
+        shadow="true"
+        [matrix]="this.pivotgridMatrix"
+        (ready)="onReady($event)"
+    >
+    </ext-pivotgrid>
+</ext-container>

@@ -1,0 +1,26 @@
+<ext-container padding="10" layout="fit" [fitToParent]="true">
+    <ext-formpanel
+        [shadow]="true"
+        [top]="top"
+        [left]="left"
+        [width]="width"
+        [height]="height"
+        [layout]="{ type: 'vbox', align: 'left' }"
+        [bodyPadding]="10"
+    >
+        <ext-checkboxfield [boxLabel]="'Unchecked'"></ext-checkboxfield>
+        <ext-checkboxfield
+            [boxLabel]="'Checked'"
+            [checked]="true"
+        ></ext-checkboxfield>
+        <ext-checkboxfield
+            [boxLabel]="'Disabled'"
+            [disabled]="true"
+        ></ext-checkboxfield>
+        <ext-checkboxfield
+            [boxLabel]="'Disabled (checked)'"
+            [checked]="true"
+            [disabled]="true"
+        ></ext-checkboxfield>
+    </ext-formpanel>
+</ext-container>
