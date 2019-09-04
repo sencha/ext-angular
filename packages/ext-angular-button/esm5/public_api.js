@@ -1,0 +1,5 @@
+/*
+ * Public API Surface of ext-angular
+ */
+export * from './src/ext-angular-button.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljX2FwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzZW5jaGEvZXh0LWFuZ3VsYXItYnV0dG9uLyIsInNvdXJjZXMiOlsicHVibGljX2FwaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7R0FFRztBQUVILGNBQWMsaUNBQWlDLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyIvKlxuICogUHVibGljIEFQSSBTdXJmYWNlIG9mIGV4dC1hbmd1bGFyXG4gKi9cblxuZXhwb3J0ICogZnJvbSAnLi9zcmMvZXh0LWFuZ3VsYXItYnV0dG9uLm1vZHVsZSc7XG4iXX0=

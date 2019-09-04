@@ -17,7 +17,7 @@
     "http": "npx http-server build -g -o"
   },
   "devDependencies": {
-    "@sencha/ext-angular-all": "~7.0.0",
+    "@sencha/ext-angular": "~7.0.0",
     "@sencha/ext-webpack-plugin": "~7.0.0",
     "@sencha/ext": "~7.0.0",
     "@sencha/ext-modern": "~7.0.0",

@@ -26,14 +26,14 @@ export class SimpleDragDropComponent {
     Ext.destroy(this.source);
   }
 
-  onParentReady = (ele) => {
-    this.panelRef = ele.ext.el;
+  onParentReady = (event) => {
+    this.panelRef = event.detail.cmp.el;
     this.source.setConstrain(this.panelRef);
     this.panelRef.destroy = this.doDestroy.bind(this);
   }
 
-  onElementReady = (ele) => {
-    this.containerRef = ele.ext.el;
+  onElementReady = (event) => {
+    this.containerRef = event.detail.cmp.el;
     this.source.setElement(this.containerRef);
   }
 

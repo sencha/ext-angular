@@ -19,12 +19,12 @@ export class ButtonComponent  {
   menuButtons = [];
 
   menuButtonReady = function(event) {
-    this.menuButtons.push(event.ext);
+    this.menuButtons.push(event.detail.cmp);
   }
 
 
   onStyleChange = (item) => {
-    this.style = item._text; 
+    this.style = item._text;
     if (this.style === 'Menu') {
       this.menu = true;
       var tempMenu = Ext.create('Ext.menu.Menu');
@@ -56,14 +56,14 @@ export class ButtonComponent  {
   }
 
   onTypeChange = (item) => {
-    this.type = item._text; 
+    this.type = item._text;
     this.iconCls = this.type.indexOf('Icon') !== -1 ? 'x-fa fa-heart' : null;
     this.text = this.type.indexOf('Text') !== -1;
   }
 
   toggleRound = function(){
     this.round=!this.round;
-    if (this.round) { 
+    if (this.round) {
       this.ui += ' round';
     }
     else {

@@ -20,23 +20,24 @@ export class DataDragDropComponent {
     Ext.destroy(this.source, this.target);
   }
 
-  parentReady = (ele) => {
-    this.parentRef = ele.ext.el;
+  parentReady = (event) => {
+    this.parentRef = event.detail.cmp.el;
     this.source.setConstrain(this.parentRef);
     this.parentRef.destroy = this.doDestroy.bind(this);
   }
 
-  targetReady = (ele) => {
-    this.targetRef = ele.ext.el;
+  targetReady = (event) => {
+    this.targetRef = event.detail.cmp.el;
     this.target.setElement(this.targetRef);
   }
 
-  sourceReady = (ele) => {
-    this.sourceRef = ele.ext.el;
+  sourceReady = (event) => {
+      console.log(event)
+    this.sourceRef = event.detail.cmp.el;
     this.source.setElement(this.sourceRef);
   }
 
-  // When the drag starts, the describe method is used to extract the relevant data that the drag 
+  // When the drag starts, the describe method is used to extract the relevant data that the drag
   // represents and is pushed into the info object for consumption by the target.
   source = new Ext.drag.Source({
     handle: '.handle',
