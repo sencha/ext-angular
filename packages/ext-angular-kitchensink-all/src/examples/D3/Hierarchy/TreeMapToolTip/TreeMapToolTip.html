@@ -1,0 +1,23 @@
+<ext-container padding="10" layout="fit" [fitToParent]="true">
+    <ext-d3-treemap
+        [rootVisible]="false"
+        [interactions]="{
+            type: 'panzoom',
+            pan: { momentum: null },
+            zoom: { doubleTap: false }
+        }"
+        (nodeValue)="nodeValue($event)"
+        [store]="store"
+        [selectEventName]="null"
+        [expandEventName]="null"
+        [noParentValue]="true"
+        [scaleLabels]="true"
+        [tooltip]="{
+            cls: 'treemaptooltip-tip',
+            ui: 'd3-treemap',
+            trackMouse: true,
+            renderer: tooltipRenderer
+        }"
+        [colorAxis]="colorAxis"
+    ></ext-d3-treemap>
+</ext-container>

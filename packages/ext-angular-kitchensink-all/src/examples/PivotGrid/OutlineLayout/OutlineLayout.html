@@ -1,0 +1,33 @@
+<ext-container layout="fit" padding="10" [fitToParent]="true">
+    <ext-toolbar
+        [shadow]="false"
+        docked="top"
+        padding="5 8"
+        [layout]="{
+            type: 'hbox',
+            align: 'stretch'
+        }"
+        ui="app-transparent-toolbar"
+        [defaults]="{
+            margin: '0 10 0 0',
+            shadow: true,
+            ui: 'action'
+        }"
+    >
+        <ext-button text="Expand all" [handler]="this.expandAll"></ext-button>
+        <ext-button
+            text="Collapse all"
+            [handler]="this.collapseAll"
+        ></ext-button>
+    </ext-toolbar>
+
+    <ext-pivotgrid
+        (ready)="onPivotGridRead($event)"
+        shadow="true"
+        [selectable]="{ cells: true }"
+        [startRowGroupsCollapsed]="false"
+        [startColGroupsCollapsed]="false"
+        [matrix]="pivotgridMatrix"
+    >
+    </ext-pivotgrid>
+</ext-container>

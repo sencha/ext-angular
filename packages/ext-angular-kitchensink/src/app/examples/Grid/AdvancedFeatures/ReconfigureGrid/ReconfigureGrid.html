@@ -1,0 +1,15 @@
+<ext-grid
+[columns]="columns"
+[store]="store"
+shadow="true"
+[deferEmptyText]="false"
+[emptyText]="'Click a button to show a dataset.'"
+[fitToParent]="true"
+>
+<ext-toolbar  [docked]="'top'" ui="transparent" layout="hbox">
+    <ext-segmentedbutton  width="300" [defaults]="{ flex: 1 }" (change)="onChange($event)">
+        <ext-button  text="Show Offices" value="Offices"></ext-button>
+        <ext-button  text="Show Employees" value="Employees"></ext-button>
+    </ext-segmentedbutton>
+</ext-toolbar>
+</ext-grid>

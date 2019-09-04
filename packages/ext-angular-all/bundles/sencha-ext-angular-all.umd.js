@@ -211,13 +211,17 @@
             this.newDiv = document.createElement('div');
             this.node.insertAdjacentElement('beforebegin', this.newDiv);
             this.xtype = metaData.XTYPE;
+            this.properties = metaData.PROPERTIES;
+            this.propertiesobject = 'propertiesobject';
+            this.events = metaData.EVENTS;
+            this.eventnames = metaData.EVENTNAMES;
             this.base = EngBase;
-            metaData.EVENTNAMES.forEach(function (event, n) {
+            this.eventnames.forEach(function (event, n) {
                 if (event != 'fullscreen') {
-                    _this.getNode()[event] = new core.EventEmitter();
+                    _this.currentEl[event] = new core.EventEmitter();
                 }
                 else {
-                    _this.getNode()[event + 'event'] = new core.EventEmitter();
+                    _this.currentEl[event + 'event'] = new core.EventEmitter();
                 }
             });
         }
@@ -231,9 +235,10 @@
         });
         EngBase.prototype.baseOnInit = function (metaData) { };
         EngBase.prototype.baseAfterViewInit = function (metaData) {
-            console.log('');
-            console.log('*** baseAfterViewInit for ' + this.xtype);
-            if (this._extitems != undefined) {
+            this.initMe();
+        };
+        EngBase.prototype.createRawChildren = function () {
+            if (this.isAngular) {
                 this.rawChildren = this.childComponents;
             }
             else {
@@ -250,42 +255,58 @@
                     }
                 }
             }
-            this.figureOutA();
-            this.createPropsForENG(metaData.PROPERTIES, metaData.EVENTS, metaData.EVENTNAMES);
-            //this.createPropsForEWC(this.PROPERTIESOBJECT, this.EVENTS);
-            this.createExtComponent();
-            this.assessChildren(this.base, this.xtype);
+        };
+        EngBase.prototype.atEnd = function () {
             console.log('*** at end');
-            console.dir(this.getNode().A);
-            if (this.getParentNode() != null) {
-                console.dir(this.getParentNode().A);
+            console.log('this - ' + this.currentElName);
+            console.dir(this.currentEl.A);
+            if (this.parentEl != null) {
+                console.log('parent - ' + this.parentElName);
+                console.dir(this.parentEl.A);
             }
             else {
                 console.log('No EXT parent');
             }
         };
+        EngBase.prototype.initMe = function () {
+            console.log('');
+            console.log('*** initMe for ' + this.currentElName);
+            this.createRawChildren();
+            this.setHasParent();
+            this.setDirection();
+            this.figureOutA();
+            this.createProps(this.properties, this.propertiesobject, this.events, this.eventnames);
+            this.createExtComponent();
+            this.assessChildren(this.base, this.xtype);
+            this.atEnd();
+            if (this.last == true) {
+                console.log('this is the end...');
+            }
+        };
         ;
-        EngBase.prototype.figureOutA = function () {
-            console.log('figureOutA');
+        EngBase.prototype.setHasParent = function () {
             var hasParent;
-            if (this.getParentNode() == null) {
-                hasParent = false;
+            if (this.parentEl == null) {
+                this.hasParent = false;
             }
             else {
-                if (this.getParentNode().nodeName.substring(0, 4) == 'EXT-') {
-                    hasParent = true;
+                if (this.parentElName.substring(0, 4) == 'EXT-') {
+                    this.hasParent = true;
                 }
                 else {
-                    hasParent = false;
+                    this.hasParent = false;
                 }
             }
+            //return hasParent
+        };
+        EngBase.prototype.setDirection = function () {
             if (this.base.count == 0) {
                 this.base.count++;
-                if (hasParent == false) {
+                if (this.hasParent == false) {
                     this.base.DIRECTION = 'TopToBottom';
                 }
                 else {
-                    if (this.getParentNode().nodeName.substring(0, 4) == 'EXT-') {
+                    if (this.parentElName.substring(0, 4) == 'EXT-') {
                         this.base.DIRECTION = 'BottomToTop';
                     }
                     else {
@@ -294,179 +315,53 @@
                 }
             }
             console.log(this.base.DIRECTION);
-            if (hasParent) {
-                if (this.getParentNode().A == undefined) {
-                    //console.log('parent not created');
-                    this.init(this.getParentNode(), this.parentNode);
-                }
-                else {
-                    //console.log('parent A IS created');
-                }
+        };
+        EngBase.prototype.figureOutA = function () {
+            if (this.hasParent && this.parentEl.A == undefined) {
+                this.init(this.parentEl, this.parentNode);
             }
-            if (this.getNode().A == undefined) {
-                //console.log('no A');
-                this.init(this.getNode(), this);
+            if (this.currentEl.A == undefined) {
+                this.init(this.currentEl, this);
             }
-            else {
-                console.log('have A');
-            }
+            // if (hasParent) {
+            //     if (this.parentEl.A == undefined) {
+            //         //console.log('parent not created');
+            //         this.init(this.parentEl, this.parentNode);
+            //     }
+            //     else {
+            //         //console.log('parent A IS created');
+            //     }
+            // }
+            // if (this.currentEl.A == undefined) {
+            //     //console.log('no A');
+            //     this.init(this.currentEl, this);
+            // }
+            // else {
+            //     console.log('have A');
+            // }
         };
         EngBase.prototype.init = function (component, node) {
             component.A = {};
             component.A.props = {};
             component.A.xtype = node.xtype;
-            component.A.ACURRENT = node.xtype;
+            //component.A.ACURRENT = node.xtype;
             component.A.CHILDRENCOMPONENTS = [];
             component.A.CHILDRENCOMPONENTSCOUNT = 0;
             component.A.CHILDRENCOMPONENTSADDED = 0;
             if (this.base.DIRECTION == 'TopToBottom') {
                 component.A.CHILDRENCOMPONENTS = component.rawChildren;
                 for (var i = 0; i < component.A.CHILDRENCOMPONENTS.length; i++) {
-                    if (this.getNodeName(component.A.CHILDRENCOMPONENTS[i]).substring(0, 4) == 'EXT-') {
+                    if (this.getCurrentElName(component.A.CHILDRENCOMPONENTS[i]).substring(0, 4) == 'EXT-') {
                         component.A.CHILDRENCOMPONENTSCOUNT++;
                     }
                 }
                 component.A.CHILDRENCOMPONENTSLEFT = component.A.CHILDRENCOMPONENTSCOUNT;
             }
         };
-        /*
-        createPropsForEWC(properties, events) {
-            var o = {};
-            o.xtype = this.xtype;
-            if (o.xtype == 'column' ||
-                o.xtype == 'gridcolumn') {
-                var renderer = this.getAttribute('renderer')
-                if (renderer != undefined) {
-                    o.cell = this.cell || {}
-                    o.cell.xtype = 'renderercell'
-                    //console.log(renderer)
-                    o.cell.renderer = renderer
-                }
-            }
-            //mjg fitToParent not working??
-            if (true === this.fitToParent) {
-                o.top=0,
-                o.left=0,
-                o.width='100%',
-                o.height='100%'
-            }
-            for (var property in properties) { //this.PROPERTIESOBJECT
-                if (this.getAttribute(property) !== null) {
-                    if (property == 'handler') {
-                        var functionString = this.getAttribute(property);
-                        //error check for only 1 dot
-                        var r = functionString.split('.');
-                        var obj = r[0];
-                        var func = r[1];
-                        o[property] = window[obj][func];
-                    }
-                    else {
-                        o[property] = this.filterProperty(this.getAttribute(property));
-                    }
-                }
-            }
-            o.listeners = {}
-
-            // this would only add events to the ones that are
-            // being used for this instance
-            // for (var i = 0; i < this.attributes.length; i++) {
-            //     var attr = this.attributes.item(i).nodeName;
-
-            //     if (/^on/.test(attr)) {
-            //     //if (/^on/.test(attr) && attr!='onitemdisclosure') {
-            //         var name = attr.slice(2);
-            //         var result = this.EVENTS.filter(obj => {return obj.name === name});
-            //         this.setEvent(result[0],o,this)
-            //     }
-            // }
-
-            //this.EVENTS
-            var me2 = this
-            events.forEach(function (eventparameter, index, array) {
-                me2.setEvent(eventparameter,o,me2)
-            })
-
-            props = o
-            //return o;
-        }
-        */
-        EngBase.prototype.createPropsForENG = function (properties, events, eventnames) {
-            var _this = this;
-            var props = this.getNode().A.props;
-            props.xtype = this.xtype;
-            var listenersProvided = false;
-            for (var i = 0; i < properties.length; i++) {
-                var prop = properties[i];
-                if (prop == 'handler') {
-                    if (this[prop] != undefined) {
-                        props[prop] = this[prop];
-                    }
-                }
-                //need to handle listeners coming in here
-                if ((props.xtype === 'cartesian' || props.xtype === 'polar') && prop === 'layout') {
-                }
-                else if (prop == 'listeners' && this[prop] != undefined) {
-                    props[prop] = this[prop];
-                    listenersProvided = true;
-                }
-                else {
-                    if (this[prop] != undefined &&
-                        prop != 'listeners' &&
-                        prop != 'config' &&
-                        prop != 'handler' &&
-                        prop != 'fitToParent') {
-                        props[prop] = this[prop];
-                    }
-                }
-            }
-            if (true === this['fitToParent']) {
-                props.top = 0,
-                    props.left = 0,
-                    props.width = '100%',
-                    props.height = '100%';
-            }
-            if (this['config'] !== {}) {
-                Ext.apply(props, this['config']);
-            }
-            if (!listenersProvided) {
-                props.listeners = {};
-                var me = this;
-                events.forEach(function (event) {
-                    var eventname = event.name;
-                    var eventparameters = event.parameters;
-                    me.getNode().A.props.listeners[eventname] = function () {
-                        console.log('in the event ' + eventname);
-                        var parameters = eventparameters;
-                        var parms = parameters.split(',');
-                        var args = Array.prototype.slice.call(arguments);
-                        var emitparms = {};
-                        if (me._extitems != undefined) {
-                            for (var i_1 = 0, j = parms.length; i_1 < j; i_1++) {
-                                emitparms[parms[i_1]] = args[i_1];
-                            }
-                            me[eventname].emit(emitparms);
-                        }
-                        else {
-                        }
-                    };
-                });
-            }
-            //dup??
-            if (this._extitems != undefined) {
-                events.forEach(function (event, n) {
-                    if (event != 'fullscreen') {
-                        _this[event] = new core.EventEmitter();
-                    }
-                    else {
-                        _this[event + 'event'] = new core.EventEmitter();
-                    }
-                });
-            }
-        };
         EngBase.prototype.createExtComponent = function () {
-            var A = this.getNode().A;
+            var A = this.currentEl.A;
             if (A.props['viewport'] == true) {
-                A.APARENT = '';
+                //A.APARENT = '';
                 //this.newDiv.remove()
                 A.ext = Ext.create(A.props);
                 console.log('0-Ext.application: ' + A.props.xtype);
@@ -474,40 +369,44 @@
                 Ext.application({
                     name: 'MyEWCApp',
                     launch: function () {
-                        Ext.Viewport.add([me.getNode().A.ext]);
+                        Ext.Viewport.add([me.currentEl.A.ext]);
                         if (window['router']) {
                             window['router'].init();
+                        }
+                        console.log(me.base.DIRECTION + ' in launch ');
+                        if (me.base.DIRECTION == 'BottomToTop') {
+                            console.log('the last thing to do...');
+                            me.last = true;
                         }
                     }
                 });
             }
             else if (this.parentNode == null) {
-                A.APARENT = '';
-                console.log('1- Ext.create: ' + this.node.nodeName + ' parent: ' + this.node.nodeName);
+                //A.APARENT = '';
+                console.log('1- Ext.create: ' + this.currentElName + ' HTML parent: ' + this.currentElName);
                 A.props.renderTo = this.newDiv;
                 A.ext = Ext.create(A.props);
-                //me.currentComponent.node.parentNode.replaceChild(me.currentComponent.node.ext.el.dom, this.A.newDiv)
+                //this.parentEl.replaceChild(A.ext.el.dom, this.newDiv)
                 //console.log('replace newDiv')
             }
             else {
-                if (this.getParentNode().nodeName.substring(0, 4) != 'EXT-') {
-                    console.log('2- Ext.create: ' + this.node.nodeName + '  parent: ' + this.parentNode.nodeName);
+                if (this.parentElName.substring(0, 4) != 'EXT-') {
+                    console.log('2- Ext.create: ' + this.currentElName + '  HTML parent: ' + this.parentElName);
                     A.props.renderTo = this.newDiv; //this.A.newDiv; //me.shadowRoot;
-                    this.getNode().A.ext = Ext.create(A.props);
-                    //me.currentComponent.node.parentNode.replaceChild(me.currentComponent.node.ext.el.dom, this.A.newDiv)
+                    this.currentEl.A.ext = Ext.create(A.props);
+                    //this.parentEl.replaceChild(A.ext.el.dom, this.newDiv)
                 }
                 else {
-                    console.log('3- Ext.create: ' + this.node.nodeName + '  Ext parent: ' + this.parentNode.nodeName);
+                    console.log('3- Ext.create: ' + this.currentElName + '  Ext parent: ' + this.parentElName);
                     A.ext = Ext.create(A.props);
                 }
             }
         };
         EngBase.prototype.assessChildren = function (base, xtype) {
-            var A = this.getNode().A;
+            var A = this.currentEl.A;
             console.log('assessChildren for: ' + xtype);
             if (this._extitems != undefined) {
                 if (this._extitems.length == 1) {
-                    //mjg console.log('item')
                     console.log('set html');
                     A.ext.setHtml(this._extitem.nativeElement);
                 }
@@ -522,15 +421,17 @@
             if (A.CHILDRENCOMPONENTSCOUNT == 0 &&
                 A.CHILDRENCOMPONENTSLEFT == 0 &&
                 A.CHILDRENCOMPONENTSADDED == 0 &&
-                this.getParentNode() == null) {
+                this.parentEl == null) {
                 console.log('Solo');
+                console.log('ready event for ' + this.currentElName);
                 this.sendReadyEvent(this);
             }
             else if (A.CHILDRENCOMPONENTSADDED > 0) {
                 console.log('addChildren');
                 console.dir(A.CHILDRENCOMPONENTS);
                 this.addChildren(this, A.CHILDRENCOMPONENTS);
-                console.log('send ready for CHILDRENCOMPONENTSADDED > 0');
+                //console.log('send ready for CHILDRENCOMPONENTSADDED > 0');
+                console.log('ready event for ' + this.currentElName);
                 this.sendReadyEvent(this);
                 this.node.remove();
             }
@@ -538,30 +439,37 @@
             //     console.log('send ready for ' + this.A.xtype);
             //     this.sendReadyEvent(this);
             // }
-            if (this.getParentNode() != null) {
+            if (this.parentEl != null) {
                 if (base.DIRECTION == 'TopToBottom') {
                     console.log('TopToBottom');
-                    this.getParentNode().A.CHILDRENCOMPONENTS.push(this);
-                    this.getParentNode().A.CHILDRENCOMPONENTSADDED++;
-                    this.getParentNode().A.CHILDRENCOMPONENTSLEFT--;
-                    if (this.getParentNode().A.CHILDRENCOMPONENTSLEFT == 0) {
-                        this.addChildren(this.getParentNode(), this.getParentNode().A.CHILDRENCOMPONENTS);
-                        console.log('send ready to parent');
-                        this.sendReadyEvent(this.getParentNode());
+                    this.parentEl.A.CHILDRENCOMPONENTS.push(this);
+                    this.parentEl.A.CHILDRENCOMPONENTSADDED++;
+                    this.parentEl.A.CHILDRENCOMPONENTSLEFT--;
+                    if (this.parentEl.A.CHILDRENCOMPONENTSLEFT == 0) {
+                        this.addChildren(this.parentEl, this.parentEl.A.CHILDRENCOMPONENTS);
+                        console.log('ready event for ' + this.parentElName + '(parent)');
+                        this.sendReadyEvent(this.parentEl);
                     }
                 }
                 else {
-                    this.getParentNode().A.CHILDRENCOMPONENTS.push(this.getNode());
-                    this.getParentNode().A.CHILDRENCOMPONENTSADDED++;
+                    this.parentEl.A.CHILDRENCOMPONENTS.push(this.currentEl);
+                    this.parentEl.A.CHILDRENCOMPONENTSADDED++;
+                    console.log('ready event for ' + this.currentElName);
                     this.sendReadyEvent(this);
                 }
             }
         };
         EngBase.prototype.addChildren = function (child, children) {
             //console.log('addChildren for ' + child.xtype + ' - num children: ' + children.length);
-            for (var i = children.length - 1; i > -1; i--) {
+            //for (var i = children.length - 1; i > -1; i--) {
+            //    var childItem = { parentCmp: {}, childCmp: {} };
+            //    childItem.parentCmp = child.currentEl.A.ext;
+            //    childItem.childCmp = children[i].A.ext;
+            //    this.addTheChild(childItem.parentCmp, childItem.childCmp, null);
+            //}
+            for (var i = 0; i < children.length; i++) {
                 var childItem = { parentCmp: {}, childCmp: {} };
-                childItem.parentCmp = child.getNode().A.ext;
+                childItem.parentCmp = child.currentEl.A.ext;
                 childItem.childCmp = children[i].A.ext;
                 this.addTheChild(childItem.parentCmp, childItem.childCmp, null);
             }
@@ -571,7 +479,7 @@
             var childxtype = childCmp.xtype;
             //console.log('addTheChild: ' + parentxtype + '(' + parentCmp.ext + ')' + ' - ' + childxtype + '(' + childCmp.ext + ')');
             //if (childxtype == 'widget')
-            if (this.getNode().A.ext.initialConfig.align != undefined) {
+            if (this.currentEl.A.ext.initialConfig.align != undefined) {
                 if (parentxtype != 'titlebar' && parentxtype != 'grid' && parentxtype != 'lockedgrid' && parentxtype != 'button') {
                     console.error('Can only use align property if parent is a Titlebar or Grid or Button');
                     return;
@@ -709,40 +617,187 @@
             //     this.parentNode.dispatchEvent(new CustomEvent('ready',{detail:{cmp: this.parentNode.ext}}))
             // }
         };
-        EngBase.prototype.getNode = function () {
-            if (this._extitems != undefined) {
-                return this.node;
-            }
-            else {
-                return this;
-            }
-        };
-        EngBase.prototype.getParentNode = function () {
-            if (this._extitems != undefined) {
-                if (this.parentNode == null) {
-                    return null;
+        Object.defineProperty(EngBase.prototype, "currentEl", {
+            // currentEl {
+            //     if (this._extitems != undefined) {
+            //         return this.node
+            //     }
+            //     else {
+            //         return this
+            //     }
+            // }
+            get: function () {
+                if (this._extitems != undefined) {
+                    return this.node;
                 }
-                return this.parentNode.node;
-            }
-            else {
-                return this.parentNode;
-            }
-        };
-        EngBase.prototype.getNodeName = function (component) {
-            if (this._extitems != undefined) {
+                else {
+                    return this;
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        EngBase.prototype.getCurrentElName = function (component) {
+            if (component._extitems != undefined) {
                 return component.node.nodeName;
             }
             else {
                 return component.nodeName;
             }
         };
+        Object.defineProperty(EngBase.prototype, "currentElName", {
+            get: function () {
+                if (this._extitems != undefined) {
+                    return this.node.nodeName;
+                }
+                else {
+                    return this.nodeName;
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(EngBase.prototype, "isAngular", {
+            get: function () {
+                if (this._extitems != undefined) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(EngBase.prototype, "parentEl", {
+            get: function () {
+                if (this.isAngular) {
+                    if (this.parentNode == null) {
+                        return null;
+                    }
+                    return this.parentNode.node;
+                }
+                else {
+                    return this.parentNode;
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(EngBase.prototype, "parentElName", {
+            get: function () {
+                if (this.isAngular) {
+                    if (this.parentNode == null) {
+                        return null;
+                    }
+                    return this.parentNode.node.nodeName;
+                }
+                else {
+                    return this.parentNode.nodeName;
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        // parentEl {
+        //     if (this._extitems != undefined) {
+        //         if (this.parentNode == null) {
+        //             return null
+        //         }
+        //         return this.parentNode.node;
+        //     }
+        //     else {
+        //         return this.parentNode;
+        //     }
+        // }
+        // getNodeName(component) {
+        //     if (this._extitems != undefined) {
+        //         return component.node.nodeName
+        //     }
+        //     else {
+        //         return component.nodeName
+        //     }
+        // }
         EngBase.prototype.sendReadyEvent = function (component) {
-            var cmp = component.getNode().A.ext;
+            var cmp = component.currentEl.A.ext;
             if (component._extitems != undefined) {
                 component['ready'].emit({ detail: { cmp: cmp } });
             }
             else {
                 component.dispatchEvent(new CustomEvent('ready', { detail: { cmp: cmp } }));
+            }
+        };
+        EngBase.prototype.createProps = function (properties, propertiesobject, events, eventnames) {
+            var _this = this;
+            var props = this.currentEl.A.props;
+            props.xtype = this.xtype;
+            var listenersProvided = false;
+            for (var i = 0; i < properties.length; i++) {
+                var prop = properties[i];
+                if (prop == 'handler') {
+                    if (this[prop] != undefined) {
+                        props[prop] = this[prop];
+                    }
+                }
+                //need to handle listeners coming in here
+                if ((props.xtype === 'cartesian' || props.xtype === 'polar') && prop === 'layout') {
+                }
+                else if (prop == 'listeners' && this[prop] != undefined) {
+                    props[prop] = this[prop];
+                    listenersProvided = true;
+                }
+                else {
+                    if (this[prop] != undefined &&
+                        prop != 'listeners' &&
+                        prop != 'config' &&
+                        prop != 'handler' &&
+                        prop != 'fitToParent') {
+                        props[prop] = this[prop];
+                    }
+                }
+            }
+            if (true === this['fitToParent']) {
+                props.top = 0,
+                    props.left = 0,
+                    props.width = '100%',
+                    props.height = '100%';
+            }
+            if (this['config'] !== {}) {
+                Ext.apply(props, this['config']);
+            }
+            if (!listenersProvided) {
+                props.listeners = {};
+                var me = this;
+                events.forEach(function (event) {
+                    var eventname = event.name;
+                    var eventparameters = event.parameters;
+                    me.currentEl.A.props.listeners[eventname] = function () {
+                        //console.log('in the event ' + eventname)
+                        var parameters = eventparameters;
+                        var parms = parameters.split(',');
+                        var args = Array.prototype.slice.call(arguments);
+                        var emitparms = {};
+                        if (me._extitems != undefined) {
+                            for (var i_1 = 0, j = parms.length; i_1 < j; i_1++) {
+                                emitparms[parms[i_1]] = args[i_1];
+                            }
+                            me[eventname].emit(emitparms);
+                        }
+                        else {
+                        }
+                    };
+                });
+            }
+            //dup??
+            if (this._extitems != undefined) {
+                events.forEach(function (event, n) {
+                    if (event != 'fullscreen') {
+                        _this[event] = new core.EventEmitter();
+                    }
+                    else {
+                        _this[event + 'event'] = new core.EventEmitter();
+                    }
+                });
             }
         };
         EngBase.prototype.baseOnChanges = function (changes) {
@@ -758,16 +813,16 @@
                     verb = 'changed';
                 }
                 var val = changes[propName].currentValue;
-                if (this.getNode().A != undefined) {
-                    //console.dir(this.getNode().A.ext)
+                if (this.currentEl.A != undefined) {
+                    //console.dir(this.currentEl.A.ext)
                     var capPropName = propName.charAt(0).toUpperCase() + propName.slice(1);
                     var setFunction = 'set' + capPropName;
                     //console.log(setFunction)
-                    if (this.getNode().A.ext[setFunction] != undefined) {
-                        this.getNode().A.ext[setFunction](val);
+                    if (this.currentEl.A.ext[setFunction] != undefined) {
+                        this.currentEl.A.ext[setFunction](val);
                     }
                     else {
-                        console.error(setFunction + ' not found for ' + this.getNode().A.ext.xtype);
+                        console.error(setFunction + ' not found for ' + this.currentEl.A.ext.xtype);
                     }
                 }
                 else {
@@ -782,12 +837,13 @@
         EngBase.prototype.ngOnDestroy = function () {
             var childCmp;
             var parentCmp;
+            console.dir(this);
             try {
-                childCmp = this.getNode().A.ext;
-                if (this.getParentNode() != null) {
-                    parentCmp = this.getParentNode().A.ext;
-                    //mjg console.log(childCmp)
-                    //mjg console.log(parentCmp)
+                childCmp = this.currentEl.A.ext;
+                if (this.parentEl != null) {
+                    parentCmp = this.parentEl.A.ext;
+                    console.log(childCmp);
+                    console.log(parentCmp);
                     if (childCmp == undefined || parentCmp == undefined)
                         if (parentCmp.xtype == 'button' && childCmp.xtype == 'menu') {
                             //console.log('button/menu not deleted')
@@ -821,7 +877,7 @@
                         childCmp.destroy();
                     }
                     else {
-                        //mjg console.log('no destroy')
+                        console.log('no destroy');
                     }
                 }
             }
