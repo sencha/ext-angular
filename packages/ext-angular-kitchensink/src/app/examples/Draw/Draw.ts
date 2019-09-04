@@ -8,7 +8,7 @@ import { Component } from '@angular/core'
 })
 
 export class DrawComponent {
-  
+
   refs = {
     draw: {}
   };
@@ -16,24 +16,24 @@ export class DrawComponent {
   supportsTouch = Ext.supports.Touch;
 
   drawRef: any;
-  
-  onReady = (ele) => {
-    this.drawRef = ele.ext;
-    this.drawRef.on({
-      element: 'element',
-      mousedown: this.onMouseDown,
-      mousemove: this.onMouseMove,
-      mouseup: this.onMouseUp,
-      mouseleave: this.onMouseUp
-    });
-  }
-  
+
+    onReady = (event) => {
+        this.drawRef = event.detail.cmp;
+        this.drawRef.on({
+            element: 'element',
+            mousedown: this.onMouseDown,
+            mousemove: this.onMouseMove,
+            mouseup: this.onMouseUp,
+            mouseleave: this.onMouseUp
+        });
+    }
+
   clear = () => {
     this.drawRef.getSurface().destroy();
     this.drawRef.getSurface('overlay').destroy();
     this.drawRef.renderFrame();
   }
-  
+
   onMouseDown = (e) => {
     let surface = this.drawRef.getSurface(), xy, x, y;
 
@@ -41,11 +41,11 @@ export class DrawComponent {
         xy = surface.getEventXY(e);
         x = xy[0];
         y = xy[1];
-  
+
         this.drawRef.list = [x, y, x, y];
         this.drawRef.lastEventX = x;
         this.drawRef.lastEventY = y;
-    
+
         this.drawRef.sprite = surface.add({
           type: 'path',
           path: [
@@ -58,14 +58,14 @@ export class DrawComponent {
               Math.random() * 127 + 128, Math.random() * 127 + 128, Math.random() * 127 + 128
             )
         });
-    
+
         surface.renderFrame();
       }
   }
-  
+
   onMouseMove = (e) => {
       let surface = this.drawRef.getSurface(), path, xy, x, y, dx, dy, D;
-  
+
       if (this.drawRef.sprite) {
         xy = surface.getEventXY(e);
         x = xy[0];
@@ -73,7 +73,7 @@ export class DrawComponent {
         dx = this.drawRef.lastEventX - x;
         dy = this.drawRef.lastEventY - y;
         D = 10;
-  
+
         if (dx * dx + dy * dy < D * D) {
           this.drawRef.list.length -= 2;
           this.drawRef.list.push(x, y);
@@ -82,13 +82,13 @@ export class DrawComponent {
           this.drawRef.list.push(this.drawRef.lastEventX = x, this.drawRef.lastEventY = y);
           this.drawRef.list.push(this.drawRef.lastEventX + 1, this.drawRef.lastEventY + 1);
         }
-  
+
         path = smoothList(this.drawRef.list);
-  
+
         this.drawRef.sprite.setAttributes({
           path: path
         });
-  
+
         if (Ext.os.is.Android) {
           Ext.this.drawRef.Animator.schedule(() => surface.renderFrame(), this.drawRef);
         } else {
@@ -96,7 +96,7 @@ export class DrawComponent {
         }
       }
   }
-  
+
   onMouseUp = (e) => {
     this.drawRef.sprite = null;
   }

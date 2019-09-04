@@ -22,8 +22,8 @@ export class GroupsDragDropComponent {
     this.sources.forEach(Ext.destroy.bind(Ext));
   }
 
-  parentReady = (ele) => {
-    this.parentRef = ele.ext.el;
+  parentReady = (event) => {
+    this.parentRef = event.detail.cmp.el;
     this.sources.slice(0, 3).forEach((source, i) => {
       source.setConstrain(this.parentRef);
     });
@@ -89,7 +89,7 @@ export class GroupsDragDropComponent {
         // This source will only interact with targets that belong to group1 or group2
         groups: ['group1', 'group2']
     }),
-    
+
     new Ext.drag.Target({
         id: 'group1-target',
         // This target will only interact with sources that belong to group1

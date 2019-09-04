@@ -22,8 +22,8 @@ export class ConstraintsDragDropComponent {
     this.sources.forEach(Ext.destroy.bind(Ext));
   }
 
-  parentReady = (ele) => {
-    this.parentRef = ele.ext.el;
+  parentReady = (event) => {
+    this.parentRef = event.detail.cmp.el;
     this.sources[1].setConstrain({
         element: this.parentRef, vertical: true
     });
@@ -37,27 +37,27 @@ export class ConstraintsDragDropComponent {
     this.parentRef.destroy = this.doDestroy.bind(this);
   }
 
-  elementReady = (ele) => {
-    this.elementRef = ele.ext.el;
+  elementReady = (event) => {
+    this.elementRef = event.detail.cmp.el;
  }
 
-  toParentReady = (ele) => {
-    this.toParentRef = ele.ext.el;
+  toParentReady = (event) => {
+    this.toParentRef = event.detail.cmp.el;
     this.sources[0].setElement(this.toParentRef);
   }
 
-  horizontalReady = (ele) => {
-    this.horizontalRef = ele.ext.el;
+  horizontalReady = (event) => {
+    this.horizontalRef = event.detail.cmp.el;
     this.sources[2].setElement(this.horizontalRef);
   }
 
-  verticalReady = (ele) => {
-    this.verticalRef = ele.ext.el;
+  verticalReady = (event) => {
+    this.verticalRef = event.detail.cmp.el;
     this.sources[1].setElement(this.verticalRef);
   }
 
-  snapReady = (ele) => {
-    this.snapRef = ele.ext.el;
+  snapReady = (event) => {
+    this.snapRef = event.detail.cmp.el;
     this.sources[3].setElement(this.snapRef);
   }
 

@@ -1,0 +1,43 @@
+{
+  "name": "@sencha/ext-angular-button",
+  "description": "ext-angular-button",
+  "version": "7.0.0",
+  "private": false,
+  "peerDependencies": {
+    "@angular/compiler": "~8.2.4",
+    "@angular/core": "~8.2.4",
+    "tslib": "^1.10.0"
+  },
+  "dependencies": {
+    "script-loader": "^0.7.2",
+    "tslib": "^1.9.0"
+  },
+  "devDependencies": {
+    "@angular/core": "~8.2.4",
+    "@angular/common": "~8.2.4",
+    "@angular/platform-browser": "~8.2.4",
+    "@angular/platform-browser-dynamic": "~8.2.4",
+    "zone.js": "~0.9.1",
+    "ng-packagr": "^5.5.0",
+    "@angular/compiler": "~8.2.4",
+    "@angular/compiler-cli": "~8.2.4",
+    "typescript": "~3.5.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sencha/ext-angular.git"
+  },
+  "keywords": [],
+  "author": "Sencha",
+  "license": "ISC",
+  "main": "bundles/sencha-ext-angular-button.umd.js",
+  "module": "fesm5/sencha-ext-angular-button.js",
+  "es2015": "fesm2015/sencha-ext-angular-button.js",
+  "esm5": "esm5/sencha-ext-angular-button.js",
+  "esm2015": "esm2015/sencha-ext-angular-button.js",
+  "fesm5": "fesm5/sencha-ext-angular-button.js",
+  "fesm2015": "fesm2015/sencha-ext-angular-button.js",
+  "typings": "sencha-ext-angular-button.d.ts",
+  "metadata": "sencha-ext-angular-button.metadata.json",
+  "sideEffects": false
+}

@@ -16,8 +16,8 @@ export class FilesDragDropComponent {
   labelText:string = DEFAULT_TEXT;
   timer:any;
 
-  parentReady = (ele) => {
-    this.parentRef = ele.ext.el;
+  parentReady = (event) => {
+    this.parentRef = event.detail.cmp.el;
     this.target.setElement(this.parentRef);
     this.parentRef.destroy = this.doDestroy.bind(this);
   }
