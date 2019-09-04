@@ -19,29 +19,29 @@ export class ProxiesDragDropComponent {
     Ext.destroy(this.sources.forEach(Ext.destroy.bind(Ext)));
   }
 
-  parentReady = (ele) => {
-    this.parentRef = ele.ext.el;
+  parentReady = (event) => {
+    this.parentRef = event.detail.cmp.el;
     this.sources[0].setConstrain(this.parentRef);
     this.sources[1].setConstrain(this.parentRef);
     this.sources[2].setConstrain(this.parentReady);
     this.parentRef.destroy = this.doDestroy.bind(this);
   }
 
-  noneEleReady = (ele) => {
-    this.noneRef = ele.ext.el;
+  noneEleReady = (event) => {
+    this.noneRef = event.detail.cmp.el;
     this.sources[0].setElement(this.noneRef);
   }
 
-  originalEleReady = (ele) => {
-    this.originalRef = ele.ext.el;
+  originalEleReady = (event) => {
+    this.originalRef = event.detail.cmp.el;
     this.sources[1].setElement(this.originalRef);
   }
 
-  placeholderEleReady = (ele) => {
-    this.placeholderRef = ele.ext.el;
+  placeholderEleReady = (event) => {
+    this.placeholderRef = event.detail.cmp.el;
     this.sources[2].setElement(this.placeholderRef);
   }
-  
+
   sources = [
     // No proxy, just track the mouse cursor
     new Ext.drag.Source({
