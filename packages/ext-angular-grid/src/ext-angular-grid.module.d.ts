@@ -1,2 +1,2 @@
-export declare class ExtAngularGridModule {
+export declare class ExtAngularModule {
 }

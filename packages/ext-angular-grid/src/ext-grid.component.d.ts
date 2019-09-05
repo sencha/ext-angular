@@ -1,14 +1,15 @@
-import { OnInit, AfterContentInit, OnChanges, ElementRef } from '@angular/core';
-import { base } from './base';
+import { OnInit, AfterViewInit, OnChanges, ElementRef, SimpleChanges } from '@angular/core';
+import { EngBase } from './eng-base';
 export declare class gridMetaData {
     static XTYPE: string;
     static PROPERTIES: string[];
     static EVENTS: any[];
     static EVENTNAMES: string[];
 }
-export declare class ExtGridComponent extends base implements OnInit, AfterContentInit, OnChanges {
-    hostComponent: base;
-    constructor(eRef: ElementRef, hostComponent: base);
+export declare class ExtGridComponent extends EngBase implements OnInit, AfterViewInit, OnChanges {
+    hostComponent: EngBase;
+    constructor(eRef: ElementRef, hostComponent: EngBase);
     ngOnInit(): void;
-    ngAfterContentInit(): void;
+    ngAfterViewInit(): void;
+    ngOnChanges(changes: SimpleChanges): void;
 }
