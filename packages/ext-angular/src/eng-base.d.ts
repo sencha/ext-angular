@@ -1,5 +1,5 @@
-import 'script-loader!../ext/ext..prod';
-import 'script-loader!../ext/css.prod';
+import 'script-loader!@sencha/ext-angular/ext/ext..prod';
+import 'script-loader!@sencha/ext-angular/ext/css.prod';
 import { QueryList } from '@angular/core';
 export declare class EngBase {
     private metaData;
