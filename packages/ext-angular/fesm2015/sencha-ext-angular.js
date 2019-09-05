@@ -1,6 +1,6 @@
 import { __decorate, __metadata, __param } from 'tslib';
 import { EventEmitter, ContentChild, ContentChildren, QueryList, Component, forwardRef, Host, Optional, SkipSelf, ElementRef, NgModule } from '@angular/core';
-import 'script-loader!@sencha/ext-angular/ext/ext..prod';
+import 'script-loader!@sencha/ext-angular/ext/ext.blank.prod';
 import 'script-loader!@sencha/ext-angular/ext/css.prod';
 
 class EngBase {

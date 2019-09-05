@@ -1,6 +1,6 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('script-loader!@sencha/ext-angular/ext/ext..prod'), require('script-loader!@sencha/ext-angular/ext/css.prod')) :
-    typeof define === 'function' && define.amd ? define('@sencha/ext-angular', ['exports', '@angular/core', 'script-loader!@sencha/ext-angular/ext/ext..prod', 'script-loader!@sencha/ext-angular/ext/css.prod'], factory) :
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('script-loader!@sencha/ext-angular/ext/ext.blank.prod'), require('script-loader!@sencha/ext-angular/ext/css.prod')) :
+    typeof define === 'function' && define.amd ? define('@sencha/ext-angular', ['exports', '@angular/core', 'script-loader!@sencha/ext-angular/ext/ext.blank.prod', 'script-loader!@sencha/ext-angular/ext/css.prod'], factory) :
     (global = global || self, factory((global.sencha = global.sencha || {}, global.sencha['ext-angular'] = {}), global.ng.core));
 }(this, function (exports, core) { 'use strict';
 
