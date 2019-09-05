@@ -1,7 +1,7 @@
 declare var Ext: any
 //import 'script-loader!../ext/ext..prod';
 //import 'script-loader!../ext/css.prod';
-import 'script-loader!@sencha/ext-angular/ext/ext..prod';
+import 'script-loader!@sencha/ext-angular/ext/ext.blank.prod';
 import 'script-loader!@sencha/ext-angular/ext/css.prod';
 //import Common from './Common'
 

@@ -1,4 +1,4 @@
-import 'script-loader!@sencha/ext-angular/ext/ext..prod';
+import 'script-loader!@sencha/ext-angular/ext/ext.blank.prod';
 import 'script-loader!@sencha/ext-angular/ext/css.prod';
 import { QueryList } from '@angular/core';
 export declare class EngBase {
