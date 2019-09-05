@@ -1,8 +1,8 @@
 declare var Ext: any
-import 'script-loader!../ext/ext..prod';
-import 'script-loader!../ext/css.prod';
-//import 'script-loader!@sencha/ext-angular/ext/ext..prod';
-//import 'script-loader!@sencha/ext-angular/ext/css.prod';
+//import 'script-loader!../ext/ext..prod';
+//import 'script-loader!../ext/css.prod';
+import 'script-loader!@sencha/ext-angular/ext/ext..prod';
+import 'script-loader!@sencha/ext-angular/ext/css.prod';
 //import Common from './Common'
 
 import {
@@ -202,7 +202,7 @@ init(component, node) {
     component.A.CHILDRENCOMPONENTSCOUNT = 0;
     component.A.CHILDRENCOMPONENTSADDED = 0;
     if (this.base.DIRECTION == 'TopToBottom') {
-        component.A.CHILDRENCOMPONENTS = component.rawChildren;
+        component.A.CHILDRENCOMPONENTS = node.rawChildren;
         for (var i = 0; i < component.A.CHILDRENCOMPONENTS.length; i++) {
             if (this.getCurrentElName(component.A.CHILDRENCOMPONENTS[i]).substring(0, 4) == 'EXT-') {
                 component.A.CHILDRENCOMPONENTSCOUNT++;

@@ -1,6 +1,6 @@
-## @sencha/ext-angular-button
+## @sencha/ext-angular-blank
 
-last run: Wed Sep 04 2019 14:27:54 GMT-0400 (Eastern Daylight Time)
+last run: Thu Sep 05 2019 07:24:10 GMT-0400 (Eastern Daylight Time)
 
 This npm package contains the minimum files that are needed to provide for the @sencha/ext-angular package for an Angular application
 
@@ -164,7 +164,7 @@ open http://localhost:4200 in a browser - the ExtAngular application will load
 
 #### components in this package:
 
-button
+actionsheet,audio,breadcrumbbar,button,calendar-event,calendar-form-add,calendar-calendar-picker,calendar-form-edit,calendar-timefield,calendar-daysheader,calendar-weeksheader,calendar-list,calendar-day,calendar-days,calendar-month,calendar,calendar-week,calendar-weeks,calendar-dayview,calendar-daysview,calendar-monthview,calendar-multiview,calendar-weekview,calendar-weeksview,carousel,cartesian,chart,legend,chartnavigator,polar,spacefilling,chip,component,container,d3-canvas,d3-heatmap,d3-pack,d3-partition,d3-sunburst,d3-tree,d3-horizontal-tree,d3-treemap,d3-svg,d3,boundlist,chipview,componentdataview,dataitem,dataview,emptytext,indexbar,itemheader,list,listitem,listitemplaceholder,listswiperitem,listswiperstepper,nestedlist,pullrefreshbar,pullrefreshspinner,simplelistitem,dialog,window,draw,surface,editor,checkbox,checkboxfield,checkboxgroup,combobox,comboboxfield,containerfield,fieldcontainer,datefield,datepickerfield,datepickernativefield,displayfield,emailfield,field,groupcontainer,filefield,filebutton,hiddenfield,inputfield,numberfield,fieldpanel,passwordfield,pickerfield,radio,radiofield,radiogroup,searchfield,selectfield,singlesliderfield,sliderfield,spinnerfield,textfield,textareafield,timefield,togglefield,cleartrigger,datetrigger,expandtrigger,menutrigger,revealtrigger,spindowntrigger,spinuptrigger,timetrigger,trigger,urlfield,fieldset,formpanel,froalaeditor,froalaeditorfield,gridcellbase,booleancell,gridcell,checkcell,datecell,numbercell,rownumberercell,textcell,treecell,widgetcell,celleditor,booleancolumn,checkcolumn,gridcolumn,column,templatecolumn,datecolumn,dragcolumn,numbercolumn,rownumberer,selectioncolumn,textcolumn,treecolumn,grid,headercontainer,lockedgrid,lockedgridregion,gridcolumnsmenu,gridgroupbythismenuitem,gridshowingroupsmenuitem,gridsortascmenuitem,gridsortdescmenuitem,pagingtoolbar,gridrow,rowbody,roweditorbar,roweditorcell,roweditor,roweditorgap,rowheader,gridsummaryrow,tree,image,img,indicator,label,treelist,treelistitem,loadmask,mask,media,menucheckitem,menuitem,menu,menuradioitem,menuseparator,messagebox,navigationview,panel,accordion,datepanel,datetitle,panelheader,timepanel,paneltitle,yearpicker,datepicker,picker,selectpicker,pickerslot,tabletpicker,pivotgridcell,pivotgridgroupcell,pivotd3container,pivotheatmap,pivottreemap,pivotgrid,pivotconfigfield,pivotconfigcontainer,pivotconfigform,pivotconfigpanel,pivotsettings,pivotrangeeditor,pivotgridrow,progress,progressbarwidget,segmentedbutton,sheet,slider,thumb,toggleslider,spacer,sparklinebar,sparkline,sparklinebox,sparklinebullet,sparklinediscrete,sparklineline,sparklinepie,sparklinetristate,splitbutton,tabbar,tabpanel,tab,tooltip,title,titlebar,tool,paneltool,toolbar,colorbutton,colorpickercolorpreview,colorfield,colorselector,gauge,map,google-map,rating,video,viewport,widget
 
 #### imports in the npm package module:
 ##### @sencha/ext-angular/ext-angular.module
