@@ -1,8 +1,8 @@
 declare var Ext: any
 //import 'script-loader!../ext/ext..prod';
 //import 'script-loader!../ext/css.prod';
-import 'script-loader!@sencha/ext-angular/ext/ext.blank.prod';
-import 'script-loader!@sencha/ext-angular/ext/css.prod';
+//import 'script-loader!@sencha/ext-angular/ext/ext.blank.prod';
+//import 'script-loader!@sencha/ext-angular/ext/css.prod';
 //import Common from './Common'
 
 import {
@@ -57,6 +57,9 @@ export class EngBase {
         this.parentNode = hostComponent;
 
         this.newDiv = document.createElement('div');
+        //var t = document.createTextNode("newDiv");
+        //this.newDiv.appendChild(t);
+
         this.node.insertAdjacentElement('beforebegin', this.newDiv);
         this.xtype = metaData.XTYPE;
         this.properties = metaData.PROPERTIES;
@@ -80,58 +83,45 @@ export class EngBase {
         this.initMe()
     }
 
-
-
+//******* base start */
+initMe() {
+    console.log('');
+    console.log('*** initMe for ' + this.currentElName);
+    this.createRawChildren();
+    this.setHasParent();
+    this.setDirection();
+    this.figureOutA();
+    this.createProps(this.properties, this.propertiesobject, this.events, this.eventnames);
+    this.createExtComponent();
+    //this.assessChildren(this.base, this.xtype);
+    //this.atEnd();
+    //if (this.last == true){
+    //    console.log('this is the end...')
+    //}
+}
+;
 createRawChildren() {
-    if (this.isAngular) {
-        this.rawChildren = this.childComponents;
+    console.log('createRawChildren')
+    if (this.currentEl.isAngular) {
+        this.currentEl.rawChildren = this.currentEl.childComponents;
     }
     else {
-        this.ewcChildren = Array.prototype.slice.call(this.children);
-        this.rawChildren = [];
+        this.currentEl.ewcChildren = Array.prototype.slice.call(this.currentEl.children);
+        this.currentEl.rawChildren = [];
         var num = 0;
-        for (var i = 0; i < this.ewcChildren.length; i++) {
-            if (this.ewcChildren[i].XTYPE != undefined) {
-                this.rawChildren[num] = {};
-                this.rawChildren[num] = this.ewcChildren[i];
-                this.rawChildren[num].currentComponent = this.ewcChildren[i];
-                this.rawChildren[num].node = this.ewcChildren[i];
+        for (var i = 0; i < this.currentEl.ewcChildren.length; i++) {
+            if (this.currentEl.ewcChildren[i].XTYPE != undefined) {
+                this.currentEl.rawChildren[num] = {};
+                this.currentEl.rawChildren[num] = this.currentEl.ewcChildren[i];
+                this.currentEl.rawChildren[num].currentComponent = this.currentEl.ewcChildren[i];
+                this.currentEl.rawChildren[num].node = this.currentEl.ewcChildren[i];
                 num++;
             }
         }
     }
+    console.log('rawChildren')
+    console.log(this.currentEl.rawChildren)
 }
-
-atEnd() {
-    console.log('*** at end');
-    console.log('this - ' + this.currentElName)
-    console.dir(this.currentEl.A);
-    if (this.parentEl != null) {
-        console.log('parent - ' + this.parentElName)
-        console.dir(this.parentEl.A);
-    }
-    else {
-        console.log('No EXT parent');
-    }
-}
-
-initMe() {
-    console.log('');
-    console.log('*** initMe for ' + this.currentElName);
-
-    this.createRawChildren()
-    this.setHasParent();
-    this.setDirection()
-    this.figureOutA();
-    this.createProps(this.properties, this.propertiesobject, this.events, this.eventnames);
-    this.createExtComponent();
-    this.assessChildren(this.base, this.xtype);
-    this.atEnd();
-    if (this.last == true){
-        console.log('this is the end...')
-    }
-};
-
 setHasParent() {
     var hasParent;
     if (this.parentEl == null) {
@@ -139,15 +129,14 @@ setHasParent() {
     }
     else {
         if (this.parentElName.substring(0, 4) == 'EXT-') {
-            this.hasParent = true
+            this.hasParent = true;
         }
         else {
-            this.hasParent = false
+            this.hasParent = false;
         }
     }
     //return hasParent
 }
-
 setDirection() {
     if (this.base.count == 0) {
         this.base.count++;
@@ -163,48 +152,27 @@ setDirection() {
             }
         }
     }
-    console.log(this.base.DIRECTION)
+    console.log(this.base.DIRECTION);
 }
-
 figureOutA() {
-
     if (this.hasParent && this.parentEl.A == undefined) {
-        this.init(this.parentEl, this.parentNode);
+        this.init(this.parentEl);
     }
     if (this.currentEl.A == undefined) {
-        this.init(this.currentEl, this);
+        this.init(this.currentEl);
     }
-
-    // if (hasParent) {
-    //     if (this.parentEl.A == undefined) {
-    //         //console.log('parent not created');
-    //         this.init(this.parentEl, this.parentNode);
-    //     }
-    //     else {
-    //         //console.log('parent A IS created');
-    //     }
-    // }
-
-    // if (this.currentEl.A == undefined) {
-    //     //console.log('no A');
-    //     this.init(this.currentEl, this);
-    // }
-    // else {
-    //     console.log('have A');
-    // }
 }
-init(component, node) {
+init(component) {
     component.A = {};
     component.A.props = {};
-    component.A.xtype = node.xtype;
-    //component.A.ACURRENT = node.xtype;
+    component.A.xtype = component.xtype;
     component.A.CHILDRENCOMPONENTS = [];
     component.A.CHILDRENCOMPONENTSCOUNT = 0;
     component.A.CHILDRENCOMPONENTSADDED = 0;
     if (this.base.DIRECTION == 'TopToBottom') {
-        component.A.CHILDRENCOMPONENTS = node.rawChildren;
+        component.A.CHILDRENCOMPONENTS = this.currentEl.rawChildren;
         for (var i = 0; i < component.A.CHILDRENCOMPONENTS.length; i++) {
-            if (this.getCurrentElName(component.A.CHILDRENCOMPONENTS[i]).substring(0, 4) == 'EXT-') {
+            if (component.getCurrentElName(component.A.CHILDRENCOMPONENTS[i]).substring(0, 4) == 'EXT-') {
                 component.A.CHILDRENCOMPONENTSCOUNT++;
             }
         }
@@ -212,54 +180,54 @@ init(component, node) {
     }
 }
 createExtComponent() {
-    var A =this.currentEl.A
+    var A = this.currentEl.A;
+    var meA = A;
+    var methis = this;
     if (A.props['viewport'] == true) {
-        //A.APARENT = '';
-        //this.newDiv.remove()
-        A.ext = Ext.create(A.props);
-        console.log('0-Ext.application: ' + A.props.xtype);
-        var me = this;
-        Ext.application({
-            name: 'MyEWCApp',
-            launch: function () {
-                Ext.Viewport.add([me.currentEl.A.ext]);
-                if (window['router']) {
-                    window['router'].init();
+        this.newDiv.parentNode.removeChild(this.newDiv);
+        Ext.onReady(function () {
+            methis.currentEl.A.ext = Ext.create(meA.props);
+            console.log('0-Ext.application: ' + meA.props.xtype);
+            methis.assessChildren(methis.base, methis.xtype);
+            Ext.application({
+                name: 'MyEWCApp',
+                launch: function () {
+                    Ext.Viewport.add([methis.currentEl.A.ext]);
+                    if (window['router']) {
+                        window['router'].init();
+                    }
+                    console.log(methis.base.DIRECTION + ' in launch ');
+                    if (methis.base.DIRECTION == 'BottomToTop') {
+                        console.log('the last thing to do...');
+                        methis.last = true;
+                    }
                 }
-
-                console.log(me.base.DIRECTION + ' in launch ')
-                if (me.base.DIRECTION == 'BottomToTop') {
-                    console.log('the last thing to do...')
-                    me.last = true
-                }
-
-            }
+            });
         });
     }
-    else if (this.parentNode == null) {
-        //A.APARENT = '';
-        console.log('1- Ext.create: ' + this.currentElName + ' HTML parent: ' + this.currentElName);
+    else if (this.parentNode == null || this.parentElName.substring(0, 4) != 'EXT-') {
         A.props.renderTo = this.newDiv;
-        A.ext = Ext.create(A.props);
-        //this.parentEl.replaceChild(A.ext.el.dom, this.newDiv)
-        //console.log('replace newDiv')
+        Ext.onReady(function () {
+            console.log('1- Ext.create: ' + methis.currentElName + ' HTML parent: ' + methis.currentElName);
+            methis.currentEl.A.ext = Ext.create(meA.props);
+            methis.newDiv.parentNode.replaceChild(methis.currentEl.A.ext.el.dom, methis.newDiv);
+            methis.assessChildren(methis.base, methis.xtype);
+            console.log('after assessChildren');
+            //var wc = meA.ext.el.dom.nextSibling;
+            //wc.parentNode.removeChild(wc);
+        });
     }
     else {
-        if (this.parentElName.substring(0, 4) != 'EXT-') {
-            console.log('2- Ext.create: ' + this.currentElName + '  HTML parent: ' + this.parentElName);
-            A.props.renderTo = this.newDiv; //this.A.newDiv; //me.shadowRoot;
-            this.currentEl.A.ext = Ext.create(A.props);
-            //this.parentEl.replaceChild(A.ext.el.dom, this.newDiv)
-        }
-        else {
-            console.log('3- Ext.create: ' + this.currentElName + '  Ext parent: ' + this.parentElName);
-            A.ext = Ext.create(A.props);
-        }
+        Ext.onReady(function () {
+            console.log('3- Ext.create: ' + methis.currentElName + '  Ext parent: ' + methis.parentElName);
+            methis.currentEl.A.ext = Ext.create(meA.props);
+            methis.assessChildren(methis.base, methis.xtype);
+        });
     }
 }
 assessChildren(base, xtype) {
-    var A =this.currentEl.A
     console.log('assessChildren for: ' + xtype);
+    var A = this.currentEl.A;
     if (this._extitems != undefined) {
         if (this._extitems.length == 1) {
             console.log('set html');
@@ -278,15 +246,16 @@ assessChildren(base, xtype) {
         A.CHILDRENCOMPONENTSADDED == 0 &&
         this.parentEl == null) {
         console.log('Solo');
-        console.log('ready event for ' + this.currentElName)
+        console.log('ready event for ' + this.currentElName);
         this.sendReadyEvent(this);
     }
     else if (A.CHILDRENCOMPONENTSADDED > 0) {
         console.log('addChildren');
         console.dir(A.CHILDRENCOMPONENTS);
+        console.log(this.node.A);
         this.addChildren(this, A.CHILDRENCOMPONENTS);
         //console.log('send ready for CHILDRENCOMPONENTSADDED > 0');
-        console.log('ready event for ' + this.currentElName)
+        console.log('ready event for ' + this.currentElName);
         this.sendReadyEvent(this);
         this.node.remove();
     }
@@ -301,15 +270,16 @@ assessChildren(base, xtype) {
             this.parentEl.A.CHILDRENCOMPONENTSADDED++;
             this.parentEl.A.CHILDRENCOMPONENTSLEFT--;
             if (this.parentEl.A.CHILDRENCOMPONENTSLEFT == 0) {
+                //console.log(this.parentEl)
                 this.addChildren(this.parentEl, this.parentEl.A.CHILDRENCOMPONENTS);
-                console.log('ready event for ' + this.parentElName + '(parent)')
+                console.log('ready event for ' + this.parentElName + '(parent)');
                 this.sendReadyEvent(this.parentEl);
             }
         }
         else {
             this.parentEl.A.CHILDRENCOMPONENTS.push(this.currentEl);
             this.parentEl.A.CHILDRENCOMPONENTSADDED++;
-            console.log('ready event for ' + this.currentElName)
+            console.log('ready event for ' + this.currentElName);
             this.sendReadyEvent(this);
         }
     }
@@ -322,10 +292,11 @@ addChildren(child, children) {
     //    childItem.childCmp = children[i].A.ext;
     //    this.addTheChild(childItem.parentCmp, childItem.childCmp, null);
     //}
+    console.dir(children)
     for (var i = 0; i < children.length; i++) {
         var childItem = { parentCmp: {}, childCmp: {} };
-        childItem.parentCmp = child.currentEl.A.ext;
-        childItem.childCmp = children[i].A.ext;
+        childItem.parentCmp = this.currentEl.A.ext;
+        childItem.childCmp = children[i].currentEl.A.ext;
         this.addTheChild(childItem.parentCmp, childItem.childCmp, null);
     }
 }
@@ -472,57 +443,54 @@ addTheChild(parentCmp, childCmp, location) {
     //     this.parentNode.dispatchEvent(new CustomEvent('ready',{detail:{cmp: this.parentNode.ext}}))
     // }
 }
-// currentEl {
-//     if (this._extitems != undefined) {
-//         return this.node
-//     }
-//     else {
-//         return this
-//     }
-// }
-
+atEnd() {
+    console.log('*** at end');
+    console.log('this - ' + this.currentElName);
+    console.dir(this.currentEl.A);
+    if (this.parentEl != null) {
+        console.log('parent - ' + this.parentElName);
+        console.dir(this.parentEl.A);
+    }
+    else {
+        console.log('No EXT parent');
+    }
+}
 get currentEl() {
     if (this._extitems != undefined) {
-        return this.node
+        return this.node;
     }
     else {
-        return this
+        return this;
     }
 }
-
 getCurrentElName(component) {
     if (component._extitems != undefined) {
-        return component.node.nodeName
+        return component.node.nodeName;
     }
     else {
-        return component.nodeName
+        return component.nodeName;
     }
 }
-
-
-
 get currentElName() {
     if (this._extitems != undefined) {
-        return this.node.nodeName
+        return this.node.nodeName;
     }
     else {
-        return this.nodeName
+        return this.nodeName;
     }
 }
-
 get isAngular() {
     if (this._extitems != undefined) {
-        return true
+        return true;
     }
     else {
-        return false
+        return false;
     }
 }
-
 get parentEl() {
     if (this.isAngular) {
         if (this.parentNode == null) {
-            return null
+            return null;
         }
         return this.parentNode.node;
     }
@@ -530,11 +498,10 @@ get parentEl() {
         return this.parentNode;
     }
 }
-
 get parentElName() {
     if (this.isAngular) {
         if (this.parentNode == null) {
-            return null
+            return null;
         }
         return this.parentNode.node.nodeName;
     }
@@ -542,31 +509,8 @@ get parentElName() {
         return this.parentNode.nodeName;
     }
 }
-
-
-// parentEl {
-//     if (this._extitems != undefined) {
-//         if (this.parentNode == null) {
-//             return null
-//         }
-//         return this.parentNode.node;
-//     }
-//     else {
-//         return this.parentNode;
-//     }
-// }
-
-// getNodeName(component) {
-//     if (this._extitems != undefined) {
-//         return component.node.nodeName
-//     }
-//     else {
-//         return component.nodeName
-//     }
-// }
-
 sendReadyEvent(component) {
-    var cmp = component.currentEl.A.ext
+    var cmp = component.currentEl.A.ext;
     if (component._extitems != undefined) {
         component['ready'].emit({ detail: { cmp: cmp } });
     }
@@ -574,8 +518,7 @@ sendReadyEvent(component) {
         component.dispatchEvent(new CustomEvent('ready', { detail: { cmp: cmp } }));
     }
 }
-
-
+//******* base end */
 createProps(properties, propertiesobject, events, eventnames) {
     var props = this.currentEl.A.props;
     props.xtype = this.xtype;
