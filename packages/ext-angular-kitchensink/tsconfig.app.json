@@ -14,6 +14,7 @@
   ],
   "exclude": [
     "src/test.ts",
-    "src/**/*.spec.ts"
+    "src/**/*.spec.ts",
+    "node_modules/@sencha/ext-angular/lib/**/*.ts"
   ]
 }
