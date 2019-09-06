@@ -1,7 +1,5 @@
 import { __decorate, __metadata, __extends, __param } from 'tslib';
 import { EventEmitter, ContentChild, ContentChildren, QueryList, Component, forwardRef, Host, Optional, SkipSelf, ElementRef, NgModule } from '@angular/core';
-import 'script-loader!@sencha/ext-angular/ext/ext.blank.prod';
-import 'script-loader!@sencha/ext-angular/ext/css.prod';
 
 var EngBase = /** @class */ (function () {
     function EngBase(nativeElement, metaData, hostComponent) {
@@ -11,6 +9,8 @@ var EngBase = /** @class */ (function () {
         this.node = nativeElement;
         this.parentNode = hostComponent;
         this.newDiv = document.createElement('div');
+        //var t = document.createTextNode("newDiv");
+        //this.newDiv.appendChild(t);
         this.node.insertAdjacentElement('beforebegin', this.newDiv);
         this.xtype = metaData.XTYPE;
         this.properties = metaData.PROPERTIES;
@@ -39,37 +39,7 @@ var EngBase = /** @class */ (function () {
     EngBase.prototype.baseAfterViewInit = function (metaData) {
         this.initMe();
     };
-    EngBase.prototype.createRawChildren = function () {
-        if (this.isAngular) {
-            this.rawChildren = this.childComponents;
-        }
-        else {
-            this.ewcChildren = Array.prototype.slice.call(this.children);
-            this.rawChildren = [];
-            var num = 0;
-            for (var i = 0; i < this.ewcChildren.length; i++) {
-                if (this.ewcChildren[i].XTYPE != undefined) {
-                    this.rawChildren[num] = {};
-                    this.rawChildren[num] = this.ewcChildren[i];
-                    this.rawChildren[num].currentComponent = this.ewcChildren[i];
-                    this.rawChildren[num].node = this.ewcChildren[i];
-                    num++;
-                }
-            }
-        }
-    };
-    EngBase.prototype.atEnd = function () {
-        console.log('*** at end');
-        console.log('this - ' + this.currentElName);
-        console.dir(this.currentEl.A);
-        if (this.parentEl != null) {
-            console.log('parent - ' + this.parentElName);
-            console.dir(this.parentEl.A);
-        }
-        else {
-            console.log('No EXT parent');
-        }
-    };
+    //******* base start */
     EngBase.prototype.initMe = function () {
         console.log('');
         console.log('*** initMe for ' + this.currentElName);
@@ -79,13 +49,35 @@ var EngBase = /** @class */ (function () {
         this.figureOutA();
         this.createProps(this.properties, this.propertiesobject, this.events, this.eventnames);
         this.createExtComponent();
-        this.assessChildren(this.base, this.xtype);
-        this.atEnd();
-        if (this.last == true) {
-            console.log('this is the end...');
-        }
+        //this.assessChildren(this.base, this.xtype);
+        //this.atEnd();
+        //if (this.last == true){
+        //    console.log('this is the end...')
+        //}
     };
     ;
+    EngBase.prototype.createRawChildren = function () {
+        console.log('createRawChildren');
+        if (this.currentEl.isAngular) {
+            this.currentEl.rawChildren = this.currentEl.childComponents;
+        }
+        else {
+            this.currentEl.ewcChildren = Array.prototype.slice.call(this.currentEl.children);
+            this.currentEl.rawChildren = [];
+            var num = 0;
+            for (var i = 0; i < this.currentEl.ewcChildren.length; i++) {
+                if (this.currentEl.ewcChildren[i].XTYPE != undefined) {
+                    this.currentEl.rawChildren[num] = {};
+                    this.currentEl.rawChildren[num] = this.currentEl.ewcChildren[i];
+                    this.currentEl.rawChildren[num].currentComponent = this.currentEl.ewcChildren[i];
+                    this.currentEl.rawChildren[num].node = this.currentEl.ewcChildren[i];
+                    num++;
+                }
+            }
+        }
+        console.log('rawChildren');
+        console.log(this.currentEl.rawChildren);
+    };
     EngBase.prototype.setHasParent = function () {
         var hasParent;
         if (this.parentEl == null) {
@@ -120,40 +112,23 @@ var EngBase = /** @class */ (function () {
     };
     EngBase.prototype.figureOutA = function () {
         if (this.hasParent && this.parentEl.A == undefined) {
-            this.init(this.parentEl, this.parentNode);
+            this.init(this.parentEl);
         }
         if (this.currentEl.A == undefined) {
-            this.init(this.currentEl, this);
+            this.init(this.currentEl);
         }
-        // if (hasParent) {
-        //     if (this.parentEl.A == undefined) {
-        //         //console.log('parent not created');
-        //         this.init(this.parentEl, this.parentNode);
-        //     }
-        //     else {
-        //         //console.log('parent A IS created');
-        //     }
-        // }
-        // if (this.currentEl.A == undefined) {
-        //     //console.log('no A');
-        //     this.init(this.currentEl, this);
-        // }
-        // else {
-        //     console.log('have A');
-        // }
     };
-    EngBase.prototype.init = function (component, node) {
+    EngBase.prototype.init = function (component) {
         component.A = {};
         component.A.props = {};
-        component.A.xtype = node.xtype;
-        //component.A.ACURRENT = node.xtype;
+        component.A.xtype = component.xtype;
         component.A.CHILDRENCOMPONENTS = [];
         component.A.CHILDRENCOMPONENTSCOUNT = 0;
         component.A.CHILDRENCOMPONENTSADDED = 0;
         if (this.base.DIRECTION == 'TopToBottom') {
-            component.A.CHILDRENCOMPONENTS = node.rawChildren;
+            component.A.CHILDRENCOMPONENTS = this.currentEl.rawChildren;
             for (var i = 0; i < component.A.CHILDRENCOMPONENTS.length; i++) {
-                if (this.getCurrentElName(component.A.CHILDRENCOMPONENTS[i]).substring(0, 4) == 'EXT-') {
+                if (component.getCurrentElName(component.A.CHILDRENCOMPONENTS[i]).substring(0, 4) == 'EXT-') {
                     component.A.CHILDRENCOMPONENTSCOUNT++;
                 }
             }
@@ -162,51 +137,53 @@ var EngBase = /** @class */ (function () {
     };
     EngBase.prototype.createExtComponent = function () {
         var A = this.currentEl.A;
+        var meA = A;
+        var methis = this;
         if (A.props['viewport'] == true) {
-            //A.APARENT = '';
-            //this.newDiv.remove()
-            A.ext = Ext.create(A.props);
-            console.log('0-Ext.application: ' + A.props.xtype);
-            var me = this;
-            Ext.application({
-                name: 'MyEWCApp',
-                launch: function () {
-                    Ext.Viewport.add([me.currentEl.A.ext]);
-                    if (window['router']) {
-                        window['router'].init();
+            this.newDiv.parentNode.removeChild(this.newDiv);
+            Ext.onReady(function () {
+                methis.currentEl.A.ext = Ext.create(meA.props);
+                console.log('0-Ext.application: ' + meA.props.xtype);
+                methis.assessChildren(methis.base, methis.xtype);
+                Ext.application({
+                    name: 'MyEWCApp',
+                    launch: function () {
+                        Ext.Viewport.add([methis.currentEl.A.ext]);
+                        if (window['router']) {
+                            window['router'].init();
+                        }
+                        console.log(methis.base.DIRECTION + ' in launch ');
+                        if (methis.base.DIRECTION == 'BottomToTop') {
+                            console.log('the last thing to do...');
+                            methis.last = true;
+                        }
                     }
-                    console.log(me.base.DIRECTION + ' in launch ');
-                    if (me.base.DIRECTION == 'BottomToTop') {
-                        console.log('the last thing to do...');
-                        me.last = true;
-                    }
-                }
+                });
             });
         }
-        else if (this.parentNode == null) {
-            //A.APARENT = '';
-            console.log('1- Ext.create: ' + this.currentElName + ' HTML parent: ' + this.currentElName);
+        else if (this.parentNode == null || this.parentElName.substring(0, 4) != 'EXT-') {
             A.props.renderTo = this.newDiv;
-            A.ext = Ext.create(A.props);
-            //this.parentEl.replaceChild(A.ext.el.dom, this.newDiv)
-            //console.log('replace newDiv')
+            Ext.onReady(function () {
+                console.log('1- Ext.create: ' + methis.currentElName + ' HTML parent: ' + methis.currentElName);
+                methis.currentEl.A.ext = Ext.create(meA.props);
+                methis.newDiv.parentNode.replaceChild(methis.currentEl.A.ext.el.dom, methis.newDiv);
+                methis.assessChildren(methis.base, methis.xtype);
+                console.log('after assessChildren');
+                //var wc = meA.ext.el.dom.nextSibling;
+                //wc.parentNode.removeChild(wc);
+            });
         }
         else {
-            if (this.parentElName.substring(0, 4) != 'EXT-') {
-                console.log('2- Ext.create: ' + this.currentElName + '  HTML parent: ' + this.parentElName);
-                A.props.renderTo = this.newDiv; //this.A.newDiv; //me.shadowRoot;
-                this.currentEl.A.ext = Ext.create(A.props);
-                //this.parentEl.replaceChild(A.ext.el.dom, this.newDiv)
-            }
-            else {
-                console.log('3- Ext.create: ' + this.currentElName + '  Ext parent: ' + this.parentElName);
-                A.ext = Ext.create(A.props);
-            }
+            Ext.onReady(function () {
+                console.log('3- Ext.create: ' + methis.currentElName + '  Ext parent: ' + methis.parentElName);
+                methis.currentEl.A.ext = Ext.create(meA.props);
+                methis.assessChildren(methis.base, methis.xtype);
+            });
         }
     };
     EngBase.prototype.assessChildren = function (base, xtype) {
-        var A = this.currentEl.A;
         console.log('assessChildren for: ' + xtype);
+        var A = this.currentEl.A;
         if (this._extitems != undefined) {
             if (this._extitems.length == 1) {
                 console.log('set html');
@@ -231,6 +208,7 @@ var EngBase = /** @class */ (function () {
         else if (A.CHILDRENCOMPONENTSADDED > 0) {
             console.log('addChildren');
             console.dir(A.CHILDRENCOMPONENTS);
+            console.log(this.node.A);
             this.addChildren(this, A.CHILDRENCOMPONENTS);
             //console.log('send ready for CHILDRENCOMPONENTSADDED > 0');
             console.log('ready event for ' + this.currentElName);
@@ -248,6 +226,7 @@ var EngBase = /** @class */ (function () {
                 this.parentEl.A.CHILDRENCOMPONENTSADDED++;
                 this.parentEl.A.CHILDRENCOMPONENTSLEFT--;
                 if (this.parentEl.A.CHILDRENCOMPONENTSLEFT == 0) {
+                    //console.log(this.parentEl)
                     this.addChildren(this.parentEl, this.parentEl.A.CHILDRENCOMPONENTS);
                     console.log('ready event for ' + this.parentElName + '(parent)');
                     this.sendReadyEvent(this.parentEl);
@@ -269,10 +248,11 @@ var EngBase = /** @class */ (function () {
         //    childItem.childCmp = children[i].A.ext;
         //    this.addTheChild(childItem.parentCmp, childItem.childCmp, null);
         //}
+        console.dir(children);
         for (var i = 0; i < children.length; i++) {
             var childItem = { parentCmp: {}, childCmp: {} };
-            childItem.parentCmp = child.currentEl.A.ext;
-            childItem.childCmp = children[i].A.ext;
+            childItem.parentCmp = this.currentEl.A.ext;
+            childItem.childCmp = children[i].currentEl.A.ext;
             this.addTheChild(childItem.parentCmp, childItem.childCmp, null);
         }
     };
@@ -419,15 +399,19 @@ var EngBase = /** @class */ (function () {
         //     this.parentNode.dispatchEvent(new CustomEvent('ready',{detail:{cmp: this.parentNode.ext}}))
         // }
     };
+    EngBase.prototype.atEnd = function () {
+        console.log('*** at end');
+        console.log('this - ' + this.currentElName);
+        console.dir(this.currentEl.A);
+        if (this.parentEl != null) {
+            console.log('parent - ' + this.parentElName);
+            console.dir(this.parentEl.A);
+        }
+        else {
+            console.log('No EXT parent');
+        }
+    };
     Object.defineProperty(EngBase.prototype, "currentEl", {
-        // currentEl {
-        //     if (this._extitems != undefined) {
-        //         return this.node
-        //     }
-        //     else {
-        //         return this
-        //     }
-        // }
         get: function () {
             if (this._extitems != undefined) {
                 return this.node;
@@ -501,25 +485,6 @@ var EngBase = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    // parentEl {
-    //     if (this._extitems != undefined) {
-    //         if (this.parentNode == null) {
-    //             return null
-    //         }
-    //         return this.parentNode.node;
-    //     }
-    //     else {
-    //         return this.parentNode;
-    //     }
-    // }
-    // getNodeName(component) {
-    //     if (this._extitems != undefined) {
-    //         return component.node.nodeName
-    //     }
-    //     else {
-    //         return component.nodeName
-    //     }
-    // }
     EngBase.prototype.sendReadyEvent = function (component) {
         var cmp = component.currentEl.A.ext;
         if (component._extitems != undefined) {
@@ -529,6 +494,7 @@ var EngBase = /** @class */ (function () {
             component.dispatchEvent(new CustomEvent('ready', { detail: { cmp: cmp } }));
         }
     };
+    //******* base end */
     EngBase.prototype.createProps = function (properties, propertiesobject, events, eventnames) {
         var _this = this;
         var props = this.currentEl.A.props;

@@ -1,6 +1,6 @@
 ## @sencha/ext-angular-blank
 
-last run: Thu Sep 05 2019 07:39:57 GMT-0400 (Eastern Daylight Time)
+last run: Fri Sep 06 2019 08:45:28 GMT-0400 (Eastern Daylight Time)
 
 This npm package contains the minimum files that are needed to provide for the @sencha/ext-angular package for an Angular application
 
@@ -45,41 +45,56 @@ in a terminal window at the root of your application, run the following:
 npm install
 ```
 
-#### Replace src/index.html (optional)
+#### Replace src/styles.css (optional)
 
 If you want to get a look at different styling...
-Open the src/index.html file in the editor and replace the contents with the following:
+Open the src/styles.css file in the editor and replace the contents with the following:
 
 ```sh
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>ext-angular example</title>
-  <base href="/">
+:root {
+    --dark-mode: false;
+    --base-color: yellow !important;
+    --base-highlight-color: #64b5f6;
+    --base-light-color: #bbdefb;
+    --base-dark-color: #1976d2;
+    --base-pressed-color: #6ab8f7;
+    --base-focused-color: #42a5f5;
+    --base-invisible-color: rgba(33, 150, 243, 0);
+    --base-foreground-color: green !important;
+    --accent-color: #ff9800;
+    --accent-light-color: #ffe0b2;
+    --accent-dark-color: #f57c00;
+    --accent-pressed-color: #ffb74d;
+    --accent-invisible-color: rgba(255, 152, 0, 0);
+    --accent-foreground-color: #222;
+    --confirm-color: #7cb342;
+    --confirm-pressed-color: #a2cc75;
+    --alert-color: #c62828;
+    --alert-pressed-color: #de5c5c;
+    --color: blue !important;
+    --reverse-color: #fff;
+    --highlight-color: rgba(17, 17, 17, 0.54);
+    --disabled-color: rgba(17, 17, 17, 0.38);
+    --reverse-disabled-color: rgba(255, 255, 255, 0.38);
+    --divider-color: #e2e2e2;
+    --selected-background-color: #e0e0e0;
+    --hovered-background-color: #eee;
+    --header-background-color: #f5f5f5;
+    --faded-color: #e1e1e1;
+    --background-color: #fafafa;
+    --alt-background-color: #f5f5f5;
+    --reverse-background-color: #303030;
+    --reverse-alt-background-color: #3a3a3a;
+    --overlay-color: rgba(0, 0, 0, 0.03);
+    --content-padding: 16px;
+    --listitem-selected-background-color: #e0e0e0;
+    --reverse-border-color: #e0e0e0;
+    --reverse-alt-border-color: #e0e0e0;
+}
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
-<style>
-    :root {
-        --base-color:black;
-        --base-foreground-color:yellow;
-        --color:darkblue;
-        --background-color:lightgray;
-        --hovered-background-color:darkgray;
-    }
-    body {
-        padding: '10px'
-    }
-    * {
-        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    }
-</style>
-</html>
+.x-grid {
+    --color: red !important;
+}
 ```
 
 #### Replace src/app/app.module.js

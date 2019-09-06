@@ -1,5 +1,3 @@
-import 'script-loader!@sencha/ext-angular/ext/ext.blank.prod';
-import 'script-loader!@sencha/ext-angular/ext/css.prod';
 import { QueryList } from '@angular/core';
 export declare class EngBase {
     private metaData;
@@ -32,17 +30,17 @@ export declare class EngBase {
     constructor(nativeElement: any, metaData: any, hostComponent: EngBase);
     baseOnInit(metaData: any): void;
     baseAfterViewInit(metaData: any): void;
-    createRawChildren(): void;
-    atEnd(): void;
     initMe(): void;
+    createRawChildren(): void;
     setHasParent(): void;
     setDirection(): void;
     figureOutA(): void;
-    init(component: any, node: any): void;
+    init(component: any): void;
     createExtComponent(): void;
     assessChildren(base: any, xtype: any): void;
     addChildren(child: any, children: any): void;
     addTheChild(parentCmp: any, childCmp: any, location: any): void;
+    atEnd(): void;
     readonly currentEl: any;
     getCurrentElName(component: any): any;
     readonly currentElName: any;

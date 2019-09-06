@@ -17,6 +17,9 @@
     "http": "npx http-server build -g -o"
   },
   "devDependencies": {
+    "@webcomponents/webcomponentsjs": "^2.2.10",
+    "@angular-builders/custom-webpack": "^8.2.0",
+    "@angular-builders/dev-server": "^7.3.1",
     "@sencha/ext-angular": "~7.0.0",
     "@sencha/ext-webpack-plugin": "~7.0.0",
     "@sencha/ext": "~7.0.0",
