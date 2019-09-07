@@ -39,7 +39,7 @@ export class BigDataComponent {
 
   rowBodyTpl=`
   <div>
-    <img src={avatar} height="100px" style="float:left;margin:0px 10px 5px 0px;"/>
+    <ext-img src={avatar} height="100px" style="float:left;margin:0px 10px 5px 0px;"/>
     <br><b>{fullName}</b>
     <br>{dob:date}
   </div>
@@ -169,17 +169,17 @@ export class BigDataComponent {
   }
 
   renderRatingThisYear = (value) => {
-    //value && <Rating value={value} tip='Set to {tracking:plural("Star")}'/>
+    //value && <ext-rating value={value} tip='Set to {tracking:plural("Star")}'/>
     return value;
   }
 
   renderSparkline = (rating) => {
       return
-    `<sparkline
+    `<ext-sparkline
       height={16}
       values={rating}
       tipTpl='Price: {y:number("0.00")}'
-    ></sparkline>`
+    ></ext-sparkline>`
   }
 
   renderVerify = (value, record) => {
