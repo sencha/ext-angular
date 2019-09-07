@@ -1,26 +1,24 @@
 {
-  "compileOnSave": false,
+  "compileOnSave": true,
+  "exclude": ["node_modules"],
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
-    "module": "esnext",
+    "module": "commonjs",
+    "target": "es5",
     "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "es2015",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ]
-  },
-  "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "preserveSymlinks": true,
+    "lib": ["es2018","dom"],
+    "typeRoots": ["node_modules/@types"],
+    "paths": { 
+      "@angular/*": ["node_modules/@angular/*"], 
+      "@sencha/*": ["node_modules/@sencha/*"] 
+    }
   }
 }

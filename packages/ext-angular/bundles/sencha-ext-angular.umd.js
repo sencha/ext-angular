@@ -452,7 +452,15 @@
             for (var i = 0; i < children.length; i++) {
                 var childItem = { parentCmp: {}, childCmp: {} };
                 childItem.parentCmp = this.currentEl.A.ext;
-                childItem.childCmp = children[i].currentEl.A.ext;
+                var A2;
+                if (children[i]._extitems != undefined) {
+                    A2 = children[i].node.A;
+                }
+                else {
+                    A2 = children[i].A;
+                }
+                childItem.childCmp = A2.ext;
+                //childItem.childCmp = children[i].currentEl.A.ext;
                 this.addTheChild(childItem.parentCmp, childItem.childCmp, null);
             }
         };
