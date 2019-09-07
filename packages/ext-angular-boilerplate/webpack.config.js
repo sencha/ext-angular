@@ -61,7 +61,7 @@ module.exports = function (env) {
         browser: browser,
         watch: watch,
         verbose: verbose,
-        inject: 'no',
+        inject: 'yes',
         intellishake: 'no'
       }),
 
