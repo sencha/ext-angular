@@ -79,7 +79,7 @@ export class AppComponent implements OnInit {
             this.node$.subscribe(({
                 next: (v) => {
                 this.node = v;
-                console.log(v)
+                //console.log(v)
                 this.files = getFiles(v, _code);
 //                this.highlightCode();
                 this.hideSelections = this.node.childNodes.length > 0 ? false: true
@@ -108,7 +108,7 @@ export class AppComponent implements OnInit {
                 }
 
                 this.node = localNode;
-                console.log(this.breadcrumbCmp)
+                //console.log(this.breadcrumbCmp)
                 this.breadcrumbCmp.setSelection(this.node)
                 }
             });
@@ -131,22 +131,22 @@ export class AppComponent implements OnInit {
     }
 
     dataviewReady = (event) => {
-        console.log('dataviewReady')
-        console.log(event)
+        //console.log('dataviewReady')
+        //console.log(event)
         this.theDataview = event.detail.cmp;
     }
 
     breadcrumbReady = (event) => {
-        console.log('breadcrumbReady')
-        console.log(event)
+        //console.log('breadcrumbReady')
+        //console.log(event)
         this.breadcrumbCmp = event.detail.cmp;
-        console.log(this.node)
+        //console.log(this.node)
         this.breadcrumbCmp.setSelection(this.node)
     }
 
     readyLeftContainer = (event) => {
-        console.log('readyLeftContainer')
-        console.log(event)
+        //console.log('readyLeftContainer')
+        //console.log(event)
         this.leftContainerCmp = event.detail.cmp;
         var title
         if(window['title'] == null) {
@@ -159,16 +159,16 @@ export class AppComponent implements OnInit {
     }
 
     readyRightContainer = (event) => {
-        console.log('readyRightContainer')
-        console.log(event)
+        //console.log('readyRightContainer')
+        //console.log(event)
         this.rightContainerCmp = event.detail.cmp;
-        this.rightContainerCmp.updateHtml('Build: ' + 'BUILD_VERSION'); // eslint-disable-line no-undef
+        this.rightContainerCmp.updateHtml('Build: ' + BUILD_VERSION); // eslint-disable-line no-undef
     }
 
     theNestedlist: any
     nestedlistReady = (event) => {
-        console.log('nestedListReady')
-        console.log(event)
+        //console.log('nestedListReady')
+        //console.log(event)
         this.theNestedlist = event.detail.cmp;
     }
 
@@ -185,7 +185,7 @@ export class AppComponent implements OnInit {
     }
 
     toggleCode = () => {
-        console.log('toggleCode')
+        //console.log('toggleCode')
         this.showCode = !this.showCode;
         //this.highlightCode();
     }
@@ -209,14 +209,14 @@ export class AppComponent implements OnInit {
     }
 
     breadcrumbChange = (event) => {
-        console.log('breadcrumbChange')
-        console.log(event)
+        //console.log('breadcrumbChange')
+        //console.log(event)
         this.breadcrumbCmp.setSelection(event.node);
         this.navigate(event.node.id);
     }
 
     navigate(location) {
-        console.log(location)
+        //console.log(location)
         //this.router.navigateByUrl('' + location)
         this.ngZone.run(() => this.router.navigateByUrl(location)).then();
     }
@@ -231,7 +231,7 @@ export class AppComponent implements OnInit {
         var record = event.record;
         if(record && record.data && record.data.id) {
             var componentSelectedId = record.data.id;
-            console.log(componentSelectedId)
+            //console.log(componentSelectedId)
             //this.router.navigate([componentSelectedId])
 
             this.ngZone.run(() => this.router.navigate([componentSelectedId])).then();
@@ -239,7 +239,7 @@ export class AppComponent implements OnInit {
     }
 
     toggleTree = function(){
-        console.log('toggleTree')
+        //console.log('toggleTree')
         this.showTreeFlag = !this.showTreeFlag;
     }
 
@@ -247,10 +247,10 @@ export class AppComponent implements OnInit {
         var oldValue = event.oldValue;
         var newValue = event.newValue;
         this.filterVal = newValue;
-        console.log("In filterNav.oldValue : " + oldValue + " newValue: " + newValue);
+        //console.log("In filterNav.oldValue : " + oldValue + " newValue: " + newValue);
         const store = this.treeStore;
         var escapeRegex = Ext.String.escapeRegex(newValue);
-        console.log(escapeRegex);
+        //console.log(escapeRegex);
         this.filterRegex = new RegExp(escapeRegex, 'i');
         store.filterBy(record => this.containsMatches(record));
     }

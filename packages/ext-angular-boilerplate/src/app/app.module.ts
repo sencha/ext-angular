@@ -1,13 +1,8 @@
-declare var Ext: any
 import { Inject, NgModule, ModuleWithProviders } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { Route, RouterModule } from '@angular/router'
 
-
-//import { ExtAngularModule } from './ext-angular-prod/ext-angular.module';
-declare var Ext: any;
 import { ExtAngularModule } from '@sencha/ext-angular';
-
 
 
 // import { ExtContainerComponent } from '@sencha/ext-angular-all/lib/ext-container.component';
@@ -56,16 +51,9 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
         // ExtColumnComponent
     ],
     providers: [],
-    entryComponents: [AppComponent]
-    //bootstrap: [AppComponent]
+    bootstrap: [AppComponent]
   })
   export class AppModule {
-      ngDoBootstrap(app) {
-          Ext.onReady(function () {
-              console.log('ngDoBootstrap')
-              app.bootstrap(AppComponent);
-          });
-     }
   }
 
 

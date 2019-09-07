@@ -11,7 +11,7 @@
   <ext-column align="right" text="Change" width="90" dataIndex="change" [cell]="{encodeHtml:false}" [renderer]="this.renderSign.bind(this, '0.00')" sortable="true"> </ext-column>
   <ext-column align="right" text="% Change" dataIndex="pctChange" [cell]="{encodeHtml:false}" [renderer]="this.renderSign.bind(this, '0.00%')" sortable="true"></ext-column>
   <ext-toolbar docked="bottom" [defaults]="{ margin: '0 20 0 0' }">
-    <label html="Tick Delay"></label>
+    <ext-label html="Tick Delay"></ext-label>
     <ext-sliderfield
       [padding]="'0 5'"
       [minValue]="25"
