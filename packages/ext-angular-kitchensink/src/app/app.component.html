@@ -72,7 +72,11 @@
     <!-- Navtree ends-->
 
     <!-- [hidden]="hideSelections"
-    [hidden]="hideExamples" -->
+    [hidden]="hideExamples"
+        [hidden]="files.length > 0 ? false: true"
+
+
+-->
 
     <!-- selections starts-->
     <ext-panel scrollable="y" [hidden]="false" (ready)="readySelection($event)" [bodyStyle]="bodyStyle" *ngIf="!isPhone">
@@ -96,19 +100,23 @@
     </ext-container>
     <!-- examples ends-->
 
+    <!-- [hideAnimation]="{type: 'slideOut', direction: 'right', duration: 100, easing: 'ease' }"
+    [showAnimation]="{type: 'slideIn', direction: 'left', duration: 100, easing: 'ease' }" -->
+
+
+
     <!-- code window starts-->
     <ext-panel docked="right" [weight]="5"
-        [hidden]="files.length > 0 ? false: true"
+        [hidden]="false"
         width="900"
         layout= "fit"
         [style]="{zIndex: 3}"
         [resizable]="{ edges: 'west', dynamic: true }"
         [header]="false"
-        [hideAnimation]="{type: 'slideOut', direction: 'right', duration: 100, easing: 'ease' }"
-        [showAnimation]="{type: 'slideIn', direction: 'left', duration: 100, easing: 'ease' }"
+
         [collapsible]="{ direction: 'right' }"
         (ready)="readyCodePanel($event)"
-        [collapsed]="!showCode"
+        [collapsed]="hideCode"
     >
         <ext-tabpanel
             [shadow]="true"
