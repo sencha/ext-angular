@@ -219,6 +219,7 @@ import {ZoomableSunburstComponent} from '../examples/D3/Hierarchy/ZoomableSunbur
 import { ScrollingTabComponent } from '../examples/Tabs/Scrolling/Scrolling';
 
 const routes : ExtAngularRoute[] = [
+    { path: 'frame-index.html', redirectTo: '/', pathMatch: 'full' },
     { path: '', redirectTo: '/', pathMatch: 'full' },
     { path: 'components', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
     { path: 'components/buttons', component: DummyComponent, text: 'components', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
