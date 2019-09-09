@@ -1,4 +1,4 @@
-//Mon Sep 09 2019 08:02:26 GMT-0400 (Eastern Daylight Time)
+//Mon Sep 09 2019 13:39:01 GMT-0400 (Eastern Daylight Time)
 declare var Ext: any
 
 import {
@@ -148,7 +148,7 @@ setDirection() {
             }
         }
     }
-    console.log(this.base.DIRECTION);
+    //console.log(this.base.DIRECTION);
 }
 figureOutA() {
     //if (this.hasParent && this.parentEl.A == undefined) {

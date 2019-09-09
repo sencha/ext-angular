@@ -9,7 +9,6 @@ var EngBase = /** @class */ (function () {
         this.node = nativeElement;
         this.parentNode = hostComponent;
         this.newDiv = document.createElement('div');
-        
         //var t = document.createTextNode("newDiv");
         //this.newDiv.appendChild(t);
         this.node.insertAdjacentElement('beforebegin', this.newDiv);
@@ -109,7 +108,7 @@ var EngBase = /** @class */ (function () {
                 }
             }
         }
-        console.log(this.base.DIRECTION);
+        //console.log(this.base.DIRECTION);
     };
     EngBase.prototype.figureOutA = function () {
         //if (this.hasParent && this.parentEl.A == undefined) {

@@ -308,7 +308,7 @@
                     }
                 }
             }
-            console.log(this.base.DIRECTION);
+            //console.log(this.base.DIRECTION);
         };
         EngBase.prototype.figureOutA = function () {
             //if (this.hasParent && this.parentEl.A == undefined) {
