@@ -102,7 +102,7 @@ class EngBase {
                 }
             }
         }
-        console.log(this.base.DIRECTION);
+        //console.log(this.base.DIRECTION);
     }
     figureOutA() {
         //if (this.hasParent && this.parentEl.A == undefined) {
