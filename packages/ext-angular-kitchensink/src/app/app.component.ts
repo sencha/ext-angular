@@ -2,8 +2,6 @@ declare var Ext: any;
 declare var BUILD_VERSION: any;
 //import { Component, OnInit, NgZone, ViewEncapsulation } from '@angular/core';
 import { Component, OnInit, NgZone } from '@angular/core';
-import {hljs} from 'highlightjs';
-import 'highlightjs/styles/atom-one-dark.css';
 import {navTreeRoot} from '../examples';
 import { Router, NavigationEnd } from '@angular/router';
 import { VERSION } from '@angular/core';
@@ -12,49 +10,44 @@ import { getFiles } from "./code_preview_helper";
 import { _code } from "./code"
 
 Ext.require([
-    //'Ext.layout.*',
     'Ext.MessageBox',
     'Ext.Toast',
     'Ext.panel.Collapser',
     'Ext.data.TreeStore'
 ])
-// const hljs: any = require('highlight.js/lib/highlight');
-// hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescript'));
-// hljs.registerLanguage('http', require('highlight.js/lib/languages/http'));
-// hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
-// hljs.registerLanguage('xml', require('highlight.js/lib/languages/xml'));
-// hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'));
+const hljs: any = require('highlight.js/lib/highlight');
+hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescript'));
+hljs.registerLanguage('http', require('highlight.js/lib/languages/http'));
+hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
+hljs.registerLanguage('xml', require('highlight.js/lib/languages/xml'));
+hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'));
 
-export class Route {
-    hash: any
-    hashlower: any
-    component: any
-    default: any
+// export class Route {
+//     hash: any
+//     hashlower: any
+//     component: any
+//     default: any
 
+//     constructor(hash, hashlower, component, defaultRoute) {
+//         try {
+//             if (!hash) {
+//                 throw "error: hash param is required";
+//             }
+//         } catch (e) {
+//             console.error(e);
+//         }
+//         this.hash = hash;
+//         this.hashlower = hashlower;
+//         this.component = component;
+//         if (defaultRoute != undefined) {
+//             this.default = defaultRoute;
+//         }
+//     }
 
-    constructor(hash, hashlower, component, defaultRoute) {
-        try {
-            if (!hash) {
-                throw "error: hash param is required";
-            }
-        } catch (e) {
-            console.error(e);
-        }
-        this.hash = hash;
-        this.hashlower = hashlower;
-        this.component = component;
-        if (defaultRoute != undefined) {
-            this.default = defaultRoute;
-        }
-    }
-
-    isActiveRoute(hashedPath) {
-        return hashedPath.replace("#", "") === this.hash;
-    }
-}
-
-
-
+//     isActiveRoute(hashedPath) {
+//         return hashedPath.replace("#", "") === this.hash;
+//     }
+// }
 
 @Component({
   selector: 'app-root',
@@ -67,6 +60,7 @@ export class AppComponent implements OnInit {
     treeStore: any
     hideSelections: any = false
     hideExamples: any = true
+    hideCode: any = true
     blockstyle: any = {'background':'top','display':'block','text-align':'center'}
     bodyStyle: any = `
     backgroundSize: 20px 20px;
@@ -96,7 +90,6 @@ export class AppComponent implements OnInit {
     filterVal: any
     showTreeFlag: any = false
 
-
     leftContainerCmp: any
     rightContainerCmp: any
     breadcrumbCmp: any
@@ -120,6 +113,7 @@ export class AppComponent implements OnInit {
     constructor(private router: Router, private ngZone: NgZone) {
         this.router = router
         this.wait = 12;
+
         // this.treeStore = Ext.create('Ext.data.TreeStore', {
         //     rootVisible: true,
         //     root: navTreeRoot
@@ -297,8 +291,6 @@ export class AppComponent implements OnInit {
         this.afterAllLoaded('readyNestedlist');
     }
 
-
-
     onNavChange = (nodeId, node) => {
         if (node.isLeaf()) {
         this.nestedlistCmp.goToLeaf(node);
@@ -315,7 +307,11 @@ export class AppComponent implements OnInit {
     toggleCode = () => {
         console.log('toggleCode')
         this.showCode = !this.showCode;
-        //this.highlightCode();
+        this.highlightCode();
+        //this.hideCode = !this.hideCode;
+        console.log(this.hideCode)
+        this.codePanelCmp.setHidden(!this.hideCode)
+        this.hideCode = !this.hideCode;
     }
 
     doTap = (event, record) => {
@@ -421,19 +417,19 @@ export class AppComponent implements OnInit {
 
 
     setCodeTabs = (node) => {
-        var hash = window.location.hash.substr(1);
-        var currentRoute = {};
+        //var hash = window.location.hash.substr(1);
+        //var currentRoute = {};
 
         //console.dir(node)
 
-        console.log('setCodeTabs')
-        console.log(node.data.name.replace(/ /g,""))
-        console.log(window.location.hash)
+        //console.log('setCodeTabs')
+        //console.log(node.data.name.replace(/ /g,""))
+        //console.log(window.location.hash)
 
         var componentName = node.data.name.replace(/ /g,"")
 
         var codeMap = _code[componentName];
-        console.log(codeMap)
+        //console.log(codeMap)
         // this.tabPanelCmp.removeAll();
         // var componentName = currentRoute.hash + 'Component';
 
@@ -471,9 +467,9 @@ export class AppComponent implements OnInit {
         if (codeMapFile != undefined) {
             this.tabPanelCmp.add(
                 {
-                    xtype: 'panel', title: file, ui: 'code-panel', layout: 'fit', userSelectable: true, scrollable: true,
+                    xtype: 'panel', title: file, ui: 'code-panel', layout: 'fit', userSelectable: {element: true,bodyElement: true}, scrollable: true,
                     tab: {ui: 'app-code-tab', flex: 0, padding: '0 5 0 0', minWidth: 220, maxWidth: 250},
-                    html: `<pre><code class='code'>${codeMapFile.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`
+                    html: `<pre style="user-select: text;"><code class='code'>${codeMapFile.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`
                 }
             );
         }
@@ -485,9 +481,9 @@ export class AppComponent implements OnInit {
 
 
     highlightCode() {
-//        document.querySelectorAll(".code").forEach((el) => {
-//           hljs.highlightBlock(el);
-//        });
+       document.querySelectorAll(".code").forEach((el) => {
+          hljs.highlightBlock(el);
+       });
     }
 
     selectionchangeNavTreeList(event) {
