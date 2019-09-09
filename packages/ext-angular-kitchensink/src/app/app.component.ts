@@ -44,7 +44,9 @@ export class AppComponent implements OnInit {
         linear-gradient(0deg, #f5f5f5 1.1px, transparent 0),
         linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)
     `
-    theDataview: any
+    wait: any
+    dataviewCmp: any
+    nestedlistCmp: any
     tpl: any = `
     <div class="app-thumbnail">
         <div class="app-thumbnail-icon-wrap">
@@ -70,11 +72,17 @@ export class AppComponent implements OnInit {
     </div>`
 
     constructor(private router: Router, private ngZone: NgZone) {
-        //console.log(navTreeRoot)
+        this.router = router
+        this.wait = 4;
         this.treeStore = Ext.create('Ext.data.TreeStore', {
-        rootVisible: true,
-        root: navTreeRoot
+            rootVisible: true,
+            root: navTreeRoot
         })
+    }
+
+    initialize = () => {
+        //console.log(navTreeRoot)
+
         try {
             this.node$.subscribe(({
                 next: (v) => {
@@ -85,8 +93,8 @@ export class AppComponent implements OnInit {
                 this.hideSelections = this.node.childNodes.length > 0 ? false: true
                 this.hideExamples = this.node.childNodes.length > 0 ? true: false
                 if(this.hideSelections == false) {
-                    if (this.theDataview != undefined) {
-                        this.theDataview.setData(this.node.childNodes)
+                    if (this.dataviewCmp != undefined) {
+                        this.dataviewCmp.setData(this.node.childNodes)
                     }
                 }
                 else {
@@ -96,7 +104,7 @@ export class AppComponent implements OnInit {
                 }
             }));
 
-            router.events.subscribe((val) => {
+            this.router.events.subscribe((val) => {
                 if (val instanceof NavigationEnd) {
                 var localNode = this.treeStore.getNodeById(val.url);
                 if (localNode) {
@@ -120,33 +128,44 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
-        var localNode = this.treeStore.getNodeById(location.pathname);
-        if(localNode) {
-            this.node = localNode;
-            this.node$.next(this.treeStore.getNodeById(location.pathname));
-        }
-        else {
-            console.log("Not a valid node. Probably looking at resources");
+        // var localNode = this.treeStore.getNodeById(location.pathname);
+        // if(localNode) {
+        //     this.node = localNode;
+        //     this.node$.next(this.treeStore.getNodeById(location.pathname));
+        // }
+        // else {
+        //     console.log("Not a valid node. Probably looking at resources");
+        // }
+    }
+
+    afterAllLoaded = (readyEventName) => {
+        console.log('afterAllLoaded: ' + readyEventName)
+        this.wait = this.wait - 1;
+
+        if (this.wait == 0) {
+            console.log('the wait is over!')
+
+            this.initialize()
+
+            var localNode = this.treeStore.getNodeById(location.pathname);
+            if(localNode) {
+                this.node = localNode;
+                this.node$.next(this.treeStore.getNodeById(location.pathname));
+            }
+            else {
+                console.log("Not a valid node. Probably looking at resources");
+            }
+
+            // var hash = window.location.hash.substr(1);
+            // if (hash == '') {hash = 'all';}
+            // var node = this.navTreelistCmp.getStore().findNode('hash', hash);
+            // this.navTreelistCmp.setSelection(node);
+            // this.navigate(node);
         }
     }
 
-    dataviewReady = (event) => {
-        //console.log('dataviewReady')
-        //console.log(event)
-        this.theDataview = event.detail.cmp;
-    }
-
-    breadcrumbReady = (event) => {
-        //console.log('breadcrumbReady')
-        //console.log(event)
-        this.breadcrumbCmp = event.detail.cmp;
-        //console.log(this.node)
-        this.breadcrumbCmp.setSelection(this.node)
-    }
 
     readyLeftContainer = (event) => {
-        //console.log('readyLeftContainer')
-        //console.log(event)
         this.leftContainerCmp = event.detail.cmp;
         var title
         if(window['title'] == null) {
@@ -156,27 +175,36 @@ export class AppComponent implements OnInit {
             title = window['title']
         }
         this.leftContainerCmp.updateHtml(title); // eslint-disable-line no-undef
+        this.afterAllLoaded('readyLeftContainer');
     }
 
     readyRightContainer = (event) => {
-        //console.log('readyRightContainer')
-        //console.log(event)
         this.rightContainerCmp = event.detail.cmp;
         this.rightContainerCmp.updateHtml('Build: ' + BUILD_VERSION); // eslint-disable-line no-undef
+        this.afterAllLoaded('readyRightContainer');
     }
 
-    theNestedlist: any
-    nestedlistReady = (event) => {
-        //console.log('nestedListReady')
-        //console.log(event)
-        this.theNestedlist = event.detail.cmp;
+    readyBreadcrumb = (event) => {
+        this.breadcrumbCmp = event.detail.cmp;
+        this.breadcrumbCmp.setSelection(this.node)
+        this.afterAllLoaded('readyBreadcrumb');
+    }
+
+    readyDataview = (event) => {
+        this.dataviewCmp = event.detail.cmp;
+        this.afterAllLoaded('readyDataview');
+    }
+
+    readyNestedlist = (event) => {
+        this.nestedlistCmp = event.detail.cmp;
+        this.afterAllLoaded('readyNestedlist');
     }
 
     onNavChange = (nodeId, node) => {
         if (node.isLeaf()) {
-        this.theNestedlist.goToLeaf(node);
+        this.nestedlistCmp.goToLeaf(node);
         } else {
-        this.theNestedlist.goToNode(node);
+        this.nestedlistCmp.goToNode(node);
         }
         if(nodeId === '' || nodeId) {
         location.hash = nodeId;

@@ -9,6 +9,7 @@ var EngBase = /** @class */ (function () {
         this.node = nativeElement;
         this.parentNode = hostComponent;
         this.newDiv = document.createElement('div');
+        
         //var t = document.createTextNode("newDiv");
         //this.newDiv.appendChild(t);
         this.node.insertAdjacentElement('beforebegin', this.newDiv);
@@ -57,7 +58,7 @@ var EngBase = /** @class */ (function () {
     };
     ;
     EngBase.prototype.createRawChildren = function () {
-        console.log('createRawChildren');
+        //console.log('createRawChildren')
         if (this.currentEl.isAngular) {
             this.currentEl.rawChildren = this.currentEl.childComponents;
         }
@@ -75,8 +76,8 @@ var EngBase = /** @class */ (function () {
                 }
             }
         }
-        console.log('rawChildren');
-        console.log(this.currentEl.rawChildren);
+        //console.log('rawChildren')
+        //console.log(this.currentEl.rawChildren)
     };
     EngBase.prototype.setHasParent = function () {
         var hasParent;
@@ -111,7 +112,10 @@ var EngBase = /** @class */ (function () {
         console.log(this.base.DIRECTION);
     };
     EngBase.prototype.figureOutA = function () {
-        if (this.hasParent && this.parentEl.A == undefined) {
+        //if (this.hasParent && this.parentEl.A == undefined) {
+        if (this.hasParent &&
+            this.parentEl.A == undefined &&
+            this.parentEl.nodeName.substring(0, 4) == 'EXT-') {
             this.init(this.parentEl);
         }
         if (this.currentEl.A == undefined) {
@@ -165,6 +169,7 @@ var EngBase = /** @class */ (function () {
             A.props.renderTo = this.newDiv;
             Ext.onReady(function () {
                 console.log('1- Ext.create: ' + methis.currentElName + ' HTML parent: ' + methis.currentElName);
+                console.dir(meA.props);
                 methis.currentEl.A.ext = Ext.create(meA.props);
                 methis.newDiv.parentNode.replaceChild(methis.currentEl.A.ext.el.dom, methis.newDiv);
                 methis.assessChildren(methis.base, methis.xtype);
@@ -200,7 +205,7 @@ var EngBase = /** @class */ (function () {
         if (A.CHILDRENCOMPONENTSCOUNT == 0 &&
             A.CHILDRENCOMPONENTSLEFT == 0 &&
             A.CHILDRENCOMPONENTSADDED == 0 &&
-            this.parentEl == null) {
+            !this.hasParent) {
             console.log('Solo');
             console.log('ready event for ' + this.currentElName);
             this.sendReadyEvent(this);
@@ -219,7 +224,11 @@ var EngBase = /** @class */ (function () {
         //     console.log('send ready for ' + this.A.xtype);
         //     this.sendReadyEvent(this);
         // }
-        if (this.parentEl != null) {
+        //if (this.parentEl != null) {
+        // if (this.hasParent &&
+        //     this.parentEl.nodeName.substring(0, 4) == 'EXT-'
+        //     ) {
+        if (this.hasParent) {
             if (base.DIRECTION == 'TopToBottom') {
                 console.log('TopToBottom');
                 this.parentEl.A.CHILDRENCOMPONENTS.push(this);
