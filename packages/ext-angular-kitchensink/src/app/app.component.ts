@@ -364,8 +364,7 @@ nav(node) {
     }
     else {
         console.log('navigate')
-        //this.files = getFiles(node, _code);
-        console.log(node.id)
+               console.log(node.id)
         this.ngZone.run(() => this.router.navigateByUrl(node.id)).then();
         this.setCodeTabs(node);
     }
@@ -461,6 +460,7 @@ nav(node) {
         //this.files = getFiles(node, _code);
 
 
+        this.files = getFiles(node, _code);
         var componentName = node.data.name.replace(/ /g,"")
 
         var codeMap = _code[componentName];
