@@ -292,6 +292,9 @@ export class AppComponent implements OnInit {
     }
 
     onNavChange = (nodeId, node) => {
+        this.nav(node);
+        return
+
         if (node.isLeaf()) {
         this.nestedlistCmp.goToLeaf(node);
         } else {
@@ -330,16 +333,45 @@ export class AppComponent implements OnInit {
     clickDataviewNav = (event) => {
         // var id = event.location.record.data.id
         // this.navigate(id)
-        this.navigate(event.location.record)
+        //this.navigate(event.location.record)
+        this.nav(event.location.record);
     }
 
     breadcrumbChange = (event) => {
-        //console.log('breadcrumbChange')
-        //console.log(event)
-        this.breadcrumbCmp.setSelection(event.node);
-        //this.navigate(event.node.id);
-        this.navigate(event.node);
+        console.log('breadcrumbChange')
+        var node = event.node
+        this.breadcrumbCmp.setSelection(node);
+        this.nav(node);
     }
+
+nav(node) {
+    if (node.childNodes.length > 0) {
+        this.hideExamples = false
+        this.hideSelections = true
+    }
+    else {
+        this.hideExamples = true
+        this.hideSelections = false
+    }
+    this.codeButtonCmp.setHidden(this.hideSelections)
+    this.dataviewNavCmp.setHidden(this.hideExamples)
+    this.routerCmp.setHidden(this.hideSelections)
+    if (this.hideExamples == false) {
+        console.log('set selection data')
+        if (this.dataviewNavCmp != undefined) {
+            this.dataviewNavCmp.setData(node.childNodes)
+        }
+    }
+    else {
+        console.log('navigate')
+        //this.files = getFiles(node, _code);
+        console.log(node.id)
+        this.ngZone.run(() => this.router.navigateByUrl(node.id)).then();
+        this.setCodeTabs(node);
+    }
+}
+
+
 
     // navigate(location) {
     //     //console.log(location)
@@ -360,60 +392,60 @@ export class AppComponent implements OnInit {
         //var node = this.dataviewNavCmp.getStore().findNode('hash', hash);
         var node = this.dataviewNavCmp.getStore().findNode('name', hash);
         //console.log(node)
-        this.breadcrumbCmp.setSelection(node);
+        //this.breadcrumbCmp.setSelection(node);
 
-        if (childNum == 0) { //} && hash != undefined) {
-            //window.location.hash = '#' + hash;
-            this.showRouter(node);
-            //console.log(' ready to route')
-            //var location = '#' + hash
-            //console.log(location)
-            //console.log(node)
-            //this.router.navigateByUrl(node.id)
-            // this.files = getFiles(node, _code);
-            // this.ngZone.run(() => this.router.navigateByUrl(node.id)).then();
-        }
-        else {
-            //window.location.hash = '#' + hash;
-            this.showSelection(node);
-        }
+        // if (childNum == 0) { //} && hash != undefined) {
+        //     //window.location.hash = '#' + hash;
+        //     this.showRouter(node);
+        //     //console.log(' ready to route')
+        //     //var location = '#' + hash
+        //     //console.log(location)
+        //     //console.log(node)
+        //     //this.router.navigateByUrl(node.id)
+        //     // this.files = getFiles(node, _code);
+        //     // this.ngZone.run(() => this.router.navigateByUrl(node.id)).then();
+        // }
+        // else {
+        //     //window.location.hash = '#' + hash;
+        //     this.showSelection(node);
+        // }
 
         if(Ext.os.is.Phone) {
             this.navTreePanelCmp.setCollapsed(true);
         }
     }
 
-    showSelection = (node) => {
-       // this.selectionCmp.setHidden(false);
-        //this.router.hidden = true;
+    // showSelection = (node) => {
+    //    // this.selectionCmp.setHidden(false);
+    //     //this.router.hidden = true;
 
-        this.files = []
-        console.log(node)
-        this.dataviewNavCmp.setData(node.childNodes);
+    //     this.files = []
+    //     console.log(node)
+    //     this.dataviewNavCmp.setData(node.childNodes);
 
 
-        this.hideSelections = false;
-        this.hideExamples = true;
-        //this.codeButtonCmp.setHidden(true);
-    }
+    //     //this.hideSelections = false;
+    //     this.hideExamples = true;
+    //     //this.codeButtonCmp.setHidden(true);
+    // }
 
-    showRouter = (node) => {
-       // this.selectionCmp.setHidden(true);
-        console.log('in showRouter')
-        console.dir(this)
-        this.files = getFiles(node, _code);
-        this.ngZone.run(() => this.router.navigateByUrl(node.id)).then();
-        //this.router.hidden = false;
-        this.hideSelections = true;
-        this.hideExamples = false;
-        //this.codeButtonCmp.setHidden(false);
+    // showRouter = (node) => {
+    //    // this.selectionCmp.setHidden(true);
+    //     console.log('in showRouter')
+    //     console.dir(this)
+    //     this.files = getFiles(node, _code);
+    //     this.ngZone.run(() => this.router.navigateByUrl(node.id)).then();
+    //     //this.router.hidden = false;
+    //     //this.hideSelections = true;
+    //     this.hideExamples = false;
+    //     //this.codeButtonCmp.setHidden(false);
 
-        // if(Ext.os.is.Phone) {
-        //     this.navTreePanelCmp.setCollapsed(true);
-        // }
+    //     // if(Ext.os.is.Phone) {
+    //     //     this.navTreePanelCmp.setCollapsed(true);
+    //     // }
 
-        this.setCodeTabs(node);
-    }
+    //     this.setCodeTabs(node);
+    // }
 
 
     setCodeTabs = (node) => {
@@ -425,6 +457,9 @@ export class AppComponent implements OnInit {
         //console.log('setCodeTabs')
         //console.log(node.data.name.replace(/ /g,""))
         //console.log(window.location.hash)
+
+        //this.files = getFiles(node, _code);
+
 
         var componentName = node.data.name.replace(/ /g,"")
 
@@ -489,7 +524,8 @@ export class AppComponent implements OnInit {
     selectionchangeNavTreeList(event) {
         var record = event.record;
         console.log(record)
-        this.navigate(record);
+        this.nav(record)
+        //this.navigate(record);
 
 
         // var record = event.record;
@@ -544,9 +580,9 @@ export class AppComponent implements OnInit {
                 this.files = getFiles(v, _code);
 //                console.log(this.files)
 //                this.highlightCode();
-                this.hideSelections = this.node.childNodes.length > 0 ? false : true
+                //this.hideSelections = this.node.childNodes.length > 0 ? false : true
                 this.hideExamples = this.node.childNodes.length > 0 ? true : false
-                if(this.hideSelections == false) {
+                if(this.hideExamples == true) {
                     if (this.dataviewCmp != undefined) {
                         this.dataviewCmp.setData(this.node.childNodes)
                     }

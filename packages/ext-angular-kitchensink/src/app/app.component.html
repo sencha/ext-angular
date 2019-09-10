@@ -1,6 +1,5 @@
 
-<ext-panel ewc="root" [viewport]="true" layout="fit" [bodyStyle]="bodyStyle" [fullscreen]="true" [weighted]="true">
-
+<ext-panel [viewport]="true" layout="fit" [bodyStyle]="bodyStyle" [fullscreen]="true" [weighted]="true">
     <!-- ext-titlebar starts-->
     <ext-titlebar docked="top" [weight]="10" *ngIf="!isPhone" >
         <ext-button iconCls="x-fa fa-bars" (tap)="toggleTree()"></ext-button>
@@ -13,38 +12,44 @@
     <!-- Breadcrumb starts-->
     <ext-toolbar docked="top" [weight]="10" *ngIf="!isPhone" padding="0">
         <ext-breadcrumbbar
+            (ready)="readyBreadcrumb($event)"
+            (change)="breadcrumbChange($event)"
             showIcons= "true"
             [store]="treeStore"
             useSplitext-buttons="true"
-            (ready)="readyBreadcrumb($event)"
-            (change)="breadcrumbChange($event)"
             width="100%"
             height="100%"
         >
         </ext-breadcrumbbar>
 
+        <!-- [hidden]="files.length > 0 ? false : true" -->
+
         <!-- code ext-button starts-->
-        <ext-button [weight]="5" *ngIf="!isPhone"
-            [hidden]="files.length > 0 ? false : true"
+        <ext-button
+            *ngIf="!isPhone"
+            (ready)="readyCodeButton($event)"
+            (tap)="toggleCode($event)"
+            [weight]="5"
+            [hidden]="false"
             ui="fab"
             [iconCls]="'x-font-icon ' + (showCode ? 'md-icon-close' : 'md-icon-code')"
-            [top]="isDesktop ? 20 : 35"
-            right="21"
+            [top]="isDesktop ? -4 : 35"
+            right="15"
             zIndex="10000"
-            (ready)="readyCodeButton($event)"
-            (tap)="toggleCode($event)">
+        >
         </ext-button>
         <!-- code ext-button ends-->
-
     </ext-toolbar>
     <!-- Breadcrumb ends-->
 
     <!-- Navtree starts-->
-    <ext-panel [weight]="10" *ngIf="!isPhone"
+    <ext-panel
+        (ready)="readyNavTreePanel($event)"
+        [weight]="10"
+        *ngIf="!isPhone"
         docked="left"
         scrollable="y"
         width="300"
-        (ready)="readyNavTreePanel($event)"
         [style]="{zIndex: 100, backgroundColor: 'white'}"
         [resizable]="{edges: 'east', dynamic: true}"
         [header]="false"
@@ -74,12 +79,13 @@
     <!-- [hidden]="hideSelections"
     [hidden]="hideExamples"
         [hidden]="files.length > 0 ? false: true"
-
-
+[hidden]="!hideExamples"
+[hidden]="hideExamples"
+scrollable="y"
 -->
 
     <!-- selections starts-->
-    <ext-panel scrollable="y" [hidden]="false" (ready)="readySelection($event)" [bodyStyle]="bodyStyle" *ngIf="!isPhone">
+    <ext-panel flex="1" (ready)="readySelection($event)" [bodyStyle]="bodyStyle" *ngIf="!isPhone">
         <ext-dataview
             [itemTpl]="tpl"
             [store]="treeStore"
@@ -95,7 +101,7 @@
     <!-- selections ends-->
 
     <!-- examples starts-->
-    <ext-container [hidden]="false" *ngIf="!isPhone" scrollable="true" (ready)="readyRouter($event)">
+    <ext-container flex="1" [hidden]="true" *ngIf="!isPhone" scrollable="true" (ready)="readyRouter($event)">
         <router-outlet #extroute></router-outlet>
     </ext-container>
     <!-- examples ends-->
@@ -106,17 +112,19 @@
 
 
     <!-- code window starts-->
-    <ext-panel docked="right" [weight]="5"
+    <ext-panel
+        (ready)="readyCodePanel($event)"
+        docked="right"
         [hidden]="false"
+        [collapsed]="hideCode"
+        [weight]="5"
         width="900"
         layout= "fit"
         [style]="{zIndex: 3}"
         [resizable]="{ edges: 'west', dynamic: true }"
         [header]="false"
-
         [collapsible]="{ direction: 'right' }"
-        (ready)="readyCodePanel($event)"
-        [collapsed]="hideCode"
+
     >
         <ext-tabpanel
             [shadow]="true"
