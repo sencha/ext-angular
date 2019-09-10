@@ -85,7 +85,7 @@ scrollable="y"
 -->
 
     <!-- selections starts-->
-    <ext-panel flex="1" (ready)="readySelection($event)" [bodyStyle]="bodyStyle" *ngIf="!isPhone">
+    <ext-panel (ready)="readySelection($event)" [bodyStyle]="bodyStyle" *ngIf="!isPhone">
         <ext-dataview
             [itemTpl]="tpl"
             [store]="treeStore"
@@ -101,7 +101,7 @@ scrollable="y"
     <!-- selections ends-->
 
     <!-- examples starts-->
-    <ext-container flex="1" [hidden]="true" *ngIf="!isPhone" scrollable="true" (ready)="readyRouter($event)">
+    <ext-container [hidden]="true" *ngIf="!isPhone" scrollable="true" (ready)="readyRouter($event)">
         <router-outlet #extroute></router-outlet>
     </ext-container>
     <!-- examples ends-->
