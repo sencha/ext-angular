@@ -1,4 +1,4 @@
-//Mon Sep 09 2019 13:39:01 GMT-0400 (Eastern Daylight Time)
+//Wed Sep 11 2019 13:30:29 GMT-0400 (Eastern Daylight Time)
 declare var Ext: any
 
 import {
@@ -652,7 +652,9 @@ createProps(properties, propertiesobject, events, eventnames) {
     ngOnDestroy() {
         var childCmp;
         var parentCmp;
-        console.dir(this)
+        if (childCmp == undefined || parentCmp == undefined) {
+            return
+        }
         try {
             childCmp = this.currentEl.A.ext;
             if (this.parentEl != null) {
