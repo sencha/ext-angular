@@ -116,17 +116,14 @@ export class AppComponent {
             this.hideExamples = true
             this.hideSelections = false
         }
-        //this.codeButtonCmp.setHidden(this.hideSelections)
-        //this.dataviewNavCmp.setHidden(this.hideExamples)
-        //this.routerCmp.setHidden(this.hideSelections)
+
         if (this.hideExamples == false) {
             console.log('showing selections')
 
+            this.showCode = false
             this.codeButtonCmp.setHidden(true);
-
             this.selectionCmp.setStyle({display: 'flex'});
             this.routerCmp.setStyle({display: 'none'});
-
             this.codePanelCmp.setCollapsed(true);
             this.navTreeListCmp.setSelection(node);
             this.breadcrumbCmp.setSelection(node);
@@ -135,20 +132,10 @@ export class AppComponent {
         else {
             console.log('showing example')
 
-            //this.navTreePanelCmp.setStyle({display: 'none'});
-
-            //this.selectionCmp.setHidden(true)
-
             this.showCode = true
             this.codeButtonCmp.setHidden(false);
-
             this.selectionCmp.setStyle({display: 'none'});
             this.routerCmp.setStyle({display: 'flex'});
-
-
-            //[style]="{zIndex: 100, backgroundColor: 'white'}"
-
-
             this.codePanelCmp.setCollapsed(false);
             this.navTreeListCmp.setSelection(node);
             this.breadcrumbCmp.setSelection(node);
