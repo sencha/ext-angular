@@ -821,7 +821,9 @@
         EngBase.prototype.ngOnDestroy = function () {
             var childCmp;
             var parentCmp;
-            console.dir(this);
+            if (childCmp == undefined || parentCmp == undefined) {
+                return;
+            }
             try {
                 childCmp = this.currentEl.A.ext;
                 if (this.parentEl != null) {

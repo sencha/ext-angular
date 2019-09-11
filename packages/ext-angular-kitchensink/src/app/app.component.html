@@ -13,7 +13,7 @@
     <ext-toolbar docked="top" [weight]="10" *ngIf="!isPhone" padding="0">
         <ext-breadcrumbbar
             (ready)="readyBreadcrumb($event)"
-            (change)="breadcrumbChange($event)"
+            (change)="changeBreadcrumb($event)"
             showIcons= "true"
             [store]="treeStore"
             useSplitext-buttons="true"
@@ -30,7 +30,6 @@
             (ready)="readyCodeButton($event)"
             (tap)="toggleCode($event)"
             [weight]="5"
-            [hidden]="false"
             ui="fab"
             [iconCls]="'x-font-icon ' + (showCode ? 'md-icon-close' : 'md-icon-code')"
             [top]="isDesktop ? -4 : 35"
@@ -68,13 +67,15 @@
             [expanderFirst]="false"
             [expanderOnly]="true"
             [selectOnExpander]="true"
-            [store]="treeStore"
+
             (ready)="readyNavTreeList($event)"
             (selectionchange)="selectionchangeNavTreeList($event)"
         >
         </ext-treelist>
     </ext-panel>
     <!-- Navtree ends-->
+
+    <!-- [store]="treeStore" -->
 
     <!-- [hidden]="hideSelections"
     [hidden]="hideExamples"
@@ -101,7 +102,7 @@ scrollable="y"
     <!-- selections ends-->
 
     <!-- examples starts-->
-    <ext-container [hidden]="true" *ngIf="!isPhone" scrollable="true" (ready)="readyRouter($event)">
+    <ext-container (ready)="readyRouter($event)" *ngIf="!isPhone" scrollable="true">
         <router-outlet #extroute></router-outlet>
     </ext-container>
     <!-- examples ends-->
@@ -110,15 +111,16 @@ scrollable="y"
     [showAnimation]="{type: 'slideIn', direction: 'left', duration: 100, easing: 'ease' }" -->
 
 
+    <!-- [collapsed]="hideCode" -->
 
     <!-- code window starts-->
     <ext-panel
         (ready)="readyCodePanel($event)"
         docked="right"
         [hidden]="false"
-        [collapsed]="hideCode"
+        [collapsed]="false"
         [weight]="5"
-        width="900"
+        width="500"
         layout= "fit"
         [style]="{zIndex: 3}"
         [resizable]="{ edges: 'west', dynamic: true }"
@@ -150,8 +152,8 @@ scrollable="y"
     [title]="'ExtAngular 7.0 Kitchen Sink'"
     [store]="treeStore"
     [layout]="{type: 'card',animation: {duration: 250,easing: 'ease-in-out'}}"
-    (itemtap)="doItemTap($event)"
-    (back)="doBack($event)"
+    (itemtap)="itemtapNestedList($event)"
+    (back)="backNestedList($event)"
     (ready)="readyNestedlist($event)">
   </ext-nestedlist>
 <!-- nestedlist ends-->

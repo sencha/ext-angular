@@ -1,9 +1,8 @@
 declare var Ext: any;
 declare var BUILD_VERSION: any;
-//import { Component, OnInit, NgZone, ViewEncapsulation } from '@angular/core';
 import { Component, OnInit, NgZone } from '@angular/core';
 import {navTreeRoot} from '../examples';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { VERSION } from '@angular/core';
 import { Subject } from "rxjs";
 import { getFiles } from "./code_preview_helper";
@@ -22,39 +21,12 @@ hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
 hljs.registerLanguage('xml', require('highlight.js/lib/languages/xml'));
 hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'));
 
-// export class Route {
-//     hash: any
-//     hashlower: any
-//     component: any
-//     default: any
-
-//     constructor(hash, hashlower, component, defaultRoute) {
-//         try {
-//             if (!hash) {
-//                 throw "error: hash param is required";
-//             }
-//         } catch (e) {
-//             console.error(e);
-//         }
-//         this.hash = hash;
-//         this.hashlower = hashlower;
-//         this.component = component;
-//         if (defaultRoute != undefined) {
-//             this.default = defaultRoute;
-//         }
-//     }
-
-//     isActiveRoute(hashedPath) {
-//         return hashedPath.replace("#", "") === this.hash;
-//     }
-// }
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
     isPhone = Ext.os.is.Phone;
     ANGULAR_VERSION: any = VERSION.full
     treeStore: any
@@ -112,67 +84,12 @@ export class AppComponent implements OnInit {
 
     constructor(private router: Router, private ngZone: NgZone) {
         this.router = router
-        this.wait = 12;
-
-        // this.treeStore = Ext.create('Ext.data.TreeStore', {
-        //     rootVisible: true,
-        //     root: navTreeRoot
-        // })
-
-        // var navTreeRoot = {
-        //     hash: 'all',
-        //     iconCls: 'x-fa fa-home',
-        //     leaf: false,
-        //     text: 'All',
-        //     children: window.menu
-        // };
-
-
+        this.wait = 14;
         this.treeStore = Ext.create('Ext.data.TreeStore', {
             rootVisible: true,
             root: navTreeRoot
         });
-
-        this.navTreeView = Ext.create('Ext.data.TreeStore', {
-            rootVisible: true,
-            root: navTreeRoot
-        });
-
-        // console.log(navTreeRoot)
-        // this.routes = this._getRoutes(navTreeRoot.children)
-        // console.log(this.routes)
-
-        // if (Ext.os.is.Phone) {
-        //     this.collapsed = true;
-        // }
-
-
     }
-
-    // _getRoutes = (items) => {
-    //     var _routes = []
-    //     var me = this
-    //     items.forEach(function(item) {
-    //         item.leaf = !item.hasOwnProperty("children");
-    //         item.hash = item.text.replace(/ /g, "");
-    //         item.hashlower = item.hash.toLowerCase();
-    //         if (item.children == undefined) {
-    //             _routes.push(
-    //                 new Route(
-    //                     item.hash,
-    //                     item.hashlower,
-    //                     item.component,
-    //                     item.default
-    //                 )
-    //             );
-    //         } else {
-    //             me._getRoutes(item.children);
-    //         }
-    //     });
-    //     return _routes;
-    // }
-
-
 
     afterAllLoaded = (readyEventName) => {
         console.log('afterAllLoaded: ' + readyEventName)
@@ -180,34 +97,80 @@ export class AppComponent implements OnInit {
 
         if (this.wait == 0) {
             console.log('the wait is over!')
-
             var hash = window.location.hash.substr(1);
-            console.log(hash)
+            console.log('hash: ' + hash)
             if (hash == '') {hash = 'all';}
-            //var node = this.navTreeListCmp.getStore().findNode('hash', hash);
             var node = this.navTreeListCmp.getStore().findNode('name', hash);
-            this.navTreeListCmp.setSelection(node);
-            //this.breadcrumbCmp.setSelection(node)
-            this.navigate(node);
+            this.nav(node);
         }
+    }
 
-        // if (this.wait == 0) {
-        //     console.log('the wait is over!')
+    nav(node) {
+        console.log('in nav function, node is:')
+        console.dir(node)
+        if (node.childNodes.length > 0) {
+            this.hideExamples = false
+            this.hideSelections = true
+        }
+        else {
+            this.hideExamples = true
+            this.hideSelections = false
+        }
+        //this.codeButtonCmp.setHidden(this.hideSelections)
+        //this.dataviewNavCmp.setHidden(this.hideExamples)
+        //this.routerCmp.setHidden(this.hideSelections)
+        if (this.hideExamples == false) {
+            console.log('showing selections')
 
-        //     this.initialize()
+            this.codeButtonCmp.setHidden(true);
 
-        //     var localNode = this.treeStore.getNodeById(location.pathname);
-        //     if(localNode) {
-        //         this.node = localNode;
-        //         this.node$.next(this.treeStore.getNodeById(location.pathname));
-        //     }
-        //     else {
-        //         console.log("Not a valid node. Probably looking at resources");
-        //     }
-        // }
+            this.selectionCmp.setStyle({display: 'flex'});
+            this.routerCmp.setStyle({display: 'none'});
+
+            this.codePanelCmp.setCollapsed(true);
+            this.navTreeListCmp.setSelection(node);
+            this.breadcrumbCmp.setSelection(node);
+            this.dataviewNavCmp.setData(node.childNodes);
+        }
+        else {
+            console.log('showing example')
+
+            //this.navTreePanelCmp.setStyle({display: 'none'});
+
+            //this.selectionCmp.setHidden(true)
+
+            this.showCode = true
+            this.codeButtonCmp.setHidden(false);
+
+            this.selectionCmp.setStyle({display: 'none'});
+            this.routerCmp.setStyle({display: 'flex'});
+
+
+            //[style]="{zIndex: 100, backgroundColor: 'white'}"
+
+
+            this.codePanelCmp.setCollapsed(false);
+            this.navTreeListCmp.setSelection(node);
+            this.breadcrumbCmp.setSelection(node);
+            this.ngZone.run(() => this.router.navigateByUrl(node.id)).then();
+            this.setCodeTabs(node);
+        }
+    }
+
+    selectionchangeNavTreeList(event) {
+        this.nav(event.record)
+    }
+
+    clickDataviewNav = (event) => {
+        this.nav(event.location.record);
+    }
+
+    changeBreadcrumb = (event) => {
+        this.nav(event.node);
     }
 
     readyLeftContainer = (event) => {
+
         this.leftContainerCmp = event.detail.cmp;
         var title
         if(window['title'] == null) {
@@ -247,7 +210,7 @@ export class AppComponent implements OnInit {
 
     readyNavTreeList = (event) => {
         this.navTreeListCmp = event.detail.cmp;
-        this.navTreeListCmp.setStore(this.navTreeView);
+        this.navTreeListCmp.setStore(this.treeStore);
         this.afterAllLoaded('readyNavTreeList');
     }
 
@@ -291,6 +254,30 @@ export class AppComponent implements OnInit {
         this.afterAllLoaded('readyNestedlist');
     }
 
+    toggleCode = () => {
+        console.log('toggleCode')
+
+        this.codePanelCmp.setCollapsed(this.showCode)
+        this.showCode = !this.showCode
+        // [iconCls]="'x-font-icon ' + (showCode ? 'md-icon-close' : 'md-icon-code')"
+        // this.showCode = !this.showCode;
+        // this.highlightCode();
+        // //this.hideCode = !this.hideCode;
+        // console.log(this.hideCode)
+        // this.codePanelCmp.setHidden(!this.hideCode)
+        // this.hideCode = !this.hideCode;
+    }
+
+    itemtapNestedList = (event, record) => {
+        var id = event.record.data.id
+        this.onNavChange(id, event.record)
+    }
+
+    backNestedList = (event) => {
+        var id = event.node.getId()
+        this.onNavChange(id, event.node)
+    }
+
     onNavChange = (nodeId, node) => {
         this.nav(node);
         return
@@ -303,72 +290,9 @@ export class AppComponent implements OnInit {
         if(nodeId === '' || nodeId) {
         location.hash = nodeId;
         //this.navigate(nodeId)
-        this.navigate(node)
+        this.nav(node)
         }
     }
-
-    toggleCode = () => {
-        console.log('toggleCode')
-        this.showCode = !this.showCode;
-        this.highlightCode();
-        //this.hideCode = !this.hideCode;
-        console.log(this.hideCode)
-        this.codePanelCmp.setHidden(!this.hideCode)
-        this.hideCode = !this.hideCode;
-    }
-
-    doTap = (event, record) => {
-    }
-
-    doItemTap = (event, record) => {
-        var id = event.record.data.id
-        this.onNavChange(id, event.record)
-    }
-
-    doBack = (event) => {
-        var id = event.node.getId()
-        this.onNavChange(id, event.node)
-    }
-
-    clickDataviewNav = (event) => {
-        // var id = event.location.record.data.id
-        // this.navigate(id)
-        //this.navigate(event.location.record)
-        this.nav(event.location.record);
-    }
-
-    breadcrumbChange = (event) => {
-        console.log('breadcrumbChange')
-        var node = event.node
-        this.breadcrumbCmp.setSelection(node);
-        this.nav(node);
-    }
-
-nav(node) {
-    if (node.childNodes.length > 0) {
-        this.hideExamples = false
-        this.hideSelections = true
-    }
-    else {
-        this.hideExamples = true
-        this.hideSelections = false
-    }
-    this.codeButtonCmp.setHidden(this.hideSelections)
-    this.dataviewNavCmp.setHidden(this.hideExamples)
-    this.routerCmp.setHidden(this.hideSelections)
-    if (this.hideExamples == false) {
-        console.log('set selection data')
-        if (this.dataviewNavCmp != undefined) {
-            this.dataviewNavCmp.setData(node.childNodes)
-        }
-    }
-    else {
-        console.log('navigate')
-               console.log(node.id)
-        this.ngZone.run(() => this.router.navigateByUrl(node.id)).then();
-        this.setCodeTabs(node);
-    }
-}
 
 
 
@@ -378,73 +302,42 @@ nav(node) {
     //     this.ngZone.run(() => this.router.navigateByUrl(location)).then();
     // }
 
-    navigate = (record) => {
-        console.log(record)
-        if (record == null) {
-            return;
-        }
-        //this.ngZone.run(() => this.router.navigateByUrl(record)).then();
+    // navigate = (record) => {
+    //     console.log(record)
+    //     if (record == null) {
+    //         return;
+    //     }
+    //     //this.ngZone.run(() => this.router.navigateByUrl(record)).then();
 
-        //var hash = record.data.hash;
-        var hash = record.data.name;
-        var childNum = record.childNodes.length;
-        //var node = this.dataviewNavCmp.getStore().findNode('hash', hash);
-        var node = this.dataviewNavCmp.getStore().findNode('name', hash);
-        //console.log(node)
-        //this.breadcrumbCmp.setSelection(node);
+    //     //var hash = record.data.hash;
+    //     var hash = record.data.name;
+    //     var childNum = record.childNodes.length;
+    //     //var node = this.dataviewNavCmp.getStore().findNode('hash', hash);
+    //     var node = this.dataviewNavCmp.getStore().findNode('name', hash);
+    //     //console.log(node)
+    //     //this.breadcrumbCmp.setSelection(node);
 
-        // if (childNum == 0) { //} && hash != undefined) {
-        //     //window.location.hash = '#' + hash;
-        //     this.showRouter(node);
-        //     //console.log(' ready to route')
-        //     //var location = '#' + hash
-        //     //console.log(location)
-        //     //console.log(node)
-        //     //this.router.navigateByUrl(node.id)
-        //     // this.files = getFiles(node, _code);
-        //     // this.ngZone.run(() => this.router.navigateByUrl(node.id)).then();
-        // }
-        // else {
-        //     //window.location.hash = '#' + hash;
-        //     this.showSelection(node);
-        // }
-
-        if(Ext.os.is.Phone) {
-            this.navTreePanelCmp.setCollapsed(true);
-        }
-    }
-
-    // showSelection = (node) => {
-    //    // this.selectionCmp.setHidden(false);
-    //     //this.router.hidden = true;
-
-    //     this.files = []
-    //     console.log(node)
-    //     this.dataviewNavCmp.setData(node.childNodes);
-
-
-    //     //this.hideSelections = false;
-    //     this.hideExamples = true;
-    //     //this.codeButtonCmp.setHidden(true);
-    // }
-
-    // showRouter = (node) => {
-    //    // this.selectionCmp.setHidden(true);
-    //     console.log('in showRouter')
-    //     console.dir(this)
-    //     this.files = getFiles(node, _code);
-    //     this.ngZone.run(() => this.router.navigateByUrl(node.id)).then();
-    //     //this.router.hidden = false;
-    //     //this.hideSelections = true;
-    //     this.hideExamples = false;
-    //     //this.codeButtonCmp.setHidden(false);
-
-    //     // if(Ext.os.is.Phone) {
-    //     //     this.navTreePanelCmp.setCollapsed(true);
+    //     // if (childNum == 0) { //} && hash != undefined) {
+    //     //     //window.location.hash = '#' + hash;
+    //     //     this.showRouter(node);
+    //     //     //console.log(' ready to route')
+    //     //     //var location = '#' + hash
+    //     //     //console.log(location)
+    //     //     //console.log(node)
+    //     //     //this.router.navigateByUrl(node.id)
+    //     //     // this.files = getFiles(node, _code);
+    //     //     // this.ngZone.run(() => this.router.navigateByUrl(node.id)).then();
+    //     // }
+    //     // else {
+    //     //     //window.location.hash = '#' + hash;
+    //     //     this.showSelection(node);
     //     // }
 
-    //     this.setCodeTabs(node);
+    //     if(Ext.os.is.Phone) {
+    //         this.navTreePanelCmp.setCollapsed(true);
+    //     }
     // }
+
 
 
     setCodeTabs = (node) => {
@@ -462,9 +355,8 @@ nav(node) {
 
         this.files = getFiles(node, _code);
         var componentName = node.data.name.replace(/ /g,"")
-
         var codeMap = _code[componentName];
-        //console.log(codeMap)
+        console.log(codeMap)
         // this.tabPanelCmp.removeAll();
         // var componentName = currentRoute.hash + 'Component';
 
@@ -482,18 +374,18 @@ nav(node) {
 
         // var codeMap = _code[currentRoute.hashlower];
         this.tabPanelCmp.removeAll();
+        console.log('a')
         // var componentName = currentRoute.hash + 'Component';
-
-
-
         this.setTab(codeMap, componentName + '.html');
         this.setTab(codeMap, componentName + '.ts',);
         this.setTab(codeMap, componentName + '.scss',);
         this.setTab(codeMap, componentName + '.css',);
         this.setTab(codeMap, componentName + 'Data.js');
         this.setTab(codeMap, componentName + 'Dummy.js');
+        console.log('b')
         document.querySelectorAll('pre code').forEach((block) => {
             hljs.highlightBlock(block);
+            console.log('c')
         });
     }
 
@@ -510,32 +402,10 @@ nav(node) {
         }
     }
 
-
-
-
-
-
     highlightCode() {
        document.querySelectorAll(".code").forEach((el) => {
           hljs.highlightBlock(el);
        });
-    }
-
-    selectionchangeNavTreeList(event) {
-        var record = event.record;
-        console.log(record)
-        this.nav(record)
-        //this.navigate(record);
-
-
-        // var record = event.record;
-        // if(record && record.data && record.data.id) {
-        //     var componentSelectedId = record.data.id;
-        //     //console.log(componentSelectedId)
-        //     //this.router.navigate([componentSelectedId])
-
-        //     this.ngZone.run(() => this.router.navigate([componentSelectedId])).then();
-        // }
     }
 
     toggleTree = function(){
@@ -569,64 +439,92 @@ nav(node) {
     }
 
 
-    initialize = () => {
-        //console.log(navTreeRoot)
+//     initialize = () => {
+//         //console.log(navTreeRoot)
 
-        try {
-            this.node$.subscribe(({
-                next: (v) => {
-                this.node = v;
-                //console.log(v)
-                this.files = getFiles(v, _code);
-//                console.log(this.files)
-//                this.highlightCode();
-                //this.hideSelections = this.node.childNodes.length > 0 ? false : true
-                this.hideExamples = this.node.childNodes.length > 0 ? true : false
-                if(this.hideExamples == true) {
-                    if (this.dataviewCmp != undefined) {
-                        this.dataviewCmp.setData(this.node.childNodes)
-                    }
-                }
-                else {
-                    var location = window.location.hash.substr(1);
-                    this.navigate(location)
-                }
-                }
-            }));
+//         try {
+//             this.node$.subscribe(({
+//                 next: (v) => {
+//                 this.node = v;
+//                 //console.log(v)
+//                 this.files = getFiles(v, _code);
+// //                console.log(this.files)
+// //                this.highlightCode();
+//                 //this.hideSelections = this.node.childNodes.length > 0 ? false : true
+//                 this.hideExamples = this.node.childNodes.length > 0 ? true : false
+//                 if(this.hideExamples == true) {
+//                     if (this.dataviewCmp != undefined) {
+//                         this.dataviewCmp.setData(this.node.childNodes)
+//                     }
+//                 }
+//                 else {
+//                     var location = window.location.hash.substr(1);
+//                     this.navigate(location)
+//                 }
+//                 }
+//             }));
 
-            this.router.events.subscribe((val) => {
-                if (val instanceof NavigationEnd) {
-                var localNode = this.treeStore.getNodeById(val.url);
-                if (localNode) {
-                    this.files = getFiles(localNode, _code);
-                    this.showCode = false;
-                    this.node$.next(localNode);
-                } else {
-                    console.log("Not a valid node. Probably looking at resources");
-                }
+//             this.router.events.subscribe((val) => {
+//                 if (val instanceof NavigationEnd) {
+//                 var localNode = this.treeStore.getNodeById(val.url);
+//                 if (localNode) {
+//                     this.files = getFiles(localNode, _code);
+//                     this.showCode = false;
+//                     this.node$.next(localNode);
+//                 } else {
+//                     console.log("Not a valid node. Probably looking at resources");
+//                 }
 
-                this.node = localNode;
-                //console.log(this.breadcrumbCmp)
-                this.breadcrumbCmp.setSelection(this.node)
-                }
-            });
-        }
-        catch(e) {
-            console.log('constructor')
-            console.error(e)
-        }
-    }
+//                 this.node = localNode;
+//                 //console.log(this.breadcrumbCmp)
+//                 this.breadcrumbCmp.setSelection(this.node)
+//                 }
+//             });
+//         }
+//         catch(e) {
+//             console.log('constructor')
+//             console.error(e)
+//         }
+//     }
 
-    ngOnInit() {
-        // var localNode = this.treeStore.getNodeById(location.pathname);
-        // if(localNode) {
-        //     this.node = localNode;
-        //     this.node$.next(this.treeStore.getNodeById(location.pathname));
-        // }
-        // else {
-        //     console.log("Not a valid node. Probably looking at resources");
-        // }
-    }
+    // ngOnInit() {
+    //     // var localNode = this.treeStore.getNodeById(location.pathname);
+    //     // if(localNode) {
+    //     //     this.node = localNode;
+    //     //     this.node$.next(this.treeStore.getNodeById(location.pathname));
+    //     // }
+    //     // else {
+    //     //     console.log("Not a valid node. Probably looking at resources");
+    //     // }
+    // }
+
+
+// export class Route {
+//     hash: any
+//     hashlower: any
+//     component: any
+//     default: any
+
+//     constructor(hash, hashlower, component, defaultRoute) {
+//         try {
+//             if (!hash) {
+//                 throw "error: hash param is required";
+//             }
+//         } catch (e) {
+//             console.error(e);
+//         }
+//         this.hash = hash;
+//         this.hashlower = hashlower;
+//         this.component = component;
+//         if (defaultRoute != undefined) {
+//             this.default = defaultRoute;
+//         }
+//     }
+
+//     isActiveRoute(hashedPath) {
+//         return hashedPath.replace("#", "") === this.hash;
+//     }
+// }
 
 
 
@@ -671,3 +569,36 @@ export class MyComponentUsingGestures implements OnInit, OnDestroy {
         }
     }
 }
+
+
+    // showSelection = (node) => {
+    //    // this.selectionCmp.setHidden(false);
+    //     //this.router.hidden = true;
+
+    //     this.files = []
+    //     console.log(node)
+    //     this.dataviewNavCmp.setData(node.childNodes);
+
+
+    //     //this.hideSelections = false;
+    //     this.hideExamples = true;
+    //     //this.codeButtonCmp.setHidden(true);
+    // }
+
+    // showRouter = (node) => {
+    //    // this.selectionCmp.setHidden(true);
+    //     console.log('in showRouter')
+    //     console.dir(this)
+    //     this.files = getFiles(node, _code);
+    //     this.ngZone.run(() => this.router.navigateByUrl(node.id)).then();
+    //     //this.router.hidden = false;
+    //     //this.hideSelections = true;
+    //     this.hideExamples = false;
+    //     //this.codeButtonCmp.setHidden(false);
+
+    //     // if(Ext.os.is.Phone) {
+    //     //     this.navTreePanelCmp.setCollapsed(true);
+    //     // }
+
+    //     this.setCodeTabs(node);
+    // }
