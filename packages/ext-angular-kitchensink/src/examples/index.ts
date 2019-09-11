@@ -252,14 +252,14 @@ const treeRoot = {
           { text: 'Needle Gauge', component: NeedleGaugeComponent, layout: 'center', navIcon: 'icon-gauge-charts' }
         ]},
         { text: 'Layouts', navIcon: 'icon-layouts', children: [
-          { text: 'accordion', component: AccordionLayoutComponent, navIcon: 'icon-layout-accordion' },
-          { text: 'card', component: CardLayoutComponent, navIcon: 'icon-layout-card' },
-          { text: 'center', component: CenterLayoutComponent, navIcon: 'icon-layout-center' },
-          { text: 'fit', component: FitLayoutComponent, navIcon: 'icon-layout-fit' },
-          { text: 'form', component: FormLayoutComponent, layout: 'auto', navIcon: 'icon-layout-form' },
-          { text: 'hbox', component: hboxLayoutComponent, layout: 'auto', navIcon: 'icon-layout-horizontal-box' },
-          { text: 'resizable', component: ResizableLayoutComponent, navIcon: 'icon-layout-box' },
-          { text: 'vbox', component: vboxLayoutComponent, layout: 'auto', navIcon: 'icon-layout-vertical-box' }
+          { text: 'Accordion Layout', component: AccordionLayoutComponent, navIcon: 'icon-layout-accordion' },
+          { text: 'Card Layout', component: CardLayoutComponent, navIcon: 'icon-layout-card' },
+          { text: 'Center Layout', component: CenterLayoutComponent, navIcon: 'icon-layout-center' },
+          { text: 'Fit Layout', component: FitLayoutComponent, navIcon: 'icon-layout-fit' },
+          { text: 'Form Layout', component: FormLayoutComponent, layout: 'auto', navIcon: 'icon-layout-form' },
+          { text: 'hbox Layout', component: hboxLayoutComponent, layout: 'auto', navIcon: 'icon-layout-horizontal-box' },
+          { text: 'Resizable Layout', component: ResizableLayoutComponent, navIcon: 'icon-layout-box' },
+          { text: 'vbox Layout', component: vboxLayoutComponent, layout: 'auto', navIcon: 'icon-layout-vertical-box' }
         ]},
         { text: 'Lists', navIcon: 'icon-lists', children: [
           { text: 'Basic List', component: BasicListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-list' },
