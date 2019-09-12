@@ -98,7 +98,7 @@ export class AppComponent {
     }
 
     nav(node) {
-        console.log('in nav function, node is:');console.dir(node)
+        //console.log('in nav function, node is:');console.dir(node)
         if (node.childNodes.length > 0) {
             this.hideExamples = false
         }
