@@ -48,7 +48,6 @@ export class ProxiesDragDropComponent {
       proxy: 'none',
       listeners: {
         dragmove: (source, info) => {
-          console.log("dragmove")
           const pos = info.proxy.current;
           this.noneText = Ext.String.format('X: {0}, Y: {1}', Math.round(pos.x), Math.round(pos.y));
           this.noneRef.setHtml(this.noneText);

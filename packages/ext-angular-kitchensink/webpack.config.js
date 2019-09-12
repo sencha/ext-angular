@@ -1,8 +1,9 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
-const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin')
-const portfinder = require('portfinder')
+const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const portfinder = require('portfinder');
 
 const webpack = require("webpack")
 const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin
@@ -95,7 +96,15 @@ module.exports = function (env) {
         exclude: /System.import/
       }),
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.DefinePlugin({
+      new CopyWebpackPlugin([{
+        from: '../node_modules/@sencha/ext-ux/modern/resources',
+        to: './ext/ux'
+    }]),
+    new CopyWebpackPlugin([{
+        from: '../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js',
+        to: './webcomponents-bundle.js'
+    }]),
+    new webpack.DefinePlugin({
         BUILD_VERSION: JSON.stringify(build_v)
     })
     ]
