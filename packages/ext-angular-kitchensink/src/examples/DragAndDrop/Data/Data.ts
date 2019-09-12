@@ -32,7 +32,6 @@ export class DataDragDropComponent {
   }
 
   sourceReady = (event) => {
-      console.log(event)
     this.sourceRef = event.detail.cmp.el;
     this.source.setElement(this.sourceRef);
   }
