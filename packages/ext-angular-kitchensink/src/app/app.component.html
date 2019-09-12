@@ -1,5 +1,6 @@
 
-<ext-panel [viewport]="true" layout="fit" [bodyStyle]="bodyStyle" [fullscreen]="true" [weighted]="true">
+<ext-panel (ready)="readyViewport($event)" [viewport]="true" layout="fit" [bodyStyle]="bodyStyle" [fullscreen]="true" [weighted]="true">
+
     <!-- ext-titlebar starts-->
     <ext-titlebar docked="top" [weight]="10" *ngIf="!isPhone" >
         <ext-button iconCls="x-fa fa-bars" (tap)="toggleTree()"></ext-button>
@@ -9,7 +10,7 @@
     </ext-titlebar>
     <!-- ext-titlebar ends-->
 
-    <!-- Breadcrumb starts-->
+    <!-- ext-toolbar starts-->
     <ext-toolbar docked="top" [weight]="10" *ngIf="!isPhone" padding="0">
         <ext-breadcrumbbar
             (ready)="readyBreadcrumb($event)"
@@ -21,25 +22,20 @@
             height="100%"
         >
         </ext-breadcrumbbar>
-
-        <!-- [hidden]="files.length > 0 ? false : true" -->
-
-        <!-- code ext-button starts-->
         <ext-button
             *ngIf="!isPhone"
             (ready)="readyCodeButton($event)"
             (tap)="toggleCode($event)"
             [weight]="5"
             ui="fab"
-            [iconCls]="'x-font-icon ' + (showCode ? 'md-icon-close' : 'md-icon-code')"
+            [iconCls]="'x-font-icon ' + (collapseCode ? 'md-icon-code' : 'md-icon-close')"
             [top]="isDesktop ? -4 : 35"
             right="15"
             zIndex="10000"
         >
         </ext-button>
-        <!-- code ext-button ends-->
     </ext-toolbar>
-    <!-- Breadcrumb ends-->
+    <!-- ext-toolbar ends-->
 
     <!-- Navtree starts-->
     <ext-panel
@@ -63,46 +59,38 @@
         >
         </ext-searchfield>
         <ext-treelist
+            (ready)="readyNavTreeList($event)"
+            (selectionchange)="selectionchangeNavTreeList($event)"
             ui="nav"
             [expanderFirst]="false"
             [expanderOnly]="true"
             [selectOnExpander]="true"
-
-            (ready)="readyNavTreeList($event)"
-            (selectionchange)="selectionchangeNavTreeList($event)"
         >
         </ext-treelist>
     </ext-panel>
     <!-- Navtree ends-->
 
-    <!-- [store]="treeStore" -->
-
-    <!-- [hidden]="hideSelections"
-    [hidden]="hideExamples"
-        [hidden]="files.length > 0 ? false: true"
-[hidden]="!hideExamples"
-[hidden]="hideExamples"
-scrollable="y"
--->
-
     <!-- selections starts-->
     <ext-panel (ready)="readySelection($event)" [bodyStyle]="bodyStyle" *ngIf="!isPhone">
         <ext-dataview
+            (ready)="readyDataviewNav($event)"
+            (childtap)="clickDataviewNav($event)"
             [itemTpl]="tpl"
-            [store]="treeStore"
             [style]="{'background':'top','display':'block','text-align':'center'}"
             [inline]="true"
             [centered]="true"
             [itemCls]="'div.app-thumbnail'"
-            (childtap)="clickDataviewNav($event)"
-            (ready)="readyDataviewNav($event)"
         >
         </ext-dataview>
     </ext-panel>
     <!-- selections ends-->
 
     <!-- examples starts-->
-    <ext-container (ready)="readyRouter($event)" *ngIf="!isPhone" scrollable="true">
+    <ext-container
+        (ready)="readyRouter($event)"
+        *ngIf="!isPhone"
+        scrollable="true"
+    >
         <router-outlet #extroute></router-outlet>
     </ext-container>
     <!-- examples ends-->
@@ -110,28 +98,24 @@ scrollable="y"
     <!-- [hideAnimation]="{type: 'slideOut', direction: 'right', duration: 100, easing: 'ease' }"
     [showAnimation]="{type: 'slideIn', direction: 'left', duration: 100, easing: 'ease' }" -->
 
-
-    <!-- [collapsed]="hideCode" -->
-
     <!-- code window starts-->
     <ext-panel
         (ready)="readyCodePanel($event)"
         docked="right"
         [hidden]="false"
-        [collapsed]="false"
+        [collapsed]="collapseCode"
         [weight]="5"
-        width="500"
+        width="700"
         layout= "fit"
         [style]="{zIndex: 3}"
         [resizable]="{ edges: 'west', dynamic: true }"
         [header]="false"
         [collapsible]="{ direction: 'right' }"
-
     >
         <ext-tabpanel
+            (ready)="readyTabPanel($event)"
             [shadow]="true"
             [tabBar]="{layout: {pack: 'left'}}"
-            (ready)="readyTabPanel($event)"
         >
             <ext-panel *ngFor="let file of files" [hidden]="files.length > 0 ? false: true"
                 layout="fit"
@@ -147,33 +131,18 @@ scrollable="y"
     </ext-panel>
     <!-- code window ends-->
 
-  <!-- nestedlist starts-->
-  <ext-nestedlist *ngIf="isPhone" [hidden]="hideSelections"
-    [title]="'ExtAngular 7.0 Kitchen Sink'"
-    [store]="treeStore"
-    [layout]="{type: 'card',animation: {duration: 250,easing: 'ease-in-out'}}"
-    (itemtap)="itemtapNestedList($event)"
-    (back)="backNestedList($event)"
-    (ready)="readyNestedlist($event)">
-  </ext-nestedlist>
-<!-- nestedlist ends-->
+    <!-- nestedlist starts-->
+    <ext-nestedlist
+        (ready)="readyNestedlist($event)"
+        (itemtap)="itemtapNestedList($event)"
+        (back)="backNestedList($event)"
+        *ngIf="isPhone"
+        [hidden]="hideSelections"
+        [title]="'ExtAngular 7.0 Kitchen Sink'"
+        [store]="treeStore"
+        [layout]="{type: 'card',animation: {duration: 250,easing: 'ease-in-out'}}"
+    >
+    </ext-nestedlist>
+    <!-- nestedlist ends-->
 
 </ext-panel>
-
-
-
-    <!-- <ext-toolbar docked="top" [weight]="10" padding="0">
-        <ext-container >
-            <header #extitem>
-                <div class="container">
-                    <nav style="float: right;">
-                        <ul style="display: flex;list-style-type: none;">
-                        <li><a style="padding: 1em;" href="#" routerLink="/">Home</a></li>
-                        <li><a style="padding: 1em;" href="#" routerLink="components/lists/grouped">Grouped List</a></li>
-                        <li><a style="padding: 1em;" href="#" routerLink="grids/core_features/basic_grid">Basic Grid</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </header>
-        </ext-container>
-    </ext-toolbar> -->

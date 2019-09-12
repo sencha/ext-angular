@@ -11,7 +11,6 @@ export const cssClassName = (file) => {
 
 export const getFiles = (node, allCode) => {
     const name = node.data.name.replace(/\s+/g, "");
-    console.log(name)
     const codeMap = allCode[name] || {};
     const files = Object.keys(codeMap).map((file) => {
         return {

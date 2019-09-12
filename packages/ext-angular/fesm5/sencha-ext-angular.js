@@ -41,8 +41,8 @@ var EngBase = /** @class */ (function () {
     };
     //******* base start */
     EngBase.prototype.initMe = function () {
-        console.log('');
-        console.log('*** initMe for ' + this.currentElName);
+        //console.log('');
+        //console.log('*** initMe for ' + this.currentElName);
         this.createRawChildren();
         this.setHasParent();
         this.setDirection();
@@ -146,7 +146,7 @@ var EngBase = /** @class */ (function () {
             this.newDiv.parentNode.removeChild(this.newDiv);
             Ext.onReady(function () {
                 methis.currentEl.A.ext = Ext.create(meA.props);
-                console.log('0-Ext.application: ' + meA.props.xtype);
+                //console.log('0-Ext.application: ' + meA.props.xtype);
                 methis.assessChildren(methis.base, methis.xtype);
                 Ext.application({
                     name: 'MyEWCApp',
@@ -155,10 +155,11 @@ var EngBase = /** @class */ (function () {
                         if (window['router']) {
                             window['router'].init();
                         }
-                        console.log(methis.base.DIRECTION + ' in launch ');
+                        //console.log(methis.base.DIRECTION + ' in launch ');
                         if (methis.base.DIRECTION == 'BottomToTop') {
-                            console.log('the last thing to do...');
+                            //console.log('the last thing to do...');
                             methis.last = true;
+                            methis.sendReadyEvent(methis);
                         }
                     }
                 });
@@ -167,36 +168,36 @@ var EngBase = /** @class */ (function () {
         else if (this.parentNode == null || this.parentElName.substring(0, 4) != 'EXT-') {
             A.props.renderTo = this.newDiv;
             Ext.onReady(function () {
-                console.log('1- Ext.create: ' + methis.currentElName + ' HTML parent: ' + methis.currentElName);
-                console.dir(meA.props);
+                //console.log('1- Ext.create: ' + methis.currentElName + ' HTML parent: ' + methis.currentElName);
+                //console.dir(meA.props)
                 methis.currentEl.A.ext = Ext.create(meA.props);
                 methis.newDiv.parentNode.replaceChild(methis.currentEl.A.ext.el.dom, methis.newDiv);
                 methis.assessChildren(methis.base, methis.xtype);
-                console.log('after assessChildren');
+                //console.log('after assessChildren');
                 //var wc = meA.ext.el.dom.nextSibling;
                 //wc.parentNode.removeChild(wc);
             });
         }
         else {
             Ext.onReady(function () {
-                console.log('3- Ext.create: ' + methis.currentElName + '  Ext parent: ' + methis.parentElName);
+                //console.log('3- Ext.create: ' + methis.currentElName + '  Ext parent: ' + methis.parentElName);
                 methis.currentEl.A.ext = Ext.create(meA.props);
                 methis.assessChildren(methis.base, methis.xtype);
             });
         }
     };
     EngBase.prototype.assessChildren = function (base, xtype) {
-        console.log('assessChildren for: ' + xtype);
+        //console.log('assessChildren for: ' + xtype);
         var A = this.currentEl.A;
         if (this._extitems != undefined) {
             if (this._extitems.length == 1) {
-                console.log('set html');
+                //console.log('set html');
                 A.ext.setHtml(this._extitem.nativeElement);
             }
         }
         if (this._extitems != undefined) {
             if (this._extroutes.length == 1) {
-                console.log('set router');
+                //console.log('set router');
                 A.ext.setHtml(this._extroute.nativeElement);
                 //childItem.childCmp = Ext.create({xtype:'widget', ewc:item.getAttribute('ewc'), element:Ext.get(item.parentNode.removeChild(item))})
             }
@@ -205,19 +206,19 @@ var EngBase = /** @class */ (function () {
             A.CHILDRENCOMPONENTSLEFT == 0 &&
             A.CHILDRENCOMPONENTSADDED == 0 &&
             !this.hasParent) {
-            console.log('Solo');
-            console.log('ready event for ' + this.currentElName);
+            //console.log('Solo');
+            //console.log('1- ready event for ' + this.currentElName);
             this.sendReadyEvent(this);
         }
         else if (A.CHILDRENCOMPONENTSADDED > 0) {
-            console.log('addChildren');
-            console.dir(A.CHILDRENCOMPONENTS);
-            console.log(this.node.A);
+            //console.log('addChildren');
+            //console.dir(A.CHILDRENCOMPONENTS);
+            //console.log(this.node.A);
             this.addChildren(this, A.CHILDRENCOMPONENTS);
             //console.log('send ready for CHILDRENCOMPONENTSADDED > 0');
-            console.log('ready event for ' + this.currentElName);
-            this.sendReadyEvent(this);
-            this.node.remove();
+            //console.log('ready event for ' + this.currentElName);
+            //this.sendReadyEvent(this);
+            //this.node.remove(); ?? is this needed??
         }
         // else if (this.parentNode != null && this.A.CHILDRENCOMPONENTSCOUNT == 0) {
         //     console.log('send ready for ' + this.A.xtype);
@@ -229,21 +230,21 @@ var EngBase = /** @class */ (function () {
         //     ) {
         if (this.hasParent) {
             if (base.DIRECTION == 'TopToBottom') {
-                console.log('TopToBottom');
+                //console.log('TopToBottom');
                 this.parentEl.A.CHILDRENCOMPONENTS.push(this);
                 this.parentEl.A.CHILDRENCOMPONENTSADDED++;
                 this.parentEl.A.CHILDRENCOMPONENTSLEFT--;
                 if (this.parentEl.A.CHILDRENCOMPONENTSLEFT == 0) {
                     //console.log(this.parentEl)
                     this.addChildren(this.parentEl, this.parentEl.A.CHILDRENCOMPONENTS);
-                    console.log('ready event for ' + this.parentElName + '(parent)');
+                    //console.log('3- ready event for ' + this.parentElName + '(parent)');
                     this.sendReadyEvent(this.parentEl);
                 }
             }
             else {
                 this.parentEl.A.CHILDRENCOMPONENTS.push(this.currentEl);
                 this.parentEl.A.CHILDRENCOMPONENTSADDED++;
-                console.log('ready event for ' + this.currentElName);
+                //console.log('4- ready event for ' + this.currentElName);
                 this.sendReadyEvent(this);
             }
         }
@@ -256,7 +257,7 @@ var EngBase = /** @class */ (function () {
         //    childItem.childCmp = children[i].A.ext;
         //    this.addTheChild(childItem.parentCmp, childItem.childCmp, null);
         //}
-        console.dir(children);
+        //console.dir(children)
         for (var i = 0; i < children.length; i++) {
             var childItem = { parentCmp: {}, childCmp: {} };
             childItem.parentCmp = this.currentEl.A.ext;
@@ -416,15 +417,15 @@ var EngBase = /** @class */ (function () {
         // }
     };
     EngBase.prototype.atEnd = function () {
-        console.log('*** at end');
-        console.log('this - ' + this.currentElName);
-        console.dir(this.currentEl.A);
+        //console.log('*** at end');
+        //console.log('this - ' + this.currentElName);
+        //console.dir(this.currentEl.A);
         if (this.parentEl != null) {
-            console.log('parent - ' + this.parentElName);
-            console.dir(this.parentEl.A);
+            //console.log('parent - ' + this.parentElName);
+            //console.dir(this.parentEl.A);
         }
         else {
-            console.log('No EXT parent');
+            //console.log('No EXT parent');
         }
     };
     Object.defineProperty(EngBase.prototype, "currentEl", {
@@ -628,8 +629,8 @@ var EngBase = /** @class */ (function () {
             childCmp = this.currentEl.A.ext;
             if (this.parentEl != null) {
                 parentCmp = this.parentEl.A.ext;
-                console.log(childCmp);
-                console.log(parentCmp);
+                //console.log(childCmp)
+                //console.log(parentCmp)
                 if (childCmp == undefined || parentCmp == undefined)
                     if (parentCmp.xtype == 'button' && childCmp.xtype == 'menu') {
                         //console.log('button/menu not deleted')

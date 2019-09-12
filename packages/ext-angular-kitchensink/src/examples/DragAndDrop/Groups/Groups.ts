@@ -30,36 +30,35 @@ export class GroupsDragDropComponent {
     this.parentRef.destroy = this.doDestroy.bind(this);
   }
 
-  src1Ready = (ele) => {
-    this.src1Ref = ele.ext.el;
+  src1Ready = (event) => {
+    this.src1Ref = event.detail.cmp.el;
     this.sources[0].setElement(this.src1Ref);
   }
 
-  src2Ready = (ele) => {
-    this.src2Ref = ele.ext.el;
+  src2Ready = (event) => {
+    this.src2Ref = event.detail.cmp.el;
     this.sources[1].setElement(this.src2Ref);
   }
 
-  srcbReady = (ele) => {
-    this.srcbRef = ele.ext.el;
+  srcbReady = (event) => {
+    this.srcbRef = event.detail.cmp.el;
     this.sources[2].setElement(this.srcbRef);
   }
 
-  tar1Ready = (ele) => {
-    this.tar1Ref = ele.ext.el;
+  tar1Ready = (event) => {
+    this.tar1Ref = event.detail.cmp.el;
     this.sources[3].setElement(this.tar1Ref);
   }
 
-  tar2Ready = (ele) => {
-    this.tar2Ref = ele.ext.el;
+  tar2Ready = (event) => {
+    this.tar2Ref = event.detail.cmp.el;
     this.sources[4].setElement(this.tar2Ref);
   }
 
-  tarbReady = (ele) => {
-    this.tarbRef = ele.ext.el;
+  tarbReady = (event) => {
+    this.tarbRef = event.detail.cmp.el;
     this.sources[5].setElement(this.tarbRef);
   }
-
 
   createSource = (cfg) => new Ext.drag.Source(
     Object.assign(cfg, {
