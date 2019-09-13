@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { VERSION } from '@angular/core';
 //import { Subject } from "rxjs";
 import { getFiles } from "./code_preview_helper";
-import { _code } from "./code"
+//import { _code } from "./code"
 
 Ext.require([
     'Ext.MessageBox',
@@ -93,9 +93,9 @@ export class AppComponent {
         var hash = window.location.hash.substr(1);
         if (hash == '') {hash = 'all';}
         var node = this.treeStore.findNode('name', hash);
-        console.log('1')
         this.nav(node);
     }
+
 
     nav(node) {
         //console.log('in nav function, node is:');console.dir(node)
@@ -173,9 +173,11 @@ export class AppComponent {
     }
 
     setCodeTabs = (node) => {
-        this.files = getFiles(node, _code);
+        console.log(node)
+        this.files = getFiles(node, window['_code']);
+        console.log(this.files)
         var componentName = node.data.name.replace(/ /g,"")
-        var codeMap = _code[componentName];
+        var codeMap = window['_code'][componentName];
         this.tabPanelCmp.removeAll();
         this.setTab(codeMap, componentName + '.html');
         this.setTab(codeMap, componentName + '.ts',);

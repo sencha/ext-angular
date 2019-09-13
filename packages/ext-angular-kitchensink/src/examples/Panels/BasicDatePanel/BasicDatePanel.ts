@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'basic-date-panel-component',
-  templateUrl: "./BasicDate.html",
+  templateUrl: "./BasicDatePanel.html",
   styles: [``]
 })
 

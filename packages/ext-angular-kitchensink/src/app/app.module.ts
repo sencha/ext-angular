@@ -30,7 +30,7 @@ import {SheetComponent} from "../examples/Sheet/Sheet"
 import {ProgressBarComponent} from "../examples/ProgressBar/ProgressBar"
 import {TitleBarComponent} from "../examples/TitleBar/TitleBar"
 import {ToolBarComponent} from "../examples/ToolBars/ToolBar/ToolBar"
-import {BreadcrumbToolBarComponent} from "../examples/ToolBars/BreadcrumbToolbar/BreadcrumbToolbar"
+import {BreadcrumbToolBarComponent} from "../examples/ToolBars/BreadcrumbToolBar/BreadcrumbToolBar"
 import {ToolTipComponent} from "../examples/ToolTip/ToolTip"
 import {ColorPickerComponent} from '../examples/ColorPicker/ColorPicker';
 import {FroalaEditorComponent} from '../examples/FroalaEditor/FroalaEditor';
@@ -81,7 +81,7 @@ import {EditableGridComponent} from '../examples/Grid/EditableGrid/EditableGrid'
 import {GroupedGridComponent} from '../examples/Grid/GroupedGrid/GroupedGrid';
 import {LockingGridComponent} from '../examples/Grid/LockingGrid/LockingGrid';
 import {XMLGridComponent} from '../examples/Grid/XMLGrid/XMLGrid';
-import {RowEditingComponent} from '../examples/Grid/RowEditing/RowEditing';
+import {EditableRowComponent} from '../examples/Grid/EditableRow/EditableRow';
 import {InfiniteGridComponent} from '../examples/Grid/InfiniteGrid/InfiniteGrid';
 
 import {GridToolsComponent} from '../examples/Grid/AddonsDecorations/GridTools/GridTools';
@@ -171,11 +171,11 @@ import {GroupsDragDropComponent} from '../examples/DragAndDrop/Groups/Groups';
 import {FilesDragDropComponent} from '../examples/DragAndDrop/Files/Files';
 import {DataDragDropComponent} from '../examples/DragAndDrop/Data/Data';
 
-import {BasicPanelComponent} from '../examples/Panels/Basic/Basic';
-import {BasicDatePanelComponent} from '../examples/Panels/BasicDate/BasicDate';
-import {AdvancedDatePanelComponent} from '../examples/Panels/AdvancedDate/AdvancedDate';
-import {TimePanelComponent} from '../examples/Panels/TimePanel/Time';
-import {CollapsiblePanelComponent} from '../examples/Panels/Collapsible/Collapsible';
+import {BasicPanelsComponent} from '../examples/Panels/BasicPanels/BasicPanels';
+import {BasicDatePanelComponent} from '../examples/Panels/BasicDatePanel/BasicDatePanel';
+import {AdvancedDatePanelComponent} from '../examples/Panels/AdvancedDatePanel/AdvancedDatePanel';
+import {TimePanelComponent} from '../examples/Panels/TimePanel/TimePanel';
+import {CollapsiblePanelComponent} from '../examples/Panels/CollapsiblePanel/CollapsiblePanel';
 import {ResizableHandleComponent} from '../examples/Panels/ResizableHandle/ResizableHandle';
 import {DialogPopupComponent} from '../examples/Popups/Dialog/Dialog';
 import {MessagePopupComponent} from '../examples/Popups/Message/Message';
@@ -183,9 +183,9 @@ import {ToastPopupComponent} from '../examples/Popups/Toast/Toast';
 
 import {BasicListComponent} from '../examples/Lists/BasicList/BasicList';
 import {DisclosureListComponent} from '../examples/Lists/Disclosure/Disclosure';
-import {GroupedListComponent} from '../examples/Lists/Grouped/GroupedList';
+import {GroupedListComponent} from '../examples/Lists/GroupedList/GroupedList';
 import {NestedListComponent} from '../examples/Lists/NestedList/NestedList';
-import {PagingListComponent} from '../examples/Lists/Paging/PagingList';
+import {PagingListComponent} from '../examples/Lists/PagingList/PagingList';
 import {PullRefreshListComponent} from '../examples/Lists/PullRefresh/PullRefresh';
 import {BasicAccordionSwiperComponent} from '../examples/Lists/BasicAccordionSwiper/BasicAccordionSwiper';
 import {BasicStepSwiperComponent} from '../examples/Lists/BasicStepSwiper/BasicStepSwiper';
@@ -193,11 +193,11 @@ import {UndoableAccordionSwiperComponent} from '../examples/Lists/UndoableAccord
 import {UndoableStepSwiperComponent} from '../examples/Lists/UndoableStepSwiper/UndoableStepSwiper';
 
 import {TouchEventsComponent} from '../examples/TouchEvents/TouchEvents';
-import {BasicTabComponent} from '../examples/Tabs/BasicTab/BasicTab';
-import {BottomTabComponent} from '../examples/Tabs/BottomTab/BottomTab';
-import {IconTabComponent} from '../examples/Tabs/IconTab/IconTab';
-import {DesktopTabComponent} from '../examples/Tabs/DesktopTab/DesktopTab';
-import {ClosableTabComponent} from '../examples/Tabs/Closable/Closable';
+import {BasicTabsComponent} from '../examples/Tabs/BasicTabs/BasicTabs';
+import {BottomTabsComponent} from '../examples/Tabs/BottomTabs/BottomTabs';
+import {IconTabsComponent} from '../examples/Tabs/IconTabs/IconTabs';
+import {DesktopTabsComponent} from '../examples/Tabs/DesktopTabs/DesktopTabs';
+import {ClosableTabsComponent} from '../examples/Tabs/ClosableTabs/ClosableTabs';
 // import {ScrollingTabComponent} from './examples/Tabs/Scrolling/Scrolling';
 import {TabBarComponent} from '../examples/Tabs/TabBar/TabBar';
 import {WizardComponent} from '../examples/Wizard/Wizard';
@@ -215,7 +215,7 @@ import {TreeMapComponent} from '../examples/D3/Hierarchy/TreeMap/TreeMap';
 import {SunburstComponent} from '../examples/D3/Hierarchy/Sunburst/Sunburst';
 import {TreeHierarchyComponent} from '../examples/D3/Hierarchy/Tree/Tree';
 import {ZoomableSunburstComponent} from '../examples/D3/Hierarchy/ZoomableSunburst/ZoomableSunburst';
-import { ScrollingTabComponent } from '../examples/Tabs/Scrolling/Scrolling';
+import { ScrollingTabsComponent } from '../examples/Tabs/ScrollingTabs/ScrollingTabs';
 
 import {CalendarService} from "../examples/Calendar/Calendar.service"
 import {GridService} from '../examples/Grid/Grid.service'
@@ -268,7 +268,7 @@ import {GridFilteringService} from '../examples/Grid/AddonsDecorations/GridFilte
     GroupedGridComponent,
     LockingGridComponent,
     XMLGridComponent,
-    RowEditingComponent,
+    EditableRowComponent,
     InfiniteGridComponent,
 
     GridToolsComponent,
@@ -384,7 +384,7 @@ import {GridFilteringService} from '../examples/Grid/AddonsDecorations/GridFilte
     FilesDragDropComponent,
     DataDragDropComponent,
 
-    BasicPanelComponent,
+    BasicPanelsComponent,
     BasicDatePanelComponent,
     AdvancedDatePanelComponent,
     DialogPopupComponent,
@@ -406,12 +406,12 @@ import {GridFilteringService} from '../examples/Grid/AddonsDecorations/GridFilte
     UndoableStepSwiperComponent,
 
     TouchEventsComponent,
-    BasicTabComponent,
-    BottomTabComponent,
-    IconTabComponent,
-    ScrollingTabComponent,
-    DesktopTabComponent,
-    ClosableTabComponent,
+    BasicTabsComponent,
+    BottomTabsComponent,
+    IconTabsComponent,
+    ScrollingTabsComponent,
+    DesktopTabsComponent,
+    ClosableTabsComponent,
     // ScrollingTabComponent,
     TabBarComponent,
     WizardComponent,

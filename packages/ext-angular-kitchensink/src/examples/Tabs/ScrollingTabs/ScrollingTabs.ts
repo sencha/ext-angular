@@ -5,8 +5,8 @@ Ext.require('Ext.layout.overflow.Scroller');
 
 @Component({
   selector: 'scrollingtab-component',
-  templateUrl: "./Scrolling.html",
+  templateUrl: "./ScrollingTabs.html",
   styles: [``]
 })
-export class ScrollingTabComponent {
+export class ScrollingTabsComponent {
 }

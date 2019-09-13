@@ -8,11 +8,11 @@ Ext.require([
 ])
 
 @Component({
-  selector: 'LockingGrid-component',
-  templateUrl: './RowEditing.html',
+  selector: 'EditibleRow-component',
+  templateUrl: './EditableRow.html',
   styles: [``]
 })
-export class RowEditingComponent {
+export class EditableRowComponent {
     // companies = Ext.create('Ext.data.Store', {
     //     model,
     //     autoLoad: true,
@@ -20,7 +20,7 @@ export class RowEditingComponent {
     //     proxy: {
     //       type: 'ajax',
     //       url: 'resources/data/CompanyData.json'
-    //     } 
+    //     }
     // });
     plants = Ext.create('Ext.data.Store', {
         autoLoad: true,

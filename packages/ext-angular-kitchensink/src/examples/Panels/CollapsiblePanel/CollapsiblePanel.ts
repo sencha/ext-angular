@@ -4,7 +4,7 @@ import {mediumText} from '../../dummy';
 
 @Component({
   selector: 'collapsible-panel-component',
-  templateUrl: "./Collapsible.html",
+  templateUrl: "./CollapsiblePanel.html",
   styles: [``]
 })
 

@@ -3,10 +3,10 @@ import { Component } from '@angular/core'
 
 @Component({
   selector: 'colseabletab-component',
-  templateUrl: "./Closable.html",
+  templateUrl: "./ClosableTabs.html",
   styles: [``]
 })
-export class ClosableTabComponent {
+export class ClosableTabsComponent {
 
   nextKey:number = 0;
   tabs:number[] = [

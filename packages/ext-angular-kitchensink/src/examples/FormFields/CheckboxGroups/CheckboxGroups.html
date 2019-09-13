@@ -1,11 +1,11 @@
 <ext-formpanel
+    (ready)="onParentPanelReady($event)"
     title="Checkbox Group Example"
     [bodyPadding]="20"
     scrollable="y"
     [maxHeight]="1400"
     [width]="750"
     margin="10"
-    (ready)="onParentPanelReady($event)"
 >
     <ext-container
         [layout]="{
@@ -223,7 +223,7 @@
             [label]="'Multi-Column<br />(custom widths):'"
             [cls]="'multi-column-checkbox-group'"
             [vertical]="true"
-            [errorTarget]="'side'"
+            errorTarget="side"
             [required]="true"
             [height]="120"
             [hidden]="false"

@@ -22,9 +22,10 @@ export class ValidationComponent {
 
   // A method validator function returns the error message when  invalid, true when valid.
   validateCapilization = (value) => {
+      console.log('here')
     const words = value.split(/\s+/);
 
-    for (let word of words) { 
+    for (let word of words) {
         if (word.length && !word.match(/^[A-Z].*$/)) {
             return 'All words must be capitalized.';
         }

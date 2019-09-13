@@ -146,7 +146,7 @@ var EngBase = /** @class */ (function () {
             this.newDiv.parentNode.removeChild(this.newDiv);
             Ext.onReady(function () {
                 methis.currentEl.A.ext = Ext.create(meA.props);
-                //console.log('0-Ext.application: ' + meA.props.xtype);
+                console.log('0-Ext.application: ' + meA.props.xtype);
                 methis.assessChildren(methis.base, methis.xtype);
                 Ext.application({
                     name: 'MyEWCApp',
@@ -168,10 +168,17 @@ var EngBase = /** @class */ (function () {
         else if (this.parentNode == null || this.parentElName.substring(0, 4) != 'EXT-') {
             A.props.renderTo = this.newDiv;
             Ext.onReady(function () {
-                //console.log('1- Ext.create: ' + methis.currentElName + ' HTML parent: ' + methis.currentElName);
+                console.log('1- Ext.create: ' + methis.currentElName + ' HTML parent: ' + methis.currentElName);
                 //console.dir(meA.props)
                 methis.currentEl.A.ext = Ext.create(meA.props);
-                methis.newDiv.parentNode.replaceChild(methis.currentEl.A.ext.el.dom, methis.newDiv);
+
+                if (methis.newDiv.parentNode != null) {
+                    methis.newDiv.parentNode.replaceChild(methis.currentEl.A.ext.el.dom, methis.newDiv);
+                }
+                else {
+                    console.log('null')
+                }
+
                 methis.assessChildren(methis.base, methis.xtype);
                 //console.log('after assessChildren');
                 //var wc = meA.ext.el.dom.nextSibling;
@@ -180,7 +187,7 @@ var EngBase = /** @class */ (function () {
         }
         else {
             Ext.onReady(function () {
-                //console.log('3- Ext.create: ' + methis.currentElName + '  Ext parent: ' + methis.parentElName);
+                console.log('3- Ext.create: ' + methis.currentElName + '  Ext parent: ' + methis.parentElName);
                 methis.currentEl.A.ext = Ext.create(meA.props);
                 methis.assessChildren(methis.base, methis.xtype);
             });
@@ -206,12 +213,12 @@ var EngBase = /** @class */ (function () {
             A.CHILDRENCOMPONENTSLEFT == 0 &&
             A.CHILDRENCOMPONENTSADDED == 0 &&
             !this.hasParent) {
-            //console.log('Solo');
+            console.log('Solo');
             //console.log('1- ready event for ' + this.currentElName);
             this.sendReadyEvent(this);
         }
         else if (A.CHILDRENCOMPONENTSADDED > 0) {
-            //console.log('addChildren');
+            console.log('addChildren');
             //console.dir(A.CHILDRENCOMPONENTS);
             //console.log(this.node.A);
             this.addChildren(this, A.CHILDRENCOMPONENTS);
@@ -228,25 +235,42 @@ var EngBase = /** @class */ (function () {
         // if (this.hasParent &&
         //     this.parentEl.nodeName.substring(0, 4) == 'EXT-'
         //     ) {
+            console.log(base.DIRECTION)
+            console.log(this.hasParent)
+
+        if (!this.hasParent) {
+            if (base.DIRECTION == 'BottomToTop') {
+                console.log('5- ready event for ' + this.currentElName);
+                this.sendReadyEvent(this);
+            }
+        }
+
+
         if (this.hasParent) {
             if (base.DIRECTION == 'TopToBottom') {
-                //console.log('TopToBottom');
+                console.log('TopToBottom');
                 this.parentEl.A.CHILDRENCOMPONENTS.push(this);
                 this.parentEl.A.CHILDRENCOMPONENTSADDED++;
                 this.parentEl.A.CHILDRENCOMPONENTSLEFT--;
                 if (this.parentEl.A.CHILDRENCOMPONENTSLEFT == 0) {
                     //console.log(this.parentEl)
                     this.addChildren(this.parentEl, this.parentEl.A.CHILDRENCOMPONENTS);
-                    //console.log('3- ready event for ' + this.parentElName + '(parent)');
+                    console.log('3- ready event for ' + this.parentElName + '(parent)');
                     this.sendReadyEvent(this.parentEl);
                 }
             }
             else {
+                console.log('BottomToTop');
                 this.parentEl.A.CHILDRENCOMPONENTS.push(this.currentEl);
                 this.parentEl.A.CHILDRENCOMPONENTSADDED++;
-                //console.log('4- ready event for ' + this.currentElName);
+                console.log('4- ready event for ' + this.currentElName);
                 this.sendReadyEvent(this);
             }
+
+
+
+
+
         }
     };
     EngBase.prototype.addChildren = function (child, children) {
@@ -279,7 +303,8 @@ var EngBase = /** @class */ (function () {
         //console.log('addTheChild: ' + parentxtype + '(' + parentCmp.ext + ')' + ' - ' + childxtype + '(' + childCmp.ext + ')');
         //if (childxtype == 'widget')
         if (this.currentEl.A.ext.initialConfig.align != undefined) {
-            if (parentxtype != 'titlebar' && parentxtype != 'grid' && parentxtype != 'lockedgrid' && parentxtype != 'button') {
+            if (parentxtype != 'tooltip' && parentxtype != 'titlebar' && parentxtype != 'grid' && parentxtype != 'lockedgrid' && parentxtype != 'button') {
+console.log(parentxtype)
                 console.error('Can only use align property if parent is a Titlebar or Grid or Button');
                 return;
             }

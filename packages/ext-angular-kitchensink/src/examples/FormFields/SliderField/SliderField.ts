@@ -1,5 +1,5 @@
 declare var Ext: any;
-import { Component } from '@angular/core'
+import { Component, ChangeDetectorRef } from '@angular/core'
 
 @Component({
   selector: 'sliderfield-component',
@@ -17,16 +17,21 @@ export class SliderFieldComponent {
   liveUpdateValue:number = 60;
   multipleValue:number[] = [10, 70];
 
+    constructor(private cd: ChangeDetectorRef) {}
+
   onSingleChange = (param) => {
     this.singleValue = param.newValue;
+    this.cd.detectChanges();
   }
 
   onMultipleChange = (param) => {
     this.multipleValue = param.newValue;
+    this.cd.detectChanges();
   }
 
   onLiveUpdateChange = (param) => {
     this.liveUpdateValue = param.newValue;
+    this.cd.detectChanges();
   }
 
 }

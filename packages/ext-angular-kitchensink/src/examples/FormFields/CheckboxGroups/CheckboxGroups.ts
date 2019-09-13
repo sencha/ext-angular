@@ -13,7 +13,8 @@ export class CheckBoxGroupsComponent {
   parentPanelCmp:any;
 
   onParentPanelReady = (event) => {
-    this.parentPanelCmp = event.ext;
+      console.log('onParentPanelReady')
+    this.parentPanelCmp = event.detail.cmp;
   }
 
   onSaveFormClick = () => {
