@@ -3,8 +3,8 @@ import { Component } from '@angular/core'
 
 @Component({
   selector: 'desktoptab-component',
-  templateUrl: "./DesktopTab.html",
+  templateUrl: "./DesktopTabs.html",
   styles: [``]
 })
-export class DesktopTabComponent {
+export class DesktopTabsComponent {
 }

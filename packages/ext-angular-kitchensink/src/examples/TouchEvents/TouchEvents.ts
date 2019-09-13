@@ -13,9 +13,9 @@ export class TouchEventsComponent {
   events = [{type:'drag'}, {type:'touchmove'}];
   theDataview:any;
 
-  touchpadReady = (ele) => {
+  touchpadReady = (event) => {
     console.log("touchpadReady")
-    this.touchpadRef = ele.ext.el;
+    this.touchpadRef = event.detail.cmp.el;
     this.touchpadRef.on({
       scope: this,
       touchstart: this.onTouchEvent,

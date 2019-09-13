@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'advanced-date-panel-component',
-  templateUrl: "./AdvancedDate.html",
+  templateUrl: "./AdvancedDatePanel.html",
   styles: [``]
 })
 

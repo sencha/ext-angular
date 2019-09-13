@@ -20,8 +20,8 @@ export class FormPanelComponent {
   disabled:boolean = false;
   formRef:any;
 
-  onReady = (ele) => {
-    this.formRef = ele.ext;
+  onReady = (event) => {
+    this.formRef = event.detail.cmp;
   }
 
   toggleDisabled = () => {

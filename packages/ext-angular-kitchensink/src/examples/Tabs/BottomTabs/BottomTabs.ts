@@ -5,9 +5,9 @@ import { Component } from '@angular/core'
 
 @Component({
   selector: 'bottomtab-component',
-  templateUrl: "./BottomTab.html",
+  templateUrl: "./BottomTabs.html",
   styles: [``]
 })
-export class BottomTabComponent {
+export class BottomTabsComponent {
 
 }

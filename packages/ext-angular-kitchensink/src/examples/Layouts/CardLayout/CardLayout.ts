@@ -1,5 +1,5 @@
 declare var Ext: any;
-import { Component } from '@angular/core'
+import {Component, ChangeDetectorRef} from '@angular/core'
 import colors from '../colors';
 
 @Component({
@@ -9,14 +9,16 @@ import colors from '../colors';
 })
 export class CardLayoutComponent {
 
-  activeCard:number = 0; 
+  activeCard:number = 0;
   animation:any = null;
-
   colors:object = colors;
+
+  constructor(private cd: ChangeDetectorRef) {}
 
   switchCards = (animation) => {
     this.animation = animation;
     this.activeCard = this.activeCard === 0 ? 1 : 0;
+    this.cd.detectChanges();
   }
 
   animationDefaults:object = {

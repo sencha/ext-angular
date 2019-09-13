@@ -13,10 +13,10 @@ export class FroalaEditorComponent {
   editorFieldCmp: any;
   parentFormPanelCmp: any;
 
-  onFormPanelReady = (ele) => {
-    if (ele.ext) {
-      this.parentFormPanelCmp = ele.ext;
-    }
+  onFormPanelReady = (event) => {
+    //if (ele.ext) {
+      this.parentFormPanelCmp = event.detail.cmp;
+    //}
   }
 
   formPanelOkBtnClick = () => {

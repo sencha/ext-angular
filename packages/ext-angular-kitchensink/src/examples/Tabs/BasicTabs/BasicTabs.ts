@@ -2,8 +2,8 @@ declare var Ext: any;
 import {Component} from '@angular/core'
 @Component({
   selector: 'basictab-component',
-  templateUrl: "./BasicTab.html",
+  templateUrl: "./BasicTabs.html",
   styles: [``]
 })
-export class BasicTabComponent {
+export class BasicTabsComponent {
 }

@@ -3,7 +3,7 @@ import {Component, ViewEncapsulation} from '@angular/core'
 
 @Component({
   selector: 'icontab-component',
-  templateUrl: "./IconTab.html",
+  templateUrl: "./IconTabs.html",
   encapsulation: ViewEncapsulation.None,
   styles: [`
   .card {
@@ -37,7 +37,7 @@ import {Component, ViewEncapsulation} from '@angular/core'
 
   `]
 })
-export class IconTabComponent {
+export class IconTabsComponent {
 
   iconItems = [{
     xtype: 'container',

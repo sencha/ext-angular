@@ -3,7 +3,7 @@ import { Component } from '@angular/core'
 
 @Component({
   selector: 'time-panel-component',
-  templateUrl: "./Time.html",
+  templateUrl: "./TimePanel.html",
   styles: [``]
 })
 

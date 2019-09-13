@@ -1,5 +1,5 @@
 declare var Ext: any;
-import { Component } from '@angular/core';
+import {Component, ChangeDetectorRef} from '@angular/core'
 import {BasicGridComponent} from '../../Grid/BasicGrid/BasicGrid';
 
 Ext.require([
@@ -16,9 +16,12 @@ export class AccordionLayoutComponent {
   panel:any;
   gaugeValue: number = 40;
 
+  constructor(private cd: ChangeDetectorRef) {}
+
   updateGauges = (event) => {
         if(this.gaugeValue === event.oldValue[0]){
             this.gaugeValue = event.newValue;
+            this.cd.detectChanges();
         }
     }
 }

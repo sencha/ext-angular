@@ -4,12 +4,12 @@ import {shortText, mediumText} from '../../dummy';
 declare var Ext: any;
 
 @Component({
-  selector: 'basic-panel-component',
-  templateUrl: "./Basic.html",
+  selector: 'basic-panels-component',
+  templateUrl: "./BasicPanels.html",
   styles: [``]
 })
 
-export class BasicPanelComponent implements OnInit  {
+export class BasicPanelsComponent implements OnInit  {
 
   isPhone:boolean = Ext.os.is.Phone;
   text:any;
