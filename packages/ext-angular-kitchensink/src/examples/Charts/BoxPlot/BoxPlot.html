@@ -1,6 +1,6 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
+<ext-container padding="10" layout="vbox" [fitToParent]="true">
 
-  <ext-container docked="top"><div #extitem>
+  <ext-container><div #extitem>
     <chart-toolbar
       [onThemeChange]="this.changeTheme"
       [onToggleZoomOnPan]="this.toggleZoomOnPan"
@@ -11,13 +11,14 @@
   </div></ext-container>
 
   <ext-cartesian downloadServerUrl ="http://svg.sencha.io"
+  flex="1"
     shadow="true"
     [theme]="theme"
     [captions]="{ title: { text: 'Age of Nobel Prize winners by field\n1901 to 2014' } }"
     [store]="this.store"
     [axes]="cartesianAxes"
     [series]="cartesianSeries"
-    [width]="'800px'">
+  >
   </ext-cartesian>
 
 </ext-container>

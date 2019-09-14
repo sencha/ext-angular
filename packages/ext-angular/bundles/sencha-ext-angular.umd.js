@@ -392,7 +392,14 @@
             if (this._extitems != undefined) {
                 if (this._extitems.length == 1) {
                     //console.log('set html');
-                    A.ext.setHtml(this._extitem.nativeElement);
+                    //A.ext.setHtml(this._extitem.nativeElement);
+                    //console.log(this._extitem)
+                    var el = Ext.get(this._extitem.nativeElement);
+                    //var w = Ext.create({xtype:'widget', element: this._extitem});
+                    var w = Ext.create({ xtype: 'widget', element: el });
+                    //console.log(w)
+                    //A.ext.add(w);
+                    this.addTheChild(A.ext, w, null);
                 }
             }
             if (this._extitems != undefined) {
@@ -428,6 +435,12 @@
             // if (this.hasParent &&
             //     this.parentEl.nodeName.substring(0, 4) == 'EXT-'
             //     ) {
+            if (!this.hasParent) {
+                if (base.DIRECTION == 'BottomToTop') {
+                    //console.log('5- ready event for ' + this.currentElName);
+                    this.sendReadyEvent(this);
+                }
+            }
             if (this.hasParent) {
                 if (base.DIRECTION == 'TopToBottom') {
                     //console.log('TopToBottom');
@@ -479,7 +492,7 @@
             //console.log('addTheChild: ' + parentxtype + '(' + parentCmp.ext + ')' + ' - ' + childxtype + '(' + childCmp.ext + ')');
             //if (childxtype == 'widget')
             if (this.currentEl.A.ext.initialConfig.align != undefined) {
-                if (parentxtype != 'titlebar' && parentxtype != 'grid' && parentxtype != 'lockedgrid' && parentxtype != 'button') {
+                if (parentxtype != 'tooltip' && parentxtype != 'titlebar' && parentxtype != 'grid' && parentxtype != 'lockedgrid' && parentxtype != 'button') {
                     console.error('Can only use align property if parent is a Titlebar or Grid or Button');
                     return;
                 }
@@ -1238,6 +1251,10 @@
         //}
         ExtActionsheetComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtActionsheetComponent_1;
+        ExtActionsheetComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtActionsheetComponent = ExtActionsheetComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-actionsheet',
@@ -1514,6 +1531,10 @@
         //}
         ExtAudioComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtAudioComponent_1;
+        ExtAudioComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtAudioComponent = ExtAudioComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-audio',
@@ -1821,6 +1842,10 @@
         //}
         ExtBreadcrumbbarComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtBreadcrumbbarComponent_1;
+        ExtBreadcrumbbarComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtBreadcrumbbarComponent = ExtBreadcrumbbarComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-breadcrumbbar',
@@ -2104,6 +2129,10 @@
         //}
         ExtButtonComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtButtonComponent_1;
+        ExtButtonComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtButtonComponent = ExtButtonComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-button',
@@ -2367,6 +2396,10 @@
         //}
         ExtCalendar_eventComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendar_eventComponent_1;
+        ExtCalendar_eventComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendar_eventComponent = ExtCalendar_eventComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar-event',
@@ -2759,6 +2792,10 @@
         //}
         ExtCalendar_form_addComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendar_form_addComponent_1;
+        ExtCalendar_form_addComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendar_form_addComponent = ExtCalendar_form_addComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar-form-add',
@@ -3118,6 +3155,10 @@
         //}
         ExtCalendar_calendar_pickerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendar_calendar_pickerComponent_1;
+        ExtCalendar_calendar_pickerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendar_calendar_pickerComponent = ExtCalendar_calendar_pickerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar-calendar-picker',
@@ -3510,6 +3551,10 @@
         //}
         ExtCalendar_form_editComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendar_form_editComponent_1;
+        ExtCalendar_form_editComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendar_form_editComponent = ExtCalendar_form_editComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar-form-edit',
@@ -3869,6 +3914,10 @@
         //}
         ExtCalendar_timefieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendar_timefieldComponent_1;
+        ExtCalendar_timefieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendar_timefieldComponent = ExtCalendar_timefieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar-timefield',
@@ -4128,6 +4177,10 @@
         //}
         ExtCalendar_daysheaderComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendar_daysheaderComponent_1;
+        ExtCalendar_daysheaderComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendar_daysheaderComponent = ExtCalendar_daysheaderComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar-daysheader',
@@ -4387,6 +4440,10 @@
         //}
         ExtCalendar_weeksheaderComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendar_weeksheaderComponent_1;
+        ExtCalendar_weeksheaderComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendar_weeksheaderComponent = ExtCalendar_weeksheaderComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar-weeksheader',
@@ -4769,6 +4826,10 @@
         //}
         ExtCalendar_listComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendar_listComponent_1;
+        ExtCalendar_listComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendar_listComponent = ExtCalendar_listComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar-list',
@@ -5165,6 +5226,10 @@
         //}
         ExtCalendar_dayComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendar_dayComponent_1;
+        ExtCalendar_dayComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendar_dayComponent = ExtCalendar_dayComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar-day',
@@ -5561,6 +5626,10 @@
         //}
         ExtCalendar_daysComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendar_daysComponent_1;
+        ExtCalendar_daysComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendar_daysComponent = ExtCalendar_daysComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar-days',
@@ -5952,6 +6021,10 @@
         //}
         ExtCalendar_monthComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendar_monthComponent_1;
+        ExtCalendar_monthComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendar_monthComponent = ExtCalendar_monthComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar-month',
@@ -6317,6 +6390,10 @@
         //}
         ExtCalendarComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendarComponent_1;
+        ExtCalendarComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendarComponent = ExtCalendarComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar',
@@ -6714,6 +6791,10 @@
         //}
         ExtCalendar_weekComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendar_weekComponent_1;
+        ExtCalendar_weekComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendar_weekComponent = ExtCalendar_weekComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar-week',
@@ -7105,6 +7186,10 @@
         //}
         ExtCalendar_weeksComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendar_weeksComponent_1;
+        ExtCalendar_weeksComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendar_weeksComponent = ExtCalendar_weeksComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar-weeks',
@@ -7407,6 +7492,10 @@
         //}
         ExtCalendar_dayviewComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendar_dayviewComponent_1;
+        ExtCalendar_dayviewComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendar_dayviewComponent = ExtCalendar_dayviewComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar-dayview',
@@ -7709,6 +7798,10 @@
         //}
         ExtCalendar_daysviewComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendar_daysviewComponent_1;
+        ExtCalendar_daysviewComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendar_daysviewComponent = ExtCalendar_daysviewComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar-daysview',
@@ -8009,6 +8102,10 @@
         //}
         ExtCalendar_monthviewComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendar_monthviewComponent_1;
+        ExtCalendar_monthviewComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendar_monthviewComponent = ExtCalendar_monthviewComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar-monthview',
@@ -8076,6 +8173,10 @@
         //}
         ExtCalendar_multiviewComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendar_multiviewComponent_1;
+        ExtCalendar_multiviewComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendar_multiviewComponent = ExtCalendar_multiviewComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar-multiview',
@@ -8379,6 +8480,10 @@
         //}
         ExtCalendar_weekviewComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendar_weekviewComponent_1;
+        ExtCalendar_weekviewComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendar_weekviewComponent = ExtCalendar_weekviewComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar-weekview',
@@ -8679,6 +8784,10 @@
         //}
         ExtCalendar_weeksviewComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCalendar_weeksviewComponent_1;
+        ExtCalendar_weeksviewComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCalendar_weeksviewComponent = ExtCalendar_weeksviewComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-calendar-weeksview',
@@ -8972,6 +9081,10 @@
         //}
         ExtCarouselComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCarouselComponent_1;
+        ExtCarouselComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCarouselComponent = ExtCarouselComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-carousel',
@@ -9332,6 +9445,10 @@
         //}
         ExtCartesianComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCartesianComponent_1;
+        ExtCartesianComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCartesianComponent = ExtCartesianComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-cartesian',
@@ -9692,6 +9809,10 @@
         //}
         ExtChartComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtChartComponent_1;
+        ExtChartComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtChartComponent = ExtChartComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-chart',
@@ -10075,6 +10196,10 @@
         //}
         ExtLegendComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtLegendComponent_1;
+        ExtLegendComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtLegendComponent = ExtLegendComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-legend',
@@ -10368,6 +10493,10 @@
         //}
         ExtChartnavigatorComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtChartnavigatorComponent_1;
+        ExtChartnavigatorComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtChartnavigatorComponent = ExtChartnavigatorComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-chartnavigator',
@@ -10729,6 +10858,10 @@
         //}
         ExtPolarComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPolarComponent_1;
+        ExtPolarComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPolarComponent = ExtPolarComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-polar',
@@ -11087,6 +11220,10 @@
         //}
         ExtSpacefillingComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSpacefillingComponent_1;
+        ExtSpacefillingComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSpacefillingComponent = ExtSpacefillingComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-spacefilling',
@@ -11346,6 +11483,10 @@
         //}
         ExtChipComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtChipComponent_1;
+        ExtChipComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtChipComponent = ExtChipComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-chip',
@@ -11599,6 +11740,10 @@
         //}
         ExtComponentComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtComponentComponent_1;
+        ExtComponentComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtComponentComponent = ExtComponentComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-component',
@@ -11890,6 +12035,10 @@
         //}
         ExtContainerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtContainerComponent_1;
+        ExtContainerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtContainerComponent = ExtContainerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-container',
@@ -12151,6 +12300,10 @@
         //}
         ExtD3_canvasComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtD3_canvasComponent_1;
+        ExtD3_canvasComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtD3_canvasComponent = ExtD3_canvasComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-d3-canvas',
@@ -12420,6 +12573,10 @@
         //}
         ExtD3_heatmapComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtD3_heatmapComponent_1;
+        ExtD3_heatmapComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtD3_heatmapComponent = ExtD3_heatmapComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-d3-heatmap',
@@ -12705,6 +12862,10 @@
         //}
         ExtD3_packComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtD3_packComponent_1;
+        ExtD3_packComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtD3_packComponent = ExtD3_packComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-d3-pack',
@@ -12988,6 +13149,10 @@
         //}
         ExtD3_partitionComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtD3_partitionComponent_1;
+        ExtD3_partitionComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtD3_partitionComponent = ExtD3_partitionComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-d3-partition',
@@ -13273,6 +13438,10 @@
         //}
         ExtD3_sunburstComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtD3_sunburstComponent_1;
+        ExtD3_sunburstComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtD3_sunburstComponent = ExtD3_sunburstComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-d3-sunburst',
@@ -13559,6 +13728,10 @@
         //}
         ExtD3_treeComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtD3_treeComponent_1;
+        ExtD3_treeComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtD3_treeComponent = ExtD3_treeComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-d3-tree',
@@ -13845,6 +14018,10 @@
         //}
         ExtD3_horizontal_treeComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtD3_horizontal_treeComponent_1;
+        ExtD3_horizontal_treeComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtD3_horizontal_treeComponent = ExtD3_horizontal_treeComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-d3-horizontal-tree',
@@ -14133,6 +14310,10 @@
         //}
         ExtD3_treemapComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtD3_treemapComponent_1;
+        ExtD3_treemapComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtD3_treemapComponent = ExtD3_treemapComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-d3-treemap',
@@ -14396,6 +14577,10 @@
         //}
         ExtD3_svgComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtD3_svgComponent_1;
+        ExtD3_svgComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtD3_svgComponent = ExtD3_svgComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-d3-svg',
@@ -14659,6 +14844,10 @@
         //}
         ExtD3Component.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtD3Component_1;
+        ExtD3Component.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtD3Component = ExtD3Component_1 = __decorate([
             core.Component({
                 selector: 'ext-d3',
@@ -15085,6 +15274,10 @@
         //}
         ExtBoundlistComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtBoundlistComponent_1;
+        ExtBoundlistComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtBoundlistComponent = ExtBoundlistComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-boundlist',
@@ -15474,6 +15667,10 @@
         //}
         ExtChipviewComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtChipviewComponent_1;
+        ExtChipviewComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtChipviewComponent = ExtChipviewComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-chipview',
@@ -15855,6 +16052,10 @@
         //}
         ExtComponentdataviewComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtComponentdataviewComponent_1;
+        ExtComponentdataviewComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtComponentdataviewComponent = ExtComponentdataviewComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-componentdataview',
@@ -16149,6 +16350,10 @@
         //}
         ExtDataitemComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtDataitemComponent_1;
+        ExtDataitemComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtDataitemComponent = ExtDataitemComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-dataitem',
@@ -16530,6 +16735,10 @@
         //}
         ExtDataviewComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtDataviewComponent_1;
+        ExtDataviewComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtDataviewComponent = ExtDataviewComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-dataview',
@@ -16783,6 +16992,10 @@
         //}
         ExtEmptytextComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtEmptytextComponent_1;
+        ExtEmptytextComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtEmptytextComponent = ExtEmptytextComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-emptytext',
@@ -17049,6 +17262,10 @@
         //}
         ExtIndexbarComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtIndexbarComponent_1;
+        ExtIndexbarComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtIndexbarComponent = ExtIndexbarComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-indexbar',
@@ -17307,6 +17524,10 @@
         //}
         ExtItemheaderComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtItemheaderComponent_1;
+        ExtItemheaderComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtItemheaderComponent = ExtItemheaderComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-itemheader',
@@ -17733,6 +17954,10 @@
         //}
         ExtListComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtListComponent_1;
+        ExtListComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtListComponent = ExtListComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-list',
@@ -18031,6 +18256,10 @@
         //}
         ExtListitemComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtListitemComponent_1;
+        ExtListitemComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtListitemComponent = ExtListitemComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-listitem',
@@ -18289,6 +18518,10 @@
         //}
         ExtListitemplaceholderComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtListitemplaceholderComponent_1;
+        ExtListitemplaceholderComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtListitemplaceholderComponent = ExtListitemplaceholderComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-listitemplaceholder',
@@ -18584,6 +18817,10 @@
         //}
         ExtListswiperitemComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtListswiperitemComponent_1;
+        ExtListswiperitemComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtListswiperitemComponent = ExtListswiperitemComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-listswiperitem',
@@ -18884,6 +19121,10 @@
         //}
         ExtListswiperstepperComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtListswiperstepperComponent_1;
+        ExtListswiperstepperComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtListswiperstepperComponent = ExtListswiperstepperComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-listswiperstepper',
@@ -19217,6 +19458,10 @@
         //}
         ExtNestedlistComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtNestedlistComponent_1;
+        ExtNestedlistComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtNestedlistComponent = ExtNestedlistComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-nestedlist',
@@ -19480,6 +19725,10 @@
         //}
         ExtPullrefreshbarComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPullrefreshbarComponent_1;
+        ExtPullrefreshbarComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPullrefreshbarComponent = ExtPullrefreshbarComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-pullrefreshbar',
@@ -19736,6 +19985,10 @@
         //}
         ExtPullrefreshspinnerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPullrefreshspinnerComponent_1;
+        ExtPullrefreshspinnerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPullrefreshspinnerComponent = ExtPullrefreshspinnerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-pullrefreshspinner',
@@ -19994,6 +20247,10 @@
         //}
         ExtSimplelistitemComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSimplelistitemComponent_1;
+        ExtSimplelistitemComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSimplelistitemComponent = ExtSimplelistitemComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-simplelistitem',
@@ -20358,6 +20615,10 @@
         //}
         ExtDialogComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtDialogComponent_1;
+        ExtDialogComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtDialogComponent = ExtDialogComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-dialog',
@@ -20722,6 +20983,10 @@
         //}
         ExtWindowComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtWindowComponent_1;
+        ExtWindowComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtWindowComponent = ExtWindowComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-window',
@@ -21037,6 +21302,10 @@
         //}
         ExtDrawComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtDrawComponent_1;
+        ExtDrawComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtDrawComponent = ExtDrawComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-draw',
@@ -21179,6 +21448,10 @@
         //}
         ExtSurfaceComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSurfaceComponent_1;
+        ExtSurfaceComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSurfaceComponent = ExtSurfaceComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-surface',
@@ -21498,6 +21771,10 @@
         //}
         ExtEditorComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtEditorComponent_1;
+        ExtEditorComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtEditorComponent = ExtEditorComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-editor',
@@ -21804,6 +22081,10 @@
         //}
         ExtCheckboxComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCheckboxComponent_1;
+        ExtCheckboxComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCheckboxComponent = ExtCheckboxComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-checkbox',
@@ -22110,6 +22391,10 @@
         //}
         ExtCheckboxfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCheckboxfieldComponent_1;
+        ExtCheckboxfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCheckboxfieldComponent = ExtCheckboxfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-checkboxfield',
@@ -22416,6 +22701,10 @@
         //}
         ExtCheckboxgroupComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCheckboxgroupComponent_1;
+        ExtCheckboxgroupComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCheckboxgroupComponent = ExtCheckboxgroupComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-checkboxgroup',
@@ -22794,6 +23083,10 @@
         //}
         ExtComboboxComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtComboboxComponent_1;
+        ExtComboboxComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtComboboxComponent = ExtComboboxComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-combobox',
@@ -23172,6 +23465,10 @@
         //}
         ExtComboboxfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtComboboxfieldComponent_1;
+        ExtComboboxfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtComboboxfieldComponent = ExtComboboxfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-comboboxfield',
@@ -23474,6 +23771,10 @@
         //}
         ExtContainerfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtContainerfieldComponent_1;
+        ExtContainerfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtContainerfieldComponent = ExtContainerfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-containerfield',
@@ -23776,6 +24077,10 @@
         //}
         ExtFieldcontainerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtFieldcontainerComponent_1;
+        ExtFieldcontainerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtFieldcontainerComponent = ExtFieldcontainerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-fieldcontainer',
@@ -24115,6 +24420,10 @@
         //}
         ExtDatefieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtDatefieldComponent_1;
+        ExtDatefieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtDatefieldComponent = ExtDatefieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-datefield',
@@ -24454,6 +24763,10 @@
         //}
         ExtDatepickerfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtDatepickerfieldComponent_1;
+        ExtDatepickerfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtDatepickerfieldComponent = ExtDatepickerfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-datepickerfield',
@@ -24793,6 +25106,10 @@
         //}
         ExtDatepickernativefieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtDatepickernativefieldComponent_1;
+        ExtDatepickernativefieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtDatepickernativefieldComponent = ExtDatepickernativefieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-datepickernativefield',
@@ -25093,6 +25410,10 @@
         //}
         ExtDisplayfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtDisplayfieldComponent_1;
+        ExtDisplayfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtDisplayfieldComponent = ExtDisplayfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-displayfield',
@@ -25414,6 +25735,10 @@
         //}
         ExtEmailfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtEmailfieldComponent_1;
+        ExtEmailfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtEmailfieldComponent = ExtEmailfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-emailfield',
@@ -25709,6 +26034,10 @@
         //}
         ExtFieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtFieldComponent_1;
+        ExtFieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtFieldComponent = ExtFieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-field',
@@ -26015,6 +26344,10 @@
         //}
         ExtGroupcontainerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtGroupcontainerComponent_1;
+        ExtGroupcontainerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtGroupcontainerComponent = ExtGroupcontainerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-groupcontainer',
@@ -26339,6 +26672,10 @@
         //}
         ExtFilefieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtFilefieldComponent_1;
+        ExtFilefieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtFilefieldComponent = ExtFilefieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-filefield',
@@ -26627,6 +26964,10 @@
         //}
         ExtFilebuttonComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtFilebuttonComponent_1;
+        ExtFilebuttonComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtFilebuttonComponent = ExtFilebuttonComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-filebutton',
@@ -26925,6 +27266,10 @@
         //}
         ExtHiddenfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtHiddenfieldComponent_1;
+        ExtHiddenfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtHiddenfieldComponent = ExtHiddenfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-hiddenfield',
@@ -27223,6 +27568,10 @@
         //}
         ExtInputfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtInputfieldComponent_1;
+        ExtInputfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtInputfieldComponent = ExtInputfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-inputfield',
@@ -27552,6 +27901,10 @@
         //}
         ExtNumberfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtNumberfieldComponent_1;
+        ExtNumberfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtNumberfieldComponent = ExtNumberfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-numberfield',
@@ -27910,6 +28263,10 @@
         //}
         ExtFieldpanelComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtFieldpanelComponent_1;
+        ExtFieldpanelComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtFieldpanelComponent = ExtFieldpanelComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-fieldpanel',
@@ -28233,6 +28590,10 @@
         //}
         ExtPasswordfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPasswordfieldComponent_1;
+        ExtPasswordfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPasswordfieldComponent = ExtPasswordfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-passwordfield',
@@ -28567,6 +28928,10 @@
         //}
         ExtPickerfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPickerfieldComponent_1;
+        ExtPickerfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPickerfieldComponent = ExtPickerfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-pickerfield',
@@ -28873,6 +29238,10 @@
         //}
         ExtRadioComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtRadioComponent_1;
+        ExtRadioComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtRadioComponent = ExtRadioComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-radio',
@@ -29179,6 +29548,10 @@
         //}
         ExtRadiofieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtRadiofieldComponent_1;
+        ExtRadiofieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtRadiofieldComponent = ExtRadiofieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-radiofield',
@@ -29486,6 +29859,10 @@
         //}
         ExtRadiogroupComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtRadiogroupComponent_1;
+        ExtRadiogroupComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtRadiogroupComponent = ExtRadiogroupComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-radiogroup',
@@ -29807,6 +30184,10 @@
         //}
         ExtSearchfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSearchfieldComponent_1;
+        ExtSearchfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSearchfieldComponent = ExtSearchfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-searchfield',
@@ -30166,6 +30547,10 @@
         //}
         ExtSelectfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSelectfieldComponent_1;
+        ExtSelectfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSelectfieldComponent = ExtSelectfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-selectfield',
@@ -30478,6 +30863,10 @@
         //}
         ExtSinglesliderfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSinglesliderfieldComponent_1;
+        ExtSinglesliderfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSinglesliderfieldComponent = ExtSinglesliderfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-singlesliderfield',
@@ -30790,6 +31179,10 @@
         //}
         ExtSliderfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSliderfieldComponent_1;
+        ExtSliderfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSliderfieldComponent = ExtSliderfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-sliderfield',
@@ -31128,6 +31521,10 @@
         //}
         ExtSpinnerfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSpinnerfieldComponent_1;
+        ExtSpinnerfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSpinnerfieldComponent = ExtSpinnerfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-spinnerfield',
@@ -31449,6 +31846,10 @@
         //}
         ExtTextfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTextfieldComponent_1;
+        ExtTextfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTextfieldComponent = ExtTextfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-textfield',
@@ -31771,6 +32172,10 @@
         //}
         ExtTextareafieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTextareafieldComponent_1;
+        ExtTextareafieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTextareafieldComponent = ExtTextareafieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-textareafield',
@@ -32107,6 +32512,10 @@
         //}
         ExtTimefieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTimefieldComponent_1;
+        ExtTimefieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTimefieldComponent = ExtTimefieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-timefield',
@@ -32421,6 +32830,10 @@
         //}
         ExtTogglefieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTogglefieldComponent_1;
+        ExtTogglefieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTogglefieldComponent = ExtTogglefieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-togglefield',
@@ -32567,6 +32980,10 @@
         //}
         ExtCleartriggerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCleartriggerComponent_1;
+        ExtCleartriggerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCleartriggerComponent = ExtCleartriggerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-cleartrigger',
@@ -32713,6 +33130,10 @@
         //}
         ExtDatetriggerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtDatetriggerComponent_1;
+        ExtDatetriggerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtDatetriggerComponent = ExtDatetriggerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-datetrigger',
@@ -32859,6 +33280,10 @@
         //}
         ExtExpandtriggerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtExpandtriggerComponent_1;
+        ExtExpandtriggerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtExpandtriggerComponent = ExtExpandtriggerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-expandtrigger',
@@ -33008,6 +33433,10 @@
         //}
         ExtMenutriggerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtMenutriggerComponent_1;
+        ExtMenutriggerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtMenutriggerComponent = ExtMenutriggerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-menutrigger',
@@ -33154,6 +33583,10 @@
         //}
         ExtRevealtriggerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtRevealtriggerComponent_1;
+        ExtRevealtriggerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtRevealtriggerComponent = ExtRevealtriggerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-revealtrigger',
@@ -33300,6 +33733,10 @@
         //}
         ExtSpindowntriggerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSpindowntriggerComponent_1;
+        ExtSpindowntriggerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSpindowntriggerComponent = ExtSpindowntriggerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-spindowntrigger',
@@ -33446,6 +33883,10 @@
         //}
         ExtSpinuptriggerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSpinuptriggerComponent_1;
+        ExtSpinuptriggerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSpinuptriggerComponent = ExtSpinuptriggerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-spinuptrigger',
@@ -33592,6 +34033,10 @@
         //}
         ExtTimetriggerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTimetriggerComponent_1;
+        ExtTimetriggerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTimetriggerComponent = ExtTimetriggerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-timetrigger',
@@ -33738,6 +34183,10 @@
         //}
         ExtTriggerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTriggerComponent_1;
+        ExtTriggerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTriggerComponent = ExtTriggerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-trigger',
@@ -34059,6 +34508,10 @@
         //}
         ExtUrlfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtUrlfieldComponent_1;
+        ExtUrlfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtUrlfieldComponent = ExtUrlfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-urlfield',
@@ -34355,6 +34808,10 @@
         //}
         ExtFieldsetComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtFieldsetComponent_1;
+        ExtFieldsetComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtFieldsetComponent = ExtFieldsetComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-fieldset',
@@ -34726,6 +35183,10 @@
         //}
         ExtFormpanelComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtFormpanelComponent_1;
+        ExtFormpanelComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtFormpanelComponent = ExtFormpanelComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-formpanel',
@@ -34987,6 +35448,10 @@
         //}
         ExtFroalaeditorComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtFroalaeditorComponent_1;
+        ExtFroalaeditorComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtFroalaeditorComponent = ExtFroalaeditorComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-froalaeditor',
@@ -35294,6 +35759,10 @@
         //}
         ExtFroalaeditorfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtFroalaeditorfieldComponent_1;
+        ExtFroalaeditorfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtFroalaeditorfieldComponent = ExtFroalaeditorfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-froalaeditorfield',
@@ -35442,6 +35911,10 @@
         //}
         ExtGridcellbaseComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtGridcellbaseComponent_1;
+        ExtGridcellbaseComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtGridcellbaseComponent = ExtGridcellbaseComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-gridcellbase',
@@ -35596,6 +36069,10 @@
         //}
         ExtBooleancellComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtBooleancellComponent_1;
+        ExtBooleancellComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtBooleancellComponent = ExtBooleancellComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-booleancell',
@@ -35751,6 +36228,10 @@
         //}
         ExtGridcellComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtGridcellComponent_1;
+        ExtGridcellComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtGridcellComponent = ExtGridcellComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-gridcell',
@@ -35899,6 +36380,10 @@
         //}
         ExtCheckcellComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCheckcellComponent_1;
+        ExtCheckcellComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCheckcellComponent = ExtCheckcellComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-checkcell',
@@ -36051,6 +36536,10 @@
         //}
         ExtDatecellComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtDatecellComponent_1;
+        ExtDatecellComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtDatecellComponent = ExtDatecellComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-datecell',
@@ -36203,6 +36692,10 @@
         //}
         ExtNumbercellComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtNumbercellComponent_1;
+        ExtNumbercellComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtNumbercellComponent = ExtNumbercellComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-numbercell',
@@ -36355,6 +36848,10 @@
         //}
         ExtRownumberercellComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtRownumberercellComponent_1;
+        ExtRownumberercellComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtRownumberercellComponent = ExtRownumberercellComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-rownumberercell',
@@ -36506,6 +37003,10 @@
         //}
         ExtTextcellComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTextcellComponent_1;
+        ExtTextcellComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTextcellComponent = ExtTextcellComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-textcell',
@@ -36674,6 +37175,10 @@
         //}
         ExtTreecellComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTreecellComponent_1;
+        ExtTreecellComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTreecellComponent = ExtTreecellComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-treecell',
@@ -36824,6 +37329,10 @@
         //}
         ExtWidgetcellComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtWidgetcellComponent_1;
+        ExtWidgetcellComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtWidgetcellComponent = ExtWidgetcellComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-widgetcell',
@@ -37144,6 +37653,10 @@
         //}
         ExtCelleditorComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCelleditorComponent_1;
+        ExtCelleditorComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCelleditorComponent = ExtCelleditorComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-celleditor',
@@ -37482,6 +37995,10 @@
         //}
         ExtBooleancolumnComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtBooleancolumnComponent_1;
+        ExtBooleancolumnComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtBooleancolumnComponent = ExtBooleancolumnComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-booleancolumn',
@@ -37824,6 +38341,10 @@
         //}
         ExtCheckcolumnComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtCheckcolumnComponent_1;
+        ExtCheckcolumnComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtCheckcolumnComponent = ExtCheckcolumnComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-checkcolumn',
@@ -38159,6 +38680,10 @@
         //}
         ExtGridcolumnComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtGridcolumnComponent_1;
+        ExtGridcolumnComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtGridcolumnComponent = ExtGridcolumnComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-gridcolumn',
@@ -38494,6 +39019,10 @@
         //}
         ExtColumnComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtColumnComponent_1;
+        ExtColumnComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtColumnComponent = ExtColumnComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-column',
@@ -38829,6 +39358,10 @@
         //}
         ExtTemplatecolumnComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTemplatecolumnComponent_1;
+        ExtTemplatecolumnComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTemplatecolumnComponent = ExtTemplatecolumnComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-templatecolumn',
@@ -39165,6 +39698,10 @@
         //}
         ExtDatecolumnComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtDatecolumnComponent_1;
+        ExtDatecolumnComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtDatecolumnComponent = ExtDatecolumnComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-datecolumn',
@@ -39500,6 +40037,10 @@
         //}
         ExtDragcolumnComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtDragcolumnComponent_1;
+        ExtDragcolumnComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtDragcolumnComponent = ExtDragcolumnComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-dragcolumn',
@@ -39836,6 +40377,10 @@
         //}
         ExtNumbercolumnComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtNumbercolumnComponent_1;
+        ExtNumbercolumnComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtNumbercolumnComponent = ExtNumbercolumnComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-numbercolumn',
@@ -40172,6 +40717,10 @@
         //}
         ExtRownumbererComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtRownumbererComponent_1;
+        ExtRownumbererComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtRownumbererComponent = ExtRownumbererComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-rownumberer',
@@ -40514,6 +41063,10 @@
         //}
         ExtSelectioncolumnComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSelectioncolumnComponent_1;
+        ExtSelectioncolumnComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSelectioncolumnComponent = ExtSelectioncolumnComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-selectioncolumn',
@@ -40849,6 +41402,10 @@
         //}
         ExtTextcolumnComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTextcolumnComponent_1;
+        ExtTextcolumnComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTextcolumnComponent = ExtTextcolumnComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-textcolumn',
@@ -41184,6 +41741,10 @@
         //}
         ExtTreecolumnComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTreecolumnComponent_1;
+        ExtTreecolumnComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTreecolumnComponent = ExtTreecolumnComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-treecolumn',
@@ -41668,6 +42229,10 @@
         //}
         ExtGridComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtGridComponent_1;
+        ExtGridComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtGridComponent = ExtGridComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-grid',
@@ -41964,6 +42529,10 @@
         //}
         ExtHeadercontainerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtHeadercontainerComponent_1;
+        ExtHeadercontainerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtHeadercontainerComponent = ExtHeadercontainerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-headercontainer',
@@ -42321,6 +42890,10 @@
         //}
         ExtLockedgridComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtLockedgridComponent_1;
+        ExtLockedgridComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtLockedgridComponent = ExtLockedgridComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-lockedgrid',
@@ -42669,6 +43242,10 @@
         //}
         ExtLockedgridregionComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtLockedgridregionComponent_1;
+        ExtLockedgridregionComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtLockedgridregionComponent = ExtLockedgridregionComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-lockedgridregion',
@@ -42939,6 +43516,10 @@
         //}
         ExtGridcolumnsmenuComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtGridcolumnsmenuComponent_1;
+        ExtGridcolumnsmenuComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtGridcolumnsmenuComponent = ExtGridcolumnsmenuComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-gridcolumnsmenu',
@@ -43209,6 +43790,10 @@
         //}
         ExtGridgroupbythismenuitemComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtGridgroupbythismenuitemComponent_1;
+        ExtGridgroupbythismenuitemComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtGridgroupbythismenuitemComponent = ExtGridgroupbythismenuitemComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-gridgroupbythismenuitem',
@@ -43488,6 +44073,10 @@
         //}
         ExtGridshowingroupsmenuitemComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtGridshowingroupsmenuitemComponent_1;
+        ExtGridshowingroupsmenuitemComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtGridshowingroupsmenuitemComponent = ExtGridshowingroupsmenuitemComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-gridshowingroupsmenuitem',
@@ -43769,6 +44358,10 @@
         //}
         ExtGridsortascmenuitemComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtGridsortascmenuitemComponent_1;
+        ExtGridsortascmenuitemComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtGridsortascmenuitemComponent = ExtGridsortascmenuitemComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-gridsortascmenuitem',
@@ -44050,6 +44643,10 @@
         //}
         ExtGridsortdescmenuitemComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtGridsortdescmenuitemComponent_1;
+        ExtGridsortdescmenuitemComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtGridsortdescmenuitemComponent = ExtGridsortdescmenuitemComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-gridsortdescmenuitem',
@@ -44347,6 +44944,10 @@
         //}
         ExtPagingtoolbarComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPagingtoolbarComponent_1;
+        ExtPagingtoolbarComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPagingtoolbarComponent = ExtPagingtoolbarComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-pagingtoolbar',
@@ -44606,6 +45207,10 @@
         //}
         ExtGridrowComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtGridrowComponent_1;
+        ExtGridrowComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtGridrowComponent = ExtGridrowComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-gridrow',
@@ -44859,6 +45464,10 @@
         //}
         ExtRowbodyComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtRowbodyComponent_1;
+        ExtRowbodyComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtRowbodyComponent = ExtRowbodyComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-rowbody',
@@ -45203,6 +45812,10 @@
         //}
         ExtRoweditorbarComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtRoweditorbarComponent_1;
+        ExtRoweditorbarComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtRoweditorbarComponent = ExtRoweditorbarComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-roweditorbar',
@@ -45456,6 +46069,10 @@
         //}
         ExtRoweditorcellComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtRoweditorcellComponent_1;
+        ExtRoweditorcellComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtRoweditorcellComponent = ExtRoweditorcellComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-roweditorcell',
@@ -45761,6 +46378,10 @@
         //}
         ExtRoweditorComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtRoweditorComponent_1;
+        ExtRoweditorComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtRoweditorComponent = ExtRoweditorComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-roweditor',
@@ -46014,6 +46635,10 @@
         //}
         ExtRoweditorgapComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtRoweditorgapComponent_1;
+        ExtRoweditorgapComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtRoweditorgapComponent = ExtRoweditorgapComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-roweditorgap',
@@ -46272,6 +46897,10 @@
         //}
         ExtRowheaderComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtRowheaderComponent_1;
+        ExtRowheaderComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtRowheaderComponent = ExtRowheaderComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-rowheader',
@@ -46531,6 +47160,10 @@
         //}
         ExtGridsummaryrowComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtGridsummaryrowComponent_1;
+        ExtGridsummaryrowComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtGridsummaryrowComponent = ExtGridsummaryrowComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-gridsummaryrow',
@@ -47034,6 +47667,10 @@
         //}
         ExtTreeComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTreeComponent_1;
+        ExtTreeComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTreeComponent = ExtTreeComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-tree',
@@ -47297,6 +47934,10 @@
         //}
         ExtImageComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtImageComponent_1;
+        ExtImageComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtImageComponent = ExtImageComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-image',
@@ -47560,6 +48201,10 @@
         //}
         ExtImgComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtImgComponent_1;
+        ExtImgComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtImgComponent = ExtImgComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-img',
@@ -47823,6 +48468,10 @@
         //}
         ExtIndicatorComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtIndicatorComponent_1;
+        ExtIndicatorComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtIndicatorComponent = ExtIndicatorComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-indicator',
@@ -48076,6 +48725,10 @@
         //}
         ExtLabelComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtLabelComponent_1;
+        ExtLabelComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtLabelComponent = ExtLabelComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-label',
@@ -48345,6 +48998,10 @@
         //}
         ExtTreelistComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTreelistComponent_1;
+        ExtTreelistComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTreelistComponent = ExtTreelistComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-treelist',
@@ -48498,6 +49155,10 @@
         //}
         ExtTreelistitemComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTreelistitemComponent_1;
+        ExtTreelistitemComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTreelistitemComponent = ExtTreelistitemComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-treelistitem',
@@ -48757,6 +49418,10 @@
         //}
         ExtLoadmaskComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtLoadmaskComponent_1;
+        ExtLoadmaskComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtLoadmaskComponent = ExtLoadmaskComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-loadmask',
@@ -49013,6 +49678,10 @@
         //}
         ExtMaskComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtMaskComponent_1;
+        ExtMaskComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtMaskComponent = ExtMaskComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-mask',
@@ -49289,6 +49958,10 @@
         //}
         ExtMediaComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtMediaComponent_1;
+        ExtMediaComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtMediaComponent = ExtMediaComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-media',
@@ -49568,6 +50241,10 @@
         //}
         ExtMenucheckitemComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtMenucheckitemComponent_1;
+        ExtMenucheckitemComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtMenucheckitemComponent = ExtMenucheckitemComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-menucheckitem',
@@ -49838,6 +50515,10 @@
         //}
         ExtMenuitemComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtMenuitemComponent_1;
+        ExtMenuitemComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtMenuitemComponent = ExtMenuitemComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-menuitem',
@@ -50192,6 +50873,10 @@
         //}
         ExtMenuComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtMenuComponent_1;
+        ExtMenuComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtMenuComponent = ExtMenuComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-menu',
@@ -50473,6 +51158,10 @@
         //}
         ExtMenuradioitemComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtMenuradioitemComponent_1;
+        ExtMenuradioitemComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtMenuradioitemComponent = ExtMenuradioitemComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-menuradioitem',
@@ -50726,6 +51415,10 @@
         //}
         ExtMenuseparatorComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtMenuseparatorComponent_1;
+        ExtMenuseparatorComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtMenuseparatorComponent = ExtMenuseparatorComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-menuseparator',
@@ -51094,6 +51787,10 @@
         //}
         ExtMessageboxComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtMessageboxComponent_1;
+        ExtMessageboxComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtMessageboxComponent = ExtMessageboxComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-messagebox',
@@ -51394,6 +52091,10 @@
         //}
         ExtNavigationviewComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtNavigationviewComponent_1;
+        ExtNavigationviewComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtNavigationviewComponent = ExtNavigationviewComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-navigationview',
@@ -51738,6 +52439,10 @@
         //}
         ExtPanelComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPanelComponent_1;
+        ExtPanelComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPanelComponent = ExtPanelComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-panel',
@@ -52085,6 +52790,10 @@
         //}
         ExtAccordionComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtAccordionComponent_1;
+        ExtAccordionComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtAccordionComponent = ExtAccordionComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-accordion',
@@ -52464,6 +53173,10 @@
         //}
         ExtDatepanelComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtDatepanelComponent_1;
+        ExtDatepanelComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtDatepanelComponent = ExtDatepanelComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-datepanel',
@@ -52725,6 +53438,10 @@
         //}
         ExtDatetitleComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtDatetitleComponent_1;
+        ExtDatetitleComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtDatetitleComponent = ExtDatetitleComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-datetitle',
@@ -53024,6 +53741,10 @@
         //}
         ExtPanelheaderComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPanelheaderComponent_1;
+        ExtPanelheaderComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPanelheaderComponent = ExtPanelheaderComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-panelheader',
@@ -53380,6 +54101,10 @@
         //}
         ExtTimepanelComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTimepanelComponent_1;
+        ExtTimepanelComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTimepanelComponent = ExtTimepanelComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-timepanel',
@@ -53641,6 +54366,10 @@
         //}
         ExtPaneltitleComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPaneltitleComponent_1;
+        ExtPaneltitleComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPaneltitleComponent = ExtPaneltitleComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-paneltitle',
@@ -54067,6 +54796,10 @@
         //}
         ExtYearpickerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtYearpickerComponent_1;
+        ExtYearpickerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtYearpickerComponent = ExtYearpickerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-yearpicker',
@@ -54436,6 +55169,10 @@
         //}
         ExtDatepickerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtDatepickerComponent_1;
+        ExtDatepickerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtDatepickerComponent = ExtDatepickerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-datepicker',
@@ -54799,6 +55536,10 @@
         //}
         ExtPickerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPickerComponent_1;
+        ExtPickerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPickerComponent = ExtPickerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-picker',
@@ -55162,6 +55903,10 @@
         //}
         ExtSelectpickerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSelectpickerComponent_1;
+        ExtSelectpickerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSelectpickerComponent = ExtSelectpickerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-selectpicker',
@@ -55552,6 +56297,10 @@
         //}
         ExtPickerslotComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPickerslotComponent_1;
+        ExtPickerslotComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPickerslotComponent = ExtPickerslotComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-pickerslot',
@@ -55896,6 +56645,10 @@
         //}
         ExtTabletpickerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTabletpickerComponent_1;
+        ExtTabletpickerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTabletpickerComponent = ExtTabletpickerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-tabletpicker',
@@ -56051,6 +56804,10 @@
         //}
         ExtPivotgridcellComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPivotgridcellComponent_1;
+        ExtPivotgridcellComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPivotgridcellComponent = ExtPivotgridcellComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-pivotgridcell',
@@ -56206,6 +56963,10 @@
         //}
         ExtPivotgridgroupcellComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPivotgridgroupcellComponent_1;
+        ExtPivotgridgroupcellComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPivotgridgroupcellComponent = ExtPivotgridgroupcellComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-pivotgridgroupcell',
@@ -56268,6 +57029,10 @@
         //}
         ExtPivotd3containerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPivotd3containerComponent_1;
+        ExtPivotd3containerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPivotd3containerComponent = ExtPivotd3containerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-pivotd3container',
@@ -56539,6 +57304,10 @@
         //}
         ExtPivotheatmapComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPivotheatmapComponent_1;
+        ExtPivotheatmapComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPivotheatmapComponent = ExtPivotheatmapComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-pivotheatmap',
@@ -56829,6 +57598,10 @@
         //}
         ExtPivottreemapComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPivottreemapComponent_1;
+        ExtPivottreemapComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPivottreemapComponent = ExtPivottreemapComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-pivottreemap',
@@ -57384,6 +58157,10 @@
         //}
         ExtPivotgridComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPivotgridComponent_1;
+        ExtPivotgridComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPivotgridComponent = ExtPivotgridComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-pivotgrid',
@@ -57682,6 +58459,10 @@
         //}
         ExtPivotconfigfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPivotconfigfieldComponent_1;
+        ExtPivotconfigfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPivotconfigfieldComponent = ExtPivotconfigfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-pivotconfigfield',
@@ -58027,6 +58808,10 @@
         //}
         ExtPivotconfigcontainerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPivotconfigcontainerComponent_1;
+        ExtPivotconfigcontainerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPivotconfigcontainerComponent = ExtPivotconfigcontainerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-pivotconfigcontainer',
@@ -58398,6 +59183,10 @@
         //}
         ExtPivotconfigformComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPivotconfigformComponent_1;
+        ExtPivotconfigformComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPivotconfigformComponent = ExtPivotconfigformComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-pivotconfigform',
@@ -58750,6 +59539,10 @@
         //}
         ExtPivotconfigpanelComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPivotconfigpanelComponent_1;
+        ExtPivotconfigpanelComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPivotconfigpanelComponent = ExtPivotconfigpanelComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-pivotconfigpanel',
@@ -59121,6 +59914,10 @@
         //}
         ExtPivotsettingsComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPivotsettingsComponent_1;
+        ExtPivotsettingsComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPivotsettingsComponent = ExtPivotsettingsComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-pivotsettings',
@@ -59492,6 +60289,10 @@
         //}
         ExtPivotrangeeditorComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPivotrangeeditorComponent_1;
+        ExtPivotrangeeditorComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPivotrangeeditorComponent = ExtPivotrangeeditorComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-pivotrangeeditor',
@@ -59751,6 +60552,10 @@
         //}
         ExtPivotgridrowComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPivotgridrowComponent_1;
+        ExtPivotgridrowComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPivotgridrowComponent = ExtPivotgridrowComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-pivotgridrow',
@@ -60008,6 +60813,10 @@
         //}
         ExtProgressComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtProgressComponent_1;
+        ExtProgressComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtProgressComponent = ExtProgressComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-progress',
@@ -60265,6 +61074,10 @@
         //}
         ExtProgressbarwidgetComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtProgressbarwidgetComponent_1;
+        ExtProgressbarwidgetComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtProgressbarwidgetComponent = ExtProgressbarwidgetComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-progressbarwidget',
@@ -60568,6 +61381,10 @@
         //}
         ExtSegmentedbuttonComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSegmentedbuttonComponent_1;
+        ExtSegmentedbuttonComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSegmentedbuttonComponent = ExtSegmentedbuttonComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-segmentedbutton',
@@ -60919,6 +61736,10 @@
         //}
         ExtSheetComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSheetComponent_1;
+        ExtSheetComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSheetComponent = ExtSheetComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-sheet',
@@ -61190,6 +62011,10 @@
         //}
         ExtSliderComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSliderComponent_1;
+        ExtSliderComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSliderComponent = ExtSliderComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-slider',
@@ -61445,6 +62270,10 @@
         //}
         ExtThumbComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtThumbComponent_1;
+        ExtThumbComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtThumbComponent = ExtThumbComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-thumb',
@@ -61716,6 +62545,10 @@
         //}
         ExtTogglesliderComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTogglesliderComponent_1;
+        ExtTogglesliderComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTogglesliderComponent = ExtTogglesliderComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-toggleslider',
@@ -61969,6 +62802,10 @@
         //}
         ExtSpacerComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSpacerComponent_1;
+        ExtSpacerComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSpacerComponent = ExtSpacerComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-spacer',
@@ -62243,6 +63080,10 @@
         //}
         ExtSparklinebarComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSparklinebarComponent_1;
+        ExtSparklinebarComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSparklinebarComponent = ExtSparklinebarComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-sparklinebar',
@@ -62505,6 +63346,10 @@
         //}
         ExtSparklineComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSparklineComponent_1;
+        ExtSparklineComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSparklineComponent = ExtSparklineComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-sparkline',
@@ -62781,6 +63626,10 @@
         //}
         ExtSparklineboxComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSparklineboxComponent_1;
+        ExtSparklineboxComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSparklineboxComponent = ExtSparklineboxComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-sparklinebox',
@@ -63048,6 +63897,10 @@
         //}
         ExtSparklinebulletComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSparklinebulletComponent_1;
+        ExtSparklinebulletComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSparklinebulletComponent = ExtSparklinebulletComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-sparklinebullet',
@@ -63316,6 +64169,10 @@
         //}
         ExtSparklinediscreteComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSparklinediscreteComponent_1;
+        ExtSparklinediscreteComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSparklinediscreteComponent = ExtSparklinediscreteComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-sparklinediscrete',
@@ -63595,6 +64452,10 @@
         //}
         ExtSparklinelineComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSparklinelineComponent_1;
+        ExtSparklinelineComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSparklinelineComponent = ExtSparklinelineComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-sparklineline',
@@ -63861,6 +64722,10 @@
         //}
         ExtSparklinepieComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSparklinepieComponent_1;
+        ExtSparklinepieComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSparklinepieComponent = ExtSparklinepieComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-sparklinepie',
@@ -64129,6 +64994,10 @@
         //}
         ExtSparklinetristateComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSparklinetristateComponent_1;
+        ExtSparklinetristateComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSparklinetristateComponent = ExtSparklinetristateComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-sparklinetristate',
@@ -64415,6 +65284,10 @@
         //}
         ExtSplitbuttonComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtSplitbuttonComponent_1;
+        ExtSplitbuttonComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtSplitbuttonComponent = ExtSplitbuttonComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-splitbutton',
@@ -64718,6 +65591,10 @@
         //}
         ExtTabbarComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTabbarComponent_1;
+        ExtTabbarComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTabbarComponent = ExtTabbarComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-tabbar',
@@ -65014,6 +65891,10 @@
         //}
         ExtTabpanelComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTabpanelComponent_1;
+        ExtTabpanelComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTabpanelComponent = ExtTabpanelComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-tabpanel',
@@ -65306,6 +66187,10 @@
         //}
         ExtTabComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTabComponent_1;
+        ExtTabComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTabComponent = ExtTabComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-tab',
@@ -65664,6 +66549,10 @@
         //}
         ExtTooltipComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTooltipComponent_1;
+        ExtTooltipComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTooltipComponent = ExtTooltipComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-tooltip',
@@ -65918,6 +66807,10 @@
         //}
         ExtTitleComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTitleComponent_1;
+        ExtTitleComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTitleComponent = ExtTitleComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-title',
@@ -66213,6 +67106,10 @@
         //}
         ExtTitlebarComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtTitlebarComponent_1;
+        ExtTitlebarComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtTitlebarComponent = ExtTitlebarComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-titlebar',
@@ -66475,6 +67372,10 @@
         //}
         ExtToolComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtToolComponent_1;
+        ExtToolComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtToolComponent = ExtToolComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-tool',
@@ -66737,6 +67638,10 @@
         //}
         ExtPaneltoolComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtPaneltoolComponent_1;
+        ExtPaneltoolComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtPaneltoolComponent = ExtPaneltoolComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-paneltool',
@@ -67030,6 +67935,10 @@
         //}
         ExtToolbarComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtToolbarComponent_1;
+        ExtToolbarComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtToolbarComponent = ExtToolbarComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-toolbar',
@@ -67290,6 +68199,10 @@
         //}
         ExtColorbuttonComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtColorbuttonComponent_1;
+        ExtColorbuttonComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtColorbuttonComponent = ExtColorbuttonComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-colorbutton',
@@ -67543,6 +68456,10 @@
         //}
         ExtColorpickercolorpreviewComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtColorpickercolorpreviewComponent_1;
+        ExtColorpickercolorpreviewComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtColorpickercolorpreviewComponent = ExtColorpickercolorpreviewComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-colorpickercolorpreview',
@@ -67881,6 +68798,10 @@
         //}
         ExtColorfieldComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtColorfieldComponent_1;
+        ExtColorfieldComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtColorfieldComponent = ExtColorfieldComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-colorfield',
@@ -67956,6 +68877,10 @@
         //}
         ExtColorselectorComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtColorselectorComponent_1;
+        ExtColorselectorComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtColorselectorComponent = ExtColorselectorComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-colorselector',
@@ -68223,6 +69148,10 @@
         //}
         ExtGaugeComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtGaugeComponent_1;
+        ExtGaugeComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtGaugeComponent = ExtGaugeComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-gauge',
@@ -68550,6 +69479,10 @@
         //}
         ExtMapComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtMapComponent_1;
+        ExtMapComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtMapComponent = ExtMapComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-map',
@@ -68877,6 +69810,10 @@
         //}
         ExtGoogle_mapComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtGoogle_mapComponent_1;
+        ExtGoogle_mapComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtGoogle_mapComponent = ExtGoogle_mapComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-google-map',
@@ -69144,6 +70081,10 @@
         //}
         ExtRatingComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtRatingComponent_1;
+        ExtRatingComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtRatingComponent = ExtRatingComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-rating',
@@ -69422,6 +70363,10 @@
         //}
         ExtVideoComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtVideoComponent_1;
+        ExtVideoComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtVideoComponent = ExtVideoComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-video',
@@ -69724,6 +70669,10 @@
         //}
         ExtViewportComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtViewportComponent_1;
+        ExtViewportComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtViewportComponent = ExtViewportComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-viewport',
@@ -69861,6 +70810,10 @@
         //}
         ExtWidgetComponent.prototype.ngOnChanges = function (changes) { this.baseOnChanges(changes); };
         var ExtWidgetComponent_1;
+        ExtWidgetComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EngBase, decorators: [{ type: core.Host }, { type: core.Optional }, { type: core.SkipSelf }] }
+        ]; };
         ExtWidgetComponent = ExtWidgetComponent_1 = __decorate([
             core.Component({
                 selector: 'ext-widget',

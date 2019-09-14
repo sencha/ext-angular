@@ -1,4 +1,4 @@
-//Thu Sep 12 2019 09:37:21 GMT-0400 (Eastern Daylight Time)
+//Sat Sep 14 2019 11:39:18 GMT-0400 (EDT)
 declare var Ext: any
 
 import {
@@ -233,7 +233,14 @@ assessChildren(base, xtype) {
     if (this._extitems != undefined) {
         if (this._extitems.length == 1) {
             //console.log('set html');
-            A.ext.setHtml(this._extitem.nativeElement);
+            //A.ext.setHtml(this._extitem.nativeElement);
+            //console.log(this._extitem)
+            var el = Ext.get(this._extitem.nativeElement);
+            //var w = Ext.create({xtype:'widget', element: this._extitem});
+            var w = Ext.create({xtype:'widget', element: el});
+            //console.log(w)
+            //A.ext.add(w);
+            this.addTheChild(A.ext, w, null);
         }
     }
     if (this._extitems != undefined) {
@@ -277,6 +284,16 @@ assessChildren(base, xtype) {
     // if (this.hasParent &&
     //     this.parentEl.nodeName.substring(0, 4) == 'EXT-'
     //     ) {
+
+    if (!this.hasParent) {
+        if (base.DIRECTION == 'BottomToTop') {
+            //console.log('5- ready event for ' + this.currentElName);
+            this.sendReadyEvent(this);
+        }
+    }
+
+
+
 
     if (this.hasParent) {
 
@@ -332,7 +349,7 @@ addTheChild(parentCmp, childCmp, location) {
     //console.log('addTheChild: ' + parentxtype + '(' + parentCmp.ext + ')' + ' - ' + childxtype + '(' + childCmp.ext + ')');
     //if (childxtype == 'widget')
     if (this.currentEl.A.ext.initialConfig.align != undefined) {
-        if (parentxtype != 'titlebar' && parentxtype != 'grid' && parentxtype != 'lockedgrid' && parentxtype != 'button') {
+        if (parentxtype != 'tooltip' && parentxtype != 'titlebar' && parentxtype != 'grid' && parentxtype != 'lockedgrid' && parentxtype != 'button') {
             console.error('Can only use align property if parent is a Titlebar or Grid or Button');
             return;
         }

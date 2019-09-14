@@ -30,6 +30,7 @@ export class PackComponent {
     ],
     proxy: {
         type: 'ajax',
+        
         url: 'resources/data/tree/tree.json'
     },
     idProperty: 'path'

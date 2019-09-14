@@ -13,9 +13,11 @@ export class LockingGridComponent {
   companies = Ext.create('Ext.data.Store', {
     model,
     autoLoad: true,
+    nosim: true,
     pageSize: 0,
     proxy: {
       type: 'ajax',
+      nosim: true,
       url: 'resources/data/CompanyData.json'
     }
   });

@@ -1,5 +1,5 @@
 import { __decorate, __metadata, __param } from 'tslib';
-import { EventEmitter, ContentChild, ContentChildren, QueryList, Component, forwardRef, Host, Optional, SkipSelf, ElementRef, NgModule } from '@angular/core';
+import { EventEmitter, ContentChild, ContentChildren, QueryList, ElementRef, Host, Optional, SkipSelf, Component, forwardRef, NgModule } from '@angular/core';
 
 class EngBase {
     constructor(nativeElement, metaData, hostComponent) {
@@ -186,7 +186,14 @@ class EngBase {
         if (this._extitems != undefined) {
             if (this._extitems.length == 1) {
                 //console.log('set html');
-                A.ext.setHtml(this._extitem.nativeElement);
+                //A.ext.setHtml(this._extitem.nativeElement);
+                //console.log(this._extitem)
+                var el = Ext.get(this._extitem.nativeElement);
+                //var w = Ext.create({xtype:'widget', element: this._extitem});
+                var w = Ext.create({ xtype: 'widget', element: el });
+                //console.log(w)
+                //A.ext.add(w);
+                this.addTheChild(A.ext, w, null);
             }
         }
         if (this._extitems != undefined) {
@@ -222,6 +229,12 @@ class EngBase {
         // if (this.hasParent &&
         //     this.parentEl.nodeName.substring(0, 4) == 'EXT-'
         //     ) {
+        if (!this.hasParent) {
+            if (base.DIRECTION == 'BottomToTop') {
+                //console.log('5- ready event for ' + this.currentElName);
+                this.sendReadyEvent(this);
+            }
+        }
         if (this.hasParent) {
             if (base.DIRECTION == 'TopToBottom') {
                 //console.log('TopToBottom');
@@ -273,7 +286,7 @@ class EngBase {
         //console.log('addTheChild: ' + parentxtype + '(' + parentCmp.ext + ')' + ' - ' + childxtype + '(' + childCmp.ext + ')');
         //if (childxtype == 'widget')
         if (this.currentEl.A.ext.initialConfig.align != undefined) {
-            if (parentxtype != 'titlebar' && parentxtype != 'grid' && parentxtype != 'lockedgrid' && parentxtype != 'button') {
+            if (parentxtype != 'tooltip' && parentxtype != 'titlebar' && parentxtype != 'grid' && parentxtype != 'lockedgrid' && parentxtype != 'button') {
                 console.error('Can only use align property if parent is a Titlebar or Grid or Button');
                 return;
             }
@@ -1007,6 +1020,10 @@ let ExtActionsheetComponent = ExtActionsheetComponent_1 = class ExtActionsheetCo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtActionsheetComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtActionsheetComponent = ExtActionsheetComponent_1 = __decorate([
     Component({
         selector: 'ext-actionsheet',
@@ -1278,6 +1295,10 @@ let ExtAudioComponent = ExtAudioComponent_1 = class ExtAudioComponent extends En
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtAudioComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtAudioComponent = ExtAudioComponent_1 = __decorate([
     Component({
         selector: 'ext-audio',
@@ -1580,6 +1601,10 @@ let ExtBreadcrumbbarComponent = ExtBreadcrumbbarComponent_1 = class ExtBreadcrum
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtBreadcrumbbarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtBreadcrumbbarComponent = ExtBreadcrumbbarComponent_1 = __decorate([
     Component({
         selector: 'ext-breadcrumbbar',
@@ -1858,6 +1883,10 @@ let ExtButtonComponent = ExtButtonComponent_1 = class ExtButtonComponent extends
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtButtonComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtButtonComponent = ExtButtonComponent_1 = __decorate([
     Component({
         selector: 'ext-button',
@@ -2116,6 +2145,10 @@ let ExtCalendar_eventComponent = ExtCalendar_eventComponent_1 = class ExtCalenda
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_eventComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_eventComponent = ExtCalendar_eventComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar-event',
@@ -2503,6 +2536,10 @@ let ExtCalendar_form_addComponent = ExtCalendar_form_addComponent_1 = class ExtC
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_form_addComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_form_addComponent = ExtCalendar_form_addComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar-form-add',
@@ -2857,6 +2894,10 @@ let ExtCalendar_calendar_pickerComponent = ExtCalendar_calendar_pickerComponent_
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_calendar_pickerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_calendar_pickerComponent = ExtCalendar_calendar_pickerComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar-calendar-picker',
@@ -3244,6 +3285,10 @@ let ExtCalendar_form_editComponent = ExtCalendar_form_editComponent_1 = class Ex
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_form_editComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_form_editComponent = ExtCalendar_form_editComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar-form-edit',
@@ -3598,6 +3643,10 @@ let ExtCalendar_timefieldComponent = ExtCalendar_timefieldComponent_1 = class Ex
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_timefieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_timefieldComponent = ExtCalendar_timefieldComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar-timefield',
@@ -3852,6 +3901,10 @@ let ExtCalendar_daysheaderComponent = ExtCalendar_daysheaderComponent_1 = class 
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_daysheaderComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_daysheaderComponent = ExtCalendar_daysheaderComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar-daysheader',
@@ -4106,6 +4159,10 @@ let ExtCalendar_weeksheaderComponent = ExtCalendar_weeksheaderComponent_1 = clas
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_weeksheaderComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_weeksheaderComponent = ExtCalendar_weeksheaderComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar-weeksheader',
@@ -4483,6 +4540,10 @@ let ExtCalendar_listComponent = ExtCalendar_listComponent_1 = class ExtCalendar_
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_listComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_listComponent = ExtCalendar_listComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar-list',
@@ -4874,6 +4935,10 @@ let ExtCalendar_dayComponent = ExtCalendar_dayComponent_1 = class ExtCalendar_da
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_dayComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_dayComponent = ExtCalendar_dayComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar-day',
@@ -5265,6 +5330,10 @@ let ExtCalendar_daysComponent = ExtCalendar_daysComponent_1 = class ExtCalendar_
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_daysComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_daysComponent = ExtCalendar_daysComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar-days',
@@ -5651,6 +5720,10 @@ let ExtCalendar_monthComponent = ExtCalendar_monthComponent_1 = class ExtCalenda
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_monthComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_monthComponent = ExtCalendar_monthComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar-month',
@@ -6011,6 +6084,10 @@ let ExtCalendarComponent = ExtCalendarComponent_1 = class ExtCalendarComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendarComponent = ExtCalendarComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar',
@@ -6403,6 +6480,10 @@ let ExtCalendar_weekComponent = ExtCalendar_weekComponent_1 = class ExtCalendar_
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_weekComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_weekComponent = ExtCalendar_weekComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar-week',
@@ -6789,6 +6870,10 @@ let ExtCalendar_weeksComponent = ExtCalendar_weeksComponent_1 = class ExtCalenda
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_weeksComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_weeksComponent = ExtCalendar_weeksComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar-weeks',
@@ -7086,6 +7171,10 @@ let ExtCalendar_dayviewComponent = ExtCalendar_dayviewComponent_1 = class ExtCal
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_dayviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_dayviewComponent = ExtCalendar_dayviewComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar-dayview',
@@ -7383,6 +7472,10 @@ let ExtCalendar_daysviewComponent = ExtCalendar_daysviewComponent_1 = class ExtC
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_daysviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_daysviewComponent = ExtCalendar_daysviewComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar-daysview',
@@ -7678,6 +7771,10 @@ let ExtCalendar_monthviewComponent = ExtCalendar_monthviewComponent_1 = class Ex
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_monthviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_monthviewComponent = ExtCalendar_monthviewComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar-monthview',
@@ -7740,6 +7837,10 @@ let ExtCalendar_multiviewComponent = ExtCalendar_multiviewComponent_1 = class Ex
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_multiviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_multiviewComponent = ExtCalendar_multiviewComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar-multiview',
@@ -8038,6 +8139,10 @@ let ExtCalendar_weekviewComponent = ExtCalendar_weekviewComponent_1 = class ExtC
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_weekviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_weekviewComponent = ExtCalendar_weekviewComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar-weekview',
@@ -8333,6 +8438,10 @@ let ExtCalendar_weeksviewComponent = ExtCalendar_weeksviewComponent_1 = class Ex
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_weeksviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_weeksviewComponent = ExtCalendar_weeksviewComponent_1 = __decorate([
     Component({
         selector: 'ext-calendar-weeksview',
@@ -8621,6 +8730,10 @@ let ExtCarouselComponent = ExtCarouselComponent_1 = class ExtCarouselComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCarouselComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCarouselComponent = ExtCarouselComponent_1 = __decorate([
     Component({
         selector: 'ext-carousel',
@@ -8976,6 +9089,10 @@ let ExtCartesianComponent = ExtCartesianComponent_1 = class ExtCartesianComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCartesianComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCartesianComponent = ExtCartesianComponent_1 = __decorate([
     Component({
         selector: 'ext-cartesian',
@@ -9331,6 +9448,10 @@ let ExtChartComponent = ExtChartComponent_1 = class ExtChartComponent extends En
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtChartComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtChartComponent = ExtChartComponent_1 = __decorate([
     Component({
         selector: 'ext-chart',
@@ -9709,6 +9830,10 @@ let ExtLegendComponent = ExtLegendComponent_1 = class ExtLegendComponent extends
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtLegendComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtLegendComponent = ExtLegendComponent_1 = __decorate([
     Component({
         selector: 'ext-legend',
@@ -9997,6 +10122,10 @@ let ExtChartnavigatorComponent = ExtChartnavigatorComponent_1 = class ExtChartna
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtChartnavigatorComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtChartnavigatorComponent = ExtChartnavigatorComponent_1 = __decorate([
     Component({
         selector: 'ext-chartnavigator',
@@ -10353,6 +10482,10 @@ let ExtPolarComponent = ExtPolarComponent_1 = class ExtPolarComponent extends En
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPolarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPolarComponent = ExtPolarComponent_1 = __decorate([
     Component({
         selector: 'ext-polar',
@@ -10706,6 +10839,10 @@ let ExtSpacefillingComponent = ExtSpacefillingComponent_1 = class ExtSpacefillin
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSpacefillingComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSpacefillingComponent = ExtSpacefillingComponent_1 = __decorate([
     Component({
         selector: 'ext-spacefilling',
@@ -10960,6 +11097,10 @@ let ExtChipComponent = ExtChipComponent_1 = class ExtChipComponent extends EngBa
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtChipComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtChipComponent = ExtChipComponent_1 = __decorate([
     Component({
         selector: 'ext-chip',
@@ -11208,6 +11349,10 @@ let ExtComponentComponent = ExtComponentComponent_1 = class ExtComponentComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtComponentComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtComponentComponent = ExtComponentComponent_1 = __decorate([
     Component({
         selector: 'ext-component',
@@ -11494,6 +11639,10 @@ let ExtContainerComponent = ExtContainerComponent_1 = class ExtContainerComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtContainerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtContainerComponent = ExtContainerComponent_1 = __decorate([
     Component({
         selector: 'ext-container',
@@ -11750,6 +11899,10 @@ let ExtD3_canvasComponent = ExtD3_canvasComponent_1 = class ExtD3_canvasComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3_canvasComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3_canvasComponent = ExtD3_canvasComponent_1 = __decorate([
     Component({
         selector: 'ext-d3-canvas',
@@ -12014,6 +12167,10 @@ let ExtD3_heatmapComponent = ExtD3_heatmapComponent_1 = class ExtD3_heatmapCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3_heatmapComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3_heatmapComponent = ExtD3_heatmapComponent_1 = __decorate([
     Component({
         selector: 'ext-d3-heatmap',
@@ -12294,6 +12451,10 @@ let ExtD3_packComponent = ExtD3_packComponent_1 = class ExtD3_packComponent exte
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3_packComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3_packComponent = ExtD3_packComponent_1 = __decorate([
     Component({
         selector: 'ext-d3-pack',
@@ -12572,6 +12733,10 @@ let ExtD3_partitionComponent = ExtD3_partitionComponent_1 = class ExtD3_partitio
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3_partitionComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3_partitionComponent = ExtD3_partitionComponent_1 = __decorate([
     Component({
         selector: 'ext-d3-partition',
@@ -12852,6 +13017,10 @@ let ExtD3_sunburstComponent = ExtD3_sunburstComponent_1 = class ExtD3_sunburstCo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3_sunburstComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3_sunburstComponent = ExtD3_sunburstComponent_1 = __decorate([
     Component({
         selector: 'ext-d3-sunburst',
@@ -13133,6 +13302,10 @@ let ExtD3_treeComponent = ExtD3_treeComponent_1 = class ExtD3_treeComponent exte
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3_treeComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3_treeComponent = ExtD3_treeComponent_1 = __decorate([
     Component({
         selector: 'ext-d3-tree',
@@ -13414,6 +13587,10 @@ let ExtD3_horizontal_treeComponent = ExtD3_horizontal_treeComponent_1 = class Ex
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3_horizontal_treeComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3_horizontal_treeComponent = ExtD3_horizontal_treeComponent_1 = __decorate([
     Component({
         selector: 'ext-d3-horizontal-tree',
@@ -13697,6 +13874,10 @@ let ExtD3_treemapComponent = ExtD3_treemapComponent_1 = class ExtD3_treemapCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3_treemapComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3_treemapComponent = ExtD3_treemapComponent_1 = __decorate([
     Component({
         selector: 'ext-d3-treemap',
@@ -13955,6 +14136,10 @@ let ExtD3_svgComponent = ExtD3_svgComponent_1 = class ExtD3_svgComponent extends
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3_svgComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3_svgComponent = ExtD3_svgComponent_1 = __decorate([
     Component({
         selector: 'ext-d3-svg',
@@ -14213,6 +14398,10 @@ let ExtD3Component = ExtD3Component_1 = class ExtD3Component extends EngBase {
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3Component.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3Component = ExtD3Component_1 = __decorate([
     Component({
         selector: 'ext-d3',
@@ -14634,6 +14823,10 @@ let ExtBoundlistComponent = ExtBoundlistComponent_1 = class ExtBoundlistComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtBoundlistComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtBoundlistComponent = ExtBoundlistComponent_1 = __decorate([
     Component({
         selector: 'ext-boundlist',
@@ -15018,6 +15211,10 @@ let ExtChipviewComponent = ExtChipviewComponent_1 = class ExtChipviewComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtChipviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtChipviewComponent = ExtChipviewComponent_1 = __decorate([
     Component({
         selector: 'ext-chipview',
@@ -15394,6 +15591,10 @@ let ExtComponentdataviewComponent = ExtComponentdataviewComponent_1 = class ExtC
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtComponentdataviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtComponentdataviewComponent = ExtComponentdataviewComponent_1 = __decorate([
     Component({
         selector: 'ext-componentdataview',
@@ -15683,6 +15884,10 @@ let ExtDataitemComponent = ExtDataitemComponent_1 = class ExtDataitemComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDataitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDataitemComponent = ExtDataitemComponent_1 = __decorate([
     Component({
         selector: 'ext-dataitem',
@@ -16059,6 +16264,10 @@ let ExtDataviewComponent = ExtDataviewComponent_1 = class ExtDataviewComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDataviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDataviewComponent = ExtDataviewComponent_1 = __decorate([
     Component({
         selector: 'ext-dataview',
@@ -16307,6 +16516,10 @@ let ExtEmptytextComponent = ExtEmptytextComponent_1 = class ExtEmptytextComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtEmptytextComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtEmptytextComponent = ExtEmptytextComponent_1 = __decorate([
     Component({
         selector: 'ext-emptytext',
@@ -16568,6 +16781,10 @@ let ExtIndexbarComponent = ExtIndexbarComponent_1 = class ExtIndexbarComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtIndexbarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtIndexbarComponent = ExtIndexbarComponent_1 = __decorate([
     Component({
         selector: 'ext-indexbar',
@@ -16821,6 +17038,10 @@ let ExtItemheaderComponent = ExtItemheaderComponent_1 = class ExtItemheaderCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtItemheaderComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtItemheaderComponent = ExtItemheaderComponent_1 = __decorate([
     Component({
         selector: 'ext-itemheader',
@@ -17242,6 +17463,10 @@ let ExtListComponent = ExtListComponent_1 = class ExtListComponent extends EngBa
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtListComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtListComponent = ExtListComponent_1 = __decorate([
     Component({
         selector: 'ext-list',
@@ -17535,6 +17760,10 @@ let ExtListitemComponent = ExtListitemComponent_1 = class ExtListitemComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtListitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtListitemComponent = ExtListitemComponent_1 = __decorate([
     Component({
         selector: 'ext-listitem',
@@ -17788,6 +18017,10 @@ let ExtListitemplaceholderComponent = ExtListitemplaceholderComponent_1 = class 
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtListitemplaceholderComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtListitemplaceholderComponent = ExtListitemplaceholderComponent_1 = __decorate([
     Component({
         selector: 'ext-listitemplaceholder',
@@ -18078,6 +18311,10 @@ let ExtListswiperitemComponent = ExtListswiperitemComponent_1 = class ExtListswi
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtListswiperitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtListswiperitemComponent = ExtListswiperitemComponent_1 = __decorate([
     Component({
         selector: 'ext-listswiperitem',
@@ -18373,6 +18610,10 @@ let ExtListswiperstepperComponent = ExtListswiperstepperComponent_1 = class ExtL
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtListswiperstepperComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtListswiperstepperComponent = ExtListswiperstepperComponent_1 = __decorate([
     Component({
         selector: 'ext-listswiperstepper',
@@ -18701,6 +18942,10 @@ let ExtNestedlistComponent = ExtNestedlistComponent_1 = class ExtNestedlistCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtNestedlistComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtNestedlistComponent = ExtNestedlistComponent_1 = __decorate([
     Component({
         selector: 'ext-nestedlist',
@@ -18959,6 +19204,10 @@ let ExtPullrefreshbarComponent = ExtPullrefreshbarComponent_1 = class ExtPullref
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPullrefreshbarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPullrefreshbarComponent = ExtPullrefreshbarComponent_1 = __decorate([
     Component({
         selector: 'ext-pullrefreshbar',
@@ -19210,6 +19459,10 @@ let ExtPullrefreshspinnerComponent = ExtPullrefreshspinnerComponent_1 = class Ex
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPullrefreshspinnerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPullrefreshspinnerComponent = ExtPullrefreshspinnerComponent_1 = __decorate([
     Component({
         selector: 'ext-pullrefreshspinner',
@@ -19463,6 +19716,10 @@ let ExtSimplelistitemComponent = ExtSimplelistitemComponent_1 = class ExtSimplel
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSimplelistitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSimplelistitemComponent = ExtSimplelistitemComponent_1 = __decorate([
     Component({
         selector: 'ext-simplelistitem',
@@ -19822,6 +20079,10 @@ let ExtDialogComponent = ExtDialogComponent_1 = class ExtDialogComponent extends
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDialogComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDialogComponent = ExtDialogComponent_1 = __decorate([
     Component({
         selector: 'ext-dialog',
@@ -20181,6 +20442,10 @@ let ExtWindowComponent = ExtWindowComponent_1 = class ExtWindowComponent extends
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtWindowComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtWindowComponent = ExtWindowComponent_1 = __decorate([
     Component({
         selector: 'ext-window',
@@ -20491,6 +20756,10 @@ let ExtDrawComponent = ExtDrawComponent_1 = class ExtDrawComponent extends EngBa
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDrawComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDrawComponent = ExtDrawComponent_1 = __decorate([
     Component({
         selector: 'ext-draw',
@@ -20628,6 +20897,10 @@ let ExtSurfaceComponent = ExtSurfaceComponent_1 = class ExtSurfaceComponent exte
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSurfaceComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSurfaceComponent = ExtSurfaceComponent_1 = __decorate([
     Component({
         selector: 'ext-surface',
@@ -20942,6 +21215,10 @@ let ExtEditorComponent = ExtEditorComponent_1 = class ExtEditorComponent extends
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtEditorComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtEditorComponent = ExtEditorComponent_1 = __decorate([
     Component({
         selector: 'ext-editor',
@@ -21243,6 +21520,10 @@ let ExtCheckboxComponent = ExtCheckboxComponent_1 = class ExtCheckboxComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCheckboxComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCheckboxComponent = ExtCheckboxComponent_1 = __decorate([
     Component({
         selector: 'ext-checkbox',
@@ -21544,6 +21825,10 @@ let ExtCheckboxfieldComponent = ExtCheckboxfieldComponent_1 = class ExtCheckboxf
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCheckboxfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCheckboxfieldComponent = ExtCheckboxfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-checkboxfield',
@@ -21845,6 +22130,10 @@ let ExtCheckboxgroupComponent = ExtCheckboxgroupComponent_1 = class ExtCheckboxg
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCheckboxgroupComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCheckboxgroupComponent = ExtCheckboxgroupComponent_1 = __decorate([
     Component({
         selector: 'ext-checkboxgroup',
@@ -22218,6 +22507,10 @@ let ExtComboboxComponent = ExtComboboxComponent_1 = class ExtComboboxComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtComboboxComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtComboboxComponent = ExtComboboxComponent_1 = __decorate([
     Component({
         selector: 'ext-combobox',
@@ -22591,6 +22884,10 @@ let ExtComboboxfieldComponent = ExtComboboxfieldComponent_1 = class ExtComboboxf
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtComboboxfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtComboboxfieldComponent = ExtComboboxfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-comboboxfield',
@@ -22888,6 +23185,10 @@ let ExtContainerfieldComponent = ExtContainerfieldComponent_1 = class ExtContain
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtContainerfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtContainerfieldComponent = ExtContainerfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-containerfield',
@@ -23185,6 +23486,10 @@ let ExtFieldcontainerComponent = ExtFieldcontainerComponent_1 = class ExtFieldco
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtFieldcontainerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtFieldcontainerComponent = ExtFieldcontainerComponent_1 = __decorate([
     Component({
         selector: 'ext-fieldcontainer',
@@ -23519,6 +23824,10 @@ let ExtDatefieldComponent = ExtDatefieldComponent_1 = class ExtDatefieldComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDatefieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDatefieldComponent = ExtDatefieldComponent_1 = __decorate([
     Component({
         selector: 'ext-datefield',
@@ -23853,6 +24162,10 @@ let ExtDatepickerfieldComponent = ExtDatepickerfieldComponent_1 = class ExtDatep
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDatepickerfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDatepickerfieldComponent = ExtDatepickerfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-datepickerfield',
@@ -24187,6 +24500,10 @@ let ExtDatepickernativefieldComponent = ExtDatepickernativefieldComponent_1 = cl
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDatepickernativefieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDatepickernativefieldComponent = ExtDatepickernativefieldComponent_1 = __decorate([
     Component({
         selector: 'ext-datepickernativefield',
@@ -24482,6 +24799,10 @@ let ExtDisplayfieldComponent = ExtDisplayfieldComponent_1 = class ExtDisplayfiel
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDisplayfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDisplayfieldComponent = ExtDisplayfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-displayfield',
@@ -24798,6 +25119,10 @@ let ExtEmailfieldComponent = ExtEmailfieldComponent_1 = class ExtEmailfieldCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtEmailfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtEmailfieldComponent = ExtEmailfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-emailfield',
@@ -25088,6 +25413,10 @@ let ExtFieldComponent = ExtFieldComponent_1 = class ExtFieldComponent extends En
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtFieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtFieldComponent = ExtFieldComponent_1 = __decorate([
     Component({
         selector: 'ext-field',
@@ -25389,6 +25718,10 @@ let ExtGroupcontainerComponent = ExtGroupcontainerComponent_1 = class ExtGroupco
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGroupcontainerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGroupcontainerComponent = ExtGroupcontainerComponent_1 = __decorate([
     Component({
         selector: 'ext-groupcontainer',
@@ -25708,6 +26041,10 @@ let ExtFilefieldComponent = ExtFilefieldComponent_1 = class ExtFilefieldComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtFilefieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtFilefieldComponent = ExtFilefieldComponent_1 = __decorate([
     Component({
         selector: 'ext-filefield',
@@ -25991,6 +26328,10 @@ let ExtFilebuttonComponent = ExtFilebuttonComponent_1 = class ExtFilebuttonCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtFilebuttonComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtFilebuttonComponent = ExtFilebuttonComponent_1 = __decorate([
     Component({
         selector: 'ext-filebutton',
@@ -26284,6 +26625,10 @@ let ExtHiddenfieldComponent = ExtHiddenfieldComponent_1 = class ExtHiddenfieldCo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtHiddenfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtHiddenfieldComponent = ExtHiddenfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-hiddenfield',
@@ -26577,6 +26922,10 @@ let ExtInputfieldComponent = ExtInputfieldComponent_1 = class ExtInputfieldCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtInputfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtInputfieldComponent = ExtInputfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-inputfield',
@@ -26901,6 +27250,10 @@ let ExtNumberfieldComponent = ExtNumberfieldComponent_1 = class ExtNumberfieldCo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtNumberfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtNumberfieldComponent = ExtNumberfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-numberfield',
@@ -27254,6 +27607,10 @@ let ExtFieldpanelComponent = ExtFieldpanelComponent_1 = class ExtFieldpanelCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtFieldpanelComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtFieldpanelComponent = ExtFieldpanelComponent_1 = __decorate([
     Component({
         selector: 'ext-fieldpanel',
@@ -27572,6 +27929,10 @@ let ExtPasswordfieldComponent = ExtPasswordfieldComponent_1 = class ExtPasswordf
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPasswordfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPasswordfieldComponent = ExtPasswordfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-passwordfield',
@@ -27901,6 +28262,10 @@ let ExtPickerfieldComponent = ExtPickerfieldComponent_1 = class ExtPickerfieldCo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPickerfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPickerfieldComponent = ExtPickerfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-pickerfield',
@@ -28202,6 +28567,10 @@ let ExtRadioComponent = ExtRadioComponent_1 = class ExtRadioComponent extends En
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRadioComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRadioComponent = ExtRadioComponent_1 = __decorate([
     Component({
         selector: 'ext-radio',
@@ -28503,6 +28872,10 @@ let ExtRadiofieldComponent = ExtRadiofieldComponent_1 = class ExtRadiofieldCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRadiofieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRadiofieldComponent = ExtRadiofieldComponent_1 = __decorate([
     Component({
         selector: 'ext-radiofield',
@@ -28805,6 +29178,10 @@ let ExtRadiogroupComponent = ExtRadiogroupComponent_1 = class ExtRadiogroupCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRadiogroupComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRadiogroupComponent = ExtRadiogroupComponent_1 = __decorate([
     Component({
         selector: 'ext-radiogroup',
@@ -29121,6 +29498,10 @@ let ExtSearchfieldComponent = ExtSearchfieldComponent_1 = class ExtSearchfieldCo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSearchfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSearchfieldComponent = ExtSearchfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-searchfield',
@@ -29475,6 +29856,10 @@ let ExtSelectfieldComponent = ExtSelectfieldComponent_1 = class ExtSelectfieldCo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSelectfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSelectfieldComponent = ExtSelectfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-selectfield',
@@ -29782,6 +30167,10 @@ let ExtSinglesliderfieldComponent = ExtSinglesliderfieldComponent_1 = class ExtS
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSinglesliderfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSinglesliderfieldComponent = ExtSinglesliderfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-singlesliderfield',
@@ -30089,6 +30478,10 @@ let ExtSliderfieldComponent = ExtSliderfieldComponent_1 = class ExtSliderfieldCo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSliderfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSliderfieldComponent = ExtSliderfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-sliderfield',
@@ -30422,6 +30815,10 @@ let ExtSpinnerfieldComponent = ExtSpinnerfieldComponent_1 = class ExtSpinnerfiel
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSpinnerfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSpinnerfieldComponent = ExtSpinnerfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-spinnerfield',
@@ -30738,6 +31135,10 @@ let ExtTextfieldComponent = ExtTextfieldComponent_1 = class ExtTextfieldComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTextfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTextfieldComponent = ExtTextfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-textfield',
@@ -31055,6 +31456,10 @@ let ExtTextareafieldComponent = ExtTextareafieldComponent_1 = class ExtTextareaf
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTextareafieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTextareafieldComponent = ExtTextareafieldComponent_1 = __decorate([
     Component({
         selector: 'ext-textareafield',
@@ -31386,6 +31791,10 @@ let ExtTimefieldComponent = ExtTimefieldComponent_1 = class ExtTimefieldComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTimefieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTimefieldComponent = ExtTimefieldComponent_1 = __decorate([
     Component({
         selector: 'ext-timefield',
@@ -31695,6 +32104,10 @@ let ExtTogglefieldComponent = ExtTogglefieldComponent_1 = class ExtTogglefieldCo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTogglefieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTogglefieldComponent = ExtTogglefieldComponent_1 = __decorate([
     Component({
         selector: 'ext-togglefield',
@@ -31836,6 +32249,10 @@ let ExtCleartriggerComponent = ExtCleartriggerComponent_1 = class ExtCleartrigge
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCleartriggerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCleartriggerComponent = ExtCleartriggerComponent_1 = __decorate([
     Component({
         selector: 'ext-cleartrigger',
@@ -31977,6 +32394,10 @@ let ExtDatetriggerComponent = ExtDatetriggerComponent_1 = class ExtDatetriggerCo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDatetriggerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDatetriggerComponent = ExtDatetriggerComponent_1 = __decorate([
     Component({
         selector: 'ext-datetrigger',
@@ -32118,6 +32539,10 @@ let ExtExpandtriggerComponent = ExtExpandtriggerComponent_1 = class ExtExpandtri
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtExpandtriggerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtExpandtriggerComponent = ExtExpandtriggerComponent_1 = __decorate([
     Component({
         selector: 'ext-expandtrigger',
@@ -32262,6 +32687,10 @@ let ExtMenutriggerComponent = ExtMenutriggerComponent_1 = class ExtMenutriggerCo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMenutriggerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMenutriggerComponent = ExtMenutriggerComponent_1 = __decorate([
     Component({
         selector: 'ext-menutrigger',
@@ -32403,6 +32832,10 @@ let ExtRevealtriggerComponent = ExtRevealtriggerComponent_1 = class ExtRevealtri
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRevealtriggerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRevealtriggerComponent = ExtRevealtriggerComponent_1 = __decorate([
     Component({
         selector: 'ext-revealtrigger',
@@ -32544,6 +32977,10 @@ let ExtSpindowntriggerComponent = ExtSpindowntriggerComponent_1 = class ExtSpind
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSpindowntriggerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSpindowntriggerComponent = ExtSpindowntriggerComponent_1 = __decorate([
     Component({
         selector: 'ext-spindowntrigger',
@@ -32685,6 +33122,10 @@ let ExtSpinuptriggerComponent = ExtSpinuptriggerComponent_1 = class ExtSpinuptri
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSpinuptriggerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSpinuptriggerComponent = ExtSpinuptriggerComponent_1 = __decorate([
     Component({
         selector: 'ext-spinuptrigger',
@@ -32826,6 +33267,10 @@ let ExtTimetriggerComponent = ExtTimetriggerComponent_1 = class ExtTimetriggerCo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTimetriggerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTimetriggerComponent = ExtTimetriggerComponent_1 = __decorate([
     Component({
         selector: 'ext-timetrigger',
@@ -32967,6 +33412,10 @@ let ExtTriggerComponent = ExtTriggerComponent_1 = class ExtTriggerComponent exte
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTriggerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTriggerComponent = ExtTriggerComponent_1 = __decorate([
     Component({
         selector: 'ext-trigger',
@@ -33283,6 +33732,10 @@ let ExtUrlfieldComponent = ExtUrlfieldComponent_1 = class ExtUrlfieldComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtUrlfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtUrlfieldComponent = ExtUrlfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-urlfield',
@@ -33574,6 +34027,10 @@ let ExtFieldsetComponent = ExtFieldsetComponent_1 = class ExtFieldsetComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtFieldsetComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtFieldsetComponent = ExtFieldsetComponent_1 = __decorate([
     Component({
         selector: 'ext-fieldset',
@@ -33940,6 +34397,10 @@ let ExtFormpanelComponent = ExtFormpanelComponent_1 = class ExtFormpanelComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtFormpanelComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtFormpanelComponent = ExtFormpanelComponent_1 = __decorate([
     Component({
         selector: 'ext-formpanel',
@@ -34196,6 +34657,10 @@ let ExtFroalaeditorComponent = ExtFroalaeditorComponent_1 = class ExtFroalaedito
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtFroalaeditorComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtFroalaeditorComponent = ExtFroalaeditorComponent_1 = __decorate([
     Component({
         selector: 'ext-froalaeditor',
@@ -34498,6 +34963,10 @@ let ExtFroalaeditorfieldComponent = ExtFroalaeditorfieldComponent_1 = class ExtF
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtFroalaeditorfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtFroalaeditorfieldComponent = ExtFroalaeditorfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-froalaeditorfield',
@@ -34641,6 +35110,10 @@ let ExtGridcellbaseComponent = ExtGridcellbaseComponent_1 = class ExtGridcellbas
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridcellbaseComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridcellbaseComponent = ExtGridcellbaseComponent_1 = __decorate([
     Component({
         selector: 'ext-gridcellbase',
@@ -34790,6 +35263,10 @@ let ExtBooleancellComponent = ExtBooleancellComponent_1 = class ExtBooleancellCo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtBooleancellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtBooleancellComponent = ExtBooleancellComponent_1 = __decorate([
     Component({
         selector: 'ext-booleancell',
@@ -34940,6 +35417,10 @@ let ExtGridcellComponent = ExtGridcellComponent_1 = class ExtGridcellComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridcellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridcellComponent = ExtGridcellComponent_1 = __decorate([
     Component({
         selector: 'ext-gridcell',
@@ -35083,6 +35564,10 @@ let ExtCheckcellComponent = ExtCheckcellComponent_1 = class ExtCheckcellComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCheckcellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCheckcellComponent = ExtCheckcellComponent_1 = __decorate([
     Component({
         selector: 'ext-checkcell',
@@ -35230,6 +35715,10 @@ let ExtDatecellComponent = ExtDatecellComponent_1 = class ExtDatecellComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDatecellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDatecellComponent = ExtDatecellComponent_1 = __decorate([
     Component({
         selector: 'ext-datecell',
@@ -35377,6 +35866,10 @@ let ExtNumbercellComponent = ExtNumbercellComponent_1 = class ExtNumbercellCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtNumbercellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtNumbercellComponent = ExtNumbercellComponent_1 = __decorate([
     Component({
         selector: 'ext-numbercell',
@@ -35524,6 +36017,10 @@ let ExtRownumberercellComponent = ExtRownumberercellComponent_1 = class ExtRownu
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRownumberercellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRownumberercellComponent = ExtRownumberercellComponent_1 = __decorate([
     Component({
         selector: 'ext-rownumberercell',
@@ -35670,6 +36167,10 @@ let ExtTextcellComponent = ExtTextcellComponent_1 = class ExtTextcellComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTextcellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTextcellComponent = ExtTextcellComponent_1 = __decorate([
     Component({
         selector: 'ext-textcell',
@@ -35833,6 +36334,10 @@ let ExtTreecellComponent = ExtTreecellComponent_1 = class ExtTreecellComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTreecellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTreecellComponent = ExtTreecellComponent_1 = __decorate([
     Component({
         selector: 'ext-treecell',
@@ -35978,6 +36483,10 @@ let ExtWidgetcellComponent = ExtWidgetcellComponent_1 = class ExtWidgetcellCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtWidgetcellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtWidgetcellComponent = ExtWidgetcellComponent_1 = __decorate([
     Component({
         selector: 'ext-widgetcell',
@@ -36293,6 +36802,10 @@ let ExtCelleditorComponent = ExtCelleditorComponent_1 = class ExtCelleditorCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCelleditorComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCelleditorComponent = ExtCelleditorComponent_1 = __decorate([
     Component({
         selector: 'ext-celleditor',
@@ -36626,6 +37139,10 @@ let ExtBooleancolumnComponent = ExtBooleancolumnComponent_1 = class ExtBooleanco
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtBooleancolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtBooleancolumnComponent = ExtBooleancolumnComponent_1 = __decorate([
     Component({
         selector: 'ext-booleancolumn',
@@ -36963,6 +37480,10 @@ let ExtCheckcolumnComponent = ExtCheckcolumnComponent_1 = class ExtCheckcolumnCo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCheckcolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCheckcolumnComponent = ExtCheckcolumnComponent_1 = __decorate([
     Component({
         selector: 'ext-checkcolumn',
@@ -37293,6 +37814,10 @@ let ExtGridcolumnComponent = ExtGridcolumnComponent_1 = class ExtGridcolumnCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridcolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridcolumnComponent = ExtGridcolumnComponent_1 = __decorate([
     Component({
         selector: 'ext-gridcolumn',
@@ -37623,6 +38148,10 @@ let ExtColumnComponent = ExtColumnComponent_1 = class ExtColumnComponent extends
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtColumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtColumnComponent = ExtColumnComponent_1 = __decorate([
     Component({
         selector: 'ext-column',
@@ -37953,6 +38482,10 @@ let ExtTemplatecolumnComponent = ExtTemplatecolumnComponent_1 = class ExtTemplat
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTemplatecolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTemplatecolumnComponent = ExtTemplatecolumnComponent_1 = __decorate([
     Component({
         selector: 'ext-templatecolumn',
@@ -38284,6 +38817,10 @@ let ExtDatecolumnComponent = ExtDatecolumnComponent_1 = class ExtDatecolumnCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDatecolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDatecolumnComponent = ExtDatecolumnComponent_1 = __decorate([
     Component({
         selector: 'ext-datecolumn',
@@ -38614,6 +39151,10 @@ let ExtDragcolumnComponent = ExtDragcolumnComponent_1 = class ExtDragcolumnCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDragcolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDragcolumnComponent = ExtDragcolumnComponent_1 = __decorate([
     Component({
         selector: 'ext-dragcolumn',
@@ -38945,6 +39486,10 @@ let ExtNumbercolumnComponent = ExtNumbercolumnComponent_1 = class ExtNumbercolum
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtNumbercolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtNumbercolumnComponent = ExtNumbercolumnComponent_1 = __decorate([
     Component({
         selector: 'ext-numbercolumn',
@@ -39276,6 +39821,10 @@ let ExtRownumbererComponent = ExtRownumbererComponent_1 = class ExtRownumbererCo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRownumbererComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRownumbererComponent = ExtRownumbererComponent_1 = __decorate([
     Component({
         selector: 'ext-rownumberer',
@@ -39613,6 +40162,10 @@ let ExtSelectioncolumnComponent = ExtSelectioncolumnComponent_1 = class ExtSelec
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSelectioncolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSelectioncolumnComponent = ExtSelectioncolumnComponent_1 = __decorate([
     Component({
         selector: 'ext-selectioncolumn',
@@ -39943,6 +40496,10 @@ let ExtTextcolumnComponent = ExtTextcolumnComponent_1 = class ExtTextcolumnCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTextcolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTextcolumnComponent = ExtTextcolumnComponent_1 = __decorate([
     Component({
         selector: 'ext-textcolumn',
@@ -40273,6 +40830,10 @@ let ExtTreecolumnComponent = ExtTreecolumnComponent_1 = class ExtTreecolumnCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTreecolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTreecolumnComponent = ExtTreecolumnComponent_1 = __decorate([
     Component({
         selector: 'ext-treecolumn',
@@ -40752,6 +41313,10 @@ let ExtGridComponent = ExtGridComponent_1 = class ExtGridComponent extends EngBa
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridComponent = ExtGridComponent_1 = __decorate([
     Component({
         selector: 'ext-grid',
@@ -41043,6 +41608,10 @@ let ExtHeadercontainerComponent = ExtHeadercontainerComponent_1 = class ExtHeade
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtHeadercontainerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtHeadercontainerComponent = ExtHeadercontainerComponent_1 = __decorate([
     Component({
         selector: 'ext-headercontainer',
@@ -41395,6 +41964,10 @@ let ExtLockedgridComponent = ExtLockedgridComponent_1 = class ExtLockedgridCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtLockedgridComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtLockedgridComponent = ExtLockedgridComponent_1 = __decorate([
     Component({
         selector: 'ext-lockedgrid',
@@ -41738,6 +42311,10 @@ let ExtLockedgridregionComponent = ExtLockedgridregionComponent_1 = class ExtLoc
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtLockedgridregionComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtLockedgridregionComponent = ExtLockedgridregionComponent_1 = __decorate([
     Component({
         selector: 'ext-lockedgridregion',
@@ -42003,6 +42580,10 @@ let ExtGridcolumnsmenuComponent = ExtGridcolumnsmenuComponent_1 = class ExtGridc
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridcolumnsmenuComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridcolumnsmenuComponent = ExtGridcolumnsmenuComponent_1 = __decorate([
     Component({
         selector: 'ext-gridcolumnsmenu',
@@ -42268,6 +42849,10 @@ let ExtGridgroupbythismenuitemComponent = ExtGridgroupbythismenuitemComponent_1 
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridgroupbythismenuitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridgroupbythismenuitemComponent = ExtGridgroupbythismenuitemComponent_1 = __decorate([
     Component({
         selector: 'ext-gridgroupbythismenuitem',
@@ -42542,6 +43127,10 @@ let ExtGridshowingroupsmenuitemComponent = ExtGridshowingroupsmenuitemComponent_
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridshowingroupsmenuitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridshowingroupsmenuitemComponent = ExtGridshowingroupsmenuitemComponent_1 = __decorate([
     Component({
         selector: 'ext-gridshowingroupsmenuitem',
@@ -42818,6 +43407,10 @@ let ExtGridsortascmenuitemComponent = ExtGridsortascmenuitemComponent_1 = class 
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridsortascmenuitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridsortascmenuitemComponent = ExtGridsortascmenuitemComponent_1 = __decorate([
     Component({
         selector: 'ext-gridsortascmenuitem',
@@ -43094,6 +43687,10 @@ let ExtGridsortdescmenuitemComponent = ExtGridsortdescmenuitemComponent_1 = clas
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridsortdescmenuitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridsortdescmenuitemComponent = ExtGridsortdescmenuitemComponent_1 = __decorate([
     Component({
         selector: 'ext-gridsortdescmenuitem',
@@ -43386,6 +43983,10 @@ let ExtPagingtoolbarComponent = ExtPagingtoolbarComponent_1 = class ExtPagingtoo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPagingtoolbarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPagingtoolbarComponent = ExtPagingtoolbarComponent_1 = __decorate([
     Component({
         selector: 'ext-pagingtoolbar',
@@ -43640,6 +44241,10 @@ let ExtGridrowComponent = ExtGridrowComponent_1 = class ExtGridrowComponent exte
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridrowComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridrowComponent = ExtGridrowComponent_1 = __decorate([
     Component({
         selector: 'ext-gridrow',
@@ -43888,6 +44493,10 @@ let ExtRowbodyComponent = ExtRowbodyComponent_1 = class ExtRowbodyComponent exte
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRowbodyComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRowbodyComponent = ExtRowbodyComponent_1 = __decorate([
     Component({
         selector: 'ext-rowbody',
@@ -44227,6 +44836,10 @@ let ExtRoweditorbarComponent = ExtRoweditorbarComponent_1 = class ExtRoweditorba
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRoweditorbarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRoweditorbarComponent = ExtRoweditorbarComponent_1 = __decorate([
     Component({
         selector: 'ext-roweditorbar',
@@ -44475,6 +45088,10 @@ let ExtRoweditorcellComponent = ExtRoweditorcellComponent_1 = class ExtRoweditor
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRoweditorcellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRoweditorcellComponent = ExtRoweditorcellComponent_1 = __decorate([
     Component({
         selector: 'ext-roweditorcell',
@@ -44775,6 +45392,10 @@ let ExtRoweditorComponent = ExtRoweditorComponent_1 = class ExtRoweditorComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRoweditorComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRoweditorComponent = ExtRoweditorComponent_1 = __decorate([
     Component({
         selector: 'ext-roweditor',
@@ -45023,6 +45644,10 @@ let ExtRoweditorgapComponent = ExtRoweditorgapComponent_1 = class ExtRoweditorga
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRoweditorgapComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRoweditorgapComponent = ExtRoweditorgapComponent_1 = __decorate([
     Component({
         selector: 'ext-roweditorgap',
@@ -45276,6 +45901,10 @@ let ExtRowheaderComponent = ExtRowheaderComponent_1 = class ExtRowheaderComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRowheaderComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRowheaderComponent = ExtRowheaderComponent_1 = __decorate([
     Component({
         selector: 'ext-rowheader',
@@ -45530,6 +46159,10 @@ let ExtGridsummaryrowComponent = ExtGridsummaryrowComponent_1 = class ExtGridsum
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridsummaryrowComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridsummaryrowComponent = ExtGridsummaryrowComponent_1 = __decorate([
     Component({
         selector: 'ext-gridsummaryrow',
@@ -46028,6 +46661,10 @@ let ExtTreeComponent = ExtTreeComponent_1 = class ExtTreeComponent extends EngBa
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTreeComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTreeComponent = ExtTreeComponent_1 = __decorate([
     Component({
         selector: 'ext-tree',
@@ -46286,6 +46923,10 @@ let ExtImageComponent = ExtImageComponent_1 = class ExtImageComponent extends En
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtImageComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtImageComponent = ExtImageComponent_1 = __decorate([
     Component({
         selector: 'ext-image',
@@ -46544,6 +47185,10 @@ let ExtImgComponent = ExtImgComponent_1 = class ExtImgComponent extends EngBase 
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtImgComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtImgComponent = ExtImgComponent_1 = __decorate([
     Component({
         selector: 'ext-img',
@@ -46802,6 +47447,10 @@ let ExtIndicatorComponent = ExtIndicatorComponent_1 = class ExtIndicatorComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtIndicatorComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtIndicatorComponent = ExtIndicatorComponent_1 = __decorate([
     Component({
         selector: 'ext-indicator',
@@ -47050,6 +47699,10 @@ let ExtLabelComponent = ExtLabelComponent_1 = class ExtLabelComponent extends En
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtLabelComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtLabelComponent = ExtLabelComponent_1 = __decorate([
     Component({
         selector: 'ext-label',
@@ -47314,6 +47967,10 @@ let ExtTreelistComponent = ExtTreelistComponent_1 = class ExtTreelistComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTreelistComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTreelistComponent = ExtTreelistComponent_1 = __decorate([
     Component({
         selector: 'ext-treelist',
@@ -47462,6 +48119,10 @@ let ExtTreelistitemComponent = ExtTreelistitemComponent_1 = class ExtTreelistite
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTreelistitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTreelistitemComponent = ExtTreelistitemComponent_1 = __decorate([
     Component({
         selector: 'ext-treelistitem',
@@ -47716,6 +48377,10 @@ let ExtLoadmaskComponent = ExtLoadmaskComponent_1 = class ExtLoadmaskComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtLoadmaskComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtLoadmaskComponent = ExtLoadmaskComponent_1 = __decorate([
     Component({
         selector: 'ext-loadmask',
@@ -47967,6 +48632,10 @@ let ExtMaskComponent = ExtMaskComponent_1 = class ExtMaskComponent extends EngBa
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMaskComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMaskComponent = ExtMaskComponent_1 = __decorate([
     Component({
         selector: 'ext-mask',
@@ -48238,6 +48907,10 @@ let ExtMediaComponent = ExtMediaComponent_1 = class ExtMediaComponent extends En
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMediaComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMediaComponent = ExtMediaComponent_1 = __decorate([
     Component({
         selector: 'ext-media',
@@ -48512,6 +49185,10 @@ let ExtMenucheckitemComponent = ExtMenucheckitemComponent_1 = class ExtMenucheck
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMenucheckitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMenucheckitemComponent = ExtMenucheckitemComponent_1 = __decorate([
     Component({
         selector: 'ext-menucheckitem',
@@ -48777,6 +49454,10 @@ let ExtMenuitemComponent = ExtMenuitemComponent_1 = class ExtMenuitemComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMenuitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMenuitemComponent = ExtMenuitemComponent_1 = __decorate([
     Component({
         selector: 'ext-menuitem',
@@ -49126,6 +49807,10 @@ let ExtMenuComponent = ExtMenuComponent_1 = class ExtMenuComponent extends EngBa
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMenuComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMenuComponent = ExtMenuComponent_1 = __decorate([
     Component({
         selector: 'ext-menu',
@@ -49402,6 +50087,10 @@ let ExtMenuradioitemComponent = ExtMenuradioitemComponent_1 = class ExtMenuradio
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMenuradioitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMenuradioitemComponent = ExtMenuradioitemComponent_1 = __decorate([
     Component({
         selector: 'ext-menuradioitem',
@@ -49650,6 +50339,10 @@ let ExtMenuseparatorComponent = ExtMenuseparatorComponent_1 = class ExtMenusepar
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMenuseparatorComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMenuseparatorComponent = ExtMenuseparatorComponent_1 = __decorate([
     Component({
         selector: 'ext-menuseparator',
@@ -50013,6 +50706,10 @@ let ExtMessageboxComponent = ExtMessageboxComponent_1 = class ExtMessageboxCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMessageboxComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMessageboxComponent = ExtMessageboxComponent_1 = __decorate([
     Component({
         selector: 'ext-messagebox',
@@ -50308,6 +51005,10 @@ let ExtNavigationviewComponent = ExtNavigationviewComponent_1 = class ExtNavigat
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtNavigationviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtNavigationviewComponent = ExtNavigationviewComponent_1 = __decorate([
     Component({
         selector: 'ext-navigationview',
@@ -50647,6 +51348,10 @@ let ExtPanelComponent = ExtPanelComponent_1 = class ExtPanelComponent extends En
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPanelComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPanelComponent = ExtPanelComponent_1 = __decorate([
     Component({
         selector: 'ext-panel',
@@ -50989,6 +51694,10 @@ let ExtAccordionComponent = ExtAccordionComponent_1 = class ExtAccordionComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtAccordionComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtAccordionComponent = ExtAccordionComponent_1 = __decorate([
     Component({
         selector: 'ext-accordion',
@@ -51363,6 +52072,10 @@ let ExtDatepanelComponent = ExtDatepanelComponent_1 = class ExtDatepanelComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDatepanelComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDatepanelComponent = ExtDatepanelComponent_1 = __decorate([
     Component({
         selector: 'ext-datepanel',
@@ -51619,6 +52332,10 @@ let ExtDatetitleComponent = ExtDatetitleComponent_1 = class ExtDatetitleComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDatetitleComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDatetitleComponent = ExtDatetitleComponent_1 = __decorate([
     Component({
         selector: 'ext-datetitle',
@@ -51913,6 +52630,10 @@ let ExtPanelheaderComponent = ExtPanelheaderComponent_1 = class ExtPanelheaderCo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPanelheaderComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPanelheaderComponent = ExtPanelheaderComponent_1 = __decorate([
     Component({
         selector: 'ext-panelheader',
@@ -52264,6 +52985,10 @@ let ExtTimepanelComponent = ExtTimepanelComponent_1 = class ExtTimepanelComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTimepanelComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTimepanelComponent = ExtTimepanelComponent_1 = __decorate([
     Component({
         selector: 'ext-timepanel',
@@ -52520,6 +53245,10 @@ let ExtPaneltitleComponent = ExtPaneltitleComponent_1 = class ExtPaneltitleCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPaneltitleComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPaneltitleComponent = ExtPaneltitleComponent_1 = __decorate([
     Component({
         selector: 'ext-paneltitle',
@@ -52941,6 +53670,10 @@ let ExtYearpickerComponent = ExtYearpickerComponent_1 = class ExtYearpickerCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtYearpickerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtYearpickerComponent = ExtYearpickerComponent_1 = __decorate([
     Component({
         selector: 'ext-yearpicker',
@@ -53305,6 +54038,10 @@ let ExtDatepickerComponent = ExtDatepickerComponent_1 = class ExtDatepickerCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDatepickerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDatepickerComponent = ExtDatepickerComponent_1 = __decorate([
     Component({
         selector: 'ext-datepicker',
@@ -53663,6 +54400,10 @@ let ExtPickerComponent = ExtPickerComponent_1 = class ExtPickerComponent extends
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPickerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPickerComponent = ExtPickerComponent_1 = __decorate([
     Component({
         selector: 'ext-picker',
@@ -54021,6 +54762,10 @@ let ExtSelectpickerComponent = ExtSelectpickerComponent_1 = class ExtSelectpicke
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSelectpickerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSelectpickerComponent = ExtSelectpickerComponent_1 = __decorate([
     Component({
         selector: 'ext-selectpicker',
@@ -54406,6 +55151,10 @@ let ExtPickerslotComponent = ExtPickerslotComponent_1 = class ExtPickerslotCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPickerslotComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPickerslotComponent = ExtPickerslotComponent_1 = __decorate([
     Component({
         selector: 'ext-pickerslot',
@@ -54745,6 +55494,10 @@ let ExtTabletpickerComponent = ExtTabletpickerComponent_1 = class ExtTabletpicke
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTabletpickerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTabletpickerComponent = ExtTabletpickerComponent_1 = __decorate([
     Component({
         selector: 'ext-tabletpicker',
@@ -54895,6 +55648,10 @@ let ExtPivotgridcellComponent = ExtPivotgridcellComponent_1 = class ExtPivotgrid
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotgridcellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotgridcellComponent = ExtPivotgridcellComponent_1 = __decorate([
     Component({
         selector: 'ext-pivotgridcell',
@@ -55045,6 +55802,10 @@ let ExtPivotgridgroupcellComponent = ExtPivotgridgroupcellComponent_1 = class Ex
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotgridgroupcellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotgridgroupcellComponent = ExtPivotgridgroupcellComponent_1 = __decorate([
     Component({
         selector: 'ext-pivotgridgroupcell',
@@ -55102,6 +55863,10 @@ let ExtPivotd3containerComponent = ExtPivotd3containerComponent_1 = class ExtPiv
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotd3containerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotd3containerComponent = ExtPivotd3containerComponent_1 = __decorate([
     Component({
         selector: 'ext-pivotd3container',
@@ -55368,6 +56133,10 @@ let ExtPivotheatmapComponent = ExtPivotheatmapComponent_1 = class ExtPivotheatma
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotheatmapComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotheatmapComponent = ExtPivotheatmapComponent_1 = __decorate([
     Component({
         selector: 'ext-pivotheatmap',
@@ -55653,6 +56422,10 @@ let ExtPivottreemapComponent = ExtPivottreemapComponent_1 = class ExtPivottreema
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivottreemapComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivottreemapComponent = ExtPivottreemapComponent_1 = __decorate([
     Component({
         selector: 'ext-pivottreemap',
@@ -56203,6 +56976,10 @@ let ExtPivotgridComponent = ExtPivotgridComponent_1 = class ExtPivotgridComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotgridComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotgridComponent = ExtPivotgridComponent_1 = __decorate([
     Component({
         selector: 'ext-pivotgrid',
@@ -56496,6 +57273,10 @@ let ExtPivotconfigfieldComponent = ExtPivotconfigfieldComponent_1 = class ExtPiv
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotconfigfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotconfigfieldComponent = ExtPivotconfigfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-pivotconfigfield',
@@ -56836,6 +57617,10 @@ let ExtPivotconfigcontainerComponent = ExtPivotconfigcontainerComponent_1 = clas
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotconfigcontainerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotconfigcontainerComponent = ExtPivotconfigcontainerComponent_1 = __decorate([
     Component({
         selector: 'ext-pivotconfigcontainer',
@@ -57202,6 +57987,10 @@ let ExtPivotconfigformComponent = ExtPivotconfigformComponent_1 = class ExtPivot
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotconfigformComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotconfigformComponent = ExtPivotconfigformComponent_1 = __decorate([
     Component({
         selector: 'ext-pivotconfigform',
@@ -57549,6 +58338,10 @@ let ExtPivotconfigpanelComponent = ExtPivotconfigpanelComponent_1 = class ExtPiv
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotconfigpanelComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotconfigpanelComponent = ExtPivotconfigpanelComponent_1 = __decorate([
     Component({
         selector: 'ext-pivotconfigpanel',
@@ -57915,6 +58708,10 @@ let ExtPivotsettingsComponent = ExtPivotsettingsComponent_1 = class ExtPivotsett
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotsettingsComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotsettingsComponent = ExtPivotsettingsComponent_1 = __decorate([
     Component({
         selector: 'ext-pivotsettings',
@@ -58281,6 +59078,10 @@ let ExtPivotrangeeditorComponent = ExtPivotrangeeditorComponent_1 = class ExtPiv
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotrangeeditorComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotrangeeditorComponent = ExtPivotrangeeditorComponent_1 = __decorate([
     Component({
         selector: 'ext-pivotrangeeditor',
@@ -58535,6 +59336,10 @@ let ExtPivotgridrowComponent = ExtPivotgridrowComponent_1 = class ExtPivotgridro
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotgridrowComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotgridrowComponent = ExtPivotgridrowComponent_1 = __decorate([
     Component({
         selector: 'ext-pivotgridrow',
@@ -58787,6 +59592,10 @@ let ExtProgressComponent = ExtProgressComponent_1 = class ExtProgressComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtProgressComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtProgressComponent = ExtProgressComponent_1 = __decorate([
     Component({
         selector: 'ext-progress',
@@ -59039,6 +59848,10 @@ let ExtProgressbarwidgetComponent = ExtProgressbarwidgetComponent_1 = class ExtP
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtProgressbarwidgetComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtProgressbarwidgetComponent = ExtProgressbarwidgetComponent_1 = __decorate([
     Component({
         selector: 'ext-progressbarwidget',
@@ -59337,6 +60150,10 @@ let ExtSegmentedbuttonComponent = ExtSegmentedbuttonComponent_1 = class ExtSegme
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSegmentedbuttonComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSegmentedbuttonComponent = ExtSegmentedbuttonComponent_1 = __decorate([
     Component({
         selector: 'ext-segmentedbutton',
@@ -59683,6 +60500,10 @@ let ExtSheetComponent = ExtSheetComponent_1 = class ExtSheetComponent extends En
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSheetComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSheetComponent = ExtSheetComponent_1 = __decorate([
     Component({
         selector: 'ext-sheet',
@@ -59949,6 +60770,10 @@ let ExtSliderComponent = ExtSliderComponent_1 = class ExtSliderComponent extends
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSliderComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSliderComponent = ExtSliderComponent_1 = __decorate([
     Component({
         selector: 'ext-slider',
@@ -60199,6 +61024,10 @@ let ExtThumbComponent = ExtThumbComponent_1 = class ExtThumbComponent extends En
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtThumbComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtThumbComponent = ExtThumbComponent_1 = __decorate([
     Component({
         selector: 'ext-thumb',
@@ -60465,6 +61294,10 @@ let ExtTogglesliderComponent = ExtTogglesliderComponent_1 = class ExtToggleslide
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTogglesliderComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTogglesliderComponent = ExtTogglesliderComponent_1 = __decorate([
     Component({
         selector: 'ext-toggleslider',
@@ -60713,6 +61546,10 @@ let ExtSpacerComponent = ExtSpacerComponent_1 = class ExtSpacerComponent extends
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSpacerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSpacerComponent = ExtSpacerComponent_1 = __decorate([
     Component({
         selector: 'ext-spacer',
@@ -60982,6 +61819,10 @@ let ExtSparklinebarComponent = ExtSparklinebarComponent_1 = class ExtSparklineba
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSparklinebarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSparklinebarComponent = ExtSparklinebarComponent_1 = __decorate([
     Component({
         selector: 'ext-sparklinebar',
@@ -61239,6 +62080,10 @@ let ExtSparklineComponent = ExtSparklineComponent_1 = class ExtSparklineComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSparklineComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSparklineComponent = ExtSparklineComponent_1 = __decorate([
     Component({
         selector: 'ext-sparkline',
@@ -61510,6 +62355,10 @@ let ExtSparklineboxComponent = ExtSparklineboxComponent_1 = class ExtSparklinebo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSparklineboxComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSparklineboxComponent = ExtSparklineboxComponent_1 = __decorate([
     Component({
         selector: 'ext-sparklinebox',
@@ -61772,6 +62621,10 @@ let ExtSparklinebulletComponent = ExtSparklinebulletComponent_1 = class ExtSpark
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSparklinebulletComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSparklinebulletComponent = ExtSparklinebulletComponent_1 = __decorate([
     Component({
         selector: 'ext-sparklinebullet',
@@ -62035,6 +62888,10 @@ let ExtSparklinediscreteComponent = ExtSparklinediscreteComponent_1 = class ExtS
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSparklinediscreteComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSparklinediscreteComponent = ExtSparklinediscreteComponent_1 = __decorate([
     Component({
         selector: 'ext-sparklinediscrete',
@@ -62309,6 +63166,10 @@ let ExtSparklinelineComponent = ExtSparklinelineComponent_1 = class ExtSparkline
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSparklinelineComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSparklinelineComponent = ExtSparklinelineComponent_1 = __decorate([
     Component({
         selector: 'ext-sparklineline',
@@ -62570,6 +63431,10 @@ let ExtSparklinepieComponent = ExtSparklinepieComponent_1 = class ExtSparklinepi
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSparklinepieComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSparklinepieComponent = ExtSparklinepieComponent_1 = __decorate([
     Component({
         selector: 'ext-sparklinepie',
@@ -62833,6 +63698,10 @@ let ExtSparklinetristateComponent = ExtSparklinetristateComponent_1 = class ExtS
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSparklinetristateComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSparklinetristateComponent = ExtSparklinetristateComponent_1 = __decorate([
     Component({
         selector: 'ext-sparklinetristate',
@@ -63114,6 +63983,10 @@ let ExtSplitbuttonComponent = ExtSplitbuttonComponent_1 = class ExtSplitbuttonCo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSplitbuttonComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSplitbuttonComponent = ExtSplitbuttonComponent_1 = __decorate([
     Component({
         selector: 'ext-splitbutton',
@@ -63412,6 +64285,10 @@ let ExtTabbarComponent = ExtTabbarComponent_1 = class ExtTabbarComponent extends
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTabbarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTabbarComponent = ExtTabbarComponent_1 = __decorate([
     Component({
         selector: 'ext-tabbar',
@@ -63703,6 +64580,10 @@ let ExtTabpanelComponent = ExtTabpanelComponent_1 = class ExtTabpanelComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTabpanelComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTabpanelComponent = ExtTabpanelComponent_1 = __decorate([
     Component({
         selector: 'ext-tabpanel',
@@ -63990,6 +64871,10 @@ let ExtTabComponent = ExtTabComponent_1 = class ExtTabComponent extends EngBase 
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTabComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTabComponent = ExtTabComponent_1 = __decorate([
     Component({
         selector: 'ext-tab',
@@ -64343,6 +65228,10 @@ let ExtTooltipComponent = ExtTooltipComponent_1 = class ExtTooltipComponent exte
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTooltipComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTooltipComponent = ExtTooltipComponent_1 = __decorate([
     Component({
         selector: 'ext-tooltip',
@@ -64592,6 +65481,10 @@ let ExtTitleComponent = ExtTitleComponent_1 = class ExtTitleComponent extends En
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTitleComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTitleComponent = ExtTitleComponent_1 = __decorate([
     Component({
         selector: 'ext-title',
@@ -64882,6 +65775,10 @@ let ExtTitlebarComponent = ExtTitlebarComponent_1 = class ExtTitlebarComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTitlebarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTitlebarComponent = ExtTitlebarComponent_1 = __decorate([
     Component({
         selector: 'ext-titlebar',
@@ -65139,6 +66036,10 @@ let ExtToolComponent = ExtToolComponent_1 = class ExtToolComponent extends EngBa
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtToolComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtToolComponent = ExtToolComponent_1 = __decorate([
     Component({
         selector: 'ext-tool',
@@ -65396,6 +66297,10 @@ let ExtPaneltoolComponent = ExtPaneltoolComponent_1 = class ExtPaneltoolComponen
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPaneltoolComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPaneltoolComponent = ExtPaneltoolComponent_1 = __decorate([
     Component({
         selector: 'ext-paneltool',
@@ -65684,6 +66589,10 @@ let ExtToolbarComponent = ExtToolbarComponent_1 = class ExtToolbarComponent exte
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtToolbarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtToolbarComponent = ExtToolbarComponent_1 = __decorate([
     Component({
         selector: 'ext-toolbar',
@@ -65939,6 +66848,10 @@ let ExtColorbuttonComponent = ExtColorbuttonComponent_1 = class ExtColorbuttonCo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtColorbuttonComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtColorbuttonComponent = ExtColorbuttonComponent_1 = __decorate([
     Component({
         selector: 'ext-colorbutton',
@@ -66187,6 +67100,10 @@ let ExtColorpickercolorpreviewComponent = ExtColorpickercolorpreviewComponent_1 
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtColorpickercolorpreviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtColorpickercolorpreviewComponent = ExtColorpickercolorpreviewComponent_1 = __decorate([
     Component({
         selector: 'ext-colorpickercolorpreview',
@@ -66520,6 +67437,10 @@ let ExtColorfieldComponent = ExtColorfieldComponent_1 = class ExtColorfieldCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtColorfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtColorfieldComponent = ExtColorfieldComponent_1 = __decorate([
     Component({
         selector: 'ext-colorfield',
@@ -66590,6 +67511,10 @@ let ExtColorselectorComponent = ExtColorselectorComponent_1 = class ExtColorsele
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtColorselectorComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtColorselectorComponent = ExtColorselectorComponent_1 = __decorate([
     Component({
         selector: 'ext-colorselector',
@@ -66852,6 +67777,10 @@ let ExtGaugeComponent = ExtGaugeComponent_1 = class ExtGaugeComponent extends En
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGaugeComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGaugeComponent = ExtGaugeComponent_1 = __decorate([
     Component({
         selector: 'ext-gauge',
@@ -67174,6 +68103,10 @@ let ExtMapComponent = ExtMapComponent_1 = class ExtMapComponent extends EngBase 
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMapComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMapComponent = ExtMapComponent_1 = __decorate([
     Component({
         selector: 'ext-map',
@@ -67496,6 +68429,10 @@ let ExtGoogle_mapComponent = ExtGoogle_mapComponent_1 = class ExtGoogle_mapCompo
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGoogle_mapComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGoogle_mapComponent = ExtGoogle_mapComponent_1 = __decorate([
     Component({
         selector: 'ext-google-map',
@@ -67758,6 +68695,10 @@ let ExtRatingComponent = ExtRatingComponent_1 = class ExtRatingComponent extends
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRatingComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRatingComponent = ExtRatingComponent_1 = __decorate([
     Component({
         selector: 'ext-rating',
@@ -68031,6 +68972,10 @@ let ExtVideoComponent = ExtVideoComponent_1 = class ExtVideoComponent extends En
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtVideoComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtVideoComponent = ExtVideoComponent_1 = __decorate([
     Component({
         selector: 'ext-video',
@@ -68328,6 +69273,10 @@ let ExtViewportComponent = ExtViewportComponent_1 = class ExtViewportComponent e
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtViewportComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtViewportComponent = ExtViewportComponent_1 = __decorate([
     Component({
         selector: 'ext-viewport',
@@ -68460,6 +69409,10 @@ let ExtWidgetComponent = ExtWidgetComponent_1 = class ExtWidgetComponent extends
     //}
     ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtWidgetComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtWidgetComponent = ExtWidgetComponent_1 = __decorate([
     Component({
         selector: 'ext-widget',

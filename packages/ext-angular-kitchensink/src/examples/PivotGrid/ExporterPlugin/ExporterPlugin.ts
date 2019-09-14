@@ -23,7 +23,7 @@ export class ExporterPluginComponent {
 
   pivotgrid:any;
   onPivotGridRead = function(event) {
-    this.pivotgrid = event.ext;
+    this.pivotgrid = event.detail.cmp;
   }
 
   showConfigurator = () => { this.pivotgrid.showConfigurator(); }

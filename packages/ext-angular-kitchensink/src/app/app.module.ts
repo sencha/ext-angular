@@ -7,6 +7,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import {AppService} from './app.service'
+
 import * as d3 from 'd3'
 window['d3'] = d3
 import * as FroalaEditor from 'froala-editor/js/froala_editor.pkgd.min.js';
@@ -437,10 +439,16 @@ import {GridFilteringService} from '../examples/Grid/AddonsDecorations/GridFilte
     //SharedModule
   ],
   providers: [
+    AppService,
     GridService,
     GridFilteringService,
+    CalendarService,
+    //BigDataService
     //GroupListService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+    constructor(appService: AppService) {
+    }
+}

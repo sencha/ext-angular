@@ -1,6 +1,6 @@
-<ext-container layout="fit" padding="8" [fitToParent]="true">
+<ext-container layout="vbox" padding="10" [fitToParent]="true">
 
-  <ext-container docked="top"><div #extitem>
+  <ext-container><div #extitem>
     <chart-toolbar
       [onRefreshClick]="this.refresh"
       [onThemeChange]="this.changeTheme"
@@ -9,6 +9,7 @@
   </div></ext-container>
 
   <ext-cartesian downloadServerUrl ="http://svg.sencha.io"
+  flex="1"
     shadow="true"
     insetPadding="20 10"
     [store]="this.store"
