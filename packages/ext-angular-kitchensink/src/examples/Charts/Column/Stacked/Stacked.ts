@@ -33,7 +33,7 @@ export class StackedComponent {
   chart: any;
 
   chartNavReady = function (event) {
-    this.chart = event.ext;
+    this.chart = event.detail.cmp;
   };
 
   toggleZoomOnPan = (zoomOnPan) => {

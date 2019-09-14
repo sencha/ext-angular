@@ -332,7 +332,7 @@ const treeRoot = {
               { text: 'Summary Row', component: SummaryRowComponent, navIcon: 'icon-grid-summary'},
               { text: 'Grid Filtering', component: GridFilteringComponent, navIcon: 'icon-grid-filtering'},
               { text: 'View Options', component: ViewOptionsComponent, navIcon: 'icon-view-options-grid'},
-              { text: 'Row Drag and Drop', component: RowDragAndDropComponent, navIcon: 'icon-dd-grid-row'},
+              { text: 'Row Drag And Drop', component: RowDragAndDropComponent, navIcon: 'icon-dd-grid-row'},
               { text: 'Drag Form To Grid', component: DragFormToGridComponent, navIcon: 'icon-dd-form-to-grid'}
           ]},
           { text: 'Advanced Features', navIcon: 'icon-grid-plugins', children:[
@@ -436,7 +436,7 @@ const treeRoot = {
               { text: 'Zoomable Sunburst', component: ZoomableSunburstComponent, navIcon: 'icon-d3-view-sunburst-zoom' },
               { text: 'Tree', component: TreeHierarchyComponent, navIcon: 'icon-d3-view-tree' },
               { text: 'TreeMap', component: TreeMapComponent, navIcon: 'icon-d3-view-treemap' },
-              { text: 'TreeMap Tooltip', component: TreeMapToolTipComponent, navIcon: 'icon-d3-view-treemap-tooltip' },
+              { text: 'TreeMap Tool Tip', component: TreeMapToolTipComponent, navIcon: 'icon-d3-view-treemap-tooltip' },
               { text: 'Configurable Pivot TreeMap', component: ConfigurablePivotTreeMapComponent, navIcon: 'icon-d3-view-treemap-pivot-configurator' }
           ]}
       ] },

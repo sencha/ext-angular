@@ -38,7 +38,7 @@ export class NavigatorComponent {
   };
 
   chartNavReady = function (event) {
-    this.chart = event.ext.getChart();
+    this.chart = event.detail.cmp.getChart();
   };
 
   toggleZoomOnPan = (zoomOnPan) => {
@@ -56,6 +56,7 @@ export class NavigatorComponent {
 
   chartNavChart = {
     xtype: 'cartesian',
+    downloadServerUrl: 'http://svg.sencha.io',
     reference: 'chart',
     insetPadding: '20 10 10 10',
     platformConfig: {

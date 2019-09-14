@@ -16,7 +16,7 @@ export class HeterogeneousTreeComponent {
   left = !this.isPhone ? '10' : null
   width = !this.isPhone ? '400' : null
   height = !this.isPhone ? '600' : null
-  
+
   cityModel: any;
   countryModel: any;
   territoryModel: any;
@@ -29,17 +29,17 @@ export class HeterogeneousTreeComponent {
 
   textField : any;
   onTextFieldReady = (event) => {
-    this.textField = event.ext;
+    this.textField = event.detail.cmp;
   }
 
   buttonField : any;
   onButtonReady = (event) => {
-    this.buttonField = event.ext;
+    this.buttonField = event.detail.cmp;
   }
 
   treeField:any;
   onTreeReady = (event) => {
-    this.treeField = event.ext;
+    this.treeField = event.detail.cmp;
   }
 
   store = Ext.create('Ext.data.TreeStore', {
@@ -63,7 +63,7 @@ export class HeterogeneousTreeComponent {
     var value = this.textField.getValue()
     if (value != null && value != '') {
       if (this.store.getNodeById(value)) {
-        return Ext.Msg.alert('Error', 'A node with this name already exists.'); 
+        return Ext.Msg.alert('Error', 'A node with this name already exists.');
       }
       node = {name : value};
       if (target.isRoot()) {

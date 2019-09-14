@@ -10,7 +10,6 @@ export class AppService {
   }
 
   init = function () {
-      console.log('app')
     Ext.define('KitchenSink.data.Init', {
       requires: [
         'Ext.ux.ajax.JsonSimlet',

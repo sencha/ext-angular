@@ -35,7 +35,7 @@ export class CandlestickComponent {
   crosshair:any;
   chart:any;
   chartNavReady = function(event) {
-    this.chart = event.ext;
+    this.chart = event.detail.cmp;
     this.panzoom = this.chart.getInteraction('panzoom');
     this.crosshair = this.chart.getInteraction('crosshair');
   }
@@ -67,7 +67,7 @@ export class CandlestickComponent {
       position: 'left',
       maximum: 1000,
       minimum: 0
-    }, 
+    },
     {
       type: 'time',
       fields: ['time'],
@@ -113,7 +113,7 @@ export class CandlestickComponent {
           allowZoom: true
         }
       }
-    }, 
+    },
     {
       type: 'crosshair',
       axes: {

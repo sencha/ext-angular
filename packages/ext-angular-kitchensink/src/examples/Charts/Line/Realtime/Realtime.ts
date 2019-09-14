@@ -17,7 +17,7 @@ export class RealtimeComponent {
 
   chart: any;
   chartNavReady = function (event) {
-    this.chart = event.ext;
+    this.chart = event.detail.cmp;
     this.startTask();
   };
 

@@ -9,7 +9,7 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 export class ThreeDGroupedComponent {
 
   constructor(private cdref: ChangeDetectorRef) { }
-  
+
   ngAfterContentChecked() {
   this.cdref.detectChanges();
   }
@@ -39,7 +39,7 @@ export class ThreeDGroupedComponent {
   chart:any;
 
   chartNavReady = function(event) {
-      this.chart = event.ext;
+      this.chart = event.detail.cmp;
   }
 
 

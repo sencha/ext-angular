@@ -443,7 +443,7 @@ import {GridFilteringService} from '../examples/Grid/AddonsDecorations/GridFilte
     GridService,
     GridFilteringService,
     CalendarService,
-    //BigDataService
+    BigDataService
     //GroupListService
   ],
   bootstrap: [AppComponent]
