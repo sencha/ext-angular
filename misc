@@ -45,14 +45,14 @@ https://github.com/maciejtreder/angular-universal-pwa
   //"dest": "../../../ext-angular",
 
 
-ng new angular-cli-with-library2 --style scss --minimal --skip-tests --inline-style --inline-template 
+ng new angular-cli-with-library2 --style scss --minimal --skip-tests --inline-style --inline-template
 
 ng generate library ext-angular
 
 ng build ext-angular
 
 https://dev.to/meltedspark/customizing-angular-cli-6-buildan-alternative-to-ng-eject-1oc4
-ng new ext-angular-builder --style scss --minimal --skip-tests --inline-style --inline-template 
+ng new ext-angular-builder --style scss --minimal --skip-tests --inline-style --inline-template
 npm i -D @angular-builders/custom-webpack
 
       "architect": {
@@ -115,7 +115,7 @@ import {
   ComponentFactoryResolver,
   EmbeddedViewRef,
   ApplicationRef
-  } 
+  }
 from '@angular/core'
 @Injectable({
   providedIn: 'root'
@@ -236,7 +236,7 @@ export function launch(AppModule) {
   //     })
   //   }
   // }
-  // else 
+  // else
   //   { thisVars.production = false }
 
 
@@ -261,3 +261,8 @@ export function launch(AppModule) {
     "angular-highlight-js":"^2.0.1",
 
     https://www.sencha.com/blog/build-a-completely-custom-ext-js-theme-in-less-than-10-minutes/
+
+
+
+
+    document.documentElement.style.setProperty('--base-color', 'navy');window['title'] = 'React UI Toolkit';

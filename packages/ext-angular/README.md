@@ -1,6 +1,6 @@
 ## @sencha/ext-angular-blank
 
-last run: Thu Sep 12 2019 09:37:21 GMT-0400 (Eastern Daylight Time)
+last run: Sat Sep 14 2019 11:39:18 GMT-0400 (EDT)
 
 This npm package contains the minimum files that are needed to provide for the @sencha/ext-angular package for an Angular application
 
@@ -97,14 +97,20 @@ Open the src/styles.css file in the editor and replace the contents with the fol
 }
 ```
 
-#### Replace src/app/app.module.js
+#### Replace src/app/app.module.ts
 
 Open the src/app/app.module.js file in the editor and replace the contents with the following:
 
 ```sh
-declare var Ext: any
-//import { ExtAngularModule } from '@sencha/ext-angular'
-import { ExtAngularModule } from '@sencha/ext-angular'
+
+import { ExtAngularAllModule } from '@sencha/ext-angular-all'
+//import '@sencha/ext-web-components/ext-web-components.module';
+// import '@sencha/ext-web-components-all/lib/ext-panel.component';
+// import '@sencha/ext-web-components-all/lib/ext-toolbar.component';
+// import '@sencha/ext-web-components-all/lib/ext-button.component';
+// import '@sencha/ext-web-components-all/lib/ext-grid.component';
+// import '@sencha/ext-web-components-all/lib/ext-column.component';
+{imports}
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -112,44 +118,43 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [
+  declarations: [{declarationsx}
     AppComponent
   ],
   imports: [
-    BrowserModule,
-    ExtAngularModule
-    //ExtAngularModule
+    BrowserModule
   ],
-  providers: [],
-  entryComponents: [AppComponent]
+  providers: [ ],
+  bootstrap: [ AppComponent ]
 })
-export class AppModule {
-    ngDoBootstrap(app) {
-        Ext.onReady(function () {
-            app.bootstrap(AppComponent);
-        });
-    }
-}
+export class AppModule {}
+
 ```
 
-#### Replace src/app/app.component.html
 
-Open the src/app/app.component.html file in the editor and replace the contents with the following: 
+#### Replace src/app/app.component.ts
+
+Open the src/app/app.component.ts file in the editor and replace the contents with the following: 
 
 ```sh
+
 import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-root',
     template: `
-<ext-grid
-    [viewport]="true"
-    [title]="title"
-    (ready)="readyGrid($event)"
->
-    <ext-column text="name" dataIndex="name"></ext-column>
-    <ext-column text="email" dataIndex="email" flex="1"></ext-column>
-</ext-grid>
+<ext-panel viewport="true" title="panel" layout="fit">
+    <ext-toolbar docked="top">
+        <ext-button text="toolbar button"></ext-button>
+    </ext-toolbar>
+    <ext-grid
+        [title]="title"
+        (ready)="readyGrid($event)"
+    >
+        <ext-column text="name" dataIndex="name"></ext-column>
+        <ext-column text="email" dataIndex="email" flex="1"></ext-column>
+    </ext-grid>
+</ext-panel>
     `,
     styles: []
 })
@@ -161,10 +166,11 @@ export class AppComponent {
         {name: 'Andy', email: 'andy@gmail.com'},
     ]
     readyGrid(event) {
-        var grid = event.detail.cmp;
+        var grid = event.target.ext;
         grid.setData(this.data)
     }
 }
+
 ```
 
 #### Run the application

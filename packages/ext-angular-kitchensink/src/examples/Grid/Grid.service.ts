@@ -1010,11 +1010,11 @@ export class GridService {
           "desc": "Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.",
           "priceChangePct": -7.13
         }
-                ]  
-          
+                ]
+
             }
           })
-          
+
 
     }
 
