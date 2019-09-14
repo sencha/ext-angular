@@ -139,7 +139,6 @@ export class AppComponent {
     }
 
     toggleCode = () => {
-        console.log('toggleCode')
         //this.codePanelCmp.setCollapsed(this.showCode)
         this.collapseCode = !this.collapseCode
         this.cd.detectChanges();
@@ -173,9 +172,9 @@ export class AppComponent {
     }
 
     setCodeTabs = (node) => {
-        console.log(node)
+        //console.log(node)
         this.files = getFiles(node, window['_code']);
-        console.log(this.files)
+        //console.log(this.files)
         var componentName = node.data.name.replace(/ /g,"")
         var codeMap = window['_code'][componentName];
         this.tabPanelCmp.removeAll();

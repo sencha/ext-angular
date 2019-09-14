@@ -33,11 +33,11 @@ export class TreeReorderComponent {
   });
 
   onTreeReady = (event) => {
-    this.treeCmp = event.ext;
+    this.treeCmp = event.detail.cmp;
   }
 
   toolbarReady = (event) => {
-    this.toolbar = event.ext;
+    this.toolbar = event.detail.cmp;
   }
 
   onExpandAllClick = () => {

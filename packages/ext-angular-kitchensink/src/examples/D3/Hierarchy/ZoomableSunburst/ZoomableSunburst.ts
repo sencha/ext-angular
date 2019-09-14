@@ -64,7 +64,7 @@ catch(e) {
 
   sunburst:any;
   onSubBurstReady = (event) => {
-    this.sunburst = event.ext;
+    this.sunburst = event.detail.cmp;
     this.sunburst.onNodeSelect = (record, selection) => {
         this.sunburst.zoomInNode(record)};
     }

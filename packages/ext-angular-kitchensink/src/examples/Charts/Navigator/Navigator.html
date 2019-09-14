@@ -1,5 +1,5 @@
 <ext-container
-    [padding]="!isPhone ? '15' : ''"
+    [padding]="!isPhone ? '10' : ''"
     layout="vbox"
     [fitToParent]="true"
 >
@@ -16,7 +16,7 @@
         flex="1"
         [shadow]="true"
         (ready)="chartNavReady($event)"
-        [navigator]="{ axis: 'bottom' }"
+        [navigator]="{ axis: 'bottom', downloadServerUrl: 'http://svg.sencha.io' }"
         [chart]="chartNavChart"
     >
     </ext-chartnavigator>

@@ -1,5 +1,5 @@
 declare var Ext: any;
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { model } from './GridModel'
 
 @Component({
@@ -60,12 +60,14 @@ export class ReconfigureGridComponent {
   store = undefined;
   columns = undefined;
 
+  constructor(private cd: ChangeDetectorRef) {}
+
 
   onChange = (event) => {
-    //console.log("onChange. event.value : " + event.value)
     const config = this.configs[event.value];
     this.columns = config.columns;
     this.store = this[config.store]();
+    this.cd.detectChanges();
   }
 
   createEmployeeStore = () => {

@@ -25,12 +25,10 @@ export class ThreeDStackedComponent {
   chart:any;
 
   chartNavReady = function(event) {
-    console.log("chartNavReady");
-    this.chart = event.ext;
+    this.chart = event.detail.cmp;
   }
 
   onStackedToggle = event => {
-    console.log("onStackedToggle.");
     if(event.value ==  0) {
         this.stacked = 1;
     }

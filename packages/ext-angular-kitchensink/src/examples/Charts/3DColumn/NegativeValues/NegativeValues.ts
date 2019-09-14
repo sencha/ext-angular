@@ -29,13 +29,13 @@ export class NegativeValuesComponent {
   chart:any;
 
   constructor(private cdref: ChangeDetectorRef) { }
-  
+
   ngAfterContentChecked() {
     this.cdref.detectChanges();
   }
 
   chartNavReady = function(event) {
-    this.chart = event.ext;
+    this.chart = event.detail.cmp;
   }
 
   onSeriesRender = (sprite, config, data, index) => {

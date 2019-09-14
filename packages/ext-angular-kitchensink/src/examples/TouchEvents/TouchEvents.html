@@ -1,53 +1,58 @@
-<ext-container [layout]="'vbox'" [defaults]="{ margin: '10' }">
-    <ext-panel
-        title="Event Log"
-        height="250"
-        scrollable="true"
-        bodyPadding="10"
-        shadow="true"
-        [header]="{
-            items: [
-                {
-                    xtype: 'button',
-                    align: 'right',
-                    text: 'clear',
-                    ui: 'alt',
-                    handler: clearEventLog
-                }
-            ]
-        }"
-    >
-        <ext-container>
-            <ext-dataview
-                [centered]="false"
-                [inline]="'true'"
-                (ready)="dataviewReady($event)"
-                [itemTpl]="tplDataView"
-            >
-            </ext-dataview>
-        </ext-container>
-    </ext-panel>
-    <ext-container
-        (ready)="touchpadReady($event)"
-        flex="1"
-        [layout]="{ type: 'vbox', pack: 'center', align: 'stretch' }"
-        [style]="{ border: '8px dashed #d6d6d6', borderRadius: '30px' }"
-    >
+<ext-container>
+    <ext-container [layout]="'vbox'" [defaults]="{ margin: '10' }">
+        <ext-panel
+            title="Event Log"
+            height="300"
+            scrollable="true"
+            bodyPadding="10"
+            shadow="true"
+            [header]="{
+                items: [
+                    {
+                        xtype: 'button',
+                        align: 'right',
+                        text: 'clear',
+                        ui: 'alt',
+                        handler: clearEventLog
+                    }
+                ]
+            }"
+        >
+            <ext-container>
+                <ext-dataview
+                    [centered]="false"
+                    [inline]="'true'"
+                    (ready)="dataviewReady($event)"
+                    [itemTpl]="tplDataView"
+                >
+                </ext-dataview>
+            </ext-container>
+        </ext-panel>
         <ext-container
-            [style]="{ textAlign: 'center', fontSize: '48px', color: '#ccc' }"
-            html="Touch Here"
-        ></ext-container>
+            (ready)="touchpadReady($event)"
+            flex="1"
+            [layout]="{ type: 'vbox', pack: 'center', align: 'stretch' }"
+            [style]="{ border: '8px dashed #d6d6d6', borderRadius: '30px' }"
+        >
+            <ext-container
+                [style]="{ textAlign: 'center', fontSize: '48px', color: '#ccc' }"
+                html="Touch Here"
+            ></ext-container>
+        </ext-container>
     </ext-container>
-</ext-container>
 
-<ext-container *ngIf="!isPhone" [layout]="'hbox'" [width]="600">
+
+
+<!-- <ext-container *ngIf="!isPhone" [layout]="'hbox'" [width]="600">
     <ext-container
+        *ngIf="!isPhone"
         [flex]="1"
         [layout]="'vbox'"
         [padding]="10"
         [margin]="'0 20 0 0'"
     >
         <ext-panel
+            *ngIf="!isPhone"
             [shadow]="true"
             [margin]="'0 0 20 0'"
             [bodyPadding]="10"
@@ -74,6 +79,7 @@
         >
         </ext-panel>
         <ext-panel
+            *ngIf="!isPhone"
             title="Event Log"
             [height]="300"
             [scrollable]="true"
@@ -91,8 +97,9 @@
                 ]
             }"
         >
-            <ext-container>
+            <ext-container *ngIf="!isPhone">
                 <ext-dataview
+                *ngIf="!isPhone"
                     [centered]="false"
                     [inline]="'true'"
                     (ready)="dataviewReady($event)"
@@ -103,14 +110,18 @@
         </ext-panel>
     </ext-container>
     <ext-container
+        *ngIf="!isPhone"
         (ready)="touchpadReady($event)"
         flex="1"
         [layout]="{ type: 'vbox', pack: 'center', align: 'stretch' }"
         [style]="{ border: '8px dashed #d6d6d6', borderRadius: '30px' }"
     >
         <ext-container
+            *ngIf="!isPhone"
             [style]="{ textAlign: 'center', fontSize: '48px', color: '#ccc' }"
             html="Touch Here"
         ></ext-container>
     </ext-container>
+</ext-container> -->
+
 </ext-container>

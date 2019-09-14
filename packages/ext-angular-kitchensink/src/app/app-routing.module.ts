@@ -316,7 +316,7 @@ const routes : ExtAngularRoute[] = [
     { path: 'grids/addons/summary_row', component: SummaryRowComponent, text: 'Summary Row', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
     { path: 'grids/addons/grid_filtering', component: GridFilteringComponent, text: 'Grid Filtering', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
     { path: 'grids/addons/view_options', component: ViewOptionsComponent, text: 'View Options', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-    { path: 'grids/addons/row_drag_and_drop', component: RowDragAndDropComponent, text: 'Row Drag and Drop Options', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+    { path: 'grids/addons/row_drag_and_drop', component: RowDragAndDropComponent, text: 'Row Drag And Drop', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
     { path: 'grids/addons/drag_form_to_grid', component: DragFormToGridComponent, text: 'Drag Form To Grid', iconCls: 'icon-dd-form-to-grid', xtype: 'homeview', leaf: true },
 
     { path: 'grids/advanced_features/big_data', component: BigDataComponent, text: 'Big Data', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -463,7 +463,7 @@ const routes : ExtAngularRoute[] = [
 
     { path: 'd3/hierarchy/org_chart', component: OrgChartComponent, text: 'Configurable Pivot heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
     { path: 'd3/hierarchy/pack', component: PackComponent, text: 'Configurable Pivot heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-    { path: 'd3/hierarchy/treemap_tooltip', component: TreeMapToolTipComponent, text: 'TreeMap Tooltip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+    { path: 'd3/hierarchy/treemap_tool_tip', component: TreeMapToolTipComponent, text: 'TreeMap Tooltip', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
     { path: 'd3/hierarchy/configurable_pivot_treemap', component: ConfigurablePivotTreeMapComponent, text: 'Configurable Pivot TreeMap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
     { path: 'd3/hierarchy/treemap', component: TreeMapComponent, text: 'TreeMap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
     { path: 'd3/hierarchy/sunburst', component: SunburstComponent, text: 'Sunburst', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },

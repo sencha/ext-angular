@@ -26,11 +26,11 @@ export class RowExpanderComponent {
 
   grid:any;
   onGridReady = (event) => {
-    this.grid = event.ext;
+    this.grid = event.detail.cmp;
     this.grid.setPlugins(this.rowExpandeerPlugin);
   }
 
-  tplVal = 
+  tplVal =
     `
     <div>
       <div>Industry: {industry}</div>

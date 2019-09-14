@@ -14,7 +14,7 @@ export class TreeGridComponent {
   left = !this.isPhone ? '10' : null
   width = !this.isPhone ? '400' : null
   height = !this.isPhone ? '600' : null
-  
+
   store = Ext.create('Ext.data.TreeStore', {
     rootVisible: true,
     root: data
@@ -22,7 +22,7 @@ export class TreeGridComponent {
 
   tree:any;
   treeReady = (event) => {
-    this.tree = event.ext;
+    this.tree = event.detail.cmp;
   }
 
 }
