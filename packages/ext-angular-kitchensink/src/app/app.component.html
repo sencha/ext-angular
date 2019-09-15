@@ -1,5 +1,12 @@
 
-<ext-panel (ready)="readyViewport($event)" [viewport]="true" layout="fit" [bodyStyle]="bodyStyle" [fullscreen]="true" [weighted]="true">
+<ext-panel
+    (ready)="readyViewport($event)"
+    [viewport]="true"
+    layout="fit"
+    [bodyStyle]="bodyStyle"
+    [fullscreen]="true"
+    [weighted]="true"
+>
 
     <!-- ext-titlebar starts-->
     <ext-titlebar docked="top" [weight]="10" *ngIf="!isPhone" >
