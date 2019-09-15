@@ -1,4 +1,4 @@
-//Sat Sep 14 2019 11:39:18 GMT-0400 (EDT)
+//Sun Sep 15 2019 08:14:56 GMT-0400 (EDT)
 declare var Ext: any
 
 import {
@@ -95,22 +95,21 @@ initMe() {
     //    console.log('this is the end...')
     //}
 }
-;
 createRawChildren() {
     //console.log('createRawChildren')
     if (this.currentEl.isAngular) {
         this.currentEl.rawChildren = this.currentEl.childComponents;
     }
     else {
-        this.currentEl.ewcChildren = Array.prototype.slice.call(this.currentEl.children);
+        this.currentEl.ewcChildren = Array.from(this.currentEl.children);
         this.currentEl.rawChildren = [];
         var num = 0;
         for (var i = 0; i < this.currentEl.ewcChildren.length; i++) {
-            if (this.currentEl.ewcChildren[i].XTYPE != undefined) {
+            if (this.currentEl.ewcChildren[i].xtype != undefined) {
                 this.currentEl.rawChildren[num] = {};
                 this.currentEl.rawChildren[num] = this.currentEl.ewcChildren[i];
-                this.currentEl.rawChildren[num].currentComponent = this.currentEl.ewcChildren[i];
-                this.currentEl.rawChildren[num].node = this.currentEl.ewcChildren[i];
+                //this.currentEl.rawChildren[num].currentComponent = this.currentEl.ewcChildren[i];
+                //this.currentEl.rawChildren[num].node = this.currentEl.ewcChildren[i];
                 num++;
             }
         }
@@ -119,7 +118,6 @@ createRawChildren() {
     //console.log(this.currentEl.rawChildren)
 }
 setHasParent() {
-    var hasParent;
     if (this.parentEl == null) {
         this.hasParent = false;
     }
@@ -131,7 +129,6 @@ setHasParent() {
             this.hasParent = false;
         }
     }
-    //return hasParent
 }
 setDirection() {
     if (this.base.count == 0) {
@@ -170,12 +167,13 @@ init(component) {
     component.A.CHILDRENCOMPONENTSCOUNT = 0;
     component.A.CHILDRENCOMPONENTSADDED = 0;
     if (this.base.DIRECTION == 'TopToBottom') {
-        component.A.CHILDRENCOMPONENTS = this.currentEl.rawChildren;
-        for (var i = 0; i < component.A.CHILDRENCOMPONENTS.length; i++) {
-            if (component.getCurrentElName(component.A.CHILDRENCOMPONENTS[i]).substring(0, 4) == 'EXT-') {
-                component.A.CHILDRENCOMPONENTSCOUNT++;
-            }
-        }
+        component.A.CHILDRENCOMPONENTS = Array.from(this.currentEl.rawChildren);
+        component.A.CHILDRENCOMPONENTSCOUNT = this.currentEl.rawChildren.length;
+        // for (var i = 0; i < component.A.CHILDRENCOMPONENTS.length; i++) {
+        //     if (component.getCurrentElName(component.A.CHILDRENCOMPONENTS[i]).substring(0, 4) == 'EXT-') {
+        //         component.A.CHILDRENCOMPONENTSCOUNT++;
+        //     }
+        // }
         component.A.CHILDRENCOMPONENTSLEFT = component.A.CHILDRENCOMPONENTSCOUNT;
     }
 }
@@ -225,6 +223,13 @@ createExtComponent() {
             methis.currentEl.A.ext = Ext.create(meA.props);
             methis.assessChildren(methis.base, methis.xtype);
         });
+    }
+    if (A.props['viewport'] == false) {
+        if (this.parentNode != null || this.parentElName.substring(0, 4) != 'EXT-') {
+            console.log('4- Ext.create: ' + methis.currentElName + ' HTML parent: ' + methis.currentElName);
+            methis.currentEl.A.ext = Ext.create(meA.props);
+            methis.assessChildren(methis.base, methis.xtype);
+        }
     }
 }
 assessChildren(base, xtype) {
@@ -299,8 +304,8 @@ assessChildren(base, xtype) {
 
         if (base.DIRECTION == 'TopToBottom') {
             //console.log('TopToBottom');
-            this.parentEl.A.CHILDRENCOMPONENTS.push(this);
-            this.parentEl.A.CHILDRENCOMPONENTSADDED++;
+            //this.parentEl.A.CHILDRENCOMPONENTS.push(this);
+            //this.parentEl.A.CHILDRENCOMPONENTSADDED++;
             this.parentEl.A.CHILDRENCOMPONENTSLEFT--;
             if (this.parentEl.A.CHILDRENCOMPONENTSLEFT == 0) {
                 //console.log(this.parentEl)
@@ -327,8 +332,10 @@ addChildren(child, children) {
     //}
     //console.dir(children)
     for (var i = 0; i < children.length; i++) {
+        //why is this created as an object??
         var childItem = { parentCmp: {}, childCmp: {} };
-        childItem.parentCmp = this.currentEl.A.ext;
+        childItem.parentCmp = child.currentEl.A.ext;
+        ;
 
         var A2
         if (children[i]._extitems != undefined) {
@@ -562,6 +569,7 @@ sendReadyEvent(component) {
     }
 }
 //******* base end */
+//******* props start */
 createProps(properties, propertiesobject, events, eventnames) {
     var props = this.currentEl.A.props;
     props.xtype = this.xtype;
@@ -634,6 +642,8 @@ createProps(properties, propertiesobject, events, eventnames) {
         });
     }
 }
+//******* props end */
+
 
 
 
