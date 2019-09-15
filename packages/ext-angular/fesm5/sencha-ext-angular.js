@@ -55,22 +55,21 @@ var EngBase = /** @class */ (function () {
         //    console.log('this is the end...')
         //}
     };
-    ;
     EngBase.prototype.createRawChildren = function () {
         //console.log('createRawChildren')
         if (this.currentEl.isAngular) {
             this.currentEl.rawChildren = this.currentEl.childComponents;
         }
         else {
-            this.currentEl.ewcChildren = Array.prototype.slice.call(this.currentEl.children);
+            this.currentEl.ewcChildren = Array.from(this.currentEl.children);
             this.currentEl.rawChildren = [];
             var num = 0;
             for (var i = 0; i < this.currentEl.ewcChildren.length; i++) {
-                if (this.currentEl.ewcChildren[i].XTYPE != undefined) {
+                if (this.currentEl.ewcChildren[i].xtype != undefined) {
                     this.currentEl.rawChildren[num] = {};
                     this.currentEl.rawChildren[num] = this.currentEl.ewcChildren[i];
-                    this.currentEl.rawChildren[num].currentComponent = this.currentEl.ewcChildren[i];
-                    this.currentEl.rawChildren[num].node = this.currentEl.ewcChildren[i];
+                    //this.currentEl.rawChildren[num].currentComponent = this.currentEl.ewcChildren[i];
+                    //this.currentEl.rawChildren[num].node = this.currentEl.ewcChildren[i];
                     num++;
                 }
             }
@@ -79,7 +78,6 @@ var EngBase = /** @class */ (function () {
         //console.log(this.currentEl.rawChildren)
     };
     EngBase.prototype.setHasParent = function () {
-        var hasParent;
         if (this.parentEl == null) {
             this.hasParent = false;
         }
@@ -91,7 +89,6 @@ var EngBase = /** @class */ (function () {
                 this.hasParent = false;
             }
         }
-        //return hasParent
     };
     EngBase.prototype.setDirection = function () {
         if (this.base.count == 0) {
@@ -129,12 +126,13 @@ var EngBase = /** @class */ (function () {
         component.A.CHILDRENCOMPONENTSCOUNT = 0;
         component.A.CHILDRENCOMPONENTSADDED = 0;
         if (this.base.DIRECTION == 'TopToBottom') {
-            component.A.CHILDRENCOMPONENTS = this.currentEl.rawChildren;
-            for (var i = 0; i < component.A.CHILDRENCOMPONENTS.length; i++) {
-                if (component.getCurrentElName(component.A.CHILDRENCOMPONENTS[i]).substring(0, 4) == 'EXT-') {
-                    component.A.CHILDRENCOMPONENTSCOUNT++;
-                }
-            }
+            component.A.CHILDRENCOMPONENTS = Array.from(this.currentEl.rawChildren);
+            component.A.CHILDRENCOMPONENTSCOUNT = this.currentEl.rawChildren.length;
+            // for (var i = 0; i < component.A.CHILDRENCOMPONENTS.length; i++) {
+            //     if (component.getCurrentElName(component.A.CHILDRENCOMPONENTS[i]).substring(0, 4) == 'EXT-') {
+            //         component.A.CHILDRENCOMPONENTSCOUNT++;
+            //     }
+            // }
             component.A.CHILDRENCOMPONENTSLEFT = component.A.CHILDRENCOMPONENTSCOUNT;
         }
     };
@@ -184,6 +182,13 @@ var EngBase = /** @class */ (function () {
                 methis.currentEl.A.ext = Ext.create(meA.props);
                 methis.assessChildren(methis.base, methis.xtype);
             });
+        }
+        if (A.props['viewport'] == false) {
+            if (this.parentNode != null || this.parentElName.substring(0, 4) != 'EXT-') {
+                console.log('4- Ext.create: ' + methis.currentElName + ' HTML parent: ' + methis.currentElName);
+                methis.currentEl.A.ext = Ext.create(meA.props);
+                methis.assessChildren(methis.base, methis.xtype);
+            }
         }
     };
     EngBase.prototype.assessChildren = function (base, xtype) {
@@ -244,8 +249,8 @@ var EngBase = /** @class */ (function () {
         if (this.hasParent) {
             if (base.DIRECTION == 'TopToBottom') {
                 //console.log('TopToBottom');
-                this.parentEl.A.CHILDRENCOMPONENTS.push(this);
-                this.parentEl.A.CHILDRENCOMPONENTSADDED++;
+                //this.parentEl.A.CHILDRENCOMPONENTS.push(this);
+                //this.parentEl.A.CHILDRENCOMPONENTSADDED++;
                 this.parentEl.A.CHILDRENCOMPONENTSLEFT--;
                 if (this.parentEl.A.CHILDRENCOMPONENTSLEFT == 0) {
                     //console.log(this.parentEl)
@@ -272,8 +277,10 @@ var EngBase = /** @class */ (function () {
         //}
         //console.dir(children)
         for (var i = 0; i < children.length; i++) {
+            //why is this created as an object??
             var childItem = { parentCmp: {}, childCmp: {} };
-            childItem.parentCmp = this.currentEl.A.ext;
+            childItem.parentCmp = child.currentEl.A.ext;
+            ;
             var A2;
             if (children[i]._extitems != undefined) {
                 A2 = children[i].node.A;
@@ -525,6 +532,7 @@ var EngBase = /** @class */ (function () {
         }
     };
     //******* base end */
+    //******* props start */
     EngBase.prototype.createProps = function (properties, propertiesobject, events, eventnames) {
         var _this = this;
         var props = this.currentEl.A.props;
@@ -598,6 +606,7 @@ var EngBase = /** @class */ (function () {
             });
         }
     };
+    //******* props end */
     EngBase.prototype.baseOnChanges = function (changes) {
         //console.log(`ngOnChanges`)
         //console.log(changes)
