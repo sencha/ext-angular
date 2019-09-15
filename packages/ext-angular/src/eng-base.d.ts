@@ -19,6 +19,7 @@ export declare class EngBase {
     ewcChildren: any;
     rawChildren: any;
     hasParent: any;
+    parentType: any;
     children: any;
     last: any;
     _extroute: any;
@@ -32,7 +33,7 @@ export declare class EngBase {
     baseAfterViewInit(metaData: any): void;
     initMe(): void;
     createRawChildren(): void;
-    setHasParent(): void;
+    setParentType(): void;
     setDirection(): void;
     figureOutA(): void;
     init(component: any): void;
