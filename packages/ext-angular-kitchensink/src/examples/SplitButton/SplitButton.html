@@ -1,12 +1,15 @@
 <ext-container padding="10" [width]="600">
 
+    <!-- , group: 'buttonstyle'
+    , group: 'buttontype' -->
+
   <ext-container
     [layout]="{ type: 'hbox', pack: isPhone ? 'center' : 'left'}"
     [margin]="'0 0 10 0'"
     [defaults]="{ margin: '0 10 0 0' }"
     [width]="550">
     <ext-button [ui]="'action raised'" text="Style">
-      <ext-menu [defaults]="{ handler: this.onStyleChange, group: 'buttonstyle' }">
+      <ext-menu [defaults]="{ handler: this.onStyleChange }">
         <ext-menuitem text="None" value="" [iconCls]="style === 'None'?'x-font-icon md-icon-check':''"></ext-menuitem>
         <ext-menuitem text="Action" value="action" [iconCls]="style === 'Action'?'x-font-icon md-icon-check':''"></ext-menuitem>
         <ext-menuitem text="Decline" value="decline" [iconCls]="style === 'Decline'?'x-font-icon md-icon-check':''"></ext-menuitem>
@@ -14,7 +17,7 @@
       </ext-menu>
     </ext-button>
     <ext-button [ui]="'action raised'" text="Type">
-      <ext-menu [defaults]="{ handler: this.onTypeChange, group: 'buttontype'}">
+      <ext-menu [defaults]="{ handler: this.onTypeChange}">
         <ext-menuitem text="Text" value="Text" [iconCls]="type === 'Text'?'x-font-icon md-icon-check':''"></ext-menuitem>
         <ext-menuitem text="Icon" value="Icon" [iconCls]="type === 'Icon'?'x-font-icon md-icon-check':''"></ext-menuitem>
         <ext-menuitem text="Text & Icon" value="Text & Icon" [iconCls]="type === 'Text & Icon'?'x-font-icon md-icon-check':''"></ext-menuitem>

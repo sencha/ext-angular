@@ -1,5 +1,6 @@
 <ext-container padding="10" layout="fit" [fitToParent]="true">
     <ext-panel [shadow]="true" [layout]="'fit'">
+
         <ext-toolbar [docked]="'top'">
             <ext-container>
                 <ext-container>
@@ -15,6 +16,11 @@
             <ext-button (tap)="clear()" [text]="'Clear'"> </ext-button>
         </ext-toolbar>
 
-        <ext-draw (ready)="onReady($event)"></ext-draw>
+        <ext-draw
+            (ready)="onReady($event)"
+            downloadServerUrl="http://svg.sencha.io"
+        >
+        </ext-draw>
+
     </ext-panel>
 </ext-container>
