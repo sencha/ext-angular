@@ -1,5 +1,5 @@
 declare var Ext: any;
-import {Component} from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'button-component',
   templateUrl: "./Button.html",
@@ -18,10 +18,11 @@ export class ButtonComponent  {
 
   menuButtons = [];
 
+  constructor(private cd: ChangeDetectorRef) {};
+
   menuButtonReady = function(event) {
     this.menuButtons.push(event.detail.cmp);
   }
-
 
   onStyleChange = (item) => {
     this.style = item._text;
@@ -69,6 +70,7 @@ export class ButtonComponent  {
     else {
       this.ui = this.ui.replace(' round', '');
     }
+    this.cd.detectChanges();
   };
 
   styleChangeDefaults = { handler: this.onStyleChange };
