@@ -10,6 +10,7 @@ import fileData from './Files.js'
 export class BreadcrumbToolBarComponent {
   breadcrumbarCmp:any;
   treeStore:any;
+
   breadcrumbarReady = function(event) {
     this.breadcrumbarCmp = event.detail.cmp;
     this.treeStore = Ext.create('Ext.data.TreeStore', {
@@ -18,4 +19,5 @@ export class BreadcrumbToolBarComponent {
     });
     this.breadcrumbarCmp.setStore(this.treeStore);
   }
+  
 }
