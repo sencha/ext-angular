@@ -53,7 +53,7 @@ module.exports = function (env) {
         theme: theme,
         packages: packages,
         script: script,
-        emit: 'no',
+        emit: emit,
         port: port,
         profile: profile,
         environment: environment,
