@@ -253,7 +253,7 @@ const treeRoot = {
         ]},
         { text: 'Layouts', navIcon: 'icon-layouts', children: [
           { text: 'Accordion Layout', component: AccordionLayoutComponent, navIcon: 'icon-layout-accordion' },
-          { text: 'Card Layout', component: CardLayoutComponent, navIcon: 'icon-layout-card' },
+          //{ text: 'Card Layout', component: CardLayoutComponent, navIcon: 'icon-layout-card' },
           { text: 'Center Layout', component: CenterLayoutComponent, navIcon: 'icon-layout-center' },
           { text: 'Fit Layout', component: FitLayoutComponent, navIcon: 'icon-layout-fit' },
           { text: 'Form Layout', component: FormLayoutComponent, layout: 'auto', navIcon: 'icon-layout-form' },
