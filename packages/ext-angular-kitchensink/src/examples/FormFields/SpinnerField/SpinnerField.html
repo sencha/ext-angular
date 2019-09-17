@@ -1,12 +1,19 @@
-<container padding="10" layout="fit" [fitToParent]="true">
-    <formpanel [shadow]="true" [top]="top" [left]="left" [width]="width" [height]="height" padding="20">
-        <spinnerfield 
-        [label]="'Spinner'" 
-        [width]="150"
-        [minValue]="0" 
-        [maxValue]="10" 
-        [stepValue]="1" 
-        [cycle]="true"
-    ></spinnerfield>
-</formpanel>
-</container>
+<ext-container padding="10" layout="fit" [fitToParent]="true">
+    <ext-formpanel
+        [shadow]="true"
+        [top]="top"
+        [left]="left"
+        [width]="width"
+        [height]="height"
+        padding="20"
+    >
+        <ext-spinnerfield
+            [label]="'Spinner'"
+            [width]="150"
+            [minValue]="0"
+            [maxValue]="10"
+            [stepValue]="1"
+            [cycle]="true"
+        ></ext-spinnerfield>
+    </ext-formpanel>
+</ext-container>

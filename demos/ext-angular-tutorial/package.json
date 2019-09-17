@@ -1,6 +1,6 @@
 {
   "name": "ext-angular-tutorial",
-  "version": "6.7.1",
+  "version": "7.0.0",
   "description": "ext-angular-tutorial",
   "scripts": {
     "clean": "rimraf build",
@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@sencha/ext": "~6.7.0",
-    "@sencha/ext-angular": "~6.7.1",
+    "@sencha/ext-angular": "~7.0.0",
     "@sencha/ext-modern": "~6.7.0",
     "@sencha/ext-modern-treegrid": "~6.7.0",
     "@sencha/ext-modern-theme-material": "~6.7.0",

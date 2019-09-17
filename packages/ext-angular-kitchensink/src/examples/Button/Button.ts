@@ -1,5 +1,5 @@
 declare var Ext: any;
-import {Component} from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'button-component',
   templateUrl: "./Button.html",
@@ -18,13 +18,14 @@ export class ButtonComponent  {
 
   menuButtons = [];
 
+  constructor(private cd: ChangeDetectorRef) {};
+
   menuButtonReady = function(event) {
-    this.menuButtons.push(event.ext);
+    this.menuButtons.push(event.detail.cmp);
   }
 
-
   onStyleChange = (item) => {
-    this.style = item._text; 
+    this.style = item._text;
     if (this.style === 'Menu') {
       this.menu = true;
       var tempMenu = Ext.create('Ext.menu.Menu');
@@ -56,19 +57,20 @@ export class ButtonComponent  {
   }
 
   onTypeChange = (item) => {
-    this.type = item._text; 
+    this.type = item._text;
     this.iconCls = this.type.indexOf('Icon') !== -1 ? 'x-fa fa-heart' : null;
     this.text = this.type.indexOf('Text') !== -1;
   }
 
   toggleRound = function(){
     this.round=!this.round;
-    if (this.round) { 
+    if (this.round) {
       this.ui += ' round';
     }
     else {
       this.ui = this.ui.replace(' round', '');
     }
+    this.cd.detectChanges();
   };
 
   styleChangeDefaults = { handler: this.onStyleChange };

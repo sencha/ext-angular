@@ -36,7 +36,7 @@ export class CollapsibleComponent {
 
   pivotgrid:any;
   onReady = function(event) {
-    this.pivotgrid = event.ext;
+    this.pivotgrid = event.detail.cmp;
   }
 
   pivotgridMatrix = {
@@ -57,11 +57,11 @@ export class CollapsibleComponent {
       {
         dataIndex: 'person',
         header: 'Person'
-      }, 
+      },
       {
         dataIndex: 'company',
         header: 'Company'
-      }, 
+      },
       {
         dataIndex: 'year',
         header: 'Year'
@@ -71,7 +71,7 @@ export class CollapsibleComponent {
       {
         dataIndex: 'country',
         header: 'Country'
-      }, 
+      },
       {
         dataIndex: 'month',
         labelRenderer: this.monthLabelRenderer,

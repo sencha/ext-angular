@@ -1,7 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
-const ExtWebpackPlugin = require('@sencha/ext-angular-webpack-plugin')
+const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin')
 const portfinder = require('portfinder')
 
 const webpack = require("webpack")
@@ -14,7 +14,13 @@ module.exports = function (env) {
    //******* */
    var framework     = get('framework',     'angular')
    var contextFolder = get('contextFolder', './src')
-   var entryFile     = get('entryFile',     './main.ts')
+   //var entryFile     = get('entryFile',     './main.ts')
+   var entry         = get('entry',
+   {
+     vendor:  './vendor.ts',
+     polyfills: './polyfills.ts',
+     main: './main.ts'
+   })
    var outputFolder  = get('outputFolder',  'build')
    const rules = [
     {test: /\.css$/, loader: ['to-string-loader', "style-loader", "css-loader"]},
@@ -81,7 +87,7 @@ module.exports = function (env) {
       mode: environment,
       devtool: (environment === 'development') ? 'inline-source-map' : false,
       context: path.join(__dirname, contextFolder),
-      entry: entryFile,
+      entry: entry,
       output: {
         path: path.join(__dirname, outputFolder),
         filename: "[name].js"

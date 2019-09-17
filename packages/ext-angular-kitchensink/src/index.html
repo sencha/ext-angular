@@ -1,35 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Sencha ExtAngular 6.7 Kitchen Sink</title>
-    <base href="/">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes">
-    <script src="resources/code.js"></script>
+    <head>
+        <title>Sencha ExtAngular 7.0 Kitchen Sink</title>
+        <base href="/">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes">
+        <script src="resources/code.js"></script>
+        <link rel="icon" type="image/x-icon" href="resources/favicon.ico">
+        <script src="webcomponents-bundle.js"></script>
+    </head>
+
+    <script>
+        //https://examples-test.sencha.com/ExtAngular/7.0.0/kitchensink/frame-index.html?basecolor=slategray&title=Angular UI Toolkit
+        //http://localhost:1841/?basecolor=maroon&title=Angular UI Toolkit
+        //https://www.rapidtables.com/web/color/red-color.html
+        const params = new URLSearchParams(window.location.search);
+        const basecolor = params.get("basecolor");
+        window['title'] = params.get("title");
+        var d = document.documentElement.style
+        if (basecolor != null) {
+            d.setProperty('--base-color', basecolor);
+            d.setProperty('--color', basecolor);
+        }
+    </script>
     <link rel="stylesheet" type="text/css" href="resources/loader.css"/>
-    <link rel="icon" type="image/x-icon" href="resources/favicon.ico">
-  </head>
-  <body>
-    <app-root>
-      <div id="loadingSplash">
-        <div id="loadingSplashTop"></div>
-        <div id="loadingSplashBottom"></div>
-        <div class="loading-fading-circle" id="loadingSplashCircles">
-          <div class="loading-circle-1 loading-circle"></div>
-          <div class="loading-circle-2 loading-circle"></div>
-          <div class="loading-circle-3 loading-circle"></div>
-          <div class="loading-circle-4 loading-circle"></div>
-          <div class="loading-circle-5 loading-circle"></div>
-          <div class="loading-circle-6 loading-circle"></div>
-          <div class="loading-circle-7 loading-circle"></div>
-          <div class="loading-circle-8 loading-circle"></div>
-          <div class="loading-circle-9 loading-circle"></div>
-          <div class="loading-circle-10 loading-circle"></div>
-          <div class="loading-circle-11 loading-circle"></div>
-          <div class="loading-circle-12 loading-circle"></div>
-        </div>
-      </div>
-    </app-root>
-  </body>
+
+    <body>
+        <app-root>
+            <div id="loadingSplash">
+                <div id="loadingSplashTop"></div>
+                <div id="loadingSplashBottom"></div>
+                <div class="loading-fading-circle" id="loadingSplashCircles">
+                <div class="loading-circle-1 loading-circle"></div>
+                <div class="loading-circle-2 loading-circle"></div>
+                <div class="loading-circle-3 loading-circle"></div>
+                <div class="loading-circle-4 loading-circle"></div>
+                <div class="loading-circle-5 loading-circle"></div>
+                <div class="loading-circle-6 loading-circle"></div>
+                <div class="loading-circle-7 loading-circle"></div>
+                <div class="loading-circle-8 loading-circle"></div>
+                <div class="loading-circle-9 loading-circle"></div>
+                <div class="loading-circle-10 loading-circle"></div>
+                <div class="loading-circle-11 loading-circle"></div>
+                <div class="loading-circle-12 loading-circle"></div>
+                </div>
+            </div>
+        </app-root>
+    </body>
 </html>

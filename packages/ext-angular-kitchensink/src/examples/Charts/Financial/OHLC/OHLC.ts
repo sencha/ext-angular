@@ -33,8 +33,7 @@ export class OHLCComponent {
   chart:any;
 
   chartNavReady = function(event) {
-      console.log("chartNavReady");
-      this.chart = event.ext;
+      this.chart = event.detail.cmp;
       this.panzoom = this.chart.getInteraction('panzoom');
       this.crosshair = this.chart.getInteraction('crosshair');
   }

@@ -32,8 +32,7 @@ export class PlotComponent {
   chart: any;
 
   chartNavReady = function (event) {
-    console.log("chartNavReady");
-    this.chart = event.ext;
+    this.chart = event.detail.cmp;
   };
 
   toggleZoomOnPan = (zoomOnPan) => {

@@ -12,8 +12,8 @@ export class XMLGridComponent {
     autoLoad: true,
     fields:[
       {name: 'Author', mapping: '@author.name'},
-      'Title', 
-      'Manufacturer', 
+      'Title',
+      'Manufacturer',
       'ProductGroup'
     ],
     proxy:{

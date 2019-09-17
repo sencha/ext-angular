@@ -1,1 +1,1 @@
-export * from './lib/ext-angular.module';
+export * from './src/ext-angular.module';

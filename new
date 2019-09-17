@@ -6,6 +6,7 @@ Smaller prod for ExtAngular
 
 Treeshaking
 - treeshake error logic and recovery (if part 1 fails, for example)
+  - now just remove 2 part for ExtReact
 - reset project if npm run build fails
   - remove ext-angular-prod
   - update module
@@ -13,12 +14,15 @@ Treeshaking
 
 ExtGen
 - support upgrade to multi-app workspace in ext-gen
-- refactor ext-gen, et all
+- add PWA support
+- add dynamic packages support
+- refactor ext-gen, ext-react-gen, et all
 - don't assume defaults of phone and desktop for profiles in upgrade
 - implement folder parameter
 
 ExtReact
 - issue in ExtReact  https://sencha.jira.com/browse/EXTREACT-9
+- renderer in column cell
 - withRef: true and react-redux 6.0.0 (https://github.com/reduxjs/react-redux/releases)
 
 Misc

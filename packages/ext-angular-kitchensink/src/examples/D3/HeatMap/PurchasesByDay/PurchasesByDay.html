@@ -1,5 +1,5 @@
-<container padding="10" layout="fit" [fitToParent]="true">
-    <d3-heatmap 
+<ext-container padding="10" layout="fit" [fitToParent]="true">
+    <ext-d3-heatmap
         [store]="this.store"
         padding="20 20 40 60"
         [platformConfig]="platformConfigVar"
@@ -15,12 +15,12 @@
         }"
         [tiles]="{
             attr: {
-                'stroke': 'green',
+                stroke: 'green',
                 'stroke-width': 1
             }
         }"
         [tooltip]="{
             renderer: this.onTooltip
         }"
-    ></d3-heatmap>
-</container>
+    ></ext-d3-heatmap>
+</ext-container>

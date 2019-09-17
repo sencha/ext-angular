@@ -1,5 +1,11 @@
-<panel  layout="vbox" bodyPadding="20" [shadow]="true" width="300">
-        <progress  [value]="progress/100.0" [text]="progressText"></progress>
-        <container  [style]="{marginTop: '20px'}" [html]="progressText"></container>
-        <progress  [value]="progress/100.0"></progress>
-</panel>
+<ext-panel layout="vbox" bodyPadding="20" [shadow]="true" width="300">
+    <ext-progress
+        [value]="progress / 100.0"
+        [text]="progressText"
+    ></ext-progress>
+    <ext-container
+        [style]="{ marginTop: '20px' }"
+        [html]="progressText"
+    ></ext-container>
+    <ext-progress [value]="progress / 100.0"></ext-progress>
+</ext-panel>

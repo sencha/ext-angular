@@ -1,18 +1,18 @@
-<container padding="10px" layout="fit" [fitToParent]="true">
-<grid 
+<ext-container padding="10px" layout="fit" [fitToParent]="true">
+<ext-grid
   title='Ticker Grid'
   [store]="this.store"
   [itemConfig] = "gridItemConfig"
   (onInitialize)="this.init($event)"
   shadow="true">
-  <column text="Company" dataIndex="name" width="150" sortable="true"></column>
-  <column align="right" text="Price" width="85" dataIndex="price" formatter='usMoney' sortable="true"></column>
-  <column text="Trend" width="200" dataIndex="trend" sortable="false" [cell]= "trendColumnCell"></column>
-  <column align="right" text="Change" width="90" dataIndex="change" [cell]="{encodeHtml:false}" [renderer]="this.renderSign.bind(this, '0.00')" sortable="true"> </column>
-  <column align="right" text="% Change" dataIndex="pctChange" [cell]="{encodeHtml:false}" [renderer]="this.renderSign.bind(this, '0.00%')" sortable="true"></column>
-  <toolbar docked="bottom" [defaults]="{ margin: '0 20 0 0' }">
-    <label html="Tick Delay"></label>
-    <sliderfield 
+  <ext-column text="Company" dataIndex="name" width="150" sortable="true"></ext-column>
+  <ext-column align="right" text="Price" width="85" dataIndex="price" formatter='usMoney' sortable="true"></ext-column>
+  <ext-column text="Trend" width="200" dataIndex="trend" sortable="false" [cell]= "trendColumnCell"></ext-column>
+  <ext-column align="right" text="Change" width="90" dataIndex="change" [cell]="{encodeHtml:false}" [renderer]="this.renderSign.bind(this, '0.00')" sortable="true"> </ext-column>
+  <ext-column align="right" text="% Change" dataIndex="pctChange" [cell]="{encodeHtml:false}" [renderer]="this.renderSign.bind(this, '0.00%')" sortable="true"></ext-column>
+  <ext-toolbar docked="bottom" [defaults]="{ margin: '0 20 0 0' }">
+    <ext-label html="Tick Delay"></ext-label>
+    <ext-sliderfield
       [padding]="'0 5'"
       [minValue]="25"
       [maxValue]="2000"
@@ -20,15 +20,15 @@
       (change)="this.onTickDelayChange($event)"
       [value]="tickDelay"
       flex="1">
-    </sliderfield>
-    <container [html]= "tickDelay + 'ms'"></container>
-   
-    <checkboxfield  
+    </ext-sliderfield>
+    <ext-container [html]= "tickDelay + 'ms'"></ext-container>
+
+    <ext-checkboxfield
       margin="0"
       boxLabel="Flash background color on change"
       (change)="this.toggleFlashBackground($event)"
-    ></checkboxfield>
-     
-  </toolbar>
-</grid>
-</container>
+    ></ext-checkboxfield>
+
+  </ext-toolbar>
+</ext-grid>
+</ext-container>

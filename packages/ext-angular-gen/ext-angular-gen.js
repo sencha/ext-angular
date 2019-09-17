@@ -74,7 +74,7 @@ function stepStart() {
 
   console.log(boldGreen(`\ext-angular-gen - Sencha ExtAngular Code Generator v${version}`))
   console.log('')
-  
+
   let mainDefinitions = [{ name: 'command', defaultOption: true }]
   const mainCommandArgs = commandLineArgs(mainDefinitions, { stopAtFirstUnknown: true })
 //  console.log('');console.log(`mainCommandArgs: ${JSON.stringify(mainCommandArgs)}`)
@@ -151,7 +151,7 @@ function stepCheckCmdLine() {
     process.env.EXTANGULARGEN_VERBOSE = 'false'
   }
   if (cmdLine.help == true) {
-    stepHelpGeneral() 
+    stepHelpGeneral()
   }
   else if (cmdLine.command == undefined) {
     console.log(`${app} ${boldRed('[ERR]')} no command specified (app, view)`)
@@ -186,7 +186,7 @@ function stepCheckCmdLine() {
 
 function stepSeeDefaults() {
   new Confirm({
-    message: 
+    message:
     `would you like to see the defaults for package.json?`,
     default: config.seeDefaults
   }).run().then(answer => {
@@ -232,7 +232,7 @@ function stepPackageName() {
   new Input({
     message: 'What would you like to name the npm Package?',
     default:  kebabCase(answers['appName'])
-  }).run().then(answer => { 
+  }).run().then(answer => {
     answers['packageName'] = answer
     stepVersion()
   })
@@ -242,7 +242,7 @@ function stepVersion() {
   new Input({
     message: 'What version is your ExtAngular application?',
     default: config.version
-  }).run().then(answer => { 
+  }).run().then(answer => {
     if (semver.valid(answer) == null) {
       console.log('version is not a valid format, must be 0.0.0')
       stepVersion()
@@ -258,7 +258,7 @@ function stepDescription() {
   new Input({
     message: 'What is the description?',
     default: config.description
-  }).run().then(answer => { 
+  }).run().then(answer => {
     answers['description'] = answer
     stepRepositoryURL()
   })
@@ -268,7 +268,7 @@ function stepRepositoryURL() {
   new Input({
     message: 'What is the GIT repository URL?',
     default: config.repositoryURL
-  }).run().then(answer => { 
+  }).run().then(answer => {
     answers['repositoryURL'] = answer
     stepKeywords()
   })
@@ -278,7 +278,7 @@ function stepKeywords() {
   new Input({
     message: 'What are the npm keywords?',
     default: config.keywords
-  }).run().then(answer => { 
+  }).run().then(answer => {
     answers['keywords'] = answer
     stepAuthorName()
   })
@@ -288,7 +288,7 @@ function stepAuthorName() {
   new Input({
     message: `What is the Author's Name?`,
     default: config.authorName
-  }).run().then(answer => { 
+  }).run().then(answer => {
     answers['authorName'] = answer
     stepLicense()
   })
@@ -298,7 +298,7 @@ function stepLicense() {
   new Input({
     message: 'What type of License does this project need?',
     default: config.license
-  }).run().then(answer => { 
+  }).run().then(answer => {
     answers['license'] = answer
     stepBugsURL()
   })
@@ -308,7 +308,7 @@ function stepBugsURL() {
   new Input({
     message: 'What is the URL to submit bugs?',
     default: config.bugsURL
-  }).run().then(answer => { 
+  }).run().then(answer => {
     answers['bugsURL'] = answer
     stepHomepageURL()
   })
@@ -318,7 +318,7 @@ function stepHomepageURL() {
   new Input({
     message: 'What is the Home Page URL?',
     default: config.homepageURL
-  }).run().then(answer => { 
+  }).run().then(answer => {
     answers['homepageURL'] = answer
     stepGo()
   })
@@ -476,7 +476,7 @@ ext-angular-gen app (-h) (-d) (-i) (-n 'name')
 -n --name          name for Ext JS generated app
 -v --verbose       verbose npm messages (for problems only)
 
-${boldGreen('Examples:')} 
+${boldGreen('Examples:')}
 ext-angular-gen app  --name CoolExtAngularApp
 ext-angular-gen app --interactive
 ext-angular-gen app -a -n CoolExtAngularApp
@@ -486,11 +486,11 @@ ext-angular-gen app -a -n CoolExtAngularApp
 }
 
 function stepShortHelp() {
-  var message = `${boldGreen('Quick Start:')} 
+  var message = `${boldGreen('Quick Start:')}
 ext-angular-gen app CoolExtAngularApp
 ext-angular-gen app -i
- 
-${boldGreen('Examples:')} 
+
+${boldGreen('Examples:')}
 ext-angular-gen app --name CoolExtAngularApp
 
 Run ${boldGreen('ext-angular-gen --help')} to see all options

@@ -1,0 +1,11 @@
+.multi-column-checkbox-group .x-label-el, .multi-column-radio-group .x-label-el {
+  padding-top: 0px;
+}
+.multi-column-checkbox-group .x-error-el, .multi-column-radio-group .x-error-el {
+  position: absolute;
+  left: 75px;
+  top: 0;
+}
+.multi-column-checkbox-group .x-error-el .x-font-icon:before, .multi-column-radio-group .x-error-el .x-font-icon:before {
+  font-size: 16px;
+}

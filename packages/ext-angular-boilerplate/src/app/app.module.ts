@@ -1,16 +1,28 @@
-declare var Ext: any
-import { NgModule, ModuleWithProviders } from '@angular/core'
+import { Inject, NgModule, ModuleWithProviders } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { Route, RouterModule } from '@angular/router'
 
 import { ExtAngularModule } from '@sencha/ext-angular';
-import { ExtAngularBootstrapService } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.service';
-import { ExtAngularBootstrapComponent } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.component';
+
+
+// import { ExtContainerComponent } from '@sencha/ext-angular-all/lib/ext-container.component';
+// import { ExtTitlebarComponent } from '@sencha/ext-angular-all/lib/ext-titlebar.component';
+// import { ExtButtonComponent } from '@sencha/ext-angular-all/lib/ext-button.component';
+// import { ExtPanelComponent } from '@sencha/ext-angular-all/lib/ext-panel.component';
+// import { ExtTreelistComponent } from '@sencha/ext-angular-all/lib/ext-treelist.component';
+// import { ExtGridComponent } from '@sencha/ext-angular-all/lib/ext-grid.component';
+// import { ExtToolbarComponent } from '@sencha/ext-angular-all/lib/ext-toolbar.component';
+// import { ExtSearchfieldComponent } from '@sencha/ext-angular-all/lib/ext-searchfield.component';
+// import { ExtColumnComponent } from '@sencha/ext-angular-all/lib/ext-column.component';
+
+//import { ExtAngularBootstrapService } from '@sencha/ext-angular-all/lib/ext-angular-bootstrap.service';
+//import { ExtAngularBootstrapComponent } from '@sencha/ext-angular-all/lib/ext-angular-bootstrap.component';
 
 import { AppComponent } from './app.component'
 import { HomeComponent } from './Home/home.component'
 import { AboutComponent } from './About/about.component'
 import { NavMenuComponent } from './NavMenu/navmenu.component'
+
 
 const routes: Route[] = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -20,14 +32,43 @@ const routes: Route[] = [
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {useHash: true});
 
 @NgModule({
-  imports:         [BrowserModule, ExtAngularModule, routingModule],
-  declarations:    [ExtAngularBootstrapComponent, AppComponent, HomeComponent, AboutComponent, NavMenuComponent],
-  providers:       [ExtAngularBootstrapService],
-  entryComponents: [AppComponent],
-  bootstrap:       [ExtAngularBootstrapComponent]
-})
-export class AppModule {
-  constructor(extAngularService : ExtAngularBootstrapService) {
-    extAngularService.setBootStrapComponent(AppComponent)
+  imports:         [BrowserModule, routingModule, ExtAngularModule],
+  declarations:    [
+        //ExtAngularBootstrapComponent,
+        AppComponent,
+        HomeComponent,
+        AboutComponent,
+        NavMenuComponent,
+
+        // ExtContainerComponent,
+        // ExtTitlebarComponent,
+        // ExtButtonComponent,
+        // ExtPanelComponent,
+        // ExtTreelistComponent,
+        // ExtGridComponent,
+        // ExtToolbarComponent,
+        // ExtSearchfieldComponent,
+        // ExtColumnComponent
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
+  })
+  export class AppModule {
   }
-}
+
+
+
+
+//   providers:       [],
+//   bootstrap:       [AppComponent]
+// })
+// export class AppModule {}
+// // export class AppModule {
+
+//     Ext.onReady(function() {
+
+
+// //   constructor(@Inject(ExtAngularBootstrapService) extAngularService : ExtAngularBootstrapService) {
+// //     extAngularService.setBootStrapComponent(AppComponent)
+// //   }
+// // }

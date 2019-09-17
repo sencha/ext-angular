@@ -1,5 +1,5 @@
-<container padding="10" layout="fit" [fitToParent]="true">
-    <d3-treemap 
+<ext-container padding="10" layout="fit" [fitToParent]="true">
+    <ext-d3-treemap
         [rootVisible]="false"
         [interactions]="{
             type: 'panzoom',
@@ -17,7 +17,7 @@
             ui: 'd3-treemap',
             trackMouse: true,
             renderer: tooltipRenderer
-          }"
+        }"
         [colorAxis]="colorAxis"
-    ></d3-treemap>
-</container>
+    ></ext-d3-treemap>
+</ext-container>

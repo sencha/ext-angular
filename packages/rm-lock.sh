@@ -4,4 +4,3 @@ rm ext-angular-demo/package-lock.json
 rm ext-angular-gen/package-lock.json
 rm ext-angular-kitchensink/package-lock.json
 rm ext-angular-tests/package-lock.json
-rm ext-angular-webpack-plugin/package-lock.json

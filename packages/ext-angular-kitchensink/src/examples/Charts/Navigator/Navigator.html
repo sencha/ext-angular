@@ -1,19 +1,23 @@
-<container [padding]="!isPhone ? '15' : ''" layout="fit" [fitToParent]="true">
+<ext-container
+    [padding]="!isPhone ? '10' : ''"
+    layout="vbox"
+    [fitToParent]="true"
+>
+    <ext-container><div #extitem>
+        <chart-toolbar
+            [onThemeChange]="this.changeTheme"
+            [onToggleZoomOnPan]="this.toggleZoomOnPan"
+            [theme]="theme"
+        >
+        </chart-toolbar>
+    </div></ext-container>
 
-  <container docked="top"><div #extitem>
-    <chart-toolbar
-      [onThemeChange]="this.changeTheme"
-      [onToggleZoomOnPan]="this.toggleZoomOnPan"
-      [theme]="theme">
-    </chart-toolbar>
-  </div></container>
-
-  <chartnavigator
-    [width]="'800px'"
-    [shadow]="true"
-    (ready)="chartNavReady($event)"
-    [navigator]="{ axis: 'bottom' }"
-    [chart]="chartNavChart">
-  </chartnavigator>
-
-</container>
+    <ext-chartnavigator
+        flex="1"
+        [shadow]="true"
+        (ready)="chartNavReady($event)"
+        [navigator]="{ axis: 'bottom', downloadServerUrl: 'http://svg.sencha.io' }"
+        [chart]="chartNavChart"
+    >
+    </ext-chartnavigator>
+</ext-container>

@@ -1,29 +1,36 @@
-<container padding="10px" layout="fit" [fitToParent]="true">
-  <tree 
-    [shadow]="true" [top]="top" [left]="left" [width]="width" [height]="height"
-    rootVisible="false"
-    [store]="this.store"
-    (select)="this.onSelectionChange($event)"
-    (selectionchange)="this.onSelectionChange($event)"
-    [columns]="[{
-      xtype:'treecolumn',
-      text:'Name',
-      dataIndex:'name',
-      width:'100%'
-    }]"
-    (ready)="onTreeReady($event)">
-
-    <toolbar docked="bottom">
-      <textfield
-        (action)="this.onFieldAction($event)"
-        (ready)="onTextFieldReady($event)">
-      </textfield>
-      <button  
-        text="Add Territory"
-        (tap)="this.addItem($event)"
-        (ready)="onButtonReady($event)">
-      </button>
-    </toolbar>
-
-  </tree>
-</container>
+<ext-container padding="10px" layout="fit" [fitToParent]="true">
+    <ext-tree
+        [shadow]="true"
+        [top]="top"
+        [left]="left"
+        [width]="width"
+        [height]="height"
+        rootVisible="false"
+        [store]="this.store"
+        (select)="this.onSelectionChange($event)"
+        (selectionchange)="this.onSelectionChange($event)"
+        [columns]="[
+            {
+                xtype: 'treecolumn',
+                text: 'Name',
+                dataIndex: 'name',
+                width: '100%'
+            }
+        ]"
+        (ready)="onTreeReady($event)"
+    >
+        <ext-toolbar docked="bottom">
+            <ext-textfield
+                (action)="this.onFieldAction($event)"
+                (ready)="onTextFieldReady($event)"
+            >
+            </ext-textfield>
+            <ext-button
+                text="Add Territory"
+                (tap)="this.addItem($event)"
+                (ready)="onButtonReady($event)"
+            >
+            </ext-button>
+        </ext-toolbar>
+    </ext-tree>
+</ext-container>
