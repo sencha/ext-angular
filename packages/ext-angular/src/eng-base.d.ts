@@ -38,7 +38,9 @@ export declare class EngBase {
     figureOutA(): void;
     init(component: any): void;
     createExtComponent(): void;
+    assessAngularChildren(base: any, xtype: any, A: any): void;
     assessChildren(base: any, xtype: any): void;
+    checkParent(component: any, base: any, me: any): void;
     addChildren(child: any, children: any): void;
     addTheChild(parentCmp: any, childCmp: any, location: any): void;
     atEnd(): void;

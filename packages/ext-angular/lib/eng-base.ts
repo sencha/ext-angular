@@ -1,4 +1,4 @@
-//Sun Sep 15 2019 18:04:44 GMT-0400 (EDT)
+//Tue Sep 17 2019 08:20:59 GMT-0400 (EDT)
 declare var Ext: any
 
 import {
@@ -171,7 +171,6 @@ init(component) {
     component.A.CHILDRENCOMPONENTSADDED = component.A.CHILDRENCOMPONENTSCOUNT;
     component.A.CHILDRENCOMPONENTSLEFT = component.A.CHILDRENCOMPONENTSCOUNT;
 }
-
 createExtComponent() {
     var A = this.currentEl.A;
     //console.dir(A)
@@ -247,9 +246,7 @@ createExtComponent() {
     }
 }
 
-assessChildren(base, xtype) {
-    //console.log('assessChildren for: ' + xtype);
-    var A = this.currentEl.A;
+assessAngularChildren(base, xtype, A) {
     if (this._extitems != undefined) {
         if (this._extitems.length == 1) {
             var el = Ext.get(this._extitem.nativeElement);
@@ -262,6 +259,14 @@ assessChildren(base, xtype) {
             A.ext.setHtml(this._extroute.nativeElement);
         }
     }
+}
+
+
+
+assessChildren(base, xtype) {
+    //console.log('assessChildren for: ' + xtype);
+    var A = this.currentEl.A;
+    this.assessAngularChildren(base, xtype, A)
 
     if (base.DIRECTION == 'BottomToTop') {
         if (A.CHILDRENCOMPONENTSCOUNT == 0 &&
@@ -299,14 +304,35 @@ assessChildren(base, xtype) {
         }
     }
     else { //base.DIRECTION == 'TopToBottom'
-        this.parentEl.A.CHILDRENCOMPONENTSLEFT--;
-        if (this.parentEl.A.CHILDRENCOMPONENTSLEFT == 0) {
-            //console.log(this.parentEl)
-            this.addChildren(this.parentEl, this.parentEl.A.CHILDRENCOMPONENTS);
-            //console.log('3- ready event for ' + this.parentElName + '(parent)');
-            this.sendReadyEvent(this.parentEl);
+        if (this.parentType == 'ext') {
+            //console.log('this: ' + A.xtype + ' ' + A.props.title + ' parent: ' + this.parentEl.A.xtype)
+            //console.log('length=0, send ready for ' + this.xtype)
+            this.sendReadyEvent(this);
         }
+        // else {
+        //     //console.log(A.props)
+        //     //console.log('this: ' + A.xtype + ' ' + A.props.title + ' root: ')
+        // }
+        if (A.CHILDRENCOMPONENTS.length == 0) {
+            this.checkParent(this.parentEl, base, this)
+        }
+        // else {
+        //     //base.COMPONENTCOUNT = base.COMPONENTCOUNT + A.CHILDRENCOMPONENTS.length;
+        // }
+    }
+}
 
+checkParent(component, base, me) {
+    if (component.A == null) {
+        me.sendReadyEvent(me)
+    }
+    else {
+        component.A.CHILDRENCOMPONENTSLEFT--
+        //base.COMPONENTLEFTCOUNT = base.COMPONENTLEFTCOUNT + 1;
+        if (component.A.CHILDRENCOMPONENTSLEFT == 0) {
+            this.addChildren(component, component.A.CHILDRENCOMPONENTS)
+            this.checkParent(component.parentEl, base, component)
+        }
     }
 }
 
