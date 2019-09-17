@@ -8,6 +8,14 @@
  * @accessor
  */
 
+  /**
+ * @cfg {Boolean} [titleCollapse]
+ * `true` to allow expanding and collapsing the panel (when `{@link #collapsible} = true`)
+ * by clicking anywhere in the header bar, `false` to allow it only by clicking to tool
+ * button.
+ * @since 7.0
+ */
+
 /**
  * @cfg {'top'/'right'/'bottom'/'left'/Boolean/Object} [collapsible]
  * A configuration for a {@link Ext.panel.Collapser Collapser}.

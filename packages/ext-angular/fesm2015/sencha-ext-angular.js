@@ -1,228 +1,602 @@
 import { __decorate, __metadata, __param } from 'tslib';
-import { defineInjectable, inject, ComponentFactoryResolver, ApplicationRef, INJECTOR, Injectable, Injector, Component, EventEmitter, ContentChild, ContentChildren, QueryList, forwardRef, Host, Optional, SkipSelf, ElementRef, NgModule } from '@angular/core';
-import '@angular/platform-browser-dynamic';
+import { EventEmitter, ContentChild, ContentChildren, QueryList, ElementRef, Host, Optional, SkipSelf, Component, forwardRef, NgModule } from '@angular/core';
 
-let ExtAngularBootstrapService = class ExtAngularBootstrapService {
-    constructor(componentFactoryResolver, appRef, injector) {
-        this.componentFactoryResolver = componentFactoryResolver;
-        this.appRef = appRef;
-        this.injector = injector;
-    }
-    appendComponentToViewport() {
-        //console.log("In appendComponentToViewport")
-        if (!this.bootstrapComponent) {
-            throw new Error("Bootstrap component not set. Please use extAngularService.setBootStrapComponent(yourComponent) to setup bootstrap component from your root module constructor");
-        }
-        //console.log("bootstrapComponent : " + this.bootstrapComponent)
-        const componentRef = this.componentFactoryResolver
-            .resolveComponentFactory(this.bootstrapComponent)
-            .create(this.injector);
-        this.appRef.attachView(componentRef.hostView);
-        const domElem = componentRef.hostView
-            .rootNodes[0];
-        var root = document.getElementsByClassName('x-viewport-body-el')[0];
-        root.appendChild(domElem);
-    }
-    setBootStrapComponent(component) {
-        //console.log("In setBootStrapComponent")
-        this.bootstrapComponent = component;
-    }
-};
-ExtAngularBootstrapService.ngInjectableDef = defineInjectable({ factory: function ExtAngularBootstrapService_Factory() { return new ExtAngularBootstrapService(inject(ComponentFactoryResolver), inject(ApplicationRef), inject(INJECTOR)); }, token: ExtAngularBootstrapService, providedIn: "root" });
-ExtAngularBootstrapService = __decorate([
-    Injectable({
-        providedIn: 'root'
-    }),
-    __metadata("design:paramtypes", [ComponentFactoryResolver,
-        ApplicationRef,
-        Injector])
-], ExtAngularBootstrapService);
-
-let ExtAngularBootstrapComponent = class ExtAngularBootstrapComponent {
-    constructor(extAngularService) {
-        this.extAngularService = extAngularService;
-        //console.log("In App constructor")
-        this.extAngularService.appendComponentToViewport();
-    }
-};
-ExtAngularBootstrapComponent = __decorate([
-    Component({
-        selector: 'app-root',
-        template: ``
-    }),
-    __metadata("design:paramtypes", [ExtAngularBootstrapService])
-], ExtAngularBootstrapComponent);
-
-class base {
+class EngBase {
     constructor(nativeElement, metaData, hostComponent) {
         this.metaData = metaData;
         this.hostComponent = hostComponent;
-        this._extChildren = false;
-        this.q = null;
-        this._nativeElement = nativeElement;
-        this._hostComponent = hostComponent;
-        metaData.EVENTNAMES.forEach((event, n) => {
+        this.node = nativeElement;
+        this.parentNode = hostComponent;
+        this.newDiv = document.createElement('div');
+        //var t = document.createTextNode("newDiv");
+        //this.newDiv.appendChild(t);
+        this.node.insertAdjacentElement('beforebegin', this.newDiv);
+        this.xtype = metaData.XTYPE;
+        this.properties = metaData.PROPERTIES;
+        this.propertiesobject = 'propertiesobject';
+        this.events = metaData.EVENTS;
+        this.eventnames = metaData.EVENTNAMES;
+        this.base = EngBase;
+        this.eventnames.forEach((event, n) => {
             if (event != 'fullscreen') {
-                this[event] = new EventEmitter();
+                this.currentEl[event] = new EventEmitter();
             }
             else {
-                this[event + 'event'] = new EventEmitter();
+                this.currentEl[event + 'event'] = new EventEmitter();
             }
         });
     }
-    baseOnInit(metaData) {
-        //console.log(`ngOnInit: ${metaData.XTYPE}`)
-        let me = this;
-        let o = {};
-        o.xtype = metaData.XTYPE;
-        let listenersProvided = false;
-        for (var i = 0; i < me.metaData.PROPERTIES.length; i++) {
-            var prop = me.metaData.PROPERTIES[i];
-            if (prop == 'handler') {
-                if (me[prop] != undefined) {
-                    o[prop] = me[prop];
+    get childComponents() {
+        return this._childComponents.filter(item => item !== this);
+    }
+    baseOnInit(metaData) { }
+    baseAfterViewInit(metaData) {
+        this.initMe();
+    }
+    //******* base start */
+    initMe() {
+        //console.log('');console.log('*** initMe for ' + this.currentElName);
+        this.createRawChildren();
+        this.setParentType();
+        this.setDirection();
+        this.figureOutA();
+        this.createProps(this.properties, this.propertiesobject, this.events, this.eventnames);
+        this.createExtComponent();
+    }
+    createRawChildren() {
+        if (this.currentEl.isAngular) {
+            this.currentEl.rawChildren = this.currentEl.childComponents;
+        }
+        else {
+            this.currentEl.ewcChildren = Array.from(this.currentEl.children);
+            this.currentEl.rawChildren = [];
+            var num = 0;
+            for (var i = 0; i < this.currentEl.ewcChildren.length; i++) {
+                if (this.currentEl.ewcChildren[i].xtype != undefined) {
+                    this.currentEl.rawChildren[num] = this.currentEl.ewcChildren[i];
+                    num++;
+                }
+                else {
+                    //do something with div (add an Ext.widget...)
                 }
             }
-            //need to handle listeners coming in here
-            if ((o.xtype === 'cartesian' || o.xtype === 'polar') && prop === 'layout') ;
-            else if (prop == 'listeners' && me[prop] != undefined) {
-                o[prop] = me[prop];
-                listenersProvided = true;
+        }
+    }
+    setParentType() {
+        // if (this.parentEl == null) {
+        //     this.hasParent = false;
+        // }
+        // else {
+        //     if (this.parentElName.substring(0, 4) == 'EXT-') {
+        //         this.hasParent = true;
+        //     }
+        //     else {
+        //         this.hasParent = false;
+        //     }
+        // }
+        if (this.parentNode == null) {
+            this.parentType = 'html';
+        }
+        else {
+            if (this.parentElName.substring(0, 4) == 'EXT-') {
+                this.parentType = 'ext';
             }
             else {
-                if (me[prop] != undefined &&
-                    prop != 'listeners' &&
-                    prop != 'config' &&
-                    prop != 'handler' &&
-                    prop != 'fitToParent') {
-                    o[prop] = me[prop];
+                this.parentType = 'html';
+            }
+        }
+    }
+    setDirection() {
+        if (this.base.count == 0) {
+            this.base.count++;
+            //        if (this.hasParent == false) {
+            if (this.parentType != 'ext') {
+                this.base.DIRECTION = 'TopToBottom';
+            }
+            else {
+                //if (this.parentElName.substring(0, 4) == 'EXT-') {
+                this.base.DIRECTION = 'BottomToTop';
+                //}
+                //else {
+                //    this.base.DIRECTION = 'TopToBottom';
+                //}
+            }
+        }
+        //console.log(this.base.DIRECTION);
+    }
+    figureOutA() {
+        if (this.parentType == 'ext' &&
+            this.parentEl.A == undefined &&
+            this.parentEl.nodeName.substring(0, 4) == 'EXT-') {
+            this.init(this.parentEl);
+        }
+        if (this.currentEl.A == undefined) {
+            this.init(this.currentEl);
+        }
+    }
+    init(component) {
+        component.A = {};
+        component.A.props = {};
+        component.A.xtype = component.xtype;
+        component.A.CHILDRENCOMPONENTS = Array.from(this.currentEl.rawChildren);
+        component.A.CHILDRENCOMPONENTSCOUNT = this.currentEl.rawChildren.length;
+        component.A.CHILDRENCOMPONENTSADDED = component.A.CHILDRENCOMPONENTSCOUNT;
+        component.A.CHILDRENCOMPONENTSLEFT = component.A.CHILDRENCOMPONENTSCOUNT;
+    }
+    createExtComponent() {
+        var A = this.currentEl.A;
+        //console.dir(A)
+        var meA = A;
+        var methis = this;
+        if (methis.base.DIRECTION == 'BottomToTop') {
+            if (A.props['viewport'] == true) {
+                //this.newDiv.parentNode.removeChild(this.newDiv);
+                if (this.parentType == 'html') {
+                    Ext.onReady(function () {
+                        methis.currentEl.A.ext = Ext.create(meA.props);
+                        //console.log('0-Ext.application: ' + meA.props.xtype);
+                        methis.assessChildren(methis.base, methis.xtype);
+                        Ext.application({
+                            name: 'MyEWCApp',
+                            launch: function () {
+                                Ext.Viewport.add([methis.currentEl.A.ext]);
+                                if (window['router']) {
+                                    window['router'].init();
+                                }
+                                methis.sendReadyEvent(methis);
+                            }
+                        });
+                    });
+                }
+                else {
+                    console.error('error: viewport not allowed on this element');
+                }
+            }
+            else {
+                if (this.parentType == 'html') {
+                    meA.props.renderTo = this.newDiv;
+                }
+                Ext.onReady(function () {
+                    //console.log(this.parentType + ' - Ext.create: ' + methis.currentElName + ' HTML parent: ' + methis.currentElName);
+                    methis.currentEl.A.ext = Ext.create(meA.props);
+                    methis.assessChildren(methis.base, methis.xtype);
+                });
+            }
+        }
+        else {
+            console.log('TopToBottom');
+            if (A.props['viewport'] == true) {
+                //this.newDiv.parentNode.removeChild(this.newDiv);
+                if (this.parentType == 'html') {
+                    Ext.onReady(function () {
+                        methis.currentEl.A.ext = Ext.create(meA.props);
+                        //console.log('0-Ext.application: ' + meA.props.xtype);
+                        methis.assessChildren(methis.base, methis.xtype);
+                        Ext.application({
+                            name: 'MyEWCApp',
+                            launch: function () {
+                                Ext.Viewport.add([methis.currentEl.A.ext]);
+                                if (window['router']) {
+                                    window['router'].init();
+                                }
+                                methis.sendReadyEvent(methis);
+                            }
+                        });
+                    });
+                }
+                else {
+                    console.error('error: viewport not allowed on this element');
+                }
+            }
+            else {
+                if (this.parentType == 'html') {
+                    meA.props.renderTo = this.newDiv;
+                }
+                Ext.onReady(function () {
+                    //console.log(this.parentType + ' - Ext.create: ' + methis.currentElName + ' HTML parent: ' + methis.currentElName);
+                    methis.currentEl.A.ext = Ext.create(meA.props);
+                    methis.assessChildren(methis.base, methis.xtype);
+                });
+            }
+        }
+    }
+    assessAngularChildren(base, xtype, A) {
+        if (this._extitems != undefined) {
+            if (this._extitems.length == 1) {
+                var el = Ext.get(this._extitem.nativeElement);
+                var w = Ext.create({ xtype: 'widget', element: el });
+                this.addTheChild(A.ext, w, null);
+            }
+        }
+        if (this._extitems != undefined) {
+            if (this._extroutes.length == 1) {
+                A.ext.setHtml(this._extroute.nativeElement);
+            }
+        }
+    }
+    assessChildren(base, xtype) {
+        //console.log('assessChildren for: ' + xtype);
+        var A = this.currentEl.A;
+        this.assessAngularChildren(base, xtype, A);
+        if (base.DIRECTION == 'BottomToTop') {
+            if (A.CHILDRENCOMPONENTSCOUNT == 0 &&
+                A.CHILDRENCOMPONENTS.length == 0 &&
+                this.parentType == 'html') {
+                //console.log('Solo');
+                //console.log('1- ready event for ' + this.currentElName);
+                this.sendReadyEvent(this);
+            }
+            else if (A.CHILDRENCOMPONENTSADDED > 0) {
+                this.addChildren(this, A.CHILDRENCOMPONENTS);
+                //this.node.remove(); ?? is this needed??
+            }
+            if (this.parentType != 'ext') {
+                if (base.DIRECTION == 'BottomToTop') {
+                    //console.log('5- ready event for ' + this.currentElName);
+                    this.sendReadyEvent(this);
+                }
+            }
+            if (this.parentType == 'ext') {
+                if (base.DIRECTION == 'BottomToTop') {
+                    this.parentEl.A.CHILDRENCOMPONENTS.push(this.currentEl);
+                    this.parentEl.A.CHILDRENCOMPONENTSADDED++;
+                    //console.log('4- ready event for ' + this.currentElName);
+                    this.sendReadyEvent(this);
+                }
+                else {
+                    this.parentEl.A.CHILDRENCOMPONENTSLEFT--;
+                    if (this.parentEl.A.CHILDRENCOMPONENTSLEFT == 0) {
+                        this.addChildren(this.parentEl, this.parentEl.A.CHILDRENCOMPONENTS);
+                        //console.log('3- ready event for ' + this.parentElName + '(parent)');
+                        this.sendReadyEvent(this.parentEl);
+                    }
                 }
             }
         }
-        if (true === me.fitToParent) {
-            o.top = 0,
-                o.left = 0,
-                o.width = '100%',
-                o.height = '100%';
+        else { //base.DIRECTION == 'TopToBottom'
+            if (this.parentType == 'ext') {
+                //console.log('this: ' + A.xtype + ' ' + A.props.title + ' parent: ' + this.parentEl.A.xtype)
+                //console.log('length=0, send ready for ' + this.xtype)
+                this.sendReadyEvent(this);
+            }
+            // else {
+            //     //console.log(A.props)
+            //     //console.log('this: ' + A.xtype + ' ' + A.props.title + ' root: ')
+            // }
+            if (A.CHILDRENCOMPONENTS.length == 0) {
+                this.checkParent(this.parentEl, base, this);
+            }
+            // else {
+            //     //base.COMPONENTCOUNT = base.COMPONENTCOUNT + A.CHILDRENCOMPONENTS.length;
+            // }
         }
-        if (me.config !== {}) {
-            Ext.apply(o, me.config);
-        }
-        if (!listenersProvided) {
-            o.listeners = {};
-            var EVENTS = metaData.EVENTS;
-            EVENTS.forEach(function (event, index, array) {
-                let eventname = event.name;
-                let eventparameters = event.parameters;
-                o.listeners[eventname] = function () {
-                    let parameters = eventparameters;
-                    let parms = parameters.split(',');
-                    let args = Array.prototype.slice.call(arguments);
-                    let emitparms = {};
-                    for (let i = 0, j = parms.length; i < j; i++) {
-                        emitparms[parms[i]] = args[i];
-                    }
-                    me[eventname].emit(emitparms);
-                };
-            });
-        }
-        if (this._nativeElement.parentElement != null) {
-            o.renderTo = this._nativeElement;
-        }
-        if (o.xtype == 'dialog') {
-            o.renderTo = undefined;
-        }
-        this.ext = Ext.create(o);
     }
-    baseAfterContentInit() {
-        if (this._extitems.length == 1) {
-            if (this._hostComponent != null) {
-                this.ext.setHtml(this._extitem.nativeElement);
+    checkParent(component, base, me) {
+        if (component.A == null) {
+            me.sendReadyEvent(me);
+        }
+        else {
+            component.A.CHILDRENCOMPONENTSLEFT--;
+            //base.COMPONENTLEFTCOUNT = base.COMPONENTLEFTCOUNT + 1;
+            if (component.A.CHILDRENCOMPONENTSLEFT == 0) {
+                this.addChildren(component, component.A.CHILDRENCOMPONENTS);
+                this.checkParent(component.parentEl, base, component);
             }
         }
-        if (this._extroutes.length == 1) {
-            this.ext.setHtml(this._extroute.nativeElement);
-        }
-        if (this._hostComponent != null) {
-            var parentCmp = this._hostComponent.ext;
-            var childCmp = this.ext;
-            this.addTheChild(parentCmp, childCmp);
-        }
-        this['ready'].emit(this);
     }
-    addTheChild(parentCmp, childCmp) {
+    addChildren(child, children) {
+        for (var i = 0; i < children.length; i++) {
+            //why is this created as an object??
+            var childItem = { parentCmp: {}, childCmp: {} };
+            childItem.parentCmp = child.currentEl.A.ext;
+            var A2;
+            if (children[i]._extitems != undefined) {
+                A2 = children[i].node.A;
+            }
+            else {
+                A2 = children[i].A;
+            }
+            childItem.childCmp = A2.ext;
+            this.addTheChild(childItem.parentCmp, childItem.childCmp, null);
+        }
+    }
+    addTheChild(parentCmp, childCmp, location) {
         var parentxtype = parentCmp.xtype;
         var childxtype = childCmp.xtype;
-        if (this.ext.initialConfig.align != undefined) {
-            if (parentxtype != 'titlebar' && parentxtype != 'grid' && parentxtype != 'button') {
+        //console.log('addTheChild: ' + parentxtype + '(' + parentCmp.ext + ')' + ' - ' + childxtype + '(' + childCmp.ext + ')');
+        //if (childxtype == 'widget')
+        if (this.currentEl.A.ext.initialConfig.align != undefined) {
+            if (parentxtype != 'tooltip' && parentxtype != 'titlebar' && parentxtype != 'grid' && parentxtype != 'lockedgrid' && parentxtype != 'button') {
                 console.error('Can only use align property if parent is a Titlebar or Grid or Button');
                 return;
             }
         }
-        if (parentxtype === 'grid' || parentxtype === 'lockedgrid') {
-            if (childxtype === 'column' || childxtype === 'treecolumn' || childxtype === 'textcolumn' || childxtype === 'checkcolumn' || childxtype === 'datecolumn' || childxtype === 'rownumberer' || childxtype === 'numbercolumn' || childxtype === 'booleancolumn') {
-                parentCmp.addColumn(childCmp);
-                return;
-            }
-            else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
-                if (parentCmp.getHideHeaders() === false) {
-                    //var j = parentCmp.items.items.length;
-                    parentCmp.insert(1, childCmp);
-                    return;
+        var defaultparent = false;
+        var defaultchild = false;
+        switch (parentxtype) {
+            case 'button':
+                switch (childxtype) {
+                    case 'menu':
+                        parentCmp.setMenu(childCmp);
+                        break;
+                    default:
+                        defaultparent = true;
+                        break;
+                }
+                break;
+            case 'booleancolumn':
+            case 'checkcolumn':
+            case 'gridcolumn':
+            case 'column':
+            case 'templatecolumn':
+            case 'gridcolumn':
+            case 'column':
+            case 'templatecolumn':
+            case 'datecolumn':
+            case 'dragcolumn':
+            case 'numbercolumn':
+            case 'selectioncolumn':
+            case 'textcolumn':
+            case 'treecolumn':
+            case 'rownumberer':
+                switch (childxtype) {
+                    case 'renderercell':
+                        parentCmp.setCell(childCmp);
+                        break;
+                    case 'column':
+                    case 'gridcolumn':
+                        parentCmp.add(childCmp);
+                        break;
+                    default:
+                        defaultparent = true;
+                        break;
+                }
+                break;
+            case 'grid':
+            case 'lockedgrid':
+                switch (childxtype) {
+                    case 'gridcolumn':
+                    case 'column':
+                    case 'treecolumn':
+                    case 'textcolumn':
+                    case 'checkcolumn':
+                    case 'datecolumn':
+                    case 'rownumberer':
+                    case 'numbercolumn':
+                    case 'booleancolumn':
+                        if (location == null) {
+                            if (parentxtype == 'grid') {
+                                parentCmp.addColumn(childCmp);
+                            }
+                            else {
+                                parentCmp.add(childCmp);
+                            }
+                        }
+                        else {
+                            var regCols = 0;
+                            if (parentCmp.registeredColumns != undefined) {
+                                regCols = parentCmp.registeredColumns.length;
+                            }
+                            if (parentxtype == 'grid') {
+                                //mjg console.log(parentCmp)
+                                parentCmp.insertColumn(location + regCols, childCmp);
+                            }
+                            else {
+                                parentCmp.insert(location + regCols, childCmp);
+                            }
+                        }
+                        break;
+                    default:
+                        defaultparent = true;
+                        break;
+                }
+                break;
+            default:
+                defaultparent = true;
+                break;
+        }
+        ;
+        switch (childxtype) {
+            case 'toolbar':
+            case 'titlebar':
+                if (parentCmp.getHideHeaders != undefined) {
+                    if (parentCmp.getHideHeaders() === false) {
+                        parentCmp.insert(1, childCmp);
+                    }
+                    else {
+                        parentCmp.add(childCmp);
+                    }
                 }
                 else {
-                    parentCmp.add(childCmp);
-                    return;
+                    if (parentCmp.add != undefined) {
+                        if (location == null) {
+                            parentCmp.add(childCmp);
+                        }
+                        else {
+                            parentCmp.insert(location, childCmp);
+                        }
+                    }
+                    else {
+                        parentCmp.add(childCmp);
+                    }
+                }
+                break;
+            case 'tooltip':
+                parentCmp.setTooltip(childCmp);
+                break;
+            case 'plugin':
+                parentCmp.setPlugin(childCmp);
+                break;
+            default:
+                defaultchild = true;
+                break;
+        }
+        if (defaultparent == true && defaultchild == true) {
+            //console.log(parentxtype + '.add(' + childxtype + ')')
+            parentCmp.add(childCmp);
+        }
+        // if (this.parentNode.childrenYetToBeDefined > 0) {
+        //     this.parentNode.childrenYetToBeDefined--
+        // }
+        // //console.log('childrenYetToBeDefined(after) '  + this.parentNode.childrenYetToBeDefined)
+        // if (this.parentNode.childrenYetToBeDefined == 0) {
+        //     this.parentNode.dispatchEvent(new CustomEvent('ready',{detail:{cmp: this.parentNode.ext}}))
+        // }
+    }
+    atEnd() {
+        //console.log('*** at end');
+        //console.log('this - ' + this.currentElName);
+        //console.dir(this.currentEl.A);
+        if (this.parentEl != null) {
+            //console.log('parent - ' + this.parentElName);
+            //console.dir(this.parentEl.A);
+        }
+        else {
+            //console.log('No EXT parent');
+        }
+    }
+    get currentEl() {
+        if (this._extitems != undefined) {
+            return this.node;
+        }
+        else {
+            return this;
+        }
+    }
+    getCurrentElName(component) {
+        if (component._extitems != undefined) {
+            return component.node.nodeName;
+        }
+        else {
+            return component.nodeName;
+        }
+    }
+    get currentElName() {
+        if (this._extitems != undefined) {
+            return this.node.nodeName;
+        }
+        else {
+            return this.nodeName;
+        }
+    }
+    get isAngular() {
+        if (this._extitems != undefined) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    get parentEl() {
+        if (this.isAngular) {
+            if (this.parentNode == null) {
+                return null;
+            }
+            return this.parentNode.node;
+        }
+        else {
+            return this.parentNode;
+        }
+    }
+    get parentElName() {
+        if (this.isAngular) {
+            if (this.parentNode == null) {
+                return null;
+            }
+            return this.parentNode.node.nodeName;
+        }
+        else {
+            return this.parentNode.nodeName;
+        }
+    }
+    sendReadyEvent(component) {
+        var cmp = component.currentEl.A.ext;
+        if (component._extitems != undefined) {
+            component['ready'].emit({ detail: { cmp: cmp } });
+        }
+        else {
+            component.dispatchEvent(new CustomEvent('ready', { detail: { cmp: cmp } }));
+        }
+    }
+    //******* base end */
+    //******* props start */
+    createProps(properties, propertiesobject, events, eventnames) {
+        var props = this.currentEl.A.props;
+        props.xtype = this.xtype;
+        let listenersProvided = false;
+        for (var i = 0; i < properties.length; i++) {
+            var prop = properties[i];
+            if (prop == 'handler') {
+                if (this[prop] != undefined) {
+                    props[prop] = this[prop];
                 }
             }
-            else {
-                console.log('unhandled else in addTheChild');
-                console.log(parentxtype);
-                console.log(childxtype);
+            //need to handle listeners coming in here
+            if ((props.xtype === 'cartesian' || props.xtype === 'polar') && prop === 'layout') {
             }
-        }
-        if (childxtype === 'tooltip') {
-            parentCmp.setTooltip(childCmp);
-            return;
-        }
-        if (childxtype === 'plugin') {
-            parentCmp.setPlugin(childCmp);
-            return;
-        }
-        else if (parentxtype === 'button' ||
-            parentxtype === 'menuitem' ||
-            parentxtype === 'menucheckitem') {
-            if (childxtype === 'menu') {
-                parentCmp.setMenu(childCmp);
-                return;
+            else if (prop == 'listeners' && this[prop] != undefined) {
+                props[prop] = this[prop];
+                listenersProvided = true;
             }
             else {
-                console.log('child not added');
+                if (this[prop] != undefined &&
+                    prop != 'listeners' &&
+                    prop != 'config' &&
+                    prop != 'handler' &&
+                    prop != 'fitToParent') {
+                    props[prop] = this[prop];
+                }
             }
         }
-        if (childxtype === 'toolbar' && Ext.isClassic === true) {
-            parentCmp.addDockedItems(childCmp);
-            return;
+        if (true === this['fitToParent']) {
+            props.top = 0,
+                props.left = 0,
+                props.width = '100%',
+                props.height = '100%';
         }
-        else if ((childxtype === 'toolbar' || childxtype === 'titlebar') && parentCmp.getHideHeaders != undefined) {
-            if (parentCmp.getHideHeaders() === false) {
-                //var j: any = parentCmp.items.items.length
-                //parentCmp.insert(j - 1, childCmp)
-                parentCmp.insert(1, childCmp);
-                return;
-            }
-            else {
-                parentCmp.add(childCmp);
-                return;
-            }
+        if (this['config'] !== {}) {
+            Ext.apply(props, this['config']);
         }
-        if (parentCmp.add != undefined) {
-            parentCmp.add(childCmp);
-            return;
+        if (!listenersProvided) {
+            props.listeners = {};
+            var me = this;
+            events.forEach(function (event) {
+                let eventname = event.name;
+                let eventparameters = event.parameters;
+                me.currentEl.A.props.listeners[eventname] = function () {
+                    //console.log('in the event ' + eventname)
+                    let parameters = eventparameters;
+                    let parms = parameters.split(',');
+                    let args = Array.prototype.slice.call(arguments);
+                    let emitparms = {};
+                    if (me._extitems != undefined) {
+                        for (let i = 0, j = parms.length; i < j; i++) {
+                            emitparms[parms[i]] = args[i];
+                        }
+                        me[eventname].emit(emitparms);
+                    }
+                    else {
+                    }
+                };
+            });
         }
-        console.log('child not added');
+        //dup??
+        if (this._extitems != undefined) {
+            events.forEach((event, n) => {
+                if (event != 'fullscreen') {
+                    this[event] = new EventEmitter();
+                }
+                else {
+                    this[event + 'event'] = new EventEmitter();
+                }
+            });
+        }
     }
-    ngOnChanges(changes) {
+    //******* props end */
+    baseOnChanges(changes) {
+        //console.log(`ngOnChanges`)
+        //console.log(changes)
+        let changesMsgs = [];
         for (let propName in changes) {
             let verb = '';
             if (changes[propName].firstChange === true) {
@@ -232,42 +606,66 @@ class base {
                 verb = 'changed';
             }
             let val = changes[propName].currentValue;
-            if (this.ext != undefined) {
+            if (this.currentEl.A != undefined) {
+                //console.dir(this.currentEl.A.ext)
                 var capPropName = propName.charAt(0).toUpperCase() + propName.slice(1);
                 var setFunction = 'set' + capPropName;
-                if (this.ext[setFunction] != undefined) {
-                    this.ext[setFunction](val);
+                //console.log(setFunction)
+                if (this.currentEl.A.ext[setFunction] != undefined) {
+                    this.currentEl.A.ext[setFunction](val);
                 }
                 else {
-                    console.error(setFunction + ' not found for ' + this.ext.xtype);
+                    console.error(setFunction + ' not found for ' + this.currentEl.A.ext.xtype);
                 }
             }
             else {
                 if (verb == 'changed') {
-                    console.log('change needed and ext not defined');
+                    //mjg console.log('change needed and ext not defined')
                 }
             }
+            changesMsgs.push(`$ $ to "$"`);
         }
         //console.log(`OnChanges: ${changesMsgs.join('; ')}`)
     }
     ngOnDestroy() {
         var childCmp;
         var parentCmp;
+        if (childCmp == undefined || parentCmp == undefined) {
+            return;
+        }
         try {
-            childCmp = this.ext;
-            if (this._hostComponent != null) {
-                parentCmp = this._hostComponent.ext;
-                if (parentCmp.xtype == 'button' && childCmp.xtype == 'menu') ;
-                else if (parentCmp.xtype == 'carousel') ;
-                else if (parentCmp.xtype == 'grid' && childCmp.xtype == 'column') ;
-                else if (parentCmp.xtype == 'segmentedbutton' && childCmp.xtype == 'button') ;
-                else if (parentCmp.xtype == 'button' && childCmp.xtype == 'tooltip') ;
-                else if (parentCmp.xtype == 'titlebar' && childCmp.xtype == 'button') ;
-                else if (parentCmp.xtype == 'titlebar' && childCmp.xtype == 'searchfield') ;
-                else {
-                    parentCmp.remove([childCmp]);
-                    childCmp.destroy();
-                }
+            childCmp = this.currentEl.A.ext;
+            if (this.parentEl != null) {
+                parentCmp = this.parentEl.A.ext;
+                //console.log(childCmp)
+                //console.log(parentCmp)
+                if (childCmp == undefined || parentCmp == undefined)
+                    if (parentCmp.xtype == 'button' && childCmp.xtype == 'menu') {
+                        //console.log('button/menu not deleted')
+                    }
+                    else if (parentCmp.xtype == 'carousel') {
+                        //console.log('carousel parent not deleted')
+                    }
+                    else if (parentCmp.xtype == 'grid' && childCmp.xtype == 'column') {
+                        //console.log('grid/column not deleted')
+                        //console.log(childCmp)
+                    }
+                    else if (parentCmp.xtype == 'segmentedbutton' && childCmp.xtype == 'button') {
+                        //console.log('segmentedbutton/button not deleted')
+                    }
+                    else if (parentCmp.xtype == 'button' && childCmp.xtype == 'tooltip') {
+                        //console.log('button/tooltip not deleted')
+                    }
+                    else if (parentCmp.xtype == 'titlebar' && childCmp.xtype == 'button') {
+                        //console.log('titlebar/button not deleted')
+                    }
+                    else if (parentCmp.xtype == 'titlebar' && childCmp.xtype == 'searchfield') {
+                        //console.log('titlebar/searchfield not deleted')
+                    }
+                    else {
+                        parentCmp.remove([childCmp]);
+                        childCmp.destroy();
+                    }
             }
             else {
                 if (childCmp != undefined) {
@@ -280,37 +678,53 @@ class base {
         }
         catch (e) {
             console.error(e);
-            console.log('*****');
-            console.log(parentCmp);
-            console.log(childCmp);
-            console.log('*****');
+            //mjg console.log('*****')
+            //mjg console.log(parentCmp)
+            //mjg console.log(childCmp)
+            //mjg console.log('*****')
         }
     }
 }
+EngBase.count = 0;
+EngBase.DIRECTION = '';
 __decorate([
-    ContentChild('extroute'),
+    ContentChild('extroute', { static: false }),
     __metadata("design:type", Object)
-], base.prototype, "_extroute", void 0);
+], EngBase.prototype, "_extroute", void 0);
 __decorate([
     ContentChildren('extroute'),
     __metadata("design:type", QueryList)
-], base.prototype, "_extroutes", void 0);
+], EngBase.prototype, "_extroutes", void 0);
 __decorate([
-    ContentChild('extitem'),
+    ContentChild('extitem', { static: false }),
     __metadata("design:type", Object)
-], base.prototype, "_extitem", void 0);
+], EngBase.prototype, "_extitem", void 0);
 __decorate([
     ContentChildren('extitem'),
     __metadata("design:type", QueryList)
-], base.prototype, "_extitems", void 0);
+], EngBase.prototype, "_extitems", void 0);
+__decorate([
+    ContentChildren(EngBase),
+    __metadata("design:type", QueryList)
+], EngBase.prototype, "_childComponents", void 0);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtActionsheetComponent_1;
 class actionsheetMetaData {
 }
 actionsheetMetaData.XTYPE = 'actionsheet';
 actionsheetMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -325,6 +739,7 @@ actionsheetMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -356,10 +771,7 @@ actionsheetMetaData.PROPERTIES = [
     'docked',
     'draggable',
     'enter',
-    'enterAnimation',
-    'eventHandlers',
     'exit',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -417,7 +829,6 @@ actionsheetMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -435,6 +846,7 @@ actionsheetMetaData.PROPERTIES = [
     'tbar',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -614,7 +1026,7 @@ actionsheetMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtActionsheetComponent = ExtActionsheetComponent_1 = class ExtActionsheetComponent extends base {
+let ExtActionsheetComponent = ExtActionsheetComponent_1 = class ExtActionsheetComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, actionsheetMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -622,28 +1034,45 @@ let ExtActionsheetComponent = ExtActionsheetComponent_1 = class ExtActionsheetCo
     ngOnInit() {
         this.baseOnInit(actionsheetMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(actionsheetMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtActionsheetComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtActionsheetComponent = ExtActionsheetComponent_1 = __decorate([
     Component({
-        selector: 'actionsheet',
+        selector: 'ext-actionsheet',
         inputs: actionsheetMetaData.PROPERTIES,
         outputs: actionsheetMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtActionsheetComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtActionsheetComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtActionsheetComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtAudioComponent_1;
 class audioMetaData {
 }
 audioMetaData.XTYPE = 'audio';
 audioMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -667,10 +1096,6 @@ audioMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enableControls',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -712,7 +1137,6 @@ audioMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -877,7 +1301,7 @@ audioMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtAudioComponent = ExtAudioComponent_1 = class ExtAudioComponent extends base {
+let ExtAudioComponent = ExtAudioComponent_1 = class ExtAudioComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, audioMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -885,28 +1309,351 @@ let ExtAudioComponent = ExtAudioComponent_1 = class ExtAudioComponent extends ba
     ngOnInit() {
         this.baseOnInit(audioMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(audioMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtAudioComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtAudioComponent = ExtAudioComponent_1 = __decorate([
     Component({
-        selector: 'audio',
+        selector: 'ext-audio',
         inputs: audioMetaData.PROPERTIES,
         outputs: audioMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtAudioComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtAudioComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtAudioComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
+var ExtBreadcrumbbarComponent_1;
+class breadcrumbbarMetaData {
+}
+breadcrumbbarMetaData.XTYPE = 'breadcrumbbar';
+breadcrumbbarMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'activeChildTabIndex',
+    'activeItem',
+    'alignSelf',
+    'allowFocusingDisabledChildren',
+    'alwaysOnTop',
+    'ariaAttributes',
+    'ariaDescribedBy',
+    'ariaLabel',
+    'ariaLabelledBy',
+    'autoDestroy',
+    'autoSize',
+    'axisLock',
+    'bind',
+    'bodyCls',
+    'border',
+    'bottom',
+    'btnCls',
+    'buttonConfig',
+    'buttonUI',
+    'cardSwitchAnimation',
+    'centered',
+    'cls',
+    'constrainAlign',
+    'contentEl',
+    'control',
+    'controller',
+    'data',
+    'defaultButtonUI',
+    'defaultFocus',
+    'defaultListenerScope',
+    'defaults',
+    'defaultType',
+    'disabled',
+    'displayed',
+    'displayField',
+    'docked',
+    'draggable',
+    'flex',
+    'floated',
+    'focusableContainer',
+    'focusCls',
+    'fullscreen',
+    'height',
+    'hidden',
+    'hideAnimation',
+    'hideMode',
+    'hideOnMaskTap',
+    'html',
+    'id',
+    'inactiveChildTabIndex',
+    'innerCls',
+    'instanceCls',
+    'itemId',
+    'items',
+    'keyMap',
+    'keyMapEnabled',
+    'keyMapTarget',
+    'layout',
+    'left',
+    'listeners',
+    'manageBorders',
+    'margin',
+    'masked',
+    'maxHeight',
+    'maxWidth',
+    'menu',
+    'minHeight',
+    'minWidth',
+    'modal',
+    'modelValidation',
+    'name',
+    'nameable',
+    'nameHolder',
+    'padding',
+    'plugins',
+    'publishes',
+    'record',
+    'reference',
+    'referenceHolder',
+    'relative',
+    'renderTo',
+    'resetFocusPosition',
+    'right',
+    'ripple',
+    'scrollable',
+    'selection',
+    'session',
+    'shadow',
+    'shareableName',
+    'shim',
+    'showAnimation',
+    'showIcons',
+    'showMenuIcons',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
+    'store',
+    'style',
+    'tabIndex',
+    'title',
+    'toFrontOnShow',
+    'tooltip',
+    'top',
+    'touchAction',
+    'tpl',
+    'tplWriteMode',
+    'translatable',
+    'twoWayBindable',
+    'ui',
+    'userCls',
+    'userSelectable',
+    'useSplitButtons',
+    'viewModel',
+    'weight',
+    'weighted',
+    'width',
+    'x',
+    'xtype',
+    'y',
+    'zIndex',
+    'platformConfig',
+    'responsiveConfig',
+    'align',
+    'fitToParent',
+    'config'
+];
+breadcrumbbarMetaData.EVENTS = [
+    { name: 'activate', parameters: 'newActiveItem,breadcrumbbar,oldActiveItem' },
+    { name: 'activeItemchange', parameters: 'sender,value,oldValue' },
+    { name: 'add', parameters: 'breadcrumbbar,item,index' },
+    { name: 'added', parameters: 'sender,container,index' },
+    { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehide', parameters: 'sender' },
+    { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeorientationchange', parameters: '' },
+    { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeshow', parameters: 'sender' },
+    { name: 'beforetofront', parameters: 'breadcrumbbar' },
+    { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'blur', parameters: 'breadcrumbbar,event' },
+    { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+    { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+    { name: 'change', parameters: 'breadcrumbbar,node,prevNode' },
+    { name: 'deactivate', parameters: 'oldActiveItem,breadcrumbbar,newActiveItem' },
+    { name: 'destroy', parameters: '' },
+    { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+    { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+    { name: 'erased', parameters: 'sender' },
+    { name: 'floatingchange', parameters: 'sender,positioned' },
+    { name: 'focus', parameters: 'breadcrumbbar,event' },
+    { name: 'focusenter', parameters: 'breadcrumbbar,event' },
+    { name: 'focusleave', parameters: 'breadcrumbbar,event' },
+    { name: 'fullscreen', parameters: 'sender' },
+    { name: 'heightchange', parameters: 'sender,value,oldValue' },
+    { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+    { name: 'hide', parameters: 'sender' },
+    { name: 'initialize', parameters: 'sender' },
+    { name: 'leftchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'move', parameters: 'breadcrumbbar,item,toIndex,fromIndex' },
+    { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+    { name: 'orientationchange', parameters: '' },
+    { name: 'painted', parameters: 'sender,element' },
+    { name: 'positionedchange', parameters: 'sender,positioned' },
+    { name: 'remove', parameters: 'breadcrumbbar,item,index' },
+    { name: 'removed', parameters: 'sender,container,index' },
+    { name: 'renderedchange', parameters: 'breadcrumbbar,item,rendered' },
+    { name: 'resize', parameters: 'element,info' },
+    { name: 'rightchange', parameters: 'sender,value,oldValue' },
+    { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+    { name: 'selectionchange', parameters: 'breadcrumbbar,node,prevNode' },
+    { name: 'show', parameters: 'sender' },
+    { name: 'tofront', parameters: 'breadcrumbbar' },
+    { name: 'topchange', parameters: 'sender,value,oldValue' },
+    { name: 'updatedata', parameters: 'sender,newData' },
+    { name: 'widthchange', parameters: 'sender,value,oldValue' },
+    { name: 'ready', parameters: '' }
+];
+breadcrumbbarMetaData.EVENTNAMES = [
+    'activate',
+    'activeItemchange',
+    'add',
+    'added',
+    'beforeactiveItemchange',
+    'beforebottomchange',
+    'beforecenteredchange',
+    'beforedisabledchange',
+    'beforedockedchange',
+    'beforeheightchange',
+    'beforehiddenchange',
+    'beforehide',
+    'beforeleftchange',
+    'beforemaxHeightchange',
+    'beforemaxWidthchange',
+    'beforeminHeightchange',
+    'beforeminWidthchange',
+    'beforeorientationchange',
+    'beforerightchange',
+    'beforescrollablechange',
+    'beforeshow',
+    'beforetofront',
+    'beforetopchange',
+    'beforewidthchange',
+    'blur',
+    'bottomchange',
+    'centeredchange',
+    'change',
+    'deactivate',
+    'destroy',
+    'disabledchange',
+    'dockedchange',
+    'erased',
+    'floatingchange',
+    'focus',
+    'focusenter',
+    'focusleave',
+    'fullscreen',
+    'heightchange',
+    'hiddenchange',
+    'hide',
+    'initialize',
+    'leftchange',
+    'maxHeightchange',
+    'maxWidthchange',
+    'minHeightchange',
+    'minWidthchange',
+    'move',
+    'moved',
+    'orientationchange',
+    'painted',
+    'positionedchange',
+    'remove',
+    'removed',
+    'renderedchange',
+    'resize',
+    'rightchange',
+    'scrollablechange',
+    'selectionchange',
+    'show',
+    'tofront',
+    'topchange',
+    'updatedata',
+    'widthchange',
+    'ready'
+];
+let ExtBreadcrumbbarComponent = ExtBreadcrumbbarComponent_1 = class ExtBreadcrumbbarComponent extends EngBase {
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, breadcrumbbarMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    ngOnInit() {
+        this.baseOnInit(breadcrumbbarMetaData);
+    }
+    ngAfterViewInit() {
+        this.baseAfterViewInit(breadcrumbbarMetaData);
+    }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
+};
+ExtBreadcrumbbarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
+ExtBreadcrumbbarComponent = ExtBreadcrumbbarComponent_1 = __decorate([
+    Component({
+        selector: 'ext-breadcrumbbar',
+        inputs: breadcrumbbarMetaData.PROPERTIES,
+        outputs: breadcrumbbarMetaData.EVENTNAMES,
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtBreadcrumbbarComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, EngBase])
+], ExtBreadcrumbbarComponent);
+
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtButtonComponent_1;
 class buttonMetaData {
 }
 buttonMetaData.XTYPE = 'button';
 buttonMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'allowDepress',
     'alwaysOnTop',
     'ariaAttributes',
@@ -935,9 +1682,6 @@ buttonMetaData.PROPERTIES = [
     'docked',
     'draggable',
     'enableToggle',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -984,7 +1728,6 @@ buttonMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -1146,7 +1889,7 @@ buttonMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtButtonComponent = ExtButtonComponent_1 = class ExtButtonComponent extends base {
+let ExtButtonComponent = ExtButtonComponent_1 = class ExtButtonComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, buttonMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -1154,28 +1897,45 @@ let ExtButtonComponent = ExtButtonComponent_1 = class ExtButtonComponent extends
     ngOnInit() {
         this.baseOnInit(buttonMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(buttonMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtButtonComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtButtonComponent = ExtButtonComponent_1 = __decorate([
     Component({
-        selector: 'button',
+        selector: 'ext-button',
         inputs: buttonMetaData.PROPERTIES,
         outputs: buttonMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtButtonComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtButtonComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtButtonComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendar_eventComponent_1;
 class calendar_eventMetaData {
 }
 calendar_eventMetaData.XTYPE = 'calendar-event';
 calendar_eventMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -1198,9 +1958,6 @@ calendar_eventMetaData.PROPERTIES = [
     'docked',
     'draggable',
     'endDate',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -1242,7 +1999,6 @@ calendar_eventMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -1395,7 +2151,7 @@ calendar_eventMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCalendar_eventComponent = ExtCalendar_eventComponent_1 = class ExtCalendar_eventComponent extends base {
+let ExtCalendar_eventComponent = ExtCalendar_eventComponent_1 = class ExtCalendar_eventComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_eventMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -1403,30 +2159,47 @@ let ExtCalendar_eventComponent = ExtCalendar_eventComponent_1 = class ExtCalenda
     ngOnInit() {
         this.baseOnInit(calendar_eventMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendar_eventMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_eventComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_eventComponent = ExtCalendar_eventComponent_1 = __decorate([
     Component({
-        selector: 'calendar-event',
+        selector: 'ext-calendar-event',
         inputs: calendar_eventMetaData.PROPERTIES,
         outputs: calendar_eventMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_eventComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendar_eventComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendar_eventComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendar_form_addComponent_1;
 class calendar_form_addMetaData {
 }
 calendar_form_addMetaData.XTYPE = 'calendar-form-add';
 calendar_form_addMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allDayField',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
@@ -1444,10 +2217,12 @@ calendar_form_addMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
     'bottom',
+    'bubbleDirty',
     'buttonAlign',
     'buttons',
     'buttonToolbar',
@@ -1474,6 +2249,7 @@ calendar_form_addMetaData.PROPERTIES = [
     'defaultToolWeights',
     'defaultType',
     'descriptionField',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
@@ -1483,10 +2259,8 @@ calendar_form_addMetaData.PROPERTIES = [
     'enctype',
     'endDateField',
     'endTimeField',
-    'enterAnimation',
     'event',
-    'eventHandlers',
-    'exitAnimation',
+    'fieldDefaults',
     'fieldSeparators',
     'flex',
     'floated',
@@ -1511,6 +2285,7 @@ calendar_form_addMetaData.PROPERTIES = [
     'instanceCls',
     'itemId',
     'items',
+    'jsonSubmit',
     'keyMap',
     'keyMapEnabled',
     'keyMapTarget',
@@ -1550,7 +2325,6 @@ calendar_form_addMetaData.PROPERTIES = [
     'ripple',
     'saveButton',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -1570,6 +2344,7 @@ calendar_form_addMetaData.PROPERTIES = [
     'timeout',
     'title',
     'titleAlign',
+    'titleCollapse',
     'titleField',
     'toFrontOnShow',
     'toolDefaults',
@@ -1637,6 +2412,7 @@ calendar_form_addMetaData.EVENTS = [
     { name: 'collapse', parameters: 'calendar-form-add' },
     { name: 'deactivate', parameters: 'oldActiveItem,calendar-form-add,newActiveItem' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'calendar-form-add,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'drawerhide', parameters: 'calendar-form-add' },
@@ -1719,6 +2495,7 @@ calendar_form_addMetaData.EVENTNAMES = [
     'collapse',
     'deactivate',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'drawerhide',
@@ -1765,7 +2542,7 @@ calendar_form_addMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCalendar_form_addComponent = ExtCalendar_form_addComponent_1 = class ExtCalendar_form_addComponent extends base {
+let ExtCalendar_form_addComponent = ExtCalendar_form_addComponent_1 = class ExtCalendar_form_addComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_form_addMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -1773,28 +2550,45 @@ let ExtCalendar_form_addComponent = ExtCalendar_form_addComponent_1 = class ExtC
     ngOnInit() {
         this.baseOnInit(calendar_form_addMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendar_form_addMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_form_addComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_form_addComponent = ExtCalendar_form_addComponent_1 = __decorate([
     Component({
-        selector: 'calendar-form-add',
+        selector: 'ext-calendar-form-add',
         inputs: calendar_form_addMetaData.PROPERTIES,
         outputs: calendar_form_addMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_form_addComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendar_form_addComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendar_form_addComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendar_calendar_pickerComponent_1;
 class calendar_calendar_pickerMetaData {
 }
 calendar_calendar_pickerMetaData.XTYPE = 'calendar-calendar-picker';
 calendar_calendar_pickerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alignTarget',
     'alwaysOnTop',
     'animateUnderline',
@@ -1817,6 +2611,7 @@ calendar_calendar_pickerMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'chipView',
     'clearable',
@@ -1826,8 +2621,10 @@ calendar_calendar_pickerMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
     'delimiter',
+    'dirty',
     'disabled',
     'displayed',
     'displayField',
@@ -1836,14 +2633,11 @@ calendar_calendar_pickerMetaData.PROPERTIES = [
     'draggable',
     'edgePicker',
     'editable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'floatedPicker',
@@ -1862,7 +2656,6 @@ calendar_calendar_pickerMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -1902,7 +2695,6 @@ calendar_calendar_pickerMetaData.PROPERTIES = [
     'picker',
     'pickerSlotAlign',
     'placeholder',
-    'placeHolder',
     'plugins',
     'publishes',
     'readOnly',
@@ -1919,7 +2711,6 @@ calendar_calendar_pickerMetaData.PROPERTIES = [
     'scrollable',
     'selection',
     'selectOnTab',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -1930,6 +2721,7 @@ calendar_calendar_pickerMetaData.PROPERTIES = [
     'statefulDefaults',
     'stateId',
     'store',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -1998,6 +2790,7 @@ calendar_calendar_pickerMetaData.EVENTS = [
     { name: 'click', parameters: 'e' },
     { name: 'collapse', parameters: 'field' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'calendar-calendar-picker,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -2012,6 +2805,7 @@ calendar_calendar_pickerMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'calendar-calendar-picker,e' },
     { name: 'keyup', parameters: 'calendar-calendar-picker,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -2066,6 +2860,7 @@ calendar_calendar_pickerMetaData.EVENTNAMES = [
     'click',
     'collapse',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -2080,6 +2875,7 @@ calendar_calendar_pickerMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -2104,7 +2900,7 @@ calendar_calendar_pickerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCalendar_calendar_pickerComponent = ExtCalendar_calendar_pickerComponent_1 = class ExtCalendar_calendar_pickerComponent extends base {
+let ExtCalendar_calendar_pickerComponent = ExtCalendar_calendar_pickerComponent_1 = class ExtCalendar_calendar_pickerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_calendar_pickerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -2112,30 +2908,47 @@ let ExtCalendar_calendar_pickerComponent = ExtCalendar_calendar_pickerComponent_
     ngOnInit() {
         this.baseOnInit(calendar_calendar_pickerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendar_calendar_pickerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_calendar_pickerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_calendar_pickerComponent = ExtCalendar_calendar_pickerComponent_1 = __decorate([
     Component({
-        selector: 'calendar-calendar-picker',
+        selector: 'ext-calendar-calendar-picker',
         inputs: calendar_calendar_pickerMetaData.PROPERTIES,
         outputs: calendar_calendar_pickerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_calendar_pickerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendar_calendar_pickerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendar_calendar_pickerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendar_form_editComponent_1;
 class calendar_form_editMetaData {
 }
 calendar_form_editMetaData.XTYPE = 'calendar-form-edit';
 calendar_form_editMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allDayField',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
@@ -2153,10 +2966,12 @@ calendar_form_editMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
     'bottom',
+    'bubbleDirty',
     'buttonAlign',
     'buttons',
     'buttonToolbar',
@@ -2183,6 +2998,7 @@ calendar_form_editMetaData.PROPERTIES = [
     'defaultToolWeights',
     'defaultType',
     'descriptionField',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
@@ -2192,10 +3008,8 @@ calendar_form_editMetaData.PROPERTIES = [
     'enctype',
     'endDateField',
     'endTimeField',
-    'enterAnimation',
     'event',
-    'eventHandlers',
-    'exitAnimation',
+    'fieldDefaults',
     'fieldSeparators',
     'flex',
     'floated',
@@ -2220,6 +3034,7 @@ calendar_form_editMetaData.PROPERTIES = [
     'instanceCls',
     'itemId',
     'items',
+    'jsonSubmit',
     'keyMap',
     'keyMapEnabled',
     'keyMapTarget',
@@ -2259,7 +3074,6 @@ calendar_form_editMetaData.PROPERTIES = [
     'ripple',
     'saveButton',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -2279,6 +3093,7 @@ calendar_form_editMetaData.PROPERTIES = [
     'timeout',
     'title',
     'titleAlign',
+    'titleCollapse',
     'titleField',
     'toFrontOnShow',
     'toolDefaults',
@@ -2346,6 +3161,7 @@ calendar_form_editMetaData.EVENTS = [
     { name: 'collapse', parameters: 'calendar-form-edit' },
     { name: 'deactivate', parameters: 'oldActiveItem,calendar-form-edit,newActiveItem' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'calendar-form-edit,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'drawerhide', parameters: 'calendar-form-edit' },
@@ -2428,6 +3244,7 @@ calendar_form_editMetaData.EVENTNAMES = [
     'collapse',
     'deactivate',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'drawerhide',
@@ -2474,7 +3291,7 @@ calendar_form_editMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCalendar_form_editComponent = ExtCalendar_form_editComponent_1 = class ExtCalendar_form_editComponent extends base {
+let ExtCalendar_form_editComponent = ExtCalendar_form_editComponent_1 = class ExtCalendar_form_editComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_form_editMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -2482,28 +3299,45 @@ let ExtCalendar_form_editComponent = ExtCalendar_form_editComponent_1 = class Ex
     ngOnInit() {
         this.baseOnInit(calendar_form_editMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendar_form_editMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_form_editComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_form_editComponent = ExtCalendar_form_editComponent_1 = __decorate([
     Component({
-        selector: 'calendar-form-edit',
+        selector: 'ext-calendar-form-edit',
         inputs: calendar_form_editMetaData.PROPERTIES,
         outputs: calendar_form_editMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_form_editComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendar_form_editComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendar_form_editComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendar_timefieldComponent_1;
 class calendar_timefieldMetaData {
 }
 calendar_timefieldMetaData.XTYPE = 'calendar-timefield';
 calendar_timefieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alignTarget',
     'alwaysOnTop',
     'animateUnderline',
@@ -2526,6 +3360,7 @@ calendar_timefieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'chipView',
     'clearable',
@@ -2535,8 +3370,10 @@ calendar_timefieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
     'delimiter',
+    'dirty',
     'disabled',
     'displayed',
     'displayField',
@@ -2545,14 +3382,11 @@ calendar_timefieldMetaData.PROPERTIES = [
     'draggable',
     'edgePicker',
     'editable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'floatedPicker',
@@ -2571,7 +3405,6 @@ calendar_timefieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -2611,7 +3444,6 @@ calendar_timefieldMetaData.PROPERTIES = [
     'picker',
     'pickerSlotAlign',
     'placeholder',
-    'placeHolder',
     'plugins',
     'publishes',
     'readOnly',
@@ -2628,7 +3460,6 @@ calendar_timefieldMetaData.PROPERTIES = [
     'scrollable',
     'selection',
     'selectOnTab',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -2639,6 +3470,7 @@ calendar_timefieldMetaData.PROPERTIES = [
     'statefulDefaults',
     'stateId',
     'store',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -2707,6 +3539,7 @@ calendar_timefieldMetaData.EVENTS = [
     { name: 'click', parameters: 'e' },
     { name: 'collapse', parameters: 'field' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'calendar-timefield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -2721,6 +3554,7 @@ calendar_timefieldMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'calendar-timefield,e' },
     { name: 'keyup', parameters: 'calendar-timefield,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -2775,6 +3609,7 @@ calendar_timefieldMetaData.EVENTNAMES = [
     'click',
     'collapse',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -2789,6 +3624,7 @@ calendar_timefieldMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -2813,7 +3649,7 @@ calendar_timefieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCalendar_timefieldComponent = ExtCalendar_timefieldComponent_1 = class ExtCalendar_timefieldComponent extends base {
+let ExtCalendar_timefieldComponent = ExtCalendar_timefieldComponent_1 = class ExtCalendar_timefieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_timefieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -2821,28 +3657,45 @@ let ExtCalendar_timefieldComponent = ExtCalendar_timefieldComponent_1 = class Ex
     ngOnInit() {
         this.baseOnInit(calendar_timefieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendar_timefieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_timefieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_timefieldComponent = ExtCalendar_timefieldComponent_1 = __decorate([
     Component({
-        selector: 'calendar-timefield',
+        selector: 'ext-calendar-timefield',
         inputs: calendar_timefieldMetaData.PROPERTIES,
         outputs: calendar_timefieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_timefieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendar_timefieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendar_timefieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendar_daysheaderComponent_1;
 class calendar_daysheaderMetaData {
 }
 calendar_daysheaderMetaData.XTYPE = 'calendar-daysheader';
 calendar_daysheaderMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -2866,9 +3719,6 @@ calendar_daysheaderMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -2907,7 +3757,6 @@ calendar_daysheaderMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -3058,7 +3907,7 @@ calendar_daysheaderMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCalendar_daysheaderComponent = ExtCalendar_daysheaderComponent_1 = class ExtCalendar_daysheaderComponent extends base {
+let ExtCalendar_daysheaderComponent = ExtCalendar_daysheaderComponent_1 = class ExtCalendar_daysheaderComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_daysheaderMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -3066,28 +3915,45 @@ let ExtCalendar_daysheaderComponent = ExtCalendar_daysheaderComponent_1 = class 
     ngOnInit() {
         this.baseOnInit(calendar_daysheaderMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendar_daysheaderMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_daysheaderComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_daysheaderComponent = ExtCalendar_daysheaderComponent_1 = __decorate([
     Component({
-        selector: 'calendar-daysheader',
+        selector: 'ext-calendar-daysheader',
         inputs: calendar_daysheaderMetaData.PROPERTIES,
         outputs: calendar_daysheaderMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_daysheaderComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendar_daysheaderComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendar_daysheaderComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendar_weeksheaderComponent_1;
 class calendar_weeksheaderMetaData {
 }
 calendar_weeksheaderMetaData.XTYPE = 'calendar-weeksheader';
 calendar_weeksheaderMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -3111,9 +3977,6 @@ calendar_weeksheaderMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -3152,7 +4015,6 @@ calendar_weeksheaderMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -3303,7 +4165,7 @@ calendar_weeksheaderMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCalendar_weeksheaderComponent = ExtCalendar_weeksheaderComponent_1 = class ExtCalendar_weeksheaderComponent extends base {
+let ExtCalendar_weeksheaderComponent = ExtCalendar_weeksheaderComponent_1 = class ExtCalendar_weeksheaderComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_weeksheaderMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -3311,30 +4173,47 @@ let ExtCalendar_weeksheaderComponent = ExtCalendar_weeksheaderComponent_1 = clas
     ngOnInit() {
         this.baseOnInit(calendar_weeksheaderMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendar_weeksheaderMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_weeksheaderComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_weeksheaderComponent = ExtCalendar_weeksheaderComponent_1 = __decorate([
     Component({
-        selector: 'calendar-weeksheader',
+        selector: 'ext-calendar-weeksheader',
         inputs: calendar_weeksheaderMetaData.PROPERTIES,
         outputs: calendar_weeksheaderMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weeksheaderComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendar_weeksheaderComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendar_weeksheaderComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendar_listComponent_1;
 class calendar_listMetaData {
 }
 calendar_listMetaData.XTYPE = 'calendar-list';
 calendar_listMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -3346,6 +4225,7 @@ calendar_listMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -3372,11 +4252,7 @@ calendar_listMetaData.PROPERTIES = [
     'emptyText',
     'emptyTextDefaults',
     'emptyTextProperty',
-    'enableTextSelection',
     'enableToggle',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -3440,7 +4316,6 @@ calendar_listMetaData.PROPERTIES = [
     'selectable',
     'selected',
     'selection',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -3671,7 +4546,7 @@ calendar_listMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCalendar_listComponent = ExtCalendar_listComponent_1 = class ExtCalendar_listComponent extends base {
+let ExtCalendar_listComponent = ExtCalendar_listComponent_1 = class ExtCalendar_listComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_listMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -3679,31 +4554,48 @@ let ExtCalendar_listComponent = ExtCalendar_listComponent_1 = class ExtCalendar_
     ngOnInit() {
         this.baseOnInit(calendar_listMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendar_listMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_listComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_listComponent = ExtCalendar_listComponent_1 = __decorate([
     Component({
-        selector: 'calendar-list',
+        selector: 'ext-calendar-list',
         inputs: calendar_listMetaData.PROPERTIES,
         outputs: calendar_listMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_listComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendar_listComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendar_listComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendar_dayComponent_1;
 class calendar_dayMetaData {
 }
 calendar_dayMetaData.XTYPE = 'calendar-day';
 calendar_dayMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'addForm',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'allowSelection',
     'alwaysOnTop',
@@ -3719,6 +4611,7 @@ calendar_dayMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -3757,11 +4650,8 @@ calendar_dayMetaData.PROPERTIES = [
     'droppable',
     'editForm',
     'endTime',
-    'enterAnimation',
     'eventDefaults',
-    'eventHandlers',
     'eventRelayers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -3775,6 +4665,7 @@ calendar_dayMetaData.PROPERTIES = [
     'hideAnimation',
     'hideMode',
     'hideOnMaskTap',
+    'highlightToday',
     'html',
     'icon',
     'iconAlign',
@@ -3820,7 +4711,6 @@ calendar_dayMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -3840,6 +4730,7 @@ calendar_dayMetaData.PROPERTIES = [
     'timezoneOffset',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -4050,7 +4941,7 @@ calendar_dayMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCalendar_dayComponent = ExtCalendar_dayComponent_1 = class ExtCalendar_dayComponent extends base {
+let ExtCalendar_dayComponent = ExtCalendar_dayComponent_1 = class ExtCalendar_dayComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_dayMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -4058,31 +4949,48 @@ let ExtCalendar_dayComponent = ExtCalendar_dayComponent_1 = class ExtCalendar_da
     ngOnInit() {
         this.baseOnInit(calendar_dayMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendar_dayMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_dayComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_dayComponent = ExtCalendar_dayComponent_1 = __decorate([
     Component({
-        selector: 'calendar-day',
+        selector: 'ext-calendar-day',
         inputs: calendar_dayMetaData.PROPERTIES,
         outputs: calendar_dayMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_dayComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendar_dayComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendar_dayComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendar_daysComponent_1;
 class calendar_daysMetaData {
 }
 calendar_daysMetaData.XTYPE = 'calendar-days';
 calendar_daysMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'addForm',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'allowSelection',
     'alwaysOnTop',
@@ -4098,6 +5006,7 @@ calendar_daysMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -4136,11 +5045,8 @@ calendar_daysMetaData.PROPERTIES = [
     'droppable',
     'editForm',
     'endTime',
-    'enterAnimation',
     'eventDefaults',
-    'eventHandlers',
     'eventRelayers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -4154,6 +5060,7 @@ calendar_daysMetaData.PROPERTIES = [
     'hideAnimation',
     'hideMode',
     'hideOnMaskTap',
+    'highlightToday',
     'html',
     'icon',
     'iconAlign',
@@ -4199,7 +5106,6 @@ calendar_daysMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -4219,6 +5125,7 @@ calendar_daysMetaData.PROPERTIES = [
     'timezoneOffset',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -4429,7 +5336,7 @@ calendar_daysMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCalendar_daysComponent = ExtCalendar_daysComponent_1 = class ExtCalendar_daysComponent extends base {
+let ExtCalendar_daysComponent = ExtCalendar_daysComponent_1 = class ExtCalendar_daysComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_daysMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -4437,32 +5344,49 @@ let ExtCalendar_daysComponent = ExtCalendar_daysComponent_1 = class ExtCalendar_
     ngOnInit() {
         this.baseOnInit(calendar_daysMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendar_daysMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_daysComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_daysComponent = ExtCalendar_daysComponent_1 = __decorate([
     Component({
-        selector: 'calendar-days',
+        selector: 'ext-calendar-days',
         inputs: calendar_daysMetaData.PROPERTIES,
         outputs: calendar_daysMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_daysComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendar_daysComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendar_daysComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendar_monthComponent_1;
 class calendar_monthMetaData {
 }
 calendar_monthMetaData.XTYPE = 'calendar-month';
 calendar_monthMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'addForm',
     'addOnSelect',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'allowSelection',
     'alwaysOnTop',
@@ -4478,6 +5402,7 @@ calendar_monthMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -4515,11 +5440,8 @@ calendar_monthMetaData.PROPERTIES = [
     'draggable',
     'droppable',
     'editForm',
-    'enterAnimation',
     'eventDefaults',
-    'eventHandlers',
     'eventRelayers',
-    'exitAnimation',
     'firstDayOfWeek',
     'flex',
     'floated',
@@ -4534,6 +5456,7 @@ calendar_monthMetaData.PROPERTIES = [
     'hideAnimation',
     'hideMode',
     'hideOnMaskTap',
+    'highlightToday',
     'html',
     'icon',
     'iconAlign',
@@ -4579,7 +5502,6 @@ calendar_monthMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -4597,6 +5519,7 @@ calendar_monthMetaData.PROPERTIES = [
     'timezoneOffset',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -4803,7 +5726,7 @@ calendar_monthMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCalendar_monthComponent = ExtCalendar_monthComponent_1 = class ExtCalendar_monthComponent extends base {
+let ExtCalendar_monthComponent = ExtCalendar_monthComponent_1 = class ExtCalendar_monthComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_monthMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -4811,30 +5734,47 @@ let ExtCalendar_monthComponent = ExtCalendar_monthComponent_1 = class ExtCalenda
     ngOnInit() {
         this.baseOnInit(calendar_monthMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendar_monthMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_monthComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_monthComponent = ExtCalendar_monthComponent_1 = __decorate([
     Component({
-        selector: 'calendar-month',
+        selector: 'ext-calendar-month',
         inputs: calendar_monthMetaData.PROPERTIES,
         outputs: calendar_monthMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_monthComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendar_monthComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendar_monthComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendarComponent_1;
 class calendarMetaData {
 }
 calendarMetaData.XTYPE = 'calendar';
 calendarMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -4849,6 +5789,7 @@ calendarMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -4885,9 +5826,6 @@ calendarMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -4900,6 +5838,7 @@ calendarMetaData.PROPERTIES = [
     'hideAnimation',
     'hideMode',
     'hideOnMaskTap',
+    'highlightToday',
     'html',
     'icon',
     'iconAlign',
@@ -4947,7 +5886,6 @@ calendarMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -4969,6 +5907,7 @@ calendarMetaData.PROPERTIES = [
     'title',
     'titleAlign',
     'titleBar',
+    'titleCollapse',
     'todayButton',
     'toFrontOnShow',
     'toolDefaults',
@@ -5151,7 +6090,7 @@ calendarMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCalendarComponent = ExtCalendarComponent_1 = class ExtCalendarComponent extends base {
+let ExtCalendarComponent = ExtCalendarComponent_1 = class ExtCalendarComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendarMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -5159,31 +6098,48 @@ let ExtCalendarComponent = ExtCalendarComponent_1 = class ExtCalendarComponent e
     ngOnInit() {
         this.baseOnInit(calendarMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendarMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendarComponent = ExtCalendarComponent_1 = __decorate([
     Component({
-        selector: 'calendar',
+        selector: 'ext-calendar',
         inputs: calendarMetaData.PROPERTIES,
         outputs: calendarMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendarComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendarComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendarComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendar_weekComponent_1;
 class calendar_weekMetaData {
 }
 calendar_weekMetaData.XTYPE = 'calendar-week';
 calendar_weekMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'addForm',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'allowSelection',
     'alwaysOnTop',
@@ -5199,6 +6155,7 @@ calendar_weekMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -5237,11 +6194,8 @@ calendar_weekMetaData.PROPERTIES = [
     'droppable',
     'editForm',
     'endTime',
-    'enterAnimation',
     'eventDefaults',
-    'eventHandlers',
     'eventRelayers',
-    'exitAnimation',
     'firstDayOfWeek',
     'flex',
     'floated',
@@ -5256,6 +6210,7 @@ calendar_weekMetaData.PROPERTIES = [
     'hideAnimation',
     'hideMode',
     'hideOnMaskTap',
+    'highlightToday',
     'html',
     'icon',
     'iconAlign',
@@ -5301,7 +6256,6 @@ calendar_weekMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -5321,6 +6275,7 @@ calendar_weekMetaData.PROPERTIES = [
     'timezoneOffset',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -5531,7 +6486,7 @@ calendar_weekMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCalendar_weekComponent = ExtCalendar_weekComponent_1 = class ExtCalendar_weekComponent extends base {
+let ExtCalendar_weekComponent = ExtCalendar_weekComponent_1 = class ExtCalendar_weekComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_weekMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -5539,32 +6494,49 @@ let ExtCalendar_weekComponent = ExtCalendar_weekComponent_1 = class ExtCalendar_
     ngOnInit() {
         this.baseOnInit(calendar_weekMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendar_weekMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_weekComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_weekComponent = ExtCalendar_weekComponent_1 = __decorate([
     Component({
-        selector: 'calendar-week',
+        selector: 'ext-calendar-week',
         inputs: calendar_weekMetaData.PROPERTIES,
         outputs: calendar_weekMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weekComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendar_weekComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendar_weekComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendar_weeksComponent_1;
 class calendar_weeksMetaData {
 }
 calendar_weeksMetaData.XTYPE = 'calendar-weeks';
 calendar_weeksMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'addForm',
     'addOnSelect',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'allowSelection',
     'alwaysOnTop',
@@ -5580,6 +6552,7 @@ calendar_weeksMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -5617,11 +6590,8 @@ calendar_weeksMetaData.PROPERTIES = [
     'draggable',
     'droppable',
     'editForm',
-    'enterAnimation',
     'eventDefaults',
-    'eventHandlers',
     'eventRelayers',
-    'exitAnimation',
     'firstDayOfWeek',
     'flex',
     'floated',
@@ -5636,6 +6606,7 @@ calendar_weeksMetaData.PROPERTIES = [
     'hideAnimation',
     'hideMode',
     'hideOnMaskTap',
+    'highlightToday',
     'html',
     'icon',
     'iconAlign',
@@ -5681,7 +6652,6 @@ calendar_weeksMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -5699,6 +6669,7 @@ calendar_weeksMetaData.PROPERTIES = [
     'timezoneOffset',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -5905,7 +6876,7 @@ calendar_weeksMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCalendar_weeksComponent = ExtCalendar_weeksComponent_1 = class ExtCalendar_weeksComponent extends base {
+let ExtCalendar_weeksComponent = ExtCalendar_weeksComponent_1 = class ExtCalendar_weeksComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_weeksMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -5913,29 +6884,46 @@ let ExtCalendar_weeksComponent = ExtCalendar_weeksComponent_1 = class ExtCalenda
     ngOnInit() {
         this.baseOnInit(calendar_weeksMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendar_weeksMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_weeksComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_weeksComponent = ExtCalendar_weeksComponent_1 = __decorate([
     Component({
-        selector: 'calendar-weeks',
+        selector: 'ext-calendar-weeks',
         inputs: calendar_weeksMetaData.PROPERTIES,
         outputs: calendar_weeksMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weeksComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendar_weeksComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendar_weeksComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendar_dayviewComponent_1;
 class calendar_dayviewMetaData {
 }
 calendar_dayviewMetaData.XTYPE = 'calendar-dayview';
 calendar_dayviewMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'addForm',
+    'alignSelf',
     'allowSelection',
     'alwaysOnTop',
     'ariaAttributes',
@@ -5964,10 +6952,7 @@ calendar_dayviewMetaData.PROPERTIES = [
     'droppable',
     'editForm',
     'endTime',
-    'enterAnimation',
     'eventDefaults',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -6008,7 +6993,6 @@ calendar_dayviewMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -6193,7 +7177,7 @@ calendar_dayviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCalendar_dayviewComponent = ExtCalendar_dayviewComponent_1 = class ExtCalendar_dayviewComponent extends base {
+let ExtCalendar_dayviewComponent = ExtCalendar_dayviewComponent_1 = class ExtCalendar_dayviewComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_dayviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -6201,29 +7185,46 @@ let ExtCalendar_dayviewComponent = ExtCalendar_dayviewComponent_1 = class ExtCal
     ngOnInit() {
         this.baseOnInit(calendar_dayviewMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendar_dayviewMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_dayviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_dayviewComponent = ExtCalendar_dayviewComponent_1 = __decorate([
     Component({
-        selector: 'calendar-dayview',
+        selector: 'ext-calendar-dayview',
         inputs: calendar_dayviewMetaData.PROPERTIES,
         outputs: calendar_dayviewMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_dayviewComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendar_dayviewComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendar_dayviewComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendar_daysviewComponent_1;
 class calendar_daysviewMetaData {
 }
 calendar_daysviewMetaData.XTYPE = 'calendar-daysview';
 calendar_daysviewMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'addForm',
+    'alignSelf',
     'allowSelection',
     'alwaysOnTop',
     'ariaAttributes',
@@ -6252,10 +7253,7 @@ calendar_daysviewMetaData.PROPERTIES = [
     'droppable',
     'editForm',
     'endTime',
-    'enterAnimation',
     'eventDefaults',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -6296,7 +7294,6 @@ calendar_daysviewMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -6481,7 +7478,7 @@ calendar_daysviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCalendar_daysviewComponent = ExtCalendar_daysviewComponent_1 = class ExtCalendar_daysviewComponent extends base {
+let ExtCalendar_daysviewComponent = ExtCalendar_daysviewComponent_1 = class ExtCalendar_daysviewComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_daysviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -6489,30 +7486,47 @@ let ExtCalendar_daysviewComponent = ExtCalendar_daysviewComponent_1 = class ExtC
     ngOnInit() {
         this.baseOnInit(calendar_daysviewMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendar_daysviewMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_daysviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_daysviewComponent = ExtCalendar_daysviewComponent_1 = __decorate([
     Component({
-        selector: 'calendar-daysview',
+        selector: 'ext-calendar-daysview',
         inputs: calendar_daysviewMetaData.PROPERTIES,
         outputs: calendar_daysviewMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_daysviewComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendar_daysviewComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendar_daysviewComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendar_monthviewComponent_1;
 class calendar_monthviewMetaData {
 }
 calendar_monthviewMetaData.XTYPE = 'calendar-monthview';
 calendar_monthviewMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'addForm',
     'addOnSelect',
+    'alignSelf',
     'allowSelection',
     'alwaysOnTop',
     'ariaAttributes',
@@ -6540,10 +7554,7 @@ calendar_monthviewMetaData.PROPERTIES = [
     'draggable',
     'droppable',
     'editForm',
-    'enterAnimation',
     'eventDefaults',
-    'eventHandlers',
-    'exitAnimation',
     'firstDayOfWeek',
     'flex',
     'floated',
@@ -6585,7 +7596,6 @@ calendar_monthviewMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -6767,7 +7777,7 @@ calendar_monthviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCalendar_monthviewComponent = ExtCalendar_monthviewComponent_1 = class ExtCalendar_monthviewComponent extends base {
+let ExtCalendar_monthviewComponent = ExtCalendar_monthviewComponent_1 = class ExtCalendar_monthviewComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_monthviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -6775,28 +7785,44 @@ let ExtCalendar_monthviewComponent = ExtCalendar_monthviewComponent_1 = class Ex
     ngOnInit() {
         this.baseOnInit(calendar_monthviewMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendar_monthviewMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_monthviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_monthviewComponent = ExtCalendar_monthviewComponent_1 = __decorate([
     Component({
-        selector: 'calendar-monthview',
+        selector: 'ext-calendar-monthview',
         inputs: calendar_monthviewMetaData.PROPERTIES,
         outputs: calendar_monthviewMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_monthviewComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendar_monthviewComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendar_monthviewComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendar_multiviewComponent_1;
 class calendar_multiviewMetaData {
 }
 calendar_multiviewMetaData.XTYPE = 'calendar-multiview';
 calendar_multiviewMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'compact',
     'compactOptions',
     'defaultView',
@@ -6817,7 +7843,7 @@ calendar_multiviewMetaData.EVENTS = [
 calendar_multiviewMetaData.EVENTNAMES = [
     'ready'
 ];
-let ExtCalendar_multiviewComponent = ExtCalendar_multiviewComponent_1 = class ExtCalendar_multiviewComponent extends base {
+let ExtCalendar_multiviewComponent = ExtCalendar_multiviewComponent_1 = class ExtCalendar_multiviewComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_multiviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -6825,29 +7851,46 @@ let ExtCalendar_multiviewComponent = ExtCalendar_multiviewComponent_1 = class Ex
     ngOnInit() {
         this.baseOnInit(calendar_multiviewMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendar_multiviewMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_multiviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_multiviewComponent = ExtCalendar_multiviewComponent_1 = __decorate([
     Component({
-        selector: 'calendar-multiview',
+        selector: 'ext-calendar-multiview',
         inputs: calendar_multiviewMetaData.PROPERTIES,
         outputs: calendar_multiviewMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_multiviewComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendar_multiviewComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendar_multiviewComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendar_weekviewComponent_1;
 class calendar_weekviewMetaData {
 }
 calendar_weekviewMetaData.XTYPE = 'calendar-weekview';
 calendar_weekviewMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'addForm',
+    'alignSelf',
     'allowSelection',
     'alwaysOnTop',
     'ariaAttributes',
@@ -6876,10 +7919,7 @@ calendar_weekviewMetaData.PROPERTIES = [
     'droppable',
     'editForm',
     'endTime',
-    'enterAnimation',
     'eventDefaults',
-    'eventHandlers',
-    'exitAnimation',
     'firstDayOfWeek',
     'flex',
     'floated',
@@ -6921,7 +7961,6 @@ calendar_weekviewMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -7106,7 +8145,7 @@ calendar_weekviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCalendar_weekviewComponent = ExtCalendar_weekviewComponent_1 = class ExtCalendar_weekviewComponent extends base {
+let ExtCalendar_weekviewComponent = ExtCalendar_weekviewComponent_1 = class ExtCalendar_weekviewComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_weekviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -7114,30 +8153,47 @@ let ExtCalendar_weekviewComponent = ExtCalendar_weekviewComponent_1 = class ExtC
     ngOnInit() {
         this.baseOnInit(calendar_weekviewMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendar_weekviewMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_weekviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_weekviewComponent = ExtCalendar_weekviewComponent_1 = __decorate([
     Component({
-        selector: 'calendar-weekview',
+        selector: 'ext-calendar-weekview',
         inputs: calendar_weekviewMetaData.PROPERTIES,
         outputs: calendar_weekviewMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weekviewComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendar_weekviewComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendar_weekviewComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCalendar_weeksviewComponent_1;
 class calendar_weeksviewMetaData {
 }
 calendar_weeksviewMetaData.XTYPE = 'calendar-weeksview';
 calendar_weeksviewMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'addForm',
     'addOnSelect',
+    'alignSelf',
     'allowSelection',
     'alwaysOnTop',
     'ariaAttributes',
@@ -7165,10 +8221,7 @@ calendar_weeksviewMetaData.PROPERTIES = [
     'draggable',
     'droppable',
     'editForm',
-    'enterAnimation',
     'eventDefaults',
-    'eventHandlers',
-    'exitAnimation',
     'firstDayOfWeek',
     'flex',
     'floated',
@@ -7210,7 +8263,6 @@ calendar_weeksviewMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -7392,7 +8444,7 @@ calendar_weeksviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCalendar_weeksviewComponent = ExtCalendar_weeksviewComponent_1 = class ExtCalendar_weeksviewComponent extends base {
+let ExtCalendar_weeksviewComponent = ExtCalendar_weeksviewComponent_1 = class ExtCalendar_weeksviewComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, calendar_weeksviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -7400,30 +8452,47 @@ let ExtCalendar_weeksviewComponent = ExtCalendar_weeksviewComponent_1 = class Ex
     ngOnInit() {
         this.baseOnInit(calendar_weeksviewMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(calendar_weeksviewMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCalendar_weeksviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCalendar_weeksviewComponent = ExtCalendar_weeksviewComponent_1 = __decorate([
     Component({
-        selector: 'calendar-weeksview',
+        selector: 'ext-calendar-weeksview',
         inputs: calendar_weeksviewMetaData.PROPERTIES,
         outputs: calendar_weeksviewMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCalendar_weeksviewComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCalendar_weeksviewComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCalendar_weeksviewComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCarouselComponent_1;
 class carouselMetaData {
 }
 carouselMetaData.XTYPE = 'carousel';
 carouselMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -7434,6 +8503,7 @@ carouselMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -7453,9 +8523,6 @@ carouselMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -7504,7 +8571,6 @@ carouselMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -7670,7 +8736,7 @@ carouselMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCarouselComponent = ExtCarouselComponent_1 = class ExtCarouselComponent extends base {
+let ExtCarouselComponent = ExtCarouselComponent_1 = class ExtCarouselComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, carouselMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -7678,111 +8744,47 @@ let ExtCarouselComponent = ExtCarouselComponent_1 = class ExtCarouselComponent e
     ngOnInit() {
         this.baseOnInit(carouselMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(carouselMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCarouselComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCarouselComponent = ExtCarouselComponent_1 = __decorate([
     Component({
-        selector: 'carousel',
+        selector: 'ext-carousel',
         inputs: carouselMetaData.PROPERTIES,
         outputs: carouselMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCarouselComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCarouselComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCarouselComponent);
 
-var ExtAxis3dComponent_1;
-class axis3dMetaData {
-}
-axis3dMetaData.XTYPE = 'axis3d';
-axis3dMetaData.PROPERTIES = [
-    'adjustByMajorUnit',
-    'background',
-    'center',
-    'chart',
-    'depth',
-    'expandRangeBy',
-    'fields',
-    'floating',
-    'grid',
-    'hidden',
-    'id',
-    'label',
-    'layout',
-    'length',
-    'limits',
-    'linkedTo',
-    'majorTickSteps',
-    'margin',
-    'maximum',
-    'maxZoom',
-    'minimum',
-    'minorTickSteps',
-    'minZoom',
-    'needHighPrecision',
-    'position',
-    'radius',
-    'reconcileRange',
-    'renderer',
-    'rotation',
-    'segmenter',
-    'style',
-    'title',
-    'titleMargin',
-    'totalAngle',
-    'visibleRange',
-    'platformConfig',
-    'responsiveConfig',
-    'align',
-    'fitToParent',
-    'config'
-];
-axis3dMetaData.EVENTS = [
-    { name: 'rangechange', parameters: 'axis,range,oldRange' },
-    { name: 'visiblerangechange', parameters: 'axis,visibleRange' },
-    { name: 'ready', parameters: '' }
-];
-axis3dMetaData.EVENTNAMES = [
-    'rangechange',
-    'visiblerangechange',
-    'ready'
-];
-let ExtAxis3dComponent = ExtAxis3dComponent_1 = class ExtAxis3dComponent extends base {
-    constructor(eRef, hostComponent) {
-        super(eRef.nativeElement, axis3dMetaData, hostComponent);
-        this.hostComponent = hostComponent;
-    }
-    ngOnInit() {
-        this.baseOnInit(axis3dMetaData);
-    }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
-    }
-};
-ExtAxis3dComponent = ExtAxis3dComponent_1 = __decorate([
-    Component({
-        selector: 'axis3d',
-        inputs: axis3dMetaData.PROPERTIES,
-        outputs: axis3dMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtAxis3dComponent_1) }],
-        template: '<ng-template></ng-template>'
-    }),
-    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
-], ExtAxis3dComponent);
-
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCartesianComponent_1;
 class cartesianMetaData {
 }
 cartesianMetaData.XTYPE = 'cartesian';
 cartesianMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'animation',
@@ -7796,6 +8798,7 @@ cartesianMetaData.PROPERTIES = [
     'axisLock',
     'background',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'captions',
@@ -7818,9 +8821,6 @@ cartesianMetaData.PROPERTIES = [
     'downloadServerUrl',
     'draggable',
     'engine',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'flipXY',
     'floated',
@@ -7877,7 +8877,6 @@ cartesianMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'series',
     'session',
     'shadow',
@@ -8096,7 +9095,7 @@ cartesianMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCartesianComponent = ExtCartesianComponent_1 = class ExtCartesianComponent extends base {
+let ExtCartesianComponent = ExtCartesianComponent_1 = class ExtCartesianComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, cartesianMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -8104,30 +9103,47 @@ let ExtCartesianComponent = ExtCartesianComponent_1 = class ExtCartesianComponen
     ngOnInit() {
         this.baseOnInit(cartesianMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(cartesianMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCartesianComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCartesianComponent = ExtCartesianComponent_1 = __decorate([
     Component({
-        selector: 'cartesian',
+        selector: 'ext-cartesian',
         inputs: cartesianMetaData.PROPERTIES,
         outputs: cartesianMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCartesianComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCartesianComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCartesianComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtChartComponent_1;
 class chartMetaData {
 }
 chartMetaData.XTYPE = 'chart';
 chartMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'animation',
@@ -8141,6 +9157,7 @@ chartMetaData.PROPERTIES = [
     'axisLock',
     'background',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'captions',
@@ -8163,9 +9180,6 @@ chartMetaData.PROPERTIES = [
     'downloadServerUrl',
     'draggable',
     'engine',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'flipXY',
     'floated',
@@ -8222,7 +9236,6 @@ chartMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'series',
     'session',
     'shadow',
@@ -8441,7 +9454,7 @@ chartMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtChartComponent = ExtChartComponent_1 = class ExtChartComponent extends base {
+let ExtChartComponent = ExtChartComponent_1 = class ExtChartComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, chartMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -8449,76 +9462,47 @@ let ExtChartComponent = ExtChartComponent_1 = class ExtChartComponent extends ba
     ngOnInit() {
         this.baseOnInit(chartMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(chartMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtChartComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtChartComponent = ExtChartComponent_1 = __decorate([
     Component({
-        selector: 'chart',
+        selector: 'ext-chart',
         inputs: chartMetaData.PROPERTIES,
         outputs: chartMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtChartComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtChartComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtChartComponent);
 
-var ExtInteractionComponent_1;
-class interactionMetaData {
-}
-interactionMetaData.XTYPE = 'interaction';
-interactionMetaData.PROPERTIES = [
-    'chart',
-    'enabled',
-    'gesture',
-    'listeners',
-    'platformConfig',
-    'responsiveConfig',
-    'align',
-    'fitToParent',
-    'config'
-];
-interactionMetaData.EVENTS = [
-    { name: 'ready', parameters: '' }
-];
-interactionMetaData.EVENTNAMES = [
-    'ready'
-];
-let ExtInteractionComponent = ExtInteractionComponent_1 = class ExtInteractionComponent extends base {
-    constructor(eRef, hostComponent) {
-        super(eRef.nativeElement, interactionMetaData, hostComponent);
-        this.hostComponent = hostComponent;
-    }
-    ngOnInit() {
-        this.baseOnInit(interactionMetaData);
-    }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
-    }
-};
-ExtInteractionComponent = ExtInteractionComponent_1 = __decorate([
-    Component({
-        selector: 'interaction',
-        inputs: interactionMetaData.PROPERTIES,
-        outputs: interactionMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtInteractionComponent_1) }],
-        template: '<ng-template></ng-template>'
-    }),
-    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
-], ExtInteractionComponent);
-
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtLegendComponent_1;
 class legendMetaData {
 }
 legendMetaData.XTYPE = 'legend';
 legendMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -8530,6 +9514,7 @@ legendMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -8556,10 +9541,6 @@ legendMetaData.PROPERTIES = [
     'emptyText',
     'emptyTextDefaults',
     'emptyTextProperty',
-    'enableTextSelection',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -8624,7 +9605,6 @@ legendMetaData.PROPERTIES = [
     'selectable',
     'selected',
     'selection',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -8856,7 +9836,7 @@ legendMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtLegendComponent = ExtLegendComponent_1 = class ExtLegendComponent extends base {
+let ExtLegendComponent = ExtLegendComponent_1 = class ExtLegendComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, legendMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -8864,30 +9844,47 @@ let ExtLegendComponent = ExtLegendComponent_1 = class ExtLegendComponent extends
     ngOnInit() {
         this.baseOnInit(legendMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(legendMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtLegendComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtLegendComponent = ExtLegendComponent_1 = __decorate([
     Component({
-        selector: 'legend',
+        selector: 'ext-legend',
         inputs: legendMetaData.PROPERTIES,
         outputs: legendMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtLegendComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtLegendComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtLegendComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtChartnavigatorComponent_1;
 class chartnavigatorMetaData {
 }
 chartnavigatorMetaData.XTYPE = 'chartnavigator';
 chartnavigatorMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -8898,6 +9895,7 @@ chartnavigatorMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -8917,9 +9915,6 @@ chartnavigatorMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -8968,7 +9963,6 @@ chartnavigatorMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -9134,7 +10128,7 @@ chartnavigatorMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtChartnavigatorComponent = ExtChartnavigatorComponent_1 = class ExtChartnavigatorComponent extends base {
+let ExtChartnavigatorComponent = ExtChartnavigatorComponent_1 = class ExtChartnavigatorComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, chartnavigatorMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -9142,30 +10136,47 @@ let ExtChartnavigatorComponent = ExtChartnavigatorComponent_1 = class ExtChartna
     ngOnInit() {
         this.baseOnInit(chartnavigatorMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(chartnavigatorMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtChartnavigatorComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtChartnavigatorComponent = ExtChartnavigatorComponent_1 = __decorate([
     Component({
-        selector: 'chartnavigator',
+        selector: 'ext-chartnavigator',
         inputs: chartnavigatorMetaData.PROPERTIES,
         outputs: chartnavigatorMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtChartnavigatorComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtChartnavigatorComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtChartnavigatorComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPolarComponent_1;
 class polarMetaData {
 }
 polarMetaData.XTYPE = 'polar';
 polarMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'animation',
@@ -9179,6 +10190,7 @@ polarMetaData.PROPERTIES = [
     'axisLock',
     'background',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'captions',
@@ -9202,9 +10214,6 @@ polarMetaData.PROPERTIES = [
     'downloadServerUrl',
     'draggable',
     'engine',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -9261,7 +10270,6 @@ polarMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'series',
     'session',
     'shadow',
@@ -9480,7 +10488,7 @@ polarMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPolarComponent = ExtPolarComponent_1 = class ExtPolarComponent extends base {
+let ExtPolarComponent = ExtPolarComponent_1 = class ExtPolarComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, polarMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -9488,30 +10496,47 @@ let ExtPolarComponent = ExtPolarComponent_1 = class ExtPolarComponent extends ba
     ngOnInit() {
         this.baseOnInit(polarMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(polarMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPolarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPolarComponent = ExtPolarComponent_1 = __decorate([
     Component({
-        selector: 'polar',
+        selector: 'ext-polar',
         inputs: polarMetaData.PROPERTIES,
         outputs: polarMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPolarComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPolarComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPolarComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSpacefillingComponent_1;
 class spacefillingMetaData {
 }
 spacefillingMetaData.XTYPE = 'spacefilling';
 spacefillingMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'animation',
@@ -9525,6 +10550,7 @@ spacefillingMetaData.PROPERTIES = [
     'axisLock',
     'background',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'captions',
@@ -9547,9 +10573,6 @@ spacefillingMetaData.PROPERTIES = [
     'downloadServerUrl',
     'draggable',
     'engine',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -9604,7 +10627,6 @@ spacefillingMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'series',
     'session',
     'shadow',
@@ -9823,7 +10845,7 @@ spacefillingMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSpacefillingComponent = ExtSpacefillingComponent_1 = class ExtSpacefillingComponent extends base {
+let ExtSpacefillingComponent = ExtSpacefillingComponent_1 = class ExtSpacefillingComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, spacefillingMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -9831,28 +10853,45 @@ let ExtSpacefillingComponent = ExtSpacefillingComponent_1 = class ExtSpacefillin
     ngOnInit() {
         this.baseOnInit(spacefillingMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(spacefillingMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSpacefillingComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSpacefillingComponent = ExtSpacefillingComponent_1 = __decorate([
     Component({
-        selector: 'spacefilling',
+        selector: 'ext-spacefilling',
         inputs: spacefillingMetaData.PROPERTIES,
         outputs: spacefillingMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSpacefillingComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSpacefillingComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSpacefillingComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtChipComponent_1;
 class chipMetaData {
 }
 chipMetaData.XTYPE = 'chip';
 chipMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -9875,9 +10914,6 @@ chipMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -9918,7 +10954,6 @@ chipMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -10068,7 +11103,7 @@ chipMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtChipComponent = ExtChipComponent_1 = class ExtChipComponent extends base {
+let ExtChipComponent = ExtChipComponent_1 = class ExtChipComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, chipMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -10076,28 +11111,45 @@ let ExtChipComponent = ExtChipComponent_1 = class ExtChipComponent extends base 
     ngOnInit() {
         this.baseOnInit(chipMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(chipMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtChipComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtChipComponent = ExtChipComponent_1 = __decorate([
     Component({
-        selector: 'chip',
+        selector: 'ext-chip',
         inputs: chipMetaData.PROPERTIES,
         outputs: chipMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtChipComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtChipComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtChipComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtComponentComponent_1;
 class componentMetaData {
 }
 componentMetaData.XTYPE = 'component';
 componentMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -10118,9 +11170,6 @@ componentMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -10158,7 +11207,6 @@ componentMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -10307,7 +11355,7 @@ componentMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtComponentComponent = ExtComponentComponent_1 = class ExtComponentComponent extends base {
+let ExtComponentComponent = ExtComponentComponent_1 = class ExtComponentComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, componentMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -10315,30 +11363,47 @@ let ExtComponentComponent = ExtComponentComponent_1 = class ExtComponentComponen
     ngOnInit() {
         this.baseOnInit(componentMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(componentMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtComponentComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtComponentComponent = ExtComponentComponent_1 = __decorate([
     Component({
-        selector: 'component',
+        selector: 'ext-component',
         inputs: componentMetaData.PROPERTIES,
         outputs: componentMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtComponentComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtComponentComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtComponentComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtContainerComponent_1;
 class containerMetaData {
 }
 containerMetaData.XTYPE = 'container';
 containerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -10349,6 +11414,7 @@ containerMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -10367,9 +11433,6 @@ containerMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -10417,7 +11480,6 @@ containerMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -10583,7 +11645,7 @@ containerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtContainerComponent = ExtContainerComponent_1 = class ExtContainerComponent extends base {
+let ExtContainerComponent = ExtContainerComponent_1 = class ExtContainerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, containerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -10591,28 +11653,45 @@ let ExtContainerComponent = ExtContainerComponent_1 = class ExtContainerComponen
     ngOnInit() {
         this.baseOnInit(containerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(containerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtContainerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtContainerComponent = ExtContainerComponent_1 = __decorate([
     Component({
-        selector: 'container',
+        selector: 'ext-container',
         inputs: containerMetaData.PROPERTIES,
         outputs: containerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtContainerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtContainerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtContainerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtD3_canvasComponent_1;
 class d3_canvasMetaData {
 }
 d3_canvasMetaData.XTYPE = 'd3-canvas';
 d3_canvasMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -10634,9 +11713,6 @@ d3_canvasMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -10676,7 +11752,6 @@ d3_canvasMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -10830,7 +11905,7 @@ d3_canvasMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtD3_canvasComponent = ExtD3_canvasComponent_1 = class ExtD3_canvasComponent extends base {
+let ExtD3_canvasComponent = ExtD3_canvasComponent_1 = class ExtD3_canvasComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3_canvasMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -10838,28 +11913,45 @@ let ExtD3_canvasComponent = ExtD3_canvasComponent_1 = class ExtD3_canvasComponen
     ngOnInit() {
         this.baseOnInit(d3_canvasMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(d3_canvasMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3_canvasComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3_canvasComponent = ExtD3_canvasComponent_1 = __decorate([
     Component({
-        selector: 'd3-canvas',
+        selector: 'ext-d3-canvas',
         inputs: d3_canvasMetaData.PROPERTIES,
         outputs: d3_canvasMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_canvasComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtD3_canvasComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtD3_canvasComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtD3_heatmapComponent_1;
 class d3_heatmapMetaData {
 }
 d3_heatmapMetaData.XTYPE = 'd3-heatmap';
 d3_heatmapMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -10883,9 +11975,6 @@ d3_heatmapMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -10926,7 +12015,6 @@ d3_heatmapMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -11085,7 +12173,7 @@ d3_heatmapMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtD3_heatmapComponent = ExtD3_heatmapComponent_1 = class ExtD3_heatmapComponent extends base {
+let ExtD3_heatmapComponent = ExtD3_heatmapComponent_1 = class ExtD3_heatmapComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3_heatmapMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -11093,28 +12181,45 @@ let ExtD3_heatmapComponent = ExtD3_heatmapComponent_1 = class ExtD3_heatmapCompo
     ngOnInit() {
         this.baseOnInit(d3_heatmapMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(d3_heatmapMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3_heatmapComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3_heatmapComponent = ExtD3_heatmapComponent_1 = __decorate([
     Component({
-        selector: 'd3-heatmap',
+        selector: 'ext-d3-heatmap',
         inputs: d3_heatmapMetaData.PROPERTIES,
         outputs: d3_heatmapMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_heatmapComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtD3_heatmapComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtD3_heatmapComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtD3_packComponent_1;
 class d3_packMetaData {
 }
 d3_packMetaData.XTYPE = 'd3-pack';
 d3_packMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -11139,9 +12244,6 @@ d3_packMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'expandEventName',
     'flex',
     'floated',
@@ -11196,7 +12298,6 @@ d3_packMetaData.PROPERTIES = [
     'scrollable',
     'selectEventName',
     'selection',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -11356,7 +12457,7 @@ d3_packMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtD3_packComponent = ExtD3_packComponent_1 = class ExtD3_packComponent extends base {
+let ExtD3_packComponent = ExtD3_packComponent_1 = class ExtD3_packComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3_packMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -11364,28 +12465,45 @@ let ExtD3_packComponent = ExtD3_packComponent_1 = class ExtD3_packComponent exte
     ngOnInit() {
         this.baseOnInit(d3_packMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(d3_packMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3_packComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3_packComponent = ExtD3_packComponent_1 = __decorate([
     Component({
-        selector: 'd3-pack',
+        selector: 'ext-d3-pack',
         inputs: d3_packMetaData.PROPERTIES,
         outputs: d3_packMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_packComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtD3_packComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtD3_packComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtD3_partitionComponent_1;
 class d3_partitionMetaData {
 }
 d3_partitionMetaData.XTYPE = 'd3-partition';
 d3_partitionMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -11409,9 +12527,6 @@ d3_partitionMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'expandEventName',
     'flex',
     'floated',
@@ -11466,7 +12581,6 @@ d3_partitionMetaData.PROPERTIES = [
     'scrollable',
     'selectEventName',
     'selection',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -11625,7 +12739,7 @@ d3_partitionMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtD3_partitionComponent = ExtD3_partitionComponent_1 = class ExtD3_partitionComponent extends base {
+let ExtD3_partitionComponent = ExtD3_partitionComponent_1 = class ExtD3_partitionComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3_partitionMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -11633,28 +12747,45 @@ let ExtD3_partitionComponent = ExtD3_partitionComponent_1 = class ExtD3_partitio
     ngOnInit() {
         this.baseOnInit(d3_partitionMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(d3_partitionMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3_partitionComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3_partitionComponent = ExtD3_partitionComponent_1 = __decorate([
     Component({
-        selector: 'd3-partition',
+        selector: 'ext-d3-partition',
         inputs: d3_partitionMetaData.PROPERTIES,
         outputs: d3_partitionMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_partitionComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtD3_partitionComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtD3_partitionComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtD3_sunburstComponent_1;
 class d3_sunburstMetaData {
 }
 d3_sunburstMetaData.XTYPE = 'd3-sunburst';
 d3_sunburstMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -11678,9 +12809,6 @@ d3_sunburstMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'expandEventName',
     'flex',
     'floated',
@@ -11735,7 +12863,6 @@ d3_sunburstMetaData.PROPERTIES = [
     'scrollable',
     'selectEventName',
     'selection',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -11896,7 +13023,7 @@ d3_sunburstMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtD3_sunburstComponent = ExtD3_sunburstComponent_1 = class ExtD3_sunburstComponent extends base {
+let ExtD3_sunburstComponent = ExtD3_sunburstComponent_1 = class ExtD3_sunburstComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3_sunburstMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -11904,28 +13031,45 @@ let ExtD3_sunburstComponent = ExtD3_sunburstComponent_1 = class ExtD3_sunburstCo
     ngOnInit() {
         this.baseOnInit(d3_sunburstMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(d3_sunburstMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3_sunburstComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3_sunburstComponent = ExtD3_sunburstComponent_1 = __decorate([
     Component({
-        selector: 'd3-sunburst',
+        selector: 'ext-d3-sunburst',
         inputs: d3_sunburstMetaData.PROPERTIES,
         outputs: d3_sunburstMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_sunburstComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtD3_sunburstComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtD3_sunburstComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtD3_treeComponent_1;
 class d3_treeMetaData {
 }
 d3_treeMetaData.XTYPE = 'd3-tree';
 d3_treeMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -11950,9 +13094,6 @@ d3_treeMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'expandEventName',
     'flex',
     'floated',
@@ -12009,7 +13150,6 @@ d3_treeMetaData.PROPERTIES = [
     'scrollable',
     'selectEventName',
     'selection',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -12168,7 +13308,7 @@ d3_treeMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtD3_treeComponent = ExtD3_treeComponent_1 = class ExtD3_treeComponent extends base {
+let ExtD3_treeComponent = ExtD3_treeComponent_1 = class ExtD3_treeComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3_treeMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -12176,28 +13316,45 @@ let ExtD3_treeComponent = ExtD3_treeComponent_1 = class ExtD3_treeComponent exte
     ngOnInit() {
         this.baseOnInit(d3_treeMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(d3_treeMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3_treeComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3_treeComponent = ExtD3_treeComponent_1 = __decorate([
     Component({
-        selector: 'd3-tree',
+        selector: 'ext-d3-tree',
         inputs: d3_treeMetaData.PROPERTIES,
         outputs: d3_treeMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_treeComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtD3_treeComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtD3_treeComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtD3_horizontal_treeComponent_1;
 class d3_horizontal_treeMetaData {
 }
 d3_horizontal_treeMetaData.XTYPE = 'd3-horizontal-tree';
 d3_horizontal_treeMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -12222,9 +13379,6 @@ d3_horizontal_treeMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'expandEventName',
     'flex',
     'floated',
@@ -12281,7 +13435,6 @@ d3_horizontal_treeMetaData.PROPERTIES = [
     'scrollable',
     'selectEventName',
     'selection',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -12440,7 +13593,7 @@ d3_horizontal_treeMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtD3_horizontal_treeComponent = ExtD3_horizontal_treeComponent_1 = class ExtD3_horizontal_treeComponent extends base {
+let ExtD3_horizontal_treeComponent = ExtD3_horizontal_treeComponent_1 = class ExtD3_horizontal_treeComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3_horizontal_treeMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -12448,28 +13601,45 @@ let ExtD3_horizontal_treeComponent = ExtD3_horizontal_treeComponent_1 = class Ex
     ngOnInit() {
         this.baseOnInit(d3_horizontal_treeMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(d3_horizontal_treeMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3_horizontal_treeComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3_horizontal_treeComponent = ExtD3_horizontal_treeComponent_1 = __decorate([
     Component({
-        selector: 'd3-horizontal-tree',
+        selector: 'ext-d3-horizontal-tree',
         inputs: d3_horizontal_treeMetaData.PROPERTIES,
         outputs: d3_horizontal_treeMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_horizontal_treeComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtD3_horizontal_treeComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtD3_horizontal_treeComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtD3_treemapComponent_1;
 class d3_treemapMetaData {
 }
 d3_treemapMetaData.XTYPE = 'd3-treemap';
 d3_treemapMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -12494,9 +13664,6 @@ d3_treemapMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'expandEventName',
     'flex',
     'floated',
@@ -12554,7 +13721,6 @@ d3_treemapMetaData.PROPERTIES = [
     'scrollable',
     'selectEventName',
     'selection',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -12714,7 +13880,7 @@ d3_treemapMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtD3_treemapComponent = ExtD3_treemapComponent_1 = class ExtD3_treemapComponent extends base {
+let ExtD3_treemapComponent = ExtD3_treemapComponent_1 = class ExtD3_treemapComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3_treemapMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -12722,28 +13888,45 @@ let ExtD3_treemapComponent = ExtD3_treemapComponent_1 = class ExtD3_treemapCompo
     ngOnInit() {
         this.baseOnInit(d3_treemapMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(d3_treemapMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3_treemapComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3_treemapComponent = ExtD3_treemapComponent_1 = __decorate([
     Component({
-        selector: 'd3-treemap',
+        selector: 'ext-d3-treemap',
         inputs: d3_treemapMetaData.PROPERTIES,
         outputs: d3_treemapMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_treemapComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtD3_treemapComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtD3_treemapComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtD3_svgComponent_1;
 class d3_svgMetaData {
 }
 d3_svgMetaData.XTYPE = 'd3-svg';
 d3_svgMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -12766,9 +13949,6 @@ d3_svgMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -12807,7 +13987,6 @@ d3_svgMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -12963,7 +14142,7 @@ d3_svgMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtD3_svgComponent = ExtD3_svgComponent_1 = class ExtD3_svgComponent extends base {
+let ExtD3_svgComponent = ExtD3_svgComponent_1 = class ExtD3_svgComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3_svgMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -12971,28 +14150,45 @@ let ExtD3_svgComponent = ExtD3_svgComponent_1 = class ExtD3_svgComponent extends
     ngOnInit() {
         this.baseOnInit(d3_svgMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(d3_svgMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3_svgComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3_svgComponent = ExtD3_svgComponent_1 = __decorate([
     Component({
-        selector: 'd3-svg',
+        selector: 'ext-d3-svg',
         inputs: d3_svgMetaData.PROPERTIES,
         outputs: d3_svgMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3_svgComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtD3_svgComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtD3_svgComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtD3Component_1;
 class d3MetaData {
 }
 d3MetaData.XTYPE = 'd3';
 d3MetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -13015,9 +14211,6 @@ d3MetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -13056,7 +14249,6 @@ d3MetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -13212,7 +14404,7 @@ d3MetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtD3Component = ExtD3Component_1 = class ExtD3Component extends base {
+let ExtD3Component = ExtD3Component_1 = class ExtD3Component extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, d3MetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -13220,30 +14412,47 @@ let ExtD3Component = ExtD3Component_1 = class ExtD3Component extends base {
     ngOnInit() {
         this.baseOnInit(d3MetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(d3MetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtD3Component.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtD3Component = ExtD3Component_1 = __decorate([
     Component({
-        selector: 'd3',
+        selector: 'ext-d3',
         inputs: d3MetaData.PROPERTIES,
         outputs: d3MetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtD3Component_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtD3Component_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtD3Component);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtBoundlistComponent_1;
 class boundlistMetaData {
 }
 boundlistMetaData.XTYPE = 'boundlist';
 boundlistMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -13255,12 +14464,15 @@ boundlistMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'bufferSize',
     'cardSwitchAnimation',
     'centered',
     'cls',
+    'collapseDefaults',
+    'collapsible',
     'constrainAlign',
     'contentEl',
     'control',
@@ -13283,10 +14495,6 @@ boundlistMetaData.PROPERTIES = [
     'emptyText',
     'emptyTextDefaults',
     'emptyTextProperty',
-    'enableTextSelection',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -13295,6 +14503,8 @@ boundlistMetaData.PROPERTIES = [
     'grouped',
     'groupFooter',
     'groupHeader',
+    'grouping',
+    'groupPlaceholder',
     'height',
     'hidden',
     'hideAnimation',
@@ -13373,7 +14583,6 @@ boundlistMetaData.PROPERTIES = [
     'scrollToTopOnRefresh',
     'selectable',
     'selection',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -13400,7 +14609,6 @@ boundlistMetaData.PROPERTIES = [
     'ui',
     'userCls',
     'userSelectable',
-    'useSimpleItems',
     'variableHeights',
     'verticalOverflow',
     'viewModel',
@@ -13431,6 +14639,8 @@ boundlistMetaData.EVENTS = [
     { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforegroupcollapse', parameters: 'boundlist,group' },
+    { name: 'beforegroupexpand', parameters: 'boundlist,group' },
     { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforehide', parameters: 'sender' },
@@ -13473,6 +14683,8 @@ boundlistMetaData.EVENTS = [
     { name: 'focusenter', parameters: 'boundlist,event' },
     { name: 'focusleave', parameters: 'boundlist,event' },
     { name: 'fullscreen', parameters: 'sender' },
+    { name: 'groupcollapse', parameters: 'boundlist,group' },
+    { name: 'groupexpand', parameters: 'boundlist,group' },
     { name: 'heightchange', parameters: 'sender,value,oldValue' },
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
@@ -13527,6 +14739,8 @@ boundlistMetaData.EVENTNAMES = [
     'beforecenteredchange',
     'beforedisabledchange',
     'beforedockedchange',
+    'beforegroupcollapse',
+    'beforegroupexpand',
     'beforeheightchange',
     'beforehiddenchange',
     'beforehide',
@@ -13569,6 +14783,8 @@ boundlistMetaData.EVENTNAMES = [
     'focusenter',
     'focusleave',
     'fullscreen',
+    'groupcollapse',
+    'groupexpand',
     'heightchange',
     'hiddenchange',
     'hide',
@@ -13613,7 +14829,7 @@ boundlistMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtBoundlistComponent = ExtBoundlistComponent_1 = class ExtBoundlistComponent extends base {
+let ExtBoundlistComponent = ExtBoundlistComponent_1 = class ExtBoundlistComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, boundlistMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -13621,30 +14837,47 @@ let ExtBoundlistComponent = ExtBoundlistComponent_1 = class ExtBoundlistComponen
     ngOnInit() {
         this.baseOnInit(boundlistMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(boundlistMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtBoundlistComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtBoundlistComponent = ExtBoundlistComponent_1 = __decorate([
     Component({
-        selector: 'boundlist',
+        selector: 'ext-boundlist',
         inputs: boundlistMetaData.PROPERTIES,
         outputs: boundlistMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtBoundlistComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtBoundlistComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtBoundlistComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtChipviewComponent_1;
 class chipviewMetaData {
 }
 chipviewMetaData.XTYPE = 'chipview';
 chipviewMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -13656,6 +14889,7 @@ chipviewMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -13687,10 +14921,6 @@ chipviewMetaData.PROPERTIES = [
     'emptyText',
     'emptyTextDefaults',
     'emptyTextProperty',
-    'enableTextSelection',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -13757,7 +14987,6 @@ chipviewMetaData.PROPERTIES = [
     'selectable',
     'selected',
     'selection',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -13988,7 +15217,7 @@ chipviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtChipviewComponent = ExtChipviewComponent_1 = class ExtChipviewComponent extends base {
+let ExtChipviewComponent = ExtChipviewComponent_1 = class ExtChipviewComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, chipviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -13996,30 +15225,47 @@ let ExtChipviewComponent = ExtChipviewComponent_1 = class ExtChipviewComponent e
     ngOnInit() {
         this.baseOnInit(chipviewMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(chipviewMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtChipviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtChipviewComponent = ExtChipviewComponent_1 = __decorate([
     Component({
-        selector: 'chipview',
+        selector: 'ext-chipview',
         inputs: chipviewMetaData.PROPERTIES,
         outputs: chipviewMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtChipviewComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtChipviewComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtChipviewComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtComponentdataviewComponent_1;
 class componentdataviewMetaData {
 }
 componentdataviewMetaData.XTYPE = 'componentdataview';
 componentdataviewMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -14031,6 +15277,7 @@ componentdataviewMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -14057,10 +15304,6 @@ componentdataviewMetaData.PROPERTIES = [
     'emptyText',
     'emptyTextDefaults',
     'emptyTextProperty',
-    'enableTextSelection',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -14127,7 +15370,6 @@ componentdataviewMetaData.PROPERTIES = [
     'scrollToTopOnRefresh',
     'selectable',
     'selection',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -14355,7 +15597,7 @@ componentdataviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtComponentdataviewComponent = ExtComponentdataviewComponent_1 = class ExtComponentdataviewComponent extends base {
+let ExtComponentdataviewComponent = ExtComponentdataviewComponent_1 = class ExtComponentdataviewComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, componentdataviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -14363,30 +15605,47 @@ let ExtComponentdataviewComponent = ExtComponentdataviewComponent_1 = class ExtC
     ngOnInit() {
         this.baseOnInit(componentdataviewMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(componentdataviewMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtComponentdataviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtComponentdataviewComponent = ExtComponentdataviewComponent_1 = __decorate([
     Component({
-        selector: 'componentdataview',
+        selector: 'ext-componentdataview',
         inputs: componentdataviewMetaData.PROPERTIES,
         outputs: componentdataviewMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtComponentdataviewComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtComponentdataviewComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtComponentdataviewComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtDataitemComponent_1;
 class dataitemMetaData {
 }
 dataitemMetaData.XTYPE = 'dataitem';
 dataitemMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -14397,6 +15656,7 @@ dataitemMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -14416,9 +15676,6 @@ dataitemMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -14468,7 +15725,6 @@ dataitemMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -14634,7 +15890,7 @@ dataitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtDataitemComponent = ExtDataitemComponent_1 = class ExtDataitemComponent extends base {
+let ExtDataitemComponent = ExtDataitemComponent_1 = class ExtDataitemComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, dataitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -14642,30 +15898,47 @@ let ExtDataitemComponent = ExtDataitemComponent_1 = class ExtDataitemComponent e
     ngOnInit() {
         this.baseOnInit(dataitemMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(dataitemMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDataitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDataitemComponent = ExtDataitemComponent_1 = __decorate([
     Component({
-        selector: 'dataitem',
+        selector: 'ext-dataitem',
         inputs: dataitemMetaData.PROPERTIES,
         outputs: dataitemMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtDataitemComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtDataitemComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtDataitemComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtDataviewComponent_1;
 class dataviewMetaData {
 }
 dataviewMetaData.XTYPE = 'dataview';
 dataviewMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -14677,6 +15950,7 @@ dataviewMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -14703,10 +15977,6 @@ dataviewMetaData.PROPERTIES = [
     'emptyText',
     'emptyTextDefaults',
     'emptyTextProperty',
-    'enableTextSelection',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -14770,7 +16040,6 @@ dataviewMetaData.PROPERTIES = [
     'selectable',
     'selected',
     'selection',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -15001,7 +16270,7 @@ dataviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtDataviewComponent = ExtDataviewComponent_1 = class ExtDataviewComponent extends base {
+let ExtDataviewComponent = ExtDataviewComponent_1 = class ExtDataviewComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, dataviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -15009,28 +16278,45 @@ let ExtDataviewComponent = ExtDataviewComponent_1 = class ExtDataviewComponent e
     ngOnInit() {
         this.baseOnInit(dataviewMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(dataviewMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDataviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDataviewComponent = ExtDataviewComponent_1 = __decorate([
     Component({
-        selector: 'dataview',
+        selector: 'ext-dataview',
         inputs: dataviewMetaData.PROPERTIES,
         outputs: dataviewMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtDataviewComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtDataviewComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtDataviewComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtEmptytextComponent_1;
 class emptytextMetaData {
 }
 emptytextMetaData.XTYPE = 'emptytext';
 emptytextMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -15051,9 +16337,6 @@ emptytextMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -15091,7 +16374,6 @@ emptytextMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -15240,7 +16522,7 @@ emptytextMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtEmptytextComponent = ExtEmptytextComponent_1 = class ExtEmptytextComponent extends base {
+let ExtEmptytextComponent = ExtEmptytextComponent_1 = class ExtEmptytextComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, emptytextMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -15248,28 +16530,45 @@ let ExtEmptytextComponent = ExtEmptytextComponent_1 = class ExtEmptytextComponen
     ngOnInit() {
         this.baseOnInit(emptytextMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(emptytextMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtEmptytextComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtEmptytextComponent = ExtEmptytextComponent_1 = __decorate([
     Component({
-        selector: 'emptytext',
+        selector: 'ext-emptytext',
         inputs: emptytextMetaData.PROPERTIES,
         outputs: emptytextMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtEmptytextComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtEmptytextComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtEmptytextComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtIndexbarComponent_1;
 class indexbarMetaData {
 }
 indexbarMetaData.XTYPE = 'indexbar';
 indexbarMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'animation',
     'ariaAttributes',
@@ -15294,9 +16593,6 @@ indexbarMetaData.PROPERTIES = [
     'docked',
     'draggable',
     'dynamic',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -15337,7 +16633,6 @@ indexbarMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -15492,7 +16787,7 @@ indexbarMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtIndexbarComponent = ExtIndexbarComponent_1 = class ExtIndexbarComponent extends base {
+let ExtIndexbarComponent = ExtIndexbarComponent_1 = class ExtIndexbarComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, indexbarMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -15500,28 +16795,45 @@ let ExtIndexbarComponent = ExtIndexbarComponent_1 = class ExtIndexbarComponent e
     ngOnInit() {
         this.baseOnInit(indexbarMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(indexbarMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtIndexbarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtIndexbarComponent = ExtIndexbarComponent_1 = __decorate([
     Component({
-        selector: 'indexbar',
+        selector: 'ext-indexbar',
         inputs: indexbarMetaData.PROPERTIES,
         outputs: indexbarMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtIndexbarComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtIndexbarComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtIndexbarComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtItemheaderComponent_1;
 class itemheaderMetaData {
 }
 itemheaderMetaData.XTYPE = 'itemheader';
 itemheaderMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -15543,9 +16855,6 @@ itemheaderMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -15585,7 +16894,6 @@ itemheaderMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -15736,7 +17044,7 @@ itemheaderMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtItemheaderComponent = ExtItemheaderComponent_1 = class ExtItemheaderComponent extends base {
+let ExtItemheaderComponent = ExtItemheaderComponent_1 = class ExtItemheaderComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, itemheaderMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -15744,30 +17052,47 @@ let ExtItemheaderComponent = ExtItemheaderComponent_1 = class ExtItemheaderCompo
     ngOnInit() {
         this.baseOnInit(itemheaderMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(itemheaderMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtItemheaderComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtItemheaderComponent = ExtItemheaderComponent_1 = __decorate([
     Component({
-        selector: 'itemheader',
+        selector: 'ext-itemheader',
         inputs: itemheaderMetaData.PROPERTIES,
         outputs: itemheaderMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtItemheaderComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtItemheaderComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtItemheaderComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtListComponent_1;
 class listMetaData {
 }
 listMetaData.XTYPE = 'list';
 listMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -15779,12 +17104,15 @@ listMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'bufferSize',
     'cardSwitchAnimation',
     'centered',
     'cls',
+    'collapseDefaults',
+    'collapsible',
     'constrainAlign',
     'contentEl',
     'control',
@@ -15807,10 +17135,6 @@ listMetaData.PROPERTIES = [
     'emptyText',
     'emptyTextDefaults',
     'emptyTextProperty',
-    'enableTextSelection',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -15819,6 +17143,8 @@ listMetaData.PROPERTIES = [
     'grouped',
     'groupFooter',
     'groupHeader',
+    'grouping',
+    'groupPlaceholder',
     'height',
     'hidden',
     'hideAnimation',
@@ -15897,7 +17223,6 @@ listMetaData.PROPERTIES = [
     'scrollToTopOnRefresh',
     'selectable',
     'selection',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -15924,7 +17249,6 @@ listMetaData.PROPERTIES = [
     'ui',
     'userCls',
     'userSelectable',
-    'useSimpleItems',
     'variableHeights',
     'verticalOverflow',
     'viewModel',
@@ -15955,6 +17279,8 @@ listMetaData.EVENTS = [
     { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforegroupcollapse', parameters: 'list,group' },
+    { name: 'beforegroupexpand', parameters: 'list,group' },
     { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforehide', parameters: 'sender' },
@@ -15997,6 +17323,8 @@ listMetaData.EVENTS = [
     { name: 'focusenter', parameters: 'list,event' },
     { name: 'focusleave', parameters: 'list,event' },
     { name: 'fullscreen', parameters: 'sender' },
+    { name: 'groupcollapse', parameters: 'list,group' },
+    { name: 'groupexpand', parameters: 'list,group' },
     { name: 'heightchange', parameters: 'sender,value,oldValue' },
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
@@ -16051,6 +17379,8 @@ listMetaData.EVENTNAMES = [
     'beforecenteredchange',
     'beforedisabledchange',
     'beforedockedchange',
+    'beforegroupcollapse',
+    'beforegroupexpand',
     'beforeheightchange',
     'beforehiddenchange',
     'beforehide',
@@ -16093,6 +17423,8 @@ listMetaData.EVENTNAMES = [
     'focusenter',
     'focusleave',
     'fullscreen',
+    'groupcollapse',
+    'groupexpand',
     'heightchange',
     'hiddenchange',
     'hide',
@@ -16137,7 +17469,7 @@ listMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtListComponent = ExtListComponent_1 = class ExtListComponent extends base {
+let ExtListComponent = ExtListComponent_1 = class ExtListComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, listMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -16145,30 +17477,47 @@ let ExtListComponent = ExtListComponent_1 = class ExtListComponent extends base 
     ngOnInit() {
         this.baseOnInit(listMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(listMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtListComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtListComponent = ExtListComponent_1 = __decorate([
     Component({
-        selector: 'list',
+        selector: 'ext-list',
         inputs: listMetaData.PROPERTIES,
         outputs: listMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtListComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtListComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtListComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtListitemComponent_1;
 class listitemMetaData {
 }
 listitemMetaData.XTYPE = 'listitem';
 listitemMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -16179,6 +17528,7 @@ listitemMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -16199,9 +17549,6 @@ listitemMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -16252,7 +17599,6 @@ listitemMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -16420,7 +17766,7 @@ listitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtListitemComponent = ExtListitemComponent_1 = class ExtListitemComponent extends base {
+let ExtListitemComponent = ExtListitemComponent_1 = class ExtListitemComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, listitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -16428,31 +17774,305 @@ let ExtListitemComponent = ExtListitemComponent_1 = class ExtListitemComponent e
     ngOnInit() {
         this.baseOnInit(listitemMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(listitemMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtListitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtListitemComponent = ExtListitemComponent_1 = __decorate([
     Component({
-        selector: 'listitem',
+        selector: 'ext-listitem',
         inputs: listitemMetaData.PROPERTIES,
         outputs: listitemMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtListitemComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtListitemComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtListitemComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
+var ExtListitemplaceholderComponent_1;
+class listitemplaceholderMetaData {
+}
+listitemplaceholderMetaData.XTYPE = 'listitemplaceholder';
+listitemplaceholderMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
+    'alwaysOnTop',
+    'ariaAttributes',
+    'ariaDescribedBy',
+    'ariaLabel',
+    'ariaLabelledBy',
+    'axisLock',
+    'bind',
+    'border',
+    'bottom',
+    'centered',
+    'cls',
+    'constrainAlign',
+    'contentEl',
+    'controller',
+    'data',
+    'defaultListenerScope',
+    'defaultToolWeights',
+    'disabled',
+    'displayed',
+    'docked',
+    'draggable',
+    'flex',
+    'floated',
+    'focusCls',
+    'fullscreen',
+    'height',
+    'hidden',
+    'hideAnimation',
+    'hideMode',
+    'hideOnMaskTap',
+    'html',
+    'id',
+    'instanceCls',
+    'itemId',
+    'keyMap',
+    'keyMapEnabled',
+    'keyMapTarget',
+    'left',
+    'listeners',
+    'margin',
+    'maxHeight',
+    'maxWidth',
+    'minHeight',
+    'minWidth',
+    'modal',
+    'modelValidation',
+    'name',
+    'nameable',
+    'padding',
+    'pinned',
+    'plugins',
+    'publishes',
+    'record',
+    'recordIndex',
+    'reference',
+    'relative',
+    'renderTo',
+    'right',
+    'ripple',
+    'scrollable',
+    'session',
+    'shadow',
+    'shareableName',
+    'shim',
+    'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
+    'style',
+    'tabIndex',
+    'toFrontOnShow',
+    'toolDefaults',
+    'tools',
+    'tooltip',
+    'top',
+    'touchAction',
+    'tpl',
+    'tplWriteMode',
+    'translatable',
+    'twoWayBindable',
+    'ui',
+    'userCls',
+    'userSelectable',
+    'viewModel',
+    'weight',
+    'width',
+    'x',
+    'xtype',
+    'y',
+    'zIndex',
+    'platformConfig',
+    'responsiveConfig',
+    'align',
+    'fitToParent',
+    'config'
+];
+listitemplaceholderMetaData.EVENTS = [
+    { name: 'added', parameters: 'sender,container,index' },
+    { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehide', parameters: 'sender' },
+    { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeorientationchange', parameters: '' },
+    { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeshow', parameters: 'sender' },
+    { name: 'beforetofront', parameters: 'listitemplaceholder' },
+    { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'blur', parameters: 'listitemplaceholder,event' },
+    { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+    { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+    { name: 'destroy', parameters: '' },
+    { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+    { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+    { name: 'erased', parameters: 'sender' },
+    { name: 'floatingchange', parameters: 'sender,positioned' },
+    { name: 'focus', parameters: 'listitemplaceholder,event' },
+    { name: 'focusenter', parameters: 'listitemplaceholder,event' },
+    { name: 'focusleave', parameters: 'listitemplaceholder,event' },
+    { name: 'fullscreen', parameters: 'sender' },
+    { name: 'heightchange', parameters: 'sender,value,oldValue' },
+    { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+    { name: 'hide', parameters: 'sender' },
+    { name: 'initialize', parameters: 'sender' },
+    { name: 'leftchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+    { name: 'orientationchange', parameters: '' },
+    { name: 'painted', parameters: 'sender,element' },
+    { name: 'positionedchange', parameters: 'sender,positioned' },
+    { name: 'removed', parameters: 'sender,container,index' },
+    { name: 'resize', parameters: 'element,info' },
+    { name: 'rightchange', parameters: 'sender,value,oldValue' },
+    { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+    { name: 'show', parameters: 'sender' },
+    { name: 'tofront', parameters: 'listitemplaceholder' },
+    { name: 'topchange', parameters: 'sender,value,oldValue' },
+    { name: 'updatedata', parameters: 'sender,newData' },
+    { name: 'widthchange', parameters: 'sender,value,oldValue' },
+    { name: 'ready', parameters: '' }
+];
+listitemplaceholderMetaData.EVENTNAMES = [
+    'added',
+    'beforebottomchange',
+    'beforecenteredchange',
+    'beforedisabledchange',
+    'beforedockedchange',
+    'beforeheightchange',
+    'beforehiddenchange',
+    'beforehide',
+    'beforeleftchange',
+    'beforemaxHeightchange',
+    'beforemaxWidthchange',
+    'beforeminHeightchange',
+    'beforeminWidthchange',
+    'beforeorientationchange',
+    'beforerightchange',
+    'beforescrollablechange',
+    'beforeshow',
+    'beforetofront',
+    'beforetopchange',
+    'beforewidthchange',
+    'blur',
+    'bottomchange',
+    'centeredchange',
+    'destroy',
+    'disabledchange',
+    'dockedchange',
+    'erased',
+    'floatingchange',
+    'focus',
+    'focusenter',
+    'focusleave',
+    'fullscreen',
+    'heightchange',
+    'hiddenchange',
+    'hide',
+    'initialize',
+    'leftchange',
+    'maxHeightchange',
+    'maxWidthchange',
+    'minHeightchange',
+    'minWidthchange',
+    'moved',
+    'orientationchange',
+    'painted',
+    'positionedchange',
+    'removed',
+    'resize',
+    'rightchange',
+    'scrollablechange',
+    'show',
+    'tofront',
+    'topchange',
+    'updatedata',
+    'widthchange',
+    'ready'
+];
+let ExtListitemplaceholderComponent = ExtListitemplaceholderComponent_1 = class ExtListitemplaceholderComponent extends EngBase {
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, listitemplaceholderMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    ngOnInit() {
+        this.baseOnInit(listitemplaceholderMetaData);
+    }
+    ngAfterViewInit() {
+        this.baseAfterViewInit(listitemplaceholderMetaData);
+    }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
+};
+ExtListitemplaceholderComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
+ExtListitemplaceholderComponent = ExtListitemplaceholderComponent_1 = __decorate([
+    Component({
+        selector: 'ext-listitemplaceholder',
+        inputs: listitemplaceholderMetaData.PROPERTIES,
+        outputs: listitemplaceholderMetaData.EVENTNAMES,
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtListitemplaceholderComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, EngBase])
+], ExtListitemplaceholderComponent);
+
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtListswiperitemComponent_1;
 class listswiperitemMetaData {
 }
 listswiperitemMetaData.XTYPE = 'listswiperitem';
 listswiperitemMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'action',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -16463,6 +18083,7 @@ listswiperitemMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -16481,9 +18102,6 @@ listswiperitemMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -16531,7 +18149,6 @@ listswiperitemMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -16700,7 +18317,7 @@ listswiperitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtListswiperitemComponent = ExtListswiperitemComponent_1 = class ExtListswiperitemComponent extends base {
+let ExtListswiperitemComponent = ExtListswiperitemComponent_1 = class ExtListswiperitemComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, listswiperitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -16708,31 +18325,48 @@ let ExtListswiperitemComponent = ExtListswiperitemComponent_1 = class ExtListswi
     ngOnInit() {
         this.baseOnInit(listswiperitemMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(listswiperitemMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtListswiperitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtListswiperitemComponent = ExtListswiperitemComponent_1 = __decorate([
     Component({
-        selector: 'listswiperitem',
+        selector: 'ext-listswiperitem',
         inputs: listswiperitemMetaData.PROPERTIES,
         outputs: listswiperitemMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtListswiperitemComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtListswiperitemComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtListswiperitemComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtListswiperstepperComponent_1;
 class listswiperstepperMetaData {
 }
 listswiperstepperMetaData.XTYPE = 'listswiperstepper';
 listswiperstepperMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'action',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'animation',
@@ -16744,6 +18378,7 @@ listswiperstepperMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -16762,9 +18397,6 @@ listswiperstepperMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -16813,7 +18445,6 @@ listswiperstepperMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -16985,7 +18616,7 @@ listswiperstepperMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtListswiperstepperComponent = ExtListswiperstepperComponent_1 = class ExtListswiperstepperComponent extends base {
+let ExtListswiperstepperComponent = ExtListswiperstepperComponent_1 = class ExtListswiperstepperComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, listswiperstepperMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -16993,30 +18624,47 @@ let ExtListswiperstepperComponent = ExtListswiperstepperComponent_1 = class ExtL
     ngOnInit() {
         this.baseOnInit(listswiperstepperMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(listswiperstepperMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtListswiperstepperComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtListswiperstepperComponent = ExtListswiperstepperComponent_1 = __decorate([
     Component({
-        selector: 'listswiperstepper',
+        selector: 'ext-listswiperstepper',
         inputs: listswiperstepperMetaData.PROPERTIES,
         outputs: listswiperstepperMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtListswiperstepperComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtListswiperstepperComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtListswiperstepperComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtNestedlistComponent_1;
 class nestedlistMetaData {
 }
 nestedlistMetaData.XTYPE = 'nestedlist';
 nestedlistMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowDeselect',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
@@ -17030,6 +18678,7 @@ nestedlistMetaData.PROPERTIES = [
     'backButton',
     'backText',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -17052,9 +18701,6 @@ nestedlistMetaData.PROPERTIES = [
     'docked',
     'draggable',
     'emptyText',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -17107,7 +18753,6 @@ nestedlistMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -17134,7 +18779,6 @@ nestedlistMetaData.PROPERTIES = [
     'userCls',
     'userSelectable',
     'useTitleAsBackText',
-    'useToolbar',
     'variableHeights',
     'viewModel',
     'weight',
@@ -17304,7 +18948,7 @@ nestedlistMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtNestedlistComponent = ExtNestedlistComponent_1 = class ExtNestedlistComponent extends base {
+let ExtNestedlistComponent = ExtNestedlistComponent_1 = class ExtNestedlistComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, nestedlistMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -17312,28 +18956,45 @@ let ExtNestedlistComponent = ExtNestedlistComponent_1 = class ExtNestedlistCompo
     ngOnInit() {
         this.baseOnInit(nestedlistMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(nestedlistMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtNestedlistComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtNestedlistComponent = ExtNestedlistComponent_1 = __decorate([
     Component({
-        selector: 'nestedlist',
+        selector: 'ext-nestedlist',
         inputs: nestedlistMetaData.PROPERTIES,
         outputs: nestedlistMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtNestedlistComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtNestedlistComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtNestedlistComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPullrefreshbarComponent_1;
 class pullrefreshbarMetaData {
 }
 pullrefreshbarMetaData.XTYPE = 'pullrefreshbar';
 pullrefreshbarMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -17354,9 +19015,6 @@ pullrefreshbarMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -17403,7 +19061,6 @@ pullrefreshbarMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -17553,7 +19210,7 @@ pullrefreshbarMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPullrefreshbarComponent = ExtPullrefreshbarComponent_1 = class ExtPullrefreshbarComponent extends base {
+let ExtPullrefreshbarComponent = ExtPullrefreshbarComponent_1 = class ExtPullrefreshbarComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pullrefreshbarMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -17561,28 +19218,45 @@ let ExtPullrefreshbarComponent = ExtPullrefreshbarComponent_1 = class ExtPullref
     ngOnInit() {
         this.baseOnInit(pullrefreshbarMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(pullrefreshbarMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPullrefreshbarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPullrefreshbarComponent = ExtPullrefreshbarComponent_1 = __decorate([
     Component({
-        selector: 'pullrefreshbar',
+        selector: 'ext-pullrefreshbar',
         inputs: pullrefreshbarMetaData.PROPERTIES,
         outputs: pullrefreshbarMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPullrefreshbarComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPullrefreshbarComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPullrefreshbarComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPullrefreshspinnerComponent_1;
 class pullrefreshspinnerMetaData {
 }
 pullrefreshspinnerMetaData.XTYPE = 'pullrefreshspinner';
 pullrefreshspinnerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -17603,9 +19277,6 @@ pullrefreshspinnerMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -17645,7 +19316,6 @@ pullrefreshspinnerMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -17795,7 +19465,7 @@ pullrefreshspinnerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPullrefreshspinnerComponent = ExtPullrefreshspinnerComponent_1 = class ExtPullrefreshspinnerComponent extends base {
+let ExtPullrefreshspinnerComponent = ExtPullrefreshspinnerComponent_1 = class ExtPullrefreshspinnerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pullrefreshspinnerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -17803,28 +19473,45 @@ let ExtPullrefreshspinnerComponent = ExtPullrefreshspinnerComponent_1 = class Ex
     ngOnInit() {
         this.baseOnInit(pullrefreshspinnerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(pullrefreshspinnerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPullrefreshspinnerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPullrefreshspinnerComponent = ExtPullrefreshspinnerComponent_1 = __decorate([
     Component({
-        selector: 'pullrefreshspinner',
+        selector: 'ext-pullrefreshspinner',
         inputs: pullrefreshspinnerMetaData.PROPERTIES,
         outputs: pullrefreshspinnerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPullrefreshspinnerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPullrefreshspinnerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPullrefreshspinnerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSimplelistitemComponent_1;
 class simplelistitemMetaData {
 }
 simplelistitemMetaData.XTYPE = 'simplelistitem';
 simplelistitemMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -17846,9 +19533,6 @@ simplelistitemMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -17888,7 +19572,6 @@ simplelistitemMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -18039,7 +19722,7 @@ simplelistitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSimplelistitemComponent = ExtSimplelistitemComponent_1 = class ExtSimplelistitemComponent extends base {
+let ExtSimplelistitemComponent = ExtSimplelistitemComponent_1 = class ExtSimplelistitemComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, simplelistitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -18047,30 +19730,47 @@ let ExtSimplelistitemComponent = ExtSimplelistitemComponent_1 = class ExtSimplel
     ngOnInit() {
         this.baseOnInit(simplelistitemMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(simplelistitemMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSimplelistitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSimplelistitemComponent = ExtSimplelistitemComponent_1 = __decorate([
     Component({
-        selector: 'simplelistitem',
+        selector: 'ext-simplelistitem',
         inputs: simplelistitemMetaData.PROPERTIES,
         outputs: simplelistitemMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSimplelistitemComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSimplelistitemComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSimplelistitemComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtDialogComponent_1;
 class dialogMetaData {
 }
 dialogMetaData.XTYPE = 'dialog';
 dialogMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -18085,6 +19785,7 @@ dialogMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -18117,9 +19818,6 @@ dialogMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -18185,7 +19883,6 @@ dialogMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -18200,6 +19897,7 @@ dialogMetaData.PROPERTIES = [
     'tbar',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -18387,7 +20085,7 @@ dialogMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtDialogComponent = ExtDialogComponent_1 = class ExtDialogComponent extends base {
+let ExtDialogComponent = ExtDialogComponent_1 = class ExtDialogComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, dialogMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -18395,30 +20093,47 @@ let ExtDialogComponent = ExtDialogComponent_1 = class ExtDialogComponent extends
     ngOnInit() {
         this.baseOnInit(dialogMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(dialogMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDialogComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDialogComponent = ExtDialogComponent_1 = __decorate([
     Component({
-        selector: 'dialog',
+        selector: 'ext-dialog',
         inputs: dialogMetaData.PROPERTIES,
         outputs: dialogMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtDialogComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtDialogComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtDialogComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtWindowComponent_1;
 class windowMetaData {
 }
 windowMetaData.XTYPE = 'window';
 windowMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -18433,6 +20148,7 @@ windowMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -18465,9 +20181,6 @@ windowMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -18533,7 +20246,6 @@ windowMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -18548,6 +20260,7 @@ windowMetaData.PROPERTIES = [
     'tbar',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -18735,7 +20448,7 @@ windowMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtWindowComponent = ExtWindowComponent_1 = class ExtWindowComponent extends base {
+let ExtWindowComponent = ExtWindowComponent_1 = class ExtWindowComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, windowMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -18743,30 +20456,47 @@ let ExtWindowComponent = ExtWindowComponent_1 = class ExtWindowComponent extends
     ngOnInit() {
         this.baseOnInit(windowMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(windowMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtWindowComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtWindowComponent = ExtWindowComponent_1 = __decorate([
     Component({
-        selector: 'window',
+        selector: 'ext-window',
         inputs: windowMetaData.PROPERTIES,
         outputs: windowMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtWindowComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtWindowComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtWindowComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtDrawComponent_1;
 class drawMetaData {
 }
 drawMetaData.XTYPE = 'draw';
 drawMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -18777,6 +20507,7 @@ drawMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -18797,9 +20528,6 @@ drawMetaData.PROPERTIES = [
     'downloadServerUrl',
     'draggable',
     'engine',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -18849,7 +20577,6 @@ drawMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -19035,7 +20762,7 @@ drawMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtDrawComponent = ExtDrawComponent_1 = class ExtDrawComponent extends base {
+let ExtDrawComponent = ExtDrawComponent_1 = class ExtDrawComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, drawMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -19043,28 +20770,45 @@ let ExtDrawComponent = ExtDrawComponent_1 = class ExtDrawComponent extends base 
     ngOnInit() {
         this.baseOnInit(drawMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(drawMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDrawComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDrawComponent = ExtDrawComponent_1 = __decorate([
     Component({
-        selector: 'draw',
+        selector: 'ext-draw',
         inputs: drawMetaData.PROPERTIES,
         outputs: drawMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtDrawComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtDrawComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtDrawComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSurfaceComponent_1;
 class surfaceMetaData {
 }
 surfaceMetaData.XTYPE = 'surface';
 surfaceMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -19079,7 +20823,6 @@ surfaceMetaData.PROPERTIES = [
     'defaultListenerScope',
     'dirty',
     'disabled',
-    'eventHandlers',
     'flex',
     'flipRtlText',
     'floated',
@@ -19095,6 +20838,7 @@ surfaceMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -19104,7 +20848,6 @@ surfaceMetaData.PROPERTIES = [
     'relative',
     'renderTo',
     'ripple',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -19160,7 +20903,7 @@ surfaceMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSurfaceComponent = ExtSurfaceComponent_1 = class ExtSurfaceComponent extends base {
+let ExtSurfaceComponent = ExtSurfaceComponent_1 = class ExtSurfaceComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, surfaceMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -19168,31 +20911,48 @@ let ExtSurfaceComponent = ExtSurfaceComponent_1 = class ExtSurfaceComponent exte
     ngOnInit() {
         this.baseOnInit(surfaceMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(surfaceMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSurfaceComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSurfaceComponent = ExtSurfaceComponent_1 = __decorate([
     Component({
-        selector: 'surface',
+        selector: 'ext-surface',
         inputs: surfaceMetaData.PROPERTIES,
         outputs: surfaceMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSurfaceComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSurfaceComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSurfaceComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtEditorComponent_1;
 class editorMetaData {
 }
 editorMetaData.XTYPE = 'editor';
 editorMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'alignment',
+    'alignSelf',
     'allowBlur',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
@@ -19204,6 +20964,7 @@ editorMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cancelOnClear',
@@ -19226,9 +20987,6 @@ editorMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'field',
     'flex',
     'floated',
@@ -19283,7 +21041,6 @@ editorMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -19464,7 +21221,7 @@ editorMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtEditorComponent = ExtEditorComponent_1 = class ExtEditorComponent extends base {
+let ExtEditorComponent = ExtEditorComponent_1 = class ExtEditorComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, editorMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -19472,28 +21229,45 @@ let ExtEditorComponent = ExtEditorComponent_1 = class ExtEditorComponent extends
     ngOnInit() {
         this.baseOnInit(editorMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(editorMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtEditorComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtEditorComponent = ExtEditorComponent_1 = __decorate([
     Component({
-        selector: 'editor',
+        selector: 'ext-editor',
         inputs: editorMetaData.PROPERTIES,
         outputs: editorMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtEditorComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtEditorComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtEditorComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCheckboxComponent_1;
 class checkboxMetaData {
 }
 checkboxMetaData.XTYPE = 'checkbox';
 checkboxMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -19507,6 +21281,7 @@ checkboxMetaData.PROPERTIES = [
     'bottom',
     'boxLabel',
     'boxLabelAlign',
+    'bubbleDirty',
     'centered',
     'checked',
     'cls',
@@ -19514,19 +21289,18 @@ checkboxMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -19539,7 +21313,6 @@ checkboxMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputType',
     'inputValue',
     'instanceCls',
@@ -19579,7 +21352,6 @@ checkboxMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -19650,6 +21422,7 @@ checkboxMetaData.EVENTS = [
     { name: 'check', parameters: 'checkbox' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'checkbox,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -19715,6 +21488,7 @@ checkboxMetaData.EVENTNAMES = [
     'check',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -19752,7 +21526,7 @@ checkboxMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCheckboxComponent = ExtCheckboxComponent_1 = class ExtCheckboxComponent extends base {
+let ExtCheckboxComponent = ExtCheckboxComponent_1 = class ExtCheckboxComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, checkboxMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -19760,28 +21534,45 @@ let ExtCheckboxComponent = ExtCheckboxComponent_1 = class ExtCheckboxComponent e
     ngOnInit() {
         this.baseOnInit(checkboxMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(checkboxMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCheckboxComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCheckboxComponent = ExtCheckboxComponent_1 = __decorate([
     Component({
-        selector: 'checkbox',
+        selector: 'ext-checkbox',
         inputs: checkboxMetaData.PROPERTIES,
         outputs: checkboxMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCheckboxComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCheckboxComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCheckboxComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCheckboxfieldComponent_1;
 class checkboxfieldMetaData {
 }
 checkboxfieldMetaData.XTYPE = 'checkboxfield';
 checkboxfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -19795,6 +21586,7 @@ checkboxfieldMetaData.PROPERTIES = [
     'bottom',
     'boxLabel',
     'boxLabelAlign',
+    'bubbleDirty',
     'centered',
     'checked',
     'cls',
@@ -19802,19 +21594,18 @@ checkboxfieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -19827,7 +21618,6 @@ checkboxfieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputType',
     'inputValue',
     'instanceCls',
@@ -19867,7 +21657,6 @@ checkboxfieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -19938,6 +21727,7 @@ checkboxfieldMetaData.EVENTS = [
     { name: 'check', parameters: 'checkbox' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'checkbox,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -20003,6 +21793,7 @@ checkboxfieldMetaData.EVENTNAMES = [
     'check',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -20040,7 +21831,7 @@ checkboxfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCheckboxfieldComponent = ExtCheckboxfieldComponent_1 = class ExtCheckboxfieldComponent extends base {
+let ExtCheckboxfieldComponent = ExtCheckboxfieldComponent_1 = class ExtCheckboxfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, checkboxfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -20048,28 +21839,350 @@ let ExtCheckboxfieldComponent = ExtCheckboxfieldComponent_1 = class ExtCheckboxf
     ngOnInit() {
         this.baseOnInit(checkboxfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(checkboxfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCheckboxfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCheckboxfieldComponent = ExtCheckboxfieldComponent_1 = __decorate([
     Component({
-        selector: 'checkboxfield',
+        selector: 'ext-checkboxfield',
         inputs: checkboxfieldMetaData.PROPERTIES,
         outputs: checkboxfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCheckboxfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCheckboxfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCheckboxfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
+var ExtCheckboxgroupComponent_1;
+class checkboxgroupMetaData {
+}
+checkboxgroupMetaData.XTYPE = 'checkboxgroup';
+checkboxgroupMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
+    'alwaysOnTop',
+    'ariaAttributes',
+    'ariaDescribedBy',
+    'ariaLabel',
+    'ariaLabelledBy',
+    'autoFitErrors',
+    'autoSize',
+    'axisLock',
+    'bind',
+    'bodyAlign',
+    'border',
+    'bottom',
+    'bubbleDirty',
+    'centered',
+    'cls',
+    'constrainAlign',
+    'container',
+    'contentEl',
+    'controller',
+    'data',
+    'dataType',
+    'defaultFieldValue',
+    'defaultListenerScope',
+    'defaults',
+    'defaultType',
+    'delegate',
+    'dirty',
+    'disabled',
+    'displayed',
+    'docked',
+    'draggable',
+    'error',
+    'errorMessage',
+    'errorTarget',
+    'errorTip',
+    'errorTpl',
+    'fieldDefaults',
+    'fieldsName',
+    'flex',
+    'floated',
+    'focusCls',
+    'fullscreen',
+    'height',
+    'hidden',
+    'hideAnimation',
+    'hideMode',
+    'hideOnMaskTap',
+    'html',
+    'id',
+    'inline',
+    'instanceCls',
+    'itemId',
+    'items',
+    'keyMap',
+    'keyMapEnabled',
+    'keyMapTarget',
+    'label',
+    'labelAlign',
+    'labelCls',
+    'labelMinWidth',
+    'labelTextAlign',
+    'labelWidth',
+    'labelWrap',
+    'layout',
+    'left',
+    'listeners',
+    'margin',
+    'maxHeight',
+    'maxWidth',
+    'minHeight',
+    'minWidth',
+    'modal',
+    'modelValidation',
+    'name',
+    'nameable',
+    'padding',
+    'plugins',
+    'publishes',
+    'record',
+    'reference',
+    'relative',
+    'renderTo',
+    'required',
+    'requiredMessage',
+    'right',
+    'ripple',
+    'scrollable',
+    'session',
+    'shadow',
+    'shareableName',
+    'shim',
+    'showAnimation',
+    'sideError',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
+    'style',
+    'tabIndex',
+    'tipError',
+    'titleError',
+    'toFrontOnShow',
+    'tooltip',
+    'top',
+    'touchAction',
+    'tpl',
+    'tplWriteMode',
+    'translatable',
+    'twoWayBindable',
+    'ui',
+    'underError',
+    'userCls',
+    'userSelectable',
+    'validateDisabled',
+    'validationMessage',
+    'validators',
+    'value',
+    'vertical',
+    'viewModel',
+    'weight',
+    'width',
+    'x',
+    'xtype',
+    'y',
+    'zIndex',
+    'platformConfig',
+    'responsiveConfig',
+    'align',
+    'fitToParent',
+    'config'
+];
+checkboxgroupMetaData.EVENTS = [
+    { name: 'added', parameters: 'sender,container,index' },
+    { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehide', parameters: 'sender' },
+    { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeorientationchange', parameters: '' },
+    { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeshow', parameters: 'sender' },
+    { name: 'beforetofront', parameters: 'checkboxgroup' },
+    { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'blur', parameters: 'checkboxgroup,event' },
+    { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+    { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+    { name: 'change', parameters: 'checkboxgroup,newValue,oldValue' },
+    { name: 'click', parameters: 'e' },
+    { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'checkboxgroup,dirty' },
+    { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+    { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+    { name: 'erased', parameters: 'sender' },
+    { name: 'errorchange', parameters: 'checkboxgroup,error' },
+    { name: 'floatingchange', parameters: 'sender,positioned' },
+    { name: 'focus', parameters: 'checkboxgroup,event' },
+    { name: 'focusenter', parameters: 'checkboxgroup,event' },
+    { name: 'focusleave', parameters: 'checkboxgroup,event' },
+    { name: 'fullscreen', parameters: 'sender' },
+    { name: 'heightchange', parameters: 'sender,value,oldValue' },
+    { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+    { name: 'hide', parameters: 'sender' },
+    { name: 'initialize', parameters: 'sender' },
+    { name: 'keyup', parameters: 'e' },
+    { name: 'leftchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'mousedown', parameters: 'e' },
+    { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+    { name: 'orientationchange', parameters: '' },
+    { name: 'painted', parameters: 'sender,element' },
+    { name: 'paste', parameters: 'e' },
+    { name: 'positionedchange', parameters: 'sender,positioned' },
+    { name: 'removed', parameters: 'sender,container,index' },
+    { name: 'resize', parameters: 'element,info' },
+    { name: 'rightchange', parameters: 'sender,value,oldValue' },
+    { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+    { name: 'show', parameters: 'sender' },
+    { name: 'tofront', parameters: 'checkboxgroup' },
+    { name: 'topchange', parameters: 'sender,value,oldValue' },
+    { name: 'updatedata', parameters: 'sender,newData' },
+    { name: 'widthchange', parameters: 'sender,value,oldValue' },
+    { name: 'ready', parameters: '' }
+];
+checkboxgroupMetaData.EVENTNAMES = [
+    'added',
+    'beforebottomchange',
+    'beforecenteredchange',
+    'beforedisabledchange',
+    'beforedockedchange',
+    'beforeheightchange',
+    'beforehiddenchange',
+    'beforehide',
+    'beforeleftchange',
+    'beforemaxHeightchange',
+    'beforemaxWidthchange',
+    'beforeminHeightchange',
+    'beforeminWidthchange',
+    'beforeorientationchange',
+    'beforerightchange',
+    'beforescrollablechange',
+    'beforeshow',
+    'beforetofront',
+    'beforetopchange',
+    'beforewidthchange',
+    'blur',
+    'bottomchange',
+    'centeredchange',
+    'change',
+    'click',
+    'destroy',
+    'dirtychange',
+    'disabledchange',
+    'dockedchange',
+    'erased',
+    'errorchange',
+    'floatingchange',
+    'focus',
+    'focusenter',
+    'focusleave',
+    'fullscreen',
+    'heightchange',
+    'hiddenchange',
+    'hide',
+    'initialize',
+    'keyup',
+    'leftchange',
+    'maxHeightchange',
+    'maxWidthchange',
+    'minHeightchange',
+    'minWidthchange',
+    'mousedown',
+    'moved',
+    'orientationchange',
+    'painted',
+    'paste',
+    'positionedchange',
+    'removed',
+    'resize',
+    'rightchange',
+    'scrollablechange',
+    'show',
+    'tofront',
+    'topchange',
+    'updatedata',
+    'widthchange',
+    'ready'
+];
+let ExtCheckboxgroupComponent = ExtCheckboxgroupComponent_1 = class ExtCheckboxgroupComponent extends EngBase {
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, checkboxgroupMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    ngOnInit() {
+        this.baseOnInit(checkboxgroupMetaData);
+    }
+    ngAfterViewInit() {
+        this.baseAfterViewInit(checkboxgroupMetaData);
+    }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
+};
+ExtCheckboxgroupComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
+ExtCheckboxgroupComponent = ExtCheckboxgroupComponent_1 = __decorate([
+    Component({
+        selector: 'ext-checkboxgroup',
+        inputs: checkboxgroupMetaData.PROPERTIES,
+        outputs: checkboxgroupMetaData.EVENTNAMES,
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCheckboxgroupComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, EngBase])
+], ExtCheckboxgroupComponent);
+
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtComboboxComponent_1;
 class comboboxMetaData {
 }
 comboboxMetaData.XTYPE = 'combobox';
 comboboxMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alignTarget',
     'allQuery',
     'alwaysOnTop',
@@ -20094,6 +22207,7 @@ comboboxMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'caseSensitive',
     'centered',
     'chipView',
@@ -20104,8 +22218,10 @@ comboboxMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
     'delimiter',
+    'dirty',
     'disabled',
     'displayed',
     'displayField',
@@ -20115,14 +22231,11 @@ comboboxMetaData.PROPERTIES = [
     'edgePicker',
     'editable',
     'enableRegEx',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'floatedPicker',
@@ -20141,7 +22254,6 @@ comboboxMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -20182,7 +22294,6 @@ comboboxMetaData.PROPERTIES = [
     'picker',
     'pickerSlotAlign',
     'placeholder',
-    'placeHolder',
     'plugins',
     'primaryFilter',
     'publishes',
@@ -20204,7 +22315,6 @@ comboboxMetaData.PROPERTIES = [
     'scrollable',
     'selection',
     'selectOnTab',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -20215,6 +22325,7 @@ comboboxMetaData.PROPERTIES = [
     'statefulDefaults',
     'stateId',
     'store',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -20288,6 +22399,7 @@ comboboxMetaData.EVENTS = [
     { name: 'click', parameters: 'e' },
     { name: 'collapse', parameters: 'field' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'combobox,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -20302,6 +22414,7 @@ comboboxMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'combobox,e' },
     { name: 'keyup', parameters: 'combobox,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -20359,6 +22472,7 @@ comboboxMetaData.EVENTNAMES = [
     'click',
     'collapse',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -20373,6 +22487,7 @@ comboboxMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -20398,7 +22513,7 @@ comboboxMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtComboboxComponent = ExtComboboxComponent_1 = class ExtComboboxComponent extends base {
+let ExtComboboxComponent = ExtComboboxComponent_1 = class ExtComboboxComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, comboboxMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -20406,28 +22521,45 @@ let ExtComboboxComponent = ExtComboboxComponent_1 = class ExtComboboxComponent e
     ngOnInit() {
         this.baseOnInit(comboboxMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(comboboxMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtComboboxComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtComboboxComponent = ExtComboboxComponent_1 = __decorate([
     Component({
-        selector: 'combobox',
+        selector: 'ext-combobox',
         inputs: comboboxMetaData.PROPERTIES,
         outputs: comboboxMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtComboboxComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtComboboxComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtComboboxComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtComboboxfieldComponent_1;
 class comboboxfieldMetaData {
 }
 comboboxfieldMetaData.XTYPE = 'comboboxfield';
 comboboxfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alignTarget',
     'allQuery',
     'alwaysOnTop',
@@ -20452,6 +22584,7 @@ comboboxfieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'caseSensitive',
     'centered',
     'chipView',
@@ -20462,8 +22595,10 @@ comboboxfieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
     'delimiter',
+    'dirty',
     'disabled',
     'displayed',
     'displayField',
@@ -20473,14 +22608,11 @@ comboboxfieldMetaData.PROPERTIES = [
     'edgePicker',
     'editable',
     'enableRegEx',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'floatedPicker',
@@ -20499,7 +22631,6 @@ comboboxfieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -20540,7 +22671,6 @@ comboboxfieldMetaData.PROPERTIES = [
     'picker',
     'pickerSlotAlign',
     'placeholder',
-    'placeHolder',
     'plugins',
     'primaryFilter',
     'publishes',
@@ -20562,7 +22692,6 @@ comboboxfieldMetaData.PROPERTIES = [
     'scrollable',
     'selection',
     'selectOnTab',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -20573,6 +22702,7 @@ comboboxfieldMetaData.PROPERTIES = [
     'statefulDefaults',
     'stateId',
     'store',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -20646,6 +22776,7 @@ comboboxfieldMetaData.EVENTS = [
     { name: 'click', parameters: 'e' },
     { name: 'collapse', parameters: 'field' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'combobox,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -20660,6 +22791,7 @@ comboboxfieldMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'combobox,e' },
     { name: 'keyup', parameters: 'combobox,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -20717,6 +22849,7 @@ comboboxfieldMetaData.EVENTNAMES = [
     'click',
     'collapse',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -20731,6 +22864,7 @@ comboboxfieldMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -20756,7 +22890,7 @@ comboboxfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtComboboxfieldComponent = ExtComboboxfieldComponent_1 = class ExtComboboxfieldComponent extends base {
+let ExtComboboxfieldComponent = ExtComboboxfieldComponent_1 = class ExtComboboxfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, comboboxfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -20764,28 +22898,45 @@ let ExtComboboxfieldComponent = ExtComboboxfieldComponent_1 = class ExtComboboxf
     ngOnInit() {
         this.baseOnInit(comboboxfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(comboboxfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtComboboxfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtComboboxfieldComponent = ExtComboboxfieldComponent_1 = __decorate([
     Component({
-        selector: 'comboboxfield',
+        selector: 'ext-comboboxfield',
         inputs: comboboxfieldMetaData.PROPERTIES,
         outputs: comboboxfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtComboboxfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtComboboxfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtComboboxfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtContainerfieldComponent_1;
 class containerfieldMetaData {
 }
 containerfieldMetaData.XTYPE = 'containerfield';
 containerfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -20798,6 +22949,7 @@ containerfieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'cls',
     'constrainAlign',
@@ -20805,21 +22957,21 @@ containerfieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
     'defaults',
     'defaultType',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
+    'fieldDefaults',
     'flex',
     'floated',
     'focusCls',
@@ -20869,7 +23021,6 @@ containerfieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -20939,6 +23090,7 @@ containerfieldMetaData.EVENTS = [
     { name: 'change', parameters: 'containerfield,newValue,oldValue' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'containerfield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -21002,6 +23154,7 @@ containerfieldMetaData.EVENTNAMES = [
     'change',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -21038,7 +23191,7 @@ containerfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtContainerfieldComponent = ExtContainerfieldComponent_1 = class ExtContainerfieldComponent extends base {
+let ExtContainerfieldComponent = ExtContainerfieldComponent_1 = class ExtContainerfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, containerfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -21046,28 +23199,45 @@ let ExtContainerfieldComponent = ExtContainerfieldComponent_1 = class ExtContain
     ngOnInit() {
         this.baseOnInit(containerfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(containerfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtContainerfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtContainerfieldComponent = ExtContainerfieldComponent_1 = __decorate([
     Component({
-        selector: 'containerfield',
+        selector: 'ext-containerfield',
         inputs: containerfieldMetaData.PROPERTIES,
         outputs: containerfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtContainerfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtContainerfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtContainerfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtFieldcontainerComponent_1;
 class fieldcontainerMetaData {
 }
 fieldcontainerMetaData.XTYPE = 'fieldcontainer';
 fieldcontainerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -21080,6 +23250,7 @@ fieldcontainerMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'cls',
     'constrainAlign',
@@ -21087,21 +23258,21 @@ fieldcontainerMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
     'defaults',
     'defaultType',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
+    'fieldDefaults',
     'flex',
     'floated',
     'focusCls',
@@ -21151,7 +23322,6 @@ fieldcontainerMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -21221,6 +23391,7 @@ fieldcontainerMetaData.EVENTS = [
     { name: 'change', parameters: 'containerfield,newValue,oldValue' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'containerfield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -21284,6 +23455,7 @@ fieldcontainerMetaData.EVENTNAMES = [
     'change',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -21320,7 +23492,7 @@ fieldcontainerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtFieldcontainerComponent = ExtFieldcontainerComponent_1 = class ExtFieldcontainerComponent extends base {
+let ExtFieldcontainerComponent = ExtFieldcontainerComponent_1 = class ExtFieldcontainerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, fieldcontainerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -21328,29 +23500,47 @@ let ExtFieldcontainerComponent = ExtFieldcontainerComponent_1 = class ExtFieldco
     ngOnInit() {
         this.baseOnInit(fieldcontainerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(fieldcontainerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtFieldcontainerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtFieldcontainerComponent = ExtFieldcontainerComponent_1 = __decorate([
     Component({
-        selector: 'fieldcontainer',
+        selector: 'ext-fieldcontainer',
         inputs: fieldcontainerMetaData.PROPERTIES,
         outputs: fieldcontainerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtFieldcontainerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtFieldcontainerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtFieldcontainerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtDatefieldComponent_1;
 class datefieldMetaData {
 }
 datefieldMetaData.XTYPE = 'datefield';
 datefieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alignTarget',
+    'altFormats',
     'alwaysOnTop',
     'animateUnderline',
     'ariaAttributes',
@@ -21368,6 +23558,7 @@ datefieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'clearable',
     'cls',
@@ -21375,23 +23566,22 @@ datefieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'dateFormat',
     'defaultListenerScope',
     'destroyPickerOnHide',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'edgePicker',
     'editable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'floatedPicker',
@@ -21408,7 +23598,6 @@ datefieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -21446,7 +23635,6 @@ datefieldMetaData.PROPERTIES = [
     'picker',
     'pickerSlotAlign',
     'placeholder',
-    'placeHolder',
     'plugins',
     'publishes',
     'readOnly',
@@ -21459,7 +23647,6 @@ datefieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -21469,6 +23656,7 @@ datefieldMetaData.PROPERTIES = [
     'stateful',
     'statefulDefaults',
     'stateId',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -21534,6 +23722,7 @@ datefieldMetaData.EVENTS = [
     { name: 'click', parameters: 'e' },
     { name: 'collapse', parameters: 'field' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'datefield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -21548,6 +23737,7 @@ datefieldMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'datefield,e' },
     { name: 'keyup', parameters: 'datefield,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -21601,6 +23791,7 @@ datefieldMetaData.EVENTNAMES = [
     'click',
     'collapse',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -21615,6 +23806,7 @@ datefieldMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -21638,7 +23830,7 @@ datefieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtDatefieldComponent = ExtDatefieldComponent_1 = class ExtDatefieldComponent extends base {
+let ExtDatefieldComponent = ExtDatefieldComponent_1 = class ExtDatefieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, datefieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -21646,29 +23838,47 @@ let ExtDatefieldComponent = ExtDatefieldComponent_1 = class ExtDatefieldComponen
     ngOnInit() {
         this.baseOnInit(datefieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(datefieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDatefieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDatefieldComponent = ExtDatefieldComponent_1 = __decorate([
     Component({
-        selector: 'datefield',
+        selector: 'ext-datefield',
         inputs: datefieldMetaData.PROPERTIES,
         outputs: datefieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtDatefieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtDatefieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtDatefieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtDatepickerfieldComponent_1;
 class datepickerfieldMetaData {
 }
 datepickerfieldMetaData.XTYPE = 'datepickerfield';
 datepickerfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alignTarget',
+    'altFormats',
     'alwaysOnTop',
     'animateUnderline',
     'ariaAttributes',
@@ -21686,6 +23896,7 @@ datepickerfieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'clearable',
     'cls',
@@ -21693,23 +23904,22 @@ datepickerfieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'dateFormat',
     'defaultListenerScope',
     'destroyPickerOnHide',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'edgePicker',
     'editable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'floatedPicker',
@@ -21726,7 +23936,6 @@ datepickerfieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -21764,7 +23973,6 @@ datepickerfieldMetaData.PROPERTIES = [
     'picker',
     'pickerSlotAlign',
     'placeholder',
-    'placeHolder',
     'plugins',
     'publishes',
     'readOnly',
@@ -21777,7 +23985,6 @@ datepickerfieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -21787,6 +23994,7 @@ datepickerfieldMetaData.PROPERTIES = [
     'stateful',
     'statefulDefaults',
     'stateId',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -21852,6 +24060,7 @@ datepickerfieldMetaData.EVENTS = [
     { name: 'click', parameters: 'e' },
     { name: 'collapse', parameters: 'field' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'datefield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -21866,6 +24075,7 @@ datepickerfieldMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'datefield,e' },
     { name: 'keyup', parameters: 'datefield,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -21919,6 +24129,7 @@ datepickerfieldMetaData.EVENTNAMES = [
     'click',
     'collapse',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -21933,6 +24144,7 @@ datepickerfieldMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -21956,7 +24168,7 @@ datepickerfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtDatepickerfieldComponent = ExtDatepickerfieldComponent_1 = class ExtDatepickerfieldComponent extends base {
+let ExtDatepickerfieldComponent = ExtDatepickerfieldComponent_1 = class ExtDatepickerfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, datepickerfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -21964,29 +24176,47 @@ let ExtDatepickerfieldComponent = ExtDatepickerfieldComponent_1 = class ExtDatep
     ngOnInit() {
         this.baseOnInit(datepickerfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(datepickerfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDatepickerfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDatepickerfieldComponent = ExtDatepickerfieldComponent_1 = __decorate([
     Component({
-        selector: 'datepickerfield',
+        selector: 'ext-datepickerfield',
         inputs: datepickerfieldMetaData.PROPERTIES,
         outputs: datepickerfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtDatepickerfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtDatepickerfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtDatepickerfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtDatepickernativefieldComponent_1;
 class datepickernativefieldMetaData {
 }
 datepickernativefieldMetaData.XTYPE = 'datepickernativefield';
 datepickernativefieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alignTarget',
+    'altFormats',
     'alwaysOnTop',
     'animateUnderline',
     'ariaAttributes',
@@ -22004,6 +24234,7 @@ datepickernativefieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'clearable',
     'cls',
@@ -22011,23 +24242,22 @@ datepickernativefieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'dateFormat',
     'defaultListenerScope',
     'destroyPickerOnHide',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'edgePicker',
     'editable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'floatedPicker',
@@ -22044,7 +24274,6 @@ datepickernativefieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -22082,7 +24311,6 @@ datepickernativefieldMetaData.PROPERTIES = [
     'picker',
     'pickerSlotAlign',
     'placeholder',
-    'placeHolder',
     'plugins',
     'publishes',
     'readOnly',
@@ -22095,7 +24323,6 @@ datepickernativefieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -22105,6 +24332,7 @@ datepickernativefieldMetaData.PROPERTIES = [
     'stateful',
     'statefulDefaults',
     'stateId',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -22170,6 +24398,7 @@ datepickernativefieldMetaData.EVENTS = [
     { name: 'click', parameters: 'e' },
     { name: 'collapse', parameters: 'field' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'datepickernativefield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -22184,6 +24413,7 @@ datepickernativefieldMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'datepickernativefield,e' },
     { name: 'keyup', parameters: 'datepickernativefield,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -22237,6 +24467,7 @@ datepickernativefieldMetaData.EVENTNAMES = [
     'click',
     'collapse',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -22251,6 +24482,7 @@ datepickernativefieldMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -22274,7 +24506,7 @@ datepickernativefieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtDatepickernativefieldComponent = ExtDatepickernativefieldComponent_1 = class ExtDatepickernativefieldComponent extends base {
+let ExtDatepickernativefieldComponent = ExtDatepickernativefieldComponent_1 = class ExtDatepickernativefieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, datepickernativefieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -22282,28 +24514,45 @@ let ExtDatepickernativefieldComponent = ExtDatepickernativefieldComponent_1 = cl
     ngOnInit() {
         this.baseOnInit(datepickernativefieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(datepickernativefieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDatepickernativefieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDatepickernativefieldComponent = ExtDatepickernativefieldComponent_1 = __decorate([
     Component({
-        selector: 'datepickernativefield',
+        selector: 'ext-datepickernativefield',
         inputs: datepickernativefieldMetaData.PROPERTIES,
         outputs: datepickernativefieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtDatepickernativefieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtDatepickernativefieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtDatepickernativefieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtDisplayfieldComponent_1;
 class displayfieldMetaData {
 }
 displayfieldMetaData.XTYPE = 'displayfield';
 displayfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -22315,26 +24564,26 @@ displayfieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'cls',
     'constrainAlign',
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'encodeHtml',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusable',
@@ -22386,7 +24635,6 @@ displayfieldMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -22456,6 +24704,7 @@ displayfieldMetaData.EVENTS = [
     { name: 'change', parameters: 'displayfield,newValue,oldValue' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'displayfield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -22519,6 +24768,7 @@ displayfieldMetaData.EVENTNAMES = [
     'change',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -22555,7 +24805,7 @@ displayfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtDisplayfieldComponent = ExtDisplayfieldComponent_1 = class ExtDisplayfieldComponent extends base {
+let ExtDisplayfieldComponent = ExtDisplayfieldComponent_1 = class ExtDisplayfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, displayfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -22563,28 +24813,45 @@ let ExtDisplayfieldComponent = ExtDisplayfieldComponent_1 = class ExtDisplayfiel
     ngOnInit() {
         this.baseOnInit(displayfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(displayfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDisplayfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDisplayfieldComponent = ExtDisplayfieldComponent_1 = __decorate([
     Component({
-        selector: 'displayfield',
+        selector: 'ext-displayfield',
         inputs: displayfieldMetaData.PROPERTIES,
         outputs: displayfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtDisplayfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtDisplayfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtDisplayfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtEmailfieldComponent_1;
 class emailfieldMetaData {
 }
 emailfieldMetaData.XTYPE = 'emailfield';
 emailfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'animateUnderline',
     'ariaAttributes',
@@ -22602,6 +24869,7 @@ emailfieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'clearable',
     'cls',
@@ -22609,20 +24877,19 @@ emailfieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'editable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -22635,7 +24902,6 @@ emailfieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -22668,7 +24934,6 @@ emailfieldMetaData.PROPERTIES = [
     'parseValidator',
     'pattern',
     'placeholder',
-    'placeHolder',
     'plugins',
     'publishes',
     'readOnly',
@@ -22681,7 +24946,6 @@ emailfieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -22691,6 +24955,7 @@ emailfieldMetaData.PROPERTIES = [
     'stateful',
     'statefulDefaults',
     'stateId',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -22755,6 +25020,7 @@ emailfieldMetaData.EVENTS = [
     { name: 'clearicontap', parameters: 'emailfield,input,e' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'emailfield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -22768,6 +25034,7 @@ emailfieldMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'emailfield,e' },
     { name: 'keyup', parameters: 'emailfield,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -22820,6 +25087,7 @@ emailfieldMetaData.EVENTNAMES = [
     'clearicontap',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -22833,6 +25101,7 @@ emailfieldMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -22856,7 +25125,7 @@ emailfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtEmailfieldComponent = ExtEmailfieldComponent_1 = class ExtEmailfieldComponent extends base {
+let ExtEmailfieldComponent = ExtEmailfieldComponent_1 = class ExtEmailfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, emailfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -22864,28 +25133,45 @@ let ExtEmailfieldComponent = ExtEmailfieldComponent_1 = class ExtEmailfieldCompo
     ngOnInit() {
         this.baseOnInit(emailfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(emailfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtEmailfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtEmailfieldComponent = ExtEmailfieldComponent_1 = __decorate([
     Component({
-        selector: 'emailfield',
+        selector: 'ext-emailfield',
         inputs: emailfieldMetaData.PROPERTIES,
         outputs: emailfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtEmailfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtEmailfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtEmailfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtFieldComponent_1;
 class fieldMetaData {
 }
 fieldMetaData.XTYPE = 'field';
 fieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -22897,25 +25183,25 @@ fieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'cls',
     'constrainAlign',
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -22963,7 +25249,6 @@ fieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -23033,6 +25318,7 @@ fieldMetaData.EVENTS = [
     { name: 'change', parameters: 'field,newValue,oldValue' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'field,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -23096,6 +25382,7 @@ fieldMetaData.EVENTNAMES = [
     'change',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -23132,7 +25419,7 @@ fieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtFieldComponent = ExtFieldComponent_1 = class ExtFieldComponent extends base {
+let ExtFieldComponent = ExtFieldComponent_1 = class ExtFieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, fieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -23140,29 +25427,351 @@ let ExtFieldComponent = ExtFieldComponent_1 = class ExtFieldComponent extends ba
     ngOnInit() {
         this.baseOnInit(fieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(fieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtFieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtFieldComponent = ExtFieldComponent_1 = __decorate([
     Component({
-        selector: 'field',
+        selector: 'ext-field',
         inputs: fieldMetaData.PROPERTIES,
         outputs: fieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtFieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtFieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtFieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
+var ExtGroupcontainerComponent_1;
+class groupcontainerMetaData {
+}
+groupcontainerMetaData.XTYPE = 'groupcontainer';
+groupcontainerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
+    'alwaysOnTop',
+    'ariaAttributes',
+    'ariaDescribedBy',
+    'ariaLabel',
+    'ariaLabelledBy',
+    'autoFitErrors',
+    'autoSize',
+    'axisLock',
+    'bind',
+    'bodyAlign',
+    'border',
+    'bottom',
+    'bubbleDirty',
+    'centered',
+    'cls',
+    'constrainAlign',
+    'container',
+    'contentEl',
+    'controller',
+    'data',
+    'dataType',
+    'defaultFieldValue',
+    'defaultListenerScope',
+    'defaults',
+    'defaultType',
+    'delegate',
+    'dirty',
+    'disabled',
+    'displayed',
+    'docked',
+    'draggable',
+    'error',
+    'errorMessage',
+    'errorTarget',
+    'errorTip',
+    'errorTpl',
+    'fieldDefaults',
+    'fieldsName',
+    'flex',
+    'floated',
+    'focusCls',
+    'fullscreen',
+    'height',
+    'hidden',
+    'hideAnimation',
+    'hideMode',
+    'hideOnMaskTap',
+    'html',
+    'id',
+    'inline',
+    'instanceCls',
+    'itemId',
+    'items',
+    'keyMap',
+    'keyMapEnabled',
+    'keyMapTarget',
+    'label',
+    'labelAlign',
+    'labelCls',
+    'labelMinWidth',
+    'labelTextAlign',
+    'labelWidth',
+    'labelWrap',
+    'layout',
+    'left',
+    'listeners',
+    'margin',
+    'maxHeight',
+    'maxWidth',
+    'minHeight',
+    'minWidth',
+    'modal',
+    'modelValidation',
+    'name',
+    'nameable',
+    'padding',
+    'plugins',
+    'publishes',
+    'record',
+    'reference',
+    'relative',
+    'renderTo',
+    'required',
+    'requiredMessage',
+    'right',
+    'ripple',
+    'scrollable',
+    'session',
+    'shadow',
+    'shareableName',
+    'shim',
+    'showAnimation',
+    'sideError',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
+    'style',
+    'tabIndex',
+    'tipError',
+    'titleError',
+    'toFrontOnShow',
+    'tooltip',
+    'top',
+    'touchAction',
+    'tpl',
+    'tplWriteMode',
+    'translatable',
+    'twoWayBindable',
+    'ui',
+    'underError',
+    'userCls',
+    'userSelectable',
+    'validateDisabled',
+    'validationMessage',
+    'validators',
+    'value',
+    'vertical',
+    'viewModel',
+    'weight',
+    'width',
+    'x',
+    'xtype',
+    'y',
+    'zIndex',
+    'platformConfig',
+    'responsiveConfig',
+    'align',
+    'fitToParent',
+    'config'
+];
+groupcontainerMetaData.EVENTS = [
+    { name: 'added', parameters: 'sender,container,index' },
+    { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehide', parameters: 'sender' },
+    { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeorientationchange', parameters: '' },
+    { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeshow', parameters: 'sender' },
+    { name: 'beforetofront', parameters: 'groupcontainer' },
+    { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'blur', parameters: 'groupcontainer,event' },
+    { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+    { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+    { name: 'change', parameters: 'groupcontainer,newValue,oldValue' },
+    { name: 'click', parameters: 'e' },
+    { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'groupcontainer,dirty' },
+    { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+    { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+    { name: 'erased', parameters: 'sender' },
+    { name: 'errorchange', parameters: 'groupcontainer,error' },
+    { name: 'floatingchange', parameters: 'sender,positioned' },
+    { name: 'focus', parameters: 'groupcontainer,event' },
+    { name: 'focusenter', parameters: 'groupcontainer,event' },
+    { name: 'focusleave', parameters: 'groupcontainer,event' },
+    { name: 'fullscreen', parameters: 'sender' },
+    { name: 'heightchange', parameters: 'sender,value,oldValue' },
+    { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+    { name: 'hide', parameters: 'sender' },
+    { name: 'initialize', parameters: 'sender' },
+    { name: 'keyup', parameters: 'e' },
+    { name: 'leftchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'mousedown', parameters: 'e' },
+    { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+    { name: 'orientationchange', parameters: '' },
+    { name: 'painted', parameters: 'sender,element' },
+    { name: 'paste', parameters: 'e' },
+    { name: 'positionedchange', parameters: 'sender,positioned' },
+    { name: 'removed', parameters: 'sender,container,index' },
+    { name: 'resize', parameters: 'element,info' },
+    { name: 'rightchange', parameters: 'sender,value,oldValue' },
+    { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+    { name: 'show', parameters: 'sender' },
+    { name: 'tofront', parameters: 'groupcontainer' },
+    { name: 'topchange', parameters: 'sender,value,oldValue' },
+    { name: 'updatedata', parameters: 'sender,newData' },
+    { name: 'widthchange', parameters: 'sender,value,oldValue' },
+    { name: 'ready', parameters: '' }
+];
+groupcontainerMetaData.EVENTNAMES = [
+    'added',
+    'beforebottomchange',
+    'beforecenteredchange',
+    'beforedisabledchange',
+    'beforedockedchange',
+    'beforeheightchange',
+    'beforehiddenchange',
+    'beforehide',
+    'beforeleftchange',
+    'beforemaxHeightchange',
+    'beforemaxWidthchange',
+    'beforeminHeightchange',
+    'beforeminWidthchange',
+    'beforeorientationchange',
+    'beforerightchange',
+    'beforescrollablechange',
+    'beforeshow',
+    'beforetofront',
+    'beforetopchange',
+    'beforewidthchange',
+    'blur',
+    'bottomchange',
+    'centeredchange',
+    'change',
+    'click',
+    'destroy',
+    'dirtychange',
+    'disabledchange',
+    'dockedchange',
+    'erased',
+    'errorchange',
+    'floatingchange',
+    'focus',
+    'focusenter',
+    'focusleave',
+    'fullscreen',
+    'heightchange',
+    'hiddenchange',
+    'hide',
+    'initialize',
+    'keyup',
+    'leftchange',
+    'maxHeightchange',
+    'maxWidthchange',
+    'minHeightchange',
+    'minWidthchange',
+    'mousedown',
+    'moved',
+    'orientationchange',
+    'painted',
+    'paste',
+    'positionedchange',
+    'removed',
+    'resize',
+    'rightchange',
+    'scrollablechange',
+    'show',
+    'tofront',
+    'topchange',
+    'updatedata',
+    'widthchange',
+    'ready'
+];
+let ExtGroupcontainerComponent = ExtGroupcontainerComponent_1 = class ExtGroupcontainerComponent extends EngBase {
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, groupcontainerMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    ngOnInit() {
+        this.baseOnInit(groupcontainerMetaData);
+    }
+    ngAfterViewInit() {
+        this.baseAfterViewInit(groupcontainerMetaData);
+    }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
+};
+ExtGroupcontainerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
+ExtGroupcontainerComponent = ExtGroupcontainerComponent_1 = __decorate([
+    Component({
+        selector: 'ext-groupcontainer',
+        inputs: groupcontainerMetaData.PROPERTIES,
+        outputs: groupcontainerMetaData.EVENTNAMES,
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtGroupcontainerComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, EngBase])
+], ExtGroupcontainerComponent);
+
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtFilefieldComponent_1;
 class filefieldMetaData {
 }
 filefieldMetaData.XTYPE = 'filefield';
 filefieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'accept',
+    'alignSelf',
     'alwaysOnTop',
     'animateUnderline',
     'ariaAttributes',
@@ -23180,6 +25789,7 @@ filefieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'capture',
     'centered',
     'clearable',
@@ -23188,20 +25798,19 @@ filefieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'editable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -23214,7 +25823,6 @@ filefieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -23248,7 +25856,6 @@ filefieldMetaData.PROPERTIES = [
     'parseValidator',
     'pattern',
     'placeholder',
-    'placeHolder',
     'plugins',
     'publishes',
     'readOnly',
@@ -23261,7 +25868,6 @@ filefieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -23271,6 +25877,7 @@ filefieldMetaData.PROPERTIES = [
     'stateful',
     'statefulDefaults',
     'stateId',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -23335,6 +25942,7 @@ filefieldMetaData.EVENTS = [
     { name: 'clearicontap', parameters: 'filefield,input,e' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'filefield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -23348,6 +25956,7 @@ filefieldMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'filefield,e' },
     { name: 'keyup', parameters: 'filefield,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -23400,6 +26009,7 @@ filefieldMetaData.EVENTNAMES = [
     'clearicontap',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -23413,6 +26023,7 @@ filefieldMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -23436,7 +26047,7 @@ filefieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtFilefieldComponent = ExtFilefieldComponent_1 = class ExtFilefieldComponent extends base {
+let ExtFilefieldComponent = ExtFilefieldComponent_1 = class ExtFilefieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, filefieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -23444,29 +26055,46 @@ let ExtFilefieldComponent = ExtFilefieldComponent_1 = class ExtFilefieldComponen
     ngOnInit() {
         this.baseOnInit(filefieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(filefieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtFilefieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtFilefieldComponent = ExtFilefieldComponent_1 = __decorate([
     Component({
-        selector: 'filefield',
+        selector: 'ext-filefield',
         inputs: filefieldMetaData.PROPERTIES,
         outputs: filefieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtFilefieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtFilefieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtFilefieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtFilebuttonComponent_1;
 class filebuttonMetaData {
 }
 filebuttonMetaData.XTYPE = 'filebutton';
 filebuttonMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'accept',
+    'alignSelf',
     'allowDepress',
     'alwaysOnTop',
     'ariaAttributes',
@@ -23496,9 +26124,6 @@ filebuttonMetaData.PROPERTIES = [
     'docked',
     'draggable',
     'enableToggle',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -23546,7 +26171,6 @@ filebuttonMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -23710,7 +26334,7 @@ filebuttonMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtFilebuttonComponent = ExtFilebuttonComponent_1 = class ExtFilebuttonComponent extends base {
+let ExtFilebuttonComponent = ExtFilebuttonComponent_1 = class ExtFilebuttonComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, filebuttonMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -23718,28 +26342,45 @@ let ExtFilebuttonComponent = ExtFilebuttonComponent_1 = class ExtFilebuttonCompo
     ngOnInit() {
         this.baseOnInit(filebuttonMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(filebuttonMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtFilebuttonComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtFilebuttonComponent = ExtFilebuttonComponent_1 = __decorate([
     Component({
-        selector: 'filebutton',
+        selector: 'ext-filebutton',
         inputs: filebuttonMetaData.PROPERTIES,
         outputs: filebuttonMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtFilebuttonComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtFilebuttonComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtFilebuttonComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtHiddenfieldComponent_1;
 class hiddenfieldMetaData {
 }
 hiddenfieldMetaData.XTYPE = 'hiddenfield';
 hiddenfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -23751,25 +26392,25 @@ hiddenfieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'cls',
     'constrainAlign',
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -23782,7 +26423,6 @@ hiddenfieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputType',
     'inputValue',
     'instanceCls',
@@ -23821,7 +26461,6 @@ hiddenfieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -23891,6 +26530,7 @@ hiddenfieldMetaData.EVENTS = [
     { name: 'change', parameters: 'hiddenfield,newValue,oldValue' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'hiddenfield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -23954,6 +26594,7 @@ hiddenfieldMetaData.EVENTNAMES = [
     'change',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -23990,7 +26631,7 @@ hiddenfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtHiddenfieldComponent = ExtHiddenfieldComponent_1 = class ExtHiddenfieldComponent extends base {
+let ExtHiddenfieldComponent = ExtHiddenfieldComponent_1 = class ExtHiddenfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, hiddenfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -23998,28 +26639,45 @@ let ExtHiddenfieldComponent = ExtHiddenfieldComponent_1 = class ExtHiddenfieldCo
     ngOnInit() {
         this.baseOnInit(hiddenfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(hiddenfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtHiddenfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtHiddenfieldComponent = ExtHiddenfieldComponent_1 = __decorate([
     Component({
-        selector: 'hiddenfield',
+        selector: 'ext-hiddenfield',
         inputs: hiddenfieldMetaData.PROPERTIES,
         outputs: hiddenfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtHiddenfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtHiddenfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtHiddenfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtInputfieldComponent_1;
 class inputfieldMetaData {
 }
 inputfieldMetaData.XTYPE = 'inputfield';
 inputfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -24031,25 +26689,25 @@ inputfieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'cls',
     'constrainAlign',
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -24062,7 +26720,6 @@ inputfieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputType',
     'inputValue',
     'instanceCls',
@@ -24101,7 +26758,6 @@ inputfieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -24171,6 +26827,7 @@ inputfieldMetaData.EVENTS = [
     { name: 'change', parameters: 'inputfield,newValue,oldValue' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'inputfield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -24234,6 +26891,7 @@ inputfieldMetaData.EVENTNAMES = [
     'change',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -24270,7 +26928,7 @@ inputfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtInputfieldComponent = ExtInputfieldComponent_1 = class ExtInputfieldComponent extends base {
+let ExtInputfieldComponent = ExtInputfieldComponent_1 = class ExtInputfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, inputfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -24278,28 +26936,45 @@ let ExtInputfieldComponent = ExtInputfieldComponent_1 = class ExtInputfieldCompo
     ngOnInit() {
         this.baseOnInit(inputfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(inputfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtInputfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtInputfieldComponent = ExtInputfieldComponent_1 = __decorate([
     Component({
-        selector: 'inputfield',
+        selector: 'ext-inputfield',
         inputs: inputfieldMetaData.PROPERTIES,
         outputs: inputfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtInputfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtInputfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtInputfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtNumberfieldComponent_1;
 class numberfieldMetaData {
 }
 numberfieldMetaData.XTYPE = 'numberfield';
 numberfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'animateUnderline',
     'ariaAttributes',
@@ -24317,6 +26992,7 @@ numberfieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'clearable',
     'cls',
@@ -24324,22 +27000,22 @@ numberfieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'decimals',
+    'decimalSeparator',
     'decimalsText',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'editable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -24352,7 +27028,6 @@ numberfieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -24389,7 +27064,6 @@ numberfieldMetaData.PROPERTIES = [
     'parseValidator',
     'pattern',
     'placeholder',
-    'placeHolder',
     'plugins',
     'publishes',
     'readOnly',
@@ -24402,7 +27076,6 @@ numberfieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -24412,6 +27085,7 @@ numberfieldMetaData.PROPERTIES = [
     'stateful',
     'statefulDefaults',
     'stateId',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -24477,6 +27151,7 @@ numberfieldMetaData.EVENTS = [
     { name: 'clearicontap', parameters: 'numberfield,input,e' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'numberfield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -24490,6 +27165,7 @@ numberfieldMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'numberfield,e' },
     { name: 'keyup', parameters: 'numberfield,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -24542,6 +27218,7 @@ numberfieldMetaData.EVENTNAMES = [
     'clearicontap',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -24555,6 +27232,7 @@ numberfieldMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -24578,7 +27256,7 @@ numberfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtNumberfieldComponent = ExtNumberfieldComponent_1 = class ExtNumberfieldComponent extends base {
+let ExtNumberfieldComponent = ExtNumberfieldComponent_1 = class ExtNumberfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, numberfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -24586,30 +27264,47 @@ let ExtNumberfieldComponent = ExtNumberfieldComponent_1 = class ExtNumberfieldCo
     ngOnInit() {
         this.baseOnInit(numberfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(numberfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtNumberfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtNumberfieldComponent = ExtNumberfieldComponent_1 = __decorate([
     Component({
-        selector: 'numberfield',
+        selector: 'ext-numberfield',
         inputs: numberfieldMetaData.PROPERTIES,
         outputs: numberfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtNumberfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtNumberfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtNumberfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtFieldpanelComponent_1;
 class fieldpanelMetaData {
 }
 fieldpanelMetaData.XTYPE = 'fieldpanel';
 fieldpanelMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -24626,10 +27321,12 @@ fieldpanelMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
     'bottom',
+    'bubbleDirty',
     'buttonAlign',
     'buttons',
     'buttonToolbar',
@@ -24651,13 +27348,11 @@ fieldpanelMetaData.PROPERTIES = [
     'defaults',
     'defaultToolWeights',
     'defaultType',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'fieldSeparators',
     'flex',
     'floated',
@@ -24718,7 +27413,6 @@ fieldpanelMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -24734,6 +27428,7 @@ fieldpanelMetaData.PROPERTIES = [
     'timeout',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -24796,6 +27491,7 @@ fieldpanelMetaData.EVENTS = [
     { name: 'collapse', parameters: 'fieldpanel' },
     { name: 'deactivate', parameters: 'oldActiveItem,fieldpanel,newActiveItem' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'fieldpanel,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'drawerhide', parameters: 'fieldpanel' },
@@ -24873,6 +27569,7 @@ fieldpanelMetaData.EVENTNAMES = [
     'collapse',
     'deactivate',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'drawerhide',
@@ -24916,7 +27613,7 @@ fieldpanelMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtFieldpanelComponent = ExtFieldpanelComponent_1 = class ExtFieldpanelComponent extends base {
+let ExtFieldpanelComponent = ExtFieldpanelComponent_1 = class ExtFieldpanelComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, fieldpanelMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -24924,28 +27621,45 @@ let ExtFieldpanelComponent = ExtFieldpanelComponent_1 = class ExtFieldpanelCompo
     ngOnInit() {
         this.baseOnInit(fieldpanelMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(fieldpanelMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtFieldpanelComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtFieldpanelComponent = ExtFieldpanelComponent_1 = __decorate([
     Component({
-        selector: 'fieldpanel',
+        selector: 'ext-fieldpanel',
         inputs: fieldpanelMetaData.PROPERTIES,
         outputs: fieldpanelMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtFieldpanelComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtFieldpanelComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtFieldpanelComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPasswordfieldComponent_1;
 class passwordfieldMetaData {
 }
 passwordfieldMetaData.XTYPE = 'passwordfield';
 passwordfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'animateUnderline',
     'ariaAttributes',
@@ -24963,6 +27677,7 @@ passwordfieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'clearable',
     'cls',
@@ -24970,20 +27685,19 @@ passwordfieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'editable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -24996,7 +27710,6 @@ passwordfieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -25029,7 +27742,6 @@ passwordfieldMetaData.PROPERTIES = [
     'parseValidator',
     'pattern',
     'placeholder',
-    'placeHolder',
     'plugins',
     'publishes',
     'readOnly',
@@ -25044,7 +27756,6 @@ passwordfieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -25054,6 +27765,7 @@ passwordfieldMetaData.PROPERTIES = [
     'stateful',
     'statefulDefaults',
     'stateId',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -25118,6 +27830,7 @@ passwordfieldMetaData.EVENTS = [
     { name: 'clearicontap', parameters: 'passwordfield,input,e' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'passwordfield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -25131,6 +27844,7 @@ passwordfieldMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'passwordfield,e' },
     { name: 'keyup', parameters: 'passwordfield,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -25183,6 +27897,7 @@ passwordfieldMetaData.EVENTNAMES = [
     'clearicontap',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -25196,6 +27911,7 @@ passwordfieldMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -25219,7 +27935,7 @@ passwordfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPasswordfieldComponent = ExtPasswordfieldComponent_1 = class ExtPasswordfieldComponent extends base {
+let ExtPasswordfieldComponent = ExtPasswordfieldComponent_1 = class ExtPasswordfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, passwordfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -25227,28 +27943,45 @@ let ExtPasswordfieldComponent = ExtPasswordfieldComponent_1 = class ExtPasswordf
     ngOnInit() {
         this.baseOnInit(passwordfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(passwordfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPasswordfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPasswordfieldComponent = ExtPasswordfieldComponent_1 = __decorate([
     Component({
-        selector: 'passwordfield',
+        selector: 'ext-passwordfield',
         inputs: passwordfieldMetaData.PROPERTIES,
         outputs: passwordfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPasswordfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPasswordfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPasswordfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPickerfieldComponent_1;
 class pickerfieldMetaData {
 }
 pickerfieldMetaData.XTYPE = 'pickerfield';
 pickerfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alignTarget',
     'alwaysOnTop',
     'animateUnderline',
@@ -25267,6 +28000,7 @@ pickerfieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'clearable',
     'cls',
@@ -25274,21 +28008,20 @@ pickerfieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'edgePicker',
     'editable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'floatedPicker',
@@ -25305,7 +28038,6 @@ pickerfieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -25341,7 +28073,6 @@ pickerfieldMetaData.PROPERTIES = [
     'picker',
     'pickerSlotAlign',
     'placeholder',
-    'placeHolder',
     'plugins',
     'publishes',
     'readOnly',
@@ -25354,7 +28085,6 @@ pickerfieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -25364,6 +28094,7 @@ pickerfieldMetaData.PROPERTIES = [
     'stateful',
     'statefulDefaults',
     'stateId',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -25429,6 +28160,7 @@ pickerfieldMetaData.EVENTS = [
     { name: 'click', parameters: 'e' },
     { name: 'collapse', parameters: 'field' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'pickerfield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -25443,6 +28175,7 @@ pickerfieldMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'pickerfield,e' },
     { name: 'keyup', parameters: 'pickerfield,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -25496,6 +28229,7 @@ pickerfieldMetaData.EVENTNAMES = [
     'click',
     'collapse',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -25510,6 +28244,7 @@ pickerfieldMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -25533,7 +28268,7 @@ pickerfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPickerfieldComponent = ExtPickerfieldComponent_1 = class ExtPickerfieldComponent extends base {
+let ExtPickerfieldComponent = ExtPickerfieldComponent_1 = class ExtPickerfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pickerfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -25541,28 +28276,45 @@ let ExtPickerfieldComponent = ExtPickerfieldComponent_1 = class ExtPickerfieldCo
     ngOnInit() {
         this.baseOnInit(pickerfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(pickerfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPickerfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPickerfieldComponent = ExtPickerfieldComponent_1 = __decorate([
     Component({
-        selector: 'pickerfield',
+        selector: 'ext-pickerfield',
         inputs: pickerfieldMetaData.PROPERTIES,
         outputs: pickerfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPickerfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPickerfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPickerfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtRadioComponent_1;
 class radioMetaData {
 }
 radioMetaData.XTYPE = 'radio';
 radioMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -25576,6 +28328,7 @@ radioMetaData.PROPERTIES = [
     'bottom',
     'boxLabel',
     'boxLabelAlign',
+    'bubbleDirty',
     'centered',
     'checked',
     'cls',
@@ -25583,19 +28336,18 @@ radioMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -25608,7 +28360,6 @@ radioMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputType',
     'inputValue',
     'instanceCls',
@@ -25648,7 +28399,6 @@ radioMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -25719,6 +28469,7 @@ radioMetaData.EVENTS = [
     { name: 'check', parameters: 'radio' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'radio,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -25784,6 +28535,7 @@ radioMetaData.EVENTNAMES = [
     'check',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -25821,7 +28573,7 @@ radioMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtRadioComponent = ExtRadioComponent_1 = class ExtRadioComponent extends base {
+let ExtRadioComponent = ExtRadioComponent_1 = class ExtRadioComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, radioMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -25829,28 +28581,45 @@ let ExtRadioComponent = ExtRadioComponent_1 = class ExtRadioComponent extends ba
     ngOnInit() {
         this.baseOnInit(radioMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(radioMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRadioComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRadioComponent = ExtRadioComponent_1 = __decorate([
     Component({
-        selector: 'radio',
+        selector: 'ext-radio',
         inputs: radioMetaData.PROPERTIES,
         outputs: radioMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtRadioComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtRadioComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtRadioComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtRadiofieldComponent_1;
 class radiofieldMetaData {
 }
 radiofieldMetaData.XTYPE = 'radiofield';
 radiofieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -25864,6 +28633,7 @@ radiofieldMetaData.PROPERTIES = [
     'bottom',
     'boxLabel',
     'boxLabelAlign',
+    'bubbleDirty',
     'centered',
     'checked',
     'cls',
@@ -25871,19 +28641,18 @@ radiofieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -25896,7 +28665,6 @@ radiofieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputType',
     'inputValue',
     'instanceCls',
@@ -25936,7 +28704,6 @@ radiofieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -26007,6 +28774,7 @@ radiofieldMetaData.EVENTS = [
     { name: 'check', parameters: 'radio' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'radio,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -26072,6 +28840,7 @@ radiofieldMetaData.EVENTNAMES = [
     'check',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -26109,7 +28878,7 @@ radiofieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtRadiofieldComponent = ExtRadiofieldComponent_1 = class ExtRadiofieldComponent extends base {
+let ExtRadiofieldComponent = ExtRadiofieldComponent_1 = class ExtRadiofieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, radiofieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -26117,28 +28886,351 @@ let ExtRadiofieldComponent = ExtRadiofieldComponent_1 = class ExtRadiofieldCompo
     ngOnInit() {
         this.baseOnInit(radiofieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(radiofieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRadiofieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRadiofieldComponent = ExtRadiofieldComponent_1 = __decorate([
     Component({
-        selector: 'radiofield',
+        selector: 'ext-radiofield',
         inputs: radiofieldMetaData.PROPERTIES,
         outputs: radiofieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtRadiofieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtRadiofieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtRadiofieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
+var ExtRadiogroupComponent_1;
+class radiogroupMetaData {
+}
+radiogroupMetaData.XTYPE = 'radiogroup';
+radiogroupMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
+    'alwaysOnTop',
+    'ariaAttributes',
+    'ariaDescribedBy',
+    'ariaLabel',
+    'ariaLabelledBy',
+    'autoFitErrors',
+    'autoSize',
+    'axisLock',
+    'bind',
+    'bodyAlign',
+    'border',
+    'bottom',
+    'bubbleDirty',
+    'centered',
+    'cls',
+    'constrainAlign',
+    'container',
+    'contentEl',
+    'controller',
+    'data',
+    'dataType',
+    'defaultFieldValue',
+    'defaultListenerScope',
+    'defaults',
+    'defaultType',
+    'delegate',
+    'dirty',
+    'disabled',
+    'displayed',
+    'docked',
+    'draggable',
+    'error',
+    'errorMessage',
+    'errorTarget',
+    'errorTip',
+    'errorTpl',
+    'fieldDefaults',
+    'fieldsName',
+    'flex',
+    'floated',
+    'focusCls',
+    'fullscreen',
+    'height',
+    'hidden',
+    'hideAnimation',
+    'hideMode',
+    'hideOnMaskTap',
+    'html',
+    'id',
+    'inline',
+    'instanceCls',
+    'itemId',
+    'items',
+    'keyMap',
+    'keyMapEnabled',
+    'keyMapTarget',
+    'label',
+    'labelAlign',
+    'labelCls',
+    'labelMinWidth',
+    'labelTextAlign',
+    'labelWidth',
+    'labelWrap',
+    'layout',
+    'left',
+    'listeners',
+    'margin',
+    'maxHeight',
+    'maxWidth',
+    'minHeight',
+    'minWidth',
+    'modal',
+    'modelValidation',
+    'name',
+    'nameable',
+    'padding',
+    'plugins',
+    'publishes',
+    'record',
+    'reference',
+    'relative',
+    'renderTo',
+    'required',
+    'requiredMessage',
+    'right',
+    'ripple',
+    'scrollable',
+    'session',
+    'shadow',
+    'shareableName',
+    'shim',
+    'showAnimation',
+    'sideError',
+    'simpleValue',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
+    'style',
+    'tabIndex',
+    'tipError',
+    'titleError',
+    'toFrontOnShow',
+    'tooltip',
+    'top',
+    'touchAction',
+    'tpl',
+    'tplWriteMode',
+    'translatable',
+    'twoWayBindable',
+    'ui',
+    'underError',
+    'userCls',
+    'userSelectable',
+    'validateDisabled',
+    'validationMessage',
+    'validators',
+    'value',
+    'vertical',
+    'viewModel',
+    'weight',
+    'width',
+    'x',
+    'xtype',
+    'y',
+    'zIndex',
+    'platformConfig',
+    'responsiveConfig',
+    'align',
+    'fitToParent',
+    'config'
+];
+radiogroupMetaData.EVENTS = [
+    { name: 'added', parameters: 'sender,container,index' },
+    { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehide', parameters: 'sender' },
+    { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeorientationchange', parameters: '' },
+    { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeshow', parameters: 'sender' },
+    { name: 'beforetofront', parameters: 'radiogroup' },
+    { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'blur', parameters: 'radiogroup,event' },
+    { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+    { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+    { name: 'change', parameters: 'radiogroup,newValue,oldValue' },
+    { name: 'click', parameters: 'e' },
+    { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'radiogroup,dirty' },
+    { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+    { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+    { name: 'erased', parameters: 'sender' },
+    { name: 'errorchange', parameters: 'radiogroup,error' },
+    { name: 'floatingchange', parameters: 'sender,positioned' },
+    { name: 'focus', parameters: 'radiogroup,event' },
+    { name: 'focusenter', parameters: 'radiogroup,event' },
+    { name: 'focusleave', parameters: 'radiogroup,event' },
+    { name: 'fullscreen', parameters: 'sender' },
+    { name: 'heightchange', parameters: 'sender,value,oldValue' },
+    { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+    { name: 'hide', parameters: 'sender' },
+    { name: 'initialize', parameters: 'sender' },
+    { name: 'keyup', parameters: 'e' },
+    { name: 'leftchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'mousedown', parameters: 'e' },
+    { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+    { name: 'orientationchange', parameters: '' },
+    { name: 'painted', parameters: 'sender,element' },
+    { name: 'paste', parameters: 'e' },
+    { name: 'positionedchange', parameters: 'sender,positioned' },
+    { name: 'removed', parameters: 'sender,container,index' },
+    { name: 'resize', parameters: 'element,info' },
+    { name: 'rightchange', parameters: 'sender,value,oldValue' },
+    { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+    { name: 'show', parameters: 'sender' },
+    { name: 'tofront', parameters: 'radiogroup' },
+    { name: 'topchange', parameters: 'sender,value,oldValue' },
+    { name: 'updatedata', parameters: 'sender,newData' },
+    { name: 'widthchange', parameters: 'sender,value,oldValue' },
+    { name: 'ready', parameters: '' }
+];
+radiogroupMetaData.EVENTNAMES = [
+    'added',
+    'beforebottomchange',
+    'beforecenteredchange',
+    'beforedisabledchange',
+    'beforedockedchange',
+    'beforeheightchange',
+    'beforehiddenchange',
+    'beforehide',
+    'beforeleftchange',
+    'beforemaxHeightchange',
+    'beforemaxWidthchange',
+    'beforeminHeightchange',
+    'beforeminWidthchange',
+    'beforeorientationchange',
+    'beforerightchange',
+    'beforescrollablechange',
+    'beforeshow',
+    'beforetofront',
+    'beforetopchange',
+    'beforewidthchange',
+    'blur',
+    'bottomchange',
+    'centeredchange',
+    'change',
+    'click',
+    'destroy',
+    'dirtychange',
+    'disabledchange',
+    'dockedchange',
+    'erased',
+    'errorchange',
+    'floatingchange',
+    'focus',
+    'focusenter',
+    'focusleave',
+    'fullscreen',
+    'heightchange',
+    'hiddenchange',
+    'hide',
+    'initialize',
+    'keyup',
+    'leftchange',
+    'maxHeightchange',
+    'maxWidthchange',
+    'minHeightchange',
+    'minWidthchange',
+    'mousedown',
+    'moved',
+    'orientationchange',
+    'painted',
+    'paste',
+    'positionedchange',
+    'removed',
+    'resize',
+    'rightchange',
+    'scrollablechange',
+    'show',
+    'tofront',
+    'topchange',
+    'updatedata',
+    'widthchange',
+    'ready'
+];
+let ExtRadiogroupComponent = ExtRadiogroupComponent_1 = class ExtRadiogroupComponent extends EngBase {
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, radiogroupMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    ngOnInit() {
+        this.baseOnInit(radiogroupMetaData);
+    }
+    ngAfterViewInit() {
+        this.baseAfterViewInit(radiogroupMetaData);
+    }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
+};
+ExtRadiogroupComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
+ExtRadiogroupComponent = ExtRadiogroupComponent_1 = __decorate([
+    Component({
+        selector: 'ext-radiogroup',
+        inputs: radiogroupMetaData.PROPERTIES,
+        outputs: radiogroupMetaData.EVENTNAMES,
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtRadiogroupComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, EngBase])
+], ExtRadiogroupComponent);
+
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSearchfieldComponent_1;
 class searchfieldMetaData {
 }
 searchfieldMetaData.XTYPE = 'searchfield';
 searchfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'animateUnderline',
     'ariaAttributes',
@@ -26156,6 +29248,7 @@ searchfieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'clearable',
     'cls',
@@ -26163,20 +29256,19 @@ searchfieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'editable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -26189,7 +29281,6 @@ searchfieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -26222,7 +29313,6 @@ searchfieldMetaData.PROPERTIES = [
     'parseValidator',
     'pattern',
     'placeholder',
-    'placeHolder',
     'plugins',
     'publishes',
     'readOnly',
@@ -26235,7 +29325,6 @@ searchfieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -26245,6 +29334,7 @@ searchfieldMetaData.PROPERTIES = [
     'stateful',
     'statefulDefaults',
     'stateId',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -26309,6 +29399,7 @@ searchfieldMetaData.EVENTS = [
     { name: 'clearicontap', parameters: 'searchfield,input,e' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'searchfield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -26322,6 +29413,7 @@ searchfieldMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'searchfield,e' },
     { name: 'keyup', parameters: 'searchfield,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -26374,6 +29466,7 @@ searchfieldMetaData.EVENTNAMES = [
     'clearicontap',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -26387,6 +29480,7 @@ searchfieldMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -26410,7 +29504,7 @@ searchfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSearchfieldComponent = ExtSearchfieldComponent_1 = class ExtSearchfieldComponent extends base {
+let ExtSearchfieldComponent = ExtSearchfieldComponent_1 = class ExtSearchfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, searchfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -26418,28 +29512,45 @@ let ExtSearchfieldComponent = ExtSearchfieldComponent_1 = class ExtSearchfieldCo
     ngOnInit() {
         this.baseOnInit(searchfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(searchfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSearchfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSearchfieldComponent = ExtSearchfieldComponent_1 = __decorate([
     Component({
-        selector: 'searchfield',
+        selector: 'ext-searchfield',
         inputs: searchfieldMetaData.PROPERTIES,
         outputs: searchfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSearchfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSearchfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSearchfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSelectfieldComponent_1;
 class selectfieldMetaData {
 }
 selectfieldMetaData.XTYPE = 'selectfield';
 selectfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alignTarget',
     'alwaysOnTop',
     'animateUnderline',
@@ -26462,6 +29573,7 @@ selectfieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'chipView',
     'clearable',
@@ -26471,8 +29583,10 @@ selectfieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
     'delimiter',
+    'dirty',
     'disabled',
     'displayed',
     'displayField',
@@ -26481,14 +29595,11 @@ selectfieldMetaData.PROPERTIES = [
     'draggable',
     'edgePicker',
     'editable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'floatedPicker',
@@ -26507,7 +29618,6 @@ selectfieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -26547,7 +29657,6 @@ selectfieldMetaData.PROPERTIES = [
     'picker',
     'pickerSlotAlign',
     'placeholder',
-    'placeHolder',
     'plugins',
     'publishes',
     'readOnly',
@@ -26564,7 +29673,6 @@ selectfieldMetaData.PROPERTIES = [
     'scrollable',
     'selection',
     'selectOnTab',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -26575,6 +29683,7 @@ selectfieldMetaData.PROPERTIES = [
     'statefulDefaults',
     'stateId',
     'store',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -26643,6 +29752,7 @@ selectfieldMetaData.EVENTS = [
     { name: 'click', parameters: 'e' },
     { name: 'collapse', parameters: 'field' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'selectfield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -26657,6 +29767,7 @@ selectfieldMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'selectfield,e' },
     { name: 'keyup', parameters: 'selectfield,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -26711,6 +29822,7 @@ selectfieldMetaData.EVENTNAMES = [
     'click',
     'collapse',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -26725,6 +29837,7 @@ selectfieldMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -26749,7 +29862,7 @@ selectfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSelectfieldComponent = ExtSelectfieldComponent_1 = class ExtSelectfieldComponent extends base {
+let ExtSelectfieldComponent = ExtSelectfieldComponent_1 = class ExtSelectfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, selectfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -26757,28 +29870,45 @@ let ExtSelectfieldComponent = ExtSelectfieldComponent_1 = class ExtSelectfieldCo
     ngOnInit() {
         this.baseOnInit(selectfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(selectfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSelectfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSelectfieldComponent = ExtSelectfieldComponent_1 = __decorate([
     Component({
-        selector: 'selectfield',
+        selector: 'ext-selectfield',
         inputs: selectfieldMetaData.PROPERTIES,
         outputs: selectfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSelectfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSelectfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSelectfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSinglesliderfieldComponent_1;
 class singlesliderfieldMetaData {
 }
 singlesliderfieldMetaData.XTYPE = 'singlesliderfield';
 singlesliderfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -26792,25 +29922,25 @@ singlesliderfieldMetaData.PROPERTIES = [
     'bottom',
     'boxLabel',
     'boxLabelAlign',
+    'bubbleDirty',
     'centered',
     'cls',
     'constrainAlign',
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -26863,7 +29993,6 @@ singlesliderfieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -26935,6 +30064,7 @@ singlesliderfieldMetaData.EVENTS = [
     { name: 'change', parameters: 'me,newValue,oldValue' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'singlesliderfield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'drag', parameters: 'singlesliderfield,sl,thumb,e' },
@@ -27002,6 +30132,7 @@ singlesliderfieldMetaData.EVENTNAMES = [
     'change',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'drag',
@@ -27042,7 +30173,7 @@ singlesliderfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSinglesliderfieldComponent = ExtSinglesliderfieldComponent_1 = class ExtSinglesliderfieldComponent extends base {
+let ExtSinglesliderfieldComponent = ExtSinglesliderfieldComponent_1 = class ExtSinglesliderfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, singlesliderfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -27050,28 +30181,45 @@ let ExtSinglesliderfieldComponent = ExtSinglesliderfieldComponent_1 = class ExtS
     ngOnInit() {
         this.baseOnInit(singlesliderfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(singlesliderfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSinglesliderfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSinglesliderfieldComponent = ExtSinglesliderfieldComponent_1 = __decorate([
     Component({
-        selector: 'singlesliderfield',
+        selector: 'ext-singlesliderfield',
         inputs: singlesliderfieldMetaData.PROPERTIES,
         outputs: singlesliderfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSinglesliderfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSinglesliderfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSinglesliderfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSliderfieldComponent_1;
 class sliderfieldMetaData {
 }
 sliderfieldMetaData.XTYPE = 'sliderfield';
 sliderfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -27085,25 +30233,25 @@ sliderfieldMetaData.PROPERTIES = [
     'bottom',
     'boxLabel',
     'boxLabelAlign',
+    'bubbleDirty',
     'centered',
     'cls',
     'constrainAlign',
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -27156,7 +30304,6 @@ sliderfieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -27228,6 +30375,7 @@ sliderfieldMetaData.EVENTS = [
     { name: 'change', parameters: 'me,newValue,oldValue' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'sliderfield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'drag', parameters: 'sliderfield,sl,thumb,e' },
@@ -27295,6 +30443,7 @@ sliderfieldMetaData.EVENTNAMES = [
     'change',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'drag',
@@ -27335,7 +30484,7 @@ sliderfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSliderfieldComponent = ExtSliderfieldComponent_1 = class ExtSliderfieldComponent extends base {
+let ExtSliderfieldComponent = ExtSliderfieldComponent_1 = class ExtSliderfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sliderfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -27343,29 +30492,46 @@ let ExtSliderfieldComponent = ExtSliderfieldComponent_1 = class ExtSliderfieldCo
     ngOnInit() {
         this.baseOnInit(sliderfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(sliderfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSliderfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSliderfieldComponent = ExtSliderfieldComponent_1 = __decorate([
     Component({
-        selector: 'sliderfield',
+        selector: 'ext-sliderfield',
         inputs: sliderfieldMetaData.PROPERTIES,
         outputs: sliderfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSliderfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSliderfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSliderfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSpinnerfieldComponent_1;
 class spinnerfieldMetaData {
 }
 spinnerfieldMetaData.XTYPE = 'spinnerfield';
 spinnerfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'accelerateOnTapHold',
+    'alignSelf',
     'alwaysOnTop',
     'animateUnderline',
     'ariaAttributes',
@@ -27383,6 +30549,7 @@ spinnerfieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'clearable',
     'cls',
@@ -27391,27 +30558,26 @@ spinnerfieldMetaData.PROPERTIES = [
     'controller',
     'cycle',
     'data',
+    'dataType',
     'decimals',
+    'decimalSeparator',
     'decimalsText',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'editable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
     'fullscreen',
-    'groupButtons',
     'height',
     'hidden',
     'hideAnimation',
@@ -27420,7 +30586,6 @@ spinnerfieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -27457,7 +30622,6 @@ spinnerfieldMetaData.PROPERTIES = [
     'parseValidator',
     'pattern',
     'placeholder',
-    'placeHolder',
     'plugins',
     'publishes',
     'readOnly',
@@ -27470,7 +30634,6 @@ spinnerfieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -27481,6 +30644,7 @@ spinnerfieldMetaData.PROPERTIES = [
     'statefulDefaults',
     'stateId',
     'stepValue',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -27546,6 +30710,7 @@ spinnerfieldMetaData.EVENTS = [
     { name: 'clearicontap', parameters: 'spinnerfield,input,e' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'spinnerfield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -27559,6 +30724,7 @@ spinnerfieldMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'spinnerfield,e' },
     { name: 'keyup', parameters: 'spinnerfield,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -27614,6 +30780,7 @@ spinnerfieldMetaData.EVENTNAMES = [
     'clearicontap',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -27627,6 +30794,7 @@ spinnerfieldMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -27653,7 +30821,7 @@ spinnerfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSpinnerfieldComponent = ExtSpinnerfieldComponent_1 = class ExtSpinnerfieldComponent extends base {
+let ExtSpinnerfieldComponent = ExtSpinnerfieldComponent_1 = class ExtSpinnerfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, spinnerfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -27661,28 +30829,45 @@ let ExtSpinnerfieldComponent = ExtSpinnerfieldComponent_1 = class ExtSpinnerfiel
     ngOnInit() {
         this.baseOnInit(spinnerfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(spinnerfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSpinnerfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSpinnerfieldComponent = ExtSpinnerfieldComponent_1 = __decorate([
     Component({
-        selector: 'spinnerfield',
+        selector: 'ext-spinnerfield',
         inputs: spinnerfieldMetaData.PROPERTIES,
         outputs: spinnerfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSpinnerfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSpinnerfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSpinnerfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTextfieldComponent_1;
 class textfieldMetaData {
 }
 textfieldMetaData.XTYPE = 'textfield';
 textfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'animateUnderline',
     'ariaAttributes',
@@ -27700,6 +30885,7 @@ textfieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'clearable',
     'cls',
@@ -27707,20 +30893,19 @@ textfieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'editable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -27733,7 +30918,6 @@ textfieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -27766,7 +30950,6 @@ textfieldMetaData.PROPERTIES = [
     'parseValidator',
     'pattern',
     'placeholder',
-    'placeHolder',
     'plugins',
     'publishes',
     'readOnly',
@@ -27779,7 +30962,6 @@ textfieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -27789,6 +30971,7 @@ textfieldMetaData.PROPERTIES = [
     'stateful',
     'statefulDefaults',
     'stateId',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -27853,6 +31036,7 @@ textfieldMetaData.EVENTS = [
     { name: 'clearicontap', parameters: 'textfield,input,e' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'textfield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -27866,6 +31050,7 @@ textfieldMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'textfield,e' },
     { name: 'keyup', parameters: 'textfield,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -27918,6 +31103,7 @@ textfieldMetaData.EVENTNAMES = [
     'clearicontap',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -27931,6 +31117,7 @@ textfieldMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -27954,7 +31141,7 @@ textfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTextfieldComponent = ExtTextfieldComponent_1 = class ExtTextfieldComponent extends base {
+let ExtTextfieldComponent = ExtTextfieldComponent_1 = class ExtTextfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, textfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -27962,28 +31149,45 @@ let ExtTextfieldComponent = ExtTextfieldComponent_1 = class ExtTextfieldComponen
     ngOnInit() {
         this.baseOnInit(textfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(textfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTextfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTextfieldComponent = ExtTextfieldComponent_1 = __decorate([
     Component({
-        selector: 'textfield',
+        selector: 'ext-textfield',
         inputs: textfieldMetaData.PROPERTIES,
         outputs: textfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTextfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTextfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTextfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTextareafieldComponent_1;
 class textareafieldMetaData {
 }
 textareafieldMetaData.XTYPE = 'textareafield';
 textareafieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'animateUnderline',
     'ariaAttributes',
@@ -28001,6 +31205,7 @@ textareafieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'clearable',
     'cls',
@@ -28008,20 +31213,19 @@ textareafieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'editable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -28034,7 +31238,6 @@ textareafieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -28068,7 +31271,6 @@ textareafieldMetaData.PROPERTIES = [
     'parseValidator',
     'pattern',
     'placeholder',
-    'placeHolder',
     'plugins',
     'publishes',
     'readOnly',
@@ -28081,7 +31283,6 @@ textareafieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -28091,6 +31292,7 @@ textareafieldMetaData.PROPERTIES = [
     'stateful',
     'statefulDefaults',
     'stateId',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -28155,6 +31357,7 @@ textareafieldMetaData.EVENTS = [
     { name: 'clearicontap', parameters: 'textareafield,input,e' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'textareafield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -28168,6 +31371,7 @@ textareafieldMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'textareafield,e' },
     { name: 'keyup', parameters: 'textareafield,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -28220,6 +31424,7 @@ textareafieldMetaData.EVENTNAMES = [
     'clearicontap',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -28233,6 +31438,7 @@ textareafieldMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -28256,7 +31462,7 @@ textareafieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTextareafieldComponent = ExtTextareafieldComponent_1 = class ExtTextareafieldComponent extends base {
+let ExtTextareafieldComponent = ExtTextareafieldComponent_1 = class ExtTextareafieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, textareafieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -28264,28 +31470,45 @@ let ExtTextareafieldComponent = ExtTextareafieldComponent_1 = class ExtTextareaf
     ngOnInit() {
         this.baseOnInit(textareafieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(textareafieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTextareafieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTextareafieldComponent = ExtTextareafieldComponent_1 = __decorate([
     Component({
-        selector: 'textareafield',
+        selector: 'ext-textareafield',
         inputs: textareafieldMetaData.PROPERTIES,
         outputs: textareafieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTextareafieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTextareafieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTextareafieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTimefieldComponent_1;
 class timefieldMetaData {
 }
 timefieldMetaData.XTYPE = 'timefield';
 timefieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alignTarget',
     'altFormats',
     'alwaysOnTop',
@@ -28305,6 +31528,7 @@ timefieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'clearable',
     'cls',
@@ -28312,21 +31536,20 @@ timefieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'edgePicker',
     'editable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'floatedPicker',
@@ -28344,7 +31567,6 @@ timefieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -28380,7 +31602,6 @@ timefieldMetaData.PROPERTIES = [
     'picker',
     'pickerSlotAlign',
     'placeholder',
-    'placeHolder',
     'plugins',
     'publishes',
     'readOnly',
@@ -28393,7 +31614,6 @@ timefieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -28403,6 +31623,7 @@ timefieldMetaData.PROPERTIES = [
     'stateful',
     'statefulDefaults',
     'stateId',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -28468,6 +31689,7 @@ timefieldMetaData.EVENTS = [
     { name: 'click', parameters: 'e' },
     { name: 'collapse', parameters: 'field' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'timefield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -28482,6 +31704,7 @@ timefieldMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'timefield,e' },
     { name: 'keyup', parameters: 'timefield,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -28535,6 +31758,7 @@ timefieldMetaData.EVENTNAMES = [
     'click',
     'collapse',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -28549,6 +31773,7 @@ timefieldMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -28572,7 +31797,7 @@ timefieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTimefieldComponent = ExtTimefieldComponent_1 = class ExtTimefieldComponent extends base {
+let ExtTimefieldComponent = ExtTimefieldComponent_1 = class ExtTimefieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, timefieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -28580,29 +31805,46 @@ let ExtTimefieldComponent = ExtTimefieldComponent_1 = class ExtTimefieldComponen
     ngOnInit() {
         this.baseOnInit(timefieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(timefieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTimefieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTimefieldComponent = ExtTimefieldComponent_1 = __decorate([
     Component({
-        selector: 'timefield',
+        selector: 'ext-timefield',
         inputs: timefieldMetaData.PROPERTIES,
         outputs: timefieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTimefieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTimefieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTimefieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTogglefieldComponent_1;
 class togglefieldMetaData {
 }
 togglefieldMetaData.XTYPE = 'togglefield';
 togglefieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeLabel',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -28616,25 +31858,25 @@ togglefieldMetaData.PROPERTIES = [
     'bottom',
     'boxLabel',
     'boxLabelAlign',
+    'bubbleDirty',
     'centered',
     'cls',
     'constrainAlign',
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -28688,7 +31930,6 @@ togglefieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -28760,6 +32001,7 @@ togglefieldMetaData.EVENTS = [
     { name: 'change', parameters: 'togglefield,newValue,oldValue' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'togglefield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'drag', parameters: '' },
@@ -28827,6 +32069,7 @@ togglefieldMetaData.EVENTNAMES = [
     'change',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'drag',
@@ -28867,7 +32110,7 @@ togglefieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTogglefieldComponent = ExtTogglefieldComponent_1 = class ExtTogglefieldComponent extends base {
+let ExtTogglefieldComponent = ExtTogglefieldComponent_1 = class ExtTogglefieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, togglefieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -28875,28 +32118,45 @@ let ExtTogglefieldComponent = ExtTogglefieldComponent_1 = class ExtTogglefieldCo
     ngOnInit() {
         this.baseOnInit(togglefieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(togglefieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTogglefieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTogglefieldComponent = ExtTogglefieldComponent_1 = __decorate([
     Component({
-        selector: 'togglefield',
+        selector: 'ext-togglefield',
         inputs: togglefieldMetaData.PROPERTIES,
         outputs: togglefieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTogglefieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTogglefieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTogglefieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCleartriggerComponent_1;
 class cleartriggerMetaData {
 }
 cleartriggerMetaData.XTYPE = 'cleartrigger';
 cleartriggerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -28909,7 +32169,6 @@ cleartriggerMetaData.PROPERTIES = [
     'controller',
     'defaultListenerScope',
     'disabled',
-    'eventHandlers',
     'field',
     'flex',
     'floated',
@@ -28928,6 +32187,7 @@ cleartriggerMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -28938,7 +32198,6 @@ cleartriggerMetaData.PROPERTIES = [
     'repeat',
     'ripple',
     'scope',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -28996,7 +32255,7 @@ cleartriggerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCleartriggerComponent = ExtCleartriggerComponent_1 = class ExtCleartriggerComponent extends base {
+let ExtCleartriggerComponent = ExtCleartriggerComponent_1 = class ExtCleartriggerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, cleartriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -29004,28 +32263,45 @@ let ExtCleartriggerComponent = ExtCleartriggerComponent_1 = class ExtCleartrigge
     ngOnInit() {
         this.baseOnInit(cleartriggerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(cleartriggerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCleartriggerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCleartriggerComponent = ExtCleartriggerComponent_1 = __decorate([
     Component({
-        selector: 'cleartrigger',
+        selector: 'ext-cleartrigger',
         inputs: cleartriggerMetaData.PROPERTIES,
         outputs: cleartriggerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCleartriggerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCleartriggerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCleartriggerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtDatetriggerComponent_1;
 class datetriggerMetaData {
 }
 datetriggerMetaData.XTYPE = 'datetrigger';
 datetriggerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -29038,7 +32314,6 @@ datetriggerMetaData.PROPERTIES = [
     'controller',
     'defaultListenerScope',
     'disabled',
-    'eventHandlers',
     'field',
     'flex',
     'floated',
@@ -29057,6 +32332,7 @@ datetriggerMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -29067,7 +32343,6 @@ datetriggerMetaData.PROPERTIES = [
     'repeat',
     'ripple',
     'scope',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -29125,7 +32400,7 @@ datetriggerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtDatetriggerComponent = ExtDatetriggerComponent_1 = class ExtDatetriggerComponent extends base {
+let ExtDatetriggerComponent = ExtDatetriggerComponent_1 = class ExtDatetriggerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, datetriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -29133,28 +32408,45 @@ let ExtDatetriggerComponent = ExtDatetriggerComponent_1 = class ExtDatetriggerCo
     ngOnInit() {
         this.baseOnInit(datetriggerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(datetriggerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDatetriggerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDatetriggerComponent = ExtDatetriggerComponent_1 = __decorate([
     Component({
-        selector: 'datetrigger',
+        selector: 'ext-datetrigger',
         inputs: datetriggerMetaData.PROPERTIES,
         outputs: datetriggerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtDatetriggerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtDatetriggerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtDatetriggerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtExpandtriggerComponent_1;
 class expandtriggerMetaData {
 }
 expandtriggerMetaData.XTYPE = 'expandtrigger';
 expandtriggerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -29167,7 +32459,6 @@ expandtriggerMetaData.PROPERTIES = [
     'controller',
     'defaultListenerScope',
     'disabled',
-    'eventHandlers',
     'field',
     'flex',
     'floated',
@@ -29186,6 +32477,7 @@ expandtriggerMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -29196,7 +32488,6 @@ expandtriggerMetaData.PROPERTIES = [
     'repeat',
     'ripple',
     'scope',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -29254,7 +32545,7 @@ expandtriggerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtExpandtriggerComponent = ExtExpandtriggerComponent_1 = class ExtExpandtriggerComponent extends base {
+let ExtExpandtriggerComponent = ExtExpandtriggerComponent_1 = class ExtExpandtriggerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, expandtriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -29262,28 +32553,45 @@ let ExtExpandtriggerComponent = ExtExpandtriggerComponent_1 = class ExtExpandtri
     ngOnInit() {
         this.baseOnInit(expandtriggerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(expandtriggerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtExpandtriggerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtExpandtriggerComponent = ExtExpandtriggerComponent_1 = __decorate([
     Component({
-        selector: 'expandtrigger',
+        selector: 'ext-expandtrigger',
         inputs: expandtriggerMetaData.PROPERTIES,
         outputs: expandtriggerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtExpandtriggerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtExpandtriggerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtExpandtriggerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtMenutriggerComponent_1;
 class menutriggerMetaData {
 }
 menutriggerMetaData.XTYPE = 'menutrigger';
 menutriggerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -29297,7 +32605,6 @@ menutriggerMetaData.PROPERTIES = [
     'defaultListenerScope',
     'destroyMenu',
     'disabled',
-    'eventHandlers',
     'field',
     'flex',
     'floated',
@@ -29316,6 +32623,7 @@ menutriggerMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'menu',
     'menuAlign',
     'name',
@@ -29328,7 +32636,6 @@ menutriggerMetaData.PROPERTIES = [
     'repeat',
     'ripple',
     'scope',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -29386,7 +32693,7 @@ menutriggerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtMenutriggerComponent = ExtMenutriggerComponent_1 = class ExtMenutriggerComponent extends base {
+let ExtMenutriggerComponent = ExtMenutriggerComponent_1 = class ExtMenutriggerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, menutriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -29394,28 +32701,45 @@ let ExtMenutriggerComponent = ExtMenutriggerComponent_1 = class ExtMenutriggerCo
     ngOnInit() {
         this.baseOnInit(menutriggerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(menutriggerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMenutriggerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMenutriggerComponent = ExtMenutriggerComponent_1 = __decorate([
     Component({
-        selector: 'menutrigger',
+        selector: 'ext-menutrigger',
         inputs: menutriggerMetaData.PROPERTIES,
         outputs: menutriggerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtMenutriggerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtMenutriggerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtMenutriggerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtRevealtriggerComponent_1;
 class revealtriggerMetaData {
 }
 revealtriggerMetaData.XTYPE = 'revealtrigger';
 revealtriggerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -29428,7 +32752,6 @@ revealtriggerMetaData.PROPERTIES = [
     'controller',
     'defaultListenerScope',
     'disabled',
-    'eventHandlers',
     'field',
     'flex',
     'floated',
@@ -29447,6 +32770,7 @@ revealtriggerMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -29457,7 +32781,6 @@ revealtriggerMetaData.PROPERTIES = [
     'repeat',
     'ripple',
     'scope',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -29515,7 +32838,7 @@ revealtriggerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtRevealtriggerComponent = ExtRevealtriggerComponent_1 = class ExtRevealtriggerComponent extends base {
+let ExtRevealtriggerComponent = ExtRevealtriggerComponent_1 = class ExtRevealtriggerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, revealtriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -29523,28 +32846,45 @@ let ExtRevealtriggerComponent = ExtRevealtriggerComponent_1 = class ExtRevealtri
     ngOnInit() {
         this.baseOnInit(revealtriggerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(revealtriggerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRevealtriggerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRevealtriggerComponent = ExtRevealtriggerComponent_1 = __decorate([
     Component({
-        selector: 'revealtrigger',
+        selector: 'ext-revealtrigger',
         inputs: revealtriggerMetaData.PROPERTIES,
         outputs: revealtriggerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtRevealtriggerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtRevealtriggerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtRevealtriggerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSpindowntriggerComponent_1;
 class spindowntriggerMetaData {
 }
 spindowntriggerMetaData.XTYPE = 'spindowntrigger';
 spindowntriggerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -29557,7 +32897,6 @@ spindowntriggerMetaData.PROPERTIES = [
     'controller',
     'defaultListenerScope',
     'disabled',
-    'eventHandlers',
     'field',
     'flex',
     'floated',
@@ -29576,6 +32915,7 @@ spindowntriggerMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -29586,7 +32926,6 @@ spindowntriggerMetaData.PROPERTIES = [
     'repeat',
     'ripple',
     'scope',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -29644,7 +32983,7 @@ spindowntriggerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSpindowntriggerComponent = ExtSpindowntriggerComponent_1 = class ExtSpindowntriggerComponent extends base {
+let ExtSpindowntriggerComponent = ExtSpindowntriggerComponent_1 = class ExtSpindowntriggerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, spindowntriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -29652,28 +32991,45 @@ let ExtSpindowntriggerComponent = ExtSpindowntriggerComponent_1 = class ExtSpind
     ngOnInit() {
         this.baseOnInit(spindowntriggerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(spindowntriggerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSpindowntriggerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSpindowntriggerComponent = ExtSpindowntriggerComponent_1 = __decorate([
     Component({
-        selector: 'spindowntrigger',
+        selector: 'ext-spindowntrigger',
         inputs: spindowntriggerMetaData.PROPERTIES,
         outputs: spindowntriggerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSpindowntriggerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSpindowntriggerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSpindowntriggerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSpinuptriggerComponent_1;
 class spinuptriggerMetaData {
 }
 spinuptriggerMetaData.XTYPE = 'spinuptrigger';
 spinuptriggerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -29686,7 +33042,6 @@ spinuptriggerMetaData.PROPERTIES = [
     'controller',
     'defaultListenerScope',
     'disabled',
-    'eventHandlers',
     'field',
     'flex',
     'floated',
@@ -29705,6 +33060,7 @@ spinuptriggerMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -29715,7 +33071,6 @@ spinuptriggerMetaData.PROPERTIES = [
     'repeat',
     'ripple',
     'scope',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -29773,7 +33128,7 @@ spinuptriggerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSpinuptriggerComponent = ExtSpinuptriggerComponent_1 = class ExtSpinuptriggerComponent extends base {
+let ExtSpinuptriggerComponent = ExtSpinuptriggerComponent_1 = class ExtSpinuptriggerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, spinuptriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -29781,28 +33136,45 @@ let ExtSpinuptriggerComponent = ExtSpinuptriggerComponent_1 = class ExtSpinuptri
     ngOnInit() {
         this.baseOnInit(spinuptriggerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(spinuptriggerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSpinuptriggerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSpinuptriggerComponent = ExtSpinuptriggerComponent_1 = __decorate([
     Component({
-        selector: 'spinuptrigger',
+        selector: 'ext-spinuptrigger',
         inputs: spinuptriggerMetaData.PROPERTIES,
         outputs: spinuptriggerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSpinuptriggerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSpinuptriggerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSpinuptriggerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTimetriggerComponent_1;
 class timetriggerMetaData {
 }
 timetriggerMetaData.XTYPE = 'timetrigger';
 timetriggerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -29815,7 +33187,6 @@ timetriggerMetaData.PROPERTIES = [
     'controller',
     'defaultListenerScope',
     'disabled',
-    'eventHandlers',
     'field',
     'flex',
     'floated',
@@ -29834,6 +33205,7 @@ timetriggerMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -29844,7 +33216,6 @@ timetriggerMetaData.PROPERTIES = [
     'repeat',
     'ripple',
     'scope',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -29902,7 +33273,7 @@ timetriggerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTimetriggerComponent = ExtTimetriggerComponent_1 = class ExtTimetriggerComponent extends base {
+let ExtTimetriggerComponent = ExtTimetriggerComponent_1 = class ExtTimetriggerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, timetriggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -29910,28 +33281,45 @@ let ExtTimetriggerComponent = ExtTimetriggerComponent_1 = class ExtTimetriggerCo
     ngOnInit() {
         this.baseOnInit(timetriggerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(timetriggerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTimetriggerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTimetriggerComponent = ExtTimetriggerComponent_1 = __decorate([
     Component({
-        selector: 'timetrigger',
+        selector: 'ext-timetrigger',
         inputs: timetriggerMetaData.PROPERTIES,
         outputs: timetriggerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTimetriggerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTimetriggerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTimetriggerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTriggerComponent_1;
 class triggerMetaData {
 }
 triggerMetaData.XTYPE = 'trigger';
 triggerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -29944,7 +33332,6 @@ triggerMetaData.PROPERTIES = [
     'controller',
     'defaultListenerScope',
     'disabled',
-    'eventHandlers',
     'field',
     'flex',
     'floated',
@@ -29963,6 +33350,7 @@ triggerMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -29973,7 +33361,6 @@ triggerMetaData.PROPERTIES = [
     'repeat',
     'ripple',
     'scope',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -30031,7 +33418,7 @@ triggerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTriggerComponent = ExtTriggerComponent_1 = class ExtTriggerComponent extends base {
+let ExtTriggerComponent = ExtTriggerComponent_1 = class ExtTriggerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, triggerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -30039,28 +33426,45 @@ let ExtTriggerComponent = ExtTriggerComponent_1 = class ExtTriggerComponent exte
     ngOnInit() {
         this.baseOnInit(triggerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(triggerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTriggerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTriggerComponent = ExtTriggerComponent_1 = __decorate([
     Component({
-        selector: 'trigger',
+        selector: 'ext-trigger',
         inputs: triggerMetaData.PROPERTIES,
         outputs: triggerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTriggerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTriggerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTriggerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtUrlfieldComponent_1;
 class urlfieldMetaData {
 }
 urlfieldMetaData.XTYPE = 'urlfield';
 urlfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'animateUnderline',
     'ariaAttributes',
@@ -30078,6 +33482,7 @@ urlfieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'clearable',
     'cls',
@@ -30085,20 +33490,19 @@ urlfieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'editable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -30111,7 +33515,6 @@ urlfieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -30144,7 +33547,6 @@ urlfieldMetaData.PROPERTIES = [
     'parseValidator',
     'pattern',
     'placeholder',
-    'placeHolder',
     'plugins',
     'publishes',
     'readOnly',
@@ -30157,7 +33559,6 @@ urlfieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -30167,6 +33568,7 @@ urlfieldMetaData.PROPERTIES = [
     'stateful',
     'statefulDefaults',
     'stateId',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -30231,6 +33633,7 @@ urlfieldMetaData.EVENTS = [
     { name: 'clearicontap', parameters: 'urlfield,input,e' },
     { name: 'click', parameters: 'e' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'urlfield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -30244,6 +33647,7 @@ urlfieldMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'urlfield,e' },
     { name: 'keyup', parameters: 'urlfield,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -30296,6 +33700,7 @@ urlfieldMetaData.EVENTNAMES = [
     'clearicontap',
     'click',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -30309,6 +33714,7 @@ urlfieldMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -30332,7 +33738,7 @@ urlfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtUrlfieldComponent = ExtUrlfieldComponent_1 = class ExtUrlfieldComponent extends base {
+let ExtUrlfieldComponent = ExtUrlfieldComponent_1 = class ExtUrlfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, urlfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -30340,30 +33746,47 @@ let ExtUrlfieldComponent = ExtUrlfieldComponent_1 = class ExtUrlfieldComponent e
     ngOnInit() {
         this.baseOnInit(urlfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(urlfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtUrlfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtUrlfieldComponent = ExtUrlfieldComponent_1 = __decorate([
     Component({
-        selector: 'urlfield',
+        selector: 'ext-urlfield',
         inputs: urlfieldMetaData.PROPERTIES,
         outputs: urlfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtUrlfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtUrlfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtUrlfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtFieldsetComponent_1;
 class fieldsetMetaData {
 }
 fieldsetMetaData.XTYPE = 'fieldset';
 fieldsetMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -30374,6 +33797,7 @@ fieldsetMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -30392,9 +33816,7 @@ fieldsetMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
+    'fieldDefaults',
     'fieldSeparators',
     'flex',
     'floated',
@@ -30445,7 +33867,6 @@ fieldsetMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -30612,7 +34033,7 @@ fieldsetMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtFieldsetComponent = ExtFieldsetComponent_1 = class ExtFieldsetComponent extends base {
+let ExtFieldsetComponent = ExtFieldsetComponent_1 = class ExtFieldsetComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, fieldsetMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -30620,30 +34041,47 @@ let ExtFieldsetComponent = ExtFieldsetComponent_1 = class ExtFieldsetComponent e
     ngOnInit() {
         this.baseOnInit(fieldsetMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(fieldsetMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtFieldsetComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtFieldsetComponent = ExtFieldsetComponent_1 = __decorate([
     Component({
-        selector: 'fieldset',
+        selector: 'ext-fieldset',
         inputs: fieldsetMetaData.PROPERTIES,
         outputs: fieldsetMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtFieldsetComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtFieldsetComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtFieldsetComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtFormpanelComponent_1;
 class formpanelMetaData {
 }
 formpanelMetaData.XTYPE = 'formpanel';
 formpanelMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -30660,10 +34098,12 @@ formpanelMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
     'bottom',
+    'bubbleDirty',
     'buttonAlign',
     'buttons',
     'buttonToolbar',
@@ -30685,15 +34125,14 @@ formpanelMetaData.PROPERTIES = [
     'defaults',
     'defaultToolWeights',
     'defaultType',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'enableSubmissionForm',
     'enctype',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
+    'fieldDefaults',
     'fieldSeparators',
     'flex',
     'floated',
@@ -30718,6 +34157,7 @@ formpanelMetaData.PROPERTIES = [
     'instanceCls',
     'itemId',
     'items',
+    'jsonSubmit',
     'keyMap',
     'keyMapEnabled',
     'keyMapTarget',
@@ -30756,7 +34196,6 @@ formpanelMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -30774,6 +34213,7 @@ formpanelMetaData.PROPERTIES = [
     'timeout',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -30838,6 +34278,7 @@ formpanelMetaData.EVENTS = [
     { name: 'collapse', parameters: 'formpanel' },
     { name: 'deactivate', parameters: 'oldActiveItem,formpanel,newActiveItem' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'formpanel,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'drawerhide', parameters: 'formpanel' },
@@ -30917,6 +34358,7 @@ formpanelMetaData.EVENTNAMES = [
     'collapse',
     'deactivate',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'drawerhide',
@@ -30961,7 +34403,7 @@ formpanelMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtFormpanelComponent = ExtFormpanelComponent_1 = class ExtFormpanelComponent extends base {
+let ExtFormpanelComponent = ExtFormpanelComponent_1 = class ExtFormpanelComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, formpanelMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -30969,29 +34411,612 @@ let ExtFormpanelComponent = ExtFormpanelComponent_1 = class ExtFormpanelComponen
     ngOnInit() {
         this.baseOnInit(formpanelMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(formpanelMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtFormpanelComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtFormpanelComponent = ExtFormpanelComponent_1 = __decorate([
     Component({
-        selector: 'formpanel',
+        selector: 'ext-formpanel',
         inputs: formpanelMetaData.PROPERTIES,
         outputs: formpanelMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtFormpanelComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtFormpanelComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtFormpanelComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
+var ExtFroalaeditorComponent_1;
+class froalaeditorMetaData {
+}
+froalaeditorMetaData.XTYPE = 'froalaeditor';
+froalaeditorMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'activationKey',
+    'alignSelf',
+    'alwaysOnTop',
+    'ariaAttributes',
+    'ariaDescribedBy',
+    'ariaLabel',
+    'ariaLabelledBy',
+    'axisLock',
+    'bind',
+    'border',
+    'bottom',
+    'centered',
+    'cls',
+    'constrainAlign',
+    'contentEl',
+    'controller',
+    'data',
+    'defaultEditor',
+    'defaultListenerScope',
+    'disabled',
+    'displayed',
+    'docked',
+    'draggable',
+    'editor',
+    'flex',
+    'floated',
+    'focusCls',
+    'fullscreen',
+    'height',
+    'hidden',
+    'hideAnimation',
+    'hideMode',
+    'hideOnMaskTap',
+    'html',
+    'id',
+    'instanceCls',
+    'itemId',
+    'keyMap',
+    'keyMapEnabled',
+    'keyMapTarget',
+    'left',
+    'listeners',
+    'margin',
+    'maxHeight',
+    'maxWidth',
+    'minHeight',
+    'minWidth',
+    'modal',
+    'modelValidation',
+    'name',
+    'nameable',
+    'padding',
+    'plugins',
+    'publishes',
+    'record',
+    'reference',
+    'relative',
+    'renderTo',
+    'right',
+    'ripple',
+    'scrollable',
+    'session',
+    'shadow',
+    'shareableName',
+    'shim',
+    'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
+    'style',
+    'tabIndex',
+    'toFrontOnShow',
+    'tooltip',
+    'top',
+    'touchAction',
+    'tpl',
+    'tplWriteMode',
+    'translatable',
+    'twoWayBindable',
+    'ui',
+    'userCls',
+    'userSelectable',
+    'value',
+    'viewModel',
+    'weight',
+    'width',
+    'x',
+    'xtype',
+    'y',
+    'zIndex',
+    'platformConfig',
+    'responsiveConfig',
+    'align',
+    'fitToParent',
+    'config'
+];
+froalaeditorMetaData.EVENTS = [
+    { name: 'added', parameters: 'sender,container,index' },
+    { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehide', parameters: 'sender' },
+    { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeorientationchange', parameters: '' },
+    { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeshow', parameters: 'sender' },
+    { name: 'beforetofront', parameters: 'froalaeditor' },
+    { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'blur', parameters: 'froalaeditor,event' },
+    { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+    { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+    { name: 'change', parameters: 'froalaeditor,the' },
+    { name: 'destroy', parameters: '' },
+    { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+    { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+    { name: 'erased', parameters: 'sender' },
+    { name: 'floatingchange', parameters: 'sender,positioned' },
+    { name: 'focus', parameters: 'froalaeditor,event' },
+    { name: 'focusenter', parameters: 'froalaeditor,event' },
+    { name: 'focusleave', parameters: 'froalaeditor,event' },
+    { name: 'fullscreen', parameters: 'sender' },
+    { name: 'heightchange', parameters: 'sender,value,oldValue' },
+    { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+    { name: 'hide', parameters: 'sender' },
+    { name: 'initialize', parameters: 'sender' },
+    { name: 'leftchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+    { name: 'orientationchange', parameters: '' },
+    { name: 'painted', parameters: 'sender,element' },
+    { name: 'positionedchange', parameters: 'sender,positioned' },
+    { name: 'ready', parameters: 'froalaeditor,the' },
+    { name: 'removed', parameters: 'sender,container,index' },
+    { name: 'resize', parameters: 'element,info' },
+    { name: 'rightchange', parameters: 'sender,value,oldValue' },
+    { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+    { name: 'show', parameters: 'sender' },
+    { name: 'tofront', parameters: 'froalaeditor' },
+    { name: 'topchange', parameters: 'sender,value,oldValue' },
+    { name: 'updatedata', parameters: 'sender,newData' },
+    { name: 'widthchange', parameters: 'sender,value,oldValue' },
+    { name: 'ready', parameters: '' }
+];
+froalaeditorMetaData.EVENTNAMES = [
+    'added',
+    'beforebottomchange',
+    'beforecenteredchange',
+    'beforedisabledchange',
+    'beforedockedchange',
+    'beforeheightchange',
+    'beforehiddenchange',
+    'beforehide',
+    'beforeleftchange',
+    'beforemaxHeightchange',
+    'beforemaxWidthchange',
+    'beforeminHeightchange',
+    'beforeminWidthchange',
+    'beforeorientationchange',
+    'beforerightchange',
+    'beforescrollablechange',
+    'beforeshow',
+    'beforetofront',
+    'beforetopchange',
+    'beforewidthchange',
+    'blur',
+    'bottomchange',
+    'centeredchange',
+    'change',
+    'destroy',
+    'disabledchange',
+    'dockedchange',
+    'erased',
+    'floatingchange',
+    'focus',
+    'focusenter',
+    'focusleave',
+    'fullscreen',
+    'heightchange',
+    'hiddenchange',
+    'hide',
+    'initialize',
+    'leftchange',
+    'maxHeightchange',
+    'maxWidthchange',
+    'minHeightchange',
+    'minWidthchange',
+    'moved',
+    'orientationchange',
+    'painted',
+    'positionedchange',
+    'ready',
+    'removed',
+    'resize',
+    'rightchange',
+    'scrollablechange',
+    'show',
+    'tofront',
+    'topchange',
+    'updatedata',
+    'widthchange',
+    'ready'
+];
+let ExtFroalaeditorComponent = ExtFroalaeditorComponent_1 = class ExtFroalaeditorComponent extends EngBase {
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, froalaeditorMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    ngOnInit() {
+        this.baseOnInit(froalaeditorMetaData);
+    }
+    ngAfterViewInit() {
+        this.baseAfterViewInit(froalaeditorMetaData);
+    }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
+};
+ExtFroalaeditorComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
+ExtFroalaeditorComponent = ExtFroalaeditorComponent_1 = __decorate([
+    Component({
+        selector: 'ext-froalaeditor',
+        inputs: froalaeditorMetaData.PROPERTIES,
+        outputs: froalaeditorMetaData.EVENTNAMES,
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtFroalaeditorComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, EngBase])
+], ExtFroalaeditorComponent);
+
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
+var ExtFroalaeditorfieldComponent_1;
+class froalaeditorfieldMetaData {
+}
+froalaeditorfieldMetaData.XTYPE = 'froalaeditorfield';
+froalaeditorfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'activationKey',
+    'alignSelf',
+    'alwaysOnTop',
+    'ariaAttributes',
+    'ariaDescribedBy',
+    'ariaLabel',
+    'ariaLabelledBy',
+    'autoFitErrors',
+    'autoSize',
+    'axisLock',
+    'bind',
+    'bodyAlign',
+    'border',
+    'bottom',
+    'bubbleDirty',
+    'centered',
+    'cls',
+    'constrainAlign',
+    'container',
+    'contentEl',
+    'controller',
+    'data',
+    'dataType',
+    'defaultEditor',
+    'defaultListenerScope',
+    'defaults',
+    'defaultType',
+    'dirty',
+    'disabled',
+    'displayed',
+    'docked',
+    'draggable',
+    'editor',
+    'error',
+    'errorMessage',
+    'errorTarget',
+    'errorTip',
+    'errorTpl',
+    'fieldDefaults',
+    'flex',
+    'floated',
+    'focusCls',
+    'fullscreen',
+    'height',
+    'hidden',
+    'hideAnimation',
+    'hideMode',
+    'hideOnMaskTap',
+    'html',
+    'id',
+    'inline',
+    'instanceCls',
+    'itemId',
+    'items',
+    'keyMap',
+    'keyMapEnabled',
+    'keyMapTarget',
+    'label',
+    'labelAlign',
+    'labelCls',
+    'labelMinWidth',
+    'labelTextAlign',
+    'labelWidth',
+    'labelWrap',
+    'layout',
+    'left',
+    'listeners',
+    'margin',
+    'maxHeight',
+    'maxWidth',
+    'minHeight',
+    'minWidth',
+    'modal',
+    'modelValidation',
+    'name',
+    'nameable',
+    'padding',
+    'plugins',
+    'publishes',
+    'record',
+    'reference',
+    'relative',
+    'renderTo',
+    'required',
+    'requiredMessage',
+    'right',
+    'ripple',
+    'scrollable',
+    'session',
+    'shadow',
+    'shareableName',
+    'shim',
+    'showAnimation',
+    'sideError',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
+    'style',
+    'tabIndex',
+    'tipError',
+    'titleError',
+    'toFrontOnShow',
+    'tooltip',
+    'top',
+    'touchAction',
+    'tpl',
+    'tplWriteMode',
+    'translatable',
+    'twoWayBindable',
+    'ui',
+    'underError',
+    'userCls',
+    'userSelectable',
+    'validateDisabled',
+    'validationMessage',
+    'validators',
+    'value',
+    'viewModel',
+    'weight',
+    'width',
+    'x',
+    'xtype',
+    'y',
+    'zIndex',
+    'platformConfig',
+    'responsiveConfig',
+    'align',
+    'fitToParent',
+    'config'
+];
+froalaeditorfieldMetaData.EVENTS = [
+    { name: 'added', parameters: 'sender,container,index' },
+    { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehide', parameters: 'sender' },
+    { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeorientationchange', parameters: '' },
+    { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeshow', parameters: 'sender' },
+    { name: 'beforetofront', parameters: 'froalaeditorfield' },
+    { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'blur', parameters: 'froalaeditorfield,event' },
+    { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+    { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+    { name: 'change', parameters: 'froalaeditorfield,the' },
+    { name: 'click', parameters: 'e' },
+    { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'froalaeditorfield,dirty' },
+    { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+    { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+    { name: 'erased', parameters: 'sender' },
+    { name: 'errorchange', parameters: 'froalaeditorfield,error' },
+    { name: 'floatingchange', parameters: 'sender,positioned' },
+    { name: 'focus', parameters: 'froalaeditorfield,event' },
+    { name: 'focusenter', parameters: 'froalaeditorfield,event' },
+    { name: 'focusleave', parameters: 'froalaeditorfield,event' },
+    { name: 'fullscreen', parameters: 'sender' },
+    { name: 'heightchange', parameters: 'sender,value,oldValue' },
+    { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+    { name: 'hide', parameters: 'sender' },
+    { name: 'initialize', parameters: 'sender' },
+    { name: 'keyup', parameters: 'e' },
+    { name: 'leftchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'mousedown', parameters: 'e' },
+    { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+    { name: 'orientationchange', parameters: '' },
+    { name: 'painted', parameters: 'sender,element' },
+    { name: 'paste', parameters: 'e' },
+    { name: 'positionedchange', parameters: 'sender,positioned' },
+    { name: 'ready', parameters: 'froalaeditorfield,the' },
+    { name: 'removed', parameters: 'sender,container,index' },
+    { name: 'resize', parameters: 'element,info' },
+    { name: 'rightchange', parameters: 'sender,value,oldValue' },
+    { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+    { name: 'show', parameters: 'sender' },
+    { name: 'tofront', parameters: 'froalaeditorfield' },
+    { name: 'topchange', parameters: 'sender,value,oldValue' },
+    { name: 'updatedata', parameters: 'sender,newData' },
+    { name: 'widthchange', parameters: 'sender,value,oldValue' },
+    { name: 'ready', parameters: '' }
+];
+froalaeditorfieldMetaData.EVENTNAMES = [
+    'added',
+    'beforebottomchange',
+    'beforecenteredchange',
+    'beforedisabledchange',
+    'beforedockedchange',
+    'beforeheightchange',
+    'beforehiddenchange',
+    'beforehide',
+    'beforeleftchange',
+    'beforemaxHeightchange',
+    'beforemaxWidthchange',
+    'beforeminHeightchange',
+    'beforeminWidthchange',
+    'beforeorientationchange',
+    'beforerightchange',
+    'beforescrollablechange',
+    'beforeshow',
+    'beforetofront',
+    'beforetopchange',
+    'beforewidthchange',
+    'blur',
+    'bottomchange',
+    'centeredchange',
+    'change',
+    'click',
+    'destroy',
+    'dirtychange',
+    'disabledchange',
+    'dockedchange',
+    'erased',
+    'errorchange',
+    'floatingchange',
+    'focus',
+    'focusenter',
+    'focusleave',
+    'fullscreen',
+    'heightchange',
+    'hiddenchange',
+    'hide',
+    'initialize',
+    'keyup',
+    'leftchange',
+    'maxHeightchange',
+    'maxWidthchange',
+    'minHeightchange',
+    'minWidthchange',
+    'mousedown',
+    'moved',
+    'orientationchange',
+    'painted',
+    'paste',
+    'positionedchange',
+    'ready',
+    'removed',
+    'resize',
+    'rightchange',
+    'scrollablechange',
+    'show',
+    'tofront',
+    'topchange',
+    'updatedata',
+    'widthchange',
+    'ready'
+];
+let ExtFroalaeditorfieldComponent = ExtFroalaeditorfieldComponent_1 = class ExtFroalaeditorfieldComponent extends EngBase {
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, froalaeditorfieldMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    ngOnInit() {
+        this.baseOnInit(froalaeditorfieldMetaData);
+    }
+    ngAfterViewInit() {
+        this.baseAfterViewInit(froalaeditorfieldMetaData);
+    }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
+};
+ExtFroalaeditorfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
+ExtFroalaeditorfieldComponent = ExtFroalaeditorfieldComponent_1 = __decorate([
+    Component({
+        selector: 'ext-froalaeditorfield',
+        inputs: froalaeditorfieldMetaData.PROPERTIES,
+        outputs: froalaeditorfieldMetaData.EVENTNAMES,
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtFroalaeditorfieldComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, EngBase])
+], ExtFroalaeditorfieldComponent);
+
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtGridcellbaseComponent_1;
 class gridcellbaseMetaData {
 }
 gridcellbaseMetaData.XTYPE = 'gridcellbase';
 gridcellbaseMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
     'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'align',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -31009,7 +35034,6 @@ gridcellbaseMetaData.PROPERTIES = [
     'defaultListenerScope',
     'defaultToolWeights',
     'disabled',
-    'eventHandlers',
     'flex',
     'floated',
     'focusCls',
@@ -31023,6 +35047,7 @@ gridcellbaseMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -31033,7 +35058,6 @@ gridcellbaseMetaData.PROPERTIES = [
     'renderTo',
     'ripple',
     'selectable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -31092,7 +35116,7 @@ gridcellbaseMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtGridcellbaseComponent = ExtGridcellbaseComponent_1 = class ExtGridcellbaseComponent extends base {
+let ExtGridcellbaseComponent = ExtGridcellbaseComponent_1 = class ExtGridcellbaseComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridcellbaseMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -31100,29 +35124,46 @@ let ExtGridcellbaseComponent = ExtGridcellbaseComponent_1 = class ExtGridcellbas
     ngOnInit() {
         this.baseOnInit(gridcellbaseMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(gridcellbaseMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridcellbaseComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridcellbaseComponent = ExtGridcellbaseComponent_1 = __decorate([
     Component({
-        selector: 'gridcellbase',
+        selector: 'ext-gridcellbase',
         inputs: gridcellbaseMetaData.PROPERTIES,
         outputs: gridcellbaseMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridcellbaseComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtGridcellbaseComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtGridcellbaseComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtBooleancellComponent_1;
 class booleancellMetaData {
 }
 booleancellMetaData.XTYPE = 'booleancell';
 booleancellMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
     'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'align',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -31141,7 +35182,6 @@ booleancellMetaData.PROPERTIES = [
     'defaultToolWeights',
     'disabled',
     'encodeHtml',
-    'eventHandlers',
     'falseText',
     'flex',
     'floated',
@@ -31156,6 +35196,7 @@ booleancellMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -31167,7 +35208,6 @@ booleancellMetaData.PROPERTIES = [
     'renderTo',
     'ripple',
     'selectable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -31229,7 +35269,7 @@ booleancellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtBooleancellComponent = ExtBooleancellComponent_1 = class ExtBooleancellComponent extends base {
+let ExtBooleancellComponent = ExtBooleancellComponent_1 = class ExtBooleancellComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, booleancellMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -31237,29 +35277,46 @@ let ExtBooleancellComponent = ExtBooleancellComponent_1 = class ExtBooleancellCo
     ngOnInit() {
         this.baseOnInit(booleancellMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(booleancellMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtBooleancellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtBooleancellComponent = ExtBooleancellComponent_1 = __decorate([
     Component({
-        selector: 'booleancell',
+        selector: 'ext-booleancell',
         inputs: booleancellMetaData.PROPERTIES,
         outputs: booleancellMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtBooleancellComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtBooleancellComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtBooleancellComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtGridcellComponent_1;
 class gridcellMetaData {
 }
 gridcellMetaData.XTYPE = 'gridcell';
 gridcellMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
     'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'align',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -31278,7 +35335,6 @@ gridcellMetaData.PROPERTIES = [
     'defaultToolWeights',
     'disabled',
     'encodeHtml',
-    'eventHandlers',
     'flex',
     'floated',
     'focusCls',
@@ -31293,6 +35349,7 @@ gridcellMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -31306,7 +35363,6 @@ gridcellMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'selectable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -31367,7 +35423,7 @@ gridcellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtGridcellComponent = ExtGridcellComponent_1 = class ExtGridcellComponent extends base {
+let ExtGridcellComponent = ExtGridcellComponent_1 = class ExtGridcellComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridcellMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -31375,29 +35431,46 @@ let ExtGridcellComponent = ExtGridcellComponent_1 = class ExtGridcellComponent e
     ngOnInit() {
         this.baseOnInit(gridcellMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(gridcellMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridcellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridcellComponent = ExtGridcellComponent_1 = __decorate([
     Component({
-        selector: 'gridcell',
+        selector: 'ext-gridcell',
         inputs: gridcellMetaData.PROPERTIES,
         outputs: gridcellMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridcellComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtGridcellComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtGridcellComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCheckcellComponent_1;
 class checkcellMetaData {
 }
 checkcellMetaData.XTYPE = 'checkcell';
 checkcellMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
     'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'align',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -31415,7 +35488,6 @@ checkcellMetaData.PROPERTIES = [
     'defaultListenerScope',
     'defaultToolWeights',
     'disabled',
-    'eventHandlers',
     'flex',
     'floated',
     'focusCls',
@@ -31429,6 +35501,7 @@ checkcellMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -31439,7 +35512,6 @@ checkcellMetaData.PROPERTIES = [
     'renderTo',
     'ripple',
     'selectable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -31498,7 +35570,7 @@ checkcellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCheckcellComponent = ExtCheckcellComponent_1 = class ExtCheckcellComponent extends base {
+let ExtCheckcellComponent = ExtCheckcellComponent_1 = class ExtCheckcellComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, checkcellMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -31506,29 +35578,46 @@ let ExtCheckcellComponent = ExtCheckcellComponent_1 = class ExtCheckcellComponen
     ngOnInit() {
         this.baseOnInit(checkcellMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(checkcellMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCheckcellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCheckcellComponent = ExtCheckcellComponent_1 = __decorate([
     Component({
-        selector: 'checkcell',
+        selector: 'ext-checkcell',
         inputs: checkcellMetaData.PROPERTIES,
         outputs: checkcellMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCheckcellComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCheckcellComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCheckcellComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtDatecellComponent_1;
 class datecellMetaData {
 }
 datecellMetaData.XTYPE = 'datecell';
 datecellMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
     'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'align',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -31547,7 +35636,6 @@ datecellMetaData.PROPERTIES = [
     'defaultToolWeights',
     'disabled',
     'encodeHtml',
-    'eventHandlers',
     'flex',
     'floated',
     'focusCls',
@@ -31562,6 +35650,7 @@ datecellMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -31573,7 +35662,6 @@ datecellMetaData.PROPERTIES = [
     'renderTo',
     'ripple',
     'selectable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -31633,7 +35721,7 @@ datecellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtDatecellComponent = ExtDatecellComponent_1 = class ExtDatecellComponent extends base {
+let ExtDatecellComponent = ExtDatecellComponent_1 = class ExtDatecellComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, datecellMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -31641,29 +35729,46 @@ let ExtDatecellComponent = ExtDatecellComponent_1 = class ExtDatecellComponent e
     ngOnInit() {
         this.baseOnInit(datecellMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(datecellMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDatecellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDatecellComponent = ExtDatecellComponent_1 = __decorate([
     Component({
-        selector: 'datecell',
+        selector: 'ext-datecell',
         inputs: datecellMetaData.PROPERTIES,
         outputs: datecellMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtDatecellComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtDatecellComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtDatecellComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtNumbercellComponent_1;
 class numbercellMetaData {
 }
 numbercellMetaData.XTYPE = 'numbercell';
 numbercellMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
     'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'align',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -31682,7 +35787,6 @@ numbercellMetaData.PROPERTIES = [
     'defaultToolWeights',
     'disabled',
     'encodeHtml',
-    'eventHandlers',
     'flex',
     'floated',
     'focusCls',
@@ -31697,6 +35801,7 @@ numbercellMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -31708,7 +35813,6 @@ numbercellMetaData.PROPERTIES = [
     'renderTo',
     'ripple',
     'selectable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -31768,7 +35872,7 @@ numbercellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtNumbercellComponent = ExtNumbercellComponent_1 = class ExtNumbercellComponent extends base {
+let ExtNumbercellComponent = ExtNumbercellComponent_1 = class ExtNumbercellComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, numbercellMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -31776,29 +35880,46 @@ let ExtNumbercellComponent = ExtNumbercellComponent_1 = class ExtNumbercellCompo
     ngOnInit() {
         this.baseOnInit(numbercellMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(numbercellMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtNumbercellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtNumbercellComponent = ExtNumbercellComponent_1 = __decorate([
     Component({
-        selector: 'numbercell',
+        selector: 'ext-numbercell',
         inputs: numbercellMetaData.PROPERTIES,
         outputs: numbercellMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtNumbercellComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtNumbercellComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtNumbercellComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtRownumberercellComponent_1;
 class rownumberercellMetaData {
 }
 rownumberercellMetaData.XTYPE = 'rownumberercell';
 rownumberercellMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
     'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'align',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -31817,7 +35938,6 @@ rownumberercellMetaData.PROPERTIES = [
     'defaultToolWeights',
     'disabled',
     'encodeHtml',
-    'eventHandlers',
     'flex',
     'floated',
     'focusCls',
@@ -31832,6 +35952,7 @@ rownumberercellMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -31843,7 +35964,6 @@ rownumberercellMetaData.PROPERTIES = [
     'renderTo',
     'ripple',
     'selectable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -31903,7 +36023,7 @@ rownumberercellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtRownumberercellComponent = ExtRownumberercellComponent_1 = class ExtRownumberercellComponent extends base {
+let ExtRownumberercellComponent = ExtRownumberercellComponent_1 = class ExtRownumberercellComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, rownumberercellMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -31911,29 +36031,46 @@ let ExtRownumberercellComponent = ExtRownumberercellComponent_1 = class ExtRownu
     ngOnInit() {
         this.baseOnInit(rownumberercellMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(rownumberercellMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRownumberercellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRownumberercellComponent = ExtRownumberercellComponent_1 = __decorate([
     Component({
-        selector: 'rownumberercell',
+        selector: 'ext-rownumberercell',
         inputs: rownumberercellMetaData.PROPERTIES,
         outputs: rownumberercellMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtRownumberercellComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtRownumberercellComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtRownumberercellComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTextcellComponent_1;
 class textcellMetaData {
 }
 textcellMetaData.XTYPE = 'textcell';
 textcellMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
     'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'align',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -31952,7 +36089,6 @@ textcellMetaData.PROPERTIES = [
     'defaultToolWeights',
     'disabled',
     'encodeHtml',
-    'eventHandlers',
     'flex',
     'floated',
     'focusCls',
@@ -31966,6 +36102,7 @@ textcellMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -31977,7 +36114,6 @@ textcellMetaData.PROPERTIES = [
     'renderTo',
     'ripple',
     'selectable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -32037,7 +36173,7 @@ textcellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTextcellComponent = ExtTextcellComponent_1 = class ExtTextcellComponent extends base {
+let ExtTextcellComponent = ExtTextcellComponent_1 = class ExtTextcellComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, textcellMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -32045,39 +36181,61 @@ let ExtTextcellComponent = ExtTextcellComponent_1 = class ExtTextcellComponent e
     ngOnInit() {
         this.baseOnInit(textcellMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(textcellMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTextcellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTextcellComponent = ExtTextcellComponent_1 = __decorate([
     Component({
-        selector: 'textcell',
+        selector: 'ext-textcell',
         inputs: textcellMetaData.PROPERTIES,
         outputs: textcellMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTextcellComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTextcellComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTextcellComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTreecellComponent_1;
 class treecellMetaData {
 }
 treecellMetaData.XTYPE = 'treecell';
 treecellMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
     'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'align',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
     'ariaLabel',
     'ariaLabelledBy',
+    'autoCheckChildren',
     'bind',
     'bodyCls',
     'bodyStyle',
     'border',
     'cellCls',
+    'checkable',
+    'checkableField',
+    'checkedField',
+    'checkOnTriTap',
     'cls',
     'column',
     'constrainAlign',
@@ -32085,8 +36243,8 @@ treecellMetaData.PROPERTIES = [
     'defaultListenerScope',
     'defaultToolWeights',
     'disabled',
+    'enableTri',
     'encodeHtml',
-    'eventHandlers',
     'flex',
     'floated',
     'focusCls',
@@ -32103,6 +36261,7 @@ treecellMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -32116,7 +36275,6 @@ treecellMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'selectable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -32145,12 +36303,14 @@ treecellMetaData.PROPERTIES = [
     'config'
 ];
 treecellMetaData.EVENTS = [
+    { name: 'beforecheckchange', parameters: 'treecell,checked,current,record,e' },
     { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforetofront', parameters: 'treecell' },
     { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'blur', parameters: 'treecell,event' },
+    { name: 'checkchange', parameters: 'treecell,checked,record,e' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'focus', parameters: 'treecell,event' },
     { name: 'focusenter', parameters: 'treecell,event' },
@@ -32162,12 +36322,14 @@ treecellMetaData.EVENTS = [
     { name: 'ready', parameters: '' }
 ];
 treecellMetaData.EVENTNAMES = [
+    'beforecheckchange',
     'beforedisabledchange',
     'beforeheightchange',
     'beforehiddenchange',
     'beforetofront',
     'beforewidthchange',
     'blur',
+    'checkchange',
     'disabledchange',
     'focus',
     'focusenter',
@@ -32178,7 +36340,7 @@ treecellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTreecellComponent = ExtTreecellComponent_1 = class ExtTreecellComponent extends base {
+let ExtTreecellComponent = ExtTreecellComponent_1 = class ExtTreecellComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, treecellMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -32186,29 +36348,46 @@ let ExtTreecellComponent = ExtTreecellComponent_1 = class ExtTreecellComponent e
     ngOnInit() {
         this.baseOnInit(treecellMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(treecellMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTreecellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTreecellComponent = ExtTreecellComponent_1 = __decorate([
     Component({
-        selector: 'treecell',
+        selector: 'ext-treecell',
         inputs: treecellMetaData.PROPERTIES,
         outputs: treecellMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTreecellComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTreecellComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTreecellComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtWidgetcellComponent_1;
 class widgetcellMetaData {
 }
 widgetcellMetaData.XTYPE = 'widgetcell';
 widgetcellMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
     'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'align',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -32226,7 +36405,6 @@ widgetcellMetaData.PROPERTIES = [
     'defaultListenerScope',
     'defaultToolWeights',
     'disabled',
-    'eventHandlers',
     'flex',
     'floated',
     'focusCls',
@@ -32241,6 +36419,7 @@ widgetcellMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -32251,7 +36430,6 @@ widgetcellMetaData.PROPERTIES = [
     'renderTo',
     'ripple',
     'selectable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -32311,7 +36489,7 @@ widgetcellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtWidgetcellComponent = ExtWidgetcellComponent_1 = class ExtWidgetcellComponent extends base {
+let ExtWidgetcellComponent = ExtWidgetcellComponent_1 = class ExtWidgetcellComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, widgetcellMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -32319,31 +36497,48 @@ let ExtWidgetcellComponent = ExtWidgetcellComponent_1 = class ExtWidgetcellCompo
     ngOnInit() {
         this.baseOnInit(widgetcellMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(widgetcellMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtWidgetcellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtWidgetcellComponent = ExtWidgetcellComponent_1 = __decorate([
     Component({
-        selector: 'widgetcell',
+        selector: 'ext-widgetcell',
         inputs: widgetcellMetaData.PROPERTIES,
         outputs: widgetcellMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtWidgetcellComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtWidgetcellComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtWidgetcellComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCelleditorComponent_1;
 class celleditorMetaData {
 }
 celleditorMetaData.XTYPE = 'celleditor';
 celleditorMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'alignment',
+    'alignSelf',
     'allowBlur',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
@@ -32356,6 +36551,7 @@ celleditorMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cancelOnClear',
@@ -32378,9 +36574,6 @@ celleditorMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'field',
     'flex',
     'floated',
@@ -32435,7 +36628,6 @@ celleditorMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -32616,7 +36808,7 @@ celleditorMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCelleditorComponent = ExtCelleditorComponent_1 = class ExtCelleditorComponent extends base {
+let ExtCelleditorComponent = ExtCelleditorComponent_1 = class ExtCelleditorComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, celleditorMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -32624,31 +36816,48 @@ let ExtCelleditorComponent = ExtCelleditorComponent_1 = class ExtCelleditorCompo
     ngOnInit() {
         this.baseOnInit(celleditorMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(celleditorMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCelleditorComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCelleditorComponent = ExtCelleditorComponent_1 = __decorate([
     Component({
-        selector: 'celleditor',
+        selector: 'ext-celleditor',
         inputs: celleditorMetaData.PROPERTIES,
         outputs: celleditorMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCelleditorComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCelleditorComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCelleditorComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtBooleancolumnComponent_1;
 class booleancolumnMetaData {
 }
 booleancolumnMetaData.XTYPE = 'booleancolumn';
 booleancolumnMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'align',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -32659,6 +36868,7 @@ booleancolumnMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -32688,9 +36898,7 @@ booleancolumnMetaData.PROPERTIES = [
     'draggable',
     'editable',
     'editor',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
+    'editorDefaults',
     'exportRenderer',
     'exportStyle',
     'exportSummaryRenderer',
@@ -32759,7 +36967,6 @@ booleancolumnMetaData.PROPERTIES = [
     'scope',
     'scratchCell',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -32776,7 +36983,6 @@ booleancolumnMetaData.PROPERTIES = [
     'summaryDataIndex',
     'summaryFormatter',
     'summaryRenderer',
-    'summaryType',
     'tabIndex',
     'text',
     'toFrontOnShow',
@@ -32939,7 +37145,7 @@ booleancolumnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtBooleancolumnComponent = ExtBooleancolumnComponent_1 = class ExtBooleancolumnComponent extends base {
+let ExtBooleancolumnComponent = ExtBooleancolumnComponent_1 = class ExtBooleancolumnComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, booleancolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -32947,31 +37153,48 @@ let ExtBooleancolumnComponent = ExtBooleancolumnComponent_1 = class ExtBooleanco
     ngOnInit() {
         this.baseOnInit(booleancolumnMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(booleancolumnMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtBooleancolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtBooleancolumnComponent = ExtBooleancolumnComponent_1 = __decorate([
     Component({
-        selector: 'booleancolumn',
+        selector: 'ext-booleancolumn',
         inputs: booleancolumnMetaData.PROPERTIES,
         outputs: booleancolumnMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtBooleancolumnComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtBooleancolumnComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtBooleancolumnComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtCheckcolumnComponent_1;
 class checkcolumnMetaData {
 }
 checkcolumnMetaData.XTYPE = 'checkcolumn';
 checkcolumnMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'align',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -32982,6 +37205,7 @@ checkcolumnMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -33011,9 +37235,7 @@ checkcolumnMetaData.PROPERTIES = [
     'draggable',
     'editable',
     'editor',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
+    'editorDefaults',
     'exportRenderer',
     'exportStyle',
     'exportSummaryRenderer',
@@ -33083,7 +37305,6 @@ checkcolumnMetaData.PROPERTIES = [
     'scope',
     'scratchCell',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -33101,7 +37322,6 @@ checkcolumnMetaData.PROPERTIES = [
     'summaryDataIndex',
     'summaryFormatter',
     'summaryRenderer',
-    'summaryType',
     'tabIndex',
     'text',
     'toFrontOnShow',
@@ -33266,7 +37486,7 @@ checkcolumnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtCheckcolumnComponent = ExtCheckcolumnComponent_1 = class ExtCheckcolumnComponent extends base {
+let ExtCheckcolumnComponent = ExtCheckcolumnComponent_1 = class ExtCheckcolumnComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, checkcolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -33274,31 +37494,48 @@ let ExtCheckcolumnComponent = ExtCheckcolumnComponent_1 = class ExtCheckcolumnCo
     ngOnInit() {
         this.baseOnInit(checkcolumnMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(checkcolumnMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtCheckcolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtCheckcolumnComponent = ExtCheckcolumnComponent_1 = __decorate([
     Component({
-        selector: 'checkcolumn',
+        selector: 'ext-checkcolumn',
         inputs: checkcolumnMetaData.PROPERTIES,
         outputs: checkcolumnMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtCheckcolumnComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtCheckcolumnComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtCheckcolumnComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtGridcolumnComponent_1;
 class gridcolumnMetaData {
 }
 gridcolumnMetaData.XTYPE = 'gridcolumn';
 gridcolumnMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'align',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -33309,6 +37546,7 @@ gridcolumnMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -33338,9 +37576,7 @@ gridcolumnMetaData.PROPERTIES = [
     'draggable',
     'editable',
     'editor',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
+    'editorDefaults',
     'exportRenderer',
     'exportStyle',
     'exportSummaryRenderer',
@@ -33408,7 +37644,6 @@ gridcolumnMetaData.PROPERTIES = [
     'scope',
     'scratchCell',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -33425,7 +37660,6 @@ gridcolumnMetaData.PROPERTIES = [
     'summaryDataIndex',
     'summaryFormatter',
     'summaryRenderer',
-    'summaryType',
     'tabIndex',
     'text',
     'toFrontOnShow',
@@ -33586,7 +37820,7 @@ gridcolumnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtGridcolumnComponent = ExtGridcolumnComponent_1 = class ExtGridcolumnComponent extends base {
+let ExtGridcolumnComponent = ExtGridcolumnComponent_1 = class ExtGridcolumnComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridcolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -33594,31 +37828,48 @@ let ExtGridcolumnComponent = ExtGridcolumnComponent_1 = class ExtGridcolumnCompo
     ngOnInit() {
         this.baseOnInit(gridcolumnMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(gridcolumnMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridcolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridcolumnComponent = ExtGridcolumnComponent_1 = __decorate([
     Component({
-        selector: 'gridcolumn',
+        selector: 'ext-gridcolumn',
         inputs: gridcolumnMetaData.PROPERTIES,
         outputs: gridcolumnMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridcolumnComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtGridcolumnComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtGridcolumnComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtColumnComponent_1;
 class columnMetaData {
 }
 columnMetaData.XTYPE = 'column';
 columnMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'align',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -33629,6 +37880,7 @@ columnMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -33658,9 +37910,7 @@ columnMetaData.PROPERTIES = [
     'draggable',
     'editable',
     'editor',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
+    'editorDefaults',
     'exportRenderer',
     'exportStyle',
     'exportSummaryRenderer',
@@ -33728,7 +37978,6 @@ columnMetaData.PROPERTIES = [
     'scope',
     'scratchCell',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -33745,7 +37994,6 @@ columnMetaData.PROPERTIES = [
     'summaryDataIndex',
     'summaryFormatter',
     'summaryRenderer',
-    'summaryType',
     'tabIndex',
     'text',
     'toFrontOnShow',
@@ -33906,7 +38154,7 @@ columnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtColumnComponent = ExtColumnComponent_1 = class ExtColumnComponent extends base {
+let ExtColumnComponent = ExtColumnComponent_1 = class ExtColumnComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, columnMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -33914,31 +38162,48 @@ let ExtColumnComponent = ExtColumnComponent_1 = class ExtColumnComponent extends
     ngOnInit() {
         this.baseOnInit(columnMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(columnMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtColumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtColumnComponent = ExtColumnComponent_1 = __decorate([
     Component({
-        selector: 'column',
+        selector: 'ext-column',
         inputs: columnMetaData.PROPERTIES,
         outputs: columnMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtColumnComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtColumnComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtColumnComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTemplatecolumnComponent_1;
 class templatecolumnMetaData {
 }
 templatecolumnMetaData.XTYPE = 'templatecolumn';
 templatecolumnMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'align',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -33949,6 +38214,7 @@ templatecolumnMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -33978,9 +38244,7 @@ templatecolumnMetaData.PROPERTIES = [
     'draggable',
     'editable',
     'editor',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
+    'editorDefaults',
     'exportRenderer',
     'exportStyle',
     'exportSummaryRenderer',
@@ -34048,7 +38312,6 @@ templatecolumnMetaData.PROPERTIES = [
     'scope',
     'scratchCell',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -34065,7 +38328,6 @@ templatecolumnMetaData.PROPERTIES = [
     'summaryDataIndex',
     'summaryFormatter',
     'summaryRenderer',
-    'summaryType',
     'tabIndex',
     'text',
     'toFrontOnShow',
@@ -34226,7 +38488,7 @@ templatecolumnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTemplatecolumnComponent = ExtTemplatecolumnComponent_1 = class ExtTemplatecolumnComponent extends base {
+let ExtTemplatecolumnComponent = ExtTemplatecolumnComponent_1 = class ExtTemplatecolumnComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, templatecolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -34234,31 +38496,48 @@ let ExtTemplatecolumnComponent = ExtTemplatecolumnComponent_1 = class ExtTemplat
     ngOnInit() {
         this.baseOnInit(templatecolumnMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(templatecolumnMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTemplatecolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTemplatecolumnComponent = ExtTemplatecolumnComponent_1 = __decorate([
     Component({
-        selector: 'templatecolumn',
+        selector: 'ext-templatecolumn',
         inputs: templatecolumnMetaData.PROPERTIES,
         outputs: templatecolumnMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTemplatecolumnComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTemplatecolumnComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTemplatecolumnComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtDatecolumnComponent_1;
 class datecolumnMetaData {
 }
 datecolumnMetaData.XTYPE = 'datecolumn';
 datecolumnMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'align',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -34269,6 +38548,7 @@ datecolumnMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -34298,9 +38578,7 @@ datecolumnMetaData.PROPERTIES = [
     'draggable',
     'editable',
     'editor',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
+    'editorDefaults',
     'exportRenderer',
     'exportStyle',
     'exportSummaryRenderer',
@@ -34369,7 +38647,6 @@ datecolumnMetaData.PROPERTIES = [
     'scope',
     'scratchCell',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -34386,7 +38663,6 @@ datecolumnMetaData.PROPERTIES = [
     'summaryDataIndex',
     'summaryFormatter',
     'summaryRenderer',
-    'summaryType',
     'tabIndex',
     'text',
     'toFrontOnShow',
@@ -34547,7 +38823,7 @@ datecolumnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtDatecolumnComponent = ExtDatecolumnComponent_1 = class ExtDatecolumnComponent extends base {
+let ExtDatecolumnComponent = ExtDatecolumnComponent_1 = class ExtDatecolumnComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, datecolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -34555,31 +38831,48 @@ let ExtDatecolumnComponent = ExtDatecolumnComponent_1 = class ExtDatecolumnCompo
     ngOnInit() {
         this.baseOnInit(datecolumnMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(datecolumnMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDatecolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDatecolumnComponent = ExtDatecolumnComponent_1 = __decorate([
     Component({
-        selector: 'datecolumn',
+        selector: 'ext-datecolumn',
         inputs: datecolumnMetaData.PROPERTIES,
         outputs: datecolumnMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtDatecolumnComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtDatecolumnComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtDatecolumnComponent);
 
-var ExtNumbercolumnComponent_1;
-class numbercolumnMetaData {
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
+var ExtDragcolumnComponent_1;
+class dragcolumnMetaData {
 }
-numbercolumnMetaData.XTYPE = 'numbercolumn';
-numbercolumnMetaData.PROPERTIES = [
+dragcolumnMetaData.XTYPE = 'dragcolumn';
+dragcolumnMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'align',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -34590,6 +38883,7 @@ numbercolumnMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -34619,9 +38913,341 @@ numbercolumnMetaData.PROPERTIES = [
     'draggable',
     'editable',
     'editor',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
+    'editorDefaults',
+    'exportRenderer',
+    'exportStyle',
+    'exportSummaryRenderer',
+    'filter',
+    'flex',
+    'floated',
+    'focusableContainer',
+    'focusCls',
+    'formatter',
+    'fullscreen',
+    'groupable',
+    'grouper',
+    'groupHeaderTpl',
+    'height',
+    'hidden',
+    'hideable',
+    'hideAnimation',
+    'hideMode',
+    'hideOnMaskTap',
+    'hideShowMenuItem',
+    'html',
+    'id',
+    'ignore',
+    'ignoreExport',
+    'inactiveChildTabIndex',
+    'innerCls',
+    'instanceCls',
+    'itemId',
+    'items',
+    'keyMap',
+    'keyMapEnabled',
+    'keyMapTarget',
+    'layout',
+    'left',
+    'listeners',
+    'locked',
+    'manageBorders',
+    'margin',
+    'masked',
+    'maxHeight',
+    'maxWidth',
+    'menu',
+    'menuDisabled',
+    'minHeight',
+    'minWidth',
+    'modal',
+    'modelValidation',
+    'name',
+    'nameable',
+    'nameHolder',
+    'padding',
+    'plugins',
+    'publishes',
+    'record',
+    'reference',
+    'referenceHolder',
+    'relative',
+    'renderer',
+    'renderTo',
+    'reserveScrollbar',
+    'resetFocusPosition',
+    'resizable',
+    'right',
+    'ripple',
+    'scope',
+    'scratchCell',
+    'scrollable',
+    'session',
+    'shadow',
+    'shareableName',
+    'shim',
+    'showAnimation',
+    'sortable',
+    'sorter',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
+    'style',
+    'summary',
+    'summaryCell',
+    'summaryDataIndex',
+    'summaryFormatter',
+    'summaryRenderer',
+    'tabIndex',
+    'text',
+    'toFrontOnShow',
+    'toolDefaults',
+    'tools',
+    'tooltip',
+    'top',
+    'touchAction',
+    'tpl',
+    'tplWriteMode',
+    'translatable',
+    'twoWayBindable',
+    'ui',
+    'userCls',
+    'userSelectable',
+    'verticalOverflow',
+    'viewModel',
+    'weight',
+    'weighted',
+    'width',
+    'x',
+    'xtype',
+    'y',
+    'zIndex',
+    'platformConfig',
+    'responsiveConfig',
+    'align',
+    'fitToParent',
+    'config'
+];
+dragcolumnMetaData.EVENTS = [
+    { name: 'activate', parameters: 'newActiveItem,dragcolumn,oldActiveItem' },
+    { name: 'activeItemchange', parameters: 'sender,value,oldValue' },
+    { name: 'add', parameters: 'dragcolumn,item,index' },
+    { name: 'added', parameters: 'sender,container,index' },
+    { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehide', parameters: 'sender' },
+    { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeorientationchange', parameters: '' },
+    { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeshow', parameters: 'sender' },
+    { name: 'beforetofront', parameters: 'dragcolumn' },
+    { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'blur', parameters: 'dragcolumn,event' },
+    { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+    { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+    { name: 'deactivate', parameters: 'oldActiveItem,dragcolumn,newActiveItem' },
+    { name: 'destroy', parameters: '' },
+    { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+    { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+    { name: 'erased', parameters: 'sender' },
+    { name: 'floatingchange', parameters: 'sender,positioned' },
+    { name: 'focus', parameters: 'dragcolumn,event' },
+    { name: 'focusenter', parameters: 'dragcolumn,event' },
+    { name: 'focusleave', parameters: 'dragcolumn,event' },
+    { name: 'fullscreen', parameters: 'sender' },
+    { name: 'heightchange', parameters: 'sender,value,oldValue' },
+    { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+    { name: 'hide', parameters: 'sender' },
+    { name: 'initialize', parameters: 'sender' },
+    { name: 'leftchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'move', parameters: 'dragcolumn,item,toIndex,fromIndex' },
+    { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+    { name: 'orientationchange', parameters: '' },
+    { name: 'painted', parameters: 'sender,element' },
+    { name: 'positionedchange', parameters: 'sender,positioned' },
+    { name: 'remove', parameters: 'dragcolumn,item,index' },
+    { name: 'removed', parameters: 'sender,container,index' },
+    { name: 'renderedchange', parameters: 'dragcolumn,item,rendered' },
+    { name: 'resize', parameters: 'element,info' },
+    { name: 'rightchange', parameters: 'sender,value,oldValue' },
+    { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+    { name: 'show', parameters: 'sender' },
+    { name: 'tofront', parameters: 'dragcolumn' },
+    { name: 'topchange', parameters: 'sender,value,oldValue' },
+    { name: 'updatedata', parameters: 'sender,newData' },
+    { name: 'widthchange', parameters: 'sender,value,oldValue' },
+    { name: 'ready', parameters: '' }
+];
+dragcolumnMetaData.EVENTNAMES = [
+    'activate',
+    'activeItemchange',
+    'add',
+    'added',
+    'beforeactiveItemchange',
+    'beforebottomchange',
+    'beforecenteredchange',
+    'beforedisabledchange',
+    'beforedockedchange',
+    'beforeheightchange',
+    'beforehiddenchange',
+    'beforehide',
+    'beforeleftchange',
+    'beforemaxHeightchange',
+    'beforemaxWidthchange',
+    'beforeminHeightchange',
+    'beforeminWidthchange',
+    'beforeorientationchange',
+    'beforerightchange',
+    'beforescrollablechange',
+    'beforeshow',
+    'beforetofront',
+    'beforetopchange',
+    'beforewidthchange',
+    'blur',
+    'bottomchange',
+    'centeredchange',
+    'deactivate',
+    'destroy',
+    'disabledchange',
+    'dockedchange',
+    'erased',
+    'floatingchange',
+    'focus',
+    'focusenter',
+    'focusleave',
+    'fullscreen',
+    'heightchange',
+    'hiddenchange',
+    'hide',
+    'initialize',
+    'leftchange',
+    'maxHeightchange',
+    'maxWidthchange',
+    'minHeightchange',
+    'minWidthchange',
+    'move',
+    'moved',
+    'orientationchange',
+    'painted',
+    'positionedchange',
+    'remove',
+    'removed',
+    'renderedchange',
+    'resize',
+    'rightchange',
+    'scrollablechange',
+    'show',
+    'tofront',
+    'topchange',
+    'updatedata',
+    'widthchange',
+    'ready'
+];
+let ExtDragcolumnComponent = ExtDragcolumnComponent_1 = class ExtDragcolumnComponent extends EngBase {
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, dragcolumnMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    ngOnInit() {
+        this.baseOnInit(dragcolumnMetaData);
+    }
+    ngAfterViewInit() {
+        this.baseAfterViewInit(dragcolumnMetaData);
+    }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
+};
+ExtDragcolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
+ExtDragcolumnComponent = ExtDragcolumnComponent_1 = __decorate([
+    Component({
+        selector: 'ext-dragcolumn',
+        inputs: dragcolumnMetaData.PROPERTIES,
+        outputs: dragcolumnMetaData.EVENTNAMES,
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtDragcolumnComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, EngBase])
+], ExtDragcolumnComponent);
+
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
+var ExtNumbercolumnComponent_1;
+class numbercolumnMetaData {
+}
+numbercolumnMetaData.XTYPE = 'numbercolumn';
+numbercolumnMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'activeChildTabIndex',
+    'activeItem',
+    'align',
+    'alignSelf',
+    'allowFocusingDisabledChildren',
+    'alwaysOnTop',
+    'ariaAttributes',
+    'ariaDescribedBy',
+    'ariaLabel',
+    'ariaLabelledBy',
+    'autoDestroy',
+    'autoSize',
+    'axisLock',
+    'bind',
+    'bodyCls',
+    'border',
+    'bottom',
+    'cardSwitchAnimation',
+    'cell',
+    'centered',
+    'cls',
+    'columns',
+    'computedWidth',
+    'constrainAlign',
+    'contentEl',
+    'control',
+    'controller',
+    'data',
+    'dataIndex',
+    'defaultColumnUI',
+    'defaultEditor',
+    'defaultFocus',
+    'defaultListenerScope',
+    'defaults',
+    'defaultToolWeights',
+    'defaultType',
+    'defaultWidth',
+    'depends',
+    'disabled',
+    'displayed',
+    'docked',
+    'draggable',
+    'editable',
+    'editor',
+    'editorDefaults',
     'exportRenderer',
     'exportStyle',
     'exportSummaryRenderer',
@@ -34690,7 +39316,6 @@ numbercolumnMetaData.PROPERTIES = [
     'scope',
     'scratchCell',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -34707,7 +39332,6 @@ numbercolumnMetaData.PROPERTIES = [
     'summaryDataIndex',
     'summaryFormatter',
     'summaryRenderer',
-    'summaryType',
     'tabIndex',
     'text',
     'toFrontOnShow',
@@ -34868,7 +39492,7 @@ numbercolumnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtNumbercolumnComponent = ExtNumbercolumnComponent_1 = class ExtNumbercolumnComponent extends base {
+let ExtNumbercolumnComponent = ExtNumbercolumnComponent_1 = class ExtNumbercolumnComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, numbercolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -34876,31 +39500,48 @@ let ExtNumbercolumnComponent = ExtNumbercolumnComponent_1 = class ExtNumbercolum
     ngOnInit() {
         this.baseOnInit(numbercolumnMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(numbercolumnMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtNumbercolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtNumbercolumnComponent = ExtNumbercolumnComponent_1 = __decorate([
     Component({
-        selector: 'numbercolumn',
+        selector: 'ext-numbercolumn',
         inputs: numbercolumnMetaData.PROPERTIES,
         outputs: numbercolumnMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtNumbercolumnComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtNumbercolumnComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtNumbercolumnComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtRownumbererComponent_1;
 class rownumbererMetaData {
 }
 rownumbererMetaData.XTYPE = 'rownumberer';
 rownumbererMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'align',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -34911,6 +39552,7 @@ rownumbererMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -34940,9 +39582,7 @@ rownumbererMetaData.PROPERTIES = [
     'draggable',
     'editable',
     'editor',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
+    'editorDefaults',
     'exportRenderer',
     'exportStyle',
     'exportSummaryRenderer',
@@ -35011,7 +39651,6 @@ rownumbererMetaData.PROPERTIES = [
     'scope',
     'scratchCell',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -35028,7 +39667,6 @@ rownumbererMetaData.PROPERTIES = [
     'summaryDataIndex',
     'summaryFormatter',
     'summaryRenderer',
-    'summaryType',
     'tabIndex',
     'text',
     'toFrontOnShow',
@@ -35189,7 +39827,7 @@ rownumbererMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtRownumbererComponent = ExtRownumbererComponent_1 = class ExtRownumbererComponent extends base {
+let ExtRownumbererComponent = ExtRownumbererComponent_1 = class ExtRownumbererComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, rownumbererMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -35197,31 +39835,48 @@ let ExtRownumbererComponent = ExtRownumbererComponent_1 = class ExtRownumbererCo
     ngOnInit() {
         this.baseOnInit(rownumbererMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(rownumbererMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRownumbererComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRownumbererComponent = ExtRownumbererComponent_1 = __decorate([
     Component({
-        selector: 'rownumberer',
+        selector: 'ext-rownumberer',
         inputs: rownumbererMetaData.PROPERTIES,
         outputs: rownumbererMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtRownumbererComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtRownumbererComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtRownumbererComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSelectioncolumnComponent_1;
 class selectioncolumnMetaData {
 }
 selectioncolumnMetaData.XTYPE = 'selectioncolumn';
 selectioncolumnMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'align',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -35232,6 +39887,7 @@ selectioncolumnMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -35261,9 +39917,7 @@ selectioncolumnMetaData.PROPERTIES = [
     'draggable',
     'editable',
     'editor',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
+    'editorDefaults',
     'exportRenderer',
     'exportStyle',
     'exportSummaryRenderer',
@@ -35333,7 +39987,6 @@ selectioncolumnMetaData.PROPERTIES = [
     'scope',
     'scratchCell',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -35351,7 +40004,6 @@ selectioncolumnMetaData.PROPERTIES = [
     'summaryDataIndex',
     'summaryFormatter',
     'summaryRenderer',
-    'summaryType',
     'tabIndex',
     'text',
     'toFrontOnShow',
@@ -35516,7 +40168,7 @@ selectioncolumnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSelectioncolumnComponent = ExtSelectioncolumnComponent_1 = class ExtSelectioncolumnComponent extends base {
+let ExtSelectioncolumnComponent = ExtSelectioncolumnComponent_1 = class ExtSelectioncolumnComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, selectioncolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -35524,31 +40176,48 @@ let ExtSelectioncolumnComponent = ExtSelectioncolumnComponent_1 = class ExtSelec
     ngOnInit() {
         this.baseOnInit(selectioncolumnMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(selectioncolumnMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSelectioncolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSelectioncolumnComponent = ExtSelectioncolumnComponent_1 = __decorate([
     Component({
-        selector: 'selectioncolumn',
+        selector: 'ext-selectioncolumn',
         inputs: selectioncolumnMetaData.PROPERTIES,
         outputs: selectioncolumnMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSelectioncolumnComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSelectioncolumnComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSelectioncolumnComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTextcolumnComponent_1;
 class textcolumnMetaData {
 }
 textcolumnMetaData.XTYPE = 'textcolumn';
 textcolumnMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'align',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -35559,6 +40228,7 @@ textcolumnMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -35588,9 +40258,7 @@ textcolumnMetaData.PROPERTIES = [
     'draggable',
     'editable',
     'editor',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
+    'editorDefaults',
     'exportRenderer',
     'exportStyle',
     'exportSummaryRenderer',
@@ -35658,7 +40326,6 @@ textcolumnMetaData.PROPERTIES = [
     'scope',
     'scratchCell',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -35675,7 +40342,6 @@ textcolumnMetaData.PROPERTIES = [
     'summaryDataIndex',
     'summaryFormatter',
     'summaryRenderer',
-    'summaryType',
     'tabIndex',
     'text',
     'toFrontOnShow',
@@ -35836,7 +40502,7 @@ textcolumnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTextcolumnComponent = ExtTextcolumnComponent_1 = class ExtTextcolumnComponent extends base {
+let ExtTextcolumnComponent = ExtTextcolumnComponent_1 = class ExtTextcolumnComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, textcolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -35844,31 +40510,48 @@ let ExtTextcolumnComponent = ExtTextcolumnComponent_1 = class ExtTextcolumnCompo
     ngOnInit() {
         this.baseOnInit(textcolumnMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(textcolumnMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTextcolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTextcolumnComponent = ExtTextcolumnComponent_1 = __decorate([
     Component({
-        selector: 'textcolumn',
+        selector: 'ext-textcolumn',
         inputs: textcolumnMetaData.PROPERTIES,
         outputs: textcolumnMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTextcolumnComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTextcolumnComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTextcolumnComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTreecolumnComponent_1;
 class treecolumnMetaData {
 }
 treecolumnMetaData.XTYPE = 'treecolumn';
 treecolumnMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'align',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -35879,6 +40562,7 @@ treecolumnMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -35908,9 +40592,7 @@ treecolumnMetaData.PROPERTIES = [
     'draggable',
     'editable',
     'editor',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
+    'editorDefaults',
     'exportRenderer',
     'exportStyle',
     'exportSummaryRenderer',
@@ -35978,7 +40660,6 @@ treecolumnMetaData.PROPERTIES = [
     'scope',
     'scratchCell',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -35995,7 +40676,6 @@ treecolumnMetaData.PROPERTIES = [
     'summaryDataIndex',
     'summaryFormatter',
     'summaryRenderer',
-    'summaryType',
     'tabIndex',
     'text',
     'toFrontOnShow',
@@ -36156,7 +40836,7 @@ treecolumnMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTreecolumnComponent = ExtTreecolumnComponent_1 = class ExtTreecolumnComponent extends base {
+let ExtTreecolumnComponent = ExtTreecolumnComponent_1 = class ExtTreecolumnComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, treecolumnMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -36164,30 +40844,47 @@ let ExtTreecolumnComponent = ExtTreecolumnComponent_1 = class ExtTreecolumnCompo
     ngOnInit() {
         this.baseOnInit(treecolumnMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(treecolumnMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTreecolumnComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTreecolumnComponent = ExtTreecolumnComponent_1 = __decorate([
     Component({
-        selector: 'treecolumn',
+        selector: 'ext-treecolumn',
         inputs: treecolumnMetaData.PROPERTIES,
         outputs: treecolumnMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTreecolumnComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTreecolumnComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTreecolumnComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtGridComponent_1;
 class gridMetaData {
 }
 gridMetaData.XTYPE = 'grid';
 gridMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -36199,12 +40896,15 @@ gridMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'bufferSize',
     'cardSwitchAnimation',
     'centered',
     'cls',
+    'collapseDefaults',
+    'collapsible',
     'columnLines',
     'columnMenu',
     'columnResize',
@@ -36232,10 +40932,7 @@ gridMetaData.PROPERTIES = [
     'emptyText',
     'emptyTextDefaults',
     'emptyTextProperty',
-    'enableTextSelection',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
+    'enableColumnMove',
     'flex',
     'floated',
     'focusableContainer',
@@ -36244,6 +40941,8 @@ gridMetaData.PROPERTIES = [
     'grouped',
     'groupFooter',
     'groupHeader',
+    'grouping',
+    'groupPlaceholder',
     'height',
     'hidden',
     'hideAnimation',
@@ -36327,7 +41026,6 @@ gridMetaData.PROPERTIES = [
     'scrollToTopOnRefresh',
     'selectable',
     'selection',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -36357,7 +41055,6 @@ gridMetaData.PROPERTIES = [
     'ui',
     'userCls',
     'userSelectable',
-    'useSimpleItems',
     'variableHeights',
     'verticalOverflow',
     'viewModel',
@@ -36386,8 +41083,12 @@ gridMetaData.EVENTS = [
     { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforecomplete', parameters: 'editor,value,startValue,The' },
     { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeedit', parameters: 'sender,location' },
+    { name: 'beforegroupcollapse', parameters: 'grid,group' },
+    { name: 'beforegroupexpand', parameters: 'grid,group' },
     { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforehide', parameters: 'sender' },
@@ -36401,12 +41102,15 @@ gridMetaData.EVENTS = [
     { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforeselectionextend', parameters: 'grid,An,extension' },
     { name: 'beforeshow', parameters: 'sender' },
+    { name: 'beforestartedit', parameters: 'editor,boundEl,value,The' },
     { name: 'beforestorechange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforetofront', parameters: 'grid' },
     { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'blur', parameters: 'grid,event' },
     { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+    { name: 'canceledit', parameters: 'editor,value,startValue' },
+    { name: 'canceledit', parameters: 'sender,location' },
     { name: 'cellselection', parameters: 'grid,selection' },
     { name: 'centeredchange', parameters: 'sender,value,oldValue' },
     { name: 'childdoubletap', parameters: 'grid,location' },
@@ -36429,18 +41133,22 @@ gridMetaData.EVENTS = [
     { name: 'columnselection', parameters: 'grid,selection' },
     { name: 'columnshow', parameters: 'grid,column' },
     { name: 'columnsort', parameters: 'grid,column,direction' },
+    { name: 'complete', parameters: 'editor,value,startValue,The' },
     { name: 'deactivate', parameters: 'oldActiveItem,grid,newActiveItem' },
     { name: 'deselect', parameters: 'grid,records' },
     { name: 'destroy', parameters: '' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'disclose', parameters: 'list,record,target,index,event' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+    { name: 'edit', parameters: 'sender,location' },
     { name: 'erased', parameters: 'sender' },
     { name: 'floatingchange', parameters: 'sender,positioned' },
     { name: 'focus', parameters: 'grid,event' },
     { name: 'focusenter', parameters: 'grid,event' },
     { name: 'focusleave', parameters: 'grid,event' },
     { name: 'fullscreen', parameters: 'sender' },
+    { name: 'groupcollapse', parameters: 'grid,group' },
+    { name: 'groupexpand', parameters: 'grid,group' },
     { name: 'heightchange', parameters: 'sender,value,oldValue' },
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
@@ -36479,10 +41187,13 @@ gridMetaData.EVENTS = [
     { name: 'select', parameters: 'grid,selected' },
     { name: 'selectionextenderdrag', parameters: 'grid,An,extension' },
     { name: 'show', parameters: 'sender' },
+    { name: 'specialkey', parameters: 'editor,field,event' },
+    { name: 'startedit', parameters: 'editor,boundEl,value,The' },
     { name: 'storechange', parameters: 'sender,value,oldValue' },
     { name: 'tofront', parameters: 'grid' },
     { name: 'topchange', parameters: 'sender,value,oldValue' },
     { name: 'updatedata', parameters: 'sender,newData' },
+    { name: 'validateedit', parameters: 'sender,location' },
     { name: 'widthchange', parameters: 'sender,value,oldValue' },
     { name: 'ready', parameters: '' }
 ];
@@ -36494,8 +41205,12 @@ gridMetaData.EVENTNAMES = [
     'beforeactiveItemchange',
     'beforebottomchange',
     'beforecenteredchange',
+    'beforecomplete',
     'beforedisabledchange',
     'beforedockedchange',
+    'beforeedit',
+    'beforegroupcollapse',
+    'beforegroupexpand',
     'beforeheightchange',
     'beforehiddenchange',
     'beforehide',
@@ -36509,12 +41224,15 @@ gridMetaData.EVENTNAMES = [
     'beforescrollablechange',
     'beforeselectionextend',
     'beforeshow',
+    'beforestartedit',
     'beforestorechange',
     'beforetofront',
     'beforetopchange',
     'beforewidthchange',
     'blur',
     'bottomchange',
+    'canceledit',
+    'canceledit',
     'cellselection',
     'centeredchange',
     'childdoubletap',
@@ -36537,18 +41255,22 @@ gridMetaData.EVENTNAMES = [
     'columnselection',
     'columnshow',
     'columnsort',
+    'complete',
     'deactivate',
     'deselect',
     'destroy',
     'disabledchange',
     'disclose',
     'dockedchange',
+    'edit',
     'erased',
     'floatingchange',
     'focus',
     'focusenter',
     'focusleave',
     'fullscreen',
+    'groupcollapse',
+    'groupexpand',
     'heightchange',
     'hiddenchange',
     'hide',
@@ -36587,14 +41309,17 @@ gridMetaData.EVENTNAMES = [
     'select',
     'selectionextenderdrag',
     'show',
+    'specialkey',
+    'startedit',
     'storechange',
     'tofront',
     'topchange',
     'updatedata',
+    'validateedit',
     'widthchange',
     'ready'
 ];
-let ExtGridComponent = ExtGridComponent_1 = class ExtGridComponent extends base {
+let ExtGridComponent = ExtGridComponent_1 = class ExtGridComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -36602,30 +41327,47 @@ let ExtGridComponent = ExtGridComponent_1 = class ExtGridComponent extends base 
     ngOnInit() {
         this.baseOnInit(gridMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(gridMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridComponent = ExtGridComponent_1 = __decorate([
     Component({
-        selector: 'grid',
+        selector: 'ext-grid',
         inputs: gridMetaData.PROPERTIES,
         outputs: gridMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtGridComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtGridComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtHeadercontainerComponent_1;
 class headercontainerMetaData {
 }
 headercontainerMetaData.XTYPE = 'headercontainer';
 headercontainerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -36636,6 +41378,7 @@ headercontainerMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -36656,9 +41399,6 @@ headercontainerMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -36707,7 +41447,6 @@ headercontainerMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -36875,7 +41614,7 @@ headercontainerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtHeadercontainerComponent = ExtHeadercontainerComponent_1 = class ExtHeadercontainerComponent extends base {
+let ExtHeadercontainerComponent = ExtHeadercontainerComponent_1 = class ExtHeadercontainerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, headercontainerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -36883,32 +41622,51 @@ let ExtHeadercontainerComponent = ExtHeadercontainerComponent_1 = class ExtHeade
     ngOnInit() {
         this.baseOnInit(headercontainerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(headercontainerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtHeadercontainerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtHeadercontainerComponent = ExtHeadercontainerComponent_1 = __decorate([
     Component({
-        selector: 'headercontainer',
+        selector: 'ext-headercontainer',
         inputs: headercontainerMetaData.PROPERTIES,
         outputs: headercontainerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtHeadercontainerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtHeadercontainerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtHeadercontainerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtLockedgridComponent_1;
 class lockedgridMetaData {
 }
 lockedgridMetaData.XTYPE = 'lockedgrid';
 lockedgridMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
+    'anchor',
+    'anchorPosition',
     'ariaAttributes',
     'ariaDescribedBy',
     'ariaLabel',
@@ -36916,12 +41674,25 @@ lockedgridMetaData.PROPERTIES = [
     'autoDestroy',
     'autoSize',
     'axisLock',
+    'bbar',
     'bind',
+    'bodyBorder',
+    'bodyCls',
+    'bodyPadding',
+    'bodyStyle',
     'border',
     'bottom',
+    'buttonAlign',
+    'buttons',
+    'buttonToolbar',
     'cardSwitchAnimation',
     'centered',
+    'closable',
+    'closeAction',
+    'closeToolText',
     'cls',
+    'collapsed',
+    'collapsible',
     'columnMenu',
     'columns',
     'constrainAlign',
@@ -36933,20 +41704,22 @@ lockedgridMetaData.PROPERTIES = [
     'defaultListenerScope',
     'defaultLockedRegion',
     'defaults',
+    'defaultToolWeights',
     'defaultType',
     'disabled',
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
+    'enableColumnMove',
     'flex',
     'floated',
     'focusableContainer',
     'focusCls',
     'fullscreen',
     'gridDefaults',
+    'grouped',
+    'header',
+    'headerPosition',
     'height',
     'hidden',
     'hideAnimation',
@@ -36954,6 +41727,9 @@ lockedgridMetaData.PROPERTIES = [
     'hideMode',
     'hideOnMaskTap',
     'html',
+    'icon',
+    'iconAlign',
+    'iconCls',
     'id',
     'inactiveChildTabIndex',
     'innerCls',
@@ -36965,6 +41741,7 @@ lockedgridMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'layout',
+    'lbar',
     'left',
     'leftGridDefaults',
     'listeners',
@@ -36973,6 +41750,7 @@ lockedgridMetaData.PROPERTIES = [
     'masked',
     'maxHeight',
     'maxWidth',
+    'minButtonWidth',
     'minHeight',
     'minWidth',
     'modal',
@@ -36983,6 +41761,7 @@ lockedgridMetaData.PROPERTIES = [
     'padding',
     'plugins',
     'publishes',
+    'rbar',
     'record',
     'reference',
     'referenceHolder',
@@ -36990,23 +41769,30 @@ lockedgridMetaData.PROPERTIES = [
     'relative',
     'renderTo',
     'resetFocusPosition',
+    'resizable',
     'right',
     'rightGridDefaults',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
     'shim',
     'showAnimation',
+    'standardButtons',
     'stateful',
     'statefulDefaults',
     'stateId',
     'store',
     'style',
     'tabIndex',
+    'tbar',
+    'title',
+    'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
+    'toolDefaults',
+    'tools',
     'tooltip',
     'top',
     'touchAction',
@@ -37040,8 +41826,10 @@ lockedgridMetaData.EVENTS = [
     { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforecollapse', parameters: 'lockedgrid' },
     { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeexpand', parameters: 'lockedgrid' },
     { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforehide', parameters: 'sender' },
@@ -37051,6 +41839,7 @@ lockedgridMetaData.EVENTS = [
     { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforeorientationchange', parameters: '' },
+    { name: 'beforeresizedragstart', parameters: 'lockedgrid,context' },
     { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforeshow', parameters: 'sender' },
@@ -37060,11 +41849,15 @@ lockedgridMetaData.EVENTS = [
     { name: 'blur', parameters: 'lockedgrid,event' },
     { name: 'bottomchange', parameters: 'sender,value,oldValue' },
     { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+    { name: 'collapse', parameters: 'lockedgrid' },
     { name: 'deactivate', parameters: 'oldActiveItem,lockedgrid,newActiveItem' },
     { name: 'destroy', parameters: '' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+    { name: 'drawerhide', parameters: 'lockedgrid' },
+    { name: 'drawershow', parameters: 'lockedgrid' },
     { name: 'erased', parameters: 'sender' },
+    { name: 'expand', parameters: 'lockedgrid' },
     { name: 'floatingchange', parameters: 'sender,positioned' },
     { name: 'focus', parameters: 'lockedgrid,event' },
     { name: 'focusenter', parameters: 'lockedgrid,event' },
@@ -37088,6 +41881,10 @@ lockedgridMetaData.EVENTS = [
     { name: 'removed', parameters: 'sender,container,index' },
     { name: 'renderedchange', parameters: 'lockedgrid,item,rendered' },
     { name: 'resize', parameters: 'element,info' },
+    { name: 'resizedrag', parameters: 'lockedgrid,context' },
+    { name: 'resizedragcancel', parameters: 'lockedgrid,context' },
+    { name: 'resizedragend', parameters: 'lockedgrid,context' },
+    { name: 'resizedragstart', parameters: 'lockedgrid,context' },
     { name: 'rightchange', parameters: 'sender,value,oldValue' },
     { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
     { name: 'show', parameters: 'sender' },
@@ -37105,8 +41902,10 @@ lockedgridMetaData.EVENTNAMES = [
     'beforeactiveItemchange',
     'beforebottomchange',
     'beforecenteredchange',
+    'beforecollapse',
     'beforedisabledchange',
     'beforedockedchange',
+    'beforeexpand',
     'beforeheightchange',
     'beforehiddenchange',
     'beforehide',
@@ -37116,6 +41915,7 @@ lockedgridMetaData.EVENTNAMES = [
     'beforeminHeightchange',
     'beforeminWidthchange',
     'beforeorientationchange',
+    'beforeresizedragstart',
     'beforerightchange',
     'beforescrollablechange',
     'beforeshow',
@@ -37125,11 +41925,15 @@ lockedgridMetaData.EVENTNAMES = [
     'blur',
     'bottomchange',
     'centeredchange',
+    'collapse',
     'deactivate',
     'destroy',
     'disabledchange',
     'dockedchange',
+    'drawerhide',
+    'drawershow',
     'erased',
+    'expand',
     'floatingchange',
     'focus',
     'focusenter',
@@ -37153,6 +41957,10 @@ lockedgridMetaData.EVENTNAMES = [
     'removed',
     'renderedchange',
     'resize',
+    'resizedrag',
+    'resizedragcancel',
+    'resizedragend',
+    'resizedragstart',
     'rightchange',
     'scrollablechange',
     'show',
@@ -37162,7 +41970,7 @@ lockedgridMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtLockedgridComponent = ExtLockedgridComponent_1 = class ExtLockedgridComponent extends base {
+let ExtLockedgridComponent = ExtLockedgridComponent_1 = class ExtLockedgridComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, lockedgridMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -37170,30 +41978,47 @@ let ExtLockedgridComponent = ExtLockedgridComponent_1 = class ExtLockedgridCompo
     ngOnInit() {
         this.baseOnInit(lockedgridMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(lockedgridMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtLockedgridComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtLockedgridComponent = ExtLockedgridComponent_1 = __decorate([
     Component({
-        selector: 'lockedgrid',
+        selector: 'ext-lockedgrid',
         inputs: lockedgridMetaData.PROPERTIES,
         outputs: lockedgridMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtLockedgridComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtLockedgridComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtLockedgridComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtLockedgridregionComponent_1;
 class lockedgridregionMetaData {
 }
 lockedgridregionMetaData.XTYPE = 'lockedgridregion';
 lockedgridregionMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -37208,6 +42033,7 @@ lockedgridregionMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -37237,9 +42063,6 @@ lockedgridregionMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -37276,7 +42099,7 @@ lockedgridregionMetaData.PROPERTIES = [
     'masked',
     'maxHeight',
     'maxWidth',
-    'menuLabel',
+    'menuItem',
     'minButtonWidth',
     'minHeight',
     'minWidth',
@@ -37300,7 +42123,6 @@ lockedgridregionMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -37315,6 +42137,7 @@ lockedgridregionMetaData.PROPERTIES = [
     'tbar',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -37494,7 +42317,7 @@ lockedgridregionMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtLockedgridregionComponent = ExtLockedgridregionComponent_1 = class ExtLockedgridregionComponent extends base {
+let ExtLockedgridregionComponent = ExtLockedgridregionComponent_1 = class ExtLockedgridregionComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, lockedgridregionMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -37502,28 +42325,45 @@ let ExtLockedgridregionComponent = ExtLockedgridregionComponent_1 = class ExtLoc
     ngOnInit() {
         this.baseOnInit(lockedgridregionMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(lockedgridregionMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtLockedgridregionComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtLockedgridregionComponent = ExtLockedgridregionComponent_1 = __decorate([
     Component({
-        selector: 'lockedgridregion',
+        selector: 'ext-lockedgridregion',
         inputs: lockedgridregionMetaData.PROPERTIES,
         outputs: lockedgridregionMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtLockedgridregionComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtLockedgridregionComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtLockedgridregionComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtGridcolumnsmenuComponent_1;
 class gridcolumnsmenuMetaData {
 }
 gridcolumnsmenuMetaData.XTYPE = 'gridcolumnsmenu';
 gridcolumnsmenuMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -37546,9 +42386,6 @@ gridcolumnsmenuMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -37598,7 +42435,6 @@ gridcolumnsmenuMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'scrollable',
-    'selfAlign',
     'separator',
     'session',
     'shadow',
@@ -37750,7 +42586,7 @@ gridcolumnsmenuMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtGridcolumnsmenuComponent = ExtGridcolumnsmenuComponent_1 = class ExtGridcolumnsmenuComponent extends base {
+let ExtGridcolumnsmenuComponent = ExtGridcolumnsmenuComponent_1 = class ExtGridcolumnsmenuComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridcolumnsmenuMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -37758,28 +42594,45 @@ let ExtGridcolumnsmenuComponent = ExtGridcolumnsmenuComponent_1 = class ExtGridc
     ngOnInit() {
         this.baseOnInit(gridcolumnsmenuMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(gridcolumnsmenuMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridcolumnsmenuComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridcolumnsmenuComponent = ExtGridcolumnsmenuComponent_1 = __decorate([
     Component({
-        selector: 'gridcolumnsmenu',
+        selector: 'ext-gridcolumnsmenu',
         inputs: gridcolumnsmenuMetaData.PROPERTIES,
         outputs: gridcolumnsmenuMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridcolumnsmenuComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtGridcolumnsmenuComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtGridcolumnsmenuComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtGridgroupbythismenuitemComponent_1;
 class gridgroupbythismenuitemMetaData {
 }
 gridgroupbythismenuitemMetaData.XTYPE = 'gridgroupbythismenuitem';
 gridgroupbythismenuitemMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -37802,9 +42655,6 @@ gridgroupbythismenuitemMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -37854,7 +42704,6 @@ gridgroupbythismenuitemMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'scrollable',
-    'selfAlign',
     'separator',
     'session',
     'shadow',
@@ -38006,7 +42855,7 @@ gridgroupbythismenuitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtGridgroupbythismenuitemComponent = ExtGridgroupbythismenuitemComponent_1 = class ExtGridgroupbythismenuitemComponent extends base {
+let ExtGridgroupbythismenuitemComponent = ExtGridgroupbythismenuitemComponent_1 = class ExtGridgroupbythismenuitemComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridgroupbythismenuitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -38014,28 +42863,45 @@ let ExtGridgroupbythismenuitemComponent = ExtGridgroupbythismenuitemComponent_1 
     ngOnInit() {
         this.baseOnInit(gridgroupbythismenuitemMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(gridgroupbythismenuitemMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridgroupbythismenuitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridgroupbythismenuitemComponent = ExtGridgroupbythismenuitemComponent_1 = __decorate([
     Component({
-        selector: 'gridgroupbythismenuitem',
+        selector: 'ext-gridgroupbythismenuitem',
         inputs: gridgroupbythismenuitemMetaData.PROPERTIES,
         outputs: gridgroupbythismenuitemMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridgroupbythismenuitemComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtGridgroupbythismenuitemComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtGridgroupbythismenuitemComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtGridshowingroupsmenuitemComponent_1;
 class gridshowingroupsmenuitemMetaData {
 }
 gridshowingroupsmenuitemMetaData.XTYPE = 'gridshowingroupsmenuitem';
 gridshowingroupsmenuitemMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -38061,9 +42927,6 @@ gridshowingroupsmenuitemMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -38113,7 +42976,6 @@ gridshowingroupsmenuitemMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'scrollable',
-    'selfAlign',
     'separator',
     'session',
     'shadow',
@@ -38271,7 +43133,7 @@ gridshowingroupsmenuitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtGridshowingroupsmenuitemComponent = ExtGridshowingroupsmenuitemComponent_1 = class ExtGridshowingroupsmenuitemComponent extends base {
+let ExtGridshowingroupsmenuitemComponent = ExtGridshowingroupsmenuitemComponent_1 = class ExtGridshowingroupsmenuitemComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridshowingroupsmenuitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -38279,28 +43141,45 @@ let ExtGridshowingroupsmenuitemComponent = ExtGridshowingroupsmenuitemComponent_
     ngOnInit() {
         this.baseOnInit(gridshowingroupsmenuitemMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(gridshowingroupsmenuitemMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridshowingroupsmenuitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridshowingroupsmenuitemComponent = ExtGridshowingroupsmenuitemComponent_1 = __decorate([
     Component({
-        selector: 'gridshowingroupsmenuitem',
+        selector: 'ext-gridshowingroupsmenuitem',
         inputs: gridshowingroupsmenuitemMetaData.PROPERTIES,
         outputs: gridshowingroupsmenuitemMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridshowingroupsmenuitemComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtGridshowingroupsmenuitemComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtGridshowingroupsmenuitemComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtGridsortascmenuitemComponent_1;
 class gridsortascmenuitemMetaData {
 }
 gridsortascmenuitemMetaData.XTYPE = 'gridsortascmenuitem';
 gridsortascmenuitemMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'allowUncheck',
     'alwaysOnTop',
     'ariaAttributes',
@@ -38327,9 +43206,6 @@ gridsortascmenuitemMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -38380,7 +43256,6 @@ gridsortascmenuitemMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'scrollable',
-    'selfAlign',
     'separator',
     'session',
     'shadow',
@@ -38538,7 +43413,7 @@ gridsortascmenuitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtGridsortascmenuitemComponent = ExtGridsortascmenuitemComponent_1 = class ExtGridsortascmenuitemComponent extends base {
+let ExtGridsortascmenuitemComponent = ExtGridsortascmenuitemComponent_1 = class ExtGridsortascmenuitemComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridsortascmenuitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -38546,28 +43421,45 @@ let ExtGridsortascmenuitemComponent = ExtGridsortascmenuitemComponent_1 = class 
     ngOnInit() {
         this.baseOnInit(gridsortascmenuitemMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(gridsortascmenuitemMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridsortascmenuitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridsortascmenuitemComponent = ExtGridsortascmenuitemComponent_1 = __decorate([
     Component({
-        selector: 'gridsortascmenuitem',
+        selector: 'ext-gridsortascmenuitem',
         inputs: gridsortascmenuitemMetaData.PROPERTIES,
         outputs: gridsortascmenuitemMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridsortascmenuitemComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtGridsortascmenuitemComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtGridsortascmenuitemComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtGridsortdescmenuitemComponent_1;
 class gridsortdescmenuitemMetaData {
 }
 gridsortdescmenuitemMetaData.XTYPE = 'gridsortdescmenuitem';
 gridsortdescmenuitemMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'allowUncheck',
     'alwaysOnTop',
     'ariaAttributes',
@@ -38594,9 +43486,6 @@ gridsortdescmenuitemMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -38647,7 +43536,6 @@ gridsortdescmenuitemMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'scrollable',
-    'selfAlign',
     'separator',
     'session',
     'shadow',
@@ -38805,7 +43693,7 @@ gridsortdescmenuitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtGridsortdescmenuitemComponent = ExtGridsortdescmenuitemComponent_1 = class ExtGridsortdescmenuitemComponent extends base {
+let ExtGridsortdescmenuitemComponent = ExtGridsortdescmenuitemComponent_1 = class ExtGridsortdescmenuitemComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridsortdescmenuitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -38813,30 +43701,47 @@ let ExtGridsortdescmenuitemComponent = ExtGridsortdescmenuitemComponent_1 = clas
     ngOnInit() {
         this.baseOnInit(gridsortdescmenuitemMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(gridsortdescmenuitemMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridsortdescmenuitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridsortdescmenuitemComponent = ExtGridsortdescmenuitemComponent_1 = __decorate([
     Component({
-        selector: 'gridsortdescmenuitem',
+        selector: 'ext-gridsortdescmenuitem',
         inputs: gridsortdescmenuitemMetaData.PROPERTIES,
         outputs: gridsortdescmenuitemMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridsortdescmenuitemComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtGridsortdescmenuitemComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtGridsortdescmenuitemComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPagingtoolbarComponent_1;
 class pagingtoolbarMetaData {
 }
 pagingtoolbarMetaData.XTYPE = 'pagingtoolbar';
 pagingtoolbarMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -38847,6 +43752,7 @@ pagingtoolbarMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -38866,9 +43772,6 @@ pagingtoolbarMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -38918,7 +43821,6 @@ pagingtoolbarMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -39087,7 +43989,7 @@ pagingtoolbarMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPagingtoolbarComponent = ExtPagingtoolbarComponent_1 = class ExtPagingtoolbarComponent extends base {
+let ExtPagingtoolbarComponent = ExtPagingtoolbarComponent_1 = class ExtPagingtoolbarComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pagingtoolbarMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -39095,28 +43997,45 @@ let ExtPagingtoolbarComponent = ExtPagingtoolbarComponent_1 = class ExtPagingtoo
     ngOnInit() {
         this.baseOnInit(pagingtoolbarMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(pagingtoolbarMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPagingtoolbarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPagingtoolbarComponent = ExtPagingtoolbarComponent_1 = __decorate([
     Component({
-        selector: 'pagingtoolbar',
+        selector: 'ext-pagingtoolbar',
         inputs: pagingtoolbarMetaData.PROPERTIES,
         outputs: pagingtoolbarMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPagingtoolbarComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPagingtoolbarComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPagingtoolbarComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtGridrowComponent_1;
 class gridrowMetaData {
 }
 gridrowMetaData.XTYPE = 'gridrow';
 gridrowMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -39139,9 +44058,6 @@ gridrowMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'expandedField',
     'flex',
     'floated',
@@ -39182,7 +44098,6 @@ gridrowMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -39332,7 +44247,7 @@ gridrowMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtGridrowComponent = ExtGridrowComponent_1 = class ExtGridrowComponent extends base {
+let ExtGridrowComponent = ExtGridrowComponent_1 = class ExtGridrowComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridrowMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -39340,28 +44255,45 @@ let ExtGridrowComponent = ExtGridrowComponent_1 = class ExtGridrowComponent exte
     ngOnInit() {
         this.baseOnInit(gridrowMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(gridrowMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridrowComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridrowComponent = ExtGridrowComponent_1 = __decorate([
     Component({
-        selector: 'gridrow',
+        selector: 'ext-gridrow',
         inputs: gridrowMetaData.PROPERTIES,
         outputs: gridrowMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridrowComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtGridrowComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtGridrowComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtRowbodyComponent_1;
 class rowbodyMetaData {
 }
 rowbodyMetaData.XTYPE = 'rowbody';
 rowbodyMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -39382,9 +44314,6 @@ rowbodyMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -39422,7 +44351,6 @@ rowbodyMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -39571,7 +44499,7 @@ rowbodyMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtRowbodyComponent = ExtRowbodyComponent_1 = class ExtRowbodyComponent extends base {
+let ExtRowbodyComponent = ExtRowbodyComponent_1 = class ExtRowbodyComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, rowbodyMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -39579,28 +44507,1196 @@ let ExtRowbodyComponent = ExtRowbodyComponent_1 = class ExtRowbodyComponent exte
     ngOnInit() {
         this.baseOnInit(rowbodyMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(rowbodyMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRowbodyComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRowbodyComponent = ExtRowbodyComponent_1 = __decorate([
     Component({
-        selector: 'rowbody',
+        selector: 'ext-rowbody',
         inputs: rowbodyMetaData.PROPERTIES,
         outputs: rowbodyMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtRowbodyComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtRowbodyComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtRowbodyComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
+var ExtRoweditorbarComponent_1;
+class roweditorbarMetaData {
+}
+roweditorbarMetaData.XTYPE = 'roweditorbar';
+roweditorbarMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'activeChildTabIndex',
+    'activeItem',
+    'alignSelf',
+    'allowFocusingDisabledChildren',
+    'alwaysOnTop',
+    'anchor',
+    'anchorPosition',
+    'ariaAttributes',
+    'ariaDescribedBy',
+    'ariaLabel',
+    'ariaLabelledBy',
+    'autoDestroy',
+    'autoSize',
+    'axisLock',
+    'bbar',
+    'bind',
+    'bodyBorder',
+    'bodyCls',
+    'bodyPadding',
+    'bodyStyle',
+    'border',
+    'bottom',
+    'buttonAlign',
+    'buttons',
+    'buttonToolbar',
+    'cardSwitchAnimation',
+    'centered',
+    'closable',
+    'closeAction',
+    'closeToolText',
+    'cls',
+    'collapsed',
+    'collapsible',
+    'constrainAlign',
+    'contentEl',
+    'control',
+    'controller',
+    'data',
+    'defaultFocus',
+    'defaultListenerScope',
+    'defaults',
+    'defaultToolWeights',
+    'defaultType',
+    'disabled',
+    'displayed',
+    'docked',
+    'draggable',
+    'flex',
+    'floated',
+    'focusableContainer',
+    'focusCls',
+    'fullscreen',
+    'header',
+    'headerPosition',
+    'height',
+    'hidden',
+    'hideAnimation',
+    'hideMode',
+    'hideOnMaskTap',
+    'html',
+    'icon',
+    'iconAlign',
+    'iconCls',
+    'id',
+    'inactiveChildTabIndex',
+    'innerCls',
+    'instanceCls',
+    'itemId',
+    'items',
+    'keyMap',
+    'keyMapEnabled',
+    'keyMapTarget',
+    'layout',
+    'lbar',
+    'left',
+    'listeners',
+    'manageBorders',
+    'margin',
+    'masked',
+    'maxHeight',
+    'maxWidth',
+    'minButtonWidth',
+    'minHeight',
+    'minWidth',
+    'modal',
+    'modelValidation',
+    'name',
+    'nameable',
+    'nameHolder',
+    'padding',
+    'plugins',
+    'publishes',
+    'rbar',
+    'record',
+    'reference',
+    'referenceHolder',
+    'relative',
+    'renderTo',
+    'resetFocusPosition',
+    'resizable',
+    'right',
+    'ripple',
+    'scrollable',
+    'session',
+    'shadow',
+    'shareableName',
+    'shim',
+    'showAnimation',
+    'standardButtons',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
+    'style',
+    'tabIndex',
+    'tbar',
+    'title',
+    'titleAlign',
+    'titleCollapse',
+    'toFrontOnShow',
+    'toolDefaults',
+    'tools',
+    'tooltip',
+    'top',
+    'touchAction',
+    'tpl',
+    'tplWriteMode',
+    'translatable',
+    'twoWayBindable',
+    'ui',
+    'userCls',
+    'userSelectable',
+    'viewModel',
+    'weight',
+    'weighted',
+    'width',
+    'x',
+    'xtype',
+    'y',
+    'zIndex',
+    'platformConfig',
+    'responsiveConfig',
+    'align',
+    'fitToParent',
+    'config'
+];
+roweditorbarMetaData.EVENTS = [
+    { name: 'activate', parameters: 'newActiveItem,roweditorbar,oldActiveItem' },
+    { name: 'activeItemchange', parameters: 'sender,value,oldValue' },
+    { name: 'add', parameters: 'roweditorbar,item,index' },
+    { name: 'added', parameters: 'sender,container,index' },
+    { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforecollapse', parameters: 'roweditorbar' },
+    { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeexpand', parameters: 'roweditorbar' },
+    { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehide', parameters: 'sender' },
+    { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeorientationchange', parameters: '' },
+    { name: 'beforeresizedragstart', parameters: 'roweditorbar,context' },
+    { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeshow', parameters: 'sender' },
+    { name: 'beforetofront', parameters: 'roweditorbar' },
+    { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'blur', parameters: 'roweditorbar,event' },
+    { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+    { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+    { name: 'collapse', parameters: 'roweditorbar' },
+    { name: 'deactivate', parameters: 'oldActiveItem,roweditorbar,newActiveItem' },
+    { name: 'destroy', parameters: '' },
+    { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+    { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+    { name: 'drawerhide', parameters: 'roweditorbar' },
+    { name: 'drawershow', parameters: 'roweditorbar' },
+    { name: 'erased', parameters: 'sender' },
+    { name: 'expand', parameters: 'roweditorbar' },
+    { name: 'floatingchange', parameters: 'sender,positioned' },
+    { name: 'focus', parameters: 'roweditorbar,event' },
+    { name: 'focusenter', parameters: 'roweditorbar,event' },
+    { name: 'focusleave', parameters: 'roweditorbar,event' },
+    { name: 'fullscreen', parameters: 'sender' },
+    { name: 'heightchange', parameters: 'sender,value,oldValue' },
+    { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+    { name: 'hide', parameters: 'sender' },
+    { name: 'initialize', parameters: 'sender' },
+    { name: 'leftchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'move', parameters: 'roweditorbar,item,toIndex,fromIndex' },
+    { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+    { name: 'orientationchange', parameters: '' },
+    { name: 'painted', parameters: 'sender,element' },
+    { name: 'positionedchange', parameters: 'sender,positioned' },
+    { name: 'remove', parameters: 'roweditorbar,item,index' },
+    { name: 'removed', parameters: 'sender,container,index' },
+    { name: 'renderedchange', parameters: 'roweditorbar,item,rendered' },
+    { name: 'resize', parameters: 'element,info' },
+    { name: 'resizedrag', parameters: 'roweditorbar,context' },
+    { name: 'resizedragcancel', parameters: 'roweditorbar,context' },
+    { name: 'resizedragend', parameters: 'roweditorbar,context' },
+    { name: 'resizedragstart', parameters: 'roweditorbar,context' },
+    { name: 'rightchange', parameters: 'sender,value,oldValue' },
+    { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+    { name: 'show', parameters: 'sender' },
+    { name: 'tofront', parameters: 'roweditorbar' },
+    { name: 'topchange', parameters: 'sender,value,oldValue' },
+    { name: 'updatedata', parameters: 'sender,newData' },
+    { name: 'widthchange', parameters: 'sender,value,oldValue' },
+    { name: 'ready', parameters: '' }
+];
+roweditorbarMetaData.EVENTNAMES = [
+    'activate',
+    'activeItemchange',
+    'add',
+    'added',
+    'beforeactiveItemchange',
+    'beforebottomchange',
+    'beforecenteredchange',
+    'beforecollapse',
+    'beforedisabledchange',
+    'beforedockedchange',
+    'beforeexpand',
+    'beforeheightchange',
+    'beforehiddenchange',
+    'beforehide',
+    'beforeleftchange',
+    'beforemaxHeightchange',
+    'beforemaxWidthchange',
+    'beforeminHeightchange',
+    'beforeminWidthchange',
+    'beforeorientationchange',
+    'beforeresizedragstart',
+    'beforerightchange',
+    'beforescrollablechange',
+    'beforeshow',
+    'beforetofront',
+    'beforetopchange',
+    'beforewidthchange',
+    'blur',
+    'bottomchange',
+    'centeredchange',
+    'collapse',
+    'deactivate',
+    'destroy',
+    'disabledchange',
+    'dockedchange',
+    'drawerhide',
+    'drawershow',
+    'erased',
+    'expand',
+    'floatingchange',
+    'focus',
+    'focusenter',
+    'focusleave',
+    'fullscreen',
+    'heightchange',
+    'hiddenchange',
+    'hide',
+    'initialize',
+    'leftchange',
+    'maxHeightchange',
+    'maxWidthchange',
+    'minHeightchange',
+    'minWidthchange',
+    'move',
+    'moved',
+    'orientationchange',
+    'painted',
+    'positionedchange',
+    'remove',
+    'removed',
+    'renderedchange',
+    'resize',
+    'resizedrag',
+    'resizedragcancel',
+    'resizedragend',
+    'resizedragstart',
+    'rightchange',
+    'scrollablechange',
+    'show',
+    'tofront',
+    'topchange',
+    'updatedata',
+    'widthchange',
+    'ready'
+];
+let ExtRoweditorbarComponent = ExtRoweditorbarComponent_1 = class ExtRoweditorbarComponent extends EngBase {
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, roweditorbarMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    ngOnInit() {
+        this.baseOnInit(roweditorbarMetaData);
+    }
+    ngAfterViewInit() {
+        this.baseAfterViewInit(roweditorbarMetaData);
+    }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
+};
+ExtRoweditorbarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
+ExtRoweditorbarComponent = ExtRoweditorbarComponent_1 = __decorate([
+    Component({
+        selector: 'ext-roweditorbar',
+        inputs: roweditorbarMetaData.PROPERTIES,
+        outputs: roweditorbarMetaData.EVENTNAMES,
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtRoweditorbarComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, EngBase])
+], ExtRoweditorbarComponent);
+
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
+var ExtRoweditorcellComponent_1;
+class roweditorcellMetaData {
+}
+roweditorcellMetaData.XTYPE = 'roweditorcell';
+roweditorcellMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
+    'alwaysOnTop',
+    'ariaAttributes',
+    'ariaDescribedBy',
+    'ariaLabel',
+    'ariaLabelledBy',
+    'axisLock',
+    'bind',
+    'border',
+    'bottom',
+    'centered',
+    'cls',
+    'constrainAlign',
+    'contentEl',
+    'controller',
+    'data',
+    'defaultListenerScope',
+    'disabled',
+    'displayed',
+    'docked',
+    'draggable',
+    'flex',
+    'floated',
+    'focusCls',
+    'fullscreen',
+    'height',
+    'hidden',
+    'hideAnimation',
+    'hideMode',
+    'hideOnMaskTap',
+    'html',
+    'id',
+    'instanceCls',
+    'itemId',
+    'keyMap',
+    'keyMapEnabled',
+    'keyMapTarget',
+    'left',
+    'listeners',
+    'margin',
+    'maxHeight',
+    'maxWidth',
+    'minHeight',
+    'minWidth',
+    'modal',
+    'modelValidation',
+    'name',
+    'nameable',
+    'padding',
+    'plugins',
+    'publishes',
+    'record',
+    'reference',
+    'relative',
+    'renderTo',
+    'right',
+    'ripple',
+    'scrollable',
+    'session',
+    'shadow',
+    'shareableName',
+    'shim',
+    'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
+    'style',
+    'tabIndex',
+    'toFrontOnShow',
+    'tooltip',
+    'top',
+    'touchAction',
+    'tpl',
+    'tplWriteMode',
+    'translatable',
+    'twoWayBindable',
+    'ui',
+    'userCls',
+    'userSelectable',
+    'viewModel',
+    'weight',
+    'width',
+    'x',
+    'xtype',
+    'y',
+    'zIndex',
+    'platformConfig',
+    'responsiveConfig',
+    'align',
+    'fitToParent',
+    'config'
+];
+roweditorcellMetaData.EVENTS = [
+    { name: 'added', parameters: 'sender,container,index' },
+    { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehide', parameters: 'sender' },
+    { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeorientationchange', parameters: '' },
+    { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeshow', parameters: 'sender' },
+    { name: 'beforetofront', parameters: 'roweditorcell' },
+    { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'blur', parameters: 'roweditorcell,event' },
+    { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+    { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+    { name: 'destroy', parameters: '' },
+    { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+    { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+    { name: 'erased', parameters: 'sender' },
+    { name: 'floatingchange', parameters: 'sender,positioned' },
+    { name: 'focus', parameters: 'roweditorcell,event' },
+    { name: 'focusenter', parameters: 'roweditorcell,event' },
+    { name: 'focusleave', parameters: 'roweditorcell,event' },
+    { name: 'fullscreen', parameters: 'sender' },
+    { name: 'heightchange', parameters: 'sender,value,oldValue' },
+    { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+    { name: 'hide', parameters: 'sender' },
+    { name: 'initialize', parameters: 'sender' },
+    { name: 'leftchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+    { name: 'orientationchange', parameters: '' },
+    { name: 'painted', parameters: 'sender,element' },
+    { name: 'positionedchange', parameters: 'sender,positioned' },
+    { name: 'removed', parameters: 'sender,container,index' },
+    { name: 'resize', parameters: 'element,info' },
+    { name: 'rightchange', parameters: 'sender,value,oldValue' },
+    { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+    { name: 'show', parameters: 'sender' },
+    { name: 'tofront', parameters: 'roweditorcell' },
+    { name: 'topchange', parameters: 'sender,value,oldValue' },
+    { name: 'updatedata', parameters: 'sender,newData' },
+    { name: 'widthchange', parameters: 'sender,value,oldValue' },
+    { name: 'ready', parameters: '' }
+];
+roweditorcellMetaData.EVENTNAMES = [
+    'added',
+    'beforebottomchange',
+    'beforecenteredchange',
+    'beforedisabledchange',
+    'beforedockedchange',
+    'beforeheightchange',
+    'beforehiddenchange',
+    'beforehide',
+    'beforeleftchange',
+    'beforemaxHeightchange',
+    'beforemaxWidthchange',
+    'beforeminHeightchange',
+    'beforeminWidthchange',
+    'beforeorientationchange',
+    'beforerightchange',
+    'beforescrollablechange',
+    'beforeshow',
+    'beforetofront',
+    'beforetopchange',
+    'beforewidthchange',
+    'blur',
+    'bottomchange',
+    'centeredchange',
+    'destroy',
+    'disabledchange',
+    'dockedchange',
+    'erased',
+    'floatingchange',
+    'focus',
+    'focusenter',
+    'focusleave',
+    'fullscreen',
+    'heightchange',
+    'hiddenchange',
+    'hide',
+    'initialize',
+    'leftchange',
+    'maxHeightchange',
+    'maxWidthchange',
+    'minHeightchange',
+    'minWidthchange',
+    'moved',
+    'orientationchange',
+    'painted',
+    'positionedchange',
+    'removed',
+    'resize',
+    'rightchange',
+    'scrollablechange',
+    'show',
+    'tofront',
+    'topchange',
+    'updatedata',
+    'widthchange',
+    'ready'
+];
+let ExtRoweditorcellComponent = ExtRoweditorcellComponent_1 = class ExtRoweditorcellComponent extends EngBase {
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, roweditorcellMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    ngOnInit() {
+        this.baseOnInit(roweditorcellMetaData);
+    }
+    ngAfterViewInit() {
+        this.baseAfterViewInit(roweditorcellMetaData);
+    }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
+};
+ExtRoweditorcellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
+ExtRoweditorcellComponent = ExtRoweditorcellComponent_1 = __decorate([
+    Component({
+        selector: 'ext-roweditorcell',
+        inputs: roweditorcellMetaData.PROPERTIES,
+        outputs: roweditorcellMetaData.EVENTNAMES,
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtRoweditorcellComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, EngBase])
+], ExtRoweditorcellComponent);
+
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
+var ExtRoweditorComponent_1;
+class roweditorMetaData {
+}
+roweditorMetaData.XTYPE = 'roweditor';
+roweditorMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'activeChildTabIndex',
+    'activeItem',
+    'alignSelf',
+    'allowFocusingDisabledChildren',
+    'alwaysOnTop',
+    'ariaAttributes',
+    'ariaDescribedBy',
+    'ariaLabel',
+    'ariaLabelledBy',
+    'autoDestroy',
+    'autoSize',
+    'axisLock',
+    'bind',
+    'bodyCls',
+    'border',
+    'bottom',
+    'buttonAlign',
+    'cardSwitchAnimation',
+    'centered',
+    'cls',
+    'constrainAlign',
+    'contentEl',
+    'control',
+    'controller',
+    'data',
+    'dataMap',
+    'defaultFocus',
+    'defaultListenerScope',
+    'defaults',
+    'defaultToolWeights',
+    'defaultType',
+    'disabled',
+    'displayed',
+    'docked',
+    'draggable',
+    'flex',
+    'floated',
+    'focusableContainer',
+    'focusCls',
+    'fullscreen',
+    'height',
+    'hidden',
+    'hideAnimation',
+    'hideMode',
+    'hideOnMaskTap',
+    'html',
+    'id',
+    'inactiveChildTabIndex',
+    'innerCls',
+    'instanceCls',
+    'itemCls',
+    'itemId',
+    'items',
+    'keyMap',
+    'keyMapEnabled',
+    'keyMapTarget',
+    'layout',
+    'left',
+    'listeners',
+    'manageBorders',
+    'margin',
+    'masked',
+    'maxHeight',
+    'maxWidth',
+    'minButtonWidth',
+    'minHeight',
+    'minWidth',
+    'modal',
+    'modelValidation',
+    'name',
+    'nameable',
+    'nameHolder',
+    'owner',
+    'ownerListeners',
+    'padding',
+    'pinned',
+    'plugins',
+    'publishes',
+    'record',
+    'recordIndex',
+    'reference',
+    'referenceHolder',
+    'relative',
+    'renderTo',
+    'resetFocusPosition',
+    'right',
+    'ripple',
+    'scrollable',
+    'session',
+    'shadow',
+    'shareableName',
+    'shim',
+    'showAnimation',
+    'sourceListeners',
+    'standardButtons',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
+    'storeListeners',
+    'style',
+    'tabIndex',
+    'toFrontOnShow',
+    'toolDefaults',
+    'tools',
+    'tooltip',
+    'top',
+    'touchAction',
+    'tpl',
+    'tplWriteMode',
+    'translatable',
+    'twoWayBindable',
+    'ui',
+    'userCls',
+    'userSelectable',
+    'viewModel',
+    'weight',
+    'weighted',
+    'width',
+    'x',
+    'xtype',
+    'y',
+    'zIndex',
+    'platformConfig',
+    'responsiveConfig',
+    'align',
+    'fitToParent',
+    'config'
+];
+roweditorMetaData.EVENTS = [
+    { name: 'activate', parameters: 'newActiveItem,roweditor,oldActiveItem' },
+    { name: 'activeItemchange', parameters: 'sender,value,oldValue' },
+    { name: 'add', parameters: 'roweditor,item,index' },
+    { name: 'added', parameters: 'sender,container,index' },
+    { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehide', parameters: 'sender' },
+    { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeorientationchange', parameters: '' },
+    { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeshow', parameters: 'sender' },
+    { name: 'beforetofront', parameters: 'roweditor' },
+    { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'blur', parameters: 'roweditor,event' },
+    { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+    { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+    { name: 'deactivate', parameters: 'oldActiveItem,roweditor,newActiveItem' },
+    { name: 'destroy', parameters: '' },
+    { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+    { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+    { name: 'erased', parameters: 'sender' },
+    { name: 'floatingchange', parameters: 'sender,positioned' },
+    { name: 'focus', parameters: 'roweditor,event' },
+    { name: 'focusenter', parameters: 'roweditor,event' },
+    { name: 'focusleave', parameters: 'roweditor,event' },
+    { name: 'fullscreen', parameters: 'sender' },
+    { name: 'heightchange', parameters: 'sender,value,oldValue' },
+    { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+    { name: 'hide', parameters: 'sender' },
+    { name: 'initialize', parameters: 'sender' },
+    { name: 'leftchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'move', parameters: 'roweditor,item,toIndex,fromIndex' },
+    { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+    { name: 'orientationchange', parameters: '' },
+    { name: 'painted', parameters: 'sender,element' },
+    { name: 'positionedchange', parameters: 'sender,positioned' },
+    { name: 'remove', parameters: 'roweditor,item,index' },
+    { name: 'removed', parameters: 'sender,container,index' },
+    { name: 'renderedchange', parameters: 'roweditor,item,rendered' },
+    { name: 'resize', parameters: 'element,info' },
+    { name: 'rightchange', parameters: 'sender,value,oldValue' },
+    { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+    { name: 'show', parameters: 'sender' },
+    { name: 'tofront', parameters: 'roweditor' },
+    { name: 'topchange', parameters: 'sender,value,oldValue' },
+    { name: 'updatedata', parameters: 'dataItem,newData' },
+    { name: 'widthchange', parameters: 'sender,value,oldValue' },
+    { name: 'ready', parameters: '' }
+];
+roweditorMetaData.EVENTNAMES = [
+    'activate',
+    'activeItemchange',
+    'add',
+    'added',
+    'beforeactiveItemchange',
+    'beforebottomchange',
+    'beforecenteredchange',
+    'beforedisabledchange',
+    'beforedockedchange',
+    'beforeheightchange',
+    'beforehiddenchange',
+    'beforehide',
+    'beforeleftchange',
+    'beforemaxHeightchange',
+    'beforemaxWidthchange',
+    'beforeminHeightchange',
+    'beforeminWidthchange',
+    'beforeorientationchange',
+    'beforerightchange',
+    'beforescrollablechange',
+    'beforeshow',
+    'beforetofront',
+    'beforetopchange',
+    'beforewidthchange',
+    'blur',
+    'bottomchange',
+    'centeredchange',
+    'deactivate',
+    'destroy',
+    'disabledchange',
+    'dockedchange',
+    'erased',
+    'floatingchange',
+    'focus',
+    'focusenter',
+    'focusleave',
+    'fullscreen',
+    'heightchange',
+    'hiddenchange',
+    'hide',
+    'initialize',
+    'leftchange',
+    'maxHeightchange',
+    'maxWidthchange',
+    'minHeightchange',
+    'minWidthchange',
+    'move',
+    'moved',
+    'orientationchange',
+    'painted',
+    'positionedchange',
+    'remove',
+    'removed',
+    'renderedchange',
+    'resize',
+    'rightchange',
+    'scrollablechange',
+    'show',
+    'tofront',
+    'topchange',
+    'updatedata',
+    'widthchange',
+    'ready'
+];
+let ExtRoweditorComponent = ExtRoweditorComponent_1 = class ExtRoweditorComponent extends EngBase {
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, roweditorMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    ngOnInit() {
+        this.baseOnInit(roweditorMetaData);
+    }
+    ngAfterViewInit() {
+        this.baseAfterViewInit(roweditorMetaData);
+    }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
+};
+ExtRoweditorComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
+ExtRoweditorComponent = ExtRoweditorComponent_1 = __decorate([
+    Component({
+        selector: 'ext-roweditor',
+        inputs: roweditorMetaData.PROPERTIES,
+        outputs: roweditorMetaData.EVENTNAMES,
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtRoweditorComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, EngBase])
+], ExtRoweditorComponent);
+
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
+var ExtRoweditorgapComponent_1;
+class roweditorgapMetaData {
+}
+roweditorgapMetaData.XTYPE = 'roweditorgap';
+roweditorgapMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
+    'alwaysOnTop',
+    'ariaAttributes',
+    'ariaDescribedBy',
+    'ariaLabel',
+    'ariaLabelledBy',
+    'axisLock',
+    'bind',
+    'border',
+    'bottom',
+    'centered',
+    'cls',
+    'constrainAlign',
+    'contentEl',
+    'controller',
+    'data',
+    'defaultListenerScope',
+    'disabled',
+    'displayed',
+    'docked',
+    'draggable',
+    'flex',
+    'floated',
+    'focusCls',
+    'fullscreen',
+    'height',
+    'hidden',
+    'hideAnimation',
+    'hideMode',
+    'hideOnMaskTap',
+    'html',
+    'id',
+    'instanceCls',
+    'itemId',
+    'keyMap',
+    'keyMapEnabled',
+    'keyMapTarget',
+    'left',
+    'listeners',
+    'margin',
+    'maxHeight',
+    'maxWidth',
+    'minHeight',
+    'minWidth',
+    'modal',
+    'modelValidation',
+    'name',
+    'nameable',
+    'padding',
+    'plugins',
+    'publishes',
+    'record',
+    'reference',
+    'relative',
+    'renderTo',
+    'right',
+    'ripple',
+    'scrollable',
+    'session',
+    'shadow',
+    'shareableName',
+    'shim',
+    'showAnimation',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
+    'style',
+    'tabIndex',
+    'toFrontOnShow',
+    'tooltip',
+    'top',
+    'touchAction',
+    'tpl',
+    'tplWriteMode',
+    'translatable',
+    'twoWayBindable',
+    'ui',
+    'userCls',
+    'userSelectable',
+    'viewModel',
+    'weight',
+    'width',
+    'x',
+    'xtype',
+    'y',
+    'zIndex',
+    'platformConfig',
+    'responsiveConfig',
+    'align',
+    'fitToParent',
+    'config'
+];
+roweditorgapMetaData.EVENTS = [
+    { name: 'added', parameters: 'sender,container,index' },
+    { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehide', parameters: 'sender' },
+    { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeorientationchange', parameters: '' },
+    { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeshow', parameters: 'sender' },
+    { name: 'beforetofront', parameters: 'roweditorgap' },
+    { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'blur', parameters: 'roweditorgap,event' },
+    { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+    { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+    { name: 'destroy', parameters: '' },
+    { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+    { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+    { name: 'erased', parameters: 'sender' },
+    { name: 'floatingchange', parameters: 'sender,positioned' },
+    { name: 'focus', parameters: 'roweditorgap,event' },
+    { name: 'focusenter', parameters: 'roweditorgap,event' },
+    { name: 'focusleave', parameters: 'roweditorgap,event' },
+    { name: 'fullscreen', parameters: 'sender' },
+    { name: 'heightchange', parameters: 'sender,value,oldValue' },
+    { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+    { name: 'hide', parameters: 'sender' },
+    { name: 'initialize', parameters: 'sender' },
+    { name: 'leftchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+    { name: 'orientationchange', parameters: '' },
+    { name: 'painted', parameters: 'sender,element' },
+    { name: 'positionedchange', parameters: 'sender,positioned' },
+    { name: 'removed', parameters: 'sender,container,index' },
+    { name: 'resize', parameters: 'element,info' },
+    { name: 'rightchange', parameters: 'sender,value,oldValue' },
+    { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+    { name: 'show', parameters: 'sender' },
+    { name: 'tofront', parameters: 'roweditorgap' },
+    { name: 'topchange', parameters: 'sender,value,oldValue' },
+    { name: 'updatedata', parameters: 'sender,newData' },
+    { name: 'widthchange', parameters: 'sender,value,oldValue' },
+    { name: 'ready', parameters: '' }
+];
+roweditorgapMetaData.EVENTNAMES = [
+    'added',
+    'beforebottomchange',
+    'beforecenteredchange',
+    'beforedisabledchange',
+    'beforedockedchange',
+    'beforeheightchange',
+    'beforehiddenchange',
+    'beforehide',
+    'beforeleftchange',
+    'beforemaxHeightchange',
+    'beforemaxWidthchange',
+    'beforeminHeightchange',
+    'beforeminWidthchange',
+    'beforeorientationchange',
+    'beforerightchange',
+    'beforescrollablechange',
+    'beforeshow',
+    'beforetofront',
+    'beforetopchange',
+    'beforewidthchange',
+    'blur',
+    'bottomchange',
+    'centeredchange',
+    'destroy',
+    'disabledchange',
+    'dockedchange',
+    'erased',
+    'floatingchange',
+    'focus',
+    'focusenter',
+    'focusleave',
+    'fullscreen',
+    'heightchange',
+    'hiddenchange',
+    'hide',
+    'initialize',
+    'leftchange',
+    'maxHeightchange',
+    'maxWidthchange',
+    'minHeightchange',
+    'minWidthchange',
+    'moved',
+    'orientationchange',
+    'painted',
+    'positionedchange',
+    'removed',
+    'resize',
+    'rightchange',
+    'scrollablechange',
+    'show',
+    'tofront',
+    'topchange',
+    'updatedata',
+    'widthchange',
+    'ready'
+];
+let ExtRoweditorgapComponent = ExtRoweditorgapComponent_1 = class ExtRoweditorgapComponent extends EngBase {
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, roweditorgapMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    ngOnInit() {
+        this.baseOnInit(roweditorgapMetaData);
+    }
+    ngAfterViewInit() {
+        this.baseAfterViewInit(roweditorgapMetaData);
+    }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
+};
+ExtRoweditorgapComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
+ExtRoweditorgapComponent = ExtRoweditorgapComponent_1 = __decorate([
+    Component({
+        selector: 'ext-roweditorgap',
+        inputs: roweditorgapMetaData.PROPERTIES,
+        outputs: roweditorgapMetaData.EVENTNAMES,
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtRoweditorgapComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, EngBase])
+], ExtRoweditorgapComponent);
+
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtRowheaderComponent_1;
 class rowheaderMetaData {
 }
 rowheaderMetaData.XTYPE = 'rowheader';
 rowheaderMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -39622,9 +45718,6 @@ rowheaderMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -39664,7 +45757,6 @@ rowheaderMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -39815,7 +45907,7 @@ rowheaderMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtRowheaderComponent = ExtRowheaderComponent_1 = class ExtRowheaderComponent extends base {
+let ExtRowheaderComponent = ExtRowheaderComponent_1 = class ExtRowheaderComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, rowheaderMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -39823,28 +45915,45 @@ let ExtRowheaderComponent = ExtRowheaderComponent_1 = class ExtRowheaderComponen
     ngOnInit() {
         this.baseOnInit(rowheaderMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(rowheaderMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRowheaderComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRowheaderComponent = ExtRowheaderComponent_1 = __decorate([
     Component({
-        selector: 'rowheader',
+        selector: 'ext-rowheader',
         inputs: rowheaderMetaData.PROPERTIES,
         outputs: rowheaderMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtRowheaderComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtRowheaderComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtRowheaderComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtGridsummaryrowComponent_1;
 class gridsummaryrowMetaData {
 }
 gridsummaryrowMetaData.XTYPE = 'gridsummaryrow';
 gridsummaryrowMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -39867,9 +45976,6 @@ gridsummaryrowMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'expandedField',
     'flex',
     'floated',
@@ -39910,7 +46016,6 @@ gridsummaryrowMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -40060,7 +46165,7 @@ gridsummaryrowMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtGridsummaryrowComponent = ExtGridsummaryrowComponent_1 = class ExtGridsummaryrowComponent extends base {
+let ExtGridsummaryrowComponent = ExtGridsummaryrowComponent_1 = class ExtGridsummaryrowComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gridsummaryrowMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -40068,30 +46173,47 @@ let ExtGridsummaryrowComponent = ExtGridsummaryrowComponent_1 = class ExtGridsum
     ngOnInit() {
         this.baseOnInit(gridsummaryrowMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(gridsummaryrowMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGridsummaryrowComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGridsummaryrowComponent = ExtGridsummaryrowComponent_1 = __decorate([
     Component({
-        selector: 'gridsummaryrow',
+        selector: 'ext-gridsummaryrow',
         inputs: gridsummaryrowMetaData.PROPERTIES,
         outputs: gridsummaryrowMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtGridsummaryrowComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtGridsummaryrowComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtGridsummaryrowComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTreeComponent_1;
 class treeMetaData {
 }
 treeMetaData.XTYPE = 'tree';
 treeMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -40103,12 +46225,15 @@ treeMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'bufferSize',
     'cardSwitchAnimation',
     'centered',
     'cls',
+    'collapseDefaults',
+    'collapsible',
     'columnLines',
     'columnMenu',
     'columnResize',
@@ -40136,10 +46261,7 @@ treeMetaData.PROPERTIES = [
     'emptyText',
     'emptyTextDefaults',
     'emptyTextProperty',
-    'enableTextSelection',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
+    'enableColumnMove',
     'expanderFirst',
     'expanderOnly',
     'flex',
@@ -40151,6 +46273,8 @@ treeMetaData.PROPERTIES = [
     'grouped',
     'groupFooter',
     'groupHeader',
+    'grouping',
+    'groupPlaceholder',
     'height',
     'hidden',
     'hideAnimation',
@@ -40235,7 +46359,6 @@ treeMetaData.PROPERTIES = [
     'selectable',
     'selection',
     'selectOnExpander',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -40266,7 +46389,6 @@ treeMetaData.PROPERTIES = [
     'ui',
     'userCls',
     'userSelectable',
-    'useSimpleItems',
     'variableHeights',
     'verticalOverflow',
     'viewModel',
@@ -40295,8 +46417,13 @@ treeMetaData.EVENTS = [
     { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforecheckchange', parameters: 'tree,checked,current,record,e' },
+    { name: 'beforecomplete', parameters: 'editor,value,startValue,The' },
     { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeedit', parameters: 'sender,location' },
+    { name: 'beforegroupcollapse', parameters: 'tree,group' },
+    { name: 'beforegroupexpand', parameters: 'tree,group' },
     { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforehide', parameters: 'sender' },
@@ -40313,14 +46440,17 @@ treeMetaData.EVENTS = [
     { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforeselectionextend', parameters: 'grid,An,extension' },
     { name: 'beforeshow', parameters: 'sender' },
+    { name: 'beforestartedit', parameters: 'editor,boundEl,value,The' },
     { name: 'beforestorechange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforetofront', parameters: 'tree' },
     { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'blur', parameters: 'tree,event' },
     { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+    { name: 'canceledit', parameters: 'editor,value,startValue' },
     { name: 'cellselection', parameters: 'grid,selection' },
     { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+    { name: 'checkchange', parameters: 'cell,checked,record,e' },
     { name: 'childdoubletap', parameters: 'tree,location' },
     { name: 'childlongpress', parameters: 'tree,location' },
     { name: 'childmouseenter', parameters: 'tree,location' },
@@ -40341,18 +46471,22 @@ treeMetaData.EVENTS = [
     { name: 'columnselection', parameters: 'grid,selection' },
     { name: 'columnshow', parameters: 'tree,column' },
     { name: 'columnsort', parameters: 'tree,column,direction' },
+    { name: 'complete', parameters: 'editor,value,startValue,The' },
     { name: 'deactivate', parameters: 'oldActiveItem,tree,newActiveItem' },
     { name: 'deselect', parameters: 'tree,records' },
     { name: 'destroy', parameters: '' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'disclose', parameters: 'list,record,target,index,event' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+    { name: 'edit', parameters: 'sender,location' },
     { name: 'erased', parameters: 'sender' },
     { name: 'floatingchange', parameters: 'sender,positioned' },
     { name: 'focus', parameters: 'tree,event' },
     { name: 'focusenter', parameters: 'tree,event' },
     { name: 'focusleave', parameters: 'tree,event' },
     { name: 'fullscreen', parameters: 'sender' },
+    { name: 'groupcollapse', parameters: 'tree,group' },
+    { name: 'groupexpand', parameters: 'tree,group' },
     { name: 'heightchange', parameters: 'sender,value,oldValue' },
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
@@ -40394,10 +46528,13 @@ treeMetaData.EVENTS = [
     { name: 'select', parameters: 'tree,selected' },
     { name: 'selectionextenderdrag', parameters: 'grid,An,extension' },
     { name: 'show', parameters: 'sender' },
+    { name: 'specialkey', parameters: 'editor,field,event' },
+    { name: 'startedit', parameters: 'editor,boundEl,value,The' },
     { name: 'storechange', parameters: 'sender,value,oldValue' },
     { name: 'tofront', parameters: 'tree' },
     { name: 'topchange', parameters: 'sender,value,oldValue' },
     { name: 'updatedata', parameters: 'sender,newData' },
+    { name: 'validateedit', parameters: 'sender,location' },
     { name: 'widthchange', parameters: 'sender,value,oldValue' },
     { name: 'ready', parameters: '' }
 ];
@@ -40409,8 +46546,13 @@ treeMetaData.EVENTNAMES = [
     'beforeactiveItemchange',
     'beforebottomchange',
     'beforecenteredchange',
+    'beforecheckchange',
+    'beforecomplete',
     'beforedisabledchange',
     'beforedockedchange',
+    'beforeedit',
+    'beforegroupcollapse',
+    'beforegroupexpand',
     'beforeheightchange',
     'beforehiddenchange',
     'beforehide',
@@ -40427,14 +46569,17 @@ treeMetaData.EVENTNAMES = [
     'beforescrollablechange',
     'beforeselectionextend',
     'beforeshow',
+    'beforestartedit',
     'beforestorechange',
     'beforetofront',
     'beforetopchange',
     'beforewidthchange',
     'blur',
     'bottomchange',
+    'canceledit',
     'cellselection',
     'centeredchange',
+    'checkchange',
     'childdoubletap',
     'childlongpress',
     'childmouseenter',
@@ -40455,18 +46600,22 @@ treeMetaData.EVENTNAMES = [
     'columnselection',
     'columnshow',
     'columnsort',
+    'complete',
     'deactivate',
     'deselect',
     'destroy',
     'disabledchange',
     'disclose',
     'dockedchange',
+    'edit',
     'erased',
     'floatingchange',
     'focus',
     'focusenter',
     'focusleave',
     'fullscreen',
+    'groupcollapse',
+    'groupexpand',
     'heightchange',
     'hiddenchange',
     'hide',
@@ -40508,14 +46657,17 @@ treeMetaData.EVENTNAMES = [
     'select',
     'selectionextenderdrag',
     'show',
+    'specialkey',
+    'startedit',
     'storechange',
     'tofront',
     'topchange',
     'updatedata',
+    'validateedit',
     'widthchange',
     'ready'
 ];
-let ExtTreeComponent = ExtTreeComponent_1 = class ExtTreeComponent extends base {
+let ExtTreeComponent = ExtTreeComponent_1 = class ExtTreeComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, treeMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -40523,28 +46675,45 @@ let ExtTreeComponent = ExtTreeComponent_1 = class ExtTreeComponent extends base 
     ngOnInit() {
         this.baseOnInit(treeMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(treeMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTreeComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTreeComponent = ExtTreeComponent_1 = __decorate([
     Component({
-        selector: 'tree',
+        selector: 'ext-tree',
         inputs: treeMetaData.PROPERTIES,
         outputs: treeMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTreeComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTreeComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTreeComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtImageComponent_1;
 class imageMetaData {
 }
 imageMetaData.XTYPE = 'image';
 imageMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -40566,9 +46735,6 @@ imageMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -40608,7 +46774,6 @@ imageMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -40764,7 +46929,7 @@ imageMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtImageComponent = ExtImageComponent_1 = class ExtImageComponent extends base {
+let ExtImageComponent = ExtImageComponent_1 = class ExtImageComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, imageMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -40772,28 +46937,45 @@ let ExtImageComponent = ExtImageComponent_1 = class ExtImageComponent extends ba
     ngOnInit() {
         this.baseOnInit(imageMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(imageMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtImageComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtImageComponent = ExtImageComponent_1 = __decorate([
     Component({
-        selector: 'image',
+        selector: 'ext-image',
         inputs: imageMetaData.PROPERTIES,
         outputs: imageMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtImageComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtImageComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtImageComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtImgComponent_1;
 class imgMetaData {
 }
 imgMetaData.XTYPE = 'img';
 imgMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -40815,9 +46997,6 @@ imgMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -40857,7 +47036,6 @@ imgMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -41013,7 +47191,7 @@ imgMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtImgComponent = ExtImgComponent_1 = class ExtImgComponent extends base {
+let ExtImgComponent = ExtImgComponent_1 = class ExtImgComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, imgMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -41021,29 +47199,46 @@ let ExtImgComponent = ExtImgComponent_1 = class ExtImgComponent extends base {
     ngOnInit() {
         this.baseOnInit(imgMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(imgMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtImgComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtImgComponent = ExtImgComponent_1 = __decorate([
     Component({
-        selector: 'img',
+        selector: 'ext-img',
         inputs: imgMetaData.PROPERTIES,
         outputs: imgMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtImgComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtImgComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtImgComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtIndicatorComponent_1;
 class indicatorMetaData {
 }
 indicatorMetaData.XTYPE = 'indicator';
 indicatorMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeIndex',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -41066,9 +47261,6 @@ indicatorMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -41106,7 +47298,6 @@ indicatorMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -41262,7 +47453,7 @@ indicatorMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtIndicatorComponent = ExtIndicatorComponent_1 = class ExtIndicatorComponent extends base {
+let ExtIndicatorComponent = ExtIndicatorComponent_1 = class ExtIndicatorComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, indicatorMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -41270,28 +47461,45 @@ let ExtIndicatorComponent = ExtIndicatorComponent_1 = class ExtIndicatorComponen
     ngOnInit() {
         this.baseOnInit(indicatorMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(indicatorMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtIndicatorComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtIndicatorComponent = ExtIndicatorComponent_1 = __decorate([
     Component({
-        selector: 'indicator',
+        selector: 'ext-indicator',
         inputs: indicatorMetaData.PROPERTIES,
         outputs: indicatorMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtIndicatorComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtIndicatorComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtIndicatorComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtLabelComponent_1;
 class labelMetaData {
 }
 labelMetaData.XTYPE = 'label';
 labelMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -41312,9 +47520,6 @@ labelMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -41352,7 +47557,6 @@ labelMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -41501,7 +47705,7 @@ labelMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtLabelComponent = ExtLabelComponent_1 = class ExtLabelComponent extends base {
+let ExtLabelComponent = ExtLabelComponent_1 = class ExtLabelComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, labelMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -41509,28 +47713,45 @@ let ExtLabelComponent = ExtLabelComponent_1 = class ExtLabelComponent extends ba
     ngOnInit() {
         this.baseOnInit(labelMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(labelMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtLabelComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtLabelComponent = ExtLabelComponent_1 = __decorate([
     Component({
-        selector: 'label',
+        selector: 'ext-label',
         inputs: labelMetaData.PROPERTIES,
         outputs: labelMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtLabelComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtLabelComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtLabelComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTreelistComponent_1;
 class treelistMetaData {
 }
 treelistMetaData.XTYPE = 'treelist';
 treelistMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -41552,9 +47773,6 @@ treelistMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'expanderFirst',
     'expanderOnly',
     'flex',
@@ -41570,6 +47788,7 @@ treelistMetaData.PROPERTIES = [
     'highlightPath',
     'html',
     'id',
+    'indent',
     'instanceCls',
     'itemId',
     'itemRipple',
@@ -41600,7 +47819,6 @@ treelistMetaData.PROPERTIES = [
     'scrollable',
     'selection',
     'selectOnExpander',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -41755,7 +47973,7 @@ treelistMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTreelistComponent = ExtTreelistComponent_1 = class ExtTreelistComponent extends base {
+let ExtTreelistComponent = ExtTreelistComponent_1 = class ExtTreelistComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, treelistMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -41763,28 +47981,45 @@ let ExtTreelistComponent = ExtTreelistComponent_1 = class ExtTreelistComponent e
     ngOnInit() {
         this.baseOnInit(treelistMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(treelistMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTreelistComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTreelistComponent = ExtTreelistComponent_1 = __decorate([
     Component({
-        selector: 'treelist',
+        selector: 'ext-treelist',
         inputs: treelistMetaData.PROPERTIES,
         outputs: treelistMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTreelistComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTreelistComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTreelistComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTreelistitemComponent_1;
 class treelistitemMetaData {
 }
 treelistitemMetaData.XTYPE = 'treelistitem';
 treelistitemMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -41797,7 +48032,6 @@ treelistitemMetaData.PROPERTIES = [
     'controller',
     'defaultListenerScope',
     'disabled',
-    'eventHandlers',
     'expandable',
     'expanded',
     'flex',
@@ -41817,6 +48051,7 @@ treelistitemMetaData.PROPERTIES = [
     'leaf',
     'listeners',
     'loading',
+    'margin',
     'name',
     'nameable',
     'node',
@@ -41833,7 +48068,6 @@ treelistitemMetaData.PROPERTIES = [
     'rowClsProperty',
     'selected',
     'selectedParent',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -41891,7 +48125,7 @@ treelistitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTreelistitemComponent = ExtTreelistitemComponent_1 = class ExtTreelistitemComponent extends base {
+let ExtTreelistitemComponent = ExtTreelistitemComponent_1 = class ExtTreelistitemComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, treelistitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -41899,28 +48133,45 @@ let ExtTreelistitemComponent = ExtTreelistitemComponent_1 = class ExtTreelistite
     ngOnInit() {
         this.baseOnInit(treelistitemMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(treelistitemMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTreelistitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTreelistitemComponent = ExtTreelistitemComponent_1 = __decorate([
     Component({
-        selector: 'treelistitem',
+        selector: 'ext-treelistitem',
         inputs: treelistitemMetaData.PROPERTIES,
         outputs: treelistitemMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTreelistitemComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTreelistitemComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTreelistitemComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtLoadmaskComponent_1;
 class loadmaskMetaData {
 }
 loadmaskMetaData.XTYPE = 'loadmask';
 loadmaskMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -41941,9 +48192,6 @@ loadmaskMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -41984,7 +48232,6 @@ loadmaskMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -42136,7 +48383,7 @@ loadmaskMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtLoadmaskComponent = ExtLoadmaskComponent_1 = class ExtLoadmaskComponent extends base {
+let ExtLoadmaskComponent = ExtLoadmaskComponent_1 = class ExtLoadmaskComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, loadmaskMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -42144,28 +48391,45 @@ let ExtLoadmaskComponent = ExtLoadmaskComponent_1 = class ExtLoadmaskComponent e
     ngOnInit() {
         this.baseOnInit(loadmaskMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(loadmaskMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtLoadmaskComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtLoadmaskComponent = ExtLoadmaskComponent_1 = __decorate([
     Component({
-        selector: 'loadmask',
+        selector: 'ext-loadmask',
         inputs: loadmaskMetaData.PROPERTIES,
         outputs: loadmaskMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtLoadmaskComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtLoadmaskComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtLoadmaskComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtMaskComponent_1;
 class maskMetaData {
 }
 maskMetaData.XTYPE = 'mask';
 maskMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -42186,9 +48450,6 @@ maskMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -42226,7 +48487,6 @@ maskMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -42378,7 +48638,7 @@ maskMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtMaskComponent = ExtMaskComponent_1 = class ExtMaskComponent extends base {
+let ExtMaskComponent = ExtMaskComponent_1 = class ExtMaskComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, maskMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -42386,28 +48646,45 @@ let ExtMaskComponent = ExtMaskComponent_1 = class ExtMaskComponent extends base 
     ngOnInit() {
         this.baseOnInit(maskMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(maskMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMaskComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMaskComponent = ExtMaskComponent_1 = __decorate([
     Component({
-        selector: 'mask',
+        selector: 'ext-mask',
         inputs: maskMetaData.PROPERTIES,
         outputs: maskMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtMaskComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtMaskComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtMaskComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtMediaComponent_1;
 class mediaMetaData {
 }
 mediaMetaData.XTYPE = 'media';
 mediaMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -42431,10 +48708,6 @@ mediaMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enableControls',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -42476,7 +48749,6 @@ mediaMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -42641,7 +48913,7 @@ mediaMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtMediaComponent = ExtMediaComponent_1 = class ExtMediaComponent extends base {
+let ExtMediaComponent = ExtMediaComponent_1 = class ExtMediaComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, mediaMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -42649,28 +48921,45 @@ let ExtMediaComponent = ExtMediaComponent_1 = class ExtMediaComponent extends ba
     ngOnInit() {
         this.baseOnInit(mediaMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(mediaMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMediaComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMediaComponent = ExtMediaComponent_1 = __decorate([
     Component({
-        selector: 'media',
+        selector: 'ext-media',
         inputs: mediaMetaData.PROPERTIES,
         outputs: mediaMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtMediaComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtMediaComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtMediaComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtMenucheckitemComponent_1;
 class menucheckitemMetaData {
 }
 menucheckitemMetaData.XTYPE = 'menucheckitem';
 menucheckitemMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -42696,9 +48985,6 @@ menucheckitemMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -42748,7 +49034,6 @@ menucheckitemMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'scrollable',
-    'selfAlign',
     'separator',
     'session',
     'shadow',
@@ -42906,7 +49191,7 @@ menucheckitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtMenucheckitemComponent = ExtMenucheckitemComponent_1 = class ExtMenucheckitemComponent extends base {
+let ExtMenucheckitemComponent = ExtMenucheckitemComponent_1 = class ExtMenucheckitemComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, menucheckitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -42914,28 +49199,45 @@ let ExtMenucheckitemComponent = ExtMenucheckitemComponent_1 = class ExtMenucheck
     ngOnInit() {
         this.baseOnInit(menucheckitemMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(menucheckitemMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMenucheckitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMenucheckitemComponent = ExtMenucheckitemComponent_1 = __decorate([
     Component({
-        selector: 'menucheckitem',
+        selector: 'ext-menucheckitem',
         inputs: menucheckitemMetaData.PROPERTIES,
         outputs: menucheckitemMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtMenucheckitemComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtMenucheckitemComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtMenucheckitemComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtMenuitemComponent_1;
 class menuitemMetaData {
 }
 menuitemMetaData.XTYPE = 'menuitem';
 menuitemMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -42958,9 +49260,6 @@ menuitemMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -43010,7 +49309,6 @@ menuitemMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'scrollable',
-    'selfAlign',
     'separator',
     'session',
     'shadow',
@@ -43162,7 +49460,7 @@ menuitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtMenuitemComponent = ExtMenuitemComponent_1 = class ExtMenuitemComponent extends base {
+let ExtMenuitemComponent = ExtMenuitemComponent_1 = class ExtMenuitemComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, menuitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -43170,31 +49468,48 @@ let ExtMenuitemComponent = ExtMenuitemComponent_1 = class ExtMenuitemComponent e
     ngOnInit() {
         this.baseOnInit(menuitemMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(menuitemMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMenuitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMenuitemComponent = ExtMenuitemComponent_1 = __decorate([
     Component({
-        selector: 'menuitem',
+        selector: 'ext-menuitem',
         inputs: menuitemMetaData.PROPERTIES,
         outputs: menuitemMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtMenuitemComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtMenuitemComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtMenuitemComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtMenuComponent_1;
 class menuMetaData {
 }
 menuMetaData.XTYPE = 'menu';
 menuMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'align',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'allowOtherMenus',
     'alwaysOnTop',
@@ -43211,6 +49526,7 @@ menuMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -43240,9 +49556,6 @@ menuMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -43303,7 +49616,6 @@ menuMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'separator',
     'session',
     'shadow',
@@ -43319,6 +49631,7 @@ menuMetaData.PROPERTIES = [
     'tbar',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -43500,7 +49813,7 @@ menuMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtMenuComponent = ExtMenuComponent_1 = class ExtMenuComponent extends base {
+let ExtMenuComponent = ExtMenuComponent_1 = class ExtMenuComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, menuMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -43508,28 +49821,45 @@ let ExtMenuComponent = ExtMenuComponent_1 = class ExtMenuComponent extends base 
     ngOnInit() {
         this.baseOnInit(menuMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(menuMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMenuComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMenuComponent = ExtMenuComponent_1 = __decorate([
     Component({
-        selector: 'menu',
+        selector: 'ext-menu',
         inputs: menuMetaData.PROPERTIES,
         outputs: menuMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtMenuComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtMenuComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtMenuComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtMenuradioitemComponent_1;
 class menuradioitemMetaData {
 }
 menuradioitemMetaData.XTYPE = 'menuradioitem';
 menuradioitemMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'allowUncheck',
     'alwaysOnTop',
     'ariaAttributes',
@@ -43556,9 +49886,6 @@ menuradioitemMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -43609,7 +49936,6 @@ menuradioitemMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'scrollable',
-    'selfAlign',
     'separator',
     'session',
     'shadow',
@@ -43767,7 +50093,7 @@ menuradioitemMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtMenuradioitemComponent = ExtMenuradioitemComponent_1 = class ExtMenuradioitemComponent extends base {
+let ExtMenuradioitemComponent = ExtMenuradioitemComponent_1 = class ExtMenuradioitemComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, menuradioitemMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -43775,28 +50101,45 @@ let ExtMenuradioitemComponent = ExtMenuradioitemComponent_1 = class ExtMenuradio
     ngOnInit() {
         this.baseOnInit(menuradioitemMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(menuradioitemMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMenuradioitemComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMenuradioitemComponent = ExtMenuradioitemComponent_1 = __decorate([
     Component({
-        selector: 'menuradioitem',
+        selector: 'ext-menuradioitem',
         inputs: menuradioitemMetaData.PROPERTIES,
         outputs: menuradioitemMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtMenuradioitemComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtMenuradioitemComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtMenuradioitemComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtMenuseparatorComponent_1;
 class menuseparatorMetaData {
 }
 menuseparatorMetaData.XTYPE = 'menuseparator';
 menuseparatorMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -43817,9 +50160,6 @@ menuseparatorMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -43857,7 +50197,6 @@ menuseparatorMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -44006,7 +50345,7 @@ menuseparatorMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtMenuseparatorComponent = ExtMenuseparatorComponent_1 = class ExtMenuseparatorComponent extends base {
+let ExtMenuseparatorComponent = ExtMenuseparatorComponent_1 = class ExtMenuseparatorComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, menuseparatorMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -44014,30 +50353,47 @@ let ExtMenuseparatorComponent = ExtMenuseparatorComponent_1 = class ExtMenusepar
     ngOnInit() {
         this.baseOnInit(menuseparatorMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(menuseparatorMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMenuseparatorComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMenuseparatorComponent = ExtMenuseparatorComponent_1 = __decorate([
     Component({
-        selector: 'menuseparator',
+        selector: 'ext-menuseparator',
         inputs: menuseparatorMetaData.PROPERTIES,
         outputs: menuseparatorMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtMenuseparatorComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtMenuseparatorComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtMenuseparatorComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtMessageboxComponent_1;
 class messageboxMetaData {
 }
 messageboxMetaData.XTYPE = 'messagebox';
 messageboxMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -44052,6 +50408,7 @@ messageboxMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -44085,9 +50442,6 @@ messageboxMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -44156,7 +50510,6 @@ messageboxMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -44171,6 +50524,7 @@ messageboxMetaData.PROPERTIES = [
     'tbar',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -44358,7 +50712,7 @@ messageboxMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtMessageboxComponent = ExtMessageboxComponent_1 = class ExtMessageboxComponent extends base {
+let ExtMessageboxComponent = ExtMessageboxComponent_1 = class ExtMessageboxComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, messageboxMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -44366,30 +50720,47 @@ let ExtMessageboxComponent = ExtMessageboxComponent_1 = class ExtMessageboxCompo
     ngOnInit() {
         this.baseOnInit(messageboxMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(messageboxMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMessageboxComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMessageboxComponent = ExtMessageboxComponent_1 = __decorate([
     Component({
-        selector: 'messagebox',
+        selector: 'ext-messagebox',
         inputs: messageboxMetaData.PROPERTIES,
         outputs: messageboxMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtMessageboxComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtMessageboxComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtMessageboxComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtNavigationviewComponent_1;
 class navigationviewMetaData {
 }
 navigationviewMetaData.XTYPE = 'navigationview';
 navigationviewMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -44400,6 +50771,7 @@ navigationviewMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -44419,9 +50791,6 @@ navigationviewMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -44470,7 +50839,6 @@ navigationviewMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -44643,7 +51011,7 @@ navigationviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtNavigationviewComponent = ExtNavigationviewComponent_1 = class ExtNavigationviewComponent extends base {
+let ExtNavigationviewComponent = ExtNavigationviewComponent_1 = class ExtNavigationviewComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, navigationviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -44651,30 +51019,47 @@ let ExtNavigationviewComponent = ExtNavigationviewComponent_1 = class ExtNavigat
     ngOnInit() {
         this.baseOnInit(navigationviewMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(navigationviewMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtNavigationviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtNavigationviewComponent = ExtNavigationviewComponent_1 = __decorate([
     Component({
-        selector: 'navigationview',
+        selector: 'ext-navigationview',
         inputs: navigationviewMetaData.PROPERTIES,
         outputs: navigationviewMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtNavigationviewComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtNavigationviewComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtNavigationviewComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPanelComponent_1;
 class panelMetaData {
 }
 panelMetaData.XTYPE = 'panel';
 panelMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -44689,6 +51074,7 @@ panelMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -44718,9 +51104,6 @@ panelMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -44777,7 +51160,6 @@ panelMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -44792,6 +51174,7 @@ panelMetaData.PROPERTIES = [
     'tbar',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -44971,7 +51354,7 @@ panelMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPanelComponent = ExtPanelComponent_1 = class ExtPanelComponent extends base {
+let ExtPanelComponent = ExtPanelComponent_1 = class ExtPanelComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, panelMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -44979,30 +51362,393 @@ let ExtPanelComponent = ExtPanelComponent_1 = class ExtPanelComponent extends ba
     ngOnInit() {
         this.baseOnInit(panelMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(panelMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPanelComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPanelComponent = ExtPanelComponent_1 = __decorate([
     Component({
-        selector: 'panel',
+        selector: 'ext-panel',
         inputs: panelMetaData.PROPERTIES,
         outputs: panelMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPanelComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPanelComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPanelComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
+var ExtAccordionComponent_1;
+class accordionMetaData {
+}
+accordionMetaData.XTYPE = 'accordion';
+accordionMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'activeChildTabIndex',
+    'activeItem',
+    'alignSelf',
+    'allowFocusingDisabledChildren',
+    'alwaysOnTop',
+    'anchor',
+    'anchorPosition',
+    'ariaAttributes',
+    'ariaDescribedBy',
+    'ariaLabel',
+    'ariaLabelledBy',
+    'autoDestroy',
+    'autoSize',
+    'axisLock',
+    'bbar',
+    'bind',
+    'bodyBorder',
+    'bodyCls',
+    'bodyPadding',
+    'bodyStyle',
+    'border',
+    'bottom',
+    'buttonAlign',
+    'buttons',
+    'buttonToolbar',
+    'cardSwitchAnimation',
+    'centered',
+    'closable',
+    'closeAction',
+    'closeToolText',
+    'cls',
+    'collapsed',
+    'collapsible',
+    'constrainAlign',
+    'contentEl',
+    'control',
+    'controller',
+    'data',
+    'defaultFocus',
+    'defaultListenerScope',
+    'defaultPanelUI',
+    'defaults',
+    'defaultToolWeights',
+    'defaultType',
+    'disabled',
+    'displayed',
+    'docked',
+    'draggable',
+    'expandedFirst',
+    'flex',
+    'floated',
+    'focusableContainer',
+    'focusCls',
+    'fullscreen',
+    'header',
+    'headerPosition',
+    'height',
+    'hidden',
+    'hideAnimation',
+    'hideMode',
+    'hideOnMaskTap',
+    'html',
+    'icon',
+    'iconAlign',
+    'iconCls',
+    'id',
+    'inactiveChildTabIndex',
+    'innerCls',
+    'instanceCls',
+    'itemId',
+    'items',
+    'keyMap',
+    'keyMapEnabled',
+    'keyMapTarget',
+    'layout',
+    'lbar',
+    'left',
+    'listeners',
+    'manageBorders',
+    'margin',
+    'masked',
+    'maxHeight',
+    'maxWidth',
+    'minButtonWidth',
+    'minHeight',
+    'minWidth',
+    'modal',
+    'modelValidation',
+    'name',
+    'nameable',
+    'nameHolder',
+    'openable',
+    'padding',
+    'plugins',
+    'publishes',
+    'rbar',
+    'record',
+    'reference',
+    'referenceHolder',
+    'relative',
+    'renderTo',
+    'resetFocusPosition',
+    'resizable',
+    'right',
+    'ripple',
+    'scrollable',
+    'session',
+    'shadow',
+    'shareableName',
+    'shim',
+    'showAnimation',
+    'standardButtons',
+    'stateful',
+    'statefulDefaults',
+    'stateId',
+    'style',
+    'tabIndex',
+    'tbar',
+    'title',
+    'titleAlign',
+    'titleCollapse',
+    'toFrontOnShow',
+    'toolDefaults',
+    'tools',
+    'tooltip',
+    'top',
+    'touchAction',
+    'tpl',
+    'tplWriteMode',
+    'translatable',
+    'twoWayBindable',
+    'ui',
+    'userCls',
+    'userSelectable',
+    'viewModel',
+    'weight',
+    'weighted',
+    'width',
+    'x',
+    'xtype',
+    'y',
+    'zIndex',
+    'platformConfig',
+    'responsiveConfig',
+    'align',
+    'fitToParent',
+    'config'
+];
+accordionMetaData.EVENTS = [
+    { name: 'activate', parameters: 'newActiveItem,accordion,oldActiveItem' },
+    { name: 'activeItemchange', parameters: 'sender,value,oldValue' },
+    { name: 'add', parameters: 'accordion,item,index' },
+    { name: 'added', parameters: 'sender,container,index' },
+    { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforecollapse', parameters: 'accordion' },
+    { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeexpand', parameters: 'accordion' },
+    { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforehide', parameters: 'sender' },
+    { name: 'beforeleftchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforemaxWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminHeightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeminWidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeorientationchange', parameters: '' },
+    { name: 'beforeresizedragstart', parameters: 'accordion,context' },
+    { name: 'beforerightchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeshow', parameters: 'sender' },
+    { name: 'beforetofront', parameters: 'accordion' },
+    { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'blur', parameters: 'accordion,event' },
+    { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+    { name: 'centeredchange', parameters: 'sender,value,oldValue' },
+    { name: 'collapse', parameters: 'accordion' },
+    { name: 'deactivate', parameters: 'oldActiveItem,accordion,newActiveItem' },
+    { name: 'destroy', parameters: '' },
+    { name: 'disabledchange', parameters: 'sender,value,oldValue' },
+    { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+    { name: 'drawerhide', parameters: 'accordion' },
+    { name: 'drawershow', parameters: 'accordion' },
+    { name: 'erased', parameters: 'sender' },
+    { name: 'expand', parameters: 'accordion' },
+    { name: 'floatingchange', parameters: 'sender,positioned' },
+    { name: 'focus', parameters: 'accordion,event' },
+    { name: 'focusenter', parameters: 'accordion,event' },
+    { name: 'focusleave', parameters: 'accordion,event' },
+    { name: 'fullscreen', parameters: 'sender' },
+    { name: 'heightchange', parameters: 'sender,value,oldValue' },
+    { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
+    { name: 'hide', parameters: 'sender' },
+    { name: 'initialize', parameters: 'sender' },
+    { name: 'leftchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'maxWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'minHeightchange', parameters: 'sender,value,oldValue' },
+    { name: 'minWidthchange', parameters: 'sender,value,oldValue' },
+    { name: 'move', parameters: 'accordion,item,toIndex,fromIndex' },
+    { name: 'moved', parameters: 'sender,container,toIndex,fromIndex' },
+    { name: 'orientationchange', parameters: '' },
+    { name: 'painted', parameters: 'sender,element' },
+    { name: 'positionedchange', parameters: 'sender,positioned' },
+    { name: 'remove', parameters: 'accordion,item,index' },
+    { name: 'removed', parameters: 'sender,container,index' },
+    { name: 'renderedchange', parameters: 'accordion,item,rendered' },
+    { name: 'resize', parameters: 'element,info' },
+    { name: 'resizedrag', parameters: 'accordion,context' },
+    { name: 'resizedragcancel', parameters: 'accordion,context' },
+    { name: 'resizedragend', parameters: 'accordion,context' },
+    { name: 'resizedragstart', parameters: 'accordion,context' },
+    { name: 'rightchange', parameters: 'sender,value,oldValue' },
+    { name: 'scrollablechange', parameters: 'sender,value,oldValue' },
+    { name: 'show', parameters: 'sender' },
+    { name: 'tofront', parameters: 'accordion' },
+    { name: 'topchange', parameters: 'sender,value,oldValue' },
+    { name: 'updatedata', parameters: 'sender,newData' },
+    { name: 'widthchange', parameters: 'sender,value,oldValue' },
+    { name: 'ready', parameters: '' }
+];
+accordionMetaData.EVENTNAMES = [
+    'activate',
+    'activeItemchange',
+    'add',
+    'added',
+    'beforeactiveItemchange',
+    'beforebottomchange',
+    'beforecenteredchange',
+    'beforecollapse',
+    'beforedisabledchange',
+    'beforedockedchange',
+    'beforeexpand',
+    'beforeheightchange',
+    'beforehiddenchange',
+    'beforehide',
+    'beforeleftchange',
+    'beforemaxHeightchange',
+    'beforemaxWidthchange',
+    'beforeminHeightchange',
+    'beforeminWidthchange',
+    'beforeorientationchange',
+    'beforeresizedragstart',
+    'beforerightchange',
+    'beforescrollablechange',
+    'beforeshow',
+    'beforetofront',
+    'beforetopchange',
+    'beforewidthchange',
+    'blur',
+    'bottomchange',
+    'centeredchange',
+    'collapse',
+    'deactivate',
+    'destroy',
+    'disabledchange',
+    'dockedchange',
+    'drawerhide',
+    'drawershow',
+    'erased',
+    'expand',
+    'floatingchange',
+    'focus',
+    'focusenter',
+    'focusleave',
+    'fullscreen',
+    'heightchange',
+    'hiddenchange',
+    'hide',
+    'initialize',
+    'leftchange',
+    'maxHeightchange',
+    'maxWidthchange',
+    'minHeightchange',
+    'minWidthchange',
+    'move',
+    'moved',
+    'orientationchange',
+    'painted',
+    'positionedchange',
+    'remove',
+    'removed',
+    'renderedchange',
+    'resize',
+    'resizedrag',
+    'resizedragcancel',
+    'resizedragend',
+    'resizedragstart',
+    'rightchange',
+    'scrollablechange',
+    'show',
+    'tofront',
+    'topchange',
+    'updatedata',
+    'widthchange',
+    'ready'
+];
+let ExtAccordionComponent = ExtAccordionComponent_1 = class ExtAccordionComponent extends EngBase {
+    constructor(eRef, hostComponent) {
+        super(eRef.nativeElement, accordionMetaData, hostComponent);
+        this.hostComponent = hostComponent;
+    }
+    ngOnInit() {
+        this.baseOnInit(accordionMetaData);
+    }
+    ngAfterViewInit() {
+        this.baseAfterViewInit(accordionMetaData);
+    }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
+};
+ExtAccordionComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
+ExtAccordionComponent = ExtAccordionComponent_1 = __decorate([
+    Component({
+        selector: 'ext-accordion',
+        inputs: accordionMetaData.PROPERTIES,
+        outputs: accordionMetaData.EVENTNAMES,
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtAccordionComponent_1) }],
+        template: '<ng-template></ng-template>'
+    }),
+    __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
+    __metadata("design:paramtypes", [ElementRef, EngBase])
+], ExtAccordionComponent);
+
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtDatepanelComponent_1;
 class datepanelMetaData {
 }
 datepanelMetaData.XTYPE = 'datepanel';
 datepanelMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -45019,6 +51765,7 @@ datepanelMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -45052,9 +51799,6 @@ datepanelMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -45126,7 +51870,6 @@ datepanelMetaData.PROPERTIES = [
     'scope',
     'scrollable',
     'selectOnNavigate',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -45150,6 +51893,7 @@ datepanelMetaData.PROPERTIES = [
     'title',
     'titleAlign',
     'titleAnimation',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -45334,7 +52078,7 @@ datepanelMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtDatepanelComponent = ExtDatepanelComponent_1 = class ExtDatepanelComponent extends base {
+let ExtDatepanelComponent = ExtDatepanelComponent_1 = class ExtDatepanelComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, datepanelMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -45342,28 +52086,45 @@ let ExtDatepanelComponent = ExtDatepanelComponent_1 = class ExtDatepanelComponen
     ngOnInit() {
         this.baseOnInit(datepanelMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(datepanelMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDatepanelComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDatepanelComponent = ExtDatepanelComponent_1 = __decorate([
     Component({
-        selector: 'datepanel',
+        selector: 'ext-datepanel',
         inputs: datepanelMetaData.PROPERTIES,
         outputs: datepanelMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtDatepanelComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtDatepanelComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtDatepanelComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtDatetitleComponent_1;
 class datetitleMetaData {
 }
 datetitleMetaData.XTYPE = 'datetitle';
 datetitleMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -45384,9 +52145,6 @@ datetitleMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -45430,7 +52188,6 @@ datetitleMetaData.PROPERTIES = [
     'rotateIcon',
     'rotation',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -45581,7 +52338,7 @@ datetitleMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtDatetitleComponent = ExtDatetitleComponent_1 = class ExtDatetitleComponent extends base {
+let ExtDatetitleComponent = ExtDatetitleComponent_1 = class ExtDatetitleComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, datetitleMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -45589,30 +52346,47 @@ let ExtDatetitleComponent = ExtDatetitleComponent_1 = class ExtDatetitleComponen
     ngOnInit() {
         this.baseOnInit(datetitleMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(datetitleMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDatetitleComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDatetitleComponent = ExtDatetitleComponent_1 = __decorate([
     Component({
-        selector: 'datetitle',
+        selector: 'ext-datetitle',
         inputs: datetitleMetaData.PROPERTIES,
         outputs: datetitleMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtDatetitleComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtDatetitleComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtDatetitleComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPanelheaderComponent_1;
 class panelheaderMetaData {
 }
 panelheaderMetaData.XTYPE = 'panelheader';
 panelheaderMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -45623,6 +52397,7 @@ panelheaderMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -45641,9 +52416,6 @@ panelheaderMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -45696,7 +52468,6 @@ panelheaderMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -45865,7 +52636,7 @@ panelheaderMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPanelheaderComponent = ExtPanelheaderComponent_1 = class ExtPanelheaderComponent extends base {
+let ExtPanelheaderComponent = ExtPanelheaderComponent_1 = class ExtPanelheaderComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, panelheaderMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -45873,30 +52644,48 @@ let ExtPanelheaderComponent = ExtPanelheaderComponent_1 = class ExtPanelheaderCo
     ngOnInit() {
         this.baseOnInit(panelheaderMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(panelheaderMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPanelheaderComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPanelheaderComponent = ExtPanelheaderComponent_1 = __decorate([
     Component({
-        selector: 'panelheader',
+        selector: 'ext-panelheader',
         inputs: panelheaderMetaData.PROPERTIES,
         outputs: panelheaderMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPanelheaderComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPanelheaderComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPanelheaderComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTimepanelComponent_1;
 class timepanelMetaData {
 }
 timepanelMetaData.XTYPE = 'timepanel';
 timepanelMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignPMInside',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -45912,6 +52701,7 @@ timepanelMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -45944,9 +52734,6 @@ timepanelMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -45960,6 +52747,7 @@ timepanelMetaData.PROPERTIES = [
     'hideAnimation',
     'hideMode',
     'hideOnMaskTap',
+    'hourDisplayFormat',
     'html',
     'icon',
     'iconAlign',
@@ -45982,6 +52770,7 @@ timepanelMetaData.PROPERTIES = [
     'masked',
     'maxHeight',
     'maxWidth',
+    'meridiem',
     'minButtonWidth',
     'minHeight',
     'minWidth',
@@ -46006,7 +52795,6 @@ timepanelMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -46021,6 +52809,7 @@ timepanelMetaData.PROPERTIES = [
     'tbar',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -46202,7 +52991,7 @@ timepanelMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTimepanelComponent = ExtTimepanelComponent_1 = class ExtTimepanelComponent extends base {
+let ExtTimepanelComponent = ExtTimepanelComponent_1 = class ExtTimepanelComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, timepanelMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -46210,28 +52999,45 @@ let ExtTimepanelComponent = ExtTimepanelComponent_1 = class ExtTimepanelComponen
     ngOnInit() {
         this.baseOnInit(timepanelMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(timepanelMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTimepanelComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTimepanelComponent = ExtTimepanelComponent_1 = __decorate([
     Component({
-        selector: 'timepanel',
+        selector: 'ext-timepanel',
         inputs: timepanelMetaData.PROPERTIES,
         outputs: timepanelMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTimepanelComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTimepanelComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTimepanelComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPaneltitleComponent_1;
 class paneltitleMetaData {
 }
 paneltitleMetaData.XTYPE = 'paneltitle';
 paneltitleMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -46252,9 +53058,6 @@ paneltitleMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -46298,7 +53101,6 @@ paneltitleMetaData.PROPERTIES = [
     'rotateIcon',
     'rotation',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -46449,7 +53251,7 @@ paneltitleMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPaneltitleComponent = ExtPaneltitleComponent_1 = class ExtPaneltitleComponent extends base {
+let ExtPaneltitleComponent = ExtPaneltitleComponent_1 = class ExtPaneltitleComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, paneltitleMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -46457,30 +53259,47 @@ let ExtPaneltitleComponent = ExtPaneltitleComponent_1 = class ExtPaneltitleCompo
     ngOnInit() {
         this.baseOnInit(paneltitleMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(paneltitleMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPaneltitleComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPaneltitleComponent = ExtPaneltitleComponent_1 = __decorate([
     Component({
-        selector: 'paneltitle',
+        selector: 'ext-paneltitle',
         inputs: paneltitleMetaData.PROPERTIES,
         outputs: paneltitleMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPaneltitleComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPaneltitleComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPaneltitleComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtYearpickerComponent_1;
 class yearpickerMetaData {
 }
 yearpickerMetaData.XTYPE = 'yearpicker';
 yearpickerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -46492,12 +53311,15 @@ yearpickerMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'bufferSize',
     'cardSwitchAnimation',
     'centered',
     'cls',
+    'collapseDefaults',
+    'collapsible',
     'constrainAlign',
     'contentEl',
     'control',
@@ -46520,10 +53342,6 @@ yearpickerMetaData.PROPERTIES = [
     'emptyText',
     'emptyTextDefaults',
     'emptyTextProperty',
-    'enableTextSelection',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -46532,6 +53350,8 @@ yearpickerMetaData.PROPERTIES = [
     'grouped',
     'groupFooter',
     'groupHeader',
+    'grouping',
+    'groupPlaceholder',
     'height',
     'hidden',
     'hideAnimation',
@@ -46610,7 +53430,6 @@ yearpickerMetaData.PROPERTIES = [
     'scrollToTopOnRefresh',
     'selectable',
     'selection',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -46637,7 +53456,6 @@ yearpickerMetaData.PROPERTIES = [
     'ui',
     'userCls',
     'userSelectable',
-    'useSimpleItems',
     'variableHeights',
     'verticalOverflow',
     'viewModel',
@@ -46668,6 +53486,8 @@ yearpickerMetaData.EVENTS = [
     { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforegroupcollapse', parameters: 'yearpicker,group' },
+    { name: 'beforegroupexpand', parameters: 'yearpicker,group' },
     { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforehide', parameters: 'sender' },
@@ -46710,6 +53530,8 @@ yearpickerMetaData.EVENTS = [
     { name: 'focusenter', parameters: 'yearpicker,event' },
     { name: 'focusleave', parameters: 'yearpicker,event' },
     { name: 'fullscreen', parameters: 'sender' },
+    { name: 'groupcollapse', parameters: 'yearpicker,group' },
+    { name: 'groupexpand', parameters: 'yearpicker,group' },
     { name: 'heightchange', parameters: 'sender,value,oldValue' },
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
@@ -46764,6 +53586,8 @@ yearpickerMetaData.EVENTNAMES = [
     'beforecenteredchange',
     'beforedisabledchange',
     'beforedockedchange',
+    'beforegroupcollapse',
+    'beforegroupexpand',
     'beforeheightchange',
     'beforehiddenchange',
     'beforehide',
@@ -46806,6 +53630,8 @@ yearpickerMetaData.EVENTNAMES = [
     'focusenter',
     'focusleave',
     'fullscreen',
+    'groupcollapse',
+    'groupexpand',
     'heightchange',
     'hiddenchange',
     'hide',
@@ -46850,7 +53676,7 @@ yearpickerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtYearpickerComponent = ExtYearpickerComponent_1 = class ExtYearpickerComponent extends base {
+let ExtYearpickerComponent = ExtYearpickerComponent_1 = class ExtYearpickerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, yearpickerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -46858,30 +53684,47 @@ let ExtYearpickerComponent = ExtYearpickerComponent_1 = class ExtYearpickerCompo
     ngOnInit() {
         this.baseOnInit(yearpickerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(yearpickerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtYearpickerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtYearpickerComponent = ExtYearpickerComponent_1 = __decorate([
     Component({
-        selector: 'yearpicker',
+        selector: 'ext-yearpicker',
         inputs: yearpickerMetaData.PROPERTIES,
         outputs: yearpickerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtYearpickerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtYearpickerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtYearpickerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtDatepickerComponent_1;
 class datepickerMetaData {
 }
 datepickerMetaData.XTYPE = 'datepicker';
 datepickerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -46896,6 +53739,7 @@ datepickerMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -46930,10 +53774,7 @@ datepickerMetaData.PROPERTIES = [
     'doneButton',
     'draggable',
     'enter',
-    'enterAnimation',
-    'eventHandlers',
     'exit',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -46992,7 +53833,6 @@ datepickerMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -47012,6 +53852,7 @@ datepickerMetaData.PROPERTIES = [
     'tbar',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolbar',
     'toolDefaults',
@@ -47203,7 +54044,7 @@ datepickerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtDatepickerComponent = ExtDatepickerComponent_1 = class ExtDatepickerComponent extends base {
+let ExtDatepickerComponent = ExtDatepickerComponent_1 = class ExtDatepickerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, datepickerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -47211,30 +54052,47 @@ let ExtDatepickerComponent = ExtDatepickerComponent_1 = class ExtDatepickerCompo
     ngOnInit() {
         this.baseOnInit(datepickerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(datepickerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtDatepickerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtDatepickerComponent = ExtDatepickerComponent_1 = __decorate([
     Component({
-        selector: 'datepicker',
+        selector: 'ext-datepicker',
         inputs: datepickerMetaData.PROPERTIES,
         outputs: datepickerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtDatepickerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtDatepickerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtDatepickerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPickerComponent_1;
 class pickerMetaData {
 }
 pickerMetaData.XTYPE = 'picker';
 pickerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -47249,6 +54107,7 @@ pickerMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -47282,10 +54141,7 @@ pickerMetaData.PROPERTIES = [
     'doneButton',
     'draggable',
     'enter',
-    'enterAnimation',
-    'eventHandlers',
     'exit',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -47343,7 +54199,6 @@ pickerMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -47362,6 +54217,7 @@ pickerMetaData.PROPERTIES = [
     'tbar',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolbar',
     'toolDefaults',
@@ -47550,7 +54406,7 @@ pickerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPickerComponent = ExtPickerComponent_1 = class ExtPickerComponent extends base {
+let ExtPickerComponent = ExtPickerComponent_1 = class ExtPickerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pickerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -47558,30 +54414,47 @@ let ExtPickerComponent = ExtPickerComponent_1 = class ExtPickerComponent extends
     ngOnInit() {
         this.baseOnInit(pickerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(pickerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPickerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPickerComponent = ExtPickerComponent_1 = __decorate([
     Component({
-        selector: 'picker',
+        selector: 'ext-picker',
         inputs: pickerMetaData.PROPERTIES,
         outputs: pickerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPickerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPickerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPickerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSelectpickerComponent_1;
 class selectpickerMetaData {
 }
 selectpickerMetaData.XTYPE = 'selectpicker';
 selectpickerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -47596,6 +54469,7 @@ selectpickerMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -47629,10 +54503,7 @@ selectpickerMetaData.PROPERTIES = [
     'doneButton',
     'draggable',
     'enter',
-    'enterAnimation',
-    'eventHandlers',
     'exit',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -47690,7 +54561,6 @@ selectpickerMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -47709,6 +54579,7 @@ selectpickerMetaData.PROPERTIES = [
     'tbar',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolbar',
     'toolDefaults',
@@ -47897,7 +54768,7 @@ selectpickerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSelectpickerComponent = ExtSelectpickerComponent_1 = class ExtSelectpickerComponent extends base {
+let ExtSelectpickerComponent = ExtSelectpickerComponent_1 = class ExtSelectpickerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, selectpickerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -47905,31 +54776,48 @@ let ExtSelectpickerComponent = ExtSelectpickerComponent_1 = class ExtSelectpicke
     ngOnInit() {
         this.baseOnInit(selectpickerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(selectpickerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSelectpickerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSelectpickerComponent = ExtSelectpickerComponent_1 = __decorate([
     Component({
-        selector: 'selectpicker',
+        selector: 'ext-selectpicker',
         inputs: selectpickerMetaData.PROPERTIES,
         outputs: selectpickerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSelectpickerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSelectpickerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSelectpickerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPickerslotComponent_1;
 class pickerslotMetaData {
 }
 pickerslotMetaData.XTYPE = 'pickerslot';
 pickerslotMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'align',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -47941,6 +54829,7 @@ pickerslotMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -47968,10 +54857,6 @@ pickerslotMetaData.PROPERTIES = [
     'emptyText',
     'emptyTextDefaults',
     'emptyTextProperty',
-    'enableTextSelection',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -48035,7 +54920,6 @@ pickerslotMetaData.PROPERTIES = [
     'selectable',
     'selected',
     'selection',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -48273,7 +55157,7 @@ pickerslotMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPickerslotComponent = ExtPickerslotComponent_1 = class ExtPickerslotComponent extends base {
+let ExtPickerslotComponent = ExtPickerslotComponent_1 = class ExtPickerslotComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pickerslotMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -48281,30 +55165,47 @@ let ExtPickerslotComponent = ExtPickerslotComponent_1 = class ExtPickerslotCompo
     ngOnInit() {
         this.baseOnInit(pickerslotMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(pickerslotMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPickerslotComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPickerslotComponent = ExtPickerslotComponent_1 = __decorate([
     Component({
-        selector: 'pickerslot',
+        selector: 'ext-pickerslot',
         inputs: pickerslotMetaData.PROPERTIES,
         outputs: pickerslotMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPickerslotComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPickerslotComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPickerslotComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTabletpickerComponent_1;
 class tabletpickerMetaData {
 }
 tabletpickerMetaData.XTYPE = 'tabletpicker';
 tabletpickerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -48319,6 +55220,7 @@ tabletpickerMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -48348,9 +55250,6 @@ tabletpickerMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -48407,7 +55306,6 @@ tabletpickerMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -48422,6 +55320,7 @@ tabletpickerMetaData.PROPERTIES = [
     'tbar',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -48601,7 +55500,7 @@ tabletpickerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTabletpickerComponent = ExtTabletpickerComponent_1 = class ExtTabletpickerComponent extends base {
+let ExtTabletpickerComponent = ExtTabletpickerComponent_1 = class ExtTabletpickerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, tabletpickerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -48609,29 +55508,46 @@ let ExtTabletpickerComponent = ExtTabletpickerComponent_1 = class ExtTabletpicke
     ngOnInit() {
         this.baseOnInit(tabletpickerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(tabletpickerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTabletpickerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTabletpickerComponent = ExtTabletpickerComponent_1 = __decorate([
     Component({
-        selector: 'tabletpicker',
+        selector: 'ext-tabletpicker',
         inputs: tabletpickerMetaData.PROPERTIES,
         outputs: tabletpickerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTabletpickerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTabletpickerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTabletpickerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPivotgridcellComponent_1;
 class pivotgridcellMetaData {
 }
 pivotgridcellMetaData.XTYPE = 'pivotgridcell';
 pivotgridcellMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
     'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'align',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -48650,7 +55566,6 @@ pivotgridcellMetaData.PROPERTIES = [
     'defaultToolWeights',
     'disabled',
     'encodeHtml',
-    'eventHandlers',
     'flex',
     'floated',
     'focusCls',
@@ -48665,6 +55580,7 @@ pivotgridcellMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -48678,7 +55594,6 @@ pivotgridcellMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'selectable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -48739,7 +55654,7 @@ pivotgridcellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPivotgridcellComponent = ExtPivotgridcellComponent_1 = class ExtPivotgridcellComponent extends base {
+let ExtPivotgridcellComponent = ExtPivotgridcellComponent_1 = class ExtPivotgridcellComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotgridcellMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -48747,29 +55662,46 @@ let ExtPivotgridcellComponent = ExtPivotgridcellComponent_1 = class ExtPivotgrid
     ngOnInit() {
         this.baseOnInit(pivotgridcellMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(pivotgridcellMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotgridcellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotgridcellComponent = ExtPivotgridcellComponent_1 = __decorate([
     Component({
-        selector: 'pivotgridcell',
+        selector: 'ext-pivotgridcell',
         inputs: pivotgridcellMetaData.PROPERTIES,
         outputs: pivotgridcellMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotgridcellComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPivotgridcellComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPivotgridcellComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPivotgridgroupcellComponent_1;
 class pivotgridgroupcellMetaData {
 }
 pivotgridgroupcellMetaData.XTYPE = 'pivotgridgroupcell';
 pivotgridgroupcellMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
     'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'align',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -48788,7 +55720,6 @@ pivotgridgroupcellMetaData.PROPERTIES = [
     'defaultToolWeights',
     'disabled',
     'encodeHtml',
-    'eventHandlers',
     'flex',
     'floated',
     'focusCls',
@@ -48803,6 +55734,7 @@ pivotgridgroupcellMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -48816,7 +55748,6 @@ pivotgridgroupcellMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'selectable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -48877,7 +55808,7 @@ pivotgridgroupcellMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPivotgridgroupcellComponent = ExtPivotgridgroupcellComponent_1 = class ExtPivotgridgroupcellComponent extends base {
+let ExtPivotgridgroupcellComponent = ExtPivotgridgroupcellComponent_1 = class ExtPivotgridgroupcellComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotgridgroupcellMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -48885,28 +55816,44 @@ let ExtPivotgridgroupcellComponent = ExtPivotgridgroupcellComponent_1 = class Ex
     ngOnInit() {
         this.baseOnInit(pivotgridgroupcellMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(pivotgridgroupcellMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotgridgroupcellComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotgridgroupcellComponent = ExtPivotgridgroupcellComponent_1 = __decorate([
     Component({
-        selector: 'pivotgridgroupcell',
+        selector: 'ext-pivotgridgroupcell',
         inputs: pivotgridgroupcellMetaData.PROPERTIES,
         outputs: pivotgridgroupcellMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotgridgroupcellComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPivotgridgroupcellComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPivotgridgroupcellComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPivotd3containerComponent_1;
 class pivotd3containerMetaData {
 }
 pivotd3containerMetaData.XTYPE = 'pivotd3container';
 pivotd3containerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'configurator',
     'drawing',
     'matrix',
@@ -48922,7 +55869,7 @@ pivotd3containerMetaData.EVENTS = [
 pivotd3containerMetaData.EVENTNAMES = [
     'ready'
 ];
-let ExtPivotd3containerComponent = ExtPivotd3containerComponent_1 = class ExtPivotd3containerComponent extends base {
+let ExtPivotd3containerComponent = ExtPivotd3containerComponent_1 = class ExtPivotd3containerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotd3containerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -48930,28 +55877,45 @@ let ExtPivotd3containerComponent = ExtPivotd3containerComponent_1 = class ExtPiv
     ngOnInit() {
         this.baseOnInit(pivotd3containerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(pivotd3containerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotd3containerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotd3containerComponent = ExtPivotd3containerComponent_1 = __decorate([
     Component({
-        selector: 'pivotd3container',
+        selector: 'ext-pivotd3container',
         inputs: pivotd3containerMetaData.PROPERTIES,
         outputs: pivotd3containerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotd3containerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPivotd3containerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPivotd3containerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPivotheatmapComponent_1;
 class pivotheatmapMetaData {
 }
 pivotheatmapMetaData.XTYPE = 'pivotheatmap';
 pivotheatmapMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -48976,9 +55940,6 @@ pivotheatmapMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -49020,7 +55981,6 @@ pivotheatmapMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -49179,7 +56139,7 @@ pivotheatmapMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPivotheatmapComponent = ExtPivotheatmapComponent_1 = class ExtPivotheatmapComponent extends base {
+let ExtPivotheatmapComponent = ExtPivotheatmapComponent_1 = class ExtPivotheatmapComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotheatmapMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -49187,28 +56147,45 @@ let ExtPivotheatmapComponent = ExtPivotheatmapComponent_1 = class ExtPivotheatma
     ngOnInit() {
         this.baseOnInit(pivotheatmapMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(pivotheatmapMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotheatmapComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotheatmapComponent = ExtPivotheatmapComponent_1 = __decorate([
     Component({
-        selector: 'pivotheatmap',
+        selector: 'ext-pivotheatmap',
         inputs: pivotheatmapMetaData.PROPERTIES,
         outputs: pivotheatmapMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotheatmapComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPivotheatmapComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPivotheatmapComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPivottreemapComponent_1;
 class pivottreemapMetaData {
 }
 pivottreemapMetaData.XTYPE = 'pivottreemap';
 pivottreemapMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -49234,9 +56211,6 @@ pivottreemapMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'expandEventName',
     'flex',
     'floated',
@@ -49295,7 +56269,6 @@ pivottreemapMetaData.PROPERTIES = [
     'scrollable',
     'selectEventName',
     'selection',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -49455,7 +56428,7 @@ pivottreemapMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPivottreemapComponent = ExtPivottreemapComponent_1 = class ExtPivottreemapComponent extends base {
+let ExtPivottreemapComponent = ExtPivottreemapComponent_1 = class ExtPivottreemapComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivottreemapMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -49463,30 +56436,47 @@ let ExtPivottreemapComponent = ExtPivottreemapComponent_1 = class ExtPivottreema
     ngOnInit() {
         this.baseOnInit(pivottreemapMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(pivottreemapMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivottreemapComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivottreemapComponent = ExtPivottreemapComponent_1 = __decorate([
     Component({
-        selector: 'pivottreemap',
+        selector: 'ext-pivottreemap',
         inputs: pivottreemapMetaData.PROPERTIES,
         outputs: pivottreemapMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivottreemapComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPivottreemapComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPivottreemapComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPivotgridComponent_1;
 class pivotgridMetaData {
 }
 pivotgridMetaData.XTYPE = 'pivotgrid';
 pivotgridMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -49498,6 +56488,7 @@ pivotgridMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'bufferSize',
@@ -49506,6 +56497,8 @@ pivotgridMetaData.PROPERTIES = [
     'cls',
     'clsGrandTotal',
     'clsGroupTotal',
+    'collapseDefaults',
+    'collapsible',
     'columnLines',
     'columnMenu',
     'columnResize',
@@ -49533,12 +56526,9 @@ pivotgridMetaData.PROPERTIES = [
     'emptyText',
     'emptyTextDefaults',
     'emptyTextProperty',
+    'enableColumnMove',
     'enableColumnSort',
     'enableLoadMask',
-    'enableTextSelection',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -49547,6 +56537,8 @@ pivotgridMetaData.PROPERTIES = [
     'grouped',
     'groupFooter',
     'groupHeader',
+    'grouping',
+    'groupPlaceholder',
     'height',
     'hidden',
     'hideAnimation',
@@ -49632,7 +56624,6 @@ pivotgridMetaData.PROPERTIES = [
     'scrollToTopOnRefresh',
     'selectable',
     'selection',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -49665,7 +56656,6 @@ pivotgridMetaData.PROPERTIES = [
     'ui',
     'userCls',
     'userSelectable',
-    'useSimpleItems',
     'variableHeights',
     'verticalOverflow',
     'viewModel',
@@ -49694,8 +56684,12 @@ pivotgridMetaData.EVENTS = [
     { name: 'beforeactiveItemchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforebottomchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforecenteredchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforecomplete', parameters: 'editor,value,startValue,The' },
     { name: 'beforedisabledchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforedockedchange', parameters: 'sender,value,oldValue,undefined' },
+    { name: 'beforeedit', parameters: 'sender,location' },
+    { name: 'beforegroupcollapse', parameters: 'pivotgrid,group' },
+    { name: 'beforegroupexpand', parameters: 'pivotgrid,group' },
     { name: 'beforeheightchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforehiddenchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforehide', parameters: 'sender' },
@@ -49709,12 +56703,14 @@ pivotgridMetaData.EVENTS = [
     { name: 'beforescrollablechange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforeselectionextend', parameters: 'grid,An,extension' },
     { name: 'beforeshow', parameters: 'sender' },
+    { name: 'beforestartedit', parameters: 'editor,boundEl,value,The' },
     { name: 'beforestorechange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforetofront', parameters: 'pivotgrid' },
     { name: 'beforetopchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'beforewidthchange', parameters: 'sender,value,oldValue,undefined' },
     { name: 'blur', parameters: 'pivotgrid,event' },
     { name: 'bottomchange', parameters: 'sender,value,oldValue' },
+    { name: 'canceledit', parameters: 'editor,value,startValue' },
     { name: 'cellselection', parameters: 'grid,selection' },
     { name: 'centeredchange', parameters: 'sender,value,oldValue' },
     { name: 'childdoubletap', parameters: 'pivotgrid,location' },
@@ -49737,18 +56733,22 @@ pivotgridMetaData.EVENTS = [
     { name: 'columnselection', parameters: 'grid,selection' },
     { name: 'columnshow', parameters: 'pivotgrid,column' },
     { name: 'columnsort', parameters: 'pivotgrid,column,direction' },
+    { name: 'complete', parameters: 'editor,value,startValue,The' },
     { name: 'deactivate', parameters: 'oldActiveItem,pivotgrid,newActiveItem' },
     { name: 'deselect', parameters: 'pivotgrid,records' },
     { name: 'destroy', parameters: '' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'disclose', parameters: 'list,record,target,index,event' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
+    { name: 'edit', parameters: 'sender,location' },
     { name: 'erased', parameters: 'sender' },
     { name: 'floatingchange', parameters: 'sender,positioned' },
     { name: 'focus', parameters: 'pivotgrid,event' },
     { name: 'focusenter', parameters: 'pivotgrid,event' },
     { name: 'focusleave', parameters: 'pivotgrid,event' },
     { name: 'fullscreen', parameters: 'sender' },
+    { name: 'groupcollapse', parameters: 'pivotgrid,group' },
+    { name: 'groupexpand', parameters: 'pivotgrid,group' },
     { name: 'heightchange', parameters: 'sender,value,oldValue' },
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
@@ -49819,10 +56819,13 @@ pivotgridMetaData.EVENTS = [
     { name: 'select', parameters: 'pivotgrid,selected' },
     { name: 'selectionextenderdrag', parameters: 'grid,An,extension' },
     { name: 'show', parameters: 'sender' },
+    { name: 'specialkey', parameters: 'editor,field,event' },
+    { name: 'startedit', parameters: 'editor,boundEl,value,The' },
     { name: 'storechange', parameters: 'sender,value,oldValue' },
     { name: 'tofront', parameters: 'pivotgrid' },
     { name: 'topchange', parameters: 'sender,value,oldValue' },
     { name: 'updatedata', parameters: 'sender,newData' },
+    { name: 'validateedit', parameters: 'sender,location' },
     { name: 'widthchange', parameters: 'sender,value,oldValue' },
     { name: 'ready', parameters: '' }
 ];
@@ -49834,8 +56837,12 @@ pivotgridMetaData.EVENTNAMES = [
     'beforeactiveItemchange',
     'beforebottomchange',
     'beforecenteredchange',
+    'beforecomplete',
     'beforedisabledchange',
     'beforedockedchange',
+    'beforeedit',
+    'beforegroupcollapse',
+    'beforegroupexpand',
     'beforeheightchange',
     'beforehiddenchange',
     'beforehide',
@@ -49849,12 +56856,14 @@ pivotgridMetaData.EVENTNAMES = [
     'beforescrollablechange',
     'beforeselectionextend',
     'beforeshow',
+    'beforestartedit',
     'beforestorechange',
     'beforetofront',
     'beforetopchange',
     'beforewidthchange',
     'blur',
     'bottomchange',
+    'canceledit',
     'cellselection',
     'centeredchange',
     'childdoubletap',
@@ -49877,18 +56886,22 @@ pivotgridMetaData.EVENTNAMES = [
     'columnselection',
     'columnshow',
     'columnsort',
+    'complete',
     'deactivate',
     'deselect',
     'destroy',
     'disabledchange',
     'disclose',
     'dockedchange',
+    'edit',
     'erased',
     'floatingchange',
     'focus',
     'focusenter',
     'focusleave',
     'fullscreen',
+    'groupcollapse',
+    'groupexpand',
     'heightchange',
     'hiddenchange',
     'hide',
@@ -49959,14 +56972,17 @@ pivotgridMetaData.EVENTNAMES = [
     'select',
     'selectionextenderdrag',
     'show',
+    'specialkey',
+    'startedit',
     'storechange',
     'tofront',
     'topchange',
     'updatedata',
+    'validateedit',
     'widthchange',
     'ready'
 ];
-let ExtPivotgridComponent = ExtPivotgridComponent_1 = class ExtPivotgridComponent extends base {
+let ExtPivotgridComponent = ExtPivotgridComponent_1 = class ExtPivotgridComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotgridMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -49974,30 +56990,47 @@ let ExtPivotgridComponent = ExtPivotgridComponent_1 = class ExtPivotgridComponen
     ngOnInit() {
         this.baseOnInit(pivotgridMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(pivotgridMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotgridComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotgridComponent = ExtPivotgridComponent_1 = __decorate([
     Component({
-        selector: 'pivotgrid',
+        selector: 'ext-pivotgrid',
         inputs: pivotgridMetaData.PROPERTIES,
         outputs: pivotgridMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotgridComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPivotgridComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPivotgridComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPivotconfigfieldComponent_1;
 class pivotconfigfieldMetaData {
 }
 pivotconfigfieldMetaData.XTYPE = 'pivotconfigfield';
 pivotconfigfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -50008,6 +57041,7 @@ pivotconfigfieldMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -50028,9 +57062,6 @@ pivotconfigfieldMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -50081,7 +57112,6 @@ pivotconfigfieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -50249,7 +57279,7 @@ pivotconfigfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPivotconfigfieldComponent = ExtPivotconfigfieldComponent_1 = class ExtPivotconfigfieldComponent extends base {
+let ExtPivotconfigfieldComponent = ExtPivotconfigfieldComponent_1 = class ExtPivotconfigfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotconfigfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -50257,30 +57287,47 @@ let ExtPivotconfigfieldComponent = ExtPivotconfigfieldComponent_1 = class ExtPiv
     ngOnInit() {
         this.baseOnInit(pivotconfigfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(pivotconfigfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotconfigfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotconfigfieldComponent = ExtPivotconfigfieldComponent_1 = __decorate([
     Component({
-        selector: 'pivotconfigfield',
+        selector: 'ext-pivotconfigfield',
         inputs: pivotconfigfieldMetaData.PROPERTIES,
         outputs: pivotconfigfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotconfigfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPivotconfigfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPivotconfigfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPivotconfigcontainerComponent_1;
 class pivotconfigcontainerMetaData {
 }
 pivotconfigcontainerMetaData.XTYPE = 'pivotconfigcontainer';
 pivotconfigcontainerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -50295,6 +57342,7 @@ pivotconfigcontainerMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -50324,9 +57372,6 @@ pivotconfigcontainerMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'fieldType',
     'flex',
     'floated',
@@ -50384,7 +57429,6 @@ pivotconfigcontainerMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -50399,6 +57443,7 @@ pivotconfigcontainerMetaData.PROPERTIES = [
     'tbar',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -50578,7 +57623,7 @@ pivotconfigcontainerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPivotconfigcontainerComponent = ExtPivotconfigcontainerComponent_1 = class ExtPivotconfigcontainerComponent extends base {
+let ExtPivotconfigcontainerComponent = ExtPivotconfigcontainerComponent_1 = class ExtPivotconfigcontainerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotconfigcontainerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -50586,30 +57631,47 @@ let ExtPivotconfigcontainerComponent = ExtPivotconfigcontainerComponent_1 = clas
     ngOnInit() {
         this.baseOnInit(pivotconfigcontainerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(pivotconfigcontainerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotconfigcontainerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotconfigcontainerComponent = ExtPivotconfigcontainerComponent_1 = __decorate([
     Component({
-        selector: 'pivotconfigcontainer',
+        selector: 'ext-pivotconfigcontainer',
         inputs: pivotconfigcontainerMetaData.PROPERTIES,
         outputs: pivotconfigcontainerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotconfigcontainerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPivotconfigcontainerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPivotconfigcontainerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPivotconfigformComponent_1;
 class pivotconfigformMetaData {
 }
 pivotconfigformMetaData.XTYPE = 'pivotconfigform';
 pivotconfigformMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -50626,10 +57688,12 @@ pivotconfigformMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
     'bottom',
+    'bubbleDirty',
     'buttonAlign',
     'buttons',
     'buttonToolbar',
@@ -50651,15 +57715,14 @@ pivotconfigformMetaData.PROPERTIES = [
     'defaults',
     'defaultToolWeights',
     'defaultType',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'enableSubmissionForm',
     'enctype',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
+    'fieldDefaults',
     'fieldSeparators',
     'flex',
     'floated',
@@ -50684,6 +57747,7 @@ pivotconfigformMetaData.PROPERTIES = [
     'instanceCls',
     'itemId',
     'items',
+    'jsonSubmit',
     'keyMap',
     'keyMapEnabled',
     'keyMapTarget',
@@ -50722,7 +57786,6 @@ pivotconfigformMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -50740,6 +57803,7 @@ pivotconfigformMetaData.PROPERTIES = [
     'timeout',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -50804,6 +57868,7 @@ pivotconfigformMetaData.EVENTS = [
     { name: 'collapse', parameters: 'pivotconfigform' },
     { name: 'deactivate', parameters: 'oldActiveItem,pivotconfigform,newActiveItem' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'pivotconfigform,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'drawerhide', parameters: 'pivotconfigform' },
@@ -50883,6 +57948,7 @@ pivotconfigformMetaData.EVENTNAMES = [
     'collapse',
     'deactivate',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'drawerhide',
@@ -50927,7 +57993,7 @@ pivotconfigformMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPivotconfigformComponent = ExtPivotconfigformComponent_1 = class ExtPivotconfigformComponent extends base {
+let ExtPivotconfigformComponent = ExtPivotconfigformComponent_1 = class ExtPivotconfigformComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotconfigformMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -50935,30 +58001,47 @@ let ExtPivotconfigformComponent = ExtPivotconfigformComponent_1 = class ExtPivot
     ngOnInit() {
         this.baseOnInit(pivotconfigformMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(pivotconfigformMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotconfigformComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotconfigformComponent = ExtPivotconfigformComponent_1 = __decorate([
     Component({
-        selector: 'pivotconfigform',
+        selector: 'ext-pivotconfigform',
         inputs: pivotconfigformMetaData.PROPERTIES,
         outputs: pivotconfigformMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotconfigformComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPivotconfigformComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPivotconfigformComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPivotconfigpanelComponent_1;
 class pivotconfigpanelMetaData {
 }
 pivotconfigpanelMetaData.XTYPE = 'pivotconfigpanel';
 pivotconfigpanelMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -50973,6 +58056,7 @@ pivotconfigpanelMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -51002,9 +58086,6 @@ pivotconfigpanelMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -51069,7 +58150,6 @@ pivotconfigpanelMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -51084,6 +58164,7 @@ pivotconfigpanelMetaData.PROPERTIES = [
     'tbar',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -51263,7 +58344,7 @@ pivotconfigpanelMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPivotconfigpanelComponent = ExtPivotconfigpanelComponent_1 = class ExtPivotconfigpanelComponent extends base {
+let ExtPivotconfigpanelComponent = ExtPivotconfigpanelComponent_1 = class ExtPivotconfigpanelComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotconfigpanelMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -51271,30 +58352,47 @@ let ExtPivotconfigpanelComponent = ExtPivotconfigpanelComponent_1 = class ExtPiv
     ngOnInit() {
         this.baseOnInit(pivotconfigpanelMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(pivotconfigpanelMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotconfigpanelComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotconfigpanelComponent = ExtPivotconfigpanelComponent_1 = __decorate([
     Component({
-        selector: 'pivotconfigpanel',
+        selector: 'ext-pivotconfigpanel',
         inputs: pivotconfigpanelMetaData.PROPERTIES,
         outputs: pivotconfigpanelMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotconfigpanelComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPivotconfigpanelComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPivotconfigpanelComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPivotsettingsComponent_1;
 class pivotsettingsMetaData {
 }
 pivotsettingsMetaData.XTYPE = 'pivotsettings';
 pivotsettingsMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -51311,10 +58409,12 @@ pivotsettingsMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
     'bottom',
+    'bubbleDirty',
     'buttonAlign',
     'buttons',
     'buttonToolbar',
@@ -51336,15 +58436,14 @@ pivotsettingsMetaData.PROPERTIES = [
     'defaults',
     'defaultToolWeights',
     'defaultType',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'enableSubmissionForm',
     'enctype',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
+    'fieldDefaults',
     'fieldSeparators',
     'flex',
     'floated',
@@ -51369,6 +58468,7 @@ pivotsettingsMetaData.PROPERTIES = [
     'instanceCls',
     'itemId',
     'items',
+    'jsonSubmit',
     'keyMap',
     'keyMapEnabled',
     'keyMapTarget',
@@ -51407,7 +58507,6 @@ pivotsettingsMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -51425,6 +58524,7 @@ pivotsettingsMetaData.PROPERTIES = [
     'timeout',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -51489,6 +58589,7 @@ pivotsettingsMetaData.EVENTS = [
     { name: 'collapse', parameters: 'pivotsettings' },
     { name: 'deactivate', parameters: 'oldActiveItem,pivotsettings,newActiveItem' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'pivotsettings,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'drawerhide', parameters: 'pivotsettings' },
@@ -51568,6 +58669,7 @@ pivotsettingsMetaData.EVENTNAMES = [
     'collapse',
     'deactivate',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'drawerhide',
@@ -51612,7 +58714,7 @@ pivotsettingsMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPivotsettingsComponent = ExtPivotsettingsComponent_1 = class ExtPivotsettingsComponent extends base {
+let ExtPivotsettingsComponent = ExtPivotsettingsComponent_1 = class ExtPivotsettingsComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotsettingsMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -51620,30 +58722,47 @@ let ExtPivotsettingsComponent = ExtPivotsettingsComponent_1 = class ExtPivotsett
     ngOnInit() {
         this.baseOnInit(pivotsettingsMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(pivotsettingsMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotsettingsComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotsettingsComponent = ExtPivotsettingsComponent_1 = __decorate([
     Component({
-        selector: 'pivotsettings',
+        selector: 'ext-pivotsettings',
         inputs: pivotsettingsMetaData.PROPERTIES,
         outputs: pivotsettingsMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotsettingsComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPivotsettingsComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPivotsettingsComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPivotrangeeditorComponent_1;
 class pivotrangeeditorMetaData {
 }
 pivotrangeeditorMetaData.XTYPE = 'pivotrangeeditor';
 pivotrangeeditorMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -51660,10 +58779,12 @@ pivotrangeeditorMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
     'bottom',
+    'bubbleDirty',
     'buttonAlign',
     'buttons',
     'buttonToolbar',
@@ -51685,15 +58806,14 @@ pivotrangeeditorMetaData.PROPERTIES = [
     'defaults',
     'defaultToolWeights',
     'defaultType',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'enableSubmissionForm',
     'enctype',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
+    'fieldDefaults',
     'fieldSeparators',
     'flex',
     'floated',
@@ -51718,6 +58838,7 @@ pivotrangeeditorMetaData.PROPERTIES = [
     'instanceCls',
     'itemId',
     'items',
+    'jsonSubmit',
     'keyMap',
     'keyMapEnabled',
     'keyMapTarget',
@@ -51756,7 +58877,6 @@ pivotrangeeditorMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -51774,6 +58894,7 @@ pivotrangeeditorMetaData.PROPERTIES = [
     'timeout',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -51838,6 +58959,7 @@ pivotrangeeditorMetaData.EVENTS = [
     { name: 'collapse', parameters: 'pivotrangeeditor' },
     { name: 'deactivate', parameters: 'oldActiveItem,pivotrangeeditor,newActiveItem' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'pivotrangeeditor,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'drawerhide', parameters: 'pivotrangeeditor' },
@@ -51917,6 +59039,7 @@ pivotrangeeditorMetaData.EVENTNAMES = [
     'collapse',
     'deactivate',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'drawerhide',
@@ -51961,7 +59084,7 @@ pivotrangeeditorMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPivotrangeeditorComponent = ExtPivotrangeeditorComponent_1 = class ExtPivotrangeeditorComponent extends base {
+let ExtPivotrangeeditorComponent = ExtPivotrangeeditorComponent_1 = class ExtPivotrangeeditorComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotrangeeditorMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -51969,28 +59092,45 @@ let ExtPivotrangeeditorComponent = ExtPivotrangeeditorComponent_1 = class ExtPiv
     ngOnInit() {
         this.baseOnInit(pivotrangeeditorMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(pivotrangeeditorMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotrangeeditorComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotrangeeditorComponent = ExtPivotrangeeditorComponent_1 = __decorate([
     Component({
-        selector: 'pivotrangeeditor',
+        selector: 'ext-pivotrangeeditor',
         inputs: pivotrangeeditorMetaData.PROPERTIES,
         outputs: pivotrangeeditorMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotrangeeditorComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPivotrangeeditorComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPivotrangeeditorComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPivotgridrowComponent_1;
 class pivotgridrowMetaData {
 }
 pivotgridrowMetaData.XTYPE = 'pivotgridrow';
 pivotgridrowMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -52013,9 +59153,6 @@ pivotgridrowMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'expandedField',
     'flex',
     'floated',
@@ -52056,7 +59193,6 @@ pivotgridrowMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -52206,7 +59342,7 @@ pivotgridrowMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPivotgridrowComponent = ExtPivotgridrowComponent_1 = class ExtPivotgridrowComponent extends base {
+let ExtPivotgridrowComponent = ExtPivotgridrowComponent_1 = class ExtPivotgridrowComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, pivotgridrowMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -52214,28 +59350,45 @@ let ExtPivotgridrowComponent = ExtPivotgridrowComponent_1 = class ExtPivotgridro
     ngOnInit() {
         this.baseOnInit(pivotgridrowMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(pivotgridrowMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPivotgridrowComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPivotgridrowComponent = ExtPivotgridrowComponent_1 = __decorate([
     Component({
-        selector: 'pivotgridrow',
+        selector: 'ext-pivotgridrow',
         inputs: pivotgridrowMetaData.PROPERTIES,
         outputs: pivotgridrowMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPivotgridrowComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPivotgridrowComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPivotgridrowComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtProgressComponent_1;
 class progressMetaData {
 }
 progressMetaData.XTYPE = 'progress';
 progressMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'animate',
     'ariaAttributes',
@@ -52257,9 +59410,6 @@ progressMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -52297,7 +59447,6 @@ progressMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -52449,7 +59598,7 @@ progressMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtProgressComponent = ExtProgressComponent_1 = class ExtProgressComponent extends base {
+let ExtProgressComponent = ExtProgressComponent_1 = class ExtProgressComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, progressMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -52457,28 +59606,45 @@ let ExtProgressComponent = ExtProgressComponent_1 = class ExtProgressComponent e
     ngOnInit() {
         this.baseOnInit(progressMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(progressMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtProgressComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtProgressComponent = ExtProgressComponent_1 = __decorate([
     Component({
-        selector: 'progress',
+        selector: 'ext-progress',
         inputs: progressMetaData.PROPERTIES,
         outputs: progressMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtProgressComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtProgressComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtProgressComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtProgressbarwidgetComponent_1;
 class progressbarwidgetMetaData {
 }
 progressbarwidgetMetaData.XTYPE = 'progressbarwidget';
 progressbarwidgetMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'animate',
     'ariaAttributes',
@@ -52500,9 +59666,6 @@ progressbarwidgetMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -52540,7 +59703,6 @@ progressbarwidgetMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -52692,7 +59854,7 @@ progressbarwidgetMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtProgressbarwidgetComponent = ExtProgressbarwidgetComponent_1 = class ExtProgressbarwidgetComponent extends base {
+let ExtProgressbarwidgetComponent = ExtProgressbarwidgetComponent_1 = class ExtProgressbarwidgetComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, progressbarwidgetMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -52700,30 +59862,47 @@ let ExtProgressbarwidgetComponent = ExtProgressbarwidgetComponent_1 = class ExtP
     ngOnInit() {
         this.baseOnInit(progressbarwidgetMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(progressbarwidgetMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtProgressbarwidgetComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtProgressbarwidgetComponent = ExtProgressbarwidgetComponent_1 = __decorate([
     Component({
-        selector: 'progressbarwidget',
+        selector: 'ext-progressbarwidget',
         inputs: progressbarwidgetMetaData.PROPERTIES,
         outputs: progressbarwidgetMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtProgressbarwidgetComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtProgressbarwidgetComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtProgressbarwidgetComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSegmentedbuttonComponent_1;
 class segmentedbuttonMetaData {
 }
 segmentedbuttonMetaData.XTYPE = 'segmentedbutton';
 segmentedbuttonMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowDepress',
     'allowFocusingDisabledChildren',
     'allowMultiple',
@@ -52737,6 +59916,7 @@ segmentedbuttonMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -52756,9 +59936,6 @@ segmentedbuttonMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -52808,7 +59985,6 @@ segmentedbuttonMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -52980,7 +60156,7 @@ segmentedbuttonMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSegmentedbuttonComponent = ExtSegmentedbuttonComponent_1 = class ExtSegmentedbuttonComponent extends base {
+let ExtSegmentedbuttonComponent = ExtSegmentedbuttonComponent_1 = class ExtSegmentedbuttonComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, segmentedbuttonMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -52988,30 +60164,47 @@ let ExtSegmentedbuttonComponent = ExtSegmentedbuttonComponent_1 = class ExtSegme
     ngOnInit() {
         this.baseOnInit(segmentedbuttonMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(segmentedbuttonMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSegmentedbuttonComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSegmentedbuttonComponent = ExtSegmentedbuttonComponent_1 = __decorate([
     Component({
-        selector: 'segmentedbutton',
+        selector: 'ext-segmentedbutton',
         inputs: segmentedbuttonMetaData.PROPERTIES,
         outputs: segmentedbuttonMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSegmentedbuttonComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSegmentedbuttonComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSegmentedbuttonComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSheetComponent_1;
 class sheetMetaData {
 }
 sheetMetaData.XTYPE = 'sheet';
 sheetMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'anchor',
@@ -53026,6 +60219,7 @@ sheetMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -53057,10 +60251,7 @@ sheetMetaData.PROPERTIES = [
     'docked',
     'draggable',
     'enter',
-    'enterAnimation',
-    'eventHandlers',
     'exit',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -53118,7 +60309,6 @@ sheetMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -53136,6 +60326,7 @@ sheetMetaData.PROPERTIES = [
     'tbar',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -53315,7 +60506,7 @@ sheetMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSheetComponent = ExtSheetComponent_1 = class ExtSheetComponent extends base {
+let ExtSheetComponent = ExtSheetComponent_1 = class ExtSheetComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sheetMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -53323,28 +60514,45 @@ let ExtSheetComponent = ExtSheetComponent_1 = class ExtSheetComponent extends ba
     ngOnInit() {
         this.baseOnInit(sheetMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(sheetMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSheetComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSheetComponent = ExtSheetComponent_1 = __decorate([
     Component({
-        selector: 'sheet',
+        selector: 'ext-sheet',
         inputs: sheetMetaData.PROPERTIES,
         outputs: sheetMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSheetComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSheetComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSheetComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSliderComponent_1;
 class sliderMetaData {
 }
 sliderMetaData.XTYPE = 'slider';
 sliderMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'allowThumbsOverlapping',
     'alwaysOnTop',
     'animation',
@@ -53367,9 +60575,6 @@ sliderMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -53411,7 +60616,6 @@ sliderMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -53572,7 +60776,7 @@ sliderMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSliderComponent = ExtSliderComponent_1 = class ExtSliderComponent extends base {
+let ExtSliderComponent = ExtSliderComponent_1 = class ExtSliderComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sliderMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -53580,28 +60784,45 @@ let ExtSliderComponent = ExtSliderComponent_1 = class ExtSliderComponent extends
     ngOnInit() {
         this.baseOnInit(sliderMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(sliderMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSliderComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSliderComponent = ExtSliderComponent_1 = __decorate([
     Component({
-        selector: 'slider',
+        selector: 'ext-slider',
         inputs: sliderMetaData.PROPERTIES,
         outputs: sliderMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSliderComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSliderComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSliderComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtThumbComponent_1;
 class thumbMetaData {
 }
 thumbMetaData.XTYPE = 'thumb';
 thumbMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -53622,9 +60843,6 @@ thumbMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'fillCls',
     'fillTrack',
     'flex',
@@ -53664,7 +60882,6 @@ thumbMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -53813,7 +61030,7 @@ thumbMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtThumbComponent = ExtThumbComponent_1 = class ExtThumbComponent extends base {
+let ExtThumbComponent = ExtThumbComponent_1 = class ExtThumbComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, thumbMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -53821,28 +61038,45 @@ let ExtThumbComponent = ExtThumbComponent_1 = class ExtThumbComponent extends ba
     ngOnInit() {
         this.baseOnInit(thumbMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(thumbMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtThumbComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtThumbComponent = ExtThumbComponent_1 = __decorate([
     Component({
-        selector: 'thumb',
+        selector: 'ext-thumb',
         inputs: thumbMetaData.PROPERTIES,
         outputs: thumbMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtThumbComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtThumbComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtThumbComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTogglesliderComponent_1;
 class togglesliderMetaData {
 }
 togglesliderMetaData.XTYPE = 'toggleslider';
 togglesliderMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'allowThumbsOverlapping',
     'alwaysOnTop',
     'animation',
@@ -53865,9 +61099,6 @@ togglesliderMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -53909,7 +61140,6 @@ togglesliderMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -54070,7 +61300,7 @@ togglesliderMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTogglesliderComponent = ExtTogglesliderComponent_1 = class ExtTogglesliderComponent extends base {
+let ExtTogglesliderComponent = ExtTogglesliderComponent_1 = class ExtTogglesliderComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, togglesliderMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -54078,28 +61308,45 @@ let ExtTogglesliderComponent = ExtTogglesliderComponent_1 = class ExtToggleslide
     ngOnInit() {
         this.baseOnInit(togglesliderMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(togglesliderMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTogglesliderComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTogglesliderComponent = ExtTogglesliderComponent_1 = __decorate([
     Component({
-        selector: 'toggleslider',
+        selector: 'ext-toggleslider',
         inputs: togglesliderMetaData.PROPERTIES,
         outputs: togglesliderMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTogglesliderComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTogglesliderComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTogglesliderComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSpacerComponent_1;
 class spacerMetaData {
 }
 spacerMetaData.XTYPE = 'spacer';
 spacerMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -54120,9 +61367,6 @@ spacerMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -54160,7 +61404,6 @@ spacerMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -54309,7 +61552,7 @@ spacerMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSpacerComponent = ExtSpacerComponent_1 = class ExtSpacerComponent extends base {
+let ExtSpacerComponent = ExtSpacerComponent_1 = class ExtSpacerComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, spacerMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -54317,28 +61560,45 @@ let ExtSpacerComponent = ExtSpacerComponent_1 = class ExtSpacerComponent extends
     ngOnInit() {
         this.baseOnInit(spacerMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(spacerMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSpacerComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSpacerComponent = ExtSpacerComponent_1 = __decorate([
     Component({
-        selector: 'spacer',
+        selector: 'ext-spacer',
         inputs: spacerMetaData.PROPERTIES,
         outputs: spacerMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSpacerComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSpacerComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSpacerComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSparklinebarComponent_1;
 class sparklinebarMetaData {
 }
 sparklinebarMetaData.XTYPE = 'sparklinebar';
 sparklinebarMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -54367,9 +61627,6 @@ sparklinebarMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -54412,7 +61669,6 @@ sparklinebarMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -54569,7 +61825,7 @@ sparklinebarMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSparklinebarComponent = ExtSparklinebarComponent_1 = class ExtSparklinebarComponent extends base {
+let ExtSparklinebarComponent = ExtSparklinebarComponent_1 = class ExtSparklinebarComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sparklinebarMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -54577,28 +61833,45 @@ let ExtSparklinebarComponent = ExtSparklinebarComponent_1 = class ExtSparklineba
     ngOnInit() {
         this.baseOnInit(sparklinebarMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(sparklinebarMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSparklinebarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSparklinebarComponent = ExtSparklinebarComponent_1 = __decorate([
     Component({
-        selector: 'sparklinebar',
+        selector: 'ext-sparklinebar',
         inputs: sparklinebarMetaData.PROPERTIES,
         outputs: sparklinebarMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinebarComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSparklinebarComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSparklinebarComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSparklineComponent_1;
 class sparklineMetaData {
 }
 sparklineMetaData.XTYPE = 'sparkline';
 sparklineMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -54620,9 +61893,6 @@ sparklineMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -54663,7 +61933,6 @@ sparklineMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -54817,7 +62086,7 @@ sparklineMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSparklineComponent = ExtSparklineComponent_1 = class ExtSparklineComponent extends base {
+let ExtSparklineComponent = ExtSparklineComponent_1 = class ExtSparklineComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sparklineMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -54825,28 +62094,45 @@ let ExtSparklineComponent = ExtSparklineComponent_1 = class ExtSparklineComponen
     ngOnInit() {
         this.baseOnInit(sparklineMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(sparklineMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSparklineComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSparklineComponent = ExtSparklineComponent_1 = __decorate([
     Component({
-        selector: 'sparkline',
+        selector: 'ext-sparkline',
         inputs: sparklineMetaData.PROPERTIES,
         outputs: sparklineMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklineComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSparklineComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSparklineComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSparklineboxComponent_1;
 class sparklineboxMetaData {
 }
 sparklineboxMetaData.XTYPE = 'sparklinebox';
 sparklineboxMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -54872,9 +62158,6 @@ sparklineboxMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -54920,7 +62203,6 @@ sparklineboxMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -55079,7 +62361,7 @@ sparklineboxMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSparklineboxComponent = ExtSparklineboxComponent_1 = class ExtSparklineboxComponent extends base {
+let ExtSparklineboxComponent = ExtSparklineboxComponent_1 = class ExtSparklineboxComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sparklineboxMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -55087,28 +62369,45 @@ let ExtSparklineboxComponent = ExtSparklineboxComponent_1 = class ExtSparklinebo
     ngOnInit() {
         this.baseOnInit(sparklineboxMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(sparklineboxMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSparklineboxComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSparklineboxComponent = ExtSparklineboxComponent_1 = __decorate([
     Component({
-        selector: 'sparklinebox',
+        selector: 'ext-sparklinebox',
         inputs: sparklineboxMetaData.PROPERTIES,
         outputs: sparklineboxMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklineboxComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSparklineboxComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSparklineboxComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSparklinebulletComponent_1;
 class sparklinebulletMetaData {
 }
 sparklinebulletMetaData.XTYPE = 'sparklinebullet';
 sparklinebulletMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -55131,9 +62430,6 @@ sparklinebulletMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -55176,7 +62472,6 @@ sparklinebulletMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -55332,7 +62627,7 @@ sparklinebulletMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSparklinebulletComponent = ExtSparklinebulletComponent_1 = class ExtSparklinebulletComponent extends base {
+let ExtSparklinebulletComponent = ExtSparklinebulletComponent_1 = class ExtSparklinebulletComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sparklinebulletMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -55340,28 +62635,45 @@ let ExtSparklinebulletComponent = ExtSparklinebulletComponent_1 = class ExtSpark
     ngOnInit() {
         this.baseOnInit(sparklinebulletMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(sparklinebulletMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSparklinebulletComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSparklinebulletComponent = ExtSparklinebulletComponent_1 = __decorate([
     Component({
-        selector: 'sparklinebullet',
+        selector: 'ext-sparklinebullet',
         inputs: sparklinebulletMetaData.PROPERTIES,
         outputs: sparklinebulletMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinebulletComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSparklinebulletComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSparklinebulletComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSparklinediscreteComponent_1;
 class sparklinediscreteMetaData {
 }
 sparklinediscreteMetaData.XTYPE = 'sparklinediscrete';
 sparklinediscreteMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -55386,9 +62698,6 @@ sparklinediscreteMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -55430,7 +62739,6 @@ sparklinediscreteMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -55586,7 +62894,7 @@ sparklinediscreteMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSparklinediscreteComponent = ExtSparklinediscreteComponent_1 = class ExtSparklinediscreteComponent extends base {
+let ExtSparklinediscreteComponent = ExtSparklinediscreteComponent_1 = class ExtSparklinediscreteComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sparklinediscreteMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -55594,28 +62902,45 @@ let ExtSparklinediscreteComponent = ExtSparklinediscreteComponent_1 = class ExtS
     ngOnInit() {
         this.baseOnInit(sparklinediscreteMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(sparklinediscreteMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSparklinediscreteComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSparklinediscreteComponent = ExtSparklinediscreteComponent_1 = __decorate([
     Component({
-        selector: 'sparklinediscrete',
+        selector: 'ext-sparklinediscrete',
         inputs: sparklinediscreteMetaData.PROPERTIES,
         outputs: sparklinediscreteMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinediscreteComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSparklinediscreteComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSparklinediscreteComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSparklinelineComponent_1;
 class sparklinelineMetaData {
 }
 sparklinelineMetaData.XTYPE = 'sparklineline';
 sparklinelineMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -55642,9 +62967,6 @@ sparklinelineMetaData.PROPERTIES = [
     'docked',
     'draggable',
     'drawNormalOnTop',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'fillColor',
     'flex',
     'floated',
@@ -55694,7 +63016,6 @@ sparklinelineMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -55851,7 +63172,7 @@ sparklinelineMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSparklinelineComponent = ExtSparklinelineComponent_1 = class ExtSparklinelineComponent extends base {
+let ExtSparklinelineComponent = ExtSparklinelineComponent_1 = class ExtSparklinelineComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sparklinelineMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -55859,28 +63180,45 @@ let ExtSparklinelineComponent = ExtSparklinelineComponent_1 = class ExtSparkline
     ngOnInit() {
         this.baseOnInit(sparklinelineMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(sparklinelineMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSparklinelineComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSparklinelineComponent = ExtSparklinelineComponent_1 = __decorate([
     Component({
-        selector: 'sparklineline',
+        selector: 'ext-sparklineline',
         inputs: sparklinelineMetaData.PROPERTIES,
         outputs: sparklinelineMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinelineComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSparklinelineComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSparklinelineComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSparklinepieComponent_1;
 class sparklinepieMetaData {
 }
 sparklinepieMetaData.XTYPE = 'sparklinepie';
 sparklinepieMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -55904,9 +63242,6 @@ sparklinepieMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -55948,7 +63283,6 @@ sparklinepieMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -56103,7 +63437,7 @@ sparklinepieMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSparklinepieComponent = ExtSparklinepieComponent_1 = class ExtSparklinepieComponent extends base {
+let ExtSparklinepieComponent = ExtSparklinepieComponent_1 = class ExtSparklinepieComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sparklinepieMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -56111,28 +63445,45 @@ let ExtSparklinepieComponent = ExtSparklinepieComponent_1 = class ExtSparklinepi
     ngOnInit() {
         this.baseOnInit(sparklinepieMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(sparklinepieMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSparklinepieComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSparklinepieComponent = ExtSparklinepieComponent_1 = __decorate([
     Component({
-        selector: 'sparklinepie',
+        selector: 'ext-sparklinepie',
         inputs: sparklinepieMetaData.PROPERTIES,
         outputs: sparklinepieMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinepieComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSparklinepieComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSparklinepieComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSparklinetristateComponent_1;
 class sparklinetristateMetaData {
 }
 sparklinetristateMetaData.XTYPE = 'sparklinetristate';
 sparklinetristateMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -56157,9 +63508,6 @@ sparklinetristateMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -56202,7 +63550,6 @@ sparklinetristateMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -56357,7 +63704,7 @@ sparklinetristateMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSparklinetristateComponent = ExtSparklinetristateComponent_1 = class ExtSparklinetristateComponent extends base {
+let ExtSparklinetristateComponent = ExtSparklinetristateComponent_1 = class ExtSparklinetristateComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, sparklinetristateMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -56365,28 +63712,45 @@ let ExtSparklinetristateComponent = ExtSparklinetristateComponent_1 = class ExtS
     ngOnInit() {
         this.baseOnInit(sparklinetristateMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(sparklinetristateMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSparklinetristateComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSparklinetristateComponent = ExtSparklinetristateComponent_1 = __decorate([
     Component({
-        selector: 'sparklinetristate',
+        selector: 'ext-sparklinetristate',
         inputs: sparklinetristateMetaData.PROPERTIES,
         outputs: sparklinetristateMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSparklinetristateComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSparklinetristateComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSparklinetristateComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtSplitbuttonComponent_1;
 class splitbuttonMetaData {
 }
 splitbuttonMetaData.XTYPE = 'splitbutton';
 splitbuttonMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'allowDepress',
     'alwaysOnTop',
     'ariaAttributes',
@@ -56416,9 +63780,6 @@ splitbuttonMetaData.PROPERTIES = [
     'docked',
     'draggable',
     'enableToggle',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -56465,7 +63826,6 @@ splitbuttonMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -56629,7 +63989,7 @@ splitbuttonMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtSplitbuttonComponent = ExtSplitbuttonComponent_1 = class ExtSplitbuttonComponent extends base {
+let ExtSplitbuttonComponent = ExtSplitbuttonComponent_1 = class ExtSplitbuttonComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, splitbuttonMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -56637,31 +63997,48 @@ let ExtSplitbuttonComponent = ExtSplitbuttonComponent_1 = class ExtSplitbuttonCo
     ngOnInit() {
         this.baseOnInit(splitbuttonMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(splitbuttonMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtSplitbuttonComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtSplitbuttonComponent = ExtSplitbuttonComponent_1 = __decorate([
     Component({
-        selector: 'splitbutton',
+        selector: 'ext-splitbutton',
         inputs: splitbuttonMetaData.PROPERTIES,
         outputs: splitbuttonMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtSplitbuttonComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtSplitbuttonComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtSplitbuttonComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTabbarComponent_1;
 class tabbarMetaData {
 }
 tabbarMetaData.XTYPE = 'tabbar';
 tabbarMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'activeTab',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'animateIndicator',
@@ -56673,6 +64050,7 @@ tabbarMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -56693,9 +64071,6 @@ tabbarMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -56743,7 +64118,6 @@ tabbarMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -56754,6 +64128,7 @@ tabbarMetaData.PROPERTIES = [
     'stateId',
     'style',
     'tabIndex',
+    'tabRotation',
     'title',
     'toFrontOnShow',
     'tooltip',
@@ -56916,7 +64291,7 @@ tabbarMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTabbarComponent = ExtTabbarComponent_1 = class ExtTabbarComponent extends base {
+let ExtTabbarComponent = ExtTabbarComponent_1 = class ExtTabbarComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, tabbarMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -56924,30 +64299,47 @@ let ExtTabbarComponent = ExtTabbarComponent_1 = class ExtTabbarComponent extends
     ngOnInit() {
         this.baseOnInit(tabbarMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(tabbarMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTabbarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTabbarComponent = ExtTabbarComponent_1 = __decorate([
     Component({
-        selector: 'tabbar',
+        selector: 'ext-tabbar',
         inputs: tabbarMetaData.PROPERTIES,
         outputs: tabbarMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTabbarComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTabbarComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTabbarComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTabpanelComponent_1;
 class tabpanelMetaData {
 }
 tabpanelMetaData.XTYPE = 'tabpanel';
 tabpanelMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -56955,9 +64347,11 @@ tabpanelMetaData.PROPERTIES = [
     'ariaLabel',
     'ariaLabelledBy',
     'autoDestroy',
+    'autoOrientAnimation',
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -56976,9 +64370,6 @@ tabpanelMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -57027,7 +64418,6 @@ tabpanelMetaData.PROPERTIES = [
     'ripple',
     'scroll',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -57040,6 +64430,7 @@ tabpanelMetaData.PROPERTIES = [
     'tabBar',
     'tabBarPosition',
     'tabIndex',
+    'tabRotation',
     'toFrontOnShow',
     'tooltip',
     'top',
@@ -57195,7 +64586,7 @@ tabpanelMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTabpanelComponent = ExtTabpanelComponent_1 = class ExtTabpanelComponent extends base {
+let ExtTabpanelComponent = ExtTabpanelComponent_1 = class ExtTabpanelComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, tabpanelMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -57203,29 +64594,46 @@ let ExtTabpanelComponent = ExtTabpanelComponent_1 = class ExtTabpanelComponent e
     ngOnInit() {
         this.baseOnInit(tabpanelMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(tabpanelMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTabpanelComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTabpanelComponent = ExtTabpanelComponent_1 = __decorate([
     Component({
-        selector: 'tabpanel',
+        selector: 'ext-tabpanel',
         inputs: tabpanelMetaData.PROPERTIES,
         outputs: tabpanelMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTabpanelComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTabpanelComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTabpanelComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTabComponent_1;
 class tabMetaData {
 }
 tabMetaData.XTYPE = 'tab';
 tabMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'active',
+    'alignSelf',
     'allowDepress',
     'alwaysOnTop',
     'ariaAttributes',
@@ -57255,9 +64663,6 @@ tabMetaData.PROPERTIES = [
     'docked',
     'draggable',
     'enableToggle',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -57302,9 +64707,9 @@ tabMetaData.PROPERTIES = [
     'renderTo',
     'right',
     'ripple',
+    'rotation',
     'scope',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -57316,6 +64721,7 @@ tabMetaData.PROPERTIES = [
     'stretchMenu',
     'style',
     'tabIndex',
+    'tabPosition',
     'text',
     'textAlign',
     'title',
@@ -57471,7 +64877,7 @@ tabMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTabComponent = ExtTabComponent_1 = class ExtTabComponent extends base {
+let ExtTabComponent = ExtTabComponent_1 = class ExtTabComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, tabMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -57479,32 +64885,49 @@ let ExtTabComponent = ExtTabComponent_1 = class ExtTabComponent extends base {
     ngOnInit() {
         this.baseOnInit(tabMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(tabMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTabComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTabComponent = ExtTabComponent_1 = __decorate([
     Component({
-        selector: 'tab',
+        selector: 'ext-tab',
         inputs: tabMetaData.PROPERTIES,
         outputs: tabMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTabComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTabComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTabComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTooltipComponent_1;
 class tooltipMetaData {
 }
 tooltipMetaData.XTYPE = 'tooltip';
 tooltipMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
     'align',
     'alignDelegate',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'allowOver',
     'alwaysOnTop',
@@ -57522,6 +64945,7 @@ tooltipMetaData.PROPERTIES = [
     'bbar',
     'bind',
     'bodyBorder',
+    'bodyCls',
     'bodyPadding',
     'bodyStyle',
     'border',
@@ -57553,9 +64977,6 @@ tooltipMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -57615,7 +65036,6 @@ tooltipMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -57633,6 +65053,7 @@ tooltipMetaData.PROPERTIES = [
     'tbar',
     'title',
     'titleAlign',
+    'titleCollapse',
     'toFrontOnShow',
     'toolDefaults',
     'tools',
@@ -57813,7 +65234,7 @@ tooltipMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTooltipComponent = ExtTooltipComponent_1 = class ExtTooltipComponent extends base {
+let ExtTooltipComponent = ExtTooltipComponent_1 = class ExtTooltipComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, tooltipMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -57821,28 +65242,45 @@ let ExtTooltipComponent = ExtTooltipComponent_1 = class ExtTooltipComponent exte
     ngOnInit() {
         this.baseOnInit(tooltipMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(tooltipMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTooltipComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTooltipComponent = ExtTooltipComponent_1 = __decorate([
     Component({
-        selector: 'tooltip',
+        selector: 'ext-tooltip',
         inputs: tooltipMetaData.PROPERTIES,
         outputs: tooltipMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTooltipComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTooltipComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTooltipComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTitleComponent_1;
 class titleMetaData {
 }
 titleMetaData.XTYPE = 'title';
 titleMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -57863,9 +65301,6 @@ titleMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -57903,7 +65338,6 @@ titleMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -58053,7 +65487,7 @@ titleMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTitleComponent = ExtTitleComponent_1 = class ExtTitleComponent extends base {
+let ExtTitleComponent = ExtTitleComponent_1 = class ExtTitleComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, titleMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -58061,30 +65495,47 @@ let ExtTitleComponent = ExtTitleComponent_1 = class ExtTitleComponent extends ba
     ngOnInit() {
         this.baseOnInit(titleMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(titleMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTitleComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTitleComponent = ExtTitleComponent_1 = __decorate([
     Component({
-        selector: 'title',
+        selector: 'ext-title',
         inputs: titleMetaData.PROPERTIES,
         outputs: titleMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTitleComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTitleComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTitleComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtTitlebarComponent_1;
 class titlebarMetaData {
 }
 titlebarMetaData.XTYPE = 'titlebar';
 titlebarMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -58095,6 +65546,7 @@ titlebarMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -58114,9 +65566,6 @@ titlebarMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -58165,7 +65614,6 @@ titlebarMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -58333,7 +65781,7 @@ titlebarMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtTitlebarComponent = ExtTitlebarComponent_1 = class ExtTitlebarComponent extends base {
+let ExtTitlebarComponent = ExtTitlebarComponent_1 = class ExtTitlebarComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, titlebarMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -58341,28 +65789,45 @@ let ExtTitlebarComponent = ExtTitlebarComponent_1 = class ExtTitlebarComponent e
     ngOnInit() {
         this.baseOnInit(titlebarMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(titlebarMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtTitlebarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtTitlebarComponent = ExtTitlebarComponent_1 = __decorate([
     Component({
-        selector: 'titlebar',
+        selector: 'ext-titlebar',
         inputs: titlebarMetaData.PROPERTIES,
         outputs: titlebarMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtTitlebarComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtTitlebarComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtTitlebarComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtToolComponent_1;
 class toolMetaData {
 }
 toolMetaData.XTYPE = 'tool';
 toolMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -58383,9 +65848,6 @@ toolMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -58427,7 +65889,6 @@ toolMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -58581,7 +66042,7 @@ toolMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtToolComponent = ExtToolComponent_1 = class ExtToolComponent extends base {
+let ExtToolComponent = ExtToolComponent_1 = class ExtToolComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, toolMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -58589,28 +66050,45 @@ let ExtToolComponent = ExtToolComponent_1 = class ExtToolComponent extends base 
     ngOnInit() {
         this.baseOnInit(toolMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(toolMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtToolComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtToolComponent = ExtToolComponent_1 = __decorate([
     Component({
-        selector: 'tool',
+        selector: 'ext-tool',
         inputs: toolMetaData.PROPERTIES,
         outputs: toolMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtToolComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtToolComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtToolComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtPaneltoolComponent_1;
 class paneltoolMetaData {
 }
 paneltoolMetaData.XTYPE = 'paneltool';
 paneltoolMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -58631,9 +66109,6 @@ paneltoolMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -58675,7 +66150,6 @@ paneltoolMetaData.PROPERTIES = [
     'ripple',
     'scope',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -58829,7 +66303,7 @@ paneltoolMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtPaneltoolComponent = ExtPaneltoolComponent_1 = class ExtPaneltoolComponent extends base {
+let ExtPaneltoolComponent = ExtPaneltoolComponent_1 = class ExtPaneltoolComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, paneltoolMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -58837,30 +66311,47 @@ let ExtPaneltoolComponent = ExtPaneltoolComponent_1 = class ExtPaneltoolComponen
     ngOnInit() {
         this.baseOnInit(paneltoolMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(paneltoolMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtPaneltoolComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtPaneltoolComponent = ExtPaneltoolComponent_1 = __decorate([
     Component({
-        selector: 'paneltool',
+        selector: 'ext-paneltool',
         inputs: paneltoolMetaData.PROPERTIES,
         outputs: paneltoolMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtPaneltoolComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtPaneltoolComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtPaneltoolComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtToolbarComponent_1;
 class toolbarMetaData {
 }
 toolbarMetaData.XTYPE = 'toolbar';
 toolbarMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -58871,6 +66362,7 @@ toolbarMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -58890,9 +66382,6 @@ toolbarMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -58940,7 +66429,6 @@ toolbarMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -59107,7 +66595,7 @@ toolbarMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtToolbarComponent = ExtToolbarComponent_1 = class ExtToolbarComponent extends base {
+let ExtToolbarComponent = ExtToolbarComponent_1 = class ExtToolbarComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, toolbarMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -59115,28 +66603,45 @@ let ExtToolbarComponent = ExtToolbarComponent_1 = class ExtToolbarComponent exte
     ngOnInit() {
         this.baseOnInit(toolbarMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(toolbarMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtToolbarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtToolbarComponent = ExtToolbarComponent_1 = __decorate([
     Component({
-        selector: 'toolbar',
+        selector: 'ext-toolbar',
         inputs: toolbarMetaData.PROPERTIES,
         outputs: toolbarMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtToolbarComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtToolbarComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtToolbarComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtColorbuttonComponent_1;
 class colorbuttonMetaData {
 }
 colorbuttonMetaData.XTYPE = 'colorbutton';
 colorbuttonMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alphaDecimalFormat',
     'alwaysOnTop',
     'ariaAttributes',
@@ -59159,9 +66664,6 @@ colorbuttonMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -59201,7 +66703,6 @@ colorbuttonMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -59353,7 +66854,7 @@ colorbuttonMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtColorbuttonComponent = ExtColorbuttonComponent_1 = class ExtColorbuttonComponent extends base {
+let ExtColorbuttonComponent = ExtColorbuttonComponent_1 = class ExtColorbuttonComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, colorbuttonMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -59361,28 +66862,45 @@ let ExtColorbuttonComponent = ExtColorbuttonComponent_1 = class ExtColorbuttonCo
     ngOnInit() {
         this.baseOnInit(colorbuttonMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(colorbuttonMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtColorbuttonComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtColorbuttonComponent = ExtColorbuttonComponent_1 = __decorate([
     Component({
-        selector: 'colorbutton',
+        selector: 'ext-colorbutton',
         inputs: colorbuttonMetaData.PROPERTIES,
         outputs: colorbuttonMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtColorbuttonComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtColorbuttonComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtColorbuttonComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtColorpickercolorpreviewComponent_1;
 class colorpickercolorpreviewMetaData {
 }
 colorpickercolorpreviewMetaData.XTYPE = 'colorpickercolorpreview';
 colorpickercolorpreviewMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -59403,9 +66921,6 @@ colorpickercolorpreviewMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -59443,7 +66958,6 @@ colorpickercolorpreviewMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -59592,7 +67106,7 @@ colorpickercolorpreviewMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtColorpickercolorpreviewComponent = ExtColorpickercolorpreviewComponent_1 = class ExtColorpickercolorpreviewComponent extends base {
+let ExtColorpickercolorpreviewComponent = ExtColorpickercolorpreviewComponent_1 = class ExtColorpickercolorpreviewComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, colorpickercolorpreviewMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -59600,28 +67114,45 @@ let ExtColorpickercolorpreviewComponent = ExtColorpickercolorpreviewComponent_1 
     ngOnInit() {
         this.baseOnInit(colorpickercolorpreviewMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(colorpickercolorpreviewMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtColorpickercolorpreviewComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtColorpickercolorpreviewComponent = ExtColorpickercolorpreviewComponent_1 = __decorate([
     Component({
-        selector: 'colorpickercolorpreview',
+        selector: 'ext-colorpickercolorpreview',
         inputs: colorpickercolorpreviewMetaData.PROPERTIES,
         outputs: colorpickercolorpreviewMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtColorpickercolorpreviewComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtColorpickercolorpreviewComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtColorpickercolorpreviewComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtColorfieldComponent_1;
 class colorfieldMetaData {
 }
 colorfieldMetaData.XTYPE = 'colorfield';
 colorfieldMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alignTarget',
     'alphaDecimalFormat',
     'alwaysOnTop',
@@ -59641,6 +67172,7 @@ colorfieldMetaData.PROPERTIES = [
     'bodyAlign',
     'border',
     'bottom',
+    'bubbleDirty',
     'centered',
     'clearable',
     'cls',
@@ -59649,21 +67181,20 @@ colorfieldMetaData.PROPERTIES = [
     'contentEl',
     'controller',
     'data',
+    'dataType',
     'defaultListenerScope',
+    'dirty',
     'disabled',
     'displayed',
     'docked',
     'draggable',
     'edgePicker',
     'editable',
-    'enterAnimation',
     'error',
     'errorMessage',
     'errorTarget',
     'errorTip',
     'errorTpl',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'floatedPicker',
@@ -59681,7 +67212,6 @@ colorfieldMetaData.PROPERTIES = [
     'html',
     'id',
     'inline',
-    'inputCls',
     'inputMask',
     'inputType',
     'inputValue',
@@ -59717,7 +67247,6 @@ colorfieldMetaData.PROPERTIES = [
     'picker',
     'pickerSlotAlign',
     'placeholder',
-    'placeHolder',
     'plugins',
     'popup',
     'publishes',
@@ -59731,7 +67260,6 @@ colorfieldMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -59741,6 +67269,7 @@ colorfieldMetaData.PROPERTIES = [
     'stateful',
     'statefulDefaults',
     'stateId',
+    'stripCharsRe',
     'style',
     'tabIndex',
     'textAlign',
@@ -59806,6 +67335,7 @@ colorfieldMetaData.EVENTS = [
     { name: 'click', parameters: 'e' },
     { name: 'collapse', parameters: 'field' },
     { name: 'destroy', parameters: '' },
+    { name: 'dirtychange', parameters: 'colorfield,dirty' },
     { name: 'disabledchange', parameters: 'sender,value,oldValue' },
     { name: 'dockedchange', parameters: 'sender,value,oldValue' },
     { name: 'erased', parameters: 'sender' },
@@ -59820,6 +67350,7 @@ colorfieldMetaData.EVENTS = [
     { name: 'hiddenchange', parameters: 'sender,value,oldValue' },
     { name: 'hide', parameters: 'sender' },
     { name: 'initialize', parameters: 'sender' },
+    { name: 'keydown', parameters: 'colorfield,e' },
     { name: 'keyup', parameters: 'colorfield,e' },
     { name: 'leftchange', parameters: 'sender,value,oldValue' },
     { name: 'maxHeightchange', parameters: 'sender,value,oldValue' },
@@ -59873,6 +67404,7 @@ colorfieldMetaData.EVENTNAMES = [
     'click',
     'collapse',
     'destroy',
+    'dirtychange',
     'disabledchange',
     'dockedchange',
     'erased',
@@ -59887,6 +67419,7 @@ colorfieldMetaData.EVENTNAMES = [
     'hiddenchange',
     'hide',
     'initialize',
+    'keydown',
     'keyup',
     'leftchange',
     'maxHeightchange',
@@ -59910,7 +67443,7 @@ colorfieldMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtColorfieldComponent = ExtColorfieldComponent_1 = class ExtColorfieldComponent extends base {
+let ExtColorfieldComponent = ExtColorfieldComponent_1 = class ExtColorfieldComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, colorfieldMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -59918,28 +67451,44 @@ let ExtColorfieldComponent = ExtColorfieldComponent_1 = class ExtColorfieldCompo
     ngOnInit() {
         this.baseOnInit(colorfieldMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(colorfieldMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtColorfieldComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtColorfieldComponent = ExtColorfieldComponent_1 = __decorate([
     Component({
-        selector: 'colorfield',
+        selector: 'ext-colorfield',
         inputs: colorfieldMetaData.PROPERTIES,
         outputs: colorfieldMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtColorfieldComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtColorfieldComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtColorfieldComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtColorselectorComponent_1;
 class colorselectorMetaData {
 }
 colorselectorMetaData.XTYPE = 'colorselector';
 colorselectorMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'alphaDecimalFormat',
     'cancelButtonText',
     'color',
@@ -59968,7 +67517,7 @@ colorselectorMetaData.EVENTNAMES = [
     'ok',
     'ready'
 ];
-let ExtColorselectorComponent = ExtColorselectorComponent_1 = class ExtColorselectorComponent extends base {
+let ExtColorselectorComponent = ExtColorselectorComponent_1 = class ExtColorselectorComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, colorselectorMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -59976,28 +67525,45 @@ let ExtColorselectorComponent = ExtColorselectorComponent_1 = class ExtColorsele
     ngOnInit() {
         this.baseOnInit(colorselectorMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(colorselectorMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtColorselectorComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtColorselectorComponent = ExtColorselectorComponent_1 = __decorate([
     Component({
-        selector: 'colorselector',
+        selector: 'ext-colorselector',
         inputs: colorselectorMetaData.PROPERTIES,
         outputs: colorselectorMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtColorselectorComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtColorselectorComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtColorselectorComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtGaugeComponent_1;
 class gaugeMetaData {
 }
 gaugeMetaData.XTYPE = 'gauge';
 gaugeMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'angleOffset',
     'animation',
@@ -60021,9 +67587,6 @@ gaugeMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -60064,7 +67627,6 @@ gaugeMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -60221,7 +67783,7 @@ gaugeMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtGaugeComponent = ExtGaugeComponent_1 = class ExtGaugeComponent extends base {
+let ExtGaugeComponent = ExtGaugeComponent_1 = class ExtGaugeComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, gaugeMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -60229,30 +67791,47 @@ let ExtGaugeComponent = ExtGaugeComponent_1 = class ExtGaugeComponent extends ba
     ngOnInit() {
         this.baseOnInit(gaugeMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(gaugeMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGaugeComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGaugeComponent = ExtGaugeComponent_1 = __decorate([
     Component({
-        selector: 'gauge',
+        selector: 'ext-gauge',
         inputs: gaugeMetaData.PROPERTIES,
         outputs: gaugeMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtGaugeComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtGaugeComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtGaugeComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtMapComponent_1;
 class mapMetaData {
 }
 mapMetaData.XTYPE = 'map';
 mapMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -60263,6 +67842,7 @@ mapMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -60281,9 +67861,6 @@ mapMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -60338,7 +67915,6 @@ mapMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -60533,7 +68109,7 @@ mapMetaData.EVENTNAMES = [
     'zoomchange',
     'ready'
 ];
-let ExtMapComponent = ExtMapComponent_1 = class ExtMapComponent extends base {
+let ExtMapComponent = ExtMapComponent_1 = class ExtMapComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, mapMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -60541,30 +68117,47 @@ let ExtMapComponent = ExtMapComponent_1 = class ExtMapComponent extends base {
     ngOnInit() {
         this.baseOnInit(mapMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(mapMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtMapComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtMapComponent = ExtMapComponent_1 = __decorate([
     Component({
-        selector: 'map',
+        selector: 'ext-map',
         inputs: mapMetaData.PROPERTIES,
         outputs: mapMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtMapComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtMapComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtMapComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtGoogle_mapComponent_1;
 class google_mapMetaData {
 }
 google_mapMetaData.XTYPE = 'google-map';
 google_mapMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -60575,6 +68168,7 @@ google_mapMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -60593,9 +68187,6 @@ google_mapMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -60650,7 +68241,6 @@ google_mapMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -60845,7 +68435,7 @@ google_mapMetaData.EVENTNAMES = [
     'zoomchange',
     'ready'
 ];
-let ExtGoogle_mapComponent = ExtGoogle_mapComponent_1 = class ExtGoogle_mapComponent extends base {
+let ExtGoogle_mapComponent = ExtGoogle_mapComponent_1 = class ExtGoogle_mapComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, google_mapMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -60853,28 +68443,45 @@ let ExtGoogle_mapComponent = ExtGoogle_mapComponent_1 = class ExtGoogle_mapCompo
     ngOnInit() {
         this.baseOnInit(google_mapMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(google_mapMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtGoogle_mapComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtGoogle_mapComponent = ExtGoogle_mapComponent_1 = __decorate([
     Component({
-        selector: 'google-map',
+        selector: 'ext-google-map',
         inputs: google_mapMetaData.PROPERTIES,
         outputs: google_mapMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtGoogle_mapComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtGoogle_mapComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtGoogle_mapComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtRatingComponent_1;
 class ratingMetaData {
 }
 ratingMetaData.XTYPE = 'rating';
 ratingMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'animate',
     'ariaAttributes',
@@ -60896,9 +68503,6 @@ ratingMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'family',
     'flex',
     'floated',
@@ -60944,7 +68548,6 @@ ratingMetaData.PROPERTIES = [
     'scale',
     'scrollable',
     'selectedStyle',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -61098,7 +68701,7 @@ ratingMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtRatingComponent = ExtRatingComponent_1 = class ExtRatingComponent extends base {
+let ExtRatingComponent = ExtRatingComponent_1 = class ExtRatingComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, ratingMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -61106,28 +68709,45 @@ let ExtRatingComponent = ExtRatingComponent_1 = class ExtRatingComponent extends
     ngOnInit() {
         this.baseOnInit(ratingMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(ratingMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtRatingComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtRatingComponent = ExtRatingComponent_1 = __decorate([
     Component({
-        selector: 'rating',
+        selector: 'ext-rating',
         inputs: ratingMetaData.PROPERTIES,
         outputs: ratingMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtRatingComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtRatingComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtRatingComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtVideoComponent_1;
 class videoMetaData {
 }
 videoMetaData.XTYPE = 'video';
 videoMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -61151,10 +68771,6 @@ videoMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enableControls',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusCls',
@@ -61197,7 +68813,6 @@ videoMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -61363,7 +68978,7 @@ videoMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtVideoComponent = ExtVideoComponent_1 = class ExtVideoComponent extends base {
+let ExtVideoComponent = ExtVideoComponent_1 = class ExtVideoComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, videoMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -61371,30 +68986,47 @@ let ExtVideoComponent = ExtVideoComponent_1 = class ExtVideoComponent extends ba
     ngOnInit() {
         this.baseOnInit(videoMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(videoMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtVideoComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtVideoComponent = ExtVideoComponent_1 = __decorate([
     Component({
-        selector: 'video',
+        selector: 'ext-video',
         inputs: videoMetaData.PROPERTIES,
         outputs: videoMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtVideoComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtVideoComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtVideoComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtViewportComponent_1;
 class viewportMetaData {
 }
 viewportMetaData.XTYPE = 'viewport';
 viewportMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
     'activeChildTabIndex',
     'activeItem',
+    'alignSelf',
     'allowFocusingDisabledChildren',
     'alwaysOnTop',
     'ariaAttributes',
@@ -61408,6 +69040,7 @@ viewportMetaData.PROPERTIES = [
     'autoSize',
     'axisLock',
     'bind',
+    'bodyCls',
     'border',
     'bottom',
     'cardSwitchAnimation',
@@ -61426,9 +69059,6 @@ viewportMetaData.PROPERTIES = [
     'displayed',
     'docked',
     'draggable',
-    'enterAnimation',
-    'eventHandlers',
-    'exitAnimation',
     'flex',
     'floated',
     'focusableContainer',
@@ -61479,7 +69109,6 @@ viewportMetaData.PROPERTIES = [
     'right',
     'ripple',
     'scrollable',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -61650,7 +69279,7 @@ viewportMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtViewportComponent = ExtViewportComponent_1 = class ExtViewportComponent extends base {
+let ExtViewportComponent = ExtViewportComponent_1 = class ExtViewportComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, viewportMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -61658,28 +69287,45 @@ let ExtViewportComponent = ExtViewportComponent_1 = class ExtViewportComponent e
     ngOnInit() {
         this.baseOnInit(viewportMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(viewportMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtViewportComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtViewportComponent = ExtViewportComponent_1 = __decorate([
     Component({
-        selector: 'viewport',
+        selector: 'ext-viewport',
         inputs: viewportMetaData.PROPERTIES,
         outputs: viewportMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtViewportComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtViewportComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtViewportComponent);
 
+//Ext.onReady(function() {
+//import { NgZone } from '@angular/core';
+//import { Router } from '@angular/router';
 var ExtWidgetComponent_1;
 class widgetMetaData {
 }
 widgetMetaData.XTYPE = 'widget';
 widgetMetaData.PROPERTIES = [
+    'eng',
+    'viewport',
+    'align',
+    'plugins',
+    'responsiveConfig',
+    'responsiveFormulas',
+    'alignSelf',
     'alwaysOnTop',
     'ariaAttributes',
     'ariaDescribedBy',
@@ -61692,7 +69338,6 @@ widgetMetaData.PROPERTIES = [
     'controller',
     'defaultListenerScope',
     'disabled',
-    'eventHandlers',
     'flex',
     'floated',
     'focusCls',
@@ -61706,6 +69351,7 @@ widgetMetaData.PROPERTIES = [
     'keyMapEnabled',
     'keyMapTarget',
     'listeners',
+    'margin',
     'name',
     'nameable',
     'plugins',
@@ -61714,7 +69360,6 @@ widgetMetaData.PROPERTIES = [
     'relative',
     'renderTo',
     'ripple',
-    'selfAlign',
     'session',
     'shadow',
     'shareableName',
@@ -61770,7 +69415,7 @@ widgetMetaData.EVENTNAMES = [
     'widthchange',
     'ready'
 ];
-let ExtWidgetComponent = ExtWidgetComponent_1 = class ExtWidgetComponent extends base {
+let ExtWidgetComponent = ExtWidgetComponent_1 = class ExtWidgetComponent extends EngBase {
     constructor(eRef, hostComponent) {
         super(eRef.nativeElement, widgetMetaData, hostComponent);
         this.hostComponent = hostComponent;
@@ -61778,21 +69423,28 @@ let ExtWidgetComponent = ExtWidgetComponent_1 = class ExtWidgetComponent extends
     ngOnInit() {
         this.baseOnInit(widgetMetaData);
     }
-    ngAfterContentInit() {
-        this.baseAfterContentInit();
-        //this['ready'].emit(this)
+    ngAfterViewInit() {
+        this.baseAfterViewInit(widgetMetaData);
     }
+    //public ngAfterContentInit() {
+    //  this.baseAfterContentInit()
+    //}
+    ngOnChanges(changes) { this.baseOnChanges(changes); }
 };
+ExtWidgetComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EngBase, decorators: [{ type: Host }, { type: Optional }, { type: SkipSelf }] }
+];
 ExtWidgetComponent = ExtWidgetComponent_1 = __decorate([
     Component({
-        selector: 'widget',
+        selector: 'ext-widget',
         inputs: widgetMetaData.PROPERTIES,
         outputs: widgetMetaData.EVENTNAMES,
-        providers: [{ provide: base, useExisting: forwardRef(() => ExtWidgetComponent_1) }],
+        providers: [{ provide: EngBase, useExisting: forwardRef(() => ExtWidgetComponent_1) }],
         template: '<ng-template></ng-template>'
     }),
     __param(1, Host()), __param(1, Optional()), __param(1, SkipSelf()),
-    __metadata("design:paramtypes", [ElementRef, base])
+    __metadata("design:paramtypes", [ElementRef, EngBase])
 ], ExtWidgetComponent);
 
 let ExtAngularModule = class ExtAngularModule {
@@ -61801,9 +69453,9 @@ ExtAngularModule = __decorate([
     NgModule({
         imports: [],
         declarations: [
-            ExtAngularBootstrapComponent,
             ExtActionsheetComponent,
             ExtAudioComponent,
+            ExtBreadcrumbbarComponent,
             ExtButtonComponent,
             ExtCalendar_eventComponent,
             ExtCalendar_form_addComponent,
@@ -61826,10 +69478,8 @@ ExtAngularModule = __decorate([
             ExtCalendar_weekviewComponent,
             ExtCalendar_weeksviewComponent,
             ExtCarouselComponent,
-            ExtAxis3dComponent,
             ExtCartesianComponent,
             ExtChartComponent,
-            ExtInteractionComponent,
             ExtLegendComponent,
             ExtChartnavigatorComponent,
             ExtPolarComponent,
@@ -61857,6 +69507,7 @@ ExtAngularModule = __decorate([
             ExtItemheaderComponent,
             ExtListComponent,
             ExtListitemComponent,
+            ExtListitemplaceholderComponent,
             ExtListswiperitemComponent,
             ExtListswiperstepperComponent,
             ExtNestedlistComponent,
@@ -61870,6 +69521,7 @@ ExtAngularModule = __decorate([
             ExtEditorComponent,
             ExtCheckboxComponent,
             ExtCheckboxfieldComponent,
+            ExtCheckboxgroupComponent,
             ExtComboboxComponent,
             ExtComboboxfieldComponent,
             ExtContainerfieldComponent,
@@ -61880,6 +69532,7 @@ ExtAngularModule = __decorate([
             ExtDisplayfieldComponent,
             ExtEmailfieldComponent,
             ExtFieldComponent,
+            ExtGroupcontainerComponent,
             ExtFilefieldComponent,
             ExtFilebuttonComponent,
             ExtHiddenfieldComponent,
@@ -61890,6 +69543,7 @@ ExtAngularModule = __decorate([
             ExtPickerfieldComponent,
             ExtRadioComponent,
             ExtRadiofieldComponent,
+            ExtRadiogroupComponent,
             ExtSearchfieldComponent,
             ExtSelectfieldComponent,
             ExtSinglesliderfieldComponent,
@@ -61911,6 +69565,8 @@ ExtAngularModule = __decorate([
             ExtUrlfieldComponent,
             ExtFieldsetComponent,
             ExtFormpanelComponent,
+            ExtFroalaeditorComponent,
+            ExtFroalaeditorfieldComponent,
             ExtGridcellbaseComponent,
             ExtBooleancellComponent,
             ExtGridcellComponent,
@@ -61928,6 +69584,7 @@ ExtAngularModule = __decorate([
             ExtColumnComponent,
             ExtTemplatecolumnComponent,
             ExtDatecolumnComponent,
+            ExtDragcolumnComponent,
             ExtNumbercolumnComponent,
             ExtRownumbererComponent,
             ExtSelectioncolumnComponent,
@@ -61945,6 +69602,10 @@ ExtAngularModule = __decorate([
             ExtPagingtoolbarComponent,
             ExtGridrowComponent,
             ExtRowbodyComponent,
+            ExtRoweditorbarComponent,
+            ExtRoweditorcellComponent,
+            ExtRoweditorComponent,
+            ExtRoweditorgapComponent,
             ExtRowheaderComponent,
             ExtGridsummaryrowComponent,
             ExtTreeComponent,
@@ -61965,6 +69626,7 @@ ExtAngularModule = __decorate([
             ExtMessageboxComponent,
             ExtNavigationviewComponent,
             ExtPanelComponent,
+            ExtAccordionComponent,
             ExtDatepanelComponent,
             ExtDatetitleComponent,
             ExtPanelheaderComponent,
@@ -62025,14 +69687,14 @@ ExtAngularModule = __decorate([
             ExtRatingComponent,
             ExtVideoComponent,
             ExtViewportComponent,
-            ExtWidgetComponent
+            ExtWidgetComponent,
         ],
         providers: [],
         entryComponents: [],
         exports: [
-            ExtAngularBootstrapComponent,
             ExtActionsheetComponent,
             ExtAudioComponent,
+            ExtBreadcrumbbarComponent,
             ExtButtonComponent,
             ExtCalendar_eventComponent,
             ExtCalendar_form_addComponent,
@@ -62055,10 +69717,8 @@ ExtAngularModule = __decorate([
             ExtCalendar_weekviewComponent,
             ExtCalendar_weeksviewComponent,
             ExtCarouselComponent,
-            ExtAxis3dComponent,
             ExtCartesianComponent,
             ExtChartComponent,
-            ExtInteractionComponent,
             ExtLegendComponent,
             ExtChartnavigatorComponent,
             ExtPolarComponent,
@@ -62086,6 +69746,7 @@ ExtAngularModule = __decorate([
             ExtItemheaderComponent,
             ExtListComponent,
             ExtListitemComponent,
+            ExtListitemplaceholderComponent,
             ExtListswiperitemComponent,
             ExtListswiperstepperComponent,
             ExtNestedlistComponent,
@@ -62099,6 +69760,7 @@ ExtAngularModule = __decorate([
             ExtEditorComponent,
             ExtCheckboxComponent,
             ExtCheckboxfieldComponent,
+            ExtCheckboxgroupComponent,
             ExtComboboxComponent,
             ExtComboboxfieldComponent,
             ExtContainerfieldComponent,
@@ -62109,6 +69771,7 @@ ExtAngularModule = __decorate([
             ExtDisplayfieldComponent,
             ExtEmailfieldComponent,
             ExtFieldComponent,
+            ExtGroupcontainerComponent,
             ExtFilefieldComponent,
             ExtFilebuttonComponent,
             ExtHiddenfieldComponent,
@@ -62119,6 +69782,7 @@ ExtAngularModule = __decorate([
             ExtPickerfieldComponent,
             ExtRadioComponent,
             ExtRadiofieldComponent,
+            ExtRadiogroupComponent,
             ExtSearchfieldComponent,
             ExtSelectfieldComponent,
             ExtSinglesliderfieldComponent,
@@ -62140,6 +69804,8 @@ ExtAngularModule = __decorate([
             ExtUrlfieldComponent,
             ExtFieldsetComponent,
             ExtFormpanelComponent,
+            ExtFroalaeditorComponent,
+            ExtFroalaeditorfieldComponent,
             ExtGridcellbaseComponent,
             ExtBooleancellComponent,
             ExtGridcellComponent,
@@ -62157,6 +69823,7 @@ ExtAngularModule = __decorate([
             ExtColumnComponent,
             ExtTemplatecolumnComponent,
             ExtDatecolumnComponent,
+            ExtDragcolumnComponent,
             ExtNumbercolumnComponent,
             ExtRownumbererComponent,
             ExtSelectioncolumnComponent,
@@ -62174,6 +69841,10 @@ ExtAngularModule = __decorate([
             ExtPagingtoolbarComponent,
             ExtGridrowComponent,
             ExtRowbodyComponent,
+            ExtRoweditorbarComponent,
+            ExtRoweditorcellComponent,
+            ExtRoweditorComponent,
+            ExtRoweditorgapComponent,
             ExtRowheaderComponent,
             ExtGridsummaryrowComponent,
             ExtTreeComponent,
@@ -62194,6 +69865,7 @@ ExtAngularModule = __decorate([
             ExtMessageboxComponent,
             ExtNavigationviewComponent,
             ExtPanelComponent,
+            ExtAccordionComponent,
             ExtDatepanelComponent,
             ExtDatetitleComponent,
             ExtPanelheaderComponent,
@@ -62254,7 +69926,7 @@ ExtAngularModule = __decorate([
             ExtRatingComponent,
             ExtVideoComponent,
             ExtViewportComponent,
-            ExtWidgetComponent
+            ExtWidgetComponent,
         ]
     })
 ], ExtAngularModule);
@@ -62267,5 +69939,5 @@ ExtAngularModule = __decorate([
  * Generated bundle index. Do not edit.
  */
 
-export { ExtAngularModule, ExtAngularBootstrapComponent as ɵa, ExtAngularBootstrapService as ɵb, ExtCalendar_dayComponent as ɵba, calendar_daysMetaData as ɵbb, ExtCalendar_daysComponent as ɵbc, calendar_monthMetaData as ɵbd, ExtCalendar_monthComponent as ɵbe, calendarMetaData as ɵbf, ExtCalendarComponent as ɵbg, calendar_weekMetaData as ɵbh, ExtCalendar_weekComponent as ɵbi, calendar_weeksMetaData as ɵbj, ExtCalendar_weeksComponent as ɵbk, calendar_dayviewMetaData as ɵbl, ExtCalendar_dayviewComponent as ɵbm, calendar_daysviewMetaData as ɵbn, ExtCalendar_daysviewComponent as ɵbo, calendar_monthviewMetaData as ɵbp, ExtCalendar_monthviewComponent as ɵbq, calendar_multiviewMetaData as ɵbr, ExtCalendar_multiviewComponent as ɵbs, calendar_weekviewMetaData as ɵbt, ExtCalendar_weekviewComponent as ɵbu, calendar_weeksviewMetaData as ɵbv, ExtCalendar_weeksviewComponent as ɵbw, carouselMetaData as ɵbx, ExtCarouselComponent as ɵby, axis3dMetaData as ɵbz, actionsheetMetaData as ɵc, ExtAxis3dComponent as ɵca, cartesianMetaData as ɵcb, ExtCartesianComponent as ɵcc, chartMetaData as ɵcd, ExtChartComponent as ɵce, interactionMetaData as ɵcf, ExtInteractionComponent as ɵcg, legendMetaData as ɵch, ExtLegendComponent as ɵci, chartnavigatorMetaData as ɵcj, ExtChartnavigatorComponent as ɵck, polarMetaData as ɵcl, ExtPolarComponent as ɵcm, spacefillingMetaData as ɵcn, ExtSpacefillingComponent as ɵco, chipMetaData as ɵcp, ExtChipComponent as ɵcq, componentMetaData as ɵcr, ExtComponentComponent as ɵcs, containerMetaData as ɵct, ExtContainerComponent as ɵcu, d3_canvasMetaData as ɵcv, ExtD3_canvasComponent as ɵcw, d3_heatmapMetaData as ɵcx, ExtD3_heatmapComponent as ɵcy, d3_packMetaData as ɵcz, ExtActionsheetComponent as ɵd, ExtD3_packComponent as ɵda, d3_partitionMetaData as ɵdb, ExtD3_partitionComponent as ɵdc, d3_sunburstMetaData as ɵdd, ExtD3_sunburstComponent as ɵde, d3_treeMetaData as ɵdf, ExtD3_treeComponent as ɵdg, d3_horizontal_treeMetaData as ɵdh, ExtD3_horizontal_treeComponent as ɵdi, d3_treemapMetaData as ɵdj, ExtD3_treemapComponent as ɵdk, d3_svgMetaData as ɵdl, ExtD3_svgComponent as ɵdm, d3MetaData as ɵdn, ExtD3Component as ɵdo, boundlistMetaData as ɵdp, ExtBoundlistComponent as ɵdq, chipviewMetaData as ɵdr, ExtChipviewComponent as ɵds, componentdataviewMetaData as ɵdt, ExtComponentdataviewComponent as ɵdu, dataitemMetaData as ɵdv, ExtDataitemComponent as ɵdw, dataviewMetaData as ɵdx, ExtDataviewComponent as ɵdy, emptytextMetaData as ɵdz, base as ɵe, ExtEmptytextComponent as ɵea, indexbarMetaData as ɵeb, ExtIndexbarComponent as ɵec, itemheaderMetaData as ɵed, ExtItemheaderComponent as ɵee, listMetaData as ɵef, ExtListComponent as ɵeg, listitemMetaData as ɵeh, ExtListitemComponent as ɵei, listswiperitemMetaData as ɵej, ExtListswiperitemComponent as ɵek, listswiperstepperMetaData as ɵel, ExtListswiperstepperComponent as ɵem, nestedlistMetaData as ɵen, ExtNestedlistComponent as ɵeo, pullrefreshbarMetaData as ɵep, ExtPullrefreshbarComponent as ɵeq, pullrefreshspinnerMetaData as ɵer, ExtPullrefreshspinnerComponent as ɵes, simplelistitemMetaData as ɵet, ExtSimplelistitemComponent as ɵeu, dialogMetaData as ɵev, ExtDialogComponent as ɵew, windowMetaData as ɵex, ExtWindowComponent as ɵey, drawMetaData as ɵez, audioMetaData as ɵf, ExtDrawComponent as ɵfa, surfaceMetaData as ɵfb, ExtSurfaceComponent as ɵfc, editorMetaData as ɵfd, ExtEditorComponent as ɵfe, checkboxMetaData as ɵff, ExtCheckboxComponent as ɵfg, checkboxfieldMetaData as ɵfh, ExtCheckboxfieldComponent as ɵfi, comboboxMetaData as ɵfj, ExtComboboxComponent as ɵfk, comboboxfieldMetaData as ɵfl, ExtComboboxfieldComponent as ɵfm, containerfieldMetaData as ɵfn, ExtContainerfieldComponent as ɵfo, fieldcontainerMetaData as ɵfp, ExtFieldcontainerComponent as ɵfq, datefieldMetaData as ɵfr, ExtDatefieldComponent as ɵfs, datepickerfieldMetaData as ɵft, ExtDatepickerfieldComponent as ɵfu, datepickernativefieldMetaData as ɵfv, ExtDatepickernativefieldComponent as ɵfw, displayfieldMetaData as ɵfx, ExtDisplayfieldComponent as ɵfy, emailfieldMetaData as ɵfz, ExtAudioComponent as ɵg, ExtEmailfieldComponent as ɵga, fieldMetaData as ɵgb, ExtFieldComponent as ɵgc, filefieldMetaData as ɵgd, ExtFilefieldComponent as ɵge, filebuttonMetaData as ɵgf, ExtFilebuttonComponent as ɵgg, hiddenfieldMetaData as ɵgh, ExtHiddenfieldComponent as ɵgi, inputfieldMetaData as ɵgj, ExtInputfieldComponent as ɵgk, numberfieldMetaData as ɵgl, ExtNumberfieldComponent as ɵgm, fieldpanelMetaData as ɵgn, ExtFieldpanelComponent as ɵgo, passwordfieldMetaData as ɵgp, ExtPasswordfieldComponent as ɵgq, pickerfieldMetaData as ɵgr, ExtPickerfieldComponent as ɵgs, radioMetaData as ɵgt, ExtRadioComponent as ɵgu, radiofieldMetaData as ɵgv, ExtRadiofieldComponent as ɵgw, searchfieldMetaData as ɵgx, ExtSearchfieldComponent as ɵgy, selectfieldMetaData as ɵgz, buttonMetaData as ɵh, ExtSelectfieldComponent as ɵha, singlesliderfieldMetaData as ɵhb, ExtSinglesliderfieldComponent as ɵhc, sliderfieldMetaData as ɵhd, ExtSliderfieldComponent as ɵhe, spinnerfieldMetaData as ɵhf, ExtSpinnerfieldComponent as ɵhg, textfieldMetaData as ɵhh, ExtTextfieldComponent as ɵhi, textareafieldMetaData as ɵhj, ExtTextareafieldComponent as ɵhk, timefieldMetaData as ɵhl, ExtTimefieldComponent as ɵhm, togglefieldMetaData as ɵhn, ExtTogglefieldComponent as ɵho, cleartriggerMetaData as ɵhp, ExtCleartriggerComponent as ɵhq, datetriggerMetaData as ɵhr, ExtDatetriggerComponent as ɵhs, expandtriggerMetaData as ɵht, ExtExpandtriggerComponent as ɵhu, menutriggerMetaData as ɵhv, ExtMenutriggerComponent as ɵhw, revealtriggerMetaData as ɵhx, ExtRevealtriggerComponent as ɵhy, spindowntriggerMetaData as ɵhz, ExtButtonComponent as ɵi, ExtSpindowntriggerComponent as ɵia, spinuptriggerMetaData as ɵib, ExtSpinuptriggerComponent as ɵic, timetriggerMetaData as ɵid, ExtTimetriggerComponent as ɵie, triggerMetaData as ɵif, ExtTriggerComponent as ɵig, urlfieldMetaData as ɵih, ExtUrlfieldComponent as ɵii, fieldsetMetaData as ɵij, ExtFieldsetComponent as ɵik, formpanelMetaData as ɵil, ExtFormpanelComponent as ɵim, gridcellbaseMetaData as ɵin, ExtGridcellbaseComponent as ɵio, booleancellMetaData as ɵip, ExtBooleancellComponent as ɵiq, gridcellMetaData as ɵir, ExtGridcellComponent as ɵis, checkcellMetaData as ɵit, ExtCheckcellComponent as ɵiu, datecellMetaData as ɵiv, ExtDatecellComponent as ɵiw, numbercellMetaData as ɵix, ExtNumbercellComponent as ɵiy, rownumberercellMetaData as ɵiz, calendar_eventMetaData as ɵj, ExtRownumberercellComponent as ɵja, textcellMetaData as ɵjb, ExtTextcellComponent as ɵjc, treecellMetaData as ɵjd, ExtTreecellComponent as ɵje, widgetcellMetaData as ɵjf, ExtWidgetcellComponent as ɵjg, celleditorMetaData as ɵjh, ExtCelleditorComponent as ɵji, booleancolumnMetaData as ɵjj, ExtBooleancolumnComponent as ɵjk, checkcolumnMetaData as ɵjl, ExtCheckcolumnComponent as ɵjm, gridcolumnMetaData as ɵjn, ExtGridcolumnComponent as ɵjo, columnMetaData as ɵjp, ExtColumnComponent as ɵjq, templatecolumnMetaData as ɵjr, ExtTemplatecolumnComponent as ɵjs, datecolumnMetaData as ɵjt, ExtDatecolumnComponent as ɵju, numbercolumnMetaData as ɵjv, ExtNumbercolumnComponent as ɵjw, rownumbererMetaData as ɵjx, ExtRownumbererComponent as ɵjy, selectioncolumnMetaData as ɵjz, ExtCalendar_eventComponent as ɵk, ExtSelectioncolumnComponent as ɵka, textcolumnMetaData as ɵkb, ExtTextcolumnComponent as ɵkc, treecolumnMetaData as ɵkd, ExtTreecolumnComponent as ɵke, gridMetaData as ɵkf, ExtGridComponent as ɵkg, headercontainerMetaData as ɵkh, ExtHeadercontainerComponent as ɵki, lockedgridMetaData as ɵkj, ExtLockedgridComponent as ɵkk, lockedgridregionMetaData as ɵkl, ExtLockedgridregionComponent as ɵkm, gridcolumnsmenuMetaData as ɵkn, ExtGridcolumnsmenuComponent as ɵko, gridgroupbythismenuitemMetaData as ɵkp, ExtGridgroupbythismenuitemComponent as ɵkq, gridshowingroupsmenuitemMetaData as ɵkr, ExtGridshowingroupsmenuitemComponent as ɵks, gridsortascmenuitemMetaData as ɵkt, ExtGridsortascmenuitemComponent as ɵku, gridsortdescmenuitemMetaData as ɵkv, ExtGridsortdescmenuitemComponent as ɵkw, pagingtoolbarMetaData as ɵkx, ExtPagingtoolbarComponent as ɵky, gridrowMetaData as ɵkz, calendar_form_addMetaData as ɵl, ExtGridrowComponent as ɵla, rowbodyMetaData as ɵlb, ExtRowbodyComponent as ɵlc, rowheaderMetaData as ɵld, ExtRowheaderComponent as ɵle, gridsummaryrowMetaData as ɵlf, ExtGridsummaryrowComponent as ɵlg, treeMetaData as ɵlh, ExtTreeComponent as ɵli, imageMetaData as ɵlj, ExtImageComponent as ɵlk, imgMetaData as ɵll, ExtImgComponent as ɵlm, indicatorMetaData as ɵln, ExtIndicatorComponent as ɵlo, labelMetaData as ɵlp, ExtLabelComponent as ɵlq, treelistMetaData as ɵlr, ExtTreelistComponent as ɵls, treelistitemMetaData as ɵlt, ExtTreelistitemComponent as ɵlu, loadmaskMetaData as ɵlv, ExtLoadmaskComponent as ɵlw, maskMetaData as ɵlx, ExtMaskComponent as ɵly, mediaMetaData as ɵlz, ExtCalendar_form_addComponent as ɵm, ExtMediaComponent as ɵma, menucheckitemMetaData as ɵmb, ExtMenucheckitemComponent as ɵmc, menuitemMetaData as ɵmd, ExtMenuitemComponent as ɵme, menuMetaData as ɵmf, ExtMenuComponent as ɵmg, menuradioitemMetaData as ɵmh, ExtMenuradioitemComponent as ɵmi, menuseparatorMetaData as ɵmj, ExtMenuseparatorComponent as ɵmk, messageboxMetaData as ɵml, ExtMessageboxComponent as ɵmm, navigationviewMetaData as ɵmn, ExtNavigationviewComponent as ɵmo, panelMetaData as ɵmp, ExtPanelComponent as ɵmq, datepanelMetaData as ɵmr, ExtDatepanelComponent as ɵms, datetitleMetaData as ɵmt, ExtDatetitleComponent as ɵmu, panelheaderMetaData as ɵmv, ExtPanelheaderComponent as ɵmw, timepanelMetaData as ɵmx, ExtTimepanelComponent as ɵmy, paneltitleMetaData as ɵmz, calendar_calendar_pickerMetaData as ɵn, ExtPaneltitleComponent as ɵna, yearpickerMetaData as ɵnb, ExtYearpickerComponent as ɵnc, datepickerMetaData as ɵnd, ExtDatepickerComponent as ɵne, pickerMetaData as ɵnf, ExtPickerComponent as ɵng, selectpickerMetaData as ɵnh, ExtSelectpickerComponent as ɵni, pickerslotMetaData as ɵnj, ExtPickerslotComponent as ɵnk, tabletpickerMetaData as ɵnl, ExtTabletpickerComponent as ɵnm, pivotgridcellMetaData as ɵnn, ExtPivotgridcellComponent as ɵno, pivotgridgroupcellMetaData as ɵnp, ExtPivotgridgroupcellComponent as ɵnq, pivotd3containerMetaData as ɵnr, ExtPivotd3containerComponent as ɵns, pivotheatmapMetaData as ɵnt, ExtPivotheatmapComponent as ɵnu, pivottreemapMetaData as ɵnv, ExtPivottreemapComponent as ɵnw, pivotgridMetaData as ɵnx, ExtPivotgridComponent as ɵny, pivotconfigfieldMetaData as ɵnz, ExtCalendar_calendar_pickerComponent as ɵo, ExtPivotconfigfieldComponent as ɵoa, pivotconfigcontainerMetaData as ɵob, ExtPivotconfigcontainerComponent as ɵoc, pivotconfigformMetaData as ɵod, ExtPivotconfigformComponent as ɵoe, pivotconfigpanelMetaData as ɵof, ExtPivotconfigpanelComponent as ɵog, pivotsettingsMetaData as ɵoh, ExtPivotsettingsComponent as ɵoi, pivotrangeeditorMetaData as ɵoj, ExtPivotrangeeditorComponent as ɵok, pivotgridrowMetaData as ɵol, ExtPivotgridrowComponent as ɵom, progressMetaData as ɵon, ExtProgressComponent as ɵoo, progressbarwidgetMetaData as ɵop, ExtProgressbarwidgetComponent as ɵoq, segmentedbuttonMetaData as ɵor, ExtSegmentedbuttonComponent as ɵos, sheetMetaData as ɵot, ExtSheetComponent as ɵou, sliderMetaData as ɵov, ExtSliderComponent as ɵow, thumbMetaData as ɵox, ExtThumbComponent as ɵoy, togglesliderMetaData as ɵoz, calendar_form_editMetaData as ɵp, ExtTogglesliderComponent as ɵpa, spacerMetaData as ɵpb, ExtSpacerComponent as ɵpc, sparklinebarMetaData as ɵpd, ExtSparklinebarComponent as ɵpe, sparklineMetaData as ɵpf, ExtSparklineComponent as ɵpg, sparklineboxMetaData as ɵph, ExtSparklineboxComponent as ɵpi, sparklinebulletMetaData as ɵpj, ExtSparklinebulletComponent as ɵpk, sparklinediscreteMetaData as ɵpl, ExtSparklinediscreteComponent as ɵpm, sparklinelineMetaData as ɵpn, ExtSparklinelineComponent as ɵpo, sparklinepieMetaData as ɵpp, ExtSparklinepieComponent as ɵpq, sparklinetristateMetaData as ɵpr, ExtSparklinetristateComponent as ɵps, splitbuttonMetaData as ɵpt, ExtSplitbuttonComponent as ɵpu, tabbarMetaData as ɵpv, ExtTabbarComponent as ɵpw, tabpanelMetaData as ɵpx, ExtTabpanelComponent as ɵpy, tabMetaData as ɵpz, ExtCalendar_form_editComponent as ɵq, ExtTabComponent as ɵqa, tooltipMetaData as ɵqb, ExtTooltipComponent as ɵqc, titleMetaData as ɵqd, ExtTitleComponent as ɵqe, titlebarMetaData as ɵqf, ExtTitlebarComponent as ɵqg, toolMetaData as ɵqh, ExtToolComponent as ɵqi, paneltoolMetaData as ɵqj, ExtPaneltoolComponent as ɵqk, toolbarMetaData as ɵql, ExtToolbarComponent as ɵqm, colorbuttonMetaData as ɵqn, ExtColorbuttonComponent as ɵqo, colorpickercolorpreviewMetaData as ɵqp, ExtColorpickercolorpreviewComponent as ɵqq, colorfieldMetaData as ɵqr, ExtColorfieldComponent as ɵqs, colorselectorMetaData as ɵqt, ExtColorselectorComponent as ɵqu, gaugeMetaData as ɵqv, ExtGaugeComponent as ɵqw, mapMetaData as ɵqx, ExtMapComponent as ɵqy, google_mapMetaData as ɵqz, calendar_timefieldMetaData as ɵr, ExtGoogle_mapComponent as ɵra, ratingMetaData as ɵrb, ExtRatingComponent as ɵrc, videoMetaData as ɵrd, ExtVideoComponent as ɵre, viewportMetaData as ɵrf, ExtViewportComponent as ɵrg, widgetMetaData as ɵrh, ExtWidgetComponent as ɵri, ExtCalendar_timefieldComponent as ɵs, calendar_daysheaderMetaData as ɵt, ExtCalendar_daysheaderComponent as ɵu, calendar_weeksheaderMetaData as ɵv, ExtCalendar_weeksheaderComponent as ɵw, calendar_listMetaData as ɵx, ExtCalendar_listComponent as ɵy, calendar_dayMetaData as ɵz };
+export { ExtAngularModule, actionsheetMetaData as ɵa, ExtActionsheetComponent as ɵb, ExtCalendar_dayComponent as ɵba, calendar_daysMetaData as ɵbb, ExtCalendar_daysComponent as ɵbc, calendar_monthMetaData as ɵbd, ExtCalendar_monthComponent as ɵbe, calendarMetaData as ɵbf, ExtCalendarComponent as ɵbg, calendar_weekMetaData as ɵbh, ExtCalendar_weekComponent as ɵbi, calendar_weeksMetaData as ɵbj, ExtCalendar_weeksComponent as ɵbk, calendar_dayviewMetaData as ɵbl, ExtCalendar_dayviewComponent as ɵbm, calendar_daysviewMetaData as ɵbn, ExtCalendar_daysviewComponent as ɵbo, calendar_monthviewMetaData as ɵbp, ExtCalendar_monthviewComponent as ɵbq, calendar_multiviewMetaData as ɵbr, ExtCalendar_multiviewComponent as ɵbs, calendar_weekviewMetaData as ɵbt, ExtCalendar_weekviewComponent as ɵbu, calendar_weeksviewMetaData as ɵbv, ExtCalendar_weeksviewComponent as ɵbw, carouselMetaData as ɵbx, ExtCarouselComponent as ɵby, cartesianMetaData as ɵbz, EngBase as ɵc, ExtCartesianComponent as ɵca, chartMetaData as ɵcb, ExtChartComponent as ɵcc, legendMetaData as ɵcd, ExtLegendComponent as ɵce, chartnavigatorMetaData as ɵcf, ExtChartnavigatorComponent as ɵcg, polarMetaData as ɵch, ExtPolarComponent as ɵci, spacefillingMetaData as ɵcj, ExtSpacefillingComponent as ɵck, chipMetaData as ɵcl, ExtChipComponent as ɵcm, componentMetaData as ɵcn, ExtComponentComponent as ɵco, containerMetaData as ɵcp, ExtContainerComponent as ɵcq, d3_canvasMetaData as ɵcr, ExtD3_canvasComponent as ɵcs, d3_heatmapMetaData as ɵct, ExtD3_heatmapComponent as ɵcu, d3_packMetaData as ɵcv, ExtD3_packComponent as ɵcw, d3_partitionMetaData as ɵcx, ExtD3_partitionComponent as ɵcy, d3_sunburstMetaData as ɵcz, audioMetaData as ɵd, ExtD3_sunburstComponent as ɵda, d3_treeMetaData as ɵdb, ExtD3_treeComponent as ɵdc, d3_horizontal_treeMetaData as ɵdd, ExtD3_horizontal_treeComponent as ɵde, d3_treemapMetaData as ɵdf, ExtD3_treemapComponent as ɵdg, d3_svgMetaData as ɵdh, ExtD3_svgComponent as ɵdi, d3MetaData as ɵdj, ExtD3Component as ɵdk, boundlistMetaData as ɵdl, ExtBoundlistComponent as ɵdm, chipviewMetaData as ɵdn, ExtChipviewComponent as ɵdo, componentdataviewMetaData as ɵdp, ExtComponentdataviewComponent as ɵdq, dataitemMetaData as ɵdr, ExtDataitemComponent as ɵds, dataviewMetaData as ɵdt, ExtDataviewComponent as ɵdu, emptytextMetaData as ɵdv, ExtEmptytextComponent as ɵdw, indexbarMetaData as ɵdx, ExtIndexbarComponent as ɵdy, itemheaderMetaData as ɵdz, ExtAudioComponent as ɵe, ExtItemheaderComponent as ɵea, listMetaData as ɵeb, ExtListComponent as ɵec, listitemMetaData as ɵed, ExtListitemComponent as ɵee, listitemplaceholderMetaData as ɵef, ExtListitemplaceholderComponent as ɵeg, listswiperitemMetaData as ɵeh, ExtListswiperitemComponent as ɵei, listswiperstepperMetaData as ɵej, ExtListswiperstepperComponent as ɵek, nestedlistMetaData as ɵel, ExtNestedlistComponent as ɵem, pullrefreshbarMetaData as ɵen, ExtPullrefreshbarComponent as ɵeo, pullrefreshspinnerMetaData as ɵep, ExtPullrefreshspinnerComponent as ɵeq, simplelistitemMetaData as ɵer, ExtSimplelistitemComponent as ɵes, dialogMetaData as ɵet, ExtDialogComponent as ɵeu, windowMetaData as ɵev, ExtWindowComponent as ɵew, drawMetaData as ɵex, ExtDrawComponent as ɵey, surfaceMetaData as ɵez, breadcrumbbarMetaData as ɵf, ExtSurfaceComponent as ɵfa, editorMetaData as ɵfb, ExtEditorComponent as ɵfc, checkboxMetaData as ɵfd, ExtCheckboxComponent as ɵfe, checkboxfieldMetaData as ɵff, ExtCheckboxfieldComponent as ɵfg, checkboxgroupMetaData as ɵfh, ExtCheckboxgroupComponent as ɵfi, comboboxMetaData as ɵfj, ExtComboboxComponent as ɵfk, comboboxfieldMetaData as ɵfl, ExtComboboxfieldComponent as ɵfm, containerfieldMetaData as ɵfn, ExtContainerfieldComponent as ɵfo, fieldcontainerMetaData as ɵfp, ExtFieldcontainerComponent as ɵfq, datefieldMetaData as ɵfr, ExtDatefieldComponent as ɵfs, datepickerfieldMetaData as ɵft, ExtDatepickerfieldComponent as ɵfu, datepickernativefieldMetaData as ɵfv, ExtDatepickernativefieldComponent as ɵfw, displayfieldMetaData as ɵfx, ExtDisplayfieldComponent as ɵfy, emailfieldMetaData as ɵfz, ExtBreadcrumbbarComponent as ɵg, ExtEmailfieldComponent as ɵga, fieldMetaData as ɵgb, ExtFieldComponent as ɵgc, groupcontainerMetaData as ɵgd, ExtGroupcontainerComponent as ɵge, filefieldMetaData as ɵgf, ExtFilefieldComponent as ɵgg, filebuttonMetaData as ɵgh, ExtFilebuttonComponent as ɵgi, hiddenfieldMetaData as ɵgj, ExtHiddenfieldComponent as ɵgk, inputfieldMetaData as ɵgl, ExtInputfieldComponent as ɵgm, numberfieldMetaData as ɵgn, ExtNumberfieldComponent as ɵgo, fieldpanelMetaData as ɵgp, ExtFieldpanelComponent as ɵgq, passwordfieldMetaData as ɵgr, ExtPasswordfieldComponent as ɵgs, pickerfieldMetaData as ɵgt, ExtPickerfieldComponent as ɵgu, radioMetaData as ɵgv, ExtRadioComponent as ɵgw, radiofieldMetaData as ɵgx, ExtRadiofieldComponent as ɵgy, radiogroupMetaData as ɵgz, buttonMetaData as ɵh, ExtRadiogroupComponent as ɵha, searchfieldMetaData as ɵhb, ExtSearchfieldComponent as ɵhc, selectfieldMetaData as ɵhd, ExtSelectfieldComponent as ɵhe, singlesliderfieldMetaData as ɵhf, ExtSinglesliderfieldComponent as ɵhg, sliderfieldMetaData as ɵhh, ExtSliderfieldComponent as ɵhi, spinnerfieldMetaData as ɵhj, ExtSpinnerfieldComponent as ɵhk, textfieldMetaData as ɵhl, ExtTextfieldComponent as ɵhm, textareafieldMetaData as ɵhn, ExtTextareafieldComponent as ɵho, timefieldMetaData as ɵhp, ExtTimefieldComponent as ɵhq, togglefieldMetaData as ɵhr, ExtTogglefieldComponent as ɵhs, cleartriggerMetaData as ɵht, ExtCleartriggerComponent as ɵhu, datetriggerMetaData as ɵhv, ExtDatetriggerComponent as ɵhw, expandtriggerMetaData as ɵhx, ExtExpandtriggerComponent as ɵhy, menutriggerMetaData as ɵhz, ExtButtonComponent as ɵi, ExtMenutriggerComponent as ɵia, revealtriggerMetaData as ɵib, ExtRevealtriggerComponent as ɵic, spindowntriggerMetaData as ɵid, ExtSpindowntriggerComponent as ɵie, spinuptriggerMetaData as ɵif, ExtSpinuptriggerComponent as ɵig, timetriggerMetaData as ɵih, ExtTimetriggerComponent as ɵii, triggerMetaData as ɵij, ExtTriggerComponent as ɵik, urlfieldMetaData as ɵil, ExtUrlfieldComponent as ɵim, fieldsetMetaData as ɵin, ExtFieldsetComponent as ɵio, formpanelMetaData as ɵip, ExtFormpanelComponent as ɵiq, froalaeditorMetaData as ɵir, ExtFroalaeditorComponent as ɵis, froalaeditorfieldMetaData as ɵit, ExtFroalaeditorfieldComponent as ɵiu, gridcellbaseMetaData as ɵiv, ExtGridcellbaseComponent as ɵiw, booleancellMetaData as ɵix, ExtBooleancellComponent as ɵiy, gridcellMetaData as ɵiz, calendar_eventMetaData as ɵj, ExtGridcellComponent as ɵja, checkcellMetaData as ɵjb, ExtCheckcellComponent as ɵjc, datecellMetaData as ɵjd, ExtDatecellComponent as ɵje, numbercellMetaData as ɵjf, ExtNumbercellComponent as ɵjg, rownumberercellMetaData as ɵjh, ExtRownumberercellComponent as ɵji, textcellMetaData as ɵjj, ExtTextcellComponent as ɵjk, treecellMetaData as ɵjl, ExtTreecellComponent as ɵjm, widgetcellMetaData as ɵjn, ExtWidgetcellComponent as ɵjo, celleditorMetaData as ɵjp, ExtCelleditorComponent as ɵjq, booleancolumnMetaData as ɵjr, ExtBooleancolumnComponent as ɵjs, checkcolumnMetaData as ɵjt, ExtCheckcolumnComponent as ɵju, gridcolumnMetaData as ɵjv, ExtGridcolumnComponent as ɵjw, columnMetaData as ɵjx, ExtColumnComponent as ɵjy, templatecolumnMetaData as ɵjz, ExtCalendar_eventComponent as ɵk, ExtTemplatecolumnComponent as ɵka, datecolumnMetaData as ɵkb, ExtDatecolumnComponent as ɵkc, dragcolumnMetaData as ɵkd, ExtDragcolumnComponent as ɵke, numbercolumnMetaData as ɵkf, ExtNumbercolumnComponent as ɵkg, rownumbererMetaData as ɵkh, ExtRownumbererComponent as ɵki, selectioncolumnMetaData as ɵkj, ExtSelectioncolumnComponent as ɵkk, textcolumnMetaData as ɵkl, ExtTextcolumnComponent as ɵkm, treecolumnMetaData as ɵkn, ExtTreecolumnComponent as ɵko, gridMetaData as ɵkp, ExtGridComponent as ɵkq, headercontainerMetaData as ɵkr, ExtHeadercontainerComponent as ɵks, lockedgridMetaData as ɵkt, ExtLockedgridComponent as ɵku, lockedgridregionMetaData as ɵkv, ExtLockedgridregionComponent as ɵkw, gridcolumnsmenuMetaData as ɵkx, ExtGridcolumnsmenuComponent as ɵky, gridgroupbythismenuitemMetaData as ɵkz, calendar_form_addMetaData as ɵl, ExtGridgroupbythismenuitemComponent as ɵla, gridshowingroupsmenuitemMetaData as ɵlb, ExtGridshowingroupsmenuitemComponent as ɵlc, gridsortascmenuitemMetaData as ɵld, ExtGridsortascmenuitemComponent as ɵle, gridsortdescmenuitemMetaData as ɵlf, ExtGridsortdescmenuitemComponent as ɵlg, pagingtoolbarMetaData as ɵlh, ExtPagingtoolbarComponent as ɵli, gridrowMetaData as ɵlj, ExtGridrowComponent as ɵlk, rowbodyMetaData as ɵll, ExtRowbodyComponent as ɵlm, roweditorbarMetaData as ɵln, ExtRoweditorbarComponent as ɵlo, roweditorcellMetaData as ɵlp, ExtRoweditorcellComponent as ɵlq, roweditorMetaData as ɵlr, ExtRoweditorComponent as ɵls, roweditorgapMetaData as ɵlt, ExtRoweditorgapComponent as ɵlu, rowheaderMetaData as ɵlv, ExtRowheaderComponent as ɵlw, gridsummaryrowMetaData as ɵlx, ExtGridsummaryrowComponent as ɵly, treeMetaData as ɵlz, ExtCalendar_form_addComponent as ɵm, ExtTreeComponent as ɵma, imageMetaData as ɵmb, ExtImageComponent as ɵmc, imgMetaData as ɵmd, ExtImgComponent as ɵme, indicatorMetaData as ɵmf, ExtIndicatorComponent as ɵmg, labelMetaData as ɵmh, ExtLabelComponent as ɵmi, treelistMetaData as ɵmj, ExtTreelistComponent as ɵmk, treelistitemMetaData as ɵml, ExtTreelistitemComponent as ɵmm, loadmaskMetaData as ɵmn, ExtLoadmaskComponent as ɵmo, maskMetaData as ɵmp, ExtMaskComponent as ɵmq, mediaMetaData as ɵmr, ExtMediaComponent as ɵms, menucheckitemMetaData as ɵmt, ExtMenucheckitemComponent as ɵmu, menuitemMetaData as ɵmv, ExtMenuitemComponent as ɵmw, menuMetaData as ɵmx, ExtMenuComponent as ɵmy, menuradioitemMetaData as ɵmz, calendar_calendar_pickerMetaData as ɵn, ExtMenuradioitemComponent as ɵna, menuseparatorMetaData as ɵnb, ExtMenuseparatorComponent as ɵnc, messageboxMetaData as ɵnd, ExtMessageboxComponent as ɵne, navigationviewMetaData as ɵnf, ExtNavigationviewComponent as ɵng, panelMetaData as ɵnh, ExtPanelComponent as ɵni, accordionMetaData as ɵnj, ExtAccordionComponent as ɵnk, datepanelMetaData as ɵnl, ExtDatepanelComponent as ɵnm, datetitleMetaData as ɵnn, ExtDatetitleComponent as ɵno, panelheaderMetaData as ɵnp, ExtPanelheaderComponent as ɵnq, timepanelMetaData as ɵnr, ExtTimepanelComponent as ɵns, paneltitleMetaData as ɵnt, ExtPaneltitleComponent as ɵnu, yearpickerMetaData as ɵnv, ExtYearpickerComponent as ɵnw, datepickerMetaData as ɵnx, ExtDatepickerComponent as ɵny, pickerMetaData as ɵnz, ExtCalendar_calendar_pickerComponent as ɵo, ExtPickerComponent as ɵoa, selectpickerMetaData as ɵob, ExtSelectpickerComponent as ɵoc, pickerslotMetaData as ɵod, ExtPickerslotComponent as ɵoe, tabletpickerMetaData as ɵof, ExtTabletpickerComponent as ɵog, pivotgridcellMetaData as ɵoh, ExtPivotgridcellComponent as ɵoi, pivotgridgroupcellMetaData as ɵoj, ExtPivotgridgroupcellComponent as ɵok, pivotd3containerMetaData as ɵol, ExtPivotd3containerComponent as ɵom, pivotheatmapMetaData as ɵon, ExtPivotheatmapComponent as ɵoo, pivottreemapMetaData as ɵop, ExtPivottreemapComponent as ɵoq, pivotgridMetaData as ɵor, ExtPivotgridComponent as ɵos, pivotconfigfieldMetaData as ɵot, ExtPivotconfigfieldComponent as ɵou, pivotconfigcontainerMetaData as ɵov, ExtPivotconfigcontainerComponent as ɵow, pivotconfigformMetaData as ɵox, ExtPivotconfigformComponent as ɵoy, pivotconfigpanelMetaData as ɵoz, calendar_form_editMetaData as ɵp, ExtPivotconfigpanelComponent as ɵpa, pivotsettingsMetaData as ɵpb, ExtPivotsettingsComponent as ɵpc, pivotrangeeditorMetaData as ɵpd, ExtPivotrangeeditorComponent as ɵpe, pivotgridrowMetaData as ɵpf, ExtPivotgridrowComponent as ɵpg, progressMetaData as ɵph, ExtProgressComponent as ɵpi, progressbarwidgetMetaData as ɵpj, ExtProgressbarwidgetComponent as ɵpk, segmentedbuttonMetaData as ɵpl, ExtSegmentedbuttonComponent as ɵpm, sheetMetaData as ɵpn, ExtSheetComponent as ɵpo, sliderMetaData as ɵpp, ExtSliderComponent as ɵpq, thumbMetaData as ɵpr, ExtThumbComponent as ɵps, togglesliderMetaData as ɵpt, ExtTogglesliderComponent as ɵpu, spacerMetaData as ɵpv, ExtSpacerComponent as ɵpw, sparklinebarMetaData as ɵpx, ExtSparklinebarComponent as ɵpy, sparklineMetaData as ɵpz, ExtCalendar_form_editComponent as ɵq, ExtSparklineComponent as ɵqa, sparklineboxMetaData as ɵqb, ExtSparklineboxComponent as ɵqc, sparklinebulletMetaData as ɵqd, ExtSparklinebulletComponent as ɵqe, sparklinediscreteMetaData as ɵqf, ExtSparklinediscreteComponent as ɵqg, sparklinelineMetaData as ɵqh, ExtSparklinelineComponent as ɵqi, sparklinepieMetaData as ɵqj, ExtSparklinepieComponent as ɵqk, sparklinetristateMetaData as ɵql, ExtSparklinetristateComponent as ɵqm, splitbuttonMetaData as ɵqn, ExtSplitbuttonComponent as ɵqo, tabbarMetaData as ɵqp, ExtTabbarComponent as ɵqq, tabpanelMetaData as ɵqr, ExtTabpanelComponent as ɵqs, tabMetaData as ɵqt, ExtTabComponent as ɵqu, tooltipMetaData as ɵqv, ExtTooltipComponent as ɵqw, titleMetaData as ɵqx, ExtTitleComponent as ɵqy, titlebarMetaData as ɵqz, calendar_timefieldMetaData as ɵr, ExtTitlebarComponent as ɵra, toolMetaData as ɵrb, ExtToolComponent as ɵrc, paneltoolMetaData as ɵrd, ExtPaneltoolComponent as ɵre, toolbarMetaData as ɵrf, ExtToolbarComponent as ɵrg, colorbuttonMetaData as ɵrh, ExtColorbuttonComponent as ɵri, colorpickercolorpreviewMetaData as ɵrj, ExtColorpickercolorpreviewComponent as ɵrk, colorfieldMetaData as ɵrl, ExtColorfieldComponent as ɵrm, colorselectorMetaData as ɵrn, ExtColorselectorComponent as ɵro, gaugeMetaData as ɵrp, ExtGaugeComponent as ɵrq, mapMetaData as ɵrr, ExtMapComponent as ɵrs, google_mapMetaData as ɵrt, ExtGoogle_mapComponent as ɵru, ratingMetaData as ɵrv, ExtRatingComponent as ɵrw, videoMetaData as ɵrx, ExtVideoComponent as ɵry, viewportMetaData as ɵrz, ExtCalendar_timefieldComponent as ɵs, ExtViewportComponent as ɵsa, widgetMetaData as ɵsb, ExtWidgetComponent as ɵsc, calendar_daysheaderMetaData as ɵt, ExtCalendar_daysheaderComponent as ɵu, calendar_weeksheaderMetaData as ɵv, ExtCalendar_weeksheaderComponent as ɵw, calendar_listMetaData as ɵx, ExtCalendar_listComponent as ɵy, calendar_dayMetaData as ɵz };
 //# sourceMappingURL=sencha-ext-angular.js.map

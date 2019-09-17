@@ -1,24 +1,39 @@
-<container padding="10" layout="fit" [fitToParent]="true">
-  <panel
-    [shadow]="true" [top]="top" [left]="left" [width]="width" [height]="height"
-    scrollable="true">
+<ext-container padding="10" layout="fit" [fitToParent]="true">
+    <ext-panel
+        [shadow]="true"
+        [top]="top"
+        [left]="left"
+        [width]="width"
+        [height]="height"
+        scrollable="true"
+    >
+        <ext-toolbar docked="top">
+            <ext-segmentedbutton allowMultiple="true">
+                <ext-button
+                    ui="default-toolbar"
+                    text="Nav"
+                    [pressed]="nav"
+                    (pressedchange)="this.toggleNav($event)"
+                    [disabled]="micro"
+                ></ext-button>
+                <ext-button
+                    ui="default-toolbar"
+                    text="Micro"
+                    [pressed]="micro"
+                    (pressedchange)="this.toggleMicro($event)"
+                ></ext-button>
+            </ext-segmentedbutton>
+        </ext-toolbar>
 
-    <toolbar  docked="top">
-      <segmentedbutton  allowMultiple="true">
-        <button  ui="default-toolbar" text="Nav" [pressed]="nav" (pressedchange)="this.toggleNav($event)" [disabled]="micro"></button>
-        <button  ui="default-toolbar" text="Micro" [pressed]="micro" (pressedchange)="this.toggleMicro($event)"></button>
-      </segmentedbutton>
-    </toolbar>
-
-    <treelist
-      ref="tree"
-      [width]="width"
-      expanderOnly="false"
-      [store]="this.store"
-      [micro]="micro"
-      [expanderFirst]="!nav"
-      [ui]="nav ? 'nav' : null">
-    </treelist>
-
-  </panel>
-</container>
+        <ext-treelist
+            ref="tree"
+            [width]="width"
+            expanderOnly="false"
+            [store]="this.store"
+            [micro]="micro"
+            [expanderFirst]="!nav"
+            [ui]="nav ? 'nav' : null"
+        >
+        </ext-treelist>
+    </ext-panel>
+</ext-container>

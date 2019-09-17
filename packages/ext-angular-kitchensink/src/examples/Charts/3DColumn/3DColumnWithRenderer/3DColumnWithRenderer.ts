@@ -10,7 +10,7 @@ import {colors, storeData} from './data';
 export class ThreeDColumnWithRendererComponent {
 
   constructor(private cdref: ChangeDetectorRef) { }
-  
+
   ngAfterContentChecked() {
     this.cdref.detectChanges();
   }
@@ -23,7 +23,7 @@ export class ThreeDColumnWithRendererComponent {
 
   chart:any;
   chartNavReady = function(event) {
-    this.chart = event.ext;
+    this.chart = event.detail.cmp;
   }
 
   cartesianSeries = [
@@ -65,7 +65,7 @@ export class ThreeDColumnWithRendererComponent {
       position: 'left',
       grid: true,
       renderer: (axis, label, layoutContext) => layoutContext.renderer(label) + '%'
-    }, 
+    },
     {
       type: 'category3d',
       fields: 'month',

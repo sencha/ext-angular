@@ -34,12 +34,12 @@ export class BigDataComponent {
 
   grid:any;
   gridReady = (event) => {
-    this.grid = event.ext;
+    this.grid = event.detail.cmp;
   }
 
   rowBodyTpl=`
   <div>
-    <img src={avatar} height="100px" style="float:left;margin:0px 10px 5px 0px;"/>
+    <ext-img src={avatar} height="100px" style="float:left;margin:0px 10px 5px 0px;"/>
     <br><b>{fullName}</b>
     <br>{dob:date}
   </div>
@@ -128,7 +128,7 @@ export class BigDataComponent {
     } else {
       count = store.getCount();
     }
-    
+
     Ext.Msg.confirm('Verify All',
       'Are you sure you want to verify all ' + count + ' items?',
       answer => {
@@ -169,39 +169,39 @@ export class BigDataComponent {
   }
 
   renderRatingThisYear = (value) => {
-    //value && <Rating value={value} tip='Set to {tracking:plural("Star")}'/>
-    return value; 
+    //value && <ext-rating value={value} tip='Set to {tracking:plural("Star")}'/>
+    return value;
   }
 
   renderSparkline = (rating) => {
-      return 
-    `<sparkline 
-      height={16} 
-      values={rating} 
+      return
+    `<ext-sparkline
+      height={16}
+      values={rating}
       tipTpl='Price: {y:number("0.00")}'
-    ></sparkline>`
+    ></ext-sparkline>`
   }
 
   renderVerify = (value, record) => {
     return `
-    <Container>
-      <Button
+    <ext-container>
+      <ext-button
         text={value ? 'Verified' : 'Verify'}
         ui="action"
         handler={this.onVerify.bind(this, record)}
       />
-    </Container>`
+    </ext-container>`
   }
 
   renderVerifyAll = (value, record, dataIndex, cell) => {
     return `
-    <Container>
-      <Button 
+    <ext-container>
+      <ext-button
         ui="action"
         text="All"
         handler={this.onVerifyAll.bind(this, cell)}
       />
-    </Container>`
+    </ext-container>`
   }
 
   onBeforeDocumentSave = view => {
@@ -231,7 +231,7 @@ export class BigDataComponent {
           horizontal: 'Right'
         }
       }
-  }, 
+  },
   {
     text: 'All',
     dataIndex: 'rating',
@@ -254,7 +254,7 @@ absensesColumn = [
     dataIndex: "sickDays",
     align: 'center',
     summary: 'sum'
-}, 
+},
 {
     text:"Holidays",
     xtype: 'textcolumn',
@@ -273,7 +273,7 @@ absensesColumn = [
 }
 ];
 
-//<button  ui ="action" [handler] ="this.onVerify" [bind] = "widgetCellBind" text = "VERIFY"></button>
+//<ext-button  ui ="action" [handler] ="this.onVerify" [bind] = "widgetCellBind" text = "VERIFY"></ext-button>
 //widgetCellBind = {tooltip : 'Verify {record.fullName}'};
 verifyCell = {
   xtype: 'widgetcell',
@@ -305,7 +305,7 @@ ratingsCell =  {
     }
   };
 
-  
+
 
   gridTitleBar = {
     shadow: false,
@@ -334,4 +334,3 @@ ratingsCell =  {
 function formatDate(date) {
     return Ext.util.Format.date(date, "d/m/Y")
   };
-  

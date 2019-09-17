@@ -1,0 +1,35 @@
+<ext-container padding="10" layout="fit" [fitToParent]="true">
+    <ext-tabpanel
+        (ready)="tabPanelReady($event)"
+        [style]="{ backgroundColor: 'white' }"
+        [shadow]="true"
+        [tabBar]="{
+            height: 48,
+            layout: { pack: 'left' },
+            style: { paddingRight: '52px' }
+        }"
+    >
+        <ext-panel
+            *ngFor="let tab of tabs"
+            [title]="'Tab ' + tab"
+            tab="{flex: 1, maxWidth: 150}"
+            layout="center"
+            closable="true"
+            (added)="tabPanelAdded($event)"
+            (destroy)="closeTab($event)"
+            [html]="'<H1>Tab ' + tab + ' Content</H1>'"
+        >
+        </ext-panel>
+    </ext-tabpanel>
+
+    <!-- <ext-button
+        [top]="18"
+        [right]="20"
+        [iconCls]="'x-fa fa-plus'"
+        (tap)="addTab($event)"
+        [ui]="'alt round'"
+        [tooltip]="'New Tab'"
+    >
+    </ext-button> -->
+
+</ext-container>

@@ -1,7 +1,7 @@
-<container padding="10" layout="fit" [fitToParent]="true">
+<ext-container padding="10" layout="fit" [fitToParent]="true">
 
-  <panel bodyPadding="10" [shadow]="true" (ready)="onParentReady($event)">
-    <container
+  <ext-panel bodyPadding="10" [shadow]="true" (ready)="onParentReady($event)">
+    <ext-container
       (ready)="onElementReady($event)"
       [style]="{
         width: '130px',
@@ -15,7 +15,7 @@
         cursor: 'move'
       }"
       [html]="dragText">
-    </container>
-  </panel>
+    </ext-container>
+  </ext-panel>
 
-</container>
+</ext-container>

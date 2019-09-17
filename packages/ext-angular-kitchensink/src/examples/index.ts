@@ -15,16 +15,17 @@ import {SheetComponent} from "./Sheet/Sheet";
 import {RippleComponent} from './Ripple/Ripple';
 import {ProgressBarComponent} from './ProgressBar/ProgressBar';
 import {TitleBarComponent} from './TitleBar/TitleBar';
-import {ToolBarComponent} from './ToolBar/ToolBar';
-import {ToolTipComponent} from './ToolTip/ToolTip';
+import {ToolBarComponent} from './ToolBars/ToolBar/ToolBar';
+import {BreadcrumbToolBarComponent} from './ToolBars/BreadcrumbToolBar/BreadcrumbToolBar';import {ToolTipComponent} from './ToolTip/ToolTip';
 import {ColorPickerComponent} from './ColorPicker/ColorPicker';
-
+import {FroalaEditorComponent} from './FroalaEditor/FroalaEditor';
 import {EditableTreeComponent} from './Trees/EditableTree/EditableTree';
 import {HeterogeneousTreeComponent} from './Trees/HeterogeneousTree/HeterogeneousTree';
 import {TreeComponent} from './Trees/Tree/Tree';
 import {TreeDecorationsComponent} from './Trees/TreeDecorations/TreeDecorations';
 import {TreeGridComponent} from './Trees/TreeGrid/TreeGrid';
 import {TreeListComponent} from './Trees/TreeList/TreeList';
+import {TreeReorderComponent} from './Trees/TreeReorder/TreeReorder';
 import {DefaultGaugeComponent} from './Gauges/DefaultGauge/DefaultGauge';
 import {NeedleGaugeComponent} from './Gauges/NeedleGauge/NeedleGauge';
 
@@ -33,7 +34,8 @@ import {EditableGridComponent} from './Grid/EditableGrid/EditableGrid';
 import {GroupedGridComponent} from './Grid/GroupedGrid/GroupedGrid';
 import {LockingGridComponent} from './Grid/LockingGrid/LockingGrid';
 import {XMLGridComponent} from './Grid/XMLGrid/XMLGrid';
-
+import {EditableRowComponent} from './Grid/EditableRow/EditableRow';
+import {InfiniteGridComponent} from './Grid/InfiniteGrid/InfiniteGrid';
 
 import {GridToolsComponent} from './Grid/AddonsDecorations/GridTools/GridTools';
 import {RowBodyComponent} from './Grid/AddonsDecorations/RowBody/RowBody';
@@ -41,6 +43,9 @@ import {RowExpanderComponent} from './Grid/AddonsDecorations/RowExpander/RowExpa
 import {SummaryRowComponent} from './Grid/AddonsDecorations/SummaryRow/SummaryRow';
 import {GridFilteringComponent} from './Grid/AddonsDecorations/GridFiltering/GridFiltering';
 import {ViewOptionsComponent} from './Grid/AddonsDecorations/ViewOptions/ViewOptions';
+import {RowDragAndDropComponent} from './Grid/AddonsDecorations/RowDragAndDrop/RowDragAndDrop';
+import {DragFormToGridComponent} from './Grid/AddonsDecorations/DragFormToGrid/DragFormToGrid';
+
 
 import {BigDataComponent} from './Grid/AdvancedFeatures/BigData/BigData';
 import {ReconfigureGridComponent} from './Grid/AdvancedFeatures/ReconfigureGrid/ReconfigureGrid';
@@ -50,6 +55,7 @@ import {StockTickerComponent} from './Grid/AdvancedFeatures/StockTicker/StockTic
 
 
 import {CheckBoxFieldComponent} from './FormFields/CheckBoxField/CheckBoxField';
+import {CheckBoxGroupsComponent} from './FormFields/CheckboxGroups/CheckboxGroups';
 import {ComboBoxFieldComponent} from './FormFields/ComboBoxField/ComboBoxField';
 import {MultiSelectComboBoxFieldComponent} from './FormFields/MultiSelectComboBoxField/MultiSelectComboBoxField'
 import {ContainerFieldComponent} from './FormFields/ContainerField/ContainerField';
@@ -78,6 +84,7 @@ import {hboxLayoutComponent} from './Layouts/hboxLayout/hboxLayout';
 import {FormLayoutComponent} from './Layouts/FormLayout/FormLayout';
 import {ResizableLayoutComponent} from './Layouts/ResizableLayout/ResizableLayout';
 import {vboxLayoutComponent} from './Layouts/vboxLayout/vboxLayout';
+import {AccordionLayoutComponent} from './Layouts/AccordionLayout/AccordionLayout';
 
 import {BasicGaugeChartComponent} from './Charts/Gauges/BasicGaugeChart/BasicGaugeChart';
 import {BoxPlotComponent} from './Charts/BoxPlot/BoxPlot';
@@ -152,20 +159,20 @@ import {GroupsDragDropComponent} from './DragAndDrop/Groups/Groups';
 import {FilesDragDropComponent} from './DragAndDrop/Files/Files';
 import {DataDragDropComponent} from './DragAndDrop/Data/Data';
 
-import {BasicPanelComponent} from './Panels/Basic/Basic';
-import {BasicDatePanelComponent} from './Panels/BasicDate/BasicDate';
-import {AdvancedDatePanelComponent} from './Panels/AdvancedDate/AdvancedDate';
-import {TimePanelComponent} from './Panels/TimePanel/Time';
-import {CollapsiblePanelComponent} from './Panels/Collapsible/Collapsible';
+import {BasicPanelsComponent} from './Panels/BasicPanels/BasicPanels';
+import {BasicDatePanelComponent} from './Panels/BasicDatePanel/BasicDatePanel';
+import {AdvancedDatePanelComponent} from './Panels/AdvancedDatePanel/AdvancedDatePanel';
+import {TimePanelComponent} from './Panels/TimePanel/TimePanel';
+import {CollapsiblePanelComponent} from './Panels/CollapsiblePanel/CollapsiblePanel';
 import {ResizableHandleComponent} from './Panels/ResizableHandle/ResizableHandle';
 import {DialogPopupComponent} from './Popups/Dialog/Dialog';
 import {MessagePopupComponent} from './Popups/Message/Message';
 import {ToastPopupComponent} from './Popups/Toast/Toast';
 import {BasicListComponent} from './Lists/BasicList/BasicList';
 import {DisclosureListComponent} from './Lists/Disclosure/Disclosure';
-import {GroupedListComponent} from './Lists/Grouped/GroupedList';
+import {GroupedListComponent} from './Lists/GroupedList/GroupedList';
 import {NestedListComponent} from './Lists/NestedList/NestedList';
-import {PagingListComponent} from './Lists/Paging/PagingList';
+import {PagingListComponent} from './Lists/PagingList/PagingList';
 import {PullRefreshListComponent} from './Lists/PullRefresh/PullRefresh';
 import {BasicAccordionSwiperComponent} from './Lists/BasicAccordionSwiper/BasicAccordionSwiper';
 import {BasicStepSwiperComponent} from './Lists/BasicStepSwiper/BasicStepSwiper';
@@ -173,19 +180,19 @@ import {UndoableAccordionSwiperComponent} from './Lists/UndoableAccordionSwiper/
 import {UndoableStepSwiperComponent} from './Lists/UndoableStepSwiper/UndoableStepSwiper';
 
 import {TouchEventsComponent} from './TouchEvents/TouchEvents';
-import {BasicTabComponent} from './Tabs/BasicTab/BasicTab';
-import {BottomTabComponent} from './Tabs/BottomTab/BottomTab';
-import {IconTabComponent} from './Tabs/IconTab/IconTab';
-import {DesktopTabComponent} from './Tabs/DesktopTab/DesktopTab';
-import {ClosableTabComponent} from './Tabs/Closable/Closable';
-import {ScrollingTabComponent} from './Tabs/Scrolling/Scrolling';
+import {BasicTabsComponent} from './Tabs/BasicTabs/BasicTabs';
+import {BottomTabsComponent} from './Tabs/BottomTabs/BottomTabs';
+import {IconTabsComponent} from './Tabs/IconTabs/IconTabs';
+import {DesktopTabsComponent} from './Tabs/DesktopTabs/DesktopTabs';
+import {ClosableTabsComponent} from './Tabs/ClosableTabs/ClosableTabs';
+import {ScrollingTabsComponent} from './Tabs/ScrollingTabs/ScrollingTabs';
 import {TabBarComponent} from './Tabs/TabBar/TabBar';
 
 import {WizardComponent} from './Wizard/Wizard';
 
 import {TreeMapToolTipComponent} from './D3/Hierarchy/TreeMapToolTip/TreeMapToolTip';
 import {ConfigurablePivotTreeMapComponent} from './D3/Hierarchy/ConfigurablePivotTreeMap/ConfigurablePivotTreeMap';
-import {TreeMapComponent} from './D3/Hierarchy/TreeMap/TreeMap'; 
+import {TreeMapComponent} from './D3/Hierarchy/TreeMap/TreeMap';
 import {SunburstComponent} from './D3/Hierarchy/Sunburst/Sunburst';
 import {TreeHierarchyComponent} from './D3/Hierarchy/Tree/Tree';
 import {ZoomableSunburstComponent} from './D3/Hierarchy/ZoomableSunburst/ZoomableSunburst';
@@ -217,6 +224,7 @@ const treeRoot = {
         { text: 'Draw', component: DrawComponent, layout: 'center', navIcon: 'icon-drawing' },
         { text: 'Forms', navIcon: 'icon-forms', children: [
           { text: 'CheckBoxField', component: CheckBoxFieldComponent, layout: 'center', navIcon: 'icon-Forms-CheckBoxField'  },
+          { text: 'CheckboxGroups', component: CheckBoxGroupsComponent, layout: 'center', navIcon: 'icon-form-checkboxgroup'  },
           { text: 'ComboBoxField', component: ComboBoxFieldComponent, layout: 'center', navIcon: 'icon-Forms-ComboBoxField'  },
           { text: 'MultiSelect ComboBoxField', component: MultiSelectComboBoxFieldComponent, layout: 'center', navIcon: 'icon-Forms-ComboBoxField'  },
           { text: 'ContainerField', component: ContainerFieldComponent, layout: Ext.os.is.Phone ? 'auto' : 'center', navIcon: 'icon-Forms-ContainerField'  },
@@ -244,32 +252,33 @@ const treeRoot = {
           { text: 'Needle Gauge', component: NeedleGaugeComponent, layout: 'center', navIcon: 'icon-gauge-charts' }
         ]},
         { text: 'Layouts', navIcon: 'icon-layouts', children: [
-          { text: 'card', component: CardLayoutComponent, navIcon: 'icon-layout-card' },
-          { text: 'center', component: CenterLayoutComponent, navIcon: 'icon-layout-center' },
-          { text: 'fit', component: FitLayoutComponent, navIcon: 'icon-layout-fit' },
-          { text: 'form', component: FormLayoutComponent, layout: 'auto', navIcon: 'icon-layout-form' },
-          { text: 'hbox', component: hboxLayoutComponent, layout: 'auto', navIcon: 'icon-layout-horizontal-box' },
-          { text: 'resizable', component: ResizableLayoutComponent, navIcon: 'icon-layout-box' },
-          { text: 'vbox', component: vboxLayoutComponent, layout: 'auto', navIcon: 'icon-layout-vertical-box' }
+          { text: 'Accordion Layout', component: AccordionLayoutComponent, navIcon: 'icon-layout-accordion' },
+          //{ text: 'Card Layout', component: CardLayoutComponent, navIcon: 'icon-layout-card' },
+          { text: 'Center Layout', component: CenterLayoutComponent, navIcon: 'icon-layout-center' },
+          { text: 'Fit Layout', component: FitLayoutComponent, navIcon: 'icon-layout-fit' },
+          { text: 'Form Layout', component: FormLayoutComponent, layout: 'auto', navIcon: 'icon-layout-form' },
+          { text: 'hbox Layout', component: hboxLayoutComponent, layout: 'auto', navIcon: 'icon-layout-horizontal-box' },
+          { text: 'Resizable Layout', component: ResizableLayoutComponent, navIcon: 'icon-layout-box' },
+          { text: 'vbox Layout', component: vboxLayoutComponent, layout: 'auto', navIcon: 'icon-layout-vertical-box' }
         ]},
         { text: 'Lists', navIcon: 'icon-lists', children: [
           { text: 'Basic List', component: BasicListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-list' },
           { text: 'Disclosure', component: DisclosureListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-disclosure-list' },
-          { text: 'Grouped', component: GroupedListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-grouped-list' },
-          { text: 'NestedList', component: NestedListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-nested-list' },
+          { text: 'Grouped List', component: GroupedListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-grouped-list' },
+          { text: 'Nested List', component: NestedListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-nested-list' },
           { text: 'Pull Refresh', component: PullRefreshListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-pullrefresh-list' },
-          { text: 'Paging', component: PagingListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-listpaging-list' },
+          { text: 'Paging List', component: PagingListComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-listpaging-list' },
           { text: 'Basic Accordion Swiper', component: BasicAccordionSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-accordion-swiper'},
           { text: 'Basic Step Swiper', component: BasicStepSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-basic-step-swiper'},
           { text: 'Undoable Accordion Swiper', component: UndoableAccordionSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-undoable-accordion-swiper'},
           { text: 'Undoable Step Swiper', component: UndoableStepSwiperComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-undoable-step-swiper'}
         ]},
-        { text: 'Media', navIcon: 'x-fa fa-video-camera', children: [
+        { text: 'Media', navIcon: 'icon-video', children: [
             { text: 'Video', navIcon: 'icon-video', component: VideoComponent },
             { text: 'Audio', navIcon: 'icon-audio', component: AudioComponent }
         ] },
         { text: 'Panels', navIcon: 'icon-panels', children: [
-            { text: 'Basic Panels', component: BasicPanelComponent, layout: Ext.os.is.Phone ? 'auto': 'center', navIcon: 'icon-panels' },
+            { text: 'Basic Panels', component: BasicPanelsComponent, layout: Ext.os.is.Phone ? 'auto': 'center', navIcon: 'icon-panels' },
             { text: 'Resizable Handle', component: ResizableHandleComponent, layout: 'fit', navIcon: 'icon-panel-handleresize', hidden: Ext.os.is.Phone },
             { text: 'Collapsible Panel', component: CollapsiblePanelComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-panel-collapsible' },
             { text: 'Basic Date Panel', component: BasicDatePanelComponent, layout: 'center', navIcon: 'icon-panel-date' },
@@ -285,20 +294,24 @@ const treeRoot = {
         { text: 'Ripple', component: RippleComponent, layout: 'center', navIcon: 'icon-Ripple' },
         { text: 'Sheet', component: SheetComponent, layout: 'center', navIcon: 'icon-actionsheets' },
         { text: 'Tabs', navIcon: 'icon-tabs', children: [
-            { text: 'Basic Tabs', component: BasicTabComponent, navIcon: 'icon-basic-tabs' },
-            { text: 'Bottom Tabs', component: BottomTabComponent, navIcon: 'icon-bottom-tabs' },
-            { text: 'Icon Tabs', component: IconTabComponent, navIcon: 'icon-icon-tabs' },
-            { text: 'Desktop Tabs', component: DesktopTabComponent, navIcon: 'icon-Desktop-Tabs' },
-            { text: 'Closable', component: ClosableTabComponent, navIcon: 'icon-Closable-Tabs' },
-            { text: 'ScrollingTabs', component: ScrollingTabComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Scrolling-Tabs' },
+            { text: 'Basic Tabs', component: BasicTabsComponent, navIcon: 'icon-basic-tabs' },
+            { text: 'Bottom Tabs', component: BottomTabsComponent, navIcon: 'icon-bottom-tabs' },
+            { text: 'Icon Tabs', component: IconTabsComponent, navIcon: 'icon-icon-tabs' },
+            { text: 'Desktop Tabs', component: DesktopTabsComponent, navIcon: 'icon-Desktop-Tabs' },
+            { text: 'Closable Tabs', component: ClosableTabsComponent, navIcon: 'icon-Closable-Tabs' },
+            { text: 'Scrolling Tabs', component: ScrollingTabsComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Scrolling-Tabs' },
             { text: 'TabBar', component: TabBarComponent, layout: Ext.os.is.Phone ? 'fit': 'center', navIcon: 'icon-Tab-Bar' }
         ]},
         { text: 'TitleBar', component: TitleBarComponent, navIcon: 'icon-Title-Bar' },
-        { text: 'Toolbar', component: ToolBarComponent, navIcon: 'icon-toolbar' },
-        { text: 'ToolTip', component: ToolTipComponent, layout: 'center', navIcon: 'icon-tooltips'  },
+        { text: 'Toolbars', navIcon: 'icon-toolbar',children:[
+            { text: 'Tool Bar', component: ToolBarComponent , navIcon: 'icon-toolbar'},
+            { text: 'Breadcrumb Tool Bar', component: BreadcrumbToolBarComponent , navIcon: 'icon-toolbar'}
+        ] },
+        { text: 'Tool Tip', component: ToolTipComponent, layout: 'center', navIcon: 'icon-tooltips'  },
         { text: 'Touch Events', component: TouchEventsComponent, navIcon: 'icon-touch-events' },
         //{ text: 'Transition', component: Transition, navIcon: 'icon-Transition' },
-        { text: 'Wizard', component: ButtonComponent, navIcon: 'icon-layout-card-indicator', layout: Ext.os.is.Phone ? 'fit': 'center' }
+        { text: 'Wizard', component: ButtonComponent, navIcon: 'icon-layout-card-indicator', layout: Ext.os.is.Phone ? 'fit': 'center' },
+        { text: 'Froala Editor', component: FroalaEditorComponent, layout: 'center', navIcon: 'icon-editor' },
       ]},
 
       { text: 'Grids', navIcon: 'icon-grids', children: [
@@ -307,7 +320,10 @@ const treeRoot = {
               { text: 'Grouped Grid', component: GroupedGridComponent, navIcon: 'icon-grouped-grid'},
               { text: 'Locking Grid', component: LockingGridComponent, navIcon: 'icon-locking-grid'},
               { text: 'Editable Grid', component: EditableGridComponent, navIcon: 'icon-editable-grid'},
-              { text: 'XML Grid', component: XMLGridComponent, navIcon: 'icon-xml-grid'}
+              { text: 'XML Grid', component: XMLGridComponent, navIcon: 'icon-xml-grid'},
+              { text: 'Editable Row', component: EditableRowComponent, navIcon: 'icon-row-editing'},
+              { text: 'Infinite Grid', component: InfiniteGridComponent, navIcon: 'icon-buffer-grid'}
+
           ]},
           { text: 'Add-ons', navIcon: 'icon-framing-buttons', children: [
               { text: 'Grid Tools', component: GridToolsComponent, navIcon: 'icon-grid-tools'},
@@ -315,7 +331,9 @@ const treeRoot = {
               { text: 'Row Body', component: RowBodyComponent, navIcon: 'icon-row-body-grid'},
               { text: 'Summary Row', component: SummaryRowComponent, navIcon: 'icon-grid-summary'},
               { text: 'Grid Filtering', component: GridFilteringComponent, navIcon: 'icon-grid-filtering'},
-              { text: 'View Options', component: ViewOptionsComponent, navIcon: 'icon-view-options-grid'}
+              { text: 'View Options', component: ViewOptionsComponent, navIcon: 'icon-view-options-grid'},
+              { text: 'Row Drag And Drop', component: RowDragAndDropComponent, navIcon: 'icon-dd-grid-row'},
+              { text: 'Drag Form To Grid', component: DragFormToGridComponent, navIcon: 'icon-dd-form-to-grid'}
           ]},
           { text: 'Advanced Features', navIcon: 'icon-grid-plugins', children:[
               { text: 'Big Data', component: BigDataComponent, navIcon: 'icon-big-data-grid' },
@@ -331,6 +349,7 @@ const treeRoot = {
           { text: 'Editable Tree', premium: true, premiumClass: 'x-fa fa-star app-premium-indicator', component: EditableTreeComponent, navIcon: 'icon-tree-editable'},
           { text: 'Tree Grid', premium: true, premiumClass: 'x-fa fa-star app-premium-indicator', component: TreeGridComponent, navIcon: 'icon-tree-grid' },
           { text: 'Tree Decorations', premium: true, premiumClass: 'x-fa fa-star app-premium-indicator', component:TreeDecorationsComponent, navIcon: 'icon-tree-decorations'},
+          { text: 'Tree Reorder', component: TreeReorderComponent, navIcon: 'icon-tree-reorder'},
           { text: 'Heterogeneous Tree', premium: true, premiumClass: 'x-fa fa-star app-premium-indicator', component: HeterogeneousTreeComponent, navIcon: 'icon-heterogeneous-tree'}
       ] },
       { text: 'Calendar', premium: false, navIcon: 'icon-calendar', children:[
@@ -372,8 +391,8 @@ const treeRoot = {
               { text: 'OHLC', component: OHLCComponent, navIcon: 'icon-financial-ohlc' }
           ] },
           { text: 'Gauges', navIcon: 'icon-gauge-charts', children: [
-              { text: 'Basic Gauge', component: BasicGaugeChartComponent, navIcon: 'icon-gauge-basic' }  
-          ] }, 
+              { text: 'Basic Gauge', component: BasicGaugeChartComponent, navIcon: 'icon-gauge-basic' }
+          ] },
           { text: 'Line', navIcon: 'icon-line-charts', children: [
               { text: 'Basic Line', component: BasicLineComponent, navIcon: 'icon-line-basic' },
               { text: 'Basic Markers', component: BasicMarkersComponent, navIcon: 'icon-line-markers' },
@@ -389,7 +408,7 @@ const treeRoot = {
               { text: 'Spie', component: SpieComponent, navIcon: 'icon-pie-custom' },
               { text: 'Donut', component: DonutComponent, navIcon: 'icon-pie-donut' },
               { text: 'Double Donut', component: DoubleDonutComponent, navIcon: 'icon-pie-double-donut' },
-              { text: '3D Pie', component: ThreeDPieComponent, navIcon: 'icon-pie-3d' } 
+              { text: '3D Pie', component: ThreeDPieComponent, navIcon: 'icon-pie-3d' }
           ] },
           { text: 'Radar', navIcon: 'icon-radar-charts', children: [
               { text: 'Basic Radar', component: BasicRadarComponent, navIcon: 'icon-radar-basic' },
@@ -417,7 +436,7 @@ const treeRoot = {
               { text: 'Zoomable Sunburst', component: ZoomableSunburstComponent, navIcon: 'icon-d3-view-sunburst-zoom' },
               { text: 'Tree', component: TreeHierarchyComponent, navIcon: 'icon-d3-view-tree' },
               { text: 'TreeMap', component: TreeMapComponent, navIcon: 'icon-d3-view-treemap' },
-              { text: 'TreeMap Tooltip', component: TreeMapToolTipComponent, navIcon: 'icon-d3-view-treemap-tooltip' },
+              { text: 'TreeMap Tool Tip', component: TreeMapToolTipComponent, navIcon: 'icon-d3-view-treemap-tooltip' },
               { text: 'Configurable Pivot TreeMap', component: ConfigurablePivotTreeMapComponent, navIcon: 'icon-d3-view-treemap-pivot-configurator' }
           ]}
       ] },
@@ -452,6 +471,6 @@ function transform(node, parentUrl) {
     }
 }
 
-transform(treeRoot, null); 
+transform(treeRoot, null);
 
 export const navTreeRoot = treeRoot;

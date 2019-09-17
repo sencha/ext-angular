@@ -1,29 +1,29 @@
-<container [padding]="10" [fitToParent]="true">
-  <panel 
-    [title]="'Resize Me'"
-    [shadow]="true"
-    [layout]="'fit'"
-    [border]="true"
-    [left]="100"
-    [top]="100"
-    [width]="400"
-    [height]="400"
-    [resizable]="{edges: 'all', dynamic: doDynamically}"
-    [bodyPadding]="10">
+<ext-container [padding]="10" [fitToParent]="true">
+    <ext-panel
+        [title]="'Resize Me'"
+        [shadow]="true"
+        [layout]="'fit'"
+        [border]="true"
+        [left]="100"
+        [top]="100"
+        [width]="400"
+        [height]="400"
+        [resizable]="{ edges: 'all', dynamic: doDynamically }"
+        [bodyPadding]="10"
+    >
+        <ext-toolbar [docked]="'top'">
+            <ext-checkboxfield
+                [checked]="doDynamically"
+                (change)="toggleDynamic($event)"
+                [boxLabel]="'Dynamic'"
+            >
+            </ext-checkboxfield>
+        </ext-toolbar>
 
-    <toolbar [docked]="'top'">
-      <checkboxfield
-        [checked]="doDynamically"
-        (change)="toggleDynamic($event)"
-        [boxLabel]="'Dynamic'">
-      </checkboxfield>
-    </toolbar>
-
-    <container>
-        <span #extitem>
-          {{bodyText}}
-        </span>
-    </container>
-
-  </panel>
-</container>
+        <ext-container>
+            <span #extitem>
+                {{ bodyText }}
+            </span>
+        </ext-container>
+    </ext-panel>
+</ext-container>

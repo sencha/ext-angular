@@ -5,17 +5,16 @@ import { Component } from '@angular/core';
   templateUrl: './TouchEvents.html',
   styles: [``]
 })
-
 export class TouchEventsComponent {
 
   touchpadRef:any;
   isPhone = Ext.os.is.Phone;
   events = [{type:'drag'}, {type:'touchmove'}];
   theDataview:any;
+  tplDataView: any=`<p>{type}&nbsp;&nbsp;&nbsp;</p>\n`;
 
-  touchpadReady = (ele) => {
-    console.log("touchpadReady")
-    this.touchpadRef = ele.ext.el;
+  touchpadReady = (event) => {
+    this.touchpadRef = event.detail.cmp.el;
     this.touchpadRef.on({
       scope: this,
       touchstart: this.onTouchEvent,
@@ -35,10 +34,8 @@ export class TouchEventsComponent {
   }
 
   dataviewReady = (event) => {
-    this.theDataview = event.ext;
+    this.theDataview = event.detail.cmp;
   }
-
-  tplDataView: any=`<p>{type}&nbsp;&nbsp;&nbsp;</p>`;
 
   onTouchEvent = (e, target, options) => {
     this.events = [{type:e.type} , ...this.events];

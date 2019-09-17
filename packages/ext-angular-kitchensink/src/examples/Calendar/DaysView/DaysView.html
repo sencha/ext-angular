@@ -1,26 +1,29 @@
-<container padding="10" layout="fit" [fitToParent]="true">
-  <panel
-    [shadow]="true"
-    [title]="panelTitle"
-    [layout]="'hbox'"
-    [header]="{titleAlign:'center'}">
-    <panel 
-      [title]="calendars"
-      [ui]="light"
-      [width]="150"
-      [bodyPadding]="5"
-      [hidden]="false">
-      <calendar-list [store]="this.store"></calendar-list>
-    </panel>
-    <calendar-days 
-      [store]="this.store"
-      [flex]="1"
-      [timezoneOffset]="0"
-      [gestureNavigation]="false"
-      [value]="calendarDaysValue"
-      [startTime]="8"
-      [endTime]="20"
-      [visibleDays]="2">
-    </calendar-days>
-  </panel>
-</container>
+<ext-container padding="10" layout="fit" [fitToParent]="true">
+    <ext-panel
+        [shadow]="true"
+        [title]="panelTitle"
+        [layout]="'hbox'"
+        [header]="{ titleAlign: 'center' }"
+    >
+        <ext-panel
+            [title]="calendars"
+            [ui]="light"
+            [width]="150"
+            [bodyPadding]="5"
+            [hidden]="false"
+        >
+            <ext-calendar-list [store]="this.store"></ext-calendar-list>
+        </ext-panel>
+        <ext-calendar-days
+            [store]="this.store"
+            [flex]="1"
+            [timezoneOffset]="0"
+            [gestureNavigation]="false"
+            [value]="calendarDaysValue"
+            [startTime]="8"
+            [endTime]="20"
+            [visibleDays]="2"
+        >
+        </ext-calendar-days>
+    </ext-panel>
+</ext-container>

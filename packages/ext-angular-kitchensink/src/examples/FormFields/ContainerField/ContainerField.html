@@ -1,35 +1,58 @@
-<container padding="10" layout="fit" [fitToParent]="true">
+<ext-container padding="10" layout="fit" [fitToParent]="true">
+    <ext-formpanel
+        [shadow]="true"
+        [top]="top"
+        [left]="left"
+        [width]="width"
+        [height]="height"
+        [layout]="{ type: 'vbox', align: 'left' }"
+        [bodyPadding]="10"
+        [defaults]="{ labelAlign: 'left', labelTextAlign: 'right' }"
+    >
+        <ext-container>
+            <span #extitem>
+                <b>ContainerField</b> allows you to apply a single label to
+                multiple fields. This is especially useful for groups of
+                checkboxes, radio buttons, and other compound fields.
+            </span>
+        </ext-container>
 
-  <formpanel [shadow]="true" [top]="top" [left]="left" [width]="width" [height]="height"
-    [layout]="{type: 'vbox', align: 'left'}" [bodyPadding]="10"
-    [defaults]="{labelAlign: 'left', labelTextAlign: 'right'}">
+        <ext-containerfield
+            [label]="'Name'"
+            [layout]="isPhone ? 'vbox' : 'vbox'"
+            [defaults]="{ labelAlign: 'bottom' }"
+        >
+            <ext-textfield [label]="'First'"></ext-textfield>
+            <ext-textfield [label]="'Middle'"></ext-textfield>
+            <ext-textfield [label]="'Last'"></ext-textfield>
+        </ext-containerfield>
 
-    <container>
-      <span #extitem>
-        <b>ContainerField</b> allows you to apply a single label to multiple fields.
-        This is especially useful for groups of checkboxes, radio buttons, and other compound 
-        fields.
-      </span>
-    </container>
+        <ext-containerfield
+            [label]="'Vehicle Class'"
+            [layout]="{ type: 'vbox', align: 'left' }"
+            [defaults]="{ margin: '0' }"
+        >
+            <ext-radiofield
+                [boxLabel]="'Compact'"
+                [name]="'priority'"
+            ></ext-radiofield>
+            <ext-radiofield
+                [boxLabel]="'Mid-size'"
+                [name]="'priority'"
+            ></ext-radiofield>
+            <ext-radiofield
+                [boxLabel]="'SUV'"
+                [name]="'priority'"
+            ></ext-radiofield>
+        </ext-containerfield>
 
-    <containerfield [label]="'Name'" [layout]="isPhone ? 'vbox' : 'vbox'" [defaults]="{labelAlign: 'bottom'}">
-      <textfield [label]="'First'"></textfield>
-      <textfield [label]="'Middle'"></textfield>
-      <textfield [label]="'Last'"></textfield>
-    </containerfield>
-
-    <containerfield [label]="'Vehicle Class'" [layout]="{type: 'vbox', align: 'left'}" [defaults]="{ margin: '0' }">
-      <radiofield [boxLabel]="'Compact'" [name]="'priority'"></radiofield>
-      <radiofield [boxLabel]="'Mid-size'" [name]="'priority'"></radiofield>
-      <radiofield [boxLabel]="'SUV'" [name]="'priority'"></radiofield>
-    </containerfield>
-
-    <containerfield [label]="'Options'" [layout]="{type: 'vbox', align: 'left'}">
-      <checkboxfield [boxLabel]="'A/C'"></checkboxfield>
-      <checkboxfield [boxLabel]="'Leather'"></checkboxfield>
-      <checkboxfield [boxLabel]="'Nav'"></checkboxfield>
-    </containerfield>
-
-  </formpanel>
-
-</container>
+        <ext-containerfield
+            [label]="'Options'"
+            [layout]="{ type: 'vbox', align: 'left' }"
+        >
+            <ext-checkboxfield [boxLabel]="'A/C'"></ext-checkboxfield>
+            <ext-checkboxfield [boxLabel]="'Leather'"></ext-checkboxfield>
+            <ext-checkboxfield [boxLabel]="'Nav'"></ext-checkboxfield>
+        </ext-containerfield>
+    </ext-formpanel>
+</ext-container>

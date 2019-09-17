@@ -15,15 +15,16 @@ export class TimeFieldComponent {
   disabled:boolean = false;
   formPanelRef:any;
 
-  onReady = (ele) => {
-    this.formPanelRef = ele.ext;
+  readyForm = (event) => {
+      console.log('onReady')
+    this.formPanelRef = event.detail.cmp;
   }
 
-  reset = () => {
-    return this.formPanelRef.reset();
+  tapReset = (event) => {
+    this.formPanelRef.reset();
   }
 
-  toggleDisabled = () => {
+  toggleDisabled = (event) => {
     this.disabled = !this.disabled;
   }
 

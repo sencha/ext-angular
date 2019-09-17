@@ -1,0 +1,34 @@
+<ext-container padding="10" layout="fit" [fitToParent]="true">
+    <ext-panel shadow="true" bodyPadding="0">
+        <ext-toolbar docked="top">
+            <ext-button
+                text="Button"
+                ui="toolbar-default"
+                (tap)="buttonHandler($event)"
+                badgeText="2"
+            ></ext-button>
+            <ext-spacer></ext-spacer>
+
+            <ext-segmentedbutton *ngIf="!isPhone">
+                <ext-button
+                    value="1"
+                    text="Option 1"
+                    [pressed]="true"
+                    (tap)="buttonHandler($event)"
+                ></ext-button>
+                <ext-button
+                    value="2"
+                    text="Option 2"
+                    (tap)="buttonHandler($event)"
+                ></ext-button>
+            </ext-segmentedbutton>
+
+            <ext-spacer></ext-spacer>
+            <ext-searchfield ui="faded" placeholder="Search"></ext-searchfield>
+        </ext-toolbar>
+        <ext-container
+            [style]="{ padding: '20px' }"
+            [html]="message"
+        ></ext-container>
+    </ext-panel>
+</ext-container>

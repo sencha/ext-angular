@@ -42,8 +42,8 @@ export class WizardComponent {
     this.indicatorRef.setActiveIndex(this.step);
   }
 
-  indicatorReady = (ele) => {
-    this.indicatorRef = ele.ext;
+  indicatorReady = (event) => {
+    this.indicatorRef = event.detail.cmp;
     this.indicatorRef.setActiveIndex(this.step);
   }
 

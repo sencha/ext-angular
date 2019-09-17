@@ -1,22 +1,27 @@
-<container  layout="fit" padding="10" [fitToParent]="true">
+<ext-container layout="fit" padding="10" [fitToParent]="true">
+    <ext-toolbar
+        [shadow]="false"
+        docked="top"
+        ui="app-transparent-toolbar"
+        padding="5 8"
+        [layout]="{
+            type: 'hbox',
+            align: 'stretch'
+        }"
+    >
+        <ext-button
+            shadow="true"
+            ui="action"
+            text="Configurator"
+            [handler]="this.showConfigurator.bind(this)"
+        ></ext-button>
+    </ext-toolbar>
 
-  <toolbar 
-    [shadow]="false"
-    docked="top"
-    ui="app-transparent-toolbar"
-    padding="5 8"
-    [layout]="{
-      type: 'hbox',
-      align: 'stretch'
-    }">
-    <button shadow="true" ui="action" text="Configurator" [handler]="this.showConfigurator.bind(this)"></button>
-  </toolbar>
-
-  <pivotgrid 
-    [shadow]="true"
-    (ready)="onPivotGridRead($event)"
-    [plugins]="pivotgridPlugins"
-    [matrix]="pivotgridMatrix">
-  </pivotgrid>
-
-</container>
+    <ext-pivotgrid
+        [shadow]="true"
+        (ready)="onPivotGridRead($event)"
+        [plugins]="pivotgridPlugins"
+        [matrix]="pivotgridMatrix"
+    >
+    </ext-pivotgrid>
+</ext-container>

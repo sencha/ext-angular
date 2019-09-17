@@ -1,18 +1,20 @@
-<container padding="10" layout="fit" [fitToParent]="true">
-    <pivotd3container 
-        shadow="true"
+<ext-container padding="10" layout="fit" [fitToParent]="true">
+    <ext-pivotd3container
         layout="'fit'"
         (ready)="ctnReady($event)"
-        (onShowConfigPanel)="this.onShowConfigPanel"
-        (onBeforeMoveConfigField)="this.onBeforeAddConfigField"
-        (onShowConfigFieldSettings)="this.onShowFieldSettings"
+        (onShowConfigPanel)="onShowConfigPanel($event)"
+        (onBeforeMoveConfigField)="onBeforeAddConfigField($event)"
+        (onShowConfigFieldSettings)="onShowFieldSettings($event)"
         [matrix]="matrixVar"
         [drawing]="drawingVar"
         [configurator]="configuratorVar"
     >
-        <toolbar  docked="top">
-            <spacer ></spacer>
-            <button  text="Show configurator" (tap)="this.showConfigurator"></button>
-        </toolbar>
-    </pivotd3container>
-</container>
+        <ext-toolbar docked="top">
+            <ext-spacer></ext-spacer>
+            <ext-button
+                text="Show configurator"
+                (tap)="showConfigurator($event)"
+            ></ext-button>
+        </ext-toolbar>
+    </ext-pivotd3container>
+</ext-container>

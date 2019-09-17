@@ -1,35 +1,35 @@
-<container padding="10" layout="fit" [fitToParent]="true" >
-    <panel  
+<ext-container padding="10" layout="fit" [fitToParent]="true" >
+    <ext-panel
         [title]="'Dock Left'"
-        [docked]="'left'" 
+        [docked]="'left'"
         [width]="200"
-        [shadow]="true" 
+        [shadow]="true"
         [layout]="'center'"
         [resizable]="{split: true, edges: 'east', dynamic: true}"
         [html]="'<code >dynamic: true</code>'"
-    ></panel>
-    <panel  [title]="'Unresizable region'" [flex]="1"></panel>
-    <panel  
-        [docked]="'right'" 
+    ></ext-panel>
+    <ext-panel  [title]="'Unresizable region'" [flex]="1"></ext-panel>
+    <ext-panel
+        [docked]="'right'"
         [title]="'Dock Right'"
         [width]="200"
         [collapsible]="'right'"
         [layout]="'center'"
         [resizable]="rightResizable"
         [html]="'<code>collapsible</code>'"
-    ></panel>
-    <panel  
-        [docked]="'top'" 
+    ></ext-panel>
+    <ext-panel
+        [docked]="'top'"
         [title]="'Dock Top'"
         [height]="150"
-        resizable="{split: true,  edges: 'south'}" 
-    ></panel>
-    <panel  
-        [docked]="'bottom'" 
+        resizable="{split: true,  edges: 'south'}"
+    ></ext-panel>
+    <ext-panel
+        [docked]="'bottom'"
         [title]="'Dock Bottom'"
         [height]="150"
         [layout]="'center'"
         [resizable]="{split: true, edges: 'north', snap: 50}"
         [html]="'<code >snap: 50</code>'"
-    ></panel>
-</container>
+    ></ext-panel>
+</ext-container>

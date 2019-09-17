@@ -1,7 +1,7 @@
-<container padding="10" layout="fit" [fitToParent]="true">
+<ext-container padding="10" layout="vbox" [fitToParent]="true">
 
-  <container docked="top"><div #extitem>
-    <chart-toolbar 
+  <ext-container><div #extitem>
+    <chart-toolbar
       [onThemeChange]="this.changeTheme"
       [onToggleZoomOnPan]="this.toggleZoomOnPan"
       [onToggleCrosshair]="this.toggleCrosshair"
@@ -9,9 +9,10 @@
       [theme]="theme"
       [onlyMidnight]="true">
     </chart-toolbar>
-  </div></container>
+  </div></ext-container>
 
-  <cartesian downloadServerUrl ="http://svg.sencha.io" 
+  <ext-cartesian downloadServerUrl ="http://svg.sencha.io"
+    flex="1"
     shadow="true"
     (ready)="chartNavReady($event)"
     [store]="this.store"
@@ -19,6 +20,6 @@
     [interactions]="cartesianInteractions"
     [series]="cartesianSeries"
     [axes]="cartesianAxes">
-  </cartesian>
+  </ext-cartesian>
 
-</container>  
+</ext-container>

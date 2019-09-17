@@ -1,27 +1,30 @@
-<container [padding]="!isPhone ? 10 : 0" layout="fit" [fitToParent]="true">
+<ext-container [padding]="!isPhone ? 10 : 0" layout="vbox" [fitToParent]="true">
+    <ext-container><div #extitem>
+        <chart-toolbar
+            [onRefreshClick]="this.refresh"
+            [onToggleZoomOnPan]="null"
+        >
+        </chart-toolbar>
+    </div></ext-container>
 
-  <container docked="top"><div #extitem>
-    <chart-toolbar
-      [onRefreshClick]="this.refresh"
-      [onToggleZoomOnPan]="null">
-    </chart-toolbar>
-  </div></container>
-
-  <panel shadow="true" layout="vbox">
-    <polar downloadServerUrl ="http://svg.sencha.io"
-      innerPadding="20"
-      [store]="this.store"
-      flex="1"
-      [animation]="{ easing: 'elasticIn', duration: 1000}"
-      [series]="polarSeries1">
-    </polar>
-    <polar downloadServerUrl ="http://svg.sencha.io"
-      innerPadding="20"
-      [store]="this.store"
-      flex="1"
-      [animation]="{ easing: 'elasticIn', duration: 1000 }"
-      [series]="polarSeries2">
-    </polar>
-  </panel>
-
-</container>
+    <ext-panel shadow="true" flex="1" layout="vbox">
+        <ext-polar
+            downloadServerUrl="http://svg.sencha.io"
+            innerPadding="20"
+            [store]="this.store"
+            flex="1"
+            [animation]="{ easing: 'elasticIn', duration: 1000 }"
+            [series]="polarSeries1"
+        >
+        </ext-polar>
+        <ext-polar
+            downloadServerUrl="http://svg.sencha.io"
+            innerPadding="20"
+            [store]="this.store"
+            flex="1"
+            [animation]="{ easing: 'elasticIn', duration: 1000 }"
+            [series]="polarSeries2"
+        >
+        </ext-polar>
+    </ext-panel>
+</ext-container>

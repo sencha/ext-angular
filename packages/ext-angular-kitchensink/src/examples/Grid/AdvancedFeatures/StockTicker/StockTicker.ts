@@ -93,11 +93,11 @@ export class StockTickerComponent implements OnInit {
 
   renderSparkline = (value) => {
     return `
-        <sparkline 
-            [values]="value" 
+        <ext-sparkline
+            [values]="value"
             height="16"
             [tipTpl]="'Price: {y:number("0.00")}'"
-        ></sparkline>
+        ></ext-sparkline>
     `
 }
 

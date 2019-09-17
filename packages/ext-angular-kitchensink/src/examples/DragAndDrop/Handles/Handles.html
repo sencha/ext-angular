@@ -1,19 +1,19 @@
-<container padding="10" layout="fit" [fitToParent]="true">
+<ext-container padding="10" layout="fit" [fitToParent]="true">
 
-  <panel 
+  <ext-panel
     [shadow]="true"
     (ready)="parentReady($event)">
 
-    <container (ready)="handleRepeatReady($event)" [cls]="'handle-repeat handle-source'">
-      <container [cls]="'handle'" [html]="'Foo'"></container>
-      <container [cls]="'handle'" [html]="'Bar'"></container>
-      <container [cls]="'handle'" [html]="'Baz'"></container>
-    </container>
+    <ext-container (ready)="handleRepeatReady($event)" [cls]="'handle-repeat handle-source'">
+      <ext-container [cls]="'handle'" [html]="'Foo'"></ext-container>
+      <ext-container [cls]="'handle'" [html]="'Bar'"></ext-container>
+      <ext-container [cls]="'handle'" [html]="'Baz'"></ext-container>
+    </ext-container>
 
-    <container (ready)="dragReady($event)" [cls]="'handle-handles handle-source'">
-      <container [cls]="'handle'" [html]="'Drag'"></container>
-    </container>
+    <ext-container (ready)="dragReady($event)" [cls]="'handle-handles handle-source'">
+      <ext-container [cls]="'handle'" [html]="'Drag'"></ext-container>
+    </ext-container>
 
-  </panel>
+  </ext-panel>
 
-</container>
+</ext-container>

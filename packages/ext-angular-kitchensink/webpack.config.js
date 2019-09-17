@@ -1,8 +1,9 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
-const ExtWebpackPlugin = require('@sencha/ext-angular-webpack-plugin')
-const portfinder = require('portfinder')
+const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const portfinder = require('portfinder');
 
 const webpack = require("webpack")
 const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin
@@ -31,21 +32,22 @@ module.exports = function (env) {
     extensions: ['.ts', '.js', '.html']
   }
   //******* */
- 
+
   var toolkit       = get('toolkit',       'modern')
   var theme         = get('theme',         'theme-kitchensink')
   var packages      = get('packages',
   [
-    'font-ext', 
-    'ux', 
+    'font-ext',
+    'ux',
     'd3',
     'pivot-d3',
-    'font-awesome', 
+    'font-awesome',
     'exporter',
-    'pivot', 
-    'calendar', 
+    'pivot',
+    'calendar',
     'charts',
-    'treegrid'
+    'treegrid',
+    'froala-editor'
   ])
   var script        = get('script',        './extract-code.js')
   var emit          = get('emit',          'yes')
@@ -55,7 +57,8 @@ module.exports = function (env) {
   var browser       = get('browser',       'yes')
   var watch         = get('watch',         'yes')
   var verbose       = get('verbose',       'no')
-  var basehref      = get('basehref',      '/') 
+  var basehref      = get('basehref',      '/')
+  var build_v       = get('build_v', '7.0.0.0');
 
   const isProd = environment === 'production'
   portfinder.basePort = (env && env.port) || 1962
@@ -71,7 +74,7 @@ module.exports = function (env) {
         script: script,
         emit: emit,
         port: port,
-        profile: profile, 
+        profile: profile,
         environment: environment,
         treeshake: treeshake,
         browser: browser,
@@ -92,7 +95,18 @@ module.exports = function (env) {
       new FilterWarningsPlugin({
         exclude: /System.import/
       }),
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.HotModuleReplacementPlugin(),
+      new CopyWebpackPlugin([{
+        from: '../node_modules/@sencha/ext-ux/modern/resources',
+        to: './ext/ux'
+    }]),
+    new CopyWebpackPlugin([{
+        from: '../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js',
+        to: './webcomponents-bundle.js'
+    }]),
+    new webpack.DefinePlugin({
+        BUILD_VERSION: JSON.stringify(build_v)
+    })
     ]
     return {
       mode: environment,

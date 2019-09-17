@@ -1,23 +1,26 @@
-<container padding="10" layout="fit" [fitToParent]="true">
+<ext-container padding="10" layout="fit" [fitToParent]="true">
+    <ext-panel [shadow]="true" [layout]="'fit'">
 
-  <panel [shadow]="true" [layout]="'fit'">
+        <ext-toolbar [docked]="'top'">
+            <ext-container>
+                <ext-container>
+                    <span #extitem>
+                        <div style="font-size: 14px;">
+                            Use your {{ supportsTouch ? "finger" : "mouse" }} to
+                            paint on the surface below.
+                        </div>
+                    </span>
+                </ext-container>
+            </ext-container>
+            <ext-spacer></ext-spacer>
+            <ext-button (tap)="clear()" [text]="'Clear'"> </ext-button>
+        </ext-toolbar>
 
-    <toolbar [docked]="'top'">
-      <container>
-        <container>
-          <span #extitem>
-            <div style="font-size: 14px;">
-              Use your {{supportsTouch ? 'finger' : 'mouse'}} to paint on the surface below.
-            </div>
-          </span>
-        </container>
-      </container>
-      <spacer ></spacer>
-      <button (tap)="clear()" [text]="'Clear'"> </button>
-    </toolbar>
+        <ext-draw
+            (ready)="onReady($event)"
+            downloadServerUrl="http://svg.sencha.io"
+        >
+        </ext-draw>
 
-    <draw (ready)="onReady($event)"></draw>
-
-  </panel>
-
-</container>
+    </ext-panel>
+</ext-container>

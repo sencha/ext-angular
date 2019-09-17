@@ -1,26 +1,26 @@
-<container padding="10" layout="fit" [fitToParent]="true">
+<ext-container padding="10" layout="fit" [fitToParent]="true">
 
-  <grid 
+  <ext-grid
     title="Grid with View Options"
     [store]="this.store"
     plugins="gridviewoptions"
     shadow="true">
 
-    <toolbar docked="top">
-      <container>
+    <ext-toolbar docked="top">
+      <ext-container>
         <span #extitem>
           <div style="font-size:'14px';font-weight: 'normal';">Long press on a column header to customize this grid.</div>
         </span>
-      </container>
-    </toolbar>
+      </ext-container>
+    </ext-toolbar>
 
-    <column text="Company" dataIndex="name" width="150"></column>
-    <column text="Phone" dataIndex="phone" width="100" hidden></column>
-    <column text="Industry" dataIndex="industry" width="150" hidden></column>
-    <column text="Price" dataIndex="price" width="75" formatter="usMoney" ></column>
-    <column text="Change" width="100" dataIndex="priceChange" [renderer]="this.renderSign.bind(this, '0.00')"></column>
-    <column text="% Change" dataIndex="priceChangePct" [renderer]="this.renderSign.bind(this, '0.00')"></column>
-    <column text="Last Updated" dataIndex="priceLastChange" width="125" formatter="date('m/d/Y')"></column>
+    <ext-column text="Company" dataIndex="name" width="150"></ext-column>
+    <ext-column text="Phone" dataIndex="phone" width="100" hidden></ext-column>
+    <ext-column text="Industry" dataIndex="industry" width="150" hidden></ext-column>
+    <ext-column text="Price" dataIndex="price" width="75" formatter="usMoney" ></ext-column>
+    <ext-column text="Change" width="100" dataIndex="priceChange" [renderer]="this.renderSign.bind(this, '0.00')"></ext-column>
+    <ext-column text="% Change" dataIndex="priceChangePct" [renderer]="this.renderSign.bind(this, '0.00')"></ext-column>
+    <ext-column text="Last Updated" dataIndex="priceLastChange" width="125" formatter="date('m/d/Y')"></ext-column>
 
-  </grid>
-</container>
+  </ext-grid>
+</ext-container>

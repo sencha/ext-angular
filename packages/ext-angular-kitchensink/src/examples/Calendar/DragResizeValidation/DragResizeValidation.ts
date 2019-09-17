@@ -18,7 +18,7 @@ export class CalendarDragResizeValidationComponent {
 
   calendarDay: any;
   calendarDayReady = (event) => {
-    this.calendarDay = event.ext;
+    this.calendarDay = event.detail.cmp;
   }
 
   onBeforeDragStart = (calendarday,context) => {

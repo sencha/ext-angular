@@ -24,8 +24,8 @@ export class ConfigurablePivotTreeMapComponent {
 
   mainCtnRef:any;
 
-  ctnReady = (ele) => {
-    this.mainCtnRef = ele.ext; 
+  ctnReady = (event) => {
+    this.mainCtnRef = event.detail.cmp;
   }
 
   drawingVar = {xtype: 'pivottreemap'};
@@ -124,7 +124,7 @@ export class ConfigurablePivotTreeMapComponent {
         }]
     };
 
-  
+
     store = Ext.create('Ext.data.TreeStore', {
     fields: [
       {name: 'id',        type: 'string'},
@@ -172,6 +172,7 @@ export class ConfigurablePivotTreeMapComponent {
   }
 
   onShowConfigPanel = panel => {
+      console.log('onShowConfigPanel')
       console.log(panel);
     panel.getLeftAxisHeader().getTitle().setText('Tree labels');
     panel.setTopAxisContainerVisible(false);

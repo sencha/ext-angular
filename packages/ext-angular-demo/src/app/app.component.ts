@@ -10,6 +10,20 @@ import { Component } from '@angular/core';
   template: `
   <panel [fullscreen]="true" title="Ext Angular Test App">
 
+  <container padding="10">
+  <button 
+      text="Say Hello {{ this.message }}"
+      [handler]="this.sayHello"
+      ui="action raised"
+  ></button>
+  <button 
+      text="Say Goodbye"
+      [handler]="this.sayGoodbye"
+  ></button>
+  <div #extitem>{{ this.message }}</div>
+</container>
+
+
   
   <button text="floating menu">
     <menu [floated]="true">
@@ -57,7 +71,15 @@ import { Component } from '@angular/core';
   `
 })
 export class AppComponent {
+  message: string;
 
+  sayHello = () => {
+    this.message = 'Hello world!';
+}
+
+sayGoodbye = () => {
+    this.message = 'Goodbye cruel world.';
+}
 
 
   // {

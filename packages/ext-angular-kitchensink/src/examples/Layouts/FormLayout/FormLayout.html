@@ -1,31 +1,31 @@
-<container  [padding]="isPhone ? 20 : 30">
-    <panel 
+<ext-container  [padding]="isPhone ? 20 : 30">
+    <ext-panel
         [shadow]="true" [ui]="'instructions'" [margin]="'0 0 30 0'"
-        [html]="'A <b>form</b> layout renders a single column of form fields, all with the same label width. 
-        The default behavior is to size all labels to the width of the label with the longest 
+        [html]="'A <b>form</b> layout renders a single column of form fields, all with the same label width.
+        The default behavior is to size all labels to the width of the label with the longest
         text, but the width of the labels can also be configured.'"
-    ></panel>
-    <container >
+    ></ext-panel>
+    <ext-container >
         <div  style="font-size:14px; font-family:Menlo, Courier; margin:10px 0 10px 0">
             labelTextAlign="left" (default)
         </div>
-    ></container>
-    <formpanel  [layout]="'form'" [shadow]="true" [margin]="'0 0 30 0'" [defaults]="{labelAlign: 'left'}">
-        <textfield  [label]="'First Name'" [labelTextAlign]="'left'"></textfield>
-        <textfield  [label]="'Last Name'" [labelTextAlign]="'left'"></textfield>
-        <textfield  [label]="'Bank Account Number'" [labelTextAlign]="'left'"></textfield>
-    </formpanel>       
-    <container>
+    ></ext-container>
+    <ext-formpanel  [layout]="'form'" [shadow]="true" [margin]="'0 0 30 0'" [defaults]="{labelAlign: 'left'}">
+        <ext-textfield  [label]="'First Name'" [labelTextAlign]="'left'"></ext-textfield>
+        <ext-textfield  [label]="'Last Name'" [labelTextAlign]="'left'"></ext-textfield>
+        <ext-textfield  [label]="'Bank Account Number'" [labelTextAlign]="'left'"></ext-textfield>
+    </ext-formpanel>
+    <ext-container>
         <div  style="font-size:14px;font-family:Menlo, Courier;margin:10px 0 10px 0">
             labelTextAlign="right"
         </div>
-    </container>
-    <formpanel  [layout]="'form'" [shadow]="true" [defaults]="{labelAlign: 'left'}">
-        <textfield  [label]="'First Name'" [labelTextAlign]="'right'"></textfield>
-        <textfield  [label]="'Last Name'" [labelTextAlign]="'right'"></textfield>
-        <textfield  [label]="'Title'" [labelTextAlign]="'right'"></textfield>
-    </formpanel> 
-</container>
+    </ext-container>
+    <ext-formpanel  [layout]="'form'" [shadow]="true" [defaults]="{labelAlign: 'left'}">
+        <ext-textfield  [label]="'First Name'" [labelTextAlign]="'right'"></ext-textfield>
+        <ext-textfield  [label]="'Last Name'" [labelTextAlign]="'right'"></ext-textfield>
+        <ext-textfield  [label]="'Title'" [labelTextAlign]="'right'"></ext-textfield>
+    </ext-formpanel>
+</ext-container>
 
 
 <!-- const styles = {
