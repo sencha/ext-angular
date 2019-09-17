@@ -1,5 +1,5 @@
 declare var Ext: any;
-import { Component } from '@angular/core'
+import { Component, ChangeDetectorRef } from '@angular/core'
 
 @Component({
   selector: 'colseabletab-component',
@@ -14,6 +14,9 @@ export class ClosableTabsComponent {
     this.nextKey++,
     this.nextKey++
   ];
+
+  constructor(private cd: ChangeDetectorRef) {}
+
 
   tabPanel:any;
   tabPanelReady = (event) => {
@@ -30,10 +33,13 @@ export class ClosableTabsComponent {
     this.tabs = this.tabs.filter(t => t !== tab);
   }
 
-  addTab = () => {
+  addTab = (event) => {
+      console.log('add')
     const key = this.nextKey++;
     this.tabs = [...this.tabs, key];
-    return false;
+    console.log(this.tabs)
+    this.cd.detectChanges();
+    //return false;
   }
 
 }

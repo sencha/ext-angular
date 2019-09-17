@@ -19,9 +19,15 @@ export class FormPanelComponent {
   height = !this.isPhone ? '600' : null
   disabled:boolean = false;
   formRef:any;
+  selRef:any;
 
   onReady = (event) => {
     this.formRef = event.detail.cmp;
+  }
+
+  OnSelChange = (event) => {
+      console.log('here')
+    this.selRef = event.detail.cmp;
   }
 
   toggleDisabled = () => {
