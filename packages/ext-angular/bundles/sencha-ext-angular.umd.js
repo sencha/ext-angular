@@ -370,7 +370,7 @@
                 }
             }
             else {
-                console.log('BottomToTop');
+                console.log('TopToBottom');
                 if (A.props['viewport'] == true) {
                     //this.newDiv.parentNode.removeChild(this.newDiv);
                     if (this.parentType == 'html') {
