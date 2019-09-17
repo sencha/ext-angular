@@ -1,4 +1,4 @@
-//Tue Sep 17 2019 08:20:59 GMT-0400 (EDT)
+//Tue Sep 17 2019 12:45:24 GMT-0400 (EDT)
 declare var Ext: any
 
 import {
@@ -211,7 +211,7 @@ createExtComponent() {
         }
     }
     else {
-        console.log('BottomToTop')
+        console.log('TopToBottom')
         if (A.props['viewport'] == true) {
             //this.newDiv.parentNode.removeChild(this.newDiv);
             if (this.parentType == 'html') {
