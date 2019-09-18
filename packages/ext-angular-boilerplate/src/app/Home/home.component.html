@@ -1,10 +1,23 @@
-<ext-container xng="home" padding="10"layout="fit" [fitToParent]="true">
-  <ext-grid shadow="true" [store]="this.store">
-    <ext-toolbar docked="top">
-      <ext-searchfield ui="faded" placeholder="Search..." (change)="this.onSearch($event)" [responsiveConfig]="searchresponsiveConfig"></ext-searchfield>
-    </ext-toolbar>
-    <ext-column text="Name" dataIndex="name" flex="2" resizable="true"></ext-column>
-    <ext-column text="Email" dataIndex="email" flex="3" resizable="true" [responsiveConfig]="emailresponsiveConfig"></ext-column>
-    <ext-column text="Phone" dataIndex="phone" flex="2" resizable="true"></ext-column>
-  </ext-grid>
+<ext-container
+    padding="10"
+    layout="fit"
+    [fitToParent]="true"
+>
+    <ext-grid
+        (ready)="readyGrid($event)"
+        shadow="true"
+    >
+        <ext-toolbar docked="top">
+            <ext-searchfield
+                (change)="this.onSearch($event)"
+                ui="faded"
+                placeholder="Search..."
+            >
+            </ext-searchfield>
+        </ext-toolbar>
+        <ext-column text="Name" dataIndex="name" width="300"></ext-column>
+        <ext-column text="Email" dataIndex="email" width="300"></ext-column>
+        <ext-column text="Phone" dataIndex="phone"width="200"></ext-column>
+    </ext-grid>
+
 </ext-container>

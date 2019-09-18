@@ -107,17 +107,25 @@ export class AppComponent {
         }
         this.navTreeListCmp.setSelection(node);
         this.breadcrumbCmp.setSelection(node);
+        var routediv = document.getElementById('routediv');
+
         if (this.hideExamples == false) {
             this.collapseCode = true;
             this.dataviewNavCmp.setData(node.childNodes);
             this.codeButtonCmp.setHidden(true);
             this.selectionCmp.setStyle({display: 'flex'});
-            this.routerCmp.setStyle({display: 'none'});
+            this.routerCmp.setHidden(true);
+            if (routediv != null) {
+                routediv.style.display = 'none';
+            }
         }
         else {
             this.codeButtonCmp.setHidden(false);
             this.selectionCmp.setStyle({display: 'none'});
-            this.routerCmp.setStyle({display: 'flex'});
+            this.routerCmp.setHidden(false);
+            if (routediv != null) {
+                routediv.style.display = 'block';
+            }
             this.ngZone.run(() => this.router.navigateByUrl(node.id)).then();
             this.setCodeTabs(node);
         }
