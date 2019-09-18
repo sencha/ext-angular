@@ -94,11 +94,14 @@
 
     <!-- examples starts-->
     <ext-container
+        id="routercontainer"
         (ready)="readyRouter($event)"
         *ngIf="!isPhone"
         scrollable="true"
     >
-        <router-outlet #extroute></router-outlet>
+        <div #extitem id="routediv">
+            <router-outlet id="route"></router-outlet>
+        </div>
     </ext-container>
     <!-- examples ends-->
 

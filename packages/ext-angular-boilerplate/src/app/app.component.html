@@ -1,22 +1,26 @@
-<ext-container xng="top" [viewport]="true" [fullscreen]="true" layout="fit">
+<ext-container
+    (ready)="readyViewport($event)"
+    [viewport]="true"
+    [fullscreen]="true"
+    layout="fit"
+>
+    <ext-titlebar [title]="title" docked="top">
+        <ext-button align="left" *ngIf="isPhone" iconCls="x-fa fa-bars" (tap)="toggleAppMenu($event)" ripple="false"></ext-button>
+    </ext-titlebar>
 
-  <ext-titlebar [title]="title" docked="top">
-    <ext-button align="left" *ngIf="isPhone" iconCls="x-fa fa-bars" (tap)="toggleAppMenu($event)" [handler]="this.toggleAppMenu" ripple="false"></ext-button>
-  </ext-titlebar>
+    <ext-panel docked="left" shadow="true" [hidden]="false">
+        <ext-treelist
+            (ready)="readyNavTreeList($event)"
+            (selectionchange)="selectionchangeNavTreeList($event)"
+            [width]="200"
+            ui="nav"
+            expanderFirst="false"
+        >
+        </ext-treelist>
+    </ext-panel>
 
-  <ext-panel docked="left" shadow="true" [hidden]="showAppMenu">
-    <ext-treelist
-      [width]="width"
-      ui="nav"
-      expanderFirst="false"
-      (selectionchange)="navigate($event)"
-      [store]="navStore"
-      [responsiveConfig]="responsiveConfig">
-    </ext-treelist>
-  </ext-panel>
-
-  <ext-container>
-    <router-outlet id="route" #extroute></router-outlet>
-  </ext-container>
+    <div #extitem>
+        <router-outlet id="route"></router-outlet>
+    </div>
 
 </ext-container>
