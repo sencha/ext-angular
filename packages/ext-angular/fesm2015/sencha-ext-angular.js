@@ -208,11 +208,11 @@ class EngBase {
                 this.addTheChild(A.ext, w, null);
             }
         }
-        if (this._extitems != undefined) {
-            if (this._extroutes.length == 1) {
-                A.ext.setHtml(this._extroute.nativeElement);
-            }
-        }
+        // if (this._extitems != undefined) {
+        //     if (this._extroutes.length == 1) {
+        //         A.ext.setHtml(this._extroute.nativeElement);
+        //     }
+        // }
     }
     assessChildren(base, xtype) {
         //console.log('assessChildren for: ' + xtype);

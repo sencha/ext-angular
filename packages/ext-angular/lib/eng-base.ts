@@ -1,4 +1,4 @@
-//Tue Sep 17 2019 12:45:24 GMT-0400 (EDT)
+//Wed Sep 18 2019 10:46:36 GMT-0400 (EDT)
 declare var Ext: any
 
 import {
@@ -254,11 +254,11 @@ assessAngularChildren(base, xtype, A) {
             this.addTheChild(A.ext, w, null);
         }
     }
-    if (this._extitems != undefined) {
-        if (this._extroutes.length == 1) {
-            A.ext.setHtml(this._extroute.nativeElement);
-        }
-    }
+    // if (this._extitems != undefined) {
+    //     if (this._extroutes.length == 1) {
+    //         A.ext.setHtml(this._extroute.nativeElement);
+    //     }
+    // }
 }
 
 
