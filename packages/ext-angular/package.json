@@ -1,7 +1,7 @@
 {
   "name": "@sencha/ext-angular",
   "description": "ext-angular",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "private": false,
   "peerDependencies": {
     "@angular/compiler": "~8.2.5",

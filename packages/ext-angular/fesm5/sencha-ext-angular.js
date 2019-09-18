@@ -4,7 +4,6 @@ import { EventEmitter, ContentChild, ContentChildren, QueryList, ElementRef, Hos
 var EngBase = /** @class */ (function () {
     function EngBase(nativeElement, metaData, hostComponent) {
         var _this = this;
-        //console.log('hi')
         this.metaData = metaData;
         this.hostComponent = hostComponent;
         this.node = nativeElement;
@@ -165,7 +164,6 @@ var EngBase = /** @class */ (function () {
                 }
                 Ext.onReady(function () {
                     //console.log(this.parentType + ' - Ext.create: ' + methis.currentElName + ' HTML parent: ' + methis.currentElName);
-                    //console.log(meA.props)
                     methis.currentEl.A.ext = Ext.create(meA.props);
                     methis.assessChildren(methis.base, methis.xtype);
                 });
@@ -211,28 +209,16 @@ var EngBase = /** @class */ (function () {
     EngBase.prototype.assessAngularChildren = function (base, xtype, A) {
         if (this._extitems != undefined) {
             if (this._extitems.length == 1) {
-                console.log('extitems')
-                console.log(this)
                 var el = Ext.get(this._extitem.nativeElement);
                 var w = Ext.create({ xtype: 'widget', element: el });
                 this.addTheChild(A.ext, w, null);
             }
         }
-//         if (this._extitems != undefined) {
-//             if (this._extroutes.length == 1) {
-//                 //A.ext.setHtml(this._extroute.nativeElement);
-// console.log(A.ext)
-// //document.body.appendChild(this._extroute.nativeElement)
-// //var r = document.getElementById('route')
-//                 //var el = Ext.get(this._extroute.nativeElement);
-//                 // var w = Ext.create({ xtype: 'widget', element: el });
-//                 // this.addTheChild(A.ext, w, null);
-//                 //A.ext.el.dom
-//                 // var el = Ext.get(this._extroute.nativeElement);
-//                 // var w = Ext.create({ xtype: 'widget', element: el });
-//                 // this.addTheChild(A.ext, w, null);
-//             }
-//         }
+        // if (this._extitems != undefined) {
+        //     if (this._extroutes.length == 1) {
+        //         A.ext.setHtml(this._extroute.nativeElement);
+        //     }
+        // }
     };
     EngBase.prototype.assessChildren = function (base, xtype) {
         //console.log('assessChildren for: ' + xtype);
