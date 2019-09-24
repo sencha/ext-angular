@@ -1,6 +1,6 @@
 ## @sencha/ext-angular-blank
 
-last run: Wed Sep 18 2019 10:46:36 GMT-0400 (EDT)
+last run: Mon Sep 23 2019 15:48:20 GMT-0400 (Eastern Daylight Time)
 
 This npm package contains the minimum files that are needed to provide for the @sencha/ext-angular package for an Angular application
 

@@ -13,7 +13,7 @@ function extractAll(dir) {
 
   for (let file of files) {
     const fullPath = path.join(dir, file)
-    
+
     if (fs.lstatSync(fullPath).isDirectory()) {
       extractAll(fullPath);
     } else if (file === `${example}.ts`) {
@@ -24,6 +24,16 @@ function extractAll(dir) {
         console.log(`Error extracting code from ${file}`, e)
       }
     }
+    else if (file === `${example}Data.js`) {
+        try {
+  //        console.log(example)
+          extractFrom(example, file, fullPath)
+        } catch (e) {
+          console.log(`Error extracting code from ${file}`, e)
+        }
+      }
+
+
   }
 }
 
