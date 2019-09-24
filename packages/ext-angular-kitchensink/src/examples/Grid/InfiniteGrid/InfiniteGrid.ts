@@ -1,6 +1,6 @@
 declare var Ext: any;
 import { Component } from '@angular/core';
-import './VirtualForm';
+import './InfiniteGridData';
 
 Ext.require([
     'Ext.grid.filters.Plugin'
@@ -12,5 +12,5 @@ Ext.require([
   styles: [``]
 })
 export class InfiniteGridComponent {
-    
+
 }

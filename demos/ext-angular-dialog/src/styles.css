@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+/* Find color names here: https://www.rapidtables.com/web/color */
+:xroot {
+    --dark-mode: false;
+    --base-color: midnightblue;
+    --base-highlight-color: #64b5f6;
+    --base-light-color: #bbdefb;
+    --base-dark-color: #1976d2;
+    --base-pressed-color: #6ab8f7;
+    --base-focused-color: #42a5f5;
+    --base-invisible-color: rgba(33, 150, 243, 0);
+    --base-foreground-color: green !important;
+    --accent-color: #ff9800;
+    --accent-light-color: #ffe0b2;
+    --accent-dark-color: #f57c00;
+    --accent-pressed-color: #ffb74d;
+    --accent-invisible-color: rgba(255, 152, 0, 0);
+    --accent-foreground-color: #222;
+    --confirm-color: #7cb342;
+    --confirm-pressed-color: #a2cc75;
+    --alert-color: #c62828;
+    --alert-pressed-color: #de5c5c;
+    --color: blue !important;
+    --reverse-color: #fff;
+    --highlight-color: rgba(17, 17, 17, 0.54);
+    --disabled-color: rgba(17, 17, 17, 0.38);
+    --reverse-disabled-color: rgba(255, 255, 255, 0.38);
+    --divider-color: #e2e2e2;
+    --selected-background-color: #e0e0e0;
+    --hovered-background-color: #eee;
+    --header-background-color: #f5f5f5;
+    --faded-color: #e1e1e1;
+    --background-color: blue !important;
+    --alt-background-color: #f5f5f5;
+    --reverse-background-color: #303030;
+    --reverse-alt-background-color: #3a3a3a;
+    --overlay-color: rgba(0, 0, 0, 0.03);
+    --content-padding: 16px;
+    --listitem-selected-background-color: #e0e0e0;
+    --reverse-border-color: #e0e0e0;
+    --reverse-alt-border-color: #e0e0e0;
+}
+
+.x-grid {
+    --color: mignightblue !important;
+}
+
+.x-dialogheader {
+    background-color: #2196f3 !important;
+    background-image: none;
+}

@@ -1,5 +1,4 @@
-declare var Ext: any;
-import {Component} from '@angular/core'
+import { Component, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'dialog-popup-component',
@@ -8,10 +7,12 @@ import {Component} from '@angular/core'
 })
 export class DialogPopupComponent {
 
-  isDialogShowing:boolean = false;
-  showDialog = () => {this.isDialogShowing = true;}
-  onOk = () => this.isDialogShowing = false;
-  onCancel = () => this.isDialogShowing = false;
-  onHide = () => this.isDialogShowing = false;
+    constructor(private cd: ChangeDetectorRef) {};
+
+    isDialogShowing:boolean = false;
+    showDialog = () => {this.isDialogShowing = true;this.cd.detectChanges();}
+    onOk = () => {this.isDialogShowing = false;this.cd.detectChanges();}
+    onCancel = () => {this.isDialogShowing = false;this.cd.detectChanges();}
+    onHide = () => {this.isDialogShowing = false;this.cd.detectChanges();}
 
 }
