@@ -1,15 +1,17 @@
-import { OnInit, AfterViewInit, OnChanges, ElementRef, SimpleChanges } from '@angular/core';
-import { EngBase } from './eng-base';
-export declare class celleditorMetaData {
-    static XTYPE: string;
+import { Ext_grid_CellEditor } from './Ext/grid/CellEditor';
+export declare class ExtCelleditorMetaData extends Ext_grid_CellEditor {
     static PROPERTIES: string[];
     static EVENTS: any[];
     static EVENTNAMES: string[];
+    static getAll(): void;
 }
-export declare class ExtCelleditorComponent extends EngBase implements OnInit, AfterViewInit, OnChanges {
-    hostComponent: EngBase;
+import { EngBase } from './eng-base';
+import { ElementRef, SimpleChanges } from '@angular/core';
+export declare class ExtCelleditorComponent extends EngBase {
+    xtype: string;
     constructor(eRef: ElementRef, hostComponent: EngBase);
     ngOnInit(): void;
     ngAfterViewInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
+    ngOnDestroy(): void;
 }

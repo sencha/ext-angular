@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { ExtAngularModule } from '@sencha/ext-angular-all'
+import { ExtAngularAllModule } from '@sencha/ext-angular-all'
 import { AppComponent } from './app.component';
 import { DialogComponent } from './app.dialog'
 
@@ -12,7 +12,7 @@ import { DialogComponent } from './app.dialog'
   ],
   imports: [
     BrowserModule,
-    ExtAngularModule
+    ExtAngularAllModule
   ],
   providers: [],
   bootstrap: [AppComponent]

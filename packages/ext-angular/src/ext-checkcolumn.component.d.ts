@@ -1,15 +1,17 @@
-import { OnInit, AfterViewInit, OnChanges, ElementRef, SimpleChanges } from '@angular/core';
-import { EngBase } from './eng-base';
-export declare class checkcolumnMetaData {
-    static XTYPE: string;
+import { Ext_grid_column_Check } from './Ext/grid/column/Check';
+export declare class ExtCheckcolumnMetaData extends Ext_grid_column_Check {
     static PROPERTIES: string[];
     static EVENTS: any[];
     static EVENTNAMES: string[];
+    static getAll(): void;
 }
-export declare class ExtCheckcolumnComponent extends EngBase implements OnInit, AfterViewInit, OnChanges {
-    hostComponent: EngBase;
+import { EngBase } from './eng-base';
+import { ElementRef, SimpleChanges } from '@angular/core';
+export declare class ExtCheckcolumnComponent extends EngBase {
+    xtype: string;
     constructor(eRef: ElementRef, hostComponent: EngBase);
     ngOnInit(): void;
     ngAfterViewInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
+    ngOnDestroy(): void;
 }

@@ -1,15 +1,17 @@
-import { OnInit, AfterViewInit, OnChanges, ElementRef, SimpleChanges } from '@angular/core';
-import { EngBase } from './eng-base';
-export declare class d3_packMetaData {
-    static XTYPE: string;
+import { Ext_d3_hierarchy_Pack } from './Ext/d3/hierarchy/Pack';
+export declare class ExtD3_packMetaData extends Ext_d3_hierarchy_Pack {
     static PROPERTIES: string[];
     static EVENTS: any[];
     static EVENTNAMES: string[];
+    static getAll(): void;
 }
-export declare class ExtD3_packComponent extends EngBase implements OnInit, AfterViewInit, OnChanges {
-    hostComponent: EngBase;
+import { EngBase } from './eng-base';
+import { ElementRef, SimpleChanges } from '@angular/core';
+export declare class ExtD3_packComponent extends EngBase {
+    xtype: string;
     constructor(eRef: ElementRef, hostComponent: EngBase);
     ngOnInit(): void;
     ngAfterViewInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
+    ngOnDestroy(): void;
 }

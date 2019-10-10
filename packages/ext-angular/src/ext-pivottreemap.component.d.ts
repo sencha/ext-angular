@@ -1,15 +1,17 @@
-import { OnInit, AfterViewInit, OnChanges, ElementRef, SimpleChanges } from '@angular/core';
-import { EngBase } from './eng-base';
-export declare class pivottreemapMetaData {
-    static XTYPE: string;
+import { Ext_pivot_d3_TreeMap } from './Ext/pivot/d3/TreeMap';
+export declare class ExtPivottreemapMetaData extends Ext_pivot_d3_TreeMap {
     static PROPERTIES: string[];
     static EVENTS: any[];
     static EVENTNAMES: string[];
+    static getAll(): void;
 }
-export declare class ExtPivottreemapComponent extends EngBase implements OnInit, AfterViewInit, OnChanges {
-    hostComponent: EngBase;
+import { EngBase } from './eng-base';
+import { ElementRef, SimpleChanges } from '@angular/core';
+export declare class ExtPivottreemapComponent extends EngBase {
+    xtype: string;
     constructor(eRef: ElementRef, hostComponent: EngBase);
     ngOnInit(): void;
     ngAfterViewInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
+    ngOnDestroy(): void;
 }

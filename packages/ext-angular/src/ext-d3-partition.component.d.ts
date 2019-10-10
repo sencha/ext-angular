@@ -1,15 +1,17 @@
-import { OnInit, AfterViewInit, OnChanges, ElementRef, SimpleChanges } from '@angular/core';
-import { EngBase } from './eng-base';
-export declare class d3_partitionMetaData {
-    static XTYPE: string;
+import { Ext_d3_hierarchy_partition_Partition } from './Ext/d3/hierarchy/partition/Partition';
+export declare class ExtD3_partitionMetaData extends Ext_d3_hierarchy_partition_Partition {
     static PROPERTIES: string[];
     static EVENTS: any[];
     static EVENTNAMES: string[];
+    static getAll(): void;
 }
-export declare class ExtD3_partitionComponent extends EngBase implements OnInit, AfterViewInit, OnChanges {
-    hostComponent: EngBase;
+import { EngBase } from './eng-base';
+import { ElementRef, SimpleChanges } from '@angular/core';
+export declare class ExtD3_partitionComponent extends EngBase {
+    xtype: string;
     constructor(eRef: ElementRef, hostComponent: EngBase);
     ngOnInit(): void;
     ngAfterViewInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
+    ngOnDestroy(): void;
 }

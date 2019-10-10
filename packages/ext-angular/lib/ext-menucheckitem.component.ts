@@ -1,297 +1,68 @@
-//Ext.onReady(function() {
-//import { NgZone } from '@angular/core';
-//import { Router } from '@angular/router';
+import { Ext_menu_CheckItem } from './Ext/menu/CheckItem';
+export class ExtMenucheckitemMetaData extends Ext_menu_CheckItem {
+    public static PROPERTIES: string[] = [];
+    public static EVENTS: any[] = [];
+    public static EVENTNAMES: string[] = [];
+    static getAll() {
+        ExtMenucheckitemMetaData.PROPERTIES = Ext_menu_CheckItem.getProperties(ExtMenucheckitemMetaData.PROPERTIES);
+        ExtMenucheckitemMetaData.EVENTS = Ext_menu_CheckItem.getEvents(ExtMenucheckitemMetaData.EVENTS);
+        ExtMenucheckitemMetaData.EVENTS.forEach( (event: any) => {
+            ExtMenucheckitemMetaData.EVENTNAMES.push(event.name);
+        })
+     }
+}
+(function () {ExtMenucheckitemMetaData.getAll();})();
 
-declare var Ext: any
+import { EngBase } from './eng-base';
 import {
-  Injectable,
   Host,
   Optional,
   SkipSelf,
-  Output,
-  OnInit,
-  AfterViewInit,
-  OnChanges,
+  //Output,
+  //OnInit,
+  //AfterViewInit,
+  //OnChanges,
   Component,
   ElementRef,
   forwardRef,
   SimpleChanges
 } from '@angular/core';
-import { EngBase } from './eng-base';
-export class menucheckitemMetaData {
-  public static XTYPE: string = 'menucheckitem';
-  public static PROPERTIES: string[] = [
-    'eng',
-    'viewport',
-    'align',
-    'plugins',
-    'responsiveConfig',
-    'responsiveFormulas',
-    'alignSelf',
-    'alwaysOnTop',
-    'ariaAttributes',
-    'ariaDescribedBy',
-    'ariaLabel',
-    'ariaLabelledBy',
-    'axisLock',
-    'bind',
-    'border',
-    'bottom',
-    'centered',
-    'checkChangeDisabled',
-    'checked',
-    'checkHandler',
-    'clickHideDelay',
-    'cls',
-    'constrainAlign',
-    'contentEl',
-    'controller',
-    'data',
-    'defaultListenerScope',
-    'destroyMenu',
-    'disabled',
-    'displayed',
-    'docked',
-    'draggable',
-    'flex',
-    'floated',
-    'focusCls',
-    'fullscreen',
-    'handler',
-    'height',
-    'hidden',
-    'hideAnimation',
-    'hideMode',
-    'hideOnClick',
-    'hideOnMaskTap',
-    'href',
-    'html',
-    'icon',
-    'iconAlign',
-    'iconCls',
-    'id',
-    'indented',
-    'instanceCls',
-    'itemId',
-    'keyMap',
-    'keyMapEnabled',
-    'keyMapTarget',
-    'left',
-    'listeners',
-    'margin',
-    'maxHeight',
-    'maxWidth',
-    'menu',
-    'menuAlign',
-    'menuExpandDelay',
-    'menuHideDelay',
-    'minHeight',
-    'minWidth',
-    'modal',
-    'modelValidation',
-    'name',
-    'nameable',
-    'padding',
-    'plugins',
-    'publishes',
-    'record',
-    'reference',
-    'relative',
-    'renderTo',
-    'right',
-    'ripple',
-    'scope',
-    'scrollable',
-    'separator',
-    'session',
-    'shadow',
-    'shareableName',
-    'shim',
-    'showAnimation',
-    'stateful',
-    'statefulDefaults',
-    'stateId',
-    'style',
-    'submenuText',
-    'tabIndex',
-    'target',
-    'text',
-    'toFrontOnShow',
-    'tooltip',
-    'top',
-    'touchAction',
-    'tpl',
-    'tplWriteMode',
-    'translatable',
-    'twoWayBindable',
-    'ui',
-    'userCls',
-    'userSelectable',
-    'value',
-    'viewModel',
-    'weight',
-    'width',
-    'x',
-    'xtype',
-    'y',
-    'zIndex',
-    'platformConfig',
-    'responsiveConfig',
-    'align',
-    'fitToParent',
-    'config'
-];
-  public static EVENTS: any[] = [
-{name:'added',parameters:'sender,container,index'},
-{name:'beforebottomchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforecenteredchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforecheckchange',parameters:'menucheckitem,checked'},
-{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforedockedchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforehide',parameters:'sender'},
-{name:'beforeleftchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforemaxHeightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforemaxWidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeminHeightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeminWidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeorientationchange',parameters:''},
-{name:'beforerightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforescrollablechange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeshow',parameters:'sender'},
-{name:'beforetofront',parameters:'menucheckitem'},
-{name:'beforetopchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'blur',parameters:'menucheckitem,event'},
-{name:'bottomchange',parameters:'sender,value,oldValue'},
-{name:'centeredchange',parameters:'sender,value,oldValue'},
-{name:'checkchange',parameters:'menucheckitem,checked'},
-{name:'destroy',parameters:''},
-{name:'disabledchange',parameters:'sender,value,oldValue'},
-{name:'dockedchange',parameters:'sender,value,oldValue'},
-{name:'erased',parameters:'sender'},
-{name:'floatingchange',parameters:'sender,positioned'},
-{name:'focus',parameters:'menucheckitem,event'},
-{name:'focusenter',parameters:'menucheckitem,event'},
-{name:'focusleave',parameters:'menucheckitem,event'},
-{name:'fullscreen',parameters:'sender'},
-{name:'heightchange',parameters:'sender,value,oldValue'},
-{name:'hiddenchange',parameters:'sender,value,oldValue'},
-{name:'hide',parameters:'sender'},
-{name:'initialize',parameters:'sender'},
-{name:'leftchange',parameters:'sender,value,oldValue'},
-{name:'maxHeightchange',parameters:'sender,value,oldValue'},
-{name:'maxWidthchange',parameters:'sender,value,oldValue'},
-{name:'minHeightchange',parameters:'sender,value,oldValue'},
-{name:'minWidthchange',parameters:'sender,value,oldValue'},
-{name:'moved',parameters:'sender,container,toIndex,fromIndex'},
-{name:'orientationchange',parameters:''},
-{name:'painted',parameters:'sender,element'},
-{name:'positionedchange',parameters:'sender,positioned'},
-{name:'removed',parameters:'sender,container,index'},
-{name:'resize',parameters:'element,info'},
-{name:'rightchange',parameters:'sender,value,oldValue'},
-{name:'scrollablechange',parameters:'sender,value,oldValue'},
-{name:'show',parameters:'sender'},
-{name:'tofront',parameters:'menucheckitem'},
-{name:'topchange',parameters:'sender,value,oldValue'},
-{name:'updatedata',parameters:'sender,newData'},
-{name:'widthchange',parameters:'sender,value,oldValue'},
-{name:'ready',parameters:''}
-];
-  public static EVENTNAMES: string[] = [
-'added',
-'beforebottomchange',
-'beforecenteredchange',
-'beforecheckchange',
-'beforedisabledchange',
-'beforedockedchange',
-'beforeheightchange',
-'beforehiddenchange',
-'beforehide',
-'beforeleftchange',
-'beforemaxHeightchange',
-'beforemaxWidthchange',
-'beforeminHeightchange',
-'beforeminWidthchange',
-'beforeorientationchange',
-'beforerightchange',
-'beforescrollablechange',
-'beforeshow',
-'beforetofront',
-'beforetopchange',
-'beforewidthchange',
-'blur',
-'bottomchange',
-'centeredchange',
-'checkchange',
-'destroy',
-'disabledchange',
-'dockedchange',
-'erased',
-'floatingchange',
-'focus',
-'focusenter',
-'focusleave',
-'fullscreen',
-'heightchange',
-'hiddenchange',
-'hide',
-'initialize',
-'leftchange',
-'maxHeightchange',
-'maxWidthchange',
-'minHeightchange',
-'minWidthchange',
-'moved',
-'orientationchange',
-'painted',
-'positionedchange',
-'removed',
-'resize',
-'rightchange',
-'scrollablechange',
-'show',
-'tofront',
-'topchange',
-'updatedata',
-'widthchange',
-'ready'
-];
-}
+
 @Component({
   selector: 'ext-menucheckitem',
-  inputs: menucheckitemMetaData.PROPERTIES,
-  outputs: menucheckitemMetaData.EVENTNAMES,
+  inputs: ExtMenucheckitemMetaData.PROPERTIES,
+  outputs: ExtMenucheckitemMetaData.EVENTNAMES,
   providers: [{provide: EngBase, useExisting: forwardRef(() => ExtMenucheckitemComponent)}],
   template: '<ng-template></ng-template>'
 })
-export class ExtMenucheckitemComponent extends EngBase implements OnInit, AfterViewInit, OnChanges  {
-    constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : EngBase) {
-        super(eRef.nativeElement,menucheckitemMetaData,hostComponent)
+export class ExtMenucheckitemComponent extends EngBase {
+    xtype: string;
+    constructor(
+        eRef: ElementRef,
+        @Host() @Optional() @SkipSelf() hostComponent: EngBase
+    ){
+        super(
+            eRef,
+            hostComponent,
+            ExtMenucheckitemMetaData.PROPERTIES,
+            ExtMenucheckitemMetaData.EVENTS
+        )
+        this.xtype = 'menucheckitem'
     }
 
     public ngOnInit() {
-        this.baseOnInit(menucheckitemMetaData)
+        this.baseOnInit()
     }
 
     public ngAfterViewInit() {
-        this.baseAfterViewInit(menucheckitemMetaData)
+        this.baseAfterViewInit()
     }
 
+    public ngOnChanges(changes: SimpleChanges) {
+        this.baseOnChanges(changes)
+    }
 
-
-  //public ngAfterContentInit() {
-  //  this.baseAfterContentInit()
-  //}
-
-  public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-
-
-
-   // public ngAfterViewChecked() {
-   //   console.log('ngAfterViewChecked')
-  //}
+    public ngOnDestroy() {
+        this.baseOnDestroy()
+    }
 }
-

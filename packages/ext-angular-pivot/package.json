@@ -1,0 +1,43 @@
+{
+  "name": "@sencha/ext-angular-pivot",
+  "description": "ext-angular-pivot",
+  "version": "7.1.0",
+  "private": false,
+  "peerDependencies": {
+    "@angular/compiler": "~8.2.9",
+    "@angular/core": "~8.2.9",
+    "tslib": "^1.10.0"
+  },
+  "dependencies": {
+    "script-loader": "^0.7.2",
+    "tslib": "^1.10.0"
+  },
+  "devDependencies": {
+    "@angular/core": "~8.2.9",
+    "@angular/common": "~8.2.9",
+    "@angular/platform-browser": "~8.2.9",
+    "@angular/platform-browser-dynamic": "~8.2.9",
+    "zone.js": "~0.10.2",
+    "ng-packagr": "^5.5.1",
+    "@angular/compiler": "~8.2.9",
+    "@angular/compiler-cli": "~8.2.9",
+    "typescript": "~3.5.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sencha/ext-angular.git"
+  },
+  "keywords": [],
+  "author": "Sencha",
+  "license": "ISC",
+  "main": "bundles/sencha-ext-angular-pivot.umd.js",
+  "module": "fesm5/sencha-ext-angular-pivot.js",
+  "es2015": "fesm2015/sencha-ext-angular-pivot.js",
+  "esm5": "esm5/sencha-ext-angular-pivot.js",
+  "esm2015": "esm2015/sencha-ext-angular-pivot.js",
+  "fesm5": "fesm5/sencha-ext-angular-pivot.js",
+  "fesm2015": "fesm2015/sencha-ext-angular-pivot.js",
+  "typings": "sencha-ext-angular-pivot.d.ts",
+  "metadata": "sencha-ext-angular-pivot.metadata.json",
+  "sideEffects": false
+}

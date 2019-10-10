@@ -1,37 +1,116 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 
 @Component({
     selector: 'app-dialog',
+    inputs: ['show', 'name', 'email'],
     template: `
-    <ext-dialog
-        [displayed]="isDialog2Showing"
-        [title]="'Dialog2'"
-        [width]="600"
-        [height]="600"
+<ext-dialog
+        [displayed]="isDisplayed"
+        [title]="'Dialog in separate source file'"
+        [width]="dialogWidth"
+        [height]="dialogHeight"
         [constrainDrag]="false"
         [closable]="false"
         [maximizable]="true"
         [closeAction]="'hide'"
-        [bodyPadding]="20"
+        [bodyPadding]="10"
         [defaultFocus]="'#ok'"
-        (onHide)="onHide()"
-        [html]="
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        "
     >
-        <ext-button text="Cancel" (tap)="onCancel2()"></ext-button>
-        <ext-button text="OK" (tap)="onOk2()"></ext-button>
-    </ext-dialog>
+
+    <ext-formpanel>
+        <ext-fieldset
+            [title]="'Personal Info'"
+            [defaults]="{ labelAlign: 'placeholder' }"
+        >
+            <ext-textfield
+                (ready)="readyName($event)"
+                [label]="'Name'"
+                [required]="true"
+                [placeholder]="'This field is required'"
+                [disabled]="disabled"
+            >
+            </ext-textfield>
+            <ext-emailfield
+                (ready)="readyEmail($event)"
+                [label]="'Email'"
+                [placeholder]="'me@sencha.com'"
+                [disabled]="disabled"
+            >
+            </ext-emailfield>
+            <ext-passwordfield
+                [label]="'Password'"
+                [required]="true"
+                [revealable]="true"
+                [disabled]="disabled"
+            >
+            </ext-passwordfield>
+            <ext-textfield
+                [label]="'Phone Number'"
+                [inputMask]="'(999) 999-9999'"
+                [inputType]="'tel'"
+                [disabled]="disabled"
+            >
+            </ext-textfield>
+            <ext-urlfield
+                [label]="'URL'"
+                [placeholder]="'http://sencha.com'"
+                [disabled]="disabled"
+            >
+            </ext-urlfield>
+            <ext-spinnerfield
+                [label]="'Spinner'"
+                [minValue]="0"
+                [maxValue]="1000"
+                [stepValue]="1"
+                [cycle]="true"
+                [margin]="'15 0 0 0'"
+                [labelAlign]="'top'"
+                [disabled]="disabled"
+            ></ext-spinnerfield>
+        </ext-fieldset>
+    </ext-formpanel>
+
+    <ext-toolbar docked="bottom">
+        <ext-spacer></ext-spacer>
+        <ext-button align="right" text="Cancel" (tap)="onCancel()"></ext-button>
+        <ext-button text="OK" (tap)="onOk()"></ext-button>
+    </ext-toolbar>
+
+</ext-dialog>
+
     `,
     styles: []
 })
 export class DialogComponent {
+
+    dialogWidth:number = document.body.clientWidth - 100;
+    dialogHeight:number = document.body.clientHeight - 100;
+    isDisplayed:boolean = false;
+
     constructor(private cd: ChangeDetectorRef) {};
 
-    isDialogShowing:boolean = false;
-    showDialog = () => {this.isDialogShowing = true;this.cd.detectChanges();}
-    onOk = () => {this.isDialogShowing = false;this.cd.detectChanges();}
-    onCancel = () => {this.isDialogShowing = false;this.cd.detectChanges();}
-    onHide = () => {this.isDialogShowing = false;this.cd.detectChanges();}
+    cmpName: any;readyName(event) {this.cmpName = event.detail.cmp;}
+    cmpEmail: any;readyEmail(event) {this.cmpEmail = event.detail.cmp;}
+
+    public ngOnChanges(changes: SimpleChanges) {
+         for (let propName in changes) {
+            if (propName == 'show') {
+                if(changes[propName].currentValue != undefined) {
+                    this.isDisplayed = true;this.cd.detectChanges();
+                }
+            }
+            if (propName == 'name') {
+                if(changes[propName].currentValue != undefined) {
+                    this.cmpName.setValue(changes[propName].currentValue);this.cd.detectChanges();
+                }
+            }
+            if (propName == 'email') {
+                if(changes[propName].currentValue != undefined) {
+                    this.cmpEmail.setValue(changes[propName].currentValue);this.cd.detectChanges();
+                }
+            }
+        }
+    }
+    onOk = () => {this.isDisplayed = false;this.cd.detectChanges();}
+    onCancel = () => {this.isDisplayed = false;this.cd.detectChanges();}
 }

@@ -1,287 +1,68 @@
-//Ext.onReady(function() {
-//import { NgZone } from '@angular/core';
-//import { Router } from '@angular/router';
+import { Ext_list_Tree } from './Ext/list/Tree';
+export class ExtTreelistMetaData extends Ext_list_Tree {
+    public static PROPERTIES: string[] = [];
+    public static EVENTS: any[] = [];
+    public static EVENTNAMES: string[] = [];
+    static getAll() {
+        ExtTreelistMetaData.PROPERTIES = Ext_list_Tree.getProperties(ExtTreelistMetaData.PROPERTIES);
+        ExtTreelistMetaData.EVENTS = Ext_list_Tree.getEvents(ExtTreelistMetaData.EVENTS);
+        ExtTreelistMetaData.EVENTS.forEach( (event: any) => {
+            ExtTreelistMetaData.EVENTNAMES.push(event.name);
+        })
+     }
+}
+(function () {ExtTreelistMetaData.getAll();})();
 
-declare var Ext: any
+import { EngBase } from './eng-base';
 import {
-  Injectable,
   Host,
   Optional,
   SkipSelf,
-  Output,
-  OnInit,
-  AfterViewInit,
-  OnChanges,
+  //Output,
+  //OnInit,
+  //AfterViewInit,
+  //OnChanges,
   Component,
   ElementRef,
   forwardRef,
   SimpleChanges
 } from '@angular/core';
-import { EngBase } from './eng-base';
-export class treelistMetaData {
-  public static XTYPE: string = 'treelist';
-  public static PROPERTIES: string[] = [
-    'eng',
-    'viewport',
-    'align',
-    'plugins',
-    'responsiveConfig',
-    'responsiveFormulas',
-    'alignSelf',
-    'alwaysOnTop',
-    'ariaAttributes',
-    'ariaDescribedBy',
-    'ariaLabel',
-    'ariaLabelledBy',
-    'axisLock',
-    'bind',
-    'border',
-    'bottom',
-    'centered',
-    'cls',
-    'constrainAlign',
-    'contentEl',
-    'controller',
-    'data',
-    'defaultListenerScope',
-    'defaults',
-    'disabled',
-    'displayed',
-    'docked',
-    'draggable',
-    'expanderFirst',
-    'expanderOnly',
-    'flex',
-    'floated',
-    'floatLeafItems',
-    'focusCls',
-    'fullscreen',
-    'height',
-    'hidden',
-    'hideAnimation',
-    'hideMode',
-    'hideOnMaskTap',
-    'highlightPath',
-    'html',
-    'id',
-    'indent',
-    'instanceCls',
-    'itemId',
-    'itemRipple',
-    'keyMap',
-    'keyMapEnabled',
-    'keyMapTarget',
-    'left',
-    'listeners',
-    'margin',
-    'maxHeight',
-    'maxWidth',
-    'micro',
-    'minHeight',
-    'minWidth',
-    'modal',
-    'modelValidation',
-    'name',
-    'nameable',
-    'padding',
-    'plugins',
-    'publishes',
-    'record',
-    'reference',
-    'relative',
-    'renderTo',
-    'right',
-    'ripple',
-    'scrollable',
-    'selection',
-    'selectOnExpander',
-    'session',
-    'shadow',
-    'shareableName',
-    'shim',
-    'showAnimation',
-    'singleExpand',
-    'stateful',
-    'statefulDefaults',
-    'stateId',
-    'store',
-    'style',
-    'tabIndex',
-    'toFrontOnShow',
-    'tooltip',
-    'top',
-    'touchAction',
-    'tpl',
-    'tplWriteMode',
-    'translatable',
-    'twoWayBindable',
-    'ui',
-    'userCls',
-    'userSelectable',
-    'viewModel',
-    'weight',
-    'width',
-    'x',
-    'xtype',
-    'y',
-    'zIndex',
-    'platformConfig',
-    'responsiveConfig',
-    'align',
-    'fitToParent',
-    'config'
-];
-  public static EVENTS: any[] = [
-{name:'added',parameters:'sender,container,index'},
-{name:'beforebottomchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforecenteredchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforedockedchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforehide',parameters:'sender'},
-{name:'beforeleftchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforemaxHeightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforemaxWidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeminHeightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeminWidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeorientationchange',parameters:''},
-{name:'beforerightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforescrollablechange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeshow',parameters:'sender'},
-{name:'beforetofront',parameters:'treelist'},
-{name:'beforetopchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'blur',parameters:'treelist,event'},
-{name:'bottomchange',parameters:'sender,value,oldValue'},
-{name:'centeredchange',parameters:'sender,value,oldValue'},
-{name:'destroy',parameters:''},
-{name:'disabledchange',parameters:'sender,value,oldValue'},
-{name:'dockedchange',parameters:'sender,value,oldValue'},
-{name:'erased',parameters:'sender'},
-{name:'floatingchange',parameters:'sender,positioned'},
-{name:'focus',parameters:'treelist,event'},
-{name:'focusenter',parameters:'treelist,event'},
-{name:'focusleave',parameters:'treelist,event'},
-{name:'fullscreen',parameters:'sender'},
-{name:'heightchange',parameters:'sender,value,oldValue'},
-{name:'hiddenchange',parameters:'sender,value,oldValue'},
-{name:'hide',parameters:'sender'},
-{name:'initialize',parameters:'sender'},
-{name:'itemclick',parameters:'sender,info'},
-{name:'leftchange',parameters:'sender,value,oldValue'},
-{name:'maxHeightchange',parameters:'sender,value,oldValue'},
-{name:'maxWidthchange',parameters:'sender,value,oldValue'},
-{name:'minHeightchange',parameters:'sender,value,oldValue'},
-{name:'minWidthchange',parameters:'sender,value,oldValue'},
-{name:'moved',parameters:'sender,container,toIndex,fromIndex'},
-{name:'orientationchange',parameters:''},
-{name:'painted',parameters:'sender,element'},
-{name:'positionedchange',parameters:'sender,positioned'},
-{name:'removed',parameters:'sender,container,index'},
-{name:'resize',parameters:'element,info'},
-{name:'rightchange',parameters:'sender,value,oldValue'},
-{name:'scrollablechange',parameters:'sender,value,oldValue'},
-{name:'selectionchange',parameters:'treelist,record'},
-{name:'show',parameters:'sender'},
-{name:'tofront',parameters:'treelist'},
-{name:'topchange',parameters:'sender,value,oldValue'},
-{name:'updatedata',parameters:'sender,newData'},
-{name:'widthchange',parameters:'sender,value,oldValue'},
-{name:'ready',parameters:''}
-];
-  public static EVENTNAMES: string[] = [
-'added',
-'beforebottomchange',
-'beforecenteredchange',
-'beforedisabledchange',
-'beforedockedchange',
-'beforeheightchange',
-'beforehiddenchange',
-'beforehide',
-'beforeleftchange',
-'beforemaxHeightchange',
-'beforemaxWidthchange',
-'beforeminHeightchange',
-'beforeminWidthchange',
-'beforeorientationchange',
-'beforerightchange',
-'beforescrollablechange',
-'beforeshow',
-'beforetofront',
-'beforetopchange',
-'beforewidthchange',
-'blur',
-'bottomchange',
-'centeredchange',
-'destroy',
-'disabledchange',
-'dockedchange',
-'erased',
-'floatingchange',
-'focus',
-'focusenter',
-'focusleave',
-'fullscreen',
-'heightchange',
-'hiddenchange',
-'hide',
-'initialize',
-'itemclick',
-'leftchange',
-'maxHeightchange',
-'maxWidthchange',
-'minHeightchange',
-'minWidthchange',
-'moved',
-'orientationchange',
-'painted',
-'positionedchange',
-'removed',
-'resize',
-'rightchange',
-'scrollablechange',
-'selectionchange',
-'show',
-'tofront',
-'topchange',
-'updatedata',
-'widthchange',
-'ready'
-];
-}
+
 @Component({
   selector: 'ext-treelist',
-  inputs: treelistMetaData.PROPERTIES,
-  outputs: treelistMetaData.EVENTNAMES,
+  inputs: ExtTreelistMetaData.PROPERTIES,
+  outputs: ExtTreelistMetaData.EVENTNAMES,
   providers: [{provide: EngBase, useExisting: forwardRef(() => ExtTreelistComponent)}],
   template: '<ng-template></ng-template>'
 })
-export class ExtTreelistComponent extends EngBase implements OnInit, AfterViewInit, OnChanges  {
-    constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : EngBase) {
-        super(eRef.nativeElement,treelistMetaData,hostComponent)
+export class ExtTreelistComponent extends EngBase {
+    xtype: string;
+    constructor(
+        eRef: ElementRef,
+        @Host() @Optional() @SkipSelf() hostComponent: EngBase
+    ){
+        super(
+            eRef,
+            hostComponent,
+            ExtTreelistMetaData.PROPERTIES,
+            ExtTreelistMetaData.EVENTS
+        )
+        this.xtype = 'treelist'
     }
 
     public ngOnInit() {
-        this.baseOnInit(treelistMetaData)
+        this.baseOnInit()
     }
 
     public ngAfterViewInit() {
-        this.baseAfterViewInit(treelistMetaData)
+        this.baseAfterViewInit()
     }
 
+    public ngOnChanges(changes: SimpleChanges) {
+        this.baseOnChanges(changes)
+    }
 
-
-  //public ngAfterContentInit() {
-  //  this.baseAfterContentInit()
-  //}
-
-  public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-
-
-
-   // public ngAfterViewChecked() {
-   //   console.log('ngAfterViewChecked')
-  //}
+    public ngOnDestroy() {
+        this.baseOnDestroy()
+    }
 }
-

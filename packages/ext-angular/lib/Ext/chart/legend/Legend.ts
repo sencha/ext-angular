@@ -1,0 +1,126 @@
+import { Ext_chart_legend_LegendBase } from '../../../Ext/chart/legend/LegendBase';
+
+export class Ext_chart_legend_Legend extends Ext_chart_legend_LegendBase {
+    public static PROPERTIES: string[] = [
+'rect',
+'store',
+'toggleable',
+'platformConfig',
+'responsiveConfig',
+'fitToParent',
+'config'
+];
+    public static EVENTS: any[] = [
+{name:'activate',parameters:'newActiveItem,legend,oldActiveItem'},
+{name:'activeItemchange',parameters:'sender,value,oldValue'},
+{name:'add',parameters:''},
+{name:'added',parameters:'sender,container,index'},
+{name:'beforeactiveItemchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforebottomchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforecenteredchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforedockedchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforehide',parameters:'sender'},
+{name:'beforeleftchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforemaxHeightchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforemaxWidthchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforeminHeightchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforeminWidthchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforeorientationchange',parameters:''},
+{name:'beforerightchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforescrollablechange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforeshow',parameters:'sender'},
+{name:'beforestorechange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforetofront',parameters:'legend'},
+{name:'beforetopchange',parameters:'sender,value,oldValue,undefined'},
+{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
+{name:'blur',parameters:'legend,event'},
+{name:'bottomchange',parameters:'sender,value,oldValue'},
+{name:'centeredchange',parameters:'sender,value,oldValue'},
+{name:'childdoubletap',parameters:'legend,location'},
+{name:'childlongpress',parameters:'legend,location'},
+{name:'childmouseenter',parameters:'legend,location'},
+{name:'childmouseleave',parameters:'legend,location'},
+{name:'childsingletap',parameters:'legend,location'},
+{name:'childtap',parameters:'legend,location'},
+{name:'childtaphold',parameters:'legend,location'},
+{name:'childtouchcancel',parameters:'legend,location'},
+{name:'childtouchend',parameters:'legend,location'},
+{name:'childtouchmove',parameters:'legend,location'},
+{name:'childtouchstart',parameters:'legend,location'},
+{name:'deactivate',parameters:'oldActiveItem,legend,newActiveItem'},
+{name:'deselect',parameters:'legend,records'},
+{name:'destroy',parameters:''},
+{name:'disabledchange',parameters:'sender,value,oldValue'},
+{name:'dockedchange',parameters:'sender,value,oldValue'},
+{name:'erased',parameters:'sender'},
+{name:'floatingchange',parameters:'sender,positioned'},
+{name:'focus',parameters:'legend,event'},
+{name:'focusenter',parameters:'legend,event'},
+{name:'focusleave',parameters:'legend,event'},
+{name:'fullscreen',parameters:'sender'},
+{name:'heightchange',parameters:'sender,value,oldValue'},
+{name:'hiddenchange',parameters:'sender,value,oldValue'},
+{name:'hide',parameters:'sender'},
+{name:'initialize',parameters:'sender'},
+{name:'itemdoubletap',parameters:'legend,index,target,record,e'},
+{name:'itemlongpress',parameters:'legend,index,target,record,e'},
+{name:'itemmouseenter',parameters:'legend,index,target,record,e'},
+{name:'itemmouseleave',parameters:'legend,index,target,record,e'},
+{name:'itemsingletap',parameters:'legend,index,target,record,e'},
+{name:'itemswipe',parameters:'legend,index,target,record,e'},
+{name:'itemtap',parameters:'legend,index,target,record,e'},
+{name:'itemtaphold',parameters:'legend,index,target,record,e'},
+{name:'itemtouchcancel',parameters:'legend,index,target,record,e'},
+{name:'itemtouchend',parameters:'legend,index,target,record,e'},
+{name:'itemtouchmove',parameters:'legend,index,target,record,e'},
+{name:'itemtouchstart',parameters:'legend,index,target,record,e'},
+{name:'leftchange',parameters:'sender,value,oldValue'},
+{name:'maxHeightchange',parameters:'sender,value,oldValue'},
+{name:'maxWidthchange',parameters:'sender,value,oldValue'},
+{name:'minHeightchange',parameters:'sender,value,oldValue'},
+{name:'minWidthchange',parameters:'sender,value,oldValue'},
+{name:'move',parameters:''},
+{name:'moved',parameters:'sender,container,toIndex,fromIndex'},
+{name:'navigate',parameters:'legend,to,from'},
+{name:'orientationchange',parameters:''},
+{name:'painted',parameters:'sender,element'},
+{name:'positionedchange',parameters:'sender,positioned'},
+{name:'refresh',parameters:'legend'},
+{name:'remove',parameters:''},
+{name:'removed',parameters:'sender,container,index'},
+{name:'renderedchange',parameters:'legend,item,rendered'},
+{name:'resize',parameters:'element,info'},
+{name:'rightchange',parameters:'sender,value,oldValue'},
+{name:'rowselection',parameters:'view,selection'},
+{name:'scrollablechange',parameters:'sender,value,oldValue'},
+{name:'select',parameters:'legend,selected'},
+{name:'selectionchange',parameters:'view,records,selected,selection'},
+{name:'show',parameters:'sender'},
+{name:'storechange',parameters:'sender,value,oldValue'},
+{name:'tofront',parameters:'legend'},
+{name:'topchange',parameters:'sender,value,oldValue'},
+{name:'updatedata',parameters:'sender,newData'},
+{name:'widthchange',parameters:'sender,value,oldValue'},
+{name:'ready',parameters:''}
+];
+    static getProperties(properties) {
+        properties = properties.concat(Ext_chart_legend_Legend.PROPERTIES);
+        return Ext_chart_legend_LegendBase.getProperties(properties);
+    }
+    static getEvents(events) {
+        events = events.concat(Ext_chart_legend_Legend.EVENTS);
+        return Ext_chart_legend_LegendBase.getEvents(events);
+    }
+}
+
+
+    //public static PROPERTIESOBJECT: any = {[object Object]};
+    //static METHODS: any[] = [];
+    //public static MJGEVENTNAMES: string[] = [];
+        //static getEventNames(eventnames) {
+    //    eventnames = eventnames.concat(Ext_chart_legend_Legend.EVENTNAMES);
+    //    return Ext_chart_legend_LegendBase.getEventNames(eventnames);
+    //}

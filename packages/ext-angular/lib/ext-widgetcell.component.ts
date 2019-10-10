@@ -1,168 +1,68 @@
-//Ext.onReady(function() {
-//import { NgZone } from '@angular/core';
-//import { Router } from '@angular/router';
+import { Ext_grid_cell_Widget } from './Ext/grid/cell/Widget';
+export class ExtWidgetcellMetaData extends Ext_grid_cell_Widget {
+    public static PROPERTIES: string[] = [];
+    public static EVENTS: any[] = [];
+    public static EVENTNAMES: string[] = [];
+    static getAll() {
+        ExtWidgetcellMetaData.PROPERTIES = Ext_grid_cell_Widget.getProperties(ExtWidgetcellMetaData.PROPERTIES);
+        ExtWidgetcellMetaData.EVENTS = Ext_grid_cell_Widget.getEvents(ExtWidgetcellMetaData.EVENTS);
+        ExtWidgetcellMetaData.EVENTS.forEach( (event: any) => {
+            ExtWidgetcellMetaData.EVENTNAMES.push(event.name);
+        })
+     }
+}
+(function () {ExtWidgetcellMetaData.getAll();})();
 
-declare var Ext: any
+import { EngBase } from './eng-base';
 import {
-  Injectable,
   Host,
   Optional,
   SkipSelf,
-  Output,
-  OnInit,
-  AfterViewInit,
-  OnChanges,
+  //Output,
+  //OnInit,
+  //AfterViewInit,
+  //OnChanges,
   Component,
   ElementRef,
   forwardRef,
   SimpleChanges
 } from '@angular/core';
-import { EngBase } from './eng-base';
-export class widgetcellMetaData {
-  public static XTYPE: string = 'widgetcell';
-  public static PROPERTIES: string[] = [
-    'eng',
-    'viewport',
-    'align',
-    'plugins',
-    'responsiveConfig',
-    'responsiveFormulas',
-    'align',
-    'alignSelf',
-    'alwaysOnTop',
-    'ariaAttributes',
-    'ariaDescribedBy',
-    'ariaLabel',
-    'ariaLabelledBy',
-    'bind',
-    'bodyCls',
-    'bodyStyle',
-    'border',
-    'cellCls',
-    'cls',
-    'column',
-    'constrainAlign',
-    'controller',
-    'defaultListenerScope',
-    'defaultToolWeights',
-    'disabled',
-    'flex',
-    'floated',
-    'focusCls',
-    'forceWidth',
-    'height',
-    'hidden',
-    'hideMode',
-    'id',
-    'instanceCls',
-    'itemId',
-    'keyMap',
-    'keyMapEnabled',
-    'keyMapTarget',
-    'listeners',
-    'margin',
-    'name',
-    'nameable',
-    'plugins',
-    'publishes',
-    'record',
-    'reference',
-    'relative',
-    'renderTo',
-    'ripple',
-    'selectable',
-    'session',
-    'shadow',
-    'shareableName',
-    'shim',
-    'style',
-    'toFrontOnShow',
-    'toolDefaults',
-    'tools',
-    'touchAction',
-    'translatable',
-    'twoWayBindable',
-    'ui',
-    'userCls',
-    'value',
-    'viewModel',
-    'widget',
-    'width',
-    'x',
-    'y',
-    'platformConfig',
-    'responsiveConfig',
-    'align',
-    'fitToParent',
-    'config'
-];
-  public static EVENTS: any[] = [
-{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforetofront',parameters:'widgetcell'},
-{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'blur',parameters:'widgetcell,event'},
-{name:'disabledchange',parameters:'sender,value,oldValue'},
-{name:'focus',parameters:'widgetcell,event'},
-{name:'focusenter',parameters:'widgetcell,event'},
-{name:'focusleave',parameters:'widgetcell,event'},
-{name:'heightchange',parameters:'sender,value,oldValue'},
-{name:'hiddenchange',parameters:'sender,value,oldValue'},
-{name:'tofront',parameters:'widgetcell'},
-{name:'widthchange',parameters:'sender,value,oldValue'},
-{name:'ready',parameters:''}
-];
-  public static EVENTNAMES: string[] = [
-'beforedisabledchange',
-'beforeheightchange',
-'beforehiddenchange',
-'beforetofront',
-'beforewidthchange',
-'blur',
-'disabledchange',
-'focus',
-'focusenter',
-'focusleave',
-'heightchange',
-'hiddenchange',
-'tofront',
-'widthchange',
-'ready'
-];
-}
+
 @Component({
   selector: 'ext-widgetcell',
-  inputs: widgetcellMetaData.PROPERTIES,
-  outputs: widgetcellMetaData.EVENTNAMES,
+  inputs: ExtWidgetcellMetaData.PROPERTIES,
+  outputs: ExtWidgetcellMetaData.EVENTNAMES,
   providers: [{provide: EngBase, useExisting: forwardRef(() => ExtWidgetcellComponent)}],
   template: '<ng-template></ng-template>'
 })
-export class ExtWidgetcellComponent extends EngBase implements OnInit, AfterViewInit, OnChanges  {
-    constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : EngBase) {
-        super(eRef.nativeElement,widgetcellMetaData,hostComponent)
+export class ExtWidgetcellComponent extends EngBase {
+    xtype: string;
+    constructor(
+        eRef: ElementRef,
+        @Host() @Optional() @SkipSelf() hostComponent: EngBase
+    ){
+        super(
+            eRef,
+            hostComponent,
+            ExtWidgetcellMetaData.PROPERTIES,
+            ExtWidgetcellMetaData.EVENTS
+        )
+        this.xtype = 'widgetcell'
     }
 
     public ngOnInit() {
-        this.baseOnInit(widgetcellMetaData)
+        this.baseOnInit()
     }
 
     public ngAfterViewInit() {
-        this.baseAfterViewInit(widgetcellMetaData)
+        this.baseAfterViewInit()
     }
 
+    public ngOnChanges(changes: SimpleChanges) {
+        this.baseOnChanges(changes)
+    }
 
-
-  //public ngAfterContentInit() {
-  //  this.baseAfterContentInit()
-  //}
-
-  public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-
-
-
-   // public ngAfterViewChecked() {
-   //   console.log('ngAfterViewChecked')
-  //}
+    public ngOnDestroy() {
+        this.baseOnDestroy()
+    }
 }
-

@@ -1,5 +1,5 @@
-//Mon Sep 23 2019 15:48:20 GMT-0400 (Eastern Daylight Time)
-declare var Ext: any
+//Mon Sep 30 2019 13:42:25 GMT-0400 (Eastern Daylight Time)
+declare var Ext: any;
 
 import {
     EventEmitter,
@@ -18,12 +18,10 @@ export class EngBase {
 
     xtype: any
     properties: any
-    propertiesobject: any
     events: any
-    eventnames: any
 
     A: any;
-    private node: any
+    node: any
     parentNode: any
     base: any
     nodeName: any
@@ -45,37 +43,34 @@ export class EngBase {
     }
 
     constructor (
-        nativeElement: any,
-        private metaData: any,
-        public hostComponent : EngBase
+        eRef: any,
+        hostComponent: any,
+        properties,
+        events
     ) {
-        this.node = nativeElement;
+        this.node = eRef.nativeElement;
         this.parentNode = hostComponent;
+        this.properties = properties;
+        this.events = events;
+
+        this.events.forEach( (event: any, n: any) => {
+            if (event.name != 'fullscreen') {
+                (<any>this)[event.name] = new EventEmitter()
+            }
+            else {
+                (<any>this)[event.name + 'event'] = new EventEmitter()
+            }
+        })
 
         this.newDiv = document.createElement('div');
         //var t = document.createTextNode("newDiv");
         //this.newDiv.appendChild(t);
-
         this.node.insertAdjacentElement('beforebegin', this.newDiv);
-        this.xtype = metaData.XTYPE;
-        this.properties = metaData.PROPERTIES;
-        this.propertiesobject = 'propertiesobject';
-        this.events = metaData.EVENTS;
-        this.eventnames = metaData.EVENTNAMES;
 
         this.base = EngBase;
-
-        this.eventnames.forEach( (event: any, n: any) => {
-            if (event != 'fullscreen') {
-                (<any>this.currentEl)[event] = new EventEmitter()
-            }
-            else {
-                (<any>this.currentEl)[event + 'event'] = new EventEmitter()
-            }
-        })
     }
-    baseOnInit(metaData) { }
-    baseAfterViewInit(metaData) {
+    baseOnInit() { }
+    baseAfterViewInit() {
         this.initMe()
     }
 
@@ -86,7 +81,7 @@ initMe() {
     this.setParentType();
     this.setDirection();
     this.figureOutA();
-    this.createProps(this.properties, this.propertiesobject, this.events, this.eventnames);
+    this.createProps(this.properties, this.events);
     this.createExtComponent();
 }
 createRawChildren() {
@@ -204,7 +199,7 @@ createExtComponent() {
                 meA.props.renderTo = this.newDiv;
             }
             Ext.onReady(function () {
-                //console.log(this.parentType + ' - Ext.create: ' + methis.currentElName + ' HTML parent: ' + methis.currentElName);
+                //console.log(methis.parentType + ' - Ext.create: ' + methis.currentElName + ' HTML parent: ' + methis.currentElName);
                 methis.currentEl.A.ext = Ext.create(meA.props);
                 methis.assessChildren(methis.base, methis.xtype);
             });
@@ -323,7 +318,8 @@ assessChildren(base, xtype) {
 }
 
 checkParent(component, base, me) {
-    if (component.A == null) {
+    //if (component.A == null) {
+    if (component == null) {
         me.sendReadyEvent(me)
     }
     else {
@@ -572,7 +568,8 @@ sendReadyEvent(component) {
 }
 //******* base end */
 //******* props start */
-createProps(properties, propertiesobject, events, eventnames) {
+//createProps(properties, propertiesobject, events, eventnames) {
+createProps(properties, events) {
     var props = this.currentEl.A.props;
     props.xtype = this.xtype;
     let listenersProvided = false;
@@ -683,7 +680,7 @@ createProps(properties, propertiesobject, events, eventnames) {
         //console.log(`OnChanges: ${changesMsgs.join('; ')}`)
     }
 
-    ngOnDestroy() {
+    baseOnDestroy() {
         var childCmp;
         var parentCmp;
         if (childCmp == undefined || parentCmp == undefined) {

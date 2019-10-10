@@ -1,80 +1,68 @@
-//Ext.onReady(function() {
-//import { NgZone } from '@angular/core';
-//import { Router } from '@angular/router';
+import { Ext_pivot_d3_Container } from './Ext/pivot/d3/Container';
+export class ExtPivotd3containerMetaData extends Ext_pivot_d3_Container {
+    public static PROPERTIES: string[] = [];
+    public static EVENTS: any[] = [];
+    public static EVENTNAMES: string[] = [];
+    static getAll() {
+        ExtPivotd3containerMetaData.PROPERTIES = Ext_pivot_d3_Container.getProperties(ExtPivotd3containerMetaData.PROPERTIES);
+        ExtPivotd3containerMetaData.EVENTS = Ext_pivot_d3_Container.getEvents(ExtPivotd3containerMetaData.EVENTS);
+        ExtPivotd3containerMetaData.EVENTS.forEach( (event: any) => {
+            ExtPivotd3containerMetaData.EVENTNAMES.push(event.name);
+        })
+     }
+}
+(function () {ExtPivotd3containerMetaData.getAll();})();
 
-declare var Ext: any
+import { EngBase } from './eng-base';
 import {
-  Injectable,
   Host,
   Optional,
   SkipSelf,
-  Output,
-  OnInit,
-  AfterViewInit,
-  OnChanges,
+  //Output,
+  //OnInit,
+  //AfterViewInit,
+  //OnChanges,
   Component,
   ElementRef,
   forwardRef,
   SimpleChanges
 } from '@angular/core';
-import { EngBase } from './eng-base';
-export class pivotd3containerMetaData {
-  public static XTYPE: string = 'pivotd3container';
-  public static PROPERTIES: string[] = [
-    'eng',
-    'viewport',
-    'align',
-    'plugins',
-    'responsiveConfig',
-    'responsiveFormulas',
-    'configurator',
-    'drawing',
-    'matrix',
-    'platformConfig',
-    'responsiveConfig',
-    'align',
-    'fitToParent',
-    'config'
-];
-  public static EVENTS: any[] = [
-{name:'ready',parameters:''}
-];
-  public static EVENTNAMES: string[] = [
-'ready'
-];
-}
+
 @Component({
   selector: 'ext-pivotd3container',
-  inputs: pivotd3containerMetaData.PROPERTIES,
-  outputs: pivotd3containerMetaData.EVENTNAMES,
+  inputs: ExtPivotd3containerMetaData.PROPERTIES,
+  outputs: ExtPivotd3containerMetaData.EVENTNAMES,
   providers: [{provide: EngBase, useExisting: forwardRef(() => ExtPivotd3containerComponent)}],
   template: '<ng-template></ng-template>'
 })
-export class ExtPivotd3containerComponent extends EngBase implements OnInit, AfterViewInit, OnChanges  {
-    constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : EngBase) {
-        super(eRef.nativeElement,pivotd3containerMetaData,hostComponent)
+export class ExtPivotd3containerComponent extends EngBase {
+    xtype: string;
+    constructor(
+        eRef: ElementRef,
+        @Host() @Optional() @SkipSelf() hostComponent: EngBase
+    ){
+        super(
+            eRef,
+            hostComponent,
+            ExtPivotd3containerMetaData.PROPERTIES,
+            ExtPivotd3containerMetaData.EVENTS
+        )
+        this.xtype = 'pivotd3container'
     }
 
     public ngOnInit() {
-        this.baseOnInit(pivotd3containerMetaData)
+        this.baseOnInit()
     }
 
     public ngAfterViewInit() {
-        this.baseAfterViewInit(pivotd3containerMetaData)
+        this.baseAfterViewInit()
     }
 
+    public ngOnChanges(changes: SimpleChanges) {
+        this.baseOnChanges(changes)
+    }
 
-
-  //public ngAfterContentInit() {
-  //  this.baseAfterContentInit()
-  //}
-
-  public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-
-
-
-   // public ngAfterViewChecked() {
-   //   console.log('ngAfterViewChecked')
-  //}
+    public ngOnDestroy() {
+        this.baseOnDestroy()
+    }
 }
-

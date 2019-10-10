@@ -1,281 +1,68 @@
-//Ext.onReady(function() {
-//import { NgZone } from '@angular/core';
-//import { Router } from '@angular/router';
+import { Ext_Indicator } from './Ext/Indicator';
+export class ExtIndicatorMetaData extends Ext_Indicator {
+    public static PROPERTIES: string[] = [];
+    public static EVENTS: any[] = [];
+    public static EVENTNAMES: string[] = [];
+    static getAll() {
+        ExtIndicatorMetaData.PROPERTIES = Ext_Indicator.getProperties(ExtIndicatorMetaData.PROPERTIES);
+        ExtIndicatorMetaData.EVENTS = Ext_Indicator.getEvents(ExtIndicatorMetaData.EVENTS);
+        ExtIndicatorMetaData.EVENTS.forEach( (event: any) => {
+            ExtIndicatorMetaData.EVENTNAMES.push(event.name);
+        })
+     }
+}
+(function () {ExtIndicatorMetaData.getAll();})();
 
-declare var Ext: any
+import { EngBase } from './eng-base';
 import {
-  Injectable,
   Host,
   Optional,
   SkipSelf,
-  Output,
-  OnInit,
-  AfterViewInit,
-  OnChanges,
+  //Output,
+  //OnInit,
+  //AfterViewInit,
+  //OnChanges,
   Component,
   ElementRef,
   forwardRef,
   SimpleChanges
 } from '@angular/core';
-import { EngBase } from './eng-base';
-export class indicatorMetaData {
-  public static XTYPE: string = 'indicator';
-  public static PROPERTIES: string[] = [
-    'eng',
-    'viewport',
-    'align',
-    'plugins',
-    'responsiveConfig',
-    'responsiveFormulas',
-    'activeIndex',
-    'alignSelf',
-    'alwaysOnTop',
-    'ariaAttributes',
-    'ariaDescribedBy',
-    'ariaLabel',
-    'ariaLabelledBy',
-    'axisLock',
-    'bind',
-    'border',
-    'bottom',
-    'centered',
-    'cls',
-    'constrainAlign',
-    'contentEl',
-    'controller',
-    'count',
-    'data',
-    'defaultListenerScope',
-    'direction',
-    'disabled',
-    'displayed',
-    'docked',
-    'draggable',
-    'flex',
-    'floated',
-    'focusCls',
-    'fullscreen',
-    'height',
-    'hidden',
-    'hideAnimation',
-    'hideMode',
-    'hideOnMaskTap',
-    'html',
-    'id',
-    'instanceCls',
-    'itemId',
-    'keyMap',
-    'keyMapEnabled',
-    'keyMapTarget',
-    'left',
-    'listeners',
-    'margin',
-    'maxHeight',
-    'maxWidth',
-    'minHeight',
-    'minWidth',
-    'modal',
-    'modelValidation',
-    'name',
-    'nameable',
-    'padding',
-    'plugins',
-    'publishes',
-    'record',
-    'reference',
-    'relative',
-    'renderTo',
-    'right',
-    'ripple',
-    'scrollable',
-    'session',
-    'shadow',
-    'shareableName',
-    'shim',
-    'showAnimation',
-    'stateful',
-    'statefulDefaults',
-    'stateId',
-    'style',
-    'tabIndex',
-    'tapMode',
-    'toFrontOnShow',
-    'tooltip',
-    'top',
-    'touchAction',
-    'tpl',
-    'tplWriteMode',
-    'translatable',
-    'twoWayBindable',
-    'ui',
-    'userCls',
-    'userSelectable',
-    'viewModel',
-    'weight',
-    'width',
-    'x',
-    'xtype',
-    'y',
-    'zIndex',
-    'platformConfig',
-    'responsiveConfig',
-    'align',
-    'fitToParent',
-    'config'
-];
-  public static EVENTS: any[] = [
-{name:'added',parameters:'sender,container,index'},
-{name:'beforebottomchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforecenteredchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforedockedchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforehide',parameters:'sender'},
-{name:'beforeleftchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforemaxHeightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforemaxWidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeminHeightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeminWidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeorientationchange',parameters:''},
-{name:'beforerightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforescrollablechange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeshow',parameters:'sender'},
-{name:'beforetofront',parameters:'indicator'},
-{name:'beforetopchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'blur',parameters:'indicator,event'},
-{name:'bottomchange',parameters:'sender,value,oldValue'},
-{name:'centeredchange',parameters:'sender,value,oldValue'},
-{name:'destroy',parameters:''},
-{name:'disabledchange',parameters:'sender,value,oldValue'},
-{name:'dockedchange',parameters:'sender,value,oldValue'},
-{name:'erased',parameters:'sender'},
-{name:'floatingchange',parameters:'sender,positioned'},
-{name:'focus',parameters:'indicator,event'},
-{name:'focusenter',parameters:'indicator,event'},
-{name:'focusleave',parameters:'indicator,event'},
-{name:'fullscreen',parameters:'sender'},
-{name:'heightchange',parameters:'sender,value,oldValue'},
-{name:'hiddenchange',parameters:'sender,value,oldValue'},
-{name:'hide',parameters:'sender'},
-{name:'indicatortap',parameters:'indicator,index,item'},
-{name:'initialize',parameters:'sender'},
-{name:'leftchange',parameters:'sender,value,oldValue'},
-{name:'maxHeightchange',parameters:'sender,value,oldValue'},
-{name:'maxWidthchange',parameters:'sender,value,oldValue'},
-{name:'minHeightchange',parameters:'sender,value,oldValue'},
-{name:'minWidthchange',parameters:'sender,value,oldValue'},
-{name:'moved',parameters:'sender,container,toIndex,fromIndex'},
-{name:'next',parameters:'indicator'},
-{name:'orientationchange',parameters:''},
-{name:'painted',parameters:'sender,element'},
-{name:'positionedchange',parameters:'sender,positioned'},
-{name:'previous',parameters:'indicator'},
-{name:'removed',parameters:'sender,container,index'},
-{name:'resize',parameters:'element,info'},
-{name:'rightchange',parameters:'sender,value,oldValue'},
-{name:'scrollablechange',parameters:'sender,value,oldValue'},
-{name:'show',parameters:'sender'},
-{name:'tofront',parameters:'indicator'},
-{name:'topchange',parameters:'sender,value,oldValue'},
-{name:'updatedata',parameters:'sender,newData'},
-{name:'widthchange',parameters:'sender,value,oldValue'},
-{name:'ready',parameters:''}
-];
-  public static EVENTNAMES: string[] = [
-'added',
-'beforebottomchange',
-'beforecenteredchange',
-'beforedisabledchange',
-'beforedockedchange',
-'beforeheightchange',
-'beforehiddenchange',
-'beforehide',
-'beforeleftchange',
-'beforemaxHeightchange',
-'beforemaxWidthchange',
-'beforeminHeightchange',
-'beforeminWidthchange',
-'beforeorientationchange',
-'beforerightchange',
-'beforescrollablechange',
-'beforeshow',
-'beforetofront',
-'beforetopchange',
-'beforewidthchange',
-'blur',
-'bottomchange',
-'centeredchange',
-'destroy',
-'disabledchange',
-'dockedchange',
-'erased',
-'floatingchange',
-'focus',
-'focusenter',
-'focusleave',
-'fullscreen',
-'heightchange',
-'hiddenchange',
-'hide',
-'indicatortap',
-'initialize',
-'leftchange',
-'maxHeightchange',
-'maxWidthchange',
-'minHeightchange',
-'minWidthchange',
-'moved',
-'next',
-'orientationchange',
-'painted',
-'positionedchange',
-'previous',
-'removed',
-'resize',
-'rightchange',
-'scrollablechange',
-'show',
-'tofront',
-'topchange',
-'updatedata',
-'widthchange',
-'ready'
-];
-}
+
 @Component({
   selector: 'ext-indicator',
-  inputs: indicatorMetaData.PROPERTIES,
-  outputs: indicatorMetaData.EVENTNAMES,
+  inputs: ExtIndicatorMetaData.PROPERTIES,
+  outputs: ExtIndicatorMetaData.EVENTNAMES,
   providers: [{provide: EngBase, useExisting: forwardRef(() => ExtIndicatorComponent)}],
   template: '<ng-template></ng-template>'
 })
-export class ExtIndicatorComponent extends EngBase implements OnInit, AfterViewInit, OnChanges  {
-    constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : EngBase) {
-        super(eRef.nativeElement,indicatorMetaData,hostComponent)
+export class ExtIndicatorComponent extends EngBase {
+    xtype: string;
+    constructor(
+        eRef: ElementRef,
+        @Host() @Optional() @SkipSelf() hostComponent: EngBase
+    ){
+        super(
+            eRef,
+            hostComponent,
+            ExtIndicatorMetaData.PROPERTIES,
+            ExtIndicatorMetaData.EVENTS
+        )
+        this.xtype = 'indicator'
     }
 
     public ngOnInit() {
-        this.baseOnInit(indicatorMetaData)
+        this.baseOnInit()
     }
 
     public ngAfterViewInit() {
-        this.baseAfterViewInit(indicatorMetaData)
+        this.baseAfterViewInit()
     }
 
+    public ngOnChanges(changes: SimpleChanges) {
+        this.baseOnChanges(changes)
+    }
 
-
-  //public ngAfterContentInit() {
-  //  this.baseAfterContentInit()
-  //}
-
-  public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-
-
-
-   // public ngAfterViewChecked() {
-   //   console.log('ngAfterViewChecked')
-  //}
+    public ngOnDestroy() {
+        this.baseOnDestroy()
+    }
 }
-

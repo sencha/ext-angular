@@ -1,6 +1,6 @@
 ## @sencha/ext-angular-blank
 
-last run: Mon Sep 23 2019 15:48:20 GMT-0400 (Eastern Daylight Time)
+last run: Mon Sep 30 2019 13:42:25 GMT-0400 (Eastern Daylight Time)
 
 This npm package contains the minimum files that are needed to provide for the @sencha/ext-angular package for an Angular application
 
@@ -34,7 +34,7 @@ cd ng-eng; code .
 In the dependencies section of package.json, add the following:
 
 ```sh
-"@sencha/ext-angular": "7.0.0",
+"@sencha/ext-angular": "7.1.0",
 ```
 
 #### Run npm install
@@ -51,6 +51,7 @@ If you want to get a look at different styling...
 Open the src/styles.css file in the editor and replace the contents with the following:
 
 ```sh
+/* Find color names here: https://www.rapidtables.com/web/color */
 :root {
     --dark-mode: false;
     --base-color: yellow !important;
@@ -103,7 +104,7 @@ Open the src/app/app.module.js file in the editor and replace the contents with 
 
 ```sh
 
-import { ExtAngularAllModule } from '@sencha/ext-angular-all'
+import { ExtAngularModule } from '@sencha/ext-angular'
 //import '@sencha/ext-web-components/ext-web-components.module';
 // import '@sencha/ext-web-components-all/lib/ext-panel.component';
 // import '@sencha/ext-web-components-all/lib/ext-toolbar.component';
@@ -118,11 +119,12 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [{declarationsx}
+  declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ExtAngularModule
   ],
   providers: [ ],
   bootstrap: [ AppComponent ]

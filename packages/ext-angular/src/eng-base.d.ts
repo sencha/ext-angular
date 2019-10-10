@@ -1,18 +1,14 @@
 import { QueryList } from '@angular/core';
 export declare class EngBase {
-    private metaData;
-    hostComponent: EngBase;
     static count: any;
     static DIRECTION: any;
     ext: any;
     newDiv: any;
     xtype: any;
     properties: any;
-    propertiesobject: any;
     events: any;
-    eventnames: any;
     A: any;
-    private node;
+    node: any;
     parentNode: any;
     base: any;
     nodeName: any;
@@ -28,9 +24,9 @@ export declare class EngBase {
     _extitems: QueryList<any>;
     _childComponents: QueryList<EngBase>;
     readonly childComponents: EngBase[];
-    constructor(nativeElement: any, metaData: any, hostComponent: EngBase);
-    baseOnInit(metaData: any): void;
-    baseAfterViewInit(metaData: any): void;
+    constructor(eRef: any, hostComponent: any, properties: any, events: any);
+    baseOnInit(): void;
+    baseAfterViewInit(): void;
     initMe(): void;
     createRawChildren(): void;
     setParentType(): void;
@@ -51,7 +47,7 @@ export declare class EngBase {
     readonly parentEl: any;
     readonly parentElName: any;
     sendReadyEvent(component: any): void;
-    createProps(properties: any, propertiesobject: any, events: any, eventnames: any): void;
+    createProps(properties: any, events: any): void;
     baseOnChanges(changes: any): void;
-    ngOnDestroy(): void;
+    baseOnDestroy(): void;
 }

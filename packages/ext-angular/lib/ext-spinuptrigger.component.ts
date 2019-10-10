@@ -1,164 +1,68 @@
-//Ext.onReady(function() {
-//import { NgZone } from '@angular/core';
-//import { Router } from '@angular/router';
+import { Ext_field_trigger_SpinUp } from './Ext/field/trigger/SpinUp';
+export class ExtSpinuptriggerMetaData extends Ext_field_trigger_SpinUp {
+    public static PROPERTIES: string[] = [];
+    public static EVENTS: any[] = [];
+    public static EVENTNAMES: string[] = [];
+    static getAll() {
+        ExtSpinuptriggerMetaData.PROPERTIES = Ext_field_trigger_SpinUp.getProperties(ExtSpinuptriggerMetaData.PROPERTIES);
+        ExtSpinuptriggerMetaData.EVENTS = Ext_field_trigger_SpinUp.getEvents(ExtSpinuptriggerMetaData.EVENTS);
+        ExtSpinuptriggerMetaData.EVENTS.forEach( (event: any) => {
+            ExtSpinuptriggerMetaData.EVENTNAMES.push(event.name);
+        })
+     }
+}
+(function () {ExtSpinuptriggerMetaData.getAll();})();
 
-declare var Ext: any
+import { EngBase } from './eng-base';
 import {
-  Injectable,
   Host,
   Optional,
   SkipSelf,
-  Output,
-  OnInit,
-  AfterViewInit,
-  OnChanges,
+  //Output,
+  //OnInit,
+  //AfterViewInit,
+  //OnChanges,
   Component,
   ElementRef,
   forwardRef,
   SimpleChanges
 } from '@angular/core';
-import { EngBase } from './eng-base';
-export class spinuptriggerMetaData {
-  public static XTYPE: string = 'spinuptrigger';
-  public static PROPERTIES: string[] = [
-    'eng',
-    'viewport',
-    'align',
-    'plugins',
-    'responsiveConfig',
-    'responsiveFormulas',
-    'alignSelf',
-    'alwaysOnTop',
-    'ariaAttributes',
-    'ariaDescribedBy',
-    'ariaLabel',
-    'ariaLabelledBy',
-    'bind',
-    'border',
-    'cls',
-    'constrainAlign',
-    'controller',
-    'defaultListenerScope',
-    'disabled',
-    'field',
-    'flex',
-    'floated',
-    'focusCls',
-    'focusOnTap',
-    'group',
-    'handler',
-    'height',
-    'hidden',
-    'hideMode',
-    'iconCls',
-    'id',
-    'instanceCls',
-    'itemId',
-    'keyMap',
-    'keyMapEnabled',
-    'keyMapTarget',
-    'listeners',
-    'margin',
-    'name',
-    'nameable',
-    'plugins',
-    'publishes',
-    'reference',
-    'relative',
-    'renderTo',
-    'repeat',
-    'ripple',
-    'scope',
-    'session',
-    'shadow',
-    'shareableName',
-    'shim',
-    'side',
-    'style',
-    'toFrontOnShow',
-    'touchAction',
-    'translatable',
-    'triggers',
-    'twoWayBindable',
-    'ui',
-    'userCls',
-    'viewModel',
-    'width',
-    'x',
-    'y',
-    'platformConfig',
-    'responsiveConfig',
-    'align',
-    'fitToParent',
-    'config'
-];
-  public static EVENTS: any[] = [
-{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforetofront',parameters:'spinuptrigger'},
-{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'blur',parameters:'spinuptrigger,event'},
-{name:'disabledchange',parameters:'sender,value,oldValue'},
-{name:'focus',parameters:'spinuptrigger,event'},
-{name:'focusenter',parameters:'spinuptrigger,event'},
-{name:'focusleave',parameters:'spinuptrigger,event'},
-{name:'heightchange',parameters:'sender,value,oldValue'},
-{name:'hiddenchange',parameters:'sender,value,oldValue'},
-{name:'tofront',parameters:'spinuptrigger'},
-{name:'widthchange',parameters:'sender,value,oldValue'},
-{name:'ready',parameters:''}
-];
-  public static EVENTNAMES: string[] = [
-'beforedisabledchange',
-'beforeheightchange',
-'beforehiddenchange',
-'beforetofront',
-'beforewidthchange',
-'blur',
-'disabledchange',
-'focus',
-'focusenter',
-'focusleave',
-'heightchange',
-'hiddenchange',
-'tofront',
-'widthchange',
-'ready'
-];
-}
+
 @Component({
   selector: 'ext-spinuptrigger',
-  inputs: spinuptriggerMetaData.PROPERTIES,
-  outputs: spinuptriggerMetaData.EVENTNAMES,
+  inputs: ExtSpinuptriggerMetaData.PROPERTIES,
+  outputs: ExtSpinuptriggerMetaData.EVENTNAMES,
   providers: [{provide: EngBase, useExisting: forwardRef(() => ExtSpinuptriggerComponent)}],
   template: '<ng-template></ng-template>'
 })
-export class ExtSpinuptriggerComponent extends EngBase implements OnInit, AfterViewInit, OnChanges  {
-    constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : EngBase) {
-        super(eRef.nativeElement,spinuptriggerMetaData,hostComponent)
+export class ExtSpinuptriggerComponent extends EngBase {
+    xtype: string;
+    constructor(
+        eRef: ElementRef,
+        @Host() @Optional() @SkipSelf() hostComponent: EngBase
+    ){
+        super(
+            eRef,
+            hostComponent,
+            ExtSpinuptriggerMetaData.PROPERTIES,
+            ExtSpinuptriggerMetaData.EVENTS
+        )
+        this.xtype = 'spinuptrigger'
     }
 
     public ngOnInit() {
-        this.baseOnInit(spinuptriggerMetaData)
+        this.baseOnInit()
     }
 
     public ngAfterViewInit() {
-        this.baseAfterViewInit(spinuptriggerMetaData)
+        this.baseAfterViewInit()
     }
 
+    public ngOnChanges(changes: SimpleChanges) {
+        this.baseOnChanges(changes)
+    }
 
-
-  //public ngAfterContentInit() {
-  //  this.baseAfterContentInit()
-  //}
-
-  public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-
-
-
-   // public ngAfterViewChecked() {
-   //   console.log('ngAfterViewChecked')
-  //}
+    public ngOnDestroy() {
+        this.baseOnDestroy()
+    }
 }
-

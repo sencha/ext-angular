@@ -1,320 +1,68 @@
-//Ext.onReady(function() {
-//import { NgZone } from '@angular/core';
-//import { Router } from '@angular/router';
+import { Ext_calendar_view_Days } from './Ext/calendar/view/Days';
+export class ExtCalendar_daysviewMetaData extends Ext_calendar_view_Days {
+    public static PROPERTIES: string[] = [];
+    public static EVENTS: any[] = [];
+    public static EVENTNAMES: string[] = [];
+    static getAll() {
+        ExtCalendar_daysviewMetaData.PROPERTIES = Ext_calendar_view_Days.getProperties(ExtCalendar_daysviewMetaData.PROPERTIES);
+        ExtCalendar_daysviewMetaData.EVENTS = Ext_calendar_view_Days.getEvents(ExtCalendar_daysviewMetaData.EVENTS);
+        ExtCalendar_daysviewMetaData.EVENTS.forEach( (event: any) => {
+            ExtCalendar_daysviewMetaData.EVENTNAMES.push(event.name);
+        })
+     }
+}
+(function () {ExtCalendar_daysviewMetaData.getAll();})();
 
-declare var Ext: any
+import { EngBase } from './eng-base';
 import {
-  Injectable,
   Host,
   Optional,
   SkipSelf,
-  Output,
-  OnInit,
-  AfterViewInit,
-  OnChanges,
+  //Output,
+  //OnInit,
+  //AfterViewInit,
+  //OnChanges,
   Component,
   ElementRef,
   forwardRef,
   SimpleChanges
 } from '@angular/core';
-import { EngBase } from './eng-base';
-export class calendar_daysviewMetaData {
-  public static XTYPE: string = 'calendar-daysview';
-  public static PROPERTIES: string[] = [
-    'eng',
-    'viewport',
-    'align',
-    'plugins',
-    'responsiveConfig',
-    'responsiveFormulas',
-    'addForm',
-    'alignSelf',
-    'allowSelection',
-    'alwaysOnTop',
-    'ariaAttributes',
-    'ariaDescribedBy',
-    'ariaLabel',
-    'ariaLabelledBy',
-    'axisLock',
-    'bind',
-    'border',
-    'bottom',
-    'centered',
-    'cls',
-    'compact',
-    'compactOptions',
-    'constrainAlign',
-    'contentEl',
-    'controller',
-    'controlStoreRange',
-    'data',
-    'defaultListenerScope',
-    'disabled',
-    'displayed',
-    'displayOverlap',
-    'docked',
-    'draggable',
-    'droppable',
-    'editForm',
-    'endTime',
-    'eventDefaults',
-    'flex',
-    'floated',
-    'focusCls',
-    'fullscreen',
-    'gestureNavigation',
-    'header',
-    'height',
-    'hidden',
-    'hideAnimation',
-    'hideMode',
-    'hideOnMaskTap',
-    'html',
-    'id',
-    'instanceCls',
-    'itemId',
-    'keyMap',
-    'keyMapEnabled',
-    'keyMapTarget',
-    'left',
-    'listeners',
-    'margin',
-    'maxHeight',
-    'maxWidth',
-    'minHeight',
-    'minWidth',
-    'modal',
-    'modelValidation',
-    'name',
-    'nameable',
-    'padding',
-    'plugins',
-    'publishes',
-    'record',
-    'reference',
-    'relative',
-    'renderTo',
-    'resizeEvents',
-    'right',
-    'ripple',
-    'scrollable',
-    'session',
-    'shadow',
-    'shareableName',
-    'shim',
-    'showAnimation',
-    'showNowMarker',
-    'startTime',
-    'stateful',
-    'statefulDefaults',
-    'stateId',
-    'store',
-    'style',
-    'tabIndex',
-    'timeFormat',
-    'timeRenderer',
-    'timezoneOffset',
-    'toFrontOnShow',
-    'tooltip',
-    'top',
-    'touchAction',
-    'tpl',
-    'tplWriteMode',
-    'translatable',
-    'twoWayBindable',
-    'ui',
-    'userCls',
-    'userSelectable',
-    'value',
-    'viewModel',
-    'visibleDays',
-    'weight',
-    'width',
-    'x',
-    'xtype',
-    'y',
-    'zIndex',
-    'platformConfig',
-    'responsiveConfig',
-    'align',
-    'fitToParent',
-    'config'
-];
-  public static EVENTS: any[] = [
-{name:'added',parameters:'sender,container,index'},
-{name:'beforebottomchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforecenteredchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforedockedchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeeventadd',parameters:'calendar-daysview,context'},
-{name:'beforeeventdragstart',parameters:'calendar-daysview,context'},
-{name:'beforeeventedit',parameters:'calendar-daysview,context'},
-{name:'beforeeventresizestart',parameters:'calendar-daysview,context'},
-{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforehide',parameters:'sender'},
-{name:'beforeleftchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforemaxHeightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforemaxWidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeminHeightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeminWidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeorientationchange',parameters:''},
-{name:'beforerightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforescrollablechange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeshow',parameters:'sender'},
-{name:'beforetofront',parameters:'calendar-daysview'},
-{name:'beforetopchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'blur',parameters:'calendar-daysview,event'},
-{name:'bottomchange',parameters:'sender,value,oldValue'},
-{name:'centeredchange',parameters:'sender,value,oldValue'},
-{name:'destroy',parameters:''},
-{name:'disabledchange',parameters:'sender,value,oldValue'},
-{name:'dockedchange',parameters:'sender,value,oldValue'},
-{name:'erased',parameters:'sender'},
-{name:'eventadd',parameters:'calendar-daysview,context'},
-{name:'eventdrop',parameters:'calendar-daysview,context'},
-{name:'eventedit',parameters:'calendar-daysview,context'},
-{name:'eventresize',parameters:'calendar-daysview,context'},
-{name:'eventtap',parameters:'calendar-daysview,context'},
-{name:'floatingchange',parameters:'sender,positioned'},
-{name:'focus',parameters:'calendar-daysview,event'},
-{name:'focusenter',parameters:'calendar-daysview,event'},
-{name:'focusleave',parameters:'calendar-daysview,event'},
-{name:'fullscreen',parameters:'sender'},
-{name:'heightchange',parameters:'sender,value,oldValue'},
-{name:'hiddenchange',parameters:'sender,value,oldValue'},
-{name:'hide',parameters:'sender'},
-{name:'initialize',parameters:'sender'},
-{name:'leftchange',parameters:'sender,value,oldValue'},
-{name:'maxHeightchange',parameters:'sender,value,oldValue'},
-{name:'maxWidthchange',parameters:'sender,value,oldValue'},
-{name:'minHeightchange',parameters:'sender,value,oldValue'},
-{name:'minWidthchange',parameters:'sender,value,oldValue'},
-{name:'moved',parameters:'sender,container,toIndex,fromIndex'},
-{name:'orientationchange',parameters:''},
-{name:'painted',parameters:'sender,element'},
-{name:'positionedchange',parameters:'sender,positioned'},
-{name:'removed',parameters:'sender,container,index'},
-{name:'resize',parameters:'element,info'},
-{name:'rightchange',parameters:'sender,value,oldValue'},
-{name:'scrollablechange',parameters:'sender,value,oldValue'},
-{name:'show',parameters:'sender'},
-{name:'tofront',parameters:'calendar-daysview'},
-{name:'topchange',parameters:'sender,value,oldValue'},
-{name:'updatedata',parameters:'sender,newData'},
-{name:'validateeventadd',parameters:'calendar-daysview,context'},
-{name:'validateeventdrop',parameters:'calendar-daysview,context'},
-{name:'validateeventedit',parameters:'calendar-daysview,context'},
-{name:'validateeventresize',parameters:'calendar-daysview,context'},
-{name:'valuechange',parameters:'calendar-daysview,context'},
-{name:'widthchange',parameters:'sender,value,oldValue'},
-{name:'ready',parameters:''}
-];
-  public static EVENTNAMES: string[] = [
-'added',
-'beforebottomchange',
-'beforecenteredchange',
-'beforedisabledchange',
-'beforedockedchange',
-'beforeeventadd',
-'beforeeventdragstart',
-'beforeeventedit',
-'beforeeventresizestart',
-'beforeheightchange',
-'beforehiddenchange',
-'beforehide',
-'beforeleftchange',
-'beforemaxHeightchange',
-'beforemaxWidthchange',
-'beforeminHeightchange',
-'beforeminWidthchange',
-'beforeorientationchange',
-'beforerightchange',
-'beforescrollablechange',
-'beforeshow',
-'beforetofront',
-'beforetopchange',
-'beforewidthchange',
-'blur',
-'bottomchange',
-'centeredchange',
-'destroy',
-'disabledchange',
-'dockedchange',
-'erased',
-'eventadd',
-'eventdrop',
-'eventedit',
-'eventresize',
-'eventtap',
-'floatingchange',
-'focus',
-'focusenter',
-'focusleave',
-'fullscreen',
-'heightchange',
-'hiddenchange',
-'hide',
-'initialize',
-'leftchange',
-'maxHeightchange',
-'maxWidthchange',
-'minHeightchange',
-'minWidthchange',
-'moved',
-'orientationchange',
-'painted',
-'positionedchange',
-'removed',
-'resize',
-'rightchange',
-'scrollablechange',
-'show',
-'tofront',
-'topchange',
-'updatedata',
-'validateeventadd',
-'validateeventdrop',
-'validateeventedit',
-'validateeventresize',
-'valuechange',
-'widthchange',
-'ready'
-];
-}
+
 @Component({
   selector: 'ext-calendar-daysview',
-  inputs: calendar_daysviewMetaData.PROPERTIES,
-  outputs: calendar_daysviewMetaData.EVENTNAMES,
+  inputs: ExtCalendar_daysviewMetaData.PROPERTIES,
+  outputs: ExtCalendar_daysviewMetaData.EVENTNAMES,
   providers: [{provide: EngBase, useExisting: forwardRef(() => ExtCalendar_daysviewComponent)}],
   template: '<ng-template></ng-template>'
 })
-export class ExtCalendar_daysviewComponent extends EngBase implements OnInit, AfterViewInit, OnChanges  {
-    constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : EngBase) {
-        super(eRef.nativeElement,calendar_daysviewMetaData,hostComponent)
+export class ExtCalendar_daysviewComponent extends EngBase {
+    xtype: string;
+    constructor(
+        eRef: ElementRef,
+        @Host() @Optional() @SkipSelf() hostComponent: EngBase
+    ){
+        super(
+            eRef,
+            hostComponent,
+            ExtCalendar_daysviewMetaData.PROPERTIES,
+            ExtCalendar_daysviewMetaData.EVENTS
+        )
+        this.xtype = 'calendar-daysview'
     }
 
     public ngOnInit() {
-        this.baseOnInit(calendar_daysviewMetaData)
+        this.baseOnInit()
     }
 
     public ngAfterViewInit() {
-        this.baseAfterViewInit(calendar_daysviewMetaData)
+        this.baseAfterViewInit()
     }
 
+    public ngOnChanges(changes: SimpleChanges) {
+        this.baseOnChanges(changes)
+    }
 
-
-  //public ngAfterContentInit() {
-  //  this.baseAfterContentInit()
-  //}
-
-  public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-
-
-
-   // public ngAfterViewChecked() {
-   //   console.log('ngAfterViewChecked')
-  //}
+    public ngOnDestroy() {
+        this.baseOnDestroy()
+    }
 }
-

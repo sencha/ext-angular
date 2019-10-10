@@ -1,313 +1,68 @@
-//Ext.onReady(function() {
-//import { NgZone } from '@angular/core';
-//import { Router } from '@angular/router';
+import { Ext_dataview_listswiper_Item } from './Ext/dataview/listswiper/Item';
+export class ExtListswiperitemMetaData extends Ext_dataview_listswiper_Item {
+    public static PROPERTIES: string[] = [];
+    public static EVENTS: any[] = [];
+    public static EVENTNAMES: string[] = [];
+    static getAll() {
+        ExtListswiperitemMetaData.PROPERTIES = Ext_dataview_listswiper_Item.getProperties(ExtListswiperitemMetaData.PROPERTIES);
+        ExtListswiperitemMetaData.EVENTS = Ext_dataview_listswiper_Item.getEvents(ExtListswiperitemMetaData.EVENTS);
+        ExtListswiperitemMetaData.EVENTS.forEach( (event: any) => {
+            ExtListswiperitemMetaData.EVENTNAMES.push(event.name);
+        })
+     }
+}
+(function () {ExtListswiperitemMetaData.getAll();})();
 
-declare var Ext: any
+import { EngBase } from './eng-base';
 import {
-  Injectable,
   Host,
   Optional,
   SkipSelf,
-  Output,
-  OnInit,
-  AfterViewInit,
-  OnChanges,
+  //Output,
+  //OnInit,
+  //AfterViewInit,
+  //OnChanges,
   Component,
   ElementRef,
   forwardRef,
   SimpleChanges
 } from '@angular/core';
-import { EngBase } from './eng-base';
-export class listswiperitemMetaData {
-  public static XTYPE: string = 'listswiperitem';
-  public static PROPERTIES: string[] = [
-    'eng',
-    'viewport',
-    'align',
-    'plugins',
-    'responsiveConfig',
-    'responsiveFormulas',
-    'action',
-    'activeChildTabIndex',
-    'activeItem',
-    'alignSelf',
-    'allowFocusingDisabledChildren',
-    'alwaysOnTop',
-    'ariaAttributes',
-    'ariaDescribedBy',
-    'ariaLabel',
-    'ariaLabelledBy',
-    'autoDestroy',
-    'autoSize',
-    'axisLock',
-    'bind',
-    'bodyCls',
-    'border',
-    'bottom',
-    'cardSwitchAnimation',
-    'centered',
-    'cls',
-    'constrainAlign',
-    'contentEl',
-    'control',
-    'controller',
-    'data',
-    'defaultFocus',
-    'defaultListenerScope',
-    'defaults',
-    'defaultType',
-    'disabled',
-    'displayed',
-    'docked',
-    'draggable',
-    'flex',
-    'floated',
-    'focusableContainer',
-    'focusCls',
-    'fullscreen',
-    'height',
-    'hidden',
-    'hideAnimation',
-    'hideMode',
-    'hideOnMaskTap',
-    'html',
-    'id',
-    'inactiveChildTabIndex',
-    'innerCls',
-    'instanceCls',
-    'itemId',
-    'items',
-    'keyMap',
-    'keyMapEnabled',
-    'keyMapTarget',
-    'layout',
-    'left',
-    'listeners',
-    'manageBorders',
-    'margin',
-    'masked',
-    'maxHeight',
-    'maxWidth',
-    'minHeight',
-    'minWidth',
-    'modal',
-    'modelValidation',
-    'name',
-    'nameable',
-    'nameHolder',
-    'padding',
-    'plugins',
-    'publishes',
-    'record',
-    'reference',
-    'referenceHolder',
-    'relative',
-    'renderTo',
-    'resetFocusPosition',
-    'right',
-    'ripple',
-    'scrollable',
-    'session',
-    'shadow',
-    'shareableName',
-    'shim',
-    'showAnimation',
-    'state',
-    'stateful',
-    'statefulDefaults',
-    'stateId',
-    'style',
-    'tabIndex',
-    'toFrontOnShow',
-    'tooltip',
-    'top',
-    'touchAction',
-    'tpl',
-    'tplWriteMode',
-    'translatable',
-    'translationTarget',
-    'twoWayBindable',
-    'ui',
-    'undo',
-    'userCls',
-    'userSelectable',
-    'viewModel',
-    'weight',
-    'weighted',
-    'width',
-    'x',
-    'xtype',
-    'y',
-    'zIndex',
-    'platformConfig',
-    'responsiveConfig',
-    'align',
-    'fitToParent',
-    'config'
-];
-  public static EVENTS: any[] = [
-{name:'activate',parameters:'newActiveItem,listswiperitem,oldActiveItem'},
-{name:'activeItemchange',parameters:'sender,value,oldValue'},
-{name:'add',parameters:'listswiperitem,item,index'},
-{name:'added',parameters:'sender,container,index'},
-{name:'beforeactiveItemchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforebottomchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforecenteredchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforedockedchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforehide',parameters:'sender'},
-{name:'beforeleftchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforemaxHeightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforemaxWidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeminHeightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeminWidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeorientationchange',parameters:''},
-{name:'beforerightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforescrollablechange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeshow',parameters:'sender'},
-{name:'beforetofront',parameters:'listswiperitem'},
-{name:'beforetopchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'blur',parameters:'listswiperitem,event'},
-{name:'bottomchange',parameters:'sender,value,oldValue'},
-{name:'centeredchange',parameters:'sender,value,oldValue'},
-{name:'deactivate',parameters:'oldActiveItem,listswiperitem,newActiveItem'},
-{name:'destroy',parameters:''},
-{name:'disabledchange',parameters:'sender,value,oldValue'},
-{name:'dockedchange',parameters:'sender,value,oldValue'},
-{name:'erased',parameters:'sender'},
-{name:'floatingchange',parameters:'sender,positioned'},
-{name:'focus',parameters:'listswiperitem,event'},
-{name:'focusenter',parameters:'listswiperitem,event'},
-{name:'focusleave',parameters:'listswiperitem,event'},
-{name:'fullscreen',parameters:'sender'},
-{name:'heightchange',parameters:'sender,value,oldValue'},
-{name:'hiddenchange',parameters:'sender,value,oldValue'},
-{name:'hide',parameters:'sender'},
-{name:'initialize',parameters:'sender'},
-{name:'leftchange',parameters:'sender,value,oldValue'},
-{name:'maxHeightchange',parameters:'sender,value,oldValue'},
-{name:'maxWidthchange',parameters:'sender,value,oldValue'},
-{name:'minHeightchange',parameters:'sender,value,oldValue'},
-{name:'minWidthchange',parameters:'sender,value,oldValue'},
-{name:'move',parameters:'listswiperitem,item,toIndex,fromIndex'},
-{name:'moved',parameters:'sender,container,toIndex,fromIndex'},
-{name:'orientationchange',parameters:''},
-{name:'painted',parameters:'sender,element'},
-{name:'positionedchange',parameters:'sender,positioned'},
-{name:'remove',parameters:'listswiperitem,item,index'},
-{name:'removed',parameters:'sender,container,index'},
-{name:'renderedchange',parameters:'listswiperitem,item,rendered'},
-{name:'resize',parameters:'element,info'},
-{name:'rightchange',parameters:'sender,value,oldValue'},
-{name:'scrollablechange',parameters:'sender,value,oldValue'},
-{name:'show',parameters:'sender'},
-{name:'tofront',parameters:'listswiperitem'},
-{name:'topchange',parameters:'sender,value,oldValue'},
-{name:'updatedata',parameters:'sender,newData'},
-{name:'widthchange',parameters:'sender,value,oldValue'},
-{name:'ready',parameters:''}
-];
-  public static EVENTNAMES: string[] = [
-'activate',
-'activeItemchange',
-'add',
-'added',
-'beforeactiveItemchange',
-'beforebottomchange',
-'beforecenteredchange',
-'beforedisabledchange',
-'beforedockedchange',
-'beforeheightchange',
-'beforehiddenchange',
-'beforehide',
-'beforeleftchange',
-'beforemaxHeightchange',
-'beforemaxWidthchange',
-'beforeminHeightchange',
-'beforeminWidthchange',
-'beforeorientationchange',
-'beforerightchange',
-'beforescrollablechange',
-'beforeshow',
-'beforetofront',
-'beforetopchange',
-'beforewidthchange',
-'blur',
-'bottomchange',
-'centeredchange',
-'deactivate',
-'destroy',
-'disabledchange',
-'dockedchange',
-'erased',
-'floatingchange',
-'focus',
-'focusenter',
-'focusleave',
-'fullscreen',
-'heightchange',
-'hiddenchange',
-'hide',
-'initialize',
-'leftchange',
-'maxHeightchange',
-'maxWidthchange',
-'minHeightchange',
-'minWidthchange',
-'move',
-'moved',
-'orientationchange',
-'painted',
-'positionedchange',
-'remove',
-'removed',
-'renderedchange',
-'resize',
-'rightchange',
-'scrollablechange',
-'show',
-'tofront',
-'topchange',
-'updatedata',
-'widthchange',
-'ready'
-];
-}
+
 @Component({
   selector: 'ext-listswiperitem',
-  inputs: listswiperitemMetaData.PROPERTIES,
-  outputs: listswiperitemMetaData.EVENTNAMES,
+  inputs: ExtListswiperitemMetaData.PROPERTIES,
+  outputs: ExtListswiperitemMetaData.EVENTNAMES,
   providers: [{provide: EngBase, useExisting: forwardRef(() => ExtListswiperitemComponent)}],
   template: '<ng-template></ng-template>'
 })
-export class ExtListswiperitemComponent extends EngBase implements OnInit, AfterViewInit, OnChanges  {
-    constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : EngBase) {
-        super(eRef.nativeElement,listswiperitemMetaData,hostComponent)
+export class ExtListswiperitemComponent extends EngBase {
+    xtype: string;
+    constructor(
+        eRef: ElementRef,
+        @Host() @Optional() @SkipSelf() hostComponent: EngBase
+    ){
+        super(
+            eRef,
+            hostComponent,
+            ExtListswiperitemMetaData.PROPERTIES,
+            ExtListswiperitemMetaData.EVENTS
+        )
+        this.xtype = 'listswiperitem'
     }
 
     public ngOnInit() {
-        this.baseOnInit(listswiperitemMetaData)
+        this.baseOnInit()
     }
 
     public ngAfterViewInit() {
-        this.baseAfterViewInit(listswiperitemMetaData)
+        this.baseAfterViewInit()
     }
 
+    public ngOnChanges(changes: SimpleChanges) {
+        this.baseOnChanges(changes)
+    }
 
-
-  //public ngAfterContentInit() {
-  //  this.baseAfterContentInit()
-  //}
-
-  public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-
-
-
-   // public ngAfterViewChecked() {
-   //   console.log('ngAfterViewChecked')
-  //}
+    public ngOnDestroy() {
+        this.baseOnDestroy()
+    }
 }
-
