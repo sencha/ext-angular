@@ -1,318 +1,68 @@
-//Ext.onReady(function() {
-//import { NgZone } from '@angular/core';
-//import { Router } from '@angular/router';
+import { Ext_form_Display } from './Ext/form/Display';
+export class ExtDisplayfieldMetaData extends Ext_form_Display {
+    public static PROPERTIES: string[] = [];
+    public static EVENTS: any[] = [];
+    public static EVENTNAMES: string[] = [];
+    static getAll() {
+        ExtDisplayfieldMetaData.PROPERTIES = Ext_form_Display.getProperties(ExtDisplayfieldMetaData.PROPERTIES);
+        ExtDisplayfieldMetaData.EVENTS = Ext_form_Display.getEvents(ExtDisplayfieldMetaData.EVENTS);
+        ExtDisplayfieldMetaData.EVENTS.forEach( (event: any) => {
+            ExtDisplayfieldMetaData.EVENTNAMES.push(event.name);
+        })
+     }
+}
+(function () {ExtDisplayfieldMetaData.getAll();})();
 
-declare var Ext: any
+import { EngBase } from './eng-base';
 import {
-  Injectable,
   Host,
   Optional,
   SkipSelf,
-  Output,
-  OnInit,
-  AfterViewInit,
-  OnChanges,
+  //Output,
+  //OnInit,
+  //AfterViewInit,
+  //OnChanges,
   Component,
   ElementRef,
   forwardRef,
   SimpleChanges
 } from '@angular/core';
-import { EngBase } from './eng-base';
-export class displayfieldMetaData {
-  public static XTYPE: string = 'displayfield';
-  public static PROPERTIES: string[] = [
-    'eng',
-    'viewport',
-    'align',
-    'plugins',
-    'responsiveConfig',
-    'responsiveFormulas',
-    'alignSelf',
-    'alwaysOnTop',
-    'ariaAttributes',
-    'ariaDescribedBy',
-    'ariaLabel',
-    'ariaLabelledBy',
-    'autoFitErrors',
-    'axisLock',
-    'bind',
-    'bodyAlign',
-    'border',
-    'bottom',
-    'bubbleDirty',
-    'centered',
-    'cls',
-    'constrainAlign',
-    'contentEl',
-    'controller',
-    'data',
-    'dataType',
-    'defaultListenerScope',
-    'dirty',
-    'disabled',
-    'displayed',
-    'docked',
-    'draggable',
-    'encodeHtml',
-    'error',
-    'errorMessage',
-    'errorTarget',
-    'errorTip',
-    'errorTpl',
-    'flex',
-    'floated',
-    'focusable',
-    'focusCls',
-    'fullscreen',
-    'height',
-    'hidden',
-    'hideAnimation',
-    'hideMode',
-    'hideOnMaskTap',
-    'html',
-    'id',
-    'inline',
-    'instanceCls',
-    'itemId',
-    'keyMap',
-    'keyMapEnabled',
-    'keyMapTarget',
-    'label',
-    'labelAlign',
-    'labelCls',
-    'labelMinWidth',
-    'labelTextAlign',
-    'labelWidth',
-    'labelWrap',
-    'left',
-    'listeners',
-    'margin',
-    'maxHeight',
-    'maxWidth',
-    'minHeight',
-    'minWidth',
-    'modal',
-    'modelValidation',
-    'name',
-    'nameable',
-    'padding',
-    'plugins',
-    'publishes',
-    'readOnly',
-    'record',
-    'reference',
-    'relative',
-    'renderer',
-    'renderTo',
-    'required',
-    'requiredMessage',
-    'right',
-    'ripple',
-    'scope',
-    'scrollable',
-    'session',
-    'shadow',
-    'shareableName',
-    'shim',
-    'showAnimation',
-    'sideError',
-    'stateful',
-    'statefulDefaults',
-    'stateId',
-    'style',
-    'tabIndex',
-    'tipError',
-    'titleError',
-    'toFrontOnShow',
-    'tooltip',
-    'top',
-    'touchAction',
-    'tpl',
-    'tplWriteMode',
-    'translatable',
-    'twoWayBindable',
-    'ui',
-    'underError',
-    'userCls',
-    'userSelectable',
-    'validateDisabled',
-    'validationMessage',
-    'validators',
-    'value',
-    'viewModel',
-    'weight',
-    'width',
-    'x',
-    'xtype',
-    'y',
-    'zIndex',
-    'platformConfig',
-    'responsiveConfig',
-    'align',
-    'fitToParent',
-    'config'
-];
-  public static EVENTS: any[] = [
-{name:'added',parameters:'sender,container,index'},
-{name:'beforebottomchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforecenteredchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforedockedchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforehide',parameters:'sender'},
-{name:'beforeleftchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforemaxHeightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforemaxWidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeminHeightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeminWidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeorientationchange',parameters:''},
-{name:'beforerightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforescrollablechange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeshow',parameters:'sender'},
-{name:'beforetofront',parameters:'displayfield'},
-{name:'beforetopchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'blur',parameters:'displayfield,event'},
-{name:'bottomchange',parameters:'sender,value,oldValue'},
-{name:'centeredchange',parameters:'sender,value,oldValue'},
-{name:'change',parameters:'displayfield,newValue,oldValue'},
-{name:'click',parameters:'e'},
-{name:'destroy',parameters:''},
-{name:'dirtychange',parameters:'displayfield,dirty'},
-{name:'disabledchange',parameters:'sender,value,oldValue'},
-{name:'dockedchange',parameters:'sender,value,oldValue'},
-{name:'erased',parameters:'sender'},
-{name:'errorchange',parameters:'displayfield,error'},
-{name:'floatingchange',parameters:'sender,positioned'},
-{name:'focus',parameters:'displayfield,event'},
-{name:'focusenter',parameters:'displayfield,event'},
-{name:'focusleave',parameters:'displayfield,event'},
-{name:'fullscreen',parameters:'sender'},
-{name:'heightchange',parameters:'sender,value,oldValue'},
-{name:'hiddenchange',parameters:'sender,value,oldValue'},
-{name:'hide',parameters:'sender'},
-{name:'initialize',parameters:'sender'},
-{name:'keyup',parameters:'e'},
-{name:'leftchange',parameters:'sender,value,oldValue'},
-{name:'maxHeightchange',parameters:'sender,value,oldValue'},
-{name:'maxWidthchange',parameters:'sender,value,oldValue'},
-{name:'minHeightchange',parameters:'sender,value,oldValue'},
-{name:'minWidthchange',parameters:'sender,value,oldValue'},
-{name:'mousedown',parameters:'e'},
-{name:'moved',parameters:'sender,container,toIndex,fromIndex'},
-{name:'orientationchange',parameters:''},
-{name:'painted',parameters:'sender,element'},
-{name:'paste',parameters:'e'},
-{name:'positionedchange',parameters:'sender,positioned'},
-{name:'removed',parameters:'sender,container,index'},
-{name:'resize',parameters:'element,info'},
-{name:'rightchange',parameters:'sender,value,oldValue'},
-{name:'scrollablechange',parameters:'sender,value,oldValue'},
-{name:'show',parameters:'sender'},
-{name:'tofront',parameters:'displayfield'},
-{name:'topchange',parameters:'sender,value,oldValue'},
-{name:'updatedata',parameters:'sender,newData'},
-{name:'widthchange',parameters:'sender,value,oldValue'},
-{name:'ready',parameters:''}
-];
-  public static EVENTNAMES: string[] = [
-'added',
-'beforebottomchange',
-'beforecenteredchange',
-'beforedisabledchange',
-'beforedockedchange',
-'beforeheightchange',
-'beforehiddenchange',
-'beforehide',
-'beforeleftchange',
-'beforemaxHeightchange',
-'beforemaxWidthchange',
-'beforeminHeightchange',
-'beforeminWidthchange',
-'beforeorientationchange',
-'beforerightchange',
-'beforescrollablechange',
-'beforeshow',
-'beforetofront',
-'beforetopchange',
-'beforewidthchange',
-'blur',
-'bottomchange',
-'centeredchange',
-'change',
-'click',
-'destroy',
-'dirtychange',
-'disabledchange',
-'dockedchange',
-'erased',
-'errorchange',
-'floatingchange',
-'focus',
-'focusenter',
-'focusleave',
-'fullscreen',
-'heightchange',
-'hiddenchange',
-'hide',
-'initialize',
-'keyup',
-'leftchange',
-'maxHeightchange',
-'maxWidthchange',
-'minHeightchange',
-'minWidthchange',
-'mousedown',
-'moved',
-'orientationchange',
-'painted',
-'paste',
-'positionedchange',
-'removed',
-'resize',
-'rightchange',
-'scrollablechange',
-'show',
-'tofront',
-'topchange',
-'updatedata',
-'widthchange',
-'ready'
-];
-}
+
 @Component({
   selector: 'ext-displayfield',
-  inputs: displayfieldMetaData.PROPERTIES,
-  outputs: displayfieldMetaData.EVENTNAMES,
+  inputs: ExtDisplayfieldMetaData.PROPERTIES,
+  outputs: ExtDisplayfieldMetaData.EVENTNAMES,
   providers: [{provide: EngBase, useExisting: forwardRef(() => ExtDisplayfieldComponent)}],
   template: '<ng-template></ng-template>'
 })
-export class ExtDisplayfieldComponent extends EngBase implements OnInit, AfterViewInit, OnChanges  {
-    constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : EngBase) {
-        super(eRef.nativeElement,displayfieldMetaData,hostComponent)
+export class ExtDisplayfieldComponent extends EngBase {
+    xtype: string;
+    constructor(
+        eRef: ElementRef,
+        @Host() @Optional() @SkipSelf() hostComponent: EngBase
+    ){
+        super(
+            eRef,
+            hostComponent,
+            ExtDisplayfieldMetaData.PROPERTIES,
+            ExtDisplayfieldMetaData.EVENTS
+        )
+        this.xtype = 'displayfield'
     }
 
     public ngOnInit() {
-        this.baseOnInit(displayfieldMetaData)
+        this.baseOnInit()
     }
 
     public ngAfterViewInit() {
-        this.baseAfterViewInit(displayfieldMetaData)
+        this.baseAfterViewInit()
     }
 
+    public ngOnChanges(changes: SimpleChanges) {
+        this.baseOnChanges(changes)
+    }
 
-
-  //public ngAfterContentInit() {
-  //  this.baseAfterContentInit()
-  //}
-
-  public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-
-
-
-   // public ngAfterViewChecked() {
-   //   console.log('ngAfterViewChecked')
-  //}
+    public ngOnDestroy() {
+        this.baseOnDestroy()
+    }
 }
-

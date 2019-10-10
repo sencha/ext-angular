@@ -1,360 +1,68 @@
-//Ext.onReady(function() {
-//import { NgZone } from '@angular/core';
-//import { Router } from '@angular/router';
+import { Ext_grid_column_Selection } from './Ext/grid/column/Selection';
+export class ExtSelectioncolumnMetaData extends Ext_grid_column_Selection {
+    public static PROPERTIES: string[] = [];
+    public static EVENTS: any[] = [];
+    public static EVENTNAMES: string[] = [];
+    static getAll() {
+        ExtSelectioncolumnMetaData.PROPERTIES = Ext_grid_column_Selection.getProperties(ExtSelectioncolumnMetaData.PROPERTIES);
+        ExtSelectioncolumnMetaData.EVENTS = Ext_grid_column_Selection.getEvents(ExtSelectioncolumnMetaData.EVENTS);
+        ExtSelectioncolumnMetaData.EVENTS.forEach( (event: any) => {
+            ExtSelectioncolumnMetaData.EVENTNAMES.push(event.name);
+        })
+     }
+}
+(function () {ExtSelectioncolumnMetaData.getAll();})();
 
-declare var Ext: any
+import { EngBase } from './eng-base';
 import {
-  Injectable,
   Host,
   Optional,
   SkipSelf,
-  Output,
-  OnInit,
-  AfterViewInit,
-  OnChanges,
+  //Output,
+  //OnInit,
+  //AfterViewInit,
+  //OnChanges,
   Component,
   ElementRef,
   forwardRef,
   SimpleChanges
 } from '@angular/core';
-import { EngBase } from './eng-base';
-export class selectioncolumnMetaData {
-  public static XTYPE: string = 'selectioncolumn';
-  public static PROPERTIES: string[] = [
-    'eng',
-    'viewport',
-    'align',
-    'plugins',
-    'responsiveConfig',
-    'responsiveFormulas',
-    'activeChildTabIndex',
-    'activeItem',
-    'align',
-    'alignSelf',
-    'allowFocusingDisabledChildren',
-    'alwaysOnTop',
-    'ariaAttributes',
-    'ariaDescribedBy',
-    'ariaLabel',
-    'ariaLabelledBy',
-    'autoDestroy',
-    'autoSize',
-    'axisLock',
-    'bind',
-    'bodyCls',
-    'border',
-    'bottom',
-    'cardSwitchAnimation',
-    'cell',
-    'centered',
-    'cls',
-    'columns',
-    'computedWidth',
-    'constrainAlign',
-    'contentEl',
-    'control',
-    'controller',
-    'data',
-    'dataIndex',
-    'defaultColumnUI',
-    'defaultEditor',
-    'defaultFocus',
-    'defaultListenerScope',
-    'defaults',
-    'defaultToolWeights',
-    'defaultType',
-    'defaultWidth',
-    'depends',
-    'disabled',
-    'displayed',
-    'docked',
-    'draggable',
-    'editable',
-    'editor',
-    'editorDefaults',
-    'exportRenderer',
-    'exportStyle',
-    'exportSummaryRenderer',
-    'filter',
-    'flex',
-    'floated',
-    'focusableContainer',
-    'focusCls',
-    'formatter',
-    'fullscreen',
-    'groupable',
-    'grouper',
-    'groupHeaderTpl',
-    'headerCheckbox',
-    'headerCheckboxAlign',
-    'height',
-    'hidden',
-    'hideable',
-    'hideAnimation',
-    'hideMode',
-    'hideOnMaskTap',
-    'hideShowMenuItem',
-    'html',
-    'id',
-    'ignore',
-    'ignoreExport',
-    'inactiveChildTabIndex',
-    'innerCls',
-    'instanceCls',
-    'itemId',
-    'items',
-    'keyMap',
-    'keyMapEnabled',
-    'keyMapTarget',
-    'layout',
-    'left',
-    'listeners',
-    'locked',
-    'manageBorders',
-    'margin',
-    'masked',
-    'maxHeight',
-    'maxWidth',
-    'menu',
-    'menuDisabled',
-    'minHeight',
-    'minWidth',
-    'modal',
-    'modelValidation',
-    'name',
-    'nameable',
-    'nameHolder',
-    'padding',
-    'plugins',
-    'publishes',
-    'record',
-    'reference',
-    'referenceHolder',
-    'relative',
-    'renderer',
-    'renderTo',
-    'reserveScrollbar',
-    'resetFocusPosition',
-    'resizable',
-    'right',
-    'ripple',
-    'scope',
-    'scratchCell',
-    'scrollable',
-    'session',
-    'shadow',
-    'shareableName',
-    'shim',
-    'showAnimation',
-    'sortable',
-    'sorter',
-    'stateful',
-    'statefulDefaults',
-    'stateId',
-    'stopSelection',
-    'style',
-    'summary',
-    'summaryCell',
-    'summaryDataIndex',
-    'summaryFormatter',
-    'summaryRenderer',
-    'tabIndex',
-    'text',
-    'toFrontOnShow',
-    'toolDefaults',
-    'tools',
-    'tooltip',
-    'top',
-    'touchAction',
-    'tpl',
-    'tplWriteMode',
-    'translatable',
-    'twoWayBindable',
-    'ui',
-    'userCls',
-    'userSelectable',
-    'verticalOverflow',
-    'viewModel',
-    'weight',
-    'weighted',
-    'width',
-    'x',
-    'xtype',
-    'y',
-    'zIndex',
-    'platformConfig',
-    'responsiveConfig',
-    'align',
-    'fitToParent',
-    'config'
-];
-  public static EVENTS: any[] = [
-{name:'activate',parameters:'newActiveItem,selectioncolumn,oldActiveItem'},
-{name:'activeItemchange',parameters:'sender,value,oldValue'},
-{name:'add',parameters:'selectioncolumn,item,index'},
-{name:'added',parameters:'sender,container,index'},
-{name:'beforeactiveItemchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforebottomchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforecenteredchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforecheckchange',parameters:'selectioncolumn,rowIndex,checked,record,e'},
-{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforedockedchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforehide',parameters:'sender'},
-{name:'beforeleftchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforemaxHeightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforemaxWidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeminHeightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeminWidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeorientationchange',parameters:''},
-{name:'beforerightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforescrollablechange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeshow',parameters:'sender'},
-{name:'beforetofront',parameters:'selectioncolumn'},
-{name:'beforetopchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'blur',parameters:'selectioncolumn,event'},
-{name:'bottomchange',parameters:'sender,value,oldValue'},
-{name:'centeredchange',parameters:'sender,value,oldValue'},
-{name:'checkchange',parameters:'selectioncolumn,rowIndex,checked,record,e'},
-{name:'deactivate',parameters:'oldActiveItem,selectioncolumn,newActiveItem'},
-{name:'destroy',parameters:''},
-{name:'disabledchange',parameters:'sender,value,oldValue'},
-{name:'dockedchange',parameters:'sender,value,oldValue'},
-{name:'erased',parameters:'sender'},
-{name:'floatingchange',parameters:'sender,positioned'},
-{name:'focus',parameters:'selectioncolumn,event'},
-{name:'focusenter',parameters:'selectioncolumn,event'},
-{name:'focusleave',parameters:'selectioncolumn,event'},
-{name:'fullscreen',parameters:'sender'},
-{name:'heightchange',parameters:'sender,value,oldValue'},
-{name:'hiddenchange',parameters:'sender,value,oldValue'},
-{name:'hide',parameters:'sender'},
-{name:'initialize',parameters:'sender'},
-{name:'leftchange',parameters:'sender,value,oldValue'},
-{name:'maxHeightchange',parameters:'sender,value,oldValue'},
-{name:'maxWidthchange',parameters:'sender,value,oldValue'},
-{name:'minHeightchange',parameters:'sender,value,oldValue'},
-{name:'minWidthchange',parameters:'sender,value,oldValue'},
-{name:'move',parameters:'selectioncolumn,item,toIndex,fromIndex'},
-{name:'moved',parameters:'sender,container,toIndex,fromIndex'},
-{name:'orientationchange',parameters:''},
-{name:'painted',parameters:'sender,element'},
-{name:'positionedchange',parameters:'sender,positioned'},
-{name:'remove',parameters:'selectioncolumn,item,index'},
-{name:'removed',parameters:'sender,container,index'},
-{name:'renderedchange',parameters:'selectioncolumn,item,rendered'},
-{name:'resize',parameters:'element,info'},
-{name:'rightchange',parameters:'sender,value,oldValue'},
-{name:'scrollablechange',parameters:'sender,value,oldValue'},
-{name:'show',parameters:'sender'},
-{name:'tofront',parameters:'selectioncolumn'},
-{name:'topchange',parameters:'sender,value,oldValue'},
-{name:'updatedata',parameters:'sender,newData'},
-{name:'widthchange',parameters:'sender,value,oldValue'},
-{name:'ready',parameters:''}
-];
-  public static EVENTNAMES: string[] = [
-'activate',
-'activeItemchange',
-'add',
-'added',
-'beforeactiveItemchange',
-'beforebottomchange',
-'beforecenteredchange',
-'beforecheckchange',
-'beforedisabledchange',
-'beforedockedchange',
-'beforeheightchange',
-'beforehiddenchange',
-'beforehide',
-'beforeleftchange',
-'beforemaxHeightchange',
-'beforemaxWidthchange',
-'beforeminHeightchange',
-'beforeminWidthchange',
-'beforeorientationchange',
-'beforerightchange',
-'beforescrollablechange',
-'beforeshow',
-'beforetofront',
-'beforetopchange',
-'beforewidthchange',
-'blur',
-'bottomchange',
-'centeredchange',
-'checkchange',
-'deactivate',
-'destroy',
-'disabledchange',
-'dockedchange',
-'erased',
-'floatingchange',
-'focus',
-'focusenter',
-'focusleave',
-'fullscreen',
-'heightchange',
-'hiddenchange',
-'hide',
-'initialize',
-'leftchange',
-'maxHeightchange',
-'maxWidthchange',
-'minHeightchange',
-'minWidthchange',
-'move',
-'moved',
-'orientationchange',
-'painted',
-'positionedchange',
-'remove',
-'removed',
-'renderedchange',
-'resize',
-'rightchange',
-'scrollablechange',
-'show',
-'tofront',
-'topchange',
-'updatedata',
-'widthchange',
-'ready'
-];
-}
+
 @Component({
   selector: 'ext-selectioncolumn',
-  inputs: selectioncolumnMetaData.PROPERTIES,
-  outputs: selectioncolumnMetaData.EVENTNAMES,
+  inputs: ExtSelectioncolumnMetaData.PROPERTIES,
+  outputs: ExtSelectioncolumnMetaData.EVENTNAMES,
   providers: [{provide: EngBase, useExisting: forwardRef(() => ExtSelectioncolumnComponent)}],
   template: '<ng-template></ng-template>'
 })
-export class ExtSelectioncolumnComponent extends EngBase implements OnInit, AfterViewInit, OnChanges  {
-    constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : EngBase) {
-        super(eRef.nativeElement,selectioncolumnMetaData,hostComponent)
+export class ExtSelectioncolumnComponent extends EngBase {
+    xtype: string;
+    constructor(
+        eRef: ElementRef,
+        @Host() @Optional() @SkipSelf() hostComponent: EngBase
+    ){
+        super(
+            eRef,
+            hostComponent,
+            ExtSelectioncolumnMetaData.PROPERTIES,
+            ExtSelectioncolumnMetaData.EVENTS
+        )
+        this.xtype = 'selectioncolumn'
     }
 
     public ngOnInit() {
-        this.baseOnInit(selectioncolumnMetaData)
+        this.baseOnInit()
     }
 
     public ngAfterViewInit() {
-        this.baseAfterViewInit(selectioncolumnMetaData)
+        this.baseAfterViewInit()
     }
 
+    public ngOnChanges(changes: SimpleChanges) {
+        this.baseOnChanges(changes)
+    }
 
-
-  //public ngAfterContentInit() {
-  //  this.baseAfterContentInit()
-  //}
-
-  public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-
-
-
-   // public ngAfterViewChecked() {
-   //   console.log('ngAfterViewChecked')
-  //}
+    public ngOnDestroy() {
+        this.baseOnDestroy()
+    }
 }
-

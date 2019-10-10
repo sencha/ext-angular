@@ -1,173 +1,68 @@
-//Ext.onReady(function() {
-//import { NgZone } from '@angular/core';
-//import { Router } from '@angular/router';
+import { Ext_pivot_cell_Cell } from './Ext/pivot/cell/Cell';
+export class ExtPivotgridcellMetaData extends Ext_pivot_cell_Cell {
+    public static PROPERTIES: string[] = [];
+    public static EVENTS: any[] = [];
+    public static EVENTNAMES: string[] = [];
+    static getAll() {
+        ExtPivotgridcellMetaData.PROPERTIES = Ext_pivot_cell_Cell.getProperties(ExtPivotgridcellMetaData.PROPERTIES);
+        ExtPivotgridcellMetaData.EVENTS = Ext_pivot_cell_Cell.getEvents(ExtPivotgridcellMetaData.EVENTS);
+        ExtPivotgridcellMetaData.EVENTS.forEach( (event: any) => {
+            ExtPivotgridcellMetaData.EVENTNAMES.push(event.name);
+        })
+     }
+}
+(function () {ExtPivotgridcellMetaData.getAll();})();
 
-declare var Ext: any
+import { EngBase } from './eng-base';
 import {
-  Injectable,
   Host,
   Optional,
   SkipSelf,
-  Output,
-  OnInit,
-  AfterViewInit,
-  OnChanges,
+  //Output,
+  //OnInit,
+  //AfterViewInit,
+  //OnChanges,
   Component,
   ElementRef,
   forwardRef,
   SimpleChanges
 } from '@angular/core';
-import { EngBase } from './eng-base';
-export class pivotgridcellMetaData {
-  public static XTYPE: string = 'pivotgridcell';
-  public static PROPERTIES: string[] = [
-    'eng',
-    'viewport',
-    'align',
-    'plugins',
-    'responsiveConfig',
-    'responsiveFormulas',
-    'align',
-    'alignSelf',
-    'alwaysOnTop',
-    'ariaAttributes',
-    'ariaDescribedBy',
-    'ariaLabel',
-    'ariaLabelledBy',
-    'bind',
-    'bodyCls',
-    'bodyStyle',
-    'border',
-    'cellCls',
-    'cls',
-    'column',
-    'constrainAlign',
-    'controller',
-    'defaultListenerScope',
-    'defaultToolWeights',
-    'disabled',
-    'encodeHtml',
-    'flex',
-    'floated',
-    'focusCls',
-    'formatter',
-    'height',
-    'hidden',
-    'hideMode',
-    'id',
-    'instanceCls',
-    'itemId',
-    'keyMap',
-    'keyMapEnabled',
-    'keyMapTarget',
-    'listeners',
-    'margin',
-    'name',
-    'nameable',
-    'plugins',
-    'publishes',
-    'rawValue',
-    'record',
-    'reference',
-    'relative',
-    'renderer',
-    'renderTo',
-    'ripple',
-    'scope',
-    'selectable',
-    'session',
-    'shadow',
-    'shareableName',
-    'shim',
-    'style',
-    'toFrontOnShow',
-    'toolDefaults',
-    'tools',
-    'touchAction',
-    'tpl',
-    'translatable',
-    'twoWayBindable',
-    'ui',
-    'userCls',
-    'value',
-    'viewModel',
-    'width',
-    'x',
-    'y',
-    'zeroValue',
-    'platformConfig',
-    'responsiveConfig',
-    'align',
-    'fitToParent',
-    'config'
-];
-  public static EVENTS: any[] = [
-{name:'beforedisabledchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforeheightchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforehiddenchange',parameters:'sender,value,oldValue,undefined'},
-{name:'beforetofront',parameters:'pivotgridcell'},
-{name:'beforewidthchange',parameters:'sender,value,oldValue,undefined'},
-{name:'blur',parameters:'pivotgridcell,event'},
-{name:'disabledchange',parameters:'sender,value,oldValue'},
-{name:'focus',parameters:'pivotgridcell,event'},
-{name:'focusenter',parameters:'pivotgridcell,event'},
-{name:'focusleave',parameters:'pivotgridcell,event'},
-{name:'heightchange',parameters:'sender,value,oldValue'},
-{name:'hiddenchange',parameters:'sender,value,oldValue'},
-{name:'tofront',parameters:'pivotgridcell'},
-{name:'widthchange',parameters:'sender,value,oldValue'},
-{name:'ready',parameters:''}
-];
-  public static EVENTNAMES: string[] = [
-'beforedisabledchange',
-'beforeheightchange',
-'beforehiddenchange',
-'beforetofront',
-'beforewidthchange',
-'blur',
-'disabledchange',
-'focus',
-'focusenter',
-'focusleave',
-'heightchange',
-'hiddenchange',
-'tofront',
-'widthchange',
-'ready'
-];
-}
+
 @Component({
   selector: 'ext-pivotgridcell',
-  inputs: pivotgridcellMetaData.PROPERTIES,
-  outputs: pivotgridcellMetaData.EVENTNAMES,
+  inputs: ExtPivotgridcellMetaData.PROPERTIES,
+  outputs: ExtPivotgridcellMetaData.EVENTNAMES,
   providers: [{provide: EngBase, useExisting: forwardRef(() => ExtPivotgridcellComponent)}],
   template: '<ng-template></ng-template>'
 })
-export class ExtPivotgridcellComponent extends EngBase implements OnInit, AfterViewInit, OnChanges  {
-    constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : EngBase) {
-        super(eRef.nativeElement,pivotgridcellMetaData,hostComponent)
+export class ExtPivotgridcellComponent extends EngBase {
+    xtype: string;
+    constructor(
+        eRef: ElementRef,
+        @Host() @Optional() @SkipSelf() hostComponent: EngBase
+    ){
+        super(
+            eRef,
+            hostComponent,
+            ExtPivotgridcellMetaData.PROPERTIES,
+            ExtPivotgridcellMetaData.EVENTS
+        )
+        this.xtype = 'pivotgridcell'
     }
 
     public ngOnInit() {
-        this.baseOnInit(pivotgridcellMetaData)
+        this.baseOnInit()
     }
 
     public ngAfterViewInit() {
-        this.baseAfterViewInit(pivotgridcellMetaData)
+        this.baseAfterViewInit()
     }
 
+    public ngOnChanges(changes: SimpleChanges) {
+        this.baseOnChanges(changes)
+    }
 
-
-  //public ngAfterContentInit() {
-  //  this.baseAfterContentInit()
-  //}
-
-  public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-
-
-
-   // public ngAfterViewChecked() {
-   //   console.log('ngAfterViewChecked')
-  //}
+    public ngOnDestroy() {
+        this.baseOnDestroy()
+    }
 }
-

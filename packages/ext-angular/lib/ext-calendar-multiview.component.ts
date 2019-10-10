@@ -1,85 +1,68 @@
-//Ext.onReady(function() {
-//import { NgZone } from '@angular/core';
-//import { Router } from '@angular/router';
+import { Ext_calendar_view_Multi } from './Ext/calendar/view/Multi';
+export class ExtCalendar_multiviewMetaData extends Ext_calendar_view_Multi {
+    public static PROPERTIES: string[] = [];
+    public static EVENTS: any[] = [];
+    public static EVENTNAMES: string[] = [];
+    static getAll() {
+        ExtCalendar_multiviewMetaData.PROPERTIES = Ext_calendar_view_Multi.getProperties(ExtCalendar_multiviewMetaData.PROPERTIES);
+        ExtCalendar_multiviewMetaData.EVENTS = Ext_calendar_view_Multi.getEvents(ExtCalendar_multiviewMetaData.EVENTS);
+        ExtCalendar_multiviewMetaData.EVENTS.forEach( (event: any) => {
+            ExtCalendar_multiviewMetaData.EVENTNAMES.push(event.name);
+        })
+     }
+}
+(function () {ExtCalendar_multiviewMetaData.getAll();})();
 
-declare var Ext: any
+import { EngBase } from './eng-base';
 import {
-  Injectable,
   Host,
   Optional,
   SkipSelf,
-  Output,
-  OnInit,
-  AfterViewInit,
-  OnChanges,
+  //Output,
+  //OnInit,
+  //AfterViewInit,
+  //OnChanges,
   Component,
   ElementRef,
   forwardRef,
   SimpleChanges
 } from '@angular/core';
-import { EngBase } from './eng-base';
-export class calendar_multiviewMetaData {
-  public static XTYPE: string = 'calendar-multiview';
-  public static PROPERTIES: string[] = [
-    'eng',
-    'viewport',
-    'align',
-    'plugins',
-    'responsiveConfig',
-    'responsiveFormulas',
-    'compact',
-    'compactOptions',
-    'defaultView',
-    'layout',
-    'store',
-    'timezoneOffset',
-    'value',
-    'views',
-    'platformConfig',
-    'responsiveConfig',
-    'align',
-    'fitToParent',
-    'config'
-];
-  public static EVENTS: any[] = [
-{name:'ready',parameters:''}
-];
-  public static EVENTNAMES: string[] = [
-'ready'
-];
-}
+
 @Component({
   selector: 'ext-calendar-multiview',
-  inputs: calendar_multiviewMetaData.PROPERTIES,
-  outputs: calendar_multiviewMetaData.EVENTNAMES,
+  inputs: ExtCalendar_multiviewMetaData.PROPERTIES,
+  outputs: ExtCalendar_multiviewMetaData.EVENTNAMES,
   providers: [{provide: EngBase, useExisting: forwardRef(() => ExtCalendar_multiviewComponent)}],
   template: '<ng-template></ng-template>'
 })
-export class ExtCalendar_multiviewComponent extends EngBase implements OnInit, AfterViewInit, OnChanges  {
-    constructor(eRef:ElementRef, @Host() @Optional() @SkipSelf() public hostComponent : EngBase) {
-        super(eRef.nativeElement,calendar_multiviewMetaData,hostComponent)
+export class ExtCalendar_multiviewComponent extends EngBase {
+    xtype: string;
+    constructor(
+        eRef: ElementRef,
+        @Host() @Optional() @SkipSelf() hostComponent: EngBase
+    ){
+        super(
+            eRef,
+            hostComponent,
+            ExtCalendar_multiviewMetaData.PROPERTIES,
+            ExtCalendar_multiviewMetaData.EVENTS
+        )
+        this.xtype = 'calendar-multiview'
     }
 
     public ngOnInit() {
-        this.baseOnInit(calendar_multiviewMetaData)
+        this.baseOnInit()
     }
 
     public ngAfterViewInit() {
-        this.baseAfterViewInit(calendar_multiviewMetaData)
+        this.baseAfterViewInit()
     }
 
+    public ngOnChanges(changes: SimpleChanges) {
+        this.baseOnChanges(changes)
+    }
 
-
-  //public ngAfterContentInit() {
-  //  this.baseAfterContentInit()
-  //}
-
-  public ngOnChanges(changes: SimpleChanges) {this.baseOnChanges(changes)}
-
-
-
-   // public ngAfterViewChecked() {
-   //   console.log('ngAfterViewChecked')
-  //}
+    public ngOnDestroy() {
+        this.baseOnDestroy()
+    }
 }
-

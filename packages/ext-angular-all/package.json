@@ -1,0 +1,43 @@
+{
+  "name": "@sencha/ext-angular-all",
+  "description": "ext-angular-all",
+  "version": "7.1.0",
+  "private": false,
+  "peerDependencies": {
+    "@angular/compiler": "~8.2.5",
+    "@angular/core": "~8.2.5",
+    "tslib": "^1.10.0"
+  },
+  "dependencies": {
+    "script-loader": "^0.7.2",
+    "tslib": "^1.9.0"
+  },
+  "devDependencies": {
+    "@angular/core": "~8.2.5",
+    "@angular/common": "~8.2.5",
+    "@angular/platform-browser": "~8.2.5",
+    "@angular/platform-browser-dynamic": "~8.2.5",
+    "zone.js": "~0.9.1",
+    "ng-packagr": "^5.5.0",
+    "@angular/compiler": "~8.2.5",
+    "@angular/compiler-cli": "~8.2.5",
+    "typescript": "~3.5.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sencha/ext-angular.git"
+  },
+  "keywords": [],
+  "author": "Sencha",
+  "license": "ISC",
+  "main": "bundles/sencha-ext-angular-all.umd.js",
+  "module": "fesm5/sencha-ext-angular-all.js",
+  "es2015": "fesm2015/sencha-ext-angular-all.js",
+  "esm5": "esm5/sencha-ext-angular-all.js",
+  "esm2015": "esm2015/sencha-ext-angular-all.js",
+  "fesm5": "fesm5/sencha-ext-angular-all.js",
+  "fesm2015": "fesm2015/sencha-ext-angular-all.js",
+  "typings": "sencha-ext-angular-all.d.ts",
+  "metadata": "sencha-ext-angular-all.metadata.json",
+  "sideEffects": false
+}
