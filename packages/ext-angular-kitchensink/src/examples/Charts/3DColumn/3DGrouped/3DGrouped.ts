@@ -39,7 +39,7 @@ export class ThreeDGroupedComponent {
   chart:any;
 
   chartNavReady = function(event) {
-      this.chart = event.detail.cmp;
+      this.chart = event.cmp;
   }
 
 

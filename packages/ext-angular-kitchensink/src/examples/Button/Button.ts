@@ -21,7 +21,7 @@ export class ButtonComponent  {
   constructor(private cd: ChangeDetectorRef) {};
 
   menuButtonReady = function(event) {
-    this.menuButtons.push(event.detail.cmp);
+    this.menuButtons.push(event.cmp);
   }
 
   onStyleChange = (item) => {

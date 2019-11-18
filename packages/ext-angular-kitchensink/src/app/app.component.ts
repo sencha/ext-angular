@@ -174,7 +174,7 @@ export class AppComponent {
         this.router.navigateByUrl(node.id);
 
         //this.ngZone.run(() => this.router.navigateByUrl(node.id)).then();
-        //this.setCodeTabs(node);
+        this.setCodeTabs(node);
       }
       this.cd.detectChanges();
   }

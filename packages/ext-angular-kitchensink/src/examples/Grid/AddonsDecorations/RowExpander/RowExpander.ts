@@ -26,7 +26,7 @@ export class RowExpanderComponent {
 
   grid:any;
   onGridReady = (event) => {
-    this.grid = event.detail.cmp;
+    this.grid = event.cmp;
     this.grid.setPlugins(this.rowExpandeerPlugin);
   }
 

@@ -12,12 +12,12 @@ export class BreadcrumbToolBarComponent {
   treeStore:any;
 
   breadcrumbarReady = function(event) {
-    this.breadcrumbarCmp = event.detail.cmp;
+    this.breadcrumbarCmp = event.cmp;
     this.treeStore = Ext.create('Ext.data.TreeStore', {
         rootVisible: true,
         root: fileData
     });
     this.breadcrumbarCmp.setStore(this.treeStore);
   }
-  
+
 }

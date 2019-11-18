@@ -23,7 +23,7 @@ export class ConstraintsDragDropComponent {
   }
 
   parentReady = (event) => {
-    this.parentRef = event.detail.cmp.el;
+    this.parentRef = event.cmp.el;
     this.sources[1].setConstrain({
         element: this.parentRef, vertical: true
     });
@@ -38,26 +38,26 @@ export class ConstraintsDragDropComponent {
   }
 
   elementReady = (event) => {
-    this.elementRef = event.detail.cmp.el;
+    this.elementRef = event.cmp.el;
  }
 
   toParentReady = (event) => {
-    this.toParentRef = event.detail.cmp.el;
+    this.toParentRef = event.cmp.el;
     this.sources[0].setElement(this.toParentRef);
   }
 
   horizontalReady = (event) => {
-    this.horizontalRef = event.detail.cmp.el;
+    this.horizontalRef = event.cmp.el;
     this.sources[2].setElement(this.horizontalRef);
   }
 
   verticalReady = (event) => {
-    this.verticalRef = event.detail.cmp.el;
+    this.verticalRef = event.cmp.el;
     this.sources[1].setElement(this.verticalRef);
   }
 
   snapReady = (event) => {
-    this.snapRef = event.detail.cmp.el;
+    this.snapRef = event.cmp.el;
     this.sources[3].setElement(this.snapRef);
   }
 

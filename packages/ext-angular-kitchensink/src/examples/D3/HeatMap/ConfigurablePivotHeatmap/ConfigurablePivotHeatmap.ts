@@ -53,7 +53,7 @@ export class ConfigurablePivotHeatmapComponent {
 
   mainCtn:any;
   mainCtnReady = function(event) {
-    this.mainCtn = event.detail.cmp;
+    this.mainCtn = event.cmp;
   }
 
   showConfigurator = () => {

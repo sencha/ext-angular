@@ -23,7 +23,7 @@ export class GroupsDragDropComponent {
   }
 
   parentReady = (event) => {
-    this.parentRef = event.detail.cmp.el;
+    this.parentRef = event.cmp.el;
     this.sources.slice(0, 3).forEach((source, i) => {
       source.setConstrain(this.parentRef);
     });
@@ -31,32 +31,32 @@ export class GroupsDragDropComponent {
   }
 
   src1Ready = (event) => {
-    this.src1Ref = event.detail.cmp.el;
+    this.src1Ref = event.cmp.el;
     this.sources[0].setElement(this.src1Ref);
   }
 
   src2Ready = (event) => {
-    this.src2Ref = event.detail.cmp.el;
+    this.src2Ref = event.cmp.el;
     this.sources[1].setElement(this.src2Ref);
   }
 
   srcbReady = (event) => {
-    this.srcbRef = event.detail.cmp.el;
+    this.srcbRef = event.cmp.el;
     this.sources[2].setElement(this.srcbRef);
   }
 
   tar1Ready = (event) => {
-    this.tar1Ref = event.detail.cmp.el;
+    this.tar1Ref = event.cmp.el;
     this.sources[3].setElement(this.tar1Ref);
   }
 
   tar2Ready = (event) => {
-    this.tar2Ref = event.detail.cmp.el;
+    this.tar2Ref = event.cmp.el;
     this.sources[4].setElement(this.tar2Ref);
   }
 
   tarbReady = (event) => {
-    this.tarbRef = event.detail.cmp.el;
+    this.tarbRef = event.cmp.el;
     this.sources[5].setElement(this.tarbRef);
   }
 

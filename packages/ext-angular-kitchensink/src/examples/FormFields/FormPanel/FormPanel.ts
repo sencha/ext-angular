@@ -22,12 +22,12 @@ export class FormPanelComponent {
   selRef:any;
 
   onReady = (event) => {
-    this.formRef = event.detail.cmp;
+    this.formRef = event.cmp;
   }
 
   OnSelChange = (event) => {
       console.log('here')
-    this.selRef = event.detail.cmp;
+    this.selRef = event.cmp;
   }
 
   toggleDisabled = () => {

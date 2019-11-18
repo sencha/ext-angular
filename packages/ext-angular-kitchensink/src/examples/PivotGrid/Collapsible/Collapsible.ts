@@ -36,7 +36,7 @@ export class CollapsibleComponent {
 
   pivotgrid:any;
   onReady = function(event) {
-    this.pivotgrid = event.detail.cmp;
+    this.pivotgrid = event.cmp;
   }
 
   pivotgridMatrix = {

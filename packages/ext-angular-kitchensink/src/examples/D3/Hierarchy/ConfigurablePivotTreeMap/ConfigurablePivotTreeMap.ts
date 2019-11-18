@@ -25,7 +25,7 @@ export class ConfigurablePivotTreeMapComponent {
   mainCtnRef:any;
 
   ctnReady = (event) => {
-    this.mainCtnRef = event.detail.cmp;
+    this.mainCtnRef = event.cmp;
   }
 
   drawingVar = {xtype: 'pivottreemap'};

@@ -21,19 +21,19 @@ export class DragFormToGridComponent {
     }
 
     parentPanelReady = (event: any) => {
-        this.parentPanel = event.detail.cmp;
+        this.parentPanel = event.cmp;
     };
 
     dataViewReady = (event: any) => {
-        this.formDataView = event.detail.cmp;
+        this.formDataView = event.cmp;
     };
 
     dataPanelReady = (event: any) => {
-        this.formDataPanel = event.detail.cmp;
+        this.formDataPanel = event.cmp;
     };
 
     hospitalGridReady = (event: any) => {
-        this.hospitalGrid = event.detail.cmp;
+        this.hospitalGrid = event.cmp;
     };
 
     registerDragZone = () => {

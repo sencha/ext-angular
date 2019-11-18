@@ -15,7 +15,7 @@ export class FroalaEditorComponent {
 
   onFormPanelReady = (event) => {
     //if (ele.ext) {
-      this.parentFormPanelCmp = event.detail.cmp;
+      this.parentFormPanelCmp = event.cmp;
     //}
   }
 

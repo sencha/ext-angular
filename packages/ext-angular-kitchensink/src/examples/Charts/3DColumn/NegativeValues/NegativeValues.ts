@@ -35,7 +35,7 @@ export class NegativeValuesComponent {
   }
 
   chartNavReady = function(event) {
-    this.chart = event.detail.cmp;
+    this.chart = event.cmp;
   }
 
   onSeriesRender = (sprite, config, data, index) => {

@@ -23,7 +23,7 @@ export class ThreeDColumnWithRendererComponent {
 
   chart:any;
   chartNavReady = function(event) {
-    this.chart = event.detail.cmp;
+    this.chart = event.cmp;
   }
 
   cartesianSeries = [

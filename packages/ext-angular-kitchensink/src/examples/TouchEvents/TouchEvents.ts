@@ -14,7 +14,7 @@ export class TouchEventsComponent {
   tplDataView: any=`<p>{type}&nbsp;&nbsp;&nbsp;</p>\n`;
 
   touchpadReady = (event) => {
-    this.touchpadRef = event.detail.cmp.el;
+    this.touchpadRef = event.cmp.el;
     this.touchpadRef.on({
       scope: this,
       touchstart: this.onTouchEvent,
@@ -34,7 +34,7 @@ export class TouchEventsComponent {
   }
 
   dataviewReady = (event) => {
-    this.theDataview = event.detail.cmp;
+    this.theDataview = event.cmp;
   }
 
   onTouchEvent = (e, target, options) => {

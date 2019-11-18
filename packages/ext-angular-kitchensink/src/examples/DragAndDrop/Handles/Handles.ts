@@ -14,18 +14,18 @@ export class HandlesDragDropComponent {
   dragRef: any;
 
   parentReady = (event) => {
-    this.parentRef = event.detail.cmp.el;
+    this.parentRef = event.cmp.el;
     this.sources[0].setConstrain(this.parentRef);
     this.sources[1].setConstrain(this.parentRef);
   }
 
   handleRepeatReady = (event) => {
-    this.handleRepeatRef = event.detail.cmp.el;
+    this.handleRepeatRef = event.cmp.el;
     this.sources[0].setElement(this.handleRepeatRef);
  }
 
   dragReady = (event) => {
-    this.dragRef = event.detail.cmp.el;
+    this.dragRef = event.cmp.el;
     this.sources[1].setElement(this.dragRef);
   }
 

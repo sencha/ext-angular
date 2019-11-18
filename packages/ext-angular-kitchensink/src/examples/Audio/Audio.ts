@@ -12,7 +12,7 @@ export class AudioComponent {
   isAndroid = Ext.os.is.Android;
 
   audioReady = (event) => {
-    this.audio = event.detail.cmp;
+    this.audio = event.cmp;
   }
 
   toggleAudioAndroid() {

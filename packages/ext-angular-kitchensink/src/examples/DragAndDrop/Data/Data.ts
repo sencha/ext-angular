@@ -21,18 +21,18 @@ export class DataDragDropComponent {
   }
 
   parentReady = (event) => {
-    this.parentRef = event.detail.cmp.el;
+    this.parentRef = event.cmp.el;
     this.source.setConstrain(this.parentRef);
     this.parentRef.destroy = this.doDestroy.bind(this);
   }
 
   targetReady = (event) => {
-    this.targetRef = event.detail.cmp.el;
+    this.targetRef = event.cmp.el;
     this.target.setElement(this.targetRef);
   }
 
   sourceReady = (event) => {
-    this.sourceRef = event.detail.cmp.el;
+    this.sourceRef = event.cmp.el;
     this.source.setElement(this.sourceRef);
   }
 

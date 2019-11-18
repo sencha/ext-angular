@@ -29,17 +29,17 @@ export class HeterogeneousTreeComponent {
 
   textField : any;
   onTextFieldReady = (event) => {
-    this.textField = event.detail.cmp;
+    this.textField = event.cmp;
   }
 
   buttonField : any;
   onButtonReady = (event) => {
-    this.buttonField = event.detail.cmp;
+    this.buttonField = event.cmp;
   }
 
   treeField:any;
   onTreeReady = (event) => {
-    this.treeField = event.detail.cmp;
+    this.treeField = event.cmp;
   }
 
   store = Ext.create('Ext.data.TreeStore', {
