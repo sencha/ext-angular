@@ -1,17 +1,14 @@
-<ext-container padding="10px" layout="fit" [fitToParent]="true">
-    <ext-actionsheet [displayed]="showExportSheet">
-        <ext-button
-            [handler]="this.exportToXlsx"
-            text="Excel xlsx"
-        ></ext-button>
-        <ext-button [handler]="this.exportToXml" text="Excel xml"></ext-button>
-        <ext-button [handler]="this.exportToCSV" text="CSV"></ext-button>
-        <ext-button [handler]="this.exportToTSV" text="TSV"></ext-button>
-        <ext-button [handler]="this.exportToHtml" text="HTML"></ext-button>
-        <ext-button [handler]="this.onCancelExport" text="Cancel"></ext-button>
-    </ext-actionsheet>
+<ExtContainer padding="10px" layout="fit" [fitToParent]="true">
+    <ExtActionsheet [displayed]="showExportSheet">
+        <ExtButton [handler]="this.exportToXlsx" text="Excel xlsx"></ExtButton>
+        <ExtButton [handler]="this.exportToXml" text="Excel xml"></ExtButton>
+        <ExtButton [handler]="this.exportToCSV" text="CSV"></ExtButton>
+        <ExtButton [handler]="this.exportToTSV" text="TSV"></ExtButton>
+        <ExtButton [handler]="this.exportToHtml" text="HTML"></ExtButton>
+        <ExtButton [handler]="this.onCancelExport" text="Cancel"></ExtButton>
+    </ExtActionsheet>
 
-    <ext-grid
+    <ExtGrid
         title="Big Data Grid"
         [store]="this.store"
         shadow="true"
@@ -41,7 +38,7 @@
     >
         <!-- Title bar property as in react bit not seen-->
         <!-- [titleBar]="gridTitleBar" -->
-        <ext-textcolumn
+        <ExtTextcolumn
             text="Id"
             dataIndex="employeeNo"
             flex="1"
@@ -53,9 +50,9 @@
                 }
             }"
         >
-        </ext-textcolumn>
+        </ExtTextcolumn>
 
-        <ext-textcolumn
+        <ExtTextcolumn
             text="Name"
             dataIndex="fullName"
             minWidth="150"
@@ -63,18 +60,19 @@
                 sorterFn: this.nameSorter
             }"
         >
-        </ext-textcolumn>
+        </ExtTextcolumn>
 
-        <ext-checkcolumn
+        <ExtCheckcolumn
             text="Verified"
             dataIndex="verified"
             headerCheckbox="true"
         >
-        </ext-checkcolumn>
+        </ExtCheckcolumn>
 
-        <ext-column text="Ratings" [columns]="ratingsColumn"> </ext-column>
+        <ExtGridcolumn text="Ratings" [columns]="ratingsColumn">
+        </ExtGridcolumn>
 
-        <ext-datecolumn
+        <ExtDatecolumn
             text="Date of Birth"
             dataIndex="dob"
             editable="true"
@@ -92,9 +90,9 @@
                 }
             ]"
         >
-        </ext-datecolumn>
+        </ExtDatecolumn>
 
-        <ext-column
+        <ExtGridcolumn
             text=""
             width="100"
             ignoreExport="true"
@@ -102,9 +100,9 @@
             [cell]="verifyCell"
             [summaryCell]="summaryCell"
         >
-        </ext-column>
+        </ExtGridcolumn>
 
-        <ext-datecolumn
+        <ExtDatecolumn
             text="Join Date"
             dataIndex="joinDate"
             editable="true"
@@ -116,16 +114,16 @@
                 }
             }"
         >
-        </ext-datecolumn>
+        </ExtDatecolumn>
 
-        <ext-textcolumn
+        <ExtTextcolumn
             text="Notice Period"
             dataIndex="noticePeriod"
             editable="true"
         >
-        </ext-textcolumn>
+        </ExtTextcolumn>
 
-        <ext-textcolumn
+        <ExtTextcolumn
             text="Email"
             dataIndex="email"
             width="250"
@@ -134,11 +132,12 @@
                 xtype: 'emailfield'
             }"
         >
-        </ext-textcolumn>
+        </ExtTextcolumn>
 
-        <ext-column text="Absences" [columns]="absensesColumn"> </ext-column>
+        <ExtGridcolumn text="Absences" [columns]="absensesColumn">
+        </ExtGridcolumn>
 
-        <ext-column
+        <ExtGridcolumn
             text="Rating<br></br>This Year"
             dataIndex="ratingThisYear"
             groupable="false"
@@ -151,9 +150,9 @@
                 }
             }"
         >
-        </ext-column>
+        </ExtGridcolumn>
 
-        <ext-textcolumn
+        <ExtTextcolumn
             text="Salary"
             dataIndex="salary"
             [renderer]="usMoneyRendered"
@@ -168,20 +167,20 @@
                 }
             }"
         >
-        </ext-textcolumn>
-    </ext-grid>
-</ext-container>
+        </ExtTextcolumn>
+    </ExtGrid>
+</ExtContainer>
 
 <!--
     TODO: future release
     <cell >
       <widgetcell >
-        <ext-button  ui ="action" [handler] ="this.onVerify" [bind] = "widgetCellBind" text = "VERIFY"></ext-button>
+        <ExtButton  ui ="action" [handler] ="this.onVerify" [bind] = "widgetCellBind" text = "VERIFY"></ExtButton>
       </widgetcell>
     </cell>
     <summaryCell >
       <widgetcell >
-        <ext-button  ui ="action" [handler] ="this.onVerifyAll" text = "All"></ext-button>
+        <ExtButton  ui ="action" [handler] ="this.onVerifyAll" text = "All"></ExtButton>
       </widgetcell>
     </summaryCell>
 -->

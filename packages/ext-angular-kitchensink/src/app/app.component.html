@@ -1,158 +1,160 @@
-
-<ext-panel
-    (ready)="readyViewport($event)"
-    [viewport]="true"
-    layout="fit"
-    [bodyStyle]="bodyStyle"
-    [fullscreen]="true"
-    [weighted]="true"
+<ExtPanel
+  (ready)="readyViewport($event)"
+  [viewport]="true"
+  layout="fit"
+  [bodyStyle]="bodyStyle"
+  [fullscreen]="true"
+  [weighted]="true"
 >
+  <!-- ExtTitlebar starts-->
+  <ExtTitlebar docked="top" [weight]="10" *ngIf="!isPhone" >
+    <ExtButton iconCls="x-fa fa-bars" (tap)="toggleTree()"></ExtButton>
+    <ExtContainer extname="leftContainer" align="left"></ExtContainer>
+    <ExtContainer align="left" html=" - Angular v{{ANGULAR_VERSION}}"></ExtContainer>
+    <ExtContainer extname="rightContainer" align="right"></ExtContainer>
+  </ExtTitlebar>
+  <!-- ExtTitlebar ends-->
 
-    <!-- ext-titlebar starts-->
-    <ext-titlebar docked="top" [weight]="10" *ngIf="!isPhone" >
-        <ext-button iconCls="x-fa fa-bars" (tap)="toggleTree()"></ext-button>
-        <ext-container align="left"  (ready)="readyLeftContainer($event)"></ext-container>
-        <ext-container align="left" html=" - Angular v{{ANGULAR_VERSION}}"></ext-container>
-        <ext-container align="right" (ready)="readyRightContainer($event)"></ext-container>
-    </ext-titlebar>
-    <!-- ext-titlebar ends-->
+  <!-- ExtToolbar starts-->
+  <ExtToolbar docked="top" [weight]="10" *ngIf="!isPhone" padding="0">
+      <ExtBreadcrumbbar
+      extname="breadcrumb"
 
-    <!-- ext-toolbar starts-->
-    <ext-toolbar docked="top" [weight]="10" *ngIf="!isPhone" padding="0">
-        <ext-breadcrumbbar
-            (ready)="readyBreadcrumb($event)"
-            (change)="changeBreadcrumb($event)"
-            showIcons= "true"
-            [store]="treeStore"
-            useSplitext-buttons="true"
-            width="100%"
-            height="100%"
-        >
-        </ext-breadcrumbbar>
-        <ext-button
-            *ngIf="!isPhone"
-            (ready)="readyCodeButton($event)"
-            (tap)="toggleCode($event)"
-            [weight]="5"
-            ui="fab"
-            [iconCls]="'x-font-icon ' + (collapseCode ? 'md-icon-code' : 'md-icon-close')"
-            [top]="isDesktop ? -4 : 35"
-            right="15"
-            zIndex="10000"
-        >
-        </ext-button>
-    </ext-toolbar>
-    <!-- ext-toolbar ends-->
-
-    <!-- Navtree starts-->
-    <ext-panel
-        (ready)="readyNavTreePanel($event)"
-        [weight]="10"
+        (change)="changeBreadcrumb($event)"
+        showIcons= "true"
+        
+        useSplitExtButtons="true"
+        width="100%"
+        height="100%"
+      >
+      </ExtBreadcrumbbar>
+      <ExtButton
         *ngIf="!isPhone"
-        docked="left"
-        scrollable="y"
-        width="300"
-        [style]="{zIndex: 100, backgroundColor: 'white'}"
-        [resizable]="{edges: 'east', dynamic: true}"
-        [header]="false"
-        [collapsible]="{ direction: 'left' }"
-        [collapsed]="showTreeFlag"
-    >
-        <ext-searchfield
-            docked="top"
-            ui="faded"
-            margin="7"
-            (change)="filterNav($event)"
-        >
-        </ext-searchfield>
-        <ext-treelist
-            (ready)="readyNavTreeList($event)"
-            (selectionchange)="selectionchangeNavTreeList($event)"
-            ui="nav"
-            [expanderFirst]="false"
-            [expanderOnly]="true"
-            [selectOnExpander]="true"
-        >
-        </ext-treelist>
-    </ext-panel>
-    <!-- Navtree ends-->
-
-    <!-- selections starts-->
-    <ext-panel (ready)="readySelection($event)" [bodyStyle]="bodyStyle" *ngIf="!isPhone">
-        <ext-dataview
-            (ready)="readyDataviewNav($event)"
-            (childtap)="clickDataviewNav($event)"
-            [itemTpl]="tpl"
-            [style]="{'background':'top','display':'block','text-align':'center'}"
-            [inline]="true"
-            [centered]="true"
-            [itemCls]="'div.app-thumbnail'"
-        >
-        </ext-dataview>
-    </ext-panel>
-    <!-- selections ends-->
-
-    <!-- examples starts-->
-    <ext-container
-        id="routercontainer"
-        (ready)="readyRouter($event)"
-        *ngIf="!isPhone"
-        scrollable="true"
-    >
-        <div #extitem id="routediv">
-            <router-outlet id="route"></router-outlet>
-        </div>
-    </ext-container>
-    <!-- examples ends-->
-
-    <!-- [hideAnimation]="{type: 'slideOut', direction: 'right', duration: 100, easing: 'ease' }"
-    [showAnimation]="{type: 'slideIn', direction: 'left', duration: 100, easing: 'ease' }" -->
-
-    <!-- code window starts-->
-    <ext-panel
-        (ready)="readyCodePanel($event)"
-        docked="right"
-        [hidden]="false"
-        [collapsed]="collapseCode"
+        extname="codeButton"
+        (tap)="toggleCode($event)"
         [weight]="5"
-        width="700"
-        layout= "fit"
-        [style]="{zIndex: 3}"
-        [resizable]="{ edges: 'west', dynamic: true }"
-        [header]="false"
-        [collapsible]="{ direction: 'right' }"
+        ui="fab"
+        [iconCls]="'x-font-icon ' + (collapseCode ? 'md-icon-code' : 'md-icon-close')"
+        [top]="isDesktop ? -4 : 35"
+        right="15"
+        zIndex="10000"
+      >
+      </ExtButton>
+  </ExtToolbar>
+  <!-- ExtToolbar ends-->
+
+  <!-- Navtree starts-->
+  <ExtPanel
+    extname="navTreePanel"
+    [weight]="10"
+    *ngIf="!isPhone"
+    docked="left"
+    scrollable="y"
+    width="300"
+    [style]="{zIndex: 100, backgroundColor: 'white'}"
+    [resizable]="{edges: 'east', dynamic: true}"
+    [header]="false"
+    [collapsible]="{ direction: 'left' }"
+    [collapsed]="showTreeFlag"
+  >
+    <ExtSearchfield
+      docked="top"
+      ui="faded"
+      margin="7"
+      (change)="filterNav($event)"
     >
-        <ext-tabpanel
-            (ready)="readyTabPanel($event)"
-            [shadow]="true"
-            [tabBar]="{layout: {pack: 'left'}}"
+    </ExtSearchfield>
+    <ExtTreelist
+      extname="navTreeList"
+      (selectionchange)="selectionchangeNavTreeList($event)"
+      ui="nav"
+      [store]="treeStore"
+      [expanderFirst]="false"
+      [expanderOnly]="true"
+      [selectOnExpander]="true"
+    >
+    </ExtTreelist>
+  </ExtPanel>
+  <!-- Navtree ends-->
+
+  <!-- selections starts-->
+  <ExtPanel extname="selection" [bodyStyle]="bodyStyle" *ngIf="!isPhone">
+    <ExtDataview
+      extname="dataviewNav"
+      (childtap)="clickDataviewNav($event)"
+      [itemTpl]="tpl"
+      [style]="{'background':'top','display':'block','tExtAlign':'center'}"
+      [inline]="true"
+      [centered]="true"
+      [itemCls]="'div.app-thumbnail'"
+    >
+    </ExtDataview>
+  </ExtPanel>
+  <!-- selections ends-->
+
+  <!-- examples starts-->
+  <ExtContainer
+    extname="router"
+    *ngIf="!isPhone"
+    scrollable="true"
+  >
+    <router-outlet #extitem id="route"></router-outlet>
+  </ExtContainer>
+  <!-- examples ends-->
+
+    <!-- <div #extitem id="routediv">
+      <router-outlet id="route"></router-outlet>
+    </div> -->
+
+
+  <!-- [hideAnimation]="{type: 'slideOut', direction: 'right', duration: 100, easing: 'ease' }"
+  [showAnimation]="{type: 'slideIn', direction: 'left', duration: 100, easing: 'ease' }" -->
+
+  <!-- code window starts-->
+  <ExtPanel
+    extname="codePanel"
+    docked="right"
+    [hidden]="false"
+    [collapsed]="collapseCode"
+    [weight]="5"
+    width="700"
+    layout= "fit"
+    [style]="{zIndex: 3}"
+    [resizable]="{ edges: 'west', dynamic: true }"
+    [header]="false"
+    [collapsible]="{ direction: 'right' }"
+  >
+      <ExtTabpanel
+        extname="tabPanel"
+        [shadow]="true"
+        [tabBar]="{layout: {pack: 'left'}}"
+      >
+        <ExtPanel *ngFor="let file of files" [hidden]="files.length > 0 ? false: true"
+          layout="fit"
+          [scrollable]="true"
+          [title]="file.name"
+          [ui]="'code-ExtPanel'"
+          tab="{ui: 'app-code-tab', flex: 0, minWidth: 120}"
+          [userSelectable]="{element: true, bodyElement: true}"
+          [html]="file.code"
         >
-            <ext-panel *ngFor="let file of files" [hidden]="files.length > 0 ? false: true"
-                layout="fit"
-                [scrollable]="true"
-                [title]="file.name"
-                [ui]="'code-ext-panel'"
-                tab="{ui: 'app-code-tab', flex: 0, minWidth: 120}"
-                [userSelectable]="{element: true, bodyElement: true}"
-                [html]="file.code"
-            >
-            </ext-panel>
-        </ext-tabpanel>
-    </ext-panel>
-    <!-- code window ends-->
+        </ExtPanel>
+      </ExtTabpanel>
+  </ExtPanel>
+  <!-- code window ends-->
 
-    <!-- nestedlist starts-->
-    <ext-nestedlist
-        (ready)="readyNestedlist($event)"
-        (itemtap)="itemtapNestedList($event)"
-        (back)="backNestedList($event)"
-        *ngIf="isPhone"
-        [hidden]="hideSelections"
-        [title]="'ExtAngular 7.0 Kitchen Sink'"
-        [store]="treeStore"
-        [layout]="{type: 'card',animation: {duration: 250,easing: 'ease-in-out'}}"
-    >
-    </ext-nestedlist>
-    <!-- nestedlist ends-->
+  <!-- nestedlist starts-->
+  <ExtNestedlist
+    extname="nestedlist"
+    (itemtap)="itemtapNestedList($event)"
+    (back)="backNestedList($event)"
+    *ngIf="isPhone"
+    [hidden]="hideSelections"
+    [title]="'ExtAngular 7.0 Kitchen Sink'"
+    [store]="treeStore"
+    [layout]="{type: 'card',animation: {duration: 250,easing: 'ease-in-out'}}"
+  >
+  </ExtNestedlist>
+  <!-- nestedlist ends-->
 
-</ext-panel>
+</ExtPanel>

@@ -1,5 +1,5 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
-  <ext-grid title="Grid Tools"
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+  <ExtGrid title="Grid Tools"
       [store]="this.store"
       columnLines="true"
       grouped="true"
@@ -24,7 +24,7 @@
         }
       }"
     >
-      <ext-column
+      <ExtGridcolumn
         text="Name"
         dataIndex="name"
         flex="1"
@@ -36,8 +36,8 @@
             }
           }
         }"
-      ></ext-column>
-      <ext-column
+      ></ExtGridcolumn>
+      <ExtGridcolumn
         text="Cuisine"
         dataIndex="cuisine"
         flex="1"
@@ -49,8 +49,8 @@
             }
           }
         }"
-      ></ext-column>
-      <ext-column
+      ></ExtGridcolumn>
+      <ExtGridcolumn
         text="Actions"
         width="80"
         [cell]="{
@@ -60,6 +60,6 @@
             }
           }
         }"
-      ></ext-column>
-    </ext-grid>
-</ext-container>
+      ></ExtGridcolumn>
+    </ExtGrid>
+</ExtContainer>

@@ -2,10 +2,11 @@ import { Inject, NgModule, ModuleWithProviders } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { Route, RouterModule } from '@angular/router'
 
-import { ExtAngularModule } from '@sencha/ext-angular';
+//import { ExtAngularModule } from '@sencha/ext-angular';
 
 
 // import { ExtContainerComponent } from '@sencha/ext-angular-all/lib/ext-container.component';
+
 // import { ExtTitlebarComponent } from '@sencha/ext-angular-all/lib/ext-titlebar.component';
 // import { ExtButtonComponent } from '@sencha/ext-angular-all/lib/ext-button.component';
 // import { ExtPanelComponent } from '@sencha/ext-angular-all/lib/ext-panel.component';
@@ -22,6 +23,21 @@ import { AppComponent } from './app.component'
 import { HomeComponent } from './Home/home.component'
 import { AboutComponent } from './About/about.component'
 import { NavMenuComponent } from './NavMenu/navmenu.component'
+
+import { ExtAngularModule } from '@sencha/ext-angular';
+
+// import ExtContainerComponent from '@sencha/ext-elements-all/angular/ExtContainer';
+// import ExtTitlebarComponent from '@sencha/ext-elements-all/angular/ExtTitlebar';
+// import ExtButtonComponent from '@sencha/ext-elements-all/angular/ExtButton';
+// import ExtPanelComponent from '@sencha/ext-elements-all/angular/ExtPanel';
+// import ExtTreelistComponent from '@sencha/ext-elements-all/angular/ExtTreelist';
+// import ExtGridComponent from '@sencha/ext-elements-all/angular/ExtGrid';
+// import ExtToolbarComponent from '@sencha/ext-elements-all/angular/ExtToolbar';
+// import ExtSearchfieldComponent from '@sencha/ext-elements-all/angular/ExtSearchfield';
+// import ExtGridcolumnComponent from '@sencha/ext-elements-all/angular/ExtGridcolumn';
+//import ExtGridComponent from '@sencha/ext-elements-all/angular/ExtGrid';
+//import ExtPanelComponent from '@sencha/ext-elements-all/angular/ExtPanel';
+//import ExtToolbarComponent from '@sencha/ext-elements-all/angular/ExtToolbar';
 
 
 const routes: Route[] = [
@@ -48,7 +64,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
         // ExtGridComponent,
         // ExtToolbarComponent,
         // ExtSearchfieldComponent,
-        // ExtColumnComponent
+        // ExtGridcolumnComponent
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
-<ext-container padding="10" maxWidth="500">
-    <ext-sheet
+<ExtContainer padding="10" maxWidth="500">
+    <ExtSheet
         [side]="direct"
         [modal]="modal"
         [reveal]="reveal"
@@ -8,33 +8,33 @@
         layout="vbox"
         padding="15 0"
     >
-        <ext-button
+        <ExtButton
             text="Settings"
             iconCls="x-fa fa-gear"
             (tap)="toggleMenu()"
             [width]="direct === 'left' || direct === 'right' ? 250 : undefined"
-        ></ext-button>
-        <ext-button
+        ></ExtButton>
+        <ExtButton
             text="New Item"
             iconCls="x-fa fa-pencil"
             (tap)="toggleMenu()"
             [width]="direct === 'left' || direct === 'right' ? 250 : undefined"
-        ></ext-button>
-        <ext-button
+        ></ExtButton>
+        <ExtButton
             text="Star"
             iconCls="x-fa fa-star"
             (tap)="toggleMenu()"
             [width]="direct === 'left' || direct === 'right' ? 250 : undefined"
-        ></ext-button>
-    </ext-sheet>
+        ></ExtButton>
+    </ExtSheet>
 
-    <ext-panel
+    <ExtPanel
         shadow="true"
         ui="instructions"
         [layout]="{ type: 'vbox', align: 'left' }"
     >
-        <ext-container layout="hbox">
-            <ext-container docked="top"
+        <ExtContainer layout="hbox">
+            <ExtContainer docked="top"
                 ><div #extitem>
                     <div>
                         Sheet is a component which allows you to easily display
@@ -42,20 +42,20 @@
                         the menu by clicking the "Show Menu" button below or by
                         swiping from the edge of the screen.
                     </div>
-                </div></ext-container
+                </div></ExtContainer
             >
-        </ext-container>
-    </ext-panel>
+        </ExtContainer>
+    </ExtPanel>
 
-    <ext-panel
+    <ExtPanel
         [layout]="{ type: 'vbox', align: 'left' }"
         shadow
         margin="20 0 0 0"
         padding="15"
         shadow="true"
     >
-        <ext-container layout="hbox">
-            <ext-button
+        <ExtContainer layout="hbox">
+            <ExtButton
                 ui="action"
                 enableToggle="true"
                 [pressed]="displayed"
@@ -63,80 +63,80 @@
                 (tap)="toggleMenu()"
                 margin="0 0 10 0"
             >
-            </ext-button>
-        </ext-container>
+            </ExtButton>
+        </ExtContainer>
 
-        <ext-container layout="hbox">
-            <ext-container docked="top"
+        <ExtContainer layout="hbox">
+            <ExtContainer docked="top"
                 ><div #extitem>
                     <div>side</div>
-                </div></ext-container
+                </div></ExtContainer
             >
-        </ext-container>
+        </ExtContainer>
 
-        <ext-segmentedbutton margin="0 0 10 0">
-            <ext-button
+        <ExtSegmentedbutton margin="0 0 10 0">
+            <ExtButton
                 text="left"
                 [pressed]="direct === 'left'"
                 (tap)="directLeft()"
-            ></ext-button>
-            <ext-button
+            ></ExtButton>
+            <ExtButton
                 text="right"
                 [pressed]="direct === 'right'"
                 (tap)="directRight()"
-            ></ext-button>
-            <ext-button
+            ></ExtButton>
+            <ExtButton
                 text="top"
                 [pressed]="direct === 'top'"
                 (tap)="directTop()"
-            ></ext-button>
-            <ext-button
+            ></ExtButton>
+            <ExtButton
                 text="bottom"
                 [pressed]="direct === 'bottom'"
                 (tap)="directBottom()"
-            ></ext-button>
-        </ext-segmentedbutton>
+            ></ExtButton>
+        </ExtSegmentedbutton>
 
-        <ext-container layout="hbox">
-            <ext-container docked="top"
+        <ExtContainer layout="hbox">
+            <ExtContainer docked="top"
                 ><div #extitem>
                     <div>reveal</div>
-                </div></ext-container
+                </div></ExtContainer
             >
-        </ext-container>
+        </ExtContainer>
 
-        <ext-segmentedbutton margin="0 0 10 0">
-            <ext-button
+        <ExtSegmentedbutton margin="0 0 10 0">
+            <ExtButton
                 text="true"
                 [pressed]="reveal"
                 (tap)="setReveal()"
-            ></ext-button>
-            <ext-button
+            ></ExtButton>
+            <ExtButton
                 text="false"
                 [pressed]="reveal"
                 (tap)="unsetReveal()"
-            ></ext-button>
-        </ext-segmentedbutton>
+            ></ExtButton>
+        </ExtSegmentedbutton>
 
-        <ext-container layout="hbox">
-            <ext-container docked="top"
+        <ExtContainer layout="hbox">
+            <ExtContainer docked="top"
                 ><div #extitem>
                     <div>modal</div>
-                </div></ext-container
+                </div></ExtContainer
             >
-        </ext-container>
+        </ExtContainer>
 
-        <ext-segmentedbutton [disabled]="reveal">
-            <ext-button
+        <ExtSegmentedbutton [disabled]="reveal">
+            <ExtButton
                 text="true"
                 [pressed]="modal"
                 (tap)="setModal()"
-            ></ext-button>
-            <ext-button
+            ></ExtButton>
+            <ExtButton
                 text="false"
                 [pressed]="modal"
                 (tap)="unsetModal()"
-            ></ext-button>
-        </ext-segmentedbutton>
-    </ext-panel>
-</ext-container>
+            ></ExtButton>
+        </ExtSegmentedbutton>
+    </ExtPanel>
+</ExtContainer>

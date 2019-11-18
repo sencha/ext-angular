@@ -14,8 +14,8 @@ export class HomeComponent {
     });
     gridCmp: any;
 
-    readyGrid = (event) => {
-        this.gridCmp = event.detail.cmp;
+    readyGrid = ({cmp, cmpObj}) => {
+        this.gridCmp = cmp;
         this.gridCmp.setStore(this.store);
     }
 

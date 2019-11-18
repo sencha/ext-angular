@@ -1,5 +1,5 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
-    <ext-panel
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+    <ExtPanel
         docked="left"
         [title]="'Calendars'"
         [ui]="'light'"
@@ -7,15 +7,15 @@
         [bodyPadding]="5"
         [hidden]="false"
     >
-        <ext-calendar-list [store]="this.store"></ext-calendar-list>
-    </ext-panel>
+        <ExtCalendar_list [store]="this.store"></ExtCalendar_list>
+    </ExtPanel>
 
-    <ext-calendar-month
+    <ExtCalendar_month
         [flex]="1"
         [visibleWeeks]="null"
         [timezoneOffset]="0"
         [gestureNavigation]="false"
         [store]="this.store"
     >
-    </ext-calendar-month>
-</ext-container>
+    </ExtCalendar_month>
+</ExtContainer>

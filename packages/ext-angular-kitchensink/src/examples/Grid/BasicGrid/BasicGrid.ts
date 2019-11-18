@@ -15,7 +15,18 @@ Ext.require([
 })
 export class BasicGridComponent {
 
-  store = Ext.create('Ext.data.Store', {
+  // store = Ext.create('Ext.data.Store', {
+  //   model,
+  //   autoLoad: true,
+  //   pageSize: 0,
+  //   proxy: {
+  //     type: 'ajax',
+  //     url: '/KitchenSink/Companys'
+  //   } 
+  // })
+
+  store = {
+    xtype: 'store',
     model,
     autoLoad: true,
     pageSize: 0,
@@ -23,7 +34,12 @@ export class BasicGridComponent {
       type: 'ajax',
       url: '/KitchenSink/Companys'
     } 
-  })
+  }
+
+
+  columns = [
+    { text: 'Company', dataIndex: 'name'}
+  ]
 
   renderSign = (format, value) =>  {
     var formattedValue = Ext.util.Format.number(value, format);

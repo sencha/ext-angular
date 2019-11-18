@@ -1,13 +1,13 @@
-<ext-container  padding="10" [layout]="'vbox'" [fitToParent]="true">
-    <ext-toolbar  margin="0 0 20 0" shadow>
-        <ext-container  key="1" [style]="{ marginRight: '10px' }"     html='Grouping:'></ext-container>
-        <ext-segmentedbutton  key="2" label="Grouping" >
-            <ext-button  key="1" ui="toolbar-default" [pressed]="grouped" text="ON" [handler]="this.onToggleGrouping.bind(this, true)"></ext-button>
-            <ext-button  key="2" ui="toolbar-default" [pressed]="!grouped" text="OFF" [handler]="this.onToggleGrouping.bind(this, false)"></ext-button>
-        </ext-segmentedbutton>
-    </ext-toolbar>
+<ExtContainer  padding="10" [layout]="'vbox'" [fitToParent]="true">
+    <ExtToolbar  margin="0 0 20 0" shadow>
+        <ExtContainer  key="1" [style]="{ marginRight: '10px' }"     html='Grouping:'></ExtContainer>
+        <ExtSegmentedbutton  key="2" label="Grouping" >
+            <ExtButton  key="1" ui="toolbar-default" [pressed]="grouped" text="ON" [handler]="this.onToggleGrouping.bind(this, true)"></ExtButton>
+            <ExtButton  key="2" ui="toolbar-default" [pressed]="!grouped" text="OFF" [handler]="this.onToggleGrouping.bind(this, false)"></ExtButton>
+        </ExtSegmentedbutton>
+    </ExtToolbar>
 
-    <ext-grid
+    <ExtGrid
         flex="1"
         title="Restaurants"
         shadow
@@ -22,18 +22,18 @@
             "gridfilters": "true"
         }'
     >
-        <ext-column
+        <ExtGridcolumn
             text="Name"
             dataIndex="name"
             flex="1"
             groupHeaderTpl='{columnName}: {value:htmlEncode}'
-        ></ext-column>
-        <ext-column
+        ></ExtGridcolumn>
+        <ExtGridcolumn
             text="Cuisine"
             dataIndex="cuisine"
             flex="1"
-        ></ext-column>
-        <ext-column
+        ></ExtGridcolumn>
+        <ExtGridcolumn
             text="Rating"
             dataIndex="rating"
             summaryCell="numbercell"
@@ -45,6 +45,6 @@
                     xtype: 'rating'
                 }
             }"
-        ></ext-column>
-    </ext-grid>
-</ext-container>
+        ></ExtGridcolumn>
+    </ExtGrid>
+</ExtContainer>

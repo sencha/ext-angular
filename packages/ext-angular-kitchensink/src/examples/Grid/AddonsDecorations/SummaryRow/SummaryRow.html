@@ -1,17 +1,17 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
 
-  <ext-grid
+  <ExtGrid
     title="Summary Row Grid"
     [store]="this.store"
     [shadow]="true"
     [plugins]="{ gridsummaryrow: true }">
 
-    <ext-column text="Company" dataIndex="name" width="150" [summaryRenderer]="this.summarizeCompanies" ></ext-column>
-    <ext-column text="Price" width="75" dataIndex="price" formatter="usMoney" summary="average" ></ext-column>
-    <ext-column text="Change" width="90" dataIndex="priceChange" [renderer]="this.renderSign.bind(this, '0.00')" summary="max" ></ext-column>
-    <ext-column text="% Change" width="100" dataIndex="priceChangePct" [renderer]="this.renderSign.bind(this, '0.00')" summary="average"></ext-column>
-    <ext-column text="Last Updated" width="125" dataIndex="priceLastChange" formatter="date('m/d/Y')" summary="max" ></ext-column>
+    <ExtGridcolumn text="Company" dataIndex="name" width="150" [summaryRenderer]="this.summarizeCompanies" ></ExtGridcolumn>
+    <ExtGridcolumn text="Price" width="75" dataIndex="price" formatter="usMoney" summary="average" ></ExtGridcolumn>
+    <ExtGridcolumn text="Change" width="90" dataIndex="priceChange" [renderer]="this.renderSign.bind(this, '0.00')" summary="max" ></ExtGridcolumn>
+    <ExtGridcolumn text="% Change" width="100" dataIndex="priceChangePct" [renderer]="this.renderSign.bind(this, '0.00')" summary="average"></ExtGridcolumn>
+    <ExtGridcolumn text="Last Updated" width="125" dataIndex="priceLastChange" formatter="date('m/d/Y')" summary="max" ></ExtGridcolumn>
 
-  </ext-grid>
+  </ExtGrid>
 
-</ext-container>
+</ExtContainer>

@@ -1,26 +1,31 @@
-<ext-container
+<ExtContainer
     (ready)="readyViewport($event)"
     [viewport]="true"
-    [fullscreen]="true"
     layout="fit"
 >
-    <ext-titlebar [title]="title" docked="top">
-        <ext-button align="left" *ngIf="isPhone" iconCls="x-fa fa-bars" (tap)="toggleAppMenu($event)" ripple="false"></ext-button>
-    </ext-titlebar>
+    <ExtTitlebar [title]="title" docked="top">
+        <ExtButton align="left" *ngIf="isPhone" iconCls="x-fa fa-bars" (tap)="toggleAppMenu($event)" ripple="false"></ExtButton>
+    </ExtTitlebar>
 
-    <ext-panel docked="left" shadow="true" [hidden]="false">
-        <ext-treelist
+    <ExtPanel docked="left" shadow="true" [hidden]="false">
+        <ExtTreelist
+            extname="navTreelist"
             (ready)="readyNavTreeList($event)"
             (selectionchange)="selectionchangeNavTreeList($event)"
             [width]="200"
             ui="nav"
             expanderFirst="false"
         >
-        </ext-treelist>
-    </ext-panel>
+        </ExtTreelist>
+    </ExtPanel>
 
-    <div #extitem>
-        <router-outlet id="route"></router-outlet>
-    </div>
+<ExtContainer html="route">
+    <router-outlet #xextitem xstyle="display:flex;flex:1;" id="route"></router-outlet>
+</ExtContainer>
 
-</ext-container>
+    <!-- <div #extitem xstyle="display:flex;flex:1;">
+        hello
+        <router-outlet xstyle="display:flex;flex:1;" id="route"></router-outlet>
+    </div> -->
+
+</ExtContainer>

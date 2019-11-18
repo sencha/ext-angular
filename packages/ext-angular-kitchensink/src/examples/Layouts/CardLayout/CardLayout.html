@@ -1,5 +1,5 @@
-<ext-container  [layout]="vbox" [padding]="10">
-    <ext-panel
+<ExtContainer  [layout]="vbox" [padding]="10">
+    <ExtPanel
         [width]="'auto'"
         shadow="true"
         ui="instructions"
@@ -7,8 +7,8 @@
         [html]="'A <b>card</b> layout shows one item at a time. Each item takes on the
             full height and width of the container. Card layouts can optionally be configured to
             animate when switching cards.'"
-    ></ext-panel>
-    <ext-container
+    ></ExtPanel>
+    <ExtContainer
         [height]="300"
         [layout]="{ type: 'card', animation: animation }"
         [activeItem]="activeCard"
@@ -16,27 +16,27 @@
         shadow="true"
         [defaults]="{scrollable: 'y'}"
     >
-        <ext-panel  [bodyStyle]="colors.card.blue" shadow="true">
-            <ext-container  *ngFor="let card of contents;let index=i">
-                <ext-button
+        <ExtPanel  [bodyStyle]="colors.card.blue" shadow="true">
+            <ExtContainer  *ngFor="let card of contents;let index=i">
+                <ExtButton
                     [margin]="card.margin ? card.margin : null"
                     key="i"
                     [text]="card.text"
                     [ui]="'alt'"
                     (tap)="switchCards(card.animation)"
-                ></ext-button>
-            </ext-container>
-        </ext-panel>
-        <ext-panel  [bodyStyle]="colors.card.green" shadow="true">
-            <ext-container  *ngFor="let card of contents; let index=i">
-                <ext-button
+                ></ExtButton>
+            </ExtContainer>
+        </ExtPanel>
+        <ExtPanel  [bodyStyle]="colors.card.green" shadow="true">
+            <ExtContainer  *ngFor="let card of contents; let index=i">
+                <ExtButton
                     [margin]="card.margin ? card.margin : null"
                     key="i"
                     [text]="card.text"
                     [ui]="'alt'"
                     (tap)="switchCards(card.animation)"
-                ></ext-button>
-            </ext-container>
-        </ext-panel>
-    </ext-container>
-</ext-container>
+                ></ExtButton>
+            </ExtContainer>
+        </ExtPanel>
+    </ExtContainer>
+</ExtContainer>

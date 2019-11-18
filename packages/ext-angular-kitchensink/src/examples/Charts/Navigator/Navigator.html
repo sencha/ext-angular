@@ -1,23 +1,23 @@
-<ext-container
+<ExtContainer
     [padding]="!isPhone ? '10' : ''"
     layout="vbox"
     [fitToParent]="true"
 >
-    <ext-container><div #extitem>
+    <ExtContainer><div #extitem>
         <chart-toolbar
             [onThemeChange]="this.changeTheme"
             [onToggleZoomOnPan]="this.toggleZoomOnPan"
             [theme]="theme"
         >
         </chart-toolbar>
-    </div></ext-container>
+    </div></ExtContainer>
 
-    <ext-chartnavigator
+    <ExtChartnavigator
         flex="1"
         [shadow]="true"
         (ready)="chartNavReady($event)"
         [navigator]="{ axis: 'bottom', downloadServerUrl: 'http://svg.sencha.io' }"
         [chart]="chartNavChart"
     >
-    </ext-chartnavigator>
-</ext-container>
+    </ExtChartnavigator>
+</ExtContainer>

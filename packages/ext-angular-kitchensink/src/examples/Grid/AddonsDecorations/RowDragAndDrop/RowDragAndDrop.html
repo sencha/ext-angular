@@ -1,5 +1,5 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
-    <ext-grid
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+    <ExtGrid
       [store]="this.store"
       [layout]="'fit'"
       [shadow]="true"
@@ -7,20 +7,20 @@
       [selectable]="this.selectable"
       [plugins]="{ gridrowdragdrop: true }"
     >
-      <ext-column
+      <ExtGridcolumn
         text="Name"
         dataIndex="fullName"
         width="150"
         checked="true"
       >
-      </ext-column>
-      <ext-column
+      </ExtGridcolumn>
+      <ExtGridcolumn
         text="Email"
         dataIndex="email"
         [flex]="1"
         [sortable]="true"
         checked="true"
        >
-       </ext-column>
-    </ext-grid>
-</ext-container>
+       </ExtGridcolumn>
+    </ExtGrid>
+</ExtContainer>

@@ -1,4 +1,4 @@
-<ext-panel
+<ExtPanel
     [layout]="{
         type: 'box'
     }"
@@ -9,22 +9,22 @@
     maxWidth="800"
     (ready)="parentPanelReady($event)"
 >
-    <ext-panel
+    <ExtPanel
         title="Patients"
         flex="0.4"
         border="true"
         scrollable="y"
         (ready)="dataPanelReady($event)"
     >
-        <ext-dataview
+        <ExtDataview
             (ready)="dataViewReady($event)"
             [itemTpl]="patientTpl"
             [store]="patientStore"
         >
-        </ext-dataview>
-    </ext-panel>
-    <ext-spacer maxHeight="20" maxWidth="20"> </ext-spacer>
-    <ext-grid
+        </ExtDataview>
+    </ExtPanel>
+    <ExtSpacer maxHeight="20" maxWidth="20"> </ExtSpacer>
+    <ExtGrid
         title="Hospitals"
         flex="0.6"
         cls="dd-hospital-grid"
@@ -43,9 +43,9 @@
             tap: this.onRemoveTapped
         }"
     >
-        <ext-column dataIndex="name" text="Name" flex="1"> </ext-column>
-        <ext-column dataIndex="address" text="Address" flex="1"> </ext-column>
-        <ext-column dataIndex="telephone" text="Telephone" flex="1">
-        </ext-column>
-    </ext-grid>
-</ext-panel>
+        <ExtGridcolumn dataIndex="name" text="Name" flex="1"> </ExtGridcolumn>
+        <ExtGridcolumn dataIndex="address" text="Address" flex="1"> </ExtGridcolumn>
+        <ExtGridcolumn dataIndex="telephone" text="Telephone" flex="1">
+        </ExtGridcolumn>
+    </ExtGrid>
+</ExtPanel>

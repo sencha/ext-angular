@@ -1,27 +1,27 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
 
 
-<ext-panel [shadow]="true" [top]="top" [left]="left" [width]="width" [height]="height">
+<ExtPanel [shadow]="true" [top]="top" [left]="left" [width]="width" [height]="height">
 
-  <ext-toolbar [shadow]="false">
-    <ext-container style="margin-right: 10px;" html="Default UI:"></ext-container>
-    <ext-segmentedbutton (change)="onButton1Change($event)">
-      <ext-button [value]="'low'"    [text]="'Low'"></ext-button>
-      <ext-button [value]="'medium'" [text]="'Medium'"></ext-button>
-      <ext-button [value]="'high'"   [text]="'High'"></ext-button>
-    </ext-segmentedbutton>
-  </ext-toolbar>
+  <ExtToolbar [shadow]="false">
+    <ExtContainer style="margin-right: 10px;" html="Default UI:"></ExtContainer>
+    <ExtSegmentedbutton (change)="onButton1Change($event)">
+      <ExtButton [value]="'low'"    [text]="'Low'"></ExtButton>
+      <ExtButton [value]="'medium'" [text]="'Medium'"></ExtButton>
+      <ExtButton [value]="'high'"   [text]="'High'"></ExtButton>
+    </ExtSegmentedbutton>
+  </ExtToolbar>
 
-  <ext-toolbar [shadow]="false">
-    <ext-container style="margin-right: 10px;" html="Toolbar UI:"></ext-container>
-    <ext-segmentedbutton
+  <ExtToolbar [shadow]="false">
+    <ExtContainer style="margin-right: 10px;" html="Toolbar UI:"></ExtContainer>
+    <ExtSegmentedbutton
       [defaultUI]="'toolbar-default'"
       (change)="onButton2Change($event)">
-      <ext-button [value]="'low'"    [text]="'Low'"></ext-button>
-      <ext-button [value]="'medium'" [text]="'Medium'"></ext-button>
-      <ext-button [value]="'high'"   [text]="'High'"></ext-button>
-    </ext-segmentedbutton>
-  </ext-toolbar>
+      <ExtButton [value]="'low'"    [text]="'Low'"></ExtButton>
+      <ExtButton [value]="'medium'" [text]="'Medium'"></ExtButton>
+      <ExtButton [value]="'high'"   [text]="'High'"></ExtButton>
+    </ExtSegmentedbutton>
+  </ExtToolbar>
 
-</ext-panel>
-</ext-container>
+</ExtPanel>
+</ExtContainer>

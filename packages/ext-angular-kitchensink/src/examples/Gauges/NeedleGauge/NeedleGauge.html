@@ -1,37 +1,37 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
-    <ext-formpanel layout="vbox" [shadow]="true">
-        <ext-sliderfield
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+    <ExtFormpanel layout="vbox" [shadow]="true">
+        <ExtSliderfield
             label="Value"
             (change)="updateGauges($event)"
             [value]="value"
-        ></ext-sliderfield>
-        <ext-container flex="1" layout="hbox">
-            <ext-container flex="1" layout="vbox">
-                <ext-gauge
+        ></ExtSliderfield>
+        <ExtContainer flex="1" layout="hbox">
+            <ExtContainer flex="1" layout="vbox">
+                <ExtGauge
                     flex="1"
                     [value]="value"
                     [needle]="{ outerRadius: '100%' }"
                     [valueStyle]="{ display: 'none' }"
-                ></ext-gauge>
-                <ext-gauge
+                ></ExtGauge>
+                <ExtGauge
                     flex="1"
                     [value]="value"
                     [needle]="'wedge'"
-                ></ext-gauge>
-            </ext-container>
-            <ext-container flex="1" layout="vbox">
-                <ext-gauge
+                ></ExtGauge>
+            </ExtContainer>
+            <ExtContainer flex="1" layout="vbox">
+                <ExtGauge
                     flex="1"
                     [value]="value"
                     [needle]="'spike'"
-                ></ext-gauge>
-                <ext-gauge
+                ></ExtGauge>
+                <ExtGauge
                     flex="1"
                     [value]="value"
                     [textOffset]="{ dy: 45 }"
                     [needle]="{ type: 'arrow', innerRadius: 0 }"
-                ></ext-gauge>
-            </ext-container>
-        </ext-container>
-    </ext-formpanel>
-</ext-container>
+                ></ExtGauge>
+            </ExtContainer>
+        </ExtContainer>
+    </ExtFormpanel>
+</ExtContainer>

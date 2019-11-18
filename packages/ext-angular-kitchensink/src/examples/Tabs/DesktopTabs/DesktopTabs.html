@@ -1,42 +1,42 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
-    <ext-tabpanel
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+    <ExtTabpanel
         [flex]="1"
         [shadow]="true"
         [tabBar]="{ layout: { pack: 'left' } }"
     >
-        <ext-panel
+        <ExtPanel
             [flex]="1"
             [title]="'Tab 1'"
             [layout]="'center'"
             tab="{flex: 0,minWidth: 100}"
         >
-            <ext-container
+            <ExtContainer
                 [html]="
                     'When optimizing for desktops, you may want to tabs on the left side of the tab bar.  You can do this by setting <code>pack: \'left\'</code> in the tab bar\'s layout config.'
                 "
-            ></ext-container>
-        </ext-panel>
-        <ext-panel
+            ></ExtContainer>
+        </ExtPanel>
+        <ExtPanel
             [flex]="1"
             [title]="'Tab 2'"
             [layout]="'center'"
             tab="{flex: 0,minWidth: 100}"
         >
-            <ext-container
+            <ExtContainer
                 [cls]="'action'"
                 [html]="'User tapped Tab 2'"
-            ></ext-container>
-        </ext-panel>
-        <ext-panel
+            ></ExtContainer>
+        </ExtPanel>
+        <ExtPanel
             [flex]="1"
             [title]="'Tab 3'"
             [layout]="'center'"
             tab="{flex: 0,minWidth: 100}"
         >
-            <ext-container
+            <ExtContainer
                 [cls]="'action'"
                 [html]="'User tapped Tab 3'"
-            ></ext-container>
-        </ext-panel>
-    </ext-tabpanel>
-</ext-container>
+            ></ExtContainer>
+        </ExtPanel>
+    </ExtTabpanel>
+</ExtContainer>

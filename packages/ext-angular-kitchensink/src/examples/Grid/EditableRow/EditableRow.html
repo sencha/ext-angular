@@ -1,5 +1,5 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
-    <ext-grid
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+    <ExtGrid
         title="Row Editing"
         [store]="plants"
         [shadow]="true"
@@ -9,15 +9,15 @@
         [markDirty]="true"
         [plugins]="{ rowedit: { autoConfirm: false } }"
     >
-        <ext-column
+        <ExtGridcolumn
             text="Common Name"
             [flex]="1"
             [width]="100"
             dataIndex="common"
             [editable]="true"
         >
-        </ext-column>
-        <ext-column
+        </ExtGridcolumn>
+        <ExtGridcolumn
             text="Light"
             [width]="125"
             [flex]="1"
@@ -34,8 +34,8 @@
                 ]
             }"
         >
-        </ext-column>
-        <ext-column
+        </ExtGridcolumn>
+        <ExtGridcolumn
             text="Price"
             [width]="100"
             [flex]="1"
@@ -43,21 +43,21 @@
             dataIndex="price"
             [editable]="true"
         >
-        </ext-column>
-        <ext-datecolumn
+        </ExtGridcolumn>
+        <ExtDatecolumn
             text="Available"
             [width]="125"
             [flex]="1"
             dataIndex="availDate"
             [editable]="true"
         >
-        </ext-datecolumn>
-        <ext-checkcolumn
+        </ExtDatecolumn>
+        <ExtCheckcolumn
             text="Indoor?"
             [flex]="1"
             dataIndex="indoor"
             [headerCheckbox]="true"
         >
-        </ext-checkcolumn>
-    </ext-grid>
-</ext-container>
+        </ExtCheckcolumn>
+    </ExtGrid>
+</ExtContainer>

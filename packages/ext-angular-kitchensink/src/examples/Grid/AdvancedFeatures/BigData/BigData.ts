@@ -250,21 +250,21 @@ export class BigDataComponent {
 absensesColumn = [
     {
     text: 'Illness',
-    xtype: 'textcolumn',
+    xtype: 'tExtGridcolumn',
     dataIndex: "sickDays",
     align: 'center',
     summary: 'sum'
 },
 {
     text:"Holidays",
-    xtype: 'textcolumn',
+    xtype: 'tExtGridcolumn',
     dataIndex:"holidayDays",
     align:'center',
     summary:'sum'
 },
 {
     text:"Holiday Allowance",
-    xtype: 'textcolumn',
+    xtype: 'tExtGridcolumn',
     dataIndex:"holidayAllowance",
     align:'center',
     summary:'sum',

@@ -1,38 +1,40 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
-  <ext-grid
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+  <ExtGrid
     title="Stock Prices"
     [store]="store"
     [shadow]="true"
-    enableColumnMove="true">
-    <ext-column
+    enableColumnMove="true"
+
+  >
+    <ExtGridcolumn
       text="Company"
       width="150"
       dataIndex="name">
-    </ext-column>
-    <ext-column
+    </ExtGridcolumn>
+    <ExtGridcolumn
       text="Price"
       width="85"
       dataIndex="price"
       formatter="usMoney">
-    </ext-column>
-    <ext-column
+    </ExtGridcolumn>
+    <!-- <ExtGridcolumn
       text="Change"
       width="100"
       dataIndex="priceChange"
       [cell]="{encodeHtml:false}"
       [renderer]="this.renderSign.bind(this,'0.00')">
-    </ext-column>
-    <ext-column
+    </ExtGridcolumn>
+    <ExtGridcolumn
       text="% Change"
       dataIndex="priceChangePct"
       [cell]="{encodeHtml:false}"
       [renderer]="this.renderSign.bind(this,'0.00')">
-    </ext-column>
-    <ext-column
+    </ExtGridcolumn> -->
+    <ExtGridcolumn
       text="Last Updated"
       width="125"
       dataIndex="lastChange"
       formatter='date("m/d/Y")'>
-    </ext-column>
-  </ext-grid>
-</ext-container>
+    </ExtGridcolumn>
+  </ExtGrid>
+</ExtContainer>

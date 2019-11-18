@@ -1,5 +1,5 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
-    <ext-formpanel
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+    <ExtFormpanel
         [shadow]="true"
         [top]="top"
         [left]="left"
@@ -8,19 +8,13 @@
         [layout]="{ type: 'vbox', align: 'left' }"
         [bodyPadding]="10"
     >
-        <ext-checkboxfield [boxLabel]="'Unchecked'"></ext-checkboxfield>
-        <ext-checkboxfield
-            [boxLabel]="'Checked'"
-            [checked]="true"
-        ></ext-checkboxfield>
-        <ext-checkboxfield
-            [boxLabel]="'Disabled'"
-            [disabled]="true"
-        ></ext-checkboxfield>
-        <ext-checkboxfield
+        <ExtCheckbox [boxLabel]="'Unchecked'"></ExtCheckbox>
+        <ExtCheckbox [boxLabel]="'Checked'" [checked]="true"></ExtCheckbox>
+        <ExtCheckbox [boxLabel]="'Disabled'" [disabled]="true"></ExtCheckbox>
+        <ExtCheckbox
             [boxLabel]="'Disabled (checked)'"
             [checked]="true"
             [disabled]="true"
-        ></ext-checkboxfield>
-    </ext-formpanel>
-</ext-container>
+        ></ExtCheckbox>
+    </ExtFormpanel>
+</ExtContainer>

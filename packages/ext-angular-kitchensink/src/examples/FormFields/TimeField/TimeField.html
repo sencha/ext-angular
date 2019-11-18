@@ -1,5 +1,5 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
-    <ext-formpanel
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+    <ExtFormpanel
         (ready)="readyForm($event)"
         [shadow]="true"
         [top]="top"
@@ -8,33 +8,33 @@
         [height]="height"
         padding="20"
     >
-        <ext-fieldset
+        <ExtFieldset
             [title]="'Personal Info'"
             [defaults]="{ labelAlign: 'placeholder' }"
         >
-            <ext-timefield
+            <ExtTimefield
                 [required]="true"
                 [label]="'Time Field'"
                 [value]="'3:42 PM'"
                 [name]="'time'"
                 [disabled]="disabled"
-            ></ext-timefield>
-        </ext-fieldset>
+            ></ExtTimefield>
+        </ExtFieldset>
 
-        <ext-toolbar
+        <ExtToolbar
             [shadow]="false"
             [docked]="'bottom'"
             [layout]="{ type: 'hbox', pack: 'right' }"
         >
-            <ext-button
+            <ExtButton
                 [text]="disabled ? 'Enable All' : 'Disable All'"
                 [margin]="'0 10 0 0'"
                 (tap)="toggleDisabled($event)"
-            ></ext-button>
-            <ext-button
+            ></ExtButton>
+            <ExtButton
                 [text]="'Reset'"
                 (tap)="tapReset($event)"
-            ></ext-button>
-        </ext-toolbar>
-    </ext-formpanel>
-</ext-container>
+            ></ExtButton>
+        </ExtToolbar>
+    </ExtFormpanel>
+</ExtContainer>
