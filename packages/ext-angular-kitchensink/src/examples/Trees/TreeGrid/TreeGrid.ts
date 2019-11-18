@@ -22,7 +22,7 @@ export class TreeGridComponent {
 
   tree:any;
   treeReady = (event) => {
-    this.tree = event.detail.cmp;
+    this.tree = event.cmp;
   }
 
 }

@@ -20,7 +20,7 @@ export class ClosableTabsComponent {
 
   tabPanel:any;
   tabPanelReady = (event) => {
-    this.tabPanel = event.detail.cmp;
+    this.tabPanel = event.cmp;
   }
 
   tabPanelAdded = (event) => {

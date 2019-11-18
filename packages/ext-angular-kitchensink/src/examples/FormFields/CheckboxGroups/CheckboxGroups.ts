@@ -14,7 +14,7 @@ export class CheckBoxGroupsComponent {
 
   onParentPanelReady = (event) => {
       console.log('onParentPanelReady')
-    this.parentPanelCmp = event.detail.cmp;
+    this.parentPanelCmp = event.cmp;
   }
 
   onSaveFormClick = () => {

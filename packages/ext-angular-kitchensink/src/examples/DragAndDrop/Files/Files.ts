@@ -17,7 +17,7 @@ export class FilesDragDropComponent {
   timer:any;
 
   parentReady = (event) => {
-    this.parentRef = event.detail.cmp.el;
+    this.parentRef = event.cmp.el;
     this.target.setElement(this.parentRef);
     this.parentRef.destroy = this.doDestroy.bind(this);
   }

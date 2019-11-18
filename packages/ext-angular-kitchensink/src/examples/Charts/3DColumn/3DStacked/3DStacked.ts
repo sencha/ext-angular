@@ -25,7 +25,7 @@ export class ThreeDStackedComponent {
   chart:any;
 
   chartNavReady = function(event) {
-    this.chart = event.detail.cmp;
+    this.chart = event.cmp;
   }
 
   onStackedToggle = event => {

@@ -20,7 +20,7 @@ export class ProxiesDragDropComponent {
   }
 
   parentReady = (event) => {
-    this.parentRef = event.detail.cmp.el;
+    this.parentRef = event.cmp.el;
     this.sources[0].setConstrain(this.parentRef);
     this.sources[1].setConstrain(this.parentRef);
     this.sources[2].setConstrain(this.parentReady);
@@ -28,17 +28,17 @@ export class ProxiesDragDropComponent {
   }
 
   noneEleReady = (event) => {
-    this.noneRef = event.detail.cmp.el;
+    this.noneRef = event.cmp.el;
     this.sources[0].setElement(this.noneRef);
   }
 
   originalEleReady = (event) => {
-    this.originalRef = event.detail.cmp.el;
+    this.originalRef = event.cmp.el;
     this.sources[1].setElement(this.originalRef);
   }
 
   placeholderEleReady = (event) => {
-    this.placeholderRef = event.detail.cmp.el;
+    this.placeholderRef = event.cmp.el;
     this.sources[2].setElement(this.placeholderRef);
   }
 

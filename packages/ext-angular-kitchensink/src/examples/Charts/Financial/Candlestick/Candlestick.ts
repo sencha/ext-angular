@@ -35,7 +35,7 @@ export class CandlestickComponent {
   crosshair:any;
   chart:any;
   chartNavReady = function(event) {
-    this.chart = event.detail.cmp;
+    this.chart = event.cmp;
     this.panzoom = this.chart.getInteraction('panzoom');
     this.crosshair = this.chart.getInteraction('crosshair');
   }

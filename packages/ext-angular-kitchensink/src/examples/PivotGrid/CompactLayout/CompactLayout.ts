@@ -20,7 +20,7 @@ export class CompactLayoutComponent {
   pivotgrid:any;
 
   onPivotGridRead = function(event) {
-    this.pivotgrid = event.detail.cmp;
+    this.pivotgrid = event.cmp;
   }
 
   expandAll = () => { this.pivotgrid.expandAll() }

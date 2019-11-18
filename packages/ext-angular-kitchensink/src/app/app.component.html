@@ -22,7 +22,7 @@
 
         (change)="changeBreadcrumb($event)"
         showIcons= "true"
-        
+
         useSplitExtButtons="true"
         width="100%"
         height="100%"
@@ -134,7 +134,7 @@
           [scrollable]="true"
           [title]="file.name"
           [ui]="'code-ExtPanel'"
-          tab="{ui: 'app-code-tab', flex: 0, minWidth: 120}"
+          [tab]="{ui: 'app-code-tab', flex: 0, minWidth: 120}"
           [userSelectable]="{element: true, bodyElement: true}"
           [html]="file.code"
         >

@@ -17,7 +17,7 @@ export class TimeFieldComponent {
 
   readyForm = (event) => {
       console.log('onReady')
-    this.formPanelRef = event.detail.cmp;
+    this.formPanelRef = event.cmp;
   }
 
   tapReset = (event) => {

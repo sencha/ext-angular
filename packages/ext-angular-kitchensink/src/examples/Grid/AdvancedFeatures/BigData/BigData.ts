@@ -34,7 +34,7 @@ export class BigDataComponent {
 
   grid:any;
   gridReady = (event) => {
-    this.grid = event.detail.cmp;
+    this.grid = event.cmp;
   }
 
   rowBodyTpl=`

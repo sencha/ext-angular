@@ -24,7 +24,7 @@ export class DonutComponent {
 
   chart: any;
   chartNavReady = function (event) {
-    this.chart = event.detail.cmp;
+    this.chart = event.cmp;
   };
 
   onResize = (view, width, height) => {

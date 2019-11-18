@@ -18,7 +18,7 @@ export class DrawComponent {
   drawRef: any;
 
     onReady = (event) => {
-        this.drawRef = event.detail.cmp;
+        this.drawRef = event.cmp;
         this.drawRef.on({
             element: 'element',
             mousedown: this.onMouseDown,

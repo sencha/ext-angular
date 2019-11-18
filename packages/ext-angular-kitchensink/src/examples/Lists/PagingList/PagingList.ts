@@ -46,7 +46,7 @@ export class PagingListComponent {
 
   list: any;
   listReady = (event) => {
-    this.list = event.detail.cmp;
+    this.list = event.cmp;
   }
 
 }
