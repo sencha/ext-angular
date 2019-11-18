@@ -1,5 +1,5 @@
-<ext-container [padding]="10" [fitToParent]="true">
-    <ext-panel
+<ExtContainer [padding]="10" [fitToParent]="true">
+    <ExtPanel
         [title]="'Resize Me'"
         [shadow]="true"
         [layout]="'fit'"
@@ -11,19 +11,19 @@
         [resizable]="{ edges: 'all', dynamic: doDynamically }"
         [bodyPadding]="10"
     >
-        <ext-toolbar [docked]="'top'">
-            <ext-checkboxfield
+        <ExtToolbar [docked]="'top'">
+            <ExtCheckbox
                 [checked]="doDynamically"
                 (change)="toggleDynamic($event)"
                 [boxLabel]="'Dynamic'"
             >
-            </ext-checkboxfield>
-        </ext-toolbar>
+            </ExtCheckbox>
+        </ExtToolbar>
 
-        <ext-container>
+        <ExtContainer>
             <span #extitem>
                 {{ bodyText }}
             </span>
-        </ext-container>
-    </ext-panel>
-</ext-container>
+        </ExtContainer>
+    </ExtPanel>
+</ExtContainer>

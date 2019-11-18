@@ -1,10 +1,10 @@
-<ext-container
+<ExtContainer
     [padding]="isPhone ? 0 : 20"
     [width]="!isPhone && 325"
     [layout]="isPhone ? 'fit' : 'auto'"
 >
-    <ext-toolbar docked="top" [ui]="transparent">
-        <ext-togglefield
+    <ExtToolbar docked="top" [ui]="transparent">
+        <ExtTogglefield
             boxLabel="is Meridiem (12 hour)"
             name="hourformat"
             reference="hourformat"
@@ -13,8 +13,8 @@
             value="true"
             (change)="this.onMeridiemChange($event)"
         >
-        </ext-togglefield>
-        <ext-togglefield
+        </ExtTogglefield>
+        <ExtTogglefield
             boxLabel="PM hours Inside"
             name="pminside"
             reference="hourformat"
@@ -24,13 +24,13 @@
             [value]="this.isValue"
             (change)="this.onPMHoursChange($event)"
         >
-        </ext-togglefield>
-    </ext-toolbar>
-    <ext-timepanel
+        </ExtTogglefield>
+    </ExtToolbar>
+    <ExtTimepanel
         [shadow]="true"
         [meridiem]="this.isMeridiem"
         [alignPMInside]="this.isalignPMInside"
         alignFormatInside="false"
     >
-    </ext-timepanel>
-</ext-container>
+    </ExtTimepanel>
+</ExtContainer>

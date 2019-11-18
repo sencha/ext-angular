@@ -1,4 +1,4 @@
-<ext-formpanel
+<ExtFormpanel
     (ready)="onParentPanelReady($event)"
     title="Checkbox Group Example"
     [bodyPadding]="20"
@@ -7,7 +7,7 @@
     [width]="750"
     margin="10"
 >
-    <ext-container
+    <ExtContainer
         [layout]="{
             type: 'box',
             vertical: false
@@ -27,86 +27,86 @@
             }
         }"
     >
-        <ext-fieldset
+        <ExtFieldset
             title="Individual Checkboxes"
             [defaultType]="checkbox"
             [layout]="'form'"
             [padding]="0"
             [flex]="1"
         >
-            <ext-textfield
+            <ExtTextfield
                 [name]="'txt-test1'"
                 [label]="'Alignment Test:'"
-            ></ext-textfield>
-            <ext-checkboxfield
+            ></ExtTextfield>
+            <ExtCheckbox
                 [boxLabel]="'Dog'"
                 [checked]="true"
                 [label]="'Favorite Animals'"
                 [name]="'fav-animal-dog'"
                 [inputValue]="'dog'"
             >
-            </ext-checkboxfield>
-            <ext-checkboxfield
+            </ExtCheckbox>
+            <ExtCheckbox
                 [boxLabel]="'Cat'"
                 [checked]="true"
                 [disabled]="true"
                 [name]="'fav-animal-cat'"
                 [inputValue]="'cat'"
             >
-            </ext-checkboxfield>
-            <ext-checkboxfield
+            </ExtCheckbox>
+            <ExtCheckbox
                 [boxLabel]="'Monkey'"
                 [name]="'fav-animal-monkey'"
                 [inputValue]="'monkey'"
             >
-            </ext-checkboxfield>
-        </ext-fieldset>
-        <ext-component [width]="10"></ext-component>
-        <ext-fieldset
+            </ExtCheckbox>
+        </ExtFieldset>
+        <ExtComponent [width]="10"></ExtComponent>
+        <ExtFieldset
             title="Individual Radios"
             [defaultType]="radio"
             [layout]="'form'"
             [padding]="0"
             [flex]="1"
         >
-            <ext-textfield
+            <ExtTextfield
                 [name]="'txt-test2'"
                 [label]="'Alignment Test 2:'"
-            ></ext-textfield>
-            <ext-radiofield
+            ></ExtTextfield>
+            <ExtRadio
                 [boxLabel]="'Red'"
                 [checked]="true"
                 [label]="'Favorite Color'"
                 [name]="'fav-color'"
                 [inputValue]="'red'"
             >
-            </ext-radiofield>
-            <ext-radiofield
+            </ExtRadio>
+            <ExtRadio
                 [boxLabel]="'Blue'"
                 [checked]="true"
                 [disabled]="true"
                 [name]="'fav-color'"
                 [inputValue]="'blue'"
             >
-            </ext-radiofield>
-            <ext-radiofield
+            </ExtRadio>
+            <ExtRadio
                 [boxLabel]="'Green'"
                 [name]="'fav-color'"
                 [inputValue]="'green'"
             >
-            </ext-radiofield>
-        </ext-fieldset>
-    </ext-container>
-    <ext-fieldset title="Checkbox Groups">
-        <ext-textfield
+            </ExtRadio>
+        </ExtFieldset>
+    </ExtContainer>
+    <ExtFieldset title="Checkbox Groups">
+        <ExtTextfield
             [name]="'txt-test3'"
             [label]="'Alignment Test:'"
             [labelAlign]="'left'"
             [labelWidth]="120"
             [margin]="10"
         >
-        </ext-textfield>
-        <ext-checkboxgroup
+        </ExtTextfield>
+        <ExtCheckboxgroup
             [label]="'Auto Layout:'"
             [cls]="'x-check-group-alt'"
             [labelAlign]="'left'"
@@ -119,8 +119,8 @@
                 { label: 'Item 4', name: 'cb-auto-4' }
             ]"
         >
-        </ext-checkboxgroup>
-        <ext-checkboxgroup
+        </ExtCheckboxgroup>
+        <ExtCheckboxgroup
             [label]="'Single Column:'"
             [width]="250"
             [labelAlign]="'left'"
@@ -132,8 +132,8 @@
                 { label: 'Item 3', name: 'cb-auto-3' }
             ]"
         >
-        </ext-checkboxgroup>
-        <ext-checkboxgroup
+        </ExtCheckboxgroup>
+        <ExtCheckboxgroup
             [label]="'Multi-Column<br />(horizontal):'"
             [cls]="'x-check-group-alt'"
             [labelAlign]="'left'"
@@ -156,8 +156,8 @@
                 { label: 'Item 6', name: 'cb-horiz-6' }
             ]"
         >
-        </ext-checkboxgroup>
-        <ext-checkboxgroup
+        </ExtCheckboxgroup>
+        <ExtCheckboxgroup
             [label]="'Multi-Column<br />(vertical):'"
             [vertical]="true"
             [height]="90"
@@ -183,8 +183,8 @@
                 { label: 'Item 6', name: 'cb-vert-6' }
             ]"
         >
-        </ext-checkboxgroup>
-        <ext-checkboxgroup
+        </ExtCheckboxgroup>
+        <ExtCheckboxgroup
             [label]="'Multi-Column<br />(custom widths):'"
             [cls]="'x-check-group-alt'"
             [labelAlign]="'left'"
@@ -218,8 +218,8 @@
                 }
             ]"
         >
-        </ext-checkboxgroup>
-        <ext-checkboxgroup
+        </ExtCheckboxgroup>
+        <ExtCheckboxgroup
             [label]="'Multi-Column<br />(custom widths):'"
             [cls]="'multi-column-checkbox-group'"
             [vertical]="true"
@@ -231,53 +231,53 @@
             [labelAlign]="'left'"
             [labelWidth]="120"
         >
-            <ext-container [width]="140" [height]="120">
-                <ext-component
+            <ExtContainer [width]="140" [height]="120">
+                <ExtComponent
                     [html]="'Heading 1'"
                     [padding]="'0 2'"
-                ></ext-component>
-                <ext-checkboxfield
+                ></ExtComponent>
+                <ExtCheckbox
                     [labelAlign]="'right'"
                     [label]="'Item 1'"
                     [name]="'cb-cust-1'"
-                ></ext-checkboxfield>
-                <ext-checkboxfield
+                ></ExtCheckbox>
+                <ExtCheckbox
                     [labelAlign]="'right'"
                     [label]="'Item 2'"
                     [name]="'cb-cust-2'"
-                ></ext-checkboxfield>
-            </ext-container>
-            <ext-container [width]="180" [height]="120">
-                <ext-component
+                ></ExtCheckbox>
+            </ExtContainer>
+            <ExtContainer [width]="180" [height]="120">
+                <ExtComponent
                     [html]="'Heading 2'"
                     [padding]="'0 2'"
-                ></ext-component>
-                <ext-checkboxfield
+                ></ExtComponent>
+                <ExtCheckbox
                     [labelAlign]="'right'"
                     [label]="'A long item just for fun'"
                     [name]="'cb-cust-3'"
-                ></ext-checkboxfield>
-            </ext-container>
-            <ext-container [width]="140" [height]="120">
-                <ext-component
+                ></ExtCheckbox>
+            </ExtContainer>
+            <ExtContainer [width]="140" [height]="120">
+                <ExtComponent
                     [html]="'Heading 3'"
                     [padding]="'0 2'"
-                ></ext-component>
-                <ext-checkboxfield
+                ></ExtComponent>
+                <ExtCheckbox
                     [labelAlign]="'right'"
                     [label]="'Item 4'"
                     [name]="'cb-cust-4'"
-                ></ext-checkboxfield>
-                <ext-checkboxfield
+                ></ExtCheckbox>
+                <ExtCheckbox
                     [labelAlign]="'right'"
                     [label]="'Item 5'"
                     [name]="'cb-cust-5'"
-                ></ext-checkboxfield>
-            </ext-container>
-        </ext-checkboxgroup>
-    </ext-fieldset>
-    <ext-container>
-        <ext-button [text]="'Save'" (tap)="onSaveFormClick()"> </ext-button>
-        <ext-button [text]="'Reset'" (tap)="onResetFormClick()"> </ext-button>
-    </ext-container>
-</ext-formpanel>
+                ></ExtCheckbox>
+            </ExtContainer>
+        </ExtCheckboxgroup>
+    </ExtFieldset>
+    <ExtContainer>
+        <ExtButton [text]="'Save'" (tap)="onSaveFormClick()"> </ExtButton>
+        <ExtButton [text]="'Reset'" (tap)="onResetFormClick()"> </ExtButton>
+    </ExtContainer>
+</ExtFormpanel>

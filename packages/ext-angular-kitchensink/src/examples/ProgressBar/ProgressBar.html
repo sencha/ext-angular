@@ -1,11 +1,11 @@
-<ext-panel layout="vbox" bodyPadding="20" [shadow]="true" width="300">
-    <ext-progress
+<ExtPanel layout="vbox" bodyPadding="20" [shadow]="true" width="300">
+    <ExtProgress
         [value]="progress / 100.0"
         [text]="progressText"
-    ></ext-progress>
-    <ext-container
+    ></ExtProgress>
+    <ExtContainer
         [style]="{ marginTop: '20px' }"
         [html]="progressText"
-    ></ext-container>
-    <ext-progress [value]="progress / 100.0"></ext-progress>
-</ext-panel>
+    ></ExtContainer>
+    <ExtProgress [value]="progress / 100.0"></ExtProgress>
+</ExtPanel>

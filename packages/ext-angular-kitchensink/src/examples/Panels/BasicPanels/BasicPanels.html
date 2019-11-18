@@ -1,4 +1,4 @@
-<ext-container
+<ExtContainer
     [padding]="10"
     [width]="!isPhone && 700"
     [layout]="{
@@ -7,22 +7,22 @@
         align: 'stretch'
     }"
 >
-    <ext-container
+    <ExtContainer
         [autoSize]="true"
         [defaults]="{flex: 1, bodyPadding: 10, shadow: true, margin: 10 }"
         [layout]="{type: isPhone ? 'vbox' : 'hbox', pack: 'center', align: 'stretch'}"
         [flex]="1"
     >
-        <ext-panel  [html]="text"></ext-panel>
-        <ext-panel  [title]="'Title'" [html]="text"></ext-panel>
-    </ext-container>
-    <ext-container
+        <ExtPanel  [html]="text"></ExtPanel>
+        <ExtPanel  [title]="'Title'" [html]="text"></ExtPanel>
+    </ExtContainer>
+    <ExtContainer
         [autoSize]="true"
         [defaults]="{flex: 1, bodyPadding: 10, shadow: true, margin: 10}"
         [layout]="{type: isPhone ? 'vbox' : 'hbox', pack: 'center', align: 'stretch'}"
         [flex]="1"
     >
-        <ext-panel
+        <ExtPanel
             [title]="'Built in Tools'"
             [tools]="[
                 {type: 'minimize', handler: toolHandler },
@@ -32,8 +32,8 @@
                 {type: 'menu', handler: toolHandler }
             ]"
             [html]="text"
-        ></ext-panel>
-        <ext-panel
+        ></ExtPanel>
+        <ExtPanel
             [title]="'Custom Tools w/ iconCls'"
             [tools]="[
                 {iconCls: 'x-fa fa-wrench', handler: toolHandler },
@@ -41,6 +41,6 @@
                 {iconCls: 'x-fa fa-reply-all', handler: toolHandler }
             ]"
             [html]="text"
-        ></ext-panel>
-    </ext-container>
-</ext-container>
+        ></ExtPanel>
+    </ExtContainer>
+</ExtContainer>

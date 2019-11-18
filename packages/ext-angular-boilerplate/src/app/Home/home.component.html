@@ -1,23 +1,24 @@
-<ext-container
+<ExtContainer
+    extname="home"
     padding="10"
     layout="fit"
-    [fitToParent]="true"
+    [fitToParent]="xtrue"
 >
-    <ext-grid
+    <ExtGrid
         (ready)="readyGrid($event)"
         shadow="true"
     >
-        <ext-toolbar docked="top">
-            <ext-searchfield
+        <ExtToolbar docked="top">
+            <ExtSearchfield
                 (change)="this.onSearch($event)"
                 ui="faded"
                 placeholder="Search..."
             >
-            </ext-searchfield>
-        </ext-toolbar>
-        <ext-column text="Name" dataIndex="name" width="300"></ext-column>
-        <ext-column text="Email" dataIndex="email" width="300"></ext-column>
-        <ext-column text="Phone" dataIndex="phone"width="200"></ext-column>
-    </ext-grid>
+            </ExtSearchfield>
+        </ExtToolbar>
+        <ExtGridcolumn text="Name" dataIndex="name" width="300"></ExtGridcolumn>
+        <ExtGridcolumn text="Email" dataIndex="email" width="300"></ExtGridcolumn>
+        <ExtGridcolumn text="Phone" dataIndex="phone"width="200"></ExtGridcolumn>
+    </ExtGrid>
 
-</ext-container>
+</ExtContainer>

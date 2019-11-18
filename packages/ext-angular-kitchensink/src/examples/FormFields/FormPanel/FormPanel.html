@@ -1,56 +1,56 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
-    <ext-container
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+    <ExtContainer
         [platformConfig]="{
             phone: { layout: 'fit' },
             '!phone': { layout: 'center', padding: 10 }
         }"
     >
         <!-- todo handle this ref -->
-        <ext-container padding="10" layout="fit" [fitToParent]="true"
-            ><ext-formpanel
+        <ExtContainer padding="10" layout="fit" [fitToParent]="true"
+            ><ExtFormpanel
                 (ready)="onReady($event)"
                 [shadow]="true"
                 [padding]="20"
                 [platformConfig]="{ '!phone': { maxHeight: 500, width: 350 } }"
             >
-                <ext-fieldset
+                <ExtFieldset
                     [title]="'Personal Info'"
                     [defaults]="{ labelAlign: 'placeholder' }"
                 >
-                    <ext-textfield
+                    <ExtTextfield
                         [label]="'Name'"
                         [required]="true"
                         [placeholder]="'This field is required'"
                         [disabled]="disabled"
                     >
-                    </ext-textfield>
-                    <ext-passwordfield
+                    </ExtTextfield>
+                    <ExtPasswordfield
                         [label]="'Password'"
                         [required]="true"
                         [revealable]="true"
                         [disabled]="disabled"
                     >
-                    </ext-passwordfield>
-                    <ext-emailfield
+                    </ExtPasswordfield>
+                    <ExtEmailfield
                         [label]="'Email'"
                         [placeholder]="'me@sencha.com'"
                         [disabled]="disabled"
                     >
-                    </ext-emailfield>
-                    <ext-textfield
+                    </ExtEmailfield>
+                    <ExtTextfield
                         [label]="'Phone Number'"
                         [inputMask]="'(999) 999-9999'"
                         [inputType]="'tel'"
                         [disabled]="disabled"
                     >
-                    </ext-textfield>
-                    <ext-urlfield
+                    </ExtTextfield>
+                    <ExtUrlfield
                         [label]="'URL'"
                         [placeholder]="'http://sencha.com'"
                         [disabled]="disabled"
                     >
-                    </ext-urlfield>
-                    <ext-spinnerfield
+                    </ExtUrlfield>
+                    <ExtSpinnerfield
                         [label]="'Spinner'"
                         [minValue]="0"
                         [maxValue]="1000"
@@ -59,12 +59,12 @@
                         [margin]="'15 0 0 0'"
                         [labelAlign]="'top'"
                         [disabled]="disabled"
-                    ></ext-spinnerfield>
-                    <ext-datepickerfield
-                        [label]="'Start Date'"
+                    ></ExtSpinnerfield>
+                    <ExtDatepicker
+                        label="Start Date"
                         [disabled]="disabled"
-                    ></ext-datepickerfield>
-                    <ext-selectfield
+                    ></ExtDatepicker>
+                    <ExtSelectfield
                         [label]="'Rank'"
                         [disabled]="disabled"
                         [options]="[
@@ -72,48 +72,48 @@
                             { text: 'Journeyman', value: 'journeyman' },
                             { text: 'Apprentice', value: 'apprentice' }
                         ]"
-                    ></ext-selectfield>
-                    <ext-textfield
+                    ></ExtSelectfield>
+                    <ExtTextfield
                         [label]="'With Error'"
                         [errorMessage]="'This field is invalid'"
                         [errorTarget]="'under'"
                         [disabled]="disabled"
                     >
-                    </ext-textfield>
-                    <ext-sliderfield
+                    </ExtTextfield>
+                    <ExtSliderfield
                         [label]="'Slider'"
                         [disabled]="disabled"
-                    ></ext-sliderfield>
-                    <ext-togglefield
+                    ></ExtSliderfield>
+                    <ExtTogglefield
                         [label]="'Toggle'"
                         [disabled]="disabled"
-                    ></ext-togglefield>
-                    <ext-textareafield
+                    ></ExtTogglefield>
+                    <ExtTextareafield
                         [label]="'Bio'"
                         [maxRows]="5"
                         [disabled]="disabled"
-                    ></ext-textareafield>
-                </ext-fieldset>
-                <ext-fieldset
+                    ></ExtTextareafield>
+                </ExtFieldset>
+                <ExtFieldset
                     [title]="'Roles'"
                     [layout]="{ type: 'vbox', align: 'left' }"
                     [margin]="'15 0'"
                     [defaults]="{ labelAlign: 'placeholder' }"
                 >
-                    <ext-checkboxfield
+                    <ExtCheckbox
                         [disabled]="disabled"
                         [boxLabel]="'Admin'"
-                    ></ext-checkboxfield>
-                    <ext-checkboxfield
+                    ></ExtCheckbox>
+                    <ExtCheckbox
                         [disabled]="disabled"
                         [boxLabel]="'Power User'"
-                    ></ext-checkboxfield>
-                </ext-fieldset>
-                <ext-fieldset
+                    ></ExtCheckbox>
+                </ExtFieldset>
+                <ExtFieldset
                     [title]="'Favorite Color'"
                     [layout]="{ type: 'vbox', align: 'left' }"
                 >
-                    <ext-radiofield
+                    <ExtRadio
                         name="color"
                         labelAlign="right"
                         labelWidth="auto"
@@ -122,8 +122,8 @@
                         boxLabel="Red"
                         value="red"
                     >
-                    </ext-radiofield>
-                    <ext-radiofield
+                    </ExtRadio>
+                    <ExtRadio
                         name="color"
                         labelAlign="right"
                         labelWidth="auto"
@@ -132,8 +132,8 @@
                         boxLabel="Blue"
                         value="blue"
                     >
-                    </ext-radiofield>
-                    <ext-radiofield
+                    </ExtRadio>
+                    <ExtRadio
                         name="color"
                         labelAlign="right"
                         labelWidth="auto"
@@ -142,8 +142,8 @@
                         boxLabel="Green"
                         value="green"
                     >
-                    </ext-radiofield>
-                    <ext-radiofield
+                    </ExtRadio>
+                    <ExtRadio
                         name="color"
                         labelAlign="right"
                         labelWidth="auto"
@@ -152,33 +152,34 @@
                         boxLabel="Purple"
                         value="purple"
                     >
-                    </ext-radiofield>
-                </ext-fieldset>
-                <!-- <ext-fieldset
+                    </ExtRadio>
+                </ExtFieldset>
+                <!-- <ExtFieldset
                     [title]="'Second Favorite Color'"
                     [layout]="{ type: 'vbox', align: 'left' }"
                 >
-                    <ext-colorfield
+                    <ExtColorfield
                         [color]="this.color"
                         (change)="this.OnSelChange($event)"
                     >
-                    </ext-colorfield>
-                </ext-fieldset> -->
-                <ext-toolbar
+                    </ExtColorfield>
+                </ExtFieldset> -->
+                <ExtToolbar
                     [docked]="'bottom'"
                     [layout]="{ type: 'hbox', pack: 'right' }"
                 >
-                    <ext-button
+                    <ExtButton
                         [text]="disabled ? 'Enable All' : 'Disable All'"
                         [margin]="'0 10 0 0'"
                         (tap)="toggleDisabled($event)"
                     >
-                    </ext-button>
-                    <ext-button
+                    </ExtButton>
+                    <ExtButton
                         [text]="'Reset'"
                         (tap)="reset($event)"
-                    ></ext-button>
-                </ext-toolbar>
-            </ext-formpanel>
-        </ext-container> </ext-container
-></ext-container>
+                    ></ExtButton>
+                </ExtToolbar>
+            </ExtFormpanel>
+        </ExtContainer> 
+        </ExtContainer>
+    </ExtContainer>

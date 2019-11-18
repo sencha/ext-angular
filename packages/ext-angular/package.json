@@ -2,25 +2,31 @@
   "name": "@sencha/ext-angular",
   "description": "ext-angular",
   "version": "7.1.0",
+  "main": "bundles/sencha-ext-angular.umd.js",
   "private": false,
   "peerDependencies": {
-    "@angular/compiler": "~8.2.5",
-    "@angular/core": "~8.2.5",
+    "@sencha/ext-web-components": "~7.1.0",
+    "@sencha/ext-runtime-base": "~7.1.0",
+    "@angular/compiler": "~8.2.13",
+    "@angular/core": "~8.2.13",
     "tslib": "^1.10.0"
   },
   "dependencies": {
+    "fs-extra": "~8.1.0",
+    "@sencha/ext-web-components": "~7.1.0",
+    "@sencha/ext-runtime-base": "~7.1.0",
     "script-loader": "^0.7.2",
-    "tslib": "^1.9.0"
+    "tslib": "^1.10.0"
   },
   "devDependencies": {
-    "@angular/core": "~8.2.5",
-    "@angular/common": "~8.2.5",
-    "@angular/platform-browser": "~8.2.5",
-    "@angular/platform-browser-dynamic": "~8.2.5",
-    "zone.js": "~0.9.1",
-    "ng-packagr": "^5.5.0",
-    "@angular/compiler": "~8.2.5",
-    "@angular/compiler-cli": "~8.2.5",
+    "@angular/core": "~8.2.13",
+    "@angular/common": "~8.2.13",
+    "@angular/platform-browser": "~8.2.13",
+    "@angular/platform-browser-dynamic": "~8.2.13",
+    "zone.js": "~0.10.2",
+    "ng-packagr": "^5.7.1",
+    "@angular/compiler": "~8.2.13",
+    "@angular/compiler-cli": "~8.2.13",
     "typescript": "~3.5.3"
   },
   "repository": {
@@ -30,7 +36,6 @@
   "keywords": [],
   "author": "Sencha",
   "license": "ISC",
-  "main": "bundles/sencha-ext-angular.umd.js",
   "module": "fesm5/sencha-ext-angular.js",
   "es2015": "fesm2015/sencha-ext-angular.js",
   "esm5": "esm5/sencha-ext-angular.js",
@@ -39,5 +44,8 @@
   "fesm2015": "fesm2015/sencha-ext-angular.js",
   "typings": "sencha-ext-angular.d.ts",
   "metadata": "sencha-ext-angular.metadata.json",
-  "sideEffects": false
+  "sideEffects": false,
+  "scripts": {
+    "postinstall": "node ./postinstall.js"
+  }
 }

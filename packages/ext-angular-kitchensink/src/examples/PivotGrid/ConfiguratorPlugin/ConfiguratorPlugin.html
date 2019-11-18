@@ -1,5 +1,5 @@
-<ext-container layout="fit" padding="10" [fitToParent]="true">
-    <ext-toolbar
+<ExtContainer layout="fit" padding="10" [fitToParent]="true">
+    <ExtToolbar
         [shadow]="false"
         docked="top"
         ui="app-transparent-toolbar"
@@ -9,19 +9,19 @@
             align: 'stretch'
         }"
     >
-        <ext-button
+        <ExtButton
             shadow="true"
             ui="action"
             text="Configurator"
             [handler]="this.showConfigurator.bind(this)"
-        ></ext-button>
-    </ext-toolbar>
+        ></ExtButton>
+    </ExtToolbar>
 
-    <ext-pivotgrid
+    <ExtPivotgrid
         [shadow]="true"
         (ready)="onPivotGridRead($event)"
         [plugins]="pivotgridPlugins"
         [matrix]="pivotgridMatrix"
     >
-    </ext-pivotgrid>
-</ext-container>
+    </ExtPivotgrid>
+</ExtContainer>

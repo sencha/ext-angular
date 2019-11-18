@@ -1,13 +1,13 @@
-<ext-container padding="10" layout="vbox" [fitToParent]="true">
+<ExtContainer padding="10" layout="vbox" [fitToParent]="true">
 
-  <ext-container><div #extitem>
+  <ExtContainer><div #extitem>
     <chart-toolbar
       [onThemeChange]="this.changeTheme"
       [theme]="theme">
     </chart-toolbar>
-  </div></ext-container>
+  </div></ExtContainer>
 
-  <ext-cartesian downloadServerUrl ="http://svg.sencha.io"
+  <ExtCartesian downloadServerUrl ="http://svg.sencha.io"
     flex="1"
     shadow="true"
     [store]="this.store"
@@ -16,6 +16,6 @@
     [legend]="{ type: 'sprite', docked: 'top', marker: { size: 16}}"
     [axes]="cartesianAxes"
     [series]="cartesianSeries">
-  </ext-cartesian>
+  </ExtCartesian>
 
-</ext-container>
+</ExtContainer>

@@ -1,7 +1,8 @@
 declare var Ext: any;
-import { Component, VERSION, ChangeDetectorRef } from '@angular/core'
-import { Router } from '@angular/router'
+import { Component, VERSION, ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgZone } from '@angular/core';
+import { extnameToProperty } from '@sencha/ext-runtime-base/util';
 
 @Component({
 	selector: 'app-root',
@@ -29,16 +30,34 @@ export class AppComponent {
     });
   }
 
-  readyViewport = (event) => {
+  readyViewport = ({cmp, cmpObj}) => {
+
+  //readyViewport = (event) => {
+    //console.log(event)
     console.log('readyViewport')
-     //this.cd.detectChanges();
-     var hash = window.location.hash.substr(2);
-     //console.log(hash)
-     if (hash == '') {hash = 'all';}
-     var node = this.treeStore.findNode('name', hash);
-     //console.log(node)
-     this.navTreeListCmp.setSelection(node);
-     this.nav(node);
+    extnameToProperty(cmpObj, this)
+    //this.cd.detectChanges();
+
+    // var hash = window.location.hash.substr(2);
+    // if (hash == '') {hash = 'all';}
+    // var node = this.treeStore.findNode('name', hash);
+    // this['navTreelistCmp'].setSelection(node);
+    // this.nav(node);
+
+    // var me = this;
+    // setTimeout(function(){
+    //   var r = document.getElementById('route')
+    //   console.dir(r)
+    //   var hash = window.location.hash.substr(2);
+    //   //console.log(hash)
+    //   if (hash == '') {hash = 'all';}
+    //   var node = me.treeStore.findNode('name', hash);
+    //   console.log(node)
+    //   me['navTreelistCmp'].setSelection(node);
+    //   me.nav(node);
+    // }, 0);
+
+
 }
 
   showAppMenu: boolean = true;
@@ -57,8 +76,8 @@ export class AppComponent {
     }
 }
 
-  readyNavTreeList = (event) => {
-    this.navTreeListCmp = event.detail.cmp;
+  readyNavTreeList = ({cmp, cmpObj}) => {
+    this.navTreeListCmp = cmp;
     this.navTreeListCmp.setStore(this.treeStore);
  }
 
@@ -89,7 +108,10 @@ export class AppComponent {
 
     //var me = this
 
-    this.ngZone.run(() => this.router.navigateByUrl(node.id)).then();
+    console.log(node.id)
+    this.router.navigateByUrl(node.id)
+
+    //this.ngZone.run(() => this.router.navigateByUrl(node.id)).then();
 
 //    setTimeout(function(){
         // this.zone.run(() =>

@@ -1,5 +1,5 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
-    <ext-pivotd3container
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+    <ExtPivotd3container
         layout="'fit'"
         (ready)="ctnReady($event)"
         (onShowConfigPanel)="onShowConfigPanel($event)"
@@ -9,12 +9,12 @@
         [drawing]="drawingVar"
         [configurator]="configuratorVar"
     >
-        <ext-toolbar docked="top">
-            <ext-spacer></ext-spacer>
-            <ext-button
+        <ExtToolbar docked="top">
+            <ExtSpacer></ExtSpacer>
+            <ExtButton
                 text="Show configurator"
                 (tap)="showConfigurator($event)"
-            ></ext-button>
-        </ext-toolbar>
-    </ext-pivotd3container>
-</ext-container>
+            ></ExtButton>
+        </ExtToolbar>
+    </ExtPivotd3container>
+</ExtContainer>

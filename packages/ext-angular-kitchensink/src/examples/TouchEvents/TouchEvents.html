@@ -1,6 +1,6 @@
-<ext-container>
-    <ext-container [layout]="'vbox'" [defaults]="{ margin: '10' }">
-        <ext-panel
+<ExtContainer>
+    <ExtContainer [layout]="'vbox'" [defaults]="{ margin: '10' }">
+        <ExtPanel
             title="Event Log"
             height="300"
             scrollable="true"
@@ -18,40 +18,40 @@
                 ]
             }"
         >
-            <ext-container>
-                <ext-dataview
+            <ExtContainer>
+                <ExtDataview
                     [centered]="false"
                     [inline]="'true'"
                     (ready)="dataviewReady($event)"
                     [itemTpl]="tplDataView"
                 >
-                </ext-dataview>
-            </ext-container>
-        </ext-panel>
-        <ext-container
+                </ExtDataview>
+            </ExtContainer>
+        </ExtPanel>
+        <ExtContainer
             (ready)="touchpadReady($event)"
             flex="1"
             [layout]="{ type: 'vbox', pack: 'center', align: 'stretch' }"
             [style]="{ border: '8px dashed #d6d6d6', borderRadius: '30px' }"
         >
-            <ext-container
+            <ExtContainer
                 [style]="{ textAlign: 'center', fontSize: '48px', color: '#ccc' }"
                 html="Touch Here"
-            ></ext-container>
-        </ext-container>
-    </ext-container>
+            ></ExtContainer>
+        </ExtContainer>
+    </ExtContainer>
 
 
 
-<!-- <ext-container *ngIf="!isPhone" [layout]="'hbox'" [width]="600">
-    <ext-container
+<!-- <ExtContainer *ngIf="!isPhone" [layout]="'hbox'" [width]="600">
+    <ExtContainer
         *ngIf="!isPhone"
         [flex]="1"
         [layout]="'vbox'"
         [padding]="10"
         [margin]="'0 20 0 0'"
     >
-        <ext-panel
+        <ExtPanel
             *ngIf="!isPhone"
             [shadow]="true"
             [margin]="'0 0 20 0'"
@@ -77,8 +77,8 @@
           </ul></div>'
             "
         >
-        </ext-panel>
-        <ext-panel
+        </ExtPanel>
+        <ExtPanel
             *ngIf="!isPhone"
             title="Event Log"
             [height]="300"
@@ -97,31 +97,31 @@
                 ]
             }"
         >
-            <ext-container *ngIf="!isPhone">
-                <ext-dataview
+            <ExtContainer *ngIf="!isPhone">
+                <ExtDataview
                 *ngIf="!isPhone"
                     [centered]="false"
                     [inline]="'true'"
                     (ready)="dataviewReady($event)"
                     [itemTpl]="tplDataView"
                 >
-                </ext-dataview>
-            </ext-container>
-        </ext-panel>
-    </ext-container>
-    <ext-container
+                </ExtDataview>
+            </ExtContainer>
+        </ExtPanel>
+    </ExtContainer>
+    <ExtContainer
         *ngIf="!isPhone"
         (ready)="touchpadReady($event)"
         flex="1"
         [layout]="{ type: 'vbox', pack: 'center', align: 'stretch' }"
         [style]="{ border: '8px dashed #d6d6d6', borderRadius: '30px' }"
     >
-        <ext-container
+        <ExtContainer
             *ngIf="!isPhone"
             [style]="{ textAlign: 'center', fontSize: '48px', color: '#ccc' }"
             html="Touch Here"
-        ></ext-container>
-    </ext-container>
-</ext-container> -->
+        ></ExtContainer>
+    </ExtContainer>
+</ExtContainer> -->
 
-</ext-container>
+</ExtContainer>

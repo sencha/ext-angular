@@ -1,5 +1,5 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
-    <ext-panel
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+    <ExtPanel
         [shadow]="true"
         [fitToParent]="true"
         [title]="panelTitle"
@@ -43,7 +43,7 @@
             ]
         }"
     >
-        <ext-calendar-day
+        <ExtCalendar_day
             [startTime]="6"
             [endTime]="22"
             [visibleDays]="2"
@@ -52,6 +52,6 @@
             [showNowMarker]="false"
             [value]="calDayValue"
             [store]="this.store"
-        ></ext-calendar-day>
-    </ext-panel>
-</ext-container>
+        ></ExtCalendar_day>
+    </ExtPanel>
+</ExtContainer>

@@ -11,7 +11,7 @@ export class LockingGridComponent {
 
   isPhone = Ext.os.is.Phone;
 
-readyLockedGrid = (event) => {
+  readyLockedGrid = ({cmp, cmpObj}) => {
     const store = Ext.create('Ext.data.Store', {
         model,
         autoLoad: true,
@@ -92,7 +92,7 @@ readyLockedGrid = (event) => {
         }
     ];
 
-    const lockedGridCmp = event.detail.cmp;
+    const lockedGridCmp = cmp;
     lockedGridCmp.setStore(store);
     lockedGridCmp.setColumns(columns);
 }

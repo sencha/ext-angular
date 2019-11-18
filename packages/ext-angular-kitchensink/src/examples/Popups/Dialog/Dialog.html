@@ -1,11 +1,11 @@
-<ext-container [padding]="10" [fitToParent]="true">
-    <ext-button
+<ExtContainer [padding]="10" [fitToParent]="true">
+    <ExtButton
         [text]="'Show dialog'"
         (tap)="showDialog()"
         [ui]="'action raised'"
-    ></ext-button>
+    ></ExtButton>
 
-    <ext-dialog
+    <ExtDialog
         [displayed]="isDialogShowing"
         [title]="'Dialog'"
         [closable]="false"
@@ -21,7 +21,7 @@
     magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
         "
     >
-        <ext-button text="Cancel" (tap)="onCancel()"></ext-button>
-        <ext-button [id]="'ok'" text="OK" (tap)="onOk()"></ext-button>
-    </ext-dialog>
-</ext-container>
+        <ExtButton text="Cancel" (tap)="onCancel()"></ExtButton>
+        <ExtButton [id]="'ok'" text="OK" (tap)="onOk()"></ExtButton>
+    </ExtDialog>
+</ExtContainer>

@@ -1,6 +1,6 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
 
-  <ext-grid
+  <ExtGrid
     [title]="'Row Expander Grid'"
     [store]="this.store"
     [layout]="'fit'"
@@ -12,11 +12,11 @@
     }"
     (ready)="onGridReady($event)">
 
-    <ext-column text="Company" dataIndex="name" width="150"></ext-column>
-    <ext-column text="Price" dataIndex="price" width="75" formatter="usMoney"></ext-column>
-    <ext-column text="Change" width="100" dataIndex="priceChange" [renderer]="this.renderSign.bind(this, '0.00')"></ext-column>
-    <ext-column text="% Change" dataIndex="priceChangePct" [renderer]="this.renderSign.bind(this, '0.00')"></ext-column>
-    <ext-column text="Last Updated" dataIndex="priceLastChange" width="125" formatter="date('m/d/Y')" ></ext-column>
-  </ext-grid>
+    <ExtGridcolumn text="Company" dataIndex="name" width="150"></ExtGridcolumn>
+    <ExtGridcolumn text="Price" dataIndex="price" width="75" formatter="usMoney"></ExtGridcolumn>
+    <ExtGridcolumn text="Change" width="100" dataIndex="priceChange" [renderer]="this.renderSign.bind(this, '0.00')"></ExtGridcolumn>
+    <ExtGridcolumn text="% Change" dataIndex="priceChangePct" [renderer]="this.renderSign.bind(this, '0.00')"></ExtGridcolumn>
+    <ExtGridcolumn text="Last Updated" dataIndex="priceLastChange" width="125" formatter="date('m/d/Y')" ></ExtGridcolumn>
+  </ExtGrid>
 
-</ext-container>
+</ExtContainer>

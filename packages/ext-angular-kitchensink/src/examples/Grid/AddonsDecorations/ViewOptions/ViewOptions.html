@@ -1,26 +1,26 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
 
-  <ext-grid
+  <ExtGrid
     title="Grid with View Options"
     [store]="this.store"
     plugins="gridviewoptions"
     shadow="true">
 
-    <ext-toolbar docked="top">
-      <ext-container>
+    <ExtToolbar docked="top">
+      <ExtContainer>
         <span #extitem>
           <div style="font-size:'14px';font-weight: 'normal';">Long press on a column header to customize this grid.</div>
         </span>
-      </ext-container>
-    </ext-toolbar>
+      </ExtContainer>
+    </ExtToolbar>
 
-    <ext-column text="Company" dataIndex="name" width="150"></ext-column>
-    <ext-column text="Phone" dataIndex="phone" width="100" hidden></ext-column>
-    <ext-column text="Industry" dataIndex="industry" width="150" hidden></ext-column>
-    <ext-column text="Price" dataIndex="price" width="75" formatter="usMoney" ></ext-column>
-    <ext-column text="Change" width="100" dataIndex="priceChange" [renderer]="this.renderSign.bind(this, '0.00')"></ext-column>
-    <ext-column text="% Change" dataIndex="priceChangePct" [renderer]="this.renderSign.bind(this, '0.00')"></ext-column>
-    <ext-column text="Last Updated" dataIndex="priceLastChange" width="125" formatter="date('m/d/Y')"></ext-column>
+    <ExtGridcolumn text="Company" dataIndex="name" width="150"></ExtGridcolumn>
+    <ExtGridcolumn text="Phone" dataIndex="phone" width="100" hidden></ExtGridcolumn>
+    <ExtGridcolumn text="Industry" dataIndex="industry" width="150" hidden></ExtGridcolumn>
+    <ExtGridcolumn text="Price" dataIndex="price" width="75" formatter="usMoney" ></ExtGridcolumn>
+    <ExtGridcolumn text="Change" width="100" dataIndex="priceChange" [renderer]="this.renderSign.bind(this, '0.00')"></ExtGridcolumn>
+    <ExtGridcolumn text="% Change" dataIndex="priceChangePct" [renderer]="this.renderSign.bind(this, '0.00')"></ExtGridcolumn>
+    <ExtGridcolumn text="Last Updated" dataIndex="priceLastChange" width="125" formatter="date('m/d/Y')"></ExtGridcolumn>
 
-  </ext-grid>
-</ext-container>
+  </ExtGrid>
+</ExtContainer>

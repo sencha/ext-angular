@@ -1,6 +1,6 @@
-<ext-container padding="10px" layout="fit" [fitToParent]="true">
+<ExtContainer padding="10px" layout="fit" [fitToParent]="true">
 
-    <ext-cartesian downloadServerUrl ="http://svg.sencha.io"
+    <ExtCartesian downloadServerUrl ="http://svg.sencha.io"
     shadow="true"
     ref="chart"
     [store]="this.store"
@@ -10,6 +10,6 @@
     [axes]="cartesianAxes"
     [series]="cartesianSeries"
     (ready)="chartNavReady($event)">
-  </ext-cartesian>
+  </ExtCartesian>
 
-</ext-container>
+</ExtContainer>

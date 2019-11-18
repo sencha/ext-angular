@@ -1,4 +1,4 @@
-<ext-grid
+<ExtGrid
     [columns]="columns"
     [store]="store"
     shadow="true"
@@ -6,10 +6,10 @@
     [emptyText]="'Click a button to show a dataset.'"
     [fitToParent]="true"
 >
-    <ext-toolbar  [docked]="'top'" ui="transparent" layout="hbox">
-        <ext-segmentedbutton width="300" [defaults]="{ flex: 1 }" (change)="onChange($event)">
-            <ext-button text="Show Offices" value="Offices"></ext-button>
-            <ext-button text="Show Employees" value="Employees"></ext-button>
-        </ext-segmentedbutton>
-    </ext-toolbar>
-</ext-grid>
+    <ExtToolbar  [docked]="'top'" ui="transparent" layout="hbox">
+        <ExtSegmentedbutton width="300" [defaults]="{ flex: 1 }" (change)="onChange($event)">
+            <ExtButton text="Show Offices" value="Offices"></ExtButton>
+            <ExtButton text="Show Employees" value="Employees"></ExtButton>
+        </ExtSegmentedbutton>
+    </ExtToolbar>
+</ExtGrid>

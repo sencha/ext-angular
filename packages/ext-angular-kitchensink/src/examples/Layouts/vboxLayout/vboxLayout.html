@@ -1,78 +1,78 @@
-<ext-container  [padding]="isPhone ? 20 : 30">
-    <ext-panel
+<ExtContainer  [padding]="isPhone ? 20 : 30">
+    <ExtPanel
         [shadow]="true" [ui]="'instructions'" [margin]="'0 0 40 0'"
         [html]="'A <b>vbox</b> layout positions items vertically with optional \'pack\', and \'align\' configs.'"
-    ></ext-panel>
-    <ext-container
+    ></ExtPanel>
+    <ExtContainer
         [style]="{fontSize:'13px',fontFamily:'Menlo, Courier', margin:'0 0 8px 0', textAlign:'left'}"
         html="<div>align: 'stretch'</div>"
-    ></ext-container>
-    <ext-panel  [shadow]="true" [layout]="{type:'vbox', align:'stretch'}" [height]="175" [margin]="'0 0 40 0'">
-        <ext-container  [layout]="center" [style]="colors.card.red" flex="1" [html]="'Item 1'"></ext-container>
-        <ext-container  [layout]="center" [style]="colors.card.blue" flex="1" [html]="'Item 2'"></ext-container>
-        <ext-container  [layout]="center" [style]="colors.card.green" flex="1" [html]="'Item 3'"></ext-container>
-    </ext-panel>
-    <ext-container
+    ></ExtContainer>
+    <ExtPanel  [shadow]="true" [layout]="{type:'vbox', align:'stretch'}" [height]="175" [margin]="'0 0 40 0'">
+        <ExtContainer  [layout]="center" [style]="colors.card.red" flex="1" [html]="'Item 1'"></ExtContainer>
+        <ExtContainer  [layout]="center" [style]="colors.card.blue" flex="1" [html]="'Item 2'"></ExtContainer>
+        <ExtContainer  [layout]="center" [style]="colors.card.green" flex="1" [html]="'Item 3'"></ExtContainer>
+    </ExtPanel>
+    <ExtContainer
         [style]="{fontSize:'13px',fontFamily:'Menlo, Courier', margin:'0 0 8px 0', textAlign:'left'}"
         html="<div>align: 'left'</div>"
-    ></ext-container>
-    <ext-panel  [shadow]="true" [layout]="{type: 'vbox', align: 'left'}" [height]="175" [margin]="'0 0 40 0'">
-        <ext-container  [layout]="center" [style]="colors.card.red" flex="1" [html]="'Item 1'"></ext-container>
-        <ext-container  [layout]="center" [style]="colors.card.blue" flex="1" [html]="'Item 2'"></ext-container>
-        <ext-container  [layout]="center" [style]="colors.card.green" flex="1" [html]="'Item 3'"></ext-container>
-    </ext-panel>
-    <ext-container
+    ></ExtContainer>
+    <ExtPanel  [shadow]="true" [layout]="{type: 'vbox', align: 'left'}" [height]="175" [margin]="'0 0 40 0'">
+        <ExtContainer  [layout]="center" [style]="colors.card.red" flex="1" [html]="'Item 1'"></ExtContainer>
+        <ExtContainer  [layout]="center" [style]="colors.card.blue" flex="1" [html]="'Item 2'"></ExtContainer>
+        <ExtContainer  [layout]="center" [style]="colors.card.green" flex="1" [html]="'Item 3'"></ExtContainer>
+    </ExtPanel>
+    <ExtContainer
         [style]="{fontSize:'13px',fontFamily:'Menlo, Courier', margin:'0 0 8px 0', textAlign:'left'}"
         html="<div>align: 'right'</div>"
-    ></ext-container>
-    <ext-panel  [shadow]="true" [layout]="{type: 'vbox', align: 'right'}" [height]="175" [margin]="'0 0 40 0'">
-        <ext-container  [layout]="center" [style]="colors.card.red" flex="1" [html]="'Item 1'"></ext-container>
-        <ext-container  [layout]="center" [style]="colors.card.blue" flex="1" [html]="'Item 2'"></ext-container>
-        <ext-container  [layout]="center" [style]="colors.card.green" flex="1" [html]="'Item 3'"></ext-container>
-    </ext-panel>
-    <ext-container
+    ></ExtContainer>
+    <ExtPanel  [shadow]="true" [layout]="{type: 'vbox', align: 'right'}" [height]="175" [margin]="'0 0 40 0'">
+        <ExtContainer  [layout]="center" [style]="colors.card.red" flex="1" [html]="'Item 1'"></ExtContainer>
+        <ExtContainer  [layout]="center" [style]="colors.card.blue" flex="1" [html]="'Item 2'"></ExtContainer>
+        <ExtContainer  [layout]="center" [style]="colors.card.green" flex="1" [html]="'Item 3'"></ExtContainer>
+    </ExtPanel>
+    <ExtContainer
     [style]="{fontSize:'13px',fontFamily:'Menlo, Courier', margin:'0 0 8px 0', textAlign:'left'}"
         html="<div>align: 'start'</div>"
-    ></ext-container>
-    <ext-panel  [shadow]="true" [layout]="{type: 'vbox', pack: 'start'}" [height]="175" [margin]="'0 0 40 0'">
-        <ext-container  [layout]="center"[style]="colors.card.red" [html]="'Item 1'"></ext-container>
-        <ext-container  [layout]="center" [style]="colors.card.blue" [html]="'Item 2'"></ext-container>
-        <ext-container  [layout]="center" [style]="colors.card.green" [html]="'Item 3'"></ext-container>
-    </ext-panel>
-    <ext-container
+    ></ExtContainer>
+    <ExtPanel  [shadow]="true" [layout]="{type: 'vbox', pack: 'start'}" [height]="175" [margin]="'0 0 40 0'">
+        <ExtContainer  [layout]="center"[style]="colors.card.red" [html]="'Item 1'"></ExtContainer>
+        <ExtContainer  [layout]="center" [style]="colors.card.blue" [html]="'Item 2'"></ExtContainer>
+        <ExtContainer  [layout]="center" [style]="colors.card.green" [html]="'Item 3'"></ExtContainer>
+    </ExtPanel>
+    <ExtContainer
         [style]="{fontSize:'13px',fontFamily:'Menlo, Courier', margin:'0 0 8px 0', textAlign:'left'}"
         html="<div>align: 'center'</div>"
-    ></ext-container>
-    <ext-panel  [shadow]="true" [layout]="{type: 'vbox', pack: 'center'}" [height]="175" [margin]="'0 0 40 0'">
-        <ext-container  [layout]="center" [style]="colors.card.red" [html]="'Item 1'"></ext-container>
-        <ext-container  [layout]="center" [style]="colors.card.blue" [html]="'Item 2'"></ext-container>
-        <ext-container  [layout]="center" [style]="colors.card.green" [html]="'Item 3'"></ext-container>
-    </ext-panel>
-    <ext-container
+    ></ExtContainer>
+    <ExtPanel  [shadow]="true" [layout]="{type: 'vbox', pack: 'center'}" [height]="175" [margin]="'0 0 40 0'">
+        <ExtContainer  [layout]="center" [style]="colors.card.red" [html]="'Item 1'"></ExtContainer>
+        <ExtContainer  [layout]="center" [style]="colors.card.blue" [html]="'Item 2'"></ExtContainer>
+        <ExtContainer  [layout]="center" [style]="colors.card.green" [html]="'Item 3'"></ExtContainer>
+    </ExtPanel>
+    <ExtContainer
         [style]="{fontSize:'13px',fontFamily:'Menlo, Courier', margin:'0 0 8px 0', textAlign:'left'}"
         html="<div>align: 'end'</div>"
-    ></ext-container>
-    <ext-panel  [shadow]="true" [layout]="{type: 'vbox', pack: 'end'}" [height]="175" [margin]="'0 0 40 0'">
-        <ext-container  [layout]="center" [style]="colors.card.red" [html]="'Item 1'"></ext-container>
-        <ext-container  [layout]="center" [style]="colors.card.blue" [html]="'Item 2'"></ext-container>
-        <ext-container  [layout]="center" [style]="colors.card.green" [html]="'Item 3'"></ext-container>
-    </ext-panel> -->
-    <ext-container
+    ></ExtContainer>
+    <ExtPanel  [shadow]="true" [layout]="{type: 'vbox', pack: 'end'}" [height]="175" [margin]="'0 0 40 0'">
+        <ExtContainer  [layout]="center" [style]="colors.card.red" [html]="'Item 1'"></ExtContainer>
+        <ExtContainer  [layout]="center" [style]="colors.card.blue" [html]="'Item 2'"></ExtContainer>
+        <ExtContainer  [layout]="center" [style]="colors.card.green" [html]="'Item 3'"></ExtContainer>
+    </ExtPanel> -->
+    <ExtContainer
         [style]="{fontSize:'13px',fontFamily:'Menlo, Courier', margin:'0 0 8px 0', textAlign:'left'}"
         html="<div>align: 'space-between'</div>"
-    ></ext-container>
-    <ext-panel  [shadow]="true" [layout]="{type: 'vbox', pack: 'space-between'}" [height]="175" [margin]="'0 0 40 0'">
-        <ext-container  [layout]="center" [style]="colors.card.red" [html]="'Item 1'"></ext-container>
-        <ext-container  [layout]="center" [style]="colors.card.blue" [html]="'Item 2'"></ext-container>
-        <ext-container  [layout]="center" [style]="colors.card.green" [html]="'Item 3'"></ext-container>
-    </ext-panel>
-    <ext-container
+    ></ExtContainer>
+    <ExtPanel  [shadow]="true" [layout]="{type: 'vbox', pack: 'space-between'}" [height]="175" [margin]="'0 0 40 0'">
+        <ExtContainer  [layout]="center" [style]="colors.card.red" [html]="'Item 1'"></ExtContainer>
+        <ExtContainer  [layout]="center" [style]="colors.card.blue" [html]="'Item 2'"></ExtContainer>
+        <ExtContainer  [layout]="center" [style]="colors.card.green" [html]="'Item 3'"></ExtContainer>
+    </ExtPanel>
+    <ExtContainer
         [style]="{fontSize:'13px',fontFamily:'Menlo, Courier', margin:'0 0 8px 0', textAlign:'left'}"
         html="<div>align: 'space-around'</div>"
-    ></ext-container>
-    <ext-panel  [shadow]="true" [layout]="{type: 'vbox', pack: 'space-around'}" [height]="175" [margin]="'0 0 40 0'">
-        <ext-container  [layout]="center" [style]="colors.card.red" [html]="'Item 1'"></ext-container>
-        <ext-container  [layout]="center" [style]="colors.card.blue" [html]="'Item 2'"></ext-container>
-        <ext-container  [layout]="center" [style]="colors.card.green" [html]="'Item 3'"></ext-container>
-    </ext-panel>
-</ext-container>
+    ></ExtContainer>
+    <ExtPanel  [shadow]="true" [layout]="{type: 'vbox', pack: 'space-around'}" [height]="175" [margin]="'0 0 40 0'">
+        <ExtContainer  [layout]="center" [style]="colors.card.red" [html]="'Item 1'"></ExtContainer>
+        <ExtContainer  [layout]="center" [style]="colors.card.blue" [html]="'Item 2'"></ExtContainer>
+        <ExtContainer  [layout]="center" [style]="colors.card.green" [html]="'Item 3'"></ExtContainer>
+    </ExtPanel>
+</ExtContainer>

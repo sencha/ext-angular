@@ -1,5 +1,5 @@
-<ext-container padding="10" [fitToParent]="true">
-    <ext-list
+<ExtContainer padding="10" [fitToParent]="true">
+    <ExtList
         [left]="10"
         [top]="10"
         [width]="300"
@@ -11,8 +11,8 @@
         (ready)="listReady($event)"
         (select)="onSelect($event)"
     >
-        <ext-container [docked]="'top'">
-            <ext-container>
+        <ExtContainer [docked]="'top'">
+            <ExtContainer>
                 <span #extitem>
                     <div style="padding:15px;">
                         <b>Auto Paging</b>:
@@ -23,39 +23,39 @@
                         }}
                     </div>
                 </span>
-            </ext-container>
-            <ext-segmentedbutton>
-                <ext-button
+            </ExtContainer>
+            <ExtSegmentedbutton>
+                <ExtButton
                     text="Off"
                     [pressed]="bufferZone === false"
                     (tap)="setBufferZone(false)"
                     [flex]="1"
-                ></ext-button>
-                <ext-button
+                ></ExtButton>
+                <ExtButton
                     text="0"
                     [pressed]="bufferZone === 0"
                     (tap)="setBufferZone(0)"
                     [flex]="1"
-                ></ext-button>
-                <ext-button
+                ></ExtButton>
+                <ExtButton
                     text="8"
                     [pressed]="bufferZone === 8"
                     (tap)="setBufferZone(8)"
                     [flex]="1"
-                ></ext-button>
-                <ext-button
+                ></ExtButton>
+                <ExtButton
                     text="16"
                     [pressed]="bufferZone === 16"
                     (tap)="setBufferZone(16)"
                     [flex]="1"
-                ></ext-button>
-                <ext-button
+                ></ExtButton>
+                <ExtButton
                     text="32"
                     [pressed]="bufferZone === 32"
                     (tap)="setBufferZone(32)"
                     [flex]="1"
-                ></ext-button>
-            </ext-segmentedbutton>
-        </ext-container>
-    </ext-list>
-</ext-container>
+                ></ExtButton>
+            </ExtSegmentedbutton>
+        </ExtContainer>
+    </ExtList>
+</ExtContainer>

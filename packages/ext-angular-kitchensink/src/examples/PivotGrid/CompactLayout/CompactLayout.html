@@ -1,5 +1,5 @@
-<ext-container layout="fit" padding="10" [fitToParent]="true">
-    <ext-toolbar
+<ExtContainer layout="fit" padding="10" [fitToParent]="true">
+    <ExtToolbar
         docked="top"
         ui="app-transparent-toolbar"
         padding="5 8"
@@ -14,15 +14,15 @@
             ui: 'action'
         }"
     >
-        <ext-button text="Expand All" [handler]="this.expandAll"> </ext-button>
-        <ext-button text="Collapse All" [handler]="this.collapseAll">
-        </ext-button>
-    </ext-toolbar>
+        <ExtButton text="Expand All" [handler]="this.expandAll"> </ExtButton>
+        <ExtButton text="Collapse All" [handler]="this.collapseAll">
+        </ExtButton>
+    </ExtToolbar>
 
-    <ext-pivotgrid
+    <ExtPivotgrid
         (ready)="onPivotGridRead($event)"
         shadow="true"
         [matrix]="pivotgridMatrix"
     >
-    </ext-pivotgrid>
-</ext-container>
+    </ExtPivotgrid>
+</ExtContainer>
