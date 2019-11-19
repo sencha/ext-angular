@@ -3,9 +3,6 @@ var productName
 var xtype
 var xtypeFileName
 
-
-
-
 function doXtype() {
   fs.copySync(`../ext-web-components-${xtype}/ext-runtime/${xtypeFileName}`,`../../../${copyFolder}ext-runtime/${xtypeFileName}`);
   console.log(`${prefix} ${xtypeFileName} copied to ./${copyFolder}ext-runtime`);
@@ -91,7 +88,6 @@ try {
       if(themes.includes(packageJsonApp.extTheme)) {
         theme = packageJsonApp.extTheme;
         console.log(`${prefix} "extTheme": ${theme} found in ./package.json`);
-
       }
       else {
         theme = 'material';
@@ -101,14 +97,15 @@ try {
       theme = 'material';
     }
     fs.copySync(`../ext-runtime-base/theme/${theme}`,`../../../${copyFolder}ext-runtime/theme/${theme}`);
-    console.log(`${prefix} ./${copyFolder}ext-runtime/theme/${theme} folder created`);
+    console.log(`${prefix} created ./${copyFolder}ext-runtime/theme/${theme} folder`);
     fs.copySync('../ext-runtime-base/engine.js',`../../../${copyFolder}ext-runtime/engine.js`);
-    console.log(`${prefix} ./${copyFolder}ext-runtime folder created`);
+    console.log(`${prefix} created ./${copyFolder}ext-runtime/engine.js`);
 
     switch(productName) {
       case '@sencha/ext-react':
         var indexHtml = fs.readFileSync(`../../../${copyFolder}index.html`, 'utf8');
-        var position = indexHtml.indexOf('<title>');
+        //var position = indexHtml.indexOf('<title>');
+        var position = indexHtml.indexOf('</head>');
         var styles = `
         <!--https://www.rapidtables.com/web/color/-->
         <style>
@@ -127,94 +124,29 @@ try {
           rel="stylesheet" type="text/css"
         >
         <script src="%PUBLIC_URL%/ext-runtime/engine.js"></script>
+        ${styles}
         `
         fs.copySync(`../../../${copyFolder}index.html`,`../../../${copyFolder}indexBack.html`);
         var indexHtmlNew = indexHtml.substring(0, position) + b + indexHtml.substring(position);
         fs.writeFileSync(`../../../${copyFolder}index.html`, indexHtmlNew);
-        console.log(`${prefix} ./${copyFolder}index.html updated`);
+        console.log(`${prefix} updated ./${copyFolder}index.html`);
         console.log(`${prefix} backup in ./${copyFolder}indexBack.html`);
         break;
       case '@sencha/ext-angular':
         var angularName = '../../../angular.json';
         var angular = fs.readFileSync(angularName, 'utf8');
         const angularJson = JSON.parse(angular);
-        var styles = [
-            `ext-runtime/theme/${theme}/${theme}-all.css`,
-            "src/styles.css"
-        ]
-        var scripts = [
-            "ext-runtime/engine.js"
-        ]
-        angularJson.projects[packageJsonApp.name].architect.build.options.styles = styles;
-        angularJson.projects[packageJsonApp.name].architect.build.options.scripts = scripts;
+        var style = `ext-runtime/theme/${theme}/${theme}-all.css`;
+        var script = "ext-runtime/engine.js";
+        angularJson.projects[packageJsonApp.name].architect.build.options.styles.push(style);
+        angularJson.projects[packageJsonApp.name].architect.build.options.scripts.push(script);
         const angularString = JSON.stringify(angularJson, null, 2);
         fs.writeFileSync(angularName, angularString);
-        console.log(`${prefix} ./angular.json updated`);
+        console.log(`${prefix} added ${style} to styles array in ./angular.json`);
+        console.log(`${prefix} added ${script} to scripts array in ./angular.json`);
         break;
       default:
     }
     if (xtype != '') {doXtype()}
 }
 catch(e) {console.log(e);}
-
-
-
-
-
-
-
-function nnndoAllXtypes() {
-
-  fs.readdir('../', function (err, files) {
-    console.log(prefix + 'in doAllXtypes');
-    //console.log(files)
-    if (err) {
-      console.error("Could not list the directory.", err);
-      process.exit(1);
-    }
-
-    files.forEach(function (file, index) {
-      // Make one pass and make the file complete
-      // var fromPath = path.join(moveFrom, file);
-      // var toPath = path.join(moveTo, file);
-
-      //console.log('../'+file)
-
-
-      fs.stat('../' + file, function (error, stat) {
-        if (error) {
-          console.error("Error stating file.", error);
-          return;
-        }
-
-        else if (stat.isDirectory()) {
-          console.log("'%s' is a directory.", file);
-          var webComponentsPrefix = 'ext-web-components-';
-          var n = file.indexOf(webComponentsPrefix);
-          if (n != -1) {
-            var xtypelocal = file.substring(webComponentsPrefix.length+n);
-            console.log(xtypelocal)
-
-            fs.copySync(`../${file}/ext-runtime/ext.${xtypelocal}.js`,`../../../${copyFolder}ext-runtime/ext.${xtype}.js`);
-
-
-
-          }
-
-        }
-
-
-      });
-
-    });
-
-
-
-
-
-
-  });
-
-
-
-}
