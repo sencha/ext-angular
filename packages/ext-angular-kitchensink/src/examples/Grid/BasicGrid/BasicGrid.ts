@@ -22,7 +22,7 @@ export class BasicGridComponent {
   //   proxy: {
   //     type: 'ajax',
   //     url: '/KitchenSink/Companys'
-  //   } 
+  //   }
   // })
 
   store = {
@@ -33,16 +33,17 @@ export class BasicGridComponent {
     proxy: {
       type: 'ajax',
       url: '/KitchenSink/Companys'
-    } 
+    }
   }
 
+  // columns = [
+  //   { text: 'Company', dataIndex: 'name'}
+  // ]
 
-  columns = [
-    { text: 'Company', dataIndex: 'name'}
-  ]
-
-  renderSign = (format, value) =>  {
-    var formattedValue = Ext.util.Format.number(value, format);
+  //renderSign = (format, value) =>  {
+  renderSign = (value) =>  {
+    console.log('renderSign')
+    var formattedValue = Ext.util.Format.number(value, '0.00');
     var col = ''
     if(value > 0) {col = 'green'}
     else if(value < 0 ) {col = 'red'}

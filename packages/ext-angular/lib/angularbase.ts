@@ -91,23 +91,35 @@ export class EngBase {
               //o[property] = this[property];
               // why does this need to be done??
               if (property != 'fullscreen' && property != 'xtype') {
-                  var propertyVal = '';
-                  if (typeof this[property] == 'string') {
-                      propertyVal = this[property];
+
+                // var propertyVal = '';
+                //   if (typeof this[property] == 'string') {
+                //       propertyVal = this[property];
+                //   }
+                //   else {
+                //       propertyVal = JSON.stringify(this[property]);
+
+                //       // if (property == 'store') {
+                //       //   propertyVal = this[property];
+                //       // }
+                //       // else {
+                //       //   propertyVal = JSON.stringify(this[property]);
+                //       //   //propertyVal = JsonStringifySafe(this[property]);
+                //       // }
+
+                //   }
+                  //this.node.newDiv.setAttribute(property, propertyVal);
+                  if (typeof this[property] == 'function') {
+                    this.node.newDiv.attributeObjects[property] = this[property]
+                    this.node.newDiv.setAttribute(property, 'function');
+                  }
+                  else if (typeof this[property] == 'object') {
+                    this.node.newDiv.attributeObjects[property] = this[property]
+                    this.node.newDiv.setAttribute(property, 'object');
                   }
                   else {
-                      propertyVal = JSON.stringify(this[property]);
-
-                      // if (property == 'store') {
-                      //   propertyVal = this[property];
-                      // }
-                      // else {
-                      //   propertyVal = JSON.stringify(this[property]);
-                      //   //propertyVal = JsonStringifySafe(this[property]);
-                      // }
-
+                    this.node.newDiv.setAttribute(property, this[property]);
                   }
-                  this.node.newDiv.setAttribute(property, propertyVal);
               }
           }
       }
@@ -264,10 +276,15 @@ export class EngBase {
     }
 
     baseOnDestroy() {
-      if (this.node.parentNode != undefined) {
-        if (this.node.parentNode.newDiv != undefined) {
-          this.node.parentNode.newDiv.removeChild(this.node.newDiv);
+      try {
+        if (this.node.parentNode != undefined) {
+          if (this.node.parentNode.newDiv != undefined) {
+            this.node.parentNode.newDiv.removeChild(this.node.newDiv);
+          }
         }
+      }
+      catch(e) {
+        console.log(e.toString())
       }
     }
 }

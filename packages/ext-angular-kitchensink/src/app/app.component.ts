@@ -144,7 +144,6 @@ export class AppComponent {
       else {
           this.hideExamples = true
       }
-      console.log(node)
       this.navTreeListCmp.setSelection(node);
       this.breadcrumbCmp.setSelection(node);
       //var routediv = document.getElementById('routediv');
@@ -210,20 +209,7 @@ export class AppComponent {
   }
 
   onNavChange = (nodeId, node) => {
-      console.log('5')
       this.nav(node);
-      return
-
-      if (node.isLeaf()) {
-      this.nestedlistCmp.goToLeaf(node);
-      } else {
-      this.nestedlistCmp.goToNode(node);
-      }
-      if(nodeId === '' || nodeId) {
-      location.hash = nodeId;
-      //this.navigate(nodeId)
-      this.nav(node)
-      }
   }
 
   setCodeTabs = (node) => {
@@ -245,16 +231,16 @@ export class AppComponent {
   }
 
   setTab = (codeMap, file) => {
-      var codeMapFile = codeMap[file];
-      if (codeMapFile != undefined) {
-          this.tabPanelCmp.add(
-              {
-                  xtype: 'panel', title: file, ui: 'code-panel', layout: 'fit', userSelectable: {element: true,bodyElement: true}, scrollable: true,
-                  tab: {ui: 'app-code-tab', flex: 0, padding: '0 5 0 0', minWidth: 220, maxWidth: 250},
-                  html: `<pre style="user-select: text;"><code class='code'>${codeMapFile.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`
-              }
-          );
-      }
+    var codeMapFile = codeMap[file];
+    if (codeMapFile != undefined) {
+      this.tabPanelCmp.add(
+        {
+          xtype: 'panel', title: file, ui: 'code-panel', layout: 'fit', userSelectable: {element: true,bodyElement: true}, scrollable: true,
+          tab: {ui: 'app-code-tab', flex: 0, padding: '0 5 0 0', minWidth: 220, maxWidth: 250},
+          html: `<pre style="user-select: text;"><code class='code'>${codeMapFile.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`
+        }
+      );
+    }
   }
 
   toggleTree = function(){
