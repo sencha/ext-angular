@@ -89,7 +89,6 @@ export class AppComponent {
       rootVisible: false,
       root: navTreeRoot
     };
-    //this.treeStore = {"xtype":"tree","rootVisible":true,"root":{"children":[{"text":"Child 1","leaf":true}]}}
   }
 
   readyViewport = ({cmp, cmpObj}) => {
@@ -272,78 +271,6 @@ export class AppComponent {
           console.error(e)
       }
   }
-
-  // readyLeftContainer = (event) => {
-  //     this.leftContainerCmp = event.detail.cmp;
-  //     var title
-  //     if(window['title'] == null) {
-  //         title = 'Sencha ExtAngular Kitchen Sink'
-  //     }
-  //     else {
-  //         title = window['title']
-  //     }
-  //     this.leftContainerCmp.updateHtml(title); // eslint-disable-line no-undef
-  // }
-
-  // readyRightContainer = (event) => {
-  //     this.rightContainerCmp = event.detail.cmp;
-  //     this.rightContainerCmp.updateHtml('Build: ' + BUILD_VERSION); // eslint-disable-line no-undef
-  // }
-
-  // readyBreadcrumb = (event) => {
-  //     this.breadcrumbCmp = event.detail.cmp;
-  //     this.breadcrumbCmp.setSelection(this.node)
-  // }
-
-  // readyCodeButton = (event) => {
-  //     this.codeButtonCmp = event.detail.cmp;
-  // }
-
-  // readyNavTreePanel = (event) => {
-  //     this.navTreePanelCmp = event.detail.cmp;
-  //     if(Ext.os.is.Phone) {
-  //         this.navTreePanelCmp.setWidth('100%');
-  //     }
-  // }
-
-  // readyNavTreeList = (event) => {
-  //     this.navTreeListCmp = event.detail.cmp;
-  //     this.navTreeListCmp.setStore(this.treeStore);
-  //  }
-
-  // readySelection = (event) => {
-  //     this.selectionCmp = event.detail.cmp;
-  //     var bodyStyle = `
-  //         backgroundSize: 20px 20px;
-  //         borderWidth: 0px;
-  //         backgroundColor: #e8e8e8;
-  //         backgroundImage:
-  //         linear-gradient(0deg, #f5f5f5 1.1px, transparent 0),
-  //         linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)
-  //     `;
-  //     this.selectionCmp.setBodyStyle(bodyStyle);
-  // }
-
-  // readyDataviewNav = (event) => {
-  //     this.dataviewNavCmp = event.detail.cmp;
-  // }
-
-  // readyRouter = (event) => {
-  //     this.routerCmp = event.detail.cmp;
-  // }
-
-  // readyCodePanel = (event) => {
-  //     this.codePanelCmp = event.detail.cmp;
-  // }
-
-  // readyTabPanel = (event) => {
-  //     this.tabPanelCmp = event.detail.cmp;
-  // }
-
-  // readyNestedlist = (event) => {
-  //     this.nestedlistCmp = event.detail.cmp;
-  // }
-
 }
 
 @Component({

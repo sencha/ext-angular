@@ -1,10 +1,10 @@
 ## @sencha/ext-angular
 
-last run: Tue Nov 19 2019 04:16:41 GMT-0500 (Eastern Standard Time)
+last run: Tue Nov 19 2019 07:01:45 GMT-0500 (Eastern Standard Time)
 
 This npm package contains the files that are needed to add the @sencha/ext-angular package to an Angular application
 
-## Test with an Angular CLI generated app
+## Create the Angular application with Angular CLI
 
 #### Install Angular CLI
 
@@ -40,7 +40,6 @@ code .
 
 (You can use any editor)
 
-
 #### Add ExtAngular to your project
 
 - Add to ./src/styles.css:
@@ -53,19 +52,6 @@ code .
   --color: black;
 }
 ```
-
-- Add to ./src/app/app.module.ts:
-
-```sh
-import { ExtAngularModule } from '@sencha/ext-angular';
-
-imports: [
-BrowserModule,
-ExtAngularModule
-],
-```
-
-or...
 
 - Replace ./src/app/app.module.ts with:
 
@@ -89,14 +75,6 @@ import { AppComponent } from './app.component';
 export class AppModule { }
 
 ```
-
-- Add to ./src/app/app.component.ts:
-
-```sh
- <ExtButton text="a button" shadow="true"></ExtButton>
-```
-
-or...
 
 - Replace ./src/app/app.component.ts with:
 
