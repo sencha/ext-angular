@@ -282,8 +282,6 @@ class EngBase {
                     //   }
                     //this.node.newDiv.setAttribute(property, propertyVal);
                     if (typeof this[property] == 'function') {
-                      console.log(property)
-                      console.log(this[property])
                         this.node.newDiv.attributeObjects[property] = this[property];
                         this.node.newDiv.setAttribute(property, 'function');
                     }
