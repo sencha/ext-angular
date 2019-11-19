@@ -39,13 +39,13 @@
             text="Change"
             width="90"
             dataIndex="change"
-            [renderer]="this.renderSign.bind(this, '0.00')"
+            [renderer]="this.renderSign"
         ></ExtGridcolumn>
         <ExtGridcolumn
             text="% Change"
             width="100"
             dataIndex="pctChange"
-            [renderer]="this.renderSign.bind(this, '0.00')"
+            [renderer]="this.renderSign"
         ></ExtGridcolumn>
         <ExtGridcolumn
             text="Last Updated"

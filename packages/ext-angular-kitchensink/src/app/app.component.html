@@ -129,7 +129,7 @@
         [shadow]="true"
         [tabBar]="{layout: {pack: 'left'}}"
       >
-        <ExtPanel *ngFor="let file of files" [hidden]="files.length > 0 ? false: true"
+        <!-- <ExtPanel *ngFor="let file of files" [hidden]="files.length > 0 ? false: true"
           layout="fit"
           [scrollable]="true"
           [title]="file.name"
@@ -138,7 +138,7 @@
           [userSelectable]="{element: true, bodyElement: true}"
           [html]="file.code"
         >
-        </ExtPanel>
+        </ExtPanel> -->
       </ExtTabpanel>
   </ExtPanel>
   <!-- code window ends-->

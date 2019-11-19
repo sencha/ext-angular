@@ -39,8 +39,9 @@ export class EditableGridComponent implements OnInit {
     gridService.initCompanyData();
   }
 
-  renderSign = (format, value) => {
-    var formattedValue = Ext.util.Format.number(value, format);
+//  renderSign = (format, value) => {
+  renderSign = (value) => {
+    var formattedValue = Ext.util.Format.number(value, '0.00');
     var col = '';
     if (value > 0) {
       col = 'green';

@@ -4,7 +4,6 @@
     [store]="store"
     [shadow]="true"
     enableColumnMove="true"
-
   >
     <ExtGridcolumn
       text="Company"
@@ -17,19 +16,19 @@
       dataIndex="price"
       formatter="usMoney">
     </ExtGridcolumn>
-    <!-- <ExtGridcolumn
+    <ExtGridcolumn
       text="Change"
       width="100"
       dataIndex="priceChange"
-      [cell]="{encodeHtml:false}"
-      [renderer]="this.renderSign.bind(this,'0.00')">
+      [renderer]="this.renderSign"
+    >
     </ExtGridcolumn>
     <ExtGridcolumn
       text="% Change"
       dataIndex="priceChangePct"
-      [cell]="{encodeHtml:false}"
-      [renderer]="this.renderSign.bind(this,'0.00')">
-    </ExtGridcolumn> -->
+      [renderer]="this.renderSign"
+    >
+    </ExtGridcolumn>
     <ExtGridcolumn
       text="Last Updated"
       width="125"
