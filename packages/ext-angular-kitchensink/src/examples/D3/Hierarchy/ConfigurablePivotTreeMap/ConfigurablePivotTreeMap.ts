@@ -1,6 +1,6 @@
 declare var Ext: any;
 import { Component, ViewEncapsulation } from '@angular/core'
-import createData from './createData';
+import {generateData} from './createData';
 
 const regions = {
     "Belgium": 'Europe',
@@ -151,7 +151,7 @@ export class ConfigurablePivotTreeMapComponent {
         }
       }
     ],
-    data: createData()
+    data: generateData()
   });
 
   matrixVar = {
