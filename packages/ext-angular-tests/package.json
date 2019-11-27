@@ -1,6 +1,6 @@
 {
   "name": "@sencha/ext-angular-tests",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "description": "ext-angular-tests",
   "scripts": {
     "start": "npm run dev",
@@ -18,7 +18,7 @@
   "devDependencies": {
     "d3": "4.5.0",
     "@sencha/ext": "~7.0.0",
-    "@sencha/ext-angular": "~7.0.0",
+    "@sencha/ext-angular-modern": "~7.1.0",
     "@sencha/ext-modern": "~7.0.0",
     "@sencha/ext-modern-treegrid": "~7.0.0",
     "@sencha/ext-modern-theme-material": "~7.0.0",
