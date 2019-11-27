@@ -1,0 +1,5 @@
+/*
+ * Public API Surface of ext-angular
+ */
+export * from './ext-angular-modern.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljX2FwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzZW5jaGEvZXh0LWFuZ3VsYXItbW9kZXJuLyIsInNvdXJjZXMiOlsicHVibGljX2FwaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7R0FFRztBQUVILGNBQWMsNkJBQTZCLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyIvKlxuICogUHVibGljIEFQSSBTdXJmYWNlIG9mIGV4dC1hbmd1bGFyXG4gKi9cblxuZXhwb3J0ICogZnJvbSAnLi9leHQtYW5ndWxhci1tb2Rlcm4ubW9kdWxlJztcbiJdfQ==

@@ -1,6 +1,6 @@
 {
   "name": "@sencha/ext-angular-boilerplate",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "description": "ext-angular-boilerplate",
   "scripts": {
     "start": "npm run dev",
@@ -20,10 +20,9 @@
     "@webcomponents/webcomponentsjs": "^2.4.0",
     "@angular-builders/custom-webpack": "^8.3.0",
     "@angular-builders/dev-server": "^7.3.1",
-    "@sencha/ext-angular": "~7.1.0",
-    "@sencha/ext-web-components": "~7.1.0",
-    "@sencha/ext-runtime-base": "~7.1.0",
-    "@sencha/ext-webpack-plugin": "~7.0.0",
+    "@sencha/ext-angular-modern": "~7.1.0",
+
+    "@sencha/ext-webpack-plugin": "~7.1.0",
     "@sencha/ext": "~7.0.0",
     "@sencha/ext-modern": "~7.0.0",
     "@sencha/ext-modern-treegrid": "~7.0.0",

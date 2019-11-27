@@ -1,5 +1,5 @@
 declare var Ext: any;
-import { ExtAngularModule } from '@sencha/ext-angular'
+import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -435,7 +435,7 @@ import {GridFilteringService} from '../examples/Grid/AddonsDecorations/GridFilte
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ExtAngularModule
+    ExtAngularModernModule
     //SharedModule
   ],
   providers: [

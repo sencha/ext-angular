@@ -58,7 +58,7 @@ module.exports = function (env) {
   var watch         = get('watch',         'yes')
   var verbose       = get('verbose',       'no')
   var basehref      = get('basehref',      '/')
-  var build_v       = get('build_v', '7.1.0.0');
+  var build_v       = get('build_v',       '7.1.0.0');
 
   const isProd = environment === 'production'
   portfinder.basePort = (env && env.port) || 1962
@@ -79,7 +79,9 @@ module.exports = function (env) {
         treeshake: treeshake,
         browser: browser,
         watch: watch,
-        verbose: verbose
+        verbose: verbose,
+        inject: 'yes',
+        intellishake: 'no'
       }),
 
       new AngularCompilerPlugin({
