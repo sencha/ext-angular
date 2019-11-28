@@ -20,7 +20,6 @@
     "buildexample": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=yes && cross-env webpack --env.environment=production --env.basehref=/ExtAngular/7.0.0/kitchensink/"
   },
   "devDependencies": {
-    "@webcomponents/webcomponentsjs": "../../lib/polyfills/packages/webcomponentsjs",
     "gzip-cli": "^1.0.1",
     "replace-in-file": "^4.2.0",
     "http-server": "^0.11.1",

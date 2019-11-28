@@ -103,7 +103,7 @@ module.exports = function (env) {
         to: './ext/ux'
     }]),
     new CopyWebpackPlugin([{
-        from: '../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js',
+        from: './polyfillsContainer',
         to: './webcomponents-bundle.js'
     }]),
     new webpack.DefinePlugin({
