@@ -1,6 +1,6 @@
 {
   "name": "@sencha/ext-angular-boilerplate-grid",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "description": "ext-angular-boilerplate-grid",
   "scripts": {
     "start": "npm run dev",
@@ -18,8 +18,7 @@
 },
 "dependencies": {},
   "devDependencies": {
-    "@sencha/ext-angular": "~7.0.0",
-    "@sencha/ext-angular-grid": "~7.0.0",
+    "@sencha/ext-angular-modern": "~7.1.0",
     "@sencha/ext-webpack-plugin": "~7.0.0",
     "@sencha/ext": "~7.0.0",
     "@sencha/ext-modern": "~7.0.0",

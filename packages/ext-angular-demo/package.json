@@ -1,6 +1,6 @@
 {
   "name": "@sencha/ext-angular-demo",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "description": "ext-angular-demo",
   "scripts": {
     "start": "npm run dev",
@@ -12,8 +12,8 @@
     "buildexample": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=yes && cross-env webpack --env.environment=production --env.basehref='/ExtAngular/7.0.0/kitchensink/'"
    },
   "devDependencies": {
-    "@sencha/ext-angular": "~7.0.0",
-    "@sencha/ext-webpack-plugin": "~7.0.0",
+    "@sencha/ext-angular-modern": "~7.1.0",
+    "@sencha/ext-webpack-plugin": "~7.1.0",
 
     "@sencha/ext": "~7.0.0",
     "@sencha/ext-modern": "~7.0.0",

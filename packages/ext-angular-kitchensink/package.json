@@ -1,6 +1,6 @@
 {
   "name": "@sencha/ext-angular-kitchensink",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "description": "ext-angular-kitchensink",
   "scripts": {
     "start": "npm run dev",
@@ -24,9 +24,9 @@
     "gzip-cli": "^1.0.1",
     "replace-in-file": "^4.2.0",
     "http-server": "^0.11.1",
-    "@sencha/ext-angular": "~7.1.0",
-    "@sencha/ext-runtime-base": "~7.1.0",
-    "@sencha/ext-webpack-plugin": "~7.0.0",
+    "@sencha/ext-angular-modern": "~7.1.0",
+    "@sencha/ext-web-components-modern": "~7.1.0",
+    "@sencha/ext-webpack-plugin": "~7.1.0",
     "@sencha/ext": "~7.0.0",
     "@sencha/ext-modern": "~7.0.0",
     "@sencha/ext-modern-treegrid": "~7.0.0",

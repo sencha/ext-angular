@@ -1,6 +1,6 @@
 {
   "name": "ext-angular-boilerplate-angular-cli",
-  "version": "0.0.0",
+  "version": "7.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -19,7 +19,7 @@
   "dependencies": {
     "gzip-cli": "^1.0.1",
     "http-server": "^0.11.1",
-    "@sencha/ext-angular": "^7.0.0",
+    "@sencha/ext-angular-modern": "^7.1.0",
     "@sencha/ext": "^7.0.0",
     "@sencha/ext-modern": "^7.0.0",
     "@sencha/ext-modern-theme-material": "^7.0.0",
