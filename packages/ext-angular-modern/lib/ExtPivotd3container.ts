@@ -14,7 +14,7 @@ import { EngBase } from './angularbase';
 
 @Component({
     selector: 'ExtPivotd3container',
-    inputs: ['renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','configurator','drawing','matrix',],
+    inputs: ['header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','configurator','drawing','matrix',],
     outputs: ['ready',],
     providers: [{provide: EngBase, useExisting: forwardRef(() => ExtPivotd3containerComponent)}],
     template: '<ng-content></ng-content>'
@@ -28,7 +28,7 @@ export class ExtPivotd3containerComponent extends EngBase {
         super(
             eRef,
             hostComponent,
-            ['renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','configurator','drawing','matrix',],
+            ['header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','configurator','drawing','matrix',],
             (new EWCPivotd3container()).events,
             ['ready',],
             vc

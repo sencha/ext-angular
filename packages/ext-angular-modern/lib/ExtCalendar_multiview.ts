@@ -14,7 +14,7 @@ import { EngBase } from './angularbase';
 
 @Component({
     selector: 'ExtCalendar_multiview',
-    inputs: ['renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','compact','compactOptions','defaultView','layout','store','timezoneOffset','value','views',],
+    inputs: ['header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','compact','compactOptions','defaultView','layout','store','timezoneOffset','value','views',],
     outputs: ['ready',],
     providers: [{provide: EngBase, useExisting: forwardRef(() => ExtCalendar_multiviewComponent)}],
     template: '<ng-content></ng-content>'
@@ -28,7 +28,7 @@ export class ExtCalendar_multiviewComponent extends EngBase {
         super(
             eRef,
             hostComponent,
-            ['renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','compact','compactOptions','defaultView','layout','store','timezoneOffset','value','views',],
+            ['header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','compact','compactOptions','defaultView','layout','store','timezoneOffset','value','views',],
             (new EWCCalendar_multiview()).events,
             ['ready',],
             vc
