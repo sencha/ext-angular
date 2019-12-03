@@ -48,7 +48,7 @@
     "@angular/router": "~8.2.14",
     "@ngtools/webpack": "~8.3.20",
     "@sencha/ext-froala-editor": "~7.1.0",
-    "core-js": "~3.4.7",
+    "core-js": "~2.5.7",
     "zone.js": "~0.10.2",
     "typescript": "3.5.3",
     "@types/core-js": "~2.5.2",
