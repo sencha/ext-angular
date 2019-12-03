@@ -45,6 +45,7 @@ import 'classlist.js';  // Run `npm install --save classlist.js`.
 /** Evergreen browsers require these. **/
 import 'core-js/es/reflect';
 //import 'core-js/es7/reflect';
+import 'core-js/proposals/reflect-metadata';
 
 
 /**
