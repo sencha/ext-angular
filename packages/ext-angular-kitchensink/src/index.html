@@ -9,23 +9,32 @@
     <script src="resources/code.js"></script>
     <link rel="icon" type="image/x-icon" href="resources/favicon.ico">
     <script src="webcomponents-bundle.js"></script>
+    <script>
+      //https://examples-test.sencha.com/ExtAngular/7.0.0/kitchensink/frame-index.html?basecolor=slategray&title=Angular UI Toolkit
+      //http://localhost:1841/?basecolor=maroon&title=Angular UI Toolkit
+      //https://www.rapidtables.com/web/color/red-color.html
+
+      // Alternative of URLSearchParams
+      function getURLParamInfo(name) {
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        if (results == null){
+           return null;
+        }
+        else {
+           return decodeURI(results[1]) || 0;
+        }
+      }
+      // const params = new URLSearchParams(window.location.search);
+      const basecolor = getURLParamInfo("basecolor");
+      window['title'] = getURLParamInfo("title");
+      var d = document.documentElement.style
+      if (basecolor != null) {
+        d.setProperty('--base-color', basecolor);
+        d.setProperty('--color', basecolor);
+      }
+    </script>
+    <link rel="stylesheet" type="text/css" href="resources/loader.css"/>
   </head>
-
-  <script>
-    //https://examples-test.sencha.com/ExtAngular/7.0.0/kitchensink/frame-index.html?basecolor=slategray&title=Angular UI Toolkit
-    //http://localhost:1841/?basecolor=maroon&title=Angular UI Toolkit
-    //https://www.rapidtables.com/web/color/red-color.html
-    const params = new URLSearchParams(window.location.search);
-    const basecolor = params.get("basecolor");
-    window['title'] = params.get("title");
-    var d = document.documentElement.style
-    if (basecolor != null) {
-      d.setProperty('--base-color', basecolor);
-      d.setProperty('--color', basecolor);
-    }
-  </script>
-  <link rel="stylesheet" type="text/css" href="resources/loader.css"/>
-
   <body>
     <app-root>
       <div id="loadingSplash">
