@@ -14,7 +14,7 @@ import { EngBase } from './angularbase';
 
 @Component({
     selector: 'ExtColorselector',
-    inputs: ['header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','alphaDecimalFormat','cancelButtonText','color','fieldPad','fieldWidth','format','okButtonText','showOkCancelButtons','showPreviousColor','value',],
+    inputs: ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','alphaDecimalFormat','cancelButtonText','color','fieldPad','fieldWidth','format','okButtonText','showOkCancelButtons','showPreviousColor','value',],
     outputs: ['ready','cancel','change','ok',],
     providers: [{provide: EngBase, useExisting: forwardRef(() => ExtColorselectorComponent)}],
     template: '<ng-content></ng-content>'
@@ -28,7 +28,7 @@ export class ExtColorselectorComponent extends EngBase {
         super(
             eRef,
             hostComponent,
-            ['header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','alphaDecimalFormat','cancelButtonText','color','fieldPad','fieldWidth','format','okButtonText','showOkCancelButtons','showPreviousColor','value',],
+            ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','alphaDecimalFormat','cancelButtonText','color','fieldPad','fieldWidth','format','okButtonText','showOkCancelButtons','showPreviousColor','value',],
             (new EWCColorselector()).events,
             ['ready','cancel','change','ok',],
             vc
