@@ -107,8 +107,8 @@ export class AppComponent {
 
     //readyViewport = (event) => {
     readyViewport = ({ cmp, cmpObj }) => {
-      console.log(extnameToProperty)
         extnameToProperty(cmpObj, this);
+        console.log(cmpObj)
 
         var title = "";
         if (window["title"] == null) {

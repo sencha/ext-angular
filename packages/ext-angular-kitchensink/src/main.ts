@@ -8,5 +8,10 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
+const Ext = window['Ext']
+Ext.onReady(function () {
+  platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
+});
+
+
