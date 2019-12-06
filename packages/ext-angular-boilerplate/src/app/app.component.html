@@ -10,7 +10,7 @@
     <ExtPanel docked="left" shadow="true" [hidden]="false">
         <ExtTreelist
             extname="navTreelist"
-            (ready)="readyNavTreeList($event)"
+          
             (selectionchange)="selectionchangeNavTreeList($event)"
             [width]="200"
             ui="nav"
@@ -20,7 +20,7 @@
     </ExtPanel>
 
 <ExtContainer>
-    <router-outlet #xextitem xstyle="display:flex;flex:1;" id="route"></router-outlet>
+  <router-outlet #extitem id="route"></router-outlet>
 </ExtContainer>
 
 <!-- <ExtPanel

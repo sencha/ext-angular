@@ -11,7 +11,7 @@ import { NgZone } from "@angular/core";
 })
 export class AppComponent {
     isPhone = Ext.platformTags.phone;
-    title = "Sencha ExtAngular 7.0 Boilerplate - Angular v" + VERSION.full;
+    title = "Sencha ExtAngularModern 7.1 Boilerplate - Angular v" + VERSION.full;
 
     navTreeListCmp: any;
     treeStore: any;
@@ -47,16 +47,11 @@ export class AppComponent {
     }
 
     readyViewport = ({ cmp, cmpObj }) => {
-        //readyViewport = (event) => {
-        //console.log(event)
-        console.log("readyViewport");
-        //extnameToProperty(cmpObj, this);
-        //this.cd.detectChanges();
-
-        // var hash = window.location.hash.substr(2);
-        // if (hash == '') {hash = 'all';}
-        // var node = this.treeStore.findNode('name', hash);
-        // this['navTreelistCmp'].setSelection(node);
+        this['navTreelist'] = cmpObj['navTreelist'];
+        this['navTreelist'].setStore(this.treeStore)
+        var hash = window.location.hash.substr(2);
+        var node = this['navTreelist'].getStore().findNode('name', hash);
+        this['navTreelist'].setSelection(node);
         // this.nav(node);
 
         // var me = this;
@@ -89,10 +84,10 @@ export class AppComponent {
         }
     }
 
-    readyNavTreeList = ({ cmp, cmpObj }) => {
-        this.navTreeListCmp = cmp;
-        this.navTreeListCmp.setStore(this.treeStore);
-    };
+    // readyNavTreeList = ({ cmp, cmpObj }) => {
+    //     this.navTreeListCmp = cmp;
+    //     this.navTreeListCmp.setStore(this.treeStore);
+    // };
 
     nav(node) {
         //console.log('in nav function, node is:');console.dir(node)
