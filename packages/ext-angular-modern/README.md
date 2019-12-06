@@ -1,6 +1,6 @@
-## @sencha/ext-angular
+## @sencha/ext-angular-modern
 
-last run: Wed Dec 04 2019 16:53:58 GMT-0500 (Eastern Standard Time)
+last run: Fri Dec 06 2019 11:44:55 GMT-0500 (Eastern Standard Time)
 
 This npm package contains the files that are needed to add the @sencha/ext-angular package to an Angular application
 
@@ -30,14 +30,14 @@ should be @angular/cli@8.3.x
 - Run 'ng new':
 
 ```sh
-ng new ext-angular-demo --minimal=true --interactive=false -g=true --skipInstall=false
+ng new ext-angular-modern-demo --minimal=true --interactive=false -g=true --skipInstall=false
 ```
 
 - Add ExtAngular to your application by running the following:
 
 ```sh
-cd ext-angular-demo
-npm install @sencha/ext-angular --save
+cd ext-angular-modern-demo
+npm install @sencha/ext-angular-modern --save
 ```
 
 - Open your editor
@@ -68,7 +68,7 @@ code .
 ```sh
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ExtAngularModule } from '@sencha/ext-angular';
+import { ExtAngularModernModule } from '@sencha/ext-angular-modern';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -77,7 +77,7 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    ExtAngularModule
+    ExtAngularModernModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -102,8 +102,8 @@ import { Component } from '@angular/core';
         [title]="title"
         (ready)="readyGrid($event)"
     >
-        <ExtGridcolumn text="name" dataIndex="name"></ExtGridcolumn>
-        <ExtGridcolumn text="email" dataIndex="email" flex="1"></ExtGridcolumn>
+        <ExtColumn text="name" dataIndex="name"></ExtColumn>
+        <ExtColumn text="email" dataIndex="email" flex="1"></ExtColumn>
     </ExtGrid>
 </ExtPanel>
     `,

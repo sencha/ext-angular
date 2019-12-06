@@ -91,15 +91,16 @@
     </ExtDataview>
   </ExtPanel>
   <!-- selections ends-->
-
   <!-- examples starts-->
-  <ExtContainer
+  <ExtPanel
+    title="router"
     extname="router"
     *ngIf="!isPhone"
     scrollable="true"
   >
-    <router-outlet #extitem id="route"></router-outlet>
-  </ExtContainer>
+  <router-outlet #extitem id="route"></router-outlet>
+
+  </ExtPanel>
   <!-- examples ends-->
 
     <!-- <div #extitem id="routediv">

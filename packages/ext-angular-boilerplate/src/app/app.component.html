@@ -19,9 +19,20 @@
         </ExtTreelist>
     </ExtPanel>
 
-<ExtContainer html="route">
+<ExtContainer>
     <router-outlet #xextitem xstyle="display:flex;flex:1;" id="route"></router-outlet>
 </ExtContainer>
+
+<!-- <ExtPanel
+title="router"
+extname="router"
+*ngIf="!isPhone"
+scrollable="true"
+>
+<router-outlet #extitem id="route"></router-outlet>
+
+</ExtPanel> -->
+
 
     <!-- <div #extitem xstyle="display:flex;flex:1;">
         hello
