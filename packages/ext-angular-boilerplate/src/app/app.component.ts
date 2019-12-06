@@ -2,7 +2,7 @@ declare var Ext: any;
 import { Component, VERSION, ChangeDetectorRef } from "@angular/core";
 import { Router } from "@angular/router";
 import { NgZone } from "@angular/core";
-import { extnameToProperty } from "@sencha/ext-runtime-modern-base/util";
+//import { extnameToProperty } from "@sencha/ext-runtime-modern-base/util";
 
 @Component({
     selector: "app-root",
@@ -50,7 +50,7 @@ export class AppComponent {
         //readyViewport = (event) => {
         //console.log(event)
         console.log("readyViewport");
-        extnameToProperty(cmpObj, this);
+        //extnameToProperty(cmpObj, this);
         //this.cd.detectChanges();
 
         // var hash = window.location.hash.substr(2);

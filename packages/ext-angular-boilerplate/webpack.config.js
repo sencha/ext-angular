@@ -43,7 +43,6 @@ module.exports = function (env) {
   const isProd = environment === 'production'
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
-      console.log(port)
     const plugins = [
       new HtmlWebpackPlugin({template: "index.html",hash: false,inject: "body"}),
       new BaseHrefWebpackPlugin({ baseHref: basehref }),

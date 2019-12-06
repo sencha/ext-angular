@@ -15,6 +15,8 @@ import { AppModule } from './app/app.module';
 //   enableProdMode();
 // }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
+const Ext = window['Ext']
+Ext.onReady(function () {
+  platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
-
+});

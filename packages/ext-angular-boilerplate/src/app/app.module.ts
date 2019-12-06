@@ -24,7 +24,7 @@ import { HomeComponent } from './Home/home.component'
 import { AboutComponent } from './About/about.component'
 import { NavMenuComponent } from './NavMenu/navmenu.component'
 
-import { ExtAngularModule } from '@sencha/ext-angular';
+import { ExtAngularModernModule } from '@sencha/ext-angular-modern';
 
 // import ExtContainerComponent from '@sencha/ext-elements-all/angular/ExtContainer';
 // import ExtTitlebarComponent from '@sencha/ext-elements-all/angular/ExtTitlebar';
@@ -48,7 +48,7 @@ const routes: Route[] = [
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {useHash: true});
 
 @NgModule({
-  imports:         [BrowserModule, routingModule, ExtAngularModule],
+  imports:         [BrowserModule, routingModule, ExtAngularModernModule],
   declarations:    [
         //ExtAngularBootstrapComponent,
         AppComponent,
