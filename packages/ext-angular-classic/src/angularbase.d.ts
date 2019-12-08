@@ -1,0 +1,30 @@
+import { QueryList, SimpleChanges } from '@angular/core';
+export declare class EngBase {
+    ext: any;
+    newDiv: any;
+    xtype: any;
+    properties: any;
+    A: any;
+    node: any;
+    parentNode: any;
+    base: any;
+    nodeName: any;
+    ewcChildren: any;
+    rawChildren: any;
+    hasParent: any;
+    parentType: any;
+    children: any;
+    last: any;
+    vc: any;
+    eventnames: any;
+    _extitem: any;
+    _extitems: QueryList<any>;
+    _childComponents: QueryList<EngBase>;
+    _viewchildComponents: QueryList<EngBase>;
+    readonly childComponents: EngBase[];
+    constructor(eRef: any, hostComponent: any, properties: any, events: any, eventnames: any, vc?: any);
+    baseOnInit(): void;
+    baseAfterViewInit(): void;
+    baseOnChanges(changes: SimpleChanges): void;
+    baseOnDestroy(): void;
+}
