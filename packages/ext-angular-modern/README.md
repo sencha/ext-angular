@@ -1,6 +1,6 @@
 ## @sencha/ext-angular-modern
 
-last run: Fri Dec 06 2019 11:44:55 GMT-0500 (Eastern Standard Time)
+last run: Sun Dec 08 2019 08:38:39 GMT-0500 (Eastern Standard Time)
 
 This npm package contains the files that are needed to add the @sencha/ext-angular package to an Angular application
 
@@ -33,7 +33,7 @@ should be @angular/cli@8.3.x
 ng new ext-angular-modern-demo --minimal=true --interactive=false -g=true --skipInstall=false
 ```
 
-- Add ExtAngular to your application by running the following:
+- Add ExtAngularModern to your application by running the following:
 
 ```sh
 cd ext-angular-modern-demo
@@ -51,6 +51,27 @@ code .
 (You can use any editor)
 
 #### Add ExtAngular to your project
+
+- Replace ./src/main.ts with:
+
+```sh
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
+
+if (environment.production) {
+  enableProdMode();
+}
+
+const Ext = window['Ext'];
+Ext.onReady(function () {
+  platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
+});
+
+```
 
 - Add to ./src/styles.css:
 
