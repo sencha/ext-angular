@@ -1,6 +1,6 @@
 ## @sencha/ext-angular-modern
 
-last run: Thu Dec 12 2019 10:13:35 GMT-0500 (Eastern Standard Time)
+last run: Thu Dec 12 2019 13:39:23 GMT-0500 (Eastern Standard Time)
 
 This npm package contains the files that are needed to add the @sencha/ext-angular package to an Angular application
 
