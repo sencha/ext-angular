@@ -7,7 +7,7 @@ import { VERSION } from "@angular/core";
 //import { Subject } from "rxjs";
 import { getFiles } from "./code_preview_helper";
 //import { _code } from "./code"
-import { extnameToProperty } from "@sencha/ext-runtime-modern-base/util";
+//import { extnameToProperty } from "@sencha/ext-runtime-modern-base/util";
 
 Ext.require([
     "Ext.MessageBox",
@@ -105,10 +105,16 @@ export class AppComponent {
         };
     }
 
-    //readyViewport = (event) => {
-    readyViewport = ({ cmp, cmpObj }) => {
-        extnameToProperty(cmpObj, this);
-        console.log(cmpObj)
+    extnameToProperty = (cmpObj, me) => {
+      for (var prop in cmpObj) {
+          me[prop+'Cmp'] = cmpObj[prop];
+      }
+    }
+
+    //readyViewport = ({ cmp, cmpObj }) => {
+    readyViewport = (detail) => {
+      console.log(detail)
+        this.extnameToProperty(detail.cmpObj, this);
 
         var title = "";
         if (window["title"] == null) {
