@@ -14070,6 +14070,30 @@
     //}
     //var eventnames = eventnamesall.filter(distinct);
 
+    var Ext$1 = window['Ext'];
+    function extLaunchFactory() {
+        var x = function () {
+            console.log('Hi from exported function');
+            return new Promise(function (resolve, reject) {
+                console.log("Loading Ext JS...");
+                Ext$1.onReady(function () {
+                    console.log("Ext has loaded...");
+                    resolve();
+                });
+            });
+        };
+        return x;
+    }
+    // var extLaunchFactory = () => {
+    //   return () => new Promise<void>((resolve, reject) => {
+    //       console.log("Loading Ext JS...");
+    //       Ext.onReady(function () {
+    //         console.log("Ext has loaded...");
+    //         resolve();
+    //       });
+    //   });
+    // }
+    //var ExtAppInitLaunchProvider = { provide: APP_INITIALIZER, useFactory: extLaunchFactory, deps: [], multi: true };
     var ExtAngularModernModule = /** @class */ (function () {
         function ExtAngularModernModule() {
         }
@@ -14313,7 +14337,9 @@
                     ExtViewportComponent,
                     ExtWidgetComponent,
                 ],
-                providers: [],
+                providers: [
+                    { provide: core.APP_INITIALIZER, useFactory: extLaunchFactory, deps: [], multi: true }
+                ],
                 entryComponents: [],
                 exports: [
                     ExtActionsheetComponent,
@@ -14558,6 +14584,7 @@
     }());
 
     exports.ExtAngularModernModule = ExtAngularModernModule;
+    exports.extLaunchFactory = extLaunchFactory;
     exports.ɵa = ExtActionsheetComponent;
     exports.ɵb = EngBase;
     exports.ɵba = ExtCartesianComponent;
