@@ -8,10 +8,10 @@ if (environment.production) {
   enableProdMode();
 }
 
-const Ext = window['Ext']
-Ext.onReady(function () {
+//const Ext = window['Ext']
+//Ext.onReady(function () {
   platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
-});
+//});
 
 
