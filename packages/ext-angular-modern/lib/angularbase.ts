@@ -6,9 +6,6 @@ import {
     QueryList,
     SimpleChanges
   } from '@angular/core';
-  //import * as JsonStringifySafe from 'json-stringify-safe'
-
-
 const Ext = window['Ext'];
 
 export class EngBase {
@@ -70,52 +67,25 @@ export class EngBase {
 
     baseOnInit() {
       //console.log('baseOnInit')
-
-      // console.log(this['html'])
-      // if (this['html'] == 'route') {
-      //   console.log('in route')
-      //   this.node.newDiv = document.createElement('router-outlet');
-      //   this.node.newDiv.setAttribute('id', 'route');
-      //   console.log(this.node.newDiv)
-      // }
-      // else {
-      //   this.node.newDiv = document.createElement('ext-' + this.xtype);
-      // }
-
-
-
       this.node.newDiv = document.createElement('ext-' + this.xtype);
       for (var i = 0; i < this.properties.length; i++) {
           var property = this.properties[i];
           if (this[property] !== undefined) {
-              //o[property] = this[property];
-              // why does this need to be done??
               if (property != 'fullscreen' && property != 'xtype') {
-
-                // var propertyVal = '';
-                //   if (typeof this[property] == 'string') {
-                //       propertyVal = this[property];
-                //   }
-                //   else {
-                //       propertyVal = JSON.stringify(this[property]);
-
-                //       // if (property == 'store') {
-                //       //   propertyVal = this[property];
-                //       // }
-                //       // else {
-                //       //   propertyVal = JSON.stringify(this[property]);
-                //       //   //propertyVal = JsonStringifySafe(this[property]);
-                //       // }
-
-                //   }
-                  //this.node.newDiv.setAttribute(property, propertyVal);
                   if (typeof this[property] == 'function') {
                     this.node.newDiv.attributeObjects[property] = this[property]
                     this.node.newDiv.setAttribute(property, 'function');
                   }
                   else if (typeof this[property] == 'object') {
-                    this.node.newDiv.attributeObjects[property] = this[property]
-                    this.node.newDiv.setAttribute(property, 'object');
+                    var sPropVal = ''
+                    try {
+                      sPropVal = JSON.stringify(this[property])
+                      this.node.newDiv.setAttribute(property, sPropVal);
+                    }
+                    catch(e) {
+                      this.node.newDiv.attributeObjects[property] = this[property];
+                      this.node.newDiv.setAttribute(property, 'object');
+                    }
                   }
                   else {
                     this.node.newDiv.setAttribute(property, this[property]);
@@ -159,6 +129,25 @@ export class EngBase {
 
     baseAfterViewInit() {
         var me = this;
+
+        if(this.node.innerHTML.length > 0) {
+          if(this.node.innerHTML.charAt(0) != '<') {
+            console.warn('use a div arount text')
+            // console.log(this.node.newDiv.A.ext)
+            // console.dir(this.node.childNodes)
+            // console.dir(this.node.childNodes.item(0))
+            // //var el = this.node.childNodes.item(0);
+            // //console.log(el)
+            // var w = Ext.create({xtype:'widget', element: this.node.childNodes.item(0)});
+            // this.node.newDiv.A.ext.add(w)
+          }
+          else if(this.node.innerHTML.substring(0, 4) != '<ext') {
+            var el = Ext.get(this.node.childNodes.item(0));
+            var w = Ext.create({xtype:'widget', element: el});
+            this.node.newDiv.A.ext.add(w)
+          }
+        }
+
         this._extitems.toArray().forEach( item => {
             //console.log(item.nativeElement)
             //var el = Ext.get(item.nativeElement);
