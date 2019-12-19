@@ -182,7 +182,9 @@ export class AppComponent {
             this.selectionCmp.setStyle({ display: "none" });
             this.selectionCmp.setHidden(true);
 
-            this.router.navigateByUrl(node.id);
+            this.router.navigateByUrl(node.id).then((isCompleted) => { if (isCompleted) {
+              this.cd.detectChanges();
+            }});
 
             //this.ngZone.run(() => this.router.navigateByUrl(node.id)).then();
             this.setCodeTabs(node);
