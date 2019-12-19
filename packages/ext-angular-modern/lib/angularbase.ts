@@ -141,7 +141,9 @@ export class EngBase {
             // var w = Ext.create({xtype:'widget', element: this.node.childNodes.item(0)});
             // this.node.newDiv.A.ext.add(w)
           }
-          else if(this.node.innerHTML.substring(0, 4) != '<ext') {
+          else if (this.node.innerHTML.substring(0, 4) != '<ext' &&
+                   this.node.innerHTML.substring(0, 4) != '<!--'
+          ) {
             var el = Ext.get(this.node.childNodes.item(0));
             var w = Ext.create({xtype:'widget', element: el});
             this.node.newDiv.A.ext.add(w)
