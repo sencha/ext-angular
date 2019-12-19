@@ -341,7 +341,8 @@ var EngBase = /** @class */ (function () {
                 // this.node.newDiv.A.ext.add(w)
             }
             else if (this.node.innerHTML.substring(0, 4) != '<ext' &&
-                this.node.innerHTML.substring(0, 4) != '<!--') {
+                this.node.innerHTML.substring(0, 4) != '<!--' &&
+                this.node.innerHTML.substring(0, 4) != '<rou') {
                 var el = Ext.get(this.node.childNodes.item(0));
                 var w = Ext.create({ xtype: 'widget', element: el });
                 this.node.newDiv.A.ext.add(w);
