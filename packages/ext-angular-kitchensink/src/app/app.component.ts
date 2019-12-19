@@ -173,6 +173,7 @@ export class AppComponent {
 
             this.collapseCode = true;
             this.dataviewNavCmp.setData(node.childNodes);
+            this.cd.detectChanges();
         } else {
             this.codeButtonCmp.setHidden(false);
             this.routerCmp.setHidden(false);
@@ -189,7 +190,6 @@ export class AppComponent {
             //this.ngZone.run(() => this.router.navigateByUrl(node.id)).then();
             this.setCodeTabs(node);
         }
-        this.cd.detectChanges();
     }
 
     selectionchangeNavTreeList(event) {
