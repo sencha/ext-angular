@@ -94,6 +94,7 @@ export class AppComponent {
         private cd: ChangeDetectorRef
     ) {
         this.router = router;
+        console.log('constructor')
         // this.treeStore = Ext.create('Ext.data.TreeStore', {
         //   rootVisible: true,
         //   root: navTreeRoot
