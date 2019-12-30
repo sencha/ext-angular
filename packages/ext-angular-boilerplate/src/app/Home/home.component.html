@@ -1,30 +1,30 @@
-<div style="padding:10px;">
-  <ExtButton text="home" shadow="true"></ExtButton>
-</div>
+<ExtContainer
+  extname="home"
+  padding="10"
+  layout="fit"
 
-<!-- <ExtContainer
-    extname="home"
-    padding="10"
-    layout="fit"
-    [fitToParent]="xtrue"
 >
-
-
-    <ExtGrid
+  <ExtGrid
         (ready)="readyGrid($event)"
         shadow="true"
+        [store]="store"
+        [columns]='[
+          {"text": "name", "dataIndex": "name", "flex": "1"},
+          {"text": "email", "dataIndex": "email", "width": "150"},
+          {"text": "phone", "dataIndex": "phone", "width": "150"}
+        ]'
     >
         <ExtToolbar docked="top">
-            <ExtSearchfield
-                (change)="this.onSearch($event)"
-                ui="faded"
-                placeholder="Search..."
-            >
-            </ExtSearchfield>
+          <ExtSearchfield
+              (change)="this.onSearch($event)"
+              ui="faded"
+              placeholder="Search..."
+          >
+          </ExtSearchfield>
         </ExtToolbar>
-        <ExtGridcolumn text="Name" dataIndex="name" width="300"></ExtGridcolumn>
-        <ExtGridcolumn text="Email" dataIndex="email" width="300"></ExtGridcolumn>
-        <ExtGridcolumn text="Phone" dataIndex="phone"width="200"></ExtGridcolumn>
+        <!-- <ExtColumn text="Name" dataIndex="name" width="300"></ExtColumn>
+        <ExtColumn text="Email" dataIndex="email" width="300"></ExtColumn>
+        <ExtColumn text="Phone" dataIndex="phone"width="200"></ExtColumn> -->
     </ExtGrid>
 
-</ExtContainer> -->
+</ExtContainer>

@@ -133,27 +133,19 @@ export class EngBase {
         if(this.node.innerHTML.length > 0) {
           if(this.node.innerHTML.charAt(0) != '<') {
             console.warn('use a div arount text')
-            // console.log(this.node.newDiv.A.ext)
-            // console.dir(this.node.childNodes)
-            // console.dir(this.node.childNodes.item(0))
-            // //var el = this.node.childNodes.item(0);
-            // //console.log(el)
-            // var w = Ext.create({xtype:'widget', element: this.node.childNodes.item(0)});
-            // this.node.newDiv.A.ext.add(w)
           }
           else if (this.node.innerHTML.substring(0, 4) != '<ext' &&
-            this.node.innerHTML.substring(0, 4) != '<!--' &&
-            this.node.innerHTML.substring(0, 4) != '<rou')
+            this.node.innerHTML.substring(0, 4) != '<!--')
             {
-            var el = Ext.get(this.node.childNodes.item(0));
-            var w = Ext.create({xtype:'widget', element: el});
-            this.node.newDiv.A.ext.add(w)
+              if (this.node.innerHTML.substring(0, 4) != '<rou') {
+                var el = Ext.get(this.node.childNodes.item(0));
+                var w = Ext.create({xtype:'widget', element: el});
+                this.node.newDiv.A.ext.add(w)
+              }
           }
         }
 
         this._extitems.toArray().forEach( item => {
-            //console.log(item.nativeElement)
-            //var el = Ext.get(item.nativeElement);
             me.node.newDiv.appendChild(Ext.get(item.nativeElement).dom);
         })
 

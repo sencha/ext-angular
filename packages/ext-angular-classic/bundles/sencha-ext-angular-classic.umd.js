@@ -406,7 +406,6 @@
         return (mod && mod.__esModule) ? mod : { default: mod };
     }
 
-    //import * as JsonStringifySafe from 'json-stringify-safe'
     var Ext = window['Ext'];
     var EngBase = /** @class */ (function () {
         function EngBase(eRef, hostComponent, properties, events, eventnames, vc) {
@@ -439,45 +438,25 @@
         });
         EngBase.prototype.baseOnInit = function () {
             //console.log('baseOnInit')
-            // console.log(this['html'])
-            // if (this['html'] == 'route') {
-            //   console.log('in route')
-            //   this.node.newDiv = document.createElement('router-outlet');
-            //   this.node.newDiv.setAttribute('id', 'route');
-            //   console.log(this.node.newDiv)
-            // }
-            // else {
-            //   this.node.newDiv = document.createElement('ext-' + this.xtype);
-            // }
             this.node.newDiv = document.createElement('ext-' + this.xtype);
             for (var i = 0; i < this.properties.length; i++) {
                 var property = this.properties[i];
                 if (this[property] !== undefined) {
-                    //o[property] = this[property];
-                    // why does this need to be done??
                     if (property != 'fullscreen' && property != 'xtype') {
-                        // var propertyVal = '';
-                        //   if (typeof this[property] == 'string') {
-                        //       propertyVal = this[property];
-                        //   }
-                        //   else {
-                        //       propertyVal = JSON.stringify(this[property]);
-                        //       // if (property == 'store') {
-                        //       //   propertyVal = this[property];
-                        //       // }
-                        //       // else {
-                        //       //   propertyVal = JSON.stringify(this[property]);
-                        //       //   //propertyVal = JsonStringifySafe(this[property]);
-                        //       // }
-                        //   }
-                        //this.node.newDiv.setAttribute(property, propertyVal);
                         if (typeof this[property] == 'function') {
                             this.node.newDiv.attributeObjects[property] = this[property];
                             this.node.newDiv.setAttribute(property, 'function');
                         }
                         else if (typeof this[property] == 'object') {
-                            this.node.newDiv.attributeObjects[property] = this[property];
-                            this.node.newDiv.setAttribute(property, 'object');
+                            var sPropVal = '';
+                            try {
+                                sPropVal = JSON.stringify(this[property]);
+                                this.node.newDiv.setAttribute(property, sPropVal);
+                            }
+                            catch (e) {
+                                this.node.newDiv.attributeObjects[property] = this[property];
+                                this.node.newDiv.setAttribute(property, 'object');
+                            }
                         }
                         else {
                             this.node.newDiv.setAttribute(property, this[property]);
@@ -520,6 +499,25 @@
         };
         EngBase.prototype.baseAfterViewInit = function () {
             var me = this;
+            if (this.node.innerHTML.length > 0) {
+                if (this.node.innerHTML.charAt(0) != '<') {
+                    console.warn('use a div arount text');
+                    // console.log(this.node.newDiv.A.ext)
+                    // console.dir(this.node.childNodes)
+                    // console.dir(this.node.childNodes.item(0))
+                    // //var el = this.node.childNodes.item(0);
+                    // //console.log(el)
+                    // var w = Ext.create({xtype:'widget', element: this.node.childNodes.item(0)});
+                    // this.node.newDiv.A.ext.add(w)
+                }
+                else if (this.node.innerHTML.substring(0, 4) != '<ext' &&
+                    this.node.innerHTML.substring(0, 4) != '<!--' &&
+                    this.node.innerHTML.substring(0, 4) != '<rou') {
+                    var el = Ext.get(this.node.childNodes.item(0));
+                    var w = Ext.create({ xtype: 'widget', element: el });
+                    this.node.newDiv.A.ext.add(w);
+                }
+            }
             this._extitems.toArray().forEach(function (item) {
                 //console.log(item.nativeElement)
                 //var el = Ext.get(item.nativeElement);
@@ -12272,6 +12270,30 @@
     //}
     //var eventnames = eventnamesall.filter(distinct);
 
+    var Ext$1 = window['Ext'];
+    function extLaunchFactory() {
+        var x = function () {
+            console.log('Hi from exported function');
+            return new Promise(function (resolve, reject) {
+                console.log("Loading Ext JS...");
+                Ext$1.onReady(function () {
+                    console.log("Ext has loaded...");
+                    resolve();
+                });
+            });
+        };
+        return x;
+    }
+    // var extLaunchFactory = () => {
+    //   return () => new Promise<void>((resolve, reject) => {
+    //       console.log("Loading Ext JS...");
+    //       Ext.onReady(function () {
+    //         console.log("Ext has loaded...");
+    //         resolve();
+    //       });
+    //   });
+    // }
+    //var ExtAppInitLaunchProvider = { provide: APP_INITIALIZER, useFactory: extLaunchFactory, deps: [], multi: true };
     var ExtAngularClassicModule = /** @class */ (function () {
         function ExtAngularClassicModule() {
         }
@@ -12484,7 +12506,9 @@
                     ExtToastComponent,
                     ExtWindowComponent,
                 ],
-                providers: [],
+                providers: [
+                    { provide: core.APP_INITIALIZER, useFactory: extLaunchFactory, deps: [], multi: true }
+                ],
                 entryComponents: [],
                 exports: [
                     ExtButtonComponent,
@@ -12698,6 +12722,7 @@
     }());
 
     exports.ExtAngularClassicModule = ExtAngularClassicModule;
+    exports.extLaunchFactory = extLaunchFactory;
     exports.ɵa = ExtButtonComponent;
     exports.ɵb = EngBase;
     exports.ɵba = ExtCartesianComponent;
