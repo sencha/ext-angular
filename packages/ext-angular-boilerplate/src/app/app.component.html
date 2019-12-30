@@ -1,7 +1,8 @@
 <ExtContainer
     (ready)="readyViewport($event)"
     [viewport]="true"
-    layout="hbox"
+    layout="vbox"
+    fitToParent="true"
 >
     <ExtTitlebar [title]="title" docked="top">
       <ExtButton align="left" *ngIf="isPhone" iconCls="x-fa fa-bars" (tap)="toggleAppMenu($event)" ripple="false"></ExtButton>

@@ -1,13 +1,24 @@
 declare var Ext: any;
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { gridData } from './data';
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    styles: [``]
+
+    styles: [`
+      // :host {
+      //   'style': 'display: table; height: 100%',
+      //   'class': 'myClass'
+      // }
+    `]
+
+
 })
 export class HomeComponent {
+  @HostBinding('style.background-color') public color: string = 'white';
+  @HostBinding('style.width') public width: string = '100%';
+  //@HostBinding('class') classes = 'classA classB';
     store = Ext.create('Ext.data.Store', {
         fields: ['name', 'email', 'phone', 'hoursTaken', 'hoursRemaining'],
         data: gridData
