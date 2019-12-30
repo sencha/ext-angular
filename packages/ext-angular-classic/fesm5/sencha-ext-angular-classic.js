@@ -1,5 +1,5 @@
 import { __decorate, __extends, __param } from 'tslib';
-import { EventEmitter, ContentChild, ContentChildren, ViewChildren, ElementRef, Host, Optional, SkipSelf, ViewContainerRef, Component, forwardRef, NgModule } from '@angular/core';
+import { EventEmitter, ContentChild, ContentChildren, ViewChildren, ElementRef, Host, Optional, SkipSelf, ViewContainerRef, Component, forwardRef, NgModule, APP_INITIALIZER } from '@angular/core';
 import EWCButton from '@sencha/ext-web-components-classic/dist/ext-button.component.js';
 import EWCCycle from '@sencha/ext-web-components-classic/dist/ext-cycle.component.js';
 import EWCSegmentedbutton from '@sencha/ext-web-components-classic/dist/ext-segmentedbutton.component.js';
@@ -205,7 +205,6 @@ import EWCMessagebox from '@sencha/ext-web-components-classic/dist/ext-messagebo
 import EWCToast from '@sencha/ext-web-components-classic/dist/ext-toast.component.js';
 import EWCWindow from '@sencha/ext-web-components-classic/dist/ext-window.component.js';
 
-//import * as JsonStringifySafe from 'json-stringify-safe'
 var Ext = window['Ext'];
 var EngBase = /** @class */ (function () {
     function EngBase(eRef, hostComponent, properties, events, eventnames, vc) {
@@ -238,45 +237,25 @@ var EngBase = /** @class */ (function () {
     });
     EngBase.prototype.baseOnInit = function () {
         //console.log('baseOnInit')
-        // console.log(this['html'])
-        // if (this['html'] == 'route') {
-        //   console.log('in route')
-        //   this.node.newDiv = document.createElement('router-outlet');
-        //   this.node.newDiv.setAttribute('id', 'route');
-        //   console.log(this.node.newDiv)
-        // }
-        // else {
-        //   this.node.newDiv = document.createElement('ext-' + this.xtype);
-        // }
         this.node.newDiv = document.createElement('ext-' + this.xtype);
         for (var i = 0; i < this.properties.length; i++) {
             var property = this.properties[i];
             if (this[property] !== undefined) {
-                //o[property] = this[property];
-                // why does this need to be done??
                 if (property != 'fullscreen' && property != 'xtype') {
-                    // var propertyVal = '';
-                    //   if (typeof this[property] == 'string') {
-                    //       propertyVal = this[property];
-                    //   }
-                    //   else {
-                    //       propertyVal = JSON.stringify(this[property]);
-                    //       // if (property == 'store') {
-                    //       //   propertyVal = this[property];
-                    //       // }
-                    //       // else {
-                    //       //   propertyVal = JSON.stringify(this[property]);
-                    //       //   //propertyVal = JsonStringifySafe(this[property]);
-                    //       // }
-                    //   }
-                    //this.node.newDiv.setAttribute(property, propertyVal);
                     if (typeof this[property] == 'function') {
                         this.node.newDiv.attributeObjects[property] = this[property];
                         this.node.newDiv.setAttribute(property, 'function');
                     }
                     else if (typeof this[property] == 'object') {
-                        this.node.newDiv.attributeObjects[property] = this[property];
-                        this.node.newDiv.setAttribute(property, 'object');
+                        var sPropVal = '';
+                        try {
+                            sPropVal = JSON.stringify(this[property]);
+                            this.node.newDiv.setAttribute(property, sPropVal);
+                        }
+                        catch (e) {
+                            this.node.newDiv.attributeObjects[property] = this[property];
+                            this.node.newDiv.setAttribute(property, 'object');
+                        }
                     }
                     else {
                         this.node.newDiv.setAttribute(property, this[property]);
@@ -319,6 +298,25 @@ var EngBase = /** @class */ (function () {
     };
     EngBase.prototype.baseAfterViewInit = function () {
         var me = this;
+        if (this.node.innerHTML.length > 0) {
+            if (this.node.innerHTML.charAt(0) != '<') {
+                console.warn('use a div arount text');
+                // console.log(this.node.newDiv.A.ext)
+                // console.dir(this.node.childNodes)
+                // console.dir(this.node.childNodes.item(0))
+                // //var el = this.node.childNodes.item(0);
+                // //console.log(el)
+                // var w = Ext.create({xtype:'widget', element: this.node.childNodes.item(0)});
+                // this.node.newDiv.A.ext.add(w)
+            }
+            else if (this.node.innerHTML.substring(0, 4) != '<ext' &&
+                this.node.innerHTML.substring(0, 4) != '<!--' &&
+                this.node.innerHTML.substring(0, 4) != '<rou') {
+                var el = Ext.get(this.node.childNodes.item(0));
+                var w = Ext.create({ xtype: 'widget', element: el });
+                this.node.newDiv.A.ext.add(w);
+            }
+        }
         this._extitems.toArray().forEach(function (item) {
             //console.log(item.nativeElement)
             //var el = Ext.get(item.nativeElement);
@@ -12071,6 +12069,30 @@ var ExtWindowComponent = /** @class */ (function (_super) {
 //}
 //var eventnames = eventnamesall.filter(distinct);
 
+var Ext$1 = window['Ext'];
+function extLaunchFactory() {
+    var x = function () {
+        console.log('Hi from exported function');
+        return new Promise(function (resolve, reject) {
+            console.log("Loading Ext JS...");
+            Ext$1.onReady(function () {
+                console.log("Ext has loaded...");
+                resolve();
+            });
+        });
+    };
+    return x;
+}
+// var extLaunchFactory = () => {
+//   return () => new Promise<void>((resolve, reject) => {
+//       console.log("Loading Ext JS...");
+//       Ext.onReady(function () {
+//         console.log("Ext has loaded...");
+//         resolve();
+//       });
+//   });
+// }
+//var ExtAppInitLaunchProvider = { provide: APP_INITIALIZER, useFactory: extLaunchFactory, deps: [], multi: true };
 var ExtAngularClassicModule = /** @class */ (function () {
     function ExtAngularClassicModule() {
     }
@@ -12283,7 +12305,9 @@ var ExtAngularClassicModule = /** @class */ (function () {
                 ExtToastComponent,
                 ExtWindowComponent,
             ],
-            providers: [],
+            providers: [
+                { provide: APP_INITIALIZER, useFactory: extLaunchFactory, deps: [], multi: true }
+            ],
             entryComponents: [],
             exports: [
                 ExtButtonComponent,
@@ -12504,5 +12528,5 @@ var ExtAngularClassicModule = /** @class */ (function () {
  * Generated bundle index. Do not edit.
  */
 
-export { ExtAngularClassicModule, ExtButtonComponent as ɵa, EngBase as ɵb, ExtCartesianComponent as ɵba, ExtChartComponent as ɵbb, ExtInteractionComponent as ɵbc, ExtLegendComponent as ɵbd, ExtChartnavigatorComponent as ɵbe, ExtPolarComponent as ɵbf, ExtSpacefillingComponent as ɵbg, ExtComponentComponent as ɵbh, ExtBoxComponent as ɵbi, ExtButtongroupComponent as ɵbj, ExtContainerComponent as ɵbk, ExtViewportComponent as ɵbl, ExtD3_canvasComponent as ɵbm, ExtD3_heatmapComponent as ɵbn, ExtD3_packComponent as ɵbo, ExtD3_partitionComponent as ɵbp, ExtD3_sunburstComponent as ɵbq, ExtD3_treeComponent as ɵbr, ExtD3_horizontal_treeComponent as ɵbs, ExtD3_treemapComponent as ɵbt, ExtD3_svgComponent as ɵbu, ExtD3Component as ɵbv, ExtDashboard_columnComponent as ɵbw, ExtDashboardComponent as ɵbx, ExtDashboard_panelComponent as ɵby, ExtDrawComponent as ɵbz, ExtCycleComponent as ɵc, ExtSurfaceComponent as ɵca, ExtEditorComponent as ɵcb, ExtFlashComponent as ɵcc, ExtCheckboxgroupComponent as ɵcd, ExtFieldComponent as ɵce, ExtCheckboxfieldComponent as ɵcf, ExtCheckboxComponent as ɵcg, ExtComboboxComponent as ɵch, ExtComboComponent as ɵci, ExtDatefieldComponent as ɵcj, ExtDisplayfieldComponent as ɵck, ExtFilefieldComponent as ɵcl, ExtFileuploadfieldComponent as ɵcm, ExtFilebuttonComponent as ɵcn, ExtHiddenfieldComponent as ɵco, ExtHiddenComponent as ɵcp, ExtHtmleditorComponent as ɵcq, ExtNumberfieldComponent as ɵcr, ExtPickerfieldComponent as ɵcs, ExtRadiofieldComponent as ɵct, ExtRadioComponent as ɵcu, ExtSpinnerfieldComponent as ɵcv, ExtTagfieldComponent as ɵcw, ExtTextfieldComponent as ɵcx, ExtTextareafieldComponent as ɵcy, ExtTextareaComponent as ɵcz, ExtSegmentedbuttonComponent as ɵd, ExtTimefieldComponent as ɵda, ExtTriggerfieldComponent as ɵdb, ExtTriggerComponent as ɵdc, ExtFieldcontainerComponent as ɵdd, ExtFieldsetComponent as ɵde, ExtLabelComponent as ɵdf, ExtFormComponent as ɵdg, ExtRadiogroupComponent as ɵdh, ExtCelleditorComponent as ɵdi, ExtActioncolumnComponent as ɵdj, ExtBooleancolumnComponent as ɵdk, ExtCheckcolumnComponent as ɵdl, ExtGridcolumnComponent as ɵdm, ExtDatecolumnComponent as ɵdn, ExtNumbercolumnComponent as ɵdo, ExtRownumbererComponent as ɵdp, ExtTemplatecolumnComponent as ɵdq, ExtWidgetcolumnComponent as ɵdr, ExtHeadercontainerComponent as ɵds, ExtGridpanelComponent as ɵdt, ExtGridComponent as ɵdu, ExtPropertygridComponent as ɵdv, ExtRoweditorComponent as ɵdw, ExtRoweditorbuttonsComponent as ɵdx, ExtImageComponent as ɵdy, ExtImagecomponentComponent as ɵdz, ExtSplitbuttonComponent as ɵe, ExtColumnsplitterComponent as ɵea, ExtTreelistComponent as ɵeb, ExtTreelistitemComponent as ɵec, ExtLoadmaskComponent as ɵed, ExtMenubarComponent as ɵee, ExtMenucheckitemComponent as ɵef, ExtColormenuComponent as ɵeg, ExtDatemenuComponent as ɵeh, ExtMenuitemComponent as ɵei, ExtMenuComponent as ɵej, ExtMenuseparatorComponent as ɵek, ExtHeaderComponent as ɵel, ExtPanelComponent as ɵem, ExtTablepanelComponent as ɵen, ExtTitleComponent as ɵeo, ExtToolComponent as ɵep, ExtColorpickerComponent as ɵeq, ExtDatepickerComponent as ɵer, ExtMonthpickerComponent as ɵes, ExtTimepickerComponent as ɵet, ExtPivotd3containerComponent as ɵeu, ExtPivotheatmapComponent as ɵev, ExtPivottreemapComponent as ɵew, ExtPivotgridComponent as ɵex, ExtMzpivotgridComponent as ɵey, ExtPivotconfigfieldComponent as ɵez, ExtCalendar_eventComponent as ɵf, ExtPivotconfigcontainerComponent as ɵfa, ExtPivotconfigpanelComponent as ɵfb, ExtProgressComponent as ɵfc, ExtProgressbarwidgetComponent as ɵfd, ExtProgressbarComponent as ɵfe, ExtBordersplitterComponent as ɵff, ExtSplitterComponent as ɵfg, ExtMultisliderComponent as ɵfh, ExtSliderComponent as ɵfi, ExtSliderfieldComponent as ɵfj, ExtSlidertipComponent as ɵfk, ExtSliderwidgetComponent as ɵfl, ExtSparklinebarComponent as ɵfm, ExtSparklineComponent as ɵfn, ExtSparklineboxComponent as ɵfo, ExtSparklinebulletComponent as ɵfp, ExtSparklinediscreteComponent as ɵfq, ExtSparklinelineComponent as ɵfr, ExtSparklinepieComponent as ɵfs, ExtSparklinetristateComponent as ɵft, ExtTabbarComponent as ɵfu, ExtTabpanelComponent as ɵfv, ExtTabComponent as ɵfw, ExtQuicktipComponent as ɵfx, ExtTipComponent as ɵfy, ExtTooltipComponent as ɵfz, ExtCalendar_form_addComponent as ɵg, ExtBreadcrumbComponent as ɵga, ExtTbfillComponent as ɵgb, ExtTbitemComponent as ɵgc, ExtPagingtoolbarComponent as ɵgd, ExtTbseparatorComponent as ɵge, ExtTbspacerComponent as ɵgf, ExtTbtextComponent as ɵgg, ExtToolbarComponent as ɵgh, ExtTreecolumnComponent as ɵgi, ExtTreepanelComponent as ɵgj, ExtTreeviewComponent as ɵgk, ExtColorbuttonComponent as ɵgl, ExtColorpickercolormapComponent as ɵgm, ExtColorpickercolorpreviewComponent as ɵgn, ExtColorfieldComponent as ɵgo, ExtColorselectorComponent as ɵgp, ExtColorpickersliderComponent as ɵgq, ExtColorpickerslideralphaComponent as ɵgr, ExtColorpickersliderhueComponent as ɵgs, ExtColorpickerslidersaturationComponent as ɵgt, ExtColorpickerslidervalueComponent as ɵgu, ExtDesktopComponent as ɵgv, ExtTaskbarComponent as ɵgw, ExtTrayclockComponent as ɵgx, ExtVideoComponent as ɵgy, ExtWallpaperComponent as ɵgz, ExtCalendar_calendar_pickerComponent as ɵh, ExtEventrecordermanagerComponent as ɵha, ExtExplorerComponent as ɵhb, ExtItemselectorfieldComponent as ɵhc, ExtItemselectorComponent as ɵhd, ExtMultiselectfieldComponent as ɵhe, ExtMultiselectComponent as ɵhf, ExtSearchfieldComponent as ɵhg, ExtGaugeComponent as ɵhh, ExtGmappanelComponent as ɵhi, ExtUxiframeComponent as ɵhj, ExtRatingComponent as ɵhk, ExtStatusbarComponent as ɵhl, ExtTreepickerComponent as ɵhm, ExtBoundlistComponent as ɵhn, ExtMultiselectorComponent as ɵho, ExtMultiselector_searchComponent as ɵhp, ExtTableviewComponent as ɵhq, ExtGridviewComponent as ɵhr, ExtDataviewComponent as ɵhs, ExtWidgetComponent as ɵht, ExtMessageboxComponent as ɵhu, ExtToastComponent as ɵhv, ExtWindowComponent as ɵhw, ExtCalendar_form_editComponent as ɵi, ExtCalendar_daysheaderComponent as ɵj, ExtCalendar_weeksheaderComponent as ɵk, ExtCalendar_listComponent as ɵl, ExtCalendar_dayComponent as ɵm, ExtCalendar_daysComponent as ɵn, ExtCalendar_monthComponent as ɵo, ExtCalendarComponent as ɵp, ExtCalendar_weekComponent as ɵq, ExtCalendar_weeksComponent as ɵr, ExtCalendar_dayviewComponent as ɵs, ExtCalendar_daysviewComponent as ɵt, ExtCalendar_monthviewComponent as ɵu, ExtCalendar_multiviewComponent as ɵv, ExtCalendar_weekviewComponent as ɵw, ExtCalendar_weeksviewComponent as ɵx, ExtAxisComponent as ɵy, ExtAxis3dComponent as ɵz };
+export { ExtAngularClassicModule, extLaunchFactory, ExtButtonComponent as ɵa, EngBase as ɵb, ExtCartesianComponent as ɵba, ExtChartComponent as ɵbb, ExtInteractionComponent as ɵbc, ExtLegendComponent as ɵbd, ExtChartnavigatorComponent as ɵbe, ExtPolarComponent as ɵbf, ExtSpacefillingComponent as ɵbg, ExtComponentComponent as ɵbh, ExtBoxComponent as ɵbi, ExtButtongroupComponent as ɵbj, ExtContainerComponent as ɵbk, ExtViewportComponent as ɵbl, ExtD3_canvasComponent as ɵbm, ExtD3_heatmapComponent as ɵbn, ExtD3_packComponent as ɵbo, ExtD3_partitionComponent as ɵbp, ExtD3_sunburstComponent as ɵbq, ExtD3_treeComponent as ɵbr, ExtD3_horizontal_treeComponent as ɵbs, ExtD3_treemapComponent as ɵbt, ExtD3_svgComponent as ɵbu, ExtD3Component as ɵbv, ExtDashboard_columnComponent as ɵbw, ExtDashboardComponent as ɵbx, ExtDashboard_panelComponent as ɵby, ExtDrawComponent as ɵbz, ExtCycleComponent as ɵc, ExtSurfaceComponent as ɵca, ExtEditorComponent as ɵcb, ExtFlashComponent as ɵcc, ExtCheckboxgroupComponent as ɵcd, ExtFieldComponent as ɵce, ExtCheckboxfieldComponent as ɵcf, ExtCheckboxComponent as ɵcg, ExtComboboxComponent as ɵch, ExtComboComponent as ɵci, ExtDatefieldComponent as ɵcj, ExtDisplayfieldComponent as ɵck, ExtFilefieldComponent as ɵcl, ExtFileuploadfieldComponent as ɵcm, ExtFilebuttonComponent as ɵcn, ExtHiddenfieldComponent as ɵco, ExtHiddenComponent as ɵcp, ExtHtmleditorComponent as ɵcq, ExtNumberfieldComponent as ɵcr, ExtPickerfieldComponent as ɵcs, ExtRadiofieldComponent as ɵct, ExtRadioComponent as ɵcu, ExtSpinnerfieldComponent as ɵcv, ExtTagfieldComponent as ɵcw, ExtTextfieldComponent as ɵcx, ExtTextareafieldComponent as ɵcy, ExtTextareaComponent as ɵcz, ExtSegmentedbuttonComponent as ɵd, ExtTimefieldComponent as ɵda, ExtTriggerfieldComponent as ɵdb, ExtTriggerComponent as ɵdc, ExtFieldcontainerComponent as ɵdd, ExtFieldsetComponent as ɵde, ExtLabelComponent as ɵdf, ExtFormComponent as ɵdg, ExtRadiogroupComponent as ɵdh, ExtCelleditorComponent as ɵdi, ExtActioncolumnComponent as ɵdj, ExtBooleancolumnComponent as ɵdk, ExtCheckcolumnComponent as ɵdl, ExtGridcolumnComponent as ɵdm, ExtDatecolumnComponent as ɵdn, ExtNumbercolumnComponent as ɵdo, ExtRownumbererComponent as ɵdp, ExtTemplatecolumnComponent as ɵdq, ExtWidgetcolumnComponent as ɵdr, ExtHeadercontainerComponent as ɵds, ExtGridpanelComponent as ɵdt, ExtGridComponent as ɵdu, ExtPropertygridComponent as ɵdv, ExtRoweditorComponent as ɵdw, ExtRoweditorbuttonsComponent as ɵdx, ExtImageComponent as ɵdy, ExtImagecomponentComponent as ɵdz, ExtSplitbuttonComponent as ɵe, ExtColumnsplitterComponent as ɵea, ExtTreelistComponent as ɵeb, ExtTreelistitemComponent as ɵec, ExtLoadmaskComponent as ɵed, ExtMenubarComponent as ɵee, ExtMenucheckitemComponent as ɵef, ExtColormenuComponent as ɵeg, ExtDatemenuComponent as ɵeh, ExtMenuitemComponent as ɵei, ExtMenuComponent as ɵej, ExtMenuseparatorComponent as ɵek, ExtHeaderComponent as ɵel, ExtPanelComponent as ɵem, ExtTablepanelComponent as ɵen, ExtTitleComponent as ɵeo, ExtToolComponent as ɵep, ExtColorpickerComponent as ɵeq, ExtDatepickerComponent as ɵer, ExtMonthpickerComponent as ɵes, ExtTimepickerComponent as ɵet, ExtPivotd3containerComponent as ɵeu, ExtPivotheatmapComponent as ɵev, ExtPivottreemapComponent as ɵew, ExtPivotgridComponent as ɵex, ExtMzpivotgridComponent as ɵey, ExtPivotconfigfieldComponent as ɵez, ExtCalendar_eventComponent as ɵf, ExtPivotconfigcontainerComponent as ɵfa, ExtPivotconfigpanelComponent as ɵfb, ExtProgressComponent as ɵfc, ExtProgressbarwidgetComponent as ɵfd, ExtProgressbarComponent as ɵfe, ExtBordersplitterComponent as ɵff, ExtSplitterComponent as ɵfg, ExtMultisliderComponent as ɵfh, ExtSliderComponent as ɵfi, ExtSliderfieldComponent as ɵfj, ExtSlidertipComponent as ɵfk, ExtSliderwidgetComponent as ɵfl, ExtSparklinebarComponent as ɵfm, ExtSparklineComponent as ɵfn, ExtSparklineboxComponent as ɵfo, ExtSparklinebulletComponent as ɵfp, ExtSparklinediscreteComponent as ɵfq, ExtSparklinelineComponent as ɵfr, ExtSparklinepieComponent as ɵfs, ExtSparklinetristateComponent as ɵft, ExtTabbarComponent as ɵfu, ExtTabpanelComponent as ɵfv, ExtTabComponent as ɵfw, ExtQuicktipComponent as ɵfx, ExtTipComponent as ɵfy, ExtTooltipComponent as ɵfz, ExtCalendar_form_addComponent as ɵg, ExtBreadcrumbComponent as ɵga, ExtTbfillComponent as ɵgb, ExtTbitemComponent as ɵgc, ExtPagingtoolbarComponent as ɵgd, ExtTbseparatorComponent as ɵge, ExtTbspacerComponent as ɵgf, ExtTbtextComponent as ɵgg, ExtToolbarComponent as ɵgh, ExtTreecolumnComponent as ɵgi, ExtTreepanelComponent as ɵgj, ExtTreeviewComponent as ɵgk, ExtColorbuttonComponent as ɵgl, ExtColorpickercolormapComponent as ɵgm, ExtColorpickercolorpreviewComponent as ɵgn, ExtColorfieldComponent as ɵgo, ExtColorselectorComponent as ɵgp, ExtColorpickersliderComponent as ɵgq, ExtColorpickerslideralphaComponent as ɵgr, ExtColorpickersliderhueComponent as ɵgs, ExtColorpickerslidersaturationComponent as ɵgt, ExtColorpickerslidervalueComponent as ɵgu, ExtDesktopComponent as ɵgv, ExtTaskbarComponent as ɵgw, ExtTrayclockComponent as ɵgx, ExtVideoComponent as ɵgy, ExtWallpaperComponent as ɵgz, ExtCalendar_calendar_pickerComponent as ɵh, ExtEventrecordermanagerComponent as ɵha, ExtExplorerComponent as ɵhb, ExtItemselectorfieldComponent as ɵhc, ExtItemselectorComponent as ɵhd, ExtMultiselectfieldComponent as ɵhe, ExtMultiselectComponent as ɵhf, ExtSearchfieldComponent as ɵhg, ExtGaugeComponent as ɵhh, ExtGmappanelComponent as ɵhi, ExtUxiframeComponent as ɵhj, ExtRatingComponent as ɵhk, ExtStatusbarComponent as ɵhl, ExtTreepickerComponent as ɵhm, ExtBoundlistComponent as ɵhn, ExtMultiselectorComponent as ɵho, ExtMultiselector_searchComponent as ɵhp, ExtTableviewComponent as ɵhq, ExtGridviewComponent as ɵhr, ExtDataviewComponent as ɵhs, ExtWidgetComponent as ɵht, ExtMessageboxComponent as ɵhu, ExtToastComponent as ɵhv, ExtWindowComponent as ɵhw, ExtCalendar_form_editComponent as ɵi, ExtCalendar_daysheaderComponent as ɵj, ExtCalendar_weeksheaderComponent as ɵk, ExtCalendar_listComponent as ɵl, ExtCalendar_dayComponent as ɵm, ExtCalendar_daysComponent as ɵn, ExtCalendar_monthComponent as ɵo, ExtCalendarComponent as ɵp, ExtCalendar_weekComponent as ɵq, ExtCalendar_weeksComponent as ɵr, ExtCalendar_dayviewComponent as ɵs, ExtCalendar_daysviewComponent as ɵt, ExtCalendar_monthviewComponent as ɵu, ExtCalendar_multiviewComponent as ɵv, ExtCalendar_weekviewComponent as ɵw, ExtCalendar_weeksviewComponent as ɵx, ExtAxisComponent as ɵy, ExtAxis3dComponent as ɵz };
 //# sourceMappingURL=sencha-ext-angular-classic.js.map

@@ -1,6 +1,6 @@
 ## @sencha/ext-angular-modern
 
-last run: Thu Dec 19 2019 16:32:13 GMT+0000 (Greenwich Mean Time)
+last run: Wed Dec 25 2019 10:56:37 GMT+0000 (Greenwich Mean Time)
 
 This npm package contains the files that are needed to add the @sencha/ext-angular package to an Angular application
 
@@ -12,9 +12,6 @@ npm login --registry=https://sencha.myget.org/F/early-adopter/npm/ --scope=@senc
 ```
 
 ## Create an Angular application with Angular CLI
-
-
-npm login --registry=https://sencha.myget.org/F/early-adopter/npm/ --scope=@sencha
 
 #### Install Angular CLI
 

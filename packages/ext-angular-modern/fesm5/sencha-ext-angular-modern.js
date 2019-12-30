@@ -329,30 +329,34 @@ var EngBase = /** @class */ (function () {
     };
     EngBase.prototype.baseAfterViewInit = function () {
         var me = this;
-        if (this.node.innerHTML.length > 0) {
-            if (this.node.innerHTML.charAt(0) != '<') {
-                console.warn('use a div arount text');
-                // console.log(this.node.newDiv.A.ext)
-                // console.dir(this.node.childNodes)
-                // console.dir(this.node.childNodes.item(0))
-                // //var el = this.node.childNodes.item(0);
-                // //console.log(el)
-                // var w = Ext.create({xtype:'widget', element: this.node.childNodes.item(0)});
-                // this.node.newDiv.A.ext.add(w)
-            }
-            else if (this.node.innerHTML.substring(0, 4) != '<ext' &&
-                this.node.innerHTML.substring(0, 4) != '<!--' &&
-                this.node.innerHTML.substring(0, 4) != '<rou') {
-                var el = Ext.get(this.node.childNodes.item(0));
-                var w = Ext.create({ xtype: 'widget', element: el });
-                this.node.newDiv.A.ext.add(w);
-            }
-        }
+        // if (this.node.innerHTML.length > 0) {
+        //     if (this.node.innerHTML.charAt(0) != '<') {
+        //         console.warn('use a div arount text');
+        //     }
+        //     else if (this.node.innerHTML.substring(0, 4) != '<ext' &&
+        //         this.node.innerHTML.substring(0, 4) != '<!--') {
+        //           console.log('a')
+        //         if (this.node.innerHTML.substring(0, 4) != '<rou') {
+        //           console.log('b')
+        //             var el = Ext.get(this.node.childNodes.item(0));
+        //             var w = Ext.create({ xtype: 'widget', element: el });
+        //             this.node.newDiv.A.ext.add(w);
+        //         }
+        //     }
+        // }
         this._extitems.toArray().forEach(function (item) {
-            //console.log(item.nativeElement)
-            //var el = Ext.get(item.nativeElement);
-            me.node.newDiv.appendChild(Ext.get(item.nativeElement).dom);
+          // console.dir(me.node.newDiv)
+          // var r2 = document.createElement('router-outlet');
+          // console.log(r2)
+          // me.node.newDiv.appendChild(r2);
+
+
+
+            me.node.newDiv.appendChild(item.nativeElement);
+          //me.node.newDiv.appendChild(Ext.get(item.nativeElement).dom);
         });
+
+
         // //console.log(this.xtype)
         // //console.log(this.childComponents)
         // //console.log(this._viewchildComponents)

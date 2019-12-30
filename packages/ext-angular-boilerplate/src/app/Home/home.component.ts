@@ -16,7 +16,7 @@ export class HomeComponent {
 
     readyGrid = ({cmp, cmpObj}) => {
         this.gridCmp = cmp;
-        this.gridCmp.setStore(this.store);
+        //this.gridCmp.setStore(this.store);
     }
 
     onSearch = (event) => {

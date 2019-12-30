@@ -10,9 +10,9 @@ import { NavMenuComponent } from './NavMenu/navmenu.component'
 import { ExtAngularModernModule } from '@sencha/ext-angular-modern';
 
 const routes: Route[] = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'about', component: AboutComponent }
+  { path: '', redirectTo: 'about', pathMatch: 'full' },
+  { path: 'about', component: AboutComponent },
+  { path: 'home', component: HomeComponent }
 ]
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {useHash: true});
 
