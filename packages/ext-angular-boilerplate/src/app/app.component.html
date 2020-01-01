@@ -1,26 +1,25 @@
 <ExtContainer
-    (ready)="readyViewport($event)"
-    [viewport]="true"
-    layout="vbox"
-    fitToParent="true"
+  (ready)="readyViewport($event)"
+  [viewport]="true"
+  layout="vbox"
+  padding="0 0 0 10"
 >
-    <ExtTitlebar [title]="title" docked="top">
-      <ExtButton align="left" *ngIf="isPhone" iconCls="x-fa fa-bars" (tap)="toggleAppMenu($event)" ripple="false"></ExtButton>
-    </ExtTitlebar>
 
-    <ExtPanel docked="left" shadow="true" [hidden]="false">
-      <ExtTreelist
-        extname="navTreelist"
-        (selectionchange)="selectionchangeNavTreeList($event)"
-        [width]="200"
-        ui="nav"
-        expanderFirst="false"
-      >
-      </ExtTreelist>
-    </ExtPanel>
+  <ExtTitlebar [title]="title" docked="top">
+    <ExtButton align="left" [hidden]="false" iconCls="x-fa fa-bars" (tap)="toggleAppMenu($event)" ripple="false"></ExtButton>
+  </ExtTitlebar>
 
-    <div style="width:100%;">
-      <router-outlet #extitem></router-outlet>
-    </div>
+  <ExtPanel docked="left" shadow="true" [hidden]="hideAppMenu">
+    <ExtTreelist
+      extname="navTreelist"
+      (selectionchange)="selectionchangeNavTreeList($event)"
+      [width]="200"
+      ui="nav"
+      expanderFirst="false"
+    >
+    </ExtTreelist>
+  </ExtPanel>
+
+  <router-outlet #extitem></router-outlet>
 
 </ExtContainer>

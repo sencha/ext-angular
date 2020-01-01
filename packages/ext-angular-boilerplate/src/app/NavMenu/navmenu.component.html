@@ -1,2 +1,9 @@
-<ExtTreelist #item [width]="width" ui="nav" expanderFirst="false" (selectionchange)="selectionChanged($event)" [store]="store"
-    [responsiveConfig]="responsiveConfig"></ExtTreelist>
+<ExtTreelist
+  [width]="width"
+  ui="nav"
+  expanderFirst="false"
+  [store]="store"
+  [responsiveConfig]="responsiveConfig"
+  (selectionchange)="selectionChanged($event)"
+>
+</ExtTreelist>
