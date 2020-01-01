@@ -239,6 +239,7 @@ import EWCWidget from '@sencha/ext-web-components-modern/dist/ext-widget.compone
 var Ext = window['Ext'];
 var EngBase = /** @class */ (function () {
     function EngBase(eRef, hostComponent, properties, events, eventnames, vc) {
+      //console.log('h')
         this.node = eRef.nativeElement;
         this.parentNode = hostComponent;
         this.properties = properties;
@@ -351,8 +352,12 @@ var EngBase = /** @class */ (function () {
           // me.node.newDiv.appendChild(r2);
 
 
+console.log('here2')
+console.dir(item)
+
 
             me.node.newDiv.appendChild(item.nativeElement);
+            console.log('after')
           //me.node.newDiv.appendChild(Ext.get(item.nativeElement).dom);
         });
 

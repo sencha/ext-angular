@@ -6,7 +6,7 @@ import { AppComponent } from './app.component'
 import { HomeComponent } from './Home/home.component'
 import { AboutComponent } from './About/about.component'
 import { NavMenuComponent } from './NavMenu/navmenu.component'
-
+import '../themer.ts'
 import { ExtAngularModernModule } from '@sencha/ext-angular-modern';
 
 const routes: Route[] = [

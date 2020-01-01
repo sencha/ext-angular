@@ -262,7 +262,7 @@ class EngBase {
         return this._childComponents.filter(item => item !== this);
     }
     baseOnInit() {
-        //console.log('baseOnInit')
+        console.log('baseOnInit')
         this.node.newDiv = document.createElement('ext-' + this.xtype);
         for (var i = 0; i < this.properties.length; i++) {
             var property = this.properties[i];

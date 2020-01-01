@@ -1,4 +1,3 @@
-declare var Ext: any;
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,7 +6,5 @@ import { Component } from '@angular/core';
   styles: [``]
 })
 export class AboutComponent {
-
-  isPhone = Ext.os.is.Phone;
 
 }

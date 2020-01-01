@@ -1,1 +1,6 @@
 
+
+
+document.getElementById('ext-element-4').appendChild(document.getElementById('ext-panel-2'))
+
+
