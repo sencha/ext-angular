@@ -329,19 +329,20 @@ var EngBase = /** @class */ (function () {
     };
     EngBase.prototype.baseAfterViewInit = function () {
         var me = this;
-        if (this.node.innerHTML.length > 0) {
-            if (this.node.innerHTML.charAt(0) != '<') {
-                console.warn('use a div arount text');
-            }
-            else if (this.node.innerHTML.substring(0, 4) != '<ext' &&
-                this.node.innerHTML.substring(0, 4) != '<!--') {
-                if (this.node.innerHTML.substring(0, 4) != '<rou') {
-                    var el = Ext.get(this.node.childNodes.item(0));
-                    var w = Ext.create({ xtype: 'widget', element: el });
-                    this.node.newDiv.A.ext.add(w);
-                }
-            }
-        }
+        // if(this.node.innerHTML.length > 0) {
+        //   if(this.node.innerHTML.charAt(0) != '<') {
+        //     console.warn('use a div arount text')
+        //   }
+        //   else if (this.node.innerHTML.substring(0, 4) != '<ext' &&
+        //     this.node.innerHTML.substring(0, 4) != '<!--')
+        //     {
+        //       if (this.node.innerHTML.substring(0, 4) != '<rou') {
+        //         var el = Ext.get(this.node.childNodes.item(0));
+        //         var w = Ext.create({xtype:'widget', element: el});
+        //         this.node.newDiv.A.ext.add(w)
+        //       }
+        //   }
+        // }
         this._extitems.toArray().forEach(function (item) {
             me.node.newDiv.appendChild(Ext.get(item.nativeElement).dom);
         });
