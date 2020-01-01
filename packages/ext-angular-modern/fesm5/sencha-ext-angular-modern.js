@@ -239,7 +239,6 @@ import EWCWidget from '@sencha/ext-web-components-modern/dist/ext-widget.compone
 var Ext = window['Ext'];
 var EngBase = /** @class */ (function () {
     function EngBase(eRef, hostComponent, properties, events, eventnames, vc) {
-      //console.log('h')
         this.node = eRef.nativeElement;
         this.parentNode = hostComponent;
         this.properties = properties;
@@ -330,38 +329,22 @@ var EngBase = /** @class */ (function () {
     };
     EngBase.prototype.baseAfterViewInit = function () {
         var me = this;
-        // if (this.node.innerHTML.length > 0) {
-        //     if (this.node.innerHTML.charAt(0) != '<') {
-        //         console.warn('use a div arount text');
-        //     }
-        //     else if (this.node.innerHTML.substring(0, 4) != '<ext' &&
-        //         this.node.innerHTML.substring(0, 4) != '<!--') {
-        //           console.log('a')
-        //         if (this.node.innerHTML.substring(0, 4) != '<rou') {
-        //           console.log('b')
-        //             var el = Ext.get(this.node.childNodes.item(0));
-        //             var w = Ext.create({ xtype: 'widget', element: el });
-        //             this.node.newDiv.A.ext.add(w);
-        //         }
-        //     }
-        // }
+        if (this.node.innerHTML.length > 0) {
+            if (this.node.innerHTML.charAt(0) != '<') {
+                console.warn('use a div arount text');
+            }
+            else if (this.node.innerHTML.substring(0, 4) != '<ext' &&
+                this.node.innerHTML.substring(0, 4) != '<!--') {
+                if (this.node.innerHTML.substring(0, 4) != '<rou') {
+                    var el = Ext.get(this.node.childNodes.item(0));
+                    var w = Ext.create({ xtype: 'widget', element: el });
+                    this.node.newDiv.A.ext.add(w);
+                }
+            }
+        }
         this._extitems.toArray().forEach(function (item) {
-          // console.dir(me.node.newDiv)
-          // var r2 = document.createElement('router-outlet');
-          // console.log(r2)
-          // me.node.newDiv.appendChild(r2);
-
-
-console.log('here2')
-console.dir(item)
-
-
-            me.node.newDiv.appendChild(item.nativeElement);
-            console.log('after')
-          //me.node.newDiv.appendChild(Ext.get(item.nativeElement).dom);
+            me.node.newDiv.appendChild(Ext.get(item.nativeElement).dom);
         });
-
-
         // //console.log(this.xtype)
         // //console.log(this.childComponents)
         // //console.log(this._viewchildComponents)
