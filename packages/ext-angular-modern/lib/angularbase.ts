@@ -10,28 +10,28 @@ const Ext = window['Ext'];
 
 export class EngBase {
     //static rootNode: any = null;
-    public ext: any
-    newDiv: any
+    //public ext: any
+    //newDiv: any
     xtype: any
     properties: any
     A: any;
     node: any
     parentNode: any
     base: any
-    nodeName: any
-    ewcChildren: any
-    rawChildren: any
-    hasParent: any
-    parentType: any
-    children: any
-    last: any
-    public vc: any;
+    //nodeName: any
+    //ewcChildren: any
+    //rawChildren: any
+    //hasParent: any
+    //parentType: any
+    //children: any
+    //last: any
+    //public vc: any;
     eventnames: any;
 
-    @ContentChild('extitem',{ static : false }) _extitem: any;
+    //@ContentChild('extitem',{ static : false }) _extitem: any;
     @ContentChildren('extitem') _extitems: QueryList<any>;
     @ContentChildren(EngBase) _childComponents: QueryList<EngBase>;
-    @ViewChildren(EngBase) _viewchildComponents: QueryList<EngBase>;
+    //@ViewChildren(EngBase) _viewchildComponents: QueryList<EngBase>;
     get childComponents(): EngBase[] {
         if (this._childComponents == undefined) { return []}
         return this._childComponents.filter(item => item !== this);
@@ -49,7 +49,7 @@ export class EngBase {
         this.parentNode = hostComponent;
         this.properties = properties;
         this.eventnames = eventnames;
-        this.vc = vc;
+        //this.vc = vc;
 
         var me = this;
         this.eventnames.forEach(function (eventname) {
