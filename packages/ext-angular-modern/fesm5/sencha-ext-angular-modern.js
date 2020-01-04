@@ -1,5 +1,5 @@
 import { __decorate, __extends, __param } from 'tslib';
-import { EventEmitter, ContentChild, ContentChildren, ViewChildren, ElementRef, Host, Optional, SkipSelf, ViewContainerRef, Component, forwardRef, NgModule, APP_INITIALIZER } from '@angular/core';
+import { EventEmitter, ContentChildren, ElementRef, Host, Optional, SkipSelf, ViewContainerRef, Component, forwardRef, NgModule, APP_INITIALIZER } from '@angular/core';
 import EWCActionsheet from '@sencha/ext-web-components-modern/dist/ext-actionsheet.component.js';
 import EWCAudio from '@sencha/ext-web-components-modern/dist/ext-audio.component.js';
 import EWCBreadcrumbbar from '@sencha/ext-web-components-modern/dist/ext-breadcrumbbar.component.js';
@@ -243,7 +243,7 @@ var EngBase = /** @class */ (function () {
         this.parentNode = hostComponent;
         this.properties = properties;
         this.eventnames = eventnames;
-        this.vc = vc;
+        //this.vc = vc;
         var me = this;
         this.eventnames.forEach(function (eventname) {
             me[eventname] = new EventEmitter();
@@ -253,6 +253,7 @@ var EngBase = /** @class */ (function () {
         this.base = EngBase;
     }
     Object.defineProperty(EngBase.prototype, "childComponents", {
+        //@ViewChildren(EngBase) _viewchildComponents: QueryList<EngBase>;
         get: function () {
             var _this = this;
             if (this._childComponents == undefined) {
@@ -341,17 +342,11 @@ var EngBase = /** @class */ (function () {
         }
     };
     __decorate([
-        ContentChild('extitem', { static: false })
-    ], EngBase.prototype, "_extitem", void 0);
-    __decorate([
         ContentChildren('extitem')
     ], EngBase.prototype, "_extitems", void 0);
     __decorate([
         ContentChildren(EngBase)
     ], EngBase.prototype, "_childComponents", void 0);
-    __decorate([
-        ViewChildren(EngBase)
-    ], EngBase.prototype, "_viewchildComponents", void 0);
     return EngBase;
 }());
 
@@ -13753,11 +13748,11 @@ var ExtWidgetComponent = /** @class */ (function (_super) {
 var Ext$1 = window['Ext'];
 function extLaunchFactory() {
     var x = function () {
-        console.log('Hi from exported function');
+        //console.log('Hi from exported function');
         return new Promise(function (resolve, reject) {
-            console.log("Loading Ext JS...");
+            //console.log("Loading Ext JS...");
             Ext$1.onReady(function () {
-                console.log("Ext has loaded...");
+                //console.log("Ext has loaded...");
                 resolve();
             });
         });

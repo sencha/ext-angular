@@ -1,5 +1,5 @@
 import { __decorate, __param } from 'tslib';
-import { EventEmitter, ContentChild, ContentChildren, ViewChildren, ElementRef, Host, Optional, SkipSelf, ViewContainerRef, Component, forwardRef, NgModule, APP_INITIALIZER } from '@angular/core';
+import { EventEmitter, ContentChildren, ElementRef, Host, Optional, SkipSelf, ViewContainerRef, Component, forwardRef, NgModule, APP_INITIALIZER } from '@angular/core';
 import EWCActionsheet from '@sencha/ext-web-components-modern/dist/ext-actionsheet.component.js';
 import EWCAudio from '@sencha/ext-web-components-modern/dist/ext-audio.component.js';
 import EWCBreadcrumbbar from '@sencha/ext-web-components-modern/dist/ext-breadcrumbbar.component.js';
@@ -243,7 +243,7 @@ class EngBase {
         this.parentNode = hostComponent;
         this.properties = properties;
         this.eventnames = eventnames;
-        this.vc = vc;
+        //this.vc = vc;
         var me = this;
         this.eventnames.forEach(function (eventname) {
             me[eventname] = new EventEmitter();
@@ -252,6 +252,7 @@ class EngBase {
         this.A.props = {};
         this.base = EngBase;
     }
+    //@ViewChildren(EngBase) _viewchildComponents: QueryList<EngBase>;
     get childComponents() {
         if (this._childComponents == undefined) {
             return [];
@@ -337,17 +338,11 @@ class EngBase {
     }
 }
 __decorate([
-    ContentChild('extitem', { static: false })
-], EngBase.prototype, "_extitem", void 0);
-__decorate([
     ContentChildren('extitem')
 ], EngBase.prototype, "_extitems", void 0);
 __decorate([
     ContentChildren(EngBase)
 ], EngBase.prototype, "_childComponents", void 0);
-__decorate([
-    ViewChildren(EngBase)
-], EngBase.prototype, "_viewchildComponents", void 0);
 
 var ExtActionsheetComponent_1;
 let ExtActionsheetComponent = ExtActionsheetComponent_1 = class ExtActionsheetComponent extends EngBase {
@@ -12807,11 +12802,11 @@ ExtWidgetComponent = ExtWidgetComponent_1 = __decorate([
 const Ext$1 = window['Ext'];
 function extLaunchFactory() {
     var x = () => {
-        console.log('Hi from exported function');
+        //console.log('Hi from exported function');
         return new Promise(function (resolve, reject) {
-            console.log("Loading Ext JS...");
+            //console.log("Loading Ext JS...");
             Ext$1.onReady(function () {
-                console.log("Ext has loaded...");
+                //console.log("Ext has loaded...");
                 resolve();
             });
         });

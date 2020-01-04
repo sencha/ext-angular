@@ -444,7 +444,7 @@
             this.parentNode = hostComponent;
             this.properties = properties;
             this.eventnames = eventnames;
-            this.vc = vc;
+            //this.vc = vc;
             var me = this;
             this.eventnames.forEach(function (eventname) {
                 me[eventname] = new core.EventEmitter();
@@ -454,6 +454,7 @@
             this.base = EngBase;
         }
         Object.defineProperty(EngBase.prototype, "childComponents", {
+            //@ViewChildren(EngBase) _viewchildComponents: QueryList<EngBase>;
             get: function () {
                 var _this = this;
                 if (this._childComponents == undefined) {
@@ -542,17 +543,11 @@
             }
         };
         __decorate([
-            core.ContentChild('extitem', { static: false })
-        ], EngBase.prototype, "_extitem", void 0);
-        __decorate([
             core.ContentChildren('extitem')
         ], EngBase.prototype, "_extitems", void 0);
         __decorate([
             core.ContentChildren(EngBase)
         ], EngBase.prototype, "_childComponents", void 0);
-        __decorate([
-            core.ViewChildren(EngBase)
-        ], EngBase.prototype, "_viewchildComponents", void 0);
         return EngBase;
     }());
 
@@ -13954,11 +13949,11 @@
     var Ext$1 = window['Ext'];
     function extLaunchFactory() {
         var x = function () {
-            console.log('Hi from exported function');
+            //console.log('Hi from exported function');
             return new Promise(function (resolve, reject) {
-                console.log("Loading Ext JS...");
+                //console.log("Loading Ext JS...");
                 Ext$1.onReady(function () {
-                    console.log("Ext has loaded...");
+                    //console.log("Ext has loaded...");
                     resolve();
                 });
             });
