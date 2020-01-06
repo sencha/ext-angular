@@ -126,15 +126,15 @@ export class AppComponent {
         this.leftContainerCmp.updateHtml(title);
         this.rightContainerCmp.updateHtml("Build: " + BUILD_VERSION);
 
-        var bodyStyle = `
-      backgroundSize: 20px 20px;
-      borderWidth: 0px;
-      backgroundColor: #e8e8e8;
-      backgroundImage:
-      linear-gradient(0deg, #f5f5f5 1.1px, transparent 0),
-      linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)
-    `;
-        this.selectionCmp.setBodyStyle(bodyStyle);
+    //     var bodyStyle = `
+    //   backgroundSize: 20px 20px;
+    //   borderWidth: 0px;
+    //   backgroundColor: #e8e8e8;
+    //   backgroundImage:
+    //   linear-gradient(0deg, #f5f5f5 1.1px, transparent 0),
+    //   linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)
+    // `;
+        //this.selectionCmp.setBodyStyle(bodyStyle);
 
         if (Ext.os.is.Phone) {
             this.navTreePanelCmp.setWidth("100%");
