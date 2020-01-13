@@ -1,6 +1,6 @@
 ## @sencha/ext-angular-classic
 
-last run: Fri Jan 10 2020 09:55:13 GMT-0500 (Eastern Standard Time)
+last run: Mon Jan 13 2020 13:38:25 GMT-0500 (Eastern Standard Time)
 
 This npm package contains the files that are needed to add the @sencha/ext-angular package to an Angular application
 
@@ -151,3 +151,11 @@ ng serve --open --port 4201
 ```
 
 open http://localhost:4201 in a browser - the ExtAngular application will load
+
+- To generate a theme for Sencha Themer:
+
+```sh
+npm install @sencha/cmd --save
+node_modules/.bin/ext-angular generate theme -b theme-material -n test-ext-angular
+```
+
