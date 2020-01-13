@@ -119,7 +119,7 @@ export class AppComponent {
 
         var title = "";
         if (window["title"] == null) {
-            title = "Sencha ExtAngular Kitchen Sink";
+            title = "Sencha ExtAngularModern Kitchen Sink";
         } else {
             title = window["title"];
         }
