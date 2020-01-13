@@ -209,8 +209,9 @@ export class AppComponent {
         this.nav(event.location.record);
     };
 
-    changeBreadcrumb = event => {
-        this.nav(event.node);
+    //changeBreadcrumb = (event) => {
+    changeBreadcrumb = ({sender, node, prevNode, eOpts}) => {
+        this.nav(node);
     };
 
     toggleCode = () => {

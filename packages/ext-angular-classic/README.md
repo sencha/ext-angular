@@ -1,6 +1,6 @@
 ## @sencha/ext-angular-classic
 
-last run: Mon Dec 23 2019 10:31:54 GMT+0000 (Greenwich Mean Time)
+last run: Fri Jan 10 2020 09:55:13 GMT-0500 (Eastern Standard Time)
 
 This npm package contains the files that are needed to add the @sencha/ext-angular package to an Angular application
 

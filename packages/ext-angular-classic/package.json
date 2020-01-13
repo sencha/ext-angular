@@ -2,6 +2,9 @@
   "name": "@sencha/ext-angular-classic",
   "description": "ext-angular-classic",
   "version": "7.1.0",
+  "bin": {
+    "ext-angular": "./bin/ext-angular.js"
+  },
   "main": "bundles/sencha-ext-angular-classic.umd.js",
   "private": false,
   "peerDependencies": {
