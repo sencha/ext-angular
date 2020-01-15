@@ -114,9 +114,14 @@ try {
       theme = 'material';
     }
     var from = `../ext-web-components-${toolkit}/ext-runtime-${toolkit}`;
-    fs.copySync(`${from}/theme/${theme}`,`../../../${copyFolder}ext-runtime-${toolkit}/theme/${theme}`);
+
+    fs.copySync(`${from}/themes/`,`../../../${copyFolder}ext-runtime-${toolkit}/themes/`);
     //fs.copySync(`../ext-runtime-${toolkit}-base/theme/${theme}`,`../../../${copyFolder}ext-runtime-${toolkit}/theme/${theme}`);
-    console.log(`${prefix} created ./${copyFolder}ext-runtime-${toolkit}/theme/${theme} folder`);
+    console.log(`${prefix} created ./${copyFolder}ext-runtime-${toolkit}/themes folder`);
+
+    // fs.copySync(`${from}/theme/${theme}`,`../../../${copyFolder}ext-runtime-${toolkit}/theme/${theme}`);
+    // //fs.copySync(`../ext-runtime-${toolkit}-base/theme/${theme}`,`../../../${copyFolder}ext-runtime-${toolkit}/theme/${theme}`);
+    // console.log(`${prefix} created ./${copyFolder}ext-runtime-${toolkit}/theme/${theme} folder`);
 
     fs.copySync(`${from}/engine.js`,`../../../${copyFolder}ext-runtime-${toolkit}/engine.js`);
     console.log(`${prefix} created ./${copyFolder}ext-runtime-${toolkit}/engine.js`);
@@ -124,36 +129,54 @@ try {
     fs.copySync(`${from}/boot.js`,`../../../${copyFolder}ext-runtime-${toolkit}/boot.js`);
     console.log(`${prefix} created ./${copyFolder}ext-runtime-${toolkit}/boot.js`);
 
-    fs.copySync(`${from}/css.prod.js`,`../../../${copyFolder}ext-runtime-${toolkit}/css.prod.js`);
-    console.log(`${prefix} created ./${copyFolder}ext-runtime-${toolkit}/css.prod.js`);
+    // fs.copySync(`${from}/css.prod.js`,`../../../${copyFolder}ext-runtime-${toolkit}/css.prod.js`);
+    // console.log(`${prefix} created ./${copyFolder}ext-runtime-${toolkit}/css.prod.js`);
 
     switch(framework) {
       case 'react':
         var indexHtml = fs.readFileSync(`../../../${copyFolder}index.html`, 'utf8');
-        //var position = indexHtml.indexOf('<title>');
         var position = indexHtml.indexOf('</head>');
-        var styles = `
-    <!--https://www.rapidtables.com/web/color/-->
-    <style>
-      :root {
-        --base-color: #024059;
-        --base-foreground-color: white;
-        --background-color: white;
-        --color: black;
-      }
-    </style>
-        `
-        var b =
-        `
-    <!--<link
-      href="%PUBLIC_URL%/ext-runtime-${toolkit}/theme/${theme}/${theme}-all.css"
-      rel="stylesheet" type="text/css"
-    >-->
-    <script src="%PUBLIC_URL%/ext-runtime-${toolkit}/boot.js"></script>
-    <script src="%PUBLIC_URL%/ext-runtime-${toolkit}/engine.js"></script>
-    <script src="%PUBLIC_URL%/ext-runtime-${toolkit}/css.prod.js"></script>
-${styles}
-        `
+
+    //     var styles = `
+    // <!--https://www.rapidtables.com/web/color/-->
+    // <style>
+    //   :root {
+    //     --base-color: #024059;
+    //     --base-foreground-color: white;
+    //     --background-color: white;
+    //     --color: black;
+    //   }
+    // </style>
+    //     `
+
+        var b = ''
+        if (toolkit == 'modern') {
+          b =
+          `
+      <script src="%PUBLIC_URL%/ext-runtime-${toolkit}/boot.js"></script>
+      <script src="%PUBLIC_URL%/ext-runtime-${toolkit}/engine.js"></script>
+      <script src="%PUBLIC_URL%/ext-runtime-${toolkit}/themes/css.${toolkit}.material.js"></script>
+      <!--
+      <script src="%PUBLIC_URL%/ext-runtime-${toolkit}/themes/css.${toolkit}.material.js"></script>
+      -->
+          `
+        }
+        else {
+          b =
+          `
+      <script src="%PUBLIC_URL%/ext-runtime-${toolkit}/boot.js"></script>
+      <script src="%PUBLIC_URL%/ext-runtime-${toolkit}/engine.js"></script>
+      <script src="%PUBLIC_URL%/ext-runtime-${toolkit}/themes/css.${toolkit}.material.js"></script>
+      <!--
+      <script src="%PUBLIC_URL%/ext-runtime-${toolkit}/themes/css.${toolkit}.crisp.js"></script>
+      <script src="%PUBLIC_URL%/ext-runtime-${toolkit}/themes/css.${toolkit}.graphite.js"></script>
+      <script src="%PUBLIC_URL%/ext-runtime-${toolkit}/themes/css.${toolkit}.material.js"></script>
+      <script src="%PUBLIC_URL%/ext-runtime-${toolkit}/themes/css.${toolkit}.neptune.js"></script>
+      <script src="%PUBLIC_URL%/ext-runtime-${toolkit}/themes/css.${toolkit}.triton.js"></script>
+      -->
+          `
+        }
+
         fs.copySync(`../../../${copyFolder}index.html`,`../../../${copyFolder}indexBack.html`);
         var indexHtmlNew = indexHtml.substring(0, position) + b + indexHtml.substring(position);
         fs.writeFileSync(`../../../${copyFolder}index.html`, indexHtmlNew);
@@ -165,22 +188,20 @@ ${styles}
         var angular = fs.readFileSync(angularName, 'utf8');
         const angularJson = JSON.parse(angular);
 
-
-
-        var style = `ext-runtime-${toolkit}/theme/${theme}/${theme}-all.css`;
-        var script2 = `ext-runtime-${toolkit}/boot.js`;
-        var script = `ext-runtime-${toolkit}/engine.js`;
-        var cssjs = `ext-runtime-${toolkit}/css.prod.js`;
+        //var style = `ext-runtime-${toolkit}/theme/${theme}/${theme}-all.css`;
+        var scriptBoot = `ext-runtime-${toolkit}/boot.js`;
+        var scriptEngine = `ext-runtime-${toolkit}/engine.js`;
+        var cssjs = `ext-runtime-${toolkit}/themes/css.${toolkit}.material.js`;
         //angularJson.projects[packageJsonApp.name].architect.build.options.styles.push(style);
-        angularJson.projects[packageJsonApp.name].architect.build.options.scripts.push(script2);
-        angularJson.projects[packageJsonApp.name].architect.build.options.scripts.push(script);
+        angularJson.projects[packageJsonApp.name].architect.build.options.scripts.push(scriptBoot);
+        angularJson.projects[packageJsonApp.name].architect.build.options.scripts.push(scriptEngine);
         angularJson.projects[packageJsonApp.name].architect.build.options.scripts.push(cssjs);
 
         const angularString = JSON.stringify(angularJson, null, 2);
         fs.writeFileSync(angularName, angularString);
         //console.log(`${prefix} added ${style} to styles array in ./angular.json`);
-        console.log(`${prefix} added ${script2} to scripts array in ./angular.json`);
-        console.log(`${prefix} added ${script} to scripts array in ./angular.json`);
+        console.log(`${prefix} added ${scriptBoot} to scripts array in ./angular.json`);
+        console.log(`${prefix} added ${scriptEngine} to scripts array in ./angular.json`);
         console.log(`${prefix} added ${cssjs} to scripts array in ./angular.json`);
         break;
       default:
