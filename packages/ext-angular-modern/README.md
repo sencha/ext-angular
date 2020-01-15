@@ -1,6 +1,6 @@
 ## @sencha/ext-angular-modern
 
-last run: Wed Jan 15 2020 11:38:50 GMT-0500 (Eastern Standard Time)
+last run: Wed Jan 15 2020 12:08:49 GMT-0500 (Eastern Standard Time)
 
 This npm package contains the files that are needed to add the @sencha/ext-angular package to an Angular application
 
@@ -12,6 +12,9 @@ npm login --registry=https://sencha.myget.org/F/early-adopter/npm/ --scope=@senc
 ```
 
 ## Create an Angular application with Angular CLI
+
+
+npm login --registry=https://sencha.myget.org/F/early-adopter/npm/ --scope=@sencha
 
 #### Install Angular CLI
 
@@ -49,7 +52,6 @@ code .
 
 #### Add ExtAngular to your project
 
-<!--
 - Replace ./src/main.ts with:
 
 ```sh
@@ -70,7 +72,6 @@ Ext.onReady(function () {
 });
 
 ```
--->
 
 - Add to ./src/styles.css:
 
@@ -157,3 +158,4 @@ open http://localhost:4201 in a browser - the ExtAngular application will load
 npm install @sencha/cmd --save
 node_modules/.bin/ext-angular generate theme -b theme-material -n test-ext-angular
 ```
+
