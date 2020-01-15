@@ -1,54 +1,159 @@
-## Getting started for @sencha/ext-react-classic
+## Getting started with @sencha/ext-angular-classic
 
-last run: Wed Jan 15 2020 12:19:01 GMT-0500 (Eastern Standard Time)
+last run: Wed Jan 15 2020 12:37:57 GMT-0500 (Eastern Standard Time)
 
-Getting started with @sencha/ext-react-classic and create-react-app
+This npm package contains the files that are needed to add the @sencha/ext-angular package to an Angular application
 
-### Login to the Sencha npm repo
-
-* Note, you must be signed into the Sencha npm registry to access packages.
-See [Authenticating to Sencha's npm Registry](getting_started.html#getting_started_-_authenticating_to_sencha_s_npm_registry)
-for more information.
-
-production:
-
-```sh
-npm login --registry=https://npm.sencha.com/ --scope=@sencha
-```
-
-early adopter:
+## Login to the Sencha early adopter npm repo
 
 ```sh
 npm login --registry=https://sencha.myget.org/F/early-adopter/npm/ --scope=@sencha
+
 ```
 
-### Create a React application with create-react-app
+## Create an Angular application with Angular CLI
 
-- Run the following:
+#### Install Angular CLI
 
 ```sh
-npx create-react-app ext-react-classic-demo --template @sencha/ext-react-classic
+npm install -g @angular/cli
 ```
 
-create-react-app will create a new application using the ext-react-classic template
-(from the sencha/ext-react git repo)
+should be @angular/cli@8.3.x
 
-- When create-react-app is completed, Run the following:
+
+#### Create a new Angular CLI application
+
+- Run 'ng new':
 
 ```sh
-cd ext-react-classic-demo
+ng new ext-angular-classic-demo --minimal=true --interactive=false -g=true --skipInstall=false
 ```
 
-- To change the theme, edit 'public/index.html' and uncomment one of the links below this line:
+- Add ExtAngularClassic to your application by running the following:
 
 ```sh
-<script src="%PUBLIC_URL%/ext-runtime-classic/themes/css.classic.material.js"></script>
+cd ext-angular-classic-demo
+npm install @sencha/ext-angular-classic --save
 ```
 
-- To start the ExtReact application, run the following in a terminal window:
+- Open your editor
+
+To open Visual Studio Code, type the following:
 
 ```sh
-npm start
+code .
 ```
 
-The ExtReact application will load in a browser window!
+(You can use any editor)
+
+#### Add ExtAngular to your project
+
+<!--
+- Replace ./src/main.ts with:
+
+```sh
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
+
+if (environment.production) {
+  enableProdMode();
+}
+
+const Ext = window['Ext'];
+Ext.onReady(function () {
+  platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
+});
+
+```
+-->
+
+- Add to ./src/styles.css:
+
+```sh
+:root {
+  --base-color: #024059;
+  --base-foreground-color: white;
+  --background-color: white;
+  --color: black;
+}
+```
+
+- Replace ./src/app/app.module.ts with:
+
+```sh
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { ExtAngularClassicModule } from '@sencha/ext-angular-classic';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    ExtAngularClassicModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+```
+
+- Replace ./src/app/app.component.ts with:
+
+```sh
+import { Component } from '@angular/core';
+
+@Component({
+    selector: 'app-root',
+    template: `
+<ExtPanel viewport="true" title="panel" layout="fit">
+    <ExtToolbar docked="top">
+        <ExtButton text="a button" shadow="true"></ExtButton>
+    </ExtToolbar>
+    <ExtGrid
+        [title]="title"
+        (ready)="readyGrid($event)"
+    >
+        <ExtColumn text="name" dataIndex="name"></ExtColumn>
+        <ExtColumn text="email" dataIndex="email" flex="1"></ExtColumn>
+    </ExtGrid>
+</ExtPanel>
+    `,
+    styles: []
+})
+export class AppComponent {
+    title = 'the grid';
+    data=[
+        {name: 'Marc', email: 'marc@gmail.com'},
+        {name: 'Nick', email: 'nick@gmail.com'},
+        {name: 'Andy', email: 'andy@gmail.com'},
+    ]
+    readyGrid(event) {
+        var grid = event.cmp;
+        grid.setData(this.data)
+    }
+}
+```
+
+- Type the following in a command/terminal window:
+
+```sh
+ng serve --open --port 4201
+```
+
+open http://localhost:4201 in a browser - the ExtAngular application will load
+
+- To generate a theme for Sencha Themer:
+
+```sh
+npm install @sencha/cmd --save
+node_modules/.bin/ext-angular generate theme -b theme-material -n test-ext-angular
+```
