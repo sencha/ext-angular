@@ -1,7 +1,7 @@
 {
   "name": "@sencha/ext-angular-modern",
   "description": "ext-angular-modern",
-  "version": "7.1.0",
+  "version": "7.1.1",
   "bin": {
     "ext-angular": "./bin/ext-angular.js"
   },

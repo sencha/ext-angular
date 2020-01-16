@@ -1,17 +1,17 @@
-<panel layout="fit" [fitToParent]="true" [bodyStyle]="bodyStyle">
+<ExtPanel viewport="true" layout="fit" [bodyStyle]="bodyStyle">
 
   <!-- Titlebar starts-->
-  <titlebar docked="top" [weight]="10">
-      <container>
+  <ExtTitlebar docked="top" [weight]="10">
+      <ExtContainer>
         <span #extitem>
           <span class="ext ext-sencha" [style]="{margin: '0 5px 0 7px', fontSize: '20px', width: '20px'}"></span>
           <span extjs href="#" class="app-title">Sencha ExtAngular 7.0 Tests - Angular v{{ANGULAR_VERSION}}</span>
         </span>
-      </container>
-    </titlebar>
+      </ExtContainer>
+    </ExtTitlebar>
     <!-- Titlebar ends-->
 
-  <panel [weight]="10"
+  <ExtPanel [weight]="10"
     docked="left"
     scrollable="y"
     width="320"
@@ -20,11 +20,11 @@
     [header]="false"
     [collapsible]="{ direction: 'left' }"
     [collapsed]="false">
-    <treelist ui="nav" [expanderFirst]="false" [expanderOnly]="false" [store]="treeStore" (selectionchange)="selectionChanged($event)"></treelist>
-  </panel>
+    <ExtTreelist ui="nav" [expanderFirst]="false" [expanderOnly]="false" [store]="treeStore" (selectionchange)="selectionChanged($event)"></ExtTreelist>
+  </ExtPanel>
 
-  <container padding="15">
+  <ExtContainer padding="15">
     <router-outlet #extroute></router-outlet>
-  </container>
- 
-</panel>
+  </ExtContainer>
+
+</ExtPanel>
