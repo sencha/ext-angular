@@ -1,6 +1,6 @@
 ## Eject for @sencha/ext-react-modern
 
-last run: Wed Jan 15 2020 20:51:50 GMT-0500 (Eastern Standard Time)
+last run: Thu Jan 16 2020 15:31:50 GMT-0500 (Eastern Standard Time)
 
 ### Eject - Adding ext-webpack-plugin to app
 
