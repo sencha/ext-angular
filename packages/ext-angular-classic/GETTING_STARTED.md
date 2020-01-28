@@ -1,6 +1,6 @@
 ## Getting started with @sencha/ext-angular-classic
 
-last run: Tue Jan 28 2020 08:14:19 GMT-0500 (Eastern Standard Time)
+last run: Tue Jan 28 2020 10:19:26 GMT-0500 (Eastern Standard Time)
 
 This npm package contains the files that are needed to add the @sencha/ext-angular package to an Angular application
 
@@ -141,6 +141,18 @@ export class AppComponent {
         grid.setData(this.data)
     }
 }
+```
+
+- to change theme, modify angular.json (uncomment one of the themes):
+
+```sh
+            "styles": [
+              "src/styles.css",
+              //"ext-runtime-modern/ios/ios-all.css"
+              //"ext-runtime-modern/material/material-all.css"
+              //"ext-runtime-modern/neptune/neptune-all.css"
+              //"ext-runtime-modern/triton/triton-all.css"
+            ],
 ```
 
 - Type the following in a command/terminal window:
