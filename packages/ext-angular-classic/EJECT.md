@@ -1,13 +1,13 @@
-## Eject for @sencha/ext-react-classic
+## Eject for @sencha/ext-angular-classic
 
-last run: Tue Jan 28 2020 10:19:26 GMT-0500 (Eastern Standard Time)
+last run: Wed Jan 29 2020 09:15:26 GMT-0500 (Eastern Standard Time)
 
 ### Eject - Adding ext-webpack-plugin to app
 
-#### 1. install ExtReact Packages using npm
+#### 1. install ExtAngular Packages using npm
 
 To add the ext-webpack-plugin, we must first
-[eject](https://github.com/facebookincubator/create-react-app#converting-to-a-custom-setup)
+[eject](https://github.com/facebookincubator/create-angular-app#converting-to-a-custom-setup)
 
 To eject, run the following in the root directory of your app.
 
@@ -24,7 +24,7 @@ also, many package entries are added to the 'dependencies' section of the 'packa
 
 #### 2. add to package.json
 
-add the following to the dependencies section of 'package.json', after "@sencha/ext-react-classic": "^7.1.0",
+add the following to the dependencies section of 'package.json', after "@sencha/ext-angular-classic": "^7.1.0",
 
 ```
     "@sencha/ext": "^7.1.0",
@@ -54,7 +54,7 @@ Add the following plugin entry:
 
 ```
       new ExtWebpackPlugin({
-        framework: 'react',
+        framework: 'angular',
         toolkit: 'classic',
         theme: 'theme-material',
         packages: [],
@@ -81,10 +81,10 @@ Add the following plugin entry:
       path: isEnvProduction ? paths.appBuild : paths.appPublic,
 ```
 
-#### 5. in 'public/index.html', comment out the 3 script tags for the ExtReact engine and add a script and link tag:
+#### 5. in 'public/index.html', comment out the 3 script tags for the ExtAngular engine and add a script and link tag:
 
 ```
-<title>React App</title>
+<title>Angular App</title>
 <script src="/ext/ext.js"></script>
 <link rel="stylesheet" type="text/css" href="/ext/ext.css">
 
@@ -99,21 +99,21 @@ Add the following plugin entry:
 
 - in 'scripts/start.js', on or around line 36
 - in 'scripts/build.js', on or around line 39
-- in 'node_modules/react-dev-utils/WebpackDevServerUtils.js', on or around line 23
+- in 'node_modules/angular-dev-utils/WebpackDevServerUtils.js', on or around line 23
 
 ```
 //const isInteractive = process.stdout.isTTY;
 const isInteractive = false;
 ```
 
-#### 7. Add .ext-reactrc to the root of your project
+#### 7. Add .ext-angularrc to the root of your project
 
-Since create-react-app uses separate webpack config files for development and production, we recommend putting
-shared config options for ExtReactWebpackPlugin in a `.ext-reactrc` file in the root of your project.  For example, the following sets the output path for the ExtReact bundle to static/js/ext-react, to match the default output path set by create-react-app.
+Since create-angular-app uses separate webpack config files for development and production, we recommend putting
+shared config options for ExtAngularWebpackPlugin in a `.ext-angularrc` file in the root of your project.  For example, the following sets the output path for the ExtAngular bundle to static/js/ext-angular, to match the default output path set by create-angular-app.
 
 ```json
 {
-    "output": "static/js/ext-react"
+    "output": "static/js/ext-angular"
 }
 ```
 
@@ -123,17 +123,17 @@ In package.json, add Ext as a global by changing the eslintConfig to:
 
 ```
 "eslintConfig": {
-  "extends": "react-app",
+  "extends": "angular-app",
   "globals": {
     "Ext": true
   }
 }
 ```
 
-#### 9. run the create-react-app application
+#### 9. run the create-angular-app application
 
 ```
 npm start
 ```
 
-The ExtReact application will load in a browser window with the ext-webpack-plugin!
+The ExtAngular application will load in a browser window with the ext-webpack-plugin!
