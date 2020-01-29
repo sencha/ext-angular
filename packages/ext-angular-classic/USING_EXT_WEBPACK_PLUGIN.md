@@ -1,139 +1,170 @@
 ## Using ext-webpack-plugin for @sencha/ext-angular-classic
 
-last run: Wed Jan 29 2020 15:41:35 GMT-0500 (Eastern Standard Time)
+last run: Wed Jan 29 2020 17:19:32 GMT-0500 (Eastern Standard Time)
 
-### Adding ext-webpack-plugin to app
+## Adding Sencha ext-webpack-plugin to an Angular CLI application
 
-#### 1. install ExtAngular Packages using npm
+This document defines the steps needed to add Sencha ext-webpack-plugin to a Angular application generated with Angular CLI.  Angular CLI is described in the [Angular CLI Overview](https://cli.angular.io/)
 
-To add the ext-webpack-plugin, we must first
-[eject](https://github.com/facebookincubator/create-angular-app#converting-to-a-custom-setup)
+### Follow the steps in Getting Started to creat an Angular CLI application with ExtAngular
 
-To eject, run the following in the root directory of your app.
+[For ext-angular-classic](https://github.com/sencha/ext-angular/blob/ext-angular-7.1.1/packages/ext-angular-classic/GETTING_STARTED.md)
 
-```
-npm run eject
-```
+For the next steps, make sure you are logged into the Sencha npm repository - for instructions, see this link: https://github.com/sencha/ext-angular/blob/ext-angular-7.0.x/README.md
 
-Two new folders are created:
+#### Do 1 of the next 2 steps:
 
-- config
-- scripts
+either...
+Add the following to the dependencies section of package.json:
 
-also, many package entries are added to the 'dependencies' section of the 'package.json' file
-
-#### 2. add to package.json
-
-add the following to the dependencies section of 'package.json', after "@sencha/ext-angular-classic": "^7.1.0",
-
-```
-    "@sencha/ext": "^7.1.0",
-    "@sencha/ext-classic": "^7.1.0",
-    "@sencha/ext-classic-theme-material": "^7.1.0",
-    "@sencha/ext-webpack-plugin": "^7.1.0",
+```sh
+"gzip-cli": "^1.0.1",
+"http-server": "^0.11.1",
+"@sencha/ext-angular-classic": "~7.1.1",
+"@sencha/ext": "^7.0.0",
+"@sencha/ext-modern": "^7.0.0",
+"@sencha/ext-modern-theme-material": "^7.0.0",
+"@sencha/ext-webpack-plugin": "^7.0.0",
+"@angular-builders/custom-webpack": "^8.1.0",
+"@angular-builders/dev-server": "^7.3.1",
+"compression-webpack-plugin": "^3.0.0",
 ```
 
-run npm install:
+To install the npm dependencies, in the terminal or command window run the following:
 
-```
+```sh
 npm install
 ```
 
-#### 3. add ext-webpack-plugin to 'config/webpack.config.js'
+or...
+Run the following commands in the terminal/command window:
 
-Add the following to the top of config/webpack.config.js:
+```sh
+npm install --save @sencha/ext-angularclassic @sencha/ext @sencha/ext-classic @sencha/ext-classic-theme-material
+npm install --save @sencha/ext-webpack-plugin
+npm install --save @angular-builders/custom-webpack
+npm install --save @angular-builders/dev-server
+```
 
-```JavaScript
+#### Edit scripts section pf package.json
+
+Add the following to the scripts section of package.json:
+
+```sh
+"buildprod": "ng build && npm run gzipext && npm run http",
+"gzipext": "npx gzip dist/ext/*.js",
+"http": "npx http-server dist -g -o",
+```
+
+#### Edit angular.json, index.html, app.module.ts, app component files, and Add custom-webpack.config.js
+
+To introduce custom webpack configuration, we first need to make changes inside angular.json file.
+
+For **ng build** command, configure the architect/build object in the angular.json file and update the builder from *@angular-devkit/build-angular:browser* to *@angular-builders/custom-webpack:browser* and add the customWebpackConfig key inside options like:
+
+ ```sh
+ "builder": "@angular-builders/custom-webpack:browser",
+ "options": {
+   "customWebpackConfig": {
+     "path": "./custom-webpack.config.js",
+     "replaceDuplicatePlugins": true
+   },
+   "outputPath": "dist",
+   ... other options
+```
+
+For **ng serve** command, update the serve/builder in the angular.json file:
+
+ ```sh
+ "serve": {
+   "builder": "@angular-builders/custom-webpack:dev-server",
+... other options
+```
+
+To configure the ext-webpack-plugin for webpack in Angular, create a file named **custom-webpack.config.js** at the root directory (where the package.json is), and add the following:
+```sh
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin')
+const path = require('path');
+
+module.exports = {
+  devServer: {
+    contentBase: 'dist',
+  },
+  output: {
+    path: path.join(__dirname, 'dist'),
+  },
+  plugins: [
+    new ExtWebpackPlugin({
+      framework: 'angular',
+      toolkit: 'modern',
+      theme: 'theme-material',
+      emit: 'yes',
+      script: '',
+      packages: [],
+      profile: '',
+      environment: 'development',
+      treeshake: 'no',
+      browser: 'no',
+      watch: 'no',
+      verbose: 'no',
+      inject: 'no',
+      intellishake: 'no'
+    }),
+    new CompressionPlugin({
+        //include: //dist/ext/,
+        filename: "[path].gz[query]",
+        algorithm: "gzip",
+        test: /.js$|.css$|.html$/,
+        minRatio: 0.8,
+        threshold: 10240
+    }),
+  ]
+};
 ```
 
-Add the following plugin entry:
 
-- search for 'new HtmlWebpackPlugin'
-- after the ), for that plugin entry, (around line 540) add the following:
+Add Ext.js and Ext.css inside index.html
 
-```
-      new ExtWebpackPlugin({
-        framework: 'angular',
-        toolkit: 'classic',
-        theme: 'theme-material',
-        packages: [],
-        script: '',
-        emit: 'yes',
-        port: 1962,
-        profile: '',
-        environment: 'development',
-        treeshake: 'no',
-        browser: 'no',
-        watch: 'yes',
-        verbose: 'no',
-        inject: 'no',
-        intellishake: 'no'
-      }),
+```sh
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ExtAngularBoilerplateAngularCli</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="ext/ext.css">
+</head>
+<body>
+  <script src="ext/ext.js"></script>
+  <app-root></app-root>
+</body>
+</html>
 ```
 
-#### 4. in 'config/webpack.config.js' on or around line 171, change to this:
 
-```
-    output: {
-      // The build folder.
-      //path: isEnvProduction ? paths.appBuild : undefined,
-      path: isEnvProduction ? paths.appBuild : paths.appPublic,
-```
+#### Run the application
 
-#### 5. in 'public/index.html', comment out the 3 script tags for the ExtAngular engine and add a script and link tag:
+In the terminal or command window, run the application:
 
-```
-<title>Angular App</title>
-<script src="/ext/ext.js"></script>
-<link rel="stylesheet" type="text/css" href="/ext/ext.css">
-
-<!--
-<script src="%PUBLIC_URL%/ext-runtime-classic/boot.js"></script>
-<script src="%PUBLIC_URL%/ext-runtime-classic/engine.js"></script>
-<script src="%PUBLIC_URL%/ext-runtime-classic/themes/css.classic.material.js"></script>
--->
+```sh
+ng serve
 ```
 
-#### 6. optionally, to stop the build from clearing the screen, make the following changes ineach of the files below:
+or
 
-- in 'scripts/start.js', on or around line 36
-- in 'scripts/build.js', on or around line 39
-- in 'node_modules/angular-dev-utils/WebpackDevServerUtils.js', on or around line 23
-
-```
-//const isInteractive = process.stdout.isTTY;
-const isInteractive = false;
-```
-
-#### 7. Add .ext-angularrc to the root of your project
-
-Since create-angular-app uses separate webpack config files for development and production, we recommend putting
-shared config options for ExtAngularWebpackPlugin in a `.ext-angularrc` file in the root of your project.  For example, the following sets the output path for the ExtAngular bundle to static/js/ext-angular, to match the default output path set by create-angular-app.
-
-```json
-{
-    "output": "static/js/ext-angular"
-}
-```
-
-#### 8. Add Ext as a global to the ESLint config
-
-In package.json, add Ext as a global by changing the eslintConfig to:
-
-```
-"eslintConfig": {
-  "extends": "angular-app",
-  "globals": {
-    "Ext": true
-  }
-}
-```
-
-#### 9. run the create-angular-app application
-
-```
+```sh
 npm start
 ```
 
-The ExtAngular application will load in a browser window with the ext-webpack-plugin!
+for production build:
+
+```sh
+npm run buildprod
+```
+
+
+Browse to http://localhost:4200 in your browser.  You should see the Angular starter application with an ExtAngular Panel and Grid in the browser.
