@@ -1,14 +1,23 @@
 ## Getting started with @sencha/ext-angular-classic
 
-last run: Wed Jan 29 2020 15:02:46 GMT-0500 (Eastern Standard Time)
+last run: Wed Jan 29 2020 15:41:35 GMT-0500 (Eastern Standard Time)
 
 This npm package contains the files that are needed to add the @sencha/ext-angular-classic package to an Angular application
 
-## Login to the Sencha early adopter npm repo
+### Login to the Sencha npm repo
+
+* Note, you must be signed into the Sencha npm registry to access packages.
+
+production:
+
+```sh
+npm login --registry=https://npm.sencha.com/ --scope=@sencha
+```
+
+early adopter:
 
 ```sh
 npm login --registry=https://sencha.myget.org/F/early-adopter/npm/ --scope=@sencha
-
 ```
 
 ## Create an Angular application with Angular CLI
