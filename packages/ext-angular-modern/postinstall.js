@@ -35,7 +35,6 @@ else {
   xtypeFileName = ``;
 }
 
-
 var copyFolder = '';
 switch(framework) {
   case 'react':
