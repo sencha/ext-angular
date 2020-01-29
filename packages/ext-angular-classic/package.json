@@ -1,52 +1,49 @@
 {
-  "name": "@sencha/ext-angular-classic",
-  "description": "ext-angular-classic",
-  "version": "7.1.1",
-  "bin": {
-    "ext-angular": "./bin/ext-angular.js"
-  },
-  "main": "bundles/sencha-ext-angular-classic.umd.js",
-  "private": false,
-  "peerDependencies": {
-    "@sencha/ext-web-components-classic": "~7.1.0",
-    "@angular/compiler": "~8.2.14",
-    "@angular/core": "~8.2.14",
-    "tslib": "^1.10.0"
-  },
-  "dependencies": {
-    "fs-extra": "~8.1.0",
-    "@sencha/ext-web-components-classic": "~7.1.0",
-    "script-loader": "^0.7.2",
-    "tslib": "^1.10.0"
-  },
-  "devDependencies": {
-    "@angular/core": "~8.2.14",
-    "@angular/common": "~8.2.14",
-    "@angular/platform-browser": "~8.2.14",
-    "@angular/platform-browser-dynamic": "~8.2.14",
-    "zone.js": "~0.10.2",
-    "ng-packagr": "^5.7.1",
-    "@angular/compiler": "~8.2.14",
-    "@angular/compiler-cli": "~8.2.14",
-    "typescript": "~3.5.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sencha/ext-angular.git"
-  },
-  "keywords": [],
-  "author": "Sencha",
-  "license": "ISC",
-  "module": "fesm5/sencha-ext-angular-classic.js",
-  "es2015": "fesm2015/sencha-ext-angular-classic.js",
-  "esm5": "esm5/sencha-ext-angular-classic.js",
-  "esm2015": "esm2015/sencha-ext-angular-classic.js",
-  "fesm5": "fesm5/sencha-ext-angular-classic.js",
-  "fesm2015": "fesm2015/sencha-ext-angular-classic.js",
-  "typings": "sencha-ext-angular-classic.d.ts",
-  "metadata": "sencha-ext-angular-classic.metadata.json",
-  "sideEffects": false,
-  "scripts": {
-    "postinstall": "node ./postinstall.js"
-  }
+	"name": "@sencha/ext-angular-classic",
+	"description": "ext-angular-classic",
+	"version": "7.1.1",
+	"bin": {
+		"ext-angular": "./bin/ext-angular.js"
+	},
+	"main": "bundles/sencha-ext-angular-classic.umd.js",
+	"private": false,
+	"peerDependencies": {
+		"@angular/compiler": "~8.2.14",
+		"@angular/core": "~8.2.14",
+		"@sencha/ext-web-components-classic": "~7.1.0",
+		"tslib": "^1.10.0"
+	},
+	"dependencies": {
+		"@sencha/ext-web-components-classic": "~7.1.0",
+		"fs-extra": "~8.1.0",
+		"script-loader": "^0.7.2",
+		"tslib": "^1.10.0"
+	},
+	"devDependencies": {
+		"@angular/common": "~8.2.14",
+		"@angular/compiler": "~8.2.14",
+		"@angular/compiler-cli": "~8.2.14",
+		"@angular/core": "~8.2.14",
+		"@angular/platform-browser": "~8.2.14",
+		"@angular/platform-browser-dynamic": "~8.2.14",
+		"ng-packagr": "^5.7.1",
+		"typescript": "~3.5.3",
+		"zone.js": "~0.10.2"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sencha/ext-angular.git"
+	},
+	"keywords": [],
+	"author": "Sencha",
+	"license": "ISC",
+	"module": "fesm5/sencha-ext-angular-classic.js",
+	"es2015": "fesm2015/sencha-ext-angular-classic.js",
+	"esm5": "esm5/sencha-ext-angular-classic.js",
+	"esm2015": "esm2015/sencha-ext-angular-classic.js",
+	"fesm5": "fesm5/sencha-ext-angular-classic.js",
+	"fesm2015": "fesm2015/sencha-ext-angular-classic.js",
+	"typings": "sencha-ext-angular-classic.d.ts",
+	"metadata": "sencha-ext-angular-classic.metadata.json",
+	"sideEffects": false
 }

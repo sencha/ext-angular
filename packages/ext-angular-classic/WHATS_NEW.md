@@ -1,6 +1,6 @@
 ## What's new for @sencha/ext-angular-classic
 
-last run: Wed Jan 29 2020 11:26:10 GMT-0500 (Eastern Standard Time)
+last run: Wed Jan 29 2020 14:45:59 GMT-0500 (Eastern Standard Time)
 
 ### What's new in version 7.1
 
