@@ -1,6 +1,6 @@
 ## Migrate for @sencha/ext-angular-modern
 
-last run: Wed Jan 29 2020 14:32:43 GMT-0500 (Eastern Standard Time)
+last run: Wed Jan 29 2020 15:16:44 GMT-0500 (Eastern Standard Time)
 
 ### Eject - Adding ext-webpack-plugin to app
 
