@@ -1,6 +1,6 @@
 ## Getting started with @sencha/ext-angular-modern
 
-last run: Wed Jan 29 2020 17:32:21 GMT-0500 (Eastern Standard Time)
+last run: Fri Jan 31 2020 14:32:37 GMT-0500 (Eastern Standard Time)
 
 This npm package contains the files that are needed to add the @sencha/ext-angular-modern package to an Angular application
 
@@ -118,6 +118,8 @@ export class AppModule { }
 - Replace ./src/app/app.component.ts with:
 
 ```sh
+
+
 import { Component } from '@angular/core';
 
 @Component({
@@ -150,13 +152,16 @@ export class AppComponent {
         grid.setData(this.data)
     }
 }
+
+
 ```
 
-- to change theme, modify angular.json (uncomment one of the themes):
+- to change theme, modify angular.json (add one of the commented out themes):
 
 ```sh
             "styles": [
               "src/styles.css",
+              "ext-runtime-modern/material/material-all.css"
               //"ext-runtime-modern/ios/ios-all.css"
               //"ext-runtime-modern/material/material-all.css"
               //"ext-runtime-modern/neptune/neptune-all.css"

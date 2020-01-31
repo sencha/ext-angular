@@ -215,7 +215,9 @@ class EngBase {
         //this.vc = vc;
         var me = this;
         this.eventnames.forEach(function (eventname) {
-            me[eventname] = new EventEmitter();
+            if (eventname != "layout") {
+                me[eventname] = new EventEmitter();
+            }
         });
         this.A = {};
         this.A.props = {};

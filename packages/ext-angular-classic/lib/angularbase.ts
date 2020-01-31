@@ -53,7 +53,9 @@ export class EngBase {
 
         var me = this;
         this.eventnames.forEach(function (eventname) {
-            me[eventname] = new EventEmitter()
+            if (eventname != "layout") {
+              me[eventname] = new EventEmitter();
+            }
         })
 
         this.A = {};

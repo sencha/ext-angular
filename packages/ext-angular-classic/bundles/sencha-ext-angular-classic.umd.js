@@ -416,7 +416,9 @@
             //this.vc = vc;
             var me = this;
             this.eventnames.forEach(function (eventname) {
-                me[eventname] = new core.EventEmitter();
+                if (eventname != "layout") {
+                    me[eventname] = new core.EventEmitter();
+                }
             });
             this.A = {};
             this.A.props = {};
