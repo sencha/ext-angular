@@ -1,6 +1,6 @@
 ## Getting started with @sencha/ext-angular-classic
 
-last run: Fri Jan 31 2020 11:36:31 GMT-0500 (Eastern Standard Time)
+last run: Fri Jan 31 2020 14:40:44 GMT-0500 (Eastern Standard Time)
 
 This npm package contains the files that are needed to add the @sencha/ext-angular-classic package to an Angular application
 
@@ -118,21 +118,21 @@ export class AppModule { }
 - Replace ./src/app/app.component.ts with:
 
 ```sh
+
+
+
 import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-root',
     template: `
 <ExtPanel viewport="true" title="panel" layout="fit">
-    <ExtToolbar docked="top">
-        <ExtButton text="a button" shadow="true"></ExtButton>
-    </ExtToolbar>
     <ExtGrid
         [title]="title"
         (ready)="readyGrid($event)"
     >
-        <ExtColumn text="name" dataIndex="name"></ExtColumn>
-        <ExtColumn text="email" dataIndex="email" flex="1"></ExtColumn>
+        <ExtGridcolumn text="name" dataIndex="name"></ExtGridcolumn>
+        <ExtGridcolumn text="email" dataIndex="email" flex="1"></ExtGridcolumn>
     </ExtGrid>
 </ExtPanel>
     `,
@@ -150,6 +150,7 @@ export class AppComponent {
         grid.setData(this.data)
     }
 }
+
 ```
 
 - to change theme, modify angular.json (add one of the commented out themes):
