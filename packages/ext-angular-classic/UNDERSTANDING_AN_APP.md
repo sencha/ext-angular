@@ -1,6 +1,6 @@
 ## Understanding an app for @sencha/ext-angular-classic
 
-last run: Mon Feb 03 2020 12:40:32 GMT-0500 (Eastern Standard Time)
+last run: Mon Feb 03 2020 13:09:01 GMT-0500 (Eastern Standard Time)
 
 This guide will illustrate some of the key features of ExtAngular within a Angular application.
 To get a starter application created,
