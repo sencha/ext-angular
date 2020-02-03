@@ -1,6 +1,6 @@
 ## Using ext-webpack-plugin for @sencha/ext-angular-classic
 
-last run: Mon Feb 03 2020 09:53:43 GMT-0500 (Eastern Standard Time)
+last run: Mon Feb 03 2020 12:40:32 GMT-0500 (Eastern Standard Time)
 
 ## Adding Sencha ext-webpack-plugin to an Angular CLI application
 
