@@ -1,10 +1,10 @@
 ## Understanding an app for @sencha/ext-angular-classic
 
-last run: Mon Feb 03 2020 08:31:40 GMT-0500 (Eastern Standard Time)
+last run: Mon Feb 03 2020 09:15:31 GMT-0500 (Eastern Standard Time)
 
 This guide will illustrate some of the key features of ExtAngular within a Angular application.
 To get a starter application created,
-follow the [Getting Started guide](https://github.com/sencha/ext-angular/blob/ext-angular-7.1.1/packages/ext-Angular-classic/GETTING_STARTED.md).
+follow the [Getting Started guide](https://github.com/sencha/ext-angular/blob/ext-angular-7.1.1/packages/ext-angular-classic/GETTING_STARTED.md).
 
 ## adding ExtAngular to an existing Angular application
 
@@ -13,7 +13,7 @@ in the root folder of the Angular app:
 
 ```
 npm install @sencha/ext-angular-classic
-``
+```
 
 This will create a 'public/ext-runtime-classic' folder, and also add several entries in the 'angular.json'
 file.
