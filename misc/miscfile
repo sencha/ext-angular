@@ -1,3 +1,5 @@
+7.2.x
+
 @angular-devkit/build-webpack/src/webpack/index.js/runWebpack
 @angular-devkit/build-angular/src/dev-server/index.js
 
@@ -28,7 +30,7 @@ npm --registry https://sencha.myget.org/F/community/npm/ whoami
 
 git fetch upstream
 
-git merge upstream/ext-angular-7.1.x
+git merge upstream/ext-angular-7.2.x
 
 
         // compilation.hooks.additionalAssets.tapAsync(`ext-additionalAssets`, (cb) => {
