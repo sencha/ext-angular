@@ -94,7 +94,6 @@ export class AppComponent {
         private cd: ChangeDetectorRef
     ) {
         this.router = router;
-        console.log('constructor')
         // this.treeStore = Ext.create('Ext.data.TreeStore', {
         //   rootVisible: true,
         //   root: navTreeRoot
@@ -112,41 +111,21 @@ export class AppComponent {
       }
     }
 
-    //readyViewport = ({ cmp, cmpObj }) => {
     readyViewport = (detail) => {
-      console.log(detail)
         this.extnameToProperty(detail.cmpObj, this);
 
         var title = "";
         if (window["title"] == null) {
-            title = "Sencha ExtAngular Kitchen Sink";
+            title = "Sencha ExtAngularModern Kitchen Sink";
         } else {
             title = window["title"];
         }
         this.leftContainerCmp.updateHtml(title);
         this.rightContainerCmp.updateHtml("Build: " + BUILD_VERSION);
 
-    //     var bodyStyle = `
-    //   backgroundSize: 20px 20px;
-    //   borderWidth: 0px;
-    //   backgroundColor: #e8e8e8;
-    //   backgroundImage:
-    //   linear-gradient(0deg, #f5f5f5 1.1px, transparent 0),
-    //   linear-gradient(90deg, #f5f5f5 1.1px, transparent 0)
-    // `;
-        //this.selectionCmp.setBodyStyle(bodyStyle);
-
         if (Ext.os.is.Phone) {
             this.navTreePanelCmp.setWidth("100%");
         }
-
-        //this.navTreeListCmp.setStore(this.treeStore);
-        // var breadcrumbTreeStore = Ext.create('Ext.data.TreeStore', {
-        //   rootVisible: true,
-        //   root: navTreeRoot
-        // });
-        // this.navTreeListCmp.getStore()
-        // this.breadcrumbCmp.setStore(breadcrumbTreeStore);
         this.breadcrumbCmp.setStore(this.navTreeListCmp.getStore());
 
         var hash = window.location.hash.substr(1);
@@ -154,7 +133,6 @@ export class AppComponent {
             hash = "all";
         }
         var node = this.navTreeListCmp.getStore().findNode("name", hash);
-        //var node = this.treeStore.findNode('name', hash);
         this.nav(node);
     };
 
@@ -167,14 +145,11 @@ export class AppComponent {
         }
         this.navTreeListCmp.setSelection(node);
         this.breadcrumbCmp.setSelection(node);
-        //var routediv = document.getElementById('routediv');
 
         if (this.hideExamples == false) {
             this.codeButtonCmp.setHidden(true);
             this.routerCmp.setHidden(true);
-            // if (routediv != null) {
-            //     routediv.style.display = 'none';
-            // }
+
             this.selectionCmp.setStyle({ display: "flex" });
             this.selectionCmp.setHidden(false);
 
@@ -184,12 +159,8 @@ export class AppComponent {
         } else {
             this.codeButtonCmp.setHidden(false);
             this.routerCmp.setHidden(false);
-            // if (routediv != null) {
-            //     routediv.style.display = 'block';
-            // }
             this.selectionCmp.setStyle({ display: "none" });
             this.selectionCmp.setHidden(true);
-
             this.router.navigateByUrl(node.id).then((isCompleted) => { if (isCompleted) {
               this.cd.detectChanges();
             }});
@@ -209,8 +180,8 @@ export class AppComponent {
         this.nav(event.location.record);
     };
 
-    changeBreadcrumb = event => {
-        this.nav(event.node);
+    changeBreadcrumb = ({sender, node, prevNode, eOpts}) => {
+        this.nav(node);
     };
 
     toggleCode = () => {
