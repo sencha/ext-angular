@@ -1,6 +1,5 @@
 ## Migrate for @sencha/ext-angular-modern
 
-last run: Mon Feb 03 2020 13:19:12 GMT-0500 (Eastern Standard Time)
 
 ## migrating/upgrading an ext-angular application
 
