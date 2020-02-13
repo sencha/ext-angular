@@ -9,8 +9,8 @@
   "private": false,
   "peerDependencies": {
     "@sencha/ext-web-components-classic": "~7.2.0",
-    "@angular/compiler": "~9.0.0",
-    "@angular/core": "~9.0.0",
+    "@angular/compiler": "~9.0.1",
+    "@angular/core": "~9.0.1",
     "tslib": "^1.10.0"
   },
   "dependencies": {
