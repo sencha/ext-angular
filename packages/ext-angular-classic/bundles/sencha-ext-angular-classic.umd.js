@@ -1,7 +1,7 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@sencha/ext-web-components-classic')) :
     typeof define === 'function' && define.amd ? define('@sencha/ext-angular-classic', ['exports', '@angular/core', '@sencha/ext-web-components-classic'], factory) :
-    (global = global || self, factory((global.sencha = global.sencha || {}, global.sencha['ext-angular-classic'] = {}), global.ng.core, global.extWebComponentsClassic));
+    (global = global || self, factory((global.sencha = global.sencha || {}, global.sencha['ext-angular-classic'] = {}), global.ng.core, global['@sencha/ext-web-components-classic']));
 }(this, (function (exports, core, extWebComponentsClassic) { 'use strict';
 
     /*! *****************************************************************************

@@ -1,12 +1,13 @@
-## Using ext-webpack-plugin for @sencha/ext-angular-modern
+## Using ext-webpack-plugin for @sencha/ext-angular-classic
+
 
 ## Adding Sencha ext-webpack-plugin to an Angular CLI application
 
-This document defines the steps needed to add Sencha ext-webpack-plugin to a Angular application generated with Angular CLI. Angular CLI is described in the [Angular CLI Overview](https://cli.angular.io/)
+This document defines the steps needed to add Sencha ext-webpack-plugin to a Angular application generated with Angular CLI.  Angular CLI is described in the [Angular CLI Overview](https://cli.angular.io/)
 
 ### Follow the steps in Getting Started to creat an Angular CLI application with ExtAngular
 
-[For ext-angular-modern](https://github.com/sencha/ext-angular/blob/ext-angular-7.1.1/packages/ext-angular-modern/GETTING_STARTED.md)
+[For ext-angular-classic](https://github.com/sencha/ext-angular/blob/ext-angular-7.1.1/packages/ext-angular-classic/GETTING_STARTED.md)
 
 For the next steps, make sure you are logged into the Sencha npm repository - for instructions, see this link: https://github.com/sencha/ext-angular/blob/ext-angular-7.0.x/README.md
 
@@ -18,7 +19,7 @@ Add the following to the dependencies section of package.json:
 ```sh
 "gzip-cli": "^1.0.1",
 "http-server": "^0.11.1",
-"@sencha/ext-angular-modern": "~7.2.0",
+"@sencha/ext-angular-classic": "~7.1.1",
 "@sencha/ext": "^7.0.0",
 "@sencha/ext-modern": "^7.0.0",
 "@sencha/ext-modern-theme-material": "^7.0.0",
@@ -38,7 +39,7 @@ or...
 Run the following commands in the terminal/command window:
 
 ```sh
-npm install --save @sencha/ext-angularmodern @sencha/ext @sencha/ext-modern @sencha/ext-modern-theme-material
+npm install --save @sencha/ext-angularclassic @sencha/ext @sencha/ext-classic @sencha/ext-classic-theme-material
 npm install --save @sencha/ext-webpack-plugin
 npm install --save @angular-builders/custom-webpack
 npm install --save @angular-builders/dev-server
@@ -58,29 +59,28 @@ Add the following to the scripts section of package.json:
 
 To introduce custom webpack configuration, we first need to make changes inside angular.json file.
 
-For **ng build** command, configure the architect/build object in the angular.json file and update the builder from _@angular-devkit/build-angular:browser_ to _@angular-builders/custom-webpack:browser_ and add the customWebpackConfig key inside options like:
+For **ng build** command, configure the architect/build object in the angular.json file and update the builder from *@angular-devkit/build-angular:browser* to *@angular-builders/custom-webpack:browser* and add the customWebpackConfig key inside options like:
 
-```sh
-"builder": "@angular-builders/custom-webpack:browser",
-"options": {
-  "customWebpackConfig": {
-    "path": "./custom-webpack.config.js",
-    "replaceDuplicatePlugins": true
-  },
-  "outputPath": "dist",
-  ... other options
+ ```sh
+ "builder": "@angular-builders/custom-webpack:browser",
+ "options": {
+   "customWebpackConfig": {
+     "path": "./custom-webpack.config.js",
+     "replaceDuplicatePlugins": true
+   },
+   "outputPath": "dist",
+   ... other options
 ```
 
 For **ng serve** command, update the serve/builder in the angular.json file:
 
-```sh
-"serve": {
-  "builder": "@angular-builders/custom-webpack:dev-server",
+ ```sh
+ "serve": {
+   "builder": "@angular-builders/custom-webpack:dev-server",
 ... other options
 ```
 
 To configure the ext-webpack-plugin for webpack in Angular, create a file named **custom-webpack.config.js** at the root directory (where the package.json is), and add the following:
-
 ```sh
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
@@ -123,6 +123,7 @@ module.exports = {
 };
 ```
 
+
 Add Ext.js and Ext.css inside index.html
 
 ```sh
@@ -142,6 +143,7 @@ Add Ext.js and Ext.css inside index.html
 </body>
 </html>
 ```
+
 
 #### Run the application
 
@@ -163,4 +165,5 @@ for production build:
 npm run buildprod
 ```
 
-Browse to http://localhost:4200 in your browser. You should see the Angular starter application with an ExtAngular Panel and Grid in the browser.
+
+Browse to http://localhost:4200 in your browser.  You should see the Angular starter application with an ExtAngular Panel and Grid in the browser.
