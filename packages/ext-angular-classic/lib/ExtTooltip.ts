@@ -1,6 +1,7 @@
 //import EWCTooltip from '../dist/ext-tooltip.component.js';
 //inputs: (new EWCTooltip()).properties,
-import EWCTooltip from '@sencha/ext-web-components-classic/dist/ext-tooltip.component.js';
+//import EWCTooltip from '@sencha/ext-web-components-classic/dist/ext-tooltip.component.js';
+import { EWCTooltip } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

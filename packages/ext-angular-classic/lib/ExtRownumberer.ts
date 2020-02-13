@@ -1,6 +1,7 @@
 //import EWCRownumberer from '../dist/ext-rownumberer.component.js';
 //inputs: (new EWCRownumberer()).properties,
-import EWCRownumberer from '@sencha/ext-web-components-classic/dist/ext-rownumberer.component.js';
+//import EWCRownumberer from '@sencha/ext-web-components-classic/dist/ext-rownumberer.component.js';
+import { EWCRownumberer } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

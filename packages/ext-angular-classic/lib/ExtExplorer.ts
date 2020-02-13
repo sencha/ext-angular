@@ -1,6 +1,7 @@
 //import EWCExplorer from '../dist/ext-explorer.component.js';
 //inputs: (new EWCExplorer()).properties,
-import EWCExplorer from '@sencha/ext-web-components-classic/dist/ext-explorer.component.js';
+//import EWCExplorer from '@sencha/ext-web-components-classic/dist/ext-explorer.component.js';
+import { EWCExplorer } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

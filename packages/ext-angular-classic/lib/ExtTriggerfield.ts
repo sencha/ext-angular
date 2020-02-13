@@ -1,6 +1,7 @@
 //import EWCTriggerfield from '../dist/ext-triggerfield.component.js';
 //inputs: (new EWCTriggerfield()).properties,
-import EWCTriggerfield from '@sencha/ext-web-components-classic/dist/ext-triggerfield.component.js';
+//import EWCTriggerfield from '@sencha/ext-web-components-classic/dist/ext-triggerfield.component.js';
+import { EWCTriggerfield } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

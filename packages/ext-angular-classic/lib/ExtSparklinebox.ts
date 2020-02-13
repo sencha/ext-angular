@@ -1,6 +1,7 @@
 //import EWCSparklinebox from '../dist/ext-sparklinebox.component.js';
 //inputs: (new EWCSparklinebox()).properties,
-import EWCSparklinebox from '@sencha/ext-web-components-classic/dist/ext-sparklinebox.component.js';
+//import EWCSparklinebox from '@sencha/ext-web-components-classic/dist/ext-sparklinebox.component.js';
+import { EWCSparklinebox } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

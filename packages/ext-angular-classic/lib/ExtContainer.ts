@@ -1,6 +1,7 @@
 //import EWCContainer from '../dist/ext-container.component.js';
 //inputs: (new EWCContainer()).properties,
-import EWCContainer from '@sencha/ext-web-components-classic/dist/ext-container.component.js';
+//import EWCContainer from '@sencha/ext-web-components-classic/dist/ext-container.component.js';
+import { EWCContainer } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

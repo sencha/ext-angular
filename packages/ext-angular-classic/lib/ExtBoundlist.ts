@@ -1,6 +1,7 @@
 //import EWCBoundlist from '../dist/ext-boundlist.component.js';
 //inputs: (new EWCBoundlist()).properties,
-import EWCBoundlist from '@sencha/ext-web-components-classic/dist/ext-boundlist.component.js';
+//import EWCBoundlist from '@sencha/ext-web-components-classic/dist/ext-boundlist.component.js';
+import { EWCBoundlist } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

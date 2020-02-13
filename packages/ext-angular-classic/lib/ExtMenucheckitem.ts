@@ -1,6 +1,7 @@
 //import EWCMenucheckitem from '../dist/ext-menucheckitem.component.js';
 //inputs: (new EWCMenucheckitem()).properties,
-import EWCMenucheckitem from '@sencha/ext-web-components-classic/dist/ext-menucheckitem.component.js';
+//import EWCMenucheckitem from '@sencha/ext-web-components-classic/dist/ext-menucheckitem.component.js';
+import { EWCMenucheckitem } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

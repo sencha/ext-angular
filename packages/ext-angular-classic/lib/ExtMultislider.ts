@@ -1,6 +1,7 @@
 //import EWCMultislider from '../dist/ext-multislider.component.js';
 //inputs: (new EWCMultislider()).properties,
-import EWCMultislider from '@sencha/ext-web-components-classic/dist/ext-multislider.component.js';
+//import EWCMultislider from '@sencha/ext-web-components-classic/dist/ext-multislider.component.js';
+import { EWCMultislider } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

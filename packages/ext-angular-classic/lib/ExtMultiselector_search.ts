@@ -1,6 +1,7 @@
 //import EWCMultiselector_search from '../dist/ext-multiselector-search.component.js';
 //inputs: (new EWCMultiselector_search()).properties,
-import EWCMultiselector_search from '@sencha/ext-web-components-classic/dist/ext-multiselector-search.component.js';
+//import EWCMultiselector_search from '@sencha/ext-web-components-classic/dist/ext-multiselector-search.component.js';
+import { EWCMultiselector_search } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

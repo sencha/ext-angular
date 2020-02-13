@@ -1,6 +1,7 @@
 //import EWCD3_heatmap from '../dist/ext-d3-heatmap.component.js';
 //inputs: (new EWCD3_heatmap()).properties,
-import EWCD3_heatmap from '@sencha/ext-web-components-classic/dist/ext-d3-heatmap.component.js';
+//import EWCD3_heatmap from '@sencha/ext-web-components-classic/dist/ext-d3-heatmap.component.js';
+import { EWCD3_heatmap } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

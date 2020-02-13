@@ -1,6 +1,7 @@
 //import EWCTimepicker from '../dist/ext-timepicker.component.js';
 //inputs: (new EWCTimepicker()).properties,
-import EWCTimepicker from '@sencha/ext-web-components-classic/dist/ext-timepicker.component.js';
+//import EWCTimepicker from '@sencha/ext-web-components-classic/dist/ext-timepicker.component.js';
+import { EWCTimepicker } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

@@ -1,6 +1,7 @@
 //import EWCTabbar from '../dist/ext-tabbar.component.js';
 //inputs: (new EWCTabbar()).properties,
-import EWCTabbar from '@sencha/ext-web-components-classic/dist/ext-tabbar.component.js';
+//import EWCTabbar from '@sencha/ext-web-components-classic/dist/ext-tabbar.component.js';
+import { EWCTabbar } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

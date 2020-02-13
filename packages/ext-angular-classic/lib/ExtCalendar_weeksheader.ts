@@ -1,6 +1,7 @@
 //import EWCCalendar_weeksheader from '../dist/ext-calendar-weeksheader.component.js';
 //inputs: (new EWCCalendar_weeksheader()).properties,
-import EWCCalendar_weeksheader from '@sencha/ext-web-components-classic/dist/ext-calendar-weeksheader.component.js';
+//import EWCCalendar_weeksheader from '@sencha/ext-web-components-classic/dist/ext-calendar-weeksheader.component.js';
+import { EWCCalendar_weeksheader } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

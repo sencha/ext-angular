@@ -1,6 +1,7 @@
 //import EWCEventrecordermanager from '../dist/ext-eventrecordermanager.component.js';
 //inputs: (new EWCEventrecordermanager()).properties,
-import EWCEventrecordermanager from '@sencha/ext-web-components-classic/dist/ext-eventrecordermanager.component.js';
+//import EWCEventrecordermanager from '@sencha/ext-web-components-classic/dist/ext-eventrecordermanager.component.js';
+import { EWCEventrecordermanager } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

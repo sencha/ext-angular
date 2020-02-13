@@ -1,6 +1,7 @@
 //import EWCFileuploadfield from '../dist/ext-fileuploadfield.component.js';
 //inputs: (new EWCFileuploadfield()).properties,
-import EWCFileuploadfield from '@sencha/ext-web-components-classic/dist/ext-fileuploadfield.component.js';
+//import EWCFileuploadfield from '@sencha/ext-web-components-classic/dist/ext-fileuploadfield.component.js';
+import { EWCFileuploadfield } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

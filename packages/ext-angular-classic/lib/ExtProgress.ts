@@ -1,6 +1,7 @@
 //import EWCProgress from '../dist/ext-progress.component.js';
 //inputs: (new EWCProgress()).properties,
-import EWCProgress from '@sencha/ext-web-components-classic/dist/ext-progress.component.js';
+//import EWCProgress from '@sencha/ext-web-components-classic/dist/ext-progress.component.js';
+import { EWCProgress } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

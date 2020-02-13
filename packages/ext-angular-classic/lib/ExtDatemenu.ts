@@ -1,6 +1,7 @@
 //import EWCDatemenu from '../dist/ext-datemenu.component.js';
 //inputs: (new EWCDatemenu()).properties,
-import EWCDatemenu from '@sencha/ext-web-components-classic/dist/ext-datemenu.component.js';
+//import EWCDatemenu from '@sencha/ext-web-components-classic/dist/ext-datemenu.component.js';
+import { EWCDatemenu } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

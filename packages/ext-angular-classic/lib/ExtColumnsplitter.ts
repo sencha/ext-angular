@@ -1,6 +1,7 @@
 //import EWCColumnsplitter from '../dist/ext-columnsplitter.component.js';
 //inputs: (new EWCColumnsplitter()).properties,
-import EWCColumnsplitter from '@sencha/ext-web-components-classic/dist/ext-columnsplitter.component.js';
+//import EWCColumnsplitter from '@sencha/ext-web-components-classic/dist/ext-columnsplitter.component.js';
+import { EWCColumnsplitter } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

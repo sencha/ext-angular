@@ -1,6 +1,7 @@
 //import EWCDatecolumn from '../dist/ext-datecolumn.component.js';
 //inputs: (new EWCDatecolumn()).properties,
-import EWCDatecolumn from '@sencha/ext-web-components-classic/dist/ext-datecolumn.component.js';
+//import EWCDatecolumn from '@sencha/ext-web-components-classic/dist/ext-datecolumn.component.js';
+import { EWCDatecolumn } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

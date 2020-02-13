@@ -1,6 +1,7 @@
 //import EWCImagecomponent from '../dist/ext-imagecomponent.component.js';
 //inputs: (new EWCImagecomponent()).properties,
-import EWCImagecomponent from '@sencha/ext-web-components-classic/dist/ext-imagecomponent.component.js';
+//import EWCImagecomponent from '@sencha/ext-web-components-classic/dist/ext-imagecomponent.component.js';
+import { EWCImagecomponent } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

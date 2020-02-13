@@ -1,6 +1,7 @@
 //import EWCToast from '../dist/ext-toast.component.js';
 //inputs: (new EWCToast()).properties,
-import EWCToast from '@sencha/ext-web-components-classic/dist/ext-toast.component.js';
+//import EWCToast from '@sencha/ext-web-components-classic/dist/ext-toast.component.js';
+import { EWCToast } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

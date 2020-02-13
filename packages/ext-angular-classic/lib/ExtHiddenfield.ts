@@ -1,6 +1,7 @@
 //import EWCHiddenfield from '../dist/ext-hiddenfield.component.js';
 //inputs: (new EWCHiddenfield()).properties,
-import EWCHiddenfield from '@sencha/ext-web-components-classic/dist/ext-hiddenfield.component.js';
+//import EWCHiddenfield from '@sencha/ext-web-components-classic/dist/ext-hiddenfield.component.js';
+import { EWCHiddenfield } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

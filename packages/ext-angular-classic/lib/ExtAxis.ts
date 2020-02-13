@@ -1,6 +1,7 @@
 //import EWCAxis from '../dist/ext-axis.component.js';
 //inputs: (new EWCAxis()).properties,
-import EWCAxis from '@sencha/ext-web-components-classic/dist/ext-axis.component.js';
+//import EWCAxis from '@sencha/ext-web-components-classic/dist/ext-axis.component.js';
+import { EWCAxis } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

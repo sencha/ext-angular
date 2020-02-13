@@ -1,6 +1,7 @@
 //import EWCMenuseparator from '../dist/ext-menuseparator.component.js';
 //inputs: (new EWCMenuseparator()).properties,
-import EWCMenuseparator from '@sencha/ext-web-components-classic/dist/ext-menuseparator.component.js';
+//import EWCMenuseparator from '@sencha/ext-web-components-classic/dist/ext-menuseparator.component.js';
+import { EWCMenuseparator } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

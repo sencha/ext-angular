@@ -1,6 +1,7 @@
 //import EWCInteraction from '../dist/ext-interaction.component.js';
 //inputs: (new EWCInteraction()).properties,
-import EWCInteraction from '@sencha/ext-web-components-classic/dist/ext-interaction.component.js';
+//import EWCInteraction from '@sencha/ext-web-components-classic/dist/ext-interaction.component.js';
+import { EWCInteraction } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

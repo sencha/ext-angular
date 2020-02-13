@@ -27,7 +27,7 @@ npm login --registry=https://sencha.myget.org/F/early-adopter/npm/ --scope=@senc
 npm install -g @angular/cli
 ```
 
-should be @angular/cli@8.3.x
+should be @angular/cli@9.0.x
 
 
 #### Create a new Angular CLI application

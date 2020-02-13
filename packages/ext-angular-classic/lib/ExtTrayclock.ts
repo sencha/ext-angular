@@ -1,6 +1,7 @@
 //import EWCTrayclock from '../dist/ext-trayclock.component.js';
 //inputs: (new EWCTrayclock()).properties,
-import EWCTrayclock from '@sencha/ext-web-components-classic/dist/ext-trayclock.component.js';
+//import EWCTrayclock from '@sencha/ext-web-components-classic/dist/ext-trayclock.component.js';
+import { EWCTrayclock } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

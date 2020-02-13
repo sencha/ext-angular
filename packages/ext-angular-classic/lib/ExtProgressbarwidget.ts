@@ -1,6 +1,7 @@
 //import EWCProgressbarwidget from '../dist/ext-progressbarwidget.component.js';
 //inputs: (new EWCProgressbarwidget()).properties,
-import EWCProgressbarwidget from '@sencha/ext-web-components-classic/dist/ext-progressbarwidget.component.js';
+//import EWCProgressbarwidget from '@sencha/ext-web-components-classic/dist/ext-progressbarwidget.component.js';
+import { EWCProgressbarwidget } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

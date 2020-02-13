@@ -1,6 +1,7 @@
 //import EWCSplitter from '../dist/ext-splitter.component.js';
 //inputs: (new EWCSplitter()).properties,
-import EWCSplitter from '@sencha/ext-web-components-classic/dist/ext-splitter.component.js';
+//import EWCSplitter from '@sencha/ext-web-components-classic/dist/ext-splitter.component.js';
+import { EWCSplitter } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

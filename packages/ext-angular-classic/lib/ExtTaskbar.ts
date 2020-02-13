@@ -1,6 +1,7 @@
 //import EWCTaskbar from '../dist/ext-taskbar.component.js';
 //inputs: (new EWCTaskbar()).properties,
-import EWCTaskbar from '@sencha/ext-web-components-classic/dist/ext-taskbar.component.js';
+//import EWCTaskbar from '@sencha/ext-web-components-classic/dist/ext-taskbar.component.js';
+import { EWCTaskbar } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

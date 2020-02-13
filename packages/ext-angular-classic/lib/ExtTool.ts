@@ -1,6 +1,7 @@
 //import EWCTool from '../dist/ext-tool.component.js';
 //inputs: (new EWCTool()).properties,
-import EWCTool from '@sencha/ext-web-components-classic/dist/ext-tool.component.js';
+//import EWCTool from '@sencha/ext-web-components-classic/dist/ext-tool.component.js';
+import { EWCTool } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

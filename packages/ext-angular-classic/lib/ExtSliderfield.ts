@@ -1,6 +1,7 @@
 //import EWCSliderfield from '../dist/ext-sliderfield.component.js';
 //inputs: (new EWCSliderfield()).properties,
-import EWCSliderfield from '@sencha/ext-web-components-classic/dist/ext-sliderfield.component.js';
+//import EWCSliderfield from '@sencha/ext-web-components-classic/dist/ext-sliderfield.component.js';
+import { EWCSliderfield } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

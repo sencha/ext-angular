@@ -1,6 +1,7 @@
 //import EWCTbfill from '../dist/ext-tbfill.component.js';
 //inputs: (new EWCTbfill()).properties,
-import EWCTbfill from '@sencha/ext-web-components-classic/dist/ext-tbfill.component.js';
+//import EWCTbfill from '@sencha/ext-web-components-classic/dist/ext-tbfill.component.js';
+import { EWCTbfill } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

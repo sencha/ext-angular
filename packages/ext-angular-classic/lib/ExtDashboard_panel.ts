@@ -1,6 +1,7 @@
 //import EWCDashboard_panel from '../dist/ext-dashboard-panel.component.js';
 //inputs: (new EWCDashboard_panel()).properties,
-import EWCDashboard_panel from '@sencha/ext-web-components-classic/dist/ext-dashboard-panel.component.js';
+//import EWCDashboard_panel from '@sencha/ext-web-components-classic/dist/ext-dashboard-panel.component.js';
+import { EWCDashboard_panel } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

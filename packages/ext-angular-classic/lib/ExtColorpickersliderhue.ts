@@ -1,6 +1,7 @@
 //import EWCColorpickersliderhue from '../dist/ext-colorpickersliderhue.component.js';
 //inputs: (new EWCColorpickersliderhue()).properties,
-import EWCColorpickersliderhue from '@sencha/ext-web-components-classic/dist/ext-colorpickersliderhue.component.js';
+//import EWCColorpickersliderhue from '@sencha/ext-web-components-classic/dist/ext-colorpickersliderhue.component.js';
+import { EWCColorpickersliderhue } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

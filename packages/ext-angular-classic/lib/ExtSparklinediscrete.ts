@@ -1,6 +1,7 @@
 //import EWCSparklinediscrete from '../dist/ext-sparklinediscrete.component.js';
 //inputs: (new EWCSparklinediscrete()).properties,
-import EWCSparklinediscrete from '@sencha/ext-web-components-classic/dist/ext-sparklinediscrete.component.js';
+//import EWCSparklinediscrete from '@sencha/ext-web-components-classic/dist/ext-sparklinediscrete.component.js';
+import { EWCSparklinediscrete } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

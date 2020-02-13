@@ -1,6 +1,7 @@
 //import EWCMenubar from '../dist/ext-menubar.component.js';
 //inputs: (new EWCMenubar()).properties,
-import EWCMenubar from '@sencha/ext-web-components-classic/dist/ext-menubar.component.js';
+//import EWCMenubar from '@sencha/ext-web-components-classic/dist/ext-menubar.component.js';
+import { EWCMenubar } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

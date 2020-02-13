@@ -1,6 +1,7 @@
 //import EWCPropertygrid from '../dist/ext-propertygrid.component.js';
 //inputs: (new EWCPropertygrid()).properties,
-import EWCPropertygrid from '@sencha/ext-web-components-classic/dist/ext-propertygrid.component.js';
+//import EWCPropertygrid from '@sencha/ext-web-components-classic/dist/ext-propertygrid.component.js';
+import { EWCPropertygrid } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

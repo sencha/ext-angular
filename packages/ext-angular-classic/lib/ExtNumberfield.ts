@@ -1,6 +1,7 @@
 //import EWCNumberfield from '../dist/ext-numberfield.component.js';
 //inputs: (new EWCNumberfield()).properties,
-import EWCNumberfield from '@sencha/ext-web-components-classic/dist/ext-numberfield.component.js';
+//import EWCNumberfield from '@sencha/ext-web-components-classic/dist/ext-numberfield.component.js';
+import { EWCNumberfield } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

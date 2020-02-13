@@ -1,6 +1,7 @@
 //import EWCWidgetcolumn from '../dist/ext-widgetcolumn.component.js';
 //inputs: (new EWCWidgetcolumn()).properties,
-import EWCWidgetcolumn from '@sencha/ext-web-components-classic/dist/ext-widgetcolumn.component.js';
+//import EWCWidgetcolumn from '@sencha/ext-web-components-classic/dist/ext-widgetcolumn.component.js';
+import { EWCWidgetcolumn } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

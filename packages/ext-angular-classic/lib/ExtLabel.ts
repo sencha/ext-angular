@@ -1,6 +1,7 @@
 //import EWCLabel from '../dist/ext-label.component.js';
 //inputs: (new EWCLabel()).properties,
-import EWCLabel from '@sencha/ext-web-components-classic/dist/ext-label.component.js';
+//import EWCLabel from '@sencha/ext-web-components-classic/dist/ext-label.component.js';
+import { EWCLabel } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

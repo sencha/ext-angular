@@ -1,6 +1,7 @@
 //import EWCWallpaper from '../dist/ext-wallpaper.component.js';
 //inputs: (new EWCWallpaper()).properties,
-import EWCWallpaper from '@sencha/ext-web-components-classic/dist/ext-wallpaper.component.js';
+//import EWCWallpaper from '@sencha/ext-web-components-classic/dist/ext-wallpaper.component.js';
+import { EWCWallpaper } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

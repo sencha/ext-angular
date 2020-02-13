@@ -1,6 +1,7 @@
 //import EWCHidden from '../dist/ext-hidden.component.js';
 //inputs: (new EWCHidden()).properties,
-import EWCHidden from '@sencha/ext-web-components-classic/dist/ext-hidden.component.js';
+//import EWCHidden from '@sencha/ext-web-components-classic/dist/ext-hidden.component.js';
+import { EWCHidden } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

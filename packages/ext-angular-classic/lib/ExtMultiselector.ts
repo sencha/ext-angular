@@ -1,6 +1,7 @@
 //import EWCMultiselector from '../dist/ext-multiselector.component.js';
 //inputs: (new EWCMultiselector()).properties,
-import EWCMultiselector from '@sencha/ext-web-components-classic/dist/ext-multiselector.component.js';
+//import EWCMultiselector from '@sencha/ext-web-components-classic/dist/ext-multiselector.component.js';
+import { EWCMultiselector } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

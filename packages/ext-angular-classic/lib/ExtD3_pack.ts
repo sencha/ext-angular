@@ -1,6 +1,7 @@
 //import EWCD3_pack from '../dist/ext-d3-pack.component.js';
 //inputs: (new EWCD3_pack()).properties,
-import EWCD3_pack from '@sencha/ext-web-components-classic/dist/ext-d3-pack.component.js';
+//import EWCD3_pack from '@sencha/ext-web-components-classic/dist/ext-d3-pack.component.js';
+import { EWCD3_pack } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

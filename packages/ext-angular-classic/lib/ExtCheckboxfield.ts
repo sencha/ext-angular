@@ -1,6 +1,7 @@
 //import EWCCheckboxfield from '../dist/ext-checkboxfield.component.js';
 //inputs: (new EWCCheckboxfield()).properties,
-import EWCCheckboxfield from '@sencha/ext-web-components-classic/dist/ext-checkboxfield.component.js';
+//import EWCCheckboxfield from '@sencha/ext-web-components-classic/dist/ext-checkboxfield.component.js';
+import { EWCCheckboxfield } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

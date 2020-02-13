@@ -1,6 +1,7 @@
 //import EWCMenuitem from '../dist/ext-menuitem.component.js';
 //inputs: (new EWCMenuitem()).properties,
-import EWCMenuitem from '@sencha/ext-web-components-classic/dist/ext-menuitem.component.js';
+//import EWCMenuitem from '@sencha/ext-web-components-classic/dist/ext-menuitem.component.js';
+import { EWCMenuitem } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

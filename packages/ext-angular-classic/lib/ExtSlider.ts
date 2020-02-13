@@ -1,6 +1,7 @@
 //import EWCSlider from '../dist/ext-slider.component.js';
 //inputs: (new EWCSlider()).properties,
-import EWCSlider from '@sencha/ext-web-components-classic/dist/ext-slider.component.js';
+//import EWCSlider from '@sencha/ext-web-components-classic/dist/ext-slider.component.js';
+import { EWCSlider } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

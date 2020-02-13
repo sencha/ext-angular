@@ -1,6 +1,7 @@
 //import EWCD3_svg from '../dist/ext-d3-svg.component.js';
 //inputs: (new EWCD3_svg()).properties,
-import EWCD3_svg from '@sencha/ext-web-components-classic/dist/ext-d3-svg.component.js';
+//import EWCD3_svg from '@sencha/ext-web-components-classic/dist/ext-d3-svg.component.js';
+import { EWCD3_svg } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

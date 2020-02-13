@@ -1,6 +1,7 @@
 //import EWCTbspacer from '../dist/ext-tbspacer.component.js';
 //inputs: (new EWCTbspacer()).properties,
-import EWCTbspacer from '@sencha/ext-web-components-classic/dist/ext-tbspacer.component.js';
+//import EWCTbspacer from '@sencha/ext-web-components-classic/dist/ext-tbspacer.component.js';
+import { EWCTbspacer } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

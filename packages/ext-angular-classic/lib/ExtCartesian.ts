@@ -1,6 +1,7 @@
 //import EWCCartesian from '../dist/ext-cartesian.component.js';
 //inputs: (new EWCCartesian()).properties,
-import EWCCartesian from '@sencha/ext-web-components-classic/dist/ext-cartesian.component.js';
+//import EWCCartesian from '@sencha/ext-web-components-classic/dist/ext-cartesian.component.js';
+import { EWCCartesian } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

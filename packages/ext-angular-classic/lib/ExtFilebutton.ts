@@ -1,6 +1,7 @@
 //import EWCFilebutton from '../dist/ext-filebutton.component.js';
 //inputs: (new EWCFilebutton()).properties,
-import EWCFilebutton from '@sencha/ext-web-components-classic/dist/ext-filebutton.component.js';
+//import EWCFilebutton from '@sencha/ext-web-components-classic/dist/ext-filebutton.component.js';
+import { EWCFilebutton } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

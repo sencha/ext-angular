@@ -1,6 +1,7 @@
 //import EWCItemselectorfield from '../dist/ext-itemselectorfield.component.js';
 //inputs: (new EWCItemselectorfield()).properties,
-import EWCItemselectorfield from '@sencha/ext-web-components-classic/dist/ext-itemselectorfield.component.js';
+//import EWCItemselectorfield from '@sencha/ext-web-components-classic/dist/ext-itemselectorfield.component.js';
+import { EWCItemselectorfield } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

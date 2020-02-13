@@ -1,6 +1,7 @@
 //import EWCFieldset from '../dist/ext-fieldset.component.js';
 //inputs: (new EWCFieldset()).properties,
-import EWCFieldset from '@sencha/ext-web-components-classic/dist/ext-fieldset.component.js';
+//import EWCFieldset from '@sencha/ext-web-components-classic/dist/ext-fieldset.component.js';
+import { EWCFieldset } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

@@ -1,6 +1,7 @@
 //import EWCCalendar_weekview from '../dist/ext-calendar-weekview.component.js';
 //inputs: (new EWCCalendar_weekview()).properties,
-import EWCCalendar_weekview from '@sencha/ext-web-components-classic/dist/ext-calendar-weekview.component.js';
+//import EWCCalendar_weekview from '@sencha/ext-web-components-classic/dist/ext-calendar-weekview.component.js';
+import { EWCCalendar_weekview } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

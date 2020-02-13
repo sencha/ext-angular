@@ -1,6 +1,7 @@
 //import EWCTbtext from '../dist/ext-tbtext.component.js';
 //inputs: (new EWCTbtext()).properties,
-import EWCTbtext from '@sencha/ext-web-components-classic/dist/ext-tbtext.component.js';
+//import EWCTbtext from '@sencha/ext-web-components-classic/dist/ext-tbtext.component.js';
+import { EWCTbtext } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

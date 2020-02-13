@@ -1,6 +1,7 @@
 //import EWCStatusbar from '../dist/ext-statusbar.component.js';
 //inputs: (new EWCStatusbar()).properties,
-import EWCStatusbar from '@sencha/ext-web-components-classic/dist/ext-statusbar.component.js';
+//import EWCStatusbar from '@sencha/ext-web-components-classic/dist/ext-statusbar.component.js';
+import { EWCStatusbar } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

@@ -9,7 +9,7 @@ export declare class EngBase {
     eventnames: any;
     _extitems: QueryList<any>;
     _childComponents: QueryList<EngBase>;
-    readonly childComponents: EngBase[];
+    get childComponents(): EngBase[];
     constructor(eRef: any, hostComponent: any, properties: any, events: any, eventnames: any, vc?: any);
     baseOnInit(): void;
     baseAfterViewInit(): void;

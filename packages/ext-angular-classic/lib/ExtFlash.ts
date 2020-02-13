@@ -1,6 +1,7 @@
 //import EWCFlash from '../dist/ext-flash.component.js';
 //inputs: (new EWCFlash()).properties,
-import EWCFlash from '@sencha/ext-web-components-classic/dist/ext-flash.component.js';
+//import EWCFlash from '@sencha/ext-web-components-classic/dist/ext-flash.component.js';
+import { EWCFlash } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

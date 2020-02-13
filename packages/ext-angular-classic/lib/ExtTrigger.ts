@@ -1,6 +1,7 @@
 //import EWCTrigger from '../dist/ext-trigger.component.js';
 //inputs: (new EWCTrigger()).properties,
-import EWCTrigger from '@sencha/ext-web-components-classic/dist/ext-trigger.component.js';
+//import EWCTrigger from '@sencha/ext-web-components-classic/dist/ext-trigger.component.js';
+import { EWCTrigger } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

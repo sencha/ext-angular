@@ -1,6 +1,7 @@
 //import EWCGridpanel from '../dist/ext-gridpanel.component.js';
 //inputs: (new EWCGridpanel()).properties,
-import EWCGridpanel from '@sencha/ext-web-components-classic/dist/ext-gridpanel.component.js';
+//import EWCGridpanel from '@sencha/ext-web-components-classic/dist/ext-gridpanel.component.js';
+import { EWCGridpanel } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

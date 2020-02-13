@@ -1,6 +1,7 @@
 //import EWCGmappanel from '../dist/ext-gmappanel.component.js';
 //inputs: (new EWCGmappanel()).properties,
-import EWCGmappanel from '@sencha/ext-web-components-classic/dist/ext-gmappanel.component.js';
+//import EWCGmappanel from '@sencha/ext-web-components-classic/dist/ext-gmappanel.component.js';
+import { EWCGmappanel } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

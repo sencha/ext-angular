@@ -1,6 +1,7 @@
 //import EWCColorselector from '../dist/ext-colorselector.component.js';
 //inputs: (new EWCColorselector()).properties,
-import EWCColorselector from '@sencha/ext-web-components-classic/dist/ext-colorselector.component.js';
+//import EWCColorselector from '@sencha/ext-web-components-classic/dist/ext-colorselector.component.js';
+import { EWCColorselector } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

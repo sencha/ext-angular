@@ -1,6 +1,7 @@
 //import EWCPivotconfigfield from '../dist/ext-pivotconfigfield.component.js';
 //inputs: (new EWCPivotconfigfield()).properties,
-import EWCPivotconfigfield from '@sencha/ext-web-components-classic/dist/ext-pivotconfigfield.component.js';
+//import EWCPivotconfigfield from '@sencha/ext-web-components-classic/dist/ext-pivotconfigfield.component.js';
+import { EWCPivotconfigfield } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

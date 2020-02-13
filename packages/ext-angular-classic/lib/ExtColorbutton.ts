@@ -1,6 +1,7 @@
 //import EWCColorbutton from '../dist/ext-colorbutton.component.js';
 //inputs: (new EWCColorbutton()).properties,
-import EWCColorbutton from '@sencha/ext-web-components-classic/dist/ext-colorbutton.component.js';
+//import EWCColorbutton from '@sencha/ext-web-components-classic/dist/ext-colorbutton.component.js';
+import { EWCColorbutton } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

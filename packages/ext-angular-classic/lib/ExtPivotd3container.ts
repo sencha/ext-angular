@@ -1,6 +1,7 @@
 //import EWCPivotd3container from '../dist/ext-pivotd3container.component.js';
 //inputs: (new EWCPivotd3container()).properties,
-import EWCPivotd3container from '@sencha/ext-web-components-classic/dist/ext-pivotd3container.component.js';
+//import EWCPivotd3container from '@sencha/ext-web-components-classic/dist/ext-pivotd3container.component.js';
+import { EWCPivotd3container } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

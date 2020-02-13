@@ -1,6 +1,7 @@
 //import EWCCombobox from '../dist/ext-combobox.component.js';
 //inputs: (new EWCCombobox()).properties,
-import EWCCombobox from '@sencha/ext-web-components-classic/dist/ext-combobox.component.js';
+//import EWCCombobox from '@sencha/ext-web-components-classic/dist/ext-combobox.component.js';
+import { EWCCombobox } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

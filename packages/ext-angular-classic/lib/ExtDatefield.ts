@@ -1,6 +1,7 @@
 //import EWCDatefield from '../dist/ext-datefield.component.js';
 //inputs: (new EWCDatefield()).properties,
-import EWCDatefield from '@sencha/ext-web-components-classic/dist/ext-datefield.component.js';
+//import EWCDatefield from '@sencha/ext-web-components-classic/dist/ext-datefield.component.js';
+import { EWCDatefield } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

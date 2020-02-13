@@ -1,6 +1,7 @@
 //import EWCTbseparator from '../dist/ext-tbseparator.component.js';
 //inputs: (new EWCTbseparator()).properties,
-import EWCTbseparator from '@sencha/ext-web-components-classic/dist/ext-tbseparator.component.js';
+//import EWCTbseparator from '@sencha/ext-web-components-classic/dist/ext-tbseparator.component.js';
+import { EWCTbseparator } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

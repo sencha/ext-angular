@@ -1,6 +1,7 @@
 //import EWCSpinnerfield from '../dist/ext-spinnerfield.component.js';
 //inputs: (new EWCSpinnerfield()).properties,
-import EWCSpinnerfield from '@sencha/ext-web-components-classic/dist/ext-spinnerfield.component.js';
+//import EWCSpinnerfield from '@sencha/ext-web-components-classic/dist/ext-spinnerfield.component.js';
+import { EWCSpinnerfield } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

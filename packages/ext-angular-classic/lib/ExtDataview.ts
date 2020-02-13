@@ -1,6 +1,7 @@
 //import EWCDataview from '../dist/ext-dataview.component.js';
 //inputs: (new EWCDataview()).properties,
-import EWCDataview from '@sencha/ext-web-components-classic/dist/ext-dataview.component.js';
+//import EWCDataview from '@sencha/ext-web-components-classic/dist/ext-dataview.component.js';
+import { EWCDataview } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

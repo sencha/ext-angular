@@ -1,6 +1,7 @@
 //import EWCCalendar_form_edit from '../dist/ext-calendar-form-edit.component.js';
 //inputs: (new EWCCalendar_form_edit()).properties,
-import EWCCalendar_form_edit from '@sencha/ext-web-components-classic/dist/ext-calendar-form-edit.component.js';
+//import EWCCalendar_form_edit from '@sencha/ext-web-components-classic/dist/ext-calendar-form-edit.component.js';
+import { EWCCalendar_form_edit } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

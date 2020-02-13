@@ -1,6 +1,7 @@
 //import EWCTbitem from '../dist/ext-tbitem.component.js';
 //inputs: (new EWCTbitem()).properties,
-import EWCTbitem from '@sencha/ext-web-components-classic/dist/ext-tbitem.component.js';
+//import EWCTbitem from '@sencha/ext-web-components-classic/dist/ext-tbitem.component.js';
+import { EWCTbitem } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

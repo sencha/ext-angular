@@ -1,6 +1,7 @@
 //import EWCSearchfield from '../dist/ext-searchfield.component.js';
 //inputs: (new EWCSearchfield()).properties,
-import EWCSearchfield from '@sencha/ext-web-components-classic/dist/ext-searchfield.component.js';
+//import EWCSearchfield from '@sencha/ext-web-components-classic/dist/ext-searchfield.component.js';
+import { EWCSearchfield } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

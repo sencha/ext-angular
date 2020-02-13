@@ -1,6 +1,7 @@
 //import EWCMonthpicker from '../dist/ext-monthpicker.component.js';
 //inputs: (new EWCMonthpicker()).properties,
-import EWCMonthpicker from '@sencha/ext-web-components-classic/dist/ext-monthpicker.component.js';
+//import EWCMonthpicker from '@sencha/ext-web-components-classic/dist/ext-monthpicker.component.js';
+import { EWCMonthpicker } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

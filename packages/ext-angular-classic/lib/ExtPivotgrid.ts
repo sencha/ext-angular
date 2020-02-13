@@ -1,6 +1,7 @@
 //import EWCPivotgrid from '../dist/ext-pivotgrid.component.js';
 //inputs: (new EWCPivotgrid()).properties,
-import EWCPivotgrid from '@sencha/ext-web-components-classic/dist/ext-pivotgrid.component.js';
+//import EWCPivotgrid from '@sencha/ext-web-components-classic/dist/ext-pivotgrid.component.js';
+import { EWCPivotgrid } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

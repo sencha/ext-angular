@@ -1,6 +1,7 @@
 //import EWCChart from '../dist/ext-chart.component.js';
 //inputs: (new EWCChart()).properties,
-import EWCChart from '@sencha/ext-web-components-classic/dist/ext-chart.component.js';
+//import EWCChart from '@sencha/ext-web-components-classic/dist/ext-chart.component.js';
+import { EWCChart } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

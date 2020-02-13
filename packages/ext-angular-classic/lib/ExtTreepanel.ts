@@ -1,6 +1,7 @@
 //import EWCTreepanel from '../dist/ext-treepanel.component.js';
 //inputs: (new EWCTreepanel()).properties,
-import EWCTreepanel from '@sencha/ext-web-components-classic/dist/ext-treepanel.component.js';
+//import EWCTreepanel from '@sencha/ext-web-components-classic/dist/ext-treepanel.component.js';
+import { EWCTreepanel } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

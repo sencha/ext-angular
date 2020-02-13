@@ -1,6 +1,7 @@
 //import EWCRadio from '../dist/ext-radio.component.js';
 //inputs: (new EWCRadio()).properties,
-import EWCRadio from '@sencha/ext-web-components-classic/dist/ext-radio.component.js';
+//import EWCRadio from '@sencha/ext-web-components-classic/dist/ext-radio.component.js';
+import { EWCRadio } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

@@ -1,6 +1,7 @@
 //import EWCTab from '../dist/ext-tab.component.js';
 //inputs: (new EWCTab()).properties,
-import EWCTab from '@sencha/ext-web-components-classic/dist/ext-tab.component.js';
+//import EWCTab from '@sencha/ext-web-components-classic/dist/ext-tab.component.js';
+import { EWCTab } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

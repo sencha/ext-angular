@@ -1,6 +1,7 @@
 //import EWCColorpickerslider from '../dist/ext-colorpickerslider.component.js';
 //inputs: (new EWCColorpickerslider()).properties,
-import EWCColorpickerslider from '@sencha/ext-web-components-classic/dist/ext-colorpickerslider.component.js';
+//import EWCColorpickerslider from '@sencha/ext-web-components-classic/dist/ext-colorpickerslider.component.js';
+import { EWCColorpickerslider } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,
