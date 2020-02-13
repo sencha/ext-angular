@@ -1,45 +1,45 @@
 {
-  "name": "@sencha/ext-angular-gen",
-  "version": "7.1.0",
-  "description": "Sencha ExtAngular code generator",
-  "bin": {
-    "ext-angular-gen": "ext-angular-gen.js",
-    "xng": "ext-angular-gen.js"
-  },
-  "scripts": {
-    "install": "node ./install.js"
-  },
-  "keywords": [
-    "Ext JS",
-    "ext-angular-gen"
-  ],
-  "directories": {
-    "lib": "lib"
-  },
-  "preferGlobal": true,
-  "dependencies": {
-    "@sencha/ext-angular-boilerplate": "7.1.0",
-    "chalk": "~2.4.2",
-    "glob": "~7.1.4",
-    "boxen": "~4.1.0",
-    "command-line-args": "~5.1.1",
-    "comment-json": "~2.1.0",
-    "cross-spawn": "~6.0.5",
-    "fs-extra": "~8.1.0",
-    "lodash": "~4.17.15",
-    "prompt-confirm": "~2.0.4",
-    "prompt-input": "~3.0.0",
-    "prompt-list": "~3.2.0",
-    "tosemver": "~1.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sencha/ext-angular.git"
-  },
-  "author": "Sencha, Inc.",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/"
-  },
-  "homepage": "http://www.sencha.com"
+    "name": "@sencha/ext-angular-gen",
+    "version": "7.2.0",
+    "description": "Sencha ExtAngular code generator",
+    "bin": {
+        "ext-angular-gen": "ext-angular-gen.js",
+        "xng": "ext-angular-gen.js"
+    },
+    "scripts": {
+        "install": "node ./install.js"
+    },
+    "keywords": [
+        "Ext JS",
+        "ext-angular-gen"
+    ],
+    "directories": {
+        "lib": "lib"
+    },
+    "preferGlobal": true,
+    "dependencies": {
+        "@sencha/ext-angular-boilerplate": "7.1.0",
+        "chalk": "~2.4.2",
+        "glob": "~7.1.4",
+        "boxen": "~4.1.0",
+        "command-line-args": "~5.1.1",
+        "comment-json": "~2.1.0",
+        "cross-spawn": "~6.0.5",
+        "fs-extra": "~8.1.0",
+        "lodash": "~4.17.15",
+        "prompt-confirm": "~2.0.4",
+        "prompt-input": "~3.0.0",
+        "prompt-list": "~3.2.0",
+        "tosemver": "~1.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sencha/ext-angular.git"
+    },
+    "author": "Sencha, Inc.",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/"
+    },
+    "homepage": "http://www.sencha.com"
 }
