@@ -1,6 +1,7 @@
 //import EWCPagingtoolbar from '../dist/ext-pagingtoolbar.component.js';
 //inputs: (new EWCPagingtoolbar()).properties,
-import EWCPagingtoolbar from '@sencha/ext-web-components-classic/dist/ext-pagingtoolbar.component.js';
+//import EWCPagingtoolbar from '@sencha/ext-web-components-classic/dist/ext-pagingtoolbar.component.js';
+import { EWCPagingtoolbar } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

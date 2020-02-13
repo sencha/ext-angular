@@ -1,6 +1,7 @@
 //import EWCDisplayfield from '../dist/ext-displayfield.component.js';
 //inputs: (new EWCDisplayfield()).properties,
-import EWCDisplayfield from '@sencha/ext-web-components-classic/dist/ext-displayfield.component.js';
+//import EWCDisplayfield from '@sencha/ext-web-components-classic/dist/ext-displayfield.component.js';
+import { EWCDisplayfield } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

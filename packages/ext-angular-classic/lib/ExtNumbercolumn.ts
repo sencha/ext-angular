@@ -1,6 +1,7 @@
 //import EWCNumbercolumn from '../dist/ext-numbercolumn.component.js';
 //inputs: (new EWCNumbercolumn()).properties,
-import EWCNumbercolumn from '@sencha/ext-web-components-classic/dist/ext-numbercolumn.component.js';
+//import EWCNumbercolumn from '@sencha/ext-web-components-classic/dist/ext-numbercolumn.component.js';
+import { EWCNumbercolumn } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

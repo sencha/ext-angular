@@ -1,6 +1,7 @@
 //import EWCUxiframe from '../dist/ext-uxiframe.component.js';
 //inputs: (new EWCUxiframe()).properties,
-import EWCUxiframe from '@sencha/ext-web-components-classic/dist/ext-uxiframe.component.js';
+//import EWCUxiframe from '@sencha/ext-web-components-classic/dist/ext-uxiframe.component.js';
+import { EWCUxiframe } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

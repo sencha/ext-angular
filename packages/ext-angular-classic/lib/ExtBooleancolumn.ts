@@ -1,6 +1,7 @@
 //import EWCBooleancolumn from '../dist/ext-booleancolumn.component.js';
 //inputs: (new EWCBooleancolumn()).properties,
-import EWCBooleancolumn from '@sencha/ext-web-components-classic/dist/ext-booleancolumn.component.js';
+//import EWCBooleancolumn from '@sencha/ext-web-components-classic/dist/ext-booleancolumn.component.js';
+import { EWCBooleancolumn } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

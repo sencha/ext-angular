@@ -1,6 +1,7 @@
 //import EWCTagfield from '../dist/ext-tagfield.component.js';
 //inputs: (new EWCTagfield()).properties,
-import EWCTagfield from '@sencha/ext-web-components-classic/dist/ext-tagfield.component.js';
+//import EWCTagfield from '@sencha/ext-web-components-classic/dist/ext-tagfield.component.js';
+import { EWCTagfield } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

@@ -1,6 +1,7 @@
 //import EWCTemplatecolumn from '../dist/ext-templatecolumn.component.js';
 //inputs: (new EWCTemplatecolumn()).properties,
-import EWCTemplatecolumn from '@sencha/ext-web-components-classic/dist/ext-templatecolumn.component.js';
+//import EWCTemplatecolumn from '@sencha/ext-web-components-classic/dist/ext-templatecolumn.component.js';
+import { EWCTemplatecolumn } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

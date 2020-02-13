@@ -1,6 +1,7 @@
 //import EWCMessagebox from '../dist/ext-messagebox.component.js';
 //inputs: (new EWCMessagebox()).properties,
-import EWCMessagebox from '@sencha/ext-web-components-classic/dist/ext-messagebox.component.js';
+//import EWCMessagebox from '@sencha/ext-web-components-classic/dist/ext-messagebox.component.js';
+import { EWCMessagebox } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

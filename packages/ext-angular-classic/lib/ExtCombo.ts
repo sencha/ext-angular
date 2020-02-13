@@ -1,6 +1,7 @@
 //import EWCCombo from '../dist/ext-combo.component.js';
 //inputs: (new EWCCombo()).properties,
-import EWCCombo from '@sencha/ext-web-components-classic/dist/ext-combo.component.js';
+//import EWCCombo from '@sencha/ext-web-components-classic/dist/ext-combo.component.js';
+import { EWCCombo } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

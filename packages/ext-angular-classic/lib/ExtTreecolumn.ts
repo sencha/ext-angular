@@ -1,6 +1,7 @@
 //import EWCTreecolumn from '../dist/ext-treecolumn.component.js';
 //inputs: (new EWCTreecolumn()).properties,
-import EWCTreecolumn from '@sencha/ext-web-components-classic/dist/ext-treecolumn.component.js';
+//import EWCTreecolumn from '@sencha/ext-web-components-classic/dist/ext-treecolumn.component.js';
+import { EWCTreecolumn } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

@@ -1,6 +1,7 @@
 //import EWCLegend from '../dist/ext-legend.component.js';
 //inputs: (new EWCLegend()).properties,
-import EWCLegend from '@sencha/ext-web-components-classic/dist/ext-legend.component.js';
+//import EWCLegend from '@sencha/ext-web-components-classic/dist/ext-legend.component.js';
+import { EWCLegend } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

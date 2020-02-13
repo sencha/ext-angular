@@ -1,6 +1,7 @@
 //import EWCSlidertip from '../dist/ext-slidertip.component.js';
 //inputs: (new EWCSlidertip()).properties,
-import EWCSlidertip from '@sencha/ext-web-components-classic/dist/ext-slidertip.component.js';
+//import EWCSlidertip from '@sencha/ext-web-components-classic/dist/ext-slidertip.component.js';
+import { EWCSlidertip } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

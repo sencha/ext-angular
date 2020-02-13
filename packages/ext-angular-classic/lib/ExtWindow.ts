@@ -1,6 +1,7 @@
 //import EWCWindow from '../dist/ext-window.component.js';
 //inputs: (new EWCWindow()).properties,
-import EWCWindow from '@sencha/ext-web-components-classic/dist/ext-window.component.js';
+//import EWCWindow from '@sencha/ext-web-components-classic/dist/ext-window.component.js';
+import { EWCWindow } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

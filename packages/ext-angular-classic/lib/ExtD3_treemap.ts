@@ -1,6 +1,7 @@
 //import EWCD3_treemap from '../dist/ext-d3-treemap.component.js';
 //inputs: (new EWCD3_treemap()).properties,
-import EWCD3_treemap from '@sencha/ext-web-components-classic/dist/ext-d3-treemap.component.js';
+//import EWCD3_treemap from '@sencha/ext-web-components-classic/dist/ext-d3-treemap.component.js';
+import { EWCD3_treemap } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

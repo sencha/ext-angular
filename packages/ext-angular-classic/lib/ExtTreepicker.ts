@@ -1,6 +1,7 @@
 //import EWCTreepicker from '../dist/ext-treepicker.component.js';
 //inputs: (new EWCTreepicker()).properties,
-import EWCTreepicker from '@sencha/ext-web-components-classic/dist/ext-treepicker.component.js';
+//import EWCTreepicker from '@sencha/ext-web-components-classic/dist/ext-treepicker.component.js';
+import { EWCTreepicker } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

@@ -1,6 +1,7 @@
 //import EWCCheckboxgroup from '../dist/ext-checkboxgroup.component.js';
 //inputs: (new EWCCheckboxgroup()).properties,
-import EWCCheckboxgroup from '@sencha/ext-web-components-classic/dist/ext-checkboxgroup.component.js';
+//import EWCCheckboxgroup from '@sencha/ext-web-components-classic/dist/ext-checkboxgroup.component.js';
+import { EWCCheckboxgroup } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

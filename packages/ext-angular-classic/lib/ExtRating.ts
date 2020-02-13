@@ -1,6 +1,7 @@
 //import EWCRating from '../dist/ext-rating.component.js';
 //inputs: (new EWCRating()).properties,
-import EWCRating from '@sencha/ext-web-components-classic/dist/ext-rating.component.js';
+//import EWCRating from '@sencha/ext-web-components-classic/dist/ext-rating.component.js';
+import { EWCRating } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

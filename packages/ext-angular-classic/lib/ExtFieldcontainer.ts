@@ -1,6 +1,7 @@
 //import EWCFieldcontainer from '../dist/ext-fieldcontainer.component.js';
 //inputs: (new EWCFieldcontainer()).properties,
-import EWCFieldcontainer from '@sencha/ext-web-components-classic/dist/ext-fieldcontainer.component.js';
+//import EWCFieldcontainer from '@sencha/ext-web-components-classic/dist/ext-fieldcontainer.component.js';
+import { EWCFieldcontainer } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

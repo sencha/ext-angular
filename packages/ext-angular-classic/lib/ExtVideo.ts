@@ -1,6 +1,7 @@
 //import EWCVideo from '../dist/ext-video.component.js';
 //inputs: (new EWCVideo()).properties,
-import EWCVideo from '@sencha/ext-web-components-classic/dist/ext-video.component.js';
+//import EWCVideo from '@sencha/ext-web-components-classic/dist/ext-video.component.js';
+import { EWCVideo } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

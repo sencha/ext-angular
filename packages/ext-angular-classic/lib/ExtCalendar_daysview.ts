@@ -1,6 +1,7 @@
 //import EWCCalendar_daysview from '../dist/ext-calendar-daysview.component.js';
 //inputs: (new EWCCalendar_daysview()).properties,
-import EWCCalendar_daysview from '@sencha/ext-web-components-classic/dist/ext-calendar-daysview.component.js';
+//import EWCCalendar_daysview from '@sencha/ext-web-components-classic/dist/ext-calendar-daysview.component.js';
+import { EWCCalendar_daysview } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

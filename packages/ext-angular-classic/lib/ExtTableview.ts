@@ -1,6 +1,7 @@
 //import EWCTableview from '../dist/ext-tableview.component.js';
 //inputs: (new EWCTableview()).properties,
-import EWCTableview from '@sencha/ext-web-components-classic/dist/ext-tableview.component.js';
+//import EWCTableview from '@sencha/ext-web-components-classic/dist/ext-tableview.component.js';
+import { EWCTableview } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

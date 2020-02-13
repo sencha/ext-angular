@@ -1,6 +1,7 @@
 //import EWCD3 from '../dist/ext-d3.component.js';
 //inputs: (new EWCD3()).properties,
-import EWCD3 from '@sencha/ext-web-components-classic/dist/ext-d3.component.js';
+//import EWCD3 from '@sencha/ext-web-components-classic/dist/ext-d3.component.js';
+import { EWCD3 } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

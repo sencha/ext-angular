@@ -1,6 +1,7 @@
 //import EWCCalendar_event from '../dist/ext-calendar-event.component.js';
 //inputs: (new EWCCalendar_event()).properties,
-import EWCCalendar_event from '@sencha/ext-web-components-classic/dist/ext-calendar-event.component.js';
+//import EWCCalendar_event from '@sencha/ext-web-components-classic/dist/ext-calendar-event.component.js';
+import { EWCCalendar_event } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

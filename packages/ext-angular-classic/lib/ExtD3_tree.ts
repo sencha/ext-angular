@@ -1,6 +1,7 @@
 //import EWCD3_tree from '../dist/ext-d3-tree.component.js';
 //inputs: (new EWCD3_tree()).properties,
-import EWCD3_tree from '@sencha/ext-web-components-classic/dist/ext-d3-tree.component.js';
+//import EWCD3_tree from '@sencha/ext-web-components-classic/dist/ext-d3-tree.component.js';
+import { EWCD3_tree } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

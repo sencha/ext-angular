@@ -1,209 +1,6 @@
 import { __decorate, __param } from 'tslib';
 import { EventEmitter, ContentChildren, ElementRef, Host, Optional, SkipSelf, ViewContainerRef, Component, forwardRef, NgModule, APP_INITIALIZER } from '@angular/core';
-import EWCButton from '@sencha/ext-web-components-classic/dist/ext-button.component.js';
-import EWCCycle from '@sencha/ext-web-components-classic/dist/ext-cycle.component.js';
-import EWCSegmentedbutton from '@sencha/ext-web-components-classic/dist/ext-segmentedbutton.component.js';
-import EWCSplitbutton from '@sencha/ext-web-components-classic/dist/ext-splitbutton.component.js';
-import EWCCalendar_event from '@sencha/ext-web-components-classic/dist/ext-calendar-event.component.js';
-import EWCCalendar_form_add from '@sencha/ext-web-components-classic/dist/ext-calendar-form-add.component.js';
-import EWCCalendar_calendar_picker from '@sencha/ext-web-components-classic/dist/ext-calendar-calendar-picker.component.js';
-import EWCCalendar_form_edit from '@sencha/ext-web-components-classic/dist/ext-calendar-form-edit.component.js';
-import EWCCalendar_daysheader from '@sencha/ext-web-components-classic/dist/ext-calendar-daysheader.component.js';
-import EWCCalendar_weeksheader from '@sencha/ext-web-components-classic/dist/ext-calendar-weeksheader.component.js';
-import EWCCalendar_list from '@sencha/ext-web-components-classic/dist/ext-calendar-list.component.js';
-import EWCCalendar_day from '@sencha/ext-web-components-classic/dist/ext-calendar-day.component.js';
-import EWCCalendar_days from '@sencha/ext-web-components-classic/dist/ext-calendar-days.component.js';
-import EWCCalendar_month from '@sencha/ext-web-components-classic/dist/ext-calendar-month.component.js';
-import EWCCalendar from '@sencha/ext-web-components-classic/dist/ext-calendar.component.js';
-import EWCCalendar_week from '@sencha/ext-web-components-classic/dist/ext-calendar-week.component.js';
-import EWCCalendar_weeks from '@sencha/ext-web-components-classic/dist/ext-calendar-weeks.component.js';
-import EWCCalendar_dayview from '@sencha/ext-web-components-classic/dist/ext-calendar-dayview.component.js';
-import EWCCalendar_daysview from '@sencha/ext-web-components-classic/dist/ext-calendar-daysview.component.js';
-import EWCCalendar_monthview from '@sencha/ext-web-components-classic/dist/ext-calendar-monthview.component.js';
-import EWCCalendar_multiview from '@sencha/ext-web-components-classic/dist/ext-calendar-multiview.component.js';
-import EWCCalendar_weekview from '@sencha/ext-web-components-classic/dist/ext-calendar-weekview.component.js';
-import EWCCalendar_weeksview from '@sencha/ext-web-components-classic/dist/ext-calendar-weeksview.component.js';
-import EWCAxis from '@sencha/ext-web-components-classic/dist/ext-axis.component.js';
-import EWCAxis3d from '@sencha/ext-web-components-classic/dist/ext-axis3d.component.js';
-import EWCCartesian from '@sencha/ext-web-components-classic/dist/ext-cartesian.component.js';
-import EWCChart from '@sencha/ext-web-components-classic/dist/ext-chart.component.js';
-import EWCInteraction from '@sencha/ext-web-components-classic/dist/ext-interaction.component.js';
-import EWCLegend from '@sencha/ext-web-components-classic/dist/ext-legend.component.js';
-import EWCChartnavigator from '@sencha/ext-web-components-classic/dist/ext-chartnavigator.component.js';
-import EWCPolar from '@sencha/ext-web-components-classic/dist/ext-polar.component.js';
-import EWCSpacefilling from '@sencha/ext-web-components-classic/dist/ext-spacefilling.component.js';
-import EWCComponent from '@sencha/ext-web-components-classic/dist/ext-component.component.js';
-import EWCBox from '@sencha/ext-web-components-classic/dist/ext-box.component.js';
-import EWCButtongroup from '@sencha/ext-web-components-classic/dist/ext-buttongroup.component.js';
-import EWCContainer from '@sencha/ext-web-components-classic/dist/ext-container.component.js';
-import EWCViewport from '@sencha/ext-web-components-classic/dist/ext-viewport.component.js';
-import EWCD3_canvas from '@sencha/ext-web-components-classic/dist/ext-d3-canvas.component.js';
-import EWCD3_heatmap from '@sencha/ext-web-components-classic/dist/ext-d3-heatmap.component.js';
-import EWCD3_pack from '@sencha/ext-web-components-classic/dist/ext-d3-pack.component.js';
-import EWCD3_partition from '@sencha/ext-web-components-classic/dist/ext-d3-partition.component.js';
-import EWCD3_sunburst from '@sencha/ext-web-components-classic/dist/ext-d3-sunburst.component.js';
-import EWCD3_tree from '@sencha/ext-web-components-classic/dist/ext-d3-tree.component.js';
-import EWCD3_horizontal_tree from '@sencha/ext-web-components-classic/dist/ext-d3-horizontal-tree.component.js';
-import EWCD3_treemap from '@sencha/ext-web-components-classic/dist/ext-d3-treemap.component.js';
-import EWCD3_svg from '@sencha/ext-web-components-classic/dist/ext-d3-svg.component.js';
-import EWCD3 from '@sencha/ext-web-components-classic/dist/ext-d3.component.js';
-import EWCDashboard_column from '@sencha/ext-web-components-classic/dist/ext-dashboard-column.component.js';
-import EWCDashboard from '@sencha/ext-web-components-classic/dist/ext-dashboard.component.js';
-import EWCDashboard_panel from '@sencha/ext-web-components-classic/dist/ext-dashboard-panel.component.js';
-import EWCDraw from '@sencha/ext-web-components-classic/dist/ext-draw.component.js';
-import EWCSurface from '@sencha/ext-web-components-classic/dist/ext-surface.component.js';
-import EWCEditor from '@sencha/ext-web-components-classic/dist/ext-editor.component.js';
-import EWCFlash from '@sencha/ext-web-components-classic/dist/ext-flash.component.js';
-import EWCCheckboxgroup from '@sencha/ext-web-components-classic/dist/ext-checkboxgroup.component.js';
-import EWCField from '@sencha/ext-web-components-classic/dist/ext-field.component.js';
-import EWCCheckboxfield from '@sencha/ext-web-components-classic/dist/ext-checkboxfield.component.js';
-import EWCCheckbox from '@sencha/ext-web-components-classic/dist/ext-checkbox.component.js';
-import EWCCombobox from '@sencha/ext-web-components-classic/dist/ext-combobox.component.js';
-import EWCCombo from '@sencha/ext-web-components-classic/dist/ext-combo.component.js';
-import EWCDatefield from '@sencha/ext-web-components-classic/dist/ext-datefield.component.js';
-import EWCDisplayfield from '@sencha/ext-web-components-classic/dist/ext-displayfield.component.js';
-import EWCFilefield from '@sencha/ext-web-components-classic/dist/ext-filefield.component.js';
-import EWCFileuploadfield from '@sencha/ext-web-components-classic/dist/ext-fileuploadfield.component.js';
-import EWCFilebutton from '@sencha/ext-web-components-classic/dist/ext-filebutton.component.js';
-import EWCHiddenfield from '@sencha/ext-web-components-classic/dist/ext-hiddenfield.component.js';
-import EWCHidden from '@sencha/ext-web-components-classic/dist/ext-hidden.component.js';
-import EWCHtmleditor from '@sencha/ext-web-components-classic/dist/ext-htmleditor.component.js';
-import EWCNumberfield from '@sencha/ext-web-components-classic/dist/ext-numberfield.component.js';
-import EWCPickerfield from '@sencha/ext-web-components-classic/dist/ext-pickerfield.component.js';
-import EWCRadiofield from '@sencha/ext-web-components-classic/dist/ext-radiofield.component.js';
-import EWCRadio from '@sencha/ext-web-components-classic/dist/ext-radio.component.js';
-import EWCSpinnerfield from '@sencha/ext-web-components-classic/dist/ext-spinnerfield.component.js';
-import EWCTagfield from '@sencha/ext-web-components-classic/dist/ext-tagfield.component.js';
-import EWCTextfield from '@sencha/ext-web-components-classic/dist/ext-textfield.component.js';
-import EWCTextareafield from '@sencha/ext-web-components-classic/dist/ext-textareafield.component.js';
-import EWCTextarea from '@sencha/ext-web-components-classic/dist/ext-textarea.component.js';
-import EWCTimefield from '@sencha/ext-web-components-classic/dist/ext-timefield.component.js';
-import EWCTriggerfield from '@sencha/ext-web-components-classic/dist/ext-triggerfield.component.js';
-import EWCTrigger from '@sencha/ext-web-components-classic/dist/ext-trigger.component.js';
-import EWCFieldcontainer from '@sencha/ext-web-components-classic/dist/ext-fieldcontainer.component.js';
-import EWCFieldset from '@sencha/ext-web-components-classic/dist/ext-fieldset.component.js';
-import EWCLabel from '@sencha/ext-web-components-classic/dist/ext-label.component.js';
-import EWCForm from '@sencha/ext-web-components-classic/dist/ext-form.component.js';
-import EWCRadiogroup from '@sencha/ext-web-components-classic/dist/ext-radiogroup.component.js';
-import EWCCelleditor from '@sencha/ext-web-components-classic/dist/ext-celleditor.component.js';
-import EWCActioncolumn from '@sencha/ext-web-components-classic/dist/ext-actioncolumn.component.js';
-import EWCBooleancolumn from '@sencha/ext-web-components-classic/dist/ext-booleancolumn.component.js';
-import EWCCheckcolumn from '@sencha/ext-web-components-classic/dist/ext-checkcolumn.component.js';
-import EWCGridcolumn from '@sencha/ext-web-components-classic/dist/ext-gridcolumn.component.js';
-import EWCDatecolumn from '@sencha/ext-web-components-classic/dist/ext-datecolumn.component.js';
-import EWCNumbercolumn from '@sencha/ext-web-components-classic/dist/ext-numbercolumn.component.js';
-import EWCRownumberer from '@sencha/ext-web-components-classic/dist/ext-rownumberer.component.js';
-import EWCTemplatecolumn from '@sencha/ext-web-components-classic/dist/ext-templatecolumn.component.js';
-import EWCWidgetcolumn from '@sencha/ext-web-components-classic/dist/ext-widgetcolumn.component.js';
-import EWCHeadercontainer from '@sencha/ext-web-components-classic/dist/ext-headercontainer.component.js';
-import EWCGridpanel from '@sencha/ext-web-components-classic/dist/ext-gridpanel.component.js';
-import EWCGrid from '@sencha/ext-web-components-classic/dist/ext-grid.component.js';
-import EWCPropertygrid from '@sencha/ext-web-components-classic/dist/ext-propertygrid.component.js';
-import EWCRoweditor from '@sencha/ext-web-components-classic/dist/ext-roweditor.component.js';
-import EWCRoweditorbuttons from '@sencha/ext-web-components-classic/dist/ext-roweditorbuttons.component.js';
-import EWCImage from '@sencha/ext-web-components-classic/dist/ext-image.component.js';
-import EWCImagecomponent from '@sencha/ext-web-components-classic/dist/ext-imagecomponent.component.js';
-import EWCColumnsplitter from '@sencha/ext-web-components-classic/dist/ext-columnsplitter.component.js';
-import EWCTreelist from '@sencha/ext-web-components-classic/dist/ext-treelist.component.js';
-import EWCTreelistitem from '@sencha/ext-web-components-classic/dist/ext-treelistitem.component.js';
-import EWCLoadmask from '@sencha/ext-web-components-classic/dist/ext-loadmask.component.js';
-import EWCMenubar from '@sencha/ext-web-components-classic/dist/ext-menubar.component.js';
-import EWCMenucheckitem from '@sencha/ext-web-components-classic/dist/ext-menucheckitem.component.js';
-import EWCColormenu from '@sencha/ext-web-components-classic/dist/ext-colormenu.component.js';
-import EWCDatemenu from '@sencha/ext-web-components-classic/dist/ext-datemenu.component.js';
-import EWCMenuitem from '@sencha/ext-web-components-classic/dist/ext-menuitem.component.js';
-import EWCMenu from '@sencha/ext-web-components-classic/dist/ext-menu.component.js';
-import EWCMenuseparator from '@sencha/ext-web-components-classic/dist/ext-menuseparator.component.js';
-import EWCHeader from '@sencha/ext-web-components-classic/dist/ext-header.component.js';
-import EWCPanel from '@sencha/ext-web-components-classic/dist/ext-panel.component.js';
-import EWCTablepanel from '@sencha/ext-web-components-classic/dist/ext-tablepanel.component.js';
-import EWCTitle from '@sencha/ext-web-components-classic/dist/ext-title.component.js';
-import EWCTool from '@sencha/ext-web-components-classic/dist/ext-tool.component.js';
-import EWCColorpicker from '@sencha/ext-web-components-classic/dist/ext-colorpicker.component.js';
-import EWCDatepicker from '@sencha/ext-web-components-classic/dist/ext-datepicker.component.js';
-import EWCMonthpicker from '@sencha/ext-web-components-classic/dist/ext-monthpicker.component.js';
-import EWCTimepicker from '@sencha/ext-web-components-classic/dist/ext-timepicker.component.js';
-import EWCPivotd3container from '@sencha/ext-web-components-classic/dist/ext-pivotd3container.component.js';
-import EWCPivotheatmap from '@sencha/ext-web-components-classic/dist/ext-pivotheatmap.component.js';
-import EWCPivottreemap from '@sencha/ext-web-components-classic/dist/ext-pivottreemap.component.js';
-import EWCPivotgrid from '@sencha/ext-web-components-classic/dist/ext-pivotgrid.component.js';
-import EWCMzpivotgrid from '@sencha/ext-web-components-classic/dist/ext-mzpivotgrid.component.js';
-import EWCPivotconfigfield from '@sencha/ext-web-components-classic/dist/ext-pivotconfigfield.component.js';
-import EWCPivotconfigcontainer from '@sencha/ext-web-components-classic/dist/ext-pivotconfigcontainer.component.js';
-import EWCPivotconfigpanel from '@sencha/ext-web-components-classic/dist/ext-pivotconfigpanel.component.js';
-import EWCProgress from '@sencha/ext-web-components-classic/dist/ext-progress.component.js';
-import EWCProgressbarwidget from '@sencha/ext-web-components-classic/dist/ext-progressbarwidget.component.js';
-import EWCProgressbar from '@sencha/ext-web-components-classic/dist/ext-progressbar.component.js';
-import EWCBordersplitter from '@sencha/ext-web-components-classic/dist/ext-bordersplitter.component.js';
-import EWCSplitter from '@sencha/ext-web-components-classic/dist/ext-splitter.component.js';
-import EWCMultislider from '@sencha/ext-web-components-classic/dist/ext-multislider.component.js';
-import EWCSlider from '@sencha/ext-web-components-classic/dist/ext-slider.component.js';
-import EWCSliderfield from '@sencha/ext-web-components-classic/dist/ext-sliderfield.component.js';
-import EWCSlidertip from '@sencha/ext-web-components-classic/dist/ext-slidertip.component.js';
-import EWCSliderwidget from '@sencha/ext-web-components-classic/dist/ext-sliderwidget.component.js';
-import EWCSparklinebar from '@sencha/ext-web-components-classic/dist/ext-sparklinebar.component.js';
-import EWCSparkline from '@sencha/ext-web-components-classic/dist/ext-sparkline.component.js';
-import EWCSparklinebox from '@sencha/ext-web-components-classic/dist/ext-sparklinebox.component.js';
-import EWCSparklinebullet from '@sencha/ext-web-components-classic/dist/ext-sparklinebullet.component.js';
-import EWCSparklinediscrete from '@sencha/ext-web-components-classic/dist/ext-sparklinediscrete.component.js';
-import EWCSparklineline from '@sencha/ext-web-components-classic/dist/ext-sparklineline.component.js';
-import EWCSparklinepie from '@sencha/ext-web-components-classic/dist/ext-sparklinepie.component.js';
-import EWCSparklinetristate from '@sencha/ext-web-components-classic/dist/ext-sparklinetristate.component.js';
-import EWCTabbar from '@sencha/ext-web-components-classic/dist/ext-tabbar.component.js';
-import EWCTabpanel from '@sencha/ext-web-components-classic/dist/ext-tabpanel.component.js';
-import EWCTab from '@sencha/ext-web-components-classic/dist/ext-tab.component.js';
-import EWCQuicktip from '@sencha/ext-web-components-classic/dist/ext-quicktip.component.js';
-import EWCTip from '@sencha/ext-web-components-classic/dist/ext-tip.component.js';
-import EWCTooltip from '@sencha/ext-web-components-classic/dist/ext-tooltip.component.js';
-import EWCBreadcrumb from '@sencha/ext-web-components-classic/dist/ext-breadcrumb.component.js';
-import EWCTbfill from '@sencha/ext-web-components-classic/dist/ext-tbfill.component.js';
-import EWCTbitem from '@sencha/ext-web-components-classic/dist/ext-tbitem.component.js';
-import EWCPagingtoolbar from '@sencha/ext-web-components-classic/dist/ext-pagingtoolbar.component.js';
-import EWCTbseparator from '@sencha/ext-web-components-classic/dist/ext-tbseparator.component.js';
-import EWCTbspacer from '@sencha/ext-web-components-classic/dist/ext-tbspacer.component.js';
-import EWCTbtext from '@sencha/ext-web-components-classic/dist/ext-tbtext.component.js';
-import EWCToolbar from '@sencha/ext-web-components-classic/dist/ext-toolbar.component.js';
-import EWCTreecolumn from '@sencha/ext-web-components-classic/dist/ext-treecolumn.component.js';
-import EWCTreepanel from '@sencha/ext-web-components-classic/dist/ext-treepanel.component.js';
-import EWCTreeview from '@sencha/ext-web-components-classic/dist/ext-treeview.component.js';
-import EWCColorbutton from '@sencha/ext-web-components-classic/dist/ext-colorbutton.component.js';
-import EWCColorpickercolormap from '@sencha/ext-web-components-classic/dist/ext-colorpickercolormap.component.js';
-import EWCColorpickercolorpreview from '@sencha/ext-web-components-classic/dist/ext-colorpickercolorpreview.component.js';
-import EWCColorfield from '@sencha/ext-web-components-classic/dist/ext-colorfield.component.js';
-import EWCColorselector from '@sencha/ext-web-components-classic/dist/ext-colorselector.component.js';
-import EWCColorpickerslider from '@sencha/ext-web-components-classic/dist/ext-colorpickerslider.component.js';
-import EWCColorpickerslideralpha from '@sencha/ext-web-components-classic/dist/ext-colorpickerslideralpha.component.js';
-import EWCColorpickersliderhue from '@sencha/ext-web-components-classic/dist/ext-colorpickersliderhue.component.js';
-import EWCColorpickerslidersaturation from '@sencha/ext-web-components-classic/dist/ext-colorpickerslidersaturation.component.js';
-import EWCColorpickerslidervalue from '@sencha/ext-web-components-classic/dist/ext-colorpickerslidervalue.component.js';
-import EWCDesktop from '@sencha/ext-web-components-classic/dist/ext-desktop.component.js';
-import EWCTaskbar from '@sencha/ext-web-components-classic/dist/ext-taskbar.component.js';
-import EWCTrayclock from '@sencha/ext-web-components-classic/dist/ext-trayclock.component.js';
-import EWCVideo from '@sencha/ext-web-components-classic/dist/ext-video.component.js';
-import EWCWallpaper from '@sencha/ext-web-components-classic/dist/ext-wallpaper.component.js';
-import EWCEventrecordermanager from '@sencha/ext-web-components-classic/dist/ext-eventrecordermanager.component.js';
-import EWCExplorer from '@sencha/ext-web-components-classic/dist/ext-explorer.component.js';
-import EWCItemselectorfield from '@sencha/ext-web-components-classic/dist/ext-itemselectorfield.component.js';
-import EWCItemselector from '@sencha/ext-web-components-classic/dist/ext-itemselector.component.js';
-import EWCMultiselectfield from '@sencha/ext-web-components-classic/dist/ext-multiselectfield.component.js';
-import EWCMultiselect from '@sencha/ext-web-components-classic/dist/ext-multiselect.component.js';
-import EWCSearchfield from '@sencha/ext-web-components-classic/dist/ext-searchfield.component.js';
-import EWCGauge from '@sencha/ext-web-components-classic/dist/ext-gauge.component.js';
-import EWCGmappanel from '@sencha/ext-web-components-classic/dist/ext-gmappanel.component.js';
-import EWCUxiframe from '@sencha/ext-web-components-classic/dist/ext-uxiframe.component.js';
-import EWCRating from '@sencha/ext-web-components-classic/dist/ext-rating.component.js';
-import EWCStatusbar from '@sencha/ext-web-components-classic/dist/ext-statusbar.component.js';
-import EWCTreepicker from '@sencha/ext-web-components-classic/dist/ext-treepicker.component.js';
-import EWCBoundlist from '@sencha/ext-web-components-classic/dist/ext-boundlist.component.js';
-import EWCMultiselector from '@sencha/ext-web-components-classic/dist/ext-multiselector.component.js';
-import EWCMultiselector_search from '@sencha/ext-web-components-classic/dist/ext-multiselector-search.component.js';
-import EWCTableview from '@sencha/ext-web-components-classic/dist/ext-tableview.component.js';
-import EWCGridview from '@sencha/ext-web-components-classic/dist/ext-gridview.component.js';
-import EWCDataview from '@sencha/ext-web-components-classic/dist/ext-dataview.component.js';
-import EWCWidget from '@sencha/ext-web-components-classic/dist/ext-widget.component.js';
-import EWCMessagebox from '@sencha/ext-web-components-classic/dist/ext-messagebox.component.js';
-import EWCToast from '@sencha/ext-web-components-classic/dist/ext-toast.component.js';
-import EWCWindow from '@sencha/ext-web-components-classic/dist/ext-window.component.js';
+import { EWCButton, EWCCycle, EWCSegmentedbutton, EWCSplitbutton, EWCCalendar_event, EWCCalendar_form_add, EWCCalendar_calendar_picker, EWCCalendar_form_edit, EWCCalendar_daysheader, EWCCalendar_weeksheader, EWCCalendar_list, EWCCalendar_day, EWCCalendar_days, EWCCalendar_month, EWCCalendar, EWCCalendar_week, EWCCalendar_weeks, EWCCalendar_dayview, EWCCalendar_daysview, EWCCalendar_monthview, EWCCalendar_multiview, EWCCalendar_weekview, EWCCalendar_weeksview, EWCAxis, EWCAxis3d, EWCCartesian, EWCChart, EWCInteraction, EWCLegend, EWCChartnavigator, EWCPolar, EWCSpacefilling, EWCComponent, EWCBox, EWCButtongroup, EWCContainer, EWCViewport, EWCD3_canvas, EWCD3_heatmap, EWCD3_pack, EWCD3_partition, EWCD3_sunburst, EWCD3_tree, EWCD3_horizontal_tree, EWCD3_treemap, EWCD3_svg, EWCD3, EWCDashboard_column, EWCDashboard, EWCDashboard_panel, EWCDraw, EWCSurface, EWCEditor, EWCFlash, EWCCheckboxgroup, EWCField, EWCCheckboxfield, EWCCheckbox, EWCCombobox, EWCCombo, EWCDatefield, EWCDisplayfield, EWCFilefield, EWCFileuploadfield, EWCFilebutton, EWCHiddenfield, EWCHidden, EWCHtmleditor, EWCNumberfield, EWCPickerfield, EWCRadiofield, EWCRadio, EWCSpinnerfield, EWCTagfield, EWCTextfield, EWCTextareafield, EWCTextarea, EWCTimefield, EWCTriggerfield, EWCTrigger, EWCFieldcontainer, EWCFieldset, EWCLabel, EWCForm, EWCRadiogroup, EWCCelleditor, EWCActioncolumn, EWCBooleancolumn, EWCCheckcolumn, EWCGridcolumn, EWCDatecolumn, EWCNumbercolumn, EWCRownumberer, EWCTemplatecolumn, EWCWidgetcolumn, EWCHeadercontainer, EWCGridpanel, EWCGrid, EWCPropertygrid, EWCRoweditor, EWCRoweditorbuttons, EWCImage, EWCImagecomponent, EWCColumnsplitter, EWCTreelist, EWCTreelistitem, EWCLoadmask, EWCMenubar, EWCMenucheckitem, EWCColormenu, EWCDatemenu, EWCMenuitem, EWCMenu, EWCMenuseparator, EWCHeader, EWCPanel, EWCTablepanel, EWCTitle, EWCTool, EWCColorpicker, EWCDatepicker, EWCMonthpicker, EWCTimepicker, EWCPivotd3container, EWCPivotheatmap, EWCPivottreemap, EWCPivotgrid, EWCMzpivotgrid, EWCPivotconfigfield, EWCPivotconfigcontainer, EWCPivotconfigpanel, EWCProgress, EWCProgressbarwidget, EWCProgressbar, EWCBordersplitter, EWCSplitter, EWCMultislider, EWCSlider, EWCSliderfield, EWCSlidertip, EWCSliderwidget, EWCSparklinebar, EWCSparkline, EWCSparklinebox, EWCSparklinebullet, EWCSparklinediscrete, EWCSparklineline, EWCSparklinepie, EWCSparklinetristate, EWCTabbar, EWCTabpanel, EWCTab, EWCQuicktip, EWCTip, EWCTooltip, EWCBreadcrumb, EWCTbfill, EWCTbitem, EWCPagingtoolbar, EWCTbseparator, EWCTbspacer, EWCTbtext, EWCToolbar, EWCTreecolumn, EWCTreepanel, EWCTreeview, EWCColorbutton, EWCColorpickercolormap, EWCColorpickercolorpreview, EWCColorfield, EWCColorselector, EWCColorpickerslider, EWCColorpickerslideralpha, EWCColorpickersliderhue, EWCColorpickerslidersaturation, EWCColorpickerslidervalue, EWCDesktop, EWCTaskbar, EWCTrayclock, EWCVideo, EWCWallpaper, EWCEventrecordermanager, EWCExplorer, EWCItemselectorfield, EWCItemselector, EWCMultiselectfield, EWCMultiselect, EWCSearchfield, EWCGauge, EWCGmappanel, EWCUxiframe, EWCRating, EWCStatusbar, EWCTreepicker, EWCBoundlist, EWCMultiselector, EWCMultiselector_search, EWCTableview, EWCGridview, EWCDataview, EWCWidget, EWCMessagebox, EWCToast, EWCWindow } from '@sencha/ext-web-components-classic';
 
 const Ext = window['Ext'];
 class EngBase {
@@ -262,7 +59,12 @@ class EngBase {
         this.eventnames.forEach(function (eventname) {
             me.node.newDiv.addEventListener(eventname, function (event) {
                 if (me[eventname] != false) {
-                    me[eventname].emit(event.detail);
+                    if (eventname != 'layout') {
+                        //console.log(eventname)
+                        //console.log(me[eventname])
+                        me[eventname].emit(event.detail);
+                    }
+                    //me[eventname].emit(event.detail);
                 }
             });
         });
@@ -11158,8 +10960,11 @@ ExtAngularClassicModule = __decorate([
         imports: [],
         declarations: [
             ExtButtonComponent,
+            ExtButtonComponent,
+            ExtCycleComponent,
             ExtCycleComponent,
             ExtSegmentedbuttonComponent,
+            ExtSplitbuttonComponent,
             ExtSplitbuttonComponent,
             ExtCalendar_eventComponent,
             ExtCalendar_form_addComponent,
@@ -11184,15 +10989,24 @@ ExtAngularClassicModule = __decorate([
             ExtAxis3dComponent,
             ExtCartesianComponent,
             ExtChartComponent,
+            ExtCartesianComponent,
+            ExtChartComponent,
             ExtInteractionComponent,
+            ExtLegendComponent,
             ExtLegendComponent,
             ExtChartnavigatorComponent,
             ExtPolarComponent,
             ExtSpacefillingComponent,
             ExtComponentComponent,
             ExtBoxComponent,
+            ExtComponentComponent,
+            ExtBoxComponent,
+            ExtButtongroupComponent,
             ExtButtongroupComponent,
             ExtContainerComponent,
+            ExtContainerComponent,
+            ExtContainerComponent,
+            ExtViewportComponent,
             ExtViewportComponent,
             ExtD3_canvasComponent,
             ExtD3_heatmapComponent,
@@ -11208,53 +11022,110 @@ ExtAngularClassicModule = __decorate([
             ExtDashboardComponent,
             ExtDashboard_panelComponent,
             ExtDrawComponent,
+            ExtDrawComponent,
             ExtSurfaceComponent,
             ExtEditorComponent,
             ExtFlashComponent,
+            ExtFlashComponent,
             ExtCheckboxgroupComponent,
             ExtFieldComponent,
+            ExtFieldComponent,
+            ExtFieldComponent,
+            ExtCheckboxfieldComponent,
+            ExtCheckboxComponent,
             ExtCheckboxfieldComponent,
             ExtCheckboxComponent,
             ExtComboboxComponent,
             ExtComboComponent,
+            ExtComboboxComponent,
+            ExtComboComponent,
+            ExtDatefieldComponent,
+            ExtDatefieldComponent,
             ExtDatefieldComponent,
             ExtDisplayfieldComponent,
+            ExtDisplayfieldComponent,
+            ExtDisplayfieldComponent,
+            ExtFilefieldComponent,
+            ExtFileuploadfieldComponent,
+            ExtFilefieldComponent,
+            ExtFileuploadfieldComponent,
+            ExtFilefieldComponent,
+            ExtFileuploadfieldComponent,
             ExtFilefieldComponent,
             ExtFileuploadfieldComponent,
             ExtFilebuttonComponent,
             ExtHiddenfieldComponent,
             ExtHiddenComponent,
+            ExtHiddenfieldComponent,
+            ExtHiddenComponent,
+            ExtHtmleditorComponent,
             ExtHtmleditorComponent,
             ExtNumberfieldComponent,
+            ExtNumberfieldComponent,
+            ExtNumberfieldComponent,
+            ExtPickerfieldComponent,
             ExtPickerfieldComponent,
             ExtRadiofieldComponent,
             ExtRadioComponent,
+            ExtRadiofieldComponent,
+            ExtRadioComponent,
+            ExtSpinnerfieldComponent,
             ExtSpinnerfieldComponent,
             ExtTagfieldComponent,
             ExtTextfieldComponent,
+            ExtTextfieldComponent,
+            ExtTextfieldComponent,
+            ExtTextareafieldComponent,
+            ExtTextareaComponent,
             ExtTextareafieldComponent,
             ExtTextareaComponent,
             ExtTimefieldComponent,
+            ExtTimefieldComponent,
+            ExtTimefieldComponent,
+            ExtTriggerfieldComponent,
+            ExtTriggerComponent,
+            ExtTriggerfieldComponent,
+            ExtTriggerComponent,
+            ExtTriggerfieldComponent,
+            ExtTriggerComponent,
             ExtTriggerfieldComponent,
             ExtTriggerComponent,
             ExtFieldcontainerComponent,
             ExtFieldsetComponent,
             ExtLabelComponent,
             ExtFormComponent,
+            ExtFormComponent,
+            ExtFormComponent,
             ExtRadiogroupComponent,
             ExtCelleditorComponent,
             ExtActioncolumnComponent,
+            ExtActioncolumnComponent,
+            ExtBooleancolumnComponent,
             ExtBooleancolumnComponent,
             ExtCheckcolumnComponent,
+            ExtCheckcolumnComponent,
+            ExtCheckcolumnComponent,
+            ExtGridcolumnComponent,
             ExtGridcolumnComponent,
             ExtDatecolumnComponent,
+            ExtDatecolumnComponent,
+            ExtNumbercolumnComponent,
             ExtNumbercolumnComponent,
             ExtRownumbererComponent,
+            ExtRownumbererComponent,
+            ExtTemplatecolumnComponent,
             ExtTemplatecolumnComponent,
             ExtWidgetcolumnComponent,
             ExtHeadercontainerComponent,
             ExtGridpanelComponent,
             ExtGridComponent,
+            ExtGridpanelComponent,
+            ExtGridComponent,
+            ExtGridpanelComponent,
+            ExtGridComponent,
+            ExtGridpanelComponent,
+            ExtGridComponent,
+            ExtPropertygridComponent,
             ExtPropertygridComponent,
             ExtRoweditorComponent,
             ExtRoweditorbuttonsComponent,
@@ -11269,15 +11140,20 @@ ExtAngularClassicModule = __decorate([
             ExtColormenuComponent,
             ExtDatemenuComponent,
             ExtMenuitemComponent,
+            ExtMenuitemComponent,
             ExtMenuComponent,
             ExtMenuseparatorComponent,
             ExtHeaderComponent,
+            ExtPanelComponent,
             ExtPanelComponent,
             ExtTablepanelComponent,
             ExtTitleComponent,
             ExtToolComponent,
             ExtColorpickerComponent,
+            ExtColorpickerComponent,
             ExtDatepickerComponent,
+            ExtDatepickerComponent,
+            ExtMonthpickerComponent,
             ExtMonthpickerComponent,
             ExtTimepickerComponent,
             ExtPivotd3containerComponent,
@@ -11285,15 +11161,30 @@ ExtAngularClassicModule = __decorate([
             ExtPivottreemapComponent,
             ExtPivotgridComponent,
             ExtMzpivotgridComponent,
+            ExtPivotgridComponent,
+            ExtMzpivotgridComponent,
+            ExtPivotgridComponent,
+            ExtMzpivotgridComponent,
             ExtPivotconfigfieldComponent,
             ExtPivotconfigcontainerComponent,
             ExtPivotconfigpanelComponent,
+            ExtProgressComponent,
+            ExtProgressbarwidgetComponent,
             ExtProgressComponent,
             ExtProgressbarwidgetComponent,
             ExtProgressbarComponent,
             ExtBordersplitterComponent,
             ExtSplitterComponent,
             ExtMultisliderComponent,
+            ExtMultisliderComponent,
+            ExtSliderComponent,
+            ExtSliderfieldComponent,
+            ExtSliderComponent,
+            ExtSliderfieldComponent,
+            ExtSliderComponent,
+            ExtSliderfieldComponent,
+            ExtSliderComponent,
+            ExtSliderfieldComponent,
             ExtSliderComponent,
             ExtSliderfieldComponent,
             ExtSlidertipComponent,
@@ -11308,19 +11199,27 @@ ExtAngularClassicModule = __decorate([
             ExtSparklinetristateComponent,
             ExtTabbarComponent,
             ExtTabpanelComponent,
+            ExtTabpanelComponent,
             ExtTabComponent,
             ExtQuicktipComponent,
+            ExtQuicktipComponent,
             ExtTipComponent,
+            ExtTipComponent,
+            ExtTooltipComponent,
             ExtTooltipComponent,
             ExtBreadcrumbComponent,
             ExtTbfillComponent,
             ExtTbitemComponent,
             ExtPagingtoolbarComponent,
+            ExtPagingtoolbarComponent,
             ExtTbseparatorComponent,
             ExtTbspacerComponent,
             ExtTbtextComponent,
             ExtToolbarComponent,
+            ExtToolbarComponent,
             ExtTreecolumnComponent,
+            ExtTreepanelComponent,
+            ExtTreepanelComponent,
             ExtTreepanelComponent,
             ExtTreeviewComponent,
             ExtColorbuttonComponent,
@@ -11342,24 +11241,36 @@ ExtAngularClassicModule = __decorate([
             ExtExplorerComponent,
             ExtItemselectorfieldComponent,
             ExtItemselectorComponent,
+            ExtItemselectorfieldComponent,
+            ExtItemselectorComponent,
+            ExtMultiselectfieldComponent,
+            ExtMultiselectComponent,
             ExtMultiselectfieldComponent,
             ExtMultiselectComponent,
             ExtSearchfieldComponent,
+            ExtGaugeComponent,
             ExtGaugeComponent,
             ExtGmappanelComponent,
             ExtUxiframeComponent,
             ExtRatingComponent,
             ExtStatusbarComponent,
+            ExtStatusbarComponent,
             ExtTreepickerComponent,
+            ExtBoundlistComponent,
             ExtBoundlistComponent,
             ExtMultiselectorComponent,
             ExtMultiselector_searchComponent,
             ExtTableviewComponent,
             ExtGridviewComponent,
+            ExtTableviewComponent,
+            ExtGridviewComponent,
             ExtDataviewComponent,
+            ExtDataviewComponent,
+            ExtWidgetComponent,
             ExtWidgetComponent,
             ExtMessageboxComponent,
             ExtToastComponent,
+            ExtWindowComponent,
             ExtWindowComponent,
         ],
         providers: [
@@ -11368,8 +11279,11 @@ ExtAngularClassicModule = __decorate([
         entryComponents: [],
         exports: [
             ExtButtonComponent,
+            ExtButtonComponent,
+            ExtCycleComponent,
             ExtCycleComponent,
             ExtSegmentedbuttonComponent,
+            ExtSplitbuttonComponent,
             ExtSplitbuttonComponent,
             ExtCalendar_eventComponent,
             ExtCalendar_form_addComponent,
@@ -11394,15 +11308,24 @@ ExtAngularClassicModule = __decorate([
             ExtAxis3dComponent,
             ExtCartesianComponent,
             ExtChartComponent,
+            ExtCartesianComponent,
+            ExtChartComponent,
             ExtInteractionComponent,
+            ExtLegendComponent,
             ExtLegendComponent,
             ExtChartnavigatorComponent,
             ExtPolarComponent,
             ExtSpacefillingComponent,
             ExtComponentComponent,
             ExtBoxComponent,
+            ExtComponentComponent,
+            ExtBoxComponent,
+            ExtButtongroupComponent,
             ExtButtongroupComponent,
             ExtContainerComponent,
+            ExtContainerComponent,
+            ExtContainerComponent,
+            ExtViewportComponent,
             ExtViewportComponent,
             ExtD3_canvasComponent,
             ExtD3_heatmapComponent,
@@ -11418,53 +11341,110 @@ ExtAngularClassicModule = __decorate([
             ExtDashboardComponent,
             ExtDashboard_panelComponent,
             ExtDrawComponent,
+            ExtDrawComponent,
             ExtSurfaceComponent,
             ExtEditorComponent,
             ExtFlashComponent,
+            ExtFlashComponent,
             ExtCheckboxgroupComponent,
             ExtFieldComponent,
+            ExtFieldComponent,
+            ExtFieldComponent,
+            ExtCheckboxfieldComponent,
+            ExtCheckboxComponent,
             ExtCheckboxfieldComponent,
             ExtCheckboxComponent,
             ExtComboboxComponent,
             ExtComboComponent,
+            ExtComboboxComponent,
+            ExtComboComponent,
+            ExtDatefieldComponent,
+            ExtDatefieldComponent,
             ExtDatefieldComponent,
             ExtDisplayfieldComponent,
+            ExtDisplayfieldComponent,
+            ExtDisplayfieldComponent,
+            ExtFilefieldComponent,
+            ExtFileuploadfieldComponent,
+            ExtFilefieldComponent,
+            ExtFileuploadfieldComponent,
+            ExtFilefieldComponent,
+            ExtFileuploadfieldComponent,
             ExtFilefieldComponent,
             ExtFileuploadfieldComponent,
             ExtFilebuttonComponent,
             ExtHiddenfieldComponent,
             ExtHiddenComponent,
+            ExtHiddenfieldComponent,
+            ExtHiddenComponent,
+            ExtHtmleditorComponent,
             ExtHtmleditorComponent,
             ExtNumberfieldComponent,
+            ExtNumberfieldComponent,
+            ExtNumberfieldComponent,
+            ExtPickerfieldComponent,
             ExtPickerfieldComponent,
             ExtRadiofieldComponent,
             ExtRadioComponent,
+            ExtRadiofieldComponent,
+            ExtRadioComponent,
+            ExtSpinnerfieldComponent,
             ExtSpinnerfieldComponent,
             ExtTagfieldComponent,
             ExtTextfieldComponent,
+            ExtTextfieldComponent,
+            ExtTextfieldComponent,
+            ExtTextareafieldComponent,
+            ExtTextareaComponent,
             ExtTextareafieldComponent,
             ExtTextareaComponent,
             ExtTimefieldComponent,
+            ExtTimefieldComponent,
+            ExtTimefieldComponent,
+            ExtTriggerfieldComponent,
+            ExtTriggerComponent,
+            ExtTriggerfieldComponent,
+            ExtTriggerComponent,
+            ExtTriggerfieldComponent,
+            ExtTriggerComponent,
             ExtTriggerfieldComponent,
             ExtTriggerComponent,
             ExtFieldcontainerComponent,
             ExtFieldsetComponent,
             ExtLabelComponent,
             ExtFormComponent,
+            ExtFormComponent,
+            ExtFormComponent,
             ExtRadiogroupComponent,
             ExtCelleditorComponent,
             ExtActioncolumnComponent,
+            ExtActioncolumnComponent,
+            ExtBooleancolumnComponent,
             ExtBooleancolumnComponent,
             ExtCheckcolumnComponent,
+            ExtCheckcolumnComponent,
+            ExtCheckcolumnComponent,
+            ExtGridcolumnComponent,
             ExtGridcolumnComponent,
             ExtDatecolumnComponent,
+            ExtDatecolumnComponent,
+            ExtNumbercolumnComponent,
             ExtNumbercolumnComponent,
             ExtRownumbererComponent,
+            ExtRownumbererComponent,
+            ExtTemplatecolumnComponent,
             ExtTemplatecolumnComponent,
             ExtWidgetcolumnComponent,
             ExtHeadercontainerComponent,
             ExtGridpanelComponent,
             ExtGridComponent,
+            ExtGridpanelComponent,
+            ExtGridComponent,
+            ExtGridpanelComponent,
+            ExtGridComponent,
+            ExtGridpanelComponent,
+            ExtGridComponent,
+            ExtPropertygridComponent,
             ExtPropertygridComponent,
             ExtRoweditorComponent,
             ExtRoweditorbuttonsComponent,
@@ -11479,15 +11459,20 @@ ExtAngularClassicModule = __decorate([
             ExtColormenuComponent,
             ExtDatemenuComponent,
             ExtMenuitemComponent,
+            ExtMenuitemComponent,
             ExtMenuComponent,
             ExtMenuseparatorComponent,
             ExtHeaderComponent,
+            ExtPanelComponent,
             ExtPanelComponent,
             ExtTablepanelComponent,
             ExtTitleComponent,
             ExtToolComponent,
             ExtColorpickerComponent,
+            ExtColorpickerComponent,
             ExtDatepickerComponent,
+            ExtDatepickerComponent,
+            ExtMonthpickerComponent,
             ExtMonthpickerComponent,
             ExtTimepickerComponent,
             ExtPivotd3containerComponent,
@@ -11495,15 +11480,30 @@ ExtAngularClassicModule = __decorate([
             ExtPivottreemapComponent,
             ExtPivotgridComponent,
             ExtMzpivotgridComponent,
+            ExtPivotgridComponent,
+            ExtMzpivotgridComponent,
+            ExtPivotgridComponent,
+            ExtMzpivotgridComponent,
             ExtPivotconfigfieldComponent,
             ExtPivotconfigcontainerComponent,
             ExtPivotconfigpanelComponent,
+            ExtProgressComponent,
+            ExtProgressbarwidgetComponent,
             ExtProgressComponent,
             ExtProgressbarwidgetComponent,
             ExtProgressbarComponent,
             ExtBordersplitterComponent,
             ExtSplitterComponent,
             ExtMultisliderComponent,
+            ExtMultisliderComponent,
+            ExtSliderComponent,
+            ExtSliderfieldComponent,
+            ExtSliderComponent,
+            ExtSliderfieldComponent,
+            ExtSliderComponent,
+            ExtSliderfieldComponent,
+            ExtSliderComponent,
+            ExtSliderfieldComponent,
             ExtSliderComponent,
             ExtSliderfieldComponent,
             ExtSlidertipComponent,
@@ -11518,19 +11518,27 @@ ExtAngularClassicModule = __decorate([
             ExtSparklinetristateComponent,
             ExtTabbarComponent,
             ExtTabpanelComponent,
+            ExtTabpanelComponent,
             ExtTabComponent,
             ExtQuicktipComponent,
+            ExtQuicktipComponent,
             ExtTipComponent,
+            ExtTipComponent,
+            ExtTooltipComponent,
             ExtTooltipComponent,
             ExtBreadcrumbComponent,
             ExtTbfillComponent,
             ExtTbitemComponent,
             ExtPagingtoolbarComponent,
+            ExtPagingtoolbarComponent,
             ExtTbseparatorComponent,
             ExtTbspacerComponent,
             ExtTbtextComponent,
             ExtToolbarComponent,
+            ExtToolbarComponent,
             ExtTreecolumnComponent,
+            ExtTreepanelComponent,
+            ExtTreepanelComponent,
             ExtTreepanelComponent,
             ExtTreeviewComponent,
             ExtColorbuttonComponent,
@@ -11552,24 +11560,36 @@ ExtAngularClassicModule = __decorate([
             ExtExplorerComponent,
             ExtItemselectorfieldComponent,
             ExtItemselectorComponent,
+            ExtItemselectorfieldComponent,
+            ExtItemselectorComponent,
+            ExtMultiselectfieldComponent,
+            ExtMultiselectComponent,
             ExtMultiselectfieldComponent,
             ExtMultiselectComponent,
             ExtSearchfieldComponent,
+            ExtGaugeComponent,
             ExtGaugeComponent,
             ExtGmappanelComponent,
             ExtUxiframeComponent,
             ExtRatingComponent,
             ExtStatusbarComponent,
+            ExtStatusbarComponent,
             ExtTreepickerComponent,
+            ExtBoundlistComponent,
             ExtBoundlistComponent,
             ExtMultiselectorComponent,
             ExtMultiselector_searchComponent,
             ExtTableviewComponent,
             ExtGridviewComponent,
+            ExtTableviewComponent,
+            ExtGridviewComponent,
             ExtDataviewComponent,
+            ExtDataviewComponent,
+            ExtWidgetComponent,
             ExtWidgetComponent,
             ExtMessageboxComponent,
             ExtToastComponent,
+            ExtWindowComponent,
             ExtWindowComponent,
         ]
     })

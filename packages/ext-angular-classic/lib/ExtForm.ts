@@ -1,6 +1,7 @@
 //import EWCForm from '../dist/ext-form.component.js';
 //inputs: (new EWCForm()).properties,
-import EWCForm from '@sencha/ext-web-components-classic/dist/ext-form.component.js';
+//import EWCForm from '@sencha/ext-web-components-classic/dist/ext-form.component.js';
+import { EWCForm } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

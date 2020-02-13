@@ -1,6 +1,7 @@
 //import EWCRadiofield from '../dist/ext-radiofield.component.js';
 //inputs: (new EWCRadiofield()).properties,
-import EWCRadiofield from '@sencha/ext-web-components-classic/dist/ext-radiofield.component.js';
+//import EWCRadiofield from '@sencha/ext-web-components-classic/dist/ext-radiofield.component.js';
+import { EWCRadiofield } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

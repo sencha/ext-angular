@@ -1,6 +1,7 @@
 //import EWCPickerfield from '../dist/ext-pickerfield.component.js';
 //inputs: (new EWCPickerfield()).properties,
-import EWCPickerfield from '@sencha/ext-web-components-classic/dist/ext-pickerfield.component.js';
+//import EWCPickerfield from '@sencha/ext-web-components-classic/dist/ext-pickerfield.component.js';
+import { EWCPickerfield } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

@@ -1,6 +1,7 @@
 //import EWCPolar from '../dist/ext-polar.component.js';
 //inputs: (new EWCPolar()).properties,
-import EWCPolar from '@sencha/ext-web-components-classic/dist/ext-polar.component.js';
+//import EWCPolar from '@sencha/ext-web-components-classic/dist/ext-polar.component.js';
+import { EWCPolar } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

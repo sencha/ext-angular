@@ -1,6 +1,7 @@
 //import EWCGridcolumn from '../dist/ext-gridcolumn.component.js';
 //inputs: (new EWCGridcolumn()).properties,
-import EWCGridcolumn from '@sencha/ext-web-components-classic/dist/ext-gridcolumn.component.js';
+//import EWCGridcolumn from '@sencha/ext-web-components-classic/dist/ext-gridcolumn.component.js';
+import { EWCGridcolumn } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

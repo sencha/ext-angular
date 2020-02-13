@@ -1,6 +1,7 @@
 //import EWCTabpanel from '../dist/ext-tabpanel.component.js';
 //inputs: (new EWCTabpanel()).properties,
-import EWCTabpanel from '@sencha/ext-web-components-classic/dist/ext-tabpanel.component.js';
+//import EWCTabpanel from '@sencha/ext-web-components-classic/dist/ext-tabpanel.component.js';
+import { EWCTabpanel } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

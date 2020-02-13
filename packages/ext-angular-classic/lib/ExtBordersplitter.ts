@@ -1,6 +1,7 @@
 //import EWCBordersplitter from '../dist/ext-bordersplitter.component.js';
 //inputs: (new EWCBordersplitter()).properties,
-import EWCBordersplitter from '@sencha/ext-web-components-classic/dist/ext-bordersplitter.component.js';
+//import EWCBordersplitter from '@sencha/ext-web-components-classic/dist/ext-bordersplitter.component.js';
+import { EWCBordersplitter } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

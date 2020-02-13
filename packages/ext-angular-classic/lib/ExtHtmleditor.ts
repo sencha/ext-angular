@@ -1,6 +1,7 @@
 //import EWCHtmleditor from '../dist/ext-htmleditor.component.js';
 //inputs: (new EWCHtmleditor()).properties,
-import EWCHtmleditor from '@sencha/ext-web-components-classic/dist/ext-htmleditor.component.js';
+//import EWCHtmleditor from '@sencha/ext-web-components-classic/dist/ext-htmleditor.component.js';
+import { EWCHtmleditor } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

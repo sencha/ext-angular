@@ -1,6 +1,7 @@
 //import EWCTablepanel from '../dist/ext-tablepanel.component.js';
 //inputs: (new EWCTablepanel()).properties,
-import EWCTablepanel from '@sencha/ext-web-components-classic/dist/ext-tablepanel.component.js';
+//import EWCTablepanel from '@sencha/ext-web-components-classic/dist/ext-tablepanel.component.js';
+import { EWCTablepanel } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

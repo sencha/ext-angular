@@ -1,6 +1,7 @@
 //import EWCPivotconfigpanel from '../dist/ext-pivotconfigpanel.component.js';
 //inputs: (new EWCPivotconfigpanel()).properties,
-import EWCPivotconfigpanel from '@sencha/ext-web-components-classic/dist/ext-pivotconfigpanel.component.js';
+//import EWCPivotconfigpanel from '@sencha/ext-web-components-classic/dist/ext-pivotconfigpanel.component.js';
+import { EWCPivotconfigpanel } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

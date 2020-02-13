@@ -1,6 +1,7 @@
 //import EWCCelleditor from '../dist/ext-celleditor.component.js';
 //inputs: (new EWCCelleditor()).properties,
-import EWCCelleditor from '@sencha/ext-web-components-classic/dist/ext-celleditor.component.js';
+//import EWCCelleditor from '@sencha/ext-web-components-classic/dist/ext-celleditor.component.js';
+import { EWCCelleditor } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

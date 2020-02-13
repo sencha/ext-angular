@@ -1,6 +1,7 @@
 //import EWCTip from '../dist/ext-tip.component.js';
 //inputs: (new EWCTip()).properties,
-import EWCTip from '@sencha/ext-web-components-classic/dist/ext-tip.component.js';
+//import EWCTip from '@sencha/ext-web-components-classic/dist/ext-tip.component.js';
+import { EWCTip } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

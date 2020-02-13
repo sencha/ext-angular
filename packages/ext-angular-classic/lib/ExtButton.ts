@@ -1,6 +1,7 @@
 //import EWCButton from '../dist/ext-button.component.js';
 //inputs: (new EWCButton()).properties,
-import EWCButton from '@sencha/ext-web-components-classic/dist/ext-button.component.js';
+//import EWCButton from '@sencha/ext-web-components-classic/dist/ext-button.component.js';
+import { EWCButton } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

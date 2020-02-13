@@ -1,6 +1,7 @@
 //import EWCSpacefilling from '../dist/ext-spacefilling.component.js';
 //inputs: (new EWCSpacefilling()).properties,
-import EWCSpacefilling from '@sencha/ext-web-components-classic/dist/ext-spacefilling.component.js';
+//import EWCSpacefilling from '@sencha/ext-web-components-classic/dist/ext-spacefilling.component.js';
+import { EWCSpacefilling } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

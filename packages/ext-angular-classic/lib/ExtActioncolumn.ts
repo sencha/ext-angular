@@ -1,6 +1,7 @@
 //import EWCActioncolumn from '../dist/ext-actioncolumn.component.js';
 //inputs: (new EWCActioncolumn()).properties,
-import EWCActioncolumn from '@sencha/ext-web-components-classic/dist/ext-actioncolumn.component.js';
+//import EWCActioncolumn from '@sencha/ext-web-components-classic/dist/ext-actioncolumn.component.js';
+import { EWCActioncolumn } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

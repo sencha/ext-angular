@@ -1,6 +1,7 @@
 //import EWCSplitbutton from '../dist/ext-splitbutton.component.js';
 //inputs: (new EWCSplitbutton()).properties,
-import EWCSplitbutton from '@sencha/ext-web-components-classic/dist/ext-splitbutton.component.js';
+//import EWCSplitbutton from '@sencha/ext-web-components-classic/dist/ext-splitbutton.component.js';
+import { EWCSplitbutton } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

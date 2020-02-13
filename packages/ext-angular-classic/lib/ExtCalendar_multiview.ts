@@ -1,6 +1,7 @@
 //import EWCCalendar_multiview from '../dist/ext-calendar-multiview.component.js';
 //inputs: (new EWCCalendar_multiview()).properties,
-import EWCCalendar_multiview from '@sencha/ext-web-components-classic/dist/ext-calendar-multiview.component.js';
+//import EWCCalendar_multiview from '@sencha/ext-web-components-classic/dist/ext-calendar-multiview.component.js';
+import { EWCCalendar_multiview } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

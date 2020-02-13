@@ -1,6 +1,7 @@
 //import EWCTitle from '../dist/ext-title.component.js';
 //inputs: (new EWCTitle()).properties,
-import EWCTitle from '@sencha/ext-web-components-classic/dist/ext-title.component.js';
+//import EWCTitle from '@sencha/ext-web-components-classic/dist/ext-title.component.js';
+import { EWCTitle } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

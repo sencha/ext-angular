@@ -1,6 +1,7 @@
 //import EWCChartnavigator from '../dist/ext-chartnavigator.component.js';
 //inputs: (new EWCChartnavigator()).properties,
-import EWCChartnavigator from '@sencha/ext-web-components-classic/dist/ext-chartnavigator.component.js';
+//import EWCChartnavigator from '@sencha/ext-web-components-classic/dist/ext-chartnavigator.component.js';
+import { EWCChartnavigator } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

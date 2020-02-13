@@ -1,6 +1,7 @@
 //import EWCPivottreemap from '../dist/ext-pivottreemap.component.js';
 //inputs: (new EWCPivottreemap()).properties,
-import EWCPivottreemap from '@sencha/ext-web-components-classic/dist/ext-pivottreemap.component.js';
+//import EWCPivottreemap from '@sencha/ext-web-components-classic/dist/ext-pivottreemap.component.js';
+import { EWCPivottreemap } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

@@ -1,6 +1,7 @@
 //import EWCD3_sunburst from '../dist/ext-d3-sunburst.component.js';
 //inputs: (new EWCD3_sunburst()).properties,
-import EWCD3_sunburst from '@sencha/ext-web-components-classic/dist/ext-d3-sunburst.component.js';
+//import EWCD3_sunburst from '@sencha/ext-web-components-classic/dist/ext-d3-sunburst.component.js';
+import { EWCD3_sunburst } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

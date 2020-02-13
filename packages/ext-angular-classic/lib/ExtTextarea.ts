@@ -1,6 +1,7 @@
 //import EWCTextarea from '../dist/ext-textarea.component.js';
 //inputs: (new EWCTextarea()).properties,
-import EWCTextarea from '@sencha/ext-web-components-classic/dist/ext-textarea.component.js';
+//import EWCTextarea from '@sencha/ext-web-components-classic/dist/ext-textarea.component.js';
+import { EWCTextarea } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

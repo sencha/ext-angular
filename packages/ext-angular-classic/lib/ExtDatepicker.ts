@@ -1,6 +1,7 @@
 //import EWCDatepicker from '../dist/ext-datepicker.component.js';
 //inputs: (new EWCDatepicker()).properties,
-import EWCDatepicker from '@sencha/ext-web-components-classic/dist/ext-datepicker.component.js';
+//import EWCDatepicker from '@sencha/ext-web-components-classic/dist/ext-datepicker.component.js';
+import { EWCDatepicker } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

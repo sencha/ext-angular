@@ -1,6 +1,7 @@
 //import EWCGridview from '../dist/ext-gridview.component.js';
 //inputs: (new EWCGridview()).properties,
-import EWCGridview from '@sencha/ext-web-components-classic/dist/ext-gridview.component.js';
+//import EWCGridview from '@sencha/ext-web-components-classic/dist/ext-gridview.component.js';
+import { EWCGridview } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

@@ -1,6 +1,7 @@
 //import EWCBox from '../dist/ext-box.component.js';
 //inputs: (new EWCBox()).properties,
-import EWCBox from '@sencha/ext-web-components-classic/dist/ext-box.component.js';
+//import EWCBox from '@sencha/ext-web-components-classic/dist/ext-box.component.js';
+import { EWCBox } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

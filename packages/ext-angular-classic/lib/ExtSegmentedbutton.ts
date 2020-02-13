@@ -1,6 +1,7 @@
 //import EWCSegmentedbutton from '../dist/ext-segmentedbutton.component.js';
 //inputs: (new EWCSegmentedbutton()).properties,
-import EWCSegmentedbutton from '@sencha/ext-web-components-classic/dist/ext-segmentedbutton.component.js';
+//import EWCSegmentedbutton from '@sencha/ext-web-components-classic/dist/ext-segmentedbutton.component.js';
+import { EWCSegmentedbutton } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

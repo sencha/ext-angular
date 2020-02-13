@@ -1,6 +1,7 @@
 //import EWCRoweditorbuttons from '../dist/ext-roweditorbuttons.component.js';
 //inputs: (new EWCRoweditorbuttons()).properties,
-import EWCRoweditorbuttons from '@sencha/ext-web-components-classic/dist/ext-roweditorbuttons.component.js';
+//import EWCRoweditorbuttons from '@sencha/ext-web-components-classic/dist/ext-roweditorbuttons.component.js';
+import { EWCRoweditorbuttons } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

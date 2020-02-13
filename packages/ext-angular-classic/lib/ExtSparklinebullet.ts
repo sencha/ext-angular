@@ -1,6 +1,7 @@
 //import EWCSparklinebullet from '../dist/ext-sparklinebullet.component.js';
 //inputs: (new EWCSparklinebullet()).properties,
-import EWCSparklinebullet from '@sencha/ext-web-components-classic/dist/ext-sparklinebullet.component.js';
+//import EWCSparklinebullet from '@sencha/ext-web-components-classic/dist/ext-sparklinebullet.component.js';
+import { EWCSparklinebullet } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

@@ -1,6 +1,7 @@
 //import EWCD3_partition from '../dist/ext-d3-partition.component.js';
 //inputs: (new EWCD3_partition()).properties,
-import EWCD3_partition from '@sencha/ext-web-components-classic/dist/ext-d3-partition.component.js';
+//import EWCD3_partition from '@sencha/ext-web-components-classic/dist/ext-d3-partition.component.js';
+import { EWCD3_partition } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

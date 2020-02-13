@@ -1,6 +1,7 @@
 //import EWCSurface from '../dist/ext-surface.component.js';
 //inputs: (new EWCSurface()).properties,
-import EWCSurface from '@sencha/ext-web-components-classic/dist/ext-surface.component.js';
+//import EWCSurface from '@sencha/ext-web-components-classic/dist/ext-surface.component.js';
+import { EWCSurface } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

@@ -1,6 +1,7 @@
 //import EWCTextfield from '../dist/ext-textfield.component.js';
 //inputs: (new EWCTextfield()).properties,
-import EWCTextfield from '@sencha/ext-web-components-classic/dist/ext-textfield.component.js';
+//import EWCTextfield from '@sencha/ext-web-components-classic/dist/ext-textfield.component.js';
+import { EWCTextfield } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

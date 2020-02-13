@@ -1,6 +1,7 @@
 //import EWCSparklinepie from '../dist/ext-sparklinepie.component.js';
 //inputs: (new EWCSparklinepie()).properties,
-import EWCSparklinepie from '@sencha/ext-web-components-classic/dist/ext-sparklinepie.component.js';
+//import EWCSparklinepie from '@sencha/ext-web-components-classic/dist/ext-sparklinepie.component.js';
+import { EWCSparklinepie } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

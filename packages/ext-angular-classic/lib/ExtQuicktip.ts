@@ -1,6 +1,7 @@
 //import EWCQuicktip from '../dist/ext-quicktip.component.js';
 //inputs: (new EWCQuicktip()).properties,
-import EWCQuicktip from '@sencha/ext-web-components-classic/dist/ext-quicktip.component.js';
+//import EWCQuicktip from '@sencha/ext-web-components-classic/dist/ext-quicktip.component.js';
+import { EWCQuicktip } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

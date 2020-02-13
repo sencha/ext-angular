@@ -1,6 +1,7 @@
 //import EWCTimefield from '../dist/ext-timefield.component.js';
 //inputs: (new EWCTimefield()).properties,
-import EWCTimefield from '@sencha/ext-web-components-classic/dist/ext-timefield.component.js';
+//import EWCTimefield from '@sencha/ext-web-components-classic/dist/ext-timefield.component.js';
+import { EWCTimefield } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

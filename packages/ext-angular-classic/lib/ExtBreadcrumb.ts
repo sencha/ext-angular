@@ -1,6 +1,7 @@
 //import EWCBreadcrumb from '../dist/ext-breadcrumb.component.js';
 //inputs: (new EWCBreadcrumb()).properties,
-import EWCBreadcrumb from '@sencha/ext-web-components-classic/dist/ext-breadcrumb.component.js';
+//import EWCBreadcrumb from '@sencha/ext-web-components-classic/dist/ext-breadcrumb.component.js';
+import { EWCBreadcrumb } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

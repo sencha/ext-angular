@@ -1,6 +1,7 @@
 //import EWCLoadmask from '../dist/ext-loadmask.component.js';
 //inputs: (new EWCLoadmask()).properties,
-import EWCLoadmask from '@sencha/ext-web-components-classic/dist/ext-loadmask.component.js';
+//import EWCLoadmask from '@sencha/ext-web-components-classic/dist/ext-loadmask.component.js';
+import { EWCLoadmask } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

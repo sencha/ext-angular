@@ -1,6 +1,7 @@
 //import EWCTreelist from '../dist/ext-treelist.component.js';
 //inputs: (new EWCTreelist()).properties,
-import EWCTreelist from '@sencha/ext-web-components-classic/dist/ext-treelist.component.js';
+//import EWCTreelist from '@sencha/ext-web-components-classic/dist/ext-treelist.component.js';
+import { EWCTreelist } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

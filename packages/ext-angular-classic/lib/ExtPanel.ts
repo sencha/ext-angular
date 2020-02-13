@@ -1,6 +1,7 @@
 //import EWCPanel from '../dist/ext-panel.component.js';
 //inputs: (new EWCPanel()).properties,
-import EWCPanel from '@sencha/ext-web-components-classic/dist/ext-panel.component.js';
+//import EWCPanel from '@sencha/ext-web-components-classic/dist/ext-panel.component.js';
+import { EWCPanel } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

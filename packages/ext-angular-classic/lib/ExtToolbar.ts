@@ -1,6 +1,7 @@
 //import EWCToolbar from '../dist/ext-toolbar.component.js';
 //inputs: (new EWCToolbar()).properties,
-import EWCToolbar from '@sencha/ext-web-components-classic/dist/ext-toolbar.component.js';
+//import EWCToolbar from '@sencha/ext-web-components-classic/dist/ext-toolbar.component.js';
+import { EWCToolbar } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

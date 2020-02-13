@@ -1,6 +1,7 @@
 //import EWCEditor from '../dist/ext-editor.component.js';
 //inputs: (new EWCEditor()).properties,
-import EWCEditor from '@sencha/ext-web-components-classic/dist/ext-editor.component.js';
+//import EWCEditor from '@sencha/ext-web-components-classic/dist/ext-editor.component.js';
+import { EWCEditor } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

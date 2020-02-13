@@ -1,6 +1,7 @@
 //import EWCTreeview from '../dist/ext-treeview.component.js';
 //inputs: (new EWCTreeview()).properties,
-import EWCTreeview from '@sencha/ext-web-components-classic/dist/ext-treeview.component.js';
+//import EWCTreeview from '@sencha/ext-web-components-classic/dist/ext-treeview.component.js';
+import { EWCTreeview } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

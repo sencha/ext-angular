@@ -1,6 +1,7 @@
 //import EWCFilefield from '../dist/ext-filefield.component.js';
 //inputs: (new EWCFilefield()).properties,
-import EWCFilefield from '@sencha/ext-web-components-classic/dist/ext-filefield.component.js';
+//import EWCFilefield from '@sencha/ext-web-components-classic/dist/ext-filefield.component.js';
+import { EWCFilefield } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

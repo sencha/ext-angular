@@ -1,6 +1,7 @@
 //import EWCHeadercontainer from '../dist/ext-headercontainer.component.js';
 //inputs: (new EWCHeadercontainer()).properties,
-import EWCHeadercontainer from '@sencha/ext-web-components-classic/dist/ext-headercontainer.component.js';
+//import EWCHeadercontainer from '@sencha/ext-web-components-classic/dist/ext-headercontainer.component.js';
+import { EWCHeadercontainer } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

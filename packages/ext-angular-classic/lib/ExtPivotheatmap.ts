@@ -1,6 +1,7 @@
 //import EWCPivotheatmap from '../dist/ext-pivotheatmap.component.js';
 //inputs: (new EWCPivotheatmap()).properties,
-import EWCPivotheatmap from '@sencha/ext-web-components-classic/dist/ext-pivotheatmap.component.js';
+//import EWCPivotheatmap from '@sencha/ext-web-components-classic/dist/ext-pivotheatmap.component.js';
+import { EWCPivotheatmap } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

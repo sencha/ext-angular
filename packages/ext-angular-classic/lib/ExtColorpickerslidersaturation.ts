@@ -1,6 +1,7 @@
 //import EWCColorpickerslidersaturation from '../dist/ext-colorpickerslidersaturation.component.js';
 //inputs: (new EWCColorpickerslidersaturation()).properties,
-import EWCColorpickerslidersaturation from '@sencha/ext-web-components-classic/dist/ext-colorpickerslidersaturation.component.js';
+//import EWCColorpickerslidersaturation from '@sencha/ext-web-components-classic/dist/ext-colorpickerslidersaturation.component.js';
+import { EWCColorpickerslidersaturation } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

@@ -1,6 +1,7 @@
 //import EWCViewport from '../dist/ext-viewport.component.js';
 //inputs: (new EWCViewport()).properties,
-import EWCViewport from '@sencha/ext-web-components-classic/dist/ext-viewport.component.js';
+//import EWCViewport from '@sencha/ext-web-components-classic/dist/ext-viewport.component.js';
+import { EWCViewport } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

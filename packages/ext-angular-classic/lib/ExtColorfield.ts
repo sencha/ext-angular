@@ -1,6 +1,7 @@
 //import EWCColorfield from '../dist/ext-colorfield.component.js';
 //inputs: (new EWCColorfield()).properties,
-import EWCColorfield from '@sencha/ext-web-components-classic/dist/ext-colorfield.component.js';
+//import EWCColorfield from '@sencha/ext-web-components-classic/dist/ext-colorfield.component.js';
+import { EWCColorfield } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

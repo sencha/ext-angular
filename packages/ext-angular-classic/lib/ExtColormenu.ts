@@ -1,6 +1,7 @@
 //import EWCColormenu from '../dist/ext-colormenu.component.js';
 //inputs: (new EWCColormenu()).properties,
-import EWCColormenu from '@sencha/ext-web-components-classic/dist/ext-colormenu.component.js';
+//import EWCColormenu from '@sencha/ext-web-components-classic/dist/ext-colormenu.component.js';
+import { EWCColormenu } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

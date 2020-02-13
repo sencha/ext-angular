@@ -1,6 +1,6 @@
 {
   "name": "@sencha/ext-angular-boilerplate",
-  "version": "7.1.0",
+  "version": "7.2.0",
   "description": "ext-angular-boilerplate",
   "scripts": {
     "start": "npm run dev",

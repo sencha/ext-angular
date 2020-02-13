@@ -1,6 +1,7 @@
 //import EWCDesktop from '../dist/ext-desktop.component.js';
 //inputs: (new EWCDesktop()).properties,
-import EWCDesktop from '@sencha/ext-web-components-classic/dist/ext-desktop.component.js';
+//import EWCDesktop from '@sencha/ext-web-components-classic/dist/ext-desktop.component.js';
+import { EWCDesktop } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

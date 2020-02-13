@@ -95,7 +95,12 @@ export class EngBase {
       this.eventnames.forEach(function (eventname) {
           me.node.newDiv.addEventListener(eventname, function (event) {
               if (me[eventname] != false) {
+                if (eventname != 'layout') {
+                  //console.log(eventname)
+                  //console.log(me[eventname])
                   me[eventname].emit(event.detail);
+                }
+                //me[eventname].emit(event.detail);
               }
           });
       });

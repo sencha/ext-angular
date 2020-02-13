@@ -1,6 +1,7 @@
 //import EWCRadiogroup from '../dist/ext-radiogroup.component.js';
 //inputs: (new EWCRadiogroup()).properties,
-import EWCRadiogroup from '@sencha/ext-web-components-classic/dist/ext-radiogroup.component.js';
+//import EWCRadiogroup from '@sencha/ext-web-components-classic/dist/ext-radiogroup.component.js';
+import { EWCRadiogroup } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

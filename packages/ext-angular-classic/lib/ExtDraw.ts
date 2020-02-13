@@ -1,6 +1,7 @@
 //import EWCDraw from '../dist/ext-draw.component.js';
 //inputs: (new EWCDraw()).properties,
-import EWCDraw from '@sencha/ext-web-components-classic/dist/ext-draw.component.js';
+//import EWCDraw from '@sencha/ext-web-components-classic/dist/ext-draw.component.js';
+import { EWCDraw } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

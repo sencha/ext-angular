@@ -1,6 +1,7 @@
 //import EWCCycle from '../dist/ext-cycle.component.js';
 //inputs: (new EWCCycle()).properties,
-import EWCCycle from '@sencha/ext-web-components-classic/dist/ext-cycle.component.js';
+//import EWCCycle from '@sencha/ext-web-components-classic/dist/ext-cycle.component.js';
+import { EWCCycle } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

@@ -1,6 +1,7 @@
 //import EWCSparklinetristate from '../dist/ext-sparklinetristate.component.js';
 //inputs: (new EWCSparklinetristate()).properties,
-import EWCSparklinetristate from '@sencha/ext-web-components-classic/dist/ext-sparklinetristate.component.js';
+//import EWCSparklinetristate from '@sencha/ext-web-components-classic/dist/ext-sparklinetristate.component.js';
+import { EWCSparklinetristate } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

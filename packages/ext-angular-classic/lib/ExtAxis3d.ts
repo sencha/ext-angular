@@ -1,6 +1,7 @@
 //import EWCAxis3d from '../dist/ext-axis3d.component.js';
 //inputs: (new EWCAxis3d()).properties,
-import EWCAxis3d from '@sencha/ext-web-components-classic/dist/ext-axis3d.component.js';
+//import EWCAxis3d from '@sencha/ext-web-components-classic/dist/ext-axis3d.component.js';
+import { EWCAxis3d } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

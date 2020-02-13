@@ -1,6 +1,7 @@
 //import EWCCheckcolumn from '../dist/ext-checkcolumn.component.js';
 //inputs: (new EWCCheckcolumn()).properties,
-import EWCCheckcolumn from '@sencha/ext-web-components-classic/dist/ext-checkcolumn.component.js';
+//import EWCCheckcolumn from '@sencha/ext-web-components-classic/dist/ext-checkcolumn.component.js';
+import { EWCCheckcolumn } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

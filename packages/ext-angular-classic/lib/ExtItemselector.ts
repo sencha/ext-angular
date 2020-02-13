@@ -1,6 +1,7 @@
 //import EWCItemselector from '../dist/ext-itemselector.component.js';
 //inputs: (new EWCItemselector()).properties,
-import EWCItemselector from '@sencha/ext-web-components-classic/dist/ext-itemselector.component.js';
+//import EWCItemselector from '@sencha/ext-web-components-classic/dist/ext-itemselector.component.js';
+import { EWCItemselector } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

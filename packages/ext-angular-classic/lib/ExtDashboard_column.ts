@@ -1,6 +1,7 @@
 //import EWCDashboard_column from '../dist/ext-dashboard-column.component.js';
 //inputs: (new EWCDashboard_column()).properties,
-import EWCDashboard_column from '@sencha/ext-web-components-classic/dist/ext-dashboard-column.component.js';
+//import EWCDashboard_column from '@sencha/ext-web-components-classic/dist/ext-dashboard-column.component.js';
+import { EWCDashboard_column } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,

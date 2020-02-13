@@ -1,6 +1,7 @@
 //import EWCMzpivotgrid from '../dist/ext-mzpivotgrid.component.js';
 //inputs: (new EWCMzpivotgrid()).properties,
-import EWCMzpivotgrid from '@sencha/ext-web-components-classic/dist/ext-mzpivotgrid.component.js';
+//import EWCMzpivotgrid from '@sencha/ext-web-components-classic/dist/ext-mzpivotgrid.component.js';
+import { EWCMzpivotgrid } from '@sencha/ext-web-components-classic';
 import {
     Host,
     Optional,
