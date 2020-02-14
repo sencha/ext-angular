@@ -1,9 +1,8 @@
 <ExtPanel
-  (ready)="readyViewport($event)"
   [viewport]="true"
+  (ready)="readyViewport($event)"
   layout="fit"
   [bodyStyle]="bodyStyle"
-  [fullscreen]="true"
   [weighted]="true"
 >
   <!-- ExtTitlebar starts-->
@@ -97,19 +96,18 @@
     extname="router"
     *ngIf="!isPhone"
     scrollable="true"
+    layout="fit"
   >
-  <router-outlet #extitem id="route"></router-outlet>
-
+    <div #extitem style="width:100%;">
+      <router-outlet id="route"></router-outlet>
+    </div>
   </ExtContainer>
   <!-- examples ends-->
 
-    <!-- <div #extitem id="routediv">
-      <router-outlet id="route"></router-outlet>
-    </div> -->
-
-
-  <!-- [hideAnimation]="{type: 'slideOut', direction: 'right', duration: 100, easing: 'ease' }"
-  [showAnimation]="{type: 'slideIn', direction: 'left', duration: 100, easing: 'ease' }" -->
+  <!--
+    [hideAnimation]="{type: 'slideOut', direction: 'right', duration: 100, easing: 'ease' }"
+    [showAnimation]="{type: 'slideIn', direction: 'left', duration: 100, easing: 'ease' }"
+  -->
 
   <!-- code window starts-->
   <ExtPanel

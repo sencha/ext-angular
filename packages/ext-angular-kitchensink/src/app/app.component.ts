@@ -7,7 +7,6 @@ import { VERSION } from "@angular/core";
 //import { Subject } from "rxjs";
 import { getFiles } from "./code_preview_helper";
 //import { _code } from "./code"
-//import { extnameToProperty } from "@sencha/ext-runtime-modern-base/util";
 
 Ext.require([
     "Ext.MessageBox",
