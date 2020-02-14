@@ -1,6 +1,6 @@
 {
   "name": "@sencha/ext-angular-router",
-  "version": "7.0.0",
+  "version": "7.2.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
