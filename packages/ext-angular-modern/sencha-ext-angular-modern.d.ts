@@ -238,5 +238,3 @@ export { ExtWidgetcellComponent as ɵeu } from './src/ExtWidgetcell';
 export { ExtWindowComponent as ɵcl } from './src/ExtWindow';
 export { ExtYearpickerComponent as ɵgy } from './src/ExtYearpicker';
 export { EngBase as ɵb } from './src/angularbase';
-
-//# sourceMappingURL=sencha-ext-angular-modern.d.ts.map
