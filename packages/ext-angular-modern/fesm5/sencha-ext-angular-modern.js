@@ -2,6 +2,14 @@ import { __decorate, __extends, __param } from 'tslib';
 import { EventEmitter, ContentChildren, ElementRef, Host, Optional, SkipSelf, ViewContainerRef, Component, forwardRef, NgModule, APP_INITIALIZER } from '@angular/core';
 import { EWCActionsheet, EWCAudio, EWCBreadcrumbbar, EWCButton, EWCCalendar_event, EWCCalendar_form_add, EWCCalendar_calendar_picker, EWCCalendar_form_edit, EWCCalendar_timefield, EWCCalendar_daysheader, EWCCalendar_weeksheader, EWCCalendar_list, EWCCalendar_day, EWCCalendar_days, EWCCalendar_month, EWCCalendar, EWCCalendar_week, EWCCalendar_weeks, EWCCalendar_dayview, EWCCalendar_daysview, EWCCalendar_monthview, EWCCalendar_multiview, EWCCalendar_weekview, EWCCalendar_weeksview, EWCCarousel, EWCCartesian, EWCChart, EWCLegend, EWCChartnavigator, EWCPolar, EWCSpacefilling, EWCChip, EWCComponent, EWCContainer, EWCD3_canvas, EWCD3_heatmap, EWCD3_pack, EWCD3_partition, EWCD3_sunburst, EWCD3_tree, EWCD3_horizontal_tree, EWCD3_treemap, EWCD3_svg, EWCD3, EWCBoundlist, EWCChipview, EWCComponentdataview, EWCDataitem, EWCDataview, EWCEmptytext, EWCIndexbar, EWCItemheader, EWCList, EWCListitem, EWCListitemplaceholder, EWCListswiperitem, EWCListswiperstepper, EWCNestedlist, EWCPullrefreshbar, EWCPullrefreshspinner, EWCSimplelistitem, EWCDialog, EWCWindow, EWCDraw, EWCSurface, EWCEditor, EWCCheckbox, EWCCheckboxfield, EWCCheckboxgroup, EWCCombobox, EWCComboboxfield, EWCContainerfield, EWCFieldcontainer, EWCDatefield, EWCDatepickerfield, EWCDatepickernativefield, EWCDisplayfield, EWCEmailfield, EWCField, EWCGroupcontainer, EWCFilefield, EWCFilebutton, EWCHiddenfield, EWCInputfield, EWCNumberfield, EWCFieldpanel, EWCPasswordfield, EWCPickerfield, EWCRadio, EWCRadiofield, EWCRadiogroup, EWCSearchfield, EWCSelectfield, EWCSinglesliderfield, EWCSliderfield, EWCSpinnerfield, EWCTextfield, EWCTextareafield, EWCTimefield, EWCTogglefield, EWCCleartrigger, EWCDatetrigger, EWCExpandtrigger, EWCMenutrigger, EWCRevealtrigger, EWCSpindowntrigger, EWCSpinuptrigger, EWCTimetrigger, EWCTrigger, EWCUrlfield, EWCFieldset, EWCFormpanel, EWCFroalaeditor, EWCFroalaeditorfield, EWCGridcellbase, EWCBooleancell, EWCGridcell, EWCCheckcell, EWCDatecell, EWCNumbercell, EWCRownumberercell, EWCTextcell, EWCTreecell, EWCWidgetcell, EWCCelleditor, EWCBooleancolumn, EWCCheckcolumn, EWCGridcolumn, EWCColumn, EWCTemplatecolumn, EWCDatecolumn, EWCDragcolumn, EWCNumbercolumn, EWCRownumberer, EWCSelectioncolumn, EWCTextcolumn, EWCTreecolumn, EWCGrid, EWCHeadercontainer, EWCLockedgrid, EWCLockedgridregion, EWCGridcolumnsmenu, EWCGridgroupbythismenuitem, EWCGridshowingroupsmenuitem, EWCGridsortascmenuitem, EWCGridsortdescmenuitem, EWCPagingtoolbar, EWCGridrow, EWCRowbody, EWCRoweditorbar, EWCRoweditorcell, EWCRoweditor, EWCRoweditorgap, EWCRowheader, EWCGridsummaryrow, EWCTree, EWCImage, EWCImg, EWCIndicator, EWCLabel, EWCTreelist, EWCTreelistitem, EWCLoadmask, EWCMask, EWCMedia, EWCMenucheckitem, EWCMenuitem, EWCMenu, EWCMenuradioitem, EWCMenuseparator, EWCMessagebox, EWCNavigationview, EWCPanel, EWCAccordion, EWCDatepanel, EWCDatetitle, EWCPanelheader, EWCTimepanel, EWCPaneltitle, EWCYearpicker, EWCDatepicker, EWCPicker, EWCSelectpicker, EWCPickerslot, EWCTabletpicker, EWCPivotgridcell, EWCPivotgridgroupcell, EWCPivotd3container, EWCPivotheatmap, EWCPivottreemap, EWCPivotgrid, EWCPivotconfigfield, EWCPivotconfigcontainer, EWCPivotconfigform, EWCPivotconfigpanel, EWCPivotsettings, EWCPivotrangeeditor, EWCPivotgridrow, EWCProgress, EWCProgressbarwidget, EWCSegmentedbutton, EWCSheet, EWCSlider, EWCThumb, EWCToggleslider, EWCSpacer, EWCSparklinebar, EWCSparkline, EWCSparklinebox, EWCSparklinebullet, EWCSparklinediscrete, EWCSparklineline, EWCSparklinepie, EWCSparklinetristate, EWCSplitbutton, EWCTabbar, EWCTabpanel, EWCTab, EWCTooltip, EWCTitle, EWCTitlebar, EWCTool, EWCPaneltool, EWCToolbar, EWCColorbutton, EWCColorpickercolorpreview, EWCColorfield, EWCColorselector, EWCGauge, EWCMap, EWCGoogle_map, EWCRating, EWCVideo, EWCViewport, EWCWidget } from '@sencha/ext-web-components-modern';
 
+function doAngularXTemplate() {
+    console.log('in doAngularXTemplate');
+}
+
+function doAngularCell() {
+    console.log('in doAngularCell');
+}
+
 var Ext = window['Ext'];
 var EngBase = /** @class */ (function () {
     function EngBase(eRef, hostComponent, properties, events, eventnames, vc) {
@@ -19,6 +27,13 @@ var EngBase = /** @class */ (function () {
         this.A = {};
         this.A.props = {};
         this.base = EngBase;
+        if (window['ExtAngular'] == null) {
+            window['ExtAngular'] = 'loaded';
+            doAngularXTemplate();
+            if (Ext.isModern == true) {
+                doAngularCell();
+            }
+        }
     }
     Object.defineProperty(EngBase.prototype, "childComponents", {
         //@ViewChildren(EngBase) _viewchildComponents: QueryList<EngBase>;
@@ -39,28 +54,37 @@ var EngBase = /** @class */ (function () {
             var property = this.properties[i];
             if (this[property] !== undefined) {
                 if (property != 'fullscreen' && property != 'xtype') {
-                    if (typeof this[property] == 'function') {
-                        this.node.newDiv.attributeObjects[property] = this[property];
-                        this.node.newDiv.setAttribute(property, 'function');
-                    }
-                    else if (typeof this[property] == 'object') {
-                        var sPropVal = '';
-                        try {
-                            sPropVal = JSON.stringify(this[property]);
-                            this.node.newDiv.setAttribute(property, sPropVal);
-                        }
-                        catch (e) {
-                            this.node.newDiv.attributeObjects[property] = this[property];
-                            this.node.newDiv.setAttribute(property, 'object');
-                        }
-                    }
-                    else {
-                        this.node.newDiv.setAttribute(property, this[property]);
-                    }
+                    this.node.newDiv.attributeObjects[property] = this[property];
                 }
             }
         }
+        // for (var i = 0; i < this.properties.length; i++) {
+        //     var property = this.properties[i];
+        //     if (this[property] !== undefined) {
+        //         if (property != 'fullscreen' && property != 'xtype') {
+        //             if (typeof this[property] == 'function') {
+        //               this.node.newDiv.attributeObjects[property] = this[property]
+        //               this.node.newDiv.setAttribute(property, 'function');
+        //             }
+        //             else if (typeof this[property] == 'object') {
+        //               var sPropVal = ''
+        //               try {
+        //                 sPropVal = JSON.stringify(this[property])
+        //                 this.node.newDiv.setAttribute(property, sPropVal);
+        //               }
+        //               catch(e) {
+        //                 this.node.newDiv.attributeObjects[property] = this[property];
+        //                 this.node.newDiv.setAttribute(property, 'object');
+        //               }
+        //             }
+        //             else {
+        //               this.node.newDiv.setAttribute(property, this[property]);
+        //             }
+        //         }
+        //     }
+        // }
         var me = this;
+        me.node.newDiv.doCreateExtComponent();
         this.eventnames.forEach(function (eventname) {
             me.node.newDiv.addEventListener(eventname, function (event) {
                 if (me[eventname] != false) {
