@@ -1,5 +1,5 @@
 import { ElementRef, ViewContainerRef } from '@angular/core';
-import { EngBase } from './angularbase';
+import { EngBase } from './runtime/angularbase';
 export declare class ExtTbfillComponent extends EngBase {
     constructor(eRef: ElementRef, hostComponent: EngBase, vc: ViewContainerRef);
     ngOnInit(): void;

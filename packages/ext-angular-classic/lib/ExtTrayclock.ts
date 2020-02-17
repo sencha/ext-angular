@@ -11,7 +11,7 @@ import {
     forwardRef,
     ViewContainerRef
   } from '@angular/core';
-import { EngBase } from './angularbase';
+import { EngBase } from './runtime/angularbase';
 
 @Component({
     selector: 'ExtTrayclock',

@@ -6,6 +6,8 @@ import {
     QueryList,
     SimpleChanges
   } from '@angular/core';
+import { doAngularXTemplate } from '../overrides/AngularXTemplate';
+import { doAngularCell } from '../overrides/AngularCell';
 const Ext = window['Ext'];
 
 export class EngBase {
@@ -61,37 +63,61 @@ export class EngBase {
         this.A = {};
         this.A.props = {}
         this.base = EngBase;
+
+        if (window['ExtAngular'] == null) {
+          window['ExtAngular'] = 'loaded'
+          doAngularXTemplate();
+          if (Ext.isModern == true) {
+            doAngularCell();
+          }
+        }
     }
 
     baseOnInit() {
       //console.log('baseOnInit')
       this.node.newDiv = document.createElement('ext-' + this.xtype);
+
       for (var i = 0; i < this.properties.length; i++) {
-          var property = this.properties[i];
-          if (this[property] !== undefined) {
-              if (property != 'fullscreen' && property != 'xtype') {
-                  if (typeof this[property] == 'function') {
-                    this.node.newDiv.attributeObjects[property] = this[property]
-                    this.node.newDiv.setAttribute(property, 'function');
-                  }
-                  else if (typeof this[property] == 'object') {
-                    var sPropVal = ''
-                    try {
-                      sPropVal = JSON.stringify(this[property])
-                      this.node.newDiv.setAttribute(property, sPropVal);
-                    }
-                    catch(e) {
-                      this.node.newDiv.attributeObjects[property] = this[property];
-                      this.node.newDiv.setAttribute(property, 'object');
-                    }
-                  }
-                  else {
-                    this.node.newDiv.setAttribute(property, this[property]);
-                  }
-              }
-          }
+        var property = this.properties[i];
+        if (this[property] !== undefined) {
+            if (property != 'fullscreen' && property != 'xtype') {
+              this.node.newDiv.attributeObjects[property] = this[property];
+            }
+        }
       }
+
+
+
+
+      // for (var i = 0; i < this.properties.length; i++) {
+      //     var property = this.properties[i];
+      //     if (this[property] !== undefined) {
+      //         if (property != 'fullscreen' && property != 'xtype') {
+      //             if (typeof this[property] == 'function') {
+      //               this.node.newDiv.attributeObjects[property] = this[property]
+      //               this.node.newDiv.setAttribute(property, 'function');
+      //             }
+      //             else if (typeof this[property] == 'object') {
+      //               var sPropVal = ''
+      //               try {
+      //                 sPropVal = JSON.stringify(this[property])
+      //                 this.node.newDiv.setAttribute(property, sPropVal);
+      //               }
+      //               catch(e) {
+      //                 this.node.newDiv.attributeObjects[property] = this[property];
+      //                 this.node.newDiv.setAttribute(property, 'object');
+      //               }
+      //             }
+      //             else {
+      //               this.node.newDiv.setAttribute(property, this[property]);
+      //             }
+      //         }
+      //     }
+      // }
+
       var me = this;
+      me.node.newDiv.doCreateExtComponent()
+
       this.eventnames.forEach(function (eventname) {
           me.node.newDiv.addEventListener(eventname, function (event) {
               if (me[eventname] != false) {

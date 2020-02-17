@@ -237,4 +237,4 @@ export { ExtWidgetComponent as ɵjb } from './src/ExtWidget';
 export { ExtWidgetcellComponent as ɵeu } from './src/ExtWidgetcell';
 export { ExtWindowComponent as ɵcl } from './src/ExtWindow';
 export { ExtYearpickerComponent as ɵgy } from './src/ExtYearpicker';
-export { EngBase as ɵb } from './src/angularbase';
+export { EngBase as ɵb } from './src/runtime/angularbase';
