@@ -1,3 +1,3 @@
 export function doAngularCell() {
-  console.log('in doAngularCell')
+  //console.log('in doAngularCell')
 }

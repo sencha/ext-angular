@@ -2,22 +2,18 @@ import { __decorate, __param } from 'tslib';
 import { EventEmitter, ContentChildren, ElementRef, Host, Optional, SkipSelf, ViewContainerRef, Component, forwardRef, NgModule, APP_INITIALIZER } from '@angular/core';
 import { EWCButton, EWCCycle, EWCSegmentedbutton, EWCSplitbutton, EWCCalendar_event, EWCCalendar_form_add, EWCCalendar_calendar_picker, EWCCalendar_form_edit, EWCCalendar_daysheader, EWCCalendar_weeksheader, EWCCalendar_list, EWCCalendar_day, EWCCalendar_days, EWCCalendar_month, EWCCalendar, EWCCalendar_week, EWCCalendar_weeks, EWCCalendar_dayview, EWCCalendar_daysview, EWCCalendar_monthview, EWCCalendar_multiview, EWCCalendar_weekview, EWCCalendar_weeksview, EWCAxis, EWCAxis3d, EWCCartesian, EWCChart, EWCInteraction, EWCLegend, EWCChartnavigator, EWCPolar, EWCSpacefilling, EWCComponent, EWCBox, EWCButtongroup, EWCContainer, EWCViewport, EWCD3_canvas, EWCD3_heatmap, EWCD3_pack, EWCD3_partition, EWCD3_sunburst, EWCD3_tree, EWCD3_horizontal_tree, EWCD3_treemap, EWCD3_svg, EWCD3, EWCDashboard_column, EWCDashboard, EWCDashboard_panel, EWCDraw, EWCSurface, EWCEditor, EWCFlash, EWCCheckboxgroup, EWCField, EWCCheckboxfield, EWCCheckbox, EWCCombobox, EWCCombo, EWCDatefield, EWCDisplayfield, EWCFilefield, EWCFileuploadfield, EWCFilebutton, EWCHiddenfield, EWCHidden, EWCHtmleditor, EWCNumberfield, EWCPickerfield, EWCRadiofield, EWCRadio, EWCSpinnerfield, EWCTagfield, EWCTextfield, EWCTextareafield, EWCTextarea, EWCTimefield, EWCTriggerfield, EWCTrigger, EWCFieldcontainer, EWCFieldset, EWCLabel, EWCForm, EWCRadiogroup, EWCCelleditor, EWCActioncolumn, EWCBooleancolumn, EWCCheckcolumn, EWCGridcolumn, EWCDatecolumn, EWCNumbercolumn, EWCRownumberer, EWCTemplatecolumn, EWCWidgetcolumn, EWCHeadercontainer, EWCGridpanel, EWCGrid, EWCPropertygrid, EWCRoweditor, EWCRoweditorbuttons, EWCImage, EWCImagecomponent, EWCColumnsplitter, EWCTreelist, EWCTreelistitem, EWCLoadmask, EWCMenubar, EWCMenucheckitem, EWCColormenu, EWCDatemenu, EWCMenuitem, EWCMenu, EWCMenuseparator, EWCHeader, EWCPanel, EWCTablepanel, EWCTitle, EWCTool, EWCColorpicker, EWCDatepicker, EWCMonthpicker, EWCTimepicker, EWCPivotd3container, EWCPivotheatmap, EWCPivottreemap, EWCPivotgrid, EWCMzpivotgrid, EWCPivotconfigfield, EWCPivotconfigcontainer, EWCPivotconfigpanel, EWCProgress, EWCProgressbarwidget, EWCProgressbar, EWCBordersplitter, EWCSplitter, EWCMultislider, EWCSlider, EWCSliderfield, EWCSlidertip, EWCSliderwidget, EWCSparklinebar, EWCSparkline, EWCSparklinebox, EWCSparklinebullet, EWCSparklinediscrete, EWCSparklineline, EWCSparklinepie, EWCSparklinetristate, EWCTabbar, EWCTabpanel, EWCTab, EWCQuicktip, EWCTip, EWCTooltip, EWCBreadcrumb, EWCTbfill, EWCTbitem, EWCPagingtoolbar, EWCTbseparator, EWCTbspacer, EWCTbtext, EWCToolbar, EWCTreecolumn, EWCTreepanel, EWCTreeview, EWCColorbutton, EWCColorpickercolormap, EWCColorpickercolorpreview, EWCColorfield, EWCColorselector, EWCColorpickerslider, EWCColorpickerslideralpha, EWCColorpickersliderhue, EWCColorpickerslidersaturation, EWCColorpickerslidervalue, EWCDesktop, EWCTaskbar, EWCTrayclock, EWCVideo, EWCWallpaper, EWCEventrecordermanager, EWCExplorer, EWCItemselectorfield, EWCItemselector, EWCMultiselectfield, EWCMultiselect, EWCSearchfield, EWCGauge, EWCGmappanel, EWCUxiframe, EWCRating, EWCStatusbar, EWCTreepicker, EWCBoundlist, EWCMultiselector, EWCMultiselector_search, EWCTableview, EWCGridview, EWCDataview, EWCWidget, EWCMessagebox, EWCToast, EWCWindow } from '@sencha/ext-web-components-classic';
 
-function doAngularXTemplate() {
-    console.log('in doAngularXTemplate');
-}
-
-function doAngularCell() {
-    console.log('in doAngularCell');
-}
-
+//import { doAngularXTemplate } from '../overrides/AngularXTemplate';
+//import { doAngularCell } from '../overrides/AngularCell';
 const Ext = window['Ext'];
 class EngBase {
     constructor(eRef, hostComponent, properties, events, eventnames, vc) {
         this.node = eRef.nativeElement;
         this.parentNode = hostComponent;
-        this.properties = properties;
-        this.eventnames = eventnames;
-        //this.vc = vc;
+        const distinct = (value, index, self) => {
+            return self.indexOf(value) === index;
+        };
+        this.properties = properties.filter(distinct);
+        this.eventnames = eventnames.filter(distinct);
         var me = this;
         this.eventnames.forEach(function (eventname) {
             if (eventname != "layout") {
@@ -29,13 +25,12 @@ class EngBase {
         this.base = EngBase;
         if (window['ExtAngular'] == null) {
             window['ExtAngular'] = 'loaded';
-            doAngularXTemplate();
-            if (Ext.isModern == true) {
-                doAngularCell();
-            }
+            // doAngularXTemplate();
+            // if (Ext.isModern == true) {
+            //   doAngularCell();
+            // }
         }
     }
-    //@ViewChildren(EngBase) _viewchildComponents: QueryList<EngBase>;
     get childComponents() {
         if (this._childComponents == undefined) {
             return [];
@@ -48,47 +43,28 @@ class EngBase {
         for (var i = 0; i < this.properties.length; i++) {
             var property = this.properties[i];
             if (this[property] !== undefined) {
-                if (property != 'fullscreen' && property != 'xtype') {
+                if (property == 'fullscreen' || property == 'xtype') {
+                    continue;
+                }
+                else if (typeof this[property] == 'function') {
+                    this.node.newDiv.setAttribute(property, 'function');
+                    this.node.newDiv.attributeObjects[property] = this[property];
+                }
+                else {
+                    this.node.newDiv.setAttribute(property, this[property]);
                     this.node.newDiv.attributeObjects[property] = this[property];
                 }
             }
         }
-        // for (var i = 0; i < this.properties.length; i++) {
-        //     var property = this.properties[i];
-        //     if (this[property] !== undefined) {
-        //         if (property != 'fullscreen' && property != 'xtype') {
-        //             if (typeof this[property] == 'function') {
-        //               this.node.newDiv.attributeObjects[property] = this[property]
-        //               this.node.newDiv.setAttribute(property, 'function');
-        //             }
-        //             else if (typeof this[property] == 'object') {
-        //               var sPropVal = ''
-        //               try {
-        //                 sPropVal = JSON.stringify(this[property])
-        //                 this.node.newDiv.setAttribute(property, sPropVal);
-        //               }
-        //               catch(e) {
-        //                 this.node.newDiv.attributeObjects[property] = this[property];
-        //                 this.node.newDiv.setAttribute(property, 'object');
-        //               }
-        //             }
-        //             else {
-        //               this.node.newDiv.setAttribute(property, this[property]);
-        //             }
-        //         }
-        //     }
-        // }
+        this.node.newDiv.setAttribute('createExtComponentDefer', true);
+        this.node.newDiv.attributeObjects['createExtComponentDefer'] = true;
         var me = this;
-        me.node.newDiv.doCreateExtComponent();
         this.eventnames.forEach(function (eventname) {
             me.node.newDiv.addEventListener(eventname, function (event) {
                 if (me[eventname] != false) {
                     if (eventname != 'layout') {
-                        //console.log(eventname)
-                        //console.log(me[eventname])
                         me[eventname].emit(event.detail);
                     }
-                    //me[eventname].emit(event.detail);
                 }
             });
         });
@@ -102,9 +78,9 @@ class EngBase {
     baseAfterViewInit() {
         var me = this;
         this._extitems.toArray().forEach(item => {
-            //me.node.newDiv.appendChild(Ext.get(item.nativeElement).dom);
             me.node.newDiv.appendChild(item.nativeElement);
         });
+        me.node.newDiv.doCreateExtComponent();
     }
     baseOnChanges(changes) {
         for (let propName in changes) {
