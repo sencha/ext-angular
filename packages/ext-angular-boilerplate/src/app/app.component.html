@@ -1,7 +1,7 @@
 <ExtContainer
   (ready)="readyViewport($event)"
   [viewport]="true"
-  layout="vbox"
+  layout="fit"
   padding="0 0 0 10"
 >
 
@@ -20,6 +20,14 @@
     </ExtTreelist>
   </ExtPanel>
 
-  <router-outlet #extitem></router-outlet>
+  <ExtContainer
+    extname="router"
+    scrollable="true"
+    layout="fit"
+  >
+    <div #extitem style="width:100%;">
+      <router-outlet id="route"></router-outlet>
+    </div>
+  </ExtContainer>
 
 </ExtContainer>

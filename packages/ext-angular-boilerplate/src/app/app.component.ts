@@ -8,7 +8,7 @@ import { Component, VERSION } from "@angular/core";
 })
 export class AppComponent {
   isPhone = Ext.platformTags.phone;
-  title = "Sencha ExtAngularModern 7.1 Boilerplate - Angular v" + VERSION.full;
+  title = "Sencha ExtAngularModern 7.2 Boilerplate - Angular v" + VERSION.full;
 
   navTreeListCmp: any;
   treeStore: any;
@@ -32,16 +32,20 @@ export class AppComponent {
   };
 
   constructor() {
-    this.treeStore = Ext.create("Ext.data.TreeStore", {
+    this.treeStore = {
+      xtype: 'tree',
       rootVisible: true,
       root: this.storeData
-    });
+    };
   }
 
   readyViewport = ({ cmp, cmpObj }) => {
     this['navTreelist'] = cmpObj['navTreelist'];
     this['navTreelist'].setStore(this.treeStore)
-    var hash = window.location.hash.substr(2);
+    var hash = window.location.hash.substring(2);
+    if (hash == '') {
+      hash = 'about';
+    }
     var node = this['navTreelist'].getStore().findNode('name', hash);
     this['navTreelist'].setSelection(node);
   };
@@ -58,8 +62,7 @@ export class AppComponent {
   }
 
   nav(node) {
-    var hash = '#' + node.id;
-    window.location.hash = hash;
+    window.location.hash = '#' + node.id;
   }
 
 }
