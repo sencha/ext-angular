@@ -201,22 +201,18 @@
         return (mod && mod.__esModule) ? mod : { default: mod };
     }
 
-    function doAngularXTemplate() {
-        console.log('in doAngularXTemplate');
-    }
-
-    function doAngularCell() {
-        console.log('in doAngularCell');
-    }
-
+    //import { doAngularXTemplate } from '../overrides/AngularXTemplate';
+    //import { doAngularCell } from '../overrides/AngularCell';
     var Ext = window['Ext'];
     var EngBase = /** @class */ (function () {
         function EngBase(eRef, hostComponent, properties, events, eventnames, vc) {
             this.node = eRef.nativeElement;
             this.parentNode = hostComponent;
-            this.properties = properties;
-            this.eventnames = eventnames;
-            //this.vc = vc;
+            var distinct = function (value, index, self) {
+                return self.indexOf(value) === index;
+            };
+            this.properties = properties.filter(distinct);
+            this.eventnames = eventnames.filter(distinct);
             var me = this;
             this.eventnames.forEach(function (eventname) {
                 if (eventname != "layout") {
@@ -228,14 +224,13 @@
             this.base = EngBase;
             if (window['ExtAngular'] == null) {
                 window['ExtAngular'] = 'loaded';
-                doAngularXTemplate();
-                if (Ext.isModern == true) {
-                    doAngularCell();
-                }
+                // doAngularXTemplate();
+                // if (Ext.isModern == true) {
+                //   doAngularCell();
+                // }
             }
         }
         Object.defineProperty(EngBase.prototype, "childComponents", {
-            //@ViewChildren(EngBase) _viewchildComponents: QueryList<EngBase>;
             get: function () {
                 var _this = this;
                 if (this._childComponents == undefined) {
@@ -252,47 +247,28 @@
             for (var i = 0; i < this.properties.length; i++) {
                 var property = this.properties[i];
                 if (this[property] !== undefined) {
-                    if (property != 'fullscreen' && property != 'xtype') {
+                    if (property == 'fullscreen' || property == 'xtype') {
+                        continue;
+                    }
+                    else if (typeof this[property] == 'function') {
+                        this.node.newDiv.setAttribute(property, 'function');
+                        this.node.newDiv.attributeObjects[property] = this[property];
+                    }
+                    else {
+                        this.node.newDiv.setAttribute(property, this[property]);
                         this.node.newDiv.attributeObjects[property] = this[property];
                     }
                 }
             }
-            // for (var i = 0; i < this.properties.length; i++) {
-            //     var property = this.properties[i];
-            //     if (this[property] !== undefined) {
-            //         if (property != 'fullscreen' && property != 'xtype') {
-            //             if (typeof this[property] == 'function') {
-            //               this.node.newDiv.attributeObjects[property] = this[property]
-            //               this.node.newDiv.setAttribute(property, 'function');
-            //             }
-            //             else if (typeof this[property] == 'object') {
-            //               var sPropVal = ''
-            //               try {
-            //                 sPropVal = JSON.stringify(this[property])
-            //                 this.node.newDiv.setAttribute(property, sPropVal);
-            //               }
-            //               catch(e) {
-            //                 this.node.newDiv.attributeObjects[property] = this[property];
-            //                 this.node.newDiv.setAttribute(property, 'object');
-            //               }
-            //             }
-            //             else {
-            //               this.node.newDiv.setAttribute(property, this[property]);
-            //             }
-            //         }
-            //     }
-            // }
+            this.node.newDiv.setAttribute('createExtComponentDefer', true);
+            this.node.newDiv.attributeObjects['createExtComponentDefer'] = true;
             var me = this;
-            me.node.newDiv.doCreateExtComponent();
             this.eventnames.forEach(function (eventname) {
                 me.node.newDiv.addEventListener(eventname, function (event) {
                     if (me[eventname] != false) {
                         if (eventname != 'layout') {
-                            //console.log(eventname)
-                            //console.log(me[eventname])
                             me[eventname].emit(event.detail);
                         }
-                        //me[eventname].emit(event.detail);
                     }
                 });
             });
@@ -306,9 +282,9 @@
         EngBase.prototype.baseAfterViewInit = function () {
             var me = this;
             this._extitems.toArray().forEach(function (item) {
-                //me.node.newDiv.appendChild(Ext.get(item.nativeElement).dom);
                 me.node.newDiv.appendChild(item.nativeElement);
             });
+            me.node.newDiv.doCreateExtComponent();
         };
         EngBase.prototype.baseOnChanges = function (changes) {
             for (var propName in changes) {

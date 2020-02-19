@@ -1,5 +1,4 @@
 import { QueryList, SimpleChanges } from '@angular/core';
-import * as ɵngcc0 from '@angular/core';
 export declare class EngBase {
     xtype: any;
     properties: any;
@@ -16,8 +15,4 @@ export declare class EngBase {
     baseAfterViewInit(): void;
     baseOnChanges(changes: SimpleChanges): void;
     baseOnDestroy(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<EngBase>;
-    static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<EngBase, never, never, {}, {}, ["_extitems", "_childComponents"]>;
 }
-
-//# sourceMappingURL=angularbase.d.ts.map

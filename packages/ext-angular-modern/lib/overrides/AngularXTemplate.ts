@@ -1,3 +1,3 @@
 export function doAngularXTemplate() {
-  console.log('in doAngularXTemplate')
+  //console.log('in doAngularXTemplate')
 }
