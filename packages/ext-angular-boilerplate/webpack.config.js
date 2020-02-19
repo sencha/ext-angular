@@ -66,7 +66,7 @@ module.exports = function (env) {
 
       new AngularCompilerPlugin({
         tsConfigPath: './tsconfig.json',
-        entryModule: "src/app/app.module#AppModule",
+       // entryModule: "src/app/app.module#AppModule",
         mainPath: "./src/main.ts",
         skipCodeGeneration: true
       }),
