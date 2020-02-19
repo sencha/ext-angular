@@ -1,5 +1,8 @@
 7.2.x
 
+git fetch upstream
+git merge upstream/ext-angular-7.2.x
+
 for extjs/SDK
 git remote add upstream https://github.com/extjs/SDK.git
 git fetch upstream
@@ -34,9 +37,7 @@ echo "//sencha.myget.org/F/community/npm/:_authToken=d2b8cca6-d601-438d-a2b9-6c7
 npm --registry https://test.npm.sencha.com/ whoami
 npm --registry https://sencha.myget.org/F/community/npm/ whoami
 
-git fetch upstream
 
-git merge upstream/ext-angular-7.2.x
 
 
         // compilation.hooks.additionalAssets.tapAsync(`ext-additionalAssets`, (cb) => {
