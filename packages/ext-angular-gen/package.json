@@ -18,7 +18,7 @@
     },
     "preferGlobal": true,
     "dependencies": {
-        "@sencha/ext-angular-boilerplate": "7.1.0",
+        "@sencha/ext-angular-boilerplate": "7.2.0",
         "chalk": "~2.4.2",
         "glob": "~7.1.4",
         "boxen": "~4.1.0",

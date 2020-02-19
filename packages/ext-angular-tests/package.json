@@ -8,7 +8,7 @@
         "dev": "webpack-dev-server --env.environment=development",
         "prod": "npm run build",
         "build": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=true && cross-env webpack --env.environment=production --env.basehref=/",
-        "buildexample": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=true && cross-env webpack --env.environment=production --env.basehref='/ExtAngular/7.1.0/kitchensink/'"
+        "buildexample": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=true && cross-env webpack --env.environment=production --env.basehref='/ExtAngular/7.2.0/kitchensink/'"
     },
     "extbuild": {
         "defaultprofile": "",
