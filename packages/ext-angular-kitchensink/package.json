@@ -18,7 +18,7 @@
         "replace": "npx replace-in-file /.js/g .js.gz build/index.html --isRegex",
         "http": "npx http-server build -g -o",
         "buildexamplelocal": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=yes && cross-env webpack --env.environment=production --env.basehref=/",
-        "buildexample": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=yes && cross-env webpack --env.environment=production --env.basehref=/ExtAngular/7.1.0/kitchensink/"
+        "buildexample": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=yes && cross-env webpack --env.environment=production --env.basehref=/ExtAngular/7.2.0/kitchensink/"
     },
     "devDependencies": {
         "gzip-cli": "^1.0.1",
@@ -69,7 +69,7 @@
         "webpack-cli": "~3.3.10",
         "webpack-dev-server": "~3.9.0",
         "hammerjs": "~2.0.8",
-        "froala-editor": "3.0.6",
+        "froala-editor": "3.1.0",
         "d3": "5.14.2",
         "highlight.js": "~9.16.2",
         "highlightjs": "~9.16.2",
