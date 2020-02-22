@@ -16,7 +16,7 @@ import { EngBase } from './runtime/angularbase';
 @Component({
     selector: 'ExtD3_tree',
     inputs: ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','ariaAttributes','ariaDescribedBy','ariaLabel','ariaLabelledBy','bind','border','clipScene','cls','colorAxis','componentCls','controller','defaultListenerScope','depth','disabled','undefined','expandEventName','focusCls','height','hidden','hideMode','hierarchyCls','instanceCls','interactions','keyMap','keyMapEnabled','keyMapTarget','layout','linkKey','listeners','margin','name','nameable','nodeChildren','nodeClass','nodeKey','nodeRadius','nodeSize','nodeText','nodeTransform','nodeValue','noParentValue','noSizeLayout','padding','plugins','publishes','reference','renderLinks','renderTo','ripple','rootVisible','selectEventName','selection','session','shareableName','size','sorter','store','style','tooltip','touchAction','transitions','twoWayBindable','ui','userCls','viewModel','width',],
-    outputs: ['ready','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','layout','sceneresize','scenesetup','widthchange',],
+    outputs: ['ready','created','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','layout','sceneresize','scenesetup','widthchange',],
     providers: [{provide: EngBase, useExisting: forwardRef(() => ExtD3_treeComponent)}],
     template: '<ng-content></ng-content>'
 })
@@ -31,7 +31,7 @@ export class ExtD3_treeComponent extends EngBase {
             hostComponent,
             ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','ariaAttributes','ariaDescribedBy','ariaLabel','ariaLabelledBy','bind','border','clipScene','cls','colorAxis','componentCls','controller','defaultListenerScope','depth','disabled','undefined','expandEventName','focusCls','height','hidden','hideMode','hierarchyCls','instanceCls','interactions','keyMap','keyMapEnabled','keyMapTarget','layout','linkKey','listeners','margin','name','nameable','nodeChildren','nodeClass','nodeKey','nodeRadius','nodeSize','nodeText','nodeTransform','nodeValue','noParentValue','noSizeLayout','padding','plugins','publishes','reference','renderLinks','renderTo','ripple','rootVisible','selectEventName','selection','session','shareableName','size','sorter','store','style','tooltip','touchAction','transitions','twoWayBindable','ui','userCls','viewModel','width',],
             (new EWCD3_tree()).events,
-            ['ready','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','layout','sceneresize','scenesetup','widthchange',],
+            ['ready','created','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','layout','sceneresize','scenesetup','widthchange',],
             vc
         )
         this.xtype = 'd3-tree'

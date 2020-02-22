@@ -16,7 +16,7 @@ import { EngBase } from './runtime/angularbase';
 @Component({
     selector: 'ExtD3_canvas',
     inputs: ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','ariaAttributes','ariaDescribedBy','ariaLabel','ariaLabelledBy','bind','border','cls','componentCls','controller','defaultListenerScope','disabled','undefined','focusCls','hdpi','height','hidden','hideMode','instanceCls','interactions','keyMap','keyMapEnabled','keyMapTarget','listeners','margin','name','nameable','plugins','publishes','reference','renderTo','ripple','session','shareableName','size','store','style','touchAction','transitions','twoWayBindable','ui','userCls','viewModel','width',],
-    outputs: ['ready','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','sceneresize','widthchange',],
+    outputs: ['ready','created','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','sceneresize','widthchange',],
     providers: [{provide: EngBase, useExisting: forwardRef(() => ExtD3_canvasComponent)}],
     template: '<ng-content></ng-content>'
 })
@@ -31,7 +31,7 @@ export class ExtD3_canvasComponent extends EngBase {
             hostComponent,
             ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','ariaAttributes','ariaDescribedBy','ariaLabel','ariaLabelledBy','bind','border','cls','componentCls','controller','defaultListenerScope','disabled','undefined','focusCls','hdpi','height','hidden','hideMode','instanceCls','interactions','keyMap','keyMapEnabled','keyMapTarget','listeners','margin','name','nameable','plugins','publishes','reference','renderTo','ripple','session','shareableName','size','store','style','touchAction','transitions','twoWayBindable','ui','userCls','viewModel','width',],
             (new EWCD3_canvas()).events,
-            ['ready','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','sceneresize','widthchange',],
+            ['ready','created','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','sceneresize','widthchange',],
             vc
         )
         this.xtype = 'd3-canvas'

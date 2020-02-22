@@ -16,7 +16,7 @@ import { EngBase } from './runtime/angularbase';
 @Component({
     selector: 'ExtSparklineline',
     inputs: ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','ariaAttributes','ariaDescribedBy','ariaLabel','ariaLabelledBy','bind','border','chartRangeMax','chartRangeMaxX','chartRangeMin','chartRangeMinX','cls','controller','defaultListenerScope','disabled','disableTooltips','drawNormalOnTop','undefined','fillColor','focusCls','height','hidden','hideMode','highlightColor','highlightLighten','highlightLineColor','highlightSpotColor','instanceCls','keyMap','keyMapEnabled','keyMapTarget','lineColor','lineWidth','listeners','margin','maxSpotColor','minSpotColor','name','nameable','normalRangeColor','normalRangeMax','normalRangeMin','plugins','publishes','reference','renderTo','ripple','session','shareableName','spotColor','spotRadius','style','tipTpl','tooltipPrefix','tooltipSkipNull','tooltipSuffix','touchAction','twoWayBindable','ui','userCls','values','valueSpots','viewModel','width',],
-    outputs: ['ready','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','widthchange',],
+    outputs: ['ready','created','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','widthchange',],
     providers: [{provide: EngBase, useExisting: forwardRef(() => ExtSparklinelineComponent)}],
     template: '<ng-content></ng-content>'
 })
@@ -31,7 +31,7 @@ export class ExtSparklinelineComponent extends EngBase {
             hostComponent,
             ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','ariaAttributes','ariaDescribedBy','ariaLabel','ariaLabelledBy','bind','border','chartRangeMax','chartRangeMaxX','chartRangeMin','chartRangeMinX','cls','controller','defaultListenerScope','disabled','disableTooltips','drawNormalOnTop','undefined','fillColor','focusCls','height','hidden','hideMode','highlightColor','highlightLighten','highlightLineColor','highlightSpotColor','instanceCls','keyMap','keyMapEnabled','keyMapTarget','lineColor','lineWidth','listeners','margin','maxSpotColor','minSpotColor','name','nameable','normalRangeColor','normalRangeMax','normalRangeMin','plugins','publishes','reference','renderTo','ripple','session','shareableName','spotColor','spotRadius','style','tipTpl','tooltipPrefix','tooltipSkipNull','tooltipSuffix','touchAction','twoWayBindable','ui','userCls','values','valueSpots','viewModel','width',],
             (new EWCSparklineline()).events,
-            ['ready','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','widthchange',],
+            ['ready','created','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','widthchange',],
             vc
         )
         this.xtype = 'sparklineline'

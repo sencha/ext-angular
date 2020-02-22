@@ -16,7 +16,7 @@ import { EngBase } from './runtime/angularbase';
 @Component({
     selector: 'ExtTreelistitem',
     inputs: ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','alignSelf','alwaysOnTop','ariaAttributes','ariaDescribedBy','ariaLabel','ariaLabelledBy','bind','border','cls','constrainAlign','controller','defaultListenerScope','disabled','undefined','expandable','expanded','flex','floated','focusCls','height','hidden','hideMode','iconCls','iconClsProperty','id','instanceCls','itemId','keyMap','keyMapEnabled','keyMapTarget','leaf','listeners','loading','margin','name','nameable','node','over','owner','parentItem','plugins','publishes','reference','relative','renderTo','ripple','rowCls','rowClsProperty','selected','selectedParent','session','shadow','shareableName','shim','style','text','textProperty','toFrontOnShow','touchAction','translatable','twoWayBindable','ui','userCls','viewModel','width','x','y',],
-    outputs: ['ready','beforedisabledchange','beforeheightchange','beforehiddenchange','beforetofront','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','tofront','widthchange',],
+    outputs: ['ready','created','beforedisabledchange','beforeheightchange','beforehiddenchange','beforetofront','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','tofront','widthchange',],
     providers: [{provide: EngBase, useExisting: forwardRef(() => ExtTreelistitemComponent)}],
     template: '<ng-content></ng-content>'
 })
@@ -31,7 +31,7 @@ export class ExtTreelistitemComponent extends EngBase {
             hostComponent,
             ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','alignSelf','alwaysOnTop','ariaAttributes','ariaDescribedBy','ariaLabel','ariaLabelledBy','bind','border','cls','constrainAlign','controller','defaultListenerScope','disabled','undefined','expandable','expanded','flex','floated','focusCls','height','hidden','hideMode','iconCls','iconClsProperty','id','instanceCls','itemId','keyMap','keyMapEnabled','keyMapTarget','leaf','listeners','loading','margin','name','nameable','node','over','owner','parentItem','plugins','publishes','reference','relative','renderTo','ripple','rowCls','rowClsProperty','selected','selectedParent','session','shadow','shareableName','shim','style','text','textProperty','toFrontOnShow','touchAction','translatable','twoWayBindable','ui','userCls','viewModel','width','x','y',],
             (new EWCTreelistitem()).events,
-            ['ready','beforedisabledchange','beforeheightchange','beforehiddenchange','beforetofront','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','tofront','widthchange',],
+            ['ready','created','beforedisabledchange','beforeheightchange','beforehiddenchange','beforetofront','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','tofront','widthchange',],
             vc
         )
         this.xtype = 'treelistitem'

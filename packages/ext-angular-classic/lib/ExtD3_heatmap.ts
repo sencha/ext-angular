@@ -16,7 +16,7 @@ import { EngBase } from './runtime/angularbase';
 @Component({
     selector: 'ExtD3_heatmap',
     inputs: ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','ariaAttributes','ariaDescribedBy','ariaLabel','ariaLabelledBy','bind','border','clipScene','cls','colorAxis','componentCls','controller','defaultListenerScope','disabled','undefined','focusCls','height','hidden','hideMode','instanceCls','interactions','keyMap','keyMapEnabled','keyMapTarget','labels','legend','listeners','margin','name','nameable','padding','plugins','publishes','reference','renderTo','ripple','session','shareableName','size','store','style','tiles','tooltip','touchAction','transitions','twoWayBindable','ui','userCls','viewModel','width','xAxis','yAxis',],
-    outputs: ['ready','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','sceneresize','scenesetup','widthchange',],
+    outputs: ['ready','created','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','sceneresize','scenesetup','widthchange',],
     providers: [{provide: EngBase, useExisting: forwardRef(() => ExtD3_heatmapComponent)}],
     template: '<ng-content></ng-content>'
 })
@@ -31,7 +31,7 @@ export class ExtD3_heatmapComponent extends EngBase {
             hostComponent,
             ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','ariaAttributes','ariaDescribedBy','ariaLabel','ariaLabelledBy','bind','border','clipScene','cls','colorAxis','componentCls','controller','defaultListenerScope','disabled','undefined','focusCls','height','hidden','hideMode','instanceCls','interactions','keyMap','keyMapEnabled','keyMapTarget','labels','legend','listeners','margin','name','nameable','padding','plugins','publishes','reference','renderTo','ripple','session','shareableName','size','store','style','tiles','tooltip','touchAction','transitions','twoWayBindable','ui','userCls','viewModel','width','xAxis','yAxis',],
             (new EWCD3_heatmap()).events,
-            ['ready','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','sceneresize','scenesetup','widthchange',],
+            ['ready','created','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','sceneresize','scenesetup','widthchange',],
             vc
         )
         this.xtype = 'd3-heatmap'

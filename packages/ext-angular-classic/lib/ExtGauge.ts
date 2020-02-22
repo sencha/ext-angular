@@ -16,7 +16,7 @@ import { EngBase } from './runtime/angularbase';
 @Component({
     selector: 'ExtGauge',
     inputs: ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','angleOffset','animation','ariaAttributes','ariaDescribedBy','ariaLabel','ariaLabelledBy','bind','border','clockwise','cls','controller','defaultListenerScope','disabled','undefined','focusCls','height','hidden','hideMode','instanceCls','keyMap','keyMapEnabled','keyMapTarget','listeners','margin','maxValue','minValue','name','nameable','needle','padding','plugins','publishes','reference','renderTo','ripple','session','shareableName','style','textAlign','textOffset','textTpl','touchAction','trackLength','trackStart','trackStyle','twoWayBindable','ui','userCls','value','valueStyle','viewModel','width',],
-    outputs: ['ready','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','widthchange',],
+    outputs: ['ready','created','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','widthchange',],
     providers: [{provide: EngBase, useExisting: forwardRef(() => ExtGaugeComponent)}],
     template: '<ng-content></ng-content>'
 })
@@ -31,7 +31,7 @@ export class ExtGaugeComponent extends EngBase {
             hostComponent,
             ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','angleOffset','animation','ariaAttributes','ariaDescribedBy','ariaLabel','ariaLabelledBy','bind','border','clockwise','cls','controller','defaultListenerScope','disabled','undefined','focusCls','height','hidden','hideMode','instanceCls','keyMap','keyMapEnabled','keyMapTarget','listeners','margin','maxValue','minValue','name','nameable','needle','padding','plugins','publishes','reference','renderTo','ripple','session','shareableName','style','textAlign','textOffset','textTpl','touchAction','trackLength','trackStart','trackStyle','twoWayBindable','ui','userCls','value','valueStyle','viewModel','width',],
             (new EWCGauge()).events,
-            ['ready','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','widthchange',],
+            ['ready','created','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','widthchange',],
             vc
         )
         this.xtype = 'gauge'
