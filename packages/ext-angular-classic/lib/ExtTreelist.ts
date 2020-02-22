@@ -16,7 +16,7 @@ import { EngBase } from './runtime/angularbase';
 @Component({
     selector: 'ExtTreelist',
     inputs: ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','ariaAttributes','ariaDescribedBy','ariaLabel','ariaLabelledBy','bind','border','cls','controller','defaultListenerScope','defaults','disabled','undefined','expanderFirst','expanderOnly','floatLeafItems','focusCls','height','hidden','hideMode','highlightPath','indent','instanceCls','itemRipple','keyMap','keyMapEnabled','keyMapTarget','listeners','margin','micro','name','nameable','plugins','publishes','reference','renderTo','ripple','selection','selectOnExpander','session','shareableName','singleExpand','store','style','touchAction','twoWayBindable','ui','userCls','viewModel','width',],
-    outputs: ['ready','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','itemclick','selectionchange','widthchange',],
+    outputs: ['ready','created','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','itemclick','selectionchange','widthchange',],
     providers: [{provide: EngBase, useExisting: forwardRef(() => ExtTreelistComponent)}],
     template: '<ng-content></ng-content>'
 })
@@ -31,7 +31,7 @@ export class ExtTreelistComponent extends EngBase {
             hostComponent,
             ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','ariaAttributes','ariaDescribedBy','ariaLabel','ariaLabelledBy','bind','border','cls','controller','defaultListenerScope','defaults','disabled','undefined','expanderFirst','expanderOnly','floatLeafItems','focusCls','height','hidden','hideMode','highlightPath','indent','instanceCls','itemRipple','keyMap','keyMapEnabled','keyMapTarget','listeners','margin','micro','name','nameable','plugins','publishes','reference','renderTo','ripple','selection','selectOnExpander','session','shareableName','singleExpand','store','style','touchAction','twoWayBindable','ui','userCls','viewModel','width',],
             (new EWCTreelist()).events,
-            ['ready','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','itemclick','selectionchange','widthchange',],
+            ['ready','created','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','itemclick','selectionchange','widthchange',],
             vc
         )
         this.xtype = 'treelist'

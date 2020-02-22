@@ -16,7 +16,7 @@ import { EngBase } from './runtime/angularbase';
 @Component({
     selector: 'ExtInteraction',
     inputs: ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','chart','enabled','gesture','listeners',],
-    outputs: ['ready',],
+    outputs: ['ready','created',],
     providers: [{provide: EngBase, useExisting: forwardRef(() => ExtInteractionComponent)}],
     template: '<ng-content></ng-content>'
 })
@@ -31,7 +31,7 @@ export class ExtInteractionComponent extends EngBase {
             hostComponent,
             ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','chart','enabled','gesture','listeners',],
             (new EWCInteraction()).events,
-            ['ready',],
+            ['ready','created',],
             vc
         )
         this.xtype = 'interaction'

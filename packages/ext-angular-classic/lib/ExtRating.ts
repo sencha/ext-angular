@@ -16,7 +16,7 @@ import { EngBase } from './runtime/angularbase';
 @Component({
     selector: 'ExtRating',
     inputs: ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','animate','ariaAttributes','ariaDescribedBy','ariaLabel','ariaLabelledBy','bind','border','cls','controller','defaultListenerScope','disabled','undefined','family','focusCls','glyphs','height','hidden','hideMode','instanceCls','keyMap','keyMapEnabled','keyMapTarget','limit','listeners','margin','minimum','name','nameable','overStyle','plugins','publishes','reference','renderTo','ripple','rounding','scale','selectedStyle','session','shareableName','style','tip','tooltipText','touchAction','trackingValue','trackOver','twoWayBindable','ui','userCls','value','viewModel','width',],
-    outputs: ['ready','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','widthchange',],
+    outputs: ['ready','created','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','widthchange',],
     providers: [{provide: EngBase, useExisting: forwardRef(() => ExtRatingComponent)}],
     template: '<ng-content></ng-content>'
 })
@@ -31,7 +31,7 @@ export class ExtRatingComponent extends EngBase {
             hostComponent,
             ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','animate','ariaAttributes','ariaDescribedBy','ariaLabel','ariaLabelledBy','bind','border','cls','controller','defaultListenerScope','disabled','undefined','family','focusCls','glyphs','height','hidden','hideMode','instanceCls','keyMap','keyMapEnabled','keyMapTarget','limit','listeners','margin','minimum','name','nameable','overStyle','plugins','publishes','reference','renderTo','ripple','rounding','scale','selectedStyle','session','shareableName','style','tip','tooltipText','touchAction','trackingValue','trackOver','twoWayBindable','ui','userCls','value','viewModel','width',],
             (new EWCRating()).events,
-            ['ready','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','widthchange',],
+            ['ready','created','beforedisabledchange','beforeheightchange','beforehiddenchange','beforewidthchange','blur','disabledchange','focus','focusenter','focusleave','heightchange','hiddenchange','widthchange',],
             vc
         )
         this.xtype = 'rating'

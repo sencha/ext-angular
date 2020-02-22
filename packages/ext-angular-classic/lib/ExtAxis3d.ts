@@ -16,7 +16,7 @@ import { EngBase } from './runtime/angularbase';
 @Component({
     selector: 'ExtAxis3d',
     inputs: ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','adjustByMajorUnit','background','center','chart','depth','expandRangeBy','fields','floating','grid','hidden','id','label','layout','length','limits','linkedTo','listeners','majorTickSteps','margin','maximum','maxZoom','minimum','minorTickSteps','minZoom','needHighPrecision','position','radius','reconcileRange','renderer','rotation','segmenter','style','title','titleMargin','totalAngle','visibleRange',],
-    outputs: ['ready','rangechange','visiblerangechange',],
+    outputs: ['ready','created','rangechange','visiblerangechange',],
     providers: [{provide: EngBase, useExisting: forwardRef(() => ExtAxis3dComponent)}],
     template: '<ng-content></ng-content>'
 })
@@ -31,7 +31,7 @@ export class ExtAxis3dComponent extends EngBase {
             hostComponent,
             ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','adjustByMajorUnit','background','center','chart','depth','expandRangeBy','fields','floating','grid','hidden','id','label','layout','length','limits','linkedTo','listeners','majorTickSteps','margin','maximum','maxZoom','minimum','minorTickSteps','minZoom','needHighPrecision','position','radius','reconcileRange','renderer','rotation','segmenter','style','title','titleMargin','totalAngle','visibleRange',],
             (new EWCAxis3d()).events,
-            ['ready','rangechange','visiblerangechange',],
+            ['ready','created','rangechange','visiblerangechange',],
             vc
         )
         this.xtype = 'axis3d'

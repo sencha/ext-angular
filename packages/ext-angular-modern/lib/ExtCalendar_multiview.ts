@@ -16,7 +16,7 @@ import { EngBase } from './runtime/angularbase';
 @Component({
     selector: 'ExtCalendar_multiview',
     inputs: ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','compact','compactOptions','defaultView','layout','store','timezoneOffset','value','views',],
-    outputs: ['ready',],
+    outputs: ['ready','created',],
     providers: [{provide: EngBase, useExisting: forwardRef(() => ExtCalendar_multiviewComponent)}],
     template: '<ng-content></ng-content>'
 })
@@ -31,7 +31,7 @@ export class ExtCalendar_multiviewComponent extends EngBase {
             hostComponent,
             ['aMe', 'header', 'renderer', 'label','fitToParent','tab','config','platformConfig','extname','viewport','align','plugins','responsiveConfig','responsiveFormulas','compact','compactOptions','defaultView','layout','store','timezoneOffset','value','views',],
             (new EWCCalendar_multiview()).events,
-            ['ready',],
+            ['ready','created',],
             vc
         )
         this.xtype = 'calendar-multiview'
