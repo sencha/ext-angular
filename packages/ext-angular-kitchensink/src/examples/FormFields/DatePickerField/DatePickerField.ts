@@ -11,6 +11,6 @@ export class DatePickerFieldComponent {
   top = !this.isPhone ? '10' : null
   left = !this.isPhone ? '10' : null
   width = !this.isPhone ? '400' : null
-  height = !this.isPhone ? '600' : null 
-  date:Date = new Date();
+  height = !this.isPhone ? '600' : null
+  date:String = new Date().toString();
 }
