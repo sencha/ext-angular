@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
   <head>
     <title>ExtAngular 7.2 Kitchen Sink</title>
     <base href="/">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes">
-    <script src="resources/code.js"></script>
     <link rel="icon" type="image/x-icon" href="resources/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="resources/loader.css"/>
+    <script src="resources/code.js"></script>
     <script src="webcomponents-bundle.js"></script>
     <script>
       //https://examples-test.sencha.com/ExtAngular/7.0.0/kitchensink/frame-index.html?basecolor=slategray&title=Angular UI Toolkit
@@ -24,7 +25,6 @@
            return decodeURI(results[1]) || 0;
         }
       }
-      // const params = new URLSearchParams(window.location.search);
       const basecolor = getURLParamInfo("basecolor");
       window['title'] = getURLParamInfo("title");
       var d = document.documentElement.style
@@ -33,7 +33,10 @@
         d.setProperty('--color', basecolor);
       }
     </script>
-    <link rel="stylesheet" type="text/css" href="resources/loader.css"/>
+
+    <link href="ext/ext.css" rel="stylesheet"></head>
+    <!-- 
+    <script type="text/javascript" src="ext/ext.js"></script> -->
   </head>
   <body>
     <app-root>

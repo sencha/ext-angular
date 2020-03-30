@@ -60,11 +60,15 @@ module.exports = function (env) {
   var basehref      = get('basehref',      '/')
   var build_v       = get('build_v',       '7.2.0.0');
 
+  var sdkTarget = env['SDK_TARGET'] || 'SDK_FULL'
+  console.log(sdkTarget)
+
   const isProd = environment === 'production'
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
     const plugins = [
-      new HtmlWebpackPlugin({template: "index.html",hash: true,inject: "body"}),
+      new HtmlWebpackPlugin({template: "index.html.tpl",hash: true,inject: "body"}),
+      //new HtmlWebpackPlugin({template: "index.html"}),
       new BaseHrefWebpackPlugin({ baseHref: basehref }),
       new ExtWebpackPlugin({
         framework: framework,
@@ -72,7 +76,7 @@ module.exports = function (env) {
         theme: theme,
         packages: packages,
         script: script,
-        emit: emit,
+        emit: 'yes',
         port: port,
         profile: profile,
         environment: environment,
@@ -103,11 +107,24 @@ module.exports = function (env) {
         to: './ext/ux'
     }]),
     new CopyWebpackPlugin([{
-        from: './polyfillsContainer',
-        to: './webcomponents-bundle.js'
+      from: './polyfillsContainer',
+      to: './'
     }]),
+    // new CopyWebpackPlugin([{
+    //     from: './polyfillsContainer',
+    //     to: './webcomponents-bundle.js'
+    // }]),
+    new webpack.NormalModuleReplacementPlugin(
+      /(.*).SDK_LOAD(\.*)/,
+      function(resource){
+        resource.request = resource.request
+          .replace(/.SDK_LOAD/, `.${sdkTarget}`);
+      }
+    ),
     new webpack.DefinePlugin({
-        BUILD_VERSION: JSON.stringify(build_v)
+      INCLUDE_ENGINE: false,
+
+      BUILD_VERSION: JSON.stringify(build_v)
     })
     ]
     return {

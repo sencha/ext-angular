@@ -68,9 +68,10 @@ function extractFrom(example, file, fullPath) {
 
 function run() {
   var outputDir = path.join(__dirname, 'build', 'resources')
+  //var outputDir = path.join(__dirname, 'resources')
   extractAll(examples)
   mkdirp(outputDir)
-  fs.writeFileSync(path.join(outputDir, 'code.js'), `window._code = ${JSON.stringify(result, null, '\t')}`, 'utf8')
+  fs.writeFileSync(path.join(outputDir, 'code.js'), ` function getIt() { window._code = ${JSON.stringify(result, null, '\t')} }`, 'utf8')
 
   var chalk = require('chalk')
   var prefix = ``

@@ -1,19 +1,15 @@
 <ExtContainer padding="10" layout="fit" [fitToParent]="true">
-    <ExtPanel [shadow]="true" [layout]="'fit'">
+    <!-- <ExtPanel [shadow]="true" layout="fit">
 
         <ExtToolbar [docked]="'top'">
             <ExtContainer>
-                <ExtContainer>
-                    <span #extitem>
-                        <div style="font-size: 14px;">
-                            Use your {{ supportsTouch ? "finger" : "mouse" }} to
-                            paint on the surface below.
-                        </div>
-                    </span>
-                </ExtContainer>
+              <div #extitem style="font-size: 14px;">
+                Use your {{ supportsTouch ? "finger" : "mouse" }} to
+                paint on the surface below.
+              </div>
             </ExtContainer>
             <ExtSpacer></ExtSpacer>
-            <ExtButton (tap)="clear()" [text]="'Clear'"> </ExtButton>
+            <ExtButton (tap)="clear()" text="Clear"></ExtButton>
         </ExtToolbar>
 
         <ExtDraw
@@ -22,5 +18,5 @@
         >
         </ExtDraw>
 
-    </ExtPanel>
+    </ExtPanel> -->
 </ExtContainer>
