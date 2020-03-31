@@ -66,17 +66,17 @@ module.exports = function (env) {
 
       new AngularCompilerPlugin({
         tsConfigPath: './tsconfig.json',
-       // entryModule: "src/app/app.module#AppModule",
+        entryModule: "src/app/app.module#AppModule",
         mainPath: "./src/main.ts",
         skipCodeGeneration: true
       }),
-      new webpack.ContextReplacementPlugin(
-        /\@angular(\\|\/)core(\\|\/)fesm5/,
-        path.resolve(__dirname, 'src'),{}
-      ),
-      new FilterWarningsPlugin({
-        exclude: /System.import/
-      }),
+      // new webpack.ContextReplacementPlugin(
+      //   /\@angular(\\|\/)core(\\|\/)fesm5/,
+      //   path.resolve(__dirname, 'src'),{}
+      // ),
+      // new FilterWarningsPlugin({
+      //   exclude: /System.import/
+      // }),
       new webpack.HotModuleReplacementPlugin()
     ]
     return {
@@ -103,12 +103,12 @@ module.exports = function (env) {
       node: false,
       devServer: {
         contentBase: outputFolder,
-        hot: !isProd,
         historyApiFallback: true,
         host: '0.0.0.0',
         port: port,
         disableHostCheck: false,
-        compress: isProd,
+        hot: !isProd,
+        compress: !isProd,
         inline:!isProd,
         stats: 'none'
       }

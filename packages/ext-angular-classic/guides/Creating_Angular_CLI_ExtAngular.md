@@ -144,7 +144,7 @@ import { Component } from '@angular/core';
     flex="1"
     [title]="title"
     extname="grid"
-    columns='[
+    [columns]='[
       { "text":"name", "dataIndex":"name" },
       { "text":"email", "dataIndex":"email", "flex": "1" }
     ]'

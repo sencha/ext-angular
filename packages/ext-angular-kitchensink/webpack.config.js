@@ -114,16 +114,14 @@ module.exports = function (env) {
     //     from: './polyfillsContainer',
     //     to: './webcomponents-bundle.js'
     // }]),
-    new webpack.NormalModuleReplacementPlugin(
-      /(.*).SDK_LOAD(\.*)/,
-      function(resource){
-        resource.request = resource.request
-          .replace(/.SDK_LOAD/, `.${sdkTarget}`);
-      }
-    ),
+    // new webpack.NormalModuleReplacementPlugin(
+    //   /(.*).SDK_LOAD(\.*)/,
+    //   function(resource){
+    //     resource.request = resource.request
+    //       .replace(/.SDK_LOAD/, `.${sdkTarget}`);
+    //   }
+    // ),
     new webpack.DefinePlugin({
-      INCLUDE_ENGINE: false,
-
       BUILD_VERSION: JSON.stringify(build_v)
     })
     ]

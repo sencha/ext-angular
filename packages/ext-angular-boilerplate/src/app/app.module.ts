@@ -7,7 +7,14 @@ import { HomeComponent } from './Home/home.component'
 import { AboutComponent } from './About/about.component'
 import { NavMenuComponent } from './NavMenu/navmenu.component'
 import '../themer.ts'
-import { ExtAngularModernModule } from '@sencha/ext-angular-modern';
+//import { ExtAngularModernModule } from '@sencha/ext-angular-modern';
+
+import { ExtPanelComponent } from '@sencha/ext-angular-modern/lib/ExtPanel';
+import { ExtContainerComponent } from '@sencha/ext-angular-modern/lib/ExtContainer';
+import { ExtTitlebarComponent } from '@sencha/ext-angular-modern/lib/ExtTitlebar';
+import { ExtButtonComponent } from '@sencha/ext-angular-modern/lib/ExtButton';
+import { ExtTreelistComponent } from '@sencha/ext-angular-modern/lib/ExtTreelist';
+import { ExtGridComponent } from '@sencha/ext-angular-modern/lib/ExtGrid';
 
 const routes: Route[] = [
   { path: '', redirectTo: 'about', pathMatch: 'full' },
@@ -19,14 +26,20 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes, {
 @NgModule({
   imports: [
     BrowserModule,
-    routingModule,
-    ExtAngularModernModule
+    routingModule
+    //ExtAngularModernModule
   ],
   declarations: [
     AppComponent,
     HomeComponent,
     AboutComponent,
-    NavMenuComponent
+    NavMenuComponent,
+    ExtPanelComponent,
+    ExtContainerComponent,
+    ExtTitlebarComponent,
+    ExtButtonComponent,
+    ExtTreelistComponent,
+    ExtGridComponent
   ],
     providers: [],
     bootstrap: [AppComponent]

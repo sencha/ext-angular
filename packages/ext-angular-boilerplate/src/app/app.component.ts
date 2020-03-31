@@ -3,7 +3,42 @@ import { Component, VERSION } from "@angular/core";
 
 @Component({
   selector: "app-root",
-  templateUrl: "app.component.html",
+  //templateUrl: "app.component.html",
+  template: `
+  <ExtContainer
+  (ready)="readyViewport($event)"
+  [viewport]="true"
+  layout="fit"
+  padding="0 0 0 10"
+>
+
+  <ExtTitlebar [title]="title" docked="top">
+    <ExtButton align="left" [hidden]="false" iconCls="x-fa fa-bars" (tap)="toggleAppMenu($event)" ripple="false"></ExtButton>
+  </ExtTitlebar>
+
+  <ExtPanel docked="left" shadow="true" [hidden]="hideAppMenu">
+    <ExtTreelist
+      extname="navTreelist"
+      (selectionchange)="selectionchangeNavTreeList($event)"
+      [width]="200"
+      ui="nav"
+      expanderFirst="false"
+    >
+    </ExtTreelist>
+  </ExtPanel>
+
+  <ExtContainer
+    extname="router"
+    scrollable="true"
+    layout="fit"
+  >
+    <div #extitem style="width:100%;">
+      <router-outlet id="route"></router-outlet>
+    </div>
+  </ExtContainer>
+
+</ExtContainer>
+  `,
   styles: [``]
 })
 export class AppComponent {

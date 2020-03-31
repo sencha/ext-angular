@@ -224,14 +224,10 @@ import {GridService} from '../examples/Grid/Grid.service'
 import {BigDataService} from '../examples/Grid/AdvancedFeatures/BigData/BigData.service'
 import {GridFilteringService} from '../examples/Grid/AddonsDecorations/GridFiltering/GridFiltering.service'
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
-
     DummyComponent,
-
     ButtonComponent,
     SplitButtonComponent,
     SegmentedButtonComponent,

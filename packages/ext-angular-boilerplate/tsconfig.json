@@ -27,7 +27,8 @@
     "preserveSymlinks": true
   },
   "include": [
+    "**/lib/**/*.ts",
     "src/**/*.ts",
-    "node_modules/@sencha/**/*.ts"
+    "node_modules/@sencha/**/*.ts",
   ]
 }
