@@ -40,6 +40,7 @@ function extractAll(dir) {
 function extractFrom(example, file, fullPath) {
   if (!fs.existsSync(fullPath)) return
   const content = fs.readFileSync(path.join(fullPath), 'utf8')
+
   const importRegex = /import[^'"]+['"]([^'"]+)['"];/gi
   const htmlRegex = /[ ]+templateUrl[^'"]+['"]([^'"]+)['"],/gi
   const styleRegex =   /[ ]+styleUrls[^'"]+['"]([^'"]+)['"]],/gi
@@ -71,7 +72,12 @@ function run() {
   //var outputDir = path.join(__dirname, 'resources')
   extractAll(examples)
   mkdirp(outputDir)
-  fs.writeFileSync(path.join(outputDir, 'code.js'), ` function getIt() { window._code = ${JSON.stringify(result, null, '\t')} }`, 'utf8')
+  //fs.writeFileSync(path.join(outputDir, 'code.js'), ` function getIt() { window._code = ${JSON.stringify(result, null, '\t')} }`, 'utf8')
+  var r = `${JSON.stringify(result, null, '\t')}`
+  var r2 = r.replace(/\/\//g, '\\/\\/');
+  //console.log(r)
+  //fs.writeFileSync(path.join(outputDir, 'code.js'), `window._code = ${JSON.stringify(result, null, '\t')}`, 'utf8')
+  fs.writeFileSync(path.join(outputDir, 'code.js'), `window._code = ${r2}`, 'utf8')
 
   var chalk = require('chalk')
   var prefix = ``

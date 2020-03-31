@@ -26,7 +26,7 @@
   <ExtPanel #layoutProps padding="10" [shadow]="true" [defaults]="{layout: 'hbox', flex:'1', margin: '10', width: '100%'}">
     <ExtContainer layout="hbox">
       <ExtContainer layout="hbox">
-        <div flex="1" #groupLabelProps1 style="tExtAlign:right;margin:24px 20px 0 0;width: 100px">Default</div>
+        <div #extitem flex="1" #groupLabelProps1 style="text-align:right;margin:24px 20px 0 0;width: 100px">Default</div>
       </ExtContainer>
       <ExtContainer flex="3" [cls]="'button-group'" #buttonGroupProps1 padding= '17 0 17 20' [layout]="{ type: 'hbox', align: 'middle', pack: 'space-around' }" flex='1' margin='0 20 0 0' width=400 [defaults]="{margin: '0 20 0 0'}">
         <ExtButton [text]="text? 'Normal' : '' "  [ui]="ui" [iconCls]="iconCls" arrowAlign="bottom" (ready)="menuButtonReady($event)">
@@ -54,7 +54,7 @@
     </ExtContainer>
     <ExtContainer layout="hbox">
       <ExtContainer layout="hbox">
-        <div flex="1" #groupLabelProps2 width='70px' style="tExtAlign:right;margin:24px 20px 0 0;width: 100px">Alt</div>
+        <div #extitem flex="1" #groupLabelProps2 width='70px' style="text-align:right;margin:24px 20px 0 0;width: 100px">Alt</div>
       </ExtContainer>
       <ExtContainer flex="3" [cls]="'button-group button-group-alt'" #buttonGroupProps2 padding= '17 0 17 20' [layout]="{ type: 'hbox', align: 'middle', pack: 'space-around' }" flex='1' margin='0 20 0 0' width=400 [defaults]="{margin: '0 20 0 0'}">
         <ExtButton [text]="text?  'Normal': ''" [ui]="ui + ' alt'" [iconCls]="iconCls" (ready)="menuButtonReady($event)">
@@ -82,7 +82,7 @@
     </ExtContainer>
     <ExtContainer layout="hbox">
       <ExtContainer layout="hbox">
-        <div flex="1" #groupLabelProps3 style="tExtAlign:right;margin:24px 20px 0 0;width: 100px">Raised</div>
+        <div #extitem flex="1" #groupLabelProps3 style="text-align:right;margin:24px 20px 0 0;width: 100px">Raised</div>
       </ExtContainer>
       <ExtContainer flex="3" [cls]="'button-group'" #buttonGroupProps3 padding= '17 0 17 20' [layout]="{ type: 'hbox', align: 'middle', pack: 'space-around' }" flex='1' margin='0 20 0 0' width=400 [defaults]="{margin: '0 20 0 0'}">
         <ExtButton [text]="text?  'Normal' : ''"  [ui]="ui + ' raised'" [iconCls]="iconCls" (ready)="menuButtonReady($event)">
@@ -110,7 +110,7 @@
     </ExtContainer>
     <ExtContainer layout="hbox">
       <ExtContainer layout="hbox">
-        <div flex="1" #groupLabelProps4 style="tExtAlign:right;margin:24px 20px 0 0;width: 100px">Alt Raised</div>
+        <div #extitem flex="1" #groupLabelProps4 style="text-align:right;margin:24px 20px 0 0;width: 100px">Alt Raised</div>
       </ExtContainer>
       <ExtContainer flex="3" [cls]="'button-group button-group-alt'" #buttonGroupProps4 padding= '17 0 17 20' [layout]="{ type: 'hbox', align: 'middle', pack: 'space-around' }" flex='1' margin='0 20 0 0' width=400 [defaults]="{margin: '0 20 0 0'}">
         <ExtButton [text]="text?  'Normal' : '' " [ui]="ui + ' alt raised'" [iconCls]="iconCls" (ready)="menuButtonReady($event)">
