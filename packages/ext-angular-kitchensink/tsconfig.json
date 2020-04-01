@@ -11,7 +11,7 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "typeRoots": ["node_modules/@types"],
-    "target": "es2015",
+    "target": "es5",
     "lib": [
       "es2018",
       "dom"

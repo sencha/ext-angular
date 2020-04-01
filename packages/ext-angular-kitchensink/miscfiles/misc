@@ -6,6 +6,10 @@ https://www.npmjs.com/package/@angular-builders/custom-webpack#index-transform
 
 https://github.com/just-jeb/angular-builders/tree/master/packages/custom-webpack/examples/full-cycle-app
 
+https://angular.io/guide/deployment#differential-loading
+
+https://stackoverflow.com/questions/59531305/call-retries-were-exceeded-exception-while-ng-build
+
     "html-loader": "~1.0.0",
     "dotenv-webpack": "^1.7.0",
         "base-href-webpack-plugin": "2.0.0",
