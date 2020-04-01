@@ -1,0 +1,30 @@
+ "builder": "@angular-builders/custom-webpack:dev-server",
+
+               "path": "./custom-webpack.config.js",
+
+https://www.npmjs.com/package/@angular-builders/custom-webpack#index-transform
+
+https://github.com/just-jeb/angular-builders/tree/master/packages/custom-webpack/examples/full-cycle-app
+
+    "html-loader": "~1.0.0",
+    "dotenv-webpack": "^1.7.0",
+        "base-href-webpack-plugin": "2.0.0",
+
+          if (vars.watchStarted == false) {
+            await _buildExtBundle(app, compilation, outputPath, parms, vars, options)
+            if (command == 'watch') {
+              vars.watchStarted = true
+            }
+            else {
+              vars.callback()
+            }
+          }
+
+
+            "styles": [
+              "src/styles.css",
+              "ext-runtime-modern/material/material-all.css"
+            ],
+            "scripts": [
+              "ext-runtime-modern/modern.engine.enterprise.js"
+            ]

@@ -39,6 +39,7 @@ export class AppComponent {
 
   collapseCode: boolean = true;
   hideExamples: any = true;
+  hideSelections: any = true;
   showTreeFlag: any = false;
 
   blockstyle: any = {
@@ -179,13 +180,13 @@ export class AppComponent {
     this.nav(node);
   };
 
-  toggleCode = () => {
+  toggleCode = (event) => {
     //this.codePanelCmp.setCollapsed(this.showCode)
     this.collapseCode = !this.collapseCode;
     this.cd.detectChanges();
   };
 
-  itemtapNestedList = (event, record) => {
+  itemtapNestedList = (event) => {
     var id = event.record.data.id;
     this.onNavChange(id, event.record);
   };

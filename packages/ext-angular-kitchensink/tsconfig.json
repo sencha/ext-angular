@@ -1,29 +1,24 @@
 {
-  "compileOnSave": true,
-  "exclude": [
-    "node_modules",
-    "src/themer.ts"
-  ],
-
+  "compileOnSave": false,
   "compilerOptions": {
-
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "module": "commonjs",
-    "target": "es5",
-    "moduleResolution": "node",
+    "downlevelIteration": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "noImplicitAny": false,
-    "suppressImplicitAnyIndexErrors": true,
-    "preserveSymlinks": true,
-    "lib": ["es2018","dom"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
     "typeRoots": ["node_modules/@types"],
-    "paths": {
-      "@angular/*": ["node_modules/@angular/*"],
-      "@sencha/*": ["node_modules/@sencha/*"]
-    }
+    "target": "es2015",
+    "lib": [
+      "es2018",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
   }
 }
