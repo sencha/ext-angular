@@ -5,6 +5,8 @@
 https://www.npmjs.com/package/@angular-builders/custom-webpack#index-transform
 
 https://github.com/just-jeb/angular-builders/tree/master/packages/custom-webpack/examples/full-cycle-app
+https://github.com/angular/angular-cli/blob/master/packages/angular_devkit/build_angular/src/angular-cli-files/plugins/index-html-webpack-plugin.ts
+
 
 https://angular.io/guide/deployment#differential-loading
 
