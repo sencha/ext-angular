@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes">
+  <link rel="icon" type="image/x-icon" href="resources/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="resources/loader.css"/>
+  <script src="resources/code.js"></script>
+  <!-- <script src="webcomponents-bundle.js"></script> -->
+  <script>
+    //https://examples-test.sencha.com/ExtAngular/7.0.0/kitchensink/frame-index.html?basecolor=slategray&title=Angular UI Toolkit
+    //http://localhost:1841/?basecolor=maroon&title=Angular UI Toolkit
+    //https://www.rapidtables.com/web/color/red-color.html
+
+    // Alternative of URLSearchParams
+    function getURLParamInfo(name) {
+      var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+      if (results == null){
+         return null;
+      }
+      else {
+         return decodeURI(results[1]) || 0;
+      }
+    }
+    const basecolor = getURLParamInfo("basecolor");
+    window['title'] = getURLParamInfo("title");
+    var d = document.documentElement.style
+    if (basecolor != null) {
+      d.setProperty('--base-color', basecolor);
+      d.setProperty('--color', basecolor);
+    }
+  </script>
+  <link href="ext/ext.css" rel="stylesheet"><link href="ext/ext.css" rel="stylesheet">
+</head>
+<body>
+  <app-root>
+    <div id="loadingSplash">
+      <div id="loadingSplashTop"></div>
+      <div id="loadingSplashBottom"></div>
+      <div class="loading-fading-circle" id="loadingSplashCircles">
+        <div class="loading-circle-1 loading-circle"></div>
+        <div class="loading-circle-2 loading-circle"></div>
+        <div class="loading-circle-3 loading-circle"></div>
+        <div class="loading-circle-4 loading-circle"></div>
+        <div class="loading-circle-5 loading-circle"></div>
+        <div class="loading-circle-6 loading-circle"></div>
+        <div class="loading-circle-7 loading-circle"></div>
+        <div class="loading-circle-8 loading-circle"></div>
+        <div class="loading-circle-9 loading-circle"></div>
+        <div class="loading-circle-10 loading-circle"></div>
+        <div class="loading-circle-11 loading-circle"></div>
+        <div class="loading-circle-12 loading-circle"></div>
+      </div>
+    </div>
+  </app-root>
+  <script type="text/javascript" src="ext/ext.js"></script>
+</body>
+</html>
