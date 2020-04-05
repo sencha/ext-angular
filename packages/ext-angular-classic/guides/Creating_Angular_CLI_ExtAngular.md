@@ -43,6 +43,7 @@ ng new ext-angular-classic-demo --minimal=true --interactive=false -g=true --ski
 ```sh
 cd ext-angular-classic-demo
 npm install @sencha/ext-angular-classic --save
+npm install @sencha/ext-classic-runtime --save
 ```
 
 - Open your editor

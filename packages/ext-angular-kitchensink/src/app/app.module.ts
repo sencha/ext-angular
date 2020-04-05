@@ -1,21 +1,25 @@
-declare var Ext: any;
+//declare var Ext: any;
 import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
+//import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+//import { AppService } from './app.service'
+//import * as d3 from 'd3'
+//window['d3'] = d3
+//import * as FroalaEditor from 'froala-editor/js/froala_editor.pkgd.min.js';
+//window['FroalaEditor'] = FroalaEditor;
 
-import {AppService} from './app.service'
+//import { DummyComponent } from './dummy.component';
+//import {ButtonComponent} from "../examples/Button/Button"
 
-import * as d3 from 'd3'
-window['d3'] = d3
-import * as FroalaEditor from 'froala-editor/js/froala_editor.pkgd.min.js';
-window['FroalaEditor'] = FroalaEditor;
+// import { DummyComponent }  from './imports';
+// import { ButtonComponent } from './imports';
+// import {SegmentedButtonComponent} from './imports';
+// import {SplitButtonComponent} from './imports';
 
-import { DummyComponent } from './dummy.component';
-import {ButtonComponent} from "../examples/Button/Button"
+
+
 // import {SegmentedButtonComponent} from "../examples/SegmentedButton/SegmentedButton"
 // import {SplitButtonComponent} from "../examples/SplitButton/SplitButton"
 // import {RippleComponent} from "../examples/Ripple/Ripple"
@@ -227,8 +231,8 @@ import {ButtonComponent} from "../examples/Button/Button"
 @NgModule({
   declarations: [
     AppComponent,
-    DummyComponent,
-    ButtonComponent,
+    // DummyComponent,
+    // ButtonComponent,
     // SplitButtonComponent,
     // SegmentedButtonComponent,
     // RippleComponent,
@@ -431,12 +435,12 @@ import {ButtonComponent} from "../examples/Button/Button"
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    //AppRoutingModule,
     ExtAngularModernModule
     //SharedModule
   ],
   providers: [
-    AppService,
+    //AppService,
     // GridService,
     // GridFilteringService,
     // CalendarService,
@@ -446,6 +450,6 @@ import {ButtonComponent} from "../examples/Button/Button"
   bootstrap: [AppComponent]
 })
 export class AppModule {
-    constructor(appService: AppService) {
+    constructor() {
     }
 }

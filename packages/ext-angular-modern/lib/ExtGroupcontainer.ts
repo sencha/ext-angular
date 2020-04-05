@@ -11,7 +11,7 @@ import {
     forwardRef,
     ViewContainerRef
   } from '@angular/core';
-import { EngBase } from './runtime/angularbase';
+import { EngBase } from './common/angularbase';
 
 @Component({
     selector: 'ExtGroupcontainer',

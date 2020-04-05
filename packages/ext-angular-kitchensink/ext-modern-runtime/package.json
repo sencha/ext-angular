@@ -1,0 +1,48 @@
+{
+  "_from": "@sencha/ext-modern-runtime@~7.2.0",
+  "_id": "@sencha/ext-modern-runtime@7.2.0",
+  "_inBundle": false,
+  "_integrity": "sha1-D5PDF+PUTMoee1Ndx+WRSIcaEBo=",
+  "_location": "/@sencha/ext-modern-runtime",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "@sencha/ext-modern-runtime@~7.2.0",
+    "name": "@sencha/ext-modern-runtime",
+    "escapedName": "@sencha%2fext-modern-runtime",
+    "scope": "@sencha",
+    "rawSpec": "~7.2.0",
+    "saveSpec": null,
+    "fetchSpec": "~7.2.0"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://sencha.myget.org/F/early-adopter/npm/@sencha/ext-modern-runtime/-/@sencha/ext-modern-runtime-7.2.0.tgz",
+  "_shasum": "0f93c317e3d44cca1e7b535dc7e59148871a101a",
+  "_spec": "@sencha/ext-modern-runtime@~7.2.0",
+  "_where": "/Users/marcgusmano/_git/sencha/ext-angular/packages/ext-angular-kitchensink",
+  "author": {
+    "name": "Sencha"
+  },
+  "bugs": {
+    "url": "https://github.com/sencha/ext-web-components/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "devDependencies": {},
+  "homepage": "https://github.com/sencha/ext-web-components#readme",
+  "keywords": [],
+  "license": "ISC",
+  "name": "@sencha/ext-modern-runtime",
+  "peerDependencies": {},
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sencha/ext-web-components.git"
+  },
+  "scripts": {},
+  "version": "7.2.0"
+}

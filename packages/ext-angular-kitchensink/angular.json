@@ -57,9 +57,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "ext-modern-runtime/material/material-all.css"
             ],
             "scripts": [
+              "ext-modern-runtime/modern.engine.enterprise.js"
             ]
           },
           "configurations": {

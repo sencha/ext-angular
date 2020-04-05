@@ -43,6 +43,7 @@ ng new ext-angular-modern-demo --minimal=true --interactive=false -g=true --skip
 ```sh
 cd ext-angular-modern-demo
 npm install @sencha/ext-angular-modern --save
+npm install @sencha/ext-modern-runtime --save
 ```
 
 - Open your editor

@@ -1,0 +1,65 @@
+<ExtContainer padding="10" [width]="600">
+
+    <!-- , group: 'buttonstyle'
+    , group: 'buttontype' -->
+
+  <ExtContainer
+    [layout]="{ type: 'hbox', pack: isPhone ? 'center' : 'left'}"
+    [margin]="'0 0 10 0'"
+    [defaults]="{ margin: '0 10 0 0' }"
+    [width]="550">
+    <ExtButton [ui]="'action raised'" text="Style">
+      <ExtMenu [defaults]="{ handler: this.onStyleChange }">
+        <ExtMenuitem text="None" value="" [iconCls]="style === 'None'?'x-font-icon md-icon-check':''"></ExtMenuitem>
+        <ExtMenuitem text="Action" value="action" [iconCls]="style === 'Action'?'x-font-icon md-icon-check':''"></ExtMenuitem>
+        <ExtMenuitem text="Decline" value="decline" [iconCls]="style === 'Decline'?'x-font-icon md-icon-check':''"></ExtMenuitem>
+        <ExtMenuitem text="Confirm" value="confirm" [iconCls]="style === 'Confirm'?'x-font-icon md-icon-check':''"></ExtMenuitem>
+      </ExtMenu>
+    </ExtButton>
+    <ExtButton [ui]="'action raised'" text="Type">
+      <ExtMenu [defaults]="{ handler: this.onTypeChange}">
+        <ExtMenuitem text="Text" value="Text" [iconCls]="type === 'Text'?'x-font-icon md-icon-check':''"></ExtMenuitem>
+        <ExtMenuitem text="Icon" value="Icon" [iconCls]="type === 'Icon'?'x-font-icon md-icon-check':''"></ExtMenuitem>
+        <ExtMenuitem text="Text & Icon" value="Text & Icon" [iconCls]="type === 'Text & Icon'?'x-font-icon md-icon-check':''"></ExtMenuitem>
+      </ExtMenu>
+    </ExtButton>
+    <ExtButton [ui]="'action raised'" [iconCls]="round ? 'x-fa fa-check' : null" [enableToggle]="true" text="Round" (tap)="toggleRound()"></ExtButton>
+  </ExtContainer>
+
+  <ExtPanel #layoutProps [padding]="10" [shadow]="true" [defaults]="{layout: 'hbox', flex:'1', margin: '10', width: '100%'}">
+
+    <ExtContainer layout="hbox">
+      <ExtContainer layout="hbox" html="<div #groupLabelProps1 style='tExtAlign:right;margin:24px 20px 0 0;width: 100px'>Default</div>"></ExtContainer>
+      <ExtContainer [flex]="3" cls="button-group" #buttonGroupProps1 padding= '17 0 17 20' [layout]="{ type: 'hbox', align: 'middle', pack: 'space-around' }" flex='1' margin='0 20 0 0' width=400 [defaults]="{margin: '0 20 0 0'}">
+        <ExtSplitbutton [text]="text? 'Normal' : ''"  [ui]="ui" [iconCls]="iconCls" [menu]="menuProp" [arrowAlign]="'bottom'"></ExtSplitbutton>
+        <ExtSplitbutton [text]="text? 'Disabled' : ''"  [ui]="ui" [iconCls]="iconCls" [disabled]="true" [menu]="menuProp"></ExtSplitbutton>
+      </ExtContainer>
+    </ExtContainer>
+
+    <ExtContainer layout="hbox">
+      <ExtContainer layout="hbox" html="<div #groupLabelProps1 style='tExtAlign:right;margin:24px 20px 0 0;width: 100px'>All</div>"></ExtContainer>
+      <ExtContainer [flex]="3" cls="button-group button-group-alt" #buttonGroupProps1 padding= '17 0 17 20' [layout]="{ type: 'hbox', align: 'middle', pack: 'space-around' }" flex='1' margin='0 20 0 0' width=400 [defaults]="{margin: '0 20 0 0'}">
+        <ExtSplitbutton [text]="text ?'Normal' : ''" [ui]="ui + ' alt'" [iconCls]="iconCls" [menu]="menuProp"></ExtSplitbutton>
+        <ExtSplitbutton [text]="text ? 'Disabled' : ''" [ui]="ui + ' alt'" [iconCls]="iconCls" [disabled]="true" [menu]="menuProp"></ExtSplitbutton>
+      </ExtContainer>
+    </ExtContainer>
+
+    <ExtContainer layout="hbox">
+      <ExtContainer layout="hbox" html="<div #groupLabelProps1 style='tExtAlign:right;margin:24px 20px 0 0;width: 100px'>Raised</div>"></ExtContainer>
+      <ExtContainer [flex]="3" cls="button-group" #buttonGroupProps1 padding= '17 0 17 20' [layout]="{ type: 'hbox', align: 'middle', pack: 'space-around' }" flex='1' margin='0 20 0 0' width=400 [defaults]="{margin: '0 20 0 0'}">
+        <ExtSplitbutton [text]="text ? 'Normal': ''" [ui]="ui + ' raised'" [iconCls]="iconCls" [menu]="menuProp"></ExtSplitbutton>
+        <ExtSplitbutton [text]="text? 'Disabled' : ''" [ui]="ui + ' raised'" [iconCls]="iconCls" [disabled]="true" [menu]="menuProp"></ExtSplitbutton>
+      </ExtContainer>
+    </ExtContainer>
+
+    <ExtContainer layout="hbox">
+      <ExtContainer layout="hbox" html="<div #groupLabelProps1 style='tExtAlign:right;margin:24px 20px 0 0;width: 100px'>Alt Raised</div>"></ExtContainer>
+      <ExtContainer [flex]="3" cls="button-group button-group-alt" #buttonGroupProps1 padding= '17 0 17 20' [layout]="{ type: 'hbox', align: 'middle', pack: 'space-around' }" flex='1' margin='0 20 0 0' width=400 [defaults]="{margin: '0 20 0 0'}">
+        <ExtSplitbutton [text]="text ? 'Normal' : ''" [ui]="ui + ' alt raised'" [iconCls]="iconCls" [menu]="menuProp"></ExtSplitbutton>
+        <ExtSplitbutton [text]="text? 'Disabled' : ''" [ui]="ui + ' alt raised'" [iconCls]="iconCls" [disabled]="true" [menu]="menuProp" ></ExtSplitbutton>
+      </ExtContainer>
+    </ExtContainer>
+
+  </ExtPanel>
+
+</ExtContainer>
