@@ -1,6 +1,6 @@
 //const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require("webpack")
-const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
+//const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
@@ -59,23 +59,23 @@ module.exports = function(config, options, c, d) {
       //hash: true,
       //inject: "body"
     }),
-    new ExtWebpackPlugin({
-      framework: framework,
-      toolkit: toolkit,
-      theme: theme,
-      packages: packages,
-      script: script,
-      emit: emit,
-      port: port,
-      profile: profile,
-      environment: environment,
-      treeshake: treeshake,
-      browser: browser,
-      watch: watch,
-      verbose: verbose,
-      inject: 'yes',
-      intellishake: 'no'
-    }),
+    // new ExtWebpackPlugin({
+    //   framework: framework,
+    //   toolkit: toolkit,
+    //   theme: theme,
+    //   packages: packages,
+    //   script: script,
+    //   emit: 'no',
+    //   port: port,
+    //   profile: profile,
+    //   environment: environment,
+    //   treeshake: treeshake,
+    //   browser: browser,
+    //   watch: watch,
+    //   verbose: verbose,
+    //   inject: 'yes',
+    //   intellishake: 'no'
+    // }),
     new webpack.DefinePlugin({
       BUILD_VERSION: JSON.stringify(build_v)
     })

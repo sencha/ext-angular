@@ -1,5 +1,5 @@
 import { ElementRef, ViewContainerRef } from '@angular/core';
-import { EngBase } from './runtime/angularbase';
+import { EngBase } from './common/angularbase';
 export declare class ExtColumnsplitterComponent extends EngBase {
     constructor(eRef: ElementRef, hostComponent: EngBase, vc: ViewContainerRef);
     ngOnInit(): void;

@@ -14,6 +14,11 @@
     "tslib": "^1.11.1"
   },
   "dependencies": {
+    "@angular/core": "~9.1.0",
+    "@angular/common": "~9.1.0",
+    "@angular/platform-browser": "~9.1.0",
+    "@angular/platform-browser-dynamic": "~9.1.0",
+    "zone.js": "~0.10.3",
     "fs-extra": "~9.0.0",
     "@sencha/ext-web-components-modern": "~7.2.0",
     "script-loader": "^0.7.2",
@@ -26,16 +31,24 @@
   "keywords": [],
   "author": "Sencha",
   "license": "ISC",
+  "module_ivy_ngcc": "__ivy_ngcc__/fesm5/sencha-ext-angular-modern.js",
   "module": "fesm5/sencha-ext-angular-modern.js",
   "es2015": "fesm2015/sencha-ext-angular-modern.js",
   "esm5": "esm5/sencha-ext-angular-modern.js",
   "esm2015": "esm2015/sencha-ext-angular-modern.js",
+  "fesm5_ivy_ngcc": "__ivy_ngcc__/fesm5/sencha-ext-angular-modern.js",
   "fesm5": "fesm5/sencha-ext-angular-modern.js",
   "fesm2015": "fesm2015/sencha-ext-angular-modern.js",
   "typings": "sencha-ext-angular-modern.d.ts",
   "metadata": "sencha-ext-angular-modern.metadata.json",
   "sideEffects": false,
   "scripts": {
-    "postinstall": "node ./postinstall.js"
+    "postinstall": "node ./postinstall.js",
+    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by NGCC. This is not allowed.\\nPlease delete and rebuild the package, without compiling with NGCC, before attempting to publish.\\nNote that NGCC may have been run by importing this package into another project that is being built with Ivy enabled.\\n')\" && exit 1"
+  },
+  "__processed_by_ivy_ngcc__": {
+    "fesm5": "9.1.0",
+    "module": "9.1.0",
+    "typings": "9.1.0"
   }
 }

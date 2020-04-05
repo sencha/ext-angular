@@ -2,7 +2,7 @@ declare var Ext: any;
 declare var BUILD_VERSION: any;
 import { Component, OnInit, NgZone, ChangeDetectorRef } from "@angular/core";
 import { navTreeRoot } from "../examples";
-import { Router } from "@angular/router";
+//import { Router } from "@angular/router";
 import { VERSION } from "@angular/core";
 //import { Subject } from "rxjs";
 import { getFiles } from "./code_preview_helper";
@@ -68,11 +68,11 @@ export class AppComponent {
   navTreeListCmp: any;
   selectionCmp: any;
   dataviewNavCmp: any;
-  routerCmp: any;
+  //routerCmp: any;
   codePanelCmp: any;
   tabPanelCmp: any;
   nestedlistCmp: any;
-  routes: any;
+  //routes: any;
 
   tpl: any = `
 <div class="app-thumbnail">
@@ -89,11 +89,11 @@ export class AppComponent {
 </div>`;
 
   constructor(
-    private router: Router,
+    //private router: Router,
     private ngZone: NgZone,
     private cd: ChangeDetectorRef
   ) {
-    this.router = router;
+    //this.router = router;
     this.treeStore = {
         xtype: "tree",
         rootVisible: false,
@@ -144,7 +144,7 @@ export class AppComponent {
 
     if (this.hideExamples == false) {
       this.codeButtonCmp.setHidden(true);
-      this.routerCmp.setHidden(true);
+      //this.routerCmp.setHidden(true);
 
       this.selectionCmp.setStyle({ display: "flex" });
       this.selectionCmp.setHidden(false);
@@ -154,12 +154,12 @@ export class AppComponent {
       this.cd.detectChanges();
     } else {
       this.codeButtonCmp.setHidden(false);
-      this.routerCmp.setHidden(false);
+      //this.routerCmp.setHidden(false);
       this.selectionCmp.setStyle({ display: "none" });
       this.selectionCmp.setHidden(true);
-      this.router.navigateByUrl(node.id).then((isCompleted) => { if (isCompleted) {
-        this.cd.detectChanges();
-      }});
+     // this.router.navigateByUrl(node.id).then((isCompleted) => { if (isCompleted) {
+     //   this.cd.detectChanges();
+     // }});
 
       //this.ngZone.run(() => this.router.navigateByUrl(node.id)).then();
       this.setCodeTabs(node);
