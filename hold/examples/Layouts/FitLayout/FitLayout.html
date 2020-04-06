@@ -1,0 +1,12 @@
+<ExtContainer  [layout]="'vbox'" [padding]="10" [width]="900">
+    <ExtPanel
+        [shadow]="true" [ui]="'instructions'" [margin]="'0 0 20 0'"
+        [html]="'A <b>fit</b> layout displays a single item, which takes on the full height and width of the container.'"
+    ></ExtPanel>
+    <ExtPanel  [layout]="'fit'" [height]="200" [flex]="1" [shadow]="true">
+        <ExtContainer
+            [layout]="{type: 'vbox', pack: 'center', align: 'center'}"
+            [style]="colors.card.red" [html]="'Content'"
+        ></ExtContainer>
+    </ExtPanel>
+</ExtContainer>

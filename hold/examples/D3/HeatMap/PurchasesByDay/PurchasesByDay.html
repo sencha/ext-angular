@@ -1,0 +1,26 @@
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+    <ExtD3_heatmap
+        [store]="this.store"
+        padding="20 20 40 60"
+        [platformConfig]="platformConfigVar"
+        [xAxis]="xAxisVar"
+        [yAxis]="yAxisVar"
+        [colorAxis]="{
+            scale: {
+                type: 'linear',
+                range: ['white', 'green']
+            },
+            field: 'count',
+            minimum: 0
+        }"
+        [tiles]="{
+            attr: {
+                stroke: 'green',
+                'stroke-width': 1
+            }
+        }"
+        [tooltip]="{
+            renderer: this.onTooltip
+        }"
+    ></ExtD3_heatmap>
+</ExtContainer>

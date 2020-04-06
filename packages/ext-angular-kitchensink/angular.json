@@ -42,6 +42,8 @@
 
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
+            "vendorSourceMap": true,
+            "preserveSymlinks": true,
             "customWebpackConfig": {
               "path": "./custom-webpack.config.js",
               "replaceDuplicatePlugins": false,

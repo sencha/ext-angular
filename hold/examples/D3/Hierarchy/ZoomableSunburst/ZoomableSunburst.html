@@ -1,0 +1,10 @@
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+    <ExtD3_sunburst
+        padding="20"
+        [store]="store"
+        [tooltip]="tooltip"
+        [transitions]="transitions"
+        (ready)="this.onSubBurstReady($event)"
+        expandEventName="false"
+    ></ExtD3_sunburst>
+</ExtContainer>

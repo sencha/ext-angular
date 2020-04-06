@@ -1,0 +1,9 @@
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+    <ExtD3_tree
+        [interactions]="interactionsVar"
+        [tooltip]="{ renderer: this.onTooltip }"
+        [nodeSize]="[200, 100]"
+        imagePath="resources/images/org-chart/"
+        [store]="this.store"
+    ></ExtD3_tree>
+</ExtContainer>

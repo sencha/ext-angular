@@ -10,13 +10,14 @@
     "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es5",
+    "target": "es2015",
     "lib": [
       "es2018",
       "dom"
     ]
   },
   "angularCompilerOptions": {
+    "enableIvy": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
   }

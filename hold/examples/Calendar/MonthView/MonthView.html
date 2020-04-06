@@ -1,0 +1,21 @@
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+    <ExtPanel
+        docked="left"
+        [title]="'Calendars'"
+        [ui]="'light'"
+        [width]="150"
+        [bodyPadding]="5"
+        [hidden]="false"
+    >
+        <ExtCalendar_list [store]="this.store"></ExtCalendar_list>
+    </ExtPanel>
+
+    <ExtCalendar_month
+        [flex]="1"
+        [visibleWeeks]="null"
+        [timezoneOffset]="0"
+        [gestureNavigation]="false"
+        [store]="this.store"
+    >
+    </ExtCalendar_month>
+</ExtContainer>

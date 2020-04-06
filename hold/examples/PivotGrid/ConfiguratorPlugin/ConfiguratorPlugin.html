@@ -1,0 +1,27 @@
+<ExtContainer layout="fit" padding="10" [fitToParent]="true">
+    <ExtToolbar
+        [shadow]="false"
+        docked="top"
+        ui="app-transparent-toolbar"
+        padding="5 8"
+        [layout]="{
+            type: 'hbox',
+            align: 'stretch'
+        }"
+    >
+        <ExtButton
+            shadow="true"
+            ui="action"
+            text="Configurator"
+            [handler]="this.showConfigurator.bind(this)"
+        ></ExtButton>
+    </ExtToolbar>
+
+    <ExtPivotgrid
+        [shadow]="true"
+        (ready)="onPivotGridRead($event)"
+        [plugins]="pivotgridPlugins"
+        [matrix]="pivotgridMatrix"
+    >
+    </ExtPivotgrid>
+</ExtContainer>
