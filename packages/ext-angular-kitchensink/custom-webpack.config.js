@@ -1,11 +1,14 @@
-//const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require("webpack")
 const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-//const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-//console.log(process.env.build_v)
-var build_v = process.env.build_v
+console.log(process)
+var build_v
+if (process.env.build_v == undefined) {
+  build_v = '7.2.0.0'
+}
+else {
+  build_v = process.env.build_v
+}
 
 var environment = 'development'
 process.argv.forEach(argv => {
@@ -13,17 +16,6 @@ process.argv.forEach(argv => {
     environment = 'production'
   }
 })
-
-//const isProd = environment === 'production'
-
-// function get(it, val) {if(env == undefined) {return val} else if(env[it] == undefined) {return val} else {return env[it]}}
-
-// var sdkTarget     = get('sdktarget', 'SDK_EMPTY')
-// √      = get('basehref',      '/mjg/')
-// var build_v       = get('build_v',       '7.2.0.0');
-
-//var basehref = process.env["basehref"]
-//console.log(basehref)
 
 module.exports = function(config, options) {
   var env = process.env
