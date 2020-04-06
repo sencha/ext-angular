@@ -2,15 +2,16 @@
   "name": "@sencha/ext-angular-kitchensink",
   "version": "7.2.0",
   "scripts": {
-    "build": "env verbose=no basehref=/dist/ext-angular-kitchensink/ ng build",
-    "buildexample": "env basehref=/ExtAngular/7.2.0/kitchensink/ ng build",
-    "build:stats": "ng build --stats-json",
-    "analyze": "webpack-bundle-analyzer dist/stats-es2015.json",
+    "start": "npm run extract && env verbose=no basehref=/ ng serve",
+    "build": "npm run extract && env verbose=no basehref=/dist/ext-angular-kitchensink/ ng build --prod",
+    "buildexample": "npm run extract && env verbose=no basehref=/ExtAngular/7.2.0/kitchensink/ ng build --prod",
+    "extract": "node ./extract-code.js",
+    "web": "npx sencha web -port 5200 start",
     "ng": "ng",
-    "start": "env verbose=no basehref=/ ng serve",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+
+    "xtest": "ng test",
+    "xlint": "ng lint",
+    "xe2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +23,8 @@
     "d3": "4.7.4",
     "html-webpack-plugin": "4.0.4",
     "webpack-bundle-analyzer": "~3.6.1",
+    "copy-webpack-plugin": "^5.1.1",
+    "@sencha/ext-webpack-plugin": "~7.2.0",
     "@sencha/ext-angular-modern": "~7.2.0",
     "@sencha/ext-modern-runtime": "~7.2.0",
     "@sencha/ext": "~7.2.0",
@@ -44,9 +47,9 @@
     "@angular/platform-browser": "~9.1.0",
     "@angular/platform-browser-dynamic": "~9.1.0",
     "@angular/router": "~9.1.0",
-    "rxjs": "~6.5.5",
-    "tslib": "^1.11.1",
-    "zone.js": "~0.10.3"
+    "rxjs": "~6.5.4",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.10.2"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^9.1.0",
@@ -55,9 +58,9 @@
     "@angular/cli": "~9.1.0",
     "@angular/compiler-cli": "~9.1.0",
     "@angular/language-service": "~9.1.0",
-    "@types/node": "^13.11.1",
-    "ts-node": "~8.8.2",
-    "tslint": "~6.1.1",
+    "@types/node": "^12.11.1",
+    "ts-node": "~8.3.0",
+    "tslint": "~6.1.0",
     "typescript": "~3.8.3"
   }
 }

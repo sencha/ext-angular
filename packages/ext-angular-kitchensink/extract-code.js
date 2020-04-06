@@ -68,7 +68,7 @@ function extractFrom(example, file, fullPath) {
 }
 
 function run() {
-  var outputDir = path.join(__dirname, 'resources')
+  var outputDir = path.join(__dirname, 'src', 'assets', 'resources')
   //var outputDir = path.join(__dirname, 'resources')
   extractAll(examples)
   mkdirp(outputDir)

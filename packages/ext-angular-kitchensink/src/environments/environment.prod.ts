@@ -1,4 +1,3 @@
 export const environment = {
-  production: true,
-  name: '/mjg/andy/'
+  production: true
 };
