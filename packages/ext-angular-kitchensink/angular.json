@@ -38,6 +38,8 @@
       "prefix": "app",
       "architect": {
         "build": {
+
+
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "customWebpackConfig": {
@@ -46,6 +48,8 @@
               "mergeStrategies":{"externals":"replace"}
             },
             "indexTransform": "./index-html-transform.js",
+
+
             "outputPath": "dist/ext-angular-kitchensink",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -58,15 +62,13 @@
             ],
             "styles": [
               "src/styles.css",
-              "ext-modern-runtime/material/material-all.css"
+              "runtime/ext/ext.css"
             ],
             "scripts": [
-              "ext-modern-runtime/modern.engine.enterprise.js"
+              "runtime/ext/ext.js"
             ]
           },
           "configurations": {
-
-
             "production": {
               "fileReplacements": [
                 {
@@ -85,8 +87,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "8mb",
+                  "maximumError": "10mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -98,17 +100,13 @@
           }
         },
         "serve": {
+
           "builder": "@angular-builders/custom-webpack:dev-server",
+
           "options": {
             "browserTarget": "ext-angular-kitchensink:build"
           },
-
-
           "configurations": {
-            "mjg": {
-              "name": "marc"
-            },
-
             "production": {
               "browserTarget": "ext-angular-kitchensink:build:production"
             }
@@ -121,6 +119,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "ext-angular-kitchensink"
 }

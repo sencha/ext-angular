@@ -1,8 +1,17 @@
 //const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require("webpack")
-//const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+//const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+var environment = 'development'
+process.argv.forEach(argv => {
+  if (argv == '--prod') {
+    environment = 'production'
+  }
+})
+
+//const isProd = environment === 'production'
 
 // function get(it, val) {if(env == undefined) {return val} else if(env[it] == undefined) {return val} else {return env[it]}}
 
@@ -13,7 +22,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 //var basehref = process.env["basehref"]
 //console.log(basehref)
 
-module.exports = function(config, options, c, d) {
+module.exports = function(config, options) {
   var env = process.env
   function get(it, val) {if(env == undefined) {return val} else if(env[it] == undefined) {return val} else {return env[it]}}
 
@@ -37,7 +46,7 @@ module.exports = function(config, options, c, d) {
   var script        = get('script',        './extract-code.js')
   var emit          = get('emit',          'yes')
   var profile       = get('profile',       '')
-  var environment   = get('environment',   'development')
+  //var environment   = get('environment',   'development')
   var treeshake     = get('treeshake',     'no')
   var browser       = get('browser',       'no')
   var watch         = get('watch',         'no')
@@ -52,30 +61,34 @@ module.exports = function(config, options, c, d) {
   // );
 
   config.plugins.push(
-    new HtmlWebpackPlugin({
-      //title: "hi",
-      //template: "./src/index.html",
-      //baseUrl: process.env["basehref"],
-      //hash: true,
-      //inject: "body"
-    }),
-    // new ExtWebpackPlugin({
-    //   framework: framework,
-    //   toolkit: toolkit,
-    //   theme: theme,
-    //   packages: packages,
-    //   script: script,
-    //   emit: 'no',
-    //   port: port,
-    //   profile: profile,
-    //   environment: environment,
-    //   treeshake: treeshake,
-    //   browser: browser,
-    //   watch: watch,
-    //   verbose: verbose,
-    //   inject: 'yes',
-    //   intellishake: 'no'
+    // new HtmlWebpackPlugin({
+    //   //title: "hi",
+    //   //template: "./src/index.html",
+    //   //baseUrl: process.env["basehref"],
+    //   //hash: true,
+    //   //inject: "body"
     // }),
+    new ExtWebpackPlugin({
+      framework: framework,
+      toolkit: toolkit,
+      theme: theme,
+      packages: packages,
+      script: '',
+      emit: 'no',
+      port: port,
+      profile: profile,
+      environment: environment,
+      treeshake: treeshake,
+      browser: browser,
+      watch: watch,
+      verbose: verbose,
+      inject: 'yes',
+      intellishake: 'no'
+    }),
+    // new CopyWebpackPlugin([{
+    //   from: './resources/code.js',
+    //   to: './src/app/assets/resources/code.js'
+    // }]),
     new webpack.DefinePlugin({
       BUILD_VERSION: JSON.stringify(build_v)
     })

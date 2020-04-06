@@ -1,2 +1,0 @@
-# theme-kitchensink - Read Me
-

@@ -10,7 +10,6 @@
     "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
-    "typeRoots": ["node_modules/@types"],
     "target": "es5",
     "lib": [
       "es2018",
