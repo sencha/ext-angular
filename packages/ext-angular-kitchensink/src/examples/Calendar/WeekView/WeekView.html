@@ -1,0 +1,55 @@
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+    <ExtPanel
+        [shadow]="true"
+        [title]="panelTitle"
+        [layout]="'hbox'"
+        [header]="{
+            layout: 'hbox',
+            items: [
+                {
+                    xtype: 'component',
+                    flex: 1
+                },
+                {
+                    xtype: 'segmentedbutton',
+                    items: [
+                        {
+                            text: isPhone ? null : 'Full Week',
+                            iconCls: isPhone
+                                ? 'x-fa fa-calendar-check-o'
+                                : null,
+                            value: 'fullweek',
+                            handler: changeCalendarView
+                        },
+                        {
+                            text: isPhone ? null : 'Work Week',
+                            iconCls: isPhone ? 'x-fa fa-briefcase' : null,
+                            value: 'workweek',
+                            handler: changeCalendarView
+                        }
+                    ]
+                }
+            ]
+        }"
+    >
+        <ExtPanel
+            [title]="'Calendars'"
+            [ui]="'light'"
+            [width]="150"
+            [bodyPadding]="5"
+            [hidden]="isPhone"
+        >
+            <ExtCalendar_list [store]="this.store"></ExtCalendar_list>
+        </ExtPanel>
+        <ExtCalendar_week
+            [store]="this.store"
+            [flex]="1"
+            [timezoneOffset]="0"
+            [gestureNavigation]="false"
+            [value]="calWeekValue"
+            [firstDayOfWeek]="this.firstDayOfWeek"
+            [visibleDays]="this.visibleDays"
+        >
+        </ExtCalendar_week>
+    </ExtPanel>
+</ExtContainer>

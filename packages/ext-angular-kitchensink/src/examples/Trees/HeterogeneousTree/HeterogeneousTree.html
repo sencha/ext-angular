@@ -1,0 +1,36 @@
+<ExtContainer padding="10px" layout="fit" [fitToParent]="true">
+    <ExtTree
+        [shadow]="true"
+        [top]="top"
+        [left]="left"
+        [width]="width"
+        [height]="height"
+        rootVisible="false"
+        [store]="this.store"
+        (select)="this.onSelectionChange($event)"
+        (selectionchange)="this.onSelectionChange($event)"
+        [columns]="[
+            {
+                xtype: 'treecolumn',
+                text: 'Name',
+                dataIndex: 'name',
+                width: '100%'
+            }
+        ]"
+        (ready)="onTreeReady($event)"
+    >
+        <ExtToolbar docked="bottom">
+            <ExtTextfield
+                (action)="this.onFieldAction($event)"
+                (ready)="onTextFieldReady($event)"
+            >
+            </ExtTextfield>
+            <ExtButton
+                text="Add Territory"
+                (tap)="this.addItem($event)"
+                (ready)="onButtonReady($event)"
+            >
+            </ExtButton>
+        </ExtToolbar>
+    </ExtTree>
+</ExtContainer>

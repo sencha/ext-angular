@@ -1,0 +1,17 @@
+<ExtContainer  [layout]="'vbox'">
+    <ExtContainer
+        [cls]="'ripple-target'"
+        [margin]="'30 0 30 0'"
+        [ripple]="true"
+        (click)="clickHandler($event)"
+        [html]="'I ripple when clicked'"
+    >
+    </ExtContainer>
+    <ExtContainer
+        [cls]="'ripple-target'"
+        [margin]="'30 0 30 0'"
+        [ripple]="true"
+        [html]="'Any ExtAngular component can also have a ripple.'"
+    >
+    </ExtContainer>
+</ExtContainer>

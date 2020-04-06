@@ -1,0 +1,22 @@
+<ExtContainer [padding]="10" layout="vbox" width="150">
+
+    <ExtButton
+      [ui]="'action raised'"
+      [margin]="'0 0 10 0'"
+      (tap)="onAlertTap()"
+      [text]="'Alert'">
+    </ExtButton>
+    <ExtButton
+      [ui]="'action raised'"
+      [margin]="'0 0 10 0'"
+      (tap)="onPropmtTap()"
+      [text]="'Prompt'">
+    </ExtButton>
+    <ExtButton
+      [ui]="'action raised'"
+      [margin]="'0 0 0 0'"
+      (tap)="onConfirmTap()"
+      [text]="'Confirm'">
+    </ExtButton>
+
+</ExtContainer>

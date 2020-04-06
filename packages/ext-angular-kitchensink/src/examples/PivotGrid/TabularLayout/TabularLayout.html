@@ -1,0 +1,32 @@
+<ExtContainer layout="fit" padding="10" [fitToParent]="true">
+    <ExtPivotgrid
+        shadow="true"
+        (ready)="onPivotGridRead($event)"
+        startRowGroupsCollapsed="false"
+        startColGroupsCollapsed="false"
+        [matrix]="pivotgridMatrix"
+    >
+    </ExtPivotgrid>
+
+    <ExtToolbar
+        shadow="false"
+        docked="top"
+        ui="app-transparent-toolbar"
+        padding="5 8"
+        [layout]="{
+            type: 'hbox',
+            align: 'stretch'
+        }"
+        [defaults]="{
+            margin: '0 10 0 0',
+            shadow: true,
+            ui: 'action'
+        }"
+    >
+        <ExtButton text="Expand All" [handler]="this.expandAll"></ExtButton>
+        <ExtButton
+            text="Collapse All"
+            [handler]="this.collapseAll"
+        ></ExtButton>
+    </ExtToolbar>
+</ExtContainer>
