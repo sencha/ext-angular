@@ -1,0 +1,2 @@
+    "@sencha/ext-angular-modern": "file:sencha-ext-angular-modern-7.2.0.tgz",
+    "@sencha/ext-angular-modern": "~7.2.0",
