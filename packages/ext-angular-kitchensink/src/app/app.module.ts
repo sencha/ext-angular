@@ -4,105 +4,153 @@ import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 import { ExtAngularModernModule } from '@sencha/ext-angular-modern'
 import { AppComponent } from './app.component';
-import {AppService} from './app.service'
-import {CalendarService} from "../examples/Calendar/Calendar.service"
-import {GridService} from '../examples/Grid/Grid.service'
-import {BigDataService} from '../examples/Grid/AdvancedFeatures/BigData/BigData.service'
-import {GridFilteringService} from '../examples/Grid/AddonsDecorations/GridFiltering/GridFiltering.service'
+import { DummyComponent }                     from './dummy.component';
 
-import { DummyComponent } from './dummy.component';
-import { ButtonComponent }          from "../examples/components/buttons/Button/Button";
-import { SplitButtonComponent }     from "../examples/components/buttons/SplitButton/SplitButton";
-import { SegmentedButtonComponent } from "../examples/components/buttons/SegmentedButton/SegmentedButton";
-import { CarouselComponent }        from '../examples/components/Carousel/Carousel';
-import { ColorPickerComponent }     from '../examples/components/ColorPicker/ColorPicker';
+import { AppService }                         from './app.service'
+import { CalendarService }                    from "../examples/Calendar/Calendar.service"
+import { GridService }                        from '../examples/Grid/Grid.service'
+import { BigDataService }                     from '../examples/Grid/AdvancedFeatures/BigData/BigData.service'
+import { GridFilteringService }               from '../examples/Grid/AddonsDecorations/GridFiltering/GridFiltering.service'
+
+import { ButtonComponent }                    from "../examples/components/buttons/Button/Button";
+import { SplitButtonComponent }               from "../examples/components/buttons/SplitButton/SplitButton";
+import { SegmentedButtonComponent }           from "../examples/components/buttons/SegmentedButton/SegmentedButton";
+
+import { CarouselComponent }                  from '../examples/components/Carousel/Carousel';
+import { ColorPickerComponent }               from '../examples/components/ColorPicker/ColorPicker';
+
+import {SimpleDragDropComponent}              from '../examples/components/DragAndDrop/Simple/Simple';
+import {ConstraintsDragDropComponent}         from '../examples/components/DragAndDrop/Constraints/Constraints';
+import {ProxiesDragDropComponent}             from '../examples/components/DragAndDrop/Proxies/Proxies';
+import {HandlesDragDropComponent}             from '../examples/components/DragAndDrop/Handles/Handles';
+import {GroupsDragDropComponent}              from '../examples/components/DragAndDrop/Groups/Groups';
+import {FilesDragDropComponent}               from '../examples/components/DragAndDrop/Files/Files';
+import {DataDragDropComponent}                from '../examples/components/DragAndDrop/Data/Data';
+
+import {DrawComponent}                         from '../examples/components/Draw/Draw';
+
+import {CheckBoxFieldComponent}                from '../examples/components/FormFields/CheckBoxField/CheckBoxField';
+import {CheckBoxGroupsComponent}               from '../examples/components/FormFields/CheckboxGroups/CheckboxGroups';
+import {ComboBoxFieldComponent}                from '../examples/components/FormFields/ComboBoxField/ComboBoxField';
+import {MultiSelectComboBoxFieldComponent}     from '../examples/components/FormFields/MultiSelectComboBoxField/MultiSelectComboBoxField'
+import {ContainerFieldComponent}               from '../examples/components/FormFields/ContainerField/ContainerField';
+import {DatePickerFieldComponent}              from '../examples/components/FormFields/DatePickerField/DatePickerField';
+import {EmailFieldComponent}                   from '../examples/components/FormFields/EmailField/EmailField';
+import {FieldSetComponent}                     from '../examples/components/FormFields/FieldSet/FieldSet';
+import {FileFieldComponent}                    from '../examples/components/FormFields/FileField/FileField';
+import {FormPanelComponent}                    from '../examples/components/FormFields/FormPanel/FormPanel';
+import {NumberFieldComponent}                  from '../examples/components/FormFields/NumberField/NumberField';
+import {PasswordFieldComponent}                from '../examples/components/FormFields/PasswordField/PasswordField';
+import {RadioFieldComponent}                   from '../examples/components/FormFields/RadioField/RadioField';
+import {SearchFieldComponent}                  from '../examples/components/FormFields/SearchField/SearchField';
+import {SelectFieldComponent}                  from '../examples/components/FormFields/SelectField/SelectField';
+import {SliderFieldComponent}                  from '../examples/components/FormFields/SliderField/SliderField';
+import {SpinnerFieldComponent}                 from '../examples/components/FormFields/SpinnerField/SpinnerField';
+import {TextAreaFieldComponent}                from '../examples/components/FormFields/TextAreaField/TextAreaField';
+import {TextFieldComponent}                    from '../examples/components/FormFields/TextField/TextField';
+import {TimeFieldComponent}                    from '../examples/components/FormFields/TimeField/TimeField';
+import {ToggleFieldComponent}                  from '../examples/components/FormFields/ToggleField/ToggleField';
+import {URLFieldComponent}                     from '../examples/components/FormFields/URLField/URLField';
+//import {ValidationComponent}                   from '../examples/components/FormFields/Validation/Validation';
+
+import {DefaultGaugeComponent}                 from '../examples/components/Gauges/DefaultGauge/DefaultGauge';
+import {NeedleGaugeComponent}                  from '../examples/components/Gauges/NeedleGauge/NeedleGauge';
+
+// import {CardLayoutComponent}               from '../examples/components/Layouts/CardLayout/CardLayout';
+// import {CenterLayoutComponent}             from '../examples/components/Layouts/CenterLayout/CenterLayout';
+// import {FitLayoutComponent}                from '../examples/components/Layouts/FitLayout/FitLayout';
+// //import {hboxLayoutComponent}             from '../examples/components/Layouts/hboxLayout/hboxLayout';
+// import {FormLayoutComponent}               from '../examples/components/Layouts/FormLayout/FormLayout';
+// import {ResizableLayoutComponent}          from '../examples/components/Layouts/ResizableLayout/ResizableLayout';
+// //import {vboxLayoutComponent}             from '../examples/components/Layouts/vboxLayout/vboxLayout';
+// import {AccordionLayoutComponent}          from '../examples/components/Layouts/AccordionLayout/AccordionLayout';
+
+import {BasicListComponent}               from '../examples/components/Lists/BasicList/BasicList';
+import {DisclosureListComponent}          from '../examples/components/Lists/Disclosure/Disclosure';
+import {GroupedListComponent}             from '../examples/components/Lists/GroupedList/GroupedList';
+import {NestedListComponent}              from '../examples/components/Lists/NestedList/NestedList';
+//import {PagingListComponent}              from '../examples/components/Lists/PagingList/PagingList';
+import {PullRefreshListComponent}         from '../examples/components/Lists/PullRefresh/PullRefresh';
+import {BasicAccordionSwiperComponent}    from '../examples/components/Lists/BasicAccordionSwiper/BasicAccordionSwiper';
+import {BasicStepSwiperComponent}         from '../examples/components/Lists/BasicStepSwiper/BasicStepSwiper';
+import {UndoableAccordionSwiperComponent} from '../examples/components/Lists/UndoableAccordionSwiper/UndoableAccordionSwiper';
+import {UndoableStepSwiperComponent}      from '../examples/components/Lists/UndoableStepSwiper/UndoableStepSwiper';
+
+import {AudioComponent}                        from "../examples/components/media/Audio/Audio";
+import {VideoComponent}                        from "../examples/components/media/Video/Video";
+
+import {BasicPanelsComponent}         from '../examples/components/Panels/BasicPanels/BasicPanels';
+import {BasicDatePanelComponent}      from '../examples/components/Panels/BasicDatePanel/BasicDatePanel';
+import {AdvancedDatePanelComponent}   from '../examples/components/Panels/AdvancedDatePanel/AdvancedDatePanel';
+import {TimePanelComponent}           from '../examples/components/Panels/TimePanel/TimePanel';
+import {CollapsiblePanelComponent}    from '../examples/components/Panels/CollapsiblePanel/CollapsiblePanel';
+import {ResizableHandleComponent}     from '../examples/components/Panels/ResizableHandle/ResizableHandle';
+
+import {DialogPopupComponent}         from '../examples/components/Popups/Dialog/Dialog';
+import {MessagePopupComponent}        from '../examples/components/Popups/Message/Message';
+import {ToastPopupComponent}          from '../examples/components/Popups/Toast/Toast';
+
+import {ProgressBarComponent}                  from '../examples/components/ProgressBar/ProgressBar';
+import {RippleComponent}                       from '../examples/components/Ripple/Ripple';
+import {SheetComponent}                        from "../examples/components/Sheet/Sheet";
+
+import {BasicTabsComponent}               from '../examples/components/Tabs/BasicTabs/BasicTabs';
+import {BottomTabsComponent}              from '../examples/components/Tabs/BottomTabs/BottomTabs';
+import {IconTabsComponent}                from '../examples/components/Tabs/IconTabs/IconTabs';
+import {DesktopTabsComponent}             from '../examples/components/Tabs/DesktopTabs/DesktopTabs';
+import {ClosableTabsComponent}            from '../examples/components/Tabs/ClosableTabs/ClosableTabs';
+import {ScrollingTabsComponent}           from '../examples/components/Tabs/ScrollingTabs/ScrollingTabs';
+import {TabBarComponent}                  from '../examples/components/Tabs/TabBar/TabBar';
+
+import {TitleBarComponent}                     from '../examples/components/TitleBar/TitleBar';
+
+import {ToolBarComponent}                      from '../examples/components/ToolBars/ToolBar/ToolBar';
+import {BreadcrumbToolBarComponent}            from '../examples/components/ToolBars/BreadcrumbToolBar/BreadcrumbToolBar';
+
+import {ToolTipComponent}                      from '../examples/components/ToolTip/ToolTip';
+import {TouchEventsComponent}                  from '../examples/components/TouchEvents/TouchEvents';
+import {WizardComponent}                       from '../examples/components/Wizard/Wizard';
+import {FroalaEditorComponent}                 from '../examples/components/FroalaEditor/FroalaEditor';
+
+
+import {BasicGridComponent}                from '../examples/Grid/BasicGrid/BasicGrid';
+import {EditableGridComponent}             from '../examples/Grid/EditableGrid/EditableGrid';
+//import {GroupedGridComponent}              from '../examples/Grid/GroupedGrid/GroupedGrid';
+import {LockingGridComponent}              from '../examples/Grid/LockingGrid/LockingGrid';
+import {XMLGridComponent}                  from '../examples/Grid/XMLGrid/XMLGrid';
+import {EditableRowComponent}              from '../examples/Grid/EditableRow/EditableRow';
+import {InfiniteGridComponent}             from '../examples/Grid/InfiniteGrid/InfiniteGrid';
+import {GridToolsComponent}                from '../examples/Grid/AddonsDecorations/GridTools/GridTools';
+import {RowBodyComponent}                  from '../examples/Grid/AddonsDecorations/RowBody/RowBody';
+import {RowExpanderComponent}              from '../examples/Grid/AddonsDecorations/RowExpander/RowExpander';
+import {SummaryRowComponent}               from '../examples/Grid/AddonsDecorations/SummaryRow/SummaryRow';
+import {GridFilteringComponent}            from '../examples/Grid/AddonsDecorations/GridFiltering/GridFiltering';
+import {ViewOptionsComponent}              from '../examples/Grid/AddonsDecorations/ViewOptions/ViewOptions';
+import {RowDragAndDropComponent}           from '../examples/Grid/AddonsDecorations/RowDragAndDrop/RowDragAndDrop';
+import {DragFormToGridComponent}           from '../examples/Grid/AddonsDecorations/DragFormToGrid/DragFormToGrid';
+import {BigDataComponent}                  from '../examples/Grid/AdvancedFeatures/BigData/BigData';
+import {ReconfigureGridComponent}          from '../examples/Grid/AdvancedFeatures/ReconfigureGrid/ReconfigureGrid';
+import {ComponentsInCellsComponent}        from '../examples/Grid/AdvancedFeatures/ComponentsInCells/ComponentsInCells';
+import {SelectAndCopyComponent}            from '../examples/Grid/AdvancedFeatures/SelectAndCopy/SelectAndCopy';
+import {StockTickerComponent}              from '../examples/Grid/AdvancedFeatures/StockTicker/StockTicker';
+
+
+import {EditableTreeComponent}                 from '../examples/Trees/EditableTree/EditableTree';
+import {HeterogeneousTreeComponent}            from '../examples/Trees/HeterogeneousTree/HeterogeneousTree';
+import {TreeComponent}                         from '../examples/Trees/Tree/Tree';
+import {TreeDecorationsComponent}              from '../examples/Trees/TreeDecorations/TreeDecorations';
+import {TreeGridComponent}                     from '../examples/Trees/TreeGrid/TreeGrid';
+import {TreeListComponent}                     from '../examples/Trees/TreeList/TreeList';
+import {TreeReorderComponent}                  from '../examples/Trees/TreeReorder/TreeReorder';
+
+import {CalendarPanelComponent}                from "../examples/Calendar/CalendarPanel/CalendarPanel";
+//import {CalendarDaysViewComponent}             from "../examples/Calendar/DaysView/DaysView";
+//import {CalendarDragResizeValidationComponent} from "../examples/Calendar/DragResizeValidation/DragResizeValidation";
+import {CalendarMonthViewComponent}            from "../examples/Calendar/MonthView/MonthView";
+import {CalendarTimezoneSupportComponent}      from "../examples/Calendar/TimezoneSupport/TimezoneSupport";
+import {CalendarWeekViewComponent}             from "../examples/Calendar/WeekView/WeekView";
 
 import {ChartToolbarComponent} from "../examples/Charts/ChartToolbar"
-
-import {AudioComponent} from "../examples/Audio/Audio";
-import {VideoComponent} from "../examples/Video/Video";
-import {DrawComponent} from '../examples/Draw/Draw';
-import {CalendarPanelComponent} from "../examples/Calendar/CalendarPanel/CalendarPanel";
-//import {CalendarDaysViewComponent} from "../examples/Calendar/DaysView/DaysView";
-//import {CalendarDragResizeValidationComponent} from "../examples/Calendar/DragResizeValidation/DragResizeValidation";
-import {CalendarMonthViewComponent} from "../examples/Calendar/MonthView/MonthView";
-import {CalendarTimezoneSupportComponent} from "../examples/Calendar/TimezoneSupport/TimezoneSupport";
-import {CalendarWeekViewComponent} from "../examples/Calendar/WeekView/WeekView";
-import {SheetComponent} from "../examples/Sheet/Sheet";
-import {RippleComponent} from '../examples/Ripple/Ripple';
-import {ProgressBarComponent} from '../examples/ProgressBar/ProgressBar';
-import {TitleBarComponent} from '../examples/TitleBar/TitleBar';
-import {ToolBarComponent} from '../examples/ToolBars/ToolBar/ToolBar';
-import {BreadcrumbToolBarComponent} from '../examples/ToolBars/BreadcrumbToolBar/BreadcrumbToolBar';import {ToolTipComponent} from '../examples/ToolTip/ToolTip';
-
-import {FroalaEditorComponent} from '../examples/FroalaEditor/FroalaEditor';
-import {EditableTreeComponent} from '../examples/Trees/EditableTree/EditableTree';
-import {HeterogeneousTreeComponent} from '../examples/Trees/HeterogeneousTree/HeterogeneousTree';
-import {TreeComponent} from '../examples/Trees/Tree/Tree';
-import {TreeDecorationsComponent} from '../examples/Trees/TreeDecorations/TreeDecorations';
-import {TreeGridComponent} from '../examples/Trees/TreeGrid/TreeGrid';
-import {TreeListComponent} from '../examples/Trees/TreeList/TreeList';
-import {TreeReorderComponent} from '../examples/Trees/TreeReorder/TreeReorder';
-import {DefaultGaugeComponent} from '../examples/Gauges/DefaultGauge/DefaultGauge';
-import {NeedleGaugeComponent} from '../examples/Gauges/NeedleGauge/NeedleGauge';
-
-import {BasicGridComponent} from '../examples/Grid/BasicGrid/BasicGrid';
-import {EditableGridComponent} from '../examples/Grid/EditableGrid/EditableGrid';
-//import {GroupedGridComponent} from '../examples/Grid/GroupedGrid/GroupedGrid';
-import {LockingGridComponent} from '../examples/Grid/LockingGrid/LockingGrid';
-import {XMLGridComponent} from '../examples/Grid/XMLGrid/XMLGrid';
-import {EditableRowComponent} from '../examples/Grid/EditableRow/EditableRow';
-import {InfiniteGridComponent} from '../examples/Grid/InfiniteGrid/InfiniteGrid';
-
-import {GridToolsComponent} from '../examples/Grid/AddonsDecorations/GridTools/GridTools';
-import {RowBodyComponent} from '../examples/Grid/AddonsDecorations/RowBody/RowBody';
-import {RowExpanderComponent} from '../examples/Grid/AddonsDecorations/RowExpander/RowExpander';
-import {SummaryRowComponent} from '../examples/Grid/AddonsDecorations/SummaryRow/SummaryRow';
-import {GridFilteringComponent} from '../examples/Grid/AddonsDecorations/GridFiltering/GridFiltering';
-import {ViewOptionsComponent} from '../examples/Grid/AddonsDecorations/ViewOptions/ViewOptions';
-import {RowDragAndDropComponent} from '../examples/Grid/AddonsDecorations/RowDragAndDrop/RowDragAndDrop';
-import {DragFormToGridComponent} from '../examples/Grid/AddonsDecorations/DragFormToGrid/DragFormToGrid';
-
-
-import {BigDataComponent} from '../examples/Grid/AdvancedFeatures/BigData/BigData';
-import {ReconfigureGridComponent} from '../examples/Grid/AdvancedFeatures/ReconfigureGrid/ReconfigureGrid';
-import {ComponentsInCellsComponent} from '../examples/Grid/AdvancedFeatures/ComponentsInCells/ComponentsInCells';
-import {SelectAndCopyComponent} from '../examples/Grid/AdvancedFeatures/SelectAndCopy/SelectAndCopy';
-import {StockTickerComponent} from '../examples/Grid/AdvancedFeatures/StockTicker/StockTicker';
-
-
-import {CheckBoxFieldComponent} from '../examples/FormFields/CheckBoxField/CheckBoxField';
-import {CheckBoxGroupsComponent} from '../examples/FormFields/CheckboxGroups/CheckboxGroups';
-import {ComboBoxFieldComponent} from '../examples/FormFields/ComboBoxField/ComboBoxField';
-import {MultiSelectComboBoxFieldComponent} from '../examples/FormFields/MultiSelectComboBoxField/MultiSelectComboBoxField'
-import {ContainerFieldComponent} from '../examples/FormFields/ContainerField/ContainerField';
-import {DatePickerFieldComponent} from '../examples/FormFields/DatePickerField/DatePickerField';
-import {EmailFieldComponent} from '../examples/FormFields/EmailField/EmailField';
-import {FieldSetComponent} from '../examples/FormFields/FieldSet/FieldSet';
-import {FileFieldComponent} from '../examples/FormFields/FileField/FileField';
-import {FormPanelComponent} from '../examples/FormFields/FormPanel/FormPanel';
-import {NumberFieldComponent} from '../examples/FormFields/NumberField/NumberField';
-import {PasswordFieldComponent} from '../examples/FormFields/PasswordField/PasswordField';
-import {RadioFieldComponent} from '../examples/FormFields/RadioField/RadioField';
-import {SearchFieldComponent} from '../examples/FormFields/SearchField/SearchField';
-import {SelectFieldComponent} from '../examples/FormFields/SelectField/SelectField';
-import {SliderFieldComponent} from '../examples/FormFields/SliderField/SliderField';
-import {SpinnerFieldComponent} from '../examples/FormFields/SpinnerField/SpinnerField';
-import {TextAreaFieldComponent} from '../examples/FormFields/TextAreaField/TextAreaField';
-import {TextFieldComponent} from '../examples/FormFields/TextField/TextField';
-import {TimeFieldComponent} from '../examples/FormFields/TimeField/TimeField';
-import {ToggleFieldComponent} from '../examples/FormFields/ToggleField/ToggleField';
-import {URLFieldComponent} from '../examples/FormFields/URLField/URLField';
-//import {ValidationComponent} from '../examples/FormFields/Validation/Validation';
-// import {CardLayoutComponent} from '../examples/Layouts/CardLayout/CardLayout';
-// import {CenterLayoutComponent} from '../examples/Layouts/CenterLayout/CenterLayout';
-// import {FitLayoutComponent} from '../examples/Layouts/FitLayout/FitLayout';
-// //import {hboxLayoutComponent} from '../examples/Layouts/hboxLayout/hboxLayout';
-// import {FormLayoutComponent} from '../examples/Layouts/FormLayout/FormLayout';
-// import {ResizableLayoutComponent} from '../examples/Layouts/ResizableLayout/ResizableLayout';
-// //import {vboxLayoutComponent} from '../examples/Layouts/vboxLayout/vboxLayout';
-// import {AccordionLayoutComponent} from '../examples/Layouts/AccordionLayout/AccordionLayout';
-
 // import {BasicGaugeChartComponent} from '../examples/Charts/Gauges/BasicGaugeChart/BasicGaugeChart';
 // import {BoxPlotComponent} from '../examples/Charts/BoxPlot/BoxPlot';
 // import {NavigatorComponent} from '../examples/Charts/Navigator/Navigator';
@@ -129,84 +177,28 @@ import {URLFieldComponent} from '../examples/FormFields/URLField/URLField';
 // import {DonutComponent} from '../examples/Charts/Pie/Donut/Donut';
 // import {DoubleDonutComponent} from '../examples/Charts/Pie/DoubleDonut/DoubleDonut';
 // import {SpieComponent} from '../examples/Charts/Pie/Spie/Spie';
-
 // import {BasicBarComponent} from '../examples/Charts/Bar/BasicBar/BasicBar';
 // import {FullStackedBarComponent} from '../examples/Charts/Bar/FullStackedBar/FullStackedBar';
 // import {StackedBarComponent} from '../examples/Charts/Bar/StackedBar/StackedBar';
-
 // import {CandlestickComponent} from '../examples/Charts/Financial/Candlestick/Candlestick';
 // import {OHLCComponent} from '../examples/Charts/Financial/OHLC/OHLC';
+import {BasicColumnComponent}                from '../examples/Charts/Column/BasicColumn/BasicColumn';
+import {ColumnWithRendererComponent}         from '../examples/Charts/Column/ColumnWithRenderer/ColumnWithRenderer';
+import {MultiaxisColumnComponent}            from '../examples/Charts/Column/MultiaxisColumn/MultiaxisColumn';
+import {StackedComponent}                    from '../examples/Charts/Column/Stacked/Stacked';
+import {ThreeDColumnWithRendererComponent}   from '../examples/Charts/3DColumn/3DColumnWithRenderer/3DColumnWithRenderer';
+import {ThreeDGroupedComponent}              from '../examples/Charts/3DColumn/3DGrouped/3DGrouped';
+import {ThreeDStackedComponent}              from '../examples/Charts/3DColumn/3DStacked/3DStacked';
+import {Basic3DColumnComponent}              from '../examples/Charts/3DColumn/Basic3DColumn/Basic3DColumn';
+import {NegativeValuesComponent}             from '../examples/Charts/3DColumn/NegativeValues/NegativeValues';
+
 
 // import {ConfigurablePivotHeatmapComponent} from '../examples/D3/HeatMap/ConfigurablePivotHeatmap/ConfigurablePivotHeatmap';
 // import {PivotHeatmapComponent} from '../examples/D3/HeatMap/PivotHeatmap/PivotHeatmap';
 // import {PurchasesByDayComponent} from '../examples/D3/HeatMap/PurchasesByDay/PurchasesByDay';
 // import {SalesPerEmployeeComponent} from '../examples/D3/HeatMap/SalesPerEmployee/SalesPerEmployee';
-
 // import {OrgChartComponent} from '../examples/D3/Hierarchy/OrgChart/OrgChart';
 // import {PackComponent} from '../examples/D3/Hierarchy/Pack/Pack';
-
-import {BasicColumnComponent} from '../examples/Charts/Column/BasicColumn/BasicColumn';
-import {ColumnWithRendererComponent} from '../examples/Charts/Column/ColumnWithRenderer/ColumnWithRenderer';
-import {MultiaxisColumnComponent} from '../examples/Charts/Column/MultiaxisColumn/MultiaxisColumn';
-import {StackedComponent} from '../examples/Charts/Column/Stacked/Stacked';
-import {ThreeDColumnWithRendererComponent} from '../examples/Charts/3DColumn/3DColumnWithRenderer/3DColumnWithRenderer';
-import {ThreeDGroupedComponent} from '../examples/Charts/3DColumn/3DGrouped/3DGrouped';
-import {ThreeDStackedComponent} from '../examples/Charts/3DColumn/3DStacked/3DStacked';
-import {Basic3DColumnComponent} from '../examples/Charts/3DColumn/Basic3DColumn/Basic3DColumn';
-import {NegativeValuesComponent} from '../examples/Charts/3DColumn/NegativeValues/NegativeValues';
-
-import {CollapsibleComponent} from '../examples/PivotGrid/Collapsible/Collapsible'
-import {CompactLayoutComponent} from '../examples/PivotGrid/CompactLayout/CompactLayout'
-import {ConfiguratorPluginComponent} from '../examples/PivotGrid/ConfiguratorPlugin/ConfiguratorPlugin'
-import {DataChangesComponent} from '../examples/PivotGrid/DataChanges/DataChanges'
-import {DrilldownPluginComponent} from '../examples/PivotGrid/DrilldownPlugin/DrilldownPlugin'
-import {ExporterPluginComponent} from '../examples/PivotGrid/ExporterPlugin/ExporterPlugin'
-import {OutlineLayoutComponent} from '../examples/PivotGrid/OutlineLayout/OutlineLayout'
-import {PivotGridWidgetsComponent} from '../examples/PivotGrid/PivotGridWidgets/PivotGridWidgets'
-import {RangeEditorPluginComponent} from '../examples/PivotGrid/RangeEditorPlugin/RangeEditorPlugin'
-import {TabularLayoutComponent} from '../examples/PivotGrid/TabularLayout/TabularLayout'
-
-
-
-import {SimpleDragDropComponent} from '../examples/DragAndDrop/Simple/Simple';
-import {ConstraintsDragDropComponent} from '../examples/DragAndDrop/Constraints/Constraints';
-import {ProxiesDragDropComponent} from '../examples/DragAndDrop/Proxies/Proxies';
-import {HandlesDragDropComponent} from '../examples/DragAndDrop/Handles/Handles';
-import {GroupsDragDropComponent} from '../examples/DragAndDrop/Groups/Groups';
-import {FilesDragDropComponent} from '../examples/DragAndDrop/Files/Files';
-import {DataDragDropComponent} from '../examples/DragAndDrop/Data/Data';
-
-import {BasicPanelsComponent} from '../examples/Panels/BasicPanels/BasicPanels';
-import {BasicDatePanelComponent} from '../examples/Panels/BasicDatePanel/BasicDatePanel';
-import {AdvancedDatePanelComponent} from '../examples/Panels/AdvancedDatePanel/AdvancedDatePanel';
-import {TimePanelComponent} from '../examples/Panels/TimePanel/TimePanel';
-import {CollapsiblePanelComponent} from '../examples/Panels/CollapsiblePanel/CollapsiblePanel';
-import {ResizableHandleComponent} from '../examples/Panels/ResizableHandle/ResizableHandle';
-import {DialogPopupComponent} from '../examples/Popups/Dialog/Dialog';
-import {MessagePopupComponent} from '../examples/Popups/Message/Message';
-import {ToastPopupComponent} from '../examples/Popups/Toast/Toast';
-import {BasicListComponent} from '../examples/Lists/BasicList/BasicList';
-import {DisclosureListComponent} from '../examples/Lists/Disclosure/Disclosure';
-import {GroupedListComponent} from '../examples/Lists/GroupedList/GroupedList';
-import {NestedListComponent} from '../examples/Lists/NestedList/NestedList';
-//import {PagingListComponent} from '../examples/Lists/PagingList/PagingList';
-import {PullRefreshListComponent} from '../examples/Lists/PullRefresh/PullRefresh';
-import {BasicAccordionSwiperComponent} from '../examples/Lists/BasicAccordionSwiper/BasicAccordionSwiper';
-import {BasicStepSwiperComponent} from '../examples/Lists/BasicStepSwiper/BasicStepSwiper';
-import {UndoableAccordionSwiperComponent} from '../examples/Lists/UndoableAccordionSwiper/UndoableAccordionSwiper';
-import {UndoableStepSwiperComponent} from '../examples/Lists/UndoableStepSwiper/UndoableStepSwiper';
-
-import {TouchEventsComponent} from '../examples/TouchEvents/TouchEvents';
-import {BasicTabsComponent} from '../examples/Tabs/BasicTabs/BasicTabs';
-import {BottomTabsComponent} from '../examples/Tabs/BottomTabs/BottomTabs';
-import {IconTabsComponent} from '../examples/Tabs/IconTabs/IconTabs';
-import {DesktopTabsComponent} from '../examples/Tabs/DesktopTabs/DesktopTabs';
-import {ClosableTabsComponent} from '../examples/Tabs/ClosableTabs/ClosableTabs';
-import {ScrollingTabsComponent} from '../examples/Tabs/ScrollingTabs/ScrollingTabs';
-import {TabBarComponent} from '../examples/Tabs/TabBar/TabBar';
-
-import {WizardComponent} from '../examples/Wizard/Wizard';
-
 // import {TreeMapToolTipComponent} from '../examples/D3/Hierarchy/TreeMapToolTip/TreeMapToolTip';
 // import {ConfigurablePivotTreeMapComponent} from '../examples/D3/Hierarchy/ConfigurablePivotTreeMap/ConfigurablePivotTreeMap';
 // import {TreeMapComponent} from '../examples/D3/Hierarchy/TreeMap/TreeMap';
@@ -214,6 +206,17 @@ import {WizardComponent} from '../examples/Wizard/Wizard';
 // import {TreeHierarchyComponent} from '../examples/D3/Hierarchy/Tree/Tree';
 // import {ZoomableSunburstComponent} from '../examples/D3/Hierarchy/ZoomableSunburst/ZoomableSunburst';
 
+
+import {CollapsibleComponent}         from '../examples/PivotGrid/Collapsible/Collapsible'
+import {CompactLayoutComponent}       from '../examples/PivotGrid/CompactLayout/CompactLayout'
+import {ConfiguratorPluginComponent}  from '../examples/PivotGrid/ConfiguratorPlugin/ConfiguratorPlugin'
+import {DataChangesComponent}         from '../examples/PivotGrid/DataChanges/DataChanges'
+import {DrilldownPluginComponent}     from '../examples/PivotGrid/DrilldownPlugin/DrilldownPlugin'
+import {ExporterPluginComponent}      from '../examples/PivotGrid/ExporterPlugin/ExporterPlugin'
+import {OutlineLayoutComponent}       from '../examples/PivotGrid/OutlineLayout/OutlineLayout'
+import {PivotGridWidgetsComponent}    from '../examples/PivotGrid/PivotGridWidgets/PivotGridWidgets'
+import {RangeEditorPluginComponent}   from '../examples/PivotGrid/RangeEditorPlugin/RangeEditorPlugin'
+import {TabularLayoutComponent}       from '../examples/PivotGrid/TabularLayout/TabularLayout'
 
 
 var declarations: any = [
