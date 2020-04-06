@@ -1,6 +1,6 @@
 declare var Ext: any;
 import { Component } from '@angular/core'
-import { mediumText } from '../../dummy';
+import { mediumText } from '../../../dummy';
 //https://www.sencha.com/forum/showthread.php?468441-6-5-Modern-Resizable-panel-throw-an-exception-when-dragging-ne-se-sw-nw-handles
 
 Ext.require([

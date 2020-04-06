@@ -1,6 +1,6 @@
 declare var Ext: any;
 import { Component } from '@angular/core'
-import {mediumText} from '../../dummy';
+import {mediumText} from '../../../dummy';
 
 @Component({
   selector: 'collapsible-panel-component',

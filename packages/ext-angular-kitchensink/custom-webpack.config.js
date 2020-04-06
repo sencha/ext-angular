@@ -3,11 +3,11 @@ const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
 
 console.log(process)
 var build_v
-if (process.env.build_v == undefined) {
+if (process.env.npm_config_env_build_v == undefined) {
   build_v = '7.2.0.0'
 }
 else {
-  build_v = process.env.build_v
+  build_v = process.env.npm_config_env_build_v
 }
 
 var environment = 'development'
