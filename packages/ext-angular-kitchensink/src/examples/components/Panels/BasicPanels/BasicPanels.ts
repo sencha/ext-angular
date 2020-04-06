@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core'
-import {shortText, mediumText} from '../../dummy';
+import {shortText, mediumText} from '../../../dummy';
 
 declare var Ext: any;
 
