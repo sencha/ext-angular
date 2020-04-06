@@ -4,6 +4,9 @@ const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 //const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+//console.log(process.env.build_v)
+var build_v = process.env.build_v
+
 var environment = 'development'
 process.argv.forEach(argv => {
   if (argv == '--prod') {
@@ -52,7 +55,7 @@ module.exports = function(config, options) {
   var watch         = get('watch',         'no')
   var verbose       = get('verbose',       'no')
   var basehref      = get('basehref',      '/')
-  var build_v       = get('build_v',       '7.2.0.0');
+  //var build_v       = get('build_v',       '7.2.0.0');
 
   var port = 1962
 
