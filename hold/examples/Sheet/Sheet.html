@@ -1,0 +1,142 @@
+<ExtContainer padding="10" maxWidth="500">
+    <ExtSheet
+        [side]="direct"
+        [modal]="modal"
+        [reveal]="reveal"
+        [displayed]="displayed"
+        (hide)="onHide()"
+        layout="vbox"
+        padding="15 0"
+    >
+        <ExtButton
+            text="Settings"
+            iconCls="x-fa fa-gear"
+            (tap)="toggleMenu()"
+            [width]="direct === 'left' || direct === 'right' ? 250 : undefined"
+        ></ExtButton>
+        <ExtButton
+            text="New Item"
+            iconCls="x-fa fa-pencil"
+            (tap)="toggleMenu()"
+            [width]="direct === 'left' || direct === 'right' ? 250 : undefined"
+        ></ExtButton>
+        <ExtButton
+            text="Star"
+            iconCls="x-fa fa-star"
+            (tap)="toggleMenu()"
+            [width]="direct === 'left' || direct === 'right' ? 250 : undefined"
+        ></ExtButton>
+    </ExtSheet>
+
+    <ExtPanel
+        shadow="true"
+        ui="instructions"
+        [layout]="{ type: 'vbox', align: 'left' }"
+    >
+        <ExtContainer layout="hbox">
+            <ExtContainer docked="top"
+                ><div #extitem>
+                    <div>
+                        Sheet is a component which allows you to easily display
+                        sliding menus from any side of the screen. You can show
+                        the menu by clicking the "Show Menu" button below or by
+                        swiping from the edge of the screen.
+                    </div>
+                </div></ExtContainer
+            >
+        </ExtContainer>
+    </ExtPanel>
+
+    <ExtPanel
+        [layout]="{ type: 'vbox', align: 'left' }"
+        shadow
+        margin="20 0 0 0"
+        padding="15"
+        shadow="true"
+    >
+        <ExtContainer layout="hbox">
+            <ExtButton
+                ui="action"
+                enableToggle="true"
+                [pressed]="displayed"
+                [text]="displayed ? 'Hide Menu' : 'Show Menu'"
+                (tap)="toggleMenu()"
+                margin="0 0 10 0"
+            >
+            </ExtButton>
+        </ExtContainer>
+
+        <ExtContainer layout="hbox">
+            <ExtContainer docked="top"
+                ><div #extitem>
+                    <div>side</div>
+                </div></ExtContainer
+            >
+        </ExtContainer>
+
+        <ExtSegmentedbutton margin="0 0 10 0">
+            <ExtButton
+                text="left"
+                [pressed]="direct === 'left'"
+                (tap)="directLeft()"
+            ></ExtButton>
+            <ExtButton
+                text="right"
+                [pressed]="direct === 'right'"
+                (tap)="directRight()"
+            ></ExtButton>
+            <ExtButton
+                text="top"
+                [pressed]="direct === 'top'"
+                (tap)="directTop()"
+            ></ExtButton>
+            <ExtButton
+                text="bottom"
+                [pressed]="direct === 'bottom'"
+                (tap)="directBottom()"
+            ></ExtButton>
+        </ExtSegmentedbutton>
+
+        <ExtContainer layout="hbox">
+            <ExtContainer docked="top"
+                ><div #extitem>
+                    <div>reveal</div>
+                </div></ExtContainer
+            >
+        </ExtContainer>
+
+        <ExtSegmentedbutton margin="0 0 10 0">
+            <ExtButton
+                text="true"
+                [pressed]="reveal"
+                (tap)="setReveal()"
+            ></ExtButton>
+            <ExtButton
+                text="false"
+                [pressed]="reveal"
+                (tap)="unsetReveal()"
+            ></ExtButton>
+        </ExtSegmentedbutton>
+
+        <ExtContainer layout="hbox">
+            <ExtContainer docked="top"
+                ><div #extitem>
+                    <div>modal</div>
+                </div></ExtContainer
+            >
+        </ExtContainer>
+
+        <ExtSegmentedbutton [disabled]="reveal">
+            <ExtButton
+                text="true"
+                [pressed]="modal"
+                (tap)="setModal()"
+            ></ExtButton>
+            <ExtButton
+                text="false"
+                [pressed]="modal"
+                (tap)="unsetModal()"
+            ></ExtButton>
+        </ExtSegmentedbutton>
+    </ExtPanel>
+</ExtContainer>

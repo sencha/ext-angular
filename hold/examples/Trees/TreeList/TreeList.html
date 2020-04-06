@@ -1,0 +1,39 @@
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+    <ExtPanel
+        [shadow]="true"
+        [top]="top"
+        [left]="left"
+        [width]="width"
+        [height]="height"
+        scrollable="true"
+    >
+        <ExtToolbar docked="top">
+            <ExtSegmentedbutton allowMultiple="true">
+                <ExtButton
+                    ui="default-toolbar"
+                    text="Nav"
+                    [pressed]="nav"
+                    (pressedchange)="this.toggleNav($event)"
+                    [disabled]="micro"
+                ></ExtButton>
+                <ExtButton
+                    ui="default-toolbar"
+                    text="Micro"
+                    [pressed]="micro"
+                    (pressedchange)="this.toggleMicro($event)"
+                ></ExtButton>
+            </ExtSegmentedbutton>
+        </ExtToolbar>
+
+        <ExtTreelist
+            ref="tree"
+            [width]="width"
+            expanderOnly="false"
+            [store]="this.store"
+            [micro]="micro"
+            [expanderFirst]="!nav"
+            [ui]="nav ? 'nav' : null"
+        >
+        </ExtTreelist>
+    </ExtPanel>
+</ExtContainer>

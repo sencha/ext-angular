@@ -1,0 +1,46 @@
+<ExtContainer
+    [padding]="10"
+    [width]="!isPhone && 700"
+    [layout]="{
+        type: 'vbox',
+        pack: 'center',
+        align: 'stretch'
+    }"
+>
+    <ExtContainer
+        [autoSize]="true"
+        [defaults]="{flex: 1, bodyPadding: 10, shadow: true, margin: 10 }"
+        [layout]="{type: isPhone ? 'vbox' : 'hbox', pack: 'center', align: 'stretch'}"
+        [flex]="1"
+    >
+        <ExtPanel  [html]="text"></ExtPanel>
+        <ExtPanel  [title]="'Title'" [html]="text"></ExtPanel>
+    </ExtContainer>
+    <ExtContainer
+        [autoSize]="true"
+        [defaults]="{flex: 1, bodyPadding: 10, shadow: true, margin: 10}"
+        [layout]="{type: isPhone ? 'vbox' : 'hbox', pack: 'center', align: 'stretch'}"
+        [flex]="1"
+    >
+        <ExtPanel
+            [title]="'Built in Tools'"
+            [tools]="[
+                {type: 'minimize', handler: toolHandler },
+                {type: 'refresh', handler: toolHandler },
+                {type: 'search', handler: toolHandler },
+                {type: 'save', handler: toolHandler },
+                {type: 'menu', handler: toolHandler }
+            ]"
+            [html]="text"
+        ></ExtPanel>
+        <ExtPanel
+            [title]="'Custom Tools w/ iconCls'"
+            [tools]="[
+                {iconCls: 'x-fa fa-wrench', handler: toolHandler },
+                {iconCls: 'x-fa fa-reply', handler: toolHandler },
+                {iconCls: 'x-fa fa-reply-all', handler: toolHandler }
+            ]"
+            [html]="text"
+        ></ExtPanel>
+    </ExtContainer>
+</ExtContainer>

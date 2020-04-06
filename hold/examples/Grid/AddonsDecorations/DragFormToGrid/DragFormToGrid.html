@@ -1,0 +1,51 @@
+<ExtPanel
+    [layout]="{
+        type: 'box'
+    }"
+    padding="10"
+    margin="40"
+    cls="form-to-grid-dd"
+    title="Patient Hospital Assignment"
+    maxWidth="800"
+    (ready)="parentPanelReady($event)"
+>
+    <ExtPanel
+        title="Patients"
+        flex="0.4"
+        border="true"
+        scrollable="y"
+        (ready)="dataPanelReady($event)"
+    >
+        <ExtDataview
+            (ready)="dataViewReady($event)"
+            [itemTpl]="patientTpl"
+            [store]="patientStore"
+        >
+        </ExtDataview>
+    </ExtPanel>
+    <ExtSpacer maxHeight="20" maxWidth="20"> </ExtSpacer>
+    <ExtGrid
+        title="Hospitals"
+        flex="0.6"
+        cls="dd-hospital-grid"
+        variableHeights="true"
+        (ready)="hospitalGridReady($event)"
+        [itemConfig]="{
+            body: {
+                tpl: this.hospitalTpl,
+                cls: 'hospital-target'
+            }
+        }"
+        [store]="hospitalStore"
+        [listeners]="{
+            element: 'element',
+            delegate: ['.remove-icon'],
+            tap: this.onRemoveTapped
+        }"
+    >
+        <ExtGridcolumn dataIndex="name" text="Name" flex="1"> </ExtGridcolumn>
+        <ExtGridcolumn dataIndex="address" text="Address" flex="1"> </ExtGridcolumn>
+        <ExtGridcolumn dataIndex="telephone" text="Telephone" flex="1">
+        </ExtGridcolumn>
+    </ExtGrid>
+</ExtPanel>

@@ -1,0 +1,23 @@
+<ExtContainer padding="10" layout="vbox" [fitToParent]="true">
+
+  <ExtContainer><div #extitem>
+    <chart-toolbar
+      [onThemeChange]="this.changeTheme"
+      [onRefreshClick]="this.refreshData"
+      [theme]="theme">
+    </chart-toolbar>
+  </div></ExtContainer>
+
+  <ExtCartesian downloadServerUrl ="http://svg.sencha.io"
+    flex="1"
+    shadow="true"
+    insetPadding="20 20 0 10"
+    [theme]="theme"
+    [interactions]="cartesianInteractions"
+    [legend]="{ type: 'sprite', position: 'bottom', marker: { size: 24 } }"
+    [store]="this.store"
+    [axes]="cartesianAxes"
+    [series]="cartesianSeries">
+  </ExtCartesian>
+
+</ExtContainer>

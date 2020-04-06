@@ -1,7 +1,7 @@
 declare var Ext: any;
 declare var BUILD_VERSION: any;
 import { Component, OnInit, NgZone, ChangeDetectorRef } from "@angular/core";
-import { navTreeRoot } from "../examples";
+//import { navTreeRoot } from "./index";
 import { Router } from "@angular/router";
 import { VERSION } from "@angular/core";
 //import { Subject } from "rxjs";
@@ -98,7 +98,7 @@ export class AppComponent {
     this.treeStore = {
         xtype: "tree",
         rootVisible: false,
-        root: navTreeRoot
+        root: window['treeroot']
     };
   }
 
@@ -225,7 +225,7 @@ export class AppComponent {
         this.tabPanelCmp.add({
           xtype: "panel",
           title: file,
-          ui: "code-panel",
+          xui: "code-panel",
           layout: "fit",
           userSelectable: { element: true, bodyElement: true },
           scrollable: true,
@@ -236,7 +236,7 @@ export class AppComponent {
             minWidth: 220,
             maxWidth: 250
           },
-          html: `<pre style="user-select: text;"><code class='code'>${codeMapFile
+          html: `<pre style="user-select: text;"><code xstyle="padding-left:10px;" class='code'>${codeMapFile
             .replace(/</g, "&lt;")
             .replace(/>/g, "&gt;")}</code></pre>`
         });

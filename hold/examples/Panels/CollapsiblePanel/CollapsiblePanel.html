@@ -1,0 +1,22 @@
+<ExtContainer  [padding]="isPhone ? 0: 10" [layout]="isPhone ? 'fit' : 'auto'">
+    <ExtPanel
+        [title]="'Top Collapsible Panel'"
+        [shadow]="true"
+        [height]="isPhone ? undefined : 400"
+        [width]="isPhone ? undefined : 400"
+        [bodyPadding]="20"
+        [collapsible]="{direction: 'top',dynamic: true}"
+        [bodyPadding]="10"
+        [html]="mediumText"
+    >
+        <ExtPanel
+            [docked]="'right'"
+            [width]="'50%'"
+            [bodyPadding]="20"
+            [title]="'Right Collapsible'"
+            [collapsible]="{collapsed: true, direction: 'right'}"
+            [html]="mediumText"
+        >
+        </ExtPanel>
+    </ExtPanel>
+</ExtContainer>
