@@ -42,8 +42,8 @@ ng new ext-angular-modern-demo --minimal=true --interactive=false -g=true --skip
 
 ```sh
 cd ext-angular-modern-demo
-npm install @sencha/ext-angular-modern --save
 npm install @sencha/ext-modern-runtime --save
+npm install @sencha/ext-angular-modern --save
 ```
 
 - Open your editor
@@ -162,9 +162,6 @@ export class AppComponent {
             "styles": [
               "src/styles.css",
               "ext-runtime-modern/material/material-all.css"
-              //"ext-runtime-modern/ios/ios-all.css"
-              //"ext-runtime-modern/material/material-all.css"
-              //"ext-runtime-modern/neptune/neptune-all.css"
               //"ext-runtime-modern/triton/triton-all.css"
             ],
 ```

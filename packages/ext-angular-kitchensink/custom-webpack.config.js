@@ -29,7 +29,7 @@ module.exports = function(config, options) {
 
   var framework     = get('framework',     'angular')
   var toolkit       = get('toolkit',       'modern')
-  var theme         = get('theme',         'theme-kitchensink')
+  var theme         = get('theme',         'theme-material')
   var packages      = get('packages',
   [
     'font-ext',
@@ -44,7 +44,7 @@ module.exports = function(config, options) {
     'treegrid',
     'froala-editor'
   ])
-  var script        = get('script',        './extract-code.js')
+  var script        = get('script',        '')
   var emit          = get('emit',          'yes')
   var profile       = get('profile',       '')
   //var environment   = get('environment',   'development')
