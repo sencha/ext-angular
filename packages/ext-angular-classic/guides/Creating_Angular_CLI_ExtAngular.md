@@ -42,8 +42,8 @@ ng new ext-angular-classic-demo --minimal=true --interactive=false -g=true --ski
 
 ```sh
 cd ext-angular-classic-demo
-npm install @sencha/ext-angular-classic --save
 npm install @sencha/ext-classic-runtime --save
+npm install @sencha/ext-angular-classic --save
 ```
 
 - Open your editor
@@ -196,9 +196,6 @@ export class AppComponent {
             "styles": [
               "src/styles.css",
               "ext-runtime-classic/material/material-all.css"
-              //"ext-runtime-classic/ios/ios-all.css"
-              //"ext-runtime-classic/material/material-all.css"
-              //"ext-runtime-classic/neptune/neptune-all.css"
               //"ext-runtime-classic/triton/triton-all.css"
             ],
 ```
