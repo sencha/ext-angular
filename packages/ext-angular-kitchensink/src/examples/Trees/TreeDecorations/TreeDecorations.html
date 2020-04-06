@@ -1,0 +1,31 @@
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+    <ExtTabpanel
+        [shadow]="true"
+        [top]="top"
+        [left]="left"
+        [width]="width"
+        [height]="height"
+        [tabBar]="{ docked: 'top' }"
+    >
+        <ExtPanel layout="fit" [title]="'Row Lines'">
+            <ExtTree
+                header="false"
+                rowLines="true"
+                rootVisible="false"
+                shadow="true"
+                [store]="store"
+            >
+            </ExtTree>
+        </ExtPanel>
+
+        <ExtPanel layout="fit" [title]="'Single Expand'">
+            <ExtTree
+                header="false"
+                singleExpand="true"
+                rootVisible="false"
+                shadow="true"
+                [store]="store"
+            >
+            </ExtTree>
+        </ExtPanel> </ExtTabpanel
+></ExtContainer>

@@ -1,0 +1,119 @@
+<ExtToolbar
+    ui="app-transparent-toolbar"
+    [shadow]="false"
+>
+    <ExtButton
+        [hidden]="!(show || theme)"
+        margin="0 10px 0 0"
+        iconCls="x-fa fa-picture-o"
+        text="Theme"
+        ui="action"
+    >
+        <ExtMenu>
+            <ExtMenuitem
+                text="Default"
+                [handler]="onThemeChangeDefault"
+                [iconCls]="
+                    theme === 'default' ? 'x-font-icon md-icon-done' : ''
+                "
+            ></ExtMenuitem>
+            <ExtMenuitem
+                [hidden]="onlyMidnight"
+                text="Green"
+                [handler]="onThemeChangeGreen"
+                [iconCls]="theme === 'green' ? 'x-font-icon md-icon-done' : ''"
+            ></ExtMenuitem>
+            <ExtMenuitem
+                text="Midnight"
+                [handler]="onThemeChangeMidnight"
+                [iconCls]="
+                    theme === 'midnight' ? 'x-font-icon md-icon-done' : ''
+                "
+            ></ExtMenuitem>
+            <ExtMenuitem
+                [hidden]="onlyMidnight"
+                text="Muted"
+                [handler]="onThemeChangeMuted"
+                [iconCls]="theme === 'muted' ? 'x-font-icon md-icon-done' : ''"
+            ></ExtMenuitem>
+            <ExtMenuitem
+                [hidden]="onlyMidnight"
+                text="Red"
+                [handler]="onThemeChangeRed"
+                [iconCls]="theme === 'red' ? 'x-font-icon md-icon-done' : ''"
+            ></ExtMenuitem>
+            <ExtMenuitem
+                [hidden]="onlyMidnight"
+                text="Sky"
+                [handler]="onThemeChangeSky"
+                [iconCls]="theme === 'sky' ? 'x-font-icon md-icon-done' : ''"
+            ></ExtMenuitem>
+            <ExtMenuitem
+                [hidden]="onlyMidnight"
+                text="Yellow"
+                [handler]="onThemeChangeYellow"
+                [iconCls]="theme === 'yellow' ? 'x-font-icon md-icon-done' : ''"
+            ></ExtMenuitem>
+        </ExtMenu>
+    </ExtButton>
+
+    <ExtButton
+        [hidden]="!downloadChartRef"
+        margin="0 10px 0 0"
+        ui="action"
+        iconCls="x-fa fa-eye"
+        text="Preview"
+        [handler]="
+            downloadChart.bind(null, downloadChartRef ? downloadChartRef : '')
+        "
+        [platformConfig]="{
+            desktop: { text: 'DOWNLOAD', iconCls: 'x-fa fa-download' }
+        }"
+    >
+    </ExtButton>
+
+    <ExtButton
+        [hidden]="!onRefreshClick"
+        ui="action"
+        margin="0 10px 0 0"
+        iconCls="x-fa fa-refresh"
+        [handler]="onRefreshClick"
+        text="REFRESH"
+    ></ExtButton>
+
+    <ExtSpacer></ExtSpacer>
+
+    <ExtSegmentedbutton
+        [hidden]="!(show || onStackGroup)"
+        margin="0 10px 0 0"
+        (change)="onStackGroup($event)"
+    >
+        <ExtButton iconCls="x-fa fa-bars" text="STACK"></ExtButton>
+        <ExtButton iconCls="x-fa fa-bar-chart" text="GROUP"></ExtButton>
+    </ExtSegmentedbutton>
+
+    <ExtSegmentedbutton
+        [hidden]="!(show || onToggleZoomOnPan) || supportsTouch"
+        [value]="zoom"
+    >
+        <ExtButton
+            iconCls="x-fa fa-arrows"
+            [handler]="onToggleZoomOnPanPan"
+            text="PAN"
+            value="false"
+        ></ExtButton>
+        <ExtButton
+            iconCls="x-fa fa-search-plus"
+            [handler]="onToggleZoomOnPanZoom"
+            text="ZOOM"
+            value="true"
+        ></ExtButton>
+        <ExtButton
+            [hidden]="!onToggleCrosshair"
+            iconCls="x-fa fa-crosshairs"
+            [handler]="onToggleCrosshairLocal"
+            text="CROSSHAIR"
+            value="crosshair"
+        ></ExtButton>
+    </ExtSegmentedbutton>
+</ExtToolbar>

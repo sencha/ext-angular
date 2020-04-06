@@ -1,0 +1,54 @@
+<ExtContainer [layout]="{ type: 'vbox', align: 'center' }" [padding]="10">
+    <ExtPanel
+        [ui]="'instructions'"
+        [margin]="'0 0 20 0'"
+        shadow="true"
+        [html]="
+            'To acheive the look and feel of tabs without using a <code>TabPanel</code>, you can use <code>TabBar</code> and <code>Tab</code> as standalone components.'
+        "
+    >
+    </ExtPanel>
+
+    <ExtTabbar
+        [width]="400"
+        [shadow]="true"
+        (activeTabchange)="onTabChange($event)"
+        [activeTab]="activeTab"
+    >
+        <ExtTab
+            key="1"
+            [itemId]="'info'"
+            [title]="'Info'"
+            [iconCls]="'x-fa fa-info-circle'"
+        ></ExtTab>
+        <ExtTab
+            key="2"
+            [itemId]="'download'"
+            title="Download"
+            [iconCls]="'x-fa fa-download'"
+            badgeText="2"
+        ></ExtTab>
+        <ExtTab
+            key="3"
+            [itemId]="'favorites'"
+            title="Favorites"
+            iconCls="x-fa fa-star"
+            (onActivate)="onActivateTab($event)"
+        ></ExtTab>
+        <ExtTab
+            key="4"
+            [itemId]="'bookmarks'"
+            title="Bookmarks"
+            iconCls="x-fa fa-bookmark"
+            (onActivate)="onActivateTab($event)"
+        ></ExtTab>
+    </ExtTabbar>
+
+    <ExtPanel ui="instructions" margin="20 0 0 0" shadow>
+        <ExtContainer>
+            <span #extitem>
+                <div>Active Tab: {{ activeTab }}</div>
+            </span>
+        </ExtContainer>
+    </ExtPanel>
+</ExtContainer>

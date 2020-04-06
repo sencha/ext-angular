@@ -1,0 +1,23 @@
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+    <ExtCalendar
+        [shadow]="true"
+        [views]="{
+            day: {
+                startTime: 6,
+                endTime: 22
+            },
+            workweek: {
+                xtype: 'calendar-week',
+                controlStoreRange: false,
+                label: 'Work Week',
+                weight: 15,
+                dayHeaderFormat: 'D d',
+                firstDayOfWeek: 1,
+                visibleDays: 5
+            }
+        }"
+        [timezoneOffset]="0"
+        [store]="this.store"
+    >
+    </ExtCalendar>
+</ExtContainer>

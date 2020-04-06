@@ -1,0 +1,40 @@
+<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+    <ExtTree
+        [shadow]="true"
+        [top]="top"
+        [left]="left"
+        [width]="width"
+        [height]="height"
+        [store]="store"
+        [platformConfig]="{
+            title: 'Editable Tree',
+            desktop: {
+                plugins: {
+                    gridcellediting: true
+                }
+            },
+            '!desktop': {
+                plugins: {
+                    grideditable: true
+                }
+            }
+        }"
+        [columns]="[
+            {
+                xtype: 'treecolumn',
+                text: 'Name',
+                dataIndex: 'text',
+                flex: 1,
+                editable: true
+            },
+            {
+                xtype: 'treecolumn',
+                text: 'Class Name',
+                dataIndex: 'className',
+                flex: 1,
+                editable: true
+            }
+        ]"
+    >
+    </ExtTree>
+</ExtContainer>
