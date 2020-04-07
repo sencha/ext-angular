@@ -67,7 +67,7 @@
               "runtime/ext/ext.css"
             ],
             "scripts": [
-              "runtime/ext/ext.js"
+              "runtime/modern.engine.enterprise.js"
             ]
           },
           "configurations": {
