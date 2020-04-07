@@ -20,8 +20,8 @@ export class ViewOptionsComponent {
     pageSize: 0,
     proxy: {
       type: 'ajax',
-      url: 'resources/data/CompanyData.json'
-    } 
+      url: 'assets/resources/data/CompanyData.json'
+    }
   });
 
   renderSign = (format, value) => {
@@ -37,3 +37,16 @@ export class ViewOptionsComponent {
   } ;
 
 }
+
+
+// <ExtGridcolumn
+// text="Change"
+// width="100"
+// dataIndex="priceChange"
+// [renderer]="this.renderSign.bind(this, '0.00')"
+// ></ExtGridcolumn>
+// <ExtGridcolumn
+// text="% Change"
+// dataIndex="priceChangePct"
+// [renderer]="this.renderSign.bind(this, '0.00')"
+// ></ExtGridcolumn>

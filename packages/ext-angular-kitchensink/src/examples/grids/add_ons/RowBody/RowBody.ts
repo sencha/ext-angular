@@ -15,13 +15,10 @@ export class RowBodyComponent {
       pageSize: 0,
       proxy: {
           type: 'ajax',
-          url: 'resources/data/CompanyData.json'
-      } 
-  });   
-
-
-
-  tpl = 
+          url: 'assets/resources/data/CompanyData.json'
+      }
+  });
+  tpl =
     `
     <div>
       <div>Industry: {industry}</div>
@@ -49,3 +46,15 @@ export class RowBodyComponent {
   }
 
 }
+
+// <ExtGridcolumn
+// text="Change"
+// width="100"
+// dataIndex="priceChange"
+// [renderer]="this.renderSign.bind(this, '0.00')"
+// ></ExtGridcolumn>
+// <ExtGridcolumn
+// text="% Change"
+// dataIndex="priceChangePct"
+// [renderer]="this.renderSign.bind(this, '0.00')"
+// ></ExtGridcolumn>

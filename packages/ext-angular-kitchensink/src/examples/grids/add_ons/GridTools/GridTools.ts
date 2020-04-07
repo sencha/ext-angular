@@ -20,7 +20,7 @@ export class GridToolsComponent {
     pageSize: 0,
     proxy: {
       type: 'ajax',
-      url: 'resources/data/restaurants.json'
+      url: 'assets/resources/data/restaurants.json'
     }
   })
 

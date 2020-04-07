@@ -18,7 +18,7 @@ export class LockingGridComponent {
         pageSize: 0,
         proxy: {
             type: 'ajax',
-            url: 'resources/data/CompanyData.json',
+            url: 'assets/resources/data/CompanyData.json',
         }
     });
     const columns = [
@@ -54,31 +54,7 @@ export class LockingGridComponent {
                 }
             }
         },
-        {
-            'locked': 'right',
-            'text': 'Change',
-            'width': '130',
-            'align': 'right',
-            'dataIndex': 'change',
-            'renderer': this.renderSign.bind(this, '0.00'),
-            'cell': {
-                'encodeHtml': 'false'
-            },
-            'xtype': 'numbercolumn',
-            'format': '0.00'
-        },
-        {
-            'text': '% Change',
-            'width': '130',
-            'align': 'right',
-            'dataIndex': 'pctChange',
-            'renderer': this.renderSign.bind(this, '0.00%'),
-            'cell': {
-                'encodeHtml': 'false'
-            },
-            'xtype': 'numbercolumn',
-            'format': '0.00%'
-        },
+
         {
             'text': 'Last Updated',
             'width': '150',
@@ -107,3 +83,29 @@ export class LockingGridComponent {
   summarizeCompanies = (grid, context) => context.records.length + ' Companies';
 
 }
+
+// {
+//   'locked': 'right',
+//   'text': 'Change',
+//   'width': '130',
+//   'align': 'right',
+//   'dataIndex': 'change',
+//   'renderer': this.renderSign.bind(this, '0.00'),
+//   'cell': {
+//       'encodeHtml': 'false'
+//   },
+//   'xtype': 'numbercolumn',
+//   'format': '0.00'
+// },
+// {
+//   'text': '% Change',
+//   'width': '130',
+//   'align': 'right',
+//   'dataIndex': 'pctChange',
+//   'renderer': this.renderSign.bind(this, '0.00%'),
+//   'cell': {
+//       'encodeHtml': 'false'
+//   },
+//   'xtype': 'numbercolumn',
+//   'format': '0.00%'
+// },

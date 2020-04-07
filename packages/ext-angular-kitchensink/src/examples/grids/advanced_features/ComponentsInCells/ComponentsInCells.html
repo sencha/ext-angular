@@ -17,19 +17,6 @@
             formatter="usMoney"
         ></ExtGridcolumn>
         <ExtGridcolumn
-            text="Change"
-            width="100"
-            dataIndex="priceChange"
-            [cell]="{encodeHtml:false}"
-            [renderer]="this.renderNumberCell.bind(this, '0.00')"
-        ></ExtGridcolumn>
-        <ExtGridcolumn
-            text="% Change"
-            dataIndex="priceChangePct"
-            [cell]="{encodeHtml:false}"
-            [renderer]="this.renderNumberCell.bind(this, '0.00%')"
-        ></ExtGridcolumn>
-        <ExtGridcolumn
             text="Actions"
             flex="1"
             minWidth="210"

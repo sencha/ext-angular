@@ -18,7 +18,7 @@ export class XMLGridComponent {
     ],
     proxy:{
       type: 'ajax',
-      url: 'resources/data/Grids/sheldon.xml',
+      url: 'assets/resources/data/Grids/sheldon.xml',
       reader: {
         type: 'xml',
         record: 'Item',

@@ -21,8 +21,8 @@ export class SummaryRowComponent {
     pageSize: 0,
     proxy: {
       type: 'ajax',
-      url: 'resources/data/CompanyData.json'
-    } 
+      url: 'assets/resources/data/CompanyData.json'
+    }
   });
 
   renderSign = (format, value) => {
@@ -40,3 +40,18 @@ export class SummaryRowComponent {
 summarizeCompanies = (grid, context) => context.records.length + ' Companies';
 
 }
+
+// <ExtGridcolumn
+// text="Change"
+// width="90"
+// dataIndex="priceChange"
+// [renderer]="this.renderSign.bind(this, '0.00')"
+// summary="max"
+// ></ExtGridcolumn>
+// <ExtGridcolumn
+// text="% Change"
+// width="100"
+// dataIndex="priceChangePct"
+// [renderer]="this.renderSign.bind(this, '0.00')"
+// summary="average"
+// ></ExtGridcolumn>

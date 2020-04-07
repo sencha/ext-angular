@@ -18,7 +18,7 @@ export class RowExpanderComponent {
     pageSize: null,
     proxy: {
       type: 'ajax',
-      url: 'resources/data/CompanyData.json',
+      url: 'assets/resources/data/CompanyData.json',
     }
   })
 
@@ -53,3 +53,15 @@ export class RowExpanderComponent {
   } ;
 
 }
+
+// <ExtGridcolumn
+// text="Change"
+// width="100"
+// dataIndex="priceChange"
+// [renderer]="this.renderSign.bind(this, '0.00')"
+// ></ExtGridcolumn>
+// <ExtGridcolumn
+// text="% Change"
+// dataIndex="priceChangePct"
+// [renderer]="this.renderSign.bind(this, '0.00')"
+// ></ExtGridcolumn>

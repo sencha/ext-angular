@@ -18,20 +18,7 @@
             formatter="usMoney"
             summary="average"
         ></ExtGridcolumn>
-        <ExtGridcolumn
-            text="Change"
-            width="90"
-            dataIndex="priceChange"
-            [renderer]="this.renderSign.bind(this, '0.00')"
-            summary="max"
-        ></ExtGridcolumn>
-        <ExtGridcolumn
-            text="% Change"
-            width="100"
-            dataIndex="priceChangePct"
-            [renderer]="this.renderSign.bind(this, '0.00')"
-            summary="average"
-        ></ExtGridcolumn>
+
         <ExtGridcolumn
             text="Last Updated"
             width="125"

@@ -22,17 +22,7 @@
             width="75"
             formatter="usMoney"
         ></ExtGridcolumn>
-        <ExtGridcolumn
-            text="Change"
-            width="100"
-            dataIndex="priceChange"
-            [renderer]="this.renderSign.bind(this, '0.00')"
-        ></ExtGridcolumn>
-        <ExtGridcolumn
-            text="% Change"
-            dataIndex="priceChangePct"
-            [renderer]="this.renderSign.bind(this, '0.00')"
-        ></ExtGridcolumn>
+
         <ExtGridcolumn
             text="Last Updated"
             dataIndex="priceLastChange"

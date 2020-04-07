@@ -43,16 +43,16 @@ export class ComponentsInCellsComponent {
     widget: {
       xtype: 'segmentedbutton',
    maxWidth: "300",
-   allowDepress: "true", 
+   allowDepress: "true",
    items: [
     {
       text: 'Buy',
       handler : this.buyHandler
-    }, 
+    },
     {
       text: 'Sell',
       handler : this.sellHandler
-    }, 
+    },
     {
       text: 'Watch',
       handler : this.watchHandler
@@ -65,24 +65,24 @@ export class ComponentsInCellsComponent {
   //   {
   //     text: 'Buy',
   //     handler : this.buyHandler
-  //   }, 
+  //   },
   //   {
   //     text: 'Sell',
   //     handler : this.sellHandler
-  //   }, 
+  //   },
   //   {
   //     text: 'Watch',
   //     handler : this.watchHandler
   //     }
   //   ];
 
-  
+
   renderActionsCell = (value, record) => {
     return `
-        <action-cell 
-            [buyHandler]=this.buyHandler.bind(this, record)" 
-            [sellHandler]="this.sellHandler.bind(this, record)" 
-            [watchHandler]="this.watchHandler.bind(this, record)" 
+        <action-cell
+            [buyHandler]=this.buyHandler.bind(this, record)"
+            [sellHandler]="this.sellHandler.bind(this, record)"
+            [watchHandler]="this.watchHandler.bind(this, record)"
         ></action-cell>
     `
 }
@@ -104,3 +104,17 @@ renderNumberCell(format, value) {
   }
 
 }
+
+// <ExtGridcolumn
+// text="Change"
+// width="100"
+// dataIndex="priceChange"
+// [cell]="{encodeHtml:false}"
+// [renderer]="this.renderNumberCell.bind(this, '0.00')"
+// ></ExtGridcolumn>
+// <ExtGridcolumn
+// text="% Change"
+// dataIndex="priceChangePct"
+// [cell]="{encodeHtml:false}"
+// [renderer]="this.renderNumberCell.bind(this, '0.00%')"
+// ></ExtGridcolumn>

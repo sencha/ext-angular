@@ -28,7 +28,7 @@ export class DrawComponent {
         });
     }
 
-  clear = () => {
+  clear = (event) => {
     this.drawRef.getSurface().destroy();
     this.drawRef.getSurface('overlay').destroy();
     this.drawRef.renderFrame();
