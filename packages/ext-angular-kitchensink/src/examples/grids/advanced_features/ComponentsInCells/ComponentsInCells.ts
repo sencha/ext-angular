@@ -87,7 +87,8 @@ export class ComponentsInCellsComponent {
     `
 }
 
-renderNumberCell(format, value) {
+renderNumberCell(value) {
+  var format = '0.00'
   var formattedValue = Ext.util.Format.number(value, format);
   var color = "";
   if(value > 0) {
@@ -103,18 +104,20 @@ renderNumberCell(format, value) {
     `
   }
 
+  renderPercentCell(value) {
+    var format = '0.00%'
+    var formattedValue = Ext.util.Format.number(value, format);
+    var color = "";
+    if(value > 0) {
+      color = "green"
+    }
+    else if (value < 0) {
+      color = "red";
+    }
+      return `
+          <span style="color:${color}">
+          ${formattedValue}
+          </span>
+      `
+    }
 }
-
-// <ExtGridcolumn
-// text="Change"
-// width="100"
-// dataIndex="priceChange"
-// [cell]="{encodeHtml:false}"
-// [renderer]="this.renderNumberCell.bind(this, '0.00')"
-// ></ExtGridcolumn>
-// <ExtGridcolumn
-// text="% Change"
-// dataIndex="priceChangePct"
-// [cell]="{encodeHtml:false}"
-// [renderer]="this.renderNumberCell.bind(this, '0.00%')"
-// ></ExtGridcolumn>

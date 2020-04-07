@@ -16,7 +16,19 @@
             dataIndex="price"
             formatter="usMoney"
         ></ExtGridcolumn>
-
+        <ExtGridcolumn
+          text="Change"
+          width="100"
+          dataIndex="priceChange"
+          [cell]="{encodeHtml:false}"
+          [renderer]="this.renderNumberCell"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+          text="% Change"
+          dataIndex="priceChangePct"
+          [cell]="{encodeHtml:false}"
+          [renderer]="this.renderPercentCell"
+        ></ExtGridcolumn>
         <ExtGridcolumn
             text="Actions"
             flex="1"

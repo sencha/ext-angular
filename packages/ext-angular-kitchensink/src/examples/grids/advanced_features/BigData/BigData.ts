@@ -39,7 +39,6 @@ export class BigDataComponent {
 
   rowBodyTpl=`
   <div>
-    <ext-img src={avatar} height="100px" style="float:left;margin:0px 10px 5px 0px;"/>
     <br><b>{fullName}</b>
     <br>{dob:date}
   </div>
