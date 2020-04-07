@@ -135,7 +135,7 @@ import {ViewOptionsComponent}              from '../examples/grids/add_ons/ViewO
 import {RowDragAndDropComponent}           from '../examples/grids/add_ons/RowDragAndDrop/RowDragAndDrop';
 import {DragFormToGridComponent}           from '../examples/grids/add_ons/DragFormToGrid/DragFormToGrid';
 import {BigDataComponent}                  from '../examples/grids/advanced_features/BigData/BigData';
-import {ReconfigureGridComponent}          from '../examples/grids/advanced_features/ReconfigureGrid/ReconfigureGrid';
+//import {ReconfigureGridComponent}          from '../examples/grids/advanced_features/ReconfigureGrid/ReconfigureGrid';
 import {ComponentsInCellsComponent}        from '../examples/grids/advanced_features/ComponentsInCells/ComponentsInCells';
 import {SelectAndCopyComponent}            from '../examples/grids/advanced_features/SelectAndCopy/SelectAndCopy';
 import {StockTickerComponent}              from '../examples/grids/advanced_features/StockTicker/StockTicker';
@@ -287,7 +287,7 @@ var declarations: any = [
   DragFormToGridComponent,
 
   BigDataComponent,
-  ReconfigureGridComponent,
+  //ReconfigureGridComponent,
   ComponentsInCellsComponent,
 
   SelectAndCopyComponent,
@@ -579,7 +579,7 @@ var treeRoot = {
       { text: 'Advanced Features', navIcon: 'icon-grid-plugins', children:[
           { text: 'Big Data', component: BigDataComponent, navIcon: 'icon-big-data-grid' },
           { text: 'Select And Copy', component: SelectAndCopyComponent, navIcon: 'icon-flexible-selection-grid' },
-          { text: 'Reconfigure Grid', component: ReconfigureGridComponent, navIcon: 'icon-reconfigure-grid' },
+          //{ text: 'Reconfigure Grid', component: ReconfigureGridComponent, navIcon: 'icon-reconfigure-grid' },
           { text: 'Components In Cells', component: ComponentsInCellsComponent, navIcon: 'icon-grid-tools' },
           { text: 'Stock Ticker', component: StockTickerComponent, navIcon: 'icon-ticker-grid' }
       ]}
@@ -799,7 +799,7 @@ var theroutes =[
 
     { path: 'grids/advanced_features/big_data', component: BigDataComponent, text: 'Big Data', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
     { path: 'grids/advanced_features/select_and_copy', component: SelectAndCopyComponent, text: 'Select and Copy', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-    { path: 'grids/advanced_features/reconfigure_grid', component: ReconfigureGridComponent, text: 'Reconfigure grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+    //{ path: 'grids/advanced_features/reconfigure_grid', component: ReconfigureGridComponent, text: 'Reconfigure grid', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
     { path: 'grids/advanced_features/components_in_cells', component: ComponentsInCellsComponent, text: 'Render components in cell', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
     { path: 'grids/advanced_features/stock_ticker', component: StockTickerComponent, text: 'Stock tikcer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 

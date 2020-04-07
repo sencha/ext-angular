@@ -69,8 +69,8 @@
         >
         </ExtCheckcolumn>
 
-        <ExtGridcolumn text="Ratings" [columns]="ratingsColumn">
-        </ExtGridcolumn>
+        <ExtColumn text="Ratings" [columns]="ratingsColumn">
+        </ExtColumn>
 
         <ExtDatecolumn
             text="Date of Birth"
@@ -92,7 +92,7 @@
         >
         </ExtDatecolumn>
 
-        <ExtGridcolumn
+        <ExtColumn
             text=""
             width="100"
             ignoreExport="true"
@@ -100,7 +100,7 @@
             [cell]="verifyCell"
             [summaryCell]="summaryCell"
         >
-        </ExtGridcolumn>
+        </ExtColumn>
 
         <ExtDatecolumn
             text="Join Date"
@@ -134,10 +134,10 @@
         >
         </ExtTextcolumn>
 
-        <ExtGridcolumn text="Absences" [columns]="absensesColumn">
-        </ExtGridcolumn>
+        <ExtColumn text="Absences" [columns]="absensesColumn">
+        </ExtColumn>
 
-        <ExtGridcolumn
+        <ExtColumn
             text="Rating<br></br>This Year"
             dataIndex="ratingThisYear"
             groupable="false"
@@ -150,7 +150,7 @@
                 }
             }"
         >
-        </ExtGridcolumn>
+        </ExtColumn>
 
         <ExtTextcolumn
             text="Salary"
