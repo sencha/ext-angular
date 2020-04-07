@@ -180,16 +180,20 @@ import {BasicRadarComponent}               from '../examples/Charts/Radar/BasicR
 import {FilledComponent}                   from '../examples/Charts/Radar/Filled/Filled';
 import {MarkedComponent}                   from '../examples/Charts/Radar/Marked/Marked';
 import {MultiaxisComponent}                from '../examples/Charts/Radar/Multiaxis/Multiaxis';
-import {ThreeDPieComponent} from '../examples/Charts/Pie/3DPie/3DPie';
-import {BasicPieComponent} from '../examples/Charts/Pie/BasicPie/BasicPie';
-import {DonutComponent} from '../examples/Charts/Pie/Donut/Donut';
-import {DoubleDonutComponent} from '../examples/Charts/Pie/DoubleDonut/DoubleDonut';
-import {SpieComponent} from '../examples/Charts/Pie/Spie/Spie';
-import {BasicBarComponent} from '../examples/Charts/Bar/BasicBar/BasicBar';
-import {FullStackedBarComponent} from '../examples/Charts/Bar/FullStackedBar/FullStackedBar';
-import {StackedBarComponent} from '../examples/Charts/Bar/StackedBar/StackedBar';
-import {CandlestickComponent} from '../examples/Charts/Financial/Candlestick/Candlestick';
-import {OHLCComponent} from '../examples/Charts/Financial/OHLC/OHLC';
+
+
+import {ThreeDPieComponent}                from '../examples/Charts/Pie/3DPie/3DPie';
+import {BasicPieComponent}                 from '../examples/Charts/Pie/BasicPie/BasicPie';
+import {DonutComponent}                    from '../examples/Charts/Pie/Donut/Donut';
+import {DoubleDonutComponent}              from '../examples/Charts/Pie/DoubleDonut/DoubleDonut';
+import {SpieComponent}                     from '../examples/Charts/Pie/Spie/Spie';
+import {BasicBarComponent}                 from '../examples/Charts/Bar/BasicBar/BasicBar';
+import {FullStackedBarComponent}           from '../examples/Charts/Bar/FullStackedBar/FullStackedBar';
+import {StackedBarComponent}               from '../examples/Charts/Bar/StackedBar/StackedBar';
+import {CandlestickComponent}              from '../examples/Charts/Financial/Candlestick/Candlestick';
+import {OHLCComponent}                     from '../examples/Charts/Financial/OHLC/OHLC';
+
+
 import {BasicColumnComponent}                from '../examples/Charts/Column/BasicColumn/BasicColumn';
 import {ColumnWithRendererComponent}         from '../examples/Charts/Column/ColumnWithRenderer/ColumnWithRenderer';
 import {MultiaxisColumnComponent}            from '../examples/Charts/Column/MultiaxisColumn/MultiaxisColumn';
@@ -201,18 +205,18 @@ import {Basic3DColumnComponent}              from '../examples/Charts/3DColumn/B
 import {NegativeValuesComponent}             from '../examples/Charts/3DColumn/NegativeValues/NegativeValues';
 
 
-import {ConfigPivotHeatmapComponent} from '../examples/D3/HeatMap/ConfigPivotHeatmap/ConfigPivotHeatmap';
-import {PivotHeatmapComponent} from '../examples/D3/HeatMap/PivotHeatmap/PivotHeatmap';
-import {PurchasesByDayComponent} from '../examples/D3/HeatMap/PurchasesByDay/PurchasesByDay';
-import {SalesPerEmployeeComponent} from '../examples/D3/HeatMap/SalesPerEmployee/SalesPerEmployee';
-import {OrgChartComponent} from '../examples/D3/Hierarchy/OrgChart/OrgChart';
-import {PackComponent} from '../examples/D3/Hierarchy/Pack/Pack';
-import {TreeMapToolTipComponent} from '../examples/D3/Hierarchy/TreeMapToolTip/TreeMapToolTip';
-import {ConfigPivotTreeMapComponent} from '../examples/D3/Hierarchy/ConfigPivotTreeMap/ConfigPivotTreeMap';
-import {TreeMapComponent} from '../examples/D3/Hierarchy/TreeMap/TreeMap';
-import {SunburstComponent} from '../examples/D3/Hierarchy/Sunburst/Sunburst';
-import {TreeHierarchyComponent} from '../examples/D3/Hierarchy/Tree/Tree';
-import {ZoomableSunburstComponent} from '../examples/D3/Hierarchy/ZoomableSunburst/ZoomableSunburst';
+import {ConfigPivotHeatmapComponent}          from '../examples/D3/HeatMap/ConfigPivotHeatmap/ConfigPivotHeatmap';
+import {PivotHeatmapComponent}                from '../examples/D3/HeatMap/PivotHeatmap/PivotHeatmap';
+import {PurchasesByDayComponent}              from '../examples/D3/HeatMap/PurchasesByDay/PurchasesByDay';
+import {SalesPerEmployeeComponent}            from '../examples/D3/HeatMap/SalesPerEmployee/SalesPerEmployee';
+import {OrgChartComponent}                    from '../examples/D3/Hierarchy/OrgChart/OrgChart';
+import {PackComponent}                        from '../examples/D3/Hierarchy/Pack/Pack';
+import {TreeMapToolTipComponent}              from '../examples/D3/Hierarchy/TreeMapToolTip/TreeMapToolTip';
+import {ConfigPivotTreeMapComponent}          from '../examples/D3/Hierarchy/ConfigPivotTreeMap/ConfigPivotTreeMap';
+import {TreeMapComponent}                     from '../examples/D3/Hierarchy/TreeMap/TreeMap';
+import {SunburstComponent}                    from '../examples/D3/Hierarchy/Sunburst/Sunburst';
+import {TreeHierarchyComponent}               from '../examples/D3/Hierarchy/Tree/Tree';
+import {ZoomableSunburstComponent}            from '../examples/D3/Hierarchy/ZoomableSunburst/ZoomableSunburst';
 
 
 import {CollapsibleComponent}         from '../examples/PivotGrid/Collapsible/Collapsible'
@@ -228,8 +232,8 @@ import {TabularLayoutComponent}       from '../examples/PivotGrid/TabularLayout/
 
 
 var declarations: any = [
-  //ActionCellsComponent,
-  ChartToolbarComponent,
+
+
   AppComponent,
   ButtonComponent,
   SplitButtonComponent,
@@ -326,6 +330,8 @@ var declarations: any = [
   DefaultGaugeComponent,
   NeedleGaugeComponent,
 
+  ChartToolbarComponent,
+
   BasicGaugeChartComponent,
 
   BoxPlotComponent,
@@ -419,7 +425,6 @@ var declarations: any = [
   ScrollingTabsComponent,
   DesktopTabsComponent,
   ClosableTabsComponent,
-  // ScrollingTabComponent,
   TabBarComponent,
   WizardComponent,
 
@@ -547,7 +552,6 @@ var treeRoot = {
       ] },
       { text: 'Tool Tip', component: ToolTipComponent, layout: 'center', navIcon: 'icon-tooltips'  },
       { text: 'Touch Events', component: TouchEventsComponent, navIcon: 'icon-touch-events' },
-      //{ text: 'Transition', component: Transition, navIcon: 'icon-Transition' },
       { text: 'Wizard', component: ButtonComponent, navIcon: 'icon-layout-card-indicator', layout: Ext.os.is.Phone ? 'fit': 'center' },
       { text: 'Froala Editor', component: FroalaEditorComponent, layout: 'center', navIcon: 'icon-editor' },
     ]},
@@ -639,7 +643,7 @@ var treeRoot = {
             { text: 'With Renderer', component: WithRendererComponent, navIcon: 'icon-line-renderer' },
             { text: 'Realtime', component: RealtimeComponent, navIcon: 'icon-line-real-time' }
         ]},
-        //{ text: 'Navigator', component: NavigatorComponent, navIcon: 'icon-navigator-charts' },
+        { text: 'Navigator', component: NavigatorComponent, navIcon: 'icon-navigator-charts' },
         { text: 'Pie', navIcon: 'icon-pie-basic', children: [
             { text: 'Basic Pie', component: BasicPieComponent, navIcon: 'icon-pie-basic' },
             { text: 'Spie', component: SpieComponent, navIcon: 'icon-pie-custom' },
@@ -744,10 +748,6 @@ var theroutes =[
     { path: 'charts/radar', component: DummyComponent, text: 'Radar', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
     { path: 'charts/scatter', component: DummyComponent, text: 'Scatter', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
-    // { path: 'd3', component: DummyComponent, text: 'D3', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-    // { path: 'd3/heatmap', component: DummyComponent, text: 'D3 Heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-    // { path: 'd3/hierarchy', component: DummyComponent, text: 'D3 Hierarchy', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-    // { path: 'pivot_grids', component: DummyComponent, text: 'Pivot Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
     { path: 'components/buttons/button', component: ButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
     { path: 'components/buttons/splitbutton', component: SplitButtonComponent, text: 'Button', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -935,6 +935,11 @@ var theroutes =[
     { path: 'pivot_grids/range_editor_plugin', component: RangeEditorPluginComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
     { path: 'pivot_grids/exporter_plugin', component: ExporterPluginComponent, text: '3D column with renderer', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
 
+    // { path: 'd3', component: DummyComponent, text: 'D3', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+    // { path: 'd3/heatmap', component: DummyComponent, text: 'D3 Heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+    // { path: 'd3/hierarchy', component: DummyComponent, text: 'D3 Hierarchy', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+    // { path: 'pivot_grids', component: DummyComponent, text: 'Pivot Grids', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
+
     { path: 'd3/heatmap/purchases_by_day', component: PurchasesByDayComponent, text: 'Purchase by day component', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
     { path: 'd3/heatmap/sales_per_employee', component: SalesPerEmployeeComponent, text: 'Sales per employee', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
     { path: 'd3/heatmap/pivot_heatmap', component: PivotHeatmapComponent, text: 'Pivot heatmap', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
@@ -947,9 +952,6 @@ var theroutes =[
     { path: 'd3/hierarchy/sunburst', component: SunburstComponent, text: 'Sunburst', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
     { path: 'd3/hierarchy/tree', component: TreeHierarchyComponent, text: 'Tree', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
     { path: 'd3/hierarchy/zoomable_sunburst', component: ZoomableSunburstComponent, text: 'Zoomable Sunburst', iconCls: 'x-fa fa-calendar', xtype: 'homeview', leaf: true },
-
-
-
   ];
 
 
@@ -969,9 +971,7 @@ var theroutes =[
     }
   }
   transform(treeRoot, null);
-  //console.log(treeRoot)
   window['treeroot'] = treeRoot
-  //console.log(window['treeroot'])
 
 interface ExtAngularRoute extends Route {
   text?: string;
@@ -994,7 +994,6 @@ const routes : ExtAngularRoute[] = theroutes
     GridFilteringService,
     CalendarService,
     BigDataService
-    //GroupListService
   ],
   bootstrap: [AppComponent]
 })

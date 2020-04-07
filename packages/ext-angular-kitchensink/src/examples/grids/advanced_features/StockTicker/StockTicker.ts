@@ -26,7 +26,7 @@ export class StockTickerComponent implements OnInit {
     pageSize: null,
     proxy: {
         type: 'ajax',
-        url: 'resources/data/CompanyData.json',
+        url: 'assets/resources/data/CompanyData.json',
         reader: {
             type: 'json',
             rootProperty: 'data'
@@ -35,12 +35,9 @@ export class StockTickerComponent implements OnInit {
   });
 
   init(event) {
-    
-  }
-
-  initialize(event) {
 
   }
+
 
 
   ngOnInit() {
@@ -150,3 +147,73 @@ export class StockTickerComponent implements OnInit {
   };
 
 }
+
+// <ExtContainer padding="10px" layout="fit" fitToParent="true">
+//     <ExtGrid
+//         title="Ticker Grid"
+//         [store]="this.store"
+//         [itemConfig]="gridItemConfig"
+//         (onInitialize)="this.init($event)"
+//         shadow="true"
+//     >
+//         <ExtGridcolumn
+//             text="Company"
+//             dataIndex="name"
+//             width="150"
+//             sortable="true"
+//         ></ExtGridcolumn>
+//         <ExtGridcolumn
+//             align="right"
+//             text="Price"
+//             width="85"
+//             dataIndex="price"
+//             formatter="usMoney"
+//             sortable="true"
+//         ></ExtGridcolumn>
+//         <ExtGridcolumn
+//             text="Trend"
+//             width="200"
+//             dataIndex="trend"
+//             sortable="false"
+//             [cell]="trendColumnCell"
+//         ></ExtGridcolumn>
+//         <ExtGridcolumn
+//             align="right"
+//             text="Change"
+//             width="90"
+//             dataIndex="change"
+//             [cell]="{encodeHtml:false}"
+//             [renderer]="this.renderSign.bind(this, '0.00')"
+//             sortable="true"
+//         >
+//         </ExtGridcolumn>
+//         <ExtGridcolumn
+//             align="right"
+//             text="% Change"
+//             dataIndex="pctChange"
+//             [cell]="{encodeHtml:false}"
+//             [renderer]="this.renderSign.bind(this, '0.00%')"
+//             sortable="true"
+//         ></ExtGridcolumn>
+//         <ExtToolbar docked="bottom" [defaults]="{ margin: '0 20 0 0' }">
+//             <ExtLabel html="Tick Delay"></ExtLabel>
+//             <ExtSliderfield
+//                 [padding]="'0 5'"
+//                 [minValue]="25"
+//                 [maxValue]="2000"
+//                 [increment]="10"
+//                 (change)="this.onTickDelayChange($event)"
+//                 [value]="tickDelay"
+//                 flex="1"
+//             >
+//             </ExtSliderfield>
+//             <ExtContainer [html]="tickDelay + 'ms'"></ExtContainer>
+
+//             <ExtCheckbox
+//                 margin="0"
+//                 boxLabel="Flash background color on change"
+//                 (change)="this.toggleFlashBackground($event)"
+//             ></ExtCheckbox>
+//         </ExtToolbar>
+//     </ExtGrid>
+// </ExtContainer>

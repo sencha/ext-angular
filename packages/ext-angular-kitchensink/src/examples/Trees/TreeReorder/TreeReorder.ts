@@ -28,7 +28,7 @@ export class TreeReorderComponent {
       },
       proxy: {
           type: 'ajax',
-          url: 'resources/data/tree/cars.json'
+          url: 'assets/resources/data/tree/cars.json'
       },
   });
 

@@ -10,12 +10,12 @@ import { Component } from '@angular/core'
 })
 export class NestedListComponent {
 
-  store = Ext.create('Ext.data.TreeStore', { 
+  store = Ext.create('Ext.data.TreeStore', {
     autoLoad: true,
     root: {},
     proxy: {
       type: 'ajax',
-      url: 'resources/data/tree/cars.json'
+      url: 'assets/resources/data/tree/cars.json'
     },
     sorters: ['last_name', 'first_name']
   });

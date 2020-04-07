@@ -3,7 +3,6 @@
         title="Ticker Grid"
         [store]="this.store"
         [itemConfig]="gridItemConfig"
-        (onInitialize)="this.init($event)"
         shadow="true"
     >
         <ExtGridcolumn
@@ -27,24 +26,6 @@
             sortable="false"
             [cell]="trendColumnCell"
         ></ExtGridcolumn>
-        <ExtGridcolumn
-            align="right"
-            text="Change"
-            width="90"
-            dataIndex="change"
-            [cell]="{encodeHtml:false}"
-            [renderer]="this.renderSign.bind(this, '0.00')"
-            sortable="true"
-        >
-        </ExtGridcolumn>
-        <ExtGridcolumn
-            align="right"
-            text="% Change"
-            dataIndex="pctChange"
-            [cell]="{encodeHtml:false}"
-            [renderer]="this.renderSign.bind(this, '0.00%')"
-            sortable="true"
-        ></ExtGridcolumn>
         <ExtToolbar docked="bottom" [defaults]="{ margin: '0 20 0 0' }">
             <ExtLabel html="Tick Delay"></ExtLabel>
             <ExtSliderfield
@@ -58,12 +39,6 @@
             >
             </ExtSliderfield>
             <ExtContainer [html]="tickDelay + 'ms'"></ExtContainer>
-
-            <ExtCheckbox
-                margin="0"
-                boxLabel="Flash background color on change"
-                (change)="this.toggleFlashBackground($event)"
-            ></ExtCheckbox>
         </ExtToolbar>
     </ExtGrid>
 </ExtContainer>

@@ -19,7 +19,7 @@ export class EditableRowComponent {
     //     pageSize: 0,
     //     proxy: {
     //       type: 'ajax',
-    //       url: 'resources/data/CompanyData.json'
+    //       url: 'assets/resources/data/CompanyData.json'
     //     }
     // });
     plants = Ext.create('Ext.data.Store', {
@@ -28,7 +28,7 @@ export class EditableRowComponent {
 
         proxy: {
             type: 'ajax',
-            url: 'resources/data/Grids/plants.xml',
+            url: 'assets/resources/data/Grids/plants.xml',
             reader: {
                 type: 'xml',
                 record: 'plant'
