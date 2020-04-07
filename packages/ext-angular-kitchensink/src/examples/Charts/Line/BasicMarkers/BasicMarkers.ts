@@ -49,7 +49,7 @@ export class BasicMarkersComponent {
     },
     marker: {
       type: 'image',
-      src: 'resources/images/square.png',
+      src: 'assets/resources/images/square.png',
       width: 46,
       height: 46,
       x: -23,
@@ -73,7 +73,7 @@ export class BasicMarkersComponent {
     },
     marker: {
       type: 'image',
-      src: 'resources/images/circle.png',
+      src: 'assets/resources/images/circle.png',
       width: 46,
       height: 46,
       x: -23,
@@ -97,7 +97,7 @@ export class BasicMarkersComponent {
     },
     marker: {
       type: 'image',
-      src: 'resources/images/pentagon.png',
+      src: 'assets/resources/images/pentagon.png',
       width: 48,
       height: 48,
       x: -24,

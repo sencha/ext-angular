@@ -1,4 +1,4 @@
-<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+<ExtContainer padding="10" layout="fit" fitToParent="true">
     <ExtFormpanel
         (ready)="readyForm($event)"
         [shadow]="true"
@@ -31,10 +31,7 @@
                 [margin]="'0 10 0 0'"
                 (tap)="toggleDisabled($event)"
             ></ExtButton>
-            <ExtButton
-                [text]="'Reset'"
-                (tap)="tapReset($event)"
-            ></ExtButton>
+            <ExtButton [text]="'Reset'" (tap)="tapReset($event)"></ExtButton>
         </ExtToolbar>
     </ExtFormpanel>
 </ExtContainer>

@@ -33,7 +33,7 @@ export class PagingListComponent {
     }
   });
 
-  bufferZone:boolean = false;
+  bufferZone:any = false;
   setBufferZone = (value) => {
     this.bufferZone = value;
     var store = this.list.getStore()
@@ -47,6 +47,10 @@ export class PagingListComponent {
   list: any;
   listReady = (event) => {
     this.list = event.cmp;
+  }
+
+  onSelect = (event) => {
+    console.log('onSelect')
   }
 
 }

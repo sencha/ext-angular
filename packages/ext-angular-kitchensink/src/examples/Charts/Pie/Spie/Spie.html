@@ -1,11 +1,9 @@
-<ExtContainer padding="10" layout="vbox" [fitToParent]="true">
-    <ExtContainer><div #extitem>
-        <chart-toolbar
-            [onThemeChange]="this.changeTheme"
-            [theme]="theme"
-        >
-        </chart-toolbar>
-    </div></ExtContainer>
+<ExtContainer padding="10" layout="vbox" fitToParent="true">
+    <ExtContainer
+        ><div #extitem>
+            <chart-toolbar [onThemeChange]="this.changeTheme" [theme]="theme">
+            </chart-toolbar></div
+    ></ExtContainer>
 
     <ExtPolar
         downloadServerUrl="http://svg.sencha.io"

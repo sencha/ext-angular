@@ -1,6 +1,6 @@
 declare var Ext: any;
 import {Component, ChangeDetectorRef} from '@angular/core'
-import {BasicGridComponent} from '../../Grid/BasicGrid/BasicGrid';
+import {BasicGridComponent} from '../../../grids/core_features/BasicGrid/BasicGrid';
 
 Ext.require([
   'Ext.panel.Accordion'

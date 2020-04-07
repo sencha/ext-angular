@@ -1,4 +1,4 @@
-<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+<ExtContainer padding="10" layout="fit" fitToParent="true">
     <ExtTabpanel
         [width]="400"
         [flex]="1"
@@ -6,12 +6,7 @@
         [tabBar]="{ layout: { pack: 'start', overflow: 'scroller' } }"
         [defaults]="{ layout: 'center', cls: 'card', bodyPadding: 0 }"
     >
-        <ExtPanel
-            [flex]="1"
-            [title]="'Home'"
-            [layout]="'center'"
-            [width]="100"
-        >
+        <ExtPanel [flex]="1" [title]="'Home'" [layout]="'center'" [width]="100">
             <ExtContainer
                 [width]="'100%'"
                 [html]="

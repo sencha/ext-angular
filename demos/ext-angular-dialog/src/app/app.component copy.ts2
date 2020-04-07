@@ -4,7 +4,7 @@ import { DialogComponent } from './app.dialog'
 @Component({
     selector: 'app-root',
     template: `
-    <ext-panel title="Application Home" [padding]="10" [fitToParent]="true">
+    <ext-panel title="Application Home" [padding]="10" fitToParent="true">
         <ext-container html="<h1>Double-Click on an item in this list for the details dialog</h1>"></ext-container>
         <ext-grid
             height="200px"

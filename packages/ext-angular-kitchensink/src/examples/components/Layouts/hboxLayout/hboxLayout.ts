@@ -4,12 +4,12 @@ import colors from '../colors';
 
 @Component({
   selector: 'hboxlayout-component',
-  templateUrl: "./hboxLayout.html",
+  templateUrl: './hboxLayout.html',
   styles: [``]
 })
 export class hboxLayoutComponent {
 
-  isPhone:boolean = Ext.os.is.Phone;
-  colors:object = colors; 
+  isPhone:any = Ext.os.is.Phone;
+  colors:any = colors;
 
 }

@@ -9,6 +9,6 @@ import colors from '../colors';
 })
 export class CenterLayoutComponent {
 
-  colors:object = colors; 
+  colors:any = colors;
 
 }

@@ -1,8 +1,9 @@
-<ExtContainer padding="10" layout="vbox" [fitToParent]="true">
+<ExtContainer padding="10" layout="vbox" fitToParent="true">
 
   <ExtContainer><div #extitem>
     <chart-toolbar
-      [onThemeChange]="this.changeTheme" [theme]="theme"
+      [onThemeChange]="this.changeTheme"
+      [theme]="theme"
       [onRefreshClick]="this.refreshData"
       [onlyMidnight]="true">
     </chart-toolbar>

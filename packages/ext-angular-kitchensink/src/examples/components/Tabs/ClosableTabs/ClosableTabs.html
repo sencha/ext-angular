@@ -1,4 +1,4 @@
-<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+<ExtContainer padding="10" layout="fit" fitToParent="true">
     <ExtTabpanel
         (ready)="tabPanelReady($event)"
         [style]="{ backgroundColor: 'white' }"
@@ -12,7 +12,7 @@
         <ExtPanel
             *ngFor="let tab of tabs"
             [title]="'Tab ' + tab"
-           
+
             layout="center"
             closable="true"
             (added)="tabPanelAdded($event)"

@@ -9,7 +9,7 @@ import colors from '../colors';
 })
 export class vboxLayoutComponent {
 
-  isPhone:boolean = Ext.os.is.Phone;
-  colors:object = colors; 
+  isPhone:any = Ext.os.is.Phone;
+  colors:any = colors;
 
 }

@@ -1,4 +1,4 @@
-<ExtContainer layout="fit" padding="10" [fitToParent]="true">
+<ExtContainer layout="fit" padding="10" fitToParent="true">
     <ExtToolbar
         docked="top"
         ui="app-transparent-toolbar"
@@ -32,8 +32,5 @@
             </ExtMenu>
         </ExtButton>
     </ExtToolbar>
-    <ExtPivotgrid
-        [shadow]="true"
-        [matrix]="pivotgridMatrix"
-    ></ExtPivotgrid>
+    <ExtPivotgrid [shadow]="true" [matrix]="pivotgridMatrix"></ExtPivotgrid>
 </ExtContainer>

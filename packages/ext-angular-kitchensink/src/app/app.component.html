@@ -18,10 +18,8 @@
   <ExtToolbar docked="top" [weight]="10" *ngIf="!isPhone" padding="0">
       <ExtBreadcrumbbar
         extname="breadcrumb"
-
         (change)="changeBreadcrumb($event)"
         showIcons= "true"
-
         useSplitExtButtons="true"
         width="100%"
         height="100%"
@@ -49,7 +47,7 @@
     *ngIf="!isPhone"
     docked="left"
     scrollable="y"
-    width="300"
+    width="325"
     [style]="{zIndex: 100, backgroundColor: 'white'}"
     [resizable]="{edges: 'east', dynamic: true}"
     [header]="false"

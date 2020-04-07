@@ -8,9 +8,9 @@ This guide will show you how to install and configure ExtAngular with Angular CL
 
 ExtAngular requires the following to be installed before proceeding:
 
-* [Node 8.11+](#getting_started_-_installing_node_and_npm)
-* [NPM 6+](#getting_started_-_installing_node_and_npm)
-* [Java 8](#getting_started_-_installing_java)
+-   [Node 8.11+](#getting_started_-_installing_node_and_npm)
+-   [NPM 6+](#getting_started_-_installing_node_and_npm)
+-   [Java 8](#getting_started_-_installing_java)
 
 ## Creating Your First ExtAngular Application with Angular CLI
 
@@ -42,7 +42,6 @@ npm start
 ```
 
 If everything is working you should have the Angular Welcome page appear in the browser at http://localhost:4200/
-
 
 ### Step 3: Add ExtAngular to the Angular CLI Application
 
@@ -78,25 +77,33 @@ to
 in the terminal window
 
 from https://github.com/sencha/ext-angular, copy
+
 ```
 
 https://github.com/sencha/ext-allshared/tree/ext-allshared-7.0.x/generators/ext-component-creator/filetemplates/angular/ext-angular-webpack.config.js
 ```
+
 to
+
 ```
  ./ext-angular-webpack.config.js
 ```
+
 copy
+
 ```
 
 https://github.com/sencha/ext-allshared/tree/ext-allshared-7.0.x/generators/ext-component-creator/filetemplates/angular/ext-angular.service.ts
 ```
+
 to
+
 ```
 ./src/ext-angular.service.ts
 ```
 
 in ./package.json, add
+
 ```
   "dependencies": {
     "@sencha/ext-angular": "~7.0.0",
@@ -112,80 +119,83 @@ in ./package.json, add
     "html-webpack-plugin": "^3.2.0",
     "base-href-webpack-plugin": "~2.0.0",
 ```
+
 in ./tsconfig.json, add
+
 ```
      "paths": {
       "@angular/*": ["./node_modules/@angular/*"]
      },
 ```
+
 replace contents of ./src/app/app.module.ts with this:
 
 ```javascript
-import { NgModule } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser'
-import { ExtAngularModule } from '@sencha/ext-angular';
-import { ExtAngularBootstrapService } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.service';
-import { ExtAngularBootstrapComponent } from '@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.component';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { ExtAngularModule } from "@sencha/ext-angular";
+import { ExtAngularBootstrapService } from "@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.service";
+import { ExtAngularBootstrapComponent } from "@sencha/ext-angular/esm5/lib/ext-angular-bootstrap.component";
 
-import { AppComponent } from './app.component'
+import { AppComponent } from "./app.component";
 
 @NgModule({
-  imports: [BrowserModule, ExtAngularModule],
-  declarations: [ExtAngularBootstrapComponent, AppComponent,],
-  providers: [ExtAngularBootstrapService],
-  entryComponents: [AppComponent],
-  bootstrap: [ExtAngularBootstrapComponent]
+    imports: [BrowserModule, ExtAngularModule],
+    declarations: [ExtAngularBootstrapComponent, AppComponent],
+    providers: [ExtAngularBootstrapService],
+    entryComponents: [AppComponent],
+    bootstrap: [ExtAngularBootstrapComponent],
 })
 export class AppModule {
-  constructor(extAngularService : ExtAngularBootstrapService) {
-    extAngularService.setBootStrapComponent(AppComponent)
-  }
+    constructor(extAngularService: ExtAngularBootstrapService) {
+        extAngularService.setBootStrapComponent(AppComponent);
+    }
 }
 ```
 
 replace the contents of ./src/index.html with this:
 
 ```html
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>ExtAngularCliBoilerplate</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="ext-angular/ext.css" rel="stylesheet">
-  <script type="text/javascript" src="ext-angular/ext.js"></script>
-</head>
-<body>
-  <app-root></app-root>
-</body>
+    <head>
+        <meta charset="utf-8" />
+        <title>ExtAngularCliBoilerplate</title>
+        <base href="/" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/x-icon" href="favicon.ico" />
+        <link href="ext-angular/ext.css" rel="stylesheet" />
+        <script type="text/javascript" src="ext-angular/ext.js"></script>
+    </head>
+    <body>
+        <app-root></app-root>
+    </body>
 </html>
 ```
 
 replace the contents of ./src/app.component.ts with this:
 
 ```javascript
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-root',
-  template: `
-<panel #item [title]=title [layout]="'hbox'" [fitToParent]="true">
-  <button #item [text]="'click'" ></button>
-</panel>
-  `,
-  styles: []
+    selector: "app-root",
+    template: `
+        <panel #item [title]="title" [layout]="'hbox'" fitToParent="true">
+            <button #item [text]="'click'"></button>
+        </panel>
+    `,
+    styles: [],
 })
 export class AppComponent {
-  title = 'ext-angular-cli-boilerplate'
+    title = "ext-angular-cli-boilerplate";
 }
 ```
-
 
 ### Step 4: Re-Run install and start your ExtAngular application
 
 Run the following in a terminal window to install and start the app
+
 ```
 npm install
 npm start
@@ -193,14 +203,13 @@ npm start
 
 Open a browser at http://localhost:4200
 
-
 The resulting app uses webpack-dev-server and hot-loading. Any changes you make will be immediately reflected in the browser.
 
 ## Example Applications
 
-The [ext-angular repo on GitHub](https://github.com/sencha/ext-angular) contains several example apps that you can use to learn more about ExtAngular.  Each has a readme that contains instructions for downloading and running:
+The [ext-angular repo on GitHub](https://github.com/sencha/ext-angular) contains several example apps that you can use to learn more about ExtAngular. Each has a readme that contains instructions for downloading and running:
 
-* [ext-angular-kitchensink](https://github.com/sencha/ext-angular/tree/master/packages/ext-angular-kitchensink) - Shows how to use every ExtAngular component. See it running [here](https://examples.sencha.com/ExtAngular/7.0.0/kitchensink/).
+-   [ext-angular-kitchensink](https://github.com/sencha/ext-angular/tree/master/packages/ext-angular-kitchensink) - Shows how to use every ExtAngular component. See it running [here](https://examples.sencha.com/ExtAngular/7.0.0/kitchensink/).
 
 ## Appendix
 
@@ -212,13 +221,13 @@ You can check the version of node you have installed by running:
 node --version
 ```
 
- To install node on Mac OS and Linux, we recommend using [nvm](https://github.com/creationix/nvm#installation).  If you already have nvm installed, you can install the latest stable version of Node and NPM using:
+To install node on Mac OS and Linux, we recommend using [nvm](https://github.com/creationix/nvm#installation). If you already have nvm installed, you can install the latest stable version of Node and NPM using:
 
- ```
- nvm install stable
- ```
+```
+nvm install stable
+```
 
- On Windows you can use the [official installer](https://nodejs.org/en/download/).  There is also a version of [nvm for Windows](https://github.com/coreybutler/nvm-windows)
+On Windows you can use the [official installer](https://nodejs.org/en/download/). There is also a version of [nvm for Windows](https://github.com/coreybutler/nvm-windows)
 
 ### Installing Java
 

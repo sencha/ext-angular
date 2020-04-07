@@ -11,7 +11,7 @@ export class CardLayoutComponent {
 
   activeCard:number = 0;
   animation:any = null;
-  colors:object = colors;
+  colors:any = colors;
 
   constructor(private cd: ChangeDetectorRef) {}
 

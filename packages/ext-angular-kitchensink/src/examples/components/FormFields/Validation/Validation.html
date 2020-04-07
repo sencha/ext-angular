@@ -1,6 +1,6 @@
-<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+<ExtContainer padding="10" layout="fit" fitToParent="true">
     <ExtContainer
-        [scrollable]="y"
+        scrollable="y"
         layout="hbox"
         [top]="top"
         [left]="left"
@@ -40,8 +40,8 @@
             ></ExtTextfield>
             <ExtDatepicker
                 label="Date of Birth"
-                [placeholder]="'mm/dd/yyyy'"
-                [validators]="'date'"
+                placeholder="mm/dd/yyyy"
+                validators="date"
             ></ExtDatepicker>
             <ExtTextfield
                 [label]="'Salary'"

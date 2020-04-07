@@ -1,4 +1,4 @@
-<ExtContainer layout="fit" padding="10" [fitToParent]="true">
+<ExtContainer layout="fit" padding="10" fitToParent="true">
     <ExtPivotgrid
         shadow="true"
         (ready)="onPivotGridRead($event)"
@@ -24,9 +24,6 @@
         }"
     >
         <ExtButton text="Expand All" [handler]="this.expandAll"></ExtButton>
-        <ExtButton
-            text="Collapse All"
-            [handler]="this.collapseAll"
-        ></ExtButton>
+        <ExtButton text="Collapse All" [handler]="this.collapseAll"></ExtButton>
     </ExtToolbar>
 </ExtContainer>

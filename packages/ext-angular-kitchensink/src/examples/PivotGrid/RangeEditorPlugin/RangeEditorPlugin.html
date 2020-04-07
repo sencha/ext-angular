@@ -1,4 +1,4 @@
-<ExtContainer layout="fit" padding="10" [fitToParent]="true">
+<ExtContainer layout="fit" padding="10" fitToParent="true">
     <ExtToolbar
         docked="top"
         ui="app-transparent-toolbar"
@@ -11,15 +11,16 @@
         }"
     >
         <ExtButton text="Expand All" [handler]="this.expandAll"></ExtButton>
-        <ExtButton
-            text="Collapse All"
-            [handler]="this.collapseAll"
-        ></ExtButton>
+        <ExtButton text="Collapse All" [handler]="this.collapseAll"></ExtButton>
         <ExtSpacer></ExtSpacer>
         <ExtContainer layout="hbox">
             <span #extitem>
                 <div
-                    style="font-size: '12px'; font-weight: 'normal'; margin-left: '10px';"
+                    style="
+                        font-size: '12px';
+                        font-weight: 'normal';
+                        margin-left: '10px';
+                    "
                 >
                     Double click an amount to edit.
                 </div>
