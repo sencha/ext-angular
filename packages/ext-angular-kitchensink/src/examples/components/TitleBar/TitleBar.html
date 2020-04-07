@@ -1,4 +1,4 @@
-<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+<ExtContainer padding="10" layout="fit" fitToParent="true">
     <ExtTitlebar
         title="App Title"
         docked="top"
@@ -6,10 +6,7 @@
     >
         <ExtButton [align]="'left'" iconCls="x-fa fa-bars" [arrow]="false">
             <ExtMenu *ngIf="isPhone">
-                <ExtMenuitem
-                    text="Inbox"
-                    iconCls="x-fa fa-inbox"
-                ></ExtMenuitem>
+                <ExtMenuitem text="Inbox" iconCls="x-fa fa-inbox"></ExtMenuitem>
                 <ExtMenuitem
                     text="Profile"
                     iconCls="x-fa fa-user"

@@ -1,10 +1,9 @@
-<ExtContainer padding="10" layout="hbox" [fitToParent]="true">
+<ExtContainer padding="10" layout="hbox" fitToParent="true">
     <ExtTree
         flex="1"
         [store]="store"
         [selection]="selection"
         (select)="onSelectionChange($event)"
-        plugins="responsive"
         title="Folders"
         shadow="true"
         [height]="200"

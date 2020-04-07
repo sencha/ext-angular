@@ -1,4 +1,4 @@
-<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+<ExtContainer padding="10" layout="fit" fitToParent="true">
     <ExtTabpanel
         [shadow]="true"
         [tabBar]="{ docked: 'bottom' }"
@@ -42,11 +42,7 @@
                 html='Tabbars are <code>ui:"dark"</code> by default, but also have light variants.'
             ></ExtContainer>
         </ExtPanel>
-        <ExtPanel
-            [title]="'More'"
-            iconCls="x-fa fa-ellipsis-h"
-            layout="center"
-        >
+        <ExtPanel [title]="'More'" iconCls="x-fa fa-ellipsis-h" layout="center">
             <ExtContainer
                 [cls]="'action'"
                 html="User tapped User"

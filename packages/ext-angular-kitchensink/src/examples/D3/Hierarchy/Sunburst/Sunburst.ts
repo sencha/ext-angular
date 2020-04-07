@@ -35,7 +35,7 @@ export class SunburstComponent {
     ],
     proxy: {
       type: 'ajax',
-      url: 'resources/data/tree/tree.json'
+      url: 'assets/resources/data/tree/tree.json'
     },
     idProperty: 'path'
   });

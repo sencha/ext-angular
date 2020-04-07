@@ -1,23 +1,22 @@
-<ExtContainer padding="10" layout="vbox" [fitToParent]="true">
+<ExtContainer padding="10" layout="vbox" fitToParent="true">
+    <ExtContainer
+        ><div #extitem>
+            <chart-toolbar [onThemeChange]="this.changeTheme" [theme]="theme">
+            </chart-toolbar></div
+    ></ExtContainer>
 
-  <ExtContainer><div #extitem>
-    <chart-toolbar
-      [onThemeChange]="this.changeTheme"
-      [theme]="theme">
-    </chart-toolbar>
-  </div></ExtContainer>
-
-  <ExtCartesian downloadServerUrl ="http://svg.sencha.io"
-  flex="1"
-    shadow="true"
-    insetPadding="70 40 0"
-    [platformConfig]="{ phone: { insetPadding: '50 0 0' } }"
-    flipXY="true"
-    [store]="this.store"
-    [theme]="theme"
-    [series]="cartesianSeries"
-    [axes]="cartesianAxes"
-    [captions]="cartesianCaptions">
-  </ExtCartesian>
-
+    <ExtCartesian
+        downloadServerUrl="http://svg.sencha.io"
+        flex="1"
+        shadow="true"
+        insetPadding="70 40 0"
+        [platformConfig]="{ phone: { insetPadding: '50 0 0' } }"
+        flipXY="true"
+        [store]="this.store"
+        [theme]="theme"
+        [series]="cartesianSeries"
+        [axes]="cartesianAxes"
+        [captions]="cartesianCaptions"
+    >
+    </ExtCartesian>
 </ExtContainer>

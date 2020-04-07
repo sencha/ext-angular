@@ -1,7 +1,0 @@
-            "styles": [
-              "src/styles.css",
-              "ext-runtime-modern/material/material-all.css"
-            ],
-            "scripts": [
-              "ext-runtime-modern/modern.engine.enterprise.js"
-            ]

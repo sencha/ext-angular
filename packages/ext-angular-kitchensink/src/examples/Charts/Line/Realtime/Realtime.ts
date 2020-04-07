@@ -21,7 +21,7 @@ export class RealtimeComponent {
     this.startTask();
   };
 
-  startTask = () => {
+  startTask = (event) => {
     let callCount = 1;
     this.timeChartTask = setInterval(() => {
       if (callCount >= 120) {
@@ -33,7 +33,7 @@ export class RealtimeComponent {
     }, interval);
   };
 
-  stopTask = () => {
+  stopTask = (event) => {
     clearInterval(this.timeChartTask);
   };
 

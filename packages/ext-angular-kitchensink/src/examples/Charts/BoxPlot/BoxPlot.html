@@ -1,24 +1,25 @@
-<ExtContainer padding="10" layout="vbox" [fitToParent]="true">
+<ExtContainer padding="10" layout="vbox" fitToParent="true">
+    <ExtContainer
+        ><div #extitem>
+            <chart-toolbar
+                [onThemeChange]="this.changeTheme"
+                [onToggleZoomOnPan]="this.toggleZoomOnPan"
+                [onRefreshClick]="this.refresh"
+                [theme]="theme"
+                [onlyMidnight]="true"
+            >
+            </chart-toolbar></div
+    ></ExtContainer>
 
-  <ExtContainer><div #extitem>
-    <chart-toolbar
-      [onThemeChange]="this.changeTheme"
-      [onToggleZoomOnPan]="this.toggleZoomOnPan"
-      [onRefreshClick]="this.refresh"
-      [theme]="theme"
-      [onlyMidnight]="true">
-    </chart-toolbar>
-  </div></ExtContainer>
-
-  <ExtCartesian downloadServerUrl ="http://svg.sencha.io"
-  flex="1"
-    shadow="true"
-    [theme]="theme"
-    [captions]="{ title: { text: 'Age of Nobel Prize winners by field\n1901 to 2014' } }"
-    [store]="this.store"
-    [axes]="cartesianAxes"
-    [series]="cartesianSeries"
-  >
-  </ExtCartesian>
-
+    <ExtCartesian
+        downloadServerUrl="http://svg.sencha.io"
+        flex="1"
+        shadow="true"
+        [theme]="theme"
+        [captions]="{ title: { text: 'Age of Nobel Prize winners by field\n1901 to 2014' } }"
+        [store]="this.store"
+        [axes]="cartesianAxes"
+        [series]="cartesianSeries"
+    >
+    </ExtCartesian>
 </ExtContainer>

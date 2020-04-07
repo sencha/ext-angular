@@ -1,0 +1,63 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtGrid
+        title="Row Editing"
+        [store]="plants"
+        [shadow]="true"
+        [height]="700"
+        [width]="600"
+        [rowNumbers]="true"
+        [markDirty]="true"
+        [plugins]="{ rowedit: { autoConfirm: false } }"
+    >
+        <ExtGridcolumn
+            text="Common Name"
+            [flex]="1"
+            [width]="100"
+            dataIndex="common"
+            [editable]="true"
+        >
+        </ExtGridcolumn>
+        <ExtGridcolumn
+            text="Light"
+            [width]="125"
+            [flex]="1"
+            dataIndex="light"
+            [editable]="true"
+            [editor]="{
+                xtype: 'selectfield',
+                options: [
+                    'Shade',
+                    'Mostly Shady',
+                    'Sun or Shade',
+                    'Mostly Sunny',
+                    'Sunny'
+                ]
+            }"
+        >
+        </ExtGridcolumn>
+        <ExtGridcolumn
+            text="Price"
+            [width]="100"
+            [flex]="1"
+            formatter="usMoney"
+            dataIndex="price"
+            [editable]="true"
+        >
+        </ExtGridcolumn>
+        <ExtDatecolumn
+            text="Available"
+            [width]="125"
+            [flex]="1"
+            dataIndex="availDate"
+            [editable]="true"
+        >
+        </ExtDatecolumn>
+        <ExtCheckcolumn
+            text="Indoor?"
+            [flex]="1"
+            dataIndex="indoor"
+            [headerCheckbox]="true"
+        >
+        </ExtCheckcolumn>
+    </ExtGrid>
+</ExtContainer>

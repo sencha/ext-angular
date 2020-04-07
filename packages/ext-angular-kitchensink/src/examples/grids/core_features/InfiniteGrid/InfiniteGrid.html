@@ -1,0 +1,18 @@
+<!-- <ExtContainer  padding="10" [layout]="'fit'" fitToParent="true"> -->
+<ExtGrid
+    title="Infinite Grid"
+    height="500px"
+    [scrollable]="true"
+    [plugins]='{ "gridfilters": true }'
+    [store]='{"type": "infinitegriddata"}'
+>
+    <ExtGridcolumn text="First Name" width="150px" dataIndex="firstName">
+    </ExtGridcolumn>
+    <ExtGridcolumn text="Last Name" width="150px" dataIndex="lastName">
+    </ExtGridcolumn>
+    <ExtGridcolumn text="Id" width="50px" dataIndex="id"> </ExtGridcolumn>
+    <ExtGridcolumn text="Title" flex="1" dataIndex="title"> </ExtGridcolumn>
+    <ExtGridcolumn text="Address" flex="1" dataIndex="address"> </ExtGridcolumn>
+    <ExtGridcolumn text="Company" flex="1" dataIndex="company"> </ExtGridcolumn>
+</ExtGrid>
+<!-- </ExtContainer> -->

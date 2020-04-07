@@ -1,16 +1,13 @@
-<ExtContainer
-    [padding]="!isPhone ? '10' : ''"
-    layout="vbox"
-    [fitToParent]="true"
->
-    <ExtContainer><div #extitem>
-        <chart-toolbar
-            [onThemeChange]="this.changeTheme"
-            [onToggleZoomOnPan]="this.toggleZoomOnPan"
-            [theme]="theme"
-        >
-        </chart-toolbar>
-    </div></ExtContainer>
+<ExtContainer [padding]="!isPhone ? '10' : ''" layout="vbox" fitToParent="true">
+    <ExtContainer
+        ><div #extitem>
+            <chart-toolbar
+                [onThemeChange]="this.changeTheme"
+                [onToggleZoomOnPan]="this.toggleZoomOnPan"
+                [theme]="theme"
+            >
+            </chart-toolbar></div
+    ></ExtContainer>
 
     <ExtChartnavigator
         flex="1"

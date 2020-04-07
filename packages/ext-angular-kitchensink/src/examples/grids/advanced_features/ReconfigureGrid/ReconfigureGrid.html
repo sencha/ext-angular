@@ -1,0 +1,19 @@
+<ExtGrid
+    [columns]="columns"
+    [store]="store"
+    shadow="true"
+    [deferEmptyText]="false"
+    [emptyText]="'Click a button to show a dataset.'"
+    fitToParent="true"
+>
+    <ExtToolbar [docked]="'top'" ui="transparent" layout="hbox">
+        <ExtSegmentedbutton
+            width="300"
+            [defaults]="{ flex: 1 }"
+            (change)="onChange($event)"
+        >
+            <ExtButton text="Show Offices" value="Offices"></ExtButton>
+            <ExtButton text="Show Employees" value="Employees"></ExtButton>
+        </ExtSegmentedbutton>
+    </ExtToolbar>
+</ExtGrid>

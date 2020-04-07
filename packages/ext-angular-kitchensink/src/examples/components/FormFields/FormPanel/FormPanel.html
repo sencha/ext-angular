@@ -1,4 +1,4 @@
-<ExtContainer padding="10" layout="fit" [fitToParent]="true">
+<ExtContainer padding="10" layout="fit" fitToParent="true">
     <ExtContainer
         [platformConfig]="{
             phone: { layout: 'fit' },
@@ -6,7 +6,7 @@
         }"
     >
         <!-- todo handle this ref -->
-        <ExtContainer padding="10" layout="fit" [fitToParent]="true"
+        <ExtContainer padding="10" layout="fit" fitToParent="true"
             ><ExtFormpanel
                 (ready)="onReady($event)"
                 [shadow]="true"
@@ -180,6 +180,6 @@
                     ></ExtButton>
                 </ExtToolbar>
             </ExtFormpanel>
-        </ExtContainer> 
+        </ExtContainer>
         </ExtContainer>
     </ExtContainer>

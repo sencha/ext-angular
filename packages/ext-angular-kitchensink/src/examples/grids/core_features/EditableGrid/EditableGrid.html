@@ -1,0 +1,57 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtGrid
+        title="Stock Prices"
+        shadow="true"
+        [store]="this.store"
+        [platformConfig]="{
+            desktop: { plugins: { gridcellediting: true } },
+            '!desktop': { plugins: { grideditable: true } }
+        }"
+    >
+        <ExtToolbar docked="top">
+            <ExtContainer docked="top"
+                ><div #extitem>
+                    <div [style]="{ color: '#666', fontSize: '13px' }">
+                        Double- {{ pressType }} a {{ pressEntity }} to edit
+                    </div>
+                </div></ExtContainer
+            >
+        </ExtToolbar>
+        <ExtGridcolumn
+            text="Company"
+            width="150"
+            dataIndex="name"
+            editable="true"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            text="Price"
+            width="120"
+            dataIndex="price"
+            formatter="usMoney"
+            editable="true"
+        >
+            <ExtNumberfield
+                required="true"
+                [validators]="{ type: 'number', message: 'Invalid price' }"
+            ></ExtNumberfield>
+        </ExtGridcolumn>
+        <ExtGridcolumn
+            text="Change"
+            width="90"
+            dataIndex="change"
+            [renderer]="this.renderSign"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            text="% Change"
+            width="100"
+            dataIndex="pctChange"
+            [renderer]="this.renderSign"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            text="Last Updated"
+            width="125"
+            dataIndex="lastChange"
+            formatter="date('m/d/Y')"
+        ></ExtGridcolumn>
+    </ExtGrid>
+</ExtContainer>

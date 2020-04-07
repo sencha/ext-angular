@@ -1,7 +1,7 @@
 const webpack = require("webpack")
 const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
 
-console.log(process)
+//console.log(process)
 var build_v
 if (process.env.build_v == undefined) {
   build_v = '7.2.0.0'

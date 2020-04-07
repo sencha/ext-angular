@@ -1,0 +1,66 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtGrid
+        title="Grid Tools"
+        [store]="this.store"
+        columnLines="true"
+        grouped="true"
+        shadow="true"
+        [tpl]="this.helperTpl"
+        [itemConfig]="{
+        header:{
+          tools:{
+            refresh:  {
+              handler: this.onGroupRefresh
+            },
+            print: {
+              handler: this.onGroupPrint,
+              tooltip: 'Print group...',
+              zone: 'tail'
+            },
+            save: {
+              handler: this.onGroupSave,
+              zone: 'end'
+            }
+          }
+        }
+      }"
+    >
+        <ExtGridcolumn
+            text="Name"
+            dataIndex="name"
+            flex="1"
+            maxWidth="200"
+            [cell]="{
+          tools:{
+            pin: {
+              handler: this.onPin
+            }
+          }
+        }"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            text="Cuisine"
+            dataIndex="cuisine"
+            flex="1"
+            maxWidth="150"
+            [cell]="{
+          tools:{
+            gear: {
+              handler: this.onGear
+            }
+          }
+        }"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            text="Actions"
+            width="80"
+            [cell]="{
+          tools:{
+            search: {
+              handler: this.onSearch
+            }
+          }
+        }"
+        ></ExtGridcolumn>
+    </ExtGrid>
+</ExtContainer>

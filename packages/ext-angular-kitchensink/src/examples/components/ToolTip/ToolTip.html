@@ -1,7 +1,7 @@
 <ExtContainer
     padding="10"
     layout="fit"
-    [fitToParent]="true"
+    fitToParent="true"
     xdefaults="containerDefaults"
 >
     <ExtToolbar docked="top" [shadow]="false" ui="app-transparent-toolbar">
@@ -56,13 +56,13 @@
             >
                 <ExtContainer
                     ><div #extitem>
-                        <ul style="margin: '15'">
+                        <ul style="margin: '15';">
                             <li>5 bedrooms</li>
                             <li>Close to transport</li>
                             <li>Large backyard</li>
                         </ul>
                         <img
-                            style="width:'400px';height:'300px'"
+                            style="width: '400px'; height: '300px';"
                             src="house.jpg"
                         /></div
                 ></ExtContainer>
@@ -109,14 +109,30 @@
         <ExtContainer docked="top"
             ><div #extitem>
                 <div
-                    style="width: 150px;margin: 0 15px 0 0;color: white;padding: 5px 10px;tExtAlign: center;cursor: default; background-color: #e91e63"
+                    style="
+                        width: 150px;
+                        margin: 0 15px 0 0;
+                        color: white;
+                        padding: 5px 10px;
+                        textalign: center;
+                        cursor: default;
+                        background-color: #e91e63;
+                    "
                     data-qtip="This tip is inline"
                     data-qshowOnTap="true"
                 >
                     Inline Tip
                 </div>
                 <div
-                    style="width: 150px;margin: 0 15px 0 0;color: white;padding: 5px 10px;tExtAlign: center;cursor: default; background-color: #2196f3"
+                    style="
+                        width: 150px;
+                        margin: 0 15px 0 0;
+                        color: white;
+                        padding: 5px 10px;
+                        textalign: center;
+                        cursor: default;
+                        background-color: #2196f3;
+                    "
                     data-qtip="This tip has a fixed width"
                     data-qwidth="400"
                     data-qshowOnTap="true"
@@ -124,7 +140,15 @@
                     Fixed width inline tip
                 </div>
                 <div
-                    style="width: 150px;margin: 0 15px 0 0;color: white;padding: 5px 10px;tExtAlign: center;cursor: default; background-color: #ff5722"
+                    style="
+                        width: 150px;
+                        margin: 0 15px 0 0;
+                        color: white;
+                        padding: 5px 10px;
+                        textalign: center;
+                        cursor: default;
+                        background-color: #ff5722;
+                    "
                     data-qtip="This tip has a title"
                     data-qtitle="The title"
                     data-qshowOnTap="true"
@@ -132,7 +156,15 @@
                     Inline tip with title
                 </div>
                 <div
-                    style="width: 150px;margin: 0 15px 0 0;color: white;padding: 5px 10px;tExtAlign: center;cursor: default; background-color: #607d8b"
+                    style="
+                        width: 150px;
+                        margin: 0 15px 0 0;
+                        color: white;
+                        padding: 5px 10px;
+                        textalign: center;
+                        cursor: default;
+                        background-color: #607d8b;
+                    "
                     data-qtip="Aligned top"
                     data-qalign="bl-tl"
                     data-qanchorToTarget="true"

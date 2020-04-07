@@ -1,0 +1,66 @@
+<ExtContainer padding="10" [layout]="'vbox'" fitToParent="true">
+    <ExtToolbar margin="0 0 20 0" shadow>
+        <ExtContainer
+            key="1"
+            [style]="{ marginRight: '10px' }"
+            html="Grouping:"
+        ></ExtContainer>
+        <ExtSegmentedbutton key="2" label="Grouping">
+            <ExtButton
+                key="1"
+                ui="toolbar-default"
+                [pressed]="grouped"
+                text="ON"
+                (tap)="this.onToggleGrouping($event)"
+            ></ExtButton>
+            <ExtButton
+                key="2"
+                ui="toolbar-default"
+                [pressed]="!grouped"
+                text="OFF"
+                (tap)="this.onToggleGrouping($event)"
+            ></ExtButton>
+        </ExtSegmentedbutton>
+    </ExtToolbar>
+
+    <ExtGrid
+        flex="1"
+        title="Restaurants"
+        shadow
+        [store]="this.store"
+        [grouped]="grouped"
+        [groupFooter]="{
+            xtype: 'gridsummaryrow'
+        }"
+        [stateful]="true"
+        stateId="grouped-grid"
+        [plugins]='{
+            "gridfilters": "true"
+        }'
+    >
+        <ExtGridcolumn
+            text="Name"
+            dataIndex="name"
+            flex="1"
+            groupHeaderTpl="{columnName}: {value:htmlEncode}"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            text="Cuisine"
+            dataIndex="cuisine"
+            flex="1"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            text="Rating"
+            dataIndex="rating"
+            summaryCell="numbercell"
+            flex="1"
+            groupHeaderTpl='{value:repeat("★")} ({value:plural("Star")})'
+            [cell]="{
+                xtype: 'widgetcell',
+                widget: {
+                    xtype: 'rating'
+                }
+            }"
+        ></ExtGridcolumn>
+    </ExtGrid>
+</ExtContainer>

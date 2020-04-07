@@ -10,6 +10,6 @@ import colors from '../colors';
 })
 export class FitLayoutComponent {
 
-  colors:object = colors;
+  colors:any = colors;
 
 }
