@@ -9,7 +9,7 @@ To gain access to the Sencha npm repository:
 1. [Start a free trial of ExtReact](https://www.sencha.com/products/extreact/evaluate/).
 2. [Purchase ExtReact or Ext JS Enterprise](https://www.sencha.com/store/).
 
-* **Note:** Ext JS enterprise customers already have access to ExtReact.
+* **Note:** Ext JS enterprise customers already have access to ExtAngular.
 * **Note:** Existing customers use your support portal credentials. But switch the username, `@` character with `'..'` two periods, so the username would look something like this after it's converted: `name..gmail.com`.
 
 ### Step 2: Login to the npm repository
@@ -41,7 +41,8 @@ ng new ext-angular-modern-demo --minimal=true --interactive=false -g=true --skip
 In the project, install the ExtAngular components dependency in the package.json.
 
 ```
-npm install @sencha/ext-angular-modern
+npm install @sencha/ext-modern-runtime --save
+npm install @sencha/ext-angular-modern --save
 ```
 
 ### Step 2: Configure Application
@@ -64,19 +65,11 @@ Configure the Angular App Module
 
 In the file [project]/src/app/app.module.ts add the ExtAngular components import.
 
-First delcare the import to import into the app module.
-Declare the import in the imports property.
-
 ```
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-```
-
 // 1. Import the ExtAngular components
-
-```
 import { ExtAngularModernModule } from '@sencha/ext-angular-modern';
-
 import { AppComponent } from './app.component';
 
 @NgModule({
