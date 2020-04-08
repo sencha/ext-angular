@@ -1,0 +1,20 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtPivotd3container
+        (ready)="mainCtnReady($event)"
+        shadow="true"
+        layout="fit"
+        (onBeforeMoveConfigField)="(this.onBeforeAddConfigField)"
+        (onShowConfigFieldSettings)="(this.onShowFieldSettings)"
+        [matrix]="matrixVar"
+        [drawing]="drawingVar"
+        [configurator]="configuratorVar"
+    >
+        <ExtToolbar docked="top">
+            <ExtSpacer></ExtSpacer>
+            <ExtButton
+                [handler]="this.showConfigurator"
+                text="Show configurator"
+            ></ExtButton>
+        </ExtToolbar>
+    </ExtPivotd3container>
+</ExtContainer>

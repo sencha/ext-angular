@@ -29,17 +29,17 @@ export class HeterogeneousTreeComponent {
 
   textField : any;
   onTextFieldReady = (event) => {
-    this.textField = event.detail.cmp;
+    this.textField = event.cmp;
   }
 
   buttonField : any;
   onButtonReady = (event) => {
-    this.buttonField = event.detail.cmp;
+    this.buttonField = event.cmp;
   }
 
   treeField:any;
   onTreeReady = (event) => {
-    this.treeField = event.detail.cmp;
+    this.treeField = event.cmp;
   }
 
   store = Ext.create('Ext.data.TreeStore', {
@@ -55,7 +55,7 @@ export class HeterogeneousTreeComponent {
     rootVisible: false
   });
 
-  addItem = () => {
+  addItem = (event) => {
     var tree = this.treeField;
     var target = tree.getSelections()[0] || this.store.getRoot();
     var node: any;
@@ -93,7 +93,7 @@ export class HeterogeneousTreeComponent {
 
   onFieldAction = (event) => {
     if (event.e.ENTER === event.e.getKey()) {
-      this.addItem();
+      this.addItem(event);
     }
   };
 

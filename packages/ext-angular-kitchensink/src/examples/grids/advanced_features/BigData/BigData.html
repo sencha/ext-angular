@@ -1,0 +1,186 @@
+<ExtContainer padding="10px" layout="fit" fitToParent="true">
+    <ExtActionsheet [displayed]="showExportSheet">
+        <ExtButton [handler]="this.exportToXlsx" text="Excel xlsx"></ExtButton>
+        <ExtButton [handler]="this.exportToXml" text="Excel xml"></ExtButton>
+        <ExtButton [handler]="this.exportToCSV" text="CSV"></ExtButton>
+        <ExtButton [handler]="this.exportToTSV" text="TSV"></ExtButton>
+        <ExtButton [handler]="this.exportToHtml" text="HTML"></ExtButton>
+        <ExtButton [handler]="this.onCancelExport" text="Cancel"></ExtButton>
+    </ExtActionsheet>
+
+    <ExtGrid
+        title="Big Data Grid"
+        [store]="this.store"
+        shadow="true"
+        grouped="true"
+        rowNumbers="true"
+        [titleBar]="gridTitleBar"
+        [plugins]="{
+            grideditable: true,
+            gridviewoptions: true,
+            summaryrow: true,
+            rowexpander: true,
+            gridexporter: true,
+            rowoperations: true
+        }"
+        [groupFooter]="{
+            xtype: 'gridsummaryrow'
+        }"
+        [itemConfig]="{
+            viewModel: {},
+            body: {
+                tpl: this.rowBodyTpl
+            }
+        }"
+        (onBeforeDocumentSave)="this.onBeforeDocumentSave($event)"
+        (onDocumentSave)="this.onDocumentSave($event)"
+        (ready)="gridReady($event)"
+    >
+        <!-- Title bar property as in react bit not seen-->
+        <!-- [titleBar]="gridTitleBar" -->
+        <ExtTextcolumn
+            text="Id"
+            dataIndex="employeeNo"
+            flex="1"
+            minWidth="100"
+            [exportStyle]="{
+                format: 'General Number',
+                alignment: {
+                    horizontal: 'Right'
+                }
+            }"
+        >
+        </ExtTextcolumn>
+
+        <ExtTextcolumn
+            text="Name"
+            dataIndex="fullName"
+            minWidth="150"
+            [sorter]="{
+                sorterFn: this.nameSorter
+            }"
+        >
+        </ExtTextcolumn>
+
+        <ExtCheckcolumn
+            text="Verified"
+            dataIndex="verified"
+            headerCheckbox="true"
+        >
+        </ExtCheckcolumn>
+
+        <ExtColumn text="Ratings" [columns]="ratingsColumn">
+        </ExtColumn>
+
+        <ExtDatecolumn
+            text="Date of Birth"
+            dataIndex="dob"
+            editable="true"
+            format="m-d-Y"
+            [exportStyle]="[
+                {
+                    format: 'Medium Date',
+                    alignment: {
+                        horizontal: 'Right'
+                    }
+                },
+                {
+                    type: 'csv',
+                    format: 'Short Date'
+                }
+            ]"
+        >
+        </ExtDatecolumn>
+
+        <ExtColumn
+            text=""
+            width="100"
+            ignoreExport="true"
+            align="center"
+            [cell]="verifyCell"
+            [summaryCell]="summaryCell"
+        >
+        </ExtColumn>
+
+        <ExtDatecolumn
+            text="Join Date"
+            dataIndex="joinDate"
+            editable="true"
+            format="d-m-Y"
+            [exportStyle]="{
+                format: 'Medium Date',
+                alignment: {
+                    horizontal: 'Right'
+                }
+            }"
+        >
+        </ExtDatecolumn>
+
+        <ExtTextcolumn
+            text="Notice Period"
+            dataIndex="noticePeriod"
+            editable="true"
+        >
+        </ExtTextcolumn>
+
+        <ExtTextcolumn
+            text="Email"
+            dataIndex="email"
+            width="250"
+            editable
+            [editor]="{
+                xtype: 'emailfield'
+            }"
+        >
+        </ExtTextcolumn>
+
+        <ExtColumn text="Absences" [columns]="absensesColumn">
+        </ExtColumn>
+
+        <ExtColumn
+            text="Rating<br></br>This Year"
+            dataIndex="ratingThisYear"
+            groupable="false"
+            formatter="round(1)"
+            summary="average"
+            [cell]="ratingsCell"
+            [exportStyle]="{
+                alignment: {
+                    horizontal: 'Right'
+                }
+            }"
+        >
+        </ExtColumn>
+
+        <ExtTextcolumn
+            text="Salary"
+            dataIndex="salary"
+            [renderer]="usMoneyRendered"
+            width="150"
+            editable
+            summary="sum"
+            [summaryRenderer]="this.salarySummaryRenderer"
+            [exportStyle]="{
+                format: 'Currency',
+                alignment: {
+                    horizontal: 'Right'
+                }
+            }"
+        >
+        </ExtTextcolumn>
+    </ExtGrid>
+</ExtContainer>
+
+<!--
+    TODO: future release
+    <cell >
+      <widgetcell >
+        <ExtButton  ui ="action" [handler] ="this.onVerify" [bind] = "widgetCellBind" text = "VERIFY"></ExtButton>
+      </widgetcell>
+    </cell>
+    <summaryCell >
+      <widgetcell >
+        <ExtButton  ui ="action" [handler] ="this.onVerifyAll" text = "All"></ExtButton>
+      </widgetcell>
+    </summaryCell>
+-->

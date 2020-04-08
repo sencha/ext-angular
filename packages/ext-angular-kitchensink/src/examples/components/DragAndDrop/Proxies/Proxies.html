@@ -1,0 +1,22 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtPanel [padding]="5" [shadow]="true" (ready)="parentReady($event)">
+        <ExtContainer
+            (ready)="noneEleReady($event)"
+            [cls]="'proxy-none proxy-source'"
+            [html]="noneText"
+        >
+        </ExtContainer>
+        <ExtContainer
+            (ready)="originalEleReady($event)"
+            [cls]="'proxy-original proxy-source'"
+            [html]="'Element as proxy with revert: true'"
+        >
+        </ExtContainer>
+        <ExtContainer
+            (ready)="placeholderEleReady($event)"
+            [cls]="'proxy-placeholder proxy-source'"
+            [html]="'Placeholder'"
+        >
+        </ExtContainer>
+    </ExtPanel>
+</ExtContainer>

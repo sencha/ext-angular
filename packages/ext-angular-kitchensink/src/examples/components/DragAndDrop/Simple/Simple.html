@@ -1,0 +1,20 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtPanel bodyPadding="10" [shadow]="true" (ready)="onParentReady($event)">
+        <ExtContainer
+            (ready)="onElementReady($event)"
+            [style]="{
+        width: '130px',
+        height: '130px',
+        padding: '5px',
+        textAlign: 'center',
+        color: '#fff',
+        backgroundColor: '#ff5722',
+        borderRadius: '5px',
+        userSelect: 'none',
+        cursor: 'move'
+      }"
+            [html]="dragText"
+        >
+        </ExtContainer>
+    </ExtPanel>
+</ExtContainer>

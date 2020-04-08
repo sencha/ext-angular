@@ -1,0 +1,19 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtFormpanel
+        (ready)="onFormPanelReady($event)"
+        layout="fit"
+        title="Ext.froala.EditorField insde a form panel"
+        [buttons]="buttonsObj"
+        margin="10"
+    >
+        <ExtFroalaeditorfield
+            (ready)="onEditorFieldReady($event)"
+            name="html"
+            margin="8"
+            [value]="value"
+            [listeners]="listenersObj"
+            [editor]="editorObj"
+        >
+        </ExtFroalaeditorfield>
+    </ExtFormpanel>
+</ExtContainer>

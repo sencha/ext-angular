@@ -1,5 +1,5 @@
-<ext-container layout="fit" padding="10" [fitToParent]="true">
-    <ext-toolbar
+<ExtContainer layout="fit" padding="10" fitToParent="true">
+    <ExtToolbar
         docked="top"
         ui="app-transparent-toolbar"
         [shadow]="false"
@@ -7,18 +7,18 @@
         padding="0 10 0 10"
         [defaults]="{ margin: '0 10 0 0', shadow: true, ui: 'action' }"
     >
-        <ext-button
+        <ExtButton
             text="Configurator"
             [handler]="this.showConfigurator"
-        ></ext-button>
-        <ext-button text="Export to ...">
-            <ext-menu
+        ></ExtButton>
+        <ExtButton text="Export to ...">
+            <ExtMenu
                 [defaults]="{
                     handler: this.exportDocument,
-                    iconCls: 'x-fa fa-file-text-o'
+                    iconCls: 'x-fa fa-file-tExtO'
                 }"
             >
-                <ext-menuitem
+                <ExtMenuitem
                     text="Excel xlsx (pivot table definition)"
                     iconCls="x-fa fa-file-excel-o"
                     [config]="{
@@ -27,14 +27,14 @@
                         fileName: 'ExportPivot.xlsx'
                     }"
                 >
-                </ext-menuitem>
-                <ext-menuitem
+                </ExtMenuitem>
+                <ExtMenuitem
                     text="Excel xlsx (all items)"
                     iconCls="x-fa fa-file-excel-o"
                     [config]="{ type: 'excel07', fileName: 'ExportAll.xlsx' }"
                 >
-                </ext-menuitem>
-                <ext-menuitem
+                </ExtMenuitem>
+                <ExtMenuitem
                     text="Excel xlsx (visible items)"
                     iconCls="x-fa fa-file-excel-o"
                     [config]="{
@@ -43,14 +43,14 @@
                         onlyExpandedNodes: true
                     }"
                 >
-                </ext-menuitem>
-                <ext-menuitem
+                </ExtMenuitem>
+                <ExtMenuitem
                     text="Excel xml (all items)"
                     iconCls="x-fa fa-file-excel-o"
                     [config]="{ type: 'excel03', fileName: 'ExportAll.xml' }"
                 >
-                </ext-menuitem>
-                <ext-menuitem
+                </ExtMenuitem>
+                <ExtMenuitem
                     text="Excel xml (visible items)"
                     iconCls="x-fa fa-file-excel-o"
                     [config]="{
@@ -59,13 +59,13 @@
                         onlyExpandedNodes: true
                     }"
                 >
-                </ext-menuitem>
-                <ext-menuitem
+                </ExtMenuitem>
+                <ExtMenuitem
                     text="CSV (all items)"
                     [config]="{ type: 'csv', fileName: 'ExportAll.csv' }"
                 >
-                </ext-menuitem>
-                <ext-menuitem
+                </ExtMenuitem>
+                <ExtMenuitem
                     text="CSV (visible items)"
                     [config]="{
                         type: 'csv',
@@ -73,13 +73,13 @@
                         onlyExpandedNodes: true
                     }"
                 >
-                </ext-menuitem>
-                <ext-menuitem
+                </ExtMenuitem>
+                <ExtMenuitem
                     text="TSV (all items)"
                     [config]="{ type: 'tsv', fileName: 'ExportAll.csv' }"
                 >
-                </ext-menuitem>
-                <ext-menuitem
+                </ExtMenuitem>
+                <ExtMenuitem
                     text="TSV (visible items)"
                     [config]="{
                         type: 'tsv',
@@ -87,14 +87,14 @@
                         onlyExpandedNodes: true
                     }"
                 >
-                </ext-menuitem>
-                <ext-menuitem
+                </ExtMenuitem>
+                <ExtMenuitem
                     text="HTML (all items)"
                     iconCls="x-fa fa-html5"
                     [config]="{ type: 'html', fileName: 'ExportAll.html' }"
                 >
-                </ext-menuitem>
-                <ext-menuitem
+                </ExtMenuitem>
+                <ExtMenuitem
                     text="HTML (visible items)"
                     iconCls="x-fa fa-html5"
                     [config]="{
@@ -103,12 +103,12 @@
                         onlyExpandedNodes: true
                     }"
                 >
-                </ext-menuitem>
-            </ext-menu>
-        </ext-button>
-    </ext-toolbar>
+                </ExtMenuitem>
+            </ExtMenu>
+        </ExtButton>
+    </ExtToolbar>
 
-    <ext-pivotgrid
+    <ExtPivotgrid
         [shadow]="true"
         [plugins]="pivotgridPlugins"
         [matrix]="pivotGridMatrix"
@@ -116,5 +116,5 @@
         (onDocumentSave)="(this.onDocumentSave)"
         (onBeforeDocumentSave)="(this.onBeforeDocumentSave)"
     >
-    </ext-pivotgrid>
-</ext-container>
+    </ExtPivotgrid>
+</ExtContainer>

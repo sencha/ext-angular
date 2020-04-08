@@ -1,0 +1,39 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtPanel [padding]="5" [shadow]="true" (ready)="parentReady($event)">
+        <ExtContainer [cls]="'group1'">
+            <ExtContainer
+                (ready)="src1Ready($event)"
+                [cls]="'group-source-group1 group-source'"
+                [html]="'group1'"
+            ></ExtContainer>
+            <ExtContainer
+                (ready)="src2Ready($event)"
+                [cls]="'group-source-group2 group-source'"
+                [html]="'group2'"
+            ></ExtContainer>
+            <ExtContainer
+                (ready)="srcbReady($event)"
+                [cls]="'group-source-both group-source'"
+                [html]="'group1, group2'"
+            ></ExtContainer>
+        </ExtContainer>
+
+        <ExtContainer [className]="'group2'">
+            <ExtContainer
+                (ready)="tar1Ready($event)"
+                [cls]="'group-target-group1 group-target'"
+                [html]="'group1'"
+            ></ExtContainer>
+            <ExtContainer
+                (ready)="tar2Ready($event)"
+                [cls]="'group-target-group2 group-target'"
+                [html]="'group2'"
+            ></ExtContainer>
+            <ExtContainer
+                (ready)="tarbReady($event)"
+                [cls]="'group-target-both group-target'"
+                [html]="'group1, group2'"
+            ></ExtContainer>
+        </ExtContainer>
+    </ExtPanel>
+</ExtContainer>

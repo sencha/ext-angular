@@ -15,3 +15,5 @@ build
 .sencha
 npm-debug.log*
 lerna-debug.log
+sencha-ext-angular-modern-7.2.0.tgz
+packages/ext-angular-kitchensink/package.json

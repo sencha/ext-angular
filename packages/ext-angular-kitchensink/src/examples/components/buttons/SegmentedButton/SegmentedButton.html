@@ -1,0 +1,36 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtPanel
+        [shadow]="true"
+        [top]="top"
+        [left]="left"
+        [width]="width"
+        [height]="height"
+    >
+        <ExtToolbar [shadow]="false">
+            <ExtContainer
+                style="margin-right: 10px;"
+                html="Default UI:"
+            ></ExtContainer>
+            <ExtSegmentedbutton (change)="onButton1Change($event)">
+                <ExtButton [value]="'low'" [text]="'Low'"></ExtButton>
+                <ExtButton [value]="'medium'" [text]="'Medium'"></ExtButton>
+                <ExtButton [value]="'high'" [text]="'High'"></ExtButton>
+            </ExtSegmentedbutton>
+        </ExtToolbar>
+
+        <ExtToolbar [shadow]="false">
+            <ExtContainer
+                style="margin-right: 10px;"
+                html="Toolbar UI:"
+            ></ExtContainer>
+            <ExtSegmentedbutton
+                [defaultUI]="'toolbar-default'"
+                (change)="onButton2Change($event)"
+            >
+                <ExtButton [value]="'low'" [text]="'Low'"></ExtButton>
+                <ExtButton [value]="'medium'" [text]="'Medium'"></ExtButton>
+                <ExtButton [value]="'high'" [text]="'High'"></ExtButton>
+            </ExtSegmentedbutton>
+        </ExtToolbar>
+    </ExtPanel>
+</ExtContainer>

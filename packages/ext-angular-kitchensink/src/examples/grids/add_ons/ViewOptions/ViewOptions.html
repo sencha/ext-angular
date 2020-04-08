@@ -1,0 +1,49 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtGrid
+        title="Grid with View Options"
+        [store]="this.store"
+        plugins="gridviewoptions"
+        shadow="true"
+    >
+        <ExtToolbar docked="top">
+            <ExtContainer>
+                <span #extitem>
+                    <div style="font-size: '14px'; font-weight: 'normal';">
+                        Long press on a column header to customize this grid.
+                    </div>
+                </span>
+            </ExtContainer>
+        </ExtToolbar>
+
+        <ExtGridcolumn
+            text="Company"
+            dataIndex="name"
+            width="150"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            text="Phone"
+            dataIndex="phone"
+            width="100"
+            hidden
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            text="Industry"
+            dataIndex="industry"
+            width="150"
+            hidden
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            text="Price"
+            dataIndex="price"
+            width="75"
+            formatter="usMoney"
+        ></ExtGridcolumn>
+
+        <ExtGridcolumn
+            text="Last Updated"
+            dataIndex="priceLastChange"
+            width="125"
+            formatter="date('m/d/Y')"
+        ></ExtGridcolumn>
+    </ExtGrid>
+</ExtContainer>

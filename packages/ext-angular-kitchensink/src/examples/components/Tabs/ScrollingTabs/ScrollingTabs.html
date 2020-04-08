@@ -1,0 +1,36 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtTabpanel
+        [width]="400"
+        [flex]="1"
+        [shadow]="true"
+        [tabBar]="{ layout: { pack: 'start', overflow: 'scroller' } }"
+        [defaults]="{ layout: 'center', cls: 'card', bodyPadding: 0 }"
+    >
+        <ExtPanel [flex]="1" [title]="'Home'" [layout]="'center'" [width]="100">
+            <ExtContainer
+                [width]="'100%'"
+                [html]="
+                    'You can set <code>{layout: { overflow: \'scroller\' }}</code> on the <code>tabBar</code> prop in combination with a <code>minWidth</code> on each tab to make the tab bar scroll when it runs out of room.'
+                "
+            ></ExtContainer>
+        </ExtPanel>
+        <ExtPanel [flex]="1" [title]="'Politics'" [layout]="'center'"
+            ><ExtContainer [html]="'Politics'"></ExtContainer
+        ></ExtPanel>
+        <ExtPanel [flex]="1" [title]="'Entertainment'" [layout]="'center'"
+            ><ExtContainer
+                [width]="'100%'"
+                [html]="'Entertainment'"
+            ></ExtContainer
+        ></ExtPanel>
+        <ExtPanel [flex]="1" [title]="'World'" [layout]="'center'"
+            ><ExtContainer [width]="'100%'" html="World"></ExtContainer
+        ></ExtPanel>
+        <ExtPanel [flex]="1" [title]="'Markets'" [layout]="'center'"
+            ><ExtContainer [width]="'100%'" html="Markets"></ExtContainer
+        ></ExtPanel>
+        <ExtPanel [flex]="1" [title]="'Sports'" [layout]="'center'"
+            ><ExtContainer [width]="'100%'" html="Sports"></ExtContainer
+        ></ExtPanel>
+    </ExtTabpanel>
+</ExtContainer>

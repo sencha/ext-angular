@@ -1,0 +1,35 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true" >
+    <ExtPanel
+        [title]="'Dock Left'"
+        [docked]="'left'"
+        [width]="200"
+        [shadow]="true"
+        [layout]="'center'"
+        [resizable]="{split: true, edges: 'east', dynamic: true}"
+        [html]="'<code >dynamic: true</code>'"
+    ></ExtPanel>
+    <ExtPanel  [title]="'Unresizable region'" [flex]="1"></ExtPanel>
+    <ExtPanel
+        [docked]="'right'"
+        [title]="'Dock Right'"
+        [width]="200"
+        [collapsible]="'right'"
+        [layout]="'center'"
+        [resizable]="rightResizable"
+        [html]="'<code>collapsible</code>'"
+    ></ExtPanel>
+    <ExtPanel
+        [docked]="'top'"
+        [title]="'Dock Top'"
+        [height]="150"
+        resizable="{split: true,  edges: 'south'}"
+    ></ExtPanel>
+    <ExtPanel
+        [docked]="'bottom'"
+        [title]="'Dock Bottom'"
+        [height]="150"
+        [layout]="'center'"
+        [resizable]="{split: true, edges: 'north', snap: 50}"
+        [html]="'<code >snap: 50</code>'"
+    ></ExtPanel>
+</ExtContainer>

@@ -16,7 +16,7 @@ export class TreeMapToolTipComponent {
   nodeValue = (node) => {
     return node.data.cap;
   }
-  
+
   colorAxis = Ext.create('Ext.d3.axis.Color', {
     scale: {
         type: 'linear',
@@ -29,7 +29,7 @@ export class TreeMapToolTipComponent {
         return record.isLeaf() ? scale(record.get(field)) : '#ececec';
     }
   });
-  
+
   store = Ext.create('Ext.data.TreeStore', {
     autoLoad: true,
     fields: [
@@ -57,7 +57,7 @@ export class TreeMapToolTipComponent {
     ],
     proxy: {
       type: 'ajax',
-      url: 'resources/data/tree/stocks.json'
+      url: 'assets/resources/data/tree/stocks.json'
     }
   });
 }

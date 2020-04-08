@@ -28,7 +28,7 @@ export class BasicScatterComponent {
   chart: any;
 
   chartNavReady = function (event) {
-    this.chart = event.detail.cmp;
+    this.chart = event.cmp;
   };
 
   theme: string = 'default';

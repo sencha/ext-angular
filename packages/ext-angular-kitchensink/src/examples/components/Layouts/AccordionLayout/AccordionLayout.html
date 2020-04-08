@@ -1,0 +1,85 @@
+<ExtContainer
+    scrollable="true"
+    layout="center"
+    flex="{1}"
+    [style]="{ margin: '20px' }"
+>
+    <ExtAccordion
+        title="Accordion Layout"
+        width="700"
+        height="700"
+        scrollable="true"
+        [openable]="openableValue"
+    >
+        <ExtPanel
+            bodyPadding="10"
+            flex="1"
+            title="Accordion Item 1"
+            [tools]="[
+                { iconCls: 'x-fa fa-thumb-tack' },
+                { iconCls: 'x-fa fa-thumb-tack fa-rotate-90' },
+                { iconCls: 'x-fa fa-gear' }
+            ]"
+            html="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed risus neque, mollis id auctor eget, aliquet vel augue. Sed egestas fermentum tempus. Praesent hendrerit eros et enim laoreet suscipit. Nam diam ante, ullamcorper id congue non, accumsan non augue. Aliquam non libero augue, vitae molestie orci. Nulla ac enim nec velit rhoncus venenatis. Aenean orci quam, eleifend ut aliquam iaculis, pellentesque ut arcu. Suspendisse lobortis commodo magna, vitae sodales orci luctus vestibulum. Cras eget ipsum sapien, vel dapibus metus. Etiam sed augue sit amet massa commodo commodo. Nam pellentesque dapibus ipsum. Proin eget malesuada magna. Curabitur elit diam, pellentesque id fermentum eget, congue ultricies nibh. Nunc tincidunt sem at diam porta tincidunt. Suspendisse fringilla felis in lectus blandit vulputate. Suspendisse mollis ipsum nec ante congue ut porttitor nunc bibendum. Maecenas mollis sem non justo iaculis vitae consequat augue pulvinar. Sed aliquet malesuada lobortis. Maecenas malesuada eros sed erat ultricies eleifend. Nulla facilisi. Pellentesque pharetra molestie mollis. Aenean venenatis tempus urna, quis convallis quam cursus eget."
+        >
+        </ExtPanel>
+        <ExtPanel
+            bodyPadding="10"
+            flex="1"
+            layout="fit"
+            title="Accordion Item 2"
+        >
+            <ExtContainer padding="10" layout="fit" fitToParent="true">
+                <ExtFormpanel shadow="true">
+                    <ExtSliderfield
+                        label="Value"
+                        (change)="updateGauges($event)"
+                        [value]="gaugeValue"
+                    ></ExtSliderfield>
+                    <ExtGauge flex="1" [value]="gaugeValue"> </ExtGauge>
+                    <ExtGauge
+                        flex="1"
+                        [value]="gaugeValue"
+                        ui="green"
+                        [trackStart]="180"
+                        [trackLength]="360"
+                    >
+                    </ExtGauge>
+                </ExtFormpanel>
+            </ExtContainer>
+        </ExtPanel>
+        <ExtPanel
+            bodyPadding="10"
+            flex="1"
+            title="Accordion Item 3 (titleCollapse)"
+            layout="fit"
+            titleCollapse="{true}"
+            [tools]="[
+                { iconCls: 'x-fa fa-thumb-tack' },
+                { iconCls: 'x-fa fa-thumb-tack fa-rotate-90' },
+                { iconCls: 'x-fa fa-gear' }
+            ]"
+        >
+            <ExtContainer padding="10" layout="fit" fitToParent="true">
+                <ExtVideo
+                    [shadow]="true"
+                    [loop]="true"
+                    [url]="[
+                        'resources/video/BigBuck.m4v',
+                        'resources/video/BigBuck.webm'
+                    ]"
+                    [posterUrl]="'resources/images/cover.jpg'"
+                    [width]="'100%'"
+                    [height]="'100%'"
+                ></ExtVideo>
+            </ExtContainer>
+        </ExtPanel>
+        <ExtPanel
+            bodyPadding="10"
+            flex="1"
+            title="Accordion Item 4"
+            html="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed risus neque, mollis id auctor eget, aliquet vel augue. Sed egestas fermentum tempus. Praesent hendrerit eros et enim laoreet suscipit. Nam diam ante, ullamcorper id congue non, accumsan non augue. Aliquam non libero augue, vitae molestie orci. Nulla ac enim nec velit rhoncus venenatis. Aenean orci quam, eleifend ut aliquam iaculis, pellentesque ut arcu. Suspendisse lobortis commodo magna, vitae sodales orci luctus vestibulum. Cras eget ipsum sapien, vel dapibus metus. Etiam sed augue sit amet massa commodo commodo. Nam pellentesque dapibus ipsum. Proin eget malesuada magna. Curabitur elit diam, pellentesque id fermentum eget, congue ultricies nibh. Nunc tincidunt sem at diam porta tincidunt. Suspendisse fringilla felis in lectus blandit vulputate. Suspendisse mollis ipsum nec ante congue ut porttitor nunc bibendum. Maecenas mollis sem non justo iaculis vitae consequat augue pulvinar. Sed aliquet malesuada lobortis. Maecenas malesuada eros sed erat ultricies eleifend. Nulla facilisi. Pellentesque pharetra molestie mollis. Aenean venenatis tempus urna, quis convallis quam cursus eget."
+        >
+        </ExtPanel>
+    </ExtAccordion>
+</ExtContainer>

@@ -1,0 +1,87 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtContainer
+        [top]="top"
+        [left]="left"
+        [width]="width"
+        [height]="height"
+        [padding]="20"
+    >
+        <ExtContainer
+            [style]="{
+                fontSize: '13px',
+                fontFamily: 'Menlo, Courier',
+                margin: '0 0 8px 0'
+            }"
+            [html]="'alt'"
+        ></ExtContainer>
+        <ExtTitlebar
+            [title]="'TitleBar'"
+            [maxWidth]="'600px'"
+            [margin]="'0 0 30 0'"
+        >
+            <ExtSearchfield
+                [ui]="'alt'"
+                [flex]="1"
+                align="right"
+                [width]="200"
+                [placeholder]="'Search'"
+            ></ExtSearchfield>
+        </ExtTitlebar>
+
+        <ExtContainer
+            [style]="{
+                fontSize: '13px',
+                fontFamily: 'Menlo, Courier',
+                margin: '0 0 8px 0'
+            }"
+            [html]="'faded'"
+        ></ExtContainer>
+        <ExtContainer
+            layout="vbox"
+            [padding]="20"
+            [style]="{ backgroundColor: 'white' }"
+            [margin]="'0 0 30 0'"
+            [shadow]="true"
+        >
+            <ExtSearchfield
+                [ui]="'faded'"
+                [placeholder]="'Search'"
+            ></ExtSearchfield>
+        </ExtContainer>
+
+        <ExtContainer
+            [style]="{
+                fontSize: '13px',
+                fontFamily: 'Menlo, Courier',
+                margin: '0 0 8px 0'
+            }"
+            [html]="'solo'"
+        >
+        </ExtContainer>
+        <ExtContainer
+            [layout]="'hbox'"
+            [padding]="20"
+            [style]="{ backgroundColor: '#F0F0F0' }"
+            [shadow]="true"
+        >
+            <ExtSearchfield
+                [ui]="'solo ks-search-right-trigger'"
+                [shadow]="true"
+                [placeholder]="'Search'"
+                [margin]="'0 10 0 0'"
+                [bodyAlign]="'left'"
+                [triggers]="{ search: { type: 'search', side: 'right' } }"
+                [flex]="1"
+            >
+            </ExtSearchfield>
+            <ExtButton
+                [iconCls]="'x-fa fa-arrow-right'"
+                [ui]="'action round raised'"
+                [height]="36"
+                [width]="36"
+                [platformConfig]="{ phone: { height: 40, width: 40 } }"
+            >
+            </ExtButton>
+        </ExtContainer>
+    </ExtContainer>
+</ExtContainer>

@@ -1,0 +1,42 @@
+<ExtContainer  layout="vbox" [padding]="10">
+    <ExtPanel
+        [width]="'auto'"
+        shadow="true"
+        ui="instructions"
+        margin="0 0 20 0"
+        [html]="'A <b>card</b> layout shows one item at a time. Each item takes on the
+            full height and width of the container. Card layouts can optionally be configured to
+            animate when switching cards.'"
+    ></ExtPanel>
+    <ExtContainer
+        [height]="300"
+        [layout]="{ type: 'card', animation: animation }"
+        [activeItem]="activeCard"
+        flex="1"
+        shadow="true"
+        [defaults]="{scrollable: 'y'}"
+    >
+        <ExtPanel  [bodyStyle]="colors.card.blue" shadow="true">
+            <ExtContainer  *ngFor="let card of contents;let index=i">
+                <ExtButton
+                    [margin]="card.margin ? card.margin : null"
+                    key="i"
+                    [text]="card.text"
+                    [ui]="'alt'"
+                    (tap)="switchCards(card.animation)"
+                ></ExtButton>
+            </ExtContainer>
+        </ExtPanel>
+        <ExtPanel  [bodyStyle]="colors.card.green" shadow="true">
+            <ExtContainer  *ngFor="let card of contents; let index=i">
+                <ExtButton
+                    [margin]="card.margin ? card.margin : null"
+                    key="i"
+                    [text]="card.text"
+                    [ui]="'alt'"
+                    (tap)="switchCards(card.animation)"
+                ></ExtButton>
+            </ExtContainer>
+        </ExtPanel>
+    </ExtContainer>
+</ExtContainer>

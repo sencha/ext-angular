@@ -1,0 +1,36 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+
+    <ExtPanel
+        [width]="'600'"
+        [height]="'400'"
+        bodyPadding="20"
+        overflowHandler="scroller"
+        [html]="
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+        "
+    >
+        <ExtBreadcrumbbar
+            docked="top"
+            [showIcons]="true"
+            (ready)="this.breadcrumbarReady($event)"
+        >
+            <ExtComponent
+                [html]="'Split buttons:'"
+                [style]="{ marginLeft: '10px', marginRight: '10px' }"
+            >
+            </ExtComponent>
+        </ExtBreadcrumbbar>
+        <ExtBreadcrumbbar
+            docked="bottom"
+            [showIcons]="true"
+            [useSplitButtons]="false"
+            (ready)="this.breadcrumbarReady($event)"
+        >
+            <ExtComponent
+                [html]="'Normal buttons:'"
+                [style]="{ marginLeft: '10px', marginRight: '10px' }"
+            >
+            </ExtComponent>
+        </ExtBreadcrumbbar>
+    </ExtPanel>
+</ExtContainer>

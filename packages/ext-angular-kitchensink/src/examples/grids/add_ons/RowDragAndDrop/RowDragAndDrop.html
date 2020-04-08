@@ -1,0 +1,26 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtGrid
+        [store]="this.store"
+        [layout]="'fit'"
+        [shadow]="true"
+        [height]="'100%'"
+        [selectable]="this.selectable"
+        [plugins]="{ gridrowdragdrop: true }"
+    >
+        <ExtGridcolumn
+            text="Name"
+            dataIndex="fullName"
+            width="150"
+            checked="true"
+        >
+        </ExtGridcolumn>
+        <ExtGridcolumn
+            text="Email"
+            dataIndex="email"
+            [flex]="1"
+            [sortable]="true"
+            checked="true"
+        >
+        </ExtGridcolumn>
+    </ExtGrid>
+</ExtContainer>

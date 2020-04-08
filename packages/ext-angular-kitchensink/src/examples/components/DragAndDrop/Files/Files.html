@@ -1,0 +1,9 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtPanel [padding]="5" [shadow]="true" (ready)="parentReady($event)">
+        <ExtContainer
+            [cls]="'drag-file-label'"
+            [html]="labelText"
+        ></ExtContainer>
+        <ExtContainer [cls]="'iconcls'"></ExtContainer>
+    </ExtPanel>
+</ExtContainer>

@@ -1,0 +1,17 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtFormpanel layout="vbox" [shadow]="true">
+        <ExtSliderfield
+            label="Value"
+            (change)="updateGauges($event)"
+            [value]="value"
+        ></ExtSliderfield>
+        <ExtGauge flex="1" [value]="value"></ExtGauge>
+        <ExtGauge
+            flex="1"
+            [value]="value"
+            [ui]="'green'"
+            [trackStart]="180"
+            [trackLength]="360"
+        ></ExtGauge>
+    </ExtFormpanel>
+</ExtContainer>

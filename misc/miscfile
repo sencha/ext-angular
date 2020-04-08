@@ -1,0 +1,279 @@
+7.2.x
+
+    "@sencha/ext-angular-modern": "file:sencha-ext-angular-modern-7.2.0.tgz",
+
+git fetch upstream
+git merge upstream/ext-angular-7.2.x
+
+for extjs/SDK
+git remote add upstream https://github.com/extjs/SDK.git
+git fetch upstream
+
+
+
+@angular-devkit/build-webpack/src/webpack/index.js/runWebpack
+@angular-devkit/build-angular/src/dev-server/index.js
+
+https://medium.com/@jeroenouw/upgrade-to-angular-8-beta-within-10-minutes-cd831fb8dd0e
+
+git remote add upstream https://github.com/sencha/ext-angular.git
+
+    <base href="/">
+    <style>body {margin: 0 !important;overflow: hidden !important;}</style>
+
+
+cat ~/.npmrc
+rm -f ~/.npmrc
+ "npm cache clean --force" and / or "rm -rf ~/.npm"
+*****
+either of the next logs me in
+npm login --registry=https://sencha.myget.org/F/extjs-upgrade-adviser/npm/ --scope=@sencha
+npm login --registry=https://sencha.myget.org/F/early-adopter/npm/ --scope=@sencha
+npm login --registry=https://test.npm.sencha.com/ --scope=@sencha
+npm login --registry=https://npm.sencha.com/ --scope=@sencha
+npm login --registry=https://sencha.myget.org/F/community/npm/ --scope=@sencha
+npm login --registry=https://sencha.myget.org/F/commercial-test/npm/ --scope=@sencha
+echo "@sencha:registry=https://sencha.myget.org/F/community/npm/" >> ~/.npmrc
+echo "//sencha.myget.org/F/community/npm/:_authToken=d2b8cca6-d601-438d-a2b9-6c7988f3afe6" >> ~/.npmrc
+*****
+npm --registry https://test.npm.sencha.com/ whoami
+npm --registry https://sencha.myget.org/F/community/npm/ whoami
+
+
+
+
+        // compilation.hooks.additionalAssets.tapAsync(`ext-additionalAssets`, (cb) => {
+        //   console.log('additionalAssets1')
+        //   cb()
+        // })
+
+
+
+https://github.com/maciejtreder/angular-universal-pwa
+
+
+
+  //"dest": "../../../ext-angular",
+
+
+ng new angular-cli-with-library2 --style scss --minimal --skip-tests --inline-style --inline-template
+
+ng generate library ext-angular
+
+ng build ext-angular
+
+https://dev.to/meltedspark/customizing-angular-cli-6-buildan-alternative-to-ng-eject-1oc4
+ng new ext-angular-builder --style scss --minimal --skip-tests --inline-style --inline-template
+npm i -D @angular-builders/custom-webpack
+
+      "architect": {
+        "build": {
+          //"builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
+          "options": {
+            "customWebpackConfig": {
+              "path": "./ext-angular-webpack.config.js"
+            },
+
+
+
+
+
+          //"builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/dev-server:generic",
+
+
+
+
+          in tsconfig.json
+
+     "paths": {
+      "@angular/*": ["./node_modules/@angular/*"]
+    }
+
+
+//<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+//</nav>
+
+
+https://www.edc4it.com/blog/web/webpack-tutorial.html
+
+    "@types/jquery": "^3.3.29",
+
+    "add": "^2.0.6",
+    "jquery": "^3.3.1",
+
+    "tslint": "^5.12.0",
+    "tslint-loader": "^3.5.4",
+
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "skipTemplateCodegen": false,
+    "strictMetadataEmit": true,
+    "fullTemplateTypeCheck": false,
+    "strictInjectionParameters": true,
+    "enableResourceInlining": true
+  }
+
+
+
+
+
+import {
+  Component,
+  Injectable,
+  Injector,
+  ComponentFactoryResolver,
+  EmbeddedViewRef,
+  ApplicationRef
+  }
+from '@angular/core'
+@Injectable({
+  providedIn: 'root'
+})
+@Component({
+  selector: 'app-root',
+  template: ``,
+})
+export class ExtAngularBootstrapService {
+  bootstrapComponent: any
+  constructor(
+      private componentFactoryResolver: ComponentFactoryResolver,
+      private appRef: ApplicationRef,
+      private injector: Injector
+  ) {}
+   appendComponentToViewport() {
+     //console.log("In appendComponentToViewport")
+    if(!this.bootstrapComponent) {
+        throw new Error("Bootstrap component not set. Please use extAngularService.setBootStrapComponent(yourComponent) to setup bootstrap component from your root module constructor")
+    }
+    //console.log("bootstrapComponent : " + this.bootstrapComponent)
+    const componentRef = this.componentFactoryResolver
+      .resolveComponentFactory(this.bootstrapComponent)
+      .create(this.injector)
+    this.appRef.attachView(componentRef.hostView)
+    const domElem = (componentRef.hostView as EmbeddedViewRef<any>)
+      .rootNodes[0] as HTMLElement
+    var root = document.getElementsByClassName('x-viewport-body-el')[0]
+    root.appendChild(domElem)
+  }
+  setBootStrapComponent(component:any) {
+    //console.log("In setBootStrapComponent")
+    this.bootstrapComponent = component
+  }
+}
+
+//import { Component } from '@angular/core'
+//import { ExtAngularBootstrapService } from './ext-angular-bootstrap.service'
+
+@Component({
+  selector: 'app-root',
+  template: ``,
+})
+export class ExtAngularBootstrapComponent {
+  constructor(private extAngularService: ExtAngularBootstrapService) {
+    //console.log("In App constructor")
+    this.extAngularService.appendComponentToViewport()
+  }
+}
+
+
+//export class ExtAngularBootstrapComponent;
+//export class ExtAngularBootstrapService;
+  declare var Ext: any
+import { platformBrowserDynamic } from "@angular/platform-browser-dynamic"
+export function launch(AppModule) {
+
+  Ext.application({
+    name: "$ExtAngularApp",
+    quickTips: true,
+    launch: () => {
+      platformBrowserDynamic().bootstrapModule(AppModule)
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+  })
+}
+
+
+    <!--
+    <base href="/">
+    <base href="/ExtAngular/6.7.0/kitchensink/">
+    <base href="/_git/sencha/ext-angular/packages/ext-angular-kitchensink/build/">
+    /repository/download/Early_Adopter_6_7_Examples_SenchaExtAngularKitchensinkTestExamplesSenchaCo/761203:id/ext-angular-6.7.0-kitchensink.zip%21/index.html
+    -->
+
+
+    "webpack-dev": "cross-env NODE_ENV=development webpack --mode development",
+    "webpack-prod": "cross-env NODE_ENV=production webpack --mode production",
+    "build:dev": "webpack-dev-server --inline --hot --progress--env.genProdData=false --env.verbose=no --env.environment=development --env.browser=true --env.watch=yes",
+    "build:prod": "npm run build:clean && ngc && npm run webpack-prod && npm run build:clean",
+    "build:clean": "del-cli 'src/**/*.js' 'src/**/*.js.map' 'src/**/*.ngsummary.json' 'src/**/*.metadata.json' 'src/**/**/*.ngfactory.ts' 'src/**/*.ngstyle.ts' 'src/**/*.shim.ts'",
+    "serve": "lite-server"
+
+
+    <!--
+  <panel docked="bottom" bodyPadding="5" shadow="true">
+    <container #extitem>
+      <container [style]="{fontSize: '14px', fontWeight: 'normal'}" [html]="message"></container>
+    </container>
+  </panel>
+-->
+
+
+<!--
+        (selectionchange)="this.onSelectionChange($event)"
+-->
+
+
+  // //mjg
+  // if (thisOptions.environment == 'production') {
+  //   thisVars.production = true
+  //   thisOptions.genProdData = options.genProdData
+  //   if (!options.genProdData && options.framework == 'angular' && options.prodFileReplacementConfig.length) {
+  //     options.prodFileReplacementConfig.forEach((value) => {
+  //       if(typeof value === 'object' && value.replace && value.with) {
+  //         let filePath = path.resolve(process.cwd(), value.with)
+  //         if (fs.existsSync(filePath)) {
+  //           const data = fsx.readFileSync(filePath).toString()
+  //           filePath = path.resolve(process.cwd(), value.replace)
+  //           if (fs.existsSync(filePath))
+  //             fsx.writeFileSync(filePath, data, 'utf-8', ()=>{return})
+  //         }
+  //       } else {
+  //         compilation.errors.push('Invalid prodFileReplacementConfig')
+  //       }
+  //     })
+  //   }
+  // }
+  // else
+  //   { thisVars.production = false }
+
+
+
+    <toolbar [hidden]="true" docked="top" ui="app-transparent-toolbar" [shadow]="false" [margin]="isPhone? '0 10' : '10 0 0 10'" padding="0 10 0 10">
+    <button ui="action" margin="0 10px 0 0" iconCls="x-fa fa-refresh" (tap)="click($event)"  text="TABS"></button>
+    <spacer></spacer>
+    <segmentedbutton [hidden]="true" margin="0 10px 0 0" (change)="onStackGroup($event)" >
+      <button iconCls="x-fa fa-bars" text="STACK" ></button>
+      <button iconCls="x-fa fa-bar-chart" text="GROUP"></button>
+    </segmentedbutton>
+  </toolbar>
+
+
+  click = event => {
+    this.tabs.map(key => (
+      console.log(key)
+    ))
+  }
+
+
+    "angular-highlight-js":"^2.0.1",
+
+    https://www.sencha.com/blog/build-a-completely-custom-ext-js-theme-in-less-than-10-minutes/
+
+
+
+
+    document.documentElement.style.setProperty('--base-color', 'navy');window['title'] = 'React UI Toolkit';

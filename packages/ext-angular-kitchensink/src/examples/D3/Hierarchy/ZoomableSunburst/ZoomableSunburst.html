@@ -1,10 +1,10 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
-    <ext-d3-sunburst
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtD3_sunburst
         padding="20"
         [store]="store"
         [tooltip]="tooltip"
         [transitions]="transitions"
         (ready)="this.onSubBurstReady($event)"
         expandEventName="false"
-    ></ext-d3-sunburst>
-</ext-container>
+    ></ExtD3_sunburst>
+</ExtContainer>

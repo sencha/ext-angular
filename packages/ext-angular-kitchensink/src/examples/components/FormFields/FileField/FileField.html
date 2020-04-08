@@ -1,0 +1,25 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtPanel
+        [shadow]="true"
+        [top]="top"
+        [left]="left"
+        [width]="width"
+        [height]="height"
+        layout="vbox"
+    >
+        <ExtFilefield
+            [label]="'Attachment'"
+            [value]="uploadedFile"
+            (change)="onChange($event)"
+        >
+        </ExtFilefield>
+
+        <ExtContainer>
+            <span #extitem>
+                <div [hidden]="uploadedFile == null">
+                    You selected {{ uploadedFile }}
+                </div>
+            </span>
+        </ExtContainer>
+    </ExtPanel>
+</ExtContainer>

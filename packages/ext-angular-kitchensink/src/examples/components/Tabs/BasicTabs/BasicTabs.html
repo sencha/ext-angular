@@ -1,0 +1,28 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtTabpanel
+        [flex]="1"
+        [shadow]="true"
+        [defaults]="{ cls: 'card', layout: 'center' }"
+    >
+        <ExtPanel title="Tab 1" [layout]="'center'">
+            <ExtContainer
+                [flex]="1"
+                [html]="'By default, tabs are aligned to the top of a view.'"
+            ></ExtContainer>
+        </ExtPanel>
+        <ExtPanel [flex]="1" title="Tab 2" [layout]="'center'">
+            <ExtContainer
+                [flex]="1"
+                [html]="
+                    'A TabPanel can use different animations by setting <code>layout.animation.</code>'
+                "
+            ></ExtContainer>
+        </ExtPanel>
+        <ExtPanel title="Tab 3" [layout]="'center'">
+            <ExtContainer
+                [cls]="'action'"
+                [html]="'User tapped Tab 3'"
+            ></ExtContainer>
+        </ExtPanel>
+    </ExtTabpanel>
+</ExtContainer>

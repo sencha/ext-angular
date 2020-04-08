@@ -1,0 +1,33 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtGrid
+        [title]="'Row Expander Grid'"
+        [store]="this.store"
+        [layout]="'fit'"
+        [shadow]="true"
+        [itemConfig]="{
+      body : {
+        tpl: this.tplVal
+      }
+    }"
+        (ready)="onGridReady($event)"
+    >
+        <ExtGridcolumn
+            text="Company"
+            dataIndex="name"
+            width="150"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            text="Price"
+            dataIndex="price"
+            width="75"
+            formatter="usMoney"
+        ></ExtGridcolumn>
+
+        <ExtGridcolumn
+            text="Last Updated"
+            dataIndex="priceLastChange"
+            width="125"
+            formatter="date('m/d/Y')"
+        ></ExtGridcolumn>
+    </ExtGrid>
+</ExtContainer>

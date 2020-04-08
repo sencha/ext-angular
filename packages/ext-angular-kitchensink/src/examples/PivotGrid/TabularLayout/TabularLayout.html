@@ -1,14 +1,14 @@
-<ext-container layout="fit" padding="10" [fitToParent]="true">
-    <ext-pivotgrid
+<ExtContainer layout="fit" padding="10" fitToParent="true">
+    <ExtPivotgrid
         shadow="true"
         (ready)="onPivotGridRead($event)"
         startRowGroupsCollapsed="false"
         startColGroupsCollapsed="false"
         [matrix]="pivotgridMatrix"
     >
-    </ext-pivotgrid>
+    </ExtPivotgrid>
 
-    <ext-toolbar
+    <ExtToolbar
         shadow="false"
         docked="top"
         ui="app-transparent-toolbar"
@@ -23,10 +23,7 @@
             ui: 'action'
         }"
     >
-        <ext-button text="Expand All" [handler]="this.expandAll"></ext-button>
-        <ext-button
-            text="Collapse All"
-            [handler]="this.collapseAll"
-        ></ext-button>
-    </ext-toolbar>
-</ext-container>
+        <ExtButton text="Expand All" [handler]="this.expandAll"></ExtButton>
+        <ExtButton text="Collapse All" [handler]="this.collapseAll"></ExtButton>
+    </ExtToolbar>
+</ExtContainer>

@@ -1,0 +1,178 @@
+<ExtContainer
+    padding="10"
+    layout="fit"
+    fitToParent="true"
+    xdefaults="containerDefaults"
+>
+    <ExtToolbar docked="top" [shadow]="false" ui="app-transparent-toolbar">
+        <ExtButton text="Basic Tip">
+            <ExtTooltip>
+                <ExtContainer
+                    ><div #extitem>
+                        <div>A simple tooltip</div>
+                    </div></ExtContainer
+                >
+            </ExtTooltip>
+        </ExtButton>
+        <ExtButton text="autoHide: false">
+            <ExtTooltip
+                [showOnTap]="true"
+                [autoHide]="false"
+                [title]="'Tip Title'"
+                closable
+            >
+                <ExtContainer
+                    ><div #extitem>
+                        <div>A simple tooltip</div>
+                    </div></ExtContainer
+                >
+            </ExtTooltip>
+        </ExtButton>
+        <ExtButton text="Mouse Track">
+            <ExtTooltip
+                [showOnTap]="true"
+                [title]="'Mouse Track'"
+                [trackMouse]="true"
+            >
+                <ExtContainer
+                    ><div #extitem>
+                        <div>
+                            This tip will follow the mouse while it is over the
+                            element
+                        </div>
+                    </div></ExtContainer
+                >
+            </ExtTooltip>
+        </ExtButton>
+    </ExtToolbar>
+
+    <ExtToolbar docked="top" [shadow]="false" ui="app-transparent-toolbar">
+        <ExtButton text="Anchor Right, Rich Content">
+            <ExtTooltip
+                showOnTap="true"
+                align="tl-tr"
+                anchorToTarget="true"
+                anchor="true"
+            >
+                <ExtContainer
+                    ><div #extitem>
+                        <ul style="margin: '15';">
+                            <li>5 bedrooms</li>
+                            <li>Close to transport</li>
+                            <li>Large backyard</li>
+                        </ul>
+                        <img
+                            style="width: '400px'; height: '300px';"
+                            src="house.jpg"
+                        /></div
+                ></ExtContainer>
+            </ExtTooltip>
+        </ExtButton>
+        <ExtButton text="Anchor Below">
+            <ExtTooltip
+                showOnTap="true"
+                align="tc-bc"
+                anchor="true"
+                anchorToTarget=""
+            >
+                <ExtContainer docked="top"
+                    ><div #extitem>
+                        <div>The anchor is centered</div>
+                    </div></ExtContainer
+                >
+            </ExtTooltip>
+        </ExtButton>
+        <ExtButton text="Anchor with Tracking">
+            <ExtTooltip
+                showOnTap="true"
+                trackMouse="true"
+                anchor="true"
+                align="l-r"
+            >
+                <ExtContainer docked="top"
+                    ><div #extitem>
+                        <div>Following the mouse with an anchor</div>
+                    </div></ExtContainer
+                >
+            </ExtTooltip>
+        </ExtButton>
+    </ExtToolbar>
+
+    <ExtContainer
+        [centered]="false"
+        [layout]="{
+            type: isPhone ? 'vbox' : 'hbox',
+            align: 'start',
+            pack: 'center'
+        }"
+    >
+        <ExtContainer docked="top"
+            ><div #extitem>
+                <div
+                    style="
+                        width: 150px;
+                        margin: 0 15px 0 0;
+                        color: white;
+                        padding: 5px 10px;
+                        textalign: center;
+                        cursor: default;
+                        background-color: #e91e63;
+                    "
+                    data-qtip="This tip is inline"
+                    data-qshowOnTap="true"
+                >
+                    Inline Tip
+                </div>
+                <div
+                    style="
+                        width: 150px;
+                        margin: 0 15px 0 0;
+                        color: white;
+                        padding: 5px 10px;
+                        textalign: center;
+                        cursor: default;
+                        background-color: #2196f3;
+                    "
+                    data-qtip="This tip has a fixed width"
+                    data-qwidth="400"
+                    data-qshowOnTap="true"
+                >
+                    Fixed width inline tip
+                </div>
+                <div
+                    style="
+                        width: 150px;
+                        margin: 0 15px 0 0;
+                        color: white;
+                        padding: 5px 10px;
+                        textalign: center;
+                        cursor: default;
+                        background-color: #ff5722;
+                    "
+                    data-qtip="This tip has a title"
+                    data-qtitle="The title"
+                    data-qshowOnTap="true"
+                >
+                    Inline tip with title
+                </div>
+                <div
+                    style="
+                        width: 150px;
+                        margin: 0 15px 0 0;
+                        color: white;
+                        padding: 5px 10px;
+                        textalign: center;
+                        cursor: default;
+                        background-color: #607d8b;
+                    "
+                    data-qtip="Aligned top"
+                    data-qalign="bl-tl"
+                    data-qanchorToTarget="true"
+                    data-qshowOnTap="true"
+                >
+                    Inline tip align top
+                </div>
+            </div></ExtContainer
+        >
+    </ExtContainer>
+</ExtContainer>

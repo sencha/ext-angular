@@ -20,7 +20,7 @@ export class DrilldownPluginComponent {
   pivotgrid:any;
 
   onPivotGridRead = function(event) {
-    this.pivotgrid = event.detail.cmp;
+    this.pivotgrid = event.cmp;
   }
 
   collapseAll = () => { this.pivotgrid.collapseAll(); }

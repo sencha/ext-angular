@@ -1,0 +1,35 @@
+<ExtList
+    [shadow]="true"
+    [itemTpl]="tpl"
+    [store]="store"
+    (select)="onSelect($event)"
+    [platformConfig]="{
+        '!phone': { height: 450, width: 300 }
+    }"
+    [plugins]="[
+        {
+            type: 'listswiper',
+            defaults: { ui: 'action' },
+            left: [
+                {
+                    iconCls: 'x-fa fa-phone',
+                    text: 'Call',
+                    commit: onCall
+                }
+            ],
+            right: [
+                {
+                    iconCls: 'x-fa fa-envelope',
+                    ui: 'alt confirm',
+                    text: 'Message',
+                    commit: onMessage
+                },
+                {
+                    iconCls: 'x-fa fa-edit',
+                    text: 'Edit',
+                    commit: onEdit
+                }
+            ]
+        }
+    ]"
+></ExtList>

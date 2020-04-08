@@ -13,7 +13,7 @@ function extractAll(dir) {
 
   for (let file of files) {
     const fullPath = path.join(dir, file)
-    
+
     if (fs.lstatSync(fullPath).isDirectory()) {
       extractAll(fullPath);
     } else if (file === `${example}.ts`) {
@@ -24,12 +24,23 @@ function extractAll(dir) {
         console.log(`Error extracting code from ${file}`, e)
       }
     }
+    else if (file === `${example}Data.js`) {
+        try {
+  //        console.log(example)
+          extractFrom(example, file, fullPath)
+        } catch (e) {
+          console.log(`Error extracting code from ${file}`, e)
+        }
+      }
+
+
   }
 }
 
 function extractFrom(example, file, fullPath) {
   if (!fs.existsSync(fullPath)) return
   const content = fs.readFileSync(path.join(fullPath), 'utf8')
+
   const importRegex = /import[^'"]+['"]([^'"]+)['"];/gi
   const htmlRegex = /[ ]+templateUrl[^'"]+['"]([^'"]+)['"],/gi
   const styleRegex =   /[ ]+styleUrls[^'"]+['"]([^'"]+)['"]],/gi
@@ -57,10 +68,16 @@ function extractFrom(example, file, fullPath) {
 }
 
 function run() {
-  var outputDir = path.join(__dirname, 'build', 'resources')
+  var outputDir = path.join(__dirname, 'src', 'assets', 'resources')
+  //var outputDir = path.join(__dirname, 'resources')
   extractAll(examples)
   mkdirp(outputDir)
-  fs.writeFileSync(path.join(outputDir, 'code.js'), `window._code = ${JSON.stringify(result, null, '\t')}`, 'utf8')
+  //fs.writeFileSync(path.join(outputDir, 'code.js'), ` function getIt() { window._code = ${JSON.stringify(result, null, '\t')} }`, 'utf8')
+  var r = `${JSON.stringify(result, null, '\t')}`
+  var r2 = r.replace(/\/\//g, '\\/\\/');
+  //console.log(r)
+  //fs.writeFileSync(path.join(outputDir, 'code.js'), `window._code = ${JSON.stringify(result, null, '\t')}`, 'utf8')
+  fs.writeFileSync(path.join(outputDir, 'code.js'), `window._code = ${r2}`, 'utf8')
 
   var chalk = require('chalk')
   var prefix = ``

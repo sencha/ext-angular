@@ -1,0 +1,12 @@
+<ExtContainer  [layout]="'vbox'" [padding]="10">
+    <ExtPanel
+        [shadow]="true" [ui]="'instructions'" [margin]="'0 0 20 0'"
+        [html]="'A <b>center</b> layout displays a single item, vertically and horizontally centered in the container.'"
+    ></ExtPanel>
+    <ExtPanel  [layout]="'center'" [flex]="1" [shadow]="true" [padding]="'6 0'">
+        <ExtContainer
+            [height]="200" [width]="200" [html]="'Content'"
+            [style]="colors.card.red" [layout]="'center'"
+        ></ExtContainer>
+    </ExtPanel>
+</ExtContainer>

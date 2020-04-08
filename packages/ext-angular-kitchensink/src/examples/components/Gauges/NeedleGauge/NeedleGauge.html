@@ -1,0 +1,37 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtFormpanel layout="vbox" [shadow]="true">
+        <ExtSliderfield
+            label="Value"
+            (change)="updateGauges($event)"
+            [value]="value"
+        ></ExtSliderfield>
+        <ExtContainer flex="1" layout="hbox">
+            <ExtContainer flex="1" layout="vbox">
+                <ExtGauge
+                    flex="1"
+                    [value]="value"
+                    [needle]="{ outerRadius: '100%' }"
+                    [valueStyle]="{ display: 'none' }"
+                ></ExtGauge>
+                <ExtGauge
+                    flex="1"
+                    [value]="value"
+                    [needle]="'wedge'"
+                ></ExtGauge>
+            </ExtContainer>
+            <ExtContainer flex="1" layout="vbox">
+                <ExtGauge
+                    flex="1"
+                    [value]="value"
+                    [needle]="'spike'"
+                ></ExtGauge>
+                <ExtGauge
+                    flex="1"
+                    [value]="value"
+                    [textOffset]="{ dy: 45 }"
+                    [needle]="{ type: 'arrow', innerRadius: 0 }"
+                ></ExtGauge>
+            </ExtContainer>
+        </ExtContainer>
+    </ExtFormpanel>
+</ExtContainer>

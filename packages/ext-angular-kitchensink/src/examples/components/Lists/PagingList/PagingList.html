@@ -1,0 +1,57 @@
+<ExtContainer padding="10" fitToParent="true">
+    <ExtList
+        [left]="10"
+        [top]="10"
+        [width]="300"
+        [height]="400"
+        [shadow]="true"
+        [itemTpl]="tpl"
+        [store]="store"
+        [plugins]="[{ type: 'listpaging' }]"
+        (ready)="listReady($event)"
+        (select)="onSelect($event)"
+    >
+        <ExtContainer [docked]="'top'">
+            <ExtContainer>
+                <span #extitem>
+                    <div style="padding: 15px;">
+                        <b>Auto Paging</b>: {{ bufferZone === false ? "OFF" :
+                        "ON (buffer zone: " + bufferZone + " )" }}
+                    </div>
+                </span>
+            </ExtContainer>
+            <ExtSegmentedbutton>
+                <ExtButton
+                    text="Off"
+                    [pressed]="bufferZone === false"
+                    (tap)="setBufferZone(false)"
+                    [flex]="1"
+                ></ExtButton>
+                <ExtButton
+                    text="0"
+                    [pressed]="bufferZone == 0"
+                    (tap)="setBufferZone(0)"
+                    [flex]="1"
+                ></ExtButton>
+                <ExtButton
+                    text="8"
+                    [pressed]="bufferZone == 8"
+                    (tap)="setBufferZone(8)"
+                    [flex]="1"
+                ></ExtButton>
+                <ExtButton
+                    text="16"
+                    [pressed]="bufferZone == 16"
+                    (tap)="setBufferZone(16)"
+                    [flex]="1"
+                ></ExtButton>
+                <ExtButton
+                    text="32"
+                    [pressed]="bufferZone == 32"
+                    (tap)="setBufferZone(32)"
+                    [flex]="1"
+                ></ExtButton>
+            </ExtSegmentedbutton>
+        </ExtContainer>
+    </ExtList>
+</ExtContainer>

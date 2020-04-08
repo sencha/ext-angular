@@ -1,0 +1,96 @@
+<ExtContainer
+    [layout]="'vbox'"
+    padding="10"
+    [platformConfig]="{
+        '!phone': { height: 350, width: 550 }
+    }"
+>
+    <ExtContainer layout="hbox" [margin]="'0 0 10 0'">
+        <ExtSegmentedbutton
+            (change)="changeTapMode($event)"
+            [defaultUI]="'toolbar-default'"
+        >
+            <ExtButton text="DIRECTION" [pressed]="tapMode === 'direction'">
+                <ExtTooltip maxWidth="300">
+                    <div style="font-weight:bold;font-size:14px;font-family:courier;">
+                    </div>
+                    <p>
+                        Clicking on a dot in the indicator will move the wizard
+                        one step forward or backward depending on the side that
+                        was clicked.
+                    </p>
+                </ExtTooltip>
+            </ExtButton>
+            <ExtButton text="ITEM" [pressed]="tapMode === 'item'">
+                <ExtTooltip maxWidth="300">
+                    <div
+                        style="font-weight:bold;font-size:14px;font-family:courier;"
+                    >
+                    </div>
+                    <p>
+                        Clicking on a dot in the indicator will move the wizard
+                        to the corresponding step.
+                    </p>
+                </ExtTooltip>
+            </ExtButton>
+        </ExtSegmentedbutton>
+    </ExtContainer>
+
+    <ExtPanel shadow [activeItem]="step" [layout]="'card'" flex="1">
+        <ExtContainer
+            padding="5 20"
+            [cls]="'step'"
+            html="
+                <h1>Welcome to the Demo Wizard!</h1>
+
+                Step 1 of 3
+
+                Please click the 'Next' button to continue...
+            "
+        ></ExtContainer>
+        <ExtContainer
+            padding="20"
+            [cls]="'step'"
+            html="
+                Step 2 of 3
+
+                Almost there. Please click the 'Next' button to continue...
+            "
+        ></ExtContainer>
+        <ExtContainer
+            padding="5 20"
+            [cls]="'step'"
+            html="
+                <h1>Congratulations!</h1>
+
+                Step 3 of 3 - Complete
+            "
+        ></ExtContainer>
+        <ExtToolbar
+            docked="bottom"
+            [layout]="{ type: 'hbox', align: 'center', pack: 'space-between' }"
+        >
+            <ExtButton
+                [disabled]="step === 0"
+                text="Previous"
+                (tap)="previous()"
+                iconCls="x-fa fa-chevron-left"
+            ></ExtButton>
+            <ExtIndicator
+                (ready)="indicatorReady($event)"
+                count="3"
+                (next)="next()"
+                (previous)="previous()"
+                [tapMode]="tapMode"
+                (indicatortap)="onIndicatorTap($event)"
+            ></ExtIndicator>
+            <ExtButton
+                [disabled]="step === 2"
+                text="Next"
+                (tap)="next()"
+                iconCls="x-fa fa-chevron-right"
+                iconAlign="right"
+            ></ExtButton>
+        </ExtToolbar>
+    </ExtPanel>
+</ExtContainer>

@@ -1,0 +1,40 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtFormpanel
+        [shadow]="true"
+        [top]="top"
+        [left]="left"
+        [width]="width"
+        [height]="height"
+        padding="20"
+    >
+        <ExtSliderfield
+            (change)="onSingleChange($event)"
+            [label]="'Single Thumb'"
+            [value]="singleValue"
+            [padding]="5"
+        ></ExtSliderfield>
+        <ExtContainer
+            [style]="{marginBottom: 20}"
+            [html]="'Value: '+singleValue"
+        ></ExtContainer>
+        <ExtSliderfield
+            (change)="onLiveUpdateChange($event)"
+            [label]="'Live Update'"
+            [value]="liveUpdateValue"
+            [liveUpdate]="true"
+            [padding]="5"
+        ></ExtSliderfield>
+        <ExtContainer
+            [style]="{marginBottom: 20}"
+            [html]="'Value: '+liveUpdateValue"
+        ></ExtContainer>
+        <ExtSliderfield
+            (change)="onMultipleChange($event)"
+            [label]="'Multiple Thumbs'"
+            [value]="multipleValue"
+            [padding]="5"
+        ></ExtSliderfield>
+        <ExtContainer [html]="'Values: '+multipleValue.join(', ')">
+        </ExtContainer>
+    </ExtFormpanel>
+</ExtContainer>

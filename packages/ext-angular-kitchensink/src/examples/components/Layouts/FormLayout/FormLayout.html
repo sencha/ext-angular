@@ -1,0 +1,66 @@
+<ExtContainer [padding]="isPhone ? 20 : 30">
+    <ExtPanel
+        [shadow]="true"
+        [ui]="'instructions'"
+        [margin]="'0 0 30 0'"
+        [html]="'A <b>form</b> layout renders a single column of form fields, all with the same label width.
+        The default behavior is to size all labels to the width of the label with the longest
+        text, but the width of the labels can also be configured.'"
+    ></ExtPanel>
+    <ExtContainer>
+        <div #extitem style="font-size:14px; font-family:Menlo, Courier; margin:10px 0 10px 0">
+            labelTextAlign="left" (default)
+        </div>
+        ></ExtContainer
+    >
+    <ExtFormpanel
+        [layout]="'form'"
+        [shadow]="true"
+        [margin]="'0 0 30 0'"
+        [defaults]="{labelAlign: 'left'}"
+    >
+        <ExtTextfield
+            [label]="'First Name'"
+            [labelTextAlign]="'left'"
+        ></ExtTextfield>
+        <ExtTextfield
+            [label]="'Last Name'"
+            [labelTextAlign]="'left'"
+        ></ExtTextfield>
+        <ExtTextfield
+            [label]="'Bank Account Number'"
+            [labelTextAlign]="'left'"
+        ></ExtTextfield>
+    </ExtFormpanel>
+    <ExtContainer>
+        <div #extitem style="font-size:14px;font-family:Menlo, Courier;margin:10px 0 10px 0">
+          labelTextAlign="right"
+        </div>
+    </ExtContainer>
+    <ExtFormpanel
+        [layout]="'form'"
+        [shadow]="true"
+        [defaults]="{labelAlign: 'left'}"
+    >
+        <ExtTextfield
+            [label]="'First Name'"
+            [labelTextAlign]="'right'"
+        ></ExtTextfield>
+        <ExtTextfield
+            [label]="'Last Name'"
+            [labelTextAlign]="'right'"
+        ></ExtTextfield>
+        <ExtTextfield
+            [label]="'Title'"
+            [labelTextAlign]="'right'"
+        ></ExtTextfield>
+    </ExtFormpanel>
+</ExtContainer>
+
+<!-- const styles = {
+heading: {
+fontSize: '14px',
+fontFamily: 'Menlo, Courier',
+margin: '10px 0 10px 0'
+}
+} -->

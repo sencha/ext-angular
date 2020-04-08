@@ -1,0 +1,67 @@
+<ExtContainer padding="10px" layout="fit" fitToParent="true">
+    <ExtGrid
+        [plugins]="{ gridfilters: true }"
+        rowNumbers="true"
+        shadow="true"
+        [store]="this.store"
+        title="Grid Filters"
+    >
+        <ExtGridcolumn
+            dataIndex="employeeNo"
+            filter="number"
+            minWidth="10"
+            text="Id"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            dataIndex="fullName"
+            filter="string"
+            minWidth="150"
+            [sorter]="{ sorterFn: this.nameSorter }"
+            text="Name"
+        ></ExtGridcolumn>
+        <ExtDatecolumn
+            dataIndex="dob"
+            editable="true"
+            format="d-m-Y"
+            text="Date of Birth"
+            width="115"
+        >
+        </ExtDatecolumn>
+        <ExtGridcolumn
+            dataIndex="noticePeriod"
+            editable="true"
+            filter="string"
+            text="Notice Period"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            align="center"
+            dataIndex="holidayDays"
+            format="0"
+            text="Holidays"
+            xtype="numbercolumn"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            align="center"
+            dataIndex="verified"
+            text="Visible"
+            width="150"
+            xtype="booleancolumn"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            align="right"
+            dataIndex="salary"
+            editable="true"
+            formatter="usMoney"
+            text="Salary"
+            width="150"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            dataIndex="email"
+            flex="1"
+            editable="true"
+            [editor]="{ xtype: 'emailfield' }"
+            text="Email"
+            width="250"
+        ></ExtGridcolumn>
+    </ExtGrid>
+</ExtContainer>

@@ -38,7 +38,7 @@ export class NavigatorComponent {
   };
 
   chartNavReady = function (event) {
-    this.chart = event.detail.cmp.getChart();
+    this.chart = event.cmp.getChart();
   };
 
   toggleZoomOnPan = (zoomOnPan) => {

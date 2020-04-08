@@ -1,0 +1,75 @@
+<ExtContainer [padding]="isPhone ? 20 : 30">
+  <ExtPanel
+      [shadow]="true" [ui]="'instructions'" [margin]="'0 0 40 0'"
+      [html]="'An <b>hbox</b> layout positions items horizontally with optional \'pack\', and \'align\' configs.'"
+  ></ExtPanel>
+  <ExtContainer  [style]="{fontSize:14, fontFamily:'Menlo, Courier', margin:'20px 0 8px'}"
+      html="<div>align: 'stretch'</div>"
+  ></ExtContainer>
+  <ExtPanel  [shadow]="true" [layout]="{ type: 'hbox', align: 'strech' }" [height]="75" [margin]="'0 0 40 0'">
+      <ExtContainer  [layout]="'center'" [style] ="colors.card.red" [flex]="1" [html]="'Item 1'"></ExtContainer>
+      <ExtContainer  [layout]="'center'" [style] ="colors.card.blue" [flex]="1" [html]="'Item 2'"></ExtContainer>
+      <ExtContainer  [layout]="'center'" [style] ="colors.card.green" [flex]="1" [html]="'Item 3'"></ExtContainer>
+  </ExtPanel>
+  <ExtContainer  [style]="{fontSize:14, fontFamily:'Menlo, Courier', margin:'20px 0 8px'}"
+      html="<div>align: 'top'</div>"
+  ></ExtContainer>
+  <ExtPanel  [shadow]="true" [layout]="{ type: 'hbox', align: 'top' }" [height]="75" [margin]="'0 0 40 0'">
+      <ExtContainer  [layout]="'center'" [style] ="colors.card.red" [flex]="1" [html]="'Item 1'"></ExtContainer>
+      <ExtContainer  [layout]="'center'" [style] ="colors.card.blue" [flex]="1" [html]="'Item 2'"></ExtContainer>
+      <ExtContainer  [layout]="'center'" [style] ="colors.card.green" [flex]="1" [html]="'Item 3'"></ExtContainer>
+  </ExtPanel>
+  <ExtContainer  [style]="{fontSize:14, fontFamily:'Menlo, Courier', margin:'20px 0 8px'}"
+      html="<div>align: 'bottom'</div>"
+  ></ExtContainer>
+  <ExtPanel  [shadow]="true" [layout]="{ type: 'hbox', align: 'bottom' }" [height]="75" [margin]="'0 0 40 0'">
+      <ExtContainer  [layout]="'center'" [style]="colors.card.red" flex="1" [html]="'Item 1'"></ExtContainer>
+      <ExtContainer  [layout]="'center'" [style]="colors.card.blue" flex="1" [html]="'Item 2'"></ExtContainer>
+      <ExtContainer  [layout]="'center'" [style]="colors.card.green" flex="1" [html]="'Item 3'"></ExtContainer>
+  </ExtPanel>
+  <ExtContainer
+      [style]="{fontSize:14, fontFamily:'Menlo, Courier', margin:'20px 0 8px'}"
+      html="<div>pack: 'start'</div>"
+  ></ExtContainer>
+  <ExtPanel  [shadow]="true" [layout]="{ type: 'hbox', pack: 'start' }" [height]="75" [margin]="'0 0 40 0'">
+      <ExtContainer  [layout]="'center'" [style]="colors.card.red" [html]="'Item 1'"></ExtContainer>
+      <ExtContainer  [layout]="'center'" [style]="colors.card.blue" [html]="'Item 2'"></ExtContainer>
+      <ExtContainer  [layout]="'center'" [style]="colors.card.green" [html]="'Item 3'"></ExtContainer>
+  </ExtPanel>
+  <ExtContainer
+      [style]="{fontSize:14, fontFamily:'Menlo, Courier', margin:'20px 0 8px'}"
+      html="<div>pack: 'center'</div>"
+  ></ExtContainer>
+  <ExtPanel  [shadow]="true" [layout]="{ type: 'hbox', pack: 'center' }" height="75" [margin]="'0 0 40 0'">
+      <ExtContainer  [layout]="'center'" [style]="colors.card.red" [html]="'Item 1'"></ExtContainer>
+      <ExtContainer  [layout]="'center'" [style]="colors.card.blue" [html]="'Item 2'"></ExtContainer>
+      <ExtContainer  [layout]="'center'" [style]="colors.card.green" [html]="'Item 3'"></ExtContainer>
+  </ExtPanel>
+  <ExtContainer
+      [style]="{fontSize:14, fontFamily:'Menlo, Courier', margin:'20px 0 8px'}"
+      html="<div>pack: 'end'</div>"
+  ></ExtContainer>
+  <ExtPanel  [shadow]="true" [layout]="{ type: 'hbox', pack: 'end' }" [height]="75" [margin]="'0 0 40 0'">
+      <ExtContainer  [layout]="'center'" [style]="colors.card.red" [html]="'Item 1'"></ExtContainer>
+      <ExtContainer  [layout]="'center'" [style]="colors.card.blue" [html]="'Item 2'"></ExtContainer>
+      <ExtContainer  [layout]="'center'" [style]="colors.card.green" [html]="'Item 3'"></ExtContainer>
+  </ExtPanel>
+  <ExtContainer
+      [style]="{fontSize:14, fontFamily:'Menlo, Courier', margin:'20px 0 8px'}"
+      html="<div>pack: 'space-between'</div>"
+  ></ExtContainer>
+  <ExtPanel  [shadow]="true" [layout]="{ type: 'hbox', pack: 'space-between' }" [height]="75" [margin]="'0 0 40 0'">
+      <ExtContainer  [layout]="'center'" [style]="colors.card.red" [html]="'Item 1'"></ExtContainer>
+      <ExtContainer  [layout]="'center'" [style]="colors.card.blue" [html]="'Item 2'"></ExtContainer>
+      <ExtContainer  [layout]="'center'" [style]="colors.card.green" [html]="'Item 3'"></ExtContainer>
+  </ExtPanel>
+  <ExtContainer
+      [style]="{fontSize:14, fontFamily:'Menlo, Courier', margin:'20px 0 8px'}"
+      html="<div>pack: 'space-around'</div>"
+  ></ExtContainer>
+  <ExtPanel  [shadow]="true" [layout]="{ type: 'hbox', pack: 'space-around' }" [height]="75" [margin]="'0 0 40 0'">
+      <ExtContainer  [layout]="'center'" [style]="colors.card.red" [html]="'Item 1'"></ExtContainer>
+      <ExtContainer  [layout]="'center'" [style]="colors.card.blue" [html]="'Item 2'"></ExtContainer>
+      <ExtContainer  [layout]="'center'" [style]="colors.card.green" [html]="'Item 3'"></ExtContainer>
+  </ExtPanel>
+</ExtContainer>

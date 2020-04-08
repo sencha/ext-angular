@@ -17,11 +17,11 @@ export class RealtimeComponent {
 
   chart: any;
   chartNavReady = function (event) {
-    this.chart = event.detail.cmp;
+    this.chart = event.cmp;
     this.startTask();
   };
 
-  startTask = () => {
+  startTask = (event) => {
     let callCount = 1;
     this.timeChartTask = setInterval(() => {
       if (callCount >= 120) {
@@ -33,7 +33,7 @@ export class RealtimeComponent {
     }, interval);
   };
 
-  stopTask = () => {
+  stopTask = (event) => {
     clearInterval(this.timeChartTask);
   };
 

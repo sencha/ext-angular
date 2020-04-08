@@ -1,13 +1,12 @@
-<ext-container padding="10" layout="vbox"[fitToParent]="true">
+<ExtContainer padding="10" layout="vbox" fitToParent="true">
+    <ExtContainer
+        ><div #extitem>
+            <chart-toolbar maxHeight="50" [downloadChartRef]="this.chart">
+            </chart-toolbar></div
+    ></ExtContainer>
 
-    <ext-container><div #extitem>
-      <chart-toolbar
-        maxHeight="50"
-        [downloadChartRef]="this.chart">
-      </chart-toolbar>
-    </div></ext-container>
-
-    <ext-cartesian downloadServerUrl ="http://svg.sencha.io"
+    <ExtCartesian
+        downloadServerUrl="http://svg.sencha.io"
         shadow="true"
         flex="1"
         [store]="this.store"
@@ -19,7 +18,7 @@
         [legend]="{ type: 'sprite' }"
         [captions]="cartesianCaptions"
         [axes]="cartesianAxes"
-        [series]="cartesianSeries">
-    </ext-cartesian>
-
-</ext-container>
+        [series]="cartesianSeries"
+    >
+    </ExtCartesian>
+</ExtContainer>

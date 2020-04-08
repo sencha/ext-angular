@@ -1,0 +1,19 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+  <ExtPanel shadow="true" layout="fit">
+    <ExtToolbar docked="top">
+        <ExtContainer>
+          <div #extitem style="font-size: 14px;">
+            Use your {{ supportsTouch ? "finger" : "mouse" }} to
+            paint on the surface below.
+          </div>
+        </ExtContainer>
+        <ExtSpacer></ExtSpacer>
+        <ExtButton (tap)="clear($event)" text="Clear"></ExtButton>
+    </ExtToolbar>
+    <ExtDraw
+      (ready)="onReady($event)"
+      downloadServerUrl="http://svg.sencha.io"
+    >
+    </ExtDraw>
+  </ExtPanel>
+</ExtContainer>

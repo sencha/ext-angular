@@ -43,7 +43,6 @@ module.exports = function (env) {
   const isProd = environment === 'production'
   portfinder.basePort = (env && env.port) || 1962
   return portfinder.getPortPromise().then(port => {
-      console.log(port)
     const plugins = [
       new HtmlWebpackPlugin({template: "index.html",hash: false,inject: "body"}),
       new BaseHrefWebpackPlugin({ baseHref: basehref }),
@@ -53,7 +52,7 @@ module.exports = function (env) {
         theme: theme,
         packages: packages,
         script: script,
-        emit: 'no',
+        emit: emit,
         port: port,
         profile: profile,
         environment: environment,
@@ -71,13 +70,13 @@ module.exports = function (env) {
         mainPath: "./src/main.ts",
         skipCodeGeneration: true
       }),
-      new webpack.ContextReplacementPlugin(
-        /\@angular(\\|\/)core(\\|\/)fesm5/,
-        path.resolve(__dirname, 'src'),{}
-      ),
-      new FilterWarningsPlugin({
-        exclude: /System.import/
-      }),
+      // new webpack.ContextReplacementPlugin(
+      //   /\@angular(\\|\/)core(\\|\/)fesm5/,
+      //   path.resolve(__dirname, 'src'),{}
+      // ),
+      // new FilterWarningsPlugin({
+      //   exclude: /System.import/
+      // }),
       new webpack.HotModuleReplacementPlugin()
     ]
     return {
@@ -104,12 +103,12 @@ module.exports = function (env) {
       node: false,
       devServer: {
         contentBase: outputFolder,
-        hot: !isProd,
         historyApiFallback: true,
         host: '0.0.0.0',
         port: port,
         disableHostCheck: false,
-        compress: isProd,
+        hot: !isProd,
+        compress: !isProd,
         inline:!isProd,
         stats: 'none'
       }

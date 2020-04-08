@@ -64,7 +64,7 @@ export class TreeHierarchyComponent {
     root: { text: 'States' },
     proxy: {
       type: 'ajax',
-      url: 'resources/data/tree/salary.json',
+      url: 'assets/resources/data/tree/salary.json',
       reader: {
         type: 'salary'
       }

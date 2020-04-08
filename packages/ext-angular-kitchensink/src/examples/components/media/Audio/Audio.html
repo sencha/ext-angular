@@ -1,0 +1,29 @@
+<ExtContainer
+    [layout]="{ type: 'vbox', align: 'stretch', pack: 'center' }"
+    [padding]="'10px'"
+>
+    <ExtContainer
+        [layout]="
+            isAndroid
+                ? { type: 'vbox', align: 'stretch', pack: 'center' }
+                : 'fit'
+        "
+    >
+        <ExtAudio
+            #audioRef
+            [loop]="true"
+            [url]="'resources/audio/crash.mp3'"
+            [controls]="!isAndroid"
+            [width]="'550px'"
+            (ready)="audioReady($event)"
+        >
+        </ExtAudio>
+        <ExtContainer *ngIf="isAndroid">
+            <ExtButton
+                [text]="playing ? 'Play Audio' : 'Pause Audio'"
+                [margin]="20"
+                [handler]="this.toggleAudioAndroid.bind(this)"
+            ></ExtButton>
+        </ExtContainer>
+    </ExtContainer>
+</ExtContainer>

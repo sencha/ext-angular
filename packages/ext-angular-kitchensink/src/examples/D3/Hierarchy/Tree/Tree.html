@@ -1,5 +1,5 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
-    <ext-d3-tree
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtD3_tree
         [store]="this.store"
         [colorAxis]="{ field: 'id' }"
         [interactions]="{
@@ -15,5 +15,5 @@
         [nodeText]="this.getNodeText"
         [tooltip]="{ renderer: this.onTooltip }"
         [platformConfig]="platConf"
-    ></ext-d3-tree>
-</ext-container>
+    ></ExtD3_tree>
+</ExtContainer>

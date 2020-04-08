@@ -5,7 +5,7 @@ declare var Ext: any;
 @Component({
   selector: 'button-component',
   template: `
-  <panel #item [title]="'hi'" [layout]="'fit'" [fitToParent]="true">
+  <panel #item [title]="'hi'" [layout]="'fit'" fitToParent="true">
     <button #item [text]="'click'"></button>
   </panel>
 `,
@@ -32,7 +32,7 @@ export class ButtonComponent implements OnInit  {
 
   onStyleChange = (item) => {
     console.log("onStyleChange : " + item._text);
-    this.style = item._text; 
+    this.style = item._text;
     if (this.style === 'Menu') {
       this.menu = true;
       var tempMenu = Ext.create('Ext.menu.Menu');
@@ -65,7 +65,7 @@ export class ButtonComponent implements OnInit  {
 
   onTypeChange = (item) => {
     console.log("onTypeChange : " + item._text);
-    this.type = item._text; 
+    this.type = item._text;
     console.log("this.type : " + this.type);
     this.iconCls = this.type.indexOf('Icon') !== -1 ? 'x-fa fa-heart' : null;
     this.text = this.type.indexOf('Text') !== -1;
@@ -76,7 +76,7 @@ export class ButtonComponent implements OnInit  {
     console.log("In toggleRound");
     this.round=!this.round;
     console.log("Round: " + this.round);
-    if (this.round) { 
+    if (this.round) {
       this.ui += ' round';
     }
     else {
@@ -95,7 +95,7 @@ export class ButtonComponent implements OnInit  {
 
 
 
-  ngOnInit() {   
+  ngOnInit() {
   }
 
   // [height] = "'100%'" [width] = "'100%'" className = "demo-buttons" defaults={margin: '20'}

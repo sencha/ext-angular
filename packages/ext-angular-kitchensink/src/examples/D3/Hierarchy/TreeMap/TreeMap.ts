@@ -37,7 +37,7 @@ export class TreeMapComponent {
     ],
     proxy: {
         type: 'ajax',
-        url: 'resources/data/tree/stocks.json'
+        url: 'assets/resources/data/tree/stocks.json'
     }
   });
 

@@ -1,0 +1,21 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtPanel [padding]="5" [shadow]="true" (ready)="parentReady($event)">
+        <ExtContainer (ready)="sourceReady($event)" [cls]="'data-source'">
+            <ExtContainer
+                [html]="'<div data-days=\'2\' class=\'handle\'>Overnight</div>'"
+            ></ExtContainer>
+            <ExtContainer
+                [html]="'<div data-days=\'7\' class=\'handle\'>Expedited</div>'"
+            ></ExtContainer>
+            <ExtContainer
+                [html]="'<div data-days=\'21\' class=\'handle\'>Standard</div>'"
+            ></ExtContainer>
+        </ExtContainer>
+
+        <ExtContainer
+            (ready)="targetReady($event)"
+            [cls]="'data-target'"
+            [html]="'Drop delivery option here'"
+        ></ExtContainer>
+    </ExtPanel>
+</ExtContainer>

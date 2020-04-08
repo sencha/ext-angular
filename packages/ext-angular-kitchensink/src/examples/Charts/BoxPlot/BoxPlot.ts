@@ -25,6 +25,13 @@ export class BoxPlotComponent {
 
   theme: string = 'default';
 
+  toggleZoomOnPan= () => {
+
+  };
+
+  refresh = () => {
+
+  };
 
   changeTheme = (themeParam) => {
     this.theme = themeParam;

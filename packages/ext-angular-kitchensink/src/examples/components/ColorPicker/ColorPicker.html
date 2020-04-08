@@ -1,0 +1,25 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtPanel
+        [shadow]="true"
+        [top]="top"
+        [left]="left"
+        [width]="width"
+        [height]="height"
+        (ready)="onPanelReady($event)"
+        [header]="panelHeader"
+        [layout]="'vbox'"
+        [resizable]="true"
+        bodyPadding="5"
+        autoSize="true"
+        title="Color Picker Components"
+        [viewModel]="{ data: { color: this.color } }"
+    >
+        <ExtColorselector
+            [color]="this.color"
+            (change)="this.OnSelChange($event)"
+        >
+        </ExtColorselector>
+
+        <ExtPanel [title]="this.colorTitle" ui="light"> </ExtPanel>
+    </ExtPanel>
+</ExtContainer>

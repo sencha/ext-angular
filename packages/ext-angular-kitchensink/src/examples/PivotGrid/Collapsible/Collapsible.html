@@ -1,5 +1,5 @@
-<ext-container layout="fit" padding="10" [fitToParent]="true">
-    <ext-toolbar
+<ExtContainer layout="fit" padding="10" fitToParent="true">
+    <ExtToolbar
         shadow="false"
         docked="top"
         ui="app-transparent-toolbar"
@@ -14,9 +14,9 @@
             ui: 'action'
         }"
     >
-        <ext-button ui="action raised" text="Collapsible">
-            <ext-menu [defaults]="{ handler: this.onCollapsibleChange }">
-                <ext-menuitem
+        <ExtButton ui="action raised" text="Collapsible">
+            <ExtMenu [defaults]="{ handler: this.onCollapsibleChange }">
+                <ExtMenuitem
                     text="None"
                     value="none"
                     [iconCls]="
@@ -24,8 +24,8 @@
                             ? 'x-font-icon md-icon-check'
                             : ''
                     "
-                ></ext-menuitem>
-                <ext-menuitem
+                ></ExtMenuitem>
+                <ExtMenuitem
                     text="Rows Only"
                     value="rows"
                     [iconCls]="
@@ -33,8 +33,8 @@
                             ? 'x-font-icon md-icon-check'
                             : ''
                     "
-                ></ext-menuitem>
-                <ext-menuitem
+                ></ExtMenuitem>
+                <ExtMenuitem
                     text="Columns Only"
                     value="cols"
                     [iconCls]="
@@ -42,8 +42,8 @@
                             ? 'x-font-icon md-icon-check'
                             : ''
                     "
-                ></ext-menuitem>
-                <ext-menuitem
+                ></ExtMenuitem>
+                <ExtMenuitem
                     text="Rows & Columns"
                     value="both"
                     [iconCls]="
@@ -51,15 +51,15 @@
                             ? 'x-font-icon md-icon-check'
                             : ''
                     "
-                ></ext-menuitem>
-            </ext-menu>
-        </ext-button>
-    </ext-toolbar>
+                ></ExtMenuitem>
+            </ExtMenu>
+        </ExtButton>
+    </ExtToolbar>
 
-    <ext-pivotgrid
+    <ExtPivotgrid
         shadow="true"
         [matrix]="this.pivotgridMatrix"
         (ready)="onReady($event)"
     >
-    </ext-pivotgrid>
-</ext-container>
+    </ExtPivotgrid>
+</ExtContainer>

@@ -1,0 +1,27 @@
+<ExtContainer [padding]="10" fitToParent="true">
+    <ExtButton
+        [text]="'Show dialog'"
+        (tap)="showDialog()"
+        [ui]="'action raised'"
+    ></ExtButton>
+
+    <ExtDialog
+        [displayed]="isDialogShowing"
+        [title]="'Dialog'"
+        [closable]="false"
+        [maximizable]="true"
+        [closeAction]="'hide'"
+        [maskTapHandler]="onCancel"
+        [bodyPadding]="20"
+        [maxWidth]="200"
+        [defaultFocus]="'#ok'"
+        (onHide)="onHide()"
+        [html]="
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        "
+    >
+        <ExtButton text="Cancel" (tap)="onCancel()"></ExtButton>
+        <ExtButton [id]="'ok'" text="OK" (tap)="onOk()"></ExtButton>
+    </ExtDialog>
+</ExtContainer>

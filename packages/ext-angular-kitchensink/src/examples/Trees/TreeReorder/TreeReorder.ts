@@ -28,16 +28,16 @@ export class TreeReorderComponent {
       },
       proxy: {
           type: 'ajax',
-          url: 'resources/data/tree/cars.json'
+          url: 'assets/resources/data/tree/cars.json'
       },
   });
 
   onTreeReady = (event) => {
-    this.treeCmp = event.detail.cmp;
+    this.treeCmp = event.cmp;
   }
 
   toolbarReady = (event) => {
-    this.toolbar = event.detail.cmp;
+    this.toolbar = event.cmp;
   }
 
   onExpandAllClick = () => {

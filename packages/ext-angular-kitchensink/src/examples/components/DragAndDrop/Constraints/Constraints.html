@@ -1,0 +1,36 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtPanel [padding]="5" [shadow]="true" (ready)="parentReady($event)">
+        <ExtContainer
+            (ready)="elementReady($event)"
+            [cls]="'dand-constraints-dragCt'"
+        >
+            <ExtContainer
+                (ready)="toParentReady($event)"
+                [cls]="'dand-constraints-item dand-constraints-to-parent'"
+                [html]="'To parent'"
+            >
+            </ExtContainer>
+        </ExtContainer>
+
+        <ExtContainer
+            (ready)="verticalReady($event)"
+            [cls]="'dand-constraints-item dand-constraints-vertical'"
+            [html]="'Vertical'"
+        >
+        </ExtContainer>
+
+        <ExtContainer
+            (ready)="horizontalReady($event)"
+            [cls]="'dand-constraints-item dand-constraints-horizontal'"
+            [html]="'Horizontal'"
+        >
+        </ExtContainer>
+
+        <ExtContainer
+            (ready)="snapReady($event)"
+            [cls]="'dand-constraints-item dand-constraints-snap'"
+            [html]="'snap: 60,50'"
+        >
+        </ExtContainer>
+    </ExtPanel>
+</ExtContainer>

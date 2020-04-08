@@ -1,0 +1,44 @@
+<ExtContainer padding="10px" layout="fit" fitToParent="true">
+    <ExtGrid
+        title="Ticker Grid"
+        [store]="this.store"
+        [itemConfig]="gridItemConfig"
+        shadow="true"
+    >
+        <ExtGridcolumn
+            text="Company"
+            dataIndex="name"
+            width="150"
+            sortable="true"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            align="right"
+            text="Price"
+            width="85"
+            dataIndex="price"
+            formatter="usMoney"
+            sortable="true"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            text="Trend"
+            width="200"
+            dataIndex="trend"
+            sortable="false"
+            [cell]="trendColumnCell"
+        ></ExtGridcolumn>
+        <ExtToolbar docked="bottom" [defaults]="{ margin: '0 20 0 0' }">
+            <ExtLabel html="Tick Delay"></ExtLabel>
+            <ExtSliderfield
+                [padding]="'0 5'"
+                [minValue]="25"
+                [maxValue]="2000"
+                [increment]="10"
+                (change)="this.onTickDelayChange($event)"
+                [value]="tickDelay"
+                flex="1"
+            >
+            </ExtSliderfield>
+            <ExtContainer [html]="tickDelay + 'ms'"></ExtContainer>
+        </ExtToolbar>
+    </ExtGrid>
+</ExtContainer>

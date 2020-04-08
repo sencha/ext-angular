@@ -1,0 +1,185 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtContainer
+        [platformConfig]="{
+            phone: { layout: 'fit' },
+            '!phone': { layout: 'center', padding: 10 }
+        }"
+    >
+        <!-- todo handle this ref -->
+        <ExtContainer padding="10" layout="fit" fitToParent="true"
+            ><ExtFormpanel
+                (ready)="onReady($event)"
+                [shadow]="true"
+                [padding]="20"
+                [platformConfig]="{ '!phone': { maxHeight: 500, width: 350 } }"
+            >
+                <ExtFieldset
+                    [title]="'Personal Info'"
+                    [defaults]="{ labelAlign: 'placeholder' }"
+                >
+                    <ExtTextfield
+                        [label]="'Name'"
+                        [required]="true"
+                        [placeholder]="'This field is required'"
+                        [disabled]="disabled"
+                    >
+                    </ExtTextfield>
+                    <ExtPasswordfield
+                        [label]="'Password'"
+                        [required]="true"
+                        [revealable]="true"
+                        [disabled]="disabled"
+                    >
+                    </ExtPasswordfield>
+                    <ExtEmailfield
+                        [label]="'Email'"
+                        [placeholder]="'me@sencha.com'"
+                        [disabled]="disabled"
+                    >
+                    </ExtEmailfield>
+                    <ExtTextfield
+                        [label]="'Phone Number'"
+                        [inputMask]="'(999) 999-9999'"
+                        [inputType]="'tel'"
+                        [disabled]="disabled"
+                    >
+                    </ExtTextfield>
+                    <ExtUrlfield
+                        [label]="'URL'"
+                        [placeholder]="'http://sencha.com'"
+                        [disabled]="disabled"
+                    >
+                    </ExtUrlfield>
+                    <ExtSpinnerfield
+                        [label]="'Spinner'"
+                        [minValue]="0"
+                        [maxValue]="1000"
+                        [stepValue]="1"
+                        [cycle]="true"
+                        [margin]="'15 0 0 0'"
+                        [labelAlign]="'top'"
+                        [disabled]="disabled"
+                    ></ExtSpinnerfield>
+                    <ExtDatepicker
+                        label="Start Date"
+                        [disabled]="disabled"
+                    ></ExtDatepicker>
+                    <ExtSelectfield
+                        [label]="'Rank'"
+                        [disabled]="disabled"
+                        [options]="[
+                            { text: 'Master', value: 'master' },
+                            { text: 'Journeyman', value: 'journeyman' },
+                            { text: 'Apprentice', value: 'apprentice' }
+                        ]"
+                    ></ExtSelectfield>
+                    <ExtTextfield
+                        [label]="'With Error'"
+                        [errorMessage]="'This field is invalid'"
+                        [errorTarget]="'under'"
+                        [disabled]="disabled"
+                    >
+                    </ExtTextfield>
+                    <ExtSliderfield
+                        [label]="'Slider'"
+                        [disabled]="disabled"
+                    ></ExtSliderfield>
+                    <ExtTogglefield
+                        [label]="'Toggle'"
+                        [disabled]="disabled"
+                    ></ExtTogglefield>
+                    <ExtTextareafield
+                        [label]="'Bio'"
+                        [maxRows]="5"
+                        [disabled]="disabled"
+                    ></ExtTextareafield>
+                </ExtFieldset>
+                <ExtFieldset
+                    [title]="'Roles'"
+                    [layout]="{ type: 'vbox', align: 'left' }"
+                    [margin]="'15 0'"
+                    [defaults]="{ labelAlign: 'placeholder' }"
+                >
+                    <ExtCheckbox
+                        [disabled]="disabled"
+                        [boxLabel]="'Admin'"
+                    ></ExtCheckbox>
+                    <ExtCheckbox
+                        [disabled]="disabled"
+                        [boxLabel]="'Power User'"
+                    ></ExtCheckbox>
+                </ExtFieldset>
+                <ExtFieldset
+                    [title]="'Favorite Color'"
+                    [layout]="{ type: 'vbox', align: 'left' }"
+                >
+                    <ExtRadio
+                        name="color"
+                        labelAlign="right"
+                        labelWidth="auto"
+                        padding="0"
+                        [disabled]="disabled"
+                        boxLabel="Red"
+                        value="red"
+                    >
+                    </ExtRadio>
+                    <ExtRadio
+                        name="color"
+                        labelAlign="right"
+                        labelWidth="auto"
+                        padding="0"
+                        [disabled]="disabled"
+                        boxLabel="Blue"
+                        value="blue"
+                    >
+                    </ExtRadio>
+                    <ExtRadio
+                        name="color"
+                        labelAlign="right"
+                        labelWidth="auto"
+                        padding="0"
+                        [disabled]="disabled"
+                        boxLabel="Green"
+                        value="green"
+                    >
+                    </ExtRadio>
+                    <ExtRadio
+                        name="color"
+                        labelAlign="right"
+                        labelWidth="auto"
+                        padding="0"
+                        [disabled]="disabled"
+                        boxLabel="Purple"
+                        value="purple"
+                    >
+                    </ExtRadio>
+                </ExtFieldset>
+                <!-- <ExtFieldset
+                    [title]="'Second Favorite Color'"
+                    [layout]="{ type: 'vbox', align: 'left' }"
+                >
+                    <ExtColorfield
+                        [color]="this.color"
+                        (change)="this.OnSelChange($event)"
+                    >
+                    </ExtColorfield>
+                </ExtFieldset> -->
+                <ExtToolbar
+                    [docked]="'bottom'"
+                    [layout]="{ type: 'hbox', pack: 'right' }"
+                >
+                    <ExtButton
+                        [text]="disabled ? 'Enable All' : 'Disable All'"
+                        [margin]="'0 10 0 0'"
+                        (tap)="toggleDisabled($event)"
+                    >
+                    </ExtButton>
+                    <ExtButton
+                        [text]="'Reset'"
+                        (tap)="reset($event)"
+                    ></ExtButton>
+                </ExtToolbar>
+            </ExtFormpanel>
+        </ExtContainer>
+        </ExtContainer>
+    </ExtContainer>

@@ -1,5 +1,5 @@
-<ext-container padding="10" layout="center" flex="1" height="100%">
-    <ext-tree
+<ExtContainer padding="10" layout="center" flex="1" height="100%">
+    <ExtTree
         plugins="treedragdrop"
         (ready)="onTreeReady($event)"
         title="Files"
@@ -8,16 +8,16 @@
         [height]="400"
         [width]="350"
     >
-        <ext-toolbar docked="top" (ready)="toolbarReady($event)">
-            <ext-button
+        <ExtToolbar docked="top" (ready)="toolbarReady($event)">
+            <ExtButton
                 text="Expand All"
                 [handler]="this.onExpandAllClick"
-            ></ext-button>
-            <ext-button
+            ></ExtButton>
+            <ExtButton
                 text="Collapse All"
                 [handler]="this.onCollapseAllClick"
-            ></ext-button>
-            <ext-button text="Reset" [handler]="this.onResetClick"></ext-button>
-        </ext-toolbar>
-    </ext-tree>
-</ext-container>
+            ></ExtButton>
+            <ExtButton text="Reset" [handler]="this.onResetClick"></ExtButton>
+        </ExtToolbar>
+    </ExtTree>
+</ExtContainer>

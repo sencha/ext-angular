@@ -1,0 +1,32 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtFormpanel
+        [shadow]="true"
+        [top]="top"
+        [left]="left"
+        [width]="width"
+        [height]="height"
+        [layout]="{type: 'vbox', align: 'left'}"
+    >
+        <ExtRadio
+            [name]="'radios'"
+            [boxLabel]="'Checked'"
+            [value]="'checked'"
+            [checked]="true"
+        >
+        </ExtRadio>
+        <ExtRadio
+            [name]="'radios'"
+            [boxLabel]="'Unchecked'"
+            [value]="'unchecked'"
+            [checked]="false"
+        >
+        </ExtRadio>
+        <ExtRadio
+            [name]="'radios'"
+            [boxLabel]="'Disabled'"
+            [value]="'disabled'"
+            [disabled]="true"
+        >
+        </ExtRadio>
+    </ExtFormpanel>
+</ExtContainer>

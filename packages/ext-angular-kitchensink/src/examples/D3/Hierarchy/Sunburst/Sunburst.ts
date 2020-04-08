@@ -35,7 +35,7 @@ export class SunburstComponent {
     ],
     proxy: {
       type: 'ajax',
-      url: 'resources/data/tree/tree.json'
+      url: 'assets/resources/data/tree/tree.json'
     },
     idProperty: 'path'
   });
@@ -47,7 +47,7 @@ export class SunburstComponent {
           length = record.childNodes.length;
 
       tooltip.setTitle(record.get('text'));
-      tooltip.setHtml(size ? 
+      tooltip.setHtml(size ?
           Ext.util.Format.fileSize(size) :
           length + ' file' + (length === 1 ? '' : 's') + ' inside.'
       );
@@ -57,9 +57,9 @@ export class SunburstComponent {
     }
   }
 
-  onSelectionChange = (field, selection) => {
-    if(Ext.isArray(selection)) selection = selection[0];
-    this.selection = selection;
+  onSelectionChange = (event) => {
+    //if(Ext.isArray(selection)) selection = selection[0];
+    //this.selection = selection;
   }
 
 }

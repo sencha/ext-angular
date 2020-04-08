@@ -1,10 +1,34 @@
-<ext-container xng="home" padding="10"layout="fit" [fitToParent]="true">
-  <ext-grid shadow="true" [store]="this.store">
-    <ext-toolbar docked="top">
-      <ext-searchfield ui="faded" placeholder="Search..." (change)="this.onSearch($event)" [responsiveConfig]="searchresponsiveConfig"></ext-searchfield>
-    </ext-toolbar>
-    <ext-column text="Name" dataIndex="name" flex="2" resizable="true"></ext-column>
-    <ext-column text="Email" dataIndex="email" flex="3" resizable="true" [responsiveConfig]="emailresponsiveConfig"></ext-column>
-    <ext-column text="Phone" dataIndex="phone" flex="2" resizable="true"></ext-column>
-  </ext-grid>
-</ext-container>
+<ExtPanel
+  extname="home"
+  padding="10 10 10 2"
+  layout="fit"
+  fitToParent="true"
+>
+  <ExtGrid
+    extname="grid"
+    title='Employees'
+    shadow="true"
+    [store]="store"
+    [columns]='[
+      {"text": "name", "dataIndex": "name", "flex": "1"},
+      {"text": "email", "dataIndex": "email", "width": "150"},
+      {"text": "phone", "dataIndex": "phone", "width": "150"}
+    ]'
+    (ready)="readyGrid($event)"
+  >
+    <ExtToolbar  extname="toolbar" docked="top">
+      <ExtSearchfield
+        extname="searchfield"
+        ui="faded"
+        placeholder="Search..."
+        (change)="this.onSearch($event)"
+      >
+      </ExtSearchfield>
+    </ExtToolbar>
+    <!--
+    <ExtColumn text="Name" dataIndex="name" width="300"></ExtColumn>
+    <ExtColumn text="Email" dataIndex="email" width="300"></ExtColumn>
+    <ExtColumn text="Phone" dataIndex="phone"width="200"></ExtColumn>
+    -->
+  </ExtGrid>
+</ExtPanel>

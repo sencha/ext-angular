@@ -1,0 +1,80 @@
+<ExtContainer padding="5" layout="vbox" fitToParent="true">
+    <ExtCarousel
+        [layout]="'vbox'"
+        [flex]="1"
+        [shadow]="true"
+        [margin]="'5 5 5 5'"
+    >
+        <ExtContainer
+            [height]="'100%'"
+            [flex]="1"
+            [layout]="{ type: 'vbox', align: 'center', pack: 'center' }"
+            [style]="{ fontSize: '18px', backgroundColor: 'white' }"
+            [html]="'Swipe left to show the next card...'"
+        >
+        </ExtContainer>
+        <ExtContainer
+            [layout]="{ type: 'vbox', align: 'center', pack: 'center' }"
+            [height]="'100%'"
+            [flex]="1"
+            [style]="{ fontSize: '18px', backgroundColor: 'white' }"
+            [html]="'You can also tap on either side of the indicators.'"
+        >
+        </ExtContainer>
+        <ExtContainer
+            [layout]="{ type: 'vbox', align: 'center', pack: 'center' }"
+            [height]="'100%'"
+            [flex]="1"
+            [style]="{ fontSize: '18px', backgroundColor: 'white' }"
+            [html]="'Card #3'"
+        >
+        </ExtContainer>
+    </ExtCarousel>
+
+    <ExtCarousel
+        [ui]="'light'"
+        [direction]="'vertical'"
+        [flex]="1"
+        [shadow]="true"
+        [margin]="'5 5 5 5'"
+    >
+        <ExtContainer
+            [height]="'100%'"
+            [flex]="1"
+            [layout]="{ type: 'vbox', align: 'center', pack: 'center' }"
+            [style]="{
+                fontSize: '18px',
+                color: 'white',
+                backgroundColor: '#303030'
+            }"
+            [html]="'Carousels can also be vertical <em>(swipe up)...</em>'"
+        >
+        </ExtContainer>
+        <ExtContainer
+            [height]="'100%'"
+            [flex]="1"
+            [layout]="{ type: 'vbox', align: 'center', pack: 'center' }"
+            [style]="{
+                fontSize: '18px',
+                backgroundColor: '#303030',
+                color: 'white'
+            }"
+            [html]="
+                '<div>And can also use <code style=\'color:#859900\'>ui:light</code>.</div>'
+            "
+        >
+        </ExtContainer>
+        <ExtContainer
+            [height]="'100%'"
+            [flex]="1"
+            [layout]="{ type: 'vbox', align: 'center', pack: 'center' }"
+            [style]="{
+                fontSize: '18px',
+                backgroundColor: '#303030',
+                color: 'white'
+            }"
+            [html]="'Card #3'"
+        >
+        </ExtContainer>
+    </ExtCarousel>
+</ExtContainer>

@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 
 declare var Ext: any;
-//Ext.require('Ext.data.TreeStore')
 
 @Component({
   selector: 'app-navmenu',

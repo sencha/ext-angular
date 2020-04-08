@@ -1,0 +1,38 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtGrid
+        title="Stock Prices"
+        [store]="store"
+        [shadow]="true"
+        enableColumnMove="true"
+    >
+        <ExtGridcolumn text="Company" width="150" dataIndex="name">
+        </ExtGridcolumn>
+        <ExtGridcolumn
+            text="Price"
+            width="85"
+            dataIndex="price"
+            formatter="usMoney"
+        >
+        </ExtGridcolumn>
+        <ExtGridcolumn
+            text="Change"
+            width="100"
+            dataIndex="priceChange"
+            [renderer]="this.renderSign"
+        >
+        </ExtGridcolumn>
+        <ExtGridcolumn
+            text="% Change"
+            dataIndex="priceChangePct"
+            [renderer]="this.renderSign"
+        >
+        </ExtGridcolumn>
+        <ExtGridcolumn
+            text="Last Updated"
+            width="125"
+            dataIndex="priceLastChange"
+            formatter='date("m/d/Y")'
+        >
+        </ExtGridcolumn>
+    </ExtGrid>
+</ExtContainer>

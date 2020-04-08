@@ -1,0 +1,30 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtGrid
+        title="Summary Row Grid"
+        [store]="this.store"
+        [shadow]="true"
+        [plugins]="{ gridsummaryrow: true }"
+    >
+        <ExtGridcolumn
+            text="Company"
+            dataIndex="name"
+            width="150"
+            [summaryRenderer]="this.summarizeCompanies"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            text="Price"
+            width="75"
+            dataIndex="price"
+            formatter="usMoney"
+            summary="average"
+        ></ExtGridcolumn>
+
+        <ExtGridcolumn
+            text="Last Updated"
+            width="125"
+            dataIndex="priceLastChange"
+            formatter="date('m/d/Y')"
+            summary="max"
+        ></ExtGridcolumn>
+    </ExtGrid>
+</ExtContainer>

@@ -1,14 +1,14 @@
-<ext-container padding="10" layout="fit" [fitToParent]="true">
-    <ext-toolbar docked="top">
-        <ext-spacer></ext-spacer>
-        <ext-button
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtToolbar docked="top">
+        <ExtSpacer></ExtSpacer>
+        <ExtButton
             iconCls="x-fa fa-refresh"
             [handler]="this.refreshData"
             text="Refresh Data"
-        ></ext-button>
-    </ext-toolbar>
+        ></ExtButton>
+    </ExtToolbar>
 
-    <ext-pivotheatmap
+    <ExtPivotheatmap
         [matrix]="matrixVar"
         [padding]="isPhone ? '20 20 60 60' : '20 30 70 120'"
         [xAxis]="{
@@ -48,5 +48,5 @@
             }
         }"
     >
-    </ext-pivotheatmap>
-</ext-container>
+    </ExtPivotheatmap>
+</ExtContainer>

@@ -1,0 +1,20 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtFormpanel
+        [shadow]="true"
+        [top]="top"
+        [left]="left"
+        [width]="width"
+        [height]="height"
+        [layout]="{ type: 'vbox', align: 'left' }"
+        [bodyPadding]="10"
+    >
+        <ExtCheckbox [boxLabel]="'Unchecked'"></ExtCheckbox>
+        <ExtCheckbox [boxLabel]="'Checked'" [checked]="true"></ExtCheckbox>
+        <ExtCheckbox [boxLabel]="'Disabled'" [disabled]="true"></ExtCheckbox>
+        <ExtCheckbox
+            [boxLabel]="'Disabled (checked)'"
+            [checked]="true"
+            [disabled]="true"
+        ></ExtCheckbox>
+    </ExtFormpanel>
+</ExtContainer>

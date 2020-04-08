@@ -13,6 +13,8 @@ Ext.require([
 })
 export class BasicGaugeChartComponent {
 
+  animation = { "easing": "elasticIn", "duration": 1000 }
+
   constructor() {
     this.refresh();
   }

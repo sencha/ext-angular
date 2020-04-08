@@ -1,0 +1,19 @@
+<ExtContainer padding="10" layout="fit" fitToParent="true">
+    <ExtPanel [shadow]="true" (ready)="parentReady($event)">
+        <ExtContainer
+            (ready)="handleRepeatReady($event)"
+            [cls]="'handle-repeat handle-source'"
+        >
+            <ExtContainer [cls]="'handle'" [html]="'Foo'"></ExtContainer>
+            <ExtContainer [cls]="'handle'" [html]="'Bar'"></ExtContainer>
+            <ExtContainer [cls]="'handle'" [html]="'Baz'"></ExtContainer>
+        </ExtContainer>
+
+        <ExtContainer
+            (ready)="dragReady($event)"
+            [cls]="'handle-handles handle-source'"
+        >
+            <ExtContainer [cls]="'handle'" [html]="'Drag'"></ExtContainer>
+        </ExtContainer>
+    </ExtPanel>
+</ExtContainer>

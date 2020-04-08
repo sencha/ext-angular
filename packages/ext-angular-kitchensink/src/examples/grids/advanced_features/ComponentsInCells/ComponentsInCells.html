@@ -1,0 +1,40 @@
+<ExtContainer padding="10px" layout="fit" fitToParent="true">
+    <ExtGrid
+        title="Stock Prices"
+        [store]="this.store"
+        shadow="true"
+        grouped="true"
+    >
+        <ExtGridcolumn
+            text="Company"
+            dataIndex="name"
+            width="150"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            text="Price"
+            width="85"
+            dataIndex="price"
+            formatter="usMoney"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+          text="Change"
+          width="100"
+          dataIndex="priceChange"
+          [cell]="{encodeHtml:false}"
+          [renderer]="this.renderNumberCell"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+          text="% Change"
+          dataIndex="priceChangePct"
+          [cell]="{encodeHtml:false}"
+          [renderer]="this.renderPercentCell"
+        ></ExtGridcolumn>
+        <ExtGridcolumn
+            text="Actions"
+            flex="1"
+            minWidth="210"
+            [cell]="actionsCell"
+        >
+        </ExtGridcolumn>
+    </ExtGrid>
+</ExtContainer>
