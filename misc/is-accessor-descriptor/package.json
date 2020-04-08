@@ -33,7 +33,7 @@
   },
   "bundleDependencies": false,
   "dependencies": {
-    "kind-of": "^3.0.2"
+    "kind-of": "^6.0.3"
   },
   "deprecated": false,
   "description": "Returns true if a value has the characteristics of a valid JavaScript accessor descriptor.",
