@@ -18,12 +18,12 @@ For the next steps, make sure you are logged into the Sencha npm repository - fo
 Add the following to the dependencies section of package.json:
 
 ```sh
-"@sencha/ext-modern-runtime": "~7.2.0",
-"@sencha/ext-angular-modern": "~7.2.0",
-"@sencha/ext": "^7.2.0",
-"@sencha/ext-modern": "^7.2.0",
-"@sencha/ext-modern-theme-material": "^7.2.0",
-"@sencha/ext-webpack-plugin": "^7.2.0",
+"@sencha/ext-modern-runtime": "~7.2.1",
+"@sencha/ext-angular-modern": "~7.2.1",
+"@sencha/ext": "~7.2.1",
+"@sencha/ext-modern": "~7.2.1",
+"@sencha/ext-modern-theme-material": "~7.2.1",
+"@sencha/ext-webpack-plugin": "~7.2.1",
 "@angular-builders/custom-webpack": "^9.1.0",
 "@angular-builders/dev-server": "^7.3.1",
 "@angular-devkit/build-angular": "~0.901.0",
