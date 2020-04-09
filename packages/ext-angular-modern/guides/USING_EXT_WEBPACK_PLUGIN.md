@@ -11,7 +11,7 @@ Also see packages/ext-angular-kitchensink for an example of an application with 
 
 [For ext-angular-modern](https://github.com/sencha/ext-angular/blob/ext-angular-7.2.0/packages/ext-angular-modern/GETTING_STARTED.md)
 
-For the next steps, make sure you are logged into the Sencha npm repository - for instructions, see this link: https://github.com/sencha/ext-angular/blob/ext-angular-7.2.x/README.md
+For the next steps, make sure you are logged into the Sencha npm repository - for instructions, see this link: https://github.com/sencha/ext-angular/blob/ext-angular-7.2.1/README.md
 
 #### Do these steps:
 
