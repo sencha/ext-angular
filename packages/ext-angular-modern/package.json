@@ -9,15 +9,15 @@
   "private": false,
   "peerDependencies": {
     "@sencha/ext-web-components-modern": "~7.2.1",
-    "@angular/compiler": "~9.1.5",
-    "@angular/core": "~9.1.5",
+    "@angular/compiler": "9.1.5",
+    "@angular/core": "10.0.0-next.6",
     "tslib": "^1.11.2"
   },
   "dependencies": {
-    "@angular/core": "~9.1.5",
-    "@angular/common": "~9.1.5",
-    "@angular/platform-browser": "~9.1.5",
-    "@angular/platform-browser-dynamic": "~9.1.5",
+    "@angular/core": "10.0.0-next.6",
+    "@angular/common": "10.0.0-next.6",
+    "@angular/platform-browser": "10.0.0-next.6",
+    "@angular/platform-browser-dynamic": "10.0.0-next.6",
     "zone.js": "~0.10.3",
     "fs-extra": "~9.0.0",
     "@sencha/ext-web-components-modern": "~7.2.1",
