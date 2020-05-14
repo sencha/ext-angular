@@ -9,20 +9,20 @@
   "private": false,
   "peerDependencies": {
     "@sencha/ext-web-components-modern": "~7.2.1",
-    "@angular/compiler": "9.1.5",
-    "@angular/core": "10.0.0-next.6",
-    "tslib": "^1.11.2"
+    "@angular/compiler": "9.1.7",
+    "@angular/core": "9.1.7",
+    "tslib": "^1.10.0"
   },
   "dependencies": {
-    "@angular/core": "10.0.0-next.6",
-    "@angular/common": "10.0.0-next.6",
-    "@angular/platform-browser": "10.0.0-next.6",
-    "@angular/platform-browser-dynamic": "10.0.0-next.6",
+    "@angular/core": "9.1.7",
+    "@angular/common": "9.1.7",
+    "@angular/platform-browser": "9.1.7",
+    "@angular/platform-browser-dynamic": "9.1.7",
     "zone.js": "~0.10.3",
     "fs-extra": "~9.0.0",
     "@sencha/ext-web-components-modern": "~7.2.1",
     "script-loader": "^0.7.2",
-    "tslib": "^1.11.2"
+    "tslib": "^1.10.0"
   },
   "repository": {
     "type": "git",
@@ -31,9 +31,11 @@
   "keywords": [],
   "author": "Sencha",
   "license": "ISC",
-  "module": "fesm2015/sencha-ext-angular-modern.js",
+  "module": "fesm5/sencha-ext-angular-modern.js",
   "es2015": "fesm2015/sencha-ext-angular-modern.js",
+  "esm5": "esm5/sencha-ext-angular-modern.js",
   "esm2015": "esm2015/sencha-ext-angular-modern.js",
+  "fesm5": "fesm5/sencha-ext-angular-modern.js",
   "fesm2015": "fesm2015/sencha-ext-angular-modern.js",
   "typings": "sencha-ext-angular-modern.d.ts",
   "metadata": "sencha-ext-angular-modern.metadata.json",
