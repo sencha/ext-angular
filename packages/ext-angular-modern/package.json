@@ -1,28 +1,28 @@
 {
   "name": "@sencha/ext-angular-modern",
   "description": "ext-angular-modern",
-  "version": "7.2.0",
+  "version": "7.2.1",
   "bin": {
     "ext-angular": "./bin/ext-angular.js"
   },
   "main": "bundles/sencha-ext-angular-modern.umd.js",
   "private": false,
   "peerDependencies": {
-    "@sencha/ext-web-components-modern": "~7.2.0",
-    "@angular/compiler": "~9.1.0",
-    "@angular/core": "~9.1.0",
-    "tslib": "^1.11.1"
+    "@sencha/ext-web-components-modern": "~7.2.1",
+    "@angular/compiler": "9.1.7",
+    "@angular/core": "9.1.7",
+    "tslib": "^1.10.0"
   },
   "dependencies": {
-    "@angular/core": "~9.1.0",
-    "@angular/common": "~9.1.0",
-    "@angular/platform-browser": "~9.1.0",
-    "@angular/platform-browser-dynamic": "~9.1.0",
+    "@angular/core": "9.1.7",
+    "@angular/common": "9.1.7",
+    "@angular/platform-browser": "9.1.7",
+    "@angular/platform-browser-dynamic": "9.1.7",
     "zone.js": "~0.10.3",
     "fs-extra": "~9.0.0",
-    "@sencha/ext-web-components-modern": "~7.2.0",
+    "@sencha/ext-web-components-modern": "~7.2.1",
     "script-loader": "^0.7.2",
-    "tslib": "^1.11.1"
+    "tslib": "^1.10.0"
   },
   "repository": {
     "type": "git",
