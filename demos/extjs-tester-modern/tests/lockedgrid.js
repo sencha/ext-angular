@@ -1,4 +1,15 @@
+Ext.application({
+  name: "$ExtAngularApp",
+  launch: function () {
+    runTest()
+  }
+});
+
+
 function runTest() {
+
+
+
   var store = {
     autoLoad: true,
     fields: ['name', 'email', 'phone'],
@@ -9,6 +20,9 @@ function runTest() {
       { name: 'Marge', email: 'marge@simpsons.com', phone: '555-222-1254' }
     ]
   }
+
+
+
   var o = {xtype: 'lockedgrid',store: store, width: '600', height: '400'}
   var lockedgrid = Ext.create(o)
 
@@ -28,7 +42,8 @@ function runTest() {
   lockedgrid.addColumn(column06)
   lockedgrid.addColumn(column07)
 
-  //lockedgrid.setColumns([column01,column02,column03,column04,column05,column06,column07])
+  lockedgrid.setColumns([column01,column02,column03,column04,column05,column06,column07])
+
 
   var panel = Ext.create({xtype:'panel', title:'lockedgrid'})
   Ext.Viewport.add([panel])
