@@ -156,6 +156,33 @@ export class AppComponent {
 
 ```
 
+- Update ./tsconfig.json with:
+
+```
+1. Add compiler options: 
+  "compilerOptions": {
+    ...
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "paths": {
+      "@angular/*": ["node_modules/@angular/*"],
+      "@sencha/*": ["node_modules/@sencha/*"]
+    },
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "preserveSymlinks": true,
+    ...
+  }
+
+2. Add includes
+  "include": [
+    "**/lib/**/*.ts",
+    "src/**/*.ts",
+    "node_modules/@sencha/**/*.ts",
+  ]
+```
+
 - to change theme, modify angular.json (add one of the commented out themes):
 
 ```sh
