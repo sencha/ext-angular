@@ -105,7 +105,35 @@ export class AppComponent {
 }
 ```
 
-### Step 3: Try it out
+### Step 3: Configure TypeScript configs
+- Update ./tsconfig.json with:
+
+```
+1. Add compiler options: 
+  "compilerOptions": {
+    ...
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "paths": {
+      "@angular/*": ["node_modules/@angular/*"],
+      "@sencha/*": ["node_modules/@sencha/*"]
+    },
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "preserveSymlinks": true,
+    ...
+  }
+
+2. Add includes
+  "include": [
+    "**/lib/**/*.ts",
+    "src/**/*.ts",
+    "node_modules/@sencha/**/*.ts",
+  ]
+```
+
+### Step 4: Try it out
 
 Run the app with npm start
 
