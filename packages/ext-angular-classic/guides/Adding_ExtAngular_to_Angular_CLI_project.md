@@ -106,7 +106,9 @@ export class AppComponent {
 ```
 
 ### Step 3: Configure TypeScript configs
-- Update ./tsconfig.json with:
+
+For version 9.x of @angular/cli update `./tsconfig.json`
+For version 10.x of @angular/cli update `./tsconfig.base.json`
 
 ```
 1. Add compiler options: 
