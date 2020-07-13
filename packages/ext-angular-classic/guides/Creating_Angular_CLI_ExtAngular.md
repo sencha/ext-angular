@@ -27,9 +27,6 @@ npm login --registry=https://sencha.myget.org/F/early-adopter/npm/ --scope=@senc
 npm install -g @angular/cli
 ```
 
-should be @angular/cli@9.1.x
-
-
 #### Create a new Angular CLI application
 
 - Run 'ng new':
@@ -190,7 +187,10 @@ export class AppComponent {
 
 ```
 
-- Update ./tsconfig.json with:
+- Update TypeScript Config Files:
+
+For version 9.x of @angular/cli update `./tsconfig.json`
+For version 10.x of @angular/cli update `./tsconfig.base.json`
 
 ```
 1. Add compiler options: 
