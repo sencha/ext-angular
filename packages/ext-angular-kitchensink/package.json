@@ -1,6 +1,6 @@
 {
   "name": "@sencha/ext-angular-kitchensink",
-  "version": "7.2.0",
+  "version": "7.2.1",
   "scripts": {
     "start": "npm run extract && env verbose=no basehref=/ ng serve",
     "build": "npm run extract && env verbose=no basehref=/dist/ext-angular-kitchensink/ ng build --prod",
@@ -61,5 +61,19 @@
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"
-  }
+  },
+    "keywords": [
+    "Angular",
+    "ExtAngular",
+    "html",
+    "javascript",
+    "framework",
+    "components",
+    "widgets",
+    "ui",
+    "datagrid",
+    "pivotgrid",
+    "chart",
+    "treelist"
+  ]
 }

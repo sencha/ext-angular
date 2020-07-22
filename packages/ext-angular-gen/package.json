@@ -1,6 +1,6 @@
 {
     "name": "@sencha/ext-angular-gen",
-    "version": "7.2.0",
+    "version": "7.2.1",
     "description": "Sencha ExtAngular code generator",
     "bin": {
         "ext-angular-gen": "ext-angular-gen.js",
@@ -9,16 +9,26 @@
     "scripts": {
         "install": "node ./install.js"
     },
-    "keywords": [
-        "Ext JS",
-        "ext-angular-gen"
-    ],
+  "keywords": [
+    "Angular",
+    "ExtAngular",
+    "html",
+    "javascript",
+    "framework",
+    "components",
+    "widgets",
+    "ui",
+    "datagrid",
+    "pivotgrid",
+    "chart",
+    "treelist"
+  ],
     "directories": {
         "lib": "lib"
     },
     "preferGlobal": true,
     "dependencies": {
-        "@sencha/ext-angular-boilerplate": "7.2.0",
+        "@sencha/ext-angular-boilerplate": "~7.2.0",
         "chalk": "~3.0.0",
         "glob": "~7.1.6",
         "boxen": "~4.2.0",
