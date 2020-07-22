@@ -1,7 +1,7 @@
 {
   "name": "@sencha/ext-angular-classic",
   "description": "ext-angular-classic",
-  "version": "7.2.1",
+  "version": "7.2.2",
   "bin": {
     "ext-angular": "./bin/ext-angular.js"
   },
@@ -28,7 +28,20 @@
     "type": "git",
     "url": "git+https://github.com/sencha/ext-angular.git"
   },
-  "keywords": [],
+    "keywords": [
+    "Angular",
+    "ExtAngular",
+    "html",
+    "javascript",
+    "framework",
+    "components",
+    "widgets",
+    "ui",
+    "datagrid",
+    "pivotgrid",
+    "chart",
+    "treelist"
+  ],
   "author": "Sencha",
   "license": "ISC",
   "module": "fesm5/sencha-ext-angular-classic.js",

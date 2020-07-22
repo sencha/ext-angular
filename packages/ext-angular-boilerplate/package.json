@@ -1,6 +1,6 @@
 {
   "name": "@sencha/ext-angular-boilerplate",
-  "version": "7.2.0",
+  "version": "7.2.1",
   "description": "ext-angular-boilerplate",
   "scripts": {
     "buildexample": "npm run clean && cross-env webpack --env.environment=production --env.treeshake=yes --env.verbose=yes --env.basehref=/ExtAngular/7.2.0/kitchensink/",
@@ -66,7 +66,20 @@
     "type": "git",
     "url": "git+https://github.com/sencha"
   },
-  "keywords": [],
+  "keywords": [
+    "Angular",
+    "ExtAngular",
+    "html",
+    "javascript",
+    "framework",
+    "components",
+    "widgets",
+    "ui",
+    "datagrid",
+    "pivotgrid",
+    "chart",
+    "treelist"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
