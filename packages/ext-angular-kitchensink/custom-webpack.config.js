@@ -4,13 +4,13 @@ const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
 //console.log(process)
 var build_v
 if (process.env.build_v == undefined) {
-  build_v = '7.2.0.0'
+  build_v = '7.3.0.0'
 }
 else {
   build_v = process.env.build_v
 }
 // if (process.env.npm_config_enbuild_v_v == undefined) {
-//   build_v = '7.2.0.0'
+//   build_v = '7.3.0.0'
 // }
 // else {
 //   build_v = process.env.npm_config_enbuild_v_v
@@ -53,7 +53,7 @@ module.exports = function(config, options) {
   var watch         = get('watch',         'no')
   var verbose       = get('verbose',       'no')
   var basehref      = get('basehref',      '/')
-  //var build_v       = get('build_v',       '7.2.0.0');
+  //var build_v       = get('build_v',       '7.3.0.0');
 
   var port = 1962
 

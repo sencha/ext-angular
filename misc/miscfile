@@ -1,9 +1,9 @@
 7.2.x
 
-    "@sencha/ext-angular-modern": "file:sencha-ext-angular-modern-7.2.0.tgz",
+    "@sencha/ext-angular-modern": "file:sencha-ext-angular-modern-7.3.0.tgz",
 
 git fetch upstream
-git merge upstream/ext-angular-7.2.1
+git merge upstream/ext-angular-7.3.0
 
 for extjs/SDK
 git remote add upstream https://github.com/extjs/SDK.git

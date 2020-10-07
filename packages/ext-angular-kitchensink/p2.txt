@@ -1,4 +1,4 @@
-    "@sencha/ext-angular-modern": "file:sencha-ext-angular-modern-7.2.1.tgz",
-    "@sencha/ext-angular-modern": "~7.2.1",
+    "@sencha/ext-angular-modern": "file:sencha-ext-angular-modern-7.3.0.tgz",
+    "@sencha/ext-angular-modern": "~7.3.0",
 
     npm run buildexample --env.build_v=%system.app.version%.%build.counter%
