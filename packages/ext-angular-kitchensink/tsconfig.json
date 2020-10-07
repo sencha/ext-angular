@@ -14,11 +14,26 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "paths": {
+      "@angular/*": ["node_modules/@angular/*"],
+      "@sencha/*": ["node_modules/@sencha/*"]
+    },
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "preserveSymlinks": true
   },
   "angularCompilerOptions": {
     "enableIvy": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
-  }
+  },
+  "include": [
+    "**/lib/**/*.ts",
+    "src/**/*.ts",
+    "node_modules/@sencha/**/*.ts",
+  ]
 }
